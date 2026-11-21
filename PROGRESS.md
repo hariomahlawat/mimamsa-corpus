@@ -1,5 +1,15 @@
 # Progress
 
+## 2026-11-21 20:06 IST — Supreme Court first check: judgment search needs a CAPTCHA (stopped)
+
+- www.sci.gov.in: robots.txt served (only /wp-admin/ disallowed) and obeyed; home page loads (200).
+- https://www.sci.gov.in/judgements-case-no/ loads, but its search form carries a CAPTCHA image
+  (the same form family covers Case Number, Diary No, Judge, Judgment Date, Free Text and
+  Neutral Citation tabs; only the Case Number tab was opened). Per the brief: no CAPTCHA bypassing,
+  stop and report. 4 requests in total, no documents downloaded. `sci` stays disabled.
+- Options to decide: another official route for Supreme Court judgments that needs no CAPTCHA
+  (to be identified and checked), or a hand-made list of judgment PDF addresses fed to the crawler.
+
 ## 2026-11-21 — India Code download run (approved): all 75 queued files fetched
 
 - Run 20261121T143022Z-0c8b86: 76 requests, 74 new files, 1 duplicate (same bytes under two
