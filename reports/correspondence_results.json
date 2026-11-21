@@ -1,0 +1,40 @@
+{
+ "bnss-crpc": {
+  "rows": 487,
+  "source_doc_id": "ref-bprd-comparison-bnss-crpc",
+  "new": "act-bnss-2023",
+  "old": "act-crpc-1973",
+  "new_provisions": 0,
+  "rows_without_old_reference": 11,
+  "new_sections_named": 461,
+  "old_sections_named": 457,
+  "new_sections_not_in_corpus": [],
+  "old_sections_not_in_corpus": [
+   "105I"
+  ]
+ },
+ "bns-ipc": {
+  "rows": 525,
+  "source_doc_id": "ref-bprd-comparison-bns-ipc",
+  "new": "act-bns-2023",
+  "old": "act-ipc-1860",
+  "new_provisions": 7,
+  "rows_without_old_reference": 13,
+  "new_sections_named": 357,
+  "old_sections_named": 525,
+  "new_sections_not_in_corpus": [],
+  "old_sections_not_in_corpus": []
+ },
+ "bsa-iea": {
+  "rows": 182,
+  "source_doc_id": "ref-bprd-comparison-bsa-iea",
+  "new": "act-bsa-2023",
+  "old": "act-evidence-1872",
+  "new_provisions": 3,
+  "rows_without_old_reference": 0,
+  "new_sections_named": 161,
+  "old_sections_named": 170,
+  "new_sections_not_in_corpus": [],
+  "old_sections_not_in_corpus": []
+ }
+}

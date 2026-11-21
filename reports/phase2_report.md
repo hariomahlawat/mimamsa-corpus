@@ -1,6 +1,6 @@
 # Phase 2 report: statutes from India Code
 
-64 documents, 2466 section records, 738 relations.
+68 documents, 2998 section records, 1061 relations.
 
 ## Acts
 
@@ -13,7 +13,7 @@
 | The Bharatiya Nyaya Sanhita, 2023 | 45 of 2023 | 2023-12-25 | 2024-07-01 | in_force | 358 | none | 1 act |
 | The Bharatiya Nagarik Suraksha Sanhita, 2023 | 46 of 2023 | 2023-12-25 | 2024-07-01 | in_force | 531 | none | 1 act, 2 schedule |
 | The Bharatiya Sakshya Adhiniyam, 2023 | 47 of 2023 | 2023-12-25 | 2024-07-01 | in_force | 170 | none | 1 act, 1 schedule |
-| The Code of Criminal Procedure 1973 | 2 of 1974 |  |  | repealed | 0 | none | none |
+| The Code of Criminal Procedure 1973 | 2 of 1974 |  |  | repealed | 532 | 532 repealed | 1 act |
 | The Indian Evidence Act, 1872 | 1 of 1872 |  |  | repealed | 185 | 185 repealed | none |
 | The Indian Penal Code | 45 of 1860 |  |  | repealed | 574 | 1 omitted, 573 repealed | none |
 | The Navy Act, 1957 | 62 of 1957 | 1957-12-27 | 1958-01-01 | amended | 194 | 59 amended | 1 act, 5 regulations |
@@ -23,7 +23,7 @@
 | Result | Documents |
 | --- | --- |
 | text from OCR | 4 |
-| text, ok | 58 |
+| text, ok | 62 |
 | text, suspect | 2 |
 
 ### Text layer present but suspect (kept, flagged)
@@ -43,6 +43,8 @@
 | act-bns-2023 | act | 112 | 1 | The Bharatiya Nyaya Sanhita, 2023 |
 | act-bsa-2023 | act | 54 | 1 | The Bharatiya Sakshya Adhiniyam, 2023 |
 | act-navy-1957 | act | 63 | 1 | The Navy Act, 1957 |
+| ref-bprd-comparison-bns-ipc | reference | 38 | 1 | Correspondence Table and Comparison Summary of the BNS, 2023 and the I |
+| ref-bprd-comparison-bsa-iea | reference | 14 | 1 | Correspondence Table and Comparison Summary of the BSA, 2023 and the I |
 | regs-regulations-for-the-air-force-reprinted-edition-2000 | regulations | 1320 | 46 | REGULATIONS FOR THE AIR FORCE REPRINTED EDITION 2000 |
 | regs-regulations-for-the-navy-part-iii | regulations | 253 | 3 | Regulations for the Navy Part III |
 | regs-regulations-for-the-navy-part-iv | regulations | 99 | 2 | Regulations for the Navy Part IV |
@@ -73,7 +75,7 @@ Pages to review are listed in `reports/ocr_review.md`.
 
 ## Amendment notes
 
-694 amendment notes read from 380 sections; 694 `amended_by` edges, none resolved to a document yet (the amending Acts are not in the corpus).
+1017 amendment notes read from 522 sections; 1017 `amended_by` edges, none resolved to a document yet (the amending Acts are not in the corpus).
 
 Dates printed in the source that could not be read as dates (kept as printed, not corrected):
 
@@ -106,9 +108,13 @@ For Acts with no section records at the source. Every section found is checked a
 
 | Act | Sections in its table | Found | Amendment notes | Result |
 | --- | --- | --- | --- | --- |
-| act-crpc-1973 | 0 | 0 | 0 | not written: no 'ACT NO. .. OF ....' line: cannot tell the table of sections from the body |
-| act-evidence-1872 | 185 | 185 | 81 | written |
-| act-ipc-1860 | 574 | 574 | 422 | written |
+| act-crpc-1973 | 532 | 532 | 224 | written |
+| act-evidence-1872 | 185 | 185 | 145 | written |
+| act-ipc-1860 | 574 | 574 | 457 | written |
+
+### act-crpc-1973: headings that differ between the table and the body (as printed; not corrected)
+
+- 482: body 'Saving of inherent powers of High Court' vs table 'Saving of inherent power of High Court.'
 
 ### act-evidence-1872: headings that differ between the table and the body (as printed; not corrected)
 
@@ -134,3 +140,13 @@ For Acts with no section records at the source. Every section found is checked a
 - 354: body 'Assault or criminal force to woman with intent to ' vs table 'Assault of criminal force to woman with intent to '
 - 389: body 'Putting person in fear or accusation of offence, i' vs table 'Putting person in fear of accusation of offence, i'
 - 452: body 'House-trespass alter preparation for hurt, assault' vs table 'House-trespass after preparation for hurt, assault'
+
+## Correspondence tables (new code <-> old code)
+
+Read from the BPR&D comparison summaries into `data/correspondence/<key>.jsonl`. Rows are as printed in the tables and are `extracted`, not verified. The last two columns check the section numbers the tables name against the section records in this corpus.
+
+| Table | Rows | New provisions | Rows with no readable old section | New-code sections named but not in corpus | Old-code sections named but not in corpus |
+| --- | --- | --- | --- | --- | --- |
+| bnss-crpc | 487 | 0 | 11 | none | 105I |
+| bns-ipc | 525 | 7 | 13 | none | none |
+| bsa-iea | 182 | 3 | 0 | none | none |

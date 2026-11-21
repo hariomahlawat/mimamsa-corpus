@@ -253,6 +253,17 @@
           ]
         }
       }
+    },
+    "text_source_doc_id": {
+      "oneOf": [
+        {
+          "$ref": "document.schema.json#/$defs/doc_id"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The document whose file the section text was cut from, when that is not the parent document's own file."
     }
   }
 }

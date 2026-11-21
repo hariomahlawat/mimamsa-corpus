@@ -13,6 +13,7 @@ SCHEMAS = {
     "document": "document.schema.json",
     "section": "section.schema.json",
     "relation": "relation.schema.json",
+    "correspondence": "correspondence.schema.json",
 }
 
 

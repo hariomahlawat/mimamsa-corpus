@@ -138,6 +138,24 @@ def run(paths: Paths, extra: dict | None = None) -> dict:
             if odd:
                 L += ["", f"### {doc_id}: headings that differ between the table and the body (as printed; not corrected)", ""]
                 L += [f"- {x}" for x in odd]
+    corr_path = paths.reports / "correspondence_results.json"
+    if extra and extra.get("correspondence") is not None:
+        corr_path.write_text(json.dumps(extra["correspondence"], indent=1, ensure_ascii=False), encoding="utf-8")
+    corr = json.loads(corr_path.read_text(encoding="utf-8")) if corr_path.exists() else {}
+    if corr:
+        L += ["", "## Correspondence tables (new code <-> old code)", "",
+              "Read from the BPR&D comparison summaries into `data/correspondence/<key>.jsonl`. Rows are as printed "
+              "in the tables and are `extracted`, not verified. The last two columns check the section numbers the "
+              "tables name against the section records in this corpus.", "",
+              "| Table | Rows | New provisions | Rows with no readable old section | New-code sections named but not "
+              "in corpus | Old-code sections named but not in corpus |", "| --- | --- | --- | --- | --- | --- |"]
+        for key, st in corr.items():
+            if st.get("reason"):
+                L.append(f"| {key} | 0 | | | {st['reason']} | |")
+                continue
+            miss = lambda v: "not checked (no sections)" if v is None else (", ".join(v) if v else "none")
+            L.append(f"| {key} | {st['rows']} | {st['new_provisions']} | {st['rows_without_old_reference']} | "
+                     f"{miss(st['new_sections_not_in_corpus'])} | {miss(st['old_sections_not_in_corpus'])} |")
     for k in ("problems", "extract_errors"):
         if extra and extra.get(k):
             L += ["", f"## {k.replace('_', ' ').title()}", ""] + [f"- {p}" for p in extra[k]]

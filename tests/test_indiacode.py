@@ -505,3 +505,25 @@ def test_repealed_record_target_goes_straight_to_its_record(cfg, db, tmp_path):
     row = db.get(f"{API}/core/bitstreams/b1/content")
     assert row["doc_id_hint"] == "act-ipc-1860"
     assert json.loads(row["meta"])["repeal_record"]["collection_name"] == "Repeal Acts"
+
+
+# ------------------------------------------------ hand-listed documents
+def test_direct_documents_are_queued_without_any_request(tmp_path, db):
+    from crawler import direct
+    raw = yaml.safe_load(DEFAULT_CONFIG.read_text(encoding="utf-8"))
+    raw["sources"]["official_copies"]["documents"] = [
+        {"doc_id": "act-x-1900", "url": "https://crpf.mha.gov.in/a/x%20y.pdf", "title": "X Act", "doc_type": "act", "year": 1900},
+        {"doc_id": "ref-off-list", "url": "https://example.org/t.pdf", "title": "T", "doc_type": "reference"},
+        {"doc_id": "ref-bad", "url": "https://crpf.mha.gov.in/b.pdf", "doc_type": "reference"}]
+    p = tmp_path / "s.yaml"
+    p.write_text(yaml.safe_dump(raw), encoding="utf-8")
+    cfg = load_config(p)
+    res = {r.doc_id: r for r in direct.discover(cfg, db, None, "official_copies")}
+    assert res["act-x-1900"].status == "queued" and res["ref-off-list"].status == "refused"
+    assert res["ref-bad"].status == "invalid" and "title" in res["ref-bad"].reason
+    row = db.get("https://crpf.mha.gov.in/a/x%20y.pdf")
+    meta = json.loads(row["meta"])
+    assert row["doc_id_hint"] == "act-x-1900" and meta["filename"] == "x y.pdf" and meta["year"] == "1900"
+    assert meta["direct"]["title"] == "X Act" and "url" not in meta["direct"]
+    assert db.counts()["official_copies"]["queued"] == 1
+    assert direct.discover(cfg, db, None, "official_copies", only=["act-x-1900"])[0].status == "already_known"

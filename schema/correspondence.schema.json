@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mimamsa.local/schema/correspondence.schema.json",
+  "title": "Mimamsa correspondence row (new code section <-> old code section)",
+  "description": "One line of data/correspondence/<pair>.jsonl, read from an official comparison table. Rows are as the table prints them; the parsed section lists are a convenience and need human verification before the app relies on them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "new_doc_id",
+    "new_ref_raw",
+    "new_section",
+    "old_doc_id",
+    "old_ref_raw",
+    "old_sections",
+    "is_new",
+    "subject",
+    "summary",
+    "source_doc_id",
+    "page",
+    "confidence"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.2.0"
+    },
+    "new_doc_id": {
+      "$ref": "document.schema.json#/$defs/doc_id"
+    },
+    "new_ref_raw": {
+      "type": "string",
+      "description": "As printed, e.g. '8(6)' or '2(1)(t)'."
+    },
+    "new_section": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Section number part of new_ref_raw, e.g. '8'."
+    },
+    "old_doc_id": {
+      "$ref": "document.schema.json#/$defs/doc_id"
+    },
+    "old_ref_raw": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "As printed, e.g. '68 & 69', '2(r)', 'New'."
+    },
+    "old_sections": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Section numbers read from old_ref_raw, e.g. ['68','69']. Empty when the provision is new or the cell could not be read."
+    },
+    "is_new": {
+      "type": "boolean",
+      "description": "The table marks the provision as new (no old counterpart)."
+    },
+    "subject": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "summary": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The table's summary of what changed."
+    },
+    "source_doc_id": {
+      "$ref": "document.schema.json#/$defs/doc_id"
+    },
+    "page": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "confidence": {
+      "enum": [
+        "extracted",
+        "llm_proposed",
+        "human_verified"
+      ]
+    }
+  }
+}

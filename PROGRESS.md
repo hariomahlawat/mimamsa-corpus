@@ -1,5 +1,39 @@
 # Progress
 
+## 2026-11-21 — Better CrPC text and the correspondence tables
+
+Corpus now: 68 documents, 2,998 section records, 1,061 relations, 1,194 correspondence rows; all validate.
+
+Sources tried
+- Legislative Department (lddashboard.legislative.gov.in): connection reset from the cloud container.
+- BPR&D (bprd.nic.in): its TLS certificate has expired; not bypassed.
+- NCRB (cytrain.ncrb.gov.in): connection reset.
+- Reachable official copies used instead (new source `official_copies`, hand-listed documents only):
+  CRPF site (Ministry of Home Affairs) for the CrPC; Kerala Prisons for the three BPR&D tables.
+  The three unreachable sites are on the allow-list for a run from a machine in India.
+
+CrPC
+- `act-crpc-1973-consolidated`: consolidated text, 226 pages, amendment footnotes. Latest amending Act
+  mentioned is of 2014, so it is NOT the text as it stood at repeal in 2024.
+- `act-crpc-1973` sections are now cut from that copy: 532 of 532 in its table, 224 amendment notes,
+  37 chapters. Each section names the copy in `text_source_doc_id`.
+- Splitter improvements made for this file: type sizes judged per page; footnote blocks set in body
+  size recognised by wording; a non-bold section start accepted when it is exactly the next one in
+  the table. IPC stays 574/574 (457 notes), Evidence Act 185/185 (145 notes).
+- Known residue: 6 footnote lines across the three codes are still inside section text.
+
+Correspondence tables (`python -m pipeline correspondence`, part of `all`)
+- BPR&D "Correspondence Table and Comparison Summary" PDFs: BNSS<->CrPC 487 rows, BNS<->IPC 525,
+  BSA<->Evidence Act 182. Output `data/correspondence/<key>.jsonl` (schema/correspondence.schema.json):
+  cells as printed, section numbers read from them, the table's summary of the change.
+- Cross-check: every new-code and old-code section the tables name exists in the corpus section
+  records, except CrPC "105I". 24 rows have no readable old section (see the report).
+- Rows are `extracted`; a person should verify before the app relies on a mapping.
+
+Curated fields
+- Documents listed by hand in sources.yaml carry provenance "llm" for the fields written there
+  (title, authority) until a person confirms them.
+
 ## 2026-11-21 — OCR, the three repealed codes, and sections cut from PDFs
 
 Corpus now: 64 documents, 2,466 section records, 738 relations; 100% validate. 84 raw files.

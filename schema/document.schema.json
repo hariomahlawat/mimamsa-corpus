@@ -49,9 +49,10 @@
         "executive_order",
         "judgment",
         "order",
-        "book_historical"
+        "book_historical",
+        "reference"
       ],
-      "description": "'order' is a court/tribunal order; 'executive_order' is a government order made under an Act; 'schedule' is a schedule of an Act published as its own file."
+      "description": "'order' is a court/tribunal order; 'executive_order' is a government order made under an Act; 'schedule' is a schedule of an Act published as its own file. 'reference' is an official aid that is not itself law (e.g. a table of corresponding sections)."
     },
     "title": {
       "type": "string",
@@ -117,6 +118,9 @@
     "source": {
       "enum": [
         "indiacode",
+        "legislative",
+        "bprd",
+        "official_copies",
         "mod",
         "aft",
         "sci",
@@ -419,6 +423,24 @@
         "minimum": 1
       },
       "uniqueItems": true
+    },
+    "provides_sections_for": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/doc_id"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "This file is the text the section records of another document were cut from (a better copy of the same Act)."
+    },
+    "curation_note": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Why this document was added by hand and where it comes from."
     }
   },
   "allOf": [

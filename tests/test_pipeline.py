@@ -459,3 +459,40 @@ def test_split_stage_writes_valid_sections_and_edges(corpus):
     assert main(["all", "--root", str(corpus.root)]) == 0                           # re-run: no duplicate edges
     again = (corpus.data / "relations.jsonl").read_text().splitlines()
     assert len(again) == len(edges)
+
+
+# ------------------------------------------- correspondence tables
+from pipeline import correspondence  # noqa: E402
+
+
+def test_section_numbers_and_ref_cleaning():
+    sn = correspondence.section_numbers
+    assert sn("68 & 69") == ["68", "69"] and sn("2(1)(t)") == ["2"] and sn("New") == []
+    assert sn("376AB, 376DA and 376DB") == ["376AB", "376DA", "376DB"] and sn("53A") == ["53A"]
+    assert sn("Section 6 r/w 7") == ["6", "7"]
+    assert correspondence.clean_ref("2(r )") == "2(r)" and correspondence.clean_ref("103 (1)") == "103(1)"
+    assert correspondence.clean_ref("68 & 69") == "68 & 69"
+
+
+def test_correspondence_rows_from_a_table(corpus, monkeypatch, tmp_path):
+    records.build_indiacode(corpus)
+    cfgfile = tmp_path / "sources.yaml"
+    cfgfile.write_text(json.dumps({"sources": {"x": {"documents": [
+        {"doc_id": "rules-army-rules-1954", "correspondence": {"key": "new-old", "new": "act-army-1950",
+                                                                 "old": "act-army-1950",
+                                                                 "columns": ["new", "subject", "old", "summary"]}},
+        {"doc_id": "ref-not-downloaded", "correspondence": {"key": "missing", "new": "a", "old": "b",
+                                                             "columns": ["new", "subject", "old", "summary"]}}]}}}))
+    monkeypatch.setattr(correspondence, "read_table", lambda path, cols: [
+        {"new": "69", "old": "75 & 76", "subject": "Civil offences.", "summary": "No change.", "page": 2},
+        {"new": "70(2)", "old": "New", "subject": "Something new.", "summary": "New provision.", "page": 3},
+        {"new": "999", "old": "see note", "subject": "Odd row.", "summary": "", "page": 3}])
+    res = correspondence.run(corpus, cfgfile)
+    assert res["missing"]["rows"] == 0 and "not in the corpus" in res["missing"]["reason"]
+    st = res["new-old"]
+    assert st["rows"] == 3 and st["new_provisions"] == 1 and st["rows_without_old_reference"] == 1
+    assert st["new_sections_not_in_corpus"] == ["999"] and st["old_sections_not_in_corpus"] == []
+    rows = [json.loads(l) for l in (corpus.data / "correspondence" / "new-old.jsonl").read_text().splitlines()]
+    assert rows[0]["old_sections"] == ["75", "76"] and rows[0]["new_section"] == "69" and rows[0]["confidence"] == "extracted"
+    assert rows[1]["is_new"] is True and rows[1]["old_sections"] == [] and rows[1]["new_section"] == "70"
+    assert validate.run(corpus)["errors"] == [] and validate.run(corpus)["correspondence_rows"] == 3

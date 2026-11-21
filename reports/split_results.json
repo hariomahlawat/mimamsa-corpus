@@ -1,12 +1,16 @@
 {
  "act-crpc-1973": {
-  "toc_sections": 0,
-  "found": 0,
+  "toc_sections": 532,
+  "found": 532,
   "missing": [],
-  "heading_mismatches": [],
-  "written": false,
-  "amendment_notes": 0,
-  "reason": "no 'ACT NO. .. OF ....' line: cannot tell the table of sections from the body"
+  "heading_mismatches": [
+   "482: body 'Saving of inherent powers of High Court' vs table 'Saving of inherent power of High Court.'"
+  ],
+  "written": true,
+  "amendment_notes": 224,
+  "reason": null,
+  "coverage": 1.0,
+  "text_from": "act-crpc-1973-consolidated"
  },
  "act-evidence-1872": {
   "toc_sections": 185,
@@ -20,9 +24,10 @@
    "85C: body 'Presumption as to [6][Electronic Signature Certifi' vs table 'Presumption as to Electronic Signature Certificate'"
   ],
   "written": true,
-  "amendment_notes": 81,
+  "amendment_notes": 145,
   "reason": null,
-  "coverage": 1.0
+  "coverage": 1.0,
+  "text_from": "act-evidence-1872"
  },
  "act-ipc-1860": {
   "toc_sections": 574,
@@ -44,11 +49,12 @@
    "452: body 'House-trespass alter preparation for hurt, assault' vs table 'House-trespass after preparation for hurt, assault'"
   ],
   "written": true,
-  "amendment_notes": 422,
+  "amendment_notes": 457,
   "reason": null,
   "source_typos": [
    "section 17 is printed without its full stop"
   ],
-  "coverage": 1.0
+  "coverage": 1.0,
+  "text_from": "act-ipc-1860"
  }
 }

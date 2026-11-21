@@ -304,7 +304,38 @@ def build_indiacode(paths: Paths) -> dict:
                 edges.append(e)
             docs[doc_id] = d
 
+    # ---- hand-listed documents (crawler/direct.py): fields come from the list in sources.yaml
+    handled_sources = {"indiacode"}
+    for r in conn.execute(
+            """SELECT u.url, u.source, u.doc_id_hint, u.sha256, u.fetched_at, u.meta, f.raw_path, f.content_type
+               FROM urls u JOIN files f ON f.sha256 = u.sha256
+               WHERE u.kind='document' AND u.status='fetched' AND json_extract(u.meta, '$.direct') IS NOT NULL
+               ORDER BY u.url"""):
+        m = json.loads(r["meta"])
+        e = m["direct"]
+        handled_sources.add(r["source"])
+        d = _base_doc(r, paths, aliases)
+        parent = e.get("parent_doc_id")
+        d.update({
+            "doc_id": e["doc_id"], "doc_type": e["doc_type"], "title": e["title"], "number": e.get("number"),
+            "issuing_authority": e.get("issuing_authority"), "issue_date": iso_date(e.get("issue_date")),
+            "effective_date": iso_date(e.get("effective_date")),
+            "status": e.get("status", "unknown"), "status_note": e.get("status_note"),
+            "status_as_of": (r["fetched_at"] or "")[:10] or None,
+            "language": e.get("language"), "parent_doc_id": parent if parent != e["doc_id"] else None,
+            "original_filename": m.get("filename"), "source_record": None,
+            "provides_sections_for": e.get("provides_sections_for"), "curation_note": e.get("note"),
+            "field_provenance": {k: "llm" for k in ("title", "number", "issuing_authority", "issue_date", "status",
+                                                    "language") if e.get(k)},
+        })
+        docs[e["doc_id"]] = d
     conn.close()
+    for d in list(docs.values()):            # a hand-listed copy takes its status from the Act it is a copy of
+        target = d.get("provides_sections_for")
+        if target and target in docs and d["status"] == "unknown":
+            d["status"], d["number"] = docs[target]["status"], d["number"] or docs[target]["number"]
+            d["status_note"] = f"Another copy of {target}: {docs[target]['status_note']}"
+            d["field_provenance"]["status"] = "rule"
 
     # ---- "Rep., Act 45 of 2023" on a repealed record -> a `repeals` edge from that Act, when it is in the corpus
     by_number = defaultdict(list)
@@ -326,7 +357,7 @@ def build_indiacode(paths: Paths) -> dict:
     # ---- remove outputs of an earlier run that this run no longer produces
     if paths.meta.exists():
         for old in paths.meta.glob("*.json"):
-            if old.stem not in docs and json.loads(old.read_text(encoding="utf-8")).get("source") == "indiacode":
+            if old.stem not in docs and json.loads(old.read_text(encoding="utf-8")).get("source") in handled_sources:
                 old.unlink()
                 (paths.text / f"{old.stem}.txt").unlink(missing_ok=True)
     for parent in {sid.split("#")[0] for sid in sections}:

@@ -19,7 +19,7 @@ import logging
 import sys
 from pathlib import Path
 
-from . import indiacode, probe
+from . import direct, indiacode, probe
 from .audit import AuditLog, setup_logging
 from .config import DEFAULT_CONFIG, ROOT, ConfigError, check_config, load_config
 from .fetch import fetch_documents
@@ -29,7 +29,7 @@ from .state import StateDB
 
 log = logging.getLogger("mimamsa.cli")
 
-DISCOVERERS = {"indiacode": indiacode}
+DISCOVERERS = {"indiacode": indiacode, "official_copies": direct, "legislative": direct, "bprd": direct}
 
 
 def _replay(args) -> str | None:

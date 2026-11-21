@@ -116,6 +116,69 @@ sources:
       - { doc_id: rules-air-force-1969,         title: "The Air Force Rules, 1969",  year: 1969, verify: true }
       - { doc_id: rules-aft-procedure-2008,     title: "The Armed Forces Tribunal (Procedure) Rules, 2008", year: 2008, verify: true }
 
+  # Legislative Department, Ministry of Law and Justice: consolidated texts of Central Acts.
+  legislative:
+    phase: 2
+    enabled: true
+    priority: 1
+    heavy: false
+    allowed_hosts: [lddashboard.legislative.gov.in, legislative.gov.in, www.legislative.gov.in]
+    base_url: https://lddashboard.legislative.gov.in
+
+  # Bureau of Police Research and Development (Ministry of Home Affairs): official comparison
+  # summaries / correspondence tables between the 2023 codes and the codes they replaced.
+  bprd:
+    phase: 2
+    enabled: true
+    priority: 2
+    heavy: false
+    allowed_hosts: [bprd.nic.in, www.bprd.nic.in]
+    base_url: https://bprd.nic.in
+
+  # Official copies on other government hosts, used when the publishing site cannot be reached.
+  # Only the explicit `documents` below are fetched; nothing is discovered by following links.
+  official_copies:
+    phase: 2
+    enabled: true
+    priority: 2
+    heavy: false
+    allowed_hosts: [crpf.mha.gov.in, cytrain.ncrb.gov.in, keralaprisons.gov.in, www.keralaprisons.gov.in]
+    # Descriptive fields here are curated (written into the config, not read from the files) and are
+    # recorded with provenance "llm" until a person confirms them.
+    documents:
+      - doc_id: act-crpc-1973-consolidated
+        url: "https://crpf.mha.gov.in/writereaddata/images/pdf/crpc1973.pdf"
+        title: "The Code of Criminal Procedure, 1973"
+        doc_type: act
+        year: 1974
+        parent_doc_id: act-crpc-1973
+        provides_sections_for: act-crpc-1973
+        note: "Consolidated text hosted by the CRPF (Ministry of Home Affairs). India Code's own copy is a scan of the 1974 print."
+      - doc_id: ref-bprd-comparison-bnss-crpc
+        correspondence: { key: bnss-crpc, new: act-bnss-2023, old: act-crpc-1973, columns: [new, subject, old, summary] }
+        issuing_authority: "Bureau of Police Research and Development, Ministry of Home Affairs"
+        url: "https://keralaprisons.gov.in/userfiles/act-and-rules/comparison_summary_BNSS_to_CrPC.pdf"
+        title: "Correspondence Table and Comparison Summary of the BNSS, 2023 and the CrPC, 1973"
+        doc_type: reference
+        year: 2024
+        note: "BPR&D comparison summary; copy hosted by Kerala Prisons because bprd.nic.in's certificate has expired."
+      - doc_id: ref-bprd-comparison-bns-ipc
+        correspondence: { key: bns-ipc, new: act-bns-2023, old: act-ipc-1860, columns: [new, subject, old, summary] }
+        issuing_authority: "Bureau of Police Research and Development, Ministry of Home Affairs"
+        url: "https://www.keralaprisons.gov.in/userfiles/act-and-rules/comparison_summary_BNS_to_IPC.pdf"
+        title: "Correspondence Table and Comparison Summary of the BNS, 2023 and the IPC, 1860"
+        doc_type: reference
+        year: 2024
+        note: "BPR&D comparison summary; copy hosted by Kerala Prisons."
+      - doc_id: ref-bprd-comparison-bsa-iea
+        correspondence: { key: bsa-iea, new: act-bsa-2023, old: act-evidence-1872, columns: [new, old, subject, summary] }
+        issuing_authority: "Bureau of Police Research and Development, Ministry of Home Affairs"
+        url: "https://keralaprisons.gov.in/userfiles/act-and-rules/comparison_summary_BSA_to_IEA.pdf"
+        title: "Correspondence Table and Comparison Summary of the BSA, 2023 and the Indian Evidence Act, 1872"
+        doc_type: reference
+        year: 2024
+        note: "BPR&D comparison summary; copy hosted by Kerala Prisons."
+
   # ---------------------------------------------------------------- Phase 3
   aft:
     phase: 3

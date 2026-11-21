@@ -33,6 +33,10 @@ def cfg():
     return load_config(DEFAULT_CONFIG)
 
 
+def cfg_enabled():
+    return load_config(DEFAULT_CONFIG).enabled_sources()
+
+
 def write_cfg(tmp_path, mutate):
     raw = yaml.safe_load(DEFAULT_CONFIG.read_text(encoding="utf-8"))
     mutate(raw)
@@ -187,7 +191,7 @@ def test_cli_dry_run_makes_no_requests(tmp_path, no_network, capsys):
     assert main(["--root", str(tmp_path), "dry-run", "--json"]) == 0
     out = json.loads(capsys.readouterr().out)
     names = [s["name"] for s in out["sources"]]
-    assert names == ["indiacode"]  # only enabled sources (mod is disabled: blocked, see PROGRESS.md)
+    assert names == cfg_enabled() and "indiacode" in names and "mod" not in names and "aft" not in names
     ic = out["sources"][0]
     assert {i["doc_id"] for i in ic["items"] if i["kind"] == "target"} >= {"act-army-1950", "act-bns-2023"}
     assert out["totals"]["targets_unresolved"] == out["totals"]["targets"]

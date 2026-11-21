@@ -54,6 +54,17 @@ def run(paths: Paths, check_files: bool = True) -> dict:
                 errs.append(f"relations.jsonl:{i}: unknown source {rel.get('source_doc_id')!r}")
             if rel.get("target_doc_id") and rel["target_doc_id"] not in known:
                 errs.append(f"relations.jsonl:{i}: unknown target {rel['target_doc_id']!r}")
+    counts["correspondence_rows"] = 0
+    for path in sorted((paths.data / "correspondence").glob("*.jsonl")):
+        for i, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+            if not line.strip():
+                continue
+            row = json.loads(line)
+            counts["correspondence_rows"] += 1
+            errs += [f"correspondence/{path.name}:{i}: {e}" for e in errors("correspondence", row)]
+            for k in ("new_doc_id", "old_doc_id", "source_doc_id"):
+                if row.get(k) not in doc_ids:
+                    errs.append(f"correspondence/{path.name}:{i}: {k} {row.get(k)!r} has no metadata")
     for d in sorted(doc_ids):
         rec = json.loads((paths.meta / f"{d}.json").read_text(encoding="utf-8"))
         if rec.get("parent_doc_id") and rec["parent_doc_id"] not in doc_ids:

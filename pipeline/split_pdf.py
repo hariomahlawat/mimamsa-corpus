@@ -32,6 +32,8 @@ TOC_ENTRY = re.compile(rf"^_?({NUM})[.,]\s*(.*)$")
 CHAPTER = re.compile(r"^CHAPTER\s+([IVXLC]+\s?[A-Z]?)\b\.?[\s—–-]*(.*)$")
 HEAD_END = re.compile(r"\.\s*[—–-]{1,2}")
 GONE = re.compile(r"^\s*(?:\[[^\]]*\]\s*\.?\s*[—–-]*\s*)?(Rep\.|Repealed\b|Omitted\b)", re.I)
+FOOT_WORDING = re.compile(r"^1\.\s+(Subs\.|Ins\.|Omitted|Rep\.|Added|The words?\b|The brackets|Cl(ause)?s?\.?\s|Sub-section|"
+                          r"Section \d|Explanation \d? ?(omitted|ins)|Proviso|Certain words|Now |See |Vide )")
 FOOT_START = re.compile(r"^(\d{1,3})\.\s+(.*)$", re.S)
 
 
@@ -45,59 +47,52 @@ class Line:
     bold_number: bool
 
 
-def _sizes(pdf) -> tuple[float, float | None]:
-    """(body size, footnote size or None). Body = the size section numbers are set in (bold "12. ");
-    footnote = the commonest size at least 1.5 pt smaller."""
+def _page_body_size(page_dict: dict) -> float:
+    """The page's body type size: the largest size that carries at least 5% of the page's characters
+    (a page can be mostly footnotes). Judged per page, because some files mix pages set in different sizes."""
     count: Counter = Counter()
-    heads: Counter = Counter()
-    for page in pdf:
-        for b in page.get_text("dict").get("blocks", []):
-            for ln in b.get("lines", []):
-                for s in ln["spans"]:
-                    if s["text"].strip():
-                        count[round(s["size"])] += len(s["text"])
-                        if (s["flags"] & 16) and re.match(rf"^\[?\s*{NUM}\.\s", s["text"].lstrip()):
-                            heads[round(s["size"])] += 1
-    if not count:
-        return 0.0, None
-    body = float((heads or count).most_common(1)[0][0])
-    smaller = [(n, s) for s, n in count.items() if s <= body - 1.5 and n >= 40]
-    return body, (float(max(smaller)[1]) if smaller else None)
+    for b in page_dict.get("blocks", []):
+        for ln in b.get("lines", []):
+            for s in ln["spans"]:
+                if s["text"].strip():
+                    count[round(s["size"] * 2) / 2] += len(s["text"])
+    total = sum(count.values())
+    big = [s for s, n in count.items() if n >= 0.05 * total]
+    return max(big) if big else 0.0
 
 
 def read_lines(pdf) -> tuple[list[Line], float]:
-    body, foot = _sizes(pdf)
     out: list[Line] = []
+    body = 0.0
     for pno, page in enumerate(pdf, 1):
+        d = page.get_text("dict")
+        body = _page_body_size(d)
         lines = []
-        for b in page.get_text("dict").get("blocks", []):
+        for b in d.get("blocks", []):
             for ln in b.get("lines", []):
                 dx, dy = ln["dir"]
                 if abs(dy) > 0.2 and abs(dx) > 0.2:              # diagonal watermark
                     continue
-                parts, sizes, bold_number, seen = [], Counter(), False, False
+                parts, sizes, bold_number, seen = [], [], False, False
                 for s in ln["spans"]:
                     t = s["text"]
                     if not t.strip():
                         parts.append(t)
                         continue
-                    if t.strip().isdigit() and ((s["flags"] & 1) or s["size"] <= body - 2.5) and s["size"] < (foot or body):
+                    if t.strip().isdigit() and ((s["flags"] & 1) or s["size"] <= body - 2.5):
                         parts.append(f"[{t.strip()}]")           # superscript footnote marker
                         continue
-                    sizes[round(s["size"])] += len(t)
+                    sizes.append(s["size"])
                     if not seen and (s["flags"] & 16) and re.match(rf"^\[?\s*{NUM}\.", t.lstrip()):
                         bold_number = True
                     if re.search(r"[A-Za-z0-9]", t):             # an opening bracket alone does not count
                         seen = True
                     parts.append(t)
-                text = re.sub(r"[ \t ]+", " ", "".join(parts)).strip()
-                if not text or not sizes:
-                    if text:                                    # a line of markers only
-                        lines.append(Line(pno, ln["bbox"][0], ln["bbox"][1], text, False, False))
+                text = re.sub(r"[ \t\u00a0]+", " ", "".join(parts)).strip()
+                if not text:
                     continue
-                size = max(sizes)                             # small caps start with a full-size capital
-                lines.append(Line(pno, ln["bbox"][0], ln["bbox"][1], text,
-                                  foot is not None and size <= body - 1.5, bold_number))
+                small = bool(sizes) and max(sizes) <= body - 0.9  # small caps start with a full-size capital
+                lines.append(Line(pno, ln["bbox"][0], ln["bbox"][1], text, small, bold_number))
         lines.sort(key=lambda l: (round(l.y), l.x))
         # Pieces on the same printed row (a superscript, or text the PDF stores separately) are joined
         # left to right. Rows are at least 9 pt apart, so 4 pt is safe.
@@ -114,11 +109,20 @@ def read_lines(pdf) -> tuple[list[Line], float]:
             first = next((l for l in row if re.search(r"[A-Za-z0-9]", re.sub(r"\[\d+\]", "", l.text))), row[0])
             lines.append(Line(row[0].page, row[0].x, min(l.y for l in row), text, row[0].foot, first.bold_number))
         # Footnotes are the small-type block at the foot of the page that starts with note "1.".
-        # Small type above that block is body text (illustrations, or a page set smaller to fit).
+        # Small type above that block is body text (illustrations, a table, a heading in small caps).
         starts = [i for i, l in enumerate(lines) if l.foot and re.match(r"^1\.\s", l.text)]
-        zone = starts[-1] if starts else len(lines)
-        for i, l in enumerate(lines):
-            l.foot = l.foot and i >= zone
+        if starts:
+            zone = starts[-1]
+            for i, l in enumerate(lines):
+                l.foot = l.foot and i >= zone
+        else:
+            # Some pages set their footnotes in the body size. Then the block is recognised by wording:
+            # a line in the lower half that starts note 1 the way amendment notes do.
+            alike = [i for i, l in enumerate(lines)
+                     if l.y > page.rect.height * 0.5 and FOOT_WORDING.match(l.text)]
+            zone = alike[-1] if alike else len(lines)
+            for i, l in enumerate(lines):
+                l.foot = i >= zone and not l.text.isdigit()
         out += lines
     return out, body
 
@@ -249,7 +253,10 @@ def split_pdf(pdf_path: Path, parent: str, act_repeal_note: str | None = None) -
         if m and not ln.bold_number:
             # Repealed sections are often not bold: "15. [Definition of "British India".] Rep. by ...".
             # Accepted only as exactly the next section in the table, with a bracketed heading.
-            if not (ptr < len(order) and m.group(1) == order[ptr] and m.group(2).lstrip().startswith("[")):
+            # A normal section printed without bold is accepted on the same condition, if it has a heading
+            # ending ".—" like every other section.
+            nxt = ptr < len(order) and m.group(1) == order[ptr]
+            if not (nxt and (m.group(2).lstrip().startswith("[") or HEAD_END.search(m.group(2)[:200]))):
                 m = None
         if m and m.group(1) in order[ptr:ptr + LOOKAHEAD]:
             close(cur)
@@ -285,16 +292,18 @@ def run(paths: Paths, only: list[str] | None = None) -> dict:
     rel_path = paths.data / "relations.jsonl"
     rels = [json.loads(l) for l in rel_path.read_text(encoding="utf-8").splitlines() if l.strip()] \
         if rel_path.exists() else []
-    for path in sorted(paths.meta.glob("*.json")):
-        meta = json.loads(path.read_text(encoding="utf-8"))
-        doc_id = meta["doc_id"]
+    metas = {p.stem: json.loads(p.read_text(encoding="utf-8")) for p in sorted(paths.meta.glob("*.json"))}
+    provided = {m["provides_sections_for"]: m for m in metas.values() if m.get("provides_sections_for")}
+    for doc_id, meta in metas.items():
         src = meta.get("source_record") or {}
         if (meta["doc_type"] != "act" or meta.get("parent_doc_id") or src.get("listing_raw_path")
                 or meta.get("mime_type") != "application/pdf" or (only and doc_id not in only)):
             continue
+        text_doc = provided.get(doc_id, meta)          # a better copy of the same Act, if one was added
         note = meta["status_note"] if meta["status"] == "repealed" else None
-        sections, stats = split_pdf(paths.raw_file(meta["raw_path"]), doc_id,
+        sections, stats = split_pdf(paths.raw_file(text_doc["raw_path"]), doc_id,
                                     f"The Act is repealed. {note}" if note else None)
+        stats["text_from"] = text_doc["doc_id"]
         results[doc_id] = stats
         out_dir = paths.sections / doc_id
         if out_dir.exists():
@@ -308,6 +317,8 @@ def run(paths: Paths, only: list[str] | None = None) -> dict:
             if used[key] > 1:
                 key = f"{key}-dup{used[key]}"
                 s["section_id"] = f"{doc_id}#{key}"
+            if text_doc is not meta:
+                s["text_source_doc_id"] = text_doc["doc_id"]
             write_json(out_dir / f"{key}.json", s)
             for h in s["amendment_history"]:
                 rels.append(_edge(s["section_id"], "amended_by", None, h["by_ref_raw"] or h["footnote_text"][:200],

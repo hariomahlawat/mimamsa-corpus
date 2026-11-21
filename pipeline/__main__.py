@@ -6,7 +6,8 @@
   ocr        Tesseract OCR for documents marked needs_ocr (slow; resumable; not part of `all`)
   validate   every record against its schema; exit 1 on any error
   report     data/manifest.csv and reports/phase2_report.md
-  all        records, extract, split, validate, report
+  correspondence  official new-code/old-code comparison tables into data/correspondence/
+  all        records, extract, split, correspondence, validate, report
 
 Each stage reads the previous stage's output and can be re-run alone.
 """
@@ -16,13 +17,13 @@ import argparse
 import json
 import sys
 
-from . import extract, ocr, records, report, split_pdf, validate
+from . import correspondence, extract, ocr, records, report, split_pdf, validate
 from .common import ROOT, Paths
 
 
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="python -m pipeline")
-    p.add_argument("stage", choices=["records", "extract", "split", "ocr", "validate", "report", "all"])
+    p.add_argument("stage", choices=["records", "extract", "split", "correspondence", "ocr", "validate", "report", "all"])
     p.add_argument("--root", default=str(ROOT))
     p.add_argument("--only", action="append", metavar="DOC_ID", help="extract/ocr: limit to these documents")
     p.add_argument("--workers", type=int, default=4, help="ocr: pages read in parallel")
@@ -45,6 +46,11 @@ def main(argv: list[str] | None = None) -> int:
         for doc_id, st in res.items():
             print(f"split: {doc_id}: {st['found']} of {st['toc_sections']} sections in its table, "
                   f"{st['amendment_notes']} amendment notes, " + ("written" if st["written"] else f"NOT written: {st['reason']}"))
+    if args.stage in ("correspondence", "all"):
+        res = correspondence.run(paths)
+        extra["correspondence"] = res
+        for key, st in res.items():
+            print(f"correspondence: {key}: {st['rows']} rows" + (f" ({st['reason']})" if st.get("reason") else ""))
     if args.stage == "ocr":
         res = ocr.run(paths, args.only, workers=args.workers, redo=args.redo)
         print("ocr:", json.dumps(res, indent=1, ensure_ascii=False))
