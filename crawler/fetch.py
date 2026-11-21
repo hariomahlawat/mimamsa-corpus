@@ -33,19 +33,37 @@ def _is_json(content: bytes) -> bool:
 
 
 def fetch_documents(cfg: Config, db: StateDB, client: PoliteClient, source: str, root: Path, *,
-                    limit: int = 50) -> dict[str, int]:
+                    limit: int = 50, workers: int = 1) -> dict[str, int]:
+    """`workers` > 1 downloads in parallel and is honoured only for `open_data_bucket` sources."""
     stats = {"downloaded": 0, "duplicate": 0, "not_modified": 0, "retry_later": 0, "failed": 0,
              "skipped": 0, "bytes": 0, "blocked": 0, "checksum_differs_from_listing": 0}
     retry = dict(max_retries=cfg.setting(source, "max_retries"),
                  backoff_base=cfg.setting(source, "backoff_base_seconds"))
-    for q in db.due(source, kind="document", limit=limit):
-        headers = {}
-        if q.etag:
-            headers["If-None-Match"] = q.etag
-        if q.last_modified:
-            headers["If-Modified-Since"] = q.last_modified
+    queue = db.due(source, kind="document", limit=limit)
+    parallel = workers > 1 and bool(cfg.source(source).get("open_data_bucket"))
+
+    def outcomes():
+        if not parallel:
+            for q in queue:
+                headers = {}
+                if q.etag:
+                    headers["If-None-Match"] = q.etag
+                if q.last_modified:
+                    headers["If-Modified-Since"] = q.last_modified
+                try:
+                    yield q, client.get(q.url, headers=headers)
+                except CrawlError as e:
+                    yield q, e
+            return
+        for i in range(0, len(queue), 200):                # in batches, so memory stays bounded
+            batch = queue[i:i + 200]
+            yield from zip(batch, client.get_many([q.url for q in batch], workers))
+
+    for q, got in outcomes():
         try:
-            r = client.get(q.url, headers=headers)
+            if isinstance(got, Exception):
+                raise got
+            r = got
         except Blocked as e:
             db.mark_skipped(q.url, f"blocked: {e}")
             stats["blocked"] += 1

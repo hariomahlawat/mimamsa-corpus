@@ -120,3 +120,28 @@ def test_high_court_slice_reads_every_bench(cfg, db, tmp_path):
     assert meta["court_key"] == "delhi" and meta["bench"] == "dhcdb" and meta["court_name"] == "High Court of Delhi"
     with pytest.raises(KeyError):
         opendata.discover(cfg, db, c, "hc", only=["nowhere:2023"])
+
+
+def test_parallel_fetch_is_only_for_buckets_and_keeps_the_audit_trail(cfg, db, tmp_path):
+    from crawler.fetch import fetch_documents
+    from crawler.http import CrawlError
+    pdf = b"%PDF-1.4 judgment "
+    urls = [f"{SC}/data/pdf/year=2013/english/j{i}_EN.pdf" for i in range(7)]
+    for u in urls:
+        db.enqueue(u, "sci", "indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com", "document",
+                   meta={"year": "2013", "filename": u.rsplit("/", 1)[-1], "dataset": "indian-supreme-court-judgments"})
+    pages = {u: httpx.Response(200, content=pdf + str(i).encode(), headers={"content-type": "application/pdf"})
+             for i, u in enumerate(urls[:5])}
+    pages[urls[5]] = httpx.Response(503)
+    c, seen = client(cfg, db, tmp_path, "sci", pages)                      # urls[6] is not in the bucket: 404
+    stats = fetch_documents(cfg, db, c, "sci", tmp_path, limit=50, workers=4)
+    assert stats["downloaded"] == 5 and stats["retry_later"] == 1 and stats["failed"] == 1
+    assert len(list((tmp_path / "data" / "raw" / "sci" / "2013").glob("*.pdf"))) == 5
+    assert db.conn.execute("SELECT COUNT(*) FROM requests").fetchone()[0] == 8       # robots.txt + 7 files, all logged
+    assert db.get(urls[5])["status"] == "queued" and db.get(urls[6])["status"] == "failed"
+    gov, _ = client(cfg, db, tmp_path, "indiacode", {})
+    with pytest.raises(CrawlError):
+        gov.get_many(["https://indiacode.gov.in/a"], 4)
+    # a government source asked for workers still goes one at a time
+    db.enqueue("https://indiacode.gov.in/a.pdf", "indiacode", "indiacode.gov.in", "document", meta={})
+    assert fetch_documents(cfg, db, gov, "indiacode", tmp_path, workers=8)["failed"] == 1

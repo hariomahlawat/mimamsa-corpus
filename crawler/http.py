@@ -166,6 +166,52 @@ class PoliteClient:
                 raise FetchError(f"{url}: HTTP {r.status}", retryable=True, status_code=r.status)
             return r
 
+    def get_many(self, urls: list[str], workers: int) -> list:
+        """Fetch several URLs at once. ONLY for sources flagged `open_data_bucket` (bulk-access object
+        storage); government hosts always go one request at a time through get().
+        Returns, in order, a FetchResult or the exception get() would have raised."""
+        if not self.cfg.source(self.source).get("open_data_bucket"):
+            raise CrawlError(f"{self.source} is not an open-data bucket: parallel requests are not allowed")
+        from concurrent.futures import ThreadPoolExecutor
+
+        def one(url: str):
+            ok, why = self.cfg.is_url_allowed(self.source, url)
+            if not ok:
+                return NotAllowed(f"{url}: {why}"), None
+            t0 = time.monotonic()
+            try:
+                with self.client.stream("GET", url) as resp:
+                    chunks, n = [], 0
+                    for chunk in resp.iter_bytes():
+                        n += len(chunk)
+                        if n > self.max_bytes:
+                            return FetchError(f"{url}: larger than max_file_mb", retryable=False), t0
+                        chunks.append(chunk)
+                    r = FetchResult(url, resp.status_code, dict(resp.headers), b"".join(chunks))
+            except httpx.TransportError as e:
+                return FetchError(f"{url}: {type(e).__name__}: {e}", retryable=True), t0
+            if r.status in (401, 403, 407):
+                return Blocked(f"{url}: HTTP {r.status} (access denied)"), t0
+            if r.status == 429 or r.status >= 500 or r.status in REDIRECTS:
+                return FetchError(f"{url}: HTTP {r.status}", retryable=r.status not in REDIRECTS, status_code=r.status), t0
+            return r, t0
+
+        if urls and not self._robots_ok(urls[0]):         # one robots.txt check for the bucket, as get() does
+            return [RobotsDisallowed(f"{u}: disallowed by robots.txt") for u in urls]
+        with ThreadPoolExecutor(max_workers=max(1, workers)) as pool:
+            done = list(pool.map(one, urls))
+        out = []
+        for url, (res, t0) in zip(urls, done):            # audit trail is written here, on the calling thread
+            if t0 is not None:
+                self.requests_made += 1
+                ok = isinstance(res, FetchResult)
+                self.audit.request(method="GET", url=url, status_code=res.status if ok else getattr(res, "status_code", None),
+                                   nbytes=len(res.content) if ok else None,
+                                   elapsed_ms=int((time.monotonic() - t0) * 1000), error=None if ok else str(res),
+                                   source=self.source)
+            out.append(res)
+        return out
+
     # ---------------------------------------------------------------- internals
     def _robots_ok(self, url: str) -> bool:
         if not self.cfg.setting(self.source, "obey_robots_txt"):

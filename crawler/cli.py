@@ -258,7 +258,8 @@ def cmd_fetch(args, cfg) -> int:
             print(f"refused: {e}", file=sys.stderr)
             return 3
         try:
-            stats = fetch_documents(cfg, db, client, args.source, _data_root(args), limit=args.limit)
+            stats = fetch_documents(cfg, db, client, args.source, _data_root(args), limit=args.limit,
+                                    workers=args.workers)
         except CrawlError as e:
             db.end_run(run_id, f"error: {e}")
             raise
@@ -309,6 +310,7 @@ def build_parser() -> argparse.ArgumentParser:
     f = sub.add_parser("fetch", help="download queued documents")
     f.add_argument("--source", required=True)
     f.add_argument("--limit", type=int, default=50)
+    f.add_argument("--workers", type=int, default=1, help="parallel downloads; only honoured for open-data buckets")
     f.add_argument("--yes-download", action="store_true", help="required: confirms a real download run")
     f.add_argument("--replay", metavar="DIR")
     f.set_defaults(func=cmd_fetch)

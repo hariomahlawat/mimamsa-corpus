@@ -86,9 +86,18 @@ def extract_document(paths: Paths, meta: dict) -> dict:
             "access_marking": marking.group(1) if marking else None, "devanagari_share": round(deva, 2)}
 
 
-def run(paths: Paths, only: list[str] | None = None, redo: bool = False) -> dict:
-    stats = {"extracted": 0, "unchanged": 0, "needs_ocr": 0, "kept_ocr": 0, "suspect": 0, "not_pdf": 0, "errors": [], "marked": [],
-             "watermark_chars_dropped": 0}
+def _extract_one(args):
+    paths, meta = args
+    try:
+        return meta["doc_id"], extract_document(paths, meta), None
+    except Exception as e:                           # a damaged PDF must not stop the run
+        return meta["doc_id"], None, f"{meta['doc_id']}: {type(e).__name__}: {e}"
+
+
+def run(paths: Paths, only: list[str] | None = None, redo: bool = False, workers: int = 4) -> dict:
+    stats = {"extracted": 0, "unchanged": 0, "needs_ocr": 0, "kept_ocr": 0, "suspect": 0, "not_pdf": 0, "errors": [],
+             "marked": [], "watermark_chars_dropped": 0}
+    todo: dict[str, tuple] = {}
     for path in sorted(paths.meta.glob("*.json")):
         meta = json.loads(path.read_text(encoding="utf-8"))
         if only and meta["doc_id"] not in only:
@@ -104,10 +113,18 @@ def run(paths: Paths, only: list[str] | None = None, redo: bool = False) -> dict
         if done and not redo:                        # same file already extracted (records resets these on a new file)
             stats["unchanged"] += 1
             continue
-        try:
-            res = extract_document(paths, meta)
-        except Exception as e:                       # a damaged PDF must not stop the run
-            stats["errors"].append(f"{meta['doc_id']}: {type(e).__name__}: {e}")
+        todo[meta["doc_id"]] = (path, meta)
+    jobs = [(paths, meta) for _, meta in todo.values()]
+    if len(jobs) > 20 and workers > 1:               # many documents: use several processes
+        from concurrent.futures import ProcessPoolExecutor
+        with ProcessPoolExecutor(max_workers=workers) as pool:
+            results = list(pool.map(_extract_one, jobs, chunksize=8))
+    else:
+        results = [_extract_one(j) for j in jobs]
+    for doc_id, res, err in results:
+        path, meta = todo[doc_id]
+        if err:
+            stats["errors"].append(err)
             continue
         stats["watermark_chars_dropped"] += res.pop("watermark_chars_dropped", 0)
         res.pop("devanagari_share", None)
