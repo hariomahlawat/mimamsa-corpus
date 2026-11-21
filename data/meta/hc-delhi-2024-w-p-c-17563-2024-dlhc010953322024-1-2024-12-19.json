@@ -1,0 +1,104 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=7_26/bench=dhcdb/DLHC010953322024_1_2024-12-19.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:49:52+00:00",
+  "sha256": "1d1ebf2c77932a1a1805afa4ab7d51d75bd822fe029f4d909f74f180823f0aff",
+  "raw_path": "data/raw/hc/2024/1d1ebf2c77932a1a1805afa4ab7d51d75bd822fe029f4d909f74f180823f0aff.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2024-w-p-c-17563-2024-dlhc010953322024-1-2024-12-19.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2024-w-p-c-17563-2024-dlhc010953322024-1-2024-12-19",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s47",
+      "target_ref_raw": "Section 47 of the Air Force Act 1950",
+      "effective_date": null,
+      "evidence": "to 4 to initiate strict disciplinary action against the respondent no.05, 06, 07 & 08 for abuse of power and ill treatment to subordinate as per the Section 47 of the Air Force Act 1950 and for violation of fundamental right of the petitioner; d. Kindly pass the order to the respondent No. 1 to 8 to compensate the petitioner for viol",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2024-w-p-c-17563-2024-dlhc010953322024-1-2024-12-19",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/17563/2024 of WG CDR SOUMYA DEEP DAS Vs UNION OF INDIA AND ORS",
+  "number": "W.P.(C)/17563/2024",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2024-12-19",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010953322024_1_2024-12-19.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010953322024",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/17563/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "WG CDR SOUMYA DEEP DAS"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE NAVIN CHAWLA",
+    "HON'BLE MS. JUSTICE SHALINDER KAUR"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "47",
+      "raw": "Section 47 of the Air Force Act 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 3,
+    "keywords": {
+      "air force act": 1,
+      "armed forces tribunal": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

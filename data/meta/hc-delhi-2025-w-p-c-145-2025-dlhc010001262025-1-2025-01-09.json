@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010001262025_1_2025-01-09.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:44:31+00:00",
+  "sha256": "297f4a8f7b5f0f135fa9d8a7ead3cb6fbd18873db9a15529df3cb5de39f892f9",
+  "raw_path": "data/raw/hc/2025/297f4a8f7b5f0f135fa9d8a7ead3cb6fbd18873db9a15529df3cb5de39f892f9.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2025-w-p-c-145-2025-dlhc010001262025-1-2025-01-09.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-145-2025-dlhc010001262025-1-2025-01-09",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s80",
+      "target_ref_raw": "Section 80 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "e respondents, who appears on advance notice of this petition, submits that the Impugned Charge Sheet was issued and the impugned Summary Trial under Section 80 of the Army Act, 1950, conducted in the Union Territory of Jammu and Kashmir. 3. In view of the above, we find that no part of the cause of action has arisen within the te",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2025-w-p-c-145-2025-dlhc010001262025-1-2025-01-09",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/145/2025 of HAV (DMT) SANJAY KUMAR TIWARI Vs UNION OF INDIA AND ORS",
+  "number": "W.P.(C)/145/2025",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2025-01-09",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010001262025_1_2025-01-09.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010001262025",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/145/2025"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "HAV (DMT) SANJAY KUMAR TIWARI"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE NAVIN CHAWLA",
+    "HON'BLE MS. JUSTICE SHALINDER KAUR"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "80",
+      "raw": "Section 80 of the Army Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "army act": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

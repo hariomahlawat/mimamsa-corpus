@@ -1,0 +1,107 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2021/court=7_26/bench=dhcdb/DLHC010199732021_1_2021-07-07.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:56:26+00:00",
+  "sha256": "51f0cfb7ee495105fadd1e61b18504ba8a58b9cbb1a6276e58f8f69a412c6c0b",
+  "raw_path": "data/raw/hc/2021/51f0cfb7ee495105fadd1e61b18504ba8a58b9cbb1a6276e58f8f69a412c6c0b.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 4,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2021-w-p-c-6204-2021-dlhc010199732021-1-2021-07-07.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2021-w-p-c-6204-2021-dlhc010199732021-1-2021-07-07",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s122",
+      "target_ref_raw": "Section 122 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "28th May, 2021, observing that the question whether the proceedings initiated against the petitioner were barred by limitation as contemplated under Section 122 of the Army Act, 1950, was a mixed question of law and facts and there was thus no reason to interfere with the General Court Martial proceedings against the petitioner. 6",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2021-w-p-c-6204-2021-dlhc010199732021-1-2021-07-07",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/6204/2021 of NB SUB MURALIDHARAN B  Vs UNION OF INDIA & ORS.",
+  "number": "W.P.(C)/6204/2021",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2021-07-07",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010199732021_1_2021-07-07.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010199732021",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/6204/2021"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "NB SUB MURALIDHARAN B"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE RAJIV SAHAI ENDLAW",
+    "AMIT BANSAL"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "122",
+      "raw": "Section 122 of the Army Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 24,
+    "keywords": {
+      "army act": 1,
+      "armed forces tribunal": 12,
+      "court martial": 11
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=7_26/bench=dhcdb/DLHC010378892022_1_2026-01-12.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:38:53+00:00",
+  "sha256": "6b844f40dad49a974bb9c7bb3d6e8395093d5474a3de79307dc2e9c5aa77ad5a",
+  "raw_path": "data/raw/hc/2026/6b844f40dad49a974bb9c7bb3d6e8395093d5474a3de79307dc2e9c5aa77ad5a.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 21,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2026-w-p-c-14302-2022-dlhc010378892022-1-2026-01-12.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2026-w-p-c-14302-2022-dlhc010378892022-1-2026-01-12",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/14302/2022 of CPL. DEEPA RAM Vs UNION OF INDIA AND ORS",
+  "number": "W.P.(C)/14302/2022",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2026-01-12",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010378892022_1_2026-01-12.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010378892022",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/14302/2022"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "CPL. DEEPA RAM"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE V. KAMESWAR RAO",
+    "HON'BLE MS. JUSTICE MANMEET PRITAM SINGH ARORA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": null,
+      "raw": "Air Force Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "air force act": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

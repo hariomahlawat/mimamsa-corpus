@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=7_26/bench=dhcdb/DLHC010881062024_1_2024-12-03.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:49:25+00:00",
+  "sha256": "5e31cc7ac1968b121dce096c8a26aa2e1f52737bf9d39e0336e9d0567349a70a",
+  "raw_path": "data/raw/hc/2024/5e31cc7ac1968b121dce096c8a26aa2e1f52737bf9d39e0336e9d0567349a70a.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2024-w-p-c-16639-2024-dlhc010881062024-1-2024-12-03.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2024-w-p-c-16639-2024-dlhc010881062024-1-2024-12-03",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/16639/2024 of CONSTABLE VIJAY KUMAR Vs UNION OF INDIA AND ORS.",
+  "number": "W.P.(C)/16639/2024",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2024-12-03",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010881062024_1_2024-12-03.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010881062024",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/16639/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "CONSTABLE VIJAY KUMAR"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE NAVIN CHAWLA",
+    "HON'BLE MS. JUSTICE SHALINDER KAUR"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "disability pension": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

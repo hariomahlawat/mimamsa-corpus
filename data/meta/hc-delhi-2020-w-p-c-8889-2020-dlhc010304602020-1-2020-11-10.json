@@ -1,0 +1,288 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2020/court=7_26/bench=dhcdb/DLHC010304602020_1_2020-11-10.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:58:36+00:00",
+  "sha256": "e3c4b40215ea36ae39f0e66327736e027b1388d57906bb1b94d2dda86e0db6b5",
+  "raw_path": "data/raw/hc/2020/e3c4b40215ea36ae39f0e66327736e027b1388d57906bb1b94d2dda86e0db6b5.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 20,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2020-w-p-c-8889-2020-dlhc010304602020-1-2020-11-10.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2020-w-p-c-8889-2020-dlhc010304602020-1-2020-11-10",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s90",
+      "target_ref_raw": "Section 90(i) of the Army Act",
+      "effective_date": null,
+      "evidence": "ing given by the AFT may be considered as his arguments. 11. We have perused the aforesaid order of the AFT and find the same to be in the context of Section 90(i) of the Army Act and Rule 193 of the Army Rules read with Army Order No.02/2001, whereunder the Army Authorities have power to grant maintenance independently of Sect",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2020-w-p-c-8889-2020-dlhc010304602020-1-2020-11-10",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s28",
+      "target_ref_raw": "Section 28 of the Army Act",
+      "effective_date": null,
+      "evidence": "r child satisfying any of the said conditions; (v) that the Report of the year 2015 of the Raksha Mantri's Committee of Experts had taken a view that Section 28 of the Army Act provided that the pay and allowances of persons subject to the Army Act are immune from attachment on direction of any Civil or Revenue Court in sati",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2020-w-p-c-8889-2020-dlhc010304602020-1-2020-11-10",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s191",
+      "target_ref_raw": "Section 191 of the Army Act",
+      "effective_date": null,
+      "evidence": "tenance; (vii) that the Army Act and the Army Rules do not provide any mechanism and procedure for adjudication of claims of maintenance; (viii) that Section 191 of the Army Act empowered the Central Government to make rules for carrying into effect the provisions of the Army Act and the subjects on which rules can be framed,",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2020-w-p-c-8889-2020-dlhc010304602020-1-2020-11-10",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s190",
+      "target_ref_raw": "Sections 190, 191 and 191A of the Air Force Act, 1950",
+      "effective_date": null,
+      "evidence": "as dismissed on 26th April, 2019], this petition has been filed. 6. In the aforesaid facts, the counsel for the petitioner has drawn our attention to Sections 190, 191 and 191A of the Air Force Act, 1950 empowering the Central Government to make regulations for all or any of the purposes of the Act other than those specified in Section 189 and requiri",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2020-w-p-c-8889-2020-dlhc010304602020-1-2020-11-10",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s21",
+      "target_ref_raw": "Section 21 of the Air Force Act",
+      "effective_date": null,
+      "evidence": "ivilian counterparts, in matters of maintenance and Air Force personnel are being subjected to an additional law regulating maintenance; (vii) though Section 21 of the Air Force Act empowers the Central Government to make rules restricting/modifying certain fundamental rights in their application to persons subject to the Air For",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2020-w-p-c-8889-2020-dlhc010304602020-1-2020-11-10",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s28",
+      "target_ref_raw": "Section 28 of the Air Force Act",
+      "effective_date": null,
+      "evidence": "mittee of Experts and Notes in the Military Manual and which reports / recommendations / manual, cannot override or amend or even modify the statute. Section 28 of the Air Force Act also confers immunity to personnel of the Air Force from attachment of his pay and allowances by direction of any Civil or Revenue Court in satisfact",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2020-w-p-c-8889-2020-dlhc010304602020-1-2020-11-10",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s16",
+      "target_ref_raw": "Sections 16 and 17 of the Air Force Act",
+      "effective_date": null,
+      "evidence": "therefrom is, that personnel of the Air Force, form a class by themselves, distinct from the civilians. In this context, we need not go further from Sections 16 and 17 of the Air Force Act providing for all persons, enrolled as combatants, selected to hold a non- commissioned rank and subject to the Air Force Act, to be attested and whi",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2020-w-p-c-8889-2020-dlhc010304602020-1-2020-11-10",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s92",
+      "target_ref_raw": "Section 92(i) of the Air Force Act",
+      "effective_date": null,
+      "evidence": "er is concerned, the said order merely issues notice of the petition impugning the order of deduction from the salary of the petitioner therein under Section 92(i) of the Air Force Act read with Rule 162 of the Air Force Rules and till the next date of hearing stays the operation and effect of the said order. The said order, not rec",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2020-w-p-c-8889-2020-dlhc010304602020-1-2020-11-10",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s141",
+      "target_ref_raw": "Sections 141, 149, 363, 504 & 506 of the Indian Penal Code, 1860",
+      "effective_date": null,
+      "evidence": "Criminal Procedure Code, 1973 (CrPC) for maintenance and also approached the Court under Section 156(3) of the CrPC, for registration of a case under Sections 141, 149, 363, 504 & 506 of the Indian Penal Code, 1860 (IPC) against the petitioner and his parents; (h) that the wife of the petitioner also filed false and fabricated case under Section 498A of the IPC",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2020-w-p-c-8889-2020-dlhc010304602020-1-2020-11-10",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s498a",
+      "target_ref_raw": "Section 498A of the IPC",
+      "effective_date": null,
+      "evidence": "Indian Penal Code, 1860 (IPC) against the petitioner and his parents; (h) that the wife of the petitioner also filed false and fabricated case under Section 498A of the IPC against the petitioner and his parents but the proceedings in the criminal complaint as well as the case under Section 498A of the IPC were stayed by",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2020-w-p-c-8889-2020-dlhc010304602020-1-2020-11-10",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s125",
+      "target_ref_raw": "Section 125 of the Criminal Procedure Code, 1973",
+      "effective_date": null,
+      "evidence": ", 2018 initiated proceedings for custody of his minor son; (g) that as a counterblast thereto, the wife of the petitioner initiated proceedings under Section 125 of the Criminal Procedure Code, 1973 (CrPC) for maintenance and also approached the Court under Section 156(3) of the CrPC, for registration of a case under Sections 141, 149, 363, 504 &",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2020-w-p-c-8889-2020-dlhc010304602020-1-2020-11-10",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s156",
+      "target_ref_raw": "Section 156(3) of the CrPC",
+      "effective_date": null,
+      "evidence": "he petitioner initiated proceedings under Section 125 of the Criminal Procedure Code, 1973 (CrPC) for maintenance and also approached the Court under Section 156(3) of the CrPC, for registration of a case under Sections 141, 149, 363, 504 & 506 of the Indian Penal Code, 1860 (IPC) against the petitioner and his parents; (h)",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2020-w-p-c-8889-2020-dlhc010304602020-1-2020-11-10",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/8889/2020 of SERGEANT AJIT KUMAR SHUKLA Vs UNION OF INDIA & ORS",
+  "number": "W.P.(C)/8889/2020",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2020-11-10",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010304602020_1_2020-11-10.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010304602020",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/8889/2020"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SERGEANT AJIT KUMAR SHUKLA"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE RAJIV SAHAI ENDLAW",
+    "HON'BLE MS. JUSTICE ASHA MENON"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "90",
+      "raw": "Section 90(i) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "28",
+      "raw": "Section 28 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "191",
+      "raw": "Section 191 of the Army Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "190",
+      "raw": "Sections 190, 191 and 191A of the Air Force Act, 1950"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "21",
+      "raw": "Section 21 of the Air Force Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "28",
+      "raw": "Section 28 of the Air Force Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "16",
+      "raw": "Sections 16 and 17 of the Air Force Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "92",
+      "raw": "Section 92(i) of the Air Force Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": null,
+      "raw": "Navy Act, 1957"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "141",
+      "raw": "Sections 141, 149, 363, 504 & 506 of the Indian Penal Code, 1860"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "498A",
+      "raw": "Section 498A of the IPC"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "125",
+      "raw": "Section 125 of the Criminal Procedure Code, 1973"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "156",
+      "raw": "Section 156(3) of the CrPC"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 64,
+    "keywords": {
+      "army act": 27,
+      "air force act": 19,
+      "navy act": 1,
+      "armed forces tribunal": 17
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

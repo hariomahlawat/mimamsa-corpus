@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=7_26/bench=dhcdb/DLHC010471242023_1_2024-03-13.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:50:37+00:00",
+  "sha256": "8af503279b46cd3f20152fa0400fd27e7f19cccf746537309bfc689be013e8e4",
+  "raw_path": "data/raw/hc/2024/8af503279b46cd3f20152fa0400fd27e7f19cccf746537309bfc689be013e8e4.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 15,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2024-w-p-c-15167-2023-dlhc010471242023-1-2024-03-13.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2024-w-p-c-15167-2023-dlhc010471242023-1-2024-03-13",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s30",
+      "target_ref_raw": "Section 30 of the AFT Act, 2007",
+      "effective_date": null,
+      "evidence": "have been impleaded as a party. He further submitted that in any event, the petitioner has approached this Court without exercising the remedy under Section 30 of the AFT Act, 2007 and thus the present petition is not maintainable in the present form. 14. Learned counsel submitted that the assessment of „Outstanding‟ denoted by",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2024-w-p-c-15167-2023-dlhc010471242023-1-2024-03-13",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/15167/2023 of BRIG ROHIT MEHTA Vs UNION OF INDIA THROUGH & ORS.",
+  "number": "W.P.(C)/15167/2023",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2024-03-13",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010471242023_1_2024-03-13.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010471242023",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/15167/2023"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "BRIG ROHIT MEHTA"
+    ],
+    "respondent": [
+      "UNION OF INDIA THROUGH & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE V. KAMESWAR RAO",
+    "HON'BLE MR. JUSTICE SAURABH BANERJEE"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "30",
+      "raw": "Section 30 of the AFT Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 15,
+    "keywords": {
+      "armed forces tribunal": 15
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

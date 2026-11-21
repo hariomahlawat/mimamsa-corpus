@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/court=7_26/bench=dhcdb/DLHC010010972019_1_2019-12-27.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:01:29+00:00",
+  "sha256": "c7f8b1129c774a4e8a620af647c2797b31b2e36b8716205c3d1181be9bd86023",
+  "raw_path": "data/raw/hc/2019/c7f8b1129c774a4e8a620af647c2797b31b2e36b8716205c3d1181be9bd86023.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2019-w-p-crl-3614-2019-dlhc010010972019-1-2019-12-27.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2019-w-p-crl-3614-2019-dlhc010010972019-1-2019-12-27",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s123",
+      "target_ref_raw": "Section 123 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "riate Writ/Order/Directions, to quash Para 6 of the impugned Invocation Policy dated 23 March, 2007, dealing with the invocation of the provisions of Section 123 of the Army Act, 1950, being arbitrary, unjust and illegal violating the provisions of Articles 14 and 21 of the Constitution of India as also the provisions of Section 12",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2019-w-p-crl-3614-2019-dlhc010010972019-1-2019-12-27",
+  "doc_type": "judgment",
+  "title": "W.P.(CRL)/3614/2019 of MAJ GEN S C SHARAN Vs UNION OF INDIA & ORS.",
+  "number": "W.P.(CRL)/3614/2019",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2019-12-27",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010010972019_1_2019-12-27.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010010972019",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(CRL)/3614/2019"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MAJ GEN S C SHARAN"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "123",
+      "raw": "Section 123 of the Army Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 16,
+    "keywords": {
+      "army act": 13,
+      "court martial": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

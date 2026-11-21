@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=7_26/bench=dhcdb/DLHC010270742021_1_2024-08-05.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:49:43+00:00",
+  "sha256": "19a9f15b0bdf50e4dfbe8527a636c74ce77eaca96d2083bc53e85445a0f80bfa",
+  "raw_path": "data/raw/hc/2024/19a9f15b0bdf50e4dfbe8527a636c74ce77eaca96d2083bc53e85445a0f80bfa.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2024-w-p-c-9529-2021-dlhc010270742021-1-2024-08-05.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2024-w-p-c-9529-2021-dlhc010270742021-1-2024-08-05",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/9529/2021 of CT/PNR RECT MAHABIR SINGH Vs UNION OF INDIA & ORS.",
+  "number": "W.P.(C)/9529/2021",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2024-08-05",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010270742021_1_2024-08-05.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010270742021",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/9529/2021"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "CT/PNR RECT MAHABIR SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MS. JUSTICE REKHA PALLI",
+    "HON'BLE MS. JUSTICE SHALINDER KAUR"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "disability pension": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

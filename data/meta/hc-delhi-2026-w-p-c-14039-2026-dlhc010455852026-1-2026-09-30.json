@@ -1,0 +1,89 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=7_26/bench=dhcdb/DLHC010455852026_1_2026-09-30.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:41:40+00:00",
+  "sha256": "3f2b9eeda88d4ebde2fdf2b4c9c0b813dee6fa98daafa8b257b14bf5718b1693",
+  "raw_path": "data/raw/hc/2026/3f2b9eeda88d4ebde2fdf2b4c9c0b813dee6fa98daafa8b257b14bf5718b1693.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2026-w-p-c-14039-2026-dlhc010455852026-1-2026-09-30.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2026-w-p-c-14039-2026-dlhc010455852026-1-2026-09-30",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/14039/2026 of UNION OF INDIA AND ORS Vs HAV DHANDEV HARIBA BANE  (RETD.)",
+  "number": "W.P.(C)/14039/2026",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2026-09-30",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010455852026_1_2026-09-30.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010455852026",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/14039/2026"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA AND ORS"
+    ],
+    "respondent": [
+      "HAV DHANDEV HARIBA BANE  (RETD.)"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SANJAY SHARMA",
+    "HON'BLE MR. JUSTICE NITIN WASUDEO SAMBRE"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "medical_board"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 11,
+    "keywords": {
+      "disability pension": 4,
+      "release medical board": 7
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

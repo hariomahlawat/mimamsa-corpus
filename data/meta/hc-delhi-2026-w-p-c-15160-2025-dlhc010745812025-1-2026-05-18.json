@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=7_26/bench=dhcdb/DLHC010745812025_1_2026-05-18.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:40:12+00:00",
+  "sha256": "91b5ca779379f543ad02d69aefae6a7d863e901be8fac573b5295e322de1b55a",
+  "raw_path": "data/raw/hc/2026/91b5ca779379f543ad02d69aefae6a7d863e901be8fac573b5295e322de1b55a.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 15,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2026-w-p-c-15160-2025-dlhc010745812025-1-2026-05-18.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2026-w-p-c-15160-2025-dlhc010745812025-1-2026-05-18",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/15160/2025 of UNION OF INDIA & ORS. Vs EX NK KASHMIR SINGH (NO 4466950-F)",
+  "number": "W.P.(C)/15160/2025",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2026-05-18",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010745812025_1_2026-05-18.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010745812025",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/15160/2025"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA & ORS."
+    ],
+    "respondent": [
+      "EX NK KASHMIR SINGH (NO 4466950-F)"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE AMIT MAHAJAN",
+    "HON'BLE MR. JUSTICE ANIL KSHETARPAL"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "armed forces tribunal": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

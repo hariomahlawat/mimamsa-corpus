@@ -1,0 +1,89 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010185012025_1_2025-12-09.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:46:18+00:00",
+  "sha256": "3cc4e478e57061407cf3e14c01af9a58d7118ce5ae2a382a98cfe692c5770e4f",
+  "raw_path": "data/raw/hc/2025/3cc4e478e57061407cf3e14c01af9a58d7118ce5ae2a382a98cfe692c5770e4f.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2025-w-p-c-4350-2025-dlhc010185012025-1-2025-12-09.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2025-w-p-c-4350-2025-dlhc010185012025-1-2025-12-09",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/4350/2025 of KALU RAM Vs UNION OF INDIA & ORS.",
+  "number": "W.P.(C)/4350/2025",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2025-11-06",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010185012025_1_2025-12-09.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010185012025",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/4350/2025"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "KALU RAM"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE C.HARI SHANKAR",
+    "HON'BLE MR. JUSTICE OM PRAKASH SHUKLA"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 2,
+    "keywords": {
+      "disability pension": 1,
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

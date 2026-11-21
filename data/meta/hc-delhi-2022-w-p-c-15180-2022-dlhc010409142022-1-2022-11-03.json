@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2022/court=7_26/bench=dhcdb/DLHC010409142022_1_2022-11-03.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:54:05+00:00",
+  "sha256": "fc9a590352a30fce95cbd7e9612bb4d4f97382dfb5b92b5e1fe13a64b1a3723a",
+  "raw_path": "data/raw/hc/2022/fc9a590352a30fce95cbd7e9612bb4d4f97382dfb5b92b5e1fe13a64b1a3723a.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2022-w-p-c-15180-2022-dlhc010409142022-1-2022-11-03.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-15180-2022-dlhc010409142022-1-2022-11-03",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s30",
+      "target_ref_raw": "Sections 30 and 31 of the Armed Forces Tribunal Act",
+      "effective_date": null,
+      "evidence": "ative remedy is available. In our concerned view, the same is not applicable to the facts of the present case in view of the specific provisions like Sections 30 and 31 of the Armed Forces Tribunal Act, 20074 being the only remedy available for challenging the final decision of the AFT, as has already been held by this Court in Nishant Kaushik(supra",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2022-w-p-c-15180-2022-dlhc010409142022-1-2022-11-03",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/15180/2022 of NR-19681H EX LT COL POONAM CHATURVEDI Vs UNION OF INDIA AND ORS.",
+  "number": "W.P.(C)/15180/2022",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2022-11-03",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010409142022_1_2022-11-03.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010409142022",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/15180/2022"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "NR-19681H EX LT COL POONAM CHATURVEDI"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SURESH  KUMAR  KAIT",
+    "SAURABH BANERJEE"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "30",
+      "raw": "Sections 30 and 31 of the Armed Forces Tribunal Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 11,
+    "keywords": {
+      "armed forces tribunal": 11
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

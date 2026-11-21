@@ -1,0 +1,146 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2020/court=7_26/bench=dhcdb/DLHC011245922012_1_2020-01-28.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:58:44+00:00",
+  "sha256": "4453a0439c072a97bc3ce3a54c93158ff72ab9d5f4509b610721a68e1cecfb0a",
+  "raw_path": "data/raw/hc/2020/4453a0439c072a97bc3ce3a54c93158ff72ab9d5f4509b610721a68e1cecfb0a.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 16,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2020-w-p-c-4781-2012-dlhc011245922012-1-2020-01-28.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2020-w-p-c-4781-2012-dlhc011245922012-1-2020-01-28",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s164",
+      "target_ref_raw": "Section 164 (2) of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "ll as the order of the General Officer Commanding-in- Chief („GOC‟), South Western Command dated 11th August, 2007 rejecting his mercy petition under Section 164 (2) of the Army Act, 1950 (hereinafter, „Army Act‟), which was directed against the above order of the SCM. 2. The background facts are that the Petitioner enrolled as a Sepoy",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2020-w-p-c-4781-2012-dlhc011245922012-1-2020-01-28",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s40",
+      "target_ref_raw": "Sections 40 (a) of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "d October, 2006 by the Commanding Officer („CO‟), 616th EME Battalion, whereby the Petitioner came to be charged with having committed offences under Sections 40 (a) of the Army Act, 1950 i.e. “using criminal force to his superior officer” 5. Subsequently, the CO, 616th EME Battalion issued a final charge sheet dated 12th October, 2006",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2020-w-p-c-4781-2012-dlhc011245922012-1-2020-01-28",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s63",
+      "target_ref_raw": "Section 63 of the Army Act",
+      "effective_date": null,
+      "evidence": "6th EME Battalion issued a final charge sheet dated 12th October, 2006 incorporating the charge under Section 40 (a) and adding a second charge under Section 63 of the Army Act of the Petitioner having committed “an act prejudicial to good order and military discipline”. By a “Certificate” of even date, the CCO, 616th EME Ba",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2020-w-p-c-4781-2012-dlhc011245922012-1-2020-01-28",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/4781/2012 of SATENDRA PAL Vs UNION OF INDIA AND ORS",
+  "number": "W.P.(C)/4781/2012",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2020-01-28",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC011245922012_1_2020-01-28.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC011245922012",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/4781/2012"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SATENDRA PAL"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE DR. JUSTICE S.MURALIDHAR",
+    "HON'BLE MR. JUSTICE TALWANT SINGH"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "164",
+      "raw": "Section 164 (2) of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "40",
+      "raw": "Sections 40 (a) of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "63",
+      "raw": "Section 63 of the Army Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": null,
+      "raw": "Evidence Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 54,
+    "keywords": {
+      "army act": 20,
+      "court martial": 22,
+      "summary of evidence": 12
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

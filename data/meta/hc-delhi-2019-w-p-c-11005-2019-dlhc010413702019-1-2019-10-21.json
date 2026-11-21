@@ -1,0 +1,173 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/court=7_26/bench=dhcdb/DLHC010413702019_1_2019-10-21.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:02:29+00:00",
+  "sha256": "5fe63922acc05170f11cb5435aade783d40c461a1d383bc51aa3ed49fad0923b",
+  "raw_path": "data/raw/hc/2019/5fe63922acc05170f11cb5435aade783d40c461a1d383bc51aa3ed49fad0923b.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2019-w-p-c-11005-2019-dlhc010413702019-1-2019-10-21.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2019-w-p-c-11005-2019-dlhc010413702019-1-2019-10-21",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s18",
+      "target_ref_raw": "section 18 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "s where the punishment of dismissal is awarded; (iv) any other matter, whatsoever, but shall not include matters relating to— (i) orders issued under section 18 of the Army Act, 1950 (46 of 1950), sub-section (1) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950 (45 of 1950); and (ii) trans",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2019-w-p-c-11005-2019-dlhc010413702019-1-2019-10-21",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s18",
+      "target_ref_raw": "section 18 of the Air Force Act, 1950",
+      "effective_date": null,
+      "evidence": "ating to— (i) orders issued under section 18 of the Army Act, 1950 (46 of 1950), sub-section (1) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950 (45 of 1950); and (ii) transfers and postings including the change of place or unit on posting whether individually or as a part of unit, formation o",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2019-w-p-c-11005-2019-dlhc010413702019-1-2019-10-21",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s15",
+      "target_ref_raw": "section 15 of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "ter, whatsoever, but shall not include matters relating to— (i) orders issued under section 18 of the Army Act, 1950 (46 of 1950), sub-section (1) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950 (45 of 1950); and (ii) transfers and postings including the change of place or unit on posting",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2019-w-p-c-11005-2019-dlhc010413702019-1-2019-10-21",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s2",
+      "target_ref_raw": "Section 2 (1) of the AFT Act",
+      "effective_date": null,
+      "evidence": "referred to an order of this Court dated 23rd September, 2013 in W.P.(C) No.3764/2013 (Aditya Singh Yadav v. Union of India). 7. Ms. Ramesh refers to Section 2 (1) of the AFT Act, which states that it applies to all persons subject to the Army Act, 1950, the Navy Act, 1957, W.P.(C) 11005/2019 Page 3 of 5 and the Air Force Act,",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2019-w-p-c-11005-2019-dlhc010413702019-1-2019-10-21",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s3",
+      "target_ref_raw": "Section 3 (o) of the AFT Act",
+      "effective_date": null,
+      "evidence": "on approaching the AFT for relief, does not arise. 8. In response, Mr Harish Vaidyanathan Shankar, learned CGSC appearing for UOI, draws attention to Section 3 (o) of the AFT Act, which defines „service matters‟ as under: “(o) service matters, in relation to the persons subject to the Army Act, 1950 (46 of 1950), the Navy Act,",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2019-w-p-c-11005-2019-dlhc010413702019-1-2019-10-21",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/11005/2019 of CADET GAUTAM SINGH Vs UNION OF INDIA AND ORS.",
+  "number": "W.P.(C)/11005/2019",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2019-10-21",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010413702019_1_2019-10-21.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010413702019",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/11005/2019"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "CADET GAUTAM SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE DR. JUSTICE S.MURALIDHAR",
+    "HON'BLE MR. JUSTICE TALWANT SINGH"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "18",
+      "raw": "section 18 of the Army Act, 1950"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "18",
+      "raw": "section 18 of the Air Force Act, 1950"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "15",
+      "raw": "section 15 of the Navy Act, 1957"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "2",
+      "raw": "Section 2 (1) of the AFT Act"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "3",
+      "raw": "Section 3 (o) of the AFT Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 23,
+    "keywords": {
+      "army act": 4,
+      "air force act": 3,
+      "navy act": 4,
+      "armed forces tribunal": 11,
+      "court martial": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

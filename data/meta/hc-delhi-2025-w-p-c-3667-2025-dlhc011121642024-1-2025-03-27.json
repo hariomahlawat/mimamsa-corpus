@@ -1,0 +1,102 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC011121642024_1_2025-03-27.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:43:16+00:00",
+  "sha256": "7138f7fe9b771f62bcc9309a0dd4b4a2a1709e9149cd373f3d773080e217c8c4",
+  "raw_path": "data/raw/hc/2025/7138f7fe9b771f62bcc9309a0dd4b4a2a1709e9149cd373f3d773080e217c8c4.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 77,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2025-w-p-c-3667-2025-dlhc011121642024-1-2025-03-27.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2025-w-p-c-3667-2025-dlhc011121642024-1-2025-03-27",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/3667/2025 of UNION OF INDIA & ORS. Vs EX NK AMIN CHAND",
+  "number": "W.P.(C)/3667/2025",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2025-03-27",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC011121642024_1_2025-03-27.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC011121642024",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/3667/2025"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA & ORS."
+    ],
+    "respondent": [
+      "EX NK AMIN CHAND"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE C.HARI SHANKAR",
+    "HON'BLE MR. JUSTICE AJAY DIGPAUL"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": null,
+      "raw": "Army Act 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "entitlement_rules",
+    "invalidment",
+    "medical_board"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 192,
+    "keywords": {
+      "army act": 1,
+      "armed forces tribunal": 25,
+      "disability pension": 77,
+      "entitlement rules": 48,
+      "invalided": 37,
+      "release medical board": 4
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

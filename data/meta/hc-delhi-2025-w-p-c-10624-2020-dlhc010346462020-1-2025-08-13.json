@@ -1,0 +1,159 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010346462020_1_2025-08-13.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:44:22+00:00",
+  "sha256": "43b427a030b6ff2e8d208171d6b1f67b08093e667181d862a14594ab187569c2",
+  "raw_path": "data/raw/hc/2025/43b427a030b6ff2e8d208171d6b1f67b08093e667181d862a14594ab187569c2.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 26,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2025-w-p-c-10624-2020-dlhc010346462020-1-2025-08-13.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-10624-2020-dlhc010346462020-1-2025-08-13",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s323",
+      "target_ref_raw": "Section 323 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": "OM PRAKASH SHUKLA, J. 1. The petitioner has filed the present petition assailing his dismissal from service and his conviction under Section 354 and Section 323 of the Indian Penal Code, 18601 by the General Security Force Court2 constituted under the Border Security Force Act, 19673. 2. Shorn off unnecessary details, the facts as no",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-10624-2020-dlhc010346462020-1-2025-08-13",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s148",
+      "target_ref_raw": "Section 148, 149 & 353 of IPC",
+      "effective_date": null,
+      "evidence": "day Offg. Coy Commander of D Coy filed an FIR against Mr. Khokha Mia, Mr. Abdul Kalam and Mr. Badshah Mia (FIR no. 283 of 2010) in P S Belonia under Section 148, 149 & 353 of IPC against the aforesaid miscreants in PS Belonia for attacking sentry on duty and preventing them from discharging bona fide Government duties and caus",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-10624-2020-dlhc010346462020-1-2025-08-13",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s34",
+      "target_ref_raw": "Section 34 of IPC",
+      "effective_date": null,
+      "evidence": "08.2025 11:08:25 Signature Not Verified W.P.(C) 10624/2020 Page 7 of 26 petitioner under Section 376 r/w Section 511, Section 341 and Section 323 r/w Section 34 of IPC; CT V. Veluswamy under Section 302, 341 and 323 r/w Section 34 of IPC and CT. Santosh Kumar under Section 341 and Section 323 r/w Section 34 of IPC w",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-10624-2020-dlhc010346462020-1-2025-08-13",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s354",
+      "target_ref_raw": "Section 354 of IPC",
+      "effective_date": null,
+      "evidence": "the charges including the charge of murder which was alleged to have been committed by CT. V. Veluswamy. However, GSFC convicted the petitioner under Section 354 of IPC and resultantly, dismissed the petitioner from services. 13. Subsequently, the petitioner preferred a pre-confirmation petition under Section 117 (1)",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2025-w-p-c-10624-2020-dlhc010346462020-1-2025-08-13",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/10624/2020 of SHEELENDRA KUMAR Vs UNION OF INDIA THROUGH SECRETARY & ANR.",
+  "number": "W.P.(C)/10624/2020",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2025-08-13",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010346462020_1_2025-08-13.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010346462020",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/10624/2020"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SHEELENDRA KUMAR"
+    ],
+    "respondent": [
+      "UNION OF INDIA THROUGH SECRETARY & ANR."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE C.HARI SHANKAR",
+    "HON'BLE MR. JUSTICE OM PRAKASH SHUKLA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "323",
+      "raw": "Section 323 of the Indian Penal Code"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "148",
+      "raw": "Section 148, 149 & 353 of IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "34",
+      "raw": "Section 34 of IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "354",
+      "raw": "Section 354 of IPC"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": null,
+      "raw": "Evidence Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 4,
+    "keywords": {
+      "court martial": 4
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

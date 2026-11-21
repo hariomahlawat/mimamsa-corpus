@@ -1,0 +1,119 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010200712023_1_2025-08-28.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:43:36+00:00",
+  "sha256": "e18b08c6d8cd2ee5be53988abb03afee30066194cdeeaff2a4011c7206bded6c",
+  "raw_path": "data/raw/hc/2025/e18b08c6d8cd2ee5be53988abb03afee30066194cdeeaff2a4011c7206bded6c.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 22,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2025-w-p-c-7056-2023-dlhc010200712023-1-2025-08-28.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-7056-2023-dlhc010200712023-1-2025-08-28",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s342",
+      "target_ref_raw": "Sections 3423, 3654 and 3775 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": "of 22 committed by the petitioner, in respect of which a First Information Report2 was registered against him at Police Outpost, Cacher, Assam, under Sections 3423, 3654 and 3775 of the Indian Penal Code, 18606 read with Section 67 of the Protection of Children From Sexual Offences Act, 20128. It was alleged that the petitioner had sodomized a 10-year",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-7056-2023-dlhc010200712023-1-2025-08-28",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s2",
+      "target_ref_raw": "Section 2 of the Code of Criminal Procedure, 1973",
+      "effective_date": null,
+      "evidence": "very person appointed as a Special Public Prosecutor under this section shall be deemed to be a Public Prosecutor within the meaning of clause (u) of Section 2 of the Code of Criminal Procedure, 1973 (2 of Digitally Signed By:AJIT KUMAR Signing Date:10.09.2025 19:28:01 Signature Not Verified W.P.(C) 7056/2023 Page 12 of 22 11.2 Besides the fact th",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2025-w-p-c-7056-2023-dlhc010200712023-1-2025-08-28",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/7056/2023 of RAKESH BABU Vs UNION OF INDIA & ORS",
+  "number": "W.P.(C)/7056/2023",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2025-08-28",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010200712023_1_2025-08-28.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010200712023",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/7056/2023"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "RAKESH BABU"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE C.HARI SHANKAR",
+    "HON'BLE MR. JUSTICE OM PRAKASH SHUKLA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "342",
+      "raw": "Sections 3423, 3654 and 3775 of the Indian Penal Code"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "2",
+      "raw": "Section 2 of the Code of Criminal Procedure, 1973"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "court martial": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

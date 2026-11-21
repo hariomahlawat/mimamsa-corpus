@@ -1,0 +1,89 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=7_26/bench=dhcdb/DLHC010017592026_1_2026-01-21.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:39:28+00:00",
+  "sha256": "29d1295728c16d8ee68846074a598a31075f3c635c0fbf7b794c01a18d58a257",
+  "raw_path": "data/raw/hc/2026/29d1295728c16d8ee68846074a598a31075f3c635c0fbf7b794c01a18d58a257.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2026-w-p-c-824-2026-dlhc010017592026-1-2026-01-21.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2026-w-p-c-824-2026-dlhc010017592026-1-2026-01-21",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/824/2026 of DALIP KUMAR CHAHAR  Vs UNION OF INDIA  & ORS.",
+  "number": "W.P.(C)/824/2026",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2026-01-21",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010017592026_1_2026-01-21.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010017592026",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/824/2026"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "DALIP KUMAR CHAHAR"
+    ],
+    "respondent": [
+      "UNION OF INDIA  & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE V. KAMESWAR RAO",
+    "HON'BLE MS. JUSTICE MANMEET PRITAM SINGH ARORA"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 3,
+    "keywords": {
+      "disability pension": 2,
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

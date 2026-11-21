@@ -1,0 +1,87 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2022/court=7_26/bench=dhcdb/DLHC010407422022_1_2022-12-15.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:54:22+00:00",
+  "sha256": "488223f059bcfcc25e77f0be442823c635cd9e92256277831c3c5301c8c0533c",
+  "raw_path": "data/raw/hc/2022/488223f059bcfcc25e77f0be442823c635cd9e92256277831c3c5301c8c0533c.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2022-w-p-c-15136-2022-dlhc010407422022-1-2022-12-15.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2022-w-p-c-15136-2022-dlhc010407422022-1-2022-12-15",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/15136/2022 of RADHEY SHYAM PANDEY Vs UNION OF INDIA AND ORS",
+  "number": "W.P.(C)/15136/2022",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2022-12-15",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010407422022_1_2022-12-15.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010407422022",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/15136/2022"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "RADHEY SHYAM PANDEY"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SURESH  KUMAR  KAIT",
+    "NEENA BANSAL KRISHNA"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 6,
+    "keywords": {
+      "disability pension": 6
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

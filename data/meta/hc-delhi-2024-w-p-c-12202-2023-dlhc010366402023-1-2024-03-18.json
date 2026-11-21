@@ -1,0 +1,189 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=7_26/bench=dhcdb/DLHC010366402023_1_2024-03-18.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:50:11+00:00",
+  "sha256": "0c269aa48bacef39e55eb5badb66e79ef75af56f60e19208d5efe9a3d437fa89",
+  "raw_path": "data/raw/hc/2024/0c269aa48bacef39e55eb5badb66e79ef75af56f60e19208d5efe9a3d437fa89.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 49,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2024-w-p-c-12202-2023-dlhc010366402023-1-2024-03-18.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2024-w-p-c-12202-2023-dlhc010366402023-1-2024-03-18",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s69",
+      "target_ref_raw": "Section 69 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "r had shared the tour programme with her. 14. On August 02, 2019, the Supreme Court set aside the finding of the GCM with regard to the charges under Section 69 of the Army Act, 1950, and held that, nothing survives against the petitioner on the charges under Section 497 (Adultery) of the Ranbir Penal Code, 1932. The Court permitt",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2024-w-p-c-12202-2023-dlhc010366402023-1-2024-03-18",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s63",
+      "target_ref_raw": "Section 63 of Army Act",
+      "effective_date": null,
+      "evidence": "he charges under Section 497 (Adultery) of the Ranbir Penal Code, 1932. The Court permitted the Competent Authority to proceed with the offence under Section 63 of Army Act and to reach its logical conclusion. On February 08, 2020, the CA directed the GCM to reassemble for fresh evidence and re-appreciate as well as re-e",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2024-w-p-c-12202-2023-dlhc010366402023-1-2024-03-18",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s164",
+      "target_ref_raw": "Section 164(2) of the Army Act",
+      "effective_date": null,
+      "evidence": "the petitioner „Guilty‟. On August 18, 2020, the petitioner made a representation to the Chief of Army Staff through GOC-in-C, Southern Command under Section 164(2) of the Army Act, challenging his conviction on Third Charge in the Revision Proceedings. The CA vide order dated May 20, 2020, confirmed the finding and sentence of",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2024-w-p-c-12202-2023-dlhc010366402023-1-2024-03-18",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s160",
+      "target_ref_raw": "Section 160 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "He seeks prayers as sought in the petition. 35. The case of the respondents before the AFT was that the powers of revision available to the CA under Section 160 of the Army Act, 1950 have been exercised in the matter, in accordance with the requirement of law. There is no reason to disbelieve the same and, therefore, no interferen",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2024-w-p-c-12202-2023-dlhc010366402023-1-2024-03-18",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s155",
+      "target_ref_raw": "Sections 155, 158 and 160 of the Army Act",
+      "effective_date": null,
+      "evidence": "nce under Section 63 of the Army Act and when the proceeding and finding of the Court was placed before the CA, the CA in exercise of its power under Sections 155, 158 and 160 of the Army Act which reads as under, exercised the jurisdiction under Section 163 and took the impugned action: “155. Power to confirm finding and sentence of distr",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2024-w-p-c-12202-2023-dlhc010366402023-1-2024-03-18",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s15",
+      "target_ref_raw": "Section 15 of the AFT Act, 2007",
+      "effective_date": null,
+      "evidence": "CA vide order dated May 20, 2020, confirmed the finding and sentence of the GCM. Feeling aggrieved by the same, the petitioner filed an appeal under Section 15 of the AFT Act, 2007. 16. The case of the petitioner was that in the initial Court of Enquiry, the charge of adultery was not proved and it recommended the dropping of th",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2024-w-p-c-12202-2023-dlhc010366402023-1-2024-03-18",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/12202/2023 of RAJNISH BHANDARI Vs UNION OF INDIA",
+  "number": "W.P.(C)/12202/2023",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2024-03-18",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010366402023_1_2024-03-18.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010366402023",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/12202/2023"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "RAJNISH BHANDARI"
+    ],
+    "respondent": [
+      "UNION OF INDIA"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE V. KAMESWAR RAO",
+    "HON'BLE MR. JUSTICE SAURABH BANERJEE"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "69",
+      "raw": "Section 69 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "63",
+      "raw": "Section 63 of Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "164",
+      "raw": "Section 164(2) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "160",
+      "raw": "Section 160 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "155",
+      "raw": "Sections 155, 158 and 160 of the Army Act"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "15",
+      "raw": "Section 15 of the AFT Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 86,
+    "keywords": {
+      "army act": 12,
+      "armed forces tribunal": 39,
+      "court martial": 34,
+      "summary of evidence": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

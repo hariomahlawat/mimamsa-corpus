@@ -1,0 +1,104 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=7_26/bench=dhcdb/DLHC010555402023_1_2024-01-23.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:49:52+00:00",
+  "sha256": "54374c67e5aad5122c5fde6b0f714b4ee5e97da59c07de1078048ac3fa70776e",
+  "raw_path": "data/raw/hc/2024/54374c67e5aad5122c5fde6b0f714b4ee5e97da59c07de1078048ac3fa70776e.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 23,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2024-w-p-c-16521-2023-dlhc010555402023-1-2024-01-23.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2024-w-p-c-16521-2023-dlhc010555402023-1-2024-01-23",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s26",
+      "target_ref_raw": "Section 26 of the Air Force Act, 1950",
+      "effective_date": null,
+      "evidence": ".P.(C) 16521/2023 Page 18 of 23 by the Unit authority, the petitioner had the statutory remedy for ‘Redressal of Grievances’ (‘RoG’, for short) under Section 26 of the Air Force Act, 1950, against the decision of the Competent Authority. The petitioner never approached the higher authority by filing a statutory complaint about non-proc",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2024-w-p-c-16521-2023-dlhc010555402023-1-2024-01-23",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/16521/2023 of NAKHAT SINGH Vs UNION OF INDIA & ORS.",
+  "number": "W.P.(C)/16521/2023",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2024-01-23",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010555402023_1_2024-01-23.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010555402023",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/16521/2023"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "NAKHAT SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE V. KAMESWAR RAO",
+    "HON'BLE MR. JUSTICE SAURABH BANERJEE"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "26",
+      "raw": "Section 26 of the Air Force Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 26,
+    "keywords": {
+      "air force act": 1,
+      "armed forces tribunal": 25
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

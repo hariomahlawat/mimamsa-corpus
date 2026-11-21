@@ -1,0 +1,199 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010181462023_1_2025-07-25.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:44:49+00:00",
+  "sha256": "4f0d51960edfde745eb9a3e1bf4d03302b0152d5526dfeb7160185fe0dac316c",
+  "raw_path": "data/raw/hc/2025/4f0d51960edfde745eb9a3e1bf4d03302b0152d5526dfeb7160185fe0dac316c.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 31,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2025-w-p-c-6319-2023-dlhc010181462023-1-2025-07-25.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-6319-2023-dlhc010181462023-1-2025-07-25",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s468",
+      "target_ref_raw": "Section 468 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": "zed, for obvious reasons.] 1. The petitioner has filed the present petition assailing his dismissal from service and conviction under Section 376 and Section 468 of the Indian Penal Code, 18601 by the General Security Force Court2 constituted under the Border Security Force Act, 19673, wherein initially he was sentenced to undergo rig",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-6319-2023-dlhc010181462023-1-2025-07-25",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s376",
+      "target_ref_raw": "Sections 376, 463 and 468 of the IPC",
+      "effective_date": null,
+      "evidence": "Page 4 of 31 2020, remanded the petitioner for preparation of Record of Evidence8, in accordance with the Rule 48 of the BSF Rules and charges under Sections 376, 463 and 468 of the IPC. Apparently, on advice of the Law Branch, Frontier Headquarter HQ (Spl Ops), BSF, Bangalore an Additional ROE was also prepared and after due conside",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-6319-2023-dlhc010181462023-1-2025-07-25",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s375",
+      "target_ref_raw": "Section 375 of the IPC",
+      "effective_date": null,
+      "evidence": "with false promise of marriages vitiates the consent under Section 90 of the Indian Evidence Act, 1872 and falls squarely within Explanation (ii) of Section 375 of the IPC. Reliance is placed on the judgment of the Supreme Court in Pramod Suryabhan Pawar v The State of Maharashtra13. 28. The learned CGSC has sought to c",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-6319-2023-dlhc010181462023-1-2025-07-25",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s371",
+      "target_ref_raw": "Section 371 of IPC",
+      "effective_date": null,
+      "evidence": "the necessary power has been vested with the authorities and explained that, in view of the minimum sentence prescribed for the offence of rape under Section 371 of IPC, the petitioner was rightly punished and sentenced upto ten years of imprisonment with termination of his service from the Force and accordingly, pra",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-6319-2023-dlhc010181462023-1-2025-07-25",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s463",
+      "target_ref_raw": "Section 463 of IPC",
+      "effective_date": null,
+      "evidence": "y of death certificate was never proved, so as to attract the provision of Section 468 of the IPC. This Court finds that the forgery is defined under Section 463 of IPC which reads as under: “Section 463- Forgery: Whoever makes any false document [or false electronic record] or part of a document [or electronic recor",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-6319-2023-dlhc010181462023-1-2025-07-25",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s90",
+      "target_ref_raw": "Section 90 of the Indian Evidence Act, 1872",
+      "effective_date": null,
+      "evidence": "ath certificate of his living wife. 27. The learned CGSC has submitted that any inducement with false promise of marriages vitiates the consent under Section 90 of the Indian Evidence Act, 1872 and falls squarely within Explanation (ii) of Section 375 of the IPC. Reliance is placed on the judgment of the Supreme Court in Pramod Suryabhan Paw",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-6319-2023-dlhc010181462023-1-2025-07-25",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s65b",
+      "target_ref_raw": "Section 65B of the Indian Evidence Act",
+      "effective_date": null,
+      "evidence": "rication of death certificate and physical exploitation under false promise of marriage. 33. As regards to the admissibility of the certificate under Section 65B of the Indian Evidence Act is concerned, the learned Counsel has relied on the judgment of the Supreme Court in Arjun Panditrao Khotkar v Kailash Kushanrao Goratiyal15. Further",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2025-w-p-c-6319-2023-dlhc010181462023-1-2025-07-25",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/6319/2023 of KIRAN KUMAR Vs UNION OF INDIA  & ANR. & ORS.",
+  "number": "W.P.(C)/6319/2023",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2025-07-25",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010181462023_1_2025-07-25.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010181462023",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/6319/2023"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "KIRAN KUMAR"
+    ],
+    "respondent": [
+      "UNION OF INDIA  & ANR. & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE C.HARI SHANKAR",
+    "HON'BLE MR. JUSTICE OM PRAKASH SHUKLA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "468",
+      "raw": "Section 468 of the Indian Penal Code"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "376",
+      "raw": "Sections 376, 463 and 468 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "375",
+      "raw": "Section 375 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "371",
+      "raw": "Section 371 of IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "463",
+      "raw": "Section 463 of IPC"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "90",
+      "raw": "Section 90 of the Indian Evidence Act, 1872"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "65B",
+      "raw": "Section 65B of the Indian Evidence Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "court martial": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

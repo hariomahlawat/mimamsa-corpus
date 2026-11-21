@@ -1,0 +1,122 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=7_26/bench=dhcdb/DLHC010179072022_1_2026-07-01.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:40:40+00:00",
+  "sha256": "46de9e6b5dabb1fa846a698e2cd2e89682d6f89e8b3ade25c1e9b42af4c051d4",
+  "raw_path": "data/raw/hc/2026/46de9e6b5dabb1fa846a698e2cd2e89682d6f89e8b3ade25c1e9b42af4c051d4.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 43,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2026-w-p-c-7264-2022-dlhc010179072022-1-2026-07-01.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2026-w-p-c-7264-2022-dlhc010179072022-1-2026-07-01",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s302",
+      "target_ref_raw": "Sections 302 and 34 of the Indian Penal Code, 1860",
+      "effective_date": null,
+      "evidence": "e course of which Ganesh Balu Pisal lost his life. 4. Consequent thereto, criminal proceedings were initiated by registration of FIR No.23/2018 under Sections 302 and 34 of the Indian Penal Code, 1860 at Wai Police Station, District Satara. Simultaneously, departmental proceedings were also initiated under Rule 36 of the CISF Rules, 2001. The Artic",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2026-w-p-c-7264-2022-dlhc010179072022-1-2026-07-01",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s235",
+      "target_ref_raw": "Section 235(1) of Criminal Procedure Code",
+      "effective_date": null,
+      "evidence": "gar Vishnu Pisal and accused No.2 Sunil PilobaGadhave are acquitted for the offence punishable under Section 302 r/w 34 of the Indian Penal Code vide Section 235(1) of Criminal Procedure Code.” (emphasis supplied) 9. The principal submission advanced by the Petitioner before the Reviewing Authority was that once acquittal had been recorded",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2026-w-p-c-7264-2022-dlhc010179072022-1-2026-07-01",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/7264/2022 of PISAL SAGAR VISHNU Vs UNION OF INDIA AND ORS",
+  "number": "W.P.(C)/7264/2022",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2026-07-01",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010179072022_1_2026-07-01.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010179072022",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/7264/2022"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "PISAL SAGAR VISHNU"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "302",
+      "raw": "Sections 302 and 34 of the Indian Penal Code, 1860"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "235",
+      "raw": "Section 235(1) of Criminal Procedure Code"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": null,
+      "raw": "Evidence Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "court martial": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

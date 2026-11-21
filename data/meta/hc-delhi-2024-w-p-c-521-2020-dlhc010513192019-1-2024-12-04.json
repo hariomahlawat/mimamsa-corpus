@@ -1,0 +1,91 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=7_26/bench=dhcdb/DLHC010513192019_1_2024-12-04.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:49:25+00:00",
+  "sha256": "07ef437a99218e2b68aa6195b39318757792bb3b538d9e914eb5d783c030030d",
+  "raw_path": "data/raw/hc/2024/07ef437a99218e2b68aa6195b39318757792bb3b538d9e914eb5d783c030030d.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 25,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2024-w-p-c-521-2020-dlhc010513192019-1-2024-12-04.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2024-w-p-c-521-2020-dlhc010513192019-1-2024-12-04",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/521/2020 of EX U/NVK (ME) PRAVINDERA SHARMA Vs UNION OF INDIA AND ORS.",
+  "number": "W.P.(C)/521/2020",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2024-12-04",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010513192019_1_2024-12-04.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010513192019",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/521/2020"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "EX U/NVK (ME) PRAVINDERA SHARMA"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE NAVIN CHAWLA",
+    "HON'BLE MS. JUSTICE SHALINDER KAUR"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "entitlement_rules",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 46,
+    "keywords": {
+      "disability pension": 34,
+      "entitlement rules": 1,
+      "invalided": 11
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

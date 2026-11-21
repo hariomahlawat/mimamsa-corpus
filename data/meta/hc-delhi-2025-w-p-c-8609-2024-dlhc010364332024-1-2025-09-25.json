@@ -1,0 +1,177 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010364332024_1_2025-09-25.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:44:13+00:00",
+  "sha256": "5b471315aff6d7d4e3bffc56e731a09f4ab4b705ad45a103ede2f4791e35018d",
+  "raw_path": "data/raw/hc/2025/5b471315aff6d7d4e3bffc56e731a09f4ab4b705ad45a103ede2f4791e35018d.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 30,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2025-w-p-c-8609-2024-dlhc010364332024-1-2025-09-25.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-8609-2024-dlhc010364332024-1-2025-09-25",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s22",
+      "target_ref_raw": "Section 22 of AFT Act",
+      "effective_date": null,
+      "evidence": "d that the petitioner has been in custody since 25.09.2021 and has thereby undergone incarceration for around 4 years, and the appeal preferred under Section 22 of AFT Act, bearing No. 3091 of 2023, is pending consideration and it would take some time in disposal of the said appeal before the learned AFT. The learned Co",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-8609-2024-dlhc010364332024-1-2025-09-25",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s376",
+      "target_ref_raw": "Sections 376(1), 354, 354B & 451 of Indian Penal Code, 1860",
+      "effective_date": null,
+      "evidence": "ions, seven charges were framed against the petitioner on 09.12.2021 before the GCM under Section 71 for commission of civil offence punishable under Sections 376(1), 354, 354B & 451 of Indian Penal Code, 1860 and Sections 45 & 65 of the AF Act. The charges framed are as follows: First Charge Section 71 Air Force Act, 1950 COMMITTING A CIVIL OFFENSE, THAT I",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-8609-2024-dlhc010364332024-1-2025-09-25",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s389",
+      "target_ref_raw": "Section 389 of the Criminal Procedure Code, 1973",
+      "effective_date": null,
+      "evidence": "However, it is necessary to bear in mind that this Court under Article 226 of the Constitution of India is not governed by the statutory remedy under Section 389 of the Criminal Procedure Code, 1973 or Section 430 of the Bharatiya Nagarik Suraksha Sanhita, 2023 but this Court possesses extraordinary power under its writ jurisdiction to exercise i",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-8609-2024-dlhc010364332024-1-2025-09-25",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s24",
+      "target_ref_raw": "Section 24 of the Indian Evidence Act",
+      "effective_date": null,
+      "evidence": "imprisonment. 11. The GCM found the alleged video confession to be valid by holding that it was voluntary, made without any duress and was not hit by Section 24 of the Indian Evidence Act of 1872 since PW1 and PW2 were juniors to the petitioner and not ‘person in authority’. Additionally, the confessions made to PW4, PW5, PW6, PW7 & PW",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-8609-2024-dlhc010364332024-1-2025-09-25",
+      "type": "cites",
+      "target_doc_id": "act-bnss-2023#s430",
+      "target_ref_raw": "Section 430 of the Bharatiya Nagarik Suraksha Sanhita, 2023",
+      "effective_date": null,
+      "evidence": "ourt under Article 226 of the Constitution of India is not governed by the statutory remedy under Section 389 of the Criminal Procedure Code, 1973 or Section 430 of the Bharatiya Nagarik Suraksha Sanhita, 2023 but this Court possesses extraordinary power under its writ jurisdiction to exercise its power of judicial review while granting or rejecting suspens",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2025-w-p-c-8609-2024-dlhc010364332024-1-2025-09-25",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/8609/2024 of AMITESH HARMUKH Vs UNION OF INDIA AND ORS",
+  "number": "W.P.(C)/8609/2024",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2025-09-25",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010364332024_1_2025-09-25.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010364332024",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/8609/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "AMITESH HARMUKH"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE C.HARI SHANKAR",
+    "HON'BLE MR. JUSTICE OM PRAKASH SHUKLA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": null,
+      "raw": "Air Force Act, 1950"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "22",
+      "raw": "Section 22 of AFT Act"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "376",
+      "raw": "Sections 376(1), 354, 354B & 451 of Indian Penal Code, 1860"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "389",
+      "raw": "Section 389 of the Criminal Procedure Code, 1973"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "24",
+      "raw": "Section 24 of the Indian Evidence Act"
+    },
+    {
+      "act": "Bharatiya Nagarik Suraksha Sanhita 2023",
+      "act_doc_id": "act-bnss-2023",
+      "section": "430",
+      "raw": "Section 430 of the Bharatiya Nagarik Suraksha Sanhita, 2023"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 38,
+    "keywords": {
+      "air force act": 7,
+      "armed forces tribunal": 30,
+      "summary of evidence": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

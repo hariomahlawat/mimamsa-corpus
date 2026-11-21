@@ -1,0 +1,78 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC013379622017_1_2025-09-26.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:45:16+00:00",
+  "sha256": "02e3320fa26f4fff02f1ca26759f4aa0f879b9be76a74436de8dd25c76a80699",
+  "raw_path": "data/raw/hc/2025/02e3320fa26f4fff02f1ca26759f4aa0f879b9be76a74436de8dd25c76a80699.pdf",
+  "mime_type": "application/pdf",
+  "page_count": null,
+  "access_marking": null,
+  "text_method": null,
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": null,
+  "text_quality": null,
+  "needs_ocr": null,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2025-la-app-256-2017-dlhc013379622017-1-2025-09-26",
+  "doc_type": "judgment",
+  "title": "LA.APP./256/2017 of POOJA Vs UNION OF INDIA & ANR",
+  "number": "LA.APP./256/2017",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2025-09-26",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC013379622017_1_2025-09-26.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC013379622017",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "LA.APP./256/2017"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "POOJA"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ANR"
+    ]
+  },
+  "judges": [
+    "HON'BLE MS. JUSTICE TARA VITASTA GANJU"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "not_checked",
+    "hits": 0,
+    "keywords": {},
+    "note": "no extracted text (needs OCR or not yet extracted)"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule"
+  }
+}

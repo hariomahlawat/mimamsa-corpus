@@ -1,0 +1,102 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=7_26/bench=dhcdb/DLHC010217602023_1_2024-08-02.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:49:25+00:00",
+  "sha256": "18f09d94d25039d7ed5dc1375e01c7a8c3f22928864b48d7cc8bf3853c0ab919",
+  "raw_path": "data/raw/hc/2024/18f09d94d25039d7ed5dc1375e01c7a8c3f22928864b48d7cc8bf3853c0ab919.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2024-w-p-c-7652-2023-dlhc010217602023-1-2024-08-02.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2024-w-p-c-7652-2023-dlhc010217602023-1-2024-08-02",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s27",
+      "target_ref_raw": "Section 27 of the Air Force Act, 1950",
+      "effective_date": null,
+      "evidence": "der Section 8(1)(a) of the Act. The Petitioner was only seeking information pertaining to his statutory complaint dated 1st October, 2018, made under Section 27 of the Air Force Act, 1950, pertaining to non- grant of his promotion. Thus, it is submitted that such information cannot be exempted under Section 8(1)(a) of the RTI Act, and",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2024-w-p-c-7652-2023-dlhc010217602023-1-2024-08-02",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/7652/2023 of WG. CDR KUNAL KUMRA (RETD.) Vs UNION OF INDIA AND ORS",
+  "number": "W.P.(C)/7652/2023",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2024-08-02",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010217602023_1_2024-08-02.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010217602023",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/7652/2023"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "WG. CDR KUNAL KUMRA (RETD.)"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SANJEEV NARULA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "27",
+      "raw": "Section 27 of the Air Force Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "air force act": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

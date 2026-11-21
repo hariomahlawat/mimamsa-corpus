@@ -1,0 +1,109 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=7_26/bench=dhcdb/DLHC010242712024_1_2024-05-02.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:49:34+00:00",
+  "sha256": "9ed3251b4e55b351b5434df9ee857e8205b011a2b4f8edef0b7aa36550d9ccca",
+  "raw_path": "data/raw/hc/2024/9ed3251b4e55b351b5434df9ee857e8205b011a2b4f8edef0b7aa36550d9ccca.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2024-w-p-c-6164-2024-dlhc010242712024-1-2024-05-02.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2024-w-p-c-6164-2024-dlhc010242712024-1-2024-05-02",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s379",
+      "target_ref_raw": "u/s 379 of IPC",
+      "effective_date": null,
+      "evidence": "- “1. To issue writ of mandamus directing the respondent No.2 and 3 to initiate disciplinary action against respondent No.4 for committing an offence u/s 379 of IPC, 63 and 69 of Army Act and Section 61 of IT Act. 2. To award exemplary cost against respondent No.4 with payment of Rs. 1,09,800/- alongwith interest",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2024-w-p-c-6164-2024-dlhc010242712024-1-2024-05-02",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/6164/2024 of SUB RAJENDRA SINGH  Vs UNION OF INDIA  & ORS.",
+  "number": "W.P.(C)/6164/2024",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2024-05-02",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010242712024_1_2024-05-02.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010242712024",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/6164/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SUB RAJENDRA SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA  & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE V. KAMESWAR RAO",
+    "HON'BLE MR. JUSTICE RAJNISH BHATNAGAR"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": null,
+      "raw": "Army Act"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "379",
+      "raw": "u/s 379 of IPC"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "army act": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

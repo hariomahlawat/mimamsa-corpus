@@ -1,0 +1,105 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010080162023_1_2025-09-17.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:44:49+00:00",
+  "sha256": "4bfc8de512977292ba111eae76fa413de780038113ed42886e5b4049e0322b3e",
+  "raw_path": "data/raw/hc/2025/4bfc8de512977292ba111eae76fa413de780038113ed42886e5b4049e0322b3e.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 21,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2025-w-p-c-2942-2023-dlhc010080162023-1-2025-09-17.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-2942-2023-dlhc010080162023-1-2025-09-17",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s114",
+      "target_ref_raw": "Section 114(g) of the Indian Evidence Act, 1872",
+      "effective_date": null,
+      "evidence": "at any stage of the proceedings. The non-examination casts doubt on the credibility of the prosecution‟s case and invites an adverse inference under Section 114(g) of the Indian Evidence Act, 1872 i.e., Section 119(g) of the Bhartiya Sakshya Adhiniyam, 2023. It is further submitted that there are glaring contradictions in the evidence of witnes",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2025-w-p-c-2942-2023-dlhc010080162023-1-2025-09-17",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/2942/2023 of SARBRAJ SINGH Vs UNION OF INDIA & ORS.",
+  "number": "W.P.(C)/2942/2023",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2025-09-17",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010080162023_1_2025-09-17.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010080162023",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/2942/2023"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SARBRAJ SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE C.HARI SHANKAR",
+    "HON'BLE MR. JUSTICE OM PRAKASH SHUKLA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "114",
+      "raw": "Section 114(g) of the Indian Evidence Act, 1872"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 8,
+    "keywords": {
+      "court martial": 8
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

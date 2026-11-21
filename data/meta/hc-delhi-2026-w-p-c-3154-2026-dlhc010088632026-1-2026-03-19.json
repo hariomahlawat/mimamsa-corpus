@@ -1,0 +1,104 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=7_26/bench=dhcdb/DLHC010088632026_1_2026-03-19.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:39:37+00:00",
+  "sha256": "919c4e4443386ef7815f4e1ed54870522816f5510435102218d0f04a60460816",
+  "raw_path": "data/raw/hc/2026/919c4e4443386ef7815f4e1ed54870522816f5510435102218d0f04a60460816.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2026-w-p-c-3154-2026-dlhc010088632026-1-2026-03-19.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2026-w-p-c-3154-2026-dlhc010088632026-1-2026-03-19",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s164",
+      "target_ref_raw": "Section 164 (1) of the Army Act",
+      "effective_date": null,
+      "evidence": "of the application for suspension of sentence after six weeks. In the meanwhile, the competent authority before whom the confirmation petition under Section 164 (1) of the Army Act is pending shall take up the petition and decide the same before the next date of hearing and submit a report to this Tribunal. However, upon confirm",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2026-w-p-c-3154-2026-dlhc010088632026-1-2026-03-19",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/3154/2026 of MAJ RAHUL SINGH THROUGH HIS WIFE PRERNA VERMA Vs UNION OF INDIA  & ORS.",
+  "number": "W.P.(C)/3154/2026",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2026-03-19",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010088632026_1_2026-03-19.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010088632026",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/3154/2026"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MAJ RAHUL SINGH THROUGH HIS WIFE PRERNA VERMA"
+    ],
+    "respondent": [
+      "UNION OF INDIA  & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE V. KAMESWAR RAO",
+    "HON'BLE MS. JUSTICE MANMEET PRITAM SINGH ARORA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "164",
+      "raw": "Section 164 (1) of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 3,
+    "keywords": {
+      "army act": 1,
+      "armed forces tribunal": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

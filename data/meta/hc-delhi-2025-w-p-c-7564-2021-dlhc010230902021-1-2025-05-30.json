@@ -1,0 +1,154 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010230902021_1_2025-05-30.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:43:16+00:00",
+  "sha256": "edc99dade1544af5b625b521ecdbb4c38bb3e902606aad8181e9a3e0aab6f393",
+  "raw_path": "data/raw/hc/2025/edc99dade1544af5b625b521ecdbb4c38bb3e902606aad8181e9a3e0aab6f393.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 47,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2025-w-p-c-7564-2021-dlhc010230902021-1-2025-05-30.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-7564-2021-dlhc010230902021-1-2025-05-30",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s27",
+      "target_ref_raw": "Section 27 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "g Date:30.05.2025 20:40:26 Signature Not Verified W.P.(C) 7564/2021 Page 9 of 47 22. On 29.12.2020, the petitioner filed a Statutory Complaint as per Section 27 of the Army Act, 1950. 23. On 06.02.2021, the petitioner was shown a reply from the Brigade Headquarters stating that he should issue two separate complaints - one against",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-7564-2021-dlhc010230902021-1-2025-05-30",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s19",
+      "target_ref_raw": "Section 19 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "7564/2021 Page 11 of 47 military discipline, the Commandant initiated the case for administrative termination of the service of the petitioner under Section 19 of the Army Act, 1950 read with Rule 14 of the Army Rules, 1954. 32. The recommendations were processed through the chain of command and at the Brigade and Division level.",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-7564-2021-dlhc010230902021-1-2025-05-30",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s21",
+      "target_ref_raw": "Section 21 of the Army Act",
+      "effective_date": null,
+      "evidence": "ent, by enacting the Army Act, has exercised its powers under Article 33 of the Constitution of India. While upholding the constitutional validity of Section 21 of the Army Act, the Supreme Court held as under: “7. … Article 33 carves out an exception insofar as the applicability of Fundamental Rights to members of the Armed",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-7564-2021-dlhc010230902021-1-2025-05-30",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s41",
+      "target_ref_raw": "Section 41 of the Army Act",
+      "effective_date": null,
+      "evidence": "attend the religious parades by even entering the sanctum sanctorum and perform the rituals if this would help in boosting the morale of the troops. Section 41 of the Army Act makes it an offence Digitally Signed By:RENUKA NEGI Signing Date:30.05.2025 20:40:26 Signature Not Verified W.P.(C) 7564/2021 Page 29 of 47 to disobe",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2025-w-p-c-7564-2021-dlhc010230902021-1-2025-05-30",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/7564/2021 of SAMUEL KAMALESAN Vs UNION OF INDIA",
+  "number": "W.P.(C)/7564/2021",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2025-05-30",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010230902021_1_2025-05-30.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010230902021",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/7564/2021"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SAMUEL KAMALESAN"
+    ],
+    "respondent": [
+      "UNION OF INDIA"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE NAVIN CHAWLA",
+    "HON'BLE MS. JUSTICE RENU BHATNAGAR"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "27",
+      "raw": "Section 27 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "19",
+      "raw": "Section 19 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "21",
+      "raw": "Section 21 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "41",
+      "raw": "Section 41 of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 48,
+    "keywords": {
+      "army act": 18,
+      "court martial": 30
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

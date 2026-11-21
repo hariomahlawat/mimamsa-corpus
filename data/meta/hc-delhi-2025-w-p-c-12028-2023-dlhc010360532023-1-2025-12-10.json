@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010360532023_1_2025-12-10.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:46:19+00:00",
+  "sha256": "213ebf770f22cb762b7844afee94137185ff77bc6e1906bd32d6e1f569d55390",
+  "raw_path": "data/raw/hc/2025/213ebf770f22cb762b7844afee94137185ff77bc6e1906bd32d6e1f569d55390.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2025-w-p-c-12028-2023-dlhc010360532023-1-2025-12-10.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2025-w-p-c-12028-2023-dlhc010360532023-1-2025-12-10",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/12028/2023 of INDER PAL SINGH, EX CPL-648397 Vs  UNION OF INDIA  & ORS.",
+  "number": "W.P.(C)/12028/2023",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2025-12-10",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010360532023_1_2025-12-10.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010360532023",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/12028/2023"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "INDER PAL SINGH, EX CPL-648397"
+    ],
+    "respondent": [
+      "UNION OF INDIA  & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE C.HARI SHANKAR",
+    "HON'BLE MR. JUSTICE OM PRAKASH SHUKLA"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 6,
+    "keywords": {
+      "armed forces tribunal": 6
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=7_26/bench=dhcdb/DLHC010265752026_1_2026-06-29.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:40:40+00:00",
+  "sha256": "3c5972d6f21145a7d63b5560d8b144077f147e277e91478e801bc6f74420346b",
+  "raw_path": "data/raw/hc/2026/3c5972d6f21145a7d63b5560d8b144077f147e277e91478e801bc6f74420346b.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2026-w-p-c-8370-2026-dlhc010265752026-1-2026-06-29.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2026-w-p-c-8370-2026-dlhc010265752026-1-2026-06-29",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/8370/2026 of MAJOR JAYATI CHANDRA Vs UNION OF INDIA & ORS.",
+  "number": "W.P.(C)/8370/2026",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2026-06-29",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010265752026_1_2026-06-29.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010265752026",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/8370/2026"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MAJOR JAYATI CHANDRA"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MS. JUSTICE MINI PUSHKARNA",
+    "HON'BLE MR. JUSTICE VINOD KUMAR"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 10,
+    "keywords": {
+      "armed forces tribunal": 10
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

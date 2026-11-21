@@ -1,0 +1,233 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010128372019_1_2025-08-25.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:43:07+00:00",
+  "sha256": "7d436cabc0fcacb09c16c6da5c5688c1ae7ca6a65ce915df3ccbb30b0b64d78e",
+  "raw_path": "data/raw/hc/2025/7d436cabc0fcacb09c16c6da5c5688c1ae7ca6a65ce915df3ccbb30b0b64d78e.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 15,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2025-w-p-c-2098-2019-dlhc010128372019-1-2025-08-25.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-2098-2019-dlhc010128372019-1-2025-08-25",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s2",
+      "target_ref_raw": "Section 2(1)(a) of the Army Act",
+      "effective_date": null,
+      "evidence": "so to all retired personnel subject to the Army Act, 1950, Air Force Act, 1950 and the Navy Act, 1957. 13. To take Army Act, 1950 as an illustration, Section 2(1)(a) of the Army Act which deals with persons subjected to the Army Act, 1959, wherein Act is applicable to the Officers, Junior Commissioned Officers and Warrant Officer",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-2098-2019-dlhc010128372019-1-2025-08-25",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s3",
+      "target_ref_raw": "Section 3 (xxi) of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "ct, 1959, wherein Act is applicable to the Officers, Junior Commissioned Officers and Warrant Officers of the regular Army. 14. Section 3 (xviii) and Section 3 (xxi) of the Army Act, 1950, defines ‘Officer’ in the following manner:- “3. (xviii) \"officer\" means a person commissioned, gazetted are in pay as an officer in the regular Army",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-2098-2019-dlhc010128372019-1-2025-08-25",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s10",
+      "target_ref_raw": "Section 10 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "Union in any part of the world, including persons belonging to the Reserve Forces and the Territorial Army when called out on permanent service;” 15. Section 10 of the Army Act, 1950 deals with Commission and Appointment. The same reads as under:- “10. Commission and appointment. The President may grant, to such person as he think",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-2098-2019-dlhc010128372019-1-2025-08-25",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s21",
+      "target_ref_raw": "Section 21 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "he thinks fit, a commission as, an officer, or as a junior commissioned officer or appoint any person, as a warrant officer of the regular Army.” 16. Section 21 of the Army Act, 1950, reads as under:- “21. Power to modify certain fundamental rights in their application to persons subject to this Act. Subject to the provisions of a",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-2098-2019-dlhc010128372019-1-2025-08-25",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s19",
+      "target_ref_raw": "Section 19 of the Army Act",
+      "effective_date": null,
+      "evidence": "dure for dismissal or removal of a temporary Commissioned Officer. The Central Government only relies on paragraph 12 of the Army Instructions. Under Section 19 of the Army Act, the procedure to be followed is according to the provisions of the Act, the Rules and the Regulations, under the Act. Therefore the petitioner canno",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-2098-2019-dlhc010128372019-1-2025-08-25",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s2",
+      "target_ref_raw": "Section 2 (1) and 2 (2) of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "tion, the same was found to be defective on the ground that the applicant Indian Short service Commissioned Officers Association is not covered under Section 2 (1) and 2 (2) of the Armed Forces Tribunal Act, 2007. Section 2(1) and 2(2) of AFT Act applies only to the serving personnel or to retired personal subject to the Army Act, 1950(46 of 1950),The Navy Act",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-2098-2019-dlhc010128372019-1-2025-08-25",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s14",
+      "target_ref_raw": "Section 14 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "from the DHC Server on 29/08/2025 at 12:49:33 W.P.(C) 2098/2019 & W.P.(C) 8006/2019 Page 13 of 15 the judicial side of the Armed Forces Tribunal. 20. Section 14 of the Armed Forces Tribunal Act, 2007 deals with the jurisdiction, powers and authority in service matters, reads as under:- “14. Jurisdiction, powers and authority in service matters.— (",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2025-w-p-c-2098-2019-dlhc010128372019-1-2025-08-25",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s123",
+      "target_ref_raw": "sections 123 and 124 of the Indian Evidence Act, 1872",
+      "effective_date": null,
+      "evidence": "025 at 12:49:33 W.P.(C) 2098/2019 & W.P.(C) 8006/2019 Page 14 of 15 documents; (c) receiving evidence on affidavits; (d) subject to the provisions of sections 123 and 124 of the Indian Evidence Act, 1872 (1 of 1872), requisitioning any public record or document or copy of such record or document from any office; (e) issuing commissions for the examina",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2025-w-p-c-2098-2019-dlhc010128372019-1-2025-08-25",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/2098/2019 of INDIAN SHORT SERVICE COMMISSIONED OFFICERS ASSOCIATION (ISSCOA) Vs UNION OF INDIA",
+  "number": "W.P.(C)/2098/2019",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2025-08-25",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010128372019_1_2025-08-25.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010128372019",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/2098/2019"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "INDIAN SHORT SERVICE COMMISSIONED OFFICERS ASSOCIATION (ISSCOA)"
+    ],
+    "respondent": [
+      "UNION OF INDIA"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SUBRAMONIUM PRASAD",
+    "HON'BLE MR. JUSTICE VIMAL KUMAR YADAV"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "2",
+      "raw": "Section 2(1)(a) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "3",
+      "raw": "Section 3 (xxi) of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "10",
+      "raw": "Section 10 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "21",
+      "raw": "Section 21 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "19",
+      "raw": "Section 19 of the Army Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": null,
+      "raw": "Air Force Act, 1950"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": null,
+      "raw": "Navy Act, 1957"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "2",
+      "raw": "Section 2 (1) and 2 (2) of the Armed Forces Tribunal Act, 2007"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "14",
+      "raw": "Section 14 of the Armed Forces Tribunal Act, 2007"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "123",
+      "raw": "sections 123 and 124 of the Indian Evidence Act, 1872"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 30,
+    "keywords": {
+      "army act": 20,
+      "air force act": 3,
+      "navy act": 4,
+      "armed forces tribunal": 2,
+      "court martial": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/court=7_26/bench=dhcdb/DLHC011443422018_1_2019-03-11.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:01:03+00:00",
+  "sha256": "948e97749bdf1c077e646ed4001725db886b5aa7acd06d80bd76bb439f26ce78",
+  "raw_path": "data/raw/hc/2019/948e97749bdf1c077e646ed4001725db886b5aa7acd06d80bd76bb439f26ce78.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 21,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2019-w-p-c-6094-2018-dlhc011443422018-1-2019-03-11.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2019-w-p-c-6094-2018-dlhc011443422018-1-2019-03-11",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/6094/2018 of KALAWATI THAKUR AND ORS. Vs UNION OF INDIA AND ANR.",
+  "number": "W.P.(C)/6094/2018",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2019-03-11",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC011443422018_1_2019-03-11.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC011443422018",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/6094/2018"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "KALAWATI THAKUR AND ORS."
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ANR."
+    ]
+  },
+  "judges": [
+    "HON'BLE DR. JUSTICE S.MURALIDHAR",
+    "HON'BLE MR. JUSTICE I.S.MEHTA"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

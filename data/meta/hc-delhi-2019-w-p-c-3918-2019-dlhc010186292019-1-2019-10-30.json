@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/court=7_26/bench=dhcdb/DLHC010186292019_1_2019-10-30.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:01:46+00:00",
+  "sha256": "3548e1f335ddf9827803a527c3c1e070c00f1f8537074eb07a4ba1a9f9d7d123",
+  "raw_path": "data/raw/hc/2019/3548e1f335ddf9827803a527c3c1e070c00f1f8537074eb07a4ba1a9f9d7d123.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2019-w-p-c-3918-2019-dlhc010186292019-1-2019-10-30.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2019-w-p-c-3918-2019-dlhc010186292019-1-2019-10-30",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/3918/2019 of MD. AZAD UDDIN Vs UNION OF INDIA & ANR",
+  "number": "W.P.(C)/3918/2019",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2019-10-30",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010186292019_1_2019-10-30.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010186292019",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/3918/2019"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MD. AZAD UDDIN"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ANR"
+    ]
+  },
+  "judges": [
+    "HON'BLE DR. JUSTICE S.MURALIDHAR",
+    "HON'BLE MR. JUSTICE TALWANT SINGH"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

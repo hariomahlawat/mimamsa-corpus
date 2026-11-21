@@ -1,0 +1,84 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=7_26/bench=dhcdb/DLHC010790102025_1_2026-03-11.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:39:19+00:00",
+  "sha256": "dab1483c5d240e058ee8e98089f37c70cecdeb94e7ad38364dd1b0975ddc4db7",
+  "raw_path": "data/raw/hc/2026/dab1483c5d240e058ee8e98089f37c70cecdeb94e7ad38364dd1b0975ddc4db7.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2026-cont-cas-c-1543-2025-dlhc010790102025-1-2026-03-11.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2026-cont-cas-c-1543-2025-dlhc010790102025-1-2026-03-11",
+  "doc_type": "judgment",
+  "title": "CONT.CAS(C)/1543/2025 of EX SGT PRAVAT RAVI Vs DR NITEN CHANDRA IAS AND ORS",
+  "number": "CONT.CAS(C)/1543/2025",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2026-03-11",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010790102025_1_2026-03-11.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010790102025",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "CONT.CAS(C)/1543/2025"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "EX SGT PRAVAT RAVI"
+    ],
+    "respondent": [
+      "DR NITEN CHANDRA IAS AND ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SACHIN DATTA"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "disability pension": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

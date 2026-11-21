@@ -1,0 +1,119 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2022/court=7_26/bench=dhcdb/DLHC010030862022_1_2022-05-02.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:54:32+00:00",
+  "sha256": "6685df3aaf95d1856ffc7255c06f48b5694ac51f98cde7ca470f93d7ab3fff6f",
+  "raw_path": "data/raw/hc/2022/6685df3aaf95d1856ffc7255c06f48b5694ac51f98cde7ca470f93d7ab3fff6f.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 49,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2022-w-p-crl-73-2022-dlhc010030862022-1-2022-05-02.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-crl-73-2022-dlhc010030862022-1-2022-05-02",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s482",
+      "target_ref_raw": "Section 482 of the Code of Criminal Procedure 1973",
+      "effective_date": null,
+      "evidence": "R. JUSTICE RAJNISH BHATNAGAR J U D G M E N T SIDDHARTH MRIDUL, J 1. These two writ petitions under Article 226 of the Constitution of India read with Section 482 of the Code of Criminal Procedure 1973, have been instituted on behalf of Zakir Khan (hereinafter “Detenu No. 1”), the Petitioner in W.P.(CRL.) 72/2022 and Sanjeev Kumar @ Sanjeev Kumar Ya",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-crl-73-2022-dlhc010030862022-1-2022-05-02",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s167",
+      "target_ref_raw": "Section 167(2) of the Code of Criminal Procedure",
+      "effective_date": null,
+      "evidence": "al prosecution was filed against the Detenus in the customs case, the Detenus were granted statutory bail in terms of the mandate of the provision of Section 167(2) of the Code of Criminal Procedure vide Order dated 20.12.2021 passed by the Learned CMM. ii) On 21.12.2021 the Detenus made a representation to the Detaining Authority, submitting tha",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2022-w-p-crl-73-2022-dlhc010030862022-1-2022-05-02",
+  "doc_type": "judgment",
+  "title": "W.P.(CRL)/73/2022 of SANJEEV KUMAR ALIAS SANJEEV KUMAR YADAV Vs UNION OF INDIA THROUGH ITS SECRETARY & ORS.",
+  "number": "W.P.(CRL)/73/2022",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2022-05-02",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010030862022_1_2022-05-02.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010030862022",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(CRL)/73/2022"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SANJEEV KUMAR ALIAS SANJEEV KUMAR YADAV"
+    ],
+    "respondent": [
+      "UNION OF INDIA THROUGH ITS SECRETARY & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SIDDHARTH MRIDUL",
+    "HON'BLE MR. JUSTICE RAJNISH BHATNAGAR"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "482",
+      "raw": "Section 482 of the Code of Criminal Procedure 1973"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "167",
+      "raw": "Section 167(2) of the Code of Criminal Procedure"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

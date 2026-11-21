@@ -1,0 +1,668 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2022/court=7_26/bench=dhcdb/DLHC010043422015_1_2022-05-11.pdf",
+  "source_aliases": [
+    "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2022/court=7_26/bench=dhcdb/DLHC013083062017_1_2022-05-11.pdf"
+  ],
+  "retrieved_at": "2026-11-21T17:54:32+00:00",
+  "sha256": "b64df349c9f5158baca80734718844d35b7b98bc8d3741ee9b98b0808ce1c984",
+  "raw_path": "data/raw/hc/2022/b64df349c9f5158baca80734718844d35b7b98bc8d3741ee9b98b0808ce1c984.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 393,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s375",
+      "target_ref_raw": "Section 375 of IPC",
+      "effective_date": null,
+      "evidence": "anced by Amicus Curiae 62 Analysis and Reasons 79 I. Brief History of Rape Law 79 II. Separation of Powers 89 III. Judicial Restraint 95 IV. Ambit of Section 375 of IPC 99 V. In defence of MRE 105 V(i) Constitutional viability of classification between married and unmarried women in the 106 Digitally Signed By:VIPIN",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s376b",
+      "target_ref_raw": "Section 376B of the IPC",
+      "effective_date": null,
+      "evidence": "Code of Criminal Procedure, 1973 [hereafter referred to as the 'Code'] which prohibits a court from taking cognizance of an offence punishable under Section 376B of the IPC except upon satisfaction of the facts which constitute the offence once a complaint is lodged by the wife against her husband. 5. Thus, for the sake",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s376",
+      "target_ref_raw": "Sections 376/363/342 of the IPC",
+      "effective_date": null,
+      "evidence": "the writ petition is to quash a particular FIR i.e., FIR bearing no.204/2016, dated 25.11.2016, registered at Police Station Hauz Qazi, Delhi, under Sections 376/363/342 of the IPC read with Sections 3 & 4 of the Protection of Children from Sexual Offences Act, 2012 [in short ‘POCSO Act’] and the proceedings commenced thereto. 6",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s498a",
+      "target_ref_raw": "Section 498A of the IPC",
+      "effective_date": null,
+      "evidence": "e that there are remedies available to address non-consensual sex between spouses, something which is apparent on a plain reading of Section 376B and Section 498A of the IPC as also the provisions of the Protection of Women from Domestic Violence Act, 2005 [hereafter referred to as \"D.V. Act\"]. These are provisions that b",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s377",
+      "target_ref_raw": "Section 377 of the IPC",
+      "effective_date": null,
+      "evidence": "or Navtej Singh Johar v. Union of India, (2018) 10 SCC 12 which concerns Section 66A of the Information Technology Act, 2000 [in short “IT Act”] and Section 377 of the IPC respectively would have no relevance to the instant case. These were judgments where a challenge was laid to a criminalising provision whereas if MRE",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s40",
+      "target_ref_raw": "Section 40 of the IPC",
+      "effective_date": null,
+      "evidence": "d by the petitioners as to who commits the offence i.e., the offender. In this context, the submission advanced on behalf of the petitioners based on Section 40 of the IPC i.e., that it defines offence in the context of an act that is made punishable and, therefore, does not draw a distinction based on the offender or t",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s323",
+      "target_ref_raw": "Sections 323 to 326, 326A, 326B, 328, 336, 352, 354, 354A, 354B, 354C, 355, 498A, 304B, 506 and 509 of IPC",
+      "effective_date": null,
+      "evidence": "arious other statutes to have her grievance redressed. [See paragraph 5.9.1 of the 167the report of the Parliamentary Standing Committee and also see Sections 323 to 326, 326A, 326B, 328, 336, 352, 354, 354A, 354B, 354C, 355, 498A, 304B, 506 and 509 of IPC as also provisions of the D.V. Act.] (xvii) Forced sexual intercourse between a husband and wife cannot be treated as rape. At worst, it can be treat",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s376a",
+      "target_ref_raw": "Section 376A, 376AB, 376DB and 376E of the IPC",
+      "effective_date": null,
+      "evidence": "rape is a heinous crime, Parliament should have provided the death penalty in all cases relating to such crime. Illustratively, reference was made to Section 376A, 376AB, 376DB and 376E of the IPC [which provide for the death penalty], as against the offences which are brought within the purview of Sections 376(2) and 376D. (xix) The importance",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s420",
+      "target_ref_raw": "Section 420 and 494 of the IPC",
+      "effective_date": null,
+      "evidence": "de were available. Likewise, it was contended that offences that were punishable with imprisonment for a longer period such as offences falling under Section 420 and 494 of the IPC could be compounded under Section 320 of the Code while others with a shorter duration of punishment, for example, an offence punishable under Sectio",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s353",
+      "target_ref_raw": "Section 353 of IPC",
+      "effective_date": null,
+      "evidence": "he IPC could be compounded under Section 320 of the Code while others with a shorter duration of punishment, for example, an offence punishable under Section 353 of IPC which was not compoundable. Reference was made to Section 494 of the IPC which concerned an offence of a spouse entering matrimony while the other sp",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s494",
+      "target_ref_raw": "Section 494 of the IPC",
+      "effective_date": null,
+      "evidence": "with a shorter duration of punishment, for example, an offence punishable under Section 353 of IPC which was not compoundable. Reference was made to Section 494 of the IPC which concerned an offence of a spouse entering matrimony while the other spouse was alive. It was submitted that although the punishment could go up",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s302",
+      "target_ref_raw": "Sections 302, 303, 304, 304A and 304B of the IPC",
+      "effective_date": null,
+      "evidence": ".P.(C)No.284/2015 & connected matters Page 32 of 193 in providing different punishments for different offences. Similarly, reference was also made to Sections 302, 303, 304, 304A and 304B of the IPC. It was stated that, although the death of a victim is a foundation for invoking, both, Section 304A and 302 of the IPC, the punishment that can be a",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s304a",
+      "target_ref_raw": "Section 304A and 302 of the IPC",
+      "effective_date": null,
+      "evidence": "also made to Sections 302, 303, 304, 304A and 304B of the IPC. It was stated that, although the death of a victim is a foundation for invoking, both, Section 304A and 302 of the IPC, the punishment that can be awarded under the two provisions may vary. The quantum of punishment can vary depending upon the relationship between the",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s497",
+      "target_ref_raw": "Section 497 and 377 of the IPC",
+      "effective_date": null,
+      "evidence": "directly. In Joseph Shine v. Union of India, (2019) 3 SCC 3910 and Navtej Singh Johar, the court de-criminalized acts that constituted offences under Section 497 and 377 of the IPC. Therefore, those judgments are distinguishable. Similarly, in K.S. Puttaswamy case, the court extended the meaning of Article 21 by confirming the r",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s376d",
+      "target_ref_raw": "Section 376D of IPC",
+      "effective_date": null,
+      "evidence": "nds from the offence of aggravated rape. For example, rape, which results in the victim's death or persistent vegetative state. [See Section 376A and Section 376D of IPC.] 47. The protection under MRE extends to the extent that if the husband were to allow for the acts described in Clause (a) of Section 375 to be done",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s228a",
+      "target_ref_raw": "Section 228A of the IPC",
+      "effective_date": null,
+      "evidence": "3A (medical examination of the rape accused if it is believed that such examination will afford evidence of the commission of an offence)]. Likewise, Section 228A of the IPC protects the rape victim by penalizing disclosure of her identity. Similarly, the proviso appended to Section 146 of the Evidence Act prohibits elici",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s354",
+      "target_ref_raw": "Section 354 of the IPC",
+      "effective_date": null,
+      "evidence": "able a victim-wife from prosecuting her husband for cruelty under Section 498A, for hurt under Section 323 and 326 or for outraging her modesty under Section 354 of the IPC. The crux of the challenge to MRE is the moral and legal approbation attached to the act of rape. 54. MRE violates Article 14 as the relationship bet",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s182",
+      "target_ref_raw": "Sections 182, 191 and 211 of IPC",
+      "effective_date": null,
+      "evidence": "brunt of a false criminal complaint being lodged against them. Provisions concerning these safeguards are found in Chapters X and XI of the IPC [see Sections 182, 191 and 211 of IPC]. 71. The other argument raised on behalf of the respondents which is that striking down MRE would expose the husbands to the risk of being awarded a",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s78",
+      "target_ref_raw": "Sections 78 and 82 of the IPC",
+      "effective_date": null,
+      "evidence": ")No.284/2015 & connected matters Page 63 of 193 77.3. Exceptions contained in the IPC are based on subjective and/or objective facts. Illustratively, Sections 78 and 82 of the IPC are acts which are based on objective facts. In contrast, for example, the exceptions to the offence of defamation provided under Section 499 of IPC",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s499",
+      "target_ref_raw": "Section 499 of IPC",
+      "effective_date": null,
+      "evidence": "8 and 82 of the IPC are acts which are based on objective facts. In contrast, for example, the exceptions to the offence of defamation provided under Section 499 of IPC are based on facts that are subjective and, therefore, must be pleaded and proved in a court of law. 77.4. Thus, exceptions based on objective facts",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s136",
+      "target_ref_raw": "Sections 136, 212, 216 and 216A of IPC",
+      "effective_date": null,
+      "evidence": "tions on account of marital relationships are based on crimes committed outside marriage and not a crime committed by one spouse upon the other. [See Sections 136, 212, 216 and 216A of IPC.] 87.1. Thus, even for the sake of argument, it is accepted that IPC recognizes that marital relationship is distinct from other relationships, no ra",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s351",
+      "target_ref_raw": "Section 351 of IPC",
+      "effective_date": null,
+      "evidence": "who would be expected to safeguard her interests. The argument that the husband can be prosecuted inter alia under other provisions such as assault (Section 351 of IPC), sexual harassment (Section Digitally Signed By:VIPIN KUMAR RAI Signing Date:11.05.2022 18:29:14 Signature valid This is a digitally signed Judgemen",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s304b",
+      "target_ref_raw": "Section 304B of the IPC",
+      "effective_date": null,
+      "evidence": "(with regard to abetment of suicide of a married woman) and 113B (vis-à-vis dowry death) under the Evidence Act are co- relatable to Section 498A and Section 304B of the IPC respectively. These Digitally Signed By:VIPIN KUMAR RAI Signing Date:11.05.2022 18:29:14 Signature valid This is a digitally signed Judgement. NEUTRA",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s354a",
+      "target_ref_raw": "Sections 354A to 354D, 319 and 339 of the IPC",
+      "effective_date": null,
+      "evidence": "rence in the private marital sphere, as such perceived interference is already permissible for other offences applicable to such a situation, such as Sections 354A to 354D, 319 and 339 of the IPC. He also submits that the Court cannot hold its hands back, from striking down the impugned Exception on the consideration of a possibility of a lack",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s335",
+      "target_ref_raw": "Sections 3353 and 4454 of the IPC",
+      "effective_date": null,
+      "evidence": "re the parties are married. She also submits that Section 375 is required to be read along with clauses (n)20 and (wa)52 of Section 2 of the CrPC and Sections 3353 and 4454 of the IPC. 73. Ms John reiterates that “the woman’s consent is central to making the act an offence”. Consent, she submits, underlies the immunity contained in",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s292",
+      "target_ref_raw": "Section 292 of the IPC",
+      "effective_date": null,
+      "evidence": "by learned Counsel for the petitioners, that (i) Devidas Ramachandra Tuljapurkar25 was a case in which the Hon`ble Supreme Court sought to interpret Section 292 of the IPC, to assess if a prima facie case of obscenity was made out in the facts of that case and, in paras 141(d) to (f), the Hon`ble Supreme Court particula",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s390",
+      "target_ref_raw": "Section 390 of the IPC",
+      "effective_date": null,
+      "evidence": "er slapping a son is not a criminal offence, whereas a stranger who slaps a child may well be committing a crime. Robbery, otherwise chargeable under Section 390 of the IPC, becomes, when conjointly committed or attempted to be committed by five or more persons, dacoity, punishable under Section 391. Even within the defi",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s198b",
+      "target_ref_raw": "Section 198B of the Code of Criminal Procedure, 1973",
+      "effective_date": null,
+      "evidence": "ch concerns sexual intercourse by a separated husband with his wife, albeit, without her consent. Consequently, prayer is also made for striking down Section 198B of the Code of Criminal Procedure, 1973 [hereafter referred to as the 'Code'] which prohibits a court from taking cognizance of an offence punishable under Section 376B of the IPC except up",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s2",
+      "target_ref_raw": "Section 2 of the CrPC",
+      "effective_date": null,
+      "evidence": "do not amount to rape where the parties are married. She also submits that Section 375 is required to be read along with clauses (n)20 and (wa)52 of Section 2 of the CrPC and Sections 3353 and 4454 of the IPC. 73. Ms John reiterates that “the woman’s consent is central to making the act an offence”. Consent, she submit",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s198",
+      "target_ref_raw": "Section 198(6)65 of the Cr PC",
+      "effective_date": null,
+      "evidence": "ns of the POCSO Act and the Prevention of Child Marriages Act, 2006 (“the PCMA”). To bring the impugned Exception in harmony with these statutes, and Section 198(6)65 of the Cr PC, the Supreme Court read down the impugned Exception as being applicable where the wife was between 15 and 18 years of age. As the Supreme Court held,",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s482",
+      "target_ref_raw": "Section 482 of the Cr PC",
+      "effective_date": null,
+      "evidence": "nt. NEUTRAL CITATION NO: 2022/DHC/001825 WP (C) No 284/2015 & connected matters Page 188 of 200 his innocence; he may, straightaway, seek recourse to Section 482 of the Cr PC and seek that the FIR be quashed, for the simple reason that, even if the act alleged had been committed by him, it is, statutorily, not rape. Any al",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s114a",
+      "target_ref_raw": "Section 114A of the Indian Evidence Act, 1872",
+      "effective_date": null,
+      "evidence": "6 of IPC. Even though, this provision relates to a “person in authority”, it does not include husbands. The provision of the IPC when read along with Section 114A of the Indian Evidence Act, 1872 [hereafter referred to as the \"Evidence Act\"] would have grave consequences if extended to husbands. Section 114A of the Evidence Act, inter alia, pr",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s113a",
+      "target_ref_raw": "Sections 113A and 113B of the Evidence Act",
+      "effective_date": null,
+      "evidence": "/DHC/001825 W.P.(C)No.284/2015 & connected matters Page 31 of 193 vis offences relating to marriage. [See Section 198, 198A and 198B of the Code, and Sections 113A and 113B of the Evidence Act.] For other offences as well, there is a provision under the Evidence Act for drawing presumption. [See Sections 111A and 114A of the said Act.] Like",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s146",
+      "target_ref_raw": "Section 146 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "an offence)]. Likewise, Section 228A of the IPC protects the rape victim by penalizing disclosure of her identity. Similarly, the proviso appended to Section 146 of the Evidence Act prohibits eliciting evidence or putting questions in cross-examination to the victim as to her \"general immoral character\" or \"previous sexual experi",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s105",
+      "target_ref_raw": "Section 105 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "exception\" to the offence of rape. 77.2. The burden of proving that the act committed falls within the realm of exception lies upon the accused. [See Section 105 of the Evidence Act.] Ordinarily, the person taking recourse to a special exception must prove that his act falls within the said exception; the standard of proof being",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s122",
+      "target_ref_raw": "Section 1229 of the Indian Evidence Act, 1872",
+      "effective_date": null,
+      "evidence": "2015 & connected matters Page 24 of 200 persons in all manner of laws that meets Article 14”. She cites, for example, spousal privilege, conferred by Section 1229 of the Indian Evidence Act, 1872 (the “Evidence Act”). Proceeding, however, to the issue of whether the said intelligible differentia has a rational nexus with the object sought to b",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2022-w-p-c-284-2015-dlhc010043422015-1-2022-05-11",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/284/2015 of RIT FOUNDATION Vs THE UNION OF INDIA",
+  "number": "W.P.(C)/284/2015",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2022-05-11",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010043422015_1_2022-05-11.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010043422015",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/284/2015"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "RIT FOUNDATION"
+    ],
+    "respondent": [
+      "THE UNION OF INDIA"
+    ]
+  },
+  "judges": [],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "375",
+      "raw": "Section 375 of IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "376B",
+      "raw": "Section 376B of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "376",
+      "raw": "Sections 376/363/342 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "498A",
+      "raw": "Section 498A of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "377",
+      "raw": "Section 377 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "40",
+      "raw": "Section 40 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "323",
+      "raw": "Sections 323 to 326, 326A, 326B, 328, 336, 352, 354, 354A, 354B, 354C, 355, 498A, 304B, 506 and 509 of IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "376A",
+      "raw": "Section 376A, 376AB, 376DB and 376E of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "420",
+      "raw": "Section 420 and 494 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "353",
+      "raw": "Section 353 of IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "494",
+      "raw": "Section 494 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "302",
+      "raw": "Sections 302, 303, 304, 304A and 304B of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "304A",
+      "raw": "Section 304A and 302 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "497",
+      "raw": "Section 497 and 377 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "198B",
+      "raw": "Sections 198B and 376B of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "376D",
+      "raw": "Section 376D of IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "228A",
+      "raw": "Section 228A of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "354",
+      "raw": "Section 354 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "182",
+      "raw": "Sections 182, 191 and 211 of IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "78",
+      "raw": "Sections 78 and 82 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "499",
+      "raw": "Section 499 of IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "136",
+      "raw": "Sections 136, 212, 216 and 216A of IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "351",
+      "raw": "Section 351 of IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "304B",
+      "raw": "Section 304B of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "354A",
+      "raw": "Sections 354A to 354D, 319 and 339 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "335",
+      "raw": "Sections 3353 and 4454 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "292",
+      "raw": "Section 292 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "390",
+      "raw": "Section 390 of the IPC"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "198B",
+      "raw": "Section 198B of the Code of Criminal Procedure, 1973"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "2",
+      "raw": "Section 2 of the CrPC"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "198",
+      "raw": "Section 198(6)65 of the Cr PC"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "482",
+      "raw": "Section 482 of the Cr PC"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "114A",
+      "raw": "Section 114A of the Indian Evidence Act, 1872"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "113A",
+      "raw": "Sections 113A and 113B of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "146",
+      "raw": "Section 146 of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "105",
+      "raw": "Section 105 of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "122",
+      "raw": "Section 1229 of the Indian Evidence Act, 1872"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=7_26/bench=dhcdb/DLHC010071072023_1_2024-10-16.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:49:09+00:00",
+  "sha256": "7230c8953246638ade78616fe3eea90bd678aaf60f58a291fc039dbb4e912dc2",
+  "raw_path": "data/raw/hc/2024/7230c8953246638ade78616fe3eea90bd678aaf60f58a291fc039dbb4e912dc2.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 7,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2024-w-p-c-2699-2023-dlhc010071072023-1-2024-10-16.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2024-w-p-c-2699-2023-dlhc010071072023-1-2024-10-16",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s160",
+      "target_ref_raw": "Section 160 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "24 16:15:37 Signature Not Verified W.P.(C)2699/2023 Page 3 of 7 counsel for the parties. 7. In Naik Gian Chand (supra), this Court, while considering Section 160 of the Army Act, 1950 has held as under: “ 29. Shri Nayar next contended that the petitioner had liked a pre-confirmation petition under Section 164(1) but the same was no",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2024-w-p-c-2699-2023-dlhc010071072023-1-2024-10-16",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s164",
+      "target_ref_raw": "Section 164 of the Army Act",
+      "effective_date": null,
+      "evidence": "pre-confirmation petition of the petitioner is concerned, we find force in the respondents submission which is based on the right of an officer under Section 164 of the Army Act. It has been contended before us by Learned Additional Solicitor General that, upon consideration of the matter, the confirming authority did not agr",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2024-w-p-c-2699-2023-dlhc010071072023-1-2024-10-16",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/2699/2023 of KUMAR SANJAY JHA Vs UNION OF INDIA AND ORS",
+  "number": "W.P.(C)/2699/2023",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2024-10-16",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010071072023_1_2024-10-16.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010071072023",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/2699/2023"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "KUMAR SANJAY JHA"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE NAVIN CHAWLA",
+    "HON'BLE MS. JUSTICE SHALINDER KAUR"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "160",
+      "raw": "Section 160 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "164",
+      "raw": "Section 164 of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 19,
+    "keywords": {
+      "army act": 7,
+      "court martial": 12
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

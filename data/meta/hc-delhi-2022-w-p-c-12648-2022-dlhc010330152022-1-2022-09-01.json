@@ -1,0 +1,88 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2022/court=7_26/bench=dhcdb/DLHC010330152022_1_2022-09-01.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:54:05+00:00",
+  "sha256": "96f12e156f37a82778f25c06304b95c8163f02efd9b4e3e713065c56142609da",
+  "raw_path": "data/raw/hc/2022/96f12e156f37a82778f25c06304b95c8163f02efd9b4e3e713065c56142609da.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2022-w-p-c-12648-2022-dlhc010330152022-1-2022-09-01.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2022-w-p-c-12648-2022-dlhc010330152022-1-2022-09-01",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/12648/2022 of LT COL PARAMPREET SINGH KOCHAR Vs UNION OF INDIA AND ORS",
+  "number": "W.P.(C)/12648/2022",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2022-09-01",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010330152022_1_2022-09-01.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010330152022",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/12648/2022"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "LT COL PARAMPREET SINGH KOCHAR"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SURESH  KUMAR  KAIT",
+    "SAURABH BANERJEE"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 5,
+    "keywords": {
+      "armed forces tribunal": 4,
+      "summary of evidence": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

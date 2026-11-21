@@ -1,0 +1,119 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=7_26/bench=dhcdb/DLHC010604372024_1_2024-09-12.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:51:21+00:00",
+  "sha256": "e542e97897d23cac2226da979d14e2cdc497a50334e0e81c021b128adc2b569a",
+  "raw_path": "data/raw/hc/2024/e542e97897d23cac2226da979d14e2cdc497a50334e0e81c021b128adc2b569a.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 12,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2024-w-p-c-12837-2024-dlhc010604372024-1-2024-09-12.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2024-w-p-c-12837-2024-dlhc010604372024-1-2024-09-12",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s22",
+      "target_ref_raw": "Section 22 of the AFT Act, 2007",
+      "effective_date": null,
+      "evidence": "rned AFT, the respondents filed a detailed counter- affidavit, stating therein that the OA as filed by the petitioner, was barred by limitation under Section 22 of the AFT Act, 2007; it was urged that though the impugned orders were passed in December, 2014 and June, 2015, the petitioner had approached the learned AFT only on 25.",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2024-w-p-c-12837-2024-dlhc010604372024-1-2024-09-12",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s21",
+      "target_ref_raw": "Section 21 of the AFT Act, 2007",
+      "effective_date": null,
+      "evidence": "e claim of the applicant not being of continuing nature, nor giving rise to continuing cause of action is barred by the limitation as enshrined under Section 21 of the AFT Act, 2007. It becomes relevant to refer to the observations of the Hon'ble Apex Court in the case of Maniben Devraj Shah Versus Municipal Corporation of Brihan",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2024-w-p-c-12837-2024-dlhc010604372024-1-2024-09-12",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/12837/2024 of EX CHAA MOHAMMED ZULKARNAIN, 550032-Z Vs UNION OF INDIA & ORS.",
+  "number": "W.P.(C)/12837/2024",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2024-09-12",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010604372024_1_2024-09-12.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010604372024",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/12837/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "EX CHAA MOHAMMED ZULKARNAIN, 550032-Z"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MS. JUSTICE REKHA PALLI",
+    "HON'BLE MS. JUSTICE SHALINDER KAUR"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "22",
+      "raw": "Section 22 of the AFT Act, 2007"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "21",
+      "raw": "Section 21 of the AFT Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 23,
+    "keywords": {
+      "armed forces tribunal": 23
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

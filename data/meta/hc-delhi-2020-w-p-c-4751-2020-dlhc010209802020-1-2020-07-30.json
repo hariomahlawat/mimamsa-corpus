@@ -1,0 +1,104 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2020/court=7_26/bench=dhcdb/DLHC010209802020_1_2020-07-30.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T17:58:28+00:00",
+  "sha256": "2e864b70a814c4f1fca9c9933ed2bb1a5cedcfe86328c5015e2f54d69ffe52a6",
+  "raw_path": "data/raw/hc/2020/2e864b70a814c4f1fca9c9933ed2bb1a5cedcfe86328c5015e2f54d69ffe52a6.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2020-w-p-c-4751-2020-dlhc010209802020-1-2020-07-30.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2020-w-p-c-4751-2020-dlhc010209802020-1-2020-07-30",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s122",
+      "target_ref_raw": "Section 122 of the Air Force Act, 1950",
+      "effective_date": null,
+      "evidence": "r, though posted at Assam, is on leave, presently at Delhi and is suffering from Covid-19 and is in quarantine. It is contended that inspite thereof, Section 122 of the Air Force Act, 1950, which is to be applied to mutiny, has been invoked. 6. We are unable to agree. A reading of the order aforesaid shows that Section 122 of the Air Fo",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2020-w-p-c-4751-2020-dlhc010209802020-1-2020-07-30",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/4751/2020 of LAC MANJEET ANTIL Vs UNION OF INDIA AND OTHERS & ORS.",
+  "number": "W.P.(C)/4751/2020",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2020-07-30",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010209802020_1_2020-07-30.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010209802020",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/4751/2020"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "LAC MANJEET ANTIL"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE RAJIV SAHAI ENDLAW",
+    "HON'BLE MS. JUSTICE ASHA MENON"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "122",
+      "raw": "Section 122 of the Air Force Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 14,
+    "keywords": {
+      "air force act": 2,
+      "armed forces tribunal": 12
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}
