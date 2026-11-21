@@ -26,6 +26,13 @@ Results
   User-Agent stays descriptive, no browser impersonation. Awaiting one retest from the PC.
   If still 403: stop; options are asking NIC how automated access should be done, or manual
   browser downloads fed in as `manual_upload`.
+- Retest from the PC with the `From` header: no more 403 on either site, so the email in the
+  User-Agent was the trigger.
+  - indiacode.nic.in: robots.txt never answers (times out in the crawler and in a desktop browser).
+    DECISION: per-source exception `robots_unreachable: allow` for indiacode only, reason recorded in
+    sources.yaml. Awaiting retest of `discover`.
+  - mod.gov.in: home page now 200, but 8277 bytes with no links and no title: either a JavaScript-only
+    page or a bot-check page. Unknown until the recorded file is looked at. MoD stays disabled.
 - archive.org: OK. robots.txt allows the search API. Title searches found the Indian Army Act 1911,
   the Manual of Indian Military Law (1911 and 1937) and British Manual of Military Law scans;
   identifiers recorded under `sources.archive.candidates` (unreviewed).

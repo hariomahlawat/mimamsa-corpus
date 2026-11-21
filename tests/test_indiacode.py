@@ -129,6 +129,42 @@ def test_robots_disallow_and_unreachable_robots(cfg, db, tmp_path):
         c2.get(f"{BASE}/a")
 
 
+def _robots_times_out(req):
+    if req.url.path == "/robots.txt":
+        raise httpx.ReadTimeout("hang", request=req)
+    return httpx.Response(200, text="x")
+
+
+def test_unreachable_robots_exception_is_per_source(cfg, db, tmp_path):
+    # indiacode has robots_unreachable: allow -> proceeds, and says so
+    c = make_client(cfg, db, tmp_path, _robots_times_out)
+    assert c.get(f"{BASE}/a").status == 200 and c.robots_exception_used
+    # archive has no exception -> still refuses
+    c2 = make_client(cfg, db, tmp_path, _robots_times_out, source="archive")
+    with pytest.raises(RobotsDisallowed):
+        c2.get("https://archive.org/a")
+
+
+def test_exception_does_not_cover_served_rules_or_5xx(cfg, db, tmp_path):
+    c = make_client(cfg, db, tmp_path, site({f"{BASE}/private/x": httpx.Response(200, text="x")}))
+    with pytest.raises(RobotsDisallowed):
+        c.get(f"{BASE}/private/x")
+
+    def robots_500(req):
+        return httpx.Response(500) if req.url.path == "/robots.txt" else httpx.Response(200, text="x")
+    with pytest.raises(RobotsDisallowed):
+        make_client(cfg, db, tmp_path, robots_500).get(f"{BASE}/a")
+
+
+def test_exception_needs_a_reason(tmp_path):
+    from crawler.config import check_config
+    raw = yaml.safe_load(DEFAULT_CONFIG.read_text(encoding="utf-8"))
+    raw["sources"]["archive"]["robots_unreachable"] = "allow"
+    p = tmp_path / "s.yaml"
+    p.write_text(yaml.safe_dump(raw), encoding="utf-8")
+    assert any("robots_unreachable_reason" in e for e in check_config(load_config(p)).errors)
+
+
 def test_missing_robots_allows(cfg, db, tmp_path):
     c = make_client(cfg, db, tmp_path, site({f"{BASE}/a": httpx.Response(200, text="a")}, robots=None))
     assert c.get(f"{BASE}/a").status == 200

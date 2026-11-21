@@ -33,6 +33,14 @@ sources:
     heavy: false
     allowed_hosts: [www.indiacode.nic.in, indiacode.nic.in]
     base_url: https://www.indiacode.nic.in
+    # EXCEPTION (approved 2026-11-21): if robots.txt cannot be fetched at all, crawl as if the site had
+    # none. Everywhere else an unreachable robots.txt means "disallow". A robots.txt that is actually
+    # served is still obeyed, and a 5xx answer still means "disallow".
+    robots_unreachable: allow
+    robots_unreachable_reason: >
+      https://www.indiacode.nic.in/robots.txt never answers: it timed out from the cloud container
+      (20 s and 60 s), from the crawler on a PC in India (60 s) and in a desktop browser on that PC,
+      all on 2026-11-21, while the site's pages load normally. Re-check from time to time.
     discovery: >
       Resolve each target to its India Code handle page by searching the
       Central Acts collection for the short title + year; record the handle URL

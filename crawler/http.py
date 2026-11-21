@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import re
 import time
 from dataclasses import dataclass
@@ -26,6 +27,8 @@ from .audit import AuditLog
 from .config import Config, url_host
 
 ROBOTS_AGENT = "Mimamsa-Corpus"
+ROBOTS_LENIENT_TIMEOUT = 20.0   # seconds to wait for robots.txt on a source with the unreachable exception
+log = logging.getLogger("mimamsa.http")
 LOGIN_PATH_RE = re.compile(r"(log-?in|sign-?in|captcha|/auth\b|/sso\b)", re.I)
 REDIRECTS = (301, 302, 303, 307, 308)
 MAX_REDIRECTS = 5
@@ -131,6 +134,7 @@ class PoliteClient:
         self._last: dict[str, float] = {}
         self._delay: dict[str, float] = {}
         self._robots: dict[str, robotparser.RobotFileParser | bool] = {}
+        self.robots_exception_used = False
         self.requests_made = 0
         self.waited_seconds = 0.0   # politeness delay a live run spends (in replay: would spend)
 
@@ -175,8 +179,20 @@ class PoliteClient:
 
     def _load_robots(self, origin: str) -> robotparser.RobotFileParser | bool:
         url = origin + "/robots.txt"
+        # Per-source exception (sources.<name>.robots_unreachable: allow): if robots.txt cannot be
+        # fetched at all (timeout / connection error), proceed as if the site had none. A robots.txt
+        # that IS served is always obeyed, and a 5xx answer still means "disallow".
+        lenient = self.cfg.source(self.source).get("robots_unreachable") == "allow"
         try:
-            r = self._send(url)
+            r = self._send(url, timeout=ROBOTS_LENIENT_TIMEOUT if lenient else None)
+        except FetchError as e:
+            if lenient and e.status_code is None:
+                log.warning("robots.txt unreachable at %s (%s); proceeding under the %s robots_unreachable "
+                            "exception", url, e, self.source)
+                self.robots_exception_used = True
+                return True
+            return False
+        try:
             for _ in range(3):
                 if r.status not in REDIRECTS or not r.headers.get("location"):
                     break
@@ -198,7 +214,8 @@ class PoliteClient:
             return True                       # no robots.txt: nothing is disallowed
         return False                          # 5xx / odd answers: be conservative
 
-    def _send(self, url: str, headers: dict[str, str] | None = None) -> FetchResult:
+    def _send(self, url: str, headers: dict[str, str] | None = None, *,
+              timeout: float | None = None) -> FetchResult:
         host = url_host(url)
         last = self._last.get(host)
         if last is not None:
@@ -209,7 +226,8 @@ class PoliteClient:
         t0 = self.clock()
         self.requests_made += 1
         try:
-            with self.client.stream("GET", url, headers=headers or {}) as resp:
+            extra = {"timeout": timeout} if timeout else {}
+            with self.client.stream("GET", url, headers=headers or {}, **extra) as resp:
                 chunks, n = [], 0
                 for chunk in resp.iter_bytes():
                     n += len(chunk)

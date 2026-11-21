@@ -204,6 +204,15 @@ def check_config(cfg: Config) -> ConfigReport:
             if did in seen_ids and seen_ids[did] != name:
                 r.warnings.append(f"{did} is targeted by both {seen_ids[did]} and {name} (first hit wins)")
             seen_ids.setdefault(did, name)
+        ru = src.get("robots_unreachable")
+        if ru not in (None, "allow", "disallow"):
+            r.errors.append(f"{where}.robots_unreachable must be 'allow' or 'disallow'")
+        elif ru == "allow":
+            if not str(src.get("robots_unreachable_reason") or "").strip():
+                r.errors.append(f"{where}.robots_unreachable: allow needs a robots_unreachable_reason")
+            else:
+                r.warnings.append(f"{where} has the robots-unreachable exception "
+                                  "(crawls if robots.txt cannot be fetched)")
         if src.get("enabled") and src.get("verify"):
             r.warnings.append(f"{where} is enabled but marked verify: true (unchecked against live site)")
     return r
