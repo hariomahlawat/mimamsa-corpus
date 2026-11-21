@@ -1,0 +1,102 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2009/court=3_22/bench=phhc/PHHC010663142009_1_2009-11-27.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:30:20+00:00",
+  "sha256": "8d6cbd7eeff68c83976124520b92c1aad7a25f81eefac0f744c517b1fff24f4f",
+  "raw_path": "data/raw/hc/2009/8d6cbd7eeff68c83976124520b92c1aad7a25f81eefac0f744c517b1fff24f4f.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2009-cwp-18140-2009-phhc010663142009-1-2009-11-27.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2009-cwp-18140-2009-phhc010663142009-1-2009-11-27",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s26",
+      "target_ref_raw": "section 26 of the Army Act",
+      "effective_date": null,
+      "evidence": "ing show cause notice his services were terminated vide order dated 15.6.2009. The petitioner had preferred a statutory petition (Annexure P-1) under section 26 of the Army Act to the competent authority against the order of his termination. The grievance of the petitioner is that the statutory petition has not been consider",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2009-cwp-18140-2009-phhc010663142009-1-2009-11-27",
+  "doc_type": "judgment",
+  "title": "CWP/18140/2009 of SUNDER SINGH Vs UNION OF INDIA",
+  "number": "CWP/18140/2009",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2009-11-27",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010663142009_1_2009-11-27.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010663142009",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/18140/2009"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SUNDER SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE PERMOD KOHLI"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "26",
+      "raw": "section 26 of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "army act": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2009/court=3_22/bench=phhc/PHHC010629652007_1_2009-03-05.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:29:55+00:00",
+  "sha256": "68b461797fe169e663839be6568c1bfec68f49f79458bcf59152f95d0d730b5e",
+  "raw_path": "data/raw/hc/2009/68b461797fe169e663839be6568c1bfec68f49f79458bcf59152f95d0d730b5e.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 14,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2009-cwp-6066-2007-phhc010629652007-1-2009-03-05.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2009-cwp-6066-2007-phhc010629652007-1-2009-03-05",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s2",
+      "target_ref_raw": "Section 2(2) of the Army Act",
+      "effective_date": null,
+      "evidence": "er was on leave, he would continue to be subjected to military law and the injury of Civil Writ Petition No. 6066 of 2007 8 the petitioner in view of Section 2(2) of the Army Act should not be viewed myopically as `not on military duty at that point of time' but viewed in a broader spectrum of `being in military service'. The",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2009-cwp-6066-2007-phhc010629652007-1-2009-03-05",
+  "doc_type": "judgment",
+  "title": "CWP/6066/2007 of YADVINDER SINGH VIRK Vs UNION OF INDIA AND ORS.",
+  "number": "CWP/6066/2007",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2009-03-05",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010629652007_1_2009-03-05.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010629652007",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/6066/2007"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "YADVINDER SINGH VIRK"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE AJAI LAMBA"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "2",
+      "raw": "Section 2(2) of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "invalidment",
+    "medical_board"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 33,
+    "keywords": {
+      "army act": 7,
+      "disability pension": 23,
+      "invalided": 2,
+      "release medical board": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

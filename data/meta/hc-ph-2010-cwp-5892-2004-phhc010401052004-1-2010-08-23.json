@@ -1,0 +1,102 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2010/court=3_22/bench=phhc/PHHC010401052004_1_2010-08-23.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:27:51+00:00",
+  "sha256": "b03513ecd8a77fb4fca6bc59c0ff1273fb74b0b9537ebc73734372512be3797c",
+  "raw_path": "data/raw/hc/2010/b03513ecd8a77fb4fca6bc59c0ff1273fb74b0b9537ebc73734372512be3797c.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2010-cwp-5892-2004-phhc010401052004-1-2010-08-23.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2010-cwp-5892-2004-phhc010401052004-1-2010-08-23",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s34",
+      "target_ref_raw": "Section 34 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "rmed Forces Tribunal constituted under the Armed Forces Tribunal Act, 2007. The claim made in the writ petition is for disability pension. In view of Section 34 of the Armed Forces Tribunal Act, 2007, the present case is mandatorily required to be transferred to the Tribunal constituted under the Act. The Registry is directed to transfer the recor",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2010-cwp-5892-2004-phhc010401052004-1-2010-08-23",
+  "doc_type": "judgment",
+  "title": "CWP/5892/2004 of JOGINDER SINGH Vs UNION OF INDIA AND ORS",
+  "number": "CWP/5892/2004",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2010-08-23",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010401052004_1_2010-08-23.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010401052004",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/5892/2004"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "JOGINDER SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE RANJIT SINGH"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "34",
+      "raw": "Section 34 of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "disability pension": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

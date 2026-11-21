@@ -1,0 +1,105 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2007/court=3_22/bench=phhc/PHHC010464662006_1_2007-03-16.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:33:59+00:00",
+  "sha256": "c8327c402e4e75de07269db238015ad0020f3828a2671255b5d6fee90cd0a10d",
+  "raw_path": "data/raw/hc/2007/c8327c402e4e75de07269db238015ad0020f3828a2671255b5d6fee90cd0a10d.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2007-crwp-214-2006-phhc010464662006-1-2007-03-16.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2007-crwp-214-2006-phhc010464662006-1-2007-03-16",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s161",
+      "target_ref_raw": "Section 161(2) of the Air Force Act, 1950",
+      "effective_date": null,
+      "evidence": "s that the petitioner has not exhausted the alternate and efficacious remedy Crl.W.P.No.214 of 2006 -2- of an appeal provided under the provisions of Section 161(2) of the Air Force Act, 1950 (in short 'the Act') which reads as under : “161. Remedy against order, finding or sentence of court-martial. -- (1) ...... ..... ...... ...... (2) A",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2007-crwp-214-2006-phhc010464662006-1-2007-03-16",
+  "doc_type": "judgment",
+  "title": "CRWP/214/2006 of EX-WING COMMANDER AS GILL Vs UOI AND ANR",
+  "number": "CRWP/214/2006",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2007-03-16",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010464662006_1_2007-03-16.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010464662006",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CRWP/214/2006"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "EX-WING COMMANDER AS GILL"
+    ],
+    "respondent": [
+      "UOI AND ANR"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE MAHESH GROVER"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "161",
+      "raw": "Section 161(2) of the Air Force Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 13,
+    "keywords": {
+      "air force act": 1,
+      "court martial": 12
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

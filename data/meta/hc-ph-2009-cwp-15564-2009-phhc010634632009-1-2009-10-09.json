@@ -1,0 +1,88 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2009/court=3_22/bench=phhc/PHHC010634632009_1_2009-10-09.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:30:44+00:00",
+  "sha256": "6de7317b98a1ef1ca69df14b6b1284b1e7ed28f1cfb9e1ec92b6e77275f28be4",
+  "raw_path": "data/raw/hc/2009/6de7317b98a1ef1ca69df14b6b1284b1e7ed28f1cfb9e1ec92b6e77275f28be4.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2009-cwp-15564-2009-phhc010634632009-1-2009-10-09.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-ph-2009-cwp-15564-2009-phhc010634632009-1-2009-10-09",
+  "doc_type": "judgment",
+  "title": "CWP/15564/2009 of SACHDEV SINGH Vs UNION OF INDIA AND ORS.",
+  "number": "CWP/15564/2009",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2009-10-09",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010634632009_1_2009-10-09.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010634632009",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/15564/2009"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SACHDEV SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE PERMOD KOHLI"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 2,
+    "keywords": {
+      "disability pension": 1,
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

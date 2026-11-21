@@ -1,0 +1,109 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2010/court=3_22/bench=phhc/PHHC010857842009_1_2010-03-31.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:28:09+00:00",
+  "sha256": "5072e4cbbff6ee26b73c9a3d96babdb686a71d400160e9b8152c34b9bd7ecda7",
+  "raw_path": "data/raw/hc/2010/5072e4cbbff6ee26b73c9a3d96babdb686a71d400160e9b8152c34b9bd7ecda7.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 26,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2010-lpa-49-2009-phhc010857842009-1-2010-03-31.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [
+    26
+  ],
+  "relations": [],
+  "doc_id": "hc-ph-2010-lpa-49-2009-phhc010857842009-1-2010-03-31",
+  "doc_type": "judgment",
+  "title": "LPA/49/2009 of UNION OF INDIA & ORS.  Vs SUMANJIT SINGH",
+  "number": "LPA/49/2009",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2010-03-31",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010857842009_1_2010-03-31.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010857842009",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "LPA/49/2009"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA & ORS."
+    ],
+    "respondent": [
+      "SUMANJIT SINGH"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE K.KANNAN",
+    "MR. JUSTICE ADARSH KUMAR GOEL",
+    "MR. JUSTICE ALOK SINGH"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": null,
+      "raw": "Army Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": null,
+      "raw": "Air Force Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "entitlement_rules",
+    "medical_board"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 30,
+    "keywords": {
+      "army act": 3,
+      "air force act": 1,
+      "disability pension": 24,
+      "entitlement rules": 1,
+      "release medical board": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

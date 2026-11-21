@@ -1,0 +1,88 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2009/court=3_22/bench=phhc/PHHC010604772009_1_2009-08-24.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:30:11+00:00",
+  "sha256": "70942e1ca7bbbb4f70be65b634d3f10767e7583e6b33e81d1c991e1034336fa7",
+  "raw_path": "data/raw/hc/2009/70942e1ca7bbbb4f70be65b634d3f10767e7583e6b33e81d1c991e1034336fa7.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2009-cwp-12869-2009-phhc010604772009-1-2009-08-24.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-ph-2009-cwp-12869-2009-phhc010604772009-1-2009-08-24",
+  "doc_type": "judgment",
+  "title": "CWP/12869/2009 of VIJAY KUMAR DIDDEE Vs UNION OF INDIA AND ORS.",
+  "number": "CWP/12869/2009",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2009-08-24",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010604772009_1_2009-08-24.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010604772009",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/12869/2009"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "VIJAY KUMAR DIDDEE"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE PERMOD KOHLI"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "medical_board"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 11,
+    "keywords": {
+      "disability pension": 9,
+      "release medical board": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

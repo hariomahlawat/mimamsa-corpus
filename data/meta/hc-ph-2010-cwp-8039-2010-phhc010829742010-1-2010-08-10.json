@@ -1,0 +1,144 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2010/court=3_22/bench=phhc/PHHC010829742010_1_2010-08-10.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:27:35+00:00",
+  "sha256": "0d0915cb9c690105e69fe22cc04dd55a40470bc1d226118e322e242376258a89",
+  "raw_path": "data/raw/hc/2010/0d0915cb9c690105e69fe22cc04dd55a40470bc1d226118e322e242376258a89.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 9,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2010-cwp-8039-2010-phhc010829742010-1-2010-08-10.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2010-cwp-8039-2010-phhc010829742010-1-2010-08-10",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s20",
+      "target_ref_raw": "Section 20 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "d officer, holding a substantive post of Havildar, to the post of Sepoy. Learned counsel for the petitioner in support of this contention referred to Section 20 of the Army Act, 1950 which reads as under:- “20. Dismissal, removal or reduction by the Chief of the Army Staff and by other officers.-- (1) The Chief of the Army Staff m",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2010-cwp-8039-2010-phhc010829742010-1-2010-08-10",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s116",
+      "target_ref_raw": "Section 116 of the Army Act",
+      "effective_date": null,
+      "evidence": "ions contained in this Act and the rules and regulations made thereunder.” Learned counsel for the Union of India supported the order by referring to Section 116 of the Army Act, wherein it is provided that summary court martial may be held by the commanding officer of any corps, department or detachment of the regular Army,",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2010-cwp-8039-2010-phhc010829742010-1-2010-08-10",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s120",
+      "target_ref_raw": "Section 120 of the Army Act",
+      "effective_date": null,
+      "evidence": "for the respondents, therefore, was that summary court martial was rightly constituted by Officer Commanding. Therefore, in view of the provisions of Section 120 of the Army Act, it was competent for commanding officer to issue punishment of reversion. CWP No. 8039 of 2010 7 Sections 116 and 120 of the Army Act read as under:",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2010-cwp-8039-2010-phhc010829742010-1-2010-08-10",
+  "doc_type": "judgment",
+  "title": "CWP/8039/2010 of SATISH KUMAR Vs UNION OF INDIA AND ORS.",
+  "number": "CWP/8039/2010",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2010-08-10",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010829742010_1_2010-08-10.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010829742010",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/8039/2010"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SATISH KUMAR"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE A.N. JINDAL",
+    "MR. JUSTICE M.M. KUMAR"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "20",
+      "raw": "Section 20 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "116",
+      "raw": "Section 116 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "120",
+      "raw": "Section 120 of the Army Act"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": null,
+      "raw": "Armed Forces Tribunal Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 24,
+    "keywords": {
+      "army act": 6,
+      "court martial": 18
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

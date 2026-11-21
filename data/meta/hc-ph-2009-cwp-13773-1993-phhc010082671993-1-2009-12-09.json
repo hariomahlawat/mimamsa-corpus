@@ -1,0 +1,105 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2009/court=3_22/bench=phhc/PHHC010082671993_1_2009-12-09.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:30:12+00:00",
+  "sha256": "5e55d21de01f4f214062a80779122bbf425f42951bb8532274b1d6135c7aa2dd",
+  "raw_path": "data/raw/hc/2009/5e55d21de01f4f214062a80779122bbf425f42951bb8532274b1d6135c7aa2dd.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 4,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2009-cwp-13773-1993-phhc010082671993-1-2009-12-09.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2009-cwp-13773-1993-phhc010082671993-1-2009-12-09",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s63",
+      "target_ref_raw": "Section 63 of the Army Act",
+      "effective_date": null,
+      "evidence": "n challenges the order of reduction in rank imposed in a summary proceeding in a Court martial for alleged misconduct that qualified for action under Section 63 of the Army Act. The charge-sheet against the accused is as follows:- “The accused No.1048346X Drf Surinder Singh of 51 Armoured Regiment is charged with:- Army Act",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2009-cwp-13773-1993-phhc010082671993-1-2009-12-09",
+  "doc_type": "judgment",
+  "title": "CWP/13773/1993 of SURINDER SINGH Vs UNION OF INDIA & ORS",
+  "number": "CWP/13773/1993",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2009-12-09",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010082671993_1_2009-12-09.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010082671993",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/13773/1993"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SURINDER SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE K.KANNAN"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "63",
+      "raw": "Section 63 of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 4,
+    "keywords": {
+      "army act": 2,
+      "court martial": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

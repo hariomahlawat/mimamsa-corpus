@@ -1,0 +1,121 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2009/court=3_22/bench=phhc/PHHC010711962007_1_2009-12-11.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:30:03+00:00",
+  "sha256": "544c199998278e124eeb53cc9cb6e22f794e2bae7e49aaa82e88df3ddfb3180f",
+  "raw_path": "data/raw/hc/2009/544c199998278e124eeb53cc9cb6e22f794e2bae7e49aaa82e88df3ddfb3180f.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 17,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2009-fao-4458-2007-phhc010711962007-1-2009-12-11.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2009-fao-4458-2007-phhc010711962007-1-2009-12-11",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s4",
+      "target_ref_raw": "Section 4 of the Army Act",
+      "effective_date": null,
+      "evidence": "gs do not overlap. As a matter of fact, Notification No. SRO-329 dated 23-9-1960 issued under the Central Rules and under sub-sections (1) and (4) of Section 4 of the Army Act makes this position clear. By this notification, the punishments that could be meted out under the Central Rules have been taken out of the purview o",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2009-fao-4458-2007-phhc010711962007-1-2009-12-11",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s300",
+      "target_ref_raw": "Section 300 of the Criminal Procedure Code",
+      "effective_date": null,
+      "evidence": "imposed by the Enforcement Directorate, the order of the Court to deposit the amount was in violation of Article 20 of the Constitution of India and Section 300 of the Criminal Procedure Code as it will amount to double jeopardy. Therefore, order passed by Enforcement FAO No. 4458 of 2007 [14] Directorate Annexure P-5 has attained finality",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2009-fao-4458-2007-phhc010711962007-1-2009-12-11",
+  "doc_type": "judgment",
+  "title": "FAO/4458/2007 of RANJIT SINGH Vs UNION OF INDIA AND ORS.",
+  "number": "FAO/4458/2007",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2009-12-11",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010711962007_1_2009-12-11.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010711962007",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "FAO/4458/2007"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "RANJIT SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE RAJESH BINDAL"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "4",
+      "raw": "Section 4 of the Army Act"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "300",
+      "raw": "Section 300 of the Criminal Procedure Code"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 6,
+    "keywords": {
+      "army act": 4,
+      "court martial": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}
