@@ -1,5 +1,35 @@
 # Progress
 
+## 2026-11-21 — Judgment collection from the open-data buckets finished
+
+Supreme Court (1950-2026) and four High Courts (Delhi, Jammu and Kashmir, Punjab and Haryana,
+Allahabad; every year the bucket has an index for). 124,446 pre-selected judgments downloaded and
+checked with the brief's keywords; only armed-forces judgments are kept.
+
+| Court | relevant | borderline | removed | scans awaiting OCR |
+| --- | --- | --- | --- | --- |
+| Supreme Court | 240 | 110 | 3,566 | 2 |
+| Delhi | 1,198 | 480 | 36,993 | 64 |
+| Jammu and Kashmir | 199 | 70 | 5,062 | 53 |
+| Punjab and Haryana | 635 | 290 | 44,020 | 834 |
+| Allahabad | 54 | 79 | 30,497 | 0 |
+| Total | 2,326 | 1,029 | 120,138 | 953 |
+
+- Corpus: 4,376 documents, 2,998 sections, 2,596 relations (1,535 `cites` edges from judgments), 0
+  validation errors. Both stores current (4,086 raw files; `raw-data` 2.29 GB of 10 GB).
+- 161 downloads failed (missing from the bucket, or not valid PDFs); logged in the crawl state.
+- Fixes during the run: extraction saves each record at once (an interrupted run resumes);
+  `push_hf.py` uses the fixed dataset name (the account lookup is rate-limited); per-run removal log
+  and relevance reports are kept in the data stores, not on `main`.
+- Known reporting error: the per-year progress line in `collect.log` often says "downloaded 0".
+
+Next / open
+- OCR for the 953 scans, then the relevance check on them (they are neither kept nor removed yet).
+- Second look at the 1,029 borderline judgments (single keyword, 1-2 mentions).
+- Allahabad: only 133 kept of 30,630; check whether the party-name pre-selection suits this court
+  (Lucknow bench is a separate bucket folder and is not configured).
+- AFT judgments: still blocked from this container; waiting for the owner's request log.
+
 ## 2026-11-21 — Hugging Face is the central data repository
 
 Decision (owner): the private Hugging Face dataset `hariomahlawat/mimamsa-corpus` holds ALL corpus
