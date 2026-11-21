@@ -1,0 +1,139 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2018/court=9_13/bench=cisdb_16012018/UPHC011346042006_1_2018-03-08.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:43:26+00:00",
+  "sha256": "5e2b0166bc9e4c30349eff77076d5125146dd733c5c3b6ab802f71c068e961ec",
+  "raw_path": "data/raw/hc/2018/5e2b0166bc9e4c30349eff77076d5125146dd733c5c3b6ab802f71c068e961ec.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2018-wria-58895-2006-uphc011346042006-1-2018-03-08.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2018-wria-58895-2006-uphc011346042006-1-2018-03-08",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s164",
+      "target_ref_raw": "Section 164 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "Martial held on 20 October 2005 imposing minor penalty upon the petitioner. The appellate order has been passed in exercise of power conferred under Section 164 of the Army Act, 1950. Petitioner (No. 1399050 IP SEPOY Store Keeper Technical) was arraigned on a charge under Section 54(b) of the Army Act for loosing by neglect magazi",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2018-wria-58895-2006-uphc011346042006-1-2018-03-08",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s54",
+      "target_ref_raw": "Section 54(b) of the Army Act",
+      "effective_date": null,
+      "evidence": "of power conferred under Section 164 of the Army Act, 1950. Petitioner (No. 1399050 IP SEPOY Store Keeper Technical) was arraigned on a charge under Section 54(b) of the Army Act for loosing by neglect magazine with AMN (ammunition) the property of the Government issued to him for safe custody. During Court Martial proceedings",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2018-wria-58895-2006-uphc011346042006-1-2018-03-08",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s71",
+      "target_ref_raw": "Section 71 of the Army Act",
+      "effective_date": null,
+      "evidence": "und him accordingly. The petitioner awarded one sentence consisting of combination of two punishments, which is permissible vide Section 73 read with Section 71 of the Army Act. The punishment awarded to him is commensurate to the nature and gravity of the offence committed by him.\" Learned counsel for the petitioner has mad",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2018-wria-58895-2006-uphc011346042006-1-2018-03-08",
+  "doc_type": "judgment",
+  "title": "WRIA/58895/2006 of NO.  13990501P NK SKT NARINDER SINGH KUSHWAHA Vs UNION OF INDIA AND OTHERS",
+  "number": "WRIA/58895/2006",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2018-03-08",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC011346042006_1_2018-03-08.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC011346042006",
+    "collection": "cisdb_16012018",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WRIA/58895/2006"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "NO.  13990501P NK SKT NARINDER SINGH KUSHWAHA"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "SUNEET KUMAR"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "164",
+      "raw": "Section 164 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "54",
+      "raw": "Section 54(b) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "71",
+      "raw": "Section 71 of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 14,
+    "keywords": {
+      "army act": 6,
+      "court martial": 5,
+      "summary of evidence": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}
