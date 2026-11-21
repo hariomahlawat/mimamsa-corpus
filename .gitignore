@@ -22,3 +22,6 @@ data/SHA256SUMS
 data/README.md
 state/collect_progress.json
 state/collect.stop
+data/excluded_judgments.jsonl
+reports/relevance.csv
+reports/phase2_report.md

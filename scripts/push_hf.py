@@ -130,6 +130,8 @@ def main(argv: list[str] | None = None) -> int:
                       allow_patterns=[f for f in FILES if f != "README.md"], commit_message=f"manifests — {args.message}")
     api.upload_folder(repo_id=repo, repo_type="dataset", folder_path=str(ROOT / "schema"), path_in_repo="schema",
                       commit_message=f"schema — {args.message}")
+    api.upload_folder(repo_id=repo, repo_type="dataset", folder_path=str(ROOT / "reports"), path_in_repo="reports",
+                      allow_patterns=["relevance.csv", "phase2_report.md"], commit_message=f"reports — {args.message}")
     api.upload_file(repo_id=repo, repo_type="dataset", path_or_fileobj=str(DATA / "README.md"), path_in_repo="README.md",
                     commit_message=f"dataset card — {args.message}")
     (DATA / "README.md").unlink(missing_ok=True)
