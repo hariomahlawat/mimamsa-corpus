@@ -27,7 +27,7 @@ Next / open
 - OCR for the 953 scans, then the relevance check on them (they are neither kept nor removed yet).
 - Second look at the 1,029 borderline judgments (single keyword, 1-2 mentions).
 - Allahabad: only 133 kept of 30,630; check whether the party-name pre-selection suits this court
-  (Lucknow bench is a separate bucket folder and is not configured).
+  and whether the Lucknow bench sits in a separate bucket folder (not verified).
 - AFT judgments: still blocked from this container; waiting for the owner's request log.
 
 ## 2026-11-21 — Hugging Face is the central data repository
