@@ -1,5 +1,23 @@
 # Progress
 
+## 2026-11-21 — First live checks (from the cloud container, US address)
+
+Setup
+- Contact email set in `defaults.user_agent`. New `probe` command: reads robots.txt and a few listing
+  pages through the polite client, lists links, downloads no documents.
+
+Results
+- mod.gov.in: BLOCKED. robots.txt and the home page both answered HTTP 403 to the crawler's
+  User-Agent (2 requests, then stopped). An earlier plain reachability check with a different
+  User-Agent got 200 for robots.txt, so the block may be on the User-Agent wording or on the address.
+  Not retried. Needs a decision.
+- archive.org: OK. robots.txt allows the search API. Title searches found the Indian Army Act 1911,
+  the Manual of Indian Military Law (1911 and 1937) and British Manual of Military Law scans;
+  identifiers recorded under `sources.archive.candidates` (unreviewed).
+- sci.gov.in: not run; heavy source, only allowed 20:00-08:00 IST.
+- Not reachable from this container: aftdelhi.nic.in (connection reset), egazette.gov.in (certificate
+  cannot be verified), indiacode.nic.in (home page loads, robots.txt hangs, so the crawler refuses).
+
 ## 2026-11-21 — Phase 1, step 3 (built against SYNTHETIC pages; NOT verified on the live site)
 
 Done

@@ -72,9 +72,17 @@ def site(pages, robots="User-agent: *\nDisallow: /private/\n"):
 
 
 # ------------------------------------------------------------ polite client
-def test_live_client_refuses_placeholder_user_agent(cfg, db, tmp_path):
+def placeholder_config(tmp_path) -> Path:
+    raw = yaml.safe_load(DEFAULT_CONFIG.read_text(encoding="utf-8"))
+    raw["defaults"]["user_agent"] = "MimamsaCorpusBot/0.1 (contact: CHANGE-ME@example.org)"
+    p = tmp_path / "placeholder.yaml"
+    p.write_text(yaml.safe_dump(raw), encoding="utf-8")
+    return p
+
+
+def test_live_client_refuses_placeholder_user_agent(db, tmp_path):
     with pytest.raises(UserAgentNotSet):
-        PoliteClient(cfg, AuditLog(tmp_path / "logs", db, None), "indiacode")
+        PoliteClient(load_config(placeholder_config(tmp_path)), AuditLog(tmp_path / "logs", db, None), "indiacode")
 
 
 def test_rate_limit_per_host(cfg, db, tmp_path):
@@ -300,7 +308,8 @@ def test_cli_discover_replay_keeps_live_state_clean(tmp_path, capsys):
 
 
 def test_cli_live_discover_refused_with_placeholder_email(tmp_path, capsys):
-    assert main(["--root", str(tmp_path), "discover", "--source", "indiacode"]) == 3
+    assert main(["--config", str(placeholder_config(tmp_path)), "--root", str(tmp_path),
+                 "discover", "--source", "indiacode"]) == 3
     assert "contact email" in capsys.readouterr().err
 
 

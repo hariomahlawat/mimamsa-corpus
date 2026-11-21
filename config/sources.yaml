@@ -8,7 +8,7 @@ schema_version: "0.1.0"
 
 defaults:
   # Refuse to start while this is still the placeholder.
-  user_agent: "MimamsaCorpusBot/0.1 (+research crawler for public military-law texts; contact: CHANGE-ME@example.org)"
+  user_agent: "MimamsaCorpusBot/0.1 (+research crawler for public military-law texts; contact: hariomahlawat@gmail.com)"
   min_delay_seconds: 2.0          # per host, at most 1 request every 2 s
   timeout_seconds: 60
   max_retries: 5                  # exponential backoff on timeouts and 5xx, then give up and log
@@ -149,6 +149,16 @@ sources:
     targets:
       - { doc_id: act-indian-army-1911, title: "Indian Army Act, 1911", status_hint: superseded }
       - { doc_id: book-manual-military-law, title: "Manual of Military Law (editions)", status_hint: superseded }
+    # Found by title search on 2026-11-21 (archive.org advancedsearch, live). Titles and years are as
+    # archive.org lists them; nobody has opened the items yet, so each needs a human look before use.
+    search_api: "https://archive.org/advancedsearch.php"
+    candidates:
+      - { identifier: in.ernet.dli.2015.108755, title: "The Indian Army Act,1911 Act No,viii", year: 1911 }
+      - { identifier: dli.ministry.16806,       title: "Manual of Indian military law, 1911", year: 1912 }
+      - { identifier: in.ernet.dli.2015.238493, title: "Manual Of Indian Military Law (1937)", year: 1937 }
+      - { identifier: in.ernet.dli.2015.110569, title: "Manual Of Military Law. War Office. 1907.", year: 1907, note: "British manual" }
+      - { identifier: in.ernet.dli.2015.279009, title: "Manual Of Military Law War Office 1907", year: null, note: "British manual; possibly a duplicate scan" }
+      - { identifier: dli.ernet.237370,         title: "Manual Of Military Law (1929)", year: 1929, note: "British manual" }
 
 # Explicitly forbidden: never fetch, even if linked.
 blocked_hosts:

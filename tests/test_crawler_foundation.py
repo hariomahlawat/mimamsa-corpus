@@ -45,7 +45,15 @@ def write_cfg(tmp_path, mutate):
 def test_real_config_has_no_errors(cfg):
     r = check_config(cfg)
     assert r.errors == []
-    assert any("placeholder" in w for w in r.warnings)
+    assert not cfg.user_agent_is_placeholder()
+
+
+def test_placeholder_email_is_flagged(tmp_path):
+    def m(r):
+        r["defaults"]["user_agent"] = "MimamsaCorpusBot/0.1 (contact: CHANGE-ME@example.org)"
+    c = write_cfg(tmp_path, m)
+    assert c.user_agent_is_placeholder()
+    assert any("placeholder" in w for w in check_config(c).warnings)
 
 
 def test_allow_list(cfg):

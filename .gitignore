@@ -14,3 +14,5 @@ snapshots/**
 reports/dry_run_*
 reports/discover_*
 state/replay_data/
+reports/probe_*
+state/recon/

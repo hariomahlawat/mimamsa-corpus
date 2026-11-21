@@ -19,7 +19,7 @@ import logging
 import sys
 from pathlib import Path
 
-from . import indiacode
+from . import indiacode, probe
 from .audit import AuditLog, setup_logging
 from .config import DEFAULT_CONFIG, ROOT, ConfigError, check_config, load_config
 from .fetch import fetch_documents
@@ -186,6 +186,51 @@ def cmd_discover(args, cfg) -> int:
     return 4 if blocked else 0
 
 
+def cmd_probe(args, cfg) -> int:
+    db_path, log_dir, report_dir = _paths(args)
+    setup_logging(log_dir, verbose=args.verbose)
+    src = cfg.source(args.source)
+    if check_config(cfg).errors:
+        print("config errors; run config-check", file=sys.stderr)
+        return 1
+    if not _replay(args) and not cfg.may_run_now(args.source):
+        q = cfg.defaults["quiet_hours_ist"]
+        print(f"{args.source} is a heavy source; it only runs {q['start']}-{q['end']} IST.", file=sys.stderr)
+        return 3
+    urls = args.url or [s["url"] for s in src.get("seeds", []) if s.get("url")] or \
+        ([src["base_url"]] if src.get("base_url") else [])
+    if not urls:
+        print(f"no --url given and {args.source} has no seeds or base_url", file=sys.stderr)
+        return 2
+    if len(urls) > args.max_pages:
+        print(f"probe is limited to {args.max_pages} pages per run", file=sys.stderr)
+        return 2
+    with StateDB(db_path) as db:
+        run_id = db.start_run("probe", [args.source], {"urls": urls, "replay": _replay(args)})
+        try:
+            client = _client(args, cfg, db, run_id, args.source, log_dir)
+        except UserAgentNotSet as e:
+            db.end_run(run_id, f"refused: {e}")
+            print(f"refused: {e}", file=sys.stderr)
+            return 3
+        results = []
+        try:
+            for u in urls:
+                results.append(probe.probe_url(cfg, db, client, args.source, u))
+                if results[-1].outcome == "blocked":
+                    break
+        finally:
+            client.close()
+        db.end_run(run_id, "blocked" if results[-1].outcome == "blocked" else "ok",
+                   {"pages": {r.url: r.outcome for r in results}, "requests": client.requests_made})
+    md = probe.results_to_markdown(args.source, results)
+    report_dir.mkdir(parents=True, exist_ok=True)
+    (report_dir / f"probe_{args.source}_{run_id}.md").write_text(md, encoding="utf-8")
+    print(md)
+    print(f"({client.requests_made} request(s), robots.txt included; no documents downloaded)")
+    return 4 if results[-1].outcome == "blocked" else 0
+
+
 def cmd_fetch(args, cfg) -> int:
     db_path, log_dir, _ = _paths(args)
     setup_logging(log_dir, verbose=args.verbose)
@@ -248,6 +293,14 @@ def build_parser() -> argparse.ArgumentParser:
     v.add_argument("--record", metavar="DIR", help="live runs: also save each page to DIR for later replay")
     v.add_argument("--json", action="store_true")
     v.set_defaults(func=cmd_discover)
+
+    pr = sub.add_parser("probe", help="first checks: read robots.txt and a few listing pages; no downloads")
+    pr.add_argument("--source", required=True)
+    pr.add_argument("--url", action="append", help="page to read (repeatable); default: the source's seeds")
+    pr.add_argument("--max-pages", type=int, default=8)
+    pr.add_argument("--replay", metavar="DIR")
+    pr.add_argument("--record", metavar="DIR", help="also save each page to DIR for later replay")
+    pr.set_defaults(func=cmd_probe)
 
     f = sub.add_parser("fetch", help="download queued documents")
     f.add_argument("--source", required=True)
