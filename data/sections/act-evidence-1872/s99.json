@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s99",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "99",
+  "chapter": {
+    "number": "VI",
+    "title": "OF THE EXCLUSION OF ORAL BY DOCUMENTARY EVIDENCE"
+  },
+  "order": 113,
+  "page_start": 45,
+  "page_end": 45,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Who may give evidence of agreement varying terms of document.",
+  "text": "Persons who are not parties to a document, or their representatives in interest, may give evidence of any facts tending to show a contemporaneous agreement varying the terms of the document.\nIllustration\nA and B make a contract in writing that B shall sell A certain cotton, to be paid for on delivery. At the same time they make an oral agreement that three months credit shall be given to A. This could not be shown as between A and B, but it might be shown by C, if it affected his interests.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

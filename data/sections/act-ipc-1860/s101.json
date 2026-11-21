@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s101",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "101",
+  "chapter": {
+    "number": "IV",
+    "title": "GENERAL EXCEPTIONS"
+  },
+  "order": 105,
+  "page_start": 29,
+  "page_end": 29,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "When such right extends to causing any harm other than death.",
+  "text": "If the offence be not of any of the descriptions enumerated in the last preceding section, the right of private defence of the body does not extend to the voluntary causing of death to the assailant, but does extend, under the restrictions mentioned in section 99 to the voluntary causing to the assailant of any harm other than death.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

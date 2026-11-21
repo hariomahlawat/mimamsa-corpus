@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s146",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "146",
+  "chapter": {
+    "number": "X",
+    "title": "OF THE EXAMINATION OF WITNESSES"
+  },
+  "order": 164,
+  "page_start": 55,
+  "page_end": 56,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Questions lawful in cross-examination.",
+  "text": "When a witness is cross-examined, he may, in addition to the questions hereinbefore referred to, be asked any questions which tend––\n(1) to test his veracity,\n(2) to discover who he is and what is his position in life, or\n(3) to shake his credit, by injuring his character, although the answer to such questions might tend\ndirectly or indirectly to criminate him or might expose or tend directly or indirectly to expose him to a\npenalty or forfeiture:\n[2][Provided that in a prosecution for an offence under section 376, [3][section 376A, section 376AB section 376B, section 376C, section 376D, section 376DA, section 376DB] or section 376E of the Indian Penal Code (45 of 1860) or for attempt to commit any such offence, where the question of consent is an issue, it shall not be permissible to adduce evidence or to put questions in the cross-examination of the victim as to the general immoral character, or previous sexual experience, of such victim with any person for proving such consent or the quality of consent.]\nSTATE AMENDMENT\nArunachal Pradesh\nAmendment of section 146.—In the proviso to section 146 of the principal act, for the words, figures and letters “section 376, section 376A, section 376B, section 376C, section 376D or section 376E of the Indian Penal Code” the words, figures and letters “section 376, section 376A, section 376AA, section 376B, section 376C, section 376D, section 376DA or section 376E of the Indian Penal Code” shall be substituted.\n[Vide Arunachal Pradesh Act 3 of 2019, s. 25]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 13 of 2013",
+      "by_doc_id": null,
+      "effective_date": "2013-02-03",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 13 of 2013, s. 28, for the proviso (w.e.f. 3-2-2013).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 22 of 2018",
+      "by_doc_id": null,
+      "effective_date": "2018-04-21",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 22 of 2018, s. 9, for “section 376A, section 376B, section 376C, section 376D” (w.e.f. 21-4-2018).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

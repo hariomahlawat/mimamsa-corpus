@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s120",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "120",
+  "chapter": {
+    "number": "IX",
+    "title": "OF WITNESSES"
+  },
+  "order": 138,
+  "page_start": 51,
+  "page_end": 51,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Parties to civil suit, and their wives or husbands. Husband or wife of person under criminal trial.",
+  "text": "In all civil proceedings the parties to the suit, and the husband or wife of any party to the suit, shall be competent witnesses. In criminal proceedings against any person, the husband or wife of such person, respectively, shall be a competent witness.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

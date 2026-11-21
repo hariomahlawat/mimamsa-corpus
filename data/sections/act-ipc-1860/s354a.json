@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s354a",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "354A",
+  "chapter": {
+    "number": "XVI",
+    "title": "OF OFFENCES AFFECTING THE HUMAN BODY"
+  },
+  "order": 394,
+  "page_start": 83,
+  "page_end": 84,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Sexual harassment and punishment for sexual harassment.",
+  "text": "(1) A man committing any of the following acts—\n(i) physical contact and advances involving unwelcome and explicit sexual overtures; or\n(ii) a demand or request for sexual favours; or\n(iii) showing pornography against the will of a woman; or\n(iv) making sexually coloured remarks, shall be guilty of the offence of sexual harassment.\n(2) Any man who commits the offence specified in clause (i) or clause (ii) or clause (iii) of sub-section (1) shall be punished with rigorous imprisonment for a term which may extend to three years, or with fine, or with both.\n(3) Any man who commits the offence specified in clause (iv) of sub-section (1) shall be punished with imprisonment of either description for a term which may extend to one year, or with fine, or with both.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "s. 7, ibid.,",
+      "by_doc_id": null,
+      "effective_date": "2013-02-03",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by s. 7, ibid., (w.e.f. 3-2-2013).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

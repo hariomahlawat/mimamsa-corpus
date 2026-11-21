@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s303",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "303",
+  "chapter": {
+    "number": "XVI",
+    "title": "OF OFFENCES AFFECTING THE HUMAN BODY"
+  },
+  "order": 338,
+  "page_start": 74,
+  "page_end": 74,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Punishment for murder by life-convict.",
+  "text": "Whoever, being under sentence of [1][imprisonment for life], commits murder shall be punished with death.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117 and the Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

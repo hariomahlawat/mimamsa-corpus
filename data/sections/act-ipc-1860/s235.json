@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s235",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "235",
+  "chapter": {
+    "number": "XII",
+    "title": "OF OFFENCES RELATING TO COIN AND GOVERNMENT STAMPS"
+  },
+  "order": 267,
+  "page_start": 62,
+  "page_end": 62,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Possession of instrument or material for the purpose of using the same for counterfeiting coin.",
+  "text": "Whoever is in possession of any instrument or material, for the purpose of using the same for counterfeiting coin, or knowing or having reason to believe that the same is intended to be used for that purpose, shall be punished with imprisonment of either description for a term which may extend to three years, and shall also be liable to fine;\nif Indian coin.—and if the coin to be counterfeited is [1][Indian coin], shall be punished with imprisonment of either description for a term which may extend to ten years, and shall also be liable to fine.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A. O. 1950, for “the Queen’s coin”",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

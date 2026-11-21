@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s59",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "59",
+  "chapter": {
+    "number": "IV",
+    "title": "OF ORAL EVIDENCE"
+  },
+  "order": 63,
+  "page_start": 32,
+  "page_end": 32,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Proof of facts by oral evidence.",
+  "text": "All facts, except the [1][contents of documents or electronic records], may be proved by oral evidence.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

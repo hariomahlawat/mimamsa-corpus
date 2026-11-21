@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s91",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "91",
+  "chapter": {
+    "number": "VI",
+    "title": "OF THE EXCLUSION OF ORAL BY DOCUMENTARY EVIDENCE"
+  },
+  "order": 105,
+  "page_start": 42,
+  "page_end": 43,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Evidence of terms of contracts, grants and other dispositions of property reduced to form of document.",
+  "text": "When the terms of a contract, or of a grant, or of any other disposition of property, have been reduced to the form of a document, and in all cases in which any matter is required by law to be reduced to the form of a document, no evidence shall be given in proof of the terms of such contract, grant or other disposition of property, or of such matter, except the document itself, or secondary evidence of its contents in cases in which secondary evidence is admissible under the provisions hereinbefore contained.\nException 1.––When a public officer is required by law to be appointed in writing, and when it is shown that any particular person has acted as such officer, the writing by which he is appointed need not be proved.\nException 2.–– Wills [3][admitted to probate in [4][India]] may be proved by the probate.\nExplanation 1.––This section applies equally to cases in which the contracts, grants or dispositions of property referred to are contained in one document, and to cases in which they are contained in more documents than one.\nExplanation 2.––Where there are more originals than one, one original only need be proved.\nExplanation 3.––The statement, in any document whatever, of a fact other than the facts referred to in this section, shall not preclude the admission of oral evidence as to the same fact.\nIllustrations\n(a) If a contract be contained in several letters, all the letters in which it is contained must be proved.\n(b) If a contract is contained in a bill of exchange, the bill of exchange must be proved.\n(c) If a bill of exchange is drawn in a set of three, one only need be proved.\n(d) A contracts, in writing, with B, for the delivery of indigo upon certain terms. The contract mentions the fact that B had paid A the price of other indigo contracted for verbally on another occasion.\nOral evidence is offered that no payment was made for the other indigo. The evidence is\nadmissible.\n(e) A gives B a receipt for money paid by B.\nOral evidence is offered of the payment.\nThe evidence is admissible.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 18 of 1872",
+      "by_doc_id": null,
+      "effective_date": "1872-08-29",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 18 of 1872, s. 7, for “under the Indian Succession Act” (w.e.f. 29-8-1872).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": "1951-04-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 3 of 1951, s. 3 and the Schedule, for “the States” (w.e.f. 1-4-1951).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

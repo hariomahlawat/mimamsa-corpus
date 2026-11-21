@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s122",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "122",
+  "chapter": {
+    "number": "VI",
+    "title": "OF OFFENCES AGAINST THE STATE"
+  },
+  "order": 130,
+  "page_start": 35,
+  "page_end": 35,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Collecting arms, etc., with intention of waging war against the Government of India.",
+  "text": "Whoever collects men, arms or ammunition or otherwise prepares to wage war with the intention of either waging or being prepared to wage war against the [2][Government of India], shall be punished with [1][imprisonment for life] or imprisonment of either description for a term not exceeding ten years, [15][and shall also be liable to fine].",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A. O. 1950, for “Queen”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117 and the Sch., for “transportation” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 16 of 1921",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 16 of 1921, s. 2, for “and shall forfeit all his property”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

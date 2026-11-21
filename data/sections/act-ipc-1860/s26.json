@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s26",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "26",
+  "chapter": {
+    "number": "II",
+    "title": "GENERAL EXPLANATIONS"
+  },
+  "order": 26,
+  "page_start": 18,
+  "page_end": 18,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "“Reason to believe”.",
+  "text": "A person is said to have “reason to believe” a thing if he has sufficient cause to believe that thing but not otherwise.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

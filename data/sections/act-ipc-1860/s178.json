@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s178",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "178",
+  "chapter": {
+    "number": "X",
+    "title": "OF CONTEMPTS OF THE LAWFUL AUTHORITY OF PUBLIC SERVANTS"
+  },
+  "order": 203,
+  "page_start": 48,
+  "page_end": 48,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Refusing oath or affirmation when duly required by public servant to make it.",
+  "text": "Whoever refuses to bind himself by an oath [5][or affirmation] to state the truth, when required so to bind himself by a public servant legally competent to require that he shall so bind himself, shall be punished with simple imprisonment for a term which may extend to six months, or with fine which may extend to one thousand rupees, or with both.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 10 of 1873",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 10 of 1873, s. 15.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

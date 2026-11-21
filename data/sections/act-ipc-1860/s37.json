@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s37",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "37",
+  "chapter": {
+    "number": "II",
+    "title": "GENERAL EXPLANATIONS"
+  },
+  "order": 38,
+  "page_start": 19,
+  "page_end": 19,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Co-operation by doing one of several acts constituting an offence.",
+  "text": "When an offence is committed by means of several acts, whoever intentionally co-operates in the commission of that offence by doing any one of those acts, either singly or jointly with any other person, commits that offence.\nIllustrations\n(a) A and B agree to murder Z by severally and at different times giving him small doses of poison. A and B administer the poison according to the agreement with intent to murder Z. Z dies from the effects the several doses of poison so administered to him. Here A and B intentionally co-operate in the commission of murder and as each of them does an act by which the death is caused, they are both guilty of the offence though their acts are separate.\n(b) A and B are joint jailors, and as such have the charge of Z, a prisoner, alternatively for six hours at a time. A and B, intending to cause Z's death, knowingly co-operate in causing that effect by illegally omitting, each during the time of his attendance, to furnish Z with food supplied to them for that purpose. Z dies of hunger. Both A and B, are guilty of the murder of Z.\n(c) A, a jailor, has the charge of Z, a prisoner. A, intending to cause Z's death, illegally omits to supply Z with food; in consequence of which Z is much reduced in strength, but the starvation is not sufficient to cause his death. A is dismissed from his office, and B succeeds him. B, without collusion or co-operation with A, illegally omits to supply Z with food, knowing that he is likely thereby to cause Z's death. Z dies of hunger. B is guilty of murder, but, as A did not co-operate with B. A is guilty only of an attempt to commit murder.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

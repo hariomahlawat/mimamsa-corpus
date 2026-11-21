@@ -1,0 +1,91 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s1",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "1",
+  "chapter": {
+    "number": "I",
+    "title": "PRELIMINARY"
+  },
+  "order": 1,
+  "page_start": 9,
+  "page_end": 9,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Short title.",
+  "text": "This Act may be called the Indian Evidence Act, 1872.\nExtent.––It extends to the whole of India [2][ [3]***] and applies to all judicial proceedings in or before any Court, including Courts-martial, [4][other than Courts-martial convened under the Army Act (44 & 45 Vict., c. 58)][5][the Naval Discipline Act [29 & 30 Vict., 109]; or [6]*** the Indian Navy (Discipline) Act, 1934 (34 of 1934),][7][or the Air Force Act (7 Geo. 5, c. 51)] but not to affidavits[8] presented to any Court or officer, nor to proceedings before an arbitrator;\nCommencement of Act.––And it shall come into force on the first day of September, 1872.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": "1951-04-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 3 of 1951, s. 3 and the Schedule, for “except Part B States” (w.e.f. 1-4-1951).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "omitted",
+      "by_ref_raw": "Act 34 of 2019",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words “except the State of Jammu and Kashmir” omitted by Act 34 of 2019, s. 95 and the Fifth Schedule (w.e.f. 31-10- 2019).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 18 of 1919",
+      "by_doc_id": null,
+      "effective_date": "1919-09-17",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 18 of 1919, s. 2 and the First Schedule (w.e.f. 17-9-1919) .",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 35 of 1934",
+      "by_doc_id": null,
+      "effective_date": "1934-09-08",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 35 of 1934, s. 2 and the Schedule (w.e.f 8-9-1934).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "omitted",
+      "by_ref_raw": "A.O. 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words “that Act as modified by” Omitted by the A.O. 1950.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 10 of 1927",
+      "by_doc_id": null,
+      "effective_date": "1927-04-04",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 10 of 1927, s. 2 and the First Schedule (w.e.f 4-4-1927).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [
+    "As to practice relating to affidavits, See the Code of Civil Procedure, 1908 (Act 5 of 1908), s. 30 (c) and the First Schedule, Order XIX. See also the Code of Criminal Procedure, 1973 (Act 2 of 1974), ss. 295 and 297."
+  ]
+}

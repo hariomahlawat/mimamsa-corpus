@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s19",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "19",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 19,
+  "page_start": 19,
+  "page_end": 19,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Admissions by persons whose position must be proved as against party to suit.",
+  "text": "Statements made by persons whose position or liability, it is necessary to prove as against any party to the suit, are admissions, if such statements would be relevant as against such persons in relation to such position or liability in a suit brought by or against them, and if they are made whilst the person making them occupies such position or is subject to such liability.\nIllustration\nA undertakes to collect rents for B.\nB sues A for not collecting rent due from C to B.\nA denies that rent was due from C to B.\nA statement by C that he owed B rent is an admission, and is a relevant fact as against A, if A denies that C did owe rent to B.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

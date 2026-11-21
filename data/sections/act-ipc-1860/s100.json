@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s100",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "100",
+  "chapter": {
+    "number": "IV",
+    "title": "GENERAL EXCEPTIONS"
+  },
+  "order": 104,
+  "page_start": 28,
+  "page_end": 29,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "When the right of private defence of the body extends to causing death.",
+  "text": "The right of private defence of the body extends, under the restrictions mentioned in the last preceding section, to the voluntary causing of death or of any other harm to the assailant, if the offence which occasions the exercise of the right be of any of the descriptions hereinafter enumerated, namely:—\nFirst.—Such an assault as may reasonably cause the apprehension that death will otherwise be the consequence of such assault;\nSecondly.—Such an assault as may reasonably cause the apprehension that grievous hurt will otherwise be the consequence of such assault;\nThirdly.—An assault with the intention of committing rape;\nFourthly.—An assault with the intention of gratifying unnatural lust;\nFifthly.—An assault with the intention of kidnapping or abducting;\nSixthly.—An assault with the intention of wrongfully confining a person, under circumstances which may reasonably cause him to apprehend that he will be unable to have recourse to the public authorities for his release.\n[1][Seventhly.—An act of throwing or administering acid or an attempt to throw or administer acid which may reasonably cause the apprehension that grievous hurt will otherwise be the consequence of such act.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 13 of 2013",
+      "by_doc_id": null,
+      "effective_date": "2013-02-03",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 13 of 2013, s. 2 (w.e.f. 3-2-2013).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s116",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "116",
+  "chapter": {
+    "number": "VIII",
+    "title": "ESTOPPEL"
+  },
+  "order": 134,
+  "page_start": 50,
+  "page_end": 50,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Estoppel of tenant; and of licensee of person in possession.",
+  "text": "No tenant of immovable property, or person claiming through such tenant, shall, during the continuance of the tenancy, be permitted to deny that the landlord of such tenant had, at the beginning of the tenancy, a title to such immovable property; and no person who came upon any immovable property by the licence of the person in possession there of shall be permitted to deny that such person had a title to such possession at the time when such licence was given.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

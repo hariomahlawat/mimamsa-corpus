@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s376e",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "376E",
+  "chapter": {
+    "number": "XVI",
+    "title": "OF OFFENCES AFFECTING THE HUMAN BODY"
+  },
+  "order": 432,
+  "page_start": 94,
+  "page_end": 94,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Punishment for repeat offenders.",
+  "text": "Whoever has been previously convicted of an offence punishable under section 376 or section 376A or [1][section 376AB or section 376D or section 376DA or section 376DB,] and is subsequently convicted of an offence punishable under any of the said sections shall be punished with imprisonment for life which shall mean imprisonment for the remainder of that person's natural life, or with death.]]\nSTATE AMENDMENT Chhattisgarh\nAfter Section 376E of the Penal Code, the following shall be inserted, namely: —\n376F. Liability of person in-charge of workplace and others to give information about offence. —Whoever, being person in-charge of any work place or any other person present at such place, having knowledge that an offence under section 376 or section 376D, is being committed at such place and being in a position to prevent commission of such offence fails so, to prevent such offence or to give information of the commission of such offence, to any magistrate or police officer, by any mode, with the intention of screening the offender from legal punishment, shall be liable to be punished for abetment of such offence with imprisonment of either description which may extend to three years and fine and no such person shall incur any liability for giving such information.\nExplanation:—Work-place includes any mode of transport owned, hired or otherwise engaged by the person in-charge of the work place for the conveyance of the woman, who was subjected to such offence, to and from her residence to such work-place. [Vide Chhattisgarh Act 25 of 2015, s. 5].\nOf Unnatural Offences",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 22 of 2018",
+      "by_doc_id": null,
+      "effective_date": "2018-04-21",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 22 of 2018, s. 7, for “section 376D” (w.e.f. 21-4-2018).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

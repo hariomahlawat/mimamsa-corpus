@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s226",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "226",
+  "chapter": {
+    "number": "XI",
+    "title": "OF FALSE EVIDENCE AND OFFENCES AGAINST PUBLIC JUSTICE"
+  },
+  "order": 256,
+  "page_start": 60,
+  "page_end": 60,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "[Unlawful return from transportation]",
+  "text": "Rep. by the Code of Criminal Procedure (Amendment) Act, 1955 (26 of 1955), s. 117 and the Sch. (w.e.f. 1-1-1956).",
+  "status": "repealed",
+  "status_note": "Rep. by the Code of Criminal Procedure (Amendment) Act, 1955 (26 of 1955), s. 117 and the Sch. (w.e.f. 1-1-1956).",
+  "amendment_history": [
+    {
+      "action": "repealed",
+      "by_ref_raw": "Code of Criminal Procedure (Amendment) Act, 1955 (26 of 1955)",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Rep. by the Code of Criminal Procedure (Amendment) Act, 1955 (26 of 1955), s. 117 and the Sch. (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "inline"
+    }
+  ],
+  "notes": []
+}

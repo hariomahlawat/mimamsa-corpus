@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s80",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "80",
+  "chapter": {
+    "number": "V",
+    "title": "OF DOCUMENTARY EVIDENCE"
+  },
+  "order": 88,
+  "page_start": 39,
+  "page_end": 39,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Presumption as to documents produced as record of evidence.",
+  "text": "Whenever any document is produced before any Court, purporting to be a record or memorandum of the evidence, or of any part of the evidence, given by a witness in a judicial proceeding or before any officer authorised by law to take such evidence or to be a statement or confession by any prisoner or accused person, taken in accordance with law, and purporting to be signed by any Judge or Magistrate, or by any such officer as aforesaid, the Court shall presume––\nthat the document is genuine; that any statements as to the circumstances under which it was\ntaken, purporting to be made by the person signing it, are true, and that such evidence, statement or\nconfession was duly taken.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

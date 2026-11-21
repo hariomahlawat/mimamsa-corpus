@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s78",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "78",
+  "chapter": {
+    "number": "IV",
+    "title": "GENERAL EXCEPTIONS"
+  },
+  "order": 82,
+  "page_start": 24,
+  "page_end": 24,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Act done pursuant to the judgment or order of Court.",
+  "text": "Nothing which is done in pursuance of, or which is warranted by the judgment or order of, a Court of Justice, if done whilst such judgment or order remains in force, is an offence, notwithstanding the Court may have had no jurisdiction to pass such judgment or order, provided the person doing the act in good faith believes that the Court had such jurisdiction.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

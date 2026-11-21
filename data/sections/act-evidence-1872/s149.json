@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s149",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "149",
+  "chapter": {
+    "number": "X",
+    "title": "OF THE EXAMINATION OF WITNESSES"
+  },
+  "order": 167,
+  "page_start": 56,
+  "page_end": 56,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Question not to be asked without reasonable grounds.",
+  "text": "No such question as is referred to in section 148 ought to be asked, unless the person asking it has reasonable grounds for thinking that the imputation which it conveys is well-founded.\nIllustrations\n(a) A barrister is instructed by an attorney or vakil that an important witness is a dakait. This is a reasonable ground for asking the witness whether he is a dakait.\n(b) A pleader is informed by a person in Court that an important witness is a dakait. The informant, on being questioned by the pleader, gives satisfactory reasons for his statement. This is a reasonable ground for asking the witness whether he is a dakait.\n(c) A witness, of whom nothing whatever is known is asked at random whether he is a dakait. There are here no reasonable ground for the question.\n(d) A witness, of whom nothing whatever is known, being questioned as to his mode of life and means of living, gives unsatisfactory answers. This may be a reasonable ground for asking him if he is a dakait.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

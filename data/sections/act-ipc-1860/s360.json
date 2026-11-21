@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s360",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "360",
+  "chapter": {
+    "number": "XVI",
+    "title": "OF OFFENCES AFFECTING THE HUMAN BODY"
+  },
+  "order": 403,
+  "page_start": 86,
+  "page_end": 86,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Kidnapping from India.",
+  "text": "Whoever conveys any person beyond the limits of [1][India] without the consent of that person, or of some person legally authorised to consent on behalf of that person, is said to kidnap that person from [1][India].",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1948, the A. O. 1950 and Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words “British India” have successively been subs. by the A. O. 1948, the A. O. 1950 and Act 3 of 1951, s. 3 and the Sch., to read as above.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1948, the A. O. 1950 and Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words “British India” have successively been subs. by the A. O. 1948, the A. O. 1950 and Act 3 of 1951, s. 3 and the Sch., to read as above.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

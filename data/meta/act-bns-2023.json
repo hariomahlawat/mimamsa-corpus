@@ -18,7 +18,18 @@
   "pages_without_text": [
     1
   ],
-  "relations": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "act-bns-2023",
+      "type": "repeals",
+      "target_doc_id": "act-ipc-1860",
+      "target_ref_raw": "Act 45 of 2023",
+      "effective_date": null,
+      "evidence": "India Code record title: The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)",
+      "confidence": "extracted"
+    }
+  ],
   "doc_id": "act-bns-2023",
   "doc_type": "act",
   "title": "The Bharatiya Nyaya Sanhita, 2023",

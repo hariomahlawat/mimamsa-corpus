@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s15",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "15",
+  "chapter": {
+    "number": "II",
+    "title": "GENERAL EXPLANATIONS"
+  },
+  "order": 15,
+  "page_start": 15,
+  "page_end": 15,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "[Definition of “British India”]",
+  "text": "Rep. by the A. O. 1937.",
+  "status": "repealed",
+  "status_note": "Rep. by the A. O. 1937.",
+  "amendment_history": [
+    {
+      "action": "repealed",
+      "by_ref_raw": "A. O. 1937",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Rep. by the A. O. 1937.",
+      "confidence": "extracted",
+      "origin": "inline"
+    }
+  ],
+  "notes": []
+}

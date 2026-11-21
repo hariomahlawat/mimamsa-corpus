@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s129",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "129",
+  "chapter": {
+    "number": "IX",
+    "title": "OF WITNESSES"
+  },
+  "order": 147,
+  "page_start": 53,
+  "page_end": 53,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Confidential communications with legal advisers.",
+  "text": "No one shall be compelled to disclose to the Court any confidential communication which has taken place between him and his legal professional adviser, unless he offers himself as a witness, in which case he may be compelled to disclose any such communications as may appear to the Court necessary to be known in order to explain any evidence which he has given, but no others.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

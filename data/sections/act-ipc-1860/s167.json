@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s167",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "167",
+  "chapter": {
+    "number": "IX",
+    "title": "OF OFFENCES BY OR RELATING TO PUBLIC SERVANTS"
+  },
+  "order": 183,
+  "page_start": 44,
+  "page_end": 45,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Public servant framing an incorrect document with intent to cause injury.",
+  "text": "Whoever, being a public servant, and being, as [3][such public servant, charged with the preparation or translation of any document or electronic record, frames, prepares or translates that document or electronic record] in a manner which he knows or believes to be incorrect, intending thereby to cause or knowing it to be likely that he may thereby cause injury to any person, shall be punished with imprisonment of either description for a term which may extend to three years, or with fine, or with both.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 21 of 2000",
+      "by_doc_id": null,
+      "effective_date": "2000-10-17",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 21 of 2000, s. 91 and the First Sch., for certain words (w.e.f. 17-10-2000).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

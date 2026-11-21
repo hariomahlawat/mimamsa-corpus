@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s116",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "116",
+  "chapter": {
+    "number": "V",
+    "title": "OF ABETMENT"
+  },
+  "order": 121,
+  "page_start": 33,
+  "page_end": 33,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Abetment of offence punishable with imprisonment—if offence be not committed.",
+  "text": "Whoever abets an offence punishable with imprisonment shall, if that offence be not committed in consequence of the abetment, and no express provision is made by this Code for the punishment of such abetment, be punished with imprisonment of any description provided for that offence for a term which may extend to one-fourth part of the longest term provided for that offence; or with such fine as is provided for that offence, or with both;\nif abettor or person abetted be a public servant whose duty it is to prevent offence.—and if the abettor or the person abetted is a public servant, whose duty it is to prevent the commission of such offence, the abettor shall be punished with imprisonment of any description provided for that offence, for a term which may extend to one-half of the longest term provided for that offence, or with such fine as is provided for the offence, or with both.\nIllustrations\n(a) A offers a bribe to B, a public servant, as a reward for showing A some favour in the exercise of B’s official functions. B refuses to accept the bribe. A is punishable under this section.\n(b) A instigates B to give false evidence. Here, if B does not give false evidence, A has nevertheless committed the offence defined in this section, and is punishable accordingly.\n(c) A, a police-officer, whose duty it is to prevent robbery, abets the commission of robbery. Here, though the robbery be not committed, A is liable to one-half of the longest term of imprisonment provided for that offence, and also to fine.\n(d) B abets the commission of a robbery by A, a police-officer, whose duty it is to prevent that offence. Here, though the robbery be not committed, B is liable to one-half of the longest term of imprisonment provided for the offence of robbery, and also to fine.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

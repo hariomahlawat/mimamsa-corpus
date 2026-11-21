@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s170",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "170",
+  "chapter": {
+    "number": "IX",
+    "title": "OF OFFENCES BY OR RELATING TO PUBLIC SERVANTS"
+  },
+  "order": 186,
+  "page_start": 45,
+  "page_end": 45,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Personating a public servant.",
+  "text": "Whoever pretends to hold any particular office as a public servant, knowing that he does not hold such office or falsely personates any other person holding such office, and in such assumed character does or attempts to do any act under colour of such office, shall be punished with imprisonment of either description for a term which may extend to two years, or with fine, or with both.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

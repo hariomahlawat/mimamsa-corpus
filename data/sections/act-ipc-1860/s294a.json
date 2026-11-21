@@ -1,0 +1,69 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s294a",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "294A",
+  "chapter": {
+    "number": "XIV",
+    "title": "OF OFFENCES A FFECTING THE PUBLIC HEALTH, SAFETY, CONVENIENCE, DECENCY AND MORALS"
+  },
+  "order": 328,
+  "page_start": 71,
+  "page_end": 71,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Keeping lottery office.",
+  "text": "Whoever keeps any office or place for the purpose of drawing any lottery [5][not being [6][a State lottery] or a lottery authorised by the [7][State] Government], shall be punished with imprisonment of either description for a term which may extend to six months, or with fine, or with both.\nAnd whoever publishes any proposal to pay any sum, or to deliver any goods, or to do or forbear doing anything for the benefit of any person, on any event or contingency relative or applicable to the drawing of any ticket, lot, number or figure in any such lottery, shall be punished with fine which may extend to one thousand rupees.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 27 of 1870",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 27 of 1870, s. 10.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1937",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A. O. 1937, for “not authorized by Government”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 3 of 1951, s. 3 and the Sch., for “a lottery organized by the Central Government or the Government of a Part A State or a Part B State”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A. O. 1950, for “Provincial”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

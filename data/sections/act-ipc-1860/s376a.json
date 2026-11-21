@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s376a",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "376A",
+  "chapter": {
+    "number": "XVI",
+    "title": "OF OFFENCES AFFECTING THE HUMAN BODY"
+  },
+  "order": 425,
+  "page_start": 92,
+  "page_end": 92,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Punishment for causing death or resulting in persistent vegetative state of victim.",
+  "text": "Whoever, commits an offence punishable under sub-section (1) or sub-section (2) of section 376 and in the course of such commission inflicts an injury which causes the death of the woman or causes the woman to be in a persistent vegetative state, shall be punished with rigorous imprisonment for a term which shall not be less than twenty years, but which may extend to imprisonment for life, which shall mean imprisonment for the remainder of that person's natural life, or with death.\nSTATE AMENDMENT Arunachal Pradesh\nInsertion of section 376AA.—After section 376A of the principal act, the following section shall be inserted, namely:-\n“376AA. Punishment for rape on a women up to twelve years of age.—Whoever commits rape on a women up to twelve years of age shall be punished with death, or rigorous imprisonment for a term which shall not be less than fourteen years but which may extend to imprisonment for life which shall mean imprisonment for the remained of that person’s natural life, and shall also be liable to fine.”. [Vide Arunachal Pradesh Act 3 of 2019, s. 8] Insertion of section 376DA.—After section 376D of the principal Act, the following section shall be inserted namely:--\n“376D.Punishment for gang rape on a woman twelve years of age.—Where a woman up to twelve years of age, is raped by one or more persons constituting a group of action in furtherance of a common intention, each of those persons shall be deemed to have committed the offence of rape and shall be punished with death, or rigorous imprisonment for a term which shall not be less than twenty years, but which may extend to imprisonment for life which shall mean imprisonment for the remainder of that person’s natural life, and shall also be liable to fine:\nProvided that such fine shall be just and reasonable to meet the medical expenses and rehabilitation of the victim:\nProvided further that any fine imposed under this section shall be paid to the victim.”. [Vide Arunachal Pradesh Act 3 of 2019, s. 9]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 13 of 2013",
+      "by_doc_id": null,
+      "effective_date": "2013-02-03",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 13 of 2013, s. 9, for sections 375, 376, 376A, 376B, 376C and 376D (w.e.f. 03-02-2013).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s120",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "120",
+  "chapter": {
+    "number": "V",
+    "title": "OF ABETMENT"
+  },
+  "order": 125,
+  "page_start": 34,
+  "page_end": 34,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Concealing design to commit offence punishable with imprisonment.",
+  "text": "Whoever, intending to facilitate or knowing it to be likely that he will thereby facilitate the commission of an offence punishable with imprisonment,\nvoluntarily conceals, by any act or illegal omission, the existence of a design to commit such offence, or makes any representation which he knows to be false respecting such design,\nif offence be committed; if offence be not committed.—shall, if the offence be committed, be punished with imprisonment of the description provided for the offence, for a term which may extend to one-fourth, and, if the offence be not committed, to one-eight of the longest term of such imprisonment, or with such fine as is provided for the offence, or with both.\n[3][CHAPTER VA\nCRIMINAL CONSPIRACY",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 8 of 1913",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 8 of 1913, s. 3.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

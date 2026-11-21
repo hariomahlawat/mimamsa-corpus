@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s18",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "18",
+  "chapter": {
+    "number": "II",
+    "title": "GENERAL EXPLANATIONS"
+  },
+  "order": 18,
+  "page_start": 16,
+  "page_end": 16,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "“India”.",
+  "text": "“India” means the territory of India excluding the State of Jammu and Kashmir.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 3 and the Sch., ibid.",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 3 and the Sch., ibid., for s. 18 which was ins. by the A.O. 1950. The Original s. 18 was rep. by the A.O. 1937.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

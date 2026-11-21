@@ -16,7 +16,18 @@
   "text_quality": "ok",
   "needs_ocr": false,
   "pages_without_text": [],
-  "relations": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "act-bnss-2023",
+      "type": "repeals",
+      "target_doc_id": "act-crpc-1973",
+      "target_ref_raw": "Act 46 of 2023",
+      "effective_date": null,
+      "evidence": "India Code record title: The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)",
+      "confidence": "extracted"
+    }
+  ],
   "doc_id": "act-bnss-2023",
   "doc_type": "act",
   "title": "The Bharatiya Nagarik Suraksha Sanhita, 2023",

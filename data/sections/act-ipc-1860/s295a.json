@@ -1,0 +1,69 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s295a",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "295A",
+  "chapter": {
+    "number": "XV",
+    "title": "OF OFFENCES RELATING TO RELIGION"
+  },
+  "order": 330,
+  "page_start": 72,
+  "page_end": 72,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Deliberate and malicious acts, intended to outrage religious feelings of any class by insulting its religion or religious beliefs.",
+  "text": "Whoever, with deliberate and malicious intention of outraging the religious feelings of any class of [2][citizens of India], [3][by words, either spoken or written, or by signs or by visible representations or otherwise], insults or attempts to insult the religion or the religious beliefs of that class, shall be punished with imprisonment of either description for a term which may extend to [4][three years], or with fine, or with both.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 25 of 1927",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 25 of 1927, s. 2.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A. O. 1950, for “His Majesty’s subjects”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 41 of 1961",
+      "by_doc_id": null,
+      "effective_date": "1961-09-27",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 41 of 1961, s. 3, for certain words (w.e.f. 27-9-1961).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 3, ibid.",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 3, ibid., for “two years”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

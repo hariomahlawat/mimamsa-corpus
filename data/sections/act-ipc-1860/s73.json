@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s73",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "73",
+  "chapter": {
+    "number": "III",
+    "title": "OF PUNISHMENTS"
+  },
+  "order": 77,
+  "page_start": 24,
+  "page_end": 24,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Solitary confinement.",
+  "text": "Whenever any person is convicted of an offence for which under this Code the Court has power to sentence him to rigorous imprisonment, the Court may, by its sentence, order that the offender shall be kept in solitary confinement for any portion or portions of the imprisonment to which he is sentenced, not exceeding three months in the whole, according to the following scale, that is to say—\na time not exceeding one month if the term of imprisonment shall not exceed six months;\na time not exceeding two months if the term of imprisonment shall exceed six months and [1][shall not exceed one] year;\na time not exceeding three months if the term of imprisonment shall exceed one year.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 8 of 1862",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 8 of 1862, s. 5, for “be less than a”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

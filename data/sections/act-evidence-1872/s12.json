@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s12",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "12",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 12,
+  "page_start": 15,
+  "page_end": 15,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "In suits for damages, facts tending to enable Court to determine amount are relevant.",
+  "text": "In suits in which damages are claimed, any fact which will enable the Court to determine the amount of damages which ought to be awarded, is relevant.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

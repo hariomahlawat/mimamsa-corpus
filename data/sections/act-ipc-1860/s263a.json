@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s263a",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "263A",
+  "chapter": {
+    "number": "XII",
+    "title": "OF OFFENCES RELATING TO COIN AND GOVERNMENT STAMPS"
+  },
+  "order": 296,
+  "page_start": 65,
+  "page_end": 66,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Prohibition of fictitious stamps.",
+  "text": "(1) Whoever—\n(a) makes, knowingly utters, deals in or sells any fictitious stamp, or knowingly uses for any\npostal purpose any fictitious stamp, or\n(b) has in his possession, without lawful excuse, any fictitious stamp, or\n(c) makes or, without lawful excuse, has in his possession any die, plate, instrument or materials\nfor making any fictitious stamp, shall be punished with fine which may extend to two hundred rupees.\n(2) Any such stamps, die, plate, instrument or materials in the possession of any person for making any fictitious stamp [2][may be seized and, if seized] shall be forfeited.\n(3) In this section “fictitious stamp” means any stamp falsely purporting to be issued by Government for the purpose of denoting a rate of postage, or any facsimile or imitation or representation, whether on paper or otherwise, of any stamp issued by Government for that purpose.\n(4) In this section and also in sections 255 to 263, both inclusive, the word “Government”, when used in connection with, or in reference to, any stamp issued for the purpose of denoting a rate of postage, shall, notwithstanding anything in section 17, be deemed to include the person or persons authorized by law to administer executive government in any part of India, and also in any part of Her Majesty's dominions or in any foreign country.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 3 of 1895",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Added by Act 3 of 1895, s. 2.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 42 of 1953",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 42 of 1953, s. 4 and the Third Sch., for “may be seized and”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

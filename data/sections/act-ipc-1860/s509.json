@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s509",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "509",
+  "chapter": {
+    "number": "XXII",
+    "title": "OF CRIMINAL INTIMIDATION, INSULT AND ANNOYANCE"
+  },
+  "order": 572,
+  "page_start": 118,
+  "page_end": 118,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Word, gesture or act intended to insult the modesty of a woman.",
+  "text": "Whoever, intending to insult the modesty of any woman, utters any words, makes any sound or gesture, or exhibits any object, intending that such word or sound shall be heard, or that such gesture or object shall be seen, by such woman, or intrudes upon the privacy of such woman, [2][shall be punished with simple imprisonment for a term which may extend to three years, and also with fine].\nSTATE AMENDMENT Chhattisgarh\nAfter Section 509 of the Penal Code, the following shall be inserted, namely: —\n509A. Sexual harassment by relative.—Whoever, being related to a woman through blood, adoption or marriage, and not being her husband, takes the advantage of his proximity and induces, seduces or threatens such woman with intent to insult her modesty by word, gesture or act shall be punished with rigorous imprisonment which shall not be less than one year but which may extend to five years and shall also liable to fine.\n509B. Sexual harassment by electronic mode.—Whoever, by means of telecommunication device or by any other electronic mode including internet, makes creates, solicits or initiates the transmission of any comment, request, suggestion, proposal, image or other communication, which is obscene, lewd, lascivious, filthy or indecent with intent to harass or cause or having knowledge that it would harass or cause annoyance or mental agony to a woman shall be punished with rigorous imprisonment for a term which shall not be less than six months but may extend to two years and shall also be liable to fine. [Vide Chhattisgarh Act 25 of 2015, sec. 6].",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 13 of 2013",
+      "by_doc_id": null,
+      "effective_date": "2013-02-03",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 13 of 2013, s. 10, for “shall be punished with simple imprisonment for a term which may extend to one year, or with fine, or with both” (w.e.f. 3-2-2013).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

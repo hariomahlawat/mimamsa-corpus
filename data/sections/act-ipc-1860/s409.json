@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s409",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "409",
+  "chapter": {
+    "number": "XVII",
+    "title": "OF OFFENCES AGAINST PROPERTY"
+  },
+  "order": 465,
+  "page_start": 101,
+  "page_end": 101,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Criminal breach of trust by public servant, or by banker, merchant or agent.",
+  "text": "Whoever, being in any manner entrusted with property, or with any dominion over property in his capacity of a public servant or in the way of his business as a banker, merchant, factor, broker, attorney or agent, commits criminal breach of trust in respect of that property, shall be punished with [1][imprisonment for life], or with imprisonment of either description for a term which may extend to ten years, and shall also be liable to fine.\nOf the receiving of stolen property",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117 and the Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

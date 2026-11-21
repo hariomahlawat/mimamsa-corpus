@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s159",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "159",
+  "chapter": {
+    "number": "X",
+    "title": "OF THE EXAMINATION OF WITNESSES"
+  },
+  "order": 177,
+  "page_start": 59,
+  "page_end": 59,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Refreshing memory.",
+  "text": "A witness may, while under examination, refresh his memory by referring to any writing made by himself at the time of the transaction concerning which he is questioned, or so soon afterwards that the Court considers it likely that the transaction was at that time fresh in his memory.\nThe witness may also refer to any such writing made by any other person, and read by the witness within the time aforesaid, if when he read it he knew it to be correct.\nWhen witness may use copy of document to refresh memory.––Whenever a witness may refresh his memory by reference to any document, he may, with the permission of the Court, refer to a copy of such document:\nProvided the Court be satisfied that there is sufficient reason for the non-production of the original. An expert may refresh his memory by reference to professional treatises.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

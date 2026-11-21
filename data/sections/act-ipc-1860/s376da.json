@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s376da",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "376DA",
+  "chapter": {
+    "number": "XVI",
+    "title": "OF OFFENCES AFFECTING THE HUMAN BODY"
+  },
+  "order": 430,
+  "page_start": 93,
+  "page_end": 93,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Punishment for gang rape on woman under sixteen years of age.",
+  "text": "Where a woman under sixteen years of age is raped by one or more persons constituting a group or acting in furtherance of a common intention, each of those persons shall be deemed to have committed the offence of rape and shall be punished with imprisonment for life, which shall mean imprisonment for the remainder of that person's natural life, and with fine:\nProvided that such fine shall be just and reasonable to meet the medical expenses and rehabilitation of the victim:\nProvided further that any fine imposed under this section shall be paid to the victim.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 22 of 2018",
+      "by_doc_id": null,
+      "effective_date": "2018-04-21",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 22 of 2018, s. 6 (w.e.f. 21-4-2018).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

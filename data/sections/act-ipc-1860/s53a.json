@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s53a",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "53A",
+  "chapter": {
+    "number": "III",
+    "title": "OF PUNISHMENTS"
+  },
+  "order": 56,
+  "page_start": 21,
+  "page_end": 21,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Construction of reference to transportation.",
+  "text": "(1) Subject to the provisions of sub-section (2) and sub-section (3), any reference to “transportation for life” in any other law for the time being in force or in any instrument or order having effect by virtue of any such law or of any enactment repealed shall be construed as a reference to “imprisonment for life”.\n(2) In every case in which a sentence of transportation for a term has been passed before the commencement of the Code of Criminal Procedure (Amendment) Act, [5][1955] (26 of 1955), the offender shall be dealt with in the same manner as if sentenced to rigorous imprisonment for the same term.\n(3) Any reference to transportation for a term or to transportation for any shorter term (by whatever name called) in any other law for the time being in force shall be deemed to have been omitted.\n(4) Any reference to “transportation” in any other law for the time being in force shall,—\n(a) if the expression means transportation for life, be construed as a reference to imprisonment for\nlife;\n(b) if the expression means transportation for any shorter term, be deemed to have been omitted.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 26 of 1955, s. 117 and the Sch. (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 36 of 1957",
+      "by_doc_id": null,
+      "effective_date": "1957-09-17",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 36 of 1957, s. 3 and the Second Sch., for “1954” (w.e.f. 17-9-1957).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

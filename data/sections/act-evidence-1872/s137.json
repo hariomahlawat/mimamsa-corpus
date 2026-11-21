@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s137",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "137",
+  "chapter": {
+    "number": "X",
+    "title": "OF THE EXAMINATION OF WITNESSES"
+  },
+  "order": 155,
+  "page_start": 54,
+  "page_end": 54,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Examination-in-chief.",
+  "text": "The examination of witness by the party who calls him shall be called his examination-in-chief.\nCross-examination.––The examination of a witness by the adverse party shall be called his cross- examination.\nRe-examination.––The examination of a witness, subsequent to the cross-examination by the party who called him, shall be called his re-examination.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

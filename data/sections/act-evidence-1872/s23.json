@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s23",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "23",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 24,
+  "page_start": 21,
+  "page_end": 21,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Admissions in civil cases when relevant.",
+  "text": "In civil cases no admission is relevant, if it is made either upon an express condition that evidence of it is not to be given, or under circumstances from which the Court can infer that the parties agreed together that evidence of it should not be given.\nExplanation.––Nothing in this section shall be taken to exempt any barrister, pleader, attorney or vakil from giving evidence of any matter of which he may be compelled to give evidence under section 126.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

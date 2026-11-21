@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s363a",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "363A",
+  "chapter": {
+    "number": "XVI",
+    "title": "OF OFFENCES AFFECTING THE HUMAN BODY"
+  },
+  "order": 407,
+  "page_start": 86,
+  "page_end": 87,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Kidnapping or maiming a minor for purposes of begging.",
+  "text": "(1) Whoever kidnaps any minor or, not being the lawful guardian of a minor, obtains the custody of the minor, in order that such 3. Subs. by s. 2, ibid., for “sixteen”. minor may be employed or used for the purposes of begging shall be punishable with imprisonment of either description for a term which may extend to ten years, and shall also be liable to fine.\n(2) Whoever maims any minor in order that such minor may be employed or used for the purposes of begging shall be punishable with imprisonment for life, and shall also be liable to fine.\n(3) Where any person, not being the lawful guardian of a minor, employs or uses such minor for the purposes of begging, it shall be presumed, unless the contrary is proved, that he kidnapped or otherwise obtained the custody of that minor in order that the minor might be employed or used for the purposes of begging.\n(4) In this section,—\n(a) “begging” means—\n(i) soliciting or receiving alms in a public place, whether under the pretence of singing,\ndancing, fortunetelling, performing tricks or selling articles or otherwise;\n(ii) entering on any private premises for the purpose of soliciting or receiving alms;\n(iii) exposing or exhibiting, with the object of obtaining or extorting alms, any sore, wound,\ninjury, deformity or disease, whether of himself or of any other person or of an animal;\n(iv) using a minor as an exhibit for the purpose of soliciting or receiving alms;\n(b) “minor” means—\n(i) in the case of a male, a person under sixteen years of age; and\n(ii) in the case of a female, a person under eighteen years of age.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 52 of 1959",
+      "by_doc_id": null,
+      "effective_date": "1960-01-15",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 52 of 1959, s. 2 (w.e.f. 15-1-1960).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

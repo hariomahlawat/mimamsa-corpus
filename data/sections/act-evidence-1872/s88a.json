@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s88a",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "88A",
+  "chapter": {
+    "number": "V",
+    "title": "OF DOCUMENTARY EVIDENCE"
+  },
+  "order": 101,
+  "page_start": 41,
+  "page_end": 41,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Presumption as to electronic messages.",
+  "text": "The Court may presume that an electronic message, forwarded by the originator through an electronic mail server to the addressee to whom the message purports to be addressed corresponds with the message as fed into his computer for transmission; but the Court shall not make any presumption as to the person by whom such message was sent.\nExplanation.––For the purposes of this section, the expressions “addressee” and “originator” shall have the same meanings respectively assigned to them in clauses (b) and (za) of sub-section (1) of section 2 of the Information Technology Act, 2000 (21 of 2000).]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

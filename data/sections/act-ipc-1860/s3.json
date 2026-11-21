@@ -1,0 +1,69 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s3",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "3",
+  "chapter": {
+    "number": "I",
+    "title": "INTRODUCTION"
+  },
+  "order": 3,
+  "page_start": 14,
+  "page_end": 14,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Punishment of offences committed beyond, but which by law may be tried within, India.",
+  "text": "Any person liable, by any [7][Indian law], to be tried for an offence committed beyond [8][India] shall be dealt with according to the provisions of this Code for any act committed beyond [8][India] in the same manner as if such act had been committed within [5][India].",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "A.O. 1937",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A.O. 1937 for “law passed by the Governor General of India in Council”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "amended",
+      "by_ref_raw": "A.O. 1937, the A.O.1948, the A.O. 1950 and Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The Original words “the limits of the said territories” have successively been amended by the A.O. 1937, the A.O.1948, the A.O. 1950 and Act 3 of 1951, s. 3 and the Sch., to read as above.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "amended",
+      "by_ref_raw": "A.O. 1937, the A.O.1948, the A.O. 1950 and Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The Original words “the limits of the said territories” have successively been amended by the A.O. 1937, the A.O.1948, the A.O. 1950 and Act 3 of 1951, s. 3 and the Sch., to read as above.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "amended",
+      "by_ref_raw": "A.O. 1937, the A.O. 1948, the A.O. 1950 and Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": "1951-04-03",
+      "effective_date_raw": null,
+      "footnote_text": "The original words “the said territories” have successively been amended by the A.O. 1937, the A.O. 1948, the A.O. 1950 and Act 3 of 1951, s. 3 and the Sch., (w.e.f. 3-4-1951) to read as above.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

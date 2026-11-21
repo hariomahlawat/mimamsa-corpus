@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s18",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "18",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 18,
+  "page_start": 19,
+  "page_end": 19,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Admission by party to proceeding or his agent;––Statements made by a party to the proceeding, or by an agent to any such party, whom the Court regards, under the circumstances of the case, as expressly or impliedly authorised by him to make them, are admissions.\nby suitor in representative character;.",
+  "text": "Statements made by parties to suits suing or sued in a representative character, are not admissions, unless they were made while the party making them held that character. Statements made by––\n(1) by party interested in subject-matter;––persons who have any proprietary or pecuniary\ninterest in the subject-matter of the proceeding, and who make the statement in their character of\npersons so interested, or\n(2) by person from whom interest derived;––persons from whom the parties to the suit have\nderived their interest in the subject-matter of the suit,\nare admissions, if they are made during the continuance of the interest of the persons making the\nstatements.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

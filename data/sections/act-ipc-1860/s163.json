@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s163",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "163",
+  "chapter": {
+    "number": "IX",
+    "title": "OF OFFENCES BY OR RELATING TO PUBLIC SERVANTS"
+  },
+  "order": 176,
+  "page_start": 44,
+  "page_end": 44,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "[Taking gratification, for the exercise personal influence with public servant]",
+  "text": "Rep. by s. 31, ibid.",
+  "status": "repealed",
+  "status_note": "Rep. by s. 31, ibid.",
+  "amendment_history": [
+    {
+      "action": "repealed",
+      "by_ref_raw": "s. 31, ibid.",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Rep. by s. 31, ibid.",
+      "confidence": "extracted",
+      "origin": "inline"
+    }
+  ],
+  "notes": []
+}

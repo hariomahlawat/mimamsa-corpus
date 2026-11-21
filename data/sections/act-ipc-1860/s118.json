@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s118",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "118",
+  "chapter": {
+    "number": "V",
+    "title": "OF ABETMENT"
+  },
+  "order": 123,
+  "page_start": 33,
+  "page_end": 34,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Concealing design to commit offence punishable with death or imprisonment for life.",
+  "text": "Whoever intending to facilitate or knowing it to be likely that he will thereby facilitate the commission of an offence punishable with death or [1][imprisonment for life],\n[1][voluntarily conceals by any act or omission or by the use of encryption or any other information hiding tool, the existence of a design] to commit such offence or makes any representation which he knows to be false respecting such design;\nif offence be committed; if offence be not committed.—shall, if that offence be committed, be punished with imprisonment of either description for a term which may extend to seven years, or, if the offence be not committed, with imprisonment of either description, for a term which may extend to three years; and in either case shall also be liable to fine.\nIllustration\nA, knowing that dacoity is about to be committed at B, falsely informs the Magistrate that a dacoity is about to be committed at C, a place in an opposite direction, and thereby misleads the Magistrate with intent to facilitate the commission of the offence. The dacoity is committed at B in pursuance of the design. A is punishable under this section.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117 and the Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 10 of 2009",
+      "by_doc_id": null,
+      "effective_date": "2009-10-27",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 10 of 2009, s. 51, for “voluntarily conceals, by any act or illegal omission, the existence of a design” (w.e.f. 27-10-2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

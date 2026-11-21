@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s25",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "25",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 26,
+  "page_start": 21,
+  "page_end": 21,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Confession to police-officer not to be proved.",
+  "text": "No confession made to a police-officer[3], shall be proved as against a person accused of any offence.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [
+    "As to statements made to police-officer investigating a case, see s. 162, ibid (w.e.f. 1-4-1974)."
+  ]
+}

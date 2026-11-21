@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s83",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "83",
+  "chapter": {
+    "number": "V",
+    "title": "OF DOCUMENTARY EVIDENCE"
+  },
+  "order": 92,
+  "page_start": 39,
+  "page_end": 39,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Presumption as to maps or plans made by authority of Government.",
+  "text": "The Court shall presume that maps or plans purporting to be made by the authority of [4][the Central Government or any State Government] were so made, and are accurate; but maps or plans made for the purposes of any cause must be proved to be accurate.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "amended",
+      "by_ref_raw": "A.O. 1937, the A.O. 1948, Act 40 of 1949 and the A.O. 1950 to read as above",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The original word “Government” has successively been amended by the A.O. 1937, the A.O. 1948, Act 40 of 1949 and the A.O. 1950 to read as above.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

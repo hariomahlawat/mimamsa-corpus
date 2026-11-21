@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s145",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "145",
+  "chapter": {
+    "number": "X",
+    "title": "OF THE EXAMINATION OF WITNESSES"
+  },
+  "order": 163,
+  "page_start": 55,
+  "page_end": 55,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Cross-examination as to previous statements in writing.",
+  "text": "A witness may be cross-examined as to previous statements made by him in writing or reduced into writing, and relevant to matters in question, without such writing being shown to him, or being proved; but, if it is intended to contradict him by the writing, his attention must, before the writing can be proved, be called to those parts of it which are to be used for the purpose of contradicting him.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [
+    "As to the Application of s. 145 to police-diaries, see the Code of Criminal Procedure, 1973 (2 of 1974), s. 172."
+  ]
+}

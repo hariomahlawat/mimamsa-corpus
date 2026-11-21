@@ -11,11 +11,14 @@ They are kept off `main` so normal clones stay small.
 
 The site watermarks PDFs at download, so they differ from the MD5 in its own listing (`listed_md5`).
 
-## Processed records (added by the Phase 2 pipeline, 2026-11-21)
+## Processed records (Phase 2 pipeline, last run 2026-11-21)
 
-- `data/meta/<doc_id>.json`: one metadata record per document (61).
-- `data/sections/<doc_id>/<key>.json`: one record per section (1,707), with text and amendment notes.
-- `data/text/<doc_id>.txt`: extracted text with `[[page N]]` markers (57 documents; 4 scans wait for OCR).
+- `data/meta/<doc_id>.json`: one metadata record per document (64).
+- `data/sections/<doc_id>/<key>.json`: one record per section (2,466), with text and amendment notes.
+  From India Code's section records for current Acts; cut from the PDF for the IPC and the Evidence Act.
+- `data/text/<doc_id>.txt`: text with `[[page N]]` markers (64 documents). Four come from OCR
+  (Hindi BNS, BNSS, BSA and one notification): good for search, not for quoting.
 - `data/relations.jsonl`, `data/manifest.csv`.
 
-All of these can be rebuilt from the raw files with `python -m pipeline all` on `main`.
+Raw files: 84 (the IPC, CrPC and Evidence Act PDFs were added from India Code's "Repeal Acts" collection).
+All processed records can be rebuilt from the raw files with `python -m pipeline all` (and `ocr`) on `main`.

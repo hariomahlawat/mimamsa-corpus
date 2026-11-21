@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s174",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "174",
+  "chapter": {
+    "number": "X",
+    "title": "OF CONTEMPTS OF THE LAWFUL AUTHORITY OF PUBLIC SERVANTS"
+  },
+  "order": 198,
+  "page_start": 47,
+  "page_end": 47,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Non-attendance in obedience to an order from public servant.",
+  "text": "Whoever, being legally bound to attend in person or by an agent at a certain place and time in obedience to a summons, notice, order or proclamation proceeding from any public servant legally competent, as such public servant, to issue the same,\nintentionally omits to attend at that place or time, or departs from the place where he is bound to attend before the time at which it is lawful for him to depart,\nshall be punished with simple imprisonment for a term which may extend to one month, or with fine which may extend to five hundred rupees, or with both;\nor, if the summons, notice, order or proclamation is to attend in person or by agent in a Court of Justice, with simple imprisonment for a term which may extend to six months, or with fine which may extend to one thousand rupees, or with both.\nIllustrations\n(a) A, being legally bound to appear before the [2][High Court] at Calcutta, in obedience to a subpoena issuing from that Court, intentionally omits to appear. A has committed the offence defined in this section.\n(b) A, being legally bound to appear before a [3][District Judge], as a witness, in obedience to a summons issued by that [3][District Judge] intentionally omits to appear. A has committed the offence defined in this section.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A. O. 1950, for “Supreme Court”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "ibid.",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. ibid., for “Zila Judge”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "ibid.",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. ibid., for “Zila Judge”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

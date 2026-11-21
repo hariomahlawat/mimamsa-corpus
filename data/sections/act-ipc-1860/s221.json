@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s221",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "221",
+  "chapter": {
+    "number": "XI",
+    "title": "OF FALSE EVIDENCE AND OFFENCES AGAINST PUBLIC JUSTICE"
+  },
+  "order": 249,
+  "page_start": 58,
+  "page_end": 58,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Intentional omission to apprehend on the part of public servant bound to apprehend.",
+  "text": "Whoever, being a public servant, legally bound as such public servant to apprehend or to keep in confinement any person charged with or liable to be apprehended for an offence, intentionally omits to apprehend such person, or intentionally suffers such person to escape, or intentionally aids such person in escaping or attempting to escape from such confinement, shall be punished as follows, that is to say:—\nwith imprisonment of either description for a term which may extend to seven years, with or without fine, if the person in confinement, or who ought to have been apprehended, was charged with, or liable to be apprehended for, an offence punishable with death; or\nwith imprisonment of either description for a term which may extend to three years, with or without fine, if the person in confinement, or who ought to have been apprehended, was charged with, or liable to be apprehended for, an offence punishable with [1][imprisonment for life] or imprisonment for a term which may extend to ten years; or\nwith imprisonment of either description for a term which may extend to two years, with or without fine, if the person in confinement, or who ought to have been apprehended, was charged with, or liable to be apprehended for, an offence punishable with imprisonment for a term less than ten years.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117 and the Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

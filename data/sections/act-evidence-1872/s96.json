@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s96",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "96",
+  "chapter": {
+    "number": "VI",
+    "title": "OF THE EXCLUSION OF ORAL BY DOCUMENTARY EVIDENCE"
+  },
+  "order": 110,
+  "page_start": 45,
+  "page_end": 45,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Evidence as to application of language which can apply to one only of several persons.",
+  "text": "When the facts are such that the language used might have been meant to apply to any one, and could not have been meant to apply to more than one, of several persons or things, evidence may be given of facts which show which of those persons or things it was intended to apply to.\nIllustrations\n(a) A agrees to sell to B, for Rs. 1,000, “my white horse”. A has two white horses. Evidence may be give of facts which show which of them was meant.\n(b) A agrees to accompany B to Haidarabad. Evidence may be given of facts showing whether Haidarabad in the Dekkhan or Haiderabad in Sind was meant.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s227",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "227",
+  "chapter": {
+    "number": "XI",
+    "title": "OF FALSE EVIDENCE AND OFFENCES AGAINST PUBLIC JUSTICE"
+  },
+  "order": 257,
+  "page_start": 60,
+  "page_end": 60,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Violation of condition of remission of punishment.",
+  "text": "Whoever, having accepted any conditional remission of punishment, knowingly violates any condition on which such remission was granted, shall be punished with the punishment to which he was originally sentenced, if he has already suffered no part of that punishment, and if he has suffered any part of that punishment, then with so much of that punishment as he has not already suffered.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s366b",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "366B",
+  "chapter": {
+    "number": "XVI",
+    "title": "OF OFFENCES AFFECTING THE HUMAN BODY"
+  },
+  "order": 413,
+  "page_start": 88,
+  "page_end": 88,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Importation of girl from foreign country.",
+  "text": "Whoever imports into [3][India] from any country outside India [4][or from the State of Jammu and Kashmir] any girl under the age of twenty-one years with intent that she may be, or knowing it to be likely that she will be, forced or seduced to illicit intercourse with another person, [5]***shall be punishable with imprisonment which may extend to ten years and shall also be liable to fine.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1948, the A. O. 1950 and Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words “British India” have successively been subs. by the A. O. 1948, the A. O. 1950 and Act 3 of 1951, s. 3 and the Sch., to read as above.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": "1951-04-01",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 3 of 1951, s. 3 and the Sch., (w.e.f. 1-4-1951).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "omitted",
+      "by_ref_raw": "s. 3 and the Sch., ibid.",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Certain words omitted by s. 3 and the Sch., ibid.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

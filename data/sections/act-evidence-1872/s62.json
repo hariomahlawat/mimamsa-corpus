@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s62",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "62",
+  "chapter": {
+    "number": "V",
+    "title": "OF DOCUMENTARY EVIDENCE"
+  },
+  "order": 66,
+  "page_start": 32,
+  "page_end": 33,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Primary evidence.",
+  "text": "Primary evidence means the document itself produced for the inspection of the Court.\nExplanation 1.––Where a document is executed in several parts, each part is primary evidence of the document.\nWhere a document is executed in counterpart, each counterpart being executed by one or some of the parties only, each counterpart is primary evidence as against the parties executing it.\nExplanation 2.––Where a number of documents are all made by one uniform process, as in the case\nof printing, lithography or photography, each is primary evidence of the contents of the rest; but, where\nthey are all copies of a common original, they are not primary evidence of the contents of the original. 1. Subs. by Act 21 of 2000, s. 92 and the Second Schedule, for “contents of documents” (w.e.f. 17-10-2000).\nIllustration\nA person is shown to have been in possession of a number of placards, all printed at one time from one original. Any one of the placards is primary evidence of the contents of any other, but no one of them is primary evidence of the contents of the original.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

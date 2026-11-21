@@ -1,0 +1,51 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s14",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "14",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 14,
+  "page_start": 16,
+  "page_end": 18,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Facts showing existence of state of mind, or of body of bodily feeling.",
+  "text": "Facts showing the existence of any state of mind such as intention, knowledge, good faith, negligence, rashness, ill-will or good-will towards any particular person, or showing the existence of any state of body or bodily feeling, are relevant, when the existence of any such state of mind or body or bodily feeling is in issue or relevant.\n[1][Explanation 1.––A fact relevant as showing the existence of a relevant state of mind must show that the state of mind exists, not generally, but in reference to the particular matter in question.\nExplanation 2.––But where, upon the trial of a person accused of an offence, the previous commission by the accused of an offence is relevant within the meaning of this section, the previous conviction of such person shall also be a relevant fact.[2]]\nIllustrations\n(a) A is accused of receiving stolen goods knowing them to be stolen. It is proved that he was in possession of a particular stolen article.\nThe fact that, at the same time, he was in possession of many other stolen articles is relevant, as tending to show that he knew each and all of the articles of which he was in possession to be stolen.\n[3][(b) A is accused of fraudulently delivering to another person a counterfeit coin which, at the time when he delivered it, he knew to be counterfeit.\nThe fact that, at the time of its delivery, A was possessed of a number of other pieces of counterfeit coin is relevant.\nThe fact that A had been previously convicted of delivering to another person as genuine a counterfeit coin knowing it to be counterfeit is relevant.]\n(c) A sues B for damage done by a dog of B’s, which B knew to be ferocious.\nThe fact that the dog had previously bitten X, Y and Z, and that they had made complaints to B, are relevant.\n(d) The question is, whether A, the acceptor of a bill of exchange, knew that the name of the payee was fictitious.\nThe fact that A had accepted other bills drawn in the same manner before they could have been transmitted to him by the payee if the payee had been a real person, is relevant, as showing that A knew that the payee was a fictitious person.\n(e) A is accused of defaming B by publishing an imputation intended to harm the reputation of B.\nThe fact of previous publications by A respecting B, showing ill-will on the part of A towards B is relevant, as proving A’s intention to harm B’s reputation by the particular publication in question.\nThe facts that there was no previous quarrel between A and B, and that A repeated the matter complained of as he heard it, are relevant, as showing that A did not intend to harm the reputation of B.\n(f) A is sued by B for fraudulently representing to B that C was solvent, whereby B, being induced to trust C, who was insolvent, suffered loss.\nThe fact that, at the time when A represented C to be solvent, C was supposed to be solvent by his neighbours and by persons dealing with him, is relevant, as showing that A made the representation in good faith.\n(g) A is sued by B for the price of work done by B, upon a house of which A is owner, by the order of C, a contractor.\nA’s defence is that B’s contract was with C.\nThe fact that A paid C for the work in question is relevant, as proving that A did, in good faith, make over to C the management of the work in question, so that C was in a position to contract with B on C’s own account, and not as agent for A.\n(h) A is accused of the dishonest misappropriation of property which he had found, and the question is whether, when he appropriated it, he believed in good faith that the real owner could not be found.\nThe fact that public notice of the loss of the property had been given in the place where A was, is relevant, as showing that A did not in good faith believe that the real owner of the property could not be found.\nThe fact that A knew, or had reason to believe, that the notice was given fraudulently by C, who had heard of the loss of the property and wished to set up a false claim to it, is relevant, as showing that the fact that A knew of the notice did not disprove A’s good faith.\n(i) A is charged with shooting at B with intent to kill him. In order to show A’s intent the fact of A’s having previously shot at B may be proved.\n(j) A is charged with sending threatening letters to B. Threatening letters previously sent by A to B may be proved, as showing the intention of the letters.\n(k) The question is, whether A has been guilty of cruelty towards B, his wife.\nExpressions of their feeling towards each other shortly before or after the alleged cruelty are relevant facts.\n(l) The question is whether A’s death was caused by poison.\nStatements made by A during his illness as to his symptoms are relevant facts.\n(m) The question is, what was the state of A’s health at the time when an assurance on his life was effected.\nStatements made by A as to the state of his health at or near the time in question are relevant facts.\n(n) A sues B for negligence in providing him with a carriage for hire not reasonably fit for use, whereby A was injured.\nThe fact that B’s attention was drawn on other occasions to the defect of that particular carriage is relevant.\nThe fact that B was habitually negligent about the carriages which he let to hire is irrelevant.\n(o) A is tried for the murder of B by intentionally shooting him dead.\nThe fact that A on other occasions shot at B is relevant as showing his intention to shoot B.\nThe fact that A was in the habit of shooting at people with intent to murder them is irrelevant.\n(p) A is tried for a crime.\nThe fact that he said something indicating an intention to commit that particular crime is relevant.\nThe fact that he said something indicating a general disposition to commit crimes of that class is irrelevant.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 3 of 1891",
+      "by_doc_id": null,
+      "effective_date": "1891-02-13",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 3 of 1891, s. 1(I), for the Explanation (w.e.f. 13-2-1891).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 3 of 1891",
+      "by_doc_id": null,
+      "effective_date": "1891-02-13",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 3 of 1891, s. 1 for Illustration (b) (w.e.f. 13-2-1891).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [
+    "See the Code of Criminal Procedure, 1898 (5 of 1898), s. 311 (w.e.f. 1-7-1898)."
+  ]
+}

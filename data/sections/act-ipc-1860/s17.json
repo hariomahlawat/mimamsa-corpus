@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s17",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "17",
+  "chapter": {
+    "number": "II",
+    "title": "GENERAL EXPLANATIONS"
+  },
+  "order": 17,
+  "page_start": 16,
+  "page_end": 16,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "“Government”.",
+  "text": "The word “Government” denotes the Central Government or the Government of a [2]***State.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "A.O. 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A.O. 1950, for section 17.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "omitted",
+      "by_ref_raw": "Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": "1951-04-01",
+      "effective_date_raw": null,
+      "footnote_text": "The word and letter “Part A” omitted by Act 3 of 1951, s. 3 and the Sch. (w.e.f. 1-4-1951).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

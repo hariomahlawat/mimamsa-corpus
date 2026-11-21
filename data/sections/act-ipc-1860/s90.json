@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s90",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "90",
+  "chapter": {
+    "number": "IV",
+    "title": "GENERAL EXCEPTIONS"
+  },
+  "order": 94,
+  "page_start": 26,
+  "page_end": 26,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Consent known to be given under fear or misconception.",
+  "text": "A consent is not such a consent as is intended by any section of this Code, if the consent is given by a person under fear of injury, or under a misconception of fact, and if the person doing the act knows, or has reason to believe, that the consent was given in consequence of such fear or misconception; or\nConsent of insane person.—if the consent is given by a person who, from unsoundness of mind, or intoxication, is unable to understand the nature and consequence of that to which he gives his consent; or\nConsent of child.—unless the contrary appears from the context, if the consent is given by a person who is under twelve years of age.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

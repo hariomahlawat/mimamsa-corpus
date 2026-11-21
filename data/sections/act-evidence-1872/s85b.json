@@ -1,0 +1,79 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s85b",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "85B",
+  "chapter": {
+    "number": "V",
+    "title": "OF DOCUMENTARY EVIDENCE"
+  },
+  "order": 96,
+  "page_start": 40,
+  "page_end": 40,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Presumption as to electronic records and [6][electronic signatures]",
+  "text": "(1) In any proceedings involving a secure electronic record, the Court shall presume unless contrary is proved, that the secure electronic record has not been altered since the specific point of time to which the secure status relates.\n(2) In any proceedings, involving secure [6][electronic signature], the Court shall presume unless the contrary is proved that—\n(a) the secure [6][electronic signature] is affixed by subscriber with the intention of signing or\napproving the electronic record;\n(b) except in the case of a secure electronic record or a secure [6][electronic signature], nothing in\nthis section shall create any presumption, relating to authenticity and integrity of the electronic record\nor any [6][electronic signature].",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "ibid",
+      "by_doc_id": null,
+      "effective_date": "2009-10-27",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by ibid., s. 52, for “Digital Signature Certificate” (w.e.f. 27.10.2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "ibid",
+      "by_doc_id": null,
+      "effective_date": "2009-10-27",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by ibid., s. 52, for “Digital Signature Certificate” (w.e.f. 27.10.2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "ibid",
+      "by_doc_id": null,
+      "effective_date": "2009-10-27",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by ibid., s. 52, for “Digital Signature Certificate” (w.e.f. 27.10.2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "ibid",
+      "by_doc_id": null,
+      "effective_date": "2009-10-27",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by ibid., s. 52, for “Digital Signature Certificate” (w.e.f. 27.10.2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "ibid",
+      "by_doc_id": null,
+      "effective_date": "2009-10-27",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by ibid., s. 52, for “Digital Signature Certificate” (w.e.f. 27.10.2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

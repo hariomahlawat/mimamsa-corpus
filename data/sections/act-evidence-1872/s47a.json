@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s47a",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "47A",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 50,
+  "page_start": 29,
+  "page_end": 29,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Opinion as to [2][electronic signature], when relevant.",
+  "text": "When the Court has to form an opinion as to the [2][electronic signature of any person, the opinion of the Certifying Authority which has issued the [3][electronic Signature Certificate] is a relevant fact.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s72",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "72",
+  "chapter": {
+    "number": "V",
+    "title": "OF DOCUMENTARY EVIDENCE"
+  },
+  "order": 79,
+  "page_start": 36,
+  "page_end": 36,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Proof of document not required by law to be attested.",
+  "text": "An attested document not required by law to be attested may be proved as if it was unattested. 1. Ins. by Act 21 of 2000, s. 92 and the Second Schedule (w.e.f. 17-10-2000). 2. Subs. by Act 10 of 2009, s. 52, for “digital signature” (w.e.f. 27-10-2009). 3. Ins. by Act 31 of 1926, s. 2 (w.e.f. 9-9-1926).",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

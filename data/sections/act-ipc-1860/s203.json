@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s203",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "203",
+  "chapter": {
+    "number": "XI",
+    "title": "OF FALSE EVIDENCE AND OFFENCES AGAINST PUBLIC JUSTICE"
+  },
+  "order": 229,
+  "page_start": 53,
+  "page_end": 54,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Giving false information respecting an offence committed.",
+  "text": "Whoever, knowing or having reason to believe that an offence has been committed, gives any information respecting that offence which he knows or believes to be false, shall be punished with imprisonment of either description for a term which may extend to two years, or with fine, or with both.\n[1][Explanation.—In sections 201 and 202 and in this section the word “offence” includes any act committed at any place out of [2][India], which, if committed in [2][India], would be punishable under any of the following sections, namely, 302, 304, 382, 392, 393, 394, 395, 396, 397, 398, 399, 402, 435, 436, 449, 450, 457, 458, 459 and 460.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 3 of 1894",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Added by Act 3 of 1894, s. 6.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1948, the A. O. 1950 and Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words “British India” have successively been subs. by the A. O. 1948, the A. O. 1950 and Act 3 of 1951, s. 3 and the Sch., to read as above.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1948, the A. O. 1950 and Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words “British India” have successively been subs. by the A. O. 1948, the A. O. 1950 and Act 3 of 1951, s. 3 and the Sch., to read as above.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

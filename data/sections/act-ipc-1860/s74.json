@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s74",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "74",
+  "chapter": {
+    "number": "III",
+    "title": "OF PUNISHMENTS"
+  },
+  "order": 78,
+  "page_start": 24,
+  "page_end": 24,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Limit of solitary confinement.",
+  "text": "In executing a sentence of solitary confinement, such confinement shall in no case exceed fourteen days at a time, with intervals between the periods of solitary confinement of not less duration than such periods, and when the imprisonment awarded shall exceed three months, the solitary confinement shall not exceed seven days in any one month of the whole imprisonment awarded, with intervals between the periods of solitary confinement of not less duration than such periods.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

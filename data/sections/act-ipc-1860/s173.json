@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s173",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "173",
+  "chapter": {
+    "number": "X",
+    "title": "OF CONTEMPTS OF THE LAWFUL AUTHORITY OF PUBLIC SERVANTS"
+  },
+  "order": 197,
+  "page_start": 47,
+  "page_end": 47,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Preventing service of summons or other proceeding, or preventing publication thereof.",
+  "text": "Whoever in any manner intentionally prevents the serving on himself, or on any other person, of any summons, notice or order proceeding from any public servant legally competent, as such public servant, to issue such summons, notice or order,\nor intentionally prevents the lawful affixing to any place of any such summons, notice or order,\nor intentionally removes any such summons, notice or order from any place to which it is lawfully affixed,\nor intentionally prevents the lawful making of any proclamation, under the authority of any public servant legally competent, as such public servant, to direct such proclamation to be made,\nshall be punished with simple imprisonment for a term which may extend to one month, or with fine which may extend to five hundred rupees, or with both;\nor, if the summons, notice, order or proclamation is to attend in person or by agent, or [1][to produce a document or electronic record in a Court of Justice] with simple imprisonment for a term which may extend to six months, or with fine which may extend to one thousand rupees, or with both.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 21 of 2000",
+      "by_doc_id": null,
+      "effective_date": "2000-10-17",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 21 of 2000, s. 91 and the First Sch., for “to produce a document in a Court of Justice” (w.e.f. 17-10-2000).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

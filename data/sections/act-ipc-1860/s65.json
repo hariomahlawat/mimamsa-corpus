@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s65",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "65",
+  "chapter": {
+    "number": "III",
+    "title": "OF PUNISHMENTS"
+  },
+  "order": 69,
+  "page_start": 22,
+  "page_end": 22,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Limit to imprisonment for non-payment of fine, when imprisonment and fine awardable.",
+  "text": "The term for which the Court directs the offender to be imprisoned in default of payment of a fine shall not exceed one-fourth of the term of imprisonment which is the maximum fixed for the offence, if the offence be punishable with imprisonment as well as fine.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

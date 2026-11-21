@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s156",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "156",
+  "chapter": {
+    "number": "X",
+    "title": "OF THE EXAMINATION OF WITNESSES"
+  },
+  "order": 174,
+  "page_start": 58,
+  "page_end": 58,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Questions tending to corroborate evidence of relevant fact, admissible.",
+  "text": "When a witness whom it is intended to corroborate gives evidence of any relevant fact, he may be questioned as to any other circumstances which he observed at or near to the time or place at which such relevant fact occurred, if the Court is of opinion that such circumstances, if proved, would corroborate the testimony of the witness as to the relevant fact which he testifies.\nIllustration\nA, an accomplice, gives an account of a robbery in which he took part. He describes various incidents unconnected with the robbery which occurred on his way to and from the place where it was committed.\nIndependent evidence of these facts may be given in order to corroborate his evidence as to the robbery itself.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

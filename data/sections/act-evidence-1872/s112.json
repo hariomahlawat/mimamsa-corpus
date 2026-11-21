@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s112",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "112",
+  "chapter": {
+    "number": "VII",
+    "title": "OF THE BURDEN OF PROOF"
+  },
+  "order": 127,
+  "page_start": 48,
+  "page_end": 48,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Birth during marriage, conclusive proof of legitimacy.",
+  "text": "The fact that any person was born during the continuance of a valid marriage between his mother and any man, or within two hundred and eighty days after its dissolution, the mother remaining unmarried, shall be conclusive proof that he is the legitimate son of that man, unless it can be shown that the parties to the marriage had no access to each other at any time when he could have been begotten.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

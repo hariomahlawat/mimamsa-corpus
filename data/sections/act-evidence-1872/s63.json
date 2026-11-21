@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s63",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "63",
+  "chapter": {
+    "number": "V",
+    "title": "OF DOCUMENTARY EVIDENCE"
+  },
+  "order": 67,
+  "page_start": 33,
+  "page_end": 33,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Secondary evidence.",
+  "text": "Secondary evidence means and includes––\n(1) certified copies given under the provisions hereinafter contained[1];\n(2) copies made from the original by mechanical processes which in themselves insure the\naccuracy of the copy, and copies compared with such copies;\n(3) copies made from or compared with the original;\n(4) counterparts of documents as against the parties who did not execute them;\n(5) oral accounts of the contents of a document given by some person who has himself seen it.\nIllustrations\n(a) A photograph of an original is secondary evidence of its contents, though the two have not been compared, if it is proved that the thing photographed was the original.\n(b) A copy compared with a copy of a letter made by a copying machine is secondary evidence of the contents of the letter, if it is shown that the copy made by the copying machine was made from the original.\n(c) A copy transcribed from a copy, but afterwards compared with the original, is secondary evidence; but the copy not so compared is not secondary evidence of the original, although the copy from which it was transcribed was compared with the original.\n(d) Neither an oral account of a copy compared with the original, nor an oral account of a photograph or machine-copy of the original, is secondary evidence of the original.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

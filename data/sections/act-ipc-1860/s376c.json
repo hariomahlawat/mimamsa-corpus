@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s376c",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "376C",
+  "chapter": {
+    "number": "XVI",
+    "title": "OF OFFENCES AFFECTING THE HUMAN BODY"
+  },
+  "order": 428,
+  "page_start": 92,
+  "page_end": 93,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Sexual intercourse by a person in authority.",
+  "text": "Whoever, being—\n(a) in a position of authority or in a fiduciary relationship; or\n(b) a public servant; or\n(c) superintendent or manager of a jail, remand home or other place of custody established by or\nunder any law for the time being in force, or a women's or children's institution; or\n(d) on the management of a hospital or being on the staff of a hospital, abuses such position or fiduciary relationship to induce or seduce any woman either in his custody or under his charge or present in the premises to have sexual intercourse with him, such sexual intercourse not amounting to the offence of rape, shall be punished with rigorous imprisonment of either description for a term which shall not be less than five years, but which may extend to ten years, and shall also be liable to fine.\nExplanation 1.—In this section, “sexual intercourse” shall mean any of the acts mentioned in\nclauses (a) to (d) of section 375.\nExplanation 2.—For the purposes of this section, Explanation 1 to section 375 shall also be\napplicable.\nExplanation 3.—“Superintendent”, in relation to a jail, remand home or other place of custody or\na women's or children’s institution, includes a person holding any other office in such jail, remand\nhome, place or institution by virtue of which such person can exercise any authority or control over\nits inmates.\nExplanation 4.—The expressions “hospital” and “women's or children’s institution” shall\nrespectively have the same meaning as in Explanation to sub-section (2) of section 376.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 13 of 2013",
+      "by_doc_id": null,
+      "effective_date": "2013-02-03",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 13 of 2013, s. 9, for sections 375, 376, 376A, 376B, 376C and 376D (w.e.f. 03-02-2013).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

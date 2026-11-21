@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s466",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "466",
+  "chapter": {
+    "number": "XVIII",
+    "title": "OF OFFENCES RELATING TO DOCUMENTSAND TO[2]*** PROPERTY MARKS"
+  },
+  "order": 522,
+  "page_start": 109,
+  "page_end": 109,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Forgery of record of Court or of public register, etc.",
+  "text": "[3][Whoever forges a document or an electronic record], purporting to be a record or proceeding of or in a Court of Justice, or a register of birth, baptism, marriage or burial, or a register kept by a public servant as such, or a certificate or document purporting to be made by a public servant in his official capacity, or an authority to institute or defend a suit, or to take any proceedings therein, or to confess judgment, or a power of attorney, shall be punished with imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine.\n[1][Explanation.—For the purposes of this section, “register” includes any list, data or record of any entries maintained in the electronic form as defined in clause (r) of sub-section ([1]) of section 2 of the Information Technology Act, 2000 (21 of 2000).]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 21 of 2000",
+      "by_doc_id": null,
+      "effective_date": "2000-10-17",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 21 of 2000, s. 91 and the First Sch., for certain words (w.e.f. 17-10-2000). [4]. Subs. by Act 26 of 1955, s. 117 and the Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 21 of 2000",
+      "by_doc_id": null,
+      "effective_date": "2000-10-17",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 21 of 2000, s. 91 and the First Sch. (w.e.f. 17-10-2000).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 21 of 2000",
+      "by_doc_id": null,
+      "effective_date": "2000-10-17",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 21 of 2000, s. 91 and the First Sch. (w.e.f. 17-10-2000).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

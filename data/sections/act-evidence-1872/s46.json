@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s46",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "46",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 48,
+  "page_start": 28,
+  "page_end": 28,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Facts bearing upon opinions of experts.",
+  "text": "Facts, not otherwise relevant, are relevant if they support or are inconsistent with the opinions of experts, when such opinions are relevant.\nIllustrations\n(a) The question is, whether A was poisoned by a certain poison.\nThe fact that other persons, who were poisoned by that poison, exhibited certain symptoms which experts affirm or deny to be the symptoms of that poison, is relevant.\n(b) The question is, whether an obstruction to a harbour is caused by a certain sea-wall.\nThe fact that other harbours similarly situated in other respects, but where there were no such sea-walls, began to be obstructed at about the same time, is relevant.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

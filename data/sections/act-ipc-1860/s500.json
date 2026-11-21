@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s500",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "500",
+  "chapter": {
+    "number": "XXI",
+    "title": "OF DEFAMATION"
+  },
+  "order": 563,
+  "page_start": 116,
+  "page_end": 116,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Punishment for defamation.",
+  "text": "Whoever defames another shall be punished with simple imprisonment for a term which may extend to two years, or with fine, or with both.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s76",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "76",
+  "chapter": {
+    "number": "IV",
+    "title": "GENERAL EXCEPTIONS"
+  },
+  "order": 80,
+  "page_start": 24,
+  "page_end": 24,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Act done by a person bound, or by mistake of fact believing himself bound, by law.",
+  "text": "Nothing is an offence which is done by a person who is, or who by reason of a mistake of fact and not by reason of a mistake of law in good faith believes himself to be, bound by law to do it.\nIllustrations\n(a) A, a soldier, fires on a mob by the order of his superior officer, in conformity with the commands of the law. A has committed no offence.\n(b) A, an officer of a Court of Justice, being ordered by that Court to arrest Y and, after due enquiry, believing Z to be Y, arrests Z. A has committed no offence.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s26",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "26",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 27,
+  "page_start": 21,
+  "page_end": 21,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Confession by accused while in custody of police not to be proved against him.",
+  "text": "No confession made by any person whilst he is in the custody of a police-officer, unless it be made in the immediate presence of a Magistrate[4], shall be proved as against such person.\n[5][Explanation.––In this section “Magistrate” does not include the head of a village discharging magisterial functions in the Presidency of Fort St. George [6]*** or elsewhere, unless such headman is a Magistrate exercising the powers of a Magistrate under the Code of Criminal Procedure, 1882[7] (10 of 1882).]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 3 of 1891",
+      "by_doc_id": null,
+      "effective_date": "1891-02-13",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 3 of 1891, s. 3 (w.e.f. 13-2-1891).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "omitted",
+      "by_ref_raw": "A.O. 1937",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words “on in Burma” omitted by the A.O. 1937.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [
+    "A coroner has been declared to be a Magistrate for the purposes of this section, see the Coroners Act, 1871 (4 of 1871), s. 20.",
+    "See now the Code of Criminal Procedure, 1973 (2 of 1974) (w.e.f. 1-4-1974)."
+  ]
+}

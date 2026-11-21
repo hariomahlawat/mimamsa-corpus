@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s44",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "44",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 45,
+  "page_start": 27,
+  "page_end": 27,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Fraud or collusion in obtaining judgment, or incompetency of Court, may be proved.",
+  "text": "Any party to a suit or other proceeding may show that any judgment, order or decree which is relevant under section 40, 41 or 42, and which has been proved by the adverse party, was delivered by a Court not competent to deliver it, or was obtained by fraud or collusion.\nOPINIONS OF THIRD PERSONS WHEN RELEVANT",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

@@ -1,0 +1,91 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s139",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "139",
+  "chapter": {
+    "number": "VII",
+    "title": "OF OFFENCES RELATINGTO THE ARMY, [4][NAVY AND AIR FORCE]"
+  },
+  "order": 149,
+  "page_start": 39,
+  "page_end": 39,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Persons subject to certain Acts.",
+  "text": "No person subject to [1][the Army Act, [2][the Army Act, 1950 (46 of 1950)], the Naval Discipline Act, [3][[4]*** [5][the Indian Navy (Discipline) Act, 1934 (34 of 1934)], [6][the Air Force Act or [7][the Air Force Act, 1950 (45 of 1950)]]], is subject to punishment under this Code for any of the offences defined in this Chapter.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 10 of 1927",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 10 of 1927, s. 2 and the First Sch., for “any Articles of War for the Army of Navy of the Queen, or for any part of such Army or Navy”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 3 of 1951, s. 3 and the Sch., for “the Indian Army Act, 1911”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 35 of 1934",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 35 of 1934, s. 2 and the Sch.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "omitted",
+      "by_ref_raw": "A. O. 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words “or that Act as modified by” omitted by the A. O. 1950.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 14 of 1932",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 14 of 1932, s. 130 and Sch., for “or the Air Force Act”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 3 of 1951, s. 3 and the Sch., for “the Indian Air Force Act, 1932”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [
+    "Now see the Navy Act, 1957 (62 of 1957)."
+  ]
+}

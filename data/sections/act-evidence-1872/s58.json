@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s58",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "58",
+  "chapter": {
+    "number": "III",
+    "title": "FACTS WHICH NEED NOT BE PROVED"
+  },
+  "order": 62,
+  "page_start": 32,
+  "page_end": 32,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Facts admitted need not be proved.",
+  "text": "No fact need be proved in any proceeding which the parties thereto or their agents agree to admit at the hearing, or which, before the hearing, they agree to admit by any writing under their hands, or which by any rule of pleading in force at the time they are deemed to have admitted by their pleadings:\nProvided that the Court may, in its discretion, require the facts admitted to be proved otherwise than by such admissions.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

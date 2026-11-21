@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s376b",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "376B",
+  "chapter": {
+    "number": "XVI",
+    "title": "OF OFFENCES AFFECTING THE HUMAN BODY"
+  },
+  "order": 427,
+  "page_start": 92,
+  "page_end": 92,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Sexual intercourse by husband upon his wife during separation.",
+  "text": "Whoever has sexual intercourse with his own wife, who is living separately, whether under a decree of separation or otherwise, without her consent, shall be punished with imprisonment of either description for a term which shall not be less than two years but which may extend to seven years, and shall also be liable to fine.\nExplanation.—In this section, “sexual intercourse” shall mean any of the acts mentioned in clauses (a) to (d) of section 375.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 13 of 2013",
+      "by_doc_id": null,
+      "effective_date": "2013-02-03",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 13 of 2013, s. 9, for sections 375, 376, 376A, 376B, 376C and 376D (w.e.f. 03-02-2013).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

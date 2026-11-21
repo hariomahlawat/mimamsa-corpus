@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s329",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "329",
+  "chapter": {
+    "number": "XVI",
+    "title": "OF OFFENCES AFFECTING THE HUMAN BODY"
+  },
+  "order": 368,
+  "page_start": 79,
+  "page_end": 79,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Voluntarily causing grievous hurt to extort property, or to constrain to an illegal act.",
+  "text": "Whoever voluntarily causes grievous hurt for the purpose of extorting from the sufferer or from any person interested in the sufferer any property or valuable security, or of constraining the sufferer or any person interested in such sufferer to do anything that is illegal or which may facilitate the commission of an offence, shall be punished with [1][imprisonment for life], or imprisonment of either description for a term which may extend to ten years, and shall also be liable to fine.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117 and the Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

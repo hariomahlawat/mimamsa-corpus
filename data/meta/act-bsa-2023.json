@@ -18,7 +18,18 @@
   "pages_without_text": [
     1
   ],
-  "relations": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "act-bsa-2023",
+      "type": "repeals",
+      "target_doc_id": "act-evidence-1872",
+      "target_ref_raw": "Act 47 of 2023",
+      "effective_date": null,
+      "evidence": "India Code record title: The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)",
+      "confidence": "extracted"
+    }
+  ],
   "doc_id": "act-bsa-2023",
   "doc_type": "act",
   "title": "The Bharatiya Sakshya Adhiniyam, 2023",

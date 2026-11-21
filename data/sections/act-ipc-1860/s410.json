@@ -1,0 +1,69 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s410",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "410",
+  "chapter": {
+    "number": "XVII",
+    "title": "OF OFFENCES AGAINST PROPERTY"
+  },
+  "order": 466,
+  "page_start": 101,
+  "page_end": 101,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Stolen property.",
+  "text": "Property, the possession whereof has been transferred by theft, or by extortion, or by robbery, and property which has been criminally misappropriated or in respect of which [2]***[3]***criminal breach of trust has been committed, is designated as “stolen property”, [4][whether the transfer has been made, or the misappropriation or breach of trust has been committed, within or without [5][India]]. But, if such property subsequently comes into the possession of a person legally entitled to the possession thereof, it then ceases to be stolen property.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "repealed",
+      "by_ref_raw": "Act 12 of 1891",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The word “the” rep by Act 12 of 1891, s. 2 and the First Sch.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "repealed",
+      "by_ref_raw": "Act 8 of1882",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words “offence of” rep. by Act 8 of1882, s. 9.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "s. 9, ibid.",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by s. 9, ibid.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1948, the A. O. 1950 and Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": "1951-04-01",
+      "effective_date_raw": null,
+      "footnote_text": "The words “British India” have successively been subs. by the A. O. 1948, the A. O. 1950 and Act 3 of 1951, s. 3 and the Sch., to read as above (w.e.f. 1-4-1951).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

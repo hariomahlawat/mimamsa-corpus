@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s172",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "172",
+  "chapter": {
+    "number": "X",
+    "title": "OF CONTEMPTS OF THE LAWFUL AUTHORITY OF PUBLIC SERVANTS"
+  },
+  "order": 196,
+  "page_start": 46,
+  "page_end": 46,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Absconding to avoid service of summons or other proceeding.",
+  "text": "Whoever absconds in order to avoid being served with a summons, notice or order proceeding from any public servant legally competent, as such public servant, to issue such summons, notice or order, shall be punished with simple imprisonment for a term which may extend to one month, or with fine which may extend to five hundred rupees, or with both;\nor, if the summons or notice or order is to attend in person or by agent, or to [2][produce a document or an electronic record in a Court of Justice], with simple imprisonment for a term which may extend to six months, or with fine which may extend to one thousand rupees, or with both.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 21 of 2000",
+      "by_doc_id": null,
+      "effective_date": "2000-10-17",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 21 of 2000, s. 91 and the First Sch., for “produce a document in a Court of Justice” (w.e.f. 17-10-2000).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

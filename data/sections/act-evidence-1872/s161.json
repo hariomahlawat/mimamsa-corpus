@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s161",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "161",
+  "chapter": {
+    "number": "X",
+    "title": "OF THE EXAMINATION OF WITNESSES"
+  },
+  "order": 179,
+  "page_start": 59,
+  "page_end": 59,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Right of adverse party as to writing used to refresh memory.",
+  "text": "Any writing referred to under the provisions of the two last preceding sections must be produced and shown to the adverse party if he requires it; such party may, if he pleases, cross-examine the witness thereupon.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

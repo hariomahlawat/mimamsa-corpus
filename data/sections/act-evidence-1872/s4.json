@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s4",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "4",
+  "chapter": {
+    "number": "I",
+    "title": "PRELIMINARY"
+  },
+  "order": 4,
+  "page_start": 11,
+  "page_end": 11,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": null,
+  "text": "“May presume.”––Whenever it is provided by this Act that the Court may presume a fact, it may either regard such fact as proved, unless and until it is disproved, or may call for proof of it.\n“Shall presume.”––Whenever it is directed by this Act that the Court shall presume a fact, it shall regard such fact as proved, unless and until it is disproved.\n“Conclusive proof.”––When one fact is declared by this Act to be conclusive proof of another, the Court shall, on proof of the one fact, regard the other as proved, and shall not allow evidence to be given for the purpose of disproving it.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

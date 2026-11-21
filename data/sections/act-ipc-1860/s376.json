@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s376",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "376",
+  "chapter": {
+    "number": "XVI",
+    "title": "OF OFFENCES AFFECTING THE HUMAN BODY"
+  },
+  "order": 424,
+  "page_start": 90,
+  "page_end": 92,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Punishment for rape.",
+  "text": "(1) Whoever, except in the cases provided for in sub-section (2), commits rape, shall be punished with rigorous imprisonment of either description for a term which [3][shall not be less than ten years, but which may extend to imprisonment for life, and shall also be liable to fine].\n(2) Whoever,—\n(a) being a police officer, commits rape—\n(i) within the limits of the police station to which such police officer is appointed; or\n(ii) in the premises of any station house; or\n(iii) on a woman in such police officer's custody or in the custody of a police officer\nsubordinate to such police officer; or\n(b) being a public servant, commits rape on a woman in such public servant's custody or in the\ncustody of a public servant subordinate to such public servant; or\n(c) being a member of the armed forces deployed in an area by the Central or a State Government\ncommits rape in such area; or\n(d) being on the management or on the staff of a jail, remand home or other place of custody\nestablished by or under any law for the time being in force or of a women's or children's institution,\ncommits rape on any inmate of such jail, remand home, place or institution; or\n(e) being on the management or on the staff of a hospital, commits rape on a woman in that\nhospital; or\n(f) being a relative, guardian or teacher of, or a person in a position of trust or authority towards\nthe woman, commits rape on such woman; or\n(g) commits rape during communal or sectarian violence; or\n(h) commits rape on a woman knowing her to be pregnant; or\n[1]* * * * *\n(j) commits rape, on a woman incapable of giving consent; or\n(k) being in a position of control or dominance over a woman, commits rape on such woman; or\n(l) commits rape on a woman suffering from mental or physical disability; or\n(m) while committing rape causes grievous bodily harm or maims or disfigures or endangers the\nlife of a woman; or\n(n) commits rape repeatedly on the same woman, shall be punished with rigorous imprisonment for a term which shall not be less than ten years, but which may extend to imprisonment for life, which shall mean imprisonment for the remainder of that person's natural life, and shall also be liable to fine.\nExplanation.—For the purposes of this sub-section,—\n(a) “armed forces” means the naval, military and air forces and includes any member of the\nArmed Forces constituted under any law for the time being in force, including the paramilitary forces\nand any auxiliary forces that are under the control of the Central Government or the State\nGovernment;\n(b) “hospital” means the precincts of the hospital and includes the precincts of any institution for\nthe reception and treatment of persons during convalescence or of persons requiring medical attention\nor rehabilitation;\n(c) “police officer” shall have the same meaning as assigned to the expression “police” under the\nPolice Act, 1861 (5 of 1861);\n(d) “women's or children's institution” means an institution, whether called an orphanage or a\nhome for neglected women or children or a widow's home or an institution called by any other name,\nwhich is established and maintained for the reception and care of women or children.\n[2][(3) Whoever, commits rape on a woman under sixteen years of age shall be punished with\nrigorous imprisonment for a term which shall not be less than twenty years, but which may extend to\nimprisonment for life, which shall mean imprisonment for the remainder of that person's natural life,\nand shall also be liable to fine:\nProvided that such fine shall be just and reasonable to meet the medical expenses and\nrehabilitation of the victim:\nProvided further that any fine imposed under this sub-section shall be paid to the victim.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 22 of 2018",
+      "by_doc_id": null,
+      "effective_date": "2018-04-21",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 22 of 2018, s. 4, for “shall not be less than seven years, but which may extend to imprisonment for life, and shall also be liable to fine” (w.e.f. 21-4-2018).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "omitted",
+      "by_ref_raw": "Act 22 of 2018 s. 4",
+      "by_doc_id": null,
+      "effective_date": "2018-04-21",
+      "effective_date_raw": null,
+      "footnote_text": "Clause (i) omitted by Act 22 of 2018 s. 4. (w.e.f. 21-4-2018).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "s. 4. ibid.,",
+      "by_doc_id": null,
+      "effective_date": "2018-04-21",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by s. 4. ibid., (w.e.f. 21-4-2018).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

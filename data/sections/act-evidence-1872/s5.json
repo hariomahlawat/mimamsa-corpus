@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s5",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "5",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 5,
+  "page_start": 11,
+  "page_end": 11,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Evidence may be given of facts in issue and relevant facts.",
+  "text": "Evidence may be given in any suit or proceeding of the existence or non-existence of every fact in issue and of such other facts as are hereinafter declared to be relevant, and of no others.\nExplanation.––This section shall not enable any person to give evidence of a fact which he is disentitled to prove by any provision of the law for the time being in force relating to Civil Procedure[5].\nIllustrations\n(a) A is tried for the murder of B by beating him with a club with the intention of causing his death.\nAt A’s trial the following facts are in issue:––\nA’s beating B with the club;\nA’s causing B’s death by such beating;\nA’s intention to cause B’s death.\n(b) A suitor does not bring with him, and have in readiness for production at the first hearing of the\ncase, a bond on which he relies. This section does not enable him to produce the bond or prove its\ncontents at a subsequent stage of the proceedings, otherwise than in accordance with the conditions\nprescribed by the Code of Civil Procedure[5].",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [
+    "See now the Code of Civil Procedure, 1908 (Act 5 of 1908).",
+    "See now the Code of Civil Procedure, 1908 (Act 5 of 1908)."
+  ]
+}

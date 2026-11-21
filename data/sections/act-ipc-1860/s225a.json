@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s225a",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "225A",
+  "chapter": {
+    "number": "XI",
+    "title": "OF FALSE EVIDENCE AND OFFENCES AGAINST PUBLIC JUSTICE"
+  },
+  "order": 254,
+  "page_start": 60,
+  "page_end": 60,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Omission to apprehend, or sufferance of escape, on part of public servant, in cases not otherwise, provided for.",
+  "text": "Whoever, being a public servant legally bound as such public servant to apprehend, or to keep in confinement, any person in any case not provided for in section 221, section 222 or section 223, or in any other law for the time being in force, omits to apprehend that person or suffers him to escape from confinement, shall be punished—\n(a) if he does so intentionally, with imprisonment of either description for a term which may\nextend to three years, or with fine, or with both; and\n(b) if he does so negligently, with simple imprisonment for a term which may extend to two\nyears, or with fine, or with both.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 10 of 1886",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 10 of 1886, s. 24(1), for section 225A which had been ins. by Act 27 of 1870, s. 9.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

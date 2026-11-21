@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s144",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "144",
+  "chapter": {
+    "number": "X",
+    "title": "OF THE EXAMINATION OF WITNESSES"
+  },
+  "order": 162,
+  "page_start": 55,
+  "page_end": 55,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Evidence as to matters in writing.",
+  "text": "Any witness may be asked, whilst under examination, whether any contract, grant or other disposition of property, as to which he is giving evidence, was not contained in a document, and if he says that it was, or if he is about to make any statement as to the contents of any document, which, in the opinion of the Court, ought to be produced, the adverse party may object to such evidence being given until such document is produced, or until facts have been proved which entitle the party who called the witness to give secondary evidence of it.\nExplanation.––A witness may give oral evidence of statements made by other persons about the contents of documents if such statements are in themselves relevant facts.\nIllustration\nThe question is, whether A assaulted B.\nC deposes that he heard A say to D––“B wrote a letter accusing me of theft, and I will be revenged on him.” This statement is relevant, as showing A’s motive for the assault, and evidence may be given of it, though no other evidence is given about the letter.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

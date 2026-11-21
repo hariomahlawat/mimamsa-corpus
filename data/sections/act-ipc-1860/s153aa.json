@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s153aa",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "153AA",
+  "chapter": {
+    "number": "VIII",
+    "title": "OF OFFENCES AGAINST THE PUBLIC TRANQUILLITY"
+  },
+  "order": 165,
+  "page_start": 41,
+  "page_end": 41,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Punishment for knowingly carrying arms in any procession or organising, or holding or taking part in any mass drill or mass training with arms.",
+  "text": "Whoever knowingly carries arms in any procession or organizes or holds or takes part in any mass drill or mass training with arms in any public place in contravention of any public notice or order issued or made under section 144A of the Code of Criminal Procedure, 1973 (2 of 1974) shall be punished with imprisonment for a term which may extend to six months and with fine which may extend to two thousand rupees.\nExplanation.—“Arms” means articles of any description designed or adapted as weapons for offence or defence and includes firearms, sharp edged weapons, lathis, dandas and sticks.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 25 of 2005",
+      "by_doc_id": null,
+      "effective_date": "2005-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 25 of 2005, s. 44 (w.e.f. 23-6-2005).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

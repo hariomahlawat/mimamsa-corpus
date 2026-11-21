@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s304a",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "304A",
+  "chapter": {
+    "number": "XVI",
+    "title": "OF OFFENCES AFFECTING THE HUMAN BODY"
+  },
+  "order": 340,
+  "page_start": 75,
+  "page_end": 75,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Causing death by negligence.",
+  "text": "Whoever causes the death of any person by doing any rash or negligent act not amounting to culpable homicide, shall be punished with imprisonment of either description for a term which may extend to two years, or with fine, or with both.]\nSTATE AMENDMENTS Himachal Pradesh.—\nAfter Section 304 A of the Indian Penal Code, 1860, in its application to the State of Himachal Pradesh, the following section shall be added, namely: —\n“304-AA. Causing death or injury by driving a public service vehicle while in a state of intoxication.—Whoever, while in a state of intoxication, drives or attempts to drive a public service vehicle and causes the death of any person not amounting to culpable homicide, or causes any bodily injury likely to cause death, shall be punished with imprisonment for life, or imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine, as if the act by which death or bodily injury is caused, is done with the knowledge that he is likely by such act to cause death or cause such bodily injury as is likely to cause death.\nExplanation. —“Public service vehicle” means any motor vehicle used or adapted to be used for the carriage of passengers for hire or reward, and includes a maxicab, a motorcab, contract carriage and stage carriage”. [Vide Himachal Pradesh Act 19 of 1997, sec. 2].\nIn Section 304-AA of the Indian Penal Code, 1860, in its application to the State of Himachal Pradesh, —\n(a) for the words “a public service vehicle” where ever these occur, the words “any vehicle” shall\nbe substituted; and\n(b) the Explanation shall be omitted. [Vide Himachal Pradesh Act 7 of 2012, s. 2]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 27 of 1870",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 27 of 1870, s. 12.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

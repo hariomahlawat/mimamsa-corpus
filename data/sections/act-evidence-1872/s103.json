@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s103",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "103",
+  "chapter": {
+    "number": "VII",
+    "title": "OF THE BURDEN OF PROOF"
+  },
+  "order": 117,
+  "page_start": 46,
+  "page_end": 46,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Burden of proof as to particular fact.",
+  "text": "The burden of proof as to any particular fact lies on that person who wishes the Court to believe in its existence, unless it is provided by any law that the proof of that fact shall lie on any particular person.\nIllustrations\n[1][(a)] A prosecutes B for theft, and wishes the Court to believe that B admitted the theft to C. A must prove the admission.\n(b) B wishes the Court to believe that, at the time in question, he was elsewhere. He must prove it.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

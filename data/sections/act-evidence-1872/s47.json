@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s47",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "47",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 49,
+  "page_start": 28,
+  "page_end": 29,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Opinion as to hand-writing, when relevant.",
+  "text": "When the Court has to form an opinion as to the person by whom any document was written or signed, the opinion of any person acquainted with the handwriting of the person by whom it is supposed to be written or signed that it was or was not written or signed by that person, is a relevant fact.\nExplanation.––A person is said to be acquainted with the handwriting of another person when he has seen that person write, or when he has received documents purporting to be written by that person in answer to documents written by himself or under his authority and addressed to that person, or when, in the ordinary course of business, documents purporting to be written by that person have been habitually submitted to him.\nIllustration\nThe question is, whether a given letter is in the hand-writing of A, a merchant in London.\nB is a merchant in Calcutta, who has written letters addressed to A and received letters purporting to be written by him. C, is B’s clerk whose duty it was to examine and file B’s correspondence. D is B’s broker, to whom B habitually submitted the letters purporting to be written by A for the purpose of advising with him thereon.\nThe opinions of B, C and D on the question whether the letter is in the handwriting of A are relevant, though neither B, C nor D ever saw A write.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

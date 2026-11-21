@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s42",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "42",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 43,
+  "page_start": 26,
+  "page_end": 26,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Relevancy and effect of judgments, orders or decrees, other than those mentioned in section 41.",
+  "text": "Judgments, orders or decrees other than those mentioned in section 41 are relevant if they relate to matters of a public nature relevant to the enquiry; but such judgments, orders or decrees are not conclusive proof of that which they state.\nIllustration\nA sues B for trespass on his land. B alleges the existence of a public right of way over the land, which A denies.\nThe existence of a decree in favour of the defendant, in a suit by A against C for a trespass on the same land, in which C alleged the existence of the same right of way, is relevant, but it is not conclusive proof that the right of way exists.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

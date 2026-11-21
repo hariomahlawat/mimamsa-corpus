@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s160",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "160",
+  "chapter": {
+    "number": "X",
+    "title": "OF THE EXAMINATION OF WITNESSES"
+  },
+  "order": 178,
+  "page_start": 59,
+  "page_end": 59,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Testimony to facts stated in document mentioned in section 159.",
+  "text": "A witness may also testify to facts mentioned in any such document as is mentioned in section 159, although he has no specific recollection of the facts themselves, if he is sure that the facts were correctly recorded in the document.\nIllustration\nA book-keeper may testify to facts recorded by him in books regularly kept in the course of business, if he knows that the books were correctly kept, although he has forgotten the particular transactions entered.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

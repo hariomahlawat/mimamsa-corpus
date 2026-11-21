@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s490",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "490",
+  "chapter": {
+    "number": "XIX",
+    "title": "OFTHE CRIMINAL BREACHOF CONTRACTSOF SERVICE"
+  },
+  "order": 552,
+  "page_start": 113,
+  "page_end": 113,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "[Breach of contract of service during voyage or journey]",
+  "text": "Rep. by the Workmen's Breach of Contract (Repealing) Act, 1925 (3 of 1925), s. 2 and Sch.",
+  "status": "repealed",
+  "status_note": "Rep. by the Workmen's Breach of Contract (Repealing) Act, 1925 (3 of 1925), s. 2 and Sch.",
+  "amendment_history": [
+    {
+      "action": "repealed",
+      "by_ref_raw": "Workmen's Breach of Contract (Repealing) Act, 1925 (3 of 1925)",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Rep. by the Workmen's Breach of Contract (Repealing) Act, 1925 (3 of 1925), s. 2 and Sch.",
+      "confidence": "extracted",
+      "origin": "inline"
+    }
+  ],
+  "notes": []
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s85a",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "85A",
+  "chapter": {
+    "number": "V",
+    "title": "OF DOCUMENTARY EVIDENCE"
+  },
+  "order": 95,
+  "page_start": 40,
+  "page_end": 40,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Presumption as to electronic agreements.",
+  "text": "The Court shall presume that every electronic record purporting to be an agreement containing the [5][electronic signature] of the parties was so concluded by affixing the [6][electronic signature] of the parties.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 21 of 2000",
+      "by_doc_id": null,
+      "effective_date": "2000-10-17",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 21 of 2000, s. 92, and the Second Schedule (w.e.f. 17-10-2000).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 10 of 2009",
+      "by_doc_id": null,
+      "effective_date": "2009-10-27",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 10 of 2009, s. 52, for “digital signature” (w.e.f. 27-10-2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "ibid",
+      "by_doc_id": null,
+      "effective_date": "2009-10-27",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by ibid., s. 52, for “Digital Signature Certificate” (w.e.f. 27.10.2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s255",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "255",
+  "chapter": {
+    "number": "XII",
+    "title": "OF OFFENCES RELATING TO COIN AND GOVERNMENT STAMPS"
+  },
+  "order": 287,
+  "page_start": 64,
+  "page_end": 64,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Counterfeiting Government stamp.",
+  "text": "Whoever counterfeits, or knowingly performs any part of the process of counterfeiting, any stamp issued by Government for the purpose of revenue, shall be punished with [1][imprisonment for life] or with imprisonment of either description for a term which may extend to ten years, and shall also be liable to fine.\nExplanation.—A person commits this offence who counterfeits by causing a genuine stamp of one denomination to appear like a genuine stamp of a different denomination.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117 and the Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

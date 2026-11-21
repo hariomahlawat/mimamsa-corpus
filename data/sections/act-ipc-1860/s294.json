@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s294",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "294",
+  "chapter": {
+    "number": "XIV",
+    "title": "OF OFFENCES A FFECTING THE PUBLIC HEALTH, SAFETY, CONVENIENCE, DECENCY AND MORALS"
+  },
+  "order": 327,
+  "page_start": 71,
+  "page_end": 71,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Obscene acts and songs.",
+  "text": "Whoever, to the annoyance of others,\n(a) does any obscene act in any public place, or\n(b) sings, recites or utters any obscene song, ballad or words, in or near any public place, shall be punished with imprisonment of either description for a term which may extend to three months, or with fine, or with both.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 3 of 1895",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 3 of 1895, s. 3, for section 294.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

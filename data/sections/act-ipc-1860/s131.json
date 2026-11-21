@@ -1,0 +1,171 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s131",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "131",
+  "chapter": {
+    "number": "VII",
+    "title": "OF OFFENCES RELATINGTO THE ARMY, [4][NAVY AND AIR FORCE]"
+  },
+  "order": 140,
+  "page_start": 37,
+  "page_end": 38,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Abetting mutiny, or attempting to seduce a soldier, sailor or airman from his duty.",
+  "text": "Whoever abets the committing of mutiny by an officer, soldier, [5][sailor or airman], in the Army, [6][Navy or Air Force] of the [1][Government of India] or attempts to seduce any such officer, soldier,[5][sailor or airman] from his allegiance or his duty, shall be punished with [2][imprisonment for life], or with imprisonment of either description for a term which may extend to ten years, and shall also be liable to fine.\n[7][Explanation.—In this section the words “officer”, [8][“soldier”, [9][“sailor”] and “airman”] include any person subject to the [1][Army Act, [2][the Army Act, 1950 (46 of 1950)], [3][the Naval Discipline Act,[4]***the [5]Indian Navy (Discipline) Act,1934 (34 of 1934)][6][the Air Force Act or [7][the Air Force Act, 1950 (45 of 1950)]], as the case may be].]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 2 and the First Sch., ibid.",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 2 and the First Sch., ibid., for “or sailor”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 2 and the First Sch., ibid.",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 2 and the First Sch., ibid., for “or Navy”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A. O. 1950, for “Queen”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 2 and the First Sch., ibid.",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 2 and the First Sch., ibid., for “or sailor”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117 and the Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 27 of 1870",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 27 of 1870, s. 6.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 10 of 1927",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 10 of 1927, s. 2 and the First Sch., for “and soldier”",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 35 of 1934",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 35 of 1934, s. 2 and Sch.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 10 of 1927",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 10 of 1927, s. 2 and the First Sch., for “Articles of War for the better government of Her Majesty’s Army, or to the Articles of War contained in Act No. 5 of 1869”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 3 of 1951, s. 3 and the Sch., for “the Indian Army Act, 1911”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 35 of 1934",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 35 of 1934, s. 2 and the Sch.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "omitted",
+      "by_ref_raw": "A. O. 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words “or that Act as modified by” omitted by the A. O. 1950.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 14 of 1932",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 14 of 1932, s. 130 and the Sch., for “or the Air Force Act”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 3 of 1951, s. 3 and the Sch., for “the Indian Air Force Act, 1932”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [
+    "Now see the Navy Act, 1957 (62 of 1957)."
+  ]
+}

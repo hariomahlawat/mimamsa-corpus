@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s53a",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "53A",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 57,
+  "page_start": 30,
+  "page_end": 30,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Evidence of character or previous sexual experience not relevant in certain cases.",
+  "text": "In a prosecution for an offence under section 354, section 354A, section 354B, section 354C, section 354D, section 376, [2][section 376A, section 376AB, section 376B, section 376C, section 376D, section 376DA, section 376DB] or section 376E of the Indian Penal Code (45 of 1860) or for attempt to commit any such offence, where the question of consent is in issue, evidence of the character of the victim or of such person’s previous sexual experience with any person shall not be relevant on the issue of such consent or the quality of consent.]\nSTATE AMENDMENT Arunachal Pradesh “Amendment of section 53A.—In section 53A of the Indian Evidence Act, 1872 (hereinafter referred to as the principal Act), for the words, figures and letters “section 354, section 354A, section 354A, section 354C, section 354D, section 376, section 376A section 376B, section 376C, section 354A, or section 376E of the Indian Penal Code” the words, figures and letters “section 354, section 354A, section 354B, section 354C, section 354C, section 376, section 376C, section 376AA, section 376B, section 376C, section 376C, section 376DA or section 376E of the Indian Penal Code” shall be substituted.” [Vide Arunachal Pradesh Act 3 of 2019, s. 24]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 13 of 2013",
+      "by_doc_id": null,
+      "effective_date": "2013-02-03",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 13 of 2013, s. 25 (w.e.f. 3-2-2013).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 22 of 2018",
+      "by_doc_id": null,
+      "effective_date": "2018-04-21",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 22 of 2018, s. 8, for “section 376A, section 376B, section 376C, section 376D” (w.e.f. 21-4-2018).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

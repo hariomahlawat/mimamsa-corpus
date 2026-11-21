@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s55",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "55",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 59,
+  "page_start": 30,
+  "page_end": 30,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Character as affecting damages.",
+  "text": "In civil cases, the fact that the character of any person is such as to affect the amount of damages which he ought to receive, is relevant.\nExplanation.––In sections 52, 53, 54 and 55, the word “character” includes both reputation and disposition; but, [4][except as provided in section 54], evidence may be given only of general reputation and general disposition, and not of particular acts by which reputation or disposition were shown.\nPART II\nON PROOF",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "s. 7, ibid",
+      "by_doc_id": null,
+      "effective_date": "1891-02-13",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by s. 7, ibid (w.e.f. 13-2-1891).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

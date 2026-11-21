@@ -1,0 +1,69 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s214",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "214",
+  "chapter": {
+    "number": "XI",
+    "title": "OF FALSE EVIDENCE AND OFFENCES AGAINST PUBLIC JUSTICE"
+  },
+  "order": 240,
+  "page_start": 56,
+  "page_end": 57,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Offering gift or restoration of property in consideration of screening offender.",
+  "text": "Whoever gives or causes, or offers or agrees to give or cause, any gratification to any person, or [4][restores or causes the restoration of] any property to any person, in consideration of that person's concealing an offence, or of his screening any person from legal punishment for any offence, or of his not proceeding against any person for the purpose of bringing him to legal punishment,\nif a capital offence.—shall, if the offence is punishable with death, be punished with imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine;\nif punishable with imprisonment for life, or with imprisonment.—and if the offence is punishable with [3][imprisonment for life] or with imprisonment which may extend to ten years, shall be punished with imprisonment of either description for a term which may extend to three years, and shall also be liable to fine;\nand if the offence is punishable with imprisonment not extending to ten years, shall be punished with imprisonment of the description provided for the offence for a term which may extend to one-fourth part of the longest term of imprisonment provided for the offence, or with fine, or with both.\n[1][Exception.—The provisions of sections 213 and 214 do not extend to any case in which the offence may lawfully be compounded.]\n[2]* * * * *",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 42 of 1953",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 42 of 1953, s. 4 and the Third Sch., for “to restore or cause the restoration of”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117 and the Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 8 of 1882",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 8 of 1882, s. 6, for the original Exception.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "repealed",
+      "by_ref_raw": "Act 10 of 1882",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Illustrations rep. by Act 10 of 1882, s. 2 and the First Sch.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

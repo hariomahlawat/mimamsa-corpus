@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s354",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "354",
+  "chapter": {
+    "number": "XVI",
+    "title": "OF OFFENCES AFFECTING THE HUMAN BODY"
+  },
+  "order": 393,
+  "page_start": 83,
+  "page_end": 83,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Assault or criminal force to woman with intent to outrage her modesty.",
+  "text": "Whoever assaults or uses criminal force to any woman, intending to outrage or knowing it to be likely that he will there by outrage her modesty, [1][shall be punished with imprisonment of either description for a term which shall not be less than one year but which may extend to five years, and shall also be liable to fine].\nSTATE AMENDMENT Chhattisgarh\nIn Section 354 of the Penal Code, the following proviso shall be inserted, namely: —\nProvided that where offence is committed, under this Section by a relative, guardian or teacher or a person in a position of trust or authority towards the person assaulted, he shall be punishable with imprisonment of either description for a term which shall not be less than two years but which may extend to seven years and shall also be liable to fine.\n[Vide Chhattisgarh Act 25 of 2015, sec. 3]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 13 of 2013",
+      "by_doc_id": null,
+      "effective_date": "2013-02-03",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 13 of 2013, s. 6, for “shall be punished with imprisonment of either description for a term which may extend to two years, or with fine, or with both” (w.e.f. 3-2-2013).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s127",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "127",
+  "chapter": {
+    "number": "IX",
+    "title": "OF WITNESSES"
+  },
+  "order": 145,
+  "page_start": 52,
+  "page_end": 52,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Section 126 to apply to interpreters, etc.",
+  "text": "The provisions of section 126 shall apply to interpreters, and the clerks or servants of barristers, pleaders, attorneys and vakils.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

@@ -1,0 +1,79 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s140",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "140",
+  "chapter": {
+    "number": "VII",
+    "title": "OF OFFENCES RELATINGTO THE ARMY, [4][NAVY AND AIR FORCE]"
+  },
+  "order": 150,
+  "page_start": 39,
+  "page_end": 39,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Wearing garb or carrying token used by soldier, sailor or airman.",
+  "text": "Whoever, not being a soldier, [8][sailor or airman] in the Military, [9][Naval or Air] service of the [10][Government of India], wears any garb or carries any token resembling any garb or token used by such a soldier, [8][sailor or airman] with the intention that it may be believed that he is such a soldier, [8][sailor or airman], shall be punished with imprisonment of either description for a term which may extend to three months, or with fine which may extend to five hundred rupees, or with both.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 10 of 1927",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 10 of 1927, s. 2 and the First Sch., for “or sailor”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 2 and the First Sch., ibid.",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 2 and the First Sch., ibid., for “or Naval”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A. O. 1950, for “Queen”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 10 of 1927",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 10 of 1927, s. 2 and the First Sch., for “or sailor”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 10 of 1927",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 10 of 1927, s. 2 and the First Sch., for “or sailor”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s60",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "60",
+  "chapter": {
+    "number": "IV",
+    "title": "OF ORAL EVIDENCE"
+  },
+  "order": 64,
+  "page_start": 32,
+  "page_end": 32,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Oral evidence must be direct.",
+  "text": "Oral evidence must, in all cases whatever, be direct; that is to say––\nif it refers to a fact which could be seen, it must be the evidence of a witness who says he saw it;\nif it refers to a fact which could be heard, it must be the evidence of a witness who says he heard\nit;\nif it refers to a fact which could be perceived by any other sense or in any other manner, it must\nbe the evidence of a witness who says he perceived it by that sense or in that manner;\nif it refers to an opinion or to the grounds on which that opinion is held, it must be the evidence of\nthe person who holds that opinion on those grounds:\nProvided that the opinions of experts expressed in any treatise commonly offered for sale, and the\ngrounds on which such opinions are held, may be proved by the production of such treatises if the\nauthor is dead or cannot be found, or has become incapable of giving evidence, or cannot be called as\na witness without an amount of delay or expense which the Court regards as unreasonable:\nProvided also that, if oral evidence refers to the existence or condition of any material thing other\nthan a document, the Court may, if it thinks fit, require the production of such material thing for its\ninspection.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

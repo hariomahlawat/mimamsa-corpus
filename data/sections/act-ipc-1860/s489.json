@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s489",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "489",
+  "chapter": {
+    "number": "XVIII",
+    "title": "OF OFFENCES RELATING TO DOCUMENTSAND TO[2]*** PROPERTY MARKS"
+  },
+  "order": 546,
+  "page_start": 112,
+  "page_end": 112,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Tampering with property mark with intent to cause injury.",
+  "text": "Whoever removes, destroys, defaces or adds to any property mark, intending or knowing it to be likely that he may thereby cause injury to any person, shall be punished with imprisonment of either description for a term which may extend to one year, or with fine, or with both.]\n[3][Of currency-notes and bank-notes",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 12 of 1899",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Added by Act 12 of 1899, s. 2.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

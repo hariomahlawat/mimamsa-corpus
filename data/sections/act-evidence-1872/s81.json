@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s81",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "81",
+  "chapter": {
+    "number": "V",
+    "title": "OF DOCUMENTARY EVIDENCE"
+  },
+  "order": 89,
+  "page_start": 39,
+  "page_end": 39,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Presumption as to Gazettes, newspapers, private Acts of Parliament and other documents.",
+  "text": "The Court shall presume the genuineness of every document purporting to be the London Gazette or [1][any Official Gazette, or the Government Gazette] of any colony, dependency or possession of the British Crown, or to be a newspaper or journal, or to be a copy of a private Act of Parliament [2][of the United Kingdom] printed by the Queen’s Printer, and of every document purporting to be a document directed by any law to be kept by any person, if such document is kept substantially in the form required by law and is produced from proper custody.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "A.O. 1937",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs by the A.O. 1937, for “the Gazette of India, or the Government Gazette of any L.G., or”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "A.O. 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by the A.O. 1950.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

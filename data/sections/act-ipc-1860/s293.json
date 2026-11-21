@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s293",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "293",
+  "chapter": {
+    "number": "XIV",
+    "title": "OF OFFENCES A FFECTING THE PUBLIC HEALTH, SAFETY, CONVENIENCE, DECENCY AND MORALS"
+  },
+  "order": 326,
+  "page_start": 71,
+  "page_end": 71,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Sale, etc., of obscene objects to young person.",
+  "text": "Whoever sells, lets to hire, distributes, exhibits or circulates to any person under the age of twenty years any such obscene object as is referred to in the last preceding section, or offers or attempts so to do, shall be punished [2][on first conviction with imprisonment of either description for a term which may extend to three years, and with fine which may extend to two thousand rupees, and, in the event of a second or subsequent conviction, with imprisonment of either description for a term which may extend to seven years, and also with fine which may extend to five thousand rupees].]\nSTATE AMENDMENT Orissa Amendment of section 293.--In section 293 of the said Code—\n(i) for the words “ any such obscene object as is referred to in the last preceding section”, the words, figures\nand letter “ any such obscene object as is referred to in section 292 or any such newspaper, periodical, circular,\npicture or other printed or written document as is referred to in section 292-A” shall be substituted;\n(ii) for the words “ which may extend to six months”, the words “ which may extend to three years” shall\nbe substituted;\n(iii) in the marginal note, after the words “ obscene objects” the words “ and grossly indecent or scurrilous\nmatter or matter intended for blackmail”, shall be inserted. [Vide Orissa Act 13 of 1962, s. 4]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 8 of 1925",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 8 of 1925, s. 2, for section 293.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 36 of 1969",
+      "by_doc_id": null,
+      "effective_date": "1969-09-07",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 36 of 1969, s. 2, for certain words (w.e.f. 7-9-1969).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

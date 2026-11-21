@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s171d",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "171D",
+  "chapter": {
+    "number": "IX",
+    "title": "OF OFFENCES BY OR RELATING TO PUBLIC SERVANTS"
+  },
+  "order": 191,
+  "page_start": 46,
+  "page_end": 46,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Personation at elections.",
+  "text": "Whoever at an election applies for a voting paper on votes in the name of any other person, whether living or dead, or in a fictitious name, or who having voted once at such election applies at the same election for a voting paper in his own name, and whoever abets, procures or attempts to procure the voting by any person in any such way, commits the offence of personation at an election:\n[1][Provided that nothing in this section shall apply to a person who has been authorised to vote as proxy for an elector under any law for the time being in force in so far as he votes as a proxy for such elector.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 24 of 2003",
+      "by_doc_id": null,
+      "effective_date": "2003-09-22",
+      "effective_date_raw": null,
+      "footnote_text": "The proviso ins. by Act 24 of 2003, s. 5 (w.e.f. 22-9-2003).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

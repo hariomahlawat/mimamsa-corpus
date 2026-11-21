@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s24",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "24",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 25,
+  "page_start": 21,
+  "page_end": 21,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Confession caused by inducement, threat or promise, when irrelevant in criminal proceeding.",
+  "text": "A confession made by an accused person is irrelevant in a criminal proceeding, if the making of the confession appears to the Court to have been caused by any inducement, threat or [2]promise having reference to the charge against the accused person, proceeding from a person in authority and sufficient, in the opinion of the Court, to give the accused person grounds which would appear to him reasonable for supposing that by making it he would gain any advantage or avoid any evil of a temporal nature in reference to the proceedings against him.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [
+    "For prohibition of such inducements, etc., see the Code of Criminal Procedure, 1973 (2 of 1974), s. 316 (w.e.f. 1-4-1974)."
+  ]
+}

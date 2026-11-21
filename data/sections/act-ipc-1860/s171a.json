@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s171a",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "171A",
+  "chapter": {
+    "number": "IX",
+    "title": "OF OFFENCES BY OR RELATING TO PUBLIC SERVANTS"
+  },
+  "order": 188,
+  "page_start": 45,
+  "page_end": 45,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "“Candidate”, “Electoral right” defined.",
+  "text": "For the purposes of this Chapter—\n[2][(a) “candidate” means a person who has been nominated as a candidate at any election;]\n(b) “electoral right” means the right of a person to stand, or not to stand as, or to withdraw from\nbeing, a candidate or to vote or refrain from voting at an election.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 40 of 1975",
+      "by_doc_id": null,
+      "effective_date": "1975-08-06",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 40 of 1975, s. 9, for cl. (a) (w.e.f. 6-8-1975).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

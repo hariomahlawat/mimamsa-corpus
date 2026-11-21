@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s20",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "20",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 20,
+  "page_start": 19,
+  "page_end": 19,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Admissions by persons expressly referred to by party to suit.",
+  "text": "Statements made by persons to whom a party to the suit has expressly referred for information in reference to a matter in dispute are admissions.\nIllustration\nThe question is, whether a horse sold by A to B is sound.\nA says to B––“Go and ask C, C knows all about it”. C’s statement is an admission.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

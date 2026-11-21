@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s489e",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "489E",
+  "chapter": {
+    "number": "XVIII",
+    "title": "OF OFFENCES RELATING TO DOCUMENTSAND TO[2]*** PROPERTY MARKS"
+  },
+  "order": 551,
+  "page_start": 113,
+  "page_end": 113,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Making or using documents resembling currency-notes or bank-notes.",
+  "text": "(1) Whoever makes, or causes to be made, or uses for any purpose whatsoever, or delivers to any person, any document purporting to be, or in any way resembling, or so nearly resembling as to be calculated to deceive, any currency-note or bank-note shall be punished with fine which may extend to one hundred rupees.\n(2) If any person, whose name appears on a document the making of which is an offence under sub-section (1), refuses, without lawful excuse, to disclose to a police-officer on being so required the name and address of the person by whom it was printed or otherwise made, he shall be punished with fine which may extend to two hundred rupees.\n(3) Where the name of any person appears on any document in respect of which any person is charged with an offence under sub-section (1) or on any other document used or distributed in connection with that document it may, until the contrary is proved, be presumed that that person caused the document to be made.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 6 of 1943",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 6 of 1943, s. 2.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

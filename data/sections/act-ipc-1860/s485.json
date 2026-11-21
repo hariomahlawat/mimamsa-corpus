@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s485",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "485",
+  "chapter": {
+    "number": "XVIII",
+    "title": "OF OFFENCES RELATING TO DOCUMENTSAND TO[2]*** PROPERTY MARKS"
+  },
+  "order": 542,
+  "page_start": 112,
+  "page_end": 112,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Making or possession of any instrument for counterfeiting a property mark.",
+  "text": "Whoever makes or has in his possession any die, plate or other instrument for the purpose of counterfeiting a property mark, or has in his possession a property mark for the purpose of denoting that any goods belong to a person to whom they do not belong, shall be punished with imprisonment of either description for a term which may extend to three years, or with fine, or with both.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 43 of 1958",
+      "by_doc_id": null,
+      "effective_date": "1959-11-25",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 43 of 1958, s. 135 and the Sch., for s. 485 (w.e.f. 25-11-1959).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

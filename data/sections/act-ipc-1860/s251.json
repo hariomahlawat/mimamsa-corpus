@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s251",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "251",
+  "chapter": {
+    "number": "XII",
+    "title": "OF OFFENCES RELATING TO COIN AND GOVERNMENT STAMPS"
+  },
+  "order": 283,
+  "page_start": 64,
+  "page_end": 64,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Delivery of Indian coin, possessed with knowledge that it is altered.",
+  "text": "Whoever, having coin in his possession with respect to which the offence defined in section 247 or 249 has been committed, and having known at the time when he became possessed of such coin that such offence had been committed with respect to it, fraudulently or with intent that fraud may be committed, delivers such coin to any other person, or attempts to induce any other person to receive the same, shall be punished with imprisonment of either description for a term which may extend to ten years, and shall also be liable to fine.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s2",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "2",
+  "chapter": {
+    "number": "I",
+    "title": "INTRODUCTION"
+  },
+  "order": 2,
+  "page_start": 14,
+  "page_end": 14,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Punishment of offences committed within India.",
+  "text": "Every person shall be liable to punishment under this Code and not otherwise for every act or omission contrary to the provisions thereof, of which he shall be guilty within [5][India][6]***.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "amended",
+      "by_ref_raw": "A.O. 1937, the A.O. 1948, the A.O. 1950 and Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": "1951-04-03",
+      "effective_date_raw": null,
+      "footnote_text": "The original words “the said territories” have successively been amended by the A.O. 1937, the A.O. 1948, the A.O. 1950 and Act 3 of 1951, s. 3 and the Sch., (w.e.f. 3-4-1951) to read as above.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "repealed",
+      "by_ref_raw": "Act 12 of 1891",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words and figures “on or after the said first day of May, 1861” rep. by Act 12 of 1891, s. 2 and the First Sch. (w.e.f. 21-3- 1891).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

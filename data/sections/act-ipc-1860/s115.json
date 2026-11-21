@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s115",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "115",
+  "chapter": {
+    "number": "V",
+    "title": "OF ABETMENT"
+  },
+  "order": 120,
+  "page_start": 33,
+  "page_end": 33,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Abetment of offence punishable with death or imprisonment for life—if offence not committed.",
+  "text": "Whoever abets the commission of an offence punishable with death or [1][imprisonment for life], shall, if that offence be not committed in consequence of the abetment, and no express provision is made by this Code for the punishment of such abetment, be punished with imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine;\nif act causing harm be done in consequence.—and if any act for which the abettor is liable in consequence of the abetment, and which causes hurt to any person, is done, the abettor shall be liable to imprisonment of either description for a term which may extend to fourteen years, and shall also be liable to fine.\nIllustration\nA instigates B to murder Z. The offence is not committed. If B had murdered Z, he would have been subject to the punishment of death or [1][imprisonment for life]. Therefore A is liable to imprisonment for a term which may extend to seven years and also to a fine, and if any hurt be done to Z in consequence of the abetment, he will be liable to imprisonment for a term which may extend to fourteen years, and to fine.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117 and the Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117 and the Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

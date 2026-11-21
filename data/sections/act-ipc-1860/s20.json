@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s20",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "20",
+  "chapter": {
+    "number": "II",
+    "title": "GENERAL EXPLANATIONS"
+  },
+  "order": 20,
+  "page_start": 16,
+  "page_end": 16,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "“Court of Justice”.",
+  "text": "The words “Court of Justice” denote a Judge who is empowered by law to act judicially alone, or a body of Judges which is empowered by law to act judicially as a body, when such Judge or body of Judges is acting judicially.\nIllustration\nA Panchayat acting under [4]Regulation VII, 1816, of the Madras Code, having power to try and determine suits, is a Court of Justice.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "repealed",
+      "by_ref_raw": "Madras Civil Courts Act, 1873 (3 of 1873)",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Rep. by the Madras Civil Courts Act, 1873 (3 of 1873).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

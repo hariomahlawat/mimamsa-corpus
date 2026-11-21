@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s57",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "57",
+  "chapter": {
+    "number": "III",
+    "title": "FACTS WHICH NEED NOT BE PROVED"
+  },
+  "order": 61,
+  "page_start": 30,
+  "page_end": 31,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Facts of which Court must take judicial notice.",
+  "text": "The Court shall take judicial notice of the following facts:––\n[5][(1) All laws in force in the territory of India:]\n(2) All public Acts passed or hereafter to be passed by Parliament [1][of the United Kingdom], and\nall local and personal Acts directed by Parliament [2][of the United Kingdom] to be judicially noticed;\n(3) Articles of War for [2][the Indian] Army [3][Navy or Air Force]\n[4][(4) The course of proceeding of Parliament of the United Kingdom, of the Constituent\nAssembly of India, of Parliament and of the legislatures established under any laws for the time being\nin force in a Province or in the States]\n(5) The accession and the sign manual of the Sovereign for the time being of the United\nKingdom of Great Britain and Ireland;\n(6) All seals of which English Courts take judicial notice: the seals of all the [5][Courts in [6][India]]\nand of all Courts out of 7[India] established by the authority of [7][the Central Government or the\nCrown Representative]; the seals of Courts of Admiralty and Maritime Jurisdiction and of Notaries\nPublic, and all seals which any person is authorised to use by [8][the Constitution or an Act of\nParliament of the United Kingdom or an] Act or Regulation having the force of law in [7][India];\n(7) The accession to office, names, titles, functions, and signatures of the persons filling for the\ntime being any public office in any State, if the fact of their appointment to such office is notified in\n[9][any Official Gazette];\n(8) The existence, title and national flag of every State or Sovereign recognised by [10][the\nGovernment of India];\n(9) The divisions of time, the geographical divisions of the world, and public festivals, fasts and\nholidays notified in the Official Gazette;\n(10) The territories under the dominion of [10][the Government of India];\n(11) The commencement, continuance and termination of hostilities between [10][the Government\nof India] and any other State or body of persons;\n(12) The names of the members and officers of the Court, and of their deputies and subordinate\nofficers and assistants, and also of all officers acting in execution of its process, and of all advocates,\nattorneys, proctors, vakils, pleaders and other persons authorised by law to appear or act before it;\n(13) The rule of the road [11][on land or at sea].\nIn all these cases and also on all matters of public history, literature, science or art, the Court may resort for its aid to appropriate books or documents of reference.\nIf the Court is called upon by any person to take judicial notice of any fact, it may refuse to do so unless and until such person produces any such book or document as it may consider necessary to enable it to do so. 1. Ins. by the A.O. 1950, for “the clause (2)”. 2. Subs. ibid., for “her Majesty’s”. 3. Subs. by Act 10 of 1927, s. 2 and the First Schedule, for “or Navy” (w.e.f. 4-4-1927). 4. Subs. by the A.O. 1950, for the Former para. (4). 5. Subs. by the A.O. 1948, for “Courts of British India”. 6. Subs. by Act 3 of 1951, s. 3 for “the States” (w.e.f. 1-4-1951). 7. Subs. by the A.O. 1937 for “the G.G. or any L.G. in Council”. 8. Subs. by the A.O. 1950, for “any Act of Parliament or other”. 9. Subs. by the A.O. 1937 for “the Gazette of India or in the Official Gazette of any L.G.”. 10. Subs. by the A.O. 1950, for “the British Crown”. 11. Ins. by Act 18 of 1872, s. 5 (w.e.f. 29-8-1872).",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A. O. 1950, for clause (1).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

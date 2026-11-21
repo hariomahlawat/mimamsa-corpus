@@ -1,0 +1,129 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s4",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "4",
+  "chapter": {
+    "number": "I",
+    "title": "INTRODUCTION"
+  },
+  "order": 4,
+  "page_start": 14,
+  "page_end": 15,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Extension of Code to extra-territorial offences.",
+  "text": "The provisions of this Code apply also to any offence committed by—\n[10][(1) any citizen of India in any place without and beyond India;\n(2) any person on any ship or aircraft registered in India wherever it may be.]\n[11][(3) any person in any place without and beyond India committing offence targeting a computer resource located in India.]\n[12][Explanation.—In this section—\n(a) the word “offence” includes every act committed outside India which, if committed in\nIndia, would be punishable under this Code; in—\nPargana Dhalbhum and the Kolhan in the District of Singhbum—see Gazette of India, 1881, Pt. I, p. 504.\nIt has been extended under s. 5 of the same Act to the Lushai Hills—see Gazette of India, 1898, Pt. II, p. 345.\n(b) the expression “computer resource” shall have the meaning assigned to it in clause (k) of\nsub-section (1) of section 2 of the Information Technology Act, 2000 (21 of 2000).]\n[1][Illustration]\n[2]***A, [3][who is [4][a citizen of India]], commits a murder in Uganda. He can be tried and convicted of murder in any place in [5][India] in which he may be found.\n[6]* * * * *",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 4 of 1898",
+      "by_doc_id": null,
+      "effective_date": "1898-02-18",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 4 of 1898, s. 2, for section 4 (w.e.f.18-2-1898).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A.O. 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A.O. 1950, for cls. (1) to (4).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 10 of 2009",
+      "by_doc_id": null,
+      "effective_date": "2009-10-27",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 10 of 2009, s. 51 (w.e.f. 27-10-2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 51, ibid.",
+      "by_doc_id": null,
+      "effective_date": "2009-10-27",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 51, ibid., for the Explanation (w.e.f. 27-10-2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 36 of 1957",
+      "by_doc_id": null,
+      "effective_date": "1957-09-17",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 36 of 1957, s. 3 and Schedule II, for “lllustrations” (w.e.f. 17-9-1957).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "omitted",
+      "by_ref_raw": "s. 3 and the Second Sch., ibid.",
+      "by_doc_id": null,
+      "effective_date": "1951-09-17",
+      "effective_date_raw": null,
+      "footnote_text": "The brackets and letter “(a)” omitted by s. 3 and the Second Sch., ibid. (w.e.f. 17-9-1951).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A.O. 1948",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A.O. 1948, for “a coolie, who is a Native Indian subject”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A.O. 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A.O. 1950, for “a British subject of Indian domicile”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "amended",
+      "by_ref_raw": "A.O. 1948, the A.O. 1950 and Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": "1951-04-01",
+      "effective_date_raw": null,
+      "footnote_text": "The words “British India” have been successively amended by the A.O. 1948, the A.O. 1950 and Act 3 of 1951, s. 3 and the Sch., (w.e.f. 1-4-1951) to read as above.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "omitted",
+      "by_ref_raw": "A.O. 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Illustrations (b), (c) and (d) omitted by the A.O. 1950.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

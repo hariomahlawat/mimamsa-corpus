@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s73",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "73",
+  "chapter": {
+    "number": "V",
+    "title": "OF DOCUMENTARY EVIDENCE"
+  },
+  "order": 80,
+  "page_start": 37,
+  "page_end": 37,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Comparison of signature, writing or seal with others admitted or proved.",
+  "text": "In order to ascertain whether a signature, writing, or seal is that of the person by whom it purports to have been written or made, any signature, writing, or seal admitted or proved to the satisfaction of the Court to have been written or made by that person may be compared with the one which is to be proved, although that signature, writing, or seal has not been produced or proved for any other purpose.\nThe Court may direct any person present in Court to write any words or figures for the purpose of enabling the Court to compare the words or figures so written with any words or figures alleged to have been written by such person.\n[1][This section applies also, with any necessary modifications, to finger-impressions.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 5 of 1899",
+      "by_doc_id": null,
+      "effective_date": "1899-02-10",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 5 of 1899, s. 3 (w.e.f. 10-2-1899).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

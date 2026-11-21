@@ -1,0 +1,69 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s132",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "132",
+  "chapter": {
+    "number": "VII",
+    "title": "OF OFFENCES RELATINGTO THE ARMY, [4][NAVY AND AIR FORCE]"
+  },
+  "order": 141,
+  "page_start": 38,
+  "page_end": 38,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Abetment of mutiny, if mutiny is committed in consequence thereof.",
+  "text": "Whoever abets the committing of mutiny by an officer, soldier, [8][sailor or airman], in the Army, [9][Navy or Air Force] of the [10][Government of India], shall, if mutiny be committed in consequence of that abetment, be punished with death or with [11][imprisonment for life], or imprisonment of either description for a term which may extend to ten years, and shall also be liable to fine.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 10 of 1927",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 10 of 1927, s. 2 and the First Sch., for “or sailor”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 2 and the First Sch., ibid.",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 2 and the First Sch., ibid., for “or Navy”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A. O. 1950, for “Queen”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117 and the Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

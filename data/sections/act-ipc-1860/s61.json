@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s61",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "61",
+  "chapter": {
+    "number": "III",
+    "title": "OF PUNISHMENTS"
+  },
+  "order": 65,
+  "page_start": 22,
+  "page_end": 22,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "[Sentence of forfeiture of property]",
+  "text": "Rep. by the Indian Penal Code (Amendment) Act, 1921 (16 of 1921), s. 4.",
+  "status": "repealed",
+  "status_note": "Rep. by the Indian Penal Code (Amendment) Act, 1921 (16 of 1921), s. 4.",
+  "amendment_history": [
+    {
+      "action": "repealed",
+      "by_ref_raw": "Indian Penal Code (Amendment) Act, 1921 (16 of 1921)",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Rep. by the Indian Penal Code (Amendment) Act, 1921 (16 of 1921), s. 4.",
+      "confidence": "extracted",
+      "origin": "inline"
+    }
+  ],
+  "notes": []
+}

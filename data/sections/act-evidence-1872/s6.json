@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s6",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "6",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 6,
+  "page_start": 11,
+  "page_end": 12,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Relevancy of facts forming part of same transaction.",
+  "text": "Facts which, though not in issue, are so connected with a fact in issue as to form part of the same transaction, are relevant, whether they occurred at the same time and place or at different times and places.\nIllustrations\n(a) A is accused of the murder of B by beating him. Whatever was said or done by A or B or the by-standers\nat the beating, or so shortly before or after it as to form part of the transaction, is a relevant fact.\n(b) A is accused of waging war against the [1][Government of India] by taking part in an armed insurrection in\nwhich property is destroyed, troops are attacked and goals are broken open. The occurrence of these facts is\nrelevant, as forming part of the general transaction, though A may not have been present at all of them.\n(c) A sues B for a libel contained in a letter forming part of a correspondence. Letters between the parties\nrelating to the subject out of which the libel arose, and forming part of the correspondence in which it is\ncontained, are relevant facts, though they do not contain the libel itself.\n(d) The question is, whether certain goods ordered from B were delivered to A. The goods were delivered to\nseveral intermediate persons successively. Each delivery is a relevant fact.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

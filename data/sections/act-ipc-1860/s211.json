@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s211",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "211",
+  "chapter": {
+    "number": "XI",
+    "title": "OF FALSE EVIDENCE AND OFFENCES AGAINST PUBLIC JUSTICE"
+  },
+  "order": 237,
+  "page_start": 55,
+  "page_end": 55,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "False charge of offence made with intent to injure.",
+  "text": "Whoever, with intent to cause injury to any person, institutes or causes to be instituted any criminal proceeding against that person, or falsely charges any person with having committed an offence, knowing that there is no just or lawful ground for such proceeding or charge against that person, shall be punished with imprisonment of either description for a term which may extend to two years, or with fine, or with both;\nand if such criminal proceeding be instituted on a false charge of an offence punishable with death,[1][imprisonment for life], or imprisonment for seven years or upwards, shall be punishable with imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine.\nSTATE AMENDMENTS Chhattisgarh.—\nIn Section 211 of the Indian Penal Code, 1860 (here-in-after referred to as the Penal Code), the following proviso shall be inserted, namely: —\nProvided that, if such criminal proceeding be instituted on a false charge, of an offence punishable under section 354, section 354A, section 354B, section 354C, section 354D, section 354E, section 376B, section 376C, section 376F, section 509, section 509A or section 509B shall be punishable with imprisonment of either description which shall not be less than three years but which may extend to five years and shall also be liable to fine. [Vide Chhattisgarh Act 25 of 2015, sec. 2].",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117 and the Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

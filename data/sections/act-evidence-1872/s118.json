@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s118",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "118",
+  "chapter": {
+    "number": "IX",
+    "title": "OF WITNESSES"
+  },
+  "order": 136,
+  "page_start": 51,
+  "page_end": 51,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Who may testify.",
+  "text": "All persons shall be competent to testify unless the Court considers that they are prevented from understanding the questions put to them, or from giving rational answers to those questions, by tender years, extreme old age, disease, whether of body or mind, or any other cause of the same kind.\nExplanation.––A lunatic is not incompetent to testify, unless he is prevented by his lunacy from understanding the questions put to him and giving rational answers to them.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s90a",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "90A",
+  "chapter": {
+    "number": "V",
+    "title": "OF DOCUMENTARY EVIDENCE"
+  },
+  "order": 104,
+  "page_start": 42,
+  "page_end": 42,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Presumption as to electronic records five years old.",
+  "text": "Where any electronic record, purporting or proved to be five years old, is produced from any custody which the Court in the particular case considers proper, the Court may presume that the [2][electronic signature] which purports to be the [2][electronic signature] of any particular person was so affixed by him or any person authorised by him in this behalf.\nExplanation.––Electronic records are said to be in proper custody if they are in the place in which, and under the care of the person with whom, they naturally be; but no custody is improper if it is proved to have had a legitimate origin, or the circumstances of the particular case are such as to render such an origin probable.\nThis Explanation applies also to section 81A.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 21 of 2000",
+      "by_doc_id": null,
+      "effective_date": "2000-10-17",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 21 of 2000, s. 92 and the Second Schedule (w.e.f. 17-10-2000).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 10 of 2009",
+      "by_doc_id": null,
+      "effective_date": "2009-10-27",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 10 of 2009, s. 52, for “Digital Signature” (w.e.f. 27-10-2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 10 of 2009",
+      "by_doc_id": null,
+      "effective_date": "2009-10-27",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 10 of 2009, s. 52, for “Digital Signature” (w.e.f. 27-10-2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

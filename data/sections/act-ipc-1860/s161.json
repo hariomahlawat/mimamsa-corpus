@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s161",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "161",
+  "chapter": {
+    "number": "IX",
+    "title": "OF OFFENCES BY OR RELATING TO PUBLIC SERVANTS"
+  },
+  "order": 174,
+  "page_start": 43,
+  "page_end": 43,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "[Public servant taking gratification other than legal remuneration in respect of an official act]",
+  "text": "Rep. by the Prevention of Corruption Act, 1988 (49 of 1988), s. 31.\nSTATE AMENDMENT\nKerala.—\nAmendment of section 161, Central Act 45 of 1860.—In section 161 of the Indian Penal Code\n(Central Act 45 of 1860), after the explanation relating to “A motive or reward for doing”, the\nfollowing explanation shall be inserted, namely:—\n“‘Public Servant’.— For purposes of this section and sections 162, 163, 164, 165 and 165A, the\nwords ‘public servant’ shall denote, besides those who are public servants under section 21 or who\nare deemed to be ‘public servants’ within the meaning of that section under any law for the time\nbeing in force, persons falling under any of the descriptions hereinafter following, namely:—\n(i) Every officer in the service or pay of the Travancore Devaswom Board or the Cochin\nDevaswom Board or the Cochin Devaswom Board;\n(ii) Every officer in the service or pay and every member of the Wakfs Board constituted\nunder the Wakfs Act, 1954 (Central Act 29 of 1954);\n(iii) The President and every member of a Village Court or Village Panchayat Court;\n(iv) Every member of the Board of Directors or of the executive or managing committee and\nevery officer or servant of a co-operative society registered or deemed to be registered under the\nlaw relating to co-operative societies for the time being in force.\n(v) Every member of the governing body and every officer or servant in the service or pay of\na society registered under the Travancore-Cochin Literary, Scientific and Charitable Societies\nRegistration Act, 1955 or the Societies Registration Act, 1860, and receiving aid or grant from the\nGovernment;\n(vi) Every teacher or other officer or servant of the University of Kerala;\n(vii) Every examiner of a University Examination or a Government Examination;\n(viii) Every Manager, or teacher or servant of an educational institution which receives or has\nreceived aid or grant from the Government or the University of kerala.”.\n[Vide Kerala Act 27 of 1962, sec. 2].",
+  "status": "repealed",
+  "status_note": "Rep. by the Prevention of Corruption Act, 1988 (49 of 1988), s. 31. STATE AMENDMENT Kerala.— Amendment of section 161, Central Act 45 of 1860.—In section 161 of the Indian Penal Code (Central Act 45 of 1860), after the explanation relating to “A motive or reward for doing”, the following explanation",
+  "amendment_history": [
+    {
+      "action": "repealed",
+      "by_ref_raw": "Prevention of Corruption Act, 1988 (49 of 1988)",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Rep. by the Prevention of Corruption Act, 1988 (49 of 1988), s. 31. STATE AMENDMENT Kerala.— Amendment of section 161, Central Act 45 of 1860.—In section 161 of the Indian Penal Code (Central Act 45 of 1860), after the explanation relating to “A motive or reward for doing”, the following explanation shall be inserted, namely:— “‘Public Servant’.— For purposes of this section and sections 162, 163, 164, 165 and 165A, the words ‘public servant’ shall denote, besides those who are public servants under section 21 or who are deemed to be ‘public servants’ within the meaning of that section under any law for the time being in force, persons falling under any of the descriptions hereinafter following, namely:— (i) Every officer in the service or pay of the Travancore Devaswom Board or the Cochin Devaswom Board or the Cochin Devaswom Board; (ii) Every officer in the service or pay and every member of the Wakfs Board constituted under the Wakfs Act, 1954 (Central Act 29 of 1954); (iii) The Pre",
+      "confidence": "extracted",
+      "origin": "inline"
+    }
+  ],
+  "notes": []
+}

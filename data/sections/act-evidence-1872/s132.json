@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s132",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "132",
+  "chapter": {
+    "number": "IX",
+    "title": "OF WITNESSES"
+  },
+  "order": 150,
+  "page_start": 53,
+  "page_end": 53,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Witness not excused from answering on ground that answer will criminate.",
+  "text": "A witness shall not be excused from answering any question as to any matter relevant to the matter in issue in any suit or in any civil or criminal proceeding, upon the ground that the answer to such question will criminate, or may tend directly or indirectly to criminate, such witness, or that it will expose, or tend directly or indirectly to expose, such witness to a penalty or forfeiture of any kind:\nProviso.––Provided that no such answer, which a witness shall be compelled to give, shall subject him to any arrest or prosecution, or be proved against him in any criminal proceeding, except a prosecution for giving false evidence by such answer.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s149",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "149",
+  "chapter": {
+    "number": "VIII",
+    "title": "OF OFFENCES AGAINST THE PUBLIC TRANQUILLITY"
+  },
+  "order": 159,
+  "page_start": 40,
+  "page_end": 40,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Every member of unlawful assembly guilty of offence committed in prosecution of common object.",
+  "text": "If an offence is committed by any member of an unlawful assembly in prosecution of the common object of that assembly, or such as the members of that assembly knew to be likely to be committed in prosecution of that object, every person who, at the time of the committing of that offence, is a member of the same assembly, is guilty of that offence.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

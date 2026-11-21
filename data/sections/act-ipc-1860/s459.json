@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s459",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "459",
+  "chapter": {
+    "number": "XVII",
+    "title": "OF OFFENCES AGAINST PROPERTY"
+  },
+  "order": 515,
+  "page_start": 108,
+  "page_end": 108,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Grievous hurt caused whilst committing lurking house-trespass or house-breaking.",
+  "text": "Whoever, whilst committing lurking house-trespass or house-breaking, causes grievous hurt to any person or attempts to cause death or grievous hurt to any person, shall be punished with [1][imprisonment for life], or imprisonment of either description for a term which may extend to ten years, and shall also be liable to fine.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117 and the Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

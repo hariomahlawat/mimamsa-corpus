@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s195",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "195",
+  "chapter": {
+    "number": "XI",
+    "title": "OF FALSE EVIDENCE AND OFFENCES AGAINST PUBLIC JUSTICE"
+  },
+  "order": 220,
+  "page_start": 52,
+  "page_end": 52,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Giving or fabricating false evidence with intent to procure conviction of offence punishable with imprisonment for life or imprisonment.",
+  "text": "Whoever gives or fabricates false evidence intending thereby to cause, or knowing it to be likely that he will thereby cause, any person to be convicted of an offence which [2][by the law for the time being in force in [3][India]] is not capital, but punishable with [4][imprisonment for life], or imprisonment for a term of seven years or upwards, shall be punished as a person convicted of that offence would be liable to be punished.\nIllustration\nA gives false evidence before a Court of Justice, intending thereby to cause Z to be convicted of a dacoity. The punishment of dacoity is [4][imprisonment for life], or rigorous imprisonment for a term which may extend to ten years, with or without fine. A, therefore, is liable to [5][imprisonment for life] or imprisonment, with or without fine.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "A.O. 1948",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A.O. 1948, for “by the law of British India or England”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 3 of 1951, s. 3 and the Sch., for “the States”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 117 and the Schedule, ibid.",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 117 and the Schedule, ibid., for “such transportation” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

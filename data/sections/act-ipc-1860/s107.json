@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s107",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "107",
+  "chapter": {
+    "number": "V",
+    "title": "OF ABETMENT"
+  },
+  "order": 111,
+  "page_start": 30,
+  "page_end": 30,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Abetment of a thing.",
+  "text": "A person abets the doing of a thing, who—\nFirst.—Instigates any person to do that thing; or\nSecondly.—Engages with one or more other person or persons in any conspiracy for the doing of that thing, if an act or illegal omission takes place in pursuance of that conspiracy, and in order to the doing of that thing; or\nThirdly.—Intentionally aids, by any act or illegal omission, the doing of that thing.\nExplanation 1.—A person who, by wilful misrepresentation, or by wilful concealment of a material fact which he is bound to disclose, voluntarily causes or procures, or attempts to cause or procure, a thing to be done, is said to instigate the doing of that thing.\nIllustration\nA, a public officer, is authorised by a warrant from a Court of Justice to apprehend Z. B, knowing that fact and also that C is not Z, wilfully represents to A that C is Z, and thereby intentionally causes A to apprehend C. Here B abets by instigation the apprehension of C.\nExplanation 2.—Whoever, either prior to or at the time of the commission of an act, does anything in order to facilitate the commission of that act, and thereby facilitates the commission thereof, is said to aid the doing of that act.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s489a",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "489A",
+  "chapter": {
+    "number": "XVIII",
+    "title": "OF OFFENCES RELATING TO DOCUMENTSAND TO[2]*** PROPERTY MARKS"
+  },
+  "order": 547,
+  "page_start": 112,
+  "page_end": 112,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Counterfeiting currency-notes or bank-notes.",
+  "text": "Whoever counterfeits, or knowingly performs any part of the process of counterfeiting, any currency-note or bank-note, shall be punished with [4][imprisonment for life], or with imprisonment of either description for a term which may extend to ten years, and shall also be liable to fine.\nExplanation.—For the purposes of this section and of sections 489B, [5][489C, 489D and 489E], the expression “bank-note” means a promissory note or engagement for the payment of money to bearer on demand issued by any person carrying on the business of banking in any part of the world, or issued by or under the authority of any State or Sovereign Power, and intended to be used as equivalent to, or as a substitute for money.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117 and the Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 35 of 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 35 of 1950, s. 3 and the Second Sch., for “489C and 489D”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

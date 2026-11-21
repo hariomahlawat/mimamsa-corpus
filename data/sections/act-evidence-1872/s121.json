@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s121",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "121",
+  "chapter": {
+    "number": "IX",
+    "title": "OF WITNESSES"
+  },
+  "order": 139,
+  "page_start": 51,
+  "page_end": 51,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Judges and Magistrates.",
+  "text": "No Judge or Magistrate shall, except upon the special order of some Court to which he is subordinate, be compelled to answer any questions as to his own conduct in Court as such Judge or Magistrate, or as to anything which came to his knowledge in Court as such Judge or Magistrate; but he may be examined as to other matters which occurred in his presence whilst he was so acting.\nIllustrations\n(a) A, on his trial before the Court of Session, says that a deposition was improperly taken by B,\nthe Magistrate. B cannot be compelled to answer questions as to this, except upon the special order of\na superior Court.\n(b) A is accused before the Court of Session of having given false evidence before B, a\nMagistrate. B cannot be asked what A said, except upon the special order of the superior Court.\n(c) A is accused before the Court of Session of attempting to murder a police-officer whilst on his\ntrial before B, a Sessions Judge. B may be examined as to what occurred.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

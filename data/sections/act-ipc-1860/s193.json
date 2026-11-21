@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s193",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "193",
+  "chapter": {
+    "number": "XI",
+    "title": "OF FALSE EVIDENCE AND OFFENCES AGAINST PUBLIC JUSTICE"
+  },
+  "order": 218,
+  "page_start": 51,
+  "page_end": 52,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Punishment for false evidence.",
+  "text": "Whoever intentionally gives false evidence in any stage of a judicial proceeding, or fabricates false evidence for the purpose of being used in any stage of a judicial proceeding, shall be punished with imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine,\nand whoever intentionally gives or fabricates false evidence in any other case, shall be punished with imprisonment of either description for a term which may extend to three years, and shall also be liable to fine.\nExplanation 1.—A trial before a Court-martial [1]***is a judicial proceeding.\nExplanation 2.—An investigation directed by law preliminary to a proceeding before a Court of Justice, is a stage of a judicial proceeding, though that investigation may not take place before a Court of Justice.\nIllustration\nA, in an enquiry before a Magistrate for the purpose of ascertaining whether Z ought to be committed for trial, makes on oath a statement which he knows to be false. As this enquiry is a stage of a judicial proceeding, A as given false evidence.\nExplanation 3.—An investigation directed by a Court of Justice according to law, and conducted under the authority of a Court of Justice, is a stage of a judicial proceeding, though that investigation may not take place before a Court of Justice.\nIllustration\nA, in an enquiry before an officer deputed by a Court of Justice to ascertain on the spot the boundaries of land, makes on oath a statement which he knows to be false. As this enquiry is a stage of a judicial proceeding, A has given false evidence.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "omitted",
+      "by_ref_raw": "Act 13 of 1889",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words “or before a Military Court of Request” omitted by Act 13 of 1889, s. 2 and Sch.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

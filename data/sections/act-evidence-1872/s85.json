@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s85",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "85",
+  "chapter": {
+    "number": "V",
+    "title": "OF DOCUMENTARY EVIDENCE"
+  },
+  "order": 94,
+  "page_start": 40,
+  "page_end": 40,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Presumption as to powers-of-attorney.",
+  "text": "The Court shall presume that every document purporting to be a power-of-attorney, and to have been executed before, and authenticated by, a Notary Public, or any Court, Judge, Magistrate, [1][Indian] Consul or Vice-Consul, or representative [2]*** of the [3][Central Government], was so executed and authenticated.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "A.O. 1950",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A.O. 1950, for “British”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "repealed",
+      "by_ref_raw": "ibid",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The Words “of Her Majesty, or” Rep. by ibid.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A.O. 1937",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A.O. 1937, for “Government of India”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

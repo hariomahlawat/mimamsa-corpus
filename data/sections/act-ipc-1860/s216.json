@@ -1,0 +1,99 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s216",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "216",
+  "chapter": {
+    "number": "XI",
+    "title": "OF FALSE EVIDENCE AND OFFENCES AGAINST PUBLIC JUSTICE"
+  },
+  "order": 242,
+  "page_start": 57,
+  "page_end": 57,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Harbouring offender who has escaped from custody or whose apprehension has been ordered.",
+  "text": "Whenever any person convicted of a charged with an offence, being in lawful custody for that offence, escapes from such custody,\nor whenever a public servant, in the exercise of the lawful powers of such public servant, orders a certain person to be apprehended for an offence, whoever, knowing of such escape or order for apprehension, harbours or conceals that person with the intention of preventing him from being apprehended, shall be punished in the manner following, that is to say,\nif a capital offence.—if the offence for which the person was in custody or is ordered to be apprehended is punishable with death, he shall be punished with imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine;\nif punishable with imprisonment for life, or with imprisonment.—if the offence is punishable with [3][imprisonment for life] or imprisonment for ten years, he shall be punished with imprisonment of either description for a term which may extend to three years, with or without fine;\nand if the offence is punishable with imprisonment which may extend to one year and not to ten years, he shall be punished with imprisonment of the description provided for the offence for a term which may extend to one-fourth part of the longest term of the imprisonment provided for such offence, or with fine, or with both.\n[4][“Offence” in this section includes also any act or omission of which a person is alleged to have been guilty out of [5][India], which, if he had been guilty of it in [5][India], would have been punishable as an offence, and for which he is, under any law relating to extradition, [6]*** or otherwise, liable to be apprehended or detained in custody in [5][India], and every such act or omission shall, for the purposes of this section, be deemed to be punishable as if the accused person had been guilty of it in [5][India].]\nException.—The provision does not extend to the case in which the harbour or concealment is by the husband or wife of the person to be apprehended.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117 and the Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 10 of 1886",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 10 of 1886, s. 23.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1948, the A. O. 1950 and Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words “British India” have successively been subs. by the A. O. 1948, the A. O. 1950 and Act 3 of 1951, s. 3 and the Sch., to read as above.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1948, the A. O. 1950 and Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words “British India” have successively been subs. by the A. O. 1948, the A. O. 1950 and Act 3 of 1951, s. 3 and the Sch., to read as above.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "omitted",
+      "by_ref_raw": "Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words “or under the Fugitive Offenders Act, 1881,” omitted by Act 3 of 1951, s. 3 and the Sch.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1948, the A. O. 1950 and Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words “British India” have successively been subs. by the A. O. 1948, the A. O. 1950 and Act 3 of 1951, s. 3 and the Sch., to read as above.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A. O. 1948, the A. O. 1950 and Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words “British India” have successively been subs. by the A. O. 1948, the A. O. 1950 and Act 3 of 1951, s. 3 and the Sch., to read as above.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

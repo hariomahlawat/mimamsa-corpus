@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s148",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "148",
+  "chapter": {
+    "number": "X",
+    "title": "OF THE EXAMINATION OF WITNESSES"
+  },
+  "order": 166,
+  "page_start": 56,
+  "page_end": 56,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Court to decide when question shall be asked and when witness compelled to answer.",
+  "text": "If any such question relates to a matter not relevant to the suit or proceeding, except in so far as it affects the credit of the witness by injuring his character, the Court shall decide whether or not the witness shall be compelled to answer it, and may, if it thinks fit, warn the witness that he is not obliged to answer it. In exercising its discretion, the Court shall have regard to the following considerations:––\n(1) such questions are proper if they are of such a nature that the truth of the imputation conveyed\nby them would seriously affect the opinion of the Court as to the credibility of the witness on the\nmatter to which he testifies;\n(2) such questions are improper if the imputation which they convey relates to matters so remote\nin time, or of such a character, that the truth of the imputation would not affect, or would affect in a\nslight degree, the opinion of the Court as to the credibility of the witness on the matter to which he\ntestifies;\n(3) such questions are improper if there is a great disproportion between the importance of the\nimputation made against the witness’s character and the importance of his evidence;\n(4) the Court may, if it sees fit, draw, from the witness’s refusal to answer, the inference that the\nanswer if given would be unfavourable.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

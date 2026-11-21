@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s370",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "370",
+  "chapter": {
+    "number": "XVI",
+    "title": "OF OFFENCES AFFECTING THE HUMAN BODY"
+  },
+  "order": 417,
+  "page_start": 88,
+  "page_end": 89,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Trafficking of person.",
+  "text": "(1) Whoever, for the purpose of exploitation, (a) recruits, (b) transports, (c) harbours, (d) transfers, or (e) receives, a person or persons, by—\nFirst.—using threats, or\nSecondly.—using force, or any other form of coercion, or\nThirdly.—by abduction, or\nFourthly.—by practising fraud, or deception, or\nFifthly.—by abuse of power, or\nSixthly.—by inducement, including the giving or receiving of payments or benefits, in order to achieve\nthe consent of any person having control over the person recruited, transported, harboured, transferred or\nreceived, commits the offence of trafficking.\nExplanation 1.—The expression \"exploitation\" shall include any act of physical exploitation or any form\nof sexual exploitation, slavery or practices similar to slavery, servitude, or the forced removal of organs.\nExplanation 2.—The consent of the victim is immaterial in determination of the offence of\ntrafficking.\n(2) Whoever commits the offence of trafficking shall be punished with rigorous imprisonment for a term which shall not be less than seven years, but which may extend to ten years, and shall also be liable to fine.\n(3) Where the offence involves the trafficking of more than one person, it shall be punishable with rigorous imprisonment for a term which shall not be less than ten years but which may extend to imprisonment for life, and shall also be liable to fine.\n(4) Where the offence involves the trafficking of a minor, it shall be punishable with rigorous imprisonment for a term which shall not be less than ten years, but which may extend to imprisonment for life, and shall also be liable to fine.\n(5) Where the offence involves the trafficking of more than one minor, it shall be punishable with rigorous imprisonment for a term which shall not be less than fourteen years, but which may extend to imprisonment for life, and shall also be liable to fine.\n(6) If a person is convicted of the offence of trafficking of minor on more than one occasion, then such person shall be punished with imprisonment for life, which shall mean imprisonment for the remainder of that person's natural life, and shall also be liable to fine.\n(7) When a public servant or a police officer is involved in the trafficking of any person then, such public servant or police officer shall be punished with imprisonment for life, which shall mean imprisonment for the remainder of that person’s natural life, and shall also be liable to fine.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 13 of 2013",
+      "by_doc_id": null,
+      "effective_date": "2013-02-03",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 13 of 2013, s. 8, for section 370 (w.e.f. 3-2-2013).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

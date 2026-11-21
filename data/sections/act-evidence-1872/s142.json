@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s142",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "142",
+  "chapter": {
+    "number": "X",
+    "title": "OF THE EXAMINATION OF WITNESSES"
+  },
+  "order": 160,
+  "page_start": 55,
+  "page_end": 55,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "When they must not be asked.",
+  "text": "Leading questions must not, if objected to by the adverse party, be asked in an examination-in-chief, or in a re-examination, except with the permission of the Court.\nThe Court shall permit leading questions as to matters which are introductory or undisputed, or which have, in its opinion, been already sufficiently proved.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

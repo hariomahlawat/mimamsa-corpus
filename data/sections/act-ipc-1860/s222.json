@@ -1,0 +1,109 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s222",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "222",
+  "chapter": {
+    "number": "XI",
+    "title": "OF FALSE EVIDENCE AND OFFENCES AGAINST PUBLIC JUSTICE"
+  },
+  "order": 250,
+  "page_start": 58,
+  "page_end": 59,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Intentional omission to apprehend on the part of public servant bound to apprehend person under sentence or lawfully committed.",
+  "text": "Whoever, being a public servant, legally bound as such public servant to apprehend or to keep in confinement any person under sentence of a Court of Justice for any offence [2][or lawfully committed to custody], intentionally omits to apprehend such person, or intentionally suffers such person to escape or intentionally aids such person in escaping or attempting to escape from such confinement, shall be punished as follows, that is to say:— with [1][imprisonment for life] or with imprisonment of either description for a term which may extend to fourteen years, with or without fine, if the person in confinement, or who ought to have been apprehended, is under sentence of death; or\nwith imprisonment of either description for a term which may extend to seven years, with or without fine, if the person in confinement, or who ought to have been apprehended, is subject, by a sentence of a Court of Justice, or by virtue of a commutation of such sentence, to [1][imprisonment for life][2]*** [3]*** [4]*** [5]*** or imprisonment for a term of ten years or upwards; or\nwith imprisonment of either description for a term which may extend to three years, or with fine, or with both, if the person in confinement, or who ought to have been apprehended is subject, by a sentence of a Court of Justice, to imprisonment for a term not extending to ten years [6][or if the person was lawfully committed to custody].",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 27 of 1870",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 27 of 1870, s. 8.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117, and Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117, and Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "omitted",
+      "by_ref_raw": "Act 17 of 1949",
+      "by_doc_id": null,
+      "effective_date": "1949-04-06",
+      "effective_date_raw": null,
+      "footnote_text": "The words “or penal servitude for life,” omitted by Act 17 of 1949, s. 2 (w.e.f. 6-4-1949).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "omitted",
+      "by_ref_raw": "Act 36 of 1957",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words “or to” omitted by Act 36 of 1957, s. 3 and the Second Sch.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "omitted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "The word “transportation” omitted by Act 26 of 1955, s. 117 and the Sch. (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "omitted",
+      "by_ref_raw": "Act 17 of 1949",
+      "by_doc_id": null,
+      "effective_date": "1949-04-06",
+      "effective_date_raw": null,
+      "footnote_text": "The words “or penal servitude” omitted by Act 17 of 1949, s. 2 (w.e.f. 6-4-1949).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 27 of 1870",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 27 of 1870, s. 8.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

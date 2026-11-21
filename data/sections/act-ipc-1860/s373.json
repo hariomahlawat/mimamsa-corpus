@@ -1,0 +1,49 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s373",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "373",
+  "chapter": {
+    "number": "XVI",
+    "title": "OF OFFENCES AFFECTING THE HUMAN BODY"
+  },
+  "order": 421,
+  "page_start": 89,
+  "page_end": 90,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Buying minor for purposes of prostitution, etc.",
+  "text": "Whoever buys, hires or otherwise obtains possession of any [4][person under the age of eighteen years with intent that such person shall at any age be employed or used for the purpose of prostitution or illicit intercourse with any person or for any unlawful and immoral purpose, or knowing it to be likely that such person will at any age be] employed or used for any such purpose, shall be punished with imprisonment of either description for a term which may extend to ten years, and shall also be liable to fine.\n[5][Explanation I.—Any prostitute or any person keeping or managing a brothel, who buys, hires or otherwise obtains possession of a female under the age of eighteen years shall, until the contrary is proved, be presumed to have obtained possession of such female with the intent that she shall be used for the purpose of prostitution.\nExplanation II.—“Illicit intercourse” has the same meaning as in section 372.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 2, ibid.",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 2, ibid., for certain words.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "s. 4, ibid.",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by s. 4, ibid.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

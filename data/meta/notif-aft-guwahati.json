@@ -9,15 +9,13 @@
   "mime_type": "application/pdf",
   "page_count": 1,
   "access_marking": null,
-  "text_method": null,
-  "ocr_confidence": null,
+  "text_method": "ocr",
+  "ocr_confidence": 86.2,
   "ocr_low_confidence_pages": [],
-  "text_path": null,
-  "text_quality": null,
-  "needs_ocr": true,
-  "pages_without_text": [
-    1
-  ],
+  "text_path": "data/text/notif-aft-guwahati.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
   "relations": [
     {
       "schema_version": "0.2.0",
@@ -57,6 +55,7 @@
     "issue_date": "crawler",
     "issuing_authority": "crawler",
     "status": "rule",
-    "page_count": "rule"
+    "page_count": "rule",
+    "text_method": "rule"
   }
 }

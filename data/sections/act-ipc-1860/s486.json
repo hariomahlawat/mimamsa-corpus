@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s486",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "486",
+  "chapter": {
+    "number": "XVIII",
+    "title": "OF OFFENCES RELATING TO DOCUMENTSAND TO[2]*** PROPERTY MARKS"
+  },
+  "order": 543,
+  "page_start": 112,
+  "page_end": 112,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Selling goods marked with a counterfeit property mark.",
+  "text": "[2][Whoever sells, or exposes, or has in possession for sale, any goods or things with a counterfeit property mark] affixed to or impressed upon the same or to or upon any case, package or other receptacle in which such goods are contained, shall, unless he proves\n(a) that, having taken all reasonable precautions against committing an offence against this\nsection, he had at the time of the commission of the alleged offence no reason to suspect the\ngenuineness of the mark, and\n(b) that, on demand made by or on behalf of the prosecutor, he gave all the information in his\npower with respect to the persons from whom he obtained such goods or things, or\n(c) that otherwise he had acted innocently, be punished with imprisonment of either description for a term which may extend to one year, or with fine, or with both.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 135 and the Sch., ibid.",
+      "by_doc_id": null,
+      "effective_date": "1959-11-25",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 135 and the Sch., ibid., for certain words (w.e.f. 25-11-1959).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

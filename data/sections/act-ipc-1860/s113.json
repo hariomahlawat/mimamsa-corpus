@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s113",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "113",
+  "chapter": {
+    "number": "V",
+    "title": "OF ABETMENT"
+  },
+  "order": 118,
+  "page_start": 32,
+  "page_end": 32,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Liability of abettor for an effect caused by the act abetted different from that intended by the abettor.",
+  "text": "When an act is abetted with the intention on the part of the abettor of causing a particular effect, and an act for which the abettor is liable in consequence of the abetment, causes a different effect from that intended by the abettor, the abettor is liable for the effect caused, in the same manner and to the same extent as if he had abetted the act with the intention of causing that effect, provided he knew that the act abetted was likely to cause that effect.\nIllustration\nA instigates B to cause grievous hurt to Z. B, in consequence of the instigation, causes grievous hurt to Z. Z dies in consequence. Here, if A knew that the grievous hurt abetted was likely to cause death, A is liable to be punished with the punishment provided for murder.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

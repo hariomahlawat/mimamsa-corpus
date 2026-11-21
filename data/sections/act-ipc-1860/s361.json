@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s361",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "361",
+  "chapter": {
+    "number": "XVI",
+    "title": "OF OFFENCES AFFECTING THE HUMAN BODY"
+  },
+  "order": 404,
+  "page_start": 86,
+  "page_end": 86,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Kidnapping from lawful guardianship.",
+  "text": "Whoever takes or entices any minor under [2][sixteen] years of age if a male, or under [3][eighteen] years of age if a female, or any person of unsound mind, out of the keeping of the lawful guardian of such minor or person of unsound mind, without the consent of such guardian, is said to kidnap such minor or person from lawful guardianship.\nExplanation.—The words “lawful guardian” in this section include any person lawfully entrusted with the care or custody of such minor or other person.\nException.—This section does not extend to the act of any person who in good faith believes himself to be the father of an illegitimate child, or who in good faith believes himself to be entitled to the lawful custody of such child, unless such act is committed for an immoral or unlawful purpose.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 42 of 1949",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 42 of 1949, s. 2, for “fourteen”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

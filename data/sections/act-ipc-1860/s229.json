@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s229",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "229",
+  "chapter": {
+    "number": "XI",
+    "title": "OF FALSE EVIDENCE AND OFFENCES AGAINST PUBLIC JUSTICE"
+  },
+  "order": 260,
+  "page_start": 61,
+  "page_end": 61,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Personation of a juror or assessor.",
+  "text": "Whoever, by personation or otherwise, shall intentionally cause, or knowingly suffer himself to be returned, empanelled or sworn as a juryman or assessor in any case in which he knows that he is not entitled by law to be so returned, empanelled or sworn, or knowing himself to have been so returned, empanelled or sworn contrary to law, shall voluntarily serve on such jury or as such assessor, shall be punished with imprisonment of either description for a term which may extend to two years, or with fine, or with both.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

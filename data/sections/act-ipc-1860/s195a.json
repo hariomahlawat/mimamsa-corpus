@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s195a",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "195A",
+  "chapter": {
+    "number": "XI",
+    "title": "OF FALSE EVIDENCE AND OFFENCES AGAINST PUBLIC JUSTICE"
+  },
+  "order": 221,
+  "page_start": 52,
+  "page_end": 52,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Threatening any person to give false evidence.",
+  "text": "Whoever threatens another with any injury to his person, reputation or property or to the person or reputation of any one in whom that person is interested, with intent to cause that person to give false evidence shall be punished with imprisonment of either description for a term which may extend to seven years, or with fine, or with both;\nand if innocent person is convicted and sentenced in consequence of such false evidence, with death or imprisonment for more than seven years, the person who threatens shall be punished with the same punishment and sentence in the same manner and to the same extent such innocent person is punished and sentenced.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 2 of 2006",
+      "by_doc_id": null,
+      "effective_date": "2006-04-16",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 2 of 2006, s. 2 (w.e.f. 16-4-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

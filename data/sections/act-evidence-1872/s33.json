@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s33",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "33",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 34,
+  "page_start": 24,
+  "page_end": 25,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Relevancy of certain evidence for proving, in subsequent proceeding, the truth of facts therein stated.",
+  "text": "Evidence given by a witness in a judicial proceeding, or before any person authorised by law to take it, is relevant for the purpose of proving, in a subsequent judicial proceeding, or in a later stage of the same judicial proceeding, the truth of the facts which it states, when the witness is dead or cannot be found, or is incapable of giving evidence, or is kept out of the way by the adverse party, or if his presence cannot be obtained without an amount of delay or expense which, under the circumstances of the case, the Court considers unreasonable:\nProvided ––\nthat the proceeding was between the same parties or their representatives in interest; that the\nadverse party in the first proceeding had the right and opportunity to cross-examine;\nthat the questions in issue were substantially the same in the first as in the second proceeding.\nExplanation.––A criminal trial or inquiry shall be deemed to be a proceeding between the\nprosecutor and the accused within the meaning of this section.\nSTATEMENTS MADE UNDER SPECIAL CIRCUMSTANCES",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

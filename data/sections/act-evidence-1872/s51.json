@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s51",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "51",
+  "chapter": {
+    "number": "II",
+    "title": "OF THE RELEVANCY OF FACTS"
+  },
+  "order": 54,
+  "page_start": 30,
+  "page_end": 30,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Grounds of opinion, when relevant.",
+  "text": "Whenever the opinion of any living person is relevant, the grounds on which such opinion is based are also relevant.\nIllustration\nAn expert may give an account of experiments performed by him for the purpose of forming his opinion.\nCHARACTER WHEN RELEVANT",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

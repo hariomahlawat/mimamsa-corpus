@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-ipc-1860#s228a",
+  "parent_doc_id": "act-ipc-1860",
+  "unit": "section",
+  "number": "228A",
+  "chapter": {
+    "number": "XI",
+    "title": "OF FALSE EVIDENCE AND OFFENCES AGAINST PUBLIC JUSTICE"
+  },
+  "order": 259,
+  "page_start": 60,
+  "page_end": 61,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Disclosure of identity of the victim of certain offences, etc.",
+  "text": "(1) Whoever prints or publishes the name or any matter which may make known the identity of any person against whom an [3][offence under section 376, [4][section 376A, section 376AB, section 376B, section 376C, section 376D, section 376DA, section 376DB] or section 376E] is alleged or found to have been committed (hereafter in this section referred to as the victim) shall be punished with imprisonment of either description for a term which may extend to two years and shall also be liable to fine.\n(2) Nothing in sub-section (1) extends to any printing or publication of the name or any matter which may make known the identity of the victim if such printing or publication is—\n(a) by or under the order in writing of the officer-in-charge of the police station or the police\nofficer making the investigation into such offence acting in good faith for the purposes of such\ninvestigation; or\n(b) by, or with the authorisation in writing of, the victim; or\n(c) where the victim is dead or minor or of unsound mind, by, or with the authorisation in writing\nof, the next-of-kin of the victim:\nProvided that no such authorisation shall be given by the next-of-kin to anybody other than the chairman or the secretary, by whatever name called, of any recognised welfare institution or organisation.\n(w.e.f. 3-2-2013).\nExplanation.—For the purposes of this sub-section, “recognised welfare institution or organisation” means a social welfare institution or organisation recognised in this behalf by the Central or State Government.\n(3) Whoever prints or publishes any matter in relation to any proceeding before a court with respect to an offence referred to in sub-section (1) without the previous permission of such court shall be punished with imprisonment of either description for a term which may extend to two years and shall also be liable to fine.\nExplanation.—The printing or publication of the judgment of any High Court or the Supreme Court does not amount to an offence within the meaning of this section.]\nSTATE AMENDMENT Arunachal Pradesh\nAmendment of section 228A.—In section 228A of the Penal Code, in sub-section (1), for the words, figure and letters “offence under section 376, section 376A, section 376B, section 376C or section 376D or section 376E” the words, figure and letters “offence under section 376, section 376A, section 376AA, section 376B, section 376C, section 376D, section 376DA or section 376E” shall be substituted. [Vide Arunachal Pradesh Act 3 of 2019, s. 4]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 43 of 1983",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 43 of 1983, s. 2.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 13 of 2013",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 13 of 2013, s. 4, for “offence under section 376, section 376A, section 376B, section 376C or section 376D”",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 22 of 2018",
+      "by_doc_id": null,
+      "effective_date": "2018-04-21",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 22 of 2018, s. 3, for “section 376A, section 376B, section 376C, section 376D” (w.e.f. 21-4-2018).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

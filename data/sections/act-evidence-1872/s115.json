@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s115",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "115",
+  "chapter": {
+    "number": "VIII",
+    "title": "ESTOPPEL"
+  },
+  "order": 133,
+  "page_start": 50,
+  "page_end": 50,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Estoppel.",
+  "text": "When one person has, by his declaration, act or omission, intentionally caused or permitted another person to believe a thing to be true and to act upon such belief, neither he nor his representative shall be allowed, in any suit or proceeding between himself and such person or his representative, to deny the truth of that thing.\nIllustration\nA intentionally and falsely leads B to believe that certain land belongs to A, and thereby induces B to buy and pay for it.\nThe land afterwards becomes the property of A, and A seeks to set aside the sale on the ground that, at the time of the sale, he had no title. He must not be allowed to prove his want of title.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}

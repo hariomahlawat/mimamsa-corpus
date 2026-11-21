@@ -1,0 +1,39 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s73a",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "73A",
+  "chapter": {
+    "number": "V",
+    "title": "OF DOCUMENTARY EVIDENCE"
+  },
+  "order": 81,
+  "page_start": 37,
+  "page_end": 37,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Proof as to verification of digital signature.",
+  "text": "In order to ascertain whether a digital signature is that of the person by whom it purports to have been affixed, the Court may direct––\n(a) that person or the Controller or the Certifying Authority to produce the Digital Signature\nCertificate;\n(b) any other person to apply the public key listed in the Digital Signature Certificate and\nverify the digital signature purported to have been affixed by that person.\nExplanation.––For the purposes of this section, “Controller” means the Controller appointed\nunder sub-section (1) of section 17 of the Information Technology Act, 2000 (21 of 2000).]\nPUBLIC DOCUMENTS",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 21 of 2000",
+      "by_doc_id": null,
+      "effective_date": "2000-10-17",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 21 of 2000, s. 92 and the Second Schedule (w.e.f. 17-10-2000).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": []
+}

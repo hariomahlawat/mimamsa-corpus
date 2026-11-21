@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-evidence-1872#s108",
+  "parent_doc_id": "act-evidence-1872",
+  "unit": "section",
+  "number": "108",
+  "chapter": {
+    "number": "VII",
+    "title": "OF THE BURDEN OF PROOF"
+  },
+  "order": 122,
+  "page_start": 47,
+  "page_end": 47,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Burden of proving that person is alive who has not been heard of for seven years.",
+  "text": "[1][Provided that when] the question is whether a man is alive or dead, and it is proved that he has not been heard of for seven years by those who would naturally have heard of him if he had been alive, the burden of proving that he is alive is [2][shifted to] the person who affirms it.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": []
+}
