@@ -28,7 +28,7 @@ Army Act 1950: downloaded (7 files, 6.3 MB, in data/raw/indiacode/, not in git)
   its own listing (counted, not treated as damage). The watermark letters show up in extracted
   text; text extraction must strip them, or use the section records / the site's TEXT files instead.
 
-Discovery for all India Code targets (listings only, nothing else downloaded yet; 50 files queued)
+Discovery for all India Code targets (listings only, nothing else downloaded yet; 75 files queued)
 - Resolved: Army Act, Air Force Act, Navy Act, AFT Act (13 rules, 16 notifications, 3 amendment
   Acts, 1 order), Army & Air Force (Disposal of Private Property) Act, BNS, BNSS, BSA.
 - NOT resolved: IPC 1860, CrPC 1973, Evidence Act 1872. India Code now lists only STATE copies of
@@ -38,7 +38,7 @@ Discovery for all India Code targets (listings only, nothing else downloaded yet
 - Gap: the Air Force Rules 1969 record exists but has no file attached.
 
 Next
-- Review, then run `fetch` for the remaining 50 queued India Code files (Phase 2).
+- Review, then run `fetch` for the remaining 75 queued India Code files (Phase 2).
 - Phase 2 pipeline: metadata records + section records from the saved JSON (no PDF parsing needed
   for section splitting), validated against the schemas.
 
