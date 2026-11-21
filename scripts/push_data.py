@@ -25,7 +25,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 WT = ROOT.parent / "raw-data-worktree"
-RAW_LIMIT_GB = 4.0
+RAW_LIMIT_GB = 10.0
 CHUNK = 40e6
 TRAILER = ("\n\nCo-Authored-By: Claude Fable 5.2 <noreply@anthropic.com>\n"
            "Claude-Session: https://claude.ai/code/session_01U1on2R5GUDbYwqG6fkFRuN")
