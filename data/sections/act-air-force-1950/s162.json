@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s162",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "162",
+  "heading": "Annulment of proceedings.",
+  "chapter": null,
+  "order": 162,
+  "text": "The Central Government, [1][the Chief of the Air Staff] or any prescribed officer may annul the proceedings of any court-martial on the ground that they are illegal or unjust.",
+  "page_start": 48,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1955-05-07",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief\" (w.e.f. 7-5-1955).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "21a0c521-8cc3-4a58-ab19-8d51de368543",
+    "handle": "123456789/523773",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

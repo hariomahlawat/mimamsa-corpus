@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s107",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "107",
+  "heading": "Provost-marshals.",
+  "chapter": null,
+  "order": 107,
+  "text": "(1) Provost-marshals may be appointed by [1][the Chief of the Army Staff] or by any prescribed officer.\n\n(2) The duties of a provost-marshal are to take charge of persons confined for any offence, to preserve good order and discipline, and to prevent breaches of the same by persons serving in, or attached to, the regular Army.\n\n(3) A provost-marshal may act any time arrest and detain for trial any person subject to this Act who commits, or is charged with, an offence, and may also carry into effect any punishment to be inflicted in pursuance of the sentence awarded by a court-martial, or by an officer exercising authority under section 80 but shall not inflict any punishment on his own authority:\n\nProvided that no officer shall be so arrested or detained otherwise than on the order of another officer.\n\n(4) For the purposes of sub-sections (2) and (3), a provost-marshal shall be deemed to include a provost-marshal appointed under any law for the time being in force relating to the Government of the Navy or Air Force, and any person legally exercising authority under him or on his behalf.",
+  "page_start": 32,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and Schedule, for \"the Commander-in-Chief\".",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6bee6b28-a97e-4ad2-b2d9-30f4dfd3d4ce",
+    "handle": "123456789/525973",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

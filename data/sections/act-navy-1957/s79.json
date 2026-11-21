@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s79",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "79",
+  "heading": "Jurisdiction as to time",
+  "chapter": null,
+  "order": 83,
+  "text": "No person unless he is an offender who has avoided apprehension or fled form justice or committed the offence of desertion or fraudulent entry or the offence of mutiny shall be tried or punished in pursuance of this Act for any offence committed by him unless such trial commences within three years from the commission of such offence:\n\nProvided that in the computation of the said period of three years any time during which an offender was outside Indial or any time during which he was a prisoner of war shall be deducted:\n\n[1] [Provided further that in computation of the said period of three years, any time during which,--\n\n(a) the commission of the offence was not known to the person aggrieved by the offence or to the authority competent to initiate action, the first day on which such offence comes to the knowledge of such person or authority, whichever is earlier;\n\n(b) it was not known by whom the offence was committed, the first day on which the identity of the offender is known to the person aggrieved by the offence or to the authority investigating into the offence, whichever is earlier, shall be excluded;\n\nProvided also that] where the institution of the prosecution in respect of an offence has been stayed by an injunction or order, then, in computing the said period of three years, the period of the continuance of the injunction or order, the day on which it was issued or made and the day on which it was withdrawn shall be excluded:\n\nProvided also that no trial for an offence of desertion other than desertion on active service or fraudulent entry shall be commenced if the person in question not being an officer has subsequently to the commission of the offence served continuously in an exemplary manner for not less than three years in the Indian Navy.",
+  "page_start": 27,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 23 of 2005",
+      "by_doc_id": null,
+      "effective_date": "2005-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 23 of 2005, s. 3, for \"Proviso further that\" (w.e.f. 23-6-2005).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "9900dc2c-2f5f-43a5-bdee-1126fe04326a",
+    "handle": "123456789/523944",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

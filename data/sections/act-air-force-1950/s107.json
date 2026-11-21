@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s107",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "107",
+  "heading": "Inquiry into absence without leave.",
+  "chapter": null,
+  "order": 107,
+  "text": "(1) When any person subject to this Act has been absent from his duty without due authority for a period of thirty days, a Court of inquiry shall, as soon as practicable, be assembled, and such Court shall, on oath or affirmation administered. In the prescribed manner, inquire respecting the absence of the person, and the deficiency, if any, in the property of the Government entrusted to his care, or in any arms, ammunition, equipment, instruments, clothing or necessaries, and if satisfied of the fact of such absence without due authority, or other sufficient cause, the Court shall declare such absence and the period thereof, and the said deficiency, if any; and the commanding officer of the unit to which the person belongs shall enter in the court-martial book of the unit a record of declaration.\n\n(2) If the person declared absent does not afterwards surrender or is not apprehended, he shall, for the purposes of this Act, be deemed to be a deserter.",
+  "page_start": 36,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b465484d-e549-4dc0-a7be-c8e6401488b6",
+    "handle": "123456789/523718",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

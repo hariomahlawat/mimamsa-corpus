@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s453",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "453",
+  "heading": "Execution of order passed under section 409.",
+  "chapter": null,
+  "order": 453,
+  "text": "When in a case submitted to the High Court for the confirmation of a sentence of death, the Court of Session receives the order of confirmation or other order of the High Court thereon, it shall cause such order to be carried into effect by issuing a warrant or taking such other steps as may be necessary.",
+  "page_start": 153,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c66d8047-e992-4d5f-93f6-d54f24b5d961",
+    "handle": "123456789/546663",
+    "listing_raw_path": "data/raw/indiacode/2023/84de940d3a0fe09d9683198d94de1a7af018b90eb5d0667daa39ef362963cb9b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

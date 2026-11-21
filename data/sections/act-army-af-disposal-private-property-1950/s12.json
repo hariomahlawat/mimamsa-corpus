@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-af-disposal-private-property-1950#s12",
+  "parent_doc_id": "act-army-af-disposal-private-property-1950",
+  "unit": "section",
+  "number": "12",
+  "heading": "Property in the hands of commanding officer, Committee or prescribed person not to be assets where commanding officer, Committee or prescribed person is stationed.",
+  "chapter": null,
+  "order": 12,
+  "text": "Any property coming into the hands of the commanding officer or the Committee or the prescribed person under section 3, section 4 or sub-section (4) of section 7 shall not, by reason thereof, be deemed to be assets of effects at the place in which that commanding officer or the Committee or the prescribed persons is stationed, and it shall not be necessary by reason thereof that representation be taken out in respect of that property for that place.",
+  "page_start": 6,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "55c9b616-60b8-4cd7-9040-4c4f25d8c926",
+    "handle": "123456789/527832",
+    "listing_raw_path": "data/raw/indiacode/1950/2dce3a9525b06939bf0a27ebc223106bd030c88a8fa3f2aa0c722862fe2924b3.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

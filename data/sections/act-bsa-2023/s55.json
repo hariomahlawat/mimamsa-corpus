@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s55",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "55",
+  "heading": "Oral evidence to be direct.",
+  "chapter": null,
+  "order": 55,
+  "text": "Oral evidence shall, in all cases whatever, be direct; if it refers to,--\n\n(i) a fact which could be seen, it must be the evidence of a witness who says he saw it;\n\n(ii) a fact which could be heard, it must be the evidence of a witness who says he heard it;\n\n(iii) a fact which could be perceived by any other sense or in any other manner, it must be the evidence of a witness who says he perceived it by that sense or in that manner;\n\n(iv) an opinion or to the grounds on which that opinion is held, it must be the evidence of the person who holds that opinion on those grounds:\n\nProvided that the opinions of experts expressed in any treatise commonly offered for sale, and the grounds on which such opinions are held, may be proved by the production of such treatises if the author is dead or cannot be found, or has become incapable of giving evidence, or cannot be called as a witness without an amount of delay or expense which the Court regards as unreasonable:\n\nProvided further that, if oral evidence refers to the existence or condition of any material thing other than a document, the Court may, if it thinks fit, require the production of such material thing for its inspection.",
+  "page_start": 25,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d0e871c4-dc71-4869-b313-d7073418070c",
+    "handle": "123456789/545949",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

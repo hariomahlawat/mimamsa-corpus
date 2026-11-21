@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s29",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "29",
+  "heading": "Execution of order of Tribunal.",
+  "chapter": null,
+  "order": 30,
+  "text": "Subject to the other provisions of this Act and the rules made thereunder, the order of the Tribunal disposing of an application shall be final and shall not be called in question in any Court and such order shall be executed accordingly.",
+  "page_start": 11,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1ac8772c-417b-4596-bf0d-0d941801015c",
+    "handle": "123456789/527546",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

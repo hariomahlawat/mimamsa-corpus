@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s128",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "128",
+  "heading": "Force.",
+  "chapter": null,
+  "order": 128,
+  "text": "A person is said to use force to another if he causes motion, change of motion, or cessation of motion to that other, or if he causes to any substance such motion, or change of motion, or cessation of motion as brings that substance into contact with any part of that other’s body, or with anything which that other is wearing or carrying, or with anything so situated that such contact affects that other’s sense of feeling:\n\nProvided that the person causing the motion, or change of motion, or cessation of motion, causes that motion, change of motion, or cessation of motion in one of the following three ways, namely:—\n\n(a) by his own bodily power;\n\n(b) by disposing any substance in such a manner that the motion or change or cessation of motion takes place without any further act on his part, or on the part of any other person;\n\n(c) by inducing any animal to move, to change its motion, or to cease to move.",
+  "page_start": 57,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8272c0ff-01ac-4f98-ba11-63b29ee04a23",
+    "handle": "123456789/545627",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s167",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "167",
+  "heading": "Using, as evidence, of document production of which was refused on notice.",
+  "chapter": null,
+  "order": 167,
+  "text": "When a party refuses to produce a document which he has had notice to produce, he cannot afterwards use the document as evidence without the consent of the other party or the order of the Court.\n\nIllustration.\n\nA sues B on an agreement and gives B notice to produce it. At the trial, A calls for the document and B refuses to produce it. A gives secondary evidence of its contents. B seeks to produce the document itself to contradict the secondary evidence given by A, or in order to show that the agreement is not stamped. He cannot do so.",
+  "page_start": 48,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "03f84913-6630-4356-9463-95468bc7fab9",
+    "handle": "123456789/546067",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

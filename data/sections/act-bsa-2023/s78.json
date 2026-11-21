@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s78",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "78",
+  "heading": "Presumption as to genuineness of certified copies.",
+  "chapter": null,
+  "order": 78,
+  "text": "(1) The Court shall presume to be genuine every document purporting to be a certificate, certified copy or other document, which is by law declared to be admissible as evidence of any particular fact and which purports to be duly certified by any officer of the Central Government or of a State Government:\n\nProvided that such document is substantially in the form and purports to be executed in the manner directed by law in that behalf.\n\n(2) The Court shall also presume that any officer by whom any such document purports to be signed or certified, held, when he signed it, the official character which he claims in such paper.",
+  "page_start": 31,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6da79728-d183-4ef8-bea9-f239e53d77ef",
+    "handle": "123456789/545973",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

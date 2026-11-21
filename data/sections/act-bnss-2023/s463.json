@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s463",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "463",
+  "heading": "Warrant for levy of fine issued by a Court in any territory to which this Sanhita does not extend.",
+  "chapter": null,
+  "order": 463,
+  "text": "Notwithstanding anything in this Sanhita or in any other law for the time being in force, when an offender has been sentenced to pay a fine by a Criminal Court in any territory to which this Sanhita does not extend and the Court passing the sentence issues a warrant to the Collector of a district in the territories to which this Sanhita extends, authorising him to realise the amount as if it were an arrear of land revenue, such warrant shall be deemed to be a warrant issued under clause (b) of sub-section (1) of section 461 by a Court in the territories to which this Sanhita extends, and the provisions of sub-section (3) of the said section as to the execution of such warrant shall apply accordingly.",
+  "page_start": 155,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "5ddca5b5-a49f-4010-9389-e6f769cb6e08",
+    "handle": "123456789/546550",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

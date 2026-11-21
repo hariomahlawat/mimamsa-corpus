@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s217",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "217",
+  "heading": "Prosecution for offences against State and for criminal conspiracy to commit such offence.",
+  "chapter": null,
+  "order": 217,
+  "text": "(1) No Court shall take cognizance of—\n\n(a) any offence punishable under Chapter VII or under section 196, section 299 or sub-section (1) of section 353 of the Bharatiya Nyaya Sanhita, 2023; or\n\n(b) a criminal conspiracy to commit such offence; or\n\n(c) any such abetment, as is described in section 47 of the Bharatiya Nyaya Sanhita, 2023, except with the previous sanction of the Central Government or of the State Government.\n\n(2) No Court shall take cognizance of—\n\n(a) any offence punishable under section 197 or sub-section (2) or sub-section (3) of section 353 of the Bharatiya Nyaya Sanhita, 2023; or\n\n(b) a criminal conspiracy to commit such offence, except with the previous sanction of the Central Government or of the State Government or of the District Magistrate.\n\n(3) No Court shall take cognizance of the offence of any criminal conspiracy punishable under sub-section (2) of section 61 of the Bharatiya Nyaya Sanhita, 2023, other than a criminal conspiracy to commit an offence punishable with death, imprisonment for life or rigorous imprisonment for a term of two years or upwards, unless the State Government or the District Magistrate has consented in writing to the initiation of the proceedings:\n\nProvided that where the criminal conspiracy is one to which the provisions of section 215 apply, no such consent shall be necessary.\n\n(4) The Central Government or the State Government may, before according sanction under sub-section (1) or sub-section (2) and the District Magistrate may, before according sanction under sub-section (2) and the State Government or the District Magistrate may, before giving consent under sub-section (3), order a preliminary investigation by a police officer not being below the rank of Inspector, in which case such police officer shall have the powers referred to in sub-section (3) of section 174.",
+  "page_start": 83,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d6593e05-5abb-4e53-84fb-0cf37046cdb2",
+    "handle": "123456789/546317",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

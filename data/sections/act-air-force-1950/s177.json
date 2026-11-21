@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s177",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "177",
+  "heading": "Pardon and remission.",
+  "chapter": null,
+  "order": 177,
+  "text": "When any person subject to this Act has been convicted by a courtmartial of any offence, the Central Government, [1][the Chief of the Air Staff], an air or other officer commanding a group or the prescribed officer, may--\n\n(a) either with or without conditions which the person sentenced accepts, pardon the person or remit the whole or any part of the punishment awarded; or\n\n(b) mitigate the punishment awarded; or\n\n(c) commute such punishment for any less punishment or punishments mentioned in this Act:\n\nProvided that a sentence of transportation shall not be commuted for a sentence of imprisonment for a term exceeding the term of transportation awarded by the court; and a sentence of imprisonment shall not be commuted for a sentence of detention for a term exceeding the term of imprisonment so awarded;\n\n(d) either with or without conditions which the person sentenced accepts, release the person on parole.",
+  "page_start": 51,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1955-05-07",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief\" (w.e.f. 7-5-1955).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1706cf0c-09cb-4c3d-a7c0-cd434db95ca3",
+    "handle": "123456789/523788",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

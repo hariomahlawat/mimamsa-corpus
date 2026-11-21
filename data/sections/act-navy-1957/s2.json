@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s2",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "2",
+  "heading": "Persons subject to naval law.",
+  "chapter": null,
+  "order": 2,
+  "text": "(1) The following persons shall be subject to naval law wherever they may be, namely:--\n\n(a) every person belonging to the Indian Navy during the time that he is liable for service under this Act;\n\n(b) every person belonging to the Indian Naval Reserve Forces when he is--\n\n(i) on active service; or\n\n(ii) in or on any property of the naval service including naval establishments, ships and other vessels, aircraft, vehicles and armouries; or\n\n(iii) called up for training or undergoing training in pursuance of regulations made under this Act, until he is duly released from his training; or\n\n(iv) called up into actual service in the Indian Navy in pursuance of regulations made under this Act, until he is duly released therefrom; or\n\n(v) in uniform;\n\n(c) members of the regular Army and the Air Force when embarked on board any ship or aircraft of the Indian Navy, to such extent and subject to such conditions as may be prescribed;\n\n(d) every person not otherwise subject to naval law, who enters into an engagement with the Central Government under section 6;\n\n(e) every person belonging to any auxiliary forces raised under this Act, to such extent and subject to such conditions as may be prescribed; and\n\n(f) every person who, although he would not otherwise be subject to naval law, is by any other Act or during active service by regulations made under this Act in this behalf made subject to naval law, to such extent and subject to such conditions as may be prescribed.\n\n(2) The following persons shall be deemed to be persons subject to naval law, namely:--\n\n(a) every person ordered to be received, or being a passenger, on board any ship or aircraft of the Indian Navy, to such extent and subject to such conditions as may be prescribed;\n\n(b) every person sentenced under this Act to imprisonment or detention, during the term of his sentence, notwithstanding that he is discharged or dismissed with or without disgrace from naval service or would otherwise but for this provision cease to be subject to naval law.",
+  "page_start": 9,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "cb5ddd64-e256-4113-84d3-3e308ae4c8e3",
+    "handle": "123456789/517347",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

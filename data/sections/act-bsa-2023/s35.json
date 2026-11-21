@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s35",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "35",
+  "heading": "Relevancy of certain judgments in probate, etc., jurisdiction.",
+  "chapter": null,
+  "order": 35,
+  "text": "(1) A final judgment, order or decree of a competent Court or Tribunal, in the exercise of probate, matrimonial, admiralty or insolvency jurisdiction, which confers upon or takes away from any person any legal character, or which declares any person to be entitled to any such character, or to be entitled to any specific thing, not as against any specified person but absolutely, is relevant when the existence of any such legal character, or the title of any such person to any such thing, is relevant.\n\n(2) Such judgment, order or decree is conclusive proof that--\n\n(i) any legal character, which it confers accrued at the time when such judgment, order or decree came into operation;\n\n(ii) any legal character, to which it declares any such person to be entitled, accrued to that person at the time when such judgment, order or decree declares it to have accrued to that person;\n\n(iii) any legal character which it takes away from any such person ceased at the time from which such judgment, order or decree declared that it had ceased or should cease; and\n\n(iv) anything to which it declares any person to be so entitled was the property of that person at the time from which such judgment, order or decree declares that it had been or should be his property.",
+  "page_start": 21,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e576f1fa-8497-4d5a-bb3e-1ccd0efdafe9",
+    "handle": "123456789/545928",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

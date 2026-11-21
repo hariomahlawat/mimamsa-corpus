@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s104",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "104",
+  "heading": "Administering oath or affirmation",
+  "chapter": null,
+  "order": 108,
+  "text": "(1) Before the court shall proceed to try the person charged, an oath or affirmation in the following form and manner shall be administered to the president and every member of the court-martial in the order of their seniority by the trial judge advocate:--\n\n\"I......................................do swear in the name of God solemnly affirm that I will duly and faithfully and to the best of my ability, knowledge and judgment administer justice according to law, without fear or favour, affection or ill-will, and that I will not on any account at any time whatsoever disclose or discover the vote or opinion of any particular member of this court-martial unless thereunto required in due course of law.\"\n\n(2) The trial judge advocate shall then be sworn or affirmed by the president in the following form:--\n\n\"I......................................do swear in the name of God solemnly affirm that I will duly and faithfully and to the best of my ability, knowledge and judgment perform the duties of my office according to law, without fear or favour, affection or ill-will, and that I will not upon any account at any time whatsoever disclose or discover the vote or opinion of any particular member of this court-martial unless thereunto required in due course of law.\"",
+  "page_start": 37,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c4392bb2-0f74-442c-bd7a-2e310ec42c97",
+    "handle": "123456789/523972",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

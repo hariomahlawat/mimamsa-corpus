@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s139",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "139",
+  "heading": "Summary punishment for contempt of court person subject to naval law",
+  "chapter": null,
+  "order": 143,
+  "text": "When any person subject to naval law commits any offence as is described in section 69 in the presence of or in relation to a proceeding before a court-martial such court-martial may punish the offender summarily by imprisonment for a term which may extend to three months or such other less punishment as may be awarded for that offence under section 69.",
+  "page_start": 45,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "993744e4-25c2-4020-a710-449b93210238",
+    "handle": "123456789/524022",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

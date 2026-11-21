@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s121",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "121",
+  "heading": "Estoppel.",
+  "chapter": null,
+  "order": 121,
+  "text": "When one person has, by his declaration, act or omission, intentionally caused or permitted another person to believe a thing to be true and to act upon such belief, neither he nor his representative shall be allowed, in any suit or proceeding between himself and such person or his representative, to deny the truth of that thing.\n\nIllustrations.\n\nA intentionally and falsely leads B to believe that certain land belongs to A, and thereby induces B to buy and pay for it. The land afterwards becomes the property of A, and A seeks to set aside the sale on the ground that, at the time of the sale, he had no title. He must not be allowed to prove his want of title",
+  "page_start": 40,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "65099bd5-2400-4cab-aaa1-a0bcbcd599c3",
+    "handle": "123456789/546017",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

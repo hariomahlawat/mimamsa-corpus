@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s119",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "119",
+  "heading": "Evidence of character and previous convictions",
+  "chapter": null,
+  "order": 123,
+  "text": "(1) If the accused is found guilty on any or all of the charges, the court before awarding punishment may call evidence as to the previous character and qualifications of the accused and in addition to any oral evidence of general character that may be adduced, shall take into consideration the following documents which shall be read by the trial judge advocate in open court:--\n\n(a) for any officer--\n\n(i) any entries against him relating to his previous convictions in the list of officers who have been tried by court-martial; and\n\n(ii) any previous entries against him in the log of the ship to which he may have belonged when the offence or offences for which he is being tried were committed and also any documents, other than such entries in the log, of the nature of a definite censure by superior authority, which log and documents the prosecution is to produce; and\n\n(iii) any certificate or other documents of character which the accused may produce;\n\n(b) for a [1][sailor]--\n\n(i) the entries against him in the conduct and offences record sheets prior to the date of the offence charged, but subsequent to his joining his present ship, with character assessed from the previous 31st day of December to the date of the offence for which he may be under trial but excluding all consideration of the latter;\n\n(ii) his certificate of service; and\n\n(iii) any entries against him relating to his previous convictions in the list of those who have been tried by court-martial.\n\n(2) The accused may then make a statement in mitigation of punishment and lead any evidence of character if he has not already done so before the finding.",
+  "page_start": 39,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 53 of 1974",
+      "by_doc_id": null,
+      "effective_date": "1974-12-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 53 of 1974, s. 2, for \"seaman\" (w.e.f. 16-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "572f62a1-1210-4798-aea8-a0da6b12ac02",
+    "handle": "123456789/523991",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

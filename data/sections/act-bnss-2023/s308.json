@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s308",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "308",
+  "heading": "Evidence to be taken in presence of accused.",
+  "chapter": null,
+  "order": 308,
+  "text": "Except as otherwise expressly provided, all evidence taken in the course of the trial or other proceeding shall be taken in the presence of the accused, or, when his personal attendance is dispensed with, in the presence of his advocate including through audio-video electronic means at the designated place to be notified by the State Government:\n\nProvided that where the evidence of a woman below the age of eighteen years who is alleged to have been subjected to rape or any other sexual offence, is to be recorded, the Court may take appropriate measures to ensure that such woman is not confronted by the accused while at the same time ensuring the right of cross-examination of the accused.\n\nExplanation.—In this section,\"accused\" includes a person in relation to whom any proceeding under Chapter IX has been commenced under this Sanhita.",
+  "page_start": 108,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f01f4d93-2284-4000-b4c4-8720f2110b64",
+    "handle": "123456789/546401",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s139",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "139",
+  "heading": "Number of witnesses.",
+  "chapter": null,
+  "order": 139,
+  "text": "No particular number of witnesses shall in any case be required for the proof of any fact.",
+  "page_start": 43,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f128c14c-5cb9-43de-9e46-97d7b6cd2d1d",
+    "handle": "123456789/546037",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

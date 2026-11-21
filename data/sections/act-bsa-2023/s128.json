@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s128",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "128",
+  "heading": "Communications during marriage.",
+  "chapter": null,
+  "order": 128,
+  "text": "No person who is or has been married, shall be compelled to disclose any communication made to him during marriage by any person to whom he is or has been married; nor shall he be permitted to disclose any such communication, unless the person who made it, or his representative in interest, consents, except in suits between married persons, or proceedings in which one married person is prosecuted for any crime committed against the other",
+  "page_start": 41,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "57c3423e-53d9-4865-ab94-68672c912c82",
+    "handle": "123456789/546025",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s12",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "12",
+  "heading": "Validity of enrolment.",
+  "chapter": null,
+  "order": 12,
+  "text": "Where a person after his enrolment has for a period of three months from the date of such enrolment been in receipt of pay as a [10][sailor], he shall be deemed to have been duly enrolled and shall not thereafter be entitled to claim his discharge on the ground of any irregularity or illegality in his engagement or any other ground whatsoever; and if within the said three months such person claims his discharge, no such irregularity or illegality or other ground shall, until such person is discharged in pursuance of his claim, affect his position as a [1][sailor] in the naval service or invalidate any proceedings, act or thing taken or done prior to his discharge.",
+  "page_start": 13,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 53 of 1974",
+      "by_doc_id": null,
+      "effective_date": "1974-12-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 53 of 1974, s. 2, for \"seaman\" (w.e.f. 16-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "837387a1-c654-45c6-a9aa-27d45358c3af",
+    "handle": "123456789/517358",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

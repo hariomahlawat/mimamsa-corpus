@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s89",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "89",
+  "heading": "Superior air force authority",
+  "chapter": null,
+  "order": 89,
+  "text": "For the purposes of sections 87 and 88, a \"superior air force authority\" means--\n\n(a) in the case of punishments awarded by a commanding officer, any officer superior in command to such commanding officer;\n\n(b) in the case of punishments awarded by any other authority, the Central Government, [1][the Chief of the Air Staff] or other officer specified by [1][the Chief of the Air Staff].",
+  "page_start": 32,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1955-05-07",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief\" (w.e.f. 7-5-1955).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f0928218-9444-46cb-b285-0f47223df06f",
+    "handle": "123456789/519407",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

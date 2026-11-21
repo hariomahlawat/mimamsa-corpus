@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s25",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "25",
+  "heading": "Right of applicant or of appellant to take assistance of a legal practitioner and of Government, etc., to appoint counsel.",
+  "chapter": null,
+  "order": 26,
+  "text": "(1) A person making an application or preferring an appeal to the Tribunal may either appear in person or take the assistance of a legal practitioner of his choice to present his case before the Tribunal..\n\n(2) The Central Government or the competent authority, as may be prescribed, may authorise one or more legal practitioners or any of its law officers to act as counsel and every person so authorised by it may present its case with respect to any application or appeal, as the case may be, before the Tribunal.",
+  "page_start": 10,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3d828e03-8433-4f82-8915-683865efb069",
+    "handle": "123456789/527503",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

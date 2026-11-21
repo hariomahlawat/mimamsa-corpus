@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s125",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "125",
+  "heading": "Security for keeping peace on conviction.",
+  "chapter": null,
+  "order": 125,
+  "text": "(1) When a Court of Session or Court of a Magistrate of the first class convicts a person of any of the offences specified in sub-section (2) or of abetting any such offence and is of opinion that it is necessary to take security from such person for keeping the peace, the Court may, at the time of passing sentence on such person, order him to execute a bond or bail bond, for keeping the peace for such period, not exceeding three years, as it thinks fit..\n\n(2) The offences referred to in sub-section (1) are---\n\n(a) any offence punishable under Chapter XI of the Bharatiya Nyaya Sanhita, 2023 (45 of 2023), other than an offence punishable under sub-section (1) of section 193 or section 196 or section 197 thereof;\n\n(b) any offence which consists of, or includes, assault or using criminal force or committing mischief;\n\n(c) any offence of criminal intimidation;\n\n(d) any other offence which caused, or was intended or known to be likely to cause, a breach of the peace.\n\n(3) If the conviction is set aside on appeal or otherwise, the bond or bail bond so executed shall become void.\n\n(4) An order under this section may also be made by an Appellate Court or by a Court when exercising its powers of revision.",
+  "page_start": 51,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "46cee9fc-0b4f-49f6-9e80-03d58b5a8c4d",
+    "handle": "123456789/546232",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

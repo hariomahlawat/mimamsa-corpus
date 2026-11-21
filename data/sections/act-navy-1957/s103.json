@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s103",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "103",
+  "heading": "Further objections",
+  "chapter": null,
+  "order": 107,
+  "text": "(1) The trial judge advocate shall then ask the accused whether he has any further objections to make respecting the constitution of the court; and should the accused raise any such objection, it shall then be decided by the court, which decision shall be final and the constitution of the court-martial shall not be afterwards impeached and it shall be deemed in all respects to have been duly constituted.\n\n(2) If the accused should have no further objection to make to the constitution of the court or if any objection is disallowed, the members and the trial judge advocate shall then make an oath or affirmation in the form set out in section 104.",
+  "page_start": 37,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c51819bb-e5b7-4c9e-9607-eb7d2f1480d1",
+    "handle": "123456789/523971",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

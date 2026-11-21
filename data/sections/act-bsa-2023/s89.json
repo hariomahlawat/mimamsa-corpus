@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s89",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "89",
+  "heading": "Presumption as to books, maps and charts.",
+  "chapter": null,
+  "order": 89,
+  "text": "The Court may presume that any book to which it may refer for information on matters of public or general interest, and that any published map or chart, the statements of which are relevant facts, and which is produced for its inspection, was written and published by the person, and at the time and place, by whom or at which it purports to have been written or published.",
+  "page_start": 32,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "4889c17c-0ea9-4fc3-9e67-8cd8837cea08",
+    "handle": "123456789/545985",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

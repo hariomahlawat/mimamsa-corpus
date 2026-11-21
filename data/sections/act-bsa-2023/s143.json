@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s143",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "143",
+  "heading": "Order of examinations.",
+  "chapter": null,
+  "order": 143,
+  "text": "(1) Witnesses shall be first examined-in-chief, then (if the adverse party so desires) cross-examined, then (if the party calling him so desires) re-examined.\n\n(2) The examination-in-chief and cross-examination must relate to relevant facts, but the cross-examination need not be confined to the facts to which the witness testified on his examination-inchief.\n\n(3) The re-examination shall be directed to the explanation of matters referred to in cross-examination; and, if new matter is, by permission of the Court, introduced in re-examination, the adverse party may further cross-examine upon that matter.",
+  "page_start": 44,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "fe91712d-7c6f-489e-b21a-4ffdb10631b8",
+    "handle": "123456789/546042",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

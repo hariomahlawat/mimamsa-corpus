@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s49",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "49",
+  "heading": "Desertion.",
+  "chapter": null,
+  "order": 49,
+  "text": "(1) Every person subject to naval law who absents himself from his ship or from the place where his duty requires him to be, with an intention of not returning to such ship or place, or who at any time and under any circumstances when absent from his ship or place of duty does any act which shows that he has an intention of not returning to such ship or place is said to desert. (2) Every person who deserts shall,--\n\n(a) if he deserts to the enemy, be punished with death or such other punishment as is hereinafter mentioned; or\n\n(b) if he deserts under any other circumstances, be punished with imprisonment for a term which may extend to fourteen years or such other punishment as is hereinafter mentioned;\n\nand in every such case he shall forfeit all pay, head money, bounty, salvage, prize money and allowances that have been earned by him and all annuities, pensions, gratuities, medals and decorations that may have been granted to him and also all clothes and effects which he may have left on board the ship or the place from which he deserted, unless the tribunal by which he is tried or the Central Government or the Chief of the Naval Staff, otherwise directs.",
+  "page_start": 22,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d7536152-a43e-4b0e-9f3f-ca9f3b206489",
+    "handle": "123456789/517399",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s327",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "327",
+  "heading": "Mischief with intent to destroy or make unsafe a rail, aircraft, decked vessel or one of twenty tons burden.",
+  "chapter": null,
+  "order": 327,
+  "text": "(1) Whoever commits mischief to any rail, aircraft, or a decked vessel or any vessel of a burden of twenty tons or upwards, intending to destroy or render unsafe, or knowing it to be likely that he will thereby destroy or render unsafe, that rail, aircraft or vessel, shall be punished with imprisonment of either description for a term which may extend to ten years, and shall also be liable to fine.\n\n(2) Whoever commits, or attempts to commit, by fire or any explosive substance, such mischief as is described in sub-section (1), shall be punished with imprisonment for life or with imprisonment of either description for a term which may extend to ten years, and shall also be liable to fine.",
+  "page_start": 96,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "655b4105-3d98-4e89-872b-d6021a2ff6d1",
+    "handle": "123456789/545889",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

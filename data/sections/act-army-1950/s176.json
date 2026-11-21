@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s176",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "176",
+  "heading": "Informality or error in the order or warrant.",
+  "chapter": null,
+  "order": 177,
+  "text": "Whenever any person is sentenced to transportation or imprisonment under this Act, and is undergoing the sentence in any place or manner in which he might be confined under a lawful order or warrant in pursuance of this Act, the confinement of such person shall not be deemed to be illegal only by reason of any informality or error in or as respects the order, warrant or other document, or the authority by which, or in pursuance whereof such person was brought into or is confined in any such place, and any such order, warrant or document may be amended accordingly.",
+  "page_start": 44,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2e65ae8b-6898-4fcd-8ee5-4dab23b6dddf",
+    "handle": "123456789/526050",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

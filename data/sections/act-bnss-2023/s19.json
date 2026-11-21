@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s19",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "19",
+  "heading": "Assistant Public Prosecutors.",
+  "chapter": null,
+  "order": 19,
+  "text": "(1) The State Government shall appoint in every district one or more Assistant Public Prosecutors for conducting prosecutions in the Courts of Magistrates.\n\n(2) The Central Government may appoint one or more Assistant Public Prosecutors for the purpose of conducting any case or class of cases in the Courts of Magistrates.\n\n(3) Without prejudice to provisions contained in sub-sections (1) and (2), where no Assistant Public Prosecutor is available for the purposes of any particular case, the District Magistrate may appoint any other person to be the Assistant Public Prosecutor in charge of that case after giving notice of fourteen days to the State Government:\n\nProvided that no police officer shall be eligible to be appointed as an Assistant Public Prosecutor, if he—\n\n(a) has taken any part in the investigation into the offence with respect to which the accused is being prosecuted; or\n\n(b) is below the rank of Inspector.",
+  "page_start": 22,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "92cb08d5-5d53-49ca-b6d8-6e0ae7192bb5",
+    "handle": "123456789/546126",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

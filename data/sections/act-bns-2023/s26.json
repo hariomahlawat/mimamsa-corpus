@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s26",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "26",
+  "heading": "Act not intended to cause death, done by consent in good faith for person's benefit.",
+  "chapter": null,
+  "order": 26,
+  "text": "Nothing, which is not intended to cause death, is an offence by reason of any harm which it may cause, or be intended by the doer to cause, or be known by the doer to be likely to cause, to any person for whose benefit it is done in good faith, and who has given a consent, whether express or implied, to suffer that harm, or to take the risk of that harm.\n\nIllustration.\n\nA, a surgeon, knowing that a particular operation is likely to cause the death of Z, who suffers under the painful complaint, but not intending to cause Zs death, and intending, in good faith, Zs benefit, performs that operation on Z, with Zs consent. A has committed no offence.",
+  "page_start": 24,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "00490ed0-1e66-47cc-83a8-f358b7ad82b9",
+    "handle": "123456789/545520",
+    "listing_raw_path": "data/raw/indiacode/2023/3f63bdbb2512a509521a6dc9e8e8d97044f569307a1a0c1b10a743ec30873357.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s505",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "505",
+  "heading": "Power to sell perishable property.",
+  "chapter": null,
+  "order": 505,
+  "text": "If the person entitled to the possession of such property is unknown or absent and the property is subject to speedy and natural decay, or if the Magistrate to whom its seizure is reported is of opinion that its sale would be for the benefit of the owner, or that the value of such property is less than ten thousand rupees, the Magistrate may at any time direct it to be sold; and the provisions of sections 503 and 504 shall, as nearly as may be practicable, apply to the net proceeds of such sale.",
+  "page_start": 167,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3b97f973-7e7e-4da0-bae6-5ef08cb3aaf7",
+    "handle": "123456789/546586",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s142",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "142",
+  "heading": "Powers of courts martial and disciplinary courts in relation to proceedings under this Act",
+  "chapter": null,
+  "order": 146,
+  "text": "Any trial by a court-martial or disciplinary court under the provisions of this Act shall be deemed to be a judicial proceeding within the meaning of sections 193 and 228 of the Indian Penal Code (45 of 1860), and the court-martial or disciplinary court shall be deemed to be a court within the meaning of [1][sections 345 and 346 of the Code of Criminal Procedure, 1973 (2 of 1974).]",
+  "page_start": 45,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 9, ibid.",
+      "by_doc_id": null,
+      "effective_date": "1982-10-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs by s. 9, ibid., for \"under sections 480 and 482 of the Code of Criminal Procedure Code, 1898 (5 of 1898)\" (w.e.f. 16-10-1982).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "98f2adab-fcf4-40dd-ae2c-a3eeea961550",
+    "handle": "123456789/524026",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

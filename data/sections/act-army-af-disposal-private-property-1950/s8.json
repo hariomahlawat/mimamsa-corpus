@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-af-disposal-private-property-1950#s8",
+  "parent_doc_id": "act-army-af-disposal-private-property-1950",
+  "unit": "section",
+  "number": "8",
+  "heading": "Disposal of surplus by prescribed persons.",
+  "chapter": null,
+  "order": 8,
+  "text": "On receipt of the surplus referred to in sub-section (7) of section 3 or clause (ii) of section 4 or sub-section (4) of section 7, the prescribed person shall,--\n\n(a) if he knows of a representative of the deceased, pay the surplus to that representative;\n\n(b) if he does not know of any such representative and the surplus has not been disposed of under section 10, publish every year a notice in the prescribed form and manner for six consecutive years and if no claim to the surplus is made by a representative of the deceased within six months even after the publication of the last of such notices, the prescribed person shall deposit the surplus together with any income or accumulation of income accrued therefrom to the credit of the Central Government:\n\nProvided that such deposit shall not bar the claim of any person to such surplus or any part thereof, if he is otherwise entitled to it.",
+  "page_start": 5,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ce47900b-4d9e-4cb0-bc51-b4c8f3bd5886",
+    "handle": "123456789/527788",
+    "listing_raw_path": "data/raw/indiacode/1950/2dce3a9525b06939bf0a27ebc223106bd030c88a8fa3f2aa0c722862fe2924b3.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

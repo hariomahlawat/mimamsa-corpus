@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s77",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "77",
+  "heading": "Field punishment.",
+  "chapter": null,
+  "order": 77,
+  "text": "(1) Where any person subject to this Act and under the rank of warrant officer commits any offence on active service, shall be lawful for a court-martial to award for that offence any such punishment as is prescribed as a field punishment.\n\n(2) Field punishment shall be of the character of personal restraint or of hard labour but shall not be of a nature to cause injury to life or limb and shall not include flogging.",
+  "page_start": 30,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6ec6b0e8-3299-4477-b8a7-903603a4645e",
+    "handle": "123456789/519393",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

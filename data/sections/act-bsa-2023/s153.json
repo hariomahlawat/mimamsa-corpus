@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s153",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "153",
+  "heading": "Procedure of Court in case of question being asked without reasonable grounds.",
+  "chapter": null,
+  "order": 153,
+  "text": "If the Court is of opinion that any such question was asked without reasonable grounds, it may, if it was asked by any advocate, report the circumstances of the case to the High Court or other authority to which such advocate is subject in the exercise of his profession.",
+  "page_start": 45,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "4e97d6f7-b89d-46c5-b369-f948e47a2543",
+    "handle": "123456789/546053",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s202",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "202",
+  "heading": "Offences committed by means of electronic communications, letters, etc.",
+  "chapter": null,
+  "order": 202,
+  "text": "(1) Any offence which includes cheating, may, if the deception is practised by means of electronic communications or letters or telecommunication messages, be inquired into or tried by any Court within whose local jurisdiction such electronic communications or letters or messages were sent or were received; and any offence of cheating and dishonestly inducing delivery of property may be inquired into or tried by a Court within whose local jurisdiction the property was delivered by the person deceived or was received by the accused person.\n\n(2) Any offence punishable under section 82 of the Bharatiya Nyaya Sanhita, 2023 may be inquired into or tried by a Court within whose local jurisdiction the offence was committed or the offender last resided with his or her spouse by the first marriage, or the wife by the first marriage has taken up permanent residence after the commission of the offence.",
+  "page_start": 80,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "cbca9531-a323-42c9-917d-5d49e534ff00",
+    "handle": "123456789/546302",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s141",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "141",
+  "heading": "Importation of girl or boy from foreign country.",
+  "chapter": null,
+  "order": 141,
+  "text": "Whoever imports into India from any country outside India any girl under the age of twenty-one years or any boy under the age of eighteen years with intent that girl or boy may be, or knowing it to be likely that girl or boy will be, forced or seduced to illicit intercourse with another person, shall be punishable with imprisonment which may extend to ten years and shall also be liable to fine.",
+  "page_start": 68,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "fb057860-b867-4150-b91a-7aa62951b081",
+    "handle": "123456789/545641",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

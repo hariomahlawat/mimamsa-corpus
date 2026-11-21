@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s1",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "1",
+  "heading": "Short title, application and commencement.",
+  "chapter": null,
+  "order": 1,
+  "text": "(1) This Act may be called the Bharatiya Sakshya Adhiniyam, 2023.\n\n(2) It applies to all judicial proceedings in or before any Court, including Courts-martial, but not to affidavits presented to any Court or officer, nor to proceedings before an arbitrator.\n\n(3) It shall come into force on such date[1] as the Central Government may, by notification in the Official Gazette, appoint.",
+  "page_start": 8,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [
+    "1st July, 2024, vide notification No. S.O. 849(E), dated, 23rd day of February, 2024, see Gazette of India, Extraordinary, Part II, sec. 3(ii)."
+  ],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c302c676-9845-4c28-8cf8-8ea83d6a9f74",
+    "handle": "123456789/545895",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

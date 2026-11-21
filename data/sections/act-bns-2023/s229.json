@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s229",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "229",
+  "heading": "Punishment for false evidence.",
+  "chapter": null,
+  "order": 229,
+  "text": "(1) Whoever intentionally gives false evidence in any stage of a judicial proceeding, or fabricates false evidence for the purpose of being used in any stage of a judicial proceeding, shall be punished with imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine which may extend to ten thousand rupees.\n\n(2) Whoever intentionally gives or fabricates false evidence in any case other than that referred to in sub-section (1), shall be punished with imprisonment of either description for a term which may extend to three years, and shall also be liable to fine which may extend to five thousand rupees.\n\nExplanation 1.—A trial before a Court-martial is a judicial proceeding.\n\nExplanation 2.—An investigation directed by law preliminary to a proceeding before a Court, is a stage of a judicial proceeding, though that investigation may not take place before a Court.\n\nIllustration.\n\nA, in an enquiry before a Magistrate for the purpose of ascertaining whether Z ought to be committed for trial, makes on oath a statement which he knows to be false. As this enquiry is a stage of a judicial proceeding, A has given false evidence.\n\nExplanation 3.—An investigation directed by a Court according to law, and conducted under the authority of a Court, is a stage of a judicial proceeding, though that investigation may not take place before a Court.\n\nIllustration.\n\nA, in an enquiry before an officer deputed by a Court to ascertain on the spot the boundaries of land, makes on oath a statement which he knows to be false. As this enquiry is a stage of a judicial proceeding, A has given false evidence.",
+  "page_start": 73,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "93e19df3-df14-436b-9c75-52bbfa6764fa",
+    "handle": "123456789/545724",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

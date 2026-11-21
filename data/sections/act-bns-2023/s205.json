@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s205",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "205",
+  "heading": "Wearing garb or carrying token used by public servant with fraudulent intent.",
+  "chapter": null,
+  "order": 205,
+  "text": "Whoever, not belonging to a certain class of public servants, wears any garb or carries any token resembling any garb or token used by that class of public servants, with the intention that it may be believed, or with the knowledge that it is likely to be believed, that he belongs to that class of public servants, shall be punished with imprisonment of either description for a term which may extend to three months, or with fine which may extend to five thousand rupees, or with both.",
+  "page_start": 91,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8009a777-372e-4878-a341-5d2feab54949",
+    "handle": "123456789/545702",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

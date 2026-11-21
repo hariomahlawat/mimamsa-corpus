@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s98",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "98",
+  "heading": "Power to declare certain publications forfeited and to issue search-warrants for same.",
+  "chapter": null,
+  "order": 98,
+  "text": "(1) Where—\n\n(a) any newspaper, or book; or\n\n(b) any document,\n\nwherever printed, appears to the State Government to contain any matter the publication of which is punishable under section 152 or section 196 or section 197 or section 294 or section 295 or section 299 of the Bharatiya Nyaya Sanhita, 2023 (45 of 2023) , the State Government may, by notification, stating the grounds of its opinion, declare every copy of the issue of the newspaper containing such matter, and every copy of such book or other document to be forfeited to Government, and thereupon any police officer may seize the same wherever found in India and any Magistrate may by warrant authorise any police officer not below the rank of sub-inspector to enter upon and search for the same in any premises where any copy of such issue, or any such book or other document may be or may be reasonably suspected to be.\n\n(2) In this section and in section 99,—\n\n(a) “newspaper” and “book” have the same meanings as in the Press and Registration of Books Act, 1867 (25 of 1867);\n\n(b) “document” includes any painting, drawing or photograph, or other visible representation.\n\n(3) No order passed or action taken under this section shall be called in question in any Court otherwise than in accordance with the provisions of section 99.",
+  "page_start": 42,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d5b373d2-4ffc-4202-8ff0-9cd879bf9117",
+    "handle": "123456789/546206",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

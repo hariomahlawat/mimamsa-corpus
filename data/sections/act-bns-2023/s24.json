@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s24",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "24",
+  "heading": "Offence requiring a particular intent or knowledge committed by one who is intoxicated.",
+  "chapter": null,
+  "order": 24,
+  "text": "In cases where an act done is not an offence unless done with a particular knowledge or intent, a person who does the act in a state of intoxication shall be liable to be dealt with as if he had the same knowledge as he would have had if he had not been intoxicated, unless the thing which intoxicated him was administered to him without his knowledge or against his will.",
+  "page_start": 6,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ba5eb0ba-41df-43a3-a94b-38b6d60e87bc",
+    "handle": "123456789/545517",
+    "listing_raw_path": "data/raw/indiacode/2023/3f63bdbb2512a509521a6dc9e8e8d97044f569307a1a0c1b10a743ec30873357.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

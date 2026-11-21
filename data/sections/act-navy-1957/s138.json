@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s138",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "138",
+  "heading": "Power of court to pay compensation out of fine",
+  "chapter": null,
+  "order": 142,
+  "text": "(1) Whenever a court-martial imposes a fine as a punishment, the court may when passing judgment order the whole or any part of the fine recovered to be applied,--\n\n(a) in the payment to any person aggrieved as compensation for any loss or injury caused by the offence;\n\n(b) When any person is convicted of any civil offence which includes theft, criminal misappropriation, criminal breach of trust or cheating or of having dishonestly received or retained or of having voluntarily assisted in disposing of stolen property knowing or having reason to believe the same to be stolen property, in compensating any bona fide purchaser of the property for the loss of the same if such property is restored to the possession of the person entitled thereto.\n\n(2) No such payment or compensation shall, however, be made before the expiry of fifteen days from the date of the sentence, and when a petition is presented against the conviction or sentence until the said petition is disposed of Power of courts-martial respecting contempt, etc.",
+  "page_start": 44,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c263fc16-e4fe-49b6-9c0c-88a40e17d806",
+    "handle": "123456789/524021",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

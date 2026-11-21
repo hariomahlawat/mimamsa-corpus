@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s162",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "162",
+  "heading": "Transmission of proceedings of summary court-martial.",
+  "chapter": null,
+  "order": 162,
+  "text": "The proceedings of every summary court-martial shall without delay be forwarded to the officer commanding the division or brigade within which the trial was held, or to the prescribed officer; and such officer, or [1][the Chief of the Army Staff], or any officer empowered in this behalf by [1][the Chief of the Army Staff], may, for reasons based on the merits of the case, but not any merely technical grounds, set aside the proceedings or reduce the sentence to any other sentence which the court might have passed.",
+  "page_start": 42,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief \".",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "91c10011-6a25-4d58-8e15-ca83bec7ca9d",
+    "handle": "123456789/526033",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

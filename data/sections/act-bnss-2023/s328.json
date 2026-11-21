@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s328",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "328",
+  "heading": "Evidence of officers of Mint.",
+  "chapter": null,
+  "order": 328,
+  "text": "(1) Any document purporting to be a report under the hand of a gazetted officer of any Mint or of any Note Printing Press or of any Security Printing Press (including the officer of the Controller of Stamps and Stationery) or of any Forensic Department or Division of Forensic Science Laboratory or any Government Examiner of Questioned Documents or any State Examiner of Questioned Documents as the Central Government may, by notification, specify in this behalf, upon any matter or thing duly submitted to him for examination and report in the course of any proceeding under this Sanhita, may be used as evidence in any inquiry, trial or other proceeding under this Sanhita, although such officer is not called as a witness.\n\n(2) The Court may, if it thinks fit, summon and examine any such officer as to the subject-matter of his report:\n\nProvided that no such officer shall be summoned to produce any records on which the report is based.\n\n(3) Without prejudice to the provisions of sections 129 and 130 of the Bharatiya Sakshya Adhiniyam, 2023, no such officer shall, except with the permission of the General Manager or any officer in charge of any Mint or of any Note Printing Press or of any Security Printing Press or of any Forensic Department or any officer in charge of the Forensic Science Laboratory or of the Government Examiner of Questioned Documents Organisation or of the State Examiner of Questioned Documents Organisation be permitted---\n\n(a) to give any evidence derived from any unpublished official records on which the report is based; or\n\n(b) to disclose the nature or particulars of any test applied by him in the course of the examination of the matter or thing.",
+  "page_start": 112,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "df7ee9dd-b4ef-4735-b7c4-ae7b10278062",
+    "handle": "123456789/546419",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

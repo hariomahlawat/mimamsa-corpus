@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s138",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "138",
+  "heading": "Conviction of offence not charged.",
+  "chapter": null,
+  "order": 138,
+  "text": "(1) A person charged before a court-martial with desertion may be found guilty of attempting to desert or of being absent without leave.\n\n(2) A person charged before a court-martial with attempting to desert may be found guilty of being absent without leave.\n\n(3) A person charged before a court-martial with using criminal force-may be found guilty of assault.\n\n(4) A person charged before a court-martial with using threatening language may be found guilty of using insubordinate language.\n\n(5) A person charged before a court-martial with any one of the offences specified in clauses (a), (b), (c) and (d) of section 52 may be found guilty of any other of these offences with which he might have been charged.\n\n(6) A person charged before a court-martial with an offence punishable under section 71 may be found guilty of any other offence of which he might have been found guilty if the provisions of the Code of Criminal Procedure, 1898 (5 of 1898), were applicable.\n\n(7) A person charged before a court-martial with any offence under this Act may on failure of proof of an offence having been committed in circumstances involving a more severe punishment, be found guilty of the same offence as having been committed in circumstances involving a less severe punishment.\n\n(8) A person charged before a court-martial with any offence under this Act may be found guilty of having attempted or abetted the commission of that offence, although the attempt or abetment is not separately charged.",
+  "page_start": 42,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "7bb22b8e-bfc0-4226-aaf0-319bbbcc4679",
+    "handle": "123456789/523749",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s82",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "82",
+  "heading": "Procedure on arrest of person against whom warrant issued.",
+  "chapter": null,
+  "order": 82,
+  "text": "(1) When a warrant of arrest is executed outside the district in which it was issued, the person arrested shall, unless the Court which issued the warrant is within thirty kilometres of the place of arrest or is nearer than the Executive Magistrate or District Superintendent of Police or Commissioner of Police within the local limits of whose jurisdiction the arrest was made, or unless security is taken under section 73, be taken before such Magistrate or District Superintendent or Commissioner.\n\n(2) On the arrest of any person referred to in sub-section (1), the police officer shall forthwith give the information regarding such arrest and the place where the arrested person is being held to the designated police officer in the district and to such officer of another district where the arrested person normally resides.",
+  "page_start": 38,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3d3b42d7-0cdc-4c10-aaba-1408eb34148d",
+    "handle": "123456789/546192",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

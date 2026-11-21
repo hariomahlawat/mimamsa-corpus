@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s91",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "91",
+  "heading": "Deductions from pay and allowances of officers.",
+  "chapter": null,
+  "order": 91,
+  "text": "The following penal deductions may be made from the pay and allowances of an officer, that is to say,--\n\n(a) all pay and allowances due to an officer for every day he absents himself without leave, unless a satisfactory explanation has been given to his commanding officer and has been approved by the Central Government;\n\n(b) all pay and allowances for everyday while he is in custody or under suspension from duty on a charge for an offence of which he is afterwards convicted by a criminal court or a court-martial or by an officer exercising authority under section 86;\n\n(c) any sum required to make good the pay of any person subject to this Act which he has unlawfully retained or unlawfully refused to pay;\n\n(d) any sum required to make good such compensation for any expenses, loss, damage or destruction occasioned by the commission of an offence as may be determined by the court-martial by whom he is convicted of such offence, or by an officer exercising authority under section 86;\n\n(e) all pay and allowances ordered by a court-martial or an officer exercising authority under section 86 to be forfeited or stopped;\n\n(f) any sum required to pay a fine awarded by a criminal court or a court-martial exercising jurisdiction under section 71;\n\n(g) any sum required to make good any loss, damage or destruction of public or service property which, after due investigation, appears to the Central Government to have been occasioned by the wrongful act or negligence on the part of the officer;\n\n(h) all pay and allowances forfeited by order of the Central Government if the officer is found by a court of inquiry constituted by [1][the Chief of the Air Staff] in this behalf, to have deserted to the enemy, or while in enemy hands, to have served with, or under the orders of, the enemy or in any manner to have aided the enemy, or to have allowed himself to be taken prisoner by the enemy through want of due precaution or through disobedience of orders or wilful neglect of duty, or having been taken prisoner by the enemy to have failed to rejoin his service when it was possible to do so;\n\n(i) any sum required by order of the Central Government to be paid for the maintenance of his wife or his legitimate or illegitimate child or towards the costs of any relief given by the said Government to the said wife or child.",
+  "page_start": 32,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1955-05-07",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief\" (w.e.f. 7-5-1955).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "651a39dc-9c83-4935-9738-d853181227a8",
+    "handle": "123456789/519409",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

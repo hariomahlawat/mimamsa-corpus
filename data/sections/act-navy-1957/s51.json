@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s51",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "51",
+  "heading": "Breaking out of ship and absence without leave.",
+  "chapter": null,
+  "order": 51,
+  "text": "Every person subject to naval law who without being guilty of desertion improperly leaves his ship or place of duty [1][or any place where he is required to be] or is absent without leave shall be punished with imprisonment for a term which may extend to two years or such other punishment as is hereinafter mentioned and shall also be punished by such mulcts of pay and allowances as may be prescribed.",
+  "page_start": 22,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 53 of 1974",
+      "by_doc_id": null,
+      "effective_date": "1974-12-16",
+      "effective_date_raw": null,
+      "footnote_text": "Ins by Act 53 of 1974, s. 11 (w.e.f. 16-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f60268b0-bcb8-4632-b5af-77ff59f04a8e",
+    "handle": "123456789/517401",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

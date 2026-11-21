@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s144",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "144",
+  "heading": "Lunacy of the accused at the time of offence",
+  "chapter": null,
+  "order": 148,
+  "text": "(1) Whenever any person subject to naval law is acquitted upon the ground that, at the time at which he is alleged to have committed an offence, he was, by reason of unsoundness of mind, incapable of knowing the nature of the act alleged as constituting the offence, or that it was wrong or contrary to law, the finding shall specifically state whether he committed the act or not.\n\n(2) Whenever the finding made under sub-section (1) states that the accused person committed the act alleged, the court-martial shall, if such act would, but for the incapacity found, have constituted an offence, order such person to be detained in safe custody in such place and in such manner as may be prescribed and shall report the action taken to the officer convening the court.\n\n(3) The officer convening the court shall then report the case for the orders of the Central Government and shall take necessary steps to detain the said person in safe custody pending receipt of such orders.\n\n(4) The Central Government may on receipt of a report under sub-section (3) order the accused person to be detained in a mental hospital or other suitable place of safe custody.",
+  "page_start": 45,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "914444b8-3164-4dd2-8ace-cf95f516778d",
+    "handle": "123456789/524028",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

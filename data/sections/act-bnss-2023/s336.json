@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s336",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "336",
+  "heading": "Evidence of public servants, experts, police officers in certain cases.",
+  "chapter": null,
+  "order": 336,
+  "text": "Where any document or report prepared by a public servant, scientific expert or medical officer is purported to be used as evidence in any inquiry, trial or other proceeding under this Sanhita, and---\n\n(i) such public servant, expert or officer is either transferred, retired, or died; or\n\n(ii) such public servant, expert or officer cannot be found or is incapable of giving deposition; or\n\n(iii) securing presence of such public servant, expert or officer is likely to cause delay in holding the inquiry, trial or other proceeding, the Court shall secure presence of successor officer of such public servant, expert, or officer who is holding that post at the time of such deposition to give deposition on such document or report:\n\nProvided that no public servant, scientific expert or medical officer shall be called to appear before the Court unless the report of such public servant, scientific expert or medical officer is disputed by any of the parties of the trial or other proceedings:\n\nProvided further that the deposition of such successor public servant, expert or officer may be allowed through audio-video electronic means.",
+  "page_start": 114,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "845b0f04-684f-4c18-bb4c-c422e80fcb3f",
+    "handle": "123456789/546427",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

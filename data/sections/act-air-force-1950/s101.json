@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s101",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "101",
+  "heading": "Period during which a person is deemed to be a prisoner of war",
+  "chapter": null,
+  "order": 101,
+  "text": "For the purposes of sections 99 and 100, a person shall be deemed to continue to be a prisoner of war until the conclusion of any inquiry into has conduct such as is referred to in section 97, and if he is cashiered or dismissed from the service in consequence of such conduct, until the date of such cashiering or dismissal.",
+  "page_start": 35,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1a7854bc-88ab-4143-8a2f-a00062556826",
+    "handle": "123456789/523712",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.2.0",
+  "source": "indiacode",
+  "source_url": "https://indiacode.gov.in/server/api/core/bitstreams/c83585f7-e505-4f9c-a31b-ce07488a60a2/content",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T14:33:48+00:00",
+  "sha256": "d483c44d1f346ec261f6e52c66e8e785029ba82d66f84f329f3e04b8bb74915d",
+  "raw_path": "data/raw/indiacode/0000/d483c44d1f346ec261f6e52c66e8e785029ba82d66f84f329f3e04b8bb74915d.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/notif-jurisdiction-for-telangana.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "notif-jurisdiction-for-telangana",
+      "type": "implements",
+      "target_doc_id": "act-armed-forces-tribunal-2007",
+      "target_ref_raw": "The Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "India Code lists this NOTIFICATION record under act_id AC_CEN_28_38_00013_200755_1517807323574 (The Armed Forces Tribunal Act, 2007).",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "notif-jurisdiction-for-telangana",
+  "doc_type": "notification",
+  "title": "Jurisdiction for Telangana",
+  "number": "Jurisdiction for Telangana",
+  "issuing_authority": "Ministry of Defence",
+  "issue_date": "2015-02-26",
+  "effective_date": null,
+  "status": "in_force",
+  "status_note": "Listed as not repealed on India Code (read 2026-11-21)",
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "original_filename": "163120.pdf",
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0211df86-ef62-4859-bf46-fadb8c5035d4",
+    "collection": "NOTIFICATION",
+    "act_id": "AC_CEN_28_38_00013_200755_1517807323574",
+    "handle": "123456789/501079",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "number": "crawler",
+    "issue_date": "crawler",
+    "issuing_authority": "crawler",
+    "status": "rule",
+    "page_count": "rule",
+    "text_method": "rule"
+  }
+}

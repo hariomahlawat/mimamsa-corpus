@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s145",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "145",
+  "heading": "Disposal of property pending trial",
+  "chapter": null,
+  "order": 149,
+  "text": "When any property regarding which an offence appears to have been committed or which appears to have been used for the commission of an offence is produced before a court-martial, the court may make such order as it thinks fit for the proper custody such property pending the conclusion of the trial and if the property is subject to speedy or natural decay may after recording such evidence as it thinks necessary order it to be sold or otherwise disposed of",
+  "page_start": 46,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d777d2b0-c21b-480d-a704-4ff88a1cd74d",
+    "handle": "123456789/524029",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

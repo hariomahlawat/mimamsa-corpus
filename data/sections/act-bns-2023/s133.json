@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s133",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "133",
+  "heading": "Assault or criminal force with intent to dishonour person, otherwise than on grave provocation.",
+  "chapter": null,
+  "order": 133,
+  "text": "Whoever assaults or uses criminal force to any person, intending thereby to dishonour that person, otherwise than on grave and sudden provocation given by that person, shall be punished with imprisonment of either description for a term which may extend to two years, or with fine, or with both.",
+  "page_start": 62,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0d13d06b-d58e-4a1b-8b66-1ab29bfbd1f0",
+    "handle": "123456789/545856",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

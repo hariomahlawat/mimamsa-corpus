@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s455",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "455",
+  "heading": "Postponement of execution of sentence of death in case of appeal to Supreme Court.",
+  "chapter": null,
+  "order": 455,
+  "text": "(1) Where a person is sentenced to death by the High Court and an appeal from its judgment lies to the Supreme Court under sub-clause (a) or sub-clause (b) of clause (1) of article 134 of the Constitution, the High Court shall order the execution of the sentence to be postponed until the period allowed for preferring such appeal has expired, or if, an appeal is preferred within that period, until such appeal is disposed of.\n\n(2) Where a sentence of death is passed or confirmed by the High Court, and the person sentenced makes an application to the High Court for the grant of a certificate under article 132 or under sub-clause (c) of clause (1) of article 134 of the Constitution, the High Court shall order the execution of the sentence to be postponed until such application is disposed of by the High Court, or if a certificate is granted on such application, until the period allowed for preferring an appeal to the Supreme Court on such certificate has expired.\n\n(3) Where a sentence of death is passed or confirmed by the High Court, and the High Court is satisfied that the person sentenced intends to present a petition to the Supreme Court for the grant of special leave to appeal under article 136 of the Constitution, the High Court shall order the execution of the sentence to be postponed for such period as it considers sufficient to enable him to present such petition.",
+  "page_start": 153,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "832261cf-fae1-43ed-a66e-e1c4d3f9d908",
+    "handle": "123456789/546544",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

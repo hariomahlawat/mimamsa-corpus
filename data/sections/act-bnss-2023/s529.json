@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s529",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "529",
+  "heading": "Duty of High Court to exercise continuous superintendence over Courts.",
+  "chapter": null,
+  "order": 529,
+  "text": "Every High Court shall so exercise its superintendence over the Courts of Session and Courts of Judicial Magistrates subordinate to it as to ensure that there is an expeditious and proper disposal of cases by the Judges and Magistrates.",
+  "page_start": 172,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f64e2336-f5f8-4b6d-b887-421b6acb2e9e",
+    "handle": "123456789/546611",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

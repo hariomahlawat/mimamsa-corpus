@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s136",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "136",
+  "heading": "Assault or criminal force on grave provocation.",
+  "chapter": null,
+  "order": 136,
+  "text": "Whoever assaults or uses criminal force to any person on grave and sudden provocation given by that person, shall be punished with simple imprisonment for a term which may extend to one month, or with fine which may extend to one thousand rupees, or with both.\n\nExplanation.—This section is subject to the same Explanation as section 131.",
+  "page_start": 66,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "9c4ae294-4d82-41b7-8aa3-64408340c7ce",
+    "handle": "123456789/545636",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s22",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "22",
+  "heading": "Act of a person of unsound mind.",
+  "chapter": null,
+  "order": 22,
+  "text": "Nothing is an offence which is done by a person who, at the time of doing it, by reason of unsoundness of mind, is incapable of knowing the nature of the act, or that he is doing what is either wrong or contrary to law.",
+  "page_start": 5,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c7883238-d5bf-4e0a-9d92-c43c38e10143",
+    "handle": "123456789/545515",
+    "listing_raw_path": "data/raw/indiacode/2023/3f63bdbb2512a509521a6dc9e8e8d97044f569307a1a0c1b10a743ec30873357.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

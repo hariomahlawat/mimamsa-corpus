@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s159",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "159",
+  "heading": "Confirming of findings and sentences on board a ship.",
+  "chapter": null,
+  "order": 159,
+  "text": "When any person subject to this Act is tried and sentenced by a court-martial while on board a ship, the finding and sentence so far as not confirmed and executed on board the ship, may be confirmed and executed in like manner as if such person had been tried at the port of disembarkation.",
+  "page_start": 41,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "314b0107-f2d4-4df0-bb7b-0ae9459fda08",
+    "handle": "123456789/526030",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

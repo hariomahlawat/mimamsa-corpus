@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s81",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "81",
+  "heading": "Limit of punishments under section 80.",
+  "chapter": null,
+  "order": 81,
+  "text": "[1]* * * * *.\n\n(2) In the case of an award of two or more of the punishments specified in clauses (a), (b), (c) and (d) of the said section, the punishment specified in clause (c) or clause (d) shall take effect only at the end of the punishment specified in clause (a) or clause (b).\n\n(3) When two or more of the punishments specified in the said clauses (a), (b) and (c) are awarded to a person conjointly, or when already undergoing one or more of the said punishments, the whole extent of the punishments shall not exceed in the aggregate forty-two days.\n\n(4) The punishments specified in clauses [2][(a), (b) and (c)] of section 80 shall not be awarded to any person who is of the rank of non-commissioned officer or was, at the time of committing the offence for which he is punished, of such rank.\n\n(5) The punishment specified in clause (g) of the said section shall not be awarded to any person below the rank of a non- commissioned officer.",
+  "page_start": 27,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "2 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "omitted",
+      "by_ref_raw": "Act 37 of 1992",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Omitted by Act 37 of 1992, s. 5.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 5, ibid.",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 5, ibid., for \"(a), (b), (c) and (j)\".",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "586509d4-cf3f-4d85-bab5-0ade02a7a825",
+    "handle": "123456789/525944",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

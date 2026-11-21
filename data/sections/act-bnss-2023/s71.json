@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s71",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "71",
+  "heading": "Service of summons on witness.",
+  "chapter": null,
+  "order": 71,
+  "text": "(1) Notwithstanding anything contained in the preceding sections of this Chapter, a Court issuing a summons to a witness may, in addition to and simultaneously with the issue of such summons, direct a copy of the summons to be served by electronic communication or by registered post addressed to the witness at the place where he ordinarily resides or carries on business or personally works for gain.\n\n(2) When an acknowledgement purporting to be signed by the witness or an endorsement purporting to be made by a postal employee that the witness refused to take delivery of the summons has been received or on the proof of delivery of summons under sub-section (3) of section 70 by electronic communication to the satisfaction of the Court, the Court issuing summons may deem that the summons has been duly served.",
+  "page_start": 36,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "412c9977-82d5-4b09-bf87-baa668b517bf",
+    "handle": "123456789/546181",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

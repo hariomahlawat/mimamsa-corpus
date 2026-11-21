@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s228",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "228",
+  "heading": "Magistrate may dispense with personal attendance of accused.",
+  "chapter": null,
+  "order": 228,
+  "text": "(1) Whenever a Magistrate issues a summons, he may, if he sees reason so to do, dispense with the personal attendance of the accused and permit him to appear by his advocate.\n\n(2) But the Magistrate inquiring into or trying the case may, in his discretion, at any stage of the proceedings, direct the personal attendance of the accused, and, if necessary, enforce such attendance in the manner hereinbefore provided.",
+  "page_start": 87,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "eb5ca21a-5e6b-477e-84a3-04e6691574e9",
+    "handle": "123456789/546328",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

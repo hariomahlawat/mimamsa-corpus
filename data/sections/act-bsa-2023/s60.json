@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s60",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "60",
+  "heading": "Cases in which secondary evidence relating to documents maybe given.",
+  "chapter": null,
+  "order": 60,
+  "text": "Secondary evidence may be given of the existence, condition, or contents of a document in the following cases, namely:--\n\n(a) when the original is shown or appears to be in the possession or power--\n\n(i) of the person against whom the document is sought to be proved; or\n\n(ii) of any person out of reach of, or not subject to, the process of the Court; or\n\n(iii) of any person legally bound to produce it,\n\nand when, after the notice mentioned in section 64 such person does not produce it;\n\n(b) when the existence, condition or contents of the original have been proved to be admitted in writing by the person against whom it is proved or by his representative in interest;\n\n(c) when the original has been destroyed or lost, or when the party offering evidence of its contents cannot, for any other reason not arising from his own default or neglect, produce it in reasonable time;\n\n(d) when the original is of such a nature as not to be easily movable;\n\n(e) when the original is a public document within the meaning of section 74;\n\n(f) when the original is a document of which a certified copy is permitted by this Adhiniyam, or by any other law in force in India to be given in evidence;\n\n(g) when the originals consist of numerous accounts or other documents which cannot conveniently be examined in Court, and the fact to be proved is the general result of the whole collection.\n\nExplanation.--For the purposes of--\n\n(i) clauses (a), (c) and (d), any secondary evidence of the contents of the document is admissible;\n\n(ii) clause (b), the written admission is admissible;\n\n(iii) clause (e) or (f), a certified copy of the document, but no other kind of secondary evidence, is admissible;\n\n(iv) clause (g), evidence may be given as to the general result of the documents by any person who has examined them, and who is skilled in the examination of such document.",
+  "page_start": 27,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "af13e07a-7a8e-4236-a23b-9d56ae0a3c7e",
+    "handle": "123456789/545954",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

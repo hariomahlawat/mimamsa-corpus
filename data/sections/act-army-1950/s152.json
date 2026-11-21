@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s152",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "152",
+  "heading": "Powers of court-martial in relation to proceedings under this Act.",
+  "chapter": null,
+  "order": 152,
+  "text": "Any trial by a courtmartial under the provisions of this Act shall be deemed to be a judicial proceeding within the meaning of sections 193 and 228 of the Indian Penal Code (45 of 1860), and the court-martial shall be deemed to be a Court within the meaning of [1][sections 345 and 346 of the Code of Criminal Procedure, 1973 (2 of 1974)].",
+  "page_start": 41,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 37 of 1992",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 37 of 1992, s. 16, for certain words.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f49a9e11-dbdf-4b48-a5c9-95a81431904b",
+    "handle": "123456789/526022",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

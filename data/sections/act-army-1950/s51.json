@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s51",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "51",
+  "heading": "Escape from custody.",
+  "chapter": null,
+  "order": 51,
+  "text": "Any person subject to this Act who, being in lawful custody, escapes or attempts to escape, shall, on conviction by court-martial, be liable to suffer imprisonment for a term which may extend to five years or such less punishment as is in this Act mentioned.",
+  "page_start": 21,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "51705347-9538-431b-9b26-8c334298bf25",
+    "handle": "123456789/525911",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

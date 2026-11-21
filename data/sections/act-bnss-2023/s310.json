@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s310",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "310",
+  "heading": "Record in warrant-cases.",
+  "chapter": null,
+  "order": 310,
+  "text": "(1) In all warrant-cases tried before a Magistrate, the evidence of each witness shall, as his examination proceeds, be taken down in writing either by the Magistrate himself\n\nor by his dictation in open Court or, where he is unable to do so owing to a physical or other incapacity, under his direction and superintendence, by an officer of the Court appointed by him in this behalf:\n\nProvided that evidence of a witness under this sub-section may also be recorded by audio-video electronic means in the presence of the advocate of the person accused of the offence.\n\n(2) Where the Magistrate causes the evidence to be taken down, he shall record a certificate that the evidence could not be taken down by himself for the reasons referred to in sub-section (1).\n\n(3) Such evidence shall ordinarily be taken down in the form of a narrative; but the Magistrate may, in his discretion take down, or cause to be taken down, any part of such evidence in the form of question and answer.\n\n(4) The evidence so taken down shall be signed by the Magistrate and shall form part of the record.",
+  "page_start": 109,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6e22a1ae-4bae-464b-946b-a546bc221469",
+    "handle": "123456789/546403",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

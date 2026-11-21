@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s465",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "465",
+  "heading": "Who may issue warrant.",
+  "chapter": null,
+  "order": 465,
+  "text": "Every warrant for the execution of a sentence may be issued either by the Judge or Magistrate who passed the sentence, or by his successor-in-office.",
+  "page_start": 155,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8b7dea06-ad11-4fde-90ba-cb30bd370e22",
+    "handle": "123456789/546666",
+    "listing_raw_path": "data/raw/indiacode/2023/84de940d3a0fe09d9683198d94de1a7af018b90eb5d0667daa39ef362963cb9b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

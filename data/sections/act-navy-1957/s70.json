@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s70",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "70",
+  "heading": "Fraudulent entry",
+  "chapter": null,
+  "order": 74,
+  "text": "Every person who upon entry into or offering himself to enter the naval service wilfully makes or gives any false statement whether orally or in writing to any officer or person authorised to enter or enrol [1][sailors] or others in or for such naval service, shall, if he has become subject to naval law, be punished with imprisonment for a term which may extend to five years or such other punishment as is hereinafter mentioned.",
+  "page_start": 26,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 53 of 1974",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": "16-12-74",
+      "footnote_text": "Subs. by Act 53 of 1974, s. 2, for \"seaman\" (w.e.f. 16-12-74).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b5e340cc-ef5e-445d-9c14-e6ef505a9eca",
+    "handle": "123456789/523934",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

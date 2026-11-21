@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s380",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "380",
+  "heading": "Appeal.",
+  "chapter": null,
+  "order": 380,
+  "text": "(1) Any person on whose application any Court other than a High Court has refused to make a complaint under sub-section (1) or sub-section (2) of section 379, or against whom such a complaint has been made by such Court, may appeal to the Court to which such former Court is subordinate within the meaning of sub-section (4) of section 215, and the superior Court may thereupon, after notice to the parties concerned, direct the withdrawal of the complaint, or, as the case may be, making of the complaint which such former Court might have made under section 379, and, if it makes such complaint, the provisions of that section shall apply accordingly.\n\n(2) An order under this section, and subject to any such order, an order under section 379, shall be final, and shall not be subject to revision.",
+  "page_start": 134,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b0f2ab87-de42-44c8-84c5-90375d174073",
+    "handle": "123456789/546470",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

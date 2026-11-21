@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s56",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "56",
+  "heading": "Offences by officers in charge of convoy",
+  "chapter": null,
+  "order": 60,
+  "text": "(1) All officers appointed for the convoy and protection of any ships or vessels shall diligently perform their duty without delay according to their instructions in that behalf.\n\n(2) Every such officer subject to naval law, who,--\n\n(a) does not defend the ships and goods under his convoy without deviation to any other objects; or\n\n(b) refuses to fight in their defence if they are assailed; or\n\n(c) cowardly abandons and exposes the ships in his convoy to hazard; or\n\n(d) demands or exacts any money or other reward from any merchant or master for convoying any ships or vessels entrusted to his care; or\n\n(e) misuses the masters or mariners thereof;\n\nshall be punished with death or such other punishment as is hereinafter mentioned, and shall also make such reparation in damages to the merchants, owners and others as a Civil Court of competent jurisdiction may adjudge.",
+  "page_start": 24,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2a19a85f-1e4f-4e7d-a598-ecccb10c91cd",
+    "handle": "123456789/523919",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

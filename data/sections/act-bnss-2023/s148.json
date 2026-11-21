@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s148",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "148",
+  "heading": "Dispersal of assembly by use of civil force.",
+  "chapter": null,
+  "order": 148,
+  "text": "(1) Any Executive Magistrate or officer in charge of a police station or, in the absence of such officer in charge, any police officer, not below the rank of a sub-inspector, may command any unlawful assembly, or any assembly of five or more persons likely to cause a disturbance of the public peace, to disperse; and it shall thereupon be the duty of the members of such assembly to disperse accordingly.\n\n(2) If, upon being so commanded, any such assembly does not disperse, or if, without being so commanded, it conducts itself in such a manner as to show a determination not to disperse, any Executive Magistrate or police officer referred to in sub-section (1), may proceed to disperse such assembly by force, and may require the assistance of any person, not being an officer or member of the armed forces and acting as such, for the purpose of dispersing such assembly, and, if necessary, arresting and confining the persons who form part of it, in order to disperse such assembly or that they may be punished according to law.",
+  "page_start": 59,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "11d94b3f-3a22-403d-ada9-0de6262f4774",
+    "handle": "123456789/546643",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

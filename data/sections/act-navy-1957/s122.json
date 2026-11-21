@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s122",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "122",
+  "heading": "Adjournment",
+  "chapter": null,
+  "order": 126,
+  "text": "(1) A court-martial may, if it appears to the court that an adjournment desirable, be adjourned accordingly, but except where such an adjournment is ordered, shall sit from day to day with the exception of Sundays until the trial is concluded, unless prevented from so doing by stress of weather or unavoidable accident.\n\n(2) The proceedings of a court-martial shall not, after the commencement of a trial, be delayed by the absence of a member:\n\nProvided that not less than four members are present: and\n\nProvided further that if any member is absent from any part of the trial, he shall not thereafter take any part in the proceedings.",
+  "page_start": 40,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f839a815-e53c-4184-ad68-54e0a744f449",
+    "handle": "123456789/523996",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

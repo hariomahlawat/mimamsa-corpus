@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s33",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "33",
+  "heading": "Public to give information of certain offences.",
+  "chapter": null,
+  "order": 33,
+  "text": "(1) Every person, aware of the commission of, or of the intention of any other person to commit, any offence punishable under any of the following sections of the Bharatiya Nyaya Sanhita, 2023, namely:—\n\n(i) sections 103 to 105 (both inclusive);\n\n(ii) sections 111 to 113 (both inclusive);\n\n(iii) sections 140 to 144 (both inclusive);\n\n(iv) sections 147 to 154 (both inclusive) and section 158;\n\n(v) sections 178 to 182 (both inclusive);\n\n(vi) sections 189 and 191;\n\n(vii) sections 274 to 280 (both inclusive);\n\n(viii) section 307;\n\n(ix) sections 309 to 312 (both inclusive);\n\n(x) sub-section (5) of section 316;\n\n(xi) sections 326 to 328 (both inclusive); and\n\n(xii) sections 331 and 332, upon the person so aware, forthwith give information to the nearest Magistrate or police officer of such commission or intention.\n\n(2) For the purposes of this section, the term “offence” includes any act committed at any place out of India which would constitute an offence if committed in India.",
+  "page_start": 24,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8f6967cc-e5ee-42c1-8add-56f673138c57",
+    "handle": "123456789/546142",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

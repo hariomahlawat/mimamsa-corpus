@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s419",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "419",
+  "heading": "Appeal in case of acquittal.",
+  "chapter": null,
+  "order": 419,
+  "text": "(1) Save as otherwise provided in sub-section (2), and subject to the provisions of sub-sections (3) and (5),---\n\n(a) the District Magistrate may, in any case, direct the Public Prosecutor to present an appeal to the Court of Session from an order of acquittal passed by a Magistrate in respect of a cognizable and nonbailable offence;\n\n(b) the State Government may, in any case, direct the Public Prosecutor to present an appeal to the High Court from an original or appellate order of acquittal passed by any Court other than a High Court not being an order under clause (a) or an order of acquittal passed by the Court of Session in revision.\n\n(2) If such an order of acquittal is passed in a case in which the offence has been investigated by any agency empowered to make investigation into an offence under any Central Act other than this Sanhita, the Central Government may, subject to the provisions of sub-section (3), also direct the Public Prosecutor to present an appeal---\n\n(a) to the Court of Session, from an order of acquittal passed by a Magistrate in respect of a cognizable and non-bailable offence;\n\n(b) to the High Court from an original or appellate order of an acquittal passed by any Court other than a High Court not being an order under clause (a) or an order of acquittal passed by the Court of Session in revision.\n\n(3) No appeal to the High Court under sub-section (1) or sub-section (2) shall be entertained except with the leave of the High Court.\n\n(4) If such an order of acquittal is passed in any case instituted upon complaint and the High Court, on an application made to it by the complainant in this behalf, grants special leave to appeal from the order of acquittal, the complainant may present such an appeal to the High Court.\n\n(5) No application under sub-section (4) for the grant of special leave to appeal from an order of acquittal shall be entertained by the High Court after the expiry of six months, where the complainant is a public servant, and sixty days in every other case, computed from the date of that order of acquittal.\n\n(6) If, in any case, the application under sub-section (4) for the grant of special leave to appeal from an order of acquittal is refused, no appeal from that order of acquittal shall lie under sub-section (1) or under sub-section (2).",
+  "page_start": 144,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ee97aa6a-a9fe-43b6-abd8-72e248801689",
+    "handle": "123456789/546509",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

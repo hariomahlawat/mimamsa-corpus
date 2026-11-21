@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s169",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "169",
+  "heading": "Information of design to commit cognizable offences.",
+  "chapter": null,
+  "order": 169,
+  "text": "Every police officer receiving information of a design to commit any cognizable offence shall communicate such information to the police officer to whom he is subordinate, and to any other officer whose duty it is to prevent or take cognizance of the commission of any such offence.",
+  "page_start": 66,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c7dc585f-6f77-4994-8bec-50664c6b71b6",
+    "handle": "123456789/546272",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

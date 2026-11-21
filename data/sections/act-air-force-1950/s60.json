@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s60",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "60",
+  "heading": "False evidence",
+  "chapter": null,
+  "order": 60,
+  "text": "Any person subject to this Act who, having been duly sworn or affirmed before any court-martial or other court competent under this Act to administer an oath or affirmation, makes any statement which is false, and which he either knows or believes to be false or does not believe to be true, shall, on conviction by court-martial, be liable to suffer imprisonment for a term which may extend to seven years or such less punishment as is in this Act mentioned.",
+  "page_start": 25,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6d45c179-04be-4d3e-92b3-cddc113ab18e",
+    "handle": "123456789/519375",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

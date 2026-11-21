@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s149",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "149",
+  "heading": "Delivery of lunatic accused to relatives.",
+  "chapter": null,
+  "order": 149,
+  "text": "Where any relative or friend of any person who is in custody under sub-section (4) of section 145 or under detention under sub-section (5) of that section desires that he should be delivered to his care and custody, the Central Government may upon application by such relative or friend and on his giving security to the satisfaction of that Government that the person delivered shall be properly taken care of and prevented from doing injury to himself or any other person, and be produced for the inspection of such officer, and at such times and places, as the Central Government may direct, order such person to be delivered to such relative or friend.",
+  "page_start": 40,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d1ced22d-6d69-4d6d-b5f1-099ff30780dd",
+    "handle": "123456789/526019",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

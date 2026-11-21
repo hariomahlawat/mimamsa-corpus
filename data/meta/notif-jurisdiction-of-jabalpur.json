@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.2.0",
+  "source": "indiacode",
+  "source_url": "https://indiacode.gov.in/server/api/core/bitstreams/6233f942-0deb-4805-a2e2-c61b704d874a/content",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T14:34:05+00:00",
+  "sha256": "d56bded1dab4c7ed5b2577fcb0d59d00adc3be72ae39d2222f109a58ce1f0024",
+  "raw_path": "data/raw/indiacode/0000/d56bded1dab4c7ed5b2577fcb0d59d00adc3be72ae39d2222f109a58ce1f0024.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/notif-jurisdiction-of-jabalpur.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "notif-jurisdiction-of-jabalpur",
+      "type": "implements",
+      "target_doc_id": "act-armed-forces-tribunal-2007",
+      "target_ref_raw": "The Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "India Code lists this NOTIFICATION record under act_id AC_CEN_28_38_00013_200755_1517807323574 (The Armed Forces Tribunal Act, 2007).",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "notif-jurisdiction-of-jabalpur",
+  "doc_type": "notification",
+  "title": "Jurisdiction of Jabalpur",
+  "number": "AFT",
+  "issuing_authority": "Ministry of Defence",
+  "issue_date": "2017-03-22",
+  "effective_date": null,
+  "status": "in_force",
+  "status_note": "Listed as not repealed on India Code (read 2026-11-21)",
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "original_filename": "jabalpur.pdf",
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ba8e95d6-8240-4fd5-a17e-cba856ca83f1",
+    "collection": "NOTIFICATION",
+    "act_id": "AC_CEN_28_38_00013_200755_1517807323574",
+    "handle": "123456789/501101",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "number": "crawler",
+    "issue_date": "crawler",
+    "issuing_authority": "crawler",
+    "status": "rule",
+    "page_count": "rule",
+    "text_method": "rule"
+  }
+}

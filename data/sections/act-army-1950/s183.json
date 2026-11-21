@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s183",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "183",
+  "heading": "Orders pending suspension.",
+  "chapter": null,
+  "order": 184,
+  "text": "(1) Where the sentence referred to in section 182 is imposed by a court-martial other than a summary court-martial, the confirming officer may, when confirming the sentence, direct that the offender be not committed to prison or to military custody until the orders of the authority or officer specified in section 182 have been obtained.\n\n(2) Where a sentence of imprisonment is imposed by a summary court-martial, the officer holding the trial or the officer authorised to approve of the sentence under sub-section (2) of section 161 may make the direction referred to in sub-section (1).",
+  "page_start": 45,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2a53c377-555b-4402-8099-030665710bcd",
+    "handle": "123456789/526057",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

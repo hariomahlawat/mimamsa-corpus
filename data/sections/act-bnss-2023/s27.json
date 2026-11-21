@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s27",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "27",
+  "heading": "Powers of officers appointed.",
+  "chapter": null,
+  "order": 27,
+  "text": "Whenever any person holding an office in the service of Government who has been invested by the High Court or the State Government with any powers under this Sanhita throughout any local area is appointed to an equal or higher office of the samenature, within a like local area under the same State Government, he shall, unless the High Court or the State Government, as the case may be, otherwise directs, or has otherwise directed, exercise the same powers in the local area in which he is so appointed.",
+  "page_start": 26,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3c49f320-099f-42db-a2c9-374d1919b480",
+    "handle": "123456789/546135",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

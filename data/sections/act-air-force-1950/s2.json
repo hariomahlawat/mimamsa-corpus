@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s2",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "2",
+  "heading": "Persons subject to this Act.",
+  "chapter": null,
+  "order": 2,
+  "text": "The following persons shall be subject to this Act wherever they may be, namely:--\n\n(a) officers and warrant officers of the Air Force;\n\n(b) persons enrolled under this Act;\n\n[1][(c) persons belonging to the Regular Air Force Reserve or the Air Defence Reserve or the Auxiliary Air Force, in the circumstances specified in section 26 of the Reserve and Auxiliary Air Forces Act, 1952 (62 of 1952);]\n\n(d) persons not otherwise subject to air force law, who, on active service, in camp, on the march, or at any frontier post specified by the Central Government by notification in this behalf, are employed by, or are in the service of, or are followers of, or accompany any portion of the Air Force.",
+  "page_start": 9,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 62 of 1952",
+      "by_doc_id": null,
+      "effective_date": "1955-08-15",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 62 of 1952, s. 35, for clause (c) (w.e.f. 15-8-1955).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e78dd579-6517-4200-aeb2-0c961d0cb0e3",
+    "handle": "123456789/525650",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

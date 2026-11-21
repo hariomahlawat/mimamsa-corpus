@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s14",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "14",
+  "heading": "Executive Magistrates.",
+  "chapter": null,
+  "order": 14,
+  "text": "(1) In every district, the State Government may appoint as many persons as itthinks fit to be Executive Magistrates and shall appoint one of them to be the District Magistrate.\n\n(2) The State Government may appoint any Executive Magistrate to be an Additional District Magistrate, and such Magistrate shall have such of the powers of a District Magistrate under this Sanhita or under any other law for the time being in force as may be directed by the State Government.\n\n(3) Whenever, in consequence of the office of a District Magistrate becoming vacant, any officer succeeds temporarily to the executive administration of the district, such officer shall, pending the orders of the State Government, exercise all the powers and perform all the duties respectively conferred and imposed by this Sanhita on the District Magistrate.\n\n(4) The State Government may place an Executive Magistrate in charge of a sub-division and may relieve him of the charge as occasion requires; and the Magistrate so placed in charge of a sub-division shall be called the Sub-divisional Magistrate.\n\n(5) The State Government may, by general or special order and subject to such control and directions as it may deem fit to impose, delegate its powers under sub-section (4) to the District Magistrate.\n\n(6) Nothing in this section shall preclude the State Government from conferring, under any law for the time being in force, on a Commissioner of Police all or any of the powers of an Executive Magistrate.",
+  "page_start": 21,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f19a9d0b-fe4f-4160-9c3d-d7f11fba37b9",
+    "handle": "123456789/546121",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s184a",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "184A",
+  "heading": "Power to make regulations with retrospective effect",
+  "chapter": null,
+  "order": 190,
+  "text": "[1][184A. Power to make regulations with retrospective effect.--The power to make regulations conferred by this Act shall include the power to give retrospective effect, from a date not earlier than the date of commencement of this Act, to the regulations or any of them, but no retrospective effect shall be given to any regulation so as to prejudicially affect the interests of any person to whom such regulation may be applicable.]",
+  "page_start": 57,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 48 of 1982",
+      "by_doc_id": null,
+      "effective_date": "1982-10-16",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 48 of 1982, s. 11 (w.e.f. 16-10-1982).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "df0441b4-2c0f-4ae7-991e-03a4bee69106",
+    "handle": "123456789/524327",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

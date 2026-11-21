@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s121",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "121",
+  "heading": "Period of limitation for trial.",
+  "chapter": null,
+  "order": 121,
+  "text": "(1) Except as provided by sub-section (2), no trial by courtmartial of any person subject to this Act for any offence shall be commenced after the expiration of a period of three years from the date of such offence.\n\n(2) The provisions of sub-section (1) shall not apply to a trial for an offence of desertion or fraudulent enrolment or for any of the offences mentioned in section 37.\n\n(3) In the computation of the period of time mentioned in sub-section (1), any time spent by such person as a prisoner of war, or in enemy territory, or in evading arrest after the commission of the offence, shall be excluded.\n\n(4) No trial for an offence of desertion, other than desertion on active service or of fraudulent enrolment shall be commenced if the person in question, not being an officer, has subsequently to the commission of the offence, served continuously in an exemplary manner for not less than three years with any portion of the Air Force.",
+  "page_start": 38,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d246e725-b4b2-4e25-a971-12cb3d8b5184",
+    "handle": "123456789/523732",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

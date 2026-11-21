@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s190",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "190",
+  "heading": "Power to make regulations",
+  "chapter": null,
+  "order": 190,
+  "text": "The Central Government may make regulations for all or any of the purposes of this Act other than those specified in section 189.",
+  "page_start": 54,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "740d5b1e-f0db-41aa-896d-d5d878e0cb38",
+    "handle": "123456789/523801",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

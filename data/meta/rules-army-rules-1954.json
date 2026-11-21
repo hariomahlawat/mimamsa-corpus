@@ -1,0 +1,63 @@
+{
+  "schema_version": "0.2.0",
+  "source": "indiacode",
+  "source_url": "https://indiacode.gov.in/server/api/core/bitstreams/a7bf1768-b4b2-4729-98de-c1cf0da72b9e/content",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T14:23:11+00:00",
+  "sha256": "48f52219121bf74d070bc832e4573f2f512b239e0a0441ba96b1daca2983a727",
+  "raw_path": "data/raw/indiacode/0000/48f52219121bf74d070bc832e4573f2f512b239e0a0441ba96b1daca2983a727.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 214,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/rules-army-rules-1954.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [
+    214
+  ],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "rules-army-rules-1954",
+      "type": "implements",
+      "target_doc_id": "act-army-1950",
+      "target_ref_raw": "The Army Act, 1950",
+      "effective_date": null,
+      "evidence": "India Code lists this RULE record under act_id AC_CEN_28_38_00012_195046_1517807323368 (The Army Act, 1950).",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "rules-army-rules-1954",
+  "doc_type": "rules",
+  "title": "Army Rules,1954",
+  "number": null,
+  "issuing_authority": "Ministry of Defence",
+  "issue_date": "1954-11-27",
+  "effective_date": null,
+  "status": "in_force",
+  "status_note": "Listed as not repealed on India Code (read 2026-11-21)",
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": "act-army-1950",
+  "original_filename": "armyrules1954.pdf",
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "059789cd-ce11-4078-bf8d-5c7a0b99d85a",
+    "collection": "RULE",
+    "act_id": "AC_CEN_28_38_00012_195046_1517807323368",
+    "handle": "123456789/509254",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "number": "crawler",
+    "issue_date": "crawler",
+    "issuing_authority": "crawler",
+    "status": "rule",
+    "page_count": "rule",
+    "text_method": "rule"
+  }
+}

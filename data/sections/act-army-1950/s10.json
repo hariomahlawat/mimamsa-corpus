@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s10",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "10",
+  "heading": "Commission and appointment.",
+  "chapter": null,
+  "order": 10,
+  "text": "The President may grant, to such person as he thinks fit, a commission as an officer, or as a junior commissioned officer or appoint any person, as a warrant officer of the regular Army",
+  "page_start": 12,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "32651ad8-bd4d-44ce-b5ee-69f6ffa92bf1",
+    "handle": "123456789/525866",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

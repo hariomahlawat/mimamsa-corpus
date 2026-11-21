@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s77",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "77",
+  "heading": "Result of certain punishments in the case of a warrant officer or non-commissioned officer.",
+  "chapter": null,
+  "order": 77,
+  "text": "A warrant officer or a non- commissioned officer sentenced by a court-martial to transportation, imprisonment, [1]* * * or dismissal from the service, shall be deemed to be reduced to ranks.",
+  "page_start": 26,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "omitted",
+      "by_ref_raw": "Act 37 of 1992",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words \"field punishment\" omitted by Act 37 of 1992, s. 3.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "79638665-1c18-44e0-8f0d-dfcd09fa90cb",
+    "handle": "123456789/525940",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

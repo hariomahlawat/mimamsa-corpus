@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s5",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "5",
+  "heading": "Application of Act to certain forces under the Central Government.",
+  "chapter": null,
+  "order": 5,
+  "text": "(1) The Central Government may, by notification, apply with or without modifications, all or any of the provisions of this Act to any force raised and maintained in India and suspend the operation of any other enactment for the time being applicable to the said force.\n\n(2) The provisions of this Act so applied shall have effect in respect of persons belonging to the said force as they have effect in respect of persons subject to this Act holding in the Air Force the same or equivalent rank as the aforesaid persons hold for the time being in the said force.\n\n(3) The provisions of this Act so applied shall also have effect in respect of persons who are employed by, or are in the service of, or are followers of, or accompany any portion of the said force as they have effect in respect of persons subject to this Act under clause (d) of section 2.\n\n(4) While any of the provisions of this Act apply to the said force, the Central Government may, by notification, direct by what authority any jurisdiction, powers or duties incident to the operation of these provisions shall be exercised or performed in respect of the said force.",
+  "page_start": 12,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "4dbf6a4f-8bd9-4e54-8745-cb9f05ba42c5",
+    "handle": "123456789/525683",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

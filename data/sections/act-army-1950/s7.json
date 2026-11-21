@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s7",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "7",
+  "heading": "Commanding officer of persons subject to military law under clause (i) of section 2.",
+  "chapter": null,
+  "order": 7,
+  "text": "(1) Every person subject to this Act under [1][clause (i) of sub-section (1) of section 2] shall, for the purposes of this Act, be deemed to be under the commanding officer of the corps, department of detachment, if any, to which he is attached, and, if he is not so attached, under the command of any officer who may for the time being be named as his commanding officer by the officer commanding the force with which such person for the time being is serving, or any other prescribed officer, or, if no such officer is named or prescribed, under the command of the said officer commanding the force.\n\n(2) An officer commanding a force shall not place a person subject to this Act under [1][clause (i) of sub-section (1) of section 2] under the command of an officer of rank inferior to that of such person, if there is present at the place where such person is any officer of a higher rank under whose command he can be placed.",
+  "page_start": 12,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 56 of 1974",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 56 of 1974, s. 3 and the Second Schedule, for \"clause (i) of section 2\".",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "56906eaa-75dd-4d23-9e7e-384d64e439b4",
+    "handle": "123456789/525863",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

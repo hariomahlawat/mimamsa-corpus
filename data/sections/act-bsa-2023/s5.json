@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s5",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "5",
+  "heading": "Facts which are occasion, cause or effect of facts in issue or relevant facts.",
+  "chapter": null,
+  "order": 5,
+  "text": "Facts which are the occasion, cause or effect, immediate or otherwise, of relevant facts, or facts in issue, or which constitute the state of things under which they happened, or which afforded an opportunity for their occurrence or transaction, are relevant.\n\nIllustrations\n\n(a) The question is, whether A robbed B. The facts that, shortly before the robbery, B went to a fair with money in his possession, and that he showed it, or mentioned the fact that he had it, to third persons, are relevant.\n\n(b) The question is, whether A murdered B. Marks on the ground, produced by a struggle at or near the place where the murder was committed, are relevant facts.\n\n(c) The question is, whether A poisoned B. The state of B's health before the symptoms ascribed to poison, and habits of B, known to A, which afforded an opportunity for the administration of poison, are relevant facts.",
+  "page_start": 11,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ed5c0e58-11e0-482c-ab0a-9d6c643db847",
+    "handle": "123456789/545900",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

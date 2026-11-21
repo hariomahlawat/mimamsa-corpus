@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s12",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "12",
+  "heading": "Limit of solitary confinement.",
+  "chapter": null,
+  "order": 12,
+  "text": "In executing a sentence of solitary confinement, such confinement shall in no case exceed fourteen days at a time, with intervals between the periods of solitary confinement of not less duration than such periods; and when the imprisonment awarded shall exceed three months, the solitary confinement shall not exceed seven days in any one month of the whole imprisonment awarded, with intervals between the periods of solitary confinement of not less duration than such periods.",
+  "page_start": 3,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "33e74803-1785-42a9-a576-cdd0d1399cb5",
+    "handle": "123456789/545504",
+    "listing_raw_path": "data/raw/indiacode/2023/3f63bdbb2512a509521a6dc9e8e8d97044f569307a1a0c1b10a743ec30873357.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s20",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "20",
+  "heading": "Dismissal, removal or reduction by the Chief of the Army Staff and by other officers.",
+  "chapter": null,
+  "order": 20,
+  "text": "(1) [1][The Chief of the Army Staff] may dismiss or remove from the service any person subject to this Act other than an officer.\n\n(2) [1][The Chief of the Army Staff] may reduce to a lower grade or rank or the ranks, any warrant officer or any non-commissioned officer.\n\n(3) An officer having power not less than a brigade or equivalent commander or any prescribed officer may dismiss or remove from the service any person serving under his command other than an officer or a junior commissioned officer.\n\n(4) Any such officer as is mentioned in sub-section (3) may reduce to a lower grade or rank or the ranks, any warrant officer or any non-commissioned officer under his command.\n\n(5) A warrant officer reduced to the ranks under this section shall not, however, be required to serve in the ranks as a sepoy.\n\n(6) The commanding officer of an acting non-commissioned officer may order him to revert to his permanent grade as a non-commissioned officer, or if he has no permanent grade above the ranks, to the ranks.\n\n(7) The exercise of any power under this section shall be subject to the said provisions contained in this Act and the rules and regulations made thereunder.",
+  "page_start": 14,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"The Commander-in-Chief\".",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b693ea2b-bde8-4851-afaf-d26d61b15330",
+    "handle": "123456789/525877",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

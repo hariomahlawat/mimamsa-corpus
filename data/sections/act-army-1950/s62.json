@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s62",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "62",
+  "heading": "Offences in relation to aircraft and flying.",
+  "chapter": null,
+  "order": 62,
+  "text": "Any person subject to this Act who commits any of the following offences, that is to say,--\n\n(a) wilfully or without reasonable excuse damages, destroys or loses any aircraft or aircraft material belonging to the Government: or\n\n(b) is guilty of any act or neglect likely to cause such damage, destruction or loss ; or\n\n(c) without lawful authority disposes of any aircraft or aircraft material belonging to the Government; or\n\n(d) is guilty of any act or neglect in flying, or in the use of any aircraft, or in relation to any aircraft or aircraft material, which causes or is likely to cause loss of life or bodily injury to any person ; or\n\n(e) during a state of war, wilfully and without proper occasion, or negligently, causes the sequestration, by or under the authority of a neutral State, or the destruction in a neutral State of any aircraft, belonging to the Government;\n\nshall, on conviction by court-martial, be liable, if he has acted wilfully, to suffer imprisonment for a term which may extend to fourteen years or such less punishment as is in this Act mentioned, and, in any other case, to suffer imprisonment for a term which may extend to five years or such less punishment as is in this Act mentioned.",
+  "page_start": 23,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "72a69aa7-2a59-4ea2-bc45-2b144d111f3e",
+    "handle": "123456789/525923",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

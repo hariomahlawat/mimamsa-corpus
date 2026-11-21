@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s112",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "112",
+  "heading": "Burden of proof as to relationship in the cases of partners, landlord and tenant, principal and agent.",
+  "chapter": null,
+  "order": 112,
+  "text": "When the question is whether persons are partners, landlord and tenant, or principal and agent, and it has been shown that they have been acting as such, the burden of proving that they do not stand, or have ceased to stand, to each other in those relationships respectively, is on the person who affirms it",
+  "page_start": 38,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "dfa521df-1192-4bd1-9b83-8beb4ce54af5",
+    "handle": "123456789/546082",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

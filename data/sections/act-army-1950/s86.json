@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s86",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "86",
+  "heading": "Transmission of proceedings.",
+  "chapter": null,
+  "order": 86,
+  "text": "In every case in which punishment has been awarded under any of the sections 83, 84 and 85, certified true copies of the proceedings shall be forwarded, in the prescribed manner, by the officer awarding the punishment, to a superior military authority as defined in section 88.",
+  "page_start": 28,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "781ec1d1-fb58-451e-943f-adf5f8d9b86c",
+    "handle": "123456789/525950",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s23",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "23",
+  "heading": "Confession to police officer.",
+  "chapter": null,
+  "order": 23,
+  "text": "(1) No confession made to a police officer shall be proved as against a person accused of any offence\n\n(2) No confession made by any person while he is in the custody of a police officer, unless it is made in the immediate presence of a Magistrate shall be proved against him:\n\nProvided that when any fact is deposed to as discovered in consequence of information received from a person accused of any offence, in the custody of a police officer, so much of such information, whether it amounts to a confession or not, as relates distinctly to the fact discovered, may be proved.",
+  "page_start": 17,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2986ae7f-8968-4c95-ac59-66ad78638c71",
+    "handle": "123456789/545918",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

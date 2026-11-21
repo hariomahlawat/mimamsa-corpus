@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s129",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "129",
+  "heading": "Judge advocate.",
+  "chapter": null,
+  "order": 129,
+  "text": "Every general court-martial shall, and every district or summary general court-martial may, be attended by a judge advocate, who shall be either an officer belonging to the department of the Judge Advocate General, or if no such officer is available, an officer approved of by the Judge Advocate General or any of his deputies.",
+  "page_start": 35,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0637b3ca-1229-4692-b968-6bd03286fcae",
+    "handle": "123456789/525997",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s244",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "244",
+  "heading": "Where it is doubtful what offence has been committed.",
+  "chapter": null,
+  "order": 244,
+  "text": "(1) If a single act or series of acts is of such a nature that it is doubtful which of several offences the facts which can be proved will constitute, the accused may be charged with having committed all or any of such offences, and any number of such charges may be tried at once; or he may be charged in the alternative with having committed someone of the said offences.\n\n(2) If in such a case the accused is charged with one offence, and it appears in evidence that he committed a different offence for which he might have been charged under the provisions of sub-section (1), he may be convicted of the offence which he is shown to have committed, although he was not charged with it.\n\nIllustrations.\n\n(a) A is accused of an act which may amount to theft, or receiving stolen property, or criminal breach of trust or cheating. He may be charged with theft, receiving stolen property, criminal breach of trust and cheating, or he may be charged with having committed theft, or receiving stolen property, or criminal breach of trust or cheating.\n\n(b) In the case mentioned, A is only charged with theft. It appears that he committed the offence of criminal breach of trust, or that of receiving stolen goods. He may be convicted of criminal breach of trust or of receiving stolen goods (as the case may be), though he was not charged with such offence.\n\n(c) A states on oath before the Magistrate that he saw B hit C with a club. Before the Sessions Court A states on oath that B never hit C. A may be charged in the alternative and convicted of intentionally giving false evidence, although it cannot be proved which of these contradictory statements was false.",
+  "page_start": 94,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b39de9fe-dd96-4124-8f04-800067452d9e",
+    "handle": "123456789/546342",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

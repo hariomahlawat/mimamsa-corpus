@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s47",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "47",
+  "heading": "III-treating a subordinate",
+  "chapter": null,
+  "order": 47,
+  "text": "Any officer, warrant officer or non-commissioned officer, who uses criminal force to or otherwise ill-treats any person subject to this Act, being his subordinate in rank or position, shall, on conviction by court-martial, be liable to suffer imprisonment for a term which may extend to seven years or such less punishment as is in this Act mentioned.",
+  "page_start": 22,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "304113b4-1cc1-42a6-92eb-e9126680298a",
+    "handle": "123456789/519360",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

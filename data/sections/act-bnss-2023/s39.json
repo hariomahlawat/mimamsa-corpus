@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s39",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "39",
+  "heading": "Arrest on refusal to give name and residence.",
+  "chapter": null,
+  "order": 39,
+  "text": "(1) When any person who, in the presence of a police officer, has committed or has been accused of committing a non-cognizable offence refuses on demand of such officer to give his name and residence or gives a name or residence which such officer hasreason to believe to be false, he may be arrested by such officer in order that his name or residence may be ascertained.\n\n(2) When the true name and residence of such person have been ascertained, he shall be released on a bond or bail bond, to appear before a Magistrate if so required:\n\nProvided that if such person is not resident in India, the bail bond shall be secured by a surety or sureties resident in India.\n\n(3) If the true name and residence of such person is not ascertained within twenty-four hours from the time of arrest or if he fails to execute the bond or bail bond, or, if so required, to furnish sufficient sureties, he shall forthwith be forwarded to the nearest Magistrate having jurisdiction.",
+  "page_start": 29,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "eb3dec67-dd07-4c1a-8e68-6bbe9b4f0336",
+    "handle": "123456789/546147",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

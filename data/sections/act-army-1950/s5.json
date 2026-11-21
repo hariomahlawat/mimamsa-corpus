@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s5",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "5",
+  "heading": "[Omitted.].",
+  "chapter": null,
+  "order": 5,
+  "text": "[Application of Act to forces of Part B States.] Omitted by the Adaptation of Laws (No. 3) Order, 1956.",
+  "page_start": 12,
+  "page_end": null,
+  "status": "omitted",
+  "status_note": "[Application of Act to forces of Part B States.] Omitted by the Adaptation of Laws (No. 3) Order, 1956.",
+  "amendment_history": [
+    {
+      "action": "omitted",
+      "by_ref_raw": "Adaptation of Laws (No. 3) Order, 1956",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "[Application of Act to forces of Part B States.] Omitted by the Adaptation of Laws (No. 3) Order, 1956.",
+      "confidence": "extracted",
+      "origin": "inline"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b57a0304-97c3-453b-b823-a4263456108c",
+    "handle": "123456789/525860",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

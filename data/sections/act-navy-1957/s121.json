@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s121",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "121",
+  "heading": "Announcement of the sentence",
+  "chapter": null,
+  "order": 125,
+  "text": "(1) When the court has decided on the sentence whether unanimously or by majority, the trial Judge advocate shall draw up the sentence in the prescribed form which shall be signed by every member of the court by way of attestation notwithstanding any difference of opinion there may have been among the members and shall be countersigned by the trial Judge advocate.\n\n(2) The court shall then be reassembled and the accused brought in and the trial Judge advocate shall by direction of the court pronounce the sentence.\n\n(3) The accused shall then be removed and the court dissolved.",
+  "page_start": 40,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d3a4aee7-4114-4ee6-87e3-38f663c014bf",
+    "handle": "123456789/523994",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

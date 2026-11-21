@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s40",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "40",
+  "heading": "Facts bearing upon opinions of experts.",
+  "chapter": null,
+  "order": 40,
+  "text": "Facts, not otherwise relevant, are relevant if they support or are inconsistent with the opinions of experts, when such opinions are relevant.\n\nIllustrations.\n\n(a) The question is, whether A was poisoned by a certain poison. The fact that other persons, who were poisoned by that poison, exhibited certain symptoms which experts affirm or deny to be the symptoms of that poison, is relevant.\n\n(b) The question is, whether an obstruction to a harbour is caused by a certain sea-wall. The fact that other harbours similarly situated in other respects, but where there were no such sea-walls, began to be obstructed at about the same time, is relevant.",
+  "page_start": 22,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "eea6384e-5a4d-4ac4-978c-6c76f8ff1934",
+    "handle": "123456789/545932",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

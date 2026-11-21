@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s82",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "82",
+  "heading": "Punishment of persons other than officers and warrant officers.",
+  "chapter": null,
+  "order": 82,
+  "text": "Subject to the provisions of section 84, a commanding officer or such other officer as is, with the consent of the Central Government, specified by [1][the Chief of the Air Staff], may, in the prescribed manner, proceed against a person subject to this Act otherwise than as an officer or warrant officer who is charged with an offence under this Act and award such person, to the extent prescribed, one or more of the following punishments, that is to say,--\n\n(a) detention up to twenty-eight days;\n\n(b) confinement to the camp up to fourteen days;\n\n(c) extra guards or duties not exceeding three in number:\n\n(d) deprivation of acting rank;\n\n(e) forfeiture of badge pay;\n\n(f) severe reprimand or reprimand;\n\n(g) fine up to fourteen days' pay in any one month;\n\n(h) penal deductions under clause\n\n(g) of section 92;\n\n(i) admonition;\n\n(j) any prescribed field punishment up to twenty-eight days, in the case of a person on active service.",
+  "page_start": 30,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1955-05-07",
+      "effective_date_raw": null,
+      "footnote_text": "Subs by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in Chief\" (w.e.f. 7-5-1955).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a3b377ba-ce5b-4b1e-9543-274f5e318db6",
+    "handle": "123456789/519399",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

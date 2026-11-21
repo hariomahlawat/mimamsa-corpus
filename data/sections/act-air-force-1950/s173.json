@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s173",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "173",
+  "heading": "Establishment and regulation of air force prisons.",
+  "chapter": null,
+  "order": 173,
+  "text": "The Central Government may set apart any building or part of a building, or any place under its control, as an air force prison or detention barracks for the confinement of persons sentenced to imprisonment or detention under this Act.",
+  "page_start": 50,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b3197f42-0ffb-49f3-a83d-376548d79fc7",
+    "handle": "123456789/523784",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

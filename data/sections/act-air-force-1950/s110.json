@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s110",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "110",
+  "heading": "Power to convene a general court-martial.",
+  "chapter": null,
+  "order": 110,
+  "text": "A general court-martial may be convened by the Central Government or [1][the Chief of the Air Staff] or by any officer empowered in this behalf by warrant of[1][the Chief of the Air Staff].",
+  "page_start": 37,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1955-05-07",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief\", (w.e.f. 7-5-1955).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "fdb7c892-cd3e-4005-87a1-8e674c021ce8",
+    "handle": "123456789/523721",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

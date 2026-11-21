@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s190",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "190",
+  "heading": "Effect of suspension and remission on dismissal.",
+  "chapter": null,
+  "order": 191,
+  "text": "(1) Where in addition to any other sentence the punishment of dismissal has been awarded by a court-martial, and such other sentence is suspended under section 182, then, such dismissal shall not take effect until so ordered by the authority or officer specified in section 182.\n\n(2) If such other sentence is remitted under section 186, the punishment of dismissal shall also be remitted.",
+  "page_start": 46,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "74848e32-4566-4a1c-912d-461d735d2945",
+    "handle": "123456789/526065",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

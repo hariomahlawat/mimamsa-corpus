@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.2.0",
+  "source": "indiacode",
+  "source_url": "https://indiacode.gov.in/server/api/core/bitstreams/6a3e7da4-d157-4ec6-a65a-ad6700d202df/content",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T14:35:05+00:00",
+  "sha256": "be619533e45739bf8e975bd4b39c826d99e2bc7627942252020360fcc1a63423",
+  "raw_path": "data/raw/indiacode/0000/be619533e45739bf8e975bd4b39c826d99e2bc7627942252020360fcc1a63423.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 15,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/act-the-tribunals-reforms-act-2026.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "act-the-tribunals-reforms-act-2026",
+      "type": "amends",
+      "target_doc_id": "act-armed-forces-tribunal-2007",
+      "target_ref_raw": "The Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "India Code lists this ACT_AMENDMENT record under act_id AC_CEN_28_38_00013_200755_1517807323574 (The Armed Forces Tribunal Act, 2007).",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "act-the-tribunals-reforms-act-2026",
+  "doc_type": "act",
+  "title": "The Tribunals Reforms Act, 2026",
+  "number": null,
+  "issuing_authority": "Ministry of Defence",
+  "issue_date": null,
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "original_filename": "2026-17.pdf",
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "56e7698c-6b21-43fa-9eb7-4353cca26145",
+    "collection": "ACT_AMENDMENT",
+    "act_id": "AC_CEN_28_38_00013_200755_1517807323574",
+    "handle": "123456789/620683",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "number": "crawler",
+    "issue_date": "crawler",
+    "issuing_authority": "crawler",
+    "status": "rule",
+    "page_count": "rule",
+    "text_method": "rule"
+  }
+}

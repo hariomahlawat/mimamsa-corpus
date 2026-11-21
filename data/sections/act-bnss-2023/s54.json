@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s54",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "54",
+  "heading": "Identification of person arrested.",
+  "chapter": null,
+  "order": 54,
+  "text": "Where a person is arrested on a charge of committing an offence and his identification by any other person or persons is considered necessary for the purpose of investigation of such offence, the Court, having jurisdiction may, on the request of the officer in charge of a police station, direct the person so arrested to subject himself to identification by any person or persons in such manner as the Court may deem fit:\n\nProvided that if the person identifying the person arrested is mentally or physically disabled, such process of identification shall take place under the supervision of a Magistrate who shall take appropriate steps to ensure that such person identifies the person arrested using methods that person is comfortable with and the identification process shall be recorded by any audio-video electronic means.",
+  "page_start": 33,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1a39c293-ec71-46ff-80bf-5f4601b23d19",
+    "handle": "123456789/546164",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

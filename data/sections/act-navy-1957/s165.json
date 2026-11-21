@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s165",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "165",
+  "heading": "Offences by persons not subject to naval law in relation to courts-martial and disciplinary courts.",
+  "chapter": null,
+  "order": 170,
+  "text": "Every person not subject to naval law, who,--\n\n(a) being duly summoned or ordered to attend as a witness before a court-martial or disciplinary court fails to attend without due cause, or\n\n(b) refuses to take an oath or make an affirmation legally required by a court-martial or disciplinary court to be taken or made, or\n\n(c) being sworn or affirmed, refuses to answer any questions put by or before a court-martial or disciplinary court, which he is in law bound to answer, or\n\n(d) refuses to produce or deliver up a document in his power which the court-martial or disciplinary court may legally demand, or\n\n(e) is guilty of contempt of court-martial or disciplinary court,\n\nshall be punished with imprisonment for a term which may extend to two years, or with fine, or with both.",
+  "page_start": 51,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8d9d982c-8586-4195-9641-f9608bc40fa8",
+    "handle": "123456789/524141",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

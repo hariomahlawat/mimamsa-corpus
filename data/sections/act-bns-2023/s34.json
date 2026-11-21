@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s34",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "34",
+  "heading": "Things done in private defence.",
+  "chapter": null,
+  "order": 34,
+  "text": "Nothing is an offence which is done in the exercise of the right of private defence.",
+  "page_start": 9,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "12127185-2d82-4a6e-bf7e-7f7dcf55e6f6",
+    "handle": "123456789/545527",
+    "listing_raw_path": "data/raw/indiacode/2023/3f63bdbb2512a509521a6dc9e8e8d97044f569307a1a0c1b10a743ec30873357.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

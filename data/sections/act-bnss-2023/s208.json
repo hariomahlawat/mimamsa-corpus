@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s208",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "208",
+  "heading": "Offence committed outside India.",
+  "chapter": null,
+  "order": 208,
+  "text": "When an offence is committed outside India—\n\n(a) by a citizen of India, whether on the high seas or elsewhere; or\n\n(b) by a person, not being such citizen, on any ship or aircraft registered in India,\n\nhe may be dealt with in respect of such offence as if it had been committed at any place within India at which he may be found or where the offence is registered in India:\n\nProvided that notwithstanding anything in any of the preceding sections of this Chapter, no such offence shall be inquired into or tried in India except with the previous sanction of the Central Government.",
+  "page_start": 81,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "81ac7fef-6078-4aa3-ad67-d234525a58d5",
+    "handle": "123456789/546308",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

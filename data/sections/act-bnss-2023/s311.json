@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s311",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "311",
+  "heading": "Record in trial before Court of Session.",
+  "chapter": null,
+  "order": 311,
+  "text": "(1) In all trials before a Court of Session, the evidence of each witness shall, as his examination proceeds, be taken down in writing either by the presiding Judge himself or by his dictation in open Court, or under his direction and superintendence, by an officer of the Court appointed by him in this behalf.\n\n(2) Such evidence shall ordinarily be taken down in the form of a narrative, but the presiding Judge may, in his discretion, take down, or cause to be taken down, any part of such evidence in the form of question and answer.\n\n(3) The evidence so taken down shall be signed by the presiding Judge and shall form part of the record.",
+  "page_start": 109,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a4b5cfa3-8e12-4099-8398-02645466a9b0",
+    "handle": "123456789/546404",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

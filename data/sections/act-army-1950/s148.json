@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s148",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "148",
+  "heading": "Release of lunatic accused.",
+  "chapter": null,
+  "order": 148,
+  "text": "Where any person is in custody under sub-section (4) of section 145 or under detention under sub-section (5) of that section--\n\n(a) if such person is in custody under the said sub-section (4), on the report of a medical officer, or\n\n(b) if such person is detained under the said sub-section (5), on a certificate from any of the authorities mentioned in clause (b) of section 146 that, in the judgment of such officer or authority such person may be released without danger of his doing injury to himself or to any other person,\n\nthe Central Government may order that such person be released or detained in custody, or transferred to a public lunatic asylum if he has not already been sent to such an asylum.",
+  "page_start": 40,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1e128378-297a-4080-9ded-b9f2551291ff",
+    "handle": "123456789/526018",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

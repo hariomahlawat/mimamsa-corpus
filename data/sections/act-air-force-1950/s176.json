@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s176",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "176",
+  "heading": "Restriction of rule-making power in respect to corporal punishment.",
+  "chapter": null,
+  "order": 176,
+  "text": "Rules made under section 175 shall not authorise corporal punishment to be inflicted for any offence, nor render the imprisonment more severe than it is under any law for the time being in force relating to civil prisons in India.",
+  "page_start": 51,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "949099cd-335a-4294-b488-04fabd6b8482",
+    "handle": "123456789/523787",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

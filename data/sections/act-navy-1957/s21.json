@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s21",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "21",
+  "heading": "Immunity from arrest for debt.",
+  "chapter": null,
+  "order": 21,
+  "text": "(1) No person in the naval service shall, so long as he is subject to naval law, be liable to be arrested for debt under any process or direction issued by, or by the authority of, any Court or public servant.\n(2) If any such person is arrested in contravention of the provisions of sub-section (1), the court or public servant by whom or by whose authority such process or direction was issued shall on complaint by the person arrested or by his superior officer enquire into the case and if satisfied that the arrest was made in contravention of sub-section (1), shall make an order for the immediate discharge of the person arrested and may award of the complainant the costs of the complaint to be recoverable in the same manner as if such costs were awarded to him by a decree against the person at whose instance such process or direction was issued.\n(3) No court-fee shall be payable on a complaint made under sub-section (2) for recovery of the costs that may be awarded under that sub-section.",
+  "page_start": 15,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0ae73098-38f9-46a8-9980-4cfdf1556f74",
+    "handle": "123456789/517368",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

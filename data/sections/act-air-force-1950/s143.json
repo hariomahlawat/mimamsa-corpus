@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s143",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "143",
+  "heading": "Evidence of previous convictions and general character",
+  "chapter": null,
+  "order": 143,
+  "text": "(1) When any person subject to this Act has been convicted by a court-martial of any offence, such court-martial may inquire into and receive and record evidence of any previous convictions of such person, either by a court-martial or by a criminal court or any previous award of punishment under section 82 or section 86 and may further enquire into and record the general character of such person and such other matters as may be prescribed.\n\n(2) Evidence received under this section may be either oral, or in the shape of entries in, or certified extracts from, court-martial books or other official records, and it shall not be necessary to give notice before trial to the person tried that evidence as to his previous convictions or character will be received.",
+  "page_start": 44,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "98034b3c-beef-4c41-86c3-89b891f7947c",
+    "handle": "123456789/523754",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

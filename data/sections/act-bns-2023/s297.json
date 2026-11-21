@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s297",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "297",
+  "heading": "Keeping lottery office.",
+  "chapter": null,
+  "order": 297,
+  "text": "(1) Whoever keeps any office or place for the purpose of drawing any lottery not being a State lottery or a lottery authorised by the State Government, shall be punished with imprisonment of either description for a term which may extend to six months, or with fine, or with both.\n\n(2) Whoever publishes any proposal to pay any sum, or to deliver any goods, or to do or forbear from doing anything for the benefit of any person, on any event or contingency relative or applicable to the drawing of any ticket, lot, number or figure in any such lottery, shall be punished with fine which may extend to five thousand rupees.",
+  "page_start": 85,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "4e9fb5a5-28a2-4449-aeb3-3d667c6811aa",
+    "handle": "123456789/545790",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

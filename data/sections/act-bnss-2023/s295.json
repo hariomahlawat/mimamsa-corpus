@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s295",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "295",
+  "heading": "Finality of judgment.",
+  "chapter": null,
+  "order": 295,
+  "text": "The judgment delivered by the Court under this section shall be final and no appeal (except the special leave petition under article 136 and writ petition under articles 226 and 227 of the Constitution) shall lie in any Court against such judgment.",
+  "page_start": 106,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8122f80e-b309-4115-99a2-be51f5cdd722",
+    "handle": "123456789/546390",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s304",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "304",
+  "heading": "Snatching.",
+  "chapter": null,
+  "order": 304,
+  "text": "(1) Theft is snatching if, in order to commit theft, the offender suddenly or quickly or forcibly seizes or secures or grabs or takes away from any person or from his possession any movable property.\n\n(2) Whoever commits snatching, shall be punished with imprisonment of either description for a term which may extend to three years, and shall also be liable to fine.",
+  "page_start": 87,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6bf2e40f-d9b0-4b89-a180-23055d023269",
+    "handle": "123456789/545796",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

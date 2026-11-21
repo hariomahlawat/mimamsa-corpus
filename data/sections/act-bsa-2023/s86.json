@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s86",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "86",
+  "heading": "Presumption as to electronic records and electronic signatures.",
+  "chapter": null,
+  "order": 86,
+  "text": "(1) In any proceeding involving a secure electronic record, the Court shall presume unless contrary is proved, that the secure electronic record has not been altered since the specific point of time to which the secure status relates.\n\n(2) In any proceeding, involving secure electronic signature, the Court shall presume unless the contrary is proved that--\n\n(a) the secure electronic signature is affixed by subscriber with the intention of signing or approving the electronic record;\n\n(b) except in the case of a secure electronic record or a secure electronic signature, nothing in this section shall create any presumption, relating to authenticity and integrity of the electronic record or any electronic signature.",
+  "page_start": 32,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "70cfe3ef-dde6-42da-9081-c213a73bb159",
+    "handle": "123456789/545982",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

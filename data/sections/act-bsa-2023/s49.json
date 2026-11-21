@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s49",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "49",
+  "heading": "Previous bad character not relevant, except in reply.",
+  "chapter": null,
+  "order": 49,
+  "text": "In criminal proceedings, the fact that the accused has a bad character, is irrelevant, unless evidence has been given that he has a good character, in which case it becomes relevant\n\nExplanation 1.--This section does not apply to cases in which the bad character of any person is itself a fact in issue.\n\nExplanation 2.--A previous conviction is relevant as evidence of bad character",
+  "page_start": 24,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f9ba0cab-2e0c-4f35-b181-c8ba1760b068",
+    "handle": "123456789/545942",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

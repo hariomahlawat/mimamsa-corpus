@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s187",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "187",
+  "heading": "Reconsideration of case after suspension.",
+  "chapter": null,
+  "order": 188,
+  "text": "(1) Where a sentence has been suspended, the case may at any time, and shall at intervals of not more than four months, be reconsidered by the authority or officer specified in section 182, or by any general or other officer not below the rank of field officer duly authorised by the authority or officer specified in section 182.\n\n(2) Where on such reconsideration by the officer so authorised it appears to him that the conduct of the offender since his conviction has been such as to justify a remission of the sentence, he shall refer the matter to the authority or officer specified in section 182.",
+  "page_start": 46,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "5c2db517-b296-4ed9-af4a-180aeb0db7cc",
+    "handle": "123456789/526062",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

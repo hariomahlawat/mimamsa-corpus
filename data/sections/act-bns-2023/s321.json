@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s321",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "321",
+  "heading": "Dishonestly or fraudulently preventing debt being available for creditors.",
+  "chapter": null,
+  "order": 321,
+  "text": "Whoever dishonestly or fraudulently prevents any debt or demand due to himself or to any other person from being made available according to law for payment of his debts or the debts of such other person, shall be punished with imprisonment of either description for a term which may extend to two years, or with fine, or with both.",
+  "page_start": 94,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f9d319a0-4890-45b7-a114-14eaee814d9e",
+    "handle": "123456789/545812",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

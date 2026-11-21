@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s200",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "200",
+  "heading": "Punishment for non-treatment of victim.",
+  "chapter": null,
+  "order": 200,
+  "text": "Whoever, being in charge of a hospital, public or private, whether run by the Central Government, the State Government, local bodies or any other person, contravenes the provisions of section 397 of the Bharatiya Nagarik Suraksha Sanhita, 2023, shall be punished with imprisonment for a term which may extend to one year, or with fine, or with both.",
+  "page_start": 90,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "01d2e1f1-628b-475e-bd61-8d5b8af655cc",
+    "handle": "123456789/545696",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s114",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "114",
+  "heading": "Assistance in securing transfer of persons.",
+  "chapter": null,
+  "order": 114,
+  "text": "(1) Where a Court in India, in relation to a criminal matter, desires that a warrant for arrest of any person to attend or produce a document or other thing issued by it shall be executed in any place in a contracting State, it shall send such warrant in duplicate in such form to such Court, Judge or Magistrate through such authority, as the Central Government may, by notification, specify in this behalf and that Court, Judge or Magistrate, as the case may be, shall cause the same to be executed.\n\n(2) If , in the course of an investigation or any inquiry into an offence, an application is made by the investigating officer or any officer superior in rank to the investigating officer that the attendance of a person who is in any place in a contracting State is required in connection with such investigation or inquiry and the Court is satisfied that such attendance is so required, it shall issue a summons or warrant, in duplicate, against the said person to such Court, Judge or Magistrate, in such form as the Central Government may, by notification, specify in this behalf, to cause the same to be served or executed.\n\n(3) Where a Court in India, in relation to a criminal matter, has received a warrant for arrest of any person requiring him to attend or attend and produce a document or other thing in that Court or before any other investigating agency, issued by a Court, Judge or Magistrate in a contracting State, the same shall be executed as if it is the warrant received by it from another Court in India for execution within its local limits.\n\n(4) Where a person transferred to a contracting State pursuant to sub-section (3) is a prisoner in India, the Court in India or the Central Government may impose such conditions as that Court or Government deems fit.\n\n(5) Where the person transferred to India pursuant to sub-section (1) or sub-section (2) is a prisoner in a contracting State, the Court in India shall ensure that the conditions subject to which the prisoner is transferred to India are complied with and such prisoner shall be kept in such custody subject to such conditions as the Central Government may direct in writing.",
+  "page_start": 48,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "05896cd2-3f0d-4012-baa8-22d7aec4fdab",
+    "handle": "123456789/546221",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

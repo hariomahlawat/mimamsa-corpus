@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s109",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "109",
+  "heading": "Objection to interpreter or shorthand-writer.",
+  "chapter": null,
+  "order": 113,
+  "text": "(1) Before any person is sworn or affirmed as an interpreter or a shorthand-writer, the accused shall be asked if he objects to such person as not being impartial and the court shall decide the objection.\n\n(2) The evidence given by a witness shall be read over to him by the shorthand-writer before the witness leaves the court, if so required by the court or the witness.",
+  "page_start": 38,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6687bd98-fd24-44d9-8481-42240ea3548b",
+    "handle": "123456789/523977",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

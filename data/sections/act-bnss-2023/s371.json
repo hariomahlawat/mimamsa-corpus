@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s371",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "371",
+  "heading": "Procedure on accused appearing before Magistrate or Court.",
+  "chapter": null,
+  "order": 371,
+  "text": "(1) If, when the accused appears or is again brought before the Magistrate or Court, as the case may be, the Magistrate or Court considers him capable of making his defence, the inquiry or trial shall proceed.\n\n(2) If the Magistrate or Court considers the accused to be still incapable of making his defence, the Magistrate or Court shall act according to the provisions of section 367 or section 368, as the case may be, and if the accused is found to be of unsound mind and consequently incapable of making his defence, shall deal with such accused in accordance with the provisions of section 369.",
+  "page_start": 131,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "9e0e00a5-8cee-4bc6-a4db-1e0c919ffa65",
+    "handle": "123456789/546461",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

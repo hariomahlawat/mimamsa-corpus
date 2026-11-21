@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s102",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "102",
+  "heading": "Duty of commanding officer in regard to detention.",
+  "chapter": null,
+  "order": 102,
+  "text": "(1) It shall be the duty of every commanding officer to take care that a person under his command when charged with an offence is not detained in custody for more than forty-eight hours after the committal of such person into custody is reported to him, without the charge being investigated, unless investigation within that period seems to him to be impracticable having regard to the public service.\n\n(2) The case of every person being detained in custody beyond a period of forty-eight hours, and the reason thereof, shall be reported by the commanding officer to the general or other officer to whom application would be made to convene a general or district court- martial for the trial of the person charged.\n\n(3) In reckoning the period of forty-eight hours specified in sub-section (1), Sundays and other public holidays shall be excluded.\n\n(4) Subject to the provisions of this Act, the Central Government may make rules providing for the manner in which and the period for which any person subject to this Act may be taken into and detained in military custody, pending the trial by any competent authority for any offence committed by him.",
+  "page_start": 31,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "215233a4-9277-4db6-939f-5e294ac4ce47",
+    "handle": "123456789/525967",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

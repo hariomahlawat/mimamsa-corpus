@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s237",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "237",
+  "heading": "Using as true such declaration knowing it to be false.",
+  "chapter": null,
+  "order": 237,
+  "text": "Whoever corruptly uses or attempts to use as true any such declaration, knowing the same to be false in any material point, shall be punished in the same manner as if he gave false evidence.\n\nExplanation.—A declaration which is inadmissible merely upon the ground of some informality, is a declaration within the meaning of section 236 and this section.",
+  "page_start": 75,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2084a350-3407-4b0b-bb38-bb9e3896baf9",
+    "handle": "123456789/545733",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s160",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "160",
+  "heading": "Revision of finding or sentence.",
+  "chapter": null,
+  "order": 160,
+  "text": "(1) Any finding or sentence of a court-martial which requires confirmation may be once revised by order of the confirming authority and on such revision, the Court, if so directed by the con-firming authority, may take additional evidence.\n\n(2) The court, on revision, shall consist of the same officers as were present when the original decision was passed, unless any of those officers are unavoidably absent.\n\n(3) In case of such unavoidable absence the cause thereof shall be duly certified in the proceedings, and the court shall proceed with the revision, provided that, if a general court-martial, it still consists of five officers, or, if a summary general or district court-martial, of three officers.",
+  "page_start": 42,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b4f540b4-2e59-47f2-97c2-16c9171b8579",
+    "handle": "123456789/526031",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

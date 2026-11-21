@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s175",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "175",
+  "heading": "Police officer’s power to investigate cognizable case.",
+  "chapter": null,
+  "order": 175,
+  "text": "(1) Any officer in charge of a police station may, without the order of a Magistrate, investigate any cognizable case which a Court having jurisdiction over the local area within the limits of such station would have power to inquire into or try under the provisions of Chapter XIV:\n\nProvided that considering the nature and gravity of the offence, the Superintendent of Police may require the Deputy Superintendent of Police to investigate the case.\n\n(2) No proceeding of a police officer in any such case shall at any stage be called in question on the ground that the case was one which such officer was not empowered under this section to investigate.\n\n(3) Any Magistrate empowered under section 210 may, after considering the application supported by an affidavit made under sub-section (4) of section 173, and after making such inquiry as he thinks necessary and submission made in this regard by the police officer, order such an investigation as above-mentioned.\n\n(4) Any Magistrate empowered under section 210, may, upon receiving a complaint against a public servant arising in course of the discharge of his official duties, order investigation, subject to—\n\n(a) receiving a report containing facts and circumstances of the incident from the officer superior to him; and\n\n(b) after consideration of the assertions made by the public servant as to the situation that led to the incident so alleged.",
+  "page_start": 68,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e64795bd-3246-4450-a14f-d1e58b2978a5",
+    "handle": "123456789/546276",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

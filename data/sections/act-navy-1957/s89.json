@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s89",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "89",
+  "heading": "Provost-marshals",
+  "chapter": null,
+  "order": 93,
+  "text": "(1) Provost-marshals may be appointed by the Chief of the Naval Staff or the prescribed officer.\n\n(2) The duties of a provost-marshal or to take charge of persons in naval custody, to preserve good order and discipline and to prevent breaches of the same by persons subject to naval law or to the law in force relating to the Government of the regular Army or the Air Force.\n\n(3) A provost-marshal may at any time arrest and detain for trial any person subject to naval law who commits, or is charged with, an offence and may also carry into effect any punishment to be inflicted in pursance of a sentence passed under this Act, but shall not inflict any punishment on his own authority:\n\nProvided that no officer shall be so arrested or detained otherwise than on the order of another officer.\n\n(4) For the purpose of sub-sections (2) and (3), a provost-marshal shall be deemed to include a provost-marshal and any of his assistants appointed under the law in force relating to the government of the regular Army or the Air Force.",
+  "page_start": 31,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e867f15e-c3af-49e0-9c88-14806dbfc9e1",
+    "handle": "123456789/523955",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s120",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "120",
+  "heading": "Forfeiture of property in certain cases.",
+  "chapter": null,
+  "order": 120,
+  "text": "(1) The Court may, after considering the explanation, if any, to the show-cause notice issued under section 119 and the material available before it and after giving to the person affected (and in a case where the person affected holds any property specified in the notice through any other person, to such other person also) a reasonable opportunity of being heard, by order, record a finding whether all or any of the properties in question are proceeds of crime:\n\nProvided that if the person affected (and in a case where the person affected holds any property specified in the notice through any other person such other person also) does not appear before the Court or represent his case before it within a period of thirty days specified in the show-cause notice, the Court may proceed to record a finding under this sub-section ex parte on the basis of evidence available before it.\n\n(2) Where the Court is satisfied that some of the properties referred to in the show-cause notice are proceeds of crime but it is not possible to identify specifically such properties, then, it shall be lawful for the Court to specify the properties which, to the best of its judgment, are proceeds of crime and record a finding accordingly under sub-section (1).\n\n(3) Where the Court records a finding under this section to the effect that any property is proceeds of crime, such property shall stand forfeited to the Central Government free from all encumbrances.\n\n(4) Where any shares in a company stand forfeited to the Central Government under this section, then, the company shall, notwithstanding anything contained in the Companies Act, 2013 (18 of 2013) or the Articles of Association of the company, forthwith register the Central Government as the transferee of such shares.",
+  "page_start": 50,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ddf3ec6e-bea0-49d6-989c-cbafdcb21831",
+    "handle": "123456789/546227",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

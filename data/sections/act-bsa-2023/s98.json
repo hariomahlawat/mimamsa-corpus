@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s98",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "98",
+  "heading": "Evidence as to document unmeaning in reference to existing facts.",
+  "chapter": null,
+  "order": 98,
+  "text": "When language used in a document is plain in itself, but is unmeaning in reference to existing facts, evidence may be given to show that it was used in a peculiar sense.\n\nIllustration.\n\nA sells to B, by deed, “my house in Kolkata”. A had no house in Kolkata, but it appears that he had a house at Howrah, of which B had been in possession since the execution of the deed. These facts may be proved to show that the deed related to the house at Howrah.",
+  "page_start": 35,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ba30a3af-88f0-4318-8314-1cd8f73daf33",
+    "handle": "123456789/545994",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

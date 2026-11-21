@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s90",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "90",
+  "heading": "Joinder of charges.",
+  "chapter": null,
+  "order": 94,
+  "text": "For every distinct offence of which any person is accused, there shall be a separate charge but except as otherwise provided by regulations made under this Act all separate charges may be tried together.",
+  "page_start": 31,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "cef53247-47aa-4080-abd6-b905066348e6",
+    "handle": "123456789/523956",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

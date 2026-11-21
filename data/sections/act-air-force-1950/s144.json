@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s144",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "144",
+  "heading": "Lunacy of accused",
+  "chapter": null,
+  "order": 144,
+  "text": "(1) Whenever, in the course of a trial by a court-martial, it appears to the court that the person charged is by reason of unsoundness of mind incapable of making his defence, or that he committed the act alleged but was by reason of unsoundness of mind incapable of knowing the nature of the act or knowing that it was wrong or contrary to law, the court shall record a finding accordingly.\n\n(2) The presiding officer of the court shall forthwith report the case to the confirming officer. (3) The confirming officer to whom the case is reported under sub-section (2) may, if he does not confirm the finding, take steps to have the accused person tried by the same or another court-martial for the offence with which he was charged.\n\n(4) A confirming officer confirming a finding in any case so reported to him under sub-section (2) shall order the accused person to be kept in custody in the prescribed manner and shall report the case for the orders of the Central Government.\n\n(5) On receipt of a report under sub-section (4) the Central Government may order the accused person to be detained in a lunatic asylum or other suitable place of safe custody.",
+  "page_start": 44,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "999a0095-ec60-4b66-923f-1a633f3a8dc1",
+    "handle": "123456789/523755",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

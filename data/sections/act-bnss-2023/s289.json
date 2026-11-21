@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s289",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "289",
+  "heading": "Application of Chapter.",
+  "chapter": null,
+  "order": 289,
+  "text": "(1) This Chapter shall apply in respect of an accused against whom—\n\n(a) the report has been forwarded by the officer in charge of the police station under section 193 alleging therein that an offence appears to have been committed by him other than an offence for which the punishment of death or of imprisonment for life or of imprisonment for a term exceeding seven years has been provided under the law for the time being in force; or\n\n(b) a Magistrate has taken cognizance of an offence on complaint, other than an offence for which the punishment of death or of imprisonment for life or of imprisonment for a term exceeding seven years, has been provided under the law for the time being in force, and after examining complainant and witnesses under section 223, issued the process under section 227,\n\nbut does not apply where such offence affects the socio-economic condition of the country or has been committed against a woman, or a child.\n\n(2) For the purposes of sub-section (1), the Central Government shall, by notification, determine the offences under the law for the time being in force which shall be the offences affecting the socio-economic condition of the country.",
+  "page_start": 104,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c0c922c9-f874-4469-ab91-27d7c949d226",
+    "handle": "123456789/546384",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

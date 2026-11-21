@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s23",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "23",
+  "heading": "Remedy of aggrieved persons.",
+  "chapter": null,
+  "order": 23,
+  "text": "(1) If an officer or [1][sailor] thinks that he has suffered any personal oppression, injustice or other ill-treatment at the hands of any superior officer, he may make a complaint in accordance with the regulations made under this Act.\n\n(2) The regulations referred to in sub-section (1) shall provide for the complaint to be forwarded to the Central Government for its consideration if the complaint is not satisfied with the decision on his complaint",
+  "page_start": 15,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 53 of 1974",
+      "by_doc_id": null,
+      "effective_date": "1974-12-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 53 of 1974, s. 2, for \"seaman\" (w.e.f. 16-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8ae84a8d-d680-4d22-ac11-c2826b35b964",
+    "handle": "123456789/517370",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

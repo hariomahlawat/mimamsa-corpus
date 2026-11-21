@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s260",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "260",
+  "heading": "Procedure in cases instituted under sub-section (2) of section 222.",
+  "chapter": null,
+  "order": 260,
+  "text": "(1) A Court of Session taking cognizance of an offence under sub-section (2) of section 222 shall try the case in accordance with the procedure for the trial of warrant-cases instituted otherwise than on a police report before a Court of Magistrate:\n\nProvided that the person against whom the offence is alleged to have been committed shall, unless the Court of Session, for reasons to be recorded, otherwise directs, be examined as a witness for the prosecution.\n\n(2) Every trial under this section shall be held in camera if either party thereto so desires or if the Court thinks fit so to do.\n\n(3) If, in any such case, the Court discharges or acquits all or any of the accused and is of opinion that there was no reasonable cause for making the accusation against them or any of them, it may, by its order of discharge or acquittal, direct the person against whom the offence was alleged to have been committed (other than the President, the Vice-President or the Governor of a State or the Administrator of a Union territory) to show cause why he should not pay compensation to such accused or to each or any of such accused, when there are more than one.\n\n(4) The Court shall record and consider any cause which may be shown by the person so directed, and if it is satisfied that there was no reasonable cause for making the accusation, it may, for reasons to be recorded, make an order that compensation to such amount not exceeding five thousand rupees, as it may determine, be paid by such person to the accused or to each or any of them.\n\n(5) Compensation awarded under sub-section (4) shall be recovered as if it were a fine imposed by a Magistrate.\n\n(6) No person who has been directed to pay compensation under sub-section (4) shall, by reason of such order, be exempted from any civil or criminal liability in respect of the complaint made under this section:\n\nProvided that any amount paid to an accused person under this section shall be taken into account in awarding compensation to such person in any subsequent civil suit relating to the same matter.\n\n(7) The person who has been ordered under sub-section (4) to pay compensation may appeal from the order, in so far as it relates to the payment of compensation, to the High Court.\n\n(8) When an order for payment of compensation to an accused person is made, the compensation shall not be paid to him before the period allowed for the presentation of the appeal has elapsed, or, if an appeal is presented, before the appeal has been decided.",
+  "page_start": 97,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "08164fdb-c119-4cf1-8b76-7065939102c1",
+    "handle": "123456789/546358",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

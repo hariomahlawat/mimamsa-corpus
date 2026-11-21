@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s317",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "317",
+  "heading": "Interpreter to be bound to interpret truthfully.",
+  "chapter": null,
+  "order": 317,
+  "text": "When the services of an interpreter are required by any Criminal Court for the interpretation of any evidence or statement, he shall be bound to state the true interpretation of such evidence or statement.",
+  "page_start": 110,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0bba54b4-bd08-4c17-90c5-b408e836b1cd",
+    "handle": "123456789/546658",
+    "listing_raw_path": "data/raw/indiacode/2023/84de940d3a0fe09d9683198d94de1a7af018b90eb5d0667daa39ef362963cb9b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

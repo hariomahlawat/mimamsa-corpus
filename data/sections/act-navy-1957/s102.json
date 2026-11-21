@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s102",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "102",
+  "heading": "Objections to members.",
+  "chapter": null,
+  "order": 106,
+  "text": "The following provisions shall apply to the disposal of objections raised by the prosecutor as well as the accused:--\n\n(a) any member may be objected to on a ground which affects his competency to act as an impartial Judge; and the trial judge advocate may reject summarily without reference to the members of the court any objection not made on such ground; '\n\n(b) objections to members shall be decided separately, those to the officer lowest in rank being taken first: provided that if the objection is to the President, such objection shall be decided first and all the other members whether objected to or not shall vote as to the disposal of the objection;\n\n(c) on an objection being allowed by one-half or more of the officers entitled to decide the objection, the member objected to shall at once retire and his place shall be filled up before an objection against another member is taken up;\n\n(d) should the president be objected to and the objection be allowed, the court shall adjourn until a new president has been appointed by the convening authority or by the officer empowered in this behalf by the convening authority; and\n\n(e) should a member be objected to on the ground of being summoned as a witness and should it be found that the objection has been made in good faith and that the officer is to give evidence as to facts and not merely as to character, the objection shall be allowed.",
+  "page_start": 36,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "337382fc-fcff-44da-98e7-3adc23ca7a0c",
+    "handle": "123456789/523970",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s104",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "104",
+  "heading": "Disposal of things found in search beyond jurisdiction.",
+  "chapter": null,
+  "order": 104,
+  "text": "When, in the execution of a searchwarrant at any place beyond the local jurisdiction of the Court which issued the same, any of the things for which search is made, are found, such things, together with the list of the same prepared under the provisions hereinafter contained, shall be immediately taken before the Court issuing the warrant, unless such place is nearer to the Magistrate having jurisdiction therein than to such Court, in which case the list and things shall be immediately taken before such Magistrate; and, unless there be good cause to the contrary, such Magistrate shall make an order authorising them to be taken to such Court.",
+  "page_start": 44,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8078cb80-db45-42a4-8927-75c3ac7ab38f",
+    "handle": "123456789/546212",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

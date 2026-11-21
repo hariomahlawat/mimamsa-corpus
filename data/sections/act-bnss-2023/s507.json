@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s507",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "507",
+  "heading": "Irregularities which vitiate proceedings.",
+  "chapter": null,
+  "order": 507,
+  "text": "If any Magistrate, not being empowered by law in this behalf, does any of the following things, namely:---\n\n(a) attaches and sells property under section 85;\n\n(b) issues a search-warrant for a document, parcel or other things in the custody of a postal authority;\n\n(c) demands security to keep the peace;\n\n(d) demands security for good behaviour;\n\n(e) discharges a person lawfully bound to be of good behaviour;\n\n(f) cancels a bond to keep the peace;\n\n(g) makes an order for maintenance;\n\n(h) makes an order under section 152 as to a local nuisance;\n\n(i) prohibits, under section 162, the repetition or continuance of a public nuisance;\n\n(j) makes an order under Part C or Part D of Chapter XI;\n\n(k) takes cognizance of an offence under clause (c) of sub-section (1) of section 210;\n\n(l) tries an offender;\n\n(m) tries an offender summarily;\n\n(n) passes a sentence, under section 364, on proceedings recorded by another Magistrate;\n\n(o) decides an appeal;\n\n(p) calls, under section 438, for proceedings; or\n\n(q) revises an order passed under section 491,\n\nhis proceedings shall be void.",
+  "page_start": 167,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b71403cb-7439-423f-befb-37ff04507c1f",
+    "handle": "123456789/546588",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

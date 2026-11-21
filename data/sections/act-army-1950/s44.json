@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s44",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "44",
+  "heading": "False answers on enrolment.",
+  "chapter": null,
+  "order": 44,
+  "text": "Any person having become subject to this Act who is discovered to have made at the time of enrolment a wilfully false answer to any question set forth in the prescribed form of enrolment which has been put to him by the enrolling officer before whom he appears for the purpose of being enrolled shall, on conviction by court-martial, be liable to suffer imprisonment for a term which may extend to five years or such less punishment as is in this Act mentioned.",
+  "page_start": 20,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "4e9ec1d1-7644-486c-991a-831aede68fd4",
+    "handle": "123456789/525903",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

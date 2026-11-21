@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s118",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "118",
+  "heading": "Powers of general and summary general courts-martial.",
+  "chapter": null,
+  "order": 118,
+  "text": "A general or summary general court-martial shall have power to try any person subject to this Act for any offence punishable therein and to pass any sentence authorised thereby.",
+  "page_start": 33,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "9738bf27-1f7a-4e3a-8344-3e9330201918",
+    "handle": "123456789/525985",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

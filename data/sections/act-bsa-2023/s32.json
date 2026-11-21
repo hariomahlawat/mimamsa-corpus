@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s32",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "32",
+  "heading": "Relevancy of statements as to any law contained in law books including electronic or digital form.",
+  "chapter": null,
+  "order": 32,
+  "text": "When the Court has to form an opinion as to a law of any country, any statement of such law contained in a book purporting to be printed or published including in electronic or digital form under the authority of the Government of such country and to contain any such law, and any report of a ruling of the Courts of such country contained in a book including in electronic or digital form purporting to be a report of such rulings, is relevant.",
+  "page_start": 20,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "afdd3917-b232-44d4-88e7-7f4941980524",
+    "handle": "123456789/546076",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

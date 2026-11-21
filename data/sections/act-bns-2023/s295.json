@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s295",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "295",
+  "heading": "Sale, etc., of obscene objects to child.",
+  "chapter": null,
+  "order": 295,
+  "text": "Whoever sells, lets to hire, distributes, exhibits or circulates to any child any such obscene object as is referred to in section 294, or offers or attempts so to do, shall be punished on first conviction with imprisonment of either description for a term which may extend to three years, and with fine which may extend to two thousand rupees, and, in the event of a second or subsequent conviction, with imprisonment of either description for a term which may extend to seven years, and also with fine which may extend to five thousand rupees.",
+  "page_start": 84,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0658aca2-c806-48e5-bf17-744cbc1c8f88",
+    "handle": "123456789/545788",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

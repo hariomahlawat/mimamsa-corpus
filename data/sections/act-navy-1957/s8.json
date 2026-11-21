@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s8",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "8",
+  "heading": "Provision respecting discipline of master of merchant vessel under convoy.",
+  "chapter": null,
+  "order": 8,
+  "text": "(1) Every master or other person for the time being in command of any merchant or other vessel comprised in a convoy under the command of an officer of the Indian Navy shall obey, in all matters relating to the navigation or security of the convoy, any directions which may be given by such officer, and shall take such precautions for avoiding the enemy as may be required by any such directions.\n\n(2) If any such directions are not obeyed, any such officer or any person acting under his orders may compel obedience by force of arms without being liable for any injury or loss of life or any danger to or loss of property resulting therefrom.",
+  "page_start": 12,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6d523d7a-8096-4091-97c2-b232daa574cd",
+    "handle": "123456789/517354",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

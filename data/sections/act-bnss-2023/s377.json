@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s377",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "377",
+  "heading": "Procedure where person of unsound mind detained is declared fit to be released.",
+  "chapter": null,
+  "order": 377,
+  "text": "(1) If a person is detained under the provisions of sub-section (2) of section 369, or section 374, and such InspectorGeneral or visitors shall certify that, in his or their judgment, he may be released without danger of his doing injury to himself or to any other person, the State Government may thereupon order him to be released, or to be detained in custody, or to be transferred to a public mental health establishment if he has not been already sent to such establishment; and, in case it orders him to be transferred to a public mental health establishment, may appoint a Commission, consisting of a Judicial and two medical officers.\n\n(2) Such Commission shall make a formal inquiry into the state of mind of such person, take such evidence as is necessary, and shall report to the State Government, which may order his release or detention as it thinks fit.",
+  "page_start": 132,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3ba7d828-f730-4bdb-919c-b6aed45cf565",
+    "handle": "123456789/546467",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

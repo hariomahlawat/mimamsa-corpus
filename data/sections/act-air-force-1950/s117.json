@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s117",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "117",
+  "heading": "Dissolution of court-martial.",
+  "chapter": null,
+  "order": 117,
+  "text": "(1) If a court-martial after the commencement of a trial is reduced below the minimum number of Officers required by this Act, it shall be dissolved.\n\n(2) If on account of the illness of the judge advocate or of the accused before the finding, it is impossible to continue the trial, a court-martial shall be dissolved.\n\n(3) The officer who convened a court-martial may dissolve such court-martial if it appears to him that the exigencies of the service or the necessities of discipline render it impossible or in expedient to continue the said court-martial.\n\n(4) Where a court-martial is dissolved under this section, the accused may be tried again.",
+  "page_start": 38,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1ef8793f-52db-4692-97bd-9c7b6e1ed714",
+    "handle": "123456789/523728",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s66",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "66",
+  "heading": "Punishment for causing death or resulting in persistent vegetative state of victim.",
+  "chapter": null,
+  "order": 66,
+  "text": "Whoever, commits an offence punishable under sub-section (1) or sub-section (2) of section 64 and in the course of such commission inflicts an injury which causes the death of the woman or causes the woman to be in a persistent vegetative state, shall be punished with rigorous imprisonment for a term which shall not be less than twenty years, but which may extend to imprisonment for life, which shall mean imprisonment for the remainder of that person’s natural life, or with death.",
+  "page_start": 28,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c30023d0-1bb5-4383-8be7-8efc05b664b5",
+    "handle": "123456789/545561",
+    "listing_raw_path": "data/raw/indiacode/2023/3f63bdbb2512a509521a6dc9e8e8d97044f569307a1a0c1b10a743ec30873357.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s161",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "161",
+  "heading": "Abetment of assault by soldier, sailor or airman on his superior officer, when in execution of his office.",
+  "chapter": null,
+  "order": 161,
+  "text": "Whoever abets an assault by an officer, soldier, sailor or airman, in the Army, Navy or Air Force of the Government of India, on any superior officer being in the execution of his office, shall be punished with imprisonment of either description for a term which may extend to three years, and shall also be liable to fine.",
+  "page_start": 80,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ce0d2cf2-d609-4e34-bb7d-44961bce108c",
+    "handle": "123456789/545859",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

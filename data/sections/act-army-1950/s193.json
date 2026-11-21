@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s193",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "193",
+  "heading": "Publication of rules and regulations in Gazette.",
+  "chapter": null,
+  "order": 194,
+  "text": "All rules and regulations made under this Act shall be published in the Official Gazette and on such publication, shall have effect as if enacted in this Act.",
+  "page_start": 47,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b03191b2-7b10-4727-b3ec-c1e7337a6864",
+    "handle": "123456789/526068",
+    "listing_raw_path": "data/raw/indiacode/1950/6542b708b5ef7c8cab69e407dc4a85be6fba6a8c1d405408d7323dc516ebf3ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

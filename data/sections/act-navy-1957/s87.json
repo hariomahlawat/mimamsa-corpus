@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s87",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "87",
+  "heading": "Duty to receive or keep in custody.",
+  "chapter": null,
+  "order": 91,
+  "text": "(1) The commanding officer shall be responsible for the safe custody of every person who is in naval custody on board his ship or in his establishment.\n\n(2) The officer or [1][sailor] in charge of a guard, or a provost-marshal shall receive and keep any person who is duly committed to his custody.",
+  "page_start": 31,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 53 of 1974",
+      "by_doc_id": null,
+      "effective_date": "1982-10-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 53 of 1974, s. 2, for \"seaman\" (w.e.f. 16-10-1982).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "df3c81aa-f6b5-4798-b1cb-a5c454f7d1ac",
+    "handle": "123456789/523953",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

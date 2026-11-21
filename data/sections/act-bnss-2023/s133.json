@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s133",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "133",
+  "heading": "Copy of order to accompany summons or warrant.",
+  "chapter": null,
+  "order": 133,
+  "text": "Every summons or warrant issued under section 132 shall be accompanied by a copy of the order made under section 130, and such copy shall be delivered by the officer serving or executing such summons or warrant to the person served with, or arrested under, the same.",
+  "page_start": 53,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1ae66752-da58-489d-997a-65902d5295bc",
+    "handle": "123456789/546240",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

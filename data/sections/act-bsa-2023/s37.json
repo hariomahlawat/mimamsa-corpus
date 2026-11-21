@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s37",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "37",
+  "heading": "Judgments, etc., other than those mentioned in sections 34, 35 and 36 when relevant.",
+  "chapter": null,
+  "order": 37,
+  "text": "Judgments or orders or decrees, other than those mentioned in sections 34, 35 and 36, are irrelevant, unless the existence of such judgment, order or decree is a fact in issue, or is relevant under some other provision of this Adhiniyam.\n\nIllustrations.\n\n(a) A and B separately sue C for a libel which reflects upon each of them. C in each case says that the matter alleged to be libellous is true, and the circumstances are such that it is probably true in each case, or in neither. A obtains a decree against C for damages on the ground that C failed to make out his justification. The fact is irrelevant as between B and C.\n\n(b) A prosecutes B for stealing a cow from him. B is convicted. A afterwards sues C for the cow, which B had sold to him before his conviction. As between A and C, the judgment against B is irrelevant.\n\n(c) A has obtained a decree for the possession of land against B. C, B's son, murders A in consequence. The existence of the judgment is relevant, as showing motive for a crime.\n\n(d) A is charged with theft and with having been previously convicted of theft. The previous conviction is relevant as a fact in issue.\n\n(e) A is tried for the murder of B. The fact that B prosecuted A for libel and that A was convicted and sentenced is relevant under section 6 as showing the motive for the fact in issue.",
+  "page_start": 21,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c5f434f3-266d-46c1-965f-55544fe73269",
+    "handle": "123456789/545929",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

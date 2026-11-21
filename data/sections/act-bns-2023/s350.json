@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s350",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "350",
+  "heading": "Making a false mark upon any receptacle containing goods.",
+  "chapter": null,
+  "order": 350,
+  "text": "(1) Whoever makes any false mark upon any case, package or other receptacle containing goods, in a manner reasonably calculated to cause any public servant or any other person to believe that such receptacle contains goods which it does not contain or that it does not contain goods which it does contain, or that the goods contained in such receptacle are of a nature or quality different from the real nature or quality thereof, shall, unless he proves that he acted without intent to defraud, be punished with imprisonment of either description for a term which may extend to three years, or with fine, or with both.\n\n(2) Whoever makes use of any false mark in any manner prohibited under sub-section (1) shall, unless he proves that he acted without intent to defraud,\n\nbe punished as if he had committed the offence under sub-section (1).",
+  "page_start": 104,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "26898210-7130-4293-a59d-2450a8c34bc2",
+    "handle": "123456789/545839",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s36",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "36",
+  "heading": "Relevancy and effect of judgments, orders or decrees, other than those mentioned in section 35.",
+  "chapter": null,
+  "order": 36,
+  "text": "Judgments, orders or decrees other than those mentioned in section 35 are relevant if they relate to matters of a public nature relevant to the enquiry; but such judgments, orders or decrees are not conclusive proof of that which they state.\n\nIllustration.\n\nA sues B for trespass on his land. B alleges the existence of a public right of way over the land, which A denies. The existence of a decree in favour of the defendant, in a suit by A against C for a trespass on the same land, in which C alleged the existence of the same right of way, is relevant, but it is not conclusive proof that the right of way exists.",
+  "page_start": 21,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "664a1a9c-01ca-4085-915f-793f0c4ed985",
+    "handle": "123456789/546078",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

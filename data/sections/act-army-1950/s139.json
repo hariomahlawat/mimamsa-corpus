@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s139",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "139",
+  "heading": "Conviction of offence not charged.",
+  "chapter": null,
+  "order": 139,
+  "text": "(1) A person charged before a court-martial with desertion may be found guilty of attempting to desert or of being absent without leave.\n\n(2) A person charged before a court-martial with attempting to desert may be found guilty of being absent without leave.\n\n(3) A person charged before a court-martial with using criminal force may be found guilty of assault.\n\n(4) A person charged before a court-martial with using threatening language may be found guilty of using insubordinate language.\n\n(5) A person charged before a court-martial with any one of the offences specified in clauses (a), (b), (c) and (d) of section 52 may be found guilty of any other of these offences with which he might have been charged.\n\n(6) A person charged before a court-martial with an offence punishable under section 69 may be found guilty of any other offence of which he might have been found guilty if the provisions of the [1][Code of Criminal Procedure, 1973 (2 of 1974)] were applicable.\n\n(7) A person charged before a court-martial with any offence under this Act, may, on failure of proof of an offence having been committed in circumstances involving a more severe punishment, be found guilty of the same offence as having been committed in circumstances involving a less severe punishment.\n\n(8) A person charged before a court-martial with any offence under this Act may be found guilty of having attempted or abetted the commission of that offence, although the attempt or abetment is not separately charged.",
+  "page_start": 37,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 37 of 1992",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 37 of 1992, s.14, for certain words.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0193e16e-d5d0-43d2-ada0-03f61e870df6",
+    "handle": "123456789/526008",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

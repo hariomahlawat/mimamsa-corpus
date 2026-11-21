@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s6",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "6",
+  "heading": "Qualifications for appointment of Chairperson and other Members.",
+  "chapter": null,
+  "order": 6,
+  "text": "(1) A person shall not be qualified for appointment as the Chairperson unless he is a retired Judge of the Supreme Court or a retired Chief Justice of a High Court.\n\n(2) A person shall not be qualified for appointment as a Judicial Member unless he is or has been a Judge of a High Court.\n\n(3) A person shall not be qualified for appointment as an Administrative Member unless--\n\n(a) he has held or has been holding the rank of Major General or above for a total period of at least three years in the Army or equivalent rank in the Navy or the Air Force; and\n\n(b) he has served for not less than one year as Judge Advocate General in the Army or the Navy or the Air Force, and is not below the rank of Major General, Commodore and Air Commodore respectively.\n\nExplanation.--When a serving person is appointed as an Administrative Member, he shall have retired from service prior to assuming such appointment.",
+  "page_start": 5,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d1e536fa-30fc-4b54-a31f-d9ffb1624fb4",
+    "handle": "123456789/527295",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

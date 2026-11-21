@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s189",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "189",
+  "heading": "Scope of power of suspension.",
+  "chapter": null,
+  "order": 190,
+  "text": "The powers conferred by sections 182 and 186 shall be in addition to and not in derogation of the power of mitigation, remission and commutation.",
+  "page_start": 46,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2f647969-9a31-40be-8f1d-5938a3f575b3",
+    "handle": "123456789/526064",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

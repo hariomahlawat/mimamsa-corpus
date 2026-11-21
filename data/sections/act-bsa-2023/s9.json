@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s9",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "9",
+  "heading": "When facts not otherwise relevant become relevant.",
+  "chapter": null,
+  "order": 9,
+  "text": "Facts not otherwise relevant are relevant--\n\n(1) if they are inconsistent with any fact in issue or relevant fact;\n\n(2) if by themselves or in connection with other facts they make the existence or non-existence of any fact in issue or relevant fact highly probable or improbable.\n\nIllustrations.\n\n(a) The question is, whether A committed a crime at Chennai on a certain day. The fact that, on that day, A was at Ladakh is relevant. The fact that, near the time when the crime was committed, A was at a distance from the place where it was committed, which would render it highly improbable, though not impossible, that he committed it, is relevant.\n\n(b) The question is, whether A committed a crime. The circumstances are such that the crime must have been committed either by A, B, C or D. Every fact which shows that the crime could have been committed by no one else, and that it was not committed by either B, C or D, is relevant.",
+  "page_start": 13,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ae2f2add-7527-430f-80f2-bf9efcc4ca9f",
+    "handle": "123456789/545904",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

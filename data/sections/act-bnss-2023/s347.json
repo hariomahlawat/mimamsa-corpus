@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s347",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "347",
+  "heading": "Local inspection.",
+  "chapter": null,
+  "order": 347,
+  "text": "(1) Any Judge or Magistrate may, at any stage of any inquiry, trial or other proceeding, after due notice to the parties, visit and inspect any place in which an offence is alleged to have been committed, or any other place which it is in his opinion necessary to view for the purpose of properly appreciating the evidence given at such inquiry or trial, and shall without unnecessary delay record a memorandum of any relevant facts observed at such inspection.\n\n(2) Such memorandum shall form part of the record of the case and if the prosecutor, complainant or accused or any other party to the case, so desires, a copy of the memorandum shall be furnished to him free of cost.",
+  "page_start": 119,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "4a2eda7f-722b-46e0-969b-5ce7b01b01d1",
+    "handle": "123456789/546438",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

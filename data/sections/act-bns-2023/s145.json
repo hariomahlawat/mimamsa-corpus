@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s145",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "145",
+  "heading": "Habitual dealing in slaves.",
+  "chapter": null,
+  "order": 145,
+  "text": "Whoever habitually imports, exports, removes, buys, sells, traffics or deals in slaves, shall be punished with imprisonment for life, or with imprisonment of either description for a term not exceeding ten years, and shall also be liable to fine",
+  "page_start": 70,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3e06ebb7-b51d-40e3-abd9-fd8f61d05e07",
+    "handle": "123456789/545646",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

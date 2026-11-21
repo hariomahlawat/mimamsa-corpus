@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s299",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "299",
+  "heading": "Deliberate and malicious acts, intended to outrage religious feelings of any class by insulting its religion or religious beliefs.",
+  "chapter": null,
+  "order": 299,
+  "text": "Whoever, with deliberate and malicious intention of outraging the religious feelings of any class of citizens of India, by words, either spoken or written, or by signs or by visible representations or through electronic means or otherwise, insults or attempts to insult the religion or the religious beliefs of that class, shall be punished with imprisonment of either description for a term which may extend to three years, or with fine, or with both.",
+  "page_start": 85,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "84e438eb-a0e6-4d6a-a7e8-8a9ecd63fb1d",
+    "handle": "123456789/545883",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

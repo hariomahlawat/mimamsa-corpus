@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s69",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "69",
+  "heading": "Offences in relation to Court-martial.",
+  "chapter": null,
+  "order": 73,
+  "text": "Every person subject to naval law, who,--\n\n(a) being duly summoned or ordered to attend as a witness before a court-martial wilfully or without reasonable excuse fails to attend; or\n\n(b) refuses to take an oath or make an affirmation legally required by a court-martial to be taken or made; or\n\n(c) being sworn, refuses to answer any questions which he is in law bound to answer; or\n\n(d) refuses to produce or deliver up a document in his power which the court may legally demand; or\n\n(e) is guilty of contempt of court-martial;\n\nshall be punished with imprisonment for a term which may extend to three years or such other punishment as is hereinafter mentioned.",
+  "page_start": 26,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c5d9f19a-417c-4d47-b61e-c7505023a36e",
+    "handle": "123456789/523933",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

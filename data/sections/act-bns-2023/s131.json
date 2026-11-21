@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s131",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "131",
+  "heading": "Punishment for assault or criminal force otherwise than on grave provocation.",
+  "chapter": null,
+  "order": 131,
+  "text": "Whoever assaults or uses criminal force to any person otherwise than on grave and sudden provocation given by that person, shall be punished with imprisonment of either description for a term which may extend to three months, or with fine which may extend to one thousand rupees, or with both.\n\nExplanation 1.—Grave and sudden provocation will not mitigate the punishment for an offence under this section,—\n\n(a) if the provocation is sought or voluntarily provoked by the offender as an excuse for the offence; or\n\n(b) if the provocation is given by anything done in obedience to the law, or by a public servant, in the lawful exercise of the powers of such public servant; or\n\n(c) if the provocation is given by anything done in the lawful exercise of the right of private defence.\n\nExplanation 2.—Whether the provocation was grave and sudden enough to mitigate the offence, is a question of fact.",
+  "page_start": 60,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b5cd5510-745f-4923-b92a-07a0c17d9d04",
+    "handle": "123456789/545630",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

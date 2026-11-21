@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s68",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "68",
+  "heading": "Proof where no attesting witness found.",
+  "chapter": null,
+  "order": 68,
+  "text": "If no such attesting witness can be found, it must be proved that the attestation of one attesting witness at least is in his handwriting, and that the signature of the person executing the document is in the handwriting of that person",
+  "page_start": 29,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "333f882e-6fa4-441e-8a0e-7a888449605c",
+    "handle": "123456789/545962",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.2.0",
+  "source": "indiacode",
+  "source_url": "https://indiacode.gov.in/server/api/core/bitstreams/77d6904d-e8ee-4c1f-9e60-75e139e6ed04/content",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T14:34:41+00:00",
+  "sha256": "5a7ea50c8074c8997ab4f493e9e9fec7f9deb616858461a1a6eb0b3e74527cb8",
+  "raw_path": "data/raw/indiacode/0000/5a7ea50c8074c8997ab4f493e9e9fec7f9deb616858461a1a6eb0b3e74527cb8.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 20,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/rules-aft-group-a-rrs.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "rules-aft-group-a-rrs",
+      "type": "implements",
+      "target_doc_id": "act-armed-forces-tribunal-2007",
+      "target_ref_raw": "The Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "India Code lists this RULE record under act_id AC_CEN_28_38_00013_200755_1517807323574 (The Armed Forces Tribunal Act, 2007).",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "rules-aft-group-a-rrs",
+  "doc_type": "rules",
+  "title": "AFT-Group-A RRs",
+  "number": null,
+  "issuing_authority": "Ministry of Defence",
+  "issue_date": "2018-04-23",
+  "effective_date": null,
+  "status": "in_force",
+  "status_note": "Listed as not repealed on India Code (read 2026-11-21)",
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "original_filename": "group-a.pdf",
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ede29d08-3007-45f2-a735-d6fe4ebe8ceb",
+    "collection": "RULE",
+    "act_id": "AC_CEN_28_38_00013_200755_1517807323574",
+    "handle": "123456789/509280",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "number": "crawler",
+    "issue_date": "crawler",
+    "issuing_authority": "crawler",
+    "status": "rule",
+    "page_count": "rule",
+    "text_method": "rule"
+  }
+}

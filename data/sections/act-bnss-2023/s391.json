@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s391",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "391",
+  "heading": "Certain Judges and Magistrates not to try certain offences when committed before themselves.",
+  "chapter": null,
+  "order": 391,
+  "text": "Except as provided in sections 383, 384, 388 and 389, no Judge of a Criminal Court (other than a Judge of a High Court) or Magistrate shall try any person for any offence referred to in section 215, when such offence is committed before himself or in contempt of his authority, or is brought under his notice as such Judge or Magistrate in the course of a judicial proceeding.",
+  "page_start": 136,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "242aa87a-6ecb-4255-ad5a-03ec6e904de3",
+    "handle": "123456789/546481",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s116",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "116",
+  "heading": "Composition of summary general court-martial.",
+  "chapter": null,
+  "order": 116,
+  "text": "A summary general court-martial shall consist of not less than three officers.",
+  "page_start": 38,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "822b33e4-4dd2-4414-9895-3f2e8489c822",
+    "handle": "123456789/523727",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

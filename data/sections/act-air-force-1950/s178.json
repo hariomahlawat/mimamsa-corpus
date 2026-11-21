@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s178",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "178",
+  "heading": "Cancellation of conditional pardon, release on parole or remission.",
+  "chapter": null,
+  "order": 178,
+  "text": "(1) If any condition on which a person has been pardoned or released on parole or a punishment has been remitted is, in the opinion of the authority which granted the pardon, release or remission, not fulfilled, such authority may cancel the pardon, release or remission, and thereupon the sentence of, the court shall be carried into effect as if such pardon, release or remission had not been granted.\n\n(2) A person whose sentence of transportation, imprisonment or detention is carried into effect under the provisions of sub-section (1) shall undergo only the unexpired portion of his sentence.",
+  "page_start": 52,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "48deee73-e139-42cc-8bc0-84c1cf798c94",
+    "handle": "123456789/523789",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

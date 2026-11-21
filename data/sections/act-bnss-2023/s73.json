@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s73",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "73",
+  "heading": "Power to direct security to be taken.",
+  "chapter": null,
+  "order": 73,
+  "text": "(1) Any Court issuing a warrant for the arrest of any person may in its discretion direct by endorsement on the warrant that, if such person executes a bail bond with sufficient sureties for his attendance before the Court at a specified time and thereafter until otherwise directed by the Court, the officer to whom the warrant is directed shall take such security and shall release such person from custody.\n\n(2) The endorsement shall state—\n\n(a) the number of sureties;\n\n(b) the amount in which they and the person for whose arrest the warrant is issued, are to be respectively bound;\n\n(c) the time at which he is to attend before the Court.\n\n(3) Whenever security is taken under this section, the officer to whom the warrant is directed shall forward the bond to the Court",
+  "page_start": 36,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8c3c2e4d-4d16-4017-ac96-b37a6f3a65de",
+    "handle": "123456789/546183",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

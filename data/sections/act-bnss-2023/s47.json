@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s47",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "47",
+  "heading": "Person arrested to be informed of grounds of arrest and of right to bail.",
+  "chapter": null,
+  "order": 47,
+  "text": "(1) Every police officer or other person arresting any person without warrant shall forthwith communicate to him full particulars of the offence for which he is arrested or other grounds for such arrest.\n\n(2) Where a police officer arrests without warrant any person other than a person accused of a nonbailable offence, he shall inform the person arrested that he is entitled to be released on bail and that he may arrange for sureties on his behalf.",
+  "page_start": 31,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "84ad41ba-cba6-4022-a353-4194fefe89ba",
+    "handle": "123456789/546156",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

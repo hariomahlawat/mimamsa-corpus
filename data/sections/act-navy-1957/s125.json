@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s125",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "125",
+  "heading": "Finding that the offence was committed with intent involving less degree of punishment",
+  "chapter": null,
+  "order": 129,
+  "text": "Where the amount of punishment for any offence depends upon the intent with which it has been committed and any person is charged with having committed such an offence with an intent involving a greater degree of punishment, a court-martial may find that the offence was committed with an intent involving less degree of punishment and award such punishment accordingly.",
+  "page_start": 41,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c067d0fe-6af0-41fe-81c7-bfbc0e7690c9",
+    "handle": "123456789/524003",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

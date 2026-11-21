@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s2",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "2",
+  "heading": "Applicability of the Act.",
+  "chapter": null,
+  "order": 2,
+  "text": "(1) The provisions of this Act shall apply to all persons subject to the Army Act, 1950 (46 of 1950), the Navy Act, 1957 (62 of 1957) and the Air Force Act, 1950 (45 of 1950).\n\n(2) This Act shall also apply to retired personnel subject to the Army Act, 1950 (46 of 1950) or the Navy Act, 1957 (62 of 1957) or the Air Force Act, 1950 (45 of 1950), including their dependants, heirs and successors, in so far as it relates to their service matters.",
+  "page_start": 3,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "92a3eaea-698b-4b88-aed7-7c617a48eee7",
+    "handle": "123456789/527251",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

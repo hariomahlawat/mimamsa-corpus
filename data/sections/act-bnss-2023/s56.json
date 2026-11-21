@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s56",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "56",
+  "heading": "Health and safety of arrested person.",
+  "chapter": null,
+  "order": 56,
+  "text": "It shall be the duty of the person having the custody of an accused to take reasonable care of the health and safety of the accused.",
+  "page_start": 34,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "48129d19-ce20-4f71-8aba-0fc3671432dd",
+    "handle": "123456789/546166",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

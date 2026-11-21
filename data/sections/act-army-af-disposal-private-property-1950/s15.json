@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-af-disposal-private-property-1950#s15",
+  "parent_doc_id": "act-army-af-disposal-private-property-1950",
+  "unit": "section",
+  "number": "15",
+  "heading": "Appointment of standing Committee of Adjustment in certain cases.",
+  "chapter": null,
+  "order": 15,
+  "text": "When an officer dies or deserts or is ascertained in the prescribed manner to be of unsound mind or while on active service is officially reported missing, the references in the foregoing provisions of this Act to the Committee shall be construed as references to the Standing Committee of Adjustment, if any, constituted in this behalf in the prescribed manner and such Standing Committee shall alone be entitled to perform all the functions of the Committee under this Act.",
+  "page_start": 6,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2b68cfbd-8b64-4777-aa0d-6f91e92f80f2",
+    "handle": "123456789/527865",
+    "listing_raw_path": "data/raw/indiacode/1950/2dce3a9525b06939bf0a27ebc223106bd030c88a8fa3f2aa0c722862fe2924b3.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

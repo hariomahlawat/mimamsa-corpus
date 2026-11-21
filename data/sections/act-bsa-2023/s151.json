@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s151",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "151",
+  "heading": "Court to decide when question shall be asked and when witness compelled to answer.",
+  "chapter": null,
+  "order": 151,
+  "text": "(1) If any such question relates to a matter not relevant to the suit or proceeding, except in so far as it affects the credit of the witness by injuring his character, the Court shall decide whether or not the witness shall be compelled to answer it, and may, if it thinks fit, warn the witness that he is not obliged to answer it.\n\n(2) In exercising its discretion, the Court shall have regard to the following considerations, namely:--\n\n(a) such questions are proper if they are of such a nature that the truth of the imputation conveyed by them would seriously affect the opinion of the Court as to the credibility of the witness on the matter to which he testifies;\n\n(b) such questions are improper if the imputation which they convey relates to matters so remote in time, or of such a character, that the truth of the imputation would not affect, or would affect in a slight degree, the opinion of the Court as to the credibility of the witness on the matter to which he testifies;\n\n(c) such questions are improper if there is a great disproportion between the importance of the imputation made against the witness's character and the importance of his evidence;\n\n(d) the Court may, if it sees fit, draw, from the witness's refusal to answer, the inference that the answer if given would be unfavourable.",
+  "page_start": 45,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "59c0f7fa-5d88-4507-ad15-a8ace7fbd3cc",
+    "handle": "123456789/546050",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s358",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "358",
+  "heading": "Power to proceed against other persons appearing to be guilty of offence.",
+  "chapter": null,
+  "order": 358,
+  "text": "(1) Where, in the course of any inquiry into, or trial of, an offence, it appears from the evidence that any person not being the accused has committed any offence for which such person could be tried together with the accused, the Court may proceed against such person for the offence which he appears to have committed.\n\n(2) Where such person is not attending the Court, he may be arrested or summoned, as the circumstances of the case may require, for the purpose aforesaid.\n\n(3) Any person attending the Court, although not under arrest or upon a summons, may be detained by such Court for the purpose of the inquiry into, or trial of, the offence which he appears to have committed.\n\n(4) Where the Court proceeds against any person under sub-section (1), then---\n\n(a) the proceedings in respect of such person shall be commenced afresh, and the witnesses reheard;\n\n(b) subject to the provisions of clause (a), the case may proceed as if such person had been an accused person when the Court took cognizance of the offence upon which the inquiry or trial was commenced.",
+  "page_start": 122,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "7e6ea6e7-ca43-4c4f-98f6-9464da8c242c",
+    "handle": "123456789/546449",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

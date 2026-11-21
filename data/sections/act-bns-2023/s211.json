@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s211",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "211",
+  "heading": "Omission to give notice or information to public servant by person legally bound to give it.",
+  "chapter": null,
+  "order": 211,
+  "text": "Whoever, being legally bound to give any notice or to furnish information on any subject to any public servant, as such, intentionally omits to give such notice or to furnish such information in the manner and at the time required by law,—.\n\n(a) shall be punished with simple imprisonment for a term which may extend to one month, or with fine which may extend to five thousand rupees, or with both;.\n\n(b) where the notice or information required to be given respects the commission of an offence, or is required for the purpose of preventing the commission of an offence, or in order to the apprehension of an offender, with simple imprisonment for a term which may extend to six months, or with fine which may extend to ten thousand rupees, or with both;.\n\n(c) where the notice or information required to be given is required by an order passed under section 394 of the Bharatiya Nagarik Suraksha Sanhita, 2023 with imprisonment of either description for a term which may extend to six months, or with fine which may extend to one thousand rupees, or with both.",
+  "page_start": 92,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "def7dcef-32ab-462c-9c7d-837982434b68",
+    "handle": "123456789/545706",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

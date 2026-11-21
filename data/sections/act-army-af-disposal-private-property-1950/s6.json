@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-af-disposal-private-property-1950#s6",
+  "parent_doc_id": "act-army-af-disposal-private-property-1950",
+  "unit": "section",
+  "number": "6",
+  "heading": "Representative powers of commanding officer or Committee.",
+  "chapter": null,
+  "order": 6,
+  "text": "For the purpose of the exercise of his or its duties under section 3 or section 4, the commanding officer or the Committee, as the case may be, shall, to the exclusion of all other persons and authorities whomsoever or whatsoever, have the same rights and powers as if he or it had taken out representation to the estate of the deceased, and any receipt given by the commanding officer or the Committee, as the case may be, shall have effect accordingly.",
+  "page_start": 4,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "906513dd-2a1d-4589-8a05-0ae2a51990c9",
+    "handle": "123456789/527766",
+    "listing_raw_path": "data/raw/indiacode/1950/2dce3a9525b06939bf0a27ebc223106bd030c88a8fa3f2aa0c722862fe2924b3.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

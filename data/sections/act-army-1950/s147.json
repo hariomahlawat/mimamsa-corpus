@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s147",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "147",
+  "heading": "Transmission to Central Government of orders under section 146.",
+  "chapter": null,
+  "order": 147,
+  "text": "A copy of every order made by an officer under section 146 for the trial of the accused shall forthwith be sent to the Central Government.",
+  "page_start": 40,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "77a085f7-c5c6-4697-8ca2-40db8884a135",
+    "handle": "123456789/526017",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

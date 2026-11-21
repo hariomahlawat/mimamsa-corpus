@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s1",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "1",
+  "heading": "Short title and commencement.",
+  "chapter": null,
+  "order": 1,
+  "text": "(1) This Act may be called the Air Force Act, 1950.\n\n(2) It shall come into force on such date[1] as the Central Government may by notification in the Official Gazette, appoint in this behalf.",
+  "page_start": 9,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [
+    "22nd July, 1950, vide Notification No. S.R.O. 124, dated 22nd July, see Gazette of India, 1950, Part II, sec. 4."
+  ],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "989c9705-7352-452a-a999-c9a05fbe1c4b",
+    "handle": "123456789/525639",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

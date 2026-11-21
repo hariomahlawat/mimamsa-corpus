@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s23",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "23",
+  "heading": "Procedure and powers of the Tribunal.",
+  "chapter": null,
+  "order": 24,
+  "text": "(1) The Tribunal shall not be bound by the procedure laid down in the Code of Civil Procedure, 1908 (5 of 1908) but shall be guided by the principles of natural justice and subject to the other provisions of this Act and any rules made thereunder, the Tribunal shall have the power to lay down and regulate its own procedure including the fixing of place and time of its inquiry and deciding whether to sit in public or in camera.\n\n(2) The Tribunal shall decide every application made to it as expeditiously as possible after a perusal of documents, affidavits and written representations and after hearing such oral arguments as may be advanced:\n\nProvided that where the Tribunal deems it necessary, for reasons to be recorded in writing, it may allow oral evidence to be adduced.\n\n(3) No adjournment shall be granted by the Tribunal without recording the reasons justifying the grant of such adjournment and cost shall be awarded, if a party requests for adjournment more than twice.",
+  "page_start": 10,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "74936556-6cce-4cc7-adda-137984c66496",
+    "handle": "123456789/527481",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

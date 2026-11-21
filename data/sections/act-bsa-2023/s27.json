@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s27",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "27",
+  "heading": "Relevancy of certain evidence for proving, in subsequent proceeding, truth of facts therein stated.",
+  "chapter": null,
+  "order": 27,
+  "text": "Evidence given by a witness in a judicial proceeding, or before any person authorised by law to take it, is relevant for the purpose of proving, in a subsequent judicial proceeding, or in a later stage of the same judicial proceeding, the truth of the facts which it states, when the witness is dead or cannot be found, or is incapable of giving evidence, or is kept out of the way by the adverse party, or if his presence cannot be obtained without an amount of delay or expense which, under the circumstances of the case, the Court considers unreasonable:\n\nProvided that the proceeding was between the same parties or their representatives in interest; that the adverse party in the first proceeding had the right and opportunity to cross-examine and the questions in issue were substantially the same in the first as in the second proceeding.\n\nExplanation.--A criminal trial or inquiry shall be deemed to be a proceeding between the prosecutor and the accused within the meaning of this section.",
+  "page_start": 19,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3a2dbd7c-ee83-4c87-9fd9-d4fb2b1e1aa6",
+    "handle": "123456789/546075",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

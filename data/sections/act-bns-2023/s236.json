@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s236",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "236",
+  "heading": "False statement made in declaration which is by law receivable as evidence.",
+  "chapter": null,
+  "order": 236,
+  "text": "Whoever, in any declaration made or subscribed by him, which declaration any Court or any public servant or other person, is bound or authorised by law to receive as evidence of any fact, makes any statement which is false, and which he either knows or believes to be false or does not believe to be true, touching any point material to the object for which the declaration is made or used, shall be punished in the same manner as if he gave false evidence.",
+  "page_start": 74,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a3f9e04e-d473-4f32-862c-9187970f006d",
+    "handle": "123456789/545732",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

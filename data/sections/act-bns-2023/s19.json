@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s19",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "19",
+  "heading": "Act likely to cause harm, but done without criminal intent, and to prevent other harm.",
+  "chapter": null,
+  "order": 19,
+  "text": "Nothing is an offence merely by reason of its being done with the knowledge that it is likely to cause harm, if it be done without any criminal intention to cause harm, and in good faith for the purpose of preventing or avoiding other harm to person or property.\n\nExplanation.—It is a question of fact in such a case whether the harm to be prevented or avoided was of such a nature and so imminent as to justify or excuse the risk of doing the act with the knowledge that it was likely to cause harm.\n\nIllustrations.\n\n(a) A, the captain of a vessel, suddenly and without any fault or negligence on his part, finds himself in such a position that, before he can stop his vessel, he must inevitably run down a boat B, with twenty or thirty passengers on board, unless he changes the course of his vessel, and that, by changing his course, he must incur risk of running down a boat C with only two passengers on board, which he may possibly clear. Here, if A alters his course without any intention to run down the boat C and in good faith for the purpose of avoiding the danger to the passengers in the boat B, he is not guilty of an offence, though he may run down the boat C by doing an act which he knew was likely to cause that effect, if it be found as a matter of fact that the danger which he intended to avoid was such as to excuse him in incurring the risk of running down the boat C.\n\n(b) A, in a great fire, pulls down houses in order to prevent the conflagration from spreading. He does this with the intention in good faith of saving human life or property. Here, if it be found that the harm to be prevented was of such a nature and so imminent as to excuse A’s act, A is not guilty of the offence.",
+  "page_start": 4,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "7090cecf-5565-4438-a1e9-6683449ffb62",
+    "handle": "123456789/545512",
+    "listing_raw_path": "data/raw/indiacode/2023/3f63bdbb2512a509521a6dc9e8e8d97044f569307a1a0c1b10a743ec30873357.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

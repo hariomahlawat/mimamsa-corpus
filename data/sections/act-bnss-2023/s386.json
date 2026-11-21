@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s386",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "386",
+  "heading": "When Registrar or Sub-Registrar to be deemed a Civil Court.",
+  "chapter": null,
+  "order": 386,
+  "text": "When the State Government so directs, any Registrar or any Sub-Registrar appointed under the Registration Act, 1908 (16 of 1908), shall be deemed to be a Civil Court within the meaning of sections 384 and 385.",
+  "page_start": 135,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1a7cd5d2-e2f7-46bd-ac28-97d38a9fea25",
+    "handle": "123456789/546476",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

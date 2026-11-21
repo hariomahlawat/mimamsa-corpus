@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s106",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "106",
+  "heading": "Opening of prosecution case.",
+  "chapter": null,
+  "order": 110,
+  "text": "(1) If the accused pleads not guilty or refuses to, or does not, plead or if he claims to be tried or if in the circumstances mentioned in sub-section (3) of section 105 withdraws the plea of guilty or if the court does not accept the plea of guilty, the court shall proceed to try the accused.\n\n(2) The prosecutor shall open his case by reading the circumstantial letter prepared in accordance with the regulations made under this Act, reading from this Act or the Indian Penal Code (45 of 1860) or other law the description of the offence charged and stating shortly by what evidence he expects to prove the guilt of the accused.\n\n(3) The prosecutor shall then examine his witnesses.",
+  "page_start": 37,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "06e5b97b-23b7-442c-8a21-ab26ee9bc93e",
+    "handle": "123456789/523974",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s78",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "78",
+  "heading": "Jurisdiction as to place and offences.",
+  "chapter": null,
+  "order": 82,
+  "text": "(1) Subject to the provisions of sub-section (2), every person subject to naval law who is charged with a naval offence or a civil offence may be tried and punished under this Act regardless of where the alleged offence was committed.\n\n(2) A person subject to naval law who commits an offence of murder against a person not subject to army, naval or air force law or an offence of culpable homicide not amounting to murder against such person or an offence of rape in relation to such person shall not be tried and punished under this Act unless he commits any of the said offences--\n\n(a) while on active service; or\n\n(b) at any place outside India; or\n\n(c) at any place specified by the Central Government by notification in this behalf.",
+  "page_start": 27,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3a2b950a-de28-4284-8f6f-c8d67a03b40c",
+    "handle": "123456789/523943",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

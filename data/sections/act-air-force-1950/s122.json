@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s122",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "122",
+  "heading": "Liability of offender who ceases to be subject to Act.",
+  "chapter": null,
+  "order": 122,
+  "text": "(1) Where an offence under this Act had been committed by any person while subject to this Act and he has ceased to be so subject, he may be taken into and kept in air force custody, and tried and punished for such offence as if he continued to be so subject.\n\n(2) Except as provided by sub-sections (3) and (4), any such person shall not be tried for an offence, unless his trial commences within six months after he had ceased to be subject to this Act.\n\n(3) The provisions of sub-section (2) shall not apply to the trial of any such person for an offence of desertion or fraudulent enrolment or for any of the offences mentioned in section 37.\n\n(4) Nothing contained in sub-section (2) shall affect the jurisdiction of a civil court to try any offence triable by such court as well as by a court-martial.\n\n(5) When a person subject to this Act is sentenced by a court-martial to transportation or imprisonment, this Act shall apply to him during the term of his sentence, though he is cashiered or dismissed from the Air Force, or has otherwise ceased to be subject to this Act and he may be kept, removed, imprisoned and punished as if he continued to be subject to this Act.\n\n(6) When a person subject to this Act it sentenced by a court-martial to death, this Act shall apply to him till the sentence is carried out.",
+  "page_start": 39,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8fb0dcd8-194a-4bd7-a7e5-c05c46fd3270",
+    "handle": "123456789/523733",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

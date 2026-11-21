@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s124",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "124",
+  "heading": "Ascertaining the opinion of the court",
+  "chapter": null,
+  "order": 128,
+  "text": "(1) Subject to the provisions of sub-sections (2) and (3), every question for determination by a court-martial shall be decided by the vote of the majority:\n\nProvided that where there is an equality of votes, the decision most favourable to the accused shall prevail.\n\n(2) The sentence of death shall not be passed on any offender unless four at least of the members present at the court-martial where the number does not exceed five, and in all other cases a majority of not less than two-thirds of the members present, concur in the sentence.\n\n(3) Where in respect of an offence, the only punishment which may be awarded is death, a finding that a charge for such offence is proved shall not be given unless four at least of the members present at the court-martial where the number does not exceed five, and in all other cases a majority of not less than two-thirds of the members present, concur in the finding.",
+  "page_start": 41,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b8f1a218-6ad1-44e5-9a69-16801d5dbf23",
+    "handle": "123456789/523999",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

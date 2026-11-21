@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s50",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "50",
+  "heading": "Character as affecting damages.",
+  "chapter": null,
+  "order": 50,
+  "text": "In civil cases, the fact that the character of any person is such as to affect the amount of damages which he ought to receive, is relevant.\n\nExplanation.--In this section and sections 46, 47 and 49, the word \"character\" includes both reputation and disposition; but, except as provided in section 49, evidence may be given only of general reputation and general disposition, and not of particular acts by which reputation or disposition has been shown.",
+  "page_start": 24,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d1e3ad56-fc82-40dd-8f52-4a3a0a23a82f",
+    "handle": "123456789/545943",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

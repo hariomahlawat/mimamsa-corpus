@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s502",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "502",
+  "heading": "Power to restore possession of immovable property.",
+  "chapter": null,
+  "order": 502,
+  "text": "(1) When a person is convicted of an offence by use of criminal force or show of force or by criminal intimidation, and it appears to the Court that, by such use of force or show of force or intimidation, any person has been dispossessed of any immovable property, the Court may, if it thinks fit, order that possession of the same be restored to that person after evicting by force, if necessary, any other person who may be in possession of the property:\n\nProvided that no such order shall be made by the Court more than one month after the date of the conviction.\n\n(2) Where the Court trying the offence has not made an order under sub-section (1), the Court of appeal, confirmation or revision may, if it thinks fit, make such order while disposing of the appeal, reference or revision, as the case may be.\n\n(3) Where an order has been made under sub-section (1), the provisions of section 500 shall apply in relation thereto as they apply in relation to an order under section 499.\n\n(4) No order made under this section shall prejudice any right or interest to or in such immovable property which any person may be able to establish in a civil suit.",
+  "page_start": 166,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3195ade2-c781-46eb-ad61-da31dec6588a",
+    "handle": "123456789/546583",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

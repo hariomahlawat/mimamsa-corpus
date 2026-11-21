@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.2.0",
+  "source": "indiacode",
+  "source_url": "https://indiacode.gov.in/server/api/core/bitstreams/ca9b9be0-c88a-4a5d-b618-473e2eb8f14f/content",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T14:33:07+00:00",
+  "sha256": "68dd1cea126dc5c4c0ebce20fbd1b5ab0a350ef5d77d5f3601046461a1034985",
+  "raw_path": "data/raw/indiacode/0000/68dd1cea126dc5c4c0ebce20fbd1b5ab0a350ef5d77d5f3601046461a1034985.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 487,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/regs-regulations-for-the-navy-part-i.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "regs-regulations-for-the-navy-part-i",
+      "type": "implements",
+      "target_doc_id": "act-navy-1957",
+      "target_ref_raw": "The Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "India Code lists this REGULATION record under act_id AC_CEN_28_38_00006_195762_1517807321397 (The Navy Act, 1957).",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "regs-regulations-for-the-navy-part-i",
+  "doc_type": "regulations",
+  "title": "Regulations for the Navy Part I",
+  "number": "Regulations for the Navy Part I",
+  "issuing_authority": "Ministry of Defence",
+  "issue_date": "1991-05-01",
+  "effective_date": null,
+  "status": "in_force",
+  "status_note": "Listed as not repealed on India Code (read 2026-11-21)",
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": "act-navy-1957",
+  "original_filename": "RegsNavyI.pdf",
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "4f0c8b19-4eed-4bdb-bc79-fd607babcf02",
+    "collection": "REGULATION",
+    "act_id": "AC_CEN_28_38_00006_195762_1517807321397",
+    "handle": "123456789/506361",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "number": "crawler",
+    "issue_date": "crawler",
+    "issuing_authority": "crawler",
+    "status": "rule",
+    "page_count": "rule",
+    "text_method": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s6",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "6",
+  "heading": "Special provision as to rank in certain cases.",
+  "chapter": null,
+  "order": 6,
+  "text": "(1) The Central Government may, by notification, direct that any person or class of persons subject to this Act under clause (d) of section 2, shall be so subject as officers, warrant officers or non-commissioned officers, and may authorise any officer to give a like direction and to cancel such direction.\n\n(2) All persons subject to this Act other than officers, warrant officers and non-commissioned officers shall, if they are not persons in respect of whom a notification or direction under sub-section (1) is in force, be deemed to be of rank inferior to that of a non-commissioned officer.",
+  "page_start": 12,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "151616fa-e71d-432a-85b5-819b54269ae6",
+    "handle": "123456789/525694",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

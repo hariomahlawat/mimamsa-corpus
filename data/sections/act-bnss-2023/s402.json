@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s402",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "402",
+  "heading": "Special reasons to be recorded in certain cases.",
+  "chapter": null,
+  "order": 402,
+  "text": "Where in any case the Court could have dealt with,---\n\n(a) an accused person under section 401 or under the provisions of the Probation of Offenders Act, 1958 (20 of 1958); or\n\n(b) a youthful offender under the Juvenile Justice (Care and Protection of Children) Act, 2015 (2 of 2016) or any other law for the time being in force for the treatment, training or rehabilitation of youthful offenders,\n\nbut has not done so, it shall record in its judgment the special reasons for not having done so.",
+  "page_start": 141,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d55b37fd-0abc-40b2-aacc-6f89d824ce5b",
+    "handle": "123456789/546492",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

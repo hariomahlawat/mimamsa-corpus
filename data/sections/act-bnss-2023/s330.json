@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s330",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "330",
+  "heading": "No formal proof of certain documents.",
+  "chapter": null,
+  "order": 330,
+  "text": "(1) Where any document is filed before any Court by the prosecution or the accused, the particulars of every such document shall be included in a list and the prosecution or the accused or the advocate for the prosecution or the accused, if any, shall be called upon to admit or deny the genuineness of each such document soon after supply of such documents and in no case later than thirty days after such supply:\n\nProvided that the Court may, in its discretion, relax the time limit with reasons to be recorded in writing:\n\nProvided further that no expert shall be called to appear before the Court unless the report of such expert is disputed by any of the parties to the trial.\n\n(2) The list of documents shall be in such form as the State Government may, by rules, provide.\n\n(3) Where the genuineness of any document is not disputed, such document may be read in evidence in any inquiry, trial or other proceeding under this Sanhita without proof of the signature of the person by whom it purports to be signed:\n\nProvided that the Court may, in its discretion, require such signature to be proved.",
+  "page_start": 113,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "84be7d8f-86f4-491f-9728-d8b7e4858cc9",
+    "handle": "123456789/546421",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

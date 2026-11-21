@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s1",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "1",
+  "heading": "Short title, commencement and application.",
+  "chapter": null,
+  "order": 1,
+  "text": "(1) This Act may be called the Bharatiya Nyaya Sanhita, 2023.\n\n(2) It shall come into force on such date[1] as the Central Government may, by notification in the Official Gazette, appoint, and different dates may be appointed for different provisions of this Sanhita.\n\n(3) Every person shall be liable to punishment under this Sanhita and not otherwise for every act or omission contrary to the provisions thereof, of which he shall be guilty within India.\n\n(4) Any person liable, by any law for the time being in force in India, to be tried for an offence committed beyond India shall be dealt with according to the provisions of this Sanhita for any act committed beyond India in the same manner as if such act had been committed within India.\n\n(5) The provisions of this Sanhita shall also apply to any offence committed by--\n\n(a) any citizen of India in any place without and beyond India;\n\n(b) any person on any ship or aircraft registered in India wherever it may be;\n\n(c) any person in any place without and beyond India committing offence targeting a computer resource located in India.\n\nExplanation.--In this section, the word \"offence\" includes every act committed outside India which, if committed in India, would be punishable under this Sanhita.\n\nIllustration.\n\nA, who is a citizen of India, commits a murder in any place without and beyond India.\n\nHe can be tried and convicted of murder in any place in India in which he may be found.\n\n(6) Nothing in this Sanhita shall affect the provisions of any Act for punishing mutiny and desertion of officers, soldiers, sailors or airmen in the service of the Government of India or the provisions of any special or local law.",
+  "page_start": 1,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [
+    "1st July, 2024, except the provision of sub-section (2) of section 106, vide notification No. S.O. 850(E), dated, 23rd day of February, 2024, see Gazette of India, Extraordinary, Part II, sec. 3(ii)."
+  ],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6720ad33-28b4-48bd-9cc1-0f7aa9fc4a49",
+    "handle": "123456789/545493",
+    "listing_raw_path": "data/raw/indiacode/2023/3f63bdbb2512a509521a6dc9e8e8d97044f569307a1a0c1b10a743ec30873357.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

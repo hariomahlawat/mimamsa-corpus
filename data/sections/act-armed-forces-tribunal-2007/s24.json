@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s24",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "24",
+  "heading": "Term of sentence and its effect on appeal.",
+  "chapter": null,
+  "order": 25,
+  "text": "(1) The term of any sentence passed by the Tribunal under clause (a) of sub-section (6) of section 15 of this Act shall, unless the Tribunal otherwise directs, be reckoned to commence on the day on which it would have commenced under the Army Act, 1950 (46 of 1950), the Navy Act, 1957 (62 of 1957) or the Air Force Act, 1950 (45 of 1950), as the case may be, under which the court martial against which the appeal was filed, had been held.\n\n(2) Subject to the provisions of sub-section (3), any sentence passed on an appeal from the Tribunal to the Supreme Court in substitution for another sentence shall, unless the Supreme Court otherwise directs, be reckoned to commence on the day on which the original sentence would have commenced.\n\n(3) Where a person who is undergoing sentence is granted stay of the operation of the said sentence, either by suspension or otherwise, pending an appeal, the period during which he is so released due to the sentence having been so stayed, shall be excluded in computing the term for which he is so sentenced by the Tribunal or the Supreme Court, as the case may be.",
+  "page_start": 10,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1d87b94a-f3dd-4b62-869f-d0e22a0ded5c",
+    "handle": "123456789/527492",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s174",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "174",
+  "heading": "Nature of the powers of commanding officer or Committee of Adjustment.",
+  "chapter": null,
+  "order": 179,
+  "text": "For the purpose of the exercise of his or its duties under section 171 or 172, as the case may be, the commanding officer or the Committee of Adjustment, as the case may be, shall, to the exclusion of all other persons and authorities have the same rights and powers as if the commanding officer or the Committee had taken out representation to the estate of the deceased, and any receipt given by such commanding officer or the Committee, as the case may be, shall have effect accordingly.\n\nExplanation.--\"Representation\" includes probate, letters of administration with or without the will annexed and a succession certificate issued by a court of competent jurisdiction constituting a person executor or administrator of the estate of the deceased person or authorising him to receive or realise the assets of a deceased person.",
+  "page_start": 54,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e119e740-7ab1-48c6-8921-7efdb341c100",
+    "handle": "123456789/524151",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

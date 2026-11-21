@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s138",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "138",
+  "heading": "Commencement of period for which security is required.",
+  "chapter": null,
+  "order": 138,
+  "text": "(1) If any person, in respect of whom an order requiring security is made under section 125 or section 136, is at the time such order is made, sentenced to, or undergoing a sentence of, imprisonment, the period for which such security is required shall commence on the expiration of such sentence.\n\n(2) In other cases such period shall commence on the date of such order unless the Magistrate, for sufficient reason, fixes a later date.",
+  "page_start": 54,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b84146cc-d1d1-4c9d-b3f3-790aaff09068",
+    "handle": "123456789/546245",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s92",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "92",
+  "heading": "Deductions from pay and allowances of airmen",
+  "chapter": null,
+  "order": 92,
+  "text": "Subject to the provisions of section 95, the following penal deductions may be made from the pay and allowances of an airman, that is to say,--\n\n(a) all pay and allowances for every day of absence either on desertion or without leave, or as a prisoner of war, and for every day of transportation or imprisonment awarded by a criminal court, or a court-martial, or of detention, or field punishment awarded by a court-martial or an officer exercising authority under section 82;\n\n(b) all pay and allowances for every day while he is in custody on a charge for an offence of which he is afterwards convicted by a criminal court or a court-martial, or on a charge of absence without leave for which he is afterwards awarded detention or field punishment by an officer exercising authority under section 82;\n\n(c) all pay and allowances for every day on which he is in hospital on account of sickness certified by the medical officer attending on him to have been caused by an offence under this Act committed by him;\n\n(d) for every day on which he is in hospital on account of sickness certified by the medical officer attending on him to have been caused by his own misconduct or imprudence, such sum as may be specified by order of the Central Government or by such officer as may be specified by that Government;\n\n(e) all pay and allowances ordered by a court-martial or by an officer exercising authority under section 82 or section 86 to be forfeited or stopped;\n\n(f) all pay and allowances for every day between his being recovered from the enemy and his dismissal from the service in consequence of his conduct when being taken prisoner by, or while in the hands of, the enemy;\n\n(g) any sum required to make good such compensation for any expenses, loss, damage or destruction caused by him to the Central Government or to any building or property as may be awarded by his commanding officer;\n\n(h) any sum require to pay a fine awarded by a criminal court, a court-martial exercising jurisdiction under section 71, or an officer exercising authority under section 82 or section 90.\n\n(i) any sum required by order of the Central Government or any prescribed officer to be paid for the maintenance of his wife or his legitimate or illegitimate child or towards the cost of any relief given by the said Government to the said wife or child.",
+  "page_start": 33,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ddd80cc7-d930-4613-a577-7aacb8d7316c",
+    "handle": "123456789/523703",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s72",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "72",
+  "heading": "Civil offences not triable by court-martial.",
+  "chapter": null,
+  "order": 72,
+  "text": "A person subject to this Act who commits an offence of murder against a person not subject to military, naval or air force law, or of culpable homicide not amounting to murder against such a person or of rape in relation to such a person, shall not be deemed to be guilty of an offence against this Act and shall not be tried by a court-martial, unless he commits any of the said offences\n\n(a) while on active service, or\n\n(b) at any place outside India, or\n\n(c) at a frontier post specified by the said Government by notification in this behalf.\n\n[1]* * * * *",
+  "page_start": 28,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "omitted",
+      "by_ref_raw": "Act 13 of 1975",
+      "by_doc_id": null,
+      "effective_date": "1975-01-25",
+      "effective_date_raw": null,
+      "footnote_text": "The Explanation omitted by Act 13 of 1975, s. 2 (w.e.f. 25-1-1975).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "13d276e2-5540-4de8-bb4b-75a8eb92b345",
+    "handle": "123456789/519388",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

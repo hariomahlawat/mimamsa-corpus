@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s35",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "35",
+  "heading": "Provision for filing of certain appeals.",
+  "chapter": null,
+  "order": 36,
+  "text": "Where any decree or order has been made or passed by any court (other than a High Court) or any other authority in any suit or proceeding before the establishment of the Tribunal, being a suit or proceeding the cause of action whereon it is based, is such that it would have been, if it had arisen after such establishment, within the jurisdiction of the Tribunal, and no appeal has been preferred against such decree or order before such establishment or if preferred, the same is pending for disposal before any court including High Court and the time for preferring such appeal under any law for the time being in force had not expired before such establishment, such appeal shall lie to the Tribunal, within ninety days from the date on which the Tribunal is established, or within ninety days from the date of receipt of the copy of such decree or order, whichever is later.",
+  "page_start": 12,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6ae8c289-7a3a-4de1-a693-ac62b9d54ae7",
+    "handle": "123456789/527612",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

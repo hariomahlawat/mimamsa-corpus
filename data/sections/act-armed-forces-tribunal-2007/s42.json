@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s42",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "42",
+  "heading": "Power to make rules retrospectively.",
+  "chapter": null,
+  "order": 43,
+  "text": "The powers to make rules under section 41 shall include the power to make such rules or any of them retrospectively from a date not earlier than the date on which this Act shall come into operation but no such retrospective effect shall be given to any such rule so as to prejudicially affect the interests of any person to whom such rule may be applicable.",
+  "page_start": 13,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "9423a630-173a-4b9e-b1c3-361fef373416",
+    "handle": "123456789/527689",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

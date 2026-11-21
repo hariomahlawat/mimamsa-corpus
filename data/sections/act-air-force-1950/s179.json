@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s179",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "179",
+  "heading": "Reduction of warrant officer or non-commissioned officer",
+  "chapter": null,
+  "order": 179,
+  "text": "When under the provisions of section 79 a warrant officer or a non-commissioned officer is deemed to be reduced to the ranks, such reduction shall, for the purpose of section 177, be treated as a punishment awarded by a sentence of a court-martial.",
+  "page_start": 52,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1c92ca00-81c3-49da-94d8-0b822cb921b0",
+    "handle": "123456789/523790",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

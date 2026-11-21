@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s117",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "117",
+  "heading": "Presumption as to abetment of suicide by a married woman.",
+  "chapter": null,
+  "order": 117,
+  "text": "When the question is whether the commission of suicide by a woman had been abetted by her husband or any relative of her husband and it is shown that she had committed suicide within a period of seven years from the date of her marriage and that her husband or such relative of her husband had subjected her to cruelty, the Court may presume, having regard to all the other circumstances of the case, that such suicide had been abetted by her husband or by such relative of her husband.\n\nExplanation.--For the purposes of this section, \"cruelty\" shall have the same meaning as in section 86 of the Bharatiya Nyaya Sanhita, 2023.",
+  "page_start": 39,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "412e7a25-c0d6-4b02-90d3-1a7e4c4a8b18",
+    "handle": "123456789/546013",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

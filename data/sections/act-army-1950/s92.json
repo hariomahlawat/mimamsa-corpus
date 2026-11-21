@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s92",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "92",
+  "heading": "Computation of time of absence or custody.",
+  "chapter": null,
+  "order": 92,
+  "text": "For the purposes of clauses (a) and (b) of section 91,--\n\n(a) no person shall be treated as absent or in custody for a day unless the absence or custody has lasted, whether wholly in one day, or partly in one day and partly in another, for six consecutive hours or upwards;\n\n(b) any absence or custody for less than a day may be reckoned as absence or custody for a day if such absence or custody prevented the absentee from fulfilling any military duty which was thereby thrown upon some other person;\n\n(c) absence or custody for twelve consecutive hours or upwards may be reckoned as absence or custody for the whole of each day during any portion of which the person was absent or in custody;\n\n(d) a period of absence, or imprisonment, which commences before, and ends after, midnight may be reckoned as a day.",
+  "page_start": 30,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c5621bb2-ebac-465a-b473-f6ddc4a50a11",
+    "handle": "123456789/525956",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

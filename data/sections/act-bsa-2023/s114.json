@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s114",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "114",
+  "heading": "Proof of good faith in transactions where one party is in relation of active confidence.",
+  "chapter": null,
+  "order": 114,
+  "text": "Where there is a question as to the good faith of a transaction between parties, one of whom stands to the other in a position of active confidence, the burden of proving the good faith of the transaction is on the party who is in a position of active confidence.\n\nIllustrations.\n\n(a) The good faith of a sale by a client to an advocate is in question in a suit brought by the client. The burden of proving the good faith of the transaction is on the advocate.\n\n(b) The good faith of a sale by a son just come of age to a father is in question in a suit brought by the son. The burden of proving the good faith of the transaction is on the father",
+  "page_start": 38,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "7df3e158-6474-42dd-9911-a6ff9a7859b2",
+    "handle": "123456789/546010",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

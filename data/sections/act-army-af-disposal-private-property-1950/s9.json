@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-af-disposal-private-property-1950#s9",
+  "parent_doc_id": "act-army-af-disposal-private-property-1950",
+  "unit": "section",
+  "number": "9",
+  "heading": "Disposal of effects, not money.",
+  "chapter": null,
+  "order": 9,
+  "text": "Where any part of the estate of a deceased person consists of effects, securities or other property not converted into money, the provisions of sub-section (7) of section 3, clause (ii) of section 4 and section 8, with respect to the payment of the surplus, shall, save as may be prescribed, extend to the delivery, transmission or transfer of such effects, securities or property, and the prescribed person shall have the same power of converting the same into money as a representative of the deceased.",
+  "page_start": 5,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "32524d65-bd1d-4c63-a594-9a3125da09f0",
+    "handle": "123456789/527799",
+    "listing_raw_path": "data/raw/indiacode/1950/2dce3a9525b06939bf0a27ebc223106bd030c88a8fa3f2aa0c722862fe2924b3.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

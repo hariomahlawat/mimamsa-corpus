@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s410",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "410",
+  "heading": "Confirmation or new sentence to be signed by two Judges.",
+  "chapter": null,
+  "order": 410,
+  "text": "In every case so submitted, the confirmation of the sentence, or any new sentence or order passed by the High Court, shall, when such Court consists of two or more Judges, be made, passed and signed by at least two of them.",
+  "page_start": 142,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "76a72f3d-6bfb-4857-910e-90a4a7a42637",
+    "handle": "123456789/546500",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s27",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "27",
+  "heading": "Act done in good faith for benefit of child or person of unsound mind, by, or by consent of guardian.",
+  "chapter": null,
+  "order": 27,
+  "text": "Nothing which is done in good faith for the benefit of a person under twelve years of age, or person of unsound mind, by, or by consent, either express or implied, of the guardian or other person having lawful charge of that person, is an offence by reason of any harm which it may cause, or be intended by the doer to cause or be known by the doer to be likely to cause to that person:\n\nProvided that this exception shall not extend to---\n\n(a) the intentional causing of death, or to the attempting to cause death;\n\n(b) the doing of anything which the person doing it knows to be likely to cause death, for any purpose other than the preventing of death or grievous hurt, or the curing of any grievous disease or infirmity;\n\n(c) the voluntary causing of grievous hurt, or to the attempting to cause grievous hurt, unless it be for the purpose of preventing death or grievous hurt, or the curing of any grievous disease or infirmity;\n\n(d) the abetment of any offence, to the committing of which offence it would not extend.\n\nIllustration.\n\nA, in good faith, for his child's benefit without his child's consent, has his child cut for the stone by a surgeon knowing it to be likely that the operation will cause the child's death, but not intending to cause the child's death. A is within the exception, in as much as his object was the cure of the child.",
+  "page_start": 24,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "510a65c1-601e-4c9e-9e0a-3a5da1f361d4",
+    "handle": "123456789/545849",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

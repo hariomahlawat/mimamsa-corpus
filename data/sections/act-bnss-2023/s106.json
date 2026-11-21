@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s106",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "106",
+  "heading": "Power of police officer to seize certain property.",
+  "chapter": null,
+  "order": 106,
+  "text": "(1) Any police officer may seize any property which may be alleged or suspected to have been stolen, or which may be found under circumstances which create suspicion of the commission of any offence.\n\n(2) Such police officer, if subordinate to the officer in charge of a police station, shall forthwith report the seizure to that officer.\n\n(3) Every police officer acting under sub-section (1) shall forthwith report the seizure to the Magistrate having jurisdiction and where the property seized is such that it cannot be conveniently transported to the Court, or where there is difficulty in securing proper accommodation for the custody of such property, or where the continued retention of the property in police custody may not be considered necessary for the purpose of investigation, he may give custody thereof to any person on his executing a bond undertaking to produce the property before the Court as and when required and to give effect to the further orders of the Court as to the disposal of the same:\n\nProvided that where the property seized under sub-section (1) is subject to speedy and natural decay and if the person entitled to the possession of such property is unknown or absent and the value of such property is less than five hundred rupees, it may forthwith be sold by auction under the orders of the Superintendent of Police and the provisions of sections 503 and 504 shall, as nearly as may be practicable, apply to the net proceeds of such sale",
+  "page_start": 44,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "36586394-860d-43a4-9709-e86948da39c6",
+    "handle": "123456789/546213",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

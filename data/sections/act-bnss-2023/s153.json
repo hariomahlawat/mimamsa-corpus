@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s153",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "153",
+  "heading": "Service or notification of order.",
+  "chapter": null,
+  "order": 153,
+  "text": "(1) The order shall, if practicable, be served on the person against whom it is made, in the manner herein provided for service of summons.\n\n(2) If such order cannot be so served, it shall be notified by proclamation published in such manner as the State Government may, by rules, direct, and a copy thereof shall be stuck up at such place or places as may be fittest for conveying the information to such person.",
+  "page_start": 61,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "48a554e2-e927-45bf-a53d-472b53beaf14",
+    "handle": "123456789/546258",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

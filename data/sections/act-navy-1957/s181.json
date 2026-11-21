@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s181",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "181",
+  "heading": "Appointment of Standing Committee of Adjustment in certain cases.",
+  "chapter": null,
+  "order": 186,
+  "text": "When an officer while subject to naval law dies or is ascertained in the prescribed manner to be of unsound mind or while on active service is officially reported missing, the reference in the foregoing provisions of this Chapter to the Committee shall be construed as references to the Standing Committee of Adjustment, if any, constituted in this behalf in the prescribed manner and such Standing Committee, if constituted, shall alone by entitled to perform all the functions of such Committee unless otherwise directed by the Chief of the Naval Staff.",
+  "page_start": 56,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "13ddc090-91ad-45f4-90c7-d4c5007cf8db",
+    "handle": "123456789/524323",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

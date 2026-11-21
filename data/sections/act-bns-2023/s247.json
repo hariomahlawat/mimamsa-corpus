@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s247",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "247",
+  "heading": "Fraudulently obtaining decree for sum not due.",
+  "chapter": null,
+  "order": 247,
+  "text": "Whoever fraudulently obtains a decree or order against any person for a sum not due, or for a larger sum than is due or for any property or interest in property to which he is not entitled, or fraudulently causes a decree or order to be executed against any person after it has been satisfied or for anything in respect of which it has been satisfied, or fraudulently suffers or permits any such act to be done in his name, shall be punished with imprisonment of either description for a term which may extend to two years, or with fine, or with both.",
+  "page_start": 76,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b657a467-4d4e-49c4-9019-c5be530b664a",
+    "handle": "123456789/545742",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

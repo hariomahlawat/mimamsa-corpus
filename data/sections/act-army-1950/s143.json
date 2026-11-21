@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s143",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "143",
+  "heading": "Reference by accused to Government officer.",
+  "chapter": null,
+  "order": 143,
+  "text": "(1) If at any trial for desertion or absence without leave, overstaying leave or not rejoining when warned for service, the person tried states in his defence any sufficient or reasonable excuse for his unauthorised absence, and refers in support thereof to any officer in the service of the Government, or if it appears that any such officer is likely to prove or disprove the said statement in the defence, the court shall address such officer and adjourn the proceedings until his reply is received.\n\n(2) The written reply of any officer so referred to shall, if signed by him be received in evidence and have the same effect as if made on oath before the court.\n\n(3) If the court is dissolved before the receipt of such reply, or if the court omits to comply with the provisions of this section, the convening officer may, at his discretion, annul the proceedings and order a, fresh trial.",
+  "page_start": 39,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ae2b0dfa-2374-4dd9-8ade-fdfb02c1ae44",
+    "handle": "123456789/526012",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s445",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "445",
+  "heading": "High Court's order to be certified to lower Court.",
+  "chapter": null,
+  "order": 445,
+  "text": "When a case is revised under this Chapter by the High Court or a Sessions Judge, it or he shall, in the manner provided by section 429, certify its decision or order to the Court by which the finding, sentence or order revised was recorded or passed, and the Court to which the decision or order is so certified shall thereupon make such orders as are conformable to the decision so certified, and, if necessary, the record shall be amended in accordance therewith.",
+  "page_start": 151,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0671b4ef-96d5-4188-8f14-58bb63be2076",
+    "handle": "123456789/546535",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

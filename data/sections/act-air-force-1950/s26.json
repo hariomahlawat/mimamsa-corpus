@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s26",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "26",
+  "heading": "Remedy of aggrieved airmen.",
+  "chapter": null,
+  "order": 26,
+  "text": "(1) Any airman who deems himself wronged by any superior or other officer may, if not attached to a unit or detachment, complain to the officer under whose command or orders he is serving; and may, if attached to a unit or detachment, complain to the officer commanding the same.\n\n(2) When the ofbrficer complained against is the officer to whom any complaint should, under subsection (1), be preferred, the aggrieved airman may complain to such officer's next superior officer, and if he thinks himself wronged by such superior officer, he may complain to [1][the Chief of the Air Staff.]\n\n(3) Every officer receiving any such complaint shall make as complete an investigation into it as may be possible for giving full redress to the complainant; or, when necessary, refer the complaint to superior authority.\n\n(4) Every such complaint shall be preferred in such manner as may from time to time be specified by the proper authority.\n\n(5) The Central Government may revise any decision by a [1][the Chief of the Air staff] under sub section (2), but subject thereto, the decision of [1][the Chief of the Air Staff] shall be final.",
+  "page_start": 16,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1955-05-07",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief\" (w.e.f. 7-5-1955).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a2fba654-14b2-483d-a778-84032e86becd",
+    "handle": "123456789/525883",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

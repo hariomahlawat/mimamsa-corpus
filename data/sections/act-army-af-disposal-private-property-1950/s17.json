@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-af-disposal-private-property-1950#s17",
+  "parent_doc_id": "act-army-af-disposal-private-property-1950",
+  "unit": "section",
+  "number": "17",
+  "heading": "Repealed.",
+  "chapter": null,
+  "order": 17,
+  "text": "[Repeals.]--Rep. by the Repealing and Amending Act, 1957 (36 of 1957), s. 2 and the First Schedule.",
+  "page_start": 7,
+  "page_end": null,
+  "status": "repealed",
+  "status_note": "[Repeals.]--Rep. by the Repealing and Amending Act, 1957 (36 of 1957), s. 2 and the First Schedule.",
+  "amendment_history": [
+    {
+      "action": "repealed",
+      "by_ref_raw": "Repealing and Amending Act, 1957 (36 of 1957)",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "[Repeals.]--Rep. by the Repealing and Amending Act, 1957 (36 of 1957), s. 2 and the First Schedule.",
+      "confidence": "extracted",
+      "origin": "inline"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "27be204f-515a-43a4-b00f-eb0fe4f5bc8a",
+    "handle": "123456789/527887",
+    "listing_raw_path": "data/raw/indiacode/1950/2dce3a9525b06939bf0a27ebc223106bd030c88a8fa3f2aa0c722862fe2924b3.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

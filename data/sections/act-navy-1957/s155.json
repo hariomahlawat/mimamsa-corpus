@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s155",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "155",
+  "heading": "Time of detention in naval custody",
+  "chapter": null,
+  "order": 159,
+  "text": "The time during which any offender under sentence of imprisonment or detention is detained in naval custody shall be reckoned as imprisonment or detention under his sentence for whatever purpose he is so detained; and the governor, gaoler, keeper or superintendent who shall deliver over any such offender shall again receive him from naval custody, so that he may undergo the remainder of his punishment.",
+  "page_start": 48,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0b080d23-6129-4b05-a02c-ba043ac65037",
+    "handle": "123456789/524040",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

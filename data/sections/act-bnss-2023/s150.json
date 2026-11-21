@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s150",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "150",
+  "heading": "Power of certain armed force officers to disperse assembly.",
+  "chapter": null,
+  "order": 150,
+  "text": "When the public security is manifestly endangered by any such assembly and no Executive Magistrate can be communicated with, any commissioned or gazetted officer of the armed forces may disperse such assembly with the help of the armed forces under his command, and may arrest and confine any persons forming part of it, in order to disperse such assembly or that they may be punished according to law; but if, while he is acting under this section, it becomes practicable for him to communicate with an Executive Magistrate, he shall do so, and shall thenceforward obey the instructions of the Magistrate, as to whether he shall or shall not continue such action.",
+  "page_start": 60,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d28831eb-1855-4e86-9d88-b74abf223dfe",
+    "handle": "123456789/546256",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

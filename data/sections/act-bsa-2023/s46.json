@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s46",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "46",
+  "heading": "In civil cases character to prove conduct imputed, irrelevant.",
+  "chapter": null,
+  "order": 46,
+  "text": "In civil cases the fact that the character of any person concerned is such as to render probable or improbable any conduct imputed to him, is irrelevant, except in so far as such character appears from facts otherwise relevant.",
+  "page_start": 23,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b5561d6a-7aa8-4e39-a119-bba158b0fe9d",
+    "handle": "123456789/545939",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

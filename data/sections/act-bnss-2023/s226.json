@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s226",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "226",
+  "heading": "Dismissal of complaint.",
+  "chapter": null,
+  "order": 226,
+  "text": "If, after considering the statements on oath (if any) of the complainant and of the witnesses and the result of the inquiry or investigation (if any) under section 225, the Magistrate is of opinion that there is no sufficient ground for proceeding, he shall dismiss the complaint, and in every such case he shall briefly record his reasons for so doing.",
+  "page_start": 87,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "64ddbad1-9b71-431a-932f-51df984efa2e",
+    "handle": "123456789/546326",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

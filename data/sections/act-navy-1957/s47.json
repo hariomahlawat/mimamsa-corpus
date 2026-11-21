@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s47",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "47",
+  "heading": "Disobedience and insubordination.",
+  "chapter": null,
+  "order": 47,
+  "text": "Every person subject to naval law, who,--\n\n(a) wilfully disobeys any lawful command of his superior officer; or\n\n(b) in the presence of his superior officer, or otherwise shows or expresses his intention to disobey a lawful command given by such superior officer; or\n\n(c) uses insubordinate, threatening or insulting language to his superior officer; or\n\n(d) behaves with contempt to his superior officer;\n\nshall, if the offence is committed on active service or in a manner to show wilful defiance of authority, be punished with imprisonment for a term which may extend to ten years or such other punishment as is hereinafter mentioned and in other cases, be punished with imprisonment for a term which may extend to three years or such other punishment as is hereinafter mentioned.",
+  "page_start": 21,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a85ffbf1-601e-450f-9c70-8ea8185f8e63",
+    "handle": "123456789/517396",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

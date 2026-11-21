@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s348",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "348",
+  "heading": "Making or possession of any instrument for counterfeiting a property mark.",
+  "chapter": null,
+  "order": 348,
+  "text": "Whoever makes or has in his possession any die, plate or other instrument for the purpose of counterfeiting a property mark, or has in his possession a property mark for the purpose of denoting that any goods belong to a person to whom they do not belong, shall be punished with imprisonment of either description for a term which may extend to three years, or with fine, or with both.",
+  "page_start": 104,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "5d55e16d-ca15-42b7-a909-c2acc5e94e3a",
+    "handle": "123456789/545837",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

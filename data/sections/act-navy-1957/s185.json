@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s185",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "185",
+  "heading": "Regulations to be laid before Parliament.",
+  "chapter": null,
+  "order": 191,
+  "text": "[1][185. Regulations to be laid before Parliament.--Every regulation made under this Act shall be laid, as soon as may be after it is made, before each House of Parliament, while it is in session for a total period of thirty days which may be comprised in one session or in two or more successive sessions, and if, before the expiry of the session immediately following the session or the successive sessions aforesaid, both Houses agree in making any modification in the regulation or, both Houses agree that the regulation should not be made, the regulation shall thereafter have effect only in such modified form or be of no effect, as the case may be; so, however, that any such modification or annulment shall be without prejudice to the validity of anything previously done under that regulation.]",
+  "page_start": 57,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 53 of 1974",
+      "by_doc_id": null,
+      "effective_date": "1974-12-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 53 of 1974, s. 19, for section 185 (w.e.f. 16-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b202b955-3ad5-46f8-b4d5-2f6ea7b60a6a",
+    "handle": "123456789/524328",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

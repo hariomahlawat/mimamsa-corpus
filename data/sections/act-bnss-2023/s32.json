@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s32",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "32",
+  "heading": "Aid to person, other than police officer, executing warrant.",
+  "chapter": null,
+  "order": 32,
+  "text": "When a warrant is directed to a person other than a police officer, any other person may aid in the execution of such warrant, if the person to whom the warrant is directed be near at hand and acting in the execution of the warrant.",
+  "page_start": 26,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "298ad34e-f9ef-45a4-a066-c105881b9083",
+    "handle": "123456789/546140",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

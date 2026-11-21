@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s236",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "236",
+  "heading": "When manner of committing offence must be stated.",
+  "chapter": null,
+  "order": 236,
+  "text": "When the nature of the case is such that the particulars mentioned in sections 234 and 235 do not give the accused sufficient notice of the matter with which he is charged, the charge shall also contain such particulars of the manner in which the alleged offence was committed as will be sufficient for that purpose.\n\nIllustrations.\n\n(a) A is accused of the theft of a certain article at a certain time and place. The charge need not set out the manner in which the theft was effected.\n\n(b) A is accused of cheating B at a given time and place. The charge must set out the manner in which A cheated B.\n\n(c) A is accused of giving false evidence at a given time and place. The charge must set out that portion of the evidence given by A which is alleged to be false.\n\n(d) A is accused of obstructing B, a public servant, in the discharge of his public functions at a given time and place. The charge must set out the manner in which A obstructed B in the discharge of his functions.\n\n(e) A is accused of the murder of B at a given time and place. The charge need not state the manner in which A murdered B.\n\n(f) A is accused of disobeying a direction of the law with intent to save B from punishment. The charge must set out the disobedience charged and the law infringed.",
+  "page_start": 91,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "9103f8ae-81a9-4533-a9aa-0cb0353b935b",
+    "handle": "123456789/546334",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

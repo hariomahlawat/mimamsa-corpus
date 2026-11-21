@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s186",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "186",
+  "heading": "Fresh sentence after suspension.",
+  "chapter": null,
+  "order": 186,
+  "text": "Where an offender, while a sentence on him is suspended under this Act, is sentenced for any other offence, them--\n\n(a) if the further sentence is also suspended under this Act, the two sentences shall run concurrently;\n\n(b) if the further sentence is for a period of three months or more and is not suspended under this Act, the offender shall also be committed to prison or air force custody for the unexpired portion of the previous sentence, but both sentences shall run concurrently; and\n\n(c) if the further sentence is for a period of less than three months and is not suspended under this Act, the offender shall be so committed on that sentence only, and the previous sentence shall, subject to any order which may be passed under section 184 or section 185, continue to be suspended.",
+  "page_start": 53,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "dbca97db-fa9e-4168-a2e0-38f25de73443",
+    "handle": "123456789/523797",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

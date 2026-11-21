@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s159",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "159",
+  "heading": "Questions tending to corroborate evidence of relevant fact, admissible.",
+  "chapter": null,
+  "order": 159,
+  "text": "When a witness whom it is intended to corroborate gives evidence of any relevant fact, he may be questioned as to any other circumstances which he observed at or near to the time or place at which such relevant fact occurred, if the Court is of opinion that such circumstances, if proved, would corroborate the testimony of the witness as to the relevant fact which he testifies\n\nIllustration.\n\nA, an accomplice, gives an account of a robbery in which he took part. He describes various incidents unconnected with the robbery which occurred on his way to and from the place where it was committed. Independent evidence of these facts may be given in order to corroborate his evidence as to the robbery itself.",
+  "page_start": 47,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1bdb030b-b46c-45b1-b553-28ae6b703943",
+    "handle": "123456789/546059",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

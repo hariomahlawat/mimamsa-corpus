@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s122",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "122",
+  "heading": "Period of limitation for trial.",
+  "chapter": null,
+  "order": 122,
+  "text": "(1) Except as provided by sub-section (2), no trial by court-martial of any person subject to this Act for any offence shall be commenced after the expiration of a period of three years [1][and such period shall commence,--\n\n(a) on the date of the offence; or\n\n(b) where the commission of the offence was not known to the person aggrieved by the offence or to the authority competent to initiate action, the first day on which such offence comes to the knowledge of such person or authority, whichever is earlier; or\n\n(c) where it is not known by whom the offence was committed, the first day on which the identity of the offender is known to the person aggrieved by the offence or to the authority competent to initiate action, whichever is earlier.]\n\n(2) The provisions of sub-section (1) shall not apply to a trial for an offence of desertion or fraudulent enrolment or for any of the offences mentioned in section 37.\n\n(3) In the computation of the period of time mentioned in sub-section (1), any time spent by such person as a prisoner of war, or in enemy territory, or in evading arrest after the commission of the offence, shall be excluded.\n\n(4) No trial for an offence of desertion other than desertion on active service or of fraudulent enrolment shall be commenced if the person in question, not being an officer, has subsequently to the commission of the offence, served continuously in an exemplary manner for not less than three years with any portion of the regular Army.",
+  "page_start": 34,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 37 of 1992",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 37 of 1992, s. 9, for certain words.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8ef976ee-a2d2-4f0d-b49a-713213536b19",
+    "handle": "123456789/525989",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

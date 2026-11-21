@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s115",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "115",
+  "heading": "Duties of the court",
+  "chapter": null,
+  "order": 119,
+  "text": "It is the duty of the court to decide which view of the facts is true and then arrive at the finding which under such view ought to be arrived at.",
+  "page_start": 39,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d6961500-5b08-4ddd-a27d-5a20dc502543",
+    "handle": "123456789/523984",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

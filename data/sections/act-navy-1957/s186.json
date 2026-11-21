@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s186",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "186",
+  "heading": "Repeals.",
+  "chapter": null,
+  "order": 192,
+  "text": "[Repeals].—Rep. by the Repealing and Amending Act, 1960 (58 of 1960), s. 2 and the First Schedule (w.e.f. 29-12-1960).",
+  "page_start": 57,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3905c0f3-527a-4e9a-80c0-850d5e917d38",
+    "handle": "123456789/524329",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

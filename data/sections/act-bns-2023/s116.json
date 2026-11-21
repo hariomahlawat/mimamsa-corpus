@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s116",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "116",
+  "heading": "Grievous hurt.",
+  "chapter": null,
+  "order": 116,
+  "text": "The following kinds of hurt only are designated as “grievous”, namely:—\n\n(a) Emasculation;\n\n(b) Permanent privation of the sight of either eye;\n\n(c) Permanent privation of the hearing of either ear;\n\n(d) Privation of any member or joint;\n\n(e) Destruction or permanent impairing of the powers of any member or joint;\n\n(f) Permanent disfiguration of the head or face;\n\n(g) Fracture or dislocation of a bone or tooth;\n\n(h) Any hurt which endangers life or which causes the sufferer to be during the space of fifteen days in severe bodily pain, or unable to follow his ordinary pursuits.",
+  "page_start": 51,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0bd1056f-1a9c-436b-9a16-649f21b03f81",
+    "handle": "123456789/545615",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

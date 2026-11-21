@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s131",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "131",
+  "heading": "Oaths of member, judge advocate and witness.",
+  "chapter": null,
+  "order": 131,
+  "text": "(1) An oath or affirmation in the prescribed manner shall be administered to every member of every court-martial and to the judge advocate before the commencement of the trial.\n\n(2) Every person giving evidence before a court-martial shall be examined after being duly sworn or affirmed in the prescribed form.\n\n(3) The provisions of sub-section (2) shall not apply where the witness is a child under twelve years of age and the court-martial is of opinion that though the witness understands the duty of speaking the truth, he does not understand the nature of an oath or affirmation.",
+  "page_start": 35,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f8d00134-881d-4347-86fd-ad379efaf0ea",
+    "handle": "123456789/525999",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

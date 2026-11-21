@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s142",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "142",
+  "heading": "Reference by accused to Government officer.",
+  "chapter": null,
+  "order": 142,
+  "text": "(1) If at any trial for desertion or absence without leave, overstaying leave or not rejoining when warned for service, the person tried states in his defence any sufficient or reasonable excuse for his unauthorised absence and refers in support thereof to any officer in the service, of the Government, or if it appears that any such officer is likely to prove or disprove the said statement in the defence, the court shall address such officer and adjourn the proceedings until his reply is received.\n\n(2) The written reply of any officer so referred to shall, if signed by him, be received in evidence and have the same effect as if made on oath before the court.\n\n(3) If the court is dissolved before the receipt of such reply, or if the court omits to comply with the provisions of this section, the convening officer may, at his discretion, annul the proceedings and order a fresh trial.",
+  "page_start": 44,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "02c7be39-fe4c-4ed0-96d1-2d89d0cf5c8f",
+    "handle": "123456789/523753",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

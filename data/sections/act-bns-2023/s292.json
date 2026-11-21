@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s292",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "292",
+  "heading": "Punishment for public nuisance in cases not otherwise provided for.",
+  "chapter": null,
+  "order": 292,
+  "text": "Whoever commits a public nuisance in any case not otherwise punishable by this Sanhita shall be punished with fine which may extend to one thousand rupees.",
+  "page_start": 84,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2dccc187-42d1-4189-beed-0a84930f3d61",
+    "handle": "123456789/545784",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

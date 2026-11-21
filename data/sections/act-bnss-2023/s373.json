@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s373",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "373",
+  "heading": "Judgment of acquittal on ground of unsoundness of mind.",
+  "chapter": null,
+  "order": 373,
+  "text": "Whenever any person is acquitted upon the ground that, at the time at which he is alleged to have committed an offence, he was, by reason of unsoundness of mind, incapable of knowing the nature of the act alleged as constituting the offence, or that it was wrong or contrary to law, the finding shall state specifically whether he committed the act or not.",
+  "page_start": 132,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1150d58c-744a-485b-91e8-2c99dfb060e1",
+    "handle": "123456789/546463",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

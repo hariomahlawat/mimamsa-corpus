@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s429",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "429",
+  "heading": "Order of High Court on appeal to be certified to lower Court.",
+  "chapter": null,
+  "order": 429,
+  "text": "(1) Whenever a case is decided on appeal by the High Court under this Chapter, it shall certify its judgment or order to the Court by which the finding, sentence or order appealed against was recorded or passed and if such Court is that of a Judicial Magistrate other than the Chief Judicial Magistrate, the High Court's judgment or order shall be sent through the Chief Judicial Magistrate, and if such Court is that of an Executive Magistrate, the High Court's judgment or order shall be sent through the District Magistrate.\n\n(2) The Court to which the High Court certifies its judgment or order shall thereupon make such orders as are conformable to the judgment or order of the High Court; and if necessary, the record shall be amended in accordance therewith.",
+  "page_start": 147,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3250659a-32df-4f93-8b93-b486ad2d1b59",
+    "handle": "123456789/546519",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

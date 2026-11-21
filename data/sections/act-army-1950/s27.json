@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s27",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "27",
+  "heading": "Remedy of aggrieved officers.",
+  "chapter": null,
+  "order": 27,
+  "text": "Any officer who deems himself wronged by his commanding officer or any superior officer and who on due application made to his commanding officer does not receive the redress to which he considers himself entitled, may complain to the Central Government in such manner as may from time to time be specified by the proper authority.",
+  "page_start": 15,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6b63cff5-1179-4424-9326-a1cc21e89571",
+    "handle": "123456789/525885",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

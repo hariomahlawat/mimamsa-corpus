@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s174",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "174",
+  "heading": "Informality or error in the order or warrants.",
+  "chapter": null,
+  "order": 174,
+  "text": "Whenever a person is sentenced to transportation, imprisonment or detention under this Act, and is undergoing the sentence in any place or manner in which he might be confined under a lawful order or warrant in pursuance of this Act, the confinement of such person shall not be deemed to be illegal only by reason of any informality or error in or as respects the order, warrant or other document, or the authority by which, or in pursuance whereof such person was brought into or is confined in any such place, and any such order, warrant or document may be amended accordingly.",
+  "page_start": 50,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c06ad27a-d865-494b-80c8-de8c5a9eae97",
+    "handle": "123456789/523785",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

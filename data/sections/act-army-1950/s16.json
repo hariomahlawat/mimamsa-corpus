@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s16",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "16",
+  "heading": "Persons to be attested.",
+  "chapter": null,
+  "order": 16,
+  "text": "The following persons shall be attested, namely:--\n\n(a) all persons enrolled as combatants;\n\n(b) all persons selected to hold a non-commissioned or acting non-commissioned rank; and\n\n(c) all other persons subject to this Act as may be prescribed by the Central Government.",
+  "page_start": 13,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "38ba2103-1190-4571-b4e1-f8348414c57f",
+    "handle": "123456789/525873",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s51",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "51",
+  "heading": "Examination of accused by medical practitioner at request of police officer.",
+  "chapter": null,
+  "order": 51,
+  "text": "(1) When a person is arrested on a charge of committing an offence of such a nature and alleged to have been committed under such circumstances that there are reasonable grounds for believing that an examination of his person will afford evidence as to the commission of an offence, it shall be lawful for a registered medical practitioner, acting at the request of any police officer, and for any person acting in good faith in his aid and under his direction, to make such an examination of the person arrested as is reasonably necessary in order to ascertain the facts which may afford such evidence, and to use such force as is reasonably necessary for that purpose.\n\n(2) Whenever the person of a female is to be examined under this section, the examination shall be made only by, or under the supervision of, a female registered medical practitioner.\n\n(3) The registered medical practitioner shall, without any delay, forward the examination report to the investigating officer.\n\nExplanation.---In this section and sections 52 and 53,---\n\n(a) \"examination\" shall include the examination of blood, blood stains, semen, swabs in case of sexual offences, sputum and sweat, hair samples and finger nail clippings by the use of modern and scientific techniques including DNA profiling and such other tests which the registered medical practitioner thinks necessary in a particular case;\n\n(b) \"registered medical practitioner\" means a medical practitioner who possesses any medical qualification recognised under the National Medical Commission Act, 2019 (30 of 2019) and whose name has been entered in the National Medical Register or a State Medical Register under that Act.",
+  "page_start": 32,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "cbcc5e5e-3690-48af-ad32-5520dffd67f9",
+    "handle": "123456789/546160",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

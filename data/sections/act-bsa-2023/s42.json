@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s42",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "42",
+  "heading": "Opinion as to existence of general custom or right, when relevant.",
+  "chapter": null,
+  "order": 42,
+  "text": "When the Court has to form an opinion as to the existence of any general custom or right, the opinions, as to the existence of such custom or right, of persons who would be likely to know of its existence if it existed, are relevant\n\nExplanation.--The expression “general custom or right” includes customs or rights common to any considerable class of persons.\n\nIllustration.\n\nThe right of the villagers of a particular village to use the water of a particular well is a general right within the meaning of this section.",
+  "page_start": 23,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "5c0411ba-0dea-4bd1-986b-e7aadd0e3959",
+    "handle": "123456789/545934",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

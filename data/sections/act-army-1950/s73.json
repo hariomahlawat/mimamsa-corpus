@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s73",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "73",
+  "heading": "Combination of punishments.",
+  "chapter": null,
+  "order": 73,
+  "text": "A sentence of a court-martial may award in addition to, or without any one other punishment, the punishment specified in clause (d) or clause (e) of section 71 and any one or more of the punishments specified in clauses (f) to (l) of that section.",
+  "page_start": 26,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "22ec222b-1c34-466b-9879-3999f13ad70e",
+    "handle": "123456789/525935",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.2.0",
+  "source": "indiacode",
+  "source_url": "https://indiacode.gov.in/server/api/core/bitstreams/46400c6b-7112-4de1-bc4c-e9dd364b27e4/content",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T14:35:12+00:00",
+  "sha256": "7a5551bab08518a7f52eb60c6cb08dc775726a8b2f5b89369413af771d173766",
+  "raw_path": "data/raw/indiacode/0000/7a5551bab08518a7f52eb60c6cb08dc775726a8b2f5b89369413af771d173766.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 92,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/act-the-finance-act-2017.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "act-the-finance-act-2017",
+      "type": "amends",
+      "target_doc_id": "act-armed-forces-tribunal-2007",
+      "target_ref_raw": "The Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "India Code lists this ACT_AMENDMENT record under act_id AC_CEN_28_38_00013_200755_1517807323574 (The Armed Forces Tribunal Act, 2007).",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "act-the-finance-act-2017",
+  "doc_type": "act",
+  "title": "The Finance Act, 2017",
+  "number": null,
+  "issuing_authority": "Ministry of Defence",
+  "issue_date": null,
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "original_filename": "2017-07.pdf",
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "26dd6204-eefa-43b6-8c1d-160425fae2cc",
+    "collection": "ACT_AMENDMENT",
+    "act_id": "AC_CEN_28_38_00013_200755_1517807323574",
+    "handle": "123456789/620685",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "number": "crawler",
+    "issue_date": "crawler",
+    "issuing_authority": "crawler",
+    "status": "rule",
+    "page_count": "rule",
+    "text_method": "rule"
+  }
+}

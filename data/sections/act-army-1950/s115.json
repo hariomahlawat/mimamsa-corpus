@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s115",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "115",
+  "heading": "Composition of summary general court-martial.",
+  "chapter": null,
+  "order": 115,
+  "text": "A summary general court-martial shall consist of not less than three officers.",
+  "page_start": 33,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c52d2c6d-a7b7-485c-92e0-71dd4b44faf7",
+    "handle": "123456789/525981",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

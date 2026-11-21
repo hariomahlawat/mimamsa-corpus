@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s189",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "189",
+  "heading": "Release of accused when evidence deficient.",
+  "chapter": null,
+  "order": 189,
+  "text": "If, upon an investigation under this Chapter, it appears to the officer in charge of the police station that there is not sufficient evidence or reasonable round of suspicion to justify the forwarding of the accused to a Magistrate, such officer shall, if such person is in custody, release him on his executing a bond or bail bond, as such officer may direct, to appear, if and when so required, before a Magistrate empowered to take cognizance of the offence on a police report, and to try the accused or commit him for trial.",
+  "page_start": 75,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1559d8c0-39fc-416b-b951-7760ca87db68",
+    "handle": "123456789/546290",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

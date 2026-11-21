@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s48",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "48",
+  "heading": "Evidence of character or previous sexual experience not relevant in certain cases.",
+  "chapter": null,
+  "order": 48,
+  "text": "In a prosecution for an offence under section 64, section 65, section 66, section 67, section 68, section 69, section 70, section 71, section 74, section 75, section 76, section 77 or section 78 of the Bharatiya Nyaya Sanhita, 2023 or for attempt to commit any such offence, where the question of consent is in issue, evidence of the character of the victim or of such person’s previous sexual experience with any person shall not be relevant on the issue of such consent or the quality of consent.",
+  "page_start": 24,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "7882900e-2d93-4ae7-b943-942cfe61a4e9",
+    "handle": "123456789/545941",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

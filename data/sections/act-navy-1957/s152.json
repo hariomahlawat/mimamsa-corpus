@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s152",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "152",
+  "heading": "Imprisonment of offender already under sentence",
+  "chapter": null,
+  "order": 156,
+  "text": "Whenever a sentence shall be passed by a court-martial on an offender already under sentence either of detention or imprisonment passed upon him under this Act for a former offence, the court may award a sentence of detention or imprisonment for the offence for which he is under trial to commence at the expiration of the sentence of detention or imprisonment to which he has been previously sentenced:\n\nProvided that so much of any term of detention imposed on a person by a sentence in pursuance of this section as will prolong the total term of detention beyond two years shall be deemed to be remitted.",
+  "page_start": 47,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3ed51678-97fc-4666-94f4-305f6b71aebd",
+    "handle": "123456789/524037",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s122",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "122",
+  "heading": "Voluntarily causing hurt or grievous hurt on provocation.",
+  "chapter": null,
+  "order": 122,
+  "text": "(1) Whoever voluntarily causes hurt on grave and sudden provocation, if he neither intends nor knows himself to be likely to cause hurt to any person other than the person who gave the provocation, shall be punished with imprisonment of either description for a term which may extend to one month, or with fine which may extend to five thousand rupees, or with both.\n\n(2) Whoever voluntarily causes grievous hurt on grave and sudden provocation, if he neither intends nor knows himself to be likely to cause grievous hurt to any person other than the person who gave the provocation, shall be punished with imprisonment of either description for a term which may extend to five years, or with fine which may extend to ten thousand rupees, or with both.\n\nExplanation.---This section is subject to the same proviso as Exception 1 of section 101.",
+  "page_start": 50,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "11b7a33f-39e5-45a5-b2cd-455a1ea4c2fb",
+    "handle": "123456789/545620",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

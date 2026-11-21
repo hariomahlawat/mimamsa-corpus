@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s149",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "149",
+  "heading": "Execution of sentences of death",
+  "chapter": null,
+  "order": 153,
+  "text": "(1) When a sentence of death is to be executed, the Chief of the Naval Staff or the convening authority or the prescribed officer shall give directions as to the time, place and manner in which sentence is to be carried out and the order of such officer or authority in the prescribed form shall be sufficient warrant for the execution of such sentence.\n\n(2) There shall be attached to the prescribed form an order of the Central Government certifying the confirmation of the sentence by the Central Government in all cases where such confirmation is necessary; and where such confirmation is not necessary, a certificate of the Chief of the Naval Staff or other prescribed officer stating that such confirmation is not necessary.",
+  "page_start": 46,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "380c6b09-5906-4f7a-9a5e-d3df239dedf8",
+    "handle": "123456789/524033",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

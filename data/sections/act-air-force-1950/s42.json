@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s42",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "42",
+  "heading": "Insubordination and obstruction.",
+  "chapter": null,
+  "order": 42,
+  "text": "Any person subject to this Act who commits any of the following offences, that is to say,--\n\n(a) being concerned in any quarrel, affray or disorder, refuses to obey any officer, though of inferior rank, who orders him into arrest, or uses criminal force to or assaults any such officer; or\n\n(b) uses criminal force to, or assaults any person, whether subject to this Act or not, in whose custody he is lawfully placed, and whether he is or is not this superior officer; or\n\n(c) resists an escort whose duty it is to apprehend him or to have him in charge; or\n\n(d) breaks out of barracks, camp or quarters; or\n\n(e) neglects to obey any general, local or other order; or\n\n(f) impedes the provost-marshal or any person lawfully acting on his behalf or, when called upon, refuses to assist in the execution of his duty a provost-marshal or any person lawfully acting on his behalf; or\n\n(g) uses criminal force to or assaults any person bringing provisions or supplies to the Forces,\n\nshall, on conviction by court-martial, be liable to suffer imprisonment for a term which may extend, in the case of the offences specified in clauses(d) and (e) to two years, and in the case of the offences specified in the other clauses to ten years or such less punishment as is in this Act mentioned.",
+  "page_start": 21,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f88016a6-bf9a-474c-80fd-20a8f05000d3",
+    "handle": "123456789/526059",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

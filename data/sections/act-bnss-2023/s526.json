@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s526",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "526",
+  "heading": "Practising advocate not to sit as Magistrate in certain Courts.",
+  "chapter": null,
+  "order": 526,
+  "text": "No advocate who practices in the Court of any Magistrate shall sit as a Magistrate in that Court or in any Court within the local jurisdiction of that Court.",
+  "page_start": 171,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "acf03bf9-d94e-4aab-8d2f-664e97e5a05e",
+    "handle": "123456789/546608",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

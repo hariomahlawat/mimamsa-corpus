@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s75",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "75",
+  "heading": "Combination of punishments.",
+  "chapter": null,
+  "order": 75,
+  "text": "A sentence of a court-martial may award in addition to, or without any one other punishment, the punishment specified in clause (e) or clause (f) of section 73 and any one or more of the punishments specified in clauses (g) to (m) of that section.",
+  "page_start": 30,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "49188055-376c-484a-845f-c5a69ac593b5",
+    "handle": "123456789/519391",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

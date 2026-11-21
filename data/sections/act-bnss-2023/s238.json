@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s238",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "238",
+  "heading": "Effect of errors.",
+  "chapter": null,
+  "order": 238,
+  "text": "No error in stating either the offence or the particulars required to be stated in the charge, and no omission to state the offence or those particulars, shall be regarded at any stage of the case as material, unless the accused was in fact misled by such error or omission, and it has occasioned a failure of justice.\n\nIllustrations.\n\n(a) A is charged under section 180 of the Bharatiya Nyaya Sanhita, 2023, with \"having been in possession of counterfeit coin, having known at the time when he became possessed thereof that such coin was counterfeit,\" the word \"fraudulently\" being omitted in the charge. Unless it appears that A was in fact misled by this omission, the error shall not be regarded as material.\n\n(b) A is charged with cheating B, and the manner in which he cheated B is not set out in the charge or is set out incorrectly. A defends himself, calls witnesses and gives his own account of the transaction. The Court may infer from this that the omission to set out the manner of the cheating is not material.\n\n(c) A is charged with cheating B, and the manner in which he cheated B is not set out in the charge. There were many transactions between A and B, and A had no means of knowing to which of them the charge referred, and offered no defence. The Court may infer from such facts that the omission to set out the manner of the cheating was, in the case, a material error.\n\n(d) A is charged with the murder of Khoda Baksh on the 21st January, 2023. In fact, the murdered person's name was Haidar Baksh, and the date of the murder was the 20th January, 2023. A was never charged with any murder but one, and had heard the inquiry before the Magistrate, which referred exclusively to the case of Haidar Baksh. The Court may infer from these facts that A was not misled, and that the error in the charge was immaterial.\n\n(e) A was charged with murdering Haidar Baksh on the 20th January, 2023, and Khoda Baksh (who tried to arrest him for that murder) on the 21st January, 2023. When charged for the murder of Haidar Baksh, he was tried for the murder of Khoda Baksh. The witnesses present in his defence were witnesses in the case of Haidar Baksh. The Court may infer from this that A was misled, and that the error was material.",
+  "page_start": 91,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8926c8de-db36-4097-8055-7fda3c372924",
+    "handle": "123456789/546336",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

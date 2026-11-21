@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s105",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "105",
+  "heading": "On whom burden of proof lies.",
+  "chapter": null,
+  "order": 105,
+  "text": "The burden of proof in a suit or proceeding lies on that person who would fail if no evidence at all were given on either side\n\nIllustrations.\n\n(a) A sues B for land of which B is in possession, and which, as A asserts, was left to A by the will of C, B's father. If no evidence were given on either side, B would be entitled to retain his possession. Therefore, the burden of proof is on A.\n\n(b) A sues B for money due on a bond. The execution of the bond is admitted, but B says that it was obtained by fraud, which A denies. If no evidence were given on either side, A would succeed, as the bond is not disputed and the fraud is not proved. Therefore, the burden of proof is on B.",
+  "page_start": 37,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e42c258c-6fc1-4d45-8b66-b0037403963d",
+    "handle": "123456789/546001",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

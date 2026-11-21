@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s154",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "154",
+  "heading": "Committing depredation on territories of foreign State at peace with Government of India.",
+  "chapter": null,
+  "order": 154,
+  "text": "Whoever commits depredation, or makes preparations to commit depredation, on the territories of any foreign State at peace with the Government of India, shall be punished with imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine and to forfeiture of any property used or intended to be used in committing such depredation, or acquired by such depredation.",
+  "page_start": 76,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8fef6da7-173c-41ab-abd1-e7902cda4104",
+    "handle": "123456789/545653",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

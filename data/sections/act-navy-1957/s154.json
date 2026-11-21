@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s154",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "154",
+  "heading": "Discharge or removal of prisoners",
+  "chapter": null,
+  "order": 158,
+  "text": "Whenever any offender is undergoing imprisonment or detention in pursuance of this Act, it shall be lawful for the Central Government or the Chief of the Naval Staff, or where an offender is undergoing imprisonment or detention by order of his commanding officer, for such commanding officer or the Central Government or the Chief of the Naval Staff, to give an order in writing in the prescribed form directing that the offender be discharged; and it shall also be lawful for the Central Government and the Chief of the Naval Staff, by order in writing in the prescribed form, to direct that any such offender be delivered over to naval custody for the purpose of being brought before a court-martial, either as a witness or for trial or otherwise, and such offender shall accordingly, on the production of any such order, be discharged, or be delivered over to such custody.",
+  "page_start": 48,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "cbb836b7-35aa-4a31-a4e2-4482200df402",
+    "handle": "123456789/524039",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s325",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "325",
+  "heading": "Mischief by killing or maiming animal.",
+  "chapter": null,
+  "order": 325,
+  "text": "Whoever commits mischief by killing, poisoning, maiming or rendering useless any animal shall be punished with imprisonment of either description for a term which may extend to five years, or with fine, or with both.",
+  "page_start": 96,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2f21b79b-4c5f-4a3c-bd82-83ba7489c586",
+    "handle": "123456789/545816",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

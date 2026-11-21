@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.2.0",
+  "source": "indiacode",
+  "source_url": "https://indiacode.gov.in/server/api/core/bitstreams/4da66be4-3939-4505-a079-96a8dfc4da2a/content",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T14:34:24+00:00",
+  "sha256": "4553e112dd43c7ac7878eaf031f6e48a24a926fcc7c3cf4097ef95265d564cd7",
+  "raw_path": "data/raw/indiacode/0000/4553e112dd43c7ac7878eaf031f6e48a24a926fcc7c3cf4097ef95265d564cd7.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/rules-aft-salary-rules-2009.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "rules-aft-salary-rules-2009",
+      "type": "implements",
+      "target_doc_id": "act-armed-forces-tribunal-2007",
+      "target_ref_raw": "The Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "India Code lists this RULE record under act_id AC_CEN_28_38_00013_200755_1517807323574 (The Armed Forces Tribunal Act, 2007).",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "rules-aft-salary-rules-2009",
+  "doc_type": "rules",
+  "title": "AFT Salary Rules 2009",
+  "number": null,
+  "issuing_authority": "Ministry of Defence",
+  "issue_date": "2009-05-18",
+  "effective_date": null,
+  "status": "in_force",
+  "status_note": "Listed as not repealed on India Code (read 2026-11-21)",
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "original_filename": "salaries.pdf",
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "87760cf6-b5e0-4ae2-9c35-7b5f9742e617",
+    "collection": "RULE",
+    "act_id": "AC_CEN_28_38_00013_200755_1517807323574",
+    "handle": "123456789/509272",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "number": "crawler",
+    "issue_date": "crawler",
+    "issuing_authority": "crawler",
+    "status": "rule",
+    "page_count": "rule",
+    "text_method": "rule"
+  }
+}

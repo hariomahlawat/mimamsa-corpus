@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s222",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "222",
+  "heading": "Omission to assist public servant when bound by law to give assistance.",
+  "chapter": null,
+  "order": 222,
+  "text": "Whoever, being bound by law to render or furnish assistance to any public servant in the execution of his public duty, intentionally omits to give such assistance,—\n\n(a) shall be punished with simple imprisonment for a term which may extend to one month, or with fine which may extend to two thousand and five hundred rupees, or with both;\n\n(b) and where such assistance be demanded of him by a public servant legally competent to make such demand for the purposes of executing any process lawfully issued by a Court or of preventing the commission of an offence, or suppressing a riot, or affray, or of apprehending a person charged with or guilty of an offence, or of having escaped from lawful custody, shall be punished with simple imprisonment for a term which may extend to six months, or with fine which may extend to five thousand rupees, or with both.",
+  "page_start": 71,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d28f98c0-3146-498d-b2d9-8e39c945e611",
+    "handle": "123456789/545716",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

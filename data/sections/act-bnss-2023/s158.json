@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s158",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "158",
+  "heading": "Power of Magistrate to direct local investigation and examination of an expert.",
+  "chapter": null,
+  "order": 158,
+  "text": "The Magistrate may, for the purposes of an inquiry under section 156 or section 157—\n\n(a) direct a local investigation to be made by such person as he thinks fit; or\n\n(b) summon and examine an expert.",
+  "page_start": 62,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "fb2f7e11-768c-4c5b-ad63-4c4404bedc0f",
+    "handle": "123456789/546263",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

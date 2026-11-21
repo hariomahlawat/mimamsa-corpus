@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s96",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "96",
+  "heading": "Constitution and procedure of disciplinary courts.",
+  "chapter": null,
+  "order": 100,
+  "text": "(1) A disciplinary court shall be composed of not less than three nor more than five officers:\n\nProvided that the majority of the officers including the president shall be officers of the executive branch of the naval service.\n\n(2) At least one of these officers composing the court shall be superior in rank to the officer under trial and in any case shall be of the rank of substantive or acting commander or of a higher rank.\n\n(3) A disciplinary court shall have power to impose any punishment inferior to detention in the scale hereinbefore contained, but no greater punishment.\n\n(4) The officers composing the disciplinary court shall be named by the authority ordering the same or by an officer empowered in this behalf by such authority.\n\n(5) Subject to the provisions of the foregoing sub-sections, the procedure and practice of courtsmartial provided by or under this Act shall apply to the procedure and practice of disciplinary courts subject to such modifications as may be prescribed.",
+  "page_start": 33,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3bd7e811-1acc-41c8-86aa-3170614a1f41",
+    "handle": "123456789/523963",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

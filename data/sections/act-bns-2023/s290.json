@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s290",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "290",
+  "heading": "Negligent conduct with respect to pulling down, repairing or constructing buildings, etc.",
+  "chapter": null,
+  "order": 290,
+  "text": "Whoever, in pulling down, repairing or constructing any building, knowingly or negligently omits to take such measures with that building as is sufficient to guard against any probable danger to human life from the fall of that building, or of any part thereof, shall be punished with imprisonment of either description for a term which may extend to six months, or with fine which may extend to five thousand rupees, or with both.",
+  "page_start": 83,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "97bf501c-3f2c-450f-ae5e-9676ff22a367",
+    "handle": "123456789/545782",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

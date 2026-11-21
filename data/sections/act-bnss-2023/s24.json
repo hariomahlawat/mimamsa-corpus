@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s24",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "24",
+  "heading": "Sentence of imprisonment in default of fine.",
+  "chapter": null,
+  "order": 24,
+  "text": "(1) The Court of a Magistrate may award such term of imprisonment in default of payment of fine as is authorised by law:\n\nProvided that the term---\n\n(a) is not in excess of the powers of the Magistrate under section 23;\n\n(b) shall not, where imprisonment has been awarded as part of the substantive sentence, exceed one-fourth of the term of imprisonment which the Magistrate is competent to inflict as punishment for the offence otherwise than as imprisonment in default of payment of the fine.\n\n(2) The imprisonment awarded under this section may be in addition to a substantive sentence of imprisonment for the maximum term awardable by the Magistrate under section 23.",
+  "page_start": 24,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b17731f3-978c-4fa5-aa83-088f987327a3",
+    "handle": "123456789/546132",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

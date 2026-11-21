@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s143",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "143",
+  "heading": "Security for unexpired period of bond.",
+  "chapter": null,
+  "order": 143,
+  "text": "(1) When a person for whose appearance a summons or warrant has been issued under the proviso to sub-section (3) of section 140 or under sub-section (10) of section 142, appears or is brought before the Magistrate or Court, the Magistrate or Court shall cancel the bond or bail bond executed by such person and shall order such person to give, for the unexpired portion of the term of such bond, fresh security of the same description as the original security.\n\n(2) Every such order shall, for the purposes of sections 139 to 142 (both inclusive) be deemed to be an order made under section 125 or section 136, as the case may be.",
+  "page_start": 57,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "4019b92c-666b-4fa8-8907-2cd0aaccd3a7",
+    "handle": "123456789/546250",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

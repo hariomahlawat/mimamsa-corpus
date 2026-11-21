@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s83",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "83",
+  "heading": "Punishment of officers, junior commissioned officers and warrant officers by brigade commanders and others.",
+  "chapter": null,
+  "order": 83,
+  "text": "An officer having power not less than a brigade, or an equivalent commander or such other officer as is, with the consent of the Central Government, specified by [1][the Chief of the Army Staff] may in the prescribed manner, proceed against an officer below the rank of a field officer, a junior commissioned officer or a warrant officer, who is charged with an offence under this Act, and award one or more of the following punishments, that is to say,--\n\n(a) severe reprimand or reprimand;\n\n(b) stoppage of pay and allowances until any proved loss or damage occasioned by the offence of which he is convicted is made good.",
+  "page_start": 27,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief\".",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8afb7d53-7107-4645-bc60-299e6c3712ed",
+    "handle": "123456789/525946",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

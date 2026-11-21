@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s113",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "113",
+  "heading": "Summing up by the trial judge advocate",
+  "chapter": null,
+  "order": 117,
+  "text": "When the case for the defence and the prosecutor's reply, if any, are concluded, the trial judge advocate shall proceed to sum up in open court the evidence for the prosecution and the defence and lay down the law by which the court is to be guided.",
+  "page_start": 39,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "13938f94-3db8-47c9-91ad-822cea37a6b4",
+    "handle": "123456789/523982",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s43",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "43",
+  "heading": "Fraudulent enrolment.",
+  "chapter": null,
+  "order": 43,
+  "text": "Any person subject to this Act who commits any of the following offences, that is to say,--\n\n(a) without having obtained a regular discharge from the Air Force or otherwise fulfilled the conditions enabling him to enroll or enter, enrolls himself in, or enters the said force or any part of the military or the naval forces of India; or\n\n(b) is concerned in the enrolment in any part of the Forces, of any person when he knows or has reason to believe such person to be so circumstanced that by enrolling he commits an offence against this Act,\n\nshall, on conviction by court-martial, be liable to suffer imprisonment for a term which may extend to five years or such less punishment as is in this Act mentioned.",
+  "page_start": 21,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "20be1cec-192c-4834-baad-1aea3ef22b28",
+    "handle": "123456789/526070",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

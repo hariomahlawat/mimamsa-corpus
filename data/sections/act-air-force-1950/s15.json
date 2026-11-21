@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s15",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "15",
+  "heading": "Validity of enrolment.",
+  "chapter": null,
+  "order": 15,
+  "text": "Every person who has for the space of three months been in receipt of pay as a person enrolled under this Act and been borne on the rolls of any unit shall be deemed to have been duly enrolled, and shall not be entitled to claim his discharge on the ground of any irregularity or illegality in his enrolment or on any other ground whatsoever; and if any person, in receipt of such pay and borne on the rolls as aforesaid, claims his discharge before the expiry of three months from his enrolment, no such irregularity or illegality or other ground shall, until he is discharged in pursuance of his claim, affect his position as an enrolled person under this Act or invalidate any proceedings, act or thing taken or done prior to his discharge.",
+  "page_start": 13,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a1404a6d-eec3-4746-b188-17da36b21e35",
+    "handle": "123456789/525793",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s94",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "94",
+  "heading": "Evidence of terms of contracts, grants and other dispositions of property reduced to form of document.",
+  "chapter": null,
+  "order": 94,
+  "text": "When the terms of a contract, or of a grant, or of any other disposition of property, have been reduced to the form of a document, and in all cases in which any matter is required by law to be reduced to the form of a document, no evidence shall be given in proof of the terms of such contract, grant or other disposition of property, or of such matter, except the document itself, or secondary evidence of its contents in cases in which secondary evidence is admissible under the provisions hereinbefore contained\n\nException 1.--When a public officer is required by law to be appointed in writing, and when it is shown that any particular person has acted as such officer, the writing by which he is appointed need not be proved.\n\nException 2.--Wills admitted to probate in India may be proved by the probate.\n\nExplanation 1.--This section applies equally to cases in which the contracts, grants or dispositions of property referred to are contained in one document, and to cases in which they are contained in more documents than one.\n\nExplanation 2.--Where there are more originals than one, one original only need be proved.\n\nExplanation 3.--The statement, in any document whatever, of a fact other than the facts referred to in this section, shall not preclude the admission of oral evidence as to the same fact.\n\nIllustrations.\n\n(a) If a contract be contained in several letters, all the letters in which it is contained must be proved.\n\n(b) If a contract is contained in a bill of exchange, the bill of exchange must be proved.\n\n(d) A contracts, in writing, with B, for the delivery of indigo upon certain terms. The contract mentions the fact that B had paid A the price of other indigo contracted for verbally on another occasion. Oral evidence is offered that no payment was made for the other indigo. The evidence is admissible.\n\n(e) A gives B a receipt for money paid by B. Oral evidence is offered of the payment. The evidence is admissible",
+  "page_start": 34,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "bfba5b95-3388-4350-ae0d-7032eafb4ccb",
+    "handle": "123456789/546080",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

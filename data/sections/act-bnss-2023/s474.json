@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s474",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "474",
+  "heading": "Power to commute sentence.",
+  "chapter": null,
+  "order": 474,
+  "text": "The appropriate Government may, without the consent of the person sentenced, commute---\n\n(a) a sentence of death, for imprisonment for life;\n\n(b) a sentence of imprisonment for life, for imprisonment for a term not less than seven years;\n\n(c) a sentence of imprisonment for seven years or more, for imprisonment for a term not less than three years;\n\n(d) a sentence of imprisonment for less than seven years, for fine;\n\n(e) a sentence of rigorous imprisonment, for simple imprisonment for any term to which that person might have been sentenced.",
+  "page_start": 158,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "02846f98-47ce-44c7-b644-e9f4e194c1ed",
+    "handle": "123456789/546559",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

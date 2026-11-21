@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s121",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "121",
+  "heading": "Fine in lieu of forfeiture.",
+  "chapter": null,
+  "order": 121,
+  "text": "(1) Where the Court makes a declaration that any property stands forfeited to the Central Government under section 120 and it is a case where the source of only a part of such property has not been proved to the satisfaction of the Court, it shall make an order giving an option to the person affected to pay, in lieu of forfeiture, a fine equal to the market value of such part.\n\n(2) Before making an order imposing a fine under sub-section (1), the person affected shall be given a reasonable opportunity of being heard.\n\n(3) Where the person affected pays the fine due under sub-section (1), within such time as may be allowed in that behalf, the Court may, by order, revoke the declaration of forfeiture under section 120 and thereupon such property shall stand released.",
+  "page_start": 50,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "df77b5ac-4392-4889-b243-bd4d732600f3",
+    "handle": "123456789/546228",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

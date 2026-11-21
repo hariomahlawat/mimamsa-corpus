@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s22",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "22",
+  "heading": "Limitation.",
+  "chapter": null,
+  "order": 23,
+  "text": "The Tribunal shall not admit an application--\n\n(a) in a case where a final order such as is mentioned in clause (a) of sub-section (2) of section 21 has been made unless the application is made within six months from the date on which such final order has been made;\n\n(b) in a case where a petition or a representation such as is mentioned in clause (b) of sub-section (2) of section 21 has been made and the period of six months has expired thereafter without such final order having been made;\n\n(c) in a case where the grievance in respect of which an application is made had arisen by reason of any order made at any time during the period of three years immediately preceding the date on which jurisdiction, powers and authority of the Tribunal became exercisable under this Act, in respect of the matter to which such order relates and no proceedings for the redressal of such grievance had been commenced before the said date before the High Court.\n\n(2) Notwithstanding anything contained in sub-section (1), the Tribunal may admit an application after the period of six months referred to in clause (a) or clause (b) of sub-section (1), as the case may be, or prior to the period of three years specified in clause (c), if the Tribunal is satisfied that the applicant had sufficient cause for not making the application within such period.",
+  "page_start": 9,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "9ac8e216-3308-49c2-a8f9-387606453652",
+    "handle": "123456789/527470",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

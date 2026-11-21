@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s235",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "235",
+  "heading": "Particulars as to time, place and person.",
+  "chapter": null,
+  "order": 235,
+  "text": "(1) The charge shall contain such particulars as to the time and place of the alleged offence, and the person (if any) against whom, or the thing (if any) in respect of which, it was committed, as are reasonably sufficient to give the accused notice of the matter with which he is charged.\n\n(2) When the accused is charged with criminal breach of trust or dishonest misappropriation of money or other movable property, it shall be sufficient to specify the gross sum or, as the case may be, describe the movable property in respect of which the offence is alleged to have been committed, and the dates between which the offence is alleged to have been committed, without specifying particular items or exact dates, and the charge so framed shall be deemed to be a charge of one offence within the meaning of section 242:\n\nProvided that the time included between the first and last of such dates shall not exceed one year.",
+  "page_start": 90,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d863cd8e-1278-47cb-9f57-fd8e3424f441",
+    "handle": "123456789/546333",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

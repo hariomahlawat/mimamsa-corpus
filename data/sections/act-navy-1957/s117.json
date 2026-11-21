@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s117",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "117",
+  "heading": "Announcement of the finding",
+  "chapter": null,
+  "order": 121,
+  "text": "(1) When the court has considered the finding, the court shall be re-assembled and the president shall inform the trial judge advocate in open court what is the finding of the court as ascertained in accordance with section 124.\n\n(2) The court shall give its findings on all the charges on which the accused is tried.",
+  "page_start": 39,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "39e175f9-2d0d-41b7-a682-5c036fdb36fa",
+    "handle": "123456789/523987",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

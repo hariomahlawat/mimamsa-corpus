@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s34",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "34",
+  "heading": "Offences in relation to the enemy and punishable with death.",
+  "chapter": null,
+  "order": 34,
+  "text": "Any person subject to this Act who commits any of the following offences, that is to say,--\n\n(a) shamefully abandons or delivers up any garrison, fortress, post, place or guard, committed to his charge, or which it is his duty to defend, or uses any means to compel or induce any commanding officer or other person to commit the said act; or\n\n(b) intentionally uses any means to compel or induce any person subject to military, naval or air force law to abstain from acting against the enemy, or to discourage such person from acting against the enemy; or\n\n(c) in the presence of the enemy, shamefully casts away his arms, ammunition, tools or equipment or misbehaves in such manner as to show cowardice; or\n\n(d) treacherously holds correspondence with, or communicates intelligence to, the enemy or any person in arms against the Union; or\n\n(e) directly or indirectly assists the enemy with money, arms, ammunition, stores or supplies; or\n\n(f) treacherously or through cowardice sends a flag of truce to the enemy; or\n\n(g) in time of war or during any air force operation, intentionally occasions a false alarm in action, camp or quarters or spreads reports calculated to create alarm or despondency; or\n\n(h) in time of action leaves his commanding officer or his post, guard, piquet, patrol or party without being regularly relieved or without leave; or\n\n(i) having been made a prisoner of war, voluntarily serves with or aids the enemy; or\n\n(j) knowingly harbours or protects an enemy not being a prisoner; or\n\n(k) being a sentry in time of war or alarm, sleeps upon his post or is intoxicated; or\n\n(l) knowingly does any act calculated to imperil the success of the military, naval or air forces of India or any forces co-operating therewith or any part of such forces; or\n\n(m) treacherously or shamefully causes the capture or destruction by the enemy of any aircraft belonging to the forces; or\n\n(n) treacherously uses any false air signal or alters or interferes with any air signal; or\n\n(o) when ordered by his superior officer or otherwise under orders to carry out any air force operations, treacherously or shamefully fails to use his utmost exertions to carry such orders into effect,\n\nshall, on conviction by court-martial, be liable to suffer death or such less punishment as is in this Act mentioned.",
+  "page_start": 17,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "946e7803-6dd6-42c0-a9b1-44956242339e",
+    "handle": "123456789/525971",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

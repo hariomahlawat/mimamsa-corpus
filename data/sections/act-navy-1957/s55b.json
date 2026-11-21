@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s55b",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "55B",
+  "heading": "Inaccurate certificate.",
+  "chapter": null,
+  "order": 57,
+  "text": "[1][55B. Inaccurate certificate.--Every person subject to naval law who signs any certificate in relation to an aircraft or aircraft material belonging to or in the service of the Government without ensuring the accuracy thereof, shall be punished with imprisonment for a term which may extend to two years or such other punishment as is hereinafter mentioned.]",
+  "page_start": 23,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "s. 14, ibid.",
+      "by_doc_id": null,
+      "effective_date": "1974-12-15",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by s. 14, ibid. (w.e.f. 15-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1c5a46b3-63e4-446d-94b2-588113c7dd7f",
+    "handle": "123456789/523916",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s148",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "148",
+  "heading": "Delivery of lunatic accused to relatives",
+  "chapter": null,
+  "order": 148,
+  "text": "Where any relative or friend of any person who is in custody under sub-section (4) of section 144 or under detention under sub-section (5) of that section desires that he should be delivered to his care and custody, the Central Government may upon application by such relative or friend and on his giving security to the satisfaction of that Government that the person delivered shall be properly taken care of and prevented from doing injury to himself or any other person, and be produced for the inspection of such officer, and at such times and places, as the Central Government may direct, order such person to be delivered to such relative or friend.",
+  "page_start": 45,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1e3083c6-eecd-4ceb-b904-30bf5d15a100",
+    "handle": "123456789/523759",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

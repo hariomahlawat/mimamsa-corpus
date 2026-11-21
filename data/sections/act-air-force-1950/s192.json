@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s192",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "192",
+  "heading": "Repealed.",
+  "chapter": null,
+  "order": 193,
+  "text": "[Repeal.][Rep. by the Repealing and Amending Act, 1957 (36 of 1957), s. 2 and the First Schedule (w.e.f.17-9-1957).",
+  "page_start": 54,
+  "page_end": null,
+  "status": "repealed",
+  "status_note": "[Repeal.][Rep. by the Repealing and Amending Act, 1957 (36 of 1957), s. 2 and the First Schedule (w.e.f.17-9-1957).",
+  "amendment_history": [
+    {
+      "action": "repealed",
+      "by_ref_raw": "Repealing and Amending Act, 1957 (36 of 1957)",
+      "by_doc_id": null,
+      "effective_date": "1957-09-17",
+      "effective_date_raw": null,
+      "footnote_text": "[Repeal.][Rep. by the Repealing and Amending Act, 1957 (36 of 1957), s. 2 and the First Schedule (w.e.f.17-9-1957).",
+      "confidence": "extracted",
+      "origin": "inline"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "20844d9e-ebd4-436d-8729-6ac93e9c4753",
+    "handle": "123456789/523804",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

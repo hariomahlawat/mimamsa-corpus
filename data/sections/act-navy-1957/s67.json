@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s67",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "67",
+  "heading": "Breaking bulk on board a prize ship.",
+  "chapter": null,
+  "order": 71,
+  "text": "Every person subject to naval law who breaks bulk on board any vessel taken as prize, or detained in the exercise of any beligerent right or under any law relating to piracy or to the slave trade or to the customs, with intent dishonestly to misappropriate anything therein or belonging thereto, shall be punished with imprisonment for a term which may extend to two years or such other punishment as is hereinafter mentioned.",
+  "page_start": 25,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "59a03d15-fb67-40c4-a0cc-597d4cf09149",
+    "handle": "123456789/523931",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

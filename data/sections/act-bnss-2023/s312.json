@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s312",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "312",
+  "heading": "Language of record of evidence.",
+  "chapter": null,
+  "order": 312,
+  "text": "In every case where evidence is taken down under section 310 or section 311,---\n\n(a) if the witness gives evidence in the language of the Court, it shall be taken down in that language;\n\n(b) if he gives evidence in any other language, it may, if practicable, be taken down in that language, and if it is not practicable to do so, a true translation of the evidence in the language of the Court shall be prepared as the examination of the witness proceeds, signed by the Magistrate or presiding Judge, and shall form part of the record;\n\n(c) where under clause (b) evidence is taken down in a language other than the language of the Court, a true translation thereof in the language of the Court shall be prepared as soon as practicable, signed by the Magistrate or presiding Judge, and shall form part of the record:\n\nProvided that when under clause (b) evidence is taken down in English and a translation thereof in the language of the Court is not required by any of the parties, the Court may dispense with such translation.",
+  "page_start": 109,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "14761379-a51c-418a-8653-2f20ad8d5cac",
+    "handle": "123456789/546405",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

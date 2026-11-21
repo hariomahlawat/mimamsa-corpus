@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s216",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "216",
+  "heading": "Procedure for witnesses in case of threatening, etc.",
+  "chapter": null,
+  "order": 216,
+  "text": "A witness or any other person may file a complaint in relation to an offence under section 232 of the Bharatiya Nyaya Sanhita, 2023.",
+  "page_start": 83,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "cf3a7c00-fb21-4551-bfda-119b0d4b2ae1",
+    "handle": "123456789/546316",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

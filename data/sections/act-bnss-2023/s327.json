@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s327",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "327",
+  "heading": "Identification report of Magistrate.",
+  "chapter": null,
+  "order": 327,
+  "text": "(1) Any document purporting to be a report of identification under the hand of an Executive Magistrate in respect of a person or property may be used as evidence in any inquiry, trial or other proceeding under this Sanhita, although such Magistrate is not called as a witness:\n\nProvided that where such report contains a statement of any suspect or witness to which the provisions of section 19, section 26, section 27, section 158 or section 160 of the Bharatiya Sakshya Adhiniyam, 2023, apply, such statement shall not be used under this sub-section except in accordance with the provisions of those sections.\n\n(2) The Court may, if it thinks fit, and shall, on the application of the prosecution or of the accused, summon and examine such Magistrate as to the subject-matter of the said report.",
+  "page_start": 112,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3e6ae6b1-e972-4a3a-aab1-0dc758ac2a19",
+    "handle": "123456789/546418",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

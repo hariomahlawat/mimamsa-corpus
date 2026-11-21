@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s53",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "53",
+  "heading": "Extortion and corruption.",
+  "chapter": null,
+  "order": 53,
+  "text": "Any person subject to this Act who commits any of the following offences, that is to say,--\n\n(a) commits extortion; or\n\n(b) without proper authority exacts from any person money, provisions or service;\n\nshall, on conviction by court-martial, be liable to suffer imprisonment for a term which may extend to ten years or such less punishment as is in this Act mentioned.",
+  "page_start": 21,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a32f3d27-8178-4e27-918c-af4c916428ad",
+    "handle": "123456789/525913",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s33",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "33",
+  "heading": "Remission of deductions.",
+  "chapter": null,
+  "order": 33,
+  "text": "(1) Any deduction from the pay and allowances authorised by or under this Act may be remitted by the Chief of the Naval Staff in his discretion.\n\n(2) Such deduction may also be remitted in such manner and to such extent and by such other authority as may be prescribed.",
+  "page_start": 19,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6b974b45-f493-492d-8cbb-6e3147558760",
+    "handle": "123456789/517381",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

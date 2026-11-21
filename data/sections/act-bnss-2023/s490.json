@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s490",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "490",
+  "heading": "Deposit instead of recognizance.",
+  "chapter": null,
+  "order": 490,
+  "text": "When any person is required by any Court or officer to execute a bond or bail bond, such Court or officer may, except in the case of a bond for good behaviour, permit him to deposit a sum of money or Government promissory notes to such amount as the Court or officer may fix in lieu of executing such bond.",
+  "page_start": 163,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3df95449-1787-4d0a-ba34-7c0ee12c000a",
+    "handle": "123456789/546573",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

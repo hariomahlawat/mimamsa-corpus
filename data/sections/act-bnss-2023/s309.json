@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s309",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "309",
+  "heading": "Record in summons-cases and inquiries.",
+  "chapter": null,
+  "order": 309,
+  "text": "(1) In all summons-cases tried before a Magistrate, in all inquiries under sections 164 to 167 (both inclusive), and in all proceedings under section 491 otherwise than in the course of a trial, the Magistrate shall, as the examination of each witness proceeds, make a memorandum of the substance of the evidence in the language of the Court:\n\nProvided that if the Magistrate is unable to make such memorandum himself, he shall, after recording the reason of his inability, cause such memorandum to be made in writing or from his dictation in open Court.\n\n(2) Such memorandum shall be signed by the Magistrate and shall form part of the record.",
+  "page_start": 309,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "bdb033c3-9b79-4907-b768-18ec7f3e8226",
+    "handle": "123456789/546402",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

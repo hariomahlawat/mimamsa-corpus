@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s232",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "232",
+  "heading": "Commitment of case to Court of Session when offence is triable exclusively by it.",
+  "chapter": null,
+  "order": 232,
+  "text": "When in a case instituted on a police report or otherwise, the accused appears or is brought before the Magistrate and it appears to the Magistrate that the offence is triable exclusively by the Court of Session, he shall—\n\n(a) commit, after complying with the provisions of section 230 or section 231 the case to the Court of Session, and subject to the provisions of this Sanhita relating to bail, remand the accused to custody until such commitment has been made;\n\n(b) subject to the provisions of this Sanhita relating to bail, remand the accused to custody during, and until the conclusion of, the trial;\n\n(c) send to that Court the record of the case and the documents and articles, if any, which are to be produced in evidence;\n\n(d) notify the Public Prosecutor of the commitment of the case to the Court of Session:\n\nProvided that the proceedings under this section shall be completed within a period of ninety days from the date of taking cognizance, and such period may be extended by the Magistrate for a period not exceeding one hundred and eighty days for the reasons to be recorded in writing:\n\nProvided further that any application filed before the Magistrate by the accused or the victim or any person authorised by such person in a case triable by Court of Session, shall be forwarded to the Court of Session with the committal of the case.",
+  "page_start": 89,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "002656c0-11fd-4876-aa1a-a046e3c6bbb9",
+    "handle": "123456789/546332",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

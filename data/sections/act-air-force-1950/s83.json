@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s83",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "83",
+  "heading": "Requirement of sanction in certain cases",
+  "chapter": null,
+  "order": 83,
+  "text": "(1) Subject to the provisions of sub-section (2), the punishments mentioned in section 82 shall not be inflicted in respect of an offence under any of the sections 34, 35 and 36 when committed on active service or under any of the sections 37, 38, 40, 42 (f) and (g), 43, 47, 52, 60, 62, 63, 64, 66(a), (b) and (c) and 71 except with the previous sanction in writing of an officer having power to convene a district court-martial.\n\n(2) The said punishments may be awarded without such sanction in the case of any offence other than an offence under section 34 or section 71, committed by persons who have not been enrolled as combatants.",
+  "page_start": 31,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "4454e9b0-101a-4551-b179-1c70bc7d9214",
+    "handle": "123456789/519400",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

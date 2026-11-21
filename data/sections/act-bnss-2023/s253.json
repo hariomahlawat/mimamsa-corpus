@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s253",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "253",
+  "heading": "Date for prosecution evidence.",
+  "chapter": null,
+  "order": 253,
+  "text": "If the accused refuses to plead, or does not plead, or claims to be tried or is not convicted under section 252, the Judge shall fix a date for the examination of witnesses, 97 and may, on the application of the prosecution, issue any process for compelling the attendance of any witness or the production of any document or other thing.",
+  "page_start": 96,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "660aa763-4521-46f6-a759-dbb8d0b889ab",
+    "handle": "123456789/546351",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

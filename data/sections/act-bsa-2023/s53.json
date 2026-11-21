@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s53",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "53",
+  "heading": "Facts admitted need not be proved.",
+  "chapter": null,
+  "order": 53,
+  "text": "No fact needs to be proved in any proceeding which the parties thereto or their agents agree to admit at the hearing, or which, before the hearing, they agree to admit by any writing under their hands, or which by any rule of pleading in force at the time they are deemed to have admitted by their pleadings:\n\nProvided that the Court may, in its discretion, require the facts admitted to be proved otherwise than by such admissions.",
+  "page_start": 25,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a77db4b8-49fc-4c81-b663-14daee84d217",
+    "handle": "123456789/545947",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

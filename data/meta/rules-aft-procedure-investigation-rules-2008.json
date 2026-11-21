@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.2.0",
+  "source": "indiacode",
+  "source_url": "https://indiacode.gov.in/server/api/core/bitstreams/520d0d9f-5322-46ca-9c32-b40ff58f9ad5/content",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T14:34:21+00:00",
+  "sha256": "9565ce774a1fd1fb0d1e6da829d3af0acca8b346918ed1204025e3b59a4f8641",
+  "raw_path": "data/raw/indiacode/0000/9565ce774a1fd1fb0d1e6da829d3af0acca8b346918ed1204025e3b59a4f8641.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 7,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/rules-aft-procedure-investigation-rules-2008.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "rules-aft-procedure-investigation-rules-2008",
+      "type": "implements",
+      "target_doc_id": "act-armed-forces-tribunal-2007",
+      "target_ref_raw": "The Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "India Code lists this RULE record under act_id AC_CEN_28_38_00013_200755_1517807323574 (The Armed Forces Tribunal Act, 2007).",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "rules-aft-procedure-investigation-rules-2008",
+  "doc_type": "rules",
+  "title": "AFT Procedure & Investigation Rules 2008",
+  "number": null,
+  "issuing_authority": "Ministry of Defence",
+  "issue_date": "2008-07-21",
+  "effective_date": null,
+  "status": "in_force",
+  "status_note": "Listed as not repealed on India Code (read 2026-11-21)",
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "original_filename": "investigation.pdf",
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "008ced16-c8a0-4b20-a5bc-cc3194a9f831",
+    "collection": "RULE",
+    "act_id": "AC_CEN_28_38_00013_200755_1517807323574",
+    "handle": "123456789/509269",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "number": "crawler",
+    "issue_date": "crawler",
+    "issuing_authority": "crawler",
+    "status": "rule",
+    "page_count": "rule",
+    "text_method": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s116",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "116",
+  "heading": "Retirement to consider finding",
+  "chapter": null,
+  "order": 120,
+  "text": "(1) After the trial judge advocate has finished his summing up, the court will be cleared to consider the finding.\n\n(2) The trial judge advocate shall not sit with the court when the court is considering the finding, and no person shall speak to or hold any communication with the court while the court is considering the finding.",
+  "page_start": 39,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "19d8c740-441e-4f65-8f65-e0f4f837b697",
+    "handle": "123456789/523985",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

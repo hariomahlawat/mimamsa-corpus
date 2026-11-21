@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s6",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "6",
+  "heading": "Special provision as to rank in certain cases.",
+  "chapter": null,
+  "order": 6,
+  "text": "(1) The Central Government may, by notification, direct that any persons or class of persons subject to this Act under [1][clause (i) of sub-section (1) of section 2] shall be so subject as officers, junior commissioned officers, warrant officers or non-commissioned officers and may authorise any officer to give a like direction and to cancel such direction.\n\n(2) All persons subject to this Act other than officers, junior commissioned officers, warrant officers and non-commissioned officers shall, if they are not persons in respect of whom a notification or direction under sub-section (1) is in force, be deemed to be of a rank inferior to that of a non-commissioned officer.",
+  "page_start": 12,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 56 of 1974",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 56 of 1974, s. 3 and the Second Schedule, for \"clause (i) of section 2\".",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2129137c-ef09-4d5e-9b6c-02cf7d5ed8d1",
+    "handle": "123456789/525862",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s188",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "188",
+  "heading": "Power of officers of the Royal Navy.",
+  "chapter": null,
+  "order": 194,
+  "text": "(1) An officer of the Royal Navy attached to or serving with the Indian Navy shall have and exercise all such powers as are vested in or may be exercised by an officer of the Indian Navy of corresponding rank or holding a corresponding appointment and shall be eligible to be granted a commission to convene courts-martial or to be appointed as president of a court-martial or to sit on a court-martial as a member as if he were an officer of the Indian Navy subject to naval law.\n\n(2) The expression \"superior officer\" wherever used in this Act shall be deemed to include an officer of the Royal Navy when serving under conditions specified in sub-section (1).",
+  "page_start": 58,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c10146e8-546d-4f0e-862d-36dea0dab564",
+    "handle": "123456789/524331",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

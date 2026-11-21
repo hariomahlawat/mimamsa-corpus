@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s337",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "337",
+  "heading": "Forgery of record of Court or of public register, etc.",
+  "chapter": null,
+  "order": 337,
+  "text": "Whoever forges a document or an electronic record, purporting to be a record or proceeding of or in a Court or an identity document issued by Government including voter identity card or Aadhaar Card, or a register of birth, marriage or burial, or a register kept by a public servant as such, or a certificate or document purporting to be made by a public servant in his official capacity, or an authority to institute or defend a suit, or to take any proceedings therein, or to confess judgment, or a power of attorney, shall be punished with imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine.\n\nExplanation.—For the purposes of this section, \"register\" includes any list, data or record of any entries maintained in the electronic form as defined in clause (r) of sub-section (1) of section 2 of the Information Technology Act, 2000 (21 of 2000).",
+  "page_start": 101,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "55a90861-9b06-4c76-bd67-fbbfda9eb242",
+    "handle": "123456789/545828",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

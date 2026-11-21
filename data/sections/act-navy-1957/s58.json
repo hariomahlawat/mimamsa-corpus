@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s58",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "58",
+  "heading": "Offences in respect of property.",
+  "chapter": null,
+  "order": 62,
+  "text": "Every person subject to naval law who wastefully expends or fraudulently buys, sells or receives any property of Government or property belonging to a naval, military or air force mess, band or institution, and every person who knowingly permits any such wasteful expenditure, or any such fraudulent purchase, sale or receipt, shall be punished with imprisonment for a term which may extend to two years or such other punishment as is hereinafter mentioned.",
+  "page_start": 24,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ccbe154e-e9e0-40ba-a242-840d2c63423e",
+    "handle": "123456789/523921",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

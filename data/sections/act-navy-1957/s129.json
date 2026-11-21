@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s129",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "129",
+  "heading": "Right of accused to copy of proceedings and sentence",
+  "chapter": null,
+  "order": 133,
+  "text": "Every person tried by a court-martial and convicted shall be entitled on demand to one copy of the proceedings and sentence of such courtmartial free of cost but no such demand shall be allowed after the lapse of one year from the date of the final decision of such court.",
+  "page_start": 41,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "86afab77-4b24-4f05-a4cf-85e3d356a9d7",
+    "handle": "123456789/524010",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

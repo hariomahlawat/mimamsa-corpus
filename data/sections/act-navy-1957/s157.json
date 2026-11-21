@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s157",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "157",
+  "heading": "Naval prisons and naval detention quarters",
+  "chapter": null,
+  "order": 161,
+  "text": "The Central Government may set apart any buildings or vessels or any parts thereof as naval prisons or naval detention quarters and any buildings, vessels or parts of buildings or vessels so set apart as naval prisons or naval detention quarters, as the case may be, shall be deemed to be naval prisons or naval detention quarters respectively within the meaning of this Act.",
+  "page_start": 48,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "dfc9164e-162b-4841-87ac-b3b3187716fc",
+    "handle": "123456789/524042",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

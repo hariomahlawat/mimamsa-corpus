@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s105",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "105",
+  "heading": "Arraignment.",
+  "chapter": null,
+  "order": 109,
+  "text": "(1) When the court is ready to commence the trial, the trial judge advocate shall read out the charges and shall ask the accused whether he pleads guilty or not guilty.\n\n(2) If the accused pleads guilty, then, before such plea is recorded, the trial judge advocate shall ensure that the accused understands the charge to which he has pleaded guilty and the difference of procedure which will result from the plea of guilty.\n\n(3) If it appears from the accuseds replies or from the summary of evidence prepared in the prescribed manner that he should not plead guilty, the trial judge advocate may advise the accused to withdraw his plea.\n\n(4) If the court accepts the plea of guilty, it shall be recorded as the finding of the court and the court shall proceed to take steps to pass sentence unless there are other charges to be tried in which event the sentence shall be deferred until after the findings on such charges are given.",
+  "page_start": 37,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "06f671f8-b049-4b9e-af3a-5937feb646d5",
+    "handle": "123456789/523973",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

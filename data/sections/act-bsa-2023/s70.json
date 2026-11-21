@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s70",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "70",
+  "heading": "Proof when attesting witness denies execution.",
+  "chapter": null,
+  "order": 70,
+  "text": "If the attesting witness denies or does not recollect the execution of the document, its execution may be proved by other evidence.",
+  "page_start": 29,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c5f0a41d-0c0c-474a-8b51-d85758a5278c",
+    "handle": "123456789/545964",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

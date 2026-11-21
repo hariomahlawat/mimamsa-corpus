@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s338",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "338",
+  "heading": "Appearance by Public Prosecutors.",
+  "chapter": null,
+  "order": 338,
+  "text": "(1) The Public Prosecutor or Assistant Public Prosecutor in charge of a case may appear and plead without any written authority before any Court in which that case is under inquiry, trial or appeal.\n\n(2) If in any such case any private person instructs his advocate to prosecute any person in any Court, the Public Prosecutor or Assistant Public Prosecutor in charge of the case shall conduct the prosecution, and the advocate so instructed shall act therein under the directions of the Public Prosecutor or Assistant Public Prosecutor, and may, with the permission of the Court, submit written arguments after the evidence is closed in the case.",
+  "page_start": 116,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ac69dbf4-f5d6-4dd8-b3a3-9942a1fe0653",
+    "handle": "123456789/546429",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

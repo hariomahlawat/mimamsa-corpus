@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s75",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "75",
+  "heading": "Certified copies of public documents.",
+  "chapter": null,
+  "order": 75,
+  "text": "Every public officer having the custody of a public document, which any person has a right to inspect, shall give that person on demand a copy of it on payment of the legal fees therefor, together with a certificate written at the foot of such copy that it is a true copy of such document or part thereof, as the case may be, and such certificate shall be dated and subscribed by such officer with his name and his official title, and shall be sealed, whenever such officer is authorised by law to make use of a seal; and such copies so certified shall be called certified copies\n\nExplanation.--Any officer who, by the ordinary course of official duty, is authorised to deliver such copies, shall be deemed to have the custody of such documents within the meaning of this section.",
+  "page_start": 30,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b1b4fb23-3031-4b52-b961-d994fbe91b0d",
+    "handle": "123456789/545970",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

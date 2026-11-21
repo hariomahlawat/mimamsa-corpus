@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s177",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "177",
+  "heading": "Disposal of effects not converted into money.",
+  "chapter": null,
+  "order": 182,
+  "text": "Where any part of the estate of a deceased officer or [1][sailor] consists of effects, securities or other property not converted into money, the provisions of sub-section (7) of section 171 or clause (ii) of section 172 and section 176 with respect to the payment of the surplus shall, save as may be prescribed, extend to the delivery, transmission or transfer of such effects, securities or property, and the prescribed person shall have the same power of converting the same into money as a legal representative of the deceased.",
+  "page_start": 55,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 53 of 1974",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": "16-12-74",
+      "footnote_text": "Subs. by Act 53 of 1974, s. 2, for \"seaman\" (w.e.f. 16-12-74).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "139adbed-1d7d-471d-951c-409d5ec6b3e6",
+    "handle": "123456789/524318",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

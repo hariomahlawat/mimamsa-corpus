@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s387",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "387",
+  "heading": "Discharge of offender on submission of apology.",
+  "chapter": null,
+  "order": 387,
+  "text": "When any Court has under section 384 adjudged an offender to punishment, or has under section 385 forwarded him to a Magistrate for trial, for refusing or omitting to do anything which he was lawfully required to do or for any intentional insult or interruption, the Court may, in its discretion, discharge the offender or remit the punishment on his submission to the order or requisition of such Court, or on apology being made to its satisfaction.",
+  "page_start": 135,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "5f1a2ba3-d568-4344-8f89-807075e23918",
+    "handle": "123456789/546477",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

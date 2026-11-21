@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s4",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "4",
+  "heading": "Application of Act to certain forces under Central Government.",
+  "chapter": null,
+  "order": 4,
+  "text": "(1) The Central Government may, by notification, apply, with or without modifications, all or any of the provisions of this Act to any force raised and maintained in India under the authority of that Government, [1]* * * and suspend the operation of any other enactment for the time being applicable to the said force.\n\n(2) The provisions of this Act so applied shall have effect in respect of persons belonging to the said force as they have effect in respect of persons subject to this Act holding in the regular Army the same or equivalent rank as the aforesaid persons hold for the time being in the said force.\n\n(3) The provisions of this Act so applied shall also have effect in respect of persons who are employed by or are in the service of or are followers of or accompany any portion of the said force as they have effect in respect of persons subject to this Act under [2][clause (i) of sub-section (1) of section (2)].\n\n(4) While any of the provisions of this Act apply to the said force, the Central Government may, by notification, direct by what authority any jurisdiction, powers or duties incident to the operation of these provisions shall be exercised or performed in respect of the said force.",
+  "page_start": 11,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "2 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "omitted",
+      "by_ref_raw": "Adaptation of Laws (No. 3) Order, 1956",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "The words \"including any force maintained by a Part B State\" omitted by the Adaptation of Laws (No. 3) Order, 1956.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 56 of 1974",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 56 of 1974, s. 3 and the Second Schedule, for \"clause (i) of section 2\".",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "27ec1636-b482-4338-8a0f-d31d8bbb054c",
+    "handle": "123456789/525859",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

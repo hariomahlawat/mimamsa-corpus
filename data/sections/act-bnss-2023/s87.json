@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s87",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "87",
+  "heading": "Claims and objections to attachment.",
+  "chapter": null,
+  "order": 87,
+  "text": "(1) If any claim is preferred to, or objection made to the attachment of, any property attached under section 85, within six months from the date of such attachment, by any person other than the proclaimed person, on the ground that the claimant or objector has an interest in such property, and that such interest is not liable to attachment under section 85, the claim or objection shall be inquired into, and may be allowed or disallowed in whole or in part:\n\nProvided that any claim preferred or objection made within the period allowed by this sub-section may, in the event of the death of the claimant or objector, be continued by his legal representative.\n\n(2) Claims or objections under sub-section (1) may be preferred or made in the Court by which the order of attachment is issued, or, if the claim or objection is in respect of property attached under an order endorsed under sub-section (2) of section 85, in the Court of the Chief Judicial Magistrate of the district in which the attachment is made.\n\n(3) Every such claim or objection shall be inquired into by the Court in which it is preferred or made:\n\nProvided that, if it is preferred or made in the Court of a Chief Judicial Magistrate, he may make it over for disposal to any Magistrate subordinate to him.\n\n(4) Any person whose claim or objection has been disallowed in whole or in part by an order under sub-section (1) may, within a period of one year from the date of such order, institute a suit to establish the right which he claims in respect of the property in dispute; but subject to the result of such suit, if any, the order shall be conclusive.",
+  "page_start": 40,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "85689443-83ad-4d3e-881a-19045c1a0cdb",
+    "handle": "123456789/546197",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

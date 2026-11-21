@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s411",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "411",
+  "heading": "Procedure in case of difference of opinion.",
+  "chapter": null,
+  "order": 411,
+  "text": "Where any such case is heard before a Bench of Judges and such Judges are equally divided in opinion, the case shall be decided in the manner provided by section 433.",
+  "page_start": 142,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6d6fc797-3af4-482f-b4e6-ca33a7862b60",
+    "handle": "123456789/546501",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s10",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "10",
+  "heading": "Commissions and appointments.",
+  "chapter": null,
+  "order": 10,
+  "text": "(1) Officers other than subordinate officers shall be appointed by commission granted by the President.\n\n(2) The grant of the commission shall be notified in the Official Gazette and such notification shall be conclusive proof of the grant of such commission.\n\n(3) Subordinate officers shall be appointed in such manner and shall hold such rank as may be prescribed.",
+  "page_start": 12,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e76913f1-4975-4c72-a22b-a72de6736793",
+    "handle": "123456789/517356",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

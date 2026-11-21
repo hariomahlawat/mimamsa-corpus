@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s5",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "5",
+  "heading": "Commutation of sentence.",
+  "chapter": null,
+  "order": 5,
+  "text": "The appropriate Government may, without the consent of the offender, commute any punishment under this Sanhita to any other punishment in accordance with section 474 of the Bharatiya Nagarik Suraksha Sanhita, 2023.\n\nExplanation.---For the purposes of this section the expression \"appropriate Government\" means, ---\n\n(a) in cases where the sentence is a sentence of death or is for an offence against any law relating to a matter to which the executive power of the Union extends, the Central Government; and\n\n(b) in cases where the sentence (whether of death or not) is for an offence against any law relating to a matter to which the executive power of the State extends, the Government of the State within which the offender is sentenced.",
+  "page_start": 2,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "83298d6f-0a5e-4488-a63b-319f256fc392",
+    "handle": "123456789/545498",
+    "listing_raw_path": "data/raw/indiacode/2023/3f63bdbb2512a509521a6dc9e8e8d97044f569307a1a0c1b10a743ec30873357.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

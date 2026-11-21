@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s170",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "170",
+  "heading": "Arrest to prevent commission of cognizable offences.",
+  "chapter": null,
+  "order": 170,
+  "text": "(1) A police officer knowing of a design to commit any cognizable offence may arrest, without orders from a Magistrate and without a warrant, the person so designing, if it appears to such officer that the commission of the offence cannot be otherwise prevented.\n\n(2) No person arrested under sub-section (1) shall be detained in custody for a period exceeding twenty-four hours from the time of his arrest unless his further detention is required or authorised under any other provisions of this Sanhita or of any other law for the time being in force.",
+  "page_start": 66,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b44fc100-fdd5-474d-8c3f-f5c253a9e5e7",
+    "handle": "123456789/546273",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

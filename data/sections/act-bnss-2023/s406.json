@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s406",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "406",
+  "heading": "Court of Session to send copy of finding and sentence to District Magistrate.",
+  "chapter": null,
+  "order": 406,
+  "text": "In cases tried by the Court of Session or a Chief Judicial Magistrate, the Court or such Magistrate, as the case may be, shall forward a copy of its or his finding and sentence (if any) to the District Magistrate within whose local jurisdiction the trial was held.",
+  "page_start": 142,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "adbb0499-9883-42a8-a05c-7cec2e3e4f24",
+    "handle": "123456789/546496",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s32",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "32",
+  "heading": "Limit of certain deductions.",
+  "chapter": null,
+  "order": 32,
+  "text": "Except when the deductions are made under sub-sections (1), (2) and (4) of section 28 or sub-sections (1) and (2) of section 29, the total deductions from the pay and allowances of an officer or [1][sailor] shall not exceeded in any one month one-half of his pay and allowances for that month.",
+  "page_start": 18,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 53 of 1974",
+      "by_doc_id": null,
+      "effective_date": "1974-12-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 53 of 1974, s. 2, for \"seaman\" (w.e.f. 16-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "5bd83c5b-c1f3-420a-896a-f1c0cb616c6e",
+    "handle": "123456789/517380",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

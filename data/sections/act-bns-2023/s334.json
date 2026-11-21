@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s334",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "334",
+  "heading": "Dishonestly breaking open receptacle containing property.",
+  "chapter": null,
+  "order": 334,
+  "text": "(1) Whoever dishonestly or with intent to commit mischief, breaks open or unfastens any closed receptacle which contains or which he believes to contain property, shall be punished with imprisonment of either description for a term which may extend to two years, or with fine, or with both.\n\n(2) Whoever, being entrusted with any closed receptacle which contains or which he believes to contain property, without having authority to open the same, dishonestly, or with intent to commit mischief, breaks open or unfastens that receptacle, shall be punished with imprisonment of either description for a term which may extend to three years, or with fine, or with both.",
+  "page_start": 99,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "984de882-3a03-4429-9071-f0e74e43810b",
+    "handle": "123456789/545823",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

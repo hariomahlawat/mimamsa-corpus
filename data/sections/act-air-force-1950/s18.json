@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s18",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "18",
+  "heading": "Tenure of service under the Act.",
+  "chapter": null,
+  "order": 18,
+  "text": "Every person subject to this Act shall hold office during the pleasure of the President.",
+  "page_start": 14,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "85da082b-4967-476f-8129-8dc227b45d36",
+    "handle": "123456789/525826",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

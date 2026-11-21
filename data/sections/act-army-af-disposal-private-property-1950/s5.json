@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-af-disposal-private-property-1950#s5",
+  "parent_doc_id": "act-army-af-disposal-private-property-1950",
+  "unit": "section",
+  "number": "5",
+  "heading": "Decision of questions as to regimental and other debts in camp or quarters.",
+  "chapter": null,
+  "order": 5,
+  "text": "If in any case a doubt or difference arises as to what are the regimental and other debts in camp or quarters of a deceased or deserter or as to the amount payable in respect thereof, the decision of the prescribed person shall be final and shall be binding on all persons for all purposes.",
+  "page_start": 4,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f9d1d65c-ccd8-41d8-811f-f44bb606e5ff",
+    "handle": "123456789/527755",
+    "listing_raw_path": "data/raw/indiacode/1950/2dce3a9525b06939bf0a27ebc223106bd030c88a8fa3f2aa0c722862fe2924b3.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

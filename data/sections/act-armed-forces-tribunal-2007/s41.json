@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s41",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "41",
+  "heading": "Power of Central Government to make rules.",
+  "chapter": null,
+  "order": 42,
+  "text": "(1) The Central Government may, by notification, make rules for the purposes of carrying out the provisions of this Act.\n\n(2) Without prejudice to the generality of the foregoing power, such rules may provide for all or any of the following matters, namely:--\n\n(a) the case or cases which shall be decided by a Bench composed of more than two Members under clause (c) of sub-section (3) of section 5;\n\n(b) the procedure under sub-section (3) of section 9 for the investigation of misbehaviour or incapacity of Chairperson or other Member;\n\n(c) the salaries and allowances payable to, and the other terms and conditions of service of the Chairperson and other Members under section 10;\n\n(d) the financial and administrative powers which the Chairperson may exercise over the Benches of the Tribunal under section 12;\n\n(e) the salaries and allowances payable to, and other terms and conditions of service of the officers and other employees of the Tribunal under sub-section (2) of section 13;\n\n(f) the form in which an application may be made under sub-section (2) of section 14, the documents and other evidence by which such application shall be accompanied and the fee payable in respect of the filing of such application or for the service of execution of processes;\n\n(g) the other matter which may be prescribed under clause (i) of sub-section (4) of section 14;\n\n(h) the form and manner in which an appeal may be filed, the fee payable thereon and the time within which such appeal may be filed under sub-section (2) of section 15;\n\n(i) the rules subject to which the Tribunal shall have power to regulate its own procedure under sub-section (1) of section 23;\n\n(j) competent authority who may authorise legal practitioners or law officers to act as counsel under sub-section (2) of section 25;\n\n(k) any other matter which may be prescribed or in respect of which rules are required to be made by the Central Government.",
+  "page_start": 13,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "4ecc0293-8c9e-4ed9-8bab-af893dd9e53b",
+    "handle": "123456789/527678",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

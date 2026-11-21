@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s10",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "10",
+  "heading": "Punishment of person guilty of one of several offences, judgment stating that it is doubtful of which.",
+  "chapter": null,
+  "order": 10,
+  "text": "In all cases in which judgment is given that a person is guilty of one of several offences specified in the judgment, but that it is doubtful of which of these offences he is guilty, the offender shall be punished for the offence for which the lowest punishment is provided if the same punishment is not provided for all.",
+  "page_start": 3,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "9c3d65d2-b74d-4af9-946a-f75839cbc1e0",
+    "handle": "123456789/545848",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

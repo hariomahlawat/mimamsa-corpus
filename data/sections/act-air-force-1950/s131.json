@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s131",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "131",
+  "heading": "Voting by members",
+  "chapter": null,
+  "order": 131,
+  "text": "(1) Subject to the provisions of sub-sections (2) and (3), every decision of a court-martial shall be passed by an absolute majority of votes; and where there is an equality of votes on either the finding or the sentence, the decision shall be in favour of the accused.\n\n(2) No sentence of death shall be passed by a general court-martial without the concurrence of at least two-thirds of the members of the court.\n\n(3) No sentence of death shall be passed by a summary general court-martial without the concurrence of all the members.\n\n(4) In matters other than a challenge or the finding or sentence, the presiding officer shall have a casting vote.",
+  "page_start": 40,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "db11be3d-9220-4a7a-8f4f-0d9eb58699df",
+    "handle": "123456789/523742",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

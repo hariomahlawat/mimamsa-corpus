@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s92",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "92",
+  "heading": "Presumption as to documents thirty years old.",
+  "chapter": null,
+  "order": 92,
+  "text": "Where any document, purporting or proved to be thirty years old, is produced from any custody which the Court in the particular case considers proper, the Court may presume that the signature and every other part of such document, which purports to be in the handwriting of any particular person, is in that person’s handwriting, and, in the case of a document executed or attested, that it was duly executed and attested by the persons by whom it purports to be executed and attested.\n\nExplanation.--The Explanation to section 80 shall also apply to this section.\n\nIllustrations.\n\n(a) A has been in possession of landed property for a long time. He produces from his custody deeds relating to the land showing his titles to it. The custody shall be proper.\n\n(b) A produces deeds relating to landed property of which he is the mortgagee. The mortgagor is in possession. The custody shall be proper.\n\n(c) A, a connection of B, produces deeds relating to lands in B's possession, which were deposited with him by B for safe custody. The custody shall be proper.",
+  "page_start": 33,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "4b07ab27-08b4-4501-9683-6e1b70e6a31e",
+    "handle": "123456789/545988",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s25",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "25",
+  "heading": "Sentence in cases of conviction of several offences at one trial.",
+  "chapter": null,
+  "order": 25,
+  "text": "(1) When a person is convicted at one trial of two or more offences, the Court may, subject to the provisions of section 9 of the Bharatiya Nyaya Sanhita, 2023, sentence him for such offences, to the several punishments prescribed therefor which such Court is competent to inflict and the Court shall, considering the gravity of offences, order such punishments to run concurrently or consecutively.\n\n(2) In the case of consecutive sentences, it shall not be necessary for the Court by reason only of the aggregate punishment for the several offences being in excess of the punishment which it is competent to inflict on conviction of a single offence, to send the offender for trial before a higher Court:\n\nProvided that—\n\n(a) in no case shall such person be sentenced to imprisonment for a longer period than twenty years;\n\n(b) the aggregate punishment shall not exceed twice the amount of punishment which the Court is competent to inflict for a single offence.\n\n(3) For the purpose of appeal by a convicted person, the aggregate of the consecutive sentences passed against him under this section shall be deemed to be a single sentence.",
+  "page_start": 25,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "296a940b-6b0f-4d7e-be11-d4285e02588e",
+    "handle": "123456789/546133",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

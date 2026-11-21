@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s17",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "17",
+  "heading": "Mode of attestation.",
+  "chapter": null,
+  "order": 17,
+  "text": "(1) When a person who is to be attested is reported fit for duty, or has completed the prescribed period of probation, an oath or affirmation shall be administered to him in the prescribed form by his commanding officer in front of his corps or such portion thereof or such members of his department as may be present, or by any other prescribed person.\n\n(2) The form of oath or affirmation prescribed under this section shall contain a promise that the person to be attested will bear true allegiance to the Constitution of India as by law established, and that he will serve in the regular Army and go wherever he is ordered by land, sea or air, and that he will obey all commands of any officer set over him, even to the peril of his life.\n\n(3) The fact of an enrolled person having taken the oath or affirmation directed by this section to be taken shall be entered on his enrolment paper, and authenticated by the signature of the officer administering the oath or affirmation.",
+  "page_start": 13,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6da0ddca-9747-4f73-8ffc-516f073a8c02",
+    "handle": "123456789/525874",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

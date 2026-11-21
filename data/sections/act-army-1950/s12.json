@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s12",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "12",
+  "heading": "Ineligibility of females for enrolment or employment.",
+  "chapter": null,
+  "order": 12,
+  "text": "No female shall be eligible for enrolment or employment in the regular Army, except in such corps, department, branch or other body forming part of, or attached to any portion of, the regular Army as the Central Government may, by notification in the Official Gazette, specify in this behalf:\n\nProvided that nothing contained in this section shall affect the provisions of any law for the time being in force providing for the raising and maintenance of any service auxiliary to the regular Army ,or any branch thereof in which females are eligible for enrolment or employment.",
+  "page_start": 13,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3b3208f7-68d1-483d-a93c-3754be714e54",
+    "handle": "123456789/525868",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

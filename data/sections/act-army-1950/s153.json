@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s153",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "153",
+  "heading": "Finding and sentence not valid, unless confirmed.",
+  "chapter": null,
+  "order": 153,
+  "text": "No finding or sentence of a general, district or summary general, court-martial shall be valid except so far as it may be confirmed as provided by this Act.",
+  "page_start": 41,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2c0db9bc-b58a-436c-a3f1-2e011f42f254",
+    "handle": "123456789/526023",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

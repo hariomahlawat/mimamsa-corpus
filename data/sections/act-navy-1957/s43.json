@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s43",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "43",
+  "heading": "Punishment for mutiny.",
+  "chapter": null,
+  "order": 43,
+  "text": "Every person subject to naval law, who,--\n\n(a) joins in a mutiny; or\n\n(b) begins, incites, causes or conspires with any other persons to cause, a mutiny; or\n\n(c) endeavours to incite any person to join in a mutiny or to commit an act of mutiny; or\n\n(d) endeavours to seduce any person in the regular Army, Navy or Air Force from his allegiance to the Constitution or loyalty to the State or duty to his superior officers or uses any means to compel or induce any such person to abstain from acting against the enemy or discourage such person from acting against the enemy; or\n\n(e) does not use his utmost exertions to suppress [1][or prevent] a mutiny; or\n\n(f) wilfully conceals any traitorous or mutinous practice or design or any traitorous words spoken against the State; or\n\n(g) knowing or having reason to believe in the existence of any mutiny or of any intention to mutiny does not without delay give information thereof to the commanding officer of his ship or other superior officer; or\n\n(h) utters words of sedition or mutiny;\n\nshall be punished with death or such other punishment as is hereinafter mentioned",
+  "page_start": 20,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 53 of 1974",
+      "by_doc_id": null,
+      "effective_date": "1974-12-16",
+      "effective_date_raw": null,
+      "footnote_text": "Ins by Act 53 of 1974, s. 10 (w.e.f. 16-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c383cb1f-318f-4c50-931f-08c5bc5ac227",
+    "handle": "123456789/517392",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

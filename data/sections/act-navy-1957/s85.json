@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s85",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "85",
+  "heading": "Procedure and conditions of naval custody.",
+  "chapter": null,
+  "order": 89,
+  "text": "(1) No person subject to naval law who is arrested under this Act shall be detained in naval custody without being informed, as soon as may be, of the grounds for such arrest.\n\n(2) Every person subject to naval law who is arrested and detained in naval custody shall be produced before his commanding officer or other officer prescribed in this behalf within a period of forty-eight hours of such arrest excluding the time necessary for the journey from the place of arrest to such commanding or other officer and no such person shall be detained in custody beyond the said period without the authority of such commanding or other officer.",
+  "page_start": 31,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0077d769-af29-4d5a-8784-a211cb05f655",
+    "handle": "123456789/523951",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

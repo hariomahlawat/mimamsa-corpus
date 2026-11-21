@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s193a",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "193A",
+  "heading": "Rules and regulations to be laid before Parliament.",
+  "chapter": null,
+  "order": 195,
+  "text": "[1][193A. Rules and regulations to be laid before Parliament.--Every rule and every regulation made by the Central Government under this Act shall be laid, as soon as may be after it is made, before each House of Parliament while it is in session, for a total period of thirty days which may be comprised in one session or in two or more successive sessions, and if, before the expiry of the session immediately following the session, or the successive sessions aforesaid, both Houses agree in making any modification in the rule or regulation should not be made the rule or regulation or shall thereafter have effect only in such modified form or be of no effect, as the case may be; so, however that any such modification or annulment shall be without prejudice to the validity of anything previously done under that rule or regulation.]",
+  "page_start": 47,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 20 of 1983",
+      "by_doc_id": null,
+      "effective_date": "1984-03-15",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 20 of 1983, s. 2 and the Schedule (w.e.f. 15-3-1984).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "077ffb76-8252-477a-b71c-639339e2a541",
+    "handle": "123456789/526069",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s321",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "321",
+  "heading": "Execution of commissions.",
+  "chapter": null,
+  "order": 321,
+  "text": "Upon receipt of the commission, the Chief Judicial Magistrate or such Magistrate as he may appoint in this behalf, shall summon the witness before him or proceed to the place where the witness is, and shall take down his evidence in the same manner, and may for this purpose exercise the same powers, as in trials of warrant-cases under this Sanhita.",
+  "page_start": 111,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f694281f-066a-49ff-95b3-7cf57f6a3a3a",
+    "handle": "123456789/546412",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

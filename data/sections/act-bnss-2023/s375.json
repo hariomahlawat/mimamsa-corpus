@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s375",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "375",
+  "heading": "Power of State Government to empower officer in charge to discharge.",
+  "chapter": null,
+  "order": 375,
+  "text": "The State Government may empower the officer in charge of the jail in which a person is confined under the provisions of section 369 or section 374 to discharge all or any of the functions of the Inspector-General of Prisons under section 376 or section 377.",
+  "page_start": 132,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "4eb62ba2-f6ce-48e1-a7b3-d478cdabaa9d",
+    "handle": "123456789/546465",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

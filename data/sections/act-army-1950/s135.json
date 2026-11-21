@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s135",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "135",
+  "heading": "Summoning witnesses.",
+  "chapter": null,
+  "order": 135,
+  "text": "(1) The convening officer, the presiding officer of a court-martial, [1][or courts of inquiry] the judge advocate or the commanding officer of the accused person may, by summons under his hand, require the attendance, at a time and place to be mentioned in the summons, of any person either to give evidence or to produce any document or other thing.\n\n(2) In the case of a witness amenable to military authority, the summons shall be sent to his commanding officer, and such officer shall serve it upon him accordingly.\n\n(3) In the case of any other witness, the summons shall be sent to the magistrate within whose jurisdiction he may be or reside, and such magistrate shall give effect to the summons as if the witness were required in the court of such magistrate.\n\n(4) When a witness is required to produce any particular document or other thing in his possession or power, the summons shall describe it with reasonable precision.",
+  "page_start": 36,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 37 of 1992",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 37 of 1992, s.12.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "70721633-872a-4d62-a854-35d5bc851cce",
+    "handle": "123456789/526003",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

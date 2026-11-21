@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s127",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "127",
+  "heading": "Judges and Magistrates.",
+  "chapter": null,
+  "order": 127,
+  "text": "No Judge or Magistrate shall, except upon the special order of some Court to which he is subordinate, be compelled to answer any question as to his own conduct in Court as such Judge or Magistrate, or as to anything which came to his knowledge in Court as such Judge or Magistrate; but he may be examined as to other matters which occurred in his presence whilst he was so acting.\n\nIllustrations.\n\n(a) A, on his trial before the Court of Session, says that a deposition was improperly taken by B, the Magistrate. B cannot be compelled to answer questions as to this, except upon the special order of a superior Court.\n\n(b) A is accused before the Court of Session of having given false evidence before B, a Magistrate. B cannot be asked what A said, except upon the special order of the superior Court\n\n(c) A is accused before the Court of Session of attempting to murder a police officer whilst on his trial before B, a Sessions Judge. B may be examined as to what occurred.",
+  "page_start": 41,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "624b027e-f37c-4d70-8ce0-941d3bfbd13f",
+    "handle": "123456789/546024",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

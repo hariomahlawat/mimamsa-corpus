@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s26",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "26",
+  "heading": "Condition as to making of interim order.",
+  "chapter": null,
+  "order": 27,
+  "text": "(1) Notwithstanding anything contained in any other provisions of this Act or in any other law for the time being in force, no interim order (whether by way of injunction or stay or in any other manner) shall be made on an application or appeal, or in any proceeding relating thereto, unless--\n\n(a) copies of such application or appeal, as the case may be, and all documents in support of the plea for such interim order are furnished to the party against whom such application or appeal, as the case may be, is made or proposed to be made; and\n\n(b) opportunity of being heard is given to the other party in the matter:\n\nProvided that the Tribunal may dispense with the requirements of clauses (a) and (b) and make an interim order as an exceptional measure if it is satisfied, for reasons to be recorded in writing, that it is necessary so to do for preventing any loss being caused to the applicant or to the appellant, as the case may be.\n\n(2) Where any party against whom an interim order, whether by way of injunction or stay or in any other manner, is made on an application or appeal or in any proceeding relating thereto under sub-section (1), without--\n\n(a) furnishing to such party copies of such application or appeal, as the case may be, and all documents in support of the plea for such interim order; and\n\n(b) giving such party an opportunity of being heard, and making an application to the Tribunal for the vacation of such order and furnishing a copy of such application or appeal, as the case may be, to the party in whose favour such order has been made or the counsel of such party,\n\nthe Tribunal shall dispose of the application within a period of fourteen days from the date on which it is received or from the date on which the copy of such application is so furnished, whichever is later, or where the Tribunal is closed on the last day of that period, before the expiry of the next working day; and if the application is not so disposed of, the interim order shall, on the expiry of that period, or, as the case may be, the expiry of the said next working day, stand vacated.",
+  "page_start": 10,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ee78ae00-6309-4ddb-92e2-743453773fff",
+    "handle": "123456789/527514",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

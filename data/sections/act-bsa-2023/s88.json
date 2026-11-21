@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s88",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "88",
+  "heading": "Presumption as to certified copies of foreign judicial records.",
+  "chapter": null,
+  "order": 88,
+  "text": "(1) The Court may presume that any document purporting to be a certified copy of any judicial record of any country beyond India is genuine and accurate, if the document purports to be certified in any manner which is certified by any representative of the Central Government in or for such country to be the manner commonly in use in that country for the certification of copies of judicial records.\n\n(2) An officer who, with respect to any territory or place outside India is a Political Agent therefor, as defined in clause (43) of section 3 of the General Clauses Act, 1897 (10 of 1897), shall, for the purposes of this section, be deemed to be a representative of the Central Government in and for the country comprising that territory or place.",
+  "page_start": 32,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "62bca3bc-80c9-4c3c-9e36-97ed43dc5a31",
+    "handle": "123456789/545984",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

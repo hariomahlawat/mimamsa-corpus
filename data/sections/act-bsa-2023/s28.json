@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s28",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "28",
+  "heading": "Entries in books of account when relevant.",
+  "chapter": null,
+  "order": 28,
+  "text": "Entries in the books of account, including those maintained in an electronic form, regularly kept in the course of business are relevant whenever they refer to a matter into which the Court has to inquire, but such statements shall not alone be sufficient evidence to charge any person with liability.\n\nIllustration\n\nA sues B for one thousand rupees, and shows entries in his account books showing B to be indebted to him to this amount. The entries are relevant, but are not sufficient, without other evidence, to prove the debt.",
+  "page_start": 20,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3035e5d9-d23c-4d81-b0f4-baf2e8ef833b",
+    "handle": "123456789/545921",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s127",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "127",
+  "heading": "Finding lesser offence proved on charge of greater offence",
+  "chapter": null,
+  "order": 131,
+  "text": "(1) When a person is charged with an offence consisting of several particulars, a combination of some only of which constitutes a complete minor offence and such combination is proved, but the remaining particulars are not proved, he may be convicted of the minor offence although he was not charged with it.\n\n(2) When a person is charged with an offence and facts are proved which reduce it to a minor offence, he may be convicted of the minor offence although he was not charged with it.\n\n(3) When a person is charged with an offence, he may be convicted of an attempt to commit such an offence, although the attempt is not separately charged.",
+  "page_start": 41,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "798d80b8-eab1-4283-b8c8-7efc11f9d9b7",
+    "handle": "123456789/524007",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

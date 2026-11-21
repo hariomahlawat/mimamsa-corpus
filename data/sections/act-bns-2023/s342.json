@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s342",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "342",
+  "heading": "Counterfeiting device or mark used for authenticating documents described in section 338, or possessing counterfeit marked material.",
+  "chapter": null,
+  "order": 342,
+  "text": "(1) Whoever counterfeits upon, or in the substance of, any material, any device or mark used for the purpose of authenticating any document described in section 338, intending that such device or mark shall be used for the purpose of giving the appearance of authenticity to any document then forged or thereafter to be forged on such material, or who, with such intent, has in his possession any material upon or in the substance of which any such device or mark has been counterfeited, shall be punished with imprisonment for life, or with imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine.\n\n(2) Whoever counterfeits upon, or in the substance of, any material, any device or mark used for the purpose of authenticating any document or electronic record other than the documents described in section 338, intending that such device or mark shall be used for the purpose of giving the appearance of authenticity to any document then forged or thereafter to be forged on such material, or who with such intent, has in his possession any material upon or in the substance of which any such device or mark has been counterfeited, shall be punished with imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine.",
+  "page_start": 102,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e889cc9d-541f-4e5f-9132-764918ce46a8",
+    "handle": "123456789/545893",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

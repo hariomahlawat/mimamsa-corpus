@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s195",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "195",
+  "heading": "Power to summon persons.",
+  "chapter": null,
+  "order": 195,
+  "text": "(1) A police officer proceeding under section 194 may, by order in writing, summon two or more persons as aforesaid for the purpose of the said investigation, and any other person who appears to be acquainted with the facts of the case and every person so summoned shall be bound to attend and to answer truly all questions other than questions the answers to which would have a tendency to expose him to a criminal charge or to a penalty or forfeiture:\n\nProvided that no male person under the age of fifteen years or above the age of sixty years or a woman or a mentally or physically disabled person or a person with acute illness shall be required to attend at any place other than the place where such person resides:\n\nProvided further that if such person is willing to attend and answer at the police station, such person may be permitted so to do.\n\n(2) If the facts do not disclose a cognizable offence to which section 190 applies, such persons shall not be required by the police officer to attend a Magistrate's Court.",
+  "page_start": 78,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "551f5b4c-f871-43e4-93e1-e644f11c864f",
+    "handle": "123456789/546295",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

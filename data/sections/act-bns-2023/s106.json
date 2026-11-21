@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s106",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "106",
+  "heading": "Causing death by negligence.",
+  "chapter": null,
+  "order": 106,
+  "text": "(1) Whoever causes death of any person by doing any rash or negligent act not amounting to culpable homicide, shall be punished with imprisonment of either description for a term which may extend to five years, and shall also be liable to fine; and if such act is done by a registered medical practitioner while performing medical procedure, he shall be punished with imprisonment of either description for a term which may extend to two years, and shall also be liable to fine.\n\nExplanation.—For the purposes of this sub-section, “registered medical practitioner” means a medical practitioner who possesses any medical qualification recognised under the National Medical Commission Act, 2019 (30 of 2019) and whose name has been entered in the National Medical Register or a State Medical Register under that Act.\n\n(2) Whoever causes death of any person by rash and negligent driving of vehicle not amounting to culpable homicide, and escapes without reporting it to a police officer or a Magistrate soon after the incident, shall be punished with imprisonment of either description of a term which may extend to ten years, and shall also be liable to fine.",
+  "page_start": 46,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0af20380-f746-4615-a483-dc5a092856d9",
+    "handle": "123456789/545604",
+    "listing_raw_path": "data/raw/indiacode/2023/3f63bdbb2512a509521a6dc9e8e8d97044f569307a1a0c1b10a743ec30873357.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

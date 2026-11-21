@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s93",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "93",
+  "heading": "Exposure and abandonment of child under twelve years of age, by parent or person having care of it.",
+  "chapter": null,
+  "order": 93,
+  "text": "Whoever being the father or mother of a child under the age of twelve years, or having the care of such child, shall expose or leave such child in any place with the intention of wholly abandoning such child, shall be punished with imprisonment of either description for a term which may extend to seven years, or with fine, or with both.\n\nExplanation.—This section is not intended to prevent the trial of the offender for murder or culpable homicide, as the case may be, if the child die in consequence of the exposure.",
+  "page_start": 39,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d13ee2ab-5d11-4c8c-ab40-45a665723075",
+    "handle": "123456789/545853",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

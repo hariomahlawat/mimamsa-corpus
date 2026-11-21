@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s116",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "116",
+  "heading": "Identifying unlawfully acquired property.",
+  "chapter": null,
+  "order": 116,
+  "text": "(1) The Court shall, under sub-section (1), or on receipt of a letter of request under sub-section (3) of section 115, direct any police officer not below the rank of Sub-Inspector of Police to take all steps necessary for tracing and identifying such property.\n\n(2) The steps referred to in sub-section (1) may include any inquiry, investigation or survey in respect of any person, place, property, assets, documents, books of account in any bank or public financial institutions or any other relevant matters.\n\n(3) Any inquiry, investigation or survey referred to in sub-section (2) shall be carried out by an officer mentioned in sub-section (1) in accordance with such directions issued by the said Court in this behalf.",
+  "page_start": 49,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c39f1fbe-3a6a-4ed2-a242-e0798bd245a1",
+    "handle": "123456789/546223",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

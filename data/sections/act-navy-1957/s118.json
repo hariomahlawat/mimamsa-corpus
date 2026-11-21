@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s118",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "118",
+  "heading": "Drawing up of the finding",
+  "chapter": null,
+  "order": 122,
+  "text": "(1) The trial judge advocate shall then draw up the finding as announced by the court.\n\n(2) The finding so drawn up shall be signed by all the members of the court by way of attestation notwithstanding any difference of opinion there may have been among the members and shall be countersigned by the trial judge advocate.\n\n(3) Where the finding on any charge is one of not guilty the court shall acquit the accused of that charge. (4) If the accused is acquitted of all the charges, the court shall, after signing the findings as provided in sub-section (2), be dissolved.\n\n(5) Neither the court nor the trial judge advocate shall announce in open court whether the finding was unanimous or not; but the president shall make a record of the division of voting on each finding without disclosing the vote or opinion of any particular member of the court-martial and such record shall be communicated to the trial judge advocate for transmission to the Judge Advocate-General of the Navy.",
+  "page_start": 39,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "5467e6ae-d6b2-4e62-b8d6-62918b979f8c",
+    "handle": "123456789/523989",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

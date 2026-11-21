@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s325",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "325",
+  "heading": "Execution of foreign commissions.",
+  "chapter": null,
+  "order": 325,
+  "text": "(1) The provisions of section 321 and so much of section 322 and section 323 as relate to the execution of a commission and its return shall apply in respect of commissions issued by any of the Courts, Judges or Magistrates hereinafter mentioned as they apply to commissions issued under section 319.\n\n(2) The Courts, Judges and Magistrates referred to in sub-section (1) are---\n\n(a) any such Court, Judge or Magistrate exercising jurisdiction within an area in India to which this Sanhita does not extend, as the Central Government may, by notification, specify in this behalf;\n\n(b) any Court, Judge or Magistrate exercising jurisdiction in any such country or place outside India, as the Central Government may, by notification, specify in this behalf, and having authority, under the law in force in that country or place, to issue commissions for the examination of witnesses in relation to criminal matters.",
+  "page_start": 112,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d2d453c8-e0d6-4ce3-96ef-79d3dab965c2",
+    "handle": "123456789/546416",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

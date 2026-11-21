@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s111",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "111",
+  "heading": "Plea of no case and defence of accused",
+  "chapter": null,
+  "order": 115,
+  "text": "(1) When the examination of the witnesses for the prosecution is concluded, the accused shall be called on for his defence.\n\n(2) Before entering on his defence, the accused may raise a plea of no case to answer.\n\n(3) If such a plea is raided, the court will decide the plea after hearing the accused and the prosecutor and the advice of the trial judge advocate.\n\n(4) If the court accepts the plea, the accused shall be acquitted on the charge or charges in respect whereof the plea has been accepted.\n\n(5) If the court overrules the plea, the accused shall be called upon to enter on his defence.\n\n(6) The trial judge advocate shall then inform the accused that he may give evidence as a witness on his own behalf should he desire to do so and should he make a request in writing to do so, but that he will thereby render himself liable to cross-examination.\n\n(7) If the accused does not apply to give evidence, he may make a statement as to the facts of the case, and if he has no defence witnesses to examine as to facts, the prosecutor may sum up his case and the accused shall be entitled to reply.\n\n(8) If the, accused or any one of the several accused applies to give evidence and there are no other witnesses in the case for the defence, other than witnesses as to character, then the evidence of such accused shall be recorded and if the accused so desires the witnesses as to character shall be examined and the prosecutor shall then sum up his case and the accused may reply.\n\n(9) If the accused or any one of the accused adduces any oral evidence as to facts other than his own evidence, if any, the accused may then sum up his case on the conclusion of that evidence and the prosecutor shall be entitled to reply.",
+  "page_start": 38,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a2869a5b-7161-4b53-b205-9bd3c737e45b",
+    "handle": "123456789/523979",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s36",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "36",
+  "heading": "Offences punishable more severely on active service than at other times.",
+  "chapter": null,
+  "order": 36,
+  "text": "Any person subject to this Act who commits any of the following offences, that is to say,--\n\n(a) forces a safeguard, or forces or uses criminal force to a sentry; or\n\n(b) breaks into any house or other place in search of plunder; or\n\n(c) being a sentry sleeps upon his post, or is intoxicated; or\n\n(d) without orders from his superior officer leaves his guard, piquet, patrol or post; or\n\n(e) intentionally or through neglect occasions a false alarm in camp or quarters; or spreads reports calculated to create unnecessary alarm or despondency; or\n\n(f) makes known the parole, watchword or countersign to any person not entitled to receive it; or knowingly gives a parole, watchword or countersign different from what he received; or\n\n(g) without due authority alters or interferes with any air signal;\n\nshall, on conviction by court-martial,\n\nif he commits any such offence when on active service, be liable to suffer imprisonment for a term which may extend to fourteen years or such less punishment as is in this Act mentioned; and\n\nif he commits any such offence when not on active service, be liable to suffer imprisonment for a term which may extend to seven years or such less punishment as is in this Act mentioned.",
+  "page_start": 19,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "cb5c81f2-ba04-4ef4-8e05-321cef29377f",
+    "handle": "123456789/525993",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

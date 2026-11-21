@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s193",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "193",
+  "heading": "Definition of British officer.",
+  "chapter": null,
+  "order": 194,
+  "text": "(1) In this Chapter \"British officer\" means a person of nonIndian domicile holding a commission in His Majesty's Air Force and serving in the Air Force.\n\n(2) The expression \"superior officer\" in this Act shall be deemed to include a British officer.",
+  "page_start": 54,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "32ecfc0b-4260-4334-a74d-b67b54f2f778",
+    "handle": "123456789/523805",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

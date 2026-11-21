@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s477",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "477",
+  "heading": "State Government to act after concurrence with Central Government in certain cases.",
+  "chapter": null,
+  "order": 477,
+  "text": "(1) The powers conferred by sections 473 and 474 upon the State Government to remit or commute a sentence, in any case where the sentence is for an offence---\n\n(a) which was investigated by any agency empowered to make investigation into an offence under any Central Act other than this Sanhita; or\n\n(b) which involved the misappropriation or destruction of, or damage to, any property belonging to the Central Government; or\n\n(c) which was committed by a person in the service of the Central Government while acting or purporting to act in the discharge of his official duty,\n\nshall not be exercised by the State Government except after concurrence with the Central Government.\n\n(2) No order of suspension, remission or commutation of sentences passed by the State Government in relation to a person, who has been convicted of offences, some of which relate to matters to which the executive power of the Union extends, and who has been sentenced to separate terms of imprisonment which are to run concurrently, shall have effect unless an order for the suspension, remission or commutation, as the case may be, of such sentences has also been made by the Central Government in relation to the offences committed by such person with regard to matters to which the executive power of the Union extends.",
+  "page_start": 158,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b0bb3bb0-3e4f-410d-888e-b101fcf6f8dc",
+    "handle": "123456789/546562",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

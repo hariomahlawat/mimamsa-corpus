@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s21",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "21",
+  "heading": "Application not to be admitted unless other remedies exhausted.",
+  "chapter": null,
+  "order": 22,
+  "text": "(1) The Tribunal shall not ordinarily admit an application unless it is satisfied that the applicant had availed of the remedies available to him under the Army Act, 1950 (46 of 1950) or the Navy Act, 1957 (62 of 1957) or the Air Force Act, 1950 (45 of 1950), as the case may be, and respective rules and regulations made thereunder.\n\n(2) For the purposes of sub-section (1), a person shall be deemed to have availed of all the remedies available to him under the Army Act, 1950 (46 of 1950) or the Navy Act, 1957 (62 of 1957) or the Air Force Act, 1950 (45 of 1950), and respective rules and regulations--\n\n(a) if a final order has been made by the Central Government or other authority or officer or other person competent to pass such order under the said Acts, rules and regulations, rejecting any petition preferred or representation made by such person;\n\n(b) where no final order has been made by the Central Government or other authority or officer or other person competent to pass such order with regard to the petition preferred or representation made by such person, if a period of six months from the date on which such petition was preferred or representation was made has expired.",
+  "page_start": 9,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b41fabf6-7a71-4be4-b15b-d66088392f1e",
+    "handle": "123456789/527459",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

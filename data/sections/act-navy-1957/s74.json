@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s74",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "74",
+  "heading": "Offences against good order and naval discipline",
+  "chapter": null,
+  "order": 78,
+  "text": "Every person subject to naval law who is guilty of an act, disorder, or neglect to the prejudice of good order and naval discipline, not hereinbefore specified, shall be punished with imprisonment for a term which may extend to three years or such other punishment as is hereinafter mentioned.",
+  "page_start": 26,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "57091233-b476-467e-82be-6ed0852ec65a",
+    "handle": "123456789/523939",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

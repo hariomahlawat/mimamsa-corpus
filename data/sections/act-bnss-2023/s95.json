@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s95",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "95",
+  "heading": "Procedure as to letters.",
+  "chapter": null,
+  "order": 95,
+  "text": "(1) If any document, parcel or thing in the custody of a postal authority is, in the opinion of the District Magistrate, Chief Judicial Magistrate, Court of Session or High Court wanted for the purpose of any investigation, inquiry, trial or other proceeding under this Sanhita, such Magistrate or Court may require the postal authority to deliver the document, parcel or thing to such person as the Magistrate or Court directs.\n\n(2) If any such document, parcel or thing is, in the opinion of any other Magistrate, whether Executive or Judicial, or of any Commissioner of Police or District Superintendent of Police, wanted for any such purpose, he may require the postal authority to cause search to be made for and to detain such document, parcel or thing pending the order of a District Magistrate, Chief Judicial Magistrate or Court under sub-section (1).",
+  "page_start": 42,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "cda2be5c-c4e6-4490-b86a-3efc3bf5265d",
+    "handle": "123456789/546204",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

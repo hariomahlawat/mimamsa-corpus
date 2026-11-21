@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s114",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "114",
+  "heading": "Composition of general court-martial.",
+  "chapter": null,
+  "order": 114,
+  "text": "A general court-martial shall consist of not less than five officers, each of whom has held a commission for not less than three whole years and of whom not less than four are of a rank not below that of flight-lieutenant.",
+  "page_start": 38,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "dfc32c6b-d26b-4584-9579-c5c47c1c25d4",
+    "handle": "123456789/523725",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

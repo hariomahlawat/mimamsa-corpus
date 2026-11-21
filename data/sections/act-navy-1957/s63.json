@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s63",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "63",
+  "heading": "Offences in respect of papers relating to prize.",
+  "chapter": null,
+  "order": 67,
+  "text": "(1) All the papers, charter-parties, bills of lading passports and other writings whatsoever that shall be taken, seized, or found [1][aboard] any ships which are taken as prize shall be duly preserved and the commanding officer of the ship which takes such prize shall send the originals entire and without fraud to the Court of competent jurisdiction or such other Court or commissioners as shall be authorised to determine whether such prize be lawful capture, there to be viewed, made use of and proceeded upon according to law.\n\n(2) Every commanding officer who wilfully fails to send the papers, charter-parties, bills of lading, passports or other writings whatsoever that shall be taken, seized, or found [1][aboard] any ships which are taken as prize to the proper Court or other authority shall be punished with dismissal from the naval service or such other punishment as is hereinafter mentioned and in addition shall forfeit and lose any share of the capture.",
+  "page_start": 25,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 58 of 1960",
+      "by_doc_id": null,
+      "effective_date": "1960-12-26",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 58 of 1960, s. 3 and the Second Schedule, for \"abroad\" (w.e.f. 26-12-1960).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "61d376e3-2512-46a2-b0ce-1795e64ea1d8",
+    "handle": "123456789/523927",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s24",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "24",
+  "heading": "Discharge or dismissal when out of India.",
+  "chapter": null,
+  "order": 24,
+  "text": "(1) Any person enrolled under this Act who is entitled under the conditions of his enrolment to be discharged, or whose discharge is ordered by competent authority, and who, when he is so entitled or ordered to be discharged, is serving out of India, and requests to be sent to India, shall, before being discharged, be sent to India with all convenient speed.\n\n(2) Any person enrolled under this Act who is dismissed from the service and who, when he is so dismissed, is serving out of India, shall be sent to India with all convenient speed.\n\n(3) Where any such person as is mentioned in sub-section (2) is sentenced to dismissal combined with any other punishment, such other punishment or, in the case of a sentence of transportation, imprisonment or detention, a portion of such sentence may be inflicted before he is sent to India.\n\n(4) for the purposes of this section, the word, \"discharge\" shall include release, and the word dismissal shall include removal.",
+  "page_start": 15,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b945640d-562d-4247-94a7-51ceaa20a21c",
+    "handle": "123456789/525861",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

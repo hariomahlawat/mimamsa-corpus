@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s74",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "74",
+  "heading": "Warrants to whom directed.",
+  "chapter": null,
+  "order": 74,
+  "text": "(1) A warrant of arrest shall ordinarily be directed to one or more police officers; but the Court issuing such a warrant may, if its immediate execution is necessary and no police officer is immediately available, direct it to any other person or persons, and such person or persons shall execute the same.\n\n(2) When a warrant is directed to more officers or persons than one, it may be executed by all, or by any one or more of them.",
+  "page_start": 37,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "562b539f-da51-469c-ab5f-ca7f0a7c787e",
+    "handle": "123456789/546184",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

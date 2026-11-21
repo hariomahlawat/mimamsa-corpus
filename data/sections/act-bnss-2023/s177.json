@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s177",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "177",
+  "heading": "Report how submitted.",
+  "chapter": null,
+  "order": 177,
+  "text": "(1) Every report sent to a Magistrate under section 176 shall, if the State Government so directs, be submitted through such superior officer of police as the State Government, by general or special order, appoints in that behalf.\n\n(2) Such superior officer may give such instructions to the officer in charge of the police station as he thinks fit, and shall, after recording such instructions on such report, transmit the same without delay to the Magistrate.",
+  "page_start": 69,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "81848207-76c8-4772-9bc9-6992b37b656f",
+    "handle": "123456789/546278",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

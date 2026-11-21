@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s78",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "78",
+  "heading": "Person arrested to be brought before Court without delay.",
+  "chapter": null,
+  "order": 78,
+  "text": "The police officer or other person executing a warrant of arrest shall (subject to the provisions of section 73 as to security) without unnecessary delay bring the person arrested before the Court before which he is required by law to produce such person:\n\nProvided that such delay shall not, in any case, exceed twenty-four hours exclusive of the time necessary for the journey from the place of arrest to the Magistrate's Court.",
+  "page_start": 37,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "990a6b86-48be-4f86-a145-daba9a7d3249",
+    "handle": "123456789/546188",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

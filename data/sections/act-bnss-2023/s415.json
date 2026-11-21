@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s415",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "415",
+  "heading": "Appeals from convictions.",
+  "chapter": null,
+  "order": 415,
+  "text": "(1) Any person convicted on a trial held by a High Court in its extraordinary original criminal jurisdiction may appeal to the Supreme Court.\n\n(2) Any person convicted on a trial held by a Sessions Judge or an Additional Sessions Judge or on a trial held by any other Court in which a sentence of imprisonment for more than seven years has been passed against him or against any other person convicted at the same trial, may appeal to the High Court.\n\n(3) Save as otherwise provided in sub-section (2), any person,---\n\n(a) convicted on a trial held by Magistrate of the first class, or of the second class; or\n\n(b) sentenced under section 364; or\n\n(c) in respect of whom an order has been made or a sentence has been passed under section 401 by any Magistrate,\n\nmay appeal to the Court of Session.\n\n(4) When an appeal has been filed against a sentence passed under section 64, section 65, section 66, section 67, section 68, section 70 or section 71 of the Bharatiya Nyaya Sanhita, 2023, the appeal shall be disposed of within a period of six months from the date of filing of such appeal.",
+  "page_start": 143,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "468e245d-8088-4b5b-b4c9-55310f38f407",
+    "handle": "123456789/546505",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

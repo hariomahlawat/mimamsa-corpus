@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s99",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "99",
+  "heading": "Provision for dependants of prisoner of war from remitted deductions.",
+  "chapter": null,
+  "order": 99,
+  "text": "In the case of all persons subject to this Act, being prisoners of war, whose pay and allowances have been forfeited under clause (h) of section 91 or clause (a) of section 92, but in respect of whom a remission has been made under section 98, it shall be lawful for proper provision to be made by the prescribed authorities out of such pay and allowances for any dependants of such persons, and any such remission shall in that case be deemed to apply only to the balance thereafter remaining of such pay and allowances.'",
+  "page_start": 35,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "500aff08-dfa3-432f-b731-e006e42644c0",
+    "handle": "123456789/523710",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

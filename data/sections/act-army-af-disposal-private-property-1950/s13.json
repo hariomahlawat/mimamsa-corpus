@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-af-disposal-private-property-1950#s13",
+  "parent_doc_id": "act-army-af-disposal-private-property-1950",
+  "unit": "section",
+  "number": "13",
+  "heading": "Saving of rights of representative.",
+  "chapter": null,
+  "order": 13,
+  "text": "After the commanding officer, or the Committee has paid to the prescribed person the surplus of the property of any deceased under sub-section (7) of section 3 or clause (ii) of section 4, any representative of the deceased or any Administrator General, shall, as regards any property of the deceased not collected by the commanding officer or the Committee, as the case may be, and not forming part of the aforesaid surplus, have the same rights and duties as if sections 3 and 4 had not been enacted.",
+  "page_start": 6,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "55ceeaee-a87b-4d3d-827e-8e4202272fb1",
+    "handle": "123456789/527843",
+    "listing_raw_path": "data/raw/indiacode/1950/2dce3a9525b06939bf0a27ebc223106bd030c88a8fa3f2aa0c722862fe2924b3.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

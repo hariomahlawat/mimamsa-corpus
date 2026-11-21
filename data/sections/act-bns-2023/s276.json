@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s276",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "276",
+  "heading": "Adulteration of drugs.",
+  "chapter": null,
+  "order": 276,
+  "text": "Whoever adulterates any drug or medical preparation in such a manner as to lessen the efficacy or change the operation of such drug or medical preparation, or to make it noxious, intending that it shall be sold or used for, or knowing it to be likely that it will be sold or used for, any medicinal purpose, as if it had not undergone such adulteration, shall be punished with imprisonment of either description for a term which may extend to one year, or with fine which may extend to five thousand rupees, or with both.",
+  "page_start": 82,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e6efc873-8d90-47ca-a5e3-5911eb562a4d",
+    "handle": "123456789/545767",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

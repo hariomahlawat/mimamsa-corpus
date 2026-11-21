@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s163a",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "163A",
+  "heading": "Provision relating to parole.",
+  "chapter": null,
+  "order": 168,
+  "text": "[1][163A. Provision relating to parole.--Where any person is tried under the provisions of this Act, the Central Government or the chief of the Naval Staff or the Flag Officers commanding-in-Chief of the Naval Commands may in the case of conviction either with or without conditions release the person on parole.]",
+  "page_start": 50,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 23 of 2005",
+      "by_doc_id": null,
+      "effective_date": "2005-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 23 of 2005, s. 8 (w.e.f. 23-6-2005).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "002f359e-3b7f-4575-a747-36e41c509883",
+    "handle": "123456789/524138",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

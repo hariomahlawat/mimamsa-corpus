@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s167",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "167",
+  "heading": "Commencement of sentence of transportation or imprisonment.",
+  "chapter": null,
+  "order": 167,
+  "text": "Whenever any person is sentenced by a court-martial under this Act to transportation or imprisonment, the term of his sentence shall, whether it has been revised or not, be reckoned to commence on the day on which the original proceedings were signed by the presiding officer or, in the case of a summary court-martial, by the court.",
+  "page_start": 43,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "5530770e-4fbf-434f-af81-a7134357fb40",
+    "handle": "123456789/526039",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

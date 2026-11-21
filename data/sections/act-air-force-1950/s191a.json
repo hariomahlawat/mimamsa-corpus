@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s191a",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "191A",
+  "heading": "Laying of rules and regulations before Parliament.",
+  "chapter": null,
+  "order": 192,
+  "text": "[1][191A. Laying of rules and regulations before Parliament.--Every rule and every regulation made under this Act shall be laid, as soon as may be after it is made, before each House of Parliament, while it is in session, for a total period of thirty days which may be comprised in one session or in two or more successive sessions, and if, before the expiry of the session immediately following the session or the successive sessions aforesaid, both Houses agree in making any modification in the rule or regulation or both Houses agree that the rule or regulation should not be made, the rule or regulation shall thereafter have effect only in such modified form or be of no effect, as the case may be; so, however, that any such modification or annulment shall be without prejudice to the validity of anything previously done under that rule or regulation.]",
+  "page_start": 54,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 4 of 1986",
+      "by_doc_id": null,
+      "effective_date": "1986-05-15",
+      "effective_date_raw": null,
+      "footnote_text": "Ins by Act 4 of 1986, s. 2 and the Schedule ( w.e.f. 15-5-1986).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "823f34c9-9d46-49fd-8573-b3b176a8a20f",
+    "handle": "123456789/523803",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

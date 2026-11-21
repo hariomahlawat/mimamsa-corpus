@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s407",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "407",
+  "heading": "Sentence of death to be submitted by Court of Session for confirmation.",
+  "chapter": null,
+  "order": 407,
+  "text": "(1) When the Court of Session passes a sentence of death, the proceedings shall forthwith be submitted to the High Court, and the sentence shall not be executed unless it is confirmed by the High Court.\n\n(2) The Court passing the sentence shall commit the convicted person to jail custody under a warrant.",
+  "page_start": 142,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "735b1957-ab7e-4cdb-9ca4-cf15efc3ee52",
+    "handle": "123456789/546497",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

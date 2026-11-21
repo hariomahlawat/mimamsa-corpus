@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s431",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "431",
+  "heading": "Arrest of accused in appeal from acquittal.",
+  "chapter": null,
+  "order": 431,
+  "text": "When an appeal is presented under section 419, the High Court may issue a warrant directing that the accused be arrested and brought before it or any subordinate Court, and the Court before which he is brought may commit him to prison pending the disposal of the appeal or admit him to bail.",
+  "page_start": 148,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1e73c336-e162-4fb7-b616-95b546161eb5",
+    "handle": "123456789/546521",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

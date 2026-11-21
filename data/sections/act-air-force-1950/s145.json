@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s145",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "145",
+  "heading": "Subsequent fitness of lunatic accused for trial.",
+  "chapter": null,
+  "order": 145,
+  "text": "Where any accused person, having been found by reason of unsoundness of mind to be incapable of making his defence, is in custody or under detention under section 144, the officer commanding a unit or detachment within the area of whose command the accused is in custody or is detained, or any other officer prescribed in this behalf, may. --\n\n(a) If such person is in custody under sub-section (4) of section 144, on the report of a medical officer that he is capable of making his defence, or\n\n(b) if such person is detained in a jail under sub-section (5) of section 144, on a certificate of the Inspector-General of Prisons and if such person is detained in a lunatic asylum under the said subsection on a certificate of any two or more of the visitors of such asylum that he is capable of making his defence,\n\ntake steps to have such person tried by the same or another court-martial for the offence with which he was originally charged, or, if the offence is a civil offence, by a criminal court.",
+  "page_start": 45,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d74bcb75-a261-417b-be3f-1826930a12de",
+    "handle": "123456789/523756",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s57",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "57",
+  "heading": "Taking unauthorised goods on board ship",
+  "chapter": null,
+  "order": 61,
+  "text": "Every officer subject to naval law in command of any ship of the Indian Navy who receives on board or permits to be received on board such ship any goods or merchandise whatsoever other than for the sole use of the ship or persons belonging to the ship, except goods and merchandise on board any ship which may be shipwrecked or in imminent danger either on the high seas or in some port, creek, or harbour, for the purpose of preserving them for their proper owners, or except such goods or merchandise as he may at any time be ordered to take or receive on board by order of the Central Government or his superior officer, shall be punished with dismissal from the naval service or such other punishment as is hereinafter mentioned.",
+  "page_start": 24,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2f448394-1964-4b28-98e7-f26c4909cd4c",
+    "handle": "123456789/523920",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

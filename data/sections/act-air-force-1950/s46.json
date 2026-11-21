@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s46",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "46",
+  "heading": "Certain forms of disgraceful conduct.",
+  "chapter": null,
+  "order": 46,
+  "text": "Any person subject to this Act who commits any of the following offences, that is to say,--\n\n(a) is guilty of any disgraceful conduct of a cruel, indecent or unnatural kind; or\n\n(b) malingers, or feigns, or produces disease or infirmity in himself, or intentionally delays his cure or aggravates his disease or infirmity; or\n\n(c) with intent to render himself or any other person unfit for service, voluntarily causes hurt to himself or that person,\n\nshall, on conviction by court-martial, be liable to suffer imprisonment for a term which may extend to seven years or such less punishment as is in this Act mentioned.",
+  "page_start": 22,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "7d972439-55ba-4521-ade8-145f270a2ee5",
+    "handle": "123456789/519359",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

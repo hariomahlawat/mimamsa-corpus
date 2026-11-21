@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s116",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "116",
+  "heading": "Summary court-martial.",
+  "chapter": null,
+  "order": 116,
+  "text": "(1) A summary court-martial may be held by the commanding officer of any corps, department or detachment of the regular Army, and he shall alone constitute the court.\n\n(2) The proceedings shall be attended throughout by two other persons who shall be officers or junior commissioned officers or one of either, and who shall not as such, be sworn or affirmed.",
+  "page_start": 33,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "64a4fe40-b974-4f3a-92f5-f0fcbf21841e",
+    "handle": "123456789/525983",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s382",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "382",
+  "heading": "Procedure of Magistrate taking cognizance.",
+  "chapter": null,
+  "order": 382,
+  "text": "(1) A Magistrate to whom a complaint is made under section 379 or section 380 shall, notwithstanding anything contained in Chapter XVI, proceed, as far as may be, to deal with the case as if it were instituted on a police report.\n\n(2) Where it is brought to the notice of such Magistrate, or of any other Magistrate to whom the case may have been transferred, that an appeal is pending against the decision arrived at in the judicial proceeding out of which the matter has arisen, he may, if he thinks fit, at any stage, adjourn the hearing of the case until such appeal is decided.",
+  "page_start": 382,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "32a17a18-96f2-4752-87d9-4bf109f46eea",
+    "handle": "123456789/546472",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s374",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "374",
+  "heading": "Person acquitted on ground of unsoundness of mind to be detained in safe custody.",
+  "chapter": null,
+  "order": 374,
+  "text": "(1) Whenever the finding states that the accused person committed the act alleged, the Magistrate or Court before whom or which the trial has been held, shall, if such act would, but for the incapacity found, have constituted an offence,---\n\n(a) order such person to be detained in safe custody in such place and manner as the Magistrate or Court thinks fit; or\n\n(b) order such person to be delivered to any relative or friend of such person.\n\n(2) No order for the detention of the accused in a public mental health establishment shall be made under clause (a) of sub-section (1) otherwise than in accordance with such rules as the State Government may have made under the Mental Healthcare Act, 2017 (10 of 2017).\n\n(3) No order for the delivery of the accused to a relative or friend shall be made under clause (b) of subsection (1) except upon the application of such relative or friend and on his giving security to the satisfaction of the Magistrate or Court that the person delivered shall---\n\n(a) be properly taken care of and prevented from doing injury to himself or to any other person;\n\n(b) be produced for the inspection of such officer, and at such times and places, as the State Government may direct.\n\n(4) The Magistrate or Court shall report to the State Government the action taken under sub-section (1).",
+  "page_start": 132,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f14d05f8-ea50-4d7d-ac86-17cf8a1ad6f7",
+    "handle": "123456789/546464",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

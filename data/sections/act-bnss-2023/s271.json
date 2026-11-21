@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s271",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "271",
+  "heading": "Acquittal or conviction.",
+  "chapter": null,
+  "order": 271,
+  "text": "(1) If, in any case under this Chapter in which a charge has been framed, the Magistrate finds the accused not guilty, he shall record an order of acquittal.\n\n(2) Where, in any case under this Chapter, the Magistrate finds the accused guilty, but does not proceed in accordance with the provisions of section 364 or section 401, he shall, after hearing the accused on the question of sentence, pass sentence upon him according to law.\n\n(3) Where, in any case under this Chapter, a previous conviction is charged under the provisions of subsection (7) of section 234 and the accused does not admit that he has been previously convicted as alleged in the charge, the Magistrate may, after he has convicted the said accused, take evidence in respect of the alleged previous conviction, and shall record a finding thereon:\n\nProvided that no such charge shall be read out by the Magistrate nor shall the accused be asked to plead thereto nor shall the previous conviction be referred to by the prosecution or in any evidence adduced by it, unless and until the accused has been convicted under sub-section (2).",
+  "page_start": 100,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3b3a688e-678e-4e9c-9af7-979e748e2935",
+    "handle": "123456789/546655",
+    "listing_raw_path": "data/raw/indiacode/2023/84de940d3a0fe09d9683198d94de1a7af018b90eb5d0667daa39ef362963cb9b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

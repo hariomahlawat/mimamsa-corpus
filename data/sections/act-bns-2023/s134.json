@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s134",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "134",
+  "heading": "Assault or criminal force in attempt to commit theft of property carried by a person.",
+  "chapter": null,
+  "order": 134,
+  "text": "Whoever assaults or uses criminal force to any person, in attempting to commit theft on any property which that person is then wearing or carrying, shall be punished with imprisonment of either description for a term which may extend to two years, or with fine, or with both.",
+  "page_start": 63,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "23b9b769-f899-4bfe-9e06-d42416f48fb9",
+    "handle": "123456789/545632",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

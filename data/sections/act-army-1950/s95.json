@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s95",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "95",
+  "heading": "Deduction from public money due to a person.",
+  "chapter": null,
+  "order": 95,
+  "text": "Any sum authorised by this Act to be deducted from the pay and allowances of any person may, without prejudice to any other mode of recovering the same, be deducted from any public money due to him other than a pension.",
+  "page_start": 30,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b0109ca1-fa9a-44c1-a42d-864789ef7d89",
+    "handle": "123456789/525959",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

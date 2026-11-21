@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s492",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "492",
+  "heading": "Cancellation of bond and bail bond.",
+  "chapter": null,
+  "order": 492,
+  "text": "Without prejudice to the provisions of section 491, where a bond or bail bond under this Sanhita is for appearance of a person in a case and it is forfeited for breach of a condition,---\n\n(a) the bond executed by such person as well as the bond, if any, executed by one or more of his sureties in that case shall stand cancelled; and\n\n(b) thereafter no such person shall be released only on his own bond in that case, if the police officer or the Court, as the case may be, for appearance before whom the bond was executed, is satisfied that there was no sufficient cause for the failure of the person bound by the bond to comply with its condition:\n\nProvided that subject to any other provisions of this Sanhita he may be released in that case upon the execution of a fresh personal bond for such sum of money and bond by one or more of such sureties as the police officer or the Court, as the case may be, thinks sufficient.",
+  "page_start": 164,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3e9875d7-33d8-4454-a8e9-6d6fd3b186aa",
+    "handle": "123456789/546670",
+    "listing_raw_path": "data/raw/indiacode/2023/84de940d3a0fe09d9683198d94de1a7af018b90eb5d0667daa39ef362963cb9b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

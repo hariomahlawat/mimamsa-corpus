@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s476",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "476",
+  "heading": "Concurrent power of Central Government in case of death sentences.",
+  "chapter": null,
+  "order": 476,
+  "text": "The powers conferred by sections 473 and 474 upon the State Government may, in the case of sentences of death, also be exercised by the Central Government.",
+  "page_start": 158,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6f06fa9f-717f-421a-b8b7-551718af065b",
+    "handle": "123456789/546561",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

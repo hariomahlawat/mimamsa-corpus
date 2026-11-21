@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s85",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "85",
+  "heading": "Punishments in addition to those specified in section 82",
+  "chapter": null,
+  "order": 85,
+  "text": "[1][The Chief of the Air Staff] may, with the consent of the Central Government, specify such other punishments as may be awarded under section 82 in addition to or without any of the punishments specified in the said section, and the extent to which such other punishments may be awarded.",
+  "page_start": 31,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1955-05-07",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief\"(w.e.f. 7-5-1955).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "7af09c45-5c38-4864-912c-bcca3bbc563c",
+    "handle": "123456789/519402",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

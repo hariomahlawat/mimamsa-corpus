@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s6",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "6",
+  "heading": "Provision respecting discipline of persons under engagement to serve Central Government.",
+  "chapter": null,
+  "order": 6,
+  "text": "(1) If any person not otherwise subject to naval law enters into an engagement with the Central Government to serve,--\n\n(a) in a particular ship; or\n\n(b) in such particular ship or in such ships as the Central Government, the Chief of the Naval Staff, or the prescribed officer may, from time to time, determine;\n\nand agrees to become subject to naval law upon entering into the engagement, that person shall, so long as the engagement remains in force and notwithstanding that for the time being he may not be serving in any ship, be subject to naval law.\n\n(2) The Central Government may, by order, direct that, subject to such exceptions as may in particular cases be made by or on behalf of the Chief of the Naval Staff, persons of any such class as may be specified in the order shall, while being subject to naval law by virtue of this section, be deemed to be officers, petty officers or other [1][sailors], as the case may be, for the purposes of this Act or of such provisions of this Act as may be so specified.",
+  "page_start": 11,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 53 of 1974",
+      "by_doc_id": null,
+      "effective_date": "1974-12-16",
+      "effective_date_raw": null,
+      "footnote_text": "Ins by Act 53 of 1974, s. 4 (w.e.f. 16-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "96d6f6b4-fa41-43dd-951f-5fe89e0e9e0f",
+    "handle": "123456789/517351",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

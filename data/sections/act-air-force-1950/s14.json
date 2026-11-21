@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s14",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "14",
+  "heading": "Mode of enrolment.",
+  "chapter": null,
+  "order": 14,
+  "text": "If, after complying with the provisions of section 13, the enrolling officer is satisfied that the person desirous of being enrolled fully understands the questions put to him and consents to the conditions of service, and if such officer perceives no impediment, he shall sign and shall also cause such person to sign the enrolment paper, and such person shall thereupon be deemed to be enrolled.",
+  "page_start": 13,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "89dc66c9-e0f8-4c6c-bfdf-f47e77ae972e",
+    "handle": "123456789/525782",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

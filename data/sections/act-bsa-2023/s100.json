@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s100",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "100",
+  "heading": ". Evidence as to application of language to one of two sets of facts, to neither of which the whole correctly applies.",
+  "chapter": null,
+  "order": 100,
+  "text": "When the language used applies partly to one set of existing facts, and partly to another set of existing facts, but the whole of it does not apply correctly to either, evidence may be given to show to which of the two it was meant to apply.\n\nIllustration\n\nA agrees to sell to B \"my land at X in the occupation of Y\". A has land at X, but not in the occupation of Y, and he has land in the occupation of Y but it is not at X. Evidence may be given of facts showing which he meant to sell.",
+  "page_start": 36,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c2b76ce2-b71b-466c-96f7-15acfefea793",
+    "handle": "123456789/546081",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

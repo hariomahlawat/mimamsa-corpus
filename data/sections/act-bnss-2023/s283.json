@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s283",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "283",
+  "heading": "Power to try summarily.",
+  "chapter": null,
+  "order": 283,
+  "text": "(1) Notwithstanding anything contained in this Sanhita—\n\n(a) any Chief Judicial Magistrate;\n\n(b) Magistrate of the first class,\n\nshall try in a summary way all or any of the following offences:—\n\n(i) theft, under sub-section (2) of section 303, section 305 or section 306 of the Bharatiya Nyaya Sanhita, 2023 where the value of the property stolen does not exceed twenty thousand rupees;\n\n(ii) receiving or retaining stolen property, under sub-section (2) of section 317 of the Bharatiya Nyaya Sanhita, 2023, where the value of the property does not exceed twenty thousand rupees;\n\n(iii) assisting in the concealment or disposal of stolen property under sub-section (5) of section 317 of the Bharatiya Nyaya Sanhita, 2023, where the value of such property does not exceed twenty thousand rupees;\n\n(iv) offences under sub-sections (2) and (3) of section 331 of the Bharatiya Nyaya Sanhita, 2023;\n\n(v) insult with intent to provoke a breach of the peace, under section 352, and criminal intimidation, under sub-sections (2) and (3) of section 351 of the Bharatiya Nyaya Sanhita, 2023;\n\n(vi) abetment of any of the foregoing offences;\n\n(vii) an attempt to commit any of the foregoing offences, when such attempt is an offence;\n\n(viii) any offence constituted by an act in respect of which a complaint may be made under section 20 of the Cattle-trespass Act, 1871 (1 of 1871).\n\n(2) The Magistrate may, after giving the accused a reasonable opportunity of being heard, for reasons to be recorded in writing, try in a summary way all or any of the offences not punishable with death or imprisonment for life or imprisonment for a term exceeding three years:\n\nProvided that no appeal shall lie against the decision of a Magistrate to try a case in a summary way under this sub-section.\n\n(3) When, in the course of a summary trial it appears to the Magistrate that the nature of the case is such that it is undesirable to try it summarily, the Magistrate shall recall any witnesses who may have been examined and proceed to re-hear the case in the manner provided by this Sanhita.",
+  "page_start": 103,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2d3600a7-1a84-46a8-bd2b-317c5a8d2bf2",
+    "handle": "123456789/546378",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s403",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "403",
+  "heading": "Court not to alter judgment.",
+  "chapter": null,
+  "order": 403,
+  "text": "Save as otherwise provided by this Sanhita or by any other law for the time being in force, no Court, when it has signed its judgment or final order disposing of a case, shall alter or review the same except to correct a clerical or arithmetical error.",
+  "page_start": 141,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "52abaf96-a458-4d6c-a0e4-e105beadab6d",
+    "handle": "123456789/546493",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

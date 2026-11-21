@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s120",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "120",
+  "heading": "Voluntarily causing hurt or grievous hurt to extort confession, or to compel restoration of property.",
+  "chapter": null,
+  "order": 120,
+  "text": "(1) Whoever voluntarily causes hurt for the purpose of extorting from the sufferer or from any person interested in the sufferer, any confession or any information which may lead to the detection of an offence or misconduct, or for the purpose of constraining the sufferer or any person interested in the sufferer to restore or to cause the restoration of any property or valuable security or to satisfy any claim or demand, or to give information which may lead to the restoration of any property or valuable security, shall be punished with imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine.\n\nIllustrations.\n\n(a) A, a police officer, tortures Z in order to induce Z to confess that he committed a crime. A is guilty of an offence under this section.\n\n(b) A, a police officer, tortures B to induce him to point out where certain stolen property is deposited. A is guilty of an offence under this section.\n\n(c) A, a revenue officer, tortures Z in order to compel him to pay certain arrears of revenue due from Z. A is guilty of an offence under this section.\n\n(2) Whoever voluntarily causes grievous hurt for any purpose referred to in sub-section (1), shall be punished with imprisonment of either description for a term which may extend to ten years, and shall also be liable to fine.",
+  "page_start": 47,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "086580d0-7b64-46bd-a2b1-a90636203955",
+    "handle": "123456789/545855",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

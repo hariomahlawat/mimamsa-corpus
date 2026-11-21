@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s156",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "156",
+  "heading": "Limitation of powers of confirming authority.",
+  "chapter": null,
+  "order": 156,
+  "text": "A warrant issued under section 154 or section 155 may contain such restrictions, reservations or conditions as the authority issuing it may think fit.",
+  "page_start": 41,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "372de4b6-5119-4b21-8979-37662453a65f",
+    "handle": "123456789/526027",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

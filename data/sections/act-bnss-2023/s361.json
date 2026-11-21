@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s361",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "361",
+  "heading": "Procedure in cases which Magistrate cannot dispose of.",
+  "chapter": null,
+  "order": 361,
+  "text": "(1) If, in the course of any inquiry into an offence or a trial before a Magistrate in any district, the evidence appears to him to warrant a presumption---\n\n(a) that he has no jurisdiction to try the case or commit it for trial; or\n\n(b) that the case is one which should be tried or committed for trial by some other Magistrate in the district; or\n\n(c) that the case should be tried by the Chief Judicial Magistrate,\n\nhe shall stay the proceedings and submit the case, with a brief report explaining its nature, to the Chief Judicial Magistrate or to such other Magistrate, having jurisdiction, as the Chief Judicial Magistrate directs.\n\n(2) The Magistrate to whom the case is submitted may, if so empowered, either try the case himself, or refer it to any Magistrate subordinate to him having jurisdiction, or commit the accused for trial.",
+  "page_start": 127,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2d7325ee-0580-4466-ac22-944de2b2f211",
+    "handle": "123456789/546452",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

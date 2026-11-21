@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s172",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "172",
+  "heading": "Personation at elections.",
+  "chapter": null,
+  "order": 172,
+  "text": "Whoever at an election applies for a voting paper on votes in the name of any other person, whether living or dead, or in a fictitious name, or who having voted once at such election applies at the same election for a voting paper in his own name, and whoever abets, procures or attempts to procure the voting by any person in any such way, commits the offence of personation at an election:.\n\nProvided that nothing in this section shall apply to a person who has been authorised to vote as proxy for an elector under any law for the time being in force in so far as he votes as a proxy for such elector.",
+  "page_start": 85,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "cfcbbf82-6e41-4626-aa88-0350718dcf9a",
+    "handle": "123456789/545672",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

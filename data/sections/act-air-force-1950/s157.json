@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s157",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "157",
+  "heading": "Power of confirming authority to mitigate, remit or commute sentences.",
+  "chapter": null,
+  "order": 157,
+  "text": "(1) Subject to such restrictions, reservations or conditions as may be contained in any warrant issued under section 153 or section 154 and to the provisions of sub-sections (2) and (3), a confirming authority may, when confirming the sentence of a court-martial, mitigate or remit the punishment thereby awarded, or commute that punishment for any punishment or punishments lower in the scale laid down in section 73.\n\n(2) A sentence of transportation shall not be commuted for a sentence of imprisonment or detention for a term exceeding the term of transportation awarded by the court.\n\n(3) A sentence of imprisonment shall not be commuted for a sentence of detention for a term exceeding the term of imprisonment awarded by the court.",
+  "page_start": 47,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "4defbaec-7dd3-424e-8930-16919733ee8b",
+    "handle": "123456789/523768",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

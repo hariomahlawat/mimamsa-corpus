@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s142",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "142",
+  "heading": "Examination of witnesses.",
+  "chapter": null,
+  "order": 142,
+  "text": "(1) The examination of a witness by the party who calls him shall be called his examination-in-chief.\n\n(2) The examination of a witness by the adverse party shall be called his cross-examination.\n\n(3) The examination of a witness, subsequent to the cross-examination, by the party who called him, shall be called his re-examination.",
+  "page_start": 43,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "31960903-7f7d-416b-8953-6cf14f7efecf",
+    "handle": "123456789/546040",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

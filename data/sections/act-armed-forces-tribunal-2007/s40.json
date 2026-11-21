@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s40",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "40",
+  "heading": "Power to remove difficulties.",
+  "chapter": null,
+  "order": 41,
+  "text": "(1) If any difficulty arises in giving effect to the provisions of this Act, the Central Government may, by order published in the Official Gazette, make such provisions, not inconsistent with the provisions of this Act as appear to it to be necessary or expedient for removing the difficulty:\n\nProvided that no order shall be made under this section after the expiry of two years from the date of commencement of this Act.\n\n(2) Every order made under this section shall, as soon as may be after it is made, be laid before each House of Parliament.",
+  "page_start": 13,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "4336cc10-6524-417e-99ef-03a894eff1e9",
+    "handle": "123456789/527667",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

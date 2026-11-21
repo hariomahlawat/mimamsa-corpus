@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s164",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "164",
+  "heading": "Harbouring deserter.",
+  "chapter": null,
+  "order": 164,
+  "text": "Whoever, except as hereinafter excepted, knowing or having reason to believe that an officer, soldier, sailor or airman, in the Army, Navy or Air Force of the Government of India, has deserted, harbours such officer, soldier, sailor or airman, shall be punished with imprisonment of either description for a term which may extend to two years, or with fine or with both.\n\nException.—This provision does not extend to the case in which the harbour is given by the spouse of the deserter.",
+  "page_start": 82,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2f0d9d95-f5ef-45e3-80c1-0f8a919cd560",
+    "handle": "123456789/545663",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

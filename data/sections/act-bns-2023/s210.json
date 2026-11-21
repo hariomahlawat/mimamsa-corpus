@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s210",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "210",
+  "heading": "Omission to produce document or electronic record to public servant by person legally bound to produce it",
+  "chapter": null,
+  "order": 210,
+  "text": "Whoever, being legally bound to produce or deliver up any document or electronic record to any public servant, as such, intentionally omits so to produce or deliver up the same,—\n\n(a) shall be punished with simple imprisonment for a term which may extend to one month, or with fine which may extend to five thousand rupees, or with both;\n\n(b) and where the document or electronic record is to be produced or delivered up to a Court with simple imprisonment for a term which may extend to six months, or with fine which may extend to ten thousand rupees, or with both.\n\nIllustration.\n\nA, being legally bound to produce a document before a District Court, intentionally omits to produce the same. A has committed the offence defined in this section.",
+  "page_start": 92,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "92fd6d1b-fc18-4407-997f-3194122796d3",
+    "handle": "123456789/545869",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

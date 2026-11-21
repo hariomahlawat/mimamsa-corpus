@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s353",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "353",
+  "heading": "Accused person to be competent witness.",
+  "chapter": null,
+  "order": 353,
+  "text": "(1) Any person accused of an offence before a Criminal Court shall be a competent witness for the defence and may give evidence on oath in disproof of the charges made against him or any person charged together with him at the same trial:\n\nProvided that---\n\n(a) he shall not be called as a witness except on his own request in writing;\n\n(b) his failure to give evidence shall not be made the subject of any comment by any of the parties or the Court or give rise to any presumption against himself or any person charged together with him at the same trial.\n\n(2) Any person against whom proceedings are instituted in any Criminal Court under section 101, or section 126, or section 127, or section 128, or section 129, or under Chapter X or under Part B, Part C or Part D of Chapter XI, may offer himself as a witness in such proceedings:\n\nProvided that in proceedings under section 127, section 128, or section 129, the failure of such person to give evidence shall not be made the subject of any comment by any of the parties or the Court or give rise to any presumption against him or any other person proceeded against together with him at the same inquiry.",
+  "page_start": 120,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "cc490768-1a4e-4928-997a-11790d28b055",
+    "handle": "123456789/546444",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s439",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "439",
+  "heading": "Power to order inquiry.",
+  "chapter": null,
+  "order": 439,
+  "text": "On examining any record under section 438 or otherwise, the High Court or the Sessions Judge may direct the Chief Judicial Magistrate by himself or by any of the Magistrates subordinate to him to make, and the Chief Judicial Magistrate may himself make or direct any subordinate Magistrate to make, further inquiry into any complaint which has been dismissed under section 226 or subsection (4) of section 227, or into the case of any person accused of an offence who has been discharged:\n\nProvided that no Court shall make any direction under this section for inquiry into the case of any person who has been discharged unless such person has had an opportunity of showing cause why such direction should not be made.",
+  "page_start": 149,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b43f0e3c-6358-42ee-ab15-41e6aeb1abdd",
+    "handle": "123456789/546529",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

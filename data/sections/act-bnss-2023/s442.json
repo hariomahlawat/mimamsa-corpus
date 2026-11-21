@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s442",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "442",
+  "heading": "High Court's powers of revision.",
+  "chapter": null,
+  "order": 442,
+  "text": "(1) In the case of any proceeding the record of which has been called for by itself or which otherwise comes to its knowledge, the High Court may, in its discretion, exercise any of the powers conferred on a Court of Appeal by sections 427, 430, 431 and 432 or on a Court of Session by section 344, and, when the Judges composing the Court of revision are equally divided in opinion, the case shall be disposed of in the manner provided by section 433.\n\n(2) No order under this section shall be made to the prejudice of the accused or other person unless he has had an opportunity of being heard either personally or by advocate in his own defence.\n\n(3) Nothing in this section shall be deemed to authorise a High Court to convert a finding of acquittal into one of conviction.\n\n(4) Where under this Sanhita an appeal lies and no appeal is brought, no proceeding by way of revision shall be entertained at the instance of the party who could have appealed.\n\n(5) Where under this Sanhita an appeal lies but an application for revision has been made to the High Court by any person and the High Court is satisfied that such application was made under the erroneous belief that no appeal lies thereto and that it is necessary in the interests of justice so to do, the High Court may treat the application for revision as a petition of appeal and deal with the same accordingly.",
+  "page_start": 150,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "497f7cfa-e116-42ce-8421-174dfa650991",
+    "handle": "123456789/546532",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

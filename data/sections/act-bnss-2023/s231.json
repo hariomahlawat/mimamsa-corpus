@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s231",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "231",
+  "heading": "Supply of copies of statements and documents to accused in other cases triable by Court of Session.",
+  "chapter": null,
+  "order": 231,
+  "text": "Where, in a case instituted otherwise than on a police report, it appears to the Magistrate issuing process under section 227 that the offence is triable exclusively by the Court of Session, the Magistrate shall forthwith furnish to the accused, free of cost, a copy of each of the following:—\n\n(i) the statements recorded under section 223 or section 225, of all persons examined by the Magistrate;\n\n(ii) the statements and confessions, if any, recorded under section 180 or section 183;\n\n(iii) any documents produced before the Magistrate on which the prosecution proposes to rely:\n\nProvided that if the Magistrate is satisfied that any such document is voluminous, he shall, instead of furnishing the accused with a copy thereof, direct that he will only be allowed to inspect it either personally or through an advocate in Court:\n\nProvided further that supply of documents in electronic form shall be considered as duly furnished.",
+  "page_start": 88,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d8cdb14e-547c-4e16-8dd1-23d79edb9bce",
+    "handle": "123456789/546331",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

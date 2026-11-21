@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s96",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "96",
+  "heading": "Pay and allowances of prisoner of war during inquiry into his conduct.",
+  "chapter": null,
+  "order": 96,
+  "text": "Where the conduct of any person subject to this Act when being taken prisoner by, or while in the hands of, the enemy, is to be inquired into under this Act or any other law, [1][the Chief of the Army Staff] or any officer authorised by him may order that the whole or any part of the pay and allowances of such person shall be withheld pending the result of such inquiry.",
+  "page_start": 30,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief\".",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8c550dc8-ea93-4404-8943-4e11ec3d0a8f",
+    "handle": "123456789/525961",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

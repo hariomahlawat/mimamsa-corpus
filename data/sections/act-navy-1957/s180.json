@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s180",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "180",
+  "heading": "Application of sections 171 to 179 to persons of unsound mind.",
+  "chapter": null,
+  "order": 185,
+  "text": "The provisions of sections 171 to 179 shall, so far as they can be made applicable, also apply in the case of an officer or [1][sailor] subject to naval law who is ascertained in the prescribed manner to be of unsound mind notwithstanding anything contained in the Indian Lunacy Act, 1912 (4 of 1912), or who, while on active service, is officially reported missing, as if the said officer or [1][sailor] had died on the day on which his unsoundness of mind is so ascertained or, as the case may be, on the day on which he is officially reported missing:\n\nProvided that in the case of an officer or [2][sailor] so reported missing, no action shall be taken to dispose of the property under sections 171, 172 and 175 until such time as a certificate under the regulations made under this Act is issued by or under the authority of the Chief of the Naval Staff or other prescribed person that he is confirmed or presumed to be dead.",
+  "page_start": 55,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "2 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 53 of 1974",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": "16-12-74",
+      "footnote_text": "Subs. by Act 53 of 1974, s. 2, for \"seaman\" (w.e.f. 16-12-74).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 53 of 1974",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": "16-12-74",
+      "footnote_text": "Subs. by Act 53 of 1974, s. 2, for \"seaman\" (w.e.f. 16-12-74).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "9cd6f976-0cfb-4dc5-9ad5-c81780f6a453",
+    "handle": "123456789/524322",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

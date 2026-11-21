@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s147",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "147",
+  "heading": "Enforcement of order of maintenance.",
+  "chapter": null,
+  "order": 147,
+  "text": "A copy of the order of maintenance or interim maintenance and expenses of proceedings, as the case may be, shall be given without payment to the person in whose favour it is made, or to his guardian, if any, or to the person to whom the allowance for the maintenance or the allowance for the interim maintenance and expenses of proceeding, as the case may be, is to be paid; and such order may be enforced by any Magistrate in any place where the person against whom it is made may be, on such Magistrate being satisfied as to the identity of the parties and the non-payment of the allowance, or as the case may be, expenses, due.",
+  "page_start": 59,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3e466aa6-1faf-4987-a311-0f924f6d6bce",
+    "handle": "123456789/546254",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

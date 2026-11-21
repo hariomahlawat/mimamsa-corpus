@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s137",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "137",
+  "heading": "Power to summon and examine material witnesses",
+  "chapter": null,
+  "order": 141,
+  "text": "(1) The trial judge advocate may, at any stage of the trial, summon any person as a witness or examine any person in attendance, though not summoned as a witness, or recall and re-examine any person already examined; and the trial judge advocate shall summon and examine or recall and re-examine any such person if his evidence appears to the court or to the trial judge advocate as essential to the just decision of the case.\n\n(2) Summons to the witnesses shall be issued as provided under this Act.",
+  "page_start": 44,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "535c21d2-fc5f-4a4f-b117-5454650f800f",
+    "handle": "123456789/524020",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

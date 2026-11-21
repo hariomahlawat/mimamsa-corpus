@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s125",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "125",
+  "heading": "Witness unable to communicate verbally.",
+  "chapter": null,
+  "order": 125,
+  "text": "A witness who is unable to speak may give his evidence in any other manner in which he can make it intelligible, as by writing or by signs; but such writing must be written and the signs made in open Court and evidence so given shall be deemed to be oral evidence:\n\nProvided that if the witness is unable to communicate verbally, the Court shall take the assistance of an interpreter or a special educator in recording the statement, and such statement shall be videographed.",
+  "page_start": 41,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b657b6f4-15c9-4585-8b15-582908d3883e",
+    "handle": "123456789/546022",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

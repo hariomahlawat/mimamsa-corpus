@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s209",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "209",
+  "heading": "Non-appearance in response to a proclamation under section 84 of Bharatiya Nagarik Suraksha Sanhita, 2023.",
+  "chapter": null,
+  "order": 209,
+  "text": "Whoever fails to appear at the specified place and the specified time as required by a proclamation published under sub-section (1) of section 84 of the Bharatiya Nagarik Suraksha Sanhita, 2023, shall be punished with imprisonment for a term which may extend to three years, or with fine, or with both, or with community service, and where a declaration has been made under sub-section (4) of that section pronouncing him as a proclaimed offender, he shall be punished with imprisonment for a term which may extend to seven years and shall also be liable to fine.",
+  "page_start": 91,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "7f52b600-e9e0-45e4-9d62-cea9009c5f24",
+    "handle": "123456789/545868",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

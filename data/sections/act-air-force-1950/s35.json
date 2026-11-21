@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s35",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "35",
+  "heading": "Offences in relation to the enemy and not punishable with death.",
+  "chapter": null,
+  "order": 35,
+  "text": "Any person subject to this Act who commits any of the following offences, that is to say,--\n\n(a) is taken prisoner, by want of due precaution, or through disobedience of orders, or wilful neglect of duty, or having been taken prisoner, fails to rejoin his service when able to do so; or\n\n(b) without due authority holds correspondence with or communicates intelligence to the enemy; or having come by the knowledge of any such correspondence or communication wilfully omits to discover it immediately to his commanding or other superior officer; or\n\n(c) without due authority sends a flag of truce to the enemy; or\n\n(d) negligently causes the capture or destruction by the enemy of any aircraft belonging to the Government; or.\n\n(e) when ordered by his superior officer, or otherwise under orders to carry out any warlike operations in the air, negligently or through other default fails to use his utmost exertions to carry such orders into effect;\n\nshall, on conviction by court-martial, be liable to suffer imprisonment for a term which may extend to fourteen years or such less punishment as is in this Act mentioned.",
+  "page_start": 18,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "19aa616c-de19-480b-a357-3d79f8e6eb9a",
+    "handle": "123456789/525982",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

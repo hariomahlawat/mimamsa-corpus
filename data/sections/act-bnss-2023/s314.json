@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s314",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "314",
+  "heading": "Interpretation of evidence to accused or his advocate.",
+  "chapter": null,
+  "order": 314,
+  "text": "(1) Whenever any evidence is given in a language not understood by the accused, and he is present in Court in person, it shall be interpreted to him in open Court in a language understood by him.\n\n(2) If he appears by an advocate and the evidence is given in a language other than the language of the Court, and not understood by the advocate, it shall be interpreted to such advocate in that language.\n\n(3) When documents are put for the purpose of formal proof, it shall be in the discretion of the Court to interpret as much thereof as appears necessary.",
+  "page_start": 314,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c60ea502-2413-4ac4-86af-bd58d48d516d",
+    "handle": "123456789/546408",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

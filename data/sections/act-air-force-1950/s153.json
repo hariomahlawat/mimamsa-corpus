@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s153",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "153",
+  "heading": "Power to confirm finding and sentence of general court-martial.",
+  "chapter": null,
+  "order": 153,
+  "text": "The findings and sentences of general courts-martial may be confirmed by the Central Government, or by any officer empowered in this behalf by warrant of the Central Government.",
+  "page_start": 46,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d2fd7f02-ce7a-47cf-93b3-dfbad8165d37",
+    "handle": "123456789/523764",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

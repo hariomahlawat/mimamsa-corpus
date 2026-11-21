@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s109",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "109",
+  "heading": "Burden of proving fact especially within knowledge.",
+  "chapter": null,
+  "order": 109,
+  "text": "When any fact is especially within the knowledge of any person, the burden of proving that fact is upon him.\n\nIllustrations.\n\n(a) When a person does an act with some intention other than that which the character and circumstances of the act suggest, the burden of proving that intention is upon him.\n\n(b) A is charged with travelling on a railway without a ticket. The burden of proving that he had a ticket is on him.",
+  "page_start": 37,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "867f4eea-362b-4db7-8e98-76d0c1872d70",
+    "handle": "123456789/546005",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

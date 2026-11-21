@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s441",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "441",
+  "heading": "Power of Additional Sessions Judge.",
+  "chapter": null,
+  "order": 441,
+  "text": "An Additional Sessions Judge shall have and may exercise all the powers of a Sessions Judge under this Chapter in respect of any case which may be transferred to him by or under any general or special order of the Sessions Judge.",
+  "page_start": 150,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0e7340a2-2782-4ab8-befe-dc9592d5ae33",
+    "handle": "123456789/546531",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

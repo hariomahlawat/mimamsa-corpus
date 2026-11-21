@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s45",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "45",
+  "heading": "Grounds of opinion, when relevant.",
+  "chapter": null,
+  "order": 45,
+  "text": "Whenever the opinion of any living person is relevant, the grounds on which such opinion is based are also relevant.\n\nIllustrations.\n\nAn expert may give an account of experiments performed by him for the purpose of forming his opinion.",
+  "page_start": 23,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d6549365-046c-4e6e-93f1-cc5b3c7f8690",
+    "handle": "123456789/545938",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s182",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "182",
+  "heading": "No inducement to be offered.",
+  "chapter": null,
+  "order": 182,
+  "text": "(1) No police officer or other person in authority shall offer or make, or cause to be offered or made, any such inducement, threat or promise as is mentioned in section 22 of the Bharatiya Sakshya Adhiniyam, 2023.\n\n(2) But no police officer or other person shall prevent, by any caution or otherwise, any person from making in the course of any investigation under this Chapter any statement which he may be disposed to make of his own free will:\n\nProvided that nothing in this sub-section shall affect the provisions of sub-section (4) of section 183.",
+  "page_start": 70,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c850fe51-95f0-4b04-8954-8158e42defda",
+    "handle": "123456789/546283",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

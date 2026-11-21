@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s80",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "80",
+  "heading": "Warrant forwarded for execution outside jurisdiction.",
+  "chapter": null,
+  "order": 80,
+  "text": "(1) When a warrant is to be executed outside the local jurisdiction of the Court issuing it, such Court may, instead of directing the warrant to a police officer within its jurisdiction, forward it by post or otherwise to any Executive Magistrate or District Superintendent of Police or Commissioner of Police within the local limits of whose jurisdiction it is to be executed; and the Executive Magistrate or District Superintendent or Commissioner shall endorse his name thereon, and if practicable, cause it to be executed in the manner hereinbefore provided.\n\n(2) The Court issuing a warrant under sub-section (1) shall forward, along with thewarrant, the substance of the information against the person to be arrested together with such documents, if any, as may be sufficient to enable the Court acting under section 83 to decide whether bail should or should not be granted to the person.",
+  "page_start": 37,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2b6acbaa-dabc-4589-8792-17733015add1",
+    "handle": "123456789/546190",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

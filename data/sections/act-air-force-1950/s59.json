@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s59",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "59",
+  "heading": "Offences relating to courts-martial.",
+  "chapter": null,
+  "order": 59,
+  "text": "Any person subject to this Act who commits any of the following offences, that is to say,--\n\n(a) being duly summoned or ordered to attend as a witness before a court- martial, wilfully or without reasonable excuse, makes default in attending; or\n\n(b) refuses to take an oath or make an affirmation legally required by a court-martial to be taken or made; or\n\n(c) refuses to produce or deliver any document in his power or control legally required by a courtmartial to be produced or delivered by him; or\n\n(d) refuses when a witness to answer any question which he is by law bound to answer; or\n\n(e) is guilty of contempt of court-martial by using insulting or threatening language, or by causing any interruption or disturbance in the proceedings of such court;\n\nshall, on conviction by court-martial, be liable to suffer imprisonment for a term which may extend to three years or such less punishment as is in this Act mentioned.",
+  "page_start": 25,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "885a96a6-9d59-4337-89da-c8caed364c36",
+    "handle": "123456789/519374",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

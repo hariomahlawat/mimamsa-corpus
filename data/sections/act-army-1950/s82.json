@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s82",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "82",
+  "heading": "Punishments in addition to those specified in section 80.",
+  "chapter": null,
+  "order": 82,
+  "text": "[1][The Chief of the Army Staff] may, with the consent of the Central Government, specify such other punishments as may be awarded under section 80 in addition to or without any of the punishments specified in the said section, and the extent to which such other punishments may be awarded.",
+  "page_start": 27,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief\".",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ba9b6d34-ed75-49ef-bb20-6f1ab879993f",
+    "handle": "123456789/525945",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

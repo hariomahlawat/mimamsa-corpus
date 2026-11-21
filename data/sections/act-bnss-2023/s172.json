@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s172",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "172",
+  "heading": "Persons bound to conform to lawful directions of police",
+  "chapter": null,
+  "order": 172,
+  "text": "(1) All persons shall be bound to conform to the lawful directions of a police officer given in fulfilment of any of his duty under this Chapter.\n\n(2) A police officer may detain or remove any person resisting, refusing, ignoring or disregarding to conform to any direction given by him under sub-section (1) and may either take such person before a Magistrate or, in petty cases, release him as soon as possible within a period of twenty-four hours.",
+  "page_start": 66,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e44bc9a5-b677-4f76-a8c3-84976bdc139a",
+    "handle": "123456789/546647",
+    "listing_raw_path": "data/raw/indiacode/2023/84de940d3a0fe09d9683198d94de1a7af018b90eb5d0667daa39ef362963cb9b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

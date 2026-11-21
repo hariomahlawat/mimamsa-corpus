@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s182",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "182",
+  "heading": "Release on suspension.",
+  "chapter": null,
+  "order": 182,
+  "text": "Where a sentence is suspended under section 180, the offender shall forthwith be released from custody.",
+  "page_start": 52,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "78f8eae1-73c8-4997-9d4c-9b2f784c8608",
+    "handle": "123456789/523793",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

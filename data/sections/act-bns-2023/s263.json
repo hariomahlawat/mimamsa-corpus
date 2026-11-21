@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s263",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "263",
+  "heading": "Resistance or obstruction to lawful apprehension of another person.",
+  "chapter": null,
+  "order": 263,
+  "text": "Whoever, intentionally offers any resistance or illegal obstruction to the lawful apprehension of any other person for an offence, or rescues or attempts to rescue any other person from any custody in which that person is lawfully detained for an offence,—\n\n(a) shall be punished with imprisonment of either description for a term which may extend to two years, or with fine, or with both; or\n\n(b) if the person to be apprehended, or the person rescued or attempted to be rescued, is charged with or liable to be apprehended for an offence punishable with imprisonment for life or imprisonment for a term which may extend to ten years, shall be punished with imprisonment of either description for a term which may extend to three years, and shall also be liable to fine; or\n\n(c) if the person to be apprehended or rescued, or attempted to be rescued, is charged with or liable to be apprehended for an offence punishable with death, shall be punished with imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine; or\n\n(d) if the person to be apprehended or rescued, or attempted to be rescued, is liable under the sentence of a Court or by virtue of a commutation of such a sentence, to imprisonment for life, or imprisonment for a term of ten years or upwards, shall be punished with imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine; or\n\n(e) if the person to be apprehended or rescued, or attempted to be rescued, is under sentence of death, shall be punished with imprisonment for life or imprisonment of either description for a term not exceeding ten years, and shall also be liable to fine.",
+  "page_start": 80,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "12813756-172f-475f-ba23-2f876223df7f",
+    "handle": "123456789/545754",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

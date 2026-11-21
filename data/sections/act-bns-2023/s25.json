@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s25",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "25",
+  "heading": "Act not intended and not known to be likely to cause death or grievous hurt, done by consent.",
+  "chapter": null,
+  "order": 25,
+  "text": "Nothing which is not intended to cause death, or grievous hurt, and which is not known by the doer to be likely to cause death or grievous hurt, is an offence by reason of any harm which it may cause, or be intended by the doer to cause, to any person, above eighteen years of age, who has given consent, whether express or implied, to suffer that harm; or by reason of any harm which it may be known by the doer to be likely to cause to any such person who has consented to take the risk of that harm..\n\nIllustration.\n\nA and Z agree to fence with each other for amusement. This agreement implies the consent of each to suffer any harm which, in the course of such fencing, may be caused without foul play; and if A, while playing fairly, hurts Z, A commits no offence.",
+  "page_start": 24,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "254b6a8f-a95d-4ca0-a100-f68c3c5ed009",
+    "handle": "123456789/545519",
+    "listing_raw_path": "data/raw/indiacode/2023/3f63bdbb2512a509521a6dc9e8e8d97044f569307a1a0c1b10a743ec30873357.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

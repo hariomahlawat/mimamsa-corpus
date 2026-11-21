@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s280",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "280",
+  "heading": "Withdrawal of complaint.",
+  "chapter": null,
+  "order": 280,
+  "text": "If a complainant, at any time before a final order is passed in any case under this Chapter, satisfies the Magistrate that there are sufficient grounds for permitting him to withdraw his complaint against the accused, or if there be more than one accused, against all or any of them, the Magistrate may permit him to withdraw the same, and shall thereupon acquit the accused against whom the complaint is so withdrawn.",
+  "page_start": 102,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "784470af-a699-4dfc-b047-2d38c095999d",
+    "handle": "123456789/546375",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

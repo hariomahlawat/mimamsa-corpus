@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s376",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "376",
+  "heading": "Procedure where prisoner of unsound mind is reported capable of making his defence.",
+  "chapter": null,
+  "order": 376,
+  "text": "If a person is detained under the provisions of sub-section (2) of section 369, and in the case of a person detained in a jail, the Inspector-General of Prisons, or, in the case of a person detained in a public mental health establishment, the Mental Health Review Board constituted under the Mental Healthcare Act, 2017 (10 of 2017), shall certify that, in his or their opinion, such person is capable of making his defence, he shall be taken before the Magistrate or Court, as the case may be, at such time as the Magistrate or Court appoints, and the Magistrate or Court shall deal with such person under the provisions of section 371; and the certificate of such Inspector-General or visitors as aforesaid shall be receivable as evidence.",
+  "page_start": 132,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c59ba4f8-dcba-4d72-a7ab-0c6a5384b2c4",
+    "handle": "123456789/546466",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s181",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "181",
+  "heading": "Orders pending suspension.",
+  "chapter": null,
+  "order": 181,
+  "text": "A confirming officer may, when confirming any sentence referred to in section 180, direct that the offender be not committed to prison or to air force custody until the orders of the authority or officer specified in section 180 have been obtained.",
+  "page_start": 52,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6c53b5da-2fef-4fe4-a656-3508337e66a9",
+    "handle": "123456789/523792",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

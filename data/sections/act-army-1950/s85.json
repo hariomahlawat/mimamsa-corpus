@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s85",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "85",
+  "heading": "Punishment of junior commissioned officers.",
+  "chapter": null,
+  "order": 85,
+  "text": "A commanding officer or such other officer as is, with the consent of the Central Government, specified by [2][the Chief of the Army Staff] may, in the prescribed manner, proceed against a junior commissioned officer who is charged with an offence under this Act [2][and award one or more of the following punishments, that is to say,--\n\n(i) severe reprimand or reprimand;\n\n(ii) stoppage of pay and allowances until any proved loss or damage occasioned by the offence of which he is convicted is made good:\n\nProvided that the punishment specified in clause (i) shall not be awarded if the commanding officer or such other officer is below the rank of Colonel].",
+  "page_start": 27,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "2 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief\".",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 37 of 1992",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 37 of 1992, s. 6, for certain words.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a41f9b13-ebd4-451f-8772-de0d000f1fe6",
+    "handle": "123456789/525948",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

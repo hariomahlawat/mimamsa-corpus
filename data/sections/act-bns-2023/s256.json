@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s256",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "256",
+  "heading": "Public servant framing incorrect record or writing with intent to save person from punishment or property from forfeiture.",
+  "chapter": null,
+  "order": 256,
+  "text": "Whoever, being a public servant, and being as such public servant, charged with the preparation of any record or other writing, frames that record or writing in a manner which he knows to be incorrect, with intent to cause, or knowing it to be likely that he will thereby cause, loss or injury to the public or to any person, or with intent thereby to save, or knowing it to be likely that he will thereby save, any person from legal punishment, or with intent to save, or knowing that he is likely thereby to save, any property from forfeiture or other charge to which it is liable by law, shall be punished with imprisonment of either description for a term which may extend to three years, or with fine, or with both.",
+  "page_start": 79,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "16a98181-4424-4073-af33-b3e1c09cd850",
+    "handle": "123456789/545878",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

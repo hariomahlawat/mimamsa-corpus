@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s163",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "163",
+  "heading": "Powers of Central Government and the Chief of the Naval Staff in respect of findings and sentences.",
+  "chapter": null,
+  "order": 167,
+  "text": "(1) Where any person is tried under the provisions of this Act, the Central Government or the Chief of the Naval Staff, may, in the case of a conviction,--\n\n(a) set aside the finding and sentence and acquit or discharge the accused or order him to be retried, or\n\n(b) alter the finding, maintaining the sentence (provided that such sentence may be legally passed on the altered finding), or\n\n(c) with or without altering the finding, reduce the sentence or commute the punishment awarded for any punishment inferior in scale, or\n\n(d) either with or without conditions, pardon the person or remit the whole or any part of the punishment awarded, or\n\n(e) either with or without conditions, release the person on parole:\n\nProvided that a sentence of imprisonment shall not be commuted for a sentence of detention for a term exceeding the term of imprisonment awarded, and a sentence of dismissal with disgrace not accompanied by a sentence of imprisonment shall not be commuted for a sentence of detention:\n\nProvided further that nothing in this section shall authorise the Central Government or the Chief of the Naval Staff to enhance the sentence.\n\n(2) Any sentence modified under the provisions of sub-section (1) shall be carried into execution as if it had been originally passed.\n\n(3) If any condition on which a person has been pardoned or released on parole or a punishment has been remitted is in the opinion of the authority which granted the pardon, release or remission not fulfilled, such authority may cancel the pardon or release or remission and thereupon the sentence awarded shall be carried into effect as if such pardon, release or remission had not been granted:\n\nProvided that in the case of a person sentenced to imprisonment or detention such person shall undergo only the unexpired portion of the sentence.",
+  "page_start": 49,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "4feb179c-fd16-4a63-8bd8-3fe8f19c2b81",
+    "handle": "123456789/524049",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

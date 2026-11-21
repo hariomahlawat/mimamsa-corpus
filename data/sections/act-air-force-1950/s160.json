@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s160",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "160",
+  "heading": "Alteration of finding or sentence in certain cases",
+  "chapter": null,
+  "order": 160,
+  "text": "(1) Where a finding of guilty by a courtmartial, which has been confirmed, is found for any reason to be invalid or cannot be supported by the evidence, the authority which would have had power under section 177 to commute the punishment awarded by the sentence, if the finding had been valid, may substitute a new finding and pass a sentence for the offence specified or involved in such finding:\n\nProvided that no such substitution shall be made unless such finding could have been validly made by the court-martial on the charge and unless it appears that the court-martial must have been satisfied of the facts establishing the offence.\n\n(2) Where a sentence passed by a court-martial which has been confirmed not being a sentence passed in pursuance of a new finding substituted under sub-section (1), is found for any reason to be invalid, the. authority referred to in sub-section (1) may pass a valid sentence.\n\n(3) The punishment awarded by a sentence passed under sub-section (1) or sub-section (2) shall not be higher in the scale of punishments than, or in excess of the punishment awarded by, the sentence for which a new sentence is substituted under this section.\n\n(4) Any finding substituted, or any sentence passed, under this section shall for the purposes of this Act and the rules made thereunder have effect as if it were a finding or sentence, as the case may be, of a court-martial.",
+  "page_start": 47,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "7eac558e-f156-4d0e-82bc-838968ae1ea5",
+    "handle": "123456789/523771",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

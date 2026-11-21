@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s33",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "33",
+  "heading": "Exclusion of jurisdiction of civil courts.",
+  "chapter": null,
+  "order": 34,
+  "text": "On and from the date from which any jurisdiction, powers and authority becomes exercisable by the Tribunal in relation to service matters under this Act, no civil court shall have, or be entitled to exercise, such jurisdiction, power or authority in relation to those service matters.",
+  "page_start": 12,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "aeefa629-f41c-4882-9f08-d615d98dcd2d",
+    "handle": "123456789/527590",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

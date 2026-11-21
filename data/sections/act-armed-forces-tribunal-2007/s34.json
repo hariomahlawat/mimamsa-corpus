@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s34",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "34",
+  "heading": "Transfer of pending cases.",
+  "chapter": null,
+  "order": 35,
+  "text": "(1) Every suit, or other proceeding pending before any court including a High Court or other authority immediately before the date of establishment of the Tribunal under this Act, being a suit or proceeding the cause of action whereon it is based, is such that it would have been within the jurisdiction of the Tribunal, if it had arisen after such establishment within the jurisdiction of such Tribunal, stand transferred on that date to such Tribunal.\n\n(2) Where any suit, or other proceeding stands transferred from any court including a High Court or other authority to the Tribunal under sub-section (1),--\n\n(a) the court or other authority shall, as soon as may be, after such transfer, forward the records of such suit, or other proceeding to the Tribunal;\n\n(b) the Tribunal may, on receipt of such records, proceed to deal with such suit, or other proceeding, so far as may be, in the same manner as in the case of an application made under subsection (2) of section 14, from the stage which was reached before such transfer or from any earlier stage or de novo as the Tribunal may deem fit.",
+  "page_start": 12,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1230f536-d68b-406c-93cd-bd5c26fe78da",
+    "handle": "123456789/527601",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s7",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "7",
+  "heading": "Territorial divisions.",
+  "chapter": null,
+  "order": 7,
+  "text": "(1) Every State shall be a sessions division or shall consist of sessions divisions; and every sessions divisions shall, for the purposes of this Sanhita, be a district or consist of districts.\n\n(2) The State Government may, after consultation with the High Court, alter the limits or the number of such divisions and districts.\n\n(3) The State Government may, after consultation with the High Court, divide any district into sub-divisions and may alter the limits or the number of such sub-divisions.\n\n(4) The sessions divisions, districts and sub-divisions existing in a State at the commencement of this Sanhita, shall be deemed to have been formed under this section.",
+  "page_start": 5,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "51ca6dd9-ce1e-47eb-9d5e-ec76da7a132d",
+    "handle": "123456789/546112",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

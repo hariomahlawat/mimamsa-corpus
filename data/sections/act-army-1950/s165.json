@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s165",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "165",
+  "heading": "Annulment of proceedings.",
+  "chapter": null,
+  "order": 165,
+  "text": "The Central Government, [1][the Chief of the Army Staff] or any prescribed officer may annul the proceedings of any court-martial on the ground that they are illegal or unjust.",
+  "page_start": 43,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief \".",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "67f0e120-2196-427f-bf13-8c63b05279ad",
+    "handle": "123456789/526036",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s9a",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "9A",
+  "heading": "Qualifications, terms and conditions of service of Chairperson and Member",
+  "chapter": null,
+  "order": 10,
+  "text": "[1][2[9A. Selection, qualifications, conditions of service, allowances, etc.--- Notwithstanding anything contained in this Act, the qualifications, manner of selection, appointment, salaries and allowances, resignation, removal and other conditions of service and eligibility for reappointment of a Chairperson and Members of the Tribunal under this Act shall be governed by the provisions of the Tribunals Reforms Act, 2026.]]",
+  "page_start": 6,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 7 of 2017",
+      "by_doc_id": null,
+      "effective_date": "2017-05-26",
+      "effective_date_raw": null,
+      "footnote_text": "1. Ins. by Act 7 of 2017, s. 181 (w.e.f. 26-5-2017). 2. Subs by Act 17 of 2026, s. 18 and Sch. II for section 9A (w.e.f. 25-08-2026).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "dfc148a4-3839-4880-a875-b4f6cd6f27d2",
+    "handle": "123456789/537626",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

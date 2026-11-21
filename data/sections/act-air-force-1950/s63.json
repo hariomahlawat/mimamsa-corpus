@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s63",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "63",
+  "heading": "Other offences relating to aircraft and flying.",
+  "chapter": null,
+  "order": 63,
+  "text": "Any person subject to this Act who commits any of the following offences, that is to say,--\n\n(a) signs any certificate in relation to an aircraft material belonging to the Government without ensuring the accuracy thereof; or\n\n(b) being the pilot of an aircraft belonging to the Government, flies it at a height less than such height as may be specified by [1][the Chief of the Air Staff], except while taking off or landing, or in such other circumstances as may be specified by [1][the Chief of the Air Staff)]; or\n\n(c) being the pilot of an aircraft belonging to the Government, flies it so as to cause, or to be likely to cause, unnecessary annoyance to any person;\n\nshall, on conviction by court-martial, be liable to suffer imprisonment for a term which may extend to two years or such less punishment as is in this Act mentioned.",
+  "page_start": 26,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1955-05-07",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief\", (w.e.f. 7-5-1955).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6bb9e53d-0735-4797-aaaa-6d2c6523b869",
+    "handle": "123456789/519378",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

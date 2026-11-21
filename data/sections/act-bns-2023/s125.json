@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s125",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "125",
+  "heading": "Act endangering life or personal safety of others.",
+  "chapter": null,
+  "order": 125,
+  "text": "Whoever does any act so rashly or negligently as to endanger human life or the personal safety of others, shall be punished with imprisonment of either description for a term which may extend to three months or with fine which may extend to two thousand five hundred rupees, or with both, but—\n\n(a) where hurt is caused, shall be punished with imprisonment of either description for a term which may extend to six months, or with fine which may extend to five thousand rupees, or with both;\n\n(b) where grievous hurt is caused, shall be punished with imprisonment of either description for a term which may extend to three years, or with fine which may extend to ten thousand rupees, or with both.",
+  "page_start": 53,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a224b3f5-0a73-42b2-bcc9-6af08efd13bd",
+    "handle": "123456789/545624",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

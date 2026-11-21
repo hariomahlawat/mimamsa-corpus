@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s30",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "30",
+  "heading": "Relevancy of statements in maps, charts and plans.",
+  "chapter": null,
+  "order": 30,
+  "text": "Statements of facts in issue or relevant facts, made in published maps or charts generally offered for public sale, or in maps or plans made under the authority of the Central Government or any State Government, as to matters usually represented or stated in such maps, charts or plans, are themselves relevant facts",
+  "page_start": 20,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f575bb62-4711-45ef-8fc5-bb23f3b9f598",
+    "handle": "123456789/545923",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

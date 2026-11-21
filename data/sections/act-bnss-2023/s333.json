@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s333",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "333",
+  "heading": "Authorities before whom affidavits may be sworn.",
+  "chapter": null,
+  "order": 333,
+  "text": "(1) Affidavits to be used before any Court under this Sanhita may be sworn or affirmed before---\n\n(a) any Judge or Judicial or Executive Magistrate; or\n\n(b) any Commissioner of Oaths appointed by a High Court or Court of Session; or\n\n(c) any notary appointed under the Notaries Act, 1952 (53 of 1952).\n\n(2) Affidavits shall be confined to, and shall state separately, such facts as the deponent is able to prove from his own knowledge and such facts as he has reasonable ground to believe to be true, and in the latter case, the deponent shall clearly state the grounds of such belief.\n\n(3) The Court may order any scandalous and irrelevant matter in the affidavit to be struck out or amended.",
+  "page_start": 114,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6476c214-4f69-4f25-bc88-ea2a5af5efe7",
+    "handle": "123456789/546424",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

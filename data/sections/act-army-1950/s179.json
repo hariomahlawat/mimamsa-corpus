@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s179",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "179",
+  "heading": "Pardon and remission.",
+  "chapter": null,
+  "order": 180,
+  "text": "When any person subject to this Act has been convicted by a court-martial of any offence, the Central Government or [1][the Chief of the Army Staff] or, in the case of a sentence, which he could have confirmed or which did not, require confirmation, the officer commanding the army, army corps, division or independent brigade in which such person at the time of conviction was serving, or the prescribed officer may--\n\n(a) either with or without conditions which the person sentenced accepts, pardon the person or remit the whole or any part of the punishment awarded; or\n\n(b) mitigate the punishment awarded; or\n\n(c) commute such punishment for any less punishment or punishments mentioned in this Act:\n\nProvided that a sentence of transportation shall not be commuted for a sentence of imprisonment for a term exceeding the term of transportation awarded by the court; or\n\n(d) either with or without conditions which the person sentenced accepts, release the person on parole.",
+  "page_start": 45,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief\".",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "25a0c21c-0bf5-48a4-be47-64e3d7971e64",
+    "handle": "123456789/526053",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

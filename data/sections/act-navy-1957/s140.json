@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s140",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "140",
+  "heading": "Summary punishment for contempt of court by person not subject to naval law",
+  "chapter": null,
+  "order": 144,
+  "text": "When any person not subject to naval law commits an offence as is described in section 165 in the presence of a court-martial, such court-martial may take such person into custody and at any time before the rising of the court on the same day, if it thinks fit, take cognizance of the offence and sentence the offender to fine not exceeding two hundred rupees or in default of payment to simple imprisonment for a term which may extend to one month, unless such fine shall be sooner paid.",
+  "page_start": 45,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "852cc395-17d2-49fd-9586-4ae8d28e34a4",
+    "handle": "123456789/524024",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s130",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "130",
+  "heading": "Order to be made.",
+  "chapter": null,
+  "order": 130,
+  "text": "When a Magistrate acting under section 126, section 127, section 128 or section 129, deems it necessary to require any person to show cause under such section, he shall make an order in writing, setting forth the substance of the information received, the amount of the bond to be executed, the term for which it is to be in force and the number of sureties, after considering the sufficiency and fitness of sureties.",
+  "page_start": 53,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "4ea1eafc-4ce8-4c36-9afc-8e53661361a9",
+    "handle": "123456789/546237",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

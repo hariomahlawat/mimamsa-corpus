@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s3",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "3",
+  "heading": "Evidence may be given of facts in issue and relevant facts.",
+  "chapter": null,
+  "order": 3,
+  "text": "Evidence may be given in any suit or proceeding of the existence or non-existence of every fact in issue and of such other facts as are hereinafter declared to be relevant, and of no others.\n\nExplanation.--This section shall not enable any person to give evidence of a fact which he is disentitled to prove by any provision of the law for the time being in force relating to civil procedure.\n\nIllustrations.\n\n(a) A is tried for the murder of B by beating him with a club with the intention of causing his death.\n\nAt A's trial the following facts are in issue:--\n\nA's beating B with the club;\n\nA's causing B's death by such beating;\n\nA's intention to cause B's death.\n\n(b) A suitor does not bring with him, and have in readiness for production at the first hearing of the case, a bond on which he relies. This section does not enable him to produce the bond or prove its contents at a subsequent stage of the proceedings, otherwise than in accordance with the conditions prescribed by the Code of Civil Procedure, 1908 (5 of 1908).",
+  "page_start": 10,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d2c85946-09e7-44ca-b476-ad99a1113773",
+    "handle": "123456789/545897",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s37",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "37",
+  "heading": "Designated police officer.",
+  "chapter": null,
+  "order": 37,
+  "text": "The State Government shall—\n\n(a) establish a police control room in every district and at State level;\n\n(b) designate a police officer in every district and in every police station, not below the rank of Assistant Sub-Inspector of Police who shall be responsible for maintaining the information about the names and addresses of the persons arrested, nature of the offence with which charged, which shall be prominently displayed in any manner including in digital mode in every police station and at the district headquarters.",
+  "page_start": 29,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "7c602ff5-84b1-4ef2-a657-3e64c4486862",
+    "handle": "123456789/546145",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

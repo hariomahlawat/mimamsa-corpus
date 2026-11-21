@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s13",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "13",
+  "heading": "Oath of allegiance.",
+  "chapter": null,
+  "order": 13,
+  "text": "Every officer and every [1][sailor] shall, as soon as may be, after appointment or enrolment make and subscribe before the commanding officer of the ship to which he belongs, or the prescribed officer an oath or affirmation in the following form, that is to say:--\n\n\"I.........................do swear in the name of God Solemnly affirm that I will bear true faith and allegiance to the Constitution of India as by law established and that I will, as in duty bound, honestly and faithfully serve in the naval service and go wherever ordered by sea, land or air, and that I will observe and obey all commands of the President and the commands of any superior officer set over me, even to the peril of my life.\".",
+  "page_start": 13,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 53 of 1974",
+      "by_doc_id": null,
+      "effective_date": "1974-12-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 53 of 1974, s. 2, for \"seaman\" (w.e.f. 16-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "94937d65-a90b-4f9d-a429-6781248f5273",
+    "handle": "123456789/517359",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

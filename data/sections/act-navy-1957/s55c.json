@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s55c",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "55C",
+  "heading": "Low flying and annoyance by flying",
+  "chapter": null,
+  "order": 58,
+  "text": "[1][55C. Low flying and annoyance by flying.--Every person subject to naval law being the pilot of an aircraft of the Indian Navy, who--\n\n(a) flies it at a height less than the minimum height authorised by his commanding officer or appropriate service authority except while taking off or landing; or\n\n(b) flies it so as to cause or likely to cause unnecessary annoyance to any person,\n\nshall be punished with imprisonment for a term which may extend to two years or such other punishment as is hereinafter mentioned.]",
+  "page_start": 23,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "s. 14, ibid.",
+      "by_doc_id": null,
+      "effective_date": "1974-12-15",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by s. 14, ibid. (w.e.f. 15-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d31a9fd7-8178-4f28-a758-e4aeb5db0d14",
+    "handle": "123456789/523917",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

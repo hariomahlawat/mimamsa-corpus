@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s74",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "74",
+  "heading": "Cashiering of officers.",
+  "chapter": null,
+  "order": 74,
+  "text": "An officer shall be sentenced to be cashiered before he is awarded any of the punishments specified in clauses (a) to (c) of section 71.",
+  "page_start": 26,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "65dd2cf6-007f-4b35-b47a-f9681264e9fa",
+    "handle": "123456789/525936",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

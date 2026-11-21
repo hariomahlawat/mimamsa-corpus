@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s68",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "68",
+  "heading": "Service on Government servant.",
+  "chapter": null,
+  "order": 68,
+  "text": "(1) Where the person summoned is in the active service of the Government, the Court issuing the summons shall ordinarily send it in duplicate to the head of the office in which such person is employed; and such head shall thereupon cause the summons to be served in the manner provided by section 64, and shall return it to the Court under his signature with the endorsement required by that section.\n\n(2) Such signature shall be evidence of due service.",
+  "page_start": 35,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "189d69e1-17e7-43d5-a3ea-605307b65a7e",
+    "handle": "123456789/546178",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

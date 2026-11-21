@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s323",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "323",
+  "heading": "Return of commission.",
+  "chapter": null,
+  "order": 323,
+  "text": "(1) After any commission issued under section 319 has been duly executed, it shall be returned, together with the deposition of the witness examined thereunder, to the Court or Magistrate issuing the commission; and the commission, the return thereto and the deposition shall be open at all reasonable times to inspection of the parties, and may, subject to all just exceptions, be read in evidence in the case by either party, and shall form part of the record.\n\n(2) Any deposition so taken, if it satisfies the conditions specified by section 27 of the Bharatiya Sakshya Adhiniyam, 2023, may also be received in evidence at any subsequent stage of the case before another Court.",
+  "page_start": 111,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "54df6b98-62d3-4a83-8415-deb77fe0e220",
+    "handle": "123456789/546414",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

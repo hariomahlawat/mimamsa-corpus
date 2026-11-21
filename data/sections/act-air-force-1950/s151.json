@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s151",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "151",
+  "heading": "Powers of courts-martial when certain offences are committed by persons not subject to this Act.",
+  "chapter": null,
+  "order": 151,
+  "text": "Any trial by a court-martial under the provisions of this Act shall be deemed to be a judicial proceeding within the meaning of sections 193 and 228 of the Indian Penal Code (45 of 1860), and the court-martial shall be deemed to be a Court within the meaning of sections 480 and 482 of the Code of Criminal Procedure, 1898 (5 of 1898).",
+  "page_start": 46,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "38871afd-225f-465f-87de-e38faa37a371",
+    "handle": "123456789/523762",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

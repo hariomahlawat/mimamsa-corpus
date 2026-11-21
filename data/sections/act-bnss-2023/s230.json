@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s230",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "230",
+  "heading": "Supply to accused of copy of police report and other documents.",
+  "chapter": null,
+  "order": 230,
+  "text": "In any case where the proceeding has been instituted on a police report, the Magistrate shall without delay, and in no case beyond fourteen days from the date of production or appearance of the accused, furnish to the accused and the victim (if represented by an advocate) free of cost, a copy of each of the following:—\n\n(i) the police report;\n\n(ii) the first information report recorded under section 173;\n\n(iii) the statements recorded under sub-section (3) of section 180 of all persons whom the prosecution proposes to examine as its witnesses, excluding therefrom any part in regard to which a request for such exclusion has been made by the police officer under sub-section (7) of section 193;\n\n(iv) the confessions and statements, if any, recorded under section 183;\n\n(v) any other document or relevant extract thereof forwarded to the Magistrate with the police report under sub-section (6) of section 193:\n\nProvided that the Magistrate may, after perusing any such part of a statement as is referred to in clause (iii) and considering the reasons given by the police officer for the request, direct that a copy of that part of the statement or of such portion thereof as the Magistrate thinks proper, shall be furnished to the accused:\n\nProvided further that if the Magistrate is satisfied that any such document is voluminous, he shall, instead of furnishing the accused and the victim (if represented by an advocate) with a copy thereof, may furnish the copies through electronic means or direct that he will only be allowed to inspect it either personally or through an advocate in Court:\n\nProvided also that supply of documents in electronic form shall be considered as duly furnished.",
+  "page_start": 88,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ed2f8aff-3c38-4daa-95e4-5a1e411904b6",
+    "handle": "123456789/546330",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

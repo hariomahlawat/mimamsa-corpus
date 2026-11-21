@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-af-disposal-private-property-1950#s10",
+  "parent_doc_id": "act-army-af-disposal-private-property-1950",
+  "unit": "section",
+  "number": "10",
+  "heading": "Disposal of certain property without production of probate, etc.",
+  "chapter": null,
+  "order": 10,
+  "text": "Property deliverable and money payable to the representative of a deceased under section 3 or section 4 or section 8 may, if the total amount or value thereof does not exceed [1][two lakhs] rupees and if the prescribed person thinks fit, be delivered or paid to any person appearing to him to be entitled to receive it or to administer the estate of the deceased without requiring such person to produce any probate, letters of administration, succession certificate or other such conclusive evidence of title.",
+  "page_start": 5,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 3, ibid.",
+      "by_doc_id": null,
+      "effective_date": "2000-08-25",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 3, ibid., for \"ten thousand\" (w.e.f. 25-8-2000).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "47d7a3e0-77ba-4630-92c7-5b3128f6c867",
+    "handle": "123456789/527810",
+    "listing_raw_path": "data/raw/indiacode/1950/2dce3a9525b06939bf0a27ebc223106bd030c88a8fa3f2aa0c722862fe2924b3.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s370",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "370",
+  "heading": "Resumption of inquiry or trial.",
+  "chapter": null,
+  "order": 370,
+  "text": "(1) Whenever an inquiry or a trial is postponed under section 367 or section 368, the Magistrate or Court, as the case may be, may at any time after the person concerned has ceased to be of unsound mind, resume the inquiry or trial and require the accused to appear or be brought before such Magistrate or Court.\n\n(2) When the accused has been released under section 369, and the sureties for his appearance produce him to the officer whom the Magistrate or Court appoints in this behalf, the certificate of such officer that the accused is capable of making his defence shall be receivable in evidence.",
+  "page_start": 131,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "7e977294-8ea1-4d4c-96b4-b4195c1caa9e",
+    "handle": "123456789/546460",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

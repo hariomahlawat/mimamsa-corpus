@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s276",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "276",
+  "heading": "Conviction on plea of guilty in absence of accused in petty cases.",
+  "chapter": null,
+  "order": 276,
+  "text": "(1) Where a summons has been issued under section 229 and the accused desires to plead guilty to the charge without appearing before 102 the Magistrate, he shall transmit to the Magistrate, by post or by messenger, a letter containing his plea and also the amount of fine specified in the summons.\n\n(2) The Magistrate may, in his discretion, convict the accused in his absence, on his plea of guilty and sentence him to pay the fine specified in the summons, and the amount transmitted by the accused shall be adjusted towards that fine, or where an advocate authorised by the accused in this behalf pleads guilty on behalf of the accused, the Magistrate shall record the plea as nearly as possible in the words used by the advocate and may, in his discretion, convict the accused on such plea and sentence him as aforesaid.",
+  "page_start": 101,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "9e06d809-276e-48be-9f87-8b65f472cf5f",
+    "handle": "123456789/546371",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

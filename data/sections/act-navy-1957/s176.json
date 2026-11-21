@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s176",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "176",
+  "heading": "Disposal of surplus by prescribed persons.",
+  "chapter": null,
+  "order": 181,
+  "text": "On receipt of the surplus referred to in sub-section (7) of section 171 or clause (ii) of section 172 or sub-section (4) of section 175, the prescribed person shall,--\n\n(a) if he knows of a legal representative of the deceased, pay the surplus to that representative;\n\n(b) if the surplus does not exceed [1][the prescribed amount not exceeding rupees on lakh in value] if he thinks fit, pay or deliver to any person appearing to him to be entitled to receive the same, without requiring such person to produce any probate, letters of administration, succession certificate or other conclusive evidence of title;\n\n(c) if the prescribed person does not know of any such representative to whom the surplus could be paid under clause (a), or if the surplus has not been disposed of under clause (b), publish every year a notice in the prescribed form and manner for six consecutive years; and if no claim to the surplus is made by the legal representative of the deceased within six months even after the publication of the last of such notices, the prescribed person shall deposit the surplus together with any income or accumulation of income accrue therefrom, to the credit of the Central Government:\n\nProvided that such deposit shall not prejudice the claims of any person to such surplus or any part thereof, if he is otherwise entitled to it.",
+  "page_start": 55,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 23 of 2005",
+      "by_doc_id": null,
+      "effective_date": "2005-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 23 of 2005, s. 9, for \"ten thousand rupees in value and\" (w.e.f. 23-6-2005).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "01e08428-04dd-4b9f-9d16-6aeedb7a0f3d",
+    "handle": "123456789/524317",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

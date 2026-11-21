@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s167",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "167",
+  "heading": "Penalty as regards gaolers, etc.",
+  "chapter": null,
+  "order": 172,
+  "text": "Every governor, gaoler, and keeper of any prison, gaol, or house of correction or of any naval detention quarters, and every person having the charge of command of any place, ship, or vessel for imprisonment, who shall without lawful excuse, refuse or neglect to receive or confine, remove, discharge, or deliver up any offender against the provisions of this Act, or any of them, shall incur for every such refusal or neglect a penalty not exceeding one thousand rupees and every such penalty shall be applied as the Central Government may direct notwithstanding any law, charter, or custom to the contrary.",
+  "page_start": 52,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1b6ebda8-621b-4b32-9517-34e150c60adf",
+    "handle": "123456789/524143",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

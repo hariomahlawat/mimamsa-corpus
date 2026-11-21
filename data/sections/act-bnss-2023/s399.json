@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s399",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "399",
+  "heading": "Compensation to persons groundlessly arrested.",
+  "chapter": null,
+  "order": 399,
+  "text": "(1) Whenever any person causes a police officer to arrest another person, if it appears to the Magistrate by whom the case is heard that there was no sufficient ground for causing such arrest, the Magistrate may award such compensation, not exceeding one thousand rupees, to be paid by the person so causing the arrest to the person so arrested, for his loss of time and expenses in the matter, as the Magistrate thinks fit.\n\n(2) In such cases, if more persons than one are arrested, the Magistrate may, in like manner, award to each of them such compensation, not exceeding one thousand rupees, as such Magistrate thinks fit.\n\n(3) All compensation awarded under this section may be recovered as if it were a fine, and, if it cannot be so recovered, the person by whom it is payable shall be sentenced to simple imprisonment for such term not exceeding thirty days as the Magistrate directs, unless such sum is sooner paid.",
+  "page_start": 139,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d49ff1a4-4afb-4c76-ab12-8e6584575103",
+    "handle": "123456789/546489",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s204",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "204",
+  "heading": "Place of trial for offences triable together.",
+  "chapter": null,
+  "order": 204,
+  "text": "Where—\n\n(a) the offences committed by any person are such that he may be charged with, and tried at one trial for, each such offence by virtue of the provisions of section 242, section 243 or section 244; or\n\n(b) the offence or offences committed by several persons are such that they may be charged with and tried together by virtue of the provisions of section 246, the offences may be inquired into or tried by any Court competent to inquire into or try any of the offences.",
+  "page_start": 80,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "fab10415-a2df-4713-bde2-8d006c38dc6f",
+    "handle": "123456789/546304",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

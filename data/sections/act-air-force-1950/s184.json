@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s184",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "184",
+  "heading": "Order after suspension.",
+  "chapter": null,
+  "order": 184,
+  "text": "The authority or officer specified in section 180, at any time while a sentence is suspended, order--\n\n(a) that the offender be committed to undergo the unexpired portion of the sentence, or\n\n(b) that the sentence be remitted.",
+  "page_start": 52,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "dc700148-b1a4-4a21-986d-c8474371e584",
+    "handle": "123456789/523795",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

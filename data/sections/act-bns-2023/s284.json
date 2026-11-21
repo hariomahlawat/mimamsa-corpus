@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s284",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "284",
+  "heading": "Conveying person by water for hire in unsafe or overloaded vessel.",
+  "chapter": null,
+  "order": 284,
+  "text": "Whoever knowingly or negligently conveys, or causes to be conveyed for hire, any person by water in any vessel, when that vessel is in such a state or so loaded as to endanger the life of that person, shall be punished with imprisonment of either description for a term which may extend to six months, or with fine which may extend to five thousand rupees, or with both.",
+  "page_start": 83,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "9649b475-5fb0-4f3f-b785-5eb6d82bda22",
+    "handle": "123456789/545775",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s99",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "99",
+  "heading": "Trial judge advocate",
+  "chapter": null,
+  "order": 103,
+  "text": "(1) Every court-martial shall be attended by a person (in this Act referred to as the trial judge advocate) who shall be either a judge advocate in the department of the Judge Advocate-General of the Navy or any fit person appointed by the convening officer:\n\nProvided that in the case of a court-martial for the trial of a capital offence the trial judge advocate shall be a person nominated by the Judge Advocate-General of the Navy unless such trial is held outside Indian waters.\n\n(2) The trial judge advocate shall administer oath to every witness at the trial and shall perform such other duties as are provided in this Act and as may be prescribed.",
+  "page_start": 36,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "87779427-2ffa-4bd6-a2c9-b747571bd01e",
+    "handle": "123456789/523966",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

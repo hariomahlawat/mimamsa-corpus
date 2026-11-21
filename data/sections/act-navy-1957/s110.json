@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s110",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "110",
+  "heading": "Swearing of witnesses.",
+  "chapter": null,
+  "order": 114,
+  "text": "(1) No witness shall be examined until he has been duly sworn or affirmed in the following manner:--\n\n\"I......................................do swear in the name of God solemnly affirm that the evidence which I shall give before this court shall be the truth, the whole truth and nothing but the truth.\".\n\n(2) Every person giving evidence on oath or affirmation before a court-martial shall be bound to state the truth.",
+  "page_start": 38,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "fdcf0889-863e-4622-ac8f-0e458a7bcb92",
+    "handle": "123456789/523978",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

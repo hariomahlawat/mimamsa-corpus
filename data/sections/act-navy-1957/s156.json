@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s156",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "156",
+  "heading": "Removal of insane prisoners",
+  "chapter": null,
+  "order": 160,
+  "text": "If any person imprisoned or undergoing detention by virtue of this Act shall become insane, and a certificate to that effect shall be given by two physicians or surgeons, the Central Government shall, by warrant in the prescribed form, direct the removal of such person to such asylum or other proper receptacle for insane persons in India as it may judge proper for the unexpired term of his imprisonment or detention; and if any such person shall in the same manner be certified to be again of sound mind, the Central Government may issue a warrant in the prescribed form for his being removed to such prison or place of confinement or in the case of a person sentenced to detention, such naval detention quarters as may be deemed expedient, to undergo the remainder of his punishment, and every gaoler or keeper of any prison, gaol, or house of correction shall receive him accordingly.",
+  "page_start": 48,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "bdc5498e-4ebd-4d76-910e-c51abe732d79",
+    "handle": "123456789/524041",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

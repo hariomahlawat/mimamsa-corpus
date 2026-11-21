@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s19",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "19",
+  "heading": "Restrictions respecting right to form associations, freedom of speech, etc.",
+  "chapter": null,
+  "order": 19,
+  "text": "(1) No person subject to naval law shall, without the express sanction of the Central Government,--\n\n(a) be a member of, or be associated in any way with, any trade union, labour union, political association or with any class of trade unions, labour unions or political associations, or\n\n(b) be a member of, or be associated in any way with, any other society, institution, association or organisation that is not recognised as part of the Armed Forces of the Union or is not of a purely social, recreational or religious nature.\n\nExplanation.--If any question arises as to whether any society, institution, association or organisation is of a purely social, recreational or religious nature, the decision of the Central Government thereon shall be final.\n\n(2) No person subject to naval law shall attend or address any meeting or take any part in any demonstration organised by any body of persons for any political purposes or for such other purposes as may be specified in this behalf by the Central Government.\n\n(3) No person subject to naval law shall communicate with the press or publish or cause to be published any book, letter or other document having bearing on any naval, army or air force subject or containing any fact or opinion calculated to embarrass the relations between the Government and the people or any section thereof or between the Government and any foreign country, except with the previous sanction of the Central Government.\n\n(4) No person subject to naval law shall whilst he is so subject practise any profession or carry on any occupation, trade or business without the previous sanction of the Chief of the Naval staff.",
+  "page_start": 14,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "400e2dae-9677-45fc-98b5-fc86b0cc1ec0",
+    "handle": "123456789/517366",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

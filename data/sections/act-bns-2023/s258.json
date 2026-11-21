@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s258",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "258",
+  "heading": "Commitment for trial or confinement by person having authority who knows that he is acting contrary to law",
+  "chapter": null,
+  "order": 258,
+  "text": "Whoever, being in any office which gives him legal authority to commit persons for trial or to confinement, or to keep persons in confinement, corruptly or maliciously commits any person for trial or to confinement, or keeps any person in confinement, in the exercise of that authority knowing that in so doing he is acting contrary to law, shall be punished with imprisonment of either description for a term which may extend to seven years, or with fine, or with both.",
+  "page_start": 79,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d8372939-7086-4d02-8a5a-c8e722fb304d",
+    "handle": "123456789/545879",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

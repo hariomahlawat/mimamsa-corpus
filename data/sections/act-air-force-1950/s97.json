@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s97",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "97",
+  "heading": "Pay and allowances of prisoner of war during inquiry into his conduct.",
+  "chapter": null,
+  "order": 97,
+  "text": "Where the conduct of any person subject to this Act when being taken prisoner by, or while in the hands of the enemy, is to be inquired into under this Act or any other law, [1][the Chief of the Air Staff] or any officer authorised by him may order that the whole or any part of the pay and allowances of such person shall be withheld pending the result of such inquiry.",
+  "page_start": 35,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1955-05-07",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief\" (w.e.f. 7-5-1955).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "973c72ae-5642-4988-9f43-f0e7946310da",
+    "handle": "123456789/523708",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

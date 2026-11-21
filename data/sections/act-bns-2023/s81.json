@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s81",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "81",
+  "heading": "Cohabitation caused by man deceitfully inducing belief of lawful marriage.",
+  "chapter": null,
+  "order": 81,
+  "text": "Every man who by deceit causes any woman who is not lawfully married to him to believe that she is lawfully married to him and to cohabit or have sexual intercourse with him in that belief, shall be punished with imprisonment of either description for a term which may extend to ten years, and shall also be liable to fine.",
+  "page_start": 32,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ec45c28b-44f1-4caf-8084-0e3a4dfd8afe",
+    "handle": "123456789/545577",
+    "listing_raw_path": "data/raw/indiacode/2023/3f63bdbb2512a509521a6dc9e8e8d97044f569307a1a0c1b10a743ec30873357.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

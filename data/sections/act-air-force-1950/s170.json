@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s170",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "170",
+  "heading": "Execution of sentence of detention.",
+  "chapter": null,
+  "order": 170,
+  "text": "Whenever any sentence of detention is passed under this Act, or whenever any sentence of death, transportation or imprisonment is commuted to detention, the sentence shall be carried out by detaining the offender in any military or air force detention barracks, detention cells or other military or air force custody; and when the sentence is to be carried out by detention in any military or air force detention barracks, the commanding officer of the person under sentence or such other officer as may be prescribed shall forward a warrant in the prescribed form to the officer-in-charge of the detention barracks in which the person under sentence is to be detained and shall forward the person under sentence to such detention barracks with the warrant.",
+  "page_start": 50,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "20e83069-1a82-49e3-8089-e590fe6d0c4d",
+    "handle": "123456789/523781",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

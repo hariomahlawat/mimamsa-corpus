@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s301",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "301",
+  "heading": "Definitions.",
+  "chapter": null,
+  "order": 301,
+  "text": "In this Chapter,---\n\n(a) \"detained\" includes detained under any law providing for preventive detention;\n\n(b) \"prison\" includes,---\n\n(i) any place which has been declared by the State Government, by general or special order, to be a subsidiary jail;\n\n(ii) any reformatory, Borstal institution or other institution of a like nature.",
+  "page_start": 107,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c25b326a-fb83-4e28-87b7-c8a09512b83a",
+    "handle": "123456789/546396",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

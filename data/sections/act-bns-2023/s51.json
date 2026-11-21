@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s51",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "51",
+  "heading": "Liability of abettor when one act abetted and different act done.",
+  "chapter": null,
+  "order": 51,
+  "text": "When an act is abetted and a different act is done, the abettor is liable for the act done, in the same manner and to the same extent as if he had directly abetted it:\n\nProvided that the act done was a probable consequence of the abetment, and was committed under the influence of the instigation, or with the aid or in pursuance of the conspiracy which constituted the abetment.\n\nllustrations.\n\n(a) A instigates a child to put poison into the food of Z, and gives him poison for that purpose. The child, in consequence of the instigation, by mistake puts the poison into the food of Y, which is by the side of that of Z. Here, if the child was acting under the influence of A’s instigation, and the act done was under the circumstances a probable consequence of the abetment, A is liable in the same manner and to the same extent as if he had instigated the child to put the poison into the food of Y.\n\n(b) A instigates B to burn Z’s house, B sets fire to the house and at the same time commits theft of property there. A, though guilty of abetting the burning of the house, is not guilty of abetting the theft; for the theft was a distinct act, and not a probable consequence of the burning.\n\n(c) A instigates B and C to break into an inhabited house at midnight for the purpose of robbery, and provides them with arms for that purpose. B and C break into the house, and being resisted by Z, one of the inmates, murder Z. Here, if that murder was the probable consequence of the abetment, A is liable to the punishment provided for murder.",
+  "page_start": 16,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "76764217-bad6-4d21-af1a-c79fffe7451e",
+    "handle": "123456789/545545",
+    "listing_raw_path": "data/raw/indiacode/2023/3f63bdbb2512a509521a6dc9e8e8d97044f569307a1a0c1b10a743ec30873357.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

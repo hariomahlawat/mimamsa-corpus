@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s16",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "16",
+  "heading": "Admission by party to proceeding or his agent.",
+  "chapter": null,
+  "order": 16,
+  "text": "(1) Statements made by a party to the proceeding, or by an agent to any such party, whom the Court regards, under the circumstances of the case, as expressly or impliedly authorised by him to make them, are admissions.\n\n(2) Statements made by--\n\n(i) parties to suits suing or sued in a representative character, are not admissions, unless they were made while the party making them held that character; or\n\n(ii) (a) persons who have any proprietary or pecuniary interest in the subject matter of the proceeding, and who make the statement in their character of persons so interested; or\n\n(b) persons from whom the parties to the suit have derived their interest in the subject matter of the suit,\n\nare admissions, if they are made during the continuance of the interest of the persons making the statements",
+  "page_start": 16,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6c5223aa-e963-43e3-8a27-4dd1488135be",
+    "handle": "123456789/545912",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

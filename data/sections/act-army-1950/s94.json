@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s94",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "94",
+  "heading": "Limit of certain deductions.",
+  "chapter": null,
+  "order": 94,
+  "text": "The total deductions from the pay and allowances of a person made under clauses (e), (g) to (i) of section 91 shall not, except where he is sentenced to dismissal, exceed in any one month one-half of his pay and allowances for that month.",
+  "page_start": 30,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e0b7420d-f04c-47d1-9703-4af183942a88",
+    "handle": "123456789/525958",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

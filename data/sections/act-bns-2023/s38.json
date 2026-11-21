@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s38",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "38",
+  "heading": "When right of private defence of body extends to causing death.",
+  "chapter": null,
+  "order": 38,
+  "text": "The right of private defence of the body extends, under the restrictions specified in section 37, to the voluntary causing of death or of any other harm to the assailant, if the offence which occasions the exercise of the right be of any of the descriptions hereinafter enumerated, namely:—\n\n(a) such an assault as may reasonably cause the apprehension that death will otherwise be the consequence of such assault;\n\n(b) such an assault as may reasonably cause the apprehension that grievous hurt will otherwise be the consequence of such assault;\n\n(c) an assault with the intention of committing rape;\n\n(d) an assault with the intention of gratifying unnatural lust;\n\n(e) an assault with the intention of kidnapping or abducting;\n\n(f) an assault with the intention of wrongfully confining a person, under circumstances which may reasonably cause him to apprehend that he will be unable to have recourse to the public authorities for his release;\n\n(g) an act of throwing or administering acid or an attempt to throw or administer acid which may reasonably cause the apprehension that grievous hurt will otherwise be the consequence of such act.",
+  "page_start": 10,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "72f228e8-12ea-4df4-b4be-7ab4951959ee",
+    "handle": "123456789/545533",
+    "listing_raw_path": "data/raw/indiacode/2023/3f63bdbb2512a509521a6dc9e8e8d97044f569307a1a0c1b10a743ec30873357.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s134",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "134",
+  "heading": "Summoning witnesses",
+  "chapter": null,
+  "order": 134,
+  "text": "(1) The convening officer, the presiding officer of a court-martial the Judge advocate or the commanding officer of the accused person, may, by summons under his hand, require the attendance at a time and place to be mentioned in the summons, of any person either to give evidence or to produce any document or other thing.\n\n(2) In the case of a witness amenable to air force authority, the summons shall be sent to his commanding officer and such officer shall serve it upon him accordingly.\n\n(3) In the case of any other witness, the summons shall be sent to the magistrate within whose jurisdiction he may be or reside, and such magistrate shall give effect to the summons as if the witness were required in the court of such magistrate.\n\n(4) When a witness is required to produce any particular document or other thing in his possession or power, the summons shall describe it with reasonable precision.",
+  "page_start": 41,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ca88e2cf-e929-45bd-9a6c-b00ce8138835",
+    "handle": "123456789/523745",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

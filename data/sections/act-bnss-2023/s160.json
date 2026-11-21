@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s160",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "160",
+  "heading": "Procedure on order being made absolute and consequences of disobedience.",
+  "chapter": null,
+  "order": 160,
+  "text": "(1) When an order has been made absolute under section 155 or section 157, the Magistrate shall give notice of the same to the person against whom the order was made, and shall further require him to perform the act directed by the order within the time to be fixed in the notice, and inform him that, in case of disobedience, he shall be liable to the penalty provided by section 223 of the Bharatiya Nyaya Sanhita, 2023.\n\n(2) If such act is not performed within the time fixed, the Magistrate may cause it to be performed, and may recover the costs of performing it, either by the sale of any building, goods or other property removed by his order, or by the distress and sale of any other movable property of such person within or without such Magistrate's local jurisdiction, and if such other property is without such jurisdiction, the order shall authorise its attachment and sale when endorsed by the Magistrate within whose local jurisdiction the property to be attached is found.\n\n(3) No suit shall lie in respect of anything done in good faith under this section.",
+  "page_start": 63,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ea01dc54-e738-4abe-90d1-8206cf63e50b",
+    "handle": "123456789/546265",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

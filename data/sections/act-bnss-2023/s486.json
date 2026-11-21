@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s486",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "486",
+  "heading": "Declaration by sureties.",
+  "chapter": null,
+  "order": 486,
+  "text": "Every person standing surety to an accused person for his release on bail, shall make a declaration before the Court as to the number of persons to whom he has stood surety including the accused, giving therein all the relevant particulars.",
+  "page_start": 163,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "190089b1-ffa6-4e66-9fa1-8e5df1b0dc90",
+    "handle": "123456789/546569",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

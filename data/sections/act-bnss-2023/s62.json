@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s62",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "62",
+  "heading": "Arrest to be made strictly according to Sanhita.",
+  "chapter": null,
+  "order": 62,
+  "text": "No arrest shall be made except in accordance with the provisions of this Sanhita or any other law for the time being in force providing for arrest.",
+  "page_start": 34,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a62d03dd-cf18-4c32-a66b-48b1eff8b9c7",
+    "handle": "123456789/546172",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

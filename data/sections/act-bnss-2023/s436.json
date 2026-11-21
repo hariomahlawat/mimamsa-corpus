@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s436",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "436",
+  "heading": "Reference to High Court.",
+  "chapter": null,
+  "order": 436,
+  "text": "(1) Where any Court is satisfied that a case pending before it involves a question as to the validity of any Act, Ordinance or Regulation or of any provision contained in an Act, Ordinance or Regulation, the determination of which is necessary for the disposal of the case, and is of opinion that such Act, Ordinance, Regulation or provision is invalid or inoperative, but has not been so declared by the High Court to which that Court is subordinate or by the Supreme Court, the Court shall state a case setting out its opinion and the reasons therefor, and refer the same for the decision of the High Court.\n\nExplanation.—In this section, \"Regulation\" means any Regulation as defined in the General Clauses Act, 1897 (10 of 1897), or in the General Clauses Act of a State.\n\n(2) A Court of Session may, if it thinks fit in any case pending before it to which the provisions of subsection (1) do not apply, refer for the decision of the High Court any question of law arising in the hearing of such case.\n\n(3) Any Court making a reference to the High Court under sub-section (1) or sub-section (2) may, pending the decision of the High Court thereon, either commit the accused to jail or release him on bail to appear when called upon.",
+  "page_start": 149,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "5756768a-40a5-49b3-8b59-8a2a7456a046",
+    "handle": "123456789/546526",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

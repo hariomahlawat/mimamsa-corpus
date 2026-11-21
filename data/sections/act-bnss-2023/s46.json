@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s46",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "46",
+  "heading": "No unnecessary restraint.",
+  "chapter": null,
+  "order": 46,
+  "text": "The person arrested shall not be subjected to more restraint than is necessary to prevent his escape.",
+  "page_start": 31,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6f0adfc7-8e81-4642-b5a5-d54c6c668429",
+    "handle": "123456789/546155",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

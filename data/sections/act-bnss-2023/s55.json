@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s55",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "55",
+  "heading": "Procedure when police officer deputes subordinate to arrest without warrant.",
+  "chapter": null,
+  "order": 55,
+  "text": "(1) When any officer in charge of a police station or any police officer making an investigation under Chapter XIII requires any officer subordinate to him to arrest without a warrant (otherwise than in his presence) any person who may lawfully be arrested without a warrant, he shall deliver to the officer required to make the arrest an order in writing, specifying the person to be arrested and the offence or other cause for which the arrest is to be made and the officer so required shall, before making the arrest, notify to the person to be arrested the substance of the order and, if so required by such person, shall show him the order.\n\n(2) Nothing in sub-section (1) shall affect the power of a police officer to arrest a person under section 35",
+  "page_start": 34,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a6aea8c1-9ac2-403c-8edb-484e86211b62",
+    "handle": "123456789/546165",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

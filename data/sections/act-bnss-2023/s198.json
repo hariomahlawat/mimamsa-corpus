@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s198",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "198",
+  "heading": "Place of inquiry or trial.",
+  "chapter": null,
+  "order": 198,
+  "text": "(a) When it is uncertain in which of several local areas an offence was committed; or\n\n(b) where an offence is committed partly in one local area and partly in another; or\n\n(c) where an offence is a continuing one, and continues to be committed in more local areas than one; or\n\n(d) where it consists of several acts done in different local areas, it may be inquired into or tried by a Court having jurisdiction over any of such local areas.",
+  "page_start": 79,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "653e2551-273e-4b00-a4d0-cb1679d345be",
+    "handle": "123456789/546298",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s74",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "74",
+  "heading": "Public and private documents.",
+  "chapter": null,
+  "order": 74,
+  "text": "(1) The following documents are public documents:--\n\n(a) documents forming the acts, or records of the acts--\n\n(i) of the sovereign authority;\n\n(ii) of official bodies and tribunals; and\n\n(iii) of public officers, legislative, judicial and executive of India or of a foreign country;\n\n(b) public records kept in any State or Union territory of private documents.\n\n(2) All other documents except the documents referred to in sub-section (1) are private.",
+  "page_start": 30,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2550d155-8fb2-4c19-86e2-d2d9e4c6d3ff",
+    "handle": "123456789/545969",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

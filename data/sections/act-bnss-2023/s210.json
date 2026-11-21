@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s210",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "210",
+  "heading": "Cognizance of offences by Magistrate.",
+  "chapter": null,
+  "order": 210,
+  "text": "(1) Subject to the provisions of this Chapter, any Magistrate of the first class, and any Magistrate of the second class specially empowered in this behalf under sub-section (2), may take cognizance of any offence—\n\n(a) upon receiving a complaint of facts, including any complaint filed by a person authorised under any special law, which constitutes such offence;\n\n(b) upon a police report (submitted in any mode including electronic mode) of such facts;\n\n(c) upon information received from any person other than a police officer, or upon his own knowledge, that such offence has been committed.\n\n(2) The Chief Judicial Magistrate may empower any Magistrate of the second class to take cognizance under sub-section (1) of such offences as are within his competence to inquire into or try.",
+  "page_start": 81,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a68769d9-39da-450b-b8ac-ef86de04b687",
+    "handle": "123456789/546310",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

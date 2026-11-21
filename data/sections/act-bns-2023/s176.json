@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s176",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "176",
+  "heading": "Illegal payments in connection with an election.",
+  "chapter": null,
+  "order": 176,
+  "text": "Whoever without the general or special authority in writing of a candidate incurs or authorises expenses on account of the holding of any public meeting, or upon any advertisement, circular or publication, or in any other way whatsoever for the purpose of promoting or procuring the election of such candidate, shall be punished with fine which may extend to ten thousand rupees:\n\nProvided that if any person having incurred any such expenses not exceeding the amount of ten rupees without authority obtains within ten days from the date on which such expenses were incurred the approval in writing of the candidate, he shall be deemed to have incurred such expenses with the authority of the candidate.",
+  "page_start": 85,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "389d9b5d-3cce-4ab5-85a2-17a9f6b225b4",
+    "handle": "123456789/545677",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

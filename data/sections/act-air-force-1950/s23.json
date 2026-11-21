@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s23",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "23",
+  "heading": "Certificate on termination of service.",
+  "chapter": null,
+  "order": 23,
+  "text": "Every warrant officer, or enrolled person who is dismissed, removed, discharged, retired or released from the service shall be furnished by his commanding officer with a certificate, in the language which is the mother tongue of such person and also in the English language setting forth--\n\n(a) the authority terminating his service;\n\n(b) the cause for such termination; and\n\n(c) the full period of his service in the Air Force.",
+  "page_start": 15,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8aa121a2-fc9a-402d-a52c-c6066b221e0b",
+    "handle": "123456789/525852",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

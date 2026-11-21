@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s109",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "109",
+  "heading": "Different kinds of courts-martial.",
+  "chapter": null,
+  "order": 109,
+  "text": "For purposes of this Act there shall be three kinds of courts-martial, that is to say,--\n\n(a) general courts-martial.\n\n(b) district courts-martial.\n\n(c) summary general courts-martial.",
+  "page_start": 37,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "48f2e79d-4ecc-4a14-a274-d39e0b5f14ed",
+    "handle": "123456789/523720",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

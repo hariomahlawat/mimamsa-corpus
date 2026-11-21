@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s84",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "84",
+  "heading": "Arrest without warrant.",
+  "chapter": null,
+  "order": 88,
+  "text": "(1) Any person subject to naval law may be ordered without warrant into naval custody by any superior officer for any offence triable under this Act.\n\n(2) A person subject to naval law may arrest without warrant any other person subject to naval law though he may be of a higher rank who in his view commits an offence punishable with death, or imprisonment for life or for a term which may extend to fourteen years.\n\n(3) A provost-marshal may arrest any person subject to naval law in accordance with the provisions of section 89.\n\n(4) It shall be lawful for the purpose of effecting arrest, or taking a person into custody, without warrant to use such force as may be necessary for the purpose.",
+  "page_start": 30,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "cdcb9ca2-13c8-4317-a7e2-a1a2a6b3f677",
+    "handle": "123456789/523950",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

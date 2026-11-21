@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s434",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "434",
+  "heading": "Finality of judgments and orders on appeal.",
+  "chapter": null,
+  "order": 434,
+  "text": "Judgments and orders passed by an Appellate Court upon an appeal shall be final, except in the cases provided for in section 418, section 419, sub-section (4) of section 425 or Chapter XXXII:\n\nProvided that notwithstanding the final disposal of an appeal against conviction in any case, the\n\nAppellate Court may hear and dispose of, on the merits,---\n\n(a) an appeal against acquittal under section 419, arising out of the same case; or\n\n(b) an appeal for the enhancement of sentence under section 418, arising out of the same case.",
+  "page_start": 148,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "5ad61cc4-59e2-4eb0-b3f5-2ddbf9e77984",
+    "handle": "123456789/546524",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

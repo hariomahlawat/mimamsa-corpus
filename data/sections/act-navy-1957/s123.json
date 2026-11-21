@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s123",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "123",
+  "heading": "Provisions relating to dissolution of courts-martial",
+  "chapter": null,
+  "order": 127,
+  "text": "(1) A court-martial assembled under this Act shall be dissolved--\n\n(a) when the number of members comprising the court is after the commencement of a trial reduced below four;\n\n(b) by the prolonged illness of the president, trial judge advocate or the accused;\n\n(c) by the death of the president or the trial judge advocate;\n\n(d) on the making of a report under sub-section (2) of section 143.\n\n(2) Whenever a court-martial is dissolved by virtue of sub-section (1), the accused may be retired.",
+  "page_start": 41,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "84df3adb-adbb-4ccb-8d90-cfbab8c56cd7",
+    "handle": "123456789/523998",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

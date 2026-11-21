@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s31",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "31",
+  "heading": "Relevancy of statement as to fact of public nature contained in certain Acts or notifications.",
+  "chapter": null,
+  "order": 31,
+  "text": "When the Court has to form an opinion as to the existence of any fact of a public nature, any statement of it, made in a recital contained in any Central Act or State Act or in a Central Government or State Government notification appearing in the respective Official Gazette or in any printed paper or in electronic or digital form purporting to be such Gazette, is a relevant fact.",
+  "page_start": 20,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d3109ee5-001c-4dfa-aa39-f443ffadd4df",
+    "handle": "123456789/545924",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

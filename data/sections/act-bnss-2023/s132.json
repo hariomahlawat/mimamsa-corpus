@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s132",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "132",
+  "heading": "Summons or warrant in case of person not so present.",
+  "chapter": null,
+  "order": 132,
+  "text": "If such person is not present in Court, the Magistrate shall issue a summons requiring him to appear, or, when such person is in custody, a warrant directing the officer in whose custody he is to bring him before the Court:\n\nProvided that whenever it appears to such Magistrate, upon the report of a police officer or upon other information (the substance of which report or information shall be recorded by the Magistrate), that there is reason to fear the commission of a breach of the peace, and that such breach of the peace cannot be prevented otherwise than by the immediate arrest of such person, the Magistrate may at any time issue a warrant for his arrest.",
+  "page_start": 53,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8731a4ad-f461-44e4-91cf-f8ae8a7b4048",
+    "handle": "123456789/546239",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

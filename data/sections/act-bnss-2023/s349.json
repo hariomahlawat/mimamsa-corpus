@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s349",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "349",
+  "heading": "Power of Magistrate to order person to give specimen signatures or handwriting, etc.",
+  "chapter": null,
+  "order": 349,
+  "text": "If a Magistrate of the first class is satisfied that, for the purposes of any investigation or proceeding under this Sanhita, it is expedient to direct any person, including an accused person, to give specimen signatures or finger impressions or handwriting or voice sample, he may make an order to that effect and in that case the person to whom the order relates shall be produced or shall attend at the time and place specified in such order and shall give his specimen signatures or finger impressions or handwriting or voice sample:\n\nProvided that no order shall be made under this section unless the person has at some time been arrested in connection with such investigation or proceeding:\n\nProvided further that the Magistrate may, for the reasons to be recorded in writing, order any person to give such specimen or sample without him being arrested.",
+  "page_start": 119,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "79efc34f-6bdc-44b4-bce9-0a8eda90b091",
+    "handle": "123456789/546440",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s58",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "58",
+  "heading": "Signing in blank and failure to report.",
+  "chapter": null,
+  "order": 58,
+  "text": "Any person subject to this Act who commits any of the following offences, that is to say,--\n\n(a) when signing any document relating to pay, arms, ammunition, equipment, clothing, supplies or stores, or any property of the Government fraudulently leaves in blank any material part for which his signature is a voucher; or\n\n(b) refuses or by culpable neglect omits to make or send a report or return which it is his duty to make or send;\n\nshall, on conviction by court-martial, be liable to suffer imprisonment for a term which may extend to seven years or such less punishment as is in this Act mentioned.",
+  "page_start": 25,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e4228894-6601-476b-8770-3c71e72ee61f",
+    "handle": "123456789/519373",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

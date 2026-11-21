@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s45",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "45",
+  "heading": "Abetment of a thing.",
+  "chapter": null,
+  "order": 45,
+  "text": "A person abets the doing of a thing, who—\n\n(a) instigates any person to do that thing; or\n\n(b) engages with one or more other person or persons in any conspiracy for the doing of that thing, if an act or illegal omission takes place in pursuance of that conspiracy, and in order to the doing of that thing; or\n\n(c) intentionally aids, by any act or illegal omission, the doing of that thing.\n\nExplanation 1.—A person who, by wilful misrepresentation, or by wilful concealment of a material fact which he is bound to disclose, voluntarily causes or procures, or attempts to cause or procure, a thing to be done, is said to instigate the doing of that thing.\n\nIllustration.\n\nA, a public officer, is authorised by a warrant from a Court to apprehend Z. B, knowing that fact and also that C is not Z, wilfully represents to A that C is Z and thereby intentionally causes A to apprehend C. Here B abets by instigation the apprehension of C.\n\nExplanation 2.—Whoever, either prior to or at the time of the commission of an act, does anything in order to facilitate the commission of that act, and thereby facilitates the commission thereof, is said to aid the doing of that act.",
+  "page_start": 14,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "71fc27d4-6d66-4e3e-a5ff-ab9d9d80c471",
+    "handle": "123456789/545541",
+    "listing_raw_path": "data/raw/indiacode/2023/3f63bdbb2512a509521a6dc9e8e8d97044f569307a1a0c1b10a743ec30873357.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

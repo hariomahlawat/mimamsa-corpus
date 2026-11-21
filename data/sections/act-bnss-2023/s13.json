@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s13",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "13",
+  "heading": "Subordination of Judicial Magistrates.",
+  "chapter": null,
+  "order": 13,
+  "text": "(1) Every Chief Judicial Magistrate shall be subordinate to the Sessions Judge; and every other Judicial Magistrate shall, subject to the general control of the Sessions Judge, be subordinate to the Chief Judicial Magistrate.\n\n(2) The Chief Judicial Magistrate may, from time to time, make rules or give special orders, consistent with this Sanhita, as to the distribution of business among the Judicial Magistrates subordinate to him",
+  "page_start": 21,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "5c8df27c-39cb-4832-a21b-9b12141c4c6b",
+    "handle": "123456789/546120",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

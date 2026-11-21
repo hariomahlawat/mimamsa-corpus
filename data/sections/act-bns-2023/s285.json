@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s285",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "285",
+  "heading": "Danger or obstruction in public way or line of navigation.",
+  "chapter": null,
+  "order": 285,
+  "text": "Whoever, by doing any act, or by omitting to take order with any property in his possession or under his charge, causes danger, obstruction or injury to any person in any public way or public line of navigation, shall be punished with fine which may extend to five thousand rupees.",
+  "page_start": 285,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "cb95b8b0-95fa-4c30-8ebc-1603f69f571a",
+    "handle": "123456789/545777",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

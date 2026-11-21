@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s493",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "493",
+  "heading": "Procedure in case of insolvency or death of surety or when a bond is forfeited.",
+  "chapter": null,
+  "order": 493,
+  "text": "When any surety to a bail bond under this Sanhita becomes insolvent or dies, or when any bond is forfeited under the provisions of section 491, the Court by whose order such bond was taken, or a Magistrate of the first class may order the person from whom such security was demanded to furnish fresh security in accordance with the directions of the original order, and if such security is not furnished, such Court or Magistrate may proceed as if there had been a default in complying with such original order.",
+  "page_start": 164,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0cc95b20-2c30-4124-91be-9b9587fd02b5",
+    "handle": "123456789/546671",
+    "listing_raw_path": "data/raw/indiacode/2023/84de940d3a0fe09d9683198d94de1a7af018b90eb5d0667daa39ef362963cb9b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

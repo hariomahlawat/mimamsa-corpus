@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s61",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "61",
+  "heading": "Criminal conspiracy.",
+  "chapter": null,
+  "order": 61,
+  "text": "(1) When two or more persons agree with the common object to do, or cause to be done—\n\n(a) an illegal act; or\n\n(b) an act which is not illegal by illegal means, such an agreement is designated a criminal conspiracy:\n\nProvided that no agreement except an agreement to commit an offence shall amount to a criminal conspiracy unless some act besides the agreement is done by one or more parties to such agreement in pursuance thereof.\n\nExplanation.—It is immaterial whether the illegal act is the ultimate object of such agreement, or is merely incidental to that object.\n\n(2) Whoever is a party to a criminal conspiracy,—\n\n(a) to commit an offence punishable with death, imprisonment for life or rigorous imprisonment for a term of two years or upwards, shall, where no express provision is made in this Sanhita for the punishment of such a conspiracy, be punished in the same manner as if he had abetted such offence;\n\n(b) other than a criminal conspiracy to commit an offence punishable as aforesaid shall be punished with imprisonment of either description for a term not exceeding six months, or with fine or with both.",
+  "page_start": 18,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "50955548-0914-4b2e-a6bf-81b57fbf9768",
+    "handle": "123456789/545556",
+    "listing_raw_path": "data/raw/indiacode/2023/3f63bdbb2512a509521a6dc9e8e8d97044f569307a1a0c1b10a743ec30873357.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s496",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "496",
+  "heading": "Power to direct levy of amount due on certain recognizances.",
+  "chapter": null,
+  "order": 496,
+  "text": "The High Court or Court of Session may direct any Magistrate to levy the amount due on a bond for appearance or attendance at such High Court or Court of Session.",
+  "page_start": 164,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "190c5fcb-d272-466e-9f86-5d56b444fadc",
+    "handle": "123456789/546577",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

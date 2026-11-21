@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s252",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "252",
+  "heading": "Taking gift to help to recover stolen property, etc.",
+  "chapter": null,
+  "order": 252,
+  "text": "Whoever takes or agrees or consents to take any gratification under pretence or on account of helping any person to recover any movable property of which he shall have been deprived by any offence punishable under this Sanhita, shall, unless he uses all means in his power to cause the offender to be apprehended and convicted of the offence, be punished with imprisonment of either description for a term which may extend to two years, or with fine, or with both.",
+  "page_start": 78,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "9516e49c-0517-4572-b426-7b14e67e5edd",
+    "handle": "123456789/545747",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

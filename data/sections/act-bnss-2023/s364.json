@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s364",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "364",
+  "heading": "Procedure when Magistrate cannot pass sentence sufficiently severe.",
+  "chapter": null,
+  "order": 364,
+  "text": "(1) Whenever a Magistrate is of opinion, after hearing the evidence for the prosecution and the accused, that the accused is guilty, and that he ought to receive a punishment different in kind from, or more severe than, that which such Magistrate is empowered to inflict, or, being a Magistrate of the second class, is of opinion that the accused ought to be required to execute a bond or bail bond under section 125, he may record the opinion and submit his proceedings, and forward the accused, to the Chief Judicial Magistrate to whom he is subordinate.\n\n(2) When more accused persons than one are being tried together, and the Magistrate considers it necessary to proceed under sub-section (1), in regard to any of such accused, he shall forward all the accused, who are in his opinion guilty, to the Chief Judicial Magistrate.\n\n(3) The Chief Judicial Magistrate to whom the proceedings are submitted may, if he thinks fit, examine the parties and recall and examine any witness who has already given evidence in the case and may call for and take any further evidence and shall pass such judgment, sentence or order in the case as he thinks fit, and is according to law.",
+  "page_start": 128,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "4a085caa-4a4c-4735-a337-d6748e771ddd",
+    "handle": "123456789/546454",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

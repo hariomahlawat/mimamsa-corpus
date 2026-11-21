@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s1",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "1",
+  "heading": "Short title and commencement.",
+  "chapter": null,
+  "order": 1,
+  "text": "(1) This Act may be called the Navy Act, 1957.\n\n(2) It shall come into force on such date[1] as the Central Government may, by notification in the Official Gazette, appoint.",
+  "page_start": 9,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [
+    "1st January, 1958, vide notification S.R.O. 11(E), dated 31st December, 1957, see Gazette of India, Extraordinary, 1958, Part II, s. 4(ii)."
+  ],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2c8c617d-b728-4b1f-821e-9655360e219b",
+    "handle": "123456789/517346",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.2.0",
+  "source": "indiacode",
+  "source_url": "https://indiacode.gov.in/server/api/core/bitstreams/f25d9e6e-8c24-4dc4-9ad5-60fd45ad73ee/content",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T14:33:22+00:00",
+  "sha256": "f9e11e04f942d3809c7479e37ba37ae70e39023e9191bb379a029d0a53535749",
+  "raw_path": "data/raw/indiacode/0000/f9e11e04f942d3809c7479e37ba37ae70e39023e9191bb379a029d0a53535749.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 319,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/regs-the-navy-pension-regulations-1964.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "regs-the-navy-pension-regulations-1964",
+      "type": "implements",
+      "target_doc_id": "act-navy-1957",
+      "target_ref_raw": "The Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "India Code lists this REGULATION record under act_id AC_CEN_28_38_00006_195762_1517807321397 (The Navy Act, 1957).",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "regs-the-navy-pension-regulations-1964",
+  "doc_type": "regulations",
+  "title": "THE NAVY (PENSION) REGULATIONS, 1964",
+  "number": "THE NAVY (PENSION) REGULATIONS, 1964",
+  "issuing_authority": "Ministry of Defence",
+  "issue_date": "1964-02-10",
+  "effective_date": null,
+  "status": "in_force",
+  "status_note": "Listed as not repealed on India Code (read 2026-11-21)",
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": "act-navy-1957",
+  "original_filename": "navy_pension_regulation,_1964.pdf",
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a1a782a4-8441-4028-83b5-2217509d6a5e",
+    "collection": "REGULATION",
+    "act_id": "AC_CEN_28_38_00006_195762_1517807321397",
+    "handle": "123456789/506368",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "number": "crawler",
+    "issue_date": "crawler",
+    "issuing_authority": "crawler",
+    "status": "rule",
+    "page_count": "rule",
+    "text_method": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s316",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "316",
+  "heading": "Record of examination of accused.",
+  "chapter": null,
+  "order": 316,
+  "text": "(1) Whenever the accused is examined by any Magistrate, or by a Court of Session, the whole of such examination, including every question put to him and every answer given by him, shall be recorded in full by the presiding Judge or Magistrate himself or where he is unable to do so owing to a physical or other incapacity, under his direction and superintendence by an officer of the Court appointed by him in this behalf.\n\n(2) The record shall, if practicable, be in the language in which the accused is examined or, if that is not practicable, in the language of the Court.\n\n(3) The record shall be shown or read to the accused, or, if he does not understand the language in which it is written, shall be interpreted to him in a language which he understands, and he shall be at liberty to explain or add to his answers.\n\n(4) It shall thereafter be signed by the accused and by the Magistrate or presiding Judge, who shall certify under his own hand that the examination was taken in his presence and hearing and that the record contains a full and true account of the statement made by the accused:\n\nProvided that where the accused is in custody and is examined through electronic communication, his signature shall be taken within seventy-two hours of such examination.\n\n(5) Nothing in this section shall be deemed to apply to the examination of an accused person in the course of a summary trial.",
+  "page_start": 110,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d24f2430-e384-441e-b689-86b9ee3e2b82",
+    "handle": "123456789/546410",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

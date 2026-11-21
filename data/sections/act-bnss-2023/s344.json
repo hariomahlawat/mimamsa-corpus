@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s344",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "344",
+  "heading": "Power to direct tender of pardon.",
+  "chapter": null,
+  "order": 344,
+  "text": "At any time after commitment of a case but before judgment is passed, the Court to which the commitment is made may, with a view to obtaining at the trial the evidence of any person supposed to have been directly or indirectly concerned in, or privy to, any such offence, tender a pardon on the same condition to such person.",
+  "page_start": 118,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "abef85e7-6ef4-4f3c-a9b7-4a6295b0190c",
+    "handle": "123456789/546435",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

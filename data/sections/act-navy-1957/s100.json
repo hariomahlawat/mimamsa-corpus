@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s100",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "100",
+  "heading": "Courts-martial to be public.",
+  "chapter": null,
+  "order": 104,
+  "text": "The place in which a court-martial is held for the purpose of trying an offence under this Act shall be deemed to be an open court to which the public generally may have access, so far as the same can conveniently contain them:\n\nProvided that, if the court is satisfied that it is necessary or expedient in the public interest or for the ends of justice so to do, the court may at any stage of the trial of any particular case order that the public generally or any portion thereof or any particular person shall not have access to, or be or remain in, the place in which the court is held.",
+  "page_start": 36,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "95d19101-8ed5-4ae9-835b-c42cbfaa4dff",
+    "handle": "123456789/523967",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

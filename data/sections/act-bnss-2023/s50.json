@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s50",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "50",
+  "heading": "Power to seize offensive weapons.",
+  "chapter": null,
+  "order": 50,
+  "text": "The police officer or other person making any arrest under this Sanhita may, immediately after the arrest is made, take from the person arrested any offensive weapons which he has about his person, and shall deliver all weapons so taken to the Court or officer before which or whom the officer or person making the arrest is required by this Sanhita to produce the person arrested.",
+  "page_start": 32,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "547b5e44-030d-4be9-8374-fad674fd57fc",
+    "handle": "123456789/546159",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

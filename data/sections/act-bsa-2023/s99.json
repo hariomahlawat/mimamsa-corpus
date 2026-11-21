@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s99",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "99",
+  "heading": "Evidence as to application of language which can apply to one only of several persons.",
+  "chapter": null,
+  "order": 99,
+  "text": "When the facts are such that the language used might have been meant to apply to any one, and could not have been meant to apply to more than one, of several persons or things, evidence may be given of facts which show which of those persons or things it was intended to apply to.\n\nIllustrations.\n\n(a) A agrees to sell to B, for one thousand rupees, \"my white horse\". A has two white horses. Evidence may be given of facts which show which of them was meant\n\n(b) A agrees to accompany B to Ramgarh. Evidence may be given of facts showing whether Ramgarh in Rajasthan or Ramgarh in Uttarakhand was meant.",
+  "page_start": 36,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a15682d0-d39a-46a5-89fd-85e003c351bb",
+    "handle": "123456789/545995",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

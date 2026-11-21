@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s497",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "497",
+  "heading": "Order for custody and disposal of property pending trial in certain cases.",
+  "chapter": null,
+  "order": 497,
+  "text": "(1) When any property is produced before any Criminal Court or the Magistrate empowered to take cognizance or commit the case for trial during any investigation, inquiry or trial, the Court or the Magistrate may make such order as it thinks fit for the proper custody of such property pending the conclusion of the investigation, inquiry or trial, and, if the property is subject to speedy and natural decay, or if it is otherwise expedient so to do, the Court or the Magistrate may, after recording such evidence as it thinks necessary, order it to be sold or otherwise disposed of.\n\nExplanation.---For the purposes of this section, \"property\" includes---\n\n(a) property of any kind or document which is produced before the Court or which is in its custody;\n\n(b) any property regarding which an offence appears to have been committed or which appears to have been used for the commission of any offence.\n\n(2) The Court or the Magistrate shall, within a period of fourteen days from the production of the property referred to in sub-section (1) before it, prepare a statement of such property containing its description in such form and manner as the State Government may, by rules, provide.\n\n(3) The Court or the Magistrate shall cause to be taken the photograph and if necessary, videograph on mobile phone or any electronic media, of the property referred to in sub-section (1).\n\n(4) The statement prepared under sub-section (2) and the photograph or the videography taken under sub-section (3) shall be used as evidence in any inquiry, trial or other proceeding under the Sanhita.\n\n(5) The Court or the Magistrate shall, within a period of thirty days after the statement has been prepared under sub-section (2) and the photograph or the videography has been taken under sub-section (3), order the disposal, destruction, confiscation or delivery of the property in the manner specified hereinafter.",
+  "page_start": 164,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0a14e06a-3e9b-44c2-a43f-79f56b7e2b16",
+    "handle": "123456789/546578",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

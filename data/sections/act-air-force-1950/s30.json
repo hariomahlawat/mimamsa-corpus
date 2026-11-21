@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s30",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "30",
+  "heading": "Immunity of persons attending courts-martial from arrest.",
+  "chapter": null,
+  "order": 30,
+  "text": "(1) No presiding officer or member of a court-martial, no judge advocate, no party to any proceeding before a court-martial, or his legal practitioner or agent, and no witness acting in obedience to a summons to attend a court-martial shall, while proceeding to, attending, or returning from, a court-martial, be liable to arrest under civil or revenue process.\n\n(2) If any such person is arrested under any such process, he may be discharged by order of the court-martial.",
+  "page_start": 16,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "5d830806-bc2e-4caa-b338-8bd8d67fb90a",
+    "handle": "123456789/525927",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

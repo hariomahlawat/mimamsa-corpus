@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s173",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "173",
+  "heading": "Punishment for bribery.",
+  "chapter": null,
+  "order": 173,
+  "text": "Whoever commits the offence of bribery shall be punished with imprisonment of either description for a term which may extend to one year, or with fine, or with both:\n\nProvided that bribery by treating shall be punished with fine only.\n\nExplanation.—“Treating” means that form of bribery where the gratification consists in food, drink, entertainment, or provision.",
+  "page_start": 85,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e56673ca-0c22-4505-8684-507dee15c029",
+    "handle": "123456789/545673",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

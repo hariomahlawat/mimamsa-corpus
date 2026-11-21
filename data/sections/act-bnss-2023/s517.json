@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s517",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "517",
+  "heading": "Exclusion of date on which Court is closed.",
+  "chapter": null,
+  "order": 517,
+  "text": "Where the period of limitation expires on a day when the Court is closed, the Court may take cognizance on the day on which the Court reopens.\n\nExplanation.---A Court shall be deemed to be closed on any day within the meaning of this section, if, during its normal working hours, it remains closed on that day.",
+  "page_start": 170,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3525a4c0-d7f8-4ab3-adb7-fe6dc79496f3",
+    "handle": "123456789/546599",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

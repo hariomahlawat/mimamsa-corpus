@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s164",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "164",
+  "heading": "Remedy against order, finding or sentence of court-martial.",
+  "chapter": null,
+  "order": 164,
+  "text": "(1) Any person subject to this Act who considers himself aggrieved by any order passed by any court-martial may present a petition to the officer or authority empowered to confirm any finding or sentence of such court-martial, and the confirming authority may take such steps as may be considered necessary to satisfy itself as to the correctness, legality or propriety of the order passed or as to the regularity of any proceeding to which the order relates.\n\n(2) Any person subject to this Act who considers himself aggrieved by a finding or sentence of any court-martial which has been confirmed, may present a petition to the Central Government, [1][the Chief of the Army Staff] or any prescribed officer superior in command to the one who confirmed such finding or sentence, and the Central Government, [1][the Chief of the Army Staff] or other officer, as the case may be, may pass such order thereon as it or he thinks fit.",
+  "page_start": 42,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief \".",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "129c22dc-a478-46c6-b798-21a133e5d14a",
+    "handle": "123456789/526035",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

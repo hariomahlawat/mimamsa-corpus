@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s179",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "179",
+  "heading": "Saving of rights of representative.",
+  "chapter": null,
+  "order": 184,
+  "text": "Nothing in this Chapter shall affect the rights and duties of the representative of a deceased [1][sailor] or officer or any Administrator-General, in respect of the property of such deceased [1][sailor] or officer not collected by the commanding officer or the Committee, as the case may be, and not forming part of the surplus handed over to the prescribed person either under sub-section (7) of section 171 or clause (ii) of section 172.",
+  "page_start": 55,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 53 of 1974",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": "16-12-74",
+      "footnote_text": "Subs. by Act 53 of 1974, s. 2, for \"seaman\" (w.e.f. 16-12-74).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "aa63d0d7-ee87-4f27-9939-fb578e648e4e",
+    "handle": "123456789/524320",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

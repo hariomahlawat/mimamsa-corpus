@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s52",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "52",
+  "heading": "Drunkenness.",
+  "chapter": null,
+  "order": 52,
+  "text": "[1][(1)] Every person subject to naval law who is guilty of drunkenness shall, if the offence is committed on active service, be punished with imprisonment for a term which may extend to two years or such other punishment as is hereinafter mentioned and in other cases be punished with imprisonment for a term which may extend to six months or such other punishment as is hereinafter mentioned.\n\n[2][(2) For the purpose of sub-section (1), a person shall be deemed to be guilty of drunkenness if, owing to the influence of alcohol or any drug whether alone or in combination with any other circumstances, he is unfit to be entrusted with his duty or with any duty which he may be called upon to perform or behaves in a disorderly manner or in a manner likely to bring discredit to the naval service.]",
+  "page_start": 22,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "2 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "renumbered",
+      "by_ref_raw": "s. 12, ibid.",
+      "by_doc_id": null,
+      "effective_date": "1974-12-16",
+      "effective_date_raw": null,
+      "footnote_text": "Section 52 renumbered as sub-section (1) thereof by s. 12, ibid. (w.e.f. 16-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "s. 12, ibid.",
+      "by_doc_id": null,
+      "effective_date": "1974-12-16",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by s. 12, ibid. (w.e.f. 16-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "04bf55a9-e48a-4716-8258-3ad915856514",
+    "handle": "123456789/517402",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

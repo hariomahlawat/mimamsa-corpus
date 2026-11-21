@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s187",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "187",
+  "heading": "Provisions as to existing naval forces, appointments, etc.",
+  "chapter": null,
+  "order": 193,
+  "text": "(1) The Indian Navy in existence at the commencement of this Act shall be deemed to be the regular naval force raised under this Act.\n\n(2) The Indian Naval Reserve, the Indian Naval Volunteer Reserve and the Indian Fleet Reserve in existence at the commencement of this Act shall be deemed to be the Indian Naval Reserve Forces raised under this Act.\n\n(3) Officers in the Indian Navy or the Indian Naval Reserve Forces at the commencement of this Act shall be deemed to have been appointed as such under this Act.\n\n(4) The person holding office as Judge Advocate of the Fleet at the commencement of this Act shall, on such commencement, be deemed to have been appointed as the Judge Advocate General of the Navy under this Act.\n\n(5) [1][Sailors] in the Indian Navy or in the Indian Naval Reserve Forces at the commencement of this Act shall be deemed to have been duly enrolled as such under this Act.",
+  "page_start": 57,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 53 of 1974",
+      "by_doc_id": null,
+      "effective_date": "1974-12-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 53 of 1974, s. 2, for \"seaman\" (w.e.f. 16-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "21d4cb13-de1c-44fe-b7a0-51eeb4b7e62f",
+    "handle": "123456789/524330",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

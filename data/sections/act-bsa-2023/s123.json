@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s123",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "123",
+  "heading": "Estoppel of acceptor of bill of exchange, bailee or licensee.",
+  "chapter": null,
+  "order": 123,
+  "text": "No acceptor of a bill of exchange shall be permitted to deny that the drawer had authority to draw such bill or to endorse it; nor shall any bailee or licensee be permitted to deny that his bailor or licensor had, at the time when the bailment or licence commenced, authority to make such bailment or grant such licence.\n\nExplanation 1.--The acceptor of a bill of exchange may deny that the bill was really drawn by the person by whom it purports to have been drawn.\n\nExplanation 2.--If a bailee delivers the goods bailed to a person other than the bailor, he may prove that such person had a right to them as against the bailor.",
+  "page_start": 40,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3c3ca101-b838-47d4-a6d9-606039f6a6a3",
+    "handle": "123456789/546020",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

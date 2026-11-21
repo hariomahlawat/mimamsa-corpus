@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s171",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "171",
+  "heading": "Communication of certain orders to prison officers.",
+  "chapter": null,
+  "order": 171,
+  "text": "Whenever an order if duly made under this Act setting aside or varying any sentence, order or warrant under which any person is confined in a civil, military or air force prison or detained in a military or air force detention barracks, a warrant in accordance with such order shall be forwarded by the officer making the order, or his staff officer, or such other person as may be prescribed, to the officer in charge of the prison or detention barracks in which such person is confined.",
+  "page_start": 50,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "593e1609-b2f8-42db-8ff7-12bf2ddd1387",
+    "handle": "123456789/523782",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

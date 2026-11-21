@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s178",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "178",
+  "heading": "Power to hold investigation or preliminary inquiry.",
+  "chapter": null,
+  "order": 178,
+  "text": "The Magistrate, on receiving a report under section 176, may direct an investigation, or, if he thinks fit, at once proceed, or depute any Magistrate subordinate to him to proceed, to hold a preliminary inquiry into, or otherwise to dispose of, the case in the manner provided in this Sanhita.",
+  "page_start": 69,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d7b83b13-26ce-404c-925c-95e30ede769e",
+    "handle": "123456789/546279",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

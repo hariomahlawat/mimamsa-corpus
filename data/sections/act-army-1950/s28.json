@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s28",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "28",
+  "heading": "Immunity from attachment.",
+  "chapter": null,
+  "order": 28,
+  "text": "Neither the arms, clothes, equipment, accoutrements or necessaries of any person subject to this Act, nor any animal used by him for the discharge of his duty, shall be seized, nor shall the pay and allowances of any such person or any part thereof be attached, by direction of any civil or revenue court or any revenue officer in satisfaction of any decree or order enforceable against him.",
+  "page_start": 15,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b7c96d98-6930-4f2f-b290-173ce37810c6",
+    "handle": "123456789/525886",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

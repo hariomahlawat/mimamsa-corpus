@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s106",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "106",
+  "heading": "Capture of deserters.",
+  "chapter": null,
+  "order": 106,
+  "text": "(1) Whenever any person subject to this Act deserts, the commanding officer of the unit or detachment to which he belongs, shall give written information of the desertion to such civil authorities as, in his opinion, may be able to afford assistance towards the capture of the deserter; and such authorities shall thereupon take steps for the apprehension of the said deserter in like manner as if he were a person for whole apprehension a warrant had been issued by a magistrate; and shall deliver the deserter, when apprehended, into air force custody.\n\n(2) Any police officer may arrest without warrant any person reasonably believed to be subject to this Act, and to be a deserter or to be travelling without authority, and shall bring him without delay before the nearest magistrate, to be dealt with according to law.",
+  "page_start": 36,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "aec268fb-4600-470c-81b6-7c3cee627c53",
+    "handle": "123456789/523717",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

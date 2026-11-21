@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s180",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "180",
+  "heading": "Suspension of sentence of transportation, imprisonment or detention.",
+  "chapter": null,
+  "order": 180,
+  "text": "(1) Where a person subject to this Act is sentenced by a court-martial to transportation, imprisonment or detention, the Central Government, [1][the Chief of the Air Staff] or any officer empowered to convene a general or a summary general court-martial may suspend the sentence whether or not the offender has already been committed to prison or to air force custody.\n\n(2) The authority or officer specified in sub-section (1) may in the case of an offender so sentenced direct that, until the orders of such authority or officer have been obtained, the offender shall not be committed to prison or to air force custody.\n\n(3) The powers conferred by sub-sections (1) and (2) may be exercised in the case of any such sentence which has been confirmed, reduced or commuted.",
+  "page_start": 52,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1955-05-07",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule \"the Commander-in-Chief\" (w.e.f. 7-5-1955).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "345c8770-955d-4a3c-be53-6876580725d3",
+    "handle": "123456789/523791",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

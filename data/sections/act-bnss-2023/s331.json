@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s331",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "331",
+  "heading": "Affidavit in proof of conduct of public servants.",
+  "chapter": null,
+  "order": 331,
+  "text": "When any application is made to any Court in the course of any inquiry, trial or other proceeding under this Sanhita, and allegations are made therein respecting any public servant, the applicant may give evidence of the facts alleged in the application by affidavit, and the Court may, if it thinks fit, order that evidence relating to such facts be so given.",
+  "page_start": 113,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8ce878f2-2de5-4d9b-a82d-4daae4a9042e",
+    "handle": "123456789/546422",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

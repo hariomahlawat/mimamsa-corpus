@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s133",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "133",
+  "heading": "Privilege not waived by volunteering evidence.",
+  "chapter": null,
+  "order": 133,
+  "text": "If any party to a suit gives evidence therein at his own instance or otherwise, he shall not be deemed to have consented thereby to such disclosure as is mentioned in section 132; and, if any party to a suit or proceeding calls any such advocate, as a witness, he shall be deemed to have consented to such disclosure only if he questions such advocate, on matters which, but for such question, he would not be at liberty to disclose.",
+  "page_start": 42,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "efed77ba-685f-4a1b-adea-d051469c3dbd",
+    "handle": "123456789/546032",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

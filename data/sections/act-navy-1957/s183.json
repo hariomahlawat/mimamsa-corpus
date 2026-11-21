@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s183",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "183",
+  "heading": "Forfeiture of effects for absence without leave.",
+  "chapter": null,
+  "order": 188,
+  "text": "If any person subject to naval law is absent without leave for a period of one month (whether he is guilty of desertion or of improperly leaving his ship or place of duty or not) but is not apprehended or tried for his offence, he shall be liable for forfeiture of pay and allowances and other benefits as the Central Government from time to time by regulations provide, and the Central Government, the Chief of the Naval Staff or the prescribed officer may by an order containing a statement of the absence without leave direct that the clothes and effects, if any, left by him on board ship or at his place of duty be forfeited and the same be sold and the proceeds of the same shall be disposed of as provided in the regulations made under this Act; and every order under this provision for forfeiture or sale be conclusive for the purpose of this section as to the fact of the absence without leave as therein stated of the person therein named; but in any case the Central Government may, if it deems fit on sufficient cause being shown at any time after forfeiture and before sale, remit the forfeiture, or after sale pay or dispose of the proceeds of the sale or any part thereof to or for the use of the person to whom the clothes or effects belonged, or his representatives.",
+  "page_start": 56,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1c0402e7-ed4f-4385-8e21-129e751c652d",
+    "handle": "123456789/524325",
+    "listing_raw_path": "data/raw/indiacode/1957/dc3a8c95b349c57f8dbf9176abe4a1f28bd819a2560299a63997eac35de9b340.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

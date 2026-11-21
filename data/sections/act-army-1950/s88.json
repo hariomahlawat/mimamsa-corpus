@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s88",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "88",
+  "heading": "Superior military authority.",
+  "chapter": null,
+  "order": 88,
+  "text": "For the purpose of sections 86 and 87, a \"superior military authority \" means--\n\n(a) in the case of punishments awarded by a commanding officer, any officer superior in command to such commanding officer;\n\n(b) in the case of punishments awarded by any other authority, the Central Government, [1][the Chief of the Army Staff] or other officer specified by [1][the Chief of the Army Staff].",
+  "page_start": 28,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for the \"Commander-in-Chief\".",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "9d81bde9-d05f-4df3-91d6-7144b4a6a503",
+    "handle": "123456789/525952",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

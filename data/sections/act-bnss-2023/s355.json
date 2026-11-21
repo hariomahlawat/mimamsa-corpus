@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s355",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "355",
+  "heading": "Provision for inquiries and trial being held in absence of accused in certain cases.",
+  "chapter": null,
+  "order": 355,
+  "text": "(1) At any stage of an inquiry or trial under this Sanhita, if the Judge or Magistrate is satisfied, for reasons to be recorded, that the personal attendance of the accused before the Court is not necessary in the interests of justice, or that the accused persistently disturbs the proceedings in Court, the Judge or Magistrate may, if the accused is represented by an advocate, dispense with his attendance and proceed with such inquiry or trial in his absence, and may, at any subsequent stage of the proceedings, direct the personal attendance of such accused.\n\n(2) If the accused in any such case is not represented by an advocate, or if the Judge or Magistrate considers his personal attendance necessary, he may, if he thinks fit and for reasons to be recorded by him, either adjourn such inquiry or trial, or order that the case of such accused be taken up or tried separately.\n\nExplanation.—For the purpose of this section, personal attendance of the accused includes attendance through audio-video electronic means.",
+  "page_start": 121,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "26f34385-467f-4b89-aab3-9649f8551c77",
+    "handle": "123456789/546446",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

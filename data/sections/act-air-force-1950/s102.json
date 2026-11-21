@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s102",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "102",
+  "heading": "Custody of offenders",
+  "chapter": null,
+  "order": 102,
+  "text": "(1) Any person subject to this Act who is charged with an offence may be taken into air force custody.\n\n(2) Any such person may be ordered into air force custody by any superior officer.\n\n(3) Any officer may order into air force custody any officer, though he may be of a higher rank, engaged in a quarrel, affray or disorder.",
+  "page_start": 35,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "de2032e3-466e-4416-8f8e-567d1170c9b4",
+    "handle": "123456789/523713",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

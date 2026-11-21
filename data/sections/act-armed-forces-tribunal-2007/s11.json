@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s11",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "11",
+  "heading": "Prohibitions as to holding of offices, etc., by Chairperson or Member on ceasing to be such Chairperson or Member.",
+  "chapter": null,
+  "order": 12,
+  "text": "On ceasing to hold office--\n\n(a) the Chairperson shall be ineligible for further employment either under the Government of India or under the Government of a State;\n\n(b) a Member other than the Chairperson shall, subject to the provisions of this Act, be eligible for appointment as a member of any other Tribunal but not for any other employment either under the Government of India or under the Government of a State; and\n\n(c) the Chairperson or other Members shall not appear, act or plead before the Tribunal.",
+  "page_start": 6,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "94a98a13-3c2b-414b-a054-7b77736a4d2f",
+    "handle": "123456789/527349",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

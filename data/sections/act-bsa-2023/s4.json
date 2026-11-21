@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s4",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "4",
+  "heading": "Relevancy of facts forming part of same transaction.",
+  "chapter": null,
+  "order": 4,
+  "text": "Facts which, though not in issue, are so connected with a fact in issue or a relevant fact as to form part of the same transaction, are relevant, whether they occurred at the same time and place or at different times and places.\n\nIllustrations.\n\n(a) A is accused of the murder of B by beating him. Whatever was said or done by A or B or the bystanders at the beating, or so shortly before or after it as to form part of the transaction, is a relevant fact.\n\n(b) A is accused of waging war against the Government of India by taking part in an armed insurrection in which property is destroyed, troops are attacked and jails are broken open. The occurrence of these facts is relevant, as forming part of the general transaction, though A may not have been present at all of them.\n\n(c) A sues B for a libel contained in a letter forming part of a correspondence. Letters between the parties relating to the subject out of which the libel arose, and forming part of the correspondence in which it is contained, are relevant facts, though they do not contain the libel itself.\n\n(d) The question is, whether certain goods ordered from B were delivered to A. The goods were delivered to several intermediate persons successively. Each delivery is a relevant fact.",
+  "page_start": 10,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "503235cf-f7b0-4d2e-ae52-4617eebc0930",
+    "handle": "123456789/545899",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

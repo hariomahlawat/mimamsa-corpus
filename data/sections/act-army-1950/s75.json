@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s75",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "75",
+  "heading": "[Omitted.].",
+  "chapter": null,
+  "order": 75,
+  "text": "[Field punishment.] Omitted by the Army (Amendment) Act, 1992 (37 of 1992), s. 2 (w.e.f. 6-9-192).",
+  "page_start": 26,
+  "page_end": null,
+  "status": "omitted",
+  "status_note": "[Field punishment.] Omitted by the Army (Amendment) Act, 1992 (37 of 1992), s. 2 (w.e.f. 6-9-192).",
+  "amendment_history": [
+    {
+      "action": "omitted",
+      "by_ref_raw": "Army (Amendment) Act, 1992 (37 of 1992)",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": "6-9-192",
+      "footnote_text": "[Field punishment.] Omitted by the Army (Amendment) Act, 1992 (37 of 1992), s. 2 (w.e.f. 6-9-192).",
+      "confidence": "extracted",
+      "origin": "inline"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a8c2af31-7467-4e42-81fd-3be68f2b8c62",
+    "handle": "123456789/525937",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

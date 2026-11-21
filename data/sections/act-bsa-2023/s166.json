@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s166",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "166",
+  "heading": "Giving, as evidence, of document called for and produced on notice.",
+  "chapter": null,
+  "order": 166,
+  "text": "When a party calls for a document which he has given the other party notice to produce, and such document is produced and inspected by the party calling for its production, he is bound to give it as evidence if the party producing it requires him to do so.",
+  "page_start": 48,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "24e5fd71-aa7b-4865-9d50-daf2896a1a4f",
+    "handle": "123456789/546066",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

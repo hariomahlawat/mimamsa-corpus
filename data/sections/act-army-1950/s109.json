@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s109",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "109",
+  "heading": "Power to convene a general court-martial.",
+  "chapter": null,
+  "order": 109,
+  "text": "A general court- martial may be convened by the Central Government or [1][the Chief of the Army Staff] or by any officer empowered in this behalf by warrant of [1][the Chief of the Army Staff ].",
+  "page_start": 32,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and Schedule, for \"the Commander-in-Chief\".",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "02f086ac-caf5-4e92-83ad-642c68612d04",
+    "handle": "123456789/525975",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

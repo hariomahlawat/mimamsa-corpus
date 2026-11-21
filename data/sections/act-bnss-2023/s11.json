@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s11",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "11",
+  "heading": "Special Judicial Magistrates.",
+  "chapter": null,
+  "order": 11,
+  "text": "(1) The High Court may, if requested by the Central or State Government so to do, confer upon any person who holds or has held any post under the Government, all or any of the powers conferred or conferrable by or under this Sanhita on a Judicial Magistrate of the first class or of the second class, in respect to particular cases or to particular classes of cases, in any local area:\n\nProvided that no such power shall be conferred on a person unless he possesses such qualification or experience in relation to legal affairs as the High Court may, by rules, specify.\n\n(2) Such Magistrates shall be called Special Judicial Magistrates and shall be appointed for such term, not exceeding one year at a time, as the High Court may, by general or special order, direct.",
+  "page_start": 20,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0c9e88b0-2e50-4bcb-87db-67dd5b553621",
+    "handle": "123456789/546116",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

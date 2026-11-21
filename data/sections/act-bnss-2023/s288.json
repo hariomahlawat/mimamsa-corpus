@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s288",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "288",
+  "heading": "Language of record and judgment.",
+  "chapter": null,
+  "order": 288,
+  "text": "(1) Every such record and judgment shall be written in the language of the Court.\n\n(2) The High Court may authorise any Magistrate empowered to try offences summarily to prepare the aforesaid record or judgment or both by means of an officer appointed in this behalf by the Chief Judicial Magistrate, and the record or judgment so prepared shall be signed by such Magistrate.",
+  "page_start": 104,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8071a697-3ba7-4ec2-abe7-d5c6dd46a728",
+    "handle": "123456789/546383",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

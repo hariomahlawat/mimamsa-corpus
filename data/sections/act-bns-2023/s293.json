@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s293",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "293",
+  "heading": "Continuance of nuisance after injunction to discontinue.",
+  "chapter": null,
+  "order": 293,
+  "text": "Whoever repeats or continues a public nuisance, having been enjoined by any public servant who has lawful authority to issue such injunction not to repeat or continue such nuisance, shall be punished with simple imprisonment for a term which may extend to six months, or with fine which may extend to five thousand rupees or with both.",
+  "page_start": 84,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a528fbf5-4486-468c-8ea8-6358d4032f1c",
+    "handle": "123456789/545785",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

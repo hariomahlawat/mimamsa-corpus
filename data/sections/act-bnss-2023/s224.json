@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s224",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "224",
+  "heading": "Procedure by Magistrate not competent to take cognizance of case.",
+  "chapter": null,
+  "order": 224,
+  "text": "If the complaint is made to a Magistrate who is not competent to take cognizance of the offence, he shall,—\n\n(a) if the complaint is in writing, return it for presentation to the proper Court with an endorsement to that effect;\n\n(b) if the complaint is not in writing, direct the complainant to the proper Court.",
+  "page_start": 86,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b1083ff4-d6d6-4136-91da-7eddde3632b5",
+    "handle": "123456789/546324",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s156",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "156",
+  "heading": "Procedure where existence of public right is denied.",
+  "chapter": null,
+  "order": 156,
+  "text": "(1) Where an order is made under section 152 for the purpose of preventing obstruction, nuisance or danger to the public in the use of any way, river, channel or place, the Magistrate shall, on the appearance before him of the person against whom the order was made, question him as to whether he denies the existence of any public right in respect of the way, river, channel or place, and if he does so, the Magistrate shall, before proceeding under section 157, inquire into the matter.\n\n(2) If in such inquiry the Magistrate finds that there is any reliable evidence in support of such denial, he shall stay the proceedings until the matter of the existence of such right has been decided by a competent Court; and, if he finds that there is no such evidence, he shall proceed as laid down in section 157.\n\n(3) A person who has, on being questioned by the Magistrate under sub-section (1), failed to deny the existence of a public right of the nature therein referred to, or who, having made such denial, has failed to adduce reliable evidence in support thereof, shall not in the subsequent proceedings be permitted to make any such denial.",
+  "page_start": 62,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "5a1267db-af93-4092-a637-3c292bbc72af",
+    "handle": "123456789/546261",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

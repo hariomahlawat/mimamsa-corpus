@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s165",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "165",
+  "heading": "Execution of sentence of transportation.",
+  "chapter": null,
+  "order": 165,
+  "text": "Whenever any sentence of transportation is passed under this Act or whenever any sentence of death be commuted to transportation, the commanding officer of the person under sentence or such other officer as may be prescribed shall forward a warrant in the prescribed form to the officer-in-charge of the civil prison in which such person is to be confined and shall arrange for his dispatch to such prison with the warrant.",
+  "page_start": 49,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "28ccf44b-3c3f-4217-a887-84239c059f50",
+    "handle": "123456789/523776",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

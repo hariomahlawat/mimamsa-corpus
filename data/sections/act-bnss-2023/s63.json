@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s63",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "63",
+  "heading": "Form of summons.",
+  "chapter": null,
+  "order": 63,
+  "text": "Every summons issued by a Court under this Sanhita shall be,—\n\n(i) in writing, in duplicate, signed by the presiding officer of such Court or by such other officer as the High Court may, from time to time, by rule direct, and shall bear the seal of the Court; or\n\n(ii) in an encrypted or any other form of electronic communication and shall bear the image of the seal of the Court or digital signature.",
+  "page_start": 35,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d0825b6a-142a-4fea-b072-db846ab6dc4d",
+    "handle": "123456789/546634",
+    "listing_raw_path": "data/raw/indiacode/2023/84de940d3a0fe09d9683198d94de1a7af018b90eb5d0667daa39ef362963cb9b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

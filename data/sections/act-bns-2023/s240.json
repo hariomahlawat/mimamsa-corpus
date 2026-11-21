@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s240",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "240",
+  "heading": "Giving false information respecting an offence committed.",
+  "chapter": null,
+  "order": 240,
+  "text": "Whoever, knowing or having reason to believe that an offence has been committed, gives any information respecting that offence which he knows or believes to be false, shall be punished with imprisonment of either description for a term which may extend to two years, or with fine, or with both.\n\nExplanation.—In sections 238 and 239 and in this section the word \"offence\" includes any act committed at any place out of India, which, if committed in India, would be punishable under any of the following sections, namely, 103, 105, 307, sub-sections (2), (3) and (4) of section 309, sub-sections (2), (3), (4) and (5) of section 310, 311, 312, clauses (f) and (g) of section 326, sub-sections (4), (6), (7) and (8) of section 331, clauses (a) and (b) of section 332.",
+  "page_start": 75,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0ee30367-1b21-4a46-85e0-4b0b7ad48952",
+    "handle": "123456789/545735",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

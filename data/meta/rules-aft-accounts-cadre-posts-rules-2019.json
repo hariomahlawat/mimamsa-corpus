@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.2.0",
+  "source": "indiacode",
+  "source_url": "https://indiacode.gov.in/server/api/core/bitstreams/a2d8fad7-f500-400c-b8da-55dbb034499b/content",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T14:34:34+00:00",
+  "sha256": "c85c9c0ebbeb096f35c55167bfa32a48a9ac734c34e9b053ad232f0070e0ba35",
+  "raw_path": "data/raw/indiacode/0000/c85c9c0ebbeb096f35c55167bfa32a48a9ac734c34e9b053ad232f0070e0ba35.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 12,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/rules-aft-accounts-cadre-posts-rules-2019.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "rules-aft-accounts-cadre-posts-rules-2019",
+      "type": "implements",
+      "target_doc_id": "act-armed-forces-tribunal-2007",
+      "target_ref_raw": "The Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "India Code lists this RULE record under act_id AC_CEN_28_38_00013_200755_1517807323574 (The Armed Forces Tribunal Act, 2007).",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "rules-aft-accounts-cadre-posts-rules-2019",
+  "doc_type": "rules",
+  "title": "AFT-Accounts-Cadre-Posts-Rules-2019",
+  "number": null,
+  "issuing_authority": "Ministry of Defence",
+  "issue_date": "2019-06-12",
+  "effective_date": null,
+  "status": "in_force",
+  "status_note": "Listed as not repealed on India Code (read 2026-11-21)",
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "original_filename": "rrsaccountscadre.pdf",
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "90d69c0b-72dc-40c2-8739-49debbb5af0c",
+    "collection": "RULE",
+    "act_id": "AC_CEN_28_38_00013_200755_1517807323574",
+    "handle": "123456789/509282",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "number": "crawler",
+    "issue_date": "crawler",
+    "issuing_authority": "crawler",
+    "status": "rule",
+    "page_count": "rule",
+    "text_method": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s339",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "339",
+  "heading": "Permission to conduct prosecution.",
+  "chapter": null,
+  "order": 339,
+  "text": "(1) Any Magistrate inquiring into or trying a case may permit the prosecution to be conducted by any person other than a police officer below the rank of inspector; but no person, other than the Advocate-General or Government Advocate or a Public Prosecutor or Assistant Public Prosecutor, shall be entitled to do so without such permission:\n\nProvided that no police officer shall be permitted to conduct the prosecution if he has taken part in the investigation into the offence with respect to which the accused is being prosecuted.\n\n(2) Any person conducting the prosecution may do so personally or by an advocate.",
+  "page_start": 116,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "52104572-5222-4e49-bd78-8f662fb43f2f",
+    "handle": "123456789/546430",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

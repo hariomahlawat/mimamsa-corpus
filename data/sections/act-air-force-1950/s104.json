@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s104",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "104",
+  "heading": "Interval between committal and court-martial",
+  "chapter": null,
+  "order": 104,
+  "text": "In every case where any such person as is mentioned in section 102 and as is not on active service remains in such custody for a longer period than eight days, without a court-martial for his trial being ordered to assemble, a special report giving reasons for the delay shall be made by his commanding officer in the manner prescribed; and similar report shall be forwarded every eight days until a court-martial is assembled or such person is released from custody.",
+  "page_start": 36,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0acf0977-eeac-47cf-b09f-156ab740cc13",
+    "handle": "123456789/523715",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s358",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "358",
+  "heading": "Repeal and savings.",
+  "chapter": null,
+  "order": 358,
+  "text": "(1) The Indian Penal Code (45 of 1860) is hereby repealed.\n\n(2) Notwithstanding the repeal of the Code referred to in sub-section (1), it shall not affect,---\n\n(a) the previous operation of the Code so repealed or anything duly done or suffered thereunder; or\n\n(b) any right, privilege, obligation or liability acquired, accrued or incurred under the Code so repealed; or\n\n(c) any penalty, or punishment incurred in respect of any offences committed against the Code so repealed; or\n\n(d) any investigation or remedy in respect of any such penalty, or punishment; or\n\n(e) any proceeding, investigation or remedy in respect of any such penalty or punishment as aforesaid, and any such proceeding or remedy may be instituted, continued or enforced, and any such penalty may be imposed as if that Code had not been repealed.\n\n(3) Notwithstanding such repeal, anything done or any action taken under the said Code shall be deemed to have been done or taken under the corresponding provisions of this Sanhita.\n\n(4) The mention of particular matters in sub-section (2) shall not be held to prejudice or affect the general application of section 6 of the General Clauses Act, 1897 (10 of 1897) with regard to the effect of the repeal.",
+  "page_start": 108,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c20a35b0-afe4-4e83-9795-e7c2f2ef9f69",
+    "handle": "123456789/545847",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

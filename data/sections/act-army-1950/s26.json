@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s26",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "26",
+  "heading": "Remedy of aggrieved persons other than officers.",
+  "chapter": null,
+  "order": 26,
+  "text": "(1) Any person subject to this Act other than an officer who deems himself wronged by any superior or other officer may, if not attached to a troop or company, complain to the officer under whose command or orders he is serving; and may, if attached to a troop or company, complain to the officer commanding the same.\n\n(2) When the officer complained against is the officer to whom any complaint should, under sub-section (1), be preferred, the aggrieved person may complain to such officer's next superior officer.\n\n(3) Every officer receiving any such complaint shall make as complete an investigation into it as may be possible for giving full redress to the complainant; or, when necessary, refer the complaint to superior authority.\n\n(4) Every such complaint shall be preferred in such manner as may from time to time be specified by the proper authority.\n\n(5) The Central Government may revise any decision by [1][the Chief of the Army Staff] under sub-section (2), but, subject thereto, the decision of [1][the Chief of the Army Staff] shall be final.",
+  "page_start": 15,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the schedule for \"the Commander-in-Chief\".",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ed6afe77-2521-42c8-92eb-1446a0272a7b",
+    "handle": "123456789/525884",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

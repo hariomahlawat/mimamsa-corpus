@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s38",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "38",
+  "heading": "Protection of action taken in good faith.",
+  "chapter": null,
+  "order": 39,
+  "text": "No suit, prosecution or other legal proceeding shall lie against the Central Government or against the Chairperson or any other Member or any other person authorised by the Chairperson, for anything which is done in good faith or intended to be done in pursuance of this Act or any rule or order made thereunder in the discharge of official duties.",
+  "page_start": 12,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6ee21b60-3746-433d-a261-031b16b7dd57",
+    "handle": "123456789/527645",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

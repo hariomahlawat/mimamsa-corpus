@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s315",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "315",
+  "heading": "Remarks respecting demeanour of witness.",
+  "chapter": null,
+  "order": 315,
+  "text": "When a presiding Judge or Magistrate has recorded the evidence of a witness, he shall also record such remarks (if any) as he thinks material respecting the demeanour of such witness whilst under examination.",
+  "page_start": 110,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "7172ff5e-eaf1-4f24-a4e0-e036cae39a8e",
+    "handle": "123456789/546409",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

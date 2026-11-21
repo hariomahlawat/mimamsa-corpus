@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s35",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "35",
+  "heading": "Offences in relation to the enemy and not punishable with death.",
+  "chapter": null,
+  "order": 35,
+  "text": "Any person subject to this Act who commits any of the following offences, that is to say,--\n\n(a) is taken prisoner, by want of due precaution, or through disobedience of orders, or wilful neglect of duty, or having been taken prisoner, fails to rejoin his service when able to do so; or\n\n(b) without due authority holds correspondence with or communicates intelligence to the enemy or having come by the knowledge of any such correspondence or communication, wilfully omits to discover it immediately to his commanding or other superior officer; or\n\n(c) without due authority sends a flag of truce to the enemy; shall, on conviction by court-martial, be liable to suffer imprisonment for a term which may extend to fourteen years or such less punishment as is in this Act mentioned.",
+  "page_start": 17,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1b3d2a8f-ecb6-4e36-a46f-3423fe012a0a",
+    "handle": "123456789/525893",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s175",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "175",
+  "heading": "Power to make rules in respect of prisons and prisoners.",
+  "chapter": null,
+  "order": 175,
+  "text": "The Central Government may make rules providing.--(a) for the government, management and regulation of air force prisons and detention barracks;\n\n(b) for the appointment, removal and power of inspectors, visitors, governors and officers thereof;\n\n(c) for the labour of prisoners undergoing confinement therein, and for enabling such prisoners or, persons to earn by special industry and good conduct; a remission of a portion of their sentence;\n\n(d) for the safe custody of such prisoners or persons and the maintenance of discipline among them and the punishment, by personal correction, restraint or otherwise, of offences committed by them;\n\n(e) for the application to air force prisons or detention barracks of any of the provisions of the Prisons Act, 1894 (9 of 1894), relating to the duties of officers of prisons and the punishment of persons not being prisoners;\n\n(f) for the admission into any prison, at proper times and subject, to proper restrictions, of person's with whom prisoners may desire to communicate and for the consultation by prisoners under trial' with their legal advisers without the presence as far as possible of any third party within hearing distance.",
+  "page_start": 51,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f878cfa7-1896-4a8c-ba1f-61e93e1e1686",
+    "handle": "123456789/523786",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

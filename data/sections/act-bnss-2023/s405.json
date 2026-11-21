@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s405",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "405",
+  "heading": "Judgment when to be translated.",
+  "chapter": null,
+  "order": 405,
+  "text": "The original judgment shall be filed with the record of the proceedings and where the original is recorded in a language different from that of the Court, and if either party so requires, a translation thereof into the language of the Court shall be added to such record.",
+  "page_start": 141,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "bd2464d5-4c38-4c9a-b4bf-26d637e6e91b",
+    "handle": "123456789/546495",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

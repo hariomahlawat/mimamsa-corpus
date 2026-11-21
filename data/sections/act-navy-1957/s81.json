@@ -1,0 +1,70 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s81",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "81",
+  "heading": "Punishments.",
+  "chapter": null,
+  "order": 85,
+  "text": "(1) The following punishments may be inflicted under this Act, namely:--\n\n(a) death;\n\n(b) imprisonment which may be for the term of life or any other lesser term;\n\n(c) dismissal with disgrace from the naval service;\n\n(d) detention;\n\n(e) dismissal from the naval service;\n\n(f) forfeiture of seniority in rank in the case of officers [1][and master chief petty officers];\n\n(g) forfeiture of time for promotion in the case of [2][officers below the rank of commander and master chief petty officers];\n\n(h) dismissal from the ship to which the offender belongs;\n\n(i) [3][reduction in rank], in the case of [4][petty officers] and persons holding leading rates;\n\n(j) fine, in respect of civil offences;\n\n(k) mulcts of pay and allowances;\n\n(l) severe reprimand or reprimand;\n\n(m) forfeiture of pay, head money, bounty, salvage, prize money and allowances earned by, and all annuities, pensions, gratuities, medals and decorations granted to, the offender or of any one or more of the above particulars; also in the case of desertion, of all clothes and effects left by the deserter in the ship to which he belongs;\n\n(n) such minor punishments as are inflicted according to the custom of the navy or may from time to time be prescribed.\n\n(2) Each of the punishments specified in sub-section (1) shall be deemed to be inferior in degree to every punishment preceding it in the above scale.",
+  "page_start": 28,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "4 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 48 of 1982",
+      "by_doc_id": null,
+      "effective_date": "1982-10-16",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 48 of 1982, s. 3 (w.e.f. 16-10-1982).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 3, ibid.",
+      "by_doc_id": null,
+      "effective_date": "1982-10-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 3, ibid., for \"subordinate officers\" (w.e.f. 16-10-1982).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 3, ibid.",
+      "by_doc_id": null,
+      "effective_date": "1982-10-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 3, ibid., for \"disrating\" (w.e.f. 16-10-1982).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 3, ibid.",
+      "by_doc_id": null,
+      "effective_date": "1982-10-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 3, ibid., for \"subordinate and petty officers\" (w.e.f. 16-10-1982).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3fd31a58-fa24-4d7f-ae7f-e65e67560015",
+    "handle": "123456789/523946",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

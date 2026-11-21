@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s283",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "283",
+  "heading": "Exhibition of false light, mark or buoy.",
+  "chapter": null,
+  "order": 283,
+  "text": "Whoever exhibits any false light, mark or buoy, intending or knowing it to be likely that such exhibition will mislead any navigator, shall be punished with imprisonment of either description for a term which may extend to seven years, and with fine which shall not be less than ten thousand rupees.",
+  "page_start": 83,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "01bf1ed4-0b71-4c90-8eaa-1ce548b9f655",
+    "handle": "123456789/545774",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

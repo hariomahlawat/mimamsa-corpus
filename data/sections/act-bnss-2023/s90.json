@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s90",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "90",
+  "heading": "Issue of warrant in lieu of, or in addition to, summons.",
+  "chapter": null,
+  "order": 90,
+  "text": "A Court may, in any case in which it is empowered by this Sanhita to issue a summons for the appearance of any person, issue, after recording its reasons in writing, a warrant for his arrest—\n\n(a) if, either before the issue of such summons, or after the issue of the same but before the time fixed for his appearance, the Court sees reason to believe that he has absconded or will not obey the summons; or\n\n(b) if at such time he fails to appear and the summons is proved to have been duly served in time to admit of his appearing in accordance therewith and no reasonable excuse is offered for such failure.",
+  "page_start": 40,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8f404282-d0b6-43aa-8a1c-d820abd68663",
+    "handle": "123456789/546637",
+    "listing_raw_path": "data/raw/indiacode/2023/84de940d3a0fe09d9683198d94de1a7af018b90eb5d0667daa39ef362963cb9b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

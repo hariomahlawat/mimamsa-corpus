@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s524",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "524",
+  "heading": "Power to alter functions allocated to Executive Magistrate in certain cases.",
+  "chapter": null,
+  "order": 524,
+  "text": "If the Legislative Assembly of a State by a resolution so permits, the State Government may, after consultation with the High Court, by notification, direct that references in sections 127, 128, 129, 164 and 166 to an Executive Magistrate shall be construed as references to a Judicial Magistrate of the first class.",
+  "page_start": 171,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "18abeb63-b7c5-4234-9f4b-9fd89b86eb20",
+    "handle": "123456789/546606",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

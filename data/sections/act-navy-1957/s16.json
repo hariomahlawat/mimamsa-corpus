@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s16",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "16",
+  "heading": "Discharge on expiry of engagement.",
+  "chapter": null,
+  "order": 16,
+  "text": "Subject to the provisions of section 18, a [1][sailor] shall be entitled to be discharged at the expiration of the term of service for which he is engaged unless--\n\n(a) such expiration occurs during active service in which case he shall be liable to continue to serve for such further period as may be required by the Chief of the Naval Staff; or\n\n(b) he is re-enrolled in accordance with the regulations made under this Act.",
+  "page_start": 14,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 2, ibid.",
+      "by_doc_id": null,
+      "effective_date": "1974-12-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 2, ibid., for \"seaman\" (w.e.f. 16-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e0c51ff6-527b-439e-b50b-17b7e90fe813",
+    "handle": "123456789/517362",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s68",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "68",
+  "heading": "Abetment of offences punishable with imprisonment and not committed.",
+  "chapter": null,
+  "order": 68,
+  "text": "Any person subject to this Act who abets the commission of any of the offences specified in sections 34 to 64 inclusive and punishable with imprisonment shall, on conviction by court-martial, if that offence be not committed in consequence of the abetment, and no express provision is made by this Act for the punishment of such abetment, be liable to suffer imprisonment for a term which may extend to one-half of the longest term provided for that offence or such less punishment as is in this Act mentioned.",
+  "page_start": 24,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0955a8e2-06af-4f93-9860-25e706595f68",
+    "handle": "123456789/525930",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

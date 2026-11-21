@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s27",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "27",
+  "heading": "Deductions from pay, etc., not to be made unless authorized.",
+  "chapter": null,
+  "order": 27,
+  "text": "No deductions other than those authorised by or under this or any other Act shall be made from the pay, pensions, gratuities, allowances and other benefits due to officers and [1][sailors] under any regulations for the time being in force.",
+  "page_start": 16,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 53 of 1974",
+      "by_doc_id": null,
+      "effective_date": "1974-12-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 53 of 1974, s. 2, for \"seaman\" (w.e.f. 16-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "98a8a504-0754-494e-8669-febc75e3a40e",
+    "handle": "123456789/517374",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

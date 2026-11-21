@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s66",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "66",
+  "heading": "Proof as to electronic signature.",
+  "chapter": null,
+  "order": 66,
+  "text": "Except in the case of a secure electronic signature, if the electronic signature of any subscriber is alleged to have been affixed to an electronic record, the fact that such electronic signature is the electronic signature of the subscriber must be proved.",
+  "page_start": 29,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1de2ddbe-5740-4597-ad00-efa1a78a9ced",
+    "handle": "123456789/545960",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

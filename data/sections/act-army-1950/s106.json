@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s106",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "106",
+  "heading": "Inquiry into absence without leave.",
+  "chapter": null,
+  "order": 106,
+  "text": "(1) When any person subject to this Act has been absent from his duty without due authority for a period of thirty days, a court of inquiry shall, as soon as practicable, be assembled, and such court shall, on oath or affirmation administered in the prescribed manner, inquire respecting the absence of the person, and the deficiency, if any, in the property of the Government entrusted to his care, or in any arms, ammunition, equipment, instruments, clothing or necessaries ; and if satisfied of the fact of such absence without due authority or other sufficient cause, the court shall declare such absence and the period thereof, and the said deficiency, if any, and the commanding officer of the corps or department to which the person belongs shall enter in the court-martial book of the corps or department a record of the declaration.\n\n(2) If the person declared absent does not afterwards surrender or is not apprehended, he shall, for the purposes of this Act, be deemed to be a deserter.",
+  "page_start": 31,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "29386263-e4a7-424b-944a-f850e46c5003",
+    "handle": "123456789/525972",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

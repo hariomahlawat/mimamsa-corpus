@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s161",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "161",
+  "heading": "Remedy against order, finding or sentence of court-martial.",
+  "chapter": null,
+  "order": 161,
+  "text": "(1) Any person subject to this Act who considers himself aggrieved by any order passed by a court-martial may present a petition to the officer or authority empowered to confirm any finding or sentence of such court-martial, and the confirming authority may take such steps as may be considered necessary to satisfy itself as to the correctness, legality or propriety of the order passed or as to the regularity of any proceeding to which the order relates.\n\n(2) Any person subject to this Act who considers himself aggrieved by a finding or sentence of a court-martial which has been confirmed, may present a petition to the Central Government, [1][the Chief of the Air Staff] or any prescribed officer superior in command to the one who confirmed such finding or sentence, and the Central Government, [1][the Chief of the Air Staff] or other officer, as the case may be, may pass such order thereon as it or he thinks fit.",
+  "page_start": 48,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1955-05-07",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief\" (w.e.f. 7-5-1955).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "01487bbe-89c8-4013-93b7-e55546107dd2",
+    "handle": "123456789/523772",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

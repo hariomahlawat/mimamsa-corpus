@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s8",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "8",
+  "heading": "Term of office.",
+  "chapter": null,
+  "order": 8,
+  "text": "The Chairperson or a Member shall hold office for a term of four years from the date on which he enters upon his office and shall be eligible for re-appointment:\n\nProvided that no Chairperson shall hold office as such after he has attained,--\n\n(a) in case he has been a Judge of the Supreme Court, the age of seventy years; and\n\n(b) in case he has been the Chief Justice of a High Court, the age of sixty-five years:\n\nProvided further that no other Member shall hold office as such Member after he has attained the age of sixty-five years.",
+  "page_start": 5,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "46c35e24-a16e-4054-97ba-639ae707a09c",
+    "handle": "123456789/527316",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

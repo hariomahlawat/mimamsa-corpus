@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s155",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "155",
+  "heading": "Penalty for failure to comply with section 154.",
+  "chapter": null,
+  "order": 155,
+  "text": "If the person against whom an order is made under section 154 does not perform such act or appear and show cause, he shall be liable to the penalty specified in that behalf in section 223 of the Bharatiya Nyaya Sanhita, 2023, and the order shall be made absolute.",
+  "page_start": 62,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3ffad479-f300-491f-bf91-140b1bff69fb",
+    "handle": "123456789/546260",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

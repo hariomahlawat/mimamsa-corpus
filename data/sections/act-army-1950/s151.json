@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s151",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "151",
+  "heading": "Order for disposal of property regarding which offence is committed.",
+  "chapter": null,
+  "order": 151,
+  "text": "(1) After the conclusion of a trial before any court-martial, the Court or the officer confirming the finding or sentence of such court-martial, or any authority superior to such officer, or, in the case of a court-martial whose finding or sentence does not require confirmation, the officer commanding the army, army corps, division or brigade within which the trial was held, may make such order as it or he thinks fit for the disposal by destruction, confiscation, delivery to any person claiming to be entitled to possession thereof, or otherwise, of any property or document produced before the Court or in its custody, or regarding which any offence appears to have been committed or which has been used for the commission of any offence.\n\n(2) Where any order has been made under sub-section (1) in respect of property regarding which an offence appears to have been committed, a copy of such order signed and certified by the authority making the same may, whether the trial was held within India or not, be sent to a magistrate within whose jurisdiction such property for the time being is situated, and such magistrate shall thereupon cause the order to be carried into effect as if it were an order passed by him under the provisions of the [1][Code of Criminal Procedure, 1973 (2 of 1974)], or any corresponding law in force in [2][the State of Jammu and Kashmir*].\n\n(3) In this section the term property includes, in the case of property regarding which an offence appears to have been committed, not only such property as has been originally in the possession or under the control of any person, but also any property into or for which the same may have been converted or exchanged, and anything acquired by such conversion or exchange whether immediately or otherwise.",
+  "page_start": 40,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "2 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 37 of 1992",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 37 of 1992, s. 14, for certain words.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Adaptation of Laws (No. 3) Order, 1956",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the Adaptation of Laws (No. 3) Order, 1956 for \"a Part B State\". *. Vide Notification No. S.O. 3912 (E), dated 30th October, 2019, this Act is made applicable to the Union territory of Jammu and Kashmir and the Union territory of Ladakh.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d810d483-2b80-4d39-91b4-b429321a2c69",
+    "handle": "123456789/526021",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

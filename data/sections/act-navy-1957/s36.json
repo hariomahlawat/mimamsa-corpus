@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s36",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "36",
+  "heading": "Delaying or discouraging action or service commanded.",
+  "chapter": null,
+  "order": 36,
+  "text": "[1][36. Delaying or discouraging action or service commanded.--Every person subject to naval law who wilfully delays or discourages upon any pretext whatsoever, any action or service which has been commanded on the part of the Navy, regular Army, or Air Force or of any forces cooperating therewith shall,--\n\n(a) if such act is committed with intent to assist the enemy, be punished with death or such other punishment as is hereinafter mentioned; and\n\n(b) in any other case, be punished with imprisonment which may extend to seven years or such other punishment as is hereinafter mentioned.]",
+  "page_start": 19,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 7, ibid.",
+      "by_doc_id": null,
+      "effective_date": "1974-12-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 7, ibid., for sections 34 to 37 (w.e.f. 16-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b24eedce-dc4c-4a09-9726-2bc4be8c21bf",
+    "handle": "123456789/517384",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

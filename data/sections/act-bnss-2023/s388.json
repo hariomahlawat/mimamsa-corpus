@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s388",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "388",
+  "heading": "Imprisonment or committal of person refusing to answer or produce document.",
+  "chapter": null,
+  "order": 388,
+  "text": "If any witness or person called to produce a document or thing before a Criminal Court refuses to answer such questions as are put to him or to produce any document or thing in his possession or power which the Court requires him to produce, and does not, after a reasonable opportunity has been given to him so to do, offer any reasonable excuse for such refusal, such Court may, for reasons to be recorded in writing, sentence him to simple imprisonment, or by warrant under the hand of the Presiding Magistrate or Judge commit him to the custody of an officer of the Court for any term not exceeding seven days, unless in the meantime, such person consents to be examined and to answer, or to produce the document or thing and in the event of his persisting in his refusal, he may be dealt with according to the provisions of section 384 or section 385.",
+  "page_start": 135,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c82c6c32-669e-440b-93de-10ba6013446a",
+    "handle": "123456789/546478",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

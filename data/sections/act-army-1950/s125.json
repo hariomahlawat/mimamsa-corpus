@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s125",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "125",
+  "heading": "Choice between criminal court and court-martial.",
+  "chapter": null,
+  "order": 125,
+  "text": "When a criminal court and a court-martial have each jurisdiction in respect of an offence, it shall be in the discretion of the officer commanding the army, army corps, division or independent brigade in which the accused person is serving or such other officer as may be prescribed to decide before which court the proceedings shall be instituted, and, if that officer decides that they should be instituted before a court-martial, to direct that the accused person shall be detained in military custody.",
+  "page_start": 35,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "fa1c83d5-c8d8-409f-8a21-6af70527af95",
+    "handle": "123456789/525992",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

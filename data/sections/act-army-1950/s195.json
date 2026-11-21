@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s195",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "195",
+  "heading": "[Omitted.].",
+  "chapter": null,
+  "order": 197,
+  "text": "[Chapter XVI.] Omitted by the Army (Amendment) Act, 1992 (37 of 1982), s. 19 (w.e.f. 6-9-1992).",
+  "page_start": 47,
+  "page_end": null,
+  "status": "omitted",
+  "status_note": "[Chapter XVI.] Omitted by the Army (Amendment) Act, 1992 (37 of 1982), s. 19 (w.e.f. 6-9-1992).",
+  "amendment_history": [
+    {
+      "action": "omitted",
+      "by_ref_raw": "Army (Amendment) Act, 1992 (37 of 1982)",
+      "by_doc_id": null,
+      "effective_date": "1992-09-06",
+      "effective_date_raw": null,
+      "footnote_text": "[Chapter XVI.] Omitted by the Army (Amendment) Act, 1992 (37 of 1982), s. 19 (w.e.f. 6-9-1992).",
+      "confidence": "extracted",
+      "origin": "inline"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "11734820-3450-4aec-b775-06aa912e814f",
+    "handle": "123456789/526072",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

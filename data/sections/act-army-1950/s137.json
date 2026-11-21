@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s137",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "137",
+  "heading": "Commissions for examination of witnesses.",
+  "chapter": null,
+  "order": 137,
+  "text": "(1) Whenever, in the course of a trial by courtmartial, it appears to the Court that the examination of a witness is necessary for the ends of justice, and that the attendance of such witness cannot be procured without an amount of delay, expense or inconvenience which, in the circumstances of the case, would be unreasonable, such Court may address the Judge Advocate General in order that a commission to take the evidence of such witness may be issued.\n\n(2) The Judge Advocate General may then, if he thinks necessary, issue a commission to any district magistrate or magistrate of the first class, within the local limits of whose jurisdiction such witness resides, to take the evidence of such witness.\n\n(3) The magistrate or officer to whom the commission is issued, or, if he is the district magistrate, he or such magistrate of the first class as he appoints in this behalf, shall proceed to the place where the witness is or shall summon the witness before him and shall take down his evidence in the same manner, and may for this purpose exercise the same powers, as in trials of warrant-cases under the [1][code of Criminal Procedure, 1973 (2 of 1974)], or any corresponding law in force in [2][the State of Jammu and Kashmir*.]\n\n(4) When the witness resides in a tribal area or in any place outside India, the commission may be issued in the manner specified in [1][Chapter XXII of the Code of Criminal Procedure, 1973 (2 of 1974)], or of any corresponding law in force in [2][the State of Jammu and Kashmir*.]\n\n(5) In this and the next succeeding section, the expression \"Judge Advocate General\" includes a Deputy Judge Advocate General.",
+  "page_start": 36,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "2 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 37 of 1992",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 37 of 1992, s.14, for certain words.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Adaptation of Laws (No. 3) Order, 1956",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the Adaptation of Laws (No. 3) Order, 1956, for \"a Part B State\". [*]. Vide Notification No. S.O. 3912 (E), dated 30th October, 2019, this Act is made applicable to the Union territory of Jammu and Kashmir and the Union territory of Ladakh.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "be0f305f-3471-43eb-8b81-521d0561dbe3",
+    "handle": "123456789/526006",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

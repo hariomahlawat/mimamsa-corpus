@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s254",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "254",
+  "heading": "Penalty for harbouring robbers or dacoits.",
+  "chapter": null,
+  "order": 254,
+  "text": "Whoever, knowing or having reason to believe that any persons are about to commit or have recently committed robbery or dacoity, harbours them or any of them, with the intention of facilitating the commission of such robbery or dacoity, or of screening them or any of them from punishment, shall be punished with rigorous imprisonment for a term which may extend to seven years, and shall also be liable to fine.\n\nExplanation.—For the purposes of this section it is immaterial whether the robbery or dacoity is intended to be committed, or has been committed, within or without India.\n\nException.—The provisions of this section do not extend to the case in which the harbour is by the spouse of the offender.",
+  "page_start": 78,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2a162412-8446-40ee-b16e-15e8228eeb96",
+    "handle": "123456789/545748",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

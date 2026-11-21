@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s125",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "125",
+  "heading": "Power of criminal court to require delivery of offender.",
+  "chapter": null,
+  "order": 125,
+  "text": "(1) When a criminal court having jurisdiction is of opinion that proceedings shall be instituted before itself in respect of any alleged offence, it may, by written notice, require the officer referred to in section 124 at his option, either to deliver over the offender to the nearest Magistrate to be proceeded, against according to law, or to postpone proceedings pending a reference to the Central Government.\n\n(2) In every such case the said officer shall either deliver over the offender in compliance with the requisition, or shall forthwith refer the question as to the court before which the proceedings are to be instituted for the determination of the Central Government whose order upon such reference shall be final.",
+  "page_start": 39,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "7a587f83-5b75-4f0d-8972-e13f0d3afa9e",
+    "handle": "123456789/523736",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s31",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "31",
+  "heading": "Privileges of reservists.",
+  "chapter": null,
+  "order": 31,
+  "text": "Every person belonging to [1][any Air Force Reserve or the Auxiliary Air Force] shall, when called out for, or engaged in, or returning from, training or service, be entitled to all the privileges accorded by sections 28 and 29 to a person subject to this Act.",
+  "page_start": 17,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 62 of 1952",
+      "by_doc_id": null,
+      "effective_date": "1955-08-15",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the Act 62 of 1952, s. 35, for \"the Air Force Reserve\" (w.e.f. 15-8-1955).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "bce0803c-a0f5-4801-9d5b-1933261279c1",
+    "handle": "123456789/525938",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

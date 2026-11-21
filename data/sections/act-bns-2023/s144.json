@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s144",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "144",
+  "heading": "Exploitation of a trafficked person.",
+  "chapter": null,
+  "order": 144,
+  "text": "(1) Whoever, knowingly or having reason to believe that a child has been trafficked, engages such child for sexual exploitation in any manner, shall be punished with rigorous imprisonment for a term which shall not be less than five years, but which may extend to ten years, and shall also be liable to fine. (2) Whoever, knowingly or having reason to believe that a person has been trafficked, engages such person for sexual exploitation in any manner, shall be punished with rigorous imprisonment for a term which shall not be less than three years, but which may extend to seven years, and shall also be liable to fine.",
+  "page_start": 69,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "60d9fef5-aea6-4bfb-a964-0f3253b6051c",
+    "handle": "123456789/545644",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

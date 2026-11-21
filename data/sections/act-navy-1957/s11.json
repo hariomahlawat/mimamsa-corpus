@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s11",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "11",
+  "heading": "Enrolment.",
+  "chapter": null,
+  "order": 11,
+  "text": "(1) Save as otherwise provided in this Act, the terms and conditions of service of [1][sailors], the person authorised to enrol for service as [1][sailors] and the manner and procedure of such enrolment shall be such as may be prescribed.\n\n(2) No person shall be enrolled as a [1][sailor] in the Indian Navy for a period exceeding [2][twenty years] in the first instance:\n\nProvided that in the case of a minor the said period of [3][twenty years] shall be reckoned from the date on which he attains the age of seventeen.\n\n(3) Notwithstanding anything contained in any other law for the time being in force,\n\n(a) the enrolment of any person under this Act shall be binding on him both during his minority and after he attains majority;\n\n(b) neither the parent or guardian of a minor duly enrolled under this Act nor any other person shall be entitled to claim custody of the said minor as against the Central Government or any of its officers or other persons set over him.",
+  "page_start": 12,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "3 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 2, ibid.",
+      "by_doc_id": null,
+      "effective_date": "1974-12-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 2, ibid., for \"seaman\" (w.e.f. 16-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 34 of 1987",
+      "by_doc_id": null,
+      "effective_date": "1987-09-09",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 34 of 1987, s. 2, for \"fifteen years\" (w.e.f. 9-9-1987).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 34 of 1987",
+      "by_doc_id": null,
+      "effective_date": "1987-09-09",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 34 of 1987, s. 2, for \"fifteen years\" (w.e.f. 9-9-1987).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ec1d6344-3a27-4775-b9e8-046a874ceeba",
+    "handle": "123456789/517357",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

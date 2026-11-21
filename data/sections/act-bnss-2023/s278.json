@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s278",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "278",
+  "heading": "Acquittal or conviction.",
+  "chapter": null,
+  "order": 278,
+  "text": "(1) If the Magistrate, upon taking the evidence referred to in section 277 and such further evidence, if any, as he may, of his own motion, cause to be produced, finds the accused not guilty, he shall record an order of acquittal.\n\n(2) Where the Magistrate does not proceed in accordance with the provisions of section 364 or section 401, he shall, if he finds the accused guilty, pass sentence upon him according to law.\n\n(3) A Magistrate may, under section 275 or section 278, convict the accused of any offence triable under this Chapter, which from the facts admitted or proved he appears to have committed, whatever may be the nature of the complaint or summons, if the Magistrate is satisfied that the accused would not be prejudiced thereby.",
+  "page_start": 102,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f2bb0d88-f5cc-44dd-b38f-690123070918",
+    "handle": "123456789/546373",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

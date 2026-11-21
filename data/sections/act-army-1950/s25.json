@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s25",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "25",
+  "heading": "Authorised deductions only to be made from pay.",
+  "chapter": null,
+  "order": 25,
+  "text": "The pay of every person subject to this Act due to him as such under any regulation for the time being in force shall be paid without any deduction other than the deductions authorised by or under this or any other Act.",
+  "page_start": 15,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "291630fc-b8aa-4b61-a79a-108907f4b7c2",
+    "handle": "123456789/525882",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

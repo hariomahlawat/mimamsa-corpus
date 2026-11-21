@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s413",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "413",
+  "heading": "No appeal to lie unless otherwise provided.",
+  "chapter": null,
+  "order": 413,
+  "text": "No appeal shall lie from any judgment or order of a Criminal Court except as provided for by this Sanhita or by any other law for the time being in force: Provided that the victim shall have a right to prefer an appeal against any order passed by the Court acquitting the accused or convicting for a lesser offence or imposing inadequate compensation, and such appeal shall lie to the Court to which an appeal ordinarily lies against the order of conviction of such Court.",
+  "page_start": 142,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "4ddbd7e6-e23b-4c0b-b309-d5b2fcd9d5d9",
+    "handle": "123456789/546503",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

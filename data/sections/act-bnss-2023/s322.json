@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s322",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "322",
+  "heading": "Parties may examine witnesses.",
+  "chapter": null,
+  "order": 322,
+  "text": "(1) The parties to any proceeding under this Sanhita in which a commission is issued may respectively forward any interrogatories in writing which the Court or Magistrate directing the commission may think relevant to the issue, and it shall be lawful for the Magistrate, Court or officer to whom the commission, is directed, or to whom the duty of executing it is delegated, to examine the witness upon such interrogatories.\n\n(2) Any such party may appear before such Magistrate, Court or Officer by an advocate, or if not in custody, in person, and may examine, cross-examine and re-examine the said witness.",
+  "page_start": 111,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "0abfe92a-9217-4bcd-95d2-d78485be5fd5",
+    "handle": "123456789/546413",
+    "listing_raw_path": "data/raw/indiacode/2023/14cfdd96c2151ab80375f58327c28a1817f48fcd6164326b9e0c28f40b86d38e.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

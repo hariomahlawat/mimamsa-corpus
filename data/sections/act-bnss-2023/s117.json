@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s117",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "117",
+  "heading": "Seizure or attachment of property.",
+  "chapter": null,
+  "order": 117,
+  "text": "(1) Where any officer conducting an inquiry or investigation under section 116 has a reason to believe that any property in relation to which such inquiry or investigation is being conducted is likely to be concealed, transferred or dealt with in any manner which will result in disposal of such property, he may make an order for seizing such property and where it is not practicable to seize such property, he may make an order of attachment directing that such property shall not be transferred or otherwise dealt with, except with the prior permission of the officer making such order, and a copy of such order shall be served on the person concerned.\n\n(2) Any order made under sub-section (1) shall have no effect unless the said order is confirmed by an order of the said Court, within a period of thirty days of its being made.",
+  "page_start": 49,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "93a20266-b45f-4a4a-a43c-97eead796aa6",
+    "handle": "123456789/546224",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

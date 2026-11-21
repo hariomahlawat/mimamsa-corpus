@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s432",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "432",
+  "heading": "Appellate Court may take further evidence or direct it to be taken.",
+  "chapter": null,
+  "order": 432,
+  "text": "(1) In dealing with any appeal under this Chapter, the Appellate Court, if it thinks additional evidence to be necessary, shall record its reasons and may either take such evidence itself, or direct it to be taken by a Magistrate or, when the Appellate Court is a High Court, by a Court of Session or a Magistrate.\n\n(2) When the additional evidence is taken by the Court of Session or the Magistrate, it or he shall certify such evidence to the Appellate Court, and such Court shall thereupon proceed to dispose of the appeal.\n\n(3) The accused or his advocate shall have the right to be present when the additional evidence is taken.\n\n(4) The taking of evidence under this section shall be subject to the provisions of Chapter XXV, as if it were an inquiry.",
+  "page_start": 148,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "7a702951-fd74-4c8b-8be9-ff5ae03aba7c",
+    "handle": "123456789/546522",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

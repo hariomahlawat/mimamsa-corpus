@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s107",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "107",
+  "heading": "Burden of proving fact to be proved to make evidence admissible.",
+  "chapter": null,
+  "order": 107,
+  "text": "The burden of proving any fact necessary to be proved in order to enable any person to give evidence of any other fact is on the person who wishes to give such evidence\n\nIllustrations.\n\n(a) A wishes to prove a dying declaration by B. A must prove B's death.\n\n(b) A wishes to prove, by secondary evidence, the contents of a lost document. A must prove that the document has been lost.",
+  "page_start": 37,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6a760d13-6285-45fa-a87a-031339a0ebe4",
+    "handle": "123456789/546003",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

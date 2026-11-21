@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s163",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "163",
+  "heading": "Testimony to facts stated in document mentioned in section 162.",
+  "chapter": null,
+  "order": 163,
+  "text": "A witness may also testify to facts mentioned in any such document as is mentioned in section 162, although he has no specific recollection of the facts themselves, if he is sure that the facts were correctly recorded in the document.\n\nIllustration.\n\nA book-keeper may testify to facts recorded by him in books regularly kept in the course of business, if he knows that the books were correctly kept, although he has forgotten the particular transactions entered.",
+  "page_start": 47,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f05c800f-c3a9-46b7-98b6-62b5f0e8f677",
+    "handle": "123456789/546063",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

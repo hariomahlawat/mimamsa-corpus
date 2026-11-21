@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s395",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "395",
+  "heading": "Order to pay compensation.",
+  "chapter": null,
+  "order": 395,
+  "text": "(1) When a Court imposes a sentence of fine or a sentence (including a sentence of death) of which fine forms a part, the Court may, when passing judgment, order the whole or any part of the fine recovered to be applied---\n\n(a) in defraying the expenses properly incurred in the prosecution;\n\n(b) in the payment to any person of compensation for any loss or injury caused by the offence, when compensation is, in the opinion of the Court, recoverable by such person in a Civil Court;\n\n(c) when any person is convicted of any offence for having caused the death of another person or of having abetted the commission of such an offence, in paying compensation to the persons who are, under the Fatal Accidents Act, 1855 (13 of 1855), entitled to recover damages from the person sentenced for the loss resulting to them from such death;\n\n(d) when any person is convicted of any offence which includes theft, criminal misappropriation, criminal breach of trust, or cheating, or of having dishonestly received or retained, or of having voluntarily assisted in disposing of, stolen property knowing or having reason to believe the same to be stolen, in compensating any bona fide purchaser of such property for the loss of the same if such property is restored to the possession of the person entitled thereto.\n\n(2) If the fine is imposed in a case which is subject to appeal, no such payment shall be made before the period allowed for presenting the appeal has elapsed, or, if an appeal be presented, before the decision of the appeal.\n\n(3) When a Court imposes a sentence, of which fine does not form a part, the Court may, when passing judgment, order the accused person to pay, by way of compensation, such amount as may be specified in the order to the person who has suffered any loss or injury by reason of the act for which the accused person has been so sentenced.\n\n(4) An order under this section may also be made by an Appellate Court or by the High Court or Court of Session when exercising its powers of revision.\n\n(5) At the time of awarding compensation in any subsequent civil suit relating to the same matter, the Court shall take into account any sum paid or recovered as compensation under this section.",
+  "page_start": 138,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "bd900ec4-1743-4fef-aed7-02828549d139",
+    "handle": "123456789/546485",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

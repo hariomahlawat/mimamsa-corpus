@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s181",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "181",
+  "heading": "Making or possessing instruments or materials for forging or counterfeiting coin, Government stamp, currency-notes or bank-notes.",
+  "chapter": null,
+  "order": 181,
+  "text": "Whoever makes or mends, or performs any part of the process of making or mending, or buys or sells or disposes of, or has in his possession, any machinery, die, or instrument or material for the purpose of being used, or knowing or having reason to believe that it is intended to be used, for forging or counterfeiting any coin, stamp issued by Government for the purpose of revenue, currency-note or bank-note, shall be punished with imprisonment for life, or with imprisonment of either description for a term which may extend to ten years, and shall also be liable to fine.",
+  "page_start": 86,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "00c53c94-229e-4b08-aa26-5fbfdfbe9130",
+    "handle": "123456789/545861",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

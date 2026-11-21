@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s39",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "39",
+  "heading": "Absence without leave.",
+  "chapter": null,
+  "order": 39,
+  "text": "Any person subject to this Act who commits any of the following offences, that is to say,--\n\n(a) absents himself without leave; or\n\n(b) without sufficient cause overstays leave granted to him; or\n\n(c) being on leave of absence and having received information from proper authority that any unit or detachment to which he belongs, has been ordered on active service, fails, without sufficient cause, to re-join without delay; or\n\n(d) without sufficient cause fails to appear at the time fixed, at the parade or place appointed for exercise or duty; or\n\n(e) when on parade, or on the line of march, without sufficient cause or without leave from his superior officer, quits the parade or line of march; or\n\n(f) when in camp or elsewhere, is found beyond any limits fixed, or in any place prohibited, by any general, local or other order, without a pass or written leave from his superior officer; or\n\n(g) without leave from his superior officer or without due cause, absents himself from any school when duly ordered to attend there,\n\nshall, on conviction by court-martial, be liable to suffer imprisonment for a term which may extend to three years or such less punishment as is in this Act mentioned.",
+  "page_start": 20,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ed39fb73-9435-4c82-be74-fa2969745424",
+    "handle": "123456789/526026",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

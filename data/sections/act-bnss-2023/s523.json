@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s523",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "523",
+  "heading": "Power of High Court to make rules.",
+  "chapter": null,
+  "order": 523,
+  "text": "(1) Every High Court may, with the previous approval of the State Government, make rules---\n\n(a) as to the persons who may be permitted to act as petition-writers in the Criminal Courts subordinate to it;\n\n(b) regulating the issue of licences to such persons, the conduct of business by them, and the scale of fees to be charged by them;\n\n(c) providing a penalty for a contravention of any of the rules so made and determining the authority by which such contravention may be investigated and the penalties imposed;\n\n(d) any other matter which is required to be, or may be, provided by rules made by the State Government.\n\n(2) All rules made under this section shall be published in the Official Gazette.",
+  "page_start": 171,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1b6be5ef-9cc6-418e-b33b-87b2f725ac8e",
+    "handle": "123456789/546605",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

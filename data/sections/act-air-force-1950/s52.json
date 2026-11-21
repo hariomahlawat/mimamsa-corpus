@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s52",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "52",
+  "heading": "Offences to respect of property.",
+  "chapter": null,
+  "order": 52,
+  "text": "Any person subject to this Act who commits any of the following offences, that is to say,--\n\n(a) commits theft of any property belonging to the Government, or to any military, naval or air force mess, band or institution, or to any person subject to military, naval or air force law; or\n\n(b) dishonestly misappropriates or converts to his own use any such property; or\n\n(c) commits criminal breach of trust in respect of any such property; or\n\n(d) dishonestly receives or retains any such property in respect of which any of the offences under clauses (a), (b) and (c) has been committed, knowing or having reason to believe the commission of such offence; or\n\n(e) wilfully destroys or injures any property of the Government entrusted to him; or\n\n(f) does any other thing with intent to defraud, or to cause wrongful gain to one person or wrongful loss to another person;\n\nshall, on conviction by court-martial, be liable to suffer imprisonment for a term which may extend to ten years or such less punishment as is in this Act mentioned.",
+  "page_start": 23,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "655a6624-5ee9-4673-b3c3-8fe6461bc828",
+    "handle": "123456789/519366",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

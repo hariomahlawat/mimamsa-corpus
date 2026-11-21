@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s150",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "150",
+  "heading": "Order for custody and disposal of property pending trial.",
+  "chapter": null,
+  "order": 150,
+  "text": "When any property regarding which any offence appears to have been committed, or which appears to have been used for the commission of any offence, is produced before a court-martial during a trial, the court may make such order as it thinks fit for the proper custody of such property pending the conclusion of the trial, and if the property is subject to speedy or natural decay may, after recording such evidence as it thinks necessary, order it to be sold or otherwise disposed of.",
+  "page_start": 40,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "043c50d2-8ebd-4e27-bb04-5398b28ceb86",
+    "handle": "123456789/526020",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

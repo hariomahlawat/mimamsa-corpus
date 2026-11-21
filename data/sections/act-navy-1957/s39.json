@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s39",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "39",
+  "heading": "Correspondence, etc., with the enemy.",
+  "chapter": null,
+  "order": 39,
+  "text": "Every person subject to naval law, who,--\n\n(a) traitorously holds correspondence with the enemy or gives intelligence to the enemy; or\n\n(b) fails to make known to the proper authorities any information he may have received from the enemy; or\n\n(c) assists the enemy with any supplies; or\n\n(d) having been made a prisoner of war, voluntarily serves with or aids the enemy;\n\nshall be punished with death or such other punishment as is hereinafter mentioned.",
+  "page_start": 20,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "7be60dc1-bc3e-4567-8808-a0fb917a1f32",
+    "handle": "123456789/517388",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

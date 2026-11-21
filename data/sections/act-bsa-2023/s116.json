@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s116",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "116",
+  "heading": "Birth during marriage, conclusive proof of legitimacy.",
+  "chapter": null,
+  "order": 116,
+  "text": "The fact that any person was born during the continuance of a valid marriage between his mother and any man, or within two hundred and eighty days after its dissolution, the mother remaining unmarried, shall be conclusive proof that he is the legitimate child of that man, unless it can be shown that the parties to the marriage had no access to each other at any time when he could have been begotten.",
+  "page_start": 38,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f92a9f2c-c721-4844-83f5-a0f738d03aee",
+    "handle": "123456789/546012",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

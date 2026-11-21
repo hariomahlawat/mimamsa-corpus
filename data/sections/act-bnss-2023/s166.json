@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s166",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "166",
+  "heading": "Dispute concerning right of use of land or water.",
+  "chapter": null,
+  "order": 166,
+  "text": "(1) Whenever an Executive Magistrate is satisfied from the report of a police officer or upon other information, that a dispute likely to cause a breach of the peace exists regarding any alleged right of user of any land or water within his local jurisdiction, whether such right be claimed as an easement or otherwise, he shall make an order in writing, stating the grounds of his being so satisfied and requiring the parties concerned in such dispute to attend his Court in person or by an advocate on a specified date and time and to put in written statements of their respective claims.\n\nExplanation.—For the purposes of this sub-section, the expression \"land or water\" has the meaning given to it in sub-section (2) of section 164.\n\n(2) The Magistrate shall peruse the statements so put in, hear the parties, receive all such evidence as may be produced by them respectively, consider the effect of such evidence, take such further evidence, if any, as he thinks necessary and, if possible, decide whether such right exists; and the provisions of section 164 shall, so far as may be, apply in the case of such inquiry.\n\n(3) If it appears to such Magistrate that such rights exist, he may make an order prohibiting any interference with the exercise of such right, including, in a proper case, an order for the removal of any obstruction in the exercise of any such right:\n\nProvided that no such order shall be made where the right is exercisable at all times of the year, unless such right has been exercised within three months next before the receipt under sub-section (1) of the report of a police officer or other information leading to the institution of the inquiry, or where the right is exercisable only at particular seasons or on particular occasions, unless the right has been exercised during the last of such seasons or on the last of such occasions before such receipt.\n\n(4) When in any proceedings commenced under sub-section (1) of section 164 the Magistrate finds that the dispute is as regards an alleged right of user of land or water, he may, after recording his reasons, continue with the proceedings as if they had been commenced under sub-section (1), and when in any proceedings commenced under sub-section (1) the Magistrate finds that the dispute should be dealt with under section 164, he may, after recording his reasons, continue with the proceedings as if they had been commenced under sub-section (1) of section 164.",
+  "page_start": 65,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e691f7c7-7f9d-4546-afdc-cf9e06739c7a",
+    "handle": "123456789/546269",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

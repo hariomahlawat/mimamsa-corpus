@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s245",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "245",
+  "heading": "Fraudulently suffering decree for sum not due.",
+  "chapter": null,
+  "order": 245,
+  "text": "Whoever fraudulently causes or suffers a decree or order to be passed against him at the suit of any person for a sum not due or for a larger sum than is due to such person or for any property or interest in property to which such person is not entitled, or fraudulently causes or suffers a decree or order to be executed against him after it has been satisfied, or for anything in respect of which it has been satisfied, shall be punished with imprisonment of either description for a term which may extend to two years, or with fine, or with both.\n\nIllustration.\n\nA institutes a suit against Z. Z, knowing that A is likely to obtain a decree against him, fraudulently suffers a judgment to pass against him for a larger amount at the suit of B, who has no just claim against him, in order that B, either on his own account or for the benefit of Z, may share in the proceeds of any sale of Zs property which may be made under As decree. Z has committed an offence under this section.",
+  "page_start": 76,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "9ebe32bd-69ec-4ee0-8f3b-bb95386d3923",
+    "handle": "123456789/545740",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

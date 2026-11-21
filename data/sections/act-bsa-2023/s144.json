@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s144",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "144",
+  "heading": "Cross examination of person called to produce a document.",
+  "chapter": null,
+  "order": 144,
+  "text": "A person summoned to produce a document does not become a witness by the mere fact that he produces it, and cannot be cross-examined unless and until he is called as a witness.",
+  "page_start": 44,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e4dc8c77-c3b0-4d6f-b96b-1d9f22d830b4",
+    "handle": "123456789/546043",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

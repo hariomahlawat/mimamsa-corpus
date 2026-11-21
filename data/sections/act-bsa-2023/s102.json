@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s102",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "102",
+  "heading": "Who may give evidence of agreement varying terms of document.",
+  "chapter": null,
+  "order": 102,
+  "text": "Persons who are not parties to a document, or their representatives in interest, may give evidence of any facts tending to show a contemporaneous agreement varying the terms of the document.\n\nIllustration.\n\nA and B make a contract in writing that B shall sell A certain cotton, to be paid for on delivery. At the same time, they make an oral agreement that three months’ credit shall be given to A. This could not be shown as between A and B, but it might be shown by C, if it affected his interests.",
+  "page_start": 36,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6a3ca97c-2b0b-4946-bacc-d2b5c539b0bf",
+    "handle": "123456789/545997",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

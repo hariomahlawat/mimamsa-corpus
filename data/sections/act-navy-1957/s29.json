@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s29",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "29",
+  "heading": "Deductions from pay and allowances of sailors.",
+  "chapter": null,
+  "order": 29,
+  "text": "The following deductions may be made from the pay and allowances of a [1][sailor] without recourse to trial by a naval tribunal, namely:--\n\n(1) all pay and allowances for everyday of absence without leave unless an explanation is given to the satisfaction of the commanding officer for such absence:\n\nProvided that the [1][sailor] is not dealt with by a naval tribunal for the said absence;\n\n(2) all pay and allowances for everyday he is in confinement on a charge for an offence of which he is afterwards convicted by a competent naval tribunal or Criminal Court;\n\n(3) all pay and allowances for everyday he is in hospital on account of sickness certified by the prescribed medical officer to have been caused by an act amounting to an offence punishable under this Act:\n\nProvided that such certificate is accepted by the Chief of the Naval Staff or the prescribed officer;\n\n(4) any sum required to make good any loss, damage or destruction of any property which after due investigation appears to the Central Government or the Chief of the Naval Staff or the prescribed officer to have been occasioned by the wrongful act or negligence on the part of the [16] sailor;\n\n(5) any sum required to be paid for the maintenance of his wife or legitimate or illegitimate children under the provisions of section 31.",
+  "page_start": 17,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 53 of 1974",
+      "by_doc_id": null,
+      "effective_date": "1974-12-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 53 of 1974, s. 2, for \"seaman\" (w.e.f. 16-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "054bfd8a-0b1b-40d9-9c09-bf383843c800",
+    "handle": "123456789/517377",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

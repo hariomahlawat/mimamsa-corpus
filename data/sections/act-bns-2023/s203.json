@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s203",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "203",
+  "heading": "Public servant unlawfully buying or bidding for property.",
+  "chapter": null,
+  "order": 203,
+  "text": "Whoever, being a public servant, and being legally bound as such public servant, not to purchase or bid for certain property, purchases or bids for that property, either in his own name or in the name of another, or jointly, or in shares with others, shall be punished with simple imprisonment for a term which may extend to two years, or with fine, or with both; and the property, if purchased, shall be confiscated.",
+  "page_start": 91,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8d52b38e-8bd3-4123-a5ae-ed4764cc32ce",
+    "handle": "123456789/545699",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-af-disposal-private-property-1950#s16",
+  "parent_doc_id": "act-army-af-disposal-private-property-1950",
+  "unit": "section",
+  "number": "16",
+  "heading": "Power to make rules.",
+  "chapter": null,
+  "order": 16,
+  "text": "(1) The Central Government may, by notification in the Official Gazette, make rules[1] for the purpose of carrying into effect the purposes of this Act.\n\n(2) In particular, and without prejudice to the generality of the foregoing power, such rules may--\n\n(a) prescribe the manner in which any property belonging to a deceased or deserter may be secured or collected and his regimental and other debts in camp or quarters paid;\n\n(b) provide for the payment of the funeral expenses of any deceased;\n\n(c) provide for the constitution of the Committee of Adjustment or any Standing Committee of Adjustment under this Act;\n\n(d) specify the person who shall be regarded as the prescribed person for the purposes of this Act;\n\n(e) prescribe the circumstances in which the estate of any deceased shall be handed over to the Administrator General;\n\n(f) prescribe the form and manner in which a notice under section 8 shall be published;\n\n(g) prescribe the procedure by which any person may be ascertained to be of unsound mind.\n\n[2][(3) Every rule made by the Central Government under this Act shall be laid, as soon as may be after it is made, before each House of Parliament while it is in session, for a total period of thirty days which may be comprised in one session or in two or more successive sessions, and if, before the expiry of the session immediately following the session or the successive sessions aforesaid, both Houses agree in making any modification in the rule or both houses agree that the rule should not be made, the rule shall thereafter have effect only in such modified form or be of no effect, as the case may be; so, however, that any such modification or annulment shall be without prejudice to the validity of anything previously done under that rule.]",
+  "page_start": 6,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 20 of 1983",
+      "by_doc_id": null,
+      "effective_date": "1984-03-15",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 20 of 1983, s. 2, and the Schedule (w.e.f. 15-3-1984).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [
+    "For the Army and Air Force (Disposal of Private Property) Rules, 1953, see Gazette of India, 1953, Part II, s. 4."
+  ],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3cb08e84-fd54-406e-b8d3-22cc63d11558",
+    "handle": "123456789/527876",
+    "listing_raw_path": "data/raw/indiacode/1950/2dce3a9525b06939bf0a27ebc223106bd030c88a8fa3f2aa0c722862fe2924b3.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

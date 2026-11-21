@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s131",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "131",
+  "heading": "Information as to commission of offences.",
+  "chapter": null,
+  "order": 131,
+  "text": "No Magistrate or police officer shall be compelled to say when he got any information as to the commission of any offence, and no revenue officer shall be compelled to say when he got any information as to the commission of any offence against the public revenue.\n\nExplanation.--\"revenue officer\" means any officer employed in or about the business of any branch of the public revenue.",
+  "page_start": 42,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "7fe6ac99-cc8d-4d7e-b78d-93f68d09d956",
+    "handle": "123456789/546028",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

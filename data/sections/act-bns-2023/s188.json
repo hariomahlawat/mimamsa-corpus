@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s188",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "188",
+  "heading": "Unlawfully taking coining instrument from mint.",
+  "chapter": null,
+  "order": 188,
+  "text": "Whoever, without lawful authority, takes out of any mint, lawfully established in India, any coining tool or instrument, shall be punished with imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine.",
+  "page_start": 88,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "cb9db632-ea55-4a35-b9d2-7a0b5594090e",
+    "handle": "123456789/545686",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

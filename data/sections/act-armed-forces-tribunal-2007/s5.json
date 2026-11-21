@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s5",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "5",
+  "heading": "Composition of Tribunal and Benches thereof.",
+  "chapter": null,
+  "order": 5,
+  "text": "(1) The Tribunal shall consist of a Chairperson, and such number of Judicial and Administrative Members as the Central Government may deem fit and, subject to the other provisions of this Act, the jurisdiction, powers and authority of the Tribunal may be exercised by Benches thereof.\n\n(2) Subject to the other provisions of this Act, a Bench shall consist of one Judicial Member and one Administrative Member.\n\n(3) Notwithstanding anything contained in sub-section (1), the Chairperson--\n\n(a) may, in addition to discharging the functions of a Judicial Member of the Bench to which he is appointed, discharge the functions of an Administrative Member of any other Bench;\n\n(b) may transfer a Member from one Bench to another Bench;\n\n(c) may, for the purpose of securing that any case or cases, which having regard to the nature of the questions involved, requires or require, in his opinion, or under the rules made under this Act, to be decided by a Bench composed of more than two members, issue such general or special orders, as he may deem fit:\n\nProvided that every Bench constituted in pursuance of this clause shall include at least one Judicial Member and one Administrative Member.\n\n(4) Subject to the other provisions of this Act, the Benches of the Tribunal shall ordinarily sit at Delhi (which shall be known as the Principal Bench), and at such other places as the Central Government may, by notification, specify.",
+  "page_start": 4,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ac76b4ac-a260-402e-ac27-3cd98f38973e",
+    "handle": "123456789/527284",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

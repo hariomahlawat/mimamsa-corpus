@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s422",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "422",
+  "heading": "Appeal to Court of Session how heard.",
+  "chapter": null,
+  "order": 422,
+  "text": "(1) Subject to the provisions of sub-section (2), an appeal to the Court of Session or Sessions Judge shall be heard by the Sessions Judge or by an Additional Sessions Judge:\n\nProvided that an appeal against a conviction on a trial held by a Magistrate of the second class may be heard and disposed of by the Chief Judicial Magistrate.\n\n(2) An Additional Sessions Judge or a Chief Judicial Magistrate shall hear only such appeals as the Sessions Judge of the division may, by general or special order, make over to him or as the High Court may, by special order, direct him to hear.",
+  "page_start": 145,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a93ddbdd-960e-4756-bb8a-562da2618904",
+    "handle": "123456789/546512",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": "0.2.0",
+  "source": "indiacode",
+  "source_url": "https://indiacode.gov.in/server/api/core/bitstreams/876c5ccd-bce9-4df4-bb0a-d23bc1a61ffc/content",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T14:35:15+00:00",
+  "sha256": "d969593bbb689144e39a406cab3d6fa806216438871ddf6321ba084e24c9b203",
+  "raw_path": "data/raw/indiacode/0000/d969593bbb689144e39a406cab3d6fa806216438871ddf6321ba084e24c9b203.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/rules-the-army-and-air-force-disposal-of-private-property-rules-1953.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "rules-the-army-and-air-force-disposal-of-private-property-rules-1953",
+      "type": "implements",
+      "target_doc_id": "act-army-af-disposal-private-property-1950",
+      "target_ref_raw": "The Army and Air Force (Disposal of Private Property) Act, 1950",
+      "effective_date": null,
+      "evidence": "India Code lists this RULE record under act_id AC_CEN_28_38_00019_195040_1517807326187 (The Army and Air Force (Disposal of Private Property) Act, 1950).",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "rules-the-army-and-air-force-disposal-of-private-property-rules-1953",
+  "doc_type": "rules",
+  "title": "THE ARMY AND AIR FORCE (DISPOSAL OF PRIVATE PROPERTY) RULES, 1953",
+  "number": null,
+  "issuing_authority": "Ministry of Defence",
+  "issue_date": "1953-07-11",
+  "effective_date": null,
+  "status": "in_force",
+  "status_note": "Listed as not repealed on India Code (read 2026-11-21)",
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": "act-army-af-disposal-private-property-1950",
+  "original_filename": "The Army and Air Force (Disposal of Private Property) Rules, 1953.pdf",
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8ff5e134-c5cf-49c2-9d83-e9d49a67a687",
+    "collection": "RULE",
+    "act_id": "AC_CEN_28_38_00019_195040_1517807326187",
+    "handle": "123456789/509260",
+    "listing_raw_path": "data/raw/indiacode/1950/2dce3a9525b06939bf0a27ebc223106bd030c88a8fa3f2aa0c722862fe2924b3.json"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "number": "crawler",
+    "issue_date": "crawler",
+    "issuing_authority": "crawler",
+    "status": "rule",
+    "page_count": "rule",
+    "text_method": "rule"
+  }
+}

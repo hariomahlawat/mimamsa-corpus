@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s221",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "221",
+  "heading": "Obstructing public servant in discharge of public functions.",
+  "chapter": null,
+  "order": 221,
+  "text": "Whoever voluntarily obstructs any public servant in the discharge of his public functions, shall be punished with imprisonment of either description for a term which may extend to three months, or with fine which may extend to two thousand and five hundred rupees, or with both.",
+  "page_start": 71,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f39ad658-8fa0-4adb-97c5-4c348bba41c3",
+    "handle": "123456789/545715",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

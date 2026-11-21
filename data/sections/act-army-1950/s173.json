@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s173",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "173",
+  "heading": "Communication of certain orders to prison officers.",
+  "chapter": null,
+  "order": 174,
+  "text": "Whenever an order is duly made under this Act setting aside or varying any sentence, order or warrant under which any person is confined in a civil or military prison, a warrant in accordance with such order shall be forwarded by the officer making the order or his staff officer or such other person as may be prescribed to the officer in charge of the prison in which such person is confined.",
+  "page_start": 44,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "bb0a6564-8055-48cb-95d0-07d3ee0be0d6",
+    "handle": "123456789/526046",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

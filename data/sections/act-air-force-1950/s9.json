@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s9",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "9",
+  "heading": "Power to declare persons to be on active service.",
+  "chapter": null,
+  "order": 9,
+  "text": "Notwithstanding anything contained in clause (i) of section 4, the Central Government may, by notification, declare that any person or class of persons subject to this Act shall, with reference to any area in which they may be serving or with reference to any provision of this Act or of any other law for the time being in force, be deemed to be on active service within the meaning of this Act.",
+  "page_start": 13,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "adb6a961-41d0-46a0-bac9-a8051850a3bb",
+    "handle": "123456789/525727",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

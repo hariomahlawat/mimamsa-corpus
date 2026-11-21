@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s24",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "24",
+  "heading": "Priority of hearing of cases concerning persons in the naval service.",
+  "chapter": null,
+  "order": 24,
+  "text": "(1) On the presentation to any Civil or Revenue Court by or on behalf of any person in the naval service while subject to naval law of a certificate from the proper naval authority of leave of absence having been granted to or applied for by him for the purpose of prosecuting or defending any suit or other proceeding in such court, the Court shall, on the application of such person, arrange, so far as may be possible, for the hearing and final disposal of such suit or other proceeding within the period of the leave so granted or applied for.\n\n(2) The certificate from the proper naval authority shall state the first and last day of the leave granted or applied for and set forth a description of the case with respect to which the leave has been granted or applied for, and shall be duly signed and authenticated by such authority.\n\n(3) No fee shall be payable to the court in respect of the presentation of any such certificate, or in respect of any application by or on behalf of any such person for priority for the hearing of his case and every such certificate duly signed and authenticated as aforesaid shall be conclusive evidence of the correctness of the contents thereof.\n\n(4) Where the court is unable to arrange for the hearing and final disposal of the suit or other proceeding within the period of the leave granted or applied for as aforesaid, it shall record its reasons for having been unable to do so, and shall cause a copy thereof to be furnished to such person on his application, without any payment whatever by him in respect either of the application for such copy or of the copy itself.\n\n(5) Every criminal court before which a case is pending against a person in the naval service, shall, so far as may be possible, arrange for the early hearing and final disposal of such case.",
+  "page_start": 15,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a9910c62-ed4d-4b23-aad4-326113775bbf",
+    "handle": "123456789/517371",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

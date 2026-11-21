@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s11",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "11",
+  "heading": "Facts relevant when right or custom is in question.",
+  "chapter": null,
+  "order": 11,
+  "text": "Where the question is as to the existence of any right or custom, the following facts are relevant--\n\n(a) any transaction by which the right or custom in question was created, claimed, modified, recognised, asserted or denied, or which was inconsistent with its existence;\n\n(b) particular instances in which the right or custom was claimed, recognised or exercised, or in which its exercise was disputed, asserted or departed from.\n\nIllustration.\n\nThe question is, whether A has a right to a fishery. A deed conferring the fishery on A's ancestors, a mortgage of the fishery by A's father, a subsequent grant of the fishery by A's father, irreconcilable with the mortgage, particular instances in which A's father exercised the right, or in which the exercise of the right was stopped by A's neighbours, are relevant facts.",
+  "page_start": 13,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "6f367f5e-2d6e-425b-b71e-68421d817598",
+    "handle": "123456789/545906",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

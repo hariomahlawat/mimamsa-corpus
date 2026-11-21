@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s126",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "126",
+  "heading": "Power of criminal court to require delivery of offender.",
+  "chapter": null,
+  "order": 126,
+  "text": "(1) When a criminal court having jurisdiction is of opinion that proceedings shall be instituted before itself in respect of any alleged offence, it may, by written notice, require the officer referred to in section 125 at his option, either to deliver over the offender to the nearest magistrate to be proceeded against according to law, or to postpone proceedings pending a reference to the Central Government.\n\n(2) In every such case the said officer shall either deliver over the offender in compliance with the requisition, or shall forthwith refer the question as to the court before which the proceedings are to be instituted for the determination of the Central Government, whose order upon such reference shall be final.",
+  "page_start": 35,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "edac68e6-8530-4dd9-bac1-2a3bd307fc6c",
+    "handle": "123456789/525994",
+    "listing_raw_path": "data/raw/indiacode/1950/bf707aef08de28f5dee7a14e1f6b2ee370a4742ee33b309651ae663960b221a5.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

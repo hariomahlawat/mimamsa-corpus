@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s147",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "147",
+  "heading": "Evidence as to matters in writing.",
+  "chapter": null,
+  "order": 147,
+  "text": "Any witness may be asked, while under examination, whether any contract, grant or other disposition of property, as to which he is giving evidence, was not contained in a document, and if he says that it was, or if he is about to make any statement as to the contents of any document, which, in the opinion of the Court, ought to be produced, the adverse party may object to such evidence being given until such document is produced, or until facts have been proved which entitle the party who called the witness to give secondary evidence of it.\n\nExplanation.--A witness may give oral evidence of statements made by other persons about the contents of documents if such statements are in themselves relevant facts.\n\nIllustration.\n\nThe question is, whether A assaulted B. C deposes that he heard A say to D-- \"B wrote a letter accusing me of theft, and I will be revenged on him\". This statement is relevant, as showing A's motive for the assault, and evidence may be given of it, though no other evidence is given about the letter.",
+  "page_start": 44,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "22fce7e0-29b5-435d-bc58-dd63a7bb516b",
+    "handle": "123456789/546046",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

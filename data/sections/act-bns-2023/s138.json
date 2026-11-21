@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s138",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "138",
+  "heading": "Abduction.",
+  "chapter": null,
+  "order": 138,
+  "text": "Whoever by force compels, or by any deceitful means induces, any person to go from any place, is said to abduct that person.",
+  "page_start": 66,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b9bf0041-daad-4cc9-b2f2-b4dc09559b7f",
+    "handle": "123456789/545638",
+    "listing_raw_path": "data/raw/indiacode/2023/e24c8804e894bc95b71537aa906a01f3c107bd5c9f3ca8647fe137daf45ec071.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

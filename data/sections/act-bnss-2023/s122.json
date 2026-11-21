@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s122",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "122",
+  "heading": "Certain transfers to be null and void.",
+  "chapter": null,
+  "order": 122,
+  "text": "Where after the making of an order under sub-section (1) of section 117 or the issue of a notice under section 119, any property referred to in the said order or notice is transferred by any mode whatsoever such transfers shall, for the purposes of the proceedings under this Chapter, be ignored and if such property is subsequently forfeited to the Central Government under section 120, then, the transfer of such property shall be deemed to be null and void.",
+  "page_start": 50,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "c3ae12b3-11eb-4db2-85de-c21f5468c9de",
+    "handle": "123456789/546229",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

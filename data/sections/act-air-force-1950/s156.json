@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s156",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "156",
+  "heading": "Power to confirm finding and sentence of summary general courts- martial.",
+  "chapter": null,
+  "order": 156,
+  "text": "The findings and sentences of summary general courts-martial may be confirmed by the convening officer or if he so directs, by an authority superior to him.",
+  "page_start": 47,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "97bfcd06-d455-44c5-9753-b0dfd4e6363f",
+    "handle": "123456789/523767",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

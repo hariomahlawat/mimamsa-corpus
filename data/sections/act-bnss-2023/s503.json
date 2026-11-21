@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s503",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "503",
+  "heading": "Procedure by police upon seizure of property.",
+  "chapter": null,
+  "order": 503,
+  "text": "(1) Whenever the seizure of property by any police officer is reported to a Magistrate under the provisions of this Sanhita, and such property is not produced before a Criminal Court during an inquiry or trial, the Magistrate may make such order as he thinks fit respecting the disposal of such property or the delivery of such property to the person entitled to the possession thereof, or if such person cannot be ascertained, respecting the custody and production of such property.\n\n(2) If the person so entitled is known, the Magistrate may order the property to be delivered to him on such conditions (if any) as the Magistrate thinks fit and if such person is unknown, the Magistrate may detain it and shall, in such case, issue a proclamation specifying the articles of which such property consists, and requiring any person who may have a claim thereto, to appear before him and establish his claim within six months from the date of such proclamation.",
+  "page_start": 166,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "91c1e83f-a282-476a-9bbf-5b5da983aab6",
+    "handle": "123456789/546584",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

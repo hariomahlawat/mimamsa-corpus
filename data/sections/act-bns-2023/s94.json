@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s94",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "94",
+  "heading": "Concealment of birth by secret disposal of dead body.",
+  "chapter": null,
+  "order": 94,
+  "text": "Whoever, by secretly burying or otherwise disposing of the dead body of a child whether such child die before or after or during its birth, intentionally conceals or endeavours to conceal the birth of such child, shall be punished with imprisonment of either description for a term which may extend to two years, or with fine, or with both.",
+  "page_start": 39,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "894928d8-7558-4781-a848-5d4c85ce01d2",
+    "handle": "123456789/545590",
+    "listing_raw_path": "data/raw/indiacode/2023/3f63bdbb2512a509521a6dc9e8e8d97044f569307a1a0c1b10a743ec30873357.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

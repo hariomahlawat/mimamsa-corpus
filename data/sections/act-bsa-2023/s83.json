@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s83",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "83",
+  "heading": "Presumption as to collections of laws and reports of decisions.",
+  "chapter": null,
+  "order": 83,
+  "text": "The Court shall presume the genuineness of, every book purporting to be printed or published under the authority of the Government of any country, and to contain any of the laws of that country, and of every book purporting to contain reports of decisions of the Courts of such country",
+  "page_start": 32,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "377d2d53-13f2-48ed-8390-c5a772ffcde2",
+    "handle": "123456789/545979",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

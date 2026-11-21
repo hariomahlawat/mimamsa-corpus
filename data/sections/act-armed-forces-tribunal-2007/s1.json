@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-armed-forces-tribunal-2007#s1",
+  "parent_doc_id": "act-armed-forces-tribunal-2007",
+  "unit": "section",
+  "number": "1",
+  "heading": "Short title and commencement.",
+  "chapter": null,
+  "order": 1,
+  "text": "(1) This Act may be called the Armed Forces Tribunal Act, 2007.\n\n(2) It shall come into force on such date[1] as the Central Government may, by notification, appoint.",
+  "page_start": 3,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [
+    "15th June, 2008, vide notification No. S.O. 14(E), dated 13th June, 2008, see Gazette of India, Extraordinary, Part II, sec. 3(ii)."
+  ],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "9a23b961-672e-4745-95d5-e2fb0dfda8a8",
+    "handle": "123456789/527240",
+    "listing_raw_path": "data/raw/indiacode/2007/95e02c280b34e5d99b059262d45c9d9c42acb780ab8f44fee597cd8c1cbad63a.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

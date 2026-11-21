@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s500",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "500",
+  "heading": "Appeal against orders under section 498 or section 499.",
+  "chapter": null,
+  "order": 500,
+  "text": "(1) Any person aggrieved by an order made by a Court or Magistrate under section 498 or section 499, may appeal against it to the Court to which appeals ordinarily lie from convictions by the former Court.\n\n(2) On such appeal, the Appellate Court may direct the order to be stayed pending disposal of the appeal, or may modify, alter or annul the order and make any further orders that may be just.\n\n(3) The powers referred to in sub-section (2) may also be exercised by a Court of appeal, confirmation or revision while dealing with the case in which the order referred to in sub-section (1) was made.",
+  "page_start": 166,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f70c081f-eac2-4cc2-927b-7a739219407d",
+    "handle": "123456789/546581",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

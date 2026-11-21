@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s344",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "344",
+  "heading": "Falsification of accounts.",
+  "chapter": null,
+  "order": 344,
+  "text": "Whoever, being a clerk, officer or servant, or employed or acting in the capacity of a clerk, officer or servant, wilfully, and with intent to defraud, destroys, alters, mutilates or falsifies any book, electronic record, paper, writing, valuable security or account which belongs to or is in the possession of his employer, or has been received by him for or on behalf of his employer, or wilfully, and with intent to defraud, makes or abets the making of any false entry in, or omits or alters or abets the omission or alteration of any material particular from or in, any such book, electronic record, paper, writing, valuable security or account, shall be punished with imprisonment of either description for a term which may extend to seven years, or with fine, or with both.\n\nExplanation.—It shall be sufficient in any charge under this section to allege a general intent to defraud without naming any particular person intended to be defrauded or specifying any particular sum of money intended to be the subject of the fraud, or any particular day on which the offence was committed.",
+  "page_start": 103,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "1985885e-94e3-44ff-9a25-584e0951baca",
+    "handle": "123456789/545832",
+    "listing_raw_path": "data/raw/indiacode/2023/4b55872ac647fc1be1786018d5bb3bd3b10a6f9a459f0262373d8f3425c9bbe0.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

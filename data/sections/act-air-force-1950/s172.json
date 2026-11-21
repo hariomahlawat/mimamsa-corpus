@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s172",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "172",
+  "heading": "Execution of sentence of fine",
+  "chapter": null,
+  "order": 172,
+  "text": "When a sentence of fine is imposed by a court-martial under section 71 whether the trial was held within India or not, a copy of such sentence, signed and certified by the confirming officer may be sent to any magistrate in India, and such magistrate shall thereupon cause the fine to be recovered in accordance with the provisions of the Code of Criminal Procedure, 1898 (5 of 1898), or any corresponding law in force in [1][the State of Jammu and Kashmir], for the levy of fines as if were a sentence of fine imposed by such Magistrate.",
+  "page_start": 50,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "A.O.(No. 3), 1956",
+      "by_doc_id": null,
+      "effective_date": "1955-05-07",
+      "effective_date_raw": null,
+      "footnote_text": "Subs by the A.O.(No. 3), 1956, for \"a Part B State\" (w.e.f. 7-5-1955).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "098c5ed9-664b-482e-9570-e9520aea4b03",
+    "handle": "123456789/523783",
+    "listing_raw_path": "data/raw/indiacode/1950/7f6dec5d50011a1a0e7e6d4d73b01902bc953399fe7f4f33294f8432e8a521ca.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

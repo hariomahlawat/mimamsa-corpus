@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s25",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "25",
+  "heading": "Right of the Chief of the Naval Staff or commanding officers to obtain copies of judgments or orders made by a criminal court.",
+  "chapter": null,
+  "order": 25,
+  "text": "A criminal court before which any proceedings have been taken against a person in the naval service while subject to naval law shall, on application by the Chief of the Naval Staff or the commanding officer of that person, grant copies of the judgment and final orders in the case free of cost and without delay.",
+  "page_start": 16,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "790cad9e-5d62-4684-a656-2619582e8794",
+    "handle": "123456789/517372",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

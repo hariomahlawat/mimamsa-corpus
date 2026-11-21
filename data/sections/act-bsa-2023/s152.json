@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s152",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "152",
+  "heading": "Question not to be asked without reasonable grounds.",
+  "chapter": null,
+  "order": 152,
+  "text": "No such question as is referred to in section 151 ought to be asked, unless the person asking it has reasonable grounds for thinking that the imputation which it conveys is well-founded.\n\nIllustrations\n\n(a) An advocate is instructed by another advocate that an important witness is a dacoit. This is a reasonable ground for asking the witness whether he is a dacoit.\n\n(b) An advocate is informed by a person in Court that an important witness is a dacoit. The informant, on being questioned by the advocate, gives satisfactory reasons for his statement. This is a reasonable ground for asking the witness whether he is a dacoit.\n\n(c) A witness, of whom nothing whatever is known, is asked at random whether he is a dacoit. There are here no reasonable grounds for the question\n\n(d) A witness, of whom nothing whatever is known, being questioned as to his mode of life and means of living, gives unsatisfactory answers. This may be a reasonable ground for asking him if he is a dacoit.",
+  "page_start": 45,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "675bb07e-ee48-479e-b423-21b71bb4f66f",
+    "handle": "123456789/546051",
+    "listing_raw_path": "data/raw/indiacode/2023/ab2cb6dfe04cc35efeae001623320ec8bb95284f43b977c599161dfe0015c9b7.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

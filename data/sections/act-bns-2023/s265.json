@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s265",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "265",
+  "heading": "Resistance or obstruction to lawful apprehension or escape or rescue in cases not otherwise provided for.",
+  "chapter": null,
+  "order": 265,
+  "text": "Whoever, in any case not provided for in section 262 or section 263 or in any other law for the time being in force, intentionally offers any resistance or illegal obstruction to the lawful apprehension of himself or of any other person, or escapes or attempts to escape from any custody in which he is lawfully detained, or rescues or attempts to rescue any other person from any custody in which that person is lawfully detained, shall be punished with imprisonment of either description for a term which may extend to six months, or with fine, or with both.",
+  "page_start": 80,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "721631ee-b72d-4d15-bd1a-8c7bea7738eb",
+    "handle": "123456789/545882",
+    "listing_raw_path": "data/raw/indiacode/2023/3dadba74751304e0739dc43a6b09378ced782f0bb0cc886c12d0a989c5dfc67d.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

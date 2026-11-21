@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s64",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "64",
+  "heading": "Offences in respect of price.",
+  "chapter": null,
+  "order": 68,
+  "text": "Every person subject to naval law who takes out of any prize or ship seized for prize, any money, plate or goods, unless it is necessary for the better securing thereof, or for the necessary use and service of any ships of war of the Indian Navy, before the same be adjuged lawful prize in a Court of competent jurisdiction, shall be punished with imprisonment for a term which may extend to two years or such other punishment as is hereinafter mentioned, and in addition shall forfeit and lose his share of the capture.",
+  "page_start": 25,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b02976b3-c5f1-41cd-ae67-16319308bc23",
+    "handle": "123456789/523928",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s360",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "360",
+  "heading": "Withdrawal from prosecution.",
+  "chapter": null,
+  "order": 360,
+  "text": "The Public Prosecutor or Assistant Public Prosecutor in charge of a case may, with the consent of the Court, at any time before the judgment is pronounced, withdraw from the prosecution of any person either generally or in respect of any one or more of the offences for which he is tried; and, upon such withdrawal,---\n\n(a) if it is made before a charge has been framed, the accused shall be discharged in respect of such offence or offences;\n\n(b) if it is made after a charge has been framed, or when under this Sanhita no charge is required,\n\nhe shall be acquitted in respect of such offence or offences:\n\nProvided that where such offence---\n\n(i) was against any law relating to a matter to which the executive power of the Union extends; or\n\n(ii) was investigated under any Central Act; or\n\n(iii) involved the misappropriation or destruction of, or damage to, any property belonging to the Central Government; or\n\n(iv) was committed by a person in the service of the Central Government while acting or purporting to act in the discharge of his official duty,\n\nand the Prosecutor in charge of the case has not been appointed by the Central Government, he shall not, unless he has been permitted by the Central Government to do so, move the Court for its consent to withdraw from the prosecution and the Court shall, before according consent, direct the Prosecutor to produce before it the permission granted by the Central Government to withdraw from the prosecution:\n\nProvided further that no Court shall allow such withdrawal without giving an opportunity of being heard to the victim in the case.",
+  "page_start": 127,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "ea15ebb7-6e82-475f-be6d-ddcf139afdbe",
+    "handle": "123456789/546451",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

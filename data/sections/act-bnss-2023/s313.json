@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s313",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "313",
+  "heading": "Procedure in regard to such evidence when completed.",
+  "chapter": null,
+  "order": 313,
+  "text": "(1) As the evidence of each witness taken under section 310 or section 311 is completed, it shall be read over to him in the presence of the accused, if in attendance, or of his advocate, if he appears by an advocate, and shall, if necessary, be corrected.\n\n(2) If the witness denies the correctness of any part of the evidence when the same is read over to him, the Magistrate or presiding Judge may, instead of correcting the evidence, make a memorandum thereon of the objection made to it by the witness and shall add such remarks as he thinks necessary.\n\n(3) If the record of the evidence is in a language different from that in which it has been given and the witness does not understand that language, the record shall be interpreted to him in the language in which it was given, or in a language which he understands.",
+  "page_start": 313,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e2aa86f1-473e-4efe-afcc-67f813befc0f",
+    "handle": "123456789/546406",
+    "listing_raw_path": "data/raw/indiacode/2023/468c13ebf998ead5b19af414bc8e0a5c5053a25af41b5f06afbf5bbc0f5517ba.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

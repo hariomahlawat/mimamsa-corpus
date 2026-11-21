@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s145",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "145",
+  "heading": "Procedure.",
+  "chapter": null,
+  "order": 145,
+  "text": "(1) Proceedings under section 144 may be taken against any person in any district—\n\n(a) where he is; or\n\n(b) where he or his wife resides; or\n\n(c) where he last resided with his wife, or as the case may be, with the mother of the illegitimate child; or\n\n(d) where his father or mother resides.\n\n(2) All evidence in such proceedings shall be taken in the presence of the person against whom an order for payment of maintenance is proposed to be made, or, when his personal attendance is dispensed with, in the presence of his advocate, and shall be recorded in the manner prescribed for summons-cases:\n\nProvided that if the Magistrate is satisfied that the person against whom an order for payment of maintenance is proposed to be made is wilfully avoiding service, or willfully neglecting to attend the Court, the Magistrate may proceed to hear and determine the case ex parte and any order so made may be set aside for good cause shown on an application made within three months from the date thereof subject to such terms including terms as to payment of costs to the opposite party as the Magistrate may think just and proper.\n\n(3) The Court in dealing with applications under section 144 shall have power to make such order as to costs as may be just.",
+  "page_start": 58,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "f88aa2ba-2751-42bb-b2ff-33c0a632a54d",
+    "handle": "123456789/546252",
+    "listing_raw_path": "data/raw/indiacode/2023/6f89f6ebe489684d1bea32b03de0d5c5348b9d9ed9d916ad34392976ef328b82.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

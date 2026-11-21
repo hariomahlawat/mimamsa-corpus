@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s21",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "21",
+  "heading": "Power to modify certain fundamental rights in their application to persons subject to this Act.",
+  "chapter": null,
+  "order": 21,
+  "text": "Subject to the provisions of any law for the time being in force relating to the regular Army or to any branch thereof, the Central Government may, by notification, make rules restricting to such extent and in such manner as may be necessary the right of any person subject to this Act--\n\n(a) to be a member of, or to be associated in any way with, any trade union or labour union, or any class of trade or labour unions or any society, institution or association, or any class of societies, institutions or associations;\n\n(b) to attend or address any meeting or to take part in any demonstration organised by any body of persons for any political or other purposes;\n\n(c) to communicate with the press or to publish or cause to be published any book, letter or other document.",
+  "page_start": 14,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "d11fbf3a-94ad-46c8-98ee-11a387f7b801",
+    "handle": "123456789/525878",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

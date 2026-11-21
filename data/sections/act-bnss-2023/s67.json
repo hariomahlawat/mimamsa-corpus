@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s67",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "67",
+  "heading": "Procedure when service cannot be effected as before provided.",
+  "chapter": null,
+  "order": 67,
+  "text": "If service cannot by the exercise of due diligence be effected as provided in section 64, section 65 or section 66, the serving officer shall affix one of the duplicates of the summons to some conspicuous part of the house or homestead in which the person summoned ordinarily resides; and thereupon the Court, after making such inquiries as it thinks fit, may either declare that the summons has been duly served or order fresh service in such manner as it considers proper.",
+  "page_start": 35,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "198d068e-2687-4d7b-b91e-3301f4f3c600",
+    "handle": "123456789/546177",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

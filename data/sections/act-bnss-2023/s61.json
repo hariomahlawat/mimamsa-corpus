@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s61",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "61",
+  "heading": "Power, on escape, to pursue and retake.",
+  "chapter": null,
+  "order": 61,
+  "text": "(1) If a person in lawful custody escapes or is rescued, the person from whose custody he escaped or was rescued may immediately pursue and arrest him in any place in India.\n\n(2) The provisions of section 44 shall apply to arrests under sub-section (1) although the person making any such arrest is not acting under a warrant and is not a police officer having authority to arrest.",
+  "page_start": 34,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e89b6699-5a49-4416-b193-abfd4b546823",
+    "handle": "123456789/546171",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

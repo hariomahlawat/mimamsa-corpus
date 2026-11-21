@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s508",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "508",
+  "heading": "Proceedings in wrong place.",
+  "chapter": null,
+  "order": 508,
+  "text": "No finding, sentence or order of any Criminal Court shall be set aside merely on the ground that the inquiry, trial or other proceedings in the course of which it was arrived at or passed, took place in a wrong sessions division, district, sub-division or other local area, unless it appears that such error has in fact occasioned a failure of justice.",
+  "page_start": 168,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "b64cd820-16cf-43b4-b29e-a3be9f8067c3",
+    "handle": "123456789/546589",
+    "listing_raw_path": "data/raw/indiacode/2023/c4c08238ddc57054fc80233f48b08eec70b9e4bc80a8797fe7d3218ad4c72a18.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

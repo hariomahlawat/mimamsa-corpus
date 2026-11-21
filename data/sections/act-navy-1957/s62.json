@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-navy-1957#s62",
+  "parent_doc_id": "act-navy-1957",
+  "unit": "section",
+  "number": "62",
+  "heading": "Penalty for endeavouring to stir up disturbance on account of unwholesomeness of victuals or other just grounds.",
+  "chapter": null,
+  "order": 66,
+  "text": "Every person subject to naval law who has any cause of complaint either of the unwholesomeness of the victuals or upon any other just ground shall quietly make the same known to his superior or captain or to the Chief of the Naval Staff, in accordance with the prescribed channels of communication and the said superior, captain or Chief of the Naval Staff shall, as far as he is able, cause the same to be presently remedied; and every person subject to naval law who upon any pretence whatever attempts to stir up any disturbance shall be punished with imprisonment for a term which may extend to fourteen years or such other punishment as is hereinafter mentioned.",
+  "page_start": 25,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "14b36a9e-fea9-435b-a507-56e0964c4323",
+    "handle": "123456789/523926",
+    "listing_raw_path": "data/raw/indiacode/1957/973bdf5834e5acf025bafcdc6b64a773273f515c44e3e8f76287dca68f67feff.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

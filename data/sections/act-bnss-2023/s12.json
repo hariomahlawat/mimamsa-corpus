@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s12",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "12",
+  "heading": "Local Jurisdiction of Judicial Magistrates.",
+  "chapter": null,
+  "order": 12,
+  "text": "(1) Subject to the control of the High Court, the Chief udicial Magistrate may, from time to time, define the local limits of the areas within which the Magistrates appointed under section 9 or under section 11 may exercise all or any of the powers with which they may respectively be invested under this Sanhita:\n\nProvided that the Court of Special Judicial Magistrate may hold its sitting at any place within the local area for which it is established.\n\n(2) Except as otherwise provided by such definition, the jurisdiction and powers of every such Magistrate shall extend throughout the district\n\n(3) Where the local jurisdiction of a Magistrate appointed under section 9 or section 11 extends to an area beyond the district in which he ordinarily holds Court, any reference in this Sanhita to the Court of Session or Chief Judicial Magistrate shall, in relation to such Magistrate, throughout the area within his local jurisdiction, be construed, unless the context otherwise requires, as a reference to the Court of Session or Chief Judicial Magistrate, as the case may be, exercising jurisdiction in relation to the said district.",
+  "page_start": 20,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "94401ea6-3785-4d53-ba3f-a173b2ba2931",
+    "handle": "123456789/546117",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

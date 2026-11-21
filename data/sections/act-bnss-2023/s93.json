@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s93",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "93",
+  "heading": "Provisions of this Chapter generally applicable to summons and warrants of arrest.",
+  "chapter": null,
+  "order": 93,
+  "text": "The provisions contained in this Chapter relating to summons and warrant, and their issue, service and execution, shall, so far as may be, apply to every summons and every warrant of arrest issued under this Sanhita.",
+  "page_start": 41,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "183910bb-cd93-4889-89d9-2d77dc261852",
+    "handle": "123456789/546203",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

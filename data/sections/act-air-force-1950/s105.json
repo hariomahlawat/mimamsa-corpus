@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s105",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "105",
+  "heading": "Arrest by civil authorities.",
+  "chapter": null,
+  "order": 105,
+  "text": "Wherever any person subject to this Act, who is accused of any offence under this Act, is within the jurisdiction of any magistrate or police officer, such magistrate or police officer shall aid in the apprehension and delivery to air force custody of such person upon receipt of a written application to that effect signed by his commanding officer.",
+  "page_start": 36,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e64a9806-428f-450f-9413-07394d726d7c",
+    "handle": "123456789/523716",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

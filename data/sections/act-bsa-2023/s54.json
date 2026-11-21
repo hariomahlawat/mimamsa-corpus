@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bsa-2023#s54",
+  "parent_doc_id": "act-bsa-2023",
+  "unit": "section",
+  "number": "54",
+  "heading": "Proof of facts by oral evidence.",
+  "chapter": null,
+  "order": 54,
+  "text": "All facts, except the contents of documents may be proved by oral evidence.",
+  "page_start": 25,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "8fa6938f-152e-4df0-b9ba-d2773363d84f",
+    "handle": "123456789/545948",
+    "listing_raw_path": "data/raw/indiacode/2023/f8d42e9b77f22017449ed2b994371c53bd1167e0e6e843506494b55db9de4574.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

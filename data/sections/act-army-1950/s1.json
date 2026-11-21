@@ -1,0 +1,31 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-1950#s1",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "1",
+  "heading": "Short title and commencement.",
+  "chapter": null,
+  "order": 1,
+  "text": "(1) This Act may be called the Army Act, 1950.\n\n(2) It shall come into force on such date[1] as the Central Government may, by notification in the Official Gazette, appoint in this behalf.",
+  "page_start": 9,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [
+    "22nd July, 1950, vide notification No. S.R.0 120, dated the 22nd July, 1950, see Gazette of India, Part II, s. 4."
+  ],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a2ea0f70-a5cb-44b9-bfd1-ce30dcda78ad",
+    "handle": "123456789/525856",
+    "listing_raw_path": "data/raw/indiacode/1950/9da416b5fecb3136daf5963b06522786eefc5aa5dd0ace9fa4a167308cfcc39c.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

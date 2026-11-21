@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s65",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "65",
+  "heading": "Service of summons on corporate bodies, firms, and societies.",
+  "chapter": null,
+  "order": 65,
+  "text": "(1) Service of a summons on a company or corporation may be effected by serving it on the Director, Manager, Secretary or other officer of the company or corporation, or by letter sent by registered post addressed to the Director, Manager, Secretary or other officer of the company or corporation in India, in which case the service shall be deemed to have been effected when the letter would arrive in ordinary course of post.\n\nExplanation.—In this section, “company” means a body corporate and “corporation” means an incorporated company or other body corporate registered under the Companies Act, 2013 (18 of 2013) or a society registered under the Societies Registration Act, 1860 (21 of 1860).\n\n(2) Service of a summons on a firm or other association of individuals may be effected by serving it on any partner of such firm or association, or by letter sent by registered post addressed to such partner, in which case the service shall be deemed to have been effected when the letter would arrive in ordinary course of post",
+  "page_start": 35,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "e39b1637-dadb-4a22-9431-24b33d16b829",
+    "handle": "123456789/546175",
+    "listing_raw_path": "data/raw/indiacode/2023/345d06ff9dedd71b9b21b4fe27cbf5341de195f67de626d091f622fa6cc60a1b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

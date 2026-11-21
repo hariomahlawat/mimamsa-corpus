@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-air-force-1950#s86",
+  "parent_doc_id": "act-air-force-1950",
+  "unit": "section",
+  "number": "86",
+  "heading": "Punishment of officers and warrant officers.",
+  "chapter": null,
+  "order": 86,
+  "text": "An officer having power to convene a general court-martial or such other officer as is, with the consent of the Central Government, specified by [1][the Chief of the Air Staff] may, in the prescribed, manner proceed against an officer below the rank of squadron leader or warrant officer, who is charged with an offence under this Act, and award one or more of the following punishments, that is to say,--\n\n(a) forfeiture of seniority, or in the case of any of them whose promotion depends upon length of service, forfeiture of service for the purpose of promotion for a period not exceeding twelve months, but subject to the right of the accused previous to the award to elect to be tried by a court-martial;\n\n(b) severe reprimand or reprimand;\n\n(c) stoppage of pay and allowance until any proved loss or damage occasioned by the offence of which he is convicted is made good but subject to the right of the accused specified in clause (a);\n\n(d) forfeiture of pay and allowances for a period not exceeding three months for an offence under clause (e) of section 42 in so far as it consists of neglect to obey flying orders or under section 62 or section 63.",
+  "page_start": 31,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 19 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1955-05-07",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 19 of 1955, s. 2 and the Schedule, for \"the Commander-in-Chief\"(w.e.f. 7-5-1955).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3f577c80-1039-4a76-9727-982b6d6c4e4e",
+    "handle": "123456789/519403",
+    "listing_raw_path": "data/raw/indiacode/1950/5d720616314d6d8ec43622dc84d563119a95831dd83f7f9ef800701186d94109.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-army-af-disposal-private-property-1950#s14",
+  "parent_doc_id": "act-army-af-disposal-private-property-1950",
+  "unit": "section",
+  "number": "14",
+  "heading": "Application of sections 3 to 13 to persons of unsound mind or to persons reported missing on active service.",
+  "chapter": null,
+  "order": 14,
+  "text": "The provisions of sections 3 to 13 shall, so far as they can be made applicable, also apply in the case of a person subject to the Army Act, 1950 (45 of 1950), or the Air Force Act, 1950 (45 of 1950), as the case may be, who, notwithstanding anything contained [1][the Mental Health Act, 1987 (14 of 1987)], is ascertained in the prescribed manner to be of unsound mind, or who, while on active service, is officially reported missing, as if he had died on the day on which his unsoundness of mind is so ascertained or, as the case may be, on the day on which he is officially reported missing:\n\nProvided that in the case of a person so reported missing, no action shall be taken under sub-section (2) to (6) or section 3 or section 4 or section 7 until such time as he is officially presumed to be dead.",
+  "page_start": 6,
+  "page_end": null,
+  "status": "amended",
+  "status_note": "1 amendment note(s) on this section",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 31 of 2000",
+      "by_doc_id": null,
+      "effective_date": "2000-08-25",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 31 of 2000, s. 4, for \"the Indian Lunacy Act, 1912 (4 of 1912)\" (w.e.f. 25-8-2000).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "00098ace-4215-4613-bbb6-df7eb8ab2d52",
+    "handle": "123456789/527854",
+    "listing_raw_path": "data/raw/indiacode/1950/2dce3a9525b06939bf0a27ebc223106bd030c88a8fa3f2aa0c722862fe2924b3.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

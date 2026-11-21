@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s414",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "414",
+  "heading": "Appeal from orders requiring security or refusal to accept or rejecting surety for keeping peace or good behavior.",
+  "chapter": null,
+  "order": 414,
+  "text": "Any person, ---\n\n(i) who has been ordered under section 136 to give security for keeping the peace or for good behaviour; or\n\n(ii) who is aggrieved by any order refusing to accept or rejecting a surety under section 140,\n\nmay appeal against such order to the Court of Session:\n\nProvided that nothing in this section shall apply to persons the proceedings against whom are laid before a Sessions Judge in accordance with the provisions of sub-section (2) or sub-section (4) of section 141.",
+  "page_start": 143,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "a13bda4e-c4a5-41ff-b6b5-03e96dcd36bb",
+    "handle": "123456789/546662",
+    "listing_raw_path": "data/raw/indiacode/2023/84de940d3a0fe09d9683198d94de1a7af018b90eb5d0667daa39ef362963cb9b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

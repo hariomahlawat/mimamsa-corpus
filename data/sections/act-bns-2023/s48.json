@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bns-2023#s48",
+  "parent_doc_id": "act-bns-2023",
+  "unit": "section",
+  "number": "48",
+  "heading": "Abetment outside India for offence in India.",
+  "chapter": null,
+  "order": 48,
+  "text": "A person abets an offence within the meaning of this Sanhita who, without and beyond India, abets the commission of any act in India which would constitute an offence if committed in India.\n\nIllustration.\n\nA, in country X, instigates B, to commit a murder in India, A is guilty of abetting murder.",
+  "page_start": 16,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "3cc03b7c-c1ad-4978-a797-9aaf496e1ec7",
+    "handle": "123456789/545544",
+    "listing_raw_path": "data/raw/indiacode/2023/3f63bdbb2512a509521a6dc9e8e8d97044f569307a1a0c1b10a743ec30873357.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}

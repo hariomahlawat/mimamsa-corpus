@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-bnss-2023#s318",
+  "parent_doc_id": "act-bnss-2023",
+  "unit": "section",
+  "number": "318",
+  "heading": "Record in High Court.",
+  "chapter": null,
+  "order": 318,
+  "text": "Every High Court may, by general rule, prescribe the manner in which the evidence of witnesses and the examination of the accused shall be taken down in cases coming before it, and such evidence and examination shall be taken down in accordance with such rule.",
+  "page_start": 111,
+  "page_end": null,
+  "status": "in_force",
+  "status_note": null,
+  "amendment_history": [],
+  "notes": [],
+  "source_record": {
+    "system": "indiacode",
+    "record_id": "2cba0e9c-c696-4097-8a70-edc09a5a2b5a",
+    "handle": "123456789/546659",
+    "listing_raw_path": "data/raw/indiacode/2023/84de940d3a0fe09d9683198d94de1a7af018b90eb5d0667daa39ef362963cb9b.json"
+  },
+  "field_provenance": {
+    "text": "crawler",
+    "heading": "crawler",
+    "status": "rule",
+    "amendment_history": "rule"
+  }
+}
