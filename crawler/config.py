@@ -205,6 +205,14 @@ def check_config(cfg: Config) -> ConfigReport:
                 r.warnings.append(f"{did} is targeted by both {seen_ids[did]} and {name} (first hit wins)")
             seen_ids.setdefault(did, name)
         ru = src.get("robots_unreachable")
+        r5 = src.get("robots_5xx")
+        if r5 not in (None, "allow", "disallow"):
+            r.errors.append(f"{where}.robots_5xx must be 'allow' or 'disallow'")
+        elif r5 == "allow":
+            if not str(src.get("robots_unreachable_reason") or "").strip():
+                r.errors.append(f"{where}.robots_5xx: allow needs a robots_unreachable_reason")
+            else:
+                r.warnings.append(f"{where} has the robots-5xx exception (crawls if robots.txt answers 5xx)")
         if ru not in (None, "allow", "disallow"):
             r.errors.append(f"{where}.robots_unreachable must be 'allow' or 'disallow'")
         elif ru == "allow":

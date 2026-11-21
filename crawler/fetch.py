@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import logging
 import os
 from pathlib import Path
@@ -12,7 +13,8 @@ from .http import Blocked, CrawlError, FetchError, FetchResult, PoliteClient, is
 from .state import StateDB
 
 log = logging.getLogger("mimamsa.fetch")
-EXT_BY_TYPE = {"application/pdf": ".pdf", "text/html": ".html"}
+EXT_BY_TYPE = {"application/pdf": ".pdf", "text/html": ".html", "application/json": ".json",
+               "application/hal+json": ".json"}
 
 
 def _ext(r: FetchResult, url: str) -> str:
@@ -22,10 +24,18 @@ def _ext(r: FetchResult, url: str) -> str:
     return EXT_BY_TYPE.get(r.content_type or "") or (suffix if suffix.isascii() and 1 < len(suffix) <= 6 else ".bin")
 
 
+def _is_json(content: bytes) -> bool:
+    try:
+        json.loads(content)
+        return True
+    except ValueError:
+        return False
+
+
 def fetch_documents(cfg: Config, db: StateDB, client: PoliteClient, source: str, root: Path, *,
                     limit: int = 50) -> dict[str, int]:
     stats = {"downloaded": 0, "duplicate": 0, "not_modified": 0, "retry_later": 0, "failed": 0,
-             "skipped": 0, "bytes": 0, "blocked": 0}
+             "skipped": 0, "bytes": 0, "blocked": 0, "checksum_differs_from_listing": 0}
     retry = dict(max_retries=cfg.setting(source, "max_retries"),
                  backoff_base=cfg.setting(source, "backoff_base_seconds"))
     for q in db.due(source, kind="document", limit=limit):
@@ -61,16 +71,28 @@ def fetch_documents(cfg: Config, db: StateDB, client: PoliteClient, source: str,
             problem = f"HTTP {r.status}"
         elif not r.content:
             problem = "empty body"
-        elif is_pdf_url(q.url) and not r.content.startswith(b"%PDF"):
+        elif ((is_pdf_url(q.url) or str(q.meta.get("filename") or "").lower().endswith(".pdf"))
+              and not r.content.startswith(b"%PDF")):
             problem = f"expected a PDF, got {r.content_type or 'unknown type'} (possible block or error page)"
+        elif q.meta.get("category") == "linked_records" and not _is_json(r.content):
+            problem = f"expected JSON records, got {r.content_type or 'unknown type'}"
         if problem:
             db.mark_attempt_failed(q.url, error=problem, status_code=r.status, retryable=False, **retry)
             stats["failed"] += 1
             log.warning("%s: %s", q.url, problem)
             continue
 
+        # India Code lists an MD5 for each stored file but stamps an "India Code" watermark onto PDFs as
+        # they are downloaded, so the bytes served differ from the listing (seen 2026-11-21: same bytes
+        # on repeat downloads, larger than the listed size). A difference is counted, not treated as damage.
+        if q.meta.get("md5") and hashlib.md5(r.content).hexdigest() != str(q.meta["md5"]).lower():
+            stats["checksum_differs_from_listing"] += 1
+            log.info("%s: served file differs from the listed MD5 (expected for watermarked PDFs)", q.url)
+
         sha = hashlib.sha256(r.content).hexdigest()
-        year = str(q.meta.get("year") or "0000")          # 0000 = year not known at download time
+        year = str(q.meta.get("year") or "")
+        if not (len(year) == 4 and year.isdigit()):
+            year = "0000"                                  # 0000 = year not known at download time
         rel = Path("data") / "raw" / source / year / f"{sha}{_ext(r, q.url)}"
         if db.has_file(sha):
             stats["duplicate"] += 1

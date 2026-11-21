@@ -1,0 +1,393 @@
+{
+  "id" : null,
+  "scope" : null,
+  "query" : "dc.identifier.collection:ACT AND dc.title:\"Army Act, 1950\"",
+  "appliedFilters" : null,
+  "sort" : null,
+  "configuration" : null,
+  "type" : "discover",
+  "_links" : {
+    "self" : {
+      "href" : "https://indiacode.gov.in/server/api/discover/search/objects?query=dc.identifier.collection%253AACT%2520AND%2520dc.title%253A%2522Army%2520Act%252C%25201950%2522"
+    }
+  },
+  "_embedded" : {
+    "searchResult" : {
+      "_embedded" : {
+        "objects" : [ {
+          "hitHighlights" : {
+            "dc.description.abstract" : [ "Summary of The <em>Army Act, 1950</em>\n\nKey Provisions:\n1.\tApplication of the <em>Act</em>: \no\tApplies to officers, soldiers, and other persons subject to Army law. \no\tDefines the categories of personnel who come under the jurisdiction of the <em>Act</em>. \n2.\t", " \n\tMutiny and disobedience of lawful commands. \n\tInsubordination and misconduct. \n\t<em>Acts</em> prejudicial to good order and military discipline. \n5.\tPunishments and Penalties: \no\tProvides punishments for offences committed by persons subject to the <em>Act</em>. \no\tPunishments may include imprisonment, dismissal from service, reduction in rank, forfeiture of pay and allowances, and other disciplinary measures. \n6.\t" ],
+            "dc.title" : [ "The <em>Army Act, 1950</em>" ]
+          },
+          "type" : "discover",
+          "_links" : {
+            "indexableObject" : {
+              "href" : "https://indiacode.gov.in/server/api/core/items/60fd2882-1df9-4b4d-8a70-3add0a9f5b6b"
+            }
+          },
+          "_embedded" : {
+            "indexableObject" : {
+              "id" : "60fd2882-1df9-4b4d-8a70-3add0a9f5b6b",
+              "uuid" : "60fd2882-1df9-4b4d-8a70-3add0a9f5b6b",
+              "name" : "The Army Act, 1950",
+              "handle" : "123456789/496203",
+              "metadata" : {
+                "dc.date.accessioned" : [ {
+                  "value" : "2026-07-10T20:10:47Z",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.date.act_year" : [ {
+                  "value" : "1950",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.date.enact_date" : [ {
+                  "value" : "1950-05-20",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.date.enforcement_date" : [ {
+                  "value" : "22-07-1950",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.date.issued" : [ {
+                  "value" : "1950-05-20",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.date.last_modified" : [ {
+                  "value" : "2025-11-07",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.description.abstract" : [ {
+                  "value" : "Summary of The Army Act, 1950\n\nKey Provisions:\n1.\tApplication of the Act: \no\tApplies to officers, soldiers, and other persons subject to Army law. \no\tDefines the categories of personnel who come under the jurisdiction of the Act. \n2.\tConstitution and Control of the Army: \no\tProvides for the organization and maintenance of the Indian Army under the authority of the Central Government. \no\tRegulates the appointment, command, duties, and service obligations of Army personnel. \n3.\tDuties and Discipline: \no\tEstablishes rules relating to obedience of lawful commands, discipline, conduct, and military duties. \no\tEnsures that Army personnel maintain the required standards of efficiency and operational readiness. \n4.\tMilitary Offences: \no\tDefines various offences under Army law, including: \n\tDesertion and absence without leave. \n\tMutiny and disobedience of lawful commands. \n\tInsubordination and misconduct. \n\tActs prejudicial to good order and military discipline. \n5.\tPunishments and Penalties: \no\tProvides punishments for offences committed by persons subject to the Act. \no\tPunishments may include imprisonment, dismissal from service, reduction in rank, forfeiture of pay and allowances, and other disciplinary measures. \n6.\tCourt-Martial System: \no\tProvides for the constitution and functioning of military courts, including General Court-Martial, District Court-Martial, Summary General Court-Martial, and Summary Court-Martial. \no\tEstablishes procedures for investigation, trial, confirmation, and review of sentences. \n7.\tPowers of Commanding Officers: \no\tGrants powers to commanding officers to maintain discipline and deal with offences committed by personnel under their command. \no\tProvides for summary proceedings in specified cases. \n8.\tService Conditions and Administration: \no\tRegulates matters relating to enlistment, discharge, pay, allowances, leave, and other conditions of service. \no\tProvides mechanisms for effective administration of the Army. \n9.\tRule-Making Powers: \no\tEmpowers the Central Government to make rules and regulations regarding recruitment, service conditions, discipline, court procedures, and other matters connected with the Army.",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.act_id" : [ {
+                  "value" : "AC_CEN_28_38_00012_195046_1517807323368",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.act_number" : [ {
+                  "value" : "46",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.collection" : [ {
+                  "value" : "ACT",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.department_id" : [ {
+                  "value" : "1408",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.department_name" : [ {
+                  "value" : "Department of Military Affairs",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.givenid" : [ {
+                  "value" : "1950-46",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.ministry_id" : [ {
+                  "value" : "28",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.ministry_name" : [ {
+                  "value" : "Ministry of Defence",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.notification_no" : [ {
+                  "value" : "22nd July, 1950, vide notification No. S.R.O. 120, dated the 22nd July, 1950, see Gazette of India, Part II, s. 4.",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.preamble_description" : [ {
+                  "value" : "<center style=\"font-size: 17px;\"> THE ARMY ACT, 1950</center> <center style=\"font-size: 16px;\">ACT NO. 46 OF 1950<sup>1</sup></center> <p style=\"text-align:right;\"> [20<i>th May, </i>1950.] </p> <span style=\"margin-left: 15px;\"></span> An Act to consolidate and amend the law relating to the Government of the regular Army.<br/><hr style=\"border: none; margin-bottom: 8px; margin-top: 0;\"/> <span style=\"margin-left: 15px;\"></span> <span style=\"margin-left: 15px;\"></span> BE it enacted by Parliament as follows:--<br/><hr style=\"border: none; margin-bottom: 8px; margin-top: 0;\"/>",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.preamble_footnote" : [ {
+                  "value" : "<sup>1</sup>. This Act has been extended to-Goa, Daman and Diu with modifications by Reg. 12 of 1962, s. 3 and Schedule; Assam Rifles as modified by S.R.O. 318, dated 6-12-1962, <i>see</i> Gazette of India, Part II, s. 4, page 223. N.P. Pondicherry <i>vide</i> Reg. 7 of 1963, s. 3 and Schedule I (w.e.f. 1-10- 1963). And brought into force in Dadra and Nagar Haveli by Reg. 6 of 1963, s. 2 and Schedule I (w.e.f. 1-7-1965). <br/><hr style=\"border: none; margin-bottom: 3px; margin-top: 0;\"/>",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.refact" : [ {
+                  "value" : "0",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.reference_sites" : [ {
+                  "value" : "Ministry of Defence https://mod.gov.in/",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                }, {
+                  "value" : "Department of Military Affairs https://www.dmamod.gov.in/",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 1
+                }, {
+                  "value" : "Concerned Ministry/Department Acts and Rules https://www.dmamod.gov.in/documents/acts-and-policies?page=2",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 2
+                } ],
+                "dc.identifier.repealed" : [ {
+                  "value" : "false",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.state_id" : [ {
+                  "value" : "1",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.state_name" : [ {
+                  "value" : "CENTRAL",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.uri" : [ {
+                  "value" : "http://test1.indiacode.nic.in/handle/123456789/496203",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.legislation.history" : [ {
+                  "value" : "<p>Legislative History: </p><p>The Army Act, 1950</p><p></p><p></p><p></p><p>Act Title\tThe Army Act, 1950</p><p>Act Number\tAct No. 46 of 1950</p><p>Act ID (India Code)\t1950-46</p><p> Presidential Assent date\tMay 20, 1950</p><p> Enforcement Date\tJuly 22, 1950 </p><p>Nodal Ministry\tMinistry of Defence </p><p> </p><p>Precedent &amp; Historical Rationale</p><p></p><p>1.\tReplacement of Colonial Legislation:</p><p>Enacted to repeal and replace the Indian Army Act, 1911, which was obsolete under independent India&#39;s constitutional setup.</p><p>2.\tUniform Code of Military Discipline: </p><p>Established updated statutory guidelines governing commission, enrollment, service terms, offenses, military courts (courts-martial), and executive powers over land forces.</p><p>Parliamentary Trajectory &amp; Enactment</p><p></p><p></p><p>•\tFormulation: Introduced alongside the Air Force Bill in Parliament to streamline military discipline under post-1950 legal standards.</p><p>•\tParliamentary passage: Passed by the Provisional Parliament in May 1950.</p><p>•\tPresidential Assent: Received Assent from the President of India on May 20, 1950.</p><p>•\tEnforcement: Enforced on July 22, 1950.</p><p>•\tSource: Official Record of Parliament, India Code, and Ministry of Defence (Department of Military Affairs)</p><p></p>",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.title" : [ {
+                  "value" : "The Army Act, 1950",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.title.long_title" : [ {
+                  "value" : "An Act to consolidate and amend the law relating to the Government of the regular Army.",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.type" : [ {
+                  "value" : "Developmental",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "keyword_count" : [ {
+                  "value" : "1",
+                  "language" : "",
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ]
+              },
+              "inArchive" : true,
+              "discoverable" : true,
+              "withdrawn" : false,
+              "lastModified" : "2026-10-15T11:43:08.880062Z",
+              "entityType" : null,
+              "type" : "item",
+              "_links" : {
+                "accessStatus" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/60fd2882-1df9-4b4d-8a70-3add0a9f5b6b/accessStatus"
+                },
+                "bundles" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/60fd2882-1df9-4b4d-8a70-3add0a9f5b6b/bundles"
+                },
+                "identifiers" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/60fd2882-1df9-4b4d-8a70-3add0a9f5b6b/identifiers"
+                },
+                "mappedCollections" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/60fd2882-1df9-4b4d-8a70-3add0a9f5b6b/mappedCollections"
+                },
+                "owningCollection" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/60fd2882-1df9-4b4d-8a70-3add0a9f5b6b/owningCollection"
+                },
+                "relationships" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/60fd2882-1df9-4b4d-8a70-3add0a9f5b6b/relationships"
+                },
+                "version" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/60fd2882-1df9-4b4d-8a70-3add0a9f5b6b/version"
+                },
+                "templateItemOf" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/60fd2882-1df9-4b4d-8a70-3add0a9f5b6b/templateItemOf"
+                },
+                "thumbnail" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/60fd2882-1df9-4b4d-8a70-3add0a9f5b6b/thumbnail"
+                },
+                "submitter" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/60fd2882-1df9-4b4d-8a70-3add0a9f5b6b/submitter"
+                },
+                "self" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/60fd2882-1df9-4b4d-8a70-3add0a9f5b6b"
+                }
+              }
+            }
+          }
+        } ]
+      },
+      "page" : {
+        "number" : 0,
+        "size" : 20,
+        "totalPages" : 1,
+        "totalElements" : 1
+      },
+      "_links" : {
+        "self" : {
+          "href" : "https://indiacode.gov.in/server/api/discover/search/objects?query=dc.identifier.collection%3AACT%20AND%20dc.title%3A%22Army%20Act%2C%201950%22"
+        }
+      }
+    },
+    "facets" : [ {
+      "name" : "dateIssued",
+      "facetType" : "date",
+      "facetLimit" : 12,
+      "minValue" : "0002-11-30",
+      "maxValue" : "9668-11-25",
+      "openByDefault" : true,
+      "page" : {
+        "number" : 0,
+        "size" : 12
+      },
+      "_links" : {
+        "self" : {
+          "href" : "https://indiacode.gov.in/server/api/discover/facets/dateIssued?query=dc.identifier.collection%3AACT%20AND%20dc.title%3A%22Army%20Act%2C%201950%22&size=12"
+        }
+      },
+      "_embedded" : {
+        "values" : [ {
+          "label" : "1460 - 2189",
+          "count" : 1,
+          "authorityKey" : null,
+          "type" : "discover",
+          "_links" : {
+            "search" : {
+              "href" : "https://indiacode.gov.in/server/api/discover/search/objects?query=dc.identifier.collection%253AACT%2520AND%2520dc.title%253A%2522Army%2520Act%252C%25201950%2522&f.dateIssued=%5B1460%20TO%202189%5D,equals"
+            }
+          }
+        } ]
+      }
+    }, {
+      "name" : "identifier_collection",
+      "facetType" : "text",
+      "facetLimit" : 10,
+      "openByDefault" : true,
+      "page" : {
+        "number" : 0,
+        "size" : 10
+      },
+      "_links" : {
+        "self" : {
+          "href" : "https://indiacode.gov.in/server/api/discover/facets/identifier_collection?query=dc.identifier.collection%3AACT%20AND%20dc.title%3A%22Army%20Act%2C%201950%22&size=10"
+        }
+      },
+      "_embedded" : {
+        "values" : [ {
+          "label" : "ACT",
+          "count" : 1,
+          "authorityKey" : null,
+          "type" : "discover",
+          "_links" : {
+            "search" : {
+              "href" : "https://indiacode.gov.in/server/api/discover/search/objects?query=dc.identifier.collection%253AACT%2520AND%2520dc.title%253A%2522Army%2520Act%252C%25201950%2522&f.identifier_collection=ACT,equals"
+            }
+          }
+        } ]
+      }
+    }, {
+      "name" : "itemtype",
+      "facetType" : "text",
+      "facetLimit" : 5,
+      "openByDefault" : true,
+      "page" : {
+        "number" : 0,
+        "size" : 5
+      },
+      "_links" : {
+        "self" : {
+          "href" : "https://indiacode.gov.in/server/api/discover/facets/itemtype?query=dc.identifier.collection%3AACT%20AND%20dc.title%3A%22Army%20Act%2C%201950%22&size=5"
+        }
+      },
+      "_embedded" : {
+        "values" : [ {
+          "label" : "Developmental",
+          "count" : 1,
+          "authorityKey" : null,
+          "type" : "discover",
+          "_links" : {
+            "search" : {
+              "href" : "https://indiacode.gov.in/server/api/discover/search/objects?query=dc.identifier.collection%253AACT%2520AND%2520dc.title%253A%2522Army%2520Act%252C%25201950%2522&f.itemtype=Developmental,equals"
+            }
+          }
+        } ]
+      }
+    } ]
+  }
+}

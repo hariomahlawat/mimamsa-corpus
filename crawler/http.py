@@ -212,6 +212,11 @@ class PoliteClient:
             return rp
         if 400 <= r.status < 500:
             return True                       # no robots.txt: nothing is disallowed
+        if r.status >= 500 and self.cfg.source(self.source).get("robots_5xx") == "allow":
+            log.warning("robots.txt at %s answers HTTP %s; proceeding under the %s robots_5xx exception",
+                        url, r.status, self.source)
+            self.robots_exception_used = True
+            return True
         return False                          # 5xx / odd answers: be conservative
 
     def _send(self, url: str, headers: dict[str, str] | None = None, *,

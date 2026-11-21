@@ -1,5 +1,47 @@
 # Progress
 
+## 2026-11-21 — India Code works end to end against the live site (Phase 1 step 3 done for real)
+
+What was found
+- India Code MOVED: www.indiacode.nic.in only shows a migration notice; the site is now
+  https://indiacode.gov.in, a DSpace 9 application built in the browser from a public REST API at
+  /server/api. That is why robots.txt and the guessed search page hung on the old address.
+- robots.txt on the new site answers HTTP 500 (generic error page). The India Code exception was
+  extended to cover that (`robots_5xx: allow`, India Code only, reason in sources.yaml).
+- The API gives structured records: one ACT record with its PDFs, one SECTION record per section
+  (text + amendment footnotes), and RULE / REGULATION / SCHEDULE / NOTIFICATION records, all linked by
+  `dc.identifier.act_id`.
+
+What was built
+- `crawler/indiacode.py` rewritten for the API (search -> Act record -> files -> all linked records).
+  Old page-scraping code and the synthetic HTML fixtures are gone; tests now replay REAL recorded API
+  answers (`tests/fixtures/indiacode_api/`). 74 tests passing.
+- Pages of linked records are saved as raw documents (they hold the section text).
+- State copies of central Acts share the title: the CENTRAL copy is chosen; otherwise unresolved.
+
+Army Act 1950: downloaded (7 files, 6.3 MB, in data/raw/indiacode/, not in git)
+- Act text a1950-46.pdf (51 pages, "as on the 21st July, 2025"), Hindi H195046.pdf, Army Rules 1954,
+  the Schedule, and 3 JSON pages holding all 198 section records.
+- Checked: ss.75, 76 and 127 are marked "Omitted by the Army (Amendment) Act, 1992 (37 of 1992)".
+  Note the source itself has a typo in the date on ss.75-76 ("w.e.f. 6-9-192").
+- The site stamps an "India Code" watermark on PDFs at download, so the bytes differ from the MD5 in
+  its own listing (counted, not treated as damage). The watermark letters show up in extracted
+  text; text extraction must strip them, or use the section records / the site's TEXT files instead.
+
+Discovery for all India Code targets (listings only, nothing else downloaded yet; 50 files queued)
+- Resolved: Army Act, Air Force Act, Navy Act, AFT Act (13 rules, 16 notifications, 3 amendment
+  Acts, 1 order), Army & Air Force (Disposal of Private Property) Act, BNS, BNSS, BSA.
+- NOT resolved: IPC 1860, CrPC 1973, Evidence Act 1872. India Code now lists only STATE copies of
+  these (Chhattisgarh, Rajasthan, ...); no CENTRAL copy was found by title. Needs a decision:
+  another source for the repealed central texts, or pick a state copy knowingly.
+- NOT found: Regulations for the Army 1987 (no record on India Code).
+- Gap: the Air Force Rules 1969 record exists but has no file attached.
+
+Next
+- Review, then run `fetch` for the remaining 50 queued India Code files (Phase 2).
+- Phase 2 pipeline: metadata records + section records from the saved JSON (no PDF parsing needed
+  for section splitting), validated against the schemas.
+
 ## 2026-11-21 — First live checks (from the cloud container, US address)
 
 Setup

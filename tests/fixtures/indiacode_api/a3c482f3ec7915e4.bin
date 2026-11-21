@@ -1,0 +1,401 @@
+{
+  "id" : null,
+  "scope" : null,
+  "query" : null,
+  "appliedFilters" : [ {
+    "filter" : "act_id",
+    "operator" : "equals",
+    "value" : "AC_CEN_28_38_00012_195046_1517807323368",
+    "label" : "AC_CEN_28_38_00012_195046_1517807323368"
+  } ],
+  "sort" : {
+    "by" : "dc.date.accessioned",
+    "order" : "ASC"
+  },
+  "configuration" : null,
+  "type" : "discover",
+  "_links" : {
+    "self" : {
+      "href" : "https://indiacode.gov.in/server/api/discover/search/objects?f.act_id=AC_CEN_28_38_00012_195046_1517807323368,equals"
+    }
+  },
+  "_embedded" : {
+    "searchResult" : {
+      "_embedded" : {
+        "objects" : [ {
+          "hitHighlights" : null,
+          "type" : "discover",
+          "_links" : {
+            "indexableObject" : {
+              "href" : "https://indiacode.gov.in/server/api/core/items/b03191b2-7b10-4727-b3ec-c1e7337a6864"
+            }
+          },
+          "_embedded" : {
+            "indexableObject" : {
+              "id" : "b03191b2-7b10-4727-b3ec-c1e7337a6864",
+              "uuid" : "b03191b2-7b10-4727-b3ec-c1e7337a6864",
+              "name" : "Publication of rules and regulations in Gazette.",
+              "handle" : "123456789/526068",
+              "metadata" : {
+                "dc.date.accessioned" : [ {
+                  "value" : "2026-07-10T22:28:24Z",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.date.act_year" : [ {
+                  "value" : "1950",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.act_id" : [ {
+                  "value" : "AC_CEN_28_38_00012_195046_1517807323368",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.act_name" : [ {
+                  "value" : "The Army Act, 1950",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.act_number" : [ {
+                  "value" : "46",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.act_repealed" : [ {
+                  "value" : "false",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.collection" : [ {
+                  "value" : "SECTION",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.department_id" : [ {
+                  "value" : "1408",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.department_name" : [ {
+                  "value" : "Department of Military Affairs",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.id" : [ {
+                  "value" : "31718",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.ministry_id" : [ {
+                  "value" : "28",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.ministry_name" : [ {
+                  "value" : "Ministry of Defence",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.next_section" : [ {
+                  "value" : "193A.Rules and regulations to be laid before Parliament.",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.order_number" : [ {
+                  "value" : "194",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.page_from" : [ {
+                  "value" : "0",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.page_number" : [ {
+                  "value" : "47",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.page_to" : [ {
+                  "value" : "0",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.repealed" : [ {
+                  "value" : "false",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.section_id" : [ {
+                  "value" : "31718",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.section_number" : [ {
+                  "value" : "193",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.section_page_note" : [ {
+                  "value" : "<span style=\"margin-left: 15px;\"></span>All rules and regulations made under this Act shall be published in the Official Gazette and on such publication, shall have effect as if enacted in this Act. <br/><hr style=\"border: none; margin-bottom: 8px; margin-top: 0;\"/>",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.state_id" : [ {
+                  "value" : "1",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.state_name" : [ {
+                  "value" : "CENTRAL",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.identifier.uri" : [ {
+                  "value" : "http://test1.indiacode.nic.in/handle/123456789/526068",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.title" : [ {
+                  "value" : "Publication of rules and regulations in Gazette.",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "keyword_count" : [ {
+                  "value" : "1",
+                  "language" : "",
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ]
+              },
+              "inArchive" : true,
+              "discoverable" : true,
+              "withdrawn" : false,
+              "lastModified" : "2026-07-10T22:28:24.235684Z",
+              "entityType" : null,
+              "type" : "item",
+              "_links" : {
+                "accessStatus" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/b03191b2-7b10-4727-b3ec-c1e7337a6864/accessStatus"
+                },
+                "bundles" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/b03191b2-7b10-4727-b3ec-c1e7337a6864/bundles"
+                },
+                "identifiers" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/b03191b2-7b10-4727-b3ec-c1e7337a6864/identifiers"
+                },
+                "mappedCollections" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/b03191b2-7b10-4727-b3ec-c1e7337a6864/mappedCollections"
+                },
+                "owningCollection" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/b03191b2-7b10-4727-b3ec-c1e7337a6864/owningCollection"
+                },
+                "relationships" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/b03191b2-7b10-4727-b3ec-c1e7337a6864/relationships"
+                },
+                "version" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/b03191b2-7b10-4727-b3ec-c1e7337a6864/version"
+                },
+                "templateItemOf" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/b03191b2-7b10-4727-b3ec-c1e7337a6864/templateItemOf"
+                },
+                "thumbnail" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/b03191b2-7b10-4727-b3ec-c1e7337a6864/thumbnail"
+                },
+                "submitter" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/b03191b2-7b10-4727-b3ec-c1e7337a6864/submitter"
+                },
+                "self" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/items/b03191b2-7b10-4727-b3ec-c1e7337a6864"
+                }
+              }
+            }
+          }
+        } ]
+      },
+      "page" : {
+        "number" : 2,
+        "size" : 100,
+        "totalPages" : 3,
+        "totalElements" : 201
+      },
+      "_links" : {
+        "prev" : {
+          "href" : "https://indiacode.gov.in/server/api/discover/search/objects?f.act_id=AC_CEN_28_38_00012_195046_1517807323368,equals&sort=dc.date.accessioned,ASC&page=1&size=100"
+        },
+        "self" : {
+          "href" : "https://indiacode.gov.in/server/api/discover/search/objects?f.act_id=AC_CEN_28_38_00012_195046_1517807323368,equals&sort=dc.date.accessioned,ASC&page=2&size=100"
+        },
+        "first" : {
+          "href" : "https://indiacode.gov.in/server/api/discover/search/objects?f.act_id=AC_CEN_28_38_00012_195046_1517807323368,equals&sort=dc.date.accessioned,ASC&page=0&size=100"
+        }
+      }
+    },
+    "facets" : [ {
+      "name" : "dateIssued",
+      "facetType" : "date",
+      "facetLimit" : 12,
+      "minValue" : "0002-11-30",
+      "maxValue" : "9668-11-25",
+      "openByDefault" : true,
+      "page" : {
+        "number" : 0,
+        "size" : 12
+      },
+      "_links" : {
+        "self" : {
+          "href" : "https://indiacode.gov.in/server/api/discover/facets/dateIssued?f.act_id=AC_CEN_28_38_00012_195046_1517807323368,equals&size=12"
+        }
+      },
+      "_embedded" : {
+        "values" : [ {
+          "label" : "1950 - 1954",
+          "count" : 2,
+          "authorityKey" : null,
+          "type" : "discover",
+          "_links" : {
+            "search" : {
+              "href" : "https://indiacode.gov.in/server/api/discover/search/objects?f.act_id=AC_CEN_28_38_00012_195046_1517807323368,equals&f.dateIssued=%5B1950%20TO%201954%5D,equals"
+            }
+          }
+        } ]
+      }
+    }, {
+      "name" : "identifier_collection",
+      "facetType" : "text",
+      "facetLimit" : 10,
+      "openByDefault" : true,
+      "page" : {
+        "number" : 0,
+        "size" : 10
+      },
+      "_links" : {
+        "self" : {
+          "href" : "https://indiacode.gov.in/server/api/discover/facets/identifier_collection?f.act_id=AC_CEN_28_38_00012_195046_1517807323368,equals&size=10"
+        }
+      },
+      "_embedded" : {
+        "values" : [ {
+          "label" : "SECTION",
+          "count" : 198,
+          "authorityKey" : null,
+          "type" : "discover",
+          "_links" : {
+            "search" : {
+              "href" : "https://indiacode.gov.in/server/api/discover/search/objects?f.act_id=AC_CEN_28_38_00012_195046_1517807323368,equals&f.identifier_collection=SECTION,equals"
+            }
+          }
+        }, {
+          "label" : "ACT",
+          "count" : 1,
+          "authorityKey" : null,
+          "type" : "discover",
+          "_links" : {
+            "search" : {
+              "href" : "https://indiacode.gov.in/server/api/discover/search/objects?f.act_id=AC_CEN_28_38_00012_195046_1517807323368,equals&f.identifier_collection=ACT,equals"
+            }
+          }
+        }, {
+          "label" : "RULE",
+          "count" : 1,
+          "authorityKey" : null,
+          "type" : "discover",
+          "_links" : {
+            "search" : {
+              "href" : "https://indiacode.gov.in/server/api/discover/search/objects?f.act_id=AC_CEN_28_38_00012_195046_1517807323368,equals&f.identifier_collection=RULE,equals"
+            }
+          }
+        }, {
+          "label" : "SCHEDULE",
+          "count" : 1,
+          "authorityKey" : null,
+          "type" : "discover",
+          "_links" : {
+            "search" : {
+              "href" : "https://indiacode.gov.in/server/api/discover/search/objects?f.act_id=AC_CEN_28_38_00012_195046_1517807323368,equals&f.identifier_collection=SCHEDULE,equals"
+            }
+          }
+        } ]
+      }
+    }, {
+      "name" : "itemtype",
+      "facetType" : "text",
+      "facetLimit" : 5,
+      "openByDefault" : true,
+      "page" : {
+        "number" : 0,
+        "size" : 5
+      },
+      "_links" : {
+        "self" : {
+          "href" : "https://indiacode.gov.in/server/api/discover/facets/itemtype?f.act_id=AC_CEN_28_38_00012_195046_1517807323368,equals&size=5"
+        }
+      },
+      "_embedded" : {
+        "values" : [ {
+          "label" : "Developmental",
+          "count" : 1,
+          "authorityKey" : null,
+          "type" : "discover",
+          "_links" : {
+            "search" : {
+              "href" : "https://indiacode.gov.in/server/api/discover/search/objects?f.act_id=AC_CEN_28_38_00012_195046_1517807323368,equals&f.itemtype=Developmental,equals"
+            }
+          }
+        } ]
+      }
+    } ]
+  }
+}

@@ -18,10 +18,10 @@ from crawler.http import (Blocked, FetchError, NotAllowed, PoliteClient, RobotsD
                           replay_transport)
 from crawler.state import StateDB
 
-FIX = Path(__file__).parent / "fixtures" / "indiacode"
-BASE = "https://www.indiacode.nic.in"
-ACT_URL = f"{BASE}/handle/123456789/99991?view_type=browse"
-ACT_PDF = f"{BASE}/bitstream/123456789/99991/1/synthetic_army_act_1950.pdf"
+FIX = Path(__file__).parent / "fixtures" / "indiacode_api"     # recorded from the live API
+BASE = "https://indiacode.gov.in"
+API = f"{BASE}/server/api"
+ACT_URL = f"{API}/core/items/60fd2882-1df9-4b4d-8a70-3add0a9f5b6b"
 
 
 @pytest.fixture(autouse=True)
@@ -124,9 +124,9 @@ def test_robots_disallow_and_unreachable_robots(cfg, db, tmp_path):
 
     def robots_down(req):
         return httpx.Response(503) if req.url.path == "/robots.txt" else httpx.Response(200, text="x")
-    c2 = make_client(cfg, db, tmp_path, robots_down)
+    c2 = make_client(cfg, db, tmp_path, robots_down, source="archive")
     with pytest.raises(RobotsDisallowed):
-        c2.get(f"{BASE}/a")
+        c2.get("https://archive.org/a")
 
 
 def _robots_times_out(req):
@@ -152,8 +152,11 @@ def test_exception_does_not_cover_served_rules_or_5xx(cfg, db, tmp_path):
 
     def robots_500(req):
         return httpx.Response(500) if req.url.path == "/robots.txt" else httpx.Response(200, text="x")
+    # indiacode also has robots_5xx: allow; a source without it still refuses on a 5xx
+    c5 = make_client(cfg, db, tmp_path, robots_500)
+    assert c5.get(f"{BASE}/a").status == 200 and c5.robots_exception_used
     with pytest.raises(RobotsDisallowed):
-        make_client(cfg, db, tmp_path, robots_500).get(f"{BASE}/a")
+        make_client(cfg, db, tmp_path, robots_500, source="archive").get("https://archive.org/a")
 
 
 def test_exception_needs_a_reason(tmp_path):
@@ -237,90 +240,145 @@ def test_size_cap(tmp_path, db):
     assert not e.value.retryable
 
 
-# ------------------------------------------------------------------ parsers
+# ------------------------------------------------------- API answer helpers
 def test_normalise_title():
     assert indiacode.normalise_title("The Army Act, 1950") == indiacode.normalise_title("ARMY ACT 1950")
     assert indiacode.normalise_title("The Indian Army Act, 1911") != indiacode.normalise_title("The Army Act, 1950")
 
 
-def test_parse_search_results():
-    res = indiacode.parse_search_results((FIX / "search_army_act.html").read_text(), BASE + "/simple-search")
-    assert ("The Army Act, 1950", ACT_URL) in res
-    assert len([u for _, u in res]) == len({u for _, u in res})
+def test_file_language_by_name():
+    assert indiacode.file_language("a1950-46.pdf") == "en" and indiacode.file_language("A2007-55.pdf") == "en"
+    assert indiacode.file_language("H195046.pdf") == "hi" and indiacode.file_language("h195045.pdf") == "hi"
+    assert indiacode.file_language("armyrules1954.pdf") is None and indiacode.file_language(None) is None
 
 
-def test_parse_act_page(cfg):
-    page = indiacode.parse_act_page((FIX / "act_army_1950.html").read_text(), ACT_URL,
-                                    lambda u: cfg.is_url_allowed("indiacode", u))
-    assert page.metadata["act_number"] == "46" and page.metadata["short_title"] == "The Army Act, 1950"
-    assert [d.url for d in page.act_pdfs] == [ACT_PDF]            # '#page=1' variant de-duplicated
-    cats = sorted(d.category for d in page.subordinate)
-    assert cats == ["notifications", "notifications", "regulations", "regulations", "rules"]
-    rules = [d for d in page.subordinate if d.category == "rules"][0]
-    assert rules.title == "The Army Rules, 1954" and rules.date_raw == "01-01-1900"
-    assert page.section_links == 3
-    assert {urlhost for urlhost, _ in [(u.split('/')[2], w) for u, w in page.dropped]} == \
-        {"indiankanoon.org", "www.example.org"}
-    assert page.warnings == []
+def _search_answer(*records):
+    objs = [{"_embedded": {"indexableObject": {"uuid": u, "name": name, "metadata": {
+        "dc.identifier.collection": [{"value": "ACT"}], "dc.date.act_year": [{"value": yr}],
+        "dc.identifier.state_name": [{"value": state}]}}}} for u, name, yr, state in records]
+    return {"_embedded": {"searchResult": {"page": {}, "_embedded": {"objects": objs}}}}
 
 
-def test_parse_act_page_warns_on_unexpected_layout(cfg):
-    page = indiacode.parse_act_page("<html><body><p>Something else entirely</p></body></html>", ACT_URL,
-                                    lambda u: (True, "ok"))
-    assert any("metadata" in w for w in page.warnings) and any("Act PDF" in w for w in page.warnings)
+def test_central_copy_is_chosen_over_state_copies_and_number_year_is_tolerated(cfg, db, tmp_path):
+    answer = _search_answer(("u-mh", "The Code of Criminal Procedure, 1973", "1974", "MAHARASHTRA"),
+                            ("u-central", "THE CODE OF CRIMINAL PROCEDURE, 1973", "1974", "CENTRAL"),
+                            ("u-up", "Code of Criminal Procedure, 1973", "1974", "UTTAR PRADESH"))
+    seen = []
+
+    def item(req):
+        seen.append(str(req.url))
+        return httpx.Response(404)
+    c = make_client(cfg, db, tmp_path, _replay_with({"/discover/search/objects?query=": httpx.Response(200, json=answer),
+                                                     "/core/items/": item}))
+    [r] = indiacode.discover(cfg, db, c, only=["act-crpc-1973"])
+    assert seen and "/core/items/u-central" in seen[0]            # went on to the CENTRAL record
+    assert r.status == "failed"                                   # (that record is not in the test data)
 
 
-# ---------------------------------------------------------------- discovery
-def test_discover_army_act(cfg, db, tmp_path):
+def test_two_central_copies_stay_unresolved(cfg, db, tmp_path):
+    answer = _search_answer(("u1", "The Indian Penal Code, 1860", "1860", "CENTRAL"),
+                            ("u2", "The Indian Penal Code, 1860", "1860", "CENTRAL"))
+    c = make_client(cfg, db, tmp_path, _replay_with({"/discover/search/objects?query=": httpx.Response(200, json=answer)}))
+    [r] = indiacode.discover(cfg, db, c, only=["act-ipc-1860"])
+    assert r.status == "unresolved" and len(r.candidates) == 2
+
+
+def test_original_bitstreams_ignores_other_bundles():
+    bs = lambda name: {"name": name, "uuid": "u-" + name, "sizeBytes": 5,
+                       "checkSum": {"checkSumAlgorithm": "MD5", "value": "abc"},
+                       "_links": {"content": {"href": f"{API}/core/bitstreams/u-{name}/content"}}}
+    wrap = lambda name, files: {"name": name, "_embedded": {"bitstreams": {"_embedded": {"bitstreams": files}}}}
+    payload = {"_embedded": {"bundles": [wrap("ORIGINAL", [bs("a.pdf")]), wrap("TEXT", [bs("a.pdf.txt")]),
+                                         wrap("THUMBNAIL", [bs("a.pdf.jpg")])]}}
+    files = indiacode.original_bitstreams(payload)
+    assert [f["filename"] for f in files] == ["a.pdf"] and files[0]["md5"] == "abc"
+
+
+# ------------------------------------------- discovery (recorded real pages)
+def test_discover_army_act_from_recorded_api(cfg, db, tmp_path):
     c = make_client(cfg, db, tmp_path)
     [r] = indiacode.discover(cfg, db, c, only=["act-army-1950"])
     assert r.status == "resolved" and r.act_url == ACT_URL
-    assert r.act_pdfs == 1 and r.subordinate == {"rules": 1, "notifications": 2, "regulations": 2}
-    assert r.newly_queued == 6 and len(r.dropped) == 2
-    assert r.warnings == []                                       # the expected Army Rules, 1954 are listed
-    assert c.requests_made == 3                                   # robots, search, act page: no documents
-    assert db.get(ACT_PDF)["doc_id_hint"] == "act-army-1950" and db.get(ACT_PDF)["status"] == "queued"
-    assert db.counts()["indiacode"] == {"queued": 6, "fetched": 2, "failed": 0, "skipped": 0}
+    assert r.metadata["dc.identifier.act_number"] == "46" and r.metadata["dc.date.enact_date"] == "1950-05-20"
+    assert r.act_pdfs == 2
+    assert r.linked == {"ACT": 1, "RULE": 1, "SCHEDULE": 1, "SECTION": 198} and r.linked_pages == 3
+    assert r.subordinate_files == {"RULE": 1, "SCHEDULE": 1}
+    assert r.newly_queued == 7 and r.warnings == []               # expected Army Rules, 1954 are linked
+    # the Act text (a1950-46.pdf, named after the record's givenid) carries the doc_id; the other file does not
+    tagged = db.conn.execute("SELECT url, meta FROM urls WHERE doc_id_hint='act-army-1950' AND kind='document'").fetchall()
+    assert len(tagged) == 1 and json.loads(tagged[0]["meta"])["filename"] == "a1950-46.pdf"
+    assert json.loads(tagged[0]["meta"])["md5"] == "0ae0daa20971e6d3e95dd6055c4f01f0"
+    kinds = dict(db.conn.execute("SELECT json_extract(meta,'$.category'), COUNT(*) FROM urls "
+                                 "WHERE kind='document' GROUP BY 1").fetchall())
+    assert kinds == {"act": 2, "linked_records": 3, "rule": 1, "schedule": 1}
+    assert db.counts()["indiacode"]["queued"] == 7 and db.counts()["indiacode"]["failed"] == 0
     # second run: nothing re-fetched
     c2 = make_client(cfg, db, tmp_path)
     [r2] = indiacode.discover(cfg, db, c2, only=["act-army-1950"])
     assert r2.status == "already_known" and c2.requests_made == 0
 
 
+def _replay_with(overrides):
+    """The recorded pages, with some answers replaced."""
+    inner = replay_transport(FIX)
+
+    def handler(req):
+        for needle, resp in overrides.items():
+            if needle in str(req.url):
+                return resp(req) if callable(resp) else resp
+        return inner.handler(req)
+    return handler
+
+
 def test_discover_warns_when_expected_rules_missing(cfg, db, tmp_path):
-    html = (FIX / "act_army_1950.html").read_text().replace("The Army Rules, 1954", "Something else")
-    search = f"{BASE}/simple-search?query=The+Army+Act%2C+1950"
-    c = make_client(cfg, db, tmp_path, site({
-        search: httpx.Response(200, text=(FIX / "search_army_act.html").read_text(),
-                               headers={"content-type": "text/html"}),
-        ACT_URL: httpx.Response(200, text=html, headers={"content-type": "text/html"})}, robots=None))
+    def no_rules(req):
+        body = replay_transport(FIX).handler(req).content.replace(b"Army Rules,1954", b"Something else")
+        return httpx.Response(200, content=body, headers={"content-type": "application/hal+json"})
+    c = make_client(cfg, db, tmp_path, _replay_with({"f.act_id=": no_rules}))
     [r] = indiacode.discover(cfg, db, c, only=["act-army-1950"])
     assert r.status == "resolved" and any("Army Rules, 1954" in w for w in r.warnings)
 
 
 def test_discover_never_guesses(cfg, db, tmp_path):
-    # Not in the replay set: search answers 404 -> failed, nothing queued.
+    # Not in the replay set: the search answers 404 -> failed, nothing queued.
     c = make_client(cfg, db, tmp_path)
     [r] = indiacode.discover(cfg, db, c, only=["act-navy-1957"])
     assert r.status == "failed" and db.counts()["indiacode"]["queued"] == 0
 
-    # Search works but has no exact title match -> unresolved, candidates listed.
-    search = f"{BASE}/simple-search?query=The+Air+Force+Act%2C+1950"
-    html = '<a href="/handle/1/2">The Air Force Rules, 1969</a><a href="/handle/1/3">Air Force Act</a>'
-    c = make_client(cfg, db, tmp_path, site({search: httpx.Response(200, text=html)}, robots=None))
+    # The search answers, but with no exact title match -> unresolved, candidates listed.
+    rec = lambda name, uuid: {"_embedded": {"indexableObject": {
+        "uuid": uuid, "name": name, "metadata": {"dc.identifier.collection": [{"value": "ACT"}],
+                                                  "dc.date.act_year": [{"value": "1950"}]}}}}
+    answer = {"_embedded": {"searchResult": {"page": {"totalElements": 2}, "_embedded": {"objects": [
+        rec("The Air Force (Amendment) Act, 1950", "u1"), rec("Air Force Act", "u2")]}}}}
+    c = make_client(cfg, db, tmp_path, _replay_with({"/discover/search/objects?query=": httpx.Response(200, json=answer)}))
     [r] = indiacode.discover(cfg, db, c, only=["act-air-force-1950"])
     assert r.status == "unresolved" and len(r.candidates) == 2
     assert db.conn.execute("SELECT COUNT(*) FROM urls WHERE kind='document'").fetchone()[0] == 0
 
 
-def test_discover_stops_when_blocked(cfg, db, tmp_path):
+def test_discover_wrong_year_is_not_a_match(cfg, db, tmp_path):
+    # Only applies when the target's title has no year in it (here: "Regulations for the Army", 1987).
+    answer = _search_answer(("u1", "Regulations for the Army", "1962", "CENTRAL"))
+    c = make_client(cfg, db, tmp_path, _replay_with({"/discover/search/objects?query=": httpx.Response(200, json=answer)}))
+    [r] = indiacode.discover(cfg, db, c, only=["regs-army-1987"])
+    assert r.status == "unresolved"
+
+
+def test_discover_stops_when_login_is_required(cfg, db, tmp_path):
     def handler(req):
-        return httpx.Response(404) if req.url.path == "/robots.txt" else httpx.Response(403)
+        return httpx.Response(404) if req.url.path == "/robots.txt" else httpx.Response(401)
     c = make_client(cfg, db, tmp_path, handler)
     results = indiacode.discover(cfg, db, c)
     assert [r.status for r in results] == ["blocked"]            # stopped at the first target
     assert c.requests_made == 2
     assert db.counts()["indiacode"]["skipped"] == 1
+
+
+def test_discover_reports_unexpected_api_shape(cfg, db, tmp_path):
+    c = make_client(cfg, db, tmp_path, _replay_with({"/discover/search/objects?query=": httpx.Response(200, json={"x": 1})}))
+    [r] = indiacode.discover(cfg, db, c, only=["act-army-1950"])
+    assert r.status == "failed" and "expected shape" in r.reason
 
 
 def test_unknown_target_rejected(cfg, db, tmp_path):
@@ -329,29 +387,55 @@ def test_unknown_target_rejected(cfg, db, tmp_path):
 
 
 # -------------------------------------------------------------------- fetch
+PDF_A = b"%PDF-1.4 test file A"
+PDF_B = b"%PDF-1.4 test file B"
+
+
+def _md5(b):
+    import hashlib
+    return hashlib.md5(b).hexdigest()
+
+
+def _queue(db, url, **meta):
+    db.enqueue(url, "indiacode", "indiacode.gov.in", "document", meta=meta)
+
+
 def test_fetch_documents(cfg, db, tmp_path):
-    c = make_client(cfg, db, tmp_path)
-    indiacode.discover(cfg, db, c, only=["act-army-1950"])
+    u = lambda n: f"{API}/core/bitstreams/{n}/content"
+    pages = {u("a"): httpx.Response(200, content=PDF_A, headers={"content-type": "application/pdf"}),
+             u("a2"): httpx.Response(200, content=PDF_A, headers={"content-type": "application/pdf"}),
+             u("bad-md5"): httpx.Response(200, content=PDF_B, headers={"content-type": "application/pdf"}),
+             u("html"): httpx.Response(200, text="<html>error</html>", headers={"content-type": "text/html"}),
+             f"{API}/discover/search/objects?page=0": httpx.Response(200, json={"ok": 1},
+                                                                     headers={"content-type": "application/hal+json"}),
+             f"{API}/private/x": httpx.Response(200, content=PDF_A)}
+    _queue(db, u("a"), filename="a1950-46.pdf", md5=_md5(PDF_A), year="1950", category="act")
+    _queue(db, u("a2"), filename="copy.pdf", md5=_md5(PDF_A), category="rule")           # same bytes, no year
+    _queue(db, u("bad-md5"), filename="b.pdf", md5=_md5(PDF_A), year="1954")
+    _queue(db, u("html"), filename="c.pdf", md5=None, year="1954")
+    _queue(db, f"{API}/discover/search/objects?page=0", category="linked_records", year="1950")
+    _queue(db, f"{API}/private/x", filename="p.pdf")
+    c = make_client(cfg, db, tmp_path, site(pages, robots="User-agent: *\nDisallow: /server/api/private/\n"))
     stats = fetch_documents(cfg, db, c, "indiacode", tmp_path)
-    assert stats["downloaded"] == 3 and stats["duplicate"] == 1   # two notification URLs, same bytes
-    assert stats["failed"] == 1 and stats["skipped"] == 1         # HTML error page; robots-disallowed
-    row = db.get(ACT_PDF)
-    raw = tmp_path / "data" / "raw" / "indiacode" / "1950" / f"{row['sha256']}.pdf"
-    assert raw.read_bytes() == (FIX / "synthetic_act.pdf").read_bytes()
-    sha = db.get(f"{BASE}/ViewFileUploaded?path=AC_CEN_SYNTH/notifications/&file=synthetic_sro_1.pdf")["sha256"]
-    assert db.aliases(sha) == [f"{BASE}/ViewFileUploaded?path=AC_CEN_SYNTH/notifications/&file=synthetic_sro_1_copy.pdf"]
-    assert "expected a PDF" in list(db.failures())[0]["last_error"]
+    assert stats["downloaded"] == 3 and stats["duplicate"] == 1
+    assert stats["failed"] == 1 and stats["skipped"] == 1
+    assert stats["checksum_differs_from_listing"] == 1            # kept, counted (site watermarks PDFs)
+    sha = db.get(u("a"))["sha256"]
+    assert (tmp_path / "data" / "raw" / "indiacode" / "1950" / f"{sha}.pdf").read_bytes() == PDF_A
+    assert db.aliases(sha) == [u("a2")]
+    jsha = db.get(f"{API}/discover/search/objects?page=0")["sha256"]
+    assert (tmp_path / "data" / "raw" / "indiacode" / "1950" / f"{jsha}.json").exists()
+    assert ["expected a PDF" in f["last_error"] for f in db.failures()] == [True]
     assert db.counts()["indiacode"]["queued"] == 0
-    # nothing left: a second run makes no requests
     n = c.requests_made
     assert fetch_documents(cfg, db, c, "indiacode", tmp_path)["downloaded"] == 0 and c.requests_made == n
 
 
 def test_fetch_retries_then_resumes(cfg, db, tmp_path):
-    url = f"{BASE}/doc.pdf"
-    db.enqueue(url, "indiacode", "www.indiacode.nic.in", "document", meta={"year": "1950"})
-    c = make_client(cfg, db, tmp_path, site({}, robots=None) if False else
-                    (lambda req: httpx.Response(404) if req.url.path == "/robots.txt" else httpx.Response(503)))
+    url = f"{API}/core/bitstreams/x/content"
+    _queue(db, url, filename="x.pdf", year="1950")
+    c = make_client(cfg, db, tmp_path,
+                    lambda req: httpx.Response(404) if req.url.path == "/robots.txt" else httpx.Response(503))
     assert fetch_documents(cfg, db, c, "indiacode", tmp_path)["retry_later"] == 1
     row = db.get(url)
     assert row["status"] == "queued" and row["attempts"] == 1 and row["next_attempt_at"]
@@ -362,8 +446,8 @@ def test_cli_discover_replay_keeps_live_state_clean(tmp_path, capsys):
     rc = main(["--root", str(tmp_path), "discover", "--source", "indiacode", "--only", "act-army-1950",
                "--replay", str(FIX), "--json"])
     out = json.loads(capsys.readouterr().out)
-    assert rc == 0 and out["targets"] == {"act-army-1950": "resolved"} and out["requests"] == 3
-    assert out["plan"]["totals"]["would_fetch"] == 6
+    assert rc == 0 and out["targets"] == {"act-army-1950": "resolved"} and out["requests"] == 9
+    assert out["plan"]["totals"]["would_fetch"] == 7
     assert (tmp_path / "state" / "replay.sqlite").exists()
     assert not (tmp_path / "state" / "crawl.sqlite").exists()
 
@@ -381,9 +465,11 @@ def test_cli_fetch_needs_confirmation(tmp_path, capsys):
     capsys.readouterr()
     assert main(["--root", str(tmp_path), "fetch", "--source", "indiacode", "--replay", str(FIX),
                  "--yes-download"]) == 0
-    assert json.loads(capsys.readouterr().out)["downloaded"] == 3
+    out = json.loads(capsys.readouterr().out)
+    # the three recorded pages of linked records are saved; the PDFs are not in the recording (404)
+    assert out["downloaded"] == 3 and out["failed"] == 4
     assert not (tmp_path / "data").exists()                       # replay files stay out of data/
-    assert list((tmp_path / "state" / "replay_data" / "data" / "raw" / "indiacode" / "1950").glob("*.pdf"))
+    assert len(list((tmp_path / "state" / "replay_data" / "data" / "raw" / "indiacode" / "1950").glob("*.json"))) == 3
 
 
 def test_cli_discover_unbuilt_source(tmp_path, capsys):

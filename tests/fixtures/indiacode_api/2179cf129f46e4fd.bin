@@ -1,0 +1,308 @@
+{
+  "_embedded" : {
+    "bundles" : [ {
+      "uuid" : "ad73ceea-718b-4cab-964c-20ecbe06d9c1",
+      "name" : "ORIGINAL",
+      "handle" : null,
+      "metadata" : {
+        "dc.title" : [ {
+          "value" : "ORIGINAL",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ]
+      },
+      "type" : "bundle",
+      "_links" : {
+        "item" : {
+          "href" : "https://indiacode.gov.in/server/api/core/bundles/ad73ceea-718b-4cab-964c-20ecbe06d9c1/item"
+        },
+        "bitstreams" : {
+          "href" : "https://indiacode.gov.in/server/api/core/bundles/ad73ceea-718b-4cab-964c-20ecbe06d9c1/bitstreams"
+        },
+        "primaryBitstream" : {
+          "href" : "https://indiacode.gov.in/server/api/core/bundles/ad73ceea-718b-4cab-964c-20ecbe06d9c1/primaryBitstream"
+        },
+        "self" : {
+          "href" : "https://indiacode.gov.in/server/api/core/bundles/ad73ceea-718b-4cab-964c-20ecbe06d9c1"
+        }
+      },
+      "_embedded" : {
+        "bitstreams" : {
+          "_embedded" : {
+            "bitstreams" : [ {
+              "id" : "a7bf1768-b4b2-4729-98de-c1cf0da72b9e",
+              "uuid" : "a7bf1768-b4b2-4729-98de-c1cf0da72b9e",
+              "name" : "armyrules1954.pdf",
+              "handle" : null,
+              "metadata" : {
+                "dc.title" : [ {
+                  "value" : "armyrules1954.pdf",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ]
+              },
+              "bundleName" : "ORIGINAL",
+              "sizeBytes" : 1091506,
+              "checkSum" : {
+                "checkSumAlgorithm" : "MD5",
+                "value" : "7f30a675001c31a292fd38e5f75f438f"
+              },
+              "sequenceId" : 1,
+              "type" : "bitstream",
+              "_links" : {
+                "content" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/bitstreams/a7bf1768-b4b2-4729-98de-c1cf0da72b9e/content"
+                },
+                "bundle" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/bitstreams/a7bf1768-b4b2-4729-98de-c1cf0da72b9e/bundle"
+                },
+                "accessStatus" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/bitstreams/a7bf1768-b4b2-4729-98de-c1cf0da72b9e/accessStatus"
+                },
+                "format" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/bitstreams/a7bf1768-b4b2-4729-98de-c1cf0da72b9e/format"
+                },
+                "thumbnail" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/bitstreams/a7bf1768-b4b2-4729-98de-c1cf0da72b9e/thumbnail"
+                },
+                "self" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/bitstreams/a7bf1768-b4b2-4729-98de-c1cf0da72b9e"
+                }
+              }
+            } ]
+          },
+          "page" : {
+            "number" : 0,
+            "size" : 20,
+            "totalPages" : 1,
+            "totalElements" : 1
+          },
+          "_links" : {
+            "self" : {
+              "href" : "https://indiacode.gov.in/server/api/core/bundles/ad73ceea-718b-4cab-964c-20ecbe06d9c1/bitstreams"
+            }
+          }
+        }
+      }
+    }, {
+      "uuid" : "0675d813-ae8c-43da-93f8-faaff98d1f73",
+      "name" : "TEXT",
+      "handle" : null,
+      "metadata" : {
+        "dc.title" : [ {
+          "value" : "TEXT",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ]
+      },
+      "type" : "bundle",
+      "_links" : {
+        "item" : {
+          "href" : "https://indiacode.gov.in/server/api/core/bundles/0675d813-ae8c-43da-93f8-faaff98d1f73/item"
+        },
+        "bitstreams" : {
+          "href" : "https://indiacode.gov.in/server/api/core/bundles/0675d813-ae8c-43da-93f8-faaff98d1f73/bitstreams"
+        },
+        "primaryBitstream" : {
+          "href" : "https://indiacode.gov.in/server/api/core/bundles/0675d813-ae8c-43da-93f8-faaff98d1f73/primaryBitstream"
+        },
+        "self" : {
+          "href" : "https://indiacode.gov.in/server/api/core/bundles/0675d813-ae8c-43da-93f8-faaff98d1f73"
+        }
+      },
+      "_embedded" : {
+        "bitstreams" : {
+          "_embedded" : {
+            "bitstreams" : [ {
+              "id" : "590d5062-8967-4112-a6f0-13634a17d6ad",
+              "uuid" : "590d5062-8967-4112-a6f0-13634a17d6ad",
+              "name" : "armyrules1954.pdf.txt",
+              "handle" : null,
+              "metadata" : {
+                "dc.description" : [ {
+                  "value" : "Extracted text",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.source" : [ {
+                  "value" : "Written by FormatFilter org.dspace.app.mediafilter.TikaTextExtractionFilter on 2026-08-11T17:12:44Z (GMT).",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.title" : [ {
+                  "value" : "armyrules1954.pdf.txt",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ]
+              },
+              "bundleName" : "TEXT",
+              "sizeBytes" : 388302,
+              "checkSum" : {
+                "checkSumAlgorithm" : "MD5",
+                "value" : "b1f32742f060844c5752da4438462f79"
+              },
+              "sequenceId" : 4,
+              "type" : "bitstream",
+              "_links" : {
+                "content" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/bitstreams/590d5062-8967-4112-a6f0-13634a17d6ad/content"
+                },
+                "bundle" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/bitstreams/590d5062-8967-4112-a6f0-13634a17d6ad/bundle"
+                },
+                "accessStatus" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/bitstreams/590d5062-8967-4112-a6f0-13634a17d6ad/accessStatus"
+                },
+                "format" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/bitstreams/590d5062-8967-4112-a6f0-13634a17d6ad/format"
+                },
+                "thumbnail" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/bitstreams/590d5062-8967-4112-a6f0-13634a17d6ad/thumbnail"
+                },
+                "self" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/bitstreams/590d5062-8967-4112-a6f0-13634a17d6ad"
+                }
+              }
+            } ]
+          },
+          "page" : {
+            "number" : 0,
+            "size" : 20,
+            "totalPages" : 1,
+            "totalElements" : 1
+          },
+          "_links" : {
+            "self" : {
+              "href" : "https://indiacode.gov.in/server/api/core/bundles/0675d813-ae8c-43da-93f8-faaff98d1f73/bitstreams"
+            }
+          }
+        }
+      }
+    }, {
+      "uuid" : "c0a343a9-022e-4244-a45e-c9ff168cb6e5",
+      "name" : "THUMBNAIL",
+      "handle" : null,
+      "metadata" : {
+        "dc.title" : [ {
+          "value" : "THUMBNAIL",
+          "language" : null,
+          "authority" : null,
+          "confidence" : -1,
+          "place" : 0
+        } ]
+      },
+      "type" : "bundle",
+      "_links" : {
+        "item" : {
+          "href" : "https://indiacode.gov.in/server/api/core/bundles/c0a343a9-022e-4244-a45e-c9ff168cb6e5/item"
+        },
+        "bitstreams" : {
+          "href" : "https://indiacode.gov.in/server/api/core/bundles/c0a343a9-022e-4244-a45e-c9ff168cb6e5/bitstreams"
+        },
+        "primaryBitstream" : {
+          "href" : "https://indiacode.gov.in/server/api/core/bundles/c0a343a9-022e-4244-a45e-c9ff168cb6e5/primaryBitstream"
+        },
+        "self" : {
+          "href" : "https://indiacode.gov.in/server/api/core/bundles/c0a343a9-022e-4244-a45e-c9ff168cb6e5"
+        }
+      },
+      "_embedded" : {
+        "bitstreams" : {
+          "_embedded" : {
+            "bitstreams" : [ {
+              "id" : "ed1693df-be1f-4261-8706-18646efbec31",
+              "uuid" : "ed1693df-be1f-4261-8706-18646efbec31",
+              "name" : "armyrules1954.pdf.jpg",
+              "handle" : null,
+              "metadata" : {
+                "dc.description" : [ {
+                  "value" : "Generated Thumbnail",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.source" : [ {
+                  "value" : "Written by FormatFilter org.dspace.app.mediafilter.PDFBoxThumbnail on 2026-08-11T17:12:44Z (GMT).",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ],
+                "dc.title" : [ {
+                  "value" : "armyrules1954.pdf.jpg",
+                  "language" : null,
+                  "authority" : null,
+                  "confidence" : -1,
+                  "place" : 0
+                } ]
+              },
+              "bundleName" : "THUMBNAIL",
+              "sizeBytes" : 6091,
+              "checkSum" : {
+                "checkSumAlgorithm" : "MD5",
+                "value" : "eed57d40f691e6f638f4341fe8452b26"
+              },
+              "sequenceId" : 5,
+              "type" : "bitstream",
+              "_links" : {
+                "content" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/bitstreams/ed1693df-be1f-4261-8706-18646efbec31/content"
+                },
+                "bundle" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/bitstreams/ed1693df-be1f-4261-8706-18646efbec31/bundle"
+                },
+                "accessStatus" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/bitstreams/ed1693df-be1f-4261-8706-18646efbec31/accessStatus"
+                },
+                "format" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/bitstreams/ed1693df-be1f-4261-8706-18646efbec31/format"
+                },
+                "thumbnail" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/bitstreams/ed1693df-be1f-4261-8706-18646efbec31/thumbnail"
+                },
+                "self" : {
+                  "href" : "https://indiacode.gov.in/server/api/core/bitstreams/ed1693df-be1f-4261-8706-18646efbec31"
+                }
+              }
+            } ]
+          },
+          "page" : {
+            "number" : 0,
+            "size" : 20,
+            "totalPages" : 1,
+            "totalElements" : 1
+          },
+          "_links" : {
+            "self" : {
+              "href" : "https://indiacode.gov.in/server/api/core/bundles/c0a343a9-022e-4244-a45e-c9ff168cb6e5/bitstreams"
+            }
+          }
+        }
+      }
+    } ]
+  },
+  "page" : {
+    "number" : 0,
+    "size" : 20,
+    "totalPages" : 1,
+    "totalElements" : 3
+  },
+  "_links" : {
+    "self" : {
+      "href" : "https://indiacode.gov.in/server/api/core/items/059789cd-ce11-4078-bf8d-5c7a0b99d85a/bundles?embed=bitstreams&size=20"
+    }
+  }
+}

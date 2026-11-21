@@ -31,27 +31,35 @@ sources:
     enabled: true
     priority: 1
     heavy: false
-    allowed_hosts: [www.indiacode.nic.in, indiacode.nic.in]
-    base_url: https://www.indiacode.nic.in
+    # MOVED: www.indiacode.nic.in now only serves a "Site Migration" notice pointing to
+    # https://indiacode.gov.in (seen 2026-11-21). The old hosts stay on the allow-list so old links
+    # can be recognised, but nothing is collected from them.
+    # backend.indiacode.gov.in is NOT listed on purpose: its API is empty for anonymous visitors and
+    # answers 401 on item lists. The public API is on indiacode.gov.in itself.
+    allowed_hosts: [indiacode.gov.in, www.indiacode.gov.in, www.indiacode.nic.in, indiacode.nic.in]
+    base_url: https://indiacode.gov.in
     # EXCEPTION (approved 2026-11-21): if robots.txt cannot be fetched at all, crawl as if the site had
     # none. Everywhere else an unreachable robots.txt means "disallow". A robots.txt that is actually
     # served is still obeyed, and a 5xx answer still means "disallow".
+    # robots_5xx (added the same day under the owner's "be autonomous" instruction): the same
+    # exception when robots.txt answers a server error, which is what the new site does.
     robots_unreachable: allow
+    robots_5xx: allow
     robots_unreachable_reason: >
-      https://www.indiacode.nic.in/robots.txt never answers: it timed out from the cloud container
-      (20 s and 60 s), from the crawler on a PC in India (60 s) and in a desktop browser on that PC,
-      all on 2026-11-21, while the site's pages load normally. Re-check from time to time.
+      No robots.txt can be obtained for India Code (checked 2026-11-21). Old site
+      www.indiacode.nic.in/robots.txt: timed out from the cloud container, from the crawler on a PC
+      in India and in a desktop browser there. New site indiacode.gov.in/robots.txt and
+      backend.indiacode.gov.in/robots.txt: HTTP 500 "Internal Server Error" (a generic error page),
+      while the site and its API answer normally. Re-check from time to time; the moment a
+      robots.txt is served, it is obeyed.
     discovery: >
-      Resolve each target to its India Code handle page by searching the
-      Central Acts collection for the short title + year; record the handle URL
-      in state so later runs go direct. From each Act page collect: the Act PDF,
-      and every item listed under subordinate legislation (rules, regulations,
-      notifications, orders) and amendments.
+      Through the site's REST API (base_url + /server/api, DSpace 9; verified live 2026-11-21):
+      search the ACT collection for the exact title, read the Act record and its files, then
+      page through every record linked to the Act's act_id (sections with text and footnotes,
+      rules, schedules, notifications) and queue their files.
     collect_subordinate: true
-    # UNVERIFIED: written from memory, never tried against the live site. {query} = the target title.
-    # If search does not work, set `handle_url: https://www.indiacode.nic.in/handle/...` on a target
-    # (copied from a browser) and discovery skips the search.
-    search_url_template: "https://www.indiacode.nic.in/simple-search?query={query}"
+    # If the title search does not give exactly one match, set `item_uuid: <uuid>` on the target
+    # (the id in the Act's page address on the site, https://indiacode.gov.in/act/<uuid>).
     targets:
       # doc_id                                 short title as printed                                          year  status_hint
       # expect_subordinate: titles that should appear in the Act page's subordinate-legislation listing.
@@ -62,7 +70,7 @@ sources:
           expect_subordinate: ["Air Force Rules, 1969"] }
       - { doc_id: act-navy-1957,                title: "The Navy Act, 1957",                                     year: 1957 }
       - { doc_id: act-armed-forces-tribunal-2007, title: "The Armed Forces Tribunal Act, 2007",                  year: 2007,
-          expect_subordinate: ["Armed Forces Tribunal (Procedure) Rules, 2008"] }
+          expect_subordinate: ["AFT-Procedure-Rules-2008"] }   # as the record is titled on India Code
       - { doc_id: act-army-af-disposal-private-property-1950, title: "The Army and Air Force (Disposal of Private Property) Act, 1950", year: 1950 }
       - { doc_id: act-bns-2023,                 title: "The Bharatiya Nyaya Sanhita, 2023",                      year: 2023 }
       - { doc_id: act-bnss-2023,                title: "The Bharatiya Nagarik Suraksha Sanhita, 2023",           year: 2023 }

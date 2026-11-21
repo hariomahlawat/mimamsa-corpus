@@ -1,157 +1,86 @@
-"""India Code (indiacode.nic.in): find an Act's page, list its PDFs and subordinate legislation.
+"""India Code (indiacode.gov.in): find an Act through the site's REST API and queue its files.
 
-STATUS: the page parsers below were written WITHOUT access to the live site (it was not
-reachable from the build environment). They are deliberately loose (they look for link
-shapes, not exact markup) and they raise structure warnings when a page does not contain
-what an Act page should. Treat every result as unverified until `discover` has been run
-against real pages and the output checked by a person.
+The site moved from www.indiacode.nic.in to indiacode.gov.in and is now a DSpace 9 application
+whose pages are built in the browser from a public REST API at <base_url>/server/api. This
+module reads that API (checked against the live site on 2026-11-21):
 
-Discovery never guesses: a target resolves only when exactly one search result has the
-same title (ignoring case, punctuation and a leading "The"). Otherwise it is reported as
-unresolved with the candidates, to be fixed by setting `handle_url` on the target.
+  search   GET /discover/search/objects?query=dc.identifier.collection:ACT AND dc.title:"<title>"
+  files    GET /core/items/<uuid>/bundles?embed=bitstreams      (ORIGINAL bundle = the PDFs)
+  linked   GET /discover/search/objects?f.act_id=<act id>,equals (sections, rules, schedules ...)
+
+Every record carries `dc.identifier.collection` (ACT, SECTION, RULE, SCHEDULE, NOTIFICATION ...)
+and, when it belongs to an Act, `dc.identifier.act_id`. Section records hold the section text
+and its amendment footnotes, so the pages of linked records are queued as documents too.
+
+Discovery never guesses: a target resolves only when exactly one ACT record has the same
+title (ignoring case, punctuation and a leading "The") and, when both are known, the same year.
 """
 from __future__ import annotations
 
 import hashlib
+import json
 import logging
 import re
 from dataclasses import dataclass, field
-from typing import Callable
-from urllib.parse import quote_plus, urldefrag, urljoin, urlsplit
-
-from bs4 import BeautifulSoup
+from urllib.parse import quote
 
 from .config import Config, url_host
-from .http import Blocked, CrawlError, FetchError, PoliteClient, is_pdf_url
+from .http import Blocked, CrawlError, FetchError, PoliteClient
 from .state import StateDB
 
 log = logging.getLogger("mimamsa.indiacode")
 
-CATEGORIES = ("rules", "regulations", "notifications", "orders", "circulars", "ordinances", "statutes")
-METADATA_LABELS = {
-    "act id": "act_id", "act number": "act_number", "enactment date": "enactment_date",
-    "act year": "act_year", "short title": "short_title", "long title": "long_title",
-    "ministry": "ministry", "department": "department", "enforcement date": "enforcement_date",
-}
-GENERIC_LINK_TEXT = {"", "view", "download", "pdf", "click here", "open", "view pdf"}
-DATE_RE = re.compile(r"\b\d{1,2}[-/.]\d{1,2}[-/.]\d{4}\b|\b\d{1,2}(?:st|nd|rd|th)?\s+[A-Z][a-z]+,?\s+\d{4}\b")
-CAPTCHA_RE = re.compile(r"<(?:input|img|div|iframe)[^>]*captcha", re.I)
+PAGE_SIZE = 100
+MAX_LINKED_PAGES = 50            # safety stop: 5,000 linked records for one Act would be a surprise
+YEAR_FIELDS = ("dc.date.rule_year", "dc.date.regulation_year", "dc.date.notification_year",
+               "dc.date.statute_year", "dc.date.ordinance_year", "dc.date.circular_year")
+
+
+_ACT_FILE = re.compile(r"^([ah])\d{4}-?\d+\.pdf$", re.I)
+
+
+def file_language(filename: str | None) -> str | None:
+    """India Code names an Act's files a<year>-<no>.pdf (English) and h<year><no>.pdf (Hindi); seen on
+    all six Acts checked on 2026-11-21. This is a naming convention, not a guarantee: the text
+    extraction stage should confirm the language from the content."""
+    m = _ACT_FILE.match(filename or "")
+    return {"a": "en", "h": "hi"}[m.group(1).lower()] if m else None
 
 
 def normalise_title(s: str) -> str:
-    s = re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
+    s = re.sub(r"[^a-z0-9]+", " ", (s or "").lower()).strip()
     return re.sub(r"^the ", "", s)
 
 
-@dataclass
-class DocLink:
-    url: str
-    title: str | None
-    category: str            # act | rules | regulations | ... | unknown
-    date_raw: str | None     # as printed in the listing row; not parsed, not guessed
+def md(item: dict, key: str) -> str | None:
+    """First value of a DSpace metadata field, or None."""
+    vals = (item.get("metadata") or {}).get(key) or []
+    return vals[0].get("value") if vals else None
 
 
-@dataclass
-class ActPage:
-    url: str
-    metadata: dict[str, str] = field(default_factory=dict)
-    act_pdfs: list[DocLink] = field(default_factory=list)
-    subordinate: list[DocLink] = field(default_factory=list)
-    section_links: int = 0
-    dropped: list[tuple[str, str]] = field(default_factory=list)   # (url, reason)
-    warnings: list[str] = field(default_factory=list)
-    has_captcha: bool = False
+def search_objects(payload: dict) -> tuple[list[dict], dict]:
+    """(records, page info) from a /discover/search/objects answer."""
+    sr = payload["_embedded"]["searchResult"]
+    objs = [o["_embedded"]["indexableObject"] for o in sr.get("_embedded", {}).get("objects", [])]
+    return objs, sr.get("page", {})
 
 
-def _abs(base: str, href: str) -> str:
-    return urldefrag(urljoin(base, href.strip())).url
-
-
-def parse_search_results(html: str, base_url: str) -> list[tuple[str, str]]:
-    """(title, url) for every link to a /handle/ page, in page order, de-duplicated."""
-    soup = BeautifulSoup(html, "html.parser")
-    out, seen = [], set()
-    for a in soup.find_all("a", href=True):
-        url = _abs(base_url, a["href"])
-        title = " ".join(a.get_text(" ", strip=True).split())
-        if "/handle/" in urlsplit(url).path and title and url not in seen:
-            seen.add(url)
-            out.append((title, url))
+def original_bitstreams(payload: dict) -> list[dict]:
+    """Files in the ORIGINAL bundle of a /core/items/<uuid>/bundles?embed=bitstreams answer."""
+    out = []
+    for bundle in payload.get("_embedded", {}).get("bundles", []):
+        if bundle.get("name") != "ORIGINAL":
+            continue
+        for bs in bundle.get("_embedded", {}).get("bitstreams", {}).get("_embedded", {}).get("bitstreams", []):
+            checksum = bs.get("checkSum") or {}
+            out.append({
+                "url": bs["_links"]["content"]["href"],
+                "filename": bs.get("name"),
+                "size": bs.get("sizeBytes"),
+                "md5": checksum.get("value") if checksum.get("checkSumAlgorithm") == "MD5" else None,
+                "bitstream_uuid": bs.get("uuid"),
+            })
     return out
-
-
-def _category(a, url: str) -> str:
-    for parent in a.parents:
-        marks = " ".join([parent.get("id") or "", *(parent.get("class") or [])]).lower()
-        for c in CATEGORIES:
-            if re.search(rf"\b{c}\b", marks):
-                return c
-    hay = (urlsplit(url).path + "?" + urlsplit(url).query).lower()
-    for c in CATEGORIES:
-        if re.search(rf"[/=]{c}(/|&|$)", hay):
-            return c
-    return "unknown"
-
-
-def _row_info(a) -> tuple[str | None, str | None]:
-    """Title and printed date for a document link, taken from its table row / list item."""
-    text = " ".join(a.get_text(" ", strip=True).split())
-    row = a.find_parent(["tr", "li"])
-    row_text = " ".join(row.get_text(" ", strip=True).split()) if row else text
-    m = DATE_RE.search(row_text)
-    title = text
-    if text.lower() in GENERIC_LINK_TEXT and row is not None:
-        cells = [" ".join(c.get_text(" ", strip=True).split()) for c in row.find_all(["td", "th"])] or [row_text]
-        cands = [c for c in cells if c and c.lower() not in GENERIC_LINK_TEXT
-                 and not c.isdigit() and not DATE_RE.fullmatch(c)]
-        title = max(cands, key=len) if cands else ""
-    return (title or None), (m.group(0) if m else None)
-
-
-def parse_act_page(html: str, url: str, is_allowed: Callable[[str], tuple[bool, str]]) -> ActPage:
-    soup = BeautifulSoup(html, "html.parser")
-    page = ActPage(url=url, has_captcha=bool(CAPTCHA_RE.search(html)))
-
-    for tr in soup.find_all("tr"):
-        cells = tr.find_all(["td", "th"], recursive=False)
-        if len(cells) == 2:
-            label = " ".join(cells[0].get_text(" ", strip=True).split()).rstrip(":").strip().lower()
-            if label in METADATA_LABELS:
-                page.metadata[METADATA_LABELS[label]] = " ".join(cells[1].get_text(" ", strip=True).split())
-
-    seen: set[str] = set()
-    for a in soup.find_all("a", href=True):
-        href = a["href"].strip()
-        if not href or href.startswith(("#", "javascript:", "mailto:")):
-            continue
-        link = _abs(url, href)
-        path = urlsplit(link).path
-        if "show-data" in path:
-            page.section_links += 1
-            continue
-        if not is_pdf_url(link) or link in seen:
-            continue
-        seen.add(link)
-        ok, why = is_allowed(link)
-        if not ok:
-            page.dropped.append((link, why))
-            continue
-        title, date_raw = _row_info(a)
-        if "/bitstream/" in path:
-            page.act_pdfs.append(DocLink(link, title, "act", date_raw))
-        else:
-            page.subordinate.append(DocLink(link, title, _category(a, link), date_raw))
-
-    if not page.metadata:
-        page.warnings.append("no Act metadata table found (Act ID, Act Number, Enactment Date ...)")
-    if not page.act_pdfs:
-        page.warnings.append("no Act PDF (/bitstream/....pdf) link found")
-    if len(page.act_pdfs) > 1:
-        page.warnings.append(f"{len(page.act_pdfs)} Act PDFs found; none is tagged with the doc_id, review needed")
-    unknown = sum(1 for d in page.subordinate if d.category == "unknown")
-    if unknown:
-        page.warnings.append(f"{unknown} PDF link(s) with no recognisable category")
-    return page
 
 
 @dataclass
@@ -160,122 +89,224 @@ class TargetResult:
     title: str
     status: str                         # resolved | already_known | unresolved | failed | skipped | blocked
     reason: str | None = None
-    act_url: str | None = None
+    act_url: str | None = None          # API URL of the Act record
+    act_id: str | None = None
     metadata: dict[str, str] = field(default_factory=dict)
     act_pdfs: int = 0
-    subordinate: dict[str, int] = field(default_factory=dict)
+    linked: dict[str, int] = field(default_factory=dict)        # collection -> number of records
+    linked_pages: int = 0
+    subordinate_files: dict[str, int] = field(default_factory=dict)   # collection -> files queued
     newly_queued: int = 0
-    section_links: int = 0
     dropped: list[tuple[str, str]] = field(default_factory=list)
     candidates: list[tuple[str, str]] = field(default_factory=list)
     warnings: list[str] = field(default_factory=list)
 
 
-def _fetch_listing(cfg: Config, db: StateDB, client: PoliteClient, source: str, url: str, *,
-                   doc_id: str, role: str, discovered_from: str | None, refresh: bool) -> str:
-    db.enqueue(url, source, url_host(url), "listing", doc_id_hint=doc_id, discovered_from=discovered_from,
-               priority=1, meta={"role": role})
-    if refresh:
-        db.requeue(url)
-    try:
-        r = client.get(url)
-    except Blocked as e:
-        db.mark_skipped(url, f"blocked: {e}")
-        raise
-    except FetchError as e:
-        db.mark_attempt_failed(url, error=str(e), status_code=e.status_code, retryable=e.retryable,
-                               max_retries=cfg.setting(source, "max_retries"),
-                               backoff_base=cfg.setting(source, "backoff_base_seconds"))
-        raise
-    except CrawlError as e:               # off allow-list, robots
-        db.mark_skipped(url, str(e))
-        raise
-    if r.status != 200:
-        db.mark_attempt_failed(url, error=f"HTTP {r.status}", status_code=r.status, retryable=False,
-                               max_retries=cfg.setting(source, "max_retries"),
-                               backoff_base=cfg.setting(source, "backoff_base_seconds"))
-        raise FetchError(f"{url}: HTTP {r.status}", retryable=False, status_code=r.status)
-    db.mark_fetched(url, status_code=200, sha256=hashlib.sha256(r.content).hexdigest(), nbytes=len(r.content),
-                    content_type=r.content_type, etag=r.headers.get("etag"),
-                    last_modified=r.headers.get("last-modified"))
-    return r.text()
+class _Api:
+    """Listing requests against the API, with crawl-state bookkeeping."""
+
+    def __init__(self, cfg: Config, db: StateDB, client: PoliteClient, source: str, refresh: bool):
+        self.cfg, self.db, self.client, self.source, self.refresh = cfg, db, client, source, refresh
+        self.base = cfg.source(source)["base_url"].rstrip("/") + "/server/api"
+        self.retry = dict(max_retries=cfg.setting(source, "max_retries"),
+                          backoff_base=cfg.setting(source, "backoff_base_seconds"))
+
+    def peek(self, url: str) -> dict:
+        """Read a JSON listing without a crawl-state row of its own. Used for pages that are also
+        queued as documents: the queue row then belongs to the document, and `fetch` saves it."""
+        r = self.client.get(url)
+        if r.status != 200:
+            raise FetchError(f"{url}: HTTP {r.status}", retryable=False, status_code=r.status)
+        try:
+            return json.loads(r.content)
+        except ValueError:
+            raise FetchError(f"{url}: not JSON ({r.content_type})", retryable=False) from None
+
+    def get(self, url: str, *, doc_id: str, role: str) -> dict:
+        db = self.db
+        is_new = db.enqueue(url, self.source, url_host(url), "listing", doc_id_hint=doc_id, priority=1,
+                            meta={"role": role})
+        if not is_new and self.refresh:
+            db.requeue(url)
+        try:
+            r = self.client.get(url)
+        except Blocked as e:
+            db.mark_skipped(url, f"blocked: {e}")
+            raise
+        except FetchError as e:
+            db.mark_attempt_failed(url, error=str(e), status_code=e.status_code, retryable=e.retryable, **self.retry)
+            raise
+        except CrawlError as e:               # off allow-list, robots
+            db.mark_skipped(url, str(e))
+            raise
+        problem, payload = None, None
+        if r.status != 200:
+            problem = f"HTTP {r.status}"
+        else:
+            try:
+                payload = json.loads(r.content)
+            except ValueError:
+                problem = f"not JSON ({r.content_type})"
+        if problem:
+            db.mark_attempt_failed(url, error=problem, status_code=r.status, retryable=False, **self.retry)
+            raise FetchError(f"{url}: {problem}", retryable=False, status_code=r.status)
+        db.mark_fetched(url, status_code=200, sha256=hashlib.sha256(r.content).hexdigest(), nbytes=len(r.content),
+                        content_type=r.content_type, etag=r.headers.get("etag"),
+                        last_modified=r.headers.get("last-modified"))
+        return payload
 
 
-def _known_act_url(db: StateDB, source: str, doc_id: str) -> str | None:
+def _known_act(db: StateDB, source: str, doc_id: str) -> str | None:
     row = db.conn.execute(
         "SELECT url FROM urls WHERE source=? AND kind='listing' AND doc_id_hint=? AND status='fetched' "
-        "AND json_extract(meta, '$.role')='act_page'", (source, doc_id)).fetchone()
+        "AND json_extract(meta, '$.role')='act_item'", (source, doc_id)).fetchone()
     return row["url"] if row else None
+
+
+def _queue_files(res: TargetResult, api: _Api, files: list[dict], *, doc_id_hint: str | None, priority: int,
+                 discovered_from: str, meta: dict) -> int:
+    queued = 0
+    for f in files:
+        ok, why = api.cfg.is_url_allowed(api.source, f["url"])
+        if not ok:
+            res.dropped.append((f["url"], why))
+            continue
+        queued += api.db.enqueue(f["url"], api.source, url_host(f["url"]), "document", doc_id_hint=doc_id_hint,
+                                 discovered_from=discovered_from, priority=priority,
+                                 meta={**meta, "filename": f["filename"], "md5": f["md5"], "size": f["size"]})
+    res.newly_queued += queued
+    return queued
 
 
 def _discover_target(cfg: Config, db: StateDB, client: PoliteClient, source: str, t: dict,
                      refresh: bool) -> TargetResult:
     src = cfg.source(source)
+    api = _Api(cfg, db, client, source, refresh)
     res = TargetResult(doc_id=t["doc_id"], title=t["title"], status="unresolved")
+    doc_id = t["doc_id"]
 
-    act_url = _known_act_url(db, source, t["doc_id"])
-    if act_url and not refresh:
-        res.status, res.act_url = "already_known", act_url
+    known = _known_act(db, source, doc_id)
+    if known and not refresh:
+        res.status, res.act_url = "already_known", known
         return res
-    act_url = act_url or t.get("handle_url")
 
-    if not act_url:
-        template = src.get("search_url_template")
-        if not template:
-            res.reason = "no handle_url on the target and no search_url_template on the source"
+    # 1. Find the Act record.
+    uuid = t.get("item_uuid")
+    if not uuid:
+        core = re.sub(r"^the\s+", "", t["title"].strip(), flags=re.I)
+        query = f'dc.identifier.collection:ACT AND dc.title:"{core}"'
+        search_url = f"{api.base}/discover/search/objects?query={quote(query)}&size=20"
+        records, _ = search_objects(api.get(search_url, doc_id=doc_id, role="search"))
+        want, year = normalise_title(t["title"]), str(t["year"]) if t.get("year") else None
+        # The record's act_year is the year of the Act NUMBER (CrPC 1973 is Act 2 of 1974), so it is
+        # only compared when the title itself does not already carry the year.
+        check_year = year is not None and year not in t["title"]
+        hits = [r for r in records
+                if md(r, "dc.identifier.collection") == "ACT" and normalise_title(r.get("name")) == want
+                and (not check_year or md(r, "dc.date.act_year") in (None, year))]
+        if len(hits) > 1:
+            # India Code also holds state copies of central Acts (with state amendments) under the
+            # same title. Keep the copy for the jurisdiction the target names (default CENTRAL).
+            state = str(t.get("state", "CENTRAL")).upper()
+            in_state = [r for r in hits if (md(r, "dc.identifier.state_name") or "").upper() == state]
+            if in_state:
+                hits = in_state
+        if len(hits) != 1:
+            res.reason = (f"{len(hits)} exact title matches among {len(records)} search results; "
+                          "set item_uuid on this target in sources.yaml")
+            res.candidates = [(f"{r.get('name')} ({md(r, 'dc.date.act_year')}, "
+                               f"{md(r, 'dc.identifier.state_name')}, repealed={md(r, 'dc.identifier.repealed')})",
+                               r["uuid"])
+                              for r in (hits or records)[:10]]
             return res
-        search_url = template.format(query=quote_plus(t["title"]))
-        html = _fetch_listing(cfg, db, client, source, search_url, doc_id=t["doc_id"], role="search",
-                              discovered_from=None, refresh=refresh)
-        results = parse_search_results(html, search_url)
-        want = normalise_title(t["title"])
-        hits = [(title, url) for title, url in results if normalise_title(title) == want]
-        if len({u for _, u in hits}) != 1:
-            res.reason = (f"{len(hits)} exact title matches among {len(results)} search results; "
-                          "set handle_url on this target in sources.yaml")
-            res.candidates = (hits or results)[:10]
-            if not results and CAPTCHA_RE.search(html):
-                raise Blocked(f"{search_url}: no results and the page carries a CAPTCHA")
-            return res
-        act_url = hits[0][1]
+        uuid = hits[0]["uuid"]
 
-    html = _fetch_listing(cfg, db, client, source, act_url, doc_id=t["doc_id"], role="act_page",
-                          discovered_from=None, refresh=refresh)
-    page = parse_act_page(html, act_url, lambda u: cfg.is_url_allowed(source, u))
-    if page.has_captcha and not page.metadata and not page.act_pdfs:
-        raise Blocked(f"{act_url}: page has a CAPTCHA and no Act content")
+    # 2. The Act record itself.
+    act_url = f"{api.base}/core/items/{uuid}"
+    act = api.get(act_url, doc_id=doc_id, role="act_item")
+    res.act_url, res.act_id = act_url, md(act, "dc.identifier.act_id")
+    for key in ("dc.title", "dc.identifier.act_number", "dc.date.act_year", "dc.date.enact_date",
+                "dc.date.enforcement_date", "dc.date.last_modified", "dc.identifier.repealed",
+                "dc.identifier.ministry_name", "dc.identifier.department_name", "dc.identifier.act_id"):
+        if md(act, key) is not None:
+            res.metadata[key] = md(act, key)
+    if md(act, "dc.identifier.collection") != "ACT":
+        res.warnings.append(f"record {uuid} is in collection {md(act, 'dc.identifier.collection')!r}, not ACT")
+    if normalise_title(act.get("name")) != normalise_title(t["title"]):
+        res.warnings.append(f"record title {act.get('name')!r} differs from target title {t['title']!r}")
+    year = md(act, "dc.date.act_year") or (str(t["year"]) if t.get("year") else None)
 
-    res.act_url, res.metadata, res.section_links = act_url, page.metadata, page.section_links
-    res.dropped, res.warnings, res.act_pdfs = page.dropped, list(page.warnings), len(page.act_pdfs)
-    printed = page.metadata.get("short_title")
-    if printed and normalise_title(printed) != normalise_title(t["title"]):
-        res.warnings.append(f"page short title {printed!r} differs from target title {t['title']!r}")
+    # 3. The Act's own files.
+    files = original_bitstreams(api.get(f"{act_url}/bundles?embed=bitstreams&size=20", doc_id=doc_id, role="bundles"))
+    res.act_pdfs = len(files)
+    main = [f for f in files if file_language(f["filename"]) == "en"]
+    for f in files:
+        is_main = len(main) == 1 and f is main[0]
+        _queue_files(res, api, [f], doc_id_hint=doc_id if is_main else None, priority=10, discovered_from=act_url,
+                     meta={"category": "act", "title": act.get("name"), "parent_doc_id": doc_id, "year": year,
+                           "item_uuid": uuid, "role": "act_text" if is_main else "act_other_file",
+                           "language_by_filename": file_language(f["filename"])})
+    if not files:
+        res.warnings.append("the Act record has no files in its ORIGINAL bundle")
+    elif len(main) != 1:
+        res.warnings.append(f"could not tell which of {len(files)} files is the Act text; none tagged with the doc_id")
 
-    year = str(t["year"]) if t.get("year") else None
-    for d in page.act_pdfs:
-        hint = t["doc_id"] if len(page.act_pdfs) == 1 else None
-        res.newly_queued += db.enqueue(
-            d.url, source, url_host(d.url), "document", doc_id_hint=hint, discovered_from=act_url, priority=10,
-            meta={"category": "act", "title": d.title or t["title"], "parent_doc_id": t["doc_id"], "year": year})
-    if src.get("collect_subordinate", True):
-        for d in page.subordinate:
-            res.subordinate[d.category] = res.subordinate.get(d.category, 0) + 1
+    # 4. Everything linked to the Act: sections, rules, schedules, notifications ...
+    if res.act_id and src.get("collect_subordinate", True):
+        total, seen, others = None, 0, []
+        for page in range(MAX_LINKED_PAGES):
+            url = (f"{api.base}/discover/search/objects?f.act_id={quote(res.act_id)},equals"
+                   f"&sort=dc.date.accessioned,ASC&size={PAGE_SIZE}&page={page}")
+            records, info = search_objects(api.peek(url))
+            total = info.get("totalElements", total)
+            if not records:
+                break
+            seen += len(records)
+            res.linked_pages += 1
+            # The page itself is source data (section text and footnotes): queue it as a document.
             res.newly_queued += db.enqueue(
-                d.url, source, url_host(d.url), "document", discovered_from=act_url, priority=50,
-                meta={"category": d.category, "title": d.title, "date_raw": d.date_raw,
-                      "parent_doc_id": t["doc_id"], "year": None})
-    listed = [normalise_title(d.title or "") for d in page.subordinate]
-    for want in t.get("expect_subordinate", []):
-        if not any(normalise_title(want) in have for have in listed):
-            res.warnings.append(f"expected subordinate document not listed on the Act page: {want!r}")
+                url, source, url_host(url), "document", discovered_from=act_url, priority=20,
+                meta={"category": "linked_records", "title": f"{act.get('name')}: linked records, page {page + 1}",
+                      "parent_doc_id": doc_id, "year": year, "act_id": res.act_id, "records": len(records)})
+            for r in records:
+                coll = md(r, "dc.identifier.collection") or "UNKNOWN"
+                res.linked[coll] = res.linked.get(coll, 0) + 1
+                if coll not in ("ACT", "SECTION"):
+                    others.append(r)
+            if total is not None and seen >= total:
+                break
+        else:
+            res.warnings.append(f"stopped after {MAX_LINKED_PAGES} pages of linked records")
+        if total is not None and seen != total:
+            res.warnings.append(f"linked records: read {seen}, the API reports {total}")
+
+        for r in others:
+            coll = md(r, "dc.identifier.collection") or "UNKNOWN"
+            r_url = f"{api.base}/core/items/{r['uuid']}"
+            r_files = original_bitstreams(api.get(f"{r_url}/bundles?embed=bitstreams&size=20", doc_id=doc_id,
+                                                  role="bundles"))
+            r_year = next((md(r, k) for k in YEAR_FIELDS if md(r, k)), None)
+            n = _queue_files(res, api, r_files, doc_id_hint=None, priority=50, discovered_from=r_url,
+                             meta={"category": coll.lower(), "title": r.get("name"), "parent_doc_id": doc_id,
+                                   "year": r_year, "item_uuid": r["uuid"]})
+            res.subordinate_files[coll] = res.subordinate_files.get(coll, 0) + n
+            if not r_files:
+                res.warnings.append(f"{coll} record {r.get('name')!r} has no files")
+
+        titles = [normalise_title(r.get("name")) for r in others]
+        for want in t.get("expect_subordinate", []):
+            if not any(normalise_title(want) in have for have in titles):
+                res.warnings.append(f"expected subordinate document not linked to the Act: {want!r}")
+    elif not res.act_id:
+        res.warnings.append("the Act record has no dc.identifier.act_id; linked records not collected")
+
     res.status = "resolved"
     return res
 
 
 def discover(cfg: Config, db: StateDB, client: PoliteClient, source: str = "indiacode", *,
              only: list[str] | None = None, refresh: bool = False) -> list[TargetResult]:
-    """Fetch listing pages only (search + Act page) and queue the documents they list.
-    Downloads no documents."""
+    """Read API listings only and queue the files they name. Downloads no documents."""
     src = cfg.source(source)
     targets = [t for key in ("targets", "also_search") for t in (src.get(key) or [])]
     if only:
@@ -295,6 +326,9 @@ def discover(cfg: Config, db: StateDB, client: PoliteClient, source: str = "indi
             results.append(TargetResult(t["doc_id"], t["title"], "failed", reason=str(e)))
         except CrawlError as e:
             results.append(TargetResult(t["doc_id"], t["title"], "skipped", reason=str(e)))
+        except (KeyError, TypeError) as e:
+            results.append(TargetResult(t["doc_id"], t["title"], "failed",
+                                        reason=f"API answer not in the expected shape: {e!r}"))
     return results
 
 
@@ -305,19 +339,20 @@ def results_to_markdown(results: list[TargetResult]) -> str:
         if r.reason:
             lines += [f"Reason: {r.reason}", ""]
         if r.act_url:
-            lines += [f"Act page: {r.act_url}  "]
+            lines += [f"Act record: {r.act_url}  "]
         if r.status == "resolved":
-            sub = ", ".join(f"{n} {c}" for c, n in sorted(r.subordinate.items())) or "none"
-            lines += [f"Act PDFs: {r.act_pdfs}; subordinate documents: {sub}; newly queued: {r.newly_queued}  ",
-                      f"Section links seen (not queued): {r.section_links}", ""]
+            linked = ", ".join(f"{n} {c}" for c, n in sorted(r.linked.items())) or "none"
+            sub = ", ".join(f"{n} from {c}" for c, n in sorted(r.subordinate_files.items())) or "none"
+            lines += [f"Act files: {r.act_pdfs}; linked records: {linked} (in {r.linked_pages} page(s)); "
+                      f"subordinate files: {sub}; newly queued: {r.newly_queued}", ""]
             if r.metadata:
-                lines += ["| Printed on the page | Value |", "| --- | --- |"]
+                lines += ["| Field on the record | Value |", "| --- | --- |"]
                 lines += [f"| {k} | {v} |" for k, v in r.metadata.items()] + [""]
         for url, why in r.dropped:
             lines.append(f"- dropped {url} ({why})")
         for w in r.warnings:
             lines.append(f"- ⚠ {w}")
-        for title, url in r.candidates:
-            lines.append(f"- candidate: {title} — {url}")
+        for title, ref in r.candidates:
+            lines.append(f"- candidate: {title} — {ref}")
         lines.append("")
     return "\n".join(lines)
