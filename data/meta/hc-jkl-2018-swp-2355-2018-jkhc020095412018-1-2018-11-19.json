@@ -1,0 +1,111 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2018/court=1_12/bench=jammuhc/JKHC020095412018_1_2018-11-19.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:41:11+00:00",
+  "sha256": "70068348a7a658ea6efb024bb4381126673a05372b731983ced0eb606cf0fcc1",
+  "raw_path": "data/raw/hc/2018/70068348a7a658ea6efb024bb4381126673a05372b731983ced0eb606cf0fcc1.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2018-swp-2355-2018-jkhc020095412018-1-2018-11-19.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-jkl-2018-swp-2355-2018-jkhc020095412018-1-2018-11-19",
+  "doc_type": "judgment",
+  "title": "SWP/2355/2018 of SUBASH CHANDER Vs UNION OF INDIA TH. ADJUTANT GENERAL BRANCH AND ORS",
+  "number": "SWP/2355/2018",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2018-11-19",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020095412018_1_2018-11-19.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020095412018",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "SWP/2355/2018"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SUBASH CHANDER"
+    ],
+    "respondent": [
+      "UNION OF INDIA TH. ADJUTANT GENERAL BRANCH AND ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MRS. JUSTICE SINDHU SHARMA"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": null,
+      "raw": "Army Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": null,
+      "raw": "Air Force Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": null,
+      "raw": "Navy Act"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": null,
+      "raw": "Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 4,
+    "keywords": {
+      "army act": 2,
+      "air force act": 1,
+      "navy act": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

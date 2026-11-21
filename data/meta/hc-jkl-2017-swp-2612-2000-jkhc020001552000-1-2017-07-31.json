@@ -1,0 +1,142 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2017/court=1_12/bench=jammuhc/JKHC020001552000_1_2017-07-31.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:42:31+00:00",
+  "sha256": "e76a942d78feb92c2b907d8fdc149a72c09babb67fd100deb54d544b1322ca8d",
+  "raw_path": "data/raw/hc/2017/e76a942d78feb92c2b907d8fdc149a72c09babb67fd100deb54d544b1322ca8d.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 17,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2017-swp-2612-2000-jkhc020001552000-1-2017-07-31.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2017-swp-2612-2000-jkhc020001552000-1-2017-07-31",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s34",
+      "target_ref_raw": "Section 34 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "o transfer of this batch of writ petitions to the Armed Forces Tribunal is being decided by this order. 2. Learned ASGI has submitted that in view of Section 34 of the Armed Forces Tribunal Act, 2007 (for brevity, the Act of 2007), the writ petitions pending before this Court deserve to be transferred to the Armed Forces Tribunal Srinagar Bench at",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2017-swp-2612-2000-jkhc020001552000-1-2017-07-31",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s2",
+      "target_ref_raw": "Section 2 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "ce that there is no reference to the provisions of Article 323A of the Constitution of India as is the case in the Administrative Tribunal Act, 1985. Section 2 of the Armed Forces Tribunal Act, 2007, which is relevant in view of the controversy involved in the writ petition, reads as under:- “2. Applicability of the Act.-(1) The provisions of thi",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-jkl-2017-swp-2612-2000-jkhc020001552000-1-2017-07-31",
+  "doc_type": "judgment",
+  "title": "SWP/2612/2000 of TILAK RAJ Vs UNION OF INDIA AND ORS.",
+  "number": "SWP/2612/2000",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2017-07-31",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020001552000_1_2017-07-31.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020001552000",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "SWP/2612/2000"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "TILAK RAJ"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE ALOK ARADHE",
+    "HON'BLE MR. JUSTICE SANJEEV KUMAR"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": null,
+      "raw": "Army Act, 1950"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": null,
+      "raw": "Air Force Act, 1950"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": null,
+      "raw": "Navy Act, 1957"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "34",
+      "raw": "Section 34 of the Armed Forces Tribunal Act, 2007"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "2",
+      "raw": "Section 2 of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 19,
+    "keywords": {
+      "army act": 6,
+      "air force act": 6,
+      "navy act": 6,
+      "court martial": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

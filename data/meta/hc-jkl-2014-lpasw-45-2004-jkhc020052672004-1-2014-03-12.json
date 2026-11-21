@@ -1,0 +1,89 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2014/court=1_12/bench=jammuhc/JKHC020052672004_1_2014-03-12.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:46:20+00:00",
+  "sha256": "afc5453c7c0f53217cedfbdbc8dbde2d028f9b8d7b346a07dfbe84ff01bc4cd4",
+  "raw_path": "data/raw/hc/2014/afc5453c7c0f53217cedfbdbc8dbde2d028f9b8d7b346a07dfbe84ff01bc4cd4.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 10,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2014-lpasw-45-2004-jkhc020052672004-1-2014-03-12.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-jkl-2014-lpasw-45-2004-jkhc020052672004-1-2014-03-12",
+  "doc_type": "judgment",
+  "title": "LPASW/45/2004 of U.O.I. TH.MIN.OF DEFENCE AND ORS. Vs JAGDISH SINGH KATOCH",
+  "number": "LPASW/45/2004",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2014-03-12",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020052672004_1_2014-03-12.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020052672004",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "LPASW/45/2004"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "U.O.I. TH.MIN.OF DEFENCE AND ORS."
+    ],
+    "respondent": [
+      "JAGDISH SINGH KATOCH"
+    ]
+  },
+  "judges": [
+    "HON'BLE THE CHIEF JUSTICE",
+    "HON'BLE MR. JUSTICE MUZAFFAR HUSSAIN ATTAR"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 61,
+    "keywords": {
+      "disability pension": 36,
+      "invalided": 25
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

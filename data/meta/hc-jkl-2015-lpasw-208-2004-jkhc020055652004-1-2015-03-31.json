@@ -1,0 +1,91 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2015/court=1_12/bench=jammuhc/JKHC020055652004_1_2015-03-31.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:45:02+00:00",
+  "sha256": "62d0de04e28650d68223ae5c98c19f93d3ac138d01a0cbb4640ba4f8e28ffeed",
+  "raw_path": "data/raw/hc/2015/62d0de04e28650d68223ae5c98c19f93d3ac138d01a0cbb4640ba4f8e28ffeed.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 9,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2015-lpasw-208-2004-jkhc020055652004-1-2015-03-31.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-jkl-2015-lpasw-208-2004-jkhc020055652004-1-2015-03-31",
+  "doc_type": "judgment",
+  "title": "LPASW/208/2004 of U.O.I. TH. MIN.OF DEFENCE AND ORS. Vs RAM PYARI",
+  "number": "LPASW/208/2004",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2015-03-31",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020055652004_1_2015-03-31.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020055652004",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "LPASW/208/2004"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "U.O.I. TH. MIN.OF DEFENCE AND ORS."
+    ],
+    "respondent": [
+      "RAM PYARI"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE BANSI LAL BHAT",
+    "HON'BLE THE CHIEF JUSTICE"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "entitlement_rules",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 19,
+    "keywords": {
+      "disability pension": 17,
+      "entitlement rules": 1,
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}
