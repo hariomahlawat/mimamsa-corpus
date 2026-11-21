@@ -1,6 +1,6 @@
 # Phase 2 report: statutes from India Code
 
-79 documents, 2998 section records, 1065 relations.
+457 documents, 2998 section records, 1665 relations.
 
 ## Acts
 
@@ -22,9 +22,17 @@
 
 | Result | Documents |
 | --- | --- |
+| needs OCR | 2 |
 | text from OCR | 4 |
-| text, ok | 73 |
+| text, ok | 449 |
 | text, suspect | 2 |
+
+### Needs OCR (no usable text layer; no text kept)
+
+| doc_id | Type | Pages | Pages without text | Title |
+| --- | --- | --- | --- | --- |
+| sc-2023-common-cause-a-regd-society-2023insc77 | judgment | 32 | 22 | COMMON CAUSE (A REGD. SOCIETY) versus UNION OF INDIA |
+| sc-2023-dr-narendra-gupta-2023insc322 | judgment | 54 | 43 | DR NARENDRA GUPTA versus UNION OF INDIA & ORS. |
 
 ### Text layer present but suspect (kept, flagged)
 
@@ -49,6 +57,15 @@
 | regs-regulations-for-the-navy-part-iii | regulations | 253 | 3 | Regulations for the Navy Part III |
 | regs-regulations-for-the-navy-part-iv | regulations | 99 | 2 | Regulations for the Navy Part IV |
 | rules-army-rules-1954 | rules | 214 | 1 | Army Rules,1954 |
+| sc-1988-kehar-singh-and-anr-etc-1988insc368 | judgment | 16 | 1 | KEHAR SINGH AND ANR. ETC. versus UNION OF INDIA & ANR. |
+| sc-1988-lt-col-k-d-gupta-1988insc113 | judgment | 10 | 1 | LT. COL. K.D. GUPTA versus UNION OF INDIA & ORS. |
+| sc-1991-lt-general-r-k-anand-1991insc344 | judgment | 8 | 1 | LT. GENERAL R.K. ANAND versus UNION OF INDIA AND ANR. |
+| sc-2008-union-of-india-ors-2008insc1279 | judgment | 24 | 1 | UNION OF INDIA & ORS. versus RAJPAL SINGH |
+| sc-2017-justice-k-s-puttaswamy-retd-an-2017insc801 | judgment | 433 | 2 | JUSTICE K S PUTTASWAMY (RETD.), AND ANR.  versus UNION OF INDIA AND OR |
+| sc-2018-justice-k-s-puttaswamy-retd-2018insc880 | judgment | 1076 | 9 | JUSTICE K. S. PUTTASWAMY (RETD.) versus UNION OF INDIA & ORS. |
+| sc-2022-cdr-amit-kumar-sharma-etc-2022insc1124 | judgment | 23 | 1 | CDR AMIT KUMAR SHARMA ETC versus UNION OF INDIA & ORS ETC |
+| sc-2023-anoop-baranwal-2023insc190 | judgment | 245 | 8 | ANOOP BARANWAL versus UNION OF INDIA |
+| sc-2023-vivek-narayan-sharma-2023insc2 | judgment | 230 | 6 | VIVEK NARAYAN SHARMA versus UNION OF INDIA |
 
 ### Read by OCR
 
@@ -147,11 +164,12 @@ Only judgments about the armed forces are kept. Cases are pre-selected from the 
 
 | Court | Relevant | Borderline | Not checked (no text) | Removed as not military |
 | --- | --- | --- | --- | --- |
-| High Court of Delhi | 4 | 7 | 0 | 344 |
+| High Court of Delhi | 16 | 21 | 0 | 1166 |
+| Supreme Court of India | 240 | 110 | 2 | 3566 |
 
-Most cited provisions in the kept judgments: Code of Criminal Procedure 1973 s.144 (1); Armed Forces Tribunal Act 2007 s.3 (1); Air Force Act 1950 s.92 (1); Army Act 1950 s.26 (1).
+Most cited provisions in the kept judgments: Army Act 1950 s.164 (23); Army Act 1950 s.69 (12); Indian Penal Code 1860 s.302 (11); Armed Forces Tribunal Act 2007 s.30 (11); Army Act 1950 s.63 (10); Army Act 1950 s.122 (9); Army Act 1950 s.39 (9); Armed Forces Tribunal Act 2007 s.14 (9); Army Act 1950 s.125 (9); Army Act 1950 s.165 (9); Army Act 1950 s.19 (9); Armed Forces Tribunal Act 2007 s.3 (8).
 
-Kept judgments by year decided: 2023: 11.
+Kept judgments by year decided: 1952: 1, 1954: 2, 1957: 5, 1959: 2, 1961: 4, 1968: 2, 1971: 2, 1972: 4, 1975: 2, 1977: 2, 1978: 1, 1979: 2, 1980: 5, 1981: 4, 1982: 4, 1983: 1, 1984: 1, 1985: 3, 1986: 3, 1987: 6, 1988: 3, 1989: 3, 1990: 3, 1991: 6, 1992: 2, 1993: 2, 1994: 6, 1995: 3, 1996: 8, 1997: 4, 1998: 3, 1999: 4, 2000: 3, 2001: 4, 2002: 2, 2003: 6, 2004: 3, 2005: 3, 2006: 7, 2007: 12, 2008: 9, 2009: 5, 2010: 13, 2011: 9, 2012: 6, 2013: 7, 2014: 7, 2015: 14, 2016: 7, 2017: 16, 2018: 20, 2019: 27, 2020: 8, 2021: 12, 2022: 11, 2023: 55, 2024: 12, 2025: 4, 2026: 4.
 
 ## Correspondence tables (new code <-> old code)
 
