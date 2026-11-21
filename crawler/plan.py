@@ -71,18 +71,19 @@ def config_planner(cfg: Config, db: StateDB, name: str) -> list[PlannedItem]:
 
     for key in ("seeds", "benches"):
         for s in src.get(key, []) or []:
-            url = s.get("url")
             notes = ["verify: true"] if s.get("verify") else []
-            if not url:
-                items.append(PlannedItem("seed", title=s.get("name") or s.get("key"), url=None,
-                                         action="skip: no URL configured", notes=notes))
+            label = s.get("name") or s.get("key")
+            urls = list(s.get("listing_urls") or ([s["url"]] if s.get("url") else []))
+            if not urls:
+                items.append(PlannedItem("seed", title=label, url=None,
+                                         action="skip: no listing address configured", notes=notes))
                 continue
-            ok, why = cfg.is_url_allowed(name, url)
-            st = _url_state(db, url)
-            action = ("refuse: " + why) if not ok else (
-                "fetch listing" if st in (None, "queued") else f"none ({st})")
-            items.append(PlannedItem("seed", title=s.get("name") or s.get("key"), url=url, state=st,
-                                     action=action, notes=notes))
+            for url in urls:
+                ok, why = cfg.is_url_allowed(name, url)
+                st = _url_state(db, url)
+                action = ("refuse: " + why) if not ok else (
+                    "fetch listing" if st in (None, "queued") else f"none ({st})")
+                items.append(PlannedItem("seed", title=label, url=url, state=st, action=action, notes=notes))
 
     for key in ("targets", "also_search"):
         for t in src.get(key, []) or []:

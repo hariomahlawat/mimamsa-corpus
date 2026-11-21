@@ -225,7 +225,7 @@ def test_dry_run_all_includes_disabled_and_flags_heavy(tmp_path, no_network, cap
     out = json.loads(capsys.readouterr().out)
     aft = [s for s in out["sources"] if s["name"] == "aft"][0]
     assert aft["enabled"] is False and aft["heavy"] is True
-    assert any(i["action"] == "skip: no URL configured" for i in aft["items"])
+    assert any(i["action"] == "skip: no listing address configured" for i in aft["items"])
 
 
 def test_unknown_source_is_rejected(tmp_path, capsys):
