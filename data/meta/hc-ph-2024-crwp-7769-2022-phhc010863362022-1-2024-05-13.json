@@ -1,0 +1,135 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=3_22/bench=phhc/PHHC010863362022_1_2024-05-13.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T20:25:03+00:00",
+  "sha256": "02389db3e96899c91178b7d91e2ee9d41602adfd9c35154c75c8ba87b366312d",
+  "raw_path": "data/raw/hc/2024/02389db3e96899c91178b7d91e2ee9d41602adfd9c35154c75c8ba87b366312d.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2024-crwp-7769-2022-phhc010863362022-1-2024-05-13.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2024-crwp-7769-2022-phhc010863362022-1-2024-05-13",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s69",
+      "target_ref_raw": "Section 69 of the Army Act",
+      "effective_date": null,
+      "evidence": ":25 I attest to the accuracy and authenticity of this document/judgment High Court, Chandigarh CRWP-7769-2022 2 2. The petitioner was convicted under Section 69 of the Army Act, and vide order of sentence dated 20.07.2016 (Annexure A-4A), he was sentenced to undergo life imprisonment. 3. Custody certificate dated 06.05.2024",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2024-crwp-7769-2022-phhc010863362022-1-2024-05-13",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s15",
+      "target_ref_raw": "Section 15 (6) (e) of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "in the nature of Mandamus for directing the respondents to grant the concession of suspension of sentence and to enlarge the petitioner to bail under Section 15 (6) (e) of the Armed Forces Tribunal Act, 2007 read with Section 389 of the Code of Criminal Procedure during the pendency of the appeal. HIMANI GUPTA 2024.05.17 14:25 I attest to the accuracy and",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2024-crwp-7769-2022-phhc010863362022-1-2024-05-13",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s389",
+      "target_ref_raw": "Section 389 of the Code of Criminal Procedure",
+      "effective_date": null,
+      "evidence": "concession of suspension of sentence and to enlarge the petitioner to bail under Section 15 (6) (e) of the Armed Forces Tribunal Act, 2007 read with Section 389 of the Code of Criminal Procedure during the pendency of the appeal. HIMANI GUPTA 2024.05.17 14:25 I attest to the accuracy and authenticity of this document/judgment High Court, Chan",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2024-crwp-7769-2022-phhc010863362022-1-2024-05-13",
+  "doc_type": "judgment",
+  "title": "CRWP/7769/2022 of EX. LANCE DAFADAR NARINDER SINGH, ARMY NO. 1548244N Vs CENTRAL GOVERNMENT AND OTHERS",
+  "number": "CRWP/7769/2022",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2024-05-13",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010863362022_1_2024-05-13.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010863362022",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CRWP/7769/2022"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "EX. LANCE DAFADAR NARINDER SINGH, ARMY NO. 1548244N"
+    ],
+    "respondent": [
+      "CENTRAL GOVERNMENT AND OTHERS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE SUDHIR SINGH",
+    "MR. JUSTICE HARSH BUNGER"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "69",
+      "raw": "Section 69 of the Army Act"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "15",
+      "raw": "Section 15 (6) (e) of the Armed Forces Tribunal Act, 2007"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "389",
+      "raw": "Section 389 of the Code of Criminal Procedure"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "army act": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

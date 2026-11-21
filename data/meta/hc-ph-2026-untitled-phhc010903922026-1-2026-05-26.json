@@ -1,0 +1,79 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=3_22/bench=phhc/PHHC010903922026_1_2026-05-26.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T20:11:55+00:00",
+  "sha256": "cbc9e6068775a6a7083c9767c1f38329ea12a3d7cfded50b3079a8ced40161c5",
+  "raw_path": "data/raw/hc/2026/cbc9e6068775a6a7083c9767c1f38329ea12a3d7cfded50b3079a8ced40161c5.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": null,
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": null,
+  "text_quality": null,
+  "needs_ocr": true,
+  "pages_without_text": [
+    1
+  ],
+  "relations": [],
+  "doc_id": "hc-ph-2026-untitled-phhc010903922026-1-2026-05-26",
+  "doc_type": "judgment",
+  "title": "/16915/2026 of PARAMJIT SINGH Vs SECRETARY GOVT OF INDIA MINISTRY OF DEFENCE",
+  "number": null,
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2026-05-26",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010903922026_1_2026-05-26.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010903922026",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "/16915/2026 of PARAMJIT SINGH"
+    ],
+    "respondent": [
+      "SECRETARY GOVT OF INDIA MINISTRY OF DEFENCE"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE HARSH BUNGER"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "not_checked",
+    "hits": 0,
+    "keywords": {},
+    "note": "no extracted text (needs OCR or not yet extracted)"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule"
+  }
+}

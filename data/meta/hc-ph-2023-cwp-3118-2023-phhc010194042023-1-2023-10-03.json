@@ -1,0 +1,188 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=3_22/bench=phhc/PHHC010194042023_1_2023-10-03.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T20:28:05+00:00",
+  "sha256": "bdcc30e45cea292770eadf30ebe4034ab0bb6fbd5baf7b102b0a97ae73ab2122",
+  "raw_path": "data/raw/hc/2023/bdcc30e45cea292770eadf30ebe4034ab0bb6fbd5baf7b102b0a97ae73ab2122.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 22,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2023-cwp-3118-2023-phhc010194042023-1-2023-10-03.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2023-cwp-3118-2023-phhc010194042023-1-2023-10-03",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s18",
+      "target_ref_raw": "section 18 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "the punishment of dismissal is awarded; (iv) any other matter, whatsoever, but shall not include service matters relating to— (i) orders issued under section 18 of the Army Act, 1950 (46 of 1950), sub-section (1) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950 (45 of 1950); and (ii) trans",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2023-cwp-3118-2023-phhc010194042023-1-2023-10-03",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s19",
+      "target_ref_raw": "Section 19 of Army Act",
+      "effective_date": null,
+      "evidence": "\u0013\u0014\u0015\u0016\u0017 \u0018\u0013\u0011\u0011\u0016\u0018\u0014\u0016\u0012 \u0018\u0010\u0019\u0016\u0019\u001a \u0004\u00063\u0004 \b \b\u0005\u001b\u0003 \u0001\u001b\u0006\b \u0007\u0005 Central Government and officers of Army have power to dismiss or remove from service. The marginal note of Section 19 of Army Act has used expression ‘termination of service' and in the body of section, expression ‘dismissal and removal from service’ has been used. Similarly, as",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2023-cwp-3118-2023-phhc010194042023-1-2023-10-03",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s84",
+      "target_ref_raw": "Section 84 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "le before Armed Forces Tribunal constituted under the Act. In view of above, keeping in view statutory mandate as well as the provisions contained in Section 84 of the Army Act, 1950, the punishment of \"severe reprimand\" shall be deemed to be a punishment and fall under the category of \"service matter\" as defined by Section 3 of t",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2023-cwp-3118-2023-phhc010194042023-1-2023-10-03",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s18",
+      "target_ref_raw": "section 18 of the Air Force Act, 1950",
+      "effective_date": null,
+      "evidence": "ating to— (i) orders issued under section 18 of the Army Act, 1950 (46 of 1950), sub-section (1) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950 (45 of 1950); and (ii) transfers and postings including the change of place or unit on posting whether individually or as a part of unit, formation o",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2023-cwp-3118-2023-phhc010194042023-1-2023-10-03",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s15",
+      "target_ref_raw": "section 15 of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "tsoever, but shall not include service matters relating to— (i) orders issued under section 18 of the Army Act, 1950 (46 of 1950), sub-section (1) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950 (45 of 1950); and (ii) transfers and postings including the change of place or unit on posting",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2023-cwp-3118-2023-phhc010194042023-1-2023-10-03",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s3",
+      "target_ref_raw": "Section 3(o) of the AFT Act",
+      "effective_date": null,
+      "evidence": "r the parties, the first and the foremost issue that needs to be decided is whether the present petition is not maintainable in this Court in view of Section 3(o) of the AFT Act, as it is the submission of Ms. Babbar that the issue herein relates to a service matter that too concerning persons subject to Army Act where the pu",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2023-cwp-3118-2023-phhc010194042023-1-2023-10-03",
+  "doc_type": "judgment",
+  "title": "CWP/3118/2023 of NK SANTOSH LOHAR Vs UNION OF INDIA AND ORS.",
+  "number": "CWP/3118/2023",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2023-10-03",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010194042023_1_2023-10-03.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010194042023",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/3118/2023"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "NK SANTOSH LOHAR"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE JAGMOHAN BANSAL"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "18",
+      "raw": "section 18 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "19",
+      "raw": "Section 19 of Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "84",
+      "raw": "Section 84 of the Army Act, 1950"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "18",
+      "raw": "section 18 of the Air Force Act, 1950"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "15",
+      "raw": "section 15 of the Navy Act, 1957"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "3",
+      "raw": "Section 3(o) of the AFT Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 58,
+    "keywords": {
+      "army act": 12,
+      "air force act": 3,
+      "navy act": 4,
+      "armed forces tribunal": 3,
+      "court martial": 36
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

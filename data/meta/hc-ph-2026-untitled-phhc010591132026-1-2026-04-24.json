@@ -1,0 +1,83 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=3_22/bench=phhc/PHHC010591132026_1_2026-04-24.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T20:13:10+00:00",
+  "sha256": "d89864faf0541a4d4502c14738a35bbada9a377e688e7a87064853939cc48f5b",
+  "raw_path": "data/raw/hc/2026/d89864faf0541a4d4502c14738a35bbada9a377e688e7a87064853939cc48f5b.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 8,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2026-untitled-phhc010591132026-1-2026-04-24.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-ph-2026-untitled-phhc010591132026-1-2026-04-24",
+  "doc_type": "judgment",
+  "title": "RA-CW/184/2026 of UNION OF INDIA Vs ARMED FORCE TRIBUNAL",
+  "number": null,
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2026-04-24",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010591132026_1_2026-04-24.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010591132026",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "RA-CW/184/2026 of UNION OF INDIA"
+    ],
+    "respondent": [
+      "ARMED FORCE TRIBUNAL"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE HARSIMRAN SINGH SETHI",
+    "MRS. JUSTICE SUDEEPTI SHARMA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "disability pension": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

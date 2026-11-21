@@ -1,0 +1,81 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=3_22/bench=phhc/PHHC011228372025_1_2025-08-11.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T20:20:01+00:00",
+  "sha256": "4a26f40e7558644741b5f67f1a67125212adafebd00df050e9950a0cecb4358e",
+  "raw_path": "data/raw/hc/2025/4a26f40e7558644741b5f67f1a67125212adafebd00df050e9950a0cecb4358e.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": null,
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": null,
+  "text_quality": null,
+  "needs_ocr": true,
+  "pages_without_text": [
+    1
+  ],
+  "relations": [],
+  "doc_id": "hc-ph-2025-cwp-23057-2025-phhc011228372025-1-2025-08-11",
+  "doc_type": "judgment",
+  "title": "CWP/23057/2025 of MANJU RANI Vs UNION OF INDIA AND OTHERS",
+  "number": "CWP/23057/2025",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2025-08-11",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC011228372025_1_2025-08-11.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC011228372025",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/23057/2025"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MANJU RANI"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE TRIBHUVAN DAHIYA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "not_checked",
+    "hits": 0,
+    "keywords": {},
+    "note": "no extracted text (needs OCR or not yet extracted)"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule"
+  }
+}

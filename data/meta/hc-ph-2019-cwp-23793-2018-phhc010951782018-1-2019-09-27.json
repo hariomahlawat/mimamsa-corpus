@@ -1,0 +1,105 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/court=3_22/bench=phhc/PHHC010951782018_1_2019-09-27.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T20:39:53+00:00",
+  "sha256": "0091558ce2fe32d7f6dae7a6d17014df76f085a8fdc41934d5a551138c6189f9",
+  "raw_path": "data/raw/hc/2019/0091558ce2fe32d7f6dae7a6d17014df76f085a8fdc41934d5a551138c6189f9.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2019-cwp-23793-2018-phhc010951782018-1-2019-09-27.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2019-cwp-23793-2018-phhc010951782018-1-2019-09-27",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s179",
+      "target_ref_raw": "Section 179 of Army Act, 1950",
+      "effective_date": null,
+      "evidence": "for pre-mature Pankaj Kakkar 2019.09.27 16:39 I attest to the accuracy and integrity of this document ( 3 ) CWP-23793-2018 (O&M) release in terms of Section 179 of Army Act, 1950. The needful shall be done by the authorities concerned. The petition stands disposed of accordingly. 27.9.2019 ( Gurvinder Singh Gill ) pankaj Judge",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2019-cwp-23793-2018-phhc010951782018-1-2019-09-27",
+  "doc_type": "judgment",
+  "title": "CWP/23793/2018 of SHINDER SINGH Vs UNION OF INDIA AND OTHERS",
+  "number": "CWP/23793/2018",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2019-09-27",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010951782018_1_2019-09-27.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010951782018",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/23793/2018"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SHINDER SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE GURVINDER SINGH GILL"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "179",
+      "raw": "Section 179 of Army Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 3,
+    "keywords": {
+      "army act": 1,
+      "court martial": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

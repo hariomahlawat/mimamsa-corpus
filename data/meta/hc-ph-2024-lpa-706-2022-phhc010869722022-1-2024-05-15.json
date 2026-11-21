@@ -1,0 +1,82 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=3_22/bench=phhc/PHHC010869722022_1_2024-05-15.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T20:24:13+00:00",
+  "sha256": "ef7f1e0c9b6ed8cea70718e6991d7f254fb9ed8fe39204153dd23112983598b3",
+  "raw_path": "data/raw/hc/2024/ef7f1e0c9b6ed8cea70718e6991d7f254fb9ed8fe39204153dd23112983598b3.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": null,
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": null,
+  "text_quality": null,
+  "needs_ocr": true,
+  "pages_without_text": [
+    1
+  ],
+  "relations": [],
+  "doc_id": "hc-ph-2024-lpa-706-2022-phhc010869722022-1-2024-05-15",
+  "doc_type": "judgment",
+  "title": "LPA/706/2022 of RAMJAN Vs UNION OF INDIA AND ORS",
+  "number": "LPA/706/2022",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2024-05-15",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010869722022_1_2024-05-15.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010869722022",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "LPA/706/2022"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "RAMJAN"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE DEEPAK SIBAL",
+    "MR. JUSTICE DEEPAK MANCHANDA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "not_checked",
+    "hits": 0,
+    "keywords": {},
+    "note": "no extracted text (needs OCR or not yet extracted)"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule"
+  }
+}

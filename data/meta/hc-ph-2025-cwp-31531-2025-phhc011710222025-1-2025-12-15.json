@@ -1,0 +1,81 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=3_22/bench=phhc/PHHC011710222025_1_2025-12-15.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T20:19:12+00:00",
+  "sha256": "e0030ae4065bad15dc1a4d04d0dda9052dd062cf488d03df32e8d2518d267432",
+  "raw_path": "data/raw/hc/2025/e0030ae4065bad15dc1a4d04d0dda9052dd062cf488d03df32e8d2518d267432.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": null,
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": null,
+  "text_quality": null,
+  "needs_ocr": true,
+  "pages_without_text": [
+    1
+  ],
+  "relations": [],
+  "doc_id": "hc-ph-2025-cwp-31531-2025-phhc011710222025-1-2025-12-15",
+  "doc_type": "judgment",
+  "title": "CWP/31531/2025 of HARJIT SINGH  ALIAS HARJEET SINGH Vs UNION OF INDIA AND OTHERS",
+  "number": "CWP/31531/2025",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2025-12-15",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC011710222025_1_2025-12-15.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC011710222025",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/31531/2025"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "HARJIT SINGH  ALIAS HARJEET SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE HARSH BUNGER"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "not_checked",
+    "hits": 0,
+    "keywords": {},
+    "note": "no extracted text (needs OCR or not yet extracted)"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule"
+  }
+}

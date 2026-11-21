@@ -1,0 +1,89 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=3_22/bench=phhc/PHHC011079752025_1_2025-07-18.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T20:18:43+00:00",
+  "sha256": "78192e4619f20ae3dc18e863eb7523a152c11d77f752db6b5190339414f2d202",
+  "raw_path": "data/raw/hc/2025/78192e4619f20ae3dc18e863eb7523a152c11d77f752db6b5190339414f2d202.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2025-cwp-19834-2025-phhc011079752025-1-2025-07-18.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-ph-2025-cwp-19834-2025-phhc011079752025-1-2025-07-18",
+  "doc_type": "judgment",
+  "title": "CWP/19834/2025 of UNION OF INDIA AND ORS Vs BALDEV SINGH BHANDULA AND ANR",
+  "number": "CWP/19834/2025",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2025-07-18",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC011079752025_1_2025-07-18.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC011079752025",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/19834/2025"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA AND ORS"
+    ],
+    "respondent": [
+      "BALDEV SINGH BHANDULA AND ANR"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE ANUPINDER SINGH GREWAL",
+    "MR. JUSTICE DEEPAK MANCHANDA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 8,
+    "keywords": {
+      "disability pension": 5,
+      "invalided": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

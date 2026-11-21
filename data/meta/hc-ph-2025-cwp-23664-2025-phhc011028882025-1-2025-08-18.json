@@ -1,0 +1,89 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=3_22/bench=phhc/PHHC011028882025_1_2025-08-18.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T20:17:13+00:00",
+  "sha256": "32f80f1e466c2d5d5ad2e710404a9af334583671896d8e409e2de072df9c0cbc",
+  "raw_path": "data/raw/hc/2025/32f80f1e466c2d5d5ad2e710404a9af334583671896d8e409e2de072df9c0cbc.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2025-cwp-23664-2025-phhc011028882025-1-2025-08-18.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-ph-2025-cwp-23664-2025-phhc011028882025-1-2025-08-18",
+  "doc_type": "judgment",
+  "title": "CWP/23664/2025 of UNION OF INDIA AND OTHERS Vs NO 15118869 M HAV PURAN CHAND AND ANOTHER",
+  "number": "CWP/23664/2025",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2025-08-18",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC011028882025_1_2025-08-18.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC011028882025",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/23664/2025"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA AND OTHERS"
+    ],
+    "respondent": [
+      "NO 15118869 M HAV PURAN CHAND AND ANOTHER"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE HARSIMRAN SINGH SETHI",
+    "MR. JUSTICE VIKAS SURI"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "entitlement_rules"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 7,
+    "keywords": {
+      "disability pension": 6,
+      "entitlement rules": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=3_22/bench=phhc/PHHC011766962024_1_2025-09-15.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T20:16:24+00:00",
+  "sha256": "5c219310f40febca5ffef7c18cf4d32b0edbfc074bfb212016295cf41e882afb",
+  "raw_path": "data/raw/hc/2025/5c219310f40febca5ffef7c18cf4d32b0edbfc074bfb212016295cf41e882afb.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2025-cwp-34458-2024-phhc011766962024-1-2025-09-15.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-ph-2025-cwp-34458-2024-phhc011766962024-1-2025-09-15",
+  "doc_type": "judgment",
+  "title": "CWP/34458/2024 of UNION OF INDIA AND OTHERS Vs NO 04449070P EX HAV DHARAM SINGH AND ANOTHER",
+  "number": "CWP/34458/2024",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2025-09-15",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC011766962024_1_2025-09-15.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC011766962024",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/34458/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA AND OTHERS"
+    ],
+    "respondent": [
+      "NO 04449070P EX HAV DHARAM SINGH AND ANOTHER"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE HARSIMRAN SINGH SETHI",
+    "MR. JUSTICE VIKAS SURI"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 9,
+    "keywords": {
+      "disability pension": 9
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

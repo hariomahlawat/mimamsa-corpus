@@ -1,0 +1,87 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=3_22/bench=phhc/PHHC011665212024_1_2025-11-18.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T20:17:44+00:00",
+  "sha256": "407f0d2d729dc22c2bc228c3927ca45ae9f467840c669f9d359a352744bb875f",
+  "raw_path": "data/raw/hc/2025/407f0d2d729dc22c2bc228c3927ca45ae9f467840c669f9d359a352744bb875f.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2025-cwp-32224-2024-phhc011665212024-1-2025-11-18.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-ph-2025-cwp-32224-2024-phhc011665212024-1-2025-11-18",
+  "doc_type": "judgment",
+  "title": "CWP/32224/2024 of UNION OF INDIA AND OTHERS Vs EX CAPT USHASREE KUMAR AND ANOTHER",
+  "number": "CWP/32224/2024",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2025-11-18",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC011665212024_1_2025-11-18.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC011665212024",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/32224/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA AND OTHERS"
+    ],
+    "respondent": [
+      "EX CAPT USHASREE KUMAR AND ANOTHER"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE HARSIMRAN SINGH SETHI",
+    "MR. JUSTICE YASHVIR SINGH RATHOR"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 11,
+    "keywords": {
+      "disability pension": 11
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

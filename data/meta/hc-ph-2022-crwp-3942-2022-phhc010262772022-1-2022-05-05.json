@@ -1,0 +1,153 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2022/court=3_22/bench=phhc/PHHC010262772022_1_2022-05-05.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T20:31:59+00:00",
+  "sha256": "8846e63b0a379a0c1c19b6f2cc264aec4d80c920676106740e63959f44788004",
+  "raw_path": "data/raw/hc/2022/8846e63b0a379a0c1c19b6f2cc264aec4d80c920676106740e63959f44788004.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 4,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2022-crwp-3942-2022-phhc010262772022-1-2022-05-05.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2022-crwp-3942-2022-phhc010262772022-1-2022-05-05",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s69",
+      "target_ref_raw": "Section 69 of the Army Act",
+      "effective_date": null,
+      "evidence": "ive sentence of imprisonment, drawn against the petitioner, was also in respect of breaches being caused to certain relevant provisions, contained in Section 69 of the Army Act. The verdict of conviction, as made upon the convict-petitioner herein by the General Court Martial, and, also the consequent therewith sentence (sup",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2022-crwp-3942-2022-phhc010262772022-1-2022-05-05",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s15",
+      "target_ref_raw": "Section 15 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "ewith sentence (supra), became appealed by him, before the Armed Forces Tribunal, Chandigarh. Along with the appeal, an application constituted under Section 15 of the Armed Forces Tribunal Act, 2007 (for short 'the Act') read with Section 389 GURPREET SINGH 2022.05.07 10:57 I attest to the accuracy and authenticity of this document Chandigarh CRW",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2022-crwp-3942-2022-phhc010262772022-1-2022-05-05",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s363",
+      "target_ref_raw": "Sections 363, 354, 451, 342 of the IPC",
+      "effective_date": null,
+      "evidence": "service, became imposed upon him. The afore drawn sentence, was in respect of charges drawn against him, qua commission of offences punishable under Sections 363, 354, 451, 342 of the IPC. Moreover, the afore cumulative substantive sentence of imprisonment, drawn against the petitioner, was also in respect of breaches being caused to c",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2022-crwp-3942-2022-phhc010262772022-1-2022-05-05",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s389",
+      "target_ref_raw": "Section 389 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "f the substantive sentence of imprisonment, imposed upon the convict, and, also not does rather carry any provision, alike the mandate, as carried in Section 389 of the Cr.P.C., whereins, occurs an empowerment in the learned Appellate Court concerned, to during the pendency of the apposite appeal, rather suspend the executi",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2022-crwp-3942-2022-phhc010262772022-1-2022-05-05",
+  "doc_type": "judgment",
+  "title": "CRWP/3942/2022 of DEGALA SIVANARAYANA REDDY Vs UNION OF INDIA AND OTHERS",
+  "number": "CRWP/3942/2022",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2022-05-05",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010262772022_1_2022-05-05.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010262772022",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CRWP/3942/2022"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "DEGALA SIVANARAYANA REDDY"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE SURESHWAR THAKUR"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "69",
+      "raw": "Section 69 of the Army Act"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "15",
+      "raw": "Section 15 of the Armed Forces Tribunal Act, 2007"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "363",
+      "raw": "Sections 363, 354, 451, 342 of the IPC"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "389",
+      "raw": "Section 389 of the Cr.P.C"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 4,
+    "keywords": {
+      "army act": 1,
+      "court martial": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

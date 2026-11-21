@@ -1,0 +1,106 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=3_22/bench=phhc/PHHC010996832024_1_2024-08-20.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T20:24:49+00:00",
+  "sha256": "037da4921f587892575c1e040d7e69ea4fc0ff324a9cd7bf1146c266175ae68e",
+  "raw_path": "data/raw/hc/2024/037da4921f587892575c1e040d7e69ea4fc0ff324a9cd7bf1146c266175ae68e.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2024-cwp-19116-2024-phhc010996832024-1-2024-08-20.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2024-cwp-19116-2024-phhc010996832024-1-2024-08-20",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s31",
+      "target_ref_raw": "Section 31(1) of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "ing order:- HIMANSHU 2024.09.05 11:17 I attest to the accuracy and authenticity of this order/judgment. CWP-19116-2024 (O&M) 3 “Leave to appeal under Section 31(1) of the Armed Forces Tribunal Act, 2007 is granted. Delay condoned. We are not inclined to interfere with the impugned order and hence, the appeal is dismissed. We must observe and express",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2024-cwp-19116-2024-phhc010996832024-1-2024-08-20",
+  "doc_type": "judgment",
+  "title": "CWP/19116/2024 of UNION OF INDIA AND OTHERS Vs NO 14474409A EX NAIK AZAD SINGH",
+  "number": "CWP/19116/2024",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2024-08-20",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010996832024_1_2024-08-20.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010996832024",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/19116/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA AND OTHERS"
+    ],
+    "respondent": [
+      "NO 14474409A EX NAIK AZAD SINGH"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE SUDHIR SINGH",
+    "MR. JUSTICE KARAMJIT SINGH"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "31",
+      "raw": "Section 31(1) of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 13,
+    "keywords": {
+      "armed forces tribunal": 5,
+      "disability pension": 8
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

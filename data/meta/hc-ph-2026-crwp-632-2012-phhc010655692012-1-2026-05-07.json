@@ -1,0 +1,87 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=3_22/bench=phhc/PHHC010655692012_1_2026-05-07.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T20:13:19+00:00",
+  "sha256": "ced48d219bcbf8c06a74fa72dd1d338022c7a9f5d3fdca5740e02e260ab24dea",
+  "raw_path": "data/raw/hc/2026/ced48d219bcbf8c06a74fa72dd1d338022c7a9f5d3fdca5740e02e260ab24dea.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2026-crwp-632-2012-phhc010655692012-1-2026-05-07.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-ph-2026-crwp-632-2012-phhc010655692012-1-2026-05-07",
+  "doc_type": "judgment",
+  "title": "CRWP/632/2012 of YEVALE ASHRU RAOSAHEB Vs UNION OF INDIA & ORS.",
+  "number": "CRWP/632/2012",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2026-05-07",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010655692012_1_2026-05-07.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010655692012",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CRWP/632/2012"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "YEVALE ASHRU RAOSAHEB"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE HARSIMRAN SINGH SETHI",
+    "MR. JUSTICE DEEPAK MANCHANDA"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 14,
+    "keywords": {
+      "court martial": 14
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

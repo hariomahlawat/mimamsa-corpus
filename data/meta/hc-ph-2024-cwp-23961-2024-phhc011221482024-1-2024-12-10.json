@@ -1,0 +1,87 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=3_22/bench=phhc/PHHC011221482024_1_2024-12-10.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T20:22:15+00:00",
+  "sha256": "d19fc96f6e9b89f65d2ad52917d4ca74ac28f8cce39b5e9708e8c675d579dab0",
+  "raw_path": "data/raw/hc/2024/d19fc96f6e9b89f65d2ad52917d4ca74ac28f8cce39b5e9708e8c675d579dab0.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 8,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2024-cwp-23961-2024-phhc011221482024-1-2024-12-10.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-ph-2024-cwp-23961-2024-phhc011221482024-1-2024-12-10",
+  "doc_type": "judgment",
+  "title": "CWP/23961/2024 of UNION OF INDIA AND OTHERS Vs JHARMAL SINGH AND ANOTHER",
+  "number": "CWP/23961/2024",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2024-12-10",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC011221482024_1_2024-12-10.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC011221482024",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/23961/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA AND OTHERS"
+    ],
+    "respondent": [
+      "JHARMAL SINGH AND ANOTHER"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE SURESHWAR THAKUR",
+    "MRS. JUSTICE SUDEEPTI SHARMA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 10,
+    "keywords": {
+      "disability pension": 10
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=3_22/bench=phhc/PHHC010697472021_1_2023-11-09.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T20:27:05+00:00",
+  "sha256": "95639897d7e792627258305300471cab473468ccaae10a0412002bbabb07b793",
+  "raw_path": "data/raw/hc/2023/95639897d7e792627258305300471cab473468ccaae10a0412002bbabb07b793.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2023-cwp-15107-2021-phhc010697472021-1-2023-11-09.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-ph-2023-cwp-15107-2021-phhc010697472021-1-2023-11-09",
+  "doc_type": "judgment",
+  "title": "CWP/15107/2021 of DEVRAJAN P.D GS 171759M MT DVR GRADE-I Vs UNION OF INDIA AND ORS",
+  "number": "CWP/15107/2021",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2023-11-09",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010697472021_1_2023-11-09.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010697472021",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/15107/2021"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "DEVRAJAN P.D GS 171759M MT DVR GRADE-I"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE JAGMOHAN BANSAL"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "disability pension": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}
