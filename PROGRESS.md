@@ -1,5 +1,21 @@
 # Progress
 
+## 2026-11-21 — India Code download run (approved): all 75 queued files fetched
+
+- Run 20261121T143022Z-0c8b86: 76 requests, 74 new files, 1 duplicate (same bytes under two
+  addresses, kept once with an alias), 0 failed, 0 skipped. 240 MB in this run.
+- India Code total now: 82 documents queued and fetched, 81 files on disk, 246 MB, for 8 Acts:
+  Army, Air Force, Navy, AFT, Army & Air Force (Disposal of Private Property), BNS, BNSS, BSA.
+  Per Act: English text (tagged with the doc_id), a second file (Hindi, by file name), every
+  linked rule / regulation / schedule / notification / order / amendment-Act file, and the JSON pages
+  of section records.
+- 57 PDFs differ from the MD5 in the site's listing (expected: download watermark).
+- Largest files: BNSS second file 76.5 MB, AFT Procedure Rules 2008 46.8 MB, BNS second file 41 MB.
+  The second files of BNS/BNSS/BSA do not follow the a…/h… naming, so their language is unconfirmed.
+- Raw files are NOT in git and live only in this cloud container (data/raw/indiacode/). The crawl
+  state (state/crawl.sqlite) is also local. Re-running `discover` + `fetch` on another machine
+  reproduces them.
+
 ## 2026-11-21 — India Code works end to end against the live site (Phase 1 step 3 done for real)
 
 What was found
