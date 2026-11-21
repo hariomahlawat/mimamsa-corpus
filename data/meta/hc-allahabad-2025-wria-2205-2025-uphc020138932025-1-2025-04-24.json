@@ -1,0 +1,91 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=9_13/bench=cishclko/UPHC020138932025_1_2025-04-24.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:07:43+00:00",
+  "sha256": "f756147c4a13b4bedf3b6a2070f64ad394d901cb7c1f9068d7763da59f0421a8",
+  "raw_path": "data/raw/hc/2025/f756147c4a13b4bedf3b6a2070f64ad394d901cb7c1f9068d7763da59f0421a8.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 10,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2025-wria-2205-2025-uphc020138932025-1-2025-04-24.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-allahabad-2025-wria-2205-2025-uphc020138932025-1-2025-04-24",
+  "doc_type": "judgment",
+  "title": "WRIA/2205/2025 of SERVICE NO. SS-41331W CAPT. VIRAJ SINGH CHAUDHARY (RETD) Vs ARMED FORCES TRIBUNAL REGIONAL BENCH LKO. THRU. ITS REGISTRAR AND 2 OTHERS",
+  "number": "WRIA/2205/2025",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2025-04-24",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC020138932025_1_2025-04-24.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC020138932025",
+    "collection": "cishclko",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WRIA/2205/2025"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SERVICE NO. SS-41331W CAPT. VIRAJ SINGH CHAUDHARY (RETD)"
+    ],
+    "respondent": [
+      "ARMED FORCES TRIBUNAL REGIONAL BENCH LKO. THRU. ITS REGISTRAR AND 2 OTHERS"
+    ]
+  },
+  "judges": [
+    "ATTAU RAHMAN MASOODI",
+    "AJAI KUMAR SRIVASTAVA-I"
+  ],
+  "outcome": "partly_allowed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "invalidment",
+    "medical_board"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 5,
+    "keywords": {
+      "disability pension": 3,
+      "invalided": 1,
+      "release medical board": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

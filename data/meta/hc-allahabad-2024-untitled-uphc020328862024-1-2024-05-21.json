@@ -1,0 +1,101 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=9_13/bench=cishclko/UPHC020328862024_1_2024-05-21.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:10:26+00:00",
+  "sha256": "ff9cbe2c0f77ff2587626931fc3670a43fb28fd7df8020e12e2a12763584204e",
+  "raw_path": "data/raw/hc/2024/ff9cbe2c0f77ff2587626931fc3670a43fb28fd7df8020e12e2a12763584204e.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2024-untitled-uphc020328862024-1-2024-05-21.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2024-untitled-uphc020328862024-1-2024-05-21",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s63",
+      "target_ref_raw": "Section 63 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "at the husband of the petitioner after being enrolled in the Indian Army on 17.08.1974 was dismissed from service on 11.03.1991 for the offence under Section 63 of the Army Act, 1950. The petitioner's husband died on 31.05.2005. There is nothing on record to show that at any point of time the husband of the petitioner challenged h",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2024-untitled-uphc020328862024-1-2024-05-21",
+  "doc_type": "judgment",
+  "title": "/3936/2024 of SMT. VIMLA PANDEY Vs UNION OF INDIA THRU. SECY. MIN. OF DEF. ,  NEW DELHI AND OTHERS",
+  "number": null,
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2024-05-21",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC020328862024_1_2024-05-21.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC020328862024",
+    "collection": "cishclko",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "/3936/2024 of SMT. VIMLA PANDEY"
+    ],
+    "respondent": [
+      "UNION OF INDIA THRU. SECY. MIN. OF DEF. ,  NEW DELHI AND OTHERS"
+    ]
+  },
+  "judges": [
+    "RAJAN ROY",
+    "OM PRAKASH SHUKLA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "63",
+      "raw": "Section 63 of the Army Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "army act": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

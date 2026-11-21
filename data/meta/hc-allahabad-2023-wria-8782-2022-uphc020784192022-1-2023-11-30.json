@@ -1,0 +1,265 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=9_13/bench=cishclko/UPHC020784192022_1_2023-11-30.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:17:16+00:00",
+  "sha256": "a7a85a795e301efa1dac80473fc94819d79c92dc83b6eeaeadf5e57686eca9bc",
+  "raw_path": "data/raw/hc/2023/a7a85a795e301efa1dac80473fc94819d79c92dc83b6eeaeadf5e57686eca9bc.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 33,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2023-wria-8782-2022-uphc020784192022-1-2023-11-30.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-wria-8782-2022-uphc020784192022-1-2023-11-30",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s18",
+      "target_ref_raw": "section 18 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "s where the punishment of dismissal is awarded; (iv) any other matter, whatsoever, but shall not include matters relating to— (i) orders issued under section 18 of the Army Act, 1950 (46 of 1950), sub-section (1) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950 (45 of1950); and (ii) transf",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-wria-8782-2022-uphc020784192022-1-2023-11-30",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s108",
+      "target_ref_raw": "Section 108 of the Army Act",
+      "effective_date": null,
+      "evidence": "martial held under the Army Act or the Navy Act including the disciplinary courts constituted under the Act or the Air Force Act, 1950. (32) However, Section 108 of the Army Act, relating to kinds of court-martial says there are four types of court-martials namely (a) general court-martial, (b) district courts-martial, (c) Su",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-wria-8782-2022-uphc020784192022-1-2023-11-30",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s18",
+      "target_ref_raw": "section 18 of the Air Force Act, 1950",
+      "effective_date": null,
+      "evidence": "ating to— (i) orders issued under section 18 of the Army Act, 1950 (46 of 1950), sub-section (1) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950 (45 of1950); and (ii) transfers and postings including the change of place or unit on posting whether individually or as a part of unit, formation or",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-wria-8782-2022-uphc020784192022-1-2023-11-30",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s60",
+      "target_ref_raw": "Sections 60 (d), 68 and 77 (2) of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "Section 14 of the Armed Forces Tribunal Act, 2007 (hereinafter referred to as “Act, 2007”) against the order of summary trial dated 23.02.2021 under Sections 60 (d), 68 and 77 (2) of the Navy Act, 1957, by which the petitioner was held guilty and sentenced to reduction in rank and to suffer deprivation of badges of good conduct, has been dismissed a",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-wria-8782-2022-uphc020784192022-1-2023-11-30",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s68",
+      "target_ref_raw": "Sections 68 and 77 (2) of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": ". He was promoted to the post of Petty Officer (GS) on 01.03.2017 and while continuing to work on the said post in Indian Navy, a summary trial under Sections 68 and 77 (2) of the Navy Act, 1957 was conducted against the petitioner for the alleged charges that unauthorized quantity of eighteen liquor bottles, which was said to be purchased by",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-wria-8782-2022-uphc020784192022-1-2023-11-30",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s23",
+      "target_ref_raw": "Section 23 of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "ank and deprivation of good conduct badges. Aggrieved by the order dated 23.02.2021, the petitioner preferred a representation dated 09.03.2021 under Section 23 of the Navy Act, 1957, however, during pendency of this representation, the petitioner was discharged from service vide order dated 02.08.2021 after completion of initial",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-wria-8782-2022-uphc020784192022-1-2023-11-30",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s81",
+      "target_ref_raw": "Section 81 of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "Shukla representing the petitioner has argued that the punishment of reduction in rank and deprivation of good conduct badges provided in Chapter IX, Section 81 of the Navy Act, 1957 is a normal incidence and condition of service. A plain reading of the provision contemplated under Section 3 (o) of the Act, 2007 reveals that servi",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-wria-8782-2022-uphc020784192022-1-2023-11-30",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s15",
+      "target_ref_raw": "section 15 of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "ter, whatsoever, but shall not include matters relating to— (i) orders issued under section 18 of the Army Act, 1950 (46 of 1950), sub-section (1) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950 (45 of1950); and (ii) transfers and postings including the change of place or unit on posting",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-wria-8782-2022-uphc020784192022-1-2023-11-30",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s14",
+      "target_ref_raw": "Section 14 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "plication No. 276 of Writ-A No. 8782 of 2022 : Ls Gi (S) Abhishek Kumar Vs. Union of India and others Page 2 of 33 2022 filed by the petitioner under Section 14 of the Armed Forces Tribunal Act, 2007 (hereinafter referred to as “Act, 2007”) against the order of summary trial dated 23.02.2021 under Sections 60 (d), 68 and 77 (2) of the Navy Act, 19",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-wria-8782-2022-uphc020784192022-1-2023-11-30",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s3",
+      "target_ref_raw": "Section 3 (o) of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "unjab and Haryana at Chandigarh, after dealing with the issue of award of punishment of ‘severe reprimand’ to an army personnel and also dealing with Section 3 (o) of the Armed Forces Tribunal Act, 2007, came to the conclusion that in view of the judgments of Allahabad High Court in Major Kunwar Ambreshwar Singh (supra) and Ex. Havildar Birendra Sing",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2023-wria-8782-2022-uphc020784192022-1-2023-11-30",
+  "doc_type": "judgment",
+  "title": "WRIA/8782/2022 of LS GI (S) ABHISHEK KUMAR Vs UNION OF INDIA THRU. SECY. MINISTRY OF DEFENCE (NAVY), NEW DELHI AND OTHERS",
+  "number": "WRIA/8782/2022",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2023-11-30",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC020784192022_1_2023-11-30.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC020784192022",
+    "collection": "cishclko",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WRIA/8782/2022"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "LS GI (S) ABHISHEK KUMAR"
+    ],
+    "respondent": [
+      "UNION OF INDIA THRU. SECY. MINISTRY OF DEFENCE (NAVY), NEW DELHI AND OTHERS"
+    ]
+  },
+  "judges": [
+    "ATTAU RAHMAN MASOODI",
+    "OM PRAKASH SHUKLA"
+  ],
+  "outcome": "partly_allowed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "18",
+      "raw": "section 18 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "108",
+      "raw": "Section 108 of the Army Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "18",
+      "raw": "section 18 of the Air Force Act, 1950"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "60",
+      "raw": "Sections 60 (d), 68 and 77 (2) of the Navy Act, 1957"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "68",
+      "raw": "Sections 68 and 77 (2) of the Navy Act, 1957"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "23",
+      "raw": "Section 23 of the Navy Act, 1957"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "81",
+      "raw": "Section 81 of the Navy Act, 1957"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "15",
+      "raw": "section 15 of the Navy Act, 1957"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "14",
+      "raw": "Section 14 of the Armed Forces Tribunal Act, 2007"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "3",
+      "raw": "Section 3 (o) of the Armed Forces Tribunal Act, 2007"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": null,
+      "raw": "Indian Penal Code"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": null,
+      "raw": "Code of Criminal Procedure, 1973"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 109,
+    "keywords": {
+      "army act": 20,
+      "air force act": 18,
+      "navy act": 22,
+      "armed forces tribunal": 2,
+      "court martial": 47
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

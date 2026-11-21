@@ -1,0 +1,102 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2020/court=9_13/bench=cisdb_16012018/UPHC010903062020_1_2020-11-04.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:29:26+00:00",
+  "sha256": "29d131b38351e432a7e9b60744008efacd01ac30ff11ab836aa513fbec2314db",
+  "raw_path": "data/raw/hc/2020/29d131b38351e432a7e9b60744008efacd01ac30ff11ab836aa513fbec2314db.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2020-capl-3600-2020-uphc010903062020-1-2020-11-04.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2020-capl-3600-2020-uphc010903062020-1-2020-11-04",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s13",
+      "target_ref_raw": "Sections 13, 14, 15, 16, 17 of Air Force Act, 1950",
+      "effective_date": null,
+      "evidence": "passed on the next date fixed.\" It appears that the applicant was initially inducted as Airman in accordance with the procedure as contemplated under Sections 13, 14, 15, 16, 17 of Air Force Act, 1950 read with Rule 7 of Air Force Rules, 1969 and his term of engagement is 20 years. His terms and conditions of service is governed by the provisions o",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2020-capl-3600-2020-uphc010903062020-1-2020-11-04",
+  "doc_type": "judgment",
+  "title": "CAPL/3600/2020 of RAHUL KUMAR Vs AIR MARSHAL R KUMAR AIR OFFICER COMMAND-IN-CHIEFING",
+  "number": "CAPL/3600/2020",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2020-11-04",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC010903062020_1_2020-11-04.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC010903062020",
+    "collection": "cisdb_16012018",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "CAPL/3600/2020"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "RAHUL KUMAR"
+    ],
+    "respondent": [
+      "AIR MARSHAL R KUMAR AIR OFFICER COMMAND-IN-CHIEFING"
+    ]
+  },
+  "judges": [
+    "MAHESH CHANDRA TRIPATHI"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "13",
+      "raw": "Sections 13, 14, 15, 16, 17 of Air Force Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "air force act": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

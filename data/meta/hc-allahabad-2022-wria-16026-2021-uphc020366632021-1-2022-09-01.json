@@ -1,0 +1,149 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2022/court=9_13/bench=cishclko/UPHC020366632021_1_2022-09-01.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:22:15+00:00",
+  "sha256": "7f40bc442c96861f805b73744b9726cf63725802efe08ce006c4de2058785511",
+  "raw_path": "data/raw/hc/2022/7f40bc442c96861f805b73744b9726cf63725802efe08ce006c4de2058785511.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 11,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2022-wria-16026-2021-uphc020366632021-1-2022-09-01.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2022-wria-16026-2021-uphc020366632021-1-2022-09-01",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s27",
+      "target_ref_raw": "Section 27 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "19 in respect of which the petitioner neither submitted Non Statutory complaint nor did he avail the remedy of statutory complaint as envisaged under Section 27 of the Army Act, 1950. The third grievance of the petitioner, which was raised by him before the Tribunal related to his non inclusion for promotion to the post of Major G",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2022-wria-16026-2021-uphc020366632021-1-2022-09-01",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s21",
+      "target_ref_raw": "Section 21 of the Army Act",
+      "effective_date": null,
+      "evidence": "otion to the post of Major General also, it is clear that the petitioner did not approach the Central Government for redressal of his grievance under Section 21 of the Army Act. 23. Accordingly, it is a case where the petitioner did not avail the remedy under the Army Act at all. 24. It is not even a case where the petitione",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2022-wria-16026-2021-uphc020366632021-1-2022-09-01",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s21",
+      "target_ref_raw": "Section 21(1) of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "tion Board held on 23.04.2021. 5. The Tribunal, while considering the Original Application, has come to the conclusion that as per the requirement of Section 21(1) of the Armed Forces Tribunal Act, 2007, since the petitioner had not exhausted the remedy available to him under the Army Act, as such, the original application could not be entertained. 6",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2022-wria-16026-2021-uphc020366632021-1-2022-09-01",
+  "doc_type": "judgment",
+  "title": "WRIA/16026/2021 of MR-05644K BRIGADIER SURAJIT BASU Vs UNION OF INDIA THRU.SECY.MINISTRY OF DEFENCE NEW DELHI and ORS",
+  "number": "WRIA/16026/2021",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2022-09-01",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC020366632021_1_2022-09-01.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC020366632021",
+    "collection": "cishclko",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WRIA/16026/2021"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MR-05644K BRIGADIER SURAJIT BASU"
+    ],
+    "respondent": [
+      "UNION OF INDIA THRU.SECY.MINISTRY OF DEFENCE NEW DELHI and ORS"
+    ]
+  },
+  "judges": [
+    "DEVENDRA KUMAR UPADHYAYA",
+    "SHREE PRAKASH SINGH"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "27",
+      "raw": "Section 27 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "21",
+      "raw": "Section 21 of the Army Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": null,
+      "raw": "Air Force Act, 1950"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": null,
+      "raw": "Navy Act, 1957"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "21",
+      "raw": "Section 21(1) of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 30,
+    "keywords": {
+      "army act": 28,
+      "air force act": 1,
+      "navy act": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

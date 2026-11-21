@@ -1,0 +1,82 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2022/court=9_13/bench=cisdb_16012018/UPHC010817702022_1_2022-05-23.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:22:07+00:00",
+  "sha256": "6cd040a6faa55d1ed17dd34d258e5e0eba62b29b324f1347aa50143f59e522f0",
+  "raw_path": "data/raw/hc/2022/6cd040a6faa55d1ed17dd34d258e5e0eba62b29b324f1347aa50143f59e522f0.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 27,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2022-wtax-760-2022-uphc010817702022-1-2022-05-23.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-allahabad-2022-wtax-760-2022-uphc010817702022-1-2022-05-23",
+  "doc_type": "judgment",
+  "title": "WTAX/760/2022 of M/S KAY PAN FRAGRANCES (P) LTD. Vs UNION OF INDIA AND 4 OTHERS",
+  "number": "WTAX/760/2022",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2022-05-22",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC010817702022_1_2022-05-23.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC010817702022",
+    "collection": "cisdb_16012018",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WTAX/760/2022"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "M/S KAY PAN FRAGRANCES (P) LTD."
+    ],
+    "respondent": [
+      "UNION OF INDIA AND 4 OTHERS"
+    ]
+  },
+  "judges": [],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "invalided": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

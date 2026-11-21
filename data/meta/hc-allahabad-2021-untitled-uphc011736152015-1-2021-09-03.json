@@ -1,0 +1,106 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2021/court=9_13/bench=cisdb_16012018/UPHC011736152015_1_2021-09-03.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:25:52+00:00",
+  "sha256": "558e36046fa37b2158ee51c14ffaf88b932f336da85cdb4c2865e0bf700f9298",
+  "raw_path": "data/raw/hc/2021/558e36046fa37b2158ee51c14ffaf88b932f336da85cdb4c2865e0bf700f9298.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2021-untitled-uphc011736152015-1-2021-09-03.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2021-untitled-uphc011736152015-1-2021-09-03",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s90",
+      "target_ref_raw": "Section 90 (I) of the Army Act",
+      "effective_date": null,
+      "evidence": "further admits that his daughter, namely, Ms. Indrani Chauhan is getting maintenance @ Rs.19,000/- per month in terms of the provisions contained in Section 90 (I) of the Army Act. 9. Thus, the moot question which is to be decided is that, whether in the light of the law laid down in case of Bhagwan Raoji Dale Vs. Sushma Alias",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2021-untitled-uphc011736152015-1-2021-09-03",
+  "doc_type": "judgment",
+  "title": "A482/11618/2015 of LT.COL.MUKUL CHAUHAN Vs STATE OF U.P. AND 3 OTHERS",
+  "number": null,
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2021-09-03",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC011736152015_1_2021-09-03.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC011736152015",
+    "collection": "cisdb_16012018",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "A482/11618/2015 of LT.COL.MUKUL CHAUHAN"
+    ],
+    "respondent": [
+      "STATE OF U.P. AND 3 OTHERS"
+    ]
+  },
+  "judges": [
+    "VIVEK AGARWAL"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "90",
+      "raw": "Section 90 (I) of the Army Act"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": null,
+      "raw": "Cr.P.C"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "army act": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

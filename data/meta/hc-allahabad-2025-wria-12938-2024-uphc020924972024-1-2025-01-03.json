@@ -1,0 +1,109 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=9_13/bench=cishclko/UPHC020924972024_1_2025-01-03.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:07:01+00:00",
+  "sha256": "894b1508f6f80f263dcf67d9a49c8c04c28a2b061515562ddf04a5889725d217",
+  "raw_path": "data/raw/hc/2025/894b1508f6f80f263dcf67d9a49c8c04c28a2b061515562ddf04a5889725d217.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 10,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2025-wria-12938-2024-uphc020924972024-1-2025-01-03.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2025-wria-12938-2024-uphc020924972024-1-2025-01-03",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s494",
+      "target_ref_raw": "Sections 494 and 495 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": ", however, triable only on a complaint made to the civil authority by an aggrieved party. The punishment for the offence of a bigamy is prescribed in Sections 494 and 495 of the Indian Penal Code, (c) When it is found, on receipt of a complaint from any source whatsoever, that any such person has gone through a ceremony of plural marriage, no",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2025-wria-12938-2024-uphc020924972024-1-2025-01-03",
+  "doc_type": "judgment",
+  "title": "WRIA/12938/2024 of SMT. PIN MAYA KUMAL Vs GOVT. OF INDIA THRU. SECY. MINISTRY OF DEFENCE ARMY AND 5 OTHERS",
+  "number": "WRIA/12938/2024",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2025-01-03",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC020924972024_1_2025-01-03.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC020924972024",
+    "collection": "cishclko",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WRIA/12938/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SMT. PIN MAYA KUMAL"
+    ],
+    "respondent": [
+      "GOVT. OF INDIA THRU. SECY. MINISTRY OF DEFENCE ARMY AND 5 OTHERS"
+    ]
+  },
+  "judges": [],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": null,
+      "raw": "Army Act"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "494",
+      "raw": "Sections 494 and 495 of the Indian Penal Code"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 3,
+    "keywords": {
+      "army act": 1,
+      "court martial": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

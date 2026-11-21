@@ -1,0 +1,82 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=9_13/bench=cisdb_16012018/UPHC016030262024_1_2025-04-01.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:04:45+00:00",
+  "sha256": "058770cc423cc15eb6891dd672cd68e0e5230a9d9cb4fc685d1eae0a5ba5734d",
+  "raw_path": "data/raw/hc/2025/058770cc423cc15eb6891dd672cd68e0e5230a9d9cb4fc685d1eae0a5ba5734d.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2025-wria-18331-2024-uphc016030262024-1-2025-04-01.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-allahabad-2025-wria-18331-2024-uphc016030262024-1-2025-04-01",
+  "doc_type": "judgment",
+  "title": "WRIA/18331/2024 of BALWANT SINGH Vs UNION OF INDIA AND 5 OTHERS",
+  "number": "WRIA/18331/2024",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2025-03-31",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC016030262024_1_2025-04-01.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC016030262024",
+    "collection": "cisdb_16012018",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WRIA/18331/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "BALWANT SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND 5 OTHERS"
+    ]
+  },
+  "judges": [],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

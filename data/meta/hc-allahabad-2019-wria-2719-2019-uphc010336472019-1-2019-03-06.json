@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/court=9_13/bench=cisdb_16012018/UPHC010336472019_1_2019-03-06.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:32:09+00:00",
+  "sha256": "d099f0ba16dc03febe25b653962baa3a12f7e3ad889e51a2b8a2b4117c0bb484",
+  "raw_path": "data/raw/hc/2019/d099f0ba16dc03febe25b653962baa3a12f7e3ad889e51a2b8a2b4117c0bb484.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 7,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2019-wria-2719-2019-uphc010336472019-1-2019-03-06.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-allahabad-2019-wria-2719-2019-uphc010336472019-1-2019-03-06",
+  "doc_type": "judgment",
+  "title": "WRIA/2719/2019 of SETU SINGH Vs UNION OF INDIA AND 4 OTHERS",
+  "number": "WRIA/2719/2019",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2019-03-06",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC010336472019_1_2019-03-06.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC010336472019",
+    "collection": "cisdb_16012018",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WRIA/2719/2019"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SETU SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND 4 OTHERS"
+    ]
+  },
+  "judges": [
+    "PANKAJ MITHAL",
+    "SAUMITRA DAYAL SINGH"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

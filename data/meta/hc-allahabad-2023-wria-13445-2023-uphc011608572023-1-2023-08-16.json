@@ -1,0 +1,156 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=9_13/bench=cisdb_16012018/UPHC011608572023_1_2023-08-16.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:14:27+00:00",
+  "sha256": "f932755e95b24f82363a888e1bda5cc1a4d4417dd3c49fbb0ca1b03f35de5356",
+  "raw_path": "data/raw/hc/2023/f932755e95b24f82363a888e1bda5cc1a4d4417dd3c49fbb0ca1b03f35de5356.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2023-wria-13445-2023-uphc011608572023-1-2023-08-16.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-wria-13445-2023-uphc011608572023-1-2023-08-16",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s18",
+      "target_ref_raw": "section 18 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "s where the punishment of dismissal is awarded; (iv) any other matter, whatsoever, but shall not include matters relating to— (i) orders issued under section 18 of the Army Act, 1950 (46 of 1950), sub- section (1) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950 (45 of 1950); and (ii) tran",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-wria-13445-2023-uphc011608572023-1-2023-08-16",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s18",
+      "target_ref_raw": "section 18 of the Air Force Act, 1950",
+      "effective_date": null,
+      "evidence": "ting to— (i) orders issued under section 18 of the Army Act, 1950 (46 of 1950), sub- section (1) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950 (45 of 1950); and (ii) transfers and postings including the change of place or unit on posting whether individually or as a part of unit, formation o",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-wria-13445-2023-uphc011608572023-1-2023-08-16",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s15",
+      "target_ref_raw": "section 15 of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "er, whatsoever, but shall not include matters relating to— (i) orders issued under section 18 of the Army Act, 1950 (46 of 1950), sub- section (1) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950 (45 of 1950); and (ii) transfers and postings including the change of place or unit on posting",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-wria-13445-2023-uphc011608572023-1-2023-08-16",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s3",
+      "target_ref_raw": "Section 3(o) of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "rs. 3. By that order, the learned Tribunal has dismissed the O.A., on merits, for the reason that the cause of action was not covered / falling under Section 3(o) of the Armed Forces Tribunal Act, 2007 (hereinafter referred to as 'the Act'). 4. Having heard the learned counsel for the parties and having perused the record, it is an undisputed fact t",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2023-wria-13445-2023-uphc011608572023-1-2023-08-16",
+  "doc_type": "judgment",
+  "title": "WRIA/13445/2023 of VIJAY KUMAR VERMA Vs UNION OF INDIA AND 6 OTHERS",
+  "number": "WRIA/13445/2023",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2023-08-16",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC011608572023_1_2023-08-16.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC011608572023",
+    "collection": "cisdb_16012018",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WRIA/13445/2023"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "VIJAY KUMAR VERMA"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND 6 OTHERS"
+    ]
+  },
+  "judges": [
+    "SAUMITRA DAYAL SINGH",
+    "ANISH KUMAR GUPTA"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "18",
+      "raw": "section 18 of the Army Act, 1950"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "18",
+      "raw": "section 18 of the Air Force Act, 1950"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "15",
+      "raw": "section 15 of the Navy Act, 1957"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "3",
+      "raw": "Section 3(o) of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 13,
+    "keywords": {
+      "army act": 3,
+      "air force act": 3,
+      "navy act": 3,
+      "court martial": 4
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

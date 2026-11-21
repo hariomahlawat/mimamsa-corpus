@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=9_13/bench=cishclko/UPHC020228272025_1_2025-04-22.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:07:34+00:00",
+  "sha256": "c7c78ab18b662691b49898a5647ce5c0b6a9fe0a3f598456479b52307332f655",
+  "raw_path": "data/raw/hc/2025/c7c78ab18b662691b49898a5647ce5c0b6a9fe0a3f598456479b52307332f655.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2025-wria-4292-2025-uphc020228272025-1-2025-04-22.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2025-wria-4292-2025-uphc020228272025-1-2025-04-22",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s192",
+      "target_ref_raw": "Section 192 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "bunal has wrongly interpreted the provision given under the Army Regulation No. 333 of the Defence Services Regulations framed under the authority of Section 192 of the Army Act, 1950. Page No. 2 of 6 6. In view of the judgments referred to above, an ex- serviceman being Gorkha may solemnize a second marriage during the subsistence",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2025-wria-4292-2025-uphc020228272025-1-2025-04-22",
+  "doc_type": "judgment",
+  "title": "WRIA/4292/2025 of SEPAWALI ALE @ SEPALI BAGALE Vs UNION OF INDIA THRU.THE SECY. MINISTRY OF DEFENSE, NEW DELHI AND 4 OTHERS",
+  "number": "WRIA/4292/2025",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2025-04-22",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC020228272025_1_2025-04-22.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC020228272025",
+    "collection": "cishclko",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WRIA/4292/2025"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SEPAWALI ALE @ SEPALI BAGALE"
+    ],
+    "respondent": [
+      "UNION OF INDIA THRU.THE SECY. MINISTRY OF DEFENSE, NEW DELHI AND 4 OTHERS"
+    ]
+  },
+  "judges": [
+    "ATTAU RAHMAN MASOODI",
+    "AJAI KUMAR SRIVASTAVA-I"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "192",
+      "raw": "Section 192 of the Army Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "army act": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

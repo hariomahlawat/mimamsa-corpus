@@ -1,0 +1,92 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2022/court=9_13/bench=cisdb_16012018/UPHC011607052006_1_2022-10-19.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:21:43+00:00",
+  "sha256": "659d74bf5e5a8f628153cd09e7b50f6469340cf313f13a12ce0fe06e4ea51d08",
+  "raw_path": "data/raw/hc/2022/659d74bf5e5a8f628153cd09e7b50f6469340cf313f13a12ce0fe06e4ea51d08.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2022-wria-17228-2006-uphc011607052006-1-2022-10-19.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-allahabad-2022-wria-17228-2006-uphc011607052006-1-2022-10-19",
+  "doc_type": "judgment",
+  "title": "WRIA/17228/2006 of KRISHNA PAL SINGH Vs UNION OF INDIA AND OTHERS",
+  "number": "WRIA/17228/2006",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2022-10-19",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC011607052006_1_2022-10-19.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC011607052006",
+    "collection": "cisdb_16012018",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WRIA/17228/2006"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "KRISHNA PAL SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "SURYA PRAKASH KESARWANI",
+    "CHANDRA KUMAR RAI"
+  ],
+  "outcome": "partly_allowed",
+  "statutes_cited": [
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": null,
+      "raw": "Indian Penal Code"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

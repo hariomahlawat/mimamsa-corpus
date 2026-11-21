@@ -1,0 +1,106 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/court=9_13/bench=cisdb_16012018/UPHC011990182009_1_2019-03-11.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:31:53+00:00",
+  "sha256": "ad63a8cc0075d69e78fd94a80ac309efb87fdbbb2bb93ee8d66dd700998bd390",
+  "raw_path": "data/raw/hc/2019/ad63a8cc0075d69e78fd94a80ac309efb87fdbbb2bb93ee8d66dd700998bd390.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2019-spla-869-2009-uphc011990182009-1-2019-03-11.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2019-spla-869-2009-uphc011990182009-1-2019-03-11",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s47",
+      "target_ref_raw": "Section 47 of Army Act, 1950",
+      "effective_date": null,
+      "evidence": "3. The appellant was posted as Platoon Constable in Training Battalian, Sikh Ligh Infantry Regimental Centre, Fatehgarh (U.P.). He was charged under Section 47 of Army Act, 1950 (hereinafter referred to as “Act, 1950”) for using criminal force to a person subject to the Act, 1950 being subordinate in rank. As a result of Summ",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2019-spla-869-2009-uphc011990182009-1-2019-03-11",
+  "doc_type": "judgment",
+  "title": "SPLA/869/2009 of DARSHAN SINGH Vs COMMANDING OFFICER TRG. BN. THE SIKH LIGHT INFATRY and ORS.",
+  "number": "SPLA/869/2009",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2019-03-11",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC011990182009_1_2019-03-11.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC011990182009",
+    "collection": "cisdb_16012018",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "SPLA/869/2009"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "DARSHAN SINGH"
+    ],
+    "respondent": [
+      "COMMANDING OFFICER TRG. BN. THE SIKH LIGHT INFATRY and ORS."
+    ]
+  },
+  "judges": [
+    "RAJENDRA KUMAR -IV",
+    "SUDHIR AGARWAL"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "47",
+      "raw": "Section 47 of Army Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 3,
+    "keywords": {
+      "army act": 1,
+      "court martial": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

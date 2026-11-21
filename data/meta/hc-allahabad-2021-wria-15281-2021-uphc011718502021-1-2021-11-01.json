@@ -1,0 +1,119 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2021/court=9_13/bench=cisdb_16012018/UPHC011718502021_1_2021-11-01.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:26:09+00:00",
+  "sha256": "d593255a6b46850f65dfb6a299352217da8e164b1c4019d011d780b34e118f5e",
+  "raw_path": "data/raw/hc/2021/d593255a6b46850f65dfb6a299352217da8e164b1c4019d011d780b34e118f5e.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 7,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2021-wria-15281-2021-uphc011718502021-1-2021-11-01.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2021-wria-15281-2021-uphc011718502021-1-2021-11-01",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s14",
+      "target_ref_raw": "Section 14 of the Armed Forces Tribunal Act 2007",
+      "effective_date": null,
+      "evidence": "g counsel. 2. Against the impugned order dated 05.02.2018 in O.A. No.160 of 2016, passed by the Armed Forces Tribunal, Regional Bench, Lucknow, under Section 14 of the Armed Forces Tribunal Act 2007, the petitioner has a right of Appeal under Section 30 of the Act before the Supreme Court. In the case of Union of India & Ors. Vs. Major General Sh",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2021-wria-15281-2021-uphc011718502021-1-2021-11-01",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s30",
+      "target_ref_raw": "Section 30 of the Armed Forces Tribunal Act",
+      "effective_date": null,
+      "evidence": "Court held as under : “33. Statutory Remedy In Union of India vs. Brigadier P.S. Gill, (2012) 4 SCC 463, this Court while dealing with appeals under Section 30 of the Armed Forces Tribunal Act following the procedure prescribed under Section 31 and its maintainability, held as follows: \"8. Section 31 of the Act extracted above specifically",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2021-wria-15281-2021-uphc011718502021-1-2021-11-01",
+  "doc_type": "judgment",
+  "title": "WRIA/15281/2021 of EX- HAV CLERK (STORES) RAM NARESH RAM Vs THE UNION OF INDIA AND 4 OTHERS",
+  "number": "WRIA/15281/2021",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2021-11-01",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC011718502021_1_2021-11-01.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC011718502021",
+    "collection": "cisdb_16012018",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WRIA/15281/2021"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "EX- HAV CLERK (STORES) RAM NARESH RAM"
+    ],
+    "respondent": [
+      "THE UNION OF INDIA AND 4 OTHERS"
+    ]
+  },
+  "judges": [
+    "SURYA PRAKASH KESARWANI",
+    "VIKAS BUDHWAR"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "14",
+      "raw": "Section 14 of the Armed Forces Tribunal Act 2007"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "30",
+      "raw": "Section 30 of the Armed Forces Tribunal Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "armed forces tribunal": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

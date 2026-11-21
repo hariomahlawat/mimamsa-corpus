@@ -1,0 +1,100 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=9_13/bench=cisdb_16012018/UPHC013256672025_1_2025-07-11.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:05:11+00:00",
+  "sha256": "d82de42beb96e77be1701f3d4580389bbe4c15ba2a55df99ede86a609fef713f",
+  "raw_path": "data/raw/hc/2025/d82de42beb96e77be1701f3d4580389bbe4c15ba2a55df99ede86a609fef713f.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2025-wria-9309-2025-uphc013256672025-1-2025-07-11.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2025-wria-9309-2025-uphc013256672025-1-2025-07-11",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s106",
+      "target_ref_raw": "Section 106 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "apprehension roll was issued to all concerned with intimation to the petitioner's wife and after 30 days, Court of Inquiry was conducted in terms of Section 106 of the Army Act, 1950 ('the Act') which declared him deserter. Since the petitioner was declared as deserter and all concerned were notified on the said aspect and for thr",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2025-wria-9309-2025-uphc013256672025-1-2025-07-11",
+  "doc_type": "judgment",
+  "title": "WRIA/9309/2025 of MOOJ NATH GIRI Vs UNION OF INDIA AND 4 OTHERS",
+  "number": "WRIA/9309/2025",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2025-07-10",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC013256672025_1_2025-07-11.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC013256672025",
+    "collection": "cisdb_16012018",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WRIA/9309/2025"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MOOJ NATH GIRI"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND 4 OTHERS"
+    ]
+  },
+  "judges": [],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "106",
+      "raw": "Section 106 of the Army Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "army act": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

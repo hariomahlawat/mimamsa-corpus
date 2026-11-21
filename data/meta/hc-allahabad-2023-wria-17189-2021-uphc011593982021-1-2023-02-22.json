@@ -1,0 +1,91 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=9_13/bench=cisdb_16012018/UPHC011593982021_1_2023-02-22.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:14:59+00:00",
+  "sha256": "54a6889397af58074e6b522b31a2e2d5513d4bca033ae148f93da3f8ef59e456",
+  "raw_path": "data/raw/hc/2023/54a6889397af58074e6b522b31a2e2d5513d4bca033ae148f93da3f8ef59e456.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 16,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2023-wria-17189-2021-uphc011593982021-1-2023-02-22.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-allahabad-2023-wria-17189-2021-uphc011593982021-1-2023-02-22",
+  "doc_type": "judgment",
+  "title": "WRIA/17189/2021 of DAYA SHANKAR TIWARI Vs UNION OF INDIA AND 4 OTHERS",
+  "number": "WRIA/17189/2021",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2023-02-22",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC011593982021_1_2023-02-22.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC011593982021",
+    "collection": "cisdb_16012018",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WRIA/17189/2021"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "DAYA SHANKAR TIWARI"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND 4 OTHERS"
+    ]
+  },
+  "judges": [
+    "JASPREET SINGH"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": null,
+      "raw": "Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "army act": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

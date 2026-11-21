@@ -1,0 +1,100 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2022/court=9_13/bench=cishclko/UPHC020519192022_1_2022-09-07.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:22:46+00:00",
+  "sha256": "9cc896fe4d3a26ad9248fc327ee111e4f2c7b49cc42426ffa6ceb3e7c3ae64bd",
+  "raw_path": "data/raw/hc/2022/9cc896fe4d3a26ad9248fc327ee111e4f2c7b49cc42426ffa6ceb3e7c3ae64bd.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2022-untitled-uphc020519192022-1-2022-09-07.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2022-untitled-uphc020519192022-1-2022-09-07",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s80",
+      "target_ref_raw": "Section 80 of the Army Act",
+      "effective_date": null,
+      "evidence": "his resignation as well as order by which a summary has been imposed to pay fine of 7 days. With regard to punishment issued to the petitioner under Section 80 of the Army Act. 3. It is stated that Armed Force Tribunal would not have jurisdiction and hence the writ petition lye before this Court with a prayer made by the pe",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2022-untitled-uphc020519192022-1-2022-09-07",
+  "doc_type": "judgment",
+  "title": "/5792/2022 of NO. 457071K SEPOY (GD) SURESH PRASAD Vs UNION OF INDIA THRU. SECY. MINISTRY OF DEFENCE AND 6 OTHERS",
+  "number": null,
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2022-09-07",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC020519192022_1_2022-09-07.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC020519192022",
+    "collection": "cishclko",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "/5792/2022 of NO. 457071K SEPOY (GD) SURESH PRASAD"
+    ],
+    "respondent": [
+      "UNION OF INDIA THRU. SECY. MINISTRY OF DEFENCE AND 6 OTHERS"
+    ]
+  },
+  "judges": [
+    "ALOK MATHUR"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "80",
+      "raw": "Section 80 of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "army act": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

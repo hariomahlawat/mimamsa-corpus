@@ -1,0 +1,89 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=9_13/bench=cishclko/UPHC020034602014_1_2023-12-13.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:16:44+00:00",
+  "sha256": "901b3f9c7d495a3160ee6737c5d856924158ab6c6b8169ad2f1eadea7bc5b381",
+  "raw_path": "data/raw/hc/2023/901b3f9c7d495a3160ee6737c5d856924158ab6c6b8169ad2f1eadea7bc5b381.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2023-wria-6256-2014-uphc020034602014-1-2023-12-13.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-allahabad-2023-wria-6256-2014-uphc020034602014-1-2023-12-13",
+  "doc_type": "judgment",
+  "title": "WRIA/6256/2014 of NO. 6606778 SEPOY GIRJA SHANKAR TIWARI Vs ARMED FORCES TRIBUNAL REGIONAL BENCH LKO. and ORS.",
+  "number": "WRIA/6256/2014",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2023-12-13",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC020034602014_1_2023-12-13.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC020034602014",
+    "collection": "cishclko",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WRIA/6256/2014"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "NO. 6606778 SEPOY GIRJA SHANKAR TIWARI"
+    ],
+    "respondent": [
+      "ARMED FORCES TRIBUNAL REGIONAL BENCH LKO. and ORS."
+    ]
+  },
+  "judges": [
+    "ATTAU RAHMAN MASOODI",
+    "OM PRAKASH SHUKLA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "medical_board"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 14,
+    "keywords": {
+      "disability pension": 12,
+      "release medical board": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/court=9_13/bench=cisdb_16012018/UPHC010379512019_1_2019-03-25.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:33:50+00:00",
+  "sha256": "c9060ec6086f8d55ea6e5c1163408b22fe69b0292e485f388cccbcceeee5e06a",
+  "raw_path": "data/raw/hc/2019/c9060ec6086f8d55ea6e5c1163408b22fe69b0292e485f388cccbcceeee5e06a.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2019-untitled-uphc010379512019-1-2019-03-25.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-allahabad-2019-untitled-uphc010379512019-1-2019-03-25",
+  "doc_type": "judgment",
+  "title": "A482/7061/2019 of Anurag Yadav (Air Force Employee) Vs State of U.P. and another",
+  "number": null,
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2019-03-25",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC010379512019_1_2019-03-25.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC010379512019",
+    "collection": "cisdb_16012018",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "A482/7061/2019 of Anurag Yadav (Air Force Employee)"
+    ],
+    "respondent": [
+      "State of U.P. and another"
+    ]
+  },
+  "judges": [
+    "RAHUL CHATURVEDI"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": null,
+      "raw": "Cr.P.C"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "court martial": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

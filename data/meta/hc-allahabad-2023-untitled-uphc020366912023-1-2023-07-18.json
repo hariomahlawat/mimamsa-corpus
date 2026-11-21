@@ -1,0 +1,168 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=9_13/bench=cishclko/UPHC020366912023_1_2023-07-18.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:17:08+00:00",
+  "sha256": "cfd06116d3cb17d6cd109180bfc3b13007b6a0fafcce91ab4620a68872d9a24a",
+  "raw_path": "data/raw/hc/2023/cfd06116d3cb17d6cd109180bfc3b13007b6a0fafcce91ab4620a68872d9a24a.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 7,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2023-untitled-uphc020366912023-1-2023-07-18.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-untitled-uphc020366912023-1-2023-07-18",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s52",
+      "target_ref_raw": "Section 52(a) of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "s. (5) As per the records of the case, on 09.04.2013, a tentative charge-sheet was served to the petitioner in which the petitioner was charged under Section 52(a) of the Army Act, 1950. [3] Subsequently, another charge-sheet was served to the petitioner, in which following two charges were levelled against him :- “First Charge Army",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-untitled-uphc020366912023-1-2023-07-18",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s80",
+      "target_ref_raw": "Section 80 of the Army Act",
+      "effective_date": null,
+      "evidence": "all the relevant documents necessary for his defence and he was told that, if he pleaded guilty then minimum punishment could be awarded to him under Section 80 of the Army Act and although the petitioner acted accordingly, however the authority found him guilty under COMMITTING THEFT OF PROPERTY BELONGING TO A PERSON SUBJEC",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-untitled-uphc020366912023-1-2023-07-18",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s71",
+      "target_ref_raw": "Section 71 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "State Bank of India Account Number 31734083744” [4] Section 52 (a) of the Act. Thus, the petitioner was dismissed from service under the provision of Section 71 of the Army Act, 1950 vide order dated 25.11.2013. (7) Feeling aggrieved by the proceeding of Summary Court Martial and the order of dismissal dated 25.11.2013, the petiti",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-untitled-uphc020366912023-1-2023-07-18",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s63",
+      "target_ref_raw": "Section 63 of Army Act, 1950",
+      "effective_date": null,
+      "evidence": "11 of the impugned judgment as follows: “ 11. We also find that during 10 years of service, the applicant has also been awarded two punishments under Section 63 of Army Act, 1950 on 12.01.2006 and 20.04.2009 for the offences committed by him, hence, his submission that applicant was having an unblemished service record is fals",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-untitled-uphc020366912023-1-2023-07-18",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s14",
+      "target_ref_raw": "Section 14 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": ", Regional Bench, Lucknow (hereinafter referred to as ‘the Tribunal’), whereby the Original Application No. 105 of 2018 filed by the petitioner under Section 14 of the Armed Forces Tribunal Act, 2007 against the order of dismissal dated 25.11.2013 and the order of General Officer Commanding-in-Chief dated 18.11.2014 confirming the aforesaid senten",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2023-untitled-uphc020366912023-1-2023-07-18",
+  "doc_type": "judgment",
+  "title": "/5115/2023 of SEPOY TRILOK DUTTA Vs UNION OF INDIA THRU. SECY. MINISTRY OF DEFENCE CENTRAL NEW DELHI AND 3 OTHERS",
+  "number": null,
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2023-07-18",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC020366912023_1_2023-07-18.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC020366912023",
+    "collection": "cishclko",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "/5115/2023 of SEPOY TRILOK DUTTA"
+    ],
+    "respondent": [
+      "UNION OF INDIA THRU. SECY. MINISTRY OF DEFENCE CENTRAL NEW DELHI AND 3 OTHERS"
+    ]
+  },
+  "judges": [
+    "DEVENDRA KUMAR UPADHYAYA",
+    "OM PRAKASH SHUKLA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "52",
+      "raw": "Section 52(a) of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "80",
+      "raw": "Section 80 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "71",
+      "raw": "Section 71 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "63",
+      "raw": "Section 63 of Army Act, 1950"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "14",
+      "raw": "Section 14 of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 13,
+    "keywords": {
+      "army act": 7,
+      "court martial": 6
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

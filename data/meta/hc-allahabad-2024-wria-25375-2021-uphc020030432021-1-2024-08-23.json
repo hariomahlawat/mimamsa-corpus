@@ -1,0 +1,105 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=9_13/bench=cishclko/UPHC020030432021_1_2024-08-23.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:10:35+00:00",
+  "sha256": "717b8ac6ff2407c1fc24309a50f69db840750c0692799a5c158ba9f598dcf5f6",
+  "raw_path": "data/raw/hc/2024/717b8ac6ff2407c1fc24309a50f69db840750c0692799a5c158ba9f598dcf5f6.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 4,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2024-wria-25375-2021-uphc020030432021-1-2024-08-23.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2024-wria-25375-2021-uphc020030432021-1-2024-08-23",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s22",
+      "target_ref_raw": "Section 22(2) of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "tioned as 30.06.2004. We asked learned counsel for the parties as to whether the delay in filing of the Original Application was condoned in terms of Section 22(2) of the Armed Forces Tribunal Act, 2007 learned counsel for the petitioner submitted that it had been condoned, however, learned counsel for the opposite parties says that there is no such",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2024-wria-25375-2021-uphc020030432021-1-2024-08-23",
+  "doc_type": "judgment",
+  "title": "WRIA/25375/2021 of NO.1260351 EX NK CHHUN BAHADUR Vs ARMED FORCES TRIBUNAL REGIONAL BENCH THRU.REGISTRAR and ORS.",
+  "number": "WRIA/25375/2021",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2024-08-23",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC020030432021_1_2024-08-23.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC020030432021",
+    "collection": "cishclko",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WRIA/25375/2021"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "NO.1260351 EX NK CHHUN BAHADUR"
+    ],
+    "respondent": [
+      "ARMED FORCES TRIBUNAL REGIONAL BENCH THRU.REGISTRAR and ORS."
+    ]
+  },
+  "judges": [
+    "RAJAN ROY",
+    "JASPREET SINGH"
+  ],
+  "outcome": "partly_allowed",
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "22",
+      "raw": "Section 22(2) of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 12,
+    "keywords": {
+      "disability pension": 12
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

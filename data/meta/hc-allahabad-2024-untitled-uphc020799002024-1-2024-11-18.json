@@ -1,0 +1,86 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=9_13/bench=cishclko/UPHC020799002024_1_2024-11-18.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T22:11:41+00:00",
+  "sha256": "6f9568685d1f5696bd36ac57a0b45e462ffe60a92333512a799dad3b836db86f",
+  "raw_path": "data/raw/hc/2024/6f9568685d1f5696bd36ac57a0b45e462ffe60a92333512a799dad3b836db86f.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2024-untitled-uphc020799002024-1-2024-11-18.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-allahabad-2024-untitled-uphc020799002024-1-2024-11-18",
+  "doc_type": "judgment",
+  "title": "/10664/2024 of DEEP SINGH Vs UNION OF INDIA THRU. SECY. MINISTRY HOME AFFAIRS AND 2 OTHERS",
+  "number": null,
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2024-11-18",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC020799002024_1_2024-11-18.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC020799002024",
+    "collection": "cishclko",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "/10664/2024 of DEEP SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA THRU. SECY. MINISTRY HOME AFFAIRS AND 2 OTHERS"
+    ]
+  },
+  "judges": [
+    "ALOK MATHUR"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 2,
+    "keywords": {
+      "disability pension": 1,
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}
