@@ -1,0 +1,125 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2022/court=1_12/bench=jammuhc/JKHC020019162022_1_2022-08-04.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:28:18+00:00",
+  "sha256": "2d375831560b73dec5d6e7dccc8c702b088206b537551da67144fb5a8b275ad0",
+  "raw_path": "data/raw/hc/2022/2d375831560b73dec5d6e7dccc8c702b088206b537551da67144fb5a8b275ad0.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 9,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2022-wp-c-900-2022-jkhc020019162022-1-2022-08-04.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2022-wp-c-900-2022-jkhc020019162022-1-2022-08-04",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s64",
+      "target_ref_raw": "Section 64 of the Army Act",
+      "effective_date": null,
+      "evidence": "ial wherein the petitioner was held guilty and sentenced ‘to be hanged till death’. Being aggrieved, petitioner filed pre-confirmation petition under Section 64 of the Army Act to the Defence Secretary, Chief of Army Staff on 02.01.2008, which came to be rejected vide order dated 11.08.2008 on the recommendations of the Cent",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2022-wp-c-900-2022-jkhc020019162022-1-2022-08-04",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s433a",
+      "target_ref_raw": "Section 433A of Cr.PC",
+      "effective_date": null,
+      "evidence": "tly in the Central Jail, Purnia, Bihar since 05.11.217. He had approached the army authorities for premature release from jail in accordance with the Section 433A of Cr.PC and as per Jail report, convict has completed more than seventeen years which is above the mandatory period of 14 years of imprisonment under Section",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-jkl-2022-wp-c-900-2022-jkhc020019162022-1-2022-08-04",
+  "doc_type": "judgment",
+  "title": "WP(C)/900/2022 of SATYAM KUMAR TH SHIVAM KUMAR Vs UNION OF INDIA TH SECRETARY MINISTRY OF DEFENCE GOI AND OTHERS",
+  "number": "WP(C)/900/2022",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2022-08-04",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020019162022_1_2022-08-04.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020019162022",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "WP(C)/900/2022"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SATYAM KUMAR TH SHIVAM KUMAR"
+    ],
+    "respondent": [
+      "UNION OF INDIA TH SECRETARY MINISTRY OF DEFENCE GOI AND OTHERS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE TASHI RABSTAN",
+    "HON'BLE MR.  JUSTICE WASIM SADIQ NARGAL"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "64",
+      "raw": "Section 64 of the Army Act"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "433A",
+      "raw": "Section 433A of Cr.PC"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 6,
+    "keywords": {
+      "army act": 1,
+      "armed forces tribunal": 1,
+      "court martial": 2,
+      "summary of evidence": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

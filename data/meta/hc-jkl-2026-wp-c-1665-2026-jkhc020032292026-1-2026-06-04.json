@@ -1,0 +1,87 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=1_12/bench=jammuhc/JKHC020032292026_1_2026-06-04.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:20:54+00:00",
+  "sha256": "de92f3a5360cea4a4eef60b1aecd4f2009afa076cd6a8a01215c038c2c5c3a58",
+  "raw_path": "data/raw/hc/2026/de92f3a5360cea4a4eef60b1aecd4f2009afa076cd6a8a01215c038c2c5c3a58.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2026-wp-c-1665-2026-jkhc020032292026-1-2026-06-04.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-jkl-2026-wp-c-1665-2026-jkhc020032292026-1-2026-06-04",
+  "doc_type": "judgment",
+  "title": "WP(C)/1665/2026 of UNION OF INDIA TH SECRETARY MINISTRY OF DEFENCE GOVT OF INDIA AND OTHERS Vs NISHAN SINGH",
+  "number": "WP(C)/1665/2026",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2026-06-04",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020032292026_1_2026-06-04.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020032292026",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "WP(C)/1665/2026"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA TH SECRETARY MINISTRY OF DEFENCE GOVT OF INDIA AND OTHERS"
+    ],
+    "respondent": [
+      "NISHAN SINGH"
+    ]
+  },
+  "judges": [
+    "HON'BLE MRS. JUSTICE SINDHU SHARMA",
+    "HON'BLE MR. JUSTICE SHAHZAD AZEEM"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 3,
+    "keywords": {
+      "disability pension": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

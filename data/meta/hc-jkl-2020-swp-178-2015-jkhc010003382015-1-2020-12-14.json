@@ -1,0 +1,81 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2020/court=1_12/bench=kashmirhc/JKHC010003382015_1_2020-12-14.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:31:59+00:00",
+  "sha256": "239756d9b9e4ad2a0c3696f2af3c835a874531a7243715d1d8d5d3669e0e94d4",
+  "raw_path": "data/raw/hc/2020/239756d9b9e4ad2a0c3696f2af3c835a874531a7243715d1d8d5d3669e0e94d4.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": null,
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": null,
+  "text_quality": null,
+  "needs_ocr": true,
+  "pages_without_text": [
+    1
+  ],
+  "relations": [],
+  "doc_id": "hc-jkl-2020-swp-178-2015-jkhc010003382015-1-2020-12-14",
+  "doc_type": "judgment",
+  "title": "SWP/178/2015 of PEERZADA SHABIR AHMAD Vs UNION OF INDIA AND OTHERS",
+  "number": "SWP/178/2015",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2020-12-14",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC010003382015_1_2020-12-14.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC010003382015",
+    "collection": "kashmirhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "SWP/178/2015"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "PEERZADA SHABIR AHMAD"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "HON'BLE THE CHIEF JUSTICE ALI MOHAMMAD MAGREY"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "not_checked",
+    "hits": 0,
+    "keywords": {},
+    "note": "no extracted text (needs OCR or not yet extracted)"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule"
+  }
+}

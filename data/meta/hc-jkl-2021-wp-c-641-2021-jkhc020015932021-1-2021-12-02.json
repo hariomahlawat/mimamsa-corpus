@@ -1,0 +1,108 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2021/court=1_12/bench=jammuhc/JKHC020015932021_1_2021-12-02.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:30:07+00:00",
+  "sha256": "dee7f0108f8de22898e9c5f942fc24b5ee84fa857a8469081ba0b5f85e6e9f2b",
+  "raw_path": "data/raw/hc/2021/dee7f0108f8de22898e9c5f942fc24b5ee84fa857a8469081ba0b5f85e6e9f2b.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 4,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2021-wp-c-641-2021-jkhc020015932021-1-2021-12-02.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2021-wp-c-641-2021-jkhc020015932021-1-2021-12-02",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s30",
+      "target_ref_raw": "Section 30 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "harma, learned ASGI, urged that no relief can be granted to the petitioner in the present proceedings inasmuch as the remedy of appeal provided under Section 30 of the Armed Forces Tribunal Act, 2007, ought to have been availed by the petitioner being an alternate and an equally efficacious remedy. 7. The issue as to whether in the light of an alt",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-jkl-2021-wp-c-641-2021-jkhc020015932021-1-2021-12-02",
+  "doc_type": "judgment",
+  "title": "WP(C)/641/2021 of MANZOOR AHMED PEER Vs UNION OF INDIA TH SECRETARY MINISTRY OF HOME AFFAIRS AND OTHERS",
+  "number": "WP(C)/641/2021",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2021-12-02",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020015932021_1_2021-12-02.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020015932021",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "WP(C)/641/2021"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MANZOOR AHMED PEER"
+    ],
+    "respondent": [
+      "UNION OF INDIA TH SECRETARY MINISTRY OF HOME AFFAIRS AND OTHERS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE DHIRAJ SINGH THAKUR",
+    "HON'BLE MR. JUSTICE MOHAN LAL"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "30",
+      "raw": "Section 30 of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 10,
+    "keywords": {
+      "armed forces tribunal": 1,
+      "disability pension": 7,
+      "invalided": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

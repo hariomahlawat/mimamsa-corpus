@@ -1,0 +1,84 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=1_12/bench=jammuhc/JKHC020002572023_1_2023-08-18.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:26:23+00:00",
+  "sha256": "d02f236de9229f06d6d9ba2342027cd3e49556bc48b1a77a30c82373289f9229",
+  "raw_path": "data/raw/hc/2023/d02f236de9229f06d6d9ba2342027cd3e49556bc48b1a77a30c82373289f9229.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2023-arb-p-2-2023-jkhc020002572023-1-2023-08-18.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-jkl-2023-arb-p-2-2023-jkhc020002572023-1-2023-08-18",
+  "doc_type": "judgment",
+  "title": "Arb P/2/2023 of M/S ADITYA CONSTRUCTIONS ENGINEERS AND CONTRACTORS TH TWAIN GUPTA Vs UNION OF INDIA TH ENGINEER IN CHIEF AND OTHERS",
+  "number": "Arb P/2/2023",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2023-08-18",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020002572023_1_2023-08-18.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020002572023",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "Arb P/2/2023"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "M/S ADITYA CONSTRUCTIONS ENGINEERS AND CONTRACTORS TH TWAIN GUPTA"
+    ],
+    "respondent": [
+      "UNION OF INDIA TH ENGINEER IN CHIEF AND OTHERS"
+    ]
+  },
+  "judges": [
+    "HON'BLE THE CHIEF JUSTICE"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

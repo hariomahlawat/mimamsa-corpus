@@ -1,0 +1,94 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=1_12/bench=jammuhc/JKHC020053852025_1_2026-02-02.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:20:45+00:00",
+  "sha256": "b6af4592d743753638814f364d954a4366288140f8bbb6c59469c8f7a59b2da7",
+  "raw_path": "data/raw/hc/2026/b6af4592d743753638814f364d954a4366288140f8bbb6c59469c8f7a59b2da7.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 10,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2026-wp-c-2550-2025-jkhc020053852025-1-2026-02-02.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-jkl-2026-wp-c-2550-2025-jkhc020053852025-1-2026-02-02",
+  "doc_type": "judgment",
+  "title": "WP(C)/2550/2025 of UNION OF INDIA AND ORS Vs MANJEET SINGH",
+  "number": "WP(C)/2550/2025",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2026-02-02",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020053852025_1_2026-02-02.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020053852025",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "WP(C)/2550/2025"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA AND ORS"
+    ],
+    "respondent": [
+      "MANJEET SINGH"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SANJEEV KUMAR",
+    "HON'BLE MR. JUSTICE SANJAY PARIHAR"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "entitlement_rules",
+    "invalidment",
+    "medical_board"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 38,
+    "keywords": {
+      "armed forces tribunal": 9,
+      "disability pension": 10,
+      "entitlement rules": 14,
+      "invalided": 3,
+      "release medical board": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

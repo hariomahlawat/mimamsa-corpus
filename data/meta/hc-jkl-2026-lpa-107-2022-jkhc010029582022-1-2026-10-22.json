@@ -1,0 +1,145 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=1_12/bench=kashmirhc/JKHC010029582022_1_2026-10-22.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:21:05+00:00",
+  "sha256": "b47063ab348709a879e3df1c6e5c268a5c8d7d14d3f32ed246277a32114d7909",
+  "raw_path": "data/raw/hc/2026/b47063ab348709a879e3df1c6e5c268a5c8d7d14d3f32ed246277a32114d7909.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 25,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2026-lpa-107-2022-jkhc010029582022-1-2026-10-22.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2026-lpa-107-2022-jkhc010029582022-1-2026-10-22",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s2",
+      "target_ref_raw": "Section 2(1) of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "ers of the appellants' unions are not subject to the Army Act as they do not fall under any of the categories enumerated in sub-clauses (a) to (i) of Section 2(1) of the Army Act, 1950, and that the impugned notifications are ultra vires the Army Act and are struck by Articles 19(1)(c) and 33 of the Constitution. 9. For reasons that",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2026-lpa-107-2022-jkhc010029582022-1-2026-10-22",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s21",
+      "target_ref_raw": "Section 21 of the Army Act",
+      "effective_date": null,
+      "evidence": "the armed forces. They answer the description of the “members of the armed forces” within the contemplation of Article 33. Consequently, by virtue of Section 21 of the Army Act, the Central Government was competent by notification to make rules restricting or curtailing their fundamental rights under Article 19(1)(c).” 37. T",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2026-lpa-107-2022-jkhc010029582022-1-2026-10-22",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s74",
+      "target_ref_raw": "Sections 74 and 76 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "fore a Security Force Court but does so within the framework established by the BSF Act. The learned Single Judge correctly noticed that, ordinarily, Sections 74 and 76 of the Evidence Act would have relevance to public documents and certified copies. However, the conclusion that Rule 129 must consequently yield to Section 76 does not f",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-jkl-2026-lpa-107-2022-jkhc010029582022-1-2026-10-22",
+  "doc_type": "judgment",
+  "title": "LPA/107/2022 of UNION OF INDIA AND ORS.(HOME AFFAIRS)   (DB-II)(off. note  20.11.25) Vs ROVINDER SINGH AND ORS. (HOME DEPARTMENT)",
+  "number": "LPA/107/2022",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2026-10-22",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC010029582022_1_2026-10-22.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC010029582022",
+    "collection": "kashmirhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "LPA/107/2022"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA AND ORS.(HOME AFFAIRS)   (DB-II)(off. note  20.11.25)"
+    ],
+    "respondent": [
+      "ROVINDER SINGH AND ORS. (HOME DEPARTMENT)"
+    ]
+  },
+  "judges": [
+    "HON'BLE THE CHIEF JUSTICE",
+    "HON'BLE MR. JUSTICE M.A. CHOWDHARY"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "2",
+      "raw": "Section 2(1) of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "21",
+      "raw": "Section 21 of the Army Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": null,
+      "raw": "Air Force Act, 1950"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "74",
+      "raw": "Sections 74 and 76 of the Evidence Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 11,
+    "keywords": {
+      "army act": 5,
+      "air force act": 1,
+      "court martial": 5
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

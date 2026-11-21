@@ -1,0 +1,108 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=1_12/bench=jammuhc/JKHC020015172024_1_2025-08-30.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:22:38+00:00",
+  "sha256": "a1163fcb7c498f50eeb9d915d8c916203a23d5f32189d6ffda13415aed6bc068",
+  "raw_path": "data/raw/hc/2025/a1163fcb7c498f50eeb9d915d8c916203a23d5f32189d6ffda13415aed6bc068.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2025-wp-c-726-2024-jkhc020015172024-1-2025-08-30.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2025-wp-c-726-2024-jkhc020015172024-1-2025-08-30",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s14",
+      "target_ref_raw": "Section 14(2) of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "rmy service, i.e., 08.04.2017, along with interest at the rate of 8% per annum. 02. The petitioner, Kamlesh Kaur, had approached the AFT, Jammu under Section 14(2) of the Armed Forces Tribunal Act, 2007, seeking grant of family pension on account of invalidation of her husband from the Army. The reliefs sought in OA were as under: - (a) That, Respond",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-jkl-2025-wp-c-726-2024-jkhc020015172024-1-2025-08-30",
+  "doc_type": "judgment",
+  "title": "WP(C)/726/2024 of KAMLESH KAUR Vs UNION OF INDIA TH SECRETARY MINISTRY OF DEFENCE NEW DELHI AND OTHERS",
+  "number": "WP(C)/726/2024",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2025-08-30",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020015172024_1_2025-08-30.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020015172024",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "WP(C)/726/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "KAMLESH KAUR"
+    ],
+    "respondent": [
+      "UNION OF INDIA TH SECRETARY MINISTRY OF DEFENCE NEW DELHI AND OTHERS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MRS. JUSTICE SINDHU SHARMA",
+    "HON'BLE MR. JUSTICE SHAHZAD AZEEM"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "14",
+      "raw": "Section 14(2) of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 21,
+    "keywords": {
+      "armed forces tribunal": 5,
+      "disability pension": 10,
+      "invalided": 6
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

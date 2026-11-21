@@ -1,0 +1,159 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=1_12/bench=jammuhc/JKHC020079912010_1_2023-09-12.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:26:23+00:00",
+  "sha256": "54f88d0433ebed317d7af9c502d0f104e453accdd83d647edc07af90719407aa",
+  "raw_path": "data/raw/hc/2023/54f88d0433ebed317d7af9c502d0f104e453accdd83d647edc07af90719407aa.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 19,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2023-lpasw-137-2010-jkhc020079912010-1-2023-09-12.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2023-lpasw-137-2010-jkhc020079912010-1-2023-09-12",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s63",
+      "target_ref_raw": "Section 63 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "rit petitioner had crossed over to Pakistan and had not even disclosed the said fact to the Army Authorities, he was awarded “severe reprimand” under Section 63 of the Army Act, 1950 [“the Army Act”]. 5. It seems that the Government of India as also the Army Authorities had been receiving complaints against some army men, who were",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2023-lpasw-137-2010-jkhc020079912010-1-2023-09-12",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s80",
+      "target_ref_raw": "Section 80 of the Army Act",
+      "effective_date": null,
+      "evidence": "mand or reprimand; (h) fine up to fourteen days‟ pay in any one month; 8 (i) penal deductions under clause (g) of sections 91.” 13. From a reading of Section 80 of the Army Act along with Rule 22 of the Army Rules, it becomes abundantly clear that the Commanding Officer, if after complying with Sub Rule (1) of Rule 22 of the",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2023-lpasw-137-2010-jkhc020079912010-1-2023-09-12",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s22",
+      "target_ref_raw": "Section 22 of the Army Act",
+      "effective_date": null,
+      "evidence": "e punishments prescribed in the Section, which include the punishment of “severe reprimand”. 20. The power conferred on the competent authority under Section 22 of the Army Act is of the nature of Pleasure-Doctrine, whereunder Competent Authority is empowered to retire, release or discharge a person from service otherwise th",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2023-lpasw-137-2010-jkhc020079912010-1-2023-09-12",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s121",
+      "target_ref_raw": "Section 121 of the Army Act",
+      "effective_date": null,
+      "evidence": "onferred upon him under Section 22 read with Rule 13 are different, as such, neither the provisions of Article 20(2) of the Constitution of India nor Section 121 of the Army Act are applicable and attracted. The writ petitioner, who was convicted for an offence under Section 63 of the Act by the Commander by proceeding under",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-jkl-2023-lpasw-137-2010-jkhc020079912010-1-2023-09-12",
+  "doc_type": "judgment",
+  "title": "LPASW/137/2010 of UOI.TH.MIN.OF DEFENCE AND ORS. Vs ANGRAJ SINGH AND ORS.",
+  "number": "LPASW/137/2010",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2023-09-12",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020079912010_1_2023-09-12.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020079912010",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "LPASW/137/2010"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UOI.TH.MIN.OF DEFENCE AND ORS."
+    ],
+    "respondent": [
+      "ANGRAJ SINGH AND ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SANJEEV KUMAR",
+    "HON'BLE MR. JUSTICE RAHUL BHARTI"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "63",
+      "raw": "Section 63 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "80",
+      "raw": "Section 80 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "22",
+      "raw": "Section 22 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "121",
+      "raw": "Section 121 of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "invalidment",
+    "medical_board"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 22,
+    "keywords": {
+      "army act": 9,
+      "armed forces tribunal": 1,
+      "court martial": 6,
+      "invalided": 3,
+      "release medical board": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

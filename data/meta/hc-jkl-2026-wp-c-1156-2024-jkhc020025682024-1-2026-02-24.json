@@ -1,0 +1,91 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=1_12/bench=jammuhc/JKHC020025682024_1_2026-02-24.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:20:45+00:00",
+  "sha256": "4723af809fb2ff3a23c3f1ef8c048ede8da4dc02e40039ab1a0a19ab4b298313",
+  "raw_path": "data/raw/hc/2026/4723af809fb2ff3a23c3f1ef8c048ede8da4dc02e40039ab1a0a19ab4b298313.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2026-wp-c-1156-2024-jkhc020025682024-1-2026-02-24.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-jkl-2026-wp-c-1156-2024-jkhc020025682024-1-2026-02-24",
+  "doc_type": "judgment",
+  "title": "WP(C)/1156/2024 of UNION OF INDIA TH SECRETARY MINISTRY OF DEFENCE NEW DELHI AND OTHERS Vs GURBAKSH SINGH",
+  "number": "WP(C)/1156/2024",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2026-02-24",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020025682024_1_2026-02-24.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020025682024",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "WP(C)/1156/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA TH SECRETARY MINISTRY OF DEFENCE NEW DELHI AND OTHERS"
+    ],
+    "respondent": [
+      "GURBAKSH SINGH"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SANJEEV KUMAR",
+    "HON'BLE MR. JUSTICE SANJAY PARIHAR"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "invalidment",
+    "medical_board"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 14,
+    "keywords": {
+      "disability pension": 10,
+      "invalided": 2,
+      "release medical board": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

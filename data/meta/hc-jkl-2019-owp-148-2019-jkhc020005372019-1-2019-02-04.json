@@ -1,0 +1,141 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/court=1_12/bench=jammuhc/JKHC020005372019_1_2019-02-04.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:33:26+00:00",
+  "sha256": "f8b45a7f73fcab2f23b997bf075f273b4a573c40bafa2b1e166734eb6a1a2f83",
+  "raw_path": "data/raw/hc/2019/f8b45a7f73fcab2f23b997bf075f273b4a573c40bafa2b1e166734eb6a1a2f83.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 7,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2019-owp-148-2019-jkhc020005372019-1-2019-02-04.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2019-owp-148-2019-jkhc020005372019-1-2019-02-04",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s69",
+      "target_ref_raw": "Section 69 of the Army Act",
+      "effective_date": null,
+      "evidence": "h of May, 2018, the SGCM for trial of the petitioner was ordered which assembled on 9th of June, 2018. 10. The petitioner was tried on a charge under Section 69 of the Army Act read with Section 5(2) and Section 5(1)(e) of the Prevention of Corruption Act, Samvat 2006. 11. By an order dated 25th of October, 2018, the petitio",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2019-owp-148-2019-jkhc020005372019-1-2019-02-04",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s182",
+      "target_ref_raw": "Section 182 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "submitted by Mr. Sharma that the writ petition of the petitioner ought not to be entertained in view of the remedy available to the petitioner under Section 182 of the Army Act, 1950. Mr. Kohli submits that given the fact the petitioner has availed the remedy of appeal under the Armed Forces Act, where his interim application for",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2019-owp-148-2019-jkhc020005372019-1-2019-02-04",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s15",
+      "target_ref_raw": "Section 15 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "On the 22nd of November, 2018, the petitioner filed an Original Application (Appeal) being No.650 of 2018 before the Regional Bench AFT, Jammu under Section 15 of the Armed Forces Tribunal Act, 2007. __________________________________________________________________________ OWP No.148/2019 Page 4 of 7 Along with the appeal, the petitioner has als",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-jkl-2019-owp-148-2019-jkhc020005372019-1-2019-02-04",
+  "doc_type": "judgment",
+  "title": "OWP/148/2019 of MAJOR BOBADE AVINASH NARAYANRAO Vs UNION OF INDIA TH. MINISTRY OF DEFENCE AND ORS.",
+  "number": "OWP/148/2019",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2019-02-04",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020005372019_1_2019-02-04.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020005372019",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "OWP/148/2019"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MAJOR BOBADE AVINASH NARAYANRAO"
+    ],
+    "respondent": [
+      "UNION OF INDIA TH. MINISTRY OF DEFENCE AND ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE THE CHIEF JUSTICE",
+    "HON'BLE MR. JUSTICE TASHI RABSTAN"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "69",
+      "raw": "Section 69 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "182",
+      "raw": "Section 182 of the Army Act, 1950"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "15",
+      "raw": "Section 15 of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 7,
+    "keywords": {
+      "army act": 3,
+      "armed forces tribunal": 1,
+      "court martial": 1,
+      "summary of evidence": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

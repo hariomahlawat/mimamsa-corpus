@@ -1,0 +1,89 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=1_12/bench=jammuhc/JKHC020007942024_1_2025-08-19.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:22:38+00:00",
+  "sha256": "afac61093f27c3b5b5ea6ecf9a81a4be8c882bbe14941da4c1f846385b8c636c",
+  "raw_path": "data/raw/hc/2025/afac61093f27c3b5b5ea6ecf9a81a4be8c882bbe14941da4c1f846385b8c636c.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 8,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2025-wp-c-1633-2024-jkhc020007942024-1-2025-08-19.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-jkl-2025-wp-c-1633-2024-jkhc020007942024-1-2025-08-19",
+  "doc_type": "judgment",
+  "title": "WP(C)/1633/2024 of UNION OF INDIA TH SECRETARY GOI MINISTRY OF DEFENCE NEW DELHI AND OTHERS Vs SHUKAR SINGH",
+  "number": "WP(C)/1633/2024",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2025-08-19",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020007942024_1_2025-08-19.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020007942024",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "WP(C)/1633/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA TH SECRETARY GOI MINISTRY OF DEFENCE NEW DELHI AND OTHERS"
+    ],
+    "respondent": [
+      "SHUKAR SINGH"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SANJEEV KUMAR",
+    "HON'BLE MR. JUSTICE SANJAY PARIHAR"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 7,
+    "keywords": {
+      "disability pension": 4,
+      "invalided": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

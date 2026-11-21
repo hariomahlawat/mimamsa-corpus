@@ -1,0 +1,91 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=1_12/bench=jammuhc/JKHC020046292024_1_2026-05-18.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:20:54+00:00",
+  "sha256": "5f466c60f14ddd4f62bcd041feb3756731bf26acef7a7a21462c5b673cb6ee7c",
+  "raw_path": "data/raw/hc/2026/5f466c60f14ddd4f62bcd041feb3756731bf26acef7a7a21462c5b673cb6ee7c.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2026-wp-c-2094-2024-jkhc020046292024-1-2026-05-18.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-jkl-2026-wp-c-2094-2024-jkhc020046292024-1-2026-05-18",
+  "doc_type": "judgment",
+  "title": "WP(C)/2094/2024 of UNION OF INDIA TH. SECRETARY TO GOVT. ,MINISTRY OF DEFENCE AND OTHERS Vs JOGINDER RAM",
+  "number": "WP(C)/2094/2024",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2026-05-18",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020046292024_1_2026-05-18.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020046292024",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "WP(C)/2094/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA TH. SECRETARY TO GOVT. ,MINISTRY OF DEFENCE AND OTHERS"
+    ],
+    "respondent": [
+      "JOGINDER RAM"
+    ]
+  },
+  "judges": [
+    "HON'BLE MRS. JUSTICE SINDHU SHARMA",
+    "HON'BLE MR. JUSTICE SHAHZAD AZEEM"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "entitlement_rules",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 16,
+    "keywords": {
+      "disability pension": 7,
+      "entitlement rules": 3,
+      "invalided": 6
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

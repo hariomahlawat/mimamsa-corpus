@@ -1,0 +1,82 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/court=1_12/bench=jammuhc/JKHC020036632019_1_2019-07-24.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:33:26+00:00",
+  "sha256": "345f599209d69cbf4289e80eea2378581f77088b8fb9ffe1e7bc7ed2f8cb39a1",
+  "raw_path": "data/raw/hc/2019/345f599209d69cbf4289e80eea2378581f77088b8fb9ffe1e7bc7ed2f8cb39a1.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": null,
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": null,
+  "text_quality": null,
+  "needs_ocr": true,
+  "pages_without_text": [
+    1,
+    2
+  ],
+  "relations": [],
+  "doc_id": "hc-jkl-2019-wp-c-2692-2019-jkhc020036632019-1-2019-07-24",
+  "doc_type": "judgment",
+  "title": "WP(C)/2692/2019 of M/S D.P.JAIN AND COMPANY INFRASTRUCTURE PVT.LTD. Vs U.O.I.TH.MINISTRY OF DEFENCE AND ANR.",
+  "number": "WP(C)/2692/2019",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2019-07-24",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020036632019_1_2019-07-24.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020036632019",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "WP(C)/2692/2019"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "M/S D.P.JAIN AND COMPANY INFRASTRUCTURE PVT.LTD."
+    ],
+    "respondent": [
+      "U.O.I.TH.MINISTRY OF DEFENCE AND ANR."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE DHIRAJ SINGH THAKUR"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "not_checked",
+    "hits": 0,
+    "keywords": {},
+    "note": "no extracted text (needs OCR or not yet extracted)"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule"
+  }
+}

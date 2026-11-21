@@ -1,0 +1,106 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=1_12/bench=jammuhc/JKHC020038112024_1_2025-11-03.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:22:38+00:00",
+  "sha256": "d93933d088e30afc5f311c1e2ea6708307d3c29c3b18abbc1e7c3d77da3c8607",
+  "raw_path": "data/raw/hc/2025/d93933d088e30afc5f311c1e2ea6708307d3c29c3b18abbc1e7c3d77da3c8607.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 9,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2025-wp-c-1709-2024-jkhc020038112024-1-2025-11-03.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2025-wp-c-1709-2024-jkhc020038112024-1-2025-11-03",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s39",
+      "target_ref_raw": "Section 39 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "invoked the doctrine of proportionality, arguing that the punishment of dismissal was unduly harsh and that the maximum punishment permissible under Section 39 of the Army Act, 1950, could only be imprisonment for one year. The respondent, it is contended, was not a habitual offender, and his absence was explained by medical and",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-jkl-2025-wp-c-1709-2024-jkhc020038112024-1-2025-11-03",
+  "doc_type": "judgment",
+  "title": "WP(C)/1709/2024 of UNION OF INDIA TH. ITS SECRETARY TO GOVT. MINISTRY OF DEFENCE  AND OTHERS Vs ABDUL RASHID WAR",
+  "number": "WP(C)/1709/2024",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2025-11-03",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020038112024_1_2025-11-03.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020038112024",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "WP(C)/1709/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA TH. ITS SECRETARY TO GOVT. MINISTRY OF DEFENCE  AND OTHERS"
+    ],
+    "respondent": [
+      "ABDUL RASHID WAR"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SANJEEV KUMAR",
+    "HON'BLE MR. JUSTICE SANJAY PARIHAR"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "39",
+      "raw": "Section 39 of the Army Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 11,
+    "keywords": {
+      "army act": 5,
+      "court martial": 6
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

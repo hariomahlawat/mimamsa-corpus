@@ -1,0 +1,88 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2020/court=1_12/bench=kashmirhc/JKHC010003872010_1_2020-03-13.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:31:57+00:00",
+  "sha256": "5f6f51ba7dbffe29a2481e25b6a2163be40b6af3dbc72f03e0975ab8308f0190",
+  "raw_path": "data/raw/hc/2020/5f6f51ba7dbffe29a2481e25b6a2163be40b6af3dbc72f03e0975ab8308f0190.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2020-swp-703-2010-jkhc010003872010-1-2020-03-13.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-jkl-2020-swp-703-2010-jkhc010003872010-1-2020-03-13",
+  "doc_type": "judgment",
+  "title": "SWP/703/2010 of ISHFAQ MOHAMMAD BHAT Vs UNION OF INDIA AND OTHERS",
+  "number": "SWP/703/2010",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2020-03-13",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC010003872010_1_2020-03-13.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC010003872010",
+    "collection": "kashmirhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "SWP/703/2010"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "ISHFAQ MOHAMMAD BHAT"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "HON'BLE THE CHIEF JUSTICE ALI MOHAMMAD MAGREY"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 2,
+    "keywords": {
+      "disability pension": 1,
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

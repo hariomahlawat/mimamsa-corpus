@@ -1,0 +1,124 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=1_12/bench=kashmirhc/JKHC010066452024_1_2025-10-06.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:23:06+00:00",
+  "sha256": "f71dc8fe702f479bc5008385b00346879b04b051cdb405864eff8dbbb05932e4",
+  "raw_path": "data/raw/hc/2025/f71dc8fe702f479bc5008385b00346879b04b051cdb405864eff8dbbb05932e4.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2025-wp-c-3053-2024-jkhc010066452024-1-2025-10-06.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2025-wp-c-3053-2024-jkhc010066452024-1-2025-10-06",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s19",
+      "target_ref_raw": "Section 19(i) of the Army Act 1950",
+      "effective_date": null,
+      "evidence": "sociation before Army Authorities on 27- 08-2023 itself, which consequently resulted into passing of order dated 19- 10-2024, under the provisions of Section 19(i) of the Army Act 1950 read with Army Rule 193 of the Army Rules of 1954, whereby sanction came to be accorded to the deduction of 12% of the reckonable pay and allowance o",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2025-wp-c-3053-2024-jkhc010066452024-1-2025-10-06",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s90",
+      "target_ref_raw": "Section 90(i) of the Army Act 1950",
+      "effective_date": null,
+      "evidence": "r stated that the said deduction was ordered for payment of maintenance by the petitioner herein to respondent 4 herein in terms of the provisions of Section 90(i) of the Army Act 1950, read with Army Order No. 06/2020/AG/DV dated 17-07-2020, and that the grant/deduction of maintenance from the pay and allowance of the army personne",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-jkl-2025-wp-c-3053-2024-jkhc010066452024-1-2025-10-06",
+  "doc_type": "judgment",
+  "title": "WP(C)/3053/2024 of MAJ. WASIF MAJIED TAK Vs UNION OF INDIA AND ORS. (MINISTRY OF DEFENCE)",
+  "number": "WP(C)/3053/2024",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2025-10-06",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC010066452024_1_2025-10-06.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC010066452024",
+    "collection": "kashmirhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "WP(C)/3053/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MAJ. WASIF MAJIED TAK"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS. (MINISTRY OF DEFENCE)"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE JAVED IQBAL WANI"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "19",
+      "raw": "Section 19(i) of the Army Act 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "90",
+      "raw": "Section 90(i) of the Army Act 1950"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": null,
+      "raw": "Code of Criminal Procedure"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 7,
+    "keywords": {
+      "army act": 7
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

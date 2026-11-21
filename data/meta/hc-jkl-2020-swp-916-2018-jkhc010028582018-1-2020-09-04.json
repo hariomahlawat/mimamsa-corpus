@@ -1,0 +1,81 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2020/court=1_12/bench=kashmirhc/JKHC010028582018_1_2020-09-04.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:31:57+00:00",
+  "sha256": "274a708251a7e2a060b4d5b0451604d1d52210d60c1374670e4e4d69299bcb29",
+  "raw_path": "data/raw/hc/2020/274a708251a7e2a060b4d5b0451604d1d52210d60c1374670e4e4d69299bcb29.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": null,
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": null,
+  "text_quality": null,
+  "needs_ocr": true,
+  "pages_without_text": [
+    1
+  ],
+  "relations": [],
+  "doc_id": "hc-jkl-2020-swp-916-2018-jkhc010028582018-1-2020-09-04",
+  "doc_type": "judgment",
+  "title": "SWP/916/2018 of AJAZ AHMAD NAIK Vs STATE OF J AND K AND ANR. (HEALTH AND MEDICAL EDUCATION DEPARTMENT)",
+  "number": "SWP/916/2018",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2020-09-04",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC010028582018_1_2020-09-04.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC010028582018",
+    "collection": "kashmirhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "SWP/916/2018"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "AJAZ AHMAD NAIK"
+    ],
+    "respondent": [
+      "STATE OF J AND K AND ANR. (HEALTH AND MEDICAL EDUCATION DEPARTMENT)"
+    ]
+  },
+  "judges": [
+    "HON'BLE THE CHIEF JUSTICE ALI MOHAMMAD MAGREY"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "not_checked",
+    "hits": 0,
+    "keywords": {},
+    "note": "no extracted text (needs OCR or not yet extracted)"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule"
+  }
+}

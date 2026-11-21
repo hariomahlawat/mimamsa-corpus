@@ -1,0 +1,106 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/court=1_12/bench=jammuhc/JKHC020078732019_1_2019-11-18.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:33:26+00:00",
+  "sha256": "06f697bf9219ca070d2e700e3a63d80562d487bb0e162c00a2168876d4db909f",
+  "raw_path": "data/raw/hc/2019/06f697bf9219ca070d2e700e3a63d80562d487bb0e162c00a2168876d4db909f.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2019-wp-c-4200-2019-jkhc020078732019-1-2019-11-18.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2019-wp-c-4200-2019-jkhc020078732019-1-2019-11-18",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s153",
+      "target_ref_raw": "Section 153 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "ey have taken us through the applicable Army Rules as well. 4 WP(C) No. 4200 of 2019 12. Mr. Vishal Sharma, learned ASGI, has also placed reliance on Section 153 of the Army Act, 1950, which mandates that sentence of a Court martial would be valid only so far as it may be confirmed as provided by the Act. 13. Our attention has been",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-jkl-2019-wp-c-4200-2019-jkhc020078732019-1-2019-11-18",
+  "doc_type": "judgment",
+  "title": "WP(C)/4200/2019 of MAJOR BOBADE AVINASH NARAYANRAO Vs UNION OF INDIA TH. SECY. MINISTRY OF DEFENCE AND ORS.",
+  "number": "WP(C)/4200/2019",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2019-11-18",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020078732019_1_2019-11-18.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020078732019",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "WP(C)/4200/2019"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MAJOR BOBADE AVINASH NARAYANRAO"
+    ],
+    "respondent": [
+      "UNION OF INDIA TH. SECY. MINISTRY OF DEFENCE AND ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE  MR. JUSTICE RAJESH BINDAL",
+    "HON'BLE THE CHIEF JUSTICE"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "153",
+      "raw": "Section 153 of the Army Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 4,
+    "keywords": {
+      "army act": 1,
+      "court martial": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

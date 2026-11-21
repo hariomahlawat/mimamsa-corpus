@@ -1,0 +1,102 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=1_12/bench=kashmirhc/JKHC010039512023_1_2023-08-21.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:26:41+00:00",
+  "sha256": "b2e690356ed9e165c96ab279661281aad5bb6bbcf67c7b94affb24cf004fa9d3",
+  "raw_path": "data/raw/hc/2023/b2e690356ed9e165c96ab279661281aad5bb6bbcf67c7b94affb24cf004fa9d3.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2023-wp-c-2081-2023-jkhc010039512023-1-2023-08-21.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2023-wp-c-2081-2023-jkhc010039512023-1-2023-08-21",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s91",
+      "target_ref_raw": "Section 91(i) of the Army Act",
+      "effective_date": null,
+      "evidence": "n directed to be made from the pay and allowance of the petitioner. This presumably has been done by respondent No. 2 in exercise of his powers under Section 91(i) of the Army Act read with Rule 193 of the Army Rules. 2. Learned counsel for the petitioner has submitted that marriage between the petitioner and respondent No. 4 s",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-jkl-2023-wp-c-2081-2023-jkhc010039512023-1-2023-08-21",
+  "doc_type": "judgment",
+  "title": "WP(C)/2081/2023 of HAV MOHAMMAD ALI AZAD Vs UNION OF INDIA AND ORS. (DEFENCE STAFF)",
+  "number": "WP(C)/2081/2023",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2023-08-21",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC010039512023_1_2023-08-21.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC010039512023",
+    "collection": "kashmirhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "WP(C)/2081/2023"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "HAV MOHAMMAD ALI AZAD"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS. (DEFENCE STAFF)"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SANJAY DHAR"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "91",
+      "raw": "Section 91(i) of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "army act": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}
