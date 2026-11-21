@@ -24,7 +24,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
-DEFAULT_REPO_NAME = "mimamsa-corpus"
+DEFAULT_REPO = "hariomahlawat/mimamsa-corpus"
 SMALL = ["meta", "sections", "text", "correspondence"]
 FILES = ["relations.jsonl", "manifest.csv", "excluded_judgments.jsonl", "raw_manifest.csv", "SHA256SUMS", "README.md"]
 
@@ -98,7 +98,7 @@ def plan() -> list[tuple[Path, str]]:
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("message", nargs="?", default="manual")
-    ap.add_argument("--repo", help="owner/name of the dataset repository (default: <your account>/mimamsa-corpus)")
+    ap.add_argument("--repo", help="owner/name of the dataset repository (default: hariomahlawat/mimamsa-corpus)")
     ap.add_argument("--dry-run", action="store_true", help="show what would be uploaded; no token needed")
     ap.add_argument("--only", action="append", metavar="PATH", help="upload only repo paths starting with this (repeatable)")
     args = ap.parse_args(argv)
@@ -117,7 +117,7 @@ def main(argv: list[str] | None = None) -> int:
         print("No Hugging Face token: nothing uploaded. Set HF_TOKEN or run `hf auth login` with a write token.")
         return 2
     api = HfApi(token=token)
-    repo = args.repo or f"{api.whoami()['name']}/{DEFAULT_REPO_NAME}"
+    repo = args.repo or DEFAULT_REPO                         # no whoami call: that endpoint is tightly rate-limited
     api.create_repo(repo, repo_type="dataset", private=True, exist_ok=True)
     (DATA / "README.md").write_text(CARD, encoding="utf-8")
     uploaded = 0
