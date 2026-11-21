@@ -1,5 +1,42 @@
 # Progress
 
+## 2026-11-21 — Phase 2 pipeline built and run on the India Code files (awaiting review)
+
+Commands: `python -m pipeline records | extract | validate | report | all` (each re-runnable alone).
+Full results: `reports/phase2_report.md`.
+
+Results on the real data
+- 61 document records, 1,707 section records, 232 relations; 100% validate against the schemas
+  (now v0.2.0; see below). `data/manifest.csv` written.
+- Sections come from India Code's own section records (text + footnotes), not from cutting up PDFs.
+  Section status: 9 omitted/repealed, ~130 amended, the rest in force. 191 amendment notes read by
+  rules; each becomes an `amended_by` edge with the note as evidence (none resolved to a document yet).
+- Brief's known cases: Army Act ss.75, 76, 127 are `omitted` with the 1992 Act as the reason.
+- Text: 55 documents extracted cleanly, 2 flagged suspect (very short), 4 need OCR (the second files of
+  BNS/BNSS/BSA, which are scans, and one AFT notification). No text is kept for those four.
+- The "IndiaCode" download watermark is removed by dropping slanted text (41,670 characters dropped).
+- Dates the source prints wrongly or with 2-digit years (e.g. "6-9-192", "16-12-74") are kept as
+  printed in `effective_date_raw` and NOT turned into dates.
+
+Needs a human look
+- "Regulations for the Air Force (Reprinted Edition 2000)" is printed "For Official Use Only" on its
+  first page, although India Code publishes it openly. Recorded in `access_marking`; decide whether
+  it belongs in the corpus.
+- All non-`cites` relations are `extracted`, not `human_verified`.
+
+Schema v0.2.0 (changes from 0.1.0)
+- document: new doc_types `schedule` and `executive_order`; new fields `language`, `parent_doc_id`,
+  `original_filename`, `source_record`, `text_path`, `text_quality`, `needs_ocr`, `pages_without_text`.
+- section: `notes`, `source_record`; amendment entries gain `origin` and `effective_date_raw`,
+  and `by_ref_raw` may be null.
+
+Not done
+- OCR stage (4 documents waiting; Tesseract is a system package, not installed; Prism reuse is still
+  an open question).
+- Golden-set coverage report: the golden test set has not been given to the pipeline.
+- Chapters on sections (the source records carry none).
+- `supersedes` edges BNS->IPC etc.: the repealed central codes are not in the corpus.
+
 ## 2026-11-21 20:06 IST — Supreme Court first check: judgment search needs a CAPTCHA (stopped)
 
 - www.sci.gov.in: robots.txt served (only /wp-admin/ disallowed) and obeyed; home page loads (200).

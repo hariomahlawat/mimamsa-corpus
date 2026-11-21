@@ -16,7 +16,9 @@
     "confidence"
   ],
   "properties": {
-    "schema_version": { "const": "0.1.0" },
+    "schema_version": {
+      "const": "0.2.0"
+    },
     "source_doc_id": {
       "description": "Document or section the edge starts from, e.g. act-army-1950 or act-army-1950#s69.",
       "$ref": "document.schema.json#/$defs/doc_or_section_id"
@@ -39,48 +41,121 @@
     "target_doc_id": {
       "description": "Resolved target. null while unresolved; target_ref_raw then carries the reference.",
       "oneOf": [
-        { "$ref": "document.schema.json#/$defs/doc_or_section_id" },
-        { "type": "null" }
+        {
+          "$ref": "document.schema.json#/$defs/doc_or_section_id"
+        },
+        {
+          "type": "null"
+        }
       ]
     },
     "target_ref_raw": {
       "description": "The reference exactly as written in the source text, e.g. 'Act 37 of 1992' or '(2013) 7 SCC 316'. Kept even after resolution.",
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "effective_date": {
       "description": "When the relationship takes legal effect (e.g. commencement of an amending Act). null if not stated.",
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date"
     },
     "evidence": {
       "description": "The sentence or footnote the edge was taken from. null only for human-entered edges with a reviewer note.",
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "evidence_location": {
       "description": "Where the evidence sits in the source document.",
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "additionalProperties": false,
       "properties": {
-        "doc_id": { "$ref": "document.schema.json#/$defs/doc_or_section_id" },
-        "page": { "type": ["integer", "null"], "minimum": 1 }
+        "doc_id": {
+          "$ref": "document.schema.json#/$defs/doc_or_section_id"
+        },
+        "page": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
       },
-      "required": ["doc_id", "page"]
+      "required": [
+        "doc_id",
+        "page"
+      ]
     },
-    "confidence": { "enum": ["extracted", "llm_proposed", "human_verified"] },
+    "confidence": {
+      "enum": [
+        "extracted",
+        "llm_proposed",
+        "human_verified"
+      ]
+    },
     "reviewed_by": {
       "description": "Reviewer name or initials when confidence=human_verified.",
-      "type": ["string", "null"]
+      "type": [
+        "string",
+        "null"
+      ]
     },
-    "reviewed_at": { "type": ["string", "null"], "format": "date-time" },
-    "review_note": { "type": ["string", "null"] }
+    "reviewed_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "review_note": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
   },
   "anyOf": [
-    { "properties": { "target_doc_id": { "type": "string" } } },
-    { "properties": { "target_ref_raw": { "type": "string", "minLength": 1 } } }
+    {
+      "properties": {
+        "target_doc_id": {
+          "type": "string"
+        }
+      }
+    },
+    {
+      "properties": {
+        "target_ref_raw": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
   ],
-  "if": { "properties": { "confidence": { "const": "human_verified" } } },
+  "if": {
+    "properties": {
+      "confidence": {
+        "const": "human_verified"
+      }
+    }
+  },
   "then": {
-    "properties": { "reviewed_by": { "type": "string", "minLength": 1 } },
-    "required": ["reviewed_by"]
+    "properties": {
+      "reviewed_by": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "required": [
+      "reviewed_by"
+    ]
   }
 }

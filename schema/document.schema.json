@@ -32,36 +32,59 @@
     "field_provenance"
   ],
   "properties": {
-    "schema_version": { "const": "0.1.0" },
-    "doc_id": { "$ref": "#/$defs/doc_id" },
+    "schema_version": {
+      "const": "0.2.0"
+    },
+    "doc_id": {
+      "$ref": "#/$defs/doc_id"
+    },
     "doc_type": {
       "enum": [
         "act",
         "rules",
         "regulations",
+        "schedule",
         "manual",
         "notification",
+        "executive_order",
         "judgment",
         "order",
         "book_historical"
-      ]
+      ],
+      "description": "'order' is a court/tribunal order; 'executive_order' is a government order made under an Act; 'schedule' is a schedule of an Act published as its own file."
     },
-    "title": { "type": "string", "minLength": 1, "description": "As printed on the document." },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "description": "As printed on the document."
+    },
     "number": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "Act number ('46 of 1950'), notification number (S.R.O./G.S.R.), or primary case number."
     },
     "issuing_authority": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "Parliament, MoD, Supreme Court, AFT Principal Bench, ..."
     },
     "issue_date": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date",
       "description": "Date of enactment, notification or judgment. null if not printed (old books)."
     },
     "effective_date": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date",
       "description": "Commencement date; often differs from issue_date."
     },
@@ -77,111 +100,339 @@
       ]
     },
     "status_note": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "Why, with reference, e.g. 'omitted by Act 37 of 1992'."
     },
     "status_as_of": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "format": "date",
       "description": "Date the status was last checked. Status is only true as of this date."
     },
     "source": {
-      "enum": ["indiacode", "mod", "aft", "sci", "hc", "egazette", "archive", "manual_upload"],
+      "enum": [
+        "indiacode",
+        "mod",
+        "aft",
+        "sci",
+        "hc",
+        "egazette",
+        "archive",
+        "manual_upload"
+      ],
       "description": "Crawler module (or manual_upload) that produced this record."
     },
-    "source_url": { "type": "string", "format": "uri", "description": "Exact URL downloaded." },
+    "source_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Exact URL downloaded."
+    },
     "source_aliases": {
       "type": "array",
       "description": "Other URLs that served the same bytes (same sha256).",
-      "items": { "type": "string", "format": "uri" },
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
       "uniqueItems": true
     },
-    "retrieved_at": { "type": "string", "format": "date-time" },
-    "sha256": { "$ref": "#/$defs/sha256" },
+    "retrieved_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sha256": {
+      "$ref": "#/$defs/sha256"
+    },
     "raw_path": {
       "type": "string",
       "pattern": "^data/raw/[a-z0-9_]+/[0-9]{4}/[0-9a-f]{64}\\.[a-z0-9]+$",
       "description": "Path to the untouched raw file, relative to repo root."
     },
-    "mime_type": { "type": "string" },
-    "page_count": { "type": ["integer", "null"], "minimum": 1 },
+    "mime_type": {
+      "type": "string"
+    },
+    "page_count": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
     "access_marking": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "e.g. 'For Official Use Only' if printed on the document."
     },
     "text_method": {
-      "enum": ["pdf_text", "ocr", "html", "mixed", null],
+      "enum": [
+        "pdf_text",
+        "ocr",
+        "html",
+        "mixed",
+        null
+      ],
       "description": "null until text extraction has run. 'mixed' = text layer on some pages, OCR on others."
     },
     "ocr_confidence": {
-      "type": ["number", "null"],
+      "type": [
+        "number",
+        "null"
+      ],
       "minimum": 0,
       "maximum": 100,
       "description": "Mean OCR confidence (0-100) over OCR'd pages."
     },
     "ocr_low_confidence_pages": {
       "type": "array",
-      "items": { "type": "integer", "minimum": 1 },
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      },
       "uniqueItems": true,
       "description": "Pages below the review threshold; listed in reports/ocr_review.md."
     },
     "relations": {
       "type": "array",
-      "items": { "$ref": "relation.schema.json" },
+      "items": {
+        "$ref": "relation.schema.json"
+      },
       "description": "Edges whose source_doc_id is this document. data/relations.jsonl is the union of these plus section-level edges."
     },
     "field_provenance": {
       "type": "object",
       "description": "How each non-null field was filled. Missing key = 'rule'.",
-      "propertyNames": { "pattern": "^[a-z_]+$" },
-      "additionalProperties": { "enum": ["crawler", "rule", "llm", "human"] }
+      "propertyNames": {
+        "pattern": "^[a-z_]+$"
+      },
+      "additionalProperties": {
+        "enum": [
+          "crawler",
+          "rule",
+          "llm",
+          "human"
+        ]
+      }
     },
-
-    "court": { "type": ["string", "null"] },
-    "bench": { "type": ["string", "null"], "description": "e.g. AFT Regional Bench Chandigarh; Division Bench." },
+    "court": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "bench": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "e.g. AFT Regional Bench Chandigarh; Division Bench."
+    },
     "case_numbers": {
       "type": "array",
-      "items": { "type": "string", "minLength": 1 },
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
       "description": "All numbers on the cover (OA, MA, CA, WP), as printed."
     },
-    "neutral_citation": { "type": ["string", "null"], "description": "e.g. 2025 INSC 549" },
+    "neutral_citation": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "e.g. 2025 INSC 549"
+    },
     "reported_citations": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "e.g. (2013) 7 SCC 316, only if printed on the judgment itself."
     },
     "parties": {
-      "type": ["object", "null"],
+      "type": [
+        "object",
+        "null"
+      ],
       "additionalProperties": false,
-      "required": ["petitioner", "respondent"],
+      "required": [
+        "petitioner",
+        "respondent"
+      ],
       "properties": {
-        "petitioner": { "type": "array", "items": { "type": "string" } },
-        "respondent": { "type": "array", "items": { "type": "string" } }
+        "petitioner": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "respondent": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
-    "judges": { "type": "array", "items": { "type": "string" }, "description": "Names as printed." },
+    "judges": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Names as printed."
+    },
     "outcome": {
-      "enum": ["allowed", "dismissed", "partly_allowed", "remanded", "disposed", null]
+      "enum": [
+        "allowed",
+        "dismissed",
+        "partly_allowed",
+        "remanded",
+        "disposed",
+        null
+      ]
     },
     "statutes_cited": {
       "type": "array",
-      "items": { "$ref": "#/$defs/statute_ref" }
+      "items": {
+        "$ref": "#/$defs/statute_ref"
+      }
     },
     "cases_cited": {
       "type": "array",
-      "items": { "type": "string" },
+      "items": {
+        "type": "string"
+      },
       "description": "Raw citation strings; resolved ones also appear as `cites` relations."
     },
     "topics": {
       "type": "array",
       "uniqueItems": true,
-      "items": { "$ref": "#/$defs/topic" }
+      "items": {
+        "$ref": "#/$defs/topic"
+      }
+    },
+    "language": {
+      "enum": [
+        "en",
+        "hi",
+        null
+      ],
+      "description": "Language of the file. null = not established."
+    },
+    "parent_doc_id": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/doc_id"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "The Act this document belongs to (rules, schedules, other-language copies)."
+    },
+    "original_filename": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_record": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "The source site's own record for this document.",
+      "additionalProperties": false,
+      "required": [
+        "system",
+        "record_id",
+        "collection",
+        "act_id",
+        "listing_raw_path"
+      ],
+      "properties": {
+        "system": {
+          "type": "string"
+        },
+        "record_id": {
+          "type": "string"
+        },
+        "collection": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "act_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "handle": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "listing_raw_path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Raw JSON page the record was read from."
+        }
+      }
+    },
+    "text_path": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "data/text/<doc_id>.txt once extracted."
+    },
+    "text_quality": {
+      "enum": [
+        "ok",
+        "suspect",
+        null
+      ],
+      "description": "suspect = a text layer exists but does not read as the expected language."
+    },
+    "needs_ocr": {
+      "type": [
+        "boolean",
+        "null"
+      ],
+      "description": "true = no usable text layer; waiting for the OCR stage."
+    },
+    "pages_without_text": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "uniqueItems": true
     }
   },
-
   "allOf": [
     {
-      "if": { "properties": { "doc_type": { "enum": ["judgment", "order"] } } },
+      "if": {
+        "properties": {
+          "doc_type": {
+            "enum": [
+              "judgment",
+              "order"
+            ]
+          }
+        }
+      },
       "then": {
         "required": [
           "court",
@@ -200,21 +451,55 @@
       "else": {
         "not": {
           "anyOf": [
-            { "required": ["case_numbers"] },
-            { "required": ["neutral_citation"] },
-            { "required": ["parties"] },
-            { "required": ["judges"] },
-            { "required": ["outcome"] }
+            {
+              "required": [
+                "case_numbers"
+              ]
+            },
+            {
+              "required": [
+                "neutral_citation"
+              ]
+            },
+            {
+              "required": [
+                "parties"
+              ]
+            },
+            {
+              "required": [
+                "judges"
+              ]
+            },
+            {
+              "required": [
+                "outcome"
+              ]
+            }
           ]
         }
       }
     },
     {
-      "if": { "properties": { "text_method": { "enum": ["pdf_text", "html"] } } },
-      "then": { "properties": { "ocr_confidence": { "type": "null" } } }
+      "if": {
+        "properties": {
+          "text_method": {
+            "enum": [
+              "pdf_text",
+              "html"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "ocr_confidence": {
+            "type": "null"
+          }
+        }
+      }
     }
   ],
-
   "$defs": {
     "doc_id": {
       "type": "string",
@@ -228,18 +513,53 @@
       "description": "Section-level id: act-army-1950#s69, rules-army-1954#r22, act-army-1950#s3-xxiv."
     },
     "doc_or_section_id": {
-      "anyOf": [{ "$ref": "#/$defs/doc_id" }, { "$ref": "#/$defs/section_id" }]
+      "anyOf": [
+        {
+          "$ref": "#/$defs/doc_id"
+        },
+        {
+          "$ref": "#/$defs/section_id"
+        }
+      ]
     },
-    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
     "statute_ref": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["act", "section", "raw"],
+      "required": [
+        "act",
+        "section",
+        "raw"
+      ],
       "properties": {
-        "act": { "type": "string", "description": "Normalised short title with year: 'Army Act 1950'." },
-        "act_doc_id": { "oneOf": [{ "$ref": "#/$defs/doc_id" }, { "type": "null" }] },
-        "section": { "type": ["string", "null"], "description": "'69', '3(xxiv)', 'Rule 22'. null = whole Act." },
-        "raw": { "type": "string", "description": "As written, e.g. 'AA s.69'." }
+        "act": {
+          "type": "string",
+          "description": "Normalised short title with year: 'Army Act 1950'."
+        },
+        "act_doc_id": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/doc_id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "section": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "'69', '3(xxiv)', 'Rule 22'. null = whole Act."
+        },
+        "raw": {
+          "type": "string",
+          "description": "As written, e.g. 'AA s.69'."
+        }
       }
     },
     "topic": {
