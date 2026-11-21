@@ -1,0 +1,54 @@
+{
+ "act-crpc-1973": {
+  "toc_sections": 0,
+  "found": 0,
+  "missing": [],
+  "heading_mismatches": [],
+  "written": false,
+  "amendment_notes": 0,
+  "reason": "no 'ACT NO. .. OF ....' line: cannot tell the table of sections from the body"
+ },
+ "act-evidence-1872": {
+  "toc_sections": 185,
+  "found": 185,
+  "missing": [],
+  "heading_mismatches": [
+   "18: body 'Admission by party to proceeding or his agent;––St' vs table 'Admission.'",
+   "47A: body 'Opinion as to [2][electronic signature], when rele' vs table 'Opinion as to [electronic signature], when relevan'",
+   "67A: body 'Proof as to [2][electronic signature]' vs table 'Proof as to electronic signature.'",
+   "85: body 'Presumption as to powers-of-attorney' vs table 'Presumptions as to powers-of-attorney.'",
+   "85C: body 'Presumption as to [6][Electronic Signature Certifi' vs table 'Presumption as to Electronic Signature Certificate'"
+  ],
+  "written": true,
+  "amendment_notes": 81,
+  "reason": null,
+  "coverage": 1.0
+ },
+ "act-ipc-1860": {
+  "toc_sections": 574,
+  "found": 574,
+  "missing": [],
+  "heading_mismatches": [
+   "22: body '“Movable property”' vs table '“Moveable property”.'",
+   "33: body '“Act”. “Omission”' vs table '“Act”.'",
+   "43: body '“Illegal”. “Legally bound to do”' vs table '“Illegal”.'",
+   "49: body '“Year”. “Month”' vs table '“Year”.'",
+   "108A: body 'Abetment in India of offences outside India' vs table 'Abetment in Indian of offences outside India.'",
+   "109: body 'Punishment of abetment if the act abetted is commi' vs table 'Punishment of a abetment if the act abetted is com'",
+   "153B: body 'Imputations, assertions prejudicial to national in' vs table 'Imputation assertions prejudicial to national'",
+   "156: body 'Liability of agent of owner or occupier for whose ' vs table 'Liablility of agent of owner or occupier for whose'",
+   "209: body 'Dishonesty making false claim in Court' vs table 'Dishonestly making false claim in Court.'",
+   "312: body 'Causing miscarraige' vs table 'Causing miscarriage.'",
+   "354: body 'Assault or criminal force to woman with intent to ' vs table 'Assault of criminal force to woman with intent to '",
+   "389: body 'Putting person in fear or accusation of offence, i' vs table 'Putting person in fear of accusation of offence, i'",
+   "452: body 'House-trespass alter preparation for hurt, assault' vs table 'House-trespass after preparation for hurt, assault'"
+  ],
+  "written": true,
+  "amendment_notes": 422,
+  "reason": null,
+  "source_typos": [
+   "section 17 is printed without its full stop"
+  ],
+  "coverage": 1.0
+ }
+}

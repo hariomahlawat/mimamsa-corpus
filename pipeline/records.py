@@ -343,6 +343,9 @@ def build_indiacode(paths: Paths) -> dict:
                 for k in EXTRACT_FIELDS:
                     if k in old:
                         d[k] = old[k]
+                if d.get("language") is None and old.get("language"):     # established later (e.g. by OCR)
+                    d["language"] = old["language"]
+                    d["field_provenance"]["language"] = (old.get("field_provenance") or {}).get("language", "rule")
                 for k, v in (old.get("field_provenance") or {}).items():
                     d["field_provenance"].setdefault(k, v)
         write_json(path, d)

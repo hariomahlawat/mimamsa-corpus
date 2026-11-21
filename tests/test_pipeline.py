@@ -335,3 +335,127 @@ def test_repealed_record_becomes_a_repealed_act_with_an_edge(corpus):
     orphan = load(corpus, "meta/act-old-thing-1850.json")["relations"][0]
     assert orphan["type"] == "superseded_by" and orphan["target_doc_id"] is None and orphan["target_ref_raw"] == "Act 29 of 1861"
     assert validate.run(corpus)["errors"] == []
+
+
+# ------------------------------------------- sections cut from a PDF
+from pipeline import split_pdf  # noqa: E402
+
+
+def make_act_pdf(path: Path, drop: tuple = ()) -> None:
+    """A small Act in the Legislative Department layout: table of sections, bold section numbers,
+    superscript markers, footnotes in small type, a watermark."""
+    doc = pymupdf.open()
+    toc = doc.new_page()
+    y = 60
+    for line in ["THE SAMPLE ACT, 1900", "ARRANGEMENT OF SECTIONS", "CHAPTER I", "PRELIMINARY", "SECTIONS",
+                 "1. Short title.", "2. [Repealed.]", "3. Definitions.", "CHAPTER II", "OFFENCES", "4. Punishment.",
+                 "4A. Abetment.", "5. Saving."]:
+        toc.insert_text((72, y), line, fontsize=11)
+        y += 16
+
+    def section(page, y, num, head, body, marker=None, bold=True, sep=".--"):
+        x = 90
+        if marker:
+            page.insert_text((x, y - 3), marker, fontsize=7)
+            x += 5
+            page.insert_text((x, y), "[", fontsize=11)
+            x += 4
+        first = f"{num}. {head}" if head else f"{num}."
+        page.insert_text((x, y), first, fontsize=11, fontname="hebo" if bold else "helv")
+        w = pymupdf.get_text_length(first, fontname="hebo" if bold else "helv", fontsize=11)
+        page.insert_text((x + w, y), f"{sep}{body}" if head else f" {body}", fontsize=11)
+
+    p = doc.new_page()
+    p.insert_text((230, 50), "THE SAMPLE ACT, 1900", fontsize=12)
+    p.insert_text((250, 66), "ACT NO. 7 OF 1900", fontsize=12)
+    p.insert_text((270, 90), "CHAPTER I", fontsize=11)
+    p.insert_text((265, 104), "PRELIMINARY", fontsize=11)
+    section(p, 130, "1", "Short title", "This Act may be called the Sample Act, 1900.")
+    p.insert_text((90, 150), "2. [Repeal of enactments.] Rep. by the Repealing Act, 1938 (1 of 1938), s. 2.", fontsize=11)
+    if "3" not in drop:
+        section(p, 170, "3", "Definitions", "In this Act, court includes every tribunal")
+        p.insert_text((72, 184), "and every officer acting judicially.", fontsize=11)
+        p.insert_text((330, 181), "1", fontsize=7)
+        p.insert_text((336, 184), "[or under the Army Act]", fontsize=11)
+    p.insert_text((72, 700), "1. Ins. by Act 10 of 1927, s. 2 (w.e.f. 1-4-1927).", fontsize=9)
+    p.insert_text((300, 800), "2", fontsize=11)
+    q = doc.new_page()
+    q.insert_text((270, 60), "CHAPTER II", fontsize=11)
+    q.insert_text((275, 74), "OFFENCES", fontsize=11)
+    section(q, 100, "4", "Punishment", "Whoever offends shall be punished with fine.")
+    q.insert_text((108, 116), "1. the first of a numbered list inside the section, in body type", fontsize=11)
+    section(q, 140, "4A", "Abetment", "Whoever abets an offence shall be punished likewise.]", marker="1")
+    section(q, 160, "5", "Saving", "Nothing in this Act affects any other law.")
+    q.insert_text((72, 700), "1. Ins. by Act 3 of 1951, s. 4 (w.e.f. 1-4-1951).", fontsize=9)
+    for page in list(doc)[1:]:
+        page.insert_text(pymupdf.Point(150, 500), "IndiaCode", fontsize=30,
+                         morph=(pymupdf.Point(150, 500), pymupdf.Matrix(45)))
+    doc.save(path)
+    doc.close()
+
+
+def test_split_pdf_follows_the_acts_own_table(tmp_path):
+    pdf = tmp_path / "act.pdf"
+    make_act_pdf(pdf)
+    secs, st = split_pdf.split_pdf(pdf, "act-sample-1900", "The Act is repealed.")
+    assert st["reason"] is None and st["toc_sections"] == 6 and st["found"] == 6 and st["missing"] == []
+    by = {s["number"]: s for s in secs}
+    assert list(by) == ["1", "2", "3", "4", "4A", "5"]
+    assert by["1"]["heading"] == "Short title." and by["1"]["text"] == "This Act may be called the Sample Act, 1900."
+    assert by["1"]["chapter"] == {"number": "I", "title": "PRELIMINARY"} and by["4"]["chapter"]["title"] == "OFFENCES"
+    assert by["1"]["status"] == "repealed" and by["1"]["status_note"] == "The Act is repealed."
+    assert by["2"]["heading"] == "[Repeal of enactments]" and by["2"]["amendment_history"][0]["action"] == "repealed"
+    assert by["2"]["amendment_history"][0]["origin"] == "inline" and "Repealing Act, 1938" in by["2"]["status_note"]
+    # wrapped line joined, superscript kept as a marker, its footnote attached, watermark and footnote text excluded
+    assert "tribunal and every officer acting judicially. [1][or under the Army Act]" in by["3"]["text"]
+    h = by["3"]["amendment_history"][0]
+    assert (h["action"], h["by_ref_raw"], h["effective_date"]) == ("inserted", "Act 10 of 1927", "1927-04-01")
+    assert "IndiaCode" not in json.dumps(secs) and "Ins. by Act 10" not in by["3"]["text"]
+    # a numbered list inside section 4 does not start a new section; 4A's marker is page-local
+    assert "1. the first of a numbered list" in by["4"]["text"]
+    assert by["4A"]["amendment_history"][0]["by_ref_raw"] == "Act 3 of 1951" and by["4A"]["page_start"] == 3
+    assert by["4A"]["section_id"] == "act-sample-1900#s4a"
+
+
+def test_split_pdf_writes_nothing_when_the_table_is_not_matched(tmp_path):
+    pdf = tmp_path / "act.pdf"
+    make_act_pdf(pdf, drop=("3",))
+    secs, st = split_pdf.split_pdf(pdf, "act-sample-1900")
+    assert secs == [] and st["found"] == 5 and st["missing"] == ["3"] and "nothing written" in st["reason"]
+    scan = tmp_path / "scan.pdf"
+    make_pdf(scan, [ENGLISH, ENGLISH])
+    secs, st = split_pdf.split_pdf(scan, "act-x")
+    assert secs == [] and "ACT NO" in st["reason"]
+
+
+def test_split_stage_writes_valid_sections_and_edges(corpus):
+    pdf = corpus.root / "tmp.pdf"
+    make_act_pdf(pdf)
+    body = pdf.read_bytes()
+    pdf.unlink()
+    sha = hashlib.sha256(body).hexdigest()
+    rel = f"data/raw/indiacode/1900/{sha}.pdf"
+    (corpus.root / rel).parent.mkdir(parents=True, exist_ok=True)
+    (corpus.root / rel).write_bytes(body)
+    with StateDB(corpus.db) as db:
+        url = f"{API}/core/bitstreams/sample/content"
+        db.enqueue(url, "indiacode", "indiacode.gov.in", "document", doc_id_hint="act-sample-1900", meta={
+            "parent_doc_id": "act-sample-1900", "category": "act", "filename": "A1900-7.pdf",
+            "language_by_filename": "en", "item_uuid": "u-sample",
+            "repeal_record": {"title": "The Sample Act, 7 of 1900 (Rep., Act 46 of 1950)", "handle": None,
+                              "date_issued": "1900", "state_name": None, "collection_name": "Repeal Acts"}})
+        db.record_file(sha256=sha, raw_path=rel, url=url, nbytes=len(body), content_type="application/pdf")
+        db.mark_fetched(url, status_code=200, sha256=sha, nbytes=len(body), content_type="application/pdf")
+    assert main(["all", "--root", str(corpus.root)]) == 0
+    s3 = load(corpus, "sections/act-sample-1900/s3.json")
+    assert s3["status"] == "repealed" and "Rep., Act 46 of 1950" in s3["status_note"]
+    edges = [json.loads(l) for l in (corpus.data / "relations.jsonl").read_text().splitlines()]
+    assert any(e["source_doc_id"] == "act-sample-1900#s3" and e["target_ref_raw"] == "Act 10 of 1927" for e in edges)
+    assert any(e["source_doc_id"] == "act-army-1950#s75" for e in edges)          # the other Acts' edges survive
+    # the Army Act has section records from its source, so it is not cut from the PDF
+    assert load(corpus, "sections/act-army-1950/s69.json")["source_record"] is not None
+    rep = (corpus.reports / "phase2_report.md").read_text()
+    assert "| act-sample-1900 | 6 | 6 |" in rep
+    assert main(["all", "--root", str(corpus.root)]) == 0                           # re-run: no duplicate edges
+    again = (corpus.data / "relations.jsonl").read_text().splitlines()
+    assert len(again) == len(edges)

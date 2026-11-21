@@ -87,7 +87,7 @@ def extract_document(paths: Paths, meta: dict) -> dict:
 
 
 def run(paths: Paths, only: list[str] | None = None) -> dict:
-    stats = {"extracted": 0, "needs_ocr": 0, "suspect": 0, "not_pdf": 0, "errors": [], "marked": [],
+    stats = {"extracted": 0, "needs_ocr": 0, "kept_ocr": 0, "suspect": 0, "not_pdf": 0, "errors": [], "marked": [],
              "watermark_chars_dropped": 0}
     for path in sorted(paths.meta.glob("*.json")):
         meta = json.loads(path.read_text(encoding="utf-8"))
@@ -95,6 +95,9 @@ def run(paths: Paths, only: list[str] | None = None) -> dict:
             continue
         if meta.get("mime_type") != "application/pdf":
             stats["not_pdf"] += 1
+            continue
+        if meta.get("text_method") == "ocr":         # already read by the OCR stage; do not undo that
+            stats["kept_ocr"] += 1
             continue
         try:
             res = extract_document(paths, meta)

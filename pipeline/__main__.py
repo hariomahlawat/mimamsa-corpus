@@ -2,10 +2,11 @@
 
   records    metadata + section records + relations from what the crawler saved
   extract    text from PDFs (data/text/), page markers kept
+  split      section records cut from the PDF, for Acts with no section records at the source
   ocr        Tesseract OCR for documents marked needs_ocr (slow; resumable; not part of `all`)
   validate   every record against its schema; exit 1 on any error
   report     data/manifest.csv and reports/phase2_report.md
-  all        the four stages in order
+  all        records, extract, split, validate, report
 
 Each stage reads the previous stage's output and can be re-run alone.
 """
@@ -15,13 +16,13 @@ import argparse
 import json
 import sys
 
-from . import extract, ocr, records, report, validate
+from . import extract, ocr, records, report, split_pdf, validate
 from .common import ROOT, Paths
 
 
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="python -m pipeline")
-    p.add_argument("stage", choices=["records", "extract", "ocr", "validate", "report", "all"])
+    p.add_argument("stage", choices=["records", "extract", "split", "ocr", "validate", "report", "all"])
     p.add_argument("--root", default=str(ROOT))
     p.add_argument("--only", action="append", metavar="DOC_ID", help="extract/ocr: limit to these documents")
     p.add_argument("--workers", type=int, default=4, help="ocr: pages read in parallel")
@@ -38,6 +39,12 @@ def main(argv: list[str] | None = None) -> int:
         res = extract.run(paths, args.only)
         extra["extract_errors"] = res["errors"]
         print("extract:", json.dumps(res, indent=1))
+    if args.stage in ("split", "all"):
+        res = split_pdf.run(paths, args.only if args.stage == "split" else None)
+        extra["split"] = res
+        for doc_id, st in res.items():
+            print(f"split: {doc_id}: {st['found']} of {st['toc_sections']} sections in its table, "
+                  f"{st['amendment_notes']} amendment notes, " + ("written" if st["written"] else f"NOT written: {st['reason']}"))
     if args.stage == "ocr":
         res = ocr.run(paths, args.only, workers=args.workers, redo=args.redo)
         print("ocr:", json.dumps(res, indent=1, ensure_ascii=False))

@@ -118,6 +118,26 @@ def run(paths: Paths, extra: dict | None = None) -> dict:
           "- Air Force Rules 1969: India Code has the record but no file.",
           "- Chapters are not recorded on section records (the source records carry no chapter field).",
           "- Relations other than `cites` need human verification before the app relies on them."]
+    split_path = paths.reports / "split_results.json"
+    if extra and extra.get("split") is not None:
+        split_path.parent.mkdir(parents=True, exist_ok=True)
+        split_path.write_text(json.dumps(extra["split"], indent=1, ensure_ascii=False), encoding="utf-8")
+    split = json.loads(split_path.read_text(encoding="utf-8")) if split_path.exists() else {}
+    if split:
+        L += ["", "## Sections cut from PDFs", "",
+              "For Acts with no section records at the source. Every section found is checked against the Act's own "
+              "table of sections; nothing is written below 98% coverage.", "",
+              "| Act | Sections in its table | Found | Amendment notes | Result |", "| --- | --- | --- | --- | --- |"]
+        for doc_id, st in split.items():
+            L.append(f"| {doc_id} | {st['toc_sections']} | {st['found']} | {st['amendment_notes']} | "
+                     + ("written" if st["written"] else f"not written: {st['reason']}") + " |")
+        for doc_id, st in split.items():
+            if st.get("missing") and st["written"]:
+                L += ["", f"Sections of {doc_id} in the table but not found: {', '.join(st['missing'])}"]
+            odd = (st.get("source_typos") or []) + (st.get("heading_mismatches") or [])
+            if odd:
+                L += ["", f"### {doc_id}: headings that differ between the table and the body (as printed; not corrected)", ""]
+                L += [f"- {x}" for x in odd]
     for k in ("problems", "extract_errors"):
         if extra and extra.get(k):
             L += ["", f"## {k.replace('_', ' ').title()}", ""] + [f"- {p}" for p in extra[k]]

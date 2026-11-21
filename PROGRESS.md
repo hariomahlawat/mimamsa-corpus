@@ -1,5 +1,38 @@
 # Progress
 
+## 2026-11-21 — OCR, the three repealed codes, and sections cut from PDFs
+
+Corpus now: 64 documents, 2,466 section records, 738 relations; 100% validate. 84 raw files.
+
+OCR (`python -m pipeline ocr`; Tesseract 5.3.4 installed in the cloud container, hin+eng)
+- 4 documents, 526 pages: the Hindi texts of BNS (145 pp, mean confidence 92.7), BNSS (319 pp, 90.8),
+  BSA (61 pp, 91.6) and the bilingual AFT Guwahati notification (1 p, 86.2). No page fell below the
+  review threshold of 70, so `reports/ocr_review.md` lists none.
+- Two passes per page: Hindi-first reads Hindi words best but drops the digit 1 ("2010" -> "200");
+  English-first reads numbers correctly. Number-bearing words are taken from the English-first pass.
+  Residual errors remain (seen: "31st" read as "318"). OCR text is for search, not for quoting.
+- Resumable: pages are cached in data/ocr/ (not in git).
+
+IPC 1860, CrPC 1973, Evidence Act 1872: found on India Code in its "Repeal Acts" collection
+- One PDF each, no section records at the source. Record titles read "... (Rep., Act 45/46/47 of 2023)".
+- Recorded as `repealed`; `repeals` edges BNS->IPC, BNSS->CrPC, BSA->Evidence Act built from those
+  titles (confidence `extracted`; need human verification).
+- No enactment dates on these records (year only), so issue_date is null.
+
+Sections cut from PDFs (`python -m pipeline split`, part of `all`)
+- For Acts without section records at the source. Each section start must match the Act's own table of
+  sections, in order; nothing is written below 98% coverage.
+- IPC: 574 of 574 sections, 422 amendment notes, 23 chapters. Evidence Act: 185 of 185, 81 notes.
+  Chapters ARE recorded for these (taken from the PDF).
+- CrPC: NOT split. The file is a scan of the original 1974 print with a poor text layer (e.g.
+  "Cfilef Judicial Ma2is•trate"), no amendments shown (no "Ins. by" notes; s.41A absent), and it fails
+  the layout check. It is in the corpus as a whole document only. Needs a better source text.
+- Found while checking: 18 places where the Act's table of sections and its body print a heading
+  differently (source typos such as "miscarraige"), and IPC s.17 printed without its full stop.
+  Listed in `reports/phase2_report.md`; kept as printed.
+- A few sections have no separate heading where the source prints none in the usual form
+  (IPC 216B; Evidence Act 4, 86).
+
 ## 2026-11-21 — Phase 2 pipeline built and run on the India Code files (awaiting review)
 
 Commands: `python -m pipeline records | extract | validate | report | all` (each re-runnable alone).
