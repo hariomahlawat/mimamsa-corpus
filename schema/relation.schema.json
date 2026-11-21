@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mimamsa.local/schema/relation.schema.json",
+  "title": "Mimamsa relation (typed edge between documents or sections)",
+  "description": "One line of data/relations.jsonl. Also used for items of a document record's `relations` list. Anything other than `cites` must reach confidence=human_verified before the app relies on it.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_doc_id",
+    "type",
+    "target_doc_id",
+    "target_ref_raw",
+    "effective_date",
+    "evidence",
+    "confidence"
+  ],
+  "properties": {
+    "schema_version": { "const": "0.1.0" },
+    "source_doc_id": {
+      "description": "Document or section the edge starts from, e.g. act-army-1950 or act-army-1950#s69.",
+      "$ref": "document.schema.json#/$defs/doc_or_section_id"
+    },
+    "type": {
+      "enum": [
+        "amends",
+        "amended_by",
+        "supersedes",
+        "superseded_by",
+        "repeals",
+        "overrules",
+        "overruled_by",
+        "follows",
+        "distinguishes",
+        "cites",
+        "implements"
+      ]
+    },
+    "target_doc_id": {
+      "description": "Resolved target. null while unresolved; target_ref_raw then carries the reference.",
+      "oneOf": [
+        { "$ref": "document.schema.json#/$defs/doc_or_section_id" },
+        { "type": "null" }
+      ]
+    },
+    "target_ref_raw": {
+      "description": "The reference exactly as written in the source text, e.g. 'Act 37 of 1992' or '(2013) 7 SCC 316'. Kept even after resolution.",
+      "type": ["string", "null"]
+    },
+    "effective_date": {
+      "description": "When the relationship takes legal effect (e.g. commencement of an amending Act). null if not stated.",
+      "type": ["string", "null"],
+      "format": "date"
+    },
+    "evidence": {
+      "description": "The sentence or footnote the edge was taken from. null only for human-entered edges with a reviewer note.",
+      "type": ["string", "null"]
+    },
+    "evidence_location": {
+      "description": "Where the evidence sits in the source document.",
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "doc_id": { "$ref": "document.schema.json#/$defs/doc_or_section_id" },
+        "page": { "type": ["integer", "null"], "minimum": 1 }
+      },
+      "required": ["doc_id", "page"]
+    },
+    "confidence": { "enum": ["extracted", "llm_proposed", "human_verified"] },
+    "reviewed_by": {
+      "description": "Reviewer name or initials when confidence=human_verified.",
+      "type": ["string", "null"]
+    },
+    "reviewed_at": { "type": ["string", "null"], "format": "date-time" },
+    "review_note": { "type": ["string", "null"] }
+  },
+  "anyOf": [
+    { "properties": { "target_doc_id": { "type": "string" } } },
+    { "properties": { "target_ref_raw": { "type": "string", "minLength": 1 } } }
+  ],
+  "if": { "properties": { "confidence": { "const": "human_verified" } } },
+  "then": {
+    "properties": { "reviewed_by": { "type": "string", "minLength": 1 } },
+    "required": ["reviewed_by"]
+  }
+}

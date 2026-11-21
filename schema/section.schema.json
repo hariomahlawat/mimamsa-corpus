@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mimamsa.local/schema/section.schema.json",
+  "title": "Mimamsa section-level record (Acts, Rules, Regulations)",
+  "description": "One file per section: data/sections/<doc_id>/<section_key>.json. Carries its own status and amendment history, so an omitted section is marked even when the parent Act is in force.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "section_id",
+    "parent_doc_id",
+    "unit",
+    "number",
+    "heading",
+    "chapter",
+    "order",
+    "text",
+    "page_start",
+    "page_end",
+    "status",
+    "status_note",
+    "amendment_history",
+    "field_provenance"
+  ],
+  "properties": {
+    "schema_version": { "const": "0.1.0" },
+    "section_id": { "$ref": "document.schema.json#/$defs/section_id" },
+    "parent_doc_id": { "$ref": "document.schema.json#/$defs/doc_id" },
+    "unit": {
+      "enum": ["section", "rule", "regulation", "paragraph", "article", "schedule"],
+      "description": "What the parent calls this unit."
+    },
+    "number": { "type": "string", "minLength": 1, "description": "As printed: '69', '3', '22A'." },
+    "heading": { "type": ["string", "null"], "description": "Marginal heading, e.g. 'Civil offences'." },
+    "chapter": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["number", "title"],
+      "properties": {
+        "number": { "type": ["string", "null"] },
+        "title": { "type": ["string", "null"] }
+      }
+    },
+    "order": { "type": "integer", "minimum": 0, "description": "Position within the parent, for stable sorting." },
+    "text": {
+      "type": ["string", "null"],
+      "description": "Current text as published by the source, footnote markers kept. null if omitted and the source prints nothing."
+    },
+    "page_start": { "type": ["integer", "null"], "minimum": 1 },
+    "page_end": { "type": ["integer", "null"], "minimum": 1 },
+    "status": {
+      "enum": ["in_force", "amended", "omitted", "repealed", "substituted", "not_yet_in_force", "unknown"]
+    },
+    "status_note": { "type": ["string", "null"], "description": "e.g. 'Omitted by Act 37 of 1992, s.3'." },
+    "amendment_history": {
+      "type": "array",
+      "description": "One entry per footnote / amendment, oldest first.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["action", "by_ref_raw", "by_doc_id", "effective_date", "footnote_text", "confidence"],
+        "properties": {
+          "action": { "enum": ["inserted", "substituted", "omitted", "amended", "renumbered", "repealed"] },
+          "by_ref_raw": { "type": "string", "description": "As printed: 'Act 37 of 1992'." },
+          "by_doc_id": {
+            "oneOf": [{ "$ref": "document.schema.json#/$defs/doc_id" }, { "type": "null" }]
+          },
+          "effective_date": { "type": ["string", "null"], "format": "date" },
+          "footnote_text": { "type": "string", "description": "Full footnote text it was parsed from." },
+          "confidence": { "enum": ["extracted", "llm_proposed", "human_verified"] }
+        }
+      }
+    },
+    "field_provenance": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z_]+$" },
+      "additionalProperties": { "enum": ["crawler", "rule", "llm", "human"] }
+    }
+  }
+}

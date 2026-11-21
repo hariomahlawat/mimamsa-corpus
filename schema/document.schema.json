@@ -1,0 +1,281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mimamsa.local/schema/document.schema.json",
+  "title": "Mimamsa document metadata record",
+  "description": "One file per document: data/meta/<doc_id>.json. Fields the pipeline cannot fill are null, never guessed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "doc_id",
+    "doc_type",
+    "title",
+    "number",
+    "issuing_authority",
+    "issue_date",
+    "effective_date",
+    "status",
+    "status_note",
+    "source",
+    "source_url",
+    "source_aliases",
+    "retrieved_at",
+    "sha256",
+    "raw_path",
+    "mime_type",
+    "page_count",
+    "access_marking",
+    "text_method",
+    "ocr_confidence",
+    "ocr_low_confidence_pages",
+    "relations",
+    "field_provenance"
+  ],
+  "properties": {
+    "schema_version": { "const": "0.1.0" },
+    "doc_id": { "$ref": "#/$defs/doc_id" },
+    "doc_type": {
+      "enum": [
+        "act",
+        "rules",
+        "regulations",
+        "manual",
+        "notification",
+        "judgment",
+        "order",
+        "book_historical"
+      ]
+    },
+    "title": { "type": "string", "minLength": 1, "description": "As printed on the document." },
+    "number": {
+      "type": ["string", "null"],
+      "description": "Act number ('46 of 1950'), notification number (S.R.O./G.S.R.), or primary case number."
+    },
+    "issuing_authority": {
+      "type": ["string", "null"],
+      "description": "Parliament, MoD, Supreme Court, AFT Principal Bench, ..."
+    },
+    "issue_date": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Date of enactment, notification or judgment. null if not printed (old books)."
+    },
+    "effective_date": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Commencement date; often differs from issue_date."
+    },
+    "status": {
+      "enum": [
+        "in_force",
+        "amended",
+        "partly_repealed",
+        "repealed",
+        "superseded",
+        "overruled",
+        "unknown"
+      ]
+    },
+    "status_note": {
+      "type": ["string", "null"],
+      "description": "Why, with reference, e.g. 'omitted by Act 37 of 1992'."
+    },
+    "status_as_of": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Date the status was last checked. Status is only true as of this date."
+    },
+    "source": {
+      "enum": ["indiacode", "mod", "aft", "sci", "hc", "egazette", "archive", "manual_upload"],
+      "description": "Crawler module (or manual_upload) that produced this record."
+    },
+    "source_url": { "type": "string", "format": "uri", "description": "Exact URL downloaded." },
+    "source_aliases": {
+      "type": "array",
+      "description": "Other URLs that served the same bytes (same sha256).",
+      "items": { "type": "string", "format": "uri" },
+      "uniqueItems": true
+    },
+    "retrieved_at": { "type": "string", "format": "date-time" },
+    "sha256": { "$ref": "#/$defs/sha256" },
+    "raw_path": {
+      "type": "string",
+      "pattern": "^data/raw/[a-z0-9_]+/[0-9]{4}/[0-9a-f]{64}\\.[a-z0-9]+$",
+      "description": "Path to the untouched raw file, relative to repo root."
+    },
+    "mime_type": { "type": "string" },
+    "page_count": { "type": ["integer", "null"], "minimum": 1 },
+    "access_marking": {
+      "type": ["string", "null"],
+      "description": "e.g. 'For Official Use Only' if printed on the document."
+    },
+    "text_method": {
+      "enum": ["pdf_text", "ocr", "html", "mixed", null],
+      "description": "null until text extraction has run. 'mixed' = text layer on some pages, OCR on others."
+    },
+    "ocr_confidence": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Mean OCR confidence (0-100) over OCR'd pages."
+    },
+    "ocr_low_confidence_pages": {
+      "type": "array",
+      "items": { "type": "integer", "minimum": 1 },
+      "uniqueItems": true,
+      "description": "Pages below the review threshold; listed in reports/ocr_review.md."
+    },
+    "relations": {
+      "type": "array",
+      "items": { "$ref": "relation.schema.json" },
+      "description": "Edges whose source_doc_id is this document. data/relations.jsonl is the union of these plus section-level edges."
+    },
+    "field_provenance": {
+      "type": "object",
+      "description": "How each non-null field was filled. Missing key = 'rule'.",
+      "propertyNames": { "pattern": "^[a-z_]+$" },
+      "additionalProperties": { "enum": ["crawler", "rule", "llm", "human"] }
+    },
+
+    "court": { "type": ["string", "null"] },
+    "bench": { "type": ["string", "null"], "description": "e.g. AFT Regional Bench Chandigarh; Division Bench." },
+    "case_numbers": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "description": "All numbers on the cover (OA, MA, CA, WP), as printed."
+    },
+    "neutral_citation": { "type": ["string", "null"], "description": "e.g. 2025 INSC 549" },
+    "reported_citations": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "e.g. (2013) 7 SCC 316, only if printed on the judgment itself."
+    },
+    "parties": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["petitioner", "respondent"],
+      "properties": {
+        "petitioner": { "type": "array", "items": { "type": "string" } },
+        "respondent": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "judges": { "type": "array", "items": { "type": "string" }, "description": "Names as printed." },
+    "outcome": {
+      "enum": ["allowed", "dismissed", "partly_allowed", "remanded", "disposed", null]
+    },
+    "statutes_cited": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/statute_ref" }
+    },
+    "cases_cited": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Raw citation strings; resolved ones also appear as `cites` relations."
+    },
+    "topics": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/topic" }
+    }
+  },
+
+  "allOf": [
+    {
+      "if": { "properties": { "doc_type": { "enum": ["judgment", "order"] } } },
+      "then": {
+        "required": [
+          "court",
+          "bench",
+          "case_numbers",
+          "neutral_citation",
+          "reported_citations",
+          "parties",
+          "judges",
+          "outcome",
+          "statutes_cited",
+          "cases_cited",
+          "topics"
+        ]
+      },
+      "else": {
+        "not": {
+          "anyOf": [
+            { "required": ["case_numbers"] },
+            { "required": ["neutral_citation"] },
+            { "required": ["parties"] },
+            { "required": ["judges"] },
+            { "required": ["outcome"] }
+          ]
+        }
+      }
+    },
+    {
+      "if": { "properties": { "text_method": { "enum": ["pdf_text", "html"] } } },
+      "then": { "properties": { "ocr_confidence": { "type": "null" } } }
+    }
+  ],
+
+  "$defs": {
+    "doc_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "maxLength": 120,
+      "description": "Stable, readable, lowercase-hyphenated: act-army-1950, sc-2013-dharamvir-singh-ca4949."
+    },
+    "section_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*#(s|r|reg|para|art|sch)[0-9a-z]+(-[0-9a-z]+)*$",
+      "description": "Section-level id: act-army-1950#s69, rules-army-1954#r22, act-army-1950#s3-xxiv."
+    },
+    "doc_or_section_id": {
+      "anyOf": [{ "$ref": "#/$defs/doc_id" }, { "$ref": "#/$defs/section_id" }]
+    },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "statute_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["act", "section", "raw"],
+      "properties": {
+        "act": { "type": "string", "description": "Normalised short title with year: 'Army Act 1950'." },
+        "act_doc_id": { "oneOf": [{ "$ref": "#/$defs/doc_id" }, { "type": "null" }] },
+        "section": { "type": ["string", "null"], "description": "'69', '3(xxiv)', 'Rule 22'. null = whole Act." },
+        "raw": { "type": "string", "description": "As written, e.g. 'AA s.69'." }
+      }
+    },
+    "topic": {
+      "description": "Fixed list. Extend only by editing this schema (and bumping schema_version).",
+      "enum": [
+        "court_martial",
+        "summary_court_martial",
+        "general_court_martial",
+        "district_court_martial",
+        "summary_of_evidence",
+        "court_of_inquiry",
+        "desertion",
+        "absence_without_leave",
+        "disobedience",
+        "fraud_and_misappropriation",
+        "civil_offence",
+        "punishment_and_sentence",
+        "dismissal_and_discharge",
+        "administrative_action",
+        "disability_pension",
+        "invalidment",
+        "service_pension",
+        "family_pension",
+        "entitlement_rules",
+        "medical_board",
+        "promotion",
+        "seniority",
+        "pay_and_allowances",
+        "aft_jurisdiction",
+        "high_court_jurisdiction",
+        "limitation_and_condonation",
+        "active_service",
+        "private_property_disposal",
+        "transition_ipc_to_bns",
+        "other"
+      ]
+    }
+  }
+}

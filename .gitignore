@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+.pytest_cache/
+data/raw/**
+data/text/**
+data/meta/**
+data/sections/**
+data/relations.jsonl
+data/manifest.csv
+state/*.sqlite*
+state/logs/
+snapshots/**
+!**/.gitkeep

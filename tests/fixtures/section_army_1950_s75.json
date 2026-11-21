@@ -1,0 +1,26 @@
+{
+  "schema_version": "0.1.0",
+  "section_id": "act-army-1950#s75",
+  "parent_doc_id": "act-army-1950",
+  "unit": "section",
+  "number": "75",
+  "heading": null,
+  "chapter": {"number": "VII", "title": "Punishments"},
+  "order": 75,
+  "text": null,
+  "page_start": 40,
+  "page_end": 40,
+  "status": "omitted",
+  "status_note": "Omitted by Act 37 of 1992",
+  "amendment_history": [
+    {
+      "action": "omitted",
+      "by_ref_raw": "Act 37 of 1992",
+      "by_doc_id": null,
+      "effective_date": null,
+      "footnote_text": "illustrative fixture footnote: Omitted by Act 37 of 1992",
+      "confidence": "extracted"
+    }
+  ],
+  "field_provenance": {}
+}
