@@ -19,7 +19,7 @@ import logging
 import sys
 from pathlib import Path
 
-from . import direct, indiacode, probe
+from . import aft, direct, indiacode, probe
 from .audit import AuditLog, setup_logging
 from .config import DEFAULT_CONFIG, ROOT, ConfigError, check_config, load_config
 from .fetch import fetch_documents
@@ -29,7 +29,7 @@ from .state import StateDB
 
 log = logging.getLogger("mimamsa.cli")
 
-DISCOVERERS = {"indiacode": indiacode, "official_copies": direct, "legislative": direct, "bprd": direct}
+DISCOVERERS = {"indiacode": indiacode, "aft": aft, "official_copies": direct, "legislative": direct, "bprd": direct}
 
 
 def _replay(args) -> str | None:
@@ -150,6 +150,10 @@ def cmd_discover(args, cfg) -> int:
     if report.errors:
         print("config errors; run config-check", file=sys.stderr)
         return 1
+    if not _replay(args) and not cfg.may_run_now(args.source):
+        q = cfg.defaults["quiet_hours_ist"]
+        print(f"{args.source} is a heavy source; it only runs {q['start']}-{q['end']} IST.", file=sys.stderr)
+        return 3
     with StateDB(db_path) as db:
         run_id = db.start_run("discover", [args.source],
                               {"only": args.only, "refresh": args.refresh, "replay": _replay(args)})

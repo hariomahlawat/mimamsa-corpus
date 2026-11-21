@@ -182,27 +182,37 @@ sources:
   # ---------------------------------------------------------------- Phase 3
   aft:
     phase: 3
+    # Not enabled: the AFT sites reset connections from the cloud container, so this has not run live.
+    # Listing addresses and page layouts below are from pages saved from the live sites in 2023
+    # (github.com/L-Bellingcat/army-tribunals). Run `discover --source aft --only <bench> --record <dir>`
+    # from a machine in India, one bench at a time, and read the result before any download.
     enabled: false
     priority: 1
     heavy: true
-    allowed_hosts: [www.aftdelhi.nic.in, aftdelhi.nic.in]
-    base_url: https://www.aftdelhi.nic.in
     verify: true
-    discovery: "Disposed-case listings by bench, year and month. Start: Principal Bench, one year."
+    allowed_hosts: [www.aftdelhi.nic.in, aftdelhi.nic.in, aftlko.up.nic.in, aftkolkata.nic.in, aftjabalpur.in]
+    base_url: https://www.aftdelhi.nic.in
+    discovery: "Per bench: read its judgment listing page(s) and queue every PDF link with what the row says about it."
     benches:
-      - { key: principal-delhi, name: "Principal Bench, New Delhi", url: "https://www.aftdelhi.nic.in", verify: true }
-      # Regional bench sites: add hosts to allowed_hosts once confirmed.
-      - { key: chandigarh,  name: "Regional Bench, Chandigarh",  url: null }
-      - { key: lucknow,     name: "Regional Bench, Lucknow",     url: null }
-      - { key: kolkata,     name: "Regional Bench, Kolkata",     url: null }
-      - { key: guwahati,    name: "Regional Bench, Guwahati",    url: null }
-      - { key: chennai,     name: "Regional Bench, Chennai",     url: null }
-      - { key: kochi,       name: "Regional Bench, Kochi",       url: null }
-      - { key: mumbai,      name: "Regional Bench, Mumbai",      url: null }
-      - { key: jaipur,      name: "Regional Bench, Jaipur",      url: null }
-      - { key: jabalpur,    name: "Regional Bench, Jabalpur",    url: null }
-      - { key: srinagar,    name: "Regional Bench, Srinagar/Jammu", url: null }
-    first_slice: { bench: principal-delhi, year: 2025 }
+      # style joodb = the listing component on aftdelhi.nic.in (rows with labelled fields + ViewPDF link);
+      # style table = an HTML table of PDF links.
+      - { key: principal-delhi, name: "Principal Bench, New Delhi", style: joodb, max_pages: 60,
+          listing_urls: ["https://www.aftdelhi.nic.in/index.php/site-links/judgement-by-case"] }
+      - { key: chandigarh,  name: "Regional Bench, Chandigarh", style: joodb, max_pages: 60,
+          listing_urls: ["https://www.aftdelhi.nic.in/index.php/rbs/chandigarh/chandigarh-judgement"] }
+      - { key: kolkata,     name: "Regional Bench, Kolkata", style: table, max_pages: 60,
+          listing_urls: ["https://aftkolkata.nic.in/judgements/index/page:1"],
+          page_link_pattern: "/judgements/index/page:\\d+$" }
+      # Layout known (table of PDF links) but the listing page addresses were not recorded in 2023:
+      - { key: lucknow,     name: "Regional Bench, Lucknow",  style: table, listing_urls: [] }
+      - { key: jabalpur,    name: "Regional Bench, Jabalpur", style: table, listing_urls: [] }
+      # Nothing known yet:
+      - { key: guwahati,    name: "Regional Bench, Guwahati" }
+      - { key: chennai,     name: "Regional Bench, Chennai" }
+      - { key: kochi,       name: "Regional Bench, Kochi" }
+      - { key: mumbai,      name: "Regional Bench, Mumbai" }
+      - { key: jaipur,      name: "Regional Bench, Jaipur" }
+      - { key: srinagar,    name: "Regional Bench, Srinagar/Jammu" }
 
   # ---------------------------------------------------------------- Phase 4
   sci:

@@ -1,5 +1,35 @@
 # Progress
 
+## 2026-11-21 — AFT module built (not run live); secondary sources for judgments checked
+
+AFT module (`crawler/aft.py`, `python -m crawler discover --source aft --only <bench>`)
+- NOT run against the live sites: they reset connections from the cloud container. Built from, and
+  tested on, excerpts of listing pages saved from the live sites in 2023 (MIT-licensed repository
+  github.com/L-Bellingcat/army-tribunals; excerpts in tests/fixtures/aft/). The sites may have changed.
+- Two listing styles: `joodb` (Principal Bench, Chandigarh on aftdelhi.nic.in: labelled rows + ViewPDF
+  link; asks for all results with limit=0 and pages on if the site returns fewer than its own
+  "Results a - b of c") and `table` (Kolkata, Lucknow, Jabalpur: tables of PDF links; Kolkata's
+  page:N links are followed).
+- Configured with listing addresses: Principal Bench, Chandigarh, Kolkata. Layout known but listing
+  address missing: Lucknow, Jabalpur. Nothing known: Guwahati, Chennai, Kochi, Mumbai, Jaipur, Srinagar.
+- Reads listing pages only; queues each PDF link with the row's fields (case number, court, year,
+  month, members). Heavy source: live runs only 20:00-08:00 IST. `aft` stays disabled in sources.yaml.
+- In 2023 Chandigarh listed 8,685 judgments on one page. Kolkata's site needed certificate checks
+  switched off in that project's scraper; this crawler will not do that.
+- 116 tests passing.
+
+Secondary sources for Supreme Court and High Court judgments (checked, nothing collected)
+- AWS Open Data, bucket `indian-supreme-court-judgments`: reachable from the container. Taken from the
+  Supreme Court's own e-SCR portal; CC-BY-4.0; per-year metadata + PDFs. The 2013 index has 854
+  reported judgments, including Dharamvir Singh v. Union of India (2013 INSC 408, decided 02-07-2013).
+  The index has no judgment text, so keyword filtering needs the PDFs.
+- AWS Open Data, bucket `indian-high-court-judgments`: reachable. From the eCourts judgments portal;
+  25 High Courts, about 17.8 million judgments, about 1.25 TiB; CC-BY-4.0.
+- No bulk dataset of AFT judgments was found. Indian Kanoon, Casemine and vLex carry AFT judgments
+  but are commercial or restricted, which the brief excludes.
+- DECISION NEEDED: the brief says official sites only. These two buckets are a third party's copy
+  of official court data, not the courts' own sites.
+
 ## 2026-11-21 — Better CrPC text and the correspondence tables
 
 Corpus now: 68 documents, 2,998 section records, 1,061 relations, 1,194 correspondence rows; all validate.
