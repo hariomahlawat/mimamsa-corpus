@@ -209,3 +209,86 @@ def test_cli_all_writes_manifest_and_report(corpus, capsys):
     rep = (corpus.reports / "phase2_report.md").read_text()
     assert "[x] Field punishment (s.75) omitted in 1992" in rep and "act-army-1950-hi" in rep
     assert "`6-9-192`" in rep
+
+
+# ---------------------------------------------------------------------- OCR
+from pipeline import ocr  # noqa: E402
+
+
+def _w(text, box, conf=90.0, line=(1, 1, 1)):
+    return {"text": text, "conf": conf, "box": box, "line": line}
+
+
+def test_merge_numbers_takes_digits_from_the_second_pass_only():
+    base = [_w("जुलाई,", (0, 0, 100, 40)), _w("200", (110, 0, 200, 40)), _w("3]", (210, 0, 250, 40)),
+            _w("प्रदत्त", (260, 0, 360, 40)), _w("2007", (370, 0, 450, 40))]
+    alt = [_w("जुलाई,", (0, 0, 100, 40)), _w("2010", (108, 0, 202, 40), conf=80.0), _w("31", (210, 0, 250, 40)),
+           _w("Wed", (260, 0, 360, 40)), _w("2007", (370, 0, 450, 40)),
+           _w("1999", (110, 400, 200, 440))]                      # same column, another line: must not be used
+    assert ocr.merge_numbers(base, alt) == 2
+    assert [w["text"] for w in base] == ["जुलाई,", "2010", "31", "प्रदत्त", "2007"]
+    assert base[1]["conf"] == 80.0                                # the lower confidence of the two readings
+
+
+def test_parse_tsv_groups_lines_and_drops_watermark():
+    head = "level\tpage_num\tblock_num\tpar_num\tline_num\tword_num\tleft\ttop\twidth\theight\tconf\ttext\n"
+    rows = ["5\t1\t1\t1\t1\t1\t0\t0\t10\t10\t90\tArmed", "5\t1\t1\t1\t1\t2\t12\t0\t10\t10\t70\tForces",
+            "5\t1\t1\t1\t2\t1\t0\t12\t10\t10\t80\tTribunal", "5\t1\t2\t1\t1\t1\t0\t40\t10\t10\t60\tIndiaCode",
+            "5\t1\t2\t1\t1\t2\t12\t40\t10\t10\t40\tAct", "4\t1\t2\t1\t1\t0\t0\t40\t30\t10\t-1\t"]
+    text, conf, n = ocr.parse_tsv(head + "\n".join(rows) + "\n")
+    assert text == "Armed Forces\nTribunal\n\nAct" and n == 4 and conf == 70.0
+
+
+@pytest.mark.skipif(ocr.tesseract_version() is None, reason="tesseract not installed")
+def test_ocr_reads_a_scanned_document_and_resumes(corpus, monkeypatch):
+    records.build_indiacode(corpus)
+    # Replace the "Hindi" file with an image-only scan of English text.
+    hindi = load(corpus, "meta/act-army-1950-hi.json")
+    src = pymupdf.open()
+    page = src.new_page()
+    page.insert_textbox(pymupdf.Rect(60, 60, 540, 700), "Armed Forces Tribunal Act, 2007\n\n" + ENGLISH, fontsize=13)
+    pix = page.get_pixmap(dpi=200)
+    scan = pymupdf.open()
+    spage = scan.new_page(width=page.rect.width, height=page.rect.height)
+    spage.insert_image(spage.rect, pixmap=pix)
+    spage2 = scan.new_page()                                       # a blank page
+    raw = corpus.raw_file(hindi["raw_path"])
+    scan.save(raw)
+    hindi["sha256"] = hashlib.sha256(raw.read_bytes()).hexdigest()
+    (corpus.meta / "act-army-1950-hi.json").write_text(json.dumps(hindi))
+    extract.run(corpus, ["act-army-1950-hi"])
+    assert load(corpus, "meta/act-army-1950-hi.json")["needs_ocr"] is True
+
+    stats = ocr.run(corpus, workers=2, langs="eng", dpi=200)
+    assert stats["errors"] == [] and stats["documents"] == 1 and stats["pages"] == 2
+    meta = load(corpus, "meta/act-army-1950-hi.json")
+    assert meta["text_method"] == "ocr" and meta["needs_ocr"] is False and meta["ocr_confidence"] > 80
+    assert meta["pages_without_text"] == [2]
+    text = (corpus.root / meta["text_path"]).read_text()
+    assert "[[page 1]]" in text and "Armed Forces Tribunal Act, 2007" in text and "court-martial" in text
+    assert (corpus.reports / "ocr_review.md").exists()
+
+    # Second run: pages come from the cache, tesseract is not called again.
+    def boom(*a, **k):
+        raise AssertionError("tesseract called despite cache")
+    meta["needs_ocr"] = True
+    (corpus.meta / "act-army-1950-hi.json").write_text(json.dumps(meta))
+    real_run = ocr.subprocess.run
+    monkeypatch.setattr(ocr.subprocess, "run", lambda cmd, **k: real_run(cmd, **k) if "--version" in cmd else boom())
+    assert ocr.run(corpus, workers=1, langs="eng", dpi=200)["pages"] == 2
+    monkeypatch.undo()
+    assert validate.run(corpus, check_files=False)["errors"] == []
+
+
+def test_low_confidence_pages_are_listed_not_hidden(corpus, monkeypatch):
+    records.build_indiacode(corpus)
+    extract.run(corpus)
+    monkeypatch.setattr(ocr, "tesseract_version", lambda: "tesseract (test)")
+    monkeypatch.setattr(ocr, "ocr_page", lambda pdf, i, cache, langs, dpi: {
+        "page": i + 1, "text": "readable text" if i == 0 else "g@rb1e", "confidence": 91.0 if i == 0 else 42.0,
+        "words": 2})
+    stats = ocr.run(corpus)
+    meta = load(corpus, "meta/act-army-1950-hi.json")
+    assert meta["ocr_low_confidence_pages"] == [2, 3] and meta["text_quality"] == "suspect"
+    assert stats["low_confidence_pages"] == 2
+    assert "p.2 (42)" in (corpus.reports / "ocr_review.md").read_text()

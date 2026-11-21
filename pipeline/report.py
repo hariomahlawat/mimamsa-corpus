@@ -55,10 +55,12 @@ def run(paths: Paths, extra: dict | None = None) -> dict:
           "| Result | Documents |", "| --- | --- |"]
     c = Counter("needs OCR" if d.get("needs_ocr") else
                 ("text, suspect" if d.get("text_quality") == "suspect" else
-                 ("text, ok" if d.get("text_method") else "not processed")) for d in docs)
+                 ("text from OCR" if d.get("text_method") == "ocr" else
+                  ("text, ok" if d.get("text_method") else "not processed"))) for d in docs)
     L += [f"| {k} | {v} |" for k, v in sorted(c.items())]
     for label, pick in (("Needs OCR (no usable text layer; no text kept)", lambda d: d.get("needs_ocr")),
-                        ("Text layer present but suspect (kept, flagged)", lambda d: d.get("text_quality") == "suspect"),
+                        ("Text layer present but suspect (kept, flagged)",
+                         lambda d: d.get("text_quality") == "suspect" and d.get("text_method") != "ocr"),
                         ("Some pages without text", lambda d: d.get("text_method") and d.get("pages_without_text"))):
         rows = [d for d in docs if pick(d)]
         if rows:
@@ -66,6 +68,14 @@ def run(paths: Paths, extra: dict | None = None) -> dict:
                   "| --- | --- | --- | --- | --- |"]
             L += [f"| {d['doc_id']} | {d['doc_type']} | {d.get('page_count') or ''} | "
                   f"{len(d.get('pages_without_text') or [])} | {d['title'][:70]} |" for d in rows]
+    ocrd = [d for d in docs if d.get("text_method") == "ocr"]
+    if ocrd:
+        L += ["", "### Read by OCR", "", "| doc_id | Language | Pages | Mean confidence | Pages to review | Title |",
+              "| --- | --- | --- | --- | --- | --- |"]
+        L += [f"| {d['doc_id']} | {d.get('language') or 'mixed/unknown'} | {d.get('page_count') or ''} | "
+              f"{d.get('ocr_confidence')} | {len(d.get('ocr_low_confidence_pages') or [])} | {d['title'][:60]} |"
+              for d in ocrd]
+        L += ["", "Pages to review are listed in `reports/ocr_review.md`."]
     marked = [d for d in docs if d.get("access_marking")]
     if marked:
         L += ["", "### Access markings found (review before use)", ""]

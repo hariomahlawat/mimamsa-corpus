@@ -16,3 +16,4 @@ reports/discover_*
 state/replay_data/
 reports/probe_*
 state/recon/
+data/ocr/
