@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2011/court=3_22/bench=phhc/PHHC010971142011_1_2011-11-23.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:15:35+00:00",
+  "sha256": "4a6c7af2f54bc2dd5ec21dfb2f74695fb327ab49bbfe085d9dc09dc5275a8948",
+  "raw_path": "data/raw/hc/2011/4a6c7af2f54bc2dd5ec21dfb2f74695fb327ab49bbfe085d9dc09dc5275a8948.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2011-lpa-2152-2011-phhc010971142011-1-2011-11-23.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2011-lpa-2152-2011-phhc010971142011-1-2011-11-23",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s42",
+      "target_ref_raw": "Section 42 of the Air Force Act, 1950",
+      "effective_date": null,
+      "evidence": "its that a normal tenure of 4-5 years is fixed for Units. It is further contended that violation of this policy attracts penal provision contained in Section 42 of the Air Force Act, 1950. We have carefully examined stipulations in the policy and Section 42 of the Air Force Act, 1950. We are of the considered view that the policy does",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2011-lpa-2152-2011-phhc010971142011-1-2011-11-23",
+  "doc_type": "judgment",
+  "title": "LPA/2152/2011 of OM PARKASH PRIYADARSHI Vs UNION OF INDIA AND ORS.",
+  "number": "LPA/2152/2011",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2011-11-23",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010971142011_1_2011-11-23.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010971142011",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "LPA/2152/2011"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "OM PARKASH PRIYADARSHI"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE PERMOD KOHLI",
+    "MR. JUSTICE TEJINDER SINGH DHINDSA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "42",
+      "raw": "Section 42 of the Air Force Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 3,
+    "keywords": {
+      "air force act": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

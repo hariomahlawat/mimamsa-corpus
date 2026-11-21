@@ -1,0 +1,189 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2011/court=3_22/bench=phhc/PHHC010335482003_1_2012-11-05.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:15:13+00:00",
+  "sha256": "3438d34dbe46d6d391db61610f7871577e6123d629547026cc716aaa3fb7a892",
+  "raw_path": "data/raw/hc/2011/3438d34dbe46d6d391db61610f7871577e6123d629547026cc716aaa3fb7a892.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 12,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2011-crwp-5-2003-phhc010335482003-1-2012-11-05.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2011-crwp-5-2003-phhc010335482003-1-2012-11-05",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s18",
+      "target_ref_raw": "section 18 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "s awarded; (iv)any other matter, whatsoever, but shall not include matters relating to— Criminal Writ Petition No. 5 of 2003 3 (i)orders issued under section 18 of the Army Act, 1950 (46 of 1950) sub-section (1) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950; (45 of 1950) and (ii)transfe",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2011-crwp-5-2003-phhc010335482003-1-2012-11-05",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s4",
+      "target_ref_raw": "Section 4 of the Army Act",
+      "effective_date": null,
+      "evidence": "ns of Army Act Criminal Writ Petition No. 5 of 2003 4 to any force raised or maintained under the authority of the Central Government is regulated by Section 4 of the Army Act. This Section provides that the Central Government may by notification, apply, with or without modifications, all or any of the provisions of the Act",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2011-crwp-5-2003-phhc010335482003-1-2012-11-05",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s18",
+      "target_ref_raw": "section 18 of the Air Force Act, 1950",
+      "effective_date": null,
+      "evidence": "5 of 2003 3 (i)orders issued under section 18 of the Army Act, 1950 (46 of 1950) sub-section (1) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950; (45 of 1950) and (ii)transfers and postings including the change of place or unit on posting whether individually or as a part of unit, formation or",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2011-crwp-5-2003-phhc010335482003-1-2012-11-05",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s15",
+      "target_ref_raw": "section 15 of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "e matters relating to— Criminal Writ Petition No. 5 of 2003 3 (i)orders issued under section 18 of the Army Act, 1950 (46 of 1950) sub-section (1) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950; (45 of 1950) and (ii)transfers and postings including the change of place or unit on posting",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2011-crwp-5-2003-phhc010335482003-1-2012-11-05",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s123",
+      "target_ref_raw": "sections 123 and 124 of the Indian Evidence Act, 1872",
+      "effective_date": null,
+      "evidence": "xamining him on oath; (b) requiring the discovery and production of documents; (c) receiving evidence on affidavits; (d) subject to the provisions of sections 123 and 124 of the Indian Evidence Act, 1872, (1 of 1872) requisitioning any public record or document or copy of such record or document from any office; (e) issuing commissions for the examina",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2011-crwp-5-2003-phhc010335482003-1-2012-11-05",
+  "doc_type": "judgment",
+  "title": "CRWP/5/2003 of JAGDISH SINGH Vs UNION OF INDIA",
+  "number": "CRWP/5/2003",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2011-10-14",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010335482003_1_2012-11-05.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010335482003",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CRWP/5/2003"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "JAGDISH SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE RANJIT SINGH"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "18",
+      "raw": "section 18 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "4",
+      "raw": "Section 4 of the Army Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "18",
+      "raw": "section 18 of the Air Force Act, 1950"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "15",
+      "raw": "section 15 of the Navy Act, 1957"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": null,
+      "raw": "Armed Forces Tribunal Act, 2007"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": null,
+      "raw": "Indian Penal Code"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": null,
+      "raw": "Code of Criminal Procedure, 1973"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "123",
+      "raw": "sections 123 and 124 of the Indian Evidence Act, 1872"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 55,
+    "keywords": {
+      "army act": 17,
+      "air force act": 9,
+      "navy act": 8,
+      "court martial": 21
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

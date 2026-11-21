@@ -1,0 +1,86 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2016/court=3_22/bench=phhc/PHHC010826772013_1_2016-02-09.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:01:02+00:00",
+  "sha256": "c4e61559ccd6e6512c5169a3c1f06c80bb71ceb29a1b861e9d3fd32daa850bb9",
+  "raw_path": "data/raw/hc/2016/c4e61559ccd6e6512c5169a3c1f06c80bb71ceb29a1b861e9d3fd32daa850bb9.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 4,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2016-cwp-21973-2013-phhc010826772013-1-2016-02-09.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-ph-2016-cwp-21973-2013-phhc010826772013-1-2016-02-09",
+  "doc_type": "judgment",
+  "title": "CWP/21973/2013 of AVINASH KUMAR Vs UNION OF INDIA AND OTHERS",
+  "number": "CWP/21973/2013",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2016-02-09",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010826772013_1_2016-02-09.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010826772013",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/21973/2013"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "AVINASH KUMAR"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "MR JUSTICE RAKESH KUMAR JAIN"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 3,
+    "keywords": {
+      "invalided": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

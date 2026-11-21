@@ -1,0 +1,122 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2013/court=3_22/bench=phhc/PHHC010686972013_1_2013-02-14.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:09:06+00:00",
+  "sha256": "d8c3785d0673896676b60aa014a0ab0366fd64943b01c1adc338db3e186a0f04",
+  "raw_path": "data/raw/hc/2013/d8c3785d0673896676b60aa014a0ab0366fd64943b01c1adc338db3e186a0f04.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 9,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2013-crwp-345-2013-phhc010686972013-1-2013-02-14.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2013-crwp-345-2013-phhc010686972013-1-2013-02-14",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s152",
+      "target_ref_raw": "Section 152 of the Air Force Act, 1950",
+      "effective_date": null,
+      "evidence": "on 29.01.2013 and the petitioner was taken in custody without confirming the proceedings, which according to the petitioner, is mandatory in terms of Section 152 of the Air Force Act, 1950 ('Act' for short). The petitioner submitted an application (Annexure P3) through proper channel on 29.01.2013 to the Air Force Commander in Chief, ('",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2013-crwp-345-2013-phhc010686972013-1-2013-02-14",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s15",
+      "target_ref_raw": "Section 15(3) of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "in accordance with section 161(1) of the Act. The matter is pending before the Armed Forces Tribunal. The petitioner even has his remedy in terms of Section 15(3) of the Armed Forces Tribunal Act, 2007, which reads as under:- 15(3) The Tribunal shall have power to grant bail to any person accused of an offence and in military custody, with or withou",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2013-crwp-345-2013-phhc010686972013-1-2013-02-14",
+  "doc_type": "judgment",
+  "title": "CRWP/345/2013 of PARVEEN KUMAR GULIA Vs UNION OF INDIA AND OTHERS",
+  "number": "CRWP/345/2013",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2013-02-14",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010686972013_1_2013-02-14.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010686972013",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CRWP/345/2013"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "PARVEEN KUMAR GULIA"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE S.S. SARON",
+    "MR. JUSTICE S.P. BANGARH"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "152",
+      "raw": "Section 152 of the Air Force Act, 1950"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "15",
+      "raw": "Section 15(3) of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 31,
+    "keywords": {
+      "air force act": 1,
+      "court martial": 30
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

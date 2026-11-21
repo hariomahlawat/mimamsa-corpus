@@ -1,0 +1,140 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2013/court=3_22/bench=phhc/PHHC010887542012_1_2013-04-12.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:09:23+00:00",
+  "sha256": "833755513484196a72849b2efed4e265645c6bd516baaa3df29760888cb83747",
+  "raw_path": "data/raw/hc/2013/833755513484196a72849b2efed4e265645c6bd516baaa3df29760888cb83747.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 25,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2013-cwp-6991-2012-phhc010887542012-1-2013-04-12.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2013-cwp-6991-2012-phhc010887542012-1-2013-04-12",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s48",
+      "target_ref_raw": "Section 48 of the Army Act",
+      "effective_date": null,
+      "evidence": "7 seeing no improvement, he was again marched up to the then Commanding Officer and awarded seven days pay fine for the offence of intoxication under Section 48 of the Army Act. The petitioner, it is submitted, had been a bad example to the troops which was proved from the fact that he had earned five red ink entries in his",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2013-cwp-6991-2012-phhc010887542012-1-2013-04-12",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s13",
+      "target_ref_raw": "Section 13 of the Armed Forces Tribunal Act 2007",
+      "effective_date": null,
+      "evidence": "Forces Tribunal Act, 2007. It is submitted that in view of Articles 136 (2) and 227 (4), besides, Article 33 of the Constitution of India as well as Section 13 of the Armed Forces Tribunal Act 2007, this Court would have no jurisdiction to entertain the petition. On merits it is submitted that the petitioner during his service was awarded five r",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2013-cwp-6991-2012-phhc010887542012-1-2013-04-12",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s30",
+      "target_ref_raw": "Section 30 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "ecided on 25.1.2013 inter alia observed as follows:- “ We are conscious of the fact that the statutory appeal against such an order is provided under Section 30 of the Armed Forces Tribunal Act, 2007 ( for short 'the Act'), however, having regard to the Constitution Bench judgment of the Supreme Court in the case of “L. Chandra Kumar etc. v. The U",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2013-cwp-6991-2012-phhc010887542012-1-2013-04-12",
+  "doc_type": "judgment",
+  "title": "CWP/6991/2012 of JAGRAJ SINGH Vs UNION OF INDIA AND OTHERS",
+  "number": "CWP/6991/2012",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2013-04-12",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010887542012_1_2013-04-12.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010887542012",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/6991/2012"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "JAGRAJ SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE S.P. BANGARH",
+    "MR. JUSTICE S.S. SARON"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "48",
+      "raw": "Section 48 of the Army Act"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "13",
+      "raw": "Section 13 of the Armed Forces Tribunal Act 2007"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "30",
+      "raw": "Section 30 of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 12,
+    "keywords": {
+      "army act": 9,
+      "court martial": 2,
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

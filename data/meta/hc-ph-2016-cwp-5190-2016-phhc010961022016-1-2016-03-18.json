@@ -1,0 +1,102 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2016/court=3_22/bench=phhc/PHHC010961022016_1_2016-03-18.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:00:41+00:00",
+  "sha256": "cc72f691afcf533a44acab7113c00d41b7152fdde623b8143dc59d7efff3de09",
+  "raw_path": "data/raw/hc/2016/cc72f691afcf533a44acab7113c00d41b7152fdde623b8143dc59d7efff3de09.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2016-cwp-5190-2016-phhc010961022016-1-2016-03-18.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2016-cwp-5190-2016-phhc010961022016-1-2016-03-18",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s25",
+      "target_ref_raw": "Section 25 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "the impugned order, 22% of the salary of the petitioner was ordered to be deducted and was ordered to be released to his wife for maintenance. As per Section 25 of the Army Act, 1950 ('Act' for short), no such deduction could be made from the salary of the petitioner. Section 25 of the Act, reads as under:- “Authorised deductions",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2016-cwp-5190-2016-phhc010961022016-1-2016-03-18",
+  "doc_type": "judgment",
+  "title": "CWP/5190/2016 of MANOJ KUMAR Vs UNION OF INDIA AND ORS",
+  "number": "CWP/5190/2016",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2016-03-18",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010961022016_1_2016-03-18.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010961022016",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/5190/2016"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MANOJ KUMAR"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "MR JUSTICE RAKESH KUMAR JAIN"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "25",
+      "raw": "Section 25 of the Army Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "army act": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

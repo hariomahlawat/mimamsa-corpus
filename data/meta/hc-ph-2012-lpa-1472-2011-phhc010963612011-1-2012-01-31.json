@@ -1,0 +1,87 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2012/court=3_22/bench=phhc/PHHC010963612011_1_2012-01-31.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:12:32+00:00",
+  "sha256": "03fffd4ad4bb9205800e5e2fdf59bb7f7dc1b64dbb541ef61714c4f5890cdb9a",
+  "raw_path": "data/raw/hc/2012/03fffd4ad4bb9205800e5e2fdf59bb7f7dc1b64dbb541ef61714c4f5890cdb9a.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2012-lpa-1472-2011-phhc010963612011-1-2012-01-31.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-ph-2012-lpa-1472-2011-phhc010963612011-1-2012-01-31",
+  "doc_type": "judgment",
+  "title": "LPA/1472/2011 of UNION OF INDIA AND ORS Vs GULZAR SINGH",
+  "number": "LPA/1472/2011",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2012-01-30",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010963612011_1_2012-01-31.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010963612011",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "LPA/1472/2011"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA AND ORS"
+    ],
+    "respondent": [
+      "GULZAR SINGH"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE M.M. KUMAR",
+    "MR. JUSTICE AJAY KUMAR MITTAL"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 5,
+    "keywords": {
+      "disability pension": 5
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2012/court=3_22/bench=phhc/PHHC011098602011_1_2012-05-22.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:12:49+00:00",
+  "sha256": "6bb3abe9335150fbeeeddb47157be6fbd2019063d302ace3546f49c7b4ad9298",
+  "raw_path": "data/raw/hc/2012/6bb3abe9335150fbeeeddb47157be6fbd2019063d302ace3546f49c7b4ad9298.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 4,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2012-rsa-409-2011-phhc011098602011-1-2012-05-22.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2012-rsa-409-2011-phhc011098602011-1-2012-05-22",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s39",
+      "target_ref_raw": "Section 39 (a) and 63 of the Army Act",
+      "effective_date": null,
+      "evidence": "976, 14 days rigorous imprisonment on 22.4.1983 and yet again another punishment of 28 days rigorous imprisonment in the year 1983 itself in terms of Section 39 (a) and 63 of the Army Act. In the light of such glaring admission the courts below have declined to interfere in the impugned order of termination dated 5.2.1984 apart from ho",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2012-rsa-409-2011-phhc011098602011-1-2012-05-22",
+  "doc_type": "judgment",
+  "title": "RSA/409/2011 of JAGDISH CHANDER  Vs UNION OF INDIA AND ORS",
+  "number": "RSA/409/2011",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2012-05-22",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC011098602011_1_2012-05-22.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC011098602011",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "RSA/409/2011"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "JAGDISH CHANDER"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE TEJINDER SINGH DHINDSA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "39",
+      "raw": "Section 39 (a) and 63 of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 7,
+    "keywords": {
+      "army act": 6,
+      "court martial": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2015/court=3_22/bench=phhc/PHHC010216661999_1_2015-04-30.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:02:44+00:00",
+  "sha256": "db5d2083c8dcb88f833888d14cd5ab0c76cc5111f66bd15233297cc230c60406",
+  "raw_path": "data/raw/hc/2015/db5d2083c8dcb88f833888d14cd5ab0c76cc5111f66bd15233297cc230c60406.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 100,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2015-cwp-15348-1999-phhc010216661999-1-2015-04-30.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2015-cwp-15348-1999-phhc010216661999-1-2015-04-30",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s484",
+      "target_ref_raw": "s. 484 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "r.P.C., 1973 may have to be read into the various provisions of the CRPF Act and Rules as a substitute to the Cr.P.C., 1898, which stands repealed by s. 484 of the Cr.P.C., 1973. Hence, by necessary implication, the 1973 Code shall stand automatically substituted. 65. That in terms of the judgment of the Supreme Court",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2015-cwp-15348-1999-phhc010216661999-1-2015-04-30",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s30",
+      "target_ref_raw": "s. 30, 32,34, 36 and 37 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "ority and powers of Chief Judicial Magistrate exercised by the 6th respondent as a Commandant of CRPF by virtue of s. 16 CRPF Act in accordance with Ss. 30, 32,34, 36 and 37 of the Cr.P.C., 1898, can no longer be exercised in view of the provisions of sections 11,12,13,20,24,26,29 of Cr.P.C., 1973. Section 3 Cr.P.C., 1973 clearly defin",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2015-cwp-15348-1999-phhc010216661999-1-2015-04-30",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s11",
+      "target_ref_raw": "sections 11,12,13,20,24,26,29 of Cr.P.C",
+      "effective_date": null,
+      "evidence": "by virtue of s. 16 CRPF Act in accordance with Ss. 30, 32,34, 36 and 37 of the Cr.P.C., 1898, can no longer be exercised in view of the provisions of sections 11,12,13,20,24,26,29 of Cr.P.C., 1973. Section 3 Cr.P.C., 1973 clearly defines that unless the context requires otherwise, any reference in any enactment passed before the commence",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2015-cwp-15348-1999-phhc010216661999-1-2015-04-30",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s3",
+      "target_ref_raw": "s. 3 of the Criminal Procedure Code, 1973",
+      "effective_date": null,
+      "evidence": "ent passed before the commencement of this Court to a Magistrate, shall be construed as a reference to a Judicial Magistrate. It is further stated in s. 3 of the Criminal Procedure Code, 1973 that, \"where under any law, other than this Court, the functions exercisable by a Magistrate relate to appreciation of evidence, formulation of any d",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2015-cwp-15348-1999-phhc010216661999-1-2015-04-30",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s20",
+      "target_ref_raw": "s. 20 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "ppointed by the Central Government or the State Government for every High Court. Executive Magistrates can be appointed by the State Government under s. 20 of the Cr.P.C. Thus, there is a clear separation of powers as contemplated by Article 50 of the Constitution and Judicial powers are not exercised by Executive Mag",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2015-cwp-15348-1999-phhc010216661999-1-2015-04-30",
+  "doc_type": "judgment",
+  "title": "CWP/15348/1999 of ZUBER AHMED Vs UNION OF INDIA ETC.",
+  "number": "CWP/15348/1999",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2015-04-30",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010216661999_1_2015-04-30.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010216661999",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/15348/1999"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "ZUBER AHMED"
+    ],
+    "respondent": [
+      "UNION OF INDIA ETC."
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE DARSHAN SINGH"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": null,
+      "raw": "Army Act, 1950"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": null,
+      "raw": "Air Force Act, 1950"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": null,
+      "raw": "Navy Act, 1957"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": null,
+      "raw": "Indian Penal Code"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "484",
+      "raw": "s. 484 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "30",
+      "raw": "s. 30, 32,34, 36 and 37 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "11",
+      "raw": "sections 11,12,13,20,24,26,29 of Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "3",
+      "raw": "s. 3 of the Criminal Procedure Code, 1973"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "20",
+      "raw": "s. 20 of the Cr.P.C"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 8,
+    "keywords": {
+      "army act": 1,
+      "air force act": 1,
+      "navy act": 1,
+      "court martial": 5
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

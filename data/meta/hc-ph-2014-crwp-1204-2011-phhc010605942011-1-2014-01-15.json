@@ -1,0 +1,129 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2014/court=3_22/bench=phhc/PHHC010605942011_1_2014-01-15.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T21:06:40+00:00",
+  "sha256": "c121c0b2188a0a4de09efb503894ae777f2672c60c2056e2206ed0667162f8bc",
+  "raw_path": "data/raw/hc/2014/c121c0b2188a0a4de09efb503894ae777f2672c60c2056e2206ed0667162f8bc.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2014-crwp-1204-2011-phhc010605942011-1-2014-01-15.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2014-crwp-1204-2011-phhc010605942011-1-2014-01-15",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s118",
+      "target_ref_raw": "Section 118 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "rs before the statutory authority. In this case, admittedly, the petitioner had after his conviction by the Summary General Court Martial in terms of Section 118 of the Army Act, 1950 which has been constituted by an empowered officer in terms of Section 112 of the Army Act has by all means exhausted all the statutory remedies avai",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2014-crwp-1204-2011-phhc010605942011-1-2014-01-15",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s112",
+      "target_ref_raw": "Section 112 of the Army Act",
+      "effective_date": null,
+      "evidence": "ion by the Summary General Court Martial in terms of Section 118 of the Army Act, 1950 which has been constituted by an empowered officer in terms of Section 112 of the Army Act has by all means exhausted all the statutory remedies available to him under the Army Act. Even otherwise it needs to be kept in mind as has been lai",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2014-crwp-1204-2011-phhc010605942011-1-2014-01-15",
+  "doc_type": "judgment",
+  "title": "CRWP/1204/2011 of JAGVIR SINGH Vs UNION OF INDIA & ORS",
+  "number": "CRWP/1204/2011",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2014-01-15",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010605942011_1_2014-01-15.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010605942011",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CRWP/1204/2011"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "JAGVIR SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE DR. RAVI RANJAN",
+    "MR. JUSTICE S.S. SARON"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "118",
+      "raw": "Section 118 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "112",
+      "raw": "Section 112 of the Army Act"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": null,
+      "raw": "Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 15,
+    "keywords": {
+      "army act": 4,
+      "armed forces tribunal": 7,
+      "court martial": 4
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}
