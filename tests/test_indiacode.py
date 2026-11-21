@@ -228,6 +228,7 @@ def test_discover_army_act(cfg, db, tmp_path):
     assert r.status == "resolved" and r.act_url == ACT_URL
     assert r.act_pdfs == 1 and r.subordinate == {"rules": 1, "notifications": 2, "regulations": 2}
     assert r.newly_queued == 6 and len(r.dropped) == 2
+    assert r.warnings == []                                       # the expected Army Rules, 1954 are listed
     assert c.requests_made == 3                                   # robots, search, act page: no documents
     assert db.get(ACT_PDF)["doc_id_hint"] == "act-army-1950" and db.get(ACT_PDF)["status"] == "queued"
     assert db.counts()["indiacode"] == {"queued": 6, "fetched": 2, "failed": 0, "skipped": 0}
@@ -235,6 +236,17 @@ def test_discover_army_act(cfg, db, tmp_path):
     c2 = make_client(cfg, db, tmp_path)
     [r2] = indiacode.discover(cfg, db, c2, only=["act-army-1950"])
     assert r2.status == "already_known" and c2.requests_made == 0
+
+
+def test_discover_warns_when_expected_rules_missing(cfg, db, tmp_path):
+    html = (FIX / "act_army_1950.html").read_text().replace("The Army Rules, 1954", "Something else")
+    search = f"{BASE}/simple-search?query=The+Army+Act%2C+1950"
+    c = make_client(cfg, db, tmp_path, site({
+        search: httpx.Response(200, text=(FIX / "search_army_act.html").read_text(),
+                               headers={"content-type": "text/html"}),
+        ACT_URL: httpx.Response(200, text=html, headers={"content-type": "text/html"})}, robots=None))
+    [r] = indiacode.discover(cfg, db, c, only=["act-army-1950"])
+    assert r.status == "resolved" and any("Army Rules, 1954" in w for w in r.warnings)
 
 
 def test_discover_never_guesses(cfg, db, tmp_path):

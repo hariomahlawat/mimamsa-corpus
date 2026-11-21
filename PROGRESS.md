@@ -16,6 +16,10 @@ Results
   curl. The earlier check string `Mimamsa-corpus-setup/0.1 (reachability check)` still gets 200 from the
   same address, so the filter reacts to something in the User-Agent text (untested which part; the
   contact email is the main difference). Stopped there; MoD stays blocked pending a decision.
+  DECISION (2026-11-21): skip MoD for now. `sources.mod.enabled: false`. Army Rules 1954, Air Force
+  Rules 1969 and AFT (Procedure) Rules 2008 are to come from India Code's subordinate-legislation
+  listings; `expect_subordinate` on those targets makes discovery warn if one is not listed.
+  Still without a source: Regulations for the Army 1987 (India Code search first) and any MoD-only manuals.
 - archive.org: OK. robots.txt allows the search API. Title searches found the Indian Army Act 1911,
   the Manual of Indian Military Law (1911 and 1937) and British Manual of Military Law scans;
   identifiers recorded under `sources.archive.candidates` (unreviewed).

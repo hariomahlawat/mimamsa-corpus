@@ -264,6 +264,10 @@ def _discover_target(cfg: Config, db: StateDB, client: PoliteClient, source: str
                 d.url, source, url_host(d.url), "document", discovered_from=act_url, priority=50,
                 meta={"category": d.category, "title": d.title, "date_raw": d.date_raw,
                       "parent_doc_id": t["doc_id"], "year": None})
+    listed = [normalise_title(d.title or "") for d in page.subordinate]
+    for want in t.get("expect_subordinate", []):
+        if not any(normalise_title(want) in have for have in listed):
+            res.warnings.append(f"expected subordinate document not listed on the Act page: {want!r}")
     res.status = "resolved"
     return res
 

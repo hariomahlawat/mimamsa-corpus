@@ -42,10 +42,15 @@ sources:
     search_url_template: "https://www.indiacode.nic.in/simple-search?query={query}"
     targets:
       # doc_id                                 short title as printed                                          year  status_hint
-      - { doc_id: act-army-1950,                title: "The Army Act, 1950",                                     year: 1950 }
-      - { doc_id: act-air-force-1950,           title: "The Air Force Act, 1950",                                year: 1950 }
+      # expect_subordinate: titles that should appear in the Act page's subordinate-legislation listing.
+      # Discovery warns when one is missing, so a gap is noticed instead of silently accepted.
+      - { doc_id: act-army-1950,                title: "The Army Act, 1950",                                     year: 1950,
+          expect_subordinate: ["Army Rules, 1954"] }
+      - { doc_id: act-air-force-1950,           title: "The Air Force Act, 1950",                                year: 1950,
+          expect_subordinate: ["Air Force Rules, 1969"] }
       - { doc_id: act-navy-1957,                title: "The Navy Act, 1957",                                     year: 1957 }
-      - { doc_id: act-armed-forces-tribunal-2007, title: "The Armed Forces Tribunal Act, 2007",                  year: 2007 }
+      - { doc_id: act-armed-forces-tribunal-2007, title: "The Armed Forces Tribunal Act, 2007",                  year: 2007,
+          expect_subordinate: ["Armed Forces Tribunal (Procedure) Rules, 2008"] }
       - { doc_id: act-army-af-disposal-private-property-1950, title: "The Army and Air Force (Disposal of Private Property) Act, 1950", year: 1950 }
       - { doc_id: act-bns-2023,                 title: "The Bharatiya Nyaya Sanhita, 2023",                      year: 2023 }
       - { doc_id: act-bnss-2023,                title: "The Bharatiya Nagarik Suraksha Sanhita, 2023",           year: 2023 }
@@ -61,7 +66,12 @@ sources:
 
   mod:
     phase: 2
-    enabled: true
+    # DISABLED 2026-11-21: the site's front end answers 403 to the crawler's User-Agent (see PROGRESS.md).
+    # Decision: skip MoD for now; take the Army Rules etc. from India Code's subordinate-legislation
+    # listings (see expect_subordinate on the indiacode targets). Revisit only for documents that
+    # exist nowhere else.
+    enabled: false
+    disabled_reason: "HTTP 403 to the crawler's User-Agent; skipped by decision on 2026-11-21"
     priority: 1
     heavy: false
     allowed_hosts: [www.mod.gov.in, mod.gov.in]
