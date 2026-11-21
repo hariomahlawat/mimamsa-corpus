@@ -115,13 +115,17 @@ def run(paths: Paths, only: list[str] | None = None, redo: bool = False, workers
             continue
         todo[meta["doc_id"]] = (path, meta)
     jobs = [(paths, meta) for _, meta in todo.values()]
-    if len(jobs) > 20 and workers > 1:               # many documents: use several processes
-        from concurrent.futures import ProcessPoolExecutor
-        with ProcessPoolExecutor(max_workers=workers) as pool:
-            results = list(pool.map(_extract_one, jobs, chunksize=8))
-    else:
-        results = [_extract_one(j) for j in jobs]
-    for doc_id, res, err in results:
+    def outcomes():
+        """Results as they are ready, so each record is saved at once and an interrupted run loses nothing."""
+        if len(jobs) > 20 and workers > 1:           # many documents: use several processes
+            from concurrent.futures import ProcessPoolExecutor
+            with ProcessPoolExecutor(max_workers=workers) as pool:
+                yield from pool.map(_extract_one, jobs, chunksize=8)
+        else:
+            for j in jobs:
+                yield _extract_one(j)
+
+    for doc_id, res, err in outcomes():
         path, meta = todo[doc_id]
         if err:
             stats["errors"].append(err)
