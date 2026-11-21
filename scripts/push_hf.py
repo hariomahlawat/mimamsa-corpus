@@ -1,0 +1,134 @@
+"""Checkpoint to Hugging Face: upload the corpus data to a PRIVATE dataset repository.
+
+Needs an access token with write permission in the environment variable HF_TOKEN. Without it this
+script does nothing and says so (exit code 2).  NOT YET RUN against Hugging Face: written when no
+token was available; the first real run should be watched.
+
+What goes up (everything under data/ that is part of the corpus):
+  data/raw/<source>/<year>/   raw files as served (rejected judgments are already deleted locally)
+  data/meta, data/sections, data/text, data/correspondence, data/relations.jsonl, manifests,
+  data/excluded_judgments.jsonl
+Uploads are made folder by folder so that each commit stays a manageable size, and a file removed
+locally (a judgment later rejected) is removed from the repository too.
+
+    HF_TOKEN=... python scripts/push_hf.py "checkpoint message" [--repo owner/name] [--dry-run]
+"""
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+import os
+import sqlite3
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+DATA = ROOT / "data"
+DEFAULT_REPO_NAME = "mimamsa-corpus"
+SMALL = ["meta", "sections", "text", "correspondence"]
+FILES = ["relations.jsonl", "manifest.csv", "excluded_judgments.jsonl", "raw_manifest.csv", "SHA256SUMS", "README.md"]
+
+CARD = """---
+license: other
+pretty_name: Mimamsa corpus (Indian military law)
+---
+# Mimamsa corpus
+
+Private working copy of a corpus of public Indian military-law documents: Acts and subordinate
+legislation from India Code, and judgments about the armed forces. Built by the crawler and
+pipeline in the project's code repository; every file is traceable through `data/raw_manifest.csv`
+(source address, retrieval time, SHA-256).
+
+- `data/raw/`: files exactly as served by the source.
+- `data/meta/`, `data/sections/`, `data/text/`: metadata records, section records, extracted text.
+- `data/correspondence/`: old-code/new-code section tables.
+- `data/excluded_judgments.jsonl`: judgments removed as not about the armed forces (log only).
+
+Sources include third-party open data (AWS Open Data court-judgment buckets, CC-BY-4.0, P. Vanga /
+Dattam Labs). Some documents carry access markings; see `access_marking` in their metadata.
+Keep this repository private.
+"""
+
+
+def write_manifest() -> int:
+    """data/raw_manifest.csv and data/SHA256SUMS for the raw files that exist locally."""
+    conn = sqlite3.connect(f"file:{ROOT / 'state' / 'crawl.sqlite'}?mode=ro", uri=True)
+    conn.row_factory = sqlite3.Row
+    rows = conn.execute("""SELECT f.sha256, f.raw_path, f.bytes, f.content_type, f.retrieved_at, f.first_url,
+                                  u.doc_id_hint, u.meta FROM files f JOIN urls u ON u.url = f.first_url
+                           ORDER BY f.raw_path""").fetchall()
+    conn.close()
+    local = [r for r in rows if (ROOT / r["raw_path"]).exists()]
+    with (DATA / "raw_manifest.csv").open("w", newline="", encoding="utf-8") as fh:
+        w = csv.writer(fh)
+        w.writerow(["sha256", "raw_path", "bytes", "content_type", "retrieved_at", "source_url", "doc_id",
+                    "parent_doc_id", "category", "title", "original_filename"])
+        for r in local:
+            m = json.loads(r["meta"] or "{}")
+            w.writerow([r["sha256"], r["raw_path"], r["bytes"], r["content_type"], r["retrieved_at"], r["first_url"],
+                        r["doc_id_hint"] or "", m.get("parent_doc_id", ""), m.get("category", ""), m.get("title", ""),
+                        m.get("filename", "")])
+    with (DATA / "SHA256SUMS").open("w", encoding="utf-8") as fh:
+        for r in local:
+            fh.write(f"{r['sha256']}  {r['raw_path']}\n")
+    return len(local)
+
+
+def plan() -> list[tuple[Path, str]]:
+    """(local folder, path in repo) for each upload step: one per raw year-folder, one per record folder."""
+    steps = []
+    raw = DATA / "raw"
+    if raw.exists():
+        for source in sorted(p for p in raw.iterdir() if p.is_dir()):
+            for year in sorted(p for p in source.iterdir() if p.is_dir()):
+                if any(year.iterdir()):
+                    steps.append((year, f"data/raw/{source.name}/{year.name}"))
+    for name in SMALL:
+        if (DATA / name).exists():
+            steps.append((DATA / name, f"data/{name}"))
+    return steps
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("message", nargs="?", default="manual")
+    ap.add_argument("--repo", help="owner/name of the dataset repository (default: <your account>/mimamsa-corpus)")
+    ap.add_argument("--dry-run", action="store_true", help="show what would be uploaded; no token needed")
+    args = ap.parse_args(argv)
+
+    n_raw = write_manifest()
+    steps = plan()
+    if args.dry_run:
+        for folder, dest in steps:
+            files = [p for p in folder.rglob("*") if p.is_file() and p.name != ".gitkeep"]
+            print(f"{dest}: {len(files)} files, {sum(p.stat().st_size for p in files) / 1e6:.1f} MB")
+        print(json.dumps({"dry_run": True, "raw_files": n_raw, "steps": len(steps)}))
+        return 0
+    token = os.environ.get("HF_TOKEN")
+    if not token:
+        print("HF_TOKEN is not set: nothing uploaded. Add a write token as the environment variable HF_TOKEN.")
+        return 2
+
+    from huggingface_hub import HfApi
+    api = HfApi(token=token)
+    repo = args.repo or f"{api.whoami()['name']}/{DEFAULT_REPO_NAME}"
+    api.create_repo(repo, repo_type="dataset", private=True, exist_ok=True)
+    (DATA / "README.md").write_text(CARD, encoding="utf-8")
+    uploaded = 0
+    for folder, dest in steps:
+        api.upload_folder(repo_id=repo, repo_type="dataset", folder_path=str(folder), path_in_repo=dest,
+                          ignore_patterns=[".gitkeep", "*.part"], delete_patterns=["*"],
+                          commit_message=f"{dest} — {args.message}")
+        uploaded += 1
+    api.upload_folder(repo_id=repo, repo_type="dataset", folder_path=str(DATA), path_in_repo="data",
+                      allow_patterns=[f for f in FILES if f != "README.md"], commit_message=f"manifests — {args.message}")
+    api.upload_file(repo_id=repo, repo_type="dataset", path_or_fileobj=str(DATA / "README.md"), path_in_repo="README.md",
+                    commit_message=f"dataset card — {args.message}")
+    (DATA / "README.md").unlink(missing_ok=True)
+    print(json.dumps({"repo": repo, "private": True, "raw_files": n_raw, "folders_uploaded": uploaded}))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

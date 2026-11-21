@@ -10,6 +10,7 @@ Progress: state/logs/collect.log and state/collect_progress.json. The kept judgm
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 import time
@@ -63,6 +64,9 @@ def checkpoint(label: str) -> None:
     """Push what the corpus holds now to the raw-data branch."""
     p = subprocess.run([PY, str(ROOT / "scripts" / "push_data.py"), label], cwd=ROOT, capture_output=True, text=True)
     say(f"checkpoint push ({label}): rc={p.returncode} {(p.stdout or p.stderr).strip().splitlines()[-1:] or ''}")
+    if os.environ.get("HF_TOKEN"):                       # also to the private Hugging Face dataset, when a token is set
+        h = subprocess.run([PY, str(ROOT / "scripts" / "push_hf.py"), label], cwd=ROOT, capture_output=True, text=True)
+        say(f"checkpoint Hugging Face ({label}): rc={h.returncode} {(h.stdout or h.stderr).strip().splitlines()[-1:] or ''}")
 
 
 def collect(source: str, slices: list[str], done: dict) -> None:

@@ -17,3 +17,6 @@ state/replay_data/
 reports/probe_*
 state/recon/
 data/ocr/
+data/raw_manifest.csv
+data/SHA256SUMS
+data/README.md
