@@ -11,3 +11,4 @@ state/*.sqlite*
 state/logs/
 snapshots/**
 !**/.gitkeep
+reports/dry_run_*
