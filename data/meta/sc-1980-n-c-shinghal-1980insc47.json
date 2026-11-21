@@ -1,0 +1,82 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1980/english/1980_3_44_70_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:17:14+00:00",
+  "sha256": "1421c0ffd4304412213d334b7c7df9808346e902e8cbbed12a12089d57beae53",
+  "raw_path": "data/raw/sci/1980/1421c0ffd4304412213d334b7c7df9808346e902e8cbbed12a12089d57beae53.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 27,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1980-n-c-shinghal-1980insc47.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "sc-1980-n-c-shinghal-1980insc47",
+  "doc_type": "judgment",
+  "title": "N.C. SHINGHAL versus UNION OF INDIA",
+  "number": "1980 INSC 47",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1980-03-19",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "1980_3_44_70_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010002561980",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1980 INSC 47",
+  "reported_citations": [
+    "[1980] 3 S.C.R. 44"
+  ],
+  "parties": {
+    "petitioner": [
+      "N.C. SHINGHAL"
+    ],
+    "respondent": [
+      "UNION OF INDIA"
+    ]
+  },
+  "judges": [
+    "D.A. DESAI"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "invalided": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

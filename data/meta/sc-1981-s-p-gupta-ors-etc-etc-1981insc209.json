@@ -1,0 +1,198 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1981/english/1982_2_365_1455_EN.pdf",
+  "source_aliases": [
+    "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1982/english/1982_2_365_1455_EN.pdf"
+  ],
+  "retrieved_at": "2026-11-21T16:17:14+00:00",
+  "sha256": "ddf835f63effb126e3dd13c9eecebadd2cfdc1fbbfa500ac33d8fe481437b389",
+  "raw_path": "data/raw/sci/1981/ddf835f63effb126e3dd13c9eecebadd2cfdc1fbbfa500ac33d8fe481437b389.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1093,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1981-s-p-gupta-ors-etc-etc-1981insc209.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1981-s-p-gupta-ors-etc-etc-1981insc209",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s166",
+      "target_ref_raw": "sec. 166 of the Indian Penal Code, 1860",
+      "effective_date": null,
+      "evidence": "unless the document is to be given in evi- dence and if the interpreter disobeys such directions, he shall be held to have committed an offence under sec. 166 of the Indian Penal Code, 1860 (45 of 1860).\" B These two sections came up for consideration for the first time before the Court in State of Punjab v. Sodhi Sukhdev Singh (supra).",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1981-s-p-gupta-ors-etc-etc-1981insc209",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s133",
+      "target_ref_raw": "section 133 of the Code of Criminal Procedure",
+      "effective_date": null,
+      "evidence": "ic wrong and that is the decision in Rat/am Municipality v. Vardhi Chand(1). The statutory provision which came up for consideration in this case was section 133 of the Code of Criminal Procedure which empowers a magistrate on receiv- ing the report of a police officer or other information to make an order for remedying a public nuisance. What",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1981-s-p-gupta-ors-etc-etc-1981insc209",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s162",
+      "target_ref_raw": "s. 162 of the Code of Criminal Procedure",
+      "effective_date": null,
+      "evidence": "t merely by case law but by statute law as also bY Constitutional. provisions. These provisions are contained in ss. 123 and 124 of the Evidence Act, s. 162 of the Code of Criminal Procedure and Art. 74(2) of the. Constitution of India. In deciding the plea of privilege taken_ by ·the State or the party concerned, the provisions of the co",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1981-s-p-gupta-ors-etc-etc-1981insc209",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s123",
+      "target_ref_raw": "sections 123 and 162 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "t for disclosing certain correspondence in the case of S.N. Kumar, Additional Judge, of the Delhi High Court, the respondents claimed privilege under sections 123 and 162 of the Evidence Act. Dismissing the petitions, the Court, while agreeing that (a) the petitioners being advocates had a 'standing' to challenge the va!idity of circulars",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1981-s-p-gupta-ors-etc-etc-1981insc209",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s114",
+      "target_ref_raw": "section 114 (e) of the Evidence Act",
+      "effective_date": null,
+      "evidence": "s new assignment and started w<;>rking and still no order of compensatory allowance was made by the President. [883 F-H] 11_. The .presumption un,der section 114 (e) of the Evidence Act, that official Acts must .deemed to have been actually done applies only where there is no challenge to the constitutional validity of .an official a",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1981-s-p-gupta-ors-etc-etc-1981insc209",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s132",
+      "target_ref_raw": "Section 132 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "red through the main body of the statute law of India are provisions which establish beyond doubt that the rule has received no countenance in India. Section 132 of the Evidence Act enacts in no uncertain terms that a witness shall not be excused from answering any questions as to any matter relevant to the matter in issue in any",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1981-s-p-gupta-ors-etc-etc-1981insc209",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s162",
+      "target_ref_raw": "section 162 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "see the document. This will be the inspec'tion of the docu- ment by the Court. Objection as · to production as well.as admissibility contemplated in ·section 162 of the Evidence Act is decided by the Court in the en- quiry as expfained by this Court in Sukhdev Singh' s ·case [1961] 2 S.C.R. 371.\" · In his concurring judgment, Mat",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-1981-s-p-gupta-ors-etc-etc-1981insc209",
+  "doc_type": "judgment",
+  "title": "S.P. GUPTA & ORS. ETC. ETC. versus UNION OF INDIA & ORS. ETC. ETC.",
+  "number": "1981 INSC 209",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1981-12-28",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "1982_2_365_1455_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010000921982",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1981 INSC 209",
+  "reported_citations": [
+    "[1982] 2 S.C.R. 365"
+  ],
+  "parties": {
+    "petitioner": [
+      "S.P. GUPTA & ORS. ETC. ETC."
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS. ETC. ETC."
+    ]
+  },
+  "judges": [
+    "P.N. BHAGWATI"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "166",
+      "raw": "sec. 166 of the Indian Penal Code, 1860"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "133",
+      "raw": "section 133 of the Code of Criminal Procedure"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "162",
+      "raw": "s. 162 of the Code of Criminal Procedure"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "123",
+      "raw": "sections 123 and 162 of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "114",
+      "raw": "section 114 (e) of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "132",
+      "raw": "Section 132 of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "162",
+      "raw": "section 162 of the Evidence Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "invalided": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

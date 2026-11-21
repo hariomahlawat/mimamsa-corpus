@@ -1,0 +1,144 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2018/english/2018_3_806_828_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:19:57+00:00",
+  "sha256": "a3177c879af1efbc3e5462707b701b65b2216fc3622339875d27386a7d635614",
+  "raw_path": "data/raw/sci/2018/a3177c879af1efbc3e5462707b701b65b2216fc3622339875d27386a7d635614.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 23,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2018-union-of-india-ors-2018insc361.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2018-union-of-india-ors-2018insc361",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s77",
+      "target_ref_raw": "Section 77(2) of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "ued a charge sheet dated September 05, 2012 for trial by Court Martial. Ten charges were framed against the respondent. Seven out of which were under Section 77(2) of the Navy Act, 1957 (hereinafter referred to as the ‘the Act”) read with Section 509 of the Indian Penal Code (‘IPC’) and three charges were framed against the responden",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2018-union-of-india-ors-2018insc361",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s17",
+      "target_ref_raw": "Section 17 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "Nodal Officer for Vodafone Mumbai and not for Vodafone South. In view of the aforesaid technical objection, the appellants filed an application under Section 17 of the Armed Forces Tribunal Act, 2007 for summoning Nodal Officer, Mumbai Sector, Vodafone along with a direction to produce the CDR of the mobile number of the respondent. Order dated No",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2018-union-of-india-ors-2018insc361",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s509",
+      "target_ref_raw": "Section 509 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": "framed against the respondent. Seven out of which were under Section 77(2) of the Navy Act, 1957 (hereinafter referred to as the ‘the Act”) read with Section 509 of the Indian Penal Code (‘IPC’) and three charges were framed against the respondent under Sections 58, 74 and 48(c) of the Navy Act. These charges pertained to the alleged",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2018-union-of-india-ors-2018insc361",
+  "doc_type": "judgment",
+  "title": "UNION OF INDIA & ORS. versus CDR. RAVINDRA V. DESAI",
+  "number": "2018 INSC 361",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2018-04-18",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2018_3_806_828_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010005382018",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2018 INSC 361",
+  "reported_citations": [
+    "[2018] 3 S.C.R. 806"
+  ],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA & ORS."
+    ],
+    "respondent": [
+      "CDR. RAVINDRA V. DESAI"
+    ]
+  },
+  "judges": [
+    "A.K. SIKRI"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "77",
+      "raw": "Section 77(2) of the Navy Act, 1957"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "17",
+      "raw": "Section 17 of the Armed Forces Tribunal Act, 2007"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "509",
+      "raw": "Section 509 of the Indian Penal Code"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": null,
+      "raw": "Indian Evidence Act, 1872"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 68,
+    "keywords": {
+      "navy act": 3,
+      "armed forces tribunal": 52,
+      "court martial": 12,
+      "summary of evidence": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

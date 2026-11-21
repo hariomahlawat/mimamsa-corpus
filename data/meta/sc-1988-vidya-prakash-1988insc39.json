@@ -1,0 +1,121 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1988/english/1988_2_953_961_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:17:23+00:00",
+  "sha256": "2383c7a41123c5ad875c59e51c1a4b577b38b86eefba90c36a31c089353afbd7",
+  "raw_path": "data/raw/sci/1988/2383c7a41123c5ad875c59e51c1a4b577b38b86eefba90c36a31c089353afbd7.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 9,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1988-vidya-prakash-1988insc39.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1988-vidya-prakash-1988insc39",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s108",
+      "target_ref_raw": "Section 108 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "e order of +.· dismissal made in the court martial proceedings. ·,_ ' D Dismissing the Appeal, HELD: 1. Four kinds of courts martial are specified in Section 108 of the Army Act, 1950. These are:( a) General Courts-Martial; (b) District Courts-Martial; (c) Summary General Courts-Martial and (d) Summary Courts-Martial. [959G-H; 960A",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1988-vidya-prakash-1988insc39",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s116",
+      "target_ref_raw": "Section 116(c) of the Army Act",
+      "effective_date": null,
+      "evidence": "stated that a Summary Court Martial may be held by a Commanding Officer of any Corps, Department or Detachment of the regular army, as stipulated by Section 116(c) of the Army Act. It has been submitted that the appellant has been tried by a Summary Court Martial and he was sentenced to dismissal from A B c D E F G H 958 SUPREM",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-1988-vidya-prakash-1988insc39",
+  "doc_type": "judgment",
+  "title": "VIDYA PRAKASH versus UNION OF INDIA & ORS.",
+  "number": "1988 INSC 39",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1988-02-10",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "1988_2_953_961_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010001991988",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1988 INSC 39",
+  "reported_citations": [
+    "[1988] 2 S.C.R. 953"
+  ],
+  "parties": {
+    "petitioner": [
+      "VIDYA PRAKASH"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "A.P. SEN"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "108",
+      "raw": "Section 108 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "116",
+      "raw": "Section 116(c) of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 87,
+    "keywords": {
+      "army act": 12,
+      "court martial": 73,
+      "summary of evidence": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

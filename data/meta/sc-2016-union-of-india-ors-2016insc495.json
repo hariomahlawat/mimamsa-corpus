@@ -1,0 +1,253 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2016/english/2016_5_473_502_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:19:45+00:00",
+  "sha256": "3a4ed1aba90b8e35922a314c9f25142ee0261b91eb833e6fc36bc148312a1bd3",
+  "raw_path": "data/raw/sci/2016/3a4ed1aba90b8e35922a314c9f25142ee0261b91eb833e6fc36bc148312a1bd3.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 30,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2016-union-of-india-ors-2016insc495.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-union-of-india-ors-2016insc495",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s120",
+      "target_ref_raw": "Section 120 of Army Act, 1950",
+      "effective_date": null,
+      "evidence": "ute the Court. No doubt, this power comes with restrictions insofar as the power to award sentence is concerned in terms of sub-Sections (4) & (5) of Section 120 of Army Act, 1950. However, even with such restrictions the power is quite 473 A B c D E F G H 474 A B c D E F G H SUPREME COURT REPORTS [2016] 5 S.C.R. drastic. The r",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-union-of-india-ors-2016insc495",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s41",
+      "target_ref_raw": "Section 41(2) of the Army Act",
+      "effective_date": null,
+      "evidence": "; he was interviewed by the Brigade Commander on 30.5. 1990; was asked to appear before the CO, 18th Punjab Regiment on 15. 7.1990; was charged under Section 41(2) of the Army Act for disobeying a lawful command given by a superior UNION OF INDIA & ORS. v. VISHAY PRIYA SINGH [UDAY UMESH LALIT, J.) officer in that he, when asked",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-union-of-india-ors-2016insc495",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s40",
+      "target_ref_raw": "Section 40(a) of the Army Act",
+      "effective_date": null,
+      "evidence": "em Singh has filed CWP 3 519/1998 pleading that he belonged to 15 INF DIV ORD Unit which assertion stands admitted. On 17.4.1998 he was charged under Section 40(a) of the Army Act for using criminal force to his superior officer in that he, at Amritsar on 20.10.1997 struck with an iron implement on the head and legs of Company",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-union-of-india-ors-2016insc495",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s69",
+      "target_ref_raw": "Section 69 of the Army Act",
+      "effective_date": null,
+      "evidence": "nt. In the year 2000 he was temporarily attached to 6lst Infantry Brigade to perform the duties as a Sahayak. By Charge-sheet dated 29.10.200 I under Section 69 of the Army Act he was accused of committing a civil offence on 25.10.2001, that is to say, using criminal force to a woman with an intent to outrage her modesty and",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-union-of-india-ors-2016insc495",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s52",
+      "target_ref_raw": "Section 52(f) of the Army Act",
+      "effective_date": null,
+      "evidence": "d by SCM between 20.12.2004 and 4.1.2005 by CO 118 Field Regiment where the Petitioner was attached for disciplinary purposes. The first charge under Section 52(f) of the Army Act was that the Petitioner between 4.8.1999 to 6.6.200 I, with intent to defraud, improperly altered several entries in the Issue Vouchers. The Petition",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-union-of-india-ors-2016insc495",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s108",
+      "target_ref_raw": "Section 108 of the Army Act 1950",
+      "effective_date": null,
+      "evidence": "Courts Martial (\"GCM\" for short), a District Courts ,Martial (\"DCM\" for short) or Summary General Courts Martial B (\"SGCM\" for short) as envisaged in Section 108 of the Army Act 1950 (hereinafter referred to as the Act). While allowing these Writ Petitions, the High Court in Paragraphs 20, 22, 23 and 24 of its judgment observed as",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-union-of-india-ors-2016insc495",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s63",
+      "target_ref_raw": "Section 63 of the Army Act",
+      "effective_date": null,
+      "evidence": "c D E F G H SUPREME COURT REPORTS [2016] 5 S.C.R. summary court martial for committing an act prejudicial to good order and military discipline under Section 63 of the Army Act. Before being subjected to court-martial, summary of evidence was recorded in presence of an independent witness, the charge and names of witness wer",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-union-of-india-ors-2016insc495",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s39",
+      "target_ref_raw": "Section 39(a) of the Army Act",
+      "effective_date": null,
+      "evidence": "side to know the password. The reply states that earlier two red ink entries had been made against the petitioner.(i) for absence without leave under Section 39(a) of the Army Act; and (ii) for committing act prejudicial to good order and military discipline (consuming liquor) under Section 63 of the Army Act. At the relevant t",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-union-of-india-ors-2016insc495",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s38",
+      "target_ref_raw": "Section 38( I) of the Army Act",
+      "effective_date": null,
+      "evidence": "fter going through the papers supplied to him, he admitted his guilt which was recorded. He was declared deserter and held guilty of the charge under Section 38( I) of the Army Act and dismissed from service on 8.4.1993. He preferred appeal which was rejected on 26. 7 .1994. In Writ Petition No.6134/1994, petitionerChatar Singh",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2016-union-of-india-ors-2016insc495",
+  "doc_type": "judgment",
+  "title": "UNION OF INDIA & ORS. versus VISHAV PRIYA SINGH",
+  "number": "2016 INSC 495",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2016-07-05",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2016_5_473_502_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010003972016",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2016 INSC 495",
+  "reported_citations": [
+    "[2016] 5 S.C.R. 473"
+  ],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA & ORS."
+    ],
+    "respondent": [
+      "VISHAV PRIYA SINGH"
+    ]
+  },
+  "judges": [
+    "T.S. THAKUR"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "120",
+      "raw": "Section 120 of Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "41",
+      "raw": "Section 41(2) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "40",
+      "raw": "Section 40(a) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "69",
+      "raw": "Section 69 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "52",
+      "raw": "Section 52(f) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "108",
+      "raw": "Section 108 of the Army Act 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "63",
+      "raw": "Section 63 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "39",
+      "raw": "Section 39(a) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "38",
+      "raw": "Section 38( I) of the Army Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": null,
+      "raw": "Air Force Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": null,
+      "raw": "Navy Act"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": null,
+      "raw": "Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 106,
+    "keywords": {
+      "army act": 16,
+      "air force act": 1,
+      "navy act": 1,
+      "court martial": 82,
+      "summary of evidence": 6
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

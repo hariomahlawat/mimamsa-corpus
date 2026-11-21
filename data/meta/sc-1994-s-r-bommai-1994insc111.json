@@ -1,0 +1,148 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1994/english/1994_2_644_1000_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:17:45+00:00",
+  "sha256": "b20b4db0d2e9468f21a256fb790ece7a53610abe5de54cf912f9656f7dd7ef50",
+  "raw_path": "data/raw/sci/1994/b20b4db0d2e9468f21a256fb790ece7a53610abe5de54cf912f9656f7dd7ef50.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 357,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1994-s-r-bommai-1994insc111.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1994-s-r-bommai-1994insc111",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s123",
+      "target_ref_raw": "S. 123 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "material on the basis of which advice was tendered is subject to judicial reviea-Whether Govt. while justifying its action can claim privilege under S. 123 of the Evidence Act, 187l-Burden of Proof-First on the person challenging the Proclamation-Then shifts to E Union of India. Constitution of India : Arts. 74 and 77-Scope",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1994-s-r-bommai-1994insc111",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s106",
+      "target_ref_raw": "Section 106 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "provisions of the Constitutim;. Since such material would be exclusively within the E knowledge of the Union Government, in view of the provisions of Section 106 of the Evidence Act, the burden of proving the existence of such material would be on the Union Government. (739 E-H, 740 A] 3.5. As regards the question whether the val",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1994-s-r-bommai-1994insc111",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s114",
+      "target_ref_raw": "Section 114 (e) of the Evidence Act",
+      "effective_date": null,
+      "evidence": "either motives nor bad faith nor abuse of power be presumed unless in an indi;,;dual case it is assailed and arise for considerat;on on that premise. Section 114 (e) of the Evidence Act raises statutory presumption that official acts have been\" regularly E performed. Prof. Bork in his \"Neutral Principles and Some First Amendments Pro",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-1994-s-r-bommai-1994insc111",
+  "doc_type": "judgment",
+  "title": "S.R. BOMMAI versus UNION OF INDIA AND ORS.",
+  "number": "1994 INSC 111",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1994-03-11",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "1994_2_644_1000_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010001111994",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1994 INSC 111",
+  "reported_citations": [
+    "[1994] 2 S.C.R. 644"
+  ],
+  "parties": {
+    "petitioner": [
+      "S.R. BOMMAI"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "A.M. AHMADI",
+    "S. RATNAVEL PANDIAN",
+    "KULDIP SINGH",
+    "J.S. VERMA",
+    "P.B. SAWANT",
+    "K. RAMASWAMY",
+    "S.C. AGRAWAL",
+    "YOGESHWAR DAYAL",
+    "B.P. JEEVAN REDDY"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": null,
+      "raw": "I.P.C"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "123",
+      "raw": "S. 123 of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "106",
+      "raw": "Section 106 of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "114",
+      "raw": "Section 114 (e) of the Evidence Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 7,
+    "keywords": {
+      "invalided": 7
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

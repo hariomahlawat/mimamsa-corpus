@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1988/english/1988_1_512_524_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:17:23+00:00",
+  "sha256": "35b9c948fe6254c66c1a416055cbbd34050fcf132abc7b66d537fe6f711586ee",
+  "raw_path": "data/raw/sci/1987/35b9c948fe6254c66c1a416055cbbd34050fcf132abc7b66d537fe6f711586ee.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 13,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1988-ranjit-thakur-1987insc285.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1988-ranjit-thakur-1987insc285",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s41",
+      "target_ref_raw": "section 41(2) of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "ficers, was alleged to have committed another offence by refus- F ing to eat his food on March 29, 1985 when ordered to o;lo so. He was charged under section 41(2) of the Army Act, 1950 for disobeying a lawful command given by his superior officer. A sentence of rigorous imprisonment for one year was imposed by a Summary Court Martia",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-1988-ranjit-thakur-1987insc285",
+  "doc_type": "judgment",
+  "title": "RANJIT THAKUR versus UNION OF INDIA AND ORS.",
+  "number": "1987 INSC 285",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1987-10-15",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "1988_1_512_524_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010000551988",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1987 INSC 285",
+  "reported_citations": [
+    "[1988] 1 S.C.R. 512"
+  ],
+  "parties": {
+    "petitioner": [
+      "RANJIT THAKUR"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "A.P. SEN"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "41",
+      "raw": "section 41(2) of the Army Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 32,
+    "keywords": {
+      "army act": 3,
+      "court martial": 29
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

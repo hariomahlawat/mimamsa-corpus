@@ -1,0 +1,199 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1987/english/1987_3_456_470_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:17:23+00:00",
+  "sha256": "4e51f01632d9595d1fd3c2701716deea9e1afe7c5b806b99f67df04f33c4c18b",
+  "raw_path": "data/raw/sci/1987/4e51f01632d9595d1fd3c2701716deea9e1afe7c5b806b99f67df04f33c4c18b.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 15,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1987-union-of-india-through-major-g-1987insc164.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1987-union-of-india-through-major-g-1987insc164",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s127",
+      "target_ref_raw": "s. 127 of the Army Act",
+      "effective_date": null,
+      "evidence": "U.0.1. v. S.K. SHARMA 457 ~ therefore, it was not permissible for the Army Authorities to hold a preliminary investigation. However, having regard to s. 127 of the Army Act, the Magistrate directed that the progress of the case be intimated at intervals of fo•1r months. in the Revision filed by the appel- lants, the High",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1987-union-of-india-through-major-g-1987insc164",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s125",
+      "target_ref_raw": "Section 125 of the Army Act",
+      "effective_date": null,
+      "evidence": "orm the Magis· Irate whether the accused has been tried by a Court Martial or other D effectual proceedings have been taken against him. [468B·Dl (v) Section 125 of the Army Act, which provides that when a Criminal Court and a Court Martial have each jurisdiction in respect of an offence, it will be in the discretion of the C",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1987-union-of-india-through-major-g-1987insc164",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s124",
+      "target_ref_raw": "s. 124 of the Army Act",
+      "effective_date": null,
+      "evidence": "observed that the preliminary investigations by a departmental ;.... court of inquiry did not seem permissible in the case. However, having regard to s. 124 of the Army Act which conferred absolute power on the Army authorities to choose the venue of trial and keeping in view - the administrative convenience of the Army",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1987-union-of-india-through-major-g-1987insc164",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s323",
+      "target_ref_raw": "sections 323, 352 and 355 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": "to the higher authorities and was attempting to pro- tect Col. Ali. It was alleged in the complaint that Col. Ali had commit- ted the offences under sections 323, 352 and 355 of the Indian Penal Code and Brigadier Randhawa had committed the offence under G section 217 of the Indian Penal Code. The Additional Chief Judicial Magistrate examined the",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1987-union-of-india-through-major-g-1987insc164",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s217",
+      "target_ref_raw": "section 217 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": "l. Ali had commit- ted the offences under sections 323, 352 and 355 of the Indian Penal Code and Brigadier Randhawa had committed the offence under G section 217 of the Indian Penal Code. The Additional Chief Judicial Magistrate examined the complaint, and taking cognizance of the + offences alleged to have been committed by Col. Ali",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1987-union-of-india-through-major-g-1987insc164",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s200",
+      "target_ref_raw": "s. 200 of the Cr. P.C",
+      "effective_date": null,
+      "evidence": "cial Magistrate had, on receipt of -· .. + U.O.l. v. S.K. SHARMA [PATHAK. CJ.[ 463 .-4 the complaint examined the complainant Major S.K. Sharma under s. 200 of the Cr. P.C. and had taken cognizance of the offence under A s. 190(A) of the Code and on being satisfied of the existence of a primo facie case process had been",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1987-union-of-india-through-major-g-1987insc164",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s475",
+      "target_ref_raw": "Section 475 of the Code of Criminal Procedure",
+      "effective_date": null,
+      "evidence": "l Court or by a Court Martial the law has attempted to resolve the competings claims of the civil authority and the military authority in such cases. Section 475 of the Code of Criminal Procedure empowers the Central Government to make rules as to cases in which persons shall be tried by a Court to which the Code applies or by a Court Martial,",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-1987-union-of-india-through-major-g-1987insc164",
+  "doc_type": "judgment",
+  "title": "UNION OF INDIA THROUGH MAJOR GENERAL H.C. PATHAK versus MAJOR S.K. SHARMA",
+  "number": "1987 INSC 164",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1987-06-29",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "1987_3_456_470_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010002551987",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1987 INSC 164",
+  "reported_citations": [
+    "[1987] 3 S.C.R. 456"
+  ],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA THROUGH MAJOR GENERAL H.C. PATHAK"
+    ],
+    "respondent": [
+      "MAJOR S.K. SHARMA"
+    ]
+  },
+  "judges": [
+    "R.S. PATHAK"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "127",
+      "raw": "s. 127 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "125",
+      "raw": "Section 125 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "124",
+      "raw": "s. 124 of the Army Act"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "323",
+      "raw": "sections 323, 352 and 355 of the Indian Penal Code"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "217",
+      "raw": "section 217 of the Indian Penal Code"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "200",
+      "raw": "s. 200 of the Cr. P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "475",
+      "raw": "Section 475 of the Code of Criminal Procedure"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 84,
+    "keywords": {
+      "army act": 20,
+      "court martial": 64
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

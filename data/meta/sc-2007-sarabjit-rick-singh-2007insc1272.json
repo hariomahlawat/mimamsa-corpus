@@ -1,0 +1,196 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2007/english/2007_13_321_351_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:18:43+00:00",
+  "sha256": "72f856955bcb53b370148fb2a0ba343f1b169e446e4fb5eaa2b7a9333f463b1a",
+  "raw_path": "data/raw/sci/2007/72f856955bcb53b370148fb2a0ba343f1b169e446e4fb5eaa2b7a9333f463b1a.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 31,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2007-sarabjit-rick-singh-2007insc1272.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2007-sarabjit-rick-singh-2007insc1272",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s173",
+      "target_ref_raw": "s.173 of the CrPC",
+      "effective_date": null,
+      "evidence": "nce of the offence is taken. At this stage, therefore, the · H 328 SUPREME COURT REPORTS [2007] 13 (Addl.) S.C.R. A requirement of sub-section (5) of s.173 of the CrPC was not necessary. B It is not, therefore, possible to hold that the report of the Magistrate is vitiated on the premise that he has failed to apply",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2007-sarabjit-rick-singh-2007insc1272",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s227",
+      "target_ref_raw": "Section 227 of the Code of Criminal Procedure, 1973",
+      "effective_date": null,
+      "evidence": "the Magistrate has no power to discharge and only remedy available to an accused facing sessions trial is to file an application for discharge under Section 227 of the Code of Criminal Procedure, 1973 before the Trial judge. F In terms of Section 208 of the Code of Criminal Procedure, 1898 the prosecution had an obligation to produce all such evide",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2007-sarabjit-rick-singh-2007insc1272",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s208",
+      "target_ref_raw": "Section 208 of the Code of Criminal Procedure",
+      "effective_date": null,
+      "evidence": "essions trial is to file an application for discharge under Section 227 of the Code of Criminal Procedure, 1973 before the Trial judge. F In terms of Section 208 of the Code of Criminal Procedure, 1898 the prosecution had an obligation to produce all such evidence in support of the prosecution. The san1e when read into Section I 0 of the Extra",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2007-sarabjit-rick-singh-2007insc1272",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s207",
+      "target_ref_raw": "Section 207 A ( 6) of the Code of Criminal Procedure",
+      "effective_date": null,
+      "evidence": "Ramnarayan Mor and Anr v. State of Maharashtra, C [1964] 5 SCR 1064 to hold that the documents also formed part of the evidence within the meaning of Section 207 A ( 6) of the Code of Criminal Procedure, 1898. 35. In a proceeding for extradition no witness is examined for establishing an allegation made in the requisition of the foreign State. The D",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2007-sarabjit-rick-singh-2007insc1272",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s200",
+      "target_ref_raw": "Section 200 of the Code of Criminal Procedure",
+      "effective_date": null,
+      "evidence": "the Magistrate at that stage has been taken away. F 36. Law in India recognizes affidavit evidence. (See Order IXX of the Code of Civil Procedure and Section 200 of the Code of Criminal Procedure). Evidence in a situation of this nature would, thus, in our opinion mean, which may be used at the trial. It may also include any document G which m",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2007-sarabjit-rick-singh-2007insc1272",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s3",
+      "target_ref_raw": "S.3 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "n of this nature would, thus, mean, which may be used at the trial. It may also include any document which may lead to discovery of further evidence. S.3 of the Evidence Act which defines \"evidence\" in an enquiry stricto sensu may not, thus, be applicable in a proceeding under the Act. [Para36)[342-F-G] B 5.3. S.10 of the",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2007-sarabjit-rick-singh-2007insc1272",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s90",
+      "target_ref_raw": "Section 90 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "provisions of the Evidence Act, unless the contents of the documents are said to be admissible by reason of a provision of a statute, as for example Section 90 of the Evidence Act. But what misses the aforementioned submission/ G contention is that whereas the contents of the document is to be proved for the purpose of trial bu",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2007-sarabjit-rick-singh-2007insc1272",
+  "doc_type": "judgment",
+  "title": "SARABJIT RICK SINGH versus UNION OF INDIA",
+  "number": "2007 INSC 1272",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2007-12-12",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2007_13_321_351_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010003242007",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2007 INSC 1272",
+  "reported_citations": [
+    "[2007] 13 S.C.R. 321"
+  ],
+  "parties": {
+    "petitioner": [
+      "SARABJIT RICK SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA"
+    ]
+  },
+  "judges": [
+    "S.B. SINHA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "173",
+      "raw": "s.173 of the CrPC"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "227",
+      "raw": "Section 227 of the Code of Criminal Procedure, 1973"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "208",
+      "raw": "Section 208 of the Code of Criminal Procedure"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "207",
+      "raw": "Section 207 A ( 6) of the Code of Criminal Procedure"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "200",
+      "raw": "Section 200 of the Code of Criminal Procedure"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "3",
+      "raw": "S.3 of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "90",
+      "raw": "Section 90 of the Evidence Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "summary of evidence": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

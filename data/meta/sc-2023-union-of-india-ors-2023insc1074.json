@@ -1,0 +1,141 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/english/2023_16_1026_1045_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:20:19+00:00",
+  "sha256": "c510f143147af80d4751d15e5910d7b31a222c6992fe0b6c3e38802d8375e07c",
+  "raw_path": "data/raw/sci/2023/c510f143147af80d4751d15e5910d7b31a222c6992fe0b6c3e38802d8375e07c.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 20,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2023-union-of-india-ors-2023insc1074.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2023-union-of-india-ors-2023insc1074",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s31",
+      "target_ref_raw": "Section 31(1)1 of the Armed Forces Tribunal Act",
+      "effective_date": null,
+      "evidence": ". S. Tomar, Rabin Majumder, Advs. for the Respondent. 1029 JUDGMENT / ORDER OF THE SUPREME COURT JUDGMENT SANJAY KAROL J. 1. This Civil Appeal, under Section 31(1)1 of the Armed Forces Tribunal Act, 20072 at the instance of the Union of India, is directed against the judgment and order dated 30th November 2015, passed by the Armed Forces Tribuna",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2023-union-of-india-ors-2023insc1074",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s123",
+      "target_ref_raw": "sections 123 and 124 of the Indian Evidence Act, 1872",
+      "effective_date": null,
+      "evidence": "examining him on oath; (b) requiring the discovery and production of documents; (c) receiving evidence on aﬃ davits; (d) subject to the provisions of sections 123 and 124 of the Indian Evidence Act, 1872 (1 of 1872), requisitioning any public record or document or copy of such record or document from any oﬃ ce; (e) issuing commissions for the examinat",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2023-union-of-india-ors-2023insc1074",
+  "doc_type": "judgment",
+  "title": "UNION OF INDIA & ORS versus AIR COMMODORE NK SHARMA (17038) ADM/LGL",
+  "number": "2023 INSC 1074",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2023-12-14",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2023_16_1026_1045_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010008312023",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2023 INSC 1074",
+  "reported_citations": [
+    "[2023] 16 S.C.R. 1026"
+  ],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA & ORS"
+    ],
+    "respondent": [
+      "AIR COMMODORE NK SHARMA (17038) ADM/LGL"
+    ]
+  },
+  "judges": [
+    "ABHAY S. OKA",
+    "SANJAY KAROL"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": null,
+      "raw": "Army Act, 1950"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "277",
+      "raw": "Section 277 of the Air Force Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": null,
+      "raw": "Navy Act, 1957"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "31",
+      "raw": "Section 31(1)1 of the Armed Forces Tribunal Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "123",
+      "raw": "sections 123 and 124 of the Indian Evidence Act, 1872"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 9,
+    "keywords": {
+      "army act": 1,
+      "air force act": 2,
+      "navy act": 1,
+      "armed forces tribunal": 3,
+      "court martial": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

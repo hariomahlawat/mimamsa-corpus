@@ -1,0 +1,119 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1985/english/S_1985_1_947_953_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:17:23+00:00",
+  "sha256": "1def331cba2f5c4def1d55f7c0d64cde6716b9d938f1f03ef5e1367c52a5f2f5",
+  "raw_path": "data/raw/sci/1982/1def331cba2f5c4def1d55f7c0d64cde6716b9d938f1f03ef5e1367c52a5f2f5.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 7,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1985-r-p-bhatt-1982insc97.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1985-r-p-bhatt-1982insc97",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s164",
+      "target_ref_raw": "s. 164 of the Army Act",
+      "effective_date": null,
+      "evidence": "of the Chief (1) [1969] 2 S.C.R. 176 - \\ ii..il. BiiATI v. UNION (Sen, J.) 953 of the Army Staff confirming the proceedings of the Court-Martial unders. 164 of the Army Act and the order of the Central Government dismissing the appeal of the delinquent under sec. 165 of the Army Act were illegal and ultra vires as the di",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1985-r-p-bhatt-1982insc97",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s165",
+      "target_ref_raw": "sec. 165 of the Army Act",
+      "effective_date": null,
+      "evidence": "he proceedings of the Court-Martial unders. 164 of the Army Act and the order of the Central Government dismissing the appeal of the delinquent under sec. 165 of the Army Act were illegal and ultra vires as the did not give reasons in support of the orders, and summed up the legal position as follows : \"Apart from any requ",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-1985-r-p-bhatt-1982insc97",
+  "doc_type": "judgment",
+  "title": "R.P. BHATT versus UNION OF INDIA AND ORS.",
+  "number": "1982 INSC 97",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1982-12-14",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "S_1985_1_947_953_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010002681985",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1982 INSC 97",
+  "reported_citations": [
+    "[1985] SUPP. 1 S.C.R. 947"
+  ],
+  "parties": {
+    "petitioner": [
+      "R.P. BHATT"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "A.P. SEN"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "164",
+      "raw": "s. 164 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "165",
+      "raw": "sec. 165 of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 3,
+    "keywords": {
+      "army act": 2,
+      "court martial": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2018/english/2018_3_770_805_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:19:57+00:00",
+  "sha256": "373eae8478407fb9f8f2b971775f5582128b793f8dba6d9a3dfba8ef39b36c9e",
+  "raw_path": "data/raw/sci/2018/373eae8478407fb9f8f2b971775f5582128b793f8dba6d9a3dfba8ef39b36c9e.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 36,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2018-shakti-vahini-2018insc266.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2018-shakti-vahini-2018insc266",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s300",
+      "target_ref_raw": "Section 300 of the IPC",
+      "effective_date": null,
+      "evidence": "men and Child Development, respondent Nos. 1, 2 and 3 respectively. It has been contended that honour killings are treated as murder as defined under Section 300 of the IPC and punishable under Section 302 of the IPC. As the police and public order are State subjects under the Constitution, it is primarily the responsibi",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2018-shakti-vahini-2018insc266",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s302",
+      "target_ref_raw": "Section 302 of the IPC",
+      "effective_date": null,
+      "evidence": ", 2 and 3 respectively. It has been contended that honour killings are treated as murder as defined under Section 300 of the IPC and punishable under Section 302 of the IPC. As the police and public order are State subjects under the Constitution, it is primarily the responsibility of the States to deal with honour killi",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2018-shakti-vahini-2018insc266",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s141",
+      "target_ref_raw": "Sections 141, 143, 503 read with 506 of IPC",
+      "effective_date": null,
+      "evidence": "e), the jurisdictional police official shall cause to immediately lodge an F.I.R. under the appropriate provisions of the Indian Penal Code including Sections 141, 143, 503 read with 506 of IPC. (b) Upon registration of F.I.R., intimation shall be simultaneously given to the Superintendent of Police/ Deputy Superintendent of Police who, in t",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2018-shakti-vahini-2018insc266",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s151",
+      "target_ref_raw": "Section 151 of Cr.P.C",
+      "effective_date": null,
+      "evidence": "Police incharge of the concerned sub-division to cause to register an F.I.R. against the persons threatening the couple(s) and, if necessary, invoke Section 151 of Cr.P.C. Additionally, the Deputy Superintendent of Police shall personally supervise the progress of investigation and ensure that the same is completed and",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2018-shakti-vahini-2018insc266",
+  "doc_type": "judgment",
+  "title": "SHAKTI VAHINI versus UNION OF INDIA AND OTHERS",
+  "number": "2018 INSC 266",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2018-03-27",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2018_3_770_805_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010005372018",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2018 INSC 266",
+  "reported_citations": [
+    "[2018] 3 S.C.R. 770"
+  ],
+  "parties": {
+    "petitioner": [
+      "SHAKTI VAHINI"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "DIPAK MISRA"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": null,
+      "raw": "Air Force Act, 1950"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "300",
+      "raw": "Section 300 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "302",
+      "raw": "Section 302 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "141",
+      "raw": "Sections 141, 143, 503 read with 506 of IPC"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "151",
+      "raw": "Section 151 of Cr.P.C"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 3,
+    "keywords": {
+      "air force act": 1,
+      "court martial": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

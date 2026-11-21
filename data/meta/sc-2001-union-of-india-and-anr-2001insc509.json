@@ -1,0 +1,184 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2001/english/S_2001_4_209_235_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:18:23+00:00",
+  "sha256": "cb3aa7cfabf6806b57975b01527412cc2d8566f3749a23a0d4887fbb062c6d15",
+  "raw_path": "data/raw/sci/2001/cb3aa7cfabf6806b57975b01527412cc2d8566f3749a23a0d4887fbb062c6d15.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 27,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2001-union-of-india-and-anr-2001insc509.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2001-union-of-india-and-anr-2001insc509",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s71",
+      "target_ref_raw": "section 71(h) of the Army Act",
+      "effective_date": null,
+      "evidence": "he respondents was not taken into consideration by the authority and the court martial did not consider it appropriate to impose the punishment under section 71(h) of the Army Act. The orders of forfeiture of pension was passed after issuing show cause notices giving opportunity to the respondent to explain the circum- stances",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2001-union-of-india-and-anr-2001insc509",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s73",
+      "target_ref_raw": "Section 73 of the Army Act",
+      "effective_date": null,
+      "evidence": "money due to a person a_nd U.0.1. v. P.D. YADAV 211 not of pension. So on the date of cashiering or dismissal there cannot be any arrears of pension. Section 73 of the Army Act enables the authorities to impose punishments in combination. Merely because punishment is not imposed under clause (h) or (k) of Section 71 and othe",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2001-union-of-india-and-anr-2001insc509",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s81",
+      "target_ref_raw": "Section 81 of the Navy Act",
+      "effective_date": null,
+      "evidence": "Regulation 16(a); so also the Central Government, under Regulation 15(2) of the Navy Pension Regulations taking note of the punishment imposed under Section 81 of the Navy Act. Thus a General Court Martial and confirming authorities imposing pun- ishments cannot debar the President or the Central Government from passing ord",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2001-union-of-india-and-anr-2001insc509",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s47",
+      "target_ref_raw": "Section 47(a) of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "harge? Communication Centre, Delhi when ordered to go out of the said office and to come afterwards and thereby committed an offence punishable under Section 47(a) of the Navy Act, 1957. F 3. Did on the Twenty ninth day of September one thousand nine hundred eighty nine at about 1402 hours behave in a disorderly manner in the office",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2001-union-of-india-and-anr-2001insc509",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s48",
+      "target_ref_raw": "Section 48(c) of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "behave in a disorderly manner in the office of the Officer-in-Charge, Communication G centre, Delhi and thereby committed an offence punishable under Section 48(c) of the Navy Act, 1957. 4. :Oid on the Twenty ninth day of September one thousand nine hundred eighty nine at about 1402 hours strike Lieutenant Com- H A B c D E F G H 218",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2001-union-of-india-and-anr-2001insc509",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s45",
+      "target_ref_raw": "Section 45(a) of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "(81917 Z) his superior officer in the office of the Officer-in-Charge, Communication Centre, Delhi and thereby committed an offence punishable under Section 45(a) of the Navy Act, 1957. Did on the Twenty ninth day of September one thousand nine hundred eighty nine at about 1403 hours use violence against Lieutenant Commander, (Speci",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2001-union-of-india-and-anr-2001insc509",
+  "doc_type": "judgment",
+  "title": "UNION OF INDIA AND ANR. versus P.D. YADAV",
+  "number": "2001 INSC 509",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2001-10-16",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "S_2001_4_209_235_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010005032001",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2001 INSC 509",
+  "reported_citations": [
+    "[2001] SUPP. 4 S.C.R. 209"
+  ],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA AND ANR."
+    ],
+    "respondent": [
+      "P.D. YADAV"
+    ]
+  },
+  "judges": [
+    "B.N. KIRPAL"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "71",
+      "raw": "section 71(h) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "73",
+      "raw": "Section 73 of the Army Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "81",
+      "raw": "Section 81 of the Navy Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "47",
+      "raw": "Section 47(a) of the Navy Act, 1957"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "48",
+      "raw": "Section 48(c) of the Navy Act, 1957"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "45",
+      "raw": "Section 45(a) of the Navy Act, 1957"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 72,
+    "keywords": {
+      "army act": 22,
+      "navy act": 11,
+      "court martial": 39
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

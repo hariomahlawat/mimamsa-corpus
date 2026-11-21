@@ -1,0 +1,119 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1995/english/S_1995_2_602_607_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:18:03+00:00",
+  "sha256": "d4f88579c084a9a7cf5aae748d1dd138d301b261638915945ac4c0597567998c",
+  "raw_path": "data/raw/sci/1995/d4f88579c084a9a7cf5aae748d1dd138d301b261638915945ac4c0597567998c.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1995-union-of-india-and-ors-1995insc449.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1995-union-of-india-and-ors-1995insc449",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s64",
+      "target_ref_raw": "Section 64(3) of the Army Act",
+      "effective_date": null,
+      "evidence": "ioned Officer in the Indian Army D was placed under closed arrest on August 7, 1980 pending his trial by a General Court Martial for an offence under Section 64(3) of the Army Act. Since the respondent was due to retire on August 31, 1990 on attaining the age of superannuation, the Army authorities passed an order extending his",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1995-union-of-india-and-ors-1995insc449",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s123",
+      "target_ref_raw": "Section 123 of the Army Act",
+      "effective_date": null,
+      "evidence": "ause he had earlier retired this Court observed: B c D \"Though the appellant had retired from the Army service but by operation of sub-section (1) of Section 123 of the Army Act, he could be tried by the GCM in respect of the offences committed by him during the period of his actual service and could be committed and punished",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-1995-union-of-india-and-ors-1995insc449",
+  "doc_type": "judgment",
+  "title": "UNION OF INDIA AND ORS. versus R.K.L.D. AZAD",
+  "number": "1995 INSC 449",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1995-08-09",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "S_1995_2_602_607_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010004511995",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1995 INSC 449",
+  "reported_citations": [
+    "[1995] SUPP. 2 S.C.R. 602"
+  ],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA AND ORS."
+    ],
+    "respondent": [
+      "R.K.L.D. AZAD"
+    ]
+  },
+  "judges": [
+    "B.P. JEEVAN REDDY"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "64",
+      "raw": "Section 64(3) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "123",
+      "raw": "Section 123 of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 14,
+    "keywords": {
+      "army act": 10,
+      "court martial": 4
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2018/english/2018_4_373_396_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:19:57+00:00",
+  "sha256": "a7f4d2780e93a902b26098f5f164cf005c9693ec3cdac9e789f1221c38acae16",
+  "raw_path": "data/raw/sci/2018/a7f4d2780e93a902b26098f5f164cf005c9693ec3cdac9e789f1221c38acae16.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 24,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2018-ex-navy-direct-entry-artificer-2018insc461.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2018-ex-navy-direct-entry-artificer-2018insc461",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s184",
+      "target_ref_raw": "section 184 of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "ndia vide SRO.No.106 of 1978 dated 28th March 1978. Relevant portions of the SRO are given below: “S.R.O.106:— In exercise of the powers conferred by section 184 of the Navy Act, 1957 (62 of 1957), the Central Government hereby makes the following regulations further to amend the Navy Ceremonial, Conditions of Service and Miscellan",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2018-ex-navy-direct-entry-artificer-2018insc461",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s30",
+      "target_ref_raw": "Section 30 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "cers? 3. Both these orders passed in O.A. as well as in review petition have been assailed by the appellants by way of instant appeal preferred under Section 30 of the Armed Forces Tribunal Act, 2007. 4. We now advert to the seminal facts which have led to the present litigation. 5. In the Indian Navy, the sailors are of two classes, the Artificer",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2018-ex-navy-direct-entry-artificer-2018insc461",
+  "doc_type": "judgment",
+  "title": "EX NAVY DIRECT ENTRY ARTIFICERS ASSOCIATION & ORS. versus THE UNION OF INDIA & ORS.",
+  "number": "2018 INSC 461",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2018-05-08",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2018_4_373_396_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010005812018",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2018 INSC 461",
+  "reported_citations": [
+    "[2018] 4 S.C.R. 373"
+  ],
+  "parties": {
+    "petitioner": [
+      "EX NAVY DIRECT ENTRY ARTIFICERS ASSOCIATION & ORS."
+    ],
+    "respondent": [
+      "THE UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "A.K. SIKRI"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "184",
+      "raw": "section 184 of the Navy Act, 1957"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "30",
+      "raw": "Section 30 of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 18,
+    "keywords": {
+      "navy act": 4,
+      "armed forces tribunal": 14
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

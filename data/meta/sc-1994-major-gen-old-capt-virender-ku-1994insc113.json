@@ -1,0 +1,86 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1994/english/1994_2_629_637_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:17:45+00:00",
+  "sha256": "0af19b8f3bae094c9c46d3ca4c298cb8f3d16b35ccc5541569e2da1e03ba50a3",
+  "raw_path": "data/raw/sci/1994/0af19b8f3bae094c9c46d3ca4c298cb8f3d16b35ccc5541569e2da1e03ba50a3.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 9,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1994-major-gen-old-capt-virender-ku-1994insc113.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "sc-1994-major-gen-old-capt-virender-ku-1994insc113",
+  "doc_type": "judgment",
+  "title": "MAJOR GEN. (OLD CAPT.) VIRENDER KUMAR versus THE CHIEF OF ARMY STAFF & 3 PROFORMA RESPONDENTS",
+  "number": "1994 INSC 113",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1994-03-11",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "1994_2_629_637_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010001081994",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1994 INSC 113",
+  "reported_citations": [
+    "[1994] 2 S.C.R. 629"
+  ],
+  "parties": {
+    "petitioner": [
+      "MAJOR GEN. (OLD CAPT.) VIRENDER KUMAR"
+    ],
+    "respondent": [
+      "THE CHIEF OF ARMY STAFF & 3 PROFORMA RESPONDENTS"
+    ]
+  },
+  "judges": [
+    "S. RATNAVEL PANDIAN"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "disability_pension"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 7,
+    "keywords": {
+      "court martial": 3,
+      "disability pension": 4
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

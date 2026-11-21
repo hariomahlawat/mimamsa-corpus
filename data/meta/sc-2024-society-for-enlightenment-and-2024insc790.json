@@ -1,0 +1,140 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/english/2024_10_1513_1632_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:20:23+00:00",
+  "sha256": "e15623181186096bca29c2a7d268950b713870394791ec83e86e6aaad6664a2c",
+  "raw_path": "data/raw/sci/2024/e15623181186096bca29c2a7d268950b713870394791ec83e86e6aaad6664a2c.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 120,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2024-society-for-enlightenment-and-2024insc790.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2024-society-for-enlightenment-and-2024insc790",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s42",
+      "target_ref_raw": "Section 42 of CrPC",
+      "effective_date": null,
+      "evidence": "the offences under the CMRA were to be treated as cognizable for (i) the purpose of investigation, and (ii) for the purpose of matters other than (a) Section 42 of CrPC and (b) the arrest of a person without a warrant or without an order of the Magistrate. By the same amendment, Parliament also raised the age of marr",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2024-society-for-enlightenment-and-2024insc790",
+      "type": "cites",
+      "target_doc_id": "act-bns-2023#s63",
+      "target_ref_raw": "Section 63 of Bharatiya Nyaya Sanhita",
+      "effective_date": null,
+      "evidence": "k down the exception to the penal provision on rape under Section 375 IPC in so far as it related to minors. Further, Subclause (vi) of clause (d) of Section 63 of Bharatiya Nyaya Sanhita 2023114 prescribes the age of consent to be eighteen years. Section 63 BNS is pari materia to Section 375 IPC. 81. The principles of the POCSO Act ar",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2024-society-for-enlightenment-and-2024insc790",
+      "type": "cites",
+      "target_doc_id": "act-bnss-2023#s199",
+      "target_ref_raw": "Section 199(C) of the Bharatiya Nagarik Suraksha Sanhita",
+      "effective_date": null,
+      "evidence": "n against any public servant found to be in deliberate neglect of duty concerning child marriage cases within their jurisdiction. As stipulated under Section 199(C) of the Bharatiya Nagarik Suraksha Sanhita (BNS), 2023, public officials who fail to act in child marriage cases, particularly those with knowledge of imminent marriages, shall be subject to s",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2024-society-for-enlightenment-and-2024insc790",
+  "doc_type": "judgment",
+  "title": "SOCIETY FOR ENLIGHTENMENT AND VOLUNTARY ACTION & ANR. versus UNION OF INDIA & ORS.",
+  "number": "2024 INSC 790",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2024-10-18",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2024_10_1513_1632_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010006452024",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2024 INSC 790",
+  "reported_citations": [
+    "[2024] 10 S.C.R. 1513"
+  ],
+  "parties": {
+    "petitioner": [
+      "SOCIETY FOR ENLIGHTENMENT AND VOLUNTARY ACTION & ANR."
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "D.Y. CHANDRACHUD"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": null,
+      "raw": "Indian Penal Code"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "42",
+      "raw": "Section 42 of CrPC"
+    },
+    {
+      "act": "Bharatiya Nyaya Sanhita 2023",
+      "act_doc_id": "act-bns-2023",
+      "section": "63",
+      "raw": "Section 63 of Bharatiya Nyaya Sanhita"
+    },
+    {
+      "act": "Bharatiya Nagarik Suraksha Sanhita 2023",
+      "act_doc_id": "act-bnss-2023",
+      "section": "199",
+      "raw": "Section 199(C) of the Bharatiya Nagarik Suraksha Sanhita"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 4,
+    "keywords": {
+      "invalided": 4
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

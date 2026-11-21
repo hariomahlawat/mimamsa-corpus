@@ -1,0 +1,206 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2003/english/2003_3_881_904_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:18:33+00:00",
+  "sha256": "676f2df941964780e2460e94e4ad23f62e3d9008efd512ef999370def6da4f04",
+  "raw_path": "data/raw/sci/2003/676f2df941964780e2460e94e4ad23f62e3d9008efd512ef999370def6da4f04.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 24,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2003-union-of-india-and-ors-2003insc254.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2003-union-of-india-and-ors-2003insc254",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s130",
+      "target_ref_raw": "Section 130 of the Army Act",
+      "effective_date": null,
+      "evidence": "t Martial as well as the orders made under sections 162 and 163 of the Navy Act. 1900-B-C; 903-G I H 884 SUPREME COURT REPORTS (2003] 3 S.C.R. A 1.4. Section 130 of the Army Act as well as Section 102 of the Navy Act B relate to the objection to the inclusion of any officer as member of the Court Martial It may be that the pr",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2003-union-of-india-and-ors-2003insc254",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s102",
+      "target_ref_raw": "Section 102 of the Navy Act",
+      "effective_date": null,
+      "evidence": "hat the High Court erred in relying on the principles laid down in Ranjit Thakur's case as that case was under the Army Act which is C different from Section 102 of the Navy Act; that there was sufficient evidence on record to support the conviction; that the High Court was not justified in law in appreciating the evidence on",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2003-union-of-india-and-ors-2003insc254",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s162",
+      "target_ref_raw": "sections 162 and 163 of the Navy Act",
+      "effective_date": null,
+      "evidence": "t Martial are vitiated. Hence the High Court rightly quashed the order of '-- conviction passed by the Court Martial as well as the orders made under sections 162 and 163 of the Navy Act. 1900-B-C; 903-G I H 884 SUPREME COURT REPORTS (2003] 3 S.C.R. A 1.4. Section 130 of the Army Act as well as Section 102 of the Navy Act B relate to",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2003-union-of-india-and-ors-2003insc254",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s77",
+      "target_ref_raw": "Section 77(2) of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "artial dated 4th September, 2000 which found the respondent guilty of the offences under sections 497, 452 and 325 of the Indian Penal Code read with Section 77(2) of the Navy Act, 1957 (hereinafter referred to as 'the Act') and the order of the Chief of the Naval Staff dated 8th January, 200 I passed under Section 162 of the Act as",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2003-union-of-india-and-ors-2003insc254",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s497",
+      "target_ref_raw": "sections 497, 452 and 325 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": "of the Constitution of India quashed the order of the Court Martial dated 4th September, 2000 which found the respondent guilty of the offences under sections 497, 452 and 325 of the Indian Penal Code read with Section 77(2) of the Navy Act, 1957 (hereinafter referred to as 'the Act') and the order of the Chief of the Naval Staff dated 8th January,",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2003-union-of-india-and-ors-2003insc254",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s376",
+      "target_ref_raw": "section 376 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": "of no assistance to the respondenf because the C offence under section 497 of the Indian Penal Code was quite distinct from an offence of rape under section 376 of the Indian Penal Code, and section 78(2) of the Act was confined in its application to the offences of murder, culpable homicide not amounting to murder and rape. The High",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2003-union-of-india-and-ors-2003insc254",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s452",
+      "target_ref_raw": "sections 452 and 355 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": "having regard to the totality of circumstances it would be wholly unsafe to record the finding of guilt against the respondent for the offences under sections 452 and 355 of the Indian Penal Code. The High Court observed that it had not re-appreciated the evidence as such, or made any attempt to find F out sufficiency or adequacy of evidence,",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2003-union-of-india-and-ors-2003insc254",
+  "doc_type": "judgment",
+  "title": "UNION OF INDIA AND ORS. versus SHIVENDRA BIKARAM SINGH",
+  "number": "2003 INSC 254",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2003-04-24",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2003_3_881_904_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010002692003",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2003 INSC 254",
+  "reported_citations": [
+    "[2003] 3 S.C.R. 881"
+  ],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA AND ORS."
+    ],
+    "respondent": [
+      "SHIVENDRA BIKARAM SINGH"
+    ]
+  },
+  "judges": [
+    "N. SANTOSH HEGDE"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "130",
+      "raw": "Section 130 of the Army Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "102",
+      "raw": "Section 102 of the Navy Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "162",
+      "raw": "sections 162 and 163 of the Navy Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "77",
+      "raw": "Section 77(2) of the Navy Act, 1957"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "497",
+      "raw": "sections 497, 452 and 325 of the Indian Penal Code"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "376",
+      "raw": "section 376 of the Indian Penal Code"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "452",
+      "raw": "sections 452 and 355 of the Indian Penal Code"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": null,
+      "raw": "Code of Criminal Procedure"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 172,
+    "keywords": {
+      "army act": 7,
+      "navy act": 13,
+      "court martial": 152
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

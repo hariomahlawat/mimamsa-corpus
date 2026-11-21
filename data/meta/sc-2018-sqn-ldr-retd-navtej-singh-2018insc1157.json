@@ -1,0 +1,109 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2018/english/2018_14_665_675_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:19:57+00:00",
+  "sha256": "54adf824d9cf02be4f6a0a351a993dac208edb53a962f8b91b0efaa88ce2e8cc",
+  "raw_path": "data/raw/sci/2018/54adf824d9cf02be4f6a0a351a993dac208edb53a962f8b91b0efaa88ce2e8cc.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 11,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2018-sqn-ldr-retd-navtej-singh-2018insc1157.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2018-sqn-ldr-retd-navtej-singh-2018insc1157",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s31",
+      "target_ref_raw": "Section 31(2) of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": ". for the Respondents. The Judgment of the Court was delivered by UDAY UMESH LALIT, J. 1. Delay condoned. 2. These appeals under Section 30 read with Section 31(2) of the Armed Forces Tribunal Act, 2007 (“The Act”, for short) are directed against (i) judgment and order dated 24.02.2015 in O.A. No.420/2013 and (ii) judgment and order dated 03.07.2015",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2018-sqn-ldr-retd-navtej-singh-2018insc1157",
+  "doc_type": "judgment",
+  "title": "SQN. LDR. (RETD.) NAVTEJ SINGH versus UNION OF INDIA AND ORS.",
+  "number": "2018 INSC 1157",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2018-12-05",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2018_14_665_675_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010003082018",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2018 INSC 1157",
+  "reported_citations": [
+    "[2018] 14 S.C.R. 665"
+  ],
+  "parties": {
+    "petitioner": [
+      "SQN. LDR. (RETD.) NAVTEJ SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "UDAY UMESH LALIT"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": null,
+      "raw": "Air Force Act, 1950"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "31",
+      "raw": "Section 31(2) of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 13,
+    "keywords": {
+      "air force act": 9,
+      "invalided": 4
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

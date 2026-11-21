@@ -1,0 +1,89 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1989/english/1989_2_370_379_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:17:33+00:00",
+  "sha256": "e425bf61b33061a241d01650cace3add3fd938e617bab3f73caa30e4de71dbe8",
+  "raw_path": "data/raw/sci/1989/e425bf61b33061a241d01650cace3add3fd938e617bab3f73caa30e4de71dbe8.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 10,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1989-lt-colonel-k-d-gupta-1989insc120.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "sc-1989-lt-colonel-k-d-gupta-1989insc120",
+  "doc_type": "judgment",
+  "title": "LT. COLONEL K.D. GUPTA versus UNION OF INDIA & ORS.",
+  "number": "1989 INSC 120",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1989-03-31",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "1989_2_370_379_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010001121989",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1989 INSC 120",
+  "reported_citations": [
+    "[1989] 2 S.C.R. 370"
+  ],
+  "parties": {
+    "petitioner": [
+      "LT. COLONEL K.D. GUPTA"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "RANGANATH MISRA"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": null,
+      "raw": "Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "army act": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

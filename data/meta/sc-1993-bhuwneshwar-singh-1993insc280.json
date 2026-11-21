@@ -1,0 +1,153 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1993/english/S_1993_2_56_71_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:17:44+00:00",
+  "sha256": "db759e27809627fca4bad1fa9f4b4258127b7e0055526e6c4c43e1ef8cd49e4d",
+  "raw_path": "data/raw/sci/1993/db759e27809627fca4bad1fa9f4b4258127b7e0055526e6c4c43e1ef8cd49e4d.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 16,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1993-bhuwneshwar-singh-1993insc280.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1993-bhuwneshwar-singh-1993insc280",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s169",
+      "target_ref_raw": "Section 169(2) of the Army Act",
+      "effective_date": null,
+      "evidence": "arma. There has, thus, been no denial of providing proper defence assistance to the appellant during the Court Martial proceedings. (64-F-G] 5. Under Section 169(2) of the Army Act read with Army Rule 166 a H warrant for the committal of a person sentenced by court martial to a civil BHUWNESHWAR v. U.O.l. 59 prison is required t",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1993-bhuwneshwar-singh-1993insc280",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s169a",
+      "target_ref_raw": "Section 169A of the Army Act",
+      "effective_date": null,
+      "evidence": "ersons convicted by Court Martial, has in F 1992 incorporated in the Army Act itself a provision ·Similar in terms as Section 428 Cr. P.C. [71-B] 16. Section 169A of the Army Act would, therefore, after 1992 mitigate the hardship of the persons sentenced by the Court Martial under G the Army Act. However, the benefit of this p",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1993-bhuwneshwar-singh-1993insc280",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s101",
+      "target_ref_raw": "Section 101 of the Army Act",
+      "effective_date": null,
+      "evidence": "found acceptance by the High Court also and the respondents have not ques- tioned the finding of the High Court in that behalf in this Court either. Section 101 of the Army Act provides that any person subject to the Army Act charged with an offence may be taken into military custody, G under orders of the superior officer.",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1993-bhuwneshwar-singh-1993insc280",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s428",
+      "target_ref_raw": "Section 428 of the Code of Criminal Procedure",
+      "effective_date": null,
+      "evidence": "fore 56 .. _, • BHUWNESHW AR v. U.O.I. 57 the tri:l! by DCM was required to be set off against the sentence imposed A by virture of the provisions of Section 428 of the Code of Criminal Procedure, 1974. All the aforesaid contentions were considered and rejected by the Single Judge, except the grievance concerning pre-trial detention beyond B t",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-1993-bhuwneshwar-singh-1993insc280",
+  "doc_type": "judgment",
+  "title": "BHUWNESHWAR SINGH versus UNION OF INDIA AND ORS.",
+  "number": "1993 INSC 280",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1993-09-01",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "S_1993_2_56_71_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010003131993",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1993 INSC 280",
+  "reported_citations": [
+    "[1993] SUPP. 2 S.C.R. 56"
+  ],
+  "parties": {
+    "petitioner": [
+      "BHUWNESHWAR SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "J.S. VERMA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "169",
+      "raw": "Section 169(2) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "169A",
+      "raw": "Section 169A of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "101",
+      "raw": "Section 101 of the Army Act"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "428",
+      "raw": "Section 428 of the Code of Criminal Procedure"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 85,
+    "keywords": {
+      "army act": 31,
+      "court martial": 51,
+      "summary of evidence": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

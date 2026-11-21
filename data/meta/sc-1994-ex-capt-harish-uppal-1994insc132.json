@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1994/english/1994_3_220_225_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:17:54+00:00",
+  "sha256": "bfa3084a18c5166f701aece9dea42a9b490f0b82bd2f3f4d4c455b1b6cf0faab",
+  "raw_path": "data/raw/sci/1994/bfa3084a18c5166f701aece9dea42a9b490f0b82bd2f3f4d4c455b1b6cf0faab.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1994-ex-capt-harish-uppal-1994insc132.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1994-ex-capt-harish-uppal-1994insc132",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s164",
+      "target_ref_raw": "s. 164(2) of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "unishment of dismissal and two years' rigorous imprisonment. While the petitioner was in prison, his advocate sent a post-confirmation petition under s. 164(2) of the Army Act, 1950. While dismissing his writ petition in November, 1985, the Supreme Court directed that the post-confirmation petition may be disposed of and the orde",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-1994-ex-capt-harish-uppal-1994insc132",
+  "doc_type": "judgment",
+  "title": "EX. CAPT. HARISH UPPAL versus UNION OF INDIA AND ORS.",
+  "number": "1994 INSC 132",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1994-03-30",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "1994_3_220_225_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010001321994",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1994 INSC 132",
+  "reported_citations": [
+    "[1994] 3 S.C.R. 220"
+  ],
+  "parties": {
+    "petitioner": [
+      "EX. CAPT. HARISH UPPAL"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "B.P. JEEVAN REDDY"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "164",
+      "raw": "s. 164(2) of the Army Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 7,
+    "keywords": {
+      "army act": 4,
+      "court martial": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

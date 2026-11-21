@@ -1,0 +1,116 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=7_26/bench=dhcdb/DLHC010139952002_1_2023-07-21.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:13:43+00:00",
+  "sha256": "61db06c360233e3a1c7c9975d650667d521c8233a1de7d1744be9826084d861c",
+  "raw_path": "data/raw/hc/2023/61db06c360233e3a1c7c9975d650667d521c8233a1de7d1744be9826084d861c.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 48,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2023-cs-os-622-2002-dlhc010139952002-1-2023-07-21.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2023-cs-os-622-2002-dlhc010139952002-1-2023-07-21",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s499",
+      "target_ref_raw": "Section 499 of IPC",
+      "effective_date": null,
+      "evidence": "85. In the Indian context the distinction between “malice in fact” and “malice in law” is evident in the two branches of law i.e. civil and criminal. Section 499 of IPC which defines defamation speaks of proof of “malice in fact”. 86. „Malice in Fact‟ is present when the ill intention translates into a deliberate act",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2023-cs-os-622-2002-dlhc010139952002-1-2023-07-21",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s65b",
+      "target_ref_raw": "section 65B of the Indian Evidence Act 1872",
+      "effective_date": null,
+      "evidence": "that was brought on record in the Court of Inquiry, the plaintiff was awarded severe displeasure. 62. Lastly, it was argued that no certificate under section 65B of the Indian Evidence Act 1872 was provided by the plaintiff in support of the electronic evidence. Thus, the documents produced by the petitioner cannot be relied. Reliance was pl",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2023-cs-os-622-2002-dlhc010139952002-1-2023-07-21",
+  "doc_type": "judgment",
+  "title": "CS(OS)/622/2002 of MAJOR GENERAL M.S.AHLUWALIA Vs TEHELKA.COM AND ORS.",
+  "number": "CS(OS)/622/2002",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2023-07-21",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010139952002_1_2023-07-21.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010139952002",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "CS(OS)/622/2002"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MAJOR GENERAL M.S.AHLUWALIA"
+    ],
+    "respondent": [
+      "TEHELKA.COM AND ORS."
+    ]
+  },
+  "judges": [],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "499",
+      "raw": "Section 499 of IPC"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "65B",
+      "raw": "section 65B of the Indian Evidence Act 1872"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "court martial": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2014/english/2014_1_270_302_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:19:34+00:00",
+  "sha256": "77060c801495db8b197d5bfb19ef578d8d957e7ef9579d6908cee753f7913f09",
+  "raw_path": "data/raw/sci/2014/77060c801495db8b197d5bfb19ef578d8d957e7ef9579d6908cee753f7913f09.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 33,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2014-major-general-h-m-singh-vsm-2014insc18.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "sc-2014-major-general-h-m-singh-vsm-2014insc18",
+  "doc_type": "judgment",
+  "title": "MAJOR GENERAL H.M. SINGH, VSM versus UNION OF INDIA AND ANR.",
+  "number": "2014 INSC 18",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2014-01-09",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2014_1_270_302_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010003132014",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2014 INSC 18",
+  "reported_citations": [
+    "[2014] 1 S.C.R. 270"
+  ],
+  "parties": {
+    "petitioner": [
+      "MAJOR GENERAL H.M. SINGH, VSM"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ANR."
+    ]
+  },
+  "judges": [
+    "A.K. PATNAIK",
+    "J.S. KHEHAR"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "16A",
+      "raw": "Section 16A(4) of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "army act": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

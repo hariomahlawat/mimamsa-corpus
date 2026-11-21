@@ -1,0 +1,248 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2020/english/2020_3_329_347_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:20:06+00:00",
+  "sha256": "e738a067b06061c4c2eb2eaae2918aedd1abae6e5e19ee17b5b6803fc1dc7c77",
+  "raw_path": "data/raw/sci/2020/e738a067b06061c4c2eb2eaae2918aedd1abae6e5e19ee17b5b6803fc1dc7c77.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 19,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2020-sanjay-marutirao-patil-2020insc85.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2020-sanjay-marutirao-patil-2020insc85",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s20",
+      "target_ref_raw": "s. 20 of the Army Act",
+      "effective_date": null,
+      "evidence": "eduction in rank – Thereafter, appellant was served with a show cause as to why he should not be discharged from Army Service under the provisions of s. 20 of the Army Act r/w. r. 17 of the Army Rules, 1954 – Appellant denied the allegations made therein – Consequent to which, Court of Inquiry was held and appellant was",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2020-sanjay-marutirao-patil-2020insc85",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s164",
+      "target_ref_raw": "u/s. 164 of the Army Act",
+      "effective_date": null,
+      "evidence": "assed by the Summary Court Martial by which the appellant was reduced in rank was even confirmed by the chief of the Army Staff in exercise of powers u/s. 164 of the Army Act – Therefore, in the facts and circumstances of the case, the respondent no. 3 was justified in exercising the power u/s.20 r/w r. 17 – The only proce",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2020-sanjay-marutirao-patil-2020insc85",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s63",
+      "target_ref_raw": "u/s. 63 of the Army Act",
+      "effective_date": null,
+      "evidence": "be noted that earlier the [2020] 3 S.C.R. 329 329 A B C D E F G H 330 SUPREME COURT REPORTS [2020] 3 S.C.R. appellant was tried by the Summary Court u/s. 63 of the Army Act only – However, the particulars of charges disclosed that offences were fraudulent in nature – Thereafter, after giving an opportunity to the appella",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2020-sanjay-marutirao-patil-2020insc85",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s71",
+      "target_ref_raw": "Section 71 of the Army Act",
+      "effective_date": null,
+      "evidence": "d 3.8.1999. The appellant was found guilty of the same misconduct and on 7.8.1999 the Court Martial imposed the punishment of reduction in rank under Section 71 of the Army Act. It is submitted that the said proceedings concluded after the order of punishment was given to the appellant. It is submitted therefore, after passi",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2020-sanjay-marutirao-patil-2020insc85",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s121",
+      "target_ref_raw": "Sections 121, 161 and 162 of the Army Act",
+      "effective_date": null,
+      "evidence": "of his above submissions, learned counsel appearing on behalf of the appellant has taken us to the relevant provisions of the Act, more particularly Sections 121, 161 and 162 of the Army Act. 4.5 It is further submitted by the learned counsel appearing on behalf of the appellant that even the manner in which the Court of Inquiry was subse",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2020-sanjay-marutirao-patil-2020insc85",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s153",
+      "target_ref_raw": "Section 153 of the Army Act",
+      "effective_date": null,
+      "evidence": "as included the said phrase in Rule 17 because only other ranks can be tried by Summary Court Martial which does not require confirmation in terms of Section 153 of the Army Act. It is submitted that in the absence of any power of confirmation which is available in case of General Court Martial, Summary Court Martial and Dist",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2020-sanjay-marutirao-patil-2020insc85",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s160",
+      "target_ref_raw": "Section 160 of the Army Act",
+      "effective_date": null,
+      "evidence": "way of revision SANJAY MARUTIRAO PATIL v. UNION OF INDIA AND OTHERS [M. R. SHAH, J.] A B C D E F G H 340 SUPREME COURT REPORTS [2020] 3 S.C.R. under Section 160 of the Army Act read with Rule 68 of the Army Rules, which is not available in the case of Summary Court Martial. It is submitted that in order to avoid miscarriage",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2020-sanjay-marutirao-patil-2020insc85",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s163",
+      "target_ref_raw": "Section 163 of the Army Act",
+      "effective_date": null,
+      "evidence": "on in service is not desirable. 5.6 Now so far as the submission on behalf of the appellant on exerciseof the powers by the Chief of Army Staff under Section 163 of the Army Act is concerned, learned Senior Advocate appearing on behalf of the respondentshas heavily relied upon the decision of this Court in the case of Union o",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2020-sanjay-marutirao-patil-2020insc85",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s22",
+      "target_ref_raw": "Section 22 of the Army Act",
+      "effective_date": null,
+      "evidence": "e discharged under Rule 13(3) item III(v) as his services are no longer required, being undesirable. It is submitted that power to discharge is under Section 22 of the Army Act. It is submitted that the appellant has duly understood the difference between the two show cause notices, namely, show cause notice dated 24.3.2000",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2020-sanjay-marutirao-patil-2020insc85",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s19",
+      "target_ref_raw": "Section 19 of the Army Act",
+      "effective_date": null,
+      "evidence": "upra) is required to be referred to and considered. 6.4 While considering the similar power of termination of service by the Central Government under Section 19 of the Army Act, it is observed and held by this Court that power under Section 19 (vested with the Central Government)is an independent power. It is further observe",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2020-sanjay-marutirao-patil-2020insc85",
+  "doc_type": "judgment",
+  "title": "SANJAY MARUTIRAO PATIL versus UNION OF INDIA AND OTHERS",
+  "number": "2020 INSC 85",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2020-01-24",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2020_3_329_347_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010002162020",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2020 INSC 85",
+  "reported_citations": [
+    "[2020] 3 S.C.R. 329"
+  ],
+  "parties": {
+    "petitioner": [
+      "SANJAY MARUTIRAO PATIL"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "L. NAGESWARA RAO",
+    "M.R. SHAH"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "20",
+      "raw": "s. 20 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "164",
+      "raw": "u/s. 164 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "63",
+      "raw": "u/s. 63 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "71",
+      "raw": "Section 71 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "121",
+      "raw": "Sections 121, 161 and 162 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "153",
+      "raw": "Section 153 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "160",
+      "raw": "Section 160 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "163",
+      "raw": "Section 163 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "22",
+      "raw": "Section 22 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "19",
+      "raw": "Section 19 of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 152,
+    "keywords": {
+      "army act": 87,
+      "court martial": 65
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

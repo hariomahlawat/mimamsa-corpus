@@ -1,0 +1,100 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1958/english/1958_1_1080_1102_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:16:29+00:00",
+  "sha256": "abc2b50b1f2ee0c4fceddb3c1cc2fb326ea360390f69d8b55c0ae553abad8d45",
+  "raw_path": "data/raw/sci/1957/abc2b50b1f2ee0c4fceddb3c1cc2fb326ea360390f69d8b55c0ae553abad8d45.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 23,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1958-khem-chand-1957insc114.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1958-khem-chand-1957insc114",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s307",
+      "target_ref_raw": "S. 307 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": "arliamen- tary and threatening language. It appears that at or about this time the appellant be- came involved in li criminal case Oil a charge under S. 307 of the Indian Penal Code and on October 30, 1949, he was actually arrested but was released on bail two or three days later. Eventually on May 20, 1950. the appellant was dis",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-1958-khem-chand-1957insc114",
+  "doc_type": "judgment",
+  "title": "KHEM CHAND versus THE UNION OF INDIA AND OTHERS",
+  "number": "1957 INSC 114",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1957-12-13",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "1958_1_1080_1102_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010000091958",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1957 INSC 114",
+  "reported_citations": [
+    "[1958] 1 S.C.R. 1080"
+  ],
+  "parties": {
+    "petitioner": [
+      "KHEM CHAND"
+    ],
+    "respondent": [
+      "THE UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "SUDHI RANJAN DAS"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "307",
+      "raw": "S. 307 of the Indian Penal Code"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "court martial": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

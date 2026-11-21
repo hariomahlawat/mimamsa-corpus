@@ -1,0 +1,109 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2006/english/S_2006_5_1_184_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:18:43+00:00",
+  "sha256": "fd81a21c767f3daa5f8ceeb96347c4350b6fd6969bdcd7d653d7d85a7ed0d16d",
+  "raw_path": "data/raw/sci/2006/fd81a21c767f3daa5f8ceeb96347c4350b6fd6969bdcd7d653d7d85a7ed0d16d.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 184,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2006-kuldip-nayar-2006insc532.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2006-kuldip-nayar-2006insc532",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s132",
+      "target_ref_raw": "Section 132 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "ar or favour and is free fi'om G arry apprehension of its disclosure against his will from his own lips . .. As Section 94 carves out an exception to Section 132 of the Evidence Act as also to Section 95 of the Act it was necessary to provide for protection of the witness if he is compelled to answer a question which may tend to",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2006-kuldip-nayar-2006insc532",
+  "doc_type": "judgment",
+  "title": "KULDIP NAYAR versus UNION OF INDIA AND ORS.",
+  "number": "2006 INSC 532",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2006-08-22",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "S_2006_5_1_184_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010006202006",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2006 INSC 532",
+  "reported_citations": [
+    "[2006] SUPP. 5 S.C.R. 1"
+  ],
+  "parties": {
+    "petitioner": [
+      "KULDIP NAYAR"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "Y.K. SABHARWAL"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": null,
+      "raw": "Army Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "132",
+      "raw": "Section 132 of the Evidence Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 2,
+    "keywords": {
+      "army act": 1,
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

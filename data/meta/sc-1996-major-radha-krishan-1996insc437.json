@@ -1,0 +1,110 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1996/english/1996_3_836_844_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:18:03+00:00",
+  "sha256": "aad9c80d52794fa51cc33c1c8afbe4cc02898093402edb4e51392820e07aba8c",
+  "raw_path": "data/raw/sci/1996/aad9c80d52794fa51cc33c1c8afbe4cc02898093402edb4e51392820e07aba8c.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 9,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1996-major-radha-krishan-1996insc437.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1996-major-radha-krishan-1996insc437",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s19",
+      "target_ref_raw": "Section 19 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "pedient''--Afeaning of in th(! comext of-Anny Act, 1950. The appellant, a Major in the Indian Army, was served a notice dated December 10, 1990 under Section 19 of the Army Act, 1950 read with Rule F 14 of the Army Rules, 1954 calling upon him to show cause why his services )I should not be terminated for the misconduCt alleged to",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-1996-major-radha-krishan-1996insc437",
+  "doc_type": "judgment",
+  "title": "MAJOR RADHA KRISHAN versus UNION OF INDIA AND ORS.",
+  "number": "1996 INSC 437",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1996-03-25",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "1996_3_836_844_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010004631996",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1996 INSC 437",
+  "reported_citations": [
+    "[1996] 3 S.C.R. 836"
+  ],
+  "parties": {
+    "petitioner": [
+      "MAJOR RADHA KRISHAN"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "M.K. MUKHERJEE",
+    "G.B. PATTANAIK"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "19",
+      "raw": "Section 19 of the Army Act, 1950"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": null,
+      "raw": "Criminal Procedure Code"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 13,
+    "keywords": {
+      "army act": 2,
+      "court martial": 11
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

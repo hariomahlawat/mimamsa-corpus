@@ -1,0 +1,224 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/english/2019_12_415_443_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:19:57+00:00",
+  "sha256": "a8793e00d1d04d56516c3dee5b017e8d816d701833897be32fab6b84855cb5b1",
+  "raw_path": "data/raw/sci/2019/a8793e00d1d04d56516c3dee5b017e8d816d701833897be32fab6b84855cb5b1.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 29,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2019-union-of-india-ors-2019insc1030.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2019-union-of-india-ors-2019insc1030",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s52",
+      "target_ref_raw": "Section 52(a) of the Army Act",
+      "effective_date": null,
+      "evidence": "18, 2006 who reported the theft of pistols by Neeraj Kumar in association with Sandeep Kumar. 7. The accused were charged on September 26, 2007 under Section 52(a) of the Army Act, 19507 read with Section 34 of the Indian Penal Code, 18608 having committed theft of the two pistols on April 6, 2006. The stand of the prosecution",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2019-union-of-india-ors-2019insc1030",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s30",
+      "target_ref_raw": "Section 30 of the Armed Forces Tribunal Act",
+      "effective_date": null,
+      "evidence": "5 of 2016 are filed by accused - Neeraj Kumar Dhaka and Sandeep Kumar respectively. 3. The challenge in the appeals filed by the Union of India under Section 30 of the Armed Forces Tribunal Act, 20071 is to an order passed on December 12, 2013 by the Armed Forces Tribunal2 setting aside the order of conviction & sentence and of dismissal con",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2019-union-of-india-ors-2019insc1030",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s34",
+      "target_ref_raw": "Section 34 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": "eeraj Kumar in association with Sandeep Kumar. 7. The accused were charged on September 26, 2007 under Section 52(a) of the Army Act, 19507 read with Section 34 of the Indian Penal Code, 18608 having committed theft of the two pistols on April 6, 2006. The stand of the prosecution was that the two pistols were stolen on April 6, 2006",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2019-union-of-india-ors-2019insc1030",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s313",
+      "target_ref_raw": "s.313 of CrPC",
+      "effective_date": null,
+      "evidence": "rightly set aside by the Tribunal– Held: Though, the incriminating circumstance should have been put to the accused in terms of r.58 which is akin to s.313 of CrPC but, the detailed explanation given by the accused rules out any prejudice caused to them on account of absence of specific incriminating circumstanc",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2019-union-of-india-ors-2019insc1030",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s164",
+      "target_ref_raw": "Section 164 of the Code of Criminal Procedure",
+      "effective_date": null,
+      "evidence": "para 3 above. Alternatively, he may be taken by the military police officer before a magistrate, for his confession to be recorded in accordance with Section 164 of the Code of Criminal Procedure.” 38. In terms of Section 1 of the Evidence Act, the provisions of the Evidence Act are not applicable to the Court Martial convened under the Army A",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2019-union-of-india-ors-2019insc1030",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s1",
+      "target_ref_raw": "Section 1 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "sread such Army Order to hold that the confessional statements are inadmissible having been made to the Army. [Paras 35-37] [437-A-F] 1.3 In terms of Section 1 of the Evidence Act, the provisions of the Evidence Act are not applicable to the Court Martial convened under the Army Act, the Naval Discipline Act, the Indian Navy (D",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2019-union-of-india-ors-2019insc1030",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s25",
+      "target_ref_raw": "Section 25 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "Evidence Act apply to all proceedings before a Court Martial subject to the provisions of the said Act. In terms of Section 133 of the Act read with Section 25 of the Evidence Act, the statement made before a Police Officer such as Military Police Officer alone is inadmissible in evidence and not the statement made before the o",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2019-union-of-india-ors-2019insc1030",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s65",
+      "target_ref_raw": "Section 65 of Indian Evidence Act 1872",
+      "effective_date": null,
+      "evidence": "shoe box containing two stolen pistols was found, to be produced as evidence in the Court is untraceable. The Prosecutor submits an application under Section 65 of Indian Evidence Act 1872 for allowing the prosecutor to lead secondary evidence for proving the documents handwritten slip and the label slip affixed to the gift wrapper in w",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2019-union-of-india-ors-2019insc1030",
+  "doc_type": "judgment",
+  "title": "UNION OF INDIA & ORS. versus SANDEEP KUMAR ETC.",
+  "number": "2019 INSC 1030",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2019-09-13",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2019_12_415_443_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010001572019",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2019 INSC 1030",
+  "reported_citations": [
+    "[2019] 12 S.C.R. 415"
+  ],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA & ORS."
+    ],
+    "respondent": [
+      "SANDEEP KUMAR ETC."
+    ]
+  },
+  "judges": [
+    "L. NAGESWARA RAO"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "52",
+      "raw": "Section 52(a) of the Army Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": null,
+      "raw": "Air Force Act"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "30",
+      "raw": "Section 30 of the Armed Forces Tribunal Act"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "34",
+      "raw": "Section 34 of the Indian Penal Code"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "313",
+      "raw": "s.313 of CrPC"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "164",
+      "raw": "Section 164 of the Code of Criminal Procedure"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "1",
+      "raw": "Section 1 of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "25",
+      "raw": "Section 25 of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "65",
+      "raw": "Section 65 of Indian Evidence Act 1872"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 34,
+    "keywords": {
+      "army act": 8,
+      "air force act": 2,
+      "court martial": 23,
+      "summary of evidence": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

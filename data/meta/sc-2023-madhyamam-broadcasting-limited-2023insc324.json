@@ -1,0 +1,138 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/english/2023_10_595_712_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:20:18+00:00",
+  "sha256": "a98fe4356dc69e9f32e706367f35d6680a684007854fd1a8bedfb2b1ba2efdac",
+  "raw_path": "data/raw/sci/2023/a98fe4356dc69e9f32e706367f35d6680a684007854fd1a8bedfb2b1ba2efdac.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 118,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2023-madhyamam-broadcasting-limited-2023insc324.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2023-madhyamam-broadcasting-limited-2023insc324",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s124",
+      "target_ref_raw": "Section 124 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "d party is able to effectively exercise their right to appeal. When the state government claims non-disclosure on the ground of public interest under Section 124 of the Evidence Act, the material is removed from the trial itself. As opposed to this method, when relevant material is disclosed in a sealed cover, there are two injur",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2023-madhyamam-broadcasting-limited-2023insc324",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s123",
+      "target_ref_raw": "Section 123 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "ort of the Public Service Commission and the proceedings of the Council of Ministers. The Chief Secretary filed an affidavit claiming privilege under Section 123 of the Evidence Act. The claim for privilege was allowed. Justice Gajendragadkar, writing the majority opinion of the Constitution Bench, laid down the scope of review o",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2023-madhyamam-broadcasting-limited-2023insc324",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s162",
+      "target_ref_raw": "Section 162 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "of the State and is unable to satisfy itself on a perusal of the affidavit. This power of inspection of the Court is not excluded by the operation of Section 162 of the Evidence Act; (v) Protection from disclosure must not be granted to documents merely because disclosure would lead to political criticism. The right to access inf",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2023-madhyamam-broadcasting-limited-2023insc324",
+  "doc_type": "judgment",
+  "title": "MADHYAMAM BROADCASTING LIMITED versus UNION OF INDIA & ORS.",
+  "number": "2023 INSC 324",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2023-04-05",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2023_10_595_712_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010005032023",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2023 INSC 324",
+  "reported_citations": [
+    "[2023] 10 S.C.R. 595"
+  ],
+  "parties": {
+    "petitioner": [
+      "MADHYAMAM BROADCASTING LIMITED"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "D.Y. CHANDRACHUD"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": null,
+      "raw": "Code of Criminal Procedure 1973"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "124",
+      "raw": "Section 124 of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "123",
+      "raw": "Section 123 of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "162",
+      "raw": "Section 162 of the Evidence Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "armed forces tribunal": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

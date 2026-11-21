@@ -1,0 +1,212 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1969/english/1969_2_177_192_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:16:48+00:00",
+  "sha256": "c6dd21359a7e3cbd4da711d87f80536f004cf206d7970cfb5eed0fbd5d427c83",
+  "raw_path": "data/raw/sci/1968/c6dd21359a7e3cbd4da711d87f80536f004cf206d7970cfb5eed0fbd5d427c83.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 16,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1969-som-datt-datta-1968insc246.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1969-som-datt-datta-1968insc246",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s164",
+      "target_ref_raw": "section 164 of the Army Act",
+      "effective_date": null,
+      "evidence": "at he was a member of an unlawful assembly; it sentenced him to cashiering and six years rigorous imprisonment. The petitioner filed a petition under section 164 of the Army Act, but this was dismissed by the confirming authority and the finding and sentence of the Court- Material was confirmed. The petitioner's appeal under",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1969-som-datt-datta-1968insc246",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s165",
+      "target_ref_raw": "section 165 of the Army Act",
+      "effective_date": null,
+      "evidence": ", but this was dismissed by the confirming authority and the finding and sentence of the Court- Material was confirmed. The petitioner's appeal under section 165 of the Army Act to the Central Government was also dismissed. In the present petition under Article 32 of tbe Constitution, the petitioner sought a writ of certiorar",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1969-som-datt-datta-1968insc246",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s125",
+      "target_ref_raw": "s. 125 of the Army Act",
+      "effective_date": null,
+      "evidence": "and held an inquest on the body of the deceased, it could not reasonably be said that there was a decision of the competent military authority under s. 125 of the Army Act to hand over the inquiry to the criminal court On the other band the action of the General Officer Commanding the area, who was the <:<>mpetent autho",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1969-som-datt-datta-1968insc246",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s139",
+      "target_ref_raw": "s. 139(6) of the Army Act",
+      "effective_date": null,
+      "evidence": "e that sub-rule was not attracted in the present case. On the contrary, the finding of the Court-Martial was justified in view of the language di E F s. 139(6) of the Army Act. [188 HJ G (iv) There is no express obligation imposed by s. 164· or by s. 165 of the Army Act on the confirming authority or upon the Central Gov- e",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1969-som-datt-datta-1968insc246",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s2",
+      "target_ref_raw": "Section 2 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "s to the Civil Police. In order to test whether this argument is valid it is neces- sary to scrutinize the provisions of the Army Act in some detail. Section 2 of the Army Act, 1950 (Act 46 of 1950), hereinafter called the 'Army Act', describes the different categories of army personnel who are subject to the Army Act. Section 3",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1969-som-datt-datta-1968insc246",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s162",
+      "target_ref_raw": "s. 162 of the Army Act",
+      "effective_date": null,
+      "evidence": "y prescribed officer may annul the proceedings of any court-martial on the around that they are illegal or unjust.\" \"' In contrast to these sections, s. 162 of the Army Act expressly provides that the Chief of the Army Staff \"for reasons based on 190 SUPREME COURT REPORTS [1969] 2 S.C.R. the merits of the case\" set aside",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1969-som-datt-datta-1968insc246",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s149",
+      "target_ref_raw": "s. 149 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": "67 I AA of 1965 from the Judge Advocate General (Army branch), Artny Headquarters whereby the petitioner was found guilty of charges under s. 304 and s. 149 of the Indian Penal Code and sentenced to a period of 6 years rigorous imprisonment and cashiering. Cause has been shown by the Attorney-General on behalf of the Union of Ind",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-1969-som-datt-datta-1968insc246",
+  "doc_type": "judgment",
+  "title": "SOM DATT DATTA versus UNION OF INDIA AND ORS.",
+  "number": "1968 INSC 246",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1968-09-20",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "1969_2_177_192_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010001291969",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1968 INSC 246",
+  "reported_citations": [
+    "[1969] 2 S.C.R. 177"
+  ],
+  "parties": {
+    "petitioner": [
+      "SOM DATT DATTA"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "M. HIDAYATULLAH"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "164",
+      "raw": "section 164 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "165",
+      "raw": "section 165 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "125",
+      "raw": "s. 125 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "139",
+      "raw": "s. 139(6) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "2",
+      "raw": "Section 2 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "162",
+      "raw": "s. 162 of the Army Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": null,
+      "raw": "Air Force Act"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "149",
+      "raw": "s. 149 of the Indian Penal Code"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "549",
+      "raw": "s. 549 of the Criminal Procedure Code"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 96,
+    "keywords": {
+      "army act": 33,
+      "air force act": 1,
+      "court martial": 62
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

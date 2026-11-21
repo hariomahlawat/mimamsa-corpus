@@ -1,0 +1,128 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2014/english/2014_10_1_354_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:19:34+00:00",
+  "sha256": "83dd7117f2058cd31f372413585a54c1634355618ea1e356e827f23524b54973",
+  "raw_path": "data/raw/sci/2014/83dd7117f2058cd31f372413585a54c1634355618ea1e356e827f23524b54973.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 354,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2014-madras-bar-association-2014insc685.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2014-madras-bar-association-2014insc685",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s196",
+      "target_ref_raw": "section 196 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": "roceeding before the Appellate Tribunal shall be deemed to be a judicial proceeding within the meaning of sections 193 and 228 and for the purpose of section 196 of the Indian Penal Code (45 of 1860t and the Appellate Tribunal shall be deemed to be a civil court for all the purposes of section 195 and Chapter XXXV of the Code of Crimi",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2014-madras-bar-association-2014insc685",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s193",
+      "target_ref_raw": "Sections 193, 219 and 228 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": "Tribunal to be judicial proceedings - All proceedings before the Appellate Tribunal shall be deemed to be judicial proceedings within the meaning of Sections 193, 219 and 228 of the Indian Penal Code (45 of 1860).\" A perusal of the above amendment reveals, that by a fiction of C law, the Appellate Tribunal was deemed to be discharging \"judicial pr",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2014-madras-bar-association-2014insc685",
+  "doc_type": "judgment",
+  "title": "MADRAS BAR ASSOCIATION versus UNION OF INDIA AND ANOTHER",
+  "number": "2014 INSC 685",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2014-09-25",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2014_10_1_354_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010000122014",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2014 INSC 685",
+  "reported_citations": [
+    "[2014] 10 S.C.R. 1"
+  ],
+  "parties": {
+    "petitioner": [
+      "MADRAS BAR ASSOCIATION"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ANOTHER"
+    ]
+  },
+  "judges": [
+    "RAJENDRA MAL LODHA"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "196",
+      "raw": "section 196 of the Indian Penal Code"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "193",
+      "raw": "Sections 193, 219 and 228 of the Indian Penal Code"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "440A",
+      "raw": "Section 440A of the Criminal Procedure Code"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": null,
+      "raw": "Evidence Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

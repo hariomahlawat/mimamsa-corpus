@@ -1,0 +1,174 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2018/english/2018_8_1_1076_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:19:57+00:00",
+  "sha256": "a7adc9ef913589cb0bb48472bea4fc76c2339cd7e3b8a3a2fa8014c7ec300230",
+  "raw_path": "data/raw/sci/2018/a7adc9ef913589cb0bb48472bea4fc76c2339cd7e3b8a3a2fa8014c7ec300230.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1076,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2018-justice-k-s-puttaswamy-retd-2018insc880.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [
+    169,
+    174,
+    175,
+    406,
+    407,
+    408,
+    409,
+    410,
+    411
+  ],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2018-justice-k-s-puttaswamy-retd-2018insc880",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s90",
+      "target_ref_raw": "Section 90 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": "aw contained in Section 11 of the Indian Contract Act, 1872, Section 45ZA of the Banking Regulation Act, 1949, Section 39 of the Insurance Act, 1938, Section 90 of the Indian Penal Code (which provides that consent of the child who is under 12 years of age shall not be regarded as consent) etc. Thus, when a child is not competent to",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2018-justice-k-s-puttaswamy-retd-2018insc880",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s53",
+      "target_ref_raw": "Section 53 of the CrPC",
+      "effective_date": null,
+      "evidence": "e purposes of any (specific ) investigation”, or in order to compare writing or signature that appears in relation to the facts of a particular case. Section 53 of the CrPC allows medical examination of a person arrested on a charge of committing an offence if reasonable grounds exist for believing that an examination of",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2018-justice-k-s-puttaswamy-retd-2018insc880",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s144",
+      "target_ref_raw": "Section 144 of the Code of Criminal Procedure",
+      "effective_date": null,
+      "evidence": "pplied) The decision of the Constitution Bench in State of Bihar v Kamla Kant Misra347 concerned a challenge to the second part of sub-section (6) of Section 144 of the Code of Criminal Procedure on the ground that it violated sub-clauses (b), (c) and (d) of Clause (1) of Article 19 of the Constitution. Justice K S Hegde, speaking for the majo",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2018-justice-k-s-puttaswamy-retd-2018insc880",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s73",
+      "target_ref_raw": "Section 73 of the Indian Evidence Act, 1872",
+      "effective_date": null,
+      "evidence": "person and so on. 215. In other cases of collection of information of this kind under other laws, there are exhaustive legal procedures. For example, Section 73 of the Indian Evidence Act, 1872 which allows the taking of handwriting samples only if necessary “for the purposes of any (specific ) investigation”, or in order to compare writing",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2018-justice-k-s-puttaswamy-retd-2018insc880",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s24",
+      "target_ref_raw": "Sections 24, 25, 26 and 27 of the Evidence Act, 1872",
+      "effective_date": null,
+      "evidence": "EPORTS [2018] 8 S.C.R. should account for its intersection with Article 20(3). Furthermore, the `rule against involuntary confessions’ as embodied in Sections 24, 25, 26 and 27 of the Evidence Act, 1872 seeks to serve both the objectives of reliability as well as voluntariness of testimony given in a custodial setting. A conjunctive reading of Articl",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2018-justice-k-s-puttaswamy-retd-2018insc880",
+  "doc_type": "judgment",
+  "title": "JUSTICE K. S. PUTTASWAMY (RETD.) versus UNION OF INDIA & ORS.",
+  "number": "2018 INSC 880",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2018-09-26",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2018_8_1_1076_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010007422018",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2018 INSC 880",
+  "reported_citations": [
+    "[2018] 8 S.C.R. 1"
+  ],
+  "parties": {
+    "petitioner": [
+      "JUSTICE K. S. PUTTASWAMY (RETD.)"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "DIPAK MISRA"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "90",
+      "raw": "Section 90 of the Indian Penal Code"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "53",
+      "raw": "Section 53 of the CrPC"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "144",
+      "raw": "Section 144 of the Code of Criminal Procedure"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "73",
+      "raw": "Section 73 of the Indian Evidence Act, 1872"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "24",
+      "raw": "Sections 24, 25, 26 and 27 of the Evidence Act, 1872"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

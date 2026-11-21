@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=7_26/bench=dhcdb/DLHC010166822023_1_2023-05-04.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:07:35+00:00",
+  "sha256": "be6603df3d489cdc2846fc32b66a566dbab512a154ef85a54c10474a0e2e9ed5",
+  "raw_path": "data/raw/hc/2023/be6603df3d489cdc2846fc32b66a566dbab512a154ef85a54c10474a0e2e9ed5.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2023-w-p-c-5806-2023-dlhc010166822023-1-2023-05-04.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2023-w-p-c-5806-2023-dlhc010166822023-1-2023-05-04",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s26",
+      "target_ref_raw": "section 26 (2) of the Army Act 1950",
+      "effective_date": null,
+      "evidence": "there. d) To quash the Army Order AO/13/2006/PS being illegal arbitrary, inconsistent with and contrary to the spirit and intent of the provisions of section 26 (2) of the Army Act 1950. 4. The present petition is filed challenging the punishment of “severe reprimand” awarded to the petitioner on 28.01.2006 by Commanding Officer, 15",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2023-w-p-c-5806-2023-dlhc010166822023-1-2023-05-04",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/5806/2023 of SUBEDAR DINESH NAIR T (JC-571374H) Vs UNION OF INDIA & ORS.",
+  "number": "W.P.(C)/5806/2023",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2023-05-04",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010166822023_1_2023-05-04.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010166822023",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/5806/2023"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SUBEDAR DINESH NAIR T (JC-571374H)"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SURESH  KUMAR  KAIT",
+    "NEENA BANSAL KRISHNA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "26",
+      "raw": "section 26 (2) of the Army Act 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "army act": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

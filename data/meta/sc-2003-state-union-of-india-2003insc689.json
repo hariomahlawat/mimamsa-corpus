@@ -1,0 +1,112 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2003/english/S_2003_6_476_486_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:18:33+00:00",
+  "sha256": "3bad0eb6bfcf37cb10cbee90cb35e9c34ea2e5da7e518baf57bc465bd70b31c0",
+  "raw_path": "data/raw/sci/2003/3bad0eb6bfcf37cb10cbee90cb35e9c34ea2e5da7e518baf57bc465bd70b31c0.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 11,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2003-state-union-of-india-2003insc689.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2003-state-union-of-india-2003insc689",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s11",
+      "target_ref_raw": "Sections 11, 12 and 13 of the Code of Criminal Procedure, 1973",
+      "effective_date": null,
+      "evidence": "Magistrate 1st B Class and, therefore, the trial and conviction of the accused-respondent were illegal. The High Court held that combined reading of Sections 11, 12 and 13 of the Code of Criminal Procedure, 1973 (in short the 'Code') clearly rule out the appointment of any person exercising powers of Judicial Magistrate, 1st Class in the absence of conferment",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2003-state-union-of-india-2003insc689",
+  "doc_type": "judgment",
+  "title": "STATE (UNION OF INDIA) versus RAM SARAN",
+  "number": "2003 INSC 689",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2003-12-04",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "S_2003_6_476_486_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010006962003",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2003 INSC 689",
+  "reported_citations": [
+    "[2003] SUPP. 6 S.C.R. 476"
+  ],
+  "parties": {
+    "petitioner": [
+      "STATE (UNION OF INDIA)"
+    ],
+    "respondent": [
+      "RAM SARAN"
+    ]
+  },
+  "judges": [
+    "DORAISWAMY RAJU"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": null,
+      "raw": "Army Act"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": null,
+      "raw": "Indian Penal Code, 1860"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "11",
+      "raw": "Sections 11, 12 and 13 of the Code of Criminal Procedure, 1973"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 3,
+    "keywords": {
+      "army act": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1997/english/S_1997_6_470_487_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:18:12+00:00",
+  "sha256": "c39b336bf48e45b6ed6a6f58e72f9f37204618b25c8a7cf1b51c255b3cb16e3d",
+  "raw_path": "data/raw/sci/1997/c39b336bf48e45b6ed6a6f58e72f9f37204618b25c8a7cf1b51c255b3cb16e3d.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 18,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1997-the-general-court-martial-and-1997insc816.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1997-the-general-court-martial-and-1997insc816",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s154",
+      "target_ref_raw": "Section 154 of the Army Act",
+      "effective_date": null,
+      "evidence": "ed the findings of the Court Martial before the High Court. Before the decision of the High Court, the order of the Court Martial was confirmed under Section 154 of the Army Act. However, the High Court allowed the writ petition filed by the respon- dent and quashed the order of the Court Martial. Hence this appeal. It was co",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1997-the-general-court-martial-and-1997insc816",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s133",
+      "target_ref_raw": "Section 133 of the Army Act",
+      "effective_date": null,
+      "evidence": "SCR 1295; Basant Singh v. Janki Singh, AIR (1967) SC 341 and Prem Ex-Serviceman Tenant Society v. State of Haryana, AIR (1974) SC 1121, relied on. 2. Section 133 of the Army Act provides that the Indian Evidence Act shall be subject to the provisions of the Act applied to all proceedings before the Court Martial. Section 134",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1997-the-general-court-martial-and-1997insc816",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s130",
+      "target_ref_raw": "Section 130 of the Army Act",
+      "effective_date": null,
+      "evidence": "a11jit Thakur v. U11ion of India & Ors., [1987) 4 SCC 611. In that case the court found that there was failure to enquire from accused as required by Section 130 of the Army Act whether he D objects to trial by any of the officers present and held that the entire proceedings was vitiated. The court went on to hold that the pu",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1997-the-general-court-martial-and-1997insc816",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s94",
+      "target_ref_raw": "Section 94 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "hich was marked as Ex AW. The case of the respondent was that the oral evidence of PWs 6, 21 and 24 was not admissible in view F of the provisions of Section 94 of the Evidence Act. It was Section 92, Proviso 1 of the Evidence Act and not Section 94 which was applicable. Partly allowing .the appeal, this Court HELD : 1.1. Neithe",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-1997-the-general-court-martial-and-1997insc816",
+  "doc_type": "judgment",
+  "title": "THE GENERAL COURT MARTIAL AND ORS. versus COL. ANILTEJ SINGH DHALIWAL",
+  "number": "1997 INSC 816",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1997-12-12",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "S_1997_6_470_487_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010008121997",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1997 INSC 816",
+  "reported_citations": [
+    "[1997] SUPP. 6 S.C.R. 470"
+  ],
+  "parties": {
+    "petitioner": [
+      "THE GENERAL COURT MARTIAL AND ORS."
+    ],
+    "respondent": [
+      "COL. ANILTEJ SINGH DHALIWAL"
+    ]
+  },
+  "judges": [
+    "M.M. PUNCHHI"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "154",
+      "raw": "Section 154 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "133",
+      "raw": "Section 133 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "130",
+      "raw": "Section 130 of the Army Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "94",
+      "raw": "Section 94 of the Evidence Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 94,
+    "keywords": {
+      "army act": 10,
+      "court martial": 84
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

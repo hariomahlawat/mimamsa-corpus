@@ -1,0 +1,169 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2011/english/2011_15_793_808_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:19:23+00:00",
+  "sha256": "7005b2bd0b84f330c9d27f03318e0dbef8eadbe5b4f3655a5ef8c8dbe70a8885",
+  "raw_path": "data/raw/sci/2011/7005b2bd0b84f330c9d27f03318e0dbef8eadbe5b4f3655a5ef8c8dbe70a8885.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 16,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2011-union-of-india-through-its-sec-2011insc727.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2011-union-of-india-through-its-sec-2011insc727",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s191",
+      "target_ref_raw": "Section 191 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "o the conducting of the Court of Inquiry on 13.10.1986 to collect evidence and to make a report under F Rule 177 of the Army Rules, 1954 framed under Section 191 of the Army Act, 1950. On conclusion of the inquiry a disciplinary action was directed against the respondent. (ii) Thereafter, the summary of evidence was recorded under",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2011-union-of-india-through-its-sec-2011insc727",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s52",
+      "target_ref_raw": "Section 52 of the Army Act",
+      "effective_date": null,
+      "evidence": "rmoured Brigade, an officer holding a permanent commission in the Regular Army is charged with:- (1) such an offence as is mentioned in Clause {f) of Section 52 of the Army Act (2) with intent to defraud, in that he, at field on 25 June 84, while commanding 6 Armoured Regiment, when authorized to claim modification grant in",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2011-union-of-india-through-its-sec-2011insc727",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s153",
+      "target_ref_raw": "Sections 153 and 154 of the Army Act",
+      "effective_date": null,
+      "evidence": "quarter, Western Command who made the statutory report thereon. These proceedings were confirmed by the confirming authority on 20.6.1988 in terms of Sections 153 and 154 of the Army Act. F The respondent preferred a Post Confirmation Petition under Section 164 of the Army Act which was rejected by the Chief of the Army. This led the",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2011-union-of-india-through-its-sec-2011insc727",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s164",
+      "target_ref_raw": "Section 164 of the Army Act",
+      "effective_date": null,
+      "evidence": "the confirming authority on 20.6.1988 in terms of Sections 153 and 154 of the Army Act. F The respondent preferred a Post Confirmation Petition under Section 164 of the Army Act which was rejected by the Chief of the Army. This led the respondent to file the Writ Petition as stated above which was dismissed but the Appeal the",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2011-union-of-india-through-its-sec-2011insc727",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s24",
+      "target_ref_raw": "Section 24 of IPC",
+      "effective_date": null,
+      "evidence": "nestly' and 'fraudulently', and they have to be F given their different meanings. It further noted that while the term 'dishonestly' as defined under Section 24 of IPC, talks about wrongiul pecuniary/economic gain to one and wrongful loss to another, the expression fraudulent is wider and includes any kind of injury",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2011-union-of-india-through-its-sec-2011insc727",
+  "doc_type": "judgment",
+  "title": "UNION OF INDIA THROUGH ITS SECRETARY MINISTRY  OF DEFENCE versus RABINDER SINGH",
+  "number": "2011 INSC 727",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2011-09-29",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2011_15_793_808_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010002892011",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2011 INSC 727",
+  "reported_citations": [
+    "[2011] 15 S.C.R. 793"
+  ],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA THROUGH ITS SECRETARY MINISTRY  OF DEFENCE"
+    ],
+    "respondent": [
+      "RABINDER SINGH"
+    ]
+  },
+  "judges": [
+    "J.M. PANCHAL"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "191",
+      "raw": "Section 191 of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "52",
+      "raw": "Section 52 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "153",
+      "raw": "Sections 153 and 154 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "164",
+      "raw": "Section 164 of the Army Act"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "24",
+      "raw": "Section 24 of IPC"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 31,
+    "keywords": {
+      "army act": 16,
+      "court martial": 14,
+      "summary of evidence": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1987/english/1987_3_84_92_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:17:23+00:00",
+  "sha256": "b6e706e3cea4e1b674d94a495fe38bb104210141acb6fb1e5bdbc0ce2619e338",
+  "raw_path": "data/raw/sci/1987/b6e706e3cea4e1b674d94a495fe38bb104210141acb6fb1e5bdbc0ce2619e338.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 9,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1987-ajmer-singh-etc-etc-1987insc142.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1987-ajmer-singh-etc-etc-1987insc142",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s167",
+      "target_ref_raw": "Section 167 of the Army Act",
+      "effective_date": null,
+      "evidence": "entences. Section 5 of the Code renders the provisions of the Code inapplicable in respect of all C matters covered by such special law. [87G-88B] 3. Section 167 of the Army Act specifically lays down that whenever a person is sentenced by a Court-Martial to Imprisonment, the term of his sentence shall be reckoned to commence",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1987-ajmer-singh-etc-etc-1987insc142",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s5",
+      "target_ref_raw": "Section 5 of the Code of Criminal Procedure",
+      "effective_date": null,
+      "evidence": "prisonment, the term of his sentence shall be reckoned to commence on the day on which the original proceedings were signed by the Presiding Otlicer. Section 5 of the Code of Criminal Procedure lays down that nothing contained in the Code shall affect any special or local law or any special jurisdiction or power or any special form of proced",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1987-ajmer-singh-etc-etc-1987insc142",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s428",
+      "target_ref_raw": "s. 428 of the Code of Criminal Procedure",
+      "effective_date": null,
+      "evidence": "the Code would get attracted. H Dismissing the appeals, the Court, 8-l \\ - r AJMER SINGH v. U.O.I. 85 HELD: 1. The provision for set off contained in s. 428 of the Code of Criminal Procedure is not attracted in the case of per- A sons convicted and sentenced by Court-Martial to undergo imprison- ment. 91F] 2. The Army Act, the Navy Act an",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1987-ajmer-singh-etc-etc-1987insc142",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s475",
+      "target_ref_raw": "Section 475 of the Code of Criminal Procedure",
+      "effective_date": null,
+      "evidence": "or form of procedure prescribed by any other law. Whatever doubt might otherwise have existed on this E ,........\\.. point is totally set at rest by Section 475 of the Code of Criminal Procedure which furnishes a conclusive indication that the provisions of the Code are not intended to apply in respect of proceeding before the Court-Martial.",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-1987-ajmer-singh-etc-etc-1987insc142",
+  "doc_type": "judgment",
+  "title": "AJMER SINGH ETC. ETC. versus UNION OF INDIA & ORS.",
+  "number": "1987 INSC 142",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1987-04-29",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "1987_3_84_92_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010002951987",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1987 INSC 142",
+  "reported_citations": [
+    "[1987] 3 S.C.R. 84"
+  ],
+  "parties": {
+    "petitioner": [
+      "AJMER SINGH ETC. ETC."
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "A.P. SEN"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "167",
+      "raw": "Section 167 of the Army Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": null,
+      "raw": "Air Force Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": null,
+      "raw": "Navy Act"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "5",
+      "raw": "Section 5 of the Code of Criminal Procedure"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "428",
+      "raw": "s. 428 of the Code of Criminal Procedure"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "475",
+      "raw": "Section 475 of the Code of Criminal Procedure"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 83,
+    "keywords": {
+      "army act": 19,
+      "air force act": 6,
+      "navy act": 6,
+      "court martial": 52
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2000/english/2000_3_245_274_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:18:23+00:00",
+  "sha256": "9edf9d95a342e8d7c66aab0a7209f5a52ed2843d69ef2a9b7e202e5eaad7db58",
+  "raw_path": "data/raw/sci/2000/9edf9d95a342e8d7c66aab0a7209f5a52ed2843d69ef2a9b7e202e5eaad7db58.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 30,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2000-union-of-india-and-anr-2000insc231.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2000-union-of-india-and-anr-2000insc231",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s39",
+      "target_ref_raw": "Section 39(1) of the Army Act",
+      "effective_date": null,
+      "evidence": "with 235 IWT company, Engineers, the respondent No.1 was alleged to have absented himself without leave on four occasions which was an offence under Section 39(1) of the Army Act. He was also charged under Section 63 of the Army Act for violation of good order and military discipline. A GCM was convened by the General Officer",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2000-union-of-india-and-anr-2000insc231",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s63",
+      "target_ref_raw": "Section 63 of the Army Act",
+      "effective_date": null,
+      "evidence": "alleged to have absented himself without leave on four occasions which was an offence under Section 39(1) of the Army Act. He was also charged under Section 63 of the Army Act for violation of good order and military discipline. A GCM was convened by the General Officer Commanding (GOC), Bengal Area by his .... f U.0.1. V.",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2000-union-of-india-and-anr-2000insc231",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s160",
+      "target_ref_raw": "Section 160 of the Army Act",
+      "effective_date": null,
+      "evidence": "g a GCM nor could he be deemed considered to be a legally and validly appointed conforming authority for the purposes of exercising the power under B Section 160 of the Army Act. In either event, his act of convening --)•' the GCM was illegal and therefore the proceedings of the GCM on that ground were void ab initio. Similar",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2000-union-of-india-and-anr-2000insc231",
+  "doc_type": "judgment",
+  "title": "UNION OF INDIA AND ANR versus CHARANJIT S. GILL AND ORS",
+  "number": "2000 INSC 231",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2000-04-24",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2000_3_245_274_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010006052000",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2000 INSC 231",
+  "reported_citations": [
+    "[2000] 3 S.C.R. 245"
+  ],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA AND ANR"
+    ],
+    "respondent": [
+      "CHARANJIT S. GILL AND ORS"
+    ]
+  },
+  "judges": [
+    "G.B. PATTANAIK"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "39",
+      "raw": "Section 39(1) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "63",
+      "raw": "Section 63 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "160",
+      "raw": "Section 160 of the Army Act"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": null,
+      "raw": "Indian Penal Code"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 150,
+    "keywords": {
+      "army act": 32,
+      "court martial": 117,
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

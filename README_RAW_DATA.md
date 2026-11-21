@@ -24,3 +24,7 @@ The site watermarks PDFs at download, so they differ from the MD5 in its own lis
 
 Raw files: 88, in `data/raw/<source>/`. All processed records can be rebuilt from the raw files with
 `python -m pipeline all` (and `ocr`) on `main`.
+
+## Central copy
+
+The complete data set is the private Hugging Face dataset [hariomahlawat/mimamsa-corpus](https://huggingface.co/datasets/hariomahlawat/mimamsa-corpus). This branch is a second copy; judgment PDFs stop being added here at the size limit (see `on_this_branch` in `data/raw_manifest.csv`).

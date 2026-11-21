@@ -1,0 +1,106 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=7_26/bench=dhcdb/DLHC010381342022_1_2023-02-17.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:15:25+00:00",
+  "sha256": "f8743f154747050b0a5e3ee4a9950fc6ba6cb765a73b77ff587afd8ab10fb3f0",
+  "raw_path": "data/raw/hc/2023/f8743f154747050b0a5e3ee4a9950fc6ba6cb765a73b77ff587afd8ab10fb3f0.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 14,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2023-w-p-c-14390-2022-dlhc010381342022-1-2023-02-17.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2023-w-p-c-14390-2022-dlhc010381342022-1-2023-02-17",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s161",
+      "target_ref_raw": "Section 161(2) of the Air Force Act",
+      "effective_date": null,
+      "evidence": "14:43 Signature Not Verified Neutral Citation Number: 2023/DHC/001133 W.P.(C) 14390/2022 Page 3 of 14 request of the petitioner that his appeal under Section 161(2) of the Air Force Act against the order of court martial and seeking pensionary benefits is pending before the Central Government, his petition [W.P.(C) No. 886/2010] was",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2023-w-p-c-14390-2022-dlhc010381342022-1-2023-02-17",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/14390/2022 of M. A. ANSARI, ADVOCATE Vs UNION OF INDIA & ORS.",
+  "number": "W.P.(C)/14390/2022",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2023-02-17",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010381342022_1_2023-02-17.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010381342022",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/14390/2022"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "M. A. ANSARI, ADVOCATE"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SURESH  KUMAR  KAIT",
+    "NEENA BANSAL KRISHNA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "161",
+      "raw": "Section 161(2) of the Air Force Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 6,
+    "keywords": {
+      "air force act": 3,
+      "court martial": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

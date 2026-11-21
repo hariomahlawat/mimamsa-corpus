@@ -1,0 +1,86 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2005/english/S_2005_4_431_438_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:18:43+00:00",
+  "sha256": "f696a5541cd41d4712aeb94c86d993f364f76e37de7008507cc1c8597548716a",
+  "raw_path": "data/raw/sci/2005/f696a5541cd41d4712aeb94c86d993f364f76e37de7008507cc1c8597548716a.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 8,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2005-controller-of-defence-accounts-2005insc515.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "sc-2005-controller-of-defence-accounts-2005insc515",
+  "doc_type": "judgment",
+  "title": "CONTROLLER OF DEFENCE ACCOUNTS (PENSION) AND ORS. versus S. BALACHANDRAN NAIR",
+  "number": "2005 INSC 515",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2005-10-21",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "S_2005_4_431_438_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010005122005",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2005 INSC 515",
+  "reported_citations": [
+    "[2005] SUPP. 4 S.C.R. 431"
+  ],
+  "parties": {
+    "petitioner": [
+      "CONTROLLER OF DEFENCE ACCOUNTS (PENSION) AND ORS."
+    ],
+    "respondent": [
+      "S. BALACHANDRAN NAIR"
+    ]
+  },
+  "judges": [
+    "ARIJIT PASAYAT"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 24,
+    "keywords": {
+      "disability pension": 20,
+      "invalided": 4
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

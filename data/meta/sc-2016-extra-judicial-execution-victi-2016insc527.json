@@ -1,0 +1,328 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2016/english/2016_4_909_994_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:19:45+00:00",
+  "sha256": "15e63a38f9ee48f6c71f6a6e609c4cd737638d12d6e4b4c7f3a1d18dc629fff7",
+  "raw_path": "data/raw/sci/2016/15e63a38f9ee48f6c71f6a6e609c4cd737638d12d6e4b4c7f3a1d18dc629fff7.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 86,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2016-extra-judicial-execution-victi-2016insc527.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-extra-judicial-execution-victi-2016insc527",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s122",
+      "target_ref_raw": "Section 122 of the Army Act",
+      "effective_date": null,
+      "evidence": "Army Act, the alleged offender may be tried by a Court Martial but the period of limitation for the trial of such an alleged offender is regulated by Section 122 of the Army Act. Section 125 and Section 126 of the Army Act are of considerable importance in this context and as far as this case is concerned. These Sections ough",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-extra-judicial-execution-victi-2016insc527",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s126",
+      "target_ref_raw": "Section 126 of the Army Act",
+      "effective_date": null,
+      "evidence": "y a Court Martial but the period of limitation for the trial of such an alleged offender is regulated by Section 122 of the Army Act. Section 125 and Section 126 of the Army Act are of considerable importance in this context and as far as this case is concerned. These Sections ought to be read in conjunction with Section 4 an",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-extra-judicial-execution-victi-2016insc527",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s3",
+      "target_ref_raw": "Section 3(x) of the Army Act",
+      "effective_date": null,
+      "evidence": "the disturbed area of Manipur is ipso facto an enemy or that the security forces in Manipur in such a case are dealing with an 'enemy' as defined in Section 3(x) of the Army Act. Each instance of an alleged extra-judicial killing of even such a person would have to be examined or thoroughly enquired into to ascertain and dete",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-extra-judicial-execution-victi-2016insc527",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s125",
+      "target_ref_raw": "Sections 125 and 126 of the Army Act",
+      "effective_date": null,
+      "evidence": "nd demoralizing, particularly in a constitutional democracy like ours. The result of the interplay between Section 4 and Section 5 of the Cr.P.C. and Sections 125 and 126 of the Army Act makes it quite clear that the decision to try a person who has committed an offence punishable under the Army Act 923 A B c D E F G H 924 A B c D E F",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-extra-judicial-execution-victi-2016insc527",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s70",
+      "target_ref_raw": "Section 70 of the Army Act",
+      "effective_date": null,
+      "evidence": "urisdiction to try.him and that only a criminal court constituted under the Cr.P.C. had jurisdiction to try him. On a consideration of Section 69 and Section 70 of the Army Act, the Constitution Bench held that under the Anny Act there are three categories of offences, namely: (I) Offences committed by a person subject to th",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-extra-judicial-execution-victi-2016insc527",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s72",
+      "target_ref_raw": "Section 72 of the Air Force Act, 1950",
+      "effective_date": null,
+      "evidence": "ention urged before this Court was that the criminal court inherently lacked jurisdiction to try the accused. This Court considered the provisions of Section 72 of the Air Force Act, 1950 (corresponding to Section 70 of the Army Act), Sections 124 and 125 of the said Act (corresponding to Sections 125 and 126 of the Army Act) and the C",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-extra-judicial-execution-victi-2016insc527",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s146",
+      "target_ref_raw": "Section 146 of the IPC",
+      "effective_date": null,
+      "evidence": "violence or such an attempt by any armed person. There can be little doubt that 'armed mutineers' and 'armed rebels' by definition deal in violence. Section 146 of the IPC explains rioting as use of force or violence by an unlawful assembly or by any member thereof in prosecution of the common object of such assembly. S",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-extra-judicial-execution-victi-2016insc527",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s121",
+      "target_ref_raw": "Section 121 of the IPC",
+      "effective_date": null,
+      "evidence": "his contention that a war-like situation was and is prevailing in Manipur, the learned Attorney General relied on Navjot Sandhu to submit that under Section 121 of the IPC 'war' is not necessarily conventional warfare between two nations and even organizing and joining an insurrection against the Government oflndia is a",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-extra-judicial-execution-victi-2016insc527",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s302",
+      "target_ref_raw": "Sections 302 and 34 of the IPC",
+      "effective_date": null,
+      "evidence": ". In Balhir Singlt the accused was in active service in the Air Force and was tried and convicted by a criminal court for an offence punishable under Sections 302 and 34 of the IPC. The contention urged before this Court was that the criminal court inherently lacked jurisdiction to try the accused. This Court considered the prov",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-extra-judicial-execution-victi-2016insc527",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s4",
+      "target_ref_raw": "Section 4 and 5 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "eapons or of fire-arms, ammunition or explosive substances. [Paras 93 to 96] (953-G-H; 954-A, C-E; 955-A-BJ G H (ii) Code of Criminal Procedure, 1973 Section 4 and 5 of the Cr.P.C. concern with investigation, enquiry, trial and other proceedings in relation to offences under the Indian Penal Code, 1860 and other laws. However,",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-extra-judicial-execution-victi-2016insc527",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s5",
+      "target_ref_raw": "Section 5 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "re of considerable importance in this context and as far as this case is concerned. These Sections ought to be read in conjunction with Section 4 and Section 5 of the Cr.P.C. These Sections provide that when both a criminal court and a Court Martial have jurisdiction in respect of an offence, the first option would be wit",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-extra-judicial-execution-victi-2016insc527",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s176",
+      "target_ref_raw": "Section 176 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "IATION (EEVFAM) v. UNION OF INDIA Magisterial Enquiry conducted at the behest of the State Government, even though it might have been conducted under Section 176 of the Cr.P.C. Therefore, even if the State Government decides to hold Magisterial Enquiries and take suitable action on the report given, it would not preclude an",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-extra-judicial-execution-victi-2016insc527",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s46",
+      "target_ref_raw": "Section 46 of the Code of Criminal Procedure, 1973",
+      "effective_date": null,
+      "evidence": "ersonnel subject to certain conditions and which may not amount to an offence but might be justifiable under law. Reference in this regard is made to Section 46 of the Code of Criminal Procedure, 1973 (for short 'the Cr.P.C. ')and it is submitted that in certain extreme situations it may be justifiable even if the death of a person being arrested i",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-extra-judicial-execution-victi-2016insc527",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s129",
+      "target_ref_raw": "Sections 129 to 132 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "satisfied and ifthe person being arrested is accused of an offence punishable with death or with imprisonment for life. 30. Reference is also made to Sections 129 to 132 of the Cr.P.C. relating to the \"Maintenance of Public Order and Tranquility\". These ' Referred to later. EXTRA JUDICIAL EXECUTION VICTIM FAMILIES ASSOCIATION (EEVF",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2016-extra-judicial-execution-victi-2016insc527",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s197",
+      "target_ref_raw": "Section 197 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "as not a case of a fake encounter. This Court also took a similar view. Though the case related primarily to the grant of sanction to prosecute under Section 197 of the Cr.P.C., it 971 A B was held, relying upon K. Satwant Sin1:1t v. State of Punja'h54 and State· C of Orissa v. Ganeslt Chandra Jew55 that if there is a \"reas",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2016-extra-judicial-execution-victi-2016insc527",
+  "doc_type": "judgment",
+  "title": "EXTRA JUDICIAL EXECUTION VICTIM FAMILIES  ASSOCIATION (EEVFAM) & ANR. versus UNION OF INDIA & ANR.",
+  "number": "2016 INSC 527",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2016-07-08",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2016_4_909_994_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010003692016",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2016 INSC 527",
+  "reported_citations": [
+    "[2016] 4 S.C.R. 909"
+  ],
+  "parties": {
+    "petitioner": [
+      "EXTRA JUDICIAL EXECUTION VICTIM FAMILIES  ASSOCIATION (EEVFAM) & ANR."
+    ],
+    "respondent": [
+      "UNION OF INDIA & ANR."
+    ]
+  },
+  "judges": [
+    "MADAN B. LOKUR"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "122",
+      "raw": "Section 122 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "126",
+      "raw": "Section 126 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "3",
+      "raw": "Section 3(x) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "125",
+      "raw": "Sections 125 and 126 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "70",
+      "raw": "Section 70 of the Army Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "72",
+      "raw": "Section 72 of the Air Force Act, 1950"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "146",
+      "raw": "Section 146 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "121",
+      "raw": "Section 121 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "302",
+      "raw": "Sections 302 and 34 of the IPC"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "4",
+      "raw": "Section 4 and 5 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "5",
+      "raw": "Section 5 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "176",
+      "raw": "Section 176 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "46",
+      "raw": "Section 46 of the Code of Criminal Procedure, 1973"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "129",
+      "raw": "Sections 129 to 132 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "197",
+      "raw": "Section 197 of the Cr.P.C"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 120,
+    "keywords": {
+      "army act": 66,
+      "air force act": 3,
+      "court martial": 51
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

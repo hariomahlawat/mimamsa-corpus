@@ -1,0 +1,137 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2020/english/2020_10_433_496_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:20:06+00:00",
+  "sha256": "9a2c4360e23bcd661fab580fc989645d174ff49bfa064f473dbe35b9af6de3b7",
+  "raw_path": "data/raw/sci/2020/9a2c4360e23bcd661fab580fc989645d174ff49bfa064f473dbe35b9af6de3b7.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 64,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2020-union-of-india-ors-2020insc300.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2020-union-of-india-ors-2020insc300",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s21",
+      "target_ref_raw": "Section 21 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "med Forces is modified by enactment of the procedure in the Army Act itself.” 59. In R Viswan v Union of India,23 one of the issues concerned whether Section 21 of the Army Act, 1950 read with Chapter IV of the Army Rules, 1954 is within the scope and ambit of Article 33 of the Constitution. Section 21 empowers the Central Governm",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2020-union-of-india-ors-2020insc300",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s9",
+      "target_ref_raw": "Section 9 of the Navy Act 1957",
+      "effective_date": null,
+      "evidence": "ts for the grant of PCs. Hence, the present appeals. A B C D E F G H 435 Disposing of the appeals, the Court HELD: 1.1 Statutory and policy framework Section 9 of the Navy Act 1957 deals with the eligibility for appointment or enrolment in the Indian Navy. Sub-section (2) of Section 9 conditions the eligibility of women to be ap",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2020-union-of-india-ors-2020insc300",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s30",
+      "target_ref_raw": "Section 30(1) of the AFT Act 2007",
+      "effective_date": null,
+      "evidence": "ed that the decision which was relied on by Mr CU Singh arose in the context of a civil suit while the scheme under the AFT Act 2007 is distinct. 53. Section 30(1) of the AFT Act 2007 provides as follows: “30. Appeal to the Supreme Court. – (1) Subject to the provisions of Section 31, an appeal shall lie to the Supreme Court agains",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2020-union-of-india-ors-2020insc300",
+  "doc_type": "judgment",
+  "title": "UNION OF INDIA & ORS. versus LT. CDR. ANNIE NAGARAJA & ORS.",
+  "number": "2020 INSC 300",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2020-03-17",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2020_10_433_496_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010000142020",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2020 INSC 300",
+  "reported_citations": [
+    "[2020] 10 S.C.R. 433"
+  ],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA & ORS."
+    ],
+    "respondent": [
+      "LT. CDR. ANNIE NAGARAJA & ORS."
+    ]
+  },
+  "judges": [
+    "D.Y. CHANDRACHUD"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "21",
+      "raw": "Section 21 of the Army Act, 1950"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "9",
+      "raw": "Section 9 of the Navy Act 1957"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "30",
+      "raw": "Section 30(1) of the AFT Act 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 95,
+    "keywords": {
+      "army act": 3,
+      "navy act": 3,
+      "armed forces tribunal": 86,
+      "court martial": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

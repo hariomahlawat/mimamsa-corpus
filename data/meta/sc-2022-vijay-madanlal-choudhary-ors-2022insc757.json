@@ -1,0 +1,708 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2022/english/2022_6_382_726_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:20:18+00:00",
+  "sha256": "9b160103a1ee0092df343ff8de006996c62aec4e9d4f1d4389226d29a596c589",
+  "raw_path": "data/raw/sci/2022/9b160103a1ee0092df343ff8de006996c62aec4e9d4f1d4389226d29a596c589.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 345,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2022-vijay-madanlal-choudhary-ors-2022insc757.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s410",
+      "target_ref_raw": "Sections 410 and 411 of the IPC",
+      "effective_date": null,
+      "evidence": "er the current scheme, an accused will be subject to two different procedures which is under the predicate offence and under the PMLA. To illustrate, Sections 410 and 411 of the IPC are scheduled offences overlapping with Sections 3 and 4 of the PMLA. However, the safeguards provided are nowhere uniform. The same is unreasonable",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s212",
+      "target_ref_raw": "Section 212 of the IPC",
+      "effective_date": null,
+      "evidence": "ngana, on the other hand, finds money-laundering completely independent of the scheduled offence. To drive the point home, attention is drawn towards Section 212 of the IPC, where the High Courts have taken a view that unless the original offence is proved, the person harbouring the accused cannot be sentenced. However,",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s201",
+      "target_ref_raw": "Sections 201 and 212 of the IPC",
+      "effective_date": null,
+      "evidence": "(Paras 15-16) 137 2019 SCC OnLine Ker 4546 A B C D E F G H 458 SUPREME COURT REPORTS [2022] 6 S.C.R. (ii) Referring to Section 45, it is argued that Sections 201 and 212 of the IPC provide for graded punishment or in line with the principle of an accessory after the fact. Attention has been drawn to a few cases to show that thes",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s71",
+      "target_ref_raw": "Section 71 of the IPC",
+      "effective_date": null,
+      "evidence": "ition, “acquisition, use, concealment, possession is capable”. However, this contrast is impermissible in law176. To buttress this plea, provision of Section 71 of the IPC and Article 20(2) are invoked177. He has also submitted that for the purpose of Section 50(3), any statement recorded and deemed to be judicial proce",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s193",
+      "target_ref_raw": "Sections 193 and 228 of the IPC",
+      "effective_date": null,
+      "evidence": "ed that as the statements given under Section 50 of the PMLA are required to be signed and are given in the judicial proceeding within the meaning of Sections 193 and 228 of the IPC, therefore, the presumption under Section 80 of the 1872 Act will apply and it shall be presumed that the document is genuine and the circumstances u",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s228",
+      "target_ref_raw": "section 228 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": "ay be required. (4) Every proceeding under sub-sections (2) and (3) shall be deemed to be a judicial proceeding within the meaning of section 193 and section 228 of the Indian Penal Code (45 of 1860). VIJAY MADANLAL CHOUDHARY & ORS. v. UNION OF INDIA & ORS. [A. M. KHANWILKAR, J.] 663 Subs. by Act 2 of 2013, sec. 22, for “banking compa",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s174",
+      "target_ref_raw": "section 174 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": "(c) of sub- section (2), a person who intentionally disobeys any direction issued under section 50 shall also be liable to be proceeded against under section 174 of the Indian Penal Code (45 of 1860).]” This provision is only an enabling provision and applies to situations referred to therein. It is in the nature of providing conseque",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s157",
+      "target_ref_raw": "Section 157 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "n 154 thereof is to be forwarded to the jurisdictional Magistrate. However, this procedure is not being followed in ECIR cases. Further, violation of Section 157 of the Cr.P.C. was also alleged and it was submitted that this has led to non-compliance with the procedure prescribed under the law (Cr.P.C.) and the law laid dow",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s173",
+      "target_ref_raw": "Section 173 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "isions hereinbelow at the appropriate place. Reliance has also been placed on the decision of Nikesh Tarachand Shah17. (vi) The safeguard provided by Section 173 of the Cr.P.C., it is argued, was present in the original enactment of 2002 (PMLA). The same has now supposedly been whittled down by various amendments over the y",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s41a",
+      "target_ref_raw": "Section 41A of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "e to the punishment for the underlying predicate offence. The same analogy ought to apply to the procedural protections, such as those provided under Section 41A of the Cr.P.C., which otherwise would be foul of the constitutional protections under Article 21. 16 For short, “1999 Bill” 17 Supra at Footnote No.3 (Para 11) A B",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s161",
+      "target_ref_raw": "Section 161 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "edural in nature are being violated. To illustrate a few - non registration of FIR, lack of a case diary, restricted access to the ECIR, violation of Section 161 of the Cr.P.C., Section 41A of the Cr.P.C., lack of magisterial permission under Section 155 of the Cr.P.C. Such unguided use of power to investigate and prosecute",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s155",
+      "target_ref_raw": "Section 155 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "case diary, restricted access to the ECIR, violation of Section 161 of the Cr.P.C., Section 41A of the Cr.P.C., lack of magisterial permission under Section 155 of the Cr.P.C. Such unguided use of power to investigate and prosecute any person violates Articles 14 and 21 of the Constitution. (xiii) Another argument raised b",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s2",
+      "target_ref_raw": "Section 2(h) of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "tion” used in Section 50 of the PMLA. A parallel has also been drawn between the definition of “investigation” under the PMLA in Section 2(1)(na) and Section 2(h) of the Cr.P.C. Further, it is urged that the test of power to file ‘chargesheet’ is not determinative of being a police officer. (xv) It is then urged that Section",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s160",
+      "target_ref_raw": "Section 160 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "he 1872 Act, the provisions under the PMLA are draconian and, thus, violative of Articles 20(3) and 21 of the Constitution. Our attention is drawn to Section 160 of the Cr.P.C. when person is summoned as a witness or under Section 41A as an accused or a suspect. In either case, the statement is recorded as per Section 161 o",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s162",
+      "target_ref_raw": "Section 162 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "serted36 and can only be used to cast doubt or discredit the testimony of the witness who is testifying before Court37. The legislative intent behind Section 162 of the Cr.P.C. is also relied upon, as has been held in Tahsildar Singh & Anr. vs. State of U.P.38. (xviii) It is, therefore, urged that the current practice of th",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s313",
+      "target_ref_raw": "Section 313 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "e right to a fair trial under Article 21. Reliance has also been placed on Selvi & Ors. vs. State of Karnataka43, the 180th Law Commission Report and Section 313 of the Cr.P.C. as being subsidiaries of right against self- incrimination and right to silence, not being read against him. (xx) Learned counsel then delineated on",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s167",
+      "target_ref_raw": "Section 167 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "s 22, 23 and 45 cannot even meet the test at the pre- complaint and pre-cognizance stage53 and the accused cannot escape the rigors of custody as per Section 167 of the Cr.P.C. As such, these conditions of reverse burden are in violation of Articles 14 and 21 of the Constitution. Presumption of innocence even in the pre-con",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s41",
+      "target_ref_raw": "Sections 41 to 41D, 46, 49, 50, 51, 55, 55A, 58, 60A of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "ntenanced. (ii) It is also argued that the PMLA has inadequate safeguards for guaranteeing a fair investigation. For, there are no safeguards akin to Sections 41 to 41D, 46, 49, 50, 51, 55, 55A, 58, 60A of the Cr.P.C. Under Chapters V and VII of the PMLA, safeguards are limited to Sections 16 to 19 and 50. The onerous bail conditions under Section 45 are in the na",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s211",
+      "target_ref_raw": "Section 211 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "only apply after the framing of charges. (i) Learned senior counsel submits that the wording of Section 24 refers to formal framing of charges under Section 211 of the Cr.P.C. For this submission, he relies on the speech of the Minister introducing the amendment in the Parliament. It has been stated that presumption is rai",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s437",
+      "target_ref_raw": "Sections 437 and 439 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "ffence compounded? Lastly, learned counsel also challenges the rigors of the twin conditions for being incongruent with general bail provisions under Sections 437 and 439 of the Cr.P.C. as being ultra vires. (i) Learned counsel refers to one of the cases in this batch, wherein the properties sought to be acquired by the ED were obta",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s401",
+      "target_ref_raw": "Section 401 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "ied by a Magistrate First Class, the right of a first appeal to Sessions Court under Section 374(3) and the right of revision to the High Court under Section 401 of the Cr.P.C. from the appellate judgment of the Sessions Court. This leads to a rather oppressive interpretation where an accused who is not charged under the PM",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s4",
+      "target_ref_raw": "Section 4(2) of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "oses of investigation, he relied upon Ashok Munilal Jain & Anr. vs. Assistant Director, Directorate of Enforcement163, wherein it had been noted that Section 4(2) of the Cr.P.C. prescribes mandatory application even in respect to special statutes unless expressly barred164. Thus, the dictum is that the provisions of the Cr.P",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s172",
+      "target_ref_raw": "Section 172 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "or 155 of the Cr.P.C., forwarding of report or FIR to competent Magistrate under Section 157 of Cr.P.C., maintaining a paginated case diary as under Section 172 of the Cr.P.C., as also, its production before the Magistrate, as provided by Section 167. (ii) A passing reference is also made to the Railway Property (Unlawful",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s472",
+      "target_ref_raw": "Section 472 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "ntinuing offence, the cause of action for which renews with every VIJAY MADANLAL CHOUDHARY & ORS. v. UNION OF INDIA & ORS. [A. M. KHANWILKAR, J.] 402 Section 472 of the Cr.P.C. 403 (1991) 2 SCC 141. 404 (1972) 2 SCC 194. 405 2. Definitions.—(1) In this Act, unless the context otherwise requires,— ….. (fa) “beneficial owner”",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s154",
+      "target_ref_raw": "Section 154 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "e PMLA. Consequently, it is submitted that since the registration of an FIR does not fall into any of seven categories contemplated under Section 65, Section 154 of the Cr.P.C. will not apply to proceedings under the PMLA. VIJAY MADANLAL CHOUDHARY & ORS. v. UNION OF INDIA & ORS. [A. M. KHANWILKAR, J.] 410 H.N. Rishbud and I",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s102",
+      "target_ref_raw": "Section 102 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "2022] 6 S.C.R. (xliii) Lack of safeguards in the Cr.P.C. are also highlighted. With respect to seizures, it is submitted that the same is governed by Section 102 of the Cr.P.C., and empowers a police officer to seize any property upon a mere suspicion. This is in stark contrast to Section 17(1) of the PMLA which permits sei",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s165",
+      "target_ref_raw": "Section 165 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "LA which permits seizure only when there is a reason to believe, and such reason is recorded in writing. With respect to search, it is submitted that Section 165 of the Cr.P.C. practically permits any officer above the rank of Constable to exercise such power, as opposed to Section 17 of the PMLA, which confers such power o",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s439",
+      "target_ref_raw": "section 439 of the Code of Criminal Procedure, 1973",
+      "effective_date": null,
+      "evidence": "original complaint or not.] (2) Nothing contained in this section shall be deemed to affect the special powers of the High Court regarding bail under section 439 of the Code of Criminal Procedure, 1973 (2 of 1974) and the High Court may exercise such powers including the power under clause (b) of sub-section (1) of that section as if the reference t",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s438",
+      "target_ref_raw": "Section 438 of the CrPC",
+      "effective_date": null,
+      "evidence": "has not been filed and the investigation is in progress or at a stage after the investigation is concluded. Power to grant “anticipatory bail” under Section 438 of the CrPC vests only with the Court of Session or the High Court. Therefore, ultimately it is for the court concerned to consider the application for “anticipa",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s156",
+      "target_ref_raw": "S. 156 of the Code of Criminal Procedure",
+      "effective_date": null,
+      "evidence": "committed an offence under the Sea Customs Act. But that is all. Though he can make an enquiry, he has no power to investigate into an offence under S. 156 of the Code of Criminal Procedure. Whatever powers he exercises are expressly set out in the Sea Customs Act. Though some of those set out in Ch. XVII may be analogous to those of a P",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s190",
+      "target_ref_raw": "S. 190 of the Code of Criminal Procedure",
+      "effective_date": null,
+      "evidence": "ain matters, he does not possess powers even analogous to those of a Police Officer. Thus he is not entitled to submit a report to a Magistrate under S. 190 of the Code of Criminal Procedure with a view that cognizance of the offence be taken by the Magistrate. Section 187(A) of the Sea Customs Act specifically provides that cognizance of",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s25",
+      "target_ref_raw": "Sections 25 and 26 of the Indian Evidence Act",
+      "effective_date": null,
+      "evidence": "crime are permitted and coercive powers are vested, then such an officer is a police officer. Further, such an officer is covered within the ambit of Sections 25 and 26 of the Indian Evidence Act, 187223. In support of the test to gauge the objective of the statute, reference has been made to State of Punjab vs. Barkat Ram24, wherein it was he",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s3",
+      "target_ref_raw": "Section 3 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "the definition of expressions in the Evidence Act, relevant to answer the issue of standard of proof in any proceeding. In the interpretation clause, Section 3 of the Evidence Act, expression “fact” has been defined as follows: VIJAY MADANLAL CHOUDHARY & ORS. v. UNION OF INDIA & ORS. [A. M. KHANWILKAR, J.] A B C D E F G H 616 S",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s106",
+      "target_ref_raw": "Section 106546 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "latter judgment, the Court relying upon other decisions including in Shambhu Nath Mehra vs. The State of Ajmer545, noted that the provisions, such as Section 106546 of the Evidence Act, is not intended to relieve the prosecution of its burden to prove the guilt of the accused beyond reasonable doubt, but the Section would apply to c",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s105",
+      "target_ref_raw": "Sections 105, 106, 113A and 113B of the Indian Evidence Act, 1872",
+      "effective_date": null,
+      "evidence": "Seema Silk & Sarees553, this Court restated that a legal 550 Section 3, Evidence Act 551 (i) Section 57A of the (Kerala) Abkari Act, I of 1077; (ii) Sections 105, 106, 113A and 113B of the Indian Evidence Act, 1872; (iii) Section 139 of the Negotiable Instruments Act, 1881; (iv) Section 9 of the Opium Act, 1878; (v) Section 9B of the Explosives Act 1884; (vi) Se",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s114",
+      "target_ref_raw": "Section 114556 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "555 See Sarbananda Sonowal (supra at Footnote No.389) A B C D E F G H 623 or activity connected with the proceeds of crime. In any case, in terms of Section 114556 of the Evidence Act, it is open to the Court to presume the existence of any fact which it thinks likely to have happened, regard being had to the common course of natur",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s4",
+      "target_ref_raw": "Section 4 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "ragraphs 13 and 17 as follows: “13. Before proceeding further, we may point out that the expressions “may presume” and “shall presume” are defined in Section 4 of the Evidence Act. The presumptions falling under the former category are compendiously known as “factual presumptions” or “discretionary presumptions” and those falli",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s119",
+      "target_ref_raw": "section 119 of the Evidence Act",
+      "effective_date": null,
+      "evidence": ", J.] 665 Supra at Footnote No.324 (also at Footnote No.47) A B C D E F G H 678 SUPREME COURT REPORTS [2022] 6 S.C.R. the case of a dumb witness (See section 119 of the Evidence Act) or the like. “To be a witness” is nothing more than “to furnish evidence”, and such evidence can be furnished through the lips or by production of a",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s139",
+      "target_ref_raw": "Section 139 of the Evidence Act",
+      "effective_date": null,
+      "evidence": "e furnished through the lips or by production of a thing or of a document or in other modes. So far as production of documents is concerned, no doubt Section 139 of the Evidence Act says that a person producing a document on summons is not a witness. But that section is meant to regulate the right of cross-examination. It is not",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2022-vijay-madanlal-choudhary-ors-2022insc757",
+  "doc_type": "judgment",
+  "title": "VIJAY MADANLAL CHOUDHARY & ORS. versus UNION OF INDIA & ORS.",
+  "number": "2022 INSC 757",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2022-07-27",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2022_6_382_726_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010002942022",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2022 INSC 757",
+  "reported_citations": [
+    "[2022] 6 S.C.R. 382"
+  ],
+  "parties": {
+    "petitioner": [
+      "VIJAY MADANLAL CHOUDHARY & ORS."
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "A.M. KHANWILKAR"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "410",
+      "raw": "Sections 410 and 411 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "212",
+      "raw": "Section 212 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "201",
+      "raw": "Sections 201 and 212 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "71",
+      "raw": "Section 71 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "193",
+      "raw": "Sections 193 and 228 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "228",
+      "raw": "section 228 of the Indian Penal Code"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "174",
+      "raw": "section 174 of the Indian Penal Code"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "157",
+      "raw": "Section 157 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "173",
+      "raw": "Section 173 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "41A",
+      "raw": "Section 41A of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "161",
+      "raw": "Section 161 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "155",
+      "raw": "Section 155 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "2",
+      "raw": "Section 2(h) of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "160",
+      "raw": "Section 160 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "162",
+      "raw": "Section 162 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "313",
+      "raw": "Section 313 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "167",
+      "raw": "Section 167 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "41",
+      "raw": "Sections 41 to 41D, 46, 49, 50, 51, 55, 55A, 58, 60A of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "211",
+      "raw": "Section 211 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "437",
+      "raw": "Sections 437 and 439 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "401",
+      "raw": "Section 401 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "4",
+      "raw": "Section 4(2) of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "172",
+      "raw": "Section 172 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "472",
+      "raw": "Section 472 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "154",
+      "raw": "Section 154 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "102",
+      "raw": "Section 102 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "165",
+      "raw": "Section 165 of the Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "439",
+      "raw": "section 439 of the Code of Criminal Procedure, 1973"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "438",
+      "raw": "Section 438 of the CrPC"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "156",
+      "raw": "S. 156 of the Code of Criminal Procedure"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "190",
+      "raw": "S. 190 of the Code of Criminal Procedure"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "25",
+      "raw": "Sections 25 and 26 of the Indian Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "3",
+      "raw": "Section 3 of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "106",
+      "raw": "Section 106546 of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "105",
+      "raw": "Sections 105, 106, 113A and 113B of the Indian Evidence Act, 1872"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "114",
+      "raw": "Section 114556 of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "4",
+      "raw": "Section 4 of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "119",
+      "raw": "section 119 of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "139",
+      "raw": "Section 139 of the Evidence Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

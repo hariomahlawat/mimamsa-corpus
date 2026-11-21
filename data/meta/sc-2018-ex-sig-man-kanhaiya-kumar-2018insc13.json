@@ -1,0 +1,136 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2018/english/2018_1_679_687_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:19:57+00:00",
+  "sha256": "6a67f7cd1bb8218869ae714b0a9bc59f4684ff8318fd0ac2e618e4070354c817",
+  "raw_path": "data/raw/sci/2018/6a67f7cd1bb8218869ae714b0a9bc59f4684ff8318fd0ac2e618e4070354c817.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 9,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2018-ex-sig-man-kanhaiya-kumar-2018insc13.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2018-ex-sig-man-kanhaiya-kumar-2018insc13",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s20",
+      "target_ref_raw": "Section 20 of the Army Act,1950",
+      "effective_date": null,
+      "evidence": "a Propria”. Fraud – Employment obtained by playing fraud – Consequences – Discussed. Dismissing the appeal, the Court HELD: 1.1 A conjoint reading of Section 20 of the Army Act,1950 along with Rule 17 of the Army Rules,1954 shows that power of dismissal or removal under Section 20(3) can be exercised if the delinquent has been in",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2018-ex-sig-man-kanhaiya-kumar-2018insc13",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s122",
+      "target_ref_raw": "Section 122(4) of the Army Act,1950",
+      "effective_date": null,
+      "evidence": "(3) of the Army Act,1950 and this general power could not have been exercised when there is a specific provision to deal with such cases laid down in Section 122(4) of the Army Act,1950. He submitted that as per law laid down by this Court in catena of judgments, the general provision cannot be invoked when there is a specific provis",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2018-ex-sig-man-kanhaiya-kumar-2018insc13",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s14",
+      "target_ref_raw": "Section 14 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "of the appellant. On 09.08.2016 the respondents rejected the representation of the appellant. The appellant preferred the Original Application under Section 14 of the Armed Forces Tribunal Act, 2007 challenging the order dated 09.08.2016. 4. It may be noted that without admitting the formal original application, the AFT had directed the responden",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2018-ex-sig-man-kanhaiya-kumar-2018insc13",
+  "doc_type": "judgment",
+  "title": "EX SIG. MAN KANHAIYA KUMAR versus UNION OF INDIA & ORS.",
+  "number": "2018 INSC 13",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2018-01-09",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2018_1_679_687_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010004002018",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2018 INSC 13",
+  "reported_citations": [
+    "[2018] 1 S.C.R. 679"
+  ],
+  "parties": {
+    "petitioner": [
+      "EX SIG. MAN KANHAIYA KUMAR"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "A.K. SIKRI"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "20",
+      "raw": "Section 20 of the Army Act,1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "122",
+      "raw": "Section 122(4) of the Army Act,1950"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "14",
+      "raw": "Section 14 of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 21,
+    "keywords": {
+      "army act": 12,
+      "armed forces tribunal": 7,
+      "court martial": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

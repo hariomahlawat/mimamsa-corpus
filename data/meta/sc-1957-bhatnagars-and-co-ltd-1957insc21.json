@@ -1,0 +1,89 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1957/english/1957_1_701_720_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:16:29+00:00",
+  "sha256": "959a1796542264952040cec195cf6ec9ec6a533c68563fdf5931560919329ba6",
+  "raw_path": "data/raw/sci/1957/959a1796542264952040cec195cf6ec9ec6a533c68563fdf5931560919329ba6.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 20,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1957-bhatnagars-and-co-ltd-1957insc21.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "sc-1957-bhatnagars-and-co-ltd-1957insc21",
+  "doc_type": "judgment",
+  "title": "BHATNAGARS AND CO. LTD.  versus THE UNION OF INDIA",
+  "number": "1957 INSC 21",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1957-02-21",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "1957_1_701_720_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010000531957",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1957 INSC 21",
+  "reported_citations": [
+    "[1957] 1 S.C.R. 701"
+  ],
+  "parties": {
+    "petitioner": [
+      "BHATNAGARS AND CO. LTD."
+    ],
+    "respondent": [
+      "THE UNION OF INDIA"
+    ]
+  },
+  "judges": [
+    "SUDHI RANJAN DAS"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": null,
+      "raw": "Criminal Procedure Code"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

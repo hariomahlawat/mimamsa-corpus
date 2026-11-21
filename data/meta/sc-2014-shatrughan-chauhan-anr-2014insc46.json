@@ -1,0 +1,164 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2014/english/2014_1_609_746_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:19:34+00:00",
+  "sha256": "e6c5b2e2a8c386b594c8c91966a363bd141693fc57592ec80b43b6d78d66b7d4",
+  "raw_path": "data/raw/sci/2014/e6c5b2e2a8c386b594c8c91966a363bd141693fc57592ec80b43b6d78d66b7d4.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 138,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2014-shatrughan-chauhan-anr-2014insc46.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2014-shatrughan-chauhan-anr-2014insc46",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s303",
+      "target_ref_raw": "Section 303 of the IPC",
+      "effective_date": null,
+      "evidence": "facts. 65. It is useful to refer a Constitution Bench decision of this D Court in Mithu vs. State of Punjab (1983) 2 SCC.277, wherein this Court held Section 303 of the IPC as unconstitutional and declared it void. The question before the Constitution Bench was whether Section 303 of IPC infringes the guarantee contained",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2014-shatrughan-chauhan-anr-2014insc46",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s73",
+      "target_ref_raw": "Section 73 of the Indian Penal Code",
+      "effective_date": null,
+      "evidence": ", and remain to be gone through. His contention is that solitary confinement is a separate substantive punishment of maddening severity prescribed by Section 73 of the Indian Penal Code which can be imposed only by the Court; and so tormenting is this sentence that even the socially less sensitive Penal Code of 1860 has interposed, i",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2014-shatrughan-chauhan-anr-2014insc46",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s432",
+      "target_ref_raw": "Sections 432 and 433 of the Criminal Procedure Code",
+      "effective_date": null,
+      "evidence": "unity to impress upon the Government of India and the State Governments that G petitions filed under Articles 72 and 161 of the Constitution or under Sections 432 and 433 of the Criminal Procedure Code must be disposed of expeditiously. A self-imposed rule should be followed by the executive authorities rigorously, that every such petition shall be",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2014-shatrughan-chauhan-anr-2014insc46",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s235",
+      "target_ref_raw": "Section 235(2) of the Criminal Procedure Code",
+      "effective_date": null,
+      "evidence": "the offender G was under the sentence of life imprisonment for the first of su~h offences is arbitrary beyond the bounds of all reason. Assuming that Section 235(2) of the Criminal Procedure Code were applicable to the case and the court was under an obligation to hear the accused on the H 680 A B c D E F G H SUPREME COURT REPORTS [2014) 1 S.C",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2014-shatrughan-chauhan-anr-2014insc46",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s354",
+      "target_ref_raw": "Section 354(5) of the CrPC",
+      "effective_date": null,
+      "evidence": "to which we have referred extensively, the State has discharged the heavy burden which lies upon it to prove that the method of hanging prescribed by Section 354(5) of the CrPC does not violate the guarantee right contained in Article 21 of the Constitution. The material before us shows that the system of hanging which Is no",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2014-shatrughan-chauhan-anr-2014insc46",
+  "doc_type": "judgment",
+  "title": "SHATRUGHAN CHAUHAN & ANR. versus UNION OF INDIA & ORS.",
+  "number": "2014 INSC 46",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2014-01-21",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2014_1_609_746_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010003322014",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2014 INSC 46",
+  "reported_citations": [
+    "[2014] 1 S.C.R. 609"
+  ],
+  "parties": {
+    "petitioner": [
+      "SHATRUGHAN CHAUHAN & ANR."
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "P. SATHASIVAM"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "303",
+      "raw": "Section 303 of the IPC"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "73",
+      "raw": "Section 73 of the Indian Penal Code"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "432",
+      "raw": "Sections 432 and 433 of the Criminal Procedure Code"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "235",
+      "raw": "Section 235(2) of the Criminal Procedure Code"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "354",
+      "raw": "Section 354(5) of the CrPC"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "court martial": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

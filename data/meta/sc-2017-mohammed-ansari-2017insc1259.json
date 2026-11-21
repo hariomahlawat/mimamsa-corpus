@@ -1,0 +1,170 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2017/english/2017_1_422_444_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:19:45+00:00",
+  "sha256": "fa6477b697504e4a0129703f6f4beb65bfc4719c383c67f13cc33767d89c219f",
+  "raw_path": "data/raw/sci/2017/fa6477b697504e4a0129703f6f4beb65bfc4719c383c67f13cc33767d89c219f.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 23,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2017-mohammed-ansari-2017insc1259.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2017-mohammed-ansari-2017insc1259",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s4",
+      "target_ref_raw": "Section 4 of the Army Act",
+      "effective_date": null,
+      "evidence": "NION OF INDIA & ORS. [DIPAK MISRA, J.] Notification No. SR0-329 dated 23-9-1960 issued under the Central Rules and under sub-sections (I) and ( 4) of Section 4 of the Army Act makes this position clear. By this notification, the punishments that could be meted out under the Central Rules have been taken out of the purview o",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2017-mohammed-ansari-2017insc1259",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s18",
+      "target_ref_raw": "section 18 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "where the punishment of dismissal is awarded; (i-1) any other matter, whatsoever, bnt shall not include matters relating to- (i) orders issued under section 18 of the Army Act, 1950 ( 46of1950), sub-section (I) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950 ( 45 of 1950); and (ii) trans",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2017-mohammed-ansari-2017insc1259",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s18",
+      "target_ref_raw": "section 18 of the Air Force Act, 1950",
+      "effective_date": null,
+      "evidence": "lating to- (i) orders issued under section 18 of the Army Act, 1950 ( 46of1950), sub-section (I) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950 ( 45 of 1950); and (ii) transfers and p()stings including the change of place or unit on posting whether individually or as a part of unit, formation",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2017-mohammed-ansari-2017insc1259",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s15",
+      "target_ref_raw": "section 15 of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "tter, whatsoever, bnt shall not include matters relating to- (i) orders issued under section 18 of the Army Act, 1950 ( 46of1950), sub-section (I) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950 ( 45 of 1950); and (ii) transfers and p()stings including the change of place or unit on posti",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2017-mohammed-ansari-2017insc1259",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s3",
+      "target_ref_raw": "Section 3(o) of the AFT Act",
+      "effective_date": null,
+      "evidence": "and the Tribunal is also required to determine as to whether such a subject-matter falls within the definition of\"service matters'', as contained in Section 3(o) of the AFT Act. In Major General S.B. Akali case•, the Principal Bench primarily went by this consideration. The subject-matter was promotion to the rank of Lieuten",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2017-mohammed-ansari-2017insc1259",
+  "doc_type": "judgment",
+  "title": "MOHAMMED ANSARI versus UNION OF INDIA & ORS.",
+  "number": "2017 INSC 1259",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2017-02-02",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2017_1_422_444_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010002472017",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2017 INSC 1259",
+  "reported_citations": [
+    "[2017] 1 S.C.R. 422"
+  ],
+  "parties": {
+    "petitioner": [
+      "MOHAMMED ANSARI"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "DIPAK MISRA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "4",
+      "raw": "Section 4 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "18",
+      "raw": "section 18 of the Army Act, 1950"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "18",
+      "raw": "section 18 of the Air Force Act, 1950"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "15",
+      "raw": "section 15 of the Navy Act, 1957"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "3",
+      "raw": "Section 3(o) of the AFT Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 59,
+    "keywords": {
+      "army act": 11,
+      "air force act": 6,
+      "navy act": 6,
+      "armed forces tribunal": 18,
+      "court martial": 18
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1998/english/S_1998_1_232_243_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:18:12+00:00",
+  "sha256": "c02b42ba26ac62c3e525f63834b3dca7c2670ae3f375e34d1bd51c141df000f5",
+  "raw_path": "data/raw/sci/1998/c02b42ba26ac62c3e525f63834b3dca7c2670ae3f375e34d1bd51c141df000f5.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 12,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1998-m-s-bindra-1998insc333.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "sc-1998-m-s-bindra-1998insc333",
+  "doc_type": "judgment",
+  "title": "M.S. BINDRA versus UNION OF INDIA AND ORS.",
+  "number": "1998 INSC 333",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1998-09-01",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "S_1998_1_232_243_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010003171998",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1998 INSC 333",
+  "reported_citations": [
+    "[1998] SUPP. 1 S.C.R. 232"
+  ],
+  "parties": {
+    "petitioner": [
+      "M.S. BINDRA"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "S. SAGHIR AHMAD"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "summary of evidence": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

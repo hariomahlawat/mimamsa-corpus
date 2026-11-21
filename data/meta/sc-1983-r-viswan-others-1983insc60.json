@@ -1,0 +1,169 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=1983/english/1983_3_60_92_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:17:14+00:00",
+  "sha256": "20a78326fc77d61bdfe1803691dfcbd59999100e6f0602ffdf518913a52db29f",
+  "raw_path": "data/raw/sci/1983/20a78326fc77d61bdfe1803691dfcbd59999100e6f0602ffdf518913a52db29f.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 33,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-1983-r-viswan-others-1983insc60.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1983-r-viswan-others-1983insc60",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s4",
+      "target_ref_raw": "s. 4 of Army Act, 1950",
+      "effective_date": null,
+      "evidence": "(1) and (4) of s. 4-'FOrce'-Meaning of General Resen•e Engineerring Force (GREF)-Whether it is 'fore:~· withill the 1neaning of sub-ss. (1) and (4) ofs. 4 of Army Act, 1950-Whether .n1en1bers ofGREF are me111hers of 'Arrned For\"·es' witirin tire nwaning of Art. 33 of Constitution-Whether S.R. Os. 329 and 330 ayplying pro",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1983-r-viswan-others-1983insc60",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s21",
+      "target_ref_raw": "s. 21 of the Army Act",
+      "effective_date": null,
+      "evidence": "orces or the Forces ch3rged with the maintenance of public order\" within the meaning of Art. 33 of the Constitution and' therefore the application of s. 21 of the Army Act rea11\" with rs. 19 to 21 of the Army Rules to them was unconstitutional since it restricted their fundamental rights in a manner not permitted by the",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1983-r-viswan-others-1983insc60",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s63",
+      "target_ref_raw": "s. 63 of the Army Act",
+      "effective_date": null,
+      "evidence": "(b) and (c) of Art. 19 (!) without any of the restrictions in1posed by rs. 19 to 21 of the Army Rules and therefore they could not be ch.arged under s. 63 of the Army Act on the facts alleged against them; that their trial was not in accordance with law; and that 'the. application of the provisions of the Army Act and",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1983-r-viswan-others-1983insc60",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s191",
+      "target_ref_raw": "section 191 of the Army Act 1950",
+      "effective_date": null,
+      "evidence": "in provisions of the Army ~ules, 1954 to tbe members of GREF in exercise of the powers conferred under section 21, sub-section (4) of section 102 and section 191 of the Army Act 1950 would be fortiori be valid. Now SRO 329 is issued by the Central Government under sub-sections (1) and (4) of section 4 of the Army Act 1950 which pr",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-1983-r-viswan-others-1983insc60",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s20",
+      "target_ref_raw": "Section 20 of the Army Act 1950",
+      "effective_date": null,
+      "evidence": "19 50 read with the Army Rules 1954, the former being disciplinary in character while the latter being clearly penal. It is significant to note that Section 20 of the Army Act 1950 which deals with dismissal, removal · or reduction of any person subject to that Act and clauses (d), (c), (f), (g) and (k) of Section 71 which provi",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-1983-r-viswan-others-1983insc60",
+  "doc_type": "judgment",
+  "title": "R. VISWAN & OTHERS versus UNION OF INDIA & OTHERS",
+  "number": "1983 INSC 60",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "1983-05-06",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "1983_3_60_92_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010001391983",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "1983 INSC 60",
+  "reported_citations": [
+    "[1983] 3 S.C.R. 60"
+  ],
+  "parties": {
+    "petitioner": [
+      "R. VISWAN & OTHERS"
+    ],
+    "respondent": [
+      "UNION OF INDIA & OTHERS"
+    ]
+  },
+  "judges": [
+    "Y.V. CHANDRACHUD"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "4",
+      "raw": "s. 4 of Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "21",
+      "raw": "s. 21 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "63",
+      "raw": "s. 63 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "191",
+      "raw": "section 191 of the Army Act 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "20",
+      "raw": "Section 20 of the Army Act 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 76,
+    "keywords": {
+      "army act": 62,
+      "court martial": 11,
+      "invalided": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2014/english/2014_11_447_462_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:19:34+00:00",
+  "sha256": "6f92473b87b41a264d864de05b34f164ab335d0c668ae8a42c494a4173d1e119",
+  "raw_path": "data/raw/sci/2014/6f92473b87b41a264d864de05b34f164ab335d0c668ae8a42c494a4173d1e119.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 16,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2014-b-d-khunte-2014insc753.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2014-b-d-khunte-2014insc753",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s69",
+      "target_ref_raw": "s. 69 of Army Act",
+      "effective_date": null,
+      "evidence": "BER 30, 2014 [T.S. THAKUR, ADARSH KUMAR GOEL AND . R. BANUMATHI, JJ.] Raribir Penal Code: A B c s.300, Exception 1, and s.302 of RanbirPenal Code and s. 69 of Army Act - Appel/ant-Jawan shot dead his superior because of an earlier incident of beating and humiliation - . Conviction and life sentence affirmed by High",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2014-b-d-khunte-2014insc753",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s300",
+      "target_ref_raw": "s. 300 of the IPC",
+      "effective_date": null,
+      "evidence": "d suffered may have acted as a motive for revenge against the deceased who had caused such humiliation but that is not what falls in , Exception 1 to s. 300 of the IPC which is identical to Exception 1 to s. 300 of the Ranbir Penal Code. [para 13, G 16 and 18] [958-F, G; 460-C-G; 457-E] . H K.M. Nanavati v. State of",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2014-b-d-khunte-2014insc753",
+  "doc_type": "judgment",
+  "title": "B.D. KHUNTE versus UNION OF INDIA & ORS.",
+  "number": "2014 INSC 753",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2014-10-30",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2014_11_447_462_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010000872014",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2014 INSC 753",
+  "reported_citations": [
+    "[2014] 11 S.C.R. 447"
+  ],
+  "parties": {
+    "petitioner": [
+      "B.D. KHUNTE"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "T.S. THAKUR"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "69",
+      "raw": "s. 69 of Army Act"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "300",
+      "raw": "s. 300 of the IPC"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 9,
+    "keywords": {
+      "army act": 5,
+      "court martial": 4
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

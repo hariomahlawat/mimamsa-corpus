@@ -1,0 +1,102 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/english/2019_9_843_850_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T16:20:06+00:00",
+  "sha256": "96b64fec9f14d6eb58501a1edb4ff247714a8f29ae478395ce0c035217fd6b13",
+  "raw_path": "data/raw/sci/2019/96b64fec9f14d6eb58501a1edb4ff247714a8f29ae478395ce0c035217fd6b13.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 8,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2019-union-of-india-and-others-2019insc818.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2019-union-of-india-and-others-2019insc818",
+      "type": "cites",
+      "target_doc_id": "act-ipc-1860#s302",
+      "target_ref_raw": "Section 302 of the IPC",
+      "effective_date": null,
+      "evidence": "lakhs. Disposing of the appeals, the Court Held: 1. The High Court has rightly directed to register a criminal case for the offence punishable under Section 302 of the IPC with respect to the death of victim and looking to the gravity [2019] 9 S.C.R. 843 843 A B C D E F G H 844 SUPREME COURT REPORTS [2019] 9 S.C.R. of t",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2019-union-of-india-and-others-2019insc818",
+  "doc_type": "judgment",
+  "title": "UNION OF INDIA AND OTHERS versus JUNU GAYARY",
+  "number": "2019 INSC 818",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2019-07-26",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2019_9_843_850_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010010332019",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2019 INSC 818",
+  "reported_citations": [
+    "[2019] 9 S.C.R. 843"
+  ],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA AND OTHERS"
+    ],
+    "respondent": [
+      "JUNU GAYARY"
+    ]
+  },
+  "judges": [
+    "M.R. SHAH"
+  ],
+  "outcome": "allowed",
+  "statutes_cited": [
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": "302",
+      "raw": "Section 302 of the IPC"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 4,
+    "keywords": {
+      "court martial": 4
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}
