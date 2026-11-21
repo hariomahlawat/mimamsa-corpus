@@ -14,7 +14,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Iterator
 
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 URL_STATUSES = ("queued", "fetched", "failed", "skipped")
 URL_KINDS = ("listing", "document", "robots")
@@ -110,6 +110,7 @@ class QueuedURL:
     attempts: int
     etag: str | None
     last_modified: str | None
+    meta: dict[str, Any]
 
 
 class StateDB:
@@ -131,7 +132,10 @@ class StateDB:
             raise RuntimeError(f"{self.path} has schema v{version}; this code knows v{SCHEMA_VERSION}")
         if version < 1:
             self.conn.executescript(_SCHEMA)
-            self.conn.execute(f"PRAGMA user_version={SCHEMA_VERSION}")
+        if version < 2:
+            # v2: free-form listing metadata (title, category, printed date, parent doc) per URL.
+            self.conn.execute("ALTER TABLE urls ADD COLUMN meta TEXT")
+        self.conn.execute(f"PRAGMA user_version={SCHEMA_VERSION}")
 
     def close(self) -> None:
         self.conn.close()
@@ -167,15 +171,17 @@ class StateDB:
 
     # ------------------------------------------------------------------ queue
     def enqueue(self, url: str, source: str, host: str, kind: str, *, doc_id_hint: str | None = None,
-                discovered_from: str | None = None, priority: int = 100) -> bool:
+                discovered_from: str | None = None, priority: int = 100,
+                meta: dict[str, Any] | None = None) -> bool:
         """Add a URL if unseen. Returns True if newly queued. Never resurrects fetched/failed/skipped URLs."""
         if kind not in URL_KINDS:
             raise ValueError(f"bad kind {kind!r}")
         cur = self.conn.execute(
             """INSERT OR IGNORE INTO urls
-               (url, source, host, kind, status, doc_id_hint, discovered_from, priority, first_seen_at)
-               VALUES (?,?,?,?, 'queued', ?,?,?,?)""",
-            (url, source, host, kind, doc_id_hint, discovered_from, priority, iso(utcnow())),
+               (url, source, host, kind, status, doc_id_hint, discovered_from, priority, first_seen_at, meta)
+               VALUES (?,?,?,?, 'queued', ?,?,?,?,?)""",
+            (url, source, host, kind, doc_id_hint, discovered_from, priority, iso(utcnow()),
+             json.dumps(meta, ensure_ascii=False) if meta else None),
         )
         return cur.rowcount == 1
 
@@ -198,7 +204,7 @@ class StateDB:
         sql += " ORDER BY priority, first_seen_at LIMIT ?"
         params.append(limit)
         return [QueuedURL(r["url"], r["source"], r["kind"], r["doc_id_hint"], r["attempts"],
-                          r["etag"], r["last_modified"])
+                          r["etag"], r["last_modified"], json.loads(r["meta"]) if r["meta"] else {})
                 for r in self.conn.execute(sql, params)]
 
     def get(self, url: str) -> sqlite3.Row | None:

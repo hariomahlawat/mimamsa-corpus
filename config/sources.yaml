@@ -36,6 +36,10 @@ sources:
       and every item listed under subordinate legislation (rules, regulations,
       notifications, orders) and amendments.
     collect_subordinate: true
+    # UNVERIFIED: written from memory, never tried against the live site. {query} = the target title.
+    # If search does not work, set `handle_url: https://www.indiacode.nic.in/handle/...` on a target
+    # (copied from a browser) and discovery skips the search.
+    search_url_template: "https://www.indiacode.nic.in/simple-search?query={query}"
     targets:
       # doc_id                                 short title as printed                                          year  status_hint
       - { doc_id: act-army-1950,                title: "The Army Act, 1950",                                     year: 1950 }

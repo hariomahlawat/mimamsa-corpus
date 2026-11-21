@@ -1,6 +1,35 @@
 # Progress
 
-## 2026-11-21 — Phase 1, step 2 (done, awaiting review)
+## 2026-11-21 — Phase 1, step 3 (built against SYNTHETIC pages; NOT verified on the live site)
+
+Done
+- `crawler/http.py`: PoliteClient, the only HTTP path. Allow-list on every hop (redirects included),
+  robots.txt (unreachable robots = disallow; Crawl-delay honoured), per-host delay, size cap, audit of
+  every request, stop on 401/403/login redirects, refuses live requests while the contact email is the
+  placeholder. Replay mode (`--replay DIR`) serves saved pages; `--record DIR` saves live pages.
+- `crawler/indiacode.py`: search -> Act page -> queue Act PDF + subordinate legislation PDFs.
+  Resolves a target only on exactly one exact title match; otherwise reports candidates.
+- `crawler/fetch.py` + `fetch --yes-download`: downloads queued documents to
+  `data/raw/<source>/<yyyy>/<sha256>.<ext>`; duplicates become aliases; non-PDF answers for PDF links fail.
+- CLI: `discover`, `fetch`; replay runs use separate state (`state/replay.sqlite`, `state/replay_data/`).
+- Crawl-state schema v2 (`urls.meta`: listing title, category, printed date, parent doc).
+- 65 tests passing.
+
+Unverified (needs the live site or real saved pages)
+- India Code page layout, link shapes (`/handle/`, `/bitstream/`, `ViewFileUploaded`) and the
+  `search_url_template` come from memory. `tests/fixtures/indiacode/` is hand-written, with invented
+  handles, dates and robots rules.
+- First real check: `python -m crawler discover --source indiacode --only act-army-1950 --record <dir>`
+  (listing pages only, 3 requests), then review the output before any `fetch`.
+
+Open points
+- Subordinate documents have no doc_id or year at download time (stored under `/0000/`); the metadata
+  stage assigns them.
+- Section pages (`show-data` links) are counted but not queued; decide in Phase 2 whether section
+  splitting uses them or the PDF.
+- Listing pages are not saved to data/raw (only their hash is kept).
+
+## 2026-11-21 — Phase 1, step 2 (approved)
 
 Done
 - `crawler/state.py`: SQLite crawl state (`state/crawl.sqlite`, WAL, schema v1): URL queue with

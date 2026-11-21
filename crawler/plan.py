@@ -6,6 +6,7 @@ pages; until then every source uses `config_planner`.
 """
 from __future__ import annotations
 
+import json
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from typing import Any, Callable
@@ -107,15 +108,18 @@ def config_planner(cfg: Config, db: StateDB, name: str) -> list[PlannedItem]:
 
     # Anything already queued in state that isn't covered above (e.g. discovered links, retries).
     covered = {i.url for i in items if i.url}
-    for r in db.conn.execute("SELECT url, kind, doc_id_hint, attempts, next_attempt_at FROM urls "
+    for r in db.conn.execute("SELECT url, kind, doc_id_hint, attempts, next_attempt_at, meta FROM urls "
                              "WHERE source=? AND status='queued' ORDER BY priority, first_seen_at", (name,)):
         if r["url"] in covered:
             continue
         waiting = r["next_attempt_at"] and r["next_attempt_at"] > iso(utcnow())
+        meta = json.loads(r["meta"]) if r["meta"] else {}
+        notes = [f"{k}: {meta[k]}" for k in ("category", "date_raw", "parent_doc_id") if meta.get(k)]
+        if r["attempts"]:
+            notes.append(f"attempt {r['attempts'] + 1}")
         items.append(PlannedItem(
-            "retry" if r["attempts"] else "queued", r["doc_id_hint"], None, r["url"], "queued",
-            f"wait until {r['next_attempt_at']}" if waiting else f"fetch {r['kind']}",
-            [f"attempt {r['attempts'] + 1}"] if r["attempts"] else []))
+            "retry" if r["attempts"] else "queued", r["doc_id_hint"], meta.get("title"), r["url"], "queued",
+            f"wait until {r['next_attempt_at']}" if waiting else f"fetch {r['kind']}", notes))
     return items
 
 

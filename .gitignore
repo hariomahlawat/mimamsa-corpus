@@ -12,3 +12,5 @@ state/logs/
 snapshots/**
 !**/.gitkeep
 reports/dry_run_*
+reports/discover_*
+state/replay_data/
