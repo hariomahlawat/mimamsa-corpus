@@ -112,6 +112,14 @@ def main(message: str) -> int:
         for r in local:
             if r["raw_path"] not in held:
                 fh.write(f"{r['sha256']}  {r['raw_path']}\n")
+    readme = WT / "README_RAW_DATA.md"                            # cross-link to the central copy
+    note = ("\n## Central copy\n\nThe complete data set is the private Hugging Face dataset "
+            "[hariomahlawat/mimamsa-corpus](https://huggingface.co/datasets/hariomahlawat/mimamsa-corpus). "
+            "This branch is a second copy; judgment PDFs stop being added here at the size limit "
+            "(see `on_this_branch` in `data/raw_manifest.csv`).\n")
+    if readme.exists() and "huggingface.co/datasets" not in readme.read_text(encoding="utf-8"):
+        readme.write_text(readme.read_text(encoding="utf-8") + note, encoding="utf-8")
+        git("add", "README_RAW_DATA.md")
     git("add", "-f", "-A", "data")
     ok = True
     if commit(f"Checkpoint: records and text — {message}"):

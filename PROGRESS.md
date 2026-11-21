@@ -1,5 +1,18 @@
 # Progress
 
+## 2026-11-21 — Hugging Face is the central data repository
+
+Decision (owner): the private Hugging Face dataset `hariomahlawat/mimamsa-corpus` holds ALL corpus
+data for the application; the GitHub `raw-data` branch is a second copy (raw files capped at 10 GB).
+- `scripts/push_hf.py` uploads every raw source folder, meta, sections, text, correspondence,
+  relations, manifests and now `schema/`. The statute files that were on GitHub (India Code, official
+  copies, 88 raw files), sections and correspondence tables were uploaded today; metadata, text and
+  judgments follow at the collection run's next checkpoint.
+- Cross-links: `README.md` (main), the dataset card, and `README_RAW_DATA.md` on `raw-data` (added at
+  the next checkpoint by `scripts/push_data.py`).
+- Collection run: High Courts expanded (Delhi all years, J&K, Punjab & Haryana, Allahabad), parallel
+  download for the open-data buckets only, checkpoint to both stores after each court.
+
 ## 2026-11-21 — Supreme Court and High Court judgments from the open-data buckets (downloads in progress)
 
 Decision (owner): collect SC and HC judgments from the AWS Open Data buckets; keep ONLY judgments

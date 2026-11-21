@@ -34,6 +34,10 @@ pretty_name: Mimamsa corpus (Indian military law)
 ---
 # Mimamsa corpus
 
+Central data repository for the Mimamsa application. Code, schemas and reports are on GitHub:
+[hariomahlawat/mimamsa-corpus](https://github.com/hariomahlawat/mimamsa-corpus) (private); its
+`raw-data` branch holds a second, size-limited copy of this data.
+
 Private working copy of a corpus of public Indian military-law documents: Acts and subordinate
 legislation from India Code, and judgments about the armed forces. Built by the crawler and
 pipeline in the project's code repository; every file is traceable through `data/raw_manifest.csv`
@@ -43,6 +47,8 @@ pipeline in the project's code repository; every file is traceable through `data
 - `data/meta/`, `data/sections/`, `data/text/`: metadata records, section records, extracted text.
 - `data/correspondence/`: old-code/new-code section tables.
 - `data/excluded_judgments.jsonl`: judgments removed as not about the armed forces (log only).
+- `schema/`: the JSON Schemas every record validates against (copied from the code repository).
+- Verify after download: `sha256sum -c data/SHA256SUMS`.
 
 Sources include third-party open data (AWS Open Data court-judgment buckets, CC-BY-4.0, P. Vanga /
 Dattam Labs). Some documents carry access markings; see `access_marking` in their metadata.
@@ -122,6 +128,8 @@ def main(argv: list[str] | None = None) -> int:
         uploaded += 1
     api.upload_folder(repo_id=repo, repo_type="dataset", folder_path=str(DATA), path_in_repo="data",
                       allow_patterns=[f for f in FILES if f != "README.md"], commit_message=f"manifests — {args.message}")
+    api.upload_folder(repo_id=repo, repo_type="dataset", folder_path=str(ROOT / "schema"), path_in_repo="schema",
+                      commit_message=f"schema — {args.message}")
     api.upload_file(repo_id=repo, repo_type="dataset", path_or_fileobj=str(DATA / "README.md"), path_in_repo="README.md",
                     commit_message=f"dataset card — {args.message}")
     (DATA / "README.md").unlink(missing_ok=True)
