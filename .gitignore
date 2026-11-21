@@ -20,3 +20,5 @@ data/ocr/
 data/raw_manifest.csv
 data/SHA256SUMS
 data/README.md
+state/collect_progress.json
+state/collect.stop
