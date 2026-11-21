@@ -20,6 +20,12 @@ Results
   Rules 1969 and AFT (Procedure) Rules 2008 are to come from India Code's subordinate-legislation
   listings; `expect_subordinate` on those targets makes discovery warn if one is not listed.
   Still without a source: Regulations for the Army 1987 (India Code search first) and any MoD-only manuals.
+- From the user's PC in India (same day): mod.gov.in AND indiacode.nic.in both answer 403 to robots.txt
+  and the first page. So the block follows the identification string, not the address.
+  Change: contact email moved from User-Agent to the HTTP `From` header (`defaults.contact_email`);
+  User-Agent stays descriptive, no browser impersonation. Awaiting one retest from the PC.
+  If still 403: stop; options are asking NIC how automated access should be done, or manual
+  browser downloads fed in as `manual_upload`.
 - archive.org: OK. robots.txt allows the search API. Title searches found the Indian Army Act 1911,
   the Manual of Indian Military Law (1911 and 1937) and British Manual of Military Law scans;
   identifiers recorded under `sources.archive.candidates` (unreviewed).

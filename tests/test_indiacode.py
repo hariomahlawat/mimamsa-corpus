@@ -74,7 +74,7 @@ def site(pages, robots="User-agent: *\nDisallow: /private/\n"):
 # ------------------------------------------------------------ polite client
 def placeholder_config(tmp_path) -> Path:
     raw = yaml.safe_load(DEFAULT_CONFIG.read_text(encoding="utf-8"))
-    raw["defaults"]["user_agent"] = "MimamsaCorpusBot/0.1 (contact: CHANGE-ME@example.org)"
+    raw["defaults"]["contact_email"] = "CHANGE-ME@example.org"
     p = tmp_path / "placeholder.yaml"
     p.write_text(yaml.safe_dump(raw), encoding="utf-8")
     return p
@@ -83,6 +83,19 @@ def placeholder_config(tmp_path) -> Path:
 def test_live_client_refuses_placeholder_user_agent(db, tmp_path):
     with pytest.raises(UserAgentNotSet):
         PoliteClient(load_config(placeholder_config(tmp_path)), AuditLog(tmp_path / "logs", db, None), "indiacode")
+
+
+def test_identifies_itself_with_from_header_not_email_in_user_agent(cfg, db, tmp_path):
+    seen = []
+
+    def handler(req):
+        seen.append((req.headers.get("user-agent"), req.headers.get("from")))
+        return httpx.Response(404) if req.url.path == "/robots.txt" else httpx.Response(200, text="x")
+    make_client(cfg, db, tmp_path, handler).get(f"{BASE}/a")
+    assert len(seen) == 2
+    for ua, sender in seen:
+        assert ua == cfg.defaults["user_agent"] and "@" not in ua and "Mozilla" not in ua
+        assert sender == cfg.defaults["contact_email"] and "@" in sender
 
 
 def test_rate_limit_per_host(cfg, db, tmp_path):

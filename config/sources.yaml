@@ -7,8 +7,12 @@
 schema_version: "0.1.0"
 
 defaults:
-  # Refuse to start while this is still the placeholder.
-  user_agent: "Mimamsa-Corpus/0.1 (research collection of public military-law texts; contact:hariomahlawat@gmail.com)"
+  # The crawler names itself in User-Agent and gives its contact address in the HTTP `From` header
+  # (RFC 9110, section 10.1.2: the address of the person responsible for an automated client).
+  # The email used to sit inside user_agent; mod.gov.in and indiacode.nic.in answered 403 to that
+  # string (2026-11-21), so it was moved. Live runs refuse to start while contact_email is the placeholder.
+  user_agent: "Mimamsa-Corpus/0.1 (research collection of public military-law texts)"
+  contact_email: "hariomahlawat@gmail.com"
   min_delay_seconds: 2.0          # per host, at most 1 request every 2 s
   timeout_seconds: 60
   max_retries: 5                  # exponential backoff on timeouts and 5xx, then give up and log

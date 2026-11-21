@@ -18,6 +18,7 @@ DOC_ID_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 
 REQUIRED_DEFAULTS = {
     "user_agent": str,
+    "contact_email": str,
     "min_delay_seconds": (int, float),
     "timeout_seconds": (int, float),
     "max_retries": int,
@@ -104,7 +105,8 @@ class Config:
         return True, "ok"
 
     def user_agent_is_placeholder(self) -> bool:
-        return PLACEHOLDER_EMAIL.lower() in self.defaults["user_agent"].lower()
+        email = self.defaults["contact_email"].strip().lower()
+        return email == PLACEHOLDER_EMAIL.lower() or "@" not in email
 
     def in_quiet_hours(self, now: datetime | None = None) -> bool:
         """True if `now` falls in the IST window when heavy sources may run."""
@@ -174,7 +176,7 @@ def check_config(cfg: Config) -> ConfigReport:
         except Exception:
             r.errors.append(f"defaults.quiet_hours_ist.{k} must be HH:MM")
     if cfg.user_agent_is_placeholder():
-        r.warnings.append("user_agent still has the placeholder contact email; real runs will refuse to start")
+        r.warnings.append("contact_email is still the placeholder; real runs will refuse to start")
 
     blocked = cfg.blocked_hosts
     seen_ids: dict[str, str] = {}

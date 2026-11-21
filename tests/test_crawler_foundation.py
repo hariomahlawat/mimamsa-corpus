@@ -50,7 +50,7 @@ def test_real_config_has_no_errors(cfg):
 
 def test_placeholder_email_is_flagged(tmp_path):
     def m(r):
-        r["defaults"]["user_agent"] = "MimamsaCorpusBot/0.1 (contact: CHANGE-ME@example.org)"
+        r["defaults"]["contact_email"] = "CHANGE-ME@example.org"
     c = write_cfg(tmp_path, m)
     assert c.user_agent_is_placeholder()
     assert any("placeholder" in w for w in check_config(c).warnings)

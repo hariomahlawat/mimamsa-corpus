@@ -117,7 +117,7 @@ class PoliteClient:
                  clock: Callable[[], float] = time.monotonic,
                  record_dir: Path | None = None):
         if not replay and cfg.user_agent_is_placeholder():
-            raise UserAgentNotSet("set a real contact email in defaults.user_agent before any live request")
+            raise UserAgentNotSet("set a real contact email in defaults.contact_email before any live request")
         self.cfg, self.audit, self.source, self.replay = cfg, audit, source, replay
         self.sleep = (lambda s: None) if replay and sleep is time.sleep else sleep
         self.clock = clock
@@ -126,7 +126,8 @@ class PoliteClient:
         self.record_dir = record_dir
         self.client = httpx.Client(transport=transport, follow_redirects=False,
                                    timeout=float(cfg.setting(source, "timeout_seconds")),
-                                   headers={"User-Agent": cfg.defaults["user_agent"]})
+                                   headers={"User-Agent": cfg.defaults["user_agent"],
+                                            "From": cfg.defaults["contact_email"]})
         self._last: dict[str, float] = {}
         self._delay: dict[str, float] = {}
         self._robots: dict[str, robotparser.RobotFileParser | bool] = {}
