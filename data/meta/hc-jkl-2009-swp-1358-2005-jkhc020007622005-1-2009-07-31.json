@@ -1,0 +1,98 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2009/court=1_12/bench=jammuhc/JKHC020007622005_1_2009-07-31.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T19:57:53+00:00",
+  "sha256": "1a47a0bf695a94742ea463c434f75bb04acd746321269dbd3c644374e785edd4",
+  "raw_path": "data/raw/hc/2009/1a47a0bf695a94742ea463c434f75bb04acd746321269dbd3c644374e785edd4.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 9,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2009-swp-1358-2005-jkhc020007622005-1-2009-07-31.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-jkl-2009-swp-1358-2005-jkhc020007622005-1-2009-07-31",
+  "doc_type": "judgment",
+  "title": "SWP/1358/2005 of MADAN LAL Vs UNION OF INDIA TH. DEFENCE AND ORS.",
+  "number": "SWP/1358/2005",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2009-07-31",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020007622005_1_2009-07-31.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020007622005",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "SWP/1358/2005"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MADAN LAL"
+    ],
+    "respondent": [
+      "UNION OF INDIA TH. DEFENCE AND ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SUNIL HALI"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": null,
+      "raw": "Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "entitlement_rules",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 13,
+    "keywords": {
+      "army act": 1,
+      "disability pension": 10,
+      "entitlement rules": 1,
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}
