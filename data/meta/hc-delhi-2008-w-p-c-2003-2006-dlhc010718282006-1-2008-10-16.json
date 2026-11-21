@@ -1,0 +1,202 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2008/court=7_26/bench=dhcdb/DLHC010718282006_1_2008-10-16.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:54:09+00:00",
+  "sha256": "b6029d1b257beda2039081e15c4d5aef8d50a78366bfbfbdb13befc7af7ac0cf",
+  "raw_path": "data/raw/hc/2008/b6029d1b257beda2039081e15c4d5aef8d50a78366bfbfbdb13befc7af7ac0cf.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 27,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2008-w-p-c-2003-2006-dlhc010718282006-1-2008-10-16.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-2003-2006-dlhc010718282006-1-2008-10-16",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s160",
+      "target_ref_raw": "Section 160 of the Army Act",
+      "effective_date": null,
+      "evidence": "d him of all the charges by holding him „Not Guilty‟. The confirming Authority instead of confirming the report exercised its right of revision under Section 160 of the Army Act (hereinafter „Act‟) and remanded back the matter to the GCM with certain directions. On remand the GCM recorded additional evidence and examined some",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-2003-2006-dlhc010718282006-1-2008-10-16",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s164",
+      "target_ref_raw": "Section 164(2) of the Army Act",
+      "effective_date": null,
+      "evidence": "or his promotion to the rank of Lt. Colonel which was delayed considerably. A petition filed by the petitioner challenging the aforesaid action under Section 164(2) of the Army Act was rejected by the Competent Authority vide order dated 22.7.2003. Hence the petitioner filed the present writ petition with the following prayers:",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-2003-2006-dlhc010718282006-1-2008-10-16",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s122",
+      "target_ref_raw": "Section 122 of the Army Act",
+      "effective_date": null,
+      "evidence": "my Staff (1978 Lab IC 9) and (iii) J.S. Kang Vs. UOI, 1987 Lab IC 1839. 8. It is also his case that the impugned action is barred by limitation under Section 122 of the Army Act which prescribes limitation of three years from the date of offence or at best form the date of the knowledge of the offence for taking disciplinary",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-2003-2006-dlhc010718282006-1-2008-10-16",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s19",
+      "target_ref_raw": "section 19 of the Army Act",
+      "effective_date": null,
+      "evidence": "be revised in accordance with Section 160 of the Army Act. However, when the proceedings are not confirmed, the competent authority can proceed under section 19 of the Army Act read with Army Rule 14(2). It is submitted that Section 122 of the Army Act is not applicable in the present case being a case of administrative acti",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-2003-2006-dlhc010718282006-1-2008-10-16",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s121",
+      "target_ref_raw": "Section 121 of the Army Act",
+      "effective_date": null,
+      "evidence": "had been confirmed under the provisions of the Air Force Act, and that in such a case Section 120 of the Air Force Act (which is in pari materia with Section 121 of the Army Act) barred a second trial by a court-martial. In Major Manohar Lal v. The Union of India and Anr. 1971 (1) S.L.R. 717 the petitioner was tried by a gene",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-2003-2006-dlhc010718282006-1-2008-10-16",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s52",
+      "target_ref_raw": "Section 52 of the Army Act",
+      "effective_date": null,
+      "evidence": "the said butchery was tried by GCM and found guilty of the offences under Army Act Section 52(f) for such an offence as is mentioned in clause (f) of Section 52 of the Army Act with intent to defraud (on two counts) the particulars averring “that he at Lucknow, on the nioght of 04/05 Mar 95, being the JCO incharge, 44 Coy AS",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-2003-2006-dlhc010718282006-1-2008-10-16",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s120",
+      "target_ref_raw": "Section 120 of the Air Force Act",
+      "effective_date": null,
+      "evidence": "-martial existed, they could not be put into effect unless they had been confirmed under the provisions of the Air Force Act, and that in such a case Section 120 of the Air Force Act (which is in pari materia with Section 121 of the Army Act) barred a second trial by a court-martial. In Major Manohar Lal v. The Union of India and",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2008-w-p-c-2003-2006-dlhc010718282006-1-2008-10-16",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/2003/2006 of LT COL S.S.SHEKHAWAT Vs U.O.I",
+  "number": "W.P.(C)/2003/2006",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2008-10-16",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010718282006_1_2008-10-16.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010718282006",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/2003/2006"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "LT COL S.S.SHEKHAWAT"
+    ],
+    "respondent": [
+      "U.O.I"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE MOOL CHAND GARG"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "160",
+      "raw": "Section 160 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "164",
+      "raw": "Section 164(2) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "122",
+      "raw": "Section 122 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "19",
+      "raw": "section 19 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "121",
+      "raw": "Section 121 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "52",
+      "raw": "Section 52 of the Army Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "120",
+      "raw": "Section 120 of the Air Force Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 100,
+    "keywords": {
+      "army act": 31,
+      "air force act": 4,
+      "court martial": 65
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

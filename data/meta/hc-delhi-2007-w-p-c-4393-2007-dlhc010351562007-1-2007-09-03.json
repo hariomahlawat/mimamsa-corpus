@@ -1,0 +1,95 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2007/court=7_26/bench=dhcdb/DLHC010351562007_1_2007-09-03.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:55:16+00:00",
+  "sha256": "abd646c490f6ff212e38eff30e03010b7af3e6dc3f61405b228b39ab9c35f93e",
+  "raw_path": "data/raw/hc/2007/abd646c490f6ff212e38eff30e03010b7af3e6dc3f61405b228b39ab9c35f93e.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 21,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2007-w-p-c-4393-2007-dlhc010351562007-1-2007-09-03.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2007-w-p-c-4393-2007-dlhc010351562007-1-2007-09-03",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/4393/2007 of MAJOR GENERAL B.P.S.MANDER Vs UOI & ORS.",
+  "number": "W.P.(C)/4393/2007",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2007-09-03",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010351562007_1_2007-09-03.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010351562007",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/4393/2007"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MAJOR GENERAL B.P.S.MANDER"
+    ],
+    "respondent": [
+      "UOI & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE VIKRAMAJIT SEN",
+    "HON'BLE MR. JUSTICE S.L.BHAYANA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": null,
+      "raw": "Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 10,
+    "keywords": {
+      "army act": 2,
+      "court martial": 8
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

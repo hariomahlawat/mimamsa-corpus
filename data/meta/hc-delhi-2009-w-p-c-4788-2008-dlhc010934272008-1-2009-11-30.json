@@ -1,0 +1,143 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2009/court=7_26/bench=dhcdb/DLHC010934272008_1_2009-11-30.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:52:56+00:00",
+  "sha256": "6bf3505baf3dafcd5d5c8622b10b38a0b49db413c298327d83d8844dc5b5792e",
+  "raw_path": "data/raw/hc/2009/6bf3505baf3dafcd5d5c8622b10b38a0b49db413c298327d83d8844dc5b5792e.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 74,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2009-w-p-c-4788-2008-dlhc010934272008-1-2009-11-30.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2009-w-p-c-4788-2008-dlhc010934272008-1-2009-11-30",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s154",
+      "target_ref_raw": "Section 154 of the Code of Criminal Procedure, 1973",
+      "effective_date": null,
+      "evidence": "the RTI Act as they are material in form of record, documents or reports which are held by the public authority. 88. First Information Report as per Section 154 of the Code of Criminal Procedure, 1973 (hereinafter referred to as Code, for short) is the first information recorded in writing by an officer in-charge of a police station and read over t",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2009-w-p-c-4788-2008-dlhc010934272008-1-2009-11-30",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s123",
+      "target_ref_raw": "Section 123 of the Evidence Act, 1872",
+      "effective_date": null,
+      "evidence": "rticle refers to inquiry by courts but will equally apply to CIC. 25. Bhagwati, J. (as his Lordship then was), has proceeded to examine and interpret Section 123 of the Evidence Act, 1872 and the protection on the basis of State privilege or public interest immunity. WPC NO.7304/2007 + CONNECTED MATTERS Page 28 Section 22 of the RTI Ac",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2009-w-p-c-4788-2008-dlhc010934272008-1-2009-11-30",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s74",
+      "target_ref_raw": "Sections 74 and 76 of the Evidence Act, 1872",
+      "effective_date": null,
+      "evidence": "e cognizance of the said offence. There are judicial decisions in which FIR has been held to be a public document under the Evidence Act, 1872. Under Sections 74 and 76 of the Evidence Act, 1872 a person who has right to inspect a public document also has a right to demand copy of the same. Right to inspect a public document is not an absolut",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2009-w-p-c-4788-2008-dlhc010934272008-1-2009-11-30",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/4788/2008 of UOI THR. SECRETARY MINISTRY OF DEFENCE & ANR. Vs THE CENTRAL INFORMATION COMMISSION THR. ITS REGISTRAR & ANR.",
+  "number": "W.P.(C)/4788/2008",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2009-11-30",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010934272008_1_2009-11-30.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010934272008",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/4788/2008"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UOI THR. SECRETARY MINISTRY OF DEFENCE & ANR."
+    ],
+    "respondent": [
+      "THE CENTRAL INFORMATION COMMISSION THR. ITS REGISTRAR & ANR."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SANJIV KHANNA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": null,
+      "raw": "Army Act"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "154",
+      "raw": "Section 154 of the Code of Criminal Procedure, 1973"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "123",
+      "raw": "Section 123 of the Evidence Act, 1872"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "74",
+      "raw": "Sections 74 and 76 of the Evidence Act, 1872"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 4,
+    "keywords": {
+      "army act": 1,
+      "court martial": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

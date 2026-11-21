@@ -1,0 +1,166 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2008/court=7_26/bench=dhcdb/DLHC010706402006_1_2008-02-08.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:54:09+00:00",
+  "sha256": "3ee00205bee32fb65f71b063b3b69315bd280545a04e751474c9c34827953173",
+  "raw_path": "data/raw/hc/2008/3ee00205bee32fb65f71b063b3b69315bd280545a04e751474c9c34827953173.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 13,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2008-w-p-c-17349-2006-dlhc010706402006-1-2008-02-08.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-17349-2006-dlhc010706402006-1-2008-02-08",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s20",
+      "target_ref_raw": "Section 20(3) of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "a dispute with these facts. 2. The GOC Delhi area while exercising administrative power awarded another punishment of “dismissal from service” under Section 20(3) of the Army Act, 1950 (hereinafter to be referred as Army Act) read with Rule 17 of Army Rules for the same charge. Aggrieved by that order the present petition was filed",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-17349-2006-dlhc010706402006-1-2008-02-08",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s164",
+      "target_ref_raw": "Section 164 of the Army Act",
+      "effective_date": null,
+      "evidence": "rocedure has not been complied with shall be reported to the Central Government.” It must be borne in mind that in the instant case no petition under Section 164 of the Army Act was moved. It will not be advisable at this late stage to direct the petitioner to move the petition under Section 164 of the Army Act. We have, ther",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-17349-2006-dlhc010706402006-1-2008-02-08",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s153",
+      "target_ref_raw": "Sections 153, 154 and 160 of the Army Act",
+      "effective_date": null,
+      "evidence": "India and others, 2002(64) DRJ 379 (consisting of S.B. Sinha, Chief Justice, as he then was and one of us viz. A.K. Sikri, J) upheld the validity of Sections 153, 154 and 160 of the Army Act. WP(C) No.17349/2006 Page 8 of 13 The last section deals with revision of finding or sentence, relied upon three cases one pertaining to the Apex Cou",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-17349-2006-dlhc010706402006-1-2008-02-08",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s121",
+      "target_ref_raw": "Section 121 of the Army Act",
+      "effective_date": null,
+      "evidence": "11. It must be noticed that framers of the Army Act were well WP(C) No.17349/2006 Page 11 of 13 aware of the concept of double jeopardy. That is why Section 121 of the Army Act specifically ingrained this concept, which is reproduced as follows : “121. Prohibition of second trial – When any person subject to this Act has bee",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2008-w-p-c-17349-2006-dlhc010706402006-1-2008-02-08",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/17349/2006 of EX SEPOY ANAND PAL Vs UOI & ORS.",
+  "number": "W.P.(C)/17349/2006",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2008-02-08",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010706402006_1_2008-02-08.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010706402006",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/17349/2006"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "EX SEPOY ANAND PAL"
+    ],
+    "respondent": [
+      "UOI & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE J.M.MALIK",
+    "HON'BLE MR. JUSTICE A.K.SIKRI"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "20",
+      "raw": "Section 20(3) of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "164",
+      "raw": "Section 164 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "153",
+      "raw": "Sections 153, 154 and 160 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "121",
+      "raw": "Section 121 of the Army Act"
+    },
+    {
+      "act": "Indian Penal Code 1860",
+      "act_doc_id": "act-ipc-1860",
+      "section": null,
+      "raw": "Indian Penal Code"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": null,
+      "raw": "Criminal Procedure Code"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 36,
+    "keywords": {
+      "army act": 16,
+      "court martial": 20
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

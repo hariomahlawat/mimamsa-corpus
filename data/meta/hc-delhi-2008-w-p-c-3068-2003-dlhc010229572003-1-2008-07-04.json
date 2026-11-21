@@ -1,0 +1,116 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2008/court=7_26/bench=dhcdb/DLHC010229572003_1_2008-07-04.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:54:09+00:00",
+  "sha256": "d4a4eeeacbf164103bcfe50b184fd28888e20a0cf9ee94a0c55fe433d428be16",
+  "raw_path": "data/raw/hc/2008/d4a4eeeacbf164103bcfe50b184fd28888e20a0cf9ee94a0c55fe433d428be16.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 27,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2008-w-p-c-3068-2003-dlhc010229572003-1-2008-07-04.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-3068-2003-dlhc010229572003-1-2008-07-04",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s19",
+      "target_ref_raw": "Section 19 of the Army Act 1950",
+      "effective_date": null,
+      "evidence": "1.10.2001 vide which his services have been terminated by the Central Government in WP (C) No. 3068/2003 Page 2 of 27 exercise of powers conferred by Section 19 of the Army Act 1950 read with Rule 15 of the Army Rules, 1954. This order reads as under:- “No. 12(2)/99-D(MS) Government of India Ministry of Defence New Delhi, dated 3",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-3068-2003-dlhc010229572003-1-2008-07-04",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s142",
+      "target_ref_raw": "Section 142(2) of the Army Act",
+      "effective_date": null,
+      "evidence": "Majors holding permanent commissions. Relying upon the said entry in the notification WP (C) No. 3068/2003 Page 18 of 27 the petitioner contends that Section 142(2) of the Army Act clearly stipulates that notification is to be treated as invalid authority and evidence for all purpose and therefore, it has to be held that the pet",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2008-w-p-c-3068-2003-dlhc010229572003-1-2008-07-04",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/3068/2003 of EX-CAPTAIN GULAB SINGH RANA Vs UOI",
+  "number": "W.P.(C)/3068/2003",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2008-07-04",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010229572003_1_2008-07-04.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010229572003",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/3068/2003"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "EX-CAPTAIN GULAB SINGH RANA"
+    ],
+    "respondent": [
+      "UOI"
+    ]
+  },
+  "judges": [],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "19",
+      "raw": "Section 19 of the Army Act 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "142",
+      "raw": "Section 142(2) of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 9,
+    "keywords": {
+      "army act": 9
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

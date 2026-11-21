@@ -1,0 +1,215 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2009/court=7_26/bench=dhcdb/DLHC010838732007_1_2009-04-28.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:52:56+00:00",
+  "sha256": "5d788aa032155e8f08a81122b4e63e90fb62a06762b3a44ce2b99bc95e3d0024",
+  "raw_path": "data/raw/hc/2009/5d788aa032155e8f08a81122b4e63e90fb62a06762b3a44ce2b99bc95e3d0024.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 15,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2009-crl-rev-p-482-2007-dlhc010838732007-1-2009-04-28.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2009-crl-rev-p-482-2007-dlhc010838732007-1-2009-04-28",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s126",
+      "target_ref_raw": "Section 126 of the Army Act",
+      "effective_date": null,
+      "evidence": ". 1 from the custody of the Civil Courts to the custody of the Commanding Officer who wishes to try the said respondent through a Court-martial under Section 126 of the Army Act. 2. Briefly stating the case of the petitioner is, that after coming to know from a source information that the respondent no.1 was involved in espio",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2009-crl-rev-p-482-2007-dlhc010838732007-1-2009-04-28",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s125",
+      "target_ref_raw": "Section 125 of the Army Act",
+      "effective_date": null,
+      "evidence": "n Judge to seek permission for recording the statement of respondent in the procedural Court of Enquiry as told by the ASJ a proper application under Section 125 of the Army Act for transfer of the first respondent to Army Authorities and for instituting proceedings against him before a Court-martial was also filed. However,",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2009-crl-rev-p-482-2007-dlhc010838732007-1-2009-04-28",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s104",
+      "target_ref_raw": "Section 104 of the Army Act",
+      "effective_date": null,
+      "evidence": ": Crl.REV.P. 482/2007 Page 10 of 15 “3(viii) “criminal court” means a court of ordinary criminal justice in any part of India.‟ iv) That furthermore, Section 104 of the Army Act, clearly proved that wherever any person subject to Army Act, who is accused of any offence under the Army Act is within the jurisdiction of any Magi",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2009-crl-rev-p-482-2007-dlhc010838732007-1-2009-04-28",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s124",
+      "target_ref_raw": "Section 124 of the Air Force Act, 1950",
+      "effective_date": null,
+      "evidence": "in Sub-Section (1) of Sec. 549 of the said Code to the authority specified in the said Sub-Section.\" 7. In the same judgment it was further observed: Section 124 of the Air Force Act, 1950, provides that when a Criminal Court and a Court-Martial have each jurisdiction in respect of an offence, it shall be in the discretion of the Chief",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2009-crl-rev-p-482-2007-dlhc010838732007-1-2009-04-28",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s125",
+      "target_ref_raw": "Sec. 125 of Air Force Act",
+      "effective_date": null,
+      "evidence": "that officer decides that they should be instituted before a Court- Martial to direct that the accused person shall be detained in Air Force custody. Sec. 125 of Air Force Act is in the following terms :- \"(1) When a criminal Court having jurisdiction is of opinion that proceedings shall be instituted before itself in respe",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2009-crl-rev-p-482-2007-dlhc010838732007-1-2009-04-28",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s475",
+      "target_ref_raw": "Section 475 of Cr.P.C",
+      "effective_date": null,
+      "evidence": "ddl. Sessions Judge in having rejected the request made by the petitioner which goes to show that after taking note of the provisions contained under Section 475 of Cr.P.C. which requires delivery of an accused to the Crl.REV.P. 482/2007 Page 3 of 15 Commanding Officer liable to be tried by a Court-martial, if asked for",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2009-crl-rev-p-482-2007-dlhc010838732007-1-2009-04-28",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s175",
+      "target_ref_raw": "Section 175 of the Code of Criminal Procedure",
+      "effective_date": null,
+      "evidence": "on there is no stipulation that the accused cannot be delivered to military custody after committal of the case to sessions Court. v) Further even in Section 175 of the Code of Criminal Procedure it is clearly provided that it is only when a person subject to military law is charged with an offence for which he is liable to be tried either by",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2009-crl-rev-p-482-2007-dlhc010838732007-1-2009-04-28",
+  "doc_type": "judgment",
+  "title": "CRL.REV.P./482/2007 of COMMANDING OFFICER 14CORPS OPERATIONG SIG. REGIMENT C/O 56 APO Vs RITESH KUMA RVISHWAKARMA & ANR",
+  "number": "CRL.REV.P./482/2007",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2009-04-28",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010838732007_1_2009-04-28.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010838732007",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "CRL.REV.P./482/2007"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "COMMANDING OFFICER 14CORPS OPERATIONG SIG. REGIMENT C/O 56 APO"
+    ],
+    "respondent": [
+      "RITESH KUMA RVISHWAKARMA & ANR"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE MOOL CHAND GARG"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "126",
+      "raw": "Section 126 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "125",
+      "raw": "Section 125 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "104",
+      "raw": "Section 104 of the Army Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "124",
+      "raw": "Section 124 of the Air Force Act, 1950"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "125",
+      "raw": "Sec. 125 of Air Force Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": null,
+      "raw": "Navy Act"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "475",
+      "raw": "Section 475 of Cr.P.C"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "549",
+      "raw": "Section 549 of the Code of Criminal Procedure"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "175",
+      "raw": "Section 175 of the Code of Criminal Procedure"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 89,
+    "keywords": {
+      "army act": 29,
+      "air force act": 9,
+      "navy act": 2,
+      "court martial": 49
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

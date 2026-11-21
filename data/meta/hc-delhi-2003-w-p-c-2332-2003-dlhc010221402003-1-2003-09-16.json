@@ -1,0 +1,82 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2003/court=7_26/bench=dhcdb/DLHC010221402003_1_2003-09-16.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:59:48+00:00",
+  "sha256": "3b16026fdc70c8ffc8b37e521d62fc2c71da02bfb9e0eb190680609c8975fd0a",
+  "raw_path": "data/raw/hc/2003/3b16026fdc70c8ffc8b37e521d62fc2c71da02bfb9e0eb190680609c8975fd0a.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2003-w-p-c-2332-2003-dlhc010221402003-1-2003-09-16.txt",
+  "text_quality": "suspect",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2003-w-p-c-2332-2003-dlhc010221402003-1-2003-09-16",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/2332/2003 of EX.SEP/DVR.SANT KUMAR Vs UOI & ORS.",
+  "number": "W.P.(C)/2332/2003",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2003-09-16",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010221402003_1_2003-09-16.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010221402003",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/2332/2003"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "EX.SEP/DVR.SANT KUMAR"
+    ],
+    "respondent": [
+      "UOI & ORS."
+    ]
+  },
+  "judges": [],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

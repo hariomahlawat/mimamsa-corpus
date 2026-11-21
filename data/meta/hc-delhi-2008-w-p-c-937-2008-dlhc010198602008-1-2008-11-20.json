@@ -1,0 +1,94 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2008/court=7_26/bench=dhcdb/DLHC010198602008_1_2008-11-20.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:54:09+00:00",
+  "sha256": "664ecaf6191a61046925e3619e88ea284cf4d2dae156d955b439eaaf87b0de28",
+  "raw_path": "data/raw/hc/2008/664ecaf6191a61046925e3619e88ea284cf4d2dae156d955b439eaaf87b0de28.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 8,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2008-w-p-c-937-2008-dlhc010198602008-1-2008-11-20.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2008-w-p-c-937-2008-dlhc010198602008-1-2008-11-20",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/937/2008 of HAVILDAR RAMESH CHANDRA MISHRA Vs UOI & ORS",
+  "number": "W.P.(C)/937/2008",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2008-11-20",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010198602008_1_2008-11-20.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010198602008",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/937/2008"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "HAVILDAR RAMESH CHANDRA MISHRA"
+    ],
+    "respondent": [
+      "UOI & ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE MOOL CHAND GARG"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": null,
+      "raw": "Army Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 2,
+    "keywords": {
+      "army act": 1,
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

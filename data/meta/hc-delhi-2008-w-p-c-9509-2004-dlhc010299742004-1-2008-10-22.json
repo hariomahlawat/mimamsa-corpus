@@ -1,0 +1,306 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2008/court=7_26/bench=dhcdb/DLHC010299742004_1_2008-10-22.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:54:09+00:00",
+  "sha256": "e444bd83f19e4624eec8f142f610c9e0cb4862e98185e70b6b75dcd8d8544fa6",
+  "raw_path": "data/raw/hc/2008/e444bd83f19e4624eec8f142f610c9e0cb4862e98185e70b6b75dcd8d8544fa6.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 50,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2008-w-p-c-9509-2004-dlhc010299742004-1-2008-10-22.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-9509-2004-dlhc010299742004-1-2008-10-22",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s77",
+      "target_ref_raw": "Section 77(2) of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "iring assets disproportionate to his known sources of income under Section 13(1)(d) r/w 13(2) of the Prevention of Corruption Act, 1969 as also under Section 77(2) of the Navy Act, 1957 (for short „the said Act‟). He was tried by a General Court Martial which found him guilty of charges No. 2, 3, 5, 6, 8, 9, 10, 13, 15 and 17 and sen",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-9509-2004-dlhc010299742004-1-2008-10-22",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s54",
+      "target_ref_raw": "Section 54(2) of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "prietor of M/s Computer Stationery, Mumbai, suppliers of computer related items to the Indian Navy, and thereby committed an offence punishable under Section 54(2) of the Navy Act, 1957. (5) Did at about 1330 hrs on 13 February, 2003 being a public servant posted as Joint Controller Procurement (Central Purchase) at Material WP(C)950",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-9509-2004-dlhc010299742004-1-2008-10-22",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s6",
+      "target_ref_raw": "Section 6(1) of the Navy Act",
+      "effective_date": null,
+      "evidence": "and conditions laid down under the Navy instructions 5/8/58 he subjected himself to Naval law. By virtue of the aforesaid instructions and in view of Section 6(1) of the Navy Act, any person who is not otherwise subject to Naval law but enters into an agreement with the Central Government to serve in particular ship or otherwi",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-9509-2004-dlhc010299742004-1-2008-10-22",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s162",
+      "target_ref_raw": "Section 162 of the Navy Act",
+      "effective_date": null,
+      "evidence": "Delhi by order dated 24th March, 2005 directed the Central Government to proceed with the disposal of the representation made by the petitioner under Section 162 of the Navy Act. The High Court has clarified that the pendency of the writ petition shall not come in the way while disposing of the representation by the Central G",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-9509-2004-dlhc010299742004-1-2008-10-22",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s110",
+      "target_ref_raw": "Section 110 of the Navy Act",
+      "effective_date": null,
+      "evidence": "has been submitted that: (i) The TJA examined and recorded the depositions of the officer of the Court without administering him oath in violation of Section 110 of the Navy Act. (ii) The summary of evidence of PW1, 2, 12 and 14 was not provided to the petitioner in violation of Regulation 169 read WP(C)9509-04 Page 13 of 50",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-9509-2004-dlhc010299742004-1-2008-10-22",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s133",
+      "target_ref_raw": "Section 133 of the Navy Act",
+      "effective_date": null,
+      "evidence": ", Regulations Navy Part II. (iii) The TJA ruled that the head of the organization can certify copies of the documents as correct. This is contrary to Section 133 of the Navy Act because it is only the Commanding Officer or the Secretary of Ministry of Defence can do so. (iv) TJA failed to take note of the provisions of Sectio",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-9509-2004-dlhc010299742004-1-2008-10-22",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s130",
+      "target_ref_raw": "Section 130 of the Navy Act",
+      "effective_date": null,
+      "evidence": "etary of Ministry of Defence can do so. (iv) TJA failed to take note of the provisions of Section 65 A and 65 B of the Evidence Act despite the fact, Section 130 of the Navy Act makes Evidence Act applicable to the Naval Trial. (v) TJA permitted postponement of cross-examination of Commander A. Saran but when petitioner’s cou",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-9509-2004-dlhc010299742004-1-2008-10-22",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s97",
+      "target_ref_raw": "Section 97 of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "as under: “Hon‟ble President and Members of this Hon‟ble Court and the learned TJA, my objection about the members of this August body is in terms of Section 97 of the Navy Act, 1957. Section 97, sub section (12) provides that, the President of a Court Marital shall be named by the authority ordering the same or by any officer emp",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-9509-2004-dlhc010299742004-1-2008-10-22",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s102",
+      "target_ref_raw": "Section 102 of the Navy Act 1957",
+      "effective_date": null,
+      "evidence": "er not less than five as is attainable is complete.” It is therefore, my humble submission that neutrality clause or impartiality clause enshrined in Section 102 of the Navy Act 1957 has been violated by the convening authority and therefore the constitution of this court martial is hit by mandate of Section 102 read with Section",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-9509-2004-dlhc010299742004-1-2008-10-22",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s100",
+      "target_ref_raw": "Section 100, 102 and 165 of the Cr.P.C",
+      "effective_date": null,
+      "evidence": "by police/provost officer, Commander A. Saran and Commander Tomar. WP(C)9509/2004 Page 12 of 50 (x) That the panchnamas were prepared in violation of Section 100, 102 and 165 of the Cr.P.C. by tampering with the original panchnama and by not observing safeguards as provided for under Sections 3 to 5 of the Prevention of Corruption Act i",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-9509-2004-dlhc010299742004-1-2008-10-22",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s155",
+      "target_ref_raw": "Section 155(2) of the Evidence Act",
+      "effective_date": null,
+      "evidence": "of black listing the fourteen offenders the Navy authorities produced those vendors as prosecution witnesses. This also impeaches their credit under Section 155(2) of the Evidence Act and makes their testimony inadmissible in evidence. In fact, the statement made by the vendors was also vitiated on account of the pressure imposed u",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-9509-2004-dlhc010299742004-1-2008-10-22",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s27",
+      "target_ref_raw": "Section 27 of the Evidence Act",
+      "effective_date": null,
+      "evidence": ". Vs. State [(1999) SCC 559]. (xi) The disclosure statement allegedly made by the petitioner Ex.P-50 was inadmissible being contrary to provisions of Section 27 of the Evidence Act. (xii) The President of the Court Martial had not applied his mind inasmuch as, throughout the proceedings he was issuing SMSs to such a large extent",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2008-w-p-c-9509-2004-dlhc010299742004-1-2008-10-22",
+      "type": "cites",
+      "target_doc_id": "act-evidence-1872#s65",
+      "target_ref_raw": "Section 65 A and 65 B of the Evidence Act",
+      "effective_date": null,
+      "evidence": "vy Act because it is only the Commanding Officer or the Secretary of Ministry of Defence can do so. (iv) TJA failed to take note of the provisions of Section 65 A and 65 B of the Evidence Act despite the fact, Section 130 of the Navy Act makes Evidence Act applicable to the Naval Trial. (v) TJA permitted postponement of cross-examination o",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2008-w-p-c-9509-2004-dlhc010299742004-1-2008-10-22",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/9509/2004 of LT.CDR.M.P.VERMA Vs UOI & ORS.",
+  "number": "W.P.(C)/9509/2004",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2008-10-22",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010299742004_1_2008-10-22.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010299742004",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/9509/2004"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "LT.CDR.M.P.VERMA"
+    ],
+    "respondent": [
+      "UOI & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE MOOL CHAND GARG"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": null,
+      "raw": "Army Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "77",
+      "raw": "Section 77(2) of the Navy Act, 1957"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "54",
+      "raw": "Section 54(2) of the Navy Act, 1957"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "6",
+      "raw": "Section 6(1) of the Navy Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "162",
+      "raw": "Section 162 of the Navy Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "110",
+      "raw": "Section 110 of the Navy Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "133",
+      "raw": "Section 133 of the Navy Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "130",
+      "raw": "Section 130 of the Navy Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "97",
+      "raw": "Section 97 of the Navy Act, 1957"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "102",
+      "raw": "Section 102 of the Navy Act 1957"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "100",
+      "raw": "Section 100, 102 and 165 of the Cr.P.C"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "155",
+      "raw": "Section 155(2) of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "27",
+      "raw": "Section 27 of the Evidence Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": "65",
+      "raw": "Section 65 A and 65 B of the Evidence Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 199,
+    "keywords": {
+      "army act": 1,
+      "navy act": 26,
+      "court martial": 168,
+      "summary of evidence": 4
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}
