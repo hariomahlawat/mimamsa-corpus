@@ -1,8 +1,7 @@
 """Checkpoint to Hugging Face: upload the corpus data to a PRIVATE dataset repository.
 
-Needs an access token with write permission in the environment variable HF_TOKEN. Without it this
-script does nothing and says so (exit code 2).  NOT YET RUN against Hugging Face: written when no
-token was available; the first real run should be watched.
+Needs an access token with write permission: the environment variable HF_TOKEN, or a login stored
+by `hf auth login`. Without one this script does nothing and says so (exit code 2).
 
 What goes up (everything under data/ that is part of the corpus):
   data/raw/<source>/<year>/   raw files as served (rejected judgments are already deleted locally)
@@ -95,22 +94,22 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("message", nargs="?", default="manual")
     ap.add_argument("--repo", help="owner/name of the dataset repository (default: <your account>/mimamsa-corpus)")
     ap.add_argument("--dry-run", action="store_true", help="show what would be uploaded; no token needed")
+    ap.add_argument("--only", action="append", metavar="PATH", help="upload only repo paths starting with this (repeatable)")
     args = ap.parse_args(argv)
 
     n_raw = write_manifest()
-    steps = plan()
+    steps = [s for s in plan() if not args.only or any(s[1].startswith(o) for o in args.only)]
     if args.dry_run:
         for folder, dest in steps:
             files = [p for p in folder.rglob("*") if p.is_file() and p.name != ".gitkeep"]
             print(f"{dest}: {len(files)} files, {sum(p.stat().st_size for p in files) / 1e6:.1f} MB")
         print(json.dumps({"dry_run": True, "raw_files": n_raw, "steps": len(steps)}))
         return 0
-    token = os.environ.get("HF_TOKEN")
+    from huggingface_hub import HfApi, get_token
+    token = os.environ.get("HF_TOKEN") or get_token()         # env variable, or a stored `hf auth login`
     if not token:
-        print("HF_TOKEN is not set: nothing uploaded. Add a write token as the environment variable HF_TOKEN.")
+        print("No Hugging Face token: nothing uploaded. Set HF_TOKEN or run `hf auth login` with a write token.")
         return 2
-
-    from huggingface_hub import HfApi
     api = HfApi(token=token)
     repo = args.repo or f"{api.whoami()['name']}/{DEFAULT_REPO_NAME}"
     api.create_repo(repo, repo_type="dataset", private=True, exist_ok=True)
