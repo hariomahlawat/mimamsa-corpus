@@ -8,7 +8,7 @@ schema_version: "0.1.0"
 
 defaults:
   # Refuse to start while this is still the placeholder.
-  user_agent: "MimamsaCorpusBot/0.1 (+research crawler for public military-law texts; contact: hariomahlawat@gmail.com)"
+  user_agent: "Mimamsa-Corpus/0.1 (research collection of public military-law texts; contact:hariomahlawat@gmail.com)"
   min_delay_seconds: 2.0          # per host, at most 1 request every 2 s
   timeout_seconds: 60
   max_retries: 5                  # exponential backoff on timeouts and 5xx, then give up and log

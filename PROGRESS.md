@@ -11,6 +11,11 @@ Results
   User-Agent (2 requests, then stopped). An earlier plain reachability check with a different
   User-Agent got 200 for robots.txt, so the block may be on the User-Agent wording or on the address.
   Not retried. Needs a decision.
+  Follow-up the same day: User-Agent reworded without "Bot"/"crawler" (now `Mimamsa-Corpus/0.1 (...)`),
+  retried once: still 403 ("Access Denied" page from the site's Akamai front end), from both httpx and
+  curl. The earlier check string `Mimamsa-corpus-setup/0.1 (reachability check)` still gets 200 from the
+  same address, so the filter reacts to something in the User-Agent text (untested which part; the
+  contact email is the main difference). Stopped there; MoD stays blocked pending a decision.
 - archive.org: OK. robots.txt allows the search API. Title searches found the Indian Army Act 1911,
   the Manual of Indian Military Law (1911 and 1937) and British Manual of Military Law scans;
   identifiers recorded under `sources.archive.candidates` (unreviewed).

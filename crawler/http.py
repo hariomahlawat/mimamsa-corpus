@@ -25,7 +25,7 @@ import httpx
 from .audit import AuditLog
 from .config import Config, url_host
 
-ROBOTS_AGENT = "MimamsaCorpusBot"
+ROBOTS_AGENT = "Mimamsa-Corpus"
 LOGIN_PATH_RE = re.compile(r"(log-?in|sign-?in|captcha|/auth\b|/sso\b)", re.I)
 REDIRECTS = (301, 302, 303, 307, 308)
 MAX_REDIRECTS = 5
