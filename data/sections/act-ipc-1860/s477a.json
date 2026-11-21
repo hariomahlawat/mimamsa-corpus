@@ -23,6 +23,57 @@
   "text": "Whoever, being a clerk, officer or servant, or employed or acting in the capacity of a clerk, officer or servant, wilfully, and with intent to defraud, destroys, alters, mutilates or falsifies any [3][book, electronic record, paper, writing] valuable security or account which belongs to or is in the possession of his employer, or has been received by him for or on behalf of his employer, or wilfully, and with intent to defraud, makes or abets the making of any false entry in, or omits or alters or abets the omission or alteration of any material particular from or in. any such [5][book, electronic record, paper, writing] valuable security or account, shall be punished with imprisonment of either description for a term which may extend to seven years, or with fine, or with both.\nExplanation.—It shall be sufficient in any charge under this section to allege a general intent to defraud without naming any particular person intended to be defrauded or specifying any particular sum of money intended to be the subject of the fraud, or any particular day on which the offence was committed.]\n[4][Of [5]*** property and other marks",
   "status": "repealed",
   "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
-  "amendment_history": [],
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 3 of 1895",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 3 of 1895, s. 4.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 21 of 2000",
+      "by_doc_id": null,
+      "effective_date": "2000-10-17",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 21 of 2000, s. 91 and the First Sch., for “book, paper, writing” (w.e.f. 17-10-2000).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "omitted",
+      "by_ref_raw": "Act 43 of 1958",
+      "by_doc_id": null,
+      "effective_date": "1959-11-25",
+      "effective_date_raw": null,
+      "footnote_text": "The word “Trade” omitted by Act 43 of 1958, s. 135 and the Sch. (w.e.f. 25-11-1959).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 4 of 1889",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 4 of 1889, s. 3, for the original heading and ss. 478 to 489.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "omitted",
+      "by_ref_raw": "Act 43 of 1958",
+      "by_doc_id": null,
+      "effective_date": "1959-11-25",
+      "effective_date_raw": null,
+      "footnote_text": "The word “Trade” omitted by Act 43 of 1958, s. 135 and the Sch. (w.e.f. 25-11-1959).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
   "notes": []
 }

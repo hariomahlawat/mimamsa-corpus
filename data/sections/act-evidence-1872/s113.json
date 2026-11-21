@@ -23,6 +23,17 @@
   "text": "A notification in the official Gazette that any portion of British territory has [1][before the commencement of Part III of the Government of India Act, 1935 (26 Geo. 5, c. 2)] been ceded to any Native State, Prince or Ruler, shall be conclusive proof that a valid cession of such territory took place at the date mentioned in such notification.",
   "status": "repealed",
   "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
-  "amendment_history": [],
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "A.O. 1937, Part III of the Government of India Act 1935, came into force on the 1st April, 1937",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by the A.O. 1937, Part III of the Government of India Act 1935, came into force on the 1st April, 1937.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
   "notes": []
 }

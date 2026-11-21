@@ -1,0 +1,80 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s327",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "327",
+  "chapter": {
+    "number": "XXIV",
+    "title": "GENERAL PROVISIONS AS TO INQUIRIES AND TRIALS"
+  },
+  "order": 367,
+  "page_start": 125,
+  "page_end": 125,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Court to be open.",
+  "text": "[3][(1)] The place in which any Criminal Court is held for the purpose of inquiring into or trying any offence shall be deemed to be an open Court, to which the public generally may have access, so far as the same can conveniently contain them:\nProvided that the presiding Judge or Magistrate may, if he thinks fit, order at any stage of any inquiry into, or trial of, any particular case, that the public generally, or any particular person, shall not have access to, or be or remain in, the room or building used by the Court.\n[4][(2) Notwithstanding anything contained in sub- section (1), the inquiry into and trial of rape or an offence under section 376, section 376A, section 376B, section 376C, [5][section 376D or section 376E of the Indian Penal Code (45 of 1860)] shall be conducted in camera :\nProvided that the presiding Judge may, if he thinks fit, or on an application made by either of the parties, allow any particular person to have access to, or be or remain in, the room or building used by the Court:\n[6][Provided further that in camera trial shall be conducted as far as practicable by a woman Judge or Magistrate.]\n(3) Where any proceedings are held under sub-section (2), it shall not be lawful for any person to print or publish any matter in relation to any such proceedings except with the previous permission of the Court:]\n[6][Provided that the ban on printing or publication of trial proceedings in relation to an offence of rape may be lifted, subject to maintaining confidentiality of name and address of the parties.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "renumbered",
+      "by_ref_raw": "Act 43 of 1983",
+      "by_doc_id": null,
+      "effective_date": "1983-12-25",
+      "effective_date_raw": null,
+      "footnote_text": "S. 327 renumbered as sub-section (1) thereof by Act 43 of 1983, s. 4 (w.e.f. 25-12-1983).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "s. 4, ibid.",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by s. 4, ibid. (w.e.f. 18-12-1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 13 of 2013",
+      "by_doc_id": null,
+      "effective_date": "2013-02-03",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 13 of 2013, s. 22, for “or section 376D of the Indian Penal Code (45 of 1860)” (w.e.f. 3-2-2013).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 5 of 2009",
+      "by_doc_id": null,
+      "effective_date": "2009-12-31",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 5 of 2009, s. 24 (w.e.f. 31-12-2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 5 of 2009",
+      "by_doc_id": null,
+      "effective_date": "2009-12-31",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 5 of 2009, s. 24 (w.e.f. 31-12-2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

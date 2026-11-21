@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s39",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "39",
+  "chapter": {
+    "number": "IV",
+    "title": "A.—POWERS OF SUPERIOR OFFICERS OF POLICE"
+  },
+  "order": 40,
+  "page_start": 32,
+  "page_end": 33,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Public to give information of certain offences.",
+  "text": "(1) Every person, aware of the commission of, or of the intention of any other person to commit, any offence punishable under any of the following sections of the Indian Penal Code (45 of 1860), namely:—\n(i) sections 121 to 126, both inclusive, and section 130 (that is to say, offences against the State\nspecified in Chapter VI of the said Code);\n(ii) sections 143, 144, 145, 147 and 148 (that is to say, offences against the public tranquillity\nspecified in Chapter VIII of the said Code);\n(iii) sections 161 to 165A, both inclusive (that is to say, offences relating to illegal\ngratification);\n(iv) sections 272 to 278, both inclusive (that is to say, offences relating to adulteration of food\nand drugs, etc.);\n(v) sections 302, 303 and 304 (that is to say, offences affecting life);\n[1][(va) section 364A (that is to say, offence relating to kidnapping for ransom, etc.);]\n(vi) section 382 (that is to say, offence of theft after preparation made for causing death, hurt or\nrestraint in order to the committing of the theft);\n(vii) sections 392 to 399, both inclusive, and section 402 (that is to say, offences of robbery\nand dacoity);\n(viii) section 409 (that is to say, offence relating to criminal breach of trust by public servant,\netc.);\n(ix) sections 431 and 439, both inclusive (that is to say, offences of mischief against property);\n(x) sections 449 and 450 (that is to say, offence of house trespass);\n(xi) sections 456 to 460, both inclusive (that is to say, offences of lurking house trespass); and\n(xii) sections 489A to 489E, both inclusive (that is to say, offences relating to currency notes\nand bank notes), shall, in the absence of any reasonable excuse, the burden of proving which excuse shall lie upon the person so aware, forthwith give information to the nearest Magistrate or police officer of such commission or intention.\n(2) For the purposes of this section, the term “offence” includes any act committed at any place out of India which would constitute an offence if committed in India.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 42 of 1993",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 42 of 1993, s. 3.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

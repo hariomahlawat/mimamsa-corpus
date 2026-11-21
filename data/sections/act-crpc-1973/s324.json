@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s324",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "324",
+  "chapter": {
+    "number": "XXIV",
+    "title": "GENERAL PROVISIONS AS TO INQUIRIES AND TRIALS"
+  },
+  "order": 364,
+  "page_start": 124,
+  "page_end": 124,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Trial of persons previously convicted of offences against coinage, stamp-law or property.",
+  "text": "(1) Where a person, having been convicted of an offence punishable under Chapter XII or Chapter XVII of the Indian Penal Code, (45 of 1860) with imprisonment for a term of three years or upwards, is again accused of any offence punishable under either of those Chapters with imprisonment for a term of three years or upwards, and the Magistrate before whom the case is pending is satisfied that there is ground for presuming that such person has committed the offence, he shall be sent for trial to the Chief Judicial Magistrate or committed to the Court of Session, unless the Magistrate is competent to try the case and is of opinion that he can himself pass an adequate sentence if the accused is convicted.\n(2) When any person is sent for trial to the Chief Judicial Magistrate or committed to the Court of Session under sub-section (1), any other person accused jointly with him in the same inquiry or trial shall be similarly sent or committed, unless the Magistrate discharges such other person under section 239 or section 245, as the case may be.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

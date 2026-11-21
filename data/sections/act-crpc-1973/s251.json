@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s251",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "251",
+  "chapter": {
+    "number": "XX",
+    "title": "TRIAL OF SUMMONS-CASES BY MAGISTRATES"
+  },
+  "order": 278,
+  "page_start": 100,
+  "page_end": 100,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Substance of accusation to be stated.",
+  "text": "When in a summons-case the accused appears or is brought before the Magistrate, the particulars of the offence of which he is accused shall be stated to him, and he shall be asked whether he pleads guilty or has any defence to make, but it shall not be necessary to frame a formal charge.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

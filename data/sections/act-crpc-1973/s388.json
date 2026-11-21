@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s388",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "388",
+  "chapter": {
+    "number": "XXIX",
+    "title": "APPEALS"
+  },
+  "order": 431,
+  "page_start": 143,
+  "page_end": 143,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Order of High Court on appeal to be certified to lower Court.",
+  "text": "(1) Whenever a case is decided on appeal by the High Court under this Chapter, it shall certify its judgment or order to the Court by which the finding, sentence or order appealed against was recorded or passed and if such Court is that of a Judicial Magistrate other than the Chief Judicial Magistrate, the High Court's judgment or order shall be sent through the Chief Judicial Magistrate, and if such Court is that of an Executive Magistrate, the High Court’s judgment or order shall be sent through the District Magistrate.\n(2) The Court to which the High Court certifies its judgment or order shall thereupon make such orders as are conformable to the judgment or order of the High Court; and if necessary, the record shall be amended in accordance therewith.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

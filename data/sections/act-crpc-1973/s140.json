@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s140",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "140",
+  "chapter": {
+    "number": "X",
+    "title": "MAINTENANCE OF PUBLIC ORDER AND TRANQUILLITY"
+  },
+  "order": 161,
+  "page_start": 65,
+  "page_end": 65,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Power of Magistrate to furnish written instructions, etc.",
+  "text": "(1) Where the Magistrate directs a local investigation by any person under section 139, the Magistrate may—\n(a) furnish such person with such written instructions as may seem necessary for his guidance;\n(b) declare by whom the whole or any part of the necessary expenses of the local investigation shall be\npaid.\n(2) The report of such person may be read as evidence in the case.\n(3) Where the Magistrate summons and examines an expert under section 139, the Magistrate may direct by whom the costs of such summoning and examination shall be paid.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

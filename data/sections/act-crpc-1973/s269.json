@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s269",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "269",
+  "chapter": {
+    "number": "XXII",
+    "title": "ATTENDANCE OF PERSONS CONFINED OR DETAINED IN PRISONS"
+  },
+  "order": 307,
+  "page_start": 106,
+  "page_end": 107,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Officer in charge of prison to abstain from carrying out order in certain contingencies.",
+  "text": "Where the person in respect of whom an order is made under section 267—\n(a) is by reason of sickness or infirmity unfit to be removed from the prison; or\n(b) is under committal for trial or under remand pending trial or pending a preliminary investigation; or\n(c) is in custody for a period which would expire before the expiration of the time required for complying\nwith the order and for taking him back to the prison in which he is confined or detained; or\n(d) is a person to whom an order made by the State Government under section 268 applies, the officer in charge of the prison shall abstain from carrying out the Court's order and shall send to the Court a statement of reasons for so abstaining:\nProvided that where the attendance of such person is required for giving evidence at a place not more than twenty-five kilometres distance from the prison, the officer in charge of the prison shall not so abstain for the reason mentioned in clause (b).",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

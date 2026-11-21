@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s375",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "375",
+  "chapter": {
+    "number": "XXIX",
+    "title": "APPEALS"
+  },
+  "order": 418,
+  "page_start": 139,
+  "page_end": 139,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "No appeal in certain cases when accused pleads guilty.",
+  "text": "Notwithstanding anything contained in section 374, where an accused person has pleaded guilty and has been convicted on such plea, there shall be no appeal,—\n(a) if the conviction is by a High Court; or\n(b) if the conviction is by a Court of Session, Metropolitan Magistrate or Magistrate of the first or second\nclass, except as to the extent or legality of the sentence.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

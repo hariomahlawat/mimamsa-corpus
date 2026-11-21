@@ -13,12 +13,14 @@ The site watermarks PDFs at download, so they differ from the MD5 in its own lis
 
 ## Processed records (Phase 2 pipeline, last run 2026-11-21)
 
-- `data/meta/<doc_id>.json`: one metadata record per document (64).
-- `data/sections/<doc_id>/<key>.json`: one record per section (2,466), with text and amendment notes.
-  From India Code's section records for current Acts; cut from the PDF for the IPC and the Evidence Act.
-- `data/text/<doc_id>.txt`: text with `[[page N]]` markers (64 documents). Four come from OCR
-  (Hindi BNS, BNSS, BSA and one notification): good for search, not for quoting.
+- `data/meta/<doc_id>.json`: one metadata record per document (68).
+- `data/sections/<doc_id>/<key>.json`: one record per section (2,998), with text and amendment notes.
+  From India Code's section records for current Acts; cut from the PDF for the IPC, CrPC and Evidence Act.
+- `data/text/<doc_id>.txt`: text with `[[page N]]` markers. Four come from OCR (Hindi BNS, BNSS, BSA
+  and one notification): good for search, not for quoting.
+- `data/correspondence/<key>.jsonl`: new-code/old-code section tables read from the BPR&D comparison
+  summaries (1,194 rows; not yet verified by a person).
 - `data/relations.jsonl`, `data/manifest.csv`.
 
-Raw files: 84 (the IPC, CrPC and Evidence Act PDFs were added from India Code's "Repeal Acts" collection).
-All processed records can be rebuilt from the raw files with `python -m pipeline all` (and `ocr`) on `main`.
+Raw files: 88, in `data/raw/<source>/`. All processed records can be rebuilt from the raw files with
+`python -m pipeline all` (and `ocr`) on `main`.

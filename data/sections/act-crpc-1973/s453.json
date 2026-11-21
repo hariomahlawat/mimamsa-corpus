@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s453",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "453",
+  "chapter": {
+    "number": "XXXIV",
+    "title": "DISPOSAL OF PROPERTY"
+  },
+  "order": 501,
+  "page_start": 160,
+  "page_end": 160,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Payment to innocent purchaser of money found on accused.",
+  "text": "When any person is convicted of any offence which includes, or amounts to, theft or receiving stolen property, and it is proved that any other person bought the stolen property from him without knowing or having reason to believe that the same was stolen, and that any money has on his arrest been taken out of the possession of the convicted person, the Court may, on the application of such purchaser and on the restitution of the stolen property to the person entitled to the possession thereof, order that out of such money a sum not exceeding the price paid by such purchaser be delivered to him.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s217",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "217",
+  "chapter": {
+    "number": "XVII",
+    "title": "THE CHARGE"
+  },
+  "order": 244,
+  "page_start": 93,
+  "page_end": 93,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Recall of witnesses when charge altered.",
+  "text": "Whenever a charge is altered or added to by the Court after the commencement of the trial, the prosecutor and the accused shall be allowed—\n(a) to recall or re-summon, and examine with reference to such alteration or addition, any witness who may\nhave been examined, unless the Court, for reasons to be recorded in writing, considers that the prosecutor or the\naccused, as the case may be, desires to recall or re-examine such witness for the purpose of vexation or delay or\nfor defeating the ends of justice;\n(b) also to call any further witness whom the Court may think to be material.\nB.—Joinder of charges",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

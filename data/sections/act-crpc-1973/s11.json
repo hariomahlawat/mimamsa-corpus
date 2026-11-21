@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s11",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "11",
+  "chapter": {
+    "number": "II",
+    "title": "CONSTITUTION OF CRIMINAL COURTS AND OFFICES"
+  },
+  "order": 11,
+  "page_start": 25,
+  "page_end": 26,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Courts of Judicial Magistrates.",
+  "text": "(1) In every district (not being a metropolitan area) there shall be established as many Courts of Judicial Magistrates of the first class and of the second class, and at such places, as the State Government may, after consultation with the High Court, by notification, specify:\n[1][Provided that the State Government may, after consultation with the High Court, establish, for any local area, one or more Special Courts of Judicial Magistrates of the first class or of the second class to try any particular case or particular class of cases, and where any such Special Court is established, no other Court of Magistrate in the local area shall have jurisdiction to try any case or class of cases for the trial of which such Special Court of Judicial Magistrate has been established.]\n(2) The presiding officers of such Courts shall be appointed by the High Court.\n(3) The High Court may, whenever it appears to it to be expedient or necessary, confer the powers of a Judicial Magistrate of the first class or of the second class on any member of the Judicial Service of the State, functioning as a Judge in a Civil Court.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 45 of 1978",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Added by Act 45 of 1978, s. 3 (w.e.f. 18-12-1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

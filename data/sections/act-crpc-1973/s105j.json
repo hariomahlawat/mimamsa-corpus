@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s105j",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "105J",
+  "chapter": {
+    "number": "VII",
+    "title": "PROCESSES TO COMPEL THE PRODUCTION OF THINGS"
+  },
+  "order": 124,
+  "page_start": 53,
+  "page_end": 53,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Certain transfers to be null and void.",
+  "text": "Where after the making of an order under sub- section (1) of section 105E or the issue of a notice under section 105G, any property referred to in the said order or notice is transferred by any mode whatsoever such transfers shall, for the purposes of the proceedings under this Chapter, be ignored and if such property is subsequently forfeited to the Central Government under section 105H, then, the transfer of such property shall be deemed to be null and void.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

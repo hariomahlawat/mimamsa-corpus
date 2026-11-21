@@ -23,6 +23,27 @@
   "text": "[1][Provided that when] the question is whether a man is alive or dead, and it is proved that he has not been heard of for seven years by those who would naturally have heard of him if he had been alive, the burden of proving that he is alive is [2][shifted to] the person who affirms it.",
   "status": "repealed",
   "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
-  "amendment_history": [],
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 18 of 1872",
+      "by_doc_id": null,
+      "effective_date": "1872-08-29",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 18 of 1872, s. 9, for “when” (w.e.f. 29-8-1872).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 9, ibid.",
+      "by_doc_id": null,
+      "effective_date": "1872-08-29",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 9, ibid., for “on” (w.e.f. 29-8-1872).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
   "notes": []
 }

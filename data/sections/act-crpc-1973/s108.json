@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s108",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "108",
+  "chapter": {
+    "number": "VIII",
+    "title": "SECURITY FOR KEEPING THE PEACE AND FOR GOOD BEHAVIOUR"
+  },
+  "order": 129,
+  "page_start": 54,
+  "page_end": 55,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Security for good behaviour from persons disseminating seditious matters.",
+  "text": "(1) When [2][an Executive Magistrate] receives information that there is within his local jurisdiction any person who, within or without such jurisdiction,—\n(i) either orally or in writing or in any other manner, intentionally disseminates or attempts to disseminate\nor abets the dissemination of,—\n(a) any matter the publication of which is punishable under section 124A or section 153A or section\n153B or section 295A of the Indian Penal Code (45 of 1860), or\n(b) any matter concerning a Judge acting or purporting to act in the discharge of his official duties\nwhich amounts to criminal intimidation or defamation under the Indian Penal Code (45 of 1860),\n(ii) makes, produces, publishes or keeps for sale, imports, exports, conveys, sells, lets to hire,\ndistributes, publicly exhibits or in any other manner puts into circulation any obscene matter such as is referred\nto in section 292 of the Indian Penal Code (45 of 1860), and the Magistrate is of opinion that there is sufficient ground for proceeding, the Magistrate may, in the manner hereinafter provided, require such person to show cause why he should not be ordered to execute a bond, with or without sureties, for his good behaviour for such period, not exceeding one year, as the Magistrate thinks fit.\n(2) No proceedings shall be taken under this section against the editor, proprietor, printer or publisher of any publication registered under, and edited, printed and published in conformity with, the rules laid down in the Press and Registration of Books Act, 1867 (25 of 1867), with reference to any matter contained in such publication except by the order or under the authority of the State Government or some officer empowered by the State Government in this behalf.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 63 of 1980",
+      "by_doc_id": null,
+      "effective_date": "1980-09-23",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 63 of 1980, s. 2, for “a Judicial Magistrate of the first class” (w.e.f. 23-9-1980).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

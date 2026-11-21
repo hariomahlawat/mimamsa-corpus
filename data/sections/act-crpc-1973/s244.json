@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s244",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "244",
+  "chapter": {
+    "number": "XIX",
+    "title": "TRIAL OF WARRANT-CASES BY MAGISTRATES"
+  },
+  "order": 271,
+  "page_start": 99,
+  "page_end": 99,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Evidence for prosecution.",
+  "text": "(1) When, in any warrant-case instituted otherwise than on a police report, the accused appears or is brought before a Magistrate, the Magistrate shall proceed to hear the prosecution and take all such evidence as may be produced in support of the prosecution.\n(2) The Magistrate may, on the application of the prosecution, issue a summons to any of its witnesses directing him to attend or to produce any document or other thing.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

@@ -20,7 +20,7 @@
     "amendment_history": "rule"
   },
   "heading": "Question by party to his own witness.",
-  "text": "[1][(1)] The Court may, in its discretion, permit the person who calls a witness to put any questions to him which might be put in cross-examination by the adverse party.\n[2][(2) Nothing in this section shall disentitle the person so permitted under sub-section (1), to rely on any part of the evidence of such witness.] 2. Ins. by s. 9, ibid. (w.e.f. 16-4-2006.)",
+  "text": "[1][(1)] The Court may, in its discretion, permit the person who calls a witness to put any questions to him which might be put in cross-examination by the adverse party.\n[2][(2) Nothing in this section shall disentitle the person so permitted under sub-section (1), to rely on any part of the evidence of such witness.]",
   "status": "repealed",
   "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
   "amendment_history": [
@@ -31,6 +31,16 @@
       "effective_date": "2006-04-16",
       "effective_date_raw": null,
       "footnote_text": "Section 154 renumbered as sub-section (1) thereof by Act 2 of 2006, s. 9 (w.e.f. 16-4-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "s. 9, ibid.",
+      "by_doc_id": null,
+      "effective_date": "2006-04-16",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by s. 9, ibid. (w.e.f. 16-4-2006.)",
       "confidence": "extracted",
       "origin": "footnote"
     }

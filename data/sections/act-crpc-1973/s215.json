@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s215",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "215",
+  "chapter": {
+    "number": "XVII",
+    "title": "THE CHARGE"
+  },
+  "order": 242,
+  "page_start": 92,
+  "page_end": 92,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Effect of errors.",
+  "text": "No error in stating either the offence or the particulars required to be stated in the charge, and no omission to state the offence or those particulars, shall be regarded at any stage of the case as material, unless the accused was in fact misled by such error or omission, and it has occasioned a failure of justice.\nIllustrations\n(a) A is charged under section 242 of the Indian Penal Code (45 of 1860), with \"having been in possession of\ncounterfeit coin, having known at the time when he became possessed thereof that such coin was counterfeit,” the word\n\"fraudulently\" being omitted in the charge. Unless it appears that A was in fact misled by this omission, the error shall not\nbe regarded as material.\n(b) A is charged with cheating B, and the manner in which he cheated B is not set out in the charge or is set out\nincorrectly. A defends himself, calls witnesses and gives his own account of the transaction. The Court may infer from this\nthat the omission to set out the manner of the cheating is not material.\n(c) A is charged with cheating B, and the manner in which he cheated B is not set out in the charge. There were many\ntransactions between A and B, and A had no means of knowing to which of them the charge referred, and offered no\ndefence. The Court may infer from such facts that the omission to set out the manner of the cheating was, in the case, a\nmaterial error.\n(d) A is charged with the murder of Khoda Baksh on the 21st January, 1882. In fact, the murdered person's name was\nHaidar Baksh, and the date of the murder was the 20th January, 1882. A was never charged with any murder but one, and\nhad heard the inquiry before the Magistrate, which referred exclusively to the case of Haidar Baksh. The Court may infer\nfrom these facts that A was not misled, and that the error in the charge was immaterial.\n(e) A was charged with murdering Haidar Baksh on the 20th January, 1882, and Khoda Baksh (who tried to arrest him\nfor that murder) on the 21st January, 1882. When charged for the murder of Haidar Baksh, he was tried for the murder of\nKhoda Baksh. The witnesses present in his defence were witnesses in the case of Haidar Baksh. The Court may infer from\nthis that A was misled, and that the error was material.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

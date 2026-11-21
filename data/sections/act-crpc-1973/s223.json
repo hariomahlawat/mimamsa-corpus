@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s223",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "223",
+  "chapter": {
+    "number": "XVII",
+    "title": "THE CHARGE"
+  },
+  "order": 250,
+  "page_start": 95,
+  "page_end": 95,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "What persons may be charged jointly.",
+  "text": "The following persons may be charged and tried together, namely:—\n(a) persons accused of the same offence committed in the course of the same transaction;\n(b) persons accused of an offence and persons accused of abetment of, or attempt to commit, such offence;\n(c) persons accused of more than one offence of the same kind, within the meaning of section 219\ncommitted by them jointly within the period of twelve months;\n(d) persons accused of different offences committed in the course of the same transaction;\n(e) persons accused of an offence which includes theft, extortion, cheating, or criminal misappropriation,\nand persons accused of receiving or retaining, or assisting in the disposal or concealment of, property\npossession of which is alleged to have been transferred by any such offence committed by the first-named\npersons, or of abetment of or attempting to commit any such last-named offence;\n(f) persons accused of offences under sections 411 and 414 of the Indian Penal Code (45 of 1860) or either\nof those sections in respect of stolen property the possession of which has been transferred by one offence;\n(g) persons accused of any offence under Chapter XII of the Indian Penal Code (45 of 1860) relating to\ncounterfeit coin and persons accused of any other offence under the said Chapter relating to the same coin, or of\nabetment of or attempting to commit any such offence; and the provisions contained in the former part of this\nChapter shall, so far as may be, apply to all such charges:\nProvided that where a number of persons are charged with separate offences and such persons do not fall within any of the categories specified in this section, the [1][Magistrate or Court of Session] may, if such persons by an application in writing, so desire, and [2][if he or it is satisfied] that such persons would not be prejudicially affected thereby, and it is expedient so to do, try all such persons together.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 25 of 2005",
+      "by_doc_id": null,
+      "effective_date": "2006-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 25 of 2005, s. 21, for “Magistrate” (w.e.f. 23-6-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 21, ibid.",
+      "by_doc_id": null,
+      "effective_date": "2006-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 21, ibid., for certain words (w.e.f. 23-6-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

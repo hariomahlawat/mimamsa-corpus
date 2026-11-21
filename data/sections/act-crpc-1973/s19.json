@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s19",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "19",
+  "chapter": {
+    "number": "II",
+    "title": "CONSTITUTION OF CRIMINAL COURTS AND OFFICES"
+  },
+  "order": 19,
+  "page_start": 27,
+  "page_end": 27,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Subordination of Metropolitan Magistrates.",
+  "text": "(1) The Chief Metropolitan Magistrate and every Additional Chief Metropolitan Magistrate shall be subordinate to the Sessions Judge; and every other Metropolitan Magistrate shall, subject to the general control of the Sessions Judge, be subordinate to the Chief Metropolitan Magistrate.\n(2) The High Court may, for the purposes of this Code, define the extent of the subordination, if any, of the Additional Chief Metropolitan Magistrates to the Chief Metropolitan Magistrate.\n(3) The Chief Metropolitan Magistrate may, from time to time, make rules or give special orders, consistent with this Code, as to the distribution of business among the Metropolitan Magistrates and as to the allocation of business to an Additional Chief Metropolitan Magistrate.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

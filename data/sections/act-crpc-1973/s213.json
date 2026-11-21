@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s213",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "213",
+  "chapter": {
+    "number": "XVII",
+    "title": "THE CHARGE"
+  },
+  "order": 240,
+  "page_start": 91,
+  "page_end": 92,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "When manner of committing offence must be stated.",
+  "text": "When the nature of the case is such that the particulars mentioned in sections 211 and 212 do not give the accused sufficient notice of the matter with which he is charged, the charge shall also contain such particulars of the manner in which the alleged offence was committed as will be sufficient for that purpose.\nIllustrations\n(a) A is accused of the theft of a certain article at a certain time and place. The charge need not set out the manner in\nwhich the theft was effected.\n(b) A is accused of cheating B at a given time and place. The charge must set out the manner in which A cheated B.\n(c) A is accused of giving false evidence at a given time and place. The charge must set out that portion of the\nevidence given by A which is alleged to be false.\n(d) A is accused of obstructing B, a public servant, in the discharge of his public functions at a given time and place.\nThe charge must set out the manner in which A obstructed B in the discharge of his functions.\n(e) A is accused of the murder of B at a given time and place. The charge need not state the manner in which A\nmurdered B.\n(f) A is accused of disobeying a direction of the law with intent to save B from punishment. The charge must set out the\ndisobedience charged and the law infringed.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

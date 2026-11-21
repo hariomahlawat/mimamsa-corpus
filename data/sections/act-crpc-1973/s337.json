@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s337",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "337",
+  "chapter": {
+    "number": "XXV",
+    "title": "PROVISIONS AS TO ACCUSED PERSONS OF UNSOUND MIND"
+  },
+  "order": 377,
+  "page_start": 128,
+  "page_end": 128,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Procedure where lunatic prisoner is reported capable of making his defence.",
+  "text": "If such person is detained under the provisions of sub-section (2) of section 330, and in the case of a person detained in a jail, the Inspector-General of Prisons, or, in the case of a person detained a lunatic asylum, the visitors of such asylum, or any two of them shall certify that, in his or their opinion, such person is capable of making his defence, he shall be taken before the Magistrate or Court, as the case may be, at such time as the Magistrate or Court appoints, and the Magistrate or Court shall deal with such person under the provisions of section 332; and the certificate of such Inspector-General or visitors as aforesaid shall be receivable as evidence.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

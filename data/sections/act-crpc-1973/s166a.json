@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s166a",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "166A",
+  "chapter": {
+    "number": "XII",
+    "title": "INFORMATION TO THE POLICE AND THEIR POWERS TO INVESTIGATE"
+  },
+  "order": 189,
+  "page_start": 74,
+  "page_end": 74,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Letter of request to competent authority for investigation in a country or place outside India.",
+  "text": "(1) Notwithstanding anything contained in this Code, if, in the course of an investigation into an offence, an application is made by the investigating officer or any officer superior in rank to the investigating officer that evidence may be available in a country or place outside India, any Criminal Court may issue a letter of request to a Court or an authority in that country or place competent to deal with such request to examine orally any person supposed to be acquainted with the facts and circumstances of the case and to record his statement made in the course of such examination and also to require such person or any other person to produce any document or thing which may be in his possession pertaining to the case and to forward all the evidence so taken or collected or the authenticated copies thereof or the thing so collected to the Court issuing such letter.\n(2) The letter of request shall be transmitted in such manner as the Central Government may specify in this behalf.\n(3) Every statement recorded or document or thing received under sub-section (1) shall be deemed to be the evidence collected during the course of investigation under this Chapter.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 10 of 1990",
+      "by_doc_id": null,
+      "effective_date": "1990-12-19",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 10 of 1990, s. 2 (w.e.f. 19-12-1990).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

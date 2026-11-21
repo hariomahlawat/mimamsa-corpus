@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s210",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "210",
+  "chapter": {
+    "number": "XVI",
+    "title": "COMMENCEMENT OF PROCEEDINGS BEFORE MAGISTRATES"
+  },
+  "order": 237,
+  "page_start": 90,
+  "page_end": 90,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Procedure to be followed when there is a complaint case and police investigation in respect of the same offence.",
+  "text": "(1) When in a case instituted otherwise than on a police report (hereinafter referred to as a complaint case), it is made to appear to the Magistrate, during the course of the inquiry or trial held by him, that an investigation by the police is in progress in relation to the offence which is the subject-matter of the inquiry or trial held by him, the Magistrate shall stay the proceedings of such inquiry or trial and call for a report on the matter from the police officer conducting the investigation.\n(2) If a report is made by the investigating police officer under section 173 and on such report cognizance of any offence is taken by the Magistrate against any person who is an accused in the complaint case, the Magistrate shall inquire into or try together the complaint case and the case arising out of the police report as if both the cases were instituted on a police report.\n(3) If the police report does not relate to any accused in the complaint case or if the Magistrate does not take cognizance of any offence on the police report, he shall proceed with the inquiry or trial, which was stayed by him, in accordance with the provisions of this Code.\nA.—Form of charges",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

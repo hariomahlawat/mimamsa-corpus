@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s366",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "366",
+  "chapter": {
+    "number": "XXVIII",
+    "title": "SUBMISSION OF DEATH SENTENCES FOR CONFIRMATION"
+  },
+  "order": 409,
+  "page_start": 137,
+  "page_end": 137,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Sentence of death to be submitted by Court of Session for confirmation.",
+  "text": "(1) When the Court of Session passes a sentence of death, the proceedings shall be submitted to the High Court, and the sentence shall not be executed unless it is confirmed by the High Court.\n(2) The Court passing the sentence shall commit the convicted person to jail custody under a warrant.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

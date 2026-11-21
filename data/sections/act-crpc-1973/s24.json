@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s24",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "24",
+  "chapter": {
+    "number": "II",
+    "title": "CONSTITUTION OF CRIMINAL COURTS AND OFFICES"
+  },
+  "order": 24,
+  "page_start": 28,
+  "page_end": 29,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Public Prosecutors.",
+  "text": "(1) For every High Court, the Central Government or the State Government shall, after consultation with the High Court, appoint a Public Prosecutor and may also appoint one or more Additional Public Prosecutors, for conducting in such Court, any prosecution, appeal or other proceeding on behalf of the Central Government or State Government, as the case may be.\n(2) The Central Government may appoint one or more Public Prosecutors for the purpose of conducting any case or class of cases in any district or local area.\n(3) For every district, the State Government shall appoint a Public Prosecutor and may also appoint one or more Additional Public Prosecutors for the district:\nProvided that the Public Prosecutor or Additional Public Prosecutor appointed for one district may be appointed also to be a Public Prosecutor or an Additional Public Prosecutor, as the case may be, for another district.\n(4) The District Magistrate shall, in consultation with the Sessions Judge, prepare a panel of names of persons, who are, in his opinion fit to be appointed as Public Prosecutors or Additional Public Prosecutors for the district.\n(5) No person shall be appointed by the State Government as the Public Prosecutor or Additional Public Prosecutor for the district unless his name appears in the panel of names prepared by the District Magistrate under sub-section (4).\n(6) Notwithstanding anything contained in sub-section (5), where in a State there exists a regular Cadre of Prosecuting Officers, the State Government shall appoint a Public Prosecutor or an Additional Public Prosecutor only from among the persons constituting such Cadre:\nProvided that where, in the opinion of the State Government, no suitable person is available in such Cadre for such appointment that Government may appoint a person as Public Prosecutor or Additional Public Prosecutor, as the case may be, from the panel of names prepared by the District Magistrate under sub-section (4).\n[1][Explanation.—For the purposes of this sub-section,—\n(a) “regular Cadre of Prosecuting Officers” means a Cadre of Prosecuting Officers which\nincludes therein the post of a Public Prosecutor, by whatever name called, and which provides for\npromotion of Assistant Public Prosecutors, by whatever name called, to that post;\n(b) “Prosecuting Officer” means a person, by whatever name called, appointed to perform the\nfunctions of a Public Prosecutor, an Additional Public Prosecutor or an Assistant Public Prosecutor\nunder this Code.]\n(7) A person shall be eligible to be appointed as a Public Prosecutor or an Additional Public Prosecutor under sub-section (1) or sub-section (2) or sub-section (3) or sub-section (6), only if he has been in practice as an advocate for not less than seven years.\n(8) The Central Government or the State Government may appoint, for the purposes of any case or class of cases, a person who has been in practice as an advocate for not less than ten years as a Special Public Prosecutor:\n[2][Provided that the Court may permit the victim to engage an advocate of his choice to assist the prosecution under this sub-section.]\n(9) For the purposes of sub-section (7) and sub-section (8), the period during which a person has been in practice as a pleader, or has rendered (whether before or after the commencement of this Code) service as a Public Prosecutor or as an Additional Public Prosecutor or Assistant Public Prosecutor or other Prosecuting Officer, by whatever name called, shall be deemed to be the period during which such person has been in practice as an advocate.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 45 of 1978",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 45 of 1978, s. 8, for s. 24 (w.e.f. 18-12-1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 25 of 2005",
+      "by_doc_id": null,
+      "effective_date": "2006-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 25 of 2005, s. 3 (w.e.f. 23-6-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 5 of 2009",
+      "by_doc_id": null,
+      "effective_date": "2009-12-31",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 5 of 2009, s. 3 (w.e.f. 31-12-2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

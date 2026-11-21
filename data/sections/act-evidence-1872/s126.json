@@ -23,6 +23,27 @@
   "text": "No barrister, attorney, pleader or vakil, shall at any time be permitted, unless with his client’s express consent, to disclose any communication made to him in the course and for the purpose of his employment as such barrister, pleader, attorney or vakil, by or on behalf of his client, or to state the contents or condition of any document with which he has become acquainted in the course and for the purpose of his professional employment, or to disclose any advice given by him to his client in the course and for the purpose of such employment:\nProvided that nothing in this section shall protect from disclosure ––\n(1) any such communication made in furtherance of any [2][illegal] purpose,\n(2) any fact observed by any barrister, pleader, attorney or vakil, in the course of his employment\nas such, showing that any crime or fraud has been committed since the commencement of his\nemployment.\nIt is immaterial whether the attention of such barrister, [3][pleader], attorney or vakil was or was not directed to such fact by or on behalf of his client.\nExplanation.––The obligation stated in this section continues after the employment has ceased.\nIllustrations\n(a) A, a client, says to B, an attorney––“I have committed forgery, and I wish you to defend me.”\nAs the defence of a man known to be guilty is not a criminal purpose, this communication is protected from disclosure.\n(b) A, a client, says to B, an attorney––“I wish to obtain possession of property by the use of a forged deed on which I request you to sue.”\nThis communication, being made in furtherance of a criminal purpose, is not protected from disclosure.\n(c) A, being charged with embezzlement, retains B, an attorney, to defend him. In the course of the proceedings, B observes that an entry has been made in A’s account book, charging A with the sum said to have been embezzled, which entry was not in the book at the commencement of his employment.\nThis being a fact observed by B in the course of his employment, showing that a fraud has been committed since the commencement of the proceedings, it is not protected from disclosure.",
   "status": "repealed",
   "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
-  "amendment_history": [],
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 18 of 1872",
+      "by_doc_id": null,
+      "effective_date": "1872-08-29",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 18 of 1872, s. 10, for “criminal” (w.e.f. 29-8-1872).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "s. 10, ibid.",
+      "by_doc_id": null,
+      "effective_date": "1872-08-29",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by s. 10, ibid. (w.e.f. 29-8-1872).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
   "notes": []
 }

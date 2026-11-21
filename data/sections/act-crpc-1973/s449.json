@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s449",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "449",
+  "chapter": {
+    "number": "XXXIII",
+    "title": "PROVISIONS AS TO BAIL AND BONDS"
+  },
+  "order": 497,
+  "page_start": 159,
+  "page_end": 159,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Appeal from orders under section 446.",
+  "text": "All orders passed under section 446 shall be appealable,—\n(i) in the case of an order made by a Magistrate, to the Sessions Judge;\n(ii) in the case of an order made by a Court of Session, to the Court to which an appeal lies from an order\nmade by such Court.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

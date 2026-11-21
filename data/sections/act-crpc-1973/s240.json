@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s240",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "240",
+  "chapter": {
+    "number": "XIX",
+    "title": "TRIAL OF WARRANT-CASES BY MAGISTRATES"
+  },
+  "order": 267,
+  "page_start": 98,
+  "page_end": 98,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Framing of charge.",
+  "text": "(1) If, upon such consideration, examination, if any, and hearing, the Magistrate is of opinion that there is ground for presuming that the accused has committed an offence triable under this Chapter, which such Magistrate is competent to try and which, in his opinion, could be adequately punished by him, he shall frame in writing a charge against the accused.\n(2) The charge shall then be read and explained to the accused, and he shall be asked whether he pleads guilty of the offence charged or claims to be tried.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

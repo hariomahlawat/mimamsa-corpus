@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s195",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "195",
+  "chapter": {
+    "number": "XIV",
+    "title": "CONDITIONS REQUISITE FOR INITIATION OF PROCEEDINGS"
+  },
+  "order": 219,
+  "page_start": 83,
+  "page_end": 84,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Prosecution for contempt of lawful authority of public servants, for offences against public justice and for offences relating to documents given in evidence.",
+  "text": "(1) No Court shall take cognizance—\n(a) (i) of any offence punishable under sections 172 to 188 (both inclusive) of the Indian Penal Code, (45 of\n1860), or\n(ii) of any abetment of, or attempt to commit, such offence, or\n(iii) of any criminal conspiracy to commit such offence, except on the complaint in writing of the public servant concerned or of some other public servant to whom he is administratively subordinate;\n(b) (i) of any offence punishable under any of the following sections of the Indian Penal Code (45 of 1860),\nnamely, sections 193 to 196 (both inclusive), 199, 200, 205 to 211 (both inclusive) and 228, when such offence\nis alleged to have been committed in, or in relation to, any proceeding in any Court, or\n(ii) of any offence described in section 463, or punishable under section 471, section 475 or section 476, of\nthe said Code, when such offence is alleged to have been committed in respect of a document produced or given\nin evidence in a proceeding in any Court, or\n(iii) of any criminal conspiracy to commit, or attempt to commit, or the abetment of, any offence specified\nin sub-clause (i) or sub-clause (ii), [1][except on the complaint in writing of that Court or by such officer of the Court as that Court may authorise in writing in this behalf, or of some other Court to which that Court is subordinate.]\n(2) Where a complaint has been made by a public servant under clause (a) of sub-section (1) any authority to which he is administratively subordinate may order the withdrawal of the complaint and send a copy of such order to the Court; and upon its receipt by the Court, no further proceedings shall be taken on the complaint:\nProvided that no such withdrawal shall be ordered if the trial in the Court of first instance has been concluded.\n(3) In clause (b) of sub-section (1), the term \"Court\" means a Civil, Revenue or Criminal Court, and includes a tribunal constituted by or under a Central, Provincial or State Act if declared by that Act to be a Court for the purposes of this section.\n(4) For the purposes of clause (b) of sub-section (1), a Court shall be deemed to be subordinate to the Court to which appeals ordinarily lie from the appealable decrees or sentences of such former Court, or in the case of a Civil Court from whose decrees no appeal ordinarily lies, to the principal Court having ordinary original civil jurisdiction within whose local jurisdiction such Civil Court is situate:\nProvided that—\n(a) where appeals lie to more than one Court, the Appellate Court of inferior jurisdiction shall be the Court\nto which such Court shall be deemed to be subordinate;\n(b) where appeals lie to a Civil and also to a Revenue Court, such Court shall be deemed to be subordinate\nto the Civil or Revenue Court according to the nature of the case or proceeding in connection with which the\noffence is alleged to have been committed.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 2 of 2006",
+      "by_doc_id": null,
+      "effective_date": "2006-04-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 2 of 2006, s. 3, for certain words (w.e.f. 16-4-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

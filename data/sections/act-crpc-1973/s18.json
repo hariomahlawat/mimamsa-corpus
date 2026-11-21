@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s18",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "18",
+  "chapter": {
+    "number": "II",
+    "title": "CONSTITUTION OF CRIMINAL COURTS AND OFFICES"
+  },
+  "order": 18,
+  "page_start": 27,
+  "page_end": 27,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Special Metropolitan Magistrates.",
+  "text": "(1) The High Court may, if requested by the Central or State Government so to do, confer upon any person who holds or has held any post under the Government, all or any of the powers conferred or conferrable by or under this Code on a Metropolitan Magistrate, in respect to particular cases or to particular classes of cases 1* * * , in any metropolitan area within its local jurisdiction:\nProvided that no such power shall be conferred on a person unless he possesses such qualification or experience in relation to legal affairs as the High Court may, by rules, specify.\n(2) Such Magistrates shall be called Special Metropolitan Magistrates and shall be appointed for such term, not exceeding one year at a time, as the High Court may, by general or special order, direct.\n[2][(3) The High Court or the State Government, as the case may be, may empower any Special Metropolitan Magistrate to exercise, in any local area outside the metropolitan area, the powers of a Judicial Magistrate of the first class.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 6, ibid.",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 6, ibid., for sub-section (3) (w.e.f. 18-12-1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

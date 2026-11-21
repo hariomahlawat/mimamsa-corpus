@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s469",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "469",
+  "chapter": {
+    "number": "XXXVI",
+    "title": "[1]"
+  },
+  "order": 517,
+  "page_start": 163,
+  "page_end": 164,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Commencement of the period of limitation.",
+  "text": "(1) The period of limitation, in relation to an offender, shall commence,—\n(a) on the date of the offence; or\n(b) where the commission of the offence was not known to the person aggrieved by the offence or to any\npolice officer, the first day on which such offence comes to the knowledge of such person or to any police\nofficer, whichever is earlier; or\n(c) where it is not known by whom the offence was committed, the first day on which the identity of the\noffender is known to the person aggrieved by the offence or to the police officer making investigation into the\noffence, whichever is earlier.\n(2) In computing the said period, the day from which such period is to be computed shall be excluded.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s200",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "200",
+  "chapter": {
+    "number": "XV",
+    "title": "COMPLAINTS TO MAGISTRATES"
+  },
+  "order": 227,
+  "page_start": 87,
+  "page_end": 87,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Examination of complainant.",
+  "text": "A Magistrate taking cognizance of an offence on complaint shall examine upon oath the complainant and the witnesses present, if any, and the substance of such examination shall be reduced to writing and shall be signed by the complainant and the witnesses, and also by the Magistrate:\nProvided that, when the complaint is made in writing, the Magistrate need not examine the complainant and the witnesses—\n(a) if a public servant acting or purporting to act in the discharge of his official duties or a Court\nhas made the complaint; or\n(b) if the Magistrate makes over the case for inquiry or trial to another Magistrate under\nsection 192:\nProvided further that if the Magistrate makes over the case to another Magistrate under section 192 after examining the complainant and the witnesses, the latter Magistrate need not re-examine them.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

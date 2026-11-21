@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s253",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "253",
+  "chapter": {
+    "number": "XX",
+    "title": "TRIAL OF SUMMONS-CASES BY MAGISTRATES"
+  },
+  "order": 280,
+  "page_start": 101,
+  "page_end": 101,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Conviction on plea of guilty in absence of accused in petty cases.",
+  "text": "(1) Where a summons has been issued under section 206 and the accused desires to plead guilty to the charge without appearing before the Magistrate, he shall transmit to the Magistrate, by post or by messenger, a letter containing his plea and also the amount of fine specified in the summons.\n(2) The Magistrate may, in his discretion, convict the accused in his absence, on his plea of guilty and sentence him to pay the fine specified in the summons, and the amount transmitted by the accused shall be adjusted towards that fine, or where a pleader authorised by the accused in this behalf pleads guilty on behalf of the accused, the Magistrate shall record the plea as nearly as possible in the words used by the pleader and may, in his discretion, convict the accused on such plea and sentence him as aforesaid.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

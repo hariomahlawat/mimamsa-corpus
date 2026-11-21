@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s394",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "394",
+  "chapter": {
+    "number": "XXIX",
+    "title": "APPEALS"
+  },
+  "order": 437,
+  "page_start": 144,
+  "page_end": 144,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Abatement of appeals.",
+  "text": "(1) Every other appeal under section 377 or section 378 shall finally abate on the death of the accused.\n(2) Every other appeal under this Chapter (except an appeal from a sentence of fine) shall finally abate on the death of the appellant:\nProvided that where the appeal is against a conviction and sentence of death or of imprisonment, and the appellant dies during the pendency of the appeal, any of his near relatives may, within thirty days of the death of the appellant, apply to the Appellate Court for leave to continue the appeal; and if leave is granted, the appeal shall not abate.\nExplanation.—In this section, \"near relative\" means a parent, spouse, lineal descendant, brother or sister.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

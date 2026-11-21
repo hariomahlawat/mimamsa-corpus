@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s242",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "242",
+  "chapter": {
+    "number": "XIX",
+    "title": "TRIAL OF WARRANT-CASES BY MAGISTRATES"
+  },
+  "order": 269,
+  "page_start": 98,
+  "page_end": 98,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Evidence for prosecution.",
+  "text": "(1) If the accused refuses to plead or does not plead, or claims to be tried or the Magistrate does not convict the accused under section 241, the Magistrate shall fix a date for the examination of witnesses:\n[1][Provided that the Magistrate shall supply in advance to the accused, the statement of witnesses recorded during investigation by the police.]\n(2) The Magistrate may, on the application of the prosecution, issue a summons to any of its witnesses directing him to attend or to produce any document or other thing.\n(3) On the date so fixed, the Magistrate shall proceed to take all such evidence as may be produced in support of the prosecution:\nProvided that the Magistrate may permit the cross-examination of any witness to be deferred until any other witness or witnesses have been examined or recall any witness for further cross-examination.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 5 of 2009",
+      "by_doc_id": null,
+      "effective_date": "2009-12-31",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 5 of 2009, s.19 (w.e.f. 31-12-2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

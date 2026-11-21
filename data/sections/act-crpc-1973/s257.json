@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s257",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "257",
+  "chapter": {
+    "number": "XX",
+    "title": "TRIAL OF SUMMONS-CASES BY MAGISTRATES"
+  },
+  "order": 284,
+  "page_start": 101,
+  "page_end": 101,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Withdrawal of complaint.",
+  "text": "If a complainant, at any time before a final order is passed in any case under this Chapter, satisfies the Magistrate that there are sufficient grounds for permitting him to withdraw his complaint against the accused, or if there be more than one accused, against all or any of them, the Magistrate may permit him to withdraw the same, and shall thereupon acquit the accused against whom the complaint is so withdrawn.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

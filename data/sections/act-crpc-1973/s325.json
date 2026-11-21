@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s325",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "325",
+  "chapter": {
+    "number": "XXIV",
+    "title": "GENERAL PROVISIONS AS TO INQUIRIES AND TRIALS"
+  },
+  "order": 365,
+  "page_start": 124,
+  "page_end": 124,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Procedure when Magistrate cannot pass sentence sufficiently severe.",
+  "text": "(1) Whenever a Magistrate is of opinion, after hearing the evidence for the prosecution and the accused, that the accused is guilty, and that he ought to receive a punishment different in kind from, or more severe than, that which such Magistrate is empowered to inflict, or, being a Magistrate of the second class, is of opinion that the accused ought to be required to execute a bond under section 106, he may record the opinion and submit his proceedings, and forward the accused, to the Chief Judicial Magistrate to whom he is subordinate.\n(2) When more accused than one are being tried together, and the Magistrate considers it necessary to proceed under sub-section (1), in regard to any of such accused, he shall forward all the accused, who are in his opinion guilty, to the Chief Judicial Magistrate.\n(3) The Chief Judicial Magistrate to whom the proceedings are submitted may, if he thinks fit, examine the parties and recall and examine any witness who has already given evidence in the case and may call for and take any further evidence and shall pass such judgment, sentence or order in the case as he thinks fit, and is according to law.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

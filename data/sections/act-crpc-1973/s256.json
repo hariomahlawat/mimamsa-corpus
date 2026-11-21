@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s256",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "256",
+  "chapter": {
+    "number": "XX",
+    "title": "TRIAL OF SUMMONS-CASES BY MAGISTRATES"
+  },
+  "order": 283,
+  "page_start": 101,
+  "page_end": 101,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Non-appearance or death of complainant.",
+  "text": "(1) If the summons has been issued on complaint, and on the day appointed for the appearance of the accused, or any day subsequent thereto to which the hearing may be adjourned, the complainant does not appear, the Magistrate shall, notwithstanding anything hereinbefore contained, acquit the accused, unless for some reason he thinks it proper to adjourn the hearing of the case to some other day:\nProvided that where the complainant is represented by a pleader or by the officer conducting the prosecution or where the Magistrate is of opinion that the personal attendance of the complainant is not necessary, the Magistrate may, dispense with his attendance and proceed with the case.\n(2) The provisions of sub-section (1) shall, so far as may be, apply also to cases where the non-appearance of the complainant is due to his death.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

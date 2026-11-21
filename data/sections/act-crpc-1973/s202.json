@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s202",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "202",
+  "chapter": {
+    "number": "XV",
+    "title": "COMPLAINTS TO MAGISTRATES"
+  },
+  "order": 229,
+  "page_start": 87,
+  "page_end": 88,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Postponement of issue of process.",
+  "text": "(1) Any Magistrate, on receipt of a complaint of an offence of which he is authorised to take cognizance or which has been made over to him under section 192, may, if he thinks fit, [1][and shall, in a case where the accused is residing at a place beyond the area in which he exercises his jurisdiction,] postpone the issue of process against the accused, and either inquire into the case himself or direct an investigation to be made by a police officer or by such other person as he thinks fit, for the purpose of deciding whether or not there is sufficient ground for proceeding:\nProvided that no such direction for investigation shall be made,—\n(a) where it appears to the Magistrate that the offence complained of is triable exclusively by the\nCourt of Session; or\n(b) where the complaint has not been made by a Court, unless the complainant and the witnesses\npresent (if any) have been examined on oath under section 200.\n(2) In an inquiry under sub-section (1), the Magistrate may, if he thinks fit, take evidence of witnesses on oath:\nProvided that if it appears to the Magistrate that the offence complained of is triable exclusively by the Court of Session, he shall call upon the complainant to produce all his witnesses and examine them on oath.\n(3) If an investigation under sub-section (1) is made by a person not being a police officer, he shall have for that investigation all the powers conferred by this Code on an officer in charge of a police station except the power to arrest without warrant.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 25 of 2005",
+      "by_doc_id": null,
+      "effective_date": "2006-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 25 of 2005, s. 19 (w.e.f. 23-6-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

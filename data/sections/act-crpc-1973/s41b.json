@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s41b",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "41B",
+  "chapter": {
+    "number": "V",
+    "title": "ARREST OF PERSONS"
+  },
+  "order": 44,
+  "page_start": 35,
+  "page_end": 35,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Procedure of arrest and duties of officer making arrest.",
+  "text": "Every police officer while making an arrest shall—\n(a) bear an accurate, visible and clear identification of his name which will facilitate easy\nidentification;\n(b) prepare a memorandum of arrest which shall be—\n(i) attested by at least one witness, who is a member of the family of the person arrested or a\nrespectable member of the locality where the arrest is made;\n(ii) countersigned by the person arrested; and\n(c) inform the person arrested, unless the memorandum is attested by a member of his family, that\nhe has a right to have a relative or a friend named by him to be informed of his arrest.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s142",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "142",
+  "chapter": {
+    "number": "X",
+    "title": "MAINTENANCE OF PUBLIC ORDER AND TRANQUILLITY"
+  },
+  "order": 163,
+  "page_start": 66,
+  "page_end": 66,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Injunction pending inquiry.",
+  "text": "(1) If a Magistrate making an order under section 133 considers that immediate measures should be taken to prevent imminent danger or injury of a serious kind to the public, he may issue such an injunction to the person against whom the order was made, as is required to obviate or prevent such danger or injury pending the determination of the matter.\n(2) In default of such person forthwith obeying such injunction, the Magistrate may himself use, or cause to be used, such means as he thinks fit to obviate such danger or to prevent such injury.\n(3) No suit shall lie in respect of anything done in good faith by a Magistrate under this section.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

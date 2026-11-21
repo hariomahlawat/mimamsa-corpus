@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s359",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "359",
+  "chapter": {
+    "number": "XXVII",
+    "title": "THE JUDGMENT"
+  },
+  "order": 402,
+  "page_start": 135,
+  "page_end": 135,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Order to pay costs in non-cognizable cases.",
+  "text": "(1) Whenever any complaint of a non-cognizable offence is made to a Court, the Court, if it convicts the accused, may, in addition to the penalty imposed upon him, order him to pay to the complainant, in whole or in part, the cost incurred by him in the prosecution, and may further order that in default of payment, the accused shall suffer simple imprisonment for a period not exceeding thirty days and such costs may include any expenses incurred in respect of process-fees, witnesses and pleader's fees which the Court may consider reasonable.\n(2) An order under this section may also be made by an Appellate Court or by the High Court or Court of Session when exercising its powers of revision.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

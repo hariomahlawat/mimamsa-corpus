@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s464",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "464",
+  "chapter": {
+    "number": "XXXV",
+    "title": "IRREGULAR PROCEEDINGS"
+  },
+  "order": 512,
+  "page_start": 162,
+  "page_end": 163,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Effect of omission to frame, or absence of, or error in, charge.",
+  "text": "(1) No finding, sentence or order by a Court of competent jurisdiction shall be deemed invalid merely on the ground that no charge was framed or on the ground of any error, omission or irregularity in the charge including any misjoinder of charges, unless, in the opinion of the Court of appeal, confirmation or revision, a failure of justice has in fact been occasioned thereby.\n(2) If the Court of appeal, confirmation or revision, is of opinion that a failure of justice has in fact been occasioned, it may,—\n(a) in the case of an omission to frame a charge, order that a charge be framed, and that the trial be\nrecommended from the point immediately after the framing of the charge;\n(b) in the case of an error, omission or irregularity in the charge, direct a new trial to be had upon a charge\nframed in whatever manner it thinks fit:\nProvided that if the Court is of opinion that the facts of the case are such that no valid charge could be preferred against the accused in respect of the facts proved, it shall quash the conviction.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

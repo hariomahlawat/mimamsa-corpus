@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s351",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "351",
+  "chapter": {
+    "number": "XXVI",
+    "title": "PROVISIONS AS TO OFFENCES AFFECTING THE ADMINISTRATION OF JUSTICE"
+  },
+  "order": 391,
+  "page_start": 131,
+  "page_end": 132,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Appeals from convictions under sections 344, 345, 349 and 350.",
+  "text": "(1) Any person sentenced by any Court other than a High Court under section 344, section 345, section 349, or section 350 may, notwithstanding anything contained in this Code appeal to the Court to which decrees or orders made in such Court are ordinarily appealable.\n(2) The provisions of Chapter XXIX shall, so far as they are applicable, apply to appeals under this section, and the Appellate Court may alter or reverse the finding, or reduce or reverse the sentence appealed against.\n(3) An appeal from such conviction by a Court of Small Causes shall lie to the Court of Session for the sessions division within which such Court is situate.\n(4) An appeal from such conviction by any Registrar or Sub-Registrar deemed to be a Civil Court by virtue of a direction issued under section 347 shall lie to the Court of Session for the sessions division within which the office of such Registrar or Sub-Registrar is situate.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

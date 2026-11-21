@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s41a",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "41A",
+  "chapter": {
+    "number": "V",
+    "title": "ARREST OF PERSONS"
+  },
+  "order": 43,
+  "page_start": 35,
+  "page_end": 35,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Notice of appearance before police officer.",
+  "text": "(1) [3][The police officer shall], in all cases where the arrest of a person is not required under the provisions of sub-section (1) of section 41, issue a notice directing the person against whom a reasonable complaint has been made, or credible information has been received, or a reasonable suspicion exists that he has committed a cognizable offence, to appear before him or at such other place as may be specified in the notice.\n(2) Where such a notice is issued to any person, it shall be the duty of that person to comply with the terms of the notice.\n(3) Where such person complies and continues to comply with the notice, he shall not be arrested in respect of the offence referred to in the notice unless, for reasons to be recorded, the police officer is of the opinion that he ought to be arrested.\n[4][(4) Where such person, at any time, fails to comply with the terms of the notice or is unwilling to identify himself, the police officer may, subject to such orders as may have been passed by a competent Court in this behalf, arrest him for the offence mentioned in the notice.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "s. 6, ibid.",
+      "by_doc_id": null,
+      "effective_date": "2010-11-01",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by s. 6, ibid. (w.e.f. 1-11-2010).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 41 of 2010",
+      "by_doc_id": null,
+      "effective_date": "2010-11-02",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 41 of 2010, s. 3, for “The police officer may” (w.e.f. 2-11-2010).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 3, ibid.",
+      "by_doc_id": null,
+      "effective_date": "2010-11-02",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 3, ibid. (w.e.f. 2-11-2010).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

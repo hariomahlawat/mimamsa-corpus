@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s261",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "261",
+  "chapter": {
+    "number": "XXI",
+    "title": "SUMMARY TRIALS"
+  },
+  "order": 288,
+  "page_start": 102,
+  "page_end": 102,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Summary trial by Magistrate of the second class.",
+  "text": "The High Court may confer on any Magistrate invested with the powers of a Magistrate of the second class power to try summarily any offence which is punishable only with fine or with imprisonment for a term not exceeding six months with or without fine, and any abetment of or attempt to commit any such offence.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

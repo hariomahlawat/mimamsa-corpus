@@ -23,6 +23,17 @@
   "text": "When there is a question whether an act was accidental or intentional, [1][or done with a particular knowledge or intention,] the fact that such act formed part of a series of similar occurrences, in each of which the person doing the act was concerned, is relevant.\nIllustrations\n(a) A is accused of burning down his house in order to obtain money for which it is insured.\nThe facts that A lived in several houses successively each of which he insured, in each of which a fire occurred, and after each of which fires A received payment from a different insurance office, are relevant, as tending to show that the fires were not accidental.\n(b) A is employed to receive money from the debtors of B. It is A’s duty to make entries in a book showing the amounts received by him. He makes an entry showing that on a particular occasion he received less than he really did receive.\nThe question is, whether this false entry was accidental or intentional.\nThe facts that other entries made by A in the same book are false, and that the false entry is in each case in favour of A, are relevant.\n(c) A is accused of fraudulently delivering to B a counterfeit rupee.\nThe question is, whether the delivery of the rupee was accidental.\nThe facts that, soon before or soon after the delivery to B, A delivered counterfeit rupees to C, D and E are relevant, as showing that the delivery to B was not accidental.",
   "status": "repealed",
   "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
-  "amendment_history": [],
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 3 of 1891",
+      "by_doc_id": null,
+      "effective_date": "1891-02-13",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 3 of 1891, s. 2 (w.e.f. 13-2-1891).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
   "notes": []
 }

@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s128",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "128",
+  "chapter": {
+    "number": "IX",
+    "title": "ORDER FOR MAINTENANCE OF WIVES, CHILDREN AND PARENTS"
+  },
+  "order": 149,
+  "page_start": 62,
+  "page_end": 62,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Enforcement of order of maintenance.",
+  "text": "A copy of the order of [3][maintenance or interim maintenance and expenses of proceedings, as the case may be,] shall be given without payment to the person in whose favour it is made, or to his guardian, if any, or to the person to [4][whom the allowance for the maintenance or the allowance for the interim maintenance and expenses of proceeding, as the case may be,] is to be paid; and such order may be enforced by any Magistrate in any place where the person against whom it is made may be, on such Magistrate being satisfied as to the identity of the parties and the non-payment of the [5][allowance, or as the case may be, expenses, due].\nA.—Unlawful assemblies",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 4, ibid.",
+      "by_doc_id": null,
+      "effective_date": "2001-09-24",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 4, ibid., for “maintenance” (w.e.f. 24-9-2001).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 4, ibid.",
+      "by_doc_id": null,
+      "effective_date": "2001-09-24",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 4, ibid., for “whom the allowance” (w.e.f. 24-9-2001).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 4, ibid.",
+      "by_doc_id": null,
+      "effective_date": "2001-09-24",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 4, ibid., for “allowance due” (w.e.f. 24-9-2001).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s222",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "222",
+  "chapter": {
+    "number": "XVII",
+    "title": "THE CHARGE"
+  },
+  "order": 249,
+  "page_start": 95,
+  "page_end": 95,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "When offence proved included in offence charged.",
+  "text": "(1) When a person is charged with an offence consisting of several particulars, a combination of some only of which constitutes a complete minor offence, and such combination is proved, but the remaining particulars are not proved, he may be convicted of the minor offence, though he was not charged with it.\n(2) When a person is charged with an offence and facts are proved which reduce it to a minor offence, he may be convicted of the minor offence, although he is not charged with it.\n(3) When a person is charged with an offence, he may be convicted of an attempt to commit such offence although the attempt is not separately charged.\n(4) Nothing in this section shall be deemed to authorise a conviction of any minor offence where the conditions requisite for the initiation of proceedings in respect of that minor offence have not been satisfied.\nIllustrations\n(a) A is charged, under section 407 of the Indian Penal Code (45 of 1860), with criminal breach of trust in respect of\nproperty entrusted to him as a carrier. It appears, that he did commit criminal breach of trust under section 406 of that Code\nin respect of the property, but that it was not entrusted to him as a carrier. He may be convicted of criminal breach of trust\nunder the said section 406.\n(b) A is charged, under section 325 of the Indian Penal Code (45 of 1860), with causing grievous hurt. He proves that\nhe acted on grave and sudden provocation. He may be convicted under section 335 of that Code.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

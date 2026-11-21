@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s281",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "281",
+  "chapter": {
+    "number": "XXIII",
+    "title": "EVIDENCE IN INQUIRIES AND TRIALS"
+  },
+  "order": 319,
+  "page_start": 109,
+  "page_end": 109,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Record of examination of accused.",
+  "text": "(1) Whenever the accused is examined by a Metropolitan Magistrate, the Magistrate shall make a memorandum of the substance of the examination of the accused in the language of the Court and such memorandum shall be signed by the Magistrate and shall form part of the record.\n(2) Whenever the accused is examined by any Magistrate other than a Metropolitan Magistrate, or by a Court of Session, the whole of such examination, including every question put to him and every answer given by him, shall be recorded in full by the presiding Judge or Magistrate himself or where he is unable to do so owing to a physical or other incapacity, under his direction and superintendence by an officer of the Court appointed by him in this behalf.\n(3) The record shall, if practicable, be in the language in which the accused is examined or, if that is not practicable, in the language of the Court.\n(4) The record shall be shown or read to the accused, or, if he does not understand the language in which it is written, shall be interpreted to him in a language which he understands, and he shall be at liberty to explain or add to his answers.\n(5) It shall thereafter be signed by the accused and by the Magistrate or presiding Judge, who shall certify under his own hand that the examination was taken in his presence and hearing and that the record contains a full and true account of the statement made by the accused.\n(6) Nothing in this section shall be deemed to apply to the examination of an accused person in the course of a summary trial.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

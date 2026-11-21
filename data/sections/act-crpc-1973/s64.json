@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s64",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "64",
+  "chapter": {
+    "number": "VI",
+    "title": "PROCESSES TO COMPEL APPEARANCE"
+  },
+  "order": 74,
+  "page_start": 41,
+  "page_end": 41,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Service when persons summoned cannot be found.",
+  "text": "Where the person summoned cannot, by the exercise of due diligence, be found, the summons may be served by leaving one of the duplicates for him with some adult male member of his family residing with him, and the person with whom the summons is so left shall, if so required by the serving officer, sign a receipt therefor on the back of the other duplicate.\nExplanation.—A servant is not a member of the family within the meaning of this section.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s371",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "371",
+  "chapter": {
+    "number": "XXVIII",
+    "title": "SUBMISSION OF DEATH SENTENCES FOR CONFIRMATION"
+  },
+  "order": 414,
+  "page_start": 138,
+  "page_end": 138,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Procedure in cases submitted to High Court for confirmation.",
+  "text": "In cases submitted by the Court of Session to the High Court for the confirmation of a sentence of death, the proper officer of the High Court shall, without delay, after the order of confirmation or other order has been made by the High Court, send a copy of the order, under the seal of the High Court and attested with his official signature, to the Court of Session.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

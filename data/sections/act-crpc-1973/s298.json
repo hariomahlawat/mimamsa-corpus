@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s298",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "298",
+  "chapter": {
+    "number": "XXIII",
+    "title": "EVIDENCE IN INQUIRIES AND TRIALS"
+  },
+  "order": 337,
+  "page_start": 112,
+  "page_end": 113,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Previous conviction or acquittal how proved.",
+  "text": "In any inquiry, trial or other proceeding under this Code, a previous conviction or acquittal may be proved, in addition to any other mode provided by any law for the time being in force,—\n(a) by an extract certified under the hand of the officer having the custody of the records of the Court in\nwhich such conviction or acquittal was held, to be a copy of the sentence or order, or\n(b) in case of a conviction, either by a certificate signed by the officer in charge of the Jail in which the\npunishment or any part thereof was undergone, or by production of the warrant of commitment under which the\npunishment was suffered, together with, in each of such cases, evidence as to the identity of the accused person with the person so convicted or acquitted.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s428",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "428",
+  "chapter": {
+    "number": "XXXII",
+    "title": "EXECUTION, SUSPENSION, REMISSION AND COMMUTATION OF SENTENCES"
+  },
+  "order": 471,
+  "page_start": 152,
+  "page_end": 152,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Period of detention undergone by the accused to be set off against the sentence of imprisonment.",
+  "text": "Where an accused person has, on conviction, been sentenced to imprisonment for a term, [1][not being imprisonment in default of payment of fine], the period of detention, if any, undergone by him during the investigation, inquiry or trial of the same case and before the date of such conviction, shall be set off against the term of imprisonment imposed on him on such conviction, and the liability of such person to undergo imprisonment on such conviction shall be restricted to the remainder, if any, of the term of imprisonment imposed on him:\n[2][Provided that in cases referred to in section 433A, such period of detention shall be set off against the period of fourteen years referred to in that section.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 45 of 1978",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 45 of 1978, s. 31 (w.e.f.18-12-1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 25 of 2005",
+      "by_doc_id": null,
+      "effective_date": "2006-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 25 of 2005, s. 34 (w.e.f. 23-6-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

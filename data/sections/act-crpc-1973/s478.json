@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s478",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "478",
+  "chapter": {
+    "number": "XXXVII",
+    "title": "MISCELLANEOUS"
+  },
+  "order": 526,
+  "page_start": 165,
+  "page_end": 165,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Power to alter functions allocated to Executive Magistrate in certain cases.",
+  "text": "If the Legislative Assembly of a State by a resolution so permits, the State Government may, after consultation with the High Court, by notification, direct that references in sections 108, 109, 110, 145 and 147 to an Executive Magistrate shall be construed as references to a Judicial Magistrate of the first class.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 63 of 1980",
+      "by_doc_id": null,
+      "effective_date": "1980-09-23",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 63 of 1980, s. 8, for s. 478 (w.e.f. 23-9-1980).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s311a",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "311A",
+  "chapter": {
+    "number": "XXIV",
+    "title": "GENERAL PROVISIONS AS TO INQUIRIES AND TRIALS"
+  },
+  "order": 351,
+  "page_start": 117,
+  "page_end": 117,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Power of Magistrate to order person to give specimen signatures or handwriting.",
+  "text": "If a Magistrate of the first class is satisfied that, for the purposes of any investigation or proceeding under this Code, it is expedient to direct any person, including an accused person, to give specimen signatures or handwriting, he may make an order to that effect and in that case the person to whom the order relates shall be produced or shall attend at the time and place specified in such order and shall give his specimen signatures or handwriting:\nProvided that no order shall be made under this section unless the person has at some time been arrested in connection with such investigation or proceeding.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 25 of 2005",
+      "by_doc_id": null,
+      "effective_date": "2006-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 25 of 2005, s. 27 (w.e.f. 23-6-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

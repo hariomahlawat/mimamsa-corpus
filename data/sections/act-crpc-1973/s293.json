@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s293",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "293",
+  "chapter": {
+    "number": "XXIII",
+    "title": "EVIDENCE IN INQUIRIES AND TRIALS"
+  },
+  "order": 332,
+  "page_start": 111,
+  "page_end": 112,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Reports of certain Government scientific experts.",
+  "text": "(1) Any document purporting to be a report under the hand of a Government scientific expert to whom this section applies, upon any matter or thing duly submitted to him for examination or analysis and report in the course of any proceeding under this Code, may be used as evidence in any inquiry, trial or other proceeding under this Code.\n(2) The Court may, if it thinks fit, summon and examine any such expert as to the subject-matter of his report.\n(3) Where any such expert is summoned by a Court, and he is unable to attend personally, he may, unless the Court has expressly directed him to appear personally, depute any responsible officer working with him to attend the Court, if such officer is conversant with the facts of the case and can satisfactorily depose in Court on his behalf.\n(4) This section applies to the following Government scientific experts, namely:—\n(a) any Chemical Examiner or Assistant Chemical Examiner to Government;\n[3][(b) the Chief Controller of Explosives;]\n(c) the Director of the Finger Print Bureau;\n(d) the Director, Haffkeine Institute, Bombay;\n(e) the Director [1][, Deputy Director or Assistant Director] of a Central Forensic Science Laboratory or a\nState Forensic Science Laboratory;\n(f) the Serologist to the Government;\n[2][(g) any other Government scientific expert specified, by notification, by the Central Government for this\npurpose.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 25 of 2005",
+      "by_doc_id": null,
+      "effective_date": "2006-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 25 of 2005, s. 26, for cl. (b) (w.e.f. 23-6-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 45 of 1978",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 45 of 1978, s. 21 (w.e.f. 18-12-1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 25 of 2005",
+      "by_doc_id": null,
+      "effective_date": "2006-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 25 of 2005, s. 26 (w.e.f. 23-6-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

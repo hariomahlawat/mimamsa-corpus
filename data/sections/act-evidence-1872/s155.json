@@ -23,6 +23,27 @@
   "text": "The credit of a witness may be impeached in the following ways by the adverse party, or, with the consent of the Court, by the party who calls him:––\n(1) by the evidence of persons who testify that they, from their knowledge of the witness, believe\nhim to be unworthy of credit;\n(2) by proof that the witness has been bribed, or has [1][accepted] the offer of a bribe, or has\nreceived any other corrupt inducement to give his evidence;\n(3) by proof of former statements inconsistent with any part of his evidence which is liable to be\ncontradicted.\n[2]* * * * *\nExplanation.––A witness declaring another witness to be unworthy of credit may not, upon his examination-in-chief, give reasons for his belief, but he may be asked his reasons in cross-examination, and the answers which he gives cannot be contradicted, though, if they are false, he may afterwards be charged with giving false evidence.\nIllustrations\n(a) A sues B for the price of goods sold and delivered to B.\nC says that he delivered the goods to B.\nEvidence is offered to show that, on a previous occasion, he said that he had not delivered the goods to B. The evidence is admissible.\n(b) A is indicted for the murder of B.\nC says that B, when dying, declared that A had given B the wound of which he died.\nEvidence is offered to show that, on a previous occasion, C said that the wound was not given by A or in his presence.\nThe evidence is admissible.",
   "status": "repealed",
   "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
-  "amendment_history": [],
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 18 of 1872",
+      "by_doc_id": null,
+      "effective_date": "1872-08-29",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 18 of 1872, s. 11, for “had” (w.e.f. 29-8-1872).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "omitted",
+      "by_ref_raw": "Act 4 of 2003",
+      "by_doc_id": null,
+      "effective_date": "2002-12-31",
+      "effective_date_raw": null,
+      "footnote_text": "Clause (4) omitted by Act 4 of 2003, s. 3 (w.e.f. 31-12-2002).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
   "notes": []
 }

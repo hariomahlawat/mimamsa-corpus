@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s288",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "288",
+  "chapter": {
+    "number": "XXIII",
+    "title": "EVIDENCE IN INQUIRIES AND TRIALS"
+  },
+  "order": 326,
+  "page_start": 110,
+  "page_end": 110,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Return of commission.",
+  "text": "(1) After any commission issued under section 284 has been duly executed, it shall be returned, together with the deposition of the witness examined thereunder, to the Court or Magistrate issuing the commission; and the commission, the return thereto and the deposition shall be open at all reasonable times to inspection of the parties, and may, subject to all just exceptions, be read in evidence in the case by either party, and shall form part of the record.\n(2) Any deposition so taken, if it satisfies the conditions prescribed by section 33 of the Indian Evidence Act, 1872 (1 of 1872), may also be received in evidence at any subsequent stage of the case before another Court.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

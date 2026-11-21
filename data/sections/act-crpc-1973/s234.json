@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s234",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "234",
+  "chapter": {
+    "number": "XVIII",
+    "title": "TRIAL BEFORE A COURT OF SESSION"
+  },
+  "order": 261,
+  "page_start": 97,
+  "page_end": 97,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Arguments.",
+  "text": "When the examination of the witnesses (if any) for the defence is complete, the prosecutor shall sum up his case and the accused or his pleader shall be entitled to reply:\nProvided that where any point of law is raised by the accused or his pleader, the prosecution may, with the permission of the Judge, make his submissions with regard to such point of law.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

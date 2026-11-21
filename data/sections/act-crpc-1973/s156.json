@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s156",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "156",
+  "chapter": {
+    "number": "XII",
+    "title": "INFORMATION TO THE POLICE AND THEIR POWERS TO INVESTIGATE"
+  },
+  "order": 177,
+  "page_start": 70,
+  "page_end": 70,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Police officer’s power to investigate cognizable case.",
+  "text": "(1) Any officer in charge of a police station may, without the order of a Magistrate, investigate any cognizable case which a Court having jurisdiction over the local area within the limits of such station would have power to inquire into or try under the provisions of Chapter XIII.\n(2) No proceeding of a police officer in any such case shall at any stage be called in question on the ground that the case was one which such officer was not empowered under this section to investigate.\n(3) Any Magistrate empowered under section 190 may order such an investigation as above-mentioned.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s330",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "330",
+  "chapter": {
+    "number": "XXV",
+    "title": "PROVISIONS AS TO ACCUSED PERSONS OF UNSOUND MIND"
+  },
+  "order": 370,
+  "page_start": 127,
+  "page_end": 127,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Release of person of unsound mind pending investigation or trial.",
+  "text": "(1) Whenever a person if found under section 328 or section 329 to be incapable of entering defence by reason of unsoundness of mind or mental retardation, the Magistrate or Court, as the case may be shall, whether the case is one in which bail may be taken or not, order release of such person on bail:\nProvided that the accused is suffering from unsoundness of mind or mental retardation which does not mandate in-patient treatment and a friend or relative undertakes to obtain regular out-patient psychiatric treatment from the nearest medical facility and to prevent from doing injury to himself or to any other person.\n(2) If the case is one in which, in the opinion of the Magistrate or Court, as the case may be, bail cannot be granted or if an appropriate undertaking is not given, he or it shall order the accused to be kept in such a place where regular psychiatric treatment can be provided, and shall report the action taken to the State Government:\nProvided that no order for the detention of the accused in a lunatic asylum shall be made otherwise than in accordance with such rules as the State Government may have made under the Mental Health Act, 1987 (14 of 1987).\n(3) Whenever a person is found under section 328 or section 329 to be incapable of entering defence by reason of unsoundness of mind or mental retardation, the Magistrate or Court, as the case may be, shall keeping in view the nature of the act committed and the extent of unsoundness of mind or mental retardation, further determine if the release of the accused can be ordered:\nProvided that—\n(a) if on the basis of medical opinion or opinion of a specialist, the Magistrate or Court, as the case may be,\ndecide to order discharge of the accused, as provided under section 328 or section 329, such release may be\nordered, if sufficient security is given that the accused shall be prevented from doing injury to himself or to any\nother person;\n(b) if the Magistrate or Court, as the case may be, is of opinion that discharge of the accused cannot be\nordered, the transfer of the accused to a residential facility for persons of unsound mind or mental retardation\nmay be ordered wherein the accused may be provided care and appropriate education and training.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 5 of 2009",
+      "by_doc_id": null,
+      "effective_date": "2009-12-31",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 5 of 2009, s. 27, for section 330 (w.e.f. 31-12-2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

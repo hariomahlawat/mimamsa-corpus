@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s441a",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "441A",
+  "chapter": {
+    "number": "XXXIII",
+    "title": "PROVISIONS AS TO BAIL AND BONDS"
+  },
+  "order": 488,
+  "page_start": 157,
+  "page_end": 157,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Declaration by sureties.",
+  "text": "Every person standing surety to an accused person for his release on bail, shall make a declaration before the Court as to the number of persons to whom he has stood surety including the accused, giving therein all the relevant particulars.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 25 of 2005",
+      "by_doc_id": null,
+      "effective_date": "2006-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 25 of 2005, s. 39 (w.e.f. 23-6-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

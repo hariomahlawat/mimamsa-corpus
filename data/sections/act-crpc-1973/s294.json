@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s294",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "294",
+  "chapter": {
+    "number": "XXIII",
+    "title": "EVIDENCE IN INQUIRIES AND TRIALS"
+  },
+  "order": 333,
+  "page_start": 112,
+  "page_end": 112,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "No formal proof of certain documents.",
+  "text": "(1)Where any document is filed before any Court by the prosecution or the accused, the particulars of every such document shall be included in a list and the prosecution or the accused, as the case may be, or the pleader for the prosecution or the accused, if any, shall be called upon to admit or deny the genuineness of each such document.\n(2) The list of documents shall be in such form as be prescribed by the State Government.\n(3) Where the genuineness of any document is not disputed, such document may be read in evidence in inquiry, trial or other proceeding under this Code without proof of the signature of the person to whom it purports to be signed:\nProvided that the Court may, in its discretion, require such signature to be proved.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

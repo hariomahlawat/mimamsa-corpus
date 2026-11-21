@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s291a",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "291A",
+  "chapter": {
+    "number": "XXIII",
+    "title": "EVIDENCE IN INQUIRIES AND TRIALS"
+  },
+  "order": 330,
+  "page_start": 111,
+  "page_end": 111,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Identification report of Magistrate.",
+  "text": "(1) Any document purporting to be a report of identification under the hand of an Executive Magistrate in respect of a person or property may be used as evidence in any inquiry, trial or other proceeding under this Code, although such Magistrate is not called as a witness:\nProvided that where such report contains a statement of any suspect or witness to which the provisions of section 21, section 32, section 33, section 155 or section 157, as the case may be, of the Indian Evidence Act, 1872 (1 of 1872), apply, such statement shall not be used under this sub-section except in accordance with the provisions of those sections.\n(2) The Court may, if it thinks fit, and shall, on the application of the prosecution or of the accused, summon and examine such Magistrate as to the subject-matter of the said report.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 25 of 2005",
+      "by_doc_id": null,
+      "effective_date": "2006-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 25 of 2005, s. 24 (w.e.f. 23-6-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

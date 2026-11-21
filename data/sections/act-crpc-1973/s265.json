@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s265",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "265",
+  "chapter": {
+    "number": "XXI",
+    "title": "SUMMARY TRIALS"
+  },
+  "order": 292,
+  "page_start": 103,
+  "page_end": 103,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Language of record and judgment.",
+  "text": "(1) Every such record and judgment shall be written in the language of the Court.\n(2) The High Court may authorise any Magistrate empowered to try offences summarily to prepare the aforesaid record or judgment or both by means of an officer appointed in this behalf by the Chief Judicial Magistrate, and the record or judgment so prepared shall be signed by such Magistrate.\n[1][CHAPTER XXIA\nPLEA BARGAINING",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 2 of 2006",
+      "by_doc_id": null,
+      "effective_date": "2006-07-05",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 2 of 2006, s. 4 (w.e.f. 5-7-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

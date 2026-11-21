@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s347",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "347",
+  "chapter": {
+    "number": "XXVI",
+    "title": "PROVISIONS AS TO OFFENCES AFFECTING THE ADMINISTRATION OF JUSTICE"
+  },
+  "order": 387,
+  "page_start": 131,
+  "page_end": 131,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "When Registrar or Sub-Registrar to be deemed a Civil Court.",
+  "text": "When the State Government so directs, any Registrar or any Sub-Registrar appointed under the [1]* * * Registration Act, 1908 (16 of 1908), shall be deemed to be a Civil Court within the meaning of sections 345 and 346.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "omitted",
+      "by_ref_raw": "Act 56 of 1974",
+      "by_doc_id": null,
+      "effective_date": "1974-12-20",
+      "effective_date_raw": null,
+      "footnote_text": "The word “Indian” omitted by Act 56 of 1974, s. 3 and the Second Sch. (w.e.f. 20-12-1974).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

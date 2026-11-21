@@ -23,6 +23,17 @@
   "text": "Whoever gives to any public servant any information which he knows or believes to be false, intending thereby to cause, or knowing it to be likely that he will thereby cause, such public servant—\n(a) to do or omit anything which such public servant ought not to do or omit if the true state of\nfacts respecting which such information is given were known by him, or\n(b) to use the lawful power of such public servant to the injury or annoyance of any person, shall be punished with imprisonment of either description for a term which may extend to six months, or with fine which may extend to one thousand rupees, or with both.\nIllustrations\n(a) A informs a Magistrate that Z, a police-officer, subordinate to such Magistrate, has been guilty of neglect of duty or misconduct, knowing such information to be false, and knowing it to be likely that the information will cause the Magistrate to dismiss Z. A has committed the offence defined in this section.\n(b) A falsely informs a public servant that Z has contraband salt in a secret place, knowing such information to be false, and knowing that it is likely that the consequence of the information will be a search of Z's premises, attended with annoyance to Z. A has committed the offence defined in this section.\n(c) A falsely informs a policeman that he has been assaulted and robbed in the neighbourhood of a particular village. He does not mention the name of any person as one of his assailants, but knows it to be likely that in consequence of this information the police will make enquiries and institute searches in the village to the annoyance of the villages or some of them. A has committed an offence under this section.]",
   "status": "repealed",
   "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)' (read 2026-11-21)",
-  "amendment_history": [],
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 3 of 1895",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 3 of 1895, s. 1, for section 182.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
   "notes": []
 }

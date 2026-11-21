@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s111",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "111",
+  "chapter": {
+    "number": "VIII",
+    "title": "SECURITY FOR KEEPING THE PEACE AND FOR GOOD BEHAVIOUR"
+  },
+  "order": 132,
+  "page_start": 56,
+  "page_end": 56,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Order to be made.",
+  "text": "When a Magistrate acting under section 107, section 108, section 109 or section 110, deems it necessary to require any person to show cause under such section, he shall make an order in writing, setting forth the substance of the information received, the amount of the bond to be executed, the term for which it is to be in force, and the number, character and class of sureties (if any) required.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

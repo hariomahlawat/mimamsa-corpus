@@ -1,0 +1,60 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s173",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "173",
+  "chapter": {
+    "number": "XII",
+    "title": "INFORMATION TO THE POLICE AND THEIR POWERS TO INVESTIGATE"
+  },
+  "order": 197,
+  "page_start": 77,
+  "page_end": 78,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Report of police officer on completion of investigation.",
+  "text": "(1) Every investigation under this Chapter shall be completed without unnecessary delay.\n[2][(1A) The investigation in relation to rape of a child may be completed within three months from the date on which the information was recorded by the officer in charge of the police station.]\n(2) (i) As soon as it is completed, the officer in charge of the police station shall forward to a Magistrate empowered to take cognizance of the offence on a police report, a report in the form prescribed by the State Government, stating—\n(a) the names of the parties;\n(b) the nature of the information;\n(c) the names of the persons who appear to be acquainted with the circumstances of the case;\n(d) whether any offence appears to have been committed and, if so, by whom;\n(e) whether the accused has been arrested;\n(f) whether he has been released on his bond and, if so, whether with or without sureties;\n(g) whether he has been forwarded in custody under section 170.\n[1][(h) whether the report of medical examination of the woman has been attached where investigation relates\nto an offence under section 376, 376A, 376B, 376C [2][376D or section 376E of the Indian Penal Code (45 of\n1860)].]\n(ii) The officer shall also communicate, in such manner as may be prescribed by the State Government, the action taken by him, to the person, if any, by whom the information relating to the commission of the offence was first given.\n(3) Where a superior officer of police has been appointed under section 158, the report shall, in any case in which the State Government by general or special order so directs, be submitted through that officer, and he may, pending the orders of the Magistrate, direct the officer in charge of the police station to make further investigation.\n(4) Whenever it appears from a report forwarded under this section that the accused has been released on his bond, the Magistrate shall make such order for the discharge of such bond or otherwise as he thinks fit.\n(5) When such report is in respect of a case to which section 170 applies, the police officer shall forward to the Magistrate along with the report—\n(a) all documents or relevant extracts thereof on which the prosecution proposes to rely other than those\nalready sent to the Magistrate during investigation;\n(b) the statements recorded under section 161 of all the persons whom the prosecution proposes to examine\nas its witnesses.\n(6) If the police officer is of opinion that any part of any such statement is not relevant to the subject-matter of the proceedings or that its disclosure to the accused is not essential in the interests of justice and is inexpedient in the public interest, he shall indicate that part of the statement and append a note requesting the Magistrate to exclude that part from the copies to be granted to the accused and stating his reasons for making such request.\n(7) Where the police officer investigating the case finds it convenient so to do, he may furnish to the accused copies of all or any of the documents referred to in sub-section (5).\n(8) Nothing in this section shall be deemed to preclude further investigation in respect of an offence after a report under sub-section (2) has been forwarded to the Magistrate and, where upon such investigation, the officer in charge of the police station obtains further evidence, oral or documentary, he shall forward to the Magistrate a further report or reports regarding such evidence in the form prescribed; and the provisions of sub-sections (2) to (6) shall, as far as may be, apply in relation to such report or reports as they apply in relation to a report forwarded under sub-section (2).",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "s. 16, ibid.",
+      "by_doc_id": null,
+      "effective_date": "2009-12-31",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by s. 16, ibid. (w.e.f. 31-12-2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 5 of 2009",
+      "by_doc_id": null,
+      "effective_date": "2009-12-31",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 5 of 2009, s. 16 (w.e.f. 31-12-2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 13 of 2013",
+      "by_doc_id": null,
+      "effective_date": "2013-02-03",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 13 of 2013, s. 17, for “or 376D of the Indian Penal Code (45 of 1860)” (w.e.f. 3-2-2013).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

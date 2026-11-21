@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s318",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "318",
+  "chapter": {
+    "number": "XXIV",
+    "title": "GENERAL PROVISIONS AS TO INQUIRIES AND TRIALS"
+  },
+  "order": 358,
+  "page_start": 119,
+  "page_end": 119,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Procedure where accused does not understand proceedings.",
+  "text": "If the accused, though not of unsound mind, cannot be made to understand the proceedings, the Court may proceed with the inquiry or trial; and, in the case of a Court other than a High Court, if such proceedings result in a conviction, the proceedings shall be forwarded to the High Court with a report of the circumstances of the case, and the High Court shall pass thereon such order as it thinks fit.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

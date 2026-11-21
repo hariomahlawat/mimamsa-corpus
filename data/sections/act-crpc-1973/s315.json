@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s315",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "315",
+  "chapter": {
+    "number": "XXIV",
+    "title": "GENERAL PROVISIONS AS TO INQUIRIES AND TRIALS"
+  },
+  "order": 355,
+  "page_start": 118,
+  "page_end": 118,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Accused person to be competent witness.",
+  "text": "(1) Any person accused of an offence before a Criminal Court shall be a competent witness for the defence and may give evidence on oath in disproof of the charges made against him or any person charged together with him at the same trial:\nProvided that—\n(a) he shall not be called as a witness except on his own request in writing;\n(b) his failure to give evidence shall not be made the subject of any comment by any of the parties or the\nCourt or give rise to any presumption against himself or any person charged together with him that the same\ntrial.\n(2) Any person against whom proceedings are instituted in any Criminal Court under section 98, or section 107 or section 108, or section 109, or section 110, or under Chapter IX or under Part B, Part C or Part D of Chapter X, may offer himself as a witness in such proceedings:\nProvided that in proceedings under section 108, section 109, or section 110, the failure of such person to give evidence shall not be made the subject of any comment by any of the parties or the Court or give rise to any presumption against him or any other person proceeded against together with him at the same inquiry.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

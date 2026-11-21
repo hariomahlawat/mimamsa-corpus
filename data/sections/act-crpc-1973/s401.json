@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s401",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "401",
+  "chapter": {
+    "number": "XXX",
+    "title": "REFERENCE AND REVISION"
+  },
+  "order": 444,
+  "page_start": 145,
+  "page_end": 146,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "High Court's powers of revision.",
+  "text": "(1) In the case of any proceeding the record of which has been called for by itself or which otherwise comes to its knowledge, the High Court may, in its discretion, exercise any of the powers conferred on a Court of Appeal by sections 386, 389, 390 and 391 or on a Court of Session by section 307, and, when the Judges composing the Court of Revision are equally divided in opinion, the case shall be disposed of in the manner provided by section 392.\n(2) No order under this section shall be made to the prejudice of the accused or other person unless he has had an opportunity of being heard either personally or by pleader in his own defence.\n(3) Nothing in this section shall be deemed to authorise a High Court to convert a finding of acquittal into one conviction.\n(4) Where under this Code an appeal lies and no appeal is brought, no proceeding by way of revision shall be entertained at the instance of the party who could have appealed.\n(5) Where under this Code an appeal lies but an application for revision has been made to the High Court by any person and the High Court is satisfied that such application was made under the erroneous belief that no appeal lies thereto and that it is necessary in the interests of Justice so to do, the High Court may treat the application for revision as a petition of appeal and deal with the same accordingly.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

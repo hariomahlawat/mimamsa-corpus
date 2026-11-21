@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s460",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "460",
+  "chapter": {
+    "number": "XXXV",
+    "title": "IRREGULAR PROCEEDINGS"
+  },
+  "order": 508,
+  "page_start": 161,
+  "page_end": 161,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Irregularities which do not vitiate proceedings.",
+  "text": "If any Magistrate not empowered by law to do any of the following things, namely:—\n(a) to issue a search-warrant under section 94;\n(b) to order, under section 155, the police to investigate an offence;\n(c) to hold an inquest under section 176;\n(d) to issue process under section 187, for the apprehension of a person within his local jurisdiction who\nhas committed an offence outside the limits of such jurisdiction;\n(e) to take cognizance of an offence under clause (a) or clause (b) of sub-section (1) of section 190;\n(f) to make over a case under sub-section (2) of section 192;\n(g) to tender a pardon under section 306;\n(h) to recall a case and try it himself under section 410; or\n(i) to sell property under section 458 or section 459, erroneously in good faith does that thing, his proceedings shall not be set aside merely on the ground of his not being so empowered.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

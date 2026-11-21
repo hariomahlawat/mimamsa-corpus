@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s442",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "442",
+  "chapter": {
+    "number": "XXXIII",
+    "title": "PROVISIONS AS TO BAIL AND BONDS"
+  },
+  "order": 489,
+  "page_start": 157,
+  "page_end": 157,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Discharge from custody.",
+  "text": "(1) As soon as the bond has been executed, the person for whose appearance it has been executed shall be released; and, when he is in jail, the court admitting him to bail shall issue an order of release to the officer in charge of the jail, and such officer on receipt of the orders shall release him.\n(2) Nothing in this section, section 436 or section 437, shall be deemed to require the release of any person liable to be detained for some matter other than that in respect of which the bond was executed.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

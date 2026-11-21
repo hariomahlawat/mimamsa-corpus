@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s452",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "452",
+  "chapter": {
+    "number": "XXXIV",
+    "title": "DISPOSAL OF PROPERTY"
+  },
+  "order": 500,
+  "page_start": 159,
+  "page_end": 160,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Order for disposal of property at conclusion of trial.",
+  "text": "(1) When an inquiry or trial in any Criminal Court is concluded, the Court may make such order as it thinks fit for the disposal, by destruction, confiscation or delivery to any person claiming to be entitled to possession thereof or otherwise, of any property or document produced before it or in its custody, or regarding which any offence appears to have been committed, or which has been used for the commission of any offence.\n(2) An order may be made under sub-section (1) for the delivery of any property to any person claiming to be entitled to the possession thereof, without any condition or on condition that he executes a bond, with or without securities, to the satisfaction of the Court, engaging to restore such property to the Court if the order made under sub-section (1) is modified or set aside on appeal or revision.\n(3) A Court of Session may, instead of itself making an order under sub-section (1), direct the property to be delivered to the Chief Judicial Magistrate, who shall thereupon deal with it in the manner provided in sections 457, 458 and 459.\n(4) Except where the property is livestock or is subject to speedy and natural decay, or where a bond has been executed in pursuance of sub-section (2), an order made under sub-section (1) shall not be carried out for two months, or when an appeal is presented, until such appeal has been disposed of.\n(5) In this section, the term \"property\" includes, in the case of property regarding which an offence appears to have been committed, not only such property as has been originally in the possession or under the control of any party, but also any property into or for which the same may have been converted or exchanged, and anything acquired by such conversion or exchange, whether immediately or otherwise.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

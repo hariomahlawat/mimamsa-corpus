@@ -23,6 +23,17 @@
   "text": "No Magistrate or police-officer shall be compelled to say whence he got any information as to the commission of any offence, and no revenue- officer shall be compelled to say whence he got any information as to the commission of any offence against the public revenue.\nExplanation.––“Revenue-officer” in this section means any officer employed in or about the business of any branch of the public revenue.]",
   "status": "repealed",
   "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
-  "amendment_history": [],
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 3 of 1887",
+      "by_doc_id": null,
+      "effective_date": "1887-01-14",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 3 of 1887, s. 1, for the original s. 125 (w.e.f. 14-1-1887).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
   "notes": []
 }

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s73",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "73",
+  "chapter": {
+    "number": "VI",
+    "title": "PROCESSES TO COMPEL APPEARANCE"
+  },
+  "order": 83,
+  "page_start": 42,
+  "page_end": 42,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Warrant may be directed to any person.",
+  "text": "(1) The Chief Judicial Magistrate or a Magistrate of the first class may direct a warrant to any person within his local jurisdiction for the arrest of any escaped convict, proclaimed offender or of any person who is accused of a non-bailable offence and is evading arrest.\n(2) Such person shall acknowledge in writing the receipt of the warrant, and shall execute it if the person for whose arrest it was issued, is in, or enters on, any land or other property under his charge.\n(3) When the person against whom such warrant is issued is arrested, he shall be made over with the warrant to the nearest police officer, who shall cause him to be taken before a Magistrate having jurisdiction in the case, unless security is taken under section 71.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

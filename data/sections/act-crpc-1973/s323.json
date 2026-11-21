@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s323",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "323",
+  "chapter": {
+    "number": "XXIV",
+    "title": "GENERAL PROVISIONS AS TO INQUIRIES AND TRIALS"
+  },
+  "order": 363,
+  "page_start": 124,
+  "page_end": 124,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Procedure when, after commencement of inquiry or trial, Magistrate finds case should be committed.",
+  "text": "If, in any inquiry into an offence or a trial before a Magistrate, it appears to him at any stage of the proceedings before signing the judgment that the case is one which ought to be tried by the Court of Session, he shall commit it to that Court under the provisions hereinbefore contained [1][and thereupon the provisions of Chapter XVIII shall apply to the commitment so made].",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 45 of 1978",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 45 of 1978, s. 26 (w.e.f. 18-12-1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s209",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "209",
+  "chapter": {
+    "number": "XVI",
+    "title": "COMMENCEMENT OF PROCEEDINGS BEFORE MAGISTRATES"
+  },
+  "order": 236,
+  "page_start": 90,
+  "page_end": 90,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Commitment of case to Court of Session when offence is triable exclusively by it.",
+  "text": "When in a case instituted on a police report or otherwise, the accused appears or is brought before the Magistrate and it appears to the Magistrate that the offence is triable exclusively by the Court of Session, he shall—\n[1][(a) commit, after complying with the provisions of section 207 or section 208, as the case may\nbe, the case to the Court of Session, and subject to the provisions of this Code relating to bail, remand\nthe accused to custody until such commitment has been made;]\n(b) subject to the provisions of this Code relating to bail, remand the accused to custody during,\nand until the conclusion of, the trial;\n(c) send to that Court the record of the case and the documents and articles, if any, which are to\nbe produced in evidence;\n(d) notify the Public Prosecutor of the commitment of the case to the Court of Session.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 45 of 1978",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 45 of 1978, s. 19, for cl. (a) (w.e.f. 18.12.1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

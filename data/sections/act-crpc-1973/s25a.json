@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s25a",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "25A",
+  "chapter": {
+    "number": "II",
+    "title": "CONSTITUTION OF CRIMINAL COURTS AND OFFICES"
+  },
+  "order": 26,
+  "page_start": 29,
+  "page_end": 30,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Directorate of Prosecution.",
+  "text": "(1) The State Government may establish a Directorate of Prosecution consisting of a Director of Prosecution and as many Deputy Directors of Prosecution as it thinks fit.\n(2) A person shall be eligible to be appointed as a Director of Prosecution or a Deputy Director of Prosecution, only if he has been in practice as an advocate for not less than ten years and such appointment shall be made with the concurrence of the Chief Justice of the High Court.\n(3) The Head of the Directorate of Prosecution shall be the Director of Prosecution, who shall function under the administrative control of the Head of the Home Department in the State.\n(4) Every Deputy Director of Prosecution shall be subordinate to the Director of Prosecution.\n(5) Every Public Prosecutor, Additional Public Prosecutor and Special Public Prosecutor appointed by the State Government under sub-section (1), or as the case may be, sub-section (8) of section 24 to conduct cases in the High Court shall be subordinate to the Director of Prosecution.\n(6) Every Public Prosecutor, Additional Public Prosecutor and Special Public Prosecutor appointed by the State Government under sub-section (3), or as the case may be, sub-section (8) of section 24 to conduct cases in District Courts and every Assistant Public Prosecutor appointed under sub-section (1) of section 25 shall be subordinate to the Deputy Director of Prosecution.\n(7) The powers and functions of the Director of Prosecution and the Deputy Directors of Prosecution and the areas for which each of the Deputy Directors of Prosecution have been appointed shall be such as the State Government may, by notification, specify.\n(8) The provisions of this section shall not apply to the Advocate General for the State while performing the functions of a Public Prosecutor.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 25 of 2005",
+      "by_doc_id": null,
+      "effective_date": "2006-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 25 of 2005, s. 4 (w.e.f. 23-6-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

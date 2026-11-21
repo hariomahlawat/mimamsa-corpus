@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s60a",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "60A",
+  "chapter": {
+    "number": "V",
+    "title": "ARREST OF PERSONS"
+  },
+  "order": 70,
+  "page_start": 40,
+  "page_end": 40,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Arrest to be made strictly according to the Code.",
+  "text": "No arrest shall be made except in accordance with the provisions of this Code or any other law for the time being in force providing for arrest.]\nA.—Summons",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "s.10, ibid.",
+      "by_doc_id": null,
+      "effective_date": "2009-12-31",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by s.10, ibid. (w.e.f. 31-12-2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

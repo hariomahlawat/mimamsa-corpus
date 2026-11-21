@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s267",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "267",
+  "chapter": {
+    "number": "XXII",
+    "title": "ATTENDANCE OF PERSONS CONFINED OR DETAINED IN PRISONS"
+  },
+  "order": 305,
+  "page_start": 106,
+  "page_end": 106,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Power to require attendance of prisoners.",
+  "text": "(1) Whenever, in the course of an inquiry, trial or proceeding under this Code, it appears to a Criminal Court,—\n(a) that a person confined or detained in a prison should be brought before the Court for answering to a\ncharge of an offence, or for the purpose of any proceedings against him, or\n(b) that it is necessary for the ends of justice to examine such person as a witness, the Court may make an order requiring the officer in charge of the prison to produce such person before the Court answering to the charge or for the purpose of such proceeding or, as the case may be, for giving evidence.\n(2) Where an order under sub-section (1) is made by a Magistrate of the second class, it shall not be forwarded to, or acted upon by, the officer in charge of the prison unless it is countersigned by the Chief Judicial Magistrate, to whom such Magistrate is subordinate.\n(3) Every order submitted for countersigning under sub-section (2) shall be accompanied by a statement of the facts which, in the opinion of the Magistrate, render the order necessary, and the Chief Judicial Magistrate to whom it is submitted may, after considering such statement, decline to countersign the order.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

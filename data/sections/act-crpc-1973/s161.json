@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s161",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "161",
+  "chapter": {
+    "number": "XII",
+    "title": "INFORMATION TO THE POLICE AND THEIR POWERS TO INVESTIGATE"
+  },
+  "order": 182,
+  "page_start": 71,
+  "page_end": 72,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Examination of witnesses by police.",
+  "text": "(1) Any police officer making an investigation under this Chapter, or any police officer not below such rank as the State Government may, by general or special order, prescribe in this behalf, acting on the requisition of such officer, may examine orally any person supposed to be acquainted with the facts and circumstances of the case.\n(2) Such person shall be bound to answer truly all questions relating to such case put to him by such officer, other than questions the answers to which would have a tendency to expose him to a criminal charge or to a penalty or forfeiture.\n(3) The police officer may reduce into writing any statement made to him in the course of an examination under this section; and if he does so, he shall make a separate and true record of the statement of each such person whose statement he records.\n[3][Provided that statement made under this sub-section may also be recorded by audio-video electronic means:]\n[1][Provided further that the statement of a woman against whom an offence under section 354, section 354A, section 354B, section 354C, section 354D, section 376, section 376A section 376B, section 376C, section 376D, section 376E or section 509 of the Indian Penal Code (45 of 1860) is alleged to have been committed or attempted shall be recorded, by a woman police officer or any woman officer.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 5 of 2009",
+      "by_doc_id": null,
+      "effective_date": "2009-12-31",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 5 of 2009, s. 12 (w.e.f. 31-12-2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 13 of 2013",
+      "by_doc_id": null,
+      "effective_date": "2013-02-03",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 13 of 2013, s. 15 (w.e.f. 3-2-2013).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

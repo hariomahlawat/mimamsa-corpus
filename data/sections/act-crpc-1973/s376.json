@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s376",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "376",
+  "chapter": {
+    "number": "XXIX",
+    "title": "APPEALS"
+  },
+  "order": 419,
+  "page_start": 139,
+  "page_end": 139,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "No appeal in petty cases.",
+  "text": "Notwithstanding anything contained in section 374, there shall be no appeal by a convicted person in any of the following cases, namely:—\n(a) where a High Court passes only a sentence of imprisonment for a term not exceeding six months or of\nfine not exceeding one thousand rupees, or of both such imprisonment and fine;\n(b) where a Court of Session or a Metropolitan Magistrate passes only a sentence of imprisonment for a\nterm not exceeding three months or of fine not exceeding two hundred rupees, or of both such imprisonment\nand fine;\n(c) where a Magistrate of the first class passes only a sentence of fine not exceeding one hundred rupees; or\n(d) where, in a case tried summarily, a Magistrate empowered to act under section 260 passes only a\nsentence of fine not exceeding two hundred rupees:\nProvided that an appeal may be brought against such sentence if any other punishment is combined with it, but such sentence shall not be appealable merely on the ground—\n(i) that the person convicted is ordered to furnish security to keep the peace; or\n(ii) that a direction for imprisonment in default of payment of fine is included in the sentence; or\n(iii) that more than one sentence of fine is passed in the case, if the total amount of fine imposed does not\nexceed the amount hereinbefore specified in respect of the case.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

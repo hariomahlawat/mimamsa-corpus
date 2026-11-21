@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s235",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "235",
+  "chapter": {
+    "number": "XVIII",
+    "title": "TRIAL BEFORE A COURT OF SESSION"
+  },
+  "order": 262,
+  "page_start": 97,
+  "page_end": 97,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Judgment of acquittal or conviction.",
+  "text": "(1) After hearing arguments and points of law (if any), the Judge shall give a judgment in the case.\n(2) If the accused is convicted, the Judge shall, unless he proceeds in accordance with the provisions of section 360, hear the accused on the questions of sentence, and then pass sentence on him according to law.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

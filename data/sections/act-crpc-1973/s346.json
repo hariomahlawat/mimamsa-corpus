@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s346",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "346",
+  "chapter": {
+    "number": "XXVI",
+    "title": "PROVISIONS AS TO OFFENCES AFFECTING THE ADMINISTRATION OF JUSTICE"
+  },
+  "order": 386,
+  "page_start": 131,
+  "page_end": 131,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Procedure where Court considers that case should not be dealt with under section 345.",
+  "text": "(1) If the Court in any case considers that a person accused of any of the offences referred to in section 345 and committed in its view or presence should be imprisoned otherwise than in default of payment of fine, or that a fine exceeding two hundred rupees should be imposed upon him, or such Court is for any other reason of opinion that the case should not be disposed of under section 345, such Court, after recording the facts constituting the offence and the statement of the accused as hereinbefore provided, may forward the case to a Magistrate having jurisdiction to try the same, and may require security to be given for the appearance of such person before such Magistrate, or if sufficient security is not given, shall forward such person in custody to such Magistrate.\n(2) The Magistrate to whom any case is forwarded under this section shall proceed to deal with, as far as may be, as if it were instituted on a police report.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

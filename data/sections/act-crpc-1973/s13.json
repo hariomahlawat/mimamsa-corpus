@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s13",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "13",
+  "chapter": {
+    "number": "II",
+    "title": "CONSTITUTION OF CRIMINAL COURTS AND OFFICES"
+  },
+  "order": 13,
+  "page_start": 26,
+  "page_end": 26,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Special Judicial Magistrates.",
+  "text": "(1) The High Court may, if requested by the Central or State Government so to do, confer upon any person who holds or has held any post under the Government, all or any of the powers conferred or conferrable by or under this Code on a Judicial Magistrate [1][of the first class or of the second class, in respect to particular cases or to particular classes of cases, in any local area, not being a metropolitan area:]\nProvided that no such power shall be conferred on a person unless he possesses such qualification or experience in relation to legal affairs as the High Court may, by rules, specify.\n(2) Such Magistrates shall be called Special Judicial Magistrates and shall be appointed for such term, not exceeding one year at a time, as the High Court may, by general or special order, direct.\n[2][(3) The High Court may empower a Special Judicial Magistrate to exercise the powers of a Metropolitan Magistrate in relation to any metropolitan area outside his local jurisdiction.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 45 of 1978",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. Act 45 of 1978, s. 4, for certain words (w.e.f. 18-12-1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "s. 4, ibid.",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by s. 4, ibid. (w.e.f. 18-12-1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s461",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "461",
+  "chapter": {
+    "number": "XXXV",
+    "title": "IRREGULAR PROCEEDINGS"
+  },
+  "order": 509,
+  "page_start": 161,
+  "page_end": 162,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Irregularities which vitiate proceedings.",
+  "text": "If any Magistrate, not being empowered by law in this behalf, does any of the following things, namely:—\n(a) attaches and sells property under section 83;\n(b) issues a search-warrant for a document, parcel or other things in the custody of a postal or telegraph\nauthority;\n(c) demands security to keep the peace;\n(d) demands security for good behaviour;\n(e) discharges a person lawfully bound to be of good behaviour;\n(f) cancels a bond to keep the peace;\n(g) makes an order for maintenance;\n(h) makes an order under section 133 as to a local nuisance;\n(i) prohibits, under section 143, the repetition or continuance of a public nuisance;\n(j) makes an order under Part C or Part D of Chapter X;\n(k) takes cognizance of an offence under clause (c) of sub-section (1) of section 190;\n(l) tries an offender;\n(m) tries an offender summarily;\n(n) passes a sentence, under section 325, on proceedings recorded by another Magistrate;\n(o) decides an appeal;\n(p) calls, under section 397, for proceedings; or\n(q) revises an order passed under section 446, his proceedings shall be void.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

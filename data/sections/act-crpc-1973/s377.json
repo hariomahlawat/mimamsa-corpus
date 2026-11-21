@@ -1,0 +1,70 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s377",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "377",
+  "chapter": {
+    "number": "XXIX",
+    "title": "APPEALS"
+  },
+  "order": 420,
+  "page_start": 139,
+  "page_end": 140,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Appeal by the State Government against sentence.",
+  "text": "(1) Save as otherwise provided in sub-section (2), the State Government may, in any case of conviction on a trial held by any Court other than a High Court, direct the Public Prosecutor to present [2][an appeal against the sentence on the ground of its inadequacy—\n(a) to the Court of Session, if the sentence is passed by the Magistrate; and\n(b) to the High Court, if the sentence is passed by any other Court.]\n(2) If such conviction is in a case in which the offence has been investigated by the Delhi Special Police Establishment, constituted under the Delhi Special Police Establishment Act, 1946 (25 of 1946), or by any other agency empowered to make investigation into an offence under any Central Act other than this Code, [1][the Central Government may also direct] the Public Prosecutor to present [2][an appeal against the sentence on the ground of its inadequacy—\n(a) to the Court of Session, if the sentence is passed by the Magistrate; and\n(b) to the High Court, if the sentence is passed by any other Court].\n(3) When an appeal has been filed against the sentence on the ground of its inadequacy, [3][the Court of Session or, as the case may be, the High Court] shall not enhance the sentence except after giving to the accused a reasonable opportunity of showing cause against such enhancement and while showing cause, the accused may plead for his acquittal or for the reduction of the sentence.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 25 of 2005",
+      "by_doc_id": null,
+      "effective_date": "2006-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 25 of 2005, s. 31, for certain words (w.e.f. 23-6-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 45 of 1978",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 45 of 1978, s. 29, for certain words (w.e.f. 18-12-1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 25 of 2005",
+      "by_doc_id": null,
+      "effective_date": "2006-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 25 of 2005, s. 31, for certain words (w.e.f. 23-6-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 31, ibid.",
+      "by_doc_id": null,
+      "effective_date": "2006-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 31, ibid., for “the High Court” (w.e.f. 23-6-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

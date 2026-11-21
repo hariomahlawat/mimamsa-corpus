@@ -20,9 +20,20 @@
     "amendment_history": "rule"
   },
   "heading": "Presumption as to certain offences.",
-  "text": "(1) Where a person is accused of having committed any offence specified in sub-section (2), in–– 1. Subs. by Act 18 of 1872, s. 9, for “when” (w.e.f. 29-8-1872). 2. Subs. by s. 9, ibid., for “on” (w.e.f. 29-8-1872). 3. Ins. by Act 61 of 1984, s. 20 (w.e.f. 14-7-1984).\n(a) any area declared to be a disturbed area under any enactment, for the time being in force,\nmaking provision for the suppression of disorder and restoration and maintenance of public order; or\n(b) any area in which there has been, over a period of more than one month, extensive disturbance\nof the public peace, and it is shown that such person had been at a place in such area at a time when firearms or explosives were used at or from that place to attack or resist the members of any armed forces or the forces charged with the maintenance of public order acting in the discharge of their duties, it shall be presumed, unless the contrary is shown, that such person had committed such offence.\n(2) The offences referred to in sub-section (1) are the following, namely:––\n(a) an offence under section 121, section 121A, section 122 or section 123 of the Indian Penal\nCode (45 of 1860);\n(b) criminal conspiracy or attempt to commit, or abetment of, an offence under section 122 or\nsection 123 of the Indian Penal Code (45 of 1860).]",
+  "text": "(1) Where a person is accused of having committed any offence specified in sub-section (2), in––\n(a) any area declared to be a disturbed area under any enactment, for the time being in force,\nmaking provision for the suppression of disorder and restoration and maintenance of public order; or\n(b) any area in which there has been, over a period of more than one month, extensive disturbance\nof the public peace, and it is shown that such person had been at a place in such area at a time when firearms or explosives were used at or from that place to attack or resist the members of any armed forces or the forces charged with the maintenance of public order acting in the discharge of their duties, it shall be presumed, unless the contrary is shown, that such person had committed such offence.\n(2) The offences referred to in sub-section (1) are the following, namely:––\n(a) an offence under section 121, section 121A, section 122 or section 123 of the Indian Penal\nCode (45 of 1860);\n(b) criminal conspiracy or attempt to commit, or abetment of, an offence under section 122 or\nsection 123 of the Indian Penal Code (45 of 1860).]",
   "status": "repealed",
   "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
-  "amendment_history": [],
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 61 of 1984",
+      "by_doc_id": null,
+      "effective_date": "1984-07-14",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 61 of 1984, s. 20 (w.e.f. 14-7-1984).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
   "notes": []
 }

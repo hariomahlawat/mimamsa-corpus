@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s423",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "423",
+  "chapter": {
+    "number": "XXXII",
+    "title": "EXECUTION, SUSPENSION, REMISSION AND COMMUTATION OF SENTENCES"
+  },
+  "order": 466,
+  "page_start": 150,
+  "page_end": 150,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Warrant for levy of fine issued by a Court in any territory to which this Code does not extend.",
+  "text": "Notwithstanding anything contained in this Code or in any other law for the time being in force, when an offender has been sentenced to pay a fine by a Criminal Court in any territory to which this Code does not extend and the Court passing the sentence issues a warrant to the Collector of a district in the territories to which this Code extends, authorising him to realise the amount as if it were an arrear of land revenue, such warrant shall be deemed to be a warrant issued under clause (b) of sub-section (1) of section 421 by a Court in the territories to which this Code extends, and the provisions of sub-section (3) of the said section as to the execution of such warrant shall apply accordingly.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

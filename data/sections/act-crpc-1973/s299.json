@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s299",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "299",
+  "chapter": {
+    "number": "XXIII",
+    "title": "EVIDENCE IN INQUIRIES AND TRIALS"
+  },
+  "order": 338,
+  "page_start": 113,
+  "page_end": 113,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Record of evidence in absence of accused.",
+  "text": "(1) If it is proved that an accused person has absconded, and that there is no immediate prospect of arresting him, the Court competent to try [1][, or commit for trial] such person for the offence complained of may, in his absence, examine the witnesses (if any) produced on behalf of the prosecution, and record their depositions and any such deposition may, on the arrest of such person, be given in evidence against him on the inquiry into, or trial for, the offence with which he is charged, if the deponent is dead or incapable of giving evidence or cannot be found or his presence cannot be procured without an amount of delay, expense or inconvenience which, under the circumstances of the case, would be unreasonable.\n(2) If it appears that an offence punishable with death or imprisonment for life has been committed by some person or persons unknown, the High Court or the Sessions Judge may direct that any Magistrate of the first class shall hold an inquiry and examine any witnesses who can give evidence concerning the offence and any depositions so taken may be given in evidence against any person who is subsequently accused of the offence, if the deponent is dead or incapable of giving evidence or beyond the limits of India.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 45 of 1978",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 45 of 1978, s. 23 (w.e.f. 18-12-1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

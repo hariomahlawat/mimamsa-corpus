@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s297",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "297",
+  "chapter": {
+    "number": "XXIII",
+    "title": "EVIDENCE IN INQUIRIES AND TRIALS"
+  },
+  "order": 336,
+  "page_start": 112,
+  "page_end": 112,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Authorities before whom affidavits may be sworn.",
+  "text": "(1) Affidavits to be used before any Court under this Code may be sworn or affirmed before—\n[3][(a) any Judge or Judicial or Executive Magistrate, or]\n(b) any Commissioner of Oaths appointed by a High Court or Court of Session, or\n(c) any notary appointed under the Notaries Act, 1952 (53 of 1952).\n(2) Affidavits shall be confined to, and shall state separately, such facts as the deponent is able to prove from his own knowledge and such facts as he has reasonable ground to believe to be true, and in the latter case, the deponent shall clearly state the grounds of such belief.\n(3) The Court may order any scandalous and irrelevant matter in the affidavit to be struck out or amended.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 45 of 1978",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 45 of 1978, s. 22, for cl. (a) (w.e.f. 18.12.1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

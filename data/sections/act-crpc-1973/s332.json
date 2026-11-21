@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s332",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "332",
+  "chapter": {
+    "number": "XXV",
+    "title": "PROVISIONS AS TO ACCUSED PERSONS OF UNSOUND MIND"
+  },
+  "order": 372,
+  "page_start": 127,
+  "page_end": 128,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Procedure on accused appearing before Magistrate or Court.",
+  "text": "(1) If, when the accused appears or is again brought before the Magistrate or Court, as the case may be, the Magistrate or Court considers him capable of making his defence, the inquiry or trial shall proceed.\n(2) If the Magistrate or Court considers the accused to be still incapable of making his defence, the Magistrate or Court shall act according to the provisions of section 328 or section 329, as the case may be, and if the accused is found to be of unsound mind and consequently incapable making his defence, shall deal with such accused in accordance with the provisions of section 330.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s279",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "279",
+  "chapter": {
+    "number": "XXIII",
+    "title": "EVIDENCE IN INQUIRIES AND TRIALS"
+  },
+  "order": 317,
+  "page_start": 108,
+  "page_end": 108,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Interpretation of evidence to accused or his pleader.",
+  "text": "(1) Whenever any evidence is given in a language not understood by the accused, and he is present in Court in person, it shall be interpreted to him in open Court in a language understood by him.\n(2) If he appears by pleader and the evidence is given in a language other than the language of the Court, and not understood by the pleader, it shall be interpreted to such pleader in that language.\n(3) When documents are put for the purpose of formal proof, it shall be in the discretion of the Court to interpret as much thereof as appears necessary.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

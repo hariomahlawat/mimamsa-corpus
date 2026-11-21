@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s368",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "368",
+  "chapter": {
+    "number": "XXVIII",
+    "title": "SUBMISSION OF DEATH SENTENCES FOR CONFIRMATION"
+  },
+  "order": 411,
+  "page_start": 138,
+  "page_end": 138,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Power of High Court to confirm sentence or annul conviction.",
+  "text": "In any case submitted under section 366, the High Court—\n(a) may confirm the sentence, or pass any other sentence warranted by law, or\n(b) may annul the conviction and convict the accused of any offence of which the Court of Session might\nhave convicted him, or order a new trial on the same or an amended charge, or\n(c) may acquit the accused person:\nProvided that no order of confirmation shall be made under this section until the period allowed for preferring an appeal has expired, or, if an appeal is presented within such period, until such appeal is disposed of.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s459",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "459",
+  "chapter": {
+    "number": "XXXIV",
+    "title": "DISPOSAL OF PROPERTY"
+  },
+  "order": 507,
+  "page_start": 161,
+  "page_end": 161,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Power to sell perishable property.",
+  "text": "If the person entitled to the possession of such property is unknown or absent and the property is subject to speedy and natural decay, or if the Magistrate to whom its seizure is reported is of opinion that its sale would be for the benefit of the owner, or that the value of such property is [1][less than five hundred rupees], the Magistrate may at any time direct it to be sold; and the provisions of sections 457 and 458 shall, as nearly as may be practicable, apply to the net proceeds of such sale.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 25 of 2005",
+      "by_doc_id": null,
+      "effective_date": "2006-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 25 of 2005, s. 41, for “less than ten rupees” (w.e.f. 23-6-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

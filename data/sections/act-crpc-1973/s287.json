@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s287",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "287",
+  "chapter": {
+    "number": "XXIII",
+    "title": "EVIDENCE IN INQUIRIES AND TRIALS"
+  },
+  "order": 325,
+  "page_start": 110,
+  "page_end": 110,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Parties may examine witnesses.",
+  "text": "(1) The parties to any proceeding under this Code in which a commission is issued may respectively forward any interrogatories in writing which the Court or Magistrate directing the commission may think relevant to the issue, and it shall be lawful for the Magistrate, Court or officer to whom the commission, is directed, or to whom the duty of executing it is delegated, to examine the witness upon such interrogatories.\n(2) Any such party may appear before such magistrate, Court or Officer by pleader, or if not in custody, in person, and may examine, cross-examine and re-examine (as the case may be) the said witness.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

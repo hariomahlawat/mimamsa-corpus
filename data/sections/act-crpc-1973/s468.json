@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s468",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "468",
+  "chapter": {
+    "number": "XXXVI",
+    "title": "[1]"
+  },
+  "order": 516,
+  "page_start": 163,
+  "page_end": 163,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Bar to taking cognizance after lapse of the period of limitation.",
+  "text": "(1) Except as otherwise provided elsewhere in this Code, no Court shall take cognizance of an offence of the category specified in sub-section (2), after the expiry of the period of limitation.\n(2) The period of limitation shall be—\n(a) six months, if the offence is punishable with fine only;\n(b) one year, if the offence is punishable with imprisonment for a term not exceeding one year;\n(c) three years, if the offence is punishable with imprisonment for a term exceeding one year but not\nexceeding three years.\n[2][(3) For the purposes of this section, the period of limitation, in relation to offences which may be tried together, shall be determined with reference to the offence which is punishable with the more severe punishment or, as the case may be, the most severe punishment.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 45 of 1978",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 45 of 1978, s. 33 (w.e.f. 18.12.1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

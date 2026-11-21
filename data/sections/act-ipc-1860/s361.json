@@ -33,6 +33,16 @@
       "footnote_text": "Subs. by Act 42 of 1949, s. 2, for “fourteen”.",
       "confidence": "extracted",
       "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 2, ibid.",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 2, ibid., for “sixteen”.",
+      "confidence": "extracted",
+      "origin": "footnote"
     }
   ],
   "notes": []

@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s331",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "331",
+  "chapter": {
+    "number": "XXV",
+    "title": "PROVISIONS AS TO ACCUSED PERSONS OF UNSOUND MIND"
+  },
+  "order": 371,
+  "page_start": 127,
+  "page_end": 127,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Resumption of inquiry or trial.",
+  "text": "(1) Whenever an inquiry or a trial is postponed under section 328 or section 329, the Magistrate or Court, as the case may be, may at any time after the person concerned has ceased to be of unsound mind, resume the inquiry or trial and require the accused to appear or be brought before such Magistrate or Court.\n(2) When the accused has been released under section 330, and the sureties for his appearance produce him to the officer whom the Magistrate or Court appoints in this behalf, the certificate of such officer that the accused is capable of making his defence shall be receivable in evidence.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

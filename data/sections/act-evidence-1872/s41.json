@@ -23,6 +23,37 @@
   "text": "A final judgment, order or decree of a competent Court, in the exercise of probate, matrimonial, admiralty or insolvency jurisdiction, which confers upon or takes away from any person any legal character, or which declares any person to be entitled to any such character, or to be entitled to any specific thing, not as against any specified person but absolutely, is relevant when the existence of any such legal character, or the title of any such person to any such thing, is relevant.\nSuch judgment, order or decree is conclusive proof ––\nthat any legal character which it confers accrued at the time when such judgment, order or decree\ncame into operation;\nthat any legal character, to which it declares any such person to be entitled, accrued to that person\nat the time when such judgment [1][order or decree] declares it to have accrued to that person;\nthat any legal character which it takes away from any such person ceased at the time from which\nsuch judgment, [1][order or decree] declared that it had ceased or should cease;\nand that anything to which it declares any person to be so entitled was the property of that person\nat the time from which such judgment, [1][order or decree] declares that it had been or should be his\nproperty.",
   "status": "repealed",
   "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
-  "amendment_history": [],
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 18 of 1872",
+      "by_doc_id": null,
+      "effective_date": "1872-08-29",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 18 of 1872, s. 3 (w.e.f. 29-8-1872).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 18 of 1872",
+      "by_doc_id": null,
+      "effective_date": "1872-08-29",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 18 of 1872, s. 3 (w.e.f. 29-8-1872).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 18 of 1872",
+      "by_doc_id": null,
+      "effective_date": "1872-08-29",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 18 of 1872, s. 3 (w.e.f. 29-8-1872).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
   "notes": []
 }

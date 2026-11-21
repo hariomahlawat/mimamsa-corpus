@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s27",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "27",
+  "chapter": {
+    "number": "III",
+    "title": "POWER OF COURTS"
+  },
+  "order": 28,
+  "page_start": 30,
+  "page_end": 30,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Jurisdiction in the case of juveniles.",
+  "text": "Any offence not punishable with death or imprisonment for life, committed by any person who at the date when he appears or is brought before the Court is under the age of sixteen years, may be tried by the Court of a Chief Judicial Magistrate, or by any Court specially empowered under the Children Act, 1960 (60 of 1960), or any other law for the time being in force providing for the treatment, training and rehabilitation of youthful offenders.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

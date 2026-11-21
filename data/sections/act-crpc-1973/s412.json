@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s412",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "412",
+  "chapter": {
+    "number": "XXXI",
+    "title": "TRANSFER OF CRIMINAL CASES"
+  },
+  "order": 455,
+  "page_start": 148,
+  "page_end": 149,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Reasons to be recorded.",
+  "text": "A Sessions Judge or Magistrate making an order under section 408, section 409, section 410 or section 411 shall record his reasons for making it.\nA.—Death Sentences",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

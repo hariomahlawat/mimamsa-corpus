@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s228",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "228",
+  "chapter": {
+    "number": "XVIII",
+    "title": "TRIAL BEFORE A COURT OF SESSION"
+  },
+  "order": 255,
+  "page_start": 96,
+  "page_end": 96,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Framing of charge.",
+  "text": "(1) If, after such consideration and hearing as aforesaid, the Judge is of opinion that there is ground for presuming that the accused has committed an offence which—\n(a) is not exclusively triable by the Court of Session, he may, frame a charge against the accused and, by\norder, transfer the case for trial to the Chief Judicial Magistrate, [1][or any other Judicial Magistrate of the first\nclass and direct the accused to appear before the Chief Judicial Magistrate, or, as the case may be, the Judicial\nMagistrate of the first class, on such date as he deems fit, and thereupon such Magistrate] shall try the offence in\naccordance with the procedure for the trial of warrant-cases instituted on a police report;\n(b) is exclusively triable by the Court, he shall frame in writing a charge against the accused.\n(2) Where the Judge frames any charge under clause (b) of sub-section (1), the charge shall be read and explained to the accused and the accused shall be asked whether he pleads guilty of the offence charged or claims to be tried.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 25 of 2005",
+      "by_doc_id": null,
+      "effective_date": "2006-06-23",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 25 of 2005, s. 22, for certain words (w.e.f. 23-6-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

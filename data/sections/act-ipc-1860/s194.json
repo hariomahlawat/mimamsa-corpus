@@ -43,6 +43,16 @@
       "footnote_text": "Subs. by Act 3 of 1951, s. 3 and the Sch., for “the States”.",
       "confidence": "extracted",
       "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 26 of 1955",
+      "by_doc_id": null,
+      "effective_date": "1956-01-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 26 of 1955, s. 117 and the Sch., for “transportation for life” (w.e.f. 1-1-1956).",
+      "confidence": "extracted",
+      "origin": "footnote"
     }
   ],
   "notes": []

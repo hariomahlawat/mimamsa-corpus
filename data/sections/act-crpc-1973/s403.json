@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s403",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "403",
+  "chapter": {
+    "number": "XXX",
+    "title": "REFERENCE AND REVISION"
+  },
+  "order": 446,
+  "page_start": 146,
+  "page_end": 146,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Option of Court to hear parties.",
+  "text": "Save as otherwise expressly provided by this Code, no party has any right to be heard either personally or by pleader before any Court exercising its powers of revision; but the Court may, if it thinks fit, when exercising such powers, hear any party either personally or by pleader.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

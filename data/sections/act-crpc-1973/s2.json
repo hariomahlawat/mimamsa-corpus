@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s2",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "2",
+  "chapter": {
+    "number": "I",
+    "title": "PRELIMINARY"
+  },
+  "order": 2,
+  "page_start": 21,
+  "page_end": 23,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Definitions.",
+  "text": "In this Code, unless the context otherwise requires,—\n(a) “bailable offence” means an offence which is shown as bailable in the First Schedule, or\nwhich is made bailable by any other law for the time being in force; and “non-bailable offence”\nmeans any other offence;\n(b) “charge” includes any head of charge when the charge contains more heads than one;\n(c) “cognizable offence” means an offence for which, and “cognizable case” means a case in\nwhich, a police officer may, in accordance with the First Schedule or under any other law for the time\nbeing in force, arrest without warrant;\n(d) “complaint” means any allegation made orally or in writing to a Magistrate, with a view to his\ntaking action under this Code, that some person, whether known or unknown, has committed an\noffence, but does not include a police report.\nExplanation.—A report made by a police officer in a case which discloses, after investigation, the\ncommission of a non-cognizable offence shall be deemed to be a complaint; and the police officer by\nwhom such report is made shall be deemed to be the complainant;\n(e) “High Court” means,—\n(i) in relation to any State, the High Court for that State;\n(ii) in relation to a Union territory to which the jurisdiction of the High Court for a State has\nbeen extended by law, that High Court;\n(iii) in relation to any other Union territory, the highest Court of criminal appeal for that\nterritory other than the Supreme Court of India;\n(f) “India” means the territories to which this Code extends;\n(g) “inquiry” means every inquiry, other than a trial, conducted under this Code by a Magistrate\nor Court;\n(h) “investigation” includes all the proceedings under this Code for the collection of evidence\nconducted by a police officer or by any person (other than a Magistrate) who is authorised by a\nMagistrate in this behalf;\n(i) “judicial proceeding” includes any proceeding in the course of which evidence is or may be\nlegally taken on oath;\n(j) “local jurisdiction”, in relation to a Court or Magistrate, means the local area within which the\nCourt or Magistrate may exercise all or any of its or his powers under this Code [1][and such local area\nmay comprise the whole of the State, or any part of the State, as the State Government may, by\nnotification, specify];\n(k) “metropolitan area” means the area declared, or deemed to be declared, under section 8, to be\na metropolitan area;\n(l) “non-cognizable offence” means an offence for which, and “non-cognizable case” means a\ncase in which, a police officer has no authority to arrest without warrant;\n(m) “notification” means a notification published in the Official Gazette;\n(n) “offence” means any act or omission made punishable by any law for the time being in force\nand includes any act in respect of which a complaint may be made under section 20 of the Cattle-\ntrespass Act, 1871 (1 of 1871);\n(o) “officer in charge of a police station” includes, when the officer in charge of the police station\nis absent from the station-house or unable from illness or other cause to perform his duties, the police\nofficer present at the station-house who is next in rank to such officer and is above the rank of\nconstable or, when the State Government so directs, any other police officer so present;\n(p) “place” includes a house, building, tent, vehicle and vessel;\n(q) “pleader”, when used with reference to any proceeding in any Court, means a person\nauthorised by or under any law for the time being in force, to practise in such Court, and includes any\nother person appointed with the permission of the Court to act in such proceeding;\n(r) “police report” means a report forwarded by a police officer to a Magistrate under\nsub-section (2) of section 173;\n(s) “police station” means any post or place declared generally or specially by the State\nGovernment, to be a police station, and includes any local area specified by the State Government in\nthis behalf;\n(t) “prescribed” means prescribed by rules made under this Code;\n(u) “Public Prosecutor” means any person appointed under section 24, and includes any person\nacting under the directions of a Public Prosecutor;\n(v) “sub-division” means a sub-division of a district;\n(w) “summons-case” means a case relating to an offence, and not being a warrant-case;\n[2][(wa) “victim” means a person who has suffered any loss or injury caused by reason of the act or\nomission for which the accused person has been charged and the expression \"victim\" includes his or\nher guardian or legal heir;]\n(x) “warrant-case” means a case relating to an offence punishable with death, imprisonment for\nlife or imprisonment for a term exceeding two years;\n(y) words and expressions used herein and not defined but defined in the Indian Penal Code (45\nof 1860) have the meanings respectively assigned to them in that Code.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 45 of 1978",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 45 of 1978, s. 2 (w.e.f. 18-12-1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 5 of 2009",
+      "by_doc_id": null,
+      "effective_date": "2009-12-31",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 5 of 2009, s. 2 (w.e.f. 31-12-2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

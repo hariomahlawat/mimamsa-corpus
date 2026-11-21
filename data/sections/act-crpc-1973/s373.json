@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s373",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "373",
+  "chapter": {
+    "number": "XXIX",
+    "title": "APPEALS"
+  },
+  "order": 416,
+  "page_start": 138,
+  "page_end": 138,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Appeal from orders requiring security or refusal to accept or rejecting surety for keeping peace or good behaviour.",
+  "text": "Any person,—\n(i) who has been ordered under section 117 to give security for keeping the peace or for good behaviour, or\n(ii) who is aggrieved by any order refusing to accept or rejecting a surety under section 121, may appeal against such order to the Court of Session:\nProvided that nothing in this section shall apply to persons the proceedings against whom are laid before a Sessions Judge in accordance with the provisions of sub-section (2) or sub-section (4) of section 122.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

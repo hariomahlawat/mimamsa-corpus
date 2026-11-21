@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s273",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "273",
+  "chapter": {
+    "number": "XXIII",
+    "title": "EVIDENCE IN INQUIRIES AND TRIALS"
+  },
+  "order": 311,
+  "page_start": 107,
+  "page_end": 107,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Evidence to be taken in presence of accused.",
+  "text": "Except as otherwise expressly provided, all evidence taken in the course of the trial or other proceeding shall be taken in the presence of the accused, or, when his personal attendance is dispensed with, in the presence of his pleader:\n[1][Provided that where the evidence of a woman below the age of eighteen years who is alleged to have been subjected to rape or any other sexual offence, is to be recorded, the court may take appropriate measures to ensure that such woman is not confronted by the accused while at the same time ensuring the right of cross-examination of the accused.]\nExplanation.—In this section, “accused” includes a person in relation to whom any proceeding under Chapter VIII has been commenced under this Code.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 13 of 2013",
+      "by_doc_id": null,
+      "effective_date": "2013-02-03",
+      "effective_date_raw": null,
+      "footnote_text": "Proviso ins. by Act 13 of 2013, s. 20 (w.e.f. 3-2-2013).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

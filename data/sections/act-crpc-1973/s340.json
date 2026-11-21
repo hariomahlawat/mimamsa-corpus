@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s340",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "340",
+  "chapter": {
+    "number": "XXVI",
+    "title": "PROVISIONS AS TO OFFENCES AFFECTING THE ADMINISTRATION OF JUSTICE"
+  },
+  "order": 380,
+  "page_start": 129,
+  "page_end": 130,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Procedure in cases mentioned in section 195.",
+  "text": "(1) When, upon an application made to it in this behalf or otherwise, any Court is of opinion that it is expedient in the interests of Justice that an inquiry should be made into any offence referred to in clause (b) of sub-section (1) of section 195, which appears to have been committed in or in relation to a proceeding in that Court or, as the case may be, in respect of a document produced or given in evidence in a proceeding in that Court, such Court may, after such preliminary inquiry, if any, as it thinks necessary,—\n(a) record a finding to that effect;\n(b) make a complaint thereof in writing;\n(c) send it to a Magistrate of the first class having jurisdiction;\n(d) take sufficient security for the appearance of the accused before such Magistrate, or if the alleged\noffence is non-bailable and the Court thinks it necessary so to do, send the accused in custody to such\nMagistrate; and\n(e) bind over any person to appear and give evidence before such Magistrate.\n(2) The power conferred on a Court by sub-section (1) in respect of an offence may, in any case where that Court has neither made a complaint under sub-section (1) in respect of that offence nor rejected an application for the making of such complaint, be exercised by the Court to which such former Court is subordinate within the meaning of sub-section (4) of section 195.\n(3) A complaint made under this section shall be signed,—\n(a) where the Court making the complaint is a High Court, by such officer of the Court as the Court may\nappoint;\n[1][(b) in any other case, by the presiding officer of the Court or by such officer of the Court as the Court\nmay authorise in writing in this behalf.]\n(4) In this section, \"Court\" has the same meaning as in section 195.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 2 of 2006",
+      "by_doc_id": null,
+      "effective_date": "2006-04-16",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 2 of 2006, s. 6, for clause (b) (w.e.f. 16-4-2006).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

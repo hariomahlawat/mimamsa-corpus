@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s172",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "172",
+  "chapter": {
+    "number": "XII",
+    "title": "INFORMATION TO THE POLICE AND THEIR POWERS TO INVESTIGATE"
+  },
+  "order": 196,
+  "page_start": 77,
+  "page_end": 77,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Diary of proceedings in investigation.",
+  "text": "(1) Every police officer making an investigation under this Chapter shall day by day enter his proceedings in the investigation in a diary, setting forth the time at which the information reached him, the time at which he began and closed his investigation, the place or places visited by him, and a statement of the circumstances ascertained through his investigation.\n[1][(1A) The statements of witnesses recorded during the course of investigation under section 161 shall be inserted in the case diary.\n(1B) The diary referred to in sub-section (1) shall be a volume and duly paginated.]\n(2) Any Criminal Court may send for the police diaries of a case under inquiry or trial in such Court, and may use such diaries, not as evidence in the case, but to aid it in such inquiry or trial.\n(3) Neither the accused nor his agents shall be entitled to call for such diaries, nor shall he or they be entitled to see them merely because they are referred to by the Court; but, if they are used by the police officer who made them to refresh his memory, or if the Court uses them for the purpose of contradicting such police officer, the provisions of section 161 or section 145, as the case may be, of the Indian Evidence Act, 1872 (1 of 1872), shall apply.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 5 of 2009",
+      "by_doc_id": null,
+      "effective_date": "2009-12-31",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 5 of 2009, s.15 (w.e.f. 31-12-2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

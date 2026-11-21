@@ -20,9 +20,22 @@
     "amendment_history": "rule"
   },
   "heading": "Cases in which secondary evidence relating to documents may be given.",
-  "text": "Secondary evidence may be given of the existence, condition or contents of a document in the following cases:––\n(a) when the original is shown or appears to be in the possession or power––\nof the person against whom the document is sought to be proved, or\nof any person out of reach of, or not subject to, the process of the Court, or\nof any person legally bound to produce it,\nand when, after the notice mentioned in section 66, such person does not produce it;\n(b) when the existence, condition or contents of the original have been proved to be admitted in\nwriting by the person against whom it is proved or by his representative in interest;\n(c) when the original has been destroyed or lost, or when the party offering evidence of its\ncontents cannot, for any other reason not arising from his own default or neglect, produce it in\nreasonable time;\n(d) when the original is of such a nature as not to be easily movable;\n(e) when the original is a public document within the meaning of section 74; 1. see s. 76, infra.\n(f) when the original is a document of which a certified copy is permitted by this Act, or by any\nother law in force in [1][India] to be given in evidence[2];\n(g) when the originals consist of numerous accounts or other documents which cannot\nconveniently be examined in Court, and the fact to be proved is the general result of the whole\ncollection.\nIn cases (a), (c) and (d), any secondary evidence of the contents of the document is admissible.\nIn case (b), the written admission is admissible.\nIn case (e) or (f), a certified copy of the document, but no other kind of secondary evidence, is\nadmissible.\nIn case (g), evidence may be given as to the general result of the documents by any person who\nhas examined them, and who is skilled in the examination of such documents.",
+  "text": "Secondary evidence may be given of the existence, condition or contents of a document in the following cases:––\n(a) when the original is shown or appears to be in the possession or power––\nof the person against whom the document is sought to be proved, or\nof any person out of reach of, or not subject to, the process of the Court, or\nof any person legally bound to produce it,\nand when, after the notice mentioned in section 66, such person does not produce it;\n(b) when the existence, condition or contents of the original have been proved to be admitted in\nwriting by the person against whom it is proved or by his representative in interest;\n(c) when the original has been destroyed or lost, or when the party offering evidence of its\ncontents cannot, for any other reason not arising from his own default or neglect, produce it in\nreasonable time;\n(d) when the original is of such a nature as not to be easily movable;\n(e) when the original is a public document within the meaning of section 74;\n(f) when the original is a document of which a certified copy is permitted by this Act, or by any\nother law in force in [1][India] to be given in evidence[2];\n(g) when the originals consist of numerous accounts or other documents which cannot\nconveniently be examined in Court, and the fact to be proved is the general result of the whole\ncollection.\nIn cases (a), (c) and (d), any secondary evidence of the contents of the document is admissible.\nIn case (b), the written admission is admissible.\nIn case (e) or (f), a certified copy of the document, but no other kind of secondary evidence, is\nadmissible.\nIn case (g), evidence may be given as to the general result of the documents by any person who\nhas examined them, and who is skilled in the examination of such documents.",
   "status": "repealed",
   "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
-  "amendment_history": [],
-  "notes": []
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": "1951-04-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 3 of 1951, s. 3 and the Schedule, for “the States” (w.e.f. 1-4-1951).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [
+    "Cf. has Bankers’ Books Evidence Act, 1891 (18 of 1891), s. 4."
+  ]
 }

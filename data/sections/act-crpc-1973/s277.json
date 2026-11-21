@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s277",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "277",
+  "chapter": {
+    "number": "XXIII",
+    "title": "EVIDENCE IN INQUIRIES AND TRIALS"
+  },
+  "order": 315,
+  "page_start": 108,
+  "page_end": 108,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Language of record of evidence.",
+  "text": "In every case where evidence is taken down under section 275 or 276,—\n(a) if the witness gives evidence in the language of the Court, it shall be taken down in that language;\n(b) if he gives evidence in any other language, it may, if practicable, be taken down in that language, and\nif it is not practicable to do so, a true translation of the evidence in the language of the Court shall be\nprepared as the examination of the witness proceeds, signed by the Magistrate or presiding Judge, and shall\nform part of the record;\n(c) where under clause (b) evidence is taken down in a language other than the language of the Court, a true\ntranslation thereof in the language of the Court shall be prepared as soon as practicable, signed by the\nMagistrate or presiding Judge, and shall form part of the record:\nProvided that when under clause (b) evidence is taken down in English and a translation thereof in the language of the Court is not required by any of the parties, the Court may dispense with such translation.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

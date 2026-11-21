@@ -1,0 +1,50 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s26",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "26",
+  "chapter": {
+    "number": "III",
+    "title": "POWER OF COURTS"
+  },
+  "order": 27,
+  "page_start": 30,
+  "page_end": 30,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Courts by which offences are triable.",
+  "text": "Subject to the other provisions of this Code,—\n(a) any offence under the Indian Penal Code (45 of 1860) may be tried by\n(i) the High Court, or\n(ii) the Court of Session, or\n(iii) any other Court by which such offence is shown in the First Schedule to be triable:\n[1][Provided that any [2][offence under section 376, section 376A, section 376B, section 376C,\nsection 376D or section 376E of the Indian Penal Code (45 of 1860)] shall be tried as far as\npracticable by a Court presided over by a woman.]\n(b) any offence under any other law shall, when any Court is mentioned in this behalf in such\nlaw, be tried by such Court and when no Court is so mentioned, may be tried by—\n(i) the High Court, or\n(ii) any other Court by which such offence is shown in the First Schedule to be triable:",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 5 of 2009",
+      "by_doc_id": null,
+      "effective_date": "2009-12-31",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 5 of 2009, s. 4 (w.e.f. 31-12-2009).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 13 of 2013",
+      "by_doc_id": null,
+      "effective_date": "2013-02-03",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 13 of 2013, s. 11, for “offence under section 376 and sections 376A to 376D of the Indian Penal Code (45 of 1860)” (w.e.f. 3-2-2013).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s433a",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "433A",
+  "chapter": {
+    "number": "XXXII",
+    "title": "EXECUTION, SUSPENSION, REMISSION AND COMMUTATION OF SENTENCES"
+  },
+  "order": 477,
+  "page_start": 153,
+  "page_end": 153,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Restriction on powers of remission or commutation in certain cases.",
+  "text": "Notwithstanding anything contained in section 432, where a sentence of imprisonment for life is imposed on conviction of a person for an offence for which death is one of the punishments provided by law, or where a sentence of death imposed on a person has been commuted under section 433 into one of imprisonment for life, such person shall not be released from prison unless he had served at least fourteen years of imprisonment.]",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 45 of 1978",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 45 of 1978, s. 32 (w.e.f.18-12-1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

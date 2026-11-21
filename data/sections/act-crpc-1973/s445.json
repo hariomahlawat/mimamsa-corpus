@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s445",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "445",
+  "chapter": {
+    "number": "XXXIII",
+    "title": "PROVISIONS AS TO BAIL AND BONDS"
+  },
+  "order": 492,
+  "page_start": 158,
+  "page_end": 158,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Deposit instead of recognizance.",
+  "text": "When any person is required by any Court or officer to execute a bond with or without sureties, such Court or officer may, except in the case of a bond for good behaviour, permit him to deposit a sum of money or Government promissory notes to such amount as the Court or officer may fix in lieu of executing such bond.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

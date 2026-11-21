@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s91",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "91",
+  "chapter": {
+    "number": "VII",
+    "title": "PROCESSES TO COMPEL THE PRODUCTION OF THINGS"
+  },
+  "order": 101,
+  "page_start": 46,
+  "page_end": 46,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Summons to produce document or other thing.",
+  "text": "(1) Whenever any Court or any officer in charge of a police station considers that the production of any document or other thing is necessary or desirable for the purposes of any investigation, inquiry, trial or other proceeding under this Code by or before such Court or officer, such Court may issue a summons, or such officer a written order, to the person in whose possession or power such document or thing is believed to be, requiring him to attend and produce it, or to produce it, at the time and place stated in the summons or order.\n(2) Any person required under this section merely to produce a document or other thing shall be deemed to have complied with the requisition if he causes such document or thing to be produced instead of attending personally to produce the same.\n(3) Nothing in this section shall be deemed—\n(a) to affect sections 123 and 124 of the Indian Evidence Act, 1872 (1 of 1872), or the Bankers’\nBooks Evidence Act, 1891 (13 of 1891), or\n(b) to apply to a letter, postcard, telegram or other document or any parcel or thing in the custody\nof the postal or telegraph authority.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

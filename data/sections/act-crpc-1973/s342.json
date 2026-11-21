@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s342",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "342",
+  "chapter": {
+    "number": "XXVI",
+    "title": "PROVISIONS AS TO OFFENCES AFFECTING THE ADMINISTRATION OF JUSTICE"
+  },
+  "order": 382,
+  "page_start": 130,
+  "page_end": 130,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Power to order costs.",
+  "text": "Any Court dealing with an application made to it for filing a complaint under section 340 or an appeal under section 341, shall have power to make such order as to costs as may be just.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

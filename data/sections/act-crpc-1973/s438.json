@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s438",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "438",
+  "chapter": {
+    "number": "XXXIII",
+    "title": "PROVISIONS AS TO BAIL AND BONDS"
+  },
+  "order": 484,
+  "page_start": 156,
+  "page_end": 156,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Direction for grant of bail to person apprehending arrest.",
+  "text": "(1) When any person has reason to believe that he may be arrested on an accusation of having committed a non-bailable offence, he may apply to the High Court or the Court of Session for a direction under this section; and that Court may, if it thinks fit, direct that in the event of such arrest, he shall be released on bail.\n(2) When the High Court or the Court of Session makes a direction under sub-section (1), it may include such conditions in such directions in the light of the facts of the particular case, as it may think fit, including—\n(i) a condition that the person shall make himself available for interrogation by a police officer as and when\nrequired;\n(ii) a condition that the person shall not, directly or indirectly, make any inducement, threat or promise to\nany person acquainted with the facts of the case so as to dissuade him from disclosing such facts to the Court or\nto any police officer;\n(iii) a condition that the person shall not leave India without the previous permission of the Court;\n(iv) such other condition as may be imposed under sub-section (3) of section 437, as if the bail were\ngranted under that section.\n(3) If such person is thereafter arrested without warrant by an officer in charge of a police station on such accusation, and is prepared either at the time of arrest or at any time while in the custody of such officer to give bail, he shall be released on bail; and if a Magistrate taking cognizance of such offence decides that a warrant should be issued in the first instance against that person, he shall issue a bailable warrant in confirmity with the direction of the Court under sub-section (1).",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

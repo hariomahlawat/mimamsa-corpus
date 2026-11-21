@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s265g",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "265G",
+  "chapter": {
+    "number": "XXI",
+    "title": "SUMMARY TRIALS"
+  },
+  "order": 299,
+  "page_start": 105,
+  "page_end": 105,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Finality of the judgment.",
+  "text": "The judgment delivered by the Court under section 265G shall be final and no appeal (except the special leave petition under article 136 and writ petition under articles 226 and 227 of the Constitution) shall lie in any Court against such judgment.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

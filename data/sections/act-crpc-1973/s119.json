@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s119",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "119",
+  "chapter": {
+    "number": "VIII",
+    "title": "SECURITY FOR KEEPING THE PEACE AND FOR GOOD BEHAVIOUR"
+  },
+  "order": 140,
+  "page_start": 57,
+  "page_end": 57,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Commencement of period for which security is required.",
+  "text": "(1) If any person, in respect of whom an order requiring security is made under section 106 or section 117, is at the time such order is made, sentenced to, or undergoing a sentence of, imprisonment, the period for which such security is required shall commence on the expiration of such sentence.\n(2) In other cases such period shall commence on the date of such order unless the Magistrate, for sufficient reason, fixes a later date.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

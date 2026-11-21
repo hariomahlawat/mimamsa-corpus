@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s71",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "71",
+  "chapter": {
+    "number": "VI",
+    "title": "PROCESSES TO COMPEL APPEARANCE"
+  },
+  "order": 81,
+  "page_start": 41,
+  "page_end": 42,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Power to direct security to be taken.",
+  "text": "(1) Any Court issuing a warrant for the arrest of any person may in its discretion direct by endorsement on the warrant that, if such person executes a bond with sufficient sureties for his attendance before the Court at a specified time and thereafter until otherwise directed by the Court, the officer to whom the warrant is directed shall take such security and shall release such person from custody.\n(2) The endorsement shall state—\n(a) the number of sureties;\n(b) the amount in which they and the person for whose arrest the warrant is issued, are to be respectively\nbound;\n(c) the time at which he is to attend before the Court.\n(3) Whenever security is taken under this section, the officer to whom the warrant is directed shall forward the bond to the Court.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

@@ -123,6 +123,26 @@
       "footnote_text": "Subs., ibid., for clause (40).",
       "confidence": "extracted",
       "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "A.O. 1937",
+      "by_doc_id": null,
+      "effective_date": null,
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by the A.O. 1937, for “Government of India”.",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 3 of 1951",
+      "by_doc_id": null,
+      "effective_date": "1951-04-01",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 3 of 1951, s. 3 and the Schedule, for “in and for that Part B State or country” (w.e.f. 1-4-1951).",
+      "confidence": "extracted",
+      "origin": "footnote"
     }
   ],
   "notes": []

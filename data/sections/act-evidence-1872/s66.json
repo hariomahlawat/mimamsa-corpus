@@ -20,9 +20,20 @@
     "amendment_history": "rule"
   },
   "heading": "Rules as to notice to produce.",
-  "text": "Secondary evidence of the contents of the documents referred to in section 65, clause (a), shall not be given unless the party proposing to give such secondary evidence has previously given to the party in whose possession or power the document is, [1][or to his attorney or 1. Ins. by Act 18 of 1872, s. 6 (w.e.f. 29-8-1872). pleader,] such notice to produce it as is prescribed by law; and if no notice is prescribed by law, then such notice as the Court considers reasonable under the circumstances of the case:\nProvided that such notice shall not be required in order to render secondary evidence admissible in any of the following cases, or in any other case in which the Court thinks fit to dispense with it: ––\n(1) when the document to be proved is itself a notice;\n(2) when, from the nature of the case, the adverse party must know that he will be required to\nproduce it;\n(3) when it appears or is proved that the adverse party has obtained possession of the original by\nfraud or force;\n(4) when the adverse party or his agent has the original in Court;\n(5) when the adverse party or his agent has admitted the loss of the document;\n(6) when the person in possession of the document is out of reach of, or not subject to, the process\nof the Court.",
+  "text": "Secondary evidence of the contents of the documents referred to in section 65, clause (a), shall not be given unless the party proposing to give such secondary evidence has previously given to the party in whose possession or power the document is, [1][or to his attorney or pleader,] such notice to produce it as is prescribed by law; and if no notice is prescribed by law, then such notice as the Court considers reasonable under the circumstances of the case:\nProvided that such notice shall not be required in order to render secondary evidence admissible in any of the following cases, or in any other case in which the Court thinks fit to dispense with it: ––\n(1) when the document to be proved is itself a notice;\n(2) when, from the nature of the case, the adverse party must know that he will be required to\nproduce it;\n(3) when it appears or is proved that the adverse party has obtained possession of the original by\nfraud or force;\n(4) when the adverse party or his agent has the original in Court;\n(5) when the adverse party or his agent has admitted the loss of the document;\n(6) when the person in possession of the document is out of reach of, or not subject to, the process\nof the Court.",
   "status": "repealed",
   "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Indian Evidence Act, 1872, 1 of 1872 (Rep., Act 47 of 2023)' (read 2026-11-21)",
-  "amendment_history": [],
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 18 of 1872",
+      "by_doc_id": null,
+      "effective_date": "1872-08-29",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 18 of 1872, s. 6 (w.e.f. 29-8-1872).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
   "notes": []
 }

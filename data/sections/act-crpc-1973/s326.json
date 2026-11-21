@@ -1,0 +1,80 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s326",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "326",
+  "chapter": {
+    "number": "XXIV",
+    "title": "GENERAL PROVISIONS AS TO INQUIRIES AND TRIALS"
+  },
+  "order": 366,
+  "page_start": 125,
+  "page_end": 125,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Conviction or commitment on evidence partly recorded by one Magistrate and partly by another.",
+  "text": "(1) Whenever any [1][Judge or Magistrate], after having heard and recorded the whole or any part of the evidence in any enquiry or a trial, ceases to exercise jurisdiction therein and is succeeded by another [1][Judge or Magistrate] who has and who exercises such jurisdiction, the [1][Judge or Magistrate] so succeeding may act on the evidence so recorded by his predecessor, or partly recorded by his predecessor and partly recorded by himself:\nProvided that if the succeeding [1][Judge or Magistrate] is of opinion that further examination of any of the witnesses whose evidence has already been recorded is necessary in the interests of Justice, he may re-summon any such witness, and after such further examination, cross-examination and re-examination, if any, as he may permit, the witness shall be discharged.\n(2) When a case is transferred under the provisions of this Code [2][from one judge to another Judge or from one Magistrate to another Magistrate], the former shall be deemed to cease to exercise jurisdiction therein, and to be succeeded by the latter, within the meaning of sub-section (1).\n(3) Nothing in this section applies to summary trials or to cases in which proceedings have been stayed under section 322 or in which proceedings have been submitted to a superior Magistrate under section 325.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 45 of 1978",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 45 of 1978, s. 27, for “Magistrate” (w.e.f. 18-12-1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 45 of 1978",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 45 of 1978, s. 27, for “Magistrate” (w.e.f. 18-12-1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 45 of 1978",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 45 of 1978, s. 27, for “Magistrate” (w.e.f. 18-12-1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "Act 45 of 1978",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by Act 45 of 1978, s. 27, for “Magistrate” (w.e.f. 18-12-1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    },
+    {
+      "action": "substituted",
+      "by_ref_raw": "s. 27, ibid.",
+      "by_doc_id": null,
+      "effective_date": "1978-12-18",
+      "effective_date_raw": null,
+      "footnote_text": "Subs. by s. 27, ibid., for “from one Magistrate to another Magistrate”(w.e.f. 18-12-1978).",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

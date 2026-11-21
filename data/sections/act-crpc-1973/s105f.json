@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s105f",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "105F",
+  "chapter": {
+    "number": "VII",
+    "title": "PROCESSES TO COMPEL THE PRODUCTION OF THINGS"
+  },
+  "order": 121,
+  "page_start": 52,
+  "page_end": 52,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Management of properties seized or forfeited under this Chapter.",
+  "text": "(1) The Court may appoint the District Magistrate of the area where the property is situated, or any other officer that may be nominated by the District Magistrate, to perform the functions of an Administrator of such property.\n(2) The Administrator appointed under sub-section (1) shall receive and manage the property in relation to which the order has been made under sub-section (1) of section 105E or under section 105H in such manner and subject to such conditions as may be specified by the Central Government.\n(3) The Administrator shall also take such measures, as the Central Government may direct, to dispose of the property which is forfeited to the Central Government.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

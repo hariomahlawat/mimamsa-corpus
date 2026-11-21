@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s433",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "433",
+  "chapter": {
+    "number": "XXXII",
+    "title": "EXECUTION, SUSPENSION, REMISSION AND COMMUTATION OF SENTENCES"
+  },
+  "order": 476,
+  "page_start": 153,
+  "page_end": 153,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Power to commute sentence.",
+  "text": "The appropriate Government may, without the consent of the person sentenced, commute—\n(a) a sentence of death, for any other punishment provided by the Indian Penal Code (45 of 1860);\n(b) a sentence of imprisonment for life, for imprisonment for a term not exceeding fourteen years or for\nfine;\n(c) a sentence of rigorous imprisonment, for simple imprisonment for any term to which that person might\nhave been sentenced, or for fine;\n(d) a sentence of simple imprisonment, for fine.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

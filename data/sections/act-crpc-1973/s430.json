@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s430",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "430",
+  "chapter": {
+    "number": "XXXII",
+    "title": "EXECUTION, SUSPENSION, REMISSION AND COMMUTATION OF SENTENCES"
+  },
+  "order": 473,
+  "page_start": 152,
+  "page_end": 152,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Return of warrant on execution of sentence.",
+  "text": "When a sentence has been fully executed, the officer executing it shall return the warrant to the Court from which it is issued, with an endorsement under his hand certifying the manner in which the sentence has been executed.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

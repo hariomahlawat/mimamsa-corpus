@@ -1,0 +1,40 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s275",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "275",
+  "chapter": {
+    "number": "XXIII",
+    "title": "EVIDENCE IN INQUIRIES AND TRIALS"
+  },
+  "order": 313,
+  "page_start": 107,
+  "page_end": 108,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Record in warrant-cases.",
+  "text": "(1) In all warrant-cases tried before a Magistrate, the evidence of each witness shall, as his examination proceeds, be taken down in writing either by the Magistrate himself or by his dictation in open Court or, where he is unable to do so owing to a physical or other incapacity, under his direction and superintendence, by an officer of the Court appointed by him in this behalf:\n[2][Provided that evidence of a witness under this sub-section may also be recorded by audio-video electronic means in the presence of the advocate of the person accused of the offence.]\n(2) Where the Magistrate causes the evidence to he taken down, he shall record a certificate that the evidence could not be taken down by himself for the reasons referred to in sub-section (1).\n(3) Such evidence shall ordinarily be taken down in the form of a narrative; but the Magistrate may, in his discretion take down, or cause to be taken down, any part of such evidence in the form of question and answer.\n(4) The evidence so taken down shall be signed by the Magistrate and shall form part of the record.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [
+    {
+      "action": "inserted",
+      "by_ref_raw": "Act 5 of 2009",
+      "by_doc_id": null,
+      "effective_date": "2009-12-31",
+      "effective_date_raw": null,
+      "footnote_text": "Ins. by Act 5 of 2009, s. 20 (w.e.f. 31-12-2009)",
+      "confidence": "extracted",
+      "origin": "footnote"
+    }
+  ],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

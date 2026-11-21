@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s265f",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "265F",
+  "chapter": {
+    "number": "XXI",
+    "title": "SUMMARY TRIALS"
+  },
+  "order": 298,
+  "page_start": 105,
+  "page_end": 105,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Judgment of the Court.",
+  "text": "The Court shall deliver its judgment in terms of section 265E in the open Court and the same shall be signed by the presiding officer of the Court.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

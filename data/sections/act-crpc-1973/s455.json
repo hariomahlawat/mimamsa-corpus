@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s455",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "455",
+  "chapter": {
+    "number": "XXXIV",
+    "title": "DISPOSAL OF PROPERTY"
+  },
+  "order": 503,
+  "page_start": 160,
+  "page_end": 160,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Destruction of libellous and other matter.",
+  "text": "(1) On a conviction under section 292, section 293, section 501 or section 502 of the Indian Penal Code (45 of 1860), the Court may order the destruction of all the copies of the thing in respect of which the conviction was had, and which are in the custody of the Court or remain in the possession or power of the person convicted.\n(2) The Court may, in like manner, on a conviction under section 272, section 273, section 274 or section 275 of the Indian Penal Code (45 of 1860), order the food, drink, drug or medical preparation in respect of which the conviction was had, to be destroyed.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

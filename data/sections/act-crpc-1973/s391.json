@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s391",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "391",
+  "chapter": {
+    "number": "XXIX",
+    "title": "APPEALS"
+  },
+  "order": 434,
+  "page_start": 143,
+  "page_end": 144,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Appellate Court may take further evidence or direct it to be taken.",
+  "text": "(1) In dealing with any appeal under this Chapter, the Appellate Court, if it thinks additional evidence to be necessary, shall record its reasons and may either take such evidence itself, or direct it to be taken by a Magistrate or, when the Appellate Court is a High Court, by a Court of Session or a Magistrate.\n(2) When the additional evidence is taken by the Court of Session or the Magistrate, it or he shall certify such evidence to the Appellate Court, and such Court shall thereupon proceed to dispose of the appeal.\n(3) The accused or his pleader shall have the right to be present when the additional evidence is taken.\n(4) The taking of evidence under this section shall be subject to the provisions of Chapter XXIII, as if it were an inquiry.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

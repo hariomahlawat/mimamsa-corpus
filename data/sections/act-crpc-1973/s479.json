@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s479",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "479",
+  "chapter": {
+    "number": "XXXVII",
+    "title": "MISCELLANEOUS"
+  },
+  "order": 527,
+  "page_start": 165,
+  "page_end": 166,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Case in which Judge or Magistrate is personally interested.",
+  "text": "No Judge or Magistrate shall, except with the permission of the Court to which an appeal lies from his Court, try or commit for trial any case to or in which he is a party, or personally interested, and no Judge or Magistrate shall hear an appeal from any judgment or order passed or made by himself.\nExplanation.—A Judge or Magistrate shall not be deemed to be a party to, or personally interested in, any case by reason only that he is concerned therein in a public capacity, or by reason only that he has viewed the place in which an offence is alleged to have been committed, or any other place in which any other transaction material to the case is alleged to have occurred, and made an inquiry in connection with the case.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}

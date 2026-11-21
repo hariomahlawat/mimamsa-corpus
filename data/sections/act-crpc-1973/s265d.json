@@ -1,0 +1,29 @@
+{
+  "schema_version": "0.2.0",
+  "section_id": "act-crpc-1973#s265d",
+  "parent_doc_id": "act-crpc-1973",
+  "unit": "section",
+  "number": "265D",
+  "chapter": {
+    "number": "XXI",
+    "title": "SUMMARY TRIALS"
+  },
+  "order": 296,
+  "page_start": 104,
+  "page_end": 104,
+  "source_record": null,
+  "field_provenance": {
+    "text": "rule",
+    "heading": "rule",
+    "chapter": "rule",
+    "status": "rule",
+    "amendment_history": "rule"
+  },
+  "heading": "Report of the mutually satisfactory disposition to be submitted before the Court.",
+  "text": "Where in a meeting under section 265C, a satisfactory disposition of the case has been worked out, the Court shall prepare a report of such disposition which shall be signed by the presiding officer of the Court and all other persons who participated in the meeting and if no such disposition has been worked out, the Court shall record such observation and proceed further in accordance with the provisions of this Code from the stage the application under sub-section (1) of section 265B has been filed in such case.",
+  "status": "repealed",
+  "status_note": "The Act is repealed. Kept in India Code's 'Repeal Acts' collection; record title reads 'The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)' (read 2026-11-21)",
+  "amendment_history": [],
+  "notes": [],
+  "text_source_doc_id": "act-crpc-1973-consolidated"
+}
