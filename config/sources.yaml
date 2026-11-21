@@ -75,9 +75,15 @@ sources:
       - { doc_id: act-bns-2023,                 title: "The Bharatiya Nyaya Sanhita, 2023",                      year: 2023 }
       - { doc_id: act-bnss-2023,                title: "The Bharatiya Nagarik Suraksha Sanhita, 2023",           year: 2023 }
       - { doc_id: act-bsa-2023,                 title: "The Bharatiya Sakshya Adhiniyam, 2023",                  year: 2023 }
-      - { doc_id: act-ipc-1860,                 title: "The Indian Penal Code, 1860",                            year: 1860, status_hint: repealed, note: "Repealed by BNS w.e.f. 2024-07-01; keep as historical" }
-      - { doc_id: act-crpc-1973,                title: "The Code of Criminal Procedure, 1973",                   year: 1973, status_hint: repealed, note: "Repealed by BNSS w.e.f. 2024-07-01" }
-      - { doc_id: act-evidence-1872,            title: "The Indian Evidence Act, 1872",                          year: 1872, status_hint: repealed, note: "Repealed by BSA w.e.f. 2024-07-01" }
+      # The three repealed codes: India Code no longer lists a central copy among current Acts (only state
+      # copies). The central text is kept in its "Repeal Acts" collection as a bare record with one PDF and
+      # no section records. item_uuid points at that record (found by title search on 2026-11-21).
+      - { doc_id: act-ipc-1860,                 title: "The Indian Penal Code, 1860",                            year: 1860,
+          status_hint: repealed, repealed_record: true, item_uuid: 972afbe0-a2de-415d-9df5-8d70038056ad }
+      - { doc_id: act-crpc-1973,                title: "The Code of Criminal Procedure, 1973",                   year: 1973,
+          status_hint: repealed, repealed_record: true, item_uuid: 973d60aa-105c-4a2f-94f1-7640f0b5d6a7 }
+      - { doc_id: act-evidence-1872,            title: "The Indian Evidence Act, 1872",                          year: 1872,
+          status_hint: repealed, repealed_record: true, item_uuid: b62073e0-4d33-4348-8eda-d92af40af24b }
     # Regulations for the Army 1987 is listed under India Code in the brief, but it
     # is an executive publication, not an Act. Search India Code first; if absent,
     # fall back to the MoD source below.

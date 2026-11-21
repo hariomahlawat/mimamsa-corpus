@@ -30,6 +30,8 @@ COLLECTIONS = {
 }
 REFERENCE_FIELDS = ("dc.identifier.notification_reference", "dc.identifier.regulation_reference",
                     "dc.identifier.order_reference", "dc.identifier.notification_no")
+# "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)" -> title, number, repealing instrument
+REPEAL_TITLE = re.compile(r"^(?P<title>.+?),?\s+(?P<no>\d+)\s+of\s+(?P<year>\d{4})\s*,?\s*\(Rep\.,\s*(?P<by>[^)]+)\)\s*$")
 EXTRACT_FIELDS = ("page_count", "text_method", "text_path", "text_quality", "needs_ocr", "pages_without_text",
                   "ocr_confidence", "ocr_low_confidence_pages", "access_marking")
 
@@ -145,6 +147,7 @@ def build_indiacode(paths: Paths) -> dict:
     for r in rows:
         by_parent[json.loads(r["meta"])["parent_doc_id"]].append(r)
 
+    repealed_by: list[tuple[str, str, str]] = []      # (doc_id, "Act 45 of 2023", record title)
     docs: dict[str, dict] = {}
     sections: dict[str, dict] = {}
     edges: list[dict] = []
@@ -156,7 +159,38 @@ def build_indiacode(paths: Paths) -> dict:
         act = next((rec for rec, _ in records.values() if md(rec, "dc.identifier.collection") == "ACT"), None)
         act_page = next((p for rec, p in records.values() if rec is act), None)
         if act is None:
-            problems.append(f"{parent}: no ACT record in the saved pages; skipped")
+            repealed = [(r, m) for r, m in metas if m.get("repeal_record")]
+            if not repealed:
+                problems.append(f"{parent}: no ACT record in the saved pages; skipped")
+                continue
+            for r, m in repealed:
+                rr = m["repeal_record"]
+                parsed = REPEAL_TITLE.match(rr.get("title") or "")
+                as_of = (r["fetched_at"] or "")[:10]
+                doc_id = parent if r["doc_id_hint"] else f"{parent}-alt-{r['sha256'][:6]}"
+                d = _base_doc(r, paths, aliases)
+                d.update({
+                    "doc_id": doc_id, "doc_type": "act",
+                    "title": (parsed.group("title").strip() if parsed else rr.get("title")),
+                    "number": f"{int(parsed.group('no'))} of {parsed.group('year')}" if parsed else None,
+                    "issuing_authority": None,
+                    "issue_date": iso_date(rr.get("date_issued")),      # the record gives a year only -> null
+                    "effective_date": None,
+                    "status": "repealed",
+                    "status_note": (f"Kept in India Code's '{rr.get('collection_name')}' collection; record title "
+                                    f"reads {rr.get('title')!r} (read {as_of})"),
+                    "status_as_of": as_of,
+                    "language": m.get("language_by_filename"),
+                    "parent_doc_id": None if r["doc_id_hint"] else parent,
+                    "original_filename": m.get("filename"),
+                    "source_record": {"system": "indiacode", "record_id": m.get("item_uuid") or "",
+                                      "collection": rr.get("collection_name"), "act_id": None,
+                                      "handle": rr.get("handle"), "listing_raw_path": None},
+                    "field_provenance": {"title": "rule", "number": "rule", "status": "crawler", "language": "rule"},
+                })
+                docs[doc_id] = d
+                if parsed and r["doc_id_hint"]:
+                    repealed_by.append((doc_id, parsed.group("by").strip(), rr.get("title")))
             continue
         as_of = max(r["fetched_at"] for r in prow)[:10]
 
@@ -271,6 +305,23 @@ def build_indiacode(paths: Paths) -> dict:
             docs[doc_id] = d
 
     conn.close()
+
+    # ---- "Rep., Act 45 of 2023" on a repealed record -> a `repeals` edge from that Act, when it is in the corpus
+    by_number = defaultdict(list)
+    for d in docs.values():
+        if d["doc_type"] == "act" and d["number"] and not d.get("parent_doc_id"):
+            by_number[d["number"]].append(d["doc_id"])
+    for doc_id, by_raw, title in repealed_by:
+        m = re.search(r"(\d+)\s+of\s+(\d{4})", by_raw)
+        targets = by_number.get(f"{int(m.group(1))} of {m.group(2)}", []) if m else []
+        evidence = f"India Code record title: {title}"
+        if len(targets) == 1:
+            e = _edge(targets[0], "repeals", doc_id, by_raw, evidence)
+            docs[targets[0]]["relations"].append(e)
+        else:                                   # the repealing Act is not (uniquely) in the corpus
+            e = _edge(doc_id, "superseded_by", None, by_raw, evidence)
+            docs[doc_id]["relations"].append(e)
+        edges.append(e)
 
     # ---- remove outputs of an earlier run that this run no longer produces
     if paths.meta.exists():

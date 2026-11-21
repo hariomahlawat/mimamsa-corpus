@@ -260,9 +260,10 @@ def _search_answer(*records):
 
 
 def test_central_copy_is_chosen_over_state_copies_and_number_year_is_tolerated(cfg, db, tmp_path):
-    answer = _search_answer(("u-mh", "The Code of Criminal Procedure, 1973", "1974", "MAHARASHTRA"),
-                            ("u-central", "THE CODE OF CRIMINAL PROCEDURE, 1973", "1974", "CENTRAL"),
-                            ("u-up", "Code of Criminal Procedure, 1973", "1974", "UTTAR PRADESH"))
+    # act_year on the record is the year of the Act number, which can differ from the year in the title
+    answer = _search_answer(("u-mh", "The Bharatiya Nagarik Suraksha Sanhita, 2023", "2024", "MAHARASHTRA"),
+                            ("u-central", "THE BHARATIYA NAGARIK SURAKSHA SANHITA, 2023", "2024", "CENTRAL"),
+                            ("u-up", "Bharatiya Nagarik Suraksha Sanhita, 2023", "2024", "UTTAR PRADESH"))
     seen = []
 
     def item(req):
@@ -270,16 +271,16 @@ def test_central_copy_is_chosen_over_state_copies_and_number_year_is_tolerated(c
         return httpx.Response(404)
     c = make_client(cfg, db, tmp_path, _replay_with({"/discover/search/objects?query=": httpx.Response(200, json=answer),
                                                      "/core/items/": item}))
-    [r] = indiacode.discover(cfg, db, c, only=["act-crpc-1973"])
+    [r] = indiacode.discover(cfg, db, c, only=["act-bnss-2023"])
     assert seen and "/core/items/u-central" in seen[0]            # went on to the CENTRAL record
     assert r.status == "failed"                                   # (that record is not in the test data)
 
 
 def test_two_central_copies_stay_unresolved(cfg, db, tmp_path):
-    answer = _search_answer(("u1", "The Indian Penal Code, 1860", "1860", "CENTRAL"),
-                            ("u2", "The Indian Penal Code, 1860", "1860", "CENTRAL"))
+    answer = _search_answer(("u1", "The Bharatiya Nyaya Sanhita, 2023", "2023", "CENTRAL"),
+                            ("u2", "The Bharatiya Nyaya Sanhita, 2023", "2023", "CENTRAL"))
     c = make_client(cfg, db, tmp_path, _replay_with({"/discover/search/objects?query=": httpx.Response(200, json=answer)}))
-    [r] = indiacode.discover(cfg, db, c, only=["act-ipc-1860"])
+    [r] = indiacode.discover(cfg, db, c, only=["act-bns-2023"])
     assert r.status == "unresolved" and len(r.candidates) == 2
 
 
@@ -474,3 +475,33 @@ def test_cli_fetch_needs_confirmation(tmp_path, capsys):
 
 def test_cli_discover_unbuilt_source(tmp_path, capsys):
     assert main(["--root", str(tmp_path), "discover", "--source", "mod", "--replay", str(FIX)]) == 2
+
+
+def test_repealed_record_target_goes_straight_to_its_record(cfg, db, tmp_path):
+    uuid = "972afbe0-a2de-415d-9df5-8d70038056ad"
+    item = {"uuid": uuid, "name": "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)", "handle": "123456789/488475",
+            "metadata": {"dc.date.issued": [{"value": "1860"}]}}
+    bundles = {"_embedded": {"bundles": [{"name": "ORIGINAL", "_embedded": {"bitstreams": {"_embedded": {"bitstreams": [
+        {"name": "A1860-45.pdf", "uuid": "b1", "sizeBytes": 10, "checkSum": {"checkSumAlgorithm": "MD5", "value": "x"},
+         "_links": {"content": {"href": f"{API}/core/bitstreams/b1/content"}}}]}}}}]}}
+    seen = []
+
+    def handler(req):
+        url = str(req.url)
+        seen.append(url)
+        if req.url.path == "/robots.txt":
+            return httpx.Response(404)
+        if url.endswith("/owningCollection"):
+            return httpx.Response(200, json={"name": "Repeal Acts"})
+        if "/bundles" in url:
+            return httpx.Response(200, json=bundles)
+        if url.endswith(uuid):
+            return httpx.Response(200, json=item)
+        return httpx.Response(404)
+    c = make_client(cfg, db, tmp_path, handler)
+    [r] = indiacode.discover(cfg, db, c, only=["act-ipc-1860"])
+    assert r.status == "resolved" and r.warnings == [] and r.act_pdfs == 1 and r.newly_queued == 1
+    assert not any("discover/search" in u for u in seen)          # no title search, no linked-record pages
+    row = db.get(f"{API}/core/bitstreams/b1/content")
+    assert row["doc_id_hint"] == "act-ipc-1860"
+    assert json.loads(row["meta"])["repeal_record"]["collection_name"] == "Repeal Acts"

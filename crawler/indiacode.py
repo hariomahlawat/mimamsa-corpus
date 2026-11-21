@@ -230,11 +230,40 @@ def _discover_target(cfg: Config, db: StateDB, client: PoliteClient, source: str
                 "dc.identifier.ministry_name", "dc.identifier.department_name", "dc.identifier.act_id"):
         if md(act, key) is not None:
             res.metadata[key] = md(act, key)
+    year = md(act, "dc.date.act_year") or (str(t["year"]) if t.get("year") else None)
+
+    if t.get("repealed_record"):
+        # A repealed central Act kept in India Code's "Repeal Acts" collection: a bare record (title such
+        # as "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)") with one PDF, no section records.
+        coll = api.get(f"{act_url}/owningCollection", doc_id=doc_id, role="collection").get("name")
+        res.metadata["owning collection"] = coll or ""
+        if "repeal" not in (coll or "").lower():
+            res.warnings.append(f"record {uuid} is in collection {coll!r}, expected the Repeal Acts collection")
+        core = normalise_title(re.sub(r"\b\d{4}\b", "", t["title"]))
+        if core not in normalise_title(act.get("name")):
+            res.warnings.append(f"record title {act.get('name')!r} does not contain target title {t['title']!r}")
+        files = original_bitstreams(api.get(f"{act_url}/bundles?embed=bitstreams&size=20", doc_id=doc_id,
+                                            role="bundles"))
+        res.act_pdfs = len(files)
+        for f in files:
+            _queue_files(res, api, [f], doc_id_hint=doc_id if len(files) == 1 else None, priority=10,
+                         discovered_from=act_url,
+                         meta={"category": "act", "title": act.get("name"), "parent_doc_id": doc_id, "year": year,
+                               "item_uuid": uuid, "role": "act_text" if len(files) == 1 else "act_other_file",
+                               "language_by_filename": file_language(f["filename"]),
+                               "repeal_record": {"title": act.get("name"), "handle": act.get("handle"),
+                                                 "date_issued": md(act, "dc.date.issued"),
+                                                 "state_name": md(act, "dc.identifier.state_name"),
+                                                 "collection_name": coll}})
+        if len(files) != 1:
+            res.warnings.append(f"expected one file on a repealed-Act record, found {len(files)}; none tagged")
+        res.status = "resolved"
+        return res
+
     if md(act, "dc.identifier.collection") != "ACT":
         res.warnings.append(f"record {uuid} is in collection {md(act, 'dc.identifier.collection')!r}, not ACT")
     if normalise_title(act.get("name")) != normalise_title(t["title"]):
         res.warnings.append(f"record title {act.get('name')!r} differs from target title {t['title']!r}")
-    year = md(act, "dc.date.act_year") or (str(t["year"]) if t.get("year") else None)
 
     # 3. The Act's own files.
     files = original_bitstreams(api.get(f"{act_url}/bundles?embed=bitstreams&size=20", doc_id=doc_id, role="bundles"))

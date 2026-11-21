@@ -292,3 +292,46 @@ def test_low_confidence_pages_are_listed_not_hidden(corpus, monkeypatch):
     assert meta["ocr_low_confidence_pages"] == [2, 3] and meta["text_quality"] == "suspect"
     assert stats["low_confidence_pages"] == 2
     assert "p.2 (42)" in (corpus.reports / "ocr_review.md").read_text()
+
+
+# ------------------------------------------------- repealed central Acts
+def test_repeal_title_pattern():
+    m = records.REPEAL_TITLE.match("The Code of Criminal Procedure 1973, 02 of 1974 (Rep., Act 46 of 2023)")
+    assert (m.group("title"), m.group("no"), m.group("year"), m.group("by")) == \
+        ("The Code of Criminal Procedure 1973", "02", "1974", "Act 46 of 2023")
+    assert records.REPEAL_TITLE.match("The Army Act, 1950") is None
+
+
+def test_repealed_record_becomes_a_repealed_act_with_an_edge(corpus):
+    pdf = corpus.root / "tmp.pdf"
+    make_pdf(pdf, [ENGLISH])
+    body = pdf.read_bytes()
+    pdf.unlink()
+    sha = hashlib.sha256(body).hexdigest()
+    rel = f"data/raw/indiacode/1911/{sha}.pdf"
+    (corpus.root / rel).parent.mkdir(parents=True, exist_ok=True)
+    (corpus.root / rel).write_bytes(body)
+
+    def add(db, doc_id, name, by):
+        url = f"{API}/core/bitstreams/{doc_id}/content"
+        db.enqueue(url, "indiacode", "indiacode.gov.in", "document", doc_id_hint=doc_id, meta={
+            "parent_doc_id": doc_id, "category": "act", "filename": "A1911-8.pdf", "language_by_filename": "en",
+            "item_uuid": "u-" + doc_id,
+            "repeal_record": {"title": f"{name} (Rep., {by})", "handle": "123456789/1", "date_issued": "1911",
+                              "state_name": None, "collection_name": "Repeal Acts"}})
+        db.record_file(sha256=sha, raw_path=rel, url=url, nbytes=len(body), content_type="application/pdf")
+        db.mark_fetched(url, status_code=200, sha256=sha, nbytes=len(body), content_type="application/pdf")
+    with StateDB(corpus.db) as db:
+        add(db, "act-indian-army-1911", "The Indian Army Act, 8 of 1911", "Act 46 of 1950")      # repealer in corpus
+        add(db, "act-old-thing-1850", "Old Thing Act, 6 of 1850", "Act 29 of 1861")              # repealer not in corpus
+    res = records.build_indiacode(corpus)
+    assert res["problems"] == []
+    old = load(corpus, "meta/act-indian-army-1911.json")
+    assert old["status"] == "repealed" and old["title"] == "The Indian Army Act" and old["number"] == "8 of 1911"
+    assert old["issue_date"] is None and "Repeal Acts" in old["status_note"]              # a bare year is not a date
+    army = load(corpus, "meta/act-army-1950.json")
+    e = [r for r in army["relations"] if r["type"] == "repeals"][0]
+    assert e["target_doc_id"] == "act-indian-army-1911" and e["target_ref_raw"] == "Act 46 of 1950"
+    orphan = load(corpus, "meta/act-old-thing-1850.json")["relations"][0]
+    assert orphan["type"] == "superseded_by" and orphan["target_doc_id"] is None and orphan["target_ref_raw"] == "Act 29 of 1861"
+    assert validate.run(corpus)["errors"] == []

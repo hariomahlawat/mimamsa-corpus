@@ -87,9 +87,18 @@ def run(paths: Paths, extra: dict | None = None) -> dict:
         ok = bool(s) and s["status"] == want
         L.append(f"- [{'x' if ok else ' '}] {label}: " + (f"`{sid}` is `{s['status']}`. {s['status_note'] or ''}" if s
                                                          else f"`{sid}` not in the corpus"))
-    L += ["- [ ] IPC to BNS from 1 July 2024: BNS, BNSS and BSA are in the corpus; IPC, CrPC and the Evidence Act "
-          "are not (no central copy on India Code), so the supersedes edges cannot be built yet.",
-          "- [ ] Dharamvir Singh / 2026 ruling / 2023 ruling on writs: judgments, Phase 4."]
+    ids = {d["doc_id"]: d for d in docs}
+    pairs = [("act-bns-2023", "act-ipc-1860"), ("act-bnss-2023", "act-crpc-1973"), ("act-bsa-2023", "act-evidence-1872")]
+    found = [(a, b) for a, b in pairs if any(r["type"] == "repeals" and r["source_doc_id"] == a
+                                             and r["target_doc_id"] == b for r in rels)]
+    eff = {a: (ids[a].get("effective_date") if a in ids else None) for a, _ in pairs}
+    L.append(f"- [{'x' if len(found) == len(pairs) else ' '}] IPC, CrPC and Evidence Act replaced by BNS, BNSS and BSA: "
+             + (", ".join(f"`{a}` repeals `{b}` (new Act in force from {eff[a] or 'date not recorded'})" for a, b in found)
+                or "no `repeals` edges yet")
+             + (". Missing: " + ", ".join(f"{a} -> {b}" for a, b in pairs if (a, b) not in found)
+                if len(found) != len(pairs) else ".")
+             + " Evidence is India Code's own record title; the edges still need human verification.")
+    L.append("- [ ] Dharamvir Singh / 2026 ruling / 2023 ruling on writs: judgments, Phase 4.")
 
     undated = [h for s in secs for h in s["amendment_history"] if h.get("effective_date_raw")]
     L += ["", "## Amendment notes", "",
@@ -103,7 +112,9 @@ def run(paths: Paths, extra: dict | None = None) -> dict:
               if h.get("effective_date_raw")]
     L += ["", "## Not done / gaps", "",
           "- Golden test set: not available to the pipeline, so `reports/golden_coverage.md` is not produced.",
-          "- IPC 1860, CrPC 1973, Evidence Act 1872, Regulations for the Army 1987: no source yet.",
+          "- IPC 1860, CrPC 1973, Evidence Act 1872: one PDF each from India Code's 'Repeal Acts' collection; "
+          "no section records exist for them, so they are not split into sections yet.",
+          "- Regulations for the Army 1987: no source yet.",
           "- Air Force Rules 1969: India Code has the record but no file.",
           "- Chapters are not recorded on section records (the source records carry no chapter field).",
           "- Relations other than `cites` need human verification before the app relies on them."]
