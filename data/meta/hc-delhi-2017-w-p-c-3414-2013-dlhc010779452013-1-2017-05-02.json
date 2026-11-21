@@ -1,0 +1,100 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2017/court=7_26/bench=dhcdb/DLHC010779452013_1_2017-05-02.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:14:53+00:00",
+  "sha256": "d62cd381cf84bc19b9132e8c5539b595826e41c699441cf5ba754e7d43785b9e",
+  "raw_path": "data/raw/hc/2017/d62cd381cf84bc19b9132e8c5539b595826e41c699441cf5ba754e7d43785b9e.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 46,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2017-w-p-c-3414-2013-dlhc010779452013-1-2017-05-02.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2017-w-p-c-3414-2013-dlhc010779452013-1-2017-05-02",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s27",
+      "target_ref_raw": "Section 27 of the Air Force Act, 1950",
+      "effective_date": null,
+      "evidence": "of Smith) v. Oxfordshite Assistant Deputy Coroner [2008] EWHC 694 is relied upon. Learned counsel also argues that the petition is not covered under Section 27 of the Air Force Act, 1950. Counsel argues that Section 27 requiring a complaint to be made to the Central Government first, operates merely against a generic wrong committed b",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2017-w-p-c-3414-2013-dlhc010779452013-1-2017-05-02",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/3414/2013 of SANJEET SINGH KALIA Vs UNION OF INDIA & ANR",
+  "number": "W.P.(C)/3414/2013",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2017-05-02",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010779452013_1_2017-05-02.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010779452013",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/3414/2013"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SANJEET SINGH KALIA"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ANR"
+    ]
+  },
+  "judges": [],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "27",
+      "raw": "Section 27 of the Air Force Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 4,
+    "keywords": {
+      "air force act": 4
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

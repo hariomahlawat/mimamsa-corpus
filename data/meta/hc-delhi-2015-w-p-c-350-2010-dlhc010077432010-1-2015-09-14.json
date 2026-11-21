@@ -1,0 +1,175 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2015/court=7_26/bench=dhcdb/DLHC010077432010_1_2015-09-14.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:21:25+00:00",
+  "sha256": "8186cb0ec193d9465c6b945cfdeb48870e2c0d00206742c861863dc90d8cf2c4",
+  "raw_path": "data/raw/hc/2015/8186cb0ec193d9465c6b945cfdeb48870e2c0d00206742c861863dc90d8cf2c4.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 16,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2015-w-p-c-350-2010-dlhc010077432010-1-2015-09-14.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2015-w-p-c-350-2010-dlhc010077432010-1-2015-09-14",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s52",
+      "target_ref_raw": "Section 52(b) of the Army Act",
+      "effective_date": null,
+      "evidence": "eld the findings and the sentence of the Summary Court Martial (“SCM”). The petitioner was held guilty of misappropriating government property, under Section 52(b) of the Army Act, 1954 (“the Act”) and a penalty of two months rigorous imprisonment in military custody along with reduction to the ranks was imposed on him. 2. The",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2015-w-p-c-350-2010-dlhc010077432010-1-2015-09-14",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s164",
+      "target_ref_raw": "Section 164(2) of the Army Act",
+      "effective_date": null,
+      "evidence": "in military custody. 5. Aggrieved by the findings of the Summary Court Martial, the petitioner filed Post Confirmation Petition before the COAS under Section 164(2) of the Army Act. The petition was rejected and the sentence awarded by the Summary Court Martial was confirmed. Hence, the petitioner is before this Court challengin",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2015-w-p-c-350-2010-dlhc010077432010-1-2015-09-14",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s116",
+      "target_ref_raw": "Section 116 of the Army Act",
+      "effective_date": null,
+      "evidence": "Court Martial. The Army Act is a specialised Act with a special procedure. The Commanding Officer is competent to hold a Summary Court Martial under Section 116 of the Army Act, 1954. This position was decisively ruled in Vidya Prakash v Union of India 1988 (2) SCC 459: “13 - The Commanding Officer of the Corps, Department o",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2015-w-p-c-350-2010-dlhc010077432010-1-2015-09-14",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s120",
+      "target_ref_raw": "Section 120 of the Army Act",
+      "effective_date": null,
+      "evidence": "of Summary Court Martial. In the present case, the Commanding Officer was competent to try by Summary Court Martial without making a reference as per Section 120 of the Army Act. Reliance is placed on the case of Brijesh Kumar Singh v Union of India, Writ Petition No. 6840 (S/S) of 2002, where the Allahabad High Court held th",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2015-w-p-c-350-2010-dlhc010077432010-1-2015-09-14",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/350/2010 of SEP AKHALLESH KUMAR RAY Vs UNION OF INDIA AND OTHERS",
+  "number": "W.P.(C)/350/2010",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2015-09-14",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010077432010_1_2015-09-14.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010077432010",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/350/2010"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SEP AKHALLESH KUMAR RAY"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE S. RAVINDRA BHAT",
+    "HON'BLE MS. JUSTICE DEEPA SHARMA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "52",
+      "raw": "Section 52(b) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "164",
+      "raw": "Section 164(2) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "116",
+      "raw": "Section 116 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "120",
+      "raw": "Section 120 of the Army Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": null,
+      "raw": "Navy Act"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": null,
+      "raw": "Code of Criminal Procedure"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": null,
+      "raw": "Evidence Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 79,
+    "keywords": {
+      "army act": 13,
+      "navy act": 1,
+      "court martial": 57,
+      "summary of evidence": 8
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

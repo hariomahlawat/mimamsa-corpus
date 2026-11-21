@@ -1,0 +1,82 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2015/court=7_26/bench=dhcdb/DLHC010275232015_1_2015-03-11.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:21:16+00:00",
+  "sha256": "3578716b1b73e6dad5f14768b8aa0905fd2c87a172309342c3eecfa31f94e8f8",
+  "raw_path": "data/raw/hc/2015/3578716b1b73e6dad5f14768b8aa0905fd2c87a172309342c3eecfa31f94e8f8.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": null,
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": null,
+  "text_quality": null,
+  "needs_ocr": true,
+  "pages_without_text": [
+    1
+  ],
+  "relations": [],
+  "doc_id": "hc-delhi-2015-w-p-c-1463-2015-dlhc010275232015-1-2015-03-11",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/1463/2015 of DHIAN CHAND Vs UNION OF INDIA & ORS.",
+  "number": "W.P.(C)/1463/2015",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2015-03-11",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010275232015_1_2015-03-11.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010275232015",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/1463/2015"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "DHIAN CHAND"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE KAILASH GAMBHIR",
+    "HON'BLE MR. JUSTICE I.S.MEHTA"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "not_checked",
+    "hits": 0,
+    "keywords": {},
+    "note": "no extracted text (needs OCR or not yet extracted)"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule"
+  }
+}

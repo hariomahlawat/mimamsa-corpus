@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2014/court=7_26/bench=dhcdb/DLHC010283532004_1_2014-07-01.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:24:13+00:00",
+  "sha256": "204366fba3be87b1d9f65c770f7e5844734838362bc6484a9f3dd280a647ecca",
+  "raw_path": "data/raw/hc/2014/204366fba3be87b1d9f65c770f7e5844734838362bc6484a9f3dd280a647ecca.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 30,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2014-w-p-c-6148-2004-dlhc010283532004-1-2014-07-01.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2014-w-p-c-6148-2004-dlhc010283532004-1-2014-07-01",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s3",
+      "target_ref_raw": "Section 3(vi) of Army Act, 1950",
+      "effective_date": null,
+      "evidence": "he stand taken by them in their counter affidavit. In addition thereto, learned counsel appearing for Ministry of Defence/DRDO argued as follows:- A. Section 3(vi) of Army Act, 1950 defines ‘Corps’ to mean any separate body of persons subject to the Army Act 1950, which is prescribed as a corps for the purposes of all or any of t",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2014-w-p-c-6148-2004-dlhc010283532004-1-2014-07-01",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/6148/2004 of MAJ.GENL.S.B.AKALI Vs UOI & ORS.",
+  "number": "W.P.(C)/6148/2004",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2014-07-01",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010283532004_1_2014-07-01.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010283532004",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/6148/2004"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MAJ.GENL.S.B.AKALI"
+    ],
+    "respondent": [
+      "UOI & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE PRADEEP NANDRAJOG",
+    "HON'BLE MR. JUSTICE JAYANT NATH"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "3",
+      "raw": "Section 3(vi) of Army Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 5,
+    "keywords": {
+      "army act": 5
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2018/court=7_26/bench=dhcdb/DLHC011421622018_1_2018-05-29.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:09:52+00:00",
+  "sha256": "d5bb56db039b955a8847e5363b64647010e1970df8b454d03757a22d8c532695",
+  "raw_path": "data/raw/hc/2018/d5bb56db039b955a8847e5363b64647010e1970df8b454d03757a22d8c532695.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2018-w-p-c-5954-2018-dlhc011421622018-1-2018-05-29.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2018-w-p-c-5954-2018-dlhc011421622018-1-2018-05-29",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s26",
+      "target_ref_raw": "Section 26 of the Army Act",
+      "effective_date": null,
+      "evidence": "tainability of the present petition in the High Court, in view of the stand taken by the petitioner that he had submitted a statutory complaint under Section 26 of the Army Act against the punishment of severe reprimand awarded to him under Sections 41 and 63 of the Army Act, 1950, the respondents are willing to examine the",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2018-w-p-c-5954-2018-dlhc011421622018-1-2018-05-29",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s41",
+      "target_ref_raw": "Sections 41 and 63 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "titioner that he had submitted a statutory complaint under Section 26 of the Army Act against the punishment of severe reprimand awarded to him under Sections 41 and 63 of the Army Act, 1950, the respondents are willing to examine the same. W.P.(C) 5954/2018 Page 1 of 2 4. Though the petitioner states that he had despatched the statutory",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2018-w-p-c-5954-2018-dlhc011421622018-1-2018-05-29",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s3",
+      "target_ref_raw": "Section 3 (o) of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "s been listed by the Registry with an objection with regard to its maintainability in the High Court. 2. Learned counsel for the petitioner refers to Section 3 (o) of the Armed Forces Tribunal Act, 2007 to state that the present petition is maintainable before this court. 3. Mr.Amit Mahajan, learned Central Government Standing Counsel, who appears on",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2018-w-p-c-5954-2018-dlhc011421622018-1-2018-05-29",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/5954/2018 of NK/CHEF VIJAY KUMAR Vs UNION OF INDIA AND ORS",
+  "number": "W.P.(C)/5954/2018",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2018-05-29",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC011421622018_1_2018-05-29.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC011421622018",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/5954/2018"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "NK/CHEF VIJAY KUMAR"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MS. JUSTICE HIMA KOHLI",
+    "HON'BLE MS. JUSTICE PRATIBHA RANI"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "26",
+      "raw": "Section 26 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "41",
+      "raw": "Sections 41 and 63 of the Army Act, 1950"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "3",
+      "raw": "Section 3 (o) of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 3,
+    "keywords": {
+      "army act": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

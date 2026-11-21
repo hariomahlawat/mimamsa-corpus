@@ -1,0 +1,151 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2011/court=7_26/bench=dhcdb/DLHC010199772010_1_2011-08-30.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:33:18+00:00",
+  "sha256": "dc0a79422764be990894b7a393c55a8f80dffa341d9a80ced139b5f38f991f14",
+  "raw_path": "data/raw/hc/2011/dc0a79422764be990894b7a393c55a8f80dffa341d9a80ced139b5f38f991f14.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 11,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2011-w-p-c-815-2010-dlhc010199772010-1-2011-08-30.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2011-w-p-c-815-2010-dlhc010199772010-1-2011-08-30",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s18",
+      "target_ref_raw": "Section 18 of the Army Act 1950",
+      "effective_date": null,
+      "evidence": "second was the consequence of the petitioner remaining in prison for 5 years. The ultimate decision taken was to invoke the Presidential power under Section 18 of the Army Act 1950. Order dated 11.9.2009 was issued, which reads as under:- “ORDER The President, in exercise of powers conferred by Section 18 of the Army Act 1950 an",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2011-w-p-c-815-2010-dlhc010199772010-1-2011-08-30",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s19",
+      "target_ref_raw": "Section 19 of the Army Act",
+      "effective_date": null,
+      "evidence": "is Section 18 of the Army Act where service of an Army personnel can be terminated without assigning any reasons. The second would be the power under Section 19 of the Army Act where, with respect to a misconduct, after holding an inquiry as contemplated by Rule 14 of the Army Rules the service can be terminated. The third i",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2011-w-p-c-815-2010-dlhc010199772010-1-2011-08-30",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s83",
+      "target_ref_raw": "Section 83 of the Army Act",
+      "effective_date": null,
+      "evidence": "ct to a misconduct, after holding an inquiry as contemplated by Rule 14 of the Army Rules the service can be terminated. The third is the power under Section 83 of the Army Act, where pursuant to summary court martials penalties can be levied. The fourth is the power under Section 109 of the Army Act pertaining to General Co",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2011-w-p-c-815-2010-dlhc010199772010-1-2011-08-30",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s109",
+      "target_ref_raw": "Section 109 of the Army Act",
+      "effective_date": null,
+      "evidence": "third is the power under Section 83 of the Army Act, where pursuant to summary court martials penalties can be levied. The fourth is the power under Section 109 of the Army Act pertaining to General Court Martials. 13. In a nut shell, power under Section 18 of the Army Act has to be resorted to if it is found inexpedient and",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2011-w-p-c-815-2010-dlhc010199772010-1-2011-08-30",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/815/2010 of MAJOR VIVEKY RAI Vs UNION OF INDIA & OTHERS",
+  "number": "W.P.(C)/815/2010",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2011-08-30",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010199772010_1_2011-08-30.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010199772010",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/815/2010"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MAJOR VIVEKY RAI"
+    ],
+    "respondent": [
+      "UNION OF INDIA & OTHERS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE PRADEEP NANDRAJOG",
+    "HON'BLE MR. JUSTICE SUNIL GAUR"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "18",
+      "raw": "Section 18 of the Army Act 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "19",
+      "raw": "Section 19 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "83",
+      "raw": "Section 83 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "109",
+      "raw": "Section 109 of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 10,
+    "keywords": {
+      "army act": 10
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

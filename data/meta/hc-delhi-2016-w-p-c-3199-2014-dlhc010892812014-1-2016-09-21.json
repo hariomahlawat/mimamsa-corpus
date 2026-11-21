@@ -1,0 +1,119 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2016/court=7_26/bench=dhcdb/DLHC010892812014_1_2016-09-21.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:18:16+00:00",
+  "sha256": "07a20860fcfef77cbd0da60facf2ac80c57df8f4626b5e74928bad026544540f",
+  "raw_path": "data/raw/hc/2016/07a20860fcfef77cbd0da60facf2ac80c57df8f4626b5e74928bad026544540f.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 19,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2016-w-p-c-3199-2014-dlhc010892812014-1-2016-09-21.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2016-w-p-c-3199-2014-dlhc010892812014-1-2016-09-21",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s192",
+      "target_ref_raw": "Section 192 of the Army Act",
+      "effective_date": null,
+      "evidence": "nor are its benefits extended to them. 4. In these circumstances, urge the petitioners, the 1989 regulations were framed and brought into force under Section 192 of the Army Act. It is submitted that these regulations did not in any manner seek to change the existing terms of recruitment, the channels or quotas prescribed for",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2016-w-p-c-3199-2014-dlhc010892812014-1-2016-09-21",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s193a",
+      "target_ref_raw": "Section 193A of the Army Act",
+      "effective_date": null,
+      "evidence": "es the provisions of the Army Act and liable to be quashed. The vires of the 1989 regulations are also questioned as being contrary to the mandate of Section 193A of the Army Act, which provides that all regulations framed should be tabled before both Houses of Parliament. Since that procedure was not ever followed, the regula",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2016-w-p-c-3199-2014-dlhc010892812014-1-2016-09-21",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/3199/2014 of INDIAN DEFENCE SERVICE OF ENGINEERS ASSOCIATION (GOVT. APPROVED) Vs UNION OF INDIA AND ORS",
+  "number": "W.P.(C)/3199/2014",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2016-09-21",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010892812014_1_2016-09-21.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010892812014",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/3199/2014"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "INDIAN DEFENCE SERVICE OF ENGINEERS ASSOCIATION (GOVT. APPROVED)"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE S. RAVINDRA BHAT",
+    "HON'BLE MS. JUSTICE DEEPA SHARMA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "192",
+      "raw": "Section 192 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "193A",
+      "raw": "Section 193A of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 18,
+    "keywords": {
+      "army act": 18
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

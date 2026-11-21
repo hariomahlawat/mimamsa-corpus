@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2013/court=7_26/bench=dhcdb/DLHC011872862013_1_2013-12-10.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:25:27+00:00",
+  "sha256": "adf12c87b1b9205463211f1930e5827ad75e79da56f7eaaecd2438a4414ec897",
+  "raw_path": "data/raw/hc/2013/adf12c87b1b9205463211f1930e5827ad75e79da56f7eaaecd2438a4414ec897.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2013-w-p-c-7754-2013-dlhc011872862013-1-2013-12-10.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2013-w-p-c-7754-2013-dlhc011872862013-1-2013-12-10",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/7754/2013 of WING COMMANDER RAVI MANI (RETD.) Vs UNION OF INDIA & ORS",
+  "number": "W.P.(C)/7754/2013",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2013-12-10",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC011872862013_1_2013-12-10.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC011872862013",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/7754/2013"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "WING COMMANDER RAVI MANI (RETD.)"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MS. JUSTICE GITA MITTAL",
+    "HON'BLE MS. JUSTICE DEEPA SHARMA"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "armed forces tribunal": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

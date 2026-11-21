@@ -1,0 +1,109 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2013/court=7_26/bench=dhcdb/DLHC010457012013_1_2013-03-22.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:25:27+00:00",
+  "sha256": "75c224be2c0808f72a58b1e2fc1bdcd0cf8e6e0c790074aebce1ef24a7307350",
+  "raw_path": "data/raw/hc/2013/75c224be2c0808f72a58b1e2fc1bdcd0cf8e6e0c790074aebce1ef24a7307350.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2013-w-p-c-1917-2013-dlhc010457012013-1-2013-03-22.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2013-w-p-c-1917-2013-dlhc010457012013-1-2013-03-22",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s46",
+      "target_ref_raw": "Section 46 (c) of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "on account of his voluntarily causing injury to himself with intent to render himself unfit for service and, therefore, he committed an offence under Section 46 (c) of the Army Act, 1950. A charge sheet was issued in this regard on 1st October, 2002. Summary of evidence was undertaken sometime in September, 2002. Five prosecution witn",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2013-w-p-c-1917-2013-dlhc010457012013-1-2013-03-22",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/1917/2013 of BRIJ LAL Vs UNION OF INDIA AND ORS",
+  "number": "W.P.(C)/1917/2013",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2013-03-22",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010457012013_1_2013-03-22.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010457012013",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/1917/2013"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "BRIJ LAL"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE S. RAVINDRA BHAT",
+    "HON'BLE MR. JUSTICE SUDERSHAN KUMAR MISRA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "46",
+      "raw": "Section 46 (c) of the Army Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 21,
+    "keywords": {
+      "army act": 1,
+      "armed forces tribunal": 8,
+      "court martial": 10,
+      "summary of evidence": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

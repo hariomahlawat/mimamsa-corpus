@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2013/court=7_26/bench=dhcdb/DLHC011618002012_1_2013-03-13.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:25:36+00:00",
+  "sha256": "b14422c1fddaf68d006ee78da88f6fa423438f2368b7f79e5ee539ea05114170",
+  "raw_path": "data/raw/hc/2013/b14422c1fddaf68d006ee78da88f6fa423438f2368b7f79e5ee539ea05114170.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 8,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2013-w-p-c-6457-2012-dlhc011618002012-1-2013-03-13.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2013-w-p-c-6457-2012-dlhc011618002012-1-2013-03-13",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/6457/2012 of RAHUL JAIN Vs UNION OF INDIA AND ORS",
+  "number": "W.P.(C)/6457/2012",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2013-03-13",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC011618002012_1_2013-03-13.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC011618002012",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/6457/2012"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "RAHUL JAIN"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE S. RAVINDRA BHAT",
+    "HON'BLE MR. JUSTICE SUDERSHAN KUMAR MISRA"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 8,
+    "keywords": {
+      "armed forces tribunal": 8
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

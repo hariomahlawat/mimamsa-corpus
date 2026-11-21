@@ -1,0 +1,123 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2015/court=7_26/bench=dhcdb/DLHC010011562014_1_2015-02-19.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:20:39+00:00",
+  "sha256": "70336640ba9f5bb591f76806cc44369b531c84349b30fd79f181fcdec083bda0",
+  "raw_path": "data/raw/hc/2015/70336640ba9f5bb591f76806cc44369b531c84349b30fd79f181fcdec083bda0.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 10,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2015-w-p-c-77-2014-dlhc010011562014-1-2015-02-19.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2015-w-p-c-77-2014-dlhc010011562014-1-2015-02-19",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s14",
+      "target_ref_raw": "Section 14 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "as under: “57. Before parting with the case, we think and we are constrained to think that we should say some-thing about the order of the tribunal. Section 14 of the Armed Forces Tribunal Act, 2007 occurs in Chapter III of the said Act and deals with jurisdiction, powers and authority of the tribunal in service matters. Under subsection (5) of S",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2015-w-p-c-77-2014-dlhc010011562014-1-2015-02-19",
+      "type": "cites",
+      "target_doc_id": "act-crpc-1973#s311",
+      "target_ref_raw": "Section 311 of the Criminal Procedure Code",
+      "effective_date": null,
+      "evidence": "2014 Page 6 of 10 the examination of a witness even at a stage subsequent to the recording of the statement of the accused in exercise of power under Section 311 of the Criminal Procedure Code. This fact is recognized in para 4 of the impugned order. However, the reason why the learned Judge refused the prayer was that it would require the",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2015-w-p-c-77-2014-dlhc010011562014-1-2015-02-19",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/77/2014 of LT. R.P. YADAV Vs UNION OF INDIA & ANR",
+  "number": "W.P.(C)/77/2014",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2015-02-19",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010011562014_1_2015-02-19.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010011562014",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/77/2014"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "LT. R.P. YADAV"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ANR"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE PRADEEP NANDRAJOG",
+    "HON'BLE MS. JUSTICE PRATIBHA RANI"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "14",
+      "raw": "Section 14 of the Armed Forces Tribunal Act, 2007"
+    },
+    {
+      "act": "Code of Criminal Procedure 1973",
+      "act_doc_id": "act-crpc-1973",
+      "section": "311",
+      "raw": "Section 311 of the Criminal Procedure Code"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 7,
+    "keywords": {
+      "court martial": 4,
+      "summary of evidence": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

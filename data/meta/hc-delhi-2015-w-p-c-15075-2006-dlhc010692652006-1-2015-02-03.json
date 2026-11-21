@@ -1,0 +1,140 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2015/court=7_26/bench=dhcdb/DLHC010692652006_1_2015-02-03.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:21:16+00:00",
+  "sha256": "00de3f44dc656061d7cee6d4d637b4f86ce7a74bf7b673e63c94e46c2d2c6e05",
+  "raw_path": "data/raw/hc/2015/00de3f44dc656061d7cee6d4d637b4f86ce7a74bf7b673e63c94e46c2d2c6e05.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2015-w-p-c-15075-2006-dlhc010692652006-1-2015-02-03.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2015-w-p-c-15075-2006-dlhc010692652006-1-2015-02-03",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s46",
+      "target_ref_raw": "Section 46(a) of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "arts for which a tentative charge-sheet was drawn up and served upon the petitioner on June 13, 2003 for having committed an offence punishable under Section 46(a) of the Army Act, 1950 resulting in the Commanding Officer directing Summary of Evidence to be conducted. The Summary of Evidence was conducted on June 15, 2003. 3. The Com",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2015-w-p-c-15075-2006-dlhc010692652006-1-2015-02-03",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s63",
+      "target_ref_raw": "Section 63 of the Army Act",
+      "effective_date": null,
+      "evidence": "ing Officer considered the evidence recorded during the Summary of Evidence proceedings and opined that case actually made out was for a charge under Section 63 of the Army Act which makes it an offence to do an act of commission or omission which is prejudicial to good order and military discipline. The Commanding Officer t",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2015-w-p-c-15075-2006-dlhc010692652006-1-2015-02-03",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s80",
+      "target_ref_raw": "Section 80 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "ial to good order and military discipline. The Commanding Officer took the view that the petitioner be tried summarily, the power vested in him under Section 80 of the Army Act, 1950 read with Rule 22 of the Army Rules, 1954. W.P.(C) No.15075/2006 Page 2 of 3 4. Tried summarily, the penalty of severe reprimand was inflicted upon t",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2015-w-p-c-15075-2006-dlhc010692652006-1-2015-02-03",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/15075/2006 of EX-HAV SATYAVIR Vs UOI & ORS.",
+  "number": "W.P.(C)/15075/2006",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2015-02-03",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010692652006_1_2015-02-03.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010692652006",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/15075/2006"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "EX-HAV SATYAVIR"
+    ],
+    "respondent": [
+      "UOI & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE PRADEEP NANDRAJOG",
+    "HON'BLE MS. JUSTICE PRATIBHA RANI"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "46",
+      "raw": "Section 46(a) of the Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "63",
+      "raw": "Section 63 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "80",
+      "raw": "Section 80 of the Army Act, 1950"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 10,
+    "keywords": {
+      "army act": 4,
+      "court martial": 1,
+      "summary of evidence": 5
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2012/court=7_26/bench=dhcdb/DLHC010962332012_1_2012-07-10.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:28:22+00:00",
+  "sha256": "f93bfb2fcaf515f8a444037d6f6777a717a05fc50bc5bac23382baaa8b382bc9",
+  "raw_path": "data/raw/hc/2012/f93bfb2fcaf515f8a444037d6f6777a717a05fc50bc5bac23382baaa8b382bc9.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 11,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2012-w-p-c-3688-2012-dlhc010962332012-1-2012-07-10.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2012-w-p-c-3688-2012-dlhc010962332012-1-2012-07-10",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/3688/2012 of PANKAJ KUMAR TIWARI Vs ARMY COLLEGE OF MEDICAL SCIENCES & ORS",
+  "number": "W.P.(C)/3688/2012",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2012-07-10",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010962332012_1_2012-07-10.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010962332012",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/3688/2012"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "PANKAJ KUMAR TIWARI"
+    ],
+    "respondent": [
+      "ARMY COLLEGE OF MEDICAL SCIENCES & ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE G.S.SISTANI"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 3,
+    "keywords": {
+      "court martial": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

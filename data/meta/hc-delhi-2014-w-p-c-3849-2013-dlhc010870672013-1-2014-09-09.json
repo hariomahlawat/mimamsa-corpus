@@ -1,0 +1,131 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2014/court=7_26/bench=dhcdb/DLHC010870672013_1_2014-09-09.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:23:51+00:00",
+  "sha256": "4db259512052c17baf4d1fa3ea8492e639084adea90f1081ce4f089bc6443ba8",
+  "raw_path": "data/raw/hc/2014/4db259512052c17baf4d1fa3ea8492e639084adea90f1081ce4f089bc6443ba8.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 8,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2014-w-p-c-3849-2013-dlhc010870672013-1-2014-09-09.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2014-w-p-c-3849-2013-dlhc010870672013-1-2014-09-09",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s36",
+      "target_ref_raw": "Section 36(b) of the Army Act",
+      "effective_date": null,
+      "evidence": "nths in civil custody and was ordered to be dismissed from service. The charges which were framed against the petitioner are as under:- “Charge under Section 36(b) of the Army Act BREAKING INTO A HOUSE IN SEARCH OF PLUNDER in that he, At C/o 56 APO on night 26 July 83 between 2220 h and 2230 h, while performing duty at 2 Armd B",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2014-w-p-c-3849-2013-dlhc010870672013-1-2014-09-09",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s164",
+      "target_ref_raw": "Section 164 of the Army Act",
+      "effective_date": null,
+      "evidence": "bined Offrs Mess guard, quitted the said guard without leave.” 3. Aggrieved by the said order of punishment, the petitioner had filed an appeal under Section 164 of the Army Act and vide order dated W.P. (C) 3849/2013 Page 4 of 8 27.04.1993 the same was rejected. The petitioner, thereafter, had filed a writ petition bearing W",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2014-w-p-c-3849-2013-dlhc010870672013-1-2014-09-09",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/3849/2013 of EX-SWR GIRDHARI LAL YADAV Vs UNION OF INDIA & ORS.",
+  "number": "W.P.(C)/3849/2013",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2014-09-09",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010870672013_1_2014-09-09.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010870672013",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/3849/2013"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "EX-SWR GIRDHARI LAL YADAV"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE KAILASH GAMBHIR",
+    "HON'BLE MR. JUSTICE NAJMI WAZIRI"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "36",
+      "raw": "Section 36(b) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "164",
+      "raw": "Section 164 of the Army Act"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": null,
+      "raw": "Armed Forces Tribunal Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 18,
+    "keywords": {
+      "army act": 4,
+      "armed forces tribunal": 11,
+      "court martial": 1,
+      "summary of evidence": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

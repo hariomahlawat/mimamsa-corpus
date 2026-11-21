@@ -1,0 +1,84 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2018/court=7_26/bench=dhcdb/DLHC011933152018_1_2018-08-03.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:09:27+00:00",
+  "sha256": "b6cce2348df5e321b1e6654841dd5b234382e8bc7bc65b72e01af026f31cdc3a",
+  "raw_path": "data/raw/hc/2018/b6cce2348df5e321b1e6654841dd5b234382e8bc7bc65b72e01af026f31cdc3a.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2018-tr-p-crl-47-2018-dlhc011933152018-1-2018-08-03.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2018-tr-p-crl-47-2018-dlhc011933152018-1-2018-08-03",
+  "doc_type": "judgment",
+  "title": "TR.P.(CRL.)/47/2018 of MD. AZAM ANSARI Vs ARMED FORCES TRIBUNAL(PB), NEW DELHI",
+  "number": "TR.P.(CRL.)/47/2018",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2018-08-03",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC011933152018_1_2018-08-03.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC011933152018",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "TR.P.(CRL.)/47/2018"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MD. AZAM ANSARI"
+    ],
+    "respondent": [
+      "ARMED FORCES TRIBUNAL(PB), NEW DELHI"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE NAJMI WAZIRI"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "armed forces tribunal": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

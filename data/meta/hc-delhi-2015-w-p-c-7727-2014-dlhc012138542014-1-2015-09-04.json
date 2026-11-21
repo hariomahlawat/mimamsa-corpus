@@ -1,0 +1,100 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2015/court=7_26/bench=dhcdb/DLHC012138542014_1_2015-09-04.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:21:07+00:00",
+  "sha256": "347f81e36c18e49412cc25f9a05b17541bb418539a730e9d0602a3ded1d618ea",
+  "raw_path": "data/raw/hc/2015/347f81e36c18e49412cc25f9a05b17541bb418539a730e9d0602a3ded1d618ea.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 34,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2015-w-p-c-7727-2014-dlhc012138542014-1-2015-09-04.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2015-w-p-c-7727-2014-dlhc012138542014-1-2015-09-04",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s9",
+      "target_ref_raw": "Section 9(2) of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "th men and these select branches as approved by the cabinet were education, logistics and law branches/cadres. Accordingly, invoking the powers under Section 9(2) of the Navy Act, 1957 a scheme for grant of direct entry Short Service Commission (SSC) in the Indian Navy for both men and women was granted for a period of 7 years, exte",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2015-w-p-c-7727-2014-dlhc012138542014-1-2015-09-04",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/7727/2014 of LT. CDR. SHINY SUNNY Vs UNION OF INDIA & ORS",
+  "number": "W.P.(C)/7727/2014",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2015-09-04",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC012138542014_1_2015-09-04.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC012138542014",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/7727/2014"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "LT. CDR. SHINY SUNNY"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS"
+    ]
+  },
+  "judges": [],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "9",
+      "raw": "Section 9(2) of the Navy Act, 1957"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 5,
+    "keywords": {
+      "navy act": 5
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

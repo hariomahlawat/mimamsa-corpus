@@ -1,0 +1,88 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2012/court=7_26/bench=dhcdb/DLHC011882142010_1_2012-04-20.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:28:11+00:00",
+  "sha256": "e832122f06eaa6c2470055e4b27ebdf15110c732f233af681a843917918fb590",
+  "raw_path": "data/raw/hc/2012/e832122f06eaa6c2470055e4b27ebdf15110c732f233af681a843917918fb590.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 8,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2012-w-p-c-8487-2010-dlhc011882142010-1-2012-04-20.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2012-w-p-c-8487-2010-dlhc011882142010-1-2012-04-20",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/8487/2010 of SIYA RAM SINGH BHADORIA Vs UNION OF INDIA & OTHERS",
+  "number": "W.P.(C)/8487/2010",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2012-04-20",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC011882142010_1_2012-04-20.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC011882142010",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/8487/2010"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SIYA RAM SINGH BHADORIA"
+    ],
+    "respondent": [
+      "UNION OF INDIA & OTHERS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE RAJIV SAHAI ENDLAW"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "invalidment"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 22,
+    "keywords": {
+      "disability pension": 21,
+      "invalided": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

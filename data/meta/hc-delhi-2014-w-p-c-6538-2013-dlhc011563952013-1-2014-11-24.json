@@ -1,0 +1,89 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2014/court=7_26/bench=dhcdb/DLHC011563952013_1_2014-11-24.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:24:00+00:00",
+  "sha256": "b60c5342365203b98fd8b58fea7fd26914ec24e5bda009d33ba029b76ec6b7a7",
+  "raw_path": "data/raw/hc/2014/b60c5342365203b98fd8b58fea7fd26914ec24e5bda009d33ba029b76ec6b7a7.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 7,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2014-w-p-c-6538-2013-dlhc011563952013-1-2014-11-24.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2014-w-p-c-6538-2013-dlhc011563952013-1-2014-11-24",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/6538/2013 of EX-SIGMN PRADEEP KUMAR SAHU Vs UNION OF INDIA & ORS.",
+  "number": "W.P.(C)/6538/2013",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2014-11-24",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC011563952013_1_2014-11-24.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC011563952013",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/6538/2013"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "EX-SIGMN PRADEEP KUMAR SAHU"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE KAILASH GAMBHIR",
+    "HON'BLE MR. JUSTICE NAJMI WAZIRI"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension",
+    "entitlement_rules"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 6,
+    "keywords": {
+      "disability pension": 5,
+      "entitlement rules": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

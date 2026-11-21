@@ -1,0 +1,137 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2016/court=7_26/bench=dhcdb/DLHC010852232016_1_2016-03-14.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:18:34+00:00",
+  "sha256": "953d366a137848a5e167438644747e73def586e46f46555872f85ddbba80806a",
+  "raw_path": "data/raw/hc/2016/953d366a137848a5e167438644747e73def586e46f46555872f85ddbba80806a.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 4,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2016-w-p-c-2171-2016-dlhc010852232016-1-2016-03-14.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2016-w-p-c-2171-2016-dlhc010852232016-1-2016-03-14",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s48",
+      "target_ref_raw": "Section 48 of the Army Act",
+      "effective_date": null,
+      "evidence": ". 01.04.2005 to 31.03.2015; (c) Direct respondent Nos.1,2 and 3 to take all necessary steps to make the new law by repealing the particular sections (Section 48 of the Army Act and Air Force Act and Section 52 of the Navy Act) as the same is being misused by the respective authorities in a discriminatory manner by punishing",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2016-w-p-c-2171-2016-dlhc010852232016-1-2016-03-14",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s48",
+      "target_ref_raw": "Section 48 of the Air Force Act",
+      "effective_date": null,
+      "evidence": "ough canteen store department for all ranks of serving as well as retired Armed Force Personnel. 4. Reliance is placed on Section 48 of the Army Act, Section 48 of the Air Force Act and Section 52 of the Naval Act, which stipulates punishment for a person found in a state of intoxication. It is urged that there are several hundre",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2016-w-p-c-2171-2016-dlhc010852232016-1-2016-03-14",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s52",
+      "target_ref_raw": "Section 52 of the Navy Act",
+      "effective_date": null,
+      "evidence": "Nos.1,2 and 3 to take all necessary steps to make the new law by repealing the particular sections (Section 48 of the Army Act and Air Force Act and Section 52 of the Navy Act) as the same is being misused by the respective authorities in a discriminatory manner by punishing several hundred soldiers and personnel below offi",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2016-w-p-c-2171-2016-dlhc010852232016-1-2016-03-14",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/2171/2016 of D.S. KAUNTAE Vs UNION OF INDIA & ORS",
+  "number": "W.P.(C)/2171/2016",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2016-03-14",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010852232016_1_2016-03-14.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010852232016",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/2171/2016"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "D.S. KAUNTAE"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE THE ACTING CHIEF JUSTICE",
+    "HON'BLE MR. JUSTICE JAYANT NATH"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "48",
+      "raw": "Section 48 of the Army Act"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "48",
+      "raw": "Section 48 of the Air Force Act"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "52",
+      "raw": "Section 52 of the Navy Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 8,
+    "keywords": {
+      "army act": 3,
+      "air force act": 4,
+      "navy act": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

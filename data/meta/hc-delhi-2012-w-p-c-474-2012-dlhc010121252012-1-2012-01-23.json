@@ -1,0 +1,122 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2012/court=7_26/bench=dhcdb/DLHC010121252012_1_2012-01-23.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:28:01+00:00",
+  "sha256": "e16b97a1efb9fbb108b0b47659c04b8d5fd7889a3c0952c943a7f42adf226da6",
+  "raw_path": "data/raw/hc/2012/e16b97a1efb9fbb108b0b47659c04b8d5fd7889a3c0952c943a7f42adf226da6.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 18,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2012-w-p-c-474-2012-dlhc010121252012-1-2012-01-23.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2012-w-p-c-474-2012-dlhc010121252012-1-2012-01-23",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s11",
+      "target_ref_raw": "Sections 11 & 12 of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "er pensionary benefits. 2. Some relevant facts to comprehend the disputes are that the petitioner was enrolled as an Artificer Apprentice in terms of Sections 11 & 12 of the Navy Act, 1957 on 18th August, 1962 and after undergoing training from 18th August, 1962 to 19th August, 1966, the petitioner was promoted to the rank of Aircraft A",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2012-w-p-c-474-2012-dlhc010121252012-1-2012-01-23",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s15",
+      "target_ref_raw": "Section 15 (2) (b) of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "er required”. 4. The petitioner contended that his discharge from the service on account of “services no longer required” is in complete violation of Section 15 (2) (b) of the Navy Act, 1957 read with Regulations 279, Regs. Navy Part III (Statutory) since it was without administering any warning or counseling him and without issuing any s",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2012-w-p-c-474-2012-dlhc010121252012-1-2012-01-23",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/474/2012 of KL SHARMA Vs UNION OF INDIA & ORS",
+  "number": "W.P.(C)/474/2012",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2012-01-23",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010121252012_1_2012-01-23.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010121252012",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/474/2012"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "KL SHARMA"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE ANIL KUMAR",
+    "HON'BLE MR. JUSTICE J.R. MIDHA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "11",
+      "raw": "Sections 11 & 12 of the Navy Act, 1957"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "15",
+      "raw": "Section 15 (2) (b) of the Navy Act, 1957"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "disability_pension"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 4,
+    "keywords": {
+      "navy act": 2,
+      "disability pension": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

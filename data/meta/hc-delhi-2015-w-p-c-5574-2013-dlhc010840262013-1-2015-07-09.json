@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2015/court=7_26/bench=dhcdb/DLHC010840262013_1_2015-07-09.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:20:48+00:00",
+  "sha256": "72a623bb18bbef79b79240a84e49c92a29407a8d404a95fa98766e03446ef657",
+  "raw_path": "data/raw/hc/2015/72a623bb18bbef79b79240a84e49c92a29407a8d404a95fa98766e03446ef657.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 11,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2015-w-p-c-5574-2013-dlhc010840262013-1-2015-07-09.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2015-w-p-c-5574-2013-dlhc010840262013-1-2015-07-09",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/5574/2013 of GD KARTHIK Vs UNION OF INDIA & OTHERS",
+  "number": "W.P.(C)/5574/2013",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2015-07-09",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010840262013_1_2015-07-09.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010840262013",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/5574/2013"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "GD KARTHIK"
+    ],
+    "respondent": [
+      "UNION OF INDIA & OTHERS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE S. RAVINDRA BHAT",
+    "HON'BLE MS. JUSTICE DEEPA SHARMA"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "court martial": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

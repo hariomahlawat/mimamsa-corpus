@@ -1,0 +1,173 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2017/court=7_26/bench=dhcdb/DLHC011763562016_1_2017-05-26.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:14:01+00:00",
+  "sha256": "b58ba3a746bf5ee877e35fab45b7d0b969c6b4a3f4471e8d3dbe7f94e6de80b4",
+  "raw_path": "data/raw/hc/2017/b58ba3a746bf5ee877e35fab45b7d0b969c6b4a3f4471e8d3dbe7f94e6de80b4.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 13,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2017-w-p-c-7219-2016-dlhc011763562016-1-2017-05-26.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2017-w-p-c-7219-2016-dlhc011763562016-1-2017-05-26",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s18",
+      "target_ref_raw": "section 18 of the Army Act, 1950",
+      "effective_date": null,
+      "evidence": "Any other matter, whatsoever But shall not include matters relating to – WP(C).No.7219/2016 & connected matters Page 6 of 13 (i) Orders issued under section 18 of the Army Act, 1950 (46 of 1950), sub-section (1) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950 (45 of 1950) ; and (ii) Tran",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2017-w-p-c-7219-2016-dlhc011763562016-1-2017-05-26",
+      "type": "cites",
+      "target_doc_id": "act-air-force-1950#s18",
+      "target_ref_raw": "section 18 of the Air Force Act, 1950",
+      "effective_date": null,
+      "evidence": "e 6 of 13 (i) Orders issued under section 18 of the Army Act, 1950 (46 of 1950), sub-section (1) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950 (45 of 1950) ; and (ii) Transfer and postings including the change of place or until on posting whether individually or as a part of unit, formation",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2017-w-p-c-7219-2016-dlhc011763562016-1-2017-05-26",
+      "type": "cites",
+      "target_doc_id": "act-navy-1957#s15",
+      "target_ref_raw": "section 15 of the Navy Act, 1957",
+      "effective_date": null,
+      "evidence": "ng to – WP(C).No.7219/2016 & connected matters Page 6 of 13 (i) Orders issued under section 18 of the Army Act, 1950 (46 of 1950), sub-section (1) of section 15 of the Navy Act, 1957 (62 of 1957) and section 18 of the Air Force Act, 1950 (45 of 1950) ; and (ii) Transfer and postings including the change of place or until on postin",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2017-w-p-c-7219-2016-dlhc011763562016-1-2017-05-26",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s3",
+      "target_ref_raw": "Section 3 (o) of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": ". 4. The preliminary objection raised by the respondents is that the dispute and issues raised by the petitioners is a ‘service matter' as defined in Section 3 (o) of the Armed Forces Tribunal Act, 2007 (Act). The petitioners have an alternative remedy as per the Act and should move the Armed Forces Tribunal (Tribunal) for relief. 5. The Act, i.e. Ar",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2017-w-p-c-7219-2016-dlhc011763562016-1-2017-05-26",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s14",
+      "target_ref_raw": "Section 14 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "nt has raised a preliminary objection that the present Writ Petition filed by the petitioner is not maintainable, as the grievance raised falls under Section 14 of the Armed Forces Tribunal Act, 2007 and the Armed Forces Tribunal is the court of first instance and competent to adjudicate upon the matter. WP(C).No.7219/2016 & connected matters Page",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2017-w-p-c-7219-2016-dlhc011763562016-1-2017-05-26",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/7219/2016 of ASHIT KUMAR MISHRA Vs UNION OF INDIA & ORS",
+  "number": "W.P.(C)/7219/2016",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2017-05-26",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC011763562016_1_2017-05-26.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC011763562016",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/7219/2016"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "ASHIT KUMAR MISHRA"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SANJIV KHANNA",
+    "HON'BLE MS. JUSTICE PRATHIBA M. SINGH"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "18",
+      "raw": "section 18 of the Army Act, 1950"
+    },
+    {
+      "act": "Air Force Act 1950",
+      "act_doc_id": "act-air-force-1950",
+      "section": "18",
+      "raw": "section 18 of the Air Force Act, 1950"
+    },
+    {
+      "act": "Navy Act 1957",
+      "act_doc_id": "act-navy-1957",
+      "section": "15",
+      "raw": "section 15 of the Navy Act, 1957"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "3",
+      "raw": "Section 3 (o) of the Armed Forces Tribunal Act, 2007"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "14",
+      "raw": "Section 14 of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 28,
+    "keywords": {
+      "army act": 8,
+      "air force act": 9,
+      "navy act": 7,
+      "armed forces tribunal": 2,
+      "court martial": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

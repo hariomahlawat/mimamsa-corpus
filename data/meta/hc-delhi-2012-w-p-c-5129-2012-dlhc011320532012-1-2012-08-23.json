@@ -1,0 +1,106 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2012/court=7_26/bench=dhcdb/DLHC011320532012_1_2012-08-23.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:28:22+00:00",
+  "sha256": "eb15220341d5856f4a17f5d61b8dc4d2b7e2fa78f2d83566df09fa0518fbc6e1",
+  "raw_path": "data/raw/hc/2012/eb15220341d5856f4a17f5d61b8dc4d2b7e2fa78f2d83566df09fa0518fbc6e1.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2012-w-p-c-5129-2012-dlhc011320532012-1-2012-08-23.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2012-w-p-c-5129-2012-dlhc011320532012-1-2012-08-23",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s164",
+      "target_ref_raw": "Section 164(2) of the Army Act",
+      "effective_date": null,
+      "evidence": "ount of the fact that the rank to which he got reduced had a lower age of superannuation. 2. The petitioner alleges that his statutory petition under Section 164(2) of the Army Act questioning the order passed on August 03, 1993 by the Summary Court Martial was filed by him but not being decided, he had filed W.P.(C) No.1315/199",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2012-w-p-c-5129-2012-dlhc011320532012-1-2012-08-23",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/5129/2012 of RAMBIR SINGH Vs UNION OF INDIA & OTHERS",
+  "number": "W.P.(C)/5129/2012",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2012-08-23",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC011320532012_1_2012-08-23.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC011320532012",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/5129/2012"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "RAMBIR SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA & OTHERS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE MANMOHAN SINGH",
+    "HON'BLE MR. JUSTICE PRADEEP NANDRAJOG"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "164",
+      "raw": "Section 164(2) of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 5,
+    "keywords": {
+      "army act": 1,
+      "court martial": 4
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

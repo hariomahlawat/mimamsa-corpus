@@ -1,0 +1,194 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2012/court=7_26/bench=dhcdb/DLHC010801082012_1_2012-05-29.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:28:01+00:00",
+  "sha256": "4b8493bfa7bccb457651a8a74d56c7358be02bb878847c12a01df9a27d045cbf",
+  "raw_path": "data/raw/hc/2012/4b8493bfa7bccb457651a8a74d56c7358be02bb878847c12a01df9a27d045cbf.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 26,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2012-w-p-c-3357-2012-dlhc010801082012-1-2012-05-29.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2012-w-p-c-3357-2012-dlhc010801082012-1-2012-05-29",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s164",
+      "target_ref_raw": "Section 164 (2) of the Army Act",
+      "effective_date": null,
+      "evidence": "ed 22nd October, 2007 passed by the Summary Court Martial and the quashing of order dated 13th September, 2008 rejecting his statutory petition under Section 164 (2) of the Army Act, and to direct the respondents to reinstate the WP (C) No.3357/2012 Page 2 of 26 petitioner back in service with all the consequential benefits. 2. R",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2012-w-p-c-3357-2012-dlhc010801082012-1-2012-05-29",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s116",
+      "target_ref_raw": "Section 116 of the Army Act",
+      "effective_date": null,
+      "evidence": "0 as it is not covered under the same and relied on para 7 of the said order in order to substantiate his plea. Reliance was also placed on Note-5 of Section 116 of the Army Act stipulating the circumstances under which the Commanding Officer of a different unit may hold a trial by Summary Court Martial of a person subject to",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2012-w-p-c-3357-2012-dlhc010801082012-1-2012-05-29",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s120",
+      "target_ref_raw": "Section 120 of the Army Act",
+      "effective_date": null,
+      "evidence": "Regulation for the Army para 381. The petitioner asserted that his case does not fall in the said category. The petitioner also referred to Note-2 of Section 120 of the Army Act stipulating that where the Commanding Officer of an accused is giving material evidence for the prosecution, thereby he renders himself ineligible fo",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2012-w-p-c-3357-2012-dlhc010801082012-1-2012-05-29",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s69",
+      "target_ref_raw": "Section 69 of the Army Act",
+      "effective_date": null,
+      "evidence": "ia, that Section 120 (2) of the Army Act is relevant for the issue raised by the petitioner which contemplates that for any offence to be tried under Section 69 of the Army Act, reference was required to be made to an WP (C) No.3357/2012 Page 6 of 26 officer empowered to convene a DCM and only then the Commanding Officer cou",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2012-w-p-c-3357-2012-dlhc010801082012-1-2012-05-29",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s108",
+      "target_ref_raw": "Section 108 of Army Act, 1950",
+      "effective_date": null,
+      "evidence": "n SCM can be convened rather than General Court Martial (GCM) or District Court Martial (DCM) or Summary General Court Martial (SGCM) as envisaged in Section 108 of Army Act, 1950. In the case of Vishwa Priya Singh (supra), Ex.L/N had made a complaint against the Commanding Officer of 19 BN Mahar Regiment of in-judicious treatm",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2012-w-p-c-3357-2012-dlhc010801082012-1-2012-05-29",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s41",
+      "target_ref_raw": "Section 41 (2) of the Army Act",
+      "effective_date": null,
+      "evidence": "Brigade Commander on 30th May, 1990; was asked to appear before the Commanding Officer of 18 BN Punjab Regiment on 15th July, 1990; was charged under Section 41 (2) of the Army Act for disobeying the lawful command given by the superior officer, in that he, then asked to accept a letter dated 16th July, 1990, requiring his prese",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2012-w-p-c-3357-2012-dlhc010801082012-1-2012-05-29",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/3357/2012 of RANJEET KUMAR Vs UNION OF INDIA AND ORS",
+  "number": "W.P.(C)/3357/2012",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2012-05-29",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010801082012_1_2012-05-29.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010801082012",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/3357/2012"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "RANJEET KUMAR"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE ANIL KUMAR",
+    "HON'BLE MR. JUSTICE SUDERSHAN KUMAR MISRA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "164",
+      "raw": "Section 164 (2) of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "116",
+      "raw": "Section 116 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "120",
+      "raw": "Section 120 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "69",
+      "raw": "Section 69 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "108",
+      "raw": "Section 108 of Army Act, 1950"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "41",
+      "raw": "Section 41 (2) of the Army Act"
+    },
+    {
+      "act": "Indian Evidence Act 1872",
+      "act_doc_id": "act-evidence-1872",
+      "section": null,
+      "raw": "Evidence Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial",
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 58,
+    "keywords": {
+      "army act": 15,
+      "court martial": 32,
+      "summary of evidence": 11
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2018/court=7_26/bench=dhcdb/DLHC012233552018_1_2018-10-25.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:10:10+00:00",
+  "sha256": "84490d4463dacc6c88942c459a0240ded34dea97434fb05479266f69f5e86d2c",
+  "raw_path": "data/raw/hc/2018/84490d4463dacc6c88942c459a0240ded34dea97434fb05479266f69f5e86d2c.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2018-w-p-c-9262-2018-dlhc012233552018-1-2018-10-25.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2018-w-p-c-9262-2018-dlhc012233552018-1-2018-10-25",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s22",
+      "target_ref_raw": "Section 22 of the Army Act",
+      "effective_date": null,
+      "evidence": "nt authority has wrongly quoted Section 20 in the order of discharge whereas, in fact, the order of discharge has to be read having been passed under Section 22 of the Army Act. It is well settled that if an authority has a power under the law merely because while exercising that power the source of power is not specifically",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2018-w-p-c-9262-2018-dlhc012233552018-1-2018-10-25",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/9262/2018 of GORAKH PAL Vs UNION OF INDIA AND ORS.",
+  "number": "W.P.(C)/9262/2018",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2018-10-25",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC012233552018_1_2018-10-25.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC012233552018",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/9262/2018"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "GORAKH PAL"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE VIPIN SANGHI",
+    "HON'BLE MR. JUSTICE A. K. CHAWLA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "22",
+      "raw": "Section 22 of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "army act": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

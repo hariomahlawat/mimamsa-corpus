@@ -1,0 +1,122 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2015/court=7_26/bench=dhcdb/DLHC010068672014_1_2015-02-02.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:21:25+00:00",
+  "sha256": "11ecafe0108ed406e4da4cfe59f48f73b360278a263479f47dbd87f18277b063",
+  "raw_path": "data/raw/hc/2015/11ecafe0108ed406e4da4cfe59f48f73b360278a263479f47dbd87f18277b063.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2015-w-p-c-336-2014-dlhc010068672014-1-2015-02-02.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2015-w-p-c-336-2014-dlhc010068672014-1-2015-02-02",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s63",
+      "target_ref_raw": "Section 63 of the Army Act",
+      "effective_date": null,
+      "evidence": "93. 6. It was in respect of this allegation that the petitioner was tried at a Summary Court Martial for having committed an offence punishable under Section 63 of the Army Act. The charge against him was as under:- “At field, on 11 Feb 94, while performing the duties of Head Clerk 15 Field Company, 201 Engineer Regiment, go",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2015-w-p-c-336-2014-dlhc010068672014-1-2015-02-02",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s164",
+      "target_ref_raw": "Section 164 of the Army Act",
+      "effective_date": null,
+      "evidence": "rit petitioner pleaded guilty and the punishment of being dismissed from service was inflicted upon him. Petitioner filed a statutory complaint under Section 164 of the Army Act on August 09, 1994 which was disposed of. He filed WP(C)No.804/1995 in this Court in which directions were issued on March 08, 1995 that his statutor",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2015-w-p-c-336-2014-dlhc010068672014-1-2015-02-02",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/336/2014 of SUSHIL KUMAR SHARMA Vs UNION OF INDIA & ORS",
+  "number": "W.P.(C)/336/2014",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2015-02-02",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010068672014_1_2015-02-02.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010068672014",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/336/2014"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SUSHIL KUMAR SHARMA"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE PRADEEP NANDRAJOG",
+    "HON'BLE MS. JUSTICE PRATIBHA RANI"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "63",
+      "raw": "Section 63 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "164",
+      "raw": "Section 164 of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "court_martial"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 7,
+    "keywords": {
+      "army act": 2,
+      "court martial": 5
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

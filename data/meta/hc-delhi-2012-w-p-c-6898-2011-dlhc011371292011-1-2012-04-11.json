@@ -1,0 +1,122 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2012/court=7_26/bench=dhcdb/DLHC011371292011_1_2012-04-11.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-21T18:27:43+00:00",
+  "sha256": "3e96795fe01d6c14a04894af4d0779fb166ecd69eea2cef2f23b900424193785",
+  "raw_path": "data/raw/hc/2012/3e96795fe01d6c14a04894af4d0779fb166ecd69eea2cef2f23b900424193785.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 17,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2012-w-p-c-6898-2011-dlhc011371292011-1-2012-04-11.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2012-w-p-c-6898-2011-dlhc011371292011-1-2012-04-11",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s39",
+      "target_ref_raw": "Section 39 of the Army Act",
+      "effective_date": null,
+      "evidence": "der and at the time he had been wrongly advised that the two days of unaccounted period could regularized after trial for absence without leave under Section 39 of the Army Act. In this regard, reliance was placed on the AEC Records WP(C) No. 6898/2011 Page 5 of 17 Panchmarhi dated 28th March, 2008 wherein the said advice ha",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2012-w-p-c-6898-2011-dlhc011371292011-1-2012-04-11",
+      "type": "cites",
+      "target_doc_id": "act-army-1950#s85",
+      "target_ref_raw": "Section 85 of the Army Act",
+      "effective_date": null,
+      "evidence": "thout leave. 11. However, the CO 2 Assam Riffles on 16th April, 2008 ordered the recording of the summary of evidence, and in the summary trial under Section 85 of the Army Act CO 2, Assam Riffles awarded punishment of severe reprimand to the petitioner by order dated 26th April, 2008. 12. There was also another case of abse",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2012-w-p-c-6898-2011-dlhc011371292011-1-2012-04-11",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/6898/2011 of R M BANDYOPADHYAY Vs UNION OF INDIA & ORS.",
+  "number": "W.P.(C)/6898/2011",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2012-04-11",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-21",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC011371292011_1_2012-04-11.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC011371292011",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/6898/2011"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "R M BANDYOPADHYAY"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE ANIL KUMAR",
+    "HON'BLE MR. JUSTICE SUDERSHAN KUMAR MISRA"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "39",
+      "raw": "Section 39 of the Army Act"
+    },
+    {
+      "act": "Army Act 1950",
+      "act_doc_id": "act-army-1950",
+      "section": "85",
+      "raw": "Section 85 of the Army Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [
+    "summary_of_evidence"
+  ],
+  "relevance": {
+    "status": "relevant",
+    "hits": 11,
+    "keywords": {
+      "army act": 7,
+      "summary of evidence": 4
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}
