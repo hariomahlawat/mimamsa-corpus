@@ -215,27 +215,50 @@ sources:
       - { key: srinagar,    name: "Regional Bench, Srinagar/Jammu" }
 
   # ---------------------------------------------------------------- Phase 4
+  # Supreme Court and High Court judgments come from the AWS Open Data buckets (decision of 2026-11-21):
+  # a third party's CC-BY-4.0 copy of the courts' own records, used because the courts' judgment searches
+  # are behind a CAPTCHA (www.sci.gov.in checked 2026-11-21). Each record names the bucket as its source.
+  # The indexes have no judgment text, so entries are pre-selected by party names (party_terms, matched
+  # against the case title / parties, case-insensitive); the pipeline's relevance stage then applies the
+  # brief's keywords to the text. Widening party_terms and re-running discovery adds what was left out.
   sci:
     phase: 4
-    enabled: false
+    enabled: true
     priority: 2
-    heavy: true
-    allowed_hosts: [www.sci.gov.in, sci.gov.in]
-    base_url: https://www.sci.gov.in
-    verify: true
-    discovery: "Judgment portal; download then keyword-filter (pipeline stage 3). Check for CAPTCHA first: if present, STOP and report."
+    heavy: false
+    open_data_bucket: true          # a bulk-access bucket, not a court's web server: a shorter delay is allowed
+    min_delay_seconds: 0.3
+    dataset: indian-supreme-court-judgments
+    allowed_hosts: [indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com]
+    base_url: https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com
+    years: [1950, 2026]
+    party_terms: &party_terms
+      - "union of india"
+      - "\\b(army|air force|navy|naval|armed forces|military|defen[cs]e|coast guard|assam rifles|border security)\\b"
+      - "\\bchief of (the )?(army|air|naval) staff\\b"
+      - "\\b(commanding officer|commandant|general officer|court[- ]martial|cantonment)\\b"
+      - "\\b(ex[- .]?(sepoy|sep|naik|nk|havildar|hav|subedar|sub|rfn|gnr|sgt|servicem[ae]n)|sepoy|havildar|naik|subedar|rifleman|sowar|jawan)\\b"
+      - "\\b(lt\\.? ?col|lt\\.? ?gen|maj\\.? ?gen|brig(adier)?|colonel|col\\.|major|maj\\.|capt(ain)?\\.?|wing commander|wg\\.? ?cdr|sqn\\.? ?ldr|squadron leader|group captain|gp\\.? ?capt|air (vice )?marshal|commodore|cdr\\.|lt\\.? ?cdr|flying officer|flt\\.? ?lt|corporal|leading aircraftman|lac)\\b"
+      - "\\b(pcda|cda|record office|records? officer)\\b"
 
   hc:
     phase: 4
-    enabled: false
+    enabled: true
     priority: 2
-    heavy: true
-    verify: true
+    heavy: false
+    open_data_bucket: true
+    min_delay_seconds: 0.3
+    dataset: indian-high-court-judgments
+    allowed_hosts: [indian-high-court-judgments.s3.ap-south-1.amazonaws.com]
+    base_url: https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com
+    party_terms: *party_terms
+    # `code` is the dataset's court code. `years` is what discovery covers when no --only slice is given;
+    # courts without `years` are only read when named, e.g. --only ph:2015-2020.
     courts:
-      - { key: delhi,   name: "High Court of Delhi",              allowed_hosts: [delhihighcourt.nic.in], first: true }
-      - { key: ph,      name: "High Court of Punjab and Haryana", allowed_hosts: [] }
-      - { key: allahabad, name: "High Court of Judicature at Allahabad", allowed_hosts: [] }
-      - { key: jkl,     name: "High Court of Jammu & Kashmir and Ladakh", allowed_hosts: [] }
+      - { key: delhi,     code: "7_26", name: "High Court of Delhi", years: [2023, 2023] }
+      - { key: ph,        code: "3_22", name: "High Court of Punjab and Haryana" }
+      - { key: allahabad, code: "9_13", name: "Allahabad High Court" }
+      - { key: jkl,       code: "1_12", name: "High Court of Jammu and Kashmir" }
 
   # ---------------------------------------------------------------- Phase 6
   egazette:

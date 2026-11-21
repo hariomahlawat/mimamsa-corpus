@@ -1,5 +1,40 @@
 # Progress
 
+## 2026-11-21 — Supreme Court and High Court judgments from the open-data buckets (downloads in progress)
+
+Decision (owner): collect SC and HC judgments from the AWS Open Data buckets; keep ONLY judgments
+about the armed forces, not civil or other unrelated ones.
+
+Collector (`crawler/opendata.py`; sources `sci` and `hc` in sources.yaml)
+- Reads the buckets' yearly metadata indexes. The indexes have no judgment text, so cases are
+  pre-selected by party names (`party_terms`: Union of India, defence bodies, service ranks), and only
+  those PDFs are queued. Slices: `discover --source sci --only 2013`, `--source hc --only delhi:2023`.
+- Supreme Court, all years 1950-2026: 43,594 index entries, 4,302 pre-selected and queued.
+- Delhi High Court, 2023 only: 8,465 index entries, 1,203 pre-selected and queued. Other years and
+  courts (Punjab & Haryana, Allahabad, J&K are configured) are not started.
+- These buckets may be fetched faster than government sites (0.3 s between requests; flag
+  `open_data_bucket`). The 2-second floor still applies to every government host.
+- The index column `pdf_exists` is unreliable ("False" on every Delhi 2023 row) and is ignored.
+
+Pipeline
+- `pipeline/judgments.py`: a metadata record per judgment from its index row (parties, judges,
+  neutral and reported citations, decision date, outcome); stage `relevance` (part of `all`) runs the
+  brief's keywords on the text: relevant (2+ keywords or 3+ hits), borderline (1-2 hits of one keyword),
+  rejected (none).
+- REJECTED judgments are removed from the corpus (metadata, text, raw file). One line each stays in
+  `data/excluded_judgments.jsonl` and `reports/relevance.csv`. To re-check after changing the keywords:
+  delete that file's entries and re-queue the addresses.
+- For kept judgments: `statutes_cited` ("section 69 of the Army Act") and `cites` relations to the
+  section records in the corpus.
+- Text extraction is now incremental (already-extracted files are skipped).
+- 122 tests passing.
+
+First results (Delhi HC 2023, 355 of 1,203 downloaded when checked): 4 relevant, 7 borderline,
+344 removed. Download of the rest and of the Supreme Court set was still running when this was written.
+
+AFT, first live try from the owner's PC (Chandigarh): stopped at robots.txt after one request
+("disallowed by robots.txt"). Not yet known whether the file forbids the path or could not be read.
+
 ## 2026-11-21 — AFT module built (not run live); secondary sources for judgments checked
 
 AFT module (`crawler/aft.py`, `python -m crawler discover --source aft --only <bench>`)

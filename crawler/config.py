@@ -190,7 +190,14 @@ def check_config(cfg: Config) -> ConfigReport:
         for h in hosts & blocked:
             r.errors.append(f"{where}: allowed host {h} is also on blocked_hosts")
         if "min_delay_seconds" in src and src["min_delay_seconds"] < d["min_delay_seconds"]:
-            r.errors.append(f"{where}.min_delay_seconds lower than the global minimum")
+            # Only a bulk-access open-data bucket may go below the floor that protects government servers.
+            if not (src.get("open_data_bucket") and src["min_delay_seconds"] >= 0.1):
+                r.errors.append(f"{where}.min_delay_seconds lower than the global minimum")
+        for i, term in enumerate(src.get("party_terms") or []):
+            try:
+                re.compile(term)
+            except re.error as e:
+                r.errors.append(f"{where}.party_terms[{i}] is not a valid pattern: {e}")
         for key, url in _iter_urls(src):
             ok, why = cfg.is_url_allowed(name, url)
             if not ok:

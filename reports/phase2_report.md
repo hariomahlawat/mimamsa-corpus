@@ -1,6 +1,6 @@
 # Phase 2 report: statutes from India Code
 
-68 documents, 2998 section records, 1061 relations.
+79 documents, 2998 section records, 1065 relations.
 
 ## Acts
 
@@ -23,7 +23,7 @@
 | Result | Documents |
 | --- | --- |
 | text from OCR | 4 |
-| text, ok | 62 |
+| text, ok | 73 |
 | text, suspect | 2 |
 
 ### Text layer present but suspect (kept, flagged)
@@ -140,6 +140,18 @@ For Acts with no section records at the source. Every section found is checked a
 - 354: body 'Assault or criminal force to woman with intent to ' vs table 'Assault of criminal force to woman with intent to '
 - 389: body 'Putting person in fear or accusation of offence, i' vs table 'Putting person in fear of accusation of offence, i'
 - 452: body 'House-trespass alter preparation for hurt, assault' vs table 'House-trespass after preparation for hurt, assault'
+
+## Judgments
+
+Only judgments about the armed forces are kept. Cases are pre-selected from the court indexes by party names, downloaded, and their text checked against the brief's keywords. A judgment with no military keyword is removed from the corpus and logged in `data/excluded_judgments.jsonl` and `reports/relevance.csv`. `borderline` = one or two mentions of a single keyword: kept, to be reviewed.
+
+| Court | Relevant | Borderline | Not checked (no text) | Removed as not military |
+| --- | --- | --- | --- | --- |
+| High Court of Delhi | 4 | 7 | 0 | 344 |
+
+Most cited provisions in the kept judgments: Code of Criminal Procedure 1973 s.144 (1); Armed Forces Tribunal Act 2007 s.3 (1); Air Force Act 1950 s.92 (1); Army Act 1950 s.26 (1).
+
+Kept judgments by year decided: 2023: 11.
 
 ## Correspondence tables (new code <-> old code)
 

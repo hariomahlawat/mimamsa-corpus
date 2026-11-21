@@ -7,7 +7,8 @@
   validate   every record against its schema; exit 1 on any error
   report     data/manifest.csv and reports/phase2_report.md
   correspondence  official new-code/old-code comparison tables into data/correspondence/
-  all        records, extract, split, correspondence, validate, report
+  relevance  keyword pass and statute references for judgments; reports/relevance.csv
+  all        records, extract, split, correspondence, relevance, validate, report
 
 Each stage reads the previous stage's output and can be re-run alone.
 """
@@ -17,17 +18,17 @@ import argparse
 import json
 import sys
 
-from . import correspondence, extract, ocr, records, report, split_pdf, validate
+from . import correspondence, extract, judgments, ocr, records, report, split_pdf, validate
 from .common import ROOT, Paths
 
 
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="python -m pipeline")
-    p.add_argument("stage", choices=["records", "extract", "split", "correspondence", "ocr", "validate", "report", "all"])
+    p.add_argument("stage", choices=["records", "extract", "split", "correspondence", "relevance", "ocr", "validate", "report", "all"])
     p.add_argument("--root", default=str(ROOT))
     p.add_argument("--only", action="append", metavar="DOC_ID", help="extract/ocr: limit to these documents")
     p.add_argument("--workers", type=int, default=4, help="ocr: pages read in parallel")
-    p.add_argument("--redo", action="store_true", help="ocr: discard cached pages and read again")
+    p.add_argument("--redo", action="store_true", help="extract/ocr: process again even if already done")
     args = p.parse_args(argv)
     paths = Paths.default(args.root)
     extra: dict = {}
@@ -37,7 +38,7 @@ def main(argv: list[str] | None = None) -> int:
         extra["problems"] = res["problems"]
         print("records:", json.dumps(res, indent=1))
     if args.stage in ("extract", "all"):
-        res = extract.run(paths, args.only)
+        res = extract.run(paths, args.only, redo=args.redo and args.stage == "extract")
         extra["extract_errors"] = res["errors"]
         print("extract:", json.dumps(res, indent=1))
     if args.stage in ("split", "all"):
@@ -51,6 +52,10 @@ def main(argv: list[str] | None = None) -> int:
         extra["correspondence"] = res
         for key, st in res.items():
             print(f"correspondence: {key}: {st['rows']} rows" + (f" ({st['reason']})" if st.get("reason") else ""))
+    if args.stage in ("relevance", "all"):
+        res = judgments.run(paths)
+        extra["relevance"] = res
+        print("relevance:", json.dumps(res))
     if args.stage == "ocr":
         res = ocr.run(paths, args.only, workers=args.workers, redo=args.redo)
         print("ocr:", json.dumps(res, indent=1, ensure_ascii=False))

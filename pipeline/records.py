@@ -32,7 +32,7 @@ REFERENCE_FIELDS = ("dc.identifier.notification_reference", "dc.identifier.regul
                     "dc.identifier.order_reference", "dc.identifier.notification_no")
 # "The Indian Penal Code, 45 of 1860 (Rep., Act 45 of 2023)" -> title, number, repealing instrument
 REPEAL_TITLE = re.compile(r"^(?P<title>.+?),?\s+(?P<no>\d+)\s+of\s+(?P<year>\d{4})\s*,?\s*\(Rep\.,\s*(?P<by>[^)]+)\)\s*$")
-EXTRACT_FIELDS = ("page_count", "text_method", "text_path", "text_quality", "needs_ocr", "pages_without_text",
+EXTRACT_FIELDS = ("relevance", "statutes_cited", "topics", "page_count", "text_method", "text_path", "text_quality", "needs_ocr", "pages_without_text",
                   "ocr_confidence", "ocr_low_confidence_pages", "access_marking")
 
 
@@ -329,6 +329,24 @@ def build_indiacode(paths: Paths) -> dict:
                                                     "language") if e.get(k)},
         })
         docs[e["doc_id"]] = d
+    # ---- judgments from the open-data buckets (crawler/opendata.py): fields from the index row
+    from .judgments import build_doc, load_excluded
+    excluded = load_excluded(paths)              # judgments already removed as not about the armed forces
+    for r in conn.execute(
+            """SELECT u.url, u.source, u.doc_id_hint, u.sha256, u.fetched_at, u.meta, f.raw_path, f.content_type
+               FROM urls u JOIN files f ON f.sha256 = u.sha256
+               WHERE u.kind='document' AND u.status='fetched' AND json_extract(u.meta, '$.dataset') IS NOT NULL
+               ORDER BY u.url"""):
+        handled_sources.add(r["source"])
+        if r["sha256"] in excluded:
+            continue
+        if not paths.raw_file(r["raw_path"]).exists():
+            problems.append(f"{r['url']}: raw file is missing and the judgment is not in the excluded list")
+            continue
+        d = build_doc(r, json.loads(r["meta"]), _base_doc(r, paths, aliases))
+        if d["doc_id"] in docs:
+            d["doc_id"] = f"{d['doc_id'][:110]}-{r['sha256'][:8]}"
+        docs[d["doc_id"]] = d
     conn.close()
     for d in list(docs.values()):            # a hand-listed copy takes its status from the Act it is a copy of
         target = d.get("provides_sections_for")
@@ -374,6 +392,9 @@ def build_indiacode(paths: Paths) -> dict:
                 for k in EXTRACT_FIELDS:
                     if k in old:
                         d[k] = old[k]
+                kept = [r for r in old.get("relations", []) if r.get("type") == "cites"]
+                d["relations"] += kept
+                edges += kept
                 if d.get("language") is None and old.get("language"):     # established later (e.g. by OCR)
                     d["language"] = old["language"]
                     d["field_provenance"]["language"] = (old.get("field_provenance") or {}).get("language", "rule")

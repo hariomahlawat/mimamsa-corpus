@@ -441,6 +441,47 @@
         "null"
       ],
       "description": "Why this document was added by hand and where it comes from."
+    },
+    "relevance": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "hits",
+        "keywords",
+        "note"
+      ],
+      "description": "Result of the keyword relevance pass on a judgment's text. Rejected judgments are kept and listed in reports/relevance.csv so the filter can be audited.",
+      "properties": {
+        "status": {
+          "enum": [
+            "relevant",
+            "borderline",
+            "rejected",
+            "not_checked"
+          ]
+        },
+        "hits": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "keywords": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
     }
   },
   "allOf": [

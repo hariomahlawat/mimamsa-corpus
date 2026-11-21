@@ -86,8 +86,8 @@ def extract_document(paths: Paths, meta: dict) -> dict:
             "access_marking": marking.group(1) if marking else None, "devanagari_share": round(deva, 2)}
 
 
-def run(paths: Paths, only: list[str] | None = None) -> dict:
-    stats = {"extracted": 0, "needs_ocr": 0, "kept_ocr": 0, "suspect": 0, "not_pdf": 0, "errors": [], "marked": [],
+def run(paths: Paths, only: list[str] | None = None, redo: bool = False) -> dict:
+    stats = {"extracted": 0, "unchanged": 0, "needs_ocr": 0, "kept_ocr": 0, "suspect": 0, "not_pdf": 0, "errors": [], "marked": [],
              "watermark_chars_dropped": 0}
     for path in sorted(paths.meta.glob("*.json")):
         meta = json.loads(path.read_text(encoding="utf-8"))
@@ -98,6 +98,11 @@ def run(paths: Paths, only: list[str] | None = None) -> dict:
             continue
         if meta.get("text_method") == "ocr":         # already read by the OCR stage; do not undo that
             stats["kept_ocr"] += 1
+            continue
+        done = meta.get("needs_ocr") is not None and (meta.get("needs_ocr") or
+                                                       (meta.get("text_path") and (paths.data.parent / meta["text_path"]).exists()))
+        if done and not redo:                        # same file already extracted (records resets these on a new file)
+            stats["unchanged"] += 1
             continue
         try:
             res = extract_document(paths, meta)

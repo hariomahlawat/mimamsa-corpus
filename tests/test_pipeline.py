@@ -496,3 +496,95 @@ def test_correspondence_rows_from_a_table(corpus, monkeypatch, tmp_path):
     assert rows[0]["old_sections"] == ["75", "76"] and rows[0]["new_section"] == "69" and rows[0]["confidence"] == "extracted"
     assert rows[1]["is_new"] is True and rows[1]["old_sections"] == [] and rows[1]["new_section"] == "70"
     assert validate.run(corpus)["errors"] == [] and validate.run(corpus)["correspondence_rows"] == 3
+
+
+# ---------------------------------------------------------------- judgments
+from pipeline import judgments  # noqa: E402
+
+JUDGMENT_TEXT = ("The appellant was enrolled in the Army and was invalided out of service. He claims disability pension "
+                 "under the Entitlement Rules. He was tried by a Summary Court Martial under Section 69 of the Army Act, 1950 "
+                 "read with Section 302 of the Indian Penal Code. Sections 75 and 76 of the Army Act were also argued. ")
+
+
+def add_judgment(corpus, key, text, index, dataset="indian-supreme-court-judgments", **extra):
+    pdf = corpus.root / "tmp.pdf"
+    make_pdf(pdf, [text * 3], watermark=False)
+    body = pdf.read_bytes() + key.encode()            # distinct bytes per judgment
+    pdf.unlink()
+    sha = hashlib.sha256(body).hexdigest()
+    rel = f"data/raw/sci/2013/{sha}.pdf"
+    (corpus.root / rel).parent.mkdir(parents=True, exist_ok=True)
+    (corpus.root / rel).write_bytes(body)
+    with StateDB(corpus.db) as db:
+        url = f"https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/{key}.pdf"
+        db.enqueue(url, "sci", "indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com", "document", meta={
+            "category": "judgment", "court_key": "sci", "year": "2013", "filename": f"{key}.pdf", "parent_doc_id": "sci",
+            "dataset": dataset, "index": index, "title": index.get("title"), **extra})
+        db.record_file(sha256=sha, raw_path=rel, url=url, nbytes=len(body), content_type="application/pdf")
+        db.mark_fetched(url, status_code=200, sha256=sha, nbytes=len(body), content_type="application/pdf")
+
+
+def test_keyword_classification_follows_the_brief():
+    kc = judgments.keyword_counts
+    assert judgments.classify(kc("nothing military here")) == "rejected"
+    assert judgments.classify(kc("a single mention of a court martial")) == "borderline"
+    assert judgments.classify(kc("court-martial under the Army Act")) == "relevant"            # two keywords
+    assert judgments.classify(kc("invalided ... invalided ... invalided")) == "relevant"        # three hits
+    assert "armed forces tribunal" in kc("the AFT held") and "armed forces tribunal" not in kc("an aft cabin")
+
+
+def test_judgments_get_records_relevance_and_citations(corpus):
+    add_judgment(corpus, "2013_8_1119_1148_EN", JUDGMENT_TEXT, {
+        "title": "DHARAMVIR SINGH versus UNION OF INDIA & ORS.", "petitioner": "DHARAMVIR SINGH",
+        "respondent": "UNION OF INDIA & ORS.", "judge": "A.K. PATNAIK, B", "citation": "[2013] 8 S.C.R. 1119",
+        "case_id": "2013 INSC 408", "cnr": "ESCR010007152013", "decision_date": "02-07-2013",
+        "disposal_nature": "Appeal(s) allowed", "path": "2013_8_1119_1148", "nc_display": "2013INSC408"})
+    add_judgment(corpus, "2013_1_1_9_EN", "A tax dispute between a company and the revenue. " * 5, {
+        "title": "X LTD versus UNION OF INDIA", "petitioner": "X LTD", "respondent": "UNION OF INDIA", "judge": "C",
+        "citation": "", "case_id": "", "cnr": "ESCR9", "decision_date": "not a date", "disposal_nature": "Dismissed",
+        "path": "2013_1_1_9", "nc_display": ""})
+    assert main(["all", "--root", str(corpus.root)]) == 0
+    d = load(corpus, "meta/sc-2013-dharamvir-singh-2013insc408.json")
+    assert d["doc_type"] == "judgment" and d["source"] == "sci" and d["issue_date"] == "2013-07-02"
+    assert d["neutral_citation"] == "2013 INSC 408" and d["reported_citations"] == ["[2013] 8 S.C.R. 1119"]
+    assert d["parties"] == {"petitioner": ["DHARAMVIR SINGH"], "respondent": ["UNION OF INDIA & ORS."]}
+    assert d["judges"] == ["A.K. PATNAIK", "B"] and d["outcome"] == "allowed" and d["court"] == "Supreme Court of India"
+    assert d["source_record"]["system"] == "aws-open-data:indian-supreme-court-judgments" and "CC-BY-4.0" in d["curation_note"]
+    assert d["relevance"]["status"] == "relevant" and d["relevance"]["keywords"]["disability pension"] == 3
+    assert set(d["topics"]) >= {"disability_pension", "entitlement_rules", "court_martial", "invalidment"}
+    cited = {(s["act"], s["section"]) for s in d["statutes_cited"]}
+    assert {("Army Act 1950", "69"), ("Army Act 1950", "75"), ("Indian Penal Code 1860", "302")} <= cited
+    targets = {r["target_doc_id"] for r in d["relations"] if r["type"] == "cites"}
+    assert targets == {"act-army-1950#s69", "act-army-1950#s75"}          # only sections that exist in the corpus
+    # the civil judgment is removed from the corpus; only a log line remains
+    assert not (corpus.meta / "sc-2013-x-ltd-2013-1-1-9.json").exists()
+    assert not (corpus.text / "sc-2013-x-ltd-2013-1-1-9.txt").exists()
+    [gone] = [json.loads(l) for l in (corpus.data / "excluded_judgments.jsonl").read_text().splitlines()]
+    assert gone["doc_id"] == "sc-2013-x-ltd-2013-1-1-9" and gone["title"] == "X LTD versus UNION OF INDIA"
+    assert gone["source_url"].endswith("2013_1_1_9_EN.pdf") and not list((corpus.data / "raw" / "sci").rglob(gone["sha256"] + "*"))
+    assert len(list((corpus.data / "raw" / "sci").rglob("*.pdf"))) == 1                # the relevant one is kept
+    lines = (corpus.reports / "relevance.csv").read_text().splitlines()
+    assert len(lines) == 3 and ",rejected (removed)," in lines[1] and ",relevant," in lines[2]
+    edges = [json.loads(l) for l in (corpus.data / "relations.jsonl").read_text().splitlines()]
+    n = sum(e["type"] == "cites" for e in edges)
+    assert n == 2 and main(["all", "--root", str(corpus.root)]) == 0      # re-run: same result, nothing duplicated
+    again = [json.loads(l) for l in (corpus.data / "relations.jsonl").read_text().splitlines()]
+    assert sum(e["type"] == "cites" for e in again) == 2 and len(again) == len(edges)
+    assert load(corpus, "meta/sc-2013-dharamvir-singh-2013insc408.json")["relevance"]["status"] == "relevant"
+    assert not (corpus.meta / "sc-2013-x-ltd-2013-1-1-9.json").exists()               # stays removed on re-runs
+    assert len((corpus.data / "excluded_judgments.jsonl").read_text().splitlines()) == 1
+
+
+def test_high_court_title_is_split_into_case_number_and_parties(corpus):
+    add_judgment(corpus, "DLHC010210552023_1_2023-05-26", "An order. " * 30, {
+        "title": "W.P.(C)/7395/2023 of NIKHIL MANDAL Vs UNION OF INDIA & ORS.", "cnr": "DLHC010210552023",
+        "decision_date": "2023-05-26 00:00:00", "judge": "CASES PERTAINING TO SPL.DIVISION BENCHES", "disposal_nature": ""},
+        dataset="indian-high-court-judgments", court_name="High Court of Delhi", bench="dhcdb")
+    with StateDB(corpus.db) as db:
+        db.conn.execute("UPDATE urls SET meta=json_set(meta,'$.court_key','delhi','$.year','2023') WHERE url LIKE '%DLHC010210552023%'")
+    records.build_indiacode(corpus)
+    d = load(corpus, "meta/hc-delhi-2023-w-p-c-7395-2023-dlhc010210552023-1-2023-05-26.json")
+    assert d["case_numbers"] == ["W.P.(C)/7395/2023"] and d["issue_date"] == "2023-05-26"
+    assert d["parties"] == {"petitioner": ["NIKHIL MANDAL"], "respondent": ["UNION OF INDIA & ORS."]}
+    assert d["judges"] == [] and d["outcome"] is None and d["court"] == "High Court of Delhi"
+    assert validate.run(corpus)["errors"] == []

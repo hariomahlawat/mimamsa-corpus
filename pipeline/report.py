@@ -138,6 +138,29 @@ def run(paths: Paths, extra: dict | None = None) -> dict:
             if odd:
                 L += ["", f"### {doc_id}: headings that differ between the table and the body (as printed; not corrected)", ""]
                 L += [f"- {x}" for x in odd]
+    judg = [d for d in docs if d["doc_type"] in ("judgment", "order")]
+    excl_path = paths.data / "excluded_judgments.jsonl"
+    excl = [json.loads(l) for l in excl_path.read_text(encoding="utf-8").splitlines() if l.strip()] if excl_path.exists() else []
+    if judg or excl:
+        by_court: dict[str, Counter] = defaultdict(Counter)
+        for d in judg:
+            by_court[d.get("court") or "?"][(d.get("relevance") or {}).get("status", "not_checked")] += 1
+        for e in excl:
+            by_court[e.get("court") or "?"]["removed"] += 1
+        L += ["", "## Judgments", "",
+              "Only judgments about the armed forces are kept. Cases are pre-selected from the court indexes by party "
+              "names, downloaded, and their text checked against the brief's keywords. A judgment with no military "
+              "keyword is removed from the corpus and logged in `data/excluded_judgments.jsonl` and "
+              "`reports/relevance.csv`. `borderline` = one or two mentions of a single keyword: kept, to be reviewed.", "",
+              "| Court | Relevant | Borderline | Not checked (no text) | Removed as not military |", "| --- | --- | --- | --- | --- |"]
+        for court, c in sorted(by_court.items()):
+            L.append(f"| {court} | {c['relevant']} | {c['borderline']} | {c['not_checked']} | {c['removed']} |")
+        cited = Counter((s["act"], s["section"]) for d in judg for s in d.get("statutes_cited", []) if s.get("section"))
+        if cited:
+            L += ["", "Most cited provisions in the kept judgments: "
+                  + "; ".join(f"{a} s.{s} ({n})" for (a, s), n in cited.most_common(12)) + "."]
+        years = Counter((d.get("issue_date") or "????")[:4] for d in judg)
+        L += ["", "Kept judgments by year decided: " + ", ".join(f"{y}: {n}" for y, n in sorted(years.items())) + "."]
     corr_path = paths.reports / "correspondence_results.json"
     if extra and extra.get("correspondence") is not None:
         corr_path.write_text(json.dumps(extra["correspondence"], indent=1, ensure_ascii=False), encoding="utf-8")

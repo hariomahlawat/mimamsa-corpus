@@ -19,7 +19,7 @@ import logging
 import sys
 from pathlib import Path
 
-from . import aft, direct, indiacode, probe
+from . import aft, direct, indiacode, opendata, probe
 from .audit import AuditLog, setup_logging
 from .config import DEFAULT_CONFIG, ROOT, ConfigError, check_config, load_config
 from .fetch import fetch_documents
@@ -29,7 +29,7 @@ from .state import StateDB
 
 log = logging.getLogger("mimamsa.cli")
 
-DISCOVERERS = {"indiacode": indiacode, "aft": aft, "official_copies": direct, "legislative": direct, "bprd": direct}
+DISCOVERERS = {"indiacode": indiacode, "aft": aft, "sci": opendata, "hc": opendata, "official_copies": direct, "legislative": direct, "bprd": direct}
 
 
 def _replay(args) -> str | None:
@@ -291,7 +291,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     v = sub.add_parser("discover", help="fetch listing pages only and queue what they list")
     v.add_argument("--source", required=True)
-    v.add_argument("--only", action="append", metavar="DOC_ID", help="limit to a target (repeatable)")
+    v.add_argument("--only", action="append", metavar="NAME", help="limit to a target, bench or slice, e.g. act-army-1950, chandigarh, 2013, delhi:2023 (repeatable)")
     v.add_argument("--refresh", action="store_true", help="re-read listing pages already fetched")
     v.add_argument("--replay", metavar="DIR", help="serve saved pages from DIR instead of the network")
     v.add_argument("--record", metavar="DIR", help="live runs: also save each page to DIR for later replay")
