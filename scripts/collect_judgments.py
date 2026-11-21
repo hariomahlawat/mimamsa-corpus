@@ -4,7 +4,8 @@ deleted as each slice is processed) and a stopped run continues where it left of
 
     python scripts/collect_judgments.py sci hc:delhi hc:jkl hc:ph hc:allahabad
 
-Progress: state/logs/collect.log and state/collect_progress.json.  Stop cleanly: create state/collect.stop
+Progress: state/logs/collect.log and state/collect_progress.json. The kept judgments are pushed to the
+`raw-data` branch after every few court-years and when each court finishes (scripts/push_data.py).  Stop cleanly: create state/collect.stop
 """
 from __future__ import annotations
 
@@ -22,6 +23,7 @@ PROGRESS = ROOT / "state" / "collect_progress.json"
 STOP = ROOT / "state" / "collect.stop"
 YEARS = range(2026, 1949, -1)              # newest first
 WORKERS = "8"
+PUSH_EVERY = 8                             # court-years with downloads between checkpoint pushes
 
 
 def say(msg: str) -> None:
@@ -57,7 +59,14 @@ def process(tag: str) -> dict:
     return json.loads(line.split(":", 1)[1]) if line else {}
 
 
+def checkpoint(label: str) -> None:
+    """Push what the corpus holds now to the raw-data branch."""
+    p = subprocess.run([PY, str(ROOT / "scripts" / "push_data.py"), label], cwd=ROOT, capture_output=True, text=True)
+    say(f"checkpoint push ({label}): rc={p.returncode} {(p.stdout or p.stderr).strip().splitlines()[-1:] or ''}")
+
+
 def collect(source: str, slices: list[str], done: dict) -> None:
+    since_push = 0
     for s in slices:
         key = f"{source}:{s}"
         if STOP.exists():
@@ -83,6 +92,10 @@ def collect(source: str, slices: list[str], done: dict) -> None:
                      "kept_borderline": rel.get("borderline"), "removed_total": rel.get("removed_as_not_military_total"),
                      "at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
         PROGRESS.write_text(json.dumps(done, indent=1), encoding="utf-8")
+        since_push += 1 if queued else 0
+        if since_push >= PUSH_EVERY:
+            checkpoint(f"after {key}")
+            since_push = 0
         say(f"{key}: index {status}; downloaded {fetched.get('downloaded', 0)} "
             f"(failed {fetched.get('failed', 0)}); corpus now relevant={rel.get('relevant')} "
             f"borderline={rel.get('borderline')} removed={rel.get('removed_as_not_military_total')}")
@@ -103,6 +116,7 @@ def main(argv: list[str]) -> int:
             say(f"unknown target {target!r}")
             continue
         rc, out = run("pipeline", "all")                 # full rebuild, validation and report after each court
+        checkpoint(f"{target} finished")
         say(f"{target}: finished; pipeline all rc={rc}; " + " | ".join(l for l in out.splitlines() if l.startswith(("validate", "relevance"))))
     say(f"done in {(time.time() - t0) / 3600:.1f} h")
     return 0
