@@ -133,3 +133,18 @@ Controls: policy v1; originals read-only; no downloads, HF sync, merges or pushe
   - OQ-A-12 (deemed date 04-06-1979 earlier than the commencement of S.R.O. 188/1979);
   - A-C2-06 (P.P.S. Bedi after the omission of r.25);
   - FID-03 (s.129 wording, to WS-A).
+
+## Controlled integration and acquisition preparation (2026-11-22, owner instruction)
+| Item | PR / branch | State | CI |
+| --- | --- | --- | --- |
+| HF safeguard hardening: environment gate, separate approval for 10 acquisition steps, 12 evaluator-based guard tests (mutation-checked), guard CI | #15 `claude/hf-sync-guard-staging` @4ebbeb89 | Ready for owner review | green |
+| #16 reconciled with #6 (merge 4e35a184) | #16 | Ready | green |
+| Cycle-2 integration branch: #16 + WS-A/B/C/D; record `COORDINATION/INTEGRATION_CYCLE2.md`; `CONSOLIDATED_PROPOSALS.csv` CP-01..13; PIC-08/09 supersession proposal | #22 `claude/integration-cycle2` @18b7e4e5 | Ready for owner review | green |
+| WS-D integration fix (quoted-text false positive) | #18 @f6c3d2bd | Reviewed (no weakening verified) | green |
+| WS-A ACQ-03 pinned candidates | #19 @fdd8dea1 | Reviewed (metadata-only network log) | green |
+| ACQ-01 HTTPS enforcement (require_https on archive and official_instruments) | #8 @1b948727; #9 re-merged | Ready | green |
+| ACQ-02 HTTPS, offline `verify_batch.py`, inventory cross-check, runbook | #17 @7313110a | Ready | green |
+| ACQ-03 config (39 pinned: 36 archive.org + 3 India Code), approval request | #23 `claude/acq-03-config` @c0e2a425 | Awaiting owner | queued at time of writing |
+
+- **Process note:** coordinator commit 71518ccd (#22) was pushed with a CSV quoting error, because gate output piped through `tail` hid the exit status. Fixed in 18b7e4e5. Gates are now checked by explicit exit codes.
+- **Agents:** all idle after these tasks (WS-A ACQ-03 list done; WS-D fix done).
