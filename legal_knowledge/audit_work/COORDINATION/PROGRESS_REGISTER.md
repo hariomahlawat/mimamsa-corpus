@@ -3,12 +3,15 @@
 Updated by the coordinator only. State is persisted here so work can resume after interruption.
 
 ## Workstreams
+All four agents were launched 2026-11-22 from base commit 2a7ae7af, each in its own worktree and branch. Agents commit locally only; the coordinator reviews, pushes and opens one PR per workstream (base `claude/audit-pilot-01`).
+Resume procedure: read each `WS-*/STATUS.md` on its branch (`git -C /home/user/ws-X log`), then continue from the 'next' items.
+
 | WS | Issue | Agent | Branch / worktree | State | Last integrated commit | CI | Integration |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| A Statutory & Gazette | #11 | (pending launch) | claude/ws-a-statutory · /home/user/ws-a | NOT STARTED | – | – | – |
-| B Judgments | #12 | (pending launch) | claude/ws-b-judgments · /home/user/ws-b | NOT STARTED | – | – | – |
-| C MML & procedure | #13 | (pending launch) | claude/ws-c-mml · /home/user/ws-c | NOT STARTED | – | – | – |
-| D Data quality & CI | #14 | (pending launch) | claude/ws-d-quality · /home/user/ws-d | NOT STARTED | – | – | – |
+| A Statutory & Gazette | #11 | launched 2026-11-22 | claude/ws-a-statutory · /home/user/ws-a | RUNNING (base 2a7ae7af) | – | – | awaiting first hand-off |
+| B Judgments | #12 | launched 2026-11-22 | claude/ws-b-judgments · /home/user/ws-b | RUNNING (base 2a7ae7af) | – | – | awaiting first hand-off |
+| C MML & procedure | #13 | launched 2026-11-22 | claude/ws-c-mml · /home/user/ws-c | RUNNING (base 2a7ae7af) | – | – | awaiting first hand-off |
+| D Data quality & CI | #14 | launched 2026-11-22 | claude/ws-d-quality · /home/user/ws-d | RUNNING (base 2a7ae7af) | – | – | awaiting first hand-off |
 
 ## Completed deliverables (coordinator, before launch)
 | Deliverable | Location | Evidence status |
