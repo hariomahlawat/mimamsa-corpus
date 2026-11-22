@@ -1,12 +1,13 @@
-provision,version,text_source_instrument,valid_from,valid_to,text_evidence,wording_status,compilation_agrees,determination_state,legal_review_required
-r.23(3),v1954,S.R.O. 484/1954 p.300,1954-11-27,open,IMAGE_CHECKED (2 independent readings),'You are not obliged to say anything...',NO (India Code: 'obliged'),CONFLICTING,YES
-r.193,v1954,S.R.O. 484/1954,1954-11-27,1987-10-10,NOT YET EXTRACTED,to transcribe from 1954 Gazette,-,OPEN,YES
-r.193,v1987,S.R.O. 302/1987 p.367,1987-10-10 (publication; commencement not stated),open?,IMAGE_CHECKED (PIC-24),'...clause (i) of section 91 shall be the Chief of the Army Staff or the Officer Commanding an Army',NO (compilation adds s.90(i)),OPEN (U-04),YES
-r.194,v1954,S.R.O. 484/1954,1954-11-27,1989-12-02,NOT YET EXTRACTED,to transcribe,-,OPEN,YES
-r.194,v1989,S.R.O. 332/1989 p.736,1989-12-02 (publication; commencement not recorded),open,IMAGE_CHECKED (PIC-12),"'...in the case of an officer, the Chief of the Army Staff or the Officer Commanding an Army...'",NO (compilation lacks added words),PROPOSAL (C-04),YES
-r.177,v2003,S.R.O. 8(E)/2003,2003-06-24,open,IMAGE_CHECKED,per R23 chain,to compare,PROPOSAL (C-03),YES
-r.192 proviso,v1965,S.R.O. 215/1965 p.172,1965-07-03,open,IMAGE_CHECKED,per R23 chain,to compare,PROPOSAL (C-02),YES
-r.22,v1993,S.R.O. 17(E)/1993,1993-12-06,open? (AR-030),IMAGE_CHECKED,per R23 chain,to compare,OPEN (S.R.O. 258/2002 gap),YES
-r.25,omitted,S.R.O. 17(E)/1993,1993-12-06,-,IMAGE_CHECKED,omitted,to compare,PROPOSAL,YES
-r.59A,v1982 / omitted 1993,S.R.O. 246/1982; 17(E)/1993,1982-11-13,1993-12-06,IMAGE_CHECKED,inserted 1982; omitted 1993,to compare,PROPOSAL,YES
-r.80A,v1985 (+corrigendum),S.R.O. 55/1985; 68/1985,1985-03-09,open,IMAGE_CHECKED,per PIC-20/21,to compare,PROPOSAL,YES
+provision,version,text_source_instrument,publication_date,commencement_as_printed,effective_date,effective_date_status,superseded_by_event,text_evidence,wording_status,compilation_agrees,determination_state,conflict_id,legal_review_required
+r.23(3),v1954,S.R.O. 484/1954 p.300,1954-11-27,not recorded,,NOT_DETERMINED (S.R.O. 484 commencement not yet recorded),none located (31 instruments),IMAGE_CHECKED (PIC-10/11; reviewer D blind reading),'You are not obliged to say anything...',NO (India Code: 'obliged'),CONFLICTING,C-01,YES
+r.193,v1954,S.R.O. 484/1954,1954-11-27,not recorded,,NOT_DETERMINED,S.R.O. 302/1987 (or earlier: 17(E)/1993 claim to be checked),NOT YET EXTRACTED (WS-A),to transcribe from page image,-,OPEN,C-08,YES
+r.193,v1987,S.R.O. 302/1987 p.367,1987-10-10,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),possibly S.R.O. 17(E)/1993 (MML 2 p.227 footnote; to verify),IMAGE_CHECKED (PIC-24),'...for the purposes of clause (i) of section 91 shall be the Chief of the Army Staff or the Officer Commanding an Army',NO (compilation: s.90(i) and s.91(i)),OPEN,C-08,YES
+r.193,v1993?,S.R.O. 17(E)/1993 (claimed by MML 2 p.227 footnote),1993-12-06,not recorded,,NOT_DETERMINED,-,REQUIRES_VERIFICATION (not yet itemised from images),unknown,compilation text would match if this substitution covers s.90(i),OPEN (hypothesis only),C-08,YES
+r.194,v1954,S.R.O. 484/1954,1954-11-27,not recorded,,NOT_DETERMINED,S.R.O. 332/1989,NOT YET EXTRACTED (WS-A),to transcribe,-,OPEN,C-09,YES
+r.194,v1989,S.R.O. 332/1989 p.736,1989-12-02,not recorded,,NOT_DETERMINED (commencement clause not yet read),none located,IMAGE_CHECKED (PIC-12),"'...in the case of an officer, the Chief of the Army Staff or the Officer Commanding an Army, and in the case of a person other than an officer, the officer empowered to convene a court martial for his trial'",NO (compilation lacks the added words),PROPOSAL (pending legal review),C-09,YES
+r.177,v2003,S.R.O. 8(E)/2003 pp.1-2,2003-06-24,not recorded,,NOT_DETERMINED,none located,IMAGE_CHECKED,per R23 chain,to compare,PROPOSAL,C-03,YES
+r.192 proviso,v1965,S.R.O. 215/1965 p.172,1965-07-03,not recorded,,NOT_DETERMINED,none located,IMAGE_CHECKED,per R23 chain,to compare,PROPOSAL,C-02,YES
+r.22,v1993,S.R.O. 17(E)/1993,1993-12-06,not recorded,,NOT_DETERMINED,possibly S.R.O. 258/2002 (GAP),IMAGE_CHECKED,per R23 chain,to compare,OPEN,-,YES
+r.25,omitted,S.R.O. 17(E)/1993,1993-12-06,not recorded,,NOT_DETERMINED,-,IMAGE_CHECKED,omitted,to compare,PROPOSAL,-,YES
+r.59A,v1982,S.R.O. 246/1982 p.413,1982-11-13,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),omitted by S.R.O. 17(E)/1993,IMAGE_CHECKED (PIC-18),inserted 1982,to compare,PROPOSAL,-,YES
+r.80A,v1985 (+corrigendum S.R.O. 68/1985),S.R.O. 55/1985 p.97; S.R.O. 68/1985 p.142,1985-03-09,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05); corrigendum effect AQ-07,none located,IMAGE_CHECKED (PIC-20/21),per PIC-20/21,to compare,PROPOSAL,-,YES
