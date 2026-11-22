@@ -160,3 +160,11 @@ utc_time	url	status	bytes
 2026-11-22T16:23:26.197297Z	https://archive.org/metadata/in.gazette.e.1956.717	200	4594
 2026-11-22T16:23:27.640422Z	https://archive.org/metadata/in.gazette.e.1955.15	200	4788
 2026-11-22T16:23:30.909879Z	https://archive.org/metadata/in.gazette.1950.318	200	4483
+2026-11-22T17:08:05.653712Z	https://archive.org/services/search/beta/page_production/?service_backend=fts&user_query=%22approved+of+by+the+Judge+Advocate+General%22&page_type=collection_details&page_target=gazetteofindia&hits_per_page=20	200	16040
+2026-11-22T17:08:08.777987Z	https://archive.org/services/search/beta/page_production/?service_backend=fts&user_query=%22any+person+approved+of+by+the+Judge+Advocate%22&page_type=collection_details&page_target=gazetteofindia&hits_per_page=20	200	8000
+2026-11-22T17:08:11.485036Z	https://archive.org/services/search/beta/page_production/?service_backend=fts&user_query=%22officer+approved+of+by+the+Judge+Advocate%22&page_type=collection_details&page_target=gazetteofindia&hits_per_page=20	200	15777
+2026-11-22T17:08:12.421269Z	https://archive.org/advancedsearch.php?q=collection%3Agazetteofindia+AND+date%3A%5B1950-05-15+TO+1950-06-15%5D+AND+title%3A%28Extraordinary%29&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=date&rows=30&output=json	200	4127
+2026-11-22T17:08:22.322883Z	https://archive.org/metadata/in.gazette.e.1950.306	200	4623
+2026-11-22T17:08:27.821190Z	https://archive.org/metadata/in.gazette.1950.368	200	4495
+2026-11-22T17:08:28.847159Z	https://archive.org/metadata/in.gazette.central.w.1950-04-01.108817	200	4521
+2026-11-22T17:08:35.320766Z	https://archive.org/services/search/beta/page_production/?service_backend=fts&user_query=%22Army+Act%2C+1950%22+%22received+the+assent+of+the+President+on+the+20th+May%22&page_type=collection_details&page_target=gazetteofindia&hits_per_page=5	200	8022

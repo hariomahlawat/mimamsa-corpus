@@ -69,3 +69,14 @@ Scripts are kept in the session scratchpad (`ws-a/scripts/`: `render.py`, `clip.
    - For r.164, the Gazette inserts the entries 96–101, and the 80-A entry dates from 1985.
 4. **Four pre-1960 Army Rules amendments** were located by OCR (1956, 28-11-1958 r.187(1)(r), 12-12-1958 r.95, 1959). No official note lists them.
 5. **AFT rules (OQ-D-005).** India Code lists the 2008 Procedure Rules, the 2011 amendment and the 2009 Practice Rules. The instrument that "Rule 4-12" refers to is still OPEN.
+
+## Cycle 3 files (branch claude/ws-a-cycle3)
+| File | Content |
+| --- | --- |
+| `statutory_version_completeness_cycle3.csv` | 219 rows: every AR rule (107) and AA section (112) cited by the 658 KB, with version-history completeness |
+| `r15_military_secretary_trace_cycle3.csv` | r.15 "or Military Secretary": instrument-by-instrument trace (source not found) |
+| `r187_evidence_dossier_cycle3.md` | r.187(1) evidence dossier (OQ-C-06) |
+| `s129_trace_cycle3.csv` | Army Act s.129 wording trace; enacted 1950 Gazette located (not held) |
+| `commencement_readings_cycle3.csv` | Commencement clauses read for AR-010, AR-011, AR-024, AR-025 |
+| `identity_transcription_register_cycle3.csv` | WSA-PIC-55..59 |
+| `acquisition_requests_cycle3.csv` | ACQ-C3-01..04 (not executed) |
