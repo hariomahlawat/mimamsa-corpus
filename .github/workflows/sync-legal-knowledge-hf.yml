@@ -52,8 +52,8 @@ jobs:
         run: |
           test "$(find .mml_transfer -maxdepth 1 -name 'part_*.b64' -type f | wc -l)" -eq 32
           mkdir -p "$RUNNER_TEMP/mml-originals"
-          cat .mml_transfer/part_*.b64 | tr -d '\\r\\n\\t ' | base64 --decode > "$RUNNER_TEMP/mml-originals/originals.zip"
-          printf '9d82b9c5cb9ac56f41fd6ca74ed0a4704a5897fd26a239fdbafe0377e511f31c  %s\\n' "$RUNNER_TEMP/mml-originals/originals.zip" | sha256sum -c -
+          cat .mml_transfer/part_*.b64 | base64 --decode > "$RUNNER_TEMP/mml-originals/originals.zip"
+          test "$(sha256sum "$RUNNER_TEMP/mml-originals/originals.zip" | cut -d' ' -f1)" = "9d82b9c5cb9ac56f41fd6ca74ed0a4704a5897fd26a239fdbafe0377e511f31c"
           python - <<'PY'
           from pathlib import Path
           from zipfile import ZipFile
