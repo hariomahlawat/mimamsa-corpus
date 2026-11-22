@@ -181,6 +181,46 @@
     "edition_authority_ref": {
       "type": "string",
       "minLength": 1
+    },
+    "proof_type": {
+      "type": "string",
+      "enum": [
+        "PAGE_IMAGE_READING",
+        "TEXT_LAYER_EXTRACTION",
+        "HTML_TEXT",
+        "OCR_TEXT",
+        "METADATA_ONLY",
+        "SEARCH_RESULT_ONLY"
+      ],
+      "description": "How the relied-on passage was read (evidence method, not authority class). OCR_TEXT, METADATA_ONLY and SEARCH_RESULT_ONLY never support SOURCE_VERIFIED."
+    },
+    "render_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 of the page render read for PAGE_IMAGE_READING."
+    },
+    "publication_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Date of publication (e.g. Gazette issue date); distinct from commencement and effective date."
+    },
+    "commencement_as_printed": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Commencement wording as printed in the instrument, verbatim or 'not stated'."
+    },
+    "effective_date_status": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(STATED_IN_INSTRUMENT|NOT_STATED|NOT_DETERMINED|NOT_APPLICABLE)([ _(:;,-].*)?$",
+      "description": "Owner date rule: effective_date may be set only when the instrument states commencement (prefix STATED_IN_INSTRUMENT); otherwise effective_date is null and this explains why."
     }
   }
 }

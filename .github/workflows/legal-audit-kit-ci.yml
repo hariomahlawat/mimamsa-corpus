@@ -33,6 +33,12 @@ jobs:
         run: python tools/legal_audit/validate.py --batch legal_knowledge/audit_work/R23-VERIFY-01 --manifest legal_knowledge/audit_work/R23-VERIFY-01/pilot-manifest.json --strict
       - name: Citation-code inventory fully registered (87 codes; fails on any missing code)
         run: python legal_knowledge/audit_work/PILOT-01/build_code_inventory.py
+      - name: Audit register CSVs are well-formed (UTF-8, unique headers, no ragged rows)
+        run: python tools/legal_audit/check_csv.py
+      - name: ARMY-RULES-CHAIN-01 / ACQ-02 register cross-references and date semantics
+        run: python legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/check_registers.py
+      - name: Reproduce frozen record hashes (PILOT-01 and R23-VERIFY-01 manifests; no private bytes)
+        run: python legal_knowledge/audit_work/WS-D-QUALITY/scripts/hash_reproduction.py --out "$RUNNER_TEMP/hash_reproduction.json"
       - name: Check frozen originals are unchanged
         run: |
           echo "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1  legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.jsonl" > /tmp/originals.sha256
