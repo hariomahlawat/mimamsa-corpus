@@ -37,23 +37,31 @@ def main():
     if args.dry_run:
         print("Dry run complete; no upload")
         return
-    from huggingface_hub import HfApi
+    from huggingface_hub import HfApi, hf_hub_download
     api = HfApi()
     info = api.repo_info(repo_id=REPO, repo_type="dataset")
     if not info.private:
         raise RuntimeError("Refusing upload: destination dataset is not private")
     for row in rows:
         source = source_dir / row["filename"]
-        api.upload_file(repo_id=REPO, repo_type="dataset",
+        dest = f'{PREFIX}/{row["filename"]}'
+        committed = api.upload_file(repo_id=REPO, repo_type="dataset",
                         path_or_fileobj=str(source),
-                        path_in_repo=f'{PREFIX}/{row["filename"]}',
+                        path_in_repo=dest,
                         commit_message=f'Archive source original (unverified): {row["filename"]}')
-        print(f'Uploaded original: {row["filename"]}')
+        revision = getattr(committed, "oid", None)
+        if not revision:
+            raise RuntimeError(f"No commit revision returned for {row['filename']}")
+        remote = Path(hf_hub_download(repo_id=REPO, repo_type="dataset",
+                                      filename=dest, revision=revision, force_download=True))
+        if hashlib.sha256(remote.read_bytes()).hexdigest() != row["sha256"]:
+            raise RuntimeError(f"Remote SHA-256 mismatch: {row['filename']}")
+        print(f'Uploaded and read-back verified: {row["filename"]}')
     api.upload_file(repo_id=REPO, repo_type="dataset",
                     path_or_fileobj=str(MANIFEST),
                     path_in_repo="legal_knowledge/manual_sources/MML_Originals_Manifest.csv",
                     commit_message="Add original MML provenance and integrity manifest")
-    print("All eight original sources uploaded to private Mimamsa dataset")
+    print("VERIFIED 8 original MML binary files on private Hugging Face")
 
 if __name__ == "__main__":
     main()
