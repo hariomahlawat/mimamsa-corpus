@@ -16,6 +16,14 @@
 | 7 | ACQ-01 inventory vs PR #8 config: doc_id spelling (Act 13/1975) and India Code items described by item ID | Naming only (crawler stack) | Mapping recorded in `docs/acquisition/inventory_match_2026-11-22.txt` (PR #17); frozen batches.json not edited |
 | 8 | HTTPS not enforced for archive.org / India Code acquisition sources (found by a new ACQ-02 test) | Security gap (crawler stack) | `require_https: true` for `archive`, `official_instruments` (PR #8, 1b948727) and `archive_acq02` (PR #17); same code as PR #9; stack re-merged |
 
+### Review-fix round (Codex review findings on #19 and #20, all verified by the coordinator before routing)
+| # | Finding | Resolution |
+| --- | --- | --- |
+| 9 | #19: the WS-A README presented 25-01-1975 as the commencement date of Act 13/1975; s.4(2) is a saving ("as if") clause and the effective date is reserved for advice (OQ-A-04) | WS-A ba358fa2 corrected the README and 4 CSV summaries; effective date stays NOT_DETERMINED. Thread resolved. |
+| 10 | WS-A PCL-BL-25 claimed an image check without a render (WS-D OQ-D-019); the first fix used a non-policy copy_fidelity value | WS-A 2fc75160: copy_fidelity NOT_CHECKED, REQUIRES_VERIFICATION in evidence_level; 31 rows re-pointed to real renders; provenance checker 0 new violations |
+| 11 | #20: WS-C parser lost letter suffixes (r.15A, r.13A, s.169A), truncated lists (SC03 r.24, HCE-029 r.23) and missed short case titles, rating them FULL | WS-C ba3d370e fixed the parser, added a regression check and regenerated all dependent artifacts. Coverage FULL 379→370, PARTIAL 131→140, UNRESOLVED 14→15, NO_CITATION 78→77 (35 records changed). Coordinator spot-checked 8 records. Threads resolved. |
+| 12 | WS-D reconciliation test failed on the integrated tree after #11 (built from the old WS-C inventory) | WS-D 1893f162 regenerated against WS-C @ba3d370e: agreement **554/658** (was 562), all 104 differences explained by definitional rules. The test now pins WS-C's input by SHA-256 and fails with an explicit "regenerate" message if it changes. |
+
 ## Validation on the integrated tree (head of this branch)
 | Check | Result |
 | --- | --- |
