@@ -94,3 +94,15 @@ The orchestrator reviews each workstream hand-off and records its review in `COO
 - WS-B: the remaining unresolved cases; identities for the 13 KB records (CC-11).
 - WS-D: the "manual_supported" relation type (CC-13, schema lease).
 - Cross-stream: reconcile WS-C's 658 inventory (FULL 379) with WS-D's scorecard (279/658 coded-searchable); the definitions differ and both carry explicit denominators.
+
+## Cycle 2 (started 2026-11-22; owner instruction)
+All four agents were resumed (same agent instances, same worktrees and branches). Each commits locally; the coordinator reviews, pushes and updates the existing PR (#18–#21) or opens a separate cycle-2 PR.
+
+| WS | Worktree / branch | Base at resume | Cycle 2 tasks | State |
+| --- | --- | --- | --- | --- |
+| A | /home/user/ws-a · claude/ws-a-statutory | 74530be9 | r.187(1) footnote (OQ-C-06); expand the provision change log from held verified sources; cross-check WS-C's 1993 footnote leads; gaps (E-7, S.R.O. 258/2002, post-2022, Rule 4-12); new requests only in `acquisition_requests_cycle2.csv` | RUNNING |
+| B | /home/user/ws-b · claude/ws-b-judgments | 68290bae | 13 unresolved curated cases; intern filter audit and proposed allow-list; holdings and treatment for calibration-sample cases; CC-09/CC-11; crosswalk improvements | RUNNING |
+| C | /home/user/ws-c · claude/ws-c-mml | a4c68cf2 | DOC/PDF fidelity register; image-check high-priority locators; procedure crosswalk (Act → Rule version → MML → KB); no substantive 658 audit | RUNNING |
+| D | /home/user/ws-d · claude/ws-d-quality | 1be2a2e1 | Reconcile WS-C/WS-D coverage metrics; v4 register proposal (new file); provenance controls; tests of check_registers semantics. **Coordinator approval granted:** optional additive relation type `manual_supported` (CC-13), never statutory authority | RUNNING |
+
+Controls: policy v1; originals read-only; no downloads, HF sync, merges or pushes by agents; shared files only with coordinator approval; consequential findings independently checked by the coordinator before integration; legal-advisor and JAG states unchanged.
