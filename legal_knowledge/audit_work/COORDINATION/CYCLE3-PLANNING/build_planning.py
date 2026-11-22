@@ -17,7 +17,7 @@ Output is byte-identical on re-run: rows are sorted, no timestamps, LF line endi
   python3 legal_knowledge/audit_work/COORDINATION/CYCLE3-PLANNING/build_planning.py
 """
 from __future__ import annotations
-import csv, io, json, re, sys
+import argparse, csv, io, json, re, sys
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -106,13 +106,24 @@ def norm_priority(v):
     return ""
 
 
-def write_csv(name, header, data):
+OUT = HERE
+COMMERCIAL_RX = re.compile(r"(?:https?://)?(?:www\.)?(?:indiankanoon\.org|casemine\.com|scconline\.com|manupatrafast\.com|"
+                           r"manupatra\.com)\S*", re.I)
+COMMERCIAL_WITHHELD = "[commercial legal database reference withheld; never a source]"
+
+
+def sanitize(v):
+    """No commercial legal database is ever shown as a host, holder or source in a planning output."""
+    return COMMERCIAL_RX.sub(COMMERCIAL_WITHHELD, v) if isinstance(v, str) else v
+
+
+def write_csv(name, header, data, clean=True):
     buf = io.StringIO()
     w = csv.writer(buf, lineterminator="\n")
     w.writerow(header)
     for r in data:
-        w.writerow([r.get(h, "") for h in header])
-    (HERE / name).write_text(buf.getvalue(), encoding="utf-8")
+        w.writerow([sanitize(r.get(h, "")) if clean else r.get(h, "") for h in header])
+    (OUT / name).write_text(buf.getvalue(), encoding="utf-8")
     return len(data)
 
 
@@ -596,7 +607,10 @@ def build_auth(acq):
         else:
             pr, basis = "P2", "default (no reserved or P1 contradiction names this file)"
         out.append(dict(
-            auth_id=f"AUTH-MML-{e['es_id']}", item_type="MML_EDITION", item=f,
+            auth_id=f"AUTH-MML-{e['es_id']}", item_type="MML_EDITION", item=f, case_key="n/a (manual edition)",
+            case53_id="n/a", official_copy="n/a (manual; see current_state)", mirror_copy="n/a",
+            http_availability="n/a (user-supplied file; no online source recorded)", identity_status="n/a",
+            identification_uncertainty="edition undated; see current_state", acquisition_request="NO_ACQUISITION_REQUEST",
             current_state=(f"edition_status={e['edition_status']}; authentication_evidence={e['authentication_evidence']}; "
                            f"document_authority={e['document_authority']}; carrier_provenance={e['carrier_provenance']}; "
                            f"copy_fidelity={e['copy_fidelity']} (all as recorded)"),
@@ -609,54 +623,109 @@ def build_auth(acq):
             linked_records=";".join(recs), contradictions=";".join(p["pc_id"] for p in pcf),
             priority=pr, priority_basis=basis,
             source_file_row=f"{cite(es_rel, e['es_id'], i)} | {PFX}{ev_rel}:file={f} | {PFX}{pc_rel}:" + (";".join(p["pc_id"] for p in pcf) or "none")))
-    # judgments
+    # judgments: seeded from EVERY WS-B register that can mark a judgment as needing an official copy, keyed by the
+    # stable WS-B identity spec_key (never a display name). Nothing is hard-coded: a regenerated register is picked up.
+    idr_rel = "WS-B-JUDGMENTS/identity_resolution.csv"
+    idr3_rel = "WS-B-JUDGMENTS/identity_resolution_cycle3.csv"
     acs_rel = "WS-B-JUDGMENTS/authoritative_copy_status_cycle3.csv"
-    idr_rel = "WS-B-JUDGMENTS/identity_resolution_cycle3.csv"
     hr_rel = "WS-B-JUDGMENTS/holdings_register_cycle3.csv"
-    pend = {r["spec_key"]: r for r in rows("WS-B-JUDGMENTS/pending_acquisition_cycle3.csv")}
-    older = {}
-    for r in rows("WS-B-JUDGMENTS/pending_source_queue.csv"):
-        for s in r["spec_key"].split(";"):
-            older.setdefault(s, []).append(r)
-    holdings = rows(hr_rel)
+    pq3_rel = "WS-B-JUDGMENTS/pending_acquisition_cycle3.csv"
+    pq_rel = "WS-B-JUDGMENTS/pending_source_queue.csv"
+    idr = {r["spec_key"]: (i, r) for i, r in enumerate(rows(idr_rel), 1)}
+    held = {k for k, (_, r) in idr.items() if "OFFICIAL_COPY_HELD" in r["identity_state"]}
     xw = {}
     for x in XW + LINKS:
         if x.get("kb_record_id"):
             xw.setdefault(x["spec_key"], set()).add(x["kb_record_id"])
     J = {}
-    for i, r in enumerate(rows(acs_rel), 1):
-        J.setdefault(r["spec_key"], {"case53": r["case53_id"], "label": r["case"], "state": [], "ev": [], "src": []})
-        d = J[r["spec_key"]]
-        d["state"].append(f"{r['state']}; official_copy_held={r['official_copy_held']}")
-        d["ev"].append(f"intern_mirror_sha256={r['intern_mirror_sha256'] or 'NOT_RECORDED'}"
-                       + (f"; official_url_located={r['official_url_located']}" if r["official_url_located"] else ""))
-        d["src"].append(cite(acs_rel, r["spec_key"], i))
-    for i, r in enumerate(rows(idr_rel), 1):
-        d = J.setdefault(r["spec_key"], {"case53": r["case53_id"], "label": r["spec_key"], "state": [], "ev": [], "src": []})
-        d["state"].append(f"identity cycle3_state={r['cycle3_state']}; evidence_strength={r['evidence_strength']}; "
-                          f"next_action={r['next_action']}")
-        d["src"].append(cite(idr_rel, r["spec_key"], i))
-    for i, h in enumerate(holdings, 1):
-        if h["copy_role"] == "OFFICIAL_COURT_COPY":
+
+    def entry(spec):
+        return J.setdefault(spec, {"case53": set(), "label": "", "src": [], "official": [], "mirror": [], "http": [],
+                                   "identity": [], "uncert": [], "queues": {}, "notes": [], "ev": []})
+
+    def needs(spec):
+        return bool(spec) and spec not in held
+
+    for k, (i, r) in idr.items():
+        if not needs(k):
             continue
-        d = J.setdefault(h["spec_key"], {"case53": h["case53_id"], "label": h["judgment"], "state": [], "ev": [], "src": []})
+        d = entry(k)
+        d["case53"].add(r["case53_id"])
+        d["label"] = r["ws_b_label"] or r["curated_title"] or k
+        d["identity"].append(f"{r['identity_state']} (identity_resolution.csv)")
+        d["official"].append("NO (no WS-B-held court copy; identity_resolution.csv held_copy_url blank)"
+                             if not r["held_copy_url"] else f"held_copy_url={r['held_copy_url']} "
+                             f"carrier={r['held_copy_carrier_provenance'] or 'NOT_RECORDED'} (identity_resolution.csv)")
+        if r["intern_sha256"]:
+            d["mirror"].append(f"intern copy sha256={r['intern_sha256']} (identity_resolution.csv)")
+        for col in ("discrepancies", "note"):
+            if r[col].strip():
+                d["uncert"].append(f"{col}: {r[col].strip()[:300]}")
+        d["src"].append(cite(idr_rel, k, i))
+    for i, r in enumerate(rows(idr3_rel), 1):
+        if not needs(r["spec_key"]) or "OFFICIAL_COPY_HELD" in r["cycle3_state"]:
+            continue
+        d = entry(r["spec_key"])
+        d["case53"].add(r["case53_id"])
+        d["label"] = d["label"] or r["spec_key"]
+        d["identity"].append(f"cycle3: {r['cycle3_state']} (identity_resolution_cycle3.csv)")
+        d["uncert"].append(f"cycle3 evidence_strength: {r['evidence_strength']}; next_action: {r['next_action']}")
+        d["src"].append(cite(idr3_rel, r["spec_key"], i))
+    for i, r in enumerate(rows(acs_rel), 1):
+        if not needs(r["spec_key"]) or not r["official_copy_held"].upper().startswith("NO"):
+            continue
+        d = entry(r["spec_key"])
+        d["case53"].add(r["case53_id"])
+        d["label"] = d["label"] or r["case"]
+        d["official"].append(f"{r['official_copy_held']} (authoritative_copy_status_cycle3.csv; state {r['state']})")
+        if r["intern_mirror_sha256"]:
+            d["mirror"].append(f"intern mirror sha256={r['intern_mirror_sha256']} (authoritative_copy_status_cycle3.csv)")
+        if r["official_url_located"] or r["read_only_lookup_result"]:
+            d["http"].append(f"url={r['official_url_located'] or 'none located'}; lookup={r['read_only_lookup_result'] or 'none'}"
+                             " (authoritative_copy_status_cycle3.csv)")
+        d["src"].append(cite(acs_rel, r["spec_key"], i))
+    for i, h in enumerate(rows(hr_rel), 1):
+        if not needs(h["spec_key"]) or h["copy_role"] == "OFFICIAL_COURT_COPY":
+            continue
+        d = entry(h["spec_key"])
+        d["case53"].add(h["case53_id"])
+        d["label"] = d["label"] or h["judgment"]
         if h["copy_role"] == "NOT_HELD":
-            d["state"].append(f"holdings {h['row_id']}: NOT_HELD ({h['technical_review_state']})")
+            d["official"].append(f"NOT_HELD (holdings {h['row_id']}: {h['technical_review_state']})")
         else:
-            d["ev"].append(f"holdings {h['row_id']} copy_role={h['copy_role']} copy_sha256={h['copy_sha256'] or 'NOT_RECORDED'}"
-                           f" page_render_sha256={h['page_render_sha256'] or 'NOT_RECORDED'}")
+            d["mirror"].append(f"holdings {h['row_id']} copy_role={h['copy_role']} copy_sha256={h['copy_sha256'] or 'NOT_RECORDED'}")
+            d["ev"].append(f"holdings {h['row_id']} page_render_sha256={h['page_render_sha256'] or 'NOT_RECORDED'}"
+                           f" pinpoint={h['para_pinpoint'] or 'NOT_RECORDED'}")
         d["src"].append(cite(hr_rel, h["row_id"], i))
+    for rel_, has_check in ((pq3_rel, True), (pq_rel, False)):
+        for i, r in enumerate(rows(rel_), 1):
+            ks = [k for k in r["spec_key"].split(";") if k]
+            ps = r["priority"].split("/")
+            for k in ks:
+                if not needs(k):
+                    continue
+                d = entry(k)
+                for c in (r.get("case53_id") or "").split(";"):
+                    if c and (len(ks) == 1 or c in {x for x in d["case53"]}):
+                        d["case53"].add(c)
+                d["label"] = d["label"] or k
+                pk = ps[ks.index(k)] if len(ks) == len(ps) and len(ps) > 1 else r["priority"]
+                d["queues"][r["queue_id"]] = pk
+                if has_check and r.get("official_url_http_check"):
+                    d["http"].append(f"{r['official_url_http_check']} (pending_acquisition_cycle3.csv {r['queue_id']})")
+                if r["note"].strip():
+                    d["notes"].append(f"{r['queue_id']}: {r['note'].strip()[:200]}")
+                d["src"].append(cite(rel_, r["queue_id"], i))
     for spec, d in sorted(J.items()):
-        q = pend.get(spec)
-        qids = [q["queue_id"]] if q else []
-        qids += [o["queue_id"] for o in older.get(spec, [])]
-        rec_p = [norm_priority(q["priority"])] if q else []
-        for o in older.get(spec, []):
-            ks, ps = o["spec_key"].split(";"), o["priority"].split("/")
-            rec_p.append(norm_priority(ps[ks.index(spec)] if len(ks) == len(ps) and len(ps) > 1 else o["priority"]))
+        c53 = sorted(c for c in d["case53"] if c)
+        if len(c53) > 1:
+            finding(f"CF-WSB-ID-{spec}", "CASE53_ID_DIFFERS_ACROSS_REGISTERS", f"{spec}: {';'.join(c53)}",
+                    f"{PFX}{idr_rel}; {PFX}{pq3_rel}; {PFX}{pq_rel}")
+        qids = sorted(d["queues"])
+        rec_p = [norm_priority(v) for _, v in sorted(d["queues"].items())]
         recs = sorted(xw.get(spec, set()))
         cal = sorted(set(recs) & CAL)
-        mirror = any("copy_role=INTERN_MIRROR" in e for e in d["ev"])
+        mirror = bool(d["mirror"])
         if "P0" in rec_p:
             pr, basis = "P0", "recorded WS-B priority P0"
         elif cal:
@@ -664,21 +733,28 @@ def build_auth(acq):
         elif "P1" in rec_p:
             pr, basis = "P1", "recorded WS-B priority P1"
         elif mirror:
-            pr, basis = "P1", "holdings pinpoints currently read from a mirror copy"
+            pr, basis = "P1", "only a mirror copy is recorded"
         else:
             pr, basis = "P2", "default"
-        note = (q["note"] if q else "")
+        uniq = lambda xs: list(dict.fromkeys(xs))
         out.append(dict(
-            auth_id=f"AUTH-J-{spec}", item_type="JUDGMENT_OFFICIAL_COPY", item=f"{d['label']} ({d['case53'] or 'no case53_id'})",
-            current_state=" | ".join(d["state"]) or "NOT_RECORDED",
-            evidence_held=" | ".join(d["ev"]) or "none recorded",
+            auth_id=f"AUTH-J-{spec}", item_type="JUDGMENT_OFFICIAL_COPY", case_key=spec, case53_id=";".join(c53) or "NOT_RECORDED",
+            item=f"{d['label']} ({';'.join(c53) or 'no case53_id'})",
+            current_state="NEEDS_OFFICIAL_COPY_AUTHENTICATION (dimensions in separate columns)",
+            official_copy=" | ".join(uniq(d["official"])) or "NOT_RECORDED",
+            mirror_copy=" | ".join(uniq(d["mirror"])) or "NONE_RECORDED",
+            http_availability=" | ".join(uniq(d["http"])) or "NOT_CHECKED (no HTTP check recorded)",
+            identity_status=" | ".join(uniq(d["identity"])) or "NOT_RECORDED",
+            identification_uncertainty=" | ".join(uniq(d["uncert"])) or "NONE_RECORDED",
+            evidence_held=" | ".join(uniq(d["ev"])) or "see official_copy / mirror_copy",
             authentication_requires=("Official court copy from the issuing court's own host, fetched only after owner approval; "
                                      "SHA-256 recorded at fetch; cover-page identity (parties, case number, date, bench) "
-                                     "checked on the page image; mirror-based pinpoints re-read from the official copy"
-                                     + (f". WS-B note: {note}" if note else "")),
-            who_or_acquisition=(";".join(qids) if qids else "NO_ACQUISITION_REQUEST_RECORDED") + " (owner approval required)",
+                                     "checked on the page image; any mirror-based pinpoints re-read from the official copy"
+                                     + (". WS-B notes: " + " ; ".join(uniq(d["notes"])) if d["notes"] else "")),
+            acquisition_request=";".join(qids) if qids else "NO_ACQUISITION_REQUEST",
+            who_or_acquisition="Owner approval required for any fetch; acquisition per acquisition_request column",
             linked_records=";".join(recs), contradictions="", priority=pr, priority_basis=basis,
-            source_file_row=" | ".join(d["src"])))
+            source_file_row=" | ".join(uniq(d["src"]))))
     out.sort(key=lambda x: (PRANK[x["priority"]], x["item_type"] != "MML_EDITION", x["auth_id"]))
     return out
 
@@ -725,7 +801,11 @@ def consistency_checks():
                 f"{PFX}ACQ-01/batches.json; {PFX}ACQ-02/supplement_inventory.csv")
 
 
-def main():
+def main(argv=None):
+    global OUT
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", type=Path, default=HERE, help="output directory (default: this folder)")
+    OUT = ap.parse_args(argv).out
     mism, s129_ok = verify_c3_01()
     if mism or not s129_ok:
         finding("CF-C3-01", "ACQ_C3_01_VALUE_MISMATCH", f"mismatch={mism}; s129_trace_agrees={s129_ok}",
@@ -745,8 +825,10 @@ def main():
                     "n_cases", "n_reserved", "unblocked_by_acq_ids", "score", "score_components", "breadth_tiebreak",
                     "source_file_rows"], aff)
     n3 = write_csv("source_authentication_queue.csv",
-                   ["auth_id", "item_type", "item", "current_state", "evidence_held", "authentication_requires",
-                    "who_or_acquisition", "linked_records", "contradictions", "priority", "priority_basis", "source_file_row"],
+                   ["auth_id", "item_type", "case_key", "case53_id", "item", "current_state", "official_copy", "mirror_copy",
+                    "http_availability", "identity_status", "identification_uncertainty", "evidence_held",
+                    "authentication_requires", "acquisition_request", "who_or_acquisition", "linked_records",
+                    "contradictions", "priority", "priority_basis", "source_file_row"],
                    auth)
     FINDINGS.append({"finding_id": "CF-C3-01-VERIFY", "kind": "VERIFICATION_RESULT",
                      "detail": ("ACQ-C3-01 identifier/bytes/md5 equal the brief values "
@@ -770,7 +852,7 @@ def main():
                "auth_judgments": sum(1 for x in auth if x["item_type"] != "MML_EDITION"),
                "auth_by_priority": {p: sum(1 for x in auth if x["priority"] == p) for p in ("P0", "P1", "P2")},
                "consistency_findings": n4, "acq_c3_01_mismatch": mism, "top10": [x["record_id"] for x in aff[:10]]}
-    (HERE / "planning_summary.json").write_text(json.dumps(summary, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+    (OUT / "planning_summary.json").write_text(json.dumps(summary, indent=1, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(summary, sort_keys=True))
     return 0
 

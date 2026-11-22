@@ -21,13 +21,13 @@
  "affected_with_cases": 78,
  "affected_with_reserved": 36,
  "auth_by_priority": {
-  "P0": 11,
-  "P1": 14,
-  "P2": 18
+  "P0": 16,
+  "P1": 35,
+  "P2": 12
  },
- "auth_judgments": 35,
+ "auth_judgments": 55,
  "auth_mml": 8,
- "authentication_queue": 43,
+ "authentication_queue": 63,
  "consistency_findings": 6,
  "top10": [
   "KB-030",
