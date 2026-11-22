@@ -29,7 +29,8 @@
         "JUDGMENT",
         "ORDER",
         "OTHER_PRIMARY",
-        "SECONDARY"
+        "SECONDARY",
+        "MANUAL"
       ]
     },
     "title": {
@@ -96,7 +97,9 @@
         "OFFICIAL_COMPILATION",
         "OFFICIAL_COURT_ARCHIVE",
         "SECONDARY",
-        "UNCONFIRMED"
+        "UNCONFIRMED",
+        "USER_SUPPLIED_REFERENCE",
+        "MANUAL_EDITION_CORROBORATED"
       ]
     },
     "caveat": {
