@@ -7,11 +7,15 @@ Baseline: 658 KB (9a8f0d19...), 53 cases (8b8d53cd...), 87 codes (72 firm, 75 in
 - D1 `hash_reproduction.json` + `scripts/hash_reproduction.py`: KB/cases files match; PILOT-01 43/43 and R23-VERIFY-01 2/2 per-record manifest hashes reproduce; MML manifest hash matches; 8/8 MML originals (scratchpad bytes) and transport ZIP match the receipt.
 - D2 `tests/test_legal_audit_citation_register.py` (8 tests): exact 87-code register completeness and class counts; pins defect D-WSD-001 (stale usage counts in 8 rows).
 
+- D3 `citation_resolution_score.json/.md` + script: code 72/87 confirmed, 3/87 inferred, 12/87 unresolved; links 594/681 confirmed; records 319/389 all-confirmed (319/658 overall).
+- D4 `plaintext_citation_index.csv` + `scripts/build_plaintext_index.py`: 269/269 uncoded records, 403 segments, exact code-point offsets (references + body), deterministic; 11 UNANCHORED_LOCATOR segments (ADM-JD-01/03/04/05, V7-T01..T07).
+- `tests/test_legal_audit_wsd_artifacts.py` (7 tests): regeneration equality, offsets, no-inflation.
+
 ## In progress
-- D3 confirmed vs inferred score.
+- D5 validator/schema rules.
 
 ## Next
-- D4 plain-text citation index; D5 validator/schema rules; D6 relation graph; D7 coverage scorecard; D8 reviewer/CI report; CI steps.
+- D5 validator/schema rules; D6 relation graph; D7 coverage scorecard; D8 reviewer/CI report; CI steps.
 
 ## Blockers
 - None.

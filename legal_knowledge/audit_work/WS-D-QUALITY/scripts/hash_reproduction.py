@@ -73,7 +73,7 @@ def main(argv=None):
         res["files"].append({"path": str(p.relative_to(ROOT)), "records": n, "expected_sha256": FROZEN[p.name],
                              "actual_sha256": got, "match": ok})
         ok or fails.append(f"{p.name} sha mismatch")
-    mml_rows = list(csv.DictReader(MML_MANIFEST.open(encoding="utf-8", newline="")))
+    mml_rows = list(csv.DictReader(io.StringIO(MML_MANIFEST.read_text(encoding="utf-8"))))
     mml_sha = sha(MML_MANIFEST.read_bytes())
     for b in BATCHES:
         man = json.loads((AW / b / "pilot-manifest.json").read_text(encoding="utf-8"))
