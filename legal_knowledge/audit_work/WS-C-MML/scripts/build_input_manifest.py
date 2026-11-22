@@ -50,6 +50,8 @@ def main():
         ("legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/official_note_discrepancies.csv", "ar_chain_note_discrepancies"),
         ("legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/statutory_version_register_seed.csv", "ar_chain_version_seed"),
         ("legal_knowledge/audit_work/SOURCE-CONFLICTS-01/conflict_determinations.csv", "conflicts"),
+        ("legal_knowledge/audit_work/WS-A-STATUTORY/provision_change_log.csv", "wsa_provision_change_log_in_tree (input to build_procedure_crosswalk.py from reconciliation onward)"),
+        ("legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/page_image_checks_chain.csv", "ar_chain_page_image_checks (PIC-39 cited by PG-02/PC-16)"),
         ("docs/legal-audit/SOURCE_AUTHORITY_POLICY.md", "policy_v1"),
         ("docs/legal-audit/EVIDENCE_STANDARD.md", "evidence_standard"),
         ("legal_knowledge/audit_work/COORDINATION/WORKSTREAM_CHARTERS.md", "charters"),
