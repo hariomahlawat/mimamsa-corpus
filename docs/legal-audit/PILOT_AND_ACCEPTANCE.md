@@ -25,6 +25,9 @@ Overlap subject tags where necessary, never double-count IDs. Include breadth ac
 ## Required artefacts
 `inventory.json`, `pilot-selection.json` (25 real IDs + seed/rationale), source evidence registry, `findings/*.json`, `reviews/*.json`, independent challenge report, advisor decisions, structural validation results, source access blockers, scorecard and signed/not-signed release decision. Version and hash all artifacts.
 
+## Future-batch evidence policy
+All new batches must set `source_authority_policy_version: v1` in their manifest, use separate `document_authority`, `carrier_provenance`, `copy_fidelity` and `amendment_chain_status` fields for every registered source, and pass strict validation. Historic PILOT-01 rows and manifests are frozen, not backfilled. Legal correctness and the operative amendment chain still require substantive verification and legal review.
+
 ## Release stopping criteria
 **NO-GO** if any invented or non-existent source survives checking, any critical legal error would enter candidate guidance, unresolved P0 statutory/judicial conflict remains represented as resolved, source pinpoint traceability fails, schema/reference checks fail, or originals changed. Percentage thresholds for the remaining metrics must be fixed before scoring rather than chosen after seeing results.
 
