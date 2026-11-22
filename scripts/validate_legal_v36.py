@@ -62,7 +62,7 @@ def main():
         if not path.startswith(ROOT+"/case_dossiers/") or not path.endswith(".md"):
             continue
         t=dl(path).read_text(encoding="utf-8")
-        if "BLOCKED_JAG_PENDING" not in t or "independent JAG" not in t.lower():
+        if "BLOCKED_JAG_PENDING" not in t or "independent jag" not in t.lower():
             raise RuntimeError("Dossier missing release or reviewer warning "+path)
         m=re.search(r"\*\*Curated ID:\*\* \`([^\`]+)\`",t)
         if not m:
