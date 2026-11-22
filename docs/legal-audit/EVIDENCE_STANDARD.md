@@ -2,6 +2,9 @@
 
 **We classify data by evidentiary and review quality, not by whether a human or AI created it.** The same checks apply to all contributions.
 
+## Mandatory source-authority policy
+Read and apply `docs/legal-audit/SOURCE_AUTHORITY_POLICY.md` to every new source and all conflicting legal assertions. **Priority is determined by the authority of the underlying instrument, not by the host domain.** An actual Government Gazette facsimile held on a third-party archive is a copy of primary legal material, not third-party commentary. Record its identity, original publication, image fidelity, copy provenance, amendments and reviewer checks separately. Authentic government-issued manuals are privileged practical references compared with third-party commentary, but not enacted law. Relevant binding judgments, later amendments, and date/jurisdiction controls remain decisive. **Do not classify a source as legally verified or current merely because a government or archival domain hosts it.**
+
 ## Foundational MML manuals
 The eight user-provided Manual of Military Law DOC/PDF originals are a mandatory first-pass **practical military reference** collection. Check all eight private HF files against their receipt/manifest, version/edition, legal date, paragraph/page concordance, text extraction and access markings. Identify exact manual-to-statute/KB/judgment references and review whether the manual is out of date. A manual is not binding law merely because unit commanders use it. A manual passage alone cannot establish current statutory correctness; use original statute/Rules/Gazette or controlling judgment as required. Preserve versions and note disputed Rule 23(3) source text rather than correcting it automatically.
 
@@ -14,7 +17,7 @@ The eight user-provided Manual of Military Law DOC/PDF originals are a mandatory
 6. Case treatment is *proposition-level*: overruled in part, limited, followed and distinguished must point to explicit later authority and relevant passage; absence of found treatment is NOT proof of no treatment.
 
 ## Explicit blockers
-- Army Rules 1954 Rule 23(3): disputed negation between government-hosted compilations and manual extracts; obtain authoritative original S.R.O. 484 of 27 Nov 1954 and necessary amendments before resolving. No autonomous correction.
+- Army Rules 1954 Rule 23(3): an uncertified archival facsimile of the 27 Nov 1954 S.R.O. 484 Gazette has now been located (printed p.300 reportedly says 'not obliged'), corroborating MML but conflicting with India Code's transcription. Classify as a Gazette facsimile with separate carrier provenance; complete the later Rule 23 amendment chain, independent page-image review and legal-advisor decision before resolving. No autonomous correction.
 - Curated original notes and cases (658 + 53) remain research/unapproved.
 - Evidence for any source/case crosswalk based on fuzzy title/year is *lead only*, never verified document identity.
 - Unavailable official sources, conflicting texts, incomplete chain of amendments, unclear licensing/access marking, missing page locator or adverse precedents -> unresolved, escalate.
