@@ -32,12 +32,14 @@ def queued(conn) -> dict:
 def main() -> int:
     conn = sqlite3.connect(ROOT / "state" / "crawl.sqlite", timeout=60)
     if not SAVED.exists():
-        shutil.copy2(LOG, SAVED)
         entries = [json.loads(l) for l in LOG.read_text(encoding="utf-8").splitlines() if l.strip()]
-        for e in entries:
-            conn.execute("DELETE FROM files WHERE sha256=?", (e["sha256"],))
-            conn.execute("UPDATE urls SET status='queued', etag=NULL, last_modified=NULL, attempts=0, "
-                         "next_attempt_at=NULL WHERE sha256=? OR url=?", (e["sha256"], e["source_url"]))
+        conn.execute("CREATE TEMP TABLE again (sha256 TEXT PRIMARY KEY, url TEXT)")     # one pass, not one scan per file
+        conn.executemany("INSERT OR IGNORE INTO again VALUES (?, ?)", [(e["sha256"], e["source_url"]) for e in entries])
+        conn.execute("CREATE INDEX temp.again_url ON again (url)")
+        conn.execute("DELETE FROM files WHERE sha256 IN (SELECT sha256 FROM again)")
+        conn.execute("UPDATE urls SET status='queued', etag=NULL, last_modified=NULL, attempts=0, next_attempt_at=NULL "
+                     "WHERE kind='document' AND (sha256 IN (SELECT sha256 FROM again) OR url IN (SELECT url FROM again))")
+        shutil.copy2(LOG, SAVED)                         # saved only once the queue is ready to be committed
         conn.commit()
         LOG.write_text("", encoding="utf-8")
         say(f"recheck: {len(entries)} removed judgments queued again")
