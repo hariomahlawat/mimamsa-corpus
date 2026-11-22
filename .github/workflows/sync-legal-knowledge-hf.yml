@@ -9,6 +9,7 @@ on:
       - "scripts/push_legal_knowledge.py"
       - "scripts/reconcile_legal_sources.py"
       - "scripts/audit_53_case_metadata_v30.py"
+      - "scripts/reconcile_p0_case_sources_v31.py"
       - "scripts/archive_supreme_court_pilot.py"
       - "scripts/verify_sc_source_matches_v29.py"
       - "scripts/push_mml_originals.py"
@@ -57,6 +58,8 @@ jobs:
       - name: Attempt official Supreme Court PDF pilot archive with readback
         continue-on-error: true
         run: python scripts/archive_supreme_court_pilot.py
+      - name: Reconcile all 11 P0 curated cases against immutable corpus PDFs
+        run: python scripts/reconcile_p0_case_sources_v31.py
       - name: Verify existing original corpus PDFs for Bedi and Ranjit Thakur with SHA-256
         run: python scripts/verify_sc_source_matches_v29.py
       - name: Verify checksum and reconstruct original MML archive
