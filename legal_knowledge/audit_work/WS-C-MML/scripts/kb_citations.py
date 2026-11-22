@@ -19,7 +19,7 @@ NUM = r"\d{1,3}[A-Z]?(?:\s*\(\s*[0-9a-zA-Z]{1,5}\s*\))*"
 SEC = re.compile(rf"(?:§§?|(?<![-\w])[sS]{{1,2}}(?:\b|(?=\d))\.?|\bsections?\b|\bSection\b)\s*({NUM}(?:\s*(?:,|and|&|–|-|to)\s*(?:s\s*)?{NUM})*)", re.I)
 RUL = re.compile(rf"(?:(?<![-\w])RR(?:\b|(?=\d))|(?<![-\w])rr?(?:\b|(?=\d))\.?|\brules?\b|\bRule\b|\bRules\b)\s*({NUM}(?:\s*(?:,|and|&|–|-|to)\s*(?:r\s*)?{NUM})*)")
 CASE = re.compile(r"(\bv\.?\s+[A-Z]|\bvs\.?\s+[A-Z]|\bINSC\b|\bSCC\b|\bAIR\s+\d{4}|\bSCR\b|\bUOI\b|\bUnion of India\b|"
-                  r"\b(?:OA|MA|CA|WP|TA|Crl\.?A|SLP)\s*(?:No\.?\s*)?\d+\s*/\s*\d{4}|\bjudgment\b|\bparas?\s+\d)", re.I)
+                  r"\b(?:OA|MA|CA|WP|TA|Crl\.?A|SLP)\s*(?:No\.?\s*)?\d+\s*/\s*\d{4}|\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\s+\((?:19|20)\d\d\))")
 STAT_OTHER = re.compile(r"\b(BSA|BNSS|BNS|IPC|CrPC|Evidence Act|AFT Act|AFT \(Procedure\) Rules|Procedure Rules|Practice Rules|"
                         r"Constitution|Art\.?\s*\d+|Article\s*\d+|POCSO|Pension Regulations|Regulations for the Army|Regs Army|"
                         r"Air Force Act|Navy Act|Territorial Army Act|Entitlement Rules|GMO|ISO Act)\b", re.I)

@@ -6,7 +6,7 @@
 - Commit 1: `input_manifest.json` (8/8 originals re-hashed = manifest), `mml_edition_status.csv` (8 files), `page_image_checks_wsc.csv` (WSC-PIC-01..13, incl. coordinator task MML 2 p.227 r.193/r.194), `provision_index.csv`, `mml1_para_index.csv`, `mml_provision_crosswalk.csv` (847 rows), `open_questions.csv`, scripts.
 
 ## In progress / next
-- `kb658_source_coverage_inventory.csv` + deterministic script + summary
+- DONE commit 2: `kb658_source_coverage_inventory.csv` (658/658 rows) + `scripts/build_kb658_inventory.py` (stdlib, deterministic, re-run byte-identical) + `kb658_coverage_summary.json`. FULL 379, PARTIAL 131, SOURCE_GAP 56, UNRESOLVED 14, NO_CITATION 78 (denominator 658). Source-coverage only; no correctness verdicts.
 - `procedure_gap_conflict_register.csv`, `candidate_corrections.csv`
 - `calibration_sample_ranked.csv`
 
