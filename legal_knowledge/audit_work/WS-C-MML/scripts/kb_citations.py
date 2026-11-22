@@ -15,10 +15,13 @@ OTHER_HINT = re.compile(r"\b(BSA|BNSS|BNS|IPC|CrPC|Cr\.?P\.?C|IEA|Evidence Act|A
                         r"V9-S0[14-8]|V6-S\d+|SRC-AFT|SRC-ISO|SRC-ISOR|SRC-RA|SRC-AO|AO\b|Army Orders?|para)", re.I)
 AA_HINT = re.compile(r"(\bAA\b|Army Act|SRC-AA\b|V8-S01\b|V9-S02\b)")
 AR_HINT = re.compile(r"(\bAR\b|Army Rules?|SRC-AR\d*\b|V8-S02\b|V9-S03\b|\bAR_ALT\b)")
-NUM = r"\d{1,3}[A-Z]?(?:\s*\(\s*[0-9a-zA-Z]{1,5}\s*\))*"
-SEC = re.compile(rf"(?:§§?|(?<![-\w])[sS]{{1,2}}(?:\b|(?=\d))\.?|\bsections?\b|\bSection\b)\s*({NUM}(?:\s*(?:,|and|&|–|-|to)\s*(?:s\s*)?{NUM})*)", re.I)
-RUL = re.compile(rf"(?:(?<![-\w])RR(?:\b|(?=\d))|(?<![-\w])rr?(?:\b|(?=\d))\.?|\brules?\b|\bRule\b|\bRules\b)\s*({NUM}(?:\s*(?:,|and|&|–|-|to)\s*(?:r\s*)?{NUM})*)")
-CASE = re.compile(r"(\bv\.?\s+[A-Z]|\bvs\.?\s+[A-Z]|\bINSC\b|\bSCC\b|\bAIR\s+\d{4}|\bSCR\b|\bUOI\b|\bUnion of India\b|"
+NUM = r"\d{1,3}(?:-?[A-Z](?![a-z]))?(?:\s*\(\s*[0-9a-zA-Z]{1,5}\s*\))*"
+PAREN = r"\(\s*[0-9a-zA-Z]{1,5}\s*\)"
+QUAL = r"(?:\s+(?:proviso|provisos|note|notes|explanation|exception|onwards|as applicable|et seq))?"
+ITEM = rf"(?:{NUM}{QUAL}|{PAREN})"
+SEC = re.compile(rf"(?:§§?|(?<![-\w])[sS]{{1,2}}(?:\b|(?=\d))\.?|\bsections?\b|\bSection\b)\s*({NUM}{QUAL}(?:\s*(?:,|and|&|–|-|to)\s*(?:s\s*)?{ITEM})*)", re.I)
+RUL = re.compile(rf"(?:(?<![-\w])RR(?:\b|(?=\d))|(?<![-\w])rr?(?:\b|(?=\d))\.?|\brules?\b|\bRule\b|\bRules\b)\s*({NUM}{QUAL}(?:\s*(?:,|and|&|–|-|to)\s*(?:r\s*)?{ITEM})*)")
+CASE = re.compile(r"(¶|\bv\.?\s+[A-Z]|\bvs\.?\s+[A-Z]|\bINSC\b|\bSCC\b|\bAIR\s+\d{4}|\bSCR\b|\bUOI\b|\bUnion of India\b|"
                   r"\b(?:OA|MA|CA|WP|TA|Crl\.?A|SLP)\s*(?:No\.?\s*)?\d+\s*/\s*\d{4}|\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\s+\((?:19|20)\d\d\))")
 STAT_OTHER = re.compile(r"\b(BSA|BNSS|BNS|IPC|CrPC|Evidence Act|AFT Act|AFT \(Procedure\) Rules|Procedure Rules|Practice Rules|"
                         r"Constitution|Art\.?\s*\d+|Article\s*\d+|POCSO|Pension Regulations|Regulations for the Army|Regs Army|"
@@ -26,6 +29,27 @@ STAT_OTHER = re.compile(r"\b(BSA|BNSS|BNS|IPC|CrPC|Evidence Act|AFT Act|AFT \(Pr
 PLACEHOLDER = re.compile(r"(\[VERIFY\]|\bverify\b|\bTBD\b|\bexact rule verify\b)", re.I)
 NONCIT = re.compile(r"^(EDITORIAL( DESIGN)?|Research procedural checklist|See linked module provisions|Source-based original format|"
                     r"Original form only.*|Workflow [A-Z0-9-]+)$", re.I)
+
+
+_LEX = None
+
+
+def lexicon():
+    """case_name_lexicon.csv (short-title keys from cases_53 and WS-B identity_resolution)."""
+    global _LEX
+    if _LEX is None:
+        import csv
+        from pathlib import Path
+        p = Path(__file__).resolve().parent.parent / "case_name_lexicon.csv"
+        _LEX = []
+        if p.exists():
+            for r in csv.DictReader(open(p, encoding="utf-8")):
+                _LEX.append((re.compile(r"(?<![A-Za-z])" + re.escape(r["key"]).replace("\\ ", r"\s+") + r"(?![a-z])"), r))
+    return _LEX
+
+
+def case_names(ref):
+    return [(r["key"], r["case53_id"] or r["spec_key"], r["kb_source_codes"]) for rx, r in lexicon() if rx.search(ref)]
 
 
 def codes_v3(r):
@@ -47,14 +71,21 @@ def codes_v3(r):
 
 
 def _expand(lst):
+    """Expand a list such as '23(1),(3),24', '15-A', '167–169A', '177-182, 22(1) proviso, 23'."""
     out = []
+    lst = re.sub(r"\b(proviso|provisos|note|notes|explanation|exception|onwards|as applicable|et seq)\b", " ", lst)
+    lst = re.sub(r"(\d)-([A-Z])(?![a-z])", r"\1\2", lst)          # 15-A -> 15A
     for t in re.split(r"\s*(?:,|and|&)\s*", lst):
         t = re.sub(r"^[sr]\s*", "", t.strip())
-        if not t:
-            continue
-        m = re.match(r"(\d{1,3})([A-Z]?)(?:\s*\(.*?\))*\s*(?:–|-|to)\s*(\d{1,3})", t)
+        if not t or t.startswith("("):
+            continue                                            # bare sub-clause continuation, e.g. ',(3)'
+        m = re.match(r"(\d{1,3})([A-Z]?)(?:\s*\(.*?\))*\s*(?:–|-|to)\s*(\d{1,3})([A-Z]?)", t)
         if m and 0 < int(m.group(3)) - int(m.group(1)) <= 40:
             out += [str(i) for i in range(int(m.group(1)), int(m.group(3)) + 1)]
+            if m.group(2):
+                out.append(m.group(1) + m.group(2))
+            if m.group(4):
+                out.append(m.group(3) + m.group(4))
             continue
         m = re.match(r"(\d{1,3}[A-Z]?)", t)
         if m:
@@ -115,7 +146,7 @@ def parse(r, known_ids=()):
     return {"codes": codes, "placeholders": ph + (["verify-text"] if re.search(r"\bverify\b", ref, re.I) and "VERIFY" not in ph else []),
             "aa": aa, "ar": ar, "other_numbered": other_num,
             "stat_other": sorted({m.group(1).strip() for m in STAT_OTHER.finditer(ref)}),
-            "case_pattern": bool(CASE.search(ref)), "internal_links": internal,
+            "case_pattern": bool(CASE.search(ref)) or bool(case_names(ref)), "case_names": case_names(ref), "internal_links": internal,
             "noncitation_text": bool(NONCIT.match(ref.strip())), "mml_mention": bool(re.search(r"\bMML\b|Manual of Military Law", ref + " " + str(r.get("body", "")), re.I)),
             "mml_in_refs": bool(re.search(r"\bMML\b|Manual of Military Law", ref, re.I))}
 

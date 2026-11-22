@@ -25,7 +25,7 @@ Fixed determinations are unchanged: r.23(3) CONFLICTING; r.193 = C-08 OPEN; r.19
 | `page_image_checks_wsc.csv` | 28 | WSC-PIC-01..28 with render SHA-256. 24 are renders of original PDF pages (20 from MML 2.pdf). 4 are LibreOffice renders of native DOC text, because a DOC has no page image |
 | `provision_index.csv` | 410 | Locator of each Army Act section / Army Rule in MML 2.pdf, vol 2(AA) PDF/DOC and both vol 2(AR) DOCs, plus the doc-1 embedded printed page (`scripts/build_provision_index.py`) |
 | `mml1_para_index.csv` | 352 | MML 1 Part I chapter/para → provisions cited (`scripts/build_mml1_para_index.py`) |
-| `mml_provision_crosswalk.csv` | 847 | MML locator → provision (with ARMY-RULES-CHAIN-01 events: publication date, commencement as printed, effective date `NOT_DETERMINED`) → KB record IDs. The 78 PILOT-01 record/file/provision triples are excluded (`scripts/build_crosswalk.py`) |
+| `mml_provision_crosswalk.csv` | 858 | MML locator → provision (with ARMY-RULES-CHAIN-01 events: publication date, commencement as printed, effective date `NOT_DETERMINED`) → KB record IDs. The 78 PILOT-01 record/file/provision triples are excluded (`scripts/build_crosswalk.py`) |
 | `procedure_gap_conflict_register.csv` | 17 | Procedural gaps, conflicts and obsolete guidance |
 | `candidate_corrections.csv` | 14 | Proposals only; none applied |
 | `kb658_source_coverage_inventory.csv` | 658 | Read-only source-coverage inventory (`scripts/build_kb658_inventory.py`; stdlib; re-runs byte-identical) |
@@ -59,11 +59,11 @@ Fixed determinations are unchanged: r.23(3) CONFLICTING; r.193 = C-08 OPEN; r.19
 
 | State | Meaning | Records |
 | --- | --- | ---: |
-| FULL | Every parsed citation resolves to a corpus-held source; a pinpoint exists; no unresolved or gap items | 379 |
-| PARTIAL | At least one corpus-held anchor, plus a gap, an unresolved item, co-citation only, or a missing pinpoint | 131 |
+| FULL | Every parsed citation resolves to a corpus-held source; a pinpoint exists; no unresolved or gap items, including no uncoded case name | 370 |
+| PARTIAL | At least one corpus-held anchor, plus a gap, an unresolved item, co-citation only, or a missing pinpoint | 140 |
 | SOURCE_GAP | Sources identified, but none held in the corpus | 56 |
-| UNRESOLVED | Citations present, none resolvable | 14 |
-| NO_CITATION | No citation (template text, internal links or placeholders only) | 78 |
+| UNRESOLVED | Citations present, none resolvable | 15 |
+| NO_CITATION | No citation (template text, internal links or placeholders only) | 77 |
 
 FULL is a parsing and coverage state. It does **not** mean the wording or the law has been verified.
 
@@ -71,9 +71,9 @@ FULL is a parsing and coverage state. It does **not** mean the wording or the la
 - 389 records carry a citation code; 269 carry none (this matches the v3 inventory).
 - 175 records have an Army Act pinpoint; 169 have an Army Rules pinpoint.
 - Statutory anchor present: 456.
-- 63 records carry a broken or unresolved flag:
+- 74 records carry a broken or unresolved flag:
   - 16 placeholders;
-  - 13 unresolved plain-text case citations;
+  - 21 uncoded case names matched through `case_name_lexicon.csv`, plus 3 other unresolved plain-text case citations;
   - 5 Army Act or Army Rules citations with no pinpoint;
   - 1 non-official URL (indiankanoon.org);
   - unresolved codes: AO, SRC-AO, V6-S02/03/10/13/22, V7-S04, V7-S16, V8-S11, V9-S08, AR_ALT.
@@ -104,3 +104,6 @@ The MML-currency flags use internal date indicators as lower bounds:
 - MML 2 latest amendment note: 2003.
 
 None of these is an edition date. No MML file contains anything on the AFT Act 2007.
+
+## Parser fix 2026-11-22
+See `PARSER_FIX_2026-11-22.md`, which gives before and after counts and the list of changed records. Regression check: `scripts/test_kb_citations.py`.

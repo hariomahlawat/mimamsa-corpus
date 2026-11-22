@@ -103,26 +103,26 @@
   {
    "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/army_rules_instrument_register.csv",
    "role": "ar_chain_instruments_37",
-   "bytes": 13433,
-   "sha256": "048543758fd103d9bbd2316ee4b7f2b5ee940b23958bf67558c750883c4d9a7a"
+   "bytes": 16561,
+   "sha256": "08144d9982fd26f58d659f79cc0ddbd43871d0d11815d7100f09fd7bc92360a6"
   },
   {
    "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/army_rules_provision_chronology.csv",
    "role": "ar_chain_chronology_46",
-   "bytes": 8346,
-   "sha256": "61b0a69aadd41c9682324137d825389a2a61f7663b861747f828814376a6a393"
+   "bytes": 8455,
+   "sha256": "c40e7692b3b02ca8ba43a225f2e98f1bfdf62497449a698b6e2c4e9c1a8ead95"
   },
   {
    "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/official_note_discrepancies.csv",
    "role": "ar_chain_note_discrepancies",
-   "bytes": 1166,
-   "sha256": "cff9cdebdb28201273e50c485e0282bc7bfd3f9f76a747a7a0ef21ecacad158f"
+   "bytes": 1530,
+   "sha256": "3a0d30628231351b377fab72d93779b98dea4bdcdf79a331183d635bedb61f16"
   },
   {
    "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/statutory_version_register_seed.csv",
    "role": "ar_chain_version_seed",
-   "bytes": 3628,
-   "sha256": "f2fbdf1586517256dcbfcc4dbf046bd44300bf5899f153cc836b35c97b950457"
+   "bytes": 3672,
+   "sha256": "b434a0377f835caf79f34fe45f386b27201084900c1b7f5f03a893a196671bd7"
   },
   {
    "path": "legal_knowledge/audit_work/SOURCE-CONFLICTS-01/conflict_determinations.csv",
@@ -415,6 +415,12 @@
    "role": "wsa_provision_change_log (git show origin/claude/ws-a-statutory:legal_knowledge/audit_work/WS-A-STATUTORY/provision_change_log.csv @ 74530be9)",
    "bytes": 72787,
    "sha256": "251cdde85aa9b5c53f86ba482c82e55678b241eac0acf71cf17f9a0082cd421d"
+  },
+  {
+   "path": "ws-c/wsb_ids.csv",
+   "role": "wsb_identity_resolution (git show origin/claude/ws-b-judgments:legal_knowledge/audit_work/WS-B-JUDGMENTS/identity_resolution.csv @ 97de40b3)",
+   "bytes": 40485,
+   "sha256": "dcb9c628dbddf59cbbf01381962ba9d22136e8730c198cdf7a51f8eb351cb723"
   }
  ]
 }

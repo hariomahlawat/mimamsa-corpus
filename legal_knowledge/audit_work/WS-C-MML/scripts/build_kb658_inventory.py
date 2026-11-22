@@ -89,7 +89,11 @@ def main():
         if p["placeholders"]:
             broken.append("PLACEHOLDER:" + "/".join(p["placeholders"]))
         broken += ["CODE_" + u for u in unres]
-        if p["case_pattern"] and not has_case_code:
+        uncoded_names = [f"{k}->{cid or 'no-id'}" for k, cid, kc in p["case_names"]
+                         if not set(filter(None, kc.split(";"))) & set(p["codes"])]
+        if uncoded_names:
+            broken.append("CASE_NAME_WITHOUT_CODE:" + "/".join(uncoded_names))
+        elif p["case_pattern"] and not has_case_code:
             broken.append("PLAIN_CASE_CITATION_UNRESOLVED")
         for inst, lst in (("AA", p["aa"]), ("AR", p["ar"])):
             for x in lst:
@@ -122,7 +126,7 @@ def main():
         stat_anchor = bool(p["aa"] or p["ar"] or plain_held or any(reg.get(c, {}).get("corpus_target_or_gap", "").startswith(("act-", "rules-")) for c in firm_held))
         anchors = len(firm_held) + len(cocit) + len(p["aa"]) + len(p["ar"]) + len(plain_held)
         gaps = len(gap) + len(plain_gap)
-        n_unres = len(unres) + len(p["placeholders"]) + (1 if "PLAIN_CASE_CITATION_UNRESOLVED" in broken else 0)
+        n_unres = len(unres) + len(p["placeholders"]) + (1 if "PLAIN_CASE_CITATION_UNRESOLVED" in broken else 0) + len(uncoded_names)
         has_any = bool(p["codes"] or p["aa"] or p["ar"] or p["stat_other"] or p["case_pattern"])
         if not has_any:
             state = "NO_CITATION"
@@ -141,6 +145,7 @@ def main():
             "codes": ";".join(p["codes"]), "codes_resolved_held": ";".join(firm_held), "codes_resolved_gap": ";".join(gap), "codes_co_citation_only": ";".join(cocit),
             "codes_unresolved": ";".join(unres), "aa_sections": ";".join(p["aa"]), "ar_rules": ";".join(p["ar"]),
             "other_statutes_plain": ";".join(p["stat_other"]), "case_citation_pattern": "YES" if p["case_pattern"] else "NO",
+            "case_names_matched": ";".join(f"{k}->{cid or 'no-id'}" for k, cid, kc in p["case_names"]),
             "pinpoint_present": "YES" if pin else "NO", "statutory_anchor_present": "YES" if stat_anchor else "NO",
             "mml_anchor_in_record": "YES" if p["mml_mention"] else "NO", "mml_crosswalk_link": mml_link or "NONE",
             "broken_or_unresolved_flags": " | ".join(broken), "info_flags": " | ".join(info), "duplicate_claim_flags": " | ".join(dup),
