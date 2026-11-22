@@ -412,6 +412,246 @@ sources:
   # ACQ-01 B6: amending Acts as Gazette scans held on India Code (government-hosted copies). India Code serves
   # download-specific bytes for these scans (served size differs from the stored bitstream), so verification
   # records the stored bitstream md5/size and the served SHA-256, and relies on a page-image identity check.
+  archive_acq02:
+    # ACQ-02 (PROPOSED 2026-11-22; NOT authorised for download). Separate approval scope from ACQ-01 (the 14
+    # documents under `archive` and `official_instruments`, PR #8). 16 Gazette of India issues found by the Army Rules
+    # amendment search; integrity (size/md5/sha1 vs archive.org metadata), identity and operative pages were
+    # pre-verified on scratch copies: legal_knowledge/audit_work/ACQ-02 (PR #16). The record copy must be re-fetched
+    # through this crawler and match expected_sha256 / expected_md5 / expected_bytes, or be rejected.
+    # Dates: issue_date = date of the notification; gazette_publication_date = Gazette issue date; no effective
+    # date is asserted here (owner rule: publication date is not an effective date).
+    phase: 6
+    enabled: false
+    priority: 3
+    heavy: false
+    allowed_hosts: [archive.org, "*.archive.org"]
+    verify: true
+    discovery: "Fetched by address only (crawler/direct.py); approval scope ACQ-02."
+    documents:
+      - doc_id: notif-army-rules-amdt-sro-205-1961
+        url: "https://archive.org/download/in.gazette.central.w.1961-07-22.87578/87578.pdf"
+        title: "Army (First Amendment) Rules, 1961"
+        doc_type: notification
+        year: 1961
+        number: "S.R.O. 205"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1961-07-12"
+        gazette_issue: "No.28, 22-07-1961, Part II-Section 4"
+        gazette_publication_date: "1961-07-22"
+        expected_sha256: "0b4c5b72ea3de650a97d573af317ed6147c62539a1890a64c5797eaf4f60da6d"
+        expected_md5: "329a99f7136bb992df8b88f95bb22cbd"
+        expected_bytes: 165477
+        note: "ACQ-02; archive.org item in.gazette.central.w.1961-07-22.87578; operative page(s) printed p.141; page-image checks PIC-13"
+      - doc_id: notif-army-rules-amdt-sro-1-1961
+        url: "https://archive.org/download/in.gazette.central.w.1962-01-06.85365/85365.pdf"
+        title: "Army (Second Amendment) Rules, 1961"
+        doc_type: notification
+        year: 1961
+        number: "S.R.O. 1"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1961-12-22"
+        gazette_issue: "No.1, 06-01-1962, Part II-Section 4"
+        gazette_publication_date: "1962-01-06"
+        expected_sha256: "b76bf4aac230f922b472a8ce69fb6f75bfe67f311591c39c21fca10996d8b778"
+        expected_md5: "08c8456059cbfb87e6a041ee3adc0d4c"
+        expected_bytes: 81214
+        note: "ACQ-02; archive.org item in.gazette.central.w.1962-01-06.85365; operative page(s) printed p.1; page-image checks PIC-14"
+      - doc_id: notif-army-rules-r188e-sro-34-1963
+        url: "https://archive.org/download/in.gazette.central.w.1963-01-19.84713/84713.pdf"
+        title: "(declaration, no short title)"
+        doc_type: notification
+        year: 1963
+        number: "S.R.O. 34"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1963-01-05"
+        gazette_issue: "No.3, 19-01-1963, Part II-Section 4"
+        gazette_publication_date: "1963-01-19"
+        expected_sha256: "4acdb1a8bc6430db30edb1046d839c177f90f97e82466d7373039d0f5289c935"
+        expected_md5: "f9414ea4adc8704350f740c56721ae08"
+        expected_bytes: 382036
+        note: "ACQ-02; archive.org item in.gazette.central.w.1963-01-19.84713; operative page(s) printed p.14; page-image checks PIC-15"
+      - doc_id: notif-army-rules-amdt-sro-126-1964
+        url: "https://archive.org/download/in.gazette.central.w.1964-03-28.83274/83274.pdf"
+        title: "Army (Amendment) Rules, 1964"
+        doc_type: notification
+        year: 1964
+        number: "S.R.O. 126"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1964-03-12"
+        gazette_issue: "28-03-1964, Part II-Section 4"
+        gazette_publication_date: "1964-03-28"
+        expected_sha256: "cce0d06e8624cc677eb3165e5cb9dd569766286175013323398e2dd8490ca07a"
+        expected_md5: "7eb76c6be331f7e23e68b11e5b21f007"
+        expected_bytes: 563644
+        note: "ACQ-02; archive.org item in.gazette.central.w.1964-03-28.83274; operative page(s) printed p.282; page-image checks PIC-16"
+      - doc_id: notif-army-rules-amdt-sro-5-1968
+        url: "https://archive.org/download/in.gazette.central.w.1969-01-11.68677/68677.pdf"
+        title: "Army (—— Amendment) Rules, 1968 [ordinal blank as printed]"
+        doc_type: notification
+        year: 1968
+        number: "S.R.O. 5"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1968-12-23"
+        gazette_issue: "No.2, 11-01-1969, Part II-Section 4"
+        gazette_publication_date: "1969-01-11"
+        expected_sha256: "5126efa258a7e7502d20d1539618aba549a4a5977068480eac0ceb00b780e3c3"
+        expected_md5: "6bcc2f8268cbce8fde3743be69a56765"
+        expected_bytes: 275520
+        note: "ACQ-02; archive.org item in.gazette.central.w.1969-01-11.68677; operative page(s) printed p.9; page-image checks PIC-17"
+      - doc_id: notif-army-rules-amdt-sro-246-1982
+        url: "https://archive.org/download/in.gazette.central.w.1982-11-13.41015/41015.pdf"
+        title: "Army (Amendment) Rules, 1982"
+        doc_type: notification
+        year: 1982
+        number: "S.R.O. 246"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1982-10-12"
+        gazette_issue: "13-11-1982, Part II-Section 4 (bilingual)"
+        gazette_publication_date: "1982-11-13"
+        expected_sha256: "d283767e91508eb9239ca8291904d381a94dc27abb5275a3870b318b57d3d868"
+        expected_md5: "e0b516a05c17fcd3a73495608fb93153"
+        expected_bytes: 862174
+        note: "ACQ-02; archive.org item in.gazette.central.w.1982-11-13.41015; operative page(s) printed p.413; page-image checks PIC-18"
+      - doc_id: notif-army-rules-amdt-sro-44-1985
+        url: "https://archive.org/download/in.gazette.central.w.1985-02-16.34755/34755.pdf"
+        title: "Army (Amendment) Rules, 1985"
+        doc_type: notification
+        year: 1985
+        number: "S.R.O. 44"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1985-01-24"
+        gazette_issue: "16-02-1985, Part II-Section 4"
+        gazette_publication_date: "1985-02-16"
+        expected_sha256: "dd6978db8cf47f2f7b3c9ea1fecaeaf462f03d6562a20268edc68d5d0514c7b7"
+        expected_md5: "3011439b1d56e5d17c99bd3220bdd838"
+        expected_bytes: 158127
+        note: "ACQ-02; archive.org item in.gazette.central.w.1985-02-16.34755; operative page(s) printed p.60; page-image checks PIC-19"
+      - doc_id: notif-army-rules-amdt-sro-55-1985
+        url: "https://archive.org/download/in.gazette.central.w.1985-03-09.34758/34758.pdf"
+        title: "Army (Amendment) Rules, 1985"
+        doc_type: notification
+        year: 1985
+        number: "S.R.O. 55"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1985-02-22"
+        gazette_issue: "09-03-1985, Part II-Section 4"
+        gazette_publication_date: "1985-03-09"
+        expected_sha256: "d8ce1958a9bf8fd1581e665190b245a7dd0f265f91ebb4330813728a00e1e1f1"
+        expected_md5: "8c96cb63854503d76b5deeb97c6d20c6"
+        expected_bytes: 548961
+        note: "ACQ-02; archive.org item in.gazette.central.w.1985-03-09.34758; operative page(s) printed p.97; page-image checks PIC-20"
+      - doc_id: notif-army-rules-amdt-sro-68-1985
+        url: "https://archive.org/download/in.gazette.central.w.1985-04-20.34763/34763.pdf"
+        title: "Corrigendum"
+        doc_type: notification
+        year: 1985
+        number: "S.R.O. 68"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1985-04-01"
+        gazette_issue: "20-04-1985, Part II-Section 4"
+        gazette_publication_date: "1985-04-20"
+        expected_sha256: "225f624b866c8ab0931492e245b5cb3dbfb9b996bad627a9acbe8dff89e5392b"
+        expected_md5: "20757a7014885c05b820a1a5fc12263b"
+        expected_bytes: 99582
+        note: "ACQ-02; archive.org item in.gazette.central.w.1985-04-20.34763; operative page(s) printed p.142; page-image checks PIC-21"
+      - doc_id: notif-army-rules-amdt-sro-278-1985
+        url: "https://archive.org/download/in.gazette.central.w.1985-12-28.34794/34794.pdf"
+        title: "Army (Third Amendment) Rules, 1985"
+        doc_type: notification
+        year: 1985
+        number: "S.R.O. 278"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1985-11-29"
+        gazette_issue: "28-12-1985, Part II-Section 4 (bilingual)"
+        gazette_publication_date: "1985-12-28"
+        expected_sha256: "972e5aa18dda6f41737f1d726451ad231b13adf79c297f1f2aeb096230efbc67"
+        expected_md5: "2522a14e42dd9fc919b07737401ade63"
+        expected_bytes: 2008876
+        note: "ACQ-02; archive.org item in.gazette.central.w.1985-12-28.34794; operative page(s) printed p.531; page-image checks PIC-22"
+      - doc_id: notif-army-rules-amdt-sro-169-1987
+        url: "https://archive.org/download/in.gazette.central.w.1987-05-30.30211/30211.pdf"
+        title: "Army (Amendment) Rules, 1987"
+        doc_type: notification
+        year: 1987
+        number: "S.R.O. 169"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1987-05-15"
+        gazette_issue: "30-05-1987, Part II-Section 4"
+        gazette_publication_date: "1987-05-30"
+        expected_sha256: "eaa233f8c70ae0b9ba15b7fc26154f98d61a4c3812e87a4779d0838c9befa682"
+        expected_md5: "bb3a292bd22a34bd7c4c8c9c263fb147"
+        expected_bytes: 457546
+        note: "ACQ-02; archive.org item in.gazette.central.w.1987-05-30.30211; operative page(s) printed p.197; page-image checks PIC-23"
+      - doc_id: notif-army-rules-amdt-sro-302-1987
+        url: "https://archive.org/download/in.gazette.central.w.1987-10-10.30228/30228.pdf"
+        title: "Army (Amendment) Rules, 1987"
+        doc_type: notification
+        year: 1987
+        number: "S.R.O. 302"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1987-09-18"
+        gazette_issue: "10-10-1987, Part II-Section 4 (bilingual)"
+        gazette_publication_date: "1987-10-10"
+        expected_sha256: "4392f326c1b9bbc906b99e9b811c95d99f5e8887ee229848af148bef3f82b0da"
+        expected_md5: "e30a504f5b503f1731e701bc2337d9eb"
+        expected_bytes: 1827754
+        note: "ACQ-02; archive.org item in.gazette.central.w.1987-10-10.30228; operative page(s) printed p.367; page-image checks PIC-24"
+      - doc_id: notif-army-rules-amdt-sro-44-and-61-1991
+        url: "https://archive.org/download/in.gazette.central.w.1991-02-23.21285/21285.pdf"
+        title: "Army (Second Amendment) Rules 1990 [S.R.O. 44] and Army (Amendment) Rules 1990 [S.R.O. 61], as printed"
+        doc_type: notification
+        year: 1991
+        number: "S.R.O. 44 and S.R.O. 61"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1991-02-01"
+        gazette_issue: "23-02-1991, Part II-Section 4"
+        gazette_publication_date: "1991-02-23"
+        expected_sha256: "0e4b8e47e299867f8a8ead184cd88dfe2b2a0e08ea8faca70bec42be58e12a18"
+        expected_md5: "178cc2e24f7ca1580c43632cb511170b"
+        expected_bytes: 376217
+        note: "ACQ-02; archive.org item in.gazette.central.w.1991-02-23.21285; operative page(s) printed p.214, printed p.217; page-image checks PIC-25, PIC-26"
+      - doc_id: notif-army-rules-amdt-sro-235-1991
+        url: "https://archive.org/download/in.gazette.central.w.1991-11-09.21312/21312.pdf"
+        title: "Army (Amendment) Rules, 1991"
+        doc_type: notification
+        year: 1991
+        number: "S.R.O. 235"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1991-10-01"
+        gazette_issue: "09-11-1991, Part II-Section 4"
+        gazette_publication_date: "1991-11-09"
+        expected_sha256: "dc67b628878ea4c5ac11b4013fecd6bf29d852ab5d6c7601f4d58a6f3ac3ac24"
+        expected_md5: "412d3699776eccf7c0bf5cb9983fe75d"
+        expected_bytes: 345814
+        note: "ACQ-02; archive.org item in.gazette.central.w.1991-11-09.21312; operative page(s) printed p.614; page-image checks PIC-27"
+      - doc_id: notif-army-rules-r188e-sro-2e-2018
+        url: "https://archive.org/download/in.gazette.central.e.2018-02-20.183010/183010.pdf"
+        title: "(declaration, no short title)"
+        doc_type: notification
+        year: 2018
+        number: "S.R.O. 2(E)"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "2018-02-20"
+        gazette_issue: "Extraordinary, 20-02-2018, Part II-Section 4 (digitally signed e-Gazette)"
+        gazette_publication_date: "2018-02-20"
+        expected_sha256: "7c12a7ecc849c8f6df96830b093fda3c16bf9e943a5cb5d331ae3352b9455551"
+        expected_md5: "85e19b7454c1feafecf1e1e0806a9ee2"
+        expected_bytes: 1707387
+        note: "ACQ-02; archive.org item in.gazette.central.e.2018-02-20.183010; operative page(s) printed p.2; page-image checks PIC-28"
+      - doc_id: notif-army-rules-amdt-sro-332-1989
+        url: "https://archive.org/download/in.gazette.central.w.1989-12-02.25809/25809.pdf"
+        title: "Army (Amendment) Rules, 1989"
+        doc_type: notification
+        year: 1989
+        number: "S.R.O. 332"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1989-09-26"
+        gazette_issue: "02-12-1989, Part II-Section 4"
+        gazette_publication_date: "1989-12-02"
+        expected_sha256: "31fedb68e25a1ffa999b8d809b6138b272275c0acc1abd9f5da502564b485147"
+        expected_md5: "8a29e71cd63bee5461b55fb1597ea904"
+        expected_bytes: 645527
+        note: "ACQ-02; archive.org item in.gazette.central.w.1989-12-02.25809; operative page(s) printed p.736; page-image checks PIC-12"
   official_instruments:
     phase: 2
     enabled: false

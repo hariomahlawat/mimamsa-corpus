@@ -1,0 +1,60 @@
+# Discovery — archive_acq02 — run 20261122T152048Z-ebe6ac
+
+0 listing request(s); politeness delay spent: 0 s. No documents were downloaded.
+
+- notif-army-rules-amdt-sro-205-1961: queued — https://archive.org/download/in.gazette.central.w.1961-07-22.87578/87578.pdf
+- notif-army-rules-amdt-sro-1-1961: queued — https://archive.org/download/in.gazette.central.w.1962-01-06.85365/85365.pdf
+- notif-army-rules-r188e-sro-34-1963: queued — https://archive.org/download/in.gazette.central.w.1963-01-19.84713/84713.pdf
+- notif-army-rules-amdt-sro-126-1964: queued — https://archive.org/download/in.gazette.central.w.1964-03-28.83274/83274.pdf
+- notif-army-rules-amdt-sro-5-1968: queued — https://archive.org/download/in.gazette.central.w.1969-01-11.68677/68677.pdf
+- notif-army-rules-amdt-sro-246-1982: queued — https://archive.org/download/in.gazette.central.w.1982-11-13.41015/41015.pdf
+- notif-army-rules-amdt-sro-44-1985: queued — https://archive.org/download/in.gazette.central.w.1985-02-16.34755/34755.pdf
+- notif-army-rules-amdt-sro-55-1985: queued — https://archive.org/download/in.gazette.central.w.1985-03-09.34758/34758.pdf
+- notif-army-rules-amdt-sro-68-1985: queued — https://archive.org/download/in.gazette.central.w.1985-04-20.34763/34763.pdf
+- notif-army-rules-amdt-sro-278-1985: queued — https://archive.org/download/in.gazette.central.w.1985-12-28.34794/34794.pdf
+- notif-army-rules-amdt-sro-169-1987: queued — https://archive.org/download/in.gazette.central.w.1987-05-30.30211/30211.pdf
+- notif-army-rules-amdt-sro-302-1987: queued — https://archive.org/download/in.gazette.central.w.1987-10-10.30228/30228.pdf
+- notif-army-rules-amdt-sro-44-and-61-1991: queued — https://archive.org/download/in.gazette.central.w.1991-02-23.21285/21285.pdf
+- notif-army-rules-amdt-sro-235-1991: queued — https://archive.org/download/in.gazette.central.w.1991-11-09.21312/21312.pdf
+- notif-army-rules-r188e-sro-2e-2018: queued — https://archive.org/download/in.gazette.central.e.2018-02-20.183010/183010.pdf
+- notif-army-rules-amdt-sro-332-1989: queued — https://archive.org/download/in.gazette.central.w.1989-12-02.25809/25809.pdf
+
+# Dry run — 2026-11-22T15:20:48+00:00
+
+1 source(s), 0 target(s) (0 still need URL discovery), 16 request(s) would be made from known URLs, 0 refused.
+
+**Config warnings:**
+
+- sources.indiacode has the robots-5xx exception (crawls if robots.txt answers 5xx)
+- sources.indiacode has the robots-unreachable exception (crawls if robots.txt cannot be fetched)
+- regs-army-1987 is targeted by both indiacode and mod (first hit wins)
+
+## archive_acq02 (phase 6, disabled)
+
+Hosts: *.archive.org, archive.org  
+State: 16 queued (16 due now, 0 in backoff), 0 fetched, 0 failed, 0 skipped  
+Would fetch now: 16
+
+Discovery: Fetched by address only (crawler/direct.py); approval scope ACQ-02.
+
+- ⚠ marked verify: true; confirm URLs on the live site
+
+| Kind | doc_id / name | URL | State | Action | Notes |
+| --- | --- | --- | --- | --- | --- |
+| queued | notif-army-rules-amdt-sro-205-1961 | https://archive.org/download/in.gazette.central.w.1961-07-22.87578/87578.pdf | queued | fetch document | category: notification; parent_doc_id: notif-army-rules-amdt-sro-205-1961 |
+| queued | notif-army-rules-amdt-sro-1-1961 | https://archive.org/download/in.gazette.central.w.1962-01-06.85365/85365.pdf | queued | fetch document | category: notification; parent_doc_id: notif-army-rules-amdt-sro-1-1961 |
+| queued | notif-army-rules-r188e-sro-34-1963 | https://archive.org/download/in.gazette.central.w.1963-01-19.84713/84713.pdf | queued | fetch document | category: notification; parent_doc_id: notif-army-rules-r188e-sro-34-1963 |
+| queued | notif-army-rules-amdt-sro-126-1964 | https://archive.org/download/in.gazette.central.w.1964-03-28.83274/83274.pdf | queued | fetch document | category: notification; parent_doc_id: notif-army-rules-amdt-sro-126-1964 |
+| queued | notif-army-rules-amdt-sro-5-1968 | https://archive.org/download/in.gazette.central.w.1969-01-11.68677/68677.pdf | queued | fetch document | category: notification; parent_doc_id: notif-army-rules-amdt-sro-5-1968 |
+| queued | notif-army-rules-amdt-sro-246-1982 | https://archive.org/download/in.gazette.central.w.1982-11-13.41015/41015.pdf | queued | fetch document | category: notification; parent_doc_id: notif-army-rules-amdt-sro-246-1982 |
+| queued | notif-army-rules-amdt-sro-44-1985 | https://archive.org/download/in.gazette.central.w.1985-02-16.34755/34755.pdf | queued | fetch document | category: notification; parent_doc_id: notif-army-rules-amdt-sro-44-1985 |
+| queued | notif-army-rules-amdt-sro-55-1985 | https://archive.org/download/in.gazette.central.w.1985-03-09.34758/34758.pdf | queued | fetch document | category: notification; parent_doc_id: notif-army-rules-amdt-sro-55-1985 |
+| queued | notif-army-rules-amdt-sro-68-1985 | https://archive.org/download/in.gazette.central.w.1985-04-20.34763/34763.pdf | queued | fetch document | category: notification; parent_doc_id: notif-army-rules-amdt-sro-68-1985 |
+| queued | notif-army-rules-amdt-sro-278-1985 | https://archive.org/download/in.gazette.central.w.1985-12-28.34794/34794.pdf | queued | fetch document | category: notification; parent_doc_id: notif-army-rules-amdt-sro-278-1985 |
+| queued | notif-army-rules-amdt-sro-169-1987 | https://archive.org/download/in.gazette.central.w.1987-05-30.30211/30211.pdf | queued | fetch document | category: notification; parent_doc_id: notif-army-rules-amdt-sro-169-1987 |
+| queued | notif-army-rules-amdt-sro-302-1987 | https://archive.org/download/in.gazette.central.w.1987-10-10.30228/30228.pdf | queued | fetch document | category: notification; parent_doc_id: notif-army-rules-amdt-sro-302-1987 |
+| queued | notif-army-rules-amdt-sro-44-and-61-1991 | https://archive.org/download/in.gazette.central.w.1991-02-23.21285/21285.pdf | queued | fetch document | category: notification; parent_doc_id: notif-army-rules-amdt-sro-44-and-61-1991 |
+| queued | notif-army-rules-amdt-sro-235-1991 | https://archive.org/download/in.gazette.central.w.1991-11-09.21312/21312.pdf | queued | fetch document | category: notification; parent_doc_id: notif-army-rules-amdt-sro-235-1991 |
+| queued | notif-army-rules-r188e-sro-2e-2018 | https://archive.org/download/in.gazette.central.e.2018-02-20.183010/183010.pdf | queued | fetch document | category: notification; parent_doc_id: notif-army-rules-r188e-sro-2e-2018 |
+| queued | notif-army-rules-amdt-sro-332-1989 | https://archive.org/download/in.gazette.central.w.1989-12-02.25809/25809.pdf | queued | fetch document | category: notification; parent_doc_id: notif-army-rules-amdt-sro-332-1989 |
+
