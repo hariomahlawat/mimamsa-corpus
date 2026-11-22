@@ -25,6 +25,9 @@ Resume procedure: read each `WS-*/STATUS.md` on its branch (`git -C /home/user/w
 - r.194 PROPOSAL (legal review)
 - r.193 OPEN
 
+## CI
+- PR #6 audit CI green on 2a7ae7af and 3b708245 (2026-11-22).
+
 ## Owner decisions required (blockers; other work continues)
 | ID | Decision | Blocks |
 | --- | --- | --- |
