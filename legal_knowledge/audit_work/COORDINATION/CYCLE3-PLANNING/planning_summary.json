@@ -1,0 +1,44 @@
+{
+ "acq_by_priority": {
+  "EXCLUDED": 1,
+  "P0": 29,
+  "P1": 66,
+  "P2": 39
+ },
+ "acq_by_scope": {
+  "ACQ-01": 20,
+  "ACQ-02": 17,
+  "ACQ-03": 44,
+  "WS-A-C3": 4,
+  "WS-B": 50
+ },
+ "acq_c3_01_mismatch": {},
+ "acq_pinned": 69,
+ "acq_source_located_yes": 90,
+ "acquisition_schedule": 135,
+ "affected_in_calibration": 35,
+ "affected_records": 349,
+ "affected_with_cases": 78,
+ "affected_with_reserved": 36,
+ "auth_by_priority": {
+  "P0": 11,
+  "P1": 14,
+  "P2": 18
+ },
+ "auth_judgments": 35,
+ "auth_mml": 8,
+ "authentication_queue": 43,
+ "consistency_findings": 6,
+ "top10": [
+  "KB-030",
+  "HCE-002",
+  "CIV-002",
+  "CM-CL-04",
+  "HCE-001",
+  "CM-001",
+  "HCE-033",
+  "CM-CL-01",
+  "CM-CL-06",
+  "CM-CL-02"
+ ]
+}
