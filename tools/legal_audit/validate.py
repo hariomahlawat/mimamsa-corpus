@@ -184,7 +184,12 @@ def validate_batch(batch: Path, strict: bool = False, manifest: Path | None = No
         errors.append("Strict validation requires at least one finding, including no-issue finding if applicable")
     extended_checks(records, ids, strict, manifest, errors)
     identity_checks(batch, records, ids, strict, errors)
-    print(json.dumps({"batch": str(batch), "counts": {k: len(v) for k, v in records.items()},
+    integrity_checks(batch, records, ids, strict, manifest, errors)
+    relations = relation_checks(batch, records, ids, errors)
+    counts = {k: len(v) for k, v in records.items()}
+    if relations is not None:
+        counts["relation"] = relations
+    print(json.dumps({"batch": str(batch), "counts": counts,
                       "strict": strict, "errors": errors}, indent=2))
     return not errors
 
@@ -476,7 +481,273 @@ def identity_checks(batch, records, ids, strict, errors):
                 errors.append(f"{label}: independent source {sid} does not belong to reviewer {rid}")
 
 
+# ---------------------------------------------------------------------------
+# WS-D integrity controls (issue #14). Structural/traceability checks only; they
+# never certify legal correctness, authenticity or the law in force.
+#
+# Two tiers:
+#  * ALWAYS-ON rules: hold for every batch, including frozen PILOT-01 and
+#    R23-VERIFY-01 (both verified to pass unchanged when these rules were added).
+#    Several only fire when a newer optional field is present, so legacy entries
+#    are never retro-classified.
+#  * CONTROLS v2 (opt-in): a NEW batch declares "audit_controls_version": "v2"
+#    in its frozen manifest and is validated with --strict. v2 implies source
+#    authority policy v1. Unknown versions fail closed. Frozen batches are not
+#    migrated silently: their manifests do not carry the flag (a migration would
+#    be a separate, reviewed proposal).
+CONTROLS_VERSIONS = (None, "v2")
+HUMAN_ROLES = {"LEGAL_ADVISOR", "PROJECT_DIRECTOR", "FORMAL_AUTHORITY"}
+AGENT_ID = re.compile(r"(-auditor$|^orchestrator|^independent-reviewer|agent|claude|^ws-[a-z])", re.I)
+WEAK_PROOF = {"OCR_TEXT", "SEARCH_RESULT_ONLY", "METADATA_ONLY"}
+ISO_IN_TEXT = re.compile(r"(?<!\d)(\d{4})-(\d{2})-(\d{2})(?!\d)")
+LEADING_DATE = re.compile(r"^(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?(?=$|[\s;(,])")
+PIC_TOKEN = re.compile(r"PIC-\d+")
+STATED = "STATED_IN_INSTRUMENT"
+AUDIT_WORK = ROOT / "legal_knowledge" / "audit_work"
+KB_FILE = ROOT / "legal_knowledge" / "curated_originals" / "knowledge_base" / "v0.9" / "records_658.jsonl"
+CASES_FILE = ROOT / "legal_knowledge" / "curated_originals" / "case_law" / "v0.9" / "cases_53.jsonl"
+
+
+def known_page_image_checks(batch: Path):
+    """check_id values from every page_image_checks*.csv register in the batch and under audit_work."""
+    import csv
+    ids = set()
+    roots = {batch, AUDIT_WORK}
+    for root in roots:
+        if not root.is_dir():
+            continue
+        for p in root.rglob("page_image_checks*.csv"):
+            with p.open(encoding="utf-8", newline="") as fh:
+                ids |= {r.get("check_id", "") for r in csv.DictReader(fh)}
+    ids.discard("")
+    return ids
+
+
+def corpus_ids():
+    out = set()
+    for p in (KB_FILE, CASES_FILE):
+        if p.is_file():
+            for line in p.read_text(encoding="utf-8").splitlines():
+                if line.strip():
+                    out.add(json.loads(line).get("id"))
+    return out
+
+
+def _valid_iso_dates(text, label, key, errors):
+    for y, m, d in ISO_IN_TEXT.findall(text):
+        try:
+            datetime.date(int(y), int(m), int(d))
+        except ValueError:
+            errors.append(f"{label}: {key} contains impossible calendar date {y}-{m}-{d}")
+
+
+def _leading_date(text):
+    m = LEADING_DATE.match(text or "")
+    if not m:
+        return None
+    y, mo, d = m.group(1), m.group(2) or "01", m.group(3) or "01"
+    try:
+        return datetime.date(int(y), int(mo), int(d))
+    except ValueError:
+        return None
+
+
+def source_integrity(label, s, v2, pics, errors):
+    kind, doc = s.get("source_type"), s.get("document_authority")
+    carrier, fid, auth = s.get("carrier_provenance"), s.get("copy_fidelity"), s.get("authenticity")
+    # (a) document authority vs carrier provenance: two independent dimensions (policy v1),
+    #     but some combinations are self-contradictory.
+    if doc == "OFFICIAL_JUDICIAL_DECISION" and kind not in ("JUDGMENT", "ORDER"):
+        errors.append(f"{label}: OFFICIAL_JUDICIAL_DECISION requires source_type JUDGMENT or ORDER")
+    if doc == "ENACTED_OR_NOTIFIED_PRIMARY" and kind not in ("STATUTE", "RULE", "GAZETTE", "REGULATION", "OTHER_PRIMARY"):
+        errors.append(f"{label}: ENACTED_OR_NOTIFIED_PRIMARY requires a statutory/notified source_type")
+    if doc == "THIRD_PARTY_COMMENTARY" and kind != "SECONDARY":
+        errors.append(f"{label}: THIRD_PARTY_COMMENTARY requires source_type SECONDARY")
+    if doc == "GOVERNMENT_COMPILATION" and auth in ("ORIGINAL_OFFICIAL", "ARCHIVAL_FACSIMILE_OF_OFFICIAL"):
+        errors.append(f"{label}: a government compilation is not the original issued instrument")
+    if carrier == "USER_SUPPLIED" and fid == "CUSTODIAN_AUTHENTICATED":
+        errors.append(f"{label}: a user-supplied copy cannot be custodian-authenticated without a custodian copy")
+    if auth == "ORIGINAL_OFFICIAL" and carrier in ("USER_SUPPLIED", "THIRD_PARTY_TRANSCRIPTION", "UNKNOWN"):
+        errors.append(f"{label}: ORIGINAL_OFFICIAL is inconsistent with carrier {carrier}")
+    # (b) proof type: how the relied-on passage was read. OCR/search/metadata never establish wording.
+    proof = s.get("proof_type")
+    if proof in WEAK_PROOF and s.get("verification_state") == "SOURCE_VERIFIED":
+        errors.append(f"{label}: proof_type {proof} cannot support SOURCE_VERIFIED (read the page image or text)")
+    if proof == "PAGE_IMAGE_READING":
+        if not s.get("page_image_check_id"):
+            errors.append(f"{label}: PAGE_IMAGE_READING requires page_image_check_id")
+        if not s.get("render_sha256"):
+            errors.append(f"{label}: PAGE_IMAGE_READING requires render_sha256")
+    # (c) register cross-reference: every PIC-n cited must exist in a page-image register.
+    pic = s.get("page_image_check_id") or ""
+    for tok in PIC_TOKEN.findall(pic):
+        if tok not in pics:
+            errors.append(f"{label}: page_image_check_id cites {tok}, absent from every page_image_checks register")
+    # (d) dates: publication, commencement as printed and effective date are distinct (owner rule).
+    for key in ("version_or_decision_date", "effective_date", "publication_date", "commencement_as_printed"):
+        if isinstance(s.get(key), str):
+            _valid_iso_dates(s[key], label, key, errors)
+    status = s.get("effective_date_status")
+    eff = s.get("effective_date")
+    if status is not None:
+        if eff and not status.startswith(STATED):
+            errors.append(f"{label}: effective_date set but effective_date_status is not {STATED}")
+        if status.startswith(STATED) and not (isinstance(eff, str) and ISO_IN_TEXT.search(eff)):
+            errors.append(f"{label}: {STATED} requires an ISO effective_date")
+    pub = s.get("publication_date")
+    if pub and eff and _leading_date(pub) and _leading_date(pub) == _leading_date(eff) and not (status or "").startswith(STATED):
+        errors.append(f"{label}: effective_date equals publication_date without a stated commencement")
+    if kind in ("JUDGMENT", "ORDER"):
+        dd, ro = _leading_date(s.get("version_or_decision_date") or ""), _leading_date(s.get("retrieved_on") or "")
+        if dd and ro and dd > ro:
+            errors.append(f"{label}: decision date is after retrieved_on")
+    if v2:
+        if not proof:
+            errors.append(f"{label}: controls v2 requires proof_type")
+        if kind in DATED_TYPES:
+            if status is None:
+                errors.append(f"{label}: controls v2 requires effective_date_status on {kind} sources")
+            if not _leading_date(s.get("version_or_decision_date") or ""):
+                errors.append(f"{label}: controls v2 requires version_or_decision_date to start with an ISO date")
+        if fid == "PAGE_IMAGE_CHECKED" and s.get("page_image_check_id") not in pics:
+            errors.append(f"{label}: controls v2 requires page_image_check_id to be exactly a registered check_id")
+
+
+def integrity_checks(batch, records, ids, strict, manifest, errors):
+    man = read_json(manifest) if manifest else {}
+    version = man.get("audit_controls_version")
+    if version not in CONTROLS_VERSIONS:
+        errors.append(f"Unknown audit_controls_version {version}")
+        return
+    v2 = strict and version == "v2"
+    if version == "v2" and man.get("source_authority_policy_version") != "v1":
+        errors.append("audit_controls_version v2 requires source_authority_policy_version v1")
+    pics = known_page_image_checks(batch)
+    for label, s in records["source"]:
+        if isinstance(s, dict):
+            source_integrity(label, s, v2, pics, errors)
+    # cross-record relations
+    known_records = corpus_ids() | {r.get("record_id") for r in man.get("records", [])}
+    for label, f in records["finding"]:
+        if not isinstance(f, dict):
+            continue
+        both = set(f.get("source_ids", [])) & set(f.get("contrary_source_ids", []) or [])
+        if both:
+            errors.append(f"{label}: source(s) {sorted(both)} listed as both supporting and contrary")
+        if man.get("batch_id") and f.get("batch_id") != man["batch_id"]:
+            errors.append(f"{label}: batch_id {f.get('batch_id')} differs from manifest batch_id {man['batch_id']}")
+        if manifest:
+            for rid in f.get("related_record_ids", []) or []:
+                if rid not in known_records:
+                    errors.append(f"{label}: related_record_id {rid} not found in KB, cases or manifest")
+        if v2:
+            if not f.get("legal_review_state"):
+                errors.append(f"{label}: controls v2 requires legal_review_state on every finding")
+            if f.get("review_state") == "ACCEPTED_FOR_CANDIDATE" and not any(
+                    isinstance(r, dict) and r.get("finding_id") == f.get("finding_id")
+                    and r.get("reviewer_role") in ("LEGAL_ADVISOR", "PROJECT_DIRECTOR")
+                    and r.get("decision") == "ACCEPTED_FOR_CANDIDATE" for _, r in records["review"]):
+                errors.append(f"{label}: controls v2: ACCEPTED_FOR_CANDIDATE needs a human acceptance review")
+    # legal-review-state separation: an agent can never hold a human legal role
+    idpath = batch / "reviewer_identities.json"
+    cfg = read_json(idpath) if idpath.is_file() else {}
+    agents = set(cfg.get("first_pass_agents", [])) | set(cfg.get("reviewers", {}))
+    humans = cfg.get("human_reviewers", {})
+    for hid, h in humans.items():
+        if hid in agents or AGENT_ID.search(hid):
+            errors.append(f"reviewer_identities: human reviewer '{hid}' is an agent identity")
+        if h.get("role") not in HUMAN_ROLES or not h.get("binding_evidence"):
+            errors.append(f"reviewer_identities: human reviewer '{hid}' needs a human role and binding_evidence")
+    for label, r in records["review"]:
+        if not isinstance(r, dict):
+            continue
+        f = ids["finding"].get(r.get("finding_id"), {})
+        if r.get("reviewed_original_sha256") and f.get("original_sha256") and r["reviewed_original_sha256"] != f["original_sha256"]:
+            errors.append(f"{label}: reviewed_original_sha256 differs from the finding's original_sha256")
+        if r.get("reviewer_role") in HUMAN_ROLES:
+            rid = r.get("reviewer_id", "")
+            if rid in agents or AGENT_ID.search(rid) or rid == f.get("agent"):
+                errors.append(f"{label}: agent identity '{rid}' cannot assert human role {r.get('reviewer_role')}")
+            if v2:
+                if humans.get(rid, {}).get("role") != r.get("reviewer_role"):
+                    errors.append(f"{label}: controls v2: '{rid}' not bound as {r.get('reviewer_role')} in human_reviewers")
+                if r.get("decision") in ("ACCEPTED_FOR_CANDIDATE", "FORMALLY_APPROVED") and not r.get("approval_artifact"):
+                    errors.append(f"{label}: controls v2: acceptance/approval requires an approval_artifact")
+
+
+# ---------------------------------------------------------------------------
+# Optional KB relation layer (WS-C CC-13; coordinator approval, WS-D cycle 2).
+# A batch MAY contain relations/*.json validated against relation.schema.json.
+# 'manual_supported' is a retrieval/support link to a page-image-checked MML
+# locator. It is never statutory or judicial authority: it cannot be cited as a
+# finding source, cannot share an ID with a source, and must declare
+# legal_effect NOT_STATUTORY_AUTHORITY (schema enum). Batches without the
+# directory are unaffected.
+def page_image_renders(batch: Path):
+    """{check_id: has 64-hex render_png_sha256} from every page-image register."""
+    import csv
+    out = {}
+    for root in {batch, AUDIT_WORK}:
+        if not root.is_dir():
+            continue
+        for p in list(root.rglob("page_image_checks*.csv")) + list(root.rglob("identity_transcription_register*.csv")):
+            with p.open(encoding="utf-8", newline="") as fh:
+                for r in csv.DictReader(fh):
+                    cid = (r.get("check_id") or "").strip()
+                    if cid:
+                        out[cid] = out.get(cid, False) or bool(SHA.fullmatch((r.get("render_png_sha256") or "").strip()))
+    return out
+
+
+def relation_checks(batch, records, ids, errors):
+    d = batch / "relations"
+    if not d.is_dir():
+        return None
+    schema = read_json(SCHEMAS / "relation.schema.json")
+    rels = read_kind(d, errors)
+    mml = load_mml_manifest()
+    renders = page_image_renders(batch)
+    known = corpus_ids()
+    seen = {}
+    for label, r in rels:
+        validate_record("relation", label, r, schema, errors)
+        if not isinstance(r, dict):
+            continue
+        rid = r.get("relation_id")
+        if rid in seen:
+            errors.append(f"{label}: duplicate relation ID: {rid}")
+        seen[rid] = r
+        if rid in ids["source"]:
+            errors.append(f"{label}: relation ID {rid} collides with a source ID")
+        if mml is None or r.get("mml_file") not in mml:
+            errors.append(f"{label}: mml_file is not one of the MML manifest originals")
+        elif r.get("mml_file_sha256") != mml[r["mml_file"]]:
+            errors.append(f"{label}: mml_file_sha256 does not match the MML manifest")
+        if not renders.get(r.get("page_image_check_id")):
+            errors.append(f"{label}: page_image_check_id must resolve to a page-image register row with a render hash")
+        if r.get("from_record_id") not in known:
+            errors.append(f"{label}: from_record_id {r.get('from_record_id')} not in the frozen KB/cases")
+        if r.get("document_authority") == "GOVERNMENT_ISSUED_MANUAL" and not r.get("edition_authority_ref"):
+            errors.append(f"{label}: GOVERNMENT_ISSUED_MANUAL requires edition_authority_ref")
+    for label, f in records["finding"]:
+        if not isinstance(f, dict):
+            continue
+        for sid in (f.get("source_ids") or []) + (f.get("contrary_source_ids") or []) + (f.get("mml_anchor_ids") or []):
+            if sid in seen:
+                errors.append(f"{label}: manual_supported relation {sid} cannot be cited as finding evidence (not statutory authority)")
+    for label, r in records["review"]:
+        if isinstance(r, dict):
+            for sid in (r.get("source_ids") or []) + (r.get("independent_source_ids") or []):
+                if sid in seen:
+                    errors.append(f"{label}: relation {sid} cannot be cited as review evidence")
+    return len(rels)
+
+
 def schema_check():
+    rel = read_json(SCHEMAS / "relation.schema.json")
+    assert rel["type"] == "object" and rel.get("additionalProperties") is False
+    assert set(rel["required"]) <= set(rel["properties"])
+    assert rel["properties"]["legal_effect"]["enum"] == ["NOT_STATUTORY_AUTHORITY"]
     for kind in KINDS:
         p = SCHEMAS / f"{kind}.schema.json"
         schema = read_json(p)

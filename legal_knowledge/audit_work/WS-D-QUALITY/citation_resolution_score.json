@@ -1,0 +1,196 @@
+{
+  "artifact": "WS-D citation resolution score",
+  "inputs": {
+    "kb_sha256": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1",
+    "register": "legal_knowledge/audit_work/PILOT-01/registers/source_code_resolution_v3.csv",
+    "register_sha256": "40b18c3dfff3ad81c099118a0ee058c28db5255a8c4ba47d4391bd1685e8d944"
+  },
+  "definitions": {
+    "CONFIRMED": [
+      "RESOLVED_RECORD_EXPLICIT",
+      "CORROBORATED_OFFICIAL"
+    ],
+    "INFERRED": [
+      "RESOLVED_CO_CITATION"
+    ],
+    "UNRESOLVED": [
+      "PROBABLE",
+      "CATEGORY_ONLY",
+      "UNRESOLVABLE"
+    ],
+    "note": "Identity resolution of a citation code only. Not legal correctness, not currency, not amendment status."
+  },
+  "code_level": {
+    "denominator_codes": 87,
+    "by_class": {
+      "CATEGORY_ONLY": 2,
+      "CORROBORATED_OFFICIAL": 33,
+      "PROBABLE": 9,
+      "RESOLVED_CO_CITATION": 3,
+      "RESOLVED_RECORD_EXPLICIT": 39,
+      "UNRESOLVABLE": 1
+    },
+    "confirmed": {
+      "numerator": 72,
+      "denominator": 87,
+      "pct": 82.8
+    },
+    "officially_corroborated": {
+      "numerator": 33,
+      "denominator": 87,
+      "pct": 37.9
+    },
+    "record_explicit_only": {
+      "numerator": 39,
+      "denominator": 87,
+      "pct": 44.8
+    },
+    "inferred_co_citation": {
+      "numerator": 3,
+      "denominator": 87,
+      "pct": 3.4
+    },
+    "confirmed_plus_inferred": {
+      "numerator": 75,
+      "denominator": 87,
+      "pct": 86.2
+    },
+    "unresolved": {
+      "numerator": 12,
+      "denominator": 87,
+      "pct": 13.8
+    }
+  },
+  "link_level": {
+    "denominator_record_code_links": 681,
+    "by_class": {
+      "CATEGORY_ONLY": 10,
+      "CORROBORATED_OFFICIAL": 377,
+      "PROBABLE": 19,
+      "RESOLVED_CO_CITATION": 56,
+      "RESOLVED_RECORD_EXPLICIT": 217,
+      "UNRESOLVABLE": 2
+    },
+    "confirmed": {
+      "numerator": 594,
+      "denominator": 681,
+      "pct": 87.2
+    },
+    "inferred_co_citation": {
+      "numerator": 56,
+      "denominator": 681,
+      "pct": 8.2
+    },
+    "unresolved": {
+      "numerator": 31,
+      "denominator": 681,
+      "pct": 4.6
+    }
+  },
+  "record_level": {
+    "denominator_all_records": 658,
+    "records_with_codes": 389,
+    "records_without_codes_plaintext_only": 269,
+    "all_codes_confirmed": {
+      "numerator": 319,
+      "denominator": 389,
+      "pct": 82.0
+    },
+    "worst_code_inferred": {
+      "numerator": 39,
+      "denominator": 389,
+      "pct": 10.0
+    },
+    "worst_code_unresolved": {
+      "numerator": 31,
+      "denominator": 389,
+      "pct": 8.0
+    },
+    "all_codes_confirmed_over_all_658": {
+      "numerator": 319,
+      "denominator": 658,
+      "pct": 48.5
+    },
+    "records_with_unresolved_code": [
+      "AFT-023",
+      "AFT-039",
+      "CIV-032",
+      "CM-040",
+      "COI-002",
+      "COI-007",
+      "COI-018",
+      "COI-029",
+      "COI-033",
+      "COI-046",
+      "EV-002",
+      "HCE-010",
+      "HCE-030",
+      "HCE-031",
+      "HCE-033",
+      "PEN-001",
+      "PEN-002",
+      "PEN-003",
+      "PEN-006",
+      "PEN-009",
+      "PEN-012",
+      "PEN-029",
+      "PEN-031",
+      "PEN-035",
+      "PEN-036",
+      "PEN-037",
+      "PEN-039",
+      "PEN-049",
+      "PEN-WF-01",
+      "PEN-WF-07",
+      "V7-CL-10"
+    ],
+    "records_with_inferred_code_only": [
+      "EV-001",
+      "EV-003",
+      "EV-004",
+      "EV-005",
+      "EV-006",
+      "EV-007",
+      "EV-008",
+      "EV-009",
+      "EV-010",
+      "EV-011",
+      "EV-012",
+      "EV-013",
+      "EV-014",
+      "EV-015",
+      "EV-016",
+      "EV-017",
+      "EV-018",
+      "EV-019",
+      "EV-020",
+      "EV-021",
+      "EV-022",
+      "EV-023",
+      "EV-024",
+      "EV-025",
+      "EV-026",
+      "EV-027",
+      "EV-028",
+      "EV-029",
+      "EV-030",
+      "EV-031",
+      "EV-032",
+      "EV-033",
+      "EV-034",
+      "EV-035",
+      "EV-036",
+      "EV-037",
+      "EV-038",
+      "EV-039",
+      "EV-040"
+    ]
+  },
+  "placeholders": {
+    "VERIFY": [
+      "CM-026",
+      "CM-040"
+    ]
+  },
+  "headline": "72/87 codes confirmed (82.8%); 75/87 (86.2%) only if 3 co-citation inferences are counted; 12/87 unresolved. 269/658 records have no code and are outside this denominator."
+}
