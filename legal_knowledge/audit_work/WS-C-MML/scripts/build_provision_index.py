@@ -13,7 +13,7 @@ from pathlib import Path
 
 SP = Path(sys.argv[1]); OUT = Path(sys.argv[2])
 R = SP / "repro1"; O = SP / "mml_x/originals"
-HEAD = re.compile(r"^\s{0,20}[\[\(]?\s*(\d{1,3})\s*[-–]?\s*([A-Z]{1,2})?\s*\.\s*\[?\s*([A-Z\(][^\n]{0,200})")
+HEAD = re.compile(r"^\s{0,20}[\[\(]?\s*(\d{1,3})\s*[-–]?\s*([A-Z]{1,2})?\s*(?:\.|(?<=[A-Z])\s)\s*\[?\s*([A-Z\(][^\n]{0,200})")
 DASH = re.compile(r"(—|–|\.-|\. -|--|\.—)")
 
 
@@ -81,7 +81,7 @@ def cands_from(items, lo=0, hi=10 ** 9, need_dash=True):
 def mml2_bold():
     import pymupdf
     d = pymupdf.open(O / "MML 2.pdf")
-    pat = re.compile(r"^\s*\[?\s*(\d{1,3})\s*[-–]?\s*([A-Z]{1,2})?\s*\.\s*")
+    pat = re.compile(r"^\s*\[?\s*(\d{1,3})\s*[-–]?\s*([A-Z]{1,2})?\s*(?:\.|(?<=[A-Z])\s)\s*")
     res = {"AA": [], "AR": []}
     for pno in range(d.page_count):
         p = pno + 1

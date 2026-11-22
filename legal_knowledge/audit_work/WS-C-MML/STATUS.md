@@ -7,7 +7,7 @@
 
 ## In progress / next
 - DONE commit 2: `kb658_source_coverage_inventory.csv` (658/658 rows) + `scripts/build_kb658_inventory.py` (stdlib, deterministic, re-run byte-identical) + `kb658_coverage_summary.json`. FULL 379, PARTIAL 131, SOURCE_GAP 56, UNRESOLVED 14, NO_CITATION 78 (denominator 658). Source-coverage only; no correctness verdicts.
-- `procedure_gap_conflict_register.csv`, `candidate_corrections.csv`
+- DONE commit 3: `procedure_gap_conflict_register.csv` (17 rows; 15 image-checked or rendered, 2 text-only marked REQUIRES_VERIFICATION), `candidate_corrections.csv` (14 proposals, none applied), `page_image_checks_wsc.csv` extended to WSC-PIC-28; provision index fixed for suffix headings such as r.80A.
 - `calibration_sample_ranked.csv`
 
 ## Blockers
