@@ -22,29 +22,12 @@ Sir/Madam,
 
 2. **Principal notification.** Gazette of India, **Part II, Section 4, No. 47, dated 27 November 1954**, pages **291–378**, containing Ministry of Defence notification **S.R.O. 484** (the Army Rules, 1954), together with any erratum or corrigendum published for it. In particular we need **page 300** (Rule 23, "Procedure for taking down the summary of evidence"). A publicly available archival scan of this issue appears to show the wording of Rule 23(3), and later compilations differ from it. A certified copy will settle the authoritative text.
 
-3. **Amending notifications.** Certified copies, with publication particulars (Gazette Part, Section, issue number, date and page), of the following notifications amending the Army Rules, 1954. These are cited in official compilations and could not be located in public archives:
-   - S.R.O. 7(E) dated 17-06-1960
-   - S.R.O. 205 dated 12-07-1961
-   - S.R.O. 1 dated 22-12-1961
-   - S.R.O. 34 dated 05-06-1963
-   - S.R.O. 126 dated 12-03-1964
-   - S.R.O. 5 dated 23-12-1968
-   - S.R.O. 246 dated 12-10-1982
-   - S.R.O. 44 dated 24-01-1985
-   - S.R.O. 55 dated 22-02-1985
-   - S.R.O. 68 dated 01-04-1985
-   - S.R.O. 278 dated 29-11-1985
-   - S.R.O. 169 dated 15-05-1987
-   - S.R.O. 302 dated 18-09-1987
-   - S.R.O. 332 dated 26-09-1989
-   - S.R.O. 44 dated 01-02-1991
-   - S.R.O. 61 dated 07-02-1991
-   - S.R.O. 235 dated 01-10-1991
-   - S.R.O. 258 dated 27-11-2002
-   - S.R.O. 2(E) dated 20-02-2018
-   - any notification amending the Army Rules, 1954 issued after 06-06-2022
+3. **Amending notifications.** Certified copies, with publication particulars (Gazette Part, Section, issue number, date and page), of the following notifications cited in official notes as amending the Army Rules, 1954, which could not be located in public archives:
+   - **E-7 dated 17-06-1960** (believed to be the Army (First Amendment) Rules, 1960)
+   - **S.R.O. 258 dated 27-11-2002**
+   - **any notification amending the Army Rules, 1954 issued after 06-06-2022**
 
-   If any of these does not exist, or does not amend the Army Rules, a statement to that effect will equally assist.
+   If any of these does not exist, or does not amend the Army Rules, a statement to that effect will equally assist. *(Thirty-one other amending or related notifications from 1960 to 2022 have been located in archival copies of the Gazette.)*
 
 4. **Confirmation sought.** Please also indicate whether any notification or corrigendum since 27 November 1954 has amended **Rule 23** of the Army Rules, 1954.
 
@@ -68,5 +51,5 @@ Yours faithfully,
 | Archival scan of Gazette No. 47, 27-11-1954 | archive.org `in.gazette.central.w.1954-11-27.103686` (Public.Resource.Org); MD5 matches archive.org; SHA-256 c5ef95a9…aca6; 88 pp = pp.291–378 | PIC-10/11; R23-VERIFY-01 F-REVD-001 (second blind reading agrees) |
 | r.23(3) wording on the scan | "You are not obliged to say anything unless you wish to do so…" | printed p.300 |
 | India Code compilation | "You are obliged to say anything…" | PDF p.41 (PIC-01) |
-| Located amendments (none amends r.23) | 116/1965, 215/1965, 188/1979, 216/1988, 17(E)/1993, 8(E)/2003, 17(E)/2019, 6(E)/2022 | `R23-VERIFY-01/registers/amendment_chain_r23.csv` |
+| Located amendments (none amends r.23) | 31 instruments 1960–2022 (9 in `amendment_chain_r23.csv`, 22 in `amendment_search_2026-11-22.csv`) | R23-VERIFY-01 registers |
 | Status | **CONFLICTING** until legal review (owner instruction) | F-R23-001/002 |
