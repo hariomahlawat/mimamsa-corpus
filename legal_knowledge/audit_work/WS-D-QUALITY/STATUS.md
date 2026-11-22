@@ -29,10 +29,13 @@ Baseline: 658 KB (9a8f0d19...), 53 cases (8b8d53cd...), 87 codes (72 firm, 75 in
 
 ## Cycle 3 (worktree /home/user/ws-d-c3, branch claude/ws-d-cycle3, from integration 9b48b08e)
 - C3-2 DONE `identity_map_proposed.csv/.json/.md` + `scripts/build_identity_map.py` (repository evidence only; inputs pinned by SHA-256): 15 non-firm codes -> 1 confirmed (V9-S03: single-code records' URL filename = official corpus original_filename armyrules1954.pdf), 4 inferred (V9-S01, V9-S02, V7-S04, V9-S08), 10 unresolved; 22 short case-name references -> 15 inferred, 7 unresolved (never confirmed). PROPOSAL: published KPI stays 72/87 (73/87 only if a reviewed register adopts V9-S03). Tests `test_legal_audit_identity_map.py` (7).
-- C3-1 DONE `canonical_coverage.csv/.json/.md` + `scripts/canonical_coverage.py` (CP-01: citation_present / source_identified / source_searchable + quality flags; denominator 658; inputs pinned by SHA-256): citation_present YES 581 / NO 77; identified ALL 396 / PARTLY 76 / NONE 109 / n.a. 77; searchable ALL 472 / n.a. 186; ANCHORED_FULL 362; items 981 (716 identified, 78 inferred). coverage_scorecard.* and coverage_reconciliation.* superseded as the coverage definition but preserved unchanged. Tests `test_legal_audit_canonical_coverage.py` (8). C3-3 versioned relationships: pending. C3-4 CI/determinism: pending.
+- C3-1 DONE `canonical_coverage.csv/.json/.md` + `scripts/canonical_coverage.py` (CP-01: citation_present / source_identified / source_searchable + quality flags; denominator 658; inputs pinned by SHA-256): citation_present YES 581 / NO 77; identified ALL 396 / PARTLY 76 / NONE 109 / n.a. 77; searchable ALL 472 / n.a. 186; ANCHORED_FULL 362; items 981 (716 identified, 78 inferred). coverage_scorecard.* and coverage_reconciliation.* superseded as the coverage definition but preserved unchanged. Tests `test_legal_audit_canonical_coverage.py` (8). 
+
+- C3-3 DONE `relation_graph_versioned_edges.csv`, `relation_graph_versioned_report.md`, `relation_graph_versioned_summary.json` + `scripts/build_versioned_edges.py`: record -> provision version/change edges from the ARMY-RULES-CHAIN-01 version register, WS-A change log and WS-A Army Act chain (non-version rows excluded); 471 candidate-version edges for 325 of 1061 record-provision citations; 220 with a stated effective date, 251 flagged EFFECTIVE_DATE_UNSTATED (never inferred from publication dates); r.23(3) CONFLICTING / r.193 OPEN / r.194 OPEN|PROPOSAL carried unchanged. Tests `test_legal_audit_versioned_edges.py` (8).
+- C3-4 DONE CI steps: versioned edges `--check` (byte-identical), canonical coverage and identity map `--check` (byte-identical where the crawler corpus ref exists; otherwise pinned-input hashes verified and regeneration reported NOT_CHECKED). Provenance checker: 0 new violations.
 
 ## In progress
-- C3-3.
+- Nothing (cycle 3 complete).
 
 ## Next (if continued)
 - Coordinator decisions on OQ-D-001..015; possible v4 register proposal (D-WSD-001) and frozen-batch date-rule migration proposal (OQ-D-006), each as separate additive files.

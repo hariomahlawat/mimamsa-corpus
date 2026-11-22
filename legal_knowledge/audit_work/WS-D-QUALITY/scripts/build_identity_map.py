@@ -30,6 +30,8 @@ INPUTS = {"register": AW / "PILOT-01/registers/source_code_resolution_v3.csv",
 NON_FIRM = ("RESOLVED_CO_CITATION", "PROBABLE", "CATEGORY_ONLY", "UNRESOLVABLE")
 OFFICIAL = re.compile(r"^https://([a-z0-9-]+\.)*(indiacode\.nic\.in|indiacode\.gov\.in|sci\.gov\.in|gov\.in|nic\.in)/", re.I)
 OUT_CSV, OUT_JSON, OUT_MD = (WSD / "identity_map_proposed.csv", WSD / "identity_map_proposed.json", WSD / "identity_map_proposed.md")
+OUT_JSON_PATH = OUT_JSON
+LABEL = "identity map"
 COLS = ["item_type", "item", "records", "current_state", "proposed_identity", "proposed_target", "confidence",
         "evidence_kind", "evidence", "what_would_confirm"]
 
@@ -186,6 +188,14 @@ def outputs(corpus_ref):
 def main(argv=None):
     ap = argparse.ArgumentParser(); ap.add_argument("--corpus-ref", default="origin/raw-data"); ap.add_argument("--check", action="store_true")
     a = ap.parse_args(argv)
+    if a.check and subprocess.run(["git", "-C", str(ROOT), "rev-parse", "--verify", "-q", a.corpus_ref],
+                                  capture_output=True).returncode != 0:
+        # CI checkouts lack the crawler-corpus ref: verify the pinned input hashes only and say so.
+        pinned = json.loads(OUT_JSON_PATH.read_text(encoding="utf-8"))["inputs"]
+        bad = [k for k, v in pinned.items() if "sha256" in v and hashlib.sha256((ROOT / v["path"]).read_bytes()).hexdigest() != v["sha256"]]
+        print("%s: corpus ref %s unavailable - regeneration NOT_CHECKED; pinned inputs %s"
+              % (LABEL, a.corpus_ref, "MATCH" if not bad else f"CHANGED {bad} (regenerate)"))
+        return 1 if bad else 0
     files = outputs(a.corpus_ref)
     if a.check:
         bad = [str(p.name) for p, t in files.items() if not p.is_file() or p.read_text(encoding="utf-8") != t]

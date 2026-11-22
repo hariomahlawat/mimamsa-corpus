@@ -50,6 +50,8 @@ NAME_DOC = [(r"^(AA|Army Act)$", "act-army-1950"), (r"^(AR|Army Rules?)$", "rule
 KNOWN_NO_TARGET = re.compile(r"^(Constitution|Art\.?\s*\d+|Article\s*\d+|POCSO|ISO Act)", re.I)
 STRUCTURAL = ("PROVISION_NOT_IN_HEADING_INDEX", "ARMY_ACT_OR_RULES_CITED_WITHOUT_PINPOINT", "URL_NON_OFFICIAL_HOST")
 OUT = {"csv": WSD / "canonical_coverage.csv", "json": WSD / "canonical_coverage.json", "md": WSD / "canonical_coverage.md"}
+OUT_JSON_PATH = OUT["json"]
+LABEL = "canonical coverage"
 COLS = ["record_id", "module", "family", "citation_present", "citation_kinds", "n_items", "source_identified",
         "n_identified", "n_inferred", "source_searchable", "n_searchable", "quality_flags", "anchored_full", "items"]
 
@@ -253,6 +255,14 @@ def outputs(corpus_ref):
 def main(argv=None):
     ap = argparse.ArgumentParser(); ap.add_argument("--corpus-ref", default="origin/raw-data"); ap.add_argument("--check", action="store_true")
     a = ap.parse_args(argv)
+    if a.check and subprocess.run(["git", "-C", str(ROOT), "rev-parse", "--verify", "-q", a.corpus_ref],
+                                  capture_output=True).returncode != 0:
+        # CI checkouts lack the crawler-corpus ref: verify the pinned input hashes only and say so.
+        pinned = json.loads(OUT_JSON_PATH.read_text(encoding="utf-8"))["inputs"]
+        bad = [k for k, v in pinned.items() if "sha256" in v and hashlib.sha256((ROOT / v["path"]).read_bytes()).hexdigest() != v["sha256"]]
+        print("%s: corpus ref %s unavailable - regeneration NOT_CHECKED; pinned inputs %s"
+              % (LABEL, a.corpus_ref, "MATCH" if not bad else f"CHANGED {bad} (regenerate)"))
+        return 1 if bad else 0
     files = outputs(a.corpus_ref)
     if a.check:
         bad = [p.name for p, t in files.items() if not p.is_file() or p.read_text(encoding="utf-8") != t]
