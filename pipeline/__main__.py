@@ -28,6 +28,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--root", default=str(ROOT))
     p.add_argument("--only", action="append", metavar="DOC_ID", help="extract/ocr: limit to these documents")
     p.add_argument("--workers", type=int, default=4, help="ocr: pages read in parallel")
+    p.add_argument("--langs", default=ocr.LANGS, help="ocr: Tesseract languages, e.g. eng or hin+eng")
     p.add_argument("--redo", action="store_true", help="extract/ocr: process again even if already done")
     args = p.parse_args(argv)
     paths = Paths.default(args.root)
@@ -57,7 +58,7 @@ def main(argv: list[str] | None = None) -> int:
         extra["relevance"] = res
         print("relevance:", json.dumps(res))
     if args.stage == "ocr":
-        res = ocr.run(paths, args.only, workers=args.workers, redo=args.redo)
+        res = ocr.run(paths, args.only, workers=args.workers, langs=args.langs, redo=args.redo)
         print("ocr:", json.dumps(res, indent=1, ensure_ascii=False))
         if res.get("error") or res.get("errors"):
             rc = 1
