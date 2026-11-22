@@ -9,7 +9,9 @@ The register is built from the Gazette instruments themselves, **not** from the 
 | `army_rules_instrument_register.csv` | 37 rows: the principal notification, every amending instrument located or alleged, r.188(e) declarations wrongly listed as amendments, unchecked hints and gaps |
 | `army_rules_provision_chronology.csv` | 46 provision-level events: inserted, substituted, amended, omitted, corrigendum. Commencement as printed and temporal notes are recorded separately from instrument and publication dates |
 | `official_note_discrepancies.csv` | 10 inconsistencies in official amendment notes |
-| `statutory_version_register_seed.csv` | Seed of the proposed authoritative version register (11 rows), for the provisions in conflict or under review |
+| `statutory_version_register_seed.csv` | Seed of the proposed authoritative version register (12 rows), for the provisions in conflict or under review; r.193 = C-08, r.194 = C-09 |
+| `page_image_checks_chain.csv` | PIC-30..36: continuation pages previously read only from the text layer, now image-checked (S.R.O. 205/1961 pp.142-143 and blank p.144; 5/1968 p.10; 278/1985 p.532; 188/1979 pp.259-260) |
+| `check_registers.py` | Deterministic cross-reference and date-semantics check (run in CI proposal) |
 
 ## Completeness (as of 2026-11-22)
 | State | Count | Rows |
@@ -25,5 +27,6 @@ One row (AR-029, S.R.O. 17(E)/1993) still needs each affected rule itemised.
 
 ## Rules followed
 - Wording relied on comes from page images. Rows from the text layer only are labelled and are not used for any legal determination.
-- `commencement_as_printed` is copied from the instrument ("not stated" where silent). Where an instrument is silent, no effective date is inferred: that is an advisor question (AQ-05).
+- **Dates are distinct:** `publication_date` (Gazette issue), `commencement_as_printed` (copied from the instrument) and `effective_date`. `effective_date` is filled only when the instrument states its commencement; otherwise it is null with an explicit `effective_date_status` (`NOT_STATED_PENDING_ADVICE (AQ-05)`, `NOT_DETERMINED`, `NOT_APPLICABLE`, `UNKNOWN`). A publication date is never used as an effective date.
+- **Continuation pages:** `continuation_pages_status` is `ALL_IMAGE_CHECKED` only when every operative page relied on was image-checked. Otherwise it is `REQUIRES_VERIFICATION`: the 5 OCR-only instruments, and S.R.O. 17(E)/1993 until WS-A itemises it.
 - Compilation text is used only as a comparison (SOURCE_AUTHORITY_POLICY v1). It never overrides a located Gazette instrument, and a disagreement is recorded rather than resolved.

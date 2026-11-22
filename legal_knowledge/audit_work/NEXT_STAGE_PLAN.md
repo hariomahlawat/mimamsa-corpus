@@ -36,14 +36,14 @@ Merge checks (`git merge-tree`): #6 into current staging is clean; the #9 stack 
 4. Acquisition data from any run goes on a **new data branch** off `main` (for example `claude/acq-01-data`). It is never pushed to `main` or staging directly. `data/` is not uploaded by the sync script.
 
 **Stack A (audit), sync guard first:**
-1. **Guard (approval A3).** A one-line owner-approved change to `sync-legal-knowledge-hf.yml` on staging, adding `- "!legal_knowledge/audit_work/**"` directly after `- "legal_knowledge/**"`. That change itself touches a trigger path, so merge it with **`[skip ci]` in the merge-commit message**; GitHub skips push-triggered workflows for such commits. Then confirm in Actions that no "Sync curated legal research" run started.
+1. **Guard (approval A3), revised 2026-11-22 on owner instruction.** The `[skip ci]` proposal is withdrawn. It is replaced by a **job-level safeguard**, PR #15 (`claude/hf-sync-guard-staging` → staging): the general corpus `upload` job runs only on `workflow_dispatch` with the input `approve_corpus_upload = I-APPROVE-CORPUS-UPLOAD`, never on push, and a first-step check repeats the test. The separately controlled `upload_abbreviations` job is unchanged. After PR #15 is merged, confirm in Actions that its own merge push skipped both jobs.
 2. Merge #6 into the #5 branch (`legal-knowledge/claude-audit-agents-v1`). That branch is not a sync branch, so nothing runs.
-3. Merge #5 into staging, again with `[skip ci]` in the merge message as a second safeguard. Confirm in Actions that no sync run started, and that `legal-audit-kit-ci` (run on the PR) was green on the final head.
+3. Merge #5 into staging (after PR #15). The upload job cannot run on push, so no sync can start. Confirm in Actions, and confirm that `legal-audit-kit-ci` (run on the PR) was green on the final head.
 4. Use **merge commits, not squash**, so that the owner's commits (b315347b..2256e1ad) and the CI evidence SHAs cited in `PILOT-01/CI_EVIDENCE.md` stay traceable.
 
 **PR #1 (staging → main) is the owner's deliberate sync path, not this audit's.** It would carry the audit work into `main` and **will** trigger a sync. Before merging it, decide on the MML base64 transport parts in staging's history (outstanding owner decision).
 
-**This proposal (`ACQ-02`, `ARMY-RULES-CHAIN-01`, update c):** committed on `claude/gifted-bardeen-byeim6` only. It is **not** yet integrated into #6, to keep #6 stable for review. Options: (a) integrate into #6 after the usual upstream check, or (b) a separate stacked PR on #6. Approval A8.
+**This proposal (`ACQ-02`, `ARMY-RULES-CHAIN-01`, updates c/d):** decided by the owner as a **separate stacked PR**. Branch `claude/next-stage-proposal`, base `claude/audit-pilot-01` (PR #6). The workstream PRs stack on it.
 
 ---
 
@@ -96,8 +96,9 @@ From `ARMY-RULES-CHAIN-01/army_rules_instrument_register.csv` (37 rows):
 | Not searched authoritatively | 1 (after 06-06-2022) |
 
 - **Rule 23:** no amendment in any of the 31 located instruments; the 5 OCR-only ones show none either. **CONFLICTING** is retained: the 1954 Gazette reads "not obliged", the compilation reads "obliged".
-- **Rule 194:** S.R.O. 332/1989 adds "or the Officer Commanding an Army". MML 2 agrees; the compilation lacks the words. **PROPOSAL, legal review required.**
-- **Rule 193 (new, U-04):** S.R.O. 302/1987 covers s.91(i) only. The compilation covers s.90(i) **and** s.91(i). No located instrument explains the s.90(i) words. **OPEN.**
+- **Rule 193 and Rule 194 now have separate conflict IDs** (`SOURCE-CONFLICTS-01/conflict_split_2026-11-22d.csv`): **C-08** (r.193) and **C-09** (r.194), both split from C-04, with links to all earlier evidence.
+- **Rule 194 (C-09):** S.R.O. 332/1989 adds "or the Officer Commanding an Army". MML 2 agrees; the compilation lacks the words. **PROPOSAL, legal review required.**
+- **Rule 193 (C-08, U-04):** S.R.O. 302/1987 covers s.91(i) only. The compilation covers s.90(i) **and** s.91(i). The leading candidate source is S.R.O. 17(E)/1993, which MML 2 p.227 footnotes as substituting r.193; it is located but not yet itemised (WS-A). **OPEN; no correction proposed until the chronology is complete.**
 - **Official notes are not a reliable index (U-05).** They omit S.R.O. 205/1961 (in 1982–85), S.R.O. 278/1985 (in 1987), S.R.O. 1/1961 (in 1991), every 1960 S.R.O. except E-7, and S.R.O. 22/2010. They misdate S.R.O. 34 and treat two r.188(e) declarations as amendments.
 - **Outstanding evidence:**
   - itemise S.R.O. 17(E)/1993 rule by rule;
@@ -121,7 +122,7 @@ plus, when implemented: `wording_sha256` (normalised text), `page_image_check_id
 **Rules:**
 1. A version's text comes **only** from an image-checked Gazette instrument (`ENACTED_OR_NOTIFIED_PRIMARY`; a facsimile is acceptable with custody checks; a certified copy prevails if the two differ). OCR text can locate a version but cannot establish it.
 2. Compilation text (India Code, dmamod) is recorded in `compilation_agrees`, never as the source of a version.
-3. `valid_from` is the commencement printed in the instrument. Where the instrument is silent, `valid_from` is left unset with the note "publication date; commencement not stated", pending the advisor's rule (AQ-05). Retrospective effect (e.g. S.R.O. 216/1988, w.e.f. 04-06-1979) is recorded explicitly.
+3. **Publication date, commencement as printed, and effective date are separate fields.** A publication date is never copied into the effective date. `effective_date` is filled only when the instrument itself states its commencement (`effective_date_status = STATED_IN_INSTRUMENT…`); otherwise it is **null**, with an explicit status: `NOT_STATED_PENDING_ADVICE (AQ-05)`, `NOT_DETERMINED`, `NOT_APPLICABLE` or `UNKNOWN`. Retrospective effect (e.g. S.R.O. 216/1988, w.e.f. 04-06-1979) is recorded as stated. `check_registers.py` enforces this.
 4. A corrigendum creates a correction entry on the version it corrects, not a new version.
 5. `determination_state` is one of `VERIFIED_TEXT`, `PROPOSAL`, `OPEN`, `CONFLICTING`. Only a named human legal reviewer can move a row to an approved state; no agent can.
 
@@ -192,7 +193,7 @@ No item is advisor-approved. Advisor nomination is still outstanding.
 | --- | --- | --- |
 | A1 | Merge #7 into `main` (owner merges) | Security fix live; unblocks #8 retarget |
 | A2 | Approve the PR #8 configuration **and** a real download run for exactly the 14 pinned URLs | Fetch B1/B2/B6, then pipeline, checksums, page-image checks, CI, separate proposals |
-| A3 | Sync guard: the workflow negation line plus `[skip ci]` merge messages, before any Stack A merge | Prevents an unintended HF sync |
+| A3 | Merge PR #15 (job-level HF guard: corpus upload manual-dispatch only with explicit approval) before any Stack A merge | Prevents an unintended HF sync |
 | A4 | Prepare an ACQ-02 crawler-config PR (16 pinned URLs with expected hashes), then a separate download approval | Turns the supplement into record copies |
 | A5 | ACQ-03 discovery: download and image-check 8 archive.org issues (5 OCR-only instruments, 3 hints), as pinned config or scratchpad discovery (choose) | Completes the archive.org part of the chain |
 | A6 | Owner or Indian-network egazette search: E-7/1960, S.R.O. 258/2002, post-06-06-2022 | Closes gaps that cannot be closed from here |

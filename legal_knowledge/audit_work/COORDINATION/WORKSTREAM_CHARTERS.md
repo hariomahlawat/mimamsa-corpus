@@ -35,7 +35,7 @@ Binding for every agent: `docs/legal-audit/SOURCE_AUTHORITY_POLICY.md` (v1), `do
 8. **Before each commit:**
    - `python3 -m unittest discover -s tests -p 'test_legal_audit_*.py'` must pass;
    - the strict validation of PILOT-01 and R23-VERIFY-01 must pass;
-   - `python3 legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/check_registers.py` must pass.
+   - `python3 legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/check_registers.py` must pass (on branches that contain the next-stage proposal, i.e. all workstream branches).
 9. **Unknowns go in the workstream's open-questions register.** Never invent an answer.
 
 ## Ownership and charters
@@ -45,6 +45,10 @@ Binding for every agent: `docs/legal-audit/SOURCE_AUTHORITY_POLICY.md` (v1), `do
 | B Judgments | #12 | `claude/ws-b-judgments` · `/home/user/ws-b` | `legal_knowledge/audit_work/WS-B-JUDGMENTS/**` | `origin/raw-data` (intern intake: data/meta, data/raw), cases_53 (frozen), issues #3/#4, PILOT-01 judgment findings | (1) dedup intake manifest; (2) identity/citation resolution register; (3) holding/obiter/argument with pinpoint paras; (4) statutes cited plus effective-date checks; (5) subsequent treatment; (6) adverse/conflict queue; (7) crosswalk to 53 cases and 658 KB | No collection duplicating the intern; no third-party holding treated as verified; every holding pinned to a para of an official copy | none |
 | C MML & procedure | #13 | `claude/ws-c-mml` · `/home/user/ws-c` | `legal_knowledge/audit_work/WS-C-MML/**` | MML originals (private; scratchpad extraction, manifest SHA), PILOT-01 crosswalk/edition notes, advisor packet | immutable input manifest; provision crosswalk with para/page; edition status; gap/conflict register; candidate corrections; **all-658 read-only source-coverage inventory**; ranked high-risk calibration samples | No complete derived MML text committed (excerpts ≤ the minimum needed); no correctness verdicts on the 658; edition never asserted official without authentication | none (uses A's outputs later, if available) |
 | D Data quality & CI | #14 | `claude/ws-d-quality` · `/home/user/ws-d` | `legal_knowledge/audit_work/WS-D-QUALITY/**`; **lease:** `tools/legal_audit/**`, `docs/legal-audit/schemas/**`, `tests/test_legal_audit_*.py` (new files freely; edits to existing tests only to extend, never weaken), `.github/workflows/legal-audit-kit-ci.yml` | 658/53 originals, code inventory (87), source_code_resolution_v3, all audit registers | (1) hash reproduction; (2) 87-code completeness test; (3) confirmed vs inferred score; (4) plain-text citation index (269 records, exact passages); (5) schema/validator tests (proof type, authority vs carrier, dates, relations, review-state separation); (6) relation graph and duplicate detection; (7) coverage scorecard with denominator; (8) reviewer provenance and CI report; CI job running `check_registers.py` | Existing tests never weakened; no KPI inflation (72/87 firm); CI green | Lease: no other WS touches the validator, schemas or CI |
+
+**Branch stack (owner instruction, 2026-11-22):** PR #6 (`claude/audit-pilot-01`) → stacked proposal PR (`claude/next-stage-proposal`: ACQ-02, ARMY-RULES-CHAIN-01, update c/d, plan) → one PR per workstream (base `claude/next-stage-proposal`).
+
+**Coordinating reviewer:** the orchestrator reviews each hand-off. Review notes go only in `COORDINATION/reviews/<WS>-<n>.md`. The reviewer never edits files in a workstream's directory; a required change is returned to the agent, or recorded as a review condition.
 
 Coordinator-owned: `legal_knowledge/audit_work/COORDINATION/**` and `NEXT_STAGE_PLAN.md`.
 **Conflict rule:** if a workstream needs a change in another's path, it writes a request in its own `STATUS.md`, and the coordinator routes it.
