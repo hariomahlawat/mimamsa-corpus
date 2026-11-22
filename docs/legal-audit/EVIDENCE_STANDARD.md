@@ -32,3 +32,10 @@ For each claim record: original record ID and location; exact existing text; all
 
 ## Security
 Do not expose repository private content in public issues, logs or external AI tools without authorisation. Preserve original access marks. Do not circumvent site protection, paywalls, robots or certificates. Keep licensed or restricted full-text evidence in authorised private stores only.
+
+## Source hierarchy for conflicts (owner rule, 2026-11-22)
+See `SOURCE_HIERARCHY.md` (binding). In summary:
+- For each conflicting document, determine its authority, provenance, applicable date and amendment history.
+- Prefer the authenticated original instrument over later transcriptions or compilations.
+- Government-issued manuals outweigh third-party commentary but never override Acts, Rules, amendments or binding judgments.
+- An archival reproduction of an official Gazette is evaluated as a copy of a primary document (class `ARCHIVAL_COPY_OF_OFFICIAL`, with custody checks), not as commentary because of its host.

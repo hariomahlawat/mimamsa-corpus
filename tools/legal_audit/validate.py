@@ -195,7 +195,8 @@ def validate_batch(batch: Path, strict: bool = False, manifest: Path | None = No
 MML_MANIFEST = ROOT / "legal_knowledge" / "manual_sources" / "MML_Originals_Manifest.csv"
 PRIMARY_TYPES = {"STATUTE", "RULE", "GAZETTE", "REGULATION", "JUDGMENT", "ORDER", "OTHER_PRIMARY"}
 DATED_TYPES = {"STATUTE", "RULE", "GAZETTE", "REGULATION"}
-MANUAL_AUTH = {"USER_SUPPLIED_REFERENCE", "MANUAL_EDITION_CORROBORATED", "SECONDARY", "UNCONFIRMED"}
+MANUAL_AUTH = {"USER_SUPPLIED_REFERENCE", "MANUAL_EDITION_CORROBORATED", "SECONDARY", "UNCONFIRMED", "GOVERNMENT_ISSUED_MANUAL"}
+ARCHIVAL_COPY_TYPES = {"GAZETTE", "STATUTE", "RULE", "REGULATION", "JUDGMENT", "ORDER", "OTHER_PRIMARY"}
 
 
 def load_mml_manifest():
@@ -223,6 +224,15 @@ def extended_checks(records, ids, strict, manifest, errors):
             continue
         if s.get("verification_state") == "SOURCE_VERIFIED" and not s.get("pinpoint"):
             errors.append(f"{label}: SOURCE_VERIFIED source without pinpoint")
+        if s.get("authenticity") == "ARCHIVAL_COPY_OF_OFFICIAL":
+            # Owner rule (2026-11-22): an archival reproduction of an official instrument is a copy of a primary
+            # document, not commentary; it must name a primary type and record custody checks.
+            if s.get("source_type") not in ARCHIVAL_COPY_TYPES:
+                errors.append(f"{label}: ARCHIVAL_COPY_OF_OFFICIAL requires a primary source_type")
+            if not s.get("custody_checks"):
+                errors.append(f"{label}: ARCHIVAL_COPY_OF_OFFICIAL requires custody_checks (identity, integrity, completeness)")
+            if not s.get("sha256"):
+                errors.append(f"{label}: ARCHIVAL_COPY_OF_OFFICIAL requires sha256 of the copy")
         if s.get("source_type") == "MANUAL":
             where = f"{s.get('local_path') or ''} {s.get('locator') or ''}"
             names = [n for n in (mml or {}) if n in where]

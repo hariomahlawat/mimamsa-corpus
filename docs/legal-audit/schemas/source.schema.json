@@ -99,7 +99,9 @@
         "SECONDARY",
         "UNCONFIRMED",
         "USER_SUPPLIED_REFERENCE",
-        "MANUAL_EDITION_CORROBORATED"
+        "MANUAL_EDITION_CORROBORATED",
+        "ARCHIVAL_COPY_OF_OFFICIAL",
+        "GOVERNMENT_ISSUED_MANUAL"
       ]
     },
     "caveat": {
@@ -118,6 +120,12 @@
         "MANUAL_COMMENTARY",
         "SECONDARY_TEXT",
         "METADATA_ONLY"
+      ]
+    },
+    "custody_checks": {
+      "type": [
+        "string",
+        "null"
       ]
     }
   }
