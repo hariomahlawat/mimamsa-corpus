@@ -1,0 +1,11 @@
+# Coordinator review: WS-A cycle 2 (bbc7faee; branch head after base merge 34e75aa9)
+- **Scope / gates:** only `WS-A-STATUTORY/`; audit tests, strict validation, check_registers, CSVs and originals all pass. The network log shows 118 requests (archive.org, indiacode, egazette), all search, metadata or API; no PDF downloaded. egazette TLS not bypassed.
+- **Independent check (commencement):** S.R.O. 188/1979 r.1(2) "They shall come into force on the date of their publication in the Official Gazette": own render of 46533.pdf PDF p.6, sha 4414f0e331854e70ac322615b7964b4767a5dea7beed8812dd006b7b66a0837c. **Confirmed.**
+- **r.187(1) (OQ-C-06):** the coordinator had already seen S.R.O. 126/1964 p.282 (PIC-16): two items, r.13(2A) only. That is consistent with WS-A's finding that no 1964 r.187 amendment is located. **Recorded, not determined**: five Mar–Apr 1964 issues are not held (ACQ-C2-05..09).
+- **Accepted into the baseline (commit 8b436b67):**
+  - commencement for AR-016 (coordinator-checked) and AR-031/034/035 (WS-A checks);
+  - AR-024 Explanation added;
+  - 10 hint rows (AR-037..046);
+  - 3 official-note errors.
+- **Pending:** r.15 "or Military Secretary" source (OQ-A-10); OQ-A-12 (deemed retrospective date earlier than the commencement of S.R.O. 188/1979) → advisor; ACQ-C2-01..12 → owner approvals.
+- **Disposition:** accepted as a review proposal (PR #19 updated). Technical review only.

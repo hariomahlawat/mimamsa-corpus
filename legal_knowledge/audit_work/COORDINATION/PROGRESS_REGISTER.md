@@ -100,9 +100,36 @@ All four agents were resumed (same agent instances, same worktrees and branches)
 
 | WS | Worktree / branch | Base at resume | Cycle 2 tasks | State |
 | --- | --- | --- | --- | --- |
-| A | /home/user/ws-a · claude/ws-a-statutory | 74530be9 | r.187(1) footnote (OQ-C-06); expand the provision change log from held verified sources; cross-check WS-C's 1993 footnote leads; gaps (E-7, S.R.O. 258/2002, post-2022, Rule 4-12); new requests only in `acquisition_requests_cycle2.csv` | RUNNING |
-| B | /home/user/ws-b · claude/ws-b-judgments | 68290bae | 13 unresolved curated cases; intern filter audit and proposed allow-list; holdings and treatment for calibration-sample cases; CC-09/CC-11; crosswalk improvements | RUNNING |
-| C | /home/user/ws-c · claude/ws-c-mml | a4c68cf2 | DOC/PDF fidelity register; image-check high-priority locators; procedure crosswalk (Act → Rule version → MML → KB); no substantive 658 audit | RUNNING |
-| D | /home/user/ws-d · claude/ws-d-quality | 1be2a2e1 | Reconcile WS-C/WS-D coverage metrics; v4 register proposal (new file); provenance controls; tests of check_registers semantics. **Coordinator approval granted:** optional additive relation type `manual_supported` (CC-13), never statutory authority | RUNNING |
+| A | /home/user/ws-a · claude/ws-a-statutory | 74530be9 | r.187(1) footnote (OQ-C-06); expand the provision change log from held verified sources; cross-check WS-C's 1993 footnote leads; gaps (E-7, S.R.O. 258/2002, post-2022, Rule 4-12); new requests only in `acquisition_requests_cycle2.csv` | COMPLETED (bbc7faee → 34e75aa9); review WS-A-2 |
+| B | /home/user/ws-b · claude/ws-b-judgments | 68290bae | 13 unresolved curated cases; intern filter audit and proposed allow-list; holdings and treatment for calibration-sample cases; CC-09/CC-11; crosswalk improvements | COMPLETED (f063fc8d → 97de40b3); review WS-B-2 |
+| C | /home/user/ws-c · claude/ws-c-mml | a4c68cf2 | DOC/PDF fidelity register; image-check high-priority locators; procedure crosswalk (Act → Rule version → MML → KB); no substantive 658 audit | COMPLETED (98e8c380 → 7eca19d7); review WS-C-2 |
+| D | /home/user/ws-d · claude/ws-d-quality | 1be2a2e1 | Reconcile WS-C/WS-D coverage metrics; v4 register proposal (new file); provenance controls; tests of check_registers semantics. **Coordinator approval granted:** optional additive relation type `manual_supported` (CC-13), never statutory authority | COMPLETED (451ba8d4 → ed3dcf90); review WS-D-2 |
 
 Controls: policy v1; originals read-only; no downloads, HF sync, merges or pushes by agents; shared files only with coordinator approval; consequential findings independently checked by the coordinator before integration; legal-advisor and JAG states unchanged.
+
+### Cycle 2 results (2026-11-22)
+- **Independent coordinator checks, all confirmed:**
+  - WS-A: S.R.O. 188/1979 commencement clause;
+  - WS-B: Shafhi identity on the official Arjun copy;
+  - WS-C: FID-01, the missing "not" in Army Act s.41(2) in the vol 2(AA) copy;
+  - WS-D: scope and refactor check, provenance run.
+- **Baseline (PR #16) commit 8b436b67:**
+  - commencement clauses AR-016/031/034/035;
+  - AR-024 Explanation added;
+  - hint rows AR-037..046 (47 instruments);
+  - 3 note errors;
+  - ACQ-02 authenticity/copy_fidelity split (policy v1);
+  - check_registers guards every r.23(3)/r.193/r.194 version row.
+- **Workstream branches:** all four re-merged with #16 and pushed (PRs #18–#21 updated). Each passes its tests and check_registers; WS-D provenance shows 0 new violations.
+- **Legal states:** unchanged. r.23(3) CONFLICTING; C-08 OPEN; C-09 PROPOSAL. Legal-advisor and JAG states NOT_STARTED.
+- **New owner decisions:**
+  - OQ-D-016 (canonical coverage definitions);
+  - OQ-D-003 (v4 register);
+  - OQ-D-018 (re-render PIC-08/09);
+  - OQ-D-020 (who authors manual_supported relations);
+  - WS-B allow-list and unreported-order route (OQ-C2-01);
+  - WS-A ACQ-C2-01..12 downloads.
+- **New advisor items:**
+  - OQ-A-12 (deemed date 04-06-1979 earlier than the commencement of S.R.O. 188/1979);
+  - A-C2-06 (P.P.S. Bedi after the omission of r.25);
+  - FID-03 (s.129 wording, to WS-A).
