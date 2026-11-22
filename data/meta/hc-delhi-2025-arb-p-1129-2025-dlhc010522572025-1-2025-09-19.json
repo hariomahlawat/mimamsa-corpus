@@ -1,0 +1,91 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=7_26/bench=dhcdb/DLHC010522572025_1_2025-09-19.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T03:25:25+00:00",
+  "sha256": "2137dd14d58a2c7269e2a36e6d0f00683150e2441d8903c833ca27d7c2cfc9ab",
+  "raw_path": "data/raw/hc/2025/2137dd14d58a2c7269e2a36e6d0f00683150e2441d8903c833ca27d7c2cfc9ab.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 8,
+  "access_marking": null,
+  "text_method": "ocr",
+  "ocr_confidence": 39.8,
+  "ocr_low_confidence_pages": [
+    1,
+    2
+  ],
+  "text_path": "data/text/hc-delhi-2025-arb-p-1129-2025-dlhc010522572025-1-2025-09-19.txt",
+  "text_quality": "suspect",
+  "needs_ocr": false,
+  "pages_without_text": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "relations": [],
+  "doc_id": "hc-delhi-2025-arb-p-1129-2025-dlhc010522572025-1-2025-09-19",
+  "doc_type": "judgment",
+  "title": "ARB.P./1129/2025 of INDO AUTO TECH LTD Vs GOVT OF INDIA INTEGRATED HQ  OF MOD ARMY",
+  "number": "ARB.P./1129/2025",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2025-09-19",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "DLHC010522572025_1_2025-09-19.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010522572025",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "ARB.P./1129/2025"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "INDO AUTO TECH LTD"
+    ],
+    "respondent": [
+      "GOVT OF INDIA INTEGRATED HQ  OF MOD ARMY"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE PURUSHAINDRA KUMAR KAURAV"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "not_checked",
+    "hits": 0,
+    "keywords": {},
+    "note": "OCR confidence below 70: cannot tell from this text"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "language": "rule",
+    "page_count": "rule",
+    "text_method": "rule"
+  }
+}

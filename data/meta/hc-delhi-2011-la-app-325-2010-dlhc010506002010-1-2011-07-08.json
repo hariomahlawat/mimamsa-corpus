@@ -1,0 +1,94 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2011/court=7_26/bench=dhcdb/DLHC010506002010_1_2011-07-08.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T03:25:25+00:00",
+  "sha256": "027897262ef96cd87340f7607486fe7f50152477fd048f37379e8f32b0c560a1",
+  "raw_path": "data/raw/hc/2011/027897262ef96cd87340f7607486fe7f50152477fd048f37379e8f32b0c560a1.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 20,
+  "access_marking": null,
+  "text_method": "ocr",
+  "ocr_confidence": 66.3,
+  "ocr_low_confidence_pages": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    9,
+    10,
+    11,
+    13,
+    14,
+    16,
+    18,
+    19,
+    20
+  ],
+  "text_path": "data/text/hc-delhi-2011-la-app-325-2010-dlhc010506002010-1-2011-07-08.txt",
+  "text_quality": "suspect",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2011-la-app-325-2010-dlhc010506002010-1-2011-07-08",
+  "doc_type": "judgment",
+  "title": "LA.APP./325/2010 of UNION OF INDIA Vs GEETESH MALHOTRA",
+  "number": "LA.APP./325/2010",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2011-07-08",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "DLHC010506002010_1_2011-07-08.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010506002010",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "LA.APP./325/2010"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA"
+    ],
+    "respondent": [
+      "GEETESH MALHOTRA"
+    ]
+  },
+  "judges": [],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "not_checked",
+    "hits": 0,
+    "keywords": {},
+    "note": "OCR confidence below 70: cannot tell from this text"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "language": "rule",
+    "page_count": "rule",
+    "text_method": "rule"
+  }
+}

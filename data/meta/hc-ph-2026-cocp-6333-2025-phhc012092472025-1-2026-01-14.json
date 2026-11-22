@@ -1,0 +1,83 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=3_22/bench=phhc/PHHC012092472025_1_2026-01-14.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T03:25:25+00:00",
+  "sha256": "b3d5304755209518d7bb6712f060798fff1d935d9a1b581154902b3756d2603e",
+  "raw_path": "data/raw/hc/2026/b3d5304755209518d7bb6712f060798fff1d935d9a1b581154902b3756d2603e.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "ocr",
+  "ocr_confidence": 66.4,
+  "ocr_low_confidence_pages": [
+    1
+  ],
+  "text_path": "data/text/hc-ph-2026-cocp-6333-2025-phhc012092472025-1-2026-01-14.txt",
+  "text_quality": "suspect",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-ph-2026-cocp-6333-2025-phhc012092472025-1-2026-01-14",
+  "doc_type": "judgment",
+  "title": "COCP/6333/2025 of CAPT. DEEPAK RAJ Vs DR. SUMITA MISHRA, IAS",
+  "number": "COCP/6333/2025",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2026-01-14",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "PHHC012092472025_1_2026-01-14.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC012092472025",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "COCP/6333/2025"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "CAPT. DEEPAK RAJ"
+    ],
+    "respondent": [
+      "DR. SUMITA MISHRA, IAS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE PANKAJ JAIN"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "not_checked",
+    "hits": 0,
+    "keywords": {},
+    "note": "OCR confidence below 70: cannot tell from this text"
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "language": "rule",
+    "page_count": "rule",
+    "text_method": "rule"
+  }
+}
