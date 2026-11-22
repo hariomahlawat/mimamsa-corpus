@@ -9,21 +9,16 @@
   "mime_type": "application/pdf",
   "page_count": 7,
   "access_marking": null,
-  "text_method": null,
-  "ocr_confidence": null,
-  "ocr_low_confidence_pages": [],
-  "text_path": null,
-  "text_quality": null,
-  "needs_ocr": true,
-  "pages_without_text": [
+  "text_method": "ocr",
+  "ocr_confidence": 75.7,
+  "ocr_low_confidence_pages": [
     1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7
+    6
   ],
+  "text_path": "data/text/hc-jkl-2025-wp-c-440-2024-jkhc020009792024-1-2025-11-25.txt",
+  "text_quality": "suspect",
+  "needs_ocr": false,
+  "pages_without_text": [],
   "relations": [],
   "doc_id": "hc-jkl-2025-wp-c-440-2024-jkhc020009792024-1-2025-11-25",
   "doc_type": "judgment",
@@ -35,7 +30,7 @@
   "status": "unknown",
   "status_note": null,
   "status_as_of": "2026-11-21",
-  "language": null,
+  "language": "en",
   "parent_doc_id": null,
   "original_filename": "JKHC020009792024_1_2025-11-25.pdf",
   "source_record": {
@@ -69,12 +64,20 @@
   "outcome": "dismissed",
   "statutes_cited": [],
   "cases_cited": [],
-  "topics": [],
+  "topics": [
+    "disability_pension",
+    "invalidment",
+    "medical_board"
+  ],
   "relevance": {
-    "status": "not_checked",
-    "hits": 0,
-    "keywords": {},
-    "note": "no extracted text (needs OCR or not yet extracted)"
+    "status": "relevant",
+    "hits": 21,
+    "keywords": {
+      "disability pension": 17,
+      "invalided": 2,
+      "release medical board": 2
+    },
+    "note": null
   },
   "field_provenance": {
     "title": "crawler",
@@ -83,6 +86,10 @@
     "outcome": "rule",
     "parties": "rule",
     "case_numbers": "rule",
-    "page_count": "rule"
+    "language": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
   }
 }

@@ -9,15 +9,13 @@
   "mime_type": "application/pdf",
   "page_count": 1,
   "access_marking": null,
-  "text_method": null,
-  "ocr_confidence": null,
+  "text_method": "ocr",
+  "ocr_confidence": 93.9,
   "ocr_low_confidence_pages": [],
-  "text_path": null,
-  "text_quality": null,
-  "needs_ocr": true,
-  "pages_without_text": [
-    1
-  ],
+  "text_path": "data/text/hc-ph-2026-cwp-11097-2026-phhc010594862026-1-2026-04-10.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
   "relations": [],
   "doc_id": "hc-ph-2026-cwp-11097-2026-phhc010594862026-1-2026-04-10",
   "doc_type": "judgment",
@@ -29,7 +27,7 @@
   "status": "unknown",
   "status_note": null,
   "status_as_of": "2026-11-21",
-  "language": null,
+  "language": "en",
   "parent_doc_id": null,
   "original_filename": "PHHC010594862026_1_2026-04-10.pdf",
   "source_record": {
@@ -64,10 +62,12 @@
   "cases_cited": [],
   "topics": [],
   "relevance": {
-    "status": "not_checked",
-    "hits": 0,
-    "keywords": {},
-    "note": "no extracted text (needs OCR or not yet extracted)"
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "disability pension": 1
+    },
+    "note": null
   },
   "field_provenance": {
     "title": "crawler",
@@ -76,6 +76,10 @@
     "outcome": "rule",
     "parties": "rule",
     "case_numbers": "rule",
-    "page_count": "rule"
+    "language": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
   }
 }

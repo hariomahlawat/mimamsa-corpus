@@ -9,23 +9,13 @@
   "mime_type": "application/pdf",
   "page_count": 9,
   "access_marking": null,
-  "text_method": null,
-  "ocr_confidence": null,
+  "text_method": "ocr",
+  "ocr_confidence": 94.3,
   "ocr_low_confidence_pages": [],
-  "text_path": null,
-  "text_quality": null,
-  "needs_ocr": true,
-  "pages_without_text": [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9
-  ],
+  "text_path": "data/text/hc-ph-2024-cwp-30550-2024-phhc011567532024-1-2024-11-13.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
   "relations": [],
   "doc_id": "hc-ph-2024-cwp-30550-2024-phhc011567532024-1-2024-11-13",
   "doc_type": "judgment",
@@ -37,7 +27,7 @@
   "status": "unknown",
   "status_note": null,
   "status_as_of": "2026-11-21",
-  "language": null,
+  "language": "en",
   "parent_doc_id": null,
   "original_filename": "PHHC011567532024_1_2024-11-13.pdf",
   "source_record": {
@@ -71,12 +61,16 @@
   "outcome": "dismissed",
   "statutes_cited": [],
   "cases_cited": [],
-  "topics": [],
+  "topics": [
+    "disability_pension"
+  ],
   "relevance": {
-    "status": "not_checked",
-    "hits": 0,
-    "keywords": {},
-    "note": "no extracted text (needs OCR or not yet extracted)"
+    "status": "relevant",
+    "hits": 11,
+    "keywords": {
+      "disability pension": 11
+    },
+    "note": null
   },
   "field_provenance": {
     "title": "crawler",
@@ -85,6 +79,10 @@
     "outcome": "rule",
     "parties": "rule",
     "case_numbers": "rule",
-    "page_count": "rule"
+    "language": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
   }
 }

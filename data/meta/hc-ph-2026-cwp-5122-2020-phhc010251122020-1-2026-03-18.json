@@ -9,23 +9,13 @@
   "mime_type": "application/pdf",
   "page_count": 9,
   "access_marking": null,
-  "text_method": null,
-  "ocr_confidence": null,
+  "text_method": "ocr",
+  "ocr_confidence": 95.6,
   "ocr_low_confidence_pages": [],
-  "text_path": null,
-  "text_quality": null,
-  "needs_ocr": true,
-  "pages_without_text": [
-    1,
-    2,
-    3,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9
-  ],
+  "text_path": "data/text/hc-ph-2026-cwp-5122-2020-phhc010251122020-1-2026-03-18.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
   "relations": [],
   "doc_id": "hc-ph-2026-cwp-5122-2020-phhc010251122020-1-2026-03-18",
   "doc_type": "judgment",
@@ -37,7 +27,7 @@
   "status": "unknown",
   "status_note": null,
   "status_as_of": "2026-11-21",
-  "language": null,
+  "language": "en",
   "parent_doc_id": null,
   "original_filename": "PHHC010251122020_1_2026-03-18.pdf",
   "source_record": {
@@ -72,10 +62,12 @@
   "cases_cited": [],
   "topics": [],
   "relevance": {
-    "status": "not_checked",
-    "hits": 0,
-    "keywords": {},
-    "note": "no extracted text (needs OCR or not yet extracted)"
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "invalided": 2
+    },
+    "note": null
   },
   "field_provenance": {
     "title": "crawler",
@@ -84,6 +76,10 @@
     "outcome": "rule",
     "parties": "rule",
     "case_numbers": "rule",
-    "page_count": "rule"
+    "language": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
   }
 }

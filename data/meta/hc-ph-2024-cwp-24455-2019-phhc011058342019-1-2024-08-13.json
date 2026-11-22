@@ -9,17 +9,35 @@
   "mime_type": "application/pdf",
   "page_count": 2,
   "access_marking": null,
-  "text_method": null,
-  "ocr_confidence": null,
+  "text_method": "ocr",
+  "ocr_confidence": 94.2,
   "ocr_low_confidence_pages": [],
-  "text_path": null,
-  "text_quality": null,
-  "needs_ocr": true,
-  "pages_without_text": [
-    1,
-    2
+  "text_path": "data/text/hc-ph-2024-cwp-24455-2019-phhc011058342019-1-2024-08-13.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2024-cwp-24455-2019-phhc011058342019-1-2024-08-13",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s3",
+      "target_ref_raw": "Section 3(0) of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "ed counsel for the respondents has filed his response and has taken preliminary objection that the matter is squarely covered under the provisions of Section 3(0) of the Armed Forces Tribunal Act, 2007 and hence, the present petition would not be maintainable as per Section 14 of the AFT Act, 2007, due to lack of jurisdiction. 4. Faced with the abov",
+      "confidence": "extracted"
+    },
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2024-cwp-24455-2019-phhc011058342019-1-2024-08-13",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s14",
+      "target_ref_raw": "Section 14 of the AFT Act, 2007",
+      "effective_date": null,
+      "evidence": "covered under the provisions of Section 3(0) of the Armed Forces Tribunal Act, 2007 and hence, the present petition would not be maintainable as per Section 14 of the AFT Act, 2007, due to lack of jurisdiction. 4. Faced with the above, learned counsel for the petitioner submits PRINCE cHawLa that the petition was filed in the ye",
+      "confidence": "extracted"
+    }
   ],
-  "relations": [],
   "doc_id": "hc-ph-2024-cwp-24455-2019-phhc011058342019-1-2024-08-13",
   "doc_type": "judgment",
   "title": "CWP/24455/2019 of SUKHPAL SINGH Vs UNION OF INDIA AND OTHERS",
@@ -30,7 +48,7 @@
   "status": "unknown",
   "status_note": null,
   "status_as_of": "2026-11-21",
-  "language": null,
+  "language": "en",
   "parent_doc_id": null,
   "original_filename": "PHHC011058342019_1_2024-08-13.pdf",
   "source_record": {
@@ -61,14 +79,29 @@
     "MR. JUSTICE ALOK JAIN"
   ],
   "outcome": "disposed",
-  "statutes_cited": [],
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "3",
+      "raw": "Section 3(0) of the Armed Forces Tribunal Act, 2007"
+    },
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "14",
+      "raw": "Section 14 of the AFT Act, 2007"
+    }
+  ],
   "cases_cited": [],
   "topics": [],
   "relevance": {
-    "status": "not_checked",
-    "hits": 0,
-    "keywords": {},
-    "note": "no extracted text (needs OCR or not yet extracted)"
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "armed forces tribunal": 1
+    },
+    "note": null
   },
   "field_provenance": {
     "title": "crawler",
@@ -77,6 +110,10 @@
     "outcome": "rule",
     "parties": "rule",
     "case_numbers": "rule",
-    "page_count": "rule"
+    "language": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
   }
 }
