@@ -34,6 +34,11 @@ on:
       - ".mml_transfer/**"
       - ".github/workflows/sync-legal-knowledge-hf.yml"
   workflow_dispatch:
+    inputs:
+      approve_corpus_upload:
+        description: "General corpus upload needs explicit owner approval. Type exactly: I-APPROVE-CORPUS-UPLOAD"
+        required: true
+        default: "no"
 
 permissions:
   contents: read
@@ -45,10 +50,21 @@ concurrency:
 
 jobs:
   upload:
-    if: ${{ !contains(github.event.head_commit.message, '[abbreviations-hf]') }}
+    # Job-level safeguard (owner decision 2026-11-22): the general corpus upload never runs on push.
+    # It runs only on a manual workflow_dispatch with the explicit approval phrase.
+    # The separately controlled abbreviation upload (upload_abbreviations) is unchanged.
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.approve_corpus_upload == 'I-APPROVE-CORPUS-UPLOAD' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
+      - name: Refuse unless manually dispatched with approval (defence in depth)
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          APPROVAL: ${{ inputs.approve_corpus_upload }}
+        run: |
+          if [ "$EVENT_NAME" != "workflow_dispatch" ] || [ "$APPROVAL" != "I-APPROVE-CORPUS-UPLOAD" ]; then
+            echo "::error::General corpus upload requires manual dispatch with explicit approval"; exit 1
+          fi
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
