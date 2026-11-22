@@ -119,14 +119,16 @@ class Fix2AmendmentEventIdentity(unittest.TestCase):
 
 # ---------------- (3) coded-record locators and section checks ----------------
 class Fix3CodedRecordSections(unittest.TestCase):
-    @unittest.skipUnless(ref_ok("origin/raw-data"), "crawler corpus ref unavailable")
+    @unittest.skipUnless(ref_ok("origin/raw-data"), "SKIPPED: local git ref origin/raw-data (crawler corpus) is absent, so the "
+                     "real-corpus variant cannot run; the same behaviour is asserted without the ref by Fix3WithoutCorpusRef")
     def test_kb003_sections_bound_to_code_target(self):
         out, _ = CC.build("origin/raw-data")
         row = next(r for r in out if r["record_id"] == "KB-003")
         self.assertRegex(row["items"], r"code:SRC-AA=>act-army-1950\[id\]#s79,s80,s81,s82",
                          f"KB-003 Army Act ss.79-82 not bound to SRC-AA: {row['items']}")
 
-    @unittest.skipUnless(ref_ok("origin/raw-data"), "crawler corpus ref unavailable")
+    @unittest.skipUnless(ref_ok("origin/raw-data"), "SKIPPED: local git ref origin/raw-data (crawler corpus) is absent, so the "
+                     "real-corpus variant cannot run; the same behaviour is asserted without the ref by Fix3WithoutCorpusRef")
     def test_missing_section_file_downgrades_coded_record(self):
         orig_load = CC.load
 
@@ -151,7 +153,8 @@ class Fix3CodedRecordSections(unittest.TestCase):
         self.assertNotEqual(row["source_searchable"], "ALL", "missing Army Act s.80 file did not downgrade KB-003")
         self.assertEqual(row["anchored_full"], "NO")
 
-    @unittest.skipUnless(ref_ok("origin/raw-data"), "crawler corpus ref unavailable")
+    @unittest.skipUnless(ref_ok("origin/raw-data"), "SKIPPED: local git ref origin/raw-data (crawler corpus) is absent, so the "
+                     "real-corpus variant cannot run; the same behaviour is asserted without the ref by Fix3WithoutCorpusRef")
     def test_mixed_forms_not_discarded(self):
         out, _ = CC.build("origin/raw-data")
         rows = {r["record_id"]: r for r in out}
@@ -163,3 +166,81 @@ class Fix3CodedRecordSections(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# ---------------- (1b) returned defect: sections OF THE AMENDING ACT are not Army Act provisions ----------------
+AA04_TEXT = ("ss.4(3), 6(1), 7(1), 7(2): 'clause (i) of section 2' -> 'clause (i) of sub-section (1) of section 2' "
+             "(s.3 and Second Schedule)")
+
+
+class Fix1bAmendingActOwnSections(unittest.TestCase):
+    def test_aa04_full_text_yields_only_army_act_sections(self):
+        self.assertEqual(VE.army_act_sections(AA04_TEXT), ["4", "6", "7"],
+                         "'(s.3 and Second Schedule)' is s.3 of the amending Act 56/1974, not Army Act s.3")
+
+    def test_aa04_not_registered_against_army_act_s3(self):
+        V = VE.versions()
+        self.assertNotIn("AA-04", version_ids(V, "AA", "3"))
+        for n in ("4", "6", "7"):
+            self.assertIn("AA-04", version_ids(V, "AA", n))
+
+    def test_no_false_s3_edges_from_aa04(self):
+        edges, _, _ = VE.build()
+        bad = [e["record_id"] for e in edges if e["provision"] == "s.3" and "AA-04" in e["evidence_refs"].split(";")]
+        self.assertEqual(bad, [], f"false Army Act s.3 edges from AA-04: {bad}")
+
+    def test_other_amending_act_reference_forms(self):
+        cases = {"s.3(iv) (definition); s.3 of Act 19/1955: references construed": ["3"],
+                 "s.3(viii) [J&K words omitted]; Explanation below s.70 omitted": ["3", "70"],
+                 "s.12 of Act 37 of 1992 inserts words in s.135(1)": ["135"],
+                 "ss.75, 76 (s.2 of the Army (Amendment) Act, 1992)": ["75", "76"],
+                 "s.5 and the First Schedule": [],
+                 "ss.137/151 etc.": ["137", "151"]}
+        for text, want in cases.items():
+            self.assertEqual(VE.army_act_sections(text), want, text)
+
+
+# ---------------- condition (b): Fix3 behaviour without the crawler-corpus ref (committed minimal fixture) ----------------
+# Minimal synthetic corpus: only the documents and Army Act / AFT Act section files these records need.
+FIXTURE_CORPUS = {
+    "ref": "fixture", "commit": "fixture-no-raw-data",
+    "meta": {"act-army-1950", "rules-army-rules-1954", "act-armed-forces-tribunal-2007"},
+    "sections": {"act-army-1950": {f"s{n}" for n in [2] + list(range(79, 89)) + [120, 121, 122]},
+                 "act-armed-forces-tribunal-2007": {f"s{n}" for n in (2, 3, 14, 15, 21, 22)}},
+    "sc_urls": {},
+}
+
+
+def build_with_corpus(corpus):
+    orig_load = CC.load
+
+    def patched(name, path):
+        mod = orig_load(name, path)
+        if name == "cov_cc":
+            mod.corpus = lambda ref: corpus
+        return mod
+    CC.load = patched
+    try:
+        out, _ = CC.build("fixture")
+    finally:
+        CC.load = orig_load
+    return {r["record_id"]: r for r in out}
+
+
+class Fix3WithoutCorpusRef(unittest.TestCase):
+    def test_kb003_sections_checked_against_fixture(self):
+        rows = build_with_corpus(FIXTURE_CORPUS)
+        self.assertRegex(rows["KB-003"]["items"], r"code:SRC-AA=>act-army-1950\[id\]#s79,s80,s81,s82")
+        self.assertEqual(rows["KB-003"]["source_searchable"], "ALL")
+
+    def test_missing_section_in_fixture_downgrades(self):
+        c = dict(FIXTURE_CORPUS, sections=dict(FIXTURE_CORPUS["sections"]))
+        c["sections"]["act-army-1950"] = FIXTURE_CORPUS["sections"]["act-army-1950"] - {"s80"}
+        rows = build_with_corpus(c)
+        self.assertNotEqual(rows["KB-003"]["source_searchable"], "ALL")
+        self.assertEqual(rows["KB-003"]["anchored_full"], "NO")
+
+    def test_mixed_forms_bound_without_ref(self):
+        rows = build_with_corpus(FIXTURE_CORPUS)
+        self.assertRegex(rows["HCE-001"]["items"], r"code:AA=>act-army-1950\[id\]#s2,s79,")
+        self.assertRegex(rows["AFT-001"]["items"], r"code:V7-S01=>act-armed-forces-tribunal-2007\[id\]#s2,s3,s14,s15,s21,s22")

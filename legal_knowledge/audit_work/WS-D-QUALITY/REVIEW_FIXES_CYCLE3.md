@@ -96,3 +96,66 @@ Section-file checks now apply identically to coded and plain-text citations.
 
 ## Commits
 - `618dcd11`: regression tests, the three fixes, the extended versioned-edge test and all regenerated artifacts (gate: 214 tests OK, all checks rc=0).
+
+## Returned defect (independent review of 4a17359e): sections of the AMENDING Act treated as Army Act provisions
+AA-04 (Repealing and Amending Act 1974) has `sections_affected` = "ss.4(3), 6(1), 7(1), 7(2): 'clause (i) of section 2' -> 'clause (i) of sub-section (1) of section 2' (s.3 and Second Schedule)". The "s.3" is s.3 of Act 56/1974. `expand_provisions` returned ['4','6','7','3'], and the verification guard passed because '3' occurs literally in the text. This produced false Army Act s.3 edges for KB-001, CIV-001, CIV-002, V8-CL-02 and V8-WF-02.
+
+Tests are in `tests/test_legal_audit_review_fixes_cycle3.py` (`Fix1bAmendingActOwnSections`, which uses AA-04's full text including the parenthetical).
+
+| Test | Before (4a17359e) | After |
+| --- | --- | --- |
+| `test_aa04_full_text_yields_only_army_act_sections` | `AttributeError: ... no attribute 'army_act_sections'` (Army Act text went straight to `expand_provisions`, which returned ['4','6','7','3']) | ok: ['4','6','7'] |
+| `test_aa04_not_registered_against_army_act_s3` | `AssertionError: 'AA-04' unexpectedly found in {'AA-02', 'AA-06', 'AA-04', 'AA-01'}` | ok |
+| `test_no_false_s3_edges_from_aa04` | `AssertionError: Lists differ: ['CIV-001', 'CIV-002', 'KB-001', 'V8-CL-02', 'V8-WF-02'] != []` | ok |
+| `test_other_amending_act_reference_forms` (6 boundary strings) | `AttributeError` | ok, e.g. "s.12 of Act 37 of 1992 inserts words in s.135(1)" gives ['135'] |
+
+**Fix.** `strip_amending_refs()` / `army_act_sections()` remove the following before expansion and verification:
+- `s.N and [the] [Second|First] Schedule`;
+- `s.N of Act X/YYYY` and `s.N of Act X of YYYY`;
+- `s.N of the <Name> Act, YYYY`.
+
+This is aligned with WS-A `tools/check_completeness_cycle3.py`. The tails are bounded so that Army Act references after them are kept. Verification runs on the stripped text, so an excluded number cannot be re-admitted by its literal occurrence.
+
+**Scan of every Army Act chain row.** The pattern occurs in three rows:
+
+| Row | Text removed | Before | After | Effect |
+| --- | --- | --- | --- | --- |
+| AA-04 | `s.3 and Second Schedule` | 4, 6, 7, 3 | 4, 6, 7 | corrected |
+| AA-01 | `s.3 of Act 19/1955` | 3 | 3 | unchanged: s.3 legitimately remains through `s.3(iv)` |
+| AA-03 | `s.2 and Schedule` | 2 | – | the row was already excluded as "none in Army Act", so no edge changes |
+
+AA-06 ("Explanation below s.70") is a genuine Army Act reference and is kept.
+
+**Edges after the fix:**
+
+| Measure | Before | After |
+| --- | --- | --- |
+| Edges | 380 | 375 (the 5 false s.3 edges removed) |
+| Amendment events | 119 | 118 |
+| Edges with a stated effective date | 177 | 177 |
+| Edges flagged EFFECTIVE_DATE_UNSTATED | 203 | 198 |
+| Zero-length or reversed intervals | 0 | 0 |
+
+`--check` was run twice: MATCH both times.
+
+## Conditions
+**(a) CONFLICTING_EVIDENCE is no longer skipped** (`tests/test_legal_audit_versioned_edges.py`). For every edge whose status is CONFLICTING_EVIDENCE, the test now asserts:
+- every date listed in the status is a STATED effective date of one of the edge's evidence rows;
+- at least two dates are listed;
+- `valid_from` is empty;
+- the edge carries the EVIDENCE_EFFECTIVE_DATE_CONFLICT flag.
+
+New tests:
+- `test_conflicting_evidence_path_fixture`: two descriptions of one event with different stated dates are grouped, flagged and left unresolved.
+- `test_conflicting_evidence_present_in_real_versions`: the r.2 event exists and is flagged.
+
+**(b) Corpus-dependent tests cannot pass vacuously.**
+- The real-corpus Fix3 tests now state their skip reason explicitly.
+- `Fix3WithoutCorpusRef` (3 tests) runs without `origin/raw-data`, on a minimal synthetic corpus committed inside the test file: KB-003 sections are checked, a missing s.80 downgrades the record, and bracket and V-series locators are bound.
+
+**(c) Notes.**
+- **r.2 CONFLICTING_EVIDENCE** (PCL-216-1988 vs PCL-BL-02, S.R.O. 216/1988). The two dates are the commencement on publication (1988-09-17) and the retrospective deemed effect (1979-06-04). This is not an evidential conflict between sources: the instrument states both. The event stays flagged CONFLICTING_EVIDENCE with `valid_from` empty, and is deliberately not resolved. Its legal effect on records dated 1979–1988 is advisor question AQ-06. No KB record cites r.2, so no edge carries it.
+- **`successor_bound` and retrospective successors (AQ-06).** When the next event's stated effective date is on or before the current event's own `valid_from` (a retrospective successor), no `valid_to` is emitted. The edge gets VALIDITY_INTERVAL_REJECTED instead of a zero-length or reversed interval. The ordering of overlapping retrospective effect is a legal question (AQ-06) and is not decided by the generator.
+
+## Commits (returned defect)
+- `2c633b04`: regression tests, fix, conditions (a)-(c), regenerated versioned edges (gate: 223 tests OK; all checks rc=0).
