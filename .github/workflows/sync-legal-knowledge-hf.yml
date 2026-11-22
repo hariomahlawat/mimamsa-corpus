@@ -1,0 +1,43 @@
+name: Sync curated legal research to private Hugging Face dataset
+on:
+  push:
+    branches:
+      - legal-knowledge/v2.5-staging
+      - main
+    paths:
+      - "legal_knowledge/**"
+      - "scripts/push_legal_knowledge.py"
+      - ".github/workflows/sync-legal-knowledge-hf.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mimamsa-hf-legal-knowledge
+  cancel-in-progress: false
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require dataset-write credential
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          if [ -z "$HF_TOKEN" ]; then
+            echo "::error::Hugging Face upload unavailable: repository secret HF_TOKEN is not configured."
+            exit 1
+          fi
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install upload dependency
+        run: python -m pip install 'huggingface_hub>=0.31,<2'
+      - name: Publish and read-back verify curated text records
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_HUB_DISABLE_TELEMETRY: "1"
+        run: python scripts/push_legal_knowledge.py
