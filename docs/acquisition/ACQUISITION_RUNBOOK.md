@@ -39,6 +39,8 @@ python -m pipeline all
 python tools/acquisition/verify_batch.py --source archive_acq02 --out reports/acq02_verify.tsv
 ```
 
+**Fetch-time integrity (added after the PR #17 review):** `crawler/fetch.py` rejects a file before storing it or marking it fetched if it differs from pinned `expected_sha256` / `expected_md5` / `expected_bytes`, the ACQ-01 `note` md5/size, or a pinned `expected_served_sha256`. India Code `listing_*` values are informational only. `verify_batch.py` then re-checks the stored copies offline.
+
 **Stop conditions:**
 - Any FAIL from `verify_batch.py` (size, md5 or sha256 differs from the pre-committed value): do not commit the file; report it.
 - Any refused URL, redirect off the allow-list, HTTP hop, login page, CAPTCHA or 4xx/5xx after retries: stop and report.
