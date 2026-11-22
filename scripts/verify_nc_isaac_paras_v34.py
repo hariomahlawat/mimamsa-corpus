@@ -42,8 +42,15 @@ def main():
             mt=re.search(pattern,page,re.I)
             if mt:
                 excerpt=page[max(0,mt.start()-80):min(len(page),mt.start()+1900)]
+                span_pages=[i]
+                # Paragraph 39 begins at the foot of PDF p92; its operative
+                # i/ii/iii directions continue on p93. Never truncate a ruling
+                # at the source-page boundary.
+                if locator=="2026_INSC_993_P39" and i<len(pages):
+                    excerpt += " [NEXT_PDF_PAGE] " + pages[i][:2200]
+                    span_pages.append(i+1)
                 picks.append({
-                  "pdf_page_1based":i,
+                  "pdf_page_1based":i, "pdf_page_span_1based":span_pages,
                   "excerpt":excerpt,
                   "excerpt_sha256":hashlib.sha256(excerpt.encode("utf-8")).hexdigest()
                 })
