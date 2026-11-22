@@ -12,6 +12,8 @@ on:
       - "scripts/reconcile_p0_case_sources_v31.py"
       - "scripts/forensic_p0_source_v32.py"
       - "scripts/archive_precedent_treatment_v32.py"
+      - "scripts/archive_gazette_v33.py"
+      - "scripts/archive_sc_treatment_v33.py"
       - "scripts/archive_supreme_court_pilot.py"
       - "scripts/verify_sc_source_matches_v29.py"
       - "scripts/push_mml_originals.py"
@@ -67,6 +69,12 @@ jobs:
       - name: Archive 2025 Supreme Court judgment clarifying Navjot Sandhu treatment
         continue-on-error: true
         run: python scripts/archive_precedent_treatment_v32.py
+      - name: Archive official 2024 Supreme Court Section 27 judgment with SHA-256
+        continue-on-error: true
+        run: python scripts/archive_sc_treatment_v33.py
+      - name: Attempt official 2022 eGazette SRO 6(E) PDF acquisition with SHA-256
+        continue-on-error: true
+        run: python scripts/archive_gazette_v33.py
       - name: Verify existing original corpus PDFs for Bedi and Ranjit Thakur with SHA-256
         run: python scripts/verify_sc_source_matches_v29.py
       - name: Verify checksum and reconstruct original MML archive
