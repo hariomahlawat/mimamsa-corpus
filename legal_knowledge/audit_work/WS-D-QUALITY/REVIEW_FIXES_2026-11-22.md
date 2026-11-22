@@ -89,3 +89,7 @@ Code-level figures are unchanged: 52/87 codes, 520/681 links, 279/389 coded reco
 - `relation_graph_summary.json/report.md`: the page-image check count is now 36 (was 29), catching up with registers the coordinator merged earlier. There are no dangling edges.
 - `citation_resolution_score`: unchanged (it does not use plain-text parsing).
 - Provenance baseline: unchanged (3 known violations, none new).
+
+## Commits
+- `6a191870`: regression tests, all four fixes, fixture correction and regenerated outputs (gate: 179 tests OK).
+- The commit that adds this line records the hash above (documentation only).
