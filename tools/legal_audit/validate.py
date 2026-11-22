@@ -185,7 +185,11 @@ def validate_batch(batch: Path, strict: bool = False, manifest: Path | None = No
     extended_checks(records, ids, strict, manifest, errors)
     identity_checks(batch, records, ids, strict, errors)
     integrity_checks(batch, records, ids, strict, manifest, errors)
-    print(json.dumps({"batch": str(batch), "counts": {k: len(v) for k, v in records.items()},
+    relations = relation_checks(batch, records, ids, errors)
+    counts = {k: len(v) for k, v in records.items()}
+    if relations is not None:
+        counts["relation"] = relations
+    print(json.dumps({"batch": str(batch), "counts": counts,
                       "strict": strict, "errors": errors}, indent=2))
     return not errors
 
@@ -671,7 +675,79 @@ def integrity_checks(batch, records, ids, strict, manifest, errors):
                     errors.append(f"{label}: controls v2: acceptance/approval requires an approval_artifact")
 
 
+# ---------------------------------------------------------------------------
+# Optional KB relation layer (WS-C CC-13; coordinator approval, WS-D cycle 2).
+# A batch MAY contain relations/*.json validated against relation.schema.json.
+# 'manual_supported' is a retrieval/support link to a page-image-checked MML
+# locator. It is never statutory or judicial authority: it cannot be cited as a
+# finding source, cannot share an ID with a source, and must declare
+# legal_effect NOT_STATUTORY_AUTHORITY (schema enum). Batches without the
+# directory are unaffected.
+def page_image_renders(batch: Path):
+    """{check_id: has 64-hex render_png_sha256} from every page-image register."""
+    import csv
+    out = {}
+    for root in {batch, AUDIT_WORK}:
+        if not root.is_dir():
+            continue
+        for p in list(root.rglob("page_image_checks*.csv")) + list(root.rglob("identity_transcription_register*.csv")):
+            with p.open(encoding="utf-8", newline="") as fh:
+                for r in csv.DictReader(fh):
+                    cid = (r.get("check_id") or "").strip()
+                    if cid:
+                        out[cid] = out.get(cid, False) or bool(SHA.fullmatch((r.get("render_png_sha256") or "").strip()))
+    return out
+
+
+def relation_checks(batch, records, ids, errors):
+    d = batch / "relations"
+    if not d.is_dir():
+        return None
+    schema = read_json(SCHEMAS / "relation.schema.json")
+    rels = read_kind(d, errors)
+    mml = load_mml_manifest()
+    renders = page_image_renders(batch)
+    known = corpus_ids()
+    seen = {}
+    for label, r in rels:
+        validate_record("relation", label, r, schema, errors)
+        if not isinstance(r, dict):
+            continue
+        rid = r.get("relation_id")
+        if rid in seen:
+            errors.append(f"{label}: duplicate relation ID: {rid}")
+        seen[rid] = r
+        if rid in ids["source"]:
+            errors.append(f"{label}: relation ID {rid} collides with a source ID")
+        if mml is None or r.get("mml_file") not in mml:
+            errors.append(f"{label}: mml_file is not one of the MML manifest originals")
+        elif r.get("mml_file_sha256") != mml[r["mml_file"]]:
+            errors.append(f"{label}: mml_file_sha256 does not match the MML manifest")
+        if not renders.get(r.get("page_image_check_id")):
+            errors.append(f"{label}: page_image_check_id must resolve to a page-image register row with a render hash")
+        if r.get("from_record_id") not in known:
+            errors.append(f"{label}: from_record_id {r.get('from_record_id')} not in the frozen KB/cases")
+        if r.get("document_authority") == "GOVERNMENT_ISSUED_MANUAL" and not r.get("edition_authority_ref"):
+            errors.append(f"{label}: GOVERNMENT_ISSUED_MANUAL requires edition_authority_ref")
+    for label, f in records["finding"]:
+        if not isinstance(f, dict):
+            continue
+        for sid in (f.get("source_ids") or []) + (f.get("contrary_source_ids") or []) + (f.get("mml_anchor_ids") or []):
+            if sid in seen:
+                errors.append(f"{label}: manual_supported relation {sid} cannot be cited as finding evidence (not statutory authority)")
+    for label, r in records["review"]:
+        if isinstance(r, dict):
+            for sid in (r.get("source_ids") or []) + (r.get("independent_source_ids") or []):
+                if sid in seen:
+                    errors.append(f"{label}: relation {sid} cannot be cited as review evidence")
+    return len(rels)
+
+
 def schema_check():
+    rel = read_json(SCHEMAS / "relation.schema.json")
+    assert rel["type"] == "object" and rel.get("additionalProperties") is False
+    assert set(rel["required"]) <= set(rel["properties"])
+    assert rel["properties"]["legal_effect"]["enum"] == ["NOT_STATUTORY_AUTHORITY"]
     for kind in KINDS:
         p = SCHEMAS / f"{kind}.schema.json"
         schema = read_json(p)

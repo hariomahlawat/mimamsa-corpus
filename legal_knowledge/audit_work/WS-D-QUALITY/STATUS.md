@@ -18,11 +18,11 @@ Baseline: 658 KB (9a8f0d19...), 53 cases (8b8d53cd...), 87 codes (72 firm, 75 in
 ## Cycle 2 (started after coordinator merge 1be2a2e1)
 - C2-1 DONE `coverage_reconciliation.md/.csv` + `scripts/coverage_reconciliation.py` (WS-C read-only via git ref or worktree): coarse agreement 562/658; 96 disagreements all explained by 11 definitional rules (R1 co-citation 39, R2 pinpoint 32, R8 no-citation definition 12, R7 plain instrument set 13 ...); code sets identical 658/658; canonical definition proposal (OQ-D-016). Tests `test_legal_audit_coverage_reconciliation.py` (7).
 - C2-2 DONE `registers/source_code_resolution_v4_proposed.csv`, `registers/source_code_resolution_v4_diff.csv`, `registers/REGISTER_V4_PROPOSAL.md`, `scripts/build_register_v4.py`; root cause: v2 grammar lacked bare `[CODE]` and leading-digest forms, v3 refreshed forms_used but not usage on 78 v2-carried rows; 8 codes / 14 links (cycle-1 '15' corrected); classes unchanged; tests `test_legal_audit_register_v4.py` (7).
-- C2-3 provenance controls: pending.
+- C2-3 DONE `tools/legal_audit/check_provenance.py` (rules IMG-1/2/3, RV-1, CA-1/2, ACQ-1, APR-1 over all audit CSV/JSON; render evidence resolves via check ids, document hashes and foreign keys) + `tools/legal_audit/provenance_baseline.json` (21 known violations: ACQ-02 copy_fidelity x17, PILOT-01 PIC-08/09, WS-A PCL-BL-25 and stale AR-029 copy); passes on HEAD and on WS-A/B/C branch trees; CI step. Optional `manual_supported` relation layer: `docs/legal-audit/schemas/relation.schema.json` + validator `relation_checks` (never statutory authority; cannot be finding/review evidence; MML hash, registered render, KB id). Tests `test_legal_audit_provenance_controls.py` (21). OQ-D-017..020.
 - C2-4 check_registers semantics tests: pending.
 
 ## In progress
-- C2-3.
+- C2-4.
 
 ## Next (if continued)
 - Coordinator decisions on OQ-D-001..015; possible v4 register proposal (D-WSD-001) and frozen-batch date-rule migration proposal (OQ-D-006), each as separate additive files.
@@ -31,4 +31,4 @@ Baseline: 658 KB (9a8f0d19...), 53 cases (8b8d53cd...), 87 codes (72 firm, 75 in
 - None. Human-reviewer nomination (OQ-D-007) needed before any v2 batch can record a legal-advisor review.
 
 ## Requests to coordinator
-- See `open_questions.csv` (OQ-D-001..016).
+- See `open_questions.csv` (OQ-D-001..020).

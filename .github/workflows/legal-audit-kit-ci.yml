@@ -35,6 +35,8 @@ jobs:
         run: python legal_knowledge/audit_work/PILOT-01/build_code_inventory.py
       - name: Audit register CSVs are well-formed (UTF-8, unique headers, no ragged rows)
         run: python tools/legal_audit/check_csv.py
+      - name: Provenance controls (render hashes, REQUIRES_VERIFICATION, carrier/authority values, acquisition approvals, no approval states)
+        run: python tools/legal_audit/check_provenance.py
       - name: ARMY-RULES-CHAIN-01 / ACQ-02 register cross-references and date semantics
         run: python legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/check_registers.py
       - name: Reproduce frozen record hashes (PILOT-01 and R23-VERIFY-01 manifests; no private bytes)
