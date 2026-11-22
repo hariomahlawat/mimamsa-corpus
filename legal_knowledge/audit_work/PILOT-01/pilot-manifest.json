@@ -9,7 +9,8 @@
   "mml_manifest_sha256": "182e24da3900da59ef5d1ab7d4be5964eca7bcbc361bd8ad576a343e6464bab1",
   "counts": {
     "KB_RECORD": 25,
-    "MML_PROVISION": 12
+    "MML_PROVISION": 12,
+    "CASE_ROW": 6
   },
   "records": [
     {
@@ -572,6 +573,78 @@
         "manual-of-military-law-auditor",
         "statutory-auditor"
       ]
+    },
+    {
+      "record_id": "DCLR-SC-2020-002",
+      "kind": "CASE_ROW",
+      "title": "Union of India v Ex Sep Virendra Kumar",
+      "source_file": "cases_53.jsonl",
+      "source_line": 2,
+      "original_sha256": "c42f28ff1395f0b50e533bae7199ef4a709d306d141a6c9c5216879858e42684",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "not_counted_in_25": true
+    },
+    {
+      "record_id": "DCLR-SC-2023-009",
+      "kind": "CASE_ROW",
+      "title": "Union of India v Parashotam Dass",
+      "source_file": "cases_53.jsonl",
+      "source_line": 9,
+      "original_sha256": "e3610481baf62dc8b4eb375a608dc614710df40fb14d2d3cbc55c38f7d2a1194",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "not_counted_in_25": true
+    },
+    {
+      "record_id": "DCLR-SC-2013-N08",
+      "kind": "CASE_ROW",
+      "title": "Dharamvir Singh v Union of India and Others",
+      "source_file": "cases_53.jsonl",
+      "source_line": 19,
+      "original_sha256": "d0e97edabfbbb52c0b9bc2ee7e204b9a521953a6a8032d10ba9d0a631e638268",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "not_counted_in_25": true
+    },
+    {
+      "record_id": "DCLR-SC-2015-N09",
+      "kind": "CASE_ROW",
+      "title": "Union of India and Another v Rajbir Singh",
+      "source_file": "cases_53.jsonl",
+      "source_line": 20,
+      "original_sha256": "5640759ed8df490944750c2bafa4898488856d5bdaebdcb89e9a745f22b16483",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "not_counted_in_25": true
+    },
+    {
+      "record_id": "DCLR-SC-2005-L01",
+      "kind": "CASE_ROW",
+      "title": "State (NCT of Delhi) v Navjot Sandhu",
+      "source_file": "cases_53.jsonl",
+      "source_line": 40,
+      "original_sha256": "4a71247575e936a04f8959115478b47faf7afd56896a2566715b91a3af15b229",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "not_counted_in_25": true
+    },
+    {
+      "record_id": "DCLR-SC-2014-N12",
+      "kind": "CASE_ROW",
+      "title": "Anvar P V v P K Basheer and Others",
+      "source_file": "cases_53.jsonl",
+      "source_line": 23,
+      "original_sha256": "ed6163fe8d19f27728baca42e3e0bd58b6d431b5cadd988443859b3a7175e6f8",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "not_counted_in_25": true
     }
   ]
 }
