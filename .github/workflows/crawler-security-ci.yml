@@ -6,6 +6,7 @@ on:
       - "config/**"
       - "crawler/**"
       - "tests/test_crawler_security.py"
+      - "tests/test_acquisition_config.py"
       - "tests/test_crawler_foundation.py"
       - ".github/workflows/crawler-security-ci.yml"
   workflow_dispatch:
@@ -36,5 +37,9 @@ jobs:
           PY
       - name: Security tests (offline)
         run: python -m pytest -v tests/test_crawler_security.py
+      - name: ACQ-01 acquisition configuration guards (offline)
+        run: python -m pytest -v tests/test_acquisition_config.py
+      - name: Crawler config check
+        run: python -m crawler config-check
       - name: Crawler foundation tests (offline)
         run: python -m pytest -q tests/test_crawler_foundation.py

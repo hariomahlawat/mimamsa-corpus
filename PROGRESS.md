@@ -1,5 +1,20 @@
 # Progress
 
+## 2026-11-22 — ACQ-01 acquisition configuration (B1, B2, B6) prepared; nothing downloaded
+
+- Owner authorised B1 (S.R.O. 484 of 1954 and 8 amending S.R.O.s), B2 (1978 Adjustment of Jurisdiction
+  Rules and S.O. 4010) and B6 (Army Act amending Acts). This PR only configures them; downloading waits
+  for the owner's approval of this PR.
+- `sources.archive`: 12 pinned `documents` (archive.org Gazette scans); `allowed_hosts` gains an explicit
+  `*.archive.org` entry because archive.org/download answers 302 to per-item data servers
+  (dnNNNNNN.{ca,eu}.archive.org, observed with HEAD requests on 2026-11-22). New `official_instruments`
+  source: 2 India Code Gazette scans (Acts 13/1975 and 37/1992). Both sources stay `enabled: false`
+  (explicit `--source` runs only); `archive` and `official_instruments` are mapped to `crawler/direct.py`.
+- `crawler/config.py`: `host_allowed()` supports `*.<domain>` (subdomains only; never the bare domain or a
+  look-alike); blocked hosts still take precedence; `check_config` rejects malformed wildcards.
+- Evidence: `config-check` OK; `discover` queued 14 URLs with 0 network requests; `dry-run` reports 14 requests
+  would be made, 0 refused; 49 offline tests pass (security, acquisition config, foundation).
+
 ## 2026-11-22 — Crawler security: compromised AFT Jabalpur host removed (PR, not merged)
 
 - `aftjabalpur.in`, formerly the configured host for AFT Regional Bench Jabalpur, was found to serve
