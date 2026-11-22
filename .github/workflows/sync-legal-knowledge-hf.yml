@@ -10,6 +10,7 @@ on:
       - "scripts/reconcile_legal_sources.py"
       - "scripts/audit_53_case_metadata_v30.py"
       - "scripts/reconcile_p0_case_sources_v31.py"
+      - "scripts/build_p0_holding_dossiers_v34.py"
       - "scripts/forensic_p0_source_v32.py"
       - "scripts/archive_precedent_treatment_v32.py"
       - "scripts/archive_gazette_v33.py"
@@ -96,6 +97,8 @@ jobs:
       - name: Archive provenance-labelled mirror of 2016 Supreme Court Mani Ram Bhaira order
         continue-on-error: true
         run: python scripts/archive_maniram_court_mirror_v33.py
+      - name: Build v3.4 P0 evidence packets and 658-KB candidate links with SHA checks
+        run: python scripts/build_p0_holding_dossiers_v34.py
       - name: Verify existing original corpus PDFs for Bedi and Ranjit Thakur with SHA-256
         run: python scripts/verify_sc_source_matches_v29.py
       - name: Verify checksum and reconstruct original MML archive
