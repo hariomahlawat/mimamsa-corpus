@@ -1,0 +1,74 @@
+{
+  "tool": "tools/legal_audit/mml_extract.py",
+  "tool_versions": {
+    "pdftotext": "pdftotext version 24.02.0",
+    "soffice": "LibreOffice 24.2.7.2 420(Build:2)"
+  },
+  "mml_manifest_sha256": "182e24da3900da59ef5d1ab7d4be5964eca7bcbc361bd8ad576a343e6464bab1",
+  "files": [
+    {
+      "original": "MML 1.doc",
+      "original_sha256": "3a2e3a4f70669483678cdb96e1dd29d901c6c0ffc43a04a794a00d3ef0c3d1ed",
+      "derived": "MML 1.lines.txt",
+      "derived_sha256": "d56c98499f14dd5517519d0240089a5284c3b84ffd93e43de07f6d9a83d8a6ec",
+      "kind": "doc",
+      "lines": 1196
+    },
+    {
+      "original": "MML 2.pdf",
+      "original_sha256": "db2119182ed2e4ccca22dd225d955327f6398ee98303e1c94615ba85b4396f65",
+      "derived": "MML 2.pdf.pages.txt",
+      "derived_sha256": "56aecc36a08800ed0e71130f615919ad833088ea55538e0d2c3dd9a3d03dd6a9",
+      "kind": "pdf",
+      "pages": 339
+    },
+    {
+      "original": "MML vol 2(AA).doc.doc",
+      "original_sha256": "73fd304227ca680ebf3c8512dfd4aafa0eb2e16952558bb8b1c1edee637a455d",
+      "derived": "MML vol 2(AA).doc.lines.txt",
+      "derived_sha256": "7168985023cdc6fa88ec32b2d40bf0c27bdc7cc7bba9888ddae4748723507e91",
+      "kind": "doc",
+      "lines": 2478
+    },
+    {
+      "original": "MML vol 2(AA).pdf",
+      "original_sha256": "c8a791a1e3a4d8fee412cae1b0c2daa4517438bf926c9f9e27fffd81cada1ec9",
+      "derived": "MML vol 2(AA).pdf.pages.txt",
+      "derived_sha256": "f2acc0e64b4aebc6c732048af9809ab0b47fcaf2585b142eaaa80c7920d108d1",
+      "kind": "pdf",
+      "pages": 151
+    },
+    {
+      "original": "MML vol 2(AR).doc-1.doc",
+      "original_sha256": "8bb17d8255ea1be2b975a96b3c739d002264df3da8a56086d29d2a1961f3a162",
+      "derived": "MML vol 2(AR).doc-1.lines.txt",
+      "derived_sha256": "e21396426157dbe6495176cf6410e7ee36b62038b016743f79df621966f88e76",
+      "kind": "doc",
+      "lines": 9298
+    },
+    {
+      "original": "MML vol 2(AR).doc.doc",
+      "original_sha256": "ed1d8a7fc1f4088f8d0fb7db6855c195b205b251874a70f611ced5c3fdb494a2",
+      "derived": "MML vol 2(AR).doc.lines.txt",
+      "derived_sha256": "278cea66b17c0c4cbc80d3f9b71665f1e860461fb9ae663cf4b02cc7179c9d29",
+      "kind": "doc",
+      "lines": 5823
+    },
+    {
+      "original": "MML vol 3.doc.doc",
+      "original_sha256": "67d788b31e8e2b618bf98b18606b6263a8c497d1ce40c4f9d0a171c3ea1bcad8",
+      "derived": "MML vol 3.doc.lines.txt",
+      "derived_sha256": "2153c4306b46d29807d1f61a5fbc4b9647cf84c6f8cc4fd64a468fda71e600be",
+      "kind": "doc",
+      "lines": 8996
+    },
+    {
+      "original": "MML vol 3.pdf.pdf",
+      "original_sha256": "dfce01c1267dc321acead765aae79764a1a2b45838ac0ba183f1dfec729c68e3",
+      "derived": "MML vol 3.pdf.pdf.pages.txt",
+      "derived_sha256": "34d5fe2b4c3d2ae644731b14de3bb82278eb467592289e16992a11b72c67d41a",
+      "kind": "pdf",
+      "pages": 295
+    }
+  ]
+}

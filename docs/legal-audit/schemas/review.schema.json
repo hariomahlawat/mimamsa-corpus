@@ -74,6 +74,16 @@
         "null"
       ],
       "pattern": "^[0-9a-f]{64}$"
+    },
+    "blind": {
+      "type": "boolean"
+    },
+    "independent_source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
     }
   }
 }

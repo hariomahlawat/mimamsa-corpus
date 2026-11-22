@@ -1,0 +1,1127 @@
+[
+ {
+  "finding_id": "F-STAT-001",
+  "batch_id": "PILOT-01",
+  "record_id": "HCE-010",
+  "original_sha256": "4131611f6617a260481cd52ef4588cb5e96e3a77857a233e7ede8b2b92cf428a",
+  "workstream": "STATUTORY",
+  "severity": "P0",
+  "issue_type": "CONFLICT",
+  "claim": "Record states the accused 'is not obliged' to make a statement (r.23(3) caution). The government-hosted compilation prints the caution without 'not'; MML copies print 'not obliged'. Authoritative S.R.O. 484 text not held.",
+  "original_location": "records_658.jsonl:line 86",
+  "original_text": "the accused is invited to make a statement but is not obliged to do so",
+  "proposed_text": null,
+  "rationale": "Army Rules compilation [[page 41]] r.23(3) reads: 'Do you wish to make any statement? You are obliged to say anything unless you wish to do so, but whatever you say will be taken down in writing and may be given in evidence'. MML 2.pdf p.152 and both MML vol 2(AR) .doc revisions print 'not obliged'. The original S.R.O. 484 of 27-11-1954 (Gazette Pt II s.4) and any amending S.R.O. touching r.23 are not held; egazette.gov.in unreachable; no Army Rules amendment notifications found on India Code (search 2026-11-22). Per the pilot's fixed position this is recorded as CONFLICTING and is NOT resolved. The record's own wording ('not obliged'; 'Use the current authenticated caution'; red flag on OCR-copied caution) already flags the issue but cannot be source-verified.",
+  "source_ids": [
+   "S-STAT-012"
+  ],
+  "verification_state": "CONFLICTING",
+  "review_state": "PENDING",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "Can the custodian (MoD/JAG/Central Secretariat Library/National Archives) supply the authenticated Gazette S.R.O. 484 of 27-11-1954 and every later S.R.O. amending r.23?",
+   "Pending that, should commander-facing content quote the caution at all, or only describe the right to silence with a source-conflict notice?"
+  ],
+  "limitations": [
+   "Did not inspect any page image of the compilation PDF or the MML PDF for the negation; derived text only.",
+   "Did not examine judicial treatment of the caution wording.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "CONFLICTING_SOURCES",
+  "pinpoint": "Army Rules 1954 r.23(3), compilation [[page 41]]",
+  "temporal_scope": "India Code-hosted annotated Army Rules compilation (undated; latest authority note SRO 258 of 27-11-2002); S.R.O. 484 (1954) and amending S.R.O.s not held; question is the wording of r.23(3) as made in 1954 and as in force today",
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-005",
+   "S-MML-006",
+   "S-MML-007"
+  ],
+  "related_record_ids": [
+   "EV-016"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-002",
+  "batch_id": "PILOT-01",
+  "record_id": "HCE-010",
+  "original_sha256": "4131611f6617a260481cd52ef4588cb5e96e3a77857a233e7ede8b2b92cf428a",
+  "workstream": "STATUTORY",
+  "severity": "P2",
+  "issue_type": "UNSUPPORTED_ASSERTION",
+  "claim": "Remaining r.23 propositions (statement recorded and read over; no cross-examination on it; defence and character witnesses; language) match the compilation text but cannot be source-verified because the compilation is unreliable at this very sub-rule and the Gazette original is not held.",
+  "original_location": "records_658.jsonl:line 86",
+  "original_text": "any voluntary statement is recorded and read over. The accused is not cross-examined on that statement at this stage and may call defence or character witnesses",
+  "proposed_text": "Consider attributing 'voluntary' to commentary rather than to r.23(3) itself, pending authenticated text.",
+  "rationale": "Compilation [[page 41]] r.23(3): 'Any statement thereupon made by the accused shall be taken down and read over to him, but he will not be cross-examined upon it. The accused may then call his witnesses, including if he so desires, any witnesses as to character.' r.23(4): evidence and statement recorded in English and, if not understood, interpreted 'in a language which he understands' - consistent with the record's language point. Wording agrees with the record, but the same compilation omits a negation in the same sub-rule, so it is held at SOURCE_LOCATED. 'Voluntary' is not a word of r.23(3); voluntariness appears only in editorial NOTE 7 (not rule text).",
+  "source_ids": [
+   "S-STAT-013"
+  ],
+  "verification_state": "SOURCE_LOCATED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "Not checked against Gazette S.R.O. 484 or amendments.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "UNVERIFIED",
+  "pinpoint": "Army Rules 1954 r.23(3)-(4), compilation [[page 41]]",
+  "temporal_scope": "India Code-hosted annotated Army Rules compilation (undated; latest authority note SRO 258 of 27-11-2002); S.R.O. 484 (1954) and amending S.R.O.s not held",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-005",
+   "S-MML-008"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-003",
+  "batch_id": "PILOT-01",
+  "record_id": "CM-013",
+  "original_sha256": "86bc66f70ee191f236be3740c918fc207153b5ebff0a4319ffce00a6b618ece8",
+  "workstream": "STATUTORY",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "Section 127 (successive trials) was omitted in 1992.",
+  "original_location": "records_658.jsonl:line 140",
+  "original_text": "Section 127 on successive trials was omitted in 1992",
+  "proposed_text": null,
+  "rationale": "Gazette of India Extraordinary Pt II s.1 No.59 (7-9-1992), Army (Amendment) Act 1992 (37 of 1992) s.11: 'Section 127 of the principal Act shall be omitted.' Assent 6-9-1992; s.1 has no separate commencement clause. India Code consolidation [[page 36]]: '127. [Successive trials by a criminal court and court-martial.] Omitted by the Army (Amendment) Act, 1992 (37 of 1992), s. 11 (w.e.f. 6-9-1992)'. Record is consistent.",
+  "source_ids": [
+   "S-STAT-008",
+   "S-STAT-004"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [
+   "Does any transitional question arise for trials linked to acts before 6-9-1992 still under review?"
+  ],
+  "limitations": [
+   "Did not examine the pre-omission text of s.127.",
+   "Repealing and Amending Act 2001 s.4-type savings not read.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Act 37 of 1992 s.11 (Gazette p.3); Army Act [[page 36]] s.127",
+  "temporal_scope": "Omission operative from 6-9-1992 (assent date; Gazette 7-9-1992). Pre-1992 s.127 text not examined; Act 37 of 1992 itself later repealed as spent by Act 30 of 2001 (savings not inspected)",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-039",
+   "S-MML-040"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-004",
+  "batch_id": "PILOT-01",
+  "record_id": "CM-013",
+  "original_sha256": "86bc66f70ee191f236be3740c918fc207153b5ebff0a4319ffce00a6b618ece8",
+  "workstream": "STATUTORY",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "Sections 125-126 allocate the forum decision and dispute procedure to specified authorities; ss.69, 70 and 121 are correctly invoked.",
+  "original_location": "records_658.jsonl:line 140",
+  "original_text": "Where both courts have jurisdiction, Sections 125–126 allocate decision and dispute procedures to specified authorities",
+  "proposed_text": null,
+  "rationale": "India Code [[page 36]] s.125 places discretion with 'the officer commanding the army, army corps, division or independent brigade in which the accused person is serving or such other officer as may be prescribed'; s.126(1)-(2) criminal court written notice, delivery or reference to Central Government 'whose order upon such reference shall be final'. s.69 civil offences subject to s.70 ([[page 25]]-[[page 26]]); s.121 bar on second trial including after summary disposal under ss.80, 83-85 ([[page 35]]). No amendment footnotes on ss.69, 70, 121, 125, 126. Record consistent. Note (not a defect): the prescribed officer for s.125 is identified in Army Rules r.197A (officer commanding the brigade or station, except s.69 cases where death resulted) - see CIV-008 finding. Army Act text still cross-refers to IPC/CrPC (45 of 1860; 2 of 1974) without BNS/BNSS adaptation; civil-offence identification after 1-7-2024 requires BNS (s.358 repeal/savings) analysis.",
+  "source_ids": [
+   "S-STAT-004",
+   "S-STAT-006",
+   "S-STAT-003"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "Army Rules r.197A not verified against Gazette.",
+   "Criminal Courts and Court-Martial (Adjustment of Jurisdiction) Rules 1978 not held.",
+   "BNS s.358 (S-STAT-025) noted for context only.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Army Act ss.69-70 [[page 25]]-[[page 26]]; s.121 [[page 35]]; ss.125-126 [[page 36]]",
+  "temporal_scope": "India Code Army Act consolidation 'As on 21 July 2025' (re-fetched 2026-11-22, unchanged SHA); amending Act 37 of 1992 checked against Gazette scan; original 1950 Gazette not held",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-033",
+   "S-MML-034"
+  ],
+  "related_record_ids": [
+   "CIV-008"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-005",
+  "batch_id": "PILOT-01",
+  "record_id": "HCE-017",
+  "original_sha256": "54a4f2358087e1a1ff3871352419ff16ce000a52db1a5fb1e965ed3b741175be",
+  "workstream": "STATUTORY",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "Sections 80-82: content of s.80 punishments, s.81 rank/aggregate limits (no (a)-(c) for NCOs; no reprimand below NCO), s.82 additional punishments with Central Government consent.",
+  "original_location": "records_658.jsonl:line 93",
+  "original_text": "Check Section 81 restrictions: e.g., custody/detention/confinement are not awardable to NCOs; reprimand is not for ranks below NCO.",
+  "proposed_text": "Optionally add: s.81(4) also bars (a)-(c) for a person who was of NCO rank when the offence was committed.",
+  "rationale": "India Code [[page 27]] s.80(a)-(i): imprisonment in military custody, detention and confinement to lines up to 28 days, extra guards/duties, deprivation, forfeiture of good service/conduct pay, severe reprimand or reprimand, fine up to 14 days' pay in a month, penal deductions; cl.(j) omitted. [[page 28]] s.81(3) 42-day aggregate for (a)-(c); s.81(4) (a), (b) and (c) not to be awarded to a person of NCO rank or who was of such rank when the offence was committed; s.81(5) cl.(g) not below NCO; s.82 COAS 'with the consent of the Central Government' may specify other punishments. Gazette Act 37 of 1992 s.4 (cl.(j) omitted) and s.5 (s.81(1) omitted; s.81(4) '(a), (b), (c) and (j)' -> '(a), (b) and (c)') confirm the amendments. Record consistent; minor omission that s.81(4) also covers a person who was an NCO at the time of the offence.",
+  "source_ids": [
+   "S-STAT-001",
+   "S-STAT-008"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "Did not search for any punishments specified under s.82 (would be Gazette notifications; egazette unreachable).",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Army Act s.80 [[page 27]]; ss.81-82 [[page 28]]; Act 37 of 1992 ss.4-5",
+  "temporal_scope": "India Code Army Act consolidation 'As on 21 July 2025' (re-fetched 2026-11-22, unchanged SHA); amending Act 37 of 1992 checked against Gazette scan; original 1950 Gazette not held; s.80/81 form since 6-9-1992",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-026",
+   "S-MML-027",
+   "S-MML-028"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-006",
+  "batch_id": "PILOT-01",
+  "record_id": "HCE-017",
+  "original_sha256": "54a4f2358087e1a1ff3871352419ff16ce000a52db1a5fb1e965ed3b741175be",
+  "workstream": "STATUTORY",
+  "severity": "P1",
+  "issue_type": "MISSING_AUTHORITY",
+  "claim": "Record's 'Check ceilings' step omits Army Rules r.192 (prescribed extent), which limits an awarding officer below field rank to 7 days' imprisonment/detention unless empowered by a division-level commander.",
+  "original_location": "records_658.jsonl:line 93",
+  "original_text": "Check ceilings, coexistence of multiple awards, and any notified additional punishments.",
+  "proposed_text": "Add to references and checklist: 'AR r.192 (prescribed extent): officer below field rank - imprisonment/detention max 7 days unless empowered by an officer not below division commander'.",
+  "rationale": "s.80 permits award 'to the extent prescribed' ([[page 27]]). Compilation [[page 209]] r.192: an officer 'if not below field rank' may award s.80 punishments to the full extent; 'if below field rank, award imprisonment and detention upto seven days and other punishments to the full extent', with an officer not less than a division commander able to empower such officer to the full extent. The record cites only r.22(3)(a) and Appendix III, so a checklist user could treat the s.80 28-day figures as the ceiling for every CO. Coercive summary-punishment power -> P1 omission. Rule text is from the annotated compilation (SOURCE_LOCATED); amendment history of r.192 unknown.",
+  "source_ids": [
+   "S-STAT-019",
+   "S-STAT-001"
+  ],
+  "verification_state": "SOURCE_LOCATED",
+  "review_state": "PENDING",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "Confirm r.192 current text and any amendment against authenticated Gazette S.R.O.s."
+  ],
+  "limitations": [
+   "r.192 not verified against Gazette.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "DISCREPANCY",
+  "pinpoint": "Army Rules r.192 [[page 209]]; Army Act s.80 [[page 27]]",
+  "temporal_scope": "India Code-hosted annotated Army Rules compilation (undated; latest authority note SRO 258 of 27-11-2002); S.R.O. 484 (1954) and amending S.R.O.s not held",
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-046"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-007",
+  "batch_id": "PILOT-01",
+  "record_id": "HCE-017",
+  "original_sha256": "54a4f2358087e1a1ff3871352419ff16ce000a52db1a5fb1e965ed3b741175be",
+  "workstream": "STATUTORY",
+  "severity": "P2",
+  "issue_type": "BROKEN_REFERENCE",
+  "claim": "Reference '[AR: r 22(3)(a), Appendix III]': r.22(3)(a) located; Appendix III is not present in the corpus Army Rules compilation, so the prescribed form cannot be checked.",
+  "original_location": "records_658.jsonl:line 93",
+  "original_text": "[AR: r 22(3)(a), Appendix III]",
+  "proposed_text": null,
+  "rationale": "Compilation [[page 38]] r.22(3)(a): 'dispose of the case under section 80 in accordance with the manner and form in Appendix III'. The 214-page compilation ends at the rules (last page 214 blank); no Appendix III text is present. Appendix III cannot be verified from any held source.",
+  "source_ids": [
+   "S-STAT-011"
+  ],
+  "verification_state": "SOURCE_LOCATED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "Appendix III not held in corpus; not searched in MML files by this agent.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "UNVERIFIED",
+  "pinpoint": "Army Rules r.22(3)(a) [[page 38]]; Appendix III not held",
+  "temporal_scope": "India Code-hosted annotated Army Rules compilation (undated; latest authority note SRO 258 of 27-11-2002); S.R.O. 484 (1954) and amending S.R.O.s not held",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-001"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-008",
+  "batch_id": "PILOT-01",
+  "record_id": "CIV-033",
+  "original_sha256": "6846102e992291e1985c7f15de5f3d2c4776c384aa906d1e67b4640fb3ea0759",
+  "workstream": "STATUTORY",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "BNSS s.521 provides for Central Government rules on forum allocation and Magistrate delivery to commanding officers; it does not itself confer a forum-choice power on a CO.",
+  "original_location": "records_658.jsonl:line 492",
+  "original_text": "BNSS section 521 provides for Central Government rules governing trial forum allocation and delivery to military commanding officers in appropriate cases.",
+  "proposed_text": null,
+  "rationale": "India Code BNSS [[page 172]]-[[page 173]] s.521(1): Central Government 'may make rules ... as to cases in which persons subject to army, naval or air-force law ... shall be tried by a Court to which this Sanhita applies, or by a Court-martial'; the Magistrate 'shall have regard to such rules, and shall in proper cases deliver him ... to the commanding officer ... for the purpose of being tried by a Court-martial'; Explanation (a)-(b); (2) Magistrate to apprehend on CO's written application; (3) High Court may direct production of a prisoner before a Court-martial. Record's description and its red flag ('Assuming BNSS 521 alone grants CO forum-choice power') are consistent; the forum choice itself sits in Army Act s.125/126.",
+  "source_ids": [
+   "S-STAT-023"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "Commencement notification S.O. 848(E) not held.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "BNSS s.521(1)-(3) [[page 172]]-[[page 173]]",
+  "temporal_scope": "BNSS in force 1-7-2024 (S.O. 848(E), per India Code footnote); India Code consolidation retrieved 2026-11-21",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor"
+ },
+ {
+  "finding_id": "F-STAT-009",
+  "batch_id": "PILOT-01",
+  "record_id": "CIV-033",
+  "original_sha256": "6846102e992291e1985c7f15de5f3d2c4776c384aa906d1e67b4640fb3ea0759",
+  "workstream": "STATUTORY",
+  "severity": "P2",
+  "issue_type": "MISSING_AUTHORITY",
+  "claim": "Record treats continuity of the 1978 adjustment rules as depending on external 'adaptation materials' but omits the statutory deeming provision BNSS s.531(2)(b).",
+  "original_location": "records_658.jsonl:line 492",
+  "original_text": "The 1978 adjustment rules refer to the former CrPC and should be read only with authenticated current legal continuity/adaptation materials.",
+  "proposed_text": "Add: 'BNSS s.531(2)(b) deems rules made under the CrPC and in force immediately before 1 July 2024 to be made under the corresponding BNSS provision (here s.521); s.531(2)(a) keeps CrPC for matters pending on that date. Confirm the 1978 Rules' in-force status.'",
+  "rationale": "BNSS [[page 174]] s.531(2)(b): 'all notifications published, ... powers conferred, forms provided by rules, ... orders, rules and appointments ... made under the said Code and which are in force immediately before the commencement of this Sanhita, shall be deemed ... to have been ... made under the corresponding provisions of this Sanhita'. s.531(2)(a) preserves CrPC for appeals, applications, trials, inquiries or investigations pending immediately before 1-7-2024. The record lists s.531 in references but its legal-position text does not state this deeming rule; whether the 1978 Rules were 'in force immediately before' 1-7-2024 and which BNSS provision 'corresponds' (s.521 vs CrPC s.475) remain to be confirmed (see separate BLOCKED finding).",
+  "source_ids": [
+   "S-STAT-024",
+   "S-STAT-023"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [
+   "Is it accepted that BNSS s.521 is the 'corresponding provision' to CrPC s.475 for s.531(2)(b) purposes?"
+  ],
+  "limitations": [
+   "Did not examine General Clauses Act 1897 s.24 or case law on deemed continuation.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "DISCREPANCY",
+  "pinpoint": "BNSS s.531(2)(a)-(b) [[page 174]]",
+  "temporal_scope": "Transition date 1-7-2024; India Code BNSS consolidation retrieved 2026-11-21",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor"
+ },
+ {
+  "finding_id": "F-STAT-010",
+  "batch_id": "PILOT-01",
+  "record_id": "CIV-033",
+  "original_sha256": "6846102e992291e1985c7f15de5f3d2c4776c384aa906d1e67b4640fb3ea0759",
+  "workstream": "STATUTORY",
+  "severity": "P1",
+  "issue_type": "MISSING_AUTHORITY",
+  "claim": "Text, amendments and current status of the Criminal Courts and Court-Martial (Adjustment of Jurisdiction) Rules 1978 cannot be established: no official copy held.",
+  "original_location": "records_658.jsonl:line 492",
+  "original_text": "Locate current valid Government adjustment rules",
+  "proposed_text": null,
+  "rationale": "The 1978 Rules are not in the corpus; an India Code search on 2026-11-22 ('Adjustment of Jurisdiction') returned only the NSG analogue (Criminal Courts and Security Guard Courts (Adjustment of Jurisdiction) Rules 1987); egazette.gov.in and mod.gov.in are unreachable. No statement about their content, notification number or date can be verified by this agent. These rules govern the Magistrate/CO delivery mechanics that the record discusses.",
+  "source_ids": [],
+  "verification_state": "NOT_FOUND",
+  "review_state": "BLOCKED",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "Obtain authenticated Gazette copy of the 1978 Adjustment of Jurisdiction Rules and all amendments; confirm no replacement rules were notified under BNSS s.521."
+  ],
+  "limitations": [
+   "Only India Code searched; Gazette unreachable.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "BLOCKED",
+  "pinpoint": null,
+  "temporal_scope": "Rules of 1978 made under CrPC s.475; status after 1-7-2024 depends on BNSS s.531(2)(b)",
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-034"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-011",
+  "batch_id": "PILOT-01",
+  "record_id": "CIV-033",
+  "original_sha256": "6846102e992291e1985c7f15de5f3d2c4776c384aa906d1e67b4640fb3ea0759",
+  "workstream": "STATUTORY",
+  "severity": "P2",
+  "issue_type": "METADATA",
+  "claim": "Corpus BNSS-CrPC correspondence data (data/correspondence/bnss-crpc.jsonl) has no row for BNSS s.521 although the source comparison table maps it to CrPC s.475; 70 BNSS sections are missing overall.",
+  "original_location": "records_658.jsonl:line 492",
+  "original_text": "BNSS s 521; former CrPC s 475",
+  "proposed_text": "Pipeline proposal only: re-extract correspondence rows lost at page boundaries (incl. BNSS 521 -> CrPC 475) and add a completeness check over BNSS ss.1-531.",
+  "rationale": "bnss-crpc.jsonl (487 rows, 461 distinct BNSS sections) has rows for 520 and 522 but none for 521; source table [[page 38]] row: '521 Delivery to commanding officers of persons liable to be tried by Court-martial. 475 The word \"military\" is replaced by \"army\".' Gaps cluster at page-start rows (e.g. 13, 31, 46, 59, 76, 92, ...) and ranges 170-178, 331-346, 486-503, suggesting a page-boundary extraction defect. Own comparison of corpus CrPC s.475 ([[page 177]]-[[page 178]], OCR, provenance unconfirmed) with BNSS s.521: same structure, Explanation and sub-ss.(2)-(3); 'military' -> 'army' in 'army, naval or air-force law/station'; Acts listed with numbers. The record's mapping 521<->475 is consistent; the defect is in corpus retrieval data, not in the record.",
+  "source_ids": [
+   "S-STAT-029",
+   "S-STAT-028",
+   "S-STAT-027",
+   "S-STAT-023"
+  ],
+  "verification_state": "SOURCE_LOCATED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "CrPC text is an OCR print of unconfirmed provenance; later CrPC amendments to s.475 not checked.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "DISCREPANCY",
+  "pinpoint": "bnss-crpc.jsonl (no new_section 521); comparison table [[page 38]]",
+  "temporal_scope": "Corpus data as at 2026-11-22",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor"
+ },
+ {
+  "finding_id": "F-STAT-012",
+  "batch_id": "PILOT-01",
+  "record_id": "CM-025",
+  "original_sha256": "a8ccf31948613da7e423aecf83bcd3f1d74e80be967843e0920f2edb23cc4e32",
+  "workstream": "STATUTORY",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "The 2025 India Code Army Act text still names the Indian Evidence Act, 1872 in s.133.",
+  "original_location": "records_658.jsonl:line 152",
+  "original_text": "The 2025 Army Act text still expressly names the Indian Evidence Act, 1872 in Section 133.",
+  "proposed_text": null,
+  "rationale": "India Code Army Act consolidation headed '(As on the 21st July, 2025)', [[page 37]] s.133: 'The Indian Evidence Act, 1872 (1 of 1872), shall, subject to the provisions of this Act, apply to all proceedings before a court-martial.' No amendment footnote on s.133. Same PDF (identical SHA-256) served by India Code on 2026-11-22; item last_modified 2025-11-07.",
+  "source_ids": [
+   "S-STAT-005"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "Could not search the Gazette for any 2025-26 amendment to s.133 (egazette unreachable).",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Army Act s.133 [[page 37]]",
+  "temporal_scope": "India Code Army Act consolidation 'As on 21 July 2025' (re-fetched 2026-11-22, unchanged SHA); amending Act 37 of 1992 checked against Gazette scan; original 1950 Gazette not held; no post-July-2025 amendment visible on India Code as of 2026-11-22 (Gazette not searchable)",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-058",
+   "S-MML-059"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-013",
+  "batch_id": "PILOT-01",
+  "record_id": "CM-025",
+  "original_sha256": "a8ccf31948613da7e423aecf83bcd3f1d74e80be967843e0920f2edb23cc4e32",
+  "workstream": "STATUTORY",
+  "severity": "P1",
+  "issue_type": "MISSING_AUTHORITY",
+  "claim": "Record frames the s.133/BSA transition but omits that BSA s.1(2) itself applies the Adhiniyam to judicial proceedings before 'Courts-martial', together with s.170 savings and the 1-7-2024 commencement.",
+  "original_location": "records_658.jsonl:line 152",
+  "original_text": "India’s replacement evidence statute creates an important transition/savings question that cannot be resolved by silent auto-substitution in an AI assistant.",
+  "proposed_text": "Add: 'BSA s.1(2) applies the BSA to judicial proceedings before Courts-martial (from 1 July 2024); s.170(2) keeps the IEA for matters pending immediately before that date; Army Act s.133 still names the IEA - JAG to advise on how s.133 is read.'",
+  "rationale": "BSA [[page 10]] s.1(2): 'It applies to all judicial proceedings in or before any Court, including Courts-martial, but not to affidavits ... nor to proceedings before an arbitrator'; s.1(3) fn: in force 1-7-2024 vide S.O. 849(E) dated 23-2-2024. [[page 51]] s.170(1) repeals the IEA; s.170(2) keeps the IEA for any application, trial, inquiry, investigation, proceeding or appeal pending immediately before commencement. By contrast the corpus IEA s.1 (unconfirmed provenance) excluded courts-martial convened under the (British) Army Act. Army Act s.133 has not been textually amended. These enacted provisions are material inputs to the transition question the record raises; their omission risks treating the issue as wholly open. How s.133's reference to the repealed IEA is to be read (e.g. General Clauses Act 1897 s.8) is a legal question not resolved here.",
+  "source_ids": [
+   "S-STAT-021",
+   "S-STAT-022",
+   "S-STAT-005"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "Does General Clauses Act 1897 s.8 operate to read Army Act s.133's reference to the IEA as a reference to the BSA from 1-7-2024?",
+   "Is a court-martial a 'trial' or 'proceeding' pending for BSA s.170(2) once convened, or from an earlier stage (charge, summary of evidence)?"
+  ],
+  "limitations": [
+   "General Clauses Act 1897 not held/examined.",
+   "No judicial treatment examined.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "DISCREPANCY",
+  "pinpoint": "BSA s.1(2)-(3) [[page 10]]; s.170 [[page 51]]; Army Act s.133 [[page 37]]",
+  "temporal_scope": "BSA commencement 1-7-2024 (India Code footnote; S.O. 849(E) not held); Army Act 'As on 21 July 2025'",
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "statutory-auditor",
+  "related_record_ids": [
+   "EV-002",
+   "CIV-034"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-014",
+  "batch_id": "PILOT-01",
+  "record_id": "EV-002",
+  "original_sha256": "5eb3f68df1d88ce32320a98bcc2defdbc11b9d8ffe6e6c7808303768594120aa",
+  "workstream": "STATUTORY",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "BSA s.170 repeals the IEA while preserving it for specified matters pending immediately before commencement (1-7-2024).",
+  "original_location": "records_658.jsonl:line 564",
+  "original_text": "Section 170 repeals the Indian Evidence Act, 1872, while preserving its application to specified matters pending immediately before commencement.",
+  "proposed_text": null,
+  "rationale": "BSA [[page 51]] s.170(1): 'The Indian Evidence Act, 1872 (1 of 1872) is hereby repealed.' s.170(2): if 'immediately before the date on which this Adhiniyam comes into force, there is any application, trial, inquiry, investigation, proceeding or appeal pending', it is dealt with under the IEA 'as in force immediately before such commencement'. Commencement 1-7-2024 per India Code footnote (S.O. 849(E) dated 23-2-2024). Record (including the list of proceeding types and the 1 July 2024 date) is consistent; its URL points to the India Code BSA PDF (aa202347.pdf).",
+  "source_ids": [
+   "S-STAT-022",
+   "S-STAT-021"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "S.O. 849(E) not held.",
+   "Application of s.170(2) to court-martial stages is a legal question not decided.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "BSA s.170(1)-(2) [[page 51]]; s.1(3) fn [[page 10]]",
+  "temporal_scope": "BSA as in India Code 'As on 6 October 2025'; commencement 1-7-2024 from India Code footnote (Gazette S.O. 849(E) not held)",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor",
+  "related_record_ids": [
+   "CM-025"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-015",
+  "batch_id": "PILOT-01",
+  "record_id": "CM-003",
+  "original_sha256": "8bf3946fdb3011eca6765bb60baa5eba0070194650a5d4b1f75ab5bccbaf7232",
+  "workstream": "STATUTORY",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "GCM convening by Central Government, COAS or officer empowered by COAS warrant; DCM by GCM-convening officer or officer empowered by his warrant; warrants may carry restrictions.",
+  "original_location": "records_658.jsonl:line 130",
+  "original_text": "GCM may be convened by the Central Government, COAS or an officer empowered by COAS warrant. DCM may be convened by a GCM-convening officer or an officer empowered by warrant of such officer.",
+  "proposed_text": null,
+  "rationale": "India Code [[page 33]] s.109: 'A general court-martial may be convened by the Central Government or [the Chief of the Army Staff] or by any officer empowered in this behalf by warrant of [the Chief of the Army Staff]' (fn: subs. by Act 19 of 1955 for 'the Commander-in-Chief'); s.110 DCM by 'an officer having power to convene a general court-martial or by any officer empowered in this behalf by warrant of any such officer'; s.111 warrants 'may contain such restrictions, reservations or conditions as the officer issuing it may think fit'. Act 19 of 1955 (India Code): in force 7-5-1955; s.3 construes references to the Commander-in-Chief of the regular Army as references to the Chief of the Army Staff. Record consistent.",
+  "source_ids": [
+   "S-STAT-002",
+   "S-STAT-010"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "No actual convening warrant examined (none held).",
+   "SGCM (s.112) not in the record's claim; not assessed.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Army Act ss.109-111 [[page 33]]; Act 19 of 1955 s.3",
+  "temporal_scope": "India Code Army Act consolidation 'As on 21 July 2025' (re-fetched 2026-11-22, unchanged SHA); amending Act 37 of 1992 checked against Gazette scan; original 1950 Gazette not held; 'Chief of the Army Staff' wording from 7-5-1955 (Act 19 of 1955 operative s.2/Schedule not reproduced on India Code)",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-047",
+   "S-MML-048",
+   "S-MML-049"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-016",
+  "batch_id": "PILOT-01",
+  "record_id": "CM-003",
+  "original_sha256": "8bf3946fdb3011eca6765bb60baa5eba0070194650a5d4b1f75ab5bccbaf7232",
+  "workstream": "STATUTORY",
+  "severity": "P2",
+  "issue_type": "UNSUPPORTED_ASSERTION",
+  "claim": "'Apply Rule 37 pre-convening evaluation' matches compilation r.37(1)-(2) but is held at SOURCE_LOCATED (annotated compilation; Gazette not held).",
+  "original_location": "records_658.jsonl:line 130",
+  "original_text": "Apply Rule 37 pre-convening evaluation to the material.",
+  "proposed_text": null,
+  "rationale": "Compilation [[page 65]] r.37(1): convening officer 'shall first satisfy himself that the charges ... are for offences within the meaning of the Act, and that the evidence justified a trial', otherwise release or refer; r.37(2) proper kind of court-martial. Editorial NOTE 1 (not rule text) states a court-martial convened by an unempowered officer 'will lack jurisdiction' - commentary only. Consistent with record but unverified against Gazette.",
+  "source_ids": [
+   "S-STAT-015"
+  ],
+  "verification_state": "SOURCE_LOCATED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "r.37 amendment history unknown.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "UNVERIFIED",
+  "pinpoint": "Army Rules r.37(1)-(4) [[page 65]]",
+  "temporal_scope": "India Code-hosted annotated Army Rules compilation (undated; latest authority note SRO 258 of 27-11-2002); S.R.O. 484 (1954) and amending S.R.O.s not held",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-053"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-017",
+  "batch_id": "PILOT-01",
+  "record_id": "CIV-008",
+  "original_sha256": "07fed784f69887cfc7ff7e18ee6c67314d09838fe790e78987fb40b3605aa844",
+  "workstream": "STATUTORY",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "Army Act s.125 places the forum choice with the officer commanding the army, army corps, division or independent brigade, or another prescribed officer.",
+  "original_location": "records_658.jsonl:line 467",
+  "original_text": "Section 125 initially places the choice, where both courts have jurisdiction, with officers of specified higher command or another officer duly prescribed.",
+  "proposed_text": null,
+  "rationale": "India Code [[page 36]] s.125: discretion of 'the officer commanding the army, army corps, division or independent brigade in which the accused person is serving or such other officer as may be prescribed'; s.126 criminal-court notice and Central Government reference. No amendment footnotes. Record consistent.",
+  "source_ids": [
+   "S-STAT-004"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Army Act s.125 [[page 36]]",
+  "temporal_scope": "India Code Army Act consolidation 'As on 21 July 2025' (re-fetched 2026-11-22, unchanged SHA); amending Act 37 of 1992 checked against Gazette scan; original 1950 Gazette not held",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-033",
+   "S-MML-035",
+   "S-MML-037"
+  ],
+  "related_record_ids": [
+   "CM-013"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-018",
+  "batch_id": "PILOT-01",
+  "record_id": "CIV-008",
+  "original_sha256": "07fed784f69887cfc7ff7e18ee6c67314d09838fe790e78987fb40b3605aa844",
+  "workstream": "STATUTORY",
+  "severity": "P1",
+  "issue_type": "MISSING_AUTHORITY",
+  "claim": "Record omits Army Rules r.197A, which prescribes the s.125 officer as the officer commanding the brigade or station (except s.69 cases where death resulted); a unit CO who is the station commander may therefore hold s.125 power.",
+  "original_location": "records_658.jsonl:line 467",
+  "original_text": "A unit CO should not assume that his ordinary command appointment gives an independent section 125 power.",
+  "proposed_text": "Add: 'AR r.197A: prescribed officer under s.125 is the officer commanding the brigade or station in which the accused is serving, except s.69 cases where death has resulted (then only the s.125-named higher commanders).'",
+  "rationale": "Compilation [[page 210]] r.197A: 'The prescribed officer for the purpose of Section 125 of the Act shall, except in cases falling under Section 69 of the Act in which death has resulted, be the officer commanding the brigade or station in which the accused person is serving.' The record's statement is not wrong as to an ordinary unit command, but without r.197A it does not identify who the 'prescribed' officer is, nor the death-case exception, and its red flag could misdirect where the unit CO is also officer commanding the station. Forum/jurisdiction -> P1. Rule text from annotated compilation (SOURCE_LOCATED); insertion instrument/date of r.197A not shown.",
+  "source_ids": [
+   "S-STAT-020",
+   "S-STAT-004"
+  ],
+  "verification_state": "SOURCE_LOCATED",
+  "review_state": "PENDING",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "Confirm r.197A text and insertion S.R.O. against Gazette; confirm whether 'station' commander includes a unit CO acting as station commander."
+  ],
+  "limitations": [
+   "r.197A not verified against Gazette.",
+   "1978 Adjustment Rules (record ref 'rule 2(c) historical') not held.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "DISCREPANCY",
+  "pinpoint": "Army Rules r.197A [[page 210]]; Army Act s.125 [[page 36]]",
+  "temporal_scope": "India Code-hosted annotated Army Rules compilation (undated; latest authority note SRO 258 of 27-11-2002); S.R.O. 484 (1954) and amending S.R.O.s not held",
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-066"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-019",
+  "batch_id": "PILOT-01",
+  "record_id": "MMLPKT-01",
+  "original_sha256": "b4bb5c3df23bfd6c6025e2b663d3d5132e5be306fe6bf43e513631d5b5009848",
+  "workstream": "STATUTORY",
+  "severity": "P1",
+  "issue_type": "MISSING_AUTHORITY",
+  "claim": "Current r.22 text (incl. r.22(1) proviso and Explanation) is available only from the annotated compilation; enacting and amending S.R.O.s are not held.",
+  "original_location": "MMLPKT-01",
+  "original_text": "Army Rules 1954 r.22 (hearing of charge; r.22(1) proviso)",
+  "proposed_text": null,
+  "rationale": "Compilation [[page 37]]-[[page 39]] shows r.22(1) with proviso (CO may dispense with sub-rule (1) procedure where the charge arises from a court of inquiry in which r.180 was complied with), r.22(2) with proviso (s.120(2)), r.22(3)(a)-(d) with proviso, r.22(4), Explanation, then authority note 'SRO No 258 dt 27 Nov 2002' (scope of that note - whole rule or Explanation only - unclear). No instrument is printed for the proviso. S.R.O. 484 (1954), S.R.O. 258 (2002) and any other amending S.R.O. are not held; none on India Code; egazette unreachable. Historical and current wording therefore BLOCKED for authentication.",
+  "source_ids": [
+   "S-STAT-011"
+  ],
+  "verification_state": "SOURCE_LOCATED",
+  "review_state": "BLOCKED",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "Obtain Gazette S.R.O. 484 (1954) and S.R.O. 258 of 27-11-2002 and identify the instrument that inserted the r.22(1) proviso."
+  ],
+  "limitations": [
+   "No Gazette access.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "BLOCKED",
+  "pinpoint": "Army Rules r.22 [[page 37]]-[[page 39]]",
+  "temporal_scope": "India Code-hosted annotated Army Rules compilation (undated; latest authority note SRO 258 of 27-11-2002); S.R.O. 484 (1954) and amending S.R.O.s not held",
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-001",
+   "S-MML-003",
+   "S-MML-004"
+  ],
+  "related_record_ids": [
+   "KB-003",
+   "HCE-004"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-020",
+  "batch_id": "PILOT-01",
+  "record_id": "MMLPKT-02",
+  "original_sha256": "aee2b541c7ffb67063f24d468f353730ca1efefc89fe97956ee9d2e89944af30",
+  "workstream": "STATUTORY",
+  "severity": "P0",
+  "issue_type": "CONFLICT",
+  "claim": "r.23(3) caution wording conflicts: compilation 'You are obliged to say anything unless you wish to do so'; MML copies 'not obliged'. Not resolved.",
+  "original_location": "MMLPKT-02",
+  "original_text": "Army Rules 1954 r.23(3) (caution to accused at SoE)",
+  "proposed_text": null,
+  "rationale": "Compilation [[page 41]] omits 'not'; MML 2.pdf p.152 and both vol 2(AR) .doc revisions include it. Original S.R.O. 484 of 27-11-1954 and any amending S.R.O. not held; egazette unreachable; no Army Rules amendments on India Code. Recorded CONFLICTING per fixed position.",
+  "source_ids": [
+   "S-STAT-012"
+  ],
+  "verification_state": "CONFLICTING",
+  "review_state": "PENDING",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "Custodian request for authenticated S.R.O. 484 Gazette scan (see registers/RULE23_3_CUSTODIAN_REQUEST_DRAFT.md)."
+  ],
+  "limitations": [
+   "No page-image check.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "CONFLICTING_SOURCES",
+  "pinpoint": "Army Rules r.23(3) [[page 41]]",
+  "temporal_scope": "India Code-hosted annotated Army Rules compilation (undated; latest authority note SRO 258 of 27-11-2002); S.R.O. 484 (1954) and amending S.R.O.s not held",
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-005",
+   "S-MML-006",
+   "S-MML-007"
+  ],
+  "related_record_ids": [
+   "HCE-010",
+   "EV-016"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-021",
+  "batch_id": "PILOT-01",
+  "record_id": "MMLPKT-03",
+  "original_sha256": "95904d7070291f7b7df9ced13c07d4cd3d6952e34d3073e7612d972c485f8541",
+  "workstream": "STATUTORY",
+  "severity": "P2",
+  "issue_type": "MISSING_AUTHORITY",
+  "claim": "r.25 is shown as omitted by 'SRO 17.E dated 6.12.93' in the compilation; amending S.R.O. not held, so omission and its date cannot be authenticated.",
+  "original_location": "MMLPKT-03",
+  "original_text": "Army Rules 1954 r.25 (omitted)",
+  "proposed_text": null,
+  "rationale": "Compilation [[page 45]]: '25. Omitted vide SRO 17.E dated 6.12.93.' The same instrument is cited for cancellation of rr.172-176 ([[page 194]]). S.R.O. 17(E) of 6-12-1993 not held; not on India Code; egazette unreachable. Current law per compilation: r.25 omitted; pre-1993 text not examined.",
+  "source_ids": [
+   "S-STAT-014"
+  ],
+  "verification_state": "SOURCE_LOCATED",
+  "review_state": "BLOCKED",
+  "requires_legal_review": false,
+  "advisor_questions": [
+   "Obtain S.R.O. 17(E) dated 6-12-1993 to confirm r.25 omission and commencement."
+  ],
+  "limitations": [
+   "Pre-1993 r.25 text not examined.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "BLOCKED",
+  "pinpoint": "Army Rules r.25 [[page 45]]",
+  "temporal_scope": "India Code-hosted annotated Army Rules compilation (undated; latest authority note SRO 258 of 27-11-2002); S.R.O. 484 (1954) and amending S.R.O.s not held; omission reported from 6-12-1993",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-009",
+   "S-MML-010",
+   "S-MML-012"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-022",
+  "batch_id": "PILOT-01",
+  "record_id": "MMLPKT-04",
+  "original_sha256": "e594535a3a0b9c556c62c9d82131a711708f54b10bd468c00243bd4f55bf6579",
+  "workstream": "STATUTORY",
+  "severity": "P1",
+  "issue_type": "MISSING_AUTHORITY",
+  "claim": "Current r.180 wording (opening 'Save in the case of a prisoner of war who is still absent') is shown without any amendment authority; amendment chain cannot be established.",
+  "original_location": "MMLPKT-04",
+  "original_text": "Army Rules 1954 r.180",
+  "proposed_text": null,
+  "rationale": "Compilation [[page 196]]-[[page 197]] r.180: full opportunity to be present, make a statement, give evidence, cross-examine witnesses and produce witnesses where an inquiry affects character or military reputation; presiding officer to ensure notice. The prisoner-of-war saving words suggest a later amendment but no instrument is printed. Original and amending S.R.O.s not held; egazette unreachable. r.180 underpins the r.22(1) proviso, so currency matters.",
+  "source_ids": [
+   "S-STAT-017"
+  ],
+  "verification_state": "SOURCE_LOCATED",
+  "review_state": "BLOCKED",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "Identify and obtain the S.R.O. that introduced the prisoner-of-war saving in r.180 (if any)."
+  ],
+  "limitations": [
+   "No Gazette access.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "BLOCKED",
+  "pinpoint": "Army Rules r.180 [[page 196]]-[[page 197]]",
+  "temporal_scope": "India Code-hosted annotated Army Rules compilation (undated; latest authority note SRO 258 of 27-11-2002); S.R.O. 484 (1954) and amending S.R.O.s not held",
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-014",
+   "S-MML-015",
+   "S-MML-016"
+  ],
+  "related_record_ids": [
+   "KB-026",
+   "HCE-004"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-023",
+  "batch_id": "PILOT-01",
+  "record_id": "MMLPKT-05",
+  "original_sha256": "67b15d127f81091b2a1b68bbdee915516bb675eaae0274a4a8b40a7ea2101754",
+  "workstream": "STATUTORY",
+  "severity": "P2",
+  "issue_type": "MISSING_AUTHORITY",
+  "claim": "Current r.182 text and proviso located in compilation without amendment authority; amendment history BLOCKED.",
+  "original_location": "MMLPKT-05",
+  "original_text": "Army Rules 1954 r.182",
+  "proposed_text": null,
+  "rationale": "Compilation [[page 197]]-[[page 198]] r.182: court-of-inquiry proceedings, confessions, statements or answers not admissible against a person subject to the Act, nor evidence of the proceedings, except on trial for wilfully giving false evidence; proviso permits use 'by the prosecution or the defence for the purpose of cross-examining any witness'. No amendment note printed; any amending S.R.O. not held.",
+  "source_ids": [
+   "S-STAT-018"
+  ],
+  "verification_state": "SOURCE_LOCATED",
+  "review_state": "BLOCKED",
+  "requires_legal_review": false,
+  "advisor_questions": [
+   "Obtain the instrument (if any) that amended r.182 or its proviso."
+  ],
+  "limitations": [
+   "No Gazette access.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "BLOCKED",
+  "pinpoint": "Army Rules r.182 [[page 197]]-[[page 198]]",
+  "temporal_scope": "India Code-hosted annotated Army Rules compilation (undated; latest authority note SRO 258 of 27-11-2002); S.R.O. 484 (1954) and amending S.R.O.s not held",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-017",
+   "S-MML-018",
+   "S-MML-019"
+  ],
+  "related_record_ids": [
+   "COI-025"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-024",
+  "batch_id": "PILOT-01",
+  "record_id": "MMLPKT-06",
+  "original_sha256": "d293fa382dae8553a3e79679f70329922f8d45a3256249ffd86590f4d730a7c1",
+  "workstream": "STATUTORY",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "Army Act ss.75-76 (field punishment) were omitted by Act 37 of 1992 s.2 from 6-9-1992.",
+  "original_location": "MMLPKT-06",
+  "original_text": "Army Act 1950 ss.75-76 (field punishment; omitted)",
+  "proposed_text": null,
+  "rationale": "Gazette Extraordinary No.59 of 7-9-1992, Act 37 of 1992 s.2: 'sections 75 and 76 shall be omitted'; s.3 deletes ', field punishment' from s.77; s.8 removes field punishment from s.91(a)-(b). Assent 6-9-1992; no separate commencement clause. India Code [[page 27]]: ss.75-76 '[Omitted]' by Act 37 of 1992, s.2 (w.e.f. 6-9-1992). Field punishment is not current law.",
+  "source_ids": [
+   "S-STAT-008",
+   "S-STAT-001"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "Pre-1992 text not examined.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Act 37 of 1992 ss.2-3, 8 (Gazette pp.1-2); Army Act [[page 27]]",
+  "temporal_scope": "Omitted from 6-9-1992; pre-1992 text of ss.75-76 not examined",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-020",
+   "S-MML-021",
+   "S-MML-022"
+  ],
+  "related_record_ids": [
+   "HCE-017"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-025",
+  "batch_id": "PILOT-01",
+  "record_id": "MMLPKT-07",
+  "original_sha256": "ef871b67799e62262390a6e830017c82bf99ce2f09c7f1c25a9327dbb504b517",
+  "workstream": "STATUTORY",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "Current ss.80-82: s.80(a)-(i) (cl.(j) omitted 1992), s.81(2)-(5) (s.81(1) omitted; s.81(4) amended 1992), s.82 unchanged except COAS designation.",
+  "original_location": "MMLPKT-07",
+  "original_text": "Army Act 1950 ss.80-82 (summary punishments, limits, additional punishments)",
+  "proposed_text": null,
+  "rationale": "India Code [[page 27]]-[[page 28]] as set out in the HCE-017 finding; Gazette Act 37 of 1992 s.4 (s.80 cl.(j) omitted), s.5(i) (s.81(1) omitted), s.5(ii) (s.81(4) '(a), (b), (c) and (j)' -> '(a), (b) and (c)'); 'Chief of the Army Staff' in ss.80, 82 by Act 19 of 1955 (operative text not reproduced; s.3 construction rule). Any manual copy printing s.80 cl.(j), s.81(1) or the pre-1992 s.81(4) is outdated (not assessed here which copies do). Prescribed extent is in AR r.192 (compilation [[page 209]], not verified).",
+  "source_ids": [
+   "S-STAT-001",
+   "S-STAT-008",
+   "S-STAT-010"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "Text of the omitted s.80(j) and s.81(1) not examined; s.82 notifications not searched.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Army Act ss.80-82 [[page 27]]-[[page 28]]; Act 37 of 1992 ss.4-5",
+  "temporal_scope": "India Code Army Act consolidation 'As on 21 July 2025' (re-fetched 2026-11-22, unchanged SHA); amending Act 37 of 1992 checked against Gazette scan; original 1950 Gazette not held",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-026",
+   "S-MML-027",
+   "S-MML-028"
+  ],
+  "related_record_ids": [
+   "HCE-017",
+   "KB-003"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-026",
+  "batch_id": "PILOT-01",
+  "record_id": "MMLPKT-08",
+  "original_sha256": "1b0fb28eacaf9bac7c9bf0448ca09e4c3301773ac3913d2828ca8adfb59b66cf",
+  "workstream": "STATUTORY",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "Current s.122: 3-year limitation running from date of offence, or knowledge, or known identity (whichever earlier), as substituted by Act 37 of 1992 s.9; exceptions and exclusions in (2)-(4).",
+  "original_location": "MMLPKT-08",
+  "original_text": "Army Act 1950 s.122 (limitation)",
+  "proposed_text": null,
+  "rationale": "Gazette Act 37 of 1992 s.9 substitutes for 'from the date of such offence' the words 'and such period shall commence,- (a) on the date of the offence; or (b) ... knowledge ...; or (c) ... identity ... whichever is earlier'. India Code [[page 35]] s.122(1)(a)-(c) (fn 1: subs. by Act 37 of 1992, s.9), (2) desertion, fraudulent enrolment, s.37 offences excluded, (3) time as POW/in enemy territory/evading arrest excluded, (4) exemplary service bar. Pre-6-9-1992 rule ran only 'from the date of such offence'.",
+  "source_ids": [
+   "S-STAT-008",
+   "S-STAT-003"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [
+   "For offences committed before 6-9-1992, which version of s.122(1) governs commencement of the limitation period?"
+  ],
+  "limitations": [
+   "Transitional application of the 1992 substitution not analysed.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Act 37 of 1992 s.9 (Gazette p.2); Army Act s.122 [[page 35]]",
+  "temporal_scope": "Substituted s.122(1) from 6-9-1992; prior text (from date of offence) for earlier period",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-029",
+   "S-MML-031",
+   "S-MML-032"
+  ],
+  "related_record_ids": [
+   "CM-011"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-027",
+  "batch_id": "PILOT-01",
+  "record_id": "MMLPKT-09",
+  "original_sha256": "5a9511413b40afc052ae0e9ffda3b3479be0252563f02c4bf106eb13d259418d",
+  "workstream": "STATUTORY",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "Current ss.125-126 (choice of forum; criminal court notice and Central Government reference) carry no amendment footnotes; prescribed officer under s.125 is in AR r.197A.",
+  "original_location": "MMLPKT-09",
+  "original_text": "Army Act 1950 ss.125-126 (choice of forum)",
+  "proposed_text": null,
+  "rationale": "India Code [[page 36]] ss.125-126 as quoted in CM-013/CIV-008 findings; no amendment notes. Original 1950 Gazette not held, but no amendment is indicated in the consolidation. AR r.197A ([[page 210]], compilation, not verified) prescribes the officer commanding the brigade or station (except s.69 death cases).",
+  "source_ids": [
+   "S-STAT-004"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "Original 1950 Gazette not held; r.197A not authenticated; 1978 Adjustment Rules not held.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Army Act ss.125-126 [[page 36]]",
+  "temporal_scope": "India Code Army Act consolidation 'As on 21 July 2025' (re-fetched 2026-11-22, unchanged SHA); amending Act 37 of 1992 checked against Gazette scan; original 1950 Gazette not held",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-033",
+   "S-MML-035",
+   "S-MML-037"
+  ],
+  "related_record_ids": [
+   "CIV-008",
+   "CM-013"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-028",
+  "batch_id": "PILOT-01",
+  "record_id": "MMLPKT-10",
+  "original_sha256": "ef031a01f9f95768537c5590e76a4853403a893a2bb72c79e9e886abe14e8679",
+  "workstream": "STATUTORY",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "Army Act s.127 omitted by Act 37 of 1992 s.11 from 6-9-1992.",
+  "original_location": "MMLPKT-10",
+  "original_text": "Army Act 1950 s.127 (successive trials; omitted)",
+  "proposed_text": null,
+  "rationale": "Gazette Act 37 of 1992 s.11: 'Section 127 of the principal Act shall be omitted.' India Code [[page 36]]: s.127 omitted (w.e.f. 6-9-1992). Any manual commentary relying on s.127 as live law (e.g. notes elsewhere in vol 2(AA), per MML crosswalk) is outdated.",
+  "source_ids": [
+   "S-STAT-008",
+   "S-STAT-004"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "Pre-1992 s.127 text not examined.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Act 37 of 1992 s.11 (Gazette p.3); Army Act [[page 36]]",
+  "temporal_scope": "Omitted from 6-9-1992",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-039",
+   "S-MML-040",
+   "S-MML-041",
+   "S-MML-043"
+  ],
+  "related_record_ids": [
+   "CM-013"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-029",
+  "batch_id": "PILOT-01",
+  "record_id": "MMLPKT-11",
+  "original_sha256": "26f7528d4188f57ee1f5a5ccab189148f11eeaa80d2fc217307ce5160090d958",
+  "workstream": "STATUTORY",
+  "severity": "P1",
+  "issue_type": "OUTDATED_AUTHORITY",
+  "claim": "MML 1 Part I Ch II para 13 describes field punishment under AA s.75 and ARs 172-176 as current; para 14 describes JCO summary punishment under s.85 as stoppages only. Both are outdated against current law.",
+  "original_location": "MMLPKT-11",
+  "original_text": "MML Part I Ch. II paras 13-14 (field punishment; summary punishments)",
+  "proposed_text": "Tag MML 1 Part I Ch II paras 13-14 as historical (pre-1992) commentary; do not use for current field/summary punishment powers.",
+  "rationale": "Para 13: Act 37 of 1992 s.2 omitted ss.75-76 from 6-9-1992 (Gazette; India Code [[page 27]]); compilation [[page 194]] shows '172 to 176. Cancelled vide SRO 17E dt 06 Dec 93' (S.R.O. not held). Para 14: s.80 by CO within s.81 limits and AR r.192 extent is consistent with current law, but s.85 was substituted by Act 37 of 1992 s.6: a CO (or specified officer) may award '(i) severe reprimand or reprimand; (ii) stoppage of pay and allowances ...', with a proviso that (i) is not awarded if the officer 'is below the rank of Colonel' (India Code [[page 28]]-[[page 29]]). The manual passage therefore pre-dates 1992 and should not be relied on for current punishment powers.",
+  "source_ids": [
+   "S-STAT-008",
+   "S-STAT-001",
+   "S-STAT-016",
+   "S-STAT-019"
+  ],
+  "verification_state": "SOURCE_LOCATED",
+  "review_state": "PENDING",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "Confirm via S.R.O. 17(E) of 6-12-1993 that ARs 172-176 were cancelled."
+  ],
+  "limitations": [
+   "Verification state held at SOURCE_LOCATED because the rr.172-176 limb rests on the unauthenticated compilation; the Act limbs are Gazette-verified.",
+   "MML 1 edition/date unknown.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "DISCREPANCY",
+  "pinpoint": "Act 37 of 1992 ss.2, 6; Army Act s.85 [[page 28]]-[[page 29]]; Army Rules rr.172-176 [[page 194]], r.192 [[page 209]]",
+  "temporal_scope": "Current law from 6-9-1992 (Act provisions, Gazette-verified) and 6-12-1993 (rr.172-176 cancellation, compilation only); MML 1 edition undated",
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-045",
+   "S-MML-046"
+  ],
+  "related_record_ids": [
+   "HCE-017",
+   "KB-003"
+  ]
+ },
+ {
+  "finding_id": "F-STAT-030",
+  "batch_id": "PILOT-01",
+  "record_id": "MMLPKT-12",
+  "original_sha256": "e8c830f5aae806f823f2fad2d37e3b8d363ccac1e14c421258e63c571603a87c",
+  "workstream": "STATUTORY",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "Current ss.109-111 (GCM/DCM convening and warrant conditions) per India Code; COAS designation from Act 19 of 1955. SGCM (s.112) also located.",
+  "original_location": "MMLPKT-12",
+  "original_text": "Army Act 1950 ss.109-111 (convening GCM/DCM/SGCM)",
+  "proposed_text": null,
+  "rationale": "India Code [[page 33]] ss.109-111 as in CM-003 finding; s.112(a)-(c) SGCM convening (order of Central Government/COAS; on active service officer commanding forces in the field; officer commanding detached portion on active service) [[page 33]]-[[page 34]]. Act 19 of 1955 (in force 7-5-1955) s.3 construes 'Commander-in-Chief' as 'Chief of the Army Staff'; its operative amending s.2/Schedule are repealed and not reproduced on India Code, so the precise 1955 amendment text is not held. Current law is clear from the consolidation.",
+  "source_ids": [
+   "S-STAT-002",
+   "S-STAT-010"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "Original 1950 Gazette and 1955 amending Schedule not held.",
+   "Unapproved research output; not legal advice; no advisor nominated."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Army Act ss.109-112 [[page 33]]-[[page 34]]; Act 19 of 1955 s.1(2), s.3",
+  "temporal_scope": "India Code Army Act consolidation 'As on 21 July 2025' (re-fetched 2026-11-22, unchanged SHA); amending Act 37 of 1992 checked against Gazette scan; original 1950 Gazette not held; 1955 amending text not held",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "statutory-auditor",
+  "mml_anchor_ids": [
+   "S-MML-047",
+   "S-MML-048",
+   "S-MML-049"
+  ],
+  "related_record_ids": [
+   "CM-003"
+  ]
+ }
+]

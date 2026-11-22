@@ -1,0 +1,107 @@
+{
+  "batch_id": "PILOT-01",
+  "nature": "Structural/process scorecard. NOT a legal accuracy percentage (no advisor-adjudicated reference set yet).",
+  "originals_unchanged": true,
+  "coverage": {
+    "manifest_items": 43,
+    "items_with_explicit_outcome": 43,
+    "kb_records": 25,
+    "kb_with_outcome": 25,
+    "kb_worst_outcome": {
+      "CONFLICTING_SOURCES": 4,
+      "NO_ISSUE_FOUND": 3,
+      "DISCREPANCY": 12,
+      "BLOCKED": 1,
+      "UNVERIFIED": 5
+    },
+    "all_items_worst_outcome": {
+      "CONFLICTING_SOURCES": 5,
+      "NO_ISSUE_FOUND": 4,
+      "DISCREPANCY": 23,
+      "BLOCKED": 5,
+      "UNVERIFIED": 6
+    },
+    "kb_mml_anchor": {
+      "EXACT_PASSAGE": 13,
+      "RELATED_PASSAGE": 5,
+      "NO_MML_COVERAGE": 7
+    }
+  },
+  "findings": {
+    "first_pass": 109,
+    "blind": 15,
+    "by_outcome": {
+      "CONFLICTING_SOURCES": 7,
+      "NO_ISSUE_FOUND": 44,
+      "UNVERIFIED": 19,
+      "DISCREPANCY": 34,
+      "BLOCKED": 5
+    },
+    "by_severity": {
+      "P0": 5,
+      "P3": 48,
+      "P2": 31,
+      "P1": 25
+    },
+    "by_verification_state": {
+      "CONFLICTING": 7,
+      "SOURCE_VERIFIED": 64,
+      "SOURCE_LOCATED": 37,
+      "NOT_FOUND": 1
+    },
+    "by_agent": {
+      "cross-volume-auditor": 10,
+      "judgment-auditor": 27,
+      "manual-of-military-law-auditor": 21,
+      "procedure-auditor": 21,
+      "statutory-auditor": 30
+    },
+    "requires_legal_review": 32
+  },
+  "sources": {
+    "total": 205,
+    "by_type": {
+      "RULE": 39,
+      "SECONDARY": 6,
+      "STATUTE": 54,
+      "GAZETTE": 6,
+      "OTHER_PRIMARY": 4,
+      "MANUAL": 78,
+      "JUDGMENT": 18
+    },
+    "by_authenticity": {
+      "OFFICIAL_COMPILATION": 89,
+      "ORIGINAL_OFFICIAL": 3,
+      "UNCONFIRMED": 15,
+      "USER_SUPPLIED_REFERENCE": 78,
+      "OFFICIAL_COURT_ARCHIVE": 17,
+      "SECONDARY": 3
+    },
+    "primary_with_sha256": 109,
+    "primary_total": 121,
+    "gazette_originals": 6
+  },
+  "independent_review": {
+    "reviews": 33,
+    "by_decision": {
+      "DISPUTES": 6,
+      "SUPPORTS": 26,
+      "RETURN_FOR_EVIDENCE": 1
+    },
+    "p0_p1_conflict_findings": 31,
+    "p0_p1_conflict_reviewed": 31,
+    "p0_p1_conflict_disputed": 5,
+    "dispute_rate_on_reviewed_high": 0.161,
+    "blind_vs_firstpass": {
+      "AGREE": 14,
+      "DISAGREE": 3,
+      "FIRSTPASS_ONLY": 8,
+      "BLIND_ONLY": 2
+    }
+  },
+  "legal_review": {
+    "advisor_nominated": false,
+    "advisor_reviewed_findings": 0,
+    "formally_approved": 0
+  }
+}
