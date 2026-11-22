@@ -103,14 +103,14 @@
   {
    "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/army_rules_instrument_register.csv",
    "role": "ar_chain_instruments_37",
-   "bytes": 16561,
-   "sha256": "08144d9982fd26f58d659f79cc0ddbd43871d0d11815d7100f09fd7bc92360a6"
+   "bytes": 17157,
+   "sha256": "3ea1404828dccb8be52c4db4f8288b1022b5a0b0fbc7e1bb209d9738614eef56"
   },
   {
    "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/army_rules_provision_chronology.csv",
    "role": "ar_chain_chronology_46",
-   "bytes": 8455,
-   "sha256": "c40e7692b3b02ca8ba43a225f2e98f1bfdf62497449a698b6e2c4e9c1a8ead95"
+   "bytes": 9523,
+   "sha256": "4bb18af8fef4b62f1620bea6ac2eb111e4e9494f948e67d2f68c064cda5020a1"
   },
   {
    "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/official_note_discrepancies.csv",
@@ -121,14 +121,26 @@
   {
    "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/statutory_version_register_seed.csv",
    "role": "ar_chain_version_seed",
-   "bytes": 3672,
-   "sha256": "b434a0377f835caf79f34fe45f386b27201084900c1b7f5f03a893a196671bd7"
+   "bytes": 3897,
+   "sha256": "595532f13af2e439f0b031f919a5413bfa56c63b5f29a96b22b32c0a1e258867"
   },
   {
    "path": "legal_knowledge/audit_work/SOURCE-CONFLICTS-01/conflict_determinations.csv",
    "role": "conflicts",
    "bytes": 6326,
    "sha256": "1b24d58a8f232d791f70b1db70e27d0ef59eddda43e6e2672e654fe598d7c7c8"
+  },
+  {
+   "path": "legal_knowledge/audit_work/WS-A-STATUTORY/provision_change_log.csv",
+   "role": "wsa_provision_change_log_in_tree (input to build_procedure_crosswalk.py from reconciliation onward)",
+   "bytes": 93394,
+   "sha256": "342ab73c937d7f9af3cf47c70f7ecb40d2cc1c65bf0f3ad9bf1f980c5e6ebcaf"
+  },
+  {
+   "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/page_image_checks_chain.csv",
+   "role": "ar_chain_page_image_checks (PIC-39 cited by PG-02/PC-16)",
+   "bytes": 6393,
+   "sha256": "8699c9fe793608f3c4097506c397f2218a446c85187c877e45d807d7b0432699"
   },
   {
    "path": "docs/legal-audit/SOURCE_AUTHORITY_POLICY.md",
