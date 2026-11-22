@@ -78,10 +78,16 @@ def main():
                         "response_bytes":len(response.content)})
             response.raise_for_status()
             data=response.content
-            if not data.startswith(b"%PDF-") or len(data)<12000:
+            # Legacy JUDIS may prepend a non-PDF wrapper. Record the binary
+            # signature position without claiming that a MIME label proves PDF.
+            magic_offset=data[:1024].find(b"%PDF-")
+            row["first_24_octets_hex"]=data[:24].hex()
+            row["pdf_header_position_first_1024"]=magic_offset
+            if magic_offset<0 or len(data)<12000:
                 row["status"]="RESPONSE_NOT_A_VALID_PDF"
                 records.append(row)
-                print("HIST_JUDIS_UNAVAILABLE",case["case_id"],row["status"],row["http_status"])
+                print("HIST_JUDIS_UNAVAILABLE",case["case_id"],row["status"],row["http_status"],
+                      "bytes",len(data),"first24",data[:24].hex(),"pdf_magic",magic_offset)
                 continue
             if len(data)>30000000:
                 row["status"]="PDF_EXCEEDS_ARCHIVAL_SIZE_GATE"
