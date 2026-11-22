@@ -33,14 +33,16 @@ UQ-P031,F-PROC-012 (AFT-011),P1,Does the authenticated Gazette text of s.22(1)(b
 UQ-P032,F-PROC-012 (AFT-011),P1,What is the controlling judicial construction of s.22(1)(b) read with s.22(2)?
 UQ-P033,F-PROC-012 (AFT-011),P1,What limitation governs s.15 appeals against court-martial?
 UQ-P034,F-PROC-019 (HCE-017),P1,Confirm KB should state s.81(4) with both limbs (present rank and rank at time of offence).
-UQ-P035,F-STAT-006 (HCE-017),P1,Confirm r.192 current text and any amendment against authenticated Gazette S.R.O.s.
-UQ-P036,F-STAT-010 (CIV-033),P1,Obtain authenticated Gazette copy of the 1978 Adjustment of Jurisdiction Rules and all amendments; confirm no replacement rules were notified under BNSS s.521.
-UQ-P037,F-STAT-013 (CM-025),P1,Does General Clauses Act 1897 s.8 operate to read Army Act s.133's reference to the IEA as a reference to the BSA from 1-7-2024?
-UQ-P038,F-STAT-013 (CM-025),P1,"Is a court-martial a 'trial' or 'proceeding' pending for BSA s.170(2) once convened, or from an earlier stage (charge, summary of evidence)?"
-UQ-P039,F-STAT-018 (CIV-008),P1,Confirm r.197A text and insertion S.R.O. against Gazette; confirm whether 'station' commander includes a unit CO acting as station commander.
-UQ-P040,F-STAT-019 (MMLPKT-01),P1,Obtain Gazette S.R.O. 484 (1954) and S.R.O. 258 of 27-11-2002 and identify the instrument that inserted the r.22(1) proviso.
-UQ-P041,F-STAT-022 (MMLPKT-04),P1,Identify and obtain the S.R.O. that introduced the prisoner-of-war saving in r.180 (if any).
-UQ-P042,F-STAT-029 (MMLPKT-11),P1,Confirm via S.R.O. 17(E) of 6-12-1993 that ARs 172-176 were cancelled.
-UQ-P043,F-PROC-018 (COI-008),P2,Obtain S.R.O. 8(E) of 23-06-2003 and confirm current r.177(1)-(2); flag the corpus compilation as possibly stale for r.177.
-UQ-P044,F-STAT-021 (MMLPKT-03),P2,Obtain S.R.O. 17(E) dated 6-12-1993 to confirm r.25 omission and commencement.
-UQ-P045,F-STAT-023 (MMLPKT-05),P2,Obtain the instrument (if any) that amended r.182 or its proviso.
+UQ-P035,F-REM-001 (HCE-017),P1,"Is the r.192 proviso (SRO 215/1965) part of the operative rule, and should the database flag its omission from the India Code compilation?"
+UQ-P036,F-REM-002 (MMLPKT-10),P1,"Confirm the scope of s.121 and whether any rule bars criminal-court retrial after court-martial (Art 20(2), CrPC s.300 / BNSS equivalent)."
+UQ-P037,F-STAT-006 (HCE-017),P1,Confirm r.192 current text and any amendment against authenticated Gazette S.R.O.s.
+UQ-P038,F-STAT-010 (CIV-033),P1,Obtain authenticated Gazette copy of the 1978 Adjustment of Jurisdiction Rules and all amendments; confirm no replacement rules were notified under BNSS s.521.
+UQ-P039,F-STAT-013 (CM-025),P1,Does General Clauses Act 1897 s.8 operate to read Army Act s.133's reference to the IEA as a reference to the BSA from 1-7-2024?
+UQ-P040,F-STAT-013 (CM-025),P1,"Is a court-martial a 'trial' or 'proceeding' pending for BSA s.170(2) once convened, or from an earlier stage (charge, summary of evidence)?"
+UQ-P041,F-STAT-018 (CIV-008),P1,Confirm r.197A text and insertion S.R.O. against Gazette; confirm whether 'station' commander includes a unit CO acting as station commander.
+UQ-P042,F-STAT-019 (MMLPKT-01),P1,Obtain Gazette S.R.O. 484 (1954) and S.R.O. 258 of 27-11-2002 and identify the instrument that inserted the r.22(1) proviso.
+UQ-P043,F-STAT-022 (MMLPKT-04),P1,Identify and obtain the S.R.O. that introduced the prisoner-of-war saving in r.180 (if any).
+UQ-P044,F-STAT-029 (MMLPKT-11),P1,Confirm via S.R.O. 17(E) of 6-12-1993 that ARs 172-176 were cancelled.
+UQ-P045,F-PROC-018 (COI-008),P2,Obtain S.R.O. 8(E) of 23-06-2003 and confirm current r.177(1)-(2); flag the corpus compilation as possibly stale for r.177.
+UQ-P046,F-STAT-021 (MMLPKT-03),P2,Obtain S.R.O. 17(E) dated 6-12-1993 to confirm r.25 omission and commencement.
+UQ-P047,F-STAT-023 (MMLPKT-05),P2,Obtain the instrument (if any) that amended r.182 or its proviso.

@@ -1,7 +1,7 @@
 record_id,kind,n_findings,worst_outcome,outcomes,highest_severity,agents,mml_anchor,legal_review_required,disputed_by_reviewer
 HCE-010,KB_RECORD,2,CONFLICTING_SOURCES,CONFLICTING_SOURCES|UNVERIFIED,P0,statutory-auditor,EXACT_PASSAGE,True,False
 CM-013,KB_RECORD,2,NO_ISSUE_FOUND,NO_ISSUE_FOUND,P3,statutory-auditor,EXACT_PASSAGE,False,False
-HCE-017,KB_RECORD,5,DISCREPANCY,DISCREPANCY|UNVERIFIED|NO_ISSUE_FOUND,P1,procedure-auditor|statutory-auditor,EXACT_PASSAGE,True,False
+HCE-017,KB_RECORD,6,CONFLICTING_SOURCES,CONFLICTING_SOURCES|DISCREPANCY|UNVERIFIED|NO_ISSUE_FOUND,P1,orchestrator|procedure-auditor|statutory-auditor,EXACT_PASSAGE,True,False
 CIV-033,KB_RECORD,4,BLOCKED,BLOCKED|DISCREPANCY|NO_ISSUE_FOUND,P1,statutory-auditor,RELATED_PASSAGE,True,False
 CM-025,KB_RECORD,2,DISCREPANCY,DISCREPANCY|NO_ISSUE_FOUND,P1,statutory-auditor,RELATED_PASSAGE,True,False
 EV-002,KB_RECORD,1,NO_ISSUE_FOUND,NO_ISSUE_FOUND,P3,statutory-auditor,NO_MML_COVERAGE,False,False
@@ -33,7 +33,7 @@ MMLPKT-06,MML_PROVISION,3,DISCREPANCY,DISCREPANCY|NO_ISSUE_FOUND,P1,manual-of-mi
 MMLPKT-07,MML_PROVISION,3,DISCREPANCY,DISCREPANCY|NO_ISSUE_FOUND,P3,manual-of-military-law-auditor|statutory-auditor,PACKET,False,False
 MMLPKT-08,MML_PROVISION,3,DISCREPANCY,DISCREPANCY|NO_ISSUE_FOUND,P1,manual-of-military-law-auditor|statutory-auditor,PACKET,True,False
 MMLPKT-09,MML_PROVISION,3,DISCREPANCY,DISCREPANCY|NO_ISSUE_FOUND,P1,manual-of-military-law-auditor|statutory-auditor,PACKET,True,False
-MMLPKT-10,MML_PROVISION,3,DISCREPANCY,DISCREPANCY|NO_ISSUE_FOUND,P1,manual-of-military-law-auditor|statutory-auditor,PACKET,True,True
+MMLPKT-10,MML_PROVISION,4,DISCREPANCY,DISCREPANCY|NO_ISSUE_FOUND,P1,manual-of-military-law-auditor|orchestrator|statutory-auditor,PACKET,True,True
 MMLPKT-11,MML_PROVISION,2,DISCREPANCY,DISCREPANCY,P1,manual-of-military-law-auditor|statutory-auditor,PACKET,True,False
 MMLPKT-12,MML_PROVISION,2,NO_ISSUE_FOUND,NO_ISSUE_FOUND,P3,manual-of-military-law-auditor|statutory-auditor,PACKET,False,False
 DCLR-SC-2020-002,CASE_ROW,2,DISCREPANCY,DISCREPANCY|NO_ISSUE_FOUND,P3,judgment-auditor,N/A,False,False
