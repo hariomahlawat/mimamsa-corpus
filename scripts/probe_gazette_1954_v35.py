@@ -67,8 +67,8 @@ def main():
                     break
             row["candidate_hrefs_observed"]=list(dict.fromkeys(possible))
             detail_links=[]
-            for m in re.finditer(r"""(?:href|src)=["']([^"']*/details/[^"']+)["']""", sample, re.I):
-                link=urllib.parse.urljoin(r.url,m.group(1))
+            for m in re.finditer(r"/details/[a-zA-Z0-9_./-]+", sample, re.I):
+                link=urllib.parse.urljoin(r.url,m.group(0))
                 detail_links.append({
                     "url":link,
                     "surrounding_index_text":" ".join(re.sub(r"<[^>]+>"," ",
