@@ -1,0 +1,783 @@
+[
+ {
+  "finding_id": "F-PROC-001",
+  "batch_id": "PILOT-01",
+  "record_id": "HCE-004",
+  "original_sha256": "71b02bcc62a2ed9716983250699f742c71f614506dbd527d126ca620a14bf34a",
+  "workstream": "PROCEDURE",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "The CO may (discretionary) dispense with the r.22(1) hearing where the charge arises from a CoI in which r.180 was complied with in respect of that accused; the proviso does not displace later steps.",
+  "original_location": "records_658.jsonl:line 80",
+  "original_text": "The CO may dispense with the Rule 22(1) procedure for a charge arising from CoI investigation when Rule 180 was complied with in respect of the accused. The proviso is not an automatic waiver of all later safeguards.",
+  "proposed_text": null,
+  "rationale": "Rule text (not NOTES) of r.22(1) proviso in the India Code compilation: 'where the charge against the accused arises as a result of investigation by a court of inquiry, wherein the provisions of rule 180 have been complied with in respect of that accused, the commanding officer may dispense with the procedure in sub-rule (1).' The SC in Virendra Kumar para 6 reproduces the same proviso. Mapping of steps: applicability = charge against any person subject to the Act (persons for whom r.22 applies; officers/JCOs/WOs proceed to r.26 for ss.83-85 disposal); trigger = (i) charge arises from CoI investigation and (ii) r.180 complied with 'in respect of that accused' - both are conditions precedent; power = 'may' (discretionary, CO). The proviso dispenses only with 'the procedure in sub-rule (1)'; r.22(2) (mandatory dismissal where evidence shows no offence; s.120(2) reference) and r.22(3) options remain. Record's checklist items 'Confirm a competent CO decision ... and document its basis' is administrative practice, not a textual requirement of r.22. MML 2.pdf p.150 and both vol 2(AR) DOC revisions reproduce the same proviso (anchors only).",
+  "source_ids": [
+   "S-PROC-005",
+   "S-PROC-008",
+   "S-PROC-011"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [
+   "When the r.22(1) proviso is invoked, how is the opening condition of r.22(3) ('After compliance of sub-rule (1)') to be read - does dispensation count as compliance?"
+  ],
+  "limitations": [
+   "Did not inspect S.R.O. 17(E) of 1993 original.",
+   "Did not examine whether r.22(3) 'After compliance of sub-rule (1)' is satisfied when the proviso is invoked (advisor question).",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Army Rules r.22(1) proviso, PDF [[page 37]]; r.180 [[page 196]]-[[page 197]]; Virendra Kumar (SC, 07-01-2020) para 6",
+  "temporal_scope": "Current text per India Code compilation retrieved 2026-11-21; amendment chain and original Gazette not verified; r.22 was substituted by S.R.O. 17(E) of 6-12-1993 per MML 2 footnote - pre-1993 text and commencement not verified (see separate finding).",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "procedure-auditor",
+  "mml_anchor_ids": [
+   "S-MML-001",
+   "S-MML-003",
+   "S-MML-004",
+   "S-MML-014"
+  ]
+ },
+ {
+  "finding_id": "F-PROC-002",
+  "batch_id": "PILOT-01",
+  "record_id": "HCE-004",
+  "original_sha256": "71b02bcc62a2ed9716983250699f742c71f614506dbd527d126ca620a14bf34a",
+  "workstream": "PROCEDURE",
+  "severity": "P2",
+  "issue_type": "PROCEDURAL_GAP",
+  "claim": "Record cites SC_VK paras 9-13 but omits that judgment's operative propositions on consequences of r.180 non-compliance and its non-reportable status.",
+  "original_location": "records_658.jsonl:line 80",
+  "original_text": "[SC_VK: paras 9-13]",
+  "proposed_text": "Add: 'Per Union of India v Virendra Kumar (SC, 07-01-2020, non-reportable) para 12, r.180 compliance is obligatory; a non-compliance objection raised at hearing of charge or summary of evidence must be rectified; an objection not raised before or at trial was held not available after a full court-martial (para 13).'",
+  "rationale": "Official SC PDF (Virendra Kumar, CA 9267/2019, 07-01-2020, Non-Reportable) para 12 summarises: (a) CoI is a fact-finding inquiry at a pre-investigation stage; (b) accused entitled to full opportunity under r.180; (c) irregularities at earlier stages cannot be the basis for setting aside a court-martial order passed on full trial; (d) if non-compliance with r.180 is raised at framing of charge or recording of summary of evidence, the authorities must rectify it, compliance being obligatory. Para 13 holds the ground could not be raised after final court-martial order where not raised earlier; para 15 limits AFT re-trial power to AFT Act s.16(2). The record's checklist (inspect r.180 record; do not backdate) is consistent, but it does not record (i) that r.180 compliance is obligatory and a defect raised at charge/SoE stage must be rectified, or (ii) the post-trial forfeiture consequence, nor that the judgment is non-reportable. The record's pinpoint paras 9-13 is accurate for the discussion; para 12 contains the summarised propositions. Note: the case_law row DCLR-SC-2020-002 pinpoints paras 12-15 - cross-reference inconsistency.",
+  "source_ids": [
+   "S-PROC-011",
+   "S-PROC-005"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [
+   "What weight should a non-reportable SC judgment carry in the KB, and should para 12(d) (rectify r.180 defect when raised at charge/SoE) be stated as a procedural consequence?"
+  ],
+  "limitations": [
+   "Subsequent judicial treatment of Virendra Kumar not searched.",
+   "Cited earlier SC cases (Prithi Pal Singh Bedi, G.S. Sodhi, A. Hussain, Sanjay Jethi) not independently read; only as quoted in Virendra Kumar.",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "DISCREPANCY",
+  "pinpoint": "Virendra Kumar paras 12(a)-(d), 13, 15 (printed pp.16-20)",
+  "temporal_scope": "SC decision of 07-01-2020; subsequent treatment not checked.",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "procedure-auditor",
+  "related_record_ids": [
+   "COI-025"
+  ]
+ },
+ {
+  "finding_id": "F-PROC-003",
+  "batch_id": "PILOT-01",
+  "record_id": "HCE-004",
+  "original_sha256": "71b02bcc62a2ed9716983250699f742c71f614506dbd527d126ca620a14bf34a",
+  "workstream": "PROCEDURE",
+  "severity": "P2",
+  "issue_type": "OUTDATED_AUTHORITY",
+  "claim": "The temporal applicability of the r.22(1) proviso (r.22 substituted by S.R.O. 17(E) of 6-12-1993) is not stated and cannot be verified from originals.",
+  "original_location": "records_658.jsonl:line 80",
+  "original_text": "Rule 22(1) proviso after Court of Inquiry",
+  "proposed_text": null,
+  "rationale": "MML 2.pdf p.150 footnote marks the whole of r.22 as 'Subs by SRO 17(E), dated 6th December, 1993' and the Explanation as inserted by SRO 258/2002; the India Code compilation marks only the Explanation ('SRO No 258 dt 27 Nov 2002') and carries no substitution marker for r.22. Neither the 1993 nor 2002 original S.R.O. is held; egazette unreachable. For charges heard before the substitution took effect, whether the proviso existed is unverified. Record is phrased in timeless present tense with no applicability date.",
+  "source_ids": [
+   "S-PROC-005",
+   "S-PROC-012"
+  ],
+  "verification_state": "SOURCE_LOCATED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [
+   "Obtain S.R.O. 17(E) of 6-12-1993 to confirm the proviso's wording and commencement."
+  ],
+  "limitations": [
+   "S.R.O. 17(E) 1993 and S.R.O. 258/2002 originals not inspected.",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "UNVERIFIED",
+  "pinpoint": "Army Rules r.22, PDF [[page 37]]-[[page 39]]; MML 2.pdf p.150 footnotes 1-2 (anchor)",
+  "temporal_scope": "Pre- and post-6-12-1993 position; original S.R.O.s not held.",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "procedure-auditor",
+  "mml_anchor_ids": [
+   "S-MML-001",
+   "S-MML-003",
+   "S-MML-004"
+  ]
+ },
+ {
+  "finding_id": "F-PROC-004",
+  "batch_id": "PILOT-01",
+  "record_id": "COI-025",
+  "original_sha256": "645787c99b5e33ecb773453b7b4c1407da9c9659a8c4cdb812fa5ed2f5d65b8e",
+  "workstream": "PROCEDURE",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "r.182 bars admissibility of CoI proceedings, confessions, statements and answers against a person subject to the Act, except on trial for wilfully giving false evidence before the court; proviso permits use by prosecution or defence to cross-examine any witness.",
+  "original_location": "records_658.jsonl:line 55",
+  "original_text": "Rule 182 sets limits on use of CoI proceedings, confessions, statements and answers against a person subject to the Act. The text contains specified exceptions, including a trial for wilfully giving false evidence before the CoI and a proviso allowing the prosecution or defence to use the proceedings to cross-examine a witness.",
+  "proposed_text": null,
+  "rationale": "Rule text of r.182 in the compilation matches the record: proceedings, or any confession, statement or answer, 'shall not be admissible in evidence against a person subject to the Act, nor shall any evidence respecting the proceedings of the court be given against any such person except upon the trial of such person for wilfully giving false evidence before the court', proviso: 'nothing in this rule shall prevent the proceedings from being used by the prosecution or the defence for the purpose of cross-examining any witness.' Mandatory bar ('shall not'). Virendra Kumar para 6 describes r.182 and its proviso consistently. The NOTE 'See AA.s. 60' is editorial. Minor completeness points (P3): the bar also covers 'any evidence respecting the proceedings'; related right to copies of relevant CoI statements for a person tried by court-martial is in r.184(1) (not mentioned). The record's checklist items (seek JAG opinion, preserve independent evidence) are practice, not rule text.",
+  "source_ids": [
+   "S-PROC-008",
+   "S-PROC-011"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [
+   "Should the KB cross-reference r.184(1) (copies of CoI statements for the accused at trial) alongside r.182?"
+  ],
+  "limitations": [
+   "Amendment history of the r.182 proviso not verified.",
+   "Interaction with Bharatiya Sakshya Adhiniyam / Evidence Act provisions on confessions not examined.",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Army Rules r.182, PDF [[page 197]]-[[page 198]]; r.184(1) [[page 200]]; Virendra Kumar para 6",
+  "temporal_scope": "Current compilation text India Code compilation retrieved 2026-11-21; amendment chain and original Gazette not verified; MML vol 2(AR) .doc brackets the proviso as amended - amending instrument not identified or verified.",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "procedure-auditor",
+  "mml_anchor_ids": [
+   "S-MML-017",
+   "S-MML-018",
+   "S-MML-019"
+  ],
+  "related_record_ids": [
+   "HCE-004"
+  ]
+ },
+ {
+  "finding_id": "F-PROC-005",
+  "batch_id": "PILOT-01",
+  "record_id": "CM-011",
+  "original_sha256": "dbf0137e3a85c5aa009b3b648dd690c705c9bc11dd4579d21e24f7b27c14ba88",
+  "workstream": "PROCEDURE",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "s.122: three-year bar on commencing court-martial trial; s.122(2) exceptions (desertion, fraudulent enrolment, s.37 offences); s.122(3) excluded periods; s.122(4) bar after exemplary service.",
+  "original_location": "records_658.jsonl:line 138",
+  "original_text": "The normal limitation is three years, subject to rules on commencement tied to date of offence, knowledge or known identity; statutory exceptions cover desertion, fraudulent enrolment and Section 37 offences, and particular periods are excluded.",
+  "proposed_text": null,
+  "rationale": "s.122(1) (as substituted by Act 37 of 1992 s.9): no trial by court-martial 'shall be commenced after the expiration of a period of three years', the period commencing (a) on the date of the offence; or (b) where commission not known to the person aggrieved or competent authority, the first day of knowledge of such person or authority, whichever is earlier; or (c) where offender unknown, first day identity known to either, whichever is earlier. s.122(2): sub-s.(1) does not apply to desertion, fraudulent enrolment or s.37 offences. s.122(3): exclude time as prisoner of war, in enemy territory, or evading arrest after the offence. s.122(4): no trial for desertion (other than on active service) or fraudulent enrolment if the person, not being an officer, has served continuously in an exemplary manner for not less than three years. The record's summary of these elements is accurate. Statutory, mandatory bar. Note the record's statement that a CoI/SoE does not pause limitation is consistent with the closed list in s.122(3) (inference, not express text).",
+  "source_ids": [
+   "S-PROC-002"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "Case law on when a trial 'commences' not retrieved (no official text read).",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Army Act s.122(1)-(4), PDF [[page 35]]",
+  "temporal_scope": "Post-Act 37 of 1992 text per India Code compilation retrieved 2026-11-21; amendment chain and original Gazette not verified; commencement of Act 37 of 1992 not verified.",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "procedure-auditor",
+  "mml_anchor_ids": [
+   "S-MML-029",
+   "S-MML-031"
+  ]
+ },
+ {
+  "finding_id": "F-PROC-006",
+  "batch_id": "PILOT-01",
+  "record_id": "CM-011",
+  "original_sha256": "dbf0137e3a85c5aa009b3b648dd690c705c9bc11dd4579d21e24f7b27c14ba88",
+  "workstream": "PROCEDURE",
+  "severity": "P1",
+  "issue_type": "POTENTIAL_CONFLICT",
+  "claim": "The instruction 'Apply the earliest relevant knowledge rule in Section 122(1)' misdescribes the computation structure.",
+  "original_location": "records_658.jsonl:line 138",
+  "original_text": "Apply the earliest relevant knowledge rule in Section 122(1).",
+  "proposed_text": "Determine which s.122(1) clause applies: (a) date of offence by default; (b) if the offence was not known to the person aggrieved or the competent authority, the first day either of them knew of it (whichever earlier); (c) if the offender was unknown, the first day either knew his identity (whichever earlier).",
+  "rationale": "s.122(1) clauses (a), (b), (c) are alternative commencement points selected by condition, not options from which the earliest is chosen: (a) date of offence is the default; (b) applies only 'where the commission of the offence was not known to the person aggrieved ... or to the authority competent to initiate action'; (c) applies only 'where it is not known by whom the offence was committed'. 'Whichever is earlier' operates within (b) and (c) only - between knowledge of the person aggrieved and knowledge of the competent authority. Read literally, 'earliest' across clauses would always select (a) and nullify (b)/(c); read as 'earliest knowledge', it omits the default (a) rule. Because the computation determines whether a court-martial can lawfully commence, the ambiguity is material. Historical note: pre-1992 commentary in MML 1 Part I Ch IV para 14 and MML 2 p.90 note 1(a) states a date-of-commission rule (manual commentary, outdated as to post-1992 text).",
+  "source_ids": [
+   "S-PROC-002"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "Confirm the computation formula: (a) date of offence by default; (b)/(c) only when their conditions are met, using the earlier of the two persons' knowledge."
+  ],
+  "limitations": [
+   "No judgment on s.122(1)(b)/(c) construction read.",
+   "Who is the 'authority competent to initiate action' for a given offence not examined.",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "DISCREPANCY",
+  "pinpoint": "Army Act s.122(1)(a)-(c), PDF [[page 35]]",
+  "temporal_scope": "Post-Act 37 of 1992 text per India Code compilation retrieved 2026-11-21; amendment chain and original Gazette not verified.",
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "procedure-auditor",
+  "mml_anchor_ids": [
+   "S-MML-029",
+   "S-MML-030",
+   "S-MML-065"
+  ]
+ },
+ {
+  "finding_id": "F-PROC-007",
+  "batch_id": "PILOT-01",
+  "record_id": "CM-011",
+  "original_sha256": "dbf0137e3a85c5aa009b3b648dd690c705c9bc11dd4579d21e24f7b27c14ba88",
+  "workstream": "PROCEDURE",
+  "severity": "P1",
+  "issue_type": "PROCEDURAL_GAP",
+  "claim": "The record omits Army Act s.123(2), a separate limitation for persons who have ceased to be subject to the Act.",
+  "original_location": "records_658.jsonl:line 138",
+  "original_text": "AA §122(1)–(4)",
+  "proposed_text": "Add: 'If the accused has ceased to be subject to the Act, also apply AA s.123(2): trial must commence within three years of cessation, excluding periods of absconding/concealment and of any staying injunction or order; not applicable to desertion, fraudulent enrolment or s.37 offences.'",
+  "rationale": "s.123(1) permits trial of a person for an offence committed while subject to the Act after he has ceased to be subject; s.123(2) (words subs. by Act 37 of 1992 s.10): no such person shall be tried unless trial commences within three years after he ceased to be subject; in computing that period exclude time he avoided arrest by absconding or concealing himself, and the period of any injunction or order staying institution of proceedings (including the days of issue and withdrawal). Proviso: does not apply to desertion, fraudulent enrolment or s.37 offences, and does not affect criminal court jurisdiction. This is a mandatory jurisdictional limit additional to s.122 for retired/discharged/released persons, and contains an injunction/stay exclusion that s.122(3) does not. The record ('Have JAG independently verify computation') lists only s.122(1)-(4). Whether s.122 and s.123 operate cumulatively for such persons is an advisor question.",
+  "source_ids": [
+   "S-PROC-002"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "Do s.122 and s.123(2) apply cumulatively to a person who has ceased to be subject to the Act, so that both periods must be satisfied?",
+   "Does the s.123(2) stay/injunction exclusion have any counterpart for persons still subject to the Act?"
+  ],
+  "limitations": [
+   "SC/HC case law on s.123 (e.g. on commencement of trial for retired personnel) not read from official text.",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "DISCREPANCY",
+  "pinpoint": "Army Act s.123(1)-(2) and proviso, PDF [[page 35]]",
+  "temporal_scope": "Post-Act 37 of 1992 text per India Code compilation retrieved 2026-11-21; amendment chain and original Gazette not verified; commencement and transitional effect not verified.",
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "procedure-auditor"
+ },
+ {
+  "finding_id": "F-PROC-008",
+  "batch_id": "PILOT-01",
+  "record_id": "CM-011",
+  "original_sha256": "dbf0137e3a85c5aa009b3b648dd690c705c9bc11dd4579d21e24f7b27c14ba88",
+  "workstream": "PROCEDURE",
+  "severity": "P2",
+  "issue_type": "OUTDATED_AUTHORITY",
+  "claim": "Temporal applicability: the knowledge/identity commencement rules exist only after Act 37 of 1992; record gives no date scope, and MML commentary states the older rule.",
+  "original_location": "records_658.jsonl:line 138",
+  "original_text": "The normal limitation is three years, subject to rules on commencement tied to date of offence, knowledge or known identity",
+  "proposed_text": null,
+  "rationale": "India Code footnote shows s.122(1) words substituted by Act 37 of 1992 s.9. MML 1 Part I Ch IV para 14 and MML 2 p.90 note 1(a) (commentary) frame limitation from the date of commission, reflecting the pre-1992 position; MML vol 2(AA).pdf p.111 also has a transcription error in s.122(3) ('in adding arrest'). Commencement date of Act 37 of 1992 and any transitional rule for offences committed before it are not verified, so the record's present-tense rule cannot be confirmed for older offences.",
+  "source_ids": [
+   "S-PROC-002",
+   "S-PROC-015"
+  ],
+  "verification_state": "SOURCE_LOCATED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [
+   "Obtain Act 37 of 1992 and its commencement notification; confirm transitional treatment of pre-commencement offences."
+  ],
+  "limitations": [
+   "Act 37 of 1992 original and commencement notification not retrieved.",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "UNVERIFIED",
+  "pinpoint": "Army Act s.122 footnote 1, PDF [[page 35]]",
+  "temporal_scope": "Offences before/after commencement of Act 37 of 1992 (date not verified).",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "procedure-auditor",
+  "mml_anchor_ids": [
+   "S-MML-030",
+   "S-MML-031",
+   "S-MML-065"
+  ]
+ },
+ {
+  "finding_id": "F-PROC-009",
+  "batch_id": "PILOT-01",
+  "record_id": "ADM-009",
+  "original_sha256": "d8933e0da4ac5690645bdca33aa8099c903d891e3222e85eaa0f5b9233d958aa",
+  "workstream": "PROCEDURE",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "r.17 requires informing particulars of cause of action and reasonable time for written reasons before dismissal/removal under s.20(1) or (3), save conviction cases; proviso permits dispensing on certification; non-compliance cases reported to Central Government.",
+  "original_location": "records_658.jsonl:line 211",
+  "original_text": "Rule 17 calls for communicating particulars and reasonable time for written defence except specified conviction/exigency circumstances; reliance on an exception must be documented and reported where required.",
+  "proposed_text": null,
+  "rationale": "Rule text: 'Save in the case where a person is dismissed or removed from service on the ground of conduct which has led to his conviction by a criminal court or a court martial, no person shall be dismissed or removed under sub-section (1) or sub-section (3), of section 20, unless he has been informed of the particulars of the cause of action against him and allowed reasonable time to state in writing any reasons ...' Proviso: if in the competent officer's opinion compliance is not expedient or reasonably practicable, he may 'after certifying to that effect' dismiss/remove without the procedure; all such cases 'shall be reported to the Central Government'. Step map: authority = COAS under s.20(1) (any person other than an officer) or brigade-or-equivalent commander/prescribed officer under s.20(3) (persons under command other than officers or JCOs); notice + reasonable time = mandatory; conviction exception = statutory (rule text); exigency exception = discretionary, conditioned on certification (mandatory) and report (mandatory). Record is accurate.",
+  "source_ids": [
+   "S-PROC-004",
+   "S-PROC-003"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "Case law on adequacy of show-cause and on r.17 proviso not examined.",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Army Rules r.17 and proviso, PDF [[page 32]]-[[page 33]]; Army Act s.20(1),(3), [[page 15]]",
+  "temporal_scope": "Current compilation text India Code compilation retrieved 2026-11-21; amendment chain and original Gazette not verified.",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "procedure-auditor",
+  "mml_anchor_ids": [
+   "S-MML-050",
+   "S-MML-051",
+   "S-MML-052"
+  ]
+ },
+ {
+  "finding_id": "F-PROC-010",
+  "batch_id": "PILOT-01",
+  "record_id": "ADM-009",
+  "original_sha256": "d8933e0da4ac5690645bdca33aa8099c903d891e3222e85eaa0f5b9233d958aa",
+  "workstream": "PROCEDURE",
+  "severity": "P2",
+  "issue_type": "PROCEDURAL_GAP",
+  "claim": "Title 'Section 20 action' overstates r.17 scope; r.17 covers only dismissal/removal under s.20(1)/(3); NOTE 2 conditions are editorial, not rule text.",
+  "original_location": "records_658.jsonl:line 211",
+  "original_text": "Rule 17: notice and exceptions for Section 20 action",
+  "proposed_text": "Retitle: 'Rule 17: notice and exceptions for dismissal or removal under Section 20(1) or 20(3)'.",
+  "rationale": "r.17 by its terms applies to dismissal or removal 'under sub-section (1) or sub-section (3), of section 20'. It does not by its text apply to reduction under s.20(2)/(4) or reversion of acting NCOs under s.20(6), which are other 'Section 20 action'. Person category also differs: s.20(1) any person other than an officer (includes JCOs); s.20(3) excludes officers and JCOs. Separately, the compilation's NOTE 2 to r.17 (authority should satisfy itself that court-martial is inexpedient or impracticable for reasons other than probable failure to establish the charge, and that retention is undesirable) is editorial commentary interleaved in the compilation, not rule text; the record does not mention it, but any KB step deriving from it must be marked as note/administrative guidance and its legal status checked. MML vol 2(AR).doc-1 derived text drops 'sub-section (1) or' across a page break (anchor S-MML-052; image check by MML auditor).",
+  "source_ids": [
+   "S-PROC-004",
+   "S-PROC-003"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [
+   "Is any notice requirement for reduction/reversion under s.20(2),(4),(6) found in Rules or Regulations?",
+   "What legal status does the KB give to r.17 NOTE 2 (court-martial impracticable) given it is compilation commentary?"
+  ],
+  "limitations": [
+   "Procedure for reduction under s.20(2)/(4) (rules/regulations) not examined.",
+   "Judicial treatment of r.17 NOTE 2 not examined.",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "DISCREPANCY",
+  "pinpoint": "Army Rules r.17 and NOTES 1-3, PDF [[page 32]]-[[page 33]]; Army Act s.20(1)-(7), [[page 15]]",
+  "temporal_scope": "Current compilation text India Code compilation retrieved 2026-11-21; amendment chain and original Gazette not verified.",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "procedure-auditor",
+  "mml_anchor_ids": [
+   "S-MML-050",
+   "S-MML-052"
+  ]
+ },
+ {
+  "finding_id": "F-PROC-011",
+  "batch_id": "PILOT-01",
+  "record_id": "AFT-011",
+  "original_sha256": "7bfd456e561fb4b1696aa3fa5cddfaa50e2d4d869583a4533f55e97286e7c0dd",
+  "workstream": "PROCEDURE",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "s.21(2)(b): deemed exhaustion of remedies where no final order on a petition/representation within six months of its being preferred/made.",
+  "original_location": "records_658.jsonl:line 372",
+  "original_text": "Section 21(2)(b) deals with deemed exhaustion after a six-month non-disposal period.",
+  "proposed_text": null,
+  "rationale": "s.21(2)(b): a person is deemed to have availed of all remedies 'where no final order has been made ... with regard to the petition preferred or representation made by such person, if a period of six months from the date on which such petition was preferred or representation was made has expired.' Accurate. Additional context: s.21(1) says the Tribunal 'shall not ordinarily admit' an application without exhaustion - a qualified, not absolute, bar (discretionary). The six-month period runs from the date the petition was preferred/representation made (record's 'petition receipt date' is a proxy; the text uses the preferring date).",
+  "source_ids": [
+   "S-PROC-010"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [
+   "Should the KB use the date the petition was 'preferred' (statutory wording) rather than the receipt date?"
+  ],
+  "limitations": [
+   "Original Gazette text not inspected.",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "AFT Act 2007 s.21(1)-(2), PDF [[page 11]]",
+  "temporal_scope": "India Code consolidation retrieved 2026-11-21 (in force from 2008-06-15 per metadata); original Gazette not inspected.",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "procedure-auditor"
+ },
+ {
+  "finding_id": "F-PROC-012",
+  "batch_id": "PILOT-01",
+  "record_id": "AFT-011",
+  "original_sha256": "7bfd456e561fb4b1696aa3fa5cddfaa50e2d4d869583a4533f55e97286e7c0dd",
+  "workstream": "PROCEDURE",
+  "severity": "P1",
+  "issue_type": "POTENTIAL_CONFLICT",
+  "claim": "s.22(1)(b) as printed has no filing period; the record's refusal to compute a deadline is supported by the compilation, but the authenticated wording and judicial construction are unverified.",
+  "original_location": "records_658.jsonl:line 372",
+  "original_text": "Section 22(1)(b) refers to the unanswered-representation case, but publicly reproduced text does not express a complete independent filing formula as clearly as clause (a).",
+  "proposed_text": null,
+  "rationale": "India Code consolidation of s.22 opens 'The Tribunal shall not admit an application-' with no '(1)', although s.22(2) refers to 'sub-section (1)'. Clause (a): application within six months from the final order. Clause (b): 'in a case where a petition or a representation such as is mentioned in clause (b) of sub-section (2) of section 21 has been made and the period of six months has expired thereafter without such final order having been made;' - no time limit expressed. Clause (c): three-year look-back relative to the Tribunal's commencement. s.22(2) permits admission 'after the period of six months referred to in clause (a) or clause (b)' on sufficient cause - textual indication that clause (b) contemplates a six-month period (inference only; not stated in clause (b)). The record's caution (no hard-coded last day) is consistent with the compilation. Not resolved: (i) whether the Gazette text of Act 55 of 2007 contains the missing words (egazette unreachable); (ii) how AFT/High Courts/SC have construed s.22(1)(b) - no official judgment read. Limitation computation for this case therefore remains unverified. Also not in record: s.22 applies to an 'application'; limitation for appeals against court-martial under s.15 was not examined.",
+  "source_ids": [
+   "S-PROC-010",
+   "S-PROC-014"
+  ],
+  "verification_state": "SOURCE_LOCATED",
+  "review_state": "PENDING",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "Does the authenticated Gazette text of s.22(1)(b) include a period (e.g. 'within six months from the date of expiry of the said period')?",
+   "What is the controlling judicial construction of s.22(1)(b) read with s.22(2)?",
+   "What limitation governs s.15 appeals against court-martial?"
+  ],
+  "limitations": [
+   "Gazette of India text of Act 55 of 2007 not obtained (egazette unreachable).",
+   "No AFT/HC/SC judgment construing s.22(1)(b) read.",
+   "AFT (Procedure) Rules 2008 text in derived/statutes has no provenance metadata; only noted that its application form declares limitation 'prescribed in section 22'.",
+   "Continuing-wrong / pension-arrears limitation doctrine not examined.",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "UNVERIFIED",
+  "pinpoint": "AFT Act 2007 s.22 opening, (1)(a)-(c) and (2), PDF [[page 11]]",
+  "temporal_scope": "India Code consolidation retrieved 2026-11-21; enacted Gazette wording and any amendment/correction not verified; case law not checked.",
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "procedure-auditor"
+ },
+ {
+  "finding_id": "F-PROC-013",
+  "batch_id": "PILOT-01",
+  "record_id": "KB-003",
+  "original_sha256": "cf94e78ade6043053ddf3194b518f0e25841bb2a8f50f755ad7cbb1666bab668",
+  "workstream": "PROCEDURE",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "s.79 authorises punishment without court-martial in the manner of ss.80, 83, 84, 85; s.80 covers persons other than officers, JCOs and WOs.",
+  "original_location": "records_658.jsonl:line 3",
+  "original_text": "Section 79 recognises punishments without court-martial as specified in ss 80, 83, 84 and 85. Section 80 provides a particular category of powers concerning persons other than officers, JCOs and warrant officers",
+  "proposed_text": null,
+  "rationale": "s.79: punishments may be inflicted 'without the intervention of a court-martial and in the manner stated in sections 80, 83, 84 and 85'. s.80 heading and text: a commanding officer, or other officer specified by COAS with Central Government consent, may 'in the prescribed manner' proceed against a person subject to the Act 'otherwise than as an officer, junior commissioned officer or warrant officer' charged with an offence and award 'to the extent prescribed' one or more listed punishments, 'subject to the provisions of section 81'. Accurate. Rank at relevant time matters under s.81(4) (rank at award or at time of offence).",
+  "source_ids": [
+   "S-PROC-001"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Army Act ss.79-80, PDF [[page 27]]",
+  "temporal_scope": "Current consolidation India Code compilation retrieved 2026-11-21; amendment chain and original Gazette not verified (s.80 amended by Act 19 of 1955 and Act 37 of 1992).",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "procedure-auditor",
+  "mml_anchor_ids": [
+   "S-MML-026",
+   "S-MML-027",
+   "S-MML-028"
+  ]
+ },
+ {
+  "finding_id": "F-PROC-014",
+  "batch_id": "PILOT-01",
+  "record_id": "KB-003",
+  "original_sha256": "cf94e78ade6043053ddf3194b518f0e25841bb2a8f50f755ad7cbb1666bab668",
+  "workstream": "PROCEDURE",
+  "severity": "P2",
+  "issue_type": "PROCEDURAL_GAP",
+  "claim": "Entry-point references (ss.79-82, r.22) omit ss.83-88 and r.26; 'obtain review' and 'competent authority' steps are not mapped to authority.",
+  "original_location": "records_658.jsonl:line 3",
+  "original_text": "Army Act ss 79–82; Army Rule 22",
+  "proposed_text": "References: Army Act ss 79-88, 121; Army Rules rr 22 (incl. proviso and Explanation), 26; Appendix III.",
+  "rationale": "Step mapping: (1) rank/category - s.80 (non-officers below WO), s.85 (JCOs: CO may award severe reprimand/reprimand and stoppage; severe reprimand barred if awarding officer below Colonel), ss.83-84 (officers below field rank / below Lt Col, JCOs, WOs by brigade/area commanders; s.84(a) right to elect court-martial). The record's references stop at s.82 and do not cite ss.83-85. (2) Competent authority - s.80 'commanding officer or such other officer ... specified by COAS'; r.22 Explanation (marker SRO 258 of 27-11-2002) extends r.22(1)-(3) 'in so far as they are applicable' to such other officer. (3) Hearing - r.22(1) and proviso; for officers/JCOs/WOs remanded for ss.83-85 disposal, r.26(1) requires the summary of evidence and charge delivered not less than 24 hours before disposal. (4) Restrictions - s.81; s.121 bars dealing again with an offence already dealt with under ss.80, 83, 84, 85. (5) Review - ss.86-88 provide transmission and review only for awards under ss.83, 84, 85; no corresponding provision in ss.86-87 for s.80 awards, so 'obtain review where doubt exists' is practice, not a statutory step for s.80. (6) Record - r.22(3)(a) 'manner and form in Appendix III' (Appendix III not in the compilation held). Note-as-rule caution: r.22 NOTE 1 ('For procedure in the case of an officer, see AR 25') refers to a rule omitted by SRO 17(E) of 6-12-1993; MML 1 Ch III para 13 also cites rr.22-25. Such NOTES must not be used as rule text.",
+  "source_ids": [
+   "S-PROC-001",
+   "S-PROC-002",
+   "S-PROC-005"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [
+   "Is there any statutory or regulatory review route for s.80 awards (beyond complaints/petitions), and should the KB distinguish it from ss.86-88 review?"
+  ],
+  "limitations": [
+   "Appendix III (prescribed manner/extent) not available in corpus compilation (gap registered as S-PROC-016).",
+   "Regulations for the Army and Army Orders on summary awards not examined.",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "DISCREPANCY",
+  "pinpoint": "Army Act ss.79-88 PDF [[page 27]]-[[page 29]], s.121 [[page 35]]; Army Rules r.22 [[page 37]]-[[page 41]], r.25-26 [[page 45]]",
+  "temporal_scope": "Current consolidations India Code compilation retrieved 2026-11-21; amendment chain and original Gazette not verified; Appendix III not examined.",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "procedure-auditor",
+  "mml_anchor_ids": [
+   "S-MML-001",
+   "S-MML-026",
+   "S-MML-064"
+  ],
+  "related_record_ids": [
+   "HCE-017"
+  ]
+ },
+ {
+  "finding_id": "F-PROC-015",
+  "batch_id": "PILOT-01",
+  "record_id": "KB-003",
+  "original_sha256": "cf94e78ade6043053ddf3194b518f0e25841bb2a8f50f755ad7cbb1666bab668",
+  "workstream": "PROCEDURE",
+  "severity": "P2",
+  "issue_type": "UNSUPPORTED_ASSERTION",
+  "claim": "Whether the s.122 limitation applies to summary disposal under s.80/83-85 is not addressed; s.122 text speaks only of 'trial by court-martial', while a compilation NOTE tells the CO to consider s.122.",
+  "original_location": "records_658.jsonl:line 3",
+  "original_text": "Check s 81 limits and other applicable restrictions; obtain review where doubt exists.",
+  "proposed_text": null,
+  "rationale": "s.122(1) bars commencement of 'trial by court-martial' after three years; it does not expressly mention punishment under ss.80, 83-85. The compilation's NOTE 4 to r.22 (editorial, not rule text) says the CO 'must also consider whether having regard to the limitation of time prescribed by AA.s.122, the accused is liable to be proceeded against'. The record's 'other applicable restrictions' does not identify whether limitation is one. This is a legal-construction question that cannot be resolved from the texts held.",
+  "source_ids": [
+   "S-PROC-002",
+   "S-PROC-005"
+  ],
+  "verification_state": "SOURCE_LOCATED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [
+   "Does s.122 (or any other provision) limit the time for summary disposal under ss.80, 83-85?"
+  ],
+  "limitations": [
+   "No case law on limitation for summary awards examined.",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "UNVERIFIED",
+  "pinpoint": "Army Act s.122(1) PDF [[page 35]]; Army Rules r.22 NOTE 4 [[page 39]] (editorial)",
+  "temporal_scope": "Current consolidation text; no judgment checked.",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "procedure-auditor",
+  "related_record_ids": [
+   "CM-011"
+  ]
+ },
+ {
+  "finding_id": "F-PROC-016",
+  "batch_id": "PILOT-01",
+  "record_id": "COI-008",
+  "original_sha256": "876ee246814af22bc17bd076d83787973f7b2d9f9c779836f8f518b83ac07d80",
+  "workstream": "PROCEDURE",
+  "severity": "P3",
+  "issue_type": "OTHER",
+  "claim": "r.177(3): a CoI may be assembled by the officer in command of any body of troops, whether belonging to one or more corps.",
+  "original_location": "records_658.jsonl:line 38",
+  "original_text": "Rule 177(3) provides that a CoI may be assembled by the officer in command of a body of troops, whether from one corps or more.",
+  "proposed_text": null,
+  "rationale": "Compilation r.177(3): 'A court of inquiry may be assembled by the officer in command of any body of troops, whether belonging to one or more corps.' Same wording in MML 2.pdf p.221 (anchor). Discretionary ('may'). Record's paraphrase ('a body of troops') is substantively accurate (text says 'any'). The record's step 'Check ... current Army Orders' is administrative practice outside the Rules; NOTE 1 reference to Regs Army paras 516-526 is editorial.",
+  "source_ids": [
+   "S-PROC-007"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "Regulations for the Army paras 516-526 and Army Orders not examined.",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "NO_ISSUE_FOUND",
+  "pinpoint": "Army Rules r.177(3), PDF [[page 194]]",
+  "temporal_scope": "r.177(3) wording identical in compilation and MML 2 (2003-substituted text); India Code compilation retrieved 2026-11-21; amendment chain and original Gazette not verified.",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "procedure-auditor",
+  "mml_anchor_ids": [
+   "S-MML-054",
+   "S-MML-056",
+   "S-MML-057"
+  ]
+ },
+ {
+  "finding_id": "F-PROC-017",
+  "batch_id": "PILOT-01",
+  "record_id": "COI-008",
+  "original_sha256": "876ee246814af22bc17bd076d83787973f7b2d9f9c779836f8f518b83ac07d80",
+  "workstream": "PROCEDURE",
+  "severity": "P2",
+  "issue_type": "PROCEDURAL_GAP",
+  "claim": "r.185 is described loosely as a 'special weapon-loss procedure'; its scope is narrower and its assembling-authority requirement is mandatory.",
+  "original_location": "records_658.jsonl:line 38",
+  "original_text": "the special weapon-loss procedure under Rule 185 should be checked before assuming routine unit-level competence",
+  "proposed_text": "Where a unit-equipment weapon is lost or stolen and a collective fine under r.186/AA s.89 may follow, r.185(1) requires the CoI to be assembled under the orders of the army, corps, division or independent brigade commander.",
+  "rationale": "r.185(1): whenever 'any weapon or part of a weapon which forms part of the equipment of a squadron, battery, company or other similar unit, and in respect of the loss or theft of which a fine may be imposed under the rule 186' is lost or stolen, a CoI 'shall be assembled, under the orders of the officer commanding the army, army corps, division or independent brigade'. r.185(2): assembling officer shall direct an opinion on circumstances. r.186 and AA s.89: the same commander may impose collective fines after obtaining the CoI report. So: (i) the special rule is confined to unit-equipment weapons where a r.186 collective fine may be imposed, not all weapon losses; (ii) the higher assembling authority is mandatory ('shall'), not merely something to 'check'; (iii) the statutory link is AA s.89 (collective fines require a CoI report). Record does not cite s.89 or r.186.",
+  "source_ids": [
+   "S-PROC-009",
+   "S-PROC-001"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [],
+  "limitations": [
+   "Whether other special rules or regulations designate higher assembling authorities (e.g. for officers, POWs) not exhaustively searched.",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "DISCREPANCY",
+  "pinpoint": "Army Rules r.185(1)-(2), r.186(1), PDF [[page 201]]; Army Act s.89(1), [[page 29]]",
+  "temporal_scope": "Current compilation text India Code compilation retrieved 2026-11-21; amendment chain and original Gazette not verified.",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "procedure-auditor",
+  "mml_anchor_ids": [
+   "S-MML-055"
+  ]
+ },
+ {
+  "finding_id": "F-PROC-018",
+  "batch_id": "PILOT-01",
+  "record_id": "COI-008",
+  "original_sha256": "876ee246814af22bc17bd076d83787973f7b2d9f9c779836f8f518b83ac07d80",
+  "workstream": "PROCEDURE",
+  "severity": "P2",
+  "issue_type": "CONFLICT",
+  "claim": "The corpus India Code compilation prints a different r.177(1)-(2) from the version MML 2 marks as substituted by S.R.O. 8(E) of 23-06-2003; the operative current text of r.177 is unresolved.",
+  "original_location": "records_658.jsonl:line 38",
+  "original_text": "Rule 177(3) provides that a CoI may be assembled by the officer in command of a body of troops",
+  "proposed_text": null,
+  "rationale": "Compilation r.177(1)-(2): court of inquiry is an assembly 'of officers or of officers and junior commissioned officers or warrant officers or non-commissioned officers'; court 'may consist of any number of officers of any rank, or of one or more officers together with' JCOs/WOs/NCOs; no amendment marker. MML 2.pdf p.221 (manual anchor, not proof) prints r.177 in brackets with footnote 'Substituted by SRO 8 (E) dated 23 June, 2003', with (1) adding assemblies 'of junior commissioned officers' and (2) providing a 'Presiding Officer, who will either be an officer or a junior commissioned officer'. r.177(3) is identical in both, so the record's specific claim is unaffected, but the compilation the KB relies on appears not to reflect the 2003 substitution for r.177(1)-(2) (composition/presiding officer). S.R.O. 8(E) 2003 not held; egazette unreachable. Not resolved.",
+  "source_ids": [
+   "S-PROC-007"
+  ],
+  "verification_state": "CONFLICTING",
+  "review_state": "PENDING",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "Obtain S.R.O. 8(E) of 23-06-2003 and confirm current r.177(1)-(2); flag the corpus compilation as possibly stale for r.177."
+  ],
+  "limitations": [
+   "S.R.O. 8(E) of 23-06-2003 not obtained (gap registered as S-PROC-013).",
+   "MML text used as anchor only, not as proof.",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "CONFLICTING_SOURCES",
+  "pinpoint": "Army Rules r.177(1)-(3), PDF [[page 194]]; MML 2.pdf p.221 (anchor S-MML-054)",
+  "temporal_scope": "Pre- vs post-23-06-2003 r.177; India Code compilation retrieved 2026-11-21 vs undated MML 2 edition (notes to 2003).",
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "procedure-auditor",
+  "mml_anchor_ids": [
+   "S-MML-054",
+   "S-MML-056",
+   "S-MML-057"
+  ]
+ },
+ {
+  "finding_id": "F-PROC-019",
+  "batch_id": "PILOT-01",
+  "record_id": "HCE-017",
+  "original_sha256": "54a4f2358087e1a1ff3871352419ff16ce000a52db1a5fb1e965ed3b741175be",
+  "workstream": "PROCEDURE",
+  "severity": "P1",
+  "issue_type": "PROCEDURAL_GAP",
+  "claim": "The s.81(4) NCO bar is stated incompletely (omits persons who were NCOs at the time of the offence); s.80 list summary omits forfeiture of good service/good conduct pay.",
+  "original_location": "records_658.jsonl:line 93",
+  "original_text": "custody/detention/confinement are not awardable to NCOs; reprimand is not for ranks below NCO.",
+  "proposed_text": "Check s.81(4): clauses (a)-(c) cannot be awarded to a person who is an NCO or was an NCO when the offence was committed; s.81(5): reprimand/severe reprimand not below NCO rank.",
+  "rationale": "s.81(4): punishments in s.80 clauses (a), (b) and (c) 'shall not be awarded to any person who is of the rank of non-commissioned officer or was, at the time of committing the offence for which he is punished, of such rank.' The record omits the time-of-offence limb, so a person since reduced below NCO could wrongly be treated as eligible for custody/detention/confinement - an illegal-punishment risk. s.81(5): clause (g) (severe reprimand or reprimand) not to any person below NCO rank - record accurate. s.80 list (a)-(i): record summary omits clause (f) 'forfeiture of good service and good conduct pay'; field punishment and cl.(j) omitted by Act 37 of 1992. s.81(2) sequencing ((c)/(d) take effect after (a)/(b)) and s.81(3) 42-day aggregate for (a)-(c) are reflected only as 'Improper aggregate days'. s.82: COAS may specify other punishments with Central Government consent - record accurate. Statutory, mandatory limits.",
+  "source_ids": [
+   "S-PROC-001"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": true,
+  "advisor_questions": [
+   "Confirm KB should state s.81(4) with both limbs (present rank and rank at time of offence)."
+  ],
+  "limitations": [
+   "Any COAS specification under s.82 not examined.",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "DISCREPANCY",
+  "pinpoint": "Army Act s.80(a)-(i), s.81(2)-(5), s.82, PDF [[page 27]]-[[page 28]]",
+  "temporal_scope": "Current consolidation India Code compilation retrieved 2026-11-21; amendment chain and original Gazette not verified (s.81(1) omitted and s.81(4) amended by Act 37 of 1992).",
+  "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+  "agent": "procedure-auditor",
+  "mml_anchor_ids": [
+   "S-MML-026",
+   "S-MML-027",
+   "S-MML-028"
+  ],
+  "related_record_ids": [
+   "KB-003"
+  ]
+ },
+ {
+  "finding_id": "F-PROC-020",
+  "batch_id": "PILOT-01",
+  "record_id": "HCE-017",
+  "original_sha256": "54a4f2358087e1a1ff3871352419ff16ce000a52db1a5fb1e965ed3b741175be",
+  "workstream": "PROCEDURE",
+  "severity": "P2",
+  "issue_type": "PROCEDURAL_GAP",
+  "claim": "'Ceilings' and 'applicable transmission' for s.80 awards are not mapped: extent is 'prescribed' (Appendix III not held) and s.86 transmission applies only to ss.83-85 awards.",
+  "original_location": "records_658.jsonl:line 93",
+  "original_text": "Check ceilings, coexistence of multiple awards, and any notified additional punishments.; Complete the authorised record and applicable transmission.",
+  "proposed_text": null,
+  "rationale": "s.80 allows award 'in the prescribed manner' and 'to the extent prescribed'; r.22(3)(a) requires disposal 'in accordance with the manner and form in Appendix III'. Appendix III is not in the compilation held, so the prescribed extents (e.g. any limit by rank of awarding officer) cannot be verified. s.86 (transmission of certified true copies to superior military authority) and s.87 (review) apply only to punishments under ss.83, 84 and 85; the record's 'applicable transmission' must not be read as a statutory s.86 requirement for s.80 awards. Any reporting of s.80 awards would derive from Appendix III/regulations - unverified.",
+  "source_ids": [
+   "S-PROC-001",
+   "S-PROC-005",
+   "S-PROC-016"
+  ],
+  "verification_state": "SOURCE_LOCATED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [
+   "What instrument currently prescribes the 'extent' of s.80 punishments by awarding officer, and is any transmission/reporting of s.80 awards required?"
+  ],
+  "limitations": [
+   "Appendix III and Regulations for the Army not examined.",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "UNVERIFIED",
+  "pinpoint": "Army Act s.80, ss.86-88 PDF [[page 27]]-[[page 29]]; Army Rules r.22(3)(a) [[page 38]]",
+  "temporal_scope": "Current consolidation; Appendix III not examined.",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "procedure-auditor",
+  "mml_anchor_ids": [
+   "S-MML-001"
+  ]
+ },
+ {
+  "finding_id": "F-PROC-021",
+  "batch_id": "PILOT-01",
+  "record_id": "V9-CL-02",
+  "original_sha256": "a45c7b3f02299dd9d34a0f230fae3a2c5979a01acd50e9bbb29aeef6786c3147",
+  "workstream": "PROCEDURE",
+  "severity": "P2",
+  "issue_type": "MISSING_AUTHORITY",
+  "claim": "Generic witness-statement checklist has no proceeding, person category, date or authority; several items map to r.23 (summary of evidence) or r.179-182 (CoI) with conditions the checklist omits.",
+  "original_location": "records_658.jsonl:line 636",
+  "original_text": "□ Read-over, signature and corrections",
+  "proposed_text": null,
+  "rationale": "The record states no proceeding (CO hearing, summary of evidence, CoI, court-martial), no authority ('Research procedural checklist') and empty sources. Mapping where a provision exists: for a summary of evidence, r.23(3) requires each witness's recorded evidence to be read over and signed (or attested by mark and witnessed) - mandatory; 'corrections' has no textual basis in r.23 (practice). r.23(2): accused's cross-examination questions and answers are added to the record (supports 'Questions and answers retained'). r.23(4): evidence recorded in English and, if the witness does not understand English, interpreted to him in a language he understands - mandatory, more specific than 'Interpreter and language assessment'. r.23(5): written statement may be used where attendance cannot readily be procured, on the officer's written certificate - omitted. SoE is not on oath (compilation NOTE 2, editorial). For a CoI: r.179(4) questioning, r.181 oath where required, r.182 inadmissibility, r.180 rights of affected persons - none referenced. 'Witness identity and independent account' and 'Time/location' are investigative practice with no rule text. The r.23(3) accused-caution sentence (disputed negation) is not engaged by this witness checklist.",
+  "source_ids": [
+   "S-PROC-006",
+   "S-PROC-008"
+  ],
+  "verification_state": "SOURCE_VERIFIED",
+  "review_state": "PENDING",
+  "requires_legal_review": false,
+  "advisor_questions": [
+   "Should this checklist be scoped to a specific proceeding (summary of evidence under r.23) and annotated rule-by-rule, separating mandatory text from practice?"
+  ],
+  "limitations": [
+   "Court-martial witness procedure (Army Rules Chapter V Section on trial) not mapped.",
+   "Regulations/administrative instructions on statement-taking not examined.",
+   "Research only; not legally approved."
+  ],
+  "examination_outcome": "DISCREPANCY",
+  "pinpoint": "Army Rules r.23(2)-(5), PDF [[page 41]]-[[page 42]]; r.179(4), r.181, r.182 [[page 196]]-[[page 198]]",
+  "temporal_scope": "Current compilation text India Code compilation retrieved 2026-11-21; amendment chain and original Gazette not verified; r.23(3) caution conflict (S.R.O. 484 of 1954) unresolved and not relied on.",
+  "legal_review_state": "NOT_REQUIRED",
+  "agent": "procedure-auditor",
+  "mml_anchor_ids": [
+   "S-MML-005",
+   "S-MML-067"
+  ]
+ }
+]

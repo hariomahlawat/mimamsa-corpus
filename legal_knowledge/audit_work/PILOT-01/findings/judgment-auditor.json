@@ -1,0 +1,950 @@
+[
+  {
+    "finding_id": "F-JUD-001",
+    "batch_id": "PILOT-01",
+    "record_id": "KB-026",
+    "original_sha256": "6f6ffb4e19247361c7e40d9c98d709e3aadf4a20d19a218e2bdfd7d54de948e8",
+    "workstream": "JUDGMENT",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "Virendra Kumar (2020) treats Rule 180 compliance as obligatory, held that a CoI-stage Rule 180 lapse not raised at charge, Summary of Evidence or trial could not ground a post-trial remand for a fresh CoI, and limited AFT retrial/remand power.",
+    "original_location": "records_658.jsonl:line 26",
+    "original_text": "The Supreme Court distinguished obligatory Rule 180 opportunity from the consequence of procedural defects at an earlier fact-finding stage. It held that in the facts of the case a CoI lapse raised only after full trial did not warrant a remand to conduct a fresh CoI, and discussed limits on AFT retrial/remand authority.",
+    "proposed_text": null,
+    "rationale": "Official PDF read. Para 12(b) and (d): accused entitled to full opportunity under Rule 180 and authorities must rectify if the ground is raised at charge or Summary of Evidence stage because compliance 'is obligatory'. Para 13: non-compliance existed but was not raised at charge, summary of evidence or court-martial; after full trial not open to raise it; Tribunal ought not to have remanded for de novo inquiry from CoI stage. Para 15: AFT may order retrial only on s.16(2) AFT Act grounds; non-compliance of Rule 180 cannot ground retrial; no power to remand to a stage prior to court-martial. The record's summary is supported. Note para 12(c) states more broadly that irregularities at earlier stages cannot be the basis for setting aside the court-martial order (a distillation of earlier case law); the record's 'in the facts' framing is the narrower and safer reading. The Court remanded the Transfer Application to the AFT for decision on merits (para 15) - not mentioned in the record.",
+    "source_ids": [
+      "S-JUD-001"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [
+      "Should the record state that the SC remanded the Transfer Application to the AFT for merits, so readers do not treat Virendra Kumar as a final validation of the court-martial?",
+      "Does para 12(c) (earlier-stage irregularities cannot set aside a court-martial) carry precedential weight given the judgment is marked Non-Reportable?"
+    ],
+    "limitations": [
+      "Later judicial treatment searched only via targeted web discovery and the official judgments listed; absence of found treatment is not proof of none.",
+      "Rule 180 text itself not re-verified against the Army Rules corpus by this agent (statutory workstream)."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "S-JUD-001 corrected copy paras 12-15 (PDF pp.16-21)",
+    "temporal_scope": "Judgment dated 2020-01-07 (non-reportable, two-judge bench); Army Rules 1954 r.180 as quoted in para 5; later treatment not reviewed.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "mml_anchor_ids": [
+      "S-MML-014",
+      "S-MML-015"
+    ],
+    "related_record_ids": [
+      "DCLR-SC-2020-002"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-002",
+    "batch_id": "PILOT-01",
+    "record_id": "KB-026",
+    "original_sha256": "6f6ffb4e19247361c7e40d9c98d709e3aadf4a20d19a218e2bdfd7d54de948e8",
+    "workstream": "JUDGMENT",
+    "severity": "P3",
+    "issue_type": "BROKEN_REFERENCE",
+    "claim": "The pinpoint 'paras 12-16' extends beyond the Rule 180/remand discussion and is version-dependent.",
+    "original_location": "records_658.jsonl:line 26",
+    "original_text": "Virendra Kumar (2020) paras 12–16",
+    "proposed_text": "Virendra Kumar (2020) paras 12–15 (corrected judgment); para 16 of the corrected judgment concerns sentence only.",
+    "rationale": "In the corrected copy para 16 is a direction that the respondent not be sentenced to imprisonment (sentence already undergone >10 years) and para 17 allows the appeal; in the uncorrected copy appended to the same official PDF para 16 is 'The Appeal is accordingly allowed'. Neither para 16 concerns Rule 180 or AFT remand power. The Rule 180 and s.16 AFT Act reasoning is in paras 12-15 (identical numbering in both copies).",
+    "source_ids": [
+      "S-JUD-001"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "Pinpoint proposal only; record not changed."
+    ],
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "S-JUD-001 corrected copy para 16 (PDF p.21); uncorrected copy para 16 (PDF p.42)",
+    "temporal_scope": "Official PDF as served by api.sci.gov.in on 2026-11-22 (created 2020-01-10).",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "DCLR-SC-2020-002"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-003",
+    "batch_id": "PILOT-01",
+    "record_id": "PEN-043",
+    "original_sha256": "aacfa91ed6b956d05b9afe1861526c79b13446626fd4bb0d696d0fb28221fd1e",
+    "workstream": "JUDGMENT",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "Dharamvir Singh (2013) and Rajbir Singh (2015) discuss the entry-health presumption and onus under the Entitlement Rules 1982 regime.",
+    "original_location": "records_658.jsonl:line 308",
+    "original_text": "Dharamvir Singh and Rajbir Singh discuss presumptions under the earlier entitlement-rule regime.",
+    "proposed_text": null,
+    "rationale": "Dharamvir (JUDIS para 28(ii),(iii),(v),(vi)) states the presumption of sound condition at entry absent a note, onus on the employer (Rule 9) and the need for Medical Board reasons, all under Regulation 173 Pension Regulations for the Army 1961 and Entitlement Rules for Casualty Pensionary Awards 1982 (paras 12-15 explain why the 1982 published Rules were preferred over a 1996-amended version). Rajbir (paras 7-10, 13, 15-16) applies the same 1982 Rules and expressly endorses Dharamvir ('in tune with the Pension Regulations, the Entitlement Rules and the Guidelines', para 15).",
+    "source_ids": [
+      "S-JUD-003",
+      "S-JUD-004"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "Later judicial treatment searched only via targeted web discovery and the official judgments listed; absence of found treatment is not proof of none.",
+      "Entitlement Rules 1982 text itself not obtained; only as quoted in the judgments."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "S-JUD-003 JUDIS paras 12-15, 28, 32; S-JUD-004 paras 7-10, 13, 15-16",
+    "temporal_scope": "Decisions of 2013-07-02 and 2015-02-13 applying Entitlement Rules 1982; says nothing about Entitlement Rules 2008 or 2023.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "DCLR-SC-2013-N08",
+      "DCLR-SC-2015-N09",
+      "PEN-J-01"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-004",
+    "batch_id": "PILOT-01",
+    "record_id": "PEN-043",
+    "original_sha256": "aacfa91ed6b956d05b9afe1861526c79b13446626fd4bb0d696d0fb28221fd1e",
+    "workstream": "JUDGMENT",
+    "severity": "P2",
+    "issue_type": "UNSUPPORTED_ASSERTION",
+    "claim": "N S Yadav (2019) paras 15-19 warns against automatic attribution of mental illness.",
+    "original_location": "records_658.jsonl:line 308",
+    "original_text": "N S Yadav (2019) warns against automatic attribution of mental illness when relevant facts and medical evidence do not support nexus.",
+    "proposed_text": null,
+    "rationale": "No official text of the 2019 decision was obtained. The case is identified in a secondary-hosted copy of Col. NC Isaac (2026) as 'Narsingh Yadav vs. Union of India (2019) 9 SCC 667', which quotes its paras 15 and 18 (no mechanical application of the non-mention-at-enrolment presumption; mental disorders and epilepsy may be undetectable at enrolment). That is consistent with the record but is secondary and does not cover paras 16-19. The record's short name 'N S Yadav' is not confirmed as the same case.",
+    "source_ids": [
+      "S-JUD-008"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [
+      "Confirm the identity of 'N S Yadav (2019)' (Ex Cfn Narsingh Yadav v Union of India, (2019) 9 SCC 667?) and obtain the official text before relying on paras 15-19."
+    ],
+    "limitations": [
+      "Official judgment not obtained; JUDIS id unknown and not probed.",
+      "Secondary text is discovery only."
+    ],
+    "examination_outcome": "UNVERIFIED",
+    "pinpoint": "S-JUD-008 (secondary) para 16.1, copy pp.59-60",
+    "temporal_scope": "2019 decision (date, case number and bench not verified).",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "PEN-J-01"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-005",
+    "batch_id": "PILOT-01",
+    "record_id": "PEN-043",
+    "original_sha256": "aacfa91ed6b956d05b9afe1861526c79b13446626fd4bb0d696d0fb28221fd1e",
+    "workstream": "JUDGMENT",
+    "severity": "P1",
+    "issue_type": "MISSING_AUTHORITY",
+    "claim": "The record frames the law as 'earlier entitlement-rule regime' versus '2023 claims' and omits the Entitlement Rules 2008 period and the September 2026 SC decision in Union of India v Col. NC Isaac (2026 INSC 993).",
+    "original_location": "records_658.jsonl:line 308",
+    "original_text": "Do not announce a blanket presumption for all 2023 claims",
+    "proposed_text": null,
+    "rationale": "A secondary-hosted copy of Col. NC Isaac (official PDF not obtained) indicates that the Court, in its own analysis (paras 30.7, 33-35, 39), held that the 2008 Entitlement Rules, assuming legal effect, substantially reproduce the 1982 scheme on causal connection, onus and attributability; that removal of the automatic presumption does not by itself change the core scheme; that onus remains on the employer, except under the Rule 7 proviso for claims more than fifteen years after discharge; that Medical Board opinions deserve due weight; and that AFT/High Court decisions following Dharamvir 'without a detailed examination of the evidence' may be revisited. This is directly relevant to the record's question and its 'Check any later Supreme Court treatment' step, and it qualifies a simple 'earlier regime vs 2023' framing. Whether the Entitlement Rules 2023 differ was not examined by Isaac on the reading done and is not verified here.",
+    "source_ids": [
+      "S-JUD-008"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": true,
+    "advisor_questions": [
+      "Obtain the official sci.gov.in PDF of 2026 INSC 993 and confirm paras 30.7, 33-35 and 39 before any KB wording change.",
+      "Which Entitlement Rules (1982, 2008 or 2023) govern by date of discharge/claim, and should the record add the 2008 tier and Isaac's 15-year Rule 7 proviso?"
+    ],
+    "limitations": [
+      "Official text of 2026 INSC 993 not obtained (official URL returned 0 bytes).",
+      "Entitlement Rules 2008 and 2023 texts not obtained (MoD/egazette unreachable)."
+    ],
+    "examination_outcome": "UNVERIFIED",
+    "pinpoint": "S-JUD-008 (secondary) paras 30.7, 33-35, 39(i)-(iii), copy pp.86, 90-93",
+    "temporal_scope": "Isaac decided 2026-09-15 (as printed on secondary copy); concerns Entitlement Rules 2008; Entitlement Rules 2023 not assessed.",
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "PEN-J-01",
+      "DCLR-SC-2013-N08",
+      "DCLR-SC-2015-N09"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-006",
+    "batch_id": "PILOT-01",
+    "record_id": "PEN-J-01",
+    "original_sha256": "6ed839aa7101abe8c6446b32f3b4d6fa979eec9f34a54e4cfbf82d3da1aeb5f7",
+    "workstream": "JUDGMENT",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "Dharamvir Singh (2013) applied a disability-entitlement presumption where no disease was noted at enrolment, under the older (1982) scheme.",
+    "original_location": "records_658.jsonl:line 355",
+    "original_text": "Historical disability entitlement presumption where no disease note at enrolment, under governing older scheme",
+    "proposed_text": null,
+    "rationale": "JUDIS para 28(ii) and (v): member presumed in sound condition on entry absent a note; disease leading to discharge deemed to have arisen in service (Rules 5, 14(b), Entitlement Rules 1982); para 32: as per Rules 5 and 9 the appellant is entitled to the presumption; para 34: appeal allowed and Single Judge's grant restored. Identity: CA 4949/2013, decided 2 July 2013, Patnaik and Mukhopadhaya JJ.",
+    "source_ids": [
+      "S-JUD-003"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "Later judicial treatment searched only via targeted web discovery and the official judgments listed; absence of found treatment is not proof of none."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "S-JUD-003 JUDIS paras 28, 32, 34 (PDF pp.29-31, 34-36)",
+    "temporal_scope": "Decision 2013-07-02; Entitlement Rules 1982 (Appendix II, Pension Regulations for the Army 1961) as published.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "DCLR-SC-2013-N08",
+      "PEN-043"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-007",
+    "batch_id": "PILOT-01",
+    "record_id": "PEN-J-01",
+    "original_sha256": "6ed839aa7101abe8c6446b32f3b4d6fa979eec9f34a54e4cfbf82d3da1aeb5f7",
+    "workstream": "JUDGMENT",
+    "severity": "P1",
+    "issue_type": "MISSING_AUTHORITY",
+    "claim": "The later-treatment note points only to N S Yadav (2019) and 'ER 2023'; it omits Rajbir Singh (2015, followed Dharamvir) and Col. NC Isaac (2026 INSC 993) on the 2008 Rules.",
+    "original_location": "records_658.jsonl:line 355",
+    "original_text": "Later treatment / limitation: Do not automatically apply to ER 2023 claim; read N S Yadav (2019) and medical context.",
+    "proposed_text": "Later treatment: followed in Union of India v Rajbir Singh (2015) paras 13-16 [verified]; Union of India v Col. NC Isaac, 2026 INSC 993 (2008 Rules substantially reproduce the 1982 scheme; Rule 7 fifteen-year proviso; mechanical reliance on Dharamvir may be revisited) [official text pending]. Do not automatically apply to claims under later Entitlement Rules without checking the governing version.",
+    "rationale": "Verified: Rajbir Singh (official) para 15 endorses Dharamvir's statement of the law and applies it (para 16). Unverified (secondary copy only): in Isaac the propositions that Dharamvir 'cannot be mechanically applied to cases governed by the Entitlement Rules 2008' and creates no automatic presumption (para 18.3) are the Attorney General's submissions, not the holding; the respondents' submission that Dharamvir 'still holds the correct position' (para 19.6) was likewise a submission. The Court's own analysis did not overrule Dharamvir; it held the 2008 Rules substantially reproduce the 1982 scheme (para 34) subject to the Rule 7 fifteen-year proviso (paras 33, 39(iii)), gave Medical Board opinions due weight (para 39(ii)), and said decisions that followed Dharamvir without detailed examination of evidence may be revisited (para 35). The record's caution is directionally consistent, but its treatment line is incomplete, and must not be upgraded to 'limited/overruled by Isaac' on the present evidence.",
+    "source_ids": [
+      "S-JUD-004",
+      "S-JUD-008"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": true,
+    "advisor_questions": [
+      "Confirm on the official 2026 INSC 993 text that the Court did not itself adopt the AG's para 18.3 propositions beyond para 39(ii).",
+      "Should the case-law relation be recorded as 'follows' (Rajbir->Dharamvir, verified) and 'distinguishes/limits' (Isaac->Dharamvir, pending) rather than 'overruled'?"
+    ],
+    "limitations": [
+      "2026 INSC 993 official PDF not obtained.",
+      "N S Yadav (2019) not obtained.",
+      "Later judicial treatment searched only via targeted web discovery and the official judgments listed; absence of found treatment is not proof of none."
+    ],
+    "examination_outcome": "UNVERIFIED",
+    "pinpoint": "S-JUD-004 paras 13-16 (PDF pp.14-19); S-JUD-008 (secondary) paras 18.3, 19.6, 33-35, 39",
+    "temporal_scope": "Treatment checked to 2026-09-15 (Isaac, secondary copy). Entitlement Rules 2023 not examined.",
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "PEN-043",
+      "DCLR-SC-2013-N08",
+      "DCLR-SC-2015-N09"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-008",
+    "batch_id": "PILOT-01",
+    "record_id": "CIV-019",
+    "original_sha256": "a10b8dce0e2ec483c9fd0f58c6b943238b922b98cdfcf54d1c097a281660d82c",
+    "workstream": "JUDGMENT",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "The BSA 2023 applies to judicial proceedings including courts-martial; admissibility of electronic records and certificates depend on current provisions and facts.",
+    "original_location": "records_658.jsonl:line 478",
+    "original_text": "The Bharatiya Sakshya Adhiniyam applies to judicial proceedings including courts-martial. Digital evidence can be important, but admissibility, authenticity, lawful acquisition and certificates depend on exact current provisions and facts.",
+    "proposed_text": null,
+    "rationale": "BSA s.1(2) (India Code): 'It applies to all judicial proceedings in or before any Court, including Courts-martial'. BSA s.61-62 make electronic records provable under s.63, and s.63(4) requires a certificate submitted with the electronic record 'at each instance where it is being submitted for admission'. Under the former Evidence Act, Anvar P.V. (paras 13-15, 22) held a s.65B(4) certificate a condition of admissibility of secondary electronic evidence, and Arjun Panditrao (para 72(b)) clarified that no certificate is needed where the original device is itself produced. The record's caution that certificates depend on exact provisions and facts, and its emphasis on preserving originals rather than screenshots, is consistent with these authorities.",
+    "source_ids": [
+      "S-JUD-010",
+      "S-JUD-006",
+      "S-JUD-007"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [
+      "Do Anvar/Arjun carry over to BSA s.63 for proceedings after 1 July 2024? No post-BSA SC authority was checked."
+    ],
+    "limitations": [
+      "No judgment interpreting BSA s.63 was located or read.",
+      "Lawful acquisition / device-search limb not checked."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "S-JUD-010 s.1(2) [[page 10]], ss.61-63(4) [[pages 29-31]]; S-JUD-006 paras 13-15, 22, 24; S-JUD-007 para 72(b)",
+    "temporal_scope": "BSA in force from 2024-07-01 (India Code text retrieved 2026-11-21); Anvar (2014) and Arjun (2020) decided under Indian Evidence Act 1872 s.65B.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "mml_anchor_ids": [
+      "S-MML-058"
+    ],
+    "related_record_ids": [
+      "DCLR-SC-2014-N12",
+      "DCLR-SC-2005-L01"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-009",
+    "batch_id": "PILOT-01",
+    "record_id": "CIV-019",
+    "original_sha256": "a10b8dce0e2ec483c9fd0f58c6b943238b922b98cdfcf54d1c097a281660d82c",
+    "workstream": "JUDGMENT",
+    "severity": "P2",
+    "issue_type": "POTENTIAL_CONFLICT",
+    "claim": "Army Act s.133 (India Code consolidation) still applies the Indian Evidence Act 1872 to court-martial proceedings; the record cites only BSA s.1(2) and gives no case authority.",
+    "original_location": "records_658.jsonl:line 478",
+    "original_text": "Legal basis: BSA 2023, including s 1(2)",
+    "proposed_text": null,
+    "rationale": "Army Act s.133 as consolidated on India Code reads that the Indian Evidence Act, 1872 shall, subject to the Act, apply to all proceedings before a court-martial. How this interacts with BSA s.1(2) and the BSA repeal/savings provision (and General Clauses Act construction of references) was not traced. The record should signal this bridge and the transitional position for evidence collected or trials begun before 1 July 2024. The record also cites no judgment on electronic evidence (Anvar/Arjun under the old Act) and its 'Illustration' field is empty.",
+    "source_ids": [
+      "S-JUD-012",
+      "S-JUD-010"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [
+      "Has Army Act s.133 been amended or is its reference to the 1872 Act read as BSA by statutory construction? Which applies to a court-martial whose evidence was gathered before 1 July 2024?"
+    ],
+    "limitations": [
+      "BSA repeal and savings section and General Clauses Act s.8 not read by this agent (statutory workstream).",
+      "Navy Act and Air Force Act equivalents not checked (cross-service)."
+    ],
+    "examination_outcome": "UNVERIFIED",
+    "pinpoint": "S-JUD-012 s.133 [[page 37]]; S-JUD-010 s.1(2) [[page 10]]",
+    "temporal_scope": "India Code consolidations retrieved 2026-11-21; transitional/savings position not checked.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "mml_anchor_ids": [
+      "S-MML-058"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-010",
+    "batch_id": "PILOT-01",
+    "record_id": "KB-028",
+    "original_sha256": "5328623a84328e7750e9d85626d8a7e3c5a665198949e54bb927a86a5d3fc6dc",
+    "workstream": "JUDGMENT",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "Parashotam Dass (2023) holds High Court Article 226 review of AFT decisions is not barred, with restraint and no re-appreciation as a second appeal.",
+    "original_location": "records_658.jsonl:line 28",
+    "original_text": "The Supreme Court confirms that the High Court’s constitutional jurisdiction under Art 226 is not inhibited merely by the AFT framework; the High Court nevertheless exercises judicial restraint appropriate to military discipline and judicial review. Distinguish legal review from unrestricted reappreciation of facts.",
+    "proposed_text": null,
+    "rationale": "Official PDF read. Para 25: self-restraint under Art 226 is distinct from an embargo; Shri Kant Sharma's embargo not accepted. Para 26: 'the power of the High Court under Article 226 ... is not inhibited, and superintendence and control under Article 227 ... are somewhat distinct'. Para 24: courts circumspect in interfering where jurisdiction exercised per Armed Forces norms. Para 30: HC may act on denial of Part III rights, jurisdictional error or error apparent; 'misconception' that HC would re-appreciate evidence as a second appeal; HCs conscious of parameters. Para 32: no per se restriction; in matters of self-discipline 'the principles already stand enunciated'. The record's statements are supported by the court's own observations (paras 24-32), not by counsel's submissions.",
+    "source_ids": [
+      "S-JUD-002"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "Later judicial treatment searched only via targeted web discovery and the official judgments listed; absence of found treatment is not proof of none."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "S-JUD-002 paras 24-26, 30, 32 (PDF pp.16-22)",
+    "temporal_scope": "Decision 2023-03-21 (three-judge bench); later treatment not reviewed.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "mml_anchor_ids": [
+      "S-MML-062"
+    ],
+    "related_record_ids": [
+      "DCLR-SC-2023-009",
+      "AFT-004"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-011",
+    "batch_id": "PILOT-01",
+    "record_id": "KB-028",
+    "original_sha256": "5328623a84328e7750e9d85626d8a7e3c5a665198949e54bb927a86a5d3fc6dc",
+    "workstream": "JUDGMENT",
+    "severity": "P2",
+    "issue_type": "PROCEDURAL_GAP",
+    "claim": "The record's pinpoint stops at para 30 and omits the conclusion (para 32) that Major General Shri Kant Sharma (2015) does not lay down the correct law; its SRC-AFT locator 'ss 30-32' overstates what the judgment discusses.",
+    "original_location": "records_658.jsonl:line 28",
+    "original_text": "Parashotam Dass (2023), paras 24–30",
+    "proposed_text": "Parashotam Dass (2023), paras 24–32 (para 32: Shri Kant Sharma (2015) 6 SCC 773 does not lay down the correct law).",
+    "rationale": "Para 32 is the operative conclusion and the source of the 'no per se restriction' proposition, and it records that Union of India v Major General Shri Kant Sharma (2015) 6 SCC 773 is in conflict with Constitution Bench authority. A user of the database who knows only Shri Kant Sharma would not learn from this record that it no longer states the law. The judgment extracts and discusses AFT Act ss.30-31 (paras 17-19, 27); s.32 is mentioned only as part of the not-pressed vires challenge in W.P.(C) 76/2016 (para 33 IV).",
+    "source_ids": [
+      "S-JUD-002"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "Shri Kant Sharma (2015) text not obtained."
+    ],
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "S-JUD-002 paras 17-19, 25, 32, 33 IV (PDF pp.11-17, 22-25)",
+    "temporal_scope": "Decision 2023-03-21.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "DCLR-SC-2023-009"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-012",
+    "batch_id": "PILOT-01",
+    "record_id": "AFT-004",
+    "original_sha256": "9034d57d9b6f05a90bd6403bc44be0b650bc9b3f6583e2e2d23d7b5382242684",
+    "workstream": "JUDGMENT",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "AFT Act s.14 governs service-matter applications; s.15 gives appellate jurisdiction over court-martial orders, decisions, findings or sentences, with powers on conviction, sentence, bail and enhancement after hearing.",
+    "original_location": "records_658.jsonl:line 365",
+    "original_text": "Section 14 governs service-matter applications. Section 15 provides appellate jurisdiction over an order, decision, finding or sentence passed by court-martial, with specified powers over conviction, sentence and bail.",
+    "proposed_text": null,
+    "rationale": "AFT Act (India Code): s.14(1)-(2) service matters and applications; s.15(1)-(2) appeal against 'any order, decision, finding or sentence passed by a court-martial'; s.15(3) bail; s.15(4)-(5) allowing appeals against conviction; s.15(6)(a)-(f) substitution, remission/mitigation/commutation, and (c) enhancement with proviso 'no such sentence shall be enhanced unless the appellant has been given an opportunity of being heard'. The record's statements and its 'power to enhance after hearing' risk line match the text. Parashotam Dass (para 11, a private-party submission) notes HCs' reluctance to entertain writs against s.15 orders - not a holding.",
+    "source_ids": [
+      "S-JUD-011"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "AFT (Procedure) Rules 2008 'Rules 4-9' not checked.",
+      "No AFT or SC judgment on the s.14/s.15 boundary was read."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "S-JUD-011 s.14(1)-(2) [[page 8]]; s.15(1)-(6) [[pages 9-10]]",
+    "temporal_scope": "India Code consolidation retrieved 2026-11-21; Act in force from 2008-06-15; amendment chain not traced.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "KB-028"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-013",
+    "batch_id": "PILOT-01",
+    "record_id": "AFT-004",
+    "original_sha256": "9034d57d9b6f05a90bd6403bc44be0b650bc9b3f6583e2e2d23d7b5382242684",
+    "workstream": "JUDGMENT",
+    "severity": "P2",
+    "issue_type": "POTENTIAL_CONFLICT",
+    "claim": "The example of a soldier dismissed by SCM needs s.3(o) analysis: 'service matters' expressly include trials where dismissal is awarded and SCMs with dismissal or >3 months' imprisonment, so the s.14/s.15 routes can overlap; the record's 'do not force a trial appeal into a generic service-law cause of action' is not anchored to any judgment.",
+    "original_location": "records_658.jsonl:line 365",
+    "original_text": "Example: A soldier dismissed by a SCM must receive a distinct jurisdiction analysis under ss3(o),14 and 15.",
+    "proposed_text": null,
+    "rationale": "AFT Act s.3(o)(iii) includes 'summary disposal and trials where the punishment of dismissal is awarded' and the exclusion in item (iv) carves back SCMs 'where the punishment is of dismissal or imprisonment for more than three months'. An SCM is a court-martial for s.15 purposes. The statute therefore places such a dismissal within both 'service matters' and s.15 appeal. The record's example correctly flags the need for analysis, but the preceding risk statement could be read as excluding a s.14 application; no judicial authority on the choice of route was located in this pass.",
+    "source_ids": [
+      "S-JUD-011"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [
+      "Is there controlling AFT/SC authority on whether a SCM dismissal is challenged by s.14 OA, s.15 appeal, or either?"
+    ],
+    "limitations": [
+      "Judgment search on this point not done (AFT site unreachable).",
+      "Cross-volume analysis left to cross-volume-auditor."
+    ],
+    "examination_outcome": "UNVERIFIED",
+    "pinpoint": "S-JUD-011 s.3(o)(iii)-(iv) [[page 6]]; s.15(1)-(2) [[page 9]]",
+    "temporal_scope": "India Code consolidation retrieved 2026-11-21.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor"
+  },
+  {
+    "finding_id": "F-JUD-014",
+    "batch_id": "PILOT-01",
+    "record_id": "COI-039",
+    "original_sha256": "d2cea86e4034a98026b4af4aed543055203a50124a32d8d017384d1acb7133de",
+    "workstream": "JUDGMENT",
+    "severity": "P3",
+    "issue_type": "METADATA",
+    "claim": "The digest format omits fields that this audit found necessary for accurate paragraph-level pinpoints: text version (corrected/uncorrected), paragraph-numbering source (official PDF vs reporter), reportability/bench strength, and a holding-versus-submission flag.",
+    "original_location": "records_658.jsonl:line 69",
+    "original_text": "Every digest should store court, title, neutral citation and law-report citation where verified, date, bench, case number, facts, issues, holdings, relevant paragraph numbers, outcome, contrary cases, later treatment, last review date and legal relevance.",
+    "proposed_text": "Add: text version/correction status; paragraph-numbering source; reportable/non-reportable and bench strength; for each pinpoint, whether it is the court's holding/observation or a party submission.",
+    "rationale": "Observed in official texts: (1) the Virendra Kumar PDF contains a corrected and an uncorrected version whose paragraph 16 differs; (2) Dharamvir Singh's JUDIS numbering (para 28, 32) differs from the numbering quoted in Rajbir Singh (paras 29.1-29.7, 33); (3) the Parashotam Dass case row pinpoints paras 11-16, which are counsel's submissions, not observations; (4) Virendra Kumar is marked Non-Reportable. The record's list is otherwise sound and its 'link propositions at paragraph level' instruction is supported by these examples.",
+    "source_ids": [
+      "S-JUD-001",
+      "S-JUD-003",
+      "S-JUD-004",
+      "S-JUD-002"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "Methodological record; no legal proposition to verify. SRC-JETHI (Sanjay Jethi 2013) not obtained; it is quoted in Virendra Kumar para 11 only."
+    ],
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "S-JUD-001 para 16 (PDF pp.21, 42); S-JUD-003 para 28 (p.29); S-JUD-004 para 13 (p.14); S-JUD-002 paras 4-23 vs 24-32",
+    "temporal_scope": "Format guidance; examples from texts retrieved 2026-11-22.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "DCLR-SC-2020-002",
+      "DCLR-SC-2013-N08",
+      "DCLR-SC-2023-009"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-015",
+    "batch_id": "PILOT-01",
+    "record_id": "DCLR-SC-2020-002",
+    "original_sha256": "c42f28ff1395f0b50e533bae7199ef4a709d306d141a6c9c5216879858e42684",
+    "workstream": "JUDGMENT",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "Identity, source and holding of the Virendra Kumar row are confirmed by the official PDF.",
+    "original_location": "cases_53.jsonl:line 2",
+    "original_text": "Rule 180 compliance is obligatory; however, the Court rejected a post-trial de novo CoI remand in the facts because the ground was not raised at charge, Summary of Evidence or trial stages, and AFT retrial powers under Section 16 are limited.",
+    "proposed_text": null,
+    "rationale": "Court: Supreme Court of India, Civil Appellate Jurisdiction. Parties: Union of India & Ors. v. Ex. No. 3192684 W. Sep. Virendra Kumar. Case no.: Civil Appeal No. 9267 of 2019 (@ Diary No. 10621 of 2018). Date: January 07, 2020. Bench: L. Nageswara Rao (author) and Ajay Rastogi JJ. No neutral or reporter citation printed (row's empty reporter_citation is consistent). Primary URL in row resolves to the official PDF (SHA-256 0ff9d2fc...e819). Holding at paras 12(b),(d), 13, 15 matches the row; these are the Court's reasoning, not submissions (submissions are paras 7-8). The row's v04 caveat on the heading slip is confirmed: heading 'Section 16 of the Army Act, 1950' precedes para 14, which quotes AFT Act s.16. Cover-page facts in material_facts are consistent with paras 3-4, 13. Army-service case.",
+    "source_ids": [
+      "S-JUD-001"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "Later judicial treatment searched only via targeted web discovery and the official judgments listed; absence of found treatment is not proof of none.",
+      "Respondent's name appears as printed in the public judgment; no further personal data recorded."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "S-JUD-001 cover (PDF p.1); paras 12-15 (pp.16-21); date (p.21)",
+    "temporal_scope": "Judgment of 2020-01-07; later treatment not reviewed.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "mml_anchor_ids": [
+      "S-MML-014"
+    ],
+    "related_record_ids": [
+      "KB-026"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-016",
+    "batch_id": "PILOT-01",
+    "record_id": "DCLR-SC-2020-002",
+    "original_sha256": "c42f28ff1395f0b50e533bae7199ef4a709d306d141a6c9c5216879858e42684",
+    "workstream": "JUDGMENT",
+    "severity": "P3",
+    "issue_type": "METADATA",
+    "claim": "Row metadata omits that the official PDF is a corrected judgment bundled with the uncorrected version, the corrected para 16 no-imprisonment direction, the remand of the Transfer Application to the AFT on merits, and the PDF hash.",
+    "original_location": "cases_53.jsonl:line 2",
+    "original_text": "The AFT remedy was framed more broadly than Section 16 allowed; earlier-stage defects were not raised when rectification was feasible.",
+    "proposed_text": "Add to scope_and_caveats: 'SC set aside the AFT de novo CoI direction and remanded the Transfer Application to the AFT for merits; corrected judgment para 16 directs no further imprisonment. Official PDF bundles corrected (pp.1-21) and uncorrected (pp.22-42) versions; cite the corrected paragraphs.' original_pdf_sha256: 0ff9d2fc8ef36dfebe862739e517b5ec51f4fff9b4f9b3f7b86beece5d85e819.",
+    "rationale": "Corrected para 16: respondent 'shall not be sentenced to any imprisonment' as he had already undergone more than 10 years; para 15: order set aside and the Transfer Application remanded to the Tribunal for decision on merits. Row has original_pdf_archived false and empty original_pdf_sha256; the official bytes are now hashed. The 'what_went_wrong' line itself is supported (paras 13, 15).",
+    "source_ids": [
+      "S-JUD-001"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [],
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "S-JUD-001 paras 15-16 (corrected copy PDF pp.19-21)",
+    "temporal_scope": "Official PDF as served 2026-11-22.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "KB-026"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-017",
+    "batch_id": "PILOT-01",
+    "record_id": "DCLR-SC-2023-009",
+    "original_sha256": "e3610481baf62dc8b4eb375a608dc614710df40fb14d2d3cbc55c38f7d2a1194",
+    "workstream": "JUDGMENT",
+    "severity": "P1",
+    "issue_type": "MISSTATED_HOLDING",
+    "claim": "The row's pinpoint (paras 11-16) points to counsel's submissions, and its holding field omits the ratio that Shri Kant Sharma (2015) does not lay down the correct law and that there is no per se restriction on Art 226 review of AFT decisions.",
+    "original_location": "cases_53.jsonl:line 9",
+    "original_text": "11–16 (jurisdiction discussion; confirm on official copy)",
+    "proposed_text": "pinpoint_paragraphs: '24–32 (Court's observations and conclusion; paras 4–23 are submissions)'. holding: 'Article 226 judicial review of AFT decisions is not per se barred; Major General Shri Kant Sharma (2015) 6 SCC 773 does not lay down the correct law, being in conflict with L. Chandra Kumar, S.N. Mukherjee and Rojer Mathew; Art 227 superintendence is distinct; High Courts exercise self-restraint and do not act as a second appeal on facts.'",
+    "rationale": "Identity confirmed: Supreme Court of India; Union of India & Ors. v. Parashotam Dass; Civil Appeal No. 447 of 2023 with connected C.A.s and W.P.(C) 76/2016; March 21, 2023; Kaul, Oka and Nagarathna JJ. (three-judge bench). In the official text paras 4-15 are 'Submissions on behalf of the private parties' and paras 16-23 'The pleas of Union of India and JAG Branch'; the Court's observations are paras 24-31 and the conclusion para 32. The row's holding ('distinguished Article 226 judicial review from the Article 227(4) restriction ... and examined the statutory AFT appellate scheme') is partly supported by para 26 but misses the operative conclusion (para 32) and the dispositions (para 33: matters remanded to High Courts for merits; W.P.(C) 76/2016 disposed with liberty). The row's v04_verified_pinpoint '26-32' is correct; the main pinpoint field is not. Citing paras 11-16 risks presenting counsel's arguments (including the Union's proposed carve-outs, para 20) as the Court's view on forum and remedy. scope_and_caveats ('official PDF ... not retrieved') is now outdated.",
+    "source_ids": [
+      "S-JUD-002"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": true,
+    "advisor_questions": [
+      "Approve correcting the pinpoint and holding fields; should the relation Parashotam Dass -> Shri Kant Sharma be typed 'overrules' (three-judge bench declaring a two-judge decision not good law) for the relations graph?"
+    ],
+    "limitations": [
+      "Later judicial treatment searched only via targeted web discovery and the official judgments listed; absence of found treatment is not proof of none.",
+      "Shri Kant Sharma (2015) text not obtained."
+    ],
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "S-JUD-002 paras 4-23 (submissions, PDF pp.3-15); paras 24-32 (pp.16-22); para 33 (pp.22-25)",
+    "temporal_scope": "Decision 2023-03-21; later treatment not reviewed.",
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "KB-028"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-018",
+    "batch_id": "PILOT-01",
+    "record_id": "DCLR-SC-2023-009",
+    "original_sha256": "e3610481baf62dc8b4eb375a608dc614710df40fb14d2d3cbc55c38f7d2a1194",
+    "workstream": "JUDGMENT",
+    "severity": "P2",
+    "issue_type": "METADATA",
+    "claim": "Later treatment of Parashotam Dass and its own effect on Shri Kant Sharma are not recorded in the row.",
+    "original_location": "cases_53.jsonl:line 9",
+    "original_text": "NOT_EXHAUSTIVELY_CHECKED",
+    "proposed_text": null,
+    "rationale": "Treatment edge supported by the official text: Parashotam Dass para 25 ('unable to appreciate the observations in ... Shri Kant Sharma') and para 32 (does not lay down the correct law) - proposed relation 'overrules' (llm_proposed/needs human verification) from DCLR-SC-2023-009 to Shri Kant Sharma (2015) 6 SCC 773, which is not in the 53-case file. No later Supreme Court judgment treating Parashotam Dass was obtained or read; absence of found treatment is not proof of none.",
+    "source_ids": [
+      "S-JUD-002"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "No citator or official later-judgment search done for Parashotam Dass."
+    ],
+    "examination_outcome": "UNVERIFIED",
+    "pinpoint": "S-JUD-002 paras 25, 32 (PDF pp.17, 22)",
+    "temporal_scope": "Treatment search not performed beyond the judgment itself (to 2026-11-22).",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor"
+  },
+  {
+    "finding_id": "F-JUD-019",
+    "batch_id": "PILOT-01",
+    "record_id": "DCLR-SC-2013-N08",
+    "original_sha256": "d0e97edabfbbb52c0b9bc2ee7e204b9a521953a6a8032d10ba9d0a631e638268",
+    "workstream": "JUDGMENT",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "Identity and core holding of the Dharamvir Singh row are confirmed by the official JUDIS PDF; the SCC citation is confirmed only through a later official judgment.",
+    "original_location": "cases_53.jsonl:line 19",
+    "original_text": "(2013) 7 SCC 316",
+    "proposed_text": null,
+    "rationale": "Court: Supreme Court of India, Civil Appellate Jurisdiction. Parties: Dharamvir Singh v. Union of India & Ors. Case no.: Civil Appeal No. 4949 of 2013 (arising out of SLP(C) No. 6940 of 2010). Date: July 2, 2013. Bench: A.K. Patnaik and Sudhansu Jyoti Mukhopadhaya (author) JJ. Appeal from Himachal Pradesh High Court Division Bench judgment of 31 July 2009 in LPA 26/2004. The JUDIS copy prints no reporter citation; '(2013) 7 SCC 316' is printed in Rajbir Singh (official) para 4. The row's v04 holding note (presumption of health, burden on employer, unreasoned Medical Board opinion insufficient, appeal allowed) is supported at JUDIS paras 28-34; this is the Court's reasoning (counsel's submissions are paras 7-10, 12-13, 27).",
+    "source_ids": [
+      "S-JUD-003",
+      "S-JUD-004"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "Later judicial treatment searched only via targeted web discovery and the official judgments listed; absence of found treatment is not proof of none.",
+      "SCC report itself not inspected."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "S-JUD-003 cover (p.1), paras 28-34 (pp.29-36); S-JUD-004 para 4 (p.4)",
+    "temporal_scope": "Decision 2013-07-02; Entitlement Rules 1982.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "PEN-J-01",
+      "PEN-043"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-020",
+    "batch_id": "PILOT-01",
+    "record_id": "DCLR-SC-2013-N08",
+    "original_sha256": "d0e97edabfbbb52c0b9bc2ee7e204b9a521953a6a8032d10ba9d0a631e638268",
+    "workstream": "JUDGMENT",
+    "severity": "P2",
+    "issue_type": "BROKEN_REFERENCE",
+    "claim": "The row's pinpoint ('Disability entitlement analysis') is not a paragraph locator, and the v04 pinpoint 28-34 uses JUDIS numbering that differs by one from the SCC numbering quoted by later SC judgments.",
+    "original_location": "cases_53.jsonl:line 19",
+    "original_text": "Disability entitlement analysis",
+    "proposed_text": "pinpoint_paragraphs: 'JUDIS paras 28(i)-(vii), 30-34 (= SCC paras 29.1-29.7, 31-35 as quoted in later SC judgments; confirm SCC numbering on the report)'.",
+    "rationale": "JUDIS para 28(i)-(vii) is quoted in Rajbir Singh para 13 as Dharamvir paras '29.1'-'29.7', and JUDIS para 32 is quoted as para '33'. A pinpoint without its numbering scheme will misdirect users between the official PDF and reporter-based citations.",
+    "source_ids": [
+      "S-JUD-003",
+      "S-JUD-004"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "SCC numbering inferred only for paras 28/29 and 32/33 from Rajbir's quotations; paras 30-34 offset assumed, not verified."
+    ],
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "S-JUD-003 JUDIS paras 28 and 32 (PDF pp.29, 34); S-JUD-004 paras 13-14 (pp.14-16)",
+    "temporal_scope": "JUDIS copy retrieved 2026-11-22.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "PEN-J-01"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-021",
+    "batch_id": "PILOT-01",
+    "record_id": "DCLR-SC-2013-N08",
+    "original_sha256": "d0e97edabfbbb52c0b9bc2ee7e204b9a521953a6a8032d10ba9d0a631e638268",
+    "workstream": "JUDGMENT",
+    "severity": "P1",
+    "issue_type": "MISSING_AUTHORITY",
+    "claim": "Later treatment: Dharamvir followed in Rajbir Singh (2015, verified); considered in Union of India v Col. NC Isaac, 2026 INSC 993 (secondary copy only) without being overruled; the row records no specific treatment.",
+    "original_location": "cases_53.jsonl:line 19",
+    "original_text": "NOT_EXHAUSTIVELY_CHECKED",
+    "proposed_text": null,
+    "rationale": "Verified: Rajbir para 15 endorses Dharamvir as 'in tune with' the Regulations and Rules and applies it (para 16) - relation 'follows'. Unverified (secondary): Isaac sets out Dharamvir's principles (paras 15.1-15.7, background), records the AG's submission that Dharamvir cannot be mechanically applied to the 2008 Rules (paras 15, 18.3) and the respondents' submission that it still holds the field (19.4, 19.6); the Court's analysis holds the 2008 Rules substantially reproduce the 1982 scheme subject to the Rule 7 fifteen-year proviso (paras 30.7, 33-34, 39(iii)) and that AFT/HC decisions applying Dharamvir without detailed examination of evidence may be revisited (para 35). On this reading Isaac limits mechanical application but does not overrule; submissions must not be cited as the holding. Official text needed before any status change.",
+    "source_ids": [
+      "S-JUD-004",
+      "S-JUD-008"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": true,
+    "advisor_questions": [
+      "After obtaining the official 2026 INSC 993 text: type the edge Isaac->Dharamvir as 'distinguishes' (2008 Rules context) or leave as 'cites'?"
+    ],
+    "limitations": [
+      "2026 INSC 993 official PDF not obtained.",
+      "Other cited later cases (Angad Singh Titaria (2015) - Air Force; Manjeet Singh (2015); Bijender Singh (2025); Rajumon T.M. (2025)) not obtained or read."
+    ],
+    "examination_outcome": "UNVERIFIED",
+    "pinpoint": "S-JUD-004 paras 13-16; S-JUD-008 (secondary) paras 15, 18.3, 19.6, 30.7, 33-35, 39",
+    "temporal_scope": "Treatment checked to 2026-09-15 (Isaac) on discovery basis only.",
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "PEN-J-01",
+      "PEN-043",
+      "DCLR-SC-2015-N09"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-022",
+    "batch_id": "PILOT-01",
+    "record_id": "DCLR-SC-2015-N09",
+    "original_sha256": "5640759ed8df490944750c2bafa4898488856d5bdaebdcb89e9a745f22b16483",
+    "workstream": "JUDGMENT",
+    "severity": "P2",
+    "issue_type": "METADATA",
+    "claim": "The Rajbir Singh row relies on a commercial transcription (Indian Kanoon) and has no primary source URL, although official SC copies exist; its pinpoint is not a paragraph locator.",
+    "original_location": "cases_53.jsonl:line 20",
+    "original_text": "SECONDARY_TRANSCRIPTION_AND_SC_OFFICE_RECORD",
+    "proposed_text": "primary_source_url: https://api.sci.gov.in/jonew/judis/42379.pdf; original_pdf_sha256: 970b96807bcbf8a1255fe16c574b575f64fe2edee1cbb271485fa7661a62c666; pinpoint_paragraphs: '7-10 (rules), 13-16 (Dharamvir applied; para 15 statement of law)'; holding add: 'Union appeals against AFT disability-pension awards dismissed (para 17)'.",
+    "rationale": "Official JUDIS copy located and read (api.sci.gov.in/jonew/judis/42379.pdf, SHA-256 970b9680...2c666); a second official copy exists at api.sci.gov.in/jonew/bosir/orderpdf/2213461.pdf. Identity: Supreme Court of India; Union of India & Anr. v. Rajbir Singh; Civil Appeal No. 2904 of 2011 with 21 connected civil appeals listed on the cover and further SLP-derived appeals; February 13, 2015; T.S. Thakur (author) and R. Banumathi JJ. No reporter citation printed (row's empty reporter_citation is consistent; '(2015) 12 SCC 264' appears only in the secondary Isaac copy). The row's holding ('applied principles including Dharamvir Singh') is supported at paras 13-16; operative result para 17: Union's appeals dismissed, upholding AFT grants. Paras 3-4 are submissions.",
+    "source_ids": [
+      "S-JUD-004"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "S-JUD-005 copy not compared paragraph by paragraph.",
+      "Individual respondents' disease table (para 5-6) not audited."
+    ],
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "S-JUD-004 cover (p.1), paras 3-4 (pp.2-4), 13-17 (pp.14-20)",
+    "temporal_scope": "Decision 2015-02-13; Entitlement Rules 1982.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "PEN-043",
+      "DCLR-SC-2013-N08"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-023",
+    "batch_id": "PILOT-01",
+    "record_id": "DCLR-SC-2015-N09",
+    "original_sha256": "5640759ed8df490944750c2bafa4898488856d5bdaebdcb89e9a745f22b16483",
+    "workstream": "JUDGMENT",
+    "severity": "P2",
+    "issue_type": "MISSING_AUTHORITY",
+    "claim": "Later treatment of Rajbir Singh not recorded; in Col. NC Isaac (2026, secondary copy) Rajbir appears only in the background survey and in the respondents' submissions.",
+    "original_location": "cases_53.jsonl:line 20",
+    "original_text": "NOT_EXHAUSTIVELY_CHECKED",
+    "proposed_text": null,
+    "rationale": "Isaac (secondary copy) para 16.3 describes Rajbir as following Dharamvir under the 1982 Rules; para 19.4 records the respondents' submission that 'Dharamvir Singh, Rajbir, Angad Singh Titaria continue to hold the field'. No passage of the Court's analysis found on this reading addresses Rajbir specifically. Same 2008-Rules qualification as for Dharamvir applies (paras 33-35, 39). Discovery only.",
+    "source_ids": [
+      "S-JUD-008"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "Official 2026 INSC 993 text not obtained.",
+      "Later judicial treatment searched only via targeted web discovery and the official judgments listed; absence of found treatment is not proof of none."
+    ],
+    "examination_outcome": "UNVERIFIED",
+    "pinpoint": "S-JUD-008 (secondary) paras 16.3, 19.4, copy pp.60-61, 68-69",
+    "temporal_scope": "To 2026-09-15 on discovery basis.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "DCLR-SC-2013-N08",
+      "PEN-043"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-024",
+    "batch_id": "PILOT-01",
+    "record_id": "DCLR-SC-2005-L01",
+    "original_sha256": "4a71247575e936a04f8959115478b47faf7afd56896a2566715b91a3af15b229",
+    "workstream": "JUDGMENT",
+    "severity": "P2",
+    "issue_type": "METADATA",
+    "claim": "Navjot Sandhu identity (date, case numbers, bench) and full text could not be verified from an official source.",
+    "original_location": "cases_53.jsonl:line 40",
+    "original_text": "CITATION LEAD ONLY: no legal proposition authenticated.",
+    "proposed_text": null,
+    "rationale": "The official full text was not obtained (bounded JUDIS probing for 4 Aug 2005 found adjacent judgments; two ids returned empty files and are not treated as identity). The only verified identity datum is the citation '(2005) 11 SCC 600' printed in Anvar P.V. (official) fn.1, with the text of Navjot para 150 as quoted in Anvar para 20. The row's empty decision_date and case_number remain unfilled; secondary snippets (4 Aug 2005; 2005 INSC 333) are not relied on. Criminal (POTA/IPC) case, not a service case.",
+    "source_ids": [
+      "S-JUD-009",
+      "S-JUD-006"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [
+      "Obtain the official judgment (JUDIS/eSCR) before any Navjot Sandhu proposition beyond the overruled para 150 is used."
+    ],
+    "limitations": [
+      "Official text not obtained; no CAPTCHA portal used.",
+      "Only para 150 known, via Anvar quotation."
+    ],
+    "examination_outcome": "UNVERIFIED",
+    "pinpoint": "S-JUD-006 para 20 and fn.1 (PDF p.16)",
+    "temporal_scope": "Lead record; no date verified.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "DCLR-SC-2014-N12",
+      "CIV-019"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-025",
+    "batch_id": "PILOT-01",
+    "record_id": "DCLR-SC-2005-L01",
+    "original_sha256": "4a71247575e936a04f8959115478b47faf7afd56896a2566715b91a3af15b229",
+    "workstream": "JUDGMENT",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "Navjot Sandhu's electronic-record statement (para 150) was overruled in part by Anvar P.V. (2014), and Arjun Panditrao (2020) confirms that treatment.",
+    "original_location": "cases_53.jsonl:line 40",
+    "original_text": "ELECTRONIC_EVIDENCE_APPROACH_REJECTED_BY_ANVAR_2014",
+    "proposed_text": "post_decision_treatment_status: 'OVERRULED_IN_PART_BY_ANVAR_2014_PARA_22 (s.65B electronic secondary evidence only); confirmed Arjun 2020 paras 35, 72(a)'.",
+    "rationale": "Anvar para 22: 'To that extent, the statement of law on admissibility of secondary evidence pertaining to electronic record, as stated by this court in Navjot Sandhu case (supra), does not lay down the correct legal position. It requires to be overruled and we do so.' Arjun para 35 describes Navjot Sandhu as 'specifically overruled by Anvar P.V.' and overrules Tomaso Bruno for following it; para 72(a) affirms Anvar as clarified. The overruling is partial (secondary evidence of electronic records under ss.63/65 IEA) - other Navjot Sandhu propositions are untouched by these passages. The row's v09 label 'HISTORIC_ONLY_ON_CERTIFICATE_EXCEPTION' is vague; 'overruled in part (Anvar para 22) on s.65B' is more precise. Sundar (2023) cited in v09 note was not checked.",
+    "source_ids": [
+      "S-JUD-006",
+      "S-JUD-007"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "Sundar (2023) not obtained.",
+      "Navjot Sandhu's own text not read."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "S-JUD-006 paras 20-22 (PDF pp.16-17); S-JUD-007 paras 35, 72(a) (pp.42, 80)",
+    "temporal_scope": "Indian Evidence Act 1872 s.65B era; BSA 2023 s.63 from 2024-07-01 not addressed by these judgments.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "DCLR-SC-2014-N12",
+      "CIV-019"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-026",
+    "batch_id": "PILOT-01",
+    "record_id": "DCLR-SC-2014-N12",
+    "original_sha256": "ed6163fe8d19f27728baca42e3e0bd58b6d431b5cadd988443859b3a7175e6f8",
+    "workstream": "JUDGMENT",
+    "severity": "P2",
+    "issue_type": "METADATA",
+    "claim": "Anvar row has no primary source URL and relies on a commercial copy; the official JUDIS text confirms identity and holding; pinpoint is not a paragraph locator.",
+    "original_location": "cases_53.jsonl:line 23",
+    "original_text": "SECONDARY_REPORT_AND_LATER_SC_QUOTATION",
+    "proposed_text": "primary_source_url: https://api.sci.gov.in/jonew/judis/41931.pdf; original_pdf_sha256: 06f77a701073bc32f91ab4a67331cb4747f61214a6f3d2e6408196355dac449b; pinpoint_paragraphs: '13-15, 19, 22, 24'.",
+    "rationale": "Official JUDIS copy located and read (api.sci.gov.in/jonew/judis/41931.pdf, SHA-256 06f77a70...c449b). Identity: Supreme Court of India; Anvar P.V. v. P.K. Basheer and others; Civil Appeal No. 4226 of 2012; September 18, 2014; R.M. Lodha CJI, Kurian Joseph (author) and R.F. Nariman JJ. (three judges). Reporter citation '(2014) 10 SCC 473' is not printed on the JUDIS copy but is printed in Arjun Panditrao (official) para 2 and footnote 32. Holding in the row ('Section 65B as a special statutory route for computer-output admissibility') is supported at paras 13-15, 19 and 22 (secondary electronic evidence inadmissible without a s.65B(4) certificate; Navjot Sandhu overruled to that extent); para 24 adds that an electronic record used as primary evidence is admissible without s.65B compliance. Disposition para 40: appeal dismissed. Election case (civil), not a service case.",
+    "source_ids": [
+      "S-JUD-006",
+      "S-JUD-007"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "Remaining paras 25-39 (corrupt-practice facts) not audited."
+    ],
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "S-JUD-006 cover (p.1), paras 13-15, 19, 22, 24, 40 (pp.11-19, 35-36); S-JUD-007 para 2 fn (p.1-2)",
+    "temporal_scope": "Decision 2014-09-18 under Indian Evidence Act 1872 s.65B.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "DCLR-SC-2005-L01",
+      "CIV-019"
+    ]
+  },
+  {
+    "finding_id": "F-JUD-027",
+    "batch_id": "PILOT-01",
+    "record_id": "DCLR-SC-2014-N12",
+    "original_sha256": "ed6163fe8d19f27728baca42e3e0bd58b6d431b5cadd988443859b3a7175e6f8",
+    "workstream": "JUDGMENT",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "Anvar was reaffirmed with clarification by Arjun Panditrao (2020) para 72(b); for current proceedings BSA ss.61-63 apply.",
+    "original_location": "cases_53.jsonl:line 23",
+    "original_text": "Arjun (2020) para 72(b) reaffirms Anvar (2014), with clarification on original device evidence.",
+    "proposed_text": null,
+    "rationale": "Arjun para 72(a): 'Anvar P.V. (supra), as clarified by us hereinabove, is the law declared by this Court on Section 65B'; Tomaso Bruno and Shafhi Mohammad overruled. Para 72(b): certificate unnecessary if the original document itself is produced (owner proving the device); where the computer is part of a system/network that cannot be brought to court, s.65B(1) with a s.65B(4) certificate is the only route; Anvar para 24's words 'under Section 62 of the Evidence Act' are to be read out. The row's treatment status and scope caveat (BSA ss.61-63 for current proceedings) are consistent with BSA ss.61-63 as enacted.",
+    "source_ids": [
+      "S-JUD-007",
+      "S-JUD-006",
+      "S-JUD-010"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "Concurring opinion in Arjun not reviewed.",
+      "No post-2020 SC treatment of Anvar/Arjun or BSA s.63 case law checked.",
+      "Later judicial treatment searched only via targeted web discovery and the official judgments listed; absence of found treatment is not proof of none."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "S-JUD-007 para 72(a)-(b) (PDF pp.80-82); S-JUD-006 para 24 (p.19); S-JUD-010 ss.61-63 [[pages 29-31]]",
+    "temporal_scope": "Arjun decided 2020-07-14; BSA from 2024-07-01; post-BSA case law not checked.",
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "judgment-auditor",
+    "related_record_ids": [
+      "DCLR-SC-2005-L01",
+      "CIV-019"
+    ]
+  }
+]

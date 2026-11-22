@@ -1,0 +1,264 @@
+[
+ {
+  "review_id": "R-B-001",
+  "finding_id": "F-JUD-005",
+  "reviewer_id": "independent-reviewer-B",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Upheld on the official text. I downloaded 2026 INSC 993 from api.sci.gov.in (S-REVB-001, sha256 3f49a314...4653, 93 pp.); it is byte-identical to the LiveLaw copy the first pass used (S-JUD-008), so the first pass's paragraph and page pinpoints (30.7 pp.86-87; 33-35 pp.90-91; 39 pp.92-93) are correct for the official copy and the 'secondary only' limitation no longer applies. Holding vs submission: 30.7, 33, 34, 35 are in Part V 'Analysis' and 39 in Part VI 'Conclusion' - the Court's own reasoning, not counsel's. Identity: Narasimha and Aradhe JJ., 15-09-2026, Union's appeals DISMISSED on delay and merits (39(i), 40). PEN-043's 'earlier regime vs 2023 claims' framing omits the ER 2008 tier that Isaac addresses; P1 (missing controlling SC authority on the doctrine) is calibrated correctly. Additions the first pass should carry: (a) paras 20-28 question whether ER 2008 have binding legal force at all (para 34 'assuming they otherwise have legal effect'; para 28 calls for authoritative notification) - material, not only a passing caveat; (b) Isaac's outcome favoured the ex-servicemen, so it must not be summarised as cutting back claimant protection beyond the Rule 7 proviso (>15 years) and Medical Board due-weight direction (39(ii)-(iii)); (c) Isaac does not mention Entitlement Rules 2023 (text search), so PEN-043's '2023 claims' warning is neither confirmed nor displaced by it; (d) Isaac paras 16-16.1 (pp.59-60) quote Narsingh Yadav (2019) 9 SCC 667 paras 15, 18 - consistent with PEN-043's N S Yadav sentence (identity of 'N S Yadav' not confirmed by me). Outcome can now move from UNVERIFIED to DISCREPANCY/SOURCE_VERIFIED for the Isaac propositions; ER 2008/2023 texts still not held. Shared-source/model correlation: my judgment and statute bytes are identical (same SHA-256) to the first pass's, and both passes are the same model family; agreement is therefore weak corroboration. Research only; not legal approval.",
+  "source_ids": [
+   "S-JUD-008",
+   "S-REVB-001"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "aacfa91ed6b956d05b9afe1861526c79b13446626fd4bb0d696d0fb28221fd1e",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVB-001"
+  ]
+ },
+ {
+  "review_id": "R-B-002",
+  "finding_id": "F-JUD-007",
+  "reviewer_id": "independent-reviewer-B",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Upheld, with one addition. Official Isaac PDF (S-REVB-001) confirms the first pass's critical distinction: para 18.3 ('Dharamvir ... cannot be mechanically applied to cases governed by the Entitlement Rules 2008') sits in Part IV.A 'Arguments advanced by Ld. Attorney General' (p.66), and 19.6 ('Dharamvir ... still holds the correct position') in Part IV.B respondents' submissions (p.70). The Court in 39(ii) expressly adopts only the AG's Medical Board submission (18.4), not 18.3. The analysis (30.7, 34) treats ER 2008 as substantially reproducing the 1982 scheme subject to the Rule 7 proviso (33, 39(iii)); para 35 says decisions that followed Dharamvir 'without a detailed examination of the evidence' present 'a case for revisiting', leaving it to the Union to identify them. Nothing in the text overrules Dharamvir (no 'overrule', 'per incuriam' or larger-bench reference found; Isaac is a two-Judge bench, as was Dharamvir - legal inference only). Rajbir->Dharamvir 'follows' re-verified on JUDIS (S-REVB-002 para 15 p.17, para 16 pp.19-20) and independently corroborated by Isaac's own narrative para 16.3 (p.60). Correction to proposed_text: add Isaac's 'assuming they otherwise have legal effect' (para 34) and that para 35 is confined to decisions made without detailed examination of evidence; drop '[official text pending]'. Severity P1 retained; outcome can be upgraded to DISCREPANCY with SOURCE_VERIFIED. N S Yadav official text not obtained by me. Shared-source/model correlation: my judgment and statute bytes are identical (same SHA-256) to the first pass's, and both passes are the same model family; agreement is therefore weak corroboration. Research only; not legal approval.",
+  "source_ids": [
+   "S-JUD-004",
+   "S-JUD-008",
+   "S-REVB-001",
+   "S-REVB-002"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "6ed839aa7101abe8c6446b32f3b4d6fa979eec9f34a54e4cfbf82d3da1aeb5f7",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVB-001",
+   "S-REVB-002"
+  ]
+ },
+ {
+  "review_id": "R-B-003",
+  "finding_id": "F-JUD-017",
+  "reviewer_id": "independent-reviewer-B",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Upheld on the official PDF (S-REVB-004, same bytes as S-JUD-002). Identity confirmed (C.A. 447/2023 etc.; 21-03-2023; Kaul, Oka, Nagarathna JJ.; Reportable). The row's pinpoint '11-16' falls in 'Submissions on behalf of the private parties' (paras 4-15) and the start of 'The pleas of Union of India and JAG Branch' (16-23): a real misattribution risk on forum/remedy. Para 32 (Conclusion, p.22) states Shri Kant Sharma 'does not lay down the correct law' and 'there is no per se restriction' on Art 226; paras 25-26 distinguish self-restraint from an embargo and Art 227 superintendence from Art 226 review; paras 28-30 reject a second-appeal characterisation and refuse carve-outs. Refinements: (a) 'paras 4-23 are submissions' is slightly over-broad - paras 18-19 (p.14) contain the Court's own remarks that the ss.30-31 appeal is restrictive; (b) para 33 does not remand everything: category II (Union v Parashotam Dass itself) is sent to a two-Judge Bench on merits, cat. I and III remanded to High Courts, cat. IV W.P.(C) 76/2016 disposed with liberty; paras 34-35 close. The row's own v04_verified_pinpoint '26-32' and v04_verified_holding_note already carry the correct ratio, which mitigates but does not cure the misleading main fields. P1 retained. Whether to type the edge 'overrules' needs Shri Kant Sharma's bench strength (not obtained) and advisor decision; later treatment not searched. Shared-source/model correlation: my judgment and statute bytes are identical (same SHA-256) to the first pass's, and both passes are the same model family; agreement is therefore weak corroboration. Research only; not legal approval.",
+  "source_ids": [
+   "S-JUD-002",
+   "S-REVB-004"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "e3610481baf62dc8b4eb375a608dc614710df40fb14d2d3cbc55c38f7d2a1194",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVB-004"
+  ]
+ },
+ {
+  "review_id": "R-B-004",
+  "finding_id": "F-JUD-021",
+  "reviewer_id": "independent-reviewer-B",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Upheld; status can be upgraded. With the official Isaac PDF (S-REVB-001), the first pass's reading holds: paras 15.1-15.7 (pp.52-59) are the Court's account of Dharamvir in Part III; para 15 opens with the AG's submission; 18.3 (AG) and 19.4/19.6 (respondents) are in Part IV 'Party Submissions'; the analysis (30.7, 33-35) and conclusion (39) do not overrule Dharamvir but (i) treat ER 2008 as substantially reproducing the 1982 scheme, (ii) apply the Rule 7 proviso shifting onus for claims after 15 years, (iii) direct due weight to Medical Board opinions, and (iv) say mechanical, evidence-free applications of Dharamvir by AFT/HCs may be revisited. Dharamvir identity and JUDIS numbering re-verified (S-REVB-003; para 28 = reported 29). Rajbir 'follows' re-verified (S-REVB-002 para 15). Adversarial point on the proposed edge: 'distinguishes' may overstate - Isaac's core finding (30.7, 31.1, 34) is that ER 2008 did not dismantle the claimant-protective structure, which tends to support continued application of Dharamvir's principles; the limitation is proposition-level (Rule 7 >15-year claims; Medical Board scrutiny). Suggested relation: 'cites' plus a proposition-level 'limits' note, not 'distinguishes' or 'overrules' - for the advisor. P1 retained. Angad Singh Titaria, Manjeet Singh, Bijender Singh, Rajumon not read by me. Shared-source/model correlation: my judgment and statute bytes are identical (same SHA-256) to the first pass's, and both passes are the same model family; agreement is therefore weak corroboration. Research only; not legal approval.",
+  "source_ids": [
+   "S-JUD-004",
+   "S-JUD-008",
+   "S-REVB-001",
+   "S-REVB-002",
+   "S-REVB-003"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "d0e97edabfbbb52c0b9bc2ee7e204b9a521953a6a8032d10ba9d0a631e638268",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVB-001",
+   "S-REVB-002",
+   "S-REVB-003"
+  ]
+ },
+ {
+  "review_id": "R-B-005",
+  "finding_id": "F-XVOL-001",
+  "reviewer_id": "independent-reviewer-B",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "DISPUTES",
+  "decision_date": "2026-11-22",
+  "rationale": "The underlying r.23(3) conflict is real (S-REVB-007: compilation prints 'You are obliged to say anything unless you wish to do so'; fixed position - not resolved). But the finding's application to EV-016 is over-flagged. EV-016 never quotes or paraphrases the disputed sentence. Its 'may ... make a voluntary statement after appropriate caution' is supported by parts of r.23(3) that are not in dispute in either version: the accused 'will be asked; \"Do you wish to make any statement?\"' and 'Any statement thereupon made ... shall be taken down and read over to him, but he will not be cross-examined upon it' (S-REVB-007, PDF p.41); read-over/signature and English/interpretation are r.23(3) first sentence and r.23(4) (S-REVB-006). So EV-016 does not imply either reading of the negation and is not itself CONFLICTING. The residual risk is real but narrower: its url points to a compilation-type copy, and a user following 'caution accused' may read out the compilation wording. I could not fetch that exact URL either (S-REVB-013: connection reset / HTTP 504). Recommended re-classification: P2 DISCREPANCY/PROCEDURAL_GAP ('missing disputed-wording cross-reference on a caution-neutral record'), keep the proposed flag text, keep legal review because the topic is a pre-trial safeguard. Severity P0 -> P2. Art 20(3) and SoE voluntariness case law not checked. Shared-source/model correlation: my judgment and statute bytes are identical (same SHA-256) to the first pass's, and both passes are the same model family; agreement is therefore weak corroboration. Research only; not legal approval.",
+  "source_ids": [
+   "S-XVOL-002",
+   "S-REVB-006",
+   "S-REVB-007",
+   "S-REVB-013"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "b2fe32d5eaee939764ab5011c9f0cc794197f64113f1ad90376c061547a4e293",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVB-006",
+   "S-REVB-007",
+   "S-REVB-013"
+  ]
+ },
+ {
+  "review_id": "R-B-006",
+  "finding_id": "F-XVOL-002",
+  "reviewer_id": "independent-reviewer-B",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "DISPUTES",
+  "decision_date": "2026-11-22",
+  "rationale": "Partly disputed. Detection (records describing the caution differently) is useful, but two premises fail. (1) Logic: EV-016's silence on the caution wording and HCE-010's assertion are not mutually inconsistent; a record that omits a disputed word cannot contradict one that states it. (2) HCE-010's 'invited to make a statement but is not obliged to do so' is substantially supported by undisputed r.23(3) text - the invitation is framed as a question ('Do you wish to make any statement?') and any statement is conditional ('Any statement thereupon made') (S-REVB-007, p.41). What HCE-010 cannot rely on is a verbatim caution, and HCE-010 itself warns to 'Use the current authenticated caution'. The dispute is therefore about the words to be read out, not the existence of a right to decline; whether the compilation sentence, if authentic, alters that is the unresolved point and must stay CONFLICTING at HCE-010's level (already covered by F-STAT-001/F-BLIND-001). Anchoring a P0 CONFLICTING finding on EV-016 double-counts that issue on a record that does not engage it. Recommend: keep the harmonisation proposal (uniform disputed-wording flag on HCE-010, V9-SC-19, V9-CL-04, V9-WF-05, KB-006, EV-016) as a P2 cross-volume consistency item; P0 -> P2 for EV-016. MML texts not re-read by me. Shared-source/model correlation: my judgment and statute bytes are identical (same SHA-256) to the first pass's, and both passes are the same model family; agreement is therefore weak corroboration. Research only; not legal approval.",
+  "source_ids": [
+   "S-XVOL-002",
+   "S-REVB-006",
+   "S-REVB-007"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "b2fe32d5eaee939764ab5011c9f0cc794197f64113f1ad90376c061547a4e293",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVB-006",
+   "S-REVB-007"
+  ]
+ },
+ {
+  "review_id": "R-B-007",
+  "finding_id": "F-XVOL-006",
+  "reviewer_id": "independent-reviewer-B",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Upheld; I would strengthen it. Re-verified on my own download (S-REVB-008): s.1(2) applies the BSA to 'all judicial proceedings in or before any Court, including Courts-martial' (p.10); commencement 1-7-2024 per footnote; s.170(2) preserves the 1872 Act for any 'application, trial, inquiry, investigation, proceeding or appeal pending' immediately before commencement (p.51). Adversarial test of the 'mere omission' characterisation: CIV-034's Assessment step 'Find trial date and applicable law' points users to the trial date, but s.170(2) keys on pendency of any listed proceeding, including an investigation or inquiry; a trial starting after 1-7-2024 on a matter whose investigation was pending before that date may fall under the savings clause (how 'pending' attaches to court-martial stages is an open legal question - the first pass's advisor question is right). The record's heuristic can therefore yield a wrong answer, which supports P1 rather than P2. Minor correction to proposed_text: commencement is under s.1(3) with S.O. 849(E), not s.1(2). No judgment on s.170(2) checked; S.O. 849(E) not retrieved. Shared-source/model correlation: my judgment and statute bytes are identical (same SHA-256) to the first pass's, and both passes are the same model family; agreement is therefore weak corroboration. Research only; not legal approval.",
+  "source_ids": [
+   "S-XVOL-004",
+   "S-XVOL-005",
+   "S-REVB-008"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "9efda464a4e1e926a2088b401e690c500442415a81536f8343aed8dce3c6f1b5",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVB-008"
+  ]
+ },
+ {
+  "review_id": "R-B-008",
+  "finding_id": "F-XVOL-007",
+  "reviewer_id": "independent-reviewer-B",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "DISPUTES",
+  "decision_date": "2026-11-22",
+  "rationale": "Texts re-verified (S-REVB-009 Army Act s.133 still names the Indian Evidence Act 1872, p.37; S-REVB-008 BSA s.1(2), s.170(1)). I dispute the CONFLICTING_SOURCES classification and P1 severity. These are not conflicting texts of the same provision; they are two enactments whose interaction the first pass expressly did not check. I retrieved General Clauses Act 1897 s.8(1) from India Code (S-REVB-011): where a Central Act 'repeals and re-enacts, with or without modification, any provision of a former enactment', references in any other enactment 'shall, unless a different intention appears, be construed as references to the provision so re-enacted'. BSA s.170(1) repeals the 1872 Act and the BSA re-enacts its scheme; BSA s.1(2) independently names courts-martial. On the face of the texts the provisions are therefore capable of being read harmoniously (s.133 -> BSA from 1-7-2024, subject to s.170(2) savings). Whether s.8 applies to a whole-Act reference, and whether 'subject to the provisions of this Act' matters, are legal questions I do not resolve. CIV-034 itself states nothing wrong (s.1(2) statement accurate). Recommended: P2 DISCREPANCY/MISSING_AUTHORITY (CIV-034 should cross-refer to s.133 and GCA s.8 with a legal-review flag), not P1 CONFLICTING. No judgment on s.133 after the BSA checked. Shared-source/model correlation: my judgment and statute bytes are identical (same SHA-256) to the first pass's, and both passes are the same model family; agreement is therefore weak corroboration. Research only; not legal approval.",
+  "source_ids": [
+   "S-XVOL-004",
+   "S-XVOL-005",
+   "S-XVOL-006",
+   "S-REVB-008",
+   "S-REVB-009",
+   "S-REVB-011"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "9efda464a4e1e926a2088b401e690c500442415a81536f8343aed8dce3c6f1b5",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVB-008",
+   "S-REVB-009",
+   "S-REVB-011"
+  ]
+ },
+ {
+  "review_id": "R-B-009",
+  "finding_id": "F-XVOL-009",
+  "reviewer_id": "independent-reviewer-B",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Textual premise upheld; severity disputed. My copy (S-REVB-010, p.6) confirms s.3(o) includes '(iii) summary disposal and trials where the punishment of dismissal is awarded' and excludes '(iv) summary court-martial except where the punishment is of dismissal or imprisonment for more than three months'; s.15(1)-(2) covers 'any order, decision, finding or sentence passed by a court-martial' (p.9). So for AFT-004's own example a s.14 route is textually arguable alongside s.15, and the risk line 'Do not force a trial appeal into a generic service-law cause of action' could mislead. Against P1: AFT-004 does not misstate either section, and its example expressly directs 'a distinct jurisdiction analysis under ss3(o),14 and 15' for exactly the SCM-dismissal case, so the inclusion limb is cross-referenced, if not spelled out. s.3(p) defines 'summary disposals and trials' only as those held under the three Acts, leaving the reach of 'trials' in (iii) interpretive. The judgment-auditor rated the same point P2 (F-JUD-013). Recommend P1 -> P2 (omission/ambiguous cross-reference), legal review retained because forum choice is a formal remedy. No AFT/HC/SC decision on the s.14/s.15 interface obtained (aftdelhi unreachable). Shared-source/model correlation: my judgment and statute bytes are identical (same SHA-256) to the first pass's, and both passes are the same model family; agreement is therefore weak corroboration. Research only; not legal approval.",
+  "source_ids": [
+   "S-XVOL-007",
+   "S-XVOL-008",
+   "S-XVOL-009",
+   "S-REVB-010"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "9034d57d9b6f05a90bd6403bc44be0b650bc9b3f6583e2e2d23d7b5382242684",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVB-010"
+  ]
+ },
+ {
+  "review_id": "R-B-010",
+  "finding_id": "F-XVOL-010",
+  "reviewer_id": "independent-reviewer-B",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Upheld as UNVERIFIED. Re-read on my copy (S-REVB-010): s.3(f) defines court-martial as one 'held under the Army Act, 1950' with no SCM carve-out (p.5); the s.3(o)(iv) SCM exclusion is confined to the 'service matters' definition (p.6); s.15(1)-(2) contains no express SCM exclusion (p.9). These textual statements are accurate and correctly limited. The decisive authority (Nk Santosh Lohar, P&H HC, 2023:PHHC:127834) is not on a reachable official host from this container, so I could not retrieve it either; the first pass rightly refused to verify it and rightly noted that absence of a flat-exclusion record is not proof. I tried to disprove the consistency claim by re-reading AFT-004: its example and risk lines do not assert 'no AFT remedy against SCM', consistent with the finding. Severity P1 is acceptable for an unverified forum proposition with court-martial consequences, though the finding identifies no record error; I would accept P2 if the advisor treats it as a verification gap only. No SC authority on SCM appeals searched. Shared-source/model correlation: my judgment and statute bytes are identical (same SHA-256) to the first pass's, and both passes are the same model family; agreement is therefore weak corroboration. Research only; not legal approval.",
+  "source_ids": [
+   "S-XVOL-007",
+   "S-XVOL-009",
+   "S-REVB-010"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "9034d57d9b6f05a90bd6403bc44be0b650bc9b3f6583e2e2d23d7b5382242684",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVB-010"
+  ]
+ },
+ {
+  "review_id": "R-B-011",
+  "finding_id": "F-PROC-021",
+  "reviewer_id": "independent-reviewer-B",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "SUPPORTS",
+  "decision_date": "2026-11-22",
+  "rationale": "Upheld at P2; control record not materially over-flagged, but outcome wording should be modest. My copy (S-REVB-006) confirms: r.23(3) read-over and signature/attestation 'as a token of the correctness of the evidence recorded' (p.41) - 'corrections' has no textual basis, as stated; r.23(2) cross-examination Q&A added to record; r.23(4) English recording with interpretation; r.23(5) written statement on the officer's written certificate (pp.41-42); NOTE 2 'Summary of evidence cannot be taken on oath or affirmation' (p.42, editorial); r.179(4) court may question witnesses (p.196), r.180 rights of affected persons (pp.196-197), r.181 oath when assembled on POW/s.106 absence/as directed, r.182 inadmissibility (p.197). Pinpoints [[page 41]]-[[page 42]] and [[page 196]]-[[page 198]] are accurate. Adversarial test: V9-CL-02 contains no false statement, so DISCREPANCY rests on missing authority/scope (empty sources, no proceeding named) and omitted mandatory conditions - that fits P2 'omission ... incomplete metadata affecting retrieval', not higher. The finding correctly avoided the r.23(3) caution dispute. Court-martial witness procedure not mapped (as the first pass noted). Shared-source/model correlation: my judgment and statute bytes are identical (same SHA-256) to the first pass's, and both passes are the same model family; agreement is therefore weak corroboration. Research only; not legal approval.",
+  "source_ids": [
+   "S-PROC-006",
+   "S-PROC-008",
+   "S-REVB-006"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "a45c7b3f02299dd9d34a0f230fae3a2c5979a01acd50e9bbb29aeef6786c3147",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVB-006"
+  ]
+ },
+ {
+  "review_id": "R-B-012",
+  "finding_id": "F-JUD-014",
+  "reviewer_id": "independent-reviewer-B",
+  "reviewer_role": "INDEPENDENT_AGENT",
+  "decision": "DISPUTES",
+  "decision_date": "2026-11-22",
+  "rationale": "Facts upheld, classification disputed (control-record false positive). All four examples are verified on my own copies: Virendra Kumar PDF holds a 'CORRECTED' version (para 16 no imprisonment; para 17 appeal allowed, p.21) and an uncorrected version (para 16 'appeal allowed', p.42), marked Non-Reportable (S-REVB-005); Dharamvir JUDIS para 28(i)-(vii) is quoted in Rajbir as 29.1-29.7 (S-REVB-003 pp.29-31; S-REVB-002 pp.14-15); Parashotam Dass paras 11-16 are submissions (S-REVB-004). But COI-039 is a methodology note, not a legal proposition, and nothing in it is wrong: it already requires 'holdings', 'relevant paragraph numbers', 'later treatment', paragraph-level linking and negative treatment. The proposed extra fields are a sound schema enhancement, not a discrepancy between record and source. Labelling it DISCREPANCY inflates error counts for a control. Recommend NO_ISSUE_FOUND (P3) with the enhancement carried as a proposal, or issue_type METADATA as an improvement note. Separately, the first pass missed what the blind pass found: COI-039's [SRC-VIR]/[SRC-JETHI] are unresolved placeholders and its 'JAG approved' status label needs an attributable approval artifact (F-BLIND-015). Shared-source/model correlation: my judgment and statute bytes are identical (same SHA-256) to the first pass's, and both passes are the same model family; agreement is therefore weak corroboration. Research only; not legal approval.",
+  "source_ids": [
+   "S-JUD-001",
+   "S-JUD-002",
+   "S-JUD-003",
+   "S-JUD-004",
+   "S-REVB-002",
+   "S-REVB-003",
+   "S-REVB-004",
+   "S-REVB-005"
+  ],
+  "approval_artifact": null,
+  "reviewed_original_sha256": "d2cea86e4034a98026b4af4aed543055203a50124a32d8d017384d1acb7133de",
+  "blind": false,
+  "independent_source_ids": [
+   "S-REVB-002",
+   "S-REVB-003",
+   "S-REVB-004",
+   "S-REVB-005"
+  ]
+ }
+]

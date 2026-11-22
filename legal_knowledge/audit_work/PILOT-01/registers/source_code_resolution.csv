@@ -1,0 +1,79 @@
+code,n_records,records_sample,locators_sample,proposed_identity,basis,confidence,corpus_target_or_gap,status
+AA,19,HCE-001;HCE-002;HCE-005;HCE-006;HCE-013,"s 120(2) || ss 2, 79-88, 120-122 || ss 34-70, 79 || ss 80, 120 || s 135",Army Act 1950,locators ss 2-193,HIGH,act-army-1950,PROPOSED_NOT_CONFIRMED
+AR,27,HCE-001;HCE-002;HCE-003;HCE-004;HCE-005,"r 22(2) || rr 22-24, 26, 33-36 || r 22(1)-(3) || r 22(1) proviso, r 180 || r 22(3)(a)-(d) and provisos",Army Rules 1954,"locators r 22-36, 180",HIGH,rules-army-rules-1954,PROPOSED_NOT_CONFIRMED
+AR_ALT,1,HCE-010,rule 23 transcription cross-check,Alternative Army Rules transcription (MML?),"""rule 23 transcription cross-check""",LOW,UNRESOLVED,PROPOSED_NOT_CONFIRMED
+SC_GILL,1,HCE-032,paras 11-18,Union of India v P S Gill (SC 2019),name,MEDIUM,HF judgment_originals/sci/2019,PROPOSED_NOT_CONFIRMED
+SC_PPS,2,HCE-003;HCE-032,discussion of rr 22-25 || military pretrial safeguards discussion,Lt Col Prithi Pal Singh Bedi v Union of India (SC 1982),PPS initials + rr 22-25 discussion,MEDIUM,DCLR-SC-1982-001,PROPOSED_NOT_CONFIRMED
+SC_VK,5,HCE-003;HCE-004;HCE-008;HCE-029;HCE-032,paras 9-13 || para 10,Union of India v Ex Sep Virendra Kumar (SC 2020) [third code],paras 9-13,MEDIUM,DCLR-SC-2020-002,PROPOSED_NOT_CONFIRMED
+SRC-AA,19,COI-001;COI-005;COI-018;COI-027;COI-030,s 106 || ss 2–3 || s 191; legal foundation || ss 79–82 || ss 80–82,Army Act 1950,"locators ss 2-3, 79-82, 106, 191",HIGH,act-army-1950,PROPOSED_NOT_CONFIRMED
+SRC-AFT,7,KB-017;KB-022;KB-023;KB-024;KB-025,"ss 30–32 || ss 14–15,21–22 || ss 3(o),14–15 || s 21(1)–(2) || s 22(1)–(2)",Armed Forces Tribunal Act 2007,"locators ss 3(o),14-15,21-22,30-32",HIGH,act-armed-forces-tribunal-2007,PROPOSED_NOT_CONFIRMED
+SRC-AR,49,COI-001;COI-003;COI-004;COI-005;COI-007,"r 180 || r 22(3) || r 179(1) || r 182 || rr 181, 183",Army Rules 1954,"locators rr 22, 177-183",HIGH,rules-army-rules-1954,PROPOSED_NOT_CONFIRMED
+SRC-AR184,1,COI-026,rr 184(1)-(2),Army Rules 1954 r.184,locator,HIGH,rules-army-rules-1954,PROPOSED_NOT_CONFIRMED
+SRC-AR185,4,COI-006;COI-008;COI-031;COI-040,r 185 || r 185(1)-(2),Army Rules 1954 r.185,locator,HIGH,rules-army-rules-1954,PROPOSED_NOT_CONFIRMED
+SRC-AR186,2,COI-006;COI-031,r 186,Army Rules 1954 r.186,locator,HIGH,rules-army-rules-1954,PROPOSED_NOT_CONFIRMED
+SRC-ISO,2,KB-001;KB-021,ss 2–3 || ss 2–5,"Inter-Services Organisations (Command, Control and Discipline) Act 2023",name,HIGH,GAP: not in corpus,PROPOSED_NOT_CONFIRMED
+SRC-ISOR,1,KB-021,rr 1–2,"ISO (Command, Control and Discipline) Rules 2025",name,HIGH,GAP: not in corpus,PROPOSED_NOT_CONFIRMED
+SRC-JETHI,5,COI-009;COI-019;COI-022;COI-024;COI-036,paras 51-54 || para 53,Union of India v Sanjay Jethi (SC 2013),name,HIGH,check 53,PROPOSED_NOT_CONFIRMED
+SRC-PARASH,2,KB-025;KB-028,"paras 18,24–30 || paras 24–30",Union of India v Parashotam Dass (SC 2023),name,HIGH,DCLR-SC-2023-009,PROPOSED_NOT_CONFIRMED
+SRC-RANJIT,2,KB-016;KB-027,judgment discussion of s 130 and bias || holding and discussion of s 130 / bias,Ranjit Thakur v Union of India (SC 1987),name + s 130/bias,HIGH,DCLR-SC-1987-R01,PROPOSED_NOT_CONFIRMED
+SRC-SANDEEP,3,COI-024;COI-028;COI-038,paras 94-97 || paras 94-97 and judgment conclusion,Col Sandeep Sharma v Union of India (Delhi HC 2024),name,HIGH,corpus match not tested,PROPOSED_NOT_CONFIRMED
+SRC-VIR,7,COI-003;COI-021;COI-024;COI-034;COI-035,paras 10-15 || para 10 || paras 10-13 || paras 11-13 || para 11,Union of India v Ex Sep Virendra Kumar (SC 2020) [duplicate code of SRC-VIRENDRA],"name pattern, paras 10-15",MEDIUM,DCLR-SC-2020-002,PROPOSED_NOT_CONFIRMED
+SRC-VIRENDRA,4,KB-005;KB-011;KB-012;KB-026,"paras 5–7, 12–13 || paras 11–13 || paras 6, 12 || paras 12–16",Union of India v Ex Sep Virendra Kumar (SC 2020),name,HIGH,DCLR-SC-2020-002,PROPOSED_NOT_CONFIRMED
+V6-S01,25,PEN-001;PEN-004;PEN-005;PEN-006;PEN-007,"reg 44 || regs 58-61 || regs 62-80,105-123 || Preface paras 2-6 || Preface",Pension Regulations for the Army (Part I?),"locators regs 44-123, Preface",MEDIUM,GAP: not in corpus,PROPOSED_NOT_CONFIRMED
+V6-S02,9,PEN-001;PEN-003;PEN-006;PEN-009;PEN-012,"Preface || regs 6-10 || regs 3-8 || Chapter III || regs 2,6-9,30-31",Pension Regulations for the Army 2008 (Part II?),locators,LOW,GAP: not in corpus,PROPOSED_NOT_CONFIRMED
+V6-S03,2,PEN-002;PEN-049,Portal || source portal,unknown,no rule,NONE,UNRESOLVED,UNRESOLVED
+V6-S04,3,PEN-013;PEN-014;PEN-019,MoD letter dated 21 Sep 2023 || Entitlement Rule 2023 original check || 2023 categories (text verify),MoD letter 21 Sep 2023 / Entitlement Rules 2023,locator,MEDIUM,GAP: not in corpus,PROPOSED_NOT_CONFIRMED
+V6-S05,9,PEN-001;PEN-003;PEN-010;PEN-013;PEN-016,Q1-3 || Q4-11 || Q4-8 || Q7-12 || Q9-11,DESW FAQ (Q1-12),locator,MEDIUM,"GAP: executive guidance, not law",PROPOSED_NOT_CONFIRMED
+V6-S06,9,PEN-001;PEN-013;PEN-016;PEN-017;PEN-019,paras 27-29 || para 27 || paras 29-30 || paras 29-34 || paras 41-49,PIB/DESW clarification (paras 27-49)?,locator,LOW,UNRESOLVED,PROPOSED_NOT_CONFIRMED
+V6-S07,11,PEN-014;PEN-015;PEN-018;PEN-019;PEN-020,Chapter I paras 2-9 || Chapter II para 2 || Chapter I paras 3-8 || injury evidence paras || Chapter I paras 9-10,Guide to Medical Officers (Military Pensions) 2008/2023?,Chapter/para locators,LOW,GAP: not in corpus,PROPOSED_NOT_CONFIRMED
+V6-S08,7,PEN-005;PEN-008;PEN-024;PEN-025;PEN-027,Kinds of Pension || Service Pension || Invalid Pension || War Injury Pension || historic appeals,unknown,no rule,NONE,UNRESOLVED,UNRESOLVED
+V6-S09,7,PEN-002;PEN-030;PEN-035;PEN-040;PEN-041,Index || later family-pension circulars || circulars 2024/2025 || CAA enhancement 30 April 2025 || policy register as needed,unknown,no rule,NONE,UNRESOLVED,UNRESOLVED
+V6-S10,2,PEN-035;PEN-WF-07,"paras 1-3, corrected tables || paras 1-3",unknown,no rule,NONE,UNRESOLVED,UNRESOLVED
+V6-S11,3,PEN-022;PEN-023;PEN-WF-08,broad-banding circular || 27 Dec 2023 || letter,unknown,no rule,NONE,UNRESOLVED,UNRESOLVED
+V6-S12,10,PEN-012;PEN-033;PEN-036;PEN-037;PEN-038,"Account/Document navigation || Death reporting, Initiate Family Pension || Commutation query || My Documents/PPO/Entitlements/Pension Slip || Annual Identification FAQs",unknown,no rule,NONE,UNRESOLVED,UNRESOLVED
+V6-S13,1,PEN-037,SPARSH services,unknown,no rule,NONE,UNRESOLVED,UNRESOLVED
+V6-S14,1,PEN-043,2013,Dharamvir Singh v Union of India (SC 2013),"with PEN-043 ""2013""",MEDIUM,DCLR-SC-2013-N08,PROPOSED_NOT_CONFIRMED
+V6-S15,1,PEN-043,2015 case citation verify,Union of India v Rajbir Singh (SC 2015),"""2015 case citation verify""",MEDIUM,DCLR-SC-2015-N09,PROPOSED_NOT_CONFIRMED
+V6-S16,2,PEN-021;PEN-043,paras 15-19 || 2019 paras 15-19,Ex Cfn N S Yadav v Union of India (SC 2019)?,"""2019 paras 15-19""",LOW,check 53,PROPOSED_NOT_CONFIRMED
+V6-S17,3,PEN-023;PEN-044;PEN-WF-08,Ram Avtar || 2014 Ram Avtar || 2014,Union of India v Ram Avtar (SC 2014),locator names case,HIGH,check 53,PROPOSED_NOT_CONFIRMED
+V6-S18,5,PEN-023;PEN-044;PEN-045;PEN-048;PEN-WF-08,paras 12-13 || 2026 Feb paras 12-14 || paras 12-23 || paras 19-23 || 2026 Feb,Union of India v Sgt Girish Kumar 2026 INSC 149 (Feb 2026),"locator ""2026 Feb""",MEDIUM,DCLR-SC-2026-007,PROPOSED_NOT_CONFIRMED
+V6-S19,4,PEN-045;PEN-048;PEN-049;PEN-WF-08,paras 6-9 || paras 7-9 || later treatment || 2026 Oct,Union of India v Sgt Girish Kumar 2026 INSC 1113 (Oct 2026),"locator ""2026 Oct""",MEDIUM,DCLR-SC-2026-008,PROPOSED_NOT_CONFIRMED
+V6-S20,6,PEN-002;PEN-004;PEN-007;PEN-011;PEN-046,"paras 39-43 || paras 4,39-43 || paras 4, 38-43",unknown,no rule,NONE,UNRESOLVED,UNRESOLVED
+V6-S21,4,PEN-003;PEN-047;PEN-048;PEN-WF-09,"ss 21-22 || ss 14,21,22 || s22",Armed Forces Tribunal Act 2007,"locators ss 14,21,22",HIGH,act-armed-forces-tribunal-2007,PROPOSED_NOT_CONFIRMED
+V6-S22,1,PEN-039,DESW escalation,unknown,no rule,NONE,UNRESOLVED,UNRESOLVED
+V7-S01,55,AFT-001;AFT-002;AFT-003;AFT-004;AFT-005,s 23 || ss 30-32 || s26 || s29 || ss29-32,Armed Forces Tribunal Act 2007,locators ss 14-32,HIGH,act-armed-forces-tribunal-2007,PROPOSED_NOT_CONFIRMED
+V7-S02,33,AFT-002;AFT-004;AFT-006;AFT-007;AFT-008,"Rule 9 || Rule 8(9) || Rules 9,12 || Rule6 || Rule12",AFT (Procedure) Rules 2008,locators Rules 6-12,MEDIUM,rules-aft-procedure-rules-2008,PROPOSED_NOT_CONFIRMED
+V7-S03,10,AFT-019;AFT-020;AFT-022;AFT-032;AFT-042,Rule12A || Rule 12A || Rule 12A amendment || 2011 amended Rule 7 || Rule 7 as amended,AFT (Procedure) Amendment Rules 2011 (Rule 12A / Rule 7),locators,MEDIUM,rules-aft-amendment-procedure-rules-2011,PROPOSED_NOT_CONFIRMED
+V7-S04,1,AFT-023,Practice Rules on pleadings and amendments,AFT Practice Rules 2009,locator,MEDIUM,rules-aft-practice-rules-2009,PROPOSED_NOT_CONFIRMED
+V7-S07,4,AFT-035;AFT-039;V7-CL-10;V7-JD-01,"L Chandra Kumar || constitutional hierarchy || judgment, especially conclusions",L. Chandra Kumar v Union of India (SC 1997),locator names case,HIGH,NOT_IN_53; corpus match not tested,PROPOSED_NOT_CONFIRMED
+V7-S08,10,AFT-001;AFT-033;AFT-035;AFT-036;AFT-039,Parashotam Dass || judgment discussion Art 226 || review remedy context || example subsequent treatment || precedent treatment,Union of India v Parashotam Dass (SC 2023),locator names case,HIGH,DCLR-SC-2023-009,PROPOSED_NOT_CONFIRMED
+V7-S09,2,AFT-035;V7-JD-02,historical contrary view || historical,Historical contrary view (likely Shri Kant Sharma 2015),"locator ""historical contrary view""",LOW,DCLR-SC-2015-N06 (candidate),PROPOSED_NOT_CONFIRMED
+V7-S10,1,V7-JD-07,original full text to verify,unknown judgment,"""original full text to verify""",NONE,UNRESOLVED,UNRESOLVED
+V7-S11,6,AFT-013;AFT-014;V7-JD-04;V7-SC-02;V7-SC-14,"delay principles || Tarsem Singh ratio || continuing wrong, arrears || third-party exception || judgment reasoning",Union of India v Tarsem Singh (SC 2008),"locator names ""Tarsem Singh ratio""",MEDIUM,NOT_IN_53,PROPOSED_NOT_CONFIRMED
+V7-S12,5,AFT-003;AFT-005;V7-CL-07;V7-JD-05;V7-SC-05,SCM jurisdiction analysis || paras discussing s15 || SCM interpretation || SCM case || judgment paras on s15,SCM / s.15 AFT judgment (unnamed),locators,NONE,UNRESOLVED,UNRESOLVED
+V7-S13,7,AFT-001;AFT-028;AFT-035;V7-JD-03;V7-JD-06,paras 14-18 || AFT first-instance practice || 2026 Delhi HC || service forum || 2026 HC practice,Delhi HC 2026 judgment (unnamed),"""2026 Delhi HC""",NONE,UNRESOLVED,UNRESOLVED
+V7-S14,3,AFT-032;V7-CL-08;V7-SC-09,Rule18 || Rule 18,AFT (Procedure) Rules 2008 r.18 (review),locator,MEDIUM,rules-aft-procedure-rules-2008,PROPOSED_NOT_CONFIRMED
+V7-S15,1,AFT-036,Art 136(2),Constitution Art 136(2),locator,HIGH,GAP: Constitution not in corpus,PROPOSED_NOT_CONFIRMED
+V7-S16,2,AFT-039;V7-CL-10,judgment portal || case search,SC/AFT judgment portal (search tool),locators,HIGH,not a legal source,PROPOSED_NOT_CONFIRMED
+V8-S01,40,CIV-001;CIV-002;CIV-003;CIV-004;CIV-005,ss 101-103 || ss 125-126 || s70 || ss125-126 || s 69,Army Act 1950,"locators ss 69, 70, 101-103, 125-126",HIGH,act-army-1950,PROPOSED_NOT_CONFIRMED
+V8-S02,6,CIV-017;CIV-025;CIV-029;V8-SC-06;V8-SC-09,CoI || rr 177-183 || CoI rules || r 185 verification pending || r185,Army Rules 1954 (CoI rules 177-185),locators,HIGH,rules-army-rules-1954,PROPOSED_NOT_CONFIRMED
+V8-S03,7,CIV-008;CIV-010;CIV-011;CIV-033;CIV-039,rule 2(c) historical || rules 3-9 (historic) || rr 3-4 historic || historic rules || historic rule 2,Criminal Courts and Court-martial (Adjustment of Jurisdiction) Rules 1978,"locators rr 2-9 ""historic""",MEDIUM,GAP: not in corpus,PROPOSED_NOT_CONFIRMED
+V8-S04,39,CIV-010;CIV-015;CIV-016;CIV-017;CIV-018,"investigation || ss194,196 || ss 194,196 || s 521 || s521",Bharatiya Nagarik Suraksha Sanhita 2023,"locators ss 194, 196, 521, 531",HIGH,act-bnss-2023,PROPOSED_NOT_CONFIRMED
+V8-S05,10,CIV-026;CIV-027;CIV-031;CIV-032;V8-CL-11,offence-specific || s358 || offence-specific provisions || sexual offence provisions || s 1,Bharatiya Nyaya Sanhita 2023,"locators s 358, offence provisions",HIGH,act-bns-2023,PROPOSED_NOT_CONFIRMED
+V8-S06,7,CIV-018;CIV-019;CIV-020;CIV-034;V8-CL-08,evidence || evidence provisions || ss 1 and evidence/electronic record provisions || s 1(2) || electronic evidence,Bharatiya Sakshya Adhiniyam 2023,"locators s 1(2), electronic records",HIGH,act-bsa-2023,PROPOSED_NOT_CONFIRMED
+V8-S07,23,CIV-002;CIV-003;CIV-004;CIV-005;CIV-009,"paras 41-47 || paras 45-47 || judgment || paras 26,41-45 || paras 42-45",SC judgment on civil/military jurisdiction (unnamed; paras 41-47),locators,NONE,UNRESOLVED,UNRESOLVED
+V8-S08,2,CIV-005;V8-JD-02,ratio || judgment,Som Datt Datta v Union of India (SC 1969)?,with V8-JD-02,LOW,UNRESOLVED,PROPOSED_NOT_CONFIRMED
+V8-S09,1,V8-JD-03,judgment,Balbir Singh v State of Punjab (SC)?,with V8-JD-03,LOW,UNRESOLVED,PROPOSED_NOT_CONFIRMED
+V8-S10,3,CIV-036;V8-JD-04;V8-SC-20,judgment verification || judgment || full judgment review pending,"Additional Director General, Army HQ v CBI?",with V8-JD-04 / AFSPA,LOW,UNRESOLVED,PROPOSED_NOT_CONFIRMED
+V8-S11,1,CIV-032,commencement,Commencement notifications BNS/BNSS/BSA (1 July 2024),"locator ""commencement""",MEDIUM,GAP: notifications not in corpus,PROPOSED_NOT_CONFIRMED
+V8-S12,2,CIV-023;CIV-024,"ss 194,196 || s 194",Bharatiya Nagarik Suraksha Sanhita 2023,"locators ss 194, 196",HIGH,act-bnss-2023,PROPOSED_NOT_CONFIRMED
+V8-S14,3,CIV-028;V8-CL-10;V8-SC-18,mandatory reporting and procedures || POCSO || child protection,POCSO Act 2012,locators,MEDIUM,GAP: not in corpus,PROPOSED_NOT_CONFIRMED
+V8-S15,2,CIV-036;V8-SC-20,special statute || AFSPA,AFSPA 1958,locator,HIGH,GAP: only MML vol 3 copy,PROPOSED_NOT_CONFIRMED
+V9-S01,32,EV-001;EV-002;EV-003;EV-004;EV-005,(sources field),unknown (sources field only),no locator,NONE,UNRESOLVED,UNRESOLVED
+V9-S02,9,EV-001;EV-003;EV-010;EV-011;EV-012,(sources field),unknown,no locator,NONE,UNRESOLVED,UNRESOLVED
+V9-S03,15,EV-001;EV-006;EV-008;EV-009;EV-011,(sources field),unknown (co-cited with Army Rule 23 in EV-016),no locator,NONE,UNRESOLVED,UNRESOLVED
+V9-S04,3,EV-025;EV-028;V9-JD-01,(sources field),unknown,no locator,NONE,UNRESOLVED,UNRESOLVED
+V9-S05,2,EV-028;V9-JD-02,(sources field),unknown,no locator,NONE,UNRESOLVED,UNRESOLVED
+V9-S06,2,EV-029;V9-JD-03,(sources field),unknown,no locator,NONE,UNRESOLVED,UNRESOLVED
+V9-S07,2,EV-015;V9-JD-04,(sources field),unknown,no locator,NONE,UNRESOLVED,UNRESOLVED
+V9-S08,1,EV-002,(sources field),unknown,no locator,NONE,UNRESOLVED,UNRESOLVED

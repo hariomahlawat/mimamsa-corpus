@@ -45,6 +45,6 @@ The manual auditor reports first; statutory/procedure/judgment agents assess app
 - `mml_discrepancy_register` including exact contradictory text and legal advisor queues.
 - A read-only 25-record pilot proposal showing 12+ MML-linked IDs if supported; precise reason for shortfall otherwise.
 
-**Known P0 research example:** The Rule 23(3) accused-statement caution: `MML 2.pdf` p.152 reportedly includes the word “not” while some government-hosted compilations omit it. The scanned original 1954 S.R.O. 484 Gazette remains unauthenticated in present research. No agent may resolve the discrepancy solely by preferring the MML or compilation.
+**Known P0 research example:** The Rule 23(3) accused-statement caution: `MML 2.pdf` p.152 includes “not” while some government-hosted compilations omit it. An uncertified archival facsimile of the 1954 S.R.O. 484 Gazette was located; printed p.300 reportedly includes “not obliged”. This is evidence about 1954 wording, not proof of the current legal position. Authenticate its fidelity, inspect subsequent amendments and obtain legal-advisor review. Read `SOURCE_AUTHORITY_POLICY.md`; do not resolve solely by preferring either a website or a manual.
 
 **Stop after read-only inventory and pilot proposal until explicit owner authorisation. Do not implement the application.**

@@ -145,6 +145,63 @@
       "items": {
         "type": "string"
       }
+    },
+    "examination_outcome": {
+      "type": "string",
+      "enum": [
+        "NO_ISSUE_FOUND",
+        "DISCREPANCY",
+        "CONFLICTING_SOURCES",
+        "UNVERIFIED",
+        "BLOCKED"
+      ]
+    },
+    "pinpoint": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "temporal_scope": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "mml_anchor_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "legal_review_state": {
+      "type": "string",
+      "enum": [
+        "NOT_REQUIRED",
+        "QUEUED_ADVISOR_NOT_NOMINATED",
+        "QUEUED",
+        "ADVISOR_REVIEWED"
+      ]
+    },
+    "agent": {
+      "type": "string"
+    },
+    "related_record_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "asserted_law_status": {
+      "type": "string",
+      "enum": [
+        "HISTORICAL_WORDING",
+        "CURRENT_IN_FORCE",
+        "SOURCE_CONFLICT",
+        "NOT_ASSERTED"
+      ]
     }
   }
 }

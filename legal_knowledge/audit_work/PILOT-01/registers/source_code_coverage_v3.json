@@ -1,0 +1,41 @@
+{
+  "denominator_codes": 87,
+  "by_class": {
+    "CORROBORATED_OFFICIAL": 33,
+    "PROBABLE": 9,
+    "RESOLVED_RECORD_EXPLICIT": 39,
+    "UNRESOLVABLE": 1,
+    "RESOLVED_CO_CITATION": 3,
+    "CATEGORY_ONLY": 2
+  },
+  "firm": "72/87 = 82.8%",
+  "inclusive_with_co_citation": "75/87 = 86.2%",
+  "officially_corroborated": "33/87 = 37.9%",
+  "usage_weighted_record_code_links": {
+    "total_links": 681,
+    "firm_pct": 87.2,
+    "inclusive_pct": 95.4,
+    "computed_by": "build_code_inventory.py (recounted from records)"
+  },
+  "threshold_90pct_met_codes": false,
+  "threshold_90pct_met_usage_weighted_inclusive": true,
+  "records_without_any_code": 269,
+  "records_with_codes": 389,
+  "placeholder_tags": {
+    "VERIFY": [
+      "CM-026",
+      "CM-040"
+    ]
+  },
+  "grammar": [
+    "structured {'source_id':...}",
+    "bracket [CODE] / [CODE: loc]",
+    "V#-S## pipe/inline",
+    "leading CODE + locator (J-, CM-JD-)",
+    "sources field (EV)"
+  ],
+  "note": "Records without codes cite instruments in plain text (e.g. 'AA \u00a719'); they are outside the code denominator and are covered by the plain-citation coverage of statute sections, not by this register.",
+  "threshold_90pct_met_usage_weighted_firm": false,
+  "threshold_note": "The pilot threshold is per code. Usage-weighted inclusive (95.4%) depends on 3 statistical co-citation resolutions and is reported for information only.",
+  "new_observation": "SRC-HUSSAIN: record COI-035 dates the case 1998; case row DCLR-SC-1997-N04 gives 1997-12-08 (year discrepancy to verify in next batch)."
+}

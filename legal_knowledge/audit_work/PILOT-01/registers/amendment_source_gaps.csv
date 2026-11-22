@@ -1,0 +1,20 @@
+gap_id,instrument_amended,amending_or_required_instrument,evidence_of_need,held_in_corpus,acquisition_route,note
+AMD-01,Army Act 1950,Act 19 of 1955,13 footnotes in corpus AA text,NOT_HELD,India Code / egazette (unreachable),AA amendment history pre-1960
+AMD-02,Army Act 1950,Act 56 of 1974,1 footnote,NOT_HELD,India Code,CrPC 1973 consequential
+AMD-03,Army Act 1950,Act 13 of 1975,3 footnotes,NOT_HELD,India Code,
+AMD-04,Army Act 1950,Act 20 of 1983,1 footnote,NOT_HELD,India Code,
+AMD-05,Army Act 1950,Act 37 of 1992 (w.e.f. 6-9-1992 per MML vol 2 AA footnotes),"16 footnotes; omits ss.75-76, 127 (MML + corpus)",NOT_HELD,India Code,"Brief supersession checklist item (field punishment, s.127)"
+AMD-06,Army Rules 1954,S.R.O. 484 dated 27-11-1954 (Gazette Pt II s.4 pp.291-378),preamble in corpus AR text line 8,NOT_HELD,egazette (unreachable) / CSL / National Archives,UQ-01 Rule 23(3) — P0
+AMD-07,Army Rules 1954,S.R.O. 34 dated 19-01-1963,authority note in corpus AR text,NOT_HELD,egazette / CSL,
+AMD-08,Army Rules 1954,S.R.O. 116/1965,authority note,NOT_HELD,egazette / CSL,
+AMD-09,Army Rules 1954,S.R.O. 188 dated 04-06-1979,authority note (r.2 definitions),NOT_HELD,egazette / CSL,
+AMD-10,Army Rules 1954,S.R.O. 216 dated 30-08-1988,MML vol 2 AR footnote (r.2 clauses omitted),NOT_HELD,egazette / CSL,
+AMD-11,Army Rules 1954,S.R.O. 17(E) dated 06-12-1993,authority notes (r.22/r.25/r.182 per prior research),NOT_HELD,egazette (unreachable),"Rule 22 proviso, Rule 25 omission"
+AMD-12,Army Rules 1954,S.R.O. 258 dated 27-11-2002,authority note,NOT_HELD,egazette,
+AMD-13,Army Rules 1954,S.R.O. 17(E) dated 28-12-2019,prior research (v3.0),NOT_HELD,egazette,
+AMD-14,Army Rules 1954,S.R.O. 6(E) dated 06-06-2022 (Rule 16A),prior research (v3.3 URL egazette 236353),NOT_HELD,egazette (unreachable),
+AMD-15,AFT Act 2007,Finance Act 2017 (Act 7 of 2017),corpus AFT text footnote,HELD (act-the-finance-act-2017),corpus,
+AMD-16,AFT Act 2007,Tribunals Reforms Act 2021 / Act 17 of 2026,corpus AFT text footnote,"HELD (act-the-tribunals-reforms-act-2021, -2026)",corpus,verify which instrument is Act 17 of 2026
+AMD-17,BNS/BNSS/BSA,Commencement notifications (1 July 2024),KB V8-S11,NOT_HELD,egazette,
+AMD-18,ISO Act 2023 / ISO Rules 2025,Act + Rules + commencement notification,"KB-001, KB-021; owner scope confirmed",NOT_HELD,India Code (reachable) / egazette,
+AMD-19,Agniveer scheme,Enrolment/terms notifications 2022-,owner scope confirmed; 0 KB records,NOT_HELD,MoD / egazette (unreachable),scope item

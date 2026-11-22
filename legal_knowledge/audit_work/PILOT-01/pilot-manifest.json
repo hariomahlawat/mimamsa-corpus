@@ -1,0 +1,650 @@
+{
+  "batch_id": "PILOT-01",
+  "approved_by_owner_on": "2026-11-22",
+  "input_snapshot": {
+    "kb_file_sha256": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1",
+    "cases_file_sha256": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a",
+    "git_ref": "origin/legal-knowledge/claude-audit-agents-v1@74014b4"
+  },
+  "mml_manifest_sha256": "182e24da3900da59ef5d1ab7d4be5964eca7bcbc361bd8ad576a343e6464bab1",
+  "counts": {
+    "KB_RECORD": 25,
+    "MML_PROVISION": 12,
+    "CASE_ROW": 6
+  },
+  "records": [
+    {
+      "record_id": "HCE-010",
+      "kind": "KB_RECORD",
+      "stratum": "STATUTORY",
+      "module": "M03",
+      "title": "Accused statement, silence and defence witnesses",
+      "source_line": 86,
+      "original_sha256": "4131611f6617a260481cd52ef4588cb5e96e3a77857a233e7ede8b2b92cf428a",
+      "first_pass_agents": [
+        "statutory-auditor"
+      ],
+      "independent_review": "BLIND_BEFORE_FIRST_PASS"
+    },
+    {
+      "record_id": "CM-013",
+      "kind": "KB_RECORD",
+      "stratum": "STATUTORY",
+      "module": "M05",
+      "title": "Civil court versus court-martial and omitted Section 127",
+      "source_line": 140,
+      "original_sha256": "86bc66f70ee191f236be3740c918fc207153b5ebff0a4319ffce00a6b618ece8",
+      "first_pass_agents": [
+        "statutory-auditor"
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "HCE-017",
+      "kind": "KB_RECORD",
+      "stratum": "STATUTORY",
+      "module": "M03",
+      "title": "Section 80: statutory punishments and limitations",
+      "source_line": 93,
+      "original_sha256": "54a4f2358087e1a1ff3871352419ff16ce000a52db1a5fb1e965ed3b741175be",
+      "first_pass_agents": [
+        "statutory-auditor",
+        "procedure-auditor"
+      ],
+      "independent_review": "BLIND_BEFORE_FIRST_PASS"
+    },
+    {
+      "record_id": "CIV-033",
+      "kind": "KB_RECORD",
+      "stratum": "STATUTORY",
+      "module": "M09",
+      "title": "BNSS section 521 and former CrPC section 475",
+      "source_line": 492,
+      "original_sha256": "6846102e992291e1985c7f15de5f3d2c4776c384aa906d1e67b4640fb3ea0759",
+      "first_pass_agents": [
+        "statutory-auditor"
+      ],
+      "independent_review": "BLIND_BEFORE_FIRST_PASS"
+    },
+    {
+      "record_id": "CM-025",
+      "kind": "KB_RECORD",
+      "stratum": "STATUTORY",
+      "module": "M05",
+      "title": "Evidence law and 2023 criminal-law transition",
+      "source_line": 152,
+      "original_sha256": "a8ccf31948613da7e423aecf83bcd3f1d74e80be967843e0920f2edb23cc4e32",
+      "first_pass_agents": [
+        "statutory-auditor"
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "EV-002",
+      "kind": "KB_RECORD",
+      "stratum": "STATUTORY",
+      "module": "M13",
+      "title": "Distinguish pre-July 2024 proceedings",
+      "source_line": 564,
+      "original_sha256": "5eb3f68df1d88ce32320a98bcc2defdbc11b9d8ffe6e6c7808303768594120aa",
+      "first_pass_agents": [
+        "statutory-auditor"
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "HCE-004",
+      "kind": "KB_RECORD",
+      "stratum": "PROCEDURE",
+      "module": "M03",
+      "title": "Rule 22(1) proviso after Court of Inquiry",
+      "source_line": 80,
+      "original_sha256": "71b02bcc62a2ed9716983250699f742c71f614506dbd527d126ca620a14bf34a",
+      "first_pass_agents": [
+        "procedure-auditor"
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "COI-025",
+      "kind": "KB_RECORD",
+      "stratum": "PROCEDURE",
+      "module": "M04",
+      "title": "6.1 Rule 182: CoI proceedings are not trial evidence against the person",
+      "source_line": 55,
+      "original_sha256": "645787c99b5e33ecb773453b7b4c1407da9c9659a8c4cdb812fa5ed2f5d65b8e",
+      "first_pass_agents": [
+        "procedure-auditor"
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "CM-011",
+      "kind": "KB_RECORD",
+      "stratum": "PROCEDURE",
+      "module": "M05",
+      "title": "Limitation to commence trial",
+      "source_line": 138,
+      "original_sha256": "dbf0137e3a85c5aa009b3b648dd690c705c9bc11dd4579d21e24f7b27c14ba88",
+      "first_pass_agents": [
+        "procedure-auditor",
+        "statutory-auditor"
+      ],
+      "independent_review": "BLIND_BEFORE_FIRST_PASS"
+    },
+    {
+      "record_id": "ADM-009",
+      "kind": "KB_RECORD",
+      "stratum": "PROCEDURE",
+      "module": "M06_M07",
+      "title": "Rule 17: notice and exceptions for Section 20 action",
+      "source_line": 211,
+      "original_sha256": "d8933e0da4ac5690645bdca33aa8099c903d891e3222e85eaa0f5b9233d958aa",
+      "first_pass_agents": [
+        "procedure-auditor"
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "AFT-011",
+      "kind": "KB_RECORD",
+      "stratum": "PROCEDURE",
+      "module": "M10",
+      "title": "Unanswered petition and statutory text issue",
+      "source_line": 372,
+      "original_sha256": "7bfd456e561fb4b1696aa3fa5cddfaa50e2d4d869583a4533f55e97286e7c0dd",
+      "first_pass_agents": [
+        "procedure-auditor",
+        "statutory-auditor"
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "KB-026",
+      "kind": "KB_RECORD",
+      "stratum": "JUDGMENT",
+      "module": "M11",
+      "title": "Case-law method: Rule 180 is mandatory but effects are context-specific",
+      "source_line": 26,
+      "original_sha256": "6f6ffb4e19247361c7e40d9c98d709e3aadf4a20d19a218e2bdfd7d54de948e8",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "PEN-043",
+      "kind": "KB_RECORD",
+      "stratum": "JUDGMENT",
+      "module": "M08",
+      "title": "Disability presumption in historical cases",
+      "source_line": 308,
+      "original_sha256": "aacfa91ed6b956d05b9afe1861526c79b13446626fd4bb0d696d0fb28221fd1e",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "independent_review": "BLIND_BEFORE_FIRST_PASS"
+    },
+    {
+      "record_id": "CIV-019",
+      "kind": "KB_RECORD",
+      "stratum": "JUDGMENT",
+      "module": "M09",
+      "title": "Electronic evidence and CCTV",
+      "source_line": 478,
+      "original_sha256": "a10b8dce0e2ec483c9fd0f58c6b943238b922b98cdfcf54d1c097a281660d82c",
+      "first_pass_agents": [
+        "judgment-auditor",
+        "statutory-auditor"
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "KB-028",
+      "kind": "KB_RECORD",
+      "stratum": "JUDGMENT",
+      "module": "M11",
+      "title": "Case-law method: constitutional review of AFT",
+      "source_line": 28,
+      "original_sha256": "5328623a84328e7750e9d85626d8a7e3c5a665198949e54bb927a86a5d3fc6dc",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "PEN-J-01",
+      "kind": "KB_RECORD",
+      "stratum": "JUDGMENT",
+      "module": "M08",
+      "title": "Dharamvir Singh v Union of India (2013)",
+      "source_line": 355,
+      "original_sha256": "6ed839aa7101abe8c6446b32f3b4d6fa979eec9f34a54e4cfbf82d3da1aeb5f7",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "KB-003",
+      "kind": "KB_RECORD",
+      "stratum": "COMMAND_AUTHORITY",
+      "module": "M02",
+      "title": "CO summary punishment: statutory entry point",
+      "source_line": 3,
+      "original_sha256": "cf94e78ade6043053ddf3194b518f0e25841bb2a8f50f755ad7cbb1666bab668",
+      "first_pass_agents": [
+        "procedure-auditor",
+        "statutory-auditor"
+      ],
+      "independent_review": "BLIND_BEFORE_FIRST_PASS"
+    },
+    {
+      "record_id": "CM-003",
+      "kind": "KB_RECORD",
+      "stratum": "COMMAND_AUTHORITY",
+      "module": "M05",
+      "title": "Who may convene a GCM or DCM",
+      "source_line": 130,
+      "original_sha256": "8bf3946fdb3011eca6765bb60baa5eba0070194650a5d4b1f75ab5bccbaf7232",
+      "first_pass_agents": [
+        "statutory-auditor"
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "COI-008",
+      "kind": "KB_RECORD",
+      "stratum": "COMMAND_AUTHORITY",
+      "module": "M04",
+      "title": "3.1 Who may assemble the court",
+      "source_line": 38,
+      "original_sha256": "876ee246814af22bc17bd076d83787973f7b2d9f9c779836f8f518b83ac07d80",
+      "first_pass_agents": [
+        "procedure-auditor"
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "CIV-008",
+      "kind": "KB_RECORD",
+      "stratum": "COMMAND_AUTHORITY",
+      "module": "M09",
+      "title": "Competent forum-choice authority",
+      "source_line": 467,
+      "original_sha256": "07fed784f69887cfc7ff7e18ee6c67314d09838fe790e78987fb40b3605aa844",
+      "first_pass_agents": [
+        "statutory-auditor",
+        "procedure-auditor"
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "EV-016",
+      "kind": "KB_RECORD",
+      "stratum": "CROSS_VOLUME",
+      "module": "M13",
+      "title": "Summary of Evidence rights and scope",
+      "source_line": 578,
+      "original_sha256": "b2fe32d5eaee939764ab5011c9f0cc794197f64113f1ad90376c061547a4e293",
+      "first_pass_agents": [
+        "cross-volume-auditor"
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "CIV-034",
+      "kind": "KB_RECORD",
+      "stratum": "CROSS_VOLUME",
+      "module": "M09",
+      "title": "BSA applies to courts-martial",
+      "source_line": 493,
+      "original_sha256": "9efda464a4e1e926a2088b401e690c500442415a81536f8343aed8dce3c6f1b5",
+      "first_pass_agents": [
+        "cross-volume-auditor"
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "AFT-004",
+      "kind": "KB_RECORD",
+      "stratum": "CROSS_VOLUME",
+      "module": "M10",
+      "title": "Section 14 original application versus section 15 court-martial appeal",
+      "source_line": 365,
+      "original_sha256": "9034d57d9b6f05a90bd6403bc44be0b650bc9b3f6583e2e2d23d7b5382242684",
+      "first_pass_agents": [
+        "cross-volume-auditor",
+        "judgment-auditor"
+      ],
+      "independent_review": "BLIND_BEFORE_FIRST_PASS"
+    },
+    {
+      "record_id": "V9-CL-02",
+      "kind": "KB_RECORD",
+      "stratum": "CONTROL",
+      "module": "M13",
+      "title": "Witness statement",
+      "source_line": 636,
+      "original_sha256": "a45c7b3f02299dd9d34a0f230fae3a2c5979a01acd50e9bbb29aeef6786c3147",
+      "first_pass_agents": [
+        "independent-reviewer"
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "COI-039",
+      "kind": "KB_RECORD",
+      "stratum": "CONTROL",
+      "module": "M04",
+      "title": "8.6 Case-digest format for the database",
+      "source_line": 69,
+      "original_sha256": "d2cea86e4034a98026b4af4aed543055203a50124a32d8d017384d1acb7133de",
+      "first_pass_agents": [
+        "independent-reviewer"
+      ],
+      "independent_review": "BLIND_BEFORE_FIRST_PASS"
+    },
+    {
+      "record_id": "MMLPKT-01",
+      "kind": "MML_PROVISION",
+      "provision": "Army Rules 1954 r.22 (hearing of charge; r.22(1) proviso)",
+      "mml_files": {
+        "MML 2.pdf": "db2119182ed2e4ccca22dd225d955327f6398ee98303e1c94615ba85b4396f65",
+        "MML vol 2(AR).doc.doc": "ed1d8a7fc1f4088f8d0fb7db6855c195b205b251874a70f611ced5c3fdb494a2",
+        "MML vol 2(AR).doc-1.doc": "8bb17d8255ea1be2b975a96b3c739d002264df3da8a56086d29d2a1961f3a162"
+      },
+      "related_pilot_records": [
+        "KB-003",
+        "HCE-004"
+      ],
+      "original_sha256": "b4bb5c3df23bfd6c6025e2b663d3d5132e5be306fe6bf43e513631d5b5009848",
+      "hash_basis": "sha256 of canonical JSON {id, provision, mml_files{name:sha256}}",
+      "first_pass_agents": [
+        "manual-of-military-law-auditor",
+        "statutory-auditor"
+      ]
+    },
+    {
+      "record_id": "MMLPKT-02",
+      "kind": "MML_PROVISION",
+      "provision": "Army Rules 1954 r.23(3) (caution to accused at SoE)",
+      "mml_files": {
+        "MML 2.pdf": "db2119182ed2e4ccca22dd225d955327f6398ee98303e1c94615ba85b4396f65",
+        "MML vol 2(AR).doc.doc": "ed1d8a7fc1f4088f8d0fb7db6855c195b205b251874a70f611ced5c3fdb494a2",
+        "MML vol 2(AR).doc-1.doc": "8bb17d8255ea1be2b975a96b3c739d002264df3da8a56086d29d2a1961f3a162"
+      },
+      "related_pilot_records": [
+        "HCE-010",
+        "EV-016"
+      ],
+      "original_sha256": "aee2b541c7ffb67063f24d468f353730ca1efefc89fe97956ee9d2e89944af30",
+      "hash_basis": "sha256 of canonical JSON {id, provision, mml_files{name:sha256}}",
+      "first_pass_agents": [
+        "manual-of-military-law-auditor",
+        "statutory-auditor"
+      ]
+    },
+    {
+      "record_id": "MMLPKT-03",
+      "kind": "MML_PROVISION",
+      "provision": "Army Rules 1954 r.25 (omitted)",
+      "mml_files": {
+        "MML 2.pdf": "db2119182ed2e4ccca22dd225d955327f6398ee98303e1c94615ba85b4396f65",
+        "MML vol 2(AR).doc.doc": "ed1d8a7fc1f4088f8d0fb7db6855c195b205b251874a70f611ced5c3fdb494a2",
+        "MML vol 2(AR).doc-1.doc": "8bb17d8255ea1be2b975a96b3c739d002264df3da8a56086d29d2a1961f3a162"
+      },
+      "related_pilot_records": [],
+      "original_sha256": "95904d7070291f7b7df9ced13c07d4cd3d6952e34d3073e7612d972c485f8541",
+      "hash_basis": "sha256 of canonical JSON {id, provision, mml_files{name:sha256}}",
+      "first_pass_agents": [
+        "manual-of-military-law-auditor",
+        "statutory-auditor"
+      ]
+    },
+    {
+      "record_id": "MMLPKT-04",
+      "kind": "MML_PROVISION",
+      "provision": "Army Rules 1954 r.180",
+      "mml_files": {
+        "MML 2.pdf": "db2119182ed2e4ccca22dd225d955327f6398ee98303e1c94615ba85b4396f65",
+        "MML vol 2(AR).doc.doc": "ed1d8a7fc1f4088f8d0fb7db6855c195b205b251874a70f611ced5c3fdb494a2",
+        "MML vol 2(AR).doc-1.doc": "8bb17d8255ea1be2b975a96b3c739d002264df3da8a56086d29d2a1961f3a162"
+      },
+      "related_pilot_records": [
+        "KB-026",
+        "HCE-004"
+      ],
+      "original_sha256": "e594535a3a0b9c556c62c9d82131a711708f54b10bd468c00243bd4f55bf6579",
+      "hash_basis": "sha256 of canonical JSON {id, provision, mml_files{name:sha256}}",
+      "first_pass_agents": [
+        "manual-of-military-law-auditor",
+        "statutory-auditor"
+      ]
+    },
+    {
+      "record_id": "MMLPKT-05",
+      "kind": "MML_PROVISION",
+      "provision": "Army Rules 1954 r.182",
+      "mml_files": {
+        "MML 2.pdf": "db2119182ed2e4ccca22dd225d955327f6398ee98303e1c94615ba85b4396f65",
+        "MML vol 2(AR).doc.doc": "ed1d8a7fc1f4088f8d0fb7db6855c195b205b251874a70f611ced5c3fdb494a2",
+        "MML vol 2(AR).doc-1.doc": "8bb17d8255ea1be2b975a96b3c739d002264df3da8a56086d29d2a1961f3a162"
+      },
+      "related_pilot_records": [
+        "COI-025"
+      ],
+      "original_sha256": "67b15d127f81091b2a1b68bbdee915516bb675eaae0274a4a8b40a7ea2101754",
+      "hash_basis": "sha256 of canonical JSON {id, provision, mml_files{name:sha256}}",
+      "first_pass_agents": [
+        "manual-of-military-law-auditor",
+        "statutory-auditor"
+      ]
+    },
+    {
+      "record_id": "MMLPKT-06",
+      "kind": "MML_PROVISION",
+      "provision": "Army Act 1950 ss.75-76 (field punishment; omitted)",
+      "mml_files": {
+        "MML 2.pdf": "db2119182ed2e4ccca22dd225d955327f6398ee98303e1c94615ba85b4396f65",
+        "MML vol 2(AA).doc.doc": "73fd304227ca680ebf3c8512dfd4aafa0eb2e16952558bb8b1c1edee637a455d",
+        "MML vol 2(AA).pdf": "c8a791a1e3a4d8fee412cae1b0c2daa4517438bf926c9f9e27fffd81cada1ec9"
+      },
+      "related_pilot_records": [
+        "HCE-017"
+      ],
+      "original_sha256": "d293fa382dae8553a3e79679f70329922f8d45a3256249ffd86590f4d730a7c1",
+      "hash_basis": "sha256 of canonical JSON {id, provision, mml_files{name:sha256}}",
+      "first_pass_agents": [
+        "manual-of-military-law-auditor",
+        "statutory-auditor"
+      ]
+    },
+    {
+      "record_id": "MMLPKT-07",
+      "kind": "MML_PROVISION",
+      "provision": "Army Act 1950 ss.80-82 (summary punishments, limits, additional punishments)",
+      "mml_files": {
+        "MML 2.pdf": "db2119182ed2e4ccca22dd225d955327f6398ee98303e1c94615ba85b4396f65",
+        "MML vol 2(AA).doc.doc": "73fd304227ca680ebf3c8512dfd4aafa0eb2e16952558bb8b1c1edee637a455d",
+        "MML vol 2(AA).pdf": "c8a791a1e3a4d8fee412cae1b0c2daa4517438bf926c9f9e27fffd81cada1ec9"
+      },
+      "related_pilot_records": [
+        "HCE-017",
+        "KB-003"
+      ],
+      "original_sha256": "ef871b67799e62262390a6e830017c82bf99ce2f09c7f1c25a9327dbb504b517",
+      "hash_basis": "sha256 of canonical JSON {id, provision, mml_files{name:sha256}}",
+      "first_pass_agents": [
+        "manual-of-military-law-auditor",
+        "statutory-auditor"
+      ]
+    },
+    {
+      "record_id": "MMLPKT-08",
+      "kind": "MML_PROVISION",
+      "provision": "Army Act 1950 s.122 (limitation)",
+      "mml_files": {
+        "MML 2.pdf": "db2119182ed2e4ccca22dd225d955327f6398ee98303e1c94615ba85b4396f65",
+        "MML vol 2(AA).doc.doc": "73fd304227ca680ebf3c8512dfd4aafa0eb2e16952558bb8b1c1edee637a455d",
+        "MML vol 2(AA).pdf": "c8a791a1e3a4d8fee412cae1b0c2daa4517438bf926c9f9e27fffd81cada1ec9"
+      },
+      "related_pilot_records": [
+        "CM-011"
+      ],
+      "original_sha256": "1b0fb28eacaf9bac7c9bf0448ca09e4c3301773ac3913d2828ca8adfb59b66cf",
+      "hash_basis": "sha256 of canonical JSON {id, provision, mml_files{name:sha256}}",
+      "first_pass_agents": [
+        "manual-of-military-law-auditor",
+        "statutory-auditor"
+      ]
+    },
+    {
+      "record_id": "MMLPKT-09",
+      "kind": "MML_PROVISION",
+      "provision": "Army Act 1950 ss.125-126 (choice of forum)",
+      "mml_files": {
+        "MML 2.pdf": "db2119182ed2e4ccca22dd225d955327f6398ee98303e1c94615ba85b4396f65",
+        "MML vol 2(AA).doc.doc": "73fd304227ca680ebf3c8512dfd4aafa0eb2e16952558bb8b1c1edee637a455d",
+        "MML vol 2(AA).pdf": "c8a791a1e3a4d8fee412cae1b0c2daa4517438bf926c9f9e27fffd81cada1ec9"
+      },
+      "related_pilot_records": [
+        "CIV-008",
+        "CM-013"
+      ],
+      "original_sha256": "5a9511413b40afc052ae0e9ffda3b3479be0252563f02c4bf106eb13d259418d",
+      "hash_basis": "sha256 of canonical JSON {id, provision, mml_files{name:sha256}}",
+      "first_pass_agents": [
+        "manual-of-military-law-auditor",
+        "statutory-auditor"
+      ]
+    },
+    {
+      "record_id": "MMLPKT-10",
+      "kind": "MML_PROVISION",
+      "provision": "Army Act 1950 s.127 (successive trials; omitted)",
+      "mml_files": {
+        "MML 2.pdf": "db2119182ed2e4ccca22dd225d955327f6398ee98303e1c94615ba85b4396f65",
+        "MML vol 2(AA).doc.doc": "73fd304227ca680ebf3c8512dfd4aafa0eb2e16952558bb8b1c1edee637a455d",
+        "MML vol 2(AA).pdf": "c8a791a1e3a4d8fee412cae1b0c2daa4517438bf926c9f9e27fffd81cada1ec9"
+      },
+      "related_pilot_records": [
+        "CM-013"
+      ],
+      "original_sha256": "ef031a01f9f95768537c5590e76a4853403a893a2bb72c79e9e886abe14e8679",
+      "hash_basis": "sha256 of canonical JSON {id, provision, mml_files{name:sha256}}",
+      "first_pass_agents": [
+        "manual-of-military-law-auditor",
+        "statutory-auditor"
+      ]
+    },
+    {
+      "record_id": "MMLPKT-11",
+      "kind": "MML_PROVISION",
+      "provision": "MML Part I Ch. II paras 13-14 (field punishment; summary punishments)",
+      "mml_files": {
+        "MML 1.doc": "3a2e3a4f70669483678cdb96e1dd29d901c6c0ffc43a04a794a00d3ef0c3d1ed"
+      },
+      "related_pilot_records": [
+        "HCE-017"
+      ],
+      "original_sha256": "26f7528d4188f57ee1f5a5ccab189148f11eeaa80d2fc217307ce5160090d958",
+      "hash_basis": "sha256 of canonical JSON {id, provision, mml_files{name:sha256}}",
+      "first_pass_agents": [
+        "manual-of-military-law-auditor",
+        "statutory-auditor"
+      ]
+    },
+    {
+      "record_id": "MMLPKT-12",
+      "kind": "MML_PROVISION",
+      "provision": "Army Act 1950 ss.109-111 (convening GCM/DCM/SGCM)",
+      "mml_files": {
+        "MML 2.pdf": "db2119182ed2e4ccca22dd225d955327f6398ee98303e1c94615ba85b4396f65",
+        "MML vol 2(AA).doc.doc": "73fd304227ca680ebf3c8512dfd4aafa0eb2e16952558bb8b1c1edee637a455d",
+        "MML vol 2(AA).pdf": "c8a791a1e3a4d8fee412cae1b0c2daa4517438bf926c9f9e27fffd81cada1ec9"
+      },
+      "related_pilot_records": [
+        "CM-003"
+      ],
+      "original_sha256": "e8c830f5aae806f823f2fad2d37e3b8d363ccac1e14c421258e63c571603a87c",
+      "hash_basis": "sha256 of canonical JSON {id, provision, mml_files{name:sha256}}",
+      "first_pass_agents": [
+        "manual-of-military-law-auditor",
+        "statutory-auditor"
+      ]
+    },
+    {
+      "record_id": "DCLR-SC-2020-002",
+      "kind": "CASE_ROW",
+      "title": "Union of India v Ex Sep Virendra Kumar",
+      "source_file": "cases_53.jsonl",
+      "source_line": 2,
+      "original_sha256": "c42f28ff1395f0b50e533bae7199ef4a709d306d141a6c9c5216879858e42684",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "not_counted_in_25": true
+    },
+    {
+      "record_id": "DCLR-SC-2023-009",
+      "kind": "CASE_ROW",
+      "title": "Union of India v Parashotam Dass",
+      "source_file": "cases_53.jsonl",
+      "source_line": 9,
+      "original_sha256": "e3610481baf62dc8b4eb375a608dc614710df40fb14d2d3cbc55c38f7d2a1194",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "not_counted_in_25": true
+    },
+    {
+      "record_id": "DCLR-SC-2013-N08",
+      "kind": "CASE_ROW",
+      "title": "Dharamvir Singh v Union of India and Others",
+      "source_file": "cases_53.jsonl",
+      "source_line": 19,
+      "original_sha256": "d0e97edabfbbb52c0b9bc2ee7e204b9a521953a6a8032d10ba9d0a631e638268",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "not_counted_in_25": true
+    },
+    {
+      "record_id": "DCLR-SC-2015-N09",
+      "kind": "CASE_ROW",
+      "title": "Union of India and Another v Rajbir Singh",
+      "source_file": "cases_53.jsonl",
+      "source_line": 20,
+      "original_sha256": "5640759ed8df490944750c2bafa4898488856d5bdaebdcb89e9a745f22b16483",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "not_counted_in_25": true
+    },
+    {
+      "record_id": "DCLR-SC-2005-L01",
+      "kind": "CASE_ROW",
+      "title": "State (NCT of Delhi) v Navjot Sandhu",
+      "source_file": "cases_53.jsonl",
+      "source_line": 40,
+      "original_sha256": "4a71247575e936a04f8959115478b47faf7afd56896a2566715b91a3af15b229",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "not_counted_in_25": true
+    },
+    {
+      "record_id": "DCLR-SC-2014-N12",
+      "kind": "CASE_ROW",
+      "title": "Anvar P V v P K Basheer and Others",
+      "source_file": "cases_53.jsonl",
+      "source_line": 23,
+      "original_sha256": "ed6163fe8d19f27728baca42e3e0bd58b6d431b5cadd988443859b3a7175e6f8",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "not_counted_in_25": true
+    }
+  ]
+}

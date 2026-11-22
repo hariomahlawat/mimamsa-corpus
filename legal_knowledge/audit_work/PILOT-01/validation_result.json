@@ -1,0 +1,10 @@
+{
+  "batch": "legal_knowledge/audit_work/PILOT-01",
+  "counts": {
+    "source": 205,
+    "finding": 124,
+    "review": 33
+  },
+  "strict": true,
+  "errors": []
+}

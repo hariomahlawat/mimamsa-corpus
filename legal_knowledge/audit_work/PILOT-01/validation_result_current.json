@@ -1,0 +1,94 @@
+{
+  "artifact": "PILOT-01 current validation result",
+  "generated_utc": "2026-11-22T12:55:30Z",
+  "supersedes_for_current_state_only": "validation_result.json (historical, 205 sources / 124 findings / 33 reviews at pilot completion; preserved unchanged)",
+  "git_commit_at_generation": "b45ef72d1267e69f884359d7561e19354ae21f97",
+  "command": "python3 tools/legal_audit/validate.py --batch legal_knowledge/audit_work/PILOT-01 --manifest legal_knowledge/audit_work/PILOT-01/pilot-manifest.json --strict",
+  "exit_code": 0,
+  "validator_sha256": "e5530ebf1944557b34b79758601354e7b2a4ff9f48ed4d573a515ec6d5be11d1",
+  "schema_sha256": {
+    "source": "c5ef6b8caddae7e132fb03e0747fb6438b575442987652c08739a240f0428f41",
+    "finding": "95fc41326c63381395545866cf9753ac5df46a3c0fe0c57b24e1001e716c385b",
+    "review": "1a30635dae2392426e7efd41cd8a12727e8a6173c6d4831ec569ace4f8caaafa"
+  },
+  "inputs_sha256": {
+    "legal_knowledge/audit_work/PILOT-01/findings/cross-volume-auditor.json": "5f2128303c71ceccf1862dec80077307ddf4a3671af94b0ffca939151de4e91e",
+    "legal_knowledge/audit_work/PILOT-01/findings/independent-reviewer-blind.json": "9b9b93fe4bf2a6636ac8cb2bd73b26e8e7da9fda49befb14143aac66d10ef3a3",
+    "legal_knowledge/audit_work/PILOT-01/findings/judgment-auditor.json": "400e11faaf1ec7cf04ec8f3c8769f6275dc4002c0f34354adea58ceece45c401",
+    "legal_knowledge/audit_work/PILOT-01/findings/manual-of-military-law-auditor.json": "c6008721b074d6f0c44d586d29fb1b2ab7ab98648bcd12cd1a5d54ca3f5024bd",
+    "legal_knowledge/audit_work/PILOT-01/findings/procedure-auditor.json": "2cbcb4054301f715f44d1f2c9b20fe9d609b319fb894d9f978a5248357b29b60",
+    "legal_knowledge/audit_work/PILOT-01/findings/remediation-orchestrator.json": "22272d44a78057a36ac76e7668716fbd0c88d4e09c3fcdb8bb0e6e9a0f4c6708",
+    "legal_knowledge/audit_work/PILOT-01/findings/statutory-auditor.json": "dc5ef16fdfff8ef11fc16ad2d6c8cfb74d01eb531ae4e045420d0c1ec6ab7bf5",
+    "legal_knowledge/audit_work/PILOT-01/reviews/independent-reviewer-A.json": "27e70ba0cffe920360d33ac6127f03d7290998f8e6bb6e6903d0a09899dfda39",
+    "legal_knowledge/audit_work/PILOT-01/reviews/independent-reviewer-B.json": "6c06842bf5357cb84ae0ba5ff7a5ff8b5a8b67fde63cc92a1ce0313c66662e67",
+    "legal_knowledge/audit_work/PILOT-01/reviews/independent-reviewer-C.json": "195a71302dce2940158338426befad6e8612b89d7e53b1b1af1c2b1c654b055b",
+    "legal_knowledge/audit_work/PILOT-01/sources/cross-volume-auditor.json": "346aa4c0d64493f7519f772833f14230d179dd982eeff660a9fae23871fe64e6",
+    "legal_knowledge/audit_work/PILOT-01/sources/independent-reviewer-A.json": "d57da409713f38fcd1b1a7641ae6d38339762546f2a1042eaf09f68b0e440c32",
+    "legal_knowledge/audit_work/PILOT-01/sources/independent-reviewer-B.json": "09a96cea8cca6357172fe86f350619b63f32219c5846c580dec38104a7e98b63",
+    "legal_knowledge/audit_work/PILOT-01/sources/independent-reviewer-C.json": "f5d36ff8a53b6dafce9390cea98b2ac76e2874b0f8caee9328336eec92bdb906",
+    "legal_knowledge/audit_work/PILOT-01/sources/independent-reviewer-blind.json": "9a2b760103a9311e54dea077286f4bf6209d6b22dad21fc0bae9d7a95436ffbf",
+    "legal_knowledge/audit_work/PILOT-01/sources/judgment-auditor.json": "9ad4b4068ebde9974997e28c67f680424859a1627fdd7e166be7d8368efff36e",
+    "legal_knowledge/audit_work/PILOT-01/sources/manual-of-military-law-auditor.json": "34d685d36701129c580dff3e54cfbe5780a31c85764c37b34751056d37fea6e6",
+    "legal_knowledge/audit_work/PILOT-01/sources/procedure-auditor.json": "5a2798cf93d7716d665302bac81feec25ec4ee9e3cc6f3f8a97a6f7b08bb6f3d",
+    "legal_knowledge/audit_work/PILOT-01/sources/remediation-orchestrator.json": "8fa41323f0a0a0d92e1d4b04e7968c844d1c90309a74f4c074c7d3ffa05deab5",
+    "legal_knowledge/audit_work/PILOT-01/sources/statutory-auditor.json": "2ce96c0a9cf416f057eb6bc71dd7431d30f349da6f4ddd01a0fcdb10109ca9db",
+    "legal_knowledge/audit_work/PILOT-01/pilot-manifest.json": "2e0e0aa519812e2d592fd07436e63524113bb992b9691a9a908f24301b959f99",
+    "legal_knowledge/audit_work/PILOT-01/reviewer_identities.json": "8a3d4e6cb6b7e13807b416be35e1ef9eac834ca275fc84c80e462fbfc93318af"
+  },
+  "originals_sha256": {
+    "legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.jsonl": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1",
+    "legal_knowledge/curated_originals/case_law/v0.9/cases_53.jsonl": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a",
+    "legal_knowledge/manual_sources/MML_Originals_Manifest.csv": "182e24da3900da59ef5d1ab7d4be5964eca7bcbc361bd8ad576a343e6464bab1"
+  },
+  "validator_output": {
+    "batch": "legal_knowledge/audit_work/PILOT-01",
+    "counts": {
+      "source": 216,
+      "finding": 126,
+      "review": 35
+    },
+    "strict": true,
+    "errors": []
+  },
+  "counts_breakdown": {
+    "sources_total": 216,
+    "sources_pre_final_controls": 209,
+    "sources_reviewer_C": 7,
+    "findings_total": 126,
+    "findings_by_agent": {
+      "cross-volume-auditor": 10,
+      "independent-reviewer": 15,
+      "judgment-auditor": 27,
+      "manual-of-military-law-auditor": 21,
+      "procedure-auditor": 21,
+      "orchestrator": 2,
+      "statutory-auditor": 30
+    },
+    "reviews_total": 35,
+    "reviews_by_reviewer": {
+      "independent-reviewer-A": 21,
+      "independent-reviewer-B": 12,
+      "independent-reviewer-C": 2
+    },
+    "reviews_by_decision": {
+      "DISPUTES": 6,
+      "SUPPORTS": 28,
+      "RETURN_FOR_EVIDENCE": 1
+    }
+  },
+  "unit_tests": {
+    "command": "python3 -m unittest tests.test_legal_audit_validator tests.test_legal_audit_controls",
+    "result": "Ran 34 tests in 0.043s \u2014 OK"
+  },
+  "controls_exercised": [
+    "schema conformance",
+    "record ID and frozen input hash (manifest)",
+    "coverage: every manifest item has an outcome",
+    "pinpoint and date traceability",
+    "manual-only verification block",
+    "state separation",
+    "MML provenance (manifest hashes)",
+    "reviewer identity binding incl. exact retrieved_by for reviewer C"
+  ],
+  "limits": "Structural/traceability validation only; not legal correctness. No advisor-reviewed or formally approved findings exist."
+}

@@ -1,0 +1,28 @@
+# Discovery — official_instruments — run 20261122T140227Z-2a7fd6
+
+0 listing request(s); politeness delay spent: 0 s. No documents were downloaded.
+
+- act-air-force-army-laws-amendment-1975: already_known — https://indiacode.gov.in/server/api/core/bitstreams/d4cb2142-ec1d-46ca-88b1-6ae2b9c603d7/content
+- act-army-amendment-1992: already_known — https://indiacode.gov.in/server/api/core/bitstreams/7a05a1f5-506a-4e9c-afae-c2e4fc1e989e/content
+
+# Dry run — 2026-11-22T14:02:27+00:00
+
+1 source(s), 0 target(s) (0 still need URL discovery), 2 request(s) would be made from known URLs, 0 refused.
+
+**Config warnings:**
+
+- sources.indiacode has the robots-5xx exception (crawls if robots.txt answers 5xx)
+- sources.indiacode has the robots-unreachable exception (crawls if robots.txt cannot be fetched)
+- regs-army-1987 is targeted by both indiacode and mod (first hit wins)
+
+## official_instruments (phase 2, disabled)
+
+Hosts: indiacode.gov.in  
+State: 2 queued (2 due now, 0 in backoff), 0 fetched, 0 failed, 0 skipped  
+Would fetch now: 2
+
+| Kind | doc_id / name | URL | State | Action | Notes |
+| --- | --- | --- | --- | --- | --- |
+| queued | act-air-force-army-laws-amendment-1975 | https://indiacode.gov.in/server/api/core/bitstreams/d4cb2142-ec1d-46ca-88b1-6ae2b9c603d7/content | queued | fetch document | category: act; parent_doc_id: act-air-force-army-laws-amendment-1975 |
+| queued | act-army-amendment-1992 | https://indiacode.gov.in/server/api/core/bitstreams/7a05a1f5-506a-4e9c-afae-c2e4fc1e989e/content | queued | fetch document | category: act; parent_doc_id: act-army-amendment-1992 |
+

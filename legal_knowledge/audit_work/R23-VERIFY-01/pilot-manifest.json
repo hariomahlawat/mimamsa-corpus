@@ -1,0 +1,45 @@
+{
+  "batch_id": "R23-VERIFY-01",
+  "purpose": "Second independent examination of the archival 1954 Gazette page carrying Army Rules r.23(3) (S.R.O. 484) and amendment-chain verification for r.23. Additive; PILOT-01 unchanged.",
+  "input_snapshot": {
+    "kb_file_sha256": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1",
+    "cases_file_sha256": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a",
+    "git_ref": "origin/legal-knowledge/claude-audit-agents-v1@74014b4"
+  },
+  "records": [
+    {
+      "record_id": "HCE-010",
+      "kind": "KB_RECORD",
+      "stratum": "STATUTORY",
+      "module": "M03",
+      "title": "Accused statement, silence and defence witnesses",
+      "source_line": 86,
+      "original_sha256": "4131611f6617a260481cd52ef4588cb5e96e3a77857a233e7ede8b2b92cf428a",
+      "first_pass_agents": [
+        "statutory-auditor"
+      ],
+      "independent_review": "BLIND_BEFORE_FIRST_PASS"
+    },
+    {
+      "record_id": "MMLPKT-02",
+      "kind": "MML_PROVISION",
+      "provision": "Army Rules 1954 r.23(3) (caution to accused at SoE)",
+      "mml_files": {
+        "MML 2.pdf": "db2119182ed2e4ccca22dd225d955327f6398ee98303e1c94615ba85b4396f65",
+        "MML vol 2(AR).doc.doc": "ed1d8a7fc1f4088f8d0fb7db6855c195b205b251874a70f611ced5c3fdb494a2",
+        "MML vol 2(AR).doc-1.doc": "8bb17d8255ea1be2b975a96b3c739d002264df3da8a56086d29d2a1961f3a162"
+      },
+      "related_pilot_records": [
+        "HCE-010",
+        "EV-016"
+      ],
+      "original_sha256": "aee2b541c7ffb67063f24d468f353730ca1efefc89fe97956ee9d2e89944af30",
+      "hash_basis": "sha256 of canonical JSON {id, provision, mml_files{name:sha256}}",
+      "first_pass_agents": [
+        "manual-of-military-law-auditor",
+        "statutory-auditor"
+      ]
+    }
+  ],
+  "source_authority_policy_version": "v1"
+}

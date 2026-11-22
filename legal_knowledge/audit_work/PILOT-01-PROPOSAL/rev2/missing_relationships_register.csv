@@ -1,0 +1,9 @@
+rel_gap_id,from,to,gap,evidence,state
+REL-01,658 KB records,MML provisions (file/page/para),"No KB record cites any MML file, page or paragraph; only 79 regex candidates exist for AR 22/23/180 (v2.5)",grep of 658 records; v2.5/04,VERIFIED
+REL-02,658 KB records,Source register,"76 internal source IDs (SRC-*, V6-S*..V9-S*) used in references have no definition anywhere in repo/HF listing",rev1 analysis,VERIFIED (repo); HF not exhaustively searched
+REL-03,658 KB records,Corpus doc_ids / section records (act-army-1950#sN),0 of 658 linked (v2.3 mimamsa_doc_id empty for all),v2.3/03 queue,VERIFIED
+REL-04,53 case rows,Corpus judgment doc_ids / PDF SHA,"0 rows carry original_pdf_sha256; v2.7: 30 title candidates, 23 no match (not proof of absence)","HF crosswalk v2.7, quality_audit v3.0",VERIFIED (counts)
+REL-05,53 case rows,Later treatment (proposition level),Exhaustive treatment for 0 of 53; 3 treatment edges exist (Navjot/Anvar/Arjun/Chandrabhan),judicial_treatment v3.2,VERIFIED (counts)
+REL-06,MML provisions,Current statutory text,"MML editions end 1976 (Part I), 1990 (Part III), 1993 (AA vol), 2000 (AR vol), 2008 (MML 2.pdf); no version mapping to India Code 2025-26 text",latest-year scan,"PRELIMINARY (year scan is a proxy, not an edition date)"
+REL-07,KB records,KB records (duplicates/overlaps),"Multiple records restate the same rule (e.g. r.22(1) proviso: HCE-004, COI-023; r.23 SoE: KB-006, HCE-008, EV-016, V9-CL-04) with no explicit link",pilot reading,PRELIMINARY
+REL-08,Army Rules 1954 (corpus),Section-level records,"Rules not split into rule-level records (only Acts in data/sections), so rule-level amendment history cannot be attached",HF data/sections listing,VERIFIED
