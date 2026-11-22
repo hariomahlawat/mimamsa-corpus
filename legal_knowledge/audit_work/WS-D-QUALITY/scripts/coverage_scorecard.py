@@ -90,6 +90,32 @@ def cited_numbers(text):
     return out
 
 
+_spec_idx = importlib.util.spec_from_file_location("wsd_plain_index", WSD / "scripts" / "build_plaintext_index.py")
+PLAIN = importlib.util.module_from_spec(_spec_idx); _spec_idx.loader.exec_module(PLAIN)
+
+
+def assess_plain_segment(seg, src):
+    """Instrument/locator assessment of one plain-text statute segment (index row), via the shared parser
+    build_plaintext_index.instrument_locators(): EVERY named instrument is assessed, each locator is bound to the
+    instrument named before it, and unit mismatches are reported as ambiguous instead of being reassigned.
+    Returns [{"token", "doc", "numbers" (Act sections counted against doc), "rule_numbers", "ambiguous"}].
+    A continuation segment continues the last instrument of its context segment (none if that was a case)."""
+    if src is seg:
+        entries = PLAIN.instrument_locators(seg["exact_text"])
+    else:
+        ctx = PLAIN.instrument_locators(src["exact_text"]) if src else []
+        if not ctx:
+            return []
+        entries = PLAIN.instrument_locators(seg["exact_text"], (ctx[-1]["token"], ctx[-1]["hint"]))
+    out = []
+    for e in entries:
+        doc = next((d for rx, d in DOC_FOR if rx.match(e["token"])), None)
+        out.append({"token": e["token"], "doc": doc,
+                    "numbers": list(e["sections"]) if doc and doc.startswith("act-") else [],
+                    "rule_numbers": list(e["rules"]), "ambiguous": list(e["ambiguous"])})
+    return out
+
+
 def pct(n, d):
     return {"numerator": n, "denominator": d, "pct": round(100 * n / d, 1) if d else None}
 
@@ -148,7 +174,7 @@ def build(ref):
         by_rec[r["record_id"]].append(r)
     seg_cat = collections.Counter(r["category"] for r in rows)
     sect_total = sect_found = 0; sect_missing = []; non_current = collections.defaultdict(set)
-    instr_seg = instr_found = 0; rec_inst = {}
+    instr_seg = instr_found = 0; rec_inst = {}; ambiguous = []
     for rid, segs in sorted(by_rec.items()):
         bykey = {s["seg_no"]: s for s in segs}
         states = []
@@ -157,18 +183,17 @@ def build(ref):
             src = bykey.get(s["context_from_seg"]) if cat == "LOCATOR_CONTINUATION" else s
             if cat not in ("STATUTE_LOCATOR", "STATUTE_GENERIC") and not (cat == "LOCATOR_CONTINUATION" and src):
                 continue
-            toks = (src or {}).get("instruments_mentioned", "").split("|")
-            doc = next((d for rx, d in DOC_FOR for t in toks[:1] if rx.match(t)), None)
-            instr_seg += 1
-            if doc is None or C is None:
-                states.append(False if doc is None else None)
-                continue
-            ok = doc in C["meta"]; instr_found += ok; states.append(ok)
-            if cat != "STATUTE_GENERIC" and doc.startswith("act-") and C["sections"].get(doc):
-                text = s["exact_text"]
-                if src is s and toks[0]:
-                    text = text.split(toks[0], 1)[-1]
-                for num in cited_numbers(text):
+            for a in assess_plain_segment(s, src):
+                doc = a["doc"]
+                ambiguous += [f"{rid}: {x}" for x in a["ambiguous"]]
+                instr_seg += 1
+                if doc is None or C is None:
+                    states.append(False if doc is None else None)
+                    continue
+                ok = doc in C["meta"]; instr_found += ok; states.append(ok)
+                if not (cat != "STATUTE_GENERIC" and doc.startswith("act-") and C["sections"].get(doc)):
+                    continue
+                for num in a["numbers"]:
                     sect_total += 1
                     key = "s" + num.lower()
                     if key in C["sections"][doc]:
@@ -185,7 +210,8 @@ def build(ref):
         "records_with_statute_reference": pct(len(with_statute), len(by_rec)),
         "records_without_any_statute_or_case_reference": sorted(r for r, segs in by_rec.items()
                                                                if not any(s["category"] in ("STATUTE_LOCATOR", "STATUTE_GENERIC", "CASE_REFERENCE", "LOCATOR_CONTINUATION") for s in segs)),
-        "statute_segments_instrument_searchable": "NOT_CHECKED" if C is None else pct(instr_found, instr_seg),
+        "statute_instrument_mentions_searchable": "NOT_CHECKED" if C is None else pct(instr_found, instr_seg),
+        "ambiguous_locators_not_counted": ambiguous,
         "records_all_statute_instruments_searchable": "NOT_CHECKED" if C is None else pct(sum(1 for r in with_statute if all(rec_inst[r])), len(with_statute)),
         "cited_act_sections_present_in_corpus": "NOT_CHECKED" if C is None else pct(sect_found, sect_total),
         "cited_act_sections_missing": sect_missing,
@@ -269,13 +295,15 @@ Gap / non-legal codes: {', '.join(c['gap_codes'])}.
 | Measure | Value |
 | --- | --- |
 | Records with a statute reference | {f(p['records_with_statute_reference'])} |
-| Statute segments whose instrument is in the crawler corpus | {f(p['statute_segments_instrument_searchable'])} |
+| Statute instrument mentions (every instrument named in a segment) in the crawler corpus | {f(p['statute_instrument_mentions_searchable'])} |
 | Records whose every statute instrument is in the corpus | {f(p['records_all_statute_instruments_searchable'])} |
 | Cited Act sections present as corpus section files | {f(p['cited_act_sections_present_in_corpus'])} |
 | Army Rules rule-level | {p['army_rules_rule_level']} |
 | Plain-text case references ({p['case_reference_segments']} segments) | {p['case_reference_resolution']} |
 
 Records with no statute or case reference at all ({len(p['records_without_any_statute_or_case_reference'])}): {', '.join(p['records_without_any_statute_or_case_reference'])}.
+
+Locators recorded as ambiguous and not counted ({len(p['ambiguous_locators_not_counted'])}): {'; '.join(p['ambiguous_locators_not_counted']) or 'none'}.
 
 Cited Act sections not found as corpus section files ({len(p['cited_act_sections_missing'])}): {', '.join(p['cited_act_sections_missing']) or 'none'}.
 

@@ -26,11 +26,11 @@ WS-C input: `legal_knowledge/audit_work/WS-C-MML/kb658_source_coverage_inventory
 | FULL | 370 | | D_CODED_ALL_SEARCHABLE | 279 |
 | NO_CITATION | 77 | | D_CODED_NONE_SEARCHABLE | 56 |
 | PARTIAL | 140 | | D_CODED_PARTLY_SEARCHABLE | 54 |
-| SOURCE_GAP | 56 | | D_PLAIN_ALL_STATUTE_SEARCHABLE | 169 |
+| SOURCE_GAP | 56 | | D_PLAIN_ALL_STATUTE_SEARCHABLE | 168 |
 | UNRESOLVED | 15 | | D_PLAIN_CASE_OR_LOCATOR_ONLY | 25 |
 |  |  | | D_PLAIN_NO_STATUTE_OR_CASE | 66 |
-|  |  | | D_PLAIN_PARTLY_SEARCHABLE | 6 |
-|  |  | | D_PLAIN_STATUTE_NOT_SEARCHABLE | 3 |
+|  |  | | D_PLAIN_PARTLY_SEARCHABLE | 8 |
+|  |  | | D_PLAIN_STATUTE_NOT_SEARCHABLE | 2 |
 
 Mapping to coarse buckets: WS-C FULL→COMPLETE, PARTIAL→PARTIAL, SOURCE_GAP/UNRESOLVED→NONE, NO_CITATION→NO_CITATION; WS-D *_ALL_*→COMPLETE, *_PARTLY_*→PARTIAL, *_NONE_*/STATUTE_NOT_SEARCHABLE/CASE_OR_LOCATOR_ONLY→NONE, NO_STATUTE_OR_CASE→NO_CITATION.
 
@@ -39,11 +39,11 @@ Mapping to coarse buckets: WS-C FULL→COMPLETE, PARTIAL→PARTIAL, SOURCE_GAP/U
 | WS-C \ WS-D | COMPLETE | PARTIAL | NONE | NO_CITATION | total |
 | --- | --- | --- | --- | --- | --- |
 | COMPLETE | 363 | 6 | 1 | 0 | 370 |
-| PARTIAL | 85 | 54 | 1 | 0 | 140 |
+| PARTIAL | 84 | 56 | 0 | 0 | 140 |
 | NONE | 0 | 0 | 71 | 0 | 71 |
 | NO_CITATION | 0 | 0 | 11 | 66 | 77 |
 
-**Agreement: 554/658 (84.2%).** Disagreements: 104; with at least one explanation tag: 104; unexplained: 0.
+**Agreement: 556/658 (84.5%).** Disagreements: 102; with at least one explanation tag: 102; unexplained: 0.
 
 ## 4. Fine-grained matrix (WS-C state × WS-D state)
 
@@ -51,7 +51,7 @@ Mapping to coarse buckets: WS-C FULL→COMPLETE, PARTIAL→PARTIAL, SOURCE_GAP/U
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | FULL | 207 | 0 | 0 | 156 | 0 | 0 | 6 | 1 |
 | NO_CITATION | 0 | 0 | 0 | 0 | 11 | 66 | 0 | 0 |
-| PARTIAL | 72 | 0 | 54 | 13 | 0 | 0 | 0 | 1 |
+| PARTIAL | 72 | 0 | 54 | 12 | 0 | 0 | 2 | 0 |
 | SOURCE_GAP | 0 | 55 | 0 | 0 | 0 | 0 | 0 | 1 |
 | UNRESOLVED | 0 | 1 | 0 | 0 | 14 | 0 | 0 | 0 |
 
@@ -60,12 +60,12 @@ Mapping to coarse buckets: WS-C FULL→COMPLETE, PARTIAL→PARTIAL, SOURCE_GAP/U
 | Rule | Records | Meaning |
 | --- | --- | --- |
 | R1_CO_CITATION | 39 | WS-C never rates a record FULL if a code is resolved only by co-citation; WS-D counts the co-citation target as searchable. |
-| R2_NO_PINPOINT | 32 | WS-C FULL requires a pinpoint; WS-D searchability does not. |
+| R2_NO_PINPOINT | 30 | WS-C FULL requires a pinpoint; WS-D searchability does not. |
 | R3_STRUCTURAL_FLAG | 3 | WS-C downgrades FULL on provision-not-in-heading-index, Army Act/Rules cited without pinpoint, or non-official URL; WS-D has no such gate. |
 | R4_PLACEHOLDER | 6 | WS-C counts [VERIFY]/'verify' placeholders as unresolved; WS-D ignores placeholders for searchability. |
 | R5_GAP_CODE | 0 | Record has a firm code whose target is a declared GAP: WS-C counts it as a source gap; WS-D as not searchable. |
 | R6_PLAIN_CASE | 11 | Plain-text case citation (incl. WS-C's short-title CASE_NAME_WITHOUT_CODE flag, parser fix ba3d370e): WS-C flags it unresolved and never rates the record FULL; WS-D excludes case names from statute searchability (case-or-locator-only = NONE). |
-| R7_PLAIN_INSTRUMENT_SET | 21 | Plain statute set differs: WS-C treats AA/AR pinpoints and a fixed held list (incl. CrPC, Evidence Act, Air Force/Navy Act, Procedure Rules) as anchors without checking the corpus; WS-D maps only AA/AR/AFT Act/BNS/BNSS/BSA to crawler doc_ids. |
+| R7_PLAIN_INSTRUMENT_SET | 19 | Plain statute set differs: WS-C treats AA/AR pinpoints and a fixed held list (incl. CrPC, Evidence Act, Air Force/Navy Act, Procedure Rules) as anchors without checking the corpus; WS-D maps only AA/AR/AFT Act/BNS/BNSS/BSA to crawler doc_ids. |
 | R8_NO_CITATION_DEFINITION | 11 | NO_CITATION differs: WS-C requires a code, AA/AR pinpoint, held statute name or case pattern; WS-D counts any statute token (incl. 'AR trial rules') or locator continuation as a reference. |
 | R9_UNRESOLVED_CODE | 2 | Record has a PROBABLE/CATEGORY_ONLY/UNRESOLVABLE code: WS-C counts it unresolved whatever its target; WS-D searchability looks only at whether the register target exists (identity class is scored separately in citation_resolution_score). |
 | R11_PLAIN_NAME_IN_CODED_RECORD | 3 | Coded record that also names a statute in plain text outside WS-C's held list (e.g. 'Constitution'): WS-C counts it as a gap; WS-D scores coded records by their codes only. |

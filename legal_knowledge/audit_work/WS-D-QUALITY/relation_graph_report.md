@@ -18,7 +18,7 @@ Inputs: KB sha `9a8f0d193065…`, cases sha `8b8d53cd1434…`, crawler corpus re
 | codes | 87 |
 | kb_records | 658 |
 | kb_records_without_codes | 269 |
-| page_image_checks | 29 |
+| page_image_checks | 36 |
 
 ## Edges and dangling references
 

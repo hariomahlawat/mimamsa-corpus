@@ -8,7 +8,7 @@ automatically when they reuse a convention:
   IMG-1  page-image register rows (page_image_checks*.csv, identity_transcription_register*.csv) carry a
          64-hex render_png_sha256.
   IMG-2  a row whose evidence_level starts IMAGE_CHECKED carries render evidence: a 64-hex render hash in
-         the row, or a check id (PIC-n / WSA-PIC-n / WSB-PIC-n / WSC-PIC-n) that resolves to a page-image
+         the row, or a complete check id (PIC-n / WSA-PIC-n / WSB-PIC-n / WSC-PIC-n; prefix never stripped) that resolves to a page-image
          register row with a 64-hex render hash.
          Render evidence also resolves (a) through the row's document SHA-256 when another register row or
          an audit source JSON pairs that document hash with a render hash or check id, and (b) through
@@ -43,7 +43,9 @@ ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_DIR = ROOT / "legal_knowledge" / "audit_work"
 BASELINE = Path(__file__).resolve().parent / "provenance_baseline.json"
 HEX = re.compile(r"(?<![0-9a-f])[0-9a-f]{64}(?![0-9a-f])")
-CHECK_ID = re.compile(r"\b(?:WS[ABC]-)?PIC-\d+\b")
+# Complete check IDs (review finding PR #22): a workstream prefix is part of the ID and is never stripped,
+# so 'WSD-PIC-5' cannot resolve through an unrelated 'PIC-5'.
+CHECK_ID = re.compile(r"(?<![A-Za-z0-9-])(?:WS[A-Z]-)?PIC-\d+(?!\d)")
 RENDER_COLS = ("render_png_sha256", "render_sha256", "page_render_sha256")
 DOC_SHA_COLS = ("sha256", "file_sha256", "document_sha256", "copy_sha256")
 ID_COLS = ("instr_id", "check_id", "chain_id", "change_id", "supp_id")

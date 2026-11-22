@@ -20,17 +20,19 @@ Gap / non-legal codes: AO, AR_ALT, SC_GILL, SRC-AO, SRC-ISO, SRC-ISOR, SRC-RA, S
 | Measure | Value |
 | --- | --- |
 | Records with a statute reference | 178/269 (66.2%) |
-| Statute segments whose instrument is in the crawler corpus | 251/261 (96.2%) |
-| Records whose every statute instrument is in the corpus | 169/178 (94.9%) |
-| Cited Act sections present as corpus section files | 448/448 (100.0%) |
+| Statute instrument mentions (every instrument named in a segment) in the crawler corpus | 254/265 (95.8%) |
+| Records whose every statute instrument is in the corpus | 168/178 (94.4%) |
+| Cited Act sections present as corpus section files | 446/446 (100.0%) |
 | Army Rules rule-level | NOT_CHECKED: crawler corpus has no section files for rules-army-rules-1954 |
 | Plain-text case references (26 segments) | NOT_CHECKED: plain-text case names are leads (WS-B owns identity resolution) |
 
 Records with no statute or case reference at all (66): ADM-CL-01, ADM-CL-02, ADM-CL-03, ADM-CL-04, ADM-CL-05, ADM-CL-06, ADM-CL-07, ADM-CL-08, ADM-CL-09, COI-045, PEN-CL-01, PEN-CL-02, PEN-CL-03, PEN-CL-04, PEN-CL-05, PEN-CL-06, PEN-CL-07, PEN-CL-08, PEN-CS-01, PEN-CS-02, PEN-CS-03, PEN-CS-04, PEN-CS-05, PEN-CS-06, PEN-CS-07, PEN-CS-08, PEN-CS-09, PEN-CS-10, PEN-CS-11, PEN-CS-12, PEN-CS-13, PEN-CS-14, PEN-CS-15, PEN-CS-16, PEN-CS-17, PEN-CS-18, PEN-CS-19, PEN-CS-20, V8-TPL-01, V8-TPL-02, V8-TPL-03, V8-TPL-04, V8-TPL-05, V8-TPL-06, V8-TPL-07, V8-WF-14, V9-CL-01, V9-CL-02, V9-CL-03, V9-CL-04, V9-CL-05, V9-CL-06, V9-CL-07, V9-CL-08, V9-CL-09, V9-CL-10, V9-CL-11, V9-CL-12, V9-TPL-01, V9-TPL-02, V9-TPL-03, V9-TPL-04, V9-TPL-05, V9-TPL-06, V9-TPL-07, V9-TPL-08.
 
+Locators recorded as ambiguous and not counted (1): ADM-JD-02: §122 (section locator under AR [rules] context).
+
 Cited Act sections not found as corpus section files (0): none.
 
-Cited sections the corpus marks non-current (lead only; a record may discuss an omitted provision deliberately): act-army-1950#s109 (amended): CM-001, CM-003, CM-014, CM-CL-01, CM-CL-02; act-army-1950#s112 (amended): CM-001, CM-004, CM-CL-01, CM-CL-02; act-army-1950#s122 (amended): ADM-JD-02, CM-001, CM-011, CM-012, CM-CL-01, CM-SC-10, CM-SC-11, SC13, V8-WF-13; act-army-1950#s123 (amended): CM-001, CM-012, CM-CL-01, CM-SC-11, SC13, V8-WF-13; act-army-1950#s127 (omitted): CM-001, CM-013, CM-SC-18; act-army-1950#s135 (amended): CM-024, CM-027, CM-CL-08, V9-WF-07; act-army-1950#s137 (amended): CM-027, CM-CL-08, V9-SC-06, V9-WF-07; act-army-1950#s162 (amended): CM-034, CM-038, CM-039, CM-CL-11, CM-SC-14; act-army-1950#s164 (amended): CM-035, CM-039, CM-CL-10, CM-CL-12, CM-SC-16; act-army-1950#s165 (amended): CM-035, CM-039, CM-CL-10, CM-CL-12; act-army-1950#s169a (amended): CM-038, CM-CL-11; act-army-1950#s2 (amended): CM-001, CM-CL-01; act-army-1950#s20 (amended): ADM-001, ADM-003, ADM-011, ADM-030, ADM-SC-01; act-army-1950#s26 (amended): ADM-020, ADM-022, ADM-023, ADM-028, ADM-SC-06; act-army-1950#s3 (amended): V8-WF-02; act-army-1950#s70 (amended): CM-013, CM-SC-12, SC09, V8-WF-01, V8-WF-02, V8-WF-06, V8-WF-08; act-army-1950#s80 (amended): SC04, SC05; act-army-1950#s81 (amended): SC04, SC05; act-army-1950#s83 (amended): SC07; act-army-1950#s84 (amended): SC08; act-army-1950#s85 (amended): SC06; act-army-1950#s88 (amended): SC07, SC15.
+Cited sections the corpus marks non-current (lead only; a record may discuss an omitted provision deliberately): act-army-1950#s109 (amended): CM-001, CM-003, CM-014, CM-CL-01, CM-CL-02; act-army-1950#s112 (amended): CM-001, CM-004, CM-CL-01, CM-CL-02; act-army-1950#s122 (amended): CM-001, CM-011, CM-012, CM-CL-01, CM-SC-10, CM-SC-11, SC13, V8-WF-13; act-army-1950#s123 (amended): CM-001, CM-012, CM-CL-01, CM-SC-11, SC13, V8-WF-13; act-army-1950#s127 (omitted): CM-001, CM-013, CM-SC-18; act-army-1950#s135 (amended): CM-024, CM-027, CM-CL-08, V9-WF-07; act-army-1950#s137 (amended): CM-027, CM-CL-08, V9-SC-06, V9-WF-07; act-army-1950#s162 (amended): CM-034, CM-038, CM-039, CM-CL-11, CM-SC-14; act-army-1950#s164 (amended): CM-035, CM-039, CM-CL-10, CM-CL-12, CM-SC-16; act-army-1950#s165 (amended): CM-035, CM-039, CM-CL-10, CM-CL-12; act-army-1950#s169a (amended): CM-038, CM-CL-11; act-army-1950#s2 (amended): CM-001, CM-CL-01; act-army-1950#s20 (amended): ADM-001, ADM-003, ADM-011, ADM-030, ADM-SC-01; act-army-1950#s26 (amended): ADM-020, ADM-022, ADM-023, ADM-028, ADM-SC-06; act-army-1950#s3 (amended): V8-WF-02; act-army-1950#s70 (amended): CM-013, CM-SC-12, SC09, V8-WF-01, V8-WF-02, V8-WF-06, V8-WF-08; act-army-1950#s80 (amended): SC04, SC05; act-army-1950#s81 (amended): SC04, SC05; act-army-1950#s83 (amended): SC07; act-army-1950#s84 (amended): SC08; act-army-1950#s85 (amended): SC06; act-army-1950#s88 (amended): SC07, SC15.
 
 ## Cases (denominator = 53)
 | Measure | Value |
@@ -45,4 +47,4 @@ Cited sections the corpus marks non-current (lead only; a record may discuss an 
 | Measure | Value |
 | --- | --- |
 | Coded records with every code searchable | 279/658 (42.4%) |
-| Plain-text records with every statute instrument searchable | 169/658 (25.7%) |
+| Plain-text records with every statute instrument searchable | 168/658 (25.5%) |

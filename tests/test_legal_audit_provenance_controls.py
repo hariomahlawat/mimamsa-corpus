@@ -159,9 +159,12 @@ FIND = {"finding_id": "F1", "batch_id": "T", "record_id": "KB-003", "original_sh
         "severity": "P3", "issue_type": "OTHER", "claim": "c", "original_location": "l", "original_text": "t",
         "proposed_text": None, "rationale": "r", "source_ids": ["S-AR"], "verification_state": "SOURCE_LOCATED",
         "review_state": "PENDING", "requires_legal_review": False}
-REL = {"relation_id": "REL-KB-003-MML2-p150", "relation_type": "manual_supported", "from_record_id": "KB-003",
+# Genuine evidence: PILOT-01 PIC-02 is a page-image check of MML 2.pdf (manifest hash db211918...) p.152, and
+# render_sha256 is that check's registered render hash (review fix PR #22: evidence must match the check record).
+PIC02_RENDER = "6f9054d335f11143af613adb9232665924d89c8d01da9f983267aca15be58cd9"
+REL = {"relation_id": "REL-KB-003-MML2-p152", "relation_type": "manual_supported", "from_record_id": "KB-003",
        "mml_file": "MML 2.pdf", "mml_file_sha256": "db2119182ed2e4ccca22dd225d955327f6398ee98303e1c94615ba85b4396f65",
-       "locator": "PDF p.150", "page_image_check_id": "PIC-01", "render_sha256": R,
+       "locator": "PDF p.152", "page_image_check_id": "PIC-02", "render_sha256": PIC02_RENDER,
        "content_role": "MANUAL_REPRODUCED_LEGAL_TEXT", "document_authority": "UNVERIFIED_MANUAL",
        "carrier_provenance": "USER_SUPPLIED", "legal_effect": "NOT_STATUTORY_AUTHORITY",
        "asserted_by": "manual-of-military-law-auditor", "asserted_on": "2026-11-23"}
