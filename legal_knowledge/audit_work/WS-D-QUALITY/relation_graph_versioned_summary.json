@@ -1,0 +1,53 @@
+{
+ "artifact": "WS-D versioned statutory edges",
+ "structural_only": true,
+ "inputs": {
+  "kb": {
+   "path": "legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.jsonl",
+   "sha256": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1"
+  },
+  "version_register": {
+   "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/statutory_version_register_seed.csv",
+   "sha256": "b434a0377f835caf79f34fe45f386b27201084900c1b7f5f03a893a196671bd7"
+  },
+  "wsa_change_log": {
+   "path": "legal_knowledge/audit_work/WS-A-STATUTORY/provision_change_log.csv",
+   "sha256": "342ab73c937d7f9af3cf47c70f7ecb40d2cc1c65bf0f3ad9bf1f980c5e6ebcaf"
+  },
+  "wsa_aa_chain": {
+   "path": "legal_knowledge/audit_work/WS-A-STATUTORY/army_act_amendment_chain.csv",
+   "sha256": "7fba35cf3a61f737c5054269bc2a785305a6d9c64b03c733f32106c99b05d1d2"
+  },
+  "wsc_inventory": {
+   "path": "legal_knowledge/audit_work/WS-C-MML/kb658_source_coverage_inventory.csv",
+   "sha256": "da06631f9b3ac5207dc84508b03cd631831e3e88b825ac356e9fea2247bc17bc"
+  },
+  "plaintext_index": {
+   "path": "legal_knowledge/audit_work/WS-D-QUALITY/plaintext_citation_index.csv",
+   "sha256": "7bd6d9b3f62aeef8a6505b07ad0026b28817dd50a4017b4b038bdd53eecf1ff6"
+  }
+ },
+ "summary": {
+  "records_citing_aa_or_ar_provisions": 282,
+  "record_provision_citations": 1061,
+  "citations_with_registered_versions": 331,
+  "edges": 380,
+  "edges_with_stated_effective_date": 177,
+  "edges_effective_date_unstated_flagged": 203,
+  "provisions_with_versions": 89,
+  "amendment_events": 119,
+  "events_grouping_duplicate_evidence": 25,
+  "edges_zero_length_or_reversed": 0,
+  "by_version_source": {
+   "ARMY-RULES-CHAIN-01/statutory_version_register_seed.csv": 26,
+   "WS-A-STATUTORY/army_act_amendment_chain.csv": 119,
+   "WS-A-STATUTORY/provision_change_log.csv": 186,
+   "WS-A-STATUTORY/provision_change_log.csv;ARMY-RULES-CHAIN-01/statutory_version_register_seed.csv": 49
+  },
+  "determination_flags": {
+   "DETERMINATION_CONFLICTING": 26,
+   "DETERMINATION_OPEN": 29,
+   "DETERMINATION_PROPOSAL": 20
+  }
+ }
+}
