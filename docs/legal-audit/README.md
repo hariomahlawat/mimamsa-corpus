@@ -20,9 +20,10 @@ The existing judgment collection is active and substantial; check the current ma
 2. `docs/legal-audit/CLAUDE_START_PROMPT.md`: prompt to paste into Claude Code.
 3. `docs/legal-audit/ORCHESTRATION.md`: orchestration/delegation with independent checks.
 4. `docs/legal-audit/EVIDENCE_STANDARD.md`: source hierarchy, claims and risk controls.
-5. `docs/legal-audit/PILOT_AND_ACCEPTANCE.md`: bounded 25-record pilot; go/no-go.
-6. `docs/legal-audit/schemas/`: schema of proposed source, finding and review records.
-7. `tools/legal_audit/validate.py`: structural validator only, not legal truth certification.
+5. `docs/legal-audit/SOURCE_AUTHORITY_POLICY.md`: government Gazette/manual authority versus copy/host provenance; required for new conflict checks.
+6. `docs/legal-audit/PILOT_AND_ACCEPTANCE.md`: bounded 25-record pilot; go/no-go.
+7. `docs/legal-audit/schemas/`: schema of proposed source, finding and review records.
+8. `tools/legal_audit/validate.py`: structural validator only, not legal truth certification.
 
 ## Required workflow
 
