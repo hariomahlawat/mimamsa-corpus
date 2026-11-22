@@ -8,10 +8,10 @@ Resume procedure: read each `WS-*/STATUS.md` on its branch (`git -C /home/user/w
 
 | WS | Issue | Agent | Branch / worktree | State | Last integrated commit | CI | Integration |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| A Statutory & Gazette | #11 | launched 2026-11-22 | claude/ws-a-statutory · /home/user/ws-a | RUNNING (base 2a7ae7af) | – | – | awaiting first hand-off |
-| B Judgments | #12 | launched 2026-11-22 | claude/ws-b-judgments · /home/user/ws-b | RUNNING (base 2a7ae7af) | – | – | awaiting first hand-off |
-| C MML & procedure | #13 | launched 2026-11-22 | claude/ws-c-mml · /home/user/ws-c | RUNNING (base 2a7ae7af) | – | – | awaiting first hand-off |
-| D Data quality & CI | #14 | Agent D (general-purpose subagent) | claude/ws-d-quality · /home/user/ws-d | COMPLETED hand-off 1 | 5df7ac95 (merged with #16) | local gate green; 113 tests | PR #18 → claude/next-stage-proposal; review WS-D-1 |
+| A Statutory & Gazette | #11 | Agent A (completed) | claude/ws-a-statutory · /home/user/ws-a | COMPLETED hand-off 1 | 74530be9 | local gate green | PR #19; review WS-A-1 (C-08 image re-confirmed) |
+| B Judgments | #12 | Agent B (completed) | claude/ws-b-judgments · /home/user/ws-b | COMPLETED hand-off 1 | 68290bae | local gate green | PR #21; review WS-B-1 (A-03 spot-checked) |
+| C MML & procedure | #13 | Agent C (completed) | claude/ws-c-mml · /home/user/ws-c | COMPLETED hand-off 1 | a4c68cf2 | local gate green | PR #20; review WS-C-1 |
+| D Data quality & CI | #14 | Agent D (completed) | claude/ws-d-quality · /home/user/ws-d | COMPLETED hand-off 1 | 1be2a2e1 (re-merged with #16 cee610f9) | local gate green; 113 tests | PR #18; review WS-D-1 |
 
 ## PRs (owner review; none merged)
 | PR | Branch → base | Content | Approval scope |
@@ -20,7 +20,9 @@ Resume procedure: read each `WS-*/STATUS.md` on its branch (`git -C /home/user/w
 | #16 | claude/next-stage-proposal → claude/audit-pilot-01 | Next-stage proposal (fd01b234 + b20843d6) with owner corrections: distinct dates, continuation-page image checks PIC-30..36, C-08 (r.193) / C-09 (r.194) split | Review proposal |
 | #17 | claude/acq-02-config → claude/acq-01-config | ACQ-02 crawler config, source `archive_acq02` (16 URLs with expected hashes), disabled | Config approval, then a separate download approval (ACQ-02 scope only) |
 | #18 | claude/ws-d-quality → claude/next-stage-proposal | WS-D: hash reproduction, 87-code test, scores, plain-text index, relation graph, coverage scorecard, validator controls, 4 CI steps | Review proposal |
-| WS-A..C | claude/ws-*-* → claude/next-stage-proposal | Opened after review of each hand-off | Review proposals |
+| #19 | claude/ws-a-statutory → claude/next-stage-proposal | WS-A: S.R.O. 17(E)/1993 itemised (41 items), r.193/194 chronology, Army Act chain, ACQ-03 requests | Review proposal; ACQ-03 needs separate approvals |
+| #20 | claude/ws-c-mml → claude/next-stage-proposal | WS-C: MML edition status, crosswalk, 658 coverage inventory, calibration sample (selection only) | Review proposal |
+| #21 | claude/ws-b-judgments → claude/next-stage-proposal | WS-B: intern intake manifest, 53-case identity, holdings, treatment, adverse queue | Review proposal |
 
 Approval scopes are documented separately:
 - ACQ-01 = PR #8 (14 URLs).
@@ -71,3 +73,24 @@ The orchestrator reviews each workstream hand-off and records its review in `COO
 ## Agent messages sent
 - 2026-11-22: owner corrections relayed to agents A–D (date semantics, page-image rule, C-08/C-09, base branch `claude/next-stage-proposal`).
 - 2026-11-22: WS-D questions routed: OQ-D-004/008/009/012 → WS-B; OQ-D-005 → WS-A.
+
+## Cycle 1 release-readiness scorecard (2026-11-22)
+| Exit condition (#10) | A | B | C | D |
+| --- | --- | --- | --- | --- |
+| Frozen input scope / manifest | ✔ registers with file SHA-256 | ✔ raw-data@ad77758d, held_copies | ✔ input_manifest.json | ✔ hash_reproduction.json |
+| Evidence register | ✔ identity_transcription (33 PIC) | ✔ holdings and identity registers | ✔ 28 PIC | ✔ scores and graph |
+| Change proposal | ✔ PCL, ACQ-03 | ✔ adverse queue, crosswalk | ✔ 14 candidate corrections | ✔ validator, CI, defects |
+| Validation outcome | ✔ gates | ✔ gates + check_ws_b | ✔ gates, reproducible | ✔ 113 tests |
+| Gaps register / next action | ✔ | ✔ | ✔ | ✔ |
+| Coordinator independent check | C-08 re-rendered | A-03 on official copy | scope, reproducibility | clean-tree CI |
+
+- **Combined check:** #16 plus all four branches merge with no conflicts. With all combined: 113 tests OK; PILOT-01 and R23 strict OK; `check_registers` 0 errors; 74 CSVs OK; relation graph OK.
+- **Originals:** unchanged (9a8f0d19…, 8b8d53cd…).
+- **No unverified authority promoted.** Highest state reached: technical review. Advisor and JAG states are NOT_STARTED.
+- **Legal states:** r.23(3) CONFLICTING; r.193 (C-08) OPEN, now explained on located evidence by S.R.O. 17(E)/1993 item 38; r.194 (C-09) PROPOSAL.
+
+## Next cycle (no approval needed; not started)
+- WS-A: the 1964 r.187(1) footnote lead (OQ-C-06); image-check the six new hints once bytes are approved.
+- WS-B: the remaining unresolved cases; identities for the 13 KB records (CC-11).
+- WS-D: the "manual_supported" relation type (CC-13, schema lease).
+- Cross-stream: reconcile WS-C's 658 inventory (FULL 379) with WS-D's scorecard (279/658 coded-searchable); the definitions differ and both carry explicit denominators.
