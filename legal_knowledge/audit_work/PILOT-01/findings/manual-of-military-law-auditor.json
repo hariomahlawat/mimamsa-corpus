@@ -1,0 +1,873 @@
+[
+  {
+    "finding_id": "F-MML-001",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-01",
+    "original_sha256": "b4bb5c3df23bfd6c6025e2b663d3d5132e5be306fe6bf43e513631d5b5009848",
+    "workstream": "MANUAL",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "MML 2.pdf reproduces Army Rule 22(1) with the proviso permitting the CO to dispense with r.22(1) where the charge arises from a court of inquiry in which r.180 was complied with, and r.22(3)(a)-(d), in the same terms as the India Code compilation.",
+    "original_location": "MMLPKT-01",
+    "original_text": "Army Rules 1954 r.22 (hearing of charge; r.22(1) proviso)",
+    "proposed_text": null,
+    "rationale": "Point tested: wording of r.22(1) proviso and r.22(3) options. MML 2.pdf p.150 and India Code [[page 37]]-[[page 38]] both read that the CO 'may dispense with the procedure in sub-rule (1)' where 'the provisions of rule 180 have been complied with in respect of that accused'. r.22(3)(a)-(d) and its proviso match. Minor wording variants exist elsewhere in r.22 (see companion finding).",
+    "source_ids": [
+      "S-MML-101"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "Verification limited to agreement between MML 2.pdf and the India Code compilation on the proviso and r.22(3); not proof of the authenticated S.R.O. 17(E) of 1993 text.",
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "MML 2.pdf PDF p.150; India Code Army Rules [[page 37]]-[[page 38]]",
+    "temporal_scope": "MML texts: undated editions (latest amendment notes seen: MML 2.pdf to SRO 8(E) of 23-06-2003; AR .doc copies to SRO 17(E) of 06-12-1993). Compared with India Code Army Rules compilation retrieved 2026-11-21; amendments after the compilation's last update and original S.R.O. text not verified.",
+    "mml_anchor_ids": [
+      "S-MML-001"
+    ],
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "KB-003",
+      "HCE-004"
+    ]
+  },
+  {
+    "finding_id": "F-MML-002",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-01",
+    "original_sha256": "b4bb5c3df23bfd6c6025e2b663d3d5132e5be306fe6bf43e513631d5b5009848",
+    "workstream": "MANUAL",
+    "severity": "P1",
+    "issue_type": "OUTDATED_AUTHORITY",
+    "claim": "The two MML vol 2(AR) .doc copies reproduce r.22 without the Explanation (officer other than CO proceeding under s.80) that MML 2.pdf and the India Code compilation carry, and differ in wording from MML 2.pdf in r.22(1)-(2).",
+    "original_location": "MMLPKT-01",
+    "original_text": "Army Rules 1954 r.22 (hearing of charge; r.22(1) proviso)",
+    "proposed_text": "Proposal only: label the vol 2(AR) .doc r.22 copies as pre-2002 text lacking the Explanation inserted by SRO 258/2002; do not use them as current text of r.22.",
+    "rationale": "MML 2.pdf p.150 contains the Explanation footnoted 'Inserted by SRO 258/2002'; India Code [[page 39]] carries it with 'SRO No 258 dt 27 Nov 2002'. MML vol 2(AR).doc.doc L00439-L00451 and doc-1 L01314-L01340 end at r.22(4) with no Explanation, consistent with a pre-2002 state. Wording variants: r.22(1) 'call any witness' (MML 2.pdf) vs 'call such witness' (both .doc copies and India Code); r.22(2) 'in his discretion' appears only in the .doc copies; proviso 'investigating' (.doc) vs 'investigation' (MML 2.pdf, India Code). MML 2.pdf footnotes r.22 as 'Subs by SRO 17(E), dated 6th December, 1993'; India Code compilation shows no substitution note for r.22(1)-(4). The .doc copies are outdated for the Explanation if the 2002 insertion is confirmed.",
+    "source_ids": [
+      "S-MML-101"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": true,
+    "advisor_questions": [
+      "Confirm from the Gazette that SRO 258 of 27 Nov 2002 inserted the r.22 Explanation and its exact wording ('shall ... may be complied with').",
+      "Is 'call any witness' (MML 2.pdf) or 'call such witness' (India Code) the authenticated wording of r.22(1) as substituted by SRO 17(E) of 1993?"
+    ],
+    "limitations": [
+      "SRO 17(E) of 1993 and SRO 258 of 2002 not obtained; .doc footnote texts not present in derived text.",
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "MML 2.pdf PDF p.150; vol 2(AR).doc.doc L00439-L00451; vol 2(AR).doc-1.doc L01314-L01340 (printed pp.349-350); India Code [[page 37]]-[[page 39]]",
+    "temporal_scope": "MML texts: undated editions (latest amendment notes seen: MML 2.pdf to SRO 8(E) of 23-06-2003; AR .doc copies to SRO 17(E) of 06-12-1993). Compared with India Code Army Rules compilation retrieved 2026-11-21; amendments after the compilation's last update and original S.R.O. text not verified.",
+    "mml_anchor_ids": [
+      "S-MML-001",
+      "S-MML-003",
+      "S-MML-004"
+    ],
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "KB-003",
+      "HCE-004"
+    ]
+  },
+  {
+    "finding_id": "F-MML-003",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-02",
+    "original_sha256": "aee2b541c7ffb67063f24d468f353730ca1efefc89fe97956ee9d2e89944af30",
+    "workstream": "MANUAL",
+    "severity": "P0",
+    "issue_type": "CONFLICT",
+    "claim": "Army Rule 23(3) caution: all three MML copies read 'You are not obliged to say anything unless you wish to do so', whereas the India Code compilation reads 'You are obliged to say anything unless you wish to do so'.",
+    "original_location": "MMLPKT-02",
+    "original_text": "Army Rules 1954 r.23(3) (caution to accused at SoE)",
+    "proposed_text": null,
+    "rationale": "MML 2.pdf p.152 lines 1-3, vol 2(AR).doc.doc L00472 and vol 2(AR).doc-1.doc L01383 (printed p.352) each contain 'not obliged'. India Code Army Rules [[page 41]] omits 'not'. The original S.R.O. 484 of 27-11-1954 and any amending notification are not held. Per fixed position this conflict is recorded and NOT resolved; neither the manual reading nor the compilation reading is treated as authoritative. The MML notes (p.152 notes 6-7) assume a protective caution but do not authenticate the rule text.",
+    "source_ids": [
+      "S-MML-102"
+    ],
+    "contrary_source_ids": [
+      "S-MML-005",
+      "S-MML-006",
+      "S-MML-007"
+    ],
+    "verification_state": "CONFLICTING",
+    "review_state": "PENDING",
+    "requires_legal_review": true,
+    "advisor_questions": [
+      "Obtain and authenticate the Gazette text of S.R.O. 484 dated 27-11-1954 (r.23(3)) and any later amendment before any wording is adopted.",
+      "Pending authentication, what interim wording, if any, may be displayed with a conflict warning?"
+    ],
+    "limitations": [
+      "MML 'not' reading not confirmed against page images of MML 2.pdf p.152.",
+      "No Gazette or Ministry source consulted; MML cannot resolve the conflict.",
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "CONFLICTING_SOURCES",
+    "pinpoint": "MML 2.pdf PDF p.152; vol 2(AR).doc.doc L00472; vol 2(AR).doc-1.doc L01383 (printed p.352); India Code Army Rules [[page 41]]",
+    "temporal_scope": "Manual copies undated; India Code compilation retrieved 2026-11-21. Original S.R.O. 484 (27-11-1954) and any amendment to r.23 not examined; conflict persists for all dates.",
+    "mml_anchor_ids": [
+      "S-MML-005",
+      "S-MML-006",
+      "S-MML-007",
+      "S-MML-008"
+    ],
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "HCE-010",
+      "EV-016"
+    ]
+  },
+  {
+    "finding_id": "F-MML-004",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-03",
+    "original_sha256": "95904d7070291f7b7df9ced13c07d4cd3d6952e34d3073e7612d972c485f8541",
+    "workstream": "MANUAL",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "MML 2.pdf records Army Rule 25 as omitted by S.R.O. 17(E) dated 6-12-1993, as does the India Code compilation.",
+    "original_location": "MMLPKT-03",
+    "original_text": "Army Rules 1954 r.25 (omitted)",
+    "proposed_text": null,
+    "rationale": "Point tested: status of r.25. MML 2.pdf p.153 '25. [ Omitted ]' with footnote 'Omitted by S.R.O 17(E), dated 6th December, 1993'; India Code [[page 45]] '25. Omitted vide SRO 17.E dated 6.12.93.' Both agree on omission and the omitting notification.",
+    "source_ids": [
+      "S-MML-103"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "MML 2.pdf PDF p.153; India Code Army Rules [[page 45]]",
+    "temporal_scope": "MML texts: undated editions (latest amendment notes seen: MML 2.pdf to SRO 8(E) of 23-06-2003; AR .doc copies to SRO 17(E) of 06-12-1993). Compared with India Code Army Rules compilation retrieved 2026-11-21; amendments after the compilation's last update and original S.R.O. text not verified.",
+    "mml_anchor_ids": [
+      "S-MML-009"
+    ],
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": []
+  },
+  {
+    "finding_id": "F-MML-005",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-03",
+    "original_sha256": "95904d7070291f7b7df9ced13c07d4cd3d6952e34d3073e7612d972c485f8541",
+    "workstream": "MANUAL",
+    "severity": "P2",
+    "issue_type": "BROKEN_REFERENCE",
+    "claim": "Both MML vol 2(AR) .doc copies show r.25 as 'Omitted' without authority or date and retain notes 1-4 explaining the omitted procedure for officers; r.22 notes in the .doc copies (and in the India Code compilation's editorial notes) still cross-refer to AR 25.",
+    "original_location": "MMLPKT-03",
+    "original_text": "Army Rules 1954 r.25 (omitted)",
+    "proposed_text": "Proposal only: treat notes under omitted r.25, and r.22 notes 1 and 9 cross-referring to AR 25, as obsolete commentary in the .doc copies.",
+    "rationale": "vol 2(AR).doc.doc L00502-L00507 and doc-1 L01442-L01451 (printed pp.354-355) keep notes describing r.25 investigation of charges against officers; doc-1's arrangement of rules (L00097) still lists '25. Procedure or charge against officer'. r.22 notes 1 and 9 in both .doc copies refer to AR 25. MML 2.pdf r.22 notes (pp.150-151) contain no such cross-reference. The India Code compilation's notes under r.22 ([[page 39]]-[[page 40]], notes 1 and 9) also refer to AR 25 although r.25 is omitted at [[page 45]] - an editorial-note inconsistency in the compilation, not the rule text.",
+    "source_ids": [
+      "S-MML-103",
+      "S-MML-101"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "vol 2(AR).doc.doc L00453, L00463, L00502-L00507; vol 2(AR).doc-1.doc L00097, L01344, L01365, L01442-L01451; India Code [[page 39]]-[[page 40]], [[page 45]]",
+    "temporal_scope": "MML texts: undated editions (latest amendment notes seen: MML 2.pdf to SRO 8(E) of 23-06-2003; AR .doc copies to SRO 17(E) of 06-12-1993). Compared with India Code Army Rules compilation retrieved 2026-11-21; amendments after the compilation's last update and original S.R.O. text not verified.",
+    "mml_anchor_ids": [
+      "S-MML-010",
+      "S-MML-011",
+      "S-MML-012",
+      "S-MML-013",
+      "S-MML-002"
+    ],
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": []
+  },
+  {
+    "finding_id": "F-MML-006",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-04",
+    "original_sha256": "e594535a3a0b9c556c62c9d82131a711708f54b10bd468c00243bd4f55bf6579",
+    "workstream": "MANUAL",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "MML 2.pdf reproduces the core Army Rule 180 obligation (full opportunity to be present throughout, make a statement, give evidence, cross-examine and produce witnesses; presiding officer to ensure notice) consistently with the India Code compilation.",
+    "original_location": "MMLPKT-04",
+    "original_text": "Army Rules 1954 r.180",
+    "proposed_text": null,
+    "rationale": "Point tested: the mandatory 'full opportunity must be afforded' formulation and presiding-officer notice duty. MML 2.pdf p.222 and India Code [[page 196]]-[[page 197]] agree on these elements; a one-word variant in the defence-witness limb is recorded separately.",
+    "source_ids": [
+      "S-MML-104"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "MML 2.pdf PDF p.222; India Code Army Rules [[page 196]]-[[page 197]]",
+    "temporal_scope": "MML texts: undated editions (latest amendment notes seen: MML 2.pdf to SRO 8(E) of 23-06-2003; AR .doc copies to SRO 17(E) of 06-12-1993). Compared with India Code Army Rules compilation retrieved 2026-11-21; amendments after the compilation's last update and original S.R.O. text not verified.",
+    "mml_anchor_ids": [
+      "S-MML-014"
+    ],
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "KB-026",
+      "HCE-004"
+    ]
+  },
+  {
+    "finding_id": "F-MML-007",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-04",
+    "original_sha256": "e594535a3a0b9c556c62c9d82131a711708f54b10bd468c00243bd4f55bf6579",
+    "workstream": "MANUAL",
+    "severity": "P2",
+    "issue_type": "POTENTIAL_CONFLICT",
+    "claim": "All three MML copies read 'producing any witnesses in defence of his character or military reputation'; the India Code compilation reads 'character and military reputation' in that limb.",
+    "original_location": "MMLPKT-04",
+    "original_text": "Army Rules 1954 r.180",
+    "proposed_text": null,
+    "rationale": "MML 2.pdf p.222, vol 2(AR).doc.doc L01881 and doc-1 L04050 (printed p.468) use 'or'; India Code [[page 196]] uses 'and' in the defence-witness limb while using 'or' elsewhere in the same rule. Not resolved; may be a compilation transcription variant. No other substantive difference noted.",
+    "source_ids": [
+      "S-MML-104"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": true,
+    "advisor_questions": [
+      "Confirm authenticated wording of r.180 defence-witness limb ('or' vs 'and')."
+    ],
+    "limitations": [
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "MML 2.pdf PDF p.222; vol 2(AR).doc.doc L01881; vol 2(AR).doc-1.doc L04050-L04054; India Code [[page 196]]",
+    "temporal_scope": "MML texts: undated editions (latest amendment notes seen: MML 2.pdf to SRO 8(E) of 23-06-2003; AR .doc copies to SRO 17(E) of 06-12-1993). Compared with India Code Army Rules compilation retrieved 2026-11-21; amendments after the compilation's last update and original S.R.O. text not verified.",
+    "mml_anchor_ids": [
+      "S-MML-014",
+      "S-MML-015",
+      "S-MML-016"
+    ],
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "KB-026",
+      "HCE-004"
+    ]
+  },
+  {
+    "finding_id": "F-MML-008",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-05",
+    "original_sha256": "67b15d127f81091b2a1b68bbdee915516bb675eaae0274a4a8b40a7ea2101754",
+    "workstream": "MANUAL",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "MML 2.pdf reproduces Army Rule 182 (inadmissibility of CoI proceedings, confessions, statements and answers against a person subject to the Act, save on trial for wilfully giving false evidence; proviso permitting use to cross-examine any witness) consistently with the India Code compilation.",
+    "original_location": "MMLPKT-05",
+    "original_text": "Army Rules 1954 r.182",
+    "proposed_text": null,
+    "rationale": "Point tested: exclusionary rule, false-evidence exception and cross-examination proviso. MML 2.pdf p.222 and India Code [[page 197]]-[[page 198]] agree. India Code shows typographical variants ('trial or such person', 'before the courts') not affecting the point tested.",
+    "source_ids": [
+      "S-MML-105"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "MML 2.pdf PDF p.222; India Code Army Rules [[page 197]]-[[page 198]]",
+    "temporal_scope": "MML texts: undated editions (latest amendment notes seen: MML 2.pdf to SRO 8(E) of 23-06-2003; AR .doc copies to SRO 17(E) of 06-12-1993). Compared with India Code Army Rules compilation retrieved 2026-11-21; amendments after the compilation's last update and original S.R.O. text not verified.",
+    "mml_anchor_ids": [
+      "S-MML-017"
+    ],
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "COI-025"
+    ]
+  },
+  {
+    "finding_id": "F-MML-009",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-05",
+    "original_sha256": "67b15d127f81091b2a1b68bbdee915516bb675eaae0274a4a8b40a7ea2101754",
+    "workstream": "MANUAL",
+    "severity": "P2",
+    "issue_type": "METADATA",
+    "claim": "MML copies differ on the amendment annotation and minor wording of r.182: MML 2.pdf brackets the whole rule as substituted by SRO 17(E) of 1993; both .doc copies bracket only the proviso.",
+    "original_location": "MMLPKT-05",
+    "original_text": "Army Rules 1954 r.182",
+    "proposed_text": null,
+    "rationale": "MML 2.pdf p.222 footnote 2 'Subs by SRO 17(E), dated 6th December, 1993' covers the whole rule; vol 2(AR).doc.doc L01892 and doc-1 L04072 bracket only the proviso (footnote text absent from derived text). Wording: 'before the court' (MML 2.pdf), 'before that court' and 'willfully' (.doc copies), 'before the courts' (India Code). The amendment history of r.182 therefore cannot be stated from these copies.",
+    "source_ids": [
+      "S-MML-105"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [
+      "Did SRO 17(E) of 1993 substitute the whole of r.182 or insert/substitute only the proviso?"
+    ],
+    "limitations": [
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "MML 2.pdf PDF p.222; vol 2(AR).doc.doc L01891-L01892; vol 2(AR).doc-1.doc L04070-L04072; India Code [[page 197]]-[[page 198]]",
+    "temporal_scope": "MML texts: undated editions (latest amendment notes seen: MML 2.pdf to SRO 8(E) of 23-06-2003; AR .doc copies to SRO 17(E) of 06-12-1993). Compared with India Code Army Rules compilation retrieved 2026-11-21; amendments after the compilation's last update and original S.R.O. text not verified.",
+    "mml_anchor_ids": [
+      "S-MML-017",
+      "S-MML-018",
+      "S-MML-019"
+    ],
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "COI-025"
+    ]
+  },
+  {
+    "finding_id": "F-MML-010",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-06",
+    "original_sha256": "d293fa382dae8553a3e79679f70329922f8d45a3256249ffd86590f4d730a7c1",
+    "workstream": "MANUAL",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "MML 2.pdf shows Army Act ss.75-76 (field punishment) as omitted by Act 37 of 1992, as does the India Code compilation (w.e.f. 6-9-1992).",
+    "original_location": "MMLPKT-06",
+    "original_text": "Army Act 1950 ss.75-76 (field punishment; omitted)",
+    "proposed_text": null,
+    "rationale": "MML 2.pdf p.62 '75. [Omitted]', '76. [Omitted]' with footnote 'Omitted by Act No. 37 of 1992.'; India Code [[page 27]] records both omitted by Act 37 of 1992, s.2, w.e.f. 6-9-1992.",
+    "source_ids": [
+      "S-MML-107"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "MML 2.pdf PDF p.62; India Code Army Act [[page 27]]",
+    "temporal_scope": "MML texts: undated editions (MML 2.pdf notes Act 37 of 1992 and later material; vol 2(AA) copies cite SROs to 1993). Compared with India Code Army Act compilation retrieved 2026-11-21 (amendment footnotes to Act 37 of 1992 and later); later amendment chain not verified.",
+    "mml_anchor_ids": [
+      "S-MML-020"
+    ],
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "HCE-017"
+    ]
+  },
+  {
+    "finding_id": "F-MML-011",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-06",
+    "original_sha256": "d293fa382dae8553a3e79679f70329922f8d45a3256249ffd86590f4d730a7c1",
+    "workstream": "MANUAL",
+    "severity": "P1",
+    "issue_type": "OUTDATED_AUTHORITY",
+    "claim": "MML vol 2(AA) .doc and .pdf show ss.75-76 merely as 'Omitted' (no authority/date) and their notes to s.80 still describe field punishment as an available summary award.",
+    "original_location": "MMLPKT-06",
+    "original_text": "Army Act 1950 ss.75-76 (field punishment; omitted)",
+    "proposed_text": "Proposal only: flag vol 2(AA) s.80 notes 6(b)(ii), 9(b) (field-punishment words) and 18 as superseded since 6-9-1992.",
+    "rationale": "vol 2(AA).pdf p.78 and .doc L01288-L01290 omit any amendment reference. Their s.80 notes keep 'Field punishment up to 28 days on active service' (note 6(b)(ii), pdf p.81 / doc L01339), list field punishment in note 9(b), and retain note 18 'Clause (j)' on field punishment (pdf p.82 / doc L01366-L01370), although s.80(j) is shown omitted in the same copies and in India Code [[page 27]] (cl.(j) omitted by Act 37 of 1992, s.4). Notes to ss.71, 73 and 77 in these copies also mention field punishment. MML 2.pdf s.80 notes (pp.63-65) contain no field-punishment items. Commanders relying on vol 2(AA) notes could treat an abolished punishment as available.",
+    "source_ids": [
+      "S-MML-107",
+      "S-MML-108"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": true,
+    "advisor_questions": [
+      "Confirm no residual field-punishment power survives (e.g., under s.82 specifications) after Act 37 of 1992."
+    ],
+    "limitations": [
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "vol 2(AA).pdf PDF pp.78, 81, 82; vol 2(AA).doc.doc L01288-L01290, L01338-L01370; MML 2.pdf PDF pp.62-65; India Code [[page 27]]",
+    "temporal_scope": "MML texts: undated editions (MML 2.pdf notes Act 37 of 1992 and later material; vol 2(AA) copies cite SROs to 1993). Compared with India Code Army Act compilation retrieved 2026-11-21 (amendment footnotes to Act 37 of 1992 and later); later amendment chain not verified.",
+    "mml_anchor_ids": [
+      "S-MML-021",
+      "S-MML-022",
+      "S-MML-023",
+      "S-MML-024",
+      "S-MML-025"
+    ],
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "HCE-017"
+    ]
+  },
+  {
+    "finding_id": "F-MML-012",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-07",
+    "original_sha256": "ef871b67799e62262390a6e830017c82bf99ce2f09c7f1c25a9327dbb504b517",
+    "workstream": "MANUAL",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "MML 2.pdf reproduces Army Act ss.79-82 (s.80 punishments (a)-(i) with (j) omitted; s.81(1) omitted, (2)-(5); s.82) in substance identical to the India Code compilation.",
+    "original_location": "MMLPKT-07",
+    "original_text": "Army Act 1950 ss.80-82 (summary punishments, limits, additional punishments)",
+    "proposed_text": null,
+    "rationale": "Point tested: list of s.80 punishments and s.81 limits (42-day aggregate; (a)-(c) not to NCOs; (g) not below NCO) and s.82 power. MML 2.pdf pp.63-66 and India Code [[page 27]]-[[page 28]] agree, including 1992 amendment footnotes. Only punctuation differs (missing comma after 'Central Government' in s.80).",
+    "source_ids": [
+      "S-MML-108"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "MML 2.pdf PDF pp.63-66; India Code Army Act [[page 27]]-[[page 28]]",
+    "temporal_scope": "MML texts: undated editions (MML 2.pdf notes Act 37 of 1992 and later material; vol 2(AA) copies cite SROs to 1993). Compared with India Code Army Act compilation retrieved 2026-11-21 (amendment footnotes to Act 37 of 1992 and later); later amendment chain not verified.",
+    "mml_anchor_ids": [
+      "S-MML-026"
+    ],
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "HCE-017",
+      "KB-003"
+    ]
+  },
+  {
+    "finding_id": "F-MML-013",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-07",
+    "original_sha256": "ef871b67799e62262390a6e830017c82bf99ce2f09c7f1c25a9327dbb504b517",
+    "workstream": "MANUAL",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "MML vol 2(AA) .doc and .pdf reproduce ss.79-82 in the same substance but with transcription errors in s.81(4) and its note.",
+    "original_location": "MMLPKT-07",
+    "original_text": "Army Act 1950 ss.80-82 (summary punishments, limits, additional punishments)",
+    "proposed_text": null,
+    "rationale": "vol 2(AA).pdf p.83 and .doc L01375 read 'or such rank' where MML 2.pdf and India Code read 'of such rank'; s.81 note 1 cross-refers to 'AA.s.89' (pdf p.83, doc L01378) where MML 2.pdf p.66 reads 'AA.s. 80'; s.82 heading 'these specified' for 'those specified'. Errors are apparent on the face and do not change the operative limits.",
+    "source_ids": [
+      "S-MML-108"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "vol 2(AA).pdf PDF p.83; vol 2(AA).doc.doc L01372-L01381; MML 2.pdf PDF pp.65-66; India Code [[page 28]]",
+    "temporal_scope": "MML texts: undated editions (MML 2.pdf notes Act 37 of 1992 and later material; vol 2(AA) copies cite SROs to 1993). Compared with India Code Army Act compilation retrieved 2026-11-21 (amendment footnotes to Act 37 of 1992 and later); later amendment chain not verified.",
+    "mml_anchor_ids": [
+      "S-MML-027",
+      "S-MML-028",
+      "S-MML-026"
+    ],
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "HCE-017",
+      "KB-003"
+    ]
+  },
+  {
+    "finding_id": "F-MML-014",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-08",
+    "original_sha256": "1b0fb28eacaf9bac7c9bf0448ca09e4c3301773ac3913d2828ca8adfb59b66cf",
+    "workstream": "MANUAL",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "MML 2.pdf reproduces Army Act s.122 in its post-1992 form (three-year period commencing on date of offence, knowledge, or identity of offender; exceptions and exclusions in (2)-(4)) consistently with the India Code compilation.",
+    "original_location": "MMLPKT-08",
+    "original_text": "Army Act 1950 s.122 (limitation)",
+    "proposed_text": null,
+    "rationale": "MML 2.pdf p.89 shows s.122(1)(a)-(c) bracketed 'Substituted by Act No. 37 of 1992'; India Code [[page 35]] footnote 1 'Subs. by Act 37 of 1992, s. 9'. Sub-sections (2)-(4) match.",
+    "source_ids": [
+      "S-MML-109"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "MML 2.pdf PDF p.89; India Code Army Act [[page 35]]",
+    "temporal_scope": "MML texts: undated editions (MML 2.pdf notes Act 37 of 1992 and later material; vol 2(AA) copies cite SROs to 1993). Compared with India Code Army Act compilation retrieved 2026-11-21 (amendment footnotes to Act 37 of 1992 and later); later amendment chain not verified.",
+    "mml_anchor_ids": [
+      "S-MML-029"
+    ],
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "CM-011"
+    ]
+  },
+  {
+    "finding_id": "F-MML-015",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-08",
+    "original_sha256": "1b0fb28eacaf9bac7c9bf0448ca09e4c3301773ac3913d2828ca8adfb59b66cf",
+    "workstream": "MANUAL",
+    "severity": "P1",
+    "issue_type": "OUTDATED_AUTHORITY",
+    "claim": "MML commentary on limitation (s.122 note 1(a) in all three copies, s.80 note 4(c) in MML 2.pdf, MML 1.doc Part I Ch IV para 14) states the bar as three years from commission of the offence, inconsistent with the post-1992 commencement rules in s.122(1)(b)-(c); vol 2(AA) copies also mis-transcribe s.122(3).",
+    "original_location": "MMLPKT-08",
+    "original_text": "Army Act 1950 s.122 (limitation)",
+    "proposed_text": "Proposal only: mark these limitation notes as pre-1992 commentary; compute limitation from s.122(1)(a)-(c) text only.",
+    "rationale": "Notes: MML 2.pdf p.90 note 1(a) 'on the expiration of three years from the commission of the offence'; same in vol 2(AA).pdf p.112 and .doc L01837; MML 2.pdf p.64 s.80 note 4(c) and MML 1.doc L00191 use a date-of-commission test and list 'mutiny' rather than all s.37 offences. India Code [[page 35]] s.122(1)(b)-(c) start the period on knowledge/identity where applicable. vol 2(AA).pdf p.112 and .doc L01834 read 'in adding arrest' for 'evading arrest' and omit 'any'. Note 3(b) differs: MML 2.pdf (five/ten years; Regs paras 170, 465A) vs vol 2(AA) copies (three years; para 465). MML 1.doc Ch IV para 15 gives six months for s.123 where India Code [[page 35]] s.123(2) gives three years (subs. Act 37 of 1992).",
+    "source_ids": [
+      "S-MML-109"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": true,
+    "advisor_questions": [
+      "Which Regulations for the Army paragraph currently defines 'exemplary manner' for s.122(4)?"
+    ],
+    "limitations": [
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "MML 2.pdf PDF pp.64, 90; vol 2(AA).pdf PDF p.112; vol 2(AA).doc.doc L01834-L01843; MML 1.doc L00191-L00194; India Code [[page 35]]",
+    "temporal_scope": "MML texts: undated editions (MML 2.pdf notes Act 37 of 1992 and later material; vol 2(AA) copies cite SROs to 1993). Compared with India Code Army Act compilation retrieved 2026-11-21 (amendment footnotes to Act 37 of 1992 and later); later amendment chain not verified.",
+    "mml_anchor_ids": [
+      "S-MML-030",
+      "S-MML-031",
+      "S-MML-032",
+      "S-MML-025",
+      "S-MML-065"
+    ],
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "CM-011"
+    ]
+  },
+  {
+    "finding_id": "F-MML-016",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-09",
+    "original_sha256": "5a9511413b40afc052ae0e9ffda3b3479be0252563f02c4bf106eb13d259418d",
+    "workstream": "MANUAL",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "MML 2.pdf reproduces Army Act ss.125-126 (forum choice by specified commanders or prescribed officer; criminal court notice; reference to Central Government) consistently with the India Code compilation.",
+    "original_location": "MMLPKT-09",
+    "original_text": "Army Act 1950 ss.125-126 (choice of forum)",
+    "proposed_text": null,
+    "rationale": "MML 2.pdf pp.91-92 and India Code [[page 36]] agree on s.125 and s.126(1)-(2); MML 2.pdf r.197-A (p.228) and India Code r.197A ([[page 210]]) agree on the prescribed officer.",
+    "source_ids": [
+      "S-MML-110",
+      "S-MML-106"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "MML 2.pdf PDF pp.91-92, 228; India Code Army Act [[page 36]]; Army Rules [[page 210]]",
+    "temporal_scope": "MML texts: undated editions (MML 2.pdf notes Act 37 of 1992 and later material; vol 2(AA) copies cite SROs to 1993). Compared with India Code Army Act compilation retrieved 2026-11-21 (amendment footnotes to Act 37 of 1992 and later); later amendment chain not verified.",
+    "mml_anchor_ids": [
+      "S-MML-033",
+      "S-MML-066"
+    ],
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "CIV-008",
+      "CM-013"
+    ]
+  },
+  {
+    "finding_id": "F-MML-017",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-09",
+    "original_sha256": "5a9511413b40afc052ae0e9ffda3b3479be0252563f02c4bf106eb13d259418d",
+    "workstream": "MANUAL",
+    "severity": "P1",
+    "issue_type": "BROKEN_REFERENCE",
+    "claim": "MML commentary to s.125 is defective or dated: vol 2(AA) copies cite the prescribed-officer rule as 'AR 179-A' and truncate note 2; all copies describe the magistrate-notice procedure by reference to the Cr PC 1973 and the 1978 Adjustment Rules.",
+    "original_location": "MMLPKT-09",
+    "original_text": "Army Act 1950 ss.125-126 (choice of forum)",
+    "proposed_text": "Proposal only: correct the cross-reference to AR 197A in the vol 2(AA) note and tag the Cr PC/1978-rules note as pre-BNSS commentary.",
+    "rationale": "vol 2(AA).pdf p.115 and .doc L01872 note 1(d) end 'AR 179-A'; MML 2.pdf p.92 reads 'AR 197.A' and India Code Army Rules [[page 210]] carries r.197A. vol 2(AA) note 2 begins mid-sentence ('2 he is liable...'), losing note 2(a) and the start of 2(b) present in MML 2.pdf p.92. All copies cite 'Cr PC, 1973' and S.O. 488 of 9 Feb 1978; the India Code BNSS compilation ([[page 172]]) contains s.521 on delivery to commanding officers, and the BNSS metadata records repeal of the CrPC (in force 1-7-2024). The manual's procedural note therefore predates the 2023 criminal-procedure transition.",
+    "source_ids": [
+      "S-MML-106",
+      "S-MML-112"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": true,
+    "advisor_questions": [
+      "Have the Criminal Courts and Court-Martial (Adjustment of Jurisdiction) Rules, 1978 been re-made or adapted under BNSS s.521?"
+    ],
+    "limitations": [
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "vol 2(AA).pdf PDF p.115; vol 2(AA).doc.doc L01872-L01873; MML 2.pdf PDF p.92; India Code Army Rules [[page 210]]; BNSS [[page 172]]",
+    "temporal_scope": "MML texts: undated editions (MML 2.pdf notes Act 37 of 1992 and later material; vol 2(AA) copies cite SROs to 1993). Compared with India Code Army Act compilation retrieved 2026-11-21 (amendment footnotes to Act 37 of 1992 and later); later amendment chain not verified. BNSS compilation retrieved 2026-11-21; status of the 1978 Adjustment Rules after 1-7-2024 not verified.",
+    "mml_anchor_ids": [
+      "S-MML-034",
+      "S-MML-036",
+      "S-MML-038"
+    ],
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "CIV-008",
+      "CM-013",
+      "CIV-033"
+    ]
+  },
+  {
+    "finding_id": "F-MML-018",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-10",
+    "original_sha256": "ef031a01f9f95768537c5590e76a4853403a893a2bb72c79e9e886abe14e8679",
+    "workstream": "MANUAL",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "MML 2.pdf shows Army Act s.127 (successive trials) as omitted by Act 37 of 1992, as does the India Code compilation (w.e.f. 6-9-1992).",
+    "original_location": "MMLPKT-10",
+    "original_text": "Army Act 1950 s.127 (successive trials; omitted)",
+    "proposed_text": null,
+    "rationale": "MML 2.pdf p.92 '127. [Omitted]' footnote 'Omitted by Act No. 37 of 1992'; India Code [[page 36]] 'Omitted by the Army (Amendment) Act, 1992 (37 of 1992), s. 11 (w.e.f. 6-9-1992)'.",
+    "source_ids": [
+      "S-MML-110"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "MML 2.pdf PDF p.92; India Code Army Act [[page 36]]",
+    "temporal_scope": "MML texts: undated editions (MML 2.pdf notes Act 37 of 1992 and later material; vol 2(AA) copies cite SROs to 1993). Compared with India Code Army Act compilation retrieved 2026-11-21 (amendment footnotes to Act 37 of 1992 and later); later amendment chain not verified.",
+    "mml_anchor_ids": [
+      "S-MML-039"
+    ],
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "CM-013"
+    ]
+  },
+  {
+    "finding_id": "F-MML-019",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-10",
+    "original_sha256": "ef031a01f9f95768537c5590e76a4853403a893a2bb72c79e9e886abe14e8679",
+    "workstream": "MANUAL",
+    "severity": "P1",
+    "issue_type": "OUTDATED_AUTHORITY",
+    "claim": "MML vol 2(AA) copies show s.127 only as 'Omitted' (no authority/date) and their notes still rely on s.127 as live: s.21 note (a) says Art 20(2) is 'abrogated by AA.s.127', and s.121 note 6 says a court-martialled person can be tried again by a criminal court, 'see AA.s.127 and notes'.",
+    "original_location": "MMLPKT-10",
+    "original_text": "Army Act 1950 s.127 (successive trials; omitted)",
+    "proposed_text": "Proposal only: tag vol 2(AA) s.21 note (a) and s.121 note 6 as relying on omitted s.127.",
+    "rationale": "vol 2(AA).pdf p.15 / .doc L00333 (s.21 note (a)) and pdf p.111 / .doc L01826 (s.121 note 6). MML 2.pdf footnotes the s.21 reference as omitted by Act 37 of 1992 (p.12) and its s.121 note 6 (p.89) instead says the section prohibits a second trial by court-martial or a criminal court. The two editions therefore give opposite commentary on civil-court retrial after court-martial. Not resolved here; it is a legal question for the advisor and other agents.",
+    "source_ids": [
+      "S-MML-110"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": true,
+    "advisor_questions": [
+      "After omission of s.127 (6-9-1992), may a criminal court try a person already tried by court-martial for the same offence? Identify controlling authority."
+    ],
+    "limitations": [
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "vol 2(AA).pdf PDF pp.15, 111, 115; vol 2(AA).doc.doc L00333, L01826, L01880; MML 2.pdf PDF pp.12, 89, 92; India Code [[page 36]]",
+    "temporal_scope": "MML texts: undated editions (MML 2.pdf notes Act 37 of 1992 and later material; vol 2(AA) copies cite SROs to 1993). Compared with India Code Army Act compilation retrieved 2026-11-21 (amendment footnotes to Act 37 of 1992 and later); later amendment chain not verified.",
+    "mml_anchor_ids": [
+      "S-MML-040",
+      "S-MML-041",
+      "S-MML-042",
+      "S-MML-043",
+      "S-MML-044"
+    ],
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "CM-013"
+    ]
+  },
+  {
+    "finding_id": "F-MML-020",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-11",
+    "original_sha256": "26f7528d4188f57ee1f5a5ccab189148f11eeaa80d2fc217307ce5160090d958",
+    "workstream": "MANUAL",
+    "severity": "P1",
+    "issue_type": "OUTDATED_AUTHORITY",
+    "claim": "MML 1.doc Part I Ch II para 13 describes field punishment under AA s.75 as an available court-martial punishment; para 14 describes s.85 as permitting a CO to award a JCO only stoppages.",
+    "original_location": "MMLPKT-11",
+    "original_text": "MML Part I Ch. II paras 13-14 (field punishment; summary punishments)",
+    "proposed_text": "Proposal only: mark MML 1.doc Ch II para 13 as historical (pre-6-9-1992) and para 14's s.85 sentence as incomplete after Act 37 of 1992.",
+    "rationale": "MML 1.doc L00041 (para 13) states that s.75 provides for field punishment and cites ARs 172-176; India Code [[page 27]] records s.75 omitted by Act 37 of 1992 w.e.f. 6-9-1992. Para 14 (L00043) on s.80/s.81 limits is consistent with India Code [[page 27]]-[[page 28]], but its account of s.85 (stoppages only) does not reflect s.85 as substituted by Act 37 of 1992, s.6, which adds severe reprimand or reprimand (not by an officer below Colonel) (India Code [[page 28]]-[[page 29]]; MML 2.pdf p.67 reproduces the substituted s.85). MML 1.doc is commentary of unknown date and predates the 1992 amendment on these points.",
+    "source_ids": [
+      "S-MML-107",
+      "S-MML-108"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "review_state": "PENDING",
+    "requires_legal_review": true,
+    "advisor_questions": [],
+    "limitations": [
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "MML 1.doc Part I Ch II paras 13-14 (L00041, L00043); India Code Army Act [[page 27]]-[[page 29]]",
+    "temporal_scope": "MML texts: undated editions (MML 2.pdf notes Act 37 of 1992 and later material; vol 2(AA) copies cite SROs to 1993). Compared with India Code Army Act compilation retrieved 2026-11-21 (amendment footnotes to Act 37 of 1992 and later); later amendment chain not verified. MML 1.doc contains no dated amendment references.",
+    "mml_anchor_ids": [
+      "S-MML-045",
+      "S-MML-046"
+    ],
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "HCE-017"
+    ]
+  },
+  {
+    "finding_id": "F-MML-021",
+    "batch_id": "PILOT-01",
+    "record_id": "MMLPKT-12",
+    "original_sha256": "e8c830f5aae806f823f2fad2d37e3b8d363ccac1e14c421258e63c571603a87c",
+    "workstream": "MANUAL",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "MML 2.pdf and both vol 2(AA) copies reproduce Army Act ss.109-111 (GCM convening by Central Government, COAS or COAS warrant-holder; DCM by GCM-convening officer or his warrant-holder; warrants may carry restrictions, reservations or conditions) consistently with the India Code compilation.",
+    "original_location": "MMLPKT-12",
+    "original_text": "Army Act 1950 ss.109-111 (convening GCM/DCM/SGCM)",
+    "proposed_text": null,
+    "rationale": "MML 2.pdf pp.83-84, vol 2(AA).pdf pp.103-104 and .doc L01711-L01725 match India Code [[page 33]], including the Act 19 of 1955 substitution of 'Chief of the Army Staff'. Note: summary general courts-martial are convened under s.112, not ss.109-111.",
+    "source_ids": [
+      "S-MML-111"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "review_state": "PENDING",
+    "requires_legal_review": false,
+    "advisor_questions": [],
+    "limitations": [
+      "Manual notes describing which commanders 'at present' hold A-1/B-1 warrants are dated practice statements and were not verified.",
+      "Packet label mentions SGCM; s.112 was read in MML 2.pdf p.84 but not compared for this finding.",
+      "MML text read only from derived text layers; no page-image check of negations, numerals or dates.",
+      "India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.",
+      "Edition/printing date of each MML file unknown; no access/copyright marking could be visually checked.",
+      "Judicial treatment of the provision not examined (outside this agent's packet)."
+    ],
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "MML 2.pdf PDF pp.83-84; India Code Army Act [[page 33]]",
+    "temporal_scope": "MML texts: undated editions (MML 2.pdf notes Act 37 of 1992 and later material; vol 2(AA) copies cite SROs to 1993). Compared with India Code Army Act compilation retrieved 2026-11-21 (amendment footnotes to Act 37 of 1992 and later); later amendment chain not verified.",
+    "mml_anchor_ids": [
+      "S-MML-047",
+      "S-MML-048",
+      "S-MML-049"
+    ],
+    "legal_review_state": "NOT_REQUIRED",
+    "agent": "manual-of-military-law-auditor",
+    "related_record_ids": [
+      "CM-003"
+    ]
+  }
+]

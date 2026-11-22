@@ -1,0 +1,39 @@
+provision,file_a,locator_a,file_b,locator_b,difference_type,short_description
+AR r.22,MML 2.pdf,PDF p.150,MML vol 2(AR).doc.doc,L00439-L00451,MISSING,"Explanation (SRO 258/2002, officer other than CO under s.80) present in MML 2.pdf, absent in .doc copy."
+AR r.22,MML 2.pdf,PDF p.150,MML vol 2(AR).doc-1.doc,L01314-L01340 (pp.349-350),MISSING,"Explanation present in MML 2.pdf, absent in .doc-1 copy."
+AR r.22(1),MML 2.pdf,PDF p.150,MML vol 2(AR).doc.doc,L00439,WORDING,'call any witness' in MML 2.pdf vs 'call such witness' in .doc (and India Code).
+AR r.22(2),MML vol 2(AR).doc.doc,L00441,MML 2.pdf,PDF p.150,WORDING,.doc copies add 'in his discretion'; MML 2.pdf reads 'ought not be proceeded with'.
+AR r.22,MML vol 2(AR).doc.doc,L00439-L00451,MML vol 2(AR).doc-1.doc,L01314-L01340,SAME,Rule text identical apart from line breaks.
+AR r.22,MML 2.pdf,PDF p.150,India Code AR,[[page 37]]-[[page 39]],FOOTNOTE,MML 2.pdf footnotes r.22 as substituted by SRO 17(E) 6-12-1993; compilation shows no substitution note.
+AR r.23(3),MML 2.pdf,PDF p.152,India Code AR,[[page 41]],WORDING,MML reads 'not obliged'; compilation reads 'obliged'. CONFLICTING - unresolved (S.R.O. 484 not held).
+AR r.23(3),MML vol 2(AR).doc.doc,L00472,MML vol 2(AR).doc-1.doc,L01383 (p.352),SAME,Both include 'not obliged'.
+AR r.23 note 1,MML 2.pdf,PDF p.152,India Code AR,[[page 42]],NUMBERING,Cross-reference 'AR 22(3)(c)' in MML; compilation note reads 'AR 23 (3)(c)'.
+AR r.25,MML 2.pdf,PDF p.153,MML vol 2(AR).doc.doc,L00502-L00507,FOOTNOTE,MML 2.pdf gives omitting SRO 17(E) 6-12-1993; .doc gives bare 'Omitted' and keeps notes 1-4.
+AR r.25,MML vol 2(AR).doc.doc,L00502-L00507,MML vol 2(AR).doc-1.doc,L01442-L01451; TOC L00097,SAME,Both bare 'Omitted' with retained notes; .doc-1 TOC still lists old heading.
+AR r.180,MML 2.pdf,PDF p.222,India Code AR,[[page 196]],WORDING,'character or military reputation' (all MML) vs 'character and military reputation' in defence-witness limb.
+AR r.180,MML vol 2(AR).doc.doc,L01881,MML vol 2(AR).doc-1.doc,L04050-L04054,SAME,Identical text.
+AR r.182,MML 2.pdf,PDF p.222,MML vol 2(AR).doc.doc,L01891-L01892,FOOTNOTE,MML 2.pdf brackets whole rule (SRO 17(E) 1993); .doc brackets only proviso.
+AR r.182,MML 2.pdf,PDF p.222,MML vol 2(AR).doc.doc,L01891,WORDING,'before the court' vs 'before that court'; heading 'Proceedings' vs 'Proceeding'.
+AR r.182,MML vol 2(AR).doc.doc,L01891-L01892,MML vol 2(AR).doc-1.doc,L04070-L04072,SAME,Identical text.
+AR r.17,MML vol 2(AR).doc.doc,L00393,MML vol 2(AR).doc-1.doc,L01227-L01231,MISSING,'sub-section (1) or' absent across .doc-1 page break; needs image check.
+AR r.177,MML 2.pdf,PDF p.221,MML vol 2(AR).doc.doc,L01857-L01859,FOOTNOTE,MML 2.pdf marks r.177 substituted by SRO 8(E) 23-06-2003; .doc has no marker.
+AA ss.75-76,MML 2.pdf,PDF p.62,MML vol 2(AA).pdf,PDF p.78,FOOTNOTE,MML 2.pdf cites Act No. 37 of 1992; vol 2(AA) gives bare 'Omitted'.
+AA ss.75-76,MML vol 2(AA).pdf,PDF p.78,MML vol 2(AA).doc.doc,L01288-L01290,SAME,Both bare 'Omitted'.
+AA s.80 notes,MML 2.pdf,PDF pp.63-65,MML vol 2(AA).pdf,PDF pp.81-82,MISSING,"vol 2(AA) keeps field-punishment notes 6(b)(ii), 9(b), 18; MML 2.pdf has none."
+AA s.80 notes,MML vol 2(AA).pdf,PDF pp.81-82,MML vol 2(AA).doc.doc,L01338-L01370,SAME,Same stale field-punishment notes.
+AA ss.80-82,MML 2.pdf,PDF pp.63-66,MML vol 2(AA).pdf,PDF pp.79-83,WORDING,vol 2(AA) s.81(4) 'or such rank'; s.81 note 1 cites 'AA.s.89'; s.82 'these specified'.
+AA ss.80-82,MML vol 2(AA).pdf,PDF pp.79-83,MML vol 2(AA).doc.doc,L01303-L01387,SAME,Same text and errors.
+AA s.122,MML 2.pdf,PDF p.89,MML vol 2(AA).pdf,PDF pp.111-112,WORDING,vol 2(AA) s.122(3) 'in adding arrest' and omits 'any'; MML 2.pdf reads 'evading arrest'.
+AA s.122 note 3(b),MML 2.pdf,PDF p.90,MML vol 2(AA).pdf,PDF p.112,WORDING,"Exemplary service: five/ten years, Regs paras 170, 465A (MML 2.pdf) vs three years, para 465 (vol 2(AA))."
+AA s.122,MML vol 2(AA).pdf,PDF pp.111-112,MML vol 2(AA).doc.doc,L01829-L01843,SAME,"Same text, notes and errors."
+AA s.125 note 1(d),MML 2.pdf,PDF p.92,MML vol 2(AA).pdf,PDF p.115,NUMBERING,Prescribed-officer rule cited 'AR 197.A' (MML 2.pdf) vs 'AR 179-A' (vol 2(AA)).
+AA s.125 note 2,MML 2.pdf,PDF p.92,MML vol 2(AA).pdf,PDF p.115,MISSING,vol 2(AA) lacks note 2(a) and opening of 2(b); starts mid-sentence.
+AA ss.125-126,MML vol 2(AA).pdf,PDF pp.114-115,MML vol 2(AA).doc.doc,L01867-L01877,SAME,Same text and notes.
+AA s.127,MML 2.pdf,PDF p.92,MML vol 2(AA).pdf,PDF p.115,FOOTNOTE,MML 2.pdf cites Act No. 37 of 1992; vol 2(AA) bare 'Omitted'.
+AA s.21 note (a),MML 2.pdf,PDF p.12,MML vol 2(AA).pdf,PDF p.15,FOOTNOTE,MML 2.pdf footnotes s.127 reference as omitted 1992; vol 2(AA) states Art 20(2) abrogated by s.127.
+AA s.121 note 6,MML 2.pdf,PDF p.89,MML vol 2(AA).pdf,PDF p.111,WORDING,Opposite commentary on criminal-court retrial; vol 2(AA) cites omitted s.127.
+AA ss.109-111,MML 2.pdf,PDF pp.83-84,MML vol 2(AA).pdf,PDF pp.103-104,SAME,Section text and notes 1-5 substantively same.
+AA ss.109-111,MML vol 2(AA).pdf,PDF pp.103-104,MML vol 2(AA).doc.doc,L01711-L01725,SAME,Same text.
+MML 1 Ch II para 13,MML 1.doc,L00041,India Code AA,[[page 27]],MISSING,Describes s.75 field punishment; s.75 omitted by Act 37 of 1992 w.e.f. 6-9-1992.
+MML 1 Ch II para 14 / AA s.85,MML 1.doc,L00043,MML 2.pdf,PDF p.67,WORDING,MML 1 describes s.85 as stoppages only; MML 2.pdf reproduces substituted s.85 adding reprimand.
+CrPC s.475 extract,MML vol 3.pdf.pdf,PDF p.31,MML vol 3.doc.doc,L00868,SAME,Same extract (repealed CrPC; BNSS s.521 successor not in MML).
