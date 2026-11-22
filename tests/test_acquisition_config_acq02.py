@@ -81,3 +81,18 @@ def test_refusals(cfg, url):
 
 def test_config_has_no_errors(cfg):
     assert check_config(cfg).errors == []
+
+
+@pytest.mark.parametrize("host", ["dn760006.eu.archive.org", "dn790000.ca.archive.org", "ia800000.us.archive.org"])
+def test_archive_redirect_hosts_allowed_for_acq02(cfg, host):
+    assert cfg.is_url_allowed("archive_acq02", f"https://{host}/x/y.pdf")[0]
+
+
+@pytest.mark.parametrize("url", ["http://dn760006.eu.archive.org/x.pdf", "https://archive.org.attacker.net/x.pdf",
+                                 "https://www.indiankanoon.org/x", "https://indiacode.gov.in/x"])
+def test_acq02_refuses_http_offsite_and_other_sources(cfg, url):
+    assert not cfg.is_url_allowed("archive_acq02", url)[0]
+
+
+def test_acq02_requires_https(cfg):
+    assert cfg.source("archive_acq02").get("require_https") is True

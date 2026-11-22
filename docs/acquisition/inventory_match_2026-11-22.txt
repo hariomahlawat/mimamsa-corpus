@@ -1,0 +1,48 @@
+ACQ-01 inventory (batches.json B1+B2+B6) vs config sources.archive + sources.official_instruments
+  inventory items: 14; config documents: 14
+  OK       notif-army-rules-1954-sro-484                        md5=3bb93dc7531e7673a94aed92e8aa8bf0 size=5032579
+  OK       notif-army-rules-amdt-sro-116-1965                   md5=5c8d1d11a11bc37740d65cbf195898f8 size=153228
+  OK       notif-army-rules-amdt-sro-215-1965                   md5=e06b4fb6725886f21cc7c52028efaa04 size=114952
+  OK       notif-army-rules-amdt-sro-188-1979                   md5=27b0a853be54c01d0151788667867cd9 size=866906
+  OK       notif-army-rules-amdt-sro-216-1988                   md5=fea10feccd506fc113efa93ff641cec2 size=745123
+  OK       notif-army-rules-amdt-sro-17e-1993                   md5=d152e3344159fa8b745f4108ec07d678 size=1592603
+  OK       notif-army-rules-amdt-sro-8e-2003                    md5=ce946e3682c421c9a40396ed6412eafb size=40864
+  OK       notif-army-rules-amdt-sro-17e-2019                   md5=05c168856e218c2b4f5b74fc3bffa692 size=339524
+  OK       notif-army-rules-amdt-sro-6e-2022                    md5=52ced37f1e9a37ae2f1af1ea18445e8f size=115072
+  OK       rules-adjustment-jurisdiction-1978-so-488            md5=91b0dd7aab747fe5260b1ffe61fd4d1d size=5923089
+  OK       notif-adjustment-jurisdiction-amdt-so-4010-1986      md5=c5eaada91e55121d0e048542f4a0e68b size=5891276
+  OK       act-commanders-in-chief-change-designation-1955      md5=6371b6ad0a8885ebf339200846044a21 size=92935
+  MISSING in config: act-air-force-army-laws-amdt-1975
+  MISMATCH act-army-amendment-1992                              md5=(none: download-specific bytes) size=-
+  EXTRA in config (not in inventory): act-air-force-army-laws-amendment-1975
+
+ACQ-02 inventory (supplement_inventory.csv) vs config sources.archive_acq02
+  inventory files: 16 (instruments 17); config documents: 16
+  OK       notif-army-rules-amdt-sro-205-1961             sha256=0b4c5b72ea3de650… md5=329a99f7136bb992df8b88f95bb22cbd bytes=165477 instruments=S.R.O. 205
+  OK       notif-army-rules-amdt-sro-1-1961               sha256=b76bf4aac230f922… md5=08c8456059cbfb87e6a041ee3adc0d4c bytes=81214 instruments=S.R.O. 1
+  OK       notif-army-rules-r188e-sro-34-1963             sha256=4acdb1a8bc6430db… md5=f9414ea4adc8704350f740c56721ae08 bytes=382036 instruments=S.R.O. 34
+  OK       notif-army-rules-amdt-sro-126-1964             sha256=cce0d06e8624cc67… md5=7eb76c6be331f7e23e68b11e5b21f007 bytes=563644 instruments=S.R.O. 126
+  OK       notif-army-rules-amdt-sro-5-1968               sha256=5126efa258a7e750… md5=6bcc2f8268cbce8fde3743be69a56765 bytes=275520 instruments=S.R.O. 5
+  OK       notif-army-rules-amdt-sro-246-1982             sha256=d283767e91508eb9… md5=e0b516a05c17fcd3a73495608fb93153 bytes=862174 instruments=S.R.O. 246
+  OK       notif-army-rules-amdt-sro-44-1985              sha256=dd6978db8cf47f2f… md5=3011439b1d56e5d17c99bd3220bdd838 bytes=158127 instruments=S.R.O. 44
+  OK       notif-army-rules-amdt-sro-55-1985              sha256=d8ce1958a9bf8fd1… md5=8c96cb63854503d76b5deeb97c6d20c6 bytes=548961 instruments=S.R.O. 55
+  OK       notif-army-rules-amdt-sro-68-1985              sha256=225f624b866c8ab0… md5=20757a7014885c05b820a1a5fc12263b bytes=99582 instruments=S.R.O. 68
+  OK       notif-army-rules-amdt-sro-278-1985             sha256=972e5aa18dda6f41… md5=2522a14e42dd9fc919b07737401ade63 bytes=2008876 instruments=S.R.O. 278
+  OK       notif-army-rules-amdt-sro-169-1987             sha256=eaa233f8c70ae0b9… md5=bb3a292bd22a34bd7c4c8c9c263fb147 bytes=457546 instruments=S.R.O. 169
+  OK       notif-army-rules-amdt-sro-302-1987             sha256=4392f326c1b9bbc9… md5=e30a504f5b503f1731e701bc2337d9eb bytes=1827754 instruments=S.R.O. 302
+  OK       notif-army-rules-amdt-sro-44-and-61-1991       sha256=0e4b8e47e299867f… md5=178cc2e24f7ca1580c43632cb511170b bytes=376217 instruments=S.R.O. 44+S.R.O. 61
+  OK       notif-army-rules-amdt-sro-235-1991             sha256=dc67b628878ea4c5… md5=412d3699776eccf7c0bf5cb9983fe75d bytes=345814 instruments=S.R.O. 235
+  OK       notif-army-rules-r188e-sro-2e-2018             sha256=7c12a7ecc849c8f6… md5=85e19b7454c1feafecf1e1e0806a9ee2 bytes=1707387 instruments=S.R.O. 2(E)
+  OK       notif-army-rules-amdt-sro-332-1989             sha256=31fedb68e25a1ffa… md5=8a29e71cd63bee5461b55fb1597ea904 bytes=645527 instruments=S.R.O. 332
+
+Overlap ACQ-01 ∩ ACQ-02 URLs: 0
+Blocked hosts: ['aftjabalpur.in', 'www.aftjabalpur.in', 'indiankanoon.org', 'www.indiankanoon.org', 'www.casemine.com', 'www.scconline.com', 'www.manupatrafast.com', 'www.manupatra.com']
+RESULT: 3 problem(s)
+
+COORDINATOR RESOLUTION OF THE 3 FLAGGED ITEMS (no content mismatch):
+  - The ACQ-01 inventory (batches.json, frozen) describes the two India Code Acts by item ID, not by download URL. The config pins the bitstream URLs of the SAME items:
+      act-air-force-army-laws-amdt-1975 (inventory) == act-air-force-army-laws-amendment-1975 (config): India Code item eff2c36e-1e1a-4b16-8b58-043bcb86e596, bitstream d4cb2142-…
+      act-army-amendment-1992: India Code item 53aa36bb-a143-4324-9717-ac946144e169, bitstream 7a05a1f5-…
+  - The 1975 entry's doc_id differs only in spelling (amdt vs amendment). The config doc_id (pinned by tests/test_acquisition_config.py) is canonical for the crawler. batches.json is not edited (frozen batch); this mapping is the record.
+  - India Code serves download-specific bytes (the stored bitstream md5/size differ from the served bytes). So no expected checksum is pre-committed for these two. verify_batch.py reports them as CHECKSUM_RECORDED_ONLY, and their SHA-256 is recorded after fetch.
+  => ACQ-01: 12 archive.org items fully pinned (md5 + size); 2 India Code items pinned by URL and item identity. ACQ-02: 16/16 fully pinned (sha256 + md5 + bytes). No overlap.
