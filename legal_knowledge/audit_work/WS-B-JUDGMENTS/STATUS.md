@@ -1,5 +1,12 @@
 # WS-B STATUS (issue #12)
 
+## Final Cycle 3 reconciliation (claude/ws-b-cycle3-reconcile, base 2a66cd04)
+- **CF-WSB-PQ-C3-32:** the commercial-database holder was removed from the Ranjit Thakur review row (PQ-C3-32).
+- **CF-WSB-NOQUEUE and completeness:** the consolidated queue now has 55 rows (23 added, including HARJEET PQ-C3-52 and PANDAPPA PQ-C3-47).
+- **New checks:** `check_ws_b.py` now enforces the holder/source rule and queue completeness.
+- **Open items:** `open_inconsistencies_cycle3.csv` holds 13 OPEN items.
+- **Evidence:** see the `REVIEW_FIXES_CYCLE3.md` section "Final Cycle 3 reconciliation".
+
 ## Cycle 3 review fixes (PR #26)
 - **F1, citation-lead pages off by one:** fixed. 77 rows corrected; 3 checked on page images, with the printed reporter page recorded separately.
 - **F2, HEAD status and content type parsed together:** fixed.

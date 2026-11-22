@@ -127,21 +127,99 @@ def authoritative(netlog):
         host_note = 'government-hosted SCR volume (s3waas.gov.in): an official report volume, not the court\'s judgment PDF' if 's3waas' in url else ''
         rows.append([k, r['case53_id'], r['ws_b_label'], r['intern_decision_date'], r['intern_sha256'], 'NO (no WS-B-held court copy)',
                      url, hres, st, diary.get(k, ''), host_note, 'C3'])
-        pend.append([f'PQ-C3-{len(pend)+1:02d}', k, r['case53_id'], 'Supreme Court of India', r['intern_case_numbers'] or r['curated_case_number'],
-                     r['intern_decision_date'], url or 'unknown',
-                     'P0' if r['case53_id'] in P0_ISSUE4 else ('P1' if st.startswith('OFFICIAL_HOST_URL_RESPONDS_200_PDF') else 'P2'),
-                     'Official court copy needed to replace mirror-only pinpoints; ' + (diary.get(k, '') or 'no diary number known'),
-                     st.split(' (')[0], 'ACQUISITION_REQUEST_ONLY', 'NO', 'C3'])
-    for k in ('GIRISH_CLAR', 'RAVINDER', 'PRAFUL', 'DHINGRA_SR', 'RANJIT_REVIEW'):
-        r = next(x for x in ids if x['spec_key'] == k)
-        pend.append([f'PQ-C3-{len(pend)+1:02d}', k, r['case53_id'], 'Supreme Court of India', r['curated_case_number'], r['curated_decision_date'],
-                     r['curated_primary_source_url'] or 'unknown', 'P1', 'Unresolved after cycle 3 (identity_resolution_cycle3.csv)',
-                     'NOT_CHECKED', 'ACQUISITION_REQUEST_ONLY', 'NO', 'C3'])
+        # (queue rows are built below, one per unresolved spec_key)
+        pass
     h1 = ['spec_key', 'case53_id', 'case', 'decision_date', 'intern_mirror_sha256', 'official_copy_held', 'official_url_located',
           'read_only_lookup_result', 'state', 'official_record_corroboration', 'note', 'cycle']
-    h2 = ['queue_id', 'spec_key', 'case53_id', 'court', 'case_number', 'decision_date', 'official_url_or_holder_if_known', 'priority', 'note',
-          'official_url_http_check', 'action', 'downloaded_by_ws_b', 'cycle']
+    status_by_spec = {r[0]: r[8] for r in rows}
+    h2, pend = build_queue(ids, status_by_spec, diary)
     return (h1, rows), (h2, pend), ctrl
+
+
+# ------------------------------------------------------------------ consolidated cycle-3 acquisition queue (reconciliation)
+COMMERCIAL_RX = re.compile(r'indiankanoon|casemine|scconline|scc\s*online|manupatra', re.I)
+OFFICIAL_HOST_RX = re.compile(r'^https?://[^/]*(sci\.gov\.in|\.gov\.in|\.nic\.in)(/|$)', re.I)
+WRONG_DOCUMENT = {'RAM_AVTAR': 'curated accessible URL is the S P Rathore judgment (Diary 33390/2018), not the Ram Avtar order (A-C2-01)'}
+# stable queue ids: the 32 rows published in cycle 3 keep their ids (mirror-only case53 order, then the 5 unresolved)
+LEGACY_TAIL = ('GIRISH_CLAR', 'RAVINDER', 'PRAFUL', 'DHINGRA_SR', 'RANJIT_REVIEW')
+UNCERTAINTY = {
+ 'IDENTITY_CORROBORATED_INTERN_MIRROR_ONLY': 'identity read from the intern mirror cover page (parties/date/case no.); byte identity with the court copy NOT established',
+ 'IDENTITY_LEAD_INTERN_METADATA_ONLY': 'intern metadata lead only; mirror text unreadable; date conflict with KB',
+ 'CITATION_METADATA_CORROBORATED_BY_OFFICIAL_RECORD_NO_COPY': 'citation metadata corroborated by an official record (later judgment or office report); the judgment itself is not held',
+ 'CITATION_METADATA_CONFLICTS_WITH_OFFICIAL_RECORD_NO_COPY': 'citation metadata conflicts with an official record (see adverse queue A-C2-02/A-C2-03); identity open',
+ 'UNRESOLVED_NO_COPY_IN_HAND': 'identity unresolved; no copy held',
+}
+
+def _court(label, cid):
+    if 'Delhi HC' in label: return 'High Court of Delhi'
+    if 'P&H HC' in label: return 'High Court of Punjab and Haryana'
+    if 'HC' in label: return 'High Court (to confirm)'
+    return 'Supreme Court of India'
+
+HOLDER_KNOWN = {
+ 'RAM_SARUP': 'official SC JUDIS copy reportedly archived on the private HF dataset (legal_knowledge/judgment_originals/sci/historical/v3.3/ram_sarup_1963.pdf, sha256 88f84411..., per issue #3); not held or verified by WS-B',
+ 'MANI_RAM': 'only a third-party (non-official) copy is reportedly on the HF dataset (sha256 cce64004..., per issue #3); official signed SC order required',
+}
+
+def _target(k, url, court):
+    base = f'official {court} copy required'
+    if k in HOLDER_KNOWN:
+        return HOLDER_KNOWN[k]
+    if k in WRONG_DOCUMENT:
+        return base + '; no official URL for this judgment located (' + WRONG_DOCUMENT[k] + ')'
+    if not url:
+        return base + '; no official URL located'
+    if COMMERCIAL_RX.search(url):
+        return base + '; no official URL located (a commercial database URL was previously recorded in the curated record - it is not a source or holder)'
+    if 'officereport' in url:
+        return base + '; only an official office report is recorded (identity record, not the judgment): ' + url
+    if OFFICIAL_HOST_RX.search(url):
+        return 'official-host URL recorded (bytes not held; identity of bytes not established): ' + url
+    return base + '; no official URL located (a third-party URL was previously recorded in the curated record - not an official source)'
+
+def build_queue(ids, status_by_spec, diary):
+    xw = collections.defaultdict(lambda: ([], []))
+    for r in csv.DictReader(open(os.path.join(WS, 'crosswalk_cases53_kb658.csv'), encoding='utf-8')):
+        if r['kb_record_id']:
+            xw[r['spec_key']][0 if r['link_basis'].startswith('CURATION_DECLARED') else 1].append(r['kb_record_id'])
+    prior = collections.defaultdict(list)
+    for r in csv.DictReader(open(os.path.join(WS, 'pending_source_queue.csv'), encoding='utf-8')):
+        for k in r['spec_key'].split(';'):
+            prior[k.strip()].append(r['queue_id'])
+    unresolved = [r for r in ids if not r['identity_state'].startswith('IDENTITY_CORROBORATED_OFFICIAL_COPY_HELD')]
+    mirror53 = [r for r in unresolved if r['case53_id'] and r['identity_state'] == 'IDENTITY_CORROBORATED_INTERN_MIRROR_ONLY']
+    order = mirror53 + [next(x for x in ids if x['spec_key'] == k) for k in LEGACY_TAIL]
+    seen = {r['spec_key'] for r in order}
+    order += [r for r in unresolved if r['spec_key'] not in seen]
+    pend = []
+    for i, r in enumerate(order, 1):
+        k = r['spec_key']; label = r['ws_b_label']; court = _court(label, r['case53_id'])
+        url = r['curated_primary_source_url']
+        st = status_by_spec.get(k, 'NOT_CHECKED')
+        code_kb, lex_kb = xw[k]
+        prio = 'P0' if r['case53_id'] in P0_ISSUE4 else ('P1' if (st.startswith('OFFICIAL_HOST_URL_RESPONDS_200_PDF') or code_kb) else 'P2')
+        mirror = (f"intern mirror docs {r['intern_doc_ids']} sha256 {r['intern_sha256']} (AWS Open Data mirror; NOT an official copy)"
+                  if r['intern_doc_ids'] else 'none')
+        dep = ('code-declared: ' + ';'.join(sorted(set(code_kb))) if code_kb else '') + \
+              (' | lexical lead: ' + ';'.join(sorted(set(lex_kb))) if lex_kb else '')
+        note = []
+        if diary.get(k): note.append(diary[k])
+        if k == 'RANJIT_REVIEW':
+            note.append('Reconciliation CF-WSB-PQ-C3-32: this row previously listed https://indiankanoon.org/doc/925325/ as holder; a commercial database is not a source or holder and was removed')
+        if k in ('HARJEET', 'PANDAPPA'):
+            note.append('Reconciliation CF-WSB-NOQUEUE: added; mirror-only case linked to KB records')
+        if i > 32 and k not in ('HARJEET', 'PANDAPPA'):
+            note.append('Reconciliation: added so that every unresolved identity has a cycle-3 queue row')
+        pend.append([f'PQ-C3-{i:02d}', k, r['case53_id'], label, court, r['curated_case_number'] or r['intern_case_numbers'],
+                     r['curated_decision_date'] or r['intern_decision_date'] or r['expected_date_spec'],
+                     r['identity_state'], UNCERTAINTY.get(r['identity_state'], ''), 'NO', mirror, _target(k, url, court),
+                     st.split(' (')[0], prio, dep.strip(' |') or 'none found', ';'.join(prior.get(k, [])) or 'none', '; '.join(note),
+                     'ACQUISITION_REQUEST_ONLY', 'NOT_APPROVED', 'NO', 'C3'])
+    h2 = ['queue_id', 'spec_key', 'case53_id', 'case', 'court', 'case_number', 'decision_date', 'identity_status', 'identity_uncertainty',
+          'official_copy_held', 'mirror_copy', 'official_target', 'official_url_http_check', 'priority', 'dependent_kb_records',
+          'prior_queue_ids', 'note', 'action', 'approval_state', 'downloaded_by_ws_b', 'cycle']
+    return h2, pend
+
 
 # ------------------------------------------------------------------ task 2: identities
 I3 = [
@@ -249,6 +327,23 @@ def kb_links(inv_path):
            'crosswalk_status', 'kb_text_evidence', 'caveat', 'cycle']
     return hdr, rows
 
+# ------------------------------------------------------------------ reconciliation item 4: known copy/transcription inconsistencies (OPEN)
+OI = [
+ ('OI-01','VIRENDRA','official vs official (two versions in one PDF)','Official PDF pp.1-21 marked CORRECTED adds para 16 (no imprisonment) and renumbers the disposal to para 17; pp.22-42 uncorrected end at para 16.','Virendra pp.21 (render aa92d37a...) and 42','adverse A-05'),
+ ('OI-02','VIRENDRA','official copy internal labelling','Heading "Section 16 of the Army Act, 1950" introduces a quotation of s.16 AFT Act 2007.','Virendra pp.18, 39','adverse A-06'),
+ ('OI-03','MULLIKOTE','official vs official (two versions in one PDF)','CORRECTED version pp.1-31 (51 paras) and a second version pp.32-62 (99 paras) are numbered differently; respondent service number "2568912 M" (p.1) vs "256812 M" (p.32).','Mullikote pp.1, 31 (render 1f23da6a...), 32','CR-C3-01; adverse A-08'),
+ ('OI-04','MULLIKOTE','court statement vs quoted text','Para 33 says condonation up to twelve months is provided in para 125 (1961) and para 44 (2008); the quoted para 125 reads "upto six months".','Mullikote pp.21-22 (text layer)','holdings WSB-H3-009'),
+ ('OI-05','ANGAD','mirror vs later official judgment','Angad cover (mirror) cites Pension Regulations for the Indian Air Force Reg 153; Isaac 2026 p.61 describes it as "Pension Regulations for the Army".','Angad mirror p.1; Isaac p.61 (render ee345615...)','adverse A-07'),
+ ('OI-06','RAM_SARUP','official vs official / curated','Reporter volume: [1964] 5 SCR 931 (official PPS Bedi p.2 list; curated; mirrors) vs (1964) 4 SCR 931 (official Jasbir fn18); KB gives AIR 1965 SC 247.','Jasbir p.20; PPS Bedi p.2','adverse A-C2-02'),
+ ('OI-07','SHAFHI','curated vs official later judgment','Curated SLP (Crl.) 2302/2017, 2018-01-30, (2018) 5 SCC 311 vs Arjun: SLP (Crl.) 9431/2011, (2018) 2 SCC 801; (2018) 5 SCC 311 = separate judgment of 03.04.2018.','Arjun pp.2, 81 (render bf48b8d8...)','adverse A-C2-03'),
+ ('OI-08','RAM_AVTAR','curated URL vs official record','Curated accessible URL is the S P Rathore judgment, not the Ram Avtar order.','Girish p.10 (render cb6de66b...); office report OR-A','adverse A-C2-01'),
+ ('OI-09','BALJIT','mirror vs curated name','Mirror cover prints "SH. BALTIT SINGH"; curated "Baljit Singh".','Baljit mirror p.1','identity_resolution discrepancies'),
+ ('OI-10','SANTOSH_LOHAR','intern metadata vs KB; unreadable mirror text','Intern date 2023-10-03 vs KB 4 Oct 2023 / 2023:PHHC:127834; mirror text layer is font-garbled.','intern meta; KB V7-JD-05','adverse A-14'),
+ ('OI-11','NAVJOT','official copy vs reporter numbering','JUDIS copy has no paragraph numbers; Anvar quotes the passage as SCC para 150.','Navjot p.49; Anvar p.16','holdings WSB-H-009'),
+ ('OI-12','PPS_BEDI','curated pinpoints vs official copy','Curated pinpoints "40","14" cannot be located in the unnumbered JUDIS copy.','PPS Bedi pp.34-35','adverse A-09'),
+ ('OI-13','INTAKE (SCR mirrors)','mirror text layer vs page image','SCR mirror text layers carry OCR artefacts (e.g. "Anny Act", "Tennination"); text-layer quotations from mirrors must be image-checked before reliance.','e.g. Harjeet mirror p.1','validation_rules V7'),
+]
+
 # ------------------------------------------------------------------ corrections + network log
 CR = [
  ('CR-C3-01', 'holdings_register.csv WSB-H-030 (MULLIKOTE)', 'Cites pp.61-62 paras 97-99, which belong to the second, uncorrected and differently numbered version inside the official PDF (pp.32-62). The CORRECTED version (pp.1-31) carries the curated pinpoints (paras 33-44, 51). Cite WSB-H3 Mullikote rows instead. Also: respondent service number differs between versions (p.1 "2568912 M"; p.32 "256812 M").', 'Mullikote official PDF pp.1, 21-31, 32 (page images p.26, p.31)', 'Prior row retained unchanged; superseded for citation by cycle-3 rows'),
@@ -271,6 +366,9 @@ def main():
     out['subsequent_treatment_cycle3.csv'] = t
     out['citation_scan_summary_cycle3.csv'] = s
     out['kb658_case_name_links_cycle3.csv'] = kb_links(a.wsc_inventory)
+    out['open_inconsistencies_cycle3.csv'] = (['item_id', 'spec_key', 'kind', 'inconsistency', 'evidence', 'cross_reference', 'state',
+                                                'legal_advisor_state', 'jag_validation_state'],
+                                               [list(x) + ['OPEN', 'NOT_STARTED', 'NOT_STARTED'] for x in OI])
     out['corrections_cycle3.csv'] = (['correction_id', 'target', 'finding', 'evidence', 'handling'], [list(x) for x in CR])
     log = []
     for line in open(a.netlog, encoding='utf-8'):
