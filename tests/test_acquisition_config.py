@@ -121,3 +121,16 @@ def test_sources_stay_disabled_for_explicit_runs_only(cfg):
     for source in EXPECTED:
         assert not cfg.source(source).get("enabled"), source
         assert source in DISCOVERERS, source
+
+
+@pytest.mark.parametrize("source", ["archive", "official_instruments"])
+def test_acq01_sources_require_https(cfg, source):
+    assert cfg.source(source).get("require_https") is True
+    ok, why = cfg.is_url_allowed(source, "http://archive.org/download/x/y.pdf" if source == "archive" else "http://indiacode.gov.in/x")
+    assert not ok and "HTTPS" in why
+
+
+def test_acq01_http_redirect_hop_refused(cfg):
+    # archive.org redirects to per-item data servers; a hop to plain HTTP must be refused for ACQ-01
+    assert not cfg.is_url_allowed("archive", "http://dn760006.eu.archive.org/x.pdf")[0]
+    assert cfg.is_url_allowed("archive", "https://dn760006.eu.archive.org/x.pdf")[0]
