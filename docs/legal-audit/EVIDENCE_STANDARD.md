@@ -2,6 +2,9 @@
 
 **We classify data by evidentiary and review quality, not by whether a human or AI created it.** The same checks apply to all contributions.
 
+## Foundational MML manuals
+The eight user-provided Manual of Military Law DOC/PDF originals are a mandatory first-pass **practical military reference** collection. Check all eight private HF files against their receipt/manifest, version/edition, legal date, paragraph/page concordance, text extraction and access markings. Identify exact manual-to-statute/KB/judgment references and review whether the manual is out of date. A manual is not binding law merely because unit commanders use it. A manual passage alone cannot establish current statutory correctness; use original statute/Rules/Gazette or controlling judgment as required. Preserve versions and note disputed Rule 23(3) source text rather than correcting it automatically.
+
 ## Authority and identity
 1. Prefer original authenticated official Gazette or enactment for historical and current statutory text; inspect the amendment and commencement chain and operative date. Government-hosted consolidated copies may differ from original Gazette. Document the hierarchy, not an imagined resolution.
 2. For cases use official signed/issued full decision PDFs or reliable official archives with court, bench, case number, decision date, parties, pages/paragraphs. A listing, counsel summary, report or office note cannot replace a judgment.
