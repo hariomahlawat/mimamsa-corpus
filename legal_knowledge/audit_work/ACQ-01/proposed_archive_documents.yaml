@@ -8,13 +8,6 @@ documents:
     year: 1954
     issuing_authority: "Central Government (Ministry of Defence), under Army Act s.191"
     note: "archive.org in.gazette.central.w.1954-11-27.103686; ARCHIVAL_COPY_OF_OFFICIAL; expected md5 3bb93dc7531e7673a94aed92e8aa8bf0, 5032579 bytes"
-  - doc_id: notif-army-rules-amdt-sro-34-1963
-    url: "https://archive.org/download/in.gazette.central.w.1963-01-19.84713/84713.pdf"
-    title: "Army Rules amendment, S.R.O. 34 (Gazette 19-01-1963)"
-    doc_type: notification
-    year: 1963
-    issuing_authority: "Ministry of Defence"
-    note: "archive.org in.gazette.central.w.1963-01-19.84713; ARCHIVAL_COPY_OF_OFFICIAL; expected md5 f9414ea4adc8704350f740c56721ae08, 382036 bytes"
   - doc_id: notif-army-rules-amdt-sro-116-1965
     url: "https://archive.org/download/in.gazette.central.w.1965-04-10.81813/81813.pdf"
     title: "Army (First Amendment) Rules 1965, S.R.O. 116"

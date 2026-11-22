@@ -1,0 +1,80 @@
+[
+  {
+    "batch_id": "R23-VERIFY-01",
+    "workstream": "STATUTORY",
+    "severity": "P0",
+    "issue_type": "CONFLICT",
+    "verification_state": "CONFLICTING",
+    "examination_outcome": "CONFLICTING_SOURCES",
+    "review_state": "PENDING",
+    "requires_legal_review": true,
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "agent": "orchestrator",
+    "proposed_text": null,
+    "source_ids": [
+      "S-R23-001"
+    ],
+    "contrary_source_ids": [
+      "S-R23-002"
+    ],
+    "mml_anchor_ids": [
+      "S-R23-003"
+    ],
+    "finding_id": "F-R23-001",
+    "record_id": "HCE-010",
+    "original_sha256": "4131611f6617a260481cd52ef4588cb5e96e3a77857a233e7ede8b2b92cf428a",
+    "claim": "Conflict determination for the Army Rules r.23(3) caution as stated in HCE-010 ('is not obliged to do so').",
+    "original_location": "records_658.jsonl:line 86",
+    "original_text": "the accused is invited to make a statement but is not obliged to do so",
+    "rationale": "Source-hierarchy determination (docs/legal-audit/SOURCE_HIERARCHY.md). (1) Gazette of 27-11-1954 (S-R23-001): authority = Central Government under AA s.191 (the notified instrument); provenance = archival reproduction of the printed Gazette (Public.Resource.Org/archive.org), identity/integrity/completeness checks passed, not custodian-certified; applicable date = 27-11-1954; prints 'You are not obliged to say anything…'. (2) India Code compilation (S-R23-002): authority = official consolidation of the same Rules (later transcription); provenance = India Code bitstream 48f52219…, annotated, no amendment marks; applicable date = unstated consolidation; prints 'You are obliged to say anything…'. (3) MML 2.pdf (S-R23-003): manual (issuer/edition not established), reproduced legal text, prints 'not obliged'; cannot override the instrument. Amendment history: per R23-VERIFY-01 amendment_chain_r23.csv (independent-reviewer-D), none of the 9 located amending instruments (1963-2022) amends r.23; the 1993 S.R.O. 17(E) runs from r.22 to r.25 without r.23. Gaps: 17 amending S.R.O.s of 1960-1991 listed in official notes, S.R.O. 258/2002, S.R.O. 2(E)/2018, anything after 06-06-2022. Weight: the notified instrument (via its archival copy) outranks the later compilation; on the instruments located, the preferred text is the 1954 Gazette wording ('not obliged') as at 06-06-2022, subject to the listed gaps. The compilation's omission of 'not' is recorded as a probable transcription discrepancy. Status remains CONFLICTING pending legal review (owner instruction); no record wording changed.",
+    "pinpoint": "Gazette 27-11-1954 printed p.300; India Code compilation PDF p.41; MML 2 p.152",
+    "temporal_scope": "Notified text 27-11-1954; amendment history checked on located instruments to 06-06-2022; gaps listed",
+    "advisor_questions": [
+      "Does the advisor accept the archival Gazette reproduction (custody checks recorded) as evidence of the notified r.23(3) text, pending any certified copy?",
+      "Is the amendment history sufficient given the listed gaps (1960-1991 S.R.O.s, 258/2002, 2(E)/2018, post-2022)?",
+      "Should HCE-010 and related records carry a note that the India Code compilation omits 'not'?"
+    ],
+    "limitations": [
+      "Not custodian-certified.",
+      "Amendment chain incomplete (gaps listed).",
+      "Same model family as the reviewer."
+    ]
+  },
+  {
+    "batch_id": "R23-VERIFY-01",
+    "workstream": "STATUTORY",
+    "severity": "P0",
+    "issue_type": "CONFLICT",
+    "verification_state": "CONFLICTING",
+    "examination_outcome": "CONFLICTING_SOURCES",
+    "review_state": "PENDING",
+    "requires_legal_review": true,
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "agent": "orchestrator",
+    "proposed_text": null,
+    "source_ids": [
+      "S-R23-001"
+    ],
+    "contrary_source_ids": [
+      "S-R23-002"
+    ],
+    "mml_anchor_ids": [
+      "S-R23-003"
+    ],
+    "finding_id": "F-R23-002",
+    "record_id": "MMLPKT-02",
+    "original_sha256": "aee2b541c7ffb67063f24d468f353730ca1efefc89fe97956ee9d2e89944af30",
+    "claim": "Conflict determination for MML packet item r.23(3): manual copies ('not obliged') vs India Code compilation ('obliged') vs the notified 1954 Gazette.",
+    "original_location": "MMLPKT-02",
+    "original_text": "Army Rules 1954 r.23(3) caution as reproduced in MML 2.pdf p.152 and vol 2(AR) copies",
+    "rationale": "Source-hierarchy determination (docs/legal-audit/SOURCE_HIERARCHY.md). (1) Gazette of 27-11-1954 (S-R23-001): authority = Central Government under AA s.191 (the notified instrument); provenance = archival reproduction of the printed Gazette (Public.Resource.Org/archive.org), identity/integrity/completeness checks passed, not custodian-certified; applicable date = 27-11-1954; prints 'You are not obliged to say anything…'. (2) India Code compilation (S-R23-002): authority = official consolidation of the same Rules (later transcription); provenance = India Code bitstream 48f52219…, annotated, no amendment marks; applicable date = unstated consolidation; prints 'You are obliged to say anything…'. (3) MML 2.pdf (S-R23-003): manual (issuer/edition not established), reproduced legal text, prints 'not obliged'; cannot override the instrument. Amendment history: per R23-VERIFY-01 amendment_chain_r23.csv (independent-reviewer-D), none of the 9 located amending instruments (1963-2022) amends r.23; the 1993 S.R.O. 17(E) runs from r.22 to r.25 without r.23. Gaps: 17 amending S.R.O.s of 1960-1991 listed in official notes, S.R.O. 258/2002, S.R.O. 2(E)/2018, anything after 06-06-2022. Weight: the notified instrument (via its archival copy) outranks the later compilation; on the instruments located, the preferred text is the 1954 Gazette wording ('not obliged') as at 06-06-2022, subject to the listed gaps. The compilation's omission of 'not' is recorded as a probable transcription discrepancy. For the MML: its reproduced text agrees with the notified instrument on the evidence located; this does not raise the manual's authority. Status remains CONFLICTING pending legal review.",
+    "pinpoint": "as F-R23-001",
+    "temporal_scope": "as F-R23-001",
+    "advisor_questions": [
+      "Confirm whether the MML reproduction may be annotated as consistent with the 1954 notified text (not as authority)."
+    ],
+    "limitations": [
+      "As F-R23-001."
+    ]
+  }
+]

@@ -44,31 +44,6 @@
           ]
         },
         {
-          "doc_id": "notif-army-rules-amdt-sro-34-1963",
-          "source": "archive",
-          "url": "https://archive.org/download/in.gazette.central.w.1963-01-19.84713/84713.pdf",
-          "archive_identifier": "in.gazette.central.w.1963-01-19.84713",
-          "expected_md5": "f9414ea4adc8704350f740c56721ae08",
-          "expected_size": 382036,
-          "title": "Army Rules amendment, S.R.O. 34 (Gazette 19-01-1963)",
-          "doc_type": "notification",
-          "number": "S.R.O. 34",
-          "issuing_authority": "Ministry of Defence",
-          "issue_date": "1963-01-19",
-          "year": 1963,
-          "gazette": "Pt II s.4",
-          "provenance_class": "ARCHIVAL_COPY_OF_OFFICIAL",
-          "uploader_collection": "carl@media.org / ['gazetteofindia', 'JaiGyan']",
-          "access_marking": null,
-          "identity_markers_to_confirm_on_image": [
-            "S.R.O. 34",
-            "'Army Rules'"
-          ],
-          "feeds": [
-            "amendment chain"
-          ]
-        },
-        {
           "doc_id": "notif-army-rules-amdt-sro-116-1965",
           "source": "archive",
           "url": "https://archive.org/download/in.gazette.central.w.1965-04-10.81813/81813.pdf",
@@ -268,7 +243,39 @@
         }
       ],
       "gaps": [
-        "S.R.O. 258 of 27-11-2002: not located on archive.org; egazette (Indian network) or custodian request"
+        "S.R.O. 258 of 27-11-2002: not located on archive.org; egazette (Indian network) or custodian request",
+        "S.R.O. 34 dated 05-06-1963 (the amendment listed in official notes): not located",
+        "17 amending S.R.O.s of 1960-1991 listed in the government compilation's own notes: not located (see R23-VERIFY-01/registers/amendment_chain_r23.csv)",
+        "S.R.O. 2(E) dated 20-02-2018: not located",
+        "Any amendment after 06-06-2022: not searched (egazette unreachable)"
+      ],
+      "excluded_items": [
+        {
+          "doc_id": "notif-army-rules-amdt-sro-34-1963",
+          "source": "archive",
+          "url": "https://archive.org/download/in.gazette.central.w.1963-01-19.84713/84713.pdf",
+          "archive_identifier": "in.gazette.central.w.1963-01-19.84713",
+          "expected_md5": "f9414ea4adc8704350f740c56721ae08",
+          "expected_size": 382036,
+          "title": "Army Rules amendment, S.R.O. 34 (Gazette 19-01-1963)",
+          "doc_type": "notification",
+          "number": "S.R.O. 34",
+          "issuing_authority": "Ministry of Defence",
+          "issue_date": "1963-01-19",
+          "year": 1963,
+          "gazette": "Pt II s.4",
+          "provenance_class": "ARCHIVAL_COPY_OF_OFFICIAL",
+          "uploader_collection": "carl@media.org / ['gazetteofindia', 'JaiGyan']",
+          "access_marking": null,
+          "identity_markers_to_confirm_on_image": [
+            "S.R.O. 34",
+            "'Army Rules'"
+          ],
+          "feeds": [
+            "amendment chain"
+          ],
+          "excluded_reason": "MISIDENTIFIED (independent-reviewer-D, R23-VERIFY-01): the archive.org item in.gazette.central.w.1963-01-19.84713 carries S.R.O. 34 dated 05-01-1963, a declaration under r.188, not an Army (Amendment) Rules notification. The amending S.R.O. 34 dated 05-06-1963 cited in official notes is NOT located."
+        }
       ]
     },
     {

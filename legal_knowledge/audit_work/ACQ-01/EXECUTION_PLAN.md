@@ -32,7 +32,7 @@ The evidence rule throughout is `docs/legal-audit/SOURCE_HIERARCHY.md` (owner ru
 ## Batches in priority order
 | Batch | Content | Items | Route | Ready now? | Approval / action needed |
 | --- | --- | --- | --- | --- | --- |
-| **B1** | **S.R.O. 484 (27-11-1954)** and 9 amending S.R.O.s: 34/1963, 116/1965, **215/1965**, 188/1979, 216/1988, 17(E)/1993, 8(E)/2003, 17(E)/2019, 6(E)/2022 | 10 | archive.org (host already allow-listed under `sources.archive`) | **Yes**, from this container | (1) Approve the run. (2) Approve a config PR adding the `documents` list to `sources.archive` and enabling it. **Gap:** S.R.O. 258/2002 not located (egazette or custodian) |
+| **B1** | **S.R.O. 484 (27-11-1954)** and 8 amending S.R.O.s: 116/1965, **215/1965**, 188/1979, 216/1988, 17(E)/1993, 8(E)/2003, 17(E)/2019, 6(E)/2022 | 9 | archive.org (host already allow-listed under `sources.archive`) | **Yes**, from this container | (1) Approve the run. (2) Approve a config PR adding the `documents` list to `sources.archive` and enabling it. **Gap:** S.R.O. 258/2002 not located (egazette or custodian) |
 | **B2** | **Adjustment of Jurisdiction Rules 1978** (S.O. 488 of 09-02-1978, Gazette 25-02-1978 p.525) and **S.O. 4010** (dated 24-11-1986, Gazette 06-12-1986) | 2 | archive.org | **Yes** | Same as B1. **Gap:** post-BNSS rules (egazette) |
 | **B3** | **Regulations for the Army 1987**: Ch V extract (India Code); complete copy; 1927 historical edition | 3 | India Code / owner upload / archive.org | Extract and historical: yes. Complete: **no** | You supply the complete official copy and **state its access marking**. If restricted, it gets the same controls as the MML (private; derived text not committed) |
 | **B4** | **Entitlement Rules 2023** and **GMO 2023** (DESW) | 2 | desw.gov.in | After allow-list change | Approve adding `desw.gov.in` (official MoD/DESW host) to an official-copies source. **Gap:** ER 1982, ER 2008 and GMO 2008 not found on reachable hosts (Indian-network run, or owner copy) |
@@ -51,3 +51,6 @@ The evidence rule throughout is `docs/legal-audit/SOURCE_HIERARCHY.md` (owner ru
 
 ## Interaction with the Rule 23(3) review
 B1 brings the 1954 instrument and its amending S.R.O.s into the corpus with verified bytes. R23-VERIFY-01 (second independent examination and amendment chain) works from research copies in the scratchpad and is independent of this run. **CONFLICTING status is retained until legal review** (owner instruction).
+
+## Correction (2026-11-22, from R23-VERIFY-01)
+The archive.org item first listed as "S.R.O. 34/1963" (`in.gazette.central.w.1963-01-19.84713`) carries S.R.O. 34 of 05-01-1963, a **declaration under r.188, not an amendment**. It is excluded from B1 (`batches.json` → `excluded_items`; removed from `proposed_archive_documents.yaml`). The amending **S.R.O. 34 of 05-06-1963** cited in official notes is not located. Further amendment-chain gaps are added to B1: 17 amending S.R.O.s of 1960–1991, S.R.O. 2(E)/2018, and anything after 06-06-2022. B1 therefore holds **9 items** (S.R.O. 484 plus 8 amendments) and 13 archive documents in total across batches.
