@@ -29,6 +29,10 @@ jobs:
         run: python -m unittest discover -s tests -p "test_legal_audit_*.py" -v
       - name: Validate PILOT-01 audit batch (strict, frozen manifest, reviewer identities)
         run: python tools/legal_audit/validate.py --batch legal_knowledge/audit_work/PILOT-01 --manifest legal_knowledge/audit_work/PILOT-01/pilot-manifest.json --strict
+      - name: Validate R23-VERIFY-01 batch (strict)
+        run: python tools/legal_audit/validate.py --batch legal_knowledge/audit_work/R23-VERIFY-01 --manifest legal_knowledge/audit_work/R23-VERIFY-01/pilot-manifest.json --strict
+      - name: Citation-code inventory fully registered (87 codes; fails on any missing code)
+        run: python legal_knowledge/audit_work/PILOT-01/build_code_inventory.py
       - name: Check frozen originals are unchanged
         run: |
           echo "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1  legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.jsonl" > /tmp/originals.sha256

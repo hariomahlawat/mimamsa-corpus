@@ -141,6 +141,21 @@ class ExtendedControls(unittest.TestCase):
         f = copy.deepcopy(FINDING); del f["examination_outcome"]
         self.assertFalse(run(findings=[f])[0])
 
+    def test_archival_copy_of_gazette_requires_custody_checks(self):
+        g = {"source_id": "S-GAZ", "source_type": "GAZETTE", "title": "Gazette of India 27-11-1954", "issuer": "Government of India",
+             "locator": "archive.org item", "pinpoint": "printed p.300", "retrieved_on": "2026-11-22",
+             "version_or_decision_date": "1954-11-27", "sha256": "d" * 64, "verification_state": "SOURCE_VERIFIED",
+             "authenticity": "ARCHIVAL_COPY_OF_OFFICIAL", "retrieved_by": "statutory-auditor", "content_role": "GAZETTE_TEXT",
+             "custody_checks": "masthead/issue/SRO identity on image; md5 equals host checksum; pages 291-378 complete"}
+        f = edit(FINDING, source_ids=["S-AR", "S-GAZ"])
+        self.assertTrue(run(sources=SOURCES + [g], findings=[f])[0])
+        self.assertFalse(run(sources=SOURCES + [edit(g, custody_checks=None)], findings=[f])[0])
+        self.assertFalse(run(sources=SOURCES + [edit(g, source_type="SECONDARY")], findings=[f])[0])
+
+    def test_manual_cannot_be_archival_copy_of_official(self):
+        src = SOURCES[:1] + [edit(SOURCES[1], authenticity="ARCHIVAL_COPY_OF_OFFICIAL")] + SOURCES[2:]
+        self.assertFalse(run(sources=src)[0])
+
 
 class IdentityControls(unittest.TestCase):
     TWO = {"first_pass_agents": ["statutory-auditor", "procedure-auditor"],

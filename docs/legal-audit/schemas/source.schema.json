@@ -100,7 +100,8 @@
         "UNCONFIRMED",
         "USER_SUPPLIED_REFERENCE",
         "MANUAL_EDITION_CORROBORATED",
-        "ARCHIVAL_FACSIMILE_OF_OFFICIAL"
+        "ARCHIVAL_COPY_OF_OFFICIAL",
+        "GOVERNMENT_ISSUED_MANUAL"
       ]
     },
     "caveat": {
@@ -121,66 +122,11 @@
         "METADATA_ONLY"
       ]
     },
-    "document_authority": {
-      "type": "string",
-      "enum": [
-        "ENACTED_OR_NOTIFIED_PRIMARY",
-        "OFFICIAL_JUDICIAL_DECISION",
-        "GOVERNMENT_COMPILATION",
-        "GOVERNMENT_ISSUED_MANUAL",
-        "UNVERIFIED_MANUAL",
-        "THIRD_PARTY_COMMENTARY",
-        "UNKNOWN"
+    "custody_checks": {
+      "type": [
+        "string",
+        "null"
       ]
-    },
-    "carrier_provenance": {
-      "type": "string",
-      "enum": [
-        "ISSUING_AUTHORITY",
-        "GOVERNMENT_HOSTED_COPY",
-        "THIRD_PARTY_ARCHIVAL_FACSIMILE",
-        "USER_SUPPLIED",
-        "THIRD_PARTY_TRANSCRIPTION",
-        "UNKNOWN"
-      ]
-    },
-    "copy_fidelity": {
-      "type": "string",
-      "enum": [
-        "NOT_CHECKED",
-        "HASH_ONLY",
-        "PAGE_IMAGE_CHECKED",
-        "CUSTODIAN_AUTHENTICATED"
-      ]
-    },
-    "amendment_chain_status": {
-      "type": "string",
-      "enum": [
-        "NOT_CHECKED",
-        "PARTIAL",
-        "CHECKED_FOR_RELEVANT_PERIOD",
-        "NOT_APPLICABLE"
-      ]
-    },
-    "instrument_identity": {
-      "type": "string",
-      "minLength": 1
-    },
-    "authority_rationale": {
-      "type": "string",
-      "minLength": 1
-    },
-    "page_image_check_id": {
-      "type": "string",
-      "minLength": 1
-    },
-    "custodian_evidence_ref": {
-      "type": "string",
-      "minLength": 1
-    },
-    "edition_authority_ref": {
-      "type": "string",
-      "minLength": 1
     }
   }
 }

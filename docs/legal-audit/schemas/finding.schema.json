@@ -193,15 +193,6 @@
         "type": "string"
       },
       "uniqueItems": true
-    },
-    "asserted_law_status": {
-      "type": "string",
-      "enum": [
-        "HISTORICAL_WORDING",
-        "CURRENT_IN_FORCE",
-        "SOURCE_CONFLICT",
-        "NOT_ASSERTED"
-      ]
     }
   }
 }
