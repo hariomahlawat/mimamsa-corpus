@@ -40,6 +40,28 @@ def main():
     info = api.repo_info(repo_id=DATASET, repo_type="dataset")
     if not info.private:
         raise RuntimeError("Refusing transfer to public Hugging Face dataset")
+    # Avoid repeated requests to Supreme Court servers on routine legal-layer commits.
+    # Reuse already archived, checksum-verified PDFs when all source metadata is present.
+    remote_register = "legal_knowledge/judgment_originals/sci/pilot_sources_2026-11-22.json"
+    if api.file_exists(repo_id=DATASET, filename=remote_register, repo_type="dataset"):
+        remote_meta = hf_hub_download(repo_id=DATASET, filename=remote_register,
+                                      repo_type="dataset", force_download=True)
+        existing = json.loads(Path(remote_meta).read_text(encoding="utf-8"))
+        by_path = {e.get("path"): e for e in existing}
+        if all(c["path"] in by_path for c in CASES):
+            matched = True
+            for case in CASES:
+                item = by_path[case["path"]]
+                if not api.file_exists(repo_id=DATASET, filename=case["path"], repo_type="dataset"):
+                    matched = False
+                    break
+                local = hf_hub_download(repo_id=DATASET, filename=case["path"],
+                                        repo_type="dataset", force_download=True)
+                if hashlib.sha256(Path(local).read_bytes()).hexdigest() != item.get("sha256"):
+                    raise RuntimeError("Previously archived official PDF failed hash verification")
+            if matched:
+                print(f"SC_PILOT_ALREADY_VERIFIED {len(CASES)} existing official judgments")
+                return
     ops = []
     evidence = []
     for case in CASES:
