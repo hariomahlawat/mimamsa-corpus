@@ -27,8 +27,12 @@ Baseline: 658 KB (9a8f0d19...), 53 cases (8b8d53cd...), 87 codes (72 firm, 75 in
 
 - Review remediation (owner instruction; 4 Codex P2 findings): REVIEW_FIXES_2026-11-22.md. (1) every instrument in a plain-text segment assessed, locators bound to their own instrument, unit mismatches recorded as ambiguous (shared parser in build_plaintext_index.py); (2) PAGE_IMAGE_READING requires a registered check id regardless of copy_fidelity; (3) complete check IDs (no prefix stripping) in validator and check_provenance; (4) manual_supported evidence bound to the check record (same document, manifest hash, real render). Regenerated: scorecard (sections 446/446, plain-text all-instruments 168/178, mentions 254/265), index (+instrument_locators), reconciliation 556/658 (102 explained), relation graph (36 checks). Tests `test_legal_audit_review_fixes.py` (10). Audit tests 179.
 
+## Cycle 3 (worktree /home/user/ws-d-c3, branch claude/ws-d-cycle3, from integration 9b48b08e)
+- C3-2 DONE `identity_map_proposed.csv/.json/.md` + `scripts/build_identity_map.py` (repository evidence only; inputs pinned by SHA-256): 15 non-firm codes -> 1 confirmed (V9-S03: single-code records' URL filename = official corpus original_filename armyrules1954.pdf), 4 inferred (V9-S01, V9-S02, V7-S04, V9-S08), 10 unresolved; 22 short case-name references -> 15 inferred, 7 unresolved (never confirmed). PROPOSAL: published KPI stays 72/87 (73/87 only if a reviewed register adopts V9-S03). Tests `test_legal_audit_identity_map.py` (7).
+- C3-1 canonical coverage: next. C3-3 versioned relationships: pending. C3-4 CI/determinism: pending.
+
 ## In progress
-- Nothing.
+- C3-1.
 
 ## Next (if continued)
 - Coordinator decisions on OQ-D-001..015; possible v4 register proposal (D-WSD-001) and frozen-batch date-rule migration proposal (OQ-D-006), each as separate additive files.
