@@ -224,10 +224,10 @@ AUTHORITY_META_FIELDS = ("document_authority", "carrier_provenance",
                          "copy_fidelity", "amendment_chain_status")
 
 
-def authority_provenance_checks(label, source, errors):
+def authority_provenance_checks(label, source, errors, require_full=False):
     auth = source.get("authenticity")
     has_policy_fields = any(key in source for key in AUTHORITY_META_FIELDS)
-    needs_policy = has_policy_fields or auth in (
+    needs_policy = require_full or has_policy_fields or auth in (
         "ARCHIVAL_FACSIMILE_OF_OFFICIAL", "MANUAL_EDITION_CORROBORATED")
     if not needs_policy:
         return  # frozen earlier records; never invent a classification
@@ -287,13 +287,17 @@ def authority_provenance_checks(label, source, errors):
 
 def extended_checks(records, ids, strict, manifest, errors):
     mml = load_mml_manifest()
+    policy = read_json(manifest).get("source_authority_policy_version") if manifest else None
+    if policy not in (None, "v1"):
+        errors.append(f"Unknown source_authority_policy_version {policy}")
+    require_source_policy = strict and policy == "v1"
     # (1) MML provenance and version differentiation
     for label, s in records["source"]:
         if not isinstance(s, dict):
             continue
         if s.get("verification_state") == "SOURCE_VERIFIED" and not s.get("pinpoint"):
             errors.append(f"{label}: SOURCE_VERIFIED source without pinpoint")
-        authority_provenance_checks(label, s, errors)
+        authority_provenance_checks(label, s, errors, require_full=require_source_policy)
         if s.get("source_type") == "MANUAL":
             where = f"{s.get('local_path') or ''} {s.get('locator') or ''}"
             names = [n for n in (mml or {}) if n in where]
