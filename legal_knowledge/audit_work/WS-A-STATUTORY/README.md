@@ -14,6 +14,7 @@
 | `network_requests_log.tsv` | | Audit trail: every request with UTC time, URL, status and bytes |
 | `mml_footnote_crosscheck_cycle2.csv` | 11 | Cycle 2: WS-C MML 2 footnote leads checked against the 41-item itemisation and held Gazettes |
 | `official_note_observations_cycle2.csv` | 4 | Cycle 2: further errors in official amendment notes |
+| `acq03_pinned_candidates.csv` / `acq03_summary.md` | 44 | Cycle 3: crawler-ready pinned candidates consolidating ACQ-03 B1–B5 and ACQ-C2 (URL, expected MD5/bytes, overlap check), not executed |
 | `acquisition_requests_cycle2.csv` | 12 | Cycle 2: ACQ-C2-01..12 (pre-1960 instruments, Mar–Apr 1964 issues, AFT rules on India Code), not executed |
 
 ## Key findings (image-checked by WS-A unless stated)

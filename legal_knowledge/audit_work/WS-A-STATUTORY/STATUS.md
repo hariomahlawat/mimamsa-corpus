@@ -1,6 +1,6 @@
 # WS-A STATUS (resumable)
 
-Updated 2026-11-22 (cycle 2). Branch: `claude/ws-a-statutory` (base 74530be9). Worktree: `/home/user/ws-a`.
+Updated 2026-11-22 (cycle 3). Branch: `claude/ws-a-statutory` (base 34e75aa9). Worktree: `/home/user/ws-a`.
 
 ## Cycle 1 (done; PR #19, accepted)
 - S.R.O. 17(E)/1993: all 41 items itemised from page images.
@@ -30,6 +30,19 @@ Updated 2026-11-22 (cycle 2). Branch: `claude/ws-a-statutory` (base 74530be9). W
 - [x] **New register-completeness gap.** Four pre-1960 Army Rules amendments were located by OCR only (1956, 1958 ×2 including r.187(1) item (r), 1959). They are in no official note and not in the register (GAP-13, ACQ-C2-01..04).
 - [x] **OQ-D-005.** India Code's official records list the AFT (Procedure) Rules 2008, the 2011 amendment and the AFT (Practice) Rules 2009. Bitstream checksums are recorded (ACQ-C2-10..12). Which instrument "Rule 4-12" means is still OPEN.
 - [x] Official-note observations (4) and `acquisition_requests_cycle2.csv` (12 rows, nothing fetched).
+
+## Cycle 3 (done)
+- [x] `acq03_pinned_candidates.csv` (44 rows) and `acq03_summary.md`. Nothing was downloaded.
+  - 40 rows have a pinned URL (37 archive.org, 3 India Code); 4 have no lawful online source known. Expected size about 74.7 MiB.
+  - No URL overlaps ACQ-01 or ACQ-02.
+  - ACQ03-016 (archive.org copy of Act 37/1992) duplicates the ACQ-01 India Code document and is optional.
+- [x] B4 sources located on archive.org (metadata/OCR locators only):
+  - S.R.O. 2(E)/1955 (e.1955.15);
+  - Adaptation of Laws (No.3) Order 1956 (e.1956.717);
+  - Ordinance 3/1975 (csl_extraordinary 1975-01-25; derivative PDF only);
+  - Act 20/1983 (e.1983.330) and its commencement notification (e.1984.465);
+  - Act 4/2018 (central.e.2018-01-08.181639, a mirror of egazette 181639.pdf);
+  - probable Army Act commencement notification of 22-07-1950 (1950.318).
 
 ## Next
 - After approval of ACQ-C2:
