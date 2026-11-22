@@ -214,6 +214,31 @@ def build(ref):
     out["kb_overall"] = {"denominator_records": 658, "coded": len(rec_codes), "plaintext_only": len(by_rec),
                          "coded_all_searchable_over_658": pct(allc, 658),
                          "plaintext_all_statute_instruments_searchable_over_658": "NOT_CHECKED" if C is None else pct(sum(1 for r in with_statute if all(rec_inst[r])), 658)}
+    # Per-record WS-D states (used by coverage reconciliation; never written to coverage_scorecard.json).
+    per = {}
+    for rid, cs_ in rec_codes.items():
+        st = [code_state[c] in searchable for c in cs_]
+        per[rid] = {"family": "CODED", "codes": sorted(cs_),
+                    "state": "D_CODED_ALL_SEARCHABLE" if all(st) else "D_CODED_PARTLY_SEARCHABLE" if any(st) else "D_CODED_NONE_SEARCHABLE",
+                    "code_states": {c: code_state[c] for c in sorted(cs_)}}
+    no_cit = set(out["plaintext_records"]["records_without_any_statute_or_case_reference"])
+    for rid, segs in by_rec.items():
+        st = rec_inst.get(rid) or []
+        cats = sorted({x["category"] for x in segs})
+        if rid in no_cit:
+            state = "D_PLAIN_NO_STATUTE_OR_CASE"
+        elif not st:
+            state = "D_PLAIN_CASE_OR_LOCATOR_ONLY"  # case names and/or unanchored locators, no statute
+        elif C is None and None in st:
+            state = "NOT_CHECKED"
+        elif all(st):
+            state = "D_PLAIN_ALL_STATUTE_SEARCHABLE"
+        elif any(st):
+            state = "D_PLAIN_PARTLY_SEARCHABLE"
+        else:
+            state = "D_PLAIN_STATUTE_NOT_SEARCHABLE"
+        per[rid] = {"family": "PLAINTEXT", "codes": [], "state": state, "segment_categories": cats}
+    out["_per_record"] = per
     return out
 
 
@@ -278,7 +303,8 @@ def main(argv=None):
     a = ap.parse_args(argv)
     o = build(a.corpus_ref)
     if not a.no_write:
-        (WSD / "coverage_scorecard.json").write_text(json.dumps(o, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        pub = {k: v for k, v in o.items() if not k.startswith("_")}
+        (WSD / "coverage_scorecard.json").write_text(json.dumps(pub, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         (WSD / "coverage_scorecard.md").write_text(render(o), encoding="utf-8")
     print(render(o))
     return 0

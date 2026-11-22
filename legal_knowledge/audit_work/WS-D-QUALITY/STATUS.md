@@ -15,8 +15,14 @@ Baseline: 658 KB (9a8f0d19...), 53 cases (8b8d53cd...), 87 codes (72 firm, 75 in
 - CI workflow: +4 steps (CSV check, check_registers.py, hash reproduction, relation graph). YAML parses.
 - Simulated integration onto origin/claude/next-stage-proposal (PR #16): all audit tests, strict validations, check_registers (corrected) and CSV check pass.
 
+## Cycle 2 (started after coordinator merge 1be2a2e1)
+- C2-1 DONE `coverage_reconciliation.md/.csv` + `scripts/coverage_reconciliation.py` (WS-C read-only via git ref or worktree): coarse agreement 562/658; 96 disagreements all explained by 11 definitional rules (R1 co-citation 39, R2 pinpoint 32, R8 no-citation definition 12, R7 plain instrument set 13 ...); code sets identical 658/658; canonical definition proposal (OQ-D-016). Tests `test_legal_audit_coverage_reconciliation.py` (7).
+- C2-2 register v4 proposal: next.
+- C2-3 provenance controls: pending.
+- C2-4 check_registers semantics tests: pending.
+
 ## In progress
-- Nothing.
+- C2-2.
 
 ## Next (if continued)
 - Coordinator decisions on OQ-D-001..015; possible v4 register proposal (D-WSD-001) and frozen-batch date-rule migration proposal (OQ-D-006), each as separate additive files.
@@ -25,4 +31,4 @@ Baseline: 658 KB (9a8f0d19...), 53 cases (8b8d53cd...), 87 codes (72 firm, 75 in
 - None. Human-reviewer nomination (OQ-D-007) needed before any v2 batch can record a legal-advisor review.
 
 ## Requests to coordinator
-- See `open_questions.csv` (OQ-D-001..015).
+- See `open_questions.csv` (OQ-D-001..016).
