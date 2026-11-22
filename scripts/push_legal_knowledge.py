@@ -10,7 +10,7 @@ from huggingface_hub import HfApi
 ROOT = Path(__file__).resolve().parent.parent
 DATASET = "hariomahlawat/mimamsa-corpus"
 BASE = ROOT / "legal_knowledge"
-SUBDIRS = ("reconciliation", "verification_batches")
+SUBDIRS = ("reconciliation", "verification_batches", "manual_sources")
 FILES = ("README.md", "DATA_AUTHORITY.md")
 
 def main():
