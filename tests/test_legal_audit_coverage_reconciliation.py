@@ -6,8 +6,10 @@ when both local inputs exist (WS-C inventory and crawler corpus ref); CI checkou
 Coverage is about locating sources, never legal correctness."""
 import collections
 import csv
+import hashlib
 import importlib.util
 import io
+import json
 import subprocess
 import unittest
 from pathlib import Path
@@ -19,6 +21,7 @@ REC = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(REC)
 ROWS = list(csv.DictReader(io.StringIO((WSD / "coverage_reconciliation.csv").read_text(encoding="utf-8"), newline="")))
 MD = (WSD / "coverage_reconciliation.md").read_text(encoding="utf-8")
+PINS = json.loads((WSD / "coverage_reconciliation.meta.json").read_text(encoding="utf-8"))
 
 
 def ref_ok(ref):
@@ -46,9 +49,15 @@ class CoverageReconciliation(unittest.TestCase):
             self.assertEqual(REC.C_BUCKET[r["wsc_state"]], r["wsc_bucket"])
             self.assertEqual(REC.D_BUCKET[r["wsd_state"]], r["wsd_bucket"])
 
-    def test_wsc_totals_match_published_wsc_summary(self):
+    def test_wsc_totals_match_pinned_wsc_input(self):
+        # WS-C inventory after the WS-C parser fix (PR #20, ba3d370e): FULL 370 / PARTIAL 140 / SOURCE_GAP 56 /
+        # UNRESOLVED 15 / NO_CITATION 77. Totals are also recorded in the input pins.
         c = collections.Counter(r["wsc_state"] for r in ROWS)
-        self.assertEqual(dict(c), {"FULL": 379, "PARTIAL": 131, "SOURCE_GAP": 56, "UNRESOLVED": 14, "NO_CITATION": 78})
+        self.assertEqual(dict(c), {"FULL": 370, "PARTIAL": 140, "SOURCE_GAP": 56, "UNRESOLVED": 15, "NO_CITATION": 77})
+        self.assertEqual(dict(c), PINS["wsc_state_totals"])
+        self.assertEqual(PINS["agreement"], sum(r["agree"] == "YES" for r in ROWS))
+        self.assertRegex(PINS["wsc_csv_sha256"], r"^[0-9a-f]{64}$")
+        self.assertRegex(PINS["wsc_commit"], r"^[0-9a-f]{40}$")
 
     def test_wsd_totals_match_scorecard(self):
         c = collections.Counter(r["wsd_state"] for r in ROWS)
@@ -61,11 +70,30 @@ class CoverageReconciliation(unittest.TestCase):
         self.assertIn(f"**Agreement: {agree}/658", MD)
         self.assertIn("PROPOSAL ONLY", MD)
 
-    @unittest.skipUnless(ref_ok("origin/raw-data") and (ref_ok("origin/claude/ws-c-mml") or (ROOT / REC.WSC_PATH).is_file()),
-                         "local WS-C inventory or crawler corpus ref unavailable")
     def test_regeneration_equals_committed(self):
-        rows, _ = REC.build("auto", "origin/raw-data")
-        self.assertEqual([{k: str(v) for k, v in r.items()} for r in rows], ROWS)
+        """Regenerate from exactly the pinned inputs, wherever the test runs. If the worktree carries a WS-C
+        inventory whose SHA-256 differs from the pin, fail with an explicit 'regenerate' message."""
+        wt = ROOT / PINS["wsc_path"]
+        if wt.is_file():
+            got = hashlib.sha256(wt.read_bytes()).hexdigest()
+            if got != PINS["wsc_csv_sha256"]:
+                self.fail("WS-C inventory changed - regenerate reconciliation: run "
+                          "legal_knowledge/audit_work/WS-D-QUALITY/scripts/coverage_reconciliation.py "
+                          f"(worktree sha256 {got[:12]}... != pinned {PINS['wsc_csv_sha256'][:12]}... from {PINS['wsc_commit'][:12]})")
+            wsc_input = "WORKTREE"
+        elif ref_ok(PINS["wsc_commit"] + "^{commit}"):
+            wsc_input = PINS["wsc_commit"]
+        else:
+            self.skipTest("pinned WS-C inventory not available locally (neither worktree file nor git object)")
+        if not ref_ok(PINS["corpus_commit"] + "^{commit}"):
+            self.skipTest("pinned crawler corpus commit not available locally")
+        rows, meta = REC.build(wsc_input, PINS["corpus_commit"])
+        self.assertEqual(meta["wsc_csv_sha256"], PINS["wsc_csv_sha256"])
+        regen = [{k: str(v) for k, v in r.items()} for r in rows]
+        diff = [a["record_id"] for a, b in zip(regen, ROWS) if a != b]
+        self.assertEqual(len(regen), len(ROWS))
+        self.assertFalse(diff, f"{len(diff)} reconciliation rows differ from regeneration (first: {diff[:5]}); "
+                               "rerun scripts/coverage_reconciliation.py")
 
 
 if __name__ == "__main__":

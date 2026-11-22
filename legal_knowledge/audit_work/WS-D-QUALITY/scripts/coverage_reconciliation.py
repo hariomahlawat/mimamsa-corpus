@@ -27,7 +27,7 @@ RULES = {
     "R3_STRUCTURAL_FLAG": "WS-C downgrades FULL on provision-not-in-heading-index, Army Act/Rules cited without pinpoint, or non-official URL; WS-D has no such gate.",
     "R4_PLACEHOLDER": "WS-C counts [VERIFY]/'verify' placeholders as unresolved; WS-D ignores placeholders for searchability.",
     "R5_GAP_CODE": "Record has a firm code whose target is a declared GAP: WS-C counts it as a source gap; WS-D as not searchable.",
-    "R6_PLAIN_CASE": "Plain-text case citation: WS-C flags it unresolved (and counts it as a citation); WS-D excludes case names from statute searchability (case-or-locator-only = NONE).",
+    "R6_PLAIN_CASE": "Plain-text case citation (incl. WS-C's short-title CASE_NAME_WITHOUT_CODE flag, parser fix ba3d370e): WS-C flags it unresolved and never rates the record FULL; WS-D excludes case names from statute searchability (case-or-locator-only = NONE).",
     "R7_PLAIN_INSTRUMENT_SET": "Plain statute set differs: WS-C treats AA/AR pinpoints and a fixed held list (incl. CrPC, Evidence Act, Air Force/Navy Act, Procedure Rules) as anchors without checking the corpus; WS-D maps only AA/AR/AFT Act/BNS/BNSS/BSA to crawler doc_ids.",
     "R8_NO_CITATION_DEFINITION": "NO_CITATION differs: WS-C requires a code, AA/AR pinpoint, held statute name or case pattern; WS-D counts any statute token (incl. 'AR trial rules') or locator continuation as a reference.",
     "R9_UNRESOLVED_CODE": "Record has a PROBABLE/CATEGORY_ONLY/UNRESOLVABLE code: WS-C counts it unresolved whatever its target; WS-D searchability looks only at whether the register target exists (identity class is scored separately in citation_resolution_score).",
@@ -60,7 +60,7 @@ def tags_for(c, d):
         t.append("R4_PLACEHOLDER")
     if c["codes_resolved_gap"]:
         t.append("R5_GAP_CODE")
-    if c["case_citation_pattern"] == "YES" or "CASE_REFERENCE" in d.get("segment_categories", []):
+    if c["case_citation_pattern"] == "YES" or "CASE_NAME_WITHOUT_CODE" in flags or "CASE_REFERENCE" in d.get("segment_categories", []):
         t.append("R6_PLAIN_CASE")
     if d["family"] == "PLAINTEXT" and (c["other_statutes_plain"] or c["aa_sections"] or c["ar_rules"]):
         t.append("R7_PLAIN_INSTRUMENT_SET")
@@ -80,6 +80,15 @@ def build(wsc_ref, corpus_ref):
     raw, commit = git_show(wsc_ref, WSC_PATH)
     if wsc_ref == "auto":
         wsc_ref = "WORKTREE" if commit == "WORKTREE" else "origin/claude/ws-c-mml"
+    if commit == "WORKTREE":
+        # identify which committed WS-C version the worktree file equals, if any (for the pin)
+        for ref in ("origin/claude/ws-c-mml", "HEAD"):
+            try:
+                blob, c2 = git_show(ref, WSC_PATH)
+                if blob == raw:
+                    commit = c2; break
+            except subprocess.CalledProcessError:
+                continue
     wsc = {r["record_id"]: r for r in csv.DictReader(io.StringIO(raw.decode("utf-8"), newline=""))}
     spec = importlib.util.spec_from_file_location("cov", WSD / "scripts" / "coverage_scorecard.py")
     cov = importlib.util.module_from_spec(spec); spec.loader.exec_module(cov)
@@ -167,6 +176,18 @@ def main(argv=None):
     (WSD / "coverage_reconciliation.csv").write_text(buf.getvalue(), encoding="utf-8")
     md = render(rows, meta)
     (WSD / "coverage_reconciliation.md").write_text(md, encoding="utf-8")
+    # Input pins: the regeneration test rebuilds from exactly these inputs, wherever it runs.
+    pins = {"note": "Inputs of coverage_reconciliation.csv/.md. The test regenerates from the WS-C inventory whose "
+                    "SHA-256 is wsc_csv_sha256 (worktree file if it matches, else git object wsc_commit) and the "
+                    "crawler corpus at corpus_commit. A different WS-C inventory means: rerun this script.",
+            "wsc_path": WSC_PATH, "wsc_ref": meta["wsc_ref"], "wsc_commit": meta["wsc_commit"],
+            "wsc_csv_sha256": meta["wsc_csv_sha256"], "corpus_ref": meta["corpus_ref"], "corpus_commit": meta["corpus_commit"],
+            "kb_sha256": meta["kb_sha256"],
+            "wsc_state_totals": dict(sorted(collections.Counter(r["wsc_state"] for r in rows).items())),
+            "wsd_state_totals": dict(sorted(collections.Counter(r["wsd_state"] for r in rows).items())),
+            "agreement": sum(r["agree"] == "YES" for r in rows),
+            "explanation_tag_counts": dict(sorted(collections.Counter(t for r in rows for t in r["explanation_tags"].split(";") if t).items()))}
+    (WSD / "coverage_reconciliation.meta.json").write_text(json.dumps(pins, indent=1) + "\n", encoding="utf-8")
     print(md.split("## 4.")[0][-900:])
     return 0
 
