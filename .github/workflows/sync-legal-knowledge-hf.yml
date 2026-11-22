@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 concurrency:
   group: mimamsa-hf-legal-knowledge
@@ -23,21 +24,21 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - name: Require dataset-write credential
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: |
-          if [ -z "$HF_TOKEN" ]; then
-            echo "::error::Hugging Face upload unavailable: repository secret HF_TOKEN is not configured."
-            exit 1
-          fi
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Install upload dependency
-        run: python -m pip install 'huggingface_hub>=0.31,<2'
-      - name: Publish and read-back verify curated text records
+      - name: Install current Hugging Face client
+        run: python -m pip install 'huggingface_hub>=1.19.0,<2'
+      - name: Acquire short-lived scoped credential via Trusted Publisher
         env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
-          HF_HUB_DISABLE_TELEMETRY: "1"
+          HF_OIDC_RESOURCE: datasets/hariomahlawat/mimamsa-corpus
+        run: |
+          TOKEN="$(hf auth token)"
+          if [ -z "$TOKEN" ]; then
+            echo "::error::No Hugging Face OIDC credential; configure Trusted Publisher on the private dataset."
+            exit 1
+          fi
+          echo "::add-mask::$TOKEN"
+          echo "HF_TOKEN=$TOKEN" >> "$GITHUB_ENV"
+      - name: Publish and verify curated text review files
         run: python scripts/push_legal_knowledge.py
