@@ -96,3 +96,81 @@ Each gate's exit code was checked directly before the commit:
 - `tools/check_ws_b.py`;
 - `tools/check_cycle3_fixes.py`;
 - `cases_53` SHA-256 `8b8d53cd…`.
+
+
+## Final Cycle 3 reconciliation (owner instruction; branch claude/ws-b-cycle3-reconcile, base 2a66cd04)
+No host was contacted. Nothing was downloaded. No legal determination was made.
+
+**New checks in `tools/check_ws_b.py`:**
+- **Holder/source check.** Fails if any CSV column naming a holder, source, URL, copy, carrier or official target contains indiankanoon, casemine, scconline, "SCC Online" or manupatra.
+  - Exception: a `curated_*` column may reproduce the frozen original verbatim, but only when the same row's `discrepancies` field flags it as "commercial database ... not evidence".
+- **Completeness check.** Fails if any identity in `identity_resolution.csv` without a held official copy lacks a row in `pending_acquisition_cycle3.csv`.
+  - Rows are keyed by the stable `spec_key`.
+  - It also checks each queue row's states (ACQUISITION_REQUEST_ONLY, NOT_APPROVED, downloaded_by_ws_b = NO) and rejects duplicates.
+
+**Before** (`check_ws_b.py` on 2a66cd04, exit 1):
+```
+COMMERCIAL DATABASE AS HOLDER/SOURCE pending_acquisition_cycle3.csv PQ-C3-32 official_url_or_holder_if_known https://indiankanoon.org/doc/925325/
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW INDER_JIT CITATION_METADATA_CORROBORATED_BY_OFFICIAL_RECORD_NO_COPY
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW CHANDRA_KUMAR CITATION_METADATA_CORROBORATED_BY_OFFICIAL_RECORD_NO_COPY
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW SODHI CITATION_METADATA_CORROBORATED_BY_OFFICIAL_RECORD_NO_COPY
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW ROJER CITATION_METADATA_CORROBORATED_BY_OFFICIAL_RECORD_NO_COPY
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW RAM_AVTAR CITATION_METADATA_CORROBORATED_BY_OFFICIAL_RECORD_NO_COPY
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW SHAFHI CITATION_METADATA_CONFLICTS_WITH_OFFICIAL_RECORD_NO_COPY
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW RAM_SARUP CITATION_METADATA_CONFLICTS_WITH_OFFICIAL_RECORD_NO_COPY
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW MANI_RAM CITATION_METADATA_CORROBORATED_BY_OFFICIAL_RECORD_NO_COPY
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW SOM_DATT IDENTITY_CORROBORATED_INTERN_MIRROR_ONLY
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW BALBIR CITATION_METADATA_CORROBORATED_BY_OFFICIAL_RECORD_NO_COPY
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW ADG_CBI CITATION_METADATA_CORROBORATED_BY_OFFICIAL_RECORD_NO_COPY
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW SONU CITATION_METADATA_CORROBORATED_BY_OFFICIAL_RECORD_NO_COPY
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW SANDEEP_SHARMA UNRESOLVED_NO_COPY_IN_HAND
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW SANTOSH_LOHAR IDENTITY_LEAD_INTERN_METADATA_ONLY
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW PANDAPPA IDENTITY_CORROBORATED_INTERN_MIRROR_ONLY
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW SUKHDEV UNRESOLVED_NO_COPY_IN_HAND
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW NITISHA_MA UNRESOLVED_NO_COPY_IN_HAND
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW INSC_2023_985 UNRESOLVED_NO_COPY_IN_HAND
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW INSC_2026_281 UNRESOLVED_NO_COPY_IN_HAND
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW HARJEET IDENTITY_CORROBORATED_INTERN_MIRROR_ONLY
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW NALIN UNRESOLVED_NO_COPY_IN_HAND
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW POOJA_PAL UNRESOLVED_NO_COPY_IN_HAND
+UNRESOLVED IDENTITY WITHOUT CYCLE-3 QUEUE ROW JOGINDER_HP CITATION_METADATA_CORROBORATED_BY_OFFICIAL_RECORD_NO_COPY
+FAIL
+```
+
+**After:** `check_ws_b.py` exits 0 and prints OK. `check_cycle3_fixes.py` also passes.
+
+**Item 1, CF-WSB-PQ-C3-32 (Ranjit Thakur review order)**
+- PQ-C3-32's `official_target` now reads: "official Supreme Court of India copy required; no official URL located (a commercial database URL was previously recorded in the curated record - it is not a source or holder)".
+- The row's `note` records that https://indiankanoon.org/doc/925325/ was listed before and has been removed.
+
+**Items 2 and 3, the consolidated acquisition queue**
+- `pending_acquisition_cycle3.csv` now has one row per unresolved `spec_key`: 55 rows, up from 32.
+- PQ-C3-01 to PQ-C3-32 keep their ids. PQ-C3-33 to PQ-C3-55 are new and include HARJEET (PQ-C3-52) and PANDAPPA (PQ-C3-47).
+- Separate fields now record:
+  - identity status and identity uncertainty;
+  - `official_copy_held` (always NO);
+  - `mirror_copy` (intern doc id and SHA-256, marked not official);
+  - `official_target`, which is never a commercial database. Ram Avtar's wrong-document URL is flagged rather than used as a target;
+  - `official_url_http_check` (availability only);
+  - `dependent_kb_records` (code-declared links vs lexical leads);
+  - `prior_queue_ids` (cycle 1–2 rows);
+  - `approval_state` = NOT_APPROVED and `downloaded_by_ws_b` = NO.
+- **Priority rule, applied to every row:**
+  1. P0 for the 11 P0 cases in issue #4;
+  2. otherwise P1 if an official PDF URL responds, or the case has a code-declared KB dependency;
+  3. otherwise P2.
+- **Priority changes on existing rows:** PQ-C3-03, 04, 07, 08, 09 and 10 move P2 → P1. PQ-C3-29, 30 and 32 move P1 → P2. PQ-C3-31 (Dhingra, an issue-#4 P0 case) moves P1 → P0.
+
+**Item 4, known inconsistencies**
+- `open_inconsistencies_cycle3.csv` lists 13 OPEN items where official copies, mirror copies, curated records and transcribed text disagree.
+
+**Other registers:** no other cycle-3 register changed. The generated output was byte-compared before and after.
+
+**Unit-test gate (not caused by WS-B).**
+- `python3 -m unittest discover -s tests -p 'test_legal_audit_*.py'` exits 1 with 2 failures:
+  - `test_legal_audit_versioned_edges.test_inputs_pinned_and_current`
+  - `test_legal_audit_versioned_edges.test_regeneration_is_byte_identical`
+- Both fail identically on the untouched base 2a66cd04. The message is "input version_register changed - regenerate versioned edges", which follows PR #28's change to ARMY-RULES-CHAIN-01.
+- The fix is outside the WS-B lease (WS-D `tests/` and the `scripts/` edge builder). It is reported to the coordinator.
+- No WS-B change touches those inputs.
+- All other gates exit 0.
