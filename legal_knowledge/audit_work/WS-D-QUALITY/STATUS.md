@@ -14,14 +14,16 @@ Baseline: 658 KB (9a8f0d19...), 53 cases (8b8d53cd...), 87 codes (72 firm, 75 in
 
 - D6 `relation_graph_report.md`, `relation_graph_summary.json`, `scripts/relation_graph.py` (CI step, exits 1 on dangling/ID collision): 1716 edges, 0 dangling (incl. 24 register targets checked against origin/raw-data@ad77758d data/meta, read locally); 0 exact/normalised/near-duplicate KB bodies; orphans and leads in OQ-D-008..011. Simulated integration onto origin/claude/next-stage-proposal: 111 audit tests pass.
 
+- D7 `coverage_scorecard.json/.md` + script (crawler corpus read locally from origin/raw-data@ad77758d): codes 52/87 searchable; links 520/681; coded records 279/389 all-searchable; plain-text statute segments 251/261 instrument-searchable, cited Act sections 448/448 present; cases 23/53 official-host URL, 0/53 PDF hash; whole KB 279/658 + 169/658.
+
 ## In progress
-- D7 coverage scorecard.
+- D8 reviewer provenance and CI report.
 
 ## Next
-- D7 coverage scorecard; D8 reviewer/CI report.
+- D8 reviewer/CI report.
 
 ## Blockers
 - None.
 
 ## Requests to coordinator
-- See `open_questions.csv` (OQ-D-001..011).
+- See `open_questions.csv` (OQ-D-001..013).

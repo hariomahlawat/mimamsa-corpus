@@ -1,0 +1,364 @@
+{
+  "artifact": "WS-D coverage scorecard",
+  "definition": "'Searchable' means the cited source (instrument, section or judgment) exists as a document in a\ncorpus the database can search: cases_53, or the crawler corpus (data/meta, data/sections) read\nfrom a LOCAL git ref via `git ls-tree` / `git cat-file` (default origin/raw-data; no network).\nIt does NOT mean the text was verified, that the version is right for the record's date, or that\nthe record states the law correctly. Without the ref, corpus-dependent measures are NOT_CHECKED.",
+  "inputs": {
+    "kb_sha256": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1",
+    "cases_sha256": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a",
+    "register_sha256": "40b18c3dfff3ad81c099118a0ee058c28db5255a8c4ba47d4391bd1685e8d944",
+    "plaintext_index_sha256": "ba83ea4fbbd8881bd3aed99f84ecd2e5f464cede9ca67199b1fd213b03dc8da0",
+    "corpus_ref": "origin/raw-data",
+    "corpus_commit": "ad77758d4569ba6aafa955cc7843d874489e10f7"
+  },
+  "codes": {
+    "denominator_codes": 87,
+    "by_state": {
+      "GAP_OR_NON_LEGAL": 35,
+      "IN_CASES_53": 28,
+      "IN_CRAWLER_CORPUS": 24
+    },
+    "searchable": {
+      "numerator": 52,
+      "denominator": 87,
+      "pct": 59.8
+    },
+    "official_copy_identified_url_and_sha": {
+      "numerator": 33,
+      "denominator": 87,
+      "pct": 37.9
+    },
+    "gap_codes": [
+      "AO",
+      "AR_ALT",
+      "SC_GILL",
+      "SRC-AO",
+      "SRC-ISO",
+      "SRC-ISOR",
+      "SRC-RA",
+      "SRC-SANDEEP",
+      "V6-S01",
+      "V6-S02",
+      "V6-S03",
+      "V6-S04",
+      "V6-S05",
+      "V6-S06",
+      "V6-S07",
+      "V6-S08",
+      "V6-S09",
+      "V6-S10",
+      "V6-S11",
+      "V6-S12",
+      "V6-S13",
+      "V6-S16",
+      "V6-S22",
+      "V7-S12",
+      "V7-S13",
+      "V7-S15",
+      "V7-S16",
+      "V8-S03",
+      "V8-S08",
+      "V8-S09",
+      "V8-S10",
+      "V8-S11",
+      "V8-S14",
+      "V8-S15",
+      "V9-S06"
+    ]
+  },
+  "record_code_links": {
+    "denominator_links": 681,
+    "searchable": {
+      "numerator": 520,
+      "denominator": 681,
+      "pct": 76.4
+    }
+  },
+  "coded_records": {
+    "denominator_records": 389,
+    "all_codes_searchable": {
+      "numerator": 279,
+      "denominator": 389,
+      "pct": 71.7
+    },
+    "at_least_one_code_searchable": {
+      "numerator": 333,
+      "denominator": 389,
+      "pct": 85.6
+    }
+  },
+  "plaintext_records": {
+    "denominator_records": 269,
+    "segments": 403,
+    "segments_by_category": {
+      "CASE_REFERENCE": 26,
+      "INTERNAL_CROSS_REF": 37,
+      "LOCATOR_CONTINUATION": 20,
+      "NON_CITATION_LABEL": 36,
+      "PLACEHOLDER": 7,
+      "POLICY_GENERIC": 25,
+      "STATUTE_GENERIC": 14,
+      "STATUTE_LOCATOR": 238
+    },
+    "records_with_statute_reference": {
+      "numerator": 178,
+      "denominator": 269,
+      "pct": 66.2
+    },
+    "records_without_any_statute_or_case_reference": [
+      "ADM-CL-01",
+      "ADM-CL-02",
+      "ADM-CL-03",
+      "ADM-CL-04",
+      "ADM-CL-05",
+      "ADM-CL-06",
+      "ADM-CL-07",
+      "ADM-CL-08",
+      "ADM-CL-09",
+      "COI-045",
+      "PEN-CL-01",
+      "PEN-CL-02",
+      "PEN-CL-03",
+      "PEN-CL-04",
+      "PEN-CL-05",
+      "PEN-CL-06",
+      "PEN-CL-07",
+      "PEN-CL-08",
+      "PEN-CS-01",
+      "PEN-CS-02",
+      "PEN-CS-03",
+      "PEN-CS-04",
+      "PEN-CS-05",
+      "PEN-CS-06",
+      "PEN-CS-07",
+      "PEN-CS-08",
+      "PEN-CS-09",
+      "PEN-CS-10",
+      "PEN-CS-11",
+      "PEN-CS-12",
+      "PEN-CS-13",
+      "PEN-CS-14",
+      "PEN-CS-15",
+      "PEN-CS-16",
+      "PEN-CS-17",
+      "PEN-CS-18",
+      "PEN-CS-19",
+      "PEN-CS-20",
+      "V8-TPL-01",
+      "V8-TPL-02",
+      "V8-TPL-03",
+      "V8-TPL-04",
+      "V8-TPL-05",
+      "V8-TPL-06",
+      "V8-TPL-07",
+      "V8-WF-14",
+      "V9-CL-01",
+      "V9-CL-02",
+      "V9-CL-03",
+      "V9-CL-04",
+      "V9-CL-05",
+      "V9-CL-06",
+      "V9-CL-07",
+      "V9-CL-08",
+      "V9-CL-09",
+      "V9-CL-10",
+      "V9-CL-11",
+      "V9-CL-12",
+      "V9-TPL-01",
+      "V9-TPL-02",
+      "V9-TPL-03",
+      "V9-TPL-04",
+      "V9-TPL-05",
+      "V9-TPL-06",
+      "V9-TPL-07",
+      "V9-TPL-08"
+    ],
+    "statute_segments_instrument_searchable": {
+      "numerator": 251,
+      "denominator": 261,
+      "pct": 96.2
+    },
+    "records_all_statute_instruments_searchable": {
+      "numerator": 169,
+      "denominator": 178,
+      "pct": 94.9
+    },
+    "cited_act_sections_present_in_corpus": {
+      "numerator": 448,
+      "denominator": 448,
+      "pct": 100.0
+    },
+    "cited_act_sections_missing": [],
+    "army_rules_rule_level": "NOT_CHECKED: crawler corpus has no section files for rules-army-rules-1954",
+    "case_reference_segments": 26,
+    "case_reference_resolution": "NOT_CHECKED: plain-text case names are leads (WS-B owns identity resolution)",
+    "cited_sections_with_non_current_corpus_status": {
+      "act-army-1950#s109 (amended)": [
+        "CM-001",
+        "CM-003",
+        "CM-014",
+        "CM-CL-01",
+        "CM-CL-02"
+      ],
+      "act-army-1950#s112 (amended)": [
+        "CM-001",
+        "CM-004",
+        "CM-CL-01",
+        "CM-CL-02"
+      ],
+      "act-army-1950#s122 (amended)": [
+        "ADM-JD-02",
+        "CM-001",
+        "CM-011",
+        "CM-012",
+        "CM-CL-01",
+        "CM-SC-10",
+        "CM-SC-11",
+        "SC13",
+        "V8-WF-13"
+      ],
+      "act-army-1950#s123 (amended)": [
+        "CM-001",
+        "CM-012",
+        "CM-CL-01",
+        "CM-SC-11",
+        "SC13",
+        "V8-WF-13"
+      ],
+      "act-army-1950#s127 (omitted)": [
+        "CM-001",
+        "CM-013",
+        "CM-SC-18"
+      ],
+      "act-army-1950#s135 (amended)": [
+        "CM-024",
+        "CM-027",
+        "CM-CL-08",
+        "V9-WF-07"
+      ],
+      "act-army-1950#s137 (amended)": [
+        "CM-027",
+        "CM-CL-08",
+        "V9-SC-06",
+        "V9-WF-07"
+      ],
+      "act-army-1950#s162 (amended)": [
+        "CM-034",
+        "CM-038",
+        "CM-039",
+        "CM-CL-11",
+        "CM-SC-14"
+      ],
+      "act-army-1950#s164 (amended)": [
+        "CM-035",
+        "CM-039",
+        "CM-CL-10",
+        "CM-CL-12",
+        "CM-SC-16"
+      ],
+      "act-army-1950#s165 (amended)": [
+        "CM-035",
+        "CM-039",
+        "CM-CL-10",
+        "CM-CL-12"
+      ],
+      "act-army-1950#s169a (amended)": [
+        "CM-038",
+        "CM-CL-11"
+      ],
+      "act-army-1950#s2 (amended)": [
+        "CM-001",
+        "CM-CL-01"
+      ],
+      "act-army-1950#s20 (amended)": [
+        "ADM-001",
+        "ADM-003",
+        "ADM-011",
+        "ADM-030",
+        "ADM-SC-01"
+      ],
+      "act-army-1950#s26 (amended)": [
+        "ADM-020",
+        "ADM-022",
+        "ADM-023",
+        "ADM-028",
+        "ADM-SC-06"
+      ],
+      "act-army-1950#s3 (amended)": [
+        "V8-WF-02"
+      ],
+      "act-army-1950#s70 (amended)": [
+        "CM-013",
+        "CM-SC-12",
+        "SC09",
+        "V8-WF-01",
+        "V8-WF-02",
+        "V8-WF-06",
+        "V8-WF-08"
+      ],
+      "act-army-1950#s80 (amended)": [
+        "SC04",
+        "SC05"
+      ],
+      "act-army-1950#s81 (amended)": [
+        "SC04",
+        "SC05"
+      ],
+      "act-army-1950#s83 (amended)": [
+        "SC07"
+      ],
+      "act-army-1950#s84 (amended)": [
+        "SC08"
+      ],
+      "act-army-1950#s85 (amended)": [
+        "SC06"
+      ],
+      "act-army-1950#s88 (amended)": [
+        "SC07",
+        "SC15"
+      ]
+    }
+  },
+  "cases": {
+    "denominator_cases": 53,
+    "official_host_primary_url": {
+      "numerator": 23,
+      "denominator": 53,
+      "pct": 43.4
+    },
+    "original_pdf_sha256_recorded": {
+      "numerator": 0,
+      "denominator": 53,
+      "pct": 0.0
+    },
+    "original_pdf_archived_flag": {
+      "numerator": 0,
+      "denominator": 53,
+      "pct": 0.0
+    },
+    "same_url_in_crawler_corpus": {
+      "numerator": 0,
+      "denominator": 53,
+      "pct": 0.0
+    },
+    "matched": [],
+    "by_record_type": {
+      "CITATION_LEAD": 9,
+      "QUARANTINED_COMPARATIVE_LEAD": 1,
+      "RESEARCH_DIGEST": 43
+    }
+  },
+  "kb_overall": {
+    "denominator_records": 658,
+    "coded": 389,
+    "plaintext_only": 269,
+    "coded_all_searchable_over_658": {
+      "numerator": 279,
+      "denominator": 658,
+      "pct": 42.4
+    },
+    "plaintext_all_statute_instruments_searchable_over_658": {
+      "numerator": 169,
+      "denominator": 658,
+      "pct": 25.7
+    }
+  }
+}

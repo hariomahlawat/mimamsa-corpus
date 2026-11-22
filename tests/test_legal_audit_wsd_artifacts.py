@@ -116,3 +116,20 @@ class RelationGraph(unittest.TestCase):
         corpus_edges = ("case.related_cases", "code.target_case", "kb.uses_code")
         for k in corpus_edges:
             self.assertEqual(self.S["edges"][k], self.committed["edges"][k], k)
+
+
+class CoverageScorecard(unittest.TestCase):
+    def test_without_corpus_ref_corpus_measures_are_not_checked(self):
+        o = load("coverage_scorecard").build(None)  # CI has no origin/raw-data ref
+        self.assertEqual(o["codes"]["by_state"], {"GAP_OR_NON_LEGAL": 35, "IN_CASES_53": 28, "NOT_CHECKED": 24})
+        self.assertEqual(o["codes"]["denominator_codes"], 87)
+        self.assertEqual(o["plaintext_records"]["denominator_records"], 269)
+        self.assertEqual(o["plaintext_records"]["cited_act_sections_present_in_corpus"], "NOT_CHECKED")
+        self.assertEqual(o["cases"]["denominator_cases"], 53)
+
+    def test_committed_scorecard_denominators(self):
+        o = json.loads((WSD / "coverage_scorecard.json").read_text(encoding="utf-8"))
+        self.assertEqual(sum(o["codes"]["by_state"].values()), 87)
+        self.assertEqual(o["record_code_links"]["denominator_links"], 681)
+        self.assertEqual(o["kb_overall"]["coded"] + o["kb_overall"]["plaintext_only"], 658)
+        self.assertEqual(o["cases"]["original_pdf_sha256_recorded"]["denominator"], 53)
