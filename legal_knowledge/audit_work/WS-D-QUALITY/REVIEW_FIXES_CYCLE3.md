@@ -268,4 +268,4 @@ The AA-04 regression still passes: no false Army Act s.3 edges.
 ## Commits (reconciliation)
 - `7e2e1baa`: R-1 provision-level searchability and the #28 regeneration.
 - `4c445df7`: merge of claude/ws-a-cycle3-reconcile (18ae1078).
-- The commit adding this section: R-2 versioned edges (see git log).
+- `aef02e0e`: R-2 versioned edges (addendum input, r.2 date model), tests and regenerated outputs.
