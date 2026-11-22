@@ -82,6 +82,8 @@ def main():
             out["scratchpad_inputs"].append(entry(SP / "derived/statutes" / n, "india_code_compilation_text (comparison only)", SP))
     if SP and (SP / "ws-c/pcl.csv").exists():
         out["scratchpad_inputs"].append(entry(SP / "ws-c/pcl.csv", "wsa_provision_change_log (git show origin/claude/ws-a-statutory:legal_knowledge/audit_work/WS-A-STATUTORY/provision_change_log.csv @ 74530be9)", SP))
+    if SP and (SP / "ws-c/wsb_ids.csv").exists():
+        out["scratchpad_inputs"].append(entry(SP / "ws-c/wsb_ids.csv", "wsb_identity_resolution (git show origin/claude/ws-b-judgments:legal_knowledge/audit_work/WS-B-JUDGMENTS/identity_resolution.csv @ 97de40b3)", SP))
     OUT.write_text(json.dumps(out, indent=1) + "\n", encoding="utf-8")
     bad = [e["path"] for e in out["scratchpad_inputs"] if e.get("matches_manifest") is False]
     print("inputs:", len(repo), "+", len(out["scratchpad_inputs"]), "originals mismatching manifest:", bad)

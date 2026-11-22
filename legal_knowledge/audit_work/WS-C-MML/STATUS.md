@@ -47,6 +47,11 @@ All eight deliverables are present. See README.md for counts, denominators and e
 - Requests:
   - WS-A: s.129 'any person' vs 'an officer' (CC-17, OQ-C-09); source of the r.15 words (CC-19).
 
+## Review fix 2026-11-22 (PR #20)
+Parser fix for letter suffixes, list continuation and uncoded case names. Details in `PARSER_FIX_2026-11-22.md`.
+- Coverage states before → after: FULL 379 → 370; PARTIAL 131 → 140; UNRESOLVED 14 → 15; NO_CITATION 78 → 77; SOURCE_GAP unchanged at 56.
+- All dependent artifacts regenerated; `scripts/test_kb_citations.py` passes.
+
 ## Next (if continued)
 - Image-check the crosswalk locators that the advisor selects. Every crosswalk locator is text-layer only (REQUIRES_VERIFICATION).
 - DOC-vs-PDF comparison for vol 2(AA) and vol 3 beyond the pilot samples.
