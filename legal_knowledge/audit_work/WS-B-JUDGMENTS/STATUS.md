@@ -1,5 +1,30 @@
 # WS-B STATUS (issue #12)
 
+## Cycle 3 (worktree /home/user/ws-b-c3, branch claude/ws-b-cycle3, base 9b48b08e)
+
+**Done (tasks 1–5).** Details are in the README "Cycle 3" section.
+
+**For independent coordinator check:**
+- Ram Avtar resolution (A-C2-01).
+- Ram Sarup volume (A-C2-02).
+- Naga conclusions (7)–(8) and (13)–(21) (mirror page images pp.53–54).
+- Mullikote para 42 (page image p.26) and the para 33 wording (quoted para 125 says six months).
+- Girish para 13 ("more than 800 appeals").
+- Ranjit s.130 (page image p.6).
+- CR-C3-01.
+
+**Process deviation CR-C3-02.** The HEAD lookups were sent in pairs, less than 3 seconds apart: 22 requests to 2 hosts, with no body bytes. It is recorded and was not repeated.
+
+**Next:**
+- Obtain official copies (`pending_acquisition_cycle3.csv`).
+- Read the Ram Sarup copy held on Hugging Face.
+- Classify the citation leads in `subsequent_treatment_cycle3.csv` against the cited judgments' text.
+
+**Blockers:**
+- `api.sci.gov.in` HEAD returns 404 even for a known URL, so availability cannot be checked read-only.
+- The court's search pages have a CAPTCHA.
+
+
 ## Cycle 2 (coordinator CYCLE 2 START; base 68290bae)
 - Done: tasks 1-4 first pass (see README 'Cycle 2'). New files: intern_filter_audit.csv, allow_list_proposed.csv, intern_invalidation_false_positives.csv, case_relations.csv; new tools cycle2_filter_audit.py, cycle2_data.py.
 - CC-09: Sonu identified as (2017) 8 SCC 570 from official Arjun (fn34, para 51); official copy not held -> PQ-C2-01. CC-11: all 13 KB records mapped to a case spec (Kuldeep - mirror-checked; Sukhdev, Nitisha MA 2023 - intern excluded log leads; Nalin Bhatia, Pooja Pal, 2023 INSC 985, 2026 INSC 281 - no copy, queued).

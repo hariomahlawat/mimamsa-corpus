@@ -1,0 +1,19 @@
+spec_key,case53_id,group,name_hits_total,rejected_same_name_other_case,sc_citing_docs,hc_citing_docs,caveat,cycle
+ANGAD,DCLR-SC-2015-L03,P0,221,0,1,220,Counts are discovery leads only; no precedent strength is inferred from frequency.,C3
+BALACHANDRAN,DCLR-SC-2005-L08,P0,21,0,7,14,Counts are discovery leads only; no precedent strength is inferred from frequency.,C3
+BALJIT,DCLR-SC-1996-L07,P0,18,0,7,11,Counts are discovery leads only; no precedent strength is inferred from frequency.,C3
+CHANDRA_KUMAR,DCLR-SC-1997-N07,CALIBRATION_OR_KB,46,0,13,33,Counts are discovery leads only; no precedent strength is inferred from frequency.,C3
+JASBIR,DCLR-SC-2022-004,CALIBRATION_OR_KB,3,3,0,0,Counts are discovery leads only; no precedent strength is inferred from frequency.,C3
+KESHAR,DCLR-SC-2007-L10,P0,22,2,11,9,Counts are discovery leads only; no precedent strength is inferred from frequency.,C3
+MANI_RAM,DCLR-SC-2016-L04,P0,1,0,0,1,Counts are discovery leads only; no precedent strength is inferred from frequency.,C3
+MANJEET,DCLR-SC-2015-L02,P0,226,7,0,219,Counts are discovery leads only; no precedent strength is inferred from frequency.,C3
+NAGA,DCLR-SC-1997-L11,P0,2,0,2,0,Counts are discovery leads only; no precedent strength is inferred from frequency.,C3
+NAVJOT,DCLR-SC-2005-L01,P0,2,0,1,1,Counts are discovery leads only; no precedent strength is inferred from frequency.,C3
+PARASHOTAM,DCLR-SC-2023-009,CALIBRATION_OR_KB,13,0,1,12,Counts are discovery leads only; no precedent strength is inferred from frequency.,C3
+PPS_BEDI,DCLR-SC-1982-001,CALIBRATION_OR_KB,30,0,14,16,Counts are discovery leads only; no precedent strength is inferred from frequency.,C3
+PS_GILL,,CALIBRATION_OR_KB,2,2,0,0,Counts are discovery leads only; no precedent strength is inferred from frequency.,C3
+RAM_SARUP,DCLR-SC-1964-A11,P0,12,0,6,6,Counts are discovery leads only; no precedent strength is inferred from frequency.,C3
+SANTOSH_LOHAR,,CALIBRATION_OR_KB,1,0,0,1,Counts are discovery leads only; no precedent strength is inferred from frequency.,C3
+SOM_DATT,,CALIBRATION_OR_KB,22,0,10,12,Counts are discovery leads only; no precedent strength is inferred from frequency.,C3
+SURINDER_RATHORE,DCLR-SC-2008-L09,P0,10,0,4,6,Counts are discovery leads only; no precedent strength is inferred from frequency.,C3
+VIRENDRA,DCLR-SC-2020-002,CALIBRATION_OR_KB,6,6,0,0,Counts are discovery leads only; no precedent strength is inferred from frequency.,C3
