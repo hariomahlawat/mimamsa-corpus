@@ -68,7 +68,9 @@ Use the optional-for-legacy fields introduced in `docs/legal-audit/schemas/sourc
 - `instrument_identity`: string with official Gazette/notification identity where relevant.
 - `authority_rationale`: brief provenance basis, especially where distinguishing facsimile from compilation.
 
-**Compatibility:** Historic PILOT-01 source entries remain immutable and may lack the new fields. For newly declared archival facsimiles or any new record using these fields, the validator enforces internal consistency; do not claim it can itself authenticate legal text. A future migration of legacy source rows must be additive and independently reviewed, not a silent change.
+**Mandatory gate for future batches:** Set `"source_authority_policy_version": "v1"` in the new batch's frozen audit manifest and run `validate.py --batch ... --manifest ... --strict`. The validator then requires all four policy fields and `authority_rationale` on **every** source entry; new archival facsimiles also need their instrument identity, hash, and page-image evidence before SOURCE_VERIFIED. Unknown policy versions fail closed.
+
+**Compatibility:** Frozen PILOT-01 source entries remain immutable and may lack these fields; its existing manifest has no new policy flag. Newly declared archival facsimiles and any newly classified source are validated even without the flag. A later migration of old sources must be additive and independently reviewed, not a silent change.
 
 ## Official reference links
 - Government of India eGazette, Department of Publication: https://egazette.gov.in/
