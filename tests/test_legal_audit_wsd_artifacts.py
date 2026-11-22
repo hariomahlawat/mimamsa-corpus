@@ -87,3 +87,32 @@ class CitationScore(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class RelationGraph(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.S = load("relation_graph").build(None)  # no crawler corpus ref in CI checkouts
+        cls.committed = json.loads((WSD / "relation_graph_summary.json").read_text(encoding="utf-8"))
+
+    def test_no_dangling_edges_and_no_id_collisions(self):
+        self.assertEqual({k: v for k, v in self.S["dangling"].items() if v}, {})
+        for k in ("kb_id_collisions", "case_id_collisions", "kb_case_id_overlap", "source_id_in_multiple_batches"):
+            self.assertEqual(self.S["duplicates"][k], [], k)
+
+    def test_no_duplicate_kb_bodies(self):
+        for k in ("kb_body_exact", "kb_body_normalised", "kb_body_near_duplicates"):
+            self.assertEqual(self.S["duplicates"][k], [], k)
+
+    def test_committed_report_matches_regeneration(self):
+        # Batch-specific keys added by later integrations (new audit batches) are not compared;
+        # corpus-level keys and the batches present at commit time must match exactly.
+        for part in ("orphans", "duplicates"):
+            for k, v in self.committed[part].items():
+                if k.split(".")[0] in ("PILOT-01", "R23-VERIFY-01") or "." not in k:
+                    if k == "source_id_in_multiple_batches":
+                        continue
+                    self.assertEqual(self.S[part][k], v, k)
+        corpus_edges = ("case.related_cases", "code.target_case", "kb.uses_code")
+        for k in corpus_edges:
+            self.assertEqual(self.S["edges"][k], self.committed["edges"][k], k)

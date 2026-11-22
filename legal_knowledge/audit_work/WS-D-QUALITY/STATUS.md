@@ -12,8 +12,10 @@ Baseline: 658 KB (9a8f0d19...), 53 cases (8b8d53cd...), 87 codes (72 firm, 75 in
 - D5 validator/schema (`tools/legal_audit/validate.py` integrity_checks; `source.schema.json` additive fields proof_type, render_sha256, publication_date, commencement_as_printed, effective_date_status). Always-on rules (pass frozen batches unchanged) + opt-in `audit_controls_version: v2`. `tools/legal_audit/check_csv.py` (generic CSV well-formedness). Tests: `test_legal_audit_integrity_controls.py` (31), `test_legal_audit_register_semantics.py` (8): owner date rule over every CSV with effective_date, no agent-asserted approval, r.23(3)/r.193/r.194 never promoted. Verified also against origin/claude/next-stage-proposal (PR #16) registers.
 - CI: new steps check_csv.py, ARMY-RULES-CHAIN-01/check_registers.py (path reference only; PR #16's corrected version runs after integration), hash reproduction.
 
+- D6 `relation_graph_report.md`, `relation_graph_summary.json`, `scripts/relation_graph.py` (CI step, exits 1 on dangling/ID collision): 1716 edges, 0 dangling (incl. 24 register targets checked against origin/raw-data@ad77758d data/meta, read locally); 0 exact/normalised/near-duplicate KB bodies; orphans and leads in OQ-D-008..011. Simulated integration onto origin/claude/next-stage-proposal: 111 audit tests pass.
+
 ## In progress
-- D6 relation graph.
+- D7 coverage scorecard.
 
 ## Next
 - D7 coverage scorecard; D8 reviewer/CI report.
@@ -22,4 +24,4 @@ Baseline: 658 KB (9a8f0d19...), 53 cases (8b8d53cd...), 87 codes (72 firm, 75 in
 - None.
 
 ## Requests to coordinator
-- See `open_questions.csv` (OQ-D-001..007).
+- See `open_questions.csv` (OQ-D-001..011).
