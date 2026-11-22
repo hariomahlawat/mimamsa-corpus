@@ -349,7 +349,7 @@ def identity_checks(batch, records, ids, strict, errors):
         if rb.startswith("independent-reviewer"):
             if own is None:
                 errors.append(f"{label}: reviewer-retrieved source {sid} not bound to any declared reviewer prefix")
-            elif exact and rb != own:
+            elif (exact or revs[own].get("require_exact_retrieved_by")) and rb != own:
                 errors.append(f"{label}: retrieved_by '{rb}' must equal reviewer id '{own}'")
         elif own is not None:
             errors.append(f"{label}: source {sid} uses reviewer {own}'s prefix but retrieved_by is '{rb}'")
