@@ -9,10 +9,12 @@ Freeze original inputs and hashes before selecting; do NOT fabricate record iden
 - 3 cross-volume conflict/duplicate-prone records
 - 2 lower-risk control records
 
+**MML is a priority source**: inventory all eight original MML files before picking the pilot. Target at least **12 of these 25 actual KB records** with a demonstrable specific MML passage/paragraph/page crosswalk, spread across the strata. If insufficient evidence supports 12, disclose the precise shortfall instead of inventing links. MML-only assertions remain manual-supported, not independently law-verified.
+
 Overlap subject tags where necessary, never double-count IDs. Include breadth across nine volumes as the actual corpus permits. Separately audit any cited case rows from the existing 53-case repository without counting them as additional KB sample IDs. Retain the prior legal batches as *leads*, not authoritative conclusions.
 
 ## Flow
-1. Read-only inventory and hash manifest (owner approval)
+1. First-pass read-only inventory and hashes for ALL eight MML originals, edition/access-marking and DOC/PDF source-pair differences; mapping of manual passages to statutes and record IDs (owner approval)
 2. Source and identity checks with statute/case/procedure agents; exact evidence links
 3. Technical validation of JSON/JSONL and evidence
 4. Independent reviewer checks critical issues and a blinded diverse sample
