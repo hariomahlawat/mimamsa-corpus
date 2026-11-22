@@ -147,6 +147,21 @@ def validate_batch(batch: Path, strict: bool = False):
                 src = ids["source"].get(sid, {})
                 if src.get("verification_state") != "SOURCE_VERIFIED" or not src.get("pinpoint"):
                     errors.append(f"{label}: claimed verified but {sid} lacks source verification/pinpoint")
+        # Manual passage authentication and binding-law verification are different.
+        # A statutory, judicial or procedural legal conclusion cannot be marked
+        # SOURCE_VERIFIED solely because an MML manual/secondary text corroborates it.
+        if (f.get("verification_state") == "SOURCE_VERIFIED"
+                and f.get("workstream") in ("STATUTORY", "JUDGMENT", "PROCEDURE")):
+            legal_primary_types = {"STATUTE", "RULE", "GAZETTE", "REGULATION",
+                                   "JUDGMENT", "ORDER", "OTHER_PRIMARY"}
+            linked = [ids["source"].get(sid, {}) for sid in f.get("source_ids", [])]
+            if not any(src.get("source_type") in legal_primary_types
+                       and src.get("verification_state") == "SOURCE_VERIFIED"
+                       and src.get("pinpoint") for src in linked):
+                errors.append(
+                    f"{label}: legal conclusion marked SOURCE_VERIFIED without "
+                    "pinpointed verified primary legal authority (manual-only inadequate)"
+                )
         if strict and f.get("review_state") == "ACCEPTED_FOR_CANDIDATE":
             if f.get("verification_state") != "SOURCE_VERIFIED":
                 errors.append(f"{label}: candidate without verified source")
