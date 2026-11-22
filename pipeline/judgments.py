@@ -37,8 +37,9 @@ KEYWORDS = {
     "invalided": r"\binvalided\b|\binvalidment\b|\binvalidation\b|\binvaliding\b",
     "release medical board": r"\brelease\s+medical\s+board\b",
 }
-_KW = {k: re.compile(v, re.I if k != "armed forces tribunal" else 0) for k, v in KEYWORDS.items()}
-_KW["armed forces tribunal"] = re.compile(r"\barmed\s+forces\s+tribunal\b|\bARMED\s+FORCES\s+TRIBUNAL\b|\bAFT\b")
+_KW = {k: re.compile(v, re.I) for k, v in KEYWORDS.items()}
+# the phrase in any case ("Armed Forces Tribunal" is the usual spelling); the abbreviation only in capitals
+_KW["armed forces tribunal"] = re.compile(r"(?i:\barmed\s+forces\s+tribunal\b)|\bAFT\b")
 TOPIC_OF = {"court martial": "court_martial", "summary of evidence": "summary_of_evidence",
             "disability pension": "disability_pension", "entitlement rules": "entitlement_rules",
             "invalided": "invalidment", "release medical board": "medical_board"}
@@ -218,6 +219,11 @@ def run(paths: Paths) -> dict:
                     "decided": meta.get("issue_date"), "source_url": meta["source_url"], "retrieved_at": meta["retrieved_at"],
                     "reason": "no military keyword in the text", "keywords_checked": sorted(KEYWORDS)}
                 path.unlink()
+                # the text of a removed judgment is kept OUTSIDE the corpus (state/rejected_text, never pushed),
+                # so a later change to the keywords can be re-checked without downloading everything again
+                keep = paths.data.parent / "state" / "rejected_text"
+                keep.mkdir(parents=True, exist_ok=True)
+                (keep / f"{meta['sha256']}.txt").write_text(text, encoding="utf-8")
                 (paths.data.parent / meta["text_path"]).unlink(missing_ok=True)
                 paths.raw_file(meta["raw_path"]).unlink(missing_ok=True)
                 continue

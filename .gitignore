@@ -25,3 +25,4 @@ state/collect.stop
 data/excluded_judgments.jsonl
 reports/relevance.csv
 reports/phase2_report.md
+state/rejected_text/

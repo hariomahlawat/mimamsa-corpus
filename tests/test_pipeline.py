@@ -531,6 +531,7 @@ def test_keyword_classification_follows_the_brief():
     assert judgments.classify(kc("court-martial under the Army Act")) == "relevant"            # two keywords
     assert judgments.classify(kc("invalided ... invalided ... invalided")) == "relevant"        # three hits
     assert "armed forces tribunal" in kc("the AFT held") and "armed forces tribunal" not in kc("an aft cabin")
+    assert "armed forces tribunal" in kc("remedy before the Armed Forces Tribunal")     # title case, the usual form
 
 
 def test_judgments_get_records_relevance_and_citations(corpus):
