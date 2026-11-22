@@ -6,7 +6,7 @@ The register is built from the Gazette instruments themselves, **not** from the 
 
 | File | Content |
 | --- | --- |
-| `army_rules_instrument_register.csv` | 37 rows: the principal notification, every amending instrument located or alleged, r.188(e) declarations wrongly listed as amendments, unchecked hints and gaps |
+| `army_rules_instrument_register.csv` | 47 rows (37 + 10 hint rows added 2026-11-22 from WS-A cycle 2): the principal notification, every amending instrument located or alleged, r.188(e) declarations wrongly listed as amendments, unchecked hints and gaps |
 | `army_rules_provision_chronology.csv` | 46 provision-level events: inserted, substituted, amended, omitted, corrigendum. Commencement as printed and temporal notes are recorded separately from instrument and publication dates |
 | `official_note_discrepancies.csv` | 10 inconsistencies in official amendment notes |
 | `statutory_version_register_seed.csv` | Seed of the proposed authoritative version register (12 rows), for the provisions in conflict or under review; r.193 = C-08, r.194 = C-09 |
@@ -18,7 +18,7 @@ The register is built from the Gazette instruments themselves, **not** from the 
 | --- | --- | --- |
 | Located, operative page image-checked | 26 | AR-000, 006–011, 014, 016–029, 031, 033–035 |
 | Located from text layer only (OCR), image check outstanding | 5 | AR-002–005 (S.R.O. 331, 348, 351, 404 of 1960), AR-032 (S.R.O. 22/2010) |
-| Full-text-search hints, not yet opened | 3 | AR-012 (1966), AR-013 (1967), AR-015 (1974) |
+| Full-text-search hints, not yet opened | 13 | AR-012 (1966), AR-013 (1967), AR-015 (1974); AR-037..040 (pre-1960: 1956, 1958 ×2, 1959); AR-041..046 (1967–1974) |
 | Not found | 2 | AR-001 E-7/1960; AR-030 S.R.O. 258/2002 |
 | Not searched authoritatively | 1 | AR-036 (after 06-06-2022; egazette.gov.in unreachable from here) |
 
