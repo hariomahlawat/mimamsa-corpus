@@ -501,26 +501,47 @@ AGENT_ID = re.compile(r"(-auditor$|^orchestrator|^independent-reviewer|agent|cla
 WEAK_PROOF = {"OCR_TEXT", "SEARCH_RESULT_ONLY", "METADATA_ONLY"}
 ISO_IN_TEXT = re.compile(r"(?<!\d)(\d{4})-(\d{2})-(\d{2})(?!\d)")
 LEADING_DATE = re.compile(r"^(\d{4})(?:-(\d{2})(?:-(\d{2}))?)?(?=$|[\s;(,])")
-PIC_TOKEN = re.compile(r"PIC-\d+")
+# Complete page-image check IDs, including workstream prefixes (WSA-PIC-21, WSC-PIC-108, PIC-12).
+# Prefixes are never stripped: WSC-PIC-108 resolves only to a register row whose check_id is WSC-PIC-108.
+PIC_TOKEN = re.compile(r"(?<![A-Za-z0-9-])(?:WS[A-Z]-)?PIC-\d+(?!\d)")
+PIC_REGISTER_GLOBS = ("page_image_checks*.csv", "identity_transcription_register*.csv")
 STATED = "STATED_IN_INSTRUMENT"
 AUDIT_WORK = ROOT / "legal_knowledge" / "audit_work"
 KB_FILE = ROOT / "legal_knowledge" / "curated_originals" / "knowledge_base" / "v0.9" / "records_658.jsonl"
 CASES_FILE = ROOT / "legal_knowledge" / "curated_originals" / "case_law" / "v0.9" / "cases_53.jsonl"
 
 
-def known_page_image_checks(batch: Path):
-    """check_id values from every page_image_checks*.csv register in the batch and under audit_work."""
+def page_image_check_records(batch: Path):
+    """{check_id: [record]} from every page-image register in the batch and under audit_work. Each record keeps
+    document, document_sha256, page and render_png_sha256 so evidence can be bound to the right document."""
     import csv
-    ids = set()
-    roots = {batch, AUDIT_WORK}
-    for root in roots:
+    out = {}
+    seen_files = set()
+    for root in (batch, AUDIT_WORK):
         if not root.is_dir():
             continue
-        for p in root.rglob("page_image_checks*.csv"):
-            with p.open(encoding="utf-8", newline="") as fh:
-                ids |= {r.get("check_id", "") for r in csv.DictReader(fh)}
-    ids.discard("")
-    return ids
+        for g in PIC_REGISTER_GLOBS:
+            for p in sorted(root.rglob(g)):
+                rp = p.resolve()
+                if rp in seen_files:
+                    continue
+                seen_files.add(rp)
+                with p.open(encoding="utf-8", newline="") as fh:
+                    for r in csv.DictReader(fh):
+                        cid = (r.get("check_id") or "").strip()
+                        if cid:
+                            out.setdefault(cid, []).append({
+                                "document": (r.get("document") or "").strip(),
+                                "document_sha256": (r.get("document_sha256") or r.get("file_sha256") or "").strip(),
+                                "page": (r.get("page") or r.get("pdf_page") or "").strip(),
+                                "render_png_sha256": (r.get("render_png_sha256") or "").strip(),
+                                "register": str(p)})
+    return out
+
+
+def known_page_image_checks(batch: Path):
+    """Complete check_id values present in any page-image register."""
+    return set(page_image_check_records(batch))
 
 
 def corpus_ids():
@@ -576,13 +597,18 @@ def source_integrity(label, s, v2, pics, errors):
     if proof == "PAGE_IMAGE_READING":
         if not s.get("page_image_check_id"):
             errors.append(f"{label}: PAGE_IMAGE_READING requires page_image_check_id")
+        elif s.get("page_image_check_id") not in pics:
+            # independent of copy_fidelity (review finding PR #18): the proof itself must name a registered check
+            errors.append(f"{label}: PAGE_IMAGE_READING requires page_image_check_id to be exactly a registered check_id "
+                          f"(got {s.get('page_image_check_id')!r})")
         if not s.get("render_sha256"):
             errors.append(f"{label}: PAGE_IMAGE_READING requires render_sha256")
     # (c) register cross-reference: every PIC-n cited must exist in a page-image register.
     pic = s.get("page_image_check_id") or ""
     for tok in PIC_TOKEN.findall(pic):
         if tok not in pics:
-            errors.append(f"{label}: page_image_check_id cites {tok}, absent from every page_image_checks register")
+            errors.append(f"{label}: page_image_check_id cites {tok}, absent from every page-image register "
+                          "(complete ID matched; workstream prefixes are not stripped)")
     # (d) dates: publication, commencement as printed and effective date are distinct (owner rule).
     for key in ("version_or_decision_date", "effective_date", "publication_date", "commencement_as_printed"):
         if isinstance(s.get(key), str):
@@ -683,22 +709,6 @@ def integrity_checks(batch, records, ids, strict, manifest, errors):
 # finding source, cannot share an ID with a source, and must declare
 # legal_effect NOT_STATUTORY_AUTHORITY (schema enum). Batches without the
 # directory are unaffected.
-def page_image_renders(batch: Path):
-    """{check_id: has 64-hex render_png_sha256} from every page-image register."""
-    import csv
-    out = {}
-    for root in {batch, AUDIT_WORK}:
-        if not root.is_dir():
-            continue
-        for p in list(root.rglob("page_image_checks*.csv")) + list(root.rglob("identity_transcription_register*.csv")):
-            with p.open(encoding="utf-8", newline="") as fh:
-                for r in csv.DictReader(fh):
-                    cid = (r.get("check_id") or "").strip()
-                    if cid:
-                        out[cid] = out.get(cid, False) or bool(SHA.fullmatch((r.get("render_png_sha256") or "").strip()))
-    return out
-
-
 def relation_checks(batch, records, ids, errors):
     d = batch / "relations"
     if not d.is_dir():
@@ -706,7 +716,7 @@ def relation_checks(batch, records, ids, errors):
     schema = read_json(SCHEMAS / "relation.schema.json")
     rels = read_kind(d, errors)
     mml = load_mml_manifest()
-    renders = page_image_renders(batch)
+    checks = page_image_check_records(batch)
     known = corpus_ids()
     seen = {}
     for label, r in rels:
@@ -723,8 +733,24 @@ def relation_checks(batch, records, ids, errors):
             errors.append(f"{label}: mml_file is not one of the MML manifest originals")
         elif r.get("mml_file_sha256") != mml[r["mml_file"]]:
             errors.append(f"{label}: mml_file_sha256 does not match the MML manifest")
-        if not renders.get(r.get("page_image_check_id")):
-            errors.append(f"{label}: page_image_check_id must resolve to a page-image register row with a render hash")
+        recs = checks.get(r.get("page_image_check_id"), [])
+        if not recs:
+            errors.append(f"{label}: page_image_check_id must resolve to a page-image register row")
+        else:
+            # Bind the evidence to the check record (review finding PR #22): same document, same document hash
+            # as the MML manifest, and the relation's render hash must be that check's actual render hash.
+            want_sha = (mml or {}).get(r.get("mml_file"))
+            same_doc = [c for c in recs if c["document"] == r.get("mml_file")]
+            if not same_doc:
+                errors.append(f"{label}: page-image check {r.get('page_image_check_id')} is for "
+                              f"{recs[0]['document']!r}, not the relation's MML document {r.get('mml_file')!r}")
+            elif not any(c["document_sha256"] == want_sha for c in same_doc):
+                errors.append(f"{label}: page-image check {r.get('page_image_check_id')} document hash does not match "
+                              "the MML manifest hash for that file")
+            elif not any(SHA.fullmatch(c["render_png_sha256"]) and c["render_png_sha256"] == r.get("render_sha256")
+                         for c in same_doc if c["document_sha256"] == want_sha):
+                errors.append(f"{label}: render_sha256 does not equal the registered render hash of check "
+                              f"{r.get('page_image_check_id')}")
         if r.get("from_record_id") not in known:
             errors.append(f"{label}: from_record_id {r.get('from_record_id')} not in the frozen KB/cases")
         if r.get("document_authority") == "GOVERNMENT_ISSUED_MANUAL" and not r.get("edition_authority_ref"):

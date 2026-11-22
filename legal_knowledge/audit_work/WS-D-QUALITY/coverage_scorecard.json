@@ -5,7 +5,7 @@
     "kb_sha256": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1",
     "cases_sha256": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a",
     "register_sha256": "40b18c3dfff3ad81c099118a0ee058c28db5255a8c4ba47d4391bd1685e8d944",
-    "plaintext_index_sha256": "ba83ea4fbbd8881bd3aed99f84ecd2e5f464cede9ca67199b1fd213b03dc8da0",
+    "plaintext_index_sha256": "7bd6d9b3f62aeef8a6505b07ad0026b28817dd50a4017b4b038bdd53eecf1ff6",
     "corpus_ref": "origin/raw-data",
     "corpus_commit": "ad77758d4569ba6aafa955cc7843d874489e10f7"
   },
@@ -171,19 +171,22 @@
       "V9-TPL-07",
       "V9-TPL-08"
     ],
-    "statute_segments_instrument_searchable": {
-      "numerator": 251,
-      "denominator": 261,
-      "pct": 96.2
+    "statute_instrument_mentions_searchable": {
+      "numerator": 254,
+      "denominator": 265,
+      "pct": 95.8
     },
+    "ambiguous_locators_not_counted": [
+      "ADM-JD-02: §122 (section locator under AR [rules] context)"
+    ],
     "records_all_statute_instruments_searchable": {
-      "numerator": 169,
+      "numerator": 168,
       "denominator": 178,
-      "pct": 94.9
+      "pct": 94.4
     },
     "cited_act_sections_present_in_corpus": {
-      "numerator": 448,
-      "denominator": 448,
+      "numerator": 446,
+      "denominator": 446,
       "pct": 100.0
     },
     "cited_act_sections_missing": [],
@@ -205,7 +208,6 @@
         "CM-CL-02"
       ],
       "act-army-1950#s122 (amended)": [
-        "ADM-JD-02",
         "CM-001",
         "CM-011",
         "CM-012",
@@ -356,9 +358,9 @@
       "pct": 42.4
     },
     "plaintext_all_statute_instruments_searchable_over_658": {
-      "numerator": 169,
+      "numerator": 168,
       "denominator": 658,
-      "pct": 25.7
+      "pct": 25.5
     }
   }
 }

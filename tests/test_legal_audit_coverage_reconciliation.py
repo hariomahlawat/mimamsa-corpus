@@ -62,7 +62,12 @@ class CoverageReconciliation(unittest.TestCase):
     def test_wsd_totals_match_scorecard(self):
         c = collections.Counter(r["wsd_state"] for r in ROWS)
         self.assertEqual(c["D_CODED_ALL_SEARCHABLE"], 279)
-        self.assertEqual(c["D_PLAIN_ALL_STATUTE_SEARCHABLE"], 169)
+        # 168 after review fix PR #18 (every instrument in a segment assessed; was 169 under the first-instrument
+        # defect). Must also equal the committed scorecard, so the two outputs cannot drift apart.
+        self.assertEqual(c["D_PLAIN_ALL_STATUTE_SEARCHABLE"], 168)
+        sc = json.loads((WSD / "coverage_scorecard.json").read_text(encoding="utf-8"))
+        self.assertEqual(c["D_PLAIN_ALL_STATUTE_SEARCHABLE"], sc["kb_overall"]["plaintext_all_statute_instruments_searchable_over_658"]["numerator"])
+        self.assertEqual(c["D_CODED_ALL_SEARCHABLE"], sc["kb_overall"]["coded_all_searchable_over_658"]["numerator"])
         self.assertEqual(sum(v for k, v in c.items() if k.startswith("D_CODED")), 389)
 
     def test_markdown_agreement_line_matches_csv(self):

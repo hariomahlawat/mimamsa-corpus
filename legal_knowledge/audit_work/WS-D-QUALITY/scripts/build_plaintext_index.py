@@ -24,6 +24,8 @@ references value, so any reader can confirm they are slicing the same text.
   UNCLASSIFIED          none of the above (should be reviewed)
 `placeholder_flags` lists literal uncertainty markers found in the segment ([VERIFY], 'verify', 'missing'),
 plus UNANCHORED_LOCATOR when a pinpoint has no instrument or case anywhere earlier in the references field.
+`instrument_locators` lists, for every instrument named (or continued), the locators bound to it in text
+order, with AMBIGUOUS entries where a unit does not fit the instrument (shared parser instrument_locators()).
 `abbrev_hint` is a query-normalisation expansion only (cf. abbreviation lexicon v1.0); it is NOT legal
 authority and does not establish which instrument or edition is meant.
 """
@@ -63,9 +65,84 @@ PLACEHOLDER = re.compile(r"^verify\b", re.I)
 FLAGS = [("VERIFY_TAG", re.compile(r"\[VERIFY\]")), ("VERIFY_WORD", re.compile(r"(?<!\[)\bverify\b", re.I)),
          ("MISSING", re.compile(r"\bmissing\b", re.I)), ("OMITTED_NOTE", re.compile(r"\bomitted\b", re.I)),
          ("HISTORIC_NOTE", re.compile(r"\bhistoric\b|\(\d{4} text\)", re.I))]
+# ---- shared instrument/locator parser (review fix PR #18) -------------------------------------------
+# Every instrument named in a segment is kept, and each locator is bound to the instrument named most
+# recently before it in the text ("AA §19, AR r14" -> AA s.19, AR r.14). A unit that does not fit that
+# instrument (e.g. a section sign after an Army Rules context: "AR r14 and §122") is recorded as AMBIGUOUS,
+# never reassigned by guess. Used by this index and by coverage_scorecard.py.
+UNIT = re.compile(r"(?P<unit>§§?|(?<![A-Za-z])ss?(?=\s*\.?\s*\d)|(?<![A-Za-z])rr?(?=\s*\.?\s*\d)|\bRules?(?=\s+\d)|"
+                  r"\bArt(?:icles?)?\.?(?=\s*\d)|\bparas?(?=\s+\d)|¶¶?)?\s*\.?\s*(?P<a>\d+[A-Z]?)(?:\s*[–-]\s*(?P<b>\d+[A-Z]?))?")
+UNIT_KIND = {"§": "section", "§§": "section", "s": "section", "ss": "section", "r": "rule", "rr": "rule",
+             "Rule": "rule", "Rules": "rule", "para": "para", "paras": "para", "¶": "para", "¶¶": "para"}
+
+
+def instrument_kind(hint):
+    if hint.startswith("Constitution"):
+        return "constitution"
+    if "Rules" in hint or "rules" in hint:
+        return "rules"
+    return "act"
+
+
+def _expand(a, b):
+    if b and a.isdigit() and b.isdigit() and 0 < int(b) - int(a) <= 60:
+        return [str(i) for i in range(int(a), int(b) + 1)]
+    return [a] + ([b] if b else [])
+
+
+def instrument_locators(text, inherited=None):
+    """[{token, hint, kind, sections, rules, articles, ambiguous}] for one segment, in text order.
+    `inherited` = (token, hint) of the instrument a continuation segment continues, or None."""
+    spans = []
+    for rx, hint in INSTR_RE:
+        for m in rx.finditer(text):
+            if not any(m.start() < e and st < m.end() for st, e, _, _ in spans):
+                spans.append((m.start(), m.end(), m.group(0), hint))
+    spans.sort()
+    parts = []
+    if inherited and (not spans or spans[0][0] > 0):
+        parts.append((inherited[0], inherited[1], text[:spans[0][0]] if spans else text))
+    for i, (st, e, tok, hint) in enumerate(spans):
+        parts.append((tok, hint, text[e:spans[i + 1][0]] if i + 1 < len(spans) else text[e:]))
+    out = []
+    for tok, hint, loc in parts:
+        kind = instrument_kind(hint)
+        natural = {"act": "section", "rules": "rule", "constitution": "article"}[kind]
+        t = re.sub(r"\([^)]*\)|\[[^\]]*\]", "", loc)
+        t = re.sub(r"(\d)\s*-\s*([A-Z])(?![A-Za-z])", r"\1\2", t)  # 13-A -> 13A
+        t = re.sub(r"\b(?:19|20)\d\d\s+(?=text|version)", "", t)
+        unit = None
+        entry = {"token": tok, "hint": hint, "kind": kind, "sections": [], "rules": [], "articles": [], "ambiguous": []}
+        for m in UNIT.finditer(t):
+            if m.group("unit"):
+                u = m.group("unit")
+                unit = "article" if u.startswith("Art") else UNIT_KIND[u]
+            u_kind = unit or natural
+            nums = _expand(m.group("a"), m.group("b"))
+            fits = {"section": "act", "rule": "rules", "article": "constitution"}.get(u_kind)
+            if fits == kind:
+                entry[{"section": "sections", "rule": "rules", "article": "articles"}[u_kind]] += nums
+            else:
+                shown = (m.group("unit") or "") + m.group("a") + ("-" + m.group("b") if m.group("b") else "")
+                entry["ambiguous"].append(f"{shown.strip()} ({u_kind} locator under {tok} [{kind}] context)")
+        out.append(entry)
+    return out
+
+
+def describe_locators(entries):
+    parts = []
+    for e in entries:
+        loc = [f"s{x}" for x in e["sections"]] + [f"r{x}" for x in e["rules"]] + [f"art{x}" for x in e["articles"]]
+        txt = e["token"] + ": " + (",".join(loc) if loc else "-")
+        if e["ambiguous"]:
+            txt += " AMBIGUOUS " + "; ".join(e["ambiguous"])
+        parts.append(txt)
+    return " | ".join(parts)
+
+
 COLUMNS = ["record_id", "jsonl_line", "line_sha256", "module", "references_sha256", "seg_no", "ref_start", "ref_end",
            "body_start", "exact_text", "category", "instruments_mentioned", "abbrev_hint", "has_locator",
-           "context_from_seg", "placeholder_flags"]
+           "context_from_seg", "placeholder_flags", "instrument_locators"]
 
 
 def classify(seg):
@@ -116,6 +193,7 @@ def build():
         embedded = body.find(ref) if ref else -1
         pos = 0
         last_ctx = ""
+        last_instr = None
         for k, part in enumerate(ref.split(";"), 1):
             lead = len(part) - len(part.lstrip())
             seg = part.strip()
@@ -126,6 +204,14 @@ def build():
             assert ref[s:e] == seg
             cat, instr, has_loc, flags = classify(seg)
             ctx = last_ctx if cat == "LOCATOR_CONTINUATION" else ""
+            if cat in ("STATUTE_LOCATOR", "STATUTE_GENERIC") or (cat == "LOCATOR_CONTINUATION" and ctx and last_instr):
+                locs = describe_locators(instrument_locators(seg, last_instr if cat == "LOCATOR_CONTINUATION" else None))
+            else:
+                locs = ""
+            if instr:
+                last_instr = (instr[-1][2], instr[-1][3])
+            elif cat == "CASE_REFERENCE":
+                last_instr = None
             if cat == "LOCATOR_CONTINUATION" and not ctx:
                 flags = flags + ["UNANCHORED_LOCATOR"]  # pinpoint with no instrument/case in the references field
             if cat in ("STATUTE_LOCATOR", "STATUTE_GENERIC", "CASE_REFERENCE"):
@@ -136,7 +222,8 @@ def build():
                          "body_start": (embedded + s) if embedded >= 0 else "", "exact_text": seg, "category": cat,
                          "instruments_mentioned": "|".join(x[2] for x in instr),
                          "abbrev_hint": "|".join(dict.fromkeys(x[3] for x in instr)),
-                         "has_locator": has_loc, "context_from_seg": ctx, "placeholder_flags": "|".join(flags)})
+                         "has_locator": has_loc, "context_from_seg": ctx, "placeholder_flags": "|".join(flags),
+                         "instrument_locators": locs})
     return rows, uncoded
 
 
