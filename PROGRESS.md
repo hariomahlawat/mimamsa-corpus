@@ -1,5 +1,18 @@
 # Progress
 
+## 2026-11-22 — OCR of the scanned judgments
+
+- 944 scanned judgments (4,705 pages) read with Tesseract, English only, 300 dpi, then run through the
+  military filter: 11 kept (5 relevant, 6 borderline), 895 removed as not military.
+- 38 scans (28 Delhi, 10 Punjab and Haryana) were read with mean confidence below 70. A "no keyword"
+  result on such text is not trusted: they are kept as `not_checked` for a person to look at, and are
+  listed in `reports/ocr_review.md`. Rule added in `pipeline/judgments.py` (`OCR_TRUST`).
+- 9 Delhi files are damaged PDFs that cannot be opened; kept as `not_checked`.
+- Judgment totals now: 2,331 relevant, 1,035 borderline, 47 not checked, 121,027 removed.
+  Corpus 3,481 documents, 0 validation errors. Both stores current (3,197 raw files).
+- `python -m pipeline ocr --langs eng` (new option); run script `scripts/ocr_judgments.sh`.
+  The statute OCR review list is `reports/ocr_review_statutes.md`.
+
 ## 2026-11-21 — Judgment collection from the open-data buckets finished
 
 Supreme Court (1950-2026) and four High Courts (Delhi, Jammu and Kashmir, Punjab and Haryana,

@@ -128,6 +128,8 @@ def build_doc(row, meta: dict, base: dict) -> dict:
 
 
 # ------------------------------------------------------------------- relevance
+OCR_TRUST = 70.0                 # mean OCR confidence below this: a "no keyword" result is not trusted
+
 def keyword_counts(text: str) -> dict[str, int]:
     return {k: n for k, rx in _KW.items() if (n := len(rx.findall(text)))}
 
@@ -190,9 +192,16 @@ def run(paths: Paths) -> dict:
             text = (paths.data.parent / meta["text_path"]).read_text(encoding="utf-8")
             counts = keyword_counts(text)
             status = classify(counts)
-            meta["relevance"] = {"status": status, "hits": sum(counts.values()), "keywords": counts, "note": None}
+            note = None
+            if (status == "rejected" and meta.get("text_method") == "ocr"
+                    and (meta.get("ocr_confidence") is None or meta["ocr_confidence"] < OCR_TRUST)):
+                # a scan read too poorly to trust "no keyword found": keep it for a person to look at
+                status, note = "not_checked", f"OCR confidence below {OCR_TRUST:.0f}: cannot tell from this text"
+            meta["relevance"] = {"status": status, "hits": sum(counts.values()), "keywords": counts, "note": note}
             stats[status] += 1
-            if status != "rejected":
+            if status == "not_checked":
+                pass
+            elif status != "rejected":
                 cited, edges = statute_refs(text, have_section)
                 meta["statutes_cited"] = [{**c, "act_doc_id": c["act_doc_id"] if c["act_doc_id"] in doc_ids else None}
                                           for c in cited]
