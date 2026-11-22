@@ -8,7 +8,7 @@
   },
   "version_register": {
    "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/statutory_version_register_seed.csv",
-   "sha256": "b434a0377f835caf79f34fe45f386b27201084900c1b7f5f03a893a196671bd7"
+   "sha256": "595532f13af2e439f0b031f919a5413bfa56c63b5f29a96b22b32c0a1e258867"
   },
   "wsa_change_log": {
    "path": "legal_knowledge/audit_work/WS-A-STATUTORY/provision_change_log.csv",

@@ -38,6 +38,10 @@ Baseline: 658 KB (9a8f0d19...), 53 cases (8b8d53cd...), 87 codes (72 firm, 75 in
 
 - Returned defect (independent review of 4a17359e): amending-Act own sections/schedules excluded from Army Act edges (AA-04 '(s.3 and Second Schedule)'); scan: AA-04 corrected, AA-01 unchanged, AA-03 already excluded; edges 380 -> 375, events 119 -> 118, unstated-flagged 203 -> 198. Conditions: CONFLICTING_EVIDENCE asserted (not skipped) + fixture; Fix3 no-ref fixture tests; r.2 and AQ-06 documented in REVIEW_FIXES_CYCLE3.md.
 
+## Final cycle-3 reconciliation (worktree /home/user/ws-d-rec, branch claude/ws-d-cycle3-reconcile, base 2a66cd04)
+- R-1 DONE P2 PR #29: provision-level searchability (missing/empty index never ALL; ABSENT vs UNAVAILABLE; coded = plain). Canonical: searchable ALL 473 -> 280, ANCHORED_FULL 362 -> 187 (all absences are rule-level references to Rules documents without a rule index). Tests `test_legal_audit_section_evidence.py` (7). Versioned edges regenerated for #28 hash change (figures unchanged).
+- R-2 versioned edges after #28 (addendum input, r.2 date model): in progress.
+
 ## In progress
 - Nothing.
 

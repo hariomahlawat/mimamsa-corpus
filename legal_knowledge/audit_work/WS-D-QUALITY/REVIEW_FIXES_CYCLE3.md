@@ -159,3 +159,56 @@ New tests:
 
 ## Commits (returned defect)
 - `2c633b04`: regression tests, fix, conditions (a)-(c), regenerated versioned edges (gate: 223 tests OK; all checks rc=0).
+
+## Final reconciliation (owner-instructed; base 2a66cd04 = integration #29 + PR #28)
+
+### Task 1: P2 on PR #29 (Codex thread PRRT_kwDOV2o5I866mW1q), empty provision index rated ALL
+**Defect.** In `canonical_coverage.py`, the check `C["sections"].get(target)` is falsy for a missing or EMPTY index, so section validation was skipped. KB-003 (Army Act ss.79–82, Army Rules r.22) was therefore rated `source_searchable = ALL` and `anchored_full = YES` without any provision evidence. Rule references were never checked at all.
+
+Tests are in `tests/test_legal_audit_section_evidence.py`, 7 in total. All run on in-file fixtures and none depends on `origin/raw-data`, so none can be skipped in CI.
+
+| Test | Before (2a66cd04) | After |
+| --- | --- | --- |
+| `test_empty_index_never_all` (Army Act + Army Rules metadata, EMPTY index) | `AssertionError: 'ALL' == 'ALL' : {'record_id': 'KB-003', ...` | ok: NONE, flag PROVISION_FILES_ABSENT |
+| `test_missing_index_key_never_all` | `AssertionError: 'ALL' == 'ALL'` | ok: NONE |
+| `test_missing_section_files` (s.81, s.82 absent) | ok (the non-empty index was already checked) | ok: PARTLY |
+| `test_partial_index` (Army Act indexed, Army Rules index empty) | `AssertionError: 'ALL' != 'PARTLY'` | ok: PARTLY; instrument level ALL |
+| `test_fully_populated_index` | `Regex didn't match: ...#r22` (rule references were not tracked) | ok: ALL |
+| `test_unavailable_corpus_is_not_checked` (corpus = None) | ok | ok: NOT_CHECKED, never ALL |
+| `test_plain_text_parity` (ADM-JD-02) | `AssertionError: 'ALL' != 'NONE'` | ok: ALL / NONE / PARTLY, matching KB-003 |
+
+**Fix.** `provision_searchable()` and `searchable_state()` implement the following rules.
+- An identified citation with section or rule references is searchable only when every corresponding provision file exists (`s<n>` / `r<n>`) in the document's index.
+- A missing or empty index means ABSENT: the source is not searchable and the record is flagged PROVISION_FILES_ABSENT.
+- An unavailable corpus means NOT_CHECKED.
+- Any ABSENT source prevents ALL for the record, even if other sources are unchecked.
+- Coded and plain-text citations follow identical rules.
+- A new informational field, `source_searchable_instrument_level` (not a gate), repeats the check at document level only. It keeps the effect of absent provision files visible.
+
+**Fixture completion (not a weakening).** `Fix3WithoutCorpusRef.FIXTURE_CORPUS` now includes `rules-army-rules-1954: {r22}`. KB-003 cites r.22, and the test's `ALL` assertion is unchanged.
+
+**Canonical coverage figures (recomputed; the earlier 362 was provisional):**
+
+| Measure | Old | New |
+| --- | --- | --- |
+| citation_present | YES 581 · NO 77 | unchanged |
+| source_identified | ALL 396 · PARTLY 77 · NONE 108 · n/a 77 | unchanged |
+| source_searchable | ALL 473 · n/a 185 | ALL 280 · PARTLY 105 · NONE 88 · n/a 185 |
+| source_searchable_instrument_level (new, informational) | – | ALL 473 · n/a 185 |
+| **ANCHORED_FULL** | YES 362 · NO 296 | **YES 187 · NO 471** |
+| CODED family: searchable ALL / anchored | 297 / 207 | 181 / 102 |
+| PLAINTEXT family: searchable ALL / anchored | 176 / 155 | 99 / 85 |
+| Items searchable (of 718 identified) | 718 | 500 |
+| Flag PROVISION_FILES_ABSENT (records) | – | 193 |
+
+**Cause.** Every absent provision is a rule-level reference to a Rules document; the crawler corpus has no rule-level index for any Rules document:
+
+| Document | Rule references absent | Records |
+| --- | --- | --- |
+| Army Rules 1954 | 454 | 157 |
+| AFT Procedure Rules 2008 | 67 | 36 |
+| AFT Amendment Procedure Rules 2011 | 11 | 9 |
+
+Every cited Act section is present. This is a corpus-granularity gap, not a defect in the records. It closes when rule-level provision files exist, and the instrument-level field shows that the documents themselves are present.
+
+**Versioned edges.** These were regenerated without code change for the #28 input-hash change. `statutory_version_register_seed.csv` changed from `b434a037…` to `595532f1…`; every edge figure is identical.

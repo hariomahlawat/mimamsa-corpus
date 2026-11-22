@@ -12,19 +12,20 @@ Inputs (SHA-256): `kb` 9a8f0d193065…; `cases` 8b8d53cd1434…; `register` 40b1
 | --- | --- |
 | citation_present | YES 581 · NO 77 |
 | source_identified | ALL 396 · NONE 108 · NOT_APPLICABLE 77 · PARTLY 77 |
-| source_searchable | ALL 473 · NOT_APPLICABLE 185 |
-| ANCHORED_FULL (derived) | YES 362 · NO 296 |
+| source_searchable | ALL 280 · NONE 88 · NOT_APPLICABLE 185 · PARTLY 105 |
+| source_searchable_instrument_level (informational, not a gate) | ALL 473 · NOT_APPLICABLE 185 |
+| ANCHORED_FULL (derived) | YES 187 · NO 471 |
 
 source_searchable is computed over the identified items only (CP-01), so a record that is PARTLY identified can still be searchable ALL; read it together with source_identified, never alone.
 
-Citation items: 983 total; 718 identified; 78 inferred (co-citation codes, unique short case names; never counted as identified); 718 identified and searchable.
+Citation items: 983 total; 718 identified; 78 inferred (co-citation codes, unique short case names; never counted as identified); 500 identified and searchable.
 
 ## By family
 
 | Family | Records | identified ALL | searchable ALL | ANCHORED_FULL |
 | --- | --- | --- | --- | --- |
-| CODED | 389 | 236 | 297 | 207 |
-| PLAINTEXT | 269 | 160 | 176 | 155 |
+| CODED | 389 | 236 | 181 | 102 |
+| PLAINTEXT | 269 | 160 | 99 | 85 |
 
 ## Quality flags (records carrying each; reported alongside, not gates)
 
@@ -36,6 +37,7 @@ Citation items: 983 total; 718 identified; 78 inferred (co-citation codes, uniqu
 | INFERRED_IDENTITY | 61 |
 | NO_PINPOINT | 61 |
 | PLACEHOLDER | 16 |
+| PROVISION_FILES_ABSENT | 193 |
 | STRUCTURAL | 6 |
 | UNANCHORED_LOCATOR | 11 |
 
@@ -56,10 +58,14 @@ Three SEPARATE measures per KB record (denominator 658), never blended into one 
   source_searchable  ALL / PARTLY / NONE / NOT_CHECKED / NOT_APPLICABLE (nothing identified). Every identified
                      source exists in a searchable corpus: DCLR id in cases_53; doc_id in crawler data/meta; and,
                      where an Act section is cited (in plain text OR in a code locator such as
-                     {'source_id': 'SRC-AA', 'locator': 'ss 79-82'}), the section file exists; a missing section file
-                     makes that source not searchable.
+                     {'source_id': 'SRC-AA', 'locator': 'ss 79-82'}), the section file exists; where a rule is cited,
+                     the rule file exists. A missing provision file, or a missing/EMPTY provision index for the
+                     document, makes that source not searchable (ABSENT, flag PROVISION_FILES_ABSENT) and never yields
+                     ALL. An unavailable corpus (ref absent) yields NOT_CHECKED, never ALL. Any ABSENT source prevents
+                     ALL for the record. source_searchable_instrument_level (informational, not a gate) repeats the
+                     check at document level only, so the effect of absent provision files stays visible.
 Quality flags are reported alongside and are not gates inside the measures: NO_PINPOINT, PLACEHOLDER,
 STRUCTURAL, AMBIGUOUS_LOCATOR, CASE_NAME_WITHOUT_CODE, UNANCHORED_LOCATOR, INFERRED_IDENTITY,
-IDENTITY_KNOWN_TARGET_ABSENT. ANCHORED_FULL = citation_present AND identified ALL AND searchable ALL AND no flag.
+IDENTITY_KNOWN_TARGET_ABSENT, PROVISION_FILES_ABSENT. ANCHORED_FULL = citation_present AND identified ALL AND searchable ALL AND no flag.
 
 Per-record detail: `canonical_coverage.csv` (items column: `kind:ref=>target[id|inferred|not-id]#sections`).
