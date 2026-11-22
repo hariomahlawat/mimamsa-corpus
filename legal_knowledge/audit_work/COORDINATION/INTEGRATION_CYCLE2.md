@@ -24,10 +24,21 @@
 | 11 | #20: WS-C parser lost letter suffixes (r.15A, r.13A, s.169A), truncated lists (SC03 r.24, HCE-029 r.23) and missed short case titles, rating them FULL | WS-C ba3d370e fixed the parser, added a regression check and regenerated all dependent artifacts. Coverage FULL 379→370, PARTIAL 131→140, UNRESOLVED 14→15, NO_CITATION 78→77 (35 records changed). Coordinator spot-checked 8 records. Threads resolved. |
 | 12 | WS-D reconciliation test failed on the integrated tree after #11 (built from the old WS-C inventory) | WS-D 1893f162 regenerated against WS-C @ba3d370e: agreement **554/658** (was 562), all 104 differences explained by definitional rules. The test now pins WS-C's input by SHA-256 and fails with an explicit "regenerate" message if it changes. |
 
+### Final review remediation (owner instruction; five P2 threads on #18, #22, #23)
+| # | Finding | Fix (tests written first, shown failing, then passing) |
+| --- | --- | --- |
+| 13 | #18: scorecard assessed only the first instrument per plain-text segment (ADM-JD-02 AR r14 counted as AA s14; V7-WF-12 Constitution ignored) | WS-D 6a191870: shared `instrument_locators()`; locators bind to their own instrument; an ambiguous unit is recorded, not reassigned. Regenerated scorecard, plain-text index, reconciliation. |
+| 14 | #18: PAGE_IMAGE_READING proof accepted a nonexistent check ID when copy_fidelity was not PAGE_IMAGE_CHECKED | WS-D 6a191870: registered exact check ID required for PAGE_IMAGE_READING regardless of copy_fidelity |
+| 15 | #22: workstream check-ID prefixes stripped (WSC-PIC-108 looked up as PIC-108) | WS-D 6a191870: full IDs matched in validate.py and check_provenance.py |
+| 16 | #22: manual_supported evidence passed with another document's check and a fabricated render | WS-D 6a191870: check record must match the MML document, its manifest hash and the registered render SHA-256; the old valid fixture (PIC-01, an India Code page) was itself an instance of the defect and now uses PIC-02 (MML 2.pdf) |
+| 17 | #23: India Code listing md5/size enforced as served-file expectations (host watermark) | Coordinator f5edf3ec (crawler stack): listing values informational; served SHA-256 recorded; page-image identity check; optional served-SHA-256 pin; archive.org still enforced |
+
+Coordinator verification: WS-D regression tests on the pre-fix code fail 7 and error 2 (the 2 errors are calls to the extracted helper, which WS-D showed was a behaviour-preserving extraction with byte-identical outputs); all 10 pass on the fixed code. Regenerated figures: plain-text records with every statute instrument searchable **168/178** (was 169); Army Act sections in corpus 446/446; reconciliation WS-C vs WS-D **556/658** (was 554), all 102 differences explained.
+
 ## Validation on the integrated tree (head of this branch)
 | Check | Result |
 | --- | --- |
-| Audit tests | 169 OK |
+| Audit tests | 179 OK (after final remediation) |
 | Schema check | pass |
 | PILOT-01 and R23-VERIFY-01 strict | 0 errors |
 | `build_code_inventory.py` (87 codes) | pass |
