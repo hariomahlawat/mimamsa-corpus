@@ -1,0 +1,222 @@
+{
+ "observed": "2026-11-22 (HEAD requests via proxy; first status line per hop is the proxy CONNECT reply)",
+ "items": [
+  {
+   "batch": "ACQ-01-B1",
+   "doc_id": "notif-army-rules-1954-sro-484",
+   "url": "https://archive.org/download/in.gazette.central.w.1954-11-27.103686/103686.pdf",
+   "chain": [
+    {
+     "url": "https://archive.org/download/in.gazette.central.w.1954-11-27.103686/103686.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": null
+    },
+    {
+     "url": "https://dn760006.eu.archive.org/0/items/in.gazette.central.w.1954-11-27.103686/103686.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": "5032579"
+    }
+   ]
+  },
+  {
+   "batch": "ACQ-01-B1",
+   "doc_id": "notif-army-rules-amdt-sro-116-1965",
+   "url": "https://archive.org/download/in.gazette.central.w.1965-04-10.81813/81813.pdf",
+   "chain": [
+    {
+     "url": "https://archive.org/download/in.gazette.central.w.1965-04-10.81813/81813.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": null
+    },
+    {
+     "url": "https://dn790000.ca.archive.org/0/items/in.gazette.central.w.1965-04-10.81813/81813.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": "153228"
+    }
+   ]
+  },
+  {
+   "batch": "ACQ-01-B1",
+   "doc_id": "notif-army-rules-amdt-sro-215-1965",
+   "url": "https://archive.org/download/in.gazette.central.w.1965-07-03.79361/79361.pdf",
+   "chain": [
+    {
+     "url": "https://archive.org/download/in.gazette.central.w.1965-07-03.79361/79361.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": null
+    },
+    {
+     "url": "https://dn711201.ca.archive.org/0/items/in.gazette.central.w.1965-07-03.79361/79361.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": "114952"
+    }
+   ]
+  },
+  {
+   "batch": "ACQ-01-B1",
+   "doc_id": "notif-army-rules-amdt-sro-188-1979",
+   "url": "https://archive.org/download/in.gazette.central.w.1979-07-28.46533/46533.pdf",
+   "chain": [
+    {
+     "url": "https://archive.org/download/in.gazette.central.w.1979-07-28.46533/46533.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": null
+    },
+    {
+     "url": "https://dn760008.eu.archive.org/0/items/in.gazette.central.w.1979-07-28.46533/46533.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": "866906"
+    }
+   ]
+  },
+  {
+   "batch": "ACQ-01-B1",
+   "doc_id": "notif-army-rules-amdt-sro-216-1988",
+   "url": "https://archive.org/download/in.gazette.central.w.1988-09-17.28081/28081.pdf",
+   "chain": [
+    {
+     "url": "https://archive.org/download/in.gazette.central.w.1988-09-17.28081/28081.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": null
+    },
+    {
+     "url": "https://dn721609.ca.archive.org/0/items/in.gazette.central.w.1988-09-17.28081/28081.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": "745123"
+    }
+   ]
+  },
+  {
+   "batch": "ACQ-01-B1",
+   "doc_id": "notif-army-rules-amdt-sro-17e-1993",
+   "url": "https://archive.org/download/in.gazette.central.e.1993-12-06.16490/16490.pdf",
+   "chain": [
+    {
+     "url": "https://archive.org/download/in.gazette.central.e.1993-12-06.16490/16490.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": null
+    },
+    {
+     "url": "https://dn790009.ca.archive.org/0/items/in.gazette.central.e.1993-12-06.16490/16490.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": "1592603"
+    }
+   ]
+  },
+  {
+   "batch": "ACQ-01-B1",
+   "doc_id": "notif-army-rules-amdt-sro-8e-2003",
+   "url": "https://archive.org/download/in.gazette.central.e.2003-06-24.153/153.pdf",
+   "chain": [
+    {
+     "url": "https://archive.org/download/in.gazette.central.e.2003-06-24.153/153.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": null
+    },
+    {
+     "url": "https://dn710901.ca.archive.org/0/items/in.gazette.central.e.2003-06-24.153/153.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": "40864"
+    }
+   ]
+  },
+  {
+   "batch": "ACQ-01-B1",
+   "doc_id": "notif-army-rules-amdt-sro-17e-2019",
+   "url": "https://archive.org/download/in.gazette.central.e.2019-12-28.214956/214956.pdf",
+   "chain": [
+    {
+     "url": "https://archive.org/download/in.gazette.central.e.2019-12-28.214956/214956.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": null
+    },
+    {
+     "url": "https://dn721901.ca.archive.org/0/items/in.gazette.central.e.2019-12-28.214956/214956.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": "339524"
+    }
+   ]
+  },
+  {
+   "batch": "ACQ-01-B1",
+   "doc_id": "notif-army-rules-amdt-sro-6e-2022",
+   "url": "https://archive.org/download/in.gazette.central.e.2022-06-06.236353/236353.pdf",
+   "chain": [
+    {
+     "url": "https://archive.org/download/in.gazette.central.e.2022-06-06.236353/236353.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": null
+    },
+    {
+     "url": "https://dn760002.eu.archive.org/0/items/in.gazette.central.e.2022-06-06.236353/236353.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": "115072"
+    }
+   ]
+  },
+  {
+   "batch": "ACQ-01-B2",
+   "doc_id": "rules-adjustment-jurisdiction-1978-so-488",
+   "url": "https://archive.org/download/in.gazette.central.w.1978-02-25.48290/48290.pdf",
+   "chain": [
+    {
+     "url": "https://archive.org/download/in.gazette.central.w.1978-02-25.48290/48290.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": null
+    },
+    {
+     "url": "https://dn790009.ca.archive.org/0/items/in.gazette.central.w.1978-02-25.48290/48290.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": "5923089"
+    }
+   ]
+  },
+  {
+   "batch": "ACQ-01-B2",
+   "doc_id": "notif-adjustment-jurisdiction-amdt-so-4010-1986",
+   "url": "https://archive.org/download/in.gazette.central.w.1986-12-06.32435/32435.pdf",
+   "chain": [
+    {
+     "url": "https://archive.org/download/in.gazette.central.w.1986-12-06.32435/32435.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": null
+    },
+    {
+     "url": "https://dn790002.ca.archive.org/0/items/in.gazette.central.w.1986-12-06.32435/32435.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": "5891276"
+    }
+   ]
+  },
+  {
+   "batch": "ACQ-01-B6",
+   "doc_id": "act-commanders-in-chief-change-designation-1955",
+   "url": "https://archive.org/download/in.gazette.e.1955.613/E-2210-1955-0031-101567.pdf",
+   "chain": [
+    {
+     "url": "https://archive.org/download/in.gazette.e.1955.613/E-2210-1955-0031-101567.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": null
+    },
+    {
+     "url": "https://dn760001.eu.archive.org/0/items/in.gazette.e.1955.613/E-2210-1955-0031-101567.pdf",
+     "status_line": "HTTP/1.1 200 Connection Established",
+     "content_length": "92935"
+    }
+   ]
+  },
+  {
+   "batch": "ACQ-01-B6",
+   "doc_id": "act-air-force-army-laws-amdt-1975",
+   "url": "India Code item eff2c36e-1e1a-4b16-8b58-043bcb86e596 (1975-13.pdf)",
+   "chain": "NO_URL"
+  },
+  {
+   "batch": "ACQ-01-B6",
+   "doc_id": "act-army-amendment-1992",
+   "url": "India Code item 53aa36bb-a143-4324-9717-ac946144e169 (1992-37.pdf)",
+   "chain": "NO_URL"
+  }
+ ],
+ "india_code_note": "HEAD returns 405 on India Code bitstream URLs; stored bitstream metadata: 1975-13.pdf 68191 B md5 b3345d50285961e65b9a41677e455c6e; 1992-37.pdf 162975 B md5 007769e174338b0877e114cf35d1457e; served bytes differ (download-specific)"
+}
