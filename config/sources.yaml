@@ -278,9 +278,124 @@ sources:
     enabled: false
     priority: 3
     heavy: false
-    allowed_hosts: [archive.org]
+    allowed_hosts: [archive.org, "*.archive.org"]
+    require_https: true
     verify: true
     discovery: "Digital Library of India items; record the archive.org item identifier in metadata."
+    # ACQ-01 (owner-authorised 2026-11-22, batches B1, B2, B6): Gazette of India issues as scanned by
+    # Public.Resource.Org (collection gazetteofindia). These are facsimiles of primary instruments
+    # (SOURCE_AUTHORITY_POLICY v1: ARCHIVAL_FACSIMILE_OF_OFFICIAL). Fetched by address only (crawler/direct.py).
+    # archive.org/download/... answers 302 to a per-item data server (dnNNNNNN.{ca,eu}.archive.org, observed
+    # 2026-11-22), hence the explicit "*.archive.org" entry. Expected md5/size: legal_knowledge/audit_work/ACQ-01.
+    documents:
+      - doc_id: notif-army-rules-1954-sro-484
+        url: "https://archive.org/download/in.gazette.central.w.1954-11-27.103686/103686.pdf"
+        title: "Army Rules, 1954 (S.R.O. 484), Gazette of India No. 47, Part II-Section 4"
+        doc_type: rules
+        year: 1954
+        number: "S.R.O. 484"
+        issuing_authority: "Central Government (Ministry of Defence), under Army Act s.191"
+        issue_date: "1954-11-27"
+        note: "Gazette: No.47, Pt II s.4, pp.291-378; archive.org item in.gazette.central.w.1954-11-27.103686; expected md5 3bb93dc7531e7673a94aed92e8aa8bf0, 5032579 bytes"
+      - doc_id: notif-army-rules-amdt-sro-116-1965
+        url: "https://archive.org/download/in.gazette.central.w.1965-04-10.81813/81813.pdf"
+        title: "Army (First Amendment) Rules 1965, S.R.O. 116"
+        doc_type: notification
+        year: 1965
+        number: "S.R.O. 116"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1965-04-10"
+        note: "Gazette: Pt II s.4; archive.org item in.gazette.central.w.1965-04-10.81813; expected md5 5c8d1d11a11bc37740d65cbf195898f8, 153228 bytes"
+      - doc_id: notif-army-rules-amdt-sro-215-1965
+        url: "https://archive.org/download/in.gazette.central.w.1965-07-03.79361/79361.pdf"
+        title: "Army Rules amendment, S.R.O. 215 dated 17-06-1965 (r.192 proviso)"
+        doc_type: notification
+        year: 1965
+        number: "S.R.O. 215"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1965-06-17"
+        note: "Gazette: Pt II s.4, Gazette 03-07-1965; archive.org item in.gazette.central.w.1965-07-03.79361; expected md5 e06b4fb6725886f21cc7c52028efaa04, 114952 bytes"
+      - doc_id: notif-army-rules-amdt-sro-188-1979
+        url: "https://archive.org/download/in.gazette.central.w.1979-07-28.46533/46533.pdf"
+        title: "Army (Amendment) Rules 1979, S.R.O. 188 dated 04-06-1979"
+        doc_type: notification
+        year: 1979
+        number: "S.R.O. 188"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1979-06-04"
+        note: "Gazette: Pt II s.4, Gazette 28-07-1979; archive.org item in.gazette.central.w.1979-07-28.46533; expected md5 27b0a853be54c01d0151788667867cd9, 866906 bytes"
+      - doc_id: notif-army-rules-amdt-sro-216-1988
+        url: "https://archive.org/download/in.gazette.central.w.1988-09-17.28081/28081.pdf"
+        title: "Army (Amendment) Rules 1988, S.R.O. 216 dated 30-08-1988"
+        doc_type: notification
+        year: 1988
+        number: "S.R.O. 216"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1988-08-30"
+        note: "Gazette: Pt II s.4, Gazette 17-09-1988; archive.org item in.gazette.central.w.1988-09-17.28081; expected md5 fea10feccd506fc113efa93ff641cec2, 745123 bytes"
+      - doc_id: notif-army-rules-amdt-sro-17e-1993
+        url: "https://archive.org/download/in.gazette.central.e.1993-12-06.16490/16490.pdf"
+        title: "Army (Amendment) Rules 1993, S.R.O. 17(E) dated 06-12-1993"
+        doc_type: notification
+        year: 1993
+        number: "S.R.O. 17(E)"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "1993-12-06"
+        note: "Gazette: Extraordinary Pt II s.4; archive.org item in.gazette.central.e.1993-12-06.16490; expected md5 d152e3344159fa8b745f4108ec07d678, 1592603 bytes"
+      - doc_id: notif-army-rules-amdt-sro-8e-2003
+        url: "https://archive.org/download/in.gazette.central.e.2003-06-24.153/153.pdf"
+        title: "Army (Amendment) Rules 2003, S.R.O. 8(E)"
+        doc_type: notification
+        year: 2003
+        number: "S.R.O. 8(E)"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "2003-06-24"
+        note: "Gazette: Extraordinary Pt II s.4; archive.org item in.gazette.central.e.2003-06-24.153; expected md5 ce946e3682c421c9a40396ed6412eafb, 40864 bytes"
+      - doc_id: notif-army-rules-amdt-sro-17e-2019
+        url: "https://archive.org/download/in.gazette.central.e.2019-12-28.214956/214956.pdf"
+        title: "Army (Amendment) Rules 2019, S.R.O. 17(E) dated 28-12-2019"
+        doc_type: notification
+        year: 2019
+        number: "S.R.O. 17(E)"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "2019-12-28"
+        note: "Gazette: Extraordinary; archive.org item in.gazette.central.e.2019-12-28.214956; expected md5 05c168856e218c2b4f5b74fc3bffa692, 339524 bytes"
+      - doc_id: notif-army-rules-amdt-sro-6e-2022
+        url: "https://archive.org/download/in.gazette.central.e.2022-06-06.236353/236353.pdf"
+        title: "Army (Amendment) Rules 2022, S.R.O. 6(E) dated 06-06-2022 (r.16A)"
+        doc_type: notification
+        year: 2022
+        number: "S.R.O. 6(E)"
+        issuing_authority: "Ministry of Defence"
+        issue_date: "2022-06-06"
+        note: "Gazette: Extraordinary; egazette id CG-DL-E-06062022-236353; archive.org item in.gazette.central.e.2022-06-06.236353; expected md5 52ced37f1e9a37ae2f1af1ea18445e8f, 115072 bytes"
+      - doc_id: rules-adjustment-jurisdiction-1978-so-488
+        url: "https://archive.org/download/in.gazette.central.w.1978-02-25.48290/48290.pdf"
+        title: "Criminal Courts and Court-martial (Adjustment of Jurisdiction) Rules, 1978 (S.O. 488, MHA, 09-02-1978)"
+        doc_type: rules
+        year: 1978
+        number: "S.O. 488"
+        issuing_authority: "Central Government (Ministry of Home Affairs)"
+        issue_date: "1978-02-09"
+        note: "Gazette: Gazette 25-02-1978, Pt II s.3(ii), p.525; archive.org item in.gazette.central.w.1978-02-25.48290; expected md5 91b0dd7aab747fe5260b1ffe61fd4d1d, 5923089 bytes"
+      - doc_id: notif-adjustment-jurisdiction-amdt-so-4010-1986
+        url: "https://archive.org/download/in.gazette.central.w.1986-12-06.32435/32435.pdf"
+        title: "Adjustment of Jurisdiction (Amendment) Rules, S.O. 4010 dated 24-11-1986"
+        doc_type: notification
+        year: 1986
+        number: "S.O. 4010"
+        issuing_authority: "Ministry of Home Affairs"
+        issue_date: "1986-11-24"
+        note: "Gazette: Gazette 06-12-1986, pp.4881-82; archive.org item in.gazette.central.w.1986-12-06.32435; expected md5 c5eaada91e55121d0e048542f4a0e68b, 5891276 bytes"
+      - doc_id: act-commanders-in-chief-change-designation-1955
+        url: "https://archive.org/download/in.gazette.e.1955.613/E-2210-1955-0031-101567.pdf"
+        title: "Commanders-in-Chief (Change in Designation) Act, 1955 (Act 19 of 1955), Gazette Extraordinary"
+        doc_type: act
+        year: 1955
+        number: "19 of 1955"
+        issuing_authority: "Parliament"
+        issue_date: "1955"
+        note: "Gazette: ; archive.org item in.gazette.e.1955.613; expected md5 6371b6ad0a8885ebf339200846044a21, 92935 bytes"
     targets:
       - { doc_id: act-indian-army-1911, title: "Indian Army Act, 1911", status_hint: superseded }
       - { doc_id: book-manual-military-law, title: "Manual of Military Law (editions)", status_hint: superseded }
@@ -294,6 +409,34 @@ sources:
       - { identifier: in.ernet.dli.2015.110569, title: "Manual Of Military Law. War Office. 1907.", year: 1907, note: "British manual" }
       - { identifier: in.ernet.dli.2015.279009, title: "Manual Of Military Law War Office 1907", year: null, note: "British manual; possibly a duplicate scan" }
       - { identifier: dli.ernet.237370,         title: "Manual Of Military Law (1929)", year: 1929, note: "British manual" }
+
+  # ACQ-01 B6: amending Acts as Gazette scans held on India Code (government-hosted copies). India Code serves
+  # download-specific bytes for these scans (served size differs from the stored bitstream), so verification
+  # records the stored bitstream md5/size and the served SHA-256, and relies on a page-image identity check.
+  official_instruments:
+    phase: 2
+    enabled: false
+    priority: 2
+    heavy: false
+    allowed_hosts: [indiacode.gov.in]
+    require_https: true
+    documents:
+      - doc_id: act-air-force-army-laws-amendment-1975
+        url: "https://indiacode.gov.in/server/api/core/bitstreams/d4cb2142-ec1d-46ca-88b1-6ae2b9c603d7/content"
+        title: "The Air Force and Army Laws (Amendment) Act, 1975 (Act 13 of 1975)"
+        doc_type: act
+        year: 1975
+        number: "13 of 1975"
+        issuing_authority: "Parliament"
+        note: "Gazette of India Extraordinary Part II-Section 1, No. 16, 29-03-1975 (scan on India Code item eff2c36e-1e1a-4b16-8b58-043bcb86e596); stored bitstream 1975-13.pdf 68191 bytes md5 b3345d50285961e65b9a41677e455c6e"
+      - doc_id: act-army-amendment-1992
+        url: "https://indiacode.gov.in/server/api/core/bitstreams/7a05a1f5-506a-4e9c-afae-c2e4fc1e989e/content"
+        title: "The Army (Amendment) Act, 1992 (Act 37 of 1992)"
+        doc_type: act
+        year: 1992
+        number: "37 of 1992"
+        issuing_authority: "Parliament"
+        note: "Gazette of India Extraordinary Part II-Section 1, No. 59, 07-09-1992 (scan on India Code item 53aa36bb-a143-4324-9717-ac946144e169); stored bitstream 1992-37.pdf 162975 bytes md5 007769e174338b0877e114cf35d1457e"
 
 # Explicitly forbidden: never fetch, even if linked. Subdomains of a blocked host are blocked too.
 blocked_hosts:

@@ -90,6 +90,18 @@ class Config:
             hosts.update(court.get("allowed_hosts", []))
         return {normalise_host(h) for h in hosts}
 
+    def host_allowed(self, name: str, host: str) -> bool:
+        """Exact match, or an explicit '*.<domain>' entry in allowed_hosts (subdomains only, never the bare domain
+        and never a look-alike such as 'evilarchive.org'). Blocked hosts are checked before this."""
+        host = normalise_host(host)
+        for h in self.allowed_hosts(name):
+            if h.startswith("*."):
+                if host.endswith(h[1:]) and host != h[2:]:
+                    return True
+            elif host == h:
+                return True
+        return False
+
     def setting(self, name: str, key: str) -> Any:
         """Per-source override, else global default."""
         s = self.source(name)
@@ -105,7 +117,9 @@ class Config:
             return False, "no host"
         if self.is_blocked_host(host):
             return False, f"host {host} is on blocked_hosts"
-        if host not in self.allowed_hosts(name):
+        if parts.scheme != "https" and self.source(name).get("require_https"):
+            return False, f"{name} requires HTTPS (require_https: true)"
+        if not self.host_allowed(name, host):
             return False, f"host {host} not in allowed_hosts for {name}"
         return True, "ok"
 
@@ -204,7 +218,9 @@ def check_config(cfg: Config) -> ConfigReport:
         if src.get("enabled") and not hosts:
             r.errors.append(f"{where} is enabled but has no allowed_hosts")
         for h in sorted(hosts):
-            if cfg.is_blocked_host(h):
+            if h.startswith("*.") and (h.count(".") < 2 or "*" in h[2:]):
+                r.errors.append(f"{where}: wildcard host {h} must be '*.<domain>.<tld>'")
+            if cfg.is_blocked_host(h.lstrip("*.")):
                 r.errors.append(f"{where}: allowed host {h} is also on blocked_hosts")
         for path, url in _config_urls(src, where):
             host = url_host(url)
