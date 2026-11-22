@@ -38,5 +38,39 @@ class AuditSchemaTests(unittest.TestCase):
             self.assertFalse(validator.validate_batch(d, strict=True))
 
 
+    def test_manual_only_cannot_verify_statutory_law(self):
+        import json
+        with tempfile.TemporaryDirectory() as root:
+            d = Path(root)
+            for folder in ("sources", "findings", "reviews"):
+                (d / folder).mkdir()
+            source = {
+                "source_id": "MML-2-P152",
+                "source_type": "MANUAL",
+                "title": "Manual of Military Law",
+                "issuer": "User-provided source, original publisher unconfirmed",
+                "locator": "legal_knowledge/manual_sources/originals/MML 2.pdf",
+                "pinpoint": "PDF p.152",
+                "retrieved_on": "2026-11-22",
+                "verification_state": "SOURCE_VERIFIED",
+                "authenticity": "USER_SUPPLIED_REFERENCE"
+            }
+            finding = {
+                "finding_id": "F-MANUAL-ONLY", "batch_id": "PILOT",
+                "record_id": "KB1", "original_sha256": "a" * 64,
+                "workstream": "STATUTORY", "severity": "P1",
+                "issue_type": "POTENTIAL_CONFLICT",
+                "claim": "A legal claim cannot be proven by MML alone",
+                "original_location": "v0.9:KB1", "original_text": "example",
+                "proposed_text": None, "rationale": "Original Gazette needed",
+                "source_ids": ["MML-2-P152"],
+                "verification_state": "SOURCE_VERIFIED",
+                "review_state": "PENDING", "requires_legal_review": True
+            }
+            (d / "sources" / "mml.json").write_text(json.dumps(source), encoding="utf-8")
+            (d / "findings" / "finding.json").write_text(json.dumps(finding), encoding="utf-8")
+            self.assertFalse(validator.validate_batch(d))
+
+
 if __name__ == "__main__":
     unittest.main()
