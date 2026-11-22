@@ -95,4 +95,4 @@ Section-file checks now apply identically to coded and plain-text citations.
 **Identity map:** unaffected; byte-identical `--check`.
 
 ## Commits
-- Fix commit: see the "Commits" line appended below.
+- `618dcd11`: regression tests, the three fixes, the extended versioned-edge test and all regenerated artifacts (gate: 214 tests OK, all checks rc=0).
