@@ -1,0 +1,97 @@
+{
+ "case53_holding_empty": 10,
+ "case53_identity_state_counts": {
+  "IDENTITY_CORROBORATED_INTERN_MIRROR_ONLY": 27,
+  "IDENTITY_CORROBORATED_OFFICIAL_COPY_HELD_AND_INTERN_COPY": 7,
+  "IDENTITY_CORROBORATED_OFFICIAL_COPY_HELD_NOT_IN_INTERN": 6,
+  "UNRESOLVED_NO_COPY_IN_HAND": 13
+ },
+ "case53_mapped_to_intern_doc": 34,
+ "case53_without_any_kb_link_ws_b": 27,
+ "case53_without_code_declared_kb_link": 31,
+ "cases53_sha256": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a",
+ "crosswalk_basis_counts": {
+  "CURATION_DECLARED_SOURCE_CODE": 139,
+  "LEXICAL_LEAD_AMBIGUOUS_SAME_PARTY_PATTERN": 6,
+  "LEXICAL_LEAD_ONLY": 35,
+  "NO_KB_LINK_FOUND": 28
+ },
+ "crosswalk_rows": 208,
+ "distinct_judgment_documents_sha256": 3951,
+ "docs_intern_kept_only_via_word_invalidation": 243,
+ "docs_intern_relevant_only_via_word_invalidation": 33,
+ "excluded_log_lines": 120185,
+ "identity_specs": 67,
+ "identity_state_counts": {
+  "IDENTITY_CORROBORATED_INTERN_MIRROR_ONLY": 30,
+  "IDENTITY_CORROBORATED_OFFICIAL_COPY_HELD_AND_INTERN_COPY": 9,
+  "IDENTITY_CORROBORATED_OFFICIAL_COPY_HELD_NOT_IN_INTERN": 7,
+  "IDENTITY_LEAD_INTERN_METADATA_ONLY": 1,
+  "UNRESOLVED_NO_COPY_IN_HAND": 20
+ },
+ "intern_judgment_records": 4259,
+ "intern_judgment_records_by_court": {
+  "Allahabad High Court": 309,
+  "High Court of Delhi": 1957,
+  "High Court of Jammu and Kashmir": 410,
+  "High Court of Punjab and Haryana": 1215,
+  "Supreme Court of India": 368
+ },
+ "intern_meta_records_total": 4327,
+ "intern_relevance_by_record": {
+  "borderline": 1341,
+  "not_checked": 47,
+  "relevant": 2871
+ },
+ "intern_relevance_vs_ws_b_decision": {
+  "borderline|EXCLUDE_PROPOSED": 217,
+  "borderline|HOLD_FOR_REVIEW": 202,
+  "borderline|INCLUDE": 902,
+  "not_checked|HOLD_FOR_REVIEW": 45,
+  "relevant|HOLD_FOR_REVIEW": 131,
+  "relevant|INCLUDE": 2454
+ },
+ "raw_data_commit": "ad77758d4569ba6aafa955cc7843d874489e10f7",
+ "records658_sha256": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1",
+ "records_collapsed_as_same_bytes": 308,
+ "ws_b_decision_by_court": {
+  "Allahabad High Court": {
+   "EXCLUDE_PROPOSED": 16,
+   "HOLD_FOR_REVIEW": 19,
+   "INCLUDE": 274
+  },
+  "High Court of Delhi": {
+   "EXCLUDE_PROPOSED": 128,
+   "HOLD_FOR_REVIEW": 158,
+   "INCLUDE": 1392
+  },
+  "High Court of Jammu and Kashmir": {
+   "EXCLUDE_PROPOSED": 3,
+   "HOLD_FOR_REVIEW": 14,
+   "INCLUDE": 393
+  },
+  "High Court of Punjab and Haryana": {
+   "EXCLUDE_PROPOSED": 16,
+   "HOLD_FOR_REVIEW": 161,
+   "INCLUDE": 1031
+  },
+  "Supreme Court of India": {
+   "EXCLUDE_PROPOSED": 54,
+   "HOLD_FOR_REVIEW": 26,
+   "INCLUDE": 266
+  }
+ },
+ "ws_b_intake_decision_by_document": {
+  "EXCLUDE_PROPOSED": 217,
+  "HOLD_FOR_REVIEW": 378,
+  "INCLUDE": 3356
+ },
+ "ws_b_lexical_class_by_document": {
+  "CAPF_OR_OTHER_FORCE_LEAD": 94,
+  "MIL_CORE_LEXICAL": 3209,
+  "MIL_PROBABLE_LEXICAL": 147,
+  "NO_MILITARY_SIGNAL": 288,
+  "TEXT_UNAVAILABLE": 7,
+  "WEAK_SIGNAL_REVIEW": 206
+ }
+}
