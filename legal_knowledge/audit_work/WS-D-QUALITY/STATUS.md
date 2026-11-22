@@ -1,7 +1,7 @@
 # WS-D Data quality and CI: STATUS
 
 Branch `claude/ws-d-quality`, worktree `/home/user/ws-d`. Engineering/QA only; nothing here is legal adjudication. Never pushed.
-Baseline: 658 KB (9a8f0d19...), 53 cases (8b8d53cd...), 87 codes (72 firm, 75 incl. 3 co-citation), 269 records without codes. Audit tests 54 at start, now 113.
+Baseline: 658 KB (9a8f0d19...), 53 cases (8b8d53cd...), 87 codes (72 firm, 75 incl. 3 co-citation), 269 records without codes. Audit tests 54 at start, 113 after cycle 1, 166 after cycle 2.
 
 ## Done
 - D1 `hash_reproduction.json` + `scripts/hash_reproduction.py`: KB/cases files match; PILOT-01 43/43 and R23-VERIFY-01 2/2 per-record manifest hashes reproduce (MML_PROVISION convention recovered: json.dumps sort_keys, default separators); MML manifest hash matches; 8/8 MML originals (scratchpad bytes) and transport ZIP match the receipt. CI step (no private bytes).
@@ -19,10 +19,10 @@ Baseline: 658 KB (9a8f0d19...), 53 cases (8b8d53cd...), 87 codes (72 firm, 75 in
 - C2-1 DONE `coverage_reconciliation.md/.csv` + `scripts/coverage_reconciliation.py` (WS-C read-only via git ref or worktree): coarse agreement 562/658; 96 disagreements all explained by 11 definitional rules (R1 co-citation 39, R2 pinpoint 32, R8 no-citation definition 12, R7 plain instrument set 13 ...); code sets identical 658/658; canonical definition proposal (OQ-D-016). Tests `test_legal_audit_coverage_reconciliation.py` (7).
 - C2-2 DONE `registers/source_code_resolution_v4_proposed.csv`, `registers/source_code_resolution_v4_diff.csv`, `registers/REGISTER_V4_PROPOSAL.md`, `scripts/build_register_v4.py`; root cause: v2 grammar lacked bare `[CODE]` and leading-digest forms, v3 refreshed forms_used but not usage on 78 v2-carried rows; 8 codes / 14 links (cycle-1 '15' corrected); classes unchanged; tests `test_legal_audit_register_v4.py` (7).
 - C2-3 DONE `tools/legal_audit/check_provenance.py` (rules IMG-1/2/3, RV-1, CA-1/2, ACQ-1, APR-1 over all audit CSV/JSON; render evidence resolves via check ids, document hashes and foreign keys) + `tools/legal_audit/provenance_baseline.json` (21 known violations: ACQ-02 copy_fidelity x17, PILOT-01 PIC-08/09, WS-A PCL-BL-25 and stale AR-029 copy); passes on HEAD and on WS-A/B/C branch trees; CI step. Optional `manual_supported` relation layer: `docs/legal-audit/schemas/relation.schema.json` + validator `relation_checks` (never statutory authority; cannot be finding/review evidence; MML hash, registered render, KB id). Tests `test_legal_audit_provenance_controls.py` (21). OQ-D-017..020.
-- C2-4 check_registers semantics tests: pending.
+- C2-4 DONE `tests/test_legal_audit_check_registers.py` (18): runs the unmodified coordinator script on a temp copy of its inputs with one-cell mutations; covers date rule (effective date only with STATED_IN_INSTRUMENT, = publication date, ISO, missing status, version seed), continuation pages, TEXT_LAYER/LOCATED, unknown PIC, C-08/r.193 OPEN, C-09/r.194 PROPOSAL, r.23(3) CONFLICTING, approval; gap OQ-D-021.
 
 ## In progress
-- C2-4.
+- Nothing (cycle 2 complete).
 
 ## Next (if continued)
 - Coordinator decisions on OQ-D-001..015; possible v4 register proposal (D-WSD-001) and frozen-batch date-rule migration proposal (OQ-D-006), each as separate additive files.
@@ -31,4 +31,4 @@ Baseline: 658 KB (9a8f0d19...), 53 cases (8b8d53cd...), 87 codes (72 firm, 75 in
 - None. Human-reviewer nomination (OQ-D-007) needed before any v2 batch can record a legal-advisor review.
 
 ## Requests to coordinator
-- See `open_questions.csv` (OQ-D-001..020).
+- See `open_questions.csv` (OQ-D-001..021).
