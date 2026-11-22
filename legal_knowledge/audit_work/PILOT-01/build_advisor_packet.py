@@ -35,7 +35,12 @@ def src_line(sid):
 
 items = sorted(first, key=lambda f: (group(f), SEV[f["severity"]], f["record_id"]))
 rows, md = [], []
-md.append("# Legal-advisor review packet — PILOT-01\n")
+md.append("# Legal-advisor review packet — PILOT-01 (FINAL v1.0, 2026-11-22)\n")
+md.append("| Status layer | Meaning | Who | State in this packet |\n|---|---|---|---|\n"
+          "| Source verification | A cited source exists and reads as stated at the pinpoint | audit agents | recorded per item |\n"
+          "| Independent review / disposition | Adversarial technical challenge by a separate agent; orchestrator's provisional disposition | independent-reviewer A/B/C, orchestrator | recorded per item — **NOT legal approval** |\n"
+          "| Substantive legal decision | Professional legal judgement on the proposition and proposed correction | nominated legal advisor | **blank — advisor not nominated** |\n"
+          "| Formal validation | Attributable JAG/formal authority approval | formal authority | **none** |\n")
 md.append("**Status: FOR ADVISOR DECISION. Advisor not yet nominated. No item is advisor-approved or JAG-validated.** "
           "Agent findings are research proposals; independent-agent reviews are challenges, not legal sign-off. "
           "Originals (658 records, 53 cases, 8 MML files) are unchanged; every correction is a proposal.\n")
@@ -62,24 +67,34 @@ for n, f in enumerate(items, 1):
     if f.get("contrary_source_ids"): md.append("- **Contrary evidence:** " + "; ".join(src_line(s) for s in f["contrary_source_ids"]))
     if f.get("mml_anchor_ids"): md.append("- **MML anchors (secondary, not proof):** " + ", ".join(f["mml_anchor_ids"][:6]))
     if pics: md.append("- **Page-image checks:** " + ", ".join(pics))
-    for r in rv: md.append(f"- **Independent review {r['review_id']} ({r['reviewer_id']}): {r['decision']}** — {r['rationale'][:450]}")
-    md.append(f"- **Post-review disposition:** {d}")
-    for q in f.get("advisor_questions", []): md.append(f"- **Question:** {q}")
     if f.get("limitations"): md.append("- **Limitations:** " + "; ".join(f["limitations"])[:400])
-    md.append("- **Advisor decision:** ☐ ACCEPT_PROPOSAL ☐ ACCEPT_WITH_AMENDMENT ☐ REJECT ☐ NEEDS_MORE_EVIDENCE — severity: ____ — "
-              "name/role/date/approval ref: ______________\n")
-    rows.append([n, g, f["finding_id"], f["record_id"], f["severity"], p, f["examination_outcome"], d,
-                 "; ".join(f"{r['reviewer_id']}:{r['decision']}" for r in rv), " | ".join(f.get("advisor_questions", [])), "", "", "", ""])
-md.append("\n## Annex: supplementary remediation findings (orchestrator; not yet independently reviewed)\n")
+    md.append("\n> **Independent review and disposition — technical challenge, NOT legal approval**")
+    for r in rv: md.append(f"> - {r['review_id']} ({r['reviewer_id']}, {r['reviewer_role']}): **{r['decision']}** — {r['rationale'][:450]}")
+    if not rv: md.append("> - No independent review recorded.")
+    md.append(f"> - Orchestrator provisional disposition: {d}; provisional severity {p} (proposal only; original finding unchanged)\n")
+    md.append("**Substantive legal decision — for the nominated legal advisor (blank)**")
+    for q in f.get("advisor_questions", []): md.append(f"- Question: {q}")
+    md.append("- Decision: ☐ ACCEPT_PROPOSAL ☐ ACCEPT_WITH_AMENDMENT ☐ REJECT ☐ NEEDS_MORE_EVIDENCE — severity: ____")
+    md.append("- Name / role / date / approval reference: ______________ (entered later as a LEGAL_ADVISOR review record; agents may not fill this)\n")
+    rows.append([n, g, f["finding_id"], f["record_id"], f["severity"], p, f["examination_outcome"],
+                 "; ".join(f"{r['reviewer_id']}:{r['decision']}" for r in rv), d, " | ".join(f.get("advisor_questions", [])), "", "", "", ""])
+md.append("\n## Annex: supplementary remediation findings (orchestrator-authored; independently reviewed by independent-reviewer-C)\n")
 for f in supp:
+    rv = [r for r in R if r["finding_id"] == f["finding_id"]]
     md.append(f"### {f['finding_id']} — {f['record_id']} — {f['severity']} — {f['examination_outcome']}\n- {f['claim'][:700]}\n"
-              f"- Evidence: " + "; ".join(src_line(s) for s in f["source_ids"] + f.get("contrary_source_ids", [])) +
-              "\n- Questions: " + " | ".join(f.get("advisor_questions", [])) + "\n")
+              f"- Evidence: " + "; ".join(src_line(s) for s in f["source_ids"] + f.get("contrary_source_ids", [])) + "\n")
+    md.append("> **Independent review — technical challenge, NOT legal approval**")
+    for r in rv: md.append(f"> - {r['review_id']} ({r['reviewer_id']}): **{r['decision']}** — {r['rationale'][:600]}")
+    if not rv: md.append("> - Not yet independently reviewed.")
+    md.append("\n**Substantive legal decision — for the nominated legal advisor (blank)**")
+    for q in f.get("advisor_questions", []): md.append(f"- Question: {q}")
+    md.append("- Decision: ☐ ACCEPT_PROPOSAL ☐ ACCEPT_WITH_AMENDMENT ☐ REJECT ☐ NEEDS_MORE_EVIDENCE — severity: ____ — name/role/date/approval ref: ________\n")
 (B / "ADVISOR_REVIEW_PACKET.md").write_text("\n".join(md) + "\n", encoding="utf-8")
 with open(B / "advisor_review_packet.csv", "w", newline="") as fh:
     w = csv.writer(fh)
-    w.writerow(["item", "group", "finding_id", "record_id", "first_pass_severity", "provisional_severity", "outcome", "disposition",
-                "independent_reviews", "questions", "advisor_decision", "advisor_severity", "advisor_name_role_date", "approval_reference"])
+    w.writerow(["item", "group", "finding_id", "record_id", "first_pass_severity", "provisional_severity", "outcome",
+                "TECHNICAL_independent_review_NOT_legal_approval", "TECHNICAL_orchestrator_disposition_NOT_legal_approval", "questions",
+                "LEGAL_advisor_decision", "LEGAL_advisor_severity", "LEGAL_advisor_name_role_date", "LEGAL_approval_reference"])
     w.writerows(rows)
 print(len(items), "items;", len(supp), "annex")
 from collections import Counter; print(Counter(group(f) for f in items))
