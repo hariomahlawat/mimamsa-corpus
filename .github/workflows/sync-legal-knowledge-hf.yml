@@ -74,9 +74,13 @@ jobs:
         continue-on-error: true
         run: python scripts/archive_sc_treatment_v33.py
       - name: Attempt official 2022 eGazette SRO 6(E) PDF acquisition with SHA-256
+        # Manual investigation only until the official portal's TLS/HTML response is fixed.
+        if: github.event_name == 'workflow_dispatch'
         continue-on-error: true
         run: python scripts/archive_gazette_v33.py
       - name: Archive authenticated Supreme Court office report citing Mani Ram Bhaira
+        # Manual investigation only until the official portal's TLS/HTML response is fixed.
+        if: github.event_name == 'workflow_dispatch'
         continue-on-error: true
         run: python scripts/archive_sci_office_report_v33.py
       - name: Verify existing original corpus PDFs for Bedi and Ranjit Thakur with SHA-256
