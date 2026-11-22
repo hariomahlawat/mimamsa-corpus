@@ -1,0 +1,110 @@
+{
+ "coverage_state": {
+  "FULL": 379,
+  "NO_CITATION": 78,
+  "PARTIAL": 131,
+  "SOURCE_GAP": 56,
+  "UNRESOLVED": 14
+ },
+ "coverage_state_by_module": {
+  "M01": {
+   "PARTIAL": 2
+  },
+  "M02": {
+   "FULL": 2
+  },
+  "M03": {
+   "FULL": 49,
+   "PARTIAL": 5,
+   "SOURCE_GAP": 1
+  },
+  "M04": {
+   "FULL": 39,
+   "NO_CITATION": 1,
+   "PARTIAL": 11,
+   "SOURCE_GAP": 1
+  },
+  "M05": {
+   "FULL": 73,
+   "PARTIAL": 4,
+   "UNRESOLVED": 1
+  },
+  "M06": {
+   "FULL": 1
+  },
+  "M06_M07": {
+   "FULL": 36,
+   "NO_CITATION": 14,
+   "UNRESOLVED": 13
+  },
+  "M08": {
+   "FULL": 4,
+   "NO_CITATION": 28,
+   "PARTIAL": 18,
+   "SOURCE_GAP": 46
+  },
+  "M09": {
+   "FULL": 66,
+   "NO_CITATION": 1,
+   "PARTIAL": 22,
+   "SOURCE_GAP": 4
+  },
+  "M10": {
+   "FULL": 69,
+   "PARTIAL": 18,
+   "SOURCE_GAP": 1
+  },
+  "M11": {
+   "FULL": 6,
+   "PARTIAL": 8,
+   "SOURCE_GAP": 2
+  },
+  "M12": {
+   "FULL": 2,
+   "NO_CITATION": 14
+  },
+  "M13": {
+   "FULL": 32,
+   "NO_CITATION": 20,
+   "PARTIAL": 43,
+   "SOURCE_GAP": 1
+  }
+ },
+ "denominator_records": 658,
+ "flag_counts": {
+  "ARMY_ACT_OR_RULES_CITED_WITHOUT_PINPOINT": 5,
+  "CODE_AO": 4,
+  "CODE_AR_ALT": 1,
+  "CODE_SRC-AO": 6,
+  "CODE_V6-S02": 9,
+  "CODE_V6-S03": 2,
+  "CODE_V6-S10": 2,
+  "CODE_V6-S13": 1,
+  "CODE_V6-S22": 1,
+  "CODE_V7-S04": 1,
+  "CODE_V7-S16": 2,
+  "CODE_V8-S11": 1,
+  "CODE_V9-S08": 1,
+  "PLACEHOLDER": 16,
+  "PLAIN_CASE_CITATION_UNRESOLVED": 13,
+  "URL_NON_OFFICIAL_HOST": 1
+ },
+ "in_pilot01": 25,
+ "info_flag_counts": {
+  "CODE_RESOLVED_BY_CO_CITATION_ONLY": 40,
+  "INFO_CITES_PROVISION_SHOWN_OMITTED": 6,
+  "INTERNAL_KB_LINKS": 20,
+  "REFERENCES_FIELD_IS_NON_CITATION_TEXT": 57
+ },
+ "kb_sha256": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1",
+ "mml_anchor_in_record": 0,
+ "mml_crosswalk_link_any": 293,
+ "not_a_correctness_audit": true,
+ "pinpoint_present": 531,
+ "records_with_aa_pinpoint": 175,
+ "records_with_any_code": 389,
+ "records_with_ar_pinpoint": 169,
+ "records_with_broken_or_unresolved_flag": 63,
+ "records_with_duplicate_flag": 17,
+ "statutory_anchor_present": 456
+}

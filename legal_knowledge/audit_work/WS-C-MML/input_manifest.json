@@ -1,0 +1,420 @@
+{
+ "batch": "WS-C-MML",
+ "frozen_on": "2026-11-22",
+ "source_authority_policy_version": "v1",
+ "note": "Scratchpad entries are private working copies; paths are relative to the session scratchpad. Hashes prove byte identity of the examined copy only, not authenticity or legal currency.",
+ "repo_inputs": [
+  {
+   "path": "legal_knowledge/manual_sources/MML_Originals_Manifest.csv",
+   "role": "mml_originals_manifest",
+   "bytes": 1706,
+   "sha256": "182e24da3900da59ef5d1ab7d4be5964eca7bcbc361bd8ad576a343e6464bab1"
+  },
+  {
+   "path": "legal_knowledge/manual_sources/UPLOAD_RECEIPT_2026-11-22.md",
+   "role": "mml_upload_receipt",
+   "bytes": 2454,
+   "sha256": "095e955f8abc1e0b48548c8c39b5e08a72ab98012b87a12b8745d1a1f1b56cad"
+  },
+  {
+   "path": "legal_knowledge/manual_sources/README.md",
+   "role": "mml_readme",
+   "bytes": 1291,
+   "sha256": "9e5ea369ba58a7c5a0cab98eaa1bf7351094d4b348e6a85b7ac7560626308860"
+  },
+  {
+   "path": "legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.jsonl",
+   "role": "kb_658_original_readonly",
+   "bytes": 510586,
+   "sha256": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1"
+  },
+  {
+   "path": "legal_knowledge/curated_originals/case_law/v0.9/cases_53.jsonl",
+   "role": "cases_53_original_readonly",
+   "bytes": 179385,
+   "sha256": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a"
+  },
+  {
+   "path": "legal_knowledge/audit_work/PILOT-01/registers/mml_crosswalk_pilot.csv",
+   "role": "pilot_crosswalk_63",
+   "bytes": 24744,
+   "sha256": "121ccf7f17c867364b44b7c7fc5c38fa8aa3797de761984986a98f36ac16972f"
+  },
+  {
+   "path": "legal_knowledge/audit_work/PILOT-01/registers/mml_edition_notes.csv",
+   "role": "pilot_edition_notes",
+   "bytes": 3317,
+   "sha256": "e18608c70798123fc6defa38c83f7c3834c6c76cf8bd17838525322f0f3d800e"
+  },
+  {
+   "path": "legal_knowledge/audit_work/PILOT-01/registers/mml_version_diffs.csv",
+   "role": "pilot_version_diffs",
+   "bytes": 5570,
+   "sha256": "4b68480499750b9cd53303a59b4e897931970150482678a2012b59f0a6fa37cb"
+  },
+  {
+   "path": "legal_knowledge/audit_work/PILOT-01/registers/volume_mapping_verification.csv",
+   "role": "pilot_volume_mapping_inferred",
+   "bytes": 1311,
+   "sha256": "ed8a0de3e1888b88d9bf3b551cb2a15e588ee5a1504578760f22685046c5a63d"
+  },
+  {
+   "path": "legal_knowledge/audit_work/PILOT-01/registers/cross_volume_matrix.csv",
+   "role": "pilot_cross_volume_matrix",
+   "bytes": 12959,
+   "sha256": "bd0cb7aaeac9a8463b5326c9899a2cd736bbe379fd11769b4470f3f0744d1632"
+  },
+  {
+   "path": "legal_knowledge/audit_work/PILOT-01/registers/page_image_checks.csv",
+   "role": "pilot_page_image_checks_PIC01_11",
+   "bytes": 4569,
+   "sha256": "48d1b0b2826587550292871b350282aa997b4bada09baf7212f26e61a765acff"
+  },
+  {
+   "path": "legal_knowledge/audit_work/PILOT-01/registers/source_code_resolution_v3.csv",
+   "role": "code_resolution_v3_87",
+   "bytes": 48239,
+   "sha256": "40b18c3dfff3ad81c099118a0ee058c28db5255a8c4ba47d4391bd1685e8d944"
+  },
+  {
+   "path": "legal_knowledge/audit_work/PILOT-01/registers/code_inventory_snapshot.json",
+   "role": "code_inventory_snapshot",
+   "bytes": 11594,
+   "sha256": "366eac9b98b1bf3cfb5376ccf38ba90d7ef1a51a61b954eb6bc308a9810ac1b9"
+  },
+  {
+   "path": "legal_knowledge/audit_work/PILOT-01/mml_derived_manifest.json",
+   "role": "pilot_mml_derived_manifest",
+   "bytes": 2863,
+   "sha256": "51e7e914a1aa66e03d52980ba1e0a70c2d14dc7a8438930a7f60ac029080aae9"
+  },
+  {
+   "path": "legal_knowledge/audit_work/PILOT-01/ADVISOR_REVIEW_PACKET.md",
+   "role": "pilot_advisor_packet",
+   "bytes": 104623,
+   "sha256": "d34946825d97caf0b30995d459c7e19d10dfb248ebc20565f74be2f035534010"
+  },
+  {
+   "path": "legal_knowledge/audit_work/PILOT-01/record_outcomes.csv",
+   "role": "pilot_record_outcomes",
+   "bytes": 5233,
+   "sha256": "c23eb073004fd1588e0f5fc6efb5999e9dea8997bd21347f98432c746468dda6"
+  },
+  {
+   "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/army_rules_instrument_register.csv",
+   "role": "ar_chain_instruments_37",
+   "bytes": 13433,
+   "sha256": "048543758fd103d9bbd2316ee4b7f2b5ee940b23958bf67558c750883c4d9a7a"
+  },
+  {
+   "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/army_rules_provision_chronology.csv",
+   "role": "ar_chain_chronology_46",
+   "bytes": 8346,
+   "sha256": "61b0a69aadd41c9682324137d825389a2a61f7663b861747f828814376a6a393"
+  },
+  {
+   "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/official_note_discrepancies.csv",
+   "role": "ar_chain_note_discrepancies",
+   "bytes": 1166,
+   "sha256": "cff9cdebdb28201273e50c485e0282bc7bfd3f9f76a747a7a0ef21ecacad158f"
+  },
+  {
+   "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/statutory_version_register_seed.csv",
+   "role": "ar_chain_version_seed",
+   "bytes": 3628,
+   "sha256": "f2fbdf1586517256dcbfcc4dbf046bd44300bf5899f153cc836b35c97b950457"
+  },
+  {
+   "path": "legal_knowledge/audit_work/SOURCE-CONFLICTS-01/conflict_determinations.csv",
+   "role": "conflicts",
+   "bytes": 6326,
+   "sha256": "1b24d58a8f232d791f70b1db70e27d0ef59eddda43e6e2672e654fe598d7c7c8"
+  },
+  {
+   "path": "docs/legal-audit/SOURCE_AUTHORITY_POLICY.md",
+   "role": "policy_v1",
+   "bytes": 8844,
+   "sha256": "1edc2c93f466b1ccfe49a8cb727699b74df1f6801d7c031876eabb0a566297c7"
+  },
+  {
+   "path": "docs/legal-audit/EVIDENCE_STANDARD.md",
+   "role": "evidence_standard",
+   "bytes": 6212,
+   "sha256": "7a8638e33b883582d5649ac4f6050ebfbabe4890fef65f44683f45d88001a619"
+  },
+  {
+   "path": "legal_knowledge/audit_work/COORDINATION/WORKSTREAM_CHARTERS.md",
+   "role": "charters",
+   "bytes": 7114,
+   "sha256": "e6fa81969f5a0f8e0d64a96e8c2e217dd481e212a18aeac9616650f4a52123ba"
+  }
+ ],
+ "scratchpad_inputs": [
+  {
+   "path": "mml_x/originals/MML 1.doc",
+   "role": "mml_original",
+   "bytes": 845312,
+   "sha256": "3a2e3a4f70669483678cdb96e1dd29d901c6c0ffc43a04a794a00d3ef0c3d1ed",
+   "manifest_sha256": "3a2e3a4f70669483678cdb96e1dd29d901c6c0ffc43a04a794a00d3ef0c3d1ed",
+   "matches_manifest": true
+  },
+  {
+   "path": "mml_x/originals/MML 2.pdf",
+   "role": "mml_original",
+   "bytes": 2443874,
+   "sha256": "db2119182ed2e4ccca22dd225d955327f6398ee98303e1c94615ba85b4396f65",
+   "manifest_sha256": "db2119182ed2e4ccca22dd225d955327f6398ee98303e1c94615ba85b4396f65",
+   "matches_manifest": true
+  },
+  {
+   "path": "mml_x/originals/MML vol 2(AA).doc.doc",
+   "role": "mml_original",
+   "bytes": 1202176,
+   "sha256": "73fd304227ca680ebf3c8512dfd4aafa0eb2e16952558bb8b1c1edee637a455d",
+   "manifest_sha256": "73fd304227ca680ebf3c8512dfd4aafa0eb2e16952558bb8b1c1edee637a455d",
+   "matches_manifest": true
+  },
+  {
+   "path": "mml_x/originals/MML vol 2(AA).pdf",
+   "role": "mml_original",
+   "bytes": 1521514,
+   "sha256": "c8a791a1e3a4d8fee412cae1b0c2daa4517438bf926c9f9e27fffd81cada1ec9",
+   "manifest_sha256": "c8a791a1e3a4d8fee412cae1b0c2daa4517438bf926c9f9e27fffd81cada1ec9",
+   "matches_manifest": true
+  },
+  {
+   "path": "mml_x/originals/MML vol 2(AR).doc-1.doc",
+   "role": "mml_original",
+   "bytes": 1499136,
+   "sha256": "8bb17d8255ea1be2b975a96b3c739d002264df3da8a56086d29d2a1961f3a162",
+   "manifest_sha256": "8bb17d8255ea1be2b975a96b3c739d002264df3da8a56086d29d2a1961f3a162",
+   "matches_manifest": true
+  },
+  {
+   "path": "mml_x/originals/MML vol 2(AR).doc.doc",
+   "role": "mml_original",
+   "bytes": 1302016,
+   "sha256": "ed1d8a7fc1f4088f8d0fb7db6855c195b205b251874a70f611ced5c3fdb494a2",
+   "manifest_sha256": "ed1d8a7fc1f4088f8d0fb7db6855c195b205b251874a70f611ced5c3fdb494a2",
+   "matches_manifest": true
+  },
+  {
+   "path": "mml_x/originals/MML vol 3.doc.doc",
+   "role": "mml_original",
+   "bytes": 2074112,
+   "sha256": "67d788b31e8e2b618bf98b18606b6263a8c497d1ce40c4f9d0a171c3ea1bcad8",
+   "manifest_sha256": "67d788b31e8e2b618bf98b18606b6263a8c497d1ce40c4f9d0a171c3ea1bcad8",
+   "matches_manifest": true
+  },
+  {
+   "path": "mml_x/originals/MML vol 3.pdf.pdf",
+   "role": "mml_original",
+   "bytes": 2409359,
+   "sha256": "dfce01c1267dc321acead765aae79764a1a2b45838ac0ba183f1dfec729c68e3",
+   "manifest_sha256": "dfce01c1267dc321acead765aae79764a1a2b45838ac0ba183f1dfec729c68e3",
+   "matches_manifest": true
+  },
+  {
+   "path": "mml_x/MML_Originals_Manifest.csv",
+   "role": "manifest_copy_in_transport_zip",
+   "bytes": 1715,
+   "sha256": "c6eab2c59c5ea2a8fc49f51731534ae75de915e01e47ad0230a18ed05d79ec2a",
+   "note": "differs from repo copy in bytes (line endings); same rows after CR stripping"
+  },
+  {
+   "path": "mml_zip/mml.zip",
+   "role": "transport_zip",
+   "bytes": 6287964,
+   "sha256": "9d82b9c5cb9ac56f41fd6ca74ed0a4704a5897fd26a239fdbafe0377e511f31c",
+   "receipt_sha256": "9d82b9c5cb9ac56f41fd6ca74ed0a4704a5897fd26a239fdbafe0377e511f31c"
+  },
+  {
+   "path": "repro1/MML 1.lines.txt",
+   "role": "mml_derived_text_USED",
+   "bytes": 306952,
+   "sha256": "d56c98499f14dd5517519d0240089a5284c3b84ffd93e43de07f6d9a83d8a6ec",
+   "pilot_manifest_sha256": "d56c98499f14dd5517519d0240089a5284c3b84ffd93e43de07f6d9a83d8a6ec",
+   "matches_pilot_manifest": true
+  },
+  {
+   "path": "repro1/MML 2.pdf.pages.txt",
+   "role": "mml_derived_text_USED",
+   "bytes": 1495781,
+   "sha256": "56aecc36a08800ed0e71130f615919ad833088ea55538e0d2c3dd9a3d03dd6a9",
+   "pilot_manifest_sha256": "56aecc36a08800ed0e71130f615919ad833088ea55538e0d2c3dd9a3d03dd6a9",
+   "matches_pilot_manifest": true
+  },
+  {
+   "path": "repro1/MML vol 2(AA).doc.lines.txt",
+   "role": "mml_derived_text_USED",
+   "bytes": 463978,
+   "sha256": "7168985023cdc6fa88ec32b2d40bf0c27bdc7cc7bba9888ddae4748723507e91",
+   "pilot_manifest_sha256": "7168985023cdc6fa88ec32b2d40bf0c27bdc7cc7bba9888ddae4748723507e91",
+   "matches_pilot_manifest": true
+  },
+  {
+   "path": "repro1/MML vol 2(AA).pdf.pages.txt",
+   "role": "mml_derived_text_USED",
+   "bytes": 475169,
+   "sha256": "f2acc0e64b4aebc6c732048af9809ab0b47fcaf2585b142eaaa80c7920d108d1",
+   "pilot_manifest_sha256": "f2acc0e64b4aebc6c732048af9809ab0b47fcaf2585b142eaaa80c7920d108d1",
+   "matches_pilot_manifest": true
+  },
+  {
+   "path": "repro1/MML vol 2(AR).doc-1.lines.txt",
+   "role": "mml_derived_text_USED",
+   "bytes": 690831,
+   "sha256": "e21396426157dbe6495176cf6410e7ee36b62038b016743f79df621966f88e76",
+   "pilot_manifest_sha256": "e21396426157dbe6495176cf6410e7ee36b62038b016743f79df621966f88e76",
+   "matches_pilot_manifest": true
+  },
+  {
+   "path": "repro1/MML vol 2(AR).doc.lines.txt",
+   "role": "mml_derived_text_USED",
+   "bytes": 644256,
+   "sha256": "278cea66b17c0c4cbc80d3f9b71665f1e860461fb9ae663cf4b02cc7179c9d29",
+   "pilot_manifest_sha256": "278cea66b17c0c4cbc80d3f9b71665f1e860461fb9ae663cf4b02cc7179c9d29",
+   "matches_pilot_manifest": true
+  },
+  {
+   "path": "repro1/MML vol 3.doc.lines.txt",
+   "role": "mml_derived_text_USED",
+   "bytes": 1267364,
+   "sha256": "2153c4306b46d29807d1f61a5fbc4b9647cf84c6f8cc4fd64a468fda71e600be",
+   "pilot_manifest_sha256": "2153c4306b46d29807d1f61a5fbc4b9647cf84c6f8cc4fd64a468fda71e600be",
+   "matches_pilot_manifest": true
+  },
+  {
+   "path": "repro1/MML vol 3.pdf.pdf.pages.txt",
+   "role": "mml_derived_text_USED",
+   "bytes": 1231845,
+   "sha256": "34d5fe2b4c3d2ae644731b14de3bb82278eb467592289e16992a11b72c67d41a",
+   "pilot_manifest_sha256": "34d5fe2b4c3d2ae644731b14de3bb82278eb467592289e16992a11b72c67d41a",
+   "matches_pilot_manifest": true
+  },
+  {
+   "path": "derived/mml/MML 1.lines.txt",
+   "role": "mml_derived_text_NOT_USED",
+   "bytes": 306233,
+   "sha256": "edea7ba62bd01759446849a903c78efba624eadfece2492e73e3f1fc551daa11",
+   "matches_pilot_manifest": false,
+   "note": "differs from PILOT-01 derived manifest; not used"
+  },
+  {
+   "path": "derived/mml/MML 2.pdf.pages.txt",
+   "role": "mml_derived_text_NOT_USED",
+   "bytes": 1495781,
+   "sha256": "56aecc36a08800ed0e71130f615919ad833088ea55538e0d2c3dd9a3d03dd6a9",
+   "matches_pilot_manifest": true,
+   "note": null
+  },
+  {
+   "path": "derived/mml/MML vol 2(AA).doc.lines.txt",
+   "role": "mml_derived_text_NOT_USED",
+   "bytes": 462904,
+   "sha256": "7d6dcf3edeacc105a2b1293d87f19d605ff3490c27de97dd9dc7c2ce78b3f7c0",
+   "matches_pilot_manifest": false,
+   "note": "differs from PILOT-01 derived manifest; not used"
+  },
+  {
+   "path": "derived/mml/MML vol 2(AA).pdf.pages.txt",
+   "role": "mml_derived_text_NOT_USED",
+   "bytes": 475169,
+   "sha256": "f2acc0e64b4aebc6c732048af9809ab0b47fcaf2585b142eaaa80c7920d108d1",
+   "matches_pilot_manifest": true,
+   "note": null
+  },
+  {
+   "path": "derived/mml/MML vol 2(AR).doc-1.lines.txt",
+   "role": "mml_derived_text_NOT_USED",
+   "bytes": 680418,
+   "sha256": "78397f01cbb2467580db845c8f18496f5da924acd5a81aa68b22c54bd15e3b35",
+   "matches_pilot_manifest": false,
+   "note": "differs from PILOT-01 derived manifest; not used"
+  },
+  {
+   "path": "derived/mml/MML vol 2(AR).doc.lines.txt",
+   "role": "mml_derived_text_NOT_USED",
+   "bytes": 633769,
+   "sha256": "8d75f83267d3eda3de0ddb062549340adc85697f97ee287bebbbfc3c5f24856a",
+   "matches_pilot_manifest": false,
+   "note": "differs from PILOT-01 derived manifest; not used"
+  },
+  {
+   "path": "derived/mml/MML vol 3.doc.lines.txt",
+   "role": "mml_derived_text_NOT_USED",
+   "bytes": 1259176,
+   "sha256": "27c10f91cdc752b70ecba87ccf11e4748929dff9c7d76d1038bef79acaa8bb79",
+   "matches_pilot_manifest": false,
+   "note": "differs from PILOT-01 derived manifest; not used"
+  },
+  {
+   "path": "derived/mml/MML vol 3.pdf.pdf.pages.txt",
+   "role": "mml_derived_text_NOT_USED",
+   "bytes": 1231845,
+   "sha256": "34d5fe2b4c3d2ae644731b14de3bb82278eb467592289e16992a11b72c67d41a",
+   "matches_pilot_manifest": true,
+   "note": null
+  },
+  {
+   "path": "ws-c/odt/docpdf/MML 1.pdf",
+   "role": "doc_rendered_to_pdf_by_LibreOffice_24.2.7.2 (render aid only)",
+   "bytes": 1060978,
+   "sha256": "397cb6bdd27d7e5e0d3edc6fab3f7a9ff12bfc19595fd6efc6f095d14b0788c9"
+  },
+  {
+   "path": "ws-c/odt/docpdf/MML vol 2(AA).doc.pdf",
+   "role": "doc_rendered_to_pdf_by_LibreOffice_24.2.7.2 (render aid only)",
+   "bytes": 1846328,
+   "sha256": "228725e4c6c295040a86fc29af39ceccd9d5ec0eb4fa6485135ae4e43636f21c"
+  },
+  {
+   "path": "ws-c/odt/docpdf/MML vol 2(AR).doc-1.pdf",
+   "role": "doc_rendered_to_pdf_by_LibreOffice_24.2.7.2 (render aid only)",
+   "bytes": 3153074,
+   "sha256": "4c4a69e4f96458f3708547c2d4018de9c1bde3a369f9328efd12661f6eb840b7"
+  },
+  {
+   "path": "ws-c/odt/docpdf/MML vol 2(AR).doc.pdf",
+   "role": "doc_rendered_to_pdf_by_LibreOffice_24.2.7.2 (render aid only)",
+   "bytes": 2487722,
+   "sha256": "4bc1bac2292dc5e5dfdf4d2c8d2f4113545a37739c2881e31519742650c277b4"
+  },
+  {
+   "path": "ws-c/odt/docpdf/MML vol 3.doc.pdf",
+   "role": "doc_rendered_to_pdf_by_LibreOffice_24.2.7.2 (render aid only)",
+   "bytes": 3514612,
+   "sha256": "77e2454271ed451fa4956e3c11270acc2d3f4430d9cff4283b13c824a1bd89c2"
+  },
+  {
+   "path": "derived/statutes/act-army-1950.txt",
+   "role": "india_code_compilation_text (comparison only)",
+   "bytes": 161192,
+   "sha256": "88a9f1dcf859a0158c0a526f8abd82350cd3caf5af13dd1b1485b70a8abd2428"
+  },
+  {
+   "path": "derived/statutes/rules-army-rules-1954.txt",
+   "role": "india_code_compilation_text (comparison only)",
+   "bytes": 374335,
+   "sha256": "94b464018d4c36fd62d1713bee6adbf48b4d711e04098125085c1da2904d5976"
+  },
+  {
+   "path": "derived/statutes/act-army-1950.json",
+   "role": "india_code_compilation_text (comparison only)",
+   "bytes": 1860,
+   "sha256": "044029581866e4bd2bc77bec481404f88252a99c5b47e019c87b1e768bc93c75"
+  },
+  {
+   "path": "derived/statutes/rules-army-rules-1954.json",
+   "role": "india_code_compilation_text (comparison only)",
+   "bytes": 2169,
+   "sha256": "3d333a6ce85974a33709c8dc69ddc0436f4acffe2ff5aa90d68992517201ca83"
+  },
+  {
+   "path": "ws-c/pcl.csv",
+   "role": "wsa_provision_change_log (git show origin/claude/ws-a-statutory:legal_knowledge/audit_work/WS-A-STATUTORY/provision_change_log.csv @ 74530be9)",
+   "bytes": 72787,
+   "sha256": "251cdde85aa9b5c53f86ba482c82e55678b241eac0acf71cf17f9a0082cd421d"
+  }
+ ]
+}
