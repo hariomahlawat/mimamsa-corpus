@@ -46,7 +46,7 @@ def main():
             raise RuntimeError("Incomplete page text for "+item["case_id"])
         if any(x["source_sha256"]!=item["source_sha256"] or
                hashlib.sha256(x["text"].encode()).hexdigest()!=x["text_sha256"] or
-               x["legal_holding_verified"] or x["jag_approved"] for x in page_recs):
+               x["judgment_holding_verified"] or x["jag_approved"] for x in page_recs):
             raise RuntimeError("Page text-source provenance or legal gate failed for "+item["case_id"])
     treatments=jsonl(BASE+"/judicial_treatment/v3.5/01_Seven_Pension_Case_Express_Citation_Checks.jsonl")
     if len(treatments)!=7 or sum(x["express_case_name_found_in_extracted_text"] for x in treatments)!=5:
