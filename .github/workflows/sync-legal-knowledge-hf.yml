@@ -7,6 +7,7 @@ on:
     paths:
       - "legal_knowledge/**"
       - "scripts/push_legal_knowledge.py"
+      - "scripts/reconcile_legal_sources.py"
       - ".github/workflows/sync-legal-knowledge-hf.yml"
   workflow_dispatch:
 
