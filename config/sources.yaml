@@ -1031,6 +1031,10 @@ sources:
     # ACQ-03 (PROPOSED 2026-11-22; NOT authorised for download). Separate approval scope from ACQ-01 (PR #8) and
     # ACQ-02 (PR #17). Pinned from WS-A acq03_pinned_candidates.csv (md5/bytes from read-only metadata).
     # OCR/FTS identities are locators only until page-image checks on the record copies.
+    # India Code watermarks PDFs when serving them (crawler/fetch.py): listing_md5/listing_bytes describe the stored
+    # ORIGINAL bitstream and are NOT expectations for the downloaded bytes. After an approved fetch, verify_batch records
+    # the served SHA-256; once reviewed it may be pinned as expected_served_sha256 so later re-fetches reject any change.
+    # Document identity is established by page-image checks on the record copy (as for ACQ-01's India Code items).
     phase: 6
     enabled: false
     priority: 3
@@ -1038,7 +1042,7 @@ sources:
     allowed_hosts: [indiacode.gov.in]
     require_https: true
     verify: true
-    discovery: "Fetched by address only; approval scope ACQ-03 (India Code)"
+    discovery: "Fetched by address only; approval scope ACQ-03 (India Code; served bytes watermarked by host)"
     documents:
       - doc_id: acq03-033-b5
         url: "https://indiacode.gov.in/server/api/core/bitstreams/3a17342b-6811-4e2c-98c8-fc4954bf5a53/content"
@@ -1047,8 +1051,9 @@ sources:
         year: 2008
         number: "ACQ03-033"
         issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
-        expected_md5: "c08af236bfd7c5bf79d25a858226d8f3"
-        expected_bytes: 46767577
+        listing_md5: "c08af236bfd7c5bf79d25a858226d8f3"
+        listing_bytes: 46767577
+        served_bytes_policy: HOST_WATERMARKS_PDF
         note: "ACQ-03 batch B5; identity expected: India Code subordinate legislation (issued 2008-09-17); closes GAP-11; OQ-A-08; file per metadata: ORIGINAL bundle; India Code item 29d5b8ff-f51d-4ad4-bccf-ad1ff110ec43 (AFT-Procedure-Rules-2008)"
       - doc_id: acq03-034-b5
         url: "https://indiacode.gov.in/server/api/core/bitstreams/5a416087-b3bd-4fa5-8fc8-e9b6768f2966/content"
@@ -1057,8 +1062,9 @@ sources:
         year: 2011
         number: "ACQ03-034"
         issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
-        expected_md5: "dae2291aa84a37ea271b896340739ec6"
-        expected_bytes: 163806
+        listing_md5: "dae2291aa84a37ea271b896340739ec6"
+        listing_bytes: 163806
+        served_bytes_policy: HOST_WATERMARKS_PDF
         note: "ACQ-03 batch B5; identity expected: India Code (issued 2011-07-29); closes GAP-11; OQ-A-08; file per metadata: ORIGINAL bundle; India Code item d80f5448-3d93-42ea-b826-8d2effafa977 (AFT Amendment Procedure Rules 2011)"
       - doc_id: acq03-035-b5
         url: "https://indiacode.gov.in/server/api/core/bitstreams/18a102cd-fbb9-49de-9e80-b0c553ff25dd/content"
@@ -1067,8 +1073,9 @@ sources:
         year: 2009
         number: "ACQ03-035"
         issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
-        expected_md5: "0fa7231285f2022db43a0150fb5817ea"
-        expected_bytes: 1441674
+        listing_md5: "0fa7231285f2022db43a0150fb5817ea"
+        listing_bytes: 1441674
+        served_bytes_policy: HOST_WATERMARKS_PDF
         note: "ACQ-03 batch B5; identity expected: India Code (issued 2009-05-11); closes GAP-11; OQ-A-08; file per metadata: ORIGINAL bundle; India Code item d76a878a-8672-4e58-9a4e-038595766bad (AFT Practice Rules-2009)"
   official_instruments:
     phase: 2

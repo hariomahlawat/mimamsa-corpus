@@ -2,7 +2,7 @@
 
 **What:** 39 files pinned in two disabled crawler sources, prepared from WS-A `acq03_pinned_candidates.csv` (commit 4930b181; copied here unchanged).
 - `archive_acq03`: 36 archive.org files (Gazette issues and Acts). md5 and bytes come from archive.org `/metadata` (`source=original` except where noted).
-- `official_instruments_acq03`: 3 India Code files (AFT rules). md5 and bytes come from the India Code ORIGINAL bundle.
+- `official_instruments_acq03`: 3 India Code files (AFT rules). India Code watermarks PDFs when serving them, so the ORIGINAL-bundle md5/size are kept only as `listing_md5`/`listing_bytes` (informational, never enforced). After an approved fetch the **served SHA-256** is recorded; identity is established by a page-image check of the record copy; once reviewed, the served SHA-256 may be pinned (`expected_served_sha256`) so any later change is rejected.
 - Total about 78.2 MB. HTTPS is required, the allow-list applies on every redirect hop, and blocked hosts are refused.
 
 | Batch | Files | Purpose (register rows closed) |
@@ -25,4 +25,4 @@
 2. A download run for `archive_acq03`, and separately for `official_instruments_acq03`, per `docs/acquisition/ACQUISITION_RUNBOOK.md` with `verify_batch.py --source <key>`.
 3. Keep or drop ACQ03-016.
 
-After a run: reject any file whose md5 or bytes differ, re-run page-image checks on the record copies, and keep every OCR/FTS identity as a locator until then.
+After a run: reject any archive.org file whose md5 or bytes differ, reject any India Code file that is not a PDF or that differs from a pinned served SHA-256, re-run page-image checks on the record copies, and keep every OCR/FTS identity as a locator until then.

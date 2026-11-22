@@ -227,7 +227,8 @@ def cfg():
 
 def test_exact_acq03_lists(cfg):
     for source, expected in ACQ03.items():
-        got = {d["doc_id"]: [d["url"], d["expected_md5"], int(d["expected_bytes"])] for d in cfg.source(source)["documents"]}
+        got = {d["doc_id"]: [d["url"], d.get("expected_md5") or d["listing_md5"], int(d.get("expected_bytes") or d["listing_bytes"])]
+               for d in cfg.source(source)["documents"]}
         assert got == expected, source
 
 
@@ -270,3 +271,11 @@ def test_india_code_source_cannot_reach_archive(cfg):
 
 def test_config_has_no_errors(cfg):
     assert check_config(cfg).errors == []
+
+
+def test_india_code_listing_values_are_not_strict_expectations(cfg):
+    for d in cfg.source("official_instruments_acq03")["documents"]:
+        assert "expected_md5" not in d and "expected_bytes" not in d, d["doc_id"]
+        assert d["served_bytes_policy"] == "HOST_WATERMARKS_PDF", d["doc_id"]
+    for d in cfg.source("archive_acq03")["documents"]:
+        assert d["expected_md5"] and int(d["expected_bytes"]) > 0, d["doc_id"]

@@ -6,7 +6,7 @@ Each batch is a **separate approval scope**. Run a batch only after the owner ha
 | --- | --- | --- | --- | --- |
 | ACQ-01 (B1, B2, B6) | PR #8 | `archive` (12), `official_instruments` (2) | 14 | 12 archive.org: md5 + bytes (in `note`). 2 India Code: URL + item identity only (download-specific bytes); SHA-256 recorded after the fetch |
 | ACQ-02 | PR #17 | `archive_acq02` | 16 files / 17 instruments | sha256 + md5 + bytes (`expected_*`) |
-| ACQ-03 | not yet configured (separate PR after approval) | – | 40 with URL (+4 with no online source) | md5 + bytes from metadata (WS-A `acq03_pinned_candidates.csv`) |
+| ACQ-03 | PR #23 | `archive_acq03` (36), `official_instruments_acq03` (3) | 39 | archive.org: md5 + bytes enforced. India Code: listing md5/size informational only (host watermark); served SHA-256 recorded, page-image identity check, optional `expected_served_sha256` pin |
 
 **Controls in force:**
 - allow-list per source, applied on every redirect hop;
