@@ -7,7 +7,9 @@ All rows are RESEARCH PROPOSALS. technical review is the highest state an agent 
 adjudication and JAG validation are separate states and are NOT_STARTED for every row.
 Page numbers are 1-based PDF pages of the copy whose SHA-256 is given. Paragraph numbers are as printed.
 """
-import csv, os
+import csv, os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import cycle2_data as C2D  # noqa: E402
 
 WS = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -121,14 +123,21 @@ H = [
  ('NAGA','','','NOT_REVIEWED_THIS_PASS','Constitution Bench AFSPA judgment; operative directions not re-read by WS-B in this pass.','','CURATED_PRESENT','V8-S15 users','Pending: official copy and full reading of conclusions.'),
 ]
 
+C.update(C2D.C_ADD); CASE.update(C2D.CASE_ADD); REND.update(C2D.REND_ADD)
+
 def holdings():
     hdr = ['row_id','spec_key','case53_id','judgment','decision_date','copy_url','copy_sha256','copy_role','carrier_provenance',
            'wording_read_from','page_render_sha256','pdf_page','para_pinpoint','passage_type','ws_b_paraphrase','anchor_quote_verbatim',
-           'comparison_with_curated','affected_kb_ids','uncertainty','technical_review_state','legal_advisor_state','jag_validation_state']
+           'comparison_with_curated','affected_kb_ids','uncertainty','technical_review_state','legal_advisor_state','jag_validation_state','cycle']
     rows = []
-    for i, (k, pg, para, typ, para_, q, cmp_, kb, unc) in enumerate(H, 1):
+    for i, ((k, pg, para, typ, para_, q, cmp_, kb, unc), cyc) in enumerate([(h, 'C1') for h in H] + [(h, 'C2') for h in C2D.H2], 1):
         url, sha, role = C[k]; cid, name, d = CASE[k]
-        rsha = REND.get((k, pg.split('-')[-1] if pg else ''), '') or REND.get((k, pg), '')
+        rsha = ''
+        if pg:
+            a_, _, b_ = pg.partition('-')
+            for pp in ([str(x) for x in range(int(a_), int(b_) + 1)] if b_ and a_.isdigit() and b_.isdigit() else [pg]):
+                if (k, pp) in REND:
+                    rsha = REND[(k, pp)]; break
         prov = 'ISSUING_AUTHORITY' if role == 'OFFICIAL_COURT_COPY' else 'THIRD_PARTY_ARCHIVAL_FACSIMILE'
         read = 'PAGE_IMAGE' if rsha else ('PDF_TEXT_LAYER' if pg else 'NOT_READ')
         if role == 'OFFICIAL_COURT_COPY':
@@ -138,7 +147,7 @@ def holdings():
         else:
             tstate = 'NOT_REVIEWED'
         rows.append([f'WSB-H-{i:03d}', k, cid, name, d, url, sha, role, prov, read, rsha, pg, para, typ, para_, q, cmp_, kb, unc,
-                     tstate, 'NOT_STARTED', 'NOT_STARTED'])
+                     tstate, 'NOT_STARTED', 'NOT_STARTED', cyc])
     return hdr, rows
 
 # ------------------------------------------------------------------ statutes cited + effective dates
@@ -172,11 +181,11 @@ S = [
 def statutes():
     hdr = ['row_id','spec_key','case53_id','judgment','decision_date','provision_cited','version_applied_by_court','publication_date',
            'commencement_date','effective_date','effective_date_status','applied_at_judgment_date','later_change_or_successor','flag',
-           'evidence_pointer','technical_review_state','legal_advisor_state','jag_validation_state']
+           'evidence_pointer','technical_review_state','legal_advisor_state','jag_validation_state','cycle']
     rows = []
     for i, s in enumerate(S, 1):
         k = s[0]; cid, name, d = CASE[k]
-        rows.append([f'WSB-S-{i:03d}', k, cid, name, d] + list(s[1:]) + ['DATES_NOT_RESOLVED_BY_WS_B', 'NOT_STARTED', 'NOT_STARTED'])
+        rows.append([f'WSB-S-{i:03d}', k, cid, name, d] + list(s[1:]) + ['DATES_NOT_RESOLVED_BY_WS_B', 'NOT_STARTED', 'NOT_STARTED', 'C1'])
     return hdr, rows
 
 # ------------------------------------------------------------------ subsequent treatment
@@ -204,9 +213,9 @@ T = [
 def treatment():
     hdr = ['row_id','earlier_spec_keys','earlier_case53_ids','proposition','later_judgment','later_copy_url','later_copy_sha256',
            'later_copy_role','pdf_page','para','treatment','scope','affected_kb_ids','uncertainty','exhaustiveness',
-           'technical_review_state','legal_advisor_state','jag_validation_state']
+           'technical_review_state','legal_advisor_state','jag_validation_state','cycle']
     rows = []
-    for i, t in enumerate(T, 1):
+    for i, (t, cyc) in enumerate([(x, 'C1') for x in T] + [(x, 'C2') for x in C2D.T2], 1):
         later = t[3]
         if later in C:
             url, sha, role = C[later]; lname = CASE[later][1]
@@ -214,7 +223,7 @@ def treatment():
             url, sha, role, lname = '', '', 'NOT_HELD', later
         rows.append([f'WSB-T-{i:03d}', t[0], t[1], t[2], lname, url, sha, role, t[4], t[5], t[6], t[7], t[8], t[9],
                      'NOT_EXHAUSTIVE: absence of other treatment rows is NOT proof of no treatment',
-                     ('PASSAGE_LOCATED_OFFICIAL_COPY' if role == 'OFFICIAL_COURT_COPY' else 'NOT_VERIFIED_ON_OFFICIAL_COPY'), 'NOT_STARTED', 'NOT_STARTED'])
+                     ('PASSAGE_LOCATED_OFFICIAL_COPY' if role == 'OFFICIAL_COURT_COPY' else 'NOT_VERIFIED_ON_OFFICIAL_COPY'), 'NOT_STARTED', 'NOT_STARTED', cyc])
     return hdr, rows
 
 # ------------------------------------------------------------------ adverse / conflict queue
@@ -239,8 +248,10 @@ A = [
 
 def adverse():
     hdr = ['item_id','severity','source_spec','affected_case53_ids','affected_kb_ids','issue','evidence_pointer','question_for_reviewer',
-           'state','technical_review_state','legal_advisor_state','jag_validation_state']
-    return hdr, [list(a) + ['OPEN', 'TECHNICAL_REVIEW_COMPLETED' if a[0] in ('A-05','A-06','A-10','A-11','A-12','A-15') else 'PROPOSAL', 'NOT_STARTED', 'NOT_STARTED'] for a in A]
+           'state','technical_review_state','legal_advisor_state','jag_validation_state','cycle']
+    done = ('A-05','A-06','A-10','A-11','A-12','A-15','A-C2-05','A-C2-07')
+    return hdr, [list(a) + ['OPEN', 'TECHNICAL_REVIEW_COMPLETED' if a[0] in done else 'PROPOSAL', 'NOT_STARTED', 'NOT_STARTED', cyc]
+                 for a, cyc in [(x, 'C1') for x in A] + [(x, 'C2') for x in C2D.A2]]
 
 # ------------------------------------------------------------------ pending source queue (no downloads made)
 P = [
@@ -270,8 +281,8 @@ P = [
 
 def pending():
     hdr = ['queue_id','spec_key','case53_id','court','case_number','decision_date','official_url_or_holder_if_known','priority','note',
-           'action','downloaded_by_ws_b']
-    return hdr, [list(p) + ['ACQUISITION_REQUEST_ONLY', 'NO'] for p in P]
+           'action','downloaded_by_ws_b','cycle']
+    return hdr, [list(p) + ['ACQUISITION_REQUEST_ONLY', 'NO', cyc] for p, cyc in [(x, 'C1') for x in P] + [(x, 'C2') for x in C2D.P2]]
 
 # ------------------------------------------------------------------ open questions
 Q = [
@@ -292,8 +303,8 @@ Q = [
 ]
 
 def questions():
-    hdr = ['question_id', 'question', 'owner', 'state']
-    return hdr, [list(q) + ['OPEN'] for q in Q]
+    hdr = ['question_id', 'question', 'owner', 'state', 'cycle']
+    return hdr, [list(q) + ['OPEN', cyc] for q, cyc in [(x, 'C1') for x in Q] + [(x, 'C2') for x in C2D.Q2]]
 
 def write(name, hr):
     hdr, rows = hr
@@ -311,3 +322,32 @@ if __name__ == '__main__':
     write('adverse_conflict_queue.csv', adverse())
     write('pending_source_queue.csv', pending())
     write('open_questions.csv', questions())
+
+
+# ------------------------------------------------------------------ cycle 2: case-to-case relations (directional vs reciprocal)
+def relations():
+    import json
+    root = os.path.abspath(os.path.join(WS, '..', '..', '..'))
+    cases = [json.loads(l) for l in open(os.path.join(root, 'legal_knowledge/curated_originals/case_law/v0.9/cases_53.jsonl'), encoding='utf-8')]
+    rel = {c['id']: set(c.get('related_cases') or []) for c in cases}
+    rows = []
+    for a in sorted(rel):
+        for b in sorted(rel[a]):
+            recip = a in rel.get(b, set())
+            note = ''
+            if (a, b) == ('DCLR-SC-2020-002', 'DCLR-SC-1982-001'):
+                note = 'Official Virendra cites PPS Bedi (PDF pp.11, 32): directional "cites" supported (OQ-D-009)'
+            rows.append(['CURATED_related_cases', a, b, 'RECIPROCAL' if recip else 'ONE_WAY', 'related (curated)', note, 'C2'])
+    # citation edges observed in copies read by WS-B (later judgment -> earlier)
+    for t, cyc in [(x, 'C1') for x in T] + [(x, 'C2') for x in C2D.T2]:
+        later = t[3]
+        if later in ('—', ''):
+            continue
+        for e in [x for x in t[1].split(';') if x]:
+            rows.append(['WS_B_OBSERVED_IN_COPY', CASE.get(later, ('', later, ''))[0] or later, e, 'DIRECTIONAL',
+                         t[6], f'{later} p.{t[4]} para {t[5]}; copy role {C.get(later, ("", "", "NOT_HELD"))[2]}', cyc])
+    hdr = ['edge_source', 'from_id', 'to_id', 'direction', 'relation_or_treatment', 'evidence', 'cycle']
+    return hdr, rows
+
+if __name__ == '__main__':
+    write('case_relations.csv', relations())

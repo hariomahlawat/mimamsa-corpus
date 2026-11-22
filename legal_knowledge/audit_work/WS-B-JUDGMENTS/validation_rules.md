@@ -93,3 +93,9 @@ Editorial headnotes and commercial-database summaries are never evidence.
 - A judgment that is needed but absent becomes a row in `pending_source_queue.csv`.
 - Allowed: reading bytes already held in the scratchpad, and read-only lookups.
 - Not allowed: downloads into the corpus, CAPTCHA bypass, the AFT bare-IP route, and using a commercial database as evidence.
+
+## V12. Cited-precedent allow-list (cycle 2)
+- Run `tools/cycle2_filter_audit.py` on every delivery.
+- Every case in `allow_list_proposed.csv` must be present in the intake, kept regardless of keywords, or explained as `ABSENT` with a stated reason (unreported order, coverage gap, or not in the bucket).
+- A removal in `excluded_judgments.jsonl` of a case that the KB, cases_53 or the 87-code register relies on is a defect.
+- The intern's AWS SC source mirrors e-SCR reported judgments only. Orders and unreported judgments need another official route.

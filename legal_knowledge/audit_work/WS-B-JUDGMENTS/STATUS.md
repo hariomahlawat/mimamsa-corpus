@@ -1,5 +1,13 @@
 # WS-B STATUS (issue #12)
 
+## Cycle 2 (coordinator CYCLE 2 START; base 68290bae)
+- Done: tasks 1-4 first pass (see README 'Cycle 2'). New files: intern_filter_audit.csv, allow_list_proposed.csv, intern_invalidation_false_positives.csv, case_relations.csv; new tools cycle2_filter_audit.py, cycle2_data.py.
+- CC-09: Sonu identified as (2017) 8 SCC 570 from official Arjun (fn34, para 51); official copy not held -> PQ-C2-01. CC-11: all 13 KB records mapped to a case spec (Kuldeep - mirror-checked; Sukhdev, Nitisha MA 2023 - intern excluded log leads; Nalin Bhatia, Pooja Pal, 2023 INSC 985, 2026 INSC 281 - no copy, queued).
+- For independent coordinator check: A-C2-01 (Ram Avtar URL = S P Rathore judgment), A-C2-03 (Shafhi identity vs Arjun), A-C2-04 (Nitisha MA removed by filter), A-C2-06 (PPS Bedi r.22/23 for officers, r.25 omitted 1993), Jasbir p.32 EEVFAM 'no absolute immunity' (H-048).
+- Read-only network lookups this cycle: 2 SC office-report HTML pages + 2 empty directory probes on api.sci.gov.in (>=3 s apart, descriptive UA). No PDFs downloaded.
+- Next: read HF-held Ram Sarup copy (A-C2-02); official copies for P0 mirror-only cases; review HOLD_FOR_REVIEW sample.
+
+
 Updated: 2026-11-22, at commit time.
 
 ## Done

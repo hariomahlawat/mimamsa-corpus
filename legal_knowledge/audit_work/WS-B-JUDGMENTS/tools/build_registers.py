@@ -22,7 +22,7 @@ WS = os.path.dirname(HERE)
 REPO = os.path.abspath(os.path.join(WS, '..', '..', '..'))
 sys.path.insert(0, HERE)
 from case_specs import SPECS            # noqa: E402
-from reviewed_matches import MATCHES    # noqa: E402
+from reviewed_matches import MATCHES, C2    # noqa: E402
 
 CASES53 = os.path.join(REPO, 'legal_knowledge/curated_originals/case_law/v0.9/cases_53.jsonl')
 KB658 = os.path.join(REPO, 'legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.jsonl')
@@ -71,6 +71,8 @@ def lexical(text):
 
 LINK_NOTES = {
     ('NITISHA', 'ADM-JD-04'): 'WRONG-DOCUMENT RISK: ADM-JD-04 digests MA 1913/2022 (Nitisha implementation application), not the 25 Mar 2021 judgment; paras 4-8, 19-22 unverified (OQ-D-004).',
+    ('NITISHA', 'ADM-017'): 'WRONG-DOCUMENT RISK: ADM-017 cites the 3 Nov 2023 MA 1913/2022 judgment (spec NITISHA_MA), not the 2021 judgment.',
+    ('NITISHA', 'ADM-SC-11'): 'WRONG-DOCUMENT RISK: ADM-SC-11 cites the 3 Nov 2023 MA 1913/2022 judgment (spec NITISHA_MA), not the 2021 judgment.',
     ('GIRISH_MAIN', 'PEN-J-06'): 'AMBIGUOUS: PEN-J-06 is the 12 Oct 2026 clarification (2026 INSC 1113), not the 12 Feb 2026 judgment.',
     ('GIRISH_CLAR', 'PEN-J-05'): 'AMBIGUOUS: PEN-J-05 is the 12 Feb 2026 judgment (2026 INSC 149), not the clarification.',
 }
@@ -266,18 +268,22 @@ def main():
             state = 'IDENTITY_LEAD_INTERN_METADATA_ONLY'
         elif hc:
             state = 'THIRD_PARTY_COPY_ONLY'
+        elif 'conflict A-C2' in C2.get(key, '') and not ir and not hc:
+            state = 'CITATION_METADATA_CONFLICTS_WITH_OFFICIAL_RECORD_NO_COPY'
+        elif ('(official)' in C2.get(key, '') or C2.get(key, '').startswith('OR-')):
+            state = 'CITATION_METADATA_CORROBORATED_BY_OFFICIAL_RECORD_NO_COPY'
         else:
             state = 'UNRESOLVED_NO_COPY_IN_HAND'
         id_rows.append([key, cid, label, c.get('title', ''), c.get('court', '') or ('High Court' if 'HC' in label else 'Supreme Court of India'),
                         cdate, c.get('case_number', ''), c.get('reporter_citation', ''), c.get('primary_source_url', ''),
                         date, nc, j(spec_codes), j(m['doc_ids']), isha, idate, icase, inc, irep, ijudges, iparties[:300],
-                        m['method'], hurl, hsha, hprov, reg_urls, reg_sha, ex_note, state, j(disc), m.get('note', '')])
+                        m['method'], hurl, hsha, hprov, reg_urls, reg_sha, ex_note, state, j(disc), m.get('note', ''), C2.get(key, '')])
     id_hdr = ['spec_key', 'case53_id', 'ws_b_label', 'curated_title', 'curated_court', 'curated_decision_date', 'curated_case_number',
               'curated_reporter_citation', 'curated_primary_source_url', 'expected_date_spec', 'expected_neutral_citation_spec',
               'kb_source_codes', 'intern_doc_ids', 'intern_sha256', 'intern_decision_date', 'intern_case_numbers',
               'intern_neutral_citation', 'intern_reported_citations', 'intern_judges', 'intern_parties', 'match_method',
               'held_copy_url', 'held_copy_sha256', 'held_copy_carrier_provenance', 'register_official_url', 'register_official_sha256',
-              'intern_excluded_log_hits', 'identity_state', 'discrepancies', 'note']
+              'intern_excluded_log_hits', 'identity_state', 'discrepancies', 'note', 'cycle2_identity_evidence']
     write_csv(os.path.join(WS, 'identity_resolution.csv'), id_hdr, id_rows)
 
     # ---------- 3. crosswalk 53 cases / specs <-> KB 658
