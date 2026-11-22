@@ -14,6 +14,9 @@ on:
       - "scripts/archive_nc_isaac_v34.py"
       - "scripts/verify_nc_isaac_paras_v34.py"
       - "scripts/validate_legal_v34.py"
+      - "scripts/extract_p0_fulltext_v35.py"
+      - "scripts/check_isaac_express_citations_v35.py"
+      - "scripts/probe_gazette_1954_v35.py"
       - "scripts/forensic_p0_source_v32.py"
       - "scripts/archive_precedent_treatment_v32.py"
       - "scripts/archive_gazette_v33.py"
@@ -108,6 +111,12 @@ jobs:
         run: python scripts/verify_nc_isaac_paras_v34.py
       - name: Validate all v3.4 original-source integrity and enforce JAG non-release invariants
         run: python scripts/validate_legal_v34.py
+      - name: Extract all ten P0 archived source opinions page by page with provenance
+        run: python scripts/extract_p0_fulltext_v35.py
+      - name: Identify direct citations of seven pension cases in 2026 official NC Isaac judgment
+        run: python scripts/check_isaac_express_citations_v35.py
+      - name: Probe authoritative Gazette archive for original 1954 Army Rules notice
+        run: python scripts/probe_gazette_1954_v35.py
       - name: Verify existing original corpus PDFs for Bedi and Ranjit Thakur with SHA-256
         run: python scripts/verify_sc_source_matches_v29.py
       - name: Verify checksum and reconstruct original MML archive
