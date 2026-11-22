@@ -10,40 +10,43 @@ Inputs (SHA-256): `kb` 9a8f0d193065…; `version_register` b434a0377f83…; `wsa
 | --- | --- |
 | records_citing_aa_or_ar_provisions | 282 |
 | record_provision_citations | 1061 |
-| citations_with_registered_versions | 325 |
-| edges | 471 |
-| edges_with_stated_effective_date | 220 |
-| edges_effective_date_unstated_flagged | 251 |
-| provisions_with_versions | 76 |
-| by_version_source | {'ARMY-RULES-CHAIN-01/statutory_version_register_seed.csv': 75, 'WS-A-STATUTORY/army_act_amendment_chain.csv': 119, 'WS-A-STATUTORY/provision_change_log.csv': 277} |
+| citations_with_registered_versions | 331 |
+| edges | 380 |
+| edges_with_stated_effective_date | 177 |
+| edges_effective_date_unstated_flagged | 203 |
+| provisions_with_versions | 89 |
+| amendment_events | 119 |
+| events_grouping_duplicate_evidence | 25 |
+| edges_zero_length_or_reversed | 0 |
+| by_version_source | {'ARMY-RULES-CHAIN-01/statutory_version_register_seed.csv': 26, 'WS-A-STATUTORY/army_act_amendment_chain.csv': 119, 'WS-A-STATUTORY/provision_change_log.csv': 186, 'WS-A-STATUTORY/provision_change_log.csv;ARMY-RULES-CHAIN-01/statutory_version_register_seed.csv': 49} |
 | determination_flags | {'DETERMINATION_CONFLICTING': 26, 'DETERMINATION_OPEN': 29, 'DETERMINATION_PROPOSAL': 20} |
 
 ## Provisions with the most candidate-version edges
 
 | Provision | Edges |
 | --- | --- |
-| r.22 | 58 |
-| r.177 | 54 |
-| r.13 | 30 |
-| r.14 | 30 |
+| r.22 | 29 |
 | r.23 | 26 |
 | s.70 | 23 |
 | r.179 | 22 |
+| r.13 | 20 |
+| r.14 | 20 |
 | s.3 | 20 |
 | r.182 | 19 |
-| r.184 | 18 |
+| r.177 | 18 |
 | s.122 | 13 |
 | s.137 | 12 |
 | r.26 | 11 |
 | s.123 | 10 |
 | s.80 | 10 |
 | s.81 | 10 |
+| r.184 | 9 |
 | r.33 | 9 |
 | r.17 | 8 |
 | r.36 | 7 |
 | s.135 | 7 |
 | s.85 | 7 |
 | r.15 | 6 |
+| r.135 | 5 |
 | r.115 | 4 |
 | r.134 | 4 |
-| r.15A | 4 |

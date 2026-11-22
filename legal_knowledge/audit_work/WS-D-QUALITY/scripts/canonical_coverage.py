@@ -15,7 +15,9 @@ Three SEPARATE measures per KB record (denominator 658), never blended into one 
                        reported as INFERRED.
   source_searchable  ALL / PARTLY / NONE / NOT_CHECKED / NOT_APPLICABLE (nothing identified). Every identified
                      source exists in a searchable corpus: DCLR id in cases_53; doc_id in crawler data/meta; and,
-                     where an Act section is cited, the section file exists.
+                     where an Act section is cited (in plain text OR in a code locator such as
+                     {'source_id': 'SRC-AA', 'locator': 'ss 79-82'}), the section file exists; a missing section file
+                     makes that source not searchable.
 Quality flags are reported alongside and are not gates inside the measures: NO_PINPOINT, PLACEHOLDER,
 STRUCTURAL, AMBIGUOUS_LOCATOR, CASE_NAME_WITHOUT_CODE, UNANCHORED_LOCATOR, INFERRED_IDENTITY,
 IDENTITY_KNOWN_TARGET_ABSENT. ANCHORED_FULL = citation_present AND identified ALL AND searchable ALL AND no flag.
@@ -72,6 +74,37 @@ def rows(p):
 
 def name_doc(name):
     return next((d for rx, d in NAME_DOC if re.match(rx, name.strip())), None)
+
+
+# ---- coded-record locators (review fix PR #25 #3) -------------------------------------------------------
+# Locators written with a code are bound to THAT code's target: structured {'source_id': X, 'locator': L},
+# bracket [X: L], V-series pipe 'X|L', leading digest 'X paras ...' (case paragraphs, no statute sections).
+# Plain text outside these constructs is parsed with the shared WS-D parser; a statute whose corpus document
+# equals a code target merges its locators into that code item, otherwise it becomes its own item.
+STRUCT = re.compile(r"\{'source_id':\s*'([^']+)'(?:,\s*'locator':\s*'([^']*)')?\}")
+BRACKET = re.compile(r"\[([A-Z][A-Z0-9_\-]{1,20})(?::\s*([^\]]*))?\]")
+VPIPE = re.compile(r"\b(V\d-S\d+)\|([^|;]*)")
+LEADING = re.compile(r"^\s*([A-Z][A-Z_]{2,})\s+((?:paras?|discussion|Judgment|judgment)[^;]*)")
+
+
+def code_locators(ref):
+    """({code: [locator strings]}, remaining plain text) for one coded record's references field."""
+    locs = collections.defaultdict(list)
+    spans = []
+    for rx in (STRUCT, BRACKET, VPIPE, LEADING):
+        for m in rx.finditer(ref):
+            if any(m.start() < e and st < m.end() for st, e in spans):
+                continue
+            if m.group(1) == "VERIFY":
+                continue
+            spans.append((m.start(), m.end()))
+            if m.group(2) and rx is not LEADING:
+                locs[m.group(1)].append(m.group(2))
+    rest, pos = [], 0
+    for st, e in sorted(spans):
+        rest.append(ref[pos:st]); pos = e
+    rest.append(ref[pos:])
+    return locs, " ".join(rest)
 
 
 def state(flags):
@@ -144,9 +177,42 @@ def build(corpus_ref):
                     items.append({"kind": "statute", "ref": a["token"], "identified": doc is not None, "inferred": False,
                                   "target": doc or "", "sections": a["numbers"] if doc else []})
         else:
-            for n in filter(None, w["other_statutes_plain"].split(";")):
+            ref = str(rec["references"])
+            locs, rest = code_locators(ref)
+            by_target = {}
+            for i in items:
+                if i["kind"] == "code" and i["target"]:
+                    by_target.setdefault(i["target"], i)
+                kindhint = "Act (code target)" if i["target"].startswith("act-") else "Rules (code target)" if i["target"].startswith("rules-") else ""
+                if not kindhint:
+                    continue
+                for L in locs.get(i["ref"], []):
+                    for e in cov.PLAIN.instrument_locators(L, (i["ref"], kindhint)):
+                        if e["token"] != i["ref"] and name_doc(e["token"]) not in (None, i["target"]):
+                            continue  # a locator naming another instrument is handled with the plain text below
+                        if e["ambiguous"]:
+                            flags.add("AMBIGUOUS_LOCATOR")
+                        if i["target"].startswith("act-"):
+                            i["sections"] += [n for n in e["sections"] if n not in i["sections"]]
+            seen_names = set()
+            for e in cov.PLAIN.instrument_locators(rest):
+                doc = name_doc(e["token"])
+                seen_names.add(e["token"])
+                if e["ambiguous"]:
+                    flags.add("AMBIGUOUS_LOCATOR")
+                if doc and doc in by_target:
+                    tgt = by_target[doc]
+                    if doc.startswith("act-"):
+                        tgt["sections"] += [n for n in e["sections"] if n not in tgt["sections"]]
+                    continue
+                if doc is None and KNOWN_NO_TARGET.match(e["token"]):
+                    flags.add("IDENTITY_KNOWN_TARGET_ABSENT")
+                items.append({"kind": "statute", "ref": e["token"], "identified": doc is not None, "inferred": False,
+                              "target": doc or "", "sections": list(e["sections"]) if doc and doc.startswith("act-") else []})
+            present_docs = {i["target"] for i in items if i["target"]}
+            for n in filter(None, w["other_statutes_plain"].split(";")):  # WS-C names the parser did not see: keep, never drop
                 doc = name_doc(n)
-                if doc and doc in code_targets:
+                if (doc and doc in present_docs) or n in seen_names or any(n == i["ref"] for i in items):
                     continue
                 if doc is None and KNOWN_NO_TARGET.match(n):
                     flags.add("IDENTITY_KNOWN_TARGET_ABSENT")

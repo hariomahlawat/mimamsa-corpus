@@ -54,13 +54,13 @@
   },
   "source_identified": {
    "ALL": 396,
-   "NONE": 109,
+   "NONE": 108,
    "NOT_APPLICABLE": 77,
-   "PARTLY": 76
+   "PARTLY": 77
   },
   "source_searchable": {
-   "ALL": 472,
-   "NOT_APPLICABLE": 186
+   "ALL": 473,
+   "NOT_APPLICABLE": 185
   },
   "anchored_full": {
    "NO": 296,
@@ -80,7 +80,7 @@
    "CODED": {
     "records": 389,
     "identified_ALL": 236,
-    "searchable_ALL": 296,
+    "searchable_ALL": 297,
     "anchored_full": 207
    },
    "PLAINTEXT": {
@@ -91,10 +91,10 @@
    }
   },
   "items": {
-   "total": 981,
-   "identified": 716,
+   "total": 983,
+   "identified": 718,
    "inferred": 78,
-   "searchable": 716
+   "searchable": 718
   },
   "records_with_citation": 581
  }

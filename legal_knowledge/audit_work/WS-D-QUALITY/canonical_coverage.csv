@@ -1,8 +1,8 @@
 record_id,module,family,citation_present,citation_kinds,n_items,source_identified,n_identified,n_inferred,source_searchable,n_searchable,quality_flags,anchored_full,items
-KB-001,M01,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:SRC-AA=>act-army-1950[id] | code:SRC-ISO[not-id]
-KB-002,M01,CODED,YES,code;statute,3,PARTLY,2,0,ALL,2,IDENTITY_KNOWN_TARGET_ABSENT,NO,code:SRC-AA=>act-army-1950[id] | code:SRC-AR=>rules-army-rules-1954[id] | statute:Constitution[not-id]
-KB-003,M02,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AA=>act-army-1950[id] | code:SRC-AR=>rules-army-rules-1954[id]
-KB-004,M02,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AA=>act-army-1950[id]
+KB-001,M01,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,"code:SRC-AA=>act-army-1950[id]#s2,s3 | code:SRC-ISO[not-id]"
+KB-002,M01,CODED,YES,code;statute,3,PARTLY,2,0,ALL,2,IDENTITY_KNOWN_TARGET_ABSENT,NO,code:SRC-AA=>act-army-1950[id]#s191 | code:SRC-AR=>rules-army-rules-1954[id] | statute:Constitution[not-id]
+KB-003,M02,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:SRC-AA=>act-army-1950[id]#s79,s80,s81,s82 | code:SRC-AR=>rules-army-rules-1954[id]"
+KB-004,M02,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:SRC-AA=>act-army-1950[id]#s80,s81,s82"
 KB-005,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AR=>rules-army-rules-1954[id] | code:SRC-VIRENDRA=>DCLR-SC-2020-002[id]
 KB-006,M03,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AR=>rules-army-rules-1954[id]
 KB-007,M03,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AR=>rules-army-rules-1954[id]
@@ -11,29 +11,29 @@ KB-009,M04,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AR=>rules-army-rules-195
 KB-010,M04,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AR=>rules-army-rules-1954[id]
 KB-011,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AR=>rules-army-rules-1954[id] | code:SRC-VIRENDRA=>DCLR-SC-2020-002[id]
 KB-012,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AR=>rules-army-rules-1954[id] | code:SRC-VIRENDRA=>DCLR-SC-2020-002[id]
-KB-013,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AA=>act-army-1950[id] | code:SRC-AR=>rules-army-rules-1954[id]
+KB-013,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AA=>act-army-1950[id]#s106 | code:SRC-AR=>rules-army-rules-1954[id]
 KB-014,M04,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AR=>rules-army-rules-1954[id]
-KB-015,M05,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AA=>act-army-1950[id] | code:SRC-AR=>rules-army-rules-1954[id]
-KB-016,M05,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AA=>act-army-1950[id] | code:SRC-RANJIT=>DCLR-SC-1987-R01[id]
-KB-017,M05,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AA=>act-army-1950[id] | code:SRC-AFT=>act-armed-forces-tribunal-2007[id]
-KB-018,M06,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AA=>act-army-1950[id] | code:SRC-AR=>rules-army-rules-1954[id]
-KB-019,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AA=>act-army-1950[id]
-KB-020,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AA=>act-army-1950[id]
+KB-015,M05,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:SRC-AA=>act-army-1950[id]#s108,s109,s110,s111,s112,s113,s114,s115,s116,s117,s118,s119,s120 | code:SRC-AR=>rules-army-rules-1954[id]"
+KB-016,M05,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AA=>act-army-1950[id]#s130 | code:SRC-RANJIT=>DCLR-SC-1987-R01[id]
+KB-017,M05,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:SRC-AA=>act-army-1950[id]#s164,s165 | code:SRC-AFT=>act-armed-forces-tribunal-2007[id]#s14,s15,s21,s22"
+KB-018,M06,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:SRC-AA=>act-army-1950[id]#s18,s19,s20,s21,s22 | code:SRC-AR=>rules-army-rules-1954[id]"
+KB-019,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:SRC-AA=>act-army-1950[id]#s69,s70"
+KB-020,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:SRC-AA=>act-army-1950[id]#s125,s126"
 KB-021,M09,CODED,YES,code;statute,3,NONE,0,0,NOT_APPLICABLE,0,IDENTITY_KNOWN_TARGET_ABSENT,NO,code:SRC-ISO[not-id] | code:SRC-ISOR[not-id] | statute:ISO Act[not-id]
-KB-022,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AFT=>act-armed-forces-tribunal-2007[id]
-KB-023,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AFT=>act-armed-forces-tribunal-2007[id]
-KB-024,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AFT=>act-armed-forces-tribunal-2007[id]
-KB-025,M10,CODED,YES,code;statute,4,PARTLY,2,0,ALL,2,IDENTITY_KNOWN_TARGET_ABSENT,NO,code:SRC-AFT=>act-armed-forces-tribunal-2007[id] | code:SRC-PARASH=>DCLR-SC-2023-009[id] | statute:Art 226[not-id] | statute:Constitution[not-id]
+KB-022,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:SRC-AFT=>act-armed-forces-tribunal-2007[id]#s3,s14,s15"
+KB-023,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AFT=>act-armed-forces-tribunal-2007[id]#s21
+KB-024,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AFT=>act-armed-forces-tribunal-2007[id]#s22
+KB-025,M10,CODED,YES,code;statute,4,PARTLY,2,0,ALL,2,IDENTITY_KNOWN_TARGET_ABSENT,NO,"code:SRC-AFT=>act-armed-forces-tribunal-2007[id]#s30,s31,s32 | code:SRC-PARASH=>DCLR-SC-2023-009[id] | statute:Constitution[not-id] | statute:Art 226[not-id]"
 KB-026,M11,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AR=>rules-army-rules-1954[id] | code:SRC-VIRENDRA=>DCLR-SC-2020-002[id]
 KB-027,M11,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-RANJIT=>DCLR-SC-1987-R01[id]
-KB-028,M11,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AFT=>act-armed-forces-tribunal-2007[id] | code:SRC-PARASH=>DCLR-SC-2023-009[id]
+KB-028,M11,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:SRC-AFT=>act-armed-forces-tribunal-2007[id]#s30,s31,s32 | code:SRC-PARASH=>DCLR-SC-2023-009[id]"
 KB-029,M12,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AR=>rules-army-rules-1954[id]
-KB-030,M12,CODED,YES,code,3,ALL,3,0,ALL,3,,YES,code:SRC-AA=>act-army-1950[id] | code:SRC-AFT=>act-armed-forces-tribunal-2007[id] | code:SRC-AR=>rules-army-rules-1954[id]
-COI-001,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AA=>act-army-1950[id] | code:SRC-AR=>rules-army-rules-1954[id]
+KB-030,M12,CODED,YES,code,3,ALL,3,0,ALL,3,,YES,"code:SRC-AA=>act-army-1950[id]#s2,s79,s80,s81,s82,s83,s84,s85,s108,s109,s110,s111,s112,s113,s114,s115,s116,s117,s118,s119,s120,s121,s122,s123,s124,s125,s126,s127,s128,s129,s130 | code:SRC-AFT=>act-armed-forces-tribunal-2007[id]#s14,s15 | code:SRC-AR=>rules-army-rules-1954[id]"
+COI-001,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:SRC-AA=>act-army-1950[id]#s2,s101,s102,s103,s104,s105,s106 | code:SRC-AR=>rules-army-rules-1954[id]"
 COI-002,M04,CODED,YES,code,4,PARTLY,2,0,ALL,2,NO_PINPOINT;STRUCTURAL,NO,code:SRC-AA=>act-army-1950[id] | code:SRC-AO[not-id] | code:SRC-AR=>rules-army-rules-1954[id] | code:SRC-RA[not-id]
 COI-003,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AR=>rules-army-rules-1954[id] | code:SRC-VIR=>DCLR-SC-2020-002[id]
 COI-004,M04,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AR=>rules-army-rules-1954[id]
-COI-005,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AA=>act-army-1950[id] | code:SRC-AR=>rules-army-rules-1954[id]
+COI-005,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AA=>act-army-1950[id]#s106 | code:SRC-AR=>rules-army-rules-1954[id]
 COI-006,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AR185=>rules-army-rules-1954[id] | code:SRC-AR186=>rules-army-rules-1954[id]
 COI-007,M04,CODED,YES,code,3,PARTLY,1,0,ALL,1,,NO,code:SRC-AO[not-id] | code:SRC-AR=>rules-army-rules-1954[id] | code:SRC-RA[not-id]
 COI-008,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AR=>rules-army-rules-1954[id] | code:SRC-AR185=>rules-army-rules-1954[id]
@@ -46,7 +46,7 @@ COI-014,M04,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AR=>rules-army-rules-19
 COI-015,M04,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AR=>rules-army-rules-1954[id]
 COI-016,M04,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AR=>rules-army-rules-1954[id]
 COI-017,M04,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AR=>rules-army-rules-1954[id]
-COI-018,M04,CODED,YES,code,3,PARTLY,2,0,ALL,2,,NO,code:SRC-AA=>act-army-1950[id] | code:SRC-AO[not-id] | code:SRC-AR=>rules-army-rules-1954[id]
+COI-018,M04,CODED,YES,code,3,PARTLY,2,0,ALL,2,,NO,"code:SRC-AA=>act-army-1950[id]#s69,s70,s125,s126 | code:SRC-AO[not-id] | code:SRC-AR=>rules-army-rules-1954[id]"
 COI-019,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AR=>rules-army-rules-1954[id] | code:SRC-JETHI=>DCLR-SC-2013-N05[id]
 COI-020,M04,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AR=>rules-army-rules-1954[id]
 COI-021,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AR=>rules-army-rules-1954[id] | code:SRC-VIR=>DCLR-SC-2020-002[id]
@@ -58,56 +58,56 @@ COI-026,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AR=>rules-army-rules-19
 COI-027,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AA=>act-army-1950[id] | code:SRC-AR=>rules-army-rules-1954[id]
 COI-028,M04,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:SRC-AR=>rules-army-rules-1954[id] | code:SRC-SANDEEP[not-id]
 COI-029,M04,CODED,YES,code,3,PARTLY,1,0,ALL,1,,NO,code:SRC-AO[not-id] | code:SRC-AR=>rules-army-rules-1954[id] | code:SRC-RA[not-id]
-COI-030,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AA=>act-army-1950[id] | code:SRC-AR=>rules-army-rules-1954[id]
+COI-030,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AA=>act-army-1950[id]#s106 | code:SRC-AR=>rules-army-rules-1954[id]
 COI-031,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-AR185=>rules-army-rules-1954[id] | code:SRC-AR186=>rules-army-rules-1954[id]
 COI-032,M04,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AR=>rules-army-rules-1954[id]
-COI-033,M04,CODED,YES,code,3,PARTLY,2,0,ALL,2,,NO,code:SRC-AA=>act-army-1950[id] | code:SRC-AO[not-id] | code:SRC-AR=>rules-army-rules-1954[id]
+COI-033,M04,CODED,YES,code,3,PARTLY,2,0,ALL,2,,NO,"code:SRC-AA=>act-army-1950[id]#s2,s69,s70,s125,s126 | code:SRC-AO[not-id] | code:SRC-AR=>rules-army-rules-1954[id]"
 COI-034,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-INDER=>DCLR-SC-1997-N03[id] | code:SRC-VIR=>DCLR-SC-2020-002[id]
 COI-035,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-HUSSAIN=>DCLR-SC-1997-N04[id] | code:SRC-VIR=>DCLR-SC-2020-002[id]
 COI-036,M04,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:SRC-JETHI=>DCLR-SC-2013-N05[id] | code:SRC-VIR=>DCLR-SC-2020-002[id]
 COI-037,M04,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-VIR=>DCLR-SC-2020-002[id]
 COI-038,M04,CODED,YES,code,1,NONE,0,0,NOT_APPLICABLE,0,,NO,code:SRC-SANDEEP[not-id]
 COI-039,M04,CODED,YES,code,2,ALL,2,0,ALL,2,NO_PINPOINT,NO,code:SRC-JETHI=>DCLR-SC-2013-N05[id] | code:SRC-VIR=>DCLR-SC-2020-002[id]
-COI-040,M04,CODED,YES,code,3,ALL,3,0,ALL,3,,YES,code:SRC-AA=>act-army-1950[id] | code:SRC-AR=>rules-army-rules-1954[id] | code:SRC-AR185=>rules-army-rules-1954[id]
+COI-040,M04,CODED,YES,code,3,ALL,3,0,ALL,3,,YES,code:SRC-AA=>act-army-1950[id]#s106 | code:SRC-AR=>rules-army-rules-1954[id] | code:SRC-AR185=>rules-army-rules-1954[id]
 COI-041,M04,CODED,YES,code,3,ALL,3,0,ALL,3,,YES,code:SRC-AR=>rules-army-rules-1954[id] | code:SRC-JETHI=>DCLR-SC-2013-N05[id] | code:SRC-VIR=>DCLR-SC-2020-002[id]
 COI-042,M04,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:SRC-AR=>rules-army-rules-1954[id]
 COI-043,M04,CODED,YES,code,2,ALL,2,0,ALL,2,NO_PINPOINT;STRUCTURAL,NO,code:SRC-AA=>act-army-1950[id] | code:SRC-AR=>rules-army-rules-1954[id]
 COI-044,M04,CODED,YES,code,2,ALL,2,0,ALL,2,NO_PINPOINT;STRUCTURAL,NO,code:SRC-AR=>rules-army-rules-1954[id] | code:SRC-VIR=>DCLR-SC-2020-002[id]
 COI-045,M04,PLAINTEXT,NO,,0,NOT_APPLICABLE,0,0,NOT_APPLICABLE,0,,NO,
 COI-046,M04,CODED,YES,code,3,PARTLY,1,0,ALL,1,NO_PINPOINT,NO,code:SRC-AO[not-id] | code:SRC-AR185=>rules-army-rules-1954[id] | code:SRC-RA[not-id]
-HCE-001,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id] | code:AR=>rules-army-rules-1954[id]
-HCE-002,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id] | code:AR=>rules-army-rules-1954[id]
+HCE-001,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:AA=>act-army-1950[id]#s2,s79,s80,s81,s82,s83,s84,s85,s86,s87,s88,s120,s121,s122 | code:AR=>rules-army-rules-1954[id]"
+HCE-002,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:AA=>act-army-1950[id]#s34,s35,s36,s37,s38,s39,s40,s41,s42,s43,s44,s45,s46,s47,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,s62,s63,s64,s65,s66,s67,s68,s69,s70,s79 | code:AR=>rules-army-rules-1954[id]"
 HCE-003,M03,CODED,YES,code,3,ALL,3,0,ALL,3,,YES,code:AR=>rules-army-rules-1954[id] | code:SC_PPS=>DCLR-SC-1982-001[id] | code:SC_VK=>DCLR-SC-2020-002[id]
 HCE-004,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AR=>rules-army-rules-1954[id] | code:SC_VK=>DCLR-SC-2020-002[id]
-HCE-005,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id] | code:AR=>rules-army-rules-1954[id]
-HCE-006,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id] | code:AR=>rules-army-rules-1954[id]
+HCE-005,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id]#s120 | code:AR=>rules-army-rules-1954[id]
+HCE-006,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:AA=>act-army-1950[id]#s80,s120 | code:AR=>rules-army-rules-1954[id]"
 HCE-007,M03,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:AR=>rules-army-rules-1954[id]
 HCE-008,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AR=>rules-army-rules-1954[id] | code:SC_VK=>DCLR-SC-2020-002[id]
 HCE-009,M03,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:AR=>rules-army-rules-1954[id]
 HCE-010,M03,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:AR=>rules-army-rules-1954[id] | code:AR_ALT[not-id]
 HCE-011,M03,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:AR=>rules-army-rules-1954[id]
 HCE-012,M03,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:AR=>rules-army-rules-1954[id]
-HCE-013,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id] | code:AR=>rules-army-rules-1954[id]
+HCE-013,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id]#s135 | code:AR=>rules-army-rules-1954[id]
 HCE-014,M03,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:AR=>rules-army-rules-1954[id]
 HCE-015,M03,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:AR=>rules-army-rules-1954[id]
-HCE-016,M03,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:AA=>act-army-1950[id]
-HCE-017,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id] | code:AR=>rules-army-rules-1954[id]
-HCE-018,M03,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:AA=>act-army-1950[id]
-HCE-019,M03,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:AA=>act-army-1950[id]
-HCE-020,M03,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:AA=>act-army-1950[id]
-HCE-021,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id] | code:AR=>rules-army-rules-1954[id]
-HCE-022,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id] | code:AR=>rules-army-rules-1954[id]
-HCE-023,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id] | code:AR=>rules-army-rules-1954[id]
-HCE-024,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id] | code:AR=>rules-army-rules-1954[id]
-HCE-025,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id] | code:AR=>rules-army-rules-1954[id]
-HCE-026,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id] | code:AR=>rules-army-rules-1954[id]
+HCE-016,M03,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:AA=>act-army-1950[id]#s79,s80,s81,s82,s83,s84,s85"
+HCE-017,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:AA=>act-army-1950[id]#s80,s81,s82 | code:AR=>rules-army-rules-1954[id]"
+HCE-018,M03,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:AA=>act-army-1950[id]#s81
+HCE-019,M03,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:AA=>act-army-1950[id]#s83
+HCE-020,M03,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:AA=>act-army-1950[id]#s84
+HCE-021,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id]#s85 | code:AR=>rules-army-rules-1954[id]
+HCE-022,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:AA=>act-army-1950[id]#s83,s84,s85,s86,s87,s88 | code:AR=>rules-army-rules-1954[id]"
+HCE-023,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:AA=>act-army-1950[id]#s86,s87,s88 | code:AR=>rules-army-rules-1954[id]"
+HCE-024,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:AA=>act-army-1950[id]#s116,s120,s161,s162 | code:AR=>rules-army-rules-1954[id]"
+HCE-025,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id]#s120 | code:AR=>rules-army-rules-1954[id]
+HCE-026,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id]#s122 | code:AR=>rules-army-rules-1954[id]
 HCE-027,M03,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:AR=>rules-army-rules-1954[id]
-HCE-028,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id] | code:AR=>rules-army-rules-1954[id]
+HCE-028,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AA=>act-army-1950[id]#s120 | code:AR=>rules-army-rules-1954[id]
 HCE-029,M03,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:AR=>rules-army-rules-1954[id] | code:SC_VK=>DCLR-SC-2020-002[id]
-HCE-030,M03,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:AA=>act-army-1950[id] | code:AO[not-id]
+HCE-030,M03,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,"code:AA=>act-army-1950[id]#s69,s70,s125,s126,s120 | code:AO[not-id]"
 HCE-031,M03,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:AO[not-id] | code:AR=>rules-army-rules-1954[id]
 HCE-032,M03,CODED,YES,code,3,PARTLY,2,0,ALL,2,,NO,code:SC_GILL[not-id] | code:SC_PPS=>DCLR-SC-1982-001[id] | code:SC_VK=>DCLR-SC-2020-002[id]
-HCE-033,M03,CODED,YES,code,3,PARTLY,2,0,ALL,2,,NO,code:AA=>act-army-1950[id] | code:AO[not-id] | code:AR=>rules-army-rules-1954[id]
+HCE-033,M03,CODED,YES,code,3,PARTLY,2,0,ALL,2,,NO,"code:AA=>act-army-1950[id]#s79,s80,s81,s82,s83,s84,s85,s86,s87,s88 | code:AO[not-id] | code:AR=>rules-army-rules-1954[id]"
 SC01,M03,PLAINTEXT,YES,statute,2,ALL,2,0,ALL,2,,YES,statute:AR=>rules-army-rules-1954[id] | statute:AA=>act-army-1950[id]
 SC02,M03,PLAINTEXT,YES,case;statute,2,PARTLY,1,1,ALL,1,CASE_NAME_WITHOUT_CODE;INFERRED_IDENTITY,NO,statute:AR=>rules-army-rules-1954[id] | case:Virendra Kumar paras 11-13[inferred]
 SC03,M03,PLAINTEXT,YES,statute,1,ALL,1,0,ALL,1,,YES,statute:AR=>rules-army-rules-1954[id]
@@ -165,7 +165,7 @@ CM-036,M05,PLAINTEXT,YES,statute,1,ALL,1,0,ALL,1,,YES,"statute:AFT Act=>act-arme
 CM-037,M05,PLAINTEXT,YES,statute,2,ALL,2,0,ALL,2,,YES,"statute:AA=>act-army-1950[id]#s117,s121 | statute:AFT Act=>act-armed-forces-tribunal-2007[id]#s16"
 CM-038,M05,PLAINTEXT,YES,statute,2,ALL,2,0,ALL,2,,YES,"statute:AA=>act-army-1950[id]#s161,s162,s167,s169A | statute:AR=>rules-army-rules-1954[id]"
 CM-039,M05,PLAINTEXT,YES,statute,3,ALL,3,0,ALL,3,,YES,"statute:AA=>act-army-1950[id]#s153,s154,s155,s156,s157,s158,s159,s160,s161,s162,s163,s164,s165 | statute:AFT Act=>act-armed-forces-tribunal-2007[id]#s15,s17 | statute:AR=>rules-army-rules-1954[id]"
-CM-040,M05,CODED,YES,code,1,NONE,0,0,NOT_APPLICABLE,0,NO_PINPOINT;PLACEHOLDER;STRUCTURAL,NO,code:AO[not-id]
+CM-040,M05,CODED,YES,code;statute,3,PARTLY,2,0,ALL,2,NO_PINPOINT;PLACEHOLDER;STRUCTURAL,NO,code:AO[not-id] | statute:AA=>act-army-1950[id] | statute:AR=>rules-army-rules-1954[id]
 CM-SC-01,M05,PLAINTEXT,YES,statute,2,ALL,2,0,ALL,2,,YES,statute:AA=>act-army-1950[id]#s120 | statute:AR=>rules-army-rules-1954[id]
 CM-SC-02,M05,PLAINTEXT,YES,case;statute,2,PARTLY,1,1,ALL,1,CASE_NAME_WITHOUT_CODE;INFERRED_IDENTITY,NO,"statute:AA=>act-army-1950[id]#s116,s120 | case:Vishav Priya Singh[inferred]"
 CM-SC-03,M05,PLAINTEXT,YES,case;statute,3,PARTLY,2,1,ALL,2,CASE_NAME_WITHOUT_CODE;INFERRED_IDENTITY,NO,statute:AA=>act-army-1950[id]#s120 | statute:AR=>rules-army-rules-1954[id] | case:Randhir Singh[inferred]
@@ -266,7 +266,7 @@ ADM-JD-04,M06_M07,PLAINTEXT,NO,,0,NOT_APPLICABLE,0,0,NOT_APPLICABLE,0,UNANCHORED
 ADM-JD-05,M06_M07,PLAINTEXT,NO,,0,NOT_APPLICABLE,0,0,NOT_APPLICABLE,0,PLACEHOLDER;UNANCHORED_LOCATOR,NO,
 PEN-001,M08,CODED,YES,code,4,NONE,0,0,NOT_APPLICABLE,0,,NO,code:V6-S01[not-id] | code:V6-S02[not-id] | code:V6-S05[not-id] | code:V6-S06[not-id]
 PEN-002,M08,CODED,YES,code,3,PARTLY,1,0,ALL,1,,NO,code:V6-S03[not-id] | code:V6-S09[not-id] | code:V6-S20=>DCLR-SC-2026-N16[id]
-PEN-003,M08,CODED,YES,code,3,PARTLY,1,0,ALL,1,,NO,code:V6-S02[not-id] | code:V6-S05[not-id] | code:V6-S21=>act-armed-forces-tribunal-2007[id]
+PEN-003,M08,CODED,YES,code,3,PARTLY,1,0,ALL,1,,NO,"code:V6-S02[not-id] | code:V6-S05[not-id] | code:V6-S21=>act-armed-forces-tribunal-2007[id]#s21,s22"
 PEN-004,M08,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V6-S01[not-id] | code:V6-S20=>DCLR-SC-2026-N16[id]
 PEN-005,M08,CODED,YES,code,2,NONE,0,0,NOT_APPLICABLE,0,,NO,code:V6-S01[not-id] | code:V6-S08[not-id]
 PEN-006,M08,CODED,YES,code,2,NONE,0,0,NOT_APPLICABLE,0,,NO,code:V6-S01[not-id] | code:V6-S02[not-id]
@@ -310,8 +310,8 @@ PEN-043,M08,CODED,YES,code,3,PARTLY,2,0,ALL,2,PLACEHOLDER,NO,code:V6-S14=>DCLR-S
 PEN-044,M08,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V6-S17=>DCLR-SC-2014-A08[id] | code:V6-S18=>DCLR-SC-2026-007[id]
 PEN-045,M08,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V6-S18=>DCLR-SC-2026-007[id] | code:V6-S19=>DCLR-SC-2026-008[id]
 PEN-046,M08,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V6-S20=>DCLR-SC-2026-N16[id]
-PEN-047,M08,CODED,YES,code,3,PARTLY,1,0,ALL,1,,NO,code:V6-S07[not-id] | code:V6-S08[not-id] | code:V6-S21=>act-armed-forces-tribunal-2007[id]
-PEN-048,M08,CODED,YES,code,3,ALL,3,0,ALL,3,,YES,code:V6-S18=>DCLR-SC-2026-007[id] | code:V6-S19=>DCLR-SC-2026-008[id] | code:V6-S21=>act-armed-forces-tribunal-2007[id]
+PEN-047,M08,CODED,YES,code,3,PARTLY,1,0,ALL,1,,NO,"code:V6-S07[not-id] | code:V6-S08[not-id] | code:V6-S21=>act-armed-forces-tribunal-2007[id]#s14,s21,s22"
+PEN-048,M08,CODED,YES,code,3,ALL,3,0,ALL,3,,YES,code:V6-S18=>DCLR-SC-2026-007[id] | code:V6-S19=>DCLR-SC-2026-008[id] | code:V6-S21=>act-armed-forces-tribunal-2007[id]#s22
 PEN-049,M08,CODED,YES,code,3,PARTLY,1,0,ALL,1,NO_PINPOINT,NO,code:V6-S03[not-id] | code:V6-S09[not-id] | code:V6-S19=>DCLR-SC-2026-008[id]
 PEN-WF-01,M08,CODED,YES,code,2,NONE,0,0,NOT_APPLICABLE,0,,NO,code:V6-S01[not-id] | code:V6-S02[not-id]
 PEN-WF-02,M08,CODED,YES,code,1,NONE,0,0,NOT_APPLICABLE,0,,NO,code:V6-S07[not-id]
@@ -321,7 +321,7 @@ PEN-WF-05,M08,CODED,YES,code,1,NONE,0,0,NOT_APPLICABLE,0,,NO,code:V6-S01[not-id]
 PEN-WF-06,M08,CODED,YES,code,1,NONE,0,0,NOT_APPLICABLE,0,NO_PINPOINT,NO,code:V6-S12[not-id]
 PEN-WF-07,M08,CODED,YES,code,2,NONE,0,0,NOT_APPLICABLE,0,,NO,code:V6-S09[not-id] | code:V6-S10[not-id]
 PEN-WF-08,M08,CODED,YES,code,4,PARTLY,3,0,ALL,3,NO_PINPOINT,NO,code:V6-S11[not-id] | code:V6-S17=>DCLR-SC-2014-A08[id] | code:V6-S18=>DCLR-SC-2026-007[id] | code:V6-S19=>DCLR-SC-2026-008[id]
-PEN-WF-09,M08,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V6-S07[not-id] | code:V6-S21=>act-armed-forces-tribunal-2007[id]
+PEN-WF-09,M08,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,"code:V6-S07[not-id] | code:V6-S21=>act-armed-forces-tribunal-2007[id]#s21,s22"
 PEN-WF-10,M08,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V6-S01[not-id] | code:V6-S20=>DCLR-SC-2026-N16[id]
 PEN-WF-11,M08,CODED,YES,code,1,NONE,0,0,NOT_APPLICABLE,0,NO_PINPOINT,NO,code:V6-S12[not-id]
 PEN-WF-12,M08,CODED,YES,code,1,NONE,0,0,NOT_APPLICABLE,0,,NO,code:V6-S01[not-id]
@@ -360,49 +360,49 @@ PEN-J-04,M08,CODED,YES,code,1,ALL,1,0,ALL,1,NO_PINPOINT,NO,code:V6-S17=>DCLR-SC-
 PEN-J-05,M08,CODED,YES,code,1,ALL,1,0,ALL,1,NO_PINPOINT,NO,code:V6-S18=>DCLR-SC-2026-007[id]
 PEN-J-06,M08,CODED,YES,code,1,ALL,1,0,ALL,1,NO_PINPOINT,NO,code:V6-S19=>DCLR-SC-2026-008[id]
 PEN-J-07,M08,CODED,YES,code,1,ALL,1,0,ALL,1,NO_PINPOINT,NO,code:V6-S20=>DCLR-SC-2026-N16[id]
-AFT-001,M10,CODED,YES,code;statute,4,PARTLY,2,0,ALL,2,IDENTITY_KNOWN_TARGET_ABSENT,NO,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S08=>DCLR-SC-2023-009[id] | code:V7-S13[not-id] | statute:Art 226[not-id]
-AFT-002,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
-AFT-003,M10,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S12[not-id]
-AFT-004,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
-AFT-005,M10,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S12[not-id]
-AFT-006,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
-AFT-007,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
-AFT-008,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
-AFT-009,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
-AFT-010,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
-AFT-011,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]
-AFT-012,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
-AFT-013,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S11=>DCLR-SC-2008-N10[id]
-AFT-014,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S11=>DCLR-SC-2008-N10[id]
-AFT-015,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]
+AFT-001,M10,CODED,YES,code;statute,4,PARTLY,2,0,ALL,2,IDENTITY_KNOWN_TARGET_ABSENT,NO,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s2,s3,s14,s15,s21,s22 | code:V7-S08=>DCLR-SC-2023-009[id] | code:V7-S13[not-id] | statute:Art 226[not-id]"
+AFT-002,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s2,s3 | code:V7-S02=>rules-aft-procedure-rules-2008[id]"
+AFT-003,M10,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s3,s14,s15 | code:V7-S12[not-id]"
+AFT-004,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s14,s15,s16,s17 | code:V7-S02=>rules-aft-procedure-rules-2008[id]"
+AFT-005,M10,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s3,s15 | code:V7-S12[not-id]"
+AFT-006,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s27 | code:V7-S02=>rules-aft-procedure-rules-2008[id]
+AFT-007,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s14 | code:V7-S02=>rules-aft-procedure-rules-2008[id]
+AFT-008,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s14,s21,s22 | code:V7-S02=>rules-aft-procedure-rules-2008[id]"
+AFT-009,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s21 | code:V7-S02=>rules-aft-procedure-rules-2008[id]
+AFT-010,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s21,s22,s22 | code:V7-S02=>rules-aft-procedure-rules-2008[id]"
+AFT-011,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s21,s22,s22"
+AFT-012,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s22 | code:V7-S02=>rules-aft-procedure-rules-2008[id]
+AFT-013,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s22 | code:V7-S11=>DCLR-SC-2008-N10[id]
+AFT-014,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s21,s22 | code:V7-S11=>DCLR-SC-2008-N10[id]"
+AFT-015,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s34,s35"
 AFT-016,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S02=>rules-aft-procedure-rules-2008[id]
-AFT-017,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
+AFT-017,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s14 | code:V7-S02=>rules-aft-procedure-rules-2008[id]
 AFT-018,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S02=>rules-aft-procedure-rules-2008[id]
 AFT-019,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S02=>rules-aft-procedure-rules-2008[id] | code:V7-S03=>rules-aft-amendment-procedure-rules-2011[id]
 AFT-020,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S02=>rules-aft-procedure-rules-2008[id] | code:V7-S03=>rules-aft-amendment-procedure-rules-2011[id]
-AFT-021,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
-AFT-022,M10,CODED,YES,code,3,ALL,3,0,ALL,3,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id] | code:V7-S03=>rules-aft-amendment-procedure-rules-2011[id]
+AFT-021,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s14 | code:V7-S02=>rules-aft-procedure-rules-2008[id]
+AFT-022,M10,CODED,YES,code,3,ALL,3,0,ALL,3,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s23 | code:V7-S02=>rules-aft-procedure-rules-2008[id] | code:V7-S03=>rules-aft-amendment-procedure-rules-2011[id]
 AFT-023,M10,CODED,YES,code;statute,3,PARTLY,1,0,ALL,1,,NO,code:V7-S02=>rules-aft-procedure-rules-2008[id] | code:V7-S04[not-id] | statute:Practice Rules[not-id]
-AFT-024,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
-AFT-025,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
-AFT-026,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
-AFT-027,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]
-AFT-028,M10,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S13[not-id]
-AFT-029,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]
-AFT-030,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]
-AFT-031,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]
-AFT-032,M10,CODED,YES,code,3,ALL,3,0,ALL,3,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S03=>rules-aft-amendment-procedure-rules-2011[id] | code:V7-S14=>rules-aft-procedure-rules-2008[id]
-AFT-033,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S08=>DCLR-SC-2023-009[id]
-AFT-034,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]
+AFT-024,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s25 | code:V7-S02=>rules-aft-procedure-rules-2008[id]
+AFT-025,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s14,s23 | code:V7-S02=>rules-aft-procedure-rules-2008[id]"
+AFT-026,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s26 | code:V7-S02=>rules-aft-procedure-rules-2008[id]
+AFT-027,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s14,s23"
+AFT-028,M10,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s14,s23 | code:V7-S13[not-id]"
+AFT-029,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s15,s17"
+AFT-030,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s15
+AFT-031,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s26,s29,s30,s31,s32"
+AFT-032,M10,CODED,YES,code,3,ALL,3,0,ALL,3,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s14 | code:V7-S03=>rules-aft-amendment-procedure-rules-2011[id] | code:V7-S14=>rules-aft-procedure-rules-2008[id]
+AFT-033,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s30,s31,s32 | code:V7-S08=>DCLR-SC-2023-009[id]"
+AFT-034,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s30,s31,s32"
 AFT-035,M10,CODED,YES,code,4,PARTLY,3,0,ALL,3,NO_PINPOINT,NO,code:V7-S07=>DCLR-SC-1997-N07[id] | code:V7-S08=>DCLR-SC-2023-009[id] | code:V7-S09=>DCLR-SC-2015-N06[id] | code:V7-S13[not-id]
-AFT-036,M10,CODED,YES,code;statute,4,PARTLY,2,0,ALL,2,IDENTITY_KNOWN_TARGET_ABSENT,NO,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S08=>DCLR-SC-2023-009[id] | code:V7-S15[not-id] | statute:Art 136[not-id]
-AFT-037,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]
-AFT-038,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
+AFT-036,M10,CODED,YES,code;statute,4,PARTLY,2,0,ALL,2,IDENTITY_KNOWN_TARGET_ABSENT,NO,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s30,s31,s32 | code:V7-S08=>DCLR-SC-2023-009[id] | code:V7-S15[not-id] | statute:Art 136[not-id]"
+AFT-037,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s19,s29,s30"
+AFT-038,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s29 | code:V7-S02=>rules-aft-procedure-rules-2008[id]
 AFT-039,M10,CODED,YES,code,3,PARTLY,2,0,ALL,2,NO_PINPOINT,NO,code:V7-S07=>DCLR-SC-1997-N07[id] | code:V7-S08=>DCLR-SC-2023-009[id] | code:V7-S16[not-id]
-AFT-040,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
-AFT-041,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
+AFT-040,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s23 | code:V7-S02=>rules-aft-procedure-rules-2008[id]
+AFT-041,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s14,s17 | code:V7-S02=>rules-aft-procedure-rules-2008[id]"
 AFT-042,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S02=>rules-aft-procedure-rules-2008[id] | code:V7-S03=>rules-aft-amendment-procedure-rules-2011[id]
-AFT-043,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]
+AFT-043,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s25,s29,s30,s31,s32"
 AFT-044,M10,CODED,YES,code,3,ALL,3,0,ALL,3,NO_PINPOINT,NO,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S03=>rules-aft-amendment-procedure-rules-2011[id] | code:V7-S08=>DCLR-SC-2023-009[id]
 V7-WF-01,M10,PLAINTEXT,YES,statute,2,PARTLY,1,0,ALL,1,,NO,"statute:AFT Act=>act-armed-forces-tribunal-2007[id]#s3,s14,s21,s22 | statute:Procedure Rules[not-id]"
 V7-WF-02,M10,PLAINTEXT,YES,statute,2,PARTLY,1,0,ALL,1,,NO,"statute:AFT Act=>act-armed-forces-tribunal-2007[id]#s15,s16,s17 | statute:Procedure Rules[not-id]"
@@ -416,33 +416,33 @@ V7-WF-09,M10,PLAINTEXT,YES,statute,1,ALL,1,0,ALL,1,,YES,"statute:AFT Act=>act-ar
 V7-WF-10,M10,PLAINTEXT,YES,statute,1,ALL,1,0,ALL,1,,YES,"statute:AFT Act=>act-armed-forces-tribunal-2007[id]#s2,s3,s14,s21,s22"
 V7-WF-11,M10,PLAINTEXT,YES,statute,1,ALL,1,0,ALL,1,,YES,"statute:AFT Act=>act-armed-forces-tribunal-2007[id]#s3,s14"
 V7-WF-12,M10,PLAINTEXT,YES,statute,2,PARTLY,1,0,ALL,1,IDENTITY_KNOWN_TARGET_ABSENT;NO_PINPOINT,NO,statute:AFT Act=>act-armed-forces-tribunal-2007[id] | statute:Constitution[not-id]
-V7-SC-01,M10,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S13[not-id]
-V7-SC-02,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S11=>DCLR-SC-2008-N10[id]
-V7-SC-03,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
-V7-SC-04,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]
-V7-SC-05,M10,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S12[not-id]
-V7-SC-06,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]
+V7-SC-01,M10,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s3,s14,s21,s22 | code:V7-S13[not-id]"
+V7-SC-02,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s22 | code:V7-S11=>DCLR-SC-2008-N10[id]
+V7-SC-03,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s26 | code:V7-S02=>rules-aft-procedure-rules-2008[id]
+V7-SC-04,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s21,s22"
+V7-SC-05,M10,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s3,s15 | code:V7-S12[not-id]"
+V7-SC-06,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s15,s17"
 V7-SC-07,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S02=>rules-aft-procedure-rules-2008[id]
 V7-SC-08,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S02=>rules-aft-procedure-rules-2008[id]
-V7-SC-09,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S14=>rules-aft-procedure-rules-2008[id]
-V7-SC-10,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]
-V7-SC-11,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]
-V7-SC-12,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]
-V7-SC-13,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]
-V7-SC-14,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S11=>DCLR-SC-2008-N10[id]
-V7-SC-15,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]
+V7-SC-09,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s30,s31,s32 | code:V7-S14=>rules-aft-procedure-rules-2008[id]"
+V7-SC-10,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s29
+V7-SC-11,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s29,s30,s31,s32"
+V7-SC-12,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s14,s23"
+V7-SC-13,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s2,s3,s14"
+V7-SC-14,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s21,s22 | code:V7-S11=>DCLR-SC-2008-N10[id]"
+V7-SC-15,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s26
 V7-SC-16,M10,CODED,YES,code,2,ALL,2,0,ALL,2,NO_PINPOINT,NO,code:V7-S02=>rules-aft-procedure-rules-2008[id] | code:V7-S11=>DCLR-SC-2008-N10[id]
 V7-SC-17,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S02=>rules-aft-procedure-rules-2008[id] | code:V7-S03=>rules-aft-amendment-procedure-rules-2011[id]
 V7-SC-18,M10,CODED,YES,code,2,PARTLY,1,0,ALL,1,NO_PINPOINT,NO,code:V7-S08=>DCLR-SC-2023-009[id] | code:V7-S13[not-id]
-V7-CL-01,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
-V7-CL-02,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S02=>rules-aft-procedure-rules-2008[id]
+V7-CL-01,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s2,s3,s14,s15 | code:V7-S02=>rules-aft-procedure-rules-2008[id]"
+V7-CL-02,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s21,s22 | code:V7-S02=>rules-aft-procedure-rules-2008[id]"
 V7-CL-03,M10,CODED,YES,code,2,ALL,2,0,ALL,2,NO_PINPOINT,NO,code:V7-S02=>rules-aft-procedure-rules-2008[id] | code:V7-S03=>rules-aft-amendment-procedure-rules-2011[id]
 V7-CL-04,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S02=>rules-aft-procedure-rules-2008[id] | code:V7-S03=>rules-aft-amendment-procedure-rules-2011[id]
 V7-CL-05,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S02=>rules-aft-procedure-rules-2008[id] | code:V7-S03=>rules-aft-amendment-procedure-rules-2011[id]
-V7-CL-06,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]
-V7-CL-07,M10,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S12[not-id]
-V7-CL-08,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id] | code:V7-S14=>rules-aft-procedure-rules-2008[id]
-V7-CL-09,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]
+V7-CL-06,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s26
+V7-CL-07,M10,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s15,s16,s17 | code:V7-S12[not-id]"
+V7-CL-08,M10,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V7-S01=>act-armed-forces-tribunal-2007[id]#s29,s30,s31,s32 | code:V7-S14=>rules-aft-procedure-rules-2008[id]"
+V7-CL-09,M10,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V7-S01=>act-armed-forces-tribunal-2007[id]#s29
 V7-CL-10,M10,CODED,YES,code,3,PARTLY,2,0,ALL,2,NO_PINPOINT,NO,code:V7-S07=>DCLR-SC-1997-N07[id] | code:V7-S08=>DCLR-SC-2023-009[id] | code:V7-S16[not-id]
 V7-JD-01,M11,CODED,YES,code,1,ALL,1,0,ALL,1,NO_PINPOINT,NO,code:V7-S07=>DCLR-SC-1997-N07[id]
 V7-JD-02,M11,CODED,YES,code,2,ALL,2,0,ALL,2,NO_PINPOINT,NO,code:V7-S08=>DCLR-SC-2023-009[id] | code:V7-S09=>DCLR-SC-2015-N06[id]
@@ -458,46 +458,46 @@ V7-T04,M12,PLAINTEXT,NO,,0,NOT_APPLICABLE,0,0,NOT_APPLICABLE,0,UNANCHORED_LOCATO
 V7-T05,M12,PLAINTEXT,NO,,0,NOT_APPLICABLE,0,0,NOT_APPLICABLE,0,UNANCHORED_LOCATOR,NO,
 V7-T06,M12,PLAINTEXT,NO,,0,NOT_APPLICABLE,0,0,NOT_APPLICABLE,0,UNANCHORED_LOCATOR,NO,
 V7-T07,M12,PLAINTEXT,NO,,0,NOT_APPLICABLE,0,0,NOT_APPLICABLE,0,UNANCHORED_LOCATOR,NO,
-CIV-001,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S01=>act-army-1950[id]
-CIV-002,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S07=>DCLR-SC-2022-004[id]
-CIV-003,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S07=>DCLR-SC-2022-004[id]
-CIV-004,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S07=>DCLR-SC-2022-004[id]
-CIV-005,M09,CODED,YES,code,3,PARTLY,2,0,ALL,2,,NO,code:V8-S01=>act-army-1950[id] | code:V8-S07=>DCLR-SC-2022-004[id] | code:V8-S08[not-id]
-CIV-006,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S01=>act-army-1950[id]
-CIV-007,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S01=>act-army-1950[id]
-CIV-008,M09,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V8-S01=>act-army-1950[id] | code:V8-S03[not-id]
-CIV-009,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S07=>DCLR-SC-2022-004[id]
-CIV-010,M09,CODED,YES,code,3,PARTLY,2,0,ALL,2,,NO,code:V8-S03[not-id] | code:V8-S04=>act-bnss-2023[id] | code:V8-S07=>DCLR-SC-2022-004[id]
-CIV-011,M09,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V8-S01=>act-army-1950[id] | code:V8-S03[not-id]
+CIV-001,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V8-S01=>act-army-1950[id]#s2,s3"
+CIV-002,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S01=>act-army-1950[id]#s3,s34,s35,s36,s37,s38,s39,s40,s41,s42,s43,s44,s45,s46,s47,s48,s49,s50,s51,s52,s53,s54,s55,s56,s57,s58,s59,s60,s61,s62,s63,s64,s65,s66,s67,s68,s69,s70 | code:V8-S07=>DCLR-SC-2022-004[id]"
+CIV-003,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id]#s69 | code:V8-S07=>DCLR-SC-2022-004[id]
+CIV-004,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id]#s70 | code:V8-S07=>DCLR-SC-2022-004[id]
+CIV-005,M09,CODED,YES,code,3,PARTLY,2,0,ALL,2,,NO,"code:V8-S01=>act-army-1950[id]#s125,s126 | code:V8-S07=>DCLR-SC-2022-004[id] | code:V8-S08[not-id]"
+CIV-006,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S01=>act-army-1950[id]#s121
+CIV-007,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V8-S01=>act-army-1950[id]#s122,s123"
+CIV-008,M09,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V8-S01=>act-army-1950[id]#s125 | code:V8-S03[not-id]
+CIV-009,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id]#s126 | code:V8-S07=>DCLR-SC-2022-004[id]
+CIV-010,M09,CODED,YES,code,3,PARTLY,2,0,ALL,2,,NO,code:V8-S03[not-id] | code:V8-S04=>act-bnss-2023[id]#s521 | code:V8-S07=>DCLR-SC-2022-004[id]
+CIV-011,M09,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V8-S01=>act-army-1950[id]#s125 | code:V8-S03[not-id]
 CIV-012,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S07=>DCLR-SC-2022-004[id]
-CIV-013,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S01=>act-army-1950[id]
-CIV-014,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S01=>act-army-1950[id]
-CIV-015,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S04=>act-bnss-2023[id]
-CIV-016,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S04=>act-bnss-2023[id]
+CIV-013,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V8-S01=>act-army-1950[id]#s101,s102,s103"
+CIV-014,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V8-S01=>act-army-1950[id]#s104,s105,s106"
+CIV-015,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S01=>act-army-1950[id]#s104,s105,s125,s126 | code:V8-S04=>act-bnss-2023[id]#s521"
+CIV-016,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id]#s69 | code:V8-S04=>act-bnss-2023[id]#s173
 CIV-017,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S02=>rules-army-rules-1954[id] | code:V8-S04=>act-bnss-2023[id]
 CIV-018,M09,CODED,YES,code,2,ALL,2,0,ALL,2,NO_PINPOINT,NO,code:V8-S04=>act-bnss-2023[id] | code:V8-S06=>act-bsa-2023[id]
-CIV-019,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S06=>act-bsa-2023[id]
+CIV-019,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S06=>act-bsa-2023[id]#s1
 CIV-020,M09,CODED,YES,code,2,ALL,2,0,ALL,2,NO_PINPOINT,NO,code:V8-S04=>act-bnss-2023[id] | code:V8-S06=>act-bsa-2023[id]
 CIV-021,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S04=>act-bnss-2023[id] | code:V8-S07=>DCLR-SC-2022-004[id]
-CIV-022,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S04=>act-bnss-2023[id]
-CIV-023,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S04=>act-bnss-2023[id] | code:V8-S12=>act-bnss-2023[id]
-CIV-024,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S12=>act-bnss-2023[id]
-CIV-025,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S02=>rules-army-rules-1954[id] | code:V8-S04=>act-bnss-2023[id]
-CIV-026,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S04=>act-bnss-2023[id] | code:V8-S05=>act-bns-2023[id]
-CIV-027,M09,CODED,YES,code,3,ALL,3,0,ALL,3,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S04=>act-bnss-2023[id] | code:V8-S05=>act-bns-2023[id]
+CIV-022,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S01=>act-army-1950[id]#s101,s102,s103 | code:V8-S04=>act-bnss-2023[id]"
+CIV-023,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S04=>act-bnss-2023[id]#s194,s196 | code:V8-S12=>act-bnss-2023[id]#s194,s196"
+CIV-024,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S01=>act-army-1950[id]#s69,s70,s125,s126 | code:V8-S12=>act-bnss-2023[id]#s194"
+CIV-025,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S02=>rules-army-rules-1954[id] | code:V8-S04=>act-bnss-2023[id]#s194,s196"
+CIV-026,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S04=>act-bnss-2023[id]#s173 | code:V8-S05=>act-bns-2023[id]
+CIV-027,M09,CODED,YES,code,3,ALL,3,0,ALL,3,,YES,code:V8-S01=>act-army-1950[id]#s70 | code:V8-S04=>act-bnss-2023[id] | code:V8-S05=>act-bns-2023[id]
 CIV-028,M09,CODED,YES,code,2,PARTLY,1,0,ALL,1,NO_PINPOINT,NO,code:V8-S04=>act-bnss-2023[id] | code:V8-S14[not-id]
 CIV-029,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S02=>rules-army-rules-1954[id] | code:V8-S04=>act-bnss-2023[id]
-CIV-030,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S04=>act-bnss-2023[id]
-CIV-031,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S05=>act-bns-2023[id]
-CIV-032,M09,CODED,YES,code,3,PARTLY,2,0,ALL,2,,NO,code:V8-S04=>act-bnss-2023[id] | code:V8-S05=>act-bns-2023[id] | code:V8-S11[not-id]
-CIV-033,M09,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V8-S03[not-id] | code:V8-S04=>act-bnss-2023[id]
-CIV-034,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S06=>act-bsa-2023[id]
+CIV-030,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S01=>act-army-1950[id]#s101,s102,s103 | code:V8-S04=>act-bnss-2023[id]#s194,s196"
+CIV-031,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S01=>act-army-1950[id]#s69,s70,s124 | code:V8-S05=>act-bns-2023[id]#s1"
+CIV-032,M09,CODED,YES,code,3,PARTLY,2,0,ALL,2,,NO,code:V8-S04=>act-bnss-2023[id]#s531 | code:V8-S05=>act-bns-2023[id]#s358 | code:V8-S11[not-id]
+CIV-033,M09,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,"code:V8-S03[not-id] | code:V8-S04=>act-bnss-2023[id]#s521,s531"
+CIV-034,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S06=>act-bsa-2023[id]#s1
 CIV-035,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S07=>DCLR-SC-2022-004[id]
 CIV-036,M09,CODED,YES,code,2,NONE,0,0,NOT_APPLICABLE,0,NO_PINPOINT,NO,code:V8-S10[not-id] | code:V8-S15[not-id]
-CIV-037,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S04=>act-bnss-2023[id]
-CIV-038,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S04=>act-bnss-2023[id]
-CIV-039,M09,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V8-S01=>act-army-1950[id] | code:V8-S03[not-id]
-CIV-040,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S07=>DCLR-SC-2022-004[id]
+CIV-037,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S01=>act-army-1950[id]#s101,s102,s103 | code:V8-S04=>act-bnss-2023[id]"
+CIV-038,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S01=>act-army-1950[id]#s69,s70 | code:V8-S04=>act-bnss-2023[id]#s173,s194"
+CIV-039,M09,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,"code:V8-S01=>act-army-1950[id]#s125,s126 | code:V8-S03[not-id]"
+CIV-040,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S01=>act-army-1950[id]#s125,s126 | code:V8-S07=>DCLR-SC-2022-004[id]"
 CIV-041,M09,CODED,YES,code,3,ALL,3,0,ALL,3,NO_PINPOINT;STRUCTURAL,NO,code:V8-S01=>act-army-1950[id] | code:V8-S04=>act-bnss-2023[id] | code:V8-S07=>DCLR-SC-2022-004[id]
 CIV-042,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S07=>DCLR-SC-2022-004[id]
 V8-WF-01,M09,PLAINTEXT,YES,statute,2,ALL,2,0,ALL,2,,YES,"statute:Army Act=>act-army-1950[id]#s69,s70 | statute:BNSS=>act-bnss-2023[id]#s173"
@@ -514,40 +514,40 @@ V8-WF-11,M09,PLAINTEXT,YES,statute,2,ALL,2,0,ALL,2,,YES,statute:BNS=>act-bns-202
 V8-WF-12,M09,PLAINTEXT,YES,statute,1,ALL,1,0,ALL,1,,YES,"statute:Army Act=>act-army-1950[id]#s125,s126"
 V8-WF-13,M09,PLAINTEXT,YES,statute,1,ALL,1,0,ALL,1,,YES,"statute:Army Act=>act-army-1950[id]#s122,s123"
 V8-WF-14,M09,PLAINTEXT,NO,,0,NOT_APPLICABLE,0,0,NOT_APPLICABLE,0,,NO,
-V8-SC-01,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S07=>DCLR-SC-2022-004[id]
-V8-SC-02,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S04=>act-bnss-2023[id]
-V8-SC-03,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S05=>act-bns-2023[id]
-V8-SC-04,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S04=>act-bnss-2023[id]
-V8-SC-05,M09,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V8-S03[not-id] | code:V8-S04=>act-bnss-2023[id]
-V8-SC-06,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S02=>rules-army-rules-1954[id] | code:V8-S04=>act-bnss-2023[id]
-V8-SC-07,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S04=>act-bnss-2023[id]
+V8-SC-01,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S01=>act-army-1950[id]#s69,s70,s125,s126 | code:V8-S07=>DCLR-SC-2022-004[id]"
+V8-SC-02,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S01=>act-army-1950[id]#s70 | code:V8-S04=>act-bnss-2023[id]#s194,s196"
+V8-SC-03,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id]#s70 | code:V8-S05=>act-bns-2023[id]
+V8-SC-04,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S01=>act-army-1950[id]#s125,s126 | code:V8-S04=>act-bnss-2023[id]"
+V8-SC-05,M09,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V8-S03[not-id] | code:V8-S04=>act-bnss-2023[id]#s521
+V8-SC-06,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S02=>rules-army-rules-1954[id] | code:V8-S04=>act-bnss-2023[id]#s173
+V8-SC-07,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id]#s2 | code:V8-S04=>act-bnss-2023[id]#s173
 V8-SC-08,M09,CODED,YES,code,2,ALL,2,0,ALL,2,NO_PINPOINT,NO,code:V8-S04=>act-bnss-2023[id] | code:V8-S05=>act-bns-2023[id]
-V8-SC-09,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S02=>rules-army-rules-1954[id] | code:V8-S04=>act-bnss-2023[id]
-V8-SC-10,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S04=>act-bnss-2023[id]
-V8-SC-11,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S04=>act-bnss-2023[id]
-V8-SC-12,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S04=>act-bnss-2023[id] | code:V8-S05=>act-bns-2023[id]
-V8-SC-13,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S04=>act-bnss-2023[id] | code:V8-S05=>act-bns-2023[id]
-V8-SC-14,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S07=>DCLR-SC-2022-004[id]
-V8-SC-15,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S01=>act-army-1950[id]
+V8-SC-09,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S02=>rules-army-rules-1954[id] | code:V8-S04=>act-bnss-2023[id]#s194,s196"
+V8-SC-10,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S04=>act-bnss-2023[id]#s194
+V8-SC-11,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S01=>act-army-1950[id]#s101,s102,s103 | code:V8-S04=>act-bnss-2023[id]#s194,s196"
+V8-SC-12,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S04=>act-bnss-2023[id]#s531 | code:V8-S05=>act-bns-2023[id]#s358
+V8-SC-13,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S04=>act-bnss-2023[id]#s521 | code:V8-S05=>act-bns-2023[id]
+V8-SC-14,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S01=>act-army-1950[id]#s69,s125 | code:V8-S07=>DCLR-SC-2022-004[id]"
+V8-SC-15,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V8-S01=>act-army-1950[id]#s122,s123"
 V8-SC-16,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S04=>act-bnss-2023[id] | code:V8-S07=>DCLR-SC-2022-004[id]
 V8-SC-17,M09,CODED,YES,code,1,ALL,1,0,ALL,1,NO_PINPOINT,NO,code:V8-S06=>act-bsa-2023[id]
 V8-SC-18,M09,CODED,YES,code;statute,2,NONE,0,0,NOT_APPLICABLE,0,IDENTITY_KNOWN_TARGET_ABSENT;NO_PINPOINT,NO,code:V8-S14[not-id] | statute:POCSO[not-id]
 V8-SC-19,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S02=>rules-army-rules-1954[id] | code:V8-S04=>act-bnss-2023[id]
 V8-SC-20,M09,CODED,YES,code,2,NONE,0,0,NOT_APPLICABLE,0,NO_PINPOINT,NO,code:V8-S10[not-id] | code:V8-S15[not-id]
 V8-SC-21,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S07=>DCLR-SC-2022-004[id]
-V8-SC-22,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S05=>act-bns-2023[id]
-V8-CL-01,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S04=>act-bnss-2023[id]
-V8-CL-02,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S01=>act-army-1950[id]
-V8-CL-03,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S01=>act-army-1950[id]
-V8-CL-04,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S01=>act-army-1950[id]
-V8-CL-05,M09,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V8-S03[not-id] | code:V8-S04=>act-bnss-2023[id]
+V8-SC-22,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S01=>act-army-1950[id]#s69,s70,s124 | code:V8-S05=>act-bns-2023[id]#s1"
+V8-CL-01,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V8-S04=>act-bnss-2023[id]#s173,s194"
+V8-CL-02,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V8-S01=>act-army-1950[id]#s2,s3,s123"
+V8-CL-03,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S01=>act-army-1950[id]#s70
+V8-CL-04,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V8-S01=>act-army-1950[id]#s125,s126"
+V8-CL-05,M09,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V8-S03[not-id] | code:V8-S04=>act-bnss-2023[id]#s521
 V8-CL-06,M09,CODED,YES,code,1,ALL,1,0,ALL,1,NO_PINPOINT,NO,code:V8-S04=>act-bnss-2023[id]
-V8-CL-07,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S04=>act-bnss-2023[id]
+V8-CL-07,M09,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,"code:V8-S04=>act-bnss-2023[id]#s194,s196"
 V8-CL-08,M09,CODED,YES,code,2,ALL,2,0,ALL,2,NO_PINPOINT,NO,code:V8-S01=>act-army-1950[id] | code:V8-S06=>act-bsa-2023[id]
 V8-CL-09,M09,CODED,YES,code,1,ALL,1,0,ALL,1,NO_PINPOINT,NO,code:V8-S06=>act-bsa-2023[id]
 V8-CL-10,M09,CODED,YES,code,2,PARTLY,1,0,ALL,1,NO_PINPOINT,NO,code:V8-S04=>act-bnss-2023[id] | code:V8-S14[not-id]
-V8-CL-11,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S04=>act-bnss-2023[id] | code:V8-S05=>act-bns-2023[id]
-V8-CL-12,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S01=>act-army-1950[id] | code:V8-S07=>DCLR-SC-2022-004[id]
+V8-CL-11,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,code:V8-S04=>act-bnss-2023[id]#s531 | code:V8-S05=>act-bns-2023[id]#s358
+V8-CL-12,M09,CODED,YES,code,2,ALL,2,0,ALL,2,,YES,"code:V8-S01=>act-army-1950[id]#s125,s126 | code:V8-S07=>DCLR-SC-2022-004[id]"
 V8-JD-01,M11,CODED,YES,code,1,ALL,1,0,ALL,1,,YES,code:V8-S07=>DCLR-SC-2022-004[id]
 V8-JD-02,M11,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V8-S07=>DCLR-SC-2022-004[id] | code:V8-S08[not-id]
 V8-JD-03,M11,CODED,YES,code,2,PARTLY,1,0,ALL,1,,NO,code:V8-S07=>DCLR-SC-2022-004[id] | code:V8-S09[not-id]
@@ -561,46 +561,46 @@ V8-TPL-04,M12,PLAINTEXT,NO,,0,NOT_APPLICABLE,0,0,NOT_APPLICABLE,0,PLACEHOLDER,NO
 V8-TPL-05,M12,PLAINTEXT,NO,,0,NOT_APPLICABLE,0,0,NOT_APPLICABLE,0,PLACEHOLDER,NO,
 V8-TPL-06,M12,PLAINTEXT,NO,,0,NOT_APPLICABLE,0,0,NOT_APPLICABLE,0,PLACEHOLDER,NO,
 V8-TPL-07,M12,PLAINTEXT,NO,,0,NOT_APPLICABLE,0,0,NOT_APPLICABLE,0,PLACEHOLDER,NO,
-EV-001,M13,CODED,YES,code,3,NONE,0,3,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred] | code:V9-S02=>act-army-1950[inferred] | code:V9-S03=>rules-army-rules-1954[inferred]
-EV-002,M13,CODED,YES,code,2,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred] | code:V9-S08[not-id]
-EV-003,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred] | code:V9-S02=>act-army-1950[inferred]
-EV-004,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]
-EV-005,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]
-EV-006,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred] | code:V9-S03=>rules-army-rules-1954[inferred]
-EV-007,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]
-EV-008,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred] | code:V9-S03=>rules-army-rules-1954[inferred]
-EV-009,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred] | code:V9-S03=>rules-army-rules-1954[inferred]
-EV-010,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred] | code:V9-S02=>act-army-1950[inferred]
-EV-011,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S02=>act-army-1950[inferred] | code:V9-S03=>rules-army-rules-1954[inferred]
-EV-012,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S02=>act-army-1950[inferred] | code:V9-S03=>rules-army-rules-1954[inferred]
-EV-013,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred] | code:V9-S03=>rules-army-rules-1954[inferred]
+EV-001,M13,CODED,YES,code,3,NONE,0,3,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]#s1 | code:V9-S02=>act-army-1950[inferred]#s133 | code:V9-S03=>rules-army-rules-1954[inferred]
+EV-002,M13,CODED,YES,code,2,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]#s170 | code:V9-S08[not-id]
+EV-003,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s1,s170 | code:V9-S02=>act-army-1950[inferred]#s133"
+EV-004,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s3,s4,s5,s54,s55,s56,s57,s58,s59,s60,s61,s62,s63,s104,s105,s106,s107,s108,s109"
+EV-005,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s104,s105,s106,s107,s108,s109"
+EV-006,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s142,s143 | code:V9-S03=>rules-army-rules-1954[inferred]"
+EV-007,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]#s146
+EV-008,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]#s148 | code:V9-S03=>rules-army-rules-1954[inferred]
+EV-009,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s124,s125,s126 | code:V9-S03=>rules-army-rules-1954[inferred]"
+EV-010,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s129,s130,s131,s132,s133,s134,s135,s136 | code:V9-S02=>act-army-1950[inferred]#s136"
+EV-011,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S02=>act-army-1950[inferred]#s135,s137,s138 | code:V9-S03=>rules-army-rules-1954[inferred]"
+EV-012,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S02=>act-army-1950[inferred]#s135,s136,s137,s138 | code:V9-S03=>rules-army-rules-1954[inferred]"
+EV-013,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s142,s143,s144,s145,s146,s147,s148,s149,s150,s151,s152,s153,s154,s155 | code:V9-S03=>rules-army-rules-1954[inferred]"
 EV-014,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S03=>rules-army-rules-1954[inferred]
 EV-015,M13,CODED,YES,code,2,PARTLY,1,1,ALL,1,INFERRED_IDENTITY,NO,code:V9-S03=>rules-army-rules-1954[inferred] | code:V9-S07=>DCLR-SC-2020-002[id]
 EV-016,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S03=>rules-army-rules-1954[inferred]
 EV-017,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S03=>rules-army-rules-1954[inferred]
 EV-018,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S03=>rules-army-rules-1954[inferred]
-EV-019,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred] | code:V9-S03=>rules-army-rules-1954[inferred]
-EV-020,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]
-EV-021,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred] | code:V9-S02=>act-army-1950[inferred]
-EV-022,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]
-EV-023,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]
-EV-024,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]
-EV-025,M13,CODED,YES,code,2,PARTLY,1,1,ALL,1,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred] | code:V9-S04=>DCLR-SC-2020-N13[id]
-EV-026,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]
-EV-027,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]
+EV-019,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s54,s55,s56,s57,s58,s59,s60 | code:V9-S03=>rules-army-rules-1954[inferred]"
+EV-020,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s56,s57,s58,s59,s60"
+EV-021,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s74,s75,s76,s77,s78,s79 | code:V9-S02=>act-army-1950[inferred]#s136"
+EV-022,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s3,s4,s5,s104,s105,s106,s107,s108,s109"
+EV-023,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s57,s61,s62,s63"
+EV-024,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]#s63
+EV-025,M13,CODED,YES,code,2,PARTLY,1,1,ALL,1,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s57,s61,s62,s63 | code:V9-S04=>DCLR-SC-2020-N13[id]"
+EV-026,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s57,s61,s62,s63"
+EV-027,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]#s63
 EV-028,M13,CODED,YES,code,3,PARTLY,2,1,ALL,2,INFERRED_IDENTITY;NO_PINPOINT,NO,code:V9-S01=>act-bsa-2023[inferred] | code:V9-S04=>DCLR-SC-2020-N13[id] | code:V9-S05=>DCLR-SC-2014-N12[id]
-EV-029,M13,CODED,YES,code,2,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred] | code:V9-S06[not-id]
-EV-030,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]
-EV-031,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]
-EV-032,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred] | code:V9-S02=>act-army-1950[inferred]
-EV-033,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]
-EV-034,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]
-EV-035,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]
+EV-029,M13,CODED,YES,code,2,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s57,s63 | code:V9-S06[not-id]"
+EV-030,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s57,s61,s62,s63"
+EV-031,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s57,s61,s62,s63,s39"
+EV-032,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s129,s130,s131,s132,s133,s134,s135,s136 | code:V9-S02=>act-army-1950[inferred]#s136"
+EV-033,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s39,s40"
+EV-034,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s39,s40"
+EV-035,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s39,s57,s61,s62,s63"
 EV-036,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S03=>rules-army-rules-1954[inferred]
-EV-037,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred] | code:V9-S03=>rules-army-rules-1954[inferred]
-EV-038,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred] | code:V9-S02=>act-army-1950[inferred]
-EV-039,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred] | code:V9-S02=>act-army-1950[inferred]
-EV-040,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,code:V9-S01=>act-bsa-2023[inferred]
+EV-037,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s142,s143,s144,s145,s146,s147,s148,s149,s150,s151,s152,s153,s154,s155 | code:V9-S03=>rules-army-rules-1954[inferred]"
+EV-038,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s104,s105,s106,s107,s108,s109 | code:V9-S02=>act-army-1950[inferred]"
+EV-039,M13,CODED,YES,code,2,NONE,0,2,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s57,s58,s59,s60,s61,s62,s63 | code:V9-S02=>act-army-1950[inferred]#s136"
+EV-040,M13,CODED,YES,code,1,NONE,0,1,NOT_APPLICABLE,0,INFERRED_IDENTITY,NO,"code:V9-S01=>act-bsa-2023[inferred]#s39,s40,s57,s61,s62,s63"
 V9-WF-01,M13,PLAINTEXT,YES,statute,2,ALL,2,0,ALL,2,,YES,"statute:BSA=>act-bsa-2023[id]#s1,s170 | statute:Army Act=>act-army-1950[id]#s133"
 V9-WF-02,M13,PLAINTEXT,YES,statute,1,ALL,1,0,ALL,1,,YES,"statute:BSA=>act-bsa-2023[id]#s54,s55,s56,s57,s58,s59,s60"
 V9-WF-03,M13,PLAINTEXT,YES,statute,1,ALL,1,0,ALL,1,,YES,"statute:BSA=>act-bsa-2023[id]#s57,s61,s62,s63"

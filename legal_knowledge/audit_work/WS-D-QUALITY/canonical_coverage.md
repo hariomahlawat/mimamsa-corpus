@@ -11,19 +11,19 @@ Inputs (SHA-256): `kb` 9a8f0d193065…; `cases` 8b8d53cd1434…; `register` 40b1
 | Measure | Values (denominator 658) |
 | --- | --- |
 | citation_present | YES 581 · NO 77 |
-| source_identified | ALL 396 · NONE 109 · NOT_APPLICABLE 77 · PARTLY 76 |
-| source_searchable | ALL 472 · NOT_APPLICABLE 186 |
+| source_identified | ALL 396 · NONE 108 · NOT_APPLICABLE 77 · PARTLY 77 |
+| source_searchable | ALL 473 · NOT_APPLICABLE 185 |
 | ANCHORED_FULL (derived) | YES 362 · NO 296 |
 
 source_searchable is computed over the identified items only (CP-01), so a record that is PARTLY identified can still be searchable ALL; read it together with source_identified, never alone.
 
-Citation items: 981 total; 716 identified; 78 inferred (co-citation codes, unique short case names; never counted as identified); 716 identified and searchable.
+Citation items: 983 total; 718 identified; 78 inferred (co-citation codes, unique short case names; never counted as identified); 718 identified and searchable.
 
 ## By family
 
 | Family | Records | identified ALL | searchable ALL | ANCHORED_FULL |
 | --- | --- | --- | --- | --- |
-| CODED | 389 | 236 | 296 | 207 |
+| CODED | 389 | 236 | 297 | 207 |
 | PLAINTEXT | 269 | 160 | 176 | 155 |
 
 ## Quality flags (records carrying each; reported alongside, not gates)
@@ -55,7 +55,9 @@ Three SEPARATE measures per KB record (denominator 658), never blended into one 
                        reported as INFERRED.
   source_searchable  ALL / PARTLY / NONE / NOT_CHECKED / NOT_APPLICABLE (nothing identified). Every identified
                      source exists in a searchable corpus: DCLR id in cases_53; doc_id in crawler data/meta; and,
-                     where an Act section is cited, the section file exists.
+                     where an Act section is cited (in plain text OR in a code locator such as
+                     {'source_id': 'SRC-AA', 'locator': 'ss 79-82'}), the section file exists; a missing section file
+                     makes that source not searchable.
 Quality flags are reported alongside and are not gates inside the measures: NO_PINPOINT, PLACEHOLDER,
 STRUCTURAL, AMBIGUOUS_LOCATOR, CASE_NAME_WITHOUT_CODE, UNANCHORED_LOCATOR, INFERRED_IDENTITY,
 IDENTITY_KNOWN_TARGET_ABSENT. ANCHORED_FULL = citation_present AND identified ALL AND searchable ALL AND no flag.

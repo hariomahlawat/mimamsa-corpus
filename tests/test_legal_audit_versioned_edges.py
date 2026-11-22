@@ -53,10 +53,18 @@ class VersionedEdges(unittest.TestCase):
             reg[r["chain_id"]] = r
         for e in EDGES:
             self.assertIn(e["version_id"], reg, e["version_id"])
-            src = reg[e["version_id"]]
+            # Grouped amendment events (review fix PR #25): every evidence row must exist, the version_id must be one
+            # of them, valid_from must be a STATED effective date of one of them, and the status must be one of theirs.
+            refs = e["evidence_refs"].split(";")
+            self.assertIn(e["version_id"], refs)
+            for ref in refs:
+                self.assertIn(ref, reg, ref)
+            srcs = [reg[ref] for ref in refs]
             if e["valid_from"]:
-                self.assertEqual(e["valid_from"], src["effective_date"], e["version_id"])
-            self.assertEqual(e["effective_date_status"], src["effective_date_status"], e["version_id"])
+                self.assertIn(e["valid_from"], {x["effective_date"] for x in srcs if x["effective_date_status"].startswith("STATED_IN_INSTRUMENT")},
+                              e["version_id"])
+            if not e["effective_date_status"].startswith("CONFLICTING_EVIDENCE"):
+                self.assertIn(e["effective_date_status"], {x["effective_date_status"] for x in srcs}, e["version_id"])
 
     def test_valid_to_not_before_valid_from(self):
         for e in EDGES:
