@@ -117,6 +117,8 @@ class Config:
             return False, "no host"
         if self.is_blocked_host(host):
             return False, f"host {host} is on blocked_hosts"
+        if parts.scheme != "https" and self.source(name).get("require_https"):
+            return False, f"{name} requires HTTPS (require_https: true)"
         if not self.host_allowed(name, host):
             return False, f"host {host} not in allowed_hosts for {name}"
         return True, "ok"
