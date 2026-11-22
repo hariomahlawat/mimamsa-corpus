@@ -30,7 +30,7 @@ from .state import StateDB
 log = logging.getLogger("mimamsa.cli")
 
 DISCOVERERS = {"indiacode": indiacode, "aft": aft, "sci": opendata, "hc": opendata, "official_copies": direct, "legislative": direct, "bprd": direct,
-               "archive": direct, "official_instruments": direct}
+               "archive": direct, "official_instruments": direct, "desw": direct}
 
 
 def _replay(args) -> str | None:
