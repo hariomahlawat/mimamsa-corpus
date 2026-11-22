@@ -18,6 +18,8 @@ P0="legal_knowledge/quality_audit/v3.0/01_Case_Metadata_Findings.jsonl"
 CAND="legal_knowledge/verification_batches/v3.4/01_Eleven_P0_Holding_Candidates.csv"
 PENSION="legal_knowledge/verification_batches/v3.4/02_Pension_2026_Treatment_Queue.csv"
 IMPACT="legal_knowledge/verification_batches/v3.4/04_Targeted_658_KB_Impact_Register.csv"
+AFSPA="legal_knowledge/verification_batches/v3.4/05_AFSPA_Later_Treatment_Queue.csv"
+ISAAC_CLAIMS="legal_knowledge/verification_batches/v3.4/06_Isaac_2026_Source_Checked_Propositions.csv"
 ISAAC_META="legal_knowledge/judgment_originals/sci/2026/nc_isaac_2026.json"
 ISAAC_PDF="legal_knowledge/judgment_originals/sci/2026/nc_isaac_2026.pdf"
 OUT="legal_knowledge/quality_audit/v3.4"
@@ -69,6 +71,14 @@ def main():
     impacts=csvrows(IMPACT)
     if len(impacts)!=14 or any(x["release_status"]!="HOLD_NONAPPROVED" for x in impacts):
         raise RuntimeError("KB impact was prematurely released")
+    afspa=csvrows(AFSPA)
+    if len(afspa)!=3 or any(x["jag_approved"]!="NO" for x in afspa):
+        raise RuntimeError("AFSPA subsequent treatment queue incorrectly promoted")
+    claims=csvrows(ISAAC_CLAIMS)
+    if len(claims)!=6 or any(x["source_check_status"]!="SC_JUDGMENT_TEXT_CONFIRMED"
+                             or x["exhaustive_later_treatment_verified"]!="NO"
+                             or x["jag_approved"]!="NO" for x in claims):
+        raise RuntimeError("2026 source-checked propositions missing or prematurely certified")
     isaac=json.loads(dl(ISAAC_META).read_text())
     if isaac["source_tier"]!="OFFICIAL_SUPREME_COURT_API" or hashlib.sha256(dl(ISAAC_PDF).read_bytes()).hexdigest()!=isaac["sha256"]:
         raise RuntimeError("2026 Isaac official judgment identity or checksum failed")
@@ -85,6 +95,7 @@ def main():
       "raw_or_scr_pdfs":7,"official_judis_pdfs":2,"third_party_pdfs":1,"missing_pdfs":1,
       "auto_excerpts":80,"unapproved_lexical_kb_links":74,"unapproved_holding_candidates":len(candidates),
       "pension_2026_treatment_queues":len(pension),"targeted_kb_references":len(impacts),
+      "afspa_treatment_leads":len(afspa),"source_checked_isaac_propositions_jag_pending":len(claims),
       "isaac_2026_official_original_sha":isaac["sha256"],
       "legal_holdings_jag_approved":0,"operational_propositions_released":0,
       "disclaimer":"Provenance/read-back and release gating are technical tests; no independent substantive legal review was performed by this workflow."
