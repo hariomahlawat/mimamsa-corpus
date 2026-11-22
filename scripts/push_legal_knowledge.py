@@ -47,14 +47,18 @@ def main():
         repo_id=DATASET, repo_type="dataset", operations=operations,
         commit_message="Stage curated military-law legal review data (not JAG approved)",
     )
-    print(f"COMMIT {result.commit_oid}")
+    # huggingface_hub.CommitInfo exposes the committed revision as `oid`.
+    revision = getattr(result, "oid", None)
+    if not revision:
+        raise RuntimeError("Hugging Face returned no commit revision for read-back verification")
+    print(f"COMMIT {revision}")
     # Verify each uploaded object's content from the remote dataset after commit.
     import hashlib
     from huggingface_hub import hf_hub_download
     for f in payload:
         remote = hf_hub_download(repo_id=DATASET, repo_type="dataset",
                                  filename=f.relative_to(ROOT).as_posix(),
-                                 revision=result.commit_oid, force_download=True)
+                                 revision=revision, force_download=True)
         local_hash = hashlib.sha256(f.read_bytes()).hexdigest()
         remote_hash = hashlib.sha256(Path(remote).read_bytes()).hexdigest()
         if local_hash != remote_hash:
