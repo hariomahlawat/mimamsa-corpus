@@ -62,12 +62,19 @@ def best_candidates(case: dict, raw: list[dict]) -> list[dict]:
     for x in raw:
         if not court_ok(case["court"], x):
             continue
+        # Title similarity without decision-year agreement produces misleading
+        # matches (e.g. similarly named Union of India cases decades apart).
+        year_match = re.search(r"(?:19|20)\\d{2}", case.get("curated_case_id", ""))
+        candidate_year = re.search(r"(?:/year=|/)((?:19|20)\\d{2})(?:/|$)",
+                                   x.get("source_url", "") or x.get("raw_path", ""))
+        if not year_match or not candidate_year or year_match.group() != candidate_year.group(1):
+            continue
         title = norm_title(x.get("title", ""))
         if len(title) < 12:
             continue
         ratio = SequenceMatcher(None, base, title).ratio()
-        # Suggested-only, never an established source identity.
-        if ratio >= 0.80:
+        # Strict, year-conditioned suggestion only; NEVER assert identity.
+        if ratio >= 0.90:
             answers.append({
                 "candidate_title": x.get("title", ""),
                 "candidate_source_url": x.get("source_url", ""),
