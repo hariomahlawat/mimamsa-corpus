@@ -89,6 +89,8 @@ jobs:
       - name: Test original SCI JUDIS judgment acquisition for Ram Sarup and Navjot Sandhu
         run: python scripts/acquire_historical_judis_v33.py
       - name: Preserve and verify official Indian Railways compilation containing S R Dhingra
+        # Indian Railways host timed out from CI; run only on explicit retry.
+        if: github.event_name == 'workflow_dispatch'
         continue-on-error: true
         run: python scripts/archive_dhingra_railway_source_v33.py
       - name: Archive provenance-labelled mirror of 2016 Supreme Court Mani Ram Bhaira order
