@@ -12,11 +12,19 @@
   },
   "wsa_change_log": {
    "path": "legal_knowledge/audit_work/WS-A-STATUTORY/provision_change_log.csv",
-   "sha256": "342ab73c937d7f9af3cf47c70f7ecb40d2cc1c65bf0f3ad9bf1f980c5e6ebcaf"
+   "sha256": "b61625caa04a5db37cab91b50323aaf99b3ea7684c88439b18c8125efb86822a"
   },
   "wsa_aa_chain": {
    "path": "legal_knowledge/audit_work/WS-A-STATUTORY/army_act_amendment_chain.csv",
    "sha256": "7fba35cf3a61f737c5054269bc2a785305a6d9c64b03c733f32106c99b05d1d2"
+  },
+  "wsa_aa_chain_addendum": {
+   "path": "legal_knowledge/audit_work/WS-A-STATUTORY/army_act_amendment_chain_addendum_cycle3.csv",
+   "sha256": "b87c2837798dd60774f05e9f08271cfc61ed5b683a85e5ea3e80d7a096e360da"
+  },
+  "chain_chronology": {
+   "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/army_rules_provision_chronology.csv",
+   "sha256": "4bb18af8fef4b62f1620bea6ac2eb111e4e9494f948e67d2f68c064cda5020a1"
   },
   "wsc_inventory": {
    "path": "legal_knowledge/audit_work/WS-C-MML/kb658_source_coverage_inventory.csv",
@@ -30,17 +38,22 @@
  "summary": {
   "records_citing_aa_or_ar_provisions": 282,
   "record_provision_citations": 1061,
-  "citations_with_registered_versions": 331,
-  "edges": 375,
+  "citations_with_registered_versions": 341,
+  "edges": 391,
   "edges_with_stated_effective_date": 177,
-  "edges_effective_date_unstated_flagged": 198,
-  "provisions_with_versions": 89,
-  "amendment_events": 118,
-  "events_grouping_duplicate_evidence": 25,
+  "edges_effective_date_unstated_flagged": 214,
+  "provisions_with_versions": 91,
+  "amendment_events": 123,
+  "events_grouping_duplicate_evidence": 29,
+  "edges_with_retrospective_deemed_effect": 0,
+  "events_conflicting_commencement": 0,
+  "events_from_addendum": 9,
   "edges_zero_length_or_reversed": 0,
   "by_version_source": {
    "ARMY-RULES-CHAIN-01/statutory_version_register_seed.csv": 26,
-   "WS-A-STATUTORY/army_act_amendment_chain.csv": 114,
+   "WS-A-STATUTORY/army_act_amendment_chain.csv": 103,
+   "WS-A-STATUTORY/army_act_amendment_chain.csv;WS-A-STATUTORY/army_act_amendment_chain_addendum_cycle3.csv": 11,
+   "WS-A-STATUTORY/army_act_amendment_chain_addendum_cycle3.csv": 16,
    "WS-A-STATUTORY/provision_change_log.csv": 186,
    "WS-A-STATUTORY/provision_change_log.csv;ARMY-RULES-CHAIN-01/statutory_version_register_seed.csv": 49
   },

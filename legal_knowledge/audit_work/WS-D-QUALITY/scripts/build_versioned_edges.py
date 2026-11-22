@@ -26,6 +26,16 @@ Determination states (e.g. r.23(3) CONFLICTING, r.193 OPEN, r.194 PROPOSAL) are 
 Structural only: an edge says a record cites a provision that has this registered version, not that the
 version applies to the record or that the record is correct.
 Outputs: relation_graph_versioned_edges.csv, relation_graph_versioned_report.md (+ .json summary).
+Date model: publication_date, commencement (valid_from, only when STATED_IN_INSTRUMENT) and
+retrospective_deemed_effect_from are DISTINCT fields. A retrospective deemed effect (e.g. S.R.O. 216/1988:
+commencement 1988-09-17, deemed from 1979-06-04) is carried in its own column with flag
+RETROSPECTIVE_DEEMED_EFFECT_AQ06; it never becomes valid_from, and its legal applicability is left to AQ-06.
+Only two different STATED commencement dates for one event are CONFLICTING (EVIDENCE_EFFECTIVE_DATE_CONFLICT).
+Inputs include WS-A's army_act_amendment_chain_addendum_cycle3.csv (AA-C3-*); a row declaring
+supersedes_or_extends 'extends AA-NN' joins that row's amendment event (same instrument, never a successor); rows
+whose instrument was not
+examined are text-only evidence (TEXT_OR_OCR_EVIDENCE_ONLY, INSTRUMENT_NOT_EXAMINED) and never supply a stated
+date. Retrospective dates come from the WS-A change log column and the ARMY-RULES-CHAIN-01 chronology.
 Usage: python3 build_versioned_edges.py [--check]
 """
 import argparse, collections, csv, hashlib, importlib.util, io, json, re, sys
@@ -38,6 +48,10 @@ KB = ROOT / "legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.j
 INPUTS = {"kb": KB, "version_register": AW / "ARMY-RULES-CHAIN-01/statutory_version_register_seed.csv",
           "wsa_change_log": AW / "WS-A-STATUTORY/provision_change_log.csv",
           "wsa_aa_chain": AW / "WS-A-STATUTORY/army_act_amendment_chain.csv",
+          # WS-A cycle-3 addendum (AA-C3-*): declared, pinned input; same exclusions and amending-Act stripping
+          "wsa_aa_chain_addendum": AW / "WS-A-STATUTORY/army_act_amendment_chain_addendum_cycle3.csv",
+          # source of retrospective_deemed_effect_from for Army Rules events (PR #28)
+          "chain_chronology": AW / "ARMY-RULES-CHAIN-01/army_rules_provision_chronology.csv",
           "wsc_inventory": AW / "WS-C-MML/kb658_source_coverage_inventory.csv",
           "plaintext_index": WSD / "plaintext_citation_index.csv"}
 OUT_CSV, OUT_MD, OUT_JSON = (WSD / "relation_graph_versioned_edges.csv", WSD / "relation_graph_versioned_report.md",
@@ -46,7 +60,7 @@ STATED = "STATED_IN_INSTRUMENT"
 NOT_A_CHANGE = re.compile(r"NO AMENDMENT|\(no amendment\)|\(not amendment\)", re.I)
 ISO = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 COLS = ["record_id", "instrument", "provision", "cited_via", "version_id", "event_key", "evidence_refs", "version_source", "change_or_version",
-        "publication_date", "effective_date_status", "valid_from", "valid_to", "determination_state", "conflict_id", "flags"]
+        "publication_date", "effective_date_status", "valid_from", "retrospective_deemed_effect_from", "valid_to", "determination_state", "conflict_id", "flags"]
 
 
 def rows(p):
@@ -173,6 +187,12 @@ def group_events(entries):
         else:
             g["eff"] = ""
             g["status"] = rep["status"] if not stated else "CONFLICTING_EVIDENCE: " + " / ".join(stated)
+        retros = sorted({m.get("retro", "") for m in ms if ISO.match(m.get("retro", "") or "")})
+        g["retro"] = retros[0] if len(retros) == 1 else ""
+        g["retro_sources"] = sorted({m["source"] for m in ms if m.get("retro")})
+        if len(retros) > 1:
+            g["conflicts"].append("EVIDENCE_DEEMED_EFFECT_CONFLICT")
+        g["not_examined"] = any(m.get("not_examined") for m in ms)
         g["source"] = ";".join(dict.fromkeys(g["sources"]))
         del g["members"]
     return groups
@@ -207,7 +227,7 @@ def versions():
                 change=r["version"], sub=bool(re.match(r"r\.\d+[A-Za-z]?\s*[\(\s]", r["provision"])), ocr=False,
                 pub=r["publication_date"], eff=r["effective_date"], status=r["effective_date_status"],
                 det=r["determination_state"], conflict=r["conflict_id"] if r["conflict_id"] not in ("", "-") else "",
-                ikey=instrument_key(r["text_source_instrument"]))
+                ikey=instrument_key(r["text_source_instrument"]), retro=(r.get("retrospective_deemed_effect_from") or "").strip())
     for r in rows(INPUTS["wsa_change_log"]):
         if "itself" in r["provision"] or NOT_A_CHANGE.search(r["change_type"]):
             continue  # not a version: search findings, notes, declarations
@@ -217,21 +237,49 @@ def versions():
                 sub=bool(re.search(r"r{1,2}\.\s*%s\s*\(" % re.escape(n), r["provision"])),
                 ocr="OCR" in r["change_type"] or "OCR" in r.get("evidence_level", ""),
                 pub=r["publication_date"], eff=r["effective_date"], status=r["effective_date_status"], det="", conflict="",
-                ikey=instrument_key(r["instrument"], r["gazette_identity"]))
-    for r in rows(INPUTS["wsa_aa_chain"]):
-        if (NOT_A_CHANGE.search(r["change_as_printed"]) or (r["effective_date_status"] or "").startswith("NOT_APPLICABLE")
-                or r["sections_affected"].strip().lower().startswith(("proposed", "none", "unknown", "all", "as act"))):
-            continue  # not an enacted change to identified sections
-        for n in army_act_sections(r["sections_affected"]):
-            add("AA", n, version_id=r["chain_id"], source="WS-A-STATUTORY/army_act_amendment_chain.csv",
-                change=f"{r['instrument'][:60]}", sub=bool(re.search(r"ss?\.\s*%s\s*\(" % re.escape(n), strip_amending_refs(r["sections_affected"]))),
-                ocr=r["evidence_level"].startswith(("HINT", "TEXT_LAYER", "REQUIRES_VERIFICATION")),
-                pub=r["publication_date"], eff=r["effective_date"], status=r["effective_date_status"], det="", conflict="",
-                ikey=instrument_key(r["instrument"], r["number_year"], r["gazette_identity"]) or r["chain_id"].rsplit("-s", 1)[0])
+                ikey=instrument_key(r["instrument"], r["gazette_identity"]), retro=(r.get("retrospective_deemed_effect_from") or "").strip())
+    chain_key = {}  # chain_id -> event key, so that addendum rows declaring 'extends AA-NN' join that event
+    for src_key in ("wsa_aa_chain", "wsa_aa_chain_addendum"):
+        for r in rows(INPUTS[src_key]):
+            ext = re.match(r"\s*extends\s+(AA-[\w-]+)", r.get("supersedes_or_extends", "") or "")
+            own_key = instrument_key(r["instrument"], r["number_year"], r["gazette_identity"]) or r["chain_id"].rsplit("-s", 1)[0]
+            ikey = chain_key.get(ext.group(1), own_key) if ext else own_key
+            chain_key.setdefault(r["chain_id"], ikey)
+            sa = r["sections_affected"].strip()
+            if (NOT_A_CHANGE.search(r["change_as_printed"]) or (r["effective_date_status"] or "").startswith("NOT_APPLICABLE")
+                    or sa.lower().startswith(("proposed", "none", "unknown", "all", "as act")) or not sa
+                    or "Bill" in r["instrument"] or r["number_year"].startswith("Bill")):
+                continue  # not an enacted change to identified Army Act section text
+            not_examined = bool(re.search(r"instrument(?:\s+itself)?\s+NOT\s+ex", " ".join((r["evidence_level"], r.get("notes", ""), r.get("uncertainty", ""))), re.I))
+            for n in army_act_sections(sa):
+                add("AA", n, version_id=r["chain_id"], source=str(INPUTS[src_key].relative_to(AW)),
+                    change=f"{r['instrument'][:60]}", sub=bool(re.search(r"ss?\.\s*%s\s*\(" % re.escape(n), strip_amending_refs(sa))),
+                    ocr=not_examined or r["evidence_level"].startswith(("HINT", "TEXT_LAYER", "REQUIRES_VERIFICATION", "COMPILATION")),
+                    pub=r["publication_date"],
+                    # an instrument not examined never supplies a stated commencement date
+                    eff="" if not_examined else r["effective_date"],
+                    status=r["effective_date_status"],  # kept as recorded; a not-examined row's date is cleared above
+                    det="", conflict="", not_examined=not_examined, ikey=ikey,
+                    retro=(r.get("retrospective_deemed_effect_from") or "").strip())
+    # retrospective deemed effect recorded on the chain chronology (PR #28), keyed by provision + instrument key
+    chron_retro = {}
+    for r in rows(INPUTS["chain_chronology"]):
+        d = (r.get("retrospective_deemed_effect_from") or "").strip()
+        if d:
+            for n in re.findall(r"r\.(\d+[A-Za-z]?)", r["provision"]):
+                chron_retro[(norm(n), instrument_key(r["instrument"]))] = d
     V = {}
     for k, entries in raw.items():
         entries.sort(key=lambda v: (v["pub"] if ISO.match(v["pub"] or "") else "9999", v["version_id"]))
         V[k] = group_events(entries)
+        for g in V[k]:
+            cd = chron_retro.get((k[1], g["ikey"])) if k[0] == "AR" else None
+            if cd:
+                g["retro_sources"].append("ARMY-RULES-CHAIN-01/army_rules_provision_chronology.csv")
+                if not g["retro"]:
+                    g["retro"] = cd
+                elif g["retro"] != cd:
+                    g["conflicts"].append("EVIDENCE_DEEMED_EFFECT_CONFLICT")
         V[k].sort(key=lambda v: (v["pub"] if ISO.match(v["pub"] or "") else "9999", v["version_id"]))
     return V
 
@@ -286,6 +334,10 @@ def build():
                     flags.append("SUBPROVISION_VERSION")
                 if v["ocr"]:
                     flags.append("TEXT_OR_OCR_EVIDENCE_ONLY")
+                if v.get("not_examined"):
+                    flags.append("INSTRUMENT_NOT_EXAMINED")
+                if v.get("retro"):
+                    flags.append("RETROSPECTIVE_DEEMED_EFFECT_AQ06")
                 if v["det"] and v["det"].split()[0] in ("CONFLICTING", "OPEN", "PROPOSAL"):
                     flags.append("DETERMINATION_" + v["det"].split()[0])
                 edges.append({"record_id": rid, "instrument": "Army Act 1950" if inst == "AA" else "Army Rules 1954",
@@ -293,6 +345,7 @@ def build():
                               "event_key": v["event_key"], "evidence_refs": ";".join(v["evidence_ids"]),
                               "version_source": v["source"], "change_or_version": v["change"], "publication_date": v["pub"],
                               "effective_date_status": v["status"], "valid_from": v["eff"] if stated else "",
+                              "retrospective_deemed_effect_from": v.get("retro", ""),
                               "valid_to": valid_to, "determination_state": v["det"], "conflict_id": v["conflict"],
                               "flags": ";".join(flags)})
     cited = {(r, k) for r in C for k in C[r]}
@@ -303,6 +356,9 @@ def build():
          "edges_effective_date_unstated_flagged": sum("EFFECTIVE_DATE_UNSTATED" in e["flags"] for e in edges),
          "provisions_with_versions": len(V), "amendment_events": sum(len(v) for v in V.values()),
          "events_grouping_duplicate_evidence": sum(1 for v in V.values() for g in v if len(g["evidence_ids"]) > 1),
+         "edges_with_retrospective_deemed_effect": sum(1 for e in edges if e["retrospective_deemed_effect_from"]),
+         "events_conflicting_commencement": sum(1 for v in V.values() for g in v if "EVIDENCE_EFFECTIVE_DATE_CONFLICT" in g["conflicts"]),
+         "events_from_addendum": sum(1 for v in V.values() for g in v if "addendum" in g["source"]),
          "edges_zero_length_or_reversed": sum(1 for e in edges if e["valid_from"] and e["valid_to"] and e["valid_to"] <= e["valid_from"]),
          "by_version_source": dict(sorted(collections.Counter(e["version_source"] for e in edges).items())),
          "determination_flags": dict(sorted(collections.Counter(f for e in edges for f in e["flags"].split(";") if f.startswith("DETERMINATION_")).items()))}
