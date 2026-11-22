@@ -11,7 +11,7 @@ Resume procedure: read each `WS-*/STATUS.md` on its branch (`git -C /home/user/w
 | A Statutory & Gazette | #11 | launched 2026-11-22 | claude/ws-a-statutory · /home/user/ws-a | RUNNING (base 2a7ae7af) | – | – | awaiting first hand-off |
 | B Judgments | #12 | launched 2026-11-22 | claude/ws-b-judgments · /home/user/ws-b | RUNNING (base 2a7ae7af) | – | – | awaiting first hand-off |
 | C MML & procedure | #13 | launched 2026-11-22 | claude/ws-c-mml · /home/user/ws-c | RUNNING (base 2a7ae7af) | – | – | awaiting first hand-off |
-| D Data quality & CI | #14 | launched 2026-11-22 | claude/ws-d-quality · /home/user/ws-d | RUNNING (base 2a7ae7af) | – | – | awaiting first hand-off |
+| D Data quality & CI | #14 | Agent D (general-purpose subagent) | claude/ws-d-quality · /home/user/ws-d | COMPLETED hand-off 1 | 5df7ac95 (merged with #16) | local gate green; 113 tests | PR #18 → claude/next-stage-proposal; review WS-D-1 |
 
 ## PRs (owner review; none merged)
 | PR | Branch → base | Content | Approval scope |
@@ -19,7 +19,8 @@ Resume procedure: read each `WS-*/STATUS.md` on its branch (`git -C /home/user/w
 | #15 | claude/hf-sync-guard-staging → legal-knowledge/v2.5-staging | Job-level HF safeguard: general corpus upload is manual-dispatch only, with approval input; abbreviation job unchanged | Merge before any staging merge (A3) |
 | #16 | claude/next-stage-proposal → claude/audit-pilot-01 | Next-stage proposal (fd01b234 + b20843d6) with owner corrections: distinct dates, continuation-page image checks PIC-30..36, C-08 (r.193) / C-09 (r.194) split | Review proposal |
 | #17 | claude/acq-02-config → claude/acq-01-config | ACQ-02 crawler config, source `archive_acq02` (16 URLs with expected hashes), disabled | Config approval, then a separate download approval (ACQ-02 scope only) |
-| WS-A..D | claude/ws-*-* → claude/next-stage-proposal | Opened by the coordinator after review of each hand-off | Review proposals |
+| #18 | claude/ws-d-quality → claude/next-stage-proposal | WS-D: hash reproduction, 87-code test, scores, plain-text index, relation graph, coverage scorecard, validator controls, 4 CI steps | Review proposal |
+| WS-A..C | claude/ws-*-* → claude/next-stage-proposal | Opened after review of each hand-off | Review proposals |
 
 Approval scopes are documented separately:
 - ACQ-01 = PR #8 (14 URLs).
@@ -53,6 +54,7 @@ Approval scopes are documented separately:
 | A6 | Indian-network egazette search (E-7/1960, S.R.O. 258/2002, post-2022) | Chain gaps |
 | A7 | Custodian letter signature | Certified copies |
 | A9 | Legal advisor nomination | All advisor items |
+| OQ-D-003/006/007/014/015 | WS-D questions: v4 register fix; migration of frozen effective dates; human reviewer nomination; fresh PILOT-01 validation record; exact reviewer IDs | WS-D follow-ups |
 | A10/A11 | DESW, AFT HTTPS route, Regulations for the Army copy; MML base64 history | Respective items |
 
 ## Unresolved legal questions
@@ -68,3 +70,4 @@ The orchestrator reviews each workstream hand-off and records its review in `COO
 
 ## Agent messages sent
 - 2026-11-22: owner corrections relayed to agents A–D (date semantics, page-image rule, C-08/C-09, base branch `claude/next-stage-proposal`).
+- 2026-11-22: WS-D questions routed: OQ-D-004/008/009/012 → WS-B; OQ-D-005 → WS-A.
