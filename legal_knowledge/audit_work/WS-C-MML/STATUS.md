@@ -100,6 +100,21 @@ PR #28 updated ARMY-RULES-CHAIN-01: AR-010, AR-011 and AR-025 have no commenceme
 
 It reproduces identically at the untouched base 2a66cd04 (caused by PR #28). WS-D is regenerating those outputs on its reconcile branch. All other gates passed: PILOT-01 and R23-VERIFY-01 strict, `check_registers.py`, `check_csv.py`, `check_provenance.py` (new=0), records_658 sha, `test_kb_citations.py`.
 
+## Follow-up: merged WS-A reconcile (claude/ws-a-cycle3-reconcile @ 18ae1078; merge 1ba72b04)
+- Re-ran `build_procedure_crosswalk.py` (in-tree WS-A log), `build_crosswalk.py` and the v2 builder. Their outputs are unchanged (byte-identical):
+  - procedure_crosswalk aff38095…;
+  - crosswalk 70ca124b…;
+  - v2 fe9c871a….
+- Only `input_manifest.json` changed: the pinned WS-A change log 342ab73c… → b61625ca…. New manifest sha f5d9891ebfda87b04ff067e6160054fb361c6d47e223d7c06c31fb89802c1b70; re-run is stable.
+- **Known WS-D unittest failures, now four**, all in `test_legal_audit_versioned_edges`:
+  - test_conflicting_evidence_present_in_real_versions;
+  - test_inputs_pinned_and_current;
+  - test_regeneration_is_byte_identical;
+  - test_stated_dates_are_the_registers_own.
+
+  They reproduce identically at the merge commit 1ba72b04 without the WS-C change (WS-A's corrected log and PR #28; WS-D regenerating).
+- All other gates passed: PILOT-01 and R23-VERIFY-01 strict, `check_registers.py`, `check_csv.py`, `check_provenance.py` (new=0), records_658 sha, `test_kb_citations.py`.
+
 ## Next (if continued)
 - Image-check the crosswalk locators that the advisor selects. Every crosswalk locator is text-layer only (REQUIRES_VERIFICATION).
 - DOC-vs-PDF comparison for vol 2(AA) and vol 3 beyond the pilot samples.

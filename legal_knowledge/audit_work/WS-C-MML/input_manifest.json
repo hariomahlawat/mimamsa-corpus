@@ -133,8 +133,8 @@
   {
    "path": "legal_knowledge/audit_work/WS-A-STATUTORY/provision_change_log.csv",
    "role": "wsa_provision_change_log_in_tree (input to build_procedure_crosswalk.py from reconciliation onward)",
-   "bytes": 93394,
-   "sha256": "342ab73c937d7f9af3cf47c70f7ecb40d2cc1c65bf0f3ad9bf1f980c5e6ebcaf"
+   "bytes": 97602,
+   "sha256": "b61625caa04a5db37cab91b50323aaf99b3ea7684c88439b18c8125efb86822a"
   },
   {
    "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/page_image_checks_chain.csv",
