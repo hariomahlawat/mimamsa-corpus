@@ -46,7 +46,8 @@
         "PROCEDURE",
         "CROSS_VOLUME",
         "DATA_QUALITY",
-        "INDEPENDENT_REVIEW"
+        "INDEPENDENT_REVIEW",
+        "MANUAL"
       ]
     },
     "severity": {
