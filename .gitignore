@@ -26,3 +26,4 @@ data/excluded_judgments.jsonl
 reports/relevance.csv
 reports/phase2_report.md
 state/rejected_text/
+state/excluded_before_recheck.jsonl
