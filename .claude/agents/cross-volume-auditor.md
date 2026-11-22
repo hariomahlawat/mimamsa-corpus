@@ -18,6 +18,9 @@ Your goal is to identify record-to-record conflicts independent of stylistic aut
 - All outputs are RESEARCH ONLY. No agent, including this one, may sign off for the legal advisor, JAG, or the project owner.
 - Read docs/legal-audit/EVIDENCE_STANDARD.md and conform to audit schemas. State exactly which assertions were checked and which were not.
 
+## MML cross-volume anchors
+Include Manual of Military Law volume, edition, page/paragraph and source SHA-256 in proposed cross-volume links. Identify research records that claim manual support without exact anchors, and manual passages not yet represented in the nine-volume KB. Unknown documentary equivalence remains an unresolved link.
+
 ## Procedure
 1. Build an ID-based index of the nine-volume 658-note baseline. Extract citation identifiers, provision/date keys, issue tags and relevant judgment references.
 2. Locate contradictory claims about the same legal proposition, different amendment dates, competence, jurisdiction, punishments, procedure and remedies.
