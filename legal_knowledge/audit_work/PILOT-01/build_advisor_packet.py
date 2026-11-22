@@ -49,6 +49,17 @@ md.append("**How to decide each item:** mark one of ACCEPT_PROPOSAL / ACCEPT_WIT
           "so that the decision can be entered as a LEGAL_ADVISOR review record (`reviews/*.json`).\n")
 md.append(f"Items: {len(items)} queued first-pass findings (P0 first), plus an annex of {len(supp)} supplementary remediation findings. "
           "Page-image evidence: `registers/page_image_checks.csv`. Dispositions: `post_review/`.\n")
+md.append("\n## Discovery addendum (2026-11-22): new evidence, no status change\n")
+md.append("Read-only discovery located an **archival scan of the printed Gazette of India, No. 47, 27-11-1954, Part II Section 4** "
+          "(archive.org item `in.gazette.central.w.1954-11-27.103686`, collection gazetteofindia, uploaded by Public.Resource.Org; "
+          "MD5 matches archive.org's published checksum; SHA-256 c5ef95a9…). Page images checked by the orchestrator (PIC-10, PIC-11): printed p.291 "
+          "carries the masthead and the S.R.O. 484 preamble; printed p.300 shows r.23(3) as “You are **not** obliged to say anything unless you wish to do so …”.\n")
+md.append("**Effect on the r.23(3) items (Items concerning F-STAT-001, F-STAT-020, F-XVOL-001/002 and the HCE-010 conflict):** "
+          "this is the first image of the *notified* 1954 text, and it agrees with the MML copies and disagrees with the India Code compilation. "
+          "**It does not close the dispute.** The remaining gates: (i) custodian authentication, or an advisor decision that this archival scan is "
+          "acceptable evidence; (ii) the r.23 amendment chain 1954 to date (amending S.R.O. scans located by discovery are not yet read for r.23); "
+          "(iii) an independent second reading of the image; (iv) a legal-advisor decision. All r.23(3) findings remain CONFLICTING. "
+          "No record wording is changed. The custodian request (draft, not sent) remains the route to certified evidence.\n")
 cur = None
 for n, f in enumerate(items, 1):
     g = group(f)

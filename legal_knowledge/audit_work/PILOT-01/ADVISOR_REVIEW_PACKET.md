@@ -14,6 +14,13 @@
 Items: 32 queued first-pass findings (P0 first), plus an annex of 2 supplementary remediation findings. Page-image evidence: `registers/page_image_checks.csv`. Dispositions: `post_review/`.
 
 
+## Discovery addendum (2026-11-22): new evidence, no status change
+
+Read-only discovery located an **archival scan of the printed Gazette of India, No. 47, 27-11-1954, Part II Section 4** (archive.org item `in.gazette.central.w.1954-11-27.103686`, collection gazetteofindia, uploaded by Public.Resource.Org; MD5 matches archive.org's published checksum; SHA-256 c5ef95a9…). Page images checked by the orchestrator (PIC-10, PIC-11): printed p.291 carries the masthead and the S.R.O. 484 preamble; printed p.300 shows r.23(3) as “You are **not** obliged to say anything unless you wish to do so …”.
+
+**Effect on the r.23(3) items (Items concerning F-STAT-001, F-STAT-020, F-XVOL-001/002 and the HCE-010 conflict):** this is the first image of the *notified* 1954 text, and it agrees with the MML copies and disagrees with the India Code compilation. **It does not close the dispute.** The remaining gates: (i) custodian authentication, or an advisor decision that this archival scan is acceptable evidence; (ii) the r.23 amendment chain 1954 to date (amending S.R.O. scans located by discovery are not yet read for r.23); (iii) an independent second reading of the image; (iv) a legal-advisor decision. All r.23(3) findings remain CONFLICTING. No record wording is changed. The custodian request (draft, not sent) remains the route to certified evidence.
+
+
 ## A. P0 issues
 
 ### Item 1: F-XVOL-001 — EV-016 — first pass P0 / provisional P2
@@ -25,6 +32,7 @@ Items: 32 queued first-pass findings (P0 first), plus an annex of 2 supplementar
 - **Temporal scope:** Army Rules 1954 as consolidated on India Code (corpus copy retrieved 2026-11-21); original S.R.O. 484 of 27-11-1954 and later amending S.R.O.s not held or verified.
 - **Evidence:** S-XVOL-002: Army Rules, 1954 (India Code compilation) - r.23(3) caution sentence t — [[page 41]]: r.23(3) second sentence, caution reads 'You are obliged to say anything unless you wish to do so' (word 'not' absent) [OFFICIAL_COMPILATION, RULE]
 - **MML anchors (secondary, not proof):** S-MML-005, S-MML-006, S-MML-007, S-MML-008
+- **Page-image checks:** PIC-10
 - **Limitations:** The specific url in EV-016 (upload.indiacode.nic.in showfile ... armyrules1954.pdf) was not fetched; the comparison used the corpus India Code copy at a different URL (bitstream a7bf1768...).; MML texts were not re-read beyond confirming the 'not obliged' line in derived text; MML is cited only via mml_anchor_ids.; No judgment on r.23(3) wording or on voluntariness of SoE statements was checked.
 
 > **Independent review and disposition — technical challenge, NOT legal approval**
@@ -46,6 +54,7 @@ Items: 32 queued first-pass findings (P0 first), plus an annex of 2 supplementar
 - **Temporal scope:** Army Rules 1954 as consolidated on India Code (corpus copy retrieved 2026-11-21); original S.R.O. 484 of 27-11-1954 and later amending S.R.O.s not held or verified.
 - **Evidence:** S-XVOL-002: Army Rules, 1954 (India Code compilation) - r.23(3) caution sentence t — [[page 41]]: r.23(3) second sentence, caution reads 'You are obliged to say anything unless you wish to do so' (word 'not' absent) [OFFICIAL_COMPILATION, RULE]
 - **MML anchors (secondary, not proof):** S-MML-005, S-MML-006, S-MML-007
+- **Page-image checks:** PIC-10
 - **Limitations:** Record-to-record comparison covered only records located by the stated regex searches over records_658.jsonl (body + references); records phrased differently may have been missed.; HCE-010 and V9-SC-19 are not primary records of this agent; findings on their own accuracy belong to other agents.; Art 20(3) and any judgment on SoE voluntariness were not checked.
 
 > **Independent review and disposition — technical challenge, NOT legal approval**
@@ -66,7 +75,7 @@ Items: 32 queued first-pass findings (P0 first), plus an annex of 2 supplementar
 - **Temporal scope:** India Code-hosted annotated Army Rules compilation (undated; latest authority note SRO 258 of 27-11-2002); S.R.O. 484 (1954) and amending S.R.O.s not held; question is the wording of r.23(3) as made in 1954 and as in force today
 - **Evidence:** S-STAT-012: Army Rules 1954 r.23(3) caution (India Code annotated compilation) — [[page 41]] r.23(3): '...You are obliged to say anything unless you wish to do so...' [OFFICIAL_COMPILATION, RULE]
 - **MML anchors (secondary, not proof):** S-MML-005, S-MML-006, S-MML-007
-- **Page-image checks:** PIC-01, PIC-02
+- **Page-image checks:** PIC-01, PIC-02, PIC-10
 - **Limitations:** Did not inspect any page image of the compilation PDF or the MML PDF for the negation; derived text only.; Did not examine judicial treatment of the caution wording.; Unapproved research output; not legal advice; no advisor nominated.
 
 > **Independent review and disposition — technical challenge, NOT legal approval**
@@ -108,7 +117,7 @@ Items: 32 queued first-pass findings (P0 first), plus an annex of 2 supplementar
 - **Temporal scope:** India Code-hosted annotated Army Rules compilation (undated; latest authority note SRO 258 of 27-11-2002); S.R.O. 484 (1954) and amending S.R.O.s not held
 - **Evidence:** S-STAT-012: Army Rules 1954 r.23(3) caution (India Code annotated compilation) — [[page 41]] r.23(3): '...You are obliged to say anything unless you wish to do so...' [OFFICIAL_COMPILATION, RULE]
 - **MML anchors (secondary, not proof):** S-MML-005, S-MML-006, S-MML-007
-- **Page-image checks:** PIC-01
+- **Page-image checks:** PIC-01, PIC-10
 - **Limitations:** No page-image check.; Unapproved research output; not legal advice; no advisor nominated.
 
 > **Independent review and disposition — technical challenge, NOT legal approval**
@@ -374,7 +383,7 @@ Items: 32 queued first-pass findings (P0 first), plus an annex of 2 supplementar
 - **Temporal scope:** MML texts: undated editions (latest amendment notes seen: MML 2.pdf to SRO 8(E) of 23-06-2003; AR .doc copies to SRO 17(E) of 06-12-1993). Compared with India Code Army Rules compilation retrieved 2026-11-21; amendments after the compilation's last update and original S.R.O. text not verified.
 - **Evidence:** S-MML-101: Army Rules, 1954 (India Code compilation) - r.22 Hearing of charge — [[page 37]]-[[page 39]]: r.22(1) with proviso, (2), (3), (4), Explanation ('SRO No 258 dt 27 Nov 2002'), notes [OFFICIAL_COMPILATION, RULE]
 - **MML anchors (secondary, not proof):** S-MML-001, S-MML-003, S-MML-004
-- **Page-image checks:** PIC-01, PIC-02
+- **Page-image checks:** PIC-01, PIC-02, PIC-10
 - **Limitations:** SRO 17(E) of 1993 and SRO 258 of 2002 not obtained; .doc footnote texts not present in derived text.; MML text read only from derived text layers; no page-image check of negations, numerals or dates.; India Code compilation is not the authenticated Gazette/S.R.O.; original notifications and full amendment chain not examined.; Edition/printing date of each MML file unknown; no access/copyright mark
 
 > **Independent review and disposition — technical challenge, NOT legal approval**
