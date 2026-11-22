@@ -279,6 +279,7 @@ sources:
     priority: 3
     heavy: false
     allowed_hosts: [archive.org, "*.archive.org"]
+    require_https: true
     verify: true
     discovery: "Digital Library of India items; record the archive.org item identifier in metadata."
     # ACQ-01 (owner-authorised 2026-11-22, batches B1, B2, B6): Gazette of India issues as scanned by
@@ -658,6 +659,7 @@ sources:
     priority: 2
     heavy: false
     allowed_hosts: [indiacode.gov.in]
+    require_https: true
     documents:
       - doc_id: act-air-force-army-laws-amendment-1975
         url: "https://indiacode.gov.in/server/api/core/bitstreams/d4cb2142-ec1d-46ca-88b1-6ae2b9c603d7/content"
