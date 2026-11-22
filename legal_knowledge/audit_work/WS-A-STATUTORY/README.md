@@ -29,7 +29,7 @@
 3. **1954 base text of r.194** (printed p.346) is transcribed. S.R.O. 17(E)/1993 does not touch r.194.
 4. **Army Act chain.**
    - Act 37/1992 has been read in full (pp.2–4 by WS-A; p.1 is PILOT-01 PIC-07). s.2 omits ss.75–76 and s.11 omits s.127. The Act has **no commencement section**; India Code's "w.e.f. 6-9-1992" is the assent date.
-   - Act 13/1975 s.4(2) deems the Act in force from 25-01-1975, replacing Ordinance 3 of 1975.
+   - Act 13/1975 has no commencement section. Its s.4(1) repeals Ordinance 3 of 1975, and s.4(2) is a saving clause: anything done under the Ordinance is deemed done under the amended Acts "as if this Act had come into force on the 25th day of January, 1975" (WSA-PIC-30). This does not establish the Act's own commencement; the effective date stays NOT_DETERMINED, for the legal advisor (OQ-A-04). India Code's "w.e.f. 25-1-1975" is a compiler inference.
    - Two Gazette misprints are recorded (OQ-A-07): "existing authority" in s.7(i) and "Code of Criminal Procedure, 1899" in s.14.
 5. **Register completeness.** Prior and new OCR locators show **six Army Rules amendment hints that are not in the register** (1967-12-16, 1968-11-16, 1969-03-01 S.R.O. 66, 1970-01-17, 1972-02-19 "Army (First Amendment) Rules, 1972", 1974-08-17), plus the three existing hints. All are LOCATED_UNVERIFIED, and ACQ-03-B1 is proposed for them.
 6. **Gaps.**
