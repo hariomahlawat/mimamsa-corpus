@@ -1,29 +1,53 @@
 # WS-A STATUS (resumable)
 
-Updated 2026-11-22. Branch: `claude/ws-a-statutory`. Worktree: `/home/user/ws-a`.
+Updated 2026-11-22 (cycle 2). Branch: `claude/ws-a-statutory` (base 74530be9). Worktree: `/home/user/ws-a`.
 
-## Done
-- [x] S.R.O. 17(E)/1993 itemised: 41 items, from WS-A page images of printed pp.12–21 (WSA-PIC-01..21).
-- [x] Base text of r.193 and r.194 in 1954, from S.R.O. 484 p.346 (WSA-PIC-22). r.1 of 1954 has no commencement clause (WSA-PIC-24).
-- [x] r.193 chronology: 1954 → 302/1987 → 17(E)/1993 item 38. Recorded under C-08 and still OPEN.
-- [x] Army Act chain: 31 rows. Act 37/1992 pp.2–4 and Act 13/1975 pp.81–82 image-checked. Compilation footnotes for ss.75–76 and 127 image-checked.
-- [x] Search inventory (138 rows), ACQ-03 B1–B5 (30 rows), gaps (12), open questions (9).
-- [x] Routed OQ-D-005 ("Rule 4-12"): candidate instruments located by metadata/OCR only. Left OPEN (GAP-11, OQ-A-08, ACQ-03-B5).
+## Cycle 1 (done; PR #19, accepted)
+- S.R.O. 17(E)/1993: all 41 items itemised from page images.
+- 1954 base text of rr.193/194 transcribed.
+- Army Act chain (31 rows).
+- Search inventory, ACQ-03 batches B1–B5, gaps register, open questions.
 
-## In progress / next
-1. After owner approval of ACQ-03-B1/B2: image-check the 9 hints and 5 OCR-only instruments, and add them to the change log.
-2. After approval of ACQ-03-B5: read rules 4–12 of the AFT (Procedure) Rules 2008 and the 2011 amendment.
-3. Search archive.org for S.R.O. 2(E)/1955, Ordinance 3/1975, Act 20/1983 and the Adaptation of Laws (No.3) Order 1956, to identify each one and its checksum.
-4. Corrigendum search for the misprints in Act 37/1992 (OQ-A-07).
+## Cycle 2 (done)
+- [x] **OQ-C-06 (r.187(1)): recorded, not determined.** Item XC-11 in `mml_footnote_crosscheck_cycle2.csv`.
+  - New image checks:
+    - the 1954 r.187(1) text;
+    - S.R.O. 126/1964, a two-item instrument amending r.13(2A) only;
+    - a second reading of S.R.O. 1/1961, which substitutes the whole phrase "Chapters II and III of these rules except rule 13".
+  - No 1964 amendment of r.187 was found in held bytes or in archive.org locators.
+  - Plausible reading: MML conflates the number of S.R.O. 1/1961 with the date of S.R.O. 126/1964. **This needs independent coordinator check.**
+- [x] **Change log grown from 86 to 107 rows** (21 new WSA-PIC renders, WSA-PIC-34..54).
+  - Covers 116/1965, 215/1965, 188/1979 (commencement), 216/1988, 8(E)/2003, 17(E)/2019, 6(E)/2022, 205/1961, 1/1961, 5/1968, 246/1982, 44/1985, 55/1985, 278/1985, 169/1987 and 126/1964.
+  - Commencement is printed (on publication) for 188/1979, 216/1988, 8(E)/2003, 17(E)/2019 and 6(E)/2022. The baseline had "not recorded" for each.
+- [x] **MML footnote cross-check** (`mml_footnote_crosscheck_cycle2.csv`, 11 rows):
+
+  | Result | Count | Provisions |
+  | --- | --- | --- |
+  | Agree | 7 | r.14(4)–(5), r.16A, r.16B, r.145, r.168(2), r.186(1), r.193 |
+  | Partial | 1 | r.164 |
+  | Discrepancy | 3 | r.13A(3), r.15, r.187(1) |
+
+- [x] **New register-completeness gap.** Four pre-1960 Army Rules amendments were located by OCR only (1956, 1958 ×2 including r.187(1) item (r), 1959). They are in no official note and not in the register (GAP-13, ACQ-C2-01..04).
+- [x] **OQ-D-005.** India Code's official records list the AFT (Procedure) Rules 2008, the 2011 amendment and the AFT (Practice) Rules 2009. Bitstream checksums are recorded (ACQ-C2-10..12). Which instrument "Rule 4-12" means is still OPEN.
+- [x] Official-note observations (4) and `acquisition_requests_cycle2.csv` (12 rows, nothing fetched).
+
+## Next
+- After approval of ACQ-C2:
+  - image-check the four pre-1960 instruments;
+  - check the four unheld Mar–Apr 1964 issues;
+  - read AFT rules 4–12.
+- After approval of ACQ-03-B1/B2: the 1966–1974 hints and the five OCR-only instruments.
+- Look for the source of the r.15 words "or Military Secretary" (OQ-A-10).
 
 ## Blockers
-- egazette.gov.in is unreachable (TLS verification failure; not bypassed).
-- E-7/1960 and S.R.O. 258/2002 need non-archive.org sources.
+- egazette.gov.in fails TLS verification (code 20); not bypassed. The period after 06-06-2022 remains unsearched.
+- E-7/1960 and S.R.O. 258/2002 still need non-archive.org sources.
 - Every download needs owner approval.
 
 ## Requests to the coordinator (other paths)
-- ARMY-RULES-CHAIN-01 (PR #16):
-  - AR-029 `provisions_affected`, `commencement_as_printed` and `continuation_pages_status` can be updated from `provision_change_log.csv` PCL-93-*.
-  - AR-000 commencement can be updated to "not stated" (PCL-54-R1).
-  - Rows for the new hints could be added once they are checked.
-- SOURCE-CONFLICTS-01: the C-08 evidence item "(4) not yet itemised" is now superseded by PCL-193-1993. The state stays OPEN.
+- ARMY-RULES-CHAIN-01:
+  - AR-016, AR-034 and AR-035 commencement can be set to "on publication" (STATED_IN_INSTRUMENT), per PCL-188-1979-R1, PCL-17E-2019 and PCL-6E-2022.
+  - The AR-024 r.16A change is an Explanation **added**, not amended.
+  - Pre-1960 hint rows could be added (GAP-13).
+- `official_note_discrepancies.csv`: add ON-C2-01..04.
+- WS-C: XC-01, XC-03, XC-07 and XC-11 bear on PG-03, PG-05, PG-06 and PG-12.

@@ -5,13 +5,16 @@
 ## Files
 | File | Rows | Content |
 | --- | --- | --- |
-| `provision_change_log.csv` | 86 | 42 rows itemising S.R.O. 17(E)/1993 (all 41 items plus its note); 7 rows for r.193/r.194/r.1 (1954 base text, 1987, 1989, 1993); 37 baseline rows carried by reference |
+| `provision_change_log.csv` | 107 (86 in cycle 1; 21 added in cycle 2) | 42 rows itemising S.R.O. 17(E)/1993 (all 41 items plus its note); 7 rows for r.193/r.194/r.1 (1954 base text, 1987, 1989, 1993); 37 baseline rows carried by reference |
 | `army_act_amendment_chain.csv` | 31 | Army Act 1950 chain: Acts 19/1955, 56/1974, 13/1975, 20/1983, 37/1992 (one row per section), the Adaptation Order 1956, the 1975 Ordinance, the repealing Acts 58/1960, 30/2001 and 4/2018, Bills, and the post-1992 gap |
-| `identity_transcription_register.csv` | 33 | WSA-PIC-01..33: file SHA-256, computed and archived MD5, page, DPI, clip, render PNG SHA-256, independent transcription |
-| `instrument_search_inventory.csv` | 138 | Deduplicated log: this session's searches, prior FTS logs reused (not repeated), and explicit NOT_CHECKED rows |
+| `identity_transcription_register.csv` | 54 | WSA-PIC-01..54: file SHA-256, computed and archived MD5, page, DPI, clip, render PNG SHA-256, independent transcription |
+| `instrument_search_inventory.csv` | 166 | Deduplicated log: this session's searches, prior FTS logs reused (not repeated), and explicit NOT_CHECKED rows |
 | `acquisition_requests.csv` | 30 | ACQ-03 batches B1 to B5, proposed and not executed; none overlaps PR #8 or ACQ-02 |
-| `gaps_register.csv` / `open_questions.csv` | 12 / 9 | NOT_FOUND, NOT_CHECKED and OPEN items |
+| `gaps_register.csv` / `open_questions.csv` | 15 / 12 | NOT_FOUND, NOT_CHECKED and OPEN items |
 | `network_requests_log.tsv` | | Audit trail: every request with UTC time, URL, status and bytes |
+| `mml_footnote_crosscheck_cycle2.csv` | 11 | Cycle 2: WS-C MML 2 footnote leads checked against the 41-item itemisation and held Gazettes |
+| `official_note_observations_cycle2.csv` | 4 | Cycle 2: further errors in official amendment notes |
+| `acquisition_requests_cycle2.csv` | 12 | Cycle 2: ACQ-C2-01..12 (pre-1960 instruments, Mar–Apr 1964 issues, AFT rules on India Code), not executed |
 
 ## Key findings (image-checked by WS-A unless stated)
 1. **S.R.O. 17(E)/1993 is fully itemised** from page images of printed pp.12–21 (SHA-256 e9bf2114…, MD5 matches archive.org).
@@ -51,3 +54,17 @@
 
 ## Reproduce
 Scripts are kept in the session scratchpad (`ws-a/scripts/`: `render.py`, `clip.py`, `net.py`, `build.py`, `build2.py`). Renders depend on the renderer (pymupdf) and the DPI, so equality of the **source** SHA-256 is the integrity test.
+
+## Cycle 2 findings (for independent coordinator check)
+1. **r.187(1) (OQ-C-06).**
+   - S.R.O. 126 of 12-03-1964 amends r.13(2A) only; this was image-checked.
+   - S.R.O. 1/1961 substitutes the whole phrase "Chapters II and III of these rules except rule 13".
+   - No 1964 amendment of r.187 has been located.
+   - MML's "SRO 1, dated 12th March, 1964" may be a conflation of the two instruments. This is recorded, not determined (XC-11, OQ-A-11).
+2. **Commencement is printed (on publication)** in 188/1979, 216/1988, 8(E)/2003, 17(E)/2019 and 6(E)/2022.
+   - S.R.O. 216/1988 deems its changes from 04-06-1979. That is the date of S.R.O. 188/1979, whose own commencement was 28-07-1979 (OQ-A-12).
+3. **MML footnote leads: 7 agree, 1 partial, 3 discrepancies.**
+   - r.13A(3) and r.15 are attributed by MML to 1993, but the 1993 instrument has no item for either rule.
+   - For r.164, the Gazette inserts the entries 96–101, and the 80-A entry dates from 1985.
+4. **Four pre-1960 Army Rules amendments** were located by OCR (1956, 28-11-1958 r.187(1)(r), 12-12-1958 r.95, 1959). No official note lists them.
+5. **AFT rules (OQ-D-005).** India Code lists the 2008 Procedure Rules, the 2011 amendment and the 2009 Practice Rules. The instrument that "Rule 4-12" refers to is still OPEN.
