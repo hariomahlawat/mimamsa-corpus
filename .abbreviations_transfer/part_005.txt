@@ -1,0 +1,6611 @@
+          "text": "Stretcher Bearer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SB pl": {
+      "preferred": [
+        "Stretcher Bearer platoon"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Stretcher Bearer platoon",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SBP": {
+      "preferred": [
+        "Stay Behind Party"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Stay Behind Party",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SC": {
+      "preferred": [
+        "Senior Command",
+        "Staff Captain",
+        "Southern Command (short form)",
+        "Central Command (short form)",
+        "Selection Centre"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Senior Command",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Staff Captain",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Southern Command (short form)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Central Command (short form)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Selection Centre",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SC (L)": {
+      "preferred": [
+        "Staff Captain (Legal)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Staff Captain (Legal)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SC (Q)": {
+      "preferred": [
+        "Staff Captain (Quartermaster General)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Staff Captain (Quartermaster General)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SC (ST)": {
+      "preferred": [
+        "Staff Captain (Supply and Transport)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Staff Captain (Supply and Transport)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SC(A)": {
+      "preferred": [
+        "Staff Captain (Adjutant General)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Staff Captain (Adjutant General)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SCA": {
+      "preferred": [
+        "Special Compensatory Allowance"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Special Compensatory Allowance",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "School of Arty": {
+      "preferred": [
+        "School of Artillery"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "School of Artillery",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SCM": {
+      "preferred": [
+        "Summary Court Martial"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Summary Court Martial",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SCO": {
+      "preferred": [
+        "Special Commissioned Officer"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Special Commissioned Officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SD": {
+      "preferred": [
+        "Staff Duties"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Staff Duties",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sd/-": {
+      "preferred": [
+        "Signed"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Signed",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SDD": {
+      "preferred": [
+        "Simulator Development Division"
+      ],
+      "preferred_basis": "confirmed_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": true,
+      "meanings": [
+        {
+          "text": "Simulator Development Division",
+          "sources": [
+            "JSSD_2025",
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SDE": {
+      "preferred": [
+        "Software Development Establishment",
+        "Supply Dropping Equipment"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Software Development Establishment",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Supply Dropping Equipment",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SDM": {
+      "preferred": [
+        "Squadron Dafadar Major"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Squadron Dafadar Major",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SDO": {
+      "preferred": [
+        "Signal Despatch Office",
+        "Scheduled Despatch Office"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Signal Despatch Office",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Scheduled Despatch Office",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SDR": {
+      "preferred": [
+        "Special Despatch Rider"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Special Despatch Rider",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SDS": {
+      "preferred": [
+        "Scheduled Despatch Service"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Scheduled Despatch Service",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SDS unit": {
+      "preferred": [
+        "Scheduled Despatch Service unit"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Scheduled Despatch Service unit",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SEAD": {
+      "preferred": [
+        "Suppression of Enemy Air Defence"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Suppression of Enemy Air Defence",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sec": {
+      "preferred": [
+        "Second",
+        "Section"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Second",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Section",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Sec BOCCS": {
+      "preferred": [
+        "Secretariat Board of Control Canteen Services"
+      ],
+      "preferred_basis": "external_source_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Secretariat Board of Control Canteen Services",
+          "sources": [
+            "CAG_2016"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Sec BPO": {
+      "preferred": [
+        "Section Base Post Office"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Section Base Post Office",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Sec hosp": {
+      "preferred": [
+        "Section hospital"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Section hospital",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Sec Offr": {
+      "preferred": [
+        "Section Officer"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Section Officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sect (s)": {
+      "preferred": [
+        "Sector(s)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Sector(s)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Sect Cdr": {
+      "preferred": [
+        "Sector Commander"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Sector Commander",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sectt": {
+      "preferred": [
+        "Secretariat"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Secretariat",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SECY": {
+      "preferred": [
+        "Secretariat"
+      ],
+      "preferred_basis": "external_source_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Secretariat",
+          "sources": [
+            "CAG_2016"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "secy": {
+      "preferred": [
+        "Secondary, Secretary"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Secondary, Secretary",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SEMO": {
+      "preferred": [
+        "Senior Executive Medical Officer"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Senior Executive Medical Officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Sep": {
+      "preferred": [
+        "Sepoy"
+      ],
+      "preferred_basis": "confirmed_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": true,
+      "meanings": [
+        {
+          "text": "Sepoy",
+          "sources": [
+            "JSSD_2025",
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "September",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "seq": {
+      "preferred": [
+        "Sequence"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Sequence",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "ser": {
+      "preferred": [
+        "Serial"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Serial",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SF": {
+      "preferred": [
+        "Special Forces"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Special Forces",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SFF": {
+      "preferred": [
+        "Special Frontier Force"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Special Frontier Force",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sfwl": {
+      "preferred": [
+        "Safaiwala, Safaiwali"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Safaiwala, Safaiwali",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SGCM": {
+      "preferred": [
+        "Summary General Court Martial"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Summary General Court Martial",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SHAPE": {
+      "preferred": [
+        "Psychology, Hearing, Appendages, Physical and Eye"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Psychology, Hearing, Appendages, Physical and Eye",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "shelrep": {
+      "preferred": [
+        "Shelling Report"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Shelling Report",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SHGD": {
+      "preferred": [
+        "Store Hand General Duties"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Store Hand General Duties",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SHO": {
+      "preferred": [
+        "Station Health Organisation"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Station Health Organisation",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SHT": {
+      "preferred": [
+        "Store Hand Technical"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Store Hand Technical",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SI": {
+      "preferred": [
+        "Senior Instructor",
+        "Signal Intelligence"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Senior Instructor",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Signal Intelligence",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SIAT": {
+      "preferred": [
+        "Small Intelligence Acquisition Team"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Small Intelligence Acquisition Team",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SIB": {
+      "preferred": [
+        "Subsidiary Intelligence Bureau"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Subsidiary Intelligence Bureau",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sig": {
+      "preferred": [
+        "Signal, Signature"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Signal, Signature",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Sig cen sec": {
+      "preferred": [
+        "Signal centre section"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Signal centre section",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sigcen": {
+      "preferred": [
+        "Signal Centre"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Signal Centre",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Sigmn": {
+      "preferred": [
+        "Signalman"
+      ],
+      "preferred_basis": "confirmed_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": true,
+      "meanings": [
+        {
+          "text": "Signalman",
+          "sources": [
+            "JSSD_2025"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Signalman, Signalmen",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SIGS": {
+      "preferred": [
+        "The Corps of Signals"
+      ],
+      "preferred_basis": "confirmed_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": true,
+      "meanings": [
+        {
+          "text": "The Corps of Signals",
+          "sources": [
+            "JSSD_2025",
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SIKH": {
+      "preferred": [
+        "The Sikh Regiment"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "The Sikh Regiment",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SIKH LI": {
+      "preferred": [
+        "The Sikh Light Infantry"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "The Sikh Light Infantry",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SIL": {
+      "preferred": [
+        "Seriously Ill List"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Seriously Ill List",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sit": {
+      "preferred": [
+        "Situation"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Situation",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sitmap": {
+      "preferred": [
+        "Situation Map"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Situation Map",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sitrep": {
+      "preferred": [
+        "Situation Report"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Situation Report",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SKT": {
+      "preferred": [
+        "Store Keeper Technical",
+        "Storekeeper Technical"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Store Keeper Technical",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Storekeeper Technical",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SL": {
+      "preferred": [
+        "Search Light",
+        "Special List",
+        "Start Line",
+        "Sick Leave"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Search Light",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Special List",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Start Line",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Sick Leave",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SLAR": {
+      "preferred": [
+        "Sideways Looking Air Borne Radar"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Sideways Looking Air Borne Radar",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SM": {
+      "preferred": [
+        "Semi Mobile",
+        "Sena Medal"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Semi Mobile",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Sena Medal",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SMART": {
+      "preferred": [
+        "Spurt Message Alpha Numeric Radio Terminal"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Spurt Message Alpha Numeric Radio Terminal",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SMB": {
+      "preferred": [
+        "Special Medical Board"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Special Medical Board",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SMC": {
+      "preferred": [
+        "Sten Machine Carbine"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Sten Machine Carbine",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SMCC": {
+      "preferred": [
+        "Staff Message Control Centre"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Staff Message Control Centre",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SMD": {
+      "preferred": [
+        "Sand Model Discussion"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Sand Model Discussion",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "smk": {
+      "preferred": [
+        "Smoke"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Smoke",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sml": {
+      "preferred": [
+        "Simulator"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Simulator",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SMT": {
+      "preferred": [
+        "Special Maintenance Tool(s)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Special Maintenance Tool(s)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SN": {
+      "preferred": [
+        "Service Note"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Service Note",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SO": {
+      "preferred": [
+        "Scientific Officer",
+        "Staff Officer"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Scientific Officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Staff Officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SO 1": {
+      "preferred": [
+        "Staff Officer Grade I"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Staff Officer Grade I",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SO 1 (Edn)": {
+      "preferred": [
+        "Staff Officer Grade 1 Education"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Staff Officer Grade 1 Education",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SO 1 Arty": {
+      "preferred": [
+        "Staff Officer Grade 1 Artillery"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Staff Officer Grade 1 Artillery",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SO 2 (Edn)": {
+      "preferred": [
+        "Staff Officer Grade 2 Education"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Staff Officer Grade 2 Education",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SO 2 Arty": {
+      "preferred": [
+        "Staff Officer Grade 2 Artillery"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Staff Officer Grade 2 Artillery",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SO II": {
+      "preferred": [
+        "Staff Officer Grade II"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Staff Officer Grade II",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SO III": {
+      "preferred": [
+        "Staff Officer Grade III"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Staff Officer Grade III",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SO to COS": {
+      "preferred": [
+        "Staff Officer to Chief of Staff"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Staff Officer to Chief of Staff",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SO to VCOAS": {
+      "preferred": [
+        "Staff Officer to the Vice Chief of the Army Staff"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Staff Officer to the Vice Chief of the Army Staff",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SO- 2 (Edn)": {
+      "preferred": [
+        "Staff Officer Grade 2 (Education)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Staff Officer Grade 2 (Education)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SO-in-C": {
+      "preferred": [
+        "Signal Officer-in-Chief",
+        "Signal Officer-in-Charge"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Signal Officer-in-Chief",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Signal Officer-in-Charge",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "soln": {
+      "preferred": [
+        "Solution"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Solution",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SOP": {
+      "preferred": [
+        "Standing Operating Procedure"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Standing Operating Procedure",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SORS": {
+      "preferred": [
+        "Struck of Ration Strength"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Struck of Ration Strength",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SOS": {
+      "preferred": [
+        "Save our Souls",
+        "Struck off Strength"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Save our Souls",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Struck off Strength",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SOUTHCOM": {
+      "preferred": [
+        "Southern Command (signal message)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Southern Command (signal message)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SOW": {
+      "preferred": [
+        "Standing Orders for War"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Standing Orders for War",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SP": {
+      "preferred": [
+        "Self Propelled",
+        "Starting Point",
+        "Start Point"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Self Propelled",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Starting Point",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Start Point",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sp": {
+      "preferred": [
+        "Support, Supported"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Support, Supported",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sp gr": {
+      "preferred": [
+        "Specific Gravity"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Specific Gravity",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SPA": {
+      "preferred": [
+        "Special Personnel Assistant"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Special Personnel Assistant",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SPE": {
+      "preferred": [
+        "Special Police Establishment"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Special Police Establishment",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "spec": {
+      "preferred": [
+        "Specifications, Specify, Specification"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Specifications, Specify, Specification",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SPG": {
+      "preferred": [
+        "Special Protection Group"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Special Protection Group",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "spk": {
+      "preferred": [
+        "Speak"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Speak",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "spmt": {
+      "preferred": [
+        "Supplement, Supplementary, Supplemented"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Supplement, Supplementary, Supplemented",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Spr": {
+      "preferred": [
+        "Sapper"
+      ],
+      "preferred_basis": "confirmed_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": true,
+      "meanings": [
+        {
+          "text": "Sapper",
+          "sources": [
+            "JSSD_2025",
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "spvr": {
+      "preferred": [
+        "Supervisor"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Supervisor",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sq": {
+      "preferred": [
+        "Square"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Square",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SQM": {
+      "preferred": [
+        "Square Meter"
+      ],
+      "preferred_basis": "external_source_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Square Meter",
+          "sources": [
+            "CAG_2016"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SQMD": {
+      "preferred": [
+        "Squadron Quartermaster Dafadar"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Squadron Quartermaster Dafadar",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sqn": {
+      "preferred": [
+        "Squadron"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Squadron",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Sqn Ldr": {
+      "preferred": [
+        "Squadron Leader"
+      ],
+      "preferred_basis": "confirmed_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": true,
+      "meanings": [
+        {
+          "text": "Squadron Leader",
+          "sources": [
+            "JSSD_2025"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SR": {
+      "preferred": [
+        "Short Range",
+        "Strategic Reconnaissance"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Short Range",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Strategic Reconnaissance",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sr": {
+      "preferred": [
+        "Senior"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Senior",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Sr PPS": {
+      "preferred": [
+        "Senior Private Personal Secretary"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Senior Private Personal Secretary",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SRH": {
+      "preferred": [
+        "Supply Railhead"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Supply Railhead",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SRO": {
+      "preferred": [
+        "Senior Records Officer",
+        "Statutory Regulatory Order"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Senior Records Officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Statutory Regulatory Order",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SRP": {
+      "preferred": [
+        "Supply Refilling Point"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Supply Refilling Point",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SS": {
+      "preferred": [
+        "Short Service"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Short Service",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SSB": {
+      "preferred": [
+        "Special Service Bureau",
+        "Service Selection Board"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Special Service Bureau",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Service Selection Board",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SSC": {
+      "preferred": [
+        "Short Service Commission"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Short Service Commission",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SSCB": {
+      "preferred": [
+        "Services Sports Control Board"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Services Sports Control Board",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SSE": {
+      "preferred": [
+        "South South East"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "South South East",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SSO": {
+      "preferred": [
+        "Senior Scientific Officer",
+        "Station Staff Officer"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Senior Scientific Officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Station Staff Officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SSW": {
+      "preferred": [
+        "South South West"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "South South West",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "ST": {
+      "preferred": [
+        "Start Time"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Start Time",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Stat": {
+      "preferred": [
+        "State, Statutory"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "State, Statutory",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "stats": {
+      "preferred": [
+        "Statistics, Statistical"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Statistics, Statistical",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "STB": {
+      "preferred": [
+        "Stock Taking Board"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Stock Taking Board",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "STC": {
+      "preferred": [
+        "Signal Training Centre"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Signal Training Centre",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "STD": {
+      "preferred": [
+        "Sexually Transmitted Disease",
+        "Subscriber Trunk Dialling"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Sexually Transmitted Disease",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Subscriber Trunk Dialling",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "std": {
+      "preferred": [
+        "Standard, Standardize, Standardization, Standardised"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Standard, Standardize, Standardization, Standardised",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "STE": {
+      "preferred": [
+        "Special Test Equipment"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Special Test Equipment",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Steno": {
+      "preferred": [
+        "Stenographer"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Stenographer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "steno": {
+      "preferred": [
+        "Stenographer, Steno Typist"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Stenographer, Steno Typist",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "stereo": {
+      "preferred": [
+        "Stereoscope, Stereoscopic"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Stereoscope, Stereoscopic",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "stewd": {
+      "preferred": [
+        "Steward"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Steward",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "stg": {
+      "preferred": [
+        "Stage, Staging"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Stage, Staging",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Stg sec": {
+      "preferred": [
+        "Staging section"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Staging section",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "stk": {
+      "preferred": [
+        "Stock, Stocking, Stocked"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Stock, Stocking, Stocked",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Stn": {
+      "preferred": [
+        "Station"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Station",
+          "sources": [
+            "APPENDIX_C_LEGACY",
+            "CAG_2016"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Stn Cdr": {
+      "preferred": [
+        "Station Commander"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Station Commander",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "stn wksp": {
+      "preferred": [
+        "Station workshop"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Station workshop",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "STO": {
+      "preferred": [
+        "Squadron Technical Officer"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Squadron Technical Officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "STOL": {
+      "preferred": [
+        "Short Take Off and Landing"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Short Take Off and Landing",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "str": {
+      "preferred": [
+        "Seater",
+        "Strength"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Seater",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Strength",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "strat": {
+      "preferred": [
+        "Strategic, Strategy"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Strategic, Strategy",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "STRIKE": {
+      "preferred": [
+        "Strike Warning (Nuclear)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Strike Warning (Nuclear)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sty": {
+      "preferred": [
+        "Stationery, Stationary"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Stationery, Stationary",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Sub": {
+      "preferred": [
+        "Subedar"
+      ],
+      "preferred_basis": "confirmed_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": true,
+      "meanings": [
+        {
+          "text": "Subedar",
+          "sources": [
+            "JSSD_2025",
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Sub Area sig coy / sec": {
+      "preferred": [
+        "Sub Area signal company, section"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Sub Area signal company, section",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Sub Maj": {
+      "preferred": [
+        "Subedar Major"
+      ],
+      "preferred_basis": "confirmed_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": true,
+      "meanings": [
+        {
+          "text": "Subedar Major",
+          "sources": [
+            "JSSD_2025",
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "subcal": {
+      "preferred": [
+        "Sub Calibre"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Sub Calibre",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "subdy": {
+      "preferred": [
+        "Subsidiary"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Subsidiary",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Subl": {
+      "preferred": [
+        "Subaltern"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Subaltern",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "subs": {
+      "preferred": [
+        "Subscription, Substantive, Subscribe, Subscribing"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Subscription, Substantive, Subscribe, Subscribing",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Sun": {
+      "preferred": [
+        "Sunday"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Sunday",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sup": {
+      "preferred": [
+        "Supply"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Supply",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Sup dep": {
+      "preferred": [
+        "Supply depot"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Supply depot",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sup O": {
+      "preferred": [
+        "Supply Officer"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Supply Officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sup P": {
+      "preferred": [
+        "Supply Point"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Supply Point",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Supdt": {
+      "preferred": [
+        "Superintendent"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Superintendent",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Supdt Tech": {
+      "preferred": [
+        "Technical Superintendent",
+        "Superintendent Technical"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Technical Superintendent",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Superintendent Technical",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sur": {
+      "preferred": [
+        "Surplus"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Surplus",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "surg": {
+      "preferred": [
+        "Surgery, Surgeon, Surgical"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Surgery, Surgeon, Surgical",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Surg team": {
+      "preferred": [
+        "Surgical team"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Surgical team",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "svl": {
+      "preferred": [
+        "Surveillance"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Surveillance",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "svy": {
+      "preferred": [
+        "Survey"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Survey",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Svy bty": {
+      "preferred": [
+        "Survey battery"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Survey battery",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "svyr": {
+      "preferred": [
+        "Surveyor"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Surveyor",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Svyr of Wks Dte": {
+      "preferred": [
+        "Surveyor of Works Directorate"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Surveyor of Works Directorate",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "swbd": {
+      "preferred": [
+        "Switch Board"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Switch Board",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Swbd op sec": {
+      "preferred": [
+        "Switch board operating section"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Switch board operating section",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SWC": {
+      "preferred": [
+        "South Western Command (short form)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "South Western Command (short form)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SWCOM": {
+      "preferred": [
+        "South Western Command (signal message)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "South Western Command (signal message)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Swr": {
+      "preferred": [
+        "Sowar"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Sowar",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "swr": {
+      "preferred": [
+        "Sowar"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Sowar",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Sy Cr": {
+      "preferred": [
+        "Sundry Creditor(s)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Sundry Creditor(s)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Sy Dr": {
+      "preferred": [
+        "Sundry Debtor(s)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Sundry Debtor(s)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "syn": {
+      "preferred": [
+        "Syndicate"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Syndicate",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sync": {
+      "preferred": [
+        "Synchronous, Synchronisation"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Synchronous, Synchronisation",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "sys": {
+      "preferred": [
+        "System"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "System",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SYSM": {
+      "preferred": [
+        "Sarvottam Yudh Seva Medal"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Sarvottam Yudh Seva Medal",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "SZ": {
+      "preferred": [
+        "Surface Zero"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Surface Zero",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "T(s)OET": {
+      "preferred": [
+        "Test(s) of Elementary Training"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Test(s) of Elementary Training",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TA": {
+      "preferred": [
+        "Travelling Allowance",
+        "Technical Assistant",
+        "Territorial Army"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Travelling Allowance",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Technical Assistant",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Territorial Army",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TA Regs": {
+      "preferred": [
+        "Regulations for the Territorial Army"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Regulations for the Territorial Army",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Tab": {
+      "preferred": [
+        "Tablet"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tablet",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TAC": {
+      "preferred": [
+        "Tactical Air Centre"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tactical Air Centre",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Tac": {
+      "preferred": [
+        "Tactic, Tactics, Tactical"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tactic, Tactics, Tactical",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Tac R": {
+      "preferred": [
+        "Tactical Reconnaissance"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tactical Reconnaissance",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TADIDS": {
+      "preferred": [
+        "Tactical Air Defence Information Decision System"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tactical Air Defence Information Decision System",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TAF": {
+      "preferred": [
+        "Tactical Air Force"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tactical Air Force",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TAG": {
+      "preferred": [
+        "Tactical Air Group"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tactical Air Group",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TAR": {
+      "preferred": [
+        "Target Acquisition Radar"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Target Acquisition Radar",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TBA": {
+      "preferred": [
+        "Tactical Battle Area"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tactical Battle Area",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TBC": {
+      "preferred": [
+        "To be Confirmed"
+      ],
+      "preferred_basis": "confirmed_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": true,
+      "meanings": [
+        {
+          "text": "To be Confirmed",
+          "sources": [
+            "JSSD_2025"
+          ],
+          "evidence": [
+            "Chapter 8, p. 149, web text line 11967"
+          ]
+        }
+      ]
+    },
+    "TBP": {
+      "preferred": [
+        "Trans Border Patrol"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Trans Border Patrol",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TC": {
+      "preferred": [
+        "Transit Camp",
+        "Traffic Control",
+        "Training Centre"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Transit Camp",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Traffic Control",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Training Centre",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tcl": {
+      "preferred": [
+        "Tentacle"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tentacle",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TCM": {
+      "preferred": [
+        "Telecommunication Mechanic (all categories)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Telecommunication Mechanic (all categories)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TCP": {
+      "preferred": [
+        "Traffic Control Post"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Traffic Control Post",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TCS": {
+      "preferred": [
+        "Tactical Communication System"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tactical Communication System",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TCV": {
+      "preferred": [
+        "Troop Carrying Vehicle"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Troop Carrying Vehicle",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TD": {
+      "preferred": [
+        "Temporary Duty",
+        "Tutorial Discussion"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Temporary Duty",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Tutorial Discussion",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "td": {
+      "preferred": [
+        "Tinned"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tinned",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tdn": {
+      "preferred": [
+        "Tradesman, Tradesmen"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tradesman, Tradesmen",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TDU": {
+      "preferred": [
+        "Target Designation Unit"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Target Designation Unit",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TE sec": {
+      "preferred": [
+        "Terminal Equipment section"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Terminal Equipment section",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TEC": {
+      "preferred": [
+        "Technical Evaluation Committee"
+      ],
+      "preferred_basis": "confirmed_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": true,
+      "meanings": [
+        {
+          "text": "Technical Evaluation Committee",
+          "sources": [
+            "JSSD_2025"
+          ],
+          "evidence": [
+            "Chapter 8, p. 149, web text line 11950"
+          ]
+        },
+        {
+          "text": "Tender Evaluation Committee",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tech": {
+      "preferred": [
+        "Technical, Technician, Technology, Technique"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Technical, Technician, Technology, Technique",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tele": {
+      "preferred": [
+        "Telephone, Telephonic, Telephony"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Telephone, Telephonic, Telephony",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Tele eqpt": {
+      "preferred": [
+        "Telecommunication Equipment"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Telecommunication Equipment",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "telecom": {
+      "preferred": [
+        "Telecommunication"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Telecommunication",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "temp": {
+      "preferred": [
+        "Temperature, Temporary"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Temperature, Temporary",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TEO": {
+      "preferred": [
+        "Technical Equipment Officer"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Technical Equipment Officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TES": {
+      "preferred": [
+        "Technology Experimented Salt"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Technology Experimented Salt",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TEWT": {
+      "preferred": [
+        "Tactical Exercise Without Troops"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tactical Exercise Without Troops",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TF": {
+      "preferred": [
+        "Task Force"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Task Force",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tfc": {
+      "preferred": [
+        "Traffic"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Traffic",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tfr": {
+      "preferred": [
+        "Transfer, Transferred, Transferring"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Transfer, Transferred, Transferring",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TG": {
+      "preferred": [
+        "Technical Group"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Technical Group",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Tg op sec": {
+      "preferred": [
+        "Telegraph operating section"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Telegraph operating section",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tgt": {
+      "preferred": [
+        "Target"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Target",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "THT": {
+      "preferred": [
+        "Tank Hunting Team"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tank Hunting Team",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Thu": {
+      "preferred": [
+        "Thursday"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Thursday",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TI": {
+      "preferred": [
+        "Thermal Imager"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Thermal Imager",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TIIOE": {
+      "preferred": [
+        "Thermal Imaging Integrated Observation Equipment"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Thermal Imaging Integrated Observation Equipment",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tk": {
+      "preferred": [
+        "Tank"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tank",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tkr": {
+      "preferred": [
+        "Tanker"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tanker",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tlr": {
+      "preferred": [
+        "Tailor"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tailor",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Tlr (U)": {
+      "preferred": [
+        "Tailor (U)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tailor (U)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TM sec": {
+      "preferred": [
+        "Technical Maintenance section"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Technical Maintenance section",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TN": {
+      "preferred": [
+        "Tamil Nadu"
+      ],
+      "preferred_basis": "external_source_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tamil Nadu",
+          "sources": [
+            "CAG_2016"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tn": {
+      "preferred": [
+        "Transportation"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Transportation",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TO": {
+      "preferred": [
+        "Technical Officer",
+        "Transport Officer"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Technical Officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Transport Officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TOD": {
+      "preferred": [
+        "Time of Despatch",
+        "Tour of Duty"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Time of Despatch",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Tour of Duty",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TOF": {
+      "preferred": [
+        "Time of Flight"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Time of Flight",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TOO": {
+      "preferred": [
+        "Time of Origin"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Time of Origin",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Tool Mkr": {
+      "preferred": [
+        "Tool Maker"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tool Maker",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "topo": {
+      "preferred": [
+        "Topographic, Topographical, Topography"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Topographic, Topographical, Topography",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "topsec": {
+      "preferred": [
+        "Top Secret"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Top Secret",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TOR": {
+      "preferred": [
+        "Time of Receipt"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Time of Receipt",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TORS": {
+      "preferred": [
+        "Taken on Ration Strength"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Taken on Ration Strength",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TOS": {
+      "preferred": [
+        "Taken on Strength"
+      ],
+      "preferred_basis": "confirmed_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": true,
+      "meanings": [
+        {
+          "text": "Taken on Strength",
+          "sources": [
+            "JSSD_2025",
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": [
+            "Chapter 8, p. 149, web text line 11927"
+          ]
+        }
+      ]
+    },
+    "TOT": {
+      "preferred": [
+        "Time On / Over Target"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Time On / Over Target",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TOTE": {
+      "preferred": [
+        "Table of Tools and Equipment"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Table of Tools and Equipment",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TP": {
+      "preferred": [
+        "Teaching Practice",
+        "Tele Printer",
+        "Transfer Point",
+        "Traffic Post",
+        "Turning Point"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Teaching Practice",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Tele Printer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Transfer Point",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Traffic Post",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Turning Point",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tp": {
+      "preferred": [
+        "Troop"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Troop",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TPC": {
+      "preferred": [
+        "Tender Purchase Committee"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tender Purchase Committee",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TPM": {
+      "preferred": [
+        "Tetra Packed Milk"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tetra Packed Milk",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TPP": {
+      "preferred": [
+        "Time Past a Point"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Time Past a Point",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tpt": {
+      "preferred": [
+        "Transport"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Transport",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Tpt coln (civ)": {
+      "preferred": [
+        "Transport column (civil)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Transport column (civil)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tpt coy wksp sec": {
+      "preferred": [
+        "Transport company workshop"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Transport company workshop",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Tpt pl": {
+      "preferred": [
+        "Transport platoon"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Transport platoon",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tpt wksp coy": {
+      "preferred": [
+        "Transport workshop company"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Transport workshop company",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tptd": {
+      "preferred": [
+        "Transported"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Transported",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tptr": {
+      "preferred": [
+        "Transporter"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Transporter",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Tr": {
+      "preferred": [
+        "Track, Tracked, Tracking"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Track, Tracked, Tracking",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Transfusion C": {
+      "preferred": [
+        "Transfusion Centre"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Transfusion Centre",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TREE": {
+      "preferred": [
+        "Transient Radiation Effect on Electronics"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Transient Radiation Effect on Electronics",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "trg": {
+      "preferred": [
+        "Training"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Training",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "trig": {
+      "preferred": [
+        "Trigonometry, Trigonometric, Trigonometrical"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Trigonometry, Trigonometric, Trigonometrical",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "trk": {
+      "preferred": [
+        "Tractor"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tractor",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "trn": {
+      "preferred": [
+        "Terrain"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Terrain",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tropo": {
+      "preferred": [
+        "Troposcatter"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Troposcatter",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TRS": {
+      "preferred": [
+        "Tent Replacement Scheme"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tent Replacement Scheme",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tscope": {
+      "preferred": [
+        "Telescope, Telescopic"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Telescope, Telescopic",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TSO": {
+      "preferred": [
+        "Technical Staff Officer"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Technical Staff Officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TSP": {
+      "preferred": [
+        "Technical Support Platoon"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Technical Support Platoon",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TSS": {
+      "preferred": [
+        "Technical Stores Section"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Technical Stores Section",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TTR": {
+      "preferred": [
+        "Target Tracking Radar"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Target Tracking Radar",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Tue": {
+      "preferred": [
+        "Tuesday"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Tuesday",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TV": {
+      "preferred": [
+        "Television"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Television",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "TWS": {
+      "preferred": [
+        "Track While Scan"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Track While Scan",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "tx": {
+      "preferred": [
+        "Transmitter"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Transmitter",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "txn": {
+      "preferred": [
+        "Transmission"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Transmission",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "u/m": {
+      "preferred": [
+        "Under Mentioned"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Under Mentioned",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "UA BSO": {
+      "preferred": [
+        "Unit Accountant Barracks Stores Officer"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Unit Accountant Barracks Stores Officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "UAC": {
+      "preferred": [
+        "Unarmed Combat",
+        "Unit Assessment Card"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Unarmed Combat",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Unit Assessment Card",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "UAV": {
+      "preferred": [
+        "Unmanned Aerial Vehicle"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Unmanned Aerial Vehicle",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "UB Area": {
+      "preferred": [
+        "Uttar Bharat Area"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Uttar Bharat Area",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "UBGL": {
+      "preferred": [
+        "Under Barrel Grenade Launcher"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Under Barrel Grenade Launcher",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "UC": {
+      "preferred": [
+        "Under Consideration",
+        "Under Carriage"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Under Consideration",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Under Carriage",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Utilisation Certificate",
+          "sources": [
+            "CAG_2016"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "UC & HA allce": {
+      "preferred": [
+        "Uncongenial Climate and High Altitude Allowance"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Uncongenial Climate and High Altitude Allowance",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "UCAV": {
+      "preferred": [
+        "Unmanned Combat Aerial Vehicle"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Unmanned Combat Aerial Vehicle",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "UDC": {
+      "preferred": [
+        "Upper Division Clerk"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Upper Division Clerk",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "UE": {
+      "preferred": [
+        "Unit Entitlement",
+        "Unit Equipment",
+        "Unit Establishment"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Unit Entitlement",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Unit Equipment",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Unit Establishment",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "UG": {
+      "preferred": [
+        "Under Ground"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Under Ground",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "UHF": {
+      "preferred": [
+        "Ultra High Frequency"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Ultra High Frequency",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "UHQ": {
+      "preferred": [
+        "Unified Headquarters"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Unified Headquarters",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "ULO": {
+      "preferred": [
+        "Unit Landing Officer"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Unit Landing Officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "ULPO": {
+      "preferred": [
+        "Unit Local Purchase Order"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Unit Local Purchase Order",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "unclas": {
+      "preferred": [
+        "Unclassified"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Unclassified",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Under Secy": {
+      "preferred": [
+        "Under Secretary"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Under Secretary",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "UNSV": {
+      "preferred": [
+        "Unserviceable"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Unserviceable",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "UP": {
+      "preferred": [
+        "Uttar Pradesh"
+      ],
+      "preferred_basis": "external_source_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Uttar Pradesh",
+          "sources": [
+            "CAG_2016"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "UPS": {
+      "preferred": [
+        "Uninterrupted Power Supply"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Uninterrupted Power Supply",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "URC": {
+      "preferred": [
+        "Unit Run Canteen"
+      ],
+      "preferred_basis": "external_source_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Unit Run Canteen",
+          "sources": [
+            "CAG_2016"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "URO": {
+      "preferred": [
+        "Unit Repair Organization"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Unit Repair Organization",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "USO": {
+      "preferred": [
+        "Unit Security Officer"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Unit Security Officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "UYSM": {
+      "preferred": [
+        "Uttam Yudh Seva Medal"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Uttam Yudh Seva Medal",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "V Adm": {
+      "preferred": [
+        "Vice Admiral"
+      ],
+      "preferred_basis": "confirmed_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": true,
+      "meanings": [
+        {
+          "text": "Vice Admiral",
+          "sources": [
+            "JSSD_2025"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VA": {
+      "preferred": [
+        "Vulnerable Area"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vulnerable Area",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "vac": {
+      "preferred": [
+        "Vacation, Vacancy"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vacation, Vacancy",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "vangd": {
+      "preferred": [
+        "Vanguard"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vanguard",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VAT": {
+      "preferred": [
+        "Value Added Tax"
+      ],
+      "preferred_basis": "external_source_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Value Added Tax",
+          "sources": [
+            "CAG_2016"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VCOAS": {
+      "preferred": [
+        "Vice Chief of the Army Staff"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vice Chief of the Army Staff",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VCOAS Sectt": {
+      "preferred": [
+        "Secretariat of the Vice Chief of the Army Staff"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Secretariat of the Vice Chief of the Army Staff",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VDC": {
+      "preferred": [
+        "Village Defence Committee"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Village Defence Committee",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VDU": {
+      "preferred": [
+        "Visual Display Unit"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Visual Display Unit",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VE": {
+      "preferred": [
+        "Vertical Envelopment"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vertical Envelopment",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VED": {
+      "preferred": [
+        "Vital Essential and Desirable"
+      ],
+      "preferred_basis": "external_source_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vital Essential and Desirable",
+          "sources": [
+            "CAG_2016"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "veg": {
+      "preferred": [
+        "Vegetarian, Vegetable"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vegetarian, Vegetable",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "veh": {
+      "preferred": [
+        "Vehicle"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vehicle",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "veh coy": {
+      "preferred": [
+        "Vehicle company"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vehicle company",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "veh dep": {
+      "preferred": [
+        "Vehicle depot"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vehicle depot",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "veh pk": {
+      "preferred": [
+        "Vehicle park"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vehicle park",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "vet": {
+      "preferred": [
+        "Veterinary"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Veterinary",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VG": {
+      "preferred": [
+        "Vital Ground"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vital Ground",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VHF": {
+      "preferred": [
+        "Very High Frequency"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Very High Frequency",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VI": {
+      "preferred": [
+        "Vertical Interval"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vertical Interval",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "vill": {
+      "preferred": [
+        "Village"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Village",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VIP": {
+      "preferred": [
+        "Very Important Person(s)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Very Important Person(s)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "vis": {
+      "preferred": [
+        "Visibility, Visual, Visible, Visit, Visited, Visiting"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Visibility, Visual, Visible, Visit, Visited, Visiting",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VKL": {
+      "preferred": [
+        "Vehicle Kit List"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vehicle Kit List",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VM": {
+      "preferred": [
+        "Vayu Sena Medal",
+        "Vehicle Mechanic"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vayu Sena Medal",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Vehicle Mechanic",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VM (AFV)": {
+      "preferred": [
+        "Vehicle Mechanic (Armoured Fighting Vehicle)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vehicle Mechanic (Armoured Fighting Vehicle)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VM (MV)": {
+      "preferred": [
+        "Vehicle Mechanic Motor Vehicle"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vehicle Mechanic Motor Vehicle",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VO": {
+      "preferred": [
+        "Veterinary officer"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Veterinary officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Vigilance Officer",
+          "sources": [
+            "CAG_2016"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "vocab": {
+      "preferred": [
+        "Vocabulary"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vocabulary",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "vol": {
+      "preferred": [
+        "Volume"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Volume",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VP": {
+      "preferred": [
+        "Vulnerable Point"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vulnerable Point",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Vr C": {
+      "preferred": [
+        "Vir Chakra"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vir Chakra",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VS": {
+      "preferred": [
+        "Visual Signalling"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Visual Signalling",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VSL": {
+      "preferred": [
+        "Vehicle Safe Lane"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vehicle Safe Lane",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VSM": {
+      "preferred": [
+        "Vishisht Seva Medal"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vishisht Seva Medal",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VT": {
+      "preferred": [
+        "Variable Time"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Variable Time",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VTKM": {
+      "preferred": [
+        "Vehicle To The Kilometre"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vehicle To The Kilometre",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VTOL": {
+      "preferred": [
+        "Vertical Take Off and Landing"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vertical Take Off and Landing",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VTP": {
+      "preferred": [
+        "Vehicle Transit Park"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vehicle Transit Park",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "VWA": {
+      "preferred": [
+        "Vehicle Waiting Area"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Vehicle Waiting Area",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "W": {
+      "preferred": [
+        "Warfare (suffix)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Warfare (suffix)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "w/o": {
+      "preferred": [
+        "Without"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Without",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WAN": {
+      "preferred": [
+        "Wide Area Network"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Wide Area Network",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WARDEC": {
+      "preferred": [
+        "Wargaming Development Centre"
+      ],
+      "preferred_basis": "confirmed_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": true,
+      "meanings": [
+        {
+          "text": "Wargaming Development Centre",
+          "sources": [
+            "JSSD_2025"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WASO": {
+      "preferred": [
+        "Wide Area Search Operation"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Wide Area Search Operation",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WC": {
+      "preferred": [
+        "Western Command (short form)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Western Command (short form)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WDI": {
+      "preferred": [
+        "Wind Direction Indicator"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Wind Direction Indicator",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WE": {
+      "preferred": [
+        "War Establishment",
+        "Weapons and Equipment"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "War Establishment",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Weapons and Equipment",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WEC": {
+      "preferred": [
+        "Wireless Experimental Centre"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Wireless Experimental Centre",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Wed": {
+      "preferred": [
+        "Wednesday"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Wednesday",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "wef": {
+      "preferred": [
+        "With Effect From"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "With Effect From",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WESTCOM": {
+      "preferred": [
+        "Western Command (signal message)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Western Command (signal message)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WET": {
+      "preferred": [
+        "War Equipment Table"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "War Equipment Table",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WEU": {
+      "preferred": [
+        "Wireless Experimental Unit"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Wireless Experimental Unit",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "wg": {
+      "preferred": [
+        "Wing"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Wing",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Wg Cdr": {
+      "preferred": [
+        "Wing Commander"
+      ],
+      "preferred_basis": "confirmed_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": true,
+      "meanings": [
+        {
+          "text": "Wing Commander",
+          "sources": [
+            "JSSD_2025"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Wg sig sec": {
+      "preferred": [
+        "Wing signal section"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Wing signal section",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "wgn": {
+      "preferred": [
+        "Wagon"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Wagon",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "wh": {
+      "preferred": [
+        "Wheel, Wheeled"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Wheel, Wheeled",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WIA": {
+      "preferred": [
+        "Wounded In Action"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Wounded In Action",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "wk": {
+      "preferred": [
+        "Work(s)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Work(s)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Wks engrs": {
+      "preferred": [
+        "Works Engineers"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Works Engineers",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "wksp": {
+      "preferred": [
+        "Workshop"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Workshop",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "wksp coy": {
+      "preferred": [
+        "Workshop company"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Workshop company",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WL": {
+      "preferred": [
+        "Wagon Lines"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Wagon Lines",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "wldr": {
+      "preferred": [
+        "Welder"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Welder",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WLL": {
+      "preferred": [
+        "Wireless in Local Loop"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Wireless in Local Loop",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WNW": {
+      "preferred": [
+        "West of North West"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "West of North West",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WP": {
+      "preferred": [
+        "Water Point"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Water Point",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "wpf": {
+      "preferred": [
+        "Water Proof, Water Proofed, Water Proofing"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Water Proof, Water Proofed, Water Proofing",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "wpn": {
+      "preferred": [
+        "Weapon"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Weapon",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WRL": {
+      "preferred": [
+        "Weapon Release Line"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Weapon Release Line",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "wrt": {
+      "preferred": [
+        "With Reference To"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "With Reference To",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WS": {
+      "preferred": [
+        "War Like Stores",
+        "Work Study"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "War Like Stores",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Work Study",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WS Dte (E-in-C)": {
+      "preferred": [
+        "Works Study Directorate (Engineer-in-Chief)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Works Study Directorate (Engineer-in-Chief)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WSE": {
+      "preferred": [
+        "West of South East"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "West of South East",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WT": {
+      "preferred": [
+        "Weapon Training"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Weapon Training",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "wt": {
+      "preferred": [
+        "Warrant",
+        "Weight"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Warrant",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "Weight",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WW": {
+      "preferred": [
+        "Winter Warfare"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Winter Warfare",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WWCP": {
+      "preferred": [
+        "Walking Wounded Collecting Post"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Walking Wounded Collecting Post",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "WWR": {
+      "preferred": [
+        "War Wastage Rate",
+        "War Wastage Reserve"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "War Wastage Rate",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        },
+        {
+          "text": "War Wastage Reserve",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "wx": {
+      "preferred": [
+        "Weather"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Weather",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "x rds": {
+      "preferred": [
+        "Cross Roads"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Cross Roads",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "xg": {
+      "preferred": [
+        "Crossing"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Crossing",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "yd": {
+      "preferred": [
+        "Yard(s)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Yard(s)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "yr": {
+      "preferred": [
+        "Year(s)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Year(s)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "yrly": {
+      "preferred": [
+        "Yearly"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Yearly",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "YSM": {
+      "preferred": [
+        "Yudh Seva Medal"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Yudh Seva Medal",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "Z": {
+      "preferred": [
+        "Zone (suffix only)"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Zone (suffix only)",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "ZRO": {
+      "preferred": [
+        "Zonal Recruiting Officer"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Zonal Recruiting Officer",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    },
+    "ZSB": {
+      "preferred": [
+        "Zila Sainik Board"
+      ],
+      "preferred_basis": "legacy_fallback_not_checked_against_all_of_JSSD_2025",
+      "confirmed_in_JSSD_2025_sample": false,
+      "meanings": [
+        {
+          "text": "Zila Sainik Board",
+          "sources": [
+            "APPENDIX_C_LEGACY"
+          ],
+          "evidence": []
+        }
+      ]
+    }
+  }
+}
