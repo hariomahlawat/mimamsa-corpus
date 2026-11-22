@@ -1,0 +1,140 @@
+{
+  "batch_id": "PILOT-01",
+  "version": "v2 (post-remediation)",
+  "date": "2026-11-22",
+  "nature": "Process/coverage scorecard; NOT a legal accuracy percentage. No advisor-adjudicated reference set exists; 0 advisor-reviewed, 0 formally approved.",
+  "originals_unchanged": true,
+  "coverage": {
+    "manifest_items": 43,
+    "items_with_explicit_outcome": 43,
+    "kb_records": 25,
+    "kb_with_outcome": 25,
+    "kb_worst_outcome": {
+      "CONFLICTING_SOURCES": 5,
+      "NO_ISSUE_FOUND": 3,
+      "BLOCKED": 1,
+      "DISCREPANCY": 11,
+      "UNVERIFIED": 5
+    },
+    "all_items_worst_outcome": {
+      "CONFLICTING_SOURCES": 6,
+      "NO_ISSUE_FOUND": 4,
+      "BLOCKED": 5,
+      "DISCREPANCY": 22,
+      "UNVERIFIED": 6
+    },
+    "kb_mml_anchor": {
+      "EXACT_PASSAGE": 13,
+      "RELATED_PASSAGE": 5,
+      "NO_MML_COVERAGE": 7
+    }
+  },
+  "findings": {
+    "first_pass": 109,
+    "first_pass_severity_original": {
+      "P3": 48,
+      "P2": 31,
+      "P1": 25,
+      "P0": 5
+    },
+    "first_pass_severity_provisional_after_review_PROPOSED": {
+      "P3": 48,
+      "P2": 41,
+      "P1": 16,
+      "P0": 4
+    },
+    "supplementary_remediation_findings": 2,
+    "blind": 15
+  },
+  "independent_review": {
+    "reviews": 33,
+    "by_decision": {
+      "DISPUTES": 6,
+      "SUPPORTS": 26,
+      "RETURN_FOR_EVIDENCE": 1
+    },
+    "p0_p1_conflict_findings": 33,
+    "p0_p1_conflict_reviewed": 31,
+    "p0_p1_conflict_disputed": 5,
+    "dispute_rate_on_reviewed_high": 0.161,
+    "blind_vs_firstpass": {
+      "AGREE": 14,
+      "DISAGREE": 3,
+      "FIRSTPASS_ONLY": 8,
+      "BLIND_ONLY": 2
+    },
+    "dispositions_recorded": 7,
+    "disposition_classes": {
+      "REVIEWER_POSITION_ADOPTED_PROVISIONALLY": 4,
+      "ADVISOR_DECISION_REQUIRED": 1,
+      "SPLIT_RESCOPED": 1,
+      "EVIDENCE_SUPPLIED_SUPPLEMENTARY_FINDING": 1
+    },
+    "severity_recalibration_proposals": 10,
+    "supplementary_findings_independently_reviewed": 0
+  },
+  "citation_codes": {
+    "v1": {
+      "registered": 78,
+      "proposed": 57,
+      "unresolved": 21
+    },
+    "v2": {
+      "registered": 78,
+      "CORROBORATED_OFFICIAL": 33,
+      "PROBABLE": 9,
+      "RESOLVED_RECORD_EXPLICIT": 32,
+      "UNRESOLVABLE": 1,
+      "RESOLVED_CO_CITATION": 3
+    },
+    "firm_resolution(official+record-explicit)": "65/78 = 83%",
+    "inclusive_resolution(+co-citation)": "68/78 = 87%",
+    "threshold_90pct_met": false,
+    "codes_found_outside_v1_register": [
+      "SRC-RA (6 records)",
+      "SRC-AO (6)",
+      "SRC-INDER (1)",
+      "SRC-HUSSAIN (1)",
+      "shorthands PPS, VISHAV, RANDHIR, VIRENDRA"
+    ],
+    "official_sha256_rows_verified": "33/33 matched to downloaded or registered files"
+  },
+  "page_image_checks": {
+    "orchestrator_recorded_with_render_hash": 7,
+    "reviewer_reported_without_hash": 2,
+    "all_matched_text_layer": true
+  },
+  "mml_reproducibility": {
+    "files": 8,
+    "determinism": "8/8 byte-identical across two runs",
+    "pdf_layers_identical_to_pilot": 3,
+    "doc_layers_line_numbering_identical": 5,
+    "doc_layers_character_differences": "punctuation/encoding only (old layer cp1252 losses)",
+    "extracted_text_committed": false
+  },
+  "validator": {
+    "tests": 33,
+    "local": "OK",
+    "ci_run": "45023068164 success",
+    "pilot_strict_errors": 0,
+    "new_controls": [
+      "reviewer identity binding (reviewer_identities.json)",
+      "no cross-reviewer evidence",
+      "no first-pass citation of reviewer sources",
+      "no self-review",
+      "blind flag only for blind stage",
+      "exact retrieved_by option"
+    ]
+  },
+  "separation": {
+    "audit_pr": "hariomahlawat/mimamsa-corpus#6 (audit paths only)",
+    "excluded": "main 21de353 crawler/state files"
+  },
+  "legal_review": {
+    "advisor_nominated": false,
+    "advisor_packet_items": 32,
+    "annex_items": 2,
+    "advisor_reviewed": 0,
+    "formally_approved": 0
+  }
+}

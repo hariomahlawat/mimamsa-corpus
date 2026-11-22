@@ -1,0 +1,43 @@
+{
+ "note": "Known provenance-control violations (tools/legal_audit/check_provenance.py). Entries are frozen or not-yet-integrated register rows; they are pinned so CI fails only on NEW violations. An entry is removed only when the source row is corrected by a versioned supersession file. Structural only; not a legal determination.",
+ "generated_from": [
+  "HEAD",
+  "origin/claude/ws-a-statutory",
+  "origin/claude/ws-b-judgments",
+  "origin/claude/ws-c-mml",
+  "pruned at ed3dcf90 (coordinator merge correcting ACQ-02 copy_fidelity and the AR-029 chain row)"
+ ],
+ "known_violations": [
+  {
+   "rule": "IMG-1",
+   "file": "PILOT-01/registers/page_image_checks.csv",
+   "row": "check_id=PIC-08",
+   "detail": "render_png_sha256 = 'not recorded'",
+   "first_seen_in": "HEAD",
+   "reason": "Frozen PILOT-01: render PNG hash 'not recorded' for this check (render not retained). Cannot be backfilled without a re-render recorded in a new register.",
+   "route_to": "coordinator"
+  },
+  {
+   "rule": "IMG-1",
+   "file": "PILOT-01/registers/page_image_checks.csv",
+   "row": "check_id=PIC-09",
+   "detail": "render_png_sha256 = 'not recorded'",
+   "first_seen_in": "HEAD",
+   "reason": "Frozen PILOT-01: render PNG hash 'not recorded' for this check (render not retained). Cannot be backfilled without a re-render recorded in a new register.",
+   "route_to": "coordinator"
+  },
+  {
+   "rule": "IMG-3",
+   "file": "WS-A-STATUTORY/provision_change_log.csv",
+   "row": "change_id=PCL-BL-25",
+   "detail": "copy_fidelity PAGE_IMAGE_CHECKED without a 64-hex render hash or a resolvable check id",
+   "first_seen_in": "origin/claude/ws-a-statutory",
+   "reason": "WS-A branch: baseline row claims copy_fidelity PAGE_IMAGE_CHECKED but cites no instrument_ref, check id or file hash.",
+   "route_to": "WS-A"
+  }
+ ],
+ "pruned_after_correction": [
+  "CA-1 ACQ-02/supplement_inventory.csv (17 rows)",
+  "RV-1 ARMY-RULES-CHAIN-01/army_rules_instrument_register.csv (1 rows)"
+ ]
+}

@@ -1,0 +1,11 @@
+volume,family_id_prefixes,modules,records,evidence_in_original_records,status
+I,?,?,?,No record names Volume I,UNVERIFIED
+II,COI-,M04,46,"COI-046 body: 'entire Volume II remains JAG-REVIEW-PENDING'; COI-001 'This volume is a working reference…'",VERIFIED_FROM_RECORD_TEXT
+III,?,?,?,No record names Volume III (HCE-001 says 'Scope of this volume' without a number),UNVERIFIED
+IV,"CM-, CM-SC-, CM-CL-, CM-JD-",M05,75,"CM-001 title 'Purpose and scope of Volume IV'",VERIFIED_FROM_RECORD_TEXT
+V,?,?,?,No record names Volume V (ADM family is the remaining candidate),UNVERIFIED
+VI,PEN-*,M08,96,"PEN-CL-01..08 'See linked Volume VI topic notes'; PEN references use V6-S* source codes (68 records)",VERIFIED_FROM_RECORD_TEXT
+VII,"AFT-, V7-*",M10 (+M11/M12 V7-*),98,"ID prefix V7-; source codes V7-S* in AFT and V7 records",VERIFIED_FROM_ID_AND_CODE_PREFIX
+VIII,"CIV-, V8-*",M09 (+M11/M12 V8-*),103,"ID prefix V8-; source codes V8-S*; V8-JD-04 'in this volume'",VERIFIED_FROM_ID_AND_CODE_PREFIX
+IX,"EV-, V9-*",M13,96,"ID prefix V9-; sources field V9-S*",VERIFIED_FROM_ID_AND_CODE_PREFIX
+(unassigned),"KB-* (30), HCE-/SC##/J- (51), ADM-* (63)","M01-M03, M06, M06_M07, M09-M12",144,"Rev1 inferred 'CORE_KB', 'HCE', 'ADM' families; assignment to Volumes I, III, V not evidenced in records",UNVERIFIED - owner to confirm

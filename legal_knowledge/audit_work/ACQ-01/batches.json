@@ -1,0 +1,537 @@
+{
+  "plan": "ACQ-01",
+  "status": "PREPARED — NOT EXECUTED",
+  "generated": "2026-11-22",
+  "batches": [
+    {
+      "batch": "ACQ-01-B1",
+      "priority": 1,
+      "name": "Army Rules 1954: S.R.O. 484 and amending S.R.O.s",
+      "route": "archive.org (already allow-listed under sources.archive)",
+      "approval_needed": [
+        "owner approval of download run",
+        "enable sources.archive / add documents list (config change, separate PR)"
+      ],
+      "items": [
+        {
+          "doc_id": "notif-army-rules-1954-sro-484",
+          "source": "archive",
+          "url": "https://archive.org/download/in.gazette.central.w.1954-11-27.103686/103686.pdf",
+          "archive_identifier": "in.gazette.central.w.1954-11-27.103686",
+          "expected_md5": "3bb93dc7531e7673a94aed92e8aa8bf0",
+          "expected_size": 5032579,
+          "title": "Army Rules, 1954 (S.R.O. 484), Gazette of India No. 47, Part II-Section 4",
+          "doc_type": "rules",
+          "number": "S.R.O. 484",
+          "issuing_authority": "Central Government (Ministry of Defence), under Army Act s.191",
+          "issue_date": "1954-11-27",
+          "year": 1954,
+          "gazette": "No.47, Pt II s.4, pp.291-378",
+          "provenance_class": "ARCHIVAL_FACSIMILE_OF_OFFICIAL",
+          "uploader_collection": "carl@media.org / ['gazetteofindia', 'JaiGyan']",
+          "access_marking": null,
+          "identity_markers_to_confirm_on_image": [
+            "masthead 'No. 47 ... NOVEMBER 27, 1954 PART II—Section 4' (p.291)",
+            "'S.R.O. 484' preamble",
+            "r.23(3) on printed p.300",
+            "88 pages = pp.291-378"
+          ],
+          "feeds": [
+            "UQ-01",
+            "F-STAT-001",
+            "MMLPKT-02",
+            "R23-VERIFY-01"
+          ]
+        },
+        {
+          "doc_id": "notif-army-rules-amdt-sro-116-1965",
+          "source": "archive",
+          "url": "https://archive.org/download/in.gazette.central.w.1965-04-10.81813/81813.pdf",
+          "archive_identifier": "in.gazette.central.w.1965-04-10.81813",
+          "expected_md5": "5c8d1d11a11bc37740d65cbf195898f8",
+          "expected_size": 153228,
+          "title": "Army (First Amendment) Rules 1965, S.R.O. 116",
+          "doc_type": "notification",
+          "number": "S.R.O. 116",
+          "issuing_authority": "Ministry of Defence",
+          "issue_date": "1965-04-10",
+          "year": 1965,
+          "gazette": "Pt II s.4",
+          "provenance_class": "ARCHIVAL_FACSIMILE_OF_OFFICIAL",
+          "uploader_collection": "carl@media.org / ['gazetteofindia', 'JaiGyan']",
+          "access_marking": null,
+          "identity_markers_to_confirm_on_image": [
+            "S.R.O. 116"
+          ],
+          "feeds": [
+            "amendment chain"
+          ]
+        },
+        {
+          "doc_id": "notif-army-rules-amdt-sro-215-1965",
+          "source": "archive",
+          "url": "https://archive.org/download/in.gazette.central.w.1965-07-03.79361/79361.pdf",
+          "archive_identifier": "in.gazette.central.w.1965-07-03.79361",
+          "expected_md5": "e06b4fb6725886f21cc7c52028efaa04",
+          "expected_size": 114952,
+          "title": "Army Rules amendment, S.R.O. 215 dated 17-06-1965 (r.192 proviso)",
+          "doc_type": "notification",
+          "number": "S.R.O. 215",
+          "issuing_authority": "Ministry of Defence",
+          "issue_date": "1965-06-17",
+          "year": 1965,
+          "gazette": "Pt II s.4, Gazette 03-07-1965",
+          "provenance_class": "ARCHIVAL_FACSIMILE_OF_OFFICIAL",
+          "uploader_collection": "carl@media.org / ['gazetteofindia', 'JaiGyan']",
+          "access_marking": null,
+          "identity_markers_to_confirm_on_image": [
+            "S.R.O. 215",
+            "r.192 proviso text"
+          ],
+          "feeds": [
+            "F-REM-001",
+            "F-STAT-006"
+          ]
+        },
+        {
+          "doc_id": "notif-army-rules-amdt-sro-188-1979",
+          "source": "archive",
+          "url": "https://archive.org/download/in.gazette.central.w.1979-07-28.46533/46533.pdf",
+          "archive_identifier": "in.gazette.central.w.1979-07-28.46533",
+          "expected_md5": "27b0a853be54c01d0151788667867cd9",
+          "expected_size": 866906,
+          "title": "Army (Amendment) Rules 1979, S.R.O. 188 dated 04-06-1979",
+          "doc_type": "notification",
+          "number": "S.R.O. 188",
+          "issuing_authority": "Ministry of Defence",
+          "issue_date": "1979-06-04",
+          "year": 1979,
+          "gazette": "Pt II s.4, Gazette 28-07-1979",
+          "provenance_class": "ARCHIVAL_FACSIMILE_OF_OFFICIAL",
+          "uploader_collection": "carl@media.org / ['gazetteofindia', 'JaiGyan']",
+          "access_marking": null,
+          "identity_markers_to_confirm_on_image": [
+            "S.R.O. 188"
+          ],
+          "feeds": [
+            "amendment chain; r.2 definitions"
+          ]
+        },
+        {
+          "doc_id": "notif-army-rules-amdt-sro-216-1988",
+          "source": "archive",
+          "url": "https://archive.org/download/in.gazette.central.w.1988-09-17.28081/28081.pdf",
+          "archive_identifier": "in.gazette.central.w.1988-09-17.28081",
+          "expected_md5": "fea10feccd506fc113efa93ff641cec2",
+          "expected_size": 745123,
+          "title": "Army (Amendment) Rules 1988, S.R.O. 216 dated 30-08-1988",
+          "doc_type": "notification",
+          "number": "S.R.O. 216",
+          "issuing_authority": "Ministry of Defence",
+          "issue_date": "1988-08-30",
+          "year": 1988,
+          "gazette": "Pt II s.4, Gazette 17-09-1988",
+          "provenance_class": "ARCHIVAL_FACSIMILE_OF_OFFICIAL",
+          "uploader_collection": "carl@media.org / ['gazetteofindia', 'JaiGyan']",
+          "access_marking": null,
+          "identity_markers_to_confirm_on_image": [
+            "S.R.O. 216"
+          ],
+          "feeds": [
+            "amendment chain"
+          ]
+        },
+        {
+          "doc_id": "notif-army-rules-amdt-sro-17e-1993",
+          "source": "archive",
+          "url": "https://archive.org/download/in.gazette.central.e.1993-12-06.16490/16490.pdf",
+          "archive_identifier": "in.gazette.central.e.1993-12-06.16490",
+          "expected_md5": "d152e3344159fa8b745f4108ec07d678",
+          "expected_size": 1592603,
+          "title": "Army (Amendment) Rules 1993, S.R.O. 17(E) dated 06-12-1993",
+          "doc_type": "notification",
+          "number": "S.R.O. 17(E)",
+          "issuing_authority": "Ministry of Defence",
+          "issue_date": "1993-12-06",
+          "year": 1993,
+          "gazette": "Extraordinary Pt II s.4",
+          "provenance_class": "ARCHIVAL_FACSIMILE_OF_OFFICIAL",
+          "uploader_collection": "carl@media.org / ['gazetteofindia', 'JaiGyan']",
+          "access_marking": null,
+          "identity_markers_to_confirm_on_image": [
+            "S.R.O. 17(E)",
+            "rules amended list"
+          ],
+          "feeds": [
+            "r.22 proviso, r.25, r.182; MMLPKT-01/03/05"
+          ]
+        },
+        {
+          "doc_id": "notif-army-rules-amdt-sro-8e-2003",
+          "source": "archive",
+          "url": "https://archive.org/download/in.gazette.central.e.2003-06-24.153/153.pdf",
+          "archive_identifier": "in.gazette.central.e.2003-06-24.153",
+          "expected_md5": "ce946e3682c421c9a40396ed6412eafb",
+          "expected_size": 40864,
+          "title": "Army (Amendment) Rules 2003, S.R.O. 8(E)",
+          "doc_type": "notification",
+          "number": "S.R.O. 8(E)",
+          "issuing_authority": "Ministry of Defence",
+          "issue_date": "2003-06-24",
+          "year": 2003,
+          "gazette": "Extraordinary Pt II s.4",
+          "provenance_class": "ARCHIVAL_FACSIMILE_OF_OFFICIAL",
+          "uploader_collection": "carl@media.org / ['gazetteofindia', 'JaiGyan']",
+          "access_marking": null,
+          "identity_markers_to_confirm_on_image": [
+            "S.R.O. 8(E)",
+            "r.177"
+          ],
+          "feeds": [
+            "F-PROC-018 (r.177)"
+          ]
+        },
+        {
+          "doc_id": "notif-army-rules-amdt-sro-17e-2019",
+          "source": "archive",
+          "url": "https://archive.org/download/in.gazette.central.e.2019-12-28.214956/214956.pdf",
+          "archive_identifier": "in.gazette.central.e.2019-12-28.214956",
+          "expected_md5": "05c168856e218c2b4f5b74fc3bffa692",
+          "expected_size": 339524,
+          "title": "Army (Amendment) Rules 2019, S.R.O. 17(E) dated 28-12-2019",
+          "doc_type": "notification",
+          "number": "S.R.O. 17(E)",
+          "issuing_authority": "Ministry of Defence",
+          "issue_date": "2019-12-28",
+          "year": 2019,
+          "gazette": "Extraordinary",
+          "provenance_class": "ARCHIVAL_FACSIMILE_OF_OFFICIAL",
+          "uploader_collection": "sushant@indiankanoon.com / ['gazetteofindia', 'JaiGyan']",
+          "access_marking": null,
+          "identity_markers_to_confirm_on_image": [
+            "S.R.O. 17(E)",
+            "2019"
+          ],
+          "feeds": [
+            "amendment chain"
+          ]
+        },
+        {
+          "doc_id": "notif-army-rules-amdt-sro-6e-2022",
+          "source": "archive",
+          "url": "https://archive.org/download/in.gazette.central.e.2022-06-06.236353/236353.pdf",
+          "archive_identifier": "in.gazette.central.e.2022-06-06.236353",
+          "expected_md5": "52ced37f1e9a37ae2f1af1ea18445e8f",
+          "expected_size": 115072,
+          "title": "Army (Amendment) Rules 2022, S.R.O. 6(E) dated 06-06-2022 (r.16A)",
+          "doc_type": "notification",
+          "number": "S.R.O. 6(E)",
+          "issuing_authority": "Ministry of Defence",
+          "issue_date": "2022-06-06",
+          "year": 2022,
+          "gazette": "Extraordinary; egazette id CG-DL-E-06062022-236353",
+          "provenance_class": "ARCHIVAL_FACSIMILE_OF_OFFICIAL",
+          "uploader_collection": "sushant@indiankanoon.com / ['gazetteofindia', 'JaiGyan']",
+          "access_marking": null,
+          "identity_markers_to_confirm_on_image": [
+            "S.R.O. 6(E)",
+            "r.16A"
+          ],
+          "feeds": [
+            "amendment chain"
+          ]
+        }
+      ],
+      "gaps": [
+        "S.R.O. 258 of 27-11-2002: not located on archive.org; egazette (Indian network) or custodian request",
+        "S.R.O. 34 dated 05-06-1963 (the amendment listed in official notes): not located",
+        "17 amending S.R.O.s of 1960-1991 listed in the government compilation's own notes: not located (see R23-VERIFY-01/registers/amendment_chain_r23.csv)",
+        "S.R.O. 2(E) dated 20-02-2018: not located",
+        "Any amendment after 06-06-2022: not searched (egazette unreachable)"
+      ],
+      "excluded_items": [
+        {
+          "doc_id": "notif-army-rules-amdt-sro-34-1963",
+          "source": "archive",
+          "url": "https://archive.org/download/in.gazette.central.w.1963-01-19.84713/84713.pdf",
+          "archive_identifier": "in.gazette.central.w.1963-01-19.84713",
+          "expected_md5": "f9414ea4adc8704350f740c56721ae08",
+          "expected_size": 382036,
+          "title": "Army Rules amendment, S.R.O. 34 (Gazette 19-01-1963)",
+          "doc_type": "notification",
+          "number": "S.R.O. 34",
+          "issuing_authority": "Ministry of Defence",
+          "issue_date": "1963-01-19",
+          "year": 1963,
+          "gazette": "Pt II s.4",
+          "provenance_class": "ARCHIVAL_FACSIMILE_OF_OFFICIAL",
+          "uploader_collection": "carl@media.org / ['gazetteofindia', 'JaiGyan']",
+          "access_marking": null,
+          "identity_markers_to_confirm_on_image": [
+            "S.R.O. 34",
+            "'Army Rules'"
+          ],
+          "feeds": [
+            "amendment chain"
+          ],
+          "excluded_reason": "MISIDENTIFIED (independent-reviewer-D, R23-VERIFY-01): the archive.org item in.gazette.central.w.1963-01-19.84713 carries S.R.O. 34 dated 05-01-1963, a declaration under r.188, not an Army (Amendment) Rules notification. The amending S.R.O. 34 dated 05-06-1963 cited in official notes is NOT located."
+        }
+      ]
+    },
+    {
+      "batch": "ACQ-01-B2",
+      "priority": 2,
+      "name": "Criminal Courts and Court-martial (Adjustment of Jurisdiction) Rules 1978 and amendment",
+      "route": "archive.org",
+      "approval_needed": [
+        "owner approval",
+        "config documents list"
+      ],
+      "items": [
+        {
+          "doc_id": "rules-adjustment-jurisdiction-1978-so-488",
+          "source": "archive",
+          "url": "https://archive.org/download/in.gazette.central.w.1978-02-25.48290/48290.pdf",
+          "archive_identifier": "in.gazette.central.w.1978-02-25.48290",
+          "expected_md5": "91b0dd7aab747fe5260b1ffe61fd4d1d",
+          "expected_size": 5923089,
+          "title": "Criminal Courts and Court-martial (Adjustment of Jurisdiction) Rules, 1978 (S.O. 488, MHA, 09-02-1978)",
+          "doc_type": "rules",
+          "number": "S.O. 488",
+          "issuing_authority": "Central Government (Ministry of Home Affairs)",
+          "issue_date": "1978-02-09",
+          "year": 1978,
+          "gazette": "Gazette 25-02-1978, Pt II s.3(ii), p.525",
+          "provenance_class": "ARCHIVAL_FACSIMILE_OF_OFFICIAL",
+          "uploader_collection": "carl@media.org / ['gazetteofindia', 'JaiGyan']",
+          "access_marking": null,
+          "identity_markers_to_confirm_on_image": [
+            "S.O. 488",
+            "rules title",
+            "p.525"
+          ],
+          "feeds": [
+            "F-STAT-010",
+            "CIV-033",
+            "CIV-008"
+          ]
+        },
+        {
+          "doc_id": "notif-adjustment-jurisdiction-amdt-so-4010-1986",
+          "source": "archive",
+          "url": "https://archive.org/download/in.gazette.central.w.1986-12-06.32435/32435.pdf",
+          "archive_identifier": "in.gazette.central.w.1986-12-06.32435",
+          "expected_md5": "c5eaada91e55121d0e048542f4a0e68b",
+          "expected_size": 5891276,
+          "title": "Adjustment of Jurisdiction (Amendment) Rules, S.O. 4010 dated 24-11-1986",
+          "doc_type": "notification",
+          "number": "S.O. 4010",
+          "issuing_authority": "Ministry of Home Affairs",
+          "issue_date": "1986-11-24",
+          "year": 1986,
+          "gazette": "Gazette 06-12-1986, pp.4881-82",
+          "provenance_class": "ARCHIVAL_FACSIMILE_OF_OFFICIAL",
+          "uploader_collection": "carl@media.org / ['gazetteofindia', 'JaiGyan']",
+          "access_marking": null,
+          "identity_markers_to_confirm_on_image": [
+            "S.O. 4010",
+            "date 24-11-1986"
+          ],
+          "feeds": [
+            "CIV-033"
+          ]
+        }
+      ],
+      "gaps": [
+        "Post-BNSS rules under BNSS s.521/531: egazette (Indian network)"
+      ]
+    },
+    {
+      "batch": "ACQ-01-B3",
+      "priority": 3,
+      "name": "Regulations for the Army",
+      "route": "India Code (extract) + owner-supplied full copy",
+      "approval_needed": [
+        "owner approval",
+        "owner to supply the full Regulations and state access marking"
+      ],
+      "items": [
+        {
+          "doc_id": "regs-army-1987-ch5-extract",
+          "source": "indiacode",
+          "url": "India Code item a1465f87-b991-407d-a2f9-c907db530fb8 (resolve bitstream at run time via crawler/indiacode.py)",
+          "title": "Regulations for the Army 1987 (Revised Edition), Chapter V paras 201-220 (extract)",
+          "doc_type": "regulations",
+          "provenance_class": "OFFICIAL_COMPILATION",
+          "access_marking": "none printed on extract (verify)",
+          "feeds": [
+            "GAP-06"
+          ],
+          "note": "partial document; record as extract"
+        },
+        {
+          "doc_id": "regs-army-1987-full",
+          "source": "manual_upload",
+          "url": null,
+          "title": "Regulations for the Army 1987 (Revised Edition), complete",
+          "doc_type": "regulations",
+          "provenance_class": "GOVERNMENT_ISSUED_MANUAL / official publication (owner-supplied)",
+          "access_marking": "OWNER TO STATE before ingest",
+          "feeds": [
+            "GAP-06"
+          ],
+          "note": "if restricted: private store; derived text not committed (same controls as MML)"
+        },
+        {
+          "doc_id": "book-regs-army-india-1927",
+          "source": "archive",
+          "url": "https://archive.org/download/in.ernet.dli.2015.548585/2015.548585.Regulations-For.pdf",
+          "archive_identifier": "in.ernet.dli.2015.548585",
+          "expected_md5": "7df74eacbaa0ec0d84db3218a1a988e4",
+          "expected_size": 9945509,
+          "title": "Regulations for the Army in India (historical)",
+          "doc_type": "book_historical",
+          "number": null,
+          "issuing_authority": "Government of India (historical)",
+          "issue_date": null,
+          "year": null,
+          "gazette": "n/a",
+          "provenance_class": "ARCHIVAL_FACSIMILE_OF_OFFICIAL (historical; superseded)",
+          "uploader_collection": "carl@media.org / ['digitallibraryindia', 'JaiGyan']",
+          "access_marking": null,
+          "identity_markers_to_confirm_on_image": [
+            "title page, edition year"
+          ],
+          "feeds": [
+            "historical layer"
+          ]
+        }
+      ]
+    },
+    {
+      "batch": "ACQ-01-B4",
+      "priority": 4,
+      "name": "Entitlement Rules and Guide to Medical Officers",
+      "route": "desw.gov.in (NOT yet allow-listed)",
+      "approval_needed": [
+        "owner approval",
+        "add desw.gov.in to an official-copies source allow-list (separate config PR)"
+      ],
+      "items": [
+        {
+          "doc_id": "rules-entitlement-2023",
+          "source": "official_copies",
+          "url": "https://desw.gov.in/sites/default/files/Entitlement%20Rules%202023.pdf",
+          "title": "Entitlement Rules for Casualty Pensionary Awards to the Armed Forces Personnel, 2023 (MoD letter 21-09-2023)",
+          "doc_type": "rules",
+          "issuing_authority": "Ministry of Defence (DESW)",
+          "provenance_class": "OFFICIAL_ORIGINAL",
+          "feeds": [
+            "PEN-013",
+            "PEN-043",
+            "Isaac 2026 context"
+          ],
+          "note": "discovery copy (2026-10 path, 13 MB) SHA-256 29f6fa2c…; confirm which copy is the canonical upload"
+        },
+        {
+          "doc_id": "guide-medical-officers-mil-pensions-2023",
+          "source": "official_copies",
+          "url": "https://desw.gov.in/sites/default/files/2026-10/GMO%202023.pdf",
+          "title": "Guide to Medical Officers (Military Pensions) 2023",
+          "doc_type": "manual",
+          "issuing_authority": "Ministry of Defence (DESW)",
+          "provenance_class": "OFFICIAL_ORIGINAL",
+          "feeds": [
+            "PEN-043"
+          ]
+        }
+      ],
+      "gaps": [
+        "Entitlement Rules 1982, 2008 and GMO 2008: not found on reachable hosts (PCDA/CGDA time out); Indian-network run, judgment annexures, or owner copy"
+      ]
+    },
+    {
+      "batch": "ACQ-01-B5",
+      "priority": 5,
+      "name": "AFT judgments",
+      "route": "see AFT_ROUTE_ASSESSMENT.md",
+      "approval_needed": [
+        "owner decision on the bare-IP PDF host 103.154.2.123 (HTTP)",
+        "Indian-network run for bench sites"
+      ],
+      "items": [
+        {
+          "doc_id": "(per listing row)",
+          "source": "aft",
+          "url": "http://aft.gov.in/reportable-judgements; /large-bench-orders; /review-cases-of-regional-benches (static listings, no CAPTCHA)",
+          "provenance_class": "OFFICIAL_ORIGINAL (linked from the official portal; PDFs on bare IP over HTTP)",
+          "feeds": [
+            "GAP-12"
+          ],
+          "note": "~44 PDFs in total. The full judgment search is CAPTCHA-gated and is NOT used."
+        }
+      ]
+    },
+    {
+      "batch": "ACQ-01-B6",
+      "priority": 6,
+      "name": "Army Act amending Acts",
+      "route": "archive.org / India Code",
+      "approval_needed": [
+        "owner approval"
+      ],
+      "items": [
+        {
+          "doc_id": "act-commanders-in-chief-change-designation-1955",
+          "source": "archive",
+          "url": "https://archive.org/download/in.gazette.e.1955.613/E-2210-1955-0031-101567.pdf",
+          "archive_identifier": "in.gazette.e.1955.613",
+          "expected_md5": "6371b6ad0a8885ebf339200846044a21",
+          "expected_size": 92935,
+          "title": "Commanders-in-Chief (Change in Designation) Act, 1955 (Act 19 of 1955), Gazette Extraordinary",
+          "doc_type": "act",
+          "number": "19 of 1955",
+          "issuing_authority": "Parliament",
+          "issue_date": "1955",
+          "year": 1955,
+          "gazette": null,
+          "provenance_class": "ARCHIVAL_FACSIMILE_OF_OFFICIAL",
+          "uploader_collection": "carl@media.org / ['gazetteofindia', 'JaiGyan']",
+          "access_marking": null,
+          "identity_markers_to_confirm_on_image": [
+            "Act No. 19 of 1955",
+            "Schedule amending Army Act"
+          ],
+          "feeds": [
+            "AA amendment chain"
+          ]
+        },
+        {
+          "doc_id": "act-air-force-army-laws-amdt-1975",
+          "source": "indiacode",
+          "url": "India Code item eff2c36e-1e1a-4b16-8b58-043bcb86e596 (1975-13.pdf)",
+          "title": "Air Force and Army Laws (Amendment) Act, 1975 (Act 13 of 1975)",
+          "doc_type": "act",
+          "provenance_class": "OFFICIAL_ORIGINAL (Gazette scan on India Code)",
+          "feeds": [
+            "AA amendment chain"
+          ],
+          "note": "discovery copy SHA-256 8358d2b3…"
+        },
+        {
+          "doc_id": "act-army-amendment-1992",
+          "source": "indiacode",
+          "url": "India Code item 53aa36bb-a143-4324-9717-ac946144e169 (1992-37.pdf)",
+          "title": "Army (Amendment) Act, 1992 (Act 37 of 1992)",
+          "doc_type": "act",
+          "provenance_class": "OFFICIAL_ORIGINAL (Gazette scan on India Code)",
+          "feeds": [
+            "MMLPKT-06/10",
+            "PIC-07"
+          ],
+          "note": "India Code serves download-specific bytes: record MD5 and SHA-256 of the stored file"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "LegalAuditReview",
+  "required": [
+    "review_id",
+    "finding_id",
+    "reviewer_id",
+    "reviewer_role",
+    "decision",
+    "decision_date",
+    "rationale",
+    "source_ids"
+  ],
+  "properties": {
+    "review_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "finding_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewer_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewer_role": {
+      "type": "string",
+      "enum": [
+        "INDEPENDENT_AGENT",
+        "LEGAL_ADVISOR",
+        "PROJECT_DIRECTOR",
+        "FORMAL_AUTHORITY"
+      ]
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "SUPPORTS",
+        "DISPUTES",
+        "INCONCLUSIVE",
+        "RETURN_FOR_EVIDENCE",
+        "ACCEPTED_FOR_CANDIDATE",
+        "REJECTED",
+        "FORMALLY_APPROVED"
+      ]
+    },
+    "decision_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "approval_artifact": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reviewed_original_sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "blind": {
+      "type": "boolean"
+    },
+    "independent_source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    }
+  }
+}

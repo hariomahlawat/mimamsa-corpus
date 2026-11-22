@@ -1,0 +1,95 @@
+[
+  {
+    "finding_id": "F-REVD-001",
+    "record_id": "HCE-010",
+    "original_sha256": "4131611f6617a260481cd52ef4588cb5e96e3a77857a233e7ede8b2b92cf428a",
+    "batch_id": "R23-VERIFY-01",
+    "workstream": "INDEPENDENT_REVIEW",
+    "agent": "independent-reviewer-D",
+    "proposed_text": null,
+    "verification_state": "CONFLICTING",
+    "examination_outcome": "CONFLICTING_SOURCES",
+    "review_state": "PENDING",
+    "requires_legal_review": true,
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "severity": "P0",
+    "issue_type": "CONFLICT",
+    "claim": "STAGE A (written before Stage B, blind): Gazette of India No. 47, New Delhi, Saturday, November 27, 1954, Part II-Section 4, S.R.O. 484 (Army Rules, 1954), printed page 300 (PDF page 10 of 103686.pdf), rule 23(3) caution sentence transcribed from image: “Do you wish to make any statement?  You are not obliged to say anything unless you wish to do so, but whatever you say will be taken down in writing and may be given in evidence.” LEGIBILITY of caution sentence (600 dpi): every word CLEAR, including 'not' before 'obliged' (crisp, unbroken). Glyph-level notes only: in 'be taken down' the 'e' of 'be' and the final 'e' of 'evidence' have a broken crossbar and resemble 'c' (printing/scan defect; word identity CLEAR in context). Punctuation as printed: colon after 'asked', opening curly double quote, question mark after 'statement' followed by double space, comma after 'so', full stop then closing curly double quote after 'evidence'. Full sub-rule (3) as printed: 'The evidence of each witness after it has been recorded as provid-ed in the rule when taken down, shall be read over to him, and shall be signed by him, or if he cannot write his name, shall be attested by his mark and witnessed as a token of the correctness of the evidence record-ed. After all the evidence against the accused has been recorded, the accused will be asked: [caution] Any statement thereupon made by the accused shall be taken down and read over to him, but he will not be cross-examined upon it. The accused may then call his witnesses, including, if he so desires, any witnesses as to character.' (line-end hyphenations 'provid-ed', 'record-ed' are typesetting; a stray dot after 'by' on line 3 is a scan speck). No erratum/corrigendum concerning r.23 in the issue (only erratum: S.R.O. No. 454 not utilised).",
+    "original_location": "legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.jsonl line 86 (HCE-010), field body/references [AR: r 23(3)]",
+    "original_text": "After adverse evidence, the accused is invited to make a statement but is not obliged to do so; any voluntary statement is recorded and read over. The accused is not cross-examined on that statement at this stage and may call defence or character witnesses.\nUse the current authenticated caution, in a language the accused understands.; Record whether a statement was made voluntarily, without suggesting silence implies guilt.; Read over the statement and document corrections.; Allow relevant defence and character witnesses in accordance with the rule.\nCoercing admissions; Treating silence as proof; Using an inaccurate caution copied from an OCR error",
+    "rationale": "Stage A was performed blind (no PILOT-01 findings/registers, MML or India Code text opened) and written to this file before Stage B. The archival image of the Gazette as notified prints the negative form 'You are not obliged to say anything unless you wish to do so'. HCE-010's paraphrase ('invited to make a statement but is not obliged to do so ... not cross-examined ... may call defence or character witnesses') is consistent with the 1954 printed text on the elements examined. COMPARISON (after Stage A and B): agrees exactly in wording with the first examination PILOT-01 PIC-10 (orchestrator, 120 dpi; same PDF, same md5 3bb93dc7..., SHA-256 prefix c5ef95a9d553685a matches); PIC-11 identity details agree. Disagrees with the India Code compilation as recorded by PILOT-01 PIC-01 ('You are obliged to say anything unless you wish to do so', no 'not'); this reviewer did not independently retrieve or view the India Code PDF (data/text/rules-army-rules-1954.txt is not present in this checkout), so that side of the conflict rests on the first examination's record. Owner instruction: r.23(3) legal status remains CONFLICTING pending legal review; this reviewer cannot resolve or approve it.",
+    "source_ids": [
+      "S-REVD-001"
+    ],
+    "pinpoint": "Gazette of India No.47, 27-11-1954, Pt II s.4, S.R.O. 484, Army Rules 1954 r.23(3), printed p.300 (PDF p.10 of archive.org 103686.pdf; 150dpi render sha256 50889a89...653e; 600dpi crop sha256 b7bd7953...a538)",
+    "temporal_scope": "Text as notified 27-11-1954. Current text depends on the amendment chain (see F-REVD-002); on located instruments r.23 was not amended, but at least 19 listed amending instruments are unlocated.",
+    "advisor_questions": [
+      "Does the as-notified 1954 Gazette wording ('You are not obliged to say anything unless you wish to do so') govern r.23(3) today, absent any located amendment to r.23, notwithstanding the India Code compilation reading without 'not'?",
+      "Should a custodian-certified copy of S.R.O. 484 (Department of Publication / MoD) be obtained before any KB wording is changed?",
+      "Is the India Code omission of 'not' to be treated as a compilation error, or is there an unlocated amending instrument that changed r.23(3)?"
+    ],
+    "limitations": [
+      "Same-model limitation: this reviewer runs on the same model family as the first-pass auditors and orchestrator; agreement is correlated evidence, not independent human verification.",
+      "Archive.org scan by Public.Resource.Org; not custodian-certified. SHA-256 proves integrity of this copy only.",
+      "Reading performed visually by the model from rendered images (150/300/600 dpi); no human eyes-on check.",
+      "India Code side of the conflict not independently retrieved by this reviewer; relies on PILOT-01 PIC-01.",
+      "Text-layer search used only to locate pages and corrigenda; transcription is from the image.",
+      "Only the Army Rules, 1954 text as notified was checked; no judgment treatment of r.23(3) examined."
+    ],
+    "related_record_ids": [
+      "MMLPKT-02",
+      "EV-016"
+    ]
+  },
+  {
+    "finding_id": "F-REVD-002",
+    "record_id": "MMLPKT-02",
+    "original_sha256": "aee2b541c7ffb67063f24d468f353730ca1efefc89fe97956ee9d2e89944af30",
+    "batch_id": "R23-VERIFY-01",
+    "workstream": "INDEPENDENT_REVIEW",
+    "agent": "independent-reviewer-D",
+    "proposed_text": null,
+    "verification_state": "CONFLICTING",
+    "examination_outcome": "CONFLICTING_SOURCES",
+    "review_state": "PENDING",
+    "requires_legal_review": true,
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "severity": "P0",
+    "issue_type": "CONFLICT",
+    "claim": "On the nine archival Gazette instruments located and image-checked (1963 S.R.O. 34; 1965 S.R.O. 116 and 215; 1979 S.R.O. 188; 1988 S.R.O. 216; 1993 S.R.O. 17(E); 2003 S.R.O. 8(E); 2019 S.R.O. 17(E); 2022 S.R.O. 6(E)), none amends rule 23 of the Army Rules, 1954 (any sub-rule), so on those instruments the r.23(3) wording as notified in 1954 ('You are not obliged to say anything unless you wish to do so ...') is unchanged. This does NOT establish that r.23(3) has never been amended: at least 19 amending instruments listed in the Government's own notes, plus S.R.O. 258/2002 and anything after 6-6-2022, were not located.",
+    "original_location": "R23-VERIFY-01 pilot-manifest MMLPKT-02 (Army Rules 1954 r.23(3) as reproduced in MML 2.pdf, MML vol 2(AR).doc.doc, MML vol 2(AR).doc-1.doc)",
+    "original_text": "Army Rules 1954 r.23(3) (caution to accused at SoE) - MML reproduced text not opened by this reviewer (blindness protocol); per PILOT-01 registers the three MML copies read 'You are not obliged to say anything unless you wish to do so'.",
+    "rationale": "Rules amended, from images: 1963 S.R.O. 34 (5-1-1963) is a r.188(e) declaration, not an amendment, and is NOT the amending 'S.R.O. 34 dated 5-6-1963' listed in later notes; 1965 S.R.O. 116: Table below r.13 and Appendix I Form I; 1965 S.R.O. 215: r.192 proviso; 1979 S.R.O. 188: r.2 clauses (cc),(di)-(diii) and new rr.16A-16C; 1988 S.R.O. 216: r.2 omissions and r.16A Explanation (w.e.f. 4-6-1979); 1993 S.R.O. 17(E): 41 items incl. r.22 substituted (item 5) and r.25 omitted (item 6) - item sequence on printed p.14 runs r.22 -> r.25 with no r.23 item; also rr.14,16A,16B,26,33,36,37,52-54,57-59,59A,62,68,92,96,106,115,134-136,150,159,160,164,168,170,170A-B,172-176,179,182,186,193 and Appendices III-V; 2003 S.R.O. 8(E): r.177; 2019 S.R.O. 17(E): r.15B, r.16A; 2022 S.R.O. 6(E): r.16A. No corrigendum concerning r.23 found in the 1954 issue or in the located amendment items (text-layer search plus page images viewed). GAPS: amending S.R.O.s listed in notes to S.R.O. 216/1988, 17(E)/1993, 8(E)/2003 but not located: 7(E)/E-7 of 1960, 205/1961, 1/1961, 34 of 5-6-1963, 126/1964, 5/1968, 246/1982, 44, 55, 68, 278 of 1985, 169 and 302 of 1987, 332 (or 352) of 1989, 44, 61, 235 of 1991; S.R.O. 258/2002 (register T1-08; not in 2003 note); S.R.O. 2(E) of 20-2-2018 (named in 2019 footnote) and any instrument between June 2003 and Dec 2019 other than those; anything after 6-6-2022. Internal inconsistencies in Government notes: 1993 S.R.O. dated 22-12-1993 in 2003 note vs printed 6-12-1993; 1960 instrument dated 17-6 vs 16-07; 1989 S.R.O. 332 vs 352; S.R.O. 116/1965 omitted from all notes. Comparison: the first examination's source discovery register rows T1-02..T1-11 broadly agree on identities and amended rules; this review DISAGREES on T1-02 (the located S.R.O. 34 is not an amendment of the Army Rules and is not the listed 5-6-1963 instrument). The r.23(3) conflict (1954 Gazette and MML 'not obliged' vs India Code compilation 'obliged', per PILOT-01) remains CONFLICTING; no amendment found that could explain the compilation wording.",
+    "source_ids": [
+      "S-REVD-001",
+      "S-REVD-002",
+      "S-REVD-003",
+      "S-REVD-004",
+      "S-REVD-005",
+      "S-REVD-006",
+      "S-REVD-007",
+      "S-REVD-008",
+      "S-REVD-009",
+      "S-REVD-010"
+    ],
+    "pinpoint": "Army Rules 1954 r.23(3); base text printed p.300 of Gazette 27-11-1954; amendment evidence pages per registers/amendment_chain_r23.csv (e.g. 1993 S.R.O. 17(E) printed p.14 items 5-6)",
+    "temporal_scope": "1954-11-27 to 2022-06-06 on located instruments only; periods with unlocated instruments: 1960-1991 (17 listed S.R.O.s), Nov 2002 (S.R.O. 258), June 2003-Dec 2019 (incl. S.R.O. 2(E)/2018), after 6-6-2022.",
+    "advisor_questions": [
+      "Can a custodian (MoD / Department of Publication) provide a certified consolidated amendment history of Army Rules r.23, or copies of the 19+ unlocated amending S.R.O.s?",
+      "Is the absence of any r.23 amendment in located instruments sufficient for operational use of the 'not obliged' wording pending certified confirmation, or must the record remain blocked?",
+      "Should S.R.O. 258/2002 be treated as a real amendment, given it is not listed in the S.R.O. 8(E)/2003 note?"
+    ],
+    "limitations": [
+      "Same-model limitation: this reviewer runs on the same model family as the first-pass auditors and orchestrator; agreement is correlated evidence, not independent human verification.",
+      "Cannot prove a negative: unlocated Gazettes may contain amendments or corrigenda to r.23.",
+      "Archival scans (Public.Resource.Org / Indian Kanoon uploads on archive.org); not custodian-certified.",
+      "1993 S.R.O. 17(E) items on printed pp.12-13 and 15-17 and 1979 pp.259-260 checked via text layer only; rule numbers for 1993 items 24 and 26 are OCR-uncertain (not r.23 on sequence).",
+      "MML texts not opened (blindness); MML wording taken from PILOT-01 registers for context only.",
+      "Corrigenda search limited to the downloaded issues; separate corrigendum notifications in other issues not searched."
+    ],
+    "related_record_ids": [
+      "HCE-010",
+      "EV-016"
+    ]
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "LegalAuditKbRelation",
+  "description": "Optional, additive KB relation layer (WS-C CC-13, coordinator-approved). 'manual_supported' links a KB record to a page-image-checked Manual of Military Law locator. It is NEVER statutory or judicial authority, never a verification state, and cannot be cited as a finding source.",
+  "required": [
+    "relation_id",
+    "relation_type",
+    "from_record_id",
+    "mml_file",
+    "mml_file_sha256",
+    "locator",
+    "page_image_check_id",
+    "render_sha256",
+    "content_role",
+    "document_authority",
+    "carrier_provenance",
+    "legal_effect",
+    "asserted_by",
+    "asserted_on"
+  ],
+  "properties": {
+    "relation_id": {"type": "string", "minLength": 1, "pattern": "^REL-[A-Za-z0-9_.-]+$"},
+    "relation_type": {"type": "string", "enum": ["manual_supported"]},
+    "from_record_id": {"type": "string", "minLength": 1},
+    "mml_file": {"type": "string", "minLength": 1},
+    "mml_file_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "locator": {"type": "string", "minLength": 1},
+    "page_image_check_id": {"type": "string", "minLength": 1},
+    "render_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "content_role": {"type": "string", "enum": ["MANUAL_REPRODUCED_LEGAL_TEXT", "MANUAL_COMMENTARY"]},
+    "document_authority": {"type": "string", "enum": ["UNVERIFIED_MANUAL", "GOVERNMENT_ISSUED_MANUAL"]},
+    "carrier_provenance": {"type": "string", "enum": ["USER_SUPPLIED", "GOVERNMENT_HOSTED_COPY", "THIRD_PARTY_ARCHIVAL_FACSIMILE", "ISSUING_AUTHORITY", "UNKNOWN"]},
+    "edition_authority_ref": {"type": "string", "minLength": 1},
+    "legal_effect": {"type": "string", "enum": ["NOT_STATUTORY_AUTHORITY"]},
+    "asserted_by": {"type": "string", "minLength": 1},
+    "asserted_on": {"type": "string", "format": "date"},
+    "note": {"type": "string"}
+  }
+}

@@ -1,0 +1,522 @@
+[
+  {
+    "finding_id": "F-BLIND-001",
+    "batch_id": "PILOT-01",
+    "record_id": "HCE-010",
+    "original_sha256": "4131611f6617a260481cd52ef4588cb5e96e3a77857a233e7ede8b2b92cf428a",
+    "workstream": "INDEPENDENT_REVIEW",
+    "original_location": "records_658.jsonl:line 86",
+    "agent": "independent-reviewer",
+    "severity": "P1",
+    "issue_type": "CONFLICT",
+    "claim": "The accused, after adverse evidence at the summary of evidence, is invited to make a statement but is not obliged to do so (caution under AR r.23(3)).",
+    "original_text": "After adverse evidence, the accused is invited to make a statement but is not obliged to do so",
+    "proposed_text": null,
+    "rationale": "The India Code compilation of r.23(3) prints the caution as 'You are obliged to say anything unless you wish to do so' (no 'not'); both MML DOC copies print 'You are not obliged to say anything...'. The record's proposition matches the MML wording and the evident structure of the caution ('unless you wish to do so'), but no authenticated original (S.R.O. 484 of 27-11-1954 or later amendment) was obtained. Per the fixed position this is recorded as CONFLICTING and not resolved. The record itself correctly warns against copying an inaccurate caution.",
+    "source_ids": [
+      "S-BLIND-005"
+    ],
+    "contrary_source_ids": [],
+    "mml_anchor_ids": [
+      "S-BLIND-006",
+      "S-BLIND-007"
+    ],
+    "verification_state": "CONFLICTING",
+    "examination_outcome": "CONFLICTING_SOURCES",
+    "pinpoint": "Army Rules r.23(3), India Code compilation [[page 41]]; MML vol 2(AR).doc-1 L01383; MML vol 2(AR).doc L00472",
+    "temporal_scope": "Army Rules 1954 as consolidated on India Code (retrieved 2026-11-21), incl. r.22 as substituted by SRO 258 of 2002 per compilation; original SROs not held.",
+    "advisor_questions": [
+      "Can the original S.R.O. 484 (27-11-1954) and any amending S.R.O. to r.23(3) be obtained to settle the caution wording?",
+      "Until settled, which caution text should operational material display, and with what warning?"
+    ],
+    "limitations": [
+      "Original Gazette S.R.O. not held; no judgment discussing the r.23(3) wording was searched.",
+      "Same-model correlation: this blind review is produced by the same model family as the first-pass auditors; agreement is not independent human corroboration.",
+      "Only India Code government-hosted consolidations were read; original Gazette texts and amending Acts/S.R.O.s were not obtained (egazette.gov.in unreachable)."
+    ],
+    "requires_legal_review": true,
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "review_state": "PENDING"
+  },
+  {
+    "finding_id": "F-BLIND-002",
+    "batch_id": "PILOT-01",
+    "record_id": "HCE-010",
+    "original_sha256": "4131611f6617a260481cd52ef4588cb5e96e3a77857a233e7ede8b2b92cf428a",
+    "workstream": "INDEPENDENT_REVIEW",
+    "original_location": "records_658.jsonl:line 86",
+    "agent": "independent-reviewer",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "Any voluntary statement is recorded and read over; the accused is not cross-examined on it and may call defence or character witnesses; recorded in English and interpreted where not understood.",
+    "original_text": "any voluntary statement is recorded and read over. The accused is not cross-examined on that statement at this stage and may call defence or character witnesses.\nUse the current authenticated caution, in a language the accused understands.",
+    "proposed_text": "Optional precision: state that this is the summary-of-evidence stage under AR r.23 (not the CO's hearing under r.22), and that under r.23(4) the statement is recorded in English and interpreted to the accused in a language he understands.",
+    "rationale": "r.23(3) (compilation, uncontested parts) provides that after all evidence against the accused is recorded, any statement made is taken down and read over, he is not cross-examined on it, and he may call witnesses including character witnesses. r.23(4) requires recording in English with interpretation into a language understood. These parts of the record match. Minor imprecision only: the record does not name the r.23 stage and compresses r.23(4) into 'in a language the accused understands'.",
+    "source_ids": [
+      "S-BLIND-005"
+    ],
+    "verification_state": "CONFLICTING",
+    "examination_outcome": "CONFLICTING_SOURCES",
+    "pinpoint": "Army Rules r.23(3)-(4), India Code compilation [[page 41]]",
+    "temporal_scope": "Army Rules 1954 as consolidated on India Code (retrieved 2026-11-21), incl. r.22 as substituted by SRO 258 of 2002 per compilation; original SROs not held.",
+    "advisor_questions": [
+      "Confirm that no amendment to r.23(3)-(4) post-dates the compilation."
+    ],
+    "limitations": [
+      "Outcome carried as CONFLICTING because the same r.23(3) source is under the fixed caution dispute; the read-over, no-cross-examination and witness parts were not themselves contradicted by any source.",
+      "Same-model correlation: this blind review is produced by the same model family as the first-pass auditors; agreement is not independent human corroboration.",
+      "Only India Code government-hosted consolidations were read; original Gazette texts and amending Acts/S.R.O.s were not obtained (egazette.gov.in unreachable)."
+    ],
+    "contrary_source_ids": [],
+    "mml_anchor_ids": [],
+    "requires_legal_review": true,
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "review_state": "PENDING"
+  },
+  {
+    "finding_id": "F-BLIND-003",
+    "batch_id": "PILOT-01",
+    "record_id": "HCE-017",
+    "original_sha256": "54a4f2358087e1a1ff3871352419ff16ce000a52db1a5fb1e965ed3b741175be",
+    "workstream": "INDEPENDENT_REVIEW",
+    "original_location": "records_658.jsonl:line 93",
+    "agent": "independent-reviewer",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "s.80 lists custody, detention, confinement to lines, extra duty, deprivation, reprimand, fine and penal deductions; s.81 imposes rank and aggregate limits; s.82 allows other punishments with Government consent; disposal under s.80 per AR r.22(3)(a) and Appendix III.",
+    "original_text": "Section 80 specifies statutory punishments including custody, detention, confinement to lines, extra duty, specified deprivation, reprimand for eligible ranks, fine and penal deductions. Section 81 imposes rank and aggregate limitations. Section 82 permits other specified punishments only with the statutorily required Government consent.",
+    "proposed_text": "Optional: add s.80(f) forfeiture of good service and good conduct pay; state ceilings (28 days for (a)-(c); fine up to 14 days' pay in any one month; aggregate 42 days under s.81(3)); state that s.82 punishments are specified by the Chief of the Army Staff with Central Government consent.",
+    "rationale": "s.80(a)-(i) on [[page 27]] matches the list ('including' makes it non-exhaustive, though cl.(f) forfeiture of good service/good conduct pay is omitted). s.81(2)-(5) on [[page 28]] contains sequencing, a 42-day aggregate and rank bars (s.81(1) omitted 1992). s.82: Chief of the Army Staff may, with consent of the Central Government, specify other punishments. AR r.22(3)(a) directs disposal under s.80 'in accordance with the manner and form in Appendix III'. Upheld on examined evidence subject to the separate F-BLIND-004 issue.",
+    "source_ids": [
+      "S-BLIND-001",
+      "S-BLIND-004"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "Army Act ss.80(a)-(i) [[page 27]], 81(2)-(5) and 82 [[page 28]]; Army Rules r.22(3)(a) [[page 38]]",
+    "temporal_scope": "Army Act 1950 as consolidated on India Code (retrieved 2026-11-21); amendments after that date and original Gazette text not verified. Army Rules 1954 as consolidated on India Code (retrieved 2026-11-21), incl. r.22 as substituted by SRO 258 of 2002 per compilation; original SROs not held.",
+    "limitations": [
+      "Appendix III forms not read; s.80 'to the extent prescribed' and any notified s.82 additional punishments (Gazette) not checked; limits tied to the rank of the awarding officer not checked.",
+      "Same-model correlation: this blind review is produced by the same model family as the first-pass auditors; agreement is not independent human corroboration.",
+      "Only India Code government-hosted consolidations were read; original Gazette texts and amending Acts/S.R.O.s were not obtained (egazette.gov.in unreachable)."
+    ],
+    "contrary_source_ids": [],
+    "mml_anchor_ids": [],
+    "advisor_questions": [],
+    "requires_legal_review": false,
+    "legal_review_state": "NOT_REQUIRED",
+    "review_state": "PENDING"
+  },
+  {
+    "finding_id": "F-BLIND-004",
+    "batch_id": "PILOT-01",
+    "record_id": "HCE-017",
+    "original_sha256": "54a4f2358087e1a1ff3871352419ff16ce000a52db1a5fb1e965ed3b741175be",
+    "workstream": "INDEPENDENT_REVIEW",
+    "original_location": "records_658.jsonl:line 93",
+    "agent": "independent-reviewer",
+    "severity": "P1",
+    "issue_type": "PROCEDURAL_GAP",
+    "claim": "Custody/detention/confinement under s.80 are not awardable to NCOs.",
+    "original_text": "Check Section 81 restrictions: e.g., custody/detention/confinement are not awardable to NCOs; reprimand is not for ranks below NCO.",
+    "proposed_text": "Proposal: 'Under s.81(4), punishments in s.80(a), (b) and (c) cannot be awarded to a person who is an NCO, or who was an NCO when the offence was committed. Under s.81(5), s.80(g) (severe reprimand or reprimand) cannot be awarded below NCO rank.'",
+    "rationale": "s.81(4) bars s.80(a)-(c) for a person 'who is of the rank of non-commissioned officer or was, at the time of committing the offence for which he is punished, of such rank'. The record omits the second limb, so a person reduced from NCO rank after the offence could wrongly be treated as eligible for imprisonment in military custody, detention or confinement. The reprimand bar (s.81(5)) is stated correctly. Severity P1 because the omitted condition concerns lawfulness of a custodial summary punishment.",
+    "source_ids": [
+      "S-BLIND-001"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "Army Act s.81(4)-(5), India Code compilation [[page 28]] (s.81(4) clause reference substituted by Act 37 of 1992, s.5)",
+    "temporal_scope": "Army Act 1950 as consolidated on India Code (retrieved 2026-11-21); amendments after that date and original Gazette text not verified.",
+    "advisor_questions": [
+      "Confirm the proposed wording of the s.81(4) 'at the time of the offence' limb for operational use.",
+      "Should P0 rather than P1 apply given the custodial consequence?"
+    ],
+    "limitations": [
+      "No judgment on s.81(4) was searched.",
+      "Same-model correlation: this blind review is produced by the same model family as the first-pass auditors; agreement is not independent human corroboration.",
+      "Only India Code government-hosted consolidations were read; original Gazette texts and amending Acts/S.R.O.s were not obtained (egazette.gov.in unreachable)."
+    ],
+    "contrary_source_ids": [],
+    "mml_anchor_ids": [],
+    "requires_legal_review": true,
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "review_state": "PENDING"
+  },
+  {
+    "finding_id": "F-BLIND-005",
+    "batch_id": "PILOT-01",
+    "record_id": "CM-011",
+    "original_sha256": "dbf0137e3a85c5aa009b3b648dd690c705c9bc11dd4579d21e24f7b27c14ba88",
+    "workstream": "INDEPENDENT_REVIEW",
+    "original_location": "records_658.jsonl:line 138",
+    "agent": "independent-reviewer",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "Three-year limitation for commencing court-martial trial, starting from offence/knowledge/identity; exceptions for desertion, fraudulent enrolment and s.37 offences; excluded periods; s.122(4) qualification.",
+    "original_text": "The normal limitation is three years, subject to rules on commencement tied to date of offence, knowledge or known identity; statutory exceptions cover desertion, fraudulent enrolment and Section 37 offences, and particular periods are excluded.",
+    "proposed_text": null,
+    "rationale": "s.122(1)(a)-(c), (2), (3) and (4) on [[page 35]] match: three years from (a) date of offence, (b) first knowledge of the aggrieved person or competent authority, whichever earlier, or (c) first knowledge of identity, whichever earlier; (2) excludes desertion, fraudulent enrolment and s.37 offences; (3) excludes time as POW, in enemy territory or evading arrest; (4) bars trial for desertion (other than on active service) or fraudulent enrolment after three years' exemplary continuous service by a non-officer. 'Do not assume a CoI or SoE pauses limitation' is consistent with s.122(3) listing only those exclusions.",
+    "source_ids": [
+      "S-BLIND-002"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "Army Act s.122(1)-(4), India Code compilation [[page 35]]",
+    "temporal_scope": "Army Act 1950 as consolidated on India Code (retrieved 2026-11-21); amendments after that date and original Gazette text not verified. s.122(1)(a)-(c) wording substituted by Act 37 of 1992 (w.e.f. 6-9-1992 per compilation footnote to ss.75-76); offences before that date may need the pre-1992 text.",
+    "limitations": [
+      "Judicial interpretation of 'authority competent to initiate action' and of when a trial 'commences' was not searched (e.g., any SC authority on s.122(1)(b)); the record's claim that commencement is a legal question was not tested against case law.",
+      "Same-model correlation: this blind review is produced by the same model family as the first-pass auditors; agreement is not independent human corroboration.",
+      "Only India Code government-hosted consolidations were read; original Gazette texts and amending Acts/S.R.O.s were not obtained (egazette.gov.in unreachable)."
+    ],
+    "contrary_source_ids": [],
+    "mml_anchor_ids": [],
+    "advisor_questions": [],
+    "requires_legal_review": false,
+    "legal_review_state": "NOT_REQUIRED",
+    "review_state": "PENDING"
+  },
+  {
+    "finding_id": "F-BLIND-006",
+    "batch_id": "PILOT-01",
+    "record_id": "CM-011",
+    "original_sha256": "dbf0137e3a85c5aa009b3b648dd690c705c9bc11dd4579d21e24f7b27c14ba88",
+    "workstream": "INDEPENDENT_REVIEW",
+    "original_location": "records_658.jsonl:line 138",
+    "agent": "independent-reviewer",
+    "severity": "P1",
+    "issue_type": "MISSING_AUTHORITY",
+    "claim": "Computation guidance relies only on s.122(1)-(4), framed as 'apply the earliest relevant knowledge rule'.",
+    "original_text": "Apply the earliest relevant knowledge rule in Section 122(1). Test Section 122(2) exceptions and (3)/(4) qualifications separately.",
+    "proposed_text": "Proposal: 'Identify which limb of s.122(1) applies on the facts: (a) date of offence; (b) where the offence was not known, the earlier of first knowledge by the person aggrieved or the competent authority; (c) where the offender was unknown, the earlier date on which identity became known to either. If the accused has ceased to be subject to the Act, also apply s.123(2) (trial must commence within three years of ceasing to be subject, with stated exclusions; proviso for desertion, fraudulent enrolment and s.37 offences).'",
+    "rationale": "(i) 'Earliest relevant knowledge rule' is imprecise: 'whichever is earlier' in s.122(1)(b)-(c) compares the aggrieved person and the competent authority within the applicable limb; it does not authorise choosing the earliest of limbs (a)-(c). (ii) The record omits s.123(2), a separate three-year bar running from the date a person ceased to be subject to the Act, with its own exclusions and proviso. A court-martial convened on a chronology that ignores s.123 could be time-barred. Court-martial jurisdiction content: P1.",
+    "source_ids": [
+      "S-BLIND-002"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "Army Act s.122(1)(a)-(c) and s.123(1)-(2) with proviso, India Code compilation [[page 35]]",
+    "temporal_scope": "Army Act 1950 as consolidated on India Code (retrieved 2026-11-21); amendments after that date and original Gazette text not verified.",
+    "advisor_questions": [
+      "Is the limb-by-limb reading of s.122(1) correct in light of Supreme Court authority on s.122?",
+      "Should s.123 be added to CM-011 or cross-referenced to another record?"
+    ],
+    "limitations": [
+      "Case law on s.122/s.123 interplay not examined.",
+      "Same-model correlation: this blind review is produced by the same model family as the first-pass auditors; agreement is not independent human corroboration.",
+      "Only India Code government-hosted consolidations were read; original Gazette texts and amending Acts/S.R.O.s were not obtained (egazette.gov.in unreachable)."
+    ],
+    "contrary_source_ids": [],
+    "mml_anchor_ids": [],
+    "requires_legal_review": true,
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "review_state": "PENDING"
+  },
+  {
+    "finding_id": "F-BLIND-007",
+    "batch_id": "PILOT-01",
+    "record_id": "KB-003",
+    "original_sha256": "cf94e78ade6043053ddf3194b518f0e25841bb2a8f50f755ad7cbb1666bab668",
+    "workstream": "INDEPENDENT_REVIEW",
+    "original_location": "records_658.jsonl:line 3",
+    "agent": "independent-reviewer",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "s.79 recognises punishment without court-martial as specified in ss.80, 83, 84, 85; s.80 covers persons other than officers, JCOs and WOs; hearing under AR 22 or a legally available exception; s.81 limits; record in prescribed manner.",
+    "original_text": "Section 79 recognises punishments without court-martial as specified in ss 80, 83, 84 and 85. Section 80 provides a particular category of powers concerning persons other than officers, JCOs and warrant officers",
+    "proposed_text": "Optional: replace 'obtain review where doubt exists' with a reference to seeking advice; note that statutory transmission and review in ss.86-88 apply to awards under ss.83-85, and that the reference should read 'Army Act ss 79-88'.",
+    "rationale": "s.79 and s.80 opening words on [[page 27]] match verbatim in substance (CO or officer specified by COAS with Central Government consent; 'in the prescribed manner'; accused must be 'charged with an offence under this Act'). AR r.22(1) requires hearing in presence of the accused with cross-examination, and its proviso permits dispensing where the charge arises from a CoI with r.180 compliance - an 'exception' consistent with the record. r.22(3)(a) prescribes disposal under s.80 per Appendix III. Weakness: 'obtain review where doubt exists' has no identified statutory basis for s.80 awards; ss.86-88 confine transmission/review to ss.83-85 awards. Upheld on examined evidence; editorial imprecision only.",
+    "source_ids": [
+      "S-BLIND-001",
+      "S-BLIND-004"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "Army Act ss.79-80 [[page 27]], s.81 [[page 28]], ss.86-88 [[page 29]]; Army Rules r.22(1) proviso [[page 37]], r.22(3)(a) [[page 38]]",
+    "temporal_scope": "Army Act 1950 as consolidated on India Code (retrieved 2026-11-21); amendments after that date and original Gazette text not verified. Army Rules 1954 as consolidated on India Code (retrieved 2026-11-21), incl. r.22 as substituted by SRO 258 of 2002 per compilation; original SROs not held.",
+    "limitations": [
+      "Appendix III not read; regulatory (Regulations for the Army) review practices for s.80 awards not checked.",
+      "Same-model correlation: this blind review is produced by the same model family as the first-pass auditors; agreement is not independent human corroboration.",
+      "Only India Code government-hosted consolidations were read; original Gazette texts and amending Acts/S.R.O.s were not obtained (egazette.gov.in unreachable)."
+    ],
+    "contrary_source_ids": [],
+    "mml_anchor_ids": [],
+    "advisor_questions": [],
+    "requires_legal_review": false,
+    "legal_review_state": "NOT_REQUIRED",
+    "review_state": "PENDING"
+  },
+  {
+    "finding_id": "F-BLIND-008",
+    "batch_id": "PILOT-01",
+    "record_id": "PEN-043",
+    "original_sha256": "aacfa91ed6b956d05b9afe1861526c79b13446626fd4bb0d696d0fb28221fd1e",
+    "workstream": "INDEPENDENT_REVIEW",
+    "original_location": "records_658.jsonl:line 308",
+    "agent": "independent-reviewer",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "Dharamvir Singh (2013) and Rajbir Singh (2015) discuss presumptions under the earlier entitlement-rule regime.",
+    "original_text": "Dharamvir Singh and Rajbir Singh discuss presumptions under the earlier entitlement-rule regime.",
+    "proposed_text": "Optional: name the regime explicitly - 'Entitlement Rules for Casualty Pensionary Awards, 1982 (Appendix II, Pension Regulations, effective 1-1-1982)'; Rajbir Singh: CA 2904 of 2011, decided 13-2-2015.",
+    "rationale": "Dharamvir Singh para 28(ii)-(v) states the presumption of sound condition on entry absent a note, deterioration presumed due to service, onus on employer, and benefit of doubt, all under the 1982 Entitlement Rules (Rules 5, 9, 14). Rajbir Singh para 15 approves Dharamvir Singh and restates the presumption under the same Rules. Both official JUDIS PDFs confirm identity, bench and dates.",
+    "source_ids": [
+      "S-BLIND-012",
+      "S-BLIND-013"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "Dharamvir Singh paras 28-29 (PDF pp.29-31); Rajbir Singh para 15 (PDF pp.16-17)",
+    "temporal_scope": "Judgments as decided (2013-07-02; 2015-02-13) applying the 1982 Entitlement Rules; later treatment addressed in F-BLIND-010.",
+    "limitations": [
+      "Reported citations for Rajbir Singh not verified (not printed on judgment).",
+      "Same-model correlation: this blind review is produced by the same model family as the first-pass auditors; agreement is not independent human corroboration.",
+      "Only India Code government-hosted consolidations were read; original Gazette texts and amending Acts/S.R.O.s were not obtained (egazette.gov.in unreachable)."
+    ],
+    "contrary_source_ids": [],
+    "mml_anchor_ids": [],
+    "advisor_questions": [],
+    "requires_legal_review": false,
+    "legal_review_state": "NOT_REQUIRED",
+    "review_state": "PENDING"
+  },
+  {
+    "finding_id": "F-BLIND-009",
+    "batch_id": "PILOT-01",
+    "record_id": "PEN-043",
+    "original_sha256": "aacfa91ed6b956d05b9afe1861526c79b13446626fd4bb0d696d0fb28221fd1e",
+    "workstream": "INDEPENDENT_REVIEW",
+    "original_location": "records_658.jsonl:line 308",
+    "agent": "independent-reviewer",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "N S Yadav (2019) warns against automatic attribution of mental illness where facts and medical evidence do not support nexus (paras 15-19).",
+    "original_text": "N S Yadav (2019) warns against automatic attribution of mental illness when relevant facts and medical evidence do not support nexus.",
+    "proposed_text": "Optional: note that N S Yadav also applied the 1982 Rules (clause 14(d) as amended in 1996), so it limits rather than departs from the 'earlier regime'; the soldier's appeal was dismissed.",
+    "rationale": "Paras 15-20 hold that there is no mechanical application of the presumption; mental disorders may escape detection at enrolment; each case must examine whether duties caused stress; schizophrenia not presumed attributable; para 21 courts defer to medical board absent strong contrary medical evidence. Matches the record and its pinpoint 'paras 15-19'. Minor: the record's phrasing could suggest Yadav is outside the 1982 regime; it is not.",
+    "source_ids": [
+      "S-BLIND-014"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "N S Yadav paras 15-21 (PDF pp.12-15)",
+    "temporal_scope": "Judgment of 2019-10-03 applying 1982 Entitlement Rules as amended 1996.",
+    "limitations": [
+      "Later treatment of N S Yadav (including in any 2025-2026 SC decisions) not verified from official texts.",
+      "Same-model correlation: this blind review is produced by the same model family as the first-pass auditors; agreement is not independent human corroboration.",
+      "Only India Code government-hosted consolidations were read; original Gazette texts and amending Acts/S.R.O.s were not obtained (egazette.gov.in unreachable)."
+    ],
+    "contrary_source_ids": [],
+    "mml_anchor_ids": [],
+    "advisor_questions": [],
+    "requires_legal_review": false,
+    "legal_review_state": "NOT_REQUIRED",
+    "review_state": "PENDING"
+  },
+  {
+    "finding_id": "F-BLIND-010",
+    "batch_id": "PILOT-01",
+    "record_id": "PEN-043",
+    "original_sha256": "aacfa91ed6b956d05b9afe1861526c79b13446626fd4bb0d696d0fb28221fd1e",
+    "workstream": "INDEPENDENT_REVIEW",
+    "original_location": "records_658.jsonl:line 308",
+    "agent": "independent-reviewer",
+    "severity": "P1",
+    "issue_type": "MISSING_AUTHORITY",
+    "claim": "Record directs a check of later Supreme Court treatment but names no authority on the 2008 Entitlement Rules or on 2026 SC treatment.",
+    "original_text": "Check any later Supreme Court treatment.\nRecords: Enrolment medical; service stress/duty history; board opinion; judgments\nRisks: Do not announce a blanket presumption for all 2023 claims",
+    "proposed_text": null,
+    "rationale": "The record's 'historical' framing implies a later regime (Entitlement Rules 2008) and a 2023 claims risk, but cites no authority for the post-2008 position. Secondary reports describe Union of India v. Col. N.C. Isaac (Retd.), 2026 INSC 993 (reported 15-9-2026) as addressing 2008 vs 1982 Rules and presumptions, possibly bearing directly on the record's warning. The official SCI PDF could not be located; holdings are unverified and must not be relied on. The 2008 Entitlement Rules text was not obtained either.",
+    "source_ids": [
+      "S-BLIND-015"
+    ],
+    "verification_state": "NOT_FOUND",
+    "examination_outcome": "UNVERIFIED",
+    "pinpoint": null,
+    "temporal_scope": "Post-2008 entitlement regime and SC treatment up to 2026-11-22: not verified.",
+    "advisor_questions": [
+      "Obtain the signed 2026 INSC 993 judgment and the Entitlement Rules 2008; does the record's 'no blanket presumption for 2023 claims' warning survive that judgment?"
+    ],
+    "limitations": [
+      "Official PDF of 2026 INSC 993 not obtained; secondary reports only (discovery).",
+      "Entitlement Rules 1982 and 2008 texts not obtained; only as quoted in judgments.",
+      "Same-model correlation: this blind review is produced by the same model family as the first-pass auditors; agreement is not independent human corroboration.",
+      "Only India Code government-hosted consolidations were read; original Gazette texts and amending Acts/S.R.O.s were not obtained (egazette.gov.in unreachable)."
+    ],
+    "contrary_source_ids": [],
+    "mml_anchor_ids": [],
+    "requires_legal_review": true,
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "review_state": "PENDING"
+  },
+  {
+    "finding_id": "F-BLIND-011",
+    "batch_id": "PILOT-01",
+    "record_id": "AFT-004",
+    "original_sha256": "9034d57d9b6f05a90bd6403bc44be0b650bc9b3f6583e2e2d23d7b5382242684",
+    "workstream": "INDEPENDENT_REVIEW",
+    "original_location": "records_658.jsonl:line 365",
+    "agent": "independent-reviewer",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "s.14 governs service-matter applications; s.15 gives appellate jurisdiction over court-martial orders/findings/sentences with powers on conviction, sentence and bail; relief within s.15(4)-(6) including enhancement after hearing; SCM dismissal needs analysis under ss.3(o), 14, 15.",
+    "original_text": "Section 14 governs service-matter applications. Section 15 provides appellate jurisdiction over an order, decision, finding or sentence passed by court-martial, with specified powers over conviction, sentence and bail.",
+    "proposed_text": null,
+    "rationale": "AFT Act s.14(1)-(2) [[page 8]] confers jurisdiction over service matters on application by an aggrieved person. s.15(1)-(2) [[page 9]] confers appellate jurisdiction over 'any order, decision, finding or sentence passed by a court-martial'; s.15(3) bail (with proviso for death/life offences); s.15(4)-(6) grounds and powers; s.15(6)(c) with proviso [[page 10]] permits enhancement only after hearing the appellant. s.3(o)(iii) includes 'summary disposal and trials where the punishment of dismissal is awarded' in service matters, while exclusion (iv) removes SCMs except where punishment is dismissal or imprisonment over three months - supporting the record's SCM-dismissal example.",
+    "source_ids": [
+      "S-BLIND-008"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "AFT Act s.3(o)(iii) and exclusion (iv) [[page 6]]; s.14(1)-(2) [[page 8]]; s.15(1)-(6) [[page 9]]-[[page 10]]",
+    "temporal_scope": "AFT Act 2007 as consolidated on India Code (retrieved 2026-11-21); case law on s.14/s.15 interplay and on High Court writ jurisdiction against AFT orders not checked.",
+    "limitations": [
+      "No judgment on whether court-martial challenges may proceed under s.14 versus s.15 was examined; ss.21-22 (exhaustion and limitation for applications) are relevant but not mentioned by the record.",
+      "Same-model correlation: this blind review is produced by the same model family as the first-pass auditors; agreement is not independent human corroboration.",
+      "Only India Code government-hosted consolidations were read; original Gazette texts and amending Acts/S.R.O.s were not obtained (egazette.gov.in unreachable)."
+    ],
+    "contrary_source_ids": [],
+    "mml_anchor_ids": [],
+    "advisor_questions": [],
+    "requires_legal_review": false,
+    "legal_review_state": "NOT_REQUIRED",
+    "review_state": "PENDING"
+  },
+  {
+    "finding_id": "F-BLIND-012",
+    "batch_id": "PILOT-01",
+    "record_id": "AFT-004",
+    "original_sha256": "9034d57d9b6f05a90bd6403bc44be0b650bc9b3f6583e2e2d23d7b5382242684",
+    "workstream": "INDEPENDENT_REVIEW",
+    "original_location": "records_658.jsonl:line 365",
+    "agent": "independent-reviewer",
+    "severity": "P3",
+    "issue_type": "BROKEN_REFERENCE",
+    "claim": "Reference 'V7-S02|Rules 4-9' and instruction to locate court-martial appeal rules and limitations.",
+    "original_text": "V7-S01|ss 14-17; V7-S02|Rules 4-9",
+    "proposed_text": "Proposal: name the instrument, e.g. 'Armed Forces Tribunal (Procedure) Rules, 2008, rr. 4-9', after verification against an authenticated copy.",
+    "rationale": "The reference does not name the instrument. The AFT (Procedure) Rules 2008 define 'applicant' to include an appellant under s.15(2) and r.4 governs filing of applications, so 'Rules 4-9' plausibly denotes those Rules, but the corpus copy is a poor OCR of the Gazette without provenance hash, and rules 5-9 and any time limit for s.15 appeals could not be read reliably.",
+    "source_ids": [
+      "S-BLIND-009"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "examination_outcome": "UNVERIFIED",
+    "pinpoint": "AFT (Procedure) Rules 2008 r.2(1)(iii) [[page 24]]; r.4 [[page 26]] (OCR)",
+    "temporal_scope": "AFT (Procedure) Rules 2008 as published 17-9-2008; later amendments not checked.",
+    "limitations": [
+      "Authenticated text of AFT (Procedure) Rules 2008 and amendments not obtained.",
+      "Same-model correlation: this blind review is produced by the same model family as the first-pass auditors; agreement is not independent human corroboration.",
+      "Only India Code government-hosted consolidations were read; original Gazette texts and amending Acts/S.R.O.s were not obtained (egazette.gov.in unreachable)."
+    ],
+    "contrary_source_ids": [],
+    "mml_anchor_ids": [],
+    "advisor_questions": [],
+    "requires_legal_review": false,
+    "legal_review_state": "NOT_REQUIRED",
+    "review_state": "PENDING"
+  },
+  {
+    "finding_id": "F-BLIND-013",
+    "batch_id": "PILOT-01",
+    "record_id": "CIV-033",
+    "original_sha256": "6846102e992291e1985c7f15de5f3d2c4776c384aa906d1e67b4640fb3ea0759",
+    "workstream": "INDEPENDENT_REVIEW",
+    "original_location": "records_658.jsonl:line 492",
+    "agent": "independent-reviewer",
+    "severity": "P3",
+    "issue_type": "OTHER",
+    "claim": "BNSS s.521 provides for Central Government rules on forum allocation and delivery to commanding officers; BNSS s.521 alone does not give a CO forum-choice power; pending matters depend on pre/post 1-7-2024.",
+    "original_text": "BNSS section 521 provides for Central Government rules governing trial forum allocation and delivery to military commanding officers in appropriate cases.",
+    "proposed_text": null,
+    "rationale": "BNSS s.521(1) [[page 172]] empowers the Central Government to make rules on which persons subject to army, naval or air-force law are tried by a criminal court or court-martial, and requires a Magistrate to have regard to those rules and in proper cases deliver the accused to the commanding officer. The red flag 'Assuming BNSS 521 alone grants CO forum-choice power' is supported: the choice is vested by Army Act s.125 in the officer commanding the army, army corps, division or independent brigade (or prescribed officer), with s.126 governing criminal-court requisition. BNSS s.531(2)(a) [[page 174]] preserves CrPC for proceedings pending on commencement, consistent with the 'before or after 1 July 2024' check.",
+    "source_ids": [
+      "S-BLIND-010",
+      "S-BLIND-003"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "examination_outcome": "NO_ISSUE_FOUND",
+    "pinpoint": "BNSS s.521(1) [[page 172]], s.531(2)(a) [[page 174]]; Army Act ss.125-126 [[page 36]]",
+    "temporal_scope": "BNSS as on India Code (retrieved 2026-11-21), commencement 1-7-2024 per corpus metadata; Army Act consolidation retrieved 2026-11-21.",
+    "limitations": [
+      "CrPC s.475 text only partially read from poor OCR (S-BLIND-011).",
+      "Same-model correlation: this blind review is produced by the same model family as the first-pass auditors; agreement is not independent human corroboration.",
+      "Only India Code government-hosted consolidations were read; original Gazette texts and amending Acts/S.R.O.s were not obtained (egazette.gov.in unreachable)."
+    ],
+    "mml_anchor_ids": [],
+    "contrary_source_ids": [],
+    "advisor_questions": [],
+    "requires_legal_review": false,
+    "legal_review_state": "NOT_REQUIRED",
+    "review_state": "PENDING"
+  },
+  {
+    "finding_id": "F-BLIND-014",
+    "batch_id": "PILOT-01",
+    "record_id": "CIV-033",
+    "original_sha256": "6846102e992291e1985c7f15de5f3d2c4776c384aa906d1e67b4640fb3ea0759",
+    "workstream": "INDEPENDENT_REVIEW",
+    "original_location": "records_658.jsonl:line 492",
+    "agent": "independent-reviewer",
+    "severity": "P2",
+    "issue_type": "MISSING_AUTHORITY",
+    "claim": "The 1978 adjustment rules refer to the former CrPC and should be read only with authenticated current continuity/adaptation materials.",
+    "original_text": "The 1978 adjustment rules refer to the former CrPC and should be read only with authenticated current legal continuity/adaptation materials.",
+    "proposed_text": "Proposal: 'BNSS s.531(2)(b) provides that rules made under the CrPC and in force immediately before 1-7-2024 are deemed made under the corresponding BNSS provisions; confirm from the Gazette whether the 1978 adjustment-of-jurisdiction rules remain in force or have been replaced, and their current text.'",
+    "rationale": "The record omits the statutory continuity provision itself: BNSS s.531(2)(b) deems rules made under the CrPC and in force immediately before commencement to have been made under the corresponding provisions of the BNSS. That is the primary 'continuity' source the record alludes to. Whether the 1978 rules are still in force, amended or replaced after 1-7-2024 could not be verified (the rules and any new notification were not obtained; egazette unreachable).",
+    "source_ids": [
+      "S-BLIND-010"
+    ],
+    "verification_state": "SOURCE_LOCATED",
+    "examination_outcome": "UNVERIFIED",
+    "pinpoint": "BNSS s.531(2)(b) [[page 174]]",
+    "temporal_scope": "Position from 1-7-2024; status of the 1978 rules as at 2026-11-22 not verified.",
+    "advisor_questions": [
+      "Have new rules under BNSS s.521 been notified, or do the 1978 rules continue under s.531(2)(b)?"
+    ],
+    "limitations": [
+      "1978 rules (Criminal Courts and Court-martial (Adjustment of Jurisdiction) Rules) not obtained; title and year taken from record only.",
+      "Same-model correlation: this blind review is produced by the same model family as the first-pass auditors; agreement is not independent human corroboration.",
+      "Only India Code government-hosted consolidations were read; original Gazette texts and amending Acts/S.R.O.s were not obtained (egazette.gov.in unreachable)."
+    ],
+    "contrary_source_ids": [],
+    "mml_anchor_ids": [],
+    "requires_legal_review": false,
+    "legal_review_state": "NOT_REQUIRED",
+    "review_state": "PENDING"
+  },
+  {
+    "finding_id": "F-BLIND-015",
+    "batch_id": "PILOT-01",
+    "record_id": "COI-039",
+    "original_sha256": "d2cea86e4034a98026b4af4aed543055203a50124a32d8d017384d1acb7133de",
+    "workstream": "INDEPENDENT_REVIEW",
+    "original_location": "records_658.jsonl:line 69",
+    "agent": "independent-reviewer",
+    "severity": "P2",
+    "issue_type": "BROKEN_REFERENCE",
+    "claim": "Case-digest data-format requirements, referenced to [SRC-VIR] and [SRC-JETHI].",
+    "original_text": "Every digest should store court, title, neutral citation and law-report citation where verified, date, bench, case number, facts, issues, holdings, relevant paragraph numbers, outcome, contrary cases, later treatment, last review date and legal relevance.",
+    "proposed_text": "Proposal: classify COI-039 as a data-governance/control record with no legal authority reference; remove or justify [SRC-VIR]/[SRC-JETHI]; replace 'JAG approved' with a status that requires an attributable formal approval artifact.",
+    "rationale": "The record states database methodology, not a legal proposition; no statute, rule or judgment governs digest format, so no primary authority can verify it. Its references [SRC-VIR] and [SRC-JETHI] are unresolved placeholder IDs; the frozen case list suggests they denote Union of India v Ex Sep Virendra Kumar (CA 9267/2019) and Union of India v Sanjay Jethi (CA 8914/2012), Court of Inquiry/Rule 180 cases that do not support a digest-format proposition. The status label 'JAG approved' conflicts with project governance unless backed by an attributable approval artifact. The methodology itself is consistent with the project's evidence standard (paragraph-level linking, negative treatment).",
+    "source_ids": [
+      "S-BLIND-016"
+    ],
+    "verification_state": "NOT_CHECKED",
+    "examination_outcome": "UNVERIFIED",
+    "pinpoint": null,
+    "temporal_scope": "Not applicable (non-legal control record).",
+    "advisor_questions": [
+      "Should control/methodology records be excluded from legal-claim verification and carried in a separate governance register?"
+    ],
+    "limitations": [
+      "Mapping of [SRC-VIR]/[SRC-JETHI] to cases is an inference from internal metadata; the two judgments were not read.",
+      "Same-model correlation: this blind review is produced by the same model family as the first-pass auditors; agreement is not independent human corroboration.",
+      "Only India Code government-hosted consolidations were read; original Gazette texts and amending Acts/S.R.O.s were not obtained (egazette.gov.in unreachable)."
+    ],
+    "contrary_source_ids": [],
+    "mml_anchor_ids": [],
+    "requires_legal_review": false,
+    "legal_review_state": "NOT_REQUIRED",
+    "review_state": "PENDING"
+  }
+]

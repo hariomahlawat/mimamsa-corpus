@@ -1,0 +1,5 @@
+obs_id,instrument_note,observation,evidence
+ON-C2-01,S.R.O. 8(E)/2003 notes (English and Hindi),list S.R.O. 17(E)/1993 as 'dated 22-12-1993'; instrument is dated 06-12-1993; Hindi note dates E-7 as 16-07-1960 and 332/1989 as '352',cycle-2 WSA-PIC (8(E)/2003 pp.1-2)
+ON-C2-02,S.R.O. 216/1988 Hindi note,prints the principal S.R.O. 484 date as 27 November 1984,cycle-2 WSA-PIC (216/1988 p.617)
+ON-C2-03,S.R.O. 17(E)/2019 foot note,"'last amended in 2018' refers to S.R.O. 2(E)/2018, an r.188(e) declaration (cf. U-03)",cycle-2 WSA-PIC (17(E)/2019 p.2)
+ON-C2-04,All official notes 1982-2022,"begin at E-7/1960; never list the pre-1960 Army Rules amendments located by OCR (1956-04-21, 1958-11-28, 1958-12-12, 1959-12-12 issues)",acquisition_requests_cycle2.csv ACQ-C2-01..04

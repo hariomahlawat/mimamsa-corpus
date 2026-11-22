@@ -1,0 +1,143 @@
+{
+  "generated_on": "2026-11-22",
+  "nature": "READ-ONLY BASELINE. Research inventory; no legal verification implied.",
+  "git": {
+    "audit_branch": "legal-knowledge/claude-audit-agents-v1@74014b4",
+    "staging_branch": "legal-knowledge/v2.5-staging@910a9e6",
+    "main": "main@21de353"
+  },
+  "canonical_store": {
+    "hf_dataset": "hariomahlawat/mimamsa-corpus (private)",
+    "access": "READ via Hugging Face MCP connector (listing/cat). No HF token in container: direct byte download returned HTTP 401.",
+    "hf_original_sizes_match_github": {
+      "records_658.jsonl": 510586,
+      "cases_53.jsonl": 179385
+    },
+    "hf_byte_hash_parity": "NOT VERIFIED (size match only)"
+  },
+  "knowledge_base": {
+    "path": "legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.jsonl",
+    "file_sha256": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1",
+    "bytes": 510586,
+    "records": 658,
+    "unique_ids": 658,
+    "by_module": {
+      "M01": 2,
+      "M02": 2,
+      "M03": 55,
+      "M04": 52,
+      "M05": 78,
+      "M06": 1,
+      "M09": 93,
+      "M10": 88,
+      "M11": 16,
+      "M12": 16,
+      "M06_M07": 63,
+      "M08": 96,
+      "M13": 96
+    },
+    "by_inferred_volume_family": {
+      "CORE_KB (earlier notes, all modules)": 30,
+      "COI (M04)": 46,
+      "HCE (M03)": 51,
+      "CM (M05)": 75,
+      "ADM (M06_M07)": 63,
+      "PEN (M08)": 96,
+      "AFT/V7": 98,
+      "CIV/V8": 103,
+      "EV/V9": 96
+    },
+    "by_kind": {
+      "EARLIER_NOTE": 127,
+      "NOTE": 40,
+      "SCENARIO": 93,
+      "CHECKLIST": 56,
+      "CASE": 9,
+      "LEGAL_NOTE": 160,
+      "PENSION_NOTE": 49,
+      "PENSION_WORKFLOW": 12,
+      "PENSION_SCENARIO": 20,
+      "PENSION_CHECKLIST": 8,
+      "PENSION_CASE": 7,
+      "WORKFLOW": 38,
+      "CASE_DIGEST": 13,
+      "TEMPLATE": 7,
+      "DRAFTING_AID": 15,
+      "JUDGMENT_DIGEST": 4
+    },
+    "by_status": {
+      "REVIEW_PENDING": 181,
+      "SOURCE_REVIEWED_JAG_APPROVAL_PENDING": 40,
+      "JAG_APPROVAL_PENDING": 35,
+      "JAG_REVIEW_PENDING": 402
+    },
+    "operational_clearance_true": 0,
+    "field_shapes": {
+      "body, id, kind, module, operational_clearance, references, status, title, url": 466,
+      "body, id, kind, module, operational_clearance, references, review_status, source_version_status, status, title": 96,
+      "body, id, kind, module, operational_clearance, references, sources, status, title, url": 96
+    },
+    "records_with_url": 44,
+    "volume_mapping_caveat": "No explicit volume field exists. 'Volume family' is INFERRED from ID prefixes (V7=AFT, V8=CIV, V9=EV prefixes support it); owner must confirm the nine-volume mapping.",
+    "record_hash_convention": "line_sha256 = SHA-256 of the exact JSONL line bytes (UTF-8, no trailing newline)."
+  },
+  "case_law": {
+    "path": "legal_knowledge/curated_originals/case_law/v0.9/cases_53.jsonl",
+    "file_sha256": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a",
+    "bytes": 179385,
+    "records": 53,
+    "unique_ids": 53,
+    "courts": {
+      "Supreme Court of India": 53
+    },
+    "source_status": {
+      "OFFICIAL_PRIMARY_RELEVANT_PASSAGES_CHECKED_V05": 4,
+      "OFFICIAL_SC_PDF_TEXT_AND_PAGE_CHECKED": 5,
+      "INHERITED_V01__PRIMARY_TEXT_CHECKED": 2,
+      "INHERITED_V01__SECONDARY_TEXT_CHECKED": 1,
+      "INHERITED_V01__PARTIAL_PRIMARY_EXTRACT_AND_OFFICIAL_INDEX": 1,
+      "PRIMARY_RELEVANT_PASSAGES_REVIEWED": 3,
+      "OFFICIAL_SCI_JUDIS_TEXT": 1,
+      "SECONDARY_TRANSCRIPTION_REVIEWED": 5,
+      "SECONDARY_TRANSCRIPTION_PLUS_LATER_SC_QUOTATION": 1,
+      "SECONDARY_OFFICIAL_REPORT_REPRODUCTION": 1,
+      "SECONDARY_TRANSCRIPTION_AND_SC_OFFICE_RECORD": 1,
+      "SECONDARY_REPORT_AND_LATER_SC_QUOTATION": 1,
+      "OFFICIAL_SCI_JUDIS_PDF_PASSAGES_CHECKED": 3,
+      "SECONDARY_JUDGMENT_TEXT_REVIEWED": 4,
+      "OFFICIAL_JUDGMENT_TEXT_REVIEWED": 4,
+      "OFFICIAL_LATER_JUDGMENT_DESCRIPTION_ONLY": 1,
+      "SECONDARY_JUDGMENT_TEXT_AND_OFFICIAL_LATER_CITATION": 1,
+      "SECONDARY_AND_LATER_TREATMENT_ONLY": 1,
+      "OFFICIAL_LATER_JUDGMENT_CITATION_ONLY": 1,
+      "CITATION_LEAD_ONLY": 11,
+      "SECONDARY_FULL_ORDER_TEXT_CHECKED_OFFICIAL_PDF_PENDING": 1
+    },
+    "post_decision_treatment_status": {
+      "NOT_EXHAUSTIVELY_CHECKED": 23,
+      "PARTIAL_TREATMENT_LEADS_ONLY": 5,
+      "REITERATED_WITH_CLARIFICATION_BY_ARJUN_2020": 1,
+      "SELECTED_2023_2026_FOLLOW_UPS_FOUND_FULL_TREATMENT_PENDING": 1,
+      "INCOMPLETE": 11,
+      "EXPRESSLY_OVERRULED_BY_ARJUN_2020_SECTION_65B": 1,
+      "ELECTRONIC_EVIDENCE_APPROACH_REJECTED_BY_ANVAR_2014": 1,
+      "NOT_REVIEWED": 10
+    },
+    "review_status": {
+      "JAG_REVIEW_PENDING": 53
+    },
+    "original_pdf_sha256_populated": 0
+  },
+  "corpus_reported_not_recounted": {
+    "documents": 3481,
+    "raw_files": 3197,
+    "source": "PROGRESS.md 2026-11-22 and HF crosswalk/v2.7 summary (rev 3129636); NOT independently recounted (no byte access to data/manifest.csv)",
+    "judgments": {
+      "relevant": 2331,
+      "borderline": 1035,
+      "not_checked": 47,
+      "removed": 121027
+    },
+    "aft_judgments": "NOT COLLECTED (blocked from container per PROGRESS.md)"
+  }
+}

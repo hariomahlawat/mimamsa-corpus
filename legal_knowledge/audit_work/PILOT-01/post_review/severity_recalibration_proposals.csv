@@ -1,0 +1,11 @@
+id,finding_id,record_id,reviewer_decision,first_pass,proposed,note,original_finding_changed,advisor_decision_required
+S-01,F-PROC-019,HCE-017,SUPPORTS,P1,P0,s.81(4) second limb omitted ('was an NCO at the time') — risk of illegal custody award,NO,YES
+S-02,F-STAT-013,CM-025,SUPPORTS,P1,P2,,NO,YES
+S-03,F-STAT-018,CIV-008,SUPPORTS,P1,P2,,NO,YES
+S-04,F-STAT-022,MMLPKT-04,SUPPORTS,P1,P2,,NO,YES
+S-05,F-MML-002,MMLPKT-01,SUPPORTS,P1,P2,,NO,YES
+S-06,F-MML-017,MMLPKT-08,SUPPORTS,P1,P2,,NO,YES
+S-07,F-XVOL-009,AFT-004,SUPPORTS,P1,P2,,NO,YES
+S-08,F-JUD-005,PEN-043,SUPPORTS,P1 UNVERIFIED,P1 (evidence now official: 2026 INSC 993 sha 3f49a314…),state change proposal: UNVERIFIED -> SOURCE_VERIFIED for the Isaac reading only,NO,YES
+S-09,F-JUD-007,PEN-J-01,SUPPORTS,P1 UNVERIFIED,P1 (evidence now official),as above,NO,YES
+S-10,F-JUD-021,DCLR-SC-2013-N08,SUPPORTS,P1 UNVERIFIED,P1 (evidence now official),edge type proposal: 'cites' + proposition-level 'limits' note,NO,YES
