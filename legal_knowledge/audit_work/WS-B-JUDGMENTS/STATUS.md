@@ -16,7 +16,7 @@ Updated: 2026-11-22, at commit time.
   - Isaac 2026 paras 19.4, 22, 28, 34, 35 and 39 classified.
 - **Statutes / effective-dates register**: no effective date inferred; Army Rules chain per seed `11ce905e`.
 - **Subsequent treatment**: 17 rows.
-- **Adverse/conflict queue**: 15 items.
+- **Adverse/conflict queue**: 16 items (A-16: role of Isaac Part III paras 14-16).
 - **Pending source queue**: 22 rows.
 - **Open questions**: 14, including WS-D OQ-D-004/008/009/012.
 - **Crosswalk**: 208 rows, with per-case link counts and empty-holding citability flags.
@@ -29,7 +29,7 @@ Updated: 2026-11-22, at commit time.
 1. Review the 378 HOLD_FOR_REVIEW and 217 EXCLUDE_PROPOSED intake rows: spot-check a sample of 50.
 2. Re-pin the P0 mirror-only holdings once official copies are obtained (PQ-004 to PQ-010).
 3. Read the Naga 1997 operative directions; read the Ranjit bias/s.130 reasoning; map the Mullikote first-copy paragraphs.
-4. Verify Isaac pp.49-51, 60-61 and 69 (the v3.5 treatment references) on page images.
+4. Page-image check of Isaac pp.49-51, 61 and 69 (located on the text layer in this pass).
 5. Run a treatment search in later intern SC documents (citations of the 53 cases) at proposition level.
 
 ## Blockers

@@ -22,7 +22,7 @@
 | `holdings_register.csv` | passage-level holding / ratio / disposition / observation / argument rows, with PDF page, paragraph, verbatim anchor, render SHA where page-image checked | 43 |
 | `statutes_cited_effective_dates.csv` | provisions applied per judgment; publication / commencement / effective dates kept separate (all effective dates unresolved); IPC→BNS / IEA→BSA / Army Rules chain flags | 21 |
 | `subsequent_treatment.csv` | proposition-level later treatment, with the later judgment's copy and pinpoint | 17 |
-| `adverse_conflict_queue.csv` | adverse authority, source conflicts and intake defects | 15 |
+| `adverse_conflict_queue.csv` | adverse authority, source conflicts and intake defects | 16 |
 | `pending_source_queue.csv` | acquisition requests (no download made) | 22 |
 | `open_questions.csv` | owner, legal-advisor and WS-D questions, including OQ-D-004/008/009/012 | 14 |
 | `crosswalk_cases53_kb658.csv` | spec ↔ KB record links: `CURATION_DECLARED_SOURCE_CODE` (via the 87-code register), `LEXICAL_LEAD_ONLY`, or ambiguous; per-case link counts and empty-holding citability flag | 208 |
@@ -75,4 +75,4 @@ All counts come from `intake_stats.json`.
 - **Verified against an official court copy**: only the holdings rows marked `PASSAGE_LOCATED_OFFICIAL_COPY_*`, covering 16 judgments. Six of their pages were checked as page images (render SHA recorded).
 - **Pinned on the intern AWS mirror only, which is not an official copy**: 7 P0 pension cases and Kuldeep Yadav.
 - **Not reviewed**: the operative directions in Naga People's Movement.
-- **Not independently verified by WS-B**: treatment rows that rely on earlier v3.5 findings. Those rows are labelled as such.
+- **Located on the text layer only (no page image)**: the Isaac references to the older pension cases (pp.49-51, 61). Their evidential role is open (A-16).
