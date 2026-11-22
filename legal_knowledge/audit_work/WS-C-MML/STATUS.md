@@ -1,17 +1,44 @@
 # WS-C-MML status (issue #13)
 
-**Research proposal only. Nothing here is legal-advisor adjudicated or JAG validated. Fixed determinations unchanged: r.23(3) CONFLICTING; r.193 = C-08 OPEN; r.194 = C-09 PROPOSAL.**
+**Research proposal only. Nothing here is legal-advisor adjudicated or JAG validated.**
+Fixed determinations are unchanged: r.23(3) CONFLICTING; r.193 = C-08 OPEN; r.194 = C-09 PROPOSAL.
 
 ## Done
-- Commit 1: `input_manifest.json` (8/8 originals re-hashed = manifest), `mml_edition_status.csv` (8 files), `page_image_checks_wsc.csv` (WSC-PIC-01..13, incl. coordinator task MML 2 p.227 r.193/r.194), `provision_index.csv`, `mml1_para_index.csv`, `mml_provision_crosswalk.csv` (847 rows), `open_questions.csv`, scripts.
+All eight deliverables are present. See README.md for counts, denominators and evidence levels.
+1. Commit 1 delivered:
+   - input manifest (8/8 originals equal the manifest);
+   - edition status for the 8 files;
+   - WSC-PIC-01..13, including the coordinator task: MML 2 p.227 r.193/r.194 image check;
+   - provision index;
+   - MML 1 paragraph index;
+   - crosswalk (847 rows).
+2. Commit 2 delivered the 658 source-coverage inventory, its script and the summary.
+3. Commit 3 delivered:
+   - the gap/conflict register (17 rows);
+   - candidate corrections (14);
+   - WSC-PIC-14..28.
+4. Commit 4 delivered:
+   - the calibration sample (46 records, selection only);
+   - the full README;
+   - a refreshed input manifest.
 
-## In progress / next
-- DONE commit 2: `kb658_source_coverage_inventory.csv` (658/658 rows) + `scripts/build_kb658_inventory.py` (stdlib, deterministic, re-run byte-identical) + `kb658_coverage_summary.json`. FULL 379, PARTIAL 131, SOURCE_GAP 56, UNRESOLVED 14, NO_CITATION 78 (denominator 658). Source-coverage only; no correctness verdicts.
-- DONE commit 3: `procedure_gap_conflict_register.csv` (17 rows; 15 image-checked or rendered, 2 text-only marked REQUIRES_VERIFICATION), `candidate_corrections.csv` (14 proposals, none applied), `page_image_checks_wsc.csv` extended to WSC-PIC-28; provision index fixed for suffix headings such as r.80A.
-- `calibration_sample_ranked.csv`
+## Next (if continued)
+- Image-check the crosswalk locators that the advisor selects. Every crosswalk locator is text-layer only (REQUIRES_VERIFICATION).
+- DOC-vs-PDF comparison for vol 2(AA) and vol 3 beyond the pilot samples.
+- Itemise MML vol 3 by instrument, linked to KB records that cite those instruments.
 
 ## Blockers
-- None blocking. Edition authentication (OQ-C-04) and cover pages (OQ-C-03) need the owner.
+None hard. The owner is needed for:
+- OQ-C-03: cover pages;
+- OQ-C-04: edition authentication;
+- OQ-C-07: handling restrictions.
 
-## Requests to other workstreams (via coordinator)
-- WS-A: itemise S.R.O. 17(E)/1993 for r.193 (OQ-C-06). MML 2 p.227 footnote attributes r.193 to that instrument (WSC-PIC-10); this is evidence only.
+## Requests to other workstreams (route via coordinator)
+- **WS-A.** Itemise S.R.O. 17(E)/1993 for the rules that MML 2 notes but the AR chain does not list. These notes are leads only:
+  - r.13A(3), r.14(4)-(5), r.15, r.16A, r.16B(1);
+  - r.145, r.164, r.168(2), r.186(1);
+  - r.193 (C-08).
+
+  Also search for "SRO 1 dated 12 March 1964" (r.187(1)). See CC-03, CC-04, OQ-C-06.
+- **WS-B.** Find the official copy for V9-JD-03 (CC-09) and the plain-text case identities (CC-11).
+- **WS-D.** Placeholder and plain-text citation lists (CC-10, CC-11). Relation type for "manual_supported" (CC-13).
