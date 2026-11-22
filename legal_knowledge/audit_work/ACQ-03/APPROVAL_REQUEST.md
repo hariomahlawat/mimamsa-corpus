@@ -16,7 +16,8 @@
 
 **Not pinned:**
 - ACQ03-016 (archive.org `19490.pdf`, Act 37/1992): byte-identical by md5 to the India Code bitstream already in ACQ-01. Optional; owner decision.
-- 4 items with no known lawful online source: E-7/1960, post-06-06-2022 (egazette fails TLS verification; not bypassed), S.R.O. 258/2002, Army Act 1950 as enacted. Routes: custodian letter or an Indian-network egazette search.
+- 3 items with no known lawful online source: E-7/1960, post-06-06-2022 (egazette fails TLS verification; not bypassed), S.R.O. 258/2002. Routes: custodian letter or an Indian-network egazette search.
+- **Superseded 2026-11-22 (WS-A Cycle 3, ACQ-C3-01):** a candidate archival facsimile of the Army Act 1950 as enacted has since been located: archive.org `in.gazette.e.1950.306` (Gazette Extraordinary 23-05-1950), 6,491,633 bytes, md5 68bcdd4e8db91eb83d1e6b92a393b2db, from read-only metadata. It is **not** in this PR's configuration, **not** approved, **not** downloaded, and its identity and authenticity are **not** verified. It needs a separate acquisition request (`WS-A-STATUTORY/acquisition_requests_cycle3.csv` ACQ-C3-01) and page-image checks after any approved fetch.
 
 **Evidence:** `config_pr_evidence/` holds config-check OK; discover with 0 network requests; dry-run queuing 36 + 3; pytest 180 passed. `tests/test_acquisition_config_acq03.py` pins all 39 entries (URL, md5, bytes) and proves ACQ-01 and ACQ-02 unchanged and disjoint.
 
