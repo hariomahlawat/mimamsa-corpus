@@ -59,36 +59,45 @@
     "requires_legal_review": 32
   },
   "sources": {
-    "total": 161,
+    "total": 205,
     "by_type": {
-      "RULE": 28,
+      "RULE": 39,
       "SECONDARY": 6,
-      "STATUTE": 41,
-      "MANUAL": 69,
-      "JUDGMENT": 12,
-      "GAZETTE": 4,
-      "OTHER_PRIMARY": 1
+      "STATUTE": 54,
+      "GAZETTE": 6,
+      "OTHER_PRIMARY": 4,
+      "MANUAL": 78,
+      "JUDGMENT": 18
     },
     "by_authenticity": {
-      "OFFICIAL_COMPILATION": 65,
-      "USER_SUPPLIED_REFERENCE": 69,
-      "UNCONFIRMED": 12,
-      "OFFICIAL_COURT_ARCHIVE": 11,
-      "SECONDARY": 3,
-      "ORIGINAL_OFFICIAL": 1
+      "OFFICIAL_COMPILATION": 89,
+      "ORIGINAL_OFFICIAL": 3,
+      "UNCONFIRMED": 15,
+      "USER_SUPPLIED_REFERENCE": 78,
+      "OFFICIAL_COURT_ARCHIVE": 17,
+      "SECONDARY": 3
     },
-    "primary_with_sha256": 75,
-    "primary_total": 86,
-    "gazette_originals": 4
+    "primary_with_sha256": 109,
+    "primary_total": 121,
+    "gazette_originals": 6
   },
   "independent_review": {
-    "reviews": 0,
-    "by_decision": {},
+    "reviews": 33,
+    "by_decision": {
+      "DISPUTES": 6,
+      "SUPPORTS": 26,
+      "RETURN_FOR_EVIDENCE": 1
+    },
     "p0_p1_conflict_findings": 31,
-    "p0_p1_conflict_reviewed": 0,
-    "p0_p1_conflict_disputed": 0,
-    "dispute_rate_on_reviewed_high": null,
-    "blind_vs_firstpass": {}
+    "p0_p1_conflict_reviewed": 31,
+    "p0_p1_conflict_disputed": 5,
+    "dispute_rate_on_reviewed_high": 0.161,
+    "blind_vs_firstpass": {
+      "AGREE": 14,
+      "DISAGREE": 3,
+      "FIRSTPASS_ONLY": 8,
+      "BLIND_ONLY": 2
+    }
   },
   "legal_review": {
     "advisor_nominated": false,
