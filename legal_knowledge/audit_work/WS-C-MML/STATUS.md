@@ -52,6 +52,28 @@ Parser fix for letter suffixes, list continuation and uncoded case names. Detail
 - Coverage states before → after: FULL 379 → 370; PARTIAL 131 → 140; UNRESOLVED 14 → 15; NO_CITATION 78 → 77; SOURCE_GAP unchanged at 56.
 - All dependent artifacts regenerated; `scripts/test_kb_citations.py` passes.
 
+## Cycle 3 (worktree /home/user/ws-c-c3, branch claude/ws-c-cycle3, from 9b48b08e)
+- C3 commit 1, task 1: `mml_edition_evidence_cycle3.csv` (29 evidence items across 8 files).
+  - Each row carries a 'what would authenticate this edition' column.
+  - No edition is asserted official; all stay UNVERIFIED_MANUAL.
+- C3 commit 1, task 2: `mml_provision_crosswalk_v2_cycle3.csv`, a versioned file; the cycle-1 crosswalk is unchanged.
+  - 436 priority rows were rendered at 110 dpi and every crop was viewed: all crosswalk rows for provisions cited by the 46 calibration records, then the procedure-crosswalk provisions.
+  - Result: 434 LOCATOR_IMAGE_CHECKED + 2 LOCATOR_CORRECTED_IMAGE_CHECKED.
+  - The corrections are s.2 in vol 2(AA): the index pointed to a note; the heading is at PDF p.1 / L00011.
+  - The remaining 422 rows stay REQUIRES_VERIFICATION.
+  - DOC rows are LibreOffice renders of native DOC text (`render_source` column).
+- C3 commit 2, task 3: `procedural_contradictions_cycle3.csv` (20 rows, proposals for independent review).
+  - Each row gives the MML reading (page image + render sha; PC-12 and PC-19 are text-only), the comparator instrument and version, and the exact reviewer question.
+  - Dates are kept distinct: publication, commencement as printed, effective date, status.
+  - Severity: P1 = 5 (PC-02, 08, 09, 10, 11); P2 = 11; P3 = 4.
+  - WSC-PIC-109 added (MML 1 Ch II para 13).
+- Task 4: the parser was not touched in cycle 3; `test_kb_citations.py` re-run at every commit and passes.
+- Fixed determinations unchanged: r.23(3) CONFLICTING; C-08 OPEN; C-09 PROPOSAL.
+- Cycle-3 review (PR #27):
+  - Verified all 436 checked rows of the v2 crosswalk: file SHA equals the manifest; render source is correct; every render hash re-computed from its PNG matches.
+  - Corrected PC-11, PC-12, PC-13 and PC-19 comparator commencement/effective dates to the chain at 9b48b08e (AR-028, AR-031, AR-034 and AR-035: in force on publication).
+  - Crosswalk and procedure crosswalk were already current; regenerating them gives byte-identical output.
+
 ## Next (if continued)
 - Image-check the crosswalk locators that the advisor selects. Every crosswalk locator is text-layer only (REQUIRES_VERIFICATION).
 - DOC-vs-PDF comparison for vol 2(AA) and vol 3 beyond the pilot samples.
