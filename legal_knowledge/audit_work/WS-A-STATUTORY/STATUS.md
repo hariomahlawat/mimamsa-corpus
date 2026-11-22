@@ -55,6 +55,33 @@ Updated 2026-11-22 (cycle 3). Branch: `claude/ws-a-statutory` (base 34e75aa9). W
     - 6 rows cite baseline PICs that carry a render SHA-256.
   - No rows were left without evidence.
 
+## Cycle 3 statutory completeness (branch `claude/ws-a-cycle3`, worktree `/home/user/ws-a-c3`, base 9b48b08e)
+- [x] **r.15 "or Military Secretary"** (`r15_military_secretary_trace_cycle3.csv`).
+  - The 1961 substituted r.15 (printed p.142, image-checked WSA-PIC-55/WSA-PIC-56) does **not** contain the words.
+  - No held instrument from 1961 to 2022 adds them:
+    - S.R.O. 235/1991 adds them to r.13A only (WSA-PIC-58);
+    - S.R.O. 61/1991 adds "or the Adjutant General" to r.15A;
+    - S.R.O. 17(E)/1993 has no r.15 item.
+  - The source remains unidentified (OQ-A-10; WS-C XC-03 agrees). For independent coordinator check.
+- [x] **r.187(1) dossier** (`r187_evidence_dossier_cycle3.md`): consolidated. It stays OPEN until ACQ03 C2-05..09 are checked.
+- [x] **Army Act s.129** (`s129_trace_cycle3.csv`).
+  - The India Code compilation p.36 reads "an officer approved of" (image-checked WSA-PIC-59).
+  - Acts 37/1992 and 13/1975 do not touch s.129.
+  - The enacted Army Act 1950 was **located** on archive.org (Gazette Extraordinary 23-05-1950, `in.gazette.e.1950.306`). Its OCR reads "an officer approved of" (locator only). Acquisition request ACQ-C3-01.
+  - MML 2 "any person" stands alone. For independent coordinator check.
+- [x] **Completeness table** (`statutory_version_completeness_cycle3.csv`): 107 AR rules and 112 AA sections cited by the KB.
+
+  | Status | AR rules | AA sections |
+  | --- | --- | --- |
+  | ESTABLISHED_SUBJECT_TO_REGISTER_GAPS | 2 (r.13A, r.15A) | 0 |
+  | PARTIALLY_ESTABLISHED | 31 | 9 |
+  | NOT_ESTABLISHED | 74 | 103 |
+
+  - No AA section is established because the enacted 1950 text is not held.
+  - Base-text page numbers come from the text layer and are locators only.
+- [x] **Commencement readings** (`commencement_readings_cycle3.csv`): AR-010, AR-011 and AR-025 print no commencement clause (NOT_STATED_PENDING_ADVICE). AR-024 is corrected: r.1(2) states commencement on publication, and **both** items 2 and 3 carry the 04-06-1979 deeming clause.
+- [x] New PICs: `identity_transcription_register_cycle3.csv` (WSA-PIC-55..59). New acquisition needs: `acquisition_requests_cycle3.csv` (ACQ-C3-01..04).
+
 ## Next
 - After approval of ACQ-C2:
   - image-check the four pre-1960 instruments;
