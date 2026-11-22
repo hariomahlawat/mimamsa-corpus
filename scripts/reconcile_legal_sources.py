@@ -64,8 +64,8 @@ def best_candidates(case: dict, raw: list[dict]) -> list[dict]:
             continue
         # Title similarity without decision-year agreement produces misleading
         # matches (e.g. similarly named Union of India cases decades apart).
-        year_match = re.search(r"(?:19|20)\\d{2}", case.get("curated_case_id", ""))
-        candidate_year = re.search(r"(?:/year=|/)((?:19|20)\\d{2})(?:/|$)",
+        year_match = re.search(r"(?:19|20)\d{2}", case.get("curated_case_id", ""))
+        candidate_year = re.search(r"(?:/year=|/)((?:19|20)\d{2})(?:/|$)",
                                    x.get("source_url", "") or x.get("raw_path", ""))
         if not year_match or not candidate_year or year_match.group() != candidate_year.group(1):
             continue
