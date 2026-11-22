@@ -80,12 +80,34 @@ def holdings3():
     return hdr, rows
 
 # ------------------------------------------------------------------ task 1: authoritative copies for mirror-only cases
+# The 11 P0 cases of issue #4 (explicit list; the curated 'L' prefix is NOT a P0 marker - e.g. L06 Buttar is not P0)
+P0_ISSUE4 = {'DCLR-SC-1964-A11', 'DCLR-SC-2005-L01', 'DCLR-SC-2015-L02', 'DCLR-SC-2015-L03', 'DCLR-SC-2016-L04', 'DCLR-SC-2008-L05',
+             'DCLR-SC-1996-L07', 'DCLR-SC-2005-L08', 'DCLR-SC-2008-L09', 'DCLR-SC-2007-L10', 'DCLR-SC-1997-L11'}
+
+def parse_netlog_line(line):
+    """TSV written by the cycle-3 lookup loop: time, purpose, method, url, http_status, content_type,
+    size_download, headers. Status and content type are SEPARATE fields."""
+    p = line.rstrip('\n').split('\t')
+    if len(p) < 5:
+        return None
+    return {'time': p[0], 'purpose': p[1], 'method': p[2], 'url': p[3], 'status': p[4].strip(),
+            'content_type': (p[5].strip() if len(p) > 5 else ''), 'headers': (p[7].strip() if len(p) > 7 else '')}
+
+def classify_head(status, content_type):
+    """HTTP availability only. A responding URL is NOT a held copy and says nothing about the identity or
+    authenticity of the bytes; acquisition remains a separate, approved step."""
+    if status == '200' and content_type.split(';')[0].strip().lower() == 'application/pdf':
+        return 'OFFICIAL_HOST_URL_RESPONDS_200_PDF (availability only; identity, authenticity and acquisition NOT established; bytes not held)'
+    if status == '200':
+        return 'OFFICIAL_HOST_URL_RESPONDS_200_NOT_PDF (content type ' + (content_type or 'unknown') + ')'
+    return 'OFFICIAL_HOST_URL_HEAD_INCONCLUSIVE (HEAD ' + (status or '?') + '; HEAD 404 also returned for control URL whose bytes were previously obtained)'
+
 def authoritative(netlog):
     head = {}
     for line in open(netlog, encoding='utf-8'):
-        p = line.rstrip('\n').split('\t')
-        if len(p) >= 5 and p[1] != 'CONTROL_DHARAMVIR':
-            head[p[1]] = (p[0], p[4], p[5] if len(p) > 5 else '')
+        rec = parse_netlog_line(line)
+        if rec and rec['purpose'] != 'CONTROL_DHARAMVIR':
+            head[rec['purpose']] = rec
     ctrl = [l for l in open(netlog, encoding='utf-8') if 'CONTROL_DHARAMVIR' in l]
     ids = list(csv.DictReader(open(os.path.join(WS, 'identity_resolution.csv'), encoding='utf-8')))
     rows, pend = [], []
@@ -95,12 +117,9 @@ def authoritative(netlog):
             continue
         k = r['spec_key']; url = r['curated_primary_source_url']
         if k in head:
-            ts, res, extra = head[k]
-            if res.startswith('200') and 'application/pdf' in res:
-                st = 'OFFICIAL_HOST_URL_RESOLVES_TO_PDF_BYTES_NOT_HELD'
-            else:
-                st = 'OFFICIAL_HOST_URL_HEAD_INCONCLUSIVE (HEAD 404 also returned for control URL whose bytes were previously obtained)'
-            hres = f'{ts} HEAD {res} {extra}'.strip()
+            h = head[k]
+            st = classify_head(h['status'], h['content_type'])
+            hres = f"{h['time']} HEAD status={h['status']} content_type={h['content_type']} {h['headers']}".strip()
         elif url:
             st, hres = 'OFFICIAL_HOST_URL_IN_CURATED_RECORD_NOT_CHECKED', ''
         else:
@@ -109,18 +128,19 @@ def authoritative(netlog):
         rows.append([k, r['case53_id'], r['ws_b_label'], r['intern_decision_date'], r['intern_sha256'], 'NO (no WS-B-held court copy)',
                      url, hres, st, diary.get(k, ''), host_note, 'C3'])
         pend.append([f'PQ-C3-{len(pend)+1:02d}', k, r['case53_id'], 'Supreme Court of India', r['intern_case_numbers'] or r['curated_case_number'],
-                     r['intern_decision_date'], url or 'unknown', 'P0' if r['case53_id'].split('-')[-1].startswith('L') else 'P2',
+                     r['intern_decision_date'], url or 'unknown',
+                     'P0' if r['case53_id'] in P0_ISSUE4 else ('P1' if st.startswith('OFFICIAL_HOST_URL_RESPONDS_200_PDF') else 'P2'),
                      'Official court copy needed to replace mirror-only pinpoints; ' + (diary.get(k, '') or 'no diary number known'),
-                     'ACQUISITION_REQUEST_ONLY', 'NO', 'C3'])
+                     st.split(' (')[0], 'ACQUISITION_REQUEST_ONLY', 'NO', 'C3'])
     for k in ('GIRISH_CLAR', 'RAVINDER', 'PRAFUL', 'DHINGRA_SR', 'RANJIT_REVIEW'):
         r = next(x for x in ids if x['spec_key'] == k)
         pend.append([f'PQ-C3-{len(pend)+1:02d}', k, r['case53_id'], 'Supreme Court of India', r['curated_case_number'], r['curated_decision_date'],
                      r['curated_primary_source_url'] or 'unknown', 'P1', 'Unresolved after cycle 3 (identity_resolution_cycle3.csv)',
-                     'ACQUISITION_REQUEST_ONLY', 'NO', 'C3'])
+                     'NOT_CHECKED', 'ACQUISITION_REQUEST_ONLY', 'NO', 'C3'])
     h1 = ['spec_key', 'case53_id', 'case', 'decision_date', 'intern_mirror_sha256', 'official_copy_held', 'official_url_located',
           'read_only_lookup_result', 'state', 'official_record_corroboration', 'note', 'cycle']
     h2 = ['queue_id', 'spec_key', 'case53_id', 'court', 'case_number', 'decision_date', 'official_url_or_holder_if_known', 'priority', 'note',
-          'action', 'downloaded_by_ws_b', 'cycle']
+          'official_url_http_check', 'action', 'downloaded_by_ws_b', 'cycle']
     return (h1, rows), (h2, pend), ctrl
 
 # ------------------------------------------------------------------ task 2: identities
@@ -151,19 +171,26 @@ SCAN_VALID = {  # spec -> regex that the citing snippet must also satisfy (filte
  'PS_GILL': r'Union of India (?:&|and) (?:Ors|Others)\.? v\.? P\.\s?S\.\s?Gill', 'BALJIT': r'Union of India|1996',
  'SANTOSH_LOHAR': r'Lohar', 'MANI_RAM': r'Bh?aira',
 }
+# Citation leads whose page was checked on a page render of the intern mirror PDF (PR #26 review fix):
+# (spec, intern doc_id) -> (printed reporter page, render sha256)
+PRINTED_VERIFIED = {
+ ('ANGAD', 'sc-2025-bijender-singh-2025insc549'): ('[2025] 4 SCR 1551', '93238c4136c34e921653856fb0b0f5f2da5ac251b11872555d00d093e16912f2'),
+ ('BALACHANDRAN', 'sc-2009-secretary-ministry-of-defence-2009insc1059'): ('[2009] 13 (Addl.) SCR 418', '91b2cf981c258c1b9a30658cf9058592f1399b3aa93c2924098a54953bf46ccf'),
+ ('NAVJOT', 'sc-2016-extra-judicial-execution-victi-2016insc527'): ('[2016] 4 SCR 919', '43bcea026ce7a76847742c4224a453785fd99df01eaeef7b5d826f10386667c8'),
+}
 P0 = {'NAVJOT','MANJEET','ANGAD','MANI_RAM','DHINGRA_SR','BALJIT','BALACHANDRAN','SURINDER_RATHORE','KESHAR','NAGA','RAM_SARUP'}
 
 def treatment3(scan):
     C = M.C; CASE = M.CASE
     hdr = ['row_id','earlier_spec_keys','earlier_case53_ids','proposition','later_judgment','later_copy_url','later_copy_sha256','later_copy_role',
            'pdf_page','para','treatment','scope','affected_kb_ids','uncertainty','exhaustiveness','technical_review_state','legal_advisor_state',
-           'jag_validation_state','cycle']
+           'jag_validation_state','cycle','printed_page_if_verified','page_render_sha256']
     rows = []
     for t in T3:
         later = t[3]; url, sha, role = C.get(later, ('', '', 'NOT_HELD'))
         rows.append([f'WSB-T3-{len(rows)+1:03d}', t[0], t[1], t[2], CASE.get(later, ('', later, ''))[1], url, sha, role, t[4], t[5], t[6], t[7], t[8], t[9],
                      'NOT_EXHAUSTIVE', 'PASSAGE_LOCATED_OFFICIAL_COPY' if role == 'OFFICIAL_COURT_COPY' else 'NOT_VERIFIED_ON_OFFICIAL_COPY',
-                     'NOT_STARTED', 'NOT_STARTED', 'C3'])
+                     'NOT_STARTED', 'NOT_STARTED', 'C3', '', ''])
     summary = []
     for k, hits in sorted(scan.items()):
         vrx = SCAN_VALID.get(k)
@@ -175,9 +202,9 @@ def treatment3(scan):
             loc = 'SCR_HEADNOTE_OR_CASE_LIST_LIKELY (editorial label, not evidence of treatment)' if (int(pg) <= 4 and re.search(r'relied on|referred to|distinguished|followed|Case Law', snip, re.I)) else 'BODY_OR_UNCLASSIFIED'
             rows.append([f'WSB-T3-{len(rows)+1:03d}', k, SPEC[k][1], 'citation located by name scan', f'intern doc {doc} ({d})',
                          'https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com (intern mirror)', '', 'INTERN_MIRROR_SCR',
-                         str(pg + 1), '', 'CITED_TREATMENT_NOT_CLASSIFIED', loc, '', re.sub(r'\s+', ' ', snip[100:300]),
+                         (str(pg) if pg else ''), '', 'CITED_TREATMENT_NOT_CLASSIFIED', loc, '', re.sub(r'\s+', ' ', snip[100:300]),
                          'NOT_EXHAUSTIVE: name scan of intern corpus only; absence is not proof of no treatment',
-                         'LEAD_ONLY', 'NOT_STARTED', 'NOT_STARTED', 'C3'])
+                         'LEAD_ONLY', 'NOT_STARTED', 'NOT_STARTED', 'C3'] + list(PRINTED_VERIFIED.get((k, doc), ('', ''))))
         summary.append([k, SPEC[k][1], 'P0' if k in P0 else 'CALIBRATION_OR_KB', len(hits), rej, len(sc), len(hc),
                         'Counts are discovery leads only; no precedent strength is inferred from frequency.', 'C3'])
     return (hdr, rows), (['spec_key', 'case53_id', 'group', 'name_hits_total', 'rejected_same_name_other_case', 'sc_citing_docs',

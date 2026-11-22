@@ -1,6 +1,12 @@
 """WS-B cycle 3: name scan of the intern corpus for later judgments citing P0 / calibration cases (discovery leads only).
 Usage: python3 cycle3_citescan.py <out.json> <snapshot_dir>"""
 import json,glob,re,os,collections,sys
+
+
+def page_of(text, pos):
+    """One-based PDF page of position pos: number of [[page N]] markers before pos (markers start at
+    [[page 1]]). Returns 0 when pos precedes the first marker. The register uses this value unchanged."""
+    return text[:pos].count('[[page ')
 S=sys.argv[2].rstrip('/')+'/data'  # snapshot dir (git archive of origin/raw-data)
 pats={
  'MANJEET':(r'Manjeet Singh','2015-05-12'),'ANGAD':(r'Angad Singh Titaria','2015-02-24'),'BALJIT':(r'Bal[jt]it Singh\W{0,40}\(1996|Union of India (?:and|&) (?:Anr\.?|Another)\.? v\.? (?:Sh\.? )?Bal[jt]it Singh','1996-10-11'),
@@ -21,7 +27,7 @@ for d,m in recs.items():
         if (m.get('issue_date') or '')<=dt: continue
         mm=re.search(rx,t,re.I)
         if mm:
-            pg=t[:mm.start()].count('[[page ')
+            pg=page_of(t, mm.start())  # one-based PDF page
             out[k].append((m['issue_date'],d,m['court'],pg,t[max(0,mm.start()-150):mm.end()+200]))
 json.dump(out,open(sys.argv[1],'w'))
 for k,v in out.items(): print(k,len(v),collections.Counter(x[2][:12] for x in v).most_common())

@@ -1,5 +1,12 @@
 # WS-B STATUS (issue #12)
 
+## Cycle 3 review fixes (PR #26)
+- **F1, citation-lead pages off by one:** fixed. 77 rows corrected; 3 checked on page images, with the printed reporter page recorded separately.
+- **F2, HEAD status and content type parsed together:** fixed.
+  - BUTTAR is now classified as an official PDF URL that responds (availability only; not held). Its pending priority moves from P0 to P1.
+  - Priority now comes from the explicit issue-#4 P0 list.
+- **Evidence:** `REVIEW_FIXES_CYCLE3.md` and `review_fix_cycle3_corrected_rows.csv`. The regression check is `tools/check_cycle3_fixes.py`.
+
 ## Cycle 3 (worktree /home/user/ws-b-c3, branch claude/ws-b-cycle3, base 9b48b08e)
 
 **Done (tasks 1–5).** Details are in the README "Cycle 3" section.
