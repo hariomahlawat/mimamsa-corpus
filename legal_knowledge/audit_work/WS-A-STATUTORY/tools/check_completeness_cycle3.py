@@ -72,8 +72,15 @@ def registered_ar():
             reg.setdefault(s, {}); reg[s].setdefault(iid, img)
     return reg
 
-def check(table):
-    fails = []; aa, ar = registered_aa(), registered_ar()
+def present(token, text):
+    """Token-boundary match: 'AR-01' does not match inside 'AR-010'; 'S.O. 39' not inside 'S.O. 3912(E)'."""
+    return re.search(r"(?<![A-Za-z0-9])" + re.escape(token) + r"(?![A-Za-z0-9])", text) is not None
+
+def check(table, aa=None, ar=None):
+    """aa/ar: optional injected registries {provision_number: {instrument_key: image_checked_bool}} (for fixtures)."""
+    fails = []
+    aa = registered_aa() if aa is None else aa
+    ar = registered_ar() if ar is None else ar
     for r in rows(table):
         kind, prov = r["provision"].split(" ", 1)
         n = prov.split(".", 1)[1]
@@ -81,8 +88,7 @@ def check(table):
         loc = r["located_amending_instruments"]
         unexamined = [k for k, img in reg.items() if not img]
         for k in reg:
-            token = k if kind == "AR" else k.replace("Act ", "Act ")
-            if token not in loc: fails.append(f"C1 {r['provision']}: registered amendment '{k}' missing from located_amending_instruments")
+            if not present(k, loc): fails.append(f"C1 {r['provision']}: registered amendment '{k}' missing from located_amending_instruments")
         if unexamined:
             st = r["completeness_status"]
             if r["amendments_image_checked"].startswith("ALL"):
@@ -94,26 +100,37 @@ def check(table):
 def selftest():
     import tempfile, os
     base = rows(HERE / "statutory_version_completeness_cycle3.csv"); cols = list(base[0].keys())
-    def run(rs):
+    def run(rs, aa=None, ar=None):
         fd, p = tempfile.mkstemp(suffix=".csv"); os.close(fd)
         with open(p, "w", newline="", encoding="utf-8") as f:
             w = csv.DictWriter(f, fieldnames=cols); w.writeheader(); w.writerows(rs)
-        out = check(p); os.unlink(p); return out
+        out = check(p, aa, ar); os.unlink(p); return out
+    def fx(prov, loc, img, st):
+        r = {c: "" for c in cols}
+        r.update(provision=prov, located_amending_instruments=loc, amendments_image_checked=img, completeness_status=st); return r
+    results = []
+    def case(name, got_fail_prefixes, expect):
+        ok = (expect == "PASS" and not got_fail_prefixes) or (expect != "PASS" and any(f.startswith(expect) for f in got_fail_prefixes))
+        results.append((name, expect, ok)); return ok
     aa = registered_aa()
     none_sec = next(r for r in base if r["provision"].startswith("AA") and r["provision"].split(".", 1)[1] not in aa)
     img_only = next(r for r in base if r["provision"].startswith("AA") and aa.get(r["provision"].split(".", 1)[1]) and all(aa[r["provision"].split(".", 1)[1]].values()))
-    ok = True
-    # boundary 1: section with no registered amendment -> no failure
-    ok &= run([none_sec]) == []
-    # boundary 2: section with only image-checked amendments, ALL -> no failure
-    ok &= run([img_only]) == []
-    # negative 1: drop the registered instrument from a row -> C1 failure
+    # live-data boundary cases
+    case(f"live: no registered amendment ({none_sec['provision']})", run([none_sec]), "PASS")
+    case(f"live: only image-checked amendments, ALL ({img_only['provision']})", run([img_only]), "PASS")
     bad = dict(img_only); bad["located_amending_instruments"] = "none"
-    ok &= any(f.startswith("C1") for f in run([bad]))
-    # negative 2: s.137 with an unexamined amendment marked ALL -> C2 failure
-    s137 = dict(next(r for r in base if r["provision"] == "AA s.137")); s137["amendments_image_checked"] = "ALL"
-    ok &= any(f.startswith("C2") for f in run([s137])) if any(not v for v in aa.get("137", {}).values()) else True
-    print("selftest", "PASS" if ok else "FAIL", f"(no-amendment case: {none_sec['provision']}; image-only case: {img_only['provision']})")
+    case("live: registered instrument removed", run([bad]), "C1")
+    # explicit fixtures (independent of live data)
+    E = {}
+    case("fixture: unexamined registration forced ALL -> C2", run([fx("AA s.999", "Act 1/2000 (fixture)", "ALL", "NOT_ESTABLISHED")], {"999": {"Act 1/2000": False}}, E), "C2")
+    case("fixture: unexamined registration with PARTIALLY_ESTABLISHED (AA) -> C2", run([fx("AA s.999", "Act 1/2000", "NOT ALL", "PARTIALLY_ESTABLISHED (x)")], {"999": {"Act 1/2000": False}}, E), "C2")
+    case("fixture: unexamined registration, NOT ALL, NOT_ESTABLISHED -> PASS", run([fx("AA s.999", "Act 1/2000", "NOT ALL", "NOT_ESTABLISHED")], {"999": {"Act 1/2000": False}}, E), "PASS")
+    case("fixture: prefix ID 'AR-01' must NOT match 'AR-010' -> C1", run([fx("AR r.999", "AR-010 S.R.O. X", "ALL", "PARTIALLY_ESTABLISHED")], E, {"999": {"AR-01": True}}), "C1")
+    case("fixture: exact ID 'AR-010' present -> PASS", run([fx("AR r.999", "AR-010 S.R.O. X", "ALL", "PARTIALLY_ESTABLISHED")], E, {"999": {"AR-010": True}}), "PASS")
+    case("fixture: prefix key 'S.O. 39' must NOT match 'S.O. 3912(E)' -> C1", run([fx("AA s.999", "S.O. 3912(E) 2019", "NOT ALL", "NOT_ESTABLISHED")], {"999": {"S.O. 39": False}}, E), "C1")
+    ok = all(r[2] for r in results)
+    for name, exp, good in results: print(f"  selftest {'ok  ' if good else 'FAIL'} expect={exp:4} {name}")
+    print("selftest", "PASS" if ok else "FAIL", f"({sum(r[2] for r in results)}/{len(results)} cases)")
     return ok
 
 if __name__ == "__main__":

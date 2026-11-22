@@ -64,3 +64,41 @@ The self-test covers four cases:
 - a section with only image-checked amendments (AA s.70), which must pass;
 - a row whose registered instrument has been removed, which must fail C1;
 - s.137 forced to ALL, which must fail C2.
+
+## 6. Follow-up to the conditional acceptance (independent review of bfc9765a)
+1. **The C2 negative test no longer depends on live data.** Explicit fixtures inject a synthetic registry into `check()`:
+   - an AA row forced to ALL with a known unexamined registration must fail C2;
+   - the same row marked PARTIALLY_ESTABLISHED must fail C2;
+   - the same row marked NOT ALL / NOT_ESTABLISHED must pass.
+2. **C1 now matches on token boundaries** (`present()`), not substrings. A registered ID must not be followed or preceded by a letter or digit. Boundary fixtures:
+   - "AR-01" must **not** match inside "AR-010" (fails C1);
+   - "AR-010" present (passes);
+   - "S.O. 39" must **not** match inside "S.O. 3912(E)" (fails C1).
+3. **Known false-pass limitation.** AA-01 (Act 19/1955) says "Commander-in-Chief → Chief of the Army Staff in many sections" without listing them.
+   - C1 therefore registers Act 19/1955 against s.3 only. It **cannot** detect Act 19/1955 being missing from the row of any other section that Act amended.
+   - The sections are not guessed. This is recorded as **OQ-A-13** in `open_questions_cycle3.csv`, pending examination of the Act's Schedule (Gazette `in.gazette.e.1955.613` is in ACQ-01 B6) or itemisation of all compilation footnote images.
+4. **WS-D input.** `army_act_amendment_chain_addendum_cycle3.csv` (AA-C3-01..04) is not yet an input to WS-D `build_versioned_edges`. This is raised as a request in STATUS.md, routed to WS-D through the coordinator. No WS-D file was edited.
+
+### Outputs after this follow-up
+```
+rows_checked=219 failures=0
+  selftest ok   expect=PASS live: no registered amendment (AA s.18)
+  selftest ok   expect=PASS live: only image-checked amendments, ALL (AA s.70)
+  selftest ok   expect=C1   live: registered instrument removed
+  selftest ok   expect=C2   fixture: unexamined registration forced ALL -> C2
+  selftest ok   expect=C2   fixture: unexamined registration with PARTIALLY_ESTABLISHED (AA) -> C2
+  selftest ok   expect=PASS fixture: unexamined registration, NOT ALL, NOT_ESTABLISHED -> PASS
+  selftest ok   expect=C1   fixture: prefix ID 'AR-01' must NOT match 'AR-010' -> C1
+  selftest ok   expect=PASS fixture: exact ID 'AR-010' present -> PASS
+  selftest ok   expect=C1   fixture: prefix key 'S.O. 39' must NOT match 'S.O. 3912(E)' -> C1
+selftest PASS (9/9 cases)
+```
+The pre-fix table still fails with boundary matching:
+```
+FAIL C1 AA s.2: registered amendment 'A.L.O.' missing from located_amending_instruments
+FAIL C1 AA s.137: registered amendment 'A.L.O.' missing from located_amending_instruments
+FAIL C1 AA s.137: registered amendment 'S.O. 3912(E)' missing from located_amending_instruments
+FAIL C2 AA s.137: amendments_image_checked=ALL but unexamined/text-only: A.L.O., S.O. 3912(E)
+FAIL C2 AA s.137: status 'PARTIALLY_ESTABLISHED' rests on image-checked amendments but unexamined/text-only: A.L.O., S.O. 3912(E)
+rows_checked=219 failures=5
+```
