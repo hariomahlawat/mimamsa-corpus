@@ -16,6 +16,7 @@ on:
       - "scripts/validate_legal_v34.py"
       - "scripts/extract_p0_fulltext_v35.py"
       - "scripts/check_isaac_express_citations_v35.py"
+      - "scripts/extract_isaac_reasoning_v35.py"
       - "scripts/probe_gazette_1954_v35.py"
       - "scripts/forensic_p0_source_v32.py"
       - "scripts/archive_precedent_treatment_v32.py"
@@ -51,6 +52,9 @@ jobs:
           python-version: '3.11'
       - name: Install current Hugging Face client
         run: python -m pip install 'huggingface_hub>=1.19.0,<2'
+      - name: Preflight v3.5 source evidence Python scripts
+        run: |
+          python -m py_compile scripts/extract_p0_fulltext_v35.py scripts/check_isaac_express_citations_v35.py scripts/extract_isaac_reasoning_v35.py scripts/probe_gazette_1954_v35.py
       - name: Acquire short-lived scoped credential via Trusted Publisher
         env:
           HF_OIDC_RESOURCE: datasets/hariomahlawat/mimamsa-corpus
@@ -115,6 +119,8 @@ jobs:
         run: python scripts/extract_p0_fulltext_v35.py
       - name: Identify direct citations of seven pension cases in 2026 official NC Isaac judgment
         run: python scripts/check_isaac_express_citations_v35.py
+      - name: Preserve source PDF reasoning context for pension case treatment
+        run: python scripts/extract_isaac_reasoning_v35.py
       - name: Probe authoritative Gazette archive for original 1954 Army Rules notice
         run: python scripts/probe_gazette_1954_v35.py
       - name: Verify existing original corpus PDFs for Bedi and Ranjit Thakur with SHA-256
