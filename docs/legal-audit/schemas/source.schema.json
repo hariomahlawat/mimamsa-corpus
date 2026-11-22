@@ -104,6 +104,21 @@
     },
     "caveat": {
       "type": "string"
+    },
+    "retrieved_by": {
+      "type": "string"
+    },
+    "content_role": {
+      "type": "string",
+      "enum": [
+        "ENACTED_TEXT",
+        "GAZETTE_TEXT",
+        "JUDGMENT_TEXT",
+        "MANUAL_REPRODUCED_LEGAL_TEXT",
+        "MANUAL_COMMENTARY",
+        "SECONDARY_TEXT",
+        "METADATA_ONLY"
+      ]
     }
   }
 }

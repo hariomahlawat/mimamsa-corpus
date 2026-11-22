@@ -6,7 +6,7 @@ on:
       - ".claude/agents/**"
       - "docs/legal-audit/**"
       - "tools/legal_audit/**"
-      - "tests/test_legal_audit_validator.py"
+      - "tests/test_legal_audit_*.py"
       - ".github/workflows/legal-audit-kit-ci.yml"
   workflow_dispatch:
 
@@ -25,4 +25,4 @@ jobs:
       - name: Validate audit schemas
         run: python tools/legal_audit/validate.py --schema-check
       - name: Test fail-closed review checks
-        run: python -m unittest discover -s tests -p test_legal_audit_validator.py -v
+        run: python -m unittest discover -s tests -p "test_legal_audit_*.py" -v
