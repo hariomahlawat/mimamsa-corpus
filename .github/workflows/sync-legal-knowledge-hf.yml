@@ -8,6 +8,8 @@ on:
       - "legal_knowledge/**"
       - "scripts/push_legal_knowledge.py"
       - "scripts/reconcile_legal_sources.py"
+      - "scripts/push_mml_originals.py"
+      - ".mml_transfer/**"
       - ".github/workflows/sync-legal-knowledge-hf.yml"
   workflow_dispatch:
 
@@ -45,3 +47,26 @@ jobs:
         run: python scripts/push_legal_knowledge.py
       - name: Reconcile against canonical HF source manifests and verify output
         run: python scripts/reconcile_legal_sources.py
+      - name: Verify checksum and reconstruct original MML archive
+        if: ${{ hashFiles('.mml_transfer/part_000.b64') != '' }}
+        run: |
+          test "$(find .mml_transfer -maxdepth 1 -name 'part_*.b64' -type f | wc -l)" -eq 32
+          mkdir -p "$RUNNER_TEMP/mml-originals"
+          cat .mml_transfer/part_*.b64 | tr -d '\\r\\n\\t ' | base64 --decode > "$RUNNER_TEMP/mml-originals/originals.zip"
+          printf '9d82b9c5cb9ac56f41fd6ca74ed0a4704a5897fd26a239fdbafe0377e511f31c  %s\\n' "$RUNNER_TEMP/mml-originals/originals.zip" | sha256sum -c -
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import os
+          dest = Path(os.environ['RUNNER_TEMP']) / 'mml-originals'
+          with ZipFile(dest / 'originals.zip') as z:
+              for f in z.namelist():
+                  p = Path(f)
+                  if p.is_absolute() or '..' in p.parts:
+                      raise RuntimeError(f'Unsafe archive path: {f}')
+              z.extractall(dest)
+          print('Original MML ZIP structure verified and extracted')
+          PY
+      - name: Upload original MML Word/PDF binaries and verify per-file SHA-256
+        if: ${{ hashFiles('.mml_transfer/part_000.b64') != '' }}
+        run: python scripts/push_mml_originals.py --source-dir "$RUNNER_TEMP/mml-originals/originals"
