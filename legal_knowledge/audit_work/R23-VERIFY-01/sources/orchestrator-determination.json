@@ -12,11 +12,17 @@
     "sha256": "c5ef95a9d553685aa655f041b71d8360d6272e2775a19a3d6e7273c6cbd0aca6",
     "local_path": "scratchpad research copy (not ingested)",
     "verification_state": "SOURCE_VERIFIED",
-    "authenticity": "ARCHIVAL_COPY_OF_OFFICIAL",
+    "authenticity": "ARCHIVAL_FACSIMILE_OF_OFFICIAL",
     "retrieved_by": "orchestrator",
     "content_role": "GAZETTE_TEXT",
-    "custody_checks": "Identity on image: masthead 'No. 47] NEW DELHI, SATURDAY, NOVEMBER 27, 1954 / PART II—Section 4', 'S.R.O. 484' preamble (s.191), 'THE ARMY RULES, 1954'. Integrity: MD5 3bb93dc7531e7673a94aed92e8aa8bf0 equals archive.org published md5. Completeness: 88 pages = printed pp.291-378. Uploader Public.Resource.Org, collection gazetteofindia.",
-    "caveat": "Archival reproduction of the printed Gazette (copy of the primary instrument per SOURCE_HIERARCHY.md); not custodian-certified."
+    "caveat": "Archival reproduction of the printed Gazette (copy of the primary instrument per SOURCE_HIERARCHY.md); not custodian-certified.",
+    "document_authority": "ENACTED_OR_NOTIFIED_PRIMARY",
+    "carrier_provenance": "THIRD_PARTY_ARCHIVAL_FACSIMILE",
+    "copy_fidelity": "PAGE_IMAGE_CHECKED",
+    "page_image_check_id": "PIC-10 (orchestrator) / render in pinpoint",
+    "instrument_identity": "Gazette of India No. 47, 27 November 1954, Part II-Section 4: S.R.O. 484 (The Army Rules, 1954)",
+    "amendment_chain_status": "PARTIAL",
+    "authority_rationale": "Image of the printed Gazette of India (primary instrument) carried by archive.org/Public.Resource.Org; identity read from the page image; archive.org md5 matched; not custodian-certified. Custody checks: Identity on image: masthead 'No. 47] NEW DELHI, SATURDAY, NOVEMBER 27, 1954 / PART II—Section 4', 'S.R.O. 484' preamble (s.191), 'THE ARMY RULES, 1954'. Integrity: MD5 3bb93dc7531e7673a94aed92e8aa8bf0 equals archive.org published md5. Completeness: 88 pages = printed pp.291-378. Uploader Public.Resource.Org, collection gazetteofindia."
   },
   {
     "source_id": "S-R23-002",
@@ -34,7 +40,13 @@
     "authenticity": "OFFICIAL_COMPILATION",
     "retrieved_by": "orchestrator",
     "content_role": "ENACTED_TEXT",
-    "caveat": "Later transcription/consolidation with interleaved editorial NOTES; reviewer C found it is a 2015 Word conversion without amendment marks; consolidation date not stated."
+    "caveat": "Later transcription/consolidation with interleaved editorial NOTES; reviewer C found it is a 2015 Word conversion without amendment marks; consolidation date not stated.",
+    "document_authority": "GOVERNMENT_COMPILATION",
+    "carrier_provenance": "GOVERNMENT_HOSTED_COPY",
+    "copy_fidelity": "PAGE_IMAGE_CHECKED",
+    "page_image_check_id": "PIC-01",
+    "amendment_chain_status": "NOT_CHECKED",
+    "authority_rationale": "India Code consolidated compilation (later transcription with editorial notes); official restatement, not the issued instrument."
   },
   {
     "source_id": "S-R23-003",
@@ -48,6 +60,12 @@
     "verification_state": "SOURCE_LOCATED",
     "authenticity": "USER_SUPPLIED_REFERENCE",
     "retrieved_by": "orchestrator",
-    "content_role": "MANUAL_REPRODUCED_LEGAL_TEXT"
+    "content_role": "MANUAL_REPRODUCED_LEGAL_TEXT",
+    "document_authority": "UNVERIFIED_MANUAL",
+    "carrier_provenance": "USER_SUPPLIED",
+    "copy_fidelity": "PAGE_IMAGE_CHECKED",
+    "page_image_check_id": "PIC-02",
+    "amendment_chain_status": "NOT_APPLICABLE",
+    "authority_rationale": "User-supplied MML file; publication/edition not authenticated; reproduced legal text only."
   }
 ]

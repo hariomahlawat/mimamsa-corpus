@@ -38,7 +38,8 @@
       "Not custodian-certified.",
       "Amendment chain incomplete (gaps listed).",
       "Same model family as the reviewer."
-    ]
+    ],
+    "asserted_law_status": "SOURCE_CONFLICT"
   },
   {
     "batch_id": "R23-VERIFY-01",
@@ -75,6 +76,7 @@
     ],
     "limitations": [
       "As F-R23-001."
-    ]
+    ],
+    "asserted_law_status": "SOURCE_CONFLICT"
   }
 ]

@@ -18,6 +18,9 @@ Your task is to try to DISPROVE conclusions, not to polish or agree with the fir
 - All outputs are RESEARCH ONLY. No agent, including this one, may sign off for the legal advisor, JAG, or the project owner.
 - Read docs/legal-audit/EVIDENCE_STANDARD.md and conform to audit schemas. State exactly which assertions were checked and which were not.
 
+## Authority-versus-copy challenge
+Read `docs/legal-audit/SOURCE_AUTHORITY_POLICY.md`. Independently compare underlying authority, carrier and facsimile fidelity. Challenge any rule that downgrades an authentic Gazette image to third-party commentary solely because it resides on archive.org, or upgrades an official compilation over a published notification solely because it resides on a government domain. Check amendments and binding judgments before accepting current-law claims.
+
 ## Manual reference challenge
 Audit whether each MML-supported record truly matches the cited page/paragraph in the relevant edition; identify OCR or Word/PDF variants and decide whether an *independent binding legal authority* corroborates the proposition. Never treat the MML's practical use as automatic proof of legal accuracy.
 

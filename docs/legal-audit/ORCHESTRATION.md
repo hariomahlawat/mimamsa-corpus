@@ -3,6 +3,11 @@
 ## Priority and scope
 Do **database integrity/legal provenance work only**. The top-level crawler brief `CLAUDE.md` remains intact; this audit contract supplements it. Do not touch any application layer.
 
+## Source authority and conflict review
+Apply `docs/legal-audit/SOURCE_AUTHORITY_POLICY.md` as a mandatory agent-wide standard. Document authority, copy carrier, image fidelity and amendment-chain checks are separate fields. Treat a third-party-hosted original Gazette facsimile as potential primary-document evidence, **not as commentary**, but never infer current operative law or custodian certification from its host or hash. A government-issued MML receives high reference value after edition authenticity is established, but cannot supersede statute, later amendments or binding judgments. Preserve Rule 23(3) as CONFLICTING.
+
+For every new audit batch after PILOT-01, freeze a manifest bearing `source_authority_policy_version: v1` and run the strict validator against it. Do not modify the original PILOT-01 manifest or archived evidence solely to backfill this policy.
+
 ## First session: read-only inventory
 0. **MANDATORY MML FIRST PASS**: read `docs/legal-audit/MML_SOURCE_PRIORITY.md`. Independently enumerate all eight originals from the canonical private HF dataset; inspect hashes, actual formats, edition/printing/access markings and page/paragraph layouts. Keep user-supplied MML DOC/PDF versions separate until equivalence is demonstrated. Build a candidate crosswalk to KB records and statutes without calling manual commentary current law. If inaccessible or restricted, report access blocker and do not claim examination.
 1. Inspect Git branch, `PROGRESS.md`, active legal-data PR, source schemas and the private HF canonical dataset only if credentials and access are already authorised. Do not assume HF is mounted.
