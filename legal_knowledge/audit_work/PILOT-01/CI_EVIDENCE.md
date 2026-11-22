@@ -24,3 +24,6 @@ What CI does **not** cover:
 Earlier run on the PR 5 head (for comparison): run 45015175390, success.
 
 Separation of changes: PR 6 contains audit paths only (75 files). The crawler and state changes from `main` commit 21de353 (`PROGRESS.md`, `reports/ocr_review.md`, `state/wider_terms_hits.json`) exist only on `claude/gifted-bardeen-byeim6`, via its merge of `main`, and are not part of the audit PR.
+
+## Re-run on the final remediation head
+Run **45023723373** (run #12), head `0d8aca3cb02e41645c88653022826eaaf999fb18`, event `pull_request`, conclusion **success** (12:43:05–12:43:13Z). PR 6 state: open, draft, `mergeable_state: clean`, 79 files, not merged.
