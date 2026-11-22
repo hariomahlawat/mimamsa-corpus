@@ -673,7 +673,8 @@ Items: 32 queued first-pass findings (P0 first), plus an annex of 2 supplementar
 - Evidence: S-REM-001: Army Rules, 1954 (India Code annotated compilation) — PDF p.209, r.192(i)-(ii); page image checked (render sha256 8516c08b…, 110 dpi) [OFFICIAL_COMPILATION, RULE]; S-REM-002: Manual of Military Law (MML 2.pdf, combined AA/AR edition) — PDF p.227 (printed 227), r.192 proviso and footnote 1 'Substituted by SRO 215 dated 17 June, 1965'; page image checked (render sha256 756b0f48…) [USER_SUPPLIED_REFERENCE, MANUAL]
 
 > **Independent review — technical challenge, NOT legal approval**
-> - Not yet independently reviewed.
+> - R-C-001 (independent-reviewer-C): **SUPPORTS** — Tests and results. (1) Bytes: India Code Army Rules PDF from raw-data re-hashed (48f52219...a727) and a live re-fetch from the India Code URL on 2026-11-22 gave identical bytes, so the compilation India Code serves today still lacks the proviso. (2) Page images: rendered India Code PDF p.209 shows r.192(i)-(ii) ending 'detention to the full extent.' with no proviso; MML 2.pdf p.227 image shows the bracketed proviso (reduction to a lower grade of pay limited to the immediately next lower grade, not effective beyond one year) with footnote 1 'Substituted by SRO 215 dated 17 June, 1965'. (3) Is t
+> - Orchestrator provisional disposition (D-08): FIRST_PASS_MAINTAINED (reviewer-supported); provisional severity P1. Narrowed: HCE-017 states nothing false; the gap is omission of r.192 whose text is in conflict. A post-1965 change to SRO 215 cannot be excluded without the Gazette (acquisition WO-01).
 
 **Substantive legal decision — for the nominated legal advisor (blank)**
 - Question: Is the r.192 proviso (SRO 215/1965) part of the operative rule, and should the database flag its omission from the India Code compilation?
@@ -684,7 +685,8 @@ Items: 32 queued first-pass findings (P0 first), plus an annex of 2 supplementar
 - Evidence: S-REM-003: The Army Act, 1950 (India Code) — [[page 35]] s.121 [OFFICIAL_COMPILATION, STATUTE]
 
 > **Independent review — technical challenge, NOT legal approval**
-> - Not yet independently reviewed.
+> - R-C-002 (independent-reviewer-C): **SUPPORTS** — Partly supported; one sub-claim disputed. Tests. (1) s.121 wording, read on the rendered India Code Army Act PDF p.35 image (the printed page is also 35): after acquittal or conviction 'by a court-martial or by a criminal court', or disposal under ss.80/83/84/85, the person 'shall not be liable to be tried again for the same offence by a court-martial or dealt with under the said sections'. The bar runs only against court-martial or summary re-disposal. Upheld. (2) The MML 2.pdf p.89 image confirms note 6: 'prohibits a second trial by court-martial or a criminal court'. MML 2 p.88 prints s.121
+> - Orchestrator provisional disposition (D-09): REVIEWER_CORRECTION_ADOPTED_PROVISIONALLY; provisional severity MML 2 note 6: P2 (P1 if advisor holds criminal-court retrial permitted); vol 2(AA) note 6: P1 (outdated law resting on omitted s.127). F-REM-002's statement that the vol 2(AA) note 'tracks the section text' with only a dead cross-reference is withdrawn as inaccurate. Both MML versions misstate the post-1992 position in different directions. Art 20(2) and BNSS s.337 (CrPC s.300) effect is reserved to the advisor.
 
 **Substantive legal decision — for the nominated legal advisor (blank)**
 - Question: Confirm the scope of s.121 and whether any rule bars criminal-court retrial after court-martial (Art 20(2), CrPC s.300 / BNSS equivalent).

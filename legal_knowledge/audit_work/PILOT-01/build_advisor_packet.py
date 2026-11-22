@@ -86,6 +86,9 @@ for f in supp:
     md.append("> **Independent review — technical challenge, NOT legal approval**")
     for r in rv: md.append(f"> - {r['review_id']} ({r['reviewer_id']}): **{r['decision']}** — {r['rationale'][:600]}")
     if not rv: md.append("> - Not yet independently reviewed.")
+    if f["finding_id"] in disp:
+        dd = disp[f["finding_id"]]
+        md.append(f"> - Orchestrator provisional disposition ({dd['disposition_id']}): {dd['disposition']}; provisional severity {dd['provisional_severity']}. {dd['note']}")
     md.append("\n**Substantive legal decision — for the nominated legal advisor (blank)**")
     for q in f.get("advisor_questions", []): md.append(f"- Question: {q}")
     md.append("- Decision: ☐ ACCEPT_PROPOSAL ☐ ACCEPT_WITH_AMENDMENT ☐ REJECT ☐ NEEDS_MORE_EVIDENCE — severity: ____ — name/role/date/approval ref: ________\n")
