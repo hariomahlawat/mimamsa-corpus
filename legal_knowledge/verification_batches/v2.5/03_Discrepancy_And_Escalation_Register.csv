@@ -1,0 +1,8 @@
+issue_id,severity,topic,finding,required_action,status
+V25-001,HIGH,Historical versus current rules,Uploaded MML and official PDF comparison does not prove all amendments to 22/23/180 through 2026 are incorporated,Authenticate current Gazette consolidated versions and amendment chain,OPEN
+V25-002,HIGH,Court of Inquiry to Rule 22,Rule 22 proviso hinges on actual compliance with Rule 180 for that accused; cannot reduce to generic COI exemption,Preserve antecedent conditions in every legal proposition and related case summary,OPEN
+V25-003,HIGH,MML commentary,"Notes on pages 151-152 and 222 are editorial interpretation, not identical to statutory rule text","Assign separate commentary records with source edition, no statutory authority status",OPEN
+V25-004,HIGH,Army Rule 182,Related evidentiary rule affects COI admissibility; current and historical legal position not separately authenticated,"Verify rule 182 and subsequent case law, connect to Rule 180 with qualification",OPEN
+V25-005,MEDIUM,Rule 22 amendment history,"MML notes SRO 17(E) dated 6 Dec 1993 and SRO 258/2002, but Gazette versions not independently archived",Retrieve original SRO PDFs and track effective-date text versions,OPEN
+V25-006,MEDIUM,Wording differences,One version reads call any witness and another such witness; potential editorial variation,Compare typeset original rule texts and gazette; log exact variant,OPEN
+V25-007,HIGH,Judicial meaning,No full judgments have been authenticated for rule 22/23/180 interpretation in this batch,"Primary Supreme Court, High Court and AFT holdings and subsequent treatment, with paragraph anchors",OPEN
