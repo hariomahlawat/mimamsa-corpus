@@ -12,6 +12,7 @@ on:
       - "scripts/reconcile_p0_case_sources_v31.py"
       - "scripts/build_p0_holding_dossiers_v34.py"
       - "scripts/archive_nc_isaac_v34.py"
+      - "scripts/verify_nc_isaac_paras_v34.py"
       - "scripts/forensic_p0_source_v32.py"
       - "scripts/archive_precedent_treatment_v32.py"
       - "scripts/archive_gazette_v33.py"
@@ -102,6 +103,8 @@ jobs:
         run: python scripts/build_p0_holding_dossiers_v34.py
       - name: Archive 2026 Supreme Court NC Isaac ruling or record source acquisition exception
         run: python scripts/archive_nc_isaac_v34.py
+      - name: Crosscheck official NC Isaac 2026 Supreme Court dispositive and rule paragraphs
+        run: python scripts/verify_nc_isaac_paras_v34.py
       - name: Verify existing original corpus PDFs for Bedi and Ranjit Thakur with SHA-256
         run: python scripts/verify_sc_source_matches_v29.py
       - name: Verify checksum and reconstruct original MML archive
