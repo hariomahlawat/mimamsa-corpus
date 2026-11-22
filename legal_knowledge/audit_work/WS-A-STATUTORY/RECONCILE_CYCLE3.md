@@ -28,15 +28,14 @@
    - **No discrepancy remains OPEN.**
 4. `tools/check_completeness_cycle3.py --selftest` has been re-run (output below).
 
-## Pinned-input constraint
-- `provision_change_log.csv` is a pinned input of WS-D `build_versioned_edges` (`tests/test_legal_audit_versioned_edges.py`). Editing it fails four WS-D tests, and WS-A may not edit WS-D files.
-- The file is therefore left **byte-identical** to its committed version.
-- The nine corrected commencement records listed under "PCL" below are recorded instead in `provision_change_log_supersessions_cycle3.csv` (PCL-SUP-C3-01..09). Each row names the superseded change_id, the before values, the after values, the separate `retrospective_deemed_effect_from`, and the image evidence.
-- WS-D is asked through the coordinator (STATUS.md) to consume the file and regenerate its edges. WS-D's test that expects the r.2 PCL-216-1988 vs PCL-BL-02 CONFLICTING_EVIDENCE flag will then need WS-D review: the supersession resolves that flag as a column-placement error (deemed date placed in `effective_date`), not a conflict between sources.
-- The other edits in this reconciliation are applied in place, because those files are not pinned: the addendum, ACQ03-029, the commencement readings, one cell of the completeness table, and the r.15 trace pointer.
+## Applied in place (coordinator decision on 192ea2e6)
+- The nine corrected commencement records ("PCL" lines below) are applied **in place** in `provision_change_log.csv`. This is the authoritative log.
+- A new column `retrospective_deemed_effect_from` was added. It is empty for all other rows.
+- `provision_change_log_supersessions_cycle3.csv` (PCL-SUP-C3-01..09) is kept as a **change record / audit trail**: before → after with image evidence. It is not an authoritative source.
+- WS-D regenerates its versioned edges from the corrected log. No WS-D file was edited, and no hash expectation was changed.
 
 ## Every changed cell (before → after)
-The "PCL" lines are recorded in the supersession file, not applied to `provision_change_log.csv`.
+The "PCL" lines are applied in place in `provision_change_log.csv` and are also recorded in the change record.
 ```
 ADDENDUM AA-C3-01 | gazette_identity | 'archive.org in.gazette.e.1956.717 (ACQ03-020)' -> 'archive.org in.gazette.e.1956.717 (ACQ03-021)'
 ADDENDUM AA-C3-01 | acquisition_request | 'ACQ03-020' -> 'ACQ03-021'
@@ -110,13 +109,15 @@ selftest PASS (9/9 cases)
 | PILOT-01 strict | 0 | |
 | R23 strict | 0 | |
 | `check_registers.py` | 0 | |
-| `check_csv.py` | 0 | 118 files, 0 errors |
-| `check_provenance.py` | 0 | violations=2, both known; new=0 |
+| `check_csv.py` | 0 | |
+| `check_provenance.py` | 0 | new=0 |
 | `check_completeness_cycle3.py --selftest` | 0 | 9/9 |
-| unittest | **1** | 2 failures |
+| unittest | **1** | 4 failures, expected, all in WS-D's versioned-edges tests |
 
-**The unittest failures pre-date this work.** The same two failures occur on the untouched base 2a66cd04, with WS-A's tracked changes stashed:
-- `test_legal_audit_versioned_edges.test_inputs_pinned_and_current`;
-- `test_legal_audit_versioned_edges.test_regeneration_is_byte_identical`.
+**WS-D tests that fail on this branch alone.** All four are cleared by WS-D regenerating from the corrected log; no WS-D file was edited.
+1. `test_legal_audit_versioned_edges.VersionedEdges.test_inputs_pinned_and_current`: the pinned inputs `version_register` (already stale at base after PR #28) and `wsa_change_log` changed.
+2. `test_legal_audit_versioned_edges.VersionedEdges.test_regeneration_is_byte_identical`: the regenerated outputs differ from the committed WS-D outputs.
+3. `test_legal_audit_versioned_edges.VersionedEdges.test_stated_dates_are_the_registers_own`: depends on the old wording `NOT_STATED_PENDING_ADVICE (AQ-05)` for PCL-116-1965.
+4. `test_legal_audit_versioned_edges.VersionedEdges.test_conflicting_evidence_present_in_real_versions`: depends on the old r.2 values (PCL-BL-02 `effective_date` 1979-06-04 vs PCL-216-1988 1988-09-17). The corrected log places 1979-06-04 in `retrospective_deemed_effect_from`.
 
-In both, the input that changed is `version_register` (ARMY-RULES-CHAIN-01, updated by PR #28), and the regenerated `relation_graph_versioned_report.md` differs only in that input's hash. Regenerating WS-D outputs is outside WS-A's write scope, so it is routed to the coordinator / WS-D. WS-A's own pinned input (`wsa_change_log`, hash 342ab73c9…) is unchanged.
+Tests 1 and 2 already failed on base 2a66cd04 (the `version_register` pin was stale after PR #28).

@@ -103,10 +103,16 @@ Updated 2026-11-22 (cycle 3). Branch: `claude/ws-a-statutory` (base 34e75aa9). W
 - [x] ACQ03-029 now points to `in.gazette.e.1950.306` (UNVERIFIED; not fetched). AA-00 is superseded through a versioned note row AA-C3-05; AA-00 itself is not edited.
 - [x] Commencement fields agree with PR #28. Six stale carried rows are corrected from images. Commencement and deemed effect are now distinct columns (`retrospective_deemed_effect_from`). Legal effect is left to AQ-06.
 - [x] Details in `RECONCILE_CYCLE3.md`. Completeness self-test 9/9.
-- **Request to WS-D (via coordinator):** consume `WS-A-STATUTORY/provision_change_log_supersessions_cycle3.csv` (PCL-SUP-C3-01..09) in `build_versioned_edges`. It supersedes the commencement fields of PCL-BL-02/04/18/41/45, PCL-116-1965, PCL-215-1965, PCL-216-1988 and PCL-194-1989, with a distinct `retrospective_deemed_effect_from`.
-  - Then regenerate the edges and review the test that expects r.2 CONFLICTING_EVIDENCE.
-  - `provision_change_log.csv` was left byte-identical because WS-D pins it.
-- **Pre-existing gate failure, for the coordinator / WS-D.** Two `test_legal_audit_versioned_edges` tests fail at base 2a66cd04: WS-D's pinned `version_register` input changed with PR #28 and has not been regenerated. This is not caused by WS-A; WS-A's own pinned input (`wsa_change_log` 342ab73c9…) is unchanged.
+- [x] Coordinator decision on 192ea2e6, applied:
+  - The nine commencement corrections are made **in place** in `provision_change_log.csv`, with a new `retrospective_deemed_effect_from` column.
+  - `provision_change_log_supersessions_cycle3.csv` is re-labelled as a change record (audit trail), not an authoritative source.
+- **WS-D tests expected to fail on this branch alone** until WS-D regenerates from the corrected log (no WS-D file edited), all in `test_legal_audit_versioned_edges.VersionedEdges`:
+  - `test_inputs_pinned_and_current`;
+  - `test_regeneration_is_byte_identical`;
+  - `test_stated_dates_are_the_registers_own`;
+  - `test_conflicting_evidence_present_in_real_versions`.
+
+  The first two already failed at base 2a66cd04.
 
 ## Next
 - After approval of ACQ-C2:
