@@ -1,5 +1,23 @@
 # Progress
 
+## 2026-11-22 — Filter bug fixed; all removed judgments re-checked
+
+- Bug: the keyword "Armed Forces Tribunal" matched only in all-lowercase or all-capitals, not the
+  usual title case. Found while checking why Allahabad was thin. Fixed in `pipeline/judgments.py`
+  with a test.
+- Re-check (`scripts/recheck_removed.py`): all 121,027 removed judgments downloaded again from the
+  open-data buckets and filtered again. Recovered 846. Judgments now: 2,871 relevant, 1,341
+  borderline, 47 not checked (38 poor scans, 9 damaged PDFs), 120,185 removed.
+  Corpus 4,327 documents, 2,755 relations, 0 validation errors. Both stores current (4,039 raw files).
+- The text of removed judgments is kept in `state/rejected_text/` (local only, never pushed) so that
+  a change to the keywords can be tested without downloading again.
+- Why Allahabad is thin (309 kept of 30,658 pre-selected): bucket coverage starts in 2018; most
+  files are one-page orders that use none of the brief's ten keywords; 92% were pre-selected only
+  on "Union of India".
+- OPEN (owner to decide): widen the keyword list. Counted on the removed text: 2,234 removed
+  judgments have 2+ wider military terms or 3+ mentions (Delhi 1,150, Allahabad 320, P&H 296,
+  J&K 249, SC 219); 6,067 have at least one. Paramilitary-only matches (CRPF, BSF...) excluded.
+
 ## 2026-11-22 — OCR of the scanned judgments
 
 - 944 scanned judgments (4,705 pages) read with Tesseract, English only, 300 dpi, then run through the
