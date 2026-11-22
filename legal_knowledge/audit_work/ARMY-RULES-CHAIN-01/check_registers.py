@@ -46,6 +46,9 @@ for r in ver:
     if r["provision"].startswith("r.193") and r["conflict_id"] != "C-08": err.append("r.193 rows must carry C-08")
     if r["provision"].startswith("r.194") and r["conflict_id"] != "C-09": err.append("r.194 rows must carry C-09")
     if r["provision"] == "r.193" and r["determination_state"].split()[0] != "OPEN": err.append("r.193 must stay OPEN")
+    # OQ-D-021: guard every version row of the three disputed provisions, not only the latest
+    if r["provision"] in ("r.23(3)", "r.193", "r.194") and r["determination_state"].split()[0] not in ("OPEN", "PROPOSAL", "CONFLICTING"):
+        err.append(f"{r['provision']} {r['version']}: state must be OPEN, PROPOSAL or CONFLICTING")
 for r in ver:
     if r["provision"].startswith("r.23(3)") and r["determination_state"] != "CONFLICTING": err.append("r.23(3) must stay CONFLICTING")
     if r["provision"] == "r.194" and r["version"] == "v1989" and not r["determination_state"].startswith("PROPOSAL"): err.append("r.194 must stay PROPOSAL")
