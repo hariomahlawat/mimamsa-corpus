@@ -1,0 +1,9 @@
+layer,location,status,ingest_policy,qualification
+source_documents,"Mimamsa data/meta, data/raw",Existing,DO_NOT_OVERWRITE,Source identity and SHA256; manual additions require marking and access review
+statute_provisions,Mimamsa data/sections,Existing,LINK_BY_STABLE_ID,Verify amendment chain and as-at dates; do not replace historical text
+manual_commentary,legal_knowledge/manual_commentary,New,STAGING_ONLY,Keep commentary distinct from authoritative law
+curated_knowledge_records,legal_knowledge/kb_records,New,STAGING_ONLY,Original 658 record IDs remain stable
+atomic_claims,legal_knowledge/claims,New,STAGING_ONLY,Do not treat segmentation as legal verification
+curated_judgment_analysis,legal_knowledge/case_analysis,New,STAGING_ONLY,53 case summaries and 81 propositions; verify pinpoints
+legal_reconciliation,legal_knowledge/reconciliation,New,REVIEW_REQUIRED,Exact matches first then text candidates; record reviewer decision
+approval_decisions,legal_knowledge/approvals,New,REVIEW_REQUIRED,Research-verified distinct from JAG approved

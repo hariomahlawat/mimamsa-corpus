@@ -1,0 +1,4 @@
+court,judgment,pdf_page_1based,passage,role_of_text,database_interpretation,release_status
+Supreme Court of India,2026 INSC 993 NC Isaac,69,"Para 19.4: assertion that Dharamvir, Rajbir and Angad continue to hold the field",RESPONDENTS_SUBMISSION_SUMMARISED_BY_COURT,DO_NOT label this sentence a Supreme Court holding or categorical blanket affirmation,BLOCK
+Supreme Court of India,2026 INSC 993 NC Isaac,61,Para 16.4 discusses earlier Angad Singh Titaria and medical board need for reasons,COURT_OWN_HISTORICAL_CASELAW_NARRATIVE,"A direct court reference, but not automatically blanket approval of all of Angad's propositions",REVIEW_PENDING
+Supreme Court of India,2026 INSC 993 NC Isaac,92–93,"Para 39(i)–(iii) and 40: dismissal of present batch, medical board reasons to receive due weight, and 15-year rule 7 exception",OPERATIVE_DISPOSITION_AND_QUALIFICATIONS,This must be considered with 2008 regime status and specific claim date before release,REVIEW_PENDING

@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "LegalAuditFinding",
+  "required": [
+    "finding_id",
+    "batch_id",
+    "record_id",
+    "original_sha256",
+    "workstream",
+    "severity",
+    "issue_type",
+    "claim",
+    "original_location",
+    "original_text",
+    "proposed_text",
+    "rationale",
+    "source_ids",
+    "verification_state",
+    "review_state",
+    "requires_legal_review"
+  ],
+  "properties": {
+    "finding_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "batch_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "record_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "original_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "workstream": {
+      "type": "string",
+      "enum": [
+        "STATUTORY",
+        "JUDGMENT",
+        "PROCEDURE",
+        "CROSS_VOLUME",
+        "DATA_QUALITY",
+        "INDEPENDENT_REVIEW",
+        "MANUAL"
+      ]
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ]
+    },
+    "issue_type": {
+      "type": "string",
+      "enum": [
+        "INCORRECT_AUTHORITY",
+        "OUTDATED_AUTHORITY",
+        "MISSING_AUTHORITY",
+        "UNSUPPORTED_ASSERTION",
+        "MISSTATED_HOLDING",
+        "PROCEDURAL_GAP",
+        "CONFLICT",
+        "POTENTIAL_CONFLICT",
+        "BROKEN_REFERENCE",
+        "DUPLICATE",
+        "METADATA",
+        "OTHER"
+      ]
+    },
+    "claim": {
+      "type": "string",
+      "minLength": 1
+    },
+    "original_location": {
+      "type": "string",
+      "minLength": 1
+    },
+    "original_text": {
+      "type": "string"
+    },
+    "proposed_text": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rationale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "contrary_source_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "verification_state": {
+      "type": "string",
+      "enum": [
+        "NOT_CHECKED",
+        "SOURCE_LOCATED",
+        "SOURCE_VERIFIED",
+        "NOT_FOUND",
+        "CONFLICTING"
+      ]
+    },
+    "review_state": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "IN_REVIEW",
+        "REJECTED",
+        "ACCEPTED_FOR_CANDIDATE",
+        "BLOCKED"
+      ]
+    },
+    "requires_legal_review": {
+      "type": "boolean"
+    },
+    "advisor_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

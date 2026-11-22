@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "title": "LegalAuditEvidenceSource",
+  "required": [
+    "source_id",
+    "source_type",
+    "title",
+    "issuer",
+    "locator",
+    "pinpoint",
+    "retrieved_on",
+    "verification_state",
+    "authenticity"
+  ],
+  "properties": {
+    "source_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "STATUTE",
+        "RULE",
+        "GAZETTE",
+        "REGULATION",
+        "JUDGMENT",
+        "ORDER",
+        "OTHER_PRIMARY",
+        "SECONDARY",
+        "MANUAL"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "issuer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "locator": {
+      "type": "string",
+      "minLength": 1
+    },
+    "pinpoint": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "retrieved_on": {
+      "type": "string",
+      "format": "date"
+    },
+    "version_or_decision_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "effective_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sha256": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "local_path": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "verification_state": {
+      "type": "string",
+      "enum": [
+        "NOT_CHECKED",
+        "SOURCE_LOCATED",
+        "SOURCE_VERIFIED",
+        "NOT_FOUND",
+        "CONFLICTING"
+      ]
+    },
+    "authenticity": {
+      "type": "string",
+      "enum": [
+        "ORIGINAL_OFFICIAL",
+        "OFFICIAL_COMPILATION",
+        "OFFICIAL_COURT_ARCHIVE",
+        "SECONDARY",
+        "UNCONFIRMED",
+        "USER_SUPPLIED_REFERENCE",
+        "MANUAL_EDITION_CORROBORATED"
+      ]
+    },
+    "caveat": {
+      "type": "string"
+    }
+  }
+}

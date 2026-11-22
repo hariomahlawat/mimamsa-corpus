@@ -1,0 +1,28 @@
+name: Legal Database Audit Kit Validation
+
+on:
+  pull_request:
+    paths:
+      - ".claude/agents/**"
+      - "docs/legal-audit/**"
+      - "tools/legal_audit/**"
+      - "tests/test_legal_audit_validator.py"
+      - ".github/workflows/legal-audit-kit-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit-kit-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate audit schemas
+        run: python tools/legal_audit/validate.py --schema-check
+      - name: Test fail-closed review checks
+        run: python -m unittest discover -s tests -p test_legal_audit_validator.py -v

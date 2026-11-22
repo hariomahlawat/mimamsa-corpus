@@ -1,0 +1,9 @@
+gate_id,priority,task,required_evidence,status
+V28-G01,CRITICAL,Verify Rule 23(3) caution,Original Gazette wording or authenticated gazette amendments; compare editions; establish legally operative dates,OPEN
+V28-G02,HIGH,Reconcile Rule 25 cross-reference,Original omission/amendment SRO and publication date; identify whether annotated notes are superseded,OPEN
+V28-G03,HIGH,Verify complete amendment chain for Rules 22/23/180/182,Gazette originals and version-effective date register,OPEN
+V28-G04,HIGH,Check judgment subsequent treatment through Nov 2026,Later authoritative Supreme Court judgments and relevant AFT/High Court developments,OPEN
+V28-G05,HIGH,Obtain original Sanjay Jethi 2013 PDF,"Official Supreme Court PDF, paragraph 53 and final relief",OPEN
+V28-G06,HIGH,Match 2020 Virendra Kumar judgment to Mimamsa corpus,"Case number/date source PDF SHA; v2.7 marks NO_SOURCE_MATCH, which is not proof of absence",OPEN
+V28-G07,MEDIUM,Check AFT Act section 16 characterization,Distinguish body of Virendra Kumar from erroneous printed section heading at judgment para 13,OPEN
+V28-G08,MEDIUM,Manual source edition and access markings,"Edition metadata, cover pages and permissions before wider circulation",OPEN
