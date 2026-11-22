@@ -74,13 +74,19 @@ Updated 2026-11-22 (cycle 3). Branch: `claude/ws-a-statutory` (base 34e75aa9). W
   | Status | AR rules | AA sections |
   | --- | --- | --- |
   | ESTABLISHED_SUBJECT_TO_REGISTER_GAPS | 2 (r.13A, r.15A) | 0 |
-  | PARTIALLY_ESTABLISHED | 31 | 9 |
-  | NOT_ESTABLISHED | 74 | 103 |
+  | PARTIALLY_ESTABLISHED | 31 | 8 |
+  | NOT_ESTABLISHED | 74 | 104 |
 
   - No AA section is established because the enacted 1950 text is not held.
   - Base-text page numbers come from the text layer and are locators only.
 - [x] **Commencement readings** (`commencement_readings_cycle3.csv`): AR-010, AR-011 and AR-025 print no commencement clause (NOT_STATED_PENDING_ADVICE). AR-024 is corrected: r.1(2) states commencement on publication, and **both** items 2 and 3 carry the 04-06-1979 deeming clause.
 - [x] New PICs: `identity_transcription_register_cycle3.csv` (WSA-PIC-55..59). New acquisition needs: `acquisition_requests_cycle3.csv` (ACQ-C3-01..04).
+
+## Cycle 3 review fix (PR #24)
+- [x] Army Act s.137 was overstated. It now lists Act 37/1992, A.L.O. (No.3) 1956 and S.O. 3912(E)/2019; amendments are NOT ALL image-checked; status NOT_ESTABLISHED. s.2 now lists A.L.O. 1956.
+- [x] Regression check `tools/check_completeness_cycle3.py` (C1/C2 plus self-test): it fails on the old table and passes on the new one.
+- [x] Addendum `army_act_amendment_chain_addendum_cycle3.csv` (AA-C3-01..04). New acquisition rows ACQ-C3-05 and -06.
+- [x] Details in `REVIEW_FIX_CYCLE3.md`. AA counts: partial 9 → 8, not established 103 → 104.
 
 ## Next
 - After approval of ACQ-C2:
