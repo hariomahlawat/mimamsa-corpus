@@ -9,6 +9,7 @@ on:
       - "scripts/push_legal_knowledge.py"
       - "scripts/reconcile_legal_sources.py"
       - "scripts/archive_supreme_court_pilot.py"
+      - "scripts/archive_sc_judgments_v29.py"
       - "scripts/push_mml_originals.py"
       - ".mml_transfer/**"
       - ".github/workflows/sync-legal-knowledge-hf.yml"
@@ -53,6 +54,8 @@ jobs:
       - name: Attempt official Supreme Court PDF pilot archive with readback
         continue-on-error: true
         run: python scripts/archive_supreme_court_pilot.py
+      - name: Archive Bedi 1982 and Ranjit Thakur 1987 official JUDIS source PDFs
+        run: python scripts/archive_sc_judgments_v29.py
       - name: Verify checksum and reconstruct original MML archive
         if: ${{ hashFiles('.mml_transfer/part_000.b64') != '' }}
         run: |
