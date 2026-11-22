@@ -35,6 +35,12 @@ for name, data, key in (("register", reg, "instr_id"), ("chronology", chron, "pr
         if eff and not st.startswith("STATED_IN_INSTRUMENT"): err.append(f"{name} {r[key]}: effective_date set without a stated commencement")
         if st.startswith("STATED_IN_INSTRUMENT") and not DATE.fullmatch(eff): err.append(f"{name} {r[key]}: stated commencement but no effective_date")
         if eff and DATE.fullmatch(eff) is None: err.append(f"{name} {r[key]}: bad effective_date")
+        # a retrospective deemed effect stated in the instrument is kept apart from commencement (effective_date)
+        dm = r.get("retrospective_deemed_effect_from", "")
+        if dm:
+            if DATE.fullmatch(dm) is None: err.append(f"{name} {r[key]}: bad retrospective_deemed_effect_from")
+            elif not st.startswith("STATED_IN_INSTRUMENT") or not DATE.fullmatch(eff): err.append(f"{name} {r[key]}: deemed effect without a stated commencement")
+            elif dm >= eff: err.append(f"{name} {r[key]}: deemed effect not earlier than commencement")
 for r in reg:
     if r["evidence_level"] == "IMAGE_CHECKED" and not r.get("continuation_pages_status", "").startswith("ALL_IMAGE_CHECKED"):
         err.append(f"{r['instr_id']}: IMAGE_CHECKED but continuation pages not all image-checked")

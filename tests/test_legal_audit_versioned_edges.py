@@ -51,6 +51,8 @@ class VersionedEdges(unittest.TestCase):
             reg[r["change_id"]] = r
         for r in rows("WS-A-STATUTORY/army_act_amendment_chain.csv"):
             reg[r["chain_id"]] = r
+        for r in rows("WS-A-STATUTORY/army_act_amendment_chain_addendum_cycle3.csv"):  # declared input since reconcile
+            reg[r["chain_id"]] = r
         for e in EDGES:
             self.assertIn(e["version_id"], reg, e["version_id"])
             # Grouped amendment events (review fix PR #25): every evidence row must exist, the version_id must be one
@@ -92,16 +94,86 @@ class VersionedEdges(unittest.TestCase):
         self.assertEqual(sorted(re.findall(r"\d{4}-\d{2}-\d{2}", g["status"])), ["1979-06-04", "1988-09-17"])
         self.assertIn("EVIDENCE_EFFECTIVE_DATE_CONFLICT", g["conflicts"])
 
-    def test_conflicting_evidence_present_in_real_versions(self):
-        """r.2: PCL-216-1988 (commencement 1988-09-17) vs PCL-BL-02 (deemed effect 1979-06-04) is a flagged,
-        unresolved conflicting-evidence event. No KB record cites r.2, so it yields no edge; asserted on versions()."""
+    def test_r2_distinct_fields_model(self):
+        """r.2 (S.R.O. 216/1988): commencement 1988-09-17 and retrospective deemed effect 1979-06-04 are DISTINCT
+        fields of ONE event, flagged for AQ-06 - not CONFLICTING_EVIDENCE.
+
+        Data correction, not a weakening: the earlier assertion that r.2 was CONFLICTING_EVIDENCE reflected
+        WS-A's provision_change_log.csv holding the deemed date (1979-06-04) in effective_date for PCL-BL-02.
+        WS-A corrected the row in place (18ae1078: effective_date 1988-09-17 + retrospective_deemed_effect_from
+        1979-06-04), matching ARMY-RULES-CHAIN-01 after PR #28. A genuine conflict (two different STATED
+        commencement dates) is still flagged: see test_conflicting_evidence_path_fixture."""
         groups = VE.versions().get(("AR", "2"), [])
         g = [x for x in groups if {"PCL-216-1988", "PCL-BL-02"} <= set(x["evidence_ids"])]
-        self.assertEqual(len(g), 1)
-        self.assertTrue(g[0]["status"].startswith("CONFLICTING_EVIDENCE"))
-        self.assertEqual(sorted(re.findall(r"\d{4}-\d{2}-\d{2}", g[0]["status"])), ["1979-06-04", "1988-09-17"])
-        self.assertEqual(g[0]["eff"], "")
+        self.assertEqual(len(g), 1, "one amendment event for r.2 under S.R.O. 216/1988")
+        g = g[0]
+        self.assertEqual(g["eff"], "1988-09-17")
+        self.assertTrue(g["status"].startswith("STATED_IN_INSTRUMENT"))
+        self.assertEqual(g["retro"], "1979-06-04")
+        self.assertEqual(g["pub"], "1988-09-17")
+        self.assertNotIn("EVIDENCE_EFFECTIVE_DATE_CONFLICT", g["conflicts"])
+        self.assertNotIn("EVIDENCE_DEEMED_EFFECT_CONFLICT", g["conflicts"])
 
+    def test_retrospective_fixture_is_not_a_conflict(self):
+        base = {"source": "fixture", "change": "x", "sub": False, "ocr": False, "det": "", "conflict": "",
+                "ikey": "SRO-216-1988", "pub": "1988-09-17", "eff": "1988-09-17", "status": "STATED_IN_INSTRUMENT (on publication)"}
+        g = VE.group_events([dict(base, version_id="FX-A", retro="1979-06-04"), dict(base, version_id="FX-B", retro="")])
+        self.assertEqual(len(g), 1)
+        self.assertEqual((g[0]["eff"], g[0]["retro"]), ("1988-09-17", "1979-06-04"))
+        self.assertEqual(g[0]["conflicts"], [])
+        two = VE.group_events([dict(base, version_id="FX-A", retro="1979-06-04"), dict(base, version_id="FX-B", retro="1980-01-01")])
+        self.assertIn("EVIDENCE_DEEMED_EFFECT_CONFLICT", two[0]["conflicts"])
+
+    def test_edges_keep_publication_commencement_and_deemed_effect_distinct(self):
+        for e in EDGES:
+            if e["retrospective_deemed_effect_from"]:
+                self.assertIn("RETROSPECTIVE_DEEMED_EFFECT_AQ06", e["flags"].split(";"))
+                self.assertNotEqual(e["valid_from"], e["retrospective_deemed_effect_from"])
+            if "RETROSPECTIVE_DEEMED_EFFECT_AQ06" in e["flags"].split(";"):
+                self.assertRegex(e["retrospective_deemed_effect_from"], ISO)
+
+
+class AddendumInput(unittest.TestCase):
+    """WS-A army_act_amendment_chain_addendum_cycle3.csv is a declared, pinned input and its rows are read."""
+
+    def test_declared_and_pinned(self):
+        self.assertIn("wsa_aa_chain_addendum", VE.INPUTS)
+        self.assertEqual(VE.INPUTS["wsa_aa_chain_addendum"].name, "army_act_amendment_chain_addendum_cycle3.csv")
+        self.assertIn("wsa_aa_chain_addendum", SUMMARY["inputs"])
+        self.assertIn("army_act_amendment_chain_addendum_cycle3.csv", (WSD / "relation_graph_versioned_report.md").read_text(encoding="utf-8"))
+
+    def test_rows_are_read(self):
+        V = VE.versions()
+        ids = {i for gs in V.values() for g in gs for i in g["evidence_ids"]}
+        for row in ("AA-C3-01", "AA-C3-02", "AA-C3-03"):
+            self.assertIn(row, ids, f"addendum row {row} not read")
+        self.assertNotIn("AA-C3-04", ids, "extension-only row ('none ...') must stay excluded")
+        self.assertTrue(any(e["version_source"].endswith("army_act_amendment_chain_addendum_cycle3.csv") or
+                            "AA-C3-" in e["evidence_refs"] for e in EDGES))
+
+    def test_extends_row_joins_the_existing_event(self):
+        V = VE.versions()
+        g = [x for x in V.get(("AA", "137"), []) if "AA-C3-01" in x["evidence_ids"]]
+        self.assertEqual(len(g), 1)
+        self.assertIn("AA-02", g[0]["evidence_ids"], "AA-C3-01 declares 'extends AA-02': same instrument, one event")
+
+    def test_instrument_not_examined_is_text_only_never_stated(self):
+        for e in EDGES:
+            refs = e["evidence_refs"].split(";")
+            if any(r in ("AA-C3-01", "AA-C3-02", "AA-C3-03") for r in refs):
+                self.assertIn("INSTRUMENT_NOT_EXAMINED", e["flags"].split(";"), e)
+                self.assertIn("TEXT_OR_OCR_EVIDENCE_ONLY", e["flags"].split(";"), e)
+                if set(refs) <= {"AA-C3-01", "AA-C3-02", "AA-C3-03"}:
+                    self.assertEqual(e["valid_from"], "", e)
+
+    def test_no_amending_act_own_sections_from_addendum(self):
+        # AA-C3-03's change text cites 's. 2 and the First Schedule' of Act 36/1957; only s.194 is an Army Act provision
+        V = VE.versions()
+        aa3 = sorted(k[1] for k, gs in V.items() for g in gs if k[0] == "AA" and "AA-C3-03" in g["evidence_ids"])
+        self.assertEqual(aa3, ["194"])
+
+
+class VersionedEdgesTail(unittest.TestCase):
     def test_valid_to_not_before_valid_from(self):
         for e in EDGES:
             if e["valid_from"] and e["valid_to"]:

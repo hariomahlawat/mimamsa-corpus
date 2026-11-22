@@ -1,48 +1,48 @@
-provision,event,instrument_id,instrument,instrument_date,publication_date,commencement_as_printed,effective_date,effective_date_status,temporal_note,evidence_level
-"r.2 cl.(cc),(di),(dii),(diii)",inserted,AR-016,S.R.O. 188/1979,1979-06-04,1979-07-28,on publication,1979-07-28,STATED_IN_INSTRUMENT (in force on publication),,IMAGE_CHECKED
-"r.2 cl.(cc),(di),(dii)",omitted w.e.f. 04-06-1979,AR-024,S.R.O. 216/1988,1988-08-30,1988-09-17,retrospective,1979-06-04,STATED_IN_INSTRUMENT (retrospective; legal effect AQ-06),Retrospective omission: legal review needed on effect for 1979-1988,IMAGE_CHECKED
-r.13 (Table),amended,AR-004,S.R.O. 351/1960,1960-10-07,1960-10-22,unknown,,NOT_DETERMINED (commencement clause not yet read),,TEXT_LAYER_ONLY
-r.13 (Table),amended,AR-010,S.R.O. 116/1965,1965-03-27,1965-04-10,not recorded,,NOT_DETERMINED (commencement clause not yet read),,IMAGE_CHECKED
-r.13 (Table),amended,AR-032,S.R.O. 22/2010,2010-05-13,2010-05-29,unknown,,NOT_DETERMINED (commencement clause not yet read),,TEXT_LAYER_ONLY
-r.13(2A),inserted,AR-009,S.R.O. 126/1964,1964-03-12,1964-03-28,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,IMAGE_CHECKED
-r.13A,inserted,AR-014,S.R.O. 5/1968,1968-12-23,1969-01-11,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,IMAGE_CHECKED
-r.13A,amended ('or the Military Secretary'),AR-028,S.R.O. 235/1991,1991-10-01,1991-11-09,on publication,1991-11-09,STATED_IN_INSTRUMENT (in force on publication),,IMAGE_CHECKED
-r.14,substituted,AR-006,S.R.O. 205/1961,1961-07-12,1961-07-22,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,IMAGE_CHECKED
-r.14,amended (itemised in WS-A provision_change_log PCL-93-*),AR-029,S.R.O. 17(E)/1993,1993-12-06,1993-12-06,on publication (r.1(2)),1993-12-06,STATED_IN_INSTRUMENT (in force on publication),,IMAGE_CHECKED (WS-A PCL-93-*)
-r.15,substituted,AR-006,S.R.O. 205/1961,1961-07-12,1961-07-22,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,IMAGE_CHECKED (PIC-30/31)
-r.15A,inserted,AR-006,S.R.O. 205/1961,1961-07-12,1961-07-22,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,IMAGE_CHECKED (PIC-30/31)
-"r.15A(3),(4)",amended ('or the Adjutant General'),AR-027,S.R.O. 61/1991,1991-02-07,1991-02-23,on publication,1991-02-23,STATED_IN_INSTRUMENT (in force on publication),,IMAGE_CHECKED
-r.15B,inserted,AR-034,S.R.O. 17(E)/2019,2019-12-28,2019-12-28,on publication,2019-12-28,STATED_IN_INSTRUMENT (in force on publication),,IMAGE_CHECKED
-r.16,substituted,AR-006,S.R.O. 205/1961,1961-07-12,1961-07-22,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,IMAGE_CHECKED (PIC-30/31)
-"r.16A,16B,16C",inserted,AR-016,S.R.O. 188/1979,1979-06-04,1979-07-28,on publication,1979-07-28,STATED_IN_INSTRUMENT (in force on publication),,IMAGE_CHECKED
-r.16A(5)(g),substituted; (h)->(j); new (h),AR-021,S.R.O. 278/1985,1985-11-29,1985-12-28,on publication,1985-12-28,STATED_IN_INSTRUMENT (in force on publication),,IMAGE_CHECKED
-r.16A Explanation,Explanation added (deemed effective 04-06-1979; AQ-06/OQ-A-12),AR-024,S.R.O. 216/1988,1988-08-30,1988-09-17,not recorded,,NOT_DETERMINED (commencement clause not yet read),,IMAGE_CHECKED
-"r.16A(5)(g)(ii),(iii)",portion omitted; (iii) added,AR-026,S.R.O. 44/1991,1991-02-01,1991-02-23,on publication,1991-02-23,STATED_IN_INSTRUMENT (in force on publication),Option for officers commissioned before 26-07-1984,IMAGE_CHECKED
-"r.16A,16B",amended (itemised in WS-A provision_change_log PCL-93-*),AR-029,S.R.O. 17(E)/1993,1993-12-06,1993-12-06,on publication (r.1(2)),1993-12-06,STATED_IN_INSTRUMENT (in force on publication),,IMAGE_CHECKED (WS-A PCL-93-*)
-"r.16A(4),(5)(a),(6)(a)",amended,AR-034,S.R.O. 17(E)/2019,2019-12-28,2019-12-28,on publication,2019-12-28,STATED_IN_INSTRUMENT (in force on publication),,IMAGE_CHECKED
-r.16A(4),proviso omitted; (4)(a) inserted,AR-035,S.R.O. 6(E)/2022,2022-06-06,2022-06-06,on publication,2022-06-06,STATED_IN_INSTRUMENT (in force on publication),,IMAGE_CHECKED
-r.17,substituted,AR-006,S.R.O. 205/1961,1961-07-12,1961-07-22,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,IMAGE_CHECKED (PIC-30/31)
-r.22,substituted,AR-029,S.R.O. 17(E)/1993,1993-12-06,1993-12-06,on publication (r.1(2)),1993-12-06,STATED_IN_INSTRUMENT (in force on publication),Possible later change by S.R.O. 258/2002 (GAP),IMAGE_CHECKED (WS-A PCL-93-*)
-r.23,"NO AMENDMENT LOCATED (31 instruments examined; gaps AR-001, AR-030, AR-036, hints AR-012/013/015)",,,,,,,NOT_APPLICABLE,Wording CONFLICTING: 1954 Gazette 'not obliged' vs India Code 'obliged',n/a
-r.25,omitted,AR-029,S.R.O. 17(E)/1993,1993-12-06,1993-12-06,on publication (r.1(2)),1993-12-06,STATED_IN_INSTRUMENT (in force on publication),,IMAGE_CHECKED (WS-A PCL-93-*)
-"rr.26,33,36,37,52,53,54,57,58,59,62,68,92,96,106,115,118(?),134",amended (itemised in WS-A provision_change_log PCL-93-*),AR-029,S.R.O. 17(E)/1993,1993-12-06,1993-12-06,on publication (r.1(2)),1993-12-06,STATED_IN_INSTRUMENT (in force on publication),Itemisation outstanding,IMAGE_CHECKED (WS-A PCL-93-*)
-r.59A,inserted,AR-017,S.R.O. 246/1982,1982-10-12,1982-11-13,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,IMAGE_CHECKED
-r.59A,omitted,AR-029,S.R.O. 17(E)/1993,1993-12-06,1993-12-06,on publication (r.1(2)),1993-12-06,STATED_IN_INSTRUMENT (in force on publication),,IMAGE_CHECKED (WS-A PCL-93-*)
-r.80A,inserted,AR-019,S.R.O. 55/1985,1985-02-22,1985-03-09,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,IMAGE_CHECKED
-r.80A,corrigendum ('or'->'of'),AR-020,S.R.O. 68/1985,1985-04-01,1985-04-20,n/a,,NOT_APPLICABLE,Corrigendum operates on the printed text from original publication (legal advisor to confirm),IMAGE_CHECKED
-r.147,substituted,AR-022,S.R.O. 169/1987,1987-05-15,1987-05-30,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,IMAGE_CHECKED
-r.164,amended (80-A inserted in list),AR-019,S.R.O. 55/1985,1985-02-22,1985-03-09,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,IMAGE_CHECKED
-r.168(2),amended,AR-002,S.R.O. 331/1960,1960-09-23,1960-10-08,unknown,,NOT_DETERMINED (commencement clause not yet read),,TEXT_LAYER_ONLY
-r.168(3),amended,AR-005,S.R.O. 404/1960,1960-11-21,1960-12-03,unknown,,NOT_DETERMINED (commencement clause not yet read),,TEXT_LAYER_ONLY
-r.177,substituted,AR-031,S.R.O. 8(E)/2003,2003-06-23,2003-06-24,on publication,2003-06-24,STATED_IN_INSTRUMENT (in force on publication),,IMAGE_CHECKED
-r.184,substituted,AR-018,S.R.O. 44/1985,1985-01-24,1985-02-16,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,IMAGE_CHECKED
-r.187(1),amended ('except rule 13'),AR-007,S.R.O. 1/1961,1961-12-22,1962-01-06,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,IMAGE_CHECKED
-r.188(e) (declarations under),declaration (not amendment),AR-008,S.R.O. 34/1963,1963-01-05,1963-01-19,n/a,,NOT_APPLICABLE,,IMAGE_CHECKED
-r.188(e) (declarations under),declaration (not amendment),AR-033,S.R.O. 2(E)/2018,2018-02-20,2018-02-20,from date of notification,2018-02-20,STATED_IN_INSTRUMENT (declaration),,IMAGE_CHECKED
-r.192,proviso inserted,AR-011,S.R.O. 215/1965,1965-06-17,1965-07-03,not recorded,,NOT_DETERMINED (commencement clause not yet read),,IMAGE_CHECKED
-r.193,substituted (s.91(i) only; 'Officer Commanding an Army'),AR-023,S.R.O. 302/1987,1987-09-18,1987-10-10,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),C-08: superseded by S.R.O. 17(E)/1993 item 38 (s.90(i) and s.91(i)); see next row,IMAGE_CHECKED
-r.193,substituted (s.90(i) and s.91(i); 'officer commanding the Army'),AR-029,S.R.O. 17(E)/1993 item 38,1993-12-06,1993-12-06,on publication (r.1(2)),1993-12-06,STATED_IN_INSTRUMENT (in force on publication),C-08: matches the India Code compilation text (PIC-29). Chronology on located instruments: 1954 s.91(i) C-in-C -> 1987 s.91(i) -> 1993 s.90(i)+91(i). State OPEN pending legal review,"IMAGE_CHECKED (WS-A; coordinator re-render, review WS-A-1)"
-r.194,substituted (adds 'or the Officer Commanding an Army' for officers),AR-025,S.R.O. 332/1989,1989-09-26,1989-12-02,not recorded,,NOT_DETERMINED (commencement clause not yet read),C-09 (r.194): India Code compilation lacks the words added by S.R.O. 332/1989,IMAGE_CHECKED
-"App. I Forms I,II",amended,AR-003,S.R.O. 348/1960,1960-10-03,1960-10-15,unknown,,NOT_DETERMINED (commencement clause not yet read),,TEXT_LAYER_ONLY
-App. I Form I,amended,AR-010,S.R.O. 116/1965,1965-03-27,1965-04-10,not recorded,,NOT_DETERMINED (commencement clause not yet read),,IMAGE_CHECKED
-"App. IV Pt II Forms A,E,F; App. V Form J",amended,AR-005,S.R.O. 404/1960,1960-11-21,1960-12-03,unknown,,NOT_DETERMINED (commencement clause not yet read),,TEXT_LAYER_ONLY
+provision,event,instrument_id,instrument,instrument_date,publication_date,commencement_as_printed,effective_date,effective_date_status,retrospective_deemed_effect_from,temporal_note,evidence_level
+"r.2 cl.(cc),(di),(dii),(diii)",inserted,AR-016,S.R.O. 188/1979,1979-06-04,1979-07-28,on publication,1979-07-28,STATED_IN_INSTRUMENT (in force on publication),,,IMAGE_CHECKED
+"r.2 cl.(cc),(di),(dii)",omitted w.e.f. 04-06-1979,AR-024,S.R.O. 216/1988,1988-08-30,1988-09-17,r.1(2): in force on the date of publication in the Official Gazette (1988-09-17); items 2 and 3 each deemed effective from 04-06-1979,1988-09-17,STATED_IN_INSTRUMENT (r.1(2): in force on publication 1988-09-17); retrospective deemed effect from 1979-06-04 recorded separately in retrospective_deemed_effect_from (legal effect AQ-06),1979-06-04,Retrospective omission: legal review needed on effect for 1979-1988,IMAGE_CHECKED
+r.13 (Table),amended,AR-004,S.R.O. 351/1960,1960-10-07,1960-10-22,unknown,,NOT_DETERMINED (commencement clause not yet read),,,TEXT_LAYER_ONLY
+r.13 (Table),amended,AR-010,S.R.O. 116/1965,1965-03-27,1965-04-10,no commencement clause printed (r.1 gives short title only),,NOT_STATED_PENDING_ADVICE (AQ-05; instrument silent; no effective date inferred from publication),,,IMAGE_CHECKED
+r.13 (Table),amended,AR-032,S.R.O. 22/2010,2010-05-13,2010-05-29,unknown,,NOT_DETERMINED (commencement clause not yet read),,,TEXT_LAYER_ONLY
+r.13(2A),inserted,AR-009,S.R.O. 126/1964,1964-03-12,1964-03-28,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,,IMAGE_CHECKED
+r.13A,inserted,AR-014,S.R.O. 5/1968,1968-12-23,1969-01-11,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,,IMAGE_CHECKED
+r.13A,amended ('or the Military Secretary'),AR-028,S.R.O. 235/1991,1991-10-01,1991-11-09,on publication,1991-11-09,STATED_IN_INSTRUMENT (in force on publication),,,IMAGE_CHECKED
+r.14,substituted,AR-006,S.R.O. 205/1961,1961-07-12,1961-07-22,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,,IMAGE_CHECKED
+r.14,amended (itemised in WS-A provision_change_log PCL-93-*),AR-029,S.R.O. 17(E)/1993,1993-12-06,1993-12-06,on publication (r.1(2)),1993-12-06,STATED_IN_INSTRUMENT (in force on publication),,,IMAGE_CHECKED (WS-A PCL-93-*)
+r.15,substituted,AR-006,S.R.O. 205/1961,1961-07-12,1961-07-22,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,,IMAGE_CHECKED (PIC-30/31)
+r.15A,inserted,AR-006,S.R.O. 205/1961,1961-07-12,1961-07-22,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,,IMAGE_CHECKED (PIC-30/31)
+"r.15A(3),(4)",amended ('or the Adjutant General'),AR-027,S.R.O. 61/1991,1991-02-07,1991-02-23,on publication,1991-02-23,STATED_IN_INSTRUMENT (in force on publication),,,IMAGE_CHECKED
+r.15B,inserted,AR-034,S.R.O. 17(E)/2019,2019-12-28,2019-12-28,on publication,2019-12-28,STATED_IN_INSTRUMENT (in force on publication),,,IMAGE_CHECKED
+r.16,substituted,AR-006,S.R.O. 205/1961,1961-07-12,1961-07-22,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,,IMAGE_CHECKED (PIC-30/31)
+"r.16A,16B,16C",inserted,AR-016,S.R.O. 188/1979,1979-06-04,1979-07-28,on publication,1979-07-28,STATED_IN_INSTRUMENT (in force on publication),,,IMAGE_CHECKED
+r.16A(5)(g),substituted; (h)->(j); new (h),AR-021,S.R.O. 278/1985,1985-11-29,1985-12-28,on publication,1985-12-28,STATED_IN_INSTRUMENT (in force on publication),,,IMAGE_CHECKED
+r.16A Explanation,Explanation added (deemed added from 04-06-1979; AQ-06/OQ-A-12),AR-024,S.R.O. 216/1988,1988-08-30,1988-09-17,r.1(2): in force on the date of publication in the Official Gazette (1988-09-17); items 2 and 3 each deemed effective from 04-06-1979,1988-09-17,STATED_IN_INSTRUMENT (r.1(2): in force on publication 1988-09-17); retrospective deemed effect from 1979-06-04 recorded separately in retrospective_deemed_effect_from (legal effect AQ-06),1979-06-04,Retrospective addition: legal review needed on effect for 1979-1988,IMAGE_CHECKED
+"r.16A(5)(g)(ii),(iii)",portion omitted; (iii) added,AR-026,S.R.O. 44/1991,1991-02-01,1991-02-23,on publication,1991-02-23,STATED_IN_INSTRUMENT (in force on publication),,Option for officers commissioned before 26-07-1984,IMAGE_CHECKED
+"r.16A,16B",amended (itemised in WS-A provision_change_log PCL-93-*),AR-029,S.R.O. 17(E)/1993,1993-12-06,1993-12-06,on publication (r.1(2)),1993-12-06,STATED_IN_INSTRUMENT (in force on publication),,,IMAGE_CHECKED (WS-A PCL-93-*)
+"r.16A(4),(5)(a),(6)(a)",amended,AR-034,S.R.O. 17(E)/2019,2019-12-28,2019-12-28,on publication,2019-12-28,STATED_IN_INSTRUMENT (in force on publication),,,IMAGE_CHECKED
+r.16A(4),proviso omitted; (4)(a) inserted,AR-035,S.R.O. 6(E)/2022,2022-06-06,2022-06-06,on publication,2022-06-06,STATED_IN_INSTRUMENT (in force on publication),,,IMAGE_CHECKED
+r.17,substituted,AR-006,S.R.O. 205/1961,1961-07-12,1961-07-22,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,,IMAGE_CHECKED (PIC-30/31)
+r.22,substituted,AR-029,S.R.O. 17(E)/1993,1993-12-06,1993-12-06,on publication (r.1(2)),1993-12-06,STATED_IN_INSTRUMENT (in force on publication),,Possible later change by S.R.O. 258/2002 (GAP),IMAGE_CHECKED (WS-A PCL-93-*)
+r.23,"NO AMENDMENT LOCATED (31 instruments examined; gaps AR-001, AR-030, AR-036, hints AR-012/013/015)",,,,,,,NOT_APPLICABLE,,Wording CONFLICTING: 1954 Gazette 'not obliged' vs India Code 'obliged',n/a
+r.25,omitted,AR-029,S.R.O. 17(E)/1993,1993-12-06,1993-12-06,on publication (r.1(2)),1993-12-06,STATED_IN_INSTRUMENT (in force on publication),,,IMAGE_CHECKED (WS-A PCL-93-*)
+"rr.26,33,36,37,52,53,54,57,58,59,62,68,92,96,106,115,118(?),134",amended (itemised in WS-A provision_change_log PCL-93-*),AR-029,S.R.O. 17(E)/1993,1993-12-06,1993-12-06,on publication (r.1(2)),1993-12-06,STATED_IN_INSTRUMENT (in force on publication),,Itemisation outstanding,IMAGE_CHECKED (WS-A PCL-93-*)
+r.59A,inserted,AR-017,S.R.O. 246/1982,1982-10-12,1982-11-13,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,,IMAGE_CHECKED
+r.59A,omitted,AR-029,S.R.O. 17(E)/1993,1993-12-06,1993-12-06,on publication (r.1(2)),1993-12-06,STATED_IN_INSTRUMENT (in force on publication),,,IMAGE_CHECKED (WS-A PCL-93-*)
+r.80A,inserted,AR-019,S.R.O. 55/1985,1985-02-22,1985-03-09,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,,IMAGE_CHECKED
+r.80A,corrigendum ('or'->'of'),AR-020,S.R.O. 68/1985,1985-04-01,1985-04-20,n/a,,NOT_APPLICABLE,,Corrigendum operates on the printed text from original publication (legal advisor to confirm),IMAGE_CHECKED
+r.147,substituted,AR-022,S.R.O. 169/1987,1987-05-15,1987-05-30,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,,IMAGE_CHECKED
+r.164,amended (80-A inserted in list),AR-019,S.R.O. 55/1985,1985-02-22,1985-03-09,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,,IMAGE_CHECKED
+r.168(2),amended,AR-002,S.R.O. 331/1960,1960-09-23,1960-10-08,unknown,,NOT_DETERMINED (commencement clause not yet read),,,TEXT_LAYER_ONLY
+r.168(3),amended,AR-005,S.R.O. 404/1960,1960-11-21,1960-12-03,unknown,,NOT_DETERMINED (commencement clause not yet read),,,TEXT_LAYER_ONLY
+r.177,substituted,AR-031,S.R.O. 8(E)/2003,2003-06-23,2003-06-24,on publication,2003-06-24,STATED_IN_INSTRUMENT (in force on publication),,,IMAGE_CHECKED
+r.184,substituted,AR-018,S.R.O. 44/1985,1985-01-24,1985-02-16,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,,IMAGE_CHECKED
+r.187(1),amended ('except rule 13'),AR-007,S.R.O. 1/1961,1961-12-22,1962-01-06,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,,IMAGE_CHECKED
+r.188(e) (declarations under),declaration (not amendment),AR-008,S.R.O. 34/1963,1963-01-05,1963-01-19,n/a,,NOT_APPLICABLE,,,IMAGE_CHECKED
+r.188(e) (declarations under),declaration (not amendment),AR-033,S.R.O. 2(E)/2018,2018-02-20,2018-02-20,from date of notification,2018-02-20,STATED_IN_INSTRUMENT (declaration),,,IMAGE_CHECKED
+r.192,proviso inserted,AR-011,S.R.O. 215/1965,1965-06-17,1965-07-03,no commencement clause printed (r.1 gives short title only),,NOT_STATED_PENDING_ADVICE (AQ-05; instrument silent; no effective date inferred from publication),,,IMAGE_CHECKED
+r.193,substituted (s.91(i) only; 'Officer Commanding an Army'),AR-023,S.R.O. 302/1987,1987-09-18,1987-10-10,not stated,,NOT_STATED_PENDING_ADVICE (AQ-05),,C-08: superseded by S.R.O. 17(E)/1993 item 38 (s.90(i) and s.91(i)); see next row,IMAGE_CHECKED
+r.193,substituted (s.90(i) and s.91(i); 'officer commanding the Army'),AR-029,S.R.O. 17(E)/1993 item 38,1993-12-06,1993-12-06,on publication (r.1(2)),1993-12-06,STATED_IN_INSTRUMENT (in force on publication),,C-08: matches the India Code compilation text (PIC-29). Chronology on located instruments: 1954 s.91(i) C-in-C -> 1987 s.91(i) -> 1993 s.90(i)+91(i). State OPEN pending legal review,"IMAGE_CHECKED (WS-A; coordinator re-render, review WS-A-1)"
+r.194,substituted (adds 'or the Officer Commanding an Army' for officers),AR-025,S.R.O. 332/1989,1989-09-26,1989-12-02,no commencement clause printed (r.1 gives short title only),,NOT_STATED_PENDING_ADVICE (AQ-05; instrument silent; no effective date inferred from publication),,C-09 (r.194): India Code compilation lacks the words added by S.R.O. 332/1989,IMAGE_CHECKED
+"App. I Forms I,II",amended,AR-003,S.R.O. 348/1960,1960-10-03,1960-10-15,unknown,,NOT_DETERMINED (commencement clause not yet read),,,TEXT_LAYER_ONLY
+App. I Form I,amended,AR-010,S.R.O. 116/1965,1965-03-27,1965-04-10,no commencement clause printed (r.1 gives short title only),,NOT_STATED_PENDING_ADVICE (AQ-05; instrument silent; no effective date inferred from publication),,,IMAGE_CHECKED
+"App. IV Pt II Forms A,E,F; App. V Form J",amended,AR-005,S.R.O. 404/1960,1960-11-21,1960-12-03,unknown,,NOT_DETERMINED (commencement clause not yet read),,,TEXT_LAYER_ONLY

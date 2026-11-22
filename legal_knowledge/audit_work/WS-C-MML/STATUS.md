@@ -74,6 +74,47 @@ Parser fix for letter suffixes, list continuation and uncoded case names. Detail
   - Corrected PC-11, PC-12, PC-13 and PC-19 comparator commencement/effective dates to the chain at 9b48b08e (AR-028, AR-031, AR-034 and AR-035: in force on publication).
   - Crosswalk and procedure crosswalk were already current; regenerating them gives byte-identical output.
 
+## Cycle 3 reconciliation (branch claude/ws-c-cycle3-reconcile, base 2a66cd04 = integration #29 + PR #28)
+PR #28 updated ARMY-RULES-CHAIN-01: AR-010, AR-011 and AR-025 have no commencement clause printed (NOT_STATED_PENDING_ADVICE); AR-024 has a separate field `retrospective_deemed_effect_from`.
+
+**Regenerated files** (a second run gives byte-identical output):
+- `procedure_crosswalk.csv`, from the in-tree WS-A `provision_change_log.csv`:
+  - PX-06 (r.192) and PX-20 (r.194) now carry the new values;
+  - PX-19 carries AR-024's effective date 1988-09-17;
+  - new separate column `retrospective_deemed_effect_from` (r.16A:AR-024:1979-06-04), never merged into effective dates.
+- `mml_provision_crosswalk.csv`: XW-C-0448..0451 (r.13) commencement text updated.
+- `mml_provision_crosswalk_v2_cycle3.csv`: rebuilt from the crosswalk.
+- `input_manifest.json`: now also lists the in-tree WS-A change log and `page_image_checks_chain.csv`.
+
+**Hand-maintained rows corrected:**
+- PG-02 and PC-16 (S.R.O. 332/1989): commencement and effective-date status set per AR-025; PIC-39 cited (render 260e5119…).
+
+**Coordinator decision applied:** the stale gap-register date rows PG-01, PG-04, PG-07, PG-08, PG-09 and PG-14 (AR-006, AR-023, AR-029, AR-034, AR-035) now carry the current ARMY-RULES-CHAIN-01 publication date, commencement as printed, effective date and status.
+- Two columns were added to the gap register: `chain_effective_date` and `chain_date_source`, which cites the chain row and its PIC or evidence locator.
+- AR-006 and AR-023 stay NOT_STATED_PENDING_ADVICE (AQ-05), as recorded in the chain.
+- The PG-02 source is also recorded.
+
+**Pre-existing unittest failure (committed by coordinator decision):** `python3 -m unittest discover -s tests -p 'test_legal_audit_*.py'` exits 1 with two failures in `test_legal_audit_versioned_edges`:
+- `test_inputs_pinned_and_current`: "input version_register changed - regenerate versioned edges: run scripts/build_versioned_edges.py";
+- `test_regeneration_is_byte_identical`.
+
+It reproduces identically at the untouched base 2a66cd04 (caused by PR #28). WS-D is regenerating those outputs on its reconcile branch. All other gates passed: PILOT-01 and R23-VERIFY-01 strict, `check_registers.py`, `check_csv.py`, `check_provenance.py` (new=0), records_658 sha, `test_kb_citations.py`.
+
+## Follow-up: merged WS-A reconcile (claude/ws-a-cycle3-reconcile @ 18ae1078; merge 1ba72b04)
+- Re-ran `build_procedure_crosswalk.py` (in-tree WS-A log), `build_crosswalk.py` and the v2 builder. Their outputs are unchanged (byte-identical):
+  - procedure_crosswalk aff38095…;
+  - crosswalk 70ca124b…;
+  - v2 fe9c871a….
+- Only `input_manifest.json` changed: the pinned WS-A change log 342ab73c… → b61625ca…. New manifest sha f5d9891ebfda87b04ff067e6160054fb361c6d47e223d7c06c31fb89802c1b70; re-run is stable.
+- **Known WS-D unittest failures, now four**, all in `test_legal_audit_versioned_edges`:
+  - test_conflicting_evidence_present_in_real_versions;
+  - test_inputs_pinned_and_current;
+  - test_regeneration_is_byte_identical;
+  - test_stated_dates_are_the_registers_own.
+
+  They reproduce identically at the merge commit 1ba72b04 without the WS-C change (WS-A's corrected log and PR #28; WS-D regenerating).
+- All other gates passed: PILOT-01 and R23-VERIFY-01 strict, `check_registers.py`, `check_csv.py`, `check_provenance.py` (new=0), records_658 sha, `test_kb_citations.py`.
+
 ## Next (if continued)
 - Image-check the crosswalk locators that the advisor selects. Every crosswalk locator is text-layer only (REQUIRES_VERIFICATION).
 - DOC-vs-PDF comparison for vol 2(AA) and vol 3 beyond the pilot samples.

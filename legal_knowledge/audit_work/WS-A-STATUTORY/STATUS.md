@@ -98,6 +98,22 @@ Updated 2026-11-22 (cycle 3). Branch: `claude/ws-a-statutory` (base 34e75aa9). W
   - Columns follow `army_act_amendment_chain.csv`, plus `supersedes_or_extends` and `compilation_page_render_sha256`.
   - WS-A has not edited any WS-D file.
 
+## Cycle 3 final reconciliation (branch claude/ws-a-cycle3-reconcile, base 2a66cd04)
+- [x] AA-C3-01 acquisition reference corrected from ACQ03-020 to ACQ03-021.
+- [x] ACQ03-029 now points to `in.gazette.e.1950.306` (UNVERIFIED; not fetched). AA-00 is superseded through a versioned note row AA-C3-05; AA-00 itself is not edited.
+- [x] Commencement fields agree with PR #28. Six stale carried rows are corrected from images. Commencement and deemed effect are now distinct columns (`retrospective_deemed_effect_from`). Legal effect is left to AQ-06.
+- [x] Details in `RECONCILE_CYCLE3.md`. Completeness self-test 9/9.
+- [x] Coordinator decision on 192ea2e6, applied:
+  - The nine commencement corrections are made **in place** in `provision_change_log.csv`, with a new `retrospective_deemed_effect_from` column.
+  - `provision_change_log_supersessions_cycle3.csv` is re-labelled as a change record (audit trail), not an authoritative source.
+- **WS-D tests expected to fail on this branch alone** until WS-D regenerates from the corrected log (no WS-D file edited), all in `test_legal_audit_versioned_edges.VersionedEdges`:
+  - `test_inputs_pinned_and_current`;
+  - `test_regeneration_is_byte_identical`;
+  - `test_stated_dates_are_the_registers_own`;
+  - `test_conflicting_evidence_present_in_real_versions`.
+
+  The first two already failed at base 2a66cd04.
+
 ## Next
 - After approval of ACQ-C2:
   - image-check the four pre-1960 instruments;

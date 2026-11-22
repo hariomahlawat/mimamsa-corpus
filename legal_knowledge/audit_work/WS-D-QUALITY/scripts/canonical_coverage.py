@@ -16,11 +16,15 @@ Three SEPARATE measures per KB record (denominator 658), never blended into one 
   source_searchable  ALL / PARTLY / NONE / NOT_CHECKED / NOT_APPLICABLE (nothing identified). Every identified
                      source exists in a searchable corpus: DCLR id in cases_53; doc_id in crawler data/meta; and,
                      where an Act section is cited (in plain text OR in a code locator such as
-                     {'source_id': 'SRC-AA', 'locator': 'ss 79-82'}), the section file exists; a missing section file
-                     makes that source not searchable.
+                     {'source_id': 'SRC-AA', 'locator': 'ss 79-82'}), the section file exists; where a rule is cited,
+                     the rule file exists. A missing provision file, or a missing/EMPTY provision index for the
+                     document, makes that source not searchable (ABSENT, flag PROVISION_FILES_ABSENT) and never yields
+                     ALL. An unavailable corpus (ref absent) yields NOT_CHECKED, never ALL. Any ABSENT source prevents
+                     ALL for the record. source_searchable_instrument_level (informational, not a gate) repeats the
+                     check at document level only, so the effect of absent provision files stays visible.
 Quality flags are reported alongside and are not gates inside the measures: NO_PINPOINT, PLACEHOLDER,
 STRUCTURAL, AMBIGUOUS_LOCATOR, CASE_NAME_WITHOUT_CODE, UNANCHORED_LOCATOR, INFERRED_IDENTITY,
-IDENTITY_KNOWN_TARGET_ABSENT. ANCHORED_FULL = citation_present AND identified ALL AND searchable ALL AND no flag.
+IDENTITY_KNOWN_TARGET_ABSENT, PROVISION_FILES_ABSENT. ANCHORED_FULL = citation_present AND identified ALL AND searchable ALL AND no flag.
 
 Coverage locates cited sources. It is NOT legal correctness, currency, amendment completeness or verification.
 Inputs are pinned by SHA-256 in canonical_coverage.json. Supersedes (but preserves) coverage_scorecard.* and
@@ -55,7 +59,7 @@ OUT = {"csv": WSD / "canonical_coverage.csv", "json": WSD / "canonical_coverage.
 OUT_JSON_PATH = OUT["json"]
 LABEL = "canonical coverage"
 COLS = ["record_id", "module", "family", "citation_present", "citation_kinds", "n_items", "source_identified",
-        "n_identified", "n_inferred", "source_searchable", "n_searchable", "quality_flags", "anchored_full", "items"]
+        "n_identified", "n_inferred", "source_searchable", "source_searchable_instrument_level", "n_searchable", "quality_flags", "anchored_full", "items"]
 
 
 def sha(p):
@@ -105,6 +109,31 @@ def code_locators(ref):
         rest.append(ref[pos:st]); pos = e
     rest.append(ref[pos:])
     return locs, " ".join(rest)
+
+
+def provision_searchable(i, target_exists, C):
+    """(searchable, instrument_level_searchable, provision_files_absent) for one identified item (review P2, PR #29).
+    searchable: True / False (ABSENT: corpus available, document or provision files missing) / None (UNAVAILABLE
+    corpus: NOT_CHECKED). An item citing sections or rules needs every corresponding provision file; a missing or
+    empty provision index for the document therefore makes it not searchable - it never yields ALL."""
+    ex = target_exists(i["target"])
+    if ex is not True:
+        return ex, ex, False
+    keys = ["s" + n.lower() for n in i.get("sections", [])] + ["r" + n.lower() for n in i.get("rules", [])]
+    if not keys:
+        return True, True, False
+    index = (C or {}).get("sections", {}).get(i["target"]) or set()
+    ok = all(k in index for k in keys)
+    return ok, True, not ok
+
+
+def searchable_state(vals):
+    """Record-level searchability: any ABSENT item (False) prevents ALL even if others are unchecked."""
+    if False in vals:
+        return "PARTLY" if True in vals else "NONE"
+    if None in vals:
+        return "NOT_CHECKED"
+    return "ALL" if vals else "NOT_APPLICABLE"
 
 
 def state(flags):
@@ -175,7 +204,8 @@ def build(corpus_ref):
                     if doc is None and KNOWN_NO_TARGET.match(a["token"]):
                         flags.add("IDENTITY_KNOWN_TARGET_ABSENT")
                     items.append({"kind": "statute", "ref": a["token"], "identified": doc is not None, "inferred": False,
-                                  "target": doc or "", "sections": a["numbers"] if doc else []})
+                                  "target": doc or "", "sections": a["numbers"] if doc else [],
+                                  "rules": list(a["rule_numbers"]) if doc and doc.startswith("rules-") else []})
         else:
             ref = str(rec["references"])
             locs, rest = code_locators(ref)
@@ -194,6 +224,9 @@ def build(corpus_ref):
                             flags.add("AMBIGUOUS_LOCATOR")
                         if i["target"].startswith("act-"):
                             i["sections"] += [n for n in e["sections"] if n not in i["sections"]]
+                        if i["target"].startswith("rules-"):
+                            i.setdefault("rules", [])
+                            i["rules"] += [n for n in e["rules"] if n not in i["rules"]]
             seen_names = set()
             for e in cov.PLAIN.instrument_locators(rest):
                 doc = name_doc(e["token"])
@@ -204,11 +237,15 @@ def build(corpus_ref):
                     tgt = by_target[doc]
                     if doc.startswith("act-"):
                         tgt["sections"] += [n for n in e["sections"] if n not in tgt["sections"]]
+                    if doc.startswith("rules-"):
+                        tgt.setdefault("rules", [])
+                        tgt["rules"] += [n for n in e["rules"] if n not in tgt["rules"]]
                     continue
                 if doc is None and KNOWN_NO_TARGET.match(e["token"]):
                     flags.add("IDENTITY_KNOWN_TARGET_ABSENT")
                 items.append({"kind": "statute", "ref": e["token"], "identified": doc is not None, "inferred": False,
-                              "target": doc or "", "sections": list(e["sections"]) if doc and doc.startswith("act-") else []})
+                              "target": doc or "", "sections": list(e["sections"]) if doc and doc.startswith("act-") else [],
+                              "rules": list(e["rules"]) if doc and doc.startswith("rules-") else []})
             present_docs = {i["target"] for i in items if i["target"]}
             for n in filter(None, w["other_statutes_plain"].split(";")):  # WS-C names the parser did not see: keep, never drop
                 doc = name_doc(n)
@@ -243,24 +280,27 @@ def build(corpus_ref):
         if present and w["pinpoint_present"] == "NO":
             flags.add("NO_PINPOINT")
         ident = [i for i in items if i["identified"]]
-        srch = []
+        srch, inst = [], []
         for i in ident:
-            ex = target_exists(i["target"])
-            if ex and i["sections"] and C is not None and C["sections"].get(i["target"]):
-                ex = all(("s" + n.lower()) in C["sections"][i["target"]] for n in i["sections"])
-            srch.append(ex)
-        s_state = "NOT_APPLICABLE" if not ident else ("NOT_CHECKED" if None in srch else state(srch))
+            ok, ex_inst, absent = provision_searchable(i, target_exists, C)
+            srch.append(ok); inst.append(ex_inst)
+            if absent:
+                flags.add("PROVISION_FILES_ABSENT")
+        s_state = "NOT_APPLICABLE" if not ident else searchable_state(srch)
+        s_inst = "NOT_APPLICABLE" if not ident else searchable_state(inst)
         i_state = state([i["identified"] for i in items]) if present else "NOT_APPLICABLE"
         full = present and i_state == "ALL" and s_state == "ALL" and not flags
         out.append({"record_id": rid, "module": rec.get("module", ""), "family": "CODED" if rid in rec_codes else "PLAINTEXT",
                     "citation_present": "YES" if present else "NO",
                     "citation_kinds": ";".join(sorted({i["kind"] for i in items})), "n_items": len(items),
                     "source_identified": i_state, "n_identified": len(ident), "n_inferred": sum(i["inferred"] for i in items),
-                    "source_searchable": s_state, "n_searchable": sum(1 for x in srch if x),
+                    "source_searchable": s_state, "source_searchable_instrument_level": s_inst,
+                    "n_searchable": sum(1 for x in srch if x),
                     "quality_flags": ";".join(sorted(flags)), "anchored_full": "YES" if full else "NO",
                     "items": " | ".join(f"{i['kind']}:{i['ref']}{'=>' + i['target'] if i['target'] else ''}"
                                         f"{'[id]' if i['identified'] else '[inferred]' if i['inferred'] else '[not-id]'}"
-                                        f"{'#s' + ',s'.join(i['sections']) if i['sections'] else ''}" for i in items)})
+                                        f"{'#s' + ',s'.join(i['sections']) if i['sections'] else ''}"
+                                        f"{'#r' + ',r'.join(i['rules']) if i.get('rules') else ''}" for i in items)})
     inputs = {k: {"path": str(p.relative_to(ROOT)), "sha256": sha(p)} for k, p in INPUTS.items()}
     inputs["crawler_corpus"] = {"ref": corpus_ref if C else None, "commit": C["commit"] if C else None}
     return out, inputs
@@ -272,7 +312,9 @@ def summarise(out):
     fl = collections.Counter(f for r in out for f in r["quality_flags"].split(";") if f)
     present = [r for r in out if r["citation_present"] == "YES"]
     return {"denominator_records": n, "citation_present": cnt("citation_present"), "source_identified": cnt("source_identified"),
-            "source_searchable": cnt("source_searchable"), "anchored_full": cnt("anchored_full"),
+            "source_searchable": cnt("source_searchable"),
+            "source_searchable_instrument_level_informational": cnt("source_searchable_instrument_level"),
+            "anchored_full": cnt("anchored_full"),
             "quality_flags_records": dict(sorted(fl.items())),
             "by_family": {f: {"records": sum(r["family"] == f for r in out),
                               "identified_ALL": sum(r["family"] == f and r["source_identified"] == "ALL" for r in out),
@@ -295,6 +337,7 @@ def render(out, inputs, S):
          f"| citation_present | YES {f(S['citation_present'], 'YES')} · NO {f(S['citation_present'], 'NO')} |",
          "| source_identified | " + " · ".join(f"{k} {v}" for k, v in S["source_identified"].items()) + " |",
          "| source_searchable | " + " · ".join(f"{k} {v}" for k, v in S["source_searchable"].items()) + " |",
+         "| source_searchable_instrument_level (informational, not a gate) | " + " · ".join(f"{k} {v}" for k, v in S["source_searchable_instrument_level_informational"].items()) + " |",
          f"| ANCHORED_FULL (derived) | YES {f(S['anchored_full'], 'YES')} · NO {f(S['anchored_full'], 'NO')} |", "",
          "source_searchable is computed over the identified items only (CP-01), so a record that is PARTLY identified can still be searchable ALL; read it together with source_identified, never alone.", "",
          f"Citation items: {S['items']['total']} total; {S['items']['identified']} identified; {S['items']['inferred']} inferred (co-citation codes, unique short case names; never counted as identified); {S['items']['searchable']} identified and searchable.", "",
