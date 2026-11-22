@@ -158,4 +158,4 @@ New tests:
 - **`successor_bound` and retrospective successors (AQ-06).** When the next event's stated effective date is on or before the current event's own `valid_from` (a retrospective successor), no `valid_to` is emitted. The edge gets VALIDITY_INTERVAL_REJECTED instead of a zero-length or reversed interval. The ordering of overlapping retrospective effect is a legal question (AQ-06) and is not decided by the generator.
 
 ## Commits (returned defect)
-- See the line appended below.
+- `2c633b04`: regression tests, fix, conditions (a)-(c), regenerated versioned edges (gate: 223 tests OK; all checks rc=0).
