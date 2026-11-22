@@ -215,6 +215,76 @@ def load_pilot_manifest(path: Path):
     return out
 
 
+
+# v1 authority-policy compatibility: legacy PILOT-01 entries remain unchanged,
+# but newly classified sources must declare BOTH underlying legal authority
+# and the provenance/fidelity of the specific copy. This checks metadata claims
+# only: it cannot authenticate the document or certify the law in force.
+AUTHORITY_META_FIELDS = ("document_authority", "carrier_provenance",
+                         "copy_fidelity", "amendment_chain_status")
+
+
+def authority_provenance_checks(label, source, errors):
+    auth = source.get("authenticity")
+    has_policy_fields = any(key in source for key in AUTHORITY_META_FIELDS)
+    needs_policy = has_policy_fields or auth in (
+        "ARCHIVAL_FACSIMILE_OF_OFFICIAL", "MANUAL_EDITION_CORROBORATED")
+    if not needs_policy:
+        return  # frozen earlier records; never invent a classification
+    for key in AUTHORITY_META_FIELDS:
+        if not source.get(key):
+            errors.append(f"{label}: source authority policy missing {key}")
+    if not source.get("authority_rationale"):
+        errors.append(f"{label}: source authority policy requires authority_rationale")
+
+    doc = source.get("document_authority")
+    carrier = source.get("carrier_provenance")
+    fidelity = source.get("copy_fidelity")
+    kind = source.get("source_type")
+
+    if auth == "ARCHIVAL_FACSIMILE_OF_OFFICIAL" or carrier == "THIRD_PARTY_ARCHIVAL_FACSIMILE":
+        # A scanned original Government Gazette is primary in *content* but
+        # archival in *carrier*. Do not collapse the two into SECONDARY.
+        if not (auth == "ARCHIVAL_FACSIMILE_OF_OFFICIAL"
+                and carrier == "THIRD_PARTY_ARCHIVAL_FACSIMILE"
+                and doc == "ENACTED_OR_NOTIFIED_PRIMARY"
+                and kind == "GAZETTE"):
+            errors.append(
+                f"{label}: official Gazette facsimile must have GAZETTE type, "
+                "primary document authority and third-party archival provenance")
+        if not source.get("instrument_identity"):
+            errors.append(f"{label}: archival Gazette facsimile lacks complete instrument_identity")
+        if not source.get("sha256"):
+            errors.append(f"{label}: archival Gazette facsimile lacks SHA-256")
+        if not source.get("pinpoint"):
+            errors.append(f"{label}: archival Gazette facsimile lacks pinpoint")
+        if source.get("content_role") not in (None, "GAZETTE_TEXT"):
+            errors.append(f"{label}: archival Gazette facsimile must be GAZETTE_TEXT")
+        if (source.get("verification_state") == "SOURCE_VERIFIED"
+                and fidelity not in ("PAGE_IMAGE_CHECKED", "CUSTODIAN_AUTHENTICATED")):
+            errors.append(
+                f"{label}: archival Gazette SOURCE_VERIFIED requires page-image "
+                "inspection or custodian authentication; HASH_ONLY is insufficient")
+    if fidelity == "PAGE_IMAGE_CHECKED" and not source.get("page_image_check_id"):
+        errors.append(f"{label}: PAGE_IMAGE_CHECKED requires a page_image_check_id")
+    if fidelity == "CUSTODIAN_AUTHENTICATED" and not source.get("custodian_evidence_ref"):
+        errors.append(f"{label}: CUSTODIAN_AUTHENTICATED requires custodian_evidence_ref")
+    if carrier == "THIRD_PARTY_ARCHIVAL_FACSIMILE" and auth == "ORIGINAL_OFFICIAL":
+        errors.append(f"{label}: a third-party hosted facsimile is not an issuing-authority copy")
+
+    if kind == "MANUAL" and doc in (
+            "ENACTED_OR_NOTIFIED_PRIMARY", "OFFICIAL_JUDICIAL_DECISION"):
+        errors.append(f"{label}: manual text cannot be labelled enacted law or a court holding")
+    if doc in ("UNVERIFIED_MANUAL", "GOVERNMENT_ISSUED_MANUAL") and kind != "MANUAL":
+        errors.append(f"{label}: manual document authority requires source_type MANUAL")
+    if auth == "MANUAL_EDITION_CORROBORATED" or doc == "GOVERNMENT_ISSUED_MANUAL":
+        if not (auth == "MANUAL_EDITION_CORROBORATED"
+                and doc == "GOVERNMENT_ISSUED_MANUAL"
+                and source.get("edition_authority_ref")):
+            errors.append(
+                f"{label}: claiming official manual edition requires independent "
+                "publisher/edition authentication reference")
+
 def extended_checks(records, ids, strict, manifest, errors):
     mml = load_mml_manifest()
     # (1) MML provenance and version differentiation
@@ -223,6 +293,7 @@ def extended_checks(records, ids, strict, manifest, errors):
             continue
         if s.get("verification_state") == "SOURCE_VERIFIED" and not s.get("pinpoint"):
             errors.append(f"{label}: SOURCE_VERIFIED source without pinpoint")
+        authority_provenance_checks(label, s, errors)
         if s.get("source_type") == "MANUAL":
             where = f"{s.get('local_path') or ''} {s.get('locator') or ''}"
             names = [n for n in (mml or {}) if n in where]
@@ -257,6 +328,22 @@ def extended_checks(records, ids, strict, manifest, errors):
             elif out and f.get("workstream") != "INDEPENDENT_REVIEW":
                 covered.add(rid)
         linked = [ids["source"].get(x, {}) for x in f.get("source_ids", [])]
+        # Claims of CURRENT law need a documented amendment chain. This does
+        # not assert that a declared 'checked' chain is in fact exhaustive.
+        asserted = f.get("asserted_law_status")
+        if asserted == "SOURCE_CONFLICT" and vs != "CONFLICTING":
+            errors.append(f"{label}: SOURCE_CONFLICT may not be treated as resolved")
+        if asserted == "CURRENT_IN_FORCE":
+            if vs != "SOURCE_VERIFIED":
+                errors.append(f"{label}: CURRENT_IN_FORCE requires SOURCE_VERIFIED evidence")
+            if not any(x.get("source_type") in PRIMARY_TYPES
+                       and x.get("amendment_chain_status") == "CHECKED_FOR_RELEVANT_PERIOD"
+                       and x.get("verification_state") == "SOURCE_VERIFIED"
+                       for x in linked):
+                errors.append(
+                    f"{label}: CURRENT_IN_FORCE requires a verified primary "
+                    "source with a checked relevant-period amendment chain")
+
         # manual-only verification blocked for every legal workstream (DATA_QUALITY exempt)
         if vs == "SOURCE_VERIFIED" and f.get("workstream") != "DATA_QUALITY":
             if not any(x.get("source_type") in PRIMARY_TYPES and x.get("verification_state") == "SOURCE_VERIFIED"
