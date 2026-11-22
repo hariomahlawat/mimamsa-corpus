@@ -20,7 +20,7 @@ for r in inv:
     if not r["in_PR8_pinned_list"].startswith("NO"): err.append(f"{r['supp_id']} must be outside PR #8 list")
 invsha = {r["sha256"] for r in inv}
 for r in reg:
-    for pid in re.findall(r"PIC-\d+", r["evidence_locator"]):
+    for pid in re.findall(r"(?<![A-Za-z-])PIC-\d+", r["evidence_locator"]):
         if pid not in pics: err.append(f"{r['instr_id']} cites unknown {pid}")
     s = r["sha256"][:64]
     if r["evidence_level"].startswith("IMAGE_CHECKED") and not re.fullmatch(r"[0-9a-f]{64}", s): err.append(f"{r['instr_id']} image-checked without full sha256")
