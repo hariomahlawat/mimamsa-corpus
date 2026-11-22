@@ -69,6 +69,10 @@ Parser fix for letter suffixes, list continuation and uncoded case names. Detail
   - WSC-PIC-109 added (MML 1 Ch II para 13).
 - Task 4: the parser was not touched in cycle 3; `test_kb_citations.py` re-run at every commit and passes.
 - Fixed determinations unchanged: r.23(3) CONFLICTING; C-08 OPEN; C-09 PROPOSAL.
+- Cycle-3 review (PR #27):
+  - Verified all 436 checked rows of the v2 crosswalk: file SHA equals the manifest; render source is correct; every render hash re-computed from its PNG matches.
+  - Corrected PC-11, PC-12, PC-13 and PC-19 comparator commencement/effective dates to the chain at 9b48b08e (AR-028, AR-031, AR-034 and AR-035: in force on publication).
+  - Crosswalk and procedure crosswalk were already current; regenerating them gives byte-identical output.
 
 ## Next (if continued)
 - Image-check the crosswalk locators that the advisor selects. Every crosswalk locator is text-layer only (REQUIRES_VERIFICATION).
