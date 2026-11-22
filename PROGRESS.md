@@ -444,3 +444,9 @@ Not done / blocked
 
 Next (after approval)
 - Step 3: India Code fetcher for the Army Act 1950 only, dry run.
+
+## 2026-11-22: ACQ-02 crawler configuration (PROPOSED; not authorised for download)
+- New source `archive_acq02` (disabled), separate from ACQ-01 (`archive`/`official_instruments`, PR #8): 16 Gazette of India issues found by the Army Rules amendment search, with `expected_sha256`/`expected_md5`/`expected_bytes` from the pre-verification in `legal_knowledge/audit_work/ACQ-02` (PR #16).
+- `issue_date` = notification date; `gazette_publication_date` = Gazette date; no effective date asserted.
+- Tests: `tests/test_acquisition_config_acq02.py` pins the 16 documents and proves the ACQ-01 list unchanged and non-overlapping. config-check OK; discover makes 0 requests; dry-run lists 16. Evidence: `legal_knowledge/audit_work/ACQ-02/config_pr_evidence/`.
+- Next (needs owner approval of this PR and of a download run): fetch with `--yes-download`, compare against expected hashes, re-run page-image checks on record copies.

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import re
 import json
 import logging
 import os
@@ -31,6 +32,43 @@ def _is_json(content: bytes) -> bool:
     except ValueError:
         return False
 
+
+
+_NOTE_MD5_SIZE = re.compile(r"expected md5 ([0-9a-f]{32}),\s*([0-9]+) bytes")
+
+
+def integrity_problem(content: bytes, direct: dict | None) -> str | None:
+    """Pinned-document integrity check, applied BEFORE a file is stored or marked fetched.
+
+    Enforced: expected_sha256, expected_md5, expected_bytes (ACQ-02/ACQ-03 archive.org), the ACQ-01 `note` form
+    "expected md5 <hex>, <n> bytes", and expected_served_sha256 (a reviewed pin of a host-watermarked file).
+    Not enforced: listing_md5 / listing_bytes (India Code listing values describe the stored bitstream, not the
+    served, watermarked bytes; served_bytes_policy HOST_WATERMARKS_PDF)."""
+    if not direct:
+        return None
+    exp = {}
+    if direct.get("expected_sha256"):
+        exp["sha256"] = str(direct["expected_sha256"]).lower()
+    if direct.get("expected_md5"):
+        exp["md5"] = str(direct["expected_md5"]).lower()
+    if direct.get("expected_bytes"):
+        exp["bytes"] = int(direct["expected_bytes"])
+    m = _NOTE_MD5_SIZE.search(str(direct.get("note") or ""))
+    if m:
+        exp.setdefault("md5", m.group(1))
+        exp.setdefault("bytes", int(m.group(2)))
+    if direct.get("expected_served_sha256"):
+        exp["served_sha256"] = str(direct["expected_served_sha256"]).lower()
+    bad = []
+    if "sha256" in exp and hashlib.sha256(content).hexdigest() != exp["sha256"]:
+        bad.append("sha256")
+    if "served_sha256" in exp and hashlib.sha256(content).hexdigest() != exp["served_sha256"]:
+        bad.append("served sha256")
+    if "md5" in exp and hashlib.md5(content).hexdigest() != exp["md5"]:
+        bad.append("md5")
+    if "bytes" in exp and len(content) != exp["bytes"]:
+        bad.append(f"size ({len(content)} != {exp['bytes']})")
+    return ("integrity check failed: " + ", ".join(bad) + " differ from the pinned values") if bad else None
 
 def fetch_documents(cfg: Config, db: StateDB, client: PoliteClient, source: str, root: Path, *,
                     limit: int = 50, workers: int = 1) -> dict[str, int]:
@@ -94,6 +132,8 @@ def fetch_documents(cfg: Config, db: StateDB, client: PoliteClient, source: str,
             problem = f"expected a PDF, got {r.content_type or 'unknown type'} (possible block or error page)"
         elif q.meta.get("category") == "linked_records" and not _is_json(r.content):
             problem = f"expected JSON records, got {r.content_type or 'unknown type'}"
+        if not problem:
+            problem = integrity_problem(r.content, q.meta.get("direct"))
         if problem:
             db.mark_attempt_failed(q.url, error=problem, status_code=r.status, retryable=False, **retry)
             stats["failed"] += 1
