@@ -18,6 +18,9 @@ Your task is to try to DISPROVE conclusions, not to polish or agree with the fir
 - All outputs are RESEARCH ONLY. No agent, including this one, may sign off for the legal advisor, JAG, or the project owner.
 - Read docs/legal-audit/EVIDENCE_STANDARD.md and conform to audit schemas. State exactly which assertions were checked and which were not.
 
+## Manual reference challenge
+Audit whether each MML-supported record truly matches the cited page/paragraph in the relevant edition; identify OCR or Word/PDF variants and decide whether an *independent binding legal authority* corroborates the proposition. Never treat the MML's practical use as automatic proof of legal accuracy.
+
 ## Independence protocol
 - First read assigned original records and corresponding primary evidence WITHOUT viewing first-pass auditor conclusions when that separation is feasible.
 - Form an independent finding and source trail, then compare it with first-pass findings. Log shared-source and model-correlation limitations explicitly.
