@@ -1,0 +1,74 @@
+[
+  {
+    "batch_id": "PILOT-01",
+    "review_state": "PENDING",
+    "requires_legal_review": true,
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "agent": "orchestrator",
+    "finding_id": "F-REM-001",
+    "record_id": "HCE-017",
+    "original_sha256": "54a4f2358087e1a1ff3871352419ff16ce000a52db1a5fb1e965ed3b741175be",
+    "workstream": "STATUTORY",
+    "severity": "P1",
+    "issue_type": "CONFLICT",
+    "claim": "Supplementary to F-STAT-006 (returned for evidence by R-A-007; F-STAT-006 preserved unchanged). The text of Army Rules r.192 differs between sources: MML 2.pdf p.227 prints a proviso (reduction to a lower grade of pay only to the immediately next lower grade, not effective beyond one year) footnoted as substituted by SRO 215 of 17-06-1965; the India Code compilation p.209 prints r.192(i)-(ii) without it. HCE-017 cites neither r.192 nor the proviso.",
+    "original_location": "records_658.jsonl:line 93",
+    "original_text": "Check ceilings, coexistence of multiple awards, and any notified additional punishments.",
+    "proposed_text": "Proposal only: cite AR r.192 with a flag that its proviso (SRO 215/1965) appears in manual copies but not in the India Code compilation; text unresolved pending the SRO.",
+    "rationale": "Both pages checked against rendered page images by the orchestrator, confirming reviewer A. Neither copy is the Gazette; SRO 215 (1965) not held.",
+    "source_ids": [
+      "S-REM-001"
+    ],
+    "contrary_source_ids": [
+      "S-REM-002"
+    ],
+    "mml_anchor_ids": [
+      "S-REM-002"
+    ],
+    "verification_state": "CONFLICTING",
+    "examination_outcome": "CONFLICTING_SOURCES",
+    "pinpoint": "AR r.192: India Code PDF p.209; MML 2.pdf p.227",
+    "temporal_scope": "r.192 as printed in the India Code compilation (retrieved 2026-11-21) vs MML 2 (undated edition; notes to 2003). SRO 215 of 1965 not held.",
+    "advisor_questions": [
+      "Is the r.192 proviso (SRO 215/1965) part of the operative rule, and should the database flag its omission from the India Code compilation?"
+    ],
+    "limitations": [
+      "SRO 215 (17-06-1965) Gazette not obtained (egazette unreachable).",
+      "Same model family as first pass and reviewers."
+    ]
+  },
+  {
+    "batch_id": "PILOT-01",
+    "review_state": "PENDING",
+    "requires_legal_review": true,
+    "legal_review_state": "QUEUED_ADVISOR_NOT_NOMINATED",
+    "agent": "orchestrator",
+    "finding_id": "F-REM-002",
+    "record_id": "MMLPKT-10",
+    "original_sha256": "ef031a01f9f95768537c5590e76a4853403a893a2bb72c79e9e886abe14e8679",
+    "workstream": "MANUAL",
+    "severity": "P1",
+    "issue_type": "UNSUPPORTED_ASSERTION",
+    "claim": "Re-scoping of F-MML-019 per R-A-020 (F-MML-019 preserved unchanged): MML 2.pdf p.89 note 6 states that s.121 'prohibits a second trial by court-martial or a criminal court'. Enacted s.121 (India Code p.35) bars a second trial only 'by a court-martial or dealt with under the said sections'. The vol 2(AA) note 6 tracks the section text; only its cross-reference to omitted s.127 is dead.",
+    "original_location": "MMLPKT-10",
+    "original_text": "(MML 2.pdf p.89 note 6, ≤20 words) 'The section prohibits a second trial by court-martial or a criminal court or being dealt with again'",
+    "proposed_text": "Proposal only: flag MML 2 p.89 note 6 as overstating s.121; flag vol 2(AA) s.21 note (a) and s.121 note 6 cross-references to omitted s.127 as dead references.",
+    "rationale": "Page image of MML 2 p.89 and India Code s.121 text compared by the orchestrator; reviewer A's dispute upheld on the text. Whether a criminal court may try after court-martial (Art 20(2); CrPC s.300 / BNSS successor) is a legal question not resolved here.",
+    "source_ids": [
+      "S-REM-003"
+    ],
+    "mml_anchor_ids": [
+      "S-REM-004"
+    ],
+    "verification_state": "SOURCE_VERIFIED",
+    "examination_outcome": "DISCREPANCY",
+    "pinpoint": "AA s.121 [[page 35]]; MML 2.pdf p.89 note 6",
+    "temporal_scope": "s.121 as consolidated on India Code (retrieved 2026-11-21); MML 2 edition undated.",
+    "advisor_questions": [
+      "Confirm the scope of s.121 and whether any rule bars criminal-court retrial after court-martial (Art 20(2), CrPC s.300 / BNSS equivalent)."
+    ],
+    "limitations": [
+      "Criminal-procedure double-jeopardy provisions not examined."
+    ]
+  }
+]

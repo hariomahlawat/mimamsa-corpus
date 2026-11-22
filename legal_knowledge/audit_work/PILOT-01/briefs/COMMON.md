@@ -61,3 +61,12 @@ as source_type SECONDARY, authenticity SECONDARY; never the basis of SOURCE_VERI
 
 ## Final reply (≤ 300 words)
 Counts by outcome and severity, files written, blockers, anything you could not do. No legal approval language.
+
+## Remediation additions (2026-11-22; binding for the next calibration batch)
+- Reviewer identity: each reviewer sets `retrieved_by` = its own reviewer_id (e.g. "independent-reviewer-A") and uses only its
+  declared source prefix; the batch `reviewer_identities.json` sets `require_exact_retrieved_by: true`.
+- Page-image check (pdftoppm render, record render SHA-256 in registers/page_image_checks.csv) is mandatory for negations,
+  numbers, dates, amendment footnotes and every P0/P1 pinpoint. DOC-only passages: state "no page image available".
+- Before searching the web for a judgment, consult the existing archive register (HF `legal_knowledge/judgment_originals/**.json`
+  sidecars and PILOT-01 sources) — PILOT-01 missed two official PDFs that were already archived.
+- India Code serves some Gazette scans with download-specific bytes; record SHA-256 AND MD5 of the stored file and the URL.

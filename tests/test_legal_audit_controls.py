@@ -42,9 +42,15 @@ REVIEW = {"review_id": "R1", "finding_id": "F1", "reviewer_id": "independent-rev
           "independent_source_ids": ["S-REV"], "blind": True}
 
 
-def run(sources=SOURCES, findings=(FINDING,), reviews=(REVIEW,), manifest=None, strict=True):
+IDENT = {"first_pass_agents": ["statutory-auditor", "manual-of-military-law-auditor", "procedure-auditor"],
+         "reviewers": {"independent-reviewer": {"stage": "blind", "source_prefixes": ["S-REV"], "finding_prefixes": ["F-BLIND-"]}}}
+
+
+def run(sources=SOURCES, findings=(FINDING,), reviews=(REVIEW,), manifest=None, strict=True, identities=IDENT):
     with tempfile.TemporaryDirectory() as root:
         d = Path(root)
+        if identities is not None:
+            (d / "reviewer_identities.json").write_text(json.dumps(identities), encoding="utf-8")
         for name, rows in (("sources", sources), ("findings", findings), ("reviews", reviews)):
             (d / name).mkdir()
             (d / name / "x.json").write_text(json.dumps(list(rows)), encoding="utf-8")
@@ -134,6 +140,63 @@ class ExtendedControls(unittest.TestCase):
     def test_strict_needs_outcome(self):
         f = copy.deepcopy(FINDING); del f["examination_outcome"]
         self.assertFalse(run(findings=[f])[0])
+
+
+class IdentityControls(unittest.TestCase):
+    TWO = {"first_pass_agents": ["statutory-auditor", "procedure-auditor"],
+           "reviewers": {"independent-reviewer-A": {"stage": "adversarial", "source_prefixes": ["S-REVA-"]},
+                         "independent-reviewer-B": {"stage": "adversarial", "source_prefixes": ["S-REVB-"]}}}
+
+    def srcs(self):
+        a = edit(SOURCES[2], source_id="S-REVA-1"); b = edit(SOURCES[2], source_id="S-REVB-1")
+        return SOURCES[:2] + [a, b]
+
+    def rev(self, **kw):
+        base = dict(reviewer_id="independent-reviewer-A", source_ids=["S-REVA-1"],
+                    independent_source_ids=["S-REVA-1"], blind=False)
+        base.update(kw)
+        return edit(REVIEW, **base)
+
+    def test_bound_reviewer_passes(self):
+        ok, errs = run(sources=self.srcs(), reviews=[self.rev()], identities=self.TWO)
+        self.assertTrue(ok, errs)
+
+    def test_strict_requires_identity_file(self):
+        self.assertFalse(run(identities=None)[0])
+
+    def test_undeclared_reviewer(self):
+        self.assertFalse(run(sources=self.srcs(), reviews=[self.rev(reviewer_id="independent-reviewer-Z")], identities=self.TWO)[0])
+
+    def test_reviewer_using_other_reviewers_source(self):
+        r = self.rev(source_ids=["S-REVB-1"], independent_source_ids=["S-REVB-1"])
+        self.assertFalse(run(sources=self.srcs(), reviews=[r], identities=self.TWO)[0])
+
+    def test_unbound_reviewer_source(self):
+        src = self.srcs() + [edit(SOURCES[2], source_id="S-XYZ-1")]
+        self.assertFalse(run(sources=src, reviews=[self.rev()], identities=self.TWO)[0])
+
+    def test_prefix_squatting_by_first_pass_agent(self):
+        src = self.srcs() + [edit(SOURCES[0], source_id="S-REVA-9", retrieved_by="statutory-auditor")]
+        self.assertFalse(run(sources=src, reviews=[self.rev()], identities=self.TWO)[0])
+
+    def test_first_pass_citing_reviewer_source(self):
+        f = edit(FINDING, source_ids=["S-AR", "S-REVA-1"])
+        self.assertFalse(run(sources=self.srcs(), findings=[f], reviews=[self.rev()], identities=self.TWO)[0])
+
+    def test_reviewing_own_finding(self):
+        f = edit(FINDING, agent="independent-reviewer-A")
+        self.assertFalse(run(sources=self.srcs(), findings=[f], reviews=[self.rev()], identities=self.TWO)[0])
+
+    def test_blind_flag_requires_blind_stage(self):
+        self.assertFalse(run(sources=self.srcs(), reviews=[self.rev(blind=True)], identities=self.TWO)[0])
+
+    def test_exact_retrieved_by_enforced(self):
+        ident = dict(self.TWO, require_exact_retrieved_by=True)
+        self.assertFalse(run(sources=self.srcs(), reviews=[self.rev()], identities=ident)[0])
+        src = [edit(x, retrieved_by="independent-reviewer-A") if x["source_id"] == "S-REVA-1" else
+               edit(x, retrieved_by="independent-reviewer-B") if x["source_id"] == "S-REVB-1" else x for x in self.srcs()]
+        ok, errs = run(sources=src, reviews=[self.rev()], identities=ident)
+        self.assertTrue(ok, errs)
 
 
 if __name__ == "__main__":
