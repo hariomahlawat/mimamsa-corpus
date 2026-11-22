@@ -1,0 +1,81 @@
+record_id,title,rule,match_basis,link_status,manual_source,manual_pages
+KB-003,CO summary punishment: statutory entry point,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+KB-005,Hearing of charge under Rule 22,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+KB-005,Hearing of charge under Rule 22,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+KB-006,Summary of Evidence under Rule 23,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+KB-007,CO decision after Summary of Evidence,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+KB-011,Court of Inquiry and Rule 180 rights,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+KB-026,Case-law method: Rule 180 is mandatory but effects are context-specific,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+KB-030,Escalation and stopping rules for commander assistant,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-003,1.3 CoI compared with other proceedings,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+COI-003,1.3 CoI compared with other proceedings,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+COI-010,3.3 Written instructions are essential,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-011,3.4 Example terms of reference (training draft),AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-013,4.1 Opening conference and procedural record,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-014,4.2 Notice of sittings and adjournments,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-019,"5.1 Legal trigger: reputational effect, not a formal charge alone",AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-020,5.2 Rights specified in the rule,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-021,5.3 Mid-inquiry identification: practical response,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-022,5.4 Multiple affected people and competing rights,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-023,5.5 Rule 180 and the later hearing of charge,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+COI-023,5.5 Rule 180 and the later hearing of charge,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-024,5.6 Legal consequence of noncompliance,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-026,6.2 Rule 184: copies and disclosure requests,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-027,6.3 Forwarding proceedings and action by assembling authority,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-032,7.3 Prisoners of war and exceptional subject matter,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-033,7.4 Cases involving another service or civilian,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-034,8.1 Major General Inder Jit Kumar v Union of India (1997),AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-036,8.3 Union of India v Sanjay Jethi (2013),AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-037,8.4 Union of India v Ex Sep Virendra Kumar (2020),AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-038,"8.5 Col Sandeep Sharma v Union of India (Delhi HC, 2024)",AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-041,9.2 Pause and consult JAG triggers,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+COI-045,10.3 Test suite and review gates,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+HCE-003,Hearing of charge: nature and purpose,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+HCE-003,Hearing of charge: nature and purpose,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+HCE-004,Rule 22(1) proviso after Court of Inquiry,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+HCE-004,Rule 22(1) proviso after Court of Inquiry,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+HCE-005,CO dismissal and prohibited dismissal,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+HCE-006,Four routes following Rule 22 hearing,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+HCE-006,Four routes following Rule 22 hearing,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+HCE-007,New offence emerging from the evidence,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+HCE-008,Summary of Evidence: ordering and scope,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+HCE-008,Summary of Evidence: ordering and scope,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+HCE-010,"Accused statement, silence and defence witnesses",AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+HCE-012,Unavailable witnesses under Rule 23(5),AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+HCE-013,Civilian witnesses and statutory summons,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+HCE-014,Rule 24: decision after Summary of Evidence,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+HCE-022,Rule 26: rights in summary disposal of officer/JCO/WO,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+HCE-027,Procedural suspension: Army Rule 36,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+HCE-028,Accused rights before trial: Rules 33–34,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+HCE-029,Court of Inquiry to Rule 22/23 transition,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+HCE-032,How to read the judgment and apply precedent,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+SC01,Soldier denies an alleged verbal order,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+SC02,Rule 180 not complied with during prior CoI,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+SC02,Rule 180 not complied with during prior CoI,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+SC03,Defence witness is not recorded in SoE,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+SC10,Witness abroad: signed statement supplied,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+SC11,New allegation appears during SoE,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+SC12,Rule 36 claimed due to operational urgency,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+J-01,Lt Col Prithi Pal Singh Bedi v Union of India,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+J-02,Union of India v Ex Sep Virendra Kumar,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+CM-001,Purpose and scope of Volume IV,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+CM-SC-01,SCM proposed for a JCO,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+CM-CL-05,Pretrial rights and disclosure,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+CM-JD-04,Union of India v Ex Sep Virendra Kumar,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+ADM-033,Court of Inquiry findings and subsequent administrative action,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+ADM-SC-01,CO wants to award recordable censure,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+AFT-042,Para-wise comments from formation to counsel,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+EV-001,Map the legal forum before applying evidence rules,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+EV-011,Assess a witness unavailable at the preliminary stage,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+EV-015,Rule 180 opportunity when reputation affected,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+EV-016,Summary of Evidence rights and scope,AR22,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,150-151
+EV-016,Summary of Evidence rights and scope,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+EV-017,Summary of Evidence is not sworn trial evidence,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+V9-WF-05,Take witness evidence at SoE,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+V9-SC-06,Witness abroad cannot attend,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+V9-SC-13,Accused does not understand English,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+V9-SC-19,Accused refuses to give SoE statement,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+V9-CL-03,Rule 180 safeguards,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+V9-CL-04,Rule 23 SoE,AR23,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,151-152
+V9-JD-04,Union of India v Ex Sep Virendra Kumar,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
+V9-TPL-07,CoI-to-trial evidentiary segregation sheet,AR180,regex_to_raw_record,CANDIDATE_NOT_LEGALLY_VERIFIED,MML 2.pdf,222
