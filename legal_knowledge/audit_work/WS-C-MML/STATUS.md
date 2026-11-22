@@ -36,7 +36,16 @@ All eight deliverables are present. See README.md for counts, denominators and e
   - FID-05/09: the AR DOCs drop 'or' in r.22(3) and read 'or before' for 'and before' in r.58(1)(a)(ii);
   - FID-06/07/08/11: the AR DOCs do not apply the 1993 changes to r.36, r.37(4), r.26(3) and r.186;
   - XC-03: WS-A does not support MML's 17(E) note for r.15.
-- Next: task 2 (image-check calibration-sample locators) and task 3 (`procedure_crosswalk.csv`).
+- C2 commit 2:
+  - `crosswalk_locator_verification.csv` (47 MML 2 locators image-checked; 8 time/number clauses);
+  - WSC-PIC-54..108;
+  - `procedure_crosswalk.csv` (20 steps, 198 KB records);
+  - CC-15..19;
+  - OQ-C-09/10;
+  - README cycle-2 section;
+  - input manifest adds the WS-A PCL copy.
+- Requests:
+  - WS-A: s.129 'any person' vs 'an officer' (CC-17, OQ-C-09); source of the r.15 words (CC-19).
 
 ## Next (if continued)
 - Image-check the crosswalk locators that the advisor selects. Every crosswalk locator is text-layer only (REQUIRES_VERIFICATION).

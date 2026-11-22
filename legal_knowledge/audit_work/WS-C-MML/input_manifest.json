@@ -103,26 +103,26 @@
   {
    "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/army_rules_instrument_register.csv",
    "role": "ar_chain_instruments_37",
-   "bytes": 10081,
-   "sha256": "d042948653c2778b773c68c2e993d3f4ddb46969a374b559c30007856a05ee3e"
+   "bytes": 13433,
+   "sha256": "048543758fd103d9bbd2316ee4b7f2b5ee940b23958bf67558c750883c4d9a7a"
   },
   {
    "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/army_rules_provision_chronology.csv",
    "role": "ar_chain_chronology_46",
-   "bytes": 5494,
-   "sha256": "396c46ac26e297a8e12bb4d99dd9fac38b0b14b6bb3b9df4f0f6f934bd0adeb1"
+   "bytes": 8346,
+   "sha256": "61b0a69aadd41c9682324137d825389a2a61f7663b861747f828814376a6a393"
   },
   {
    "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/official_note_discrepancies.csv",
    "role": "ar_chain_note_discrepancies",
-   "bytes": 1032,
-   "sha256": "89af8234d5220df6fd554770d90817f528e2e81d1e55b26d1804197ebf5189be"
+   "bytes": 1166,
+   "sha256": "cff9cdebdb28201273e50c485e0282bc7bfd3f9f76a747a7a0ef21ecacad158f"
   },
   {
    "path": "legal_knowledge/audit_work/ARMY-RULES-CHAIN-01/statutory_version_register_seed.csv",
    "role": "ar_chain_version_seed",
-   "bytes": 1768,
-   "sha256": "54a94ebc6e444450827989f008ed89be18a161ff12212ab2a7912408dcaa5c3c"
+   "bytes": 3628,
+   "sha256": "f2fbdf1586517256dcbfcc4dbf046bd44300bf5899f153cc836b35c97b950457"
   },
   {
    "path": "legal_knowledge/audit_work/SOURCE-CONFLICTS-01/conflict_determinations.csv",
@@ -145,8 +145,8 @@
   {
    "path": "legal_knowledge/audit_work/COORDINATION/WORKSTREAM_CHARTERS.md",
    "role": "charters",
-   "bytes": 6518,
-   "sha256": "4287d7757b8f08c6714493c2b1fc6c8dd74ee6a0f1e284dd08c50a5cfb6a8248"
+   "bytes": 7114,
+   "sha256": "e6fa81969f5a0f8e0d64a96e8c2e217dd481e212a18aeac9616650f4a52123ba"
   }
  ],
  "scratchpad_inputs": [
@@ -409,6 +409,12 @@
    "role": "india_code_compilation_text (comparison only)",
    "bytes": 2169,
    "sha256": "3d333a6ce85974a33709c8dc69ddc0436f4acffe2ff5aa90d68992517201ca83"
+  },
+  {
+   "path": "ws-c/pcl.csv",
+   "role": "wsa_provision_change_log (git show origin/claude/ws-a-statutory:legal_knowledge/audit_work/WS-A-STATUTORY/provision_change_log.csv @ 74530be9)",
+   "bytes": 72787,
+   "sha256": "251cdde85aa9b5c53f86ba482c82e55678b241eac0acf71cf17f9a0082cd421d"
   }
  ]
 }

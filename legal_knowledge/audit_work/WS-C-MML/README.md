@@ -86,3 +86,21 @@ FULL is a parsing and coverage state. It does **not** mean the wording or the la
 - Ranking is by a transparent score: consequence keywords, coverage state, flags, link to a gap row or to r.23, near-approval status, and not yet piloted.
 - At most 8 records per module, and at least 2 per module.
 - This is a selection only. No record in it has been audited.
+
+## Cycle 2 (after coordinator merge a4c68cf2)
+All findings below are evidence only and are FOR INDEPENDENT COORDINATOR CHECK.
+
+| File | Rows | Content |
+| --- | ---: | --- |
+| `doc_pdf_fidelity_register.csv` | 13 | DOC/PDF transcriptions vs page images. FID-01..11 are image-checked on both sides (renders WSC-PIC-29..53). FID-12/13 are text screen only (REQUIRES_VERIFICATION) |
+| `doc_pdf_screen_summary.json` | – | Text-layer screen over the 216 KB-cited provisions (`scripts/doc_pdf_diff.py`). Pairs: vol 2(AA).doc vs MML 2 (110 pairs, 68 identical); vol 2(AR).doc vs MML 2 (103, 49); doc-1 vs MML 2 (105, 50); vol 2(AA).doc vs vol 2(AA).pdf (110, 109 identical) |
+| `crosswalk_locator_verification.csv` | 47 | MML 2 heading locators image-checked (LV-001..047, WSC-PIC-54..108). It covers the provisions cited by the calibration sample plus the procedural-timeline sections. 8 time/number clauses were read on the image: s.122 three years, s.102 48 hours, s.103 8 days, s.106 30 days, r.27 8 days, r.34(7) 96/24 hours, s.120(5) one year/three months, s.80(a) 28 days |
+| `procedure_crosswalk.csv` | 20 | Procedural step → Army Act sections → Army Rules with version events. Publication date, commencement as printed, effective date and status are kept separate. Sources: ARMY-RULES-CHAIN-01 and the WS-A PCL. Then → MML 2 page (img/txt), MML 1 paragraphs, vol 2 DOC lines → KB records (198 distinct) → MML-currency flag (`scripts/build_procedure_crosswalk.py <PCL path>`) |
+| `wsa_itemisation_crosscheck.csv` | 27 | MML 2 notes citing S.R.O. 17(E)/1993, compared with the WS-A itemisation (PCL @ origin/claude/ws-a-statutory 74530be9). Results: 22 agree; XC-01 (r.13A(3)) and XC-03 (r.15) disagree; XC-15 is a note-level edit, not a rule change; XC-26 MML silent; XC-27 unresolved |
+
+The MML-currency flags use internal date indicators as lower bounds:
+- MML 1 latest internal year: 1976;
+- vol 2 DOCs latest amendment note: 1993;
+- MML 2 latest amendment note: 2003.
+
+None of these is an edition date. No MML file contains anything on the AFT Act 2007.

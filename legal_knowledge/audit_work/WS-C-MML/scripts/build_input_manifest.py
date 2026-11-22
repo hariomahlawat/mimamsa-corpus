@@ -80,6 +80,8 @@ def main():
             out["scratchpad_inputs"].append(entry(p, "doc_rendered_to_pdf_by_LibreOffice_24.2.7.2 (render aid only)", SP))
         for n in ["act-army-1950.txt", "rules-army-rules-1954.txt", "act-army-1950.json", "rules-army-rules-1954.json"]:
             out["scratchpad_inputs"].append(entry(SP / "derived/statutes" / n, "india_code_compilation_text (comparison only)", SP))
+    if SP and (SP / "ws-c/pcl.csv").exists():
+        out["scratchpad_inputs"].append(entry(SP / "ws-c/pcl.csv", "wsa_provision_change_log (git show origin/claude/ws-a-statutory:legal_knowledge/audit_work/WS-A-STATUTORY/provision_change_log.csv @ 74530be9)", SP))
     OUT.write_text(json.dumps(out, indent=1) + "\n", encoding="utf-8")
     bad = [e["path"] for e in out["scratchpad_inputs"] if e.get("matches_manifest") is False]
     print("inputs:", len(repo), "+", len(out["scratchpad_inputs"]), "originals mismatching manifest:", bad)
