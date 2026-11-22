@@ -128,6 +128,13 @@ def main(argv: list[str] | None = None) -> int:
         uploaded += 1
     api.upload_folder(repo_id=repo, repo_type="dataset", folder_path=str(DATA), path_in_repo="data",
                       allow_patterns=[f for f in FILES if f != "README.md"], commit_message=f"manifests — {args.message}")
+    # Curated legal-knowledge review batches are additive and never overwrite crawler output.
+    # No raw manual uploads or JAG-approval claims are introduced by this sync.
+    legal_dir = ROOT / "legal_knowledge"
+    if legal_dir.is_dir():
+        api.upload_folder(repo_id=repo, repo_type="dataset", folder_path=str(legal_dir),
+                          path_in_repo="legal_knowledge",
+                          commit_message=f"legal knowledge review batches — {args.message}")
     api.upload_folder(repo_id=repo, repo_type="dataset", folder_path=str(ROOT / "schema"), path_in_repo="schema",
                       commit_message=f"schema — {args.message}")
     api.upload_folder(repo_id=repo, repo_type="dataset", folder_path=str(ROOT / "reports"), path_in_repo="reports",
