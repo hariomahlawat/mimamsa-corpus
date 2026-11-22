@@ -369,7 +369,8 @@ def build_acquisitions():
         items.append(dict(
             acq_id=r["queue_id"], scope="WS-B", aliases="", batch=batch,
             item=" ".join(x for x in [r["spec_key"], r.get("case53_id", ""), r["court"], r["case_number"], r["decision_date"]] if x),
-            host=(h if h else "NOT_RECORDED"), url_as_recorded=u,
+            host=(f"NONE (commercial holder {h} recorded upstream; not a source, never contacted)" if h in COMMERCIAL_HOSTS
+                  else (h if h else "NOT_RECORDED")), url_as_recorded=u,
             authority_class="NOT_RECORDED (target: official court copy)",
             pinned_integrity="NOT_PINNED (no expected hash recorded)", source_located=located,
             status_as_recorded=r["action"] + (f"; downloaded_by_ws_b={r['downloaded_by_ws_b']}" if r.get("downloaded_by_ws_b") else ""),
