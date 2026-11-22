@@ -1,0 +1,26 @@
+name: HF sync safeguard tests
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/sync-legal-knowledge-hf.yml"
+      - ".github/workflows/hf-sync-guard-ci.yml"
+      - "tests/test_hf_sync_workflow_guard.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  guard-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install PyYAML (pinned as in requirements.txt)
+        run: python -m pip install 'PyYAML==6.0.4'
+      - name: Workflow guard tests (no network, no upload)
+        run: python -m unittest -v tests.test_hf_sync_workflow_guard
