@@ -49,7 +49,7 @@ Updated 2026-11-22 (cycle 3). Branch: `claude/ws-a-statutory` (base 34e75aa9). W
   - s.4(2) is described as a repeal-and-saving ("as if") clause for actions under the repealed Ordinance 3/1975.
   - The effective date stays NOT_DETERMINED (AA-06; advisor OQ-A-04).
   - Edited: README.md, army_act_amendment_chain.csv (AA-05, AA-06), open_questions.csv (OQ-A-04), acquisition_requests.csv (ACQ-03-B4-06), acq03_pinned_candidates.csv (ACQ03-022).
-- [x] CP-04 / OQ-D-019: PCL-BL-25 (r.23 search-absence summary) is now REQUIRES_VERIFICATION; it relies on no page image and no render hash.
+- [x] CP-04 / OQ-D-019: PCL-BL-25 (r.23 search-absence summary) now has copy_fidelity NOT_CHECKED (policy v1), with REQUIRES_VERIFICATION in evidence_level; it relies on no page image and no render hash.
   - The other 31 carried baseline rows that claimed PAGE_IMAGE_CHECKED now cite render evidence:
     - 25 rows cite WS-A renders (WSA-PIC, with hashes in identity_transcription_register.csv);
     - 6 rows cite baseline PICs that carry a render SHA-256.
