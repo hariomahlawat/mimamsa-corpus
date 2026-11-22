@@ -1,6 +1,6 @@
 # Source-conflict determinations (owner rule, 2026-11-22)
 
-`conflict_determinations.csv` applies `docs/legal-audit/SOURCE_HIERARCHY.md` to every known conflict. For each document it records:
+`conflict_determinations.csv` applies `docs/legal-audit/SOURCE_AUTHORITY_POLICY.md (v1)` to every known conflict. For each document it records:
 - authority
 - provenance
 - applicable date

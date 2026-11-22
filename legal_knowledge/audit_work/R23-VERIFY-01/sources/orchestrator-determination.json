@@ -15,7 +15,7 @@
     "authenticity": "ARCHIVAL_FACSIMILE_OF_OFFICIAL",
     "retrieved_by": "orchestrator",
     "content_role": "GAZETTE_TEXT",
-    "caveat": "Archival reproduction of the printed Gazette (copy of the primary instrument per SOURCE_HIERARCHY.md); not custodian-certified.",
+    "caveat": "Archival reproduction of the printed Gazette (copy of the primary instrument per SOURCE_AUTHORITY_POLICY.md (v1)); not custodian-certified.",
     "document_authority": "ENACTED_OR_NOTIFIED_PRIMARY",
     "carrier_provenance": "THIRD_PARTY_ARCHIVAL_FACSIMILE",
     "copy_fidelity": "PAGE_IMAGE_CHECKED",
