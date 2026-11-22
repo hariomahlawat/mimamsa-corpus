@@ -1,0 +1,523 @@
+{
+  "batch_id": "PILOT-01",
+  "status": "PROPOSED - AWAITING OWNER APPROVAL",
+  "generated_on": "2026-11-22",
+  "input_snapshot": {
+    "kb_file_sha256": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1",
+    "cases_file_sha256": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a",
+    "git_ref": "origin/legal-knowledge/claude-audit-agents-v1@74014b4"
+  },
+  "selection_method": "Purposive stratified selection (23 IDs, rationale per ID) per PILOT_AND_ACCEPTANCE.md strata, plus 2 seeded controls (deterministic, reproducible). Deviation: none in stratum counts.",
+  "seed": "MIMAMSA-PILOT-01",
+  "strata_counts": {
+    "STATUTORY": 6,
+    "PROCEDURE": 5,
+    "JUDGMENT": 5,
+    "COMMAND_AUTHORITY": 4,
+    "CROSS_VOLUME": 3,
+    "CONTROL": 2
+  },
+  "family_coverage": {
+    "HCE (M03)": 3,
+    "CM (M05)": 4,
+    "CIV/V8": 4,
+    "EV/V9": 3,
+    "COI (M04)": 3,
+    "ADM (M06_M07)": 1,
+    "AFT/V7": 2,
+    "CORE_KB (earlier notes, all modules)": 3,
+    "PEN (M08)": 2
+  },
+  "records": [
+    {
+      "record_id": "HCE-010",
+      "stratum": "STATUTORY",
+      "module": "M03",
+      "inferred_volume_family": "HCE (M03)",
+      "kind": "EARLIER_NOTE",
+      "status": "REVIEW_PENDING",
+      "title": "Accused statement, silence and defence witnesses",
+      "source_line": 86,
+      "original_line_sha256": "4131611f6617a260481cd52ef4588cb5e96e3a77857a233e7ede8b2b92cf428a",
+      "original_canonical_sha256": "c22b4e09f427f9cca39a17afa12c6d34dd571f5a01e53547531b9e618cccad86",
+      "first_pass_agents": [
+        "statutory-auditor"
+      ],
+      "rationale": "States accused 'is not obliged' to make SoE statement: exact wording disputed (Rule 23(3) / S.R.O. 484 blocker EX36-001).",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "BLIND_BEFORE_FIRST_PASS"
+    },
+    {
+      "record_id": "CM-013",
+      "stratum": "STATUTORY",
+      "module": "M05",
+      "inferred_volume_family": "CM (M05)",
+      "kind": "NOTE",
+      "status": "SOURCE_REVIEWED_JAG_APPROVAL_PENDING",
+      "title": "Civil court versus court-martial and omitted Section 127",
+      "source_line": 140,
+      "original_line_sha256": "86bc66f70ee191f236be3740c918fc207153b5ebff0a4319ffce00a6b618ece8",
+      "original_canonical_sha256": "a5baa30c903ed8b7bdd399411127bcd543b8da8052515522014166dfce7c5dd9",
+      "first_pass_agents": [
+        "statutory-auditor"
+      ],
+      "rationale": "Brief-listed supersession: AA s.127 omitted 1992; verify amending Act, date and ss.125-126 text.",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "HCE-017",
+      "stratum": "STATUTORY",
+      "module": "M03",
+      "inferred_volume_family": "HCE (M03)",
+      "kind": "EARLIER_NOTE",
+      "status": "REVIEW_PENDING",
+      "title": "Section 80: statutory punishments and limitations",
+      "source_line": 93,
+      "original_line_sha256": "54a4f2358087e1a1ff3871352419ff16ce000a52db1a5fb1e965ed3b741175be",
+      "original_canonical_sha256": "d868421abe927435e65851f5449529a6ffc3bf366e010806977c04bb2c989fa9",
+      "first_pass_agents": [
+        "statutory-auditor",
+        "procedure-auditor"
+      ],
+      "rationale": "Rank-specific limits on ss.80-82 punishments; P0 domain (punishments); check against s.81 text and Appendix III.",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "BLIND_BEFORE_FIRST_PASS"
+    },
+    {
+      "record_id": "CIV-033",
+      "stratum": "STATUTORY",
+      "module": "M09",
+      "inferred_volume_family": "CIV/V8",
+      "kind": "LEGAL_NOTE",
+      "status": "JAG_REVIEW_PENDING",
+      "title": "BNSS section 521 and former CrPC section 475",
+      "source_line": 492,
+      "original_line_sha256": "6846102e992291e1985c7f15de5f3d2c4776c384aa906d1e67b4640fb3ea0759",
+      "original_canonical_sha256": "467bd5ee7b253e495e5f2d75ecdf4d8c935701c19aa384b3f5bee31368f20570",
+      "first_pass_agents": [
+        "statutory-auditor"
+      ],
+      "rationale": "CrPC s.475 -> BNSS s.521 mapping; corpus correspondence table has no BNSS s.521 row (gap).",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "BLIND_BEFORE_FIRST_PASS"
+    },
+    {
+      "record_id": "CM-025",
+      "stratum": "STATUTORY",
+      "module": "M05",
+      "inferred_volume_family": "CM (M05)",
+      "kind": "NOTE",
+      "status": "SOURCE_REVIEWED_JAG_APPROVAL_PENDING",
+      "title": "Evidence law and 2023 criminal-law transition",
+      "source_line": 152,
+      "original_line_sha256": "a8ccf31948613da7e423aecf83bcd3f1d74e80be967843e0920f2edb23cc4e32",
+      "original_canonical_sha256": "d5392a629a354b9b4e9c9970380bc014a556757899c7ba61a8a1a53f7e368019",
+      "first_pass_agents": [
+        "statutory-auditor"
+      ],
+      "rationale": "Claims 2025 AA s.133 still names Indian Evidence Act 1872; IEA->BSA transition (brief supersession case).",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "EV-002",
+      "stratum": "STATUTORY",
+      "module": "M13",
+      "inferred_volume_family": "EV/V9",
+      "kind": "LEGAL_NOTE",
+      "status": "JAG_REVIEW_PENDING",
+      "title": "Distinguish pre-July 2024 proceedings",
+      "source_line": 564,
+      "original_line_sha256": "5eb3f68df1d88ce32320a98bcc2defdbc11b9d8ffe6e6c7808303768594120aa",
+      "original_canonical_sha256": "9a6e022a052a24364dcd03f860b2eda71d60791912345720a27c86db9ec9a3d0",
+      "first_pass_agents": [
+        "statutory-auditor"
+      ],
+      "rationale": "BSA s.170 repeal/savings for pending proceedings; temporal-validity test, Volume EV/V9.",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "HCE-004",
+      "stratum": "PROCEDURE",
+      "module": "M03",
+      "inferred_volume_family": "HCE (M03)",
+      "kind": "EARLIER_NOTE",
+      "status": "REVIEW_PENDING",
+      "title": "Rule 22(1) proviso after Court of Inquiry",
+      "source_line": 80,
+      "original_line_sha256": "71b02bcc62a2ed9716983250699f742c71f614506dbd527d126ca620a14bf34a",
+      "original_canonical_sha256": "44b36786b548e819ac59521eb9d1cc41a843f45e203dae26395c5a605de1e05f",
+      "first_pass_agents": [
+        "procedure-auditor"
+      ],
+      "rationale": "Rule 22(1) proviso after CoI conditional on Rule 180; 1993 amendment (S.R.O. 17(E)) chain unverified.",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "COI-025",
+      "stratum": "PROCEDURE",
+      "module": "M04",
+      "inferred_volume_family": "COI (M04)",
+      "kind": "EARLIER_NOTE",
+      "status": "REVIEW_PENDING",
+      "title": "6.1 Rule 182: CoI proceedings are not trial evidence against the person",
+      "source_line": 55,
+      "original_line_sha256": "645787c99b5e33ecb773453b7b4c1407da9c9659a8c4cdb812fa5ed2f5d65b8e",
+      "original_canonical_sha256": "a948f7bf74e8b7250815ed990e376580f547380cef7d12699e425c8f90e6c7bc",
+      "first_pass_agents": [
+        "procedure-auditor"
+      ],
+      "rationale": "Rule 182 use of CoI evidence and exceptions; v2.8 'narrow text match' only.",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "CM-011",
+      "stratum": "PROCEDURE",
+      "module": "M05",
+      "inferred_volume_family": "CM (M05)",
+      "kind": "NOTE",
+      "status": "SOURCE_REVIEWED_JAG_APPROVAL_PENDING",
+      "title": "Limitation to commence trial",
+      "source_line": 138,
+      "original_line_sha256": "dbf0137e3a85c5aa009b3b648dd690c705c9bc11dd4579d21e24f7b27c14ba88",
+      "original_canonical_sha256": "36fee987b68df3a01ca72c464790bdd5301a4e0b93184d3994a97836fc3964bc",
+      "first_pass_agents": [
+        "procedure-auditor",
+        "statutory-auditor"
+      ],
+      "rationale": "AA s.122 limitation computation and exceptions; P0 (court-martial).",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "BLIND_BEFORE_FIRST_PASS"
+    },
+    {
+      "record_id": "ADM-009",
+      "stratum": "PROCEDURE",
+      "module": "M06_M07",
+      "inferred_volume_family": "ADM (M06_M07)",
+      "kind": "LEGAL_NOTE",
+      "status": "JAG_REVIEW_PENDING",
+      "title": "Rule 17: notice and exceptions for Section 20 action",
+      "source_line": 211,
+      "original_line_sha256": "d8933e0da4ac5690645bdca33aa8099c903d891e3222e85eaa0f5b9233d958aa",
+      "original_canonical_sha256": "4269c112dcc81c9570f0bdbcb1ae8362ac0326493df8b52f2ad3c2c77f88e8e1",
+      "first_pass_agents": [
+        "procedure-auditor"
+      ],
+      "rationale": "Rule 17 notice / s.20 administrative action exceptions; Volume ADM.",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "AFT-011",
+      "stratum": "PROCEDURE",
+      "module": "M10",
+      "inferred_volume_family": "AFT/V7",
+      "kind": "LEGAL_NOTE",
+      "status": "JAG_REVIEW_PENDING",
+      "title": "Unanswered petition and statutory text issue",
+      "source_line": 372,
+      "original_line_sha256": "7bfd456e561fb4b1696aa3fa5cddfaa50e2d4d869583a4533f55e97286e7c0dd",
+      "original_canonical_sha256": "31647b16c03fc2fa3c91f46f71fda6f2c6f234cbe92c4775456440a706847af5",
+      "first_pass_agents": [
+        "procedure-auditor",
+        "statutory-auditor"
+      ],
+      "rationale": "AFT Act ss.21-22 deemed exhaustion/limitation; record itself flags a statutory-text issue.",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "KB-026",
+      "stratum": "JUDGMENT",
+      "module": "M11",
+      "inferred_volume_family": "CORE_KB (earlier notes, all modules)",
+      "kind": "EARLIER_NOTE",
+      "status": "REVIEW_PENDING",
+      "title": "Case-law method: Rule 180 is mandatory but effects are context-specific",
+      "source_line": 26,
+      "original_line_sha256": "6f6ffb4e19247361c7e40d9c98d709e3aadf4a20d19a218e2bdfd7d54de948e8",
+      "original_canonical_sha256": "03c6fd8478c7948341500f28ca4a449cf1127c209e201ec4b869de1e8297119b",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "rationale": "Virendra Kumar 2020 paras 12-16; official SC PDF archived on HF (judgment_originals/sci/2020).",
+      "linked_53_case_rows_UNVERIFIED": [
+        {
+          "case_id": "DCLR-SC-2020-002",
+          "basis": "party name 'virendra kumar' appears in record text"
+        }
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "PEN-043",
+      "stratum": "JUDGMENT",
+      "module": "M08",
+      "inferred_volume_family": "PEN (M08)",
+      "kind": "PENSION_NOTE",
+      "status": "JAG_REVIEW_PENDING",
+      "title": "Disability presumption in historical cases",
+      "source_line": 308,
+      "original_line_sha256": "aacfa91ed6b956d05b9afe1861526c79b13446626fd4bb0d696d0fb28221fd1e",
+      "original_canonical_sha256": "9a6f68a4b86de8358a42daced906a56c19a3af5db143a32b9d2b38e00e12ba91",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "rationale": "Dharamvir/Rajbir/N S Yadav presumption vs 2026 INSC 993 (Isaac); brief-listed supersession case.",
+      "linked_53_case_rows_UNVERIFIED": [
+        {
+          "case_id": "DCLR-SC-2013-N08",
+          "basis": "party name 'dharamvir' appears in record text"
+        },
+        {
+          "case_id": "DCLR-SC-2015-N09",
+          "basis": "party name 'rajbir' appears in record text"
+        }
+      ],
+      "independent_review": "BLIND_BEFORE_FIRST_PASS"
+    },
+    {
+      "record_id": "CIV-019",
+      "stratum": "JUDGMENT",
+      "module": "M09",
+      "inferred_volume_family": "CIV/V8",
+      "kind": "LEGAL_NOTE",
+      "status": "JAG_REVIEW_PENDING",
+      "title": "Electronic evidence and CCTV",
+      "source_line": 478,
+      "original_line_sha256": "a10b8dce0e2ec483c9fd0f58c6b943238b922b98cdfcf54d1c097a281660d82c",
+      "original_canonical_sha256": "a8b03e629c4becafecddba5bbbe7b38f9b36c6f7d05077ee17ac2c07629cb8ad",
+      "first_pass_agents": [
+        "judgment-auditor",
+        "statutory-auditor"
+      ],
+      "rationale": "Electronic evidence; Navjot s.65B line overruled in part (EX36-004); record cites only BSA.",
+      "linked_53_case_rows_UNVERIFIED": [
+        {
+          "case_id": "DCLR-SC-2005-L01",
+          "basis": "subject-matter lead only; case not cited by record"
+        },
+        {
+          "case_id": "DCLR-SC-2014-N12",
+          "basis": "subject-matter lead only; case not cited by record"
+        }
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "KB-028",
+      "stratum": "JUDGMENT",
+      "module": "M11",
+      "inferred_volume_family": "CORE_KB (earlier notes, all modules)",
+      "kind": "EARLIER_NOTE",
+      "status": "REVIEW_PENDING",
+      "title": "Case-law method: constitutional review of AFT",
+      "source_line": 28,
+      "original_line_sha256": "5328623a84328e7750e9d85626d8a7e3c5a665198949e54bb927a86a5d3fc6dc",
+      "original_canonical_sha256": "77b9ba1140446ceaad2b331102c85580882cb510fb687bc4a2cac2989294263e",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "rationale": "Parashotam Dass 2023 paras 24-30: HC Art 226 review of AFT orders (brief-listed).",
+      "linked_53_case_rows_UNVERIFIED": [
+        {
+          "case_id": "DCLR-SC-2023-009",
+          "basis": "party name 'parashotam dass' appears in record text"
+        }
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "PEN-J-01",
+      "stratum": "JUDGMENT",
+      "module": "M08",
+      "inferred_volume_family": "PEN (M08)",
+      "kind": "PENSION_CASE",
+      "status": "JAG_REVIEW_PENDING",
+      "title": "Dharamvir Singh v Union of India (2013)",
+      "source_line": 355,
+      "original_line_sha256": "6ed839aa7101abe8c6446b32f3b4d6fa979eec9f34a54e4cfbf82d3da1aeb5f7",
+      "original_canonical_sha256": "7fc4679a5f5df798257a758e08109687f1c04118a5efed37ce5384452d01153f",
+      "first_pass_agents": [
+        "judgment-auditor"
+      ],
+      "rationale": "Dharamvir Singh 2013 digest: identity/citation and later treatment (Isaac 2026).",
+      "linked_53_case_rows_UNVERIFIED": [
+        {
+          "case_id": "DCLR-SC-2013-N08",
+          "basis": "party name 'dharamvir' appears in record text"
+        }
+      ],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "KB-003",
+      "stratum": "COMMAND_AUTHORITY",
+      "module": "M02",
+      "inferred_volume_family": "CORE_KB (earlier notes, all modules)",
+      "kind": "EARLIER_NOTE",
+      "status": "REVIEW_PENDING",
+      "title": "CO summary punishment: statutory entry point",
+      "source_line": 3,
+      "original_line_sha256": "cf94e78ade6043053ddf3194b518f0e25841bb2a8f50f755ad7cbb1666bab668",
+      "original_canonical_sha256": "892bf3d5d10603cae06d45959339a9b78d6afca34298ee9f15433919009e93bf",
+      "first_pass_agents": [
+        "procedure-auditor",
+        "statutory-auditor"
+      ],
+      "rationale": "CO summary punishment powers ss.79-82 (P0: coercive powers).",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "BLIND_BEFORE_FIRST_PASS"
+    },
+    {
+      "record_id": "CM-003",
+      "stratum": "COMMAND_AUTHORITY",
+      "module": "M05",
+      "inferred_volume_family": "CM (M05)",
+      "kind": "NOTE",
+      "status": "SOURCE_REVIEWED_JAG_APPROVAL_PENDING",
+      "title": "Who may convene a GCM or DCM",
+      "source_line": 130,
+      "original_line_sha256": "8bf3946fdb3011eca6765bb60baa5eba0070194650a5d4b1f75ab5bccbaf7232",
+      "original_canonical_sha256": "0907c61d70d218cfc1ebe414222c178ceefbcf8ce8ceb72f21ec99cc1b40106d",
+      "first_pass_agents": [
+        "statutory-auditor"
+      ],
+      "rationale": "GCM/DCM convening authority ss.109-111, Rule 37 (P0: court-martial authority).",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "COI-008",
+      "stratum": "COMMAND_AUTHORITY",
+      "module": "M04",
+      "inferred_volume_family": "COI (M04)",
+      "kind": "EARLIER_NOTE",
+      "status": "REVIEW_PENDING",
+      "title": "3.1 Who may assemble the court",
+      "source_line": 38,
+      "original_line_sha256": "876ee246814af22bc17bd076d83787973f7b2d9f9c779836f8f518b83ac07d80",
+      "original_canonical_sha256": "2618c48db1cc75055bbfa73fed34b4e4ab84afd4ed26428a8c82b18f8637a993",
+      "first_pass_agents": [
+        "procedure-auditor"
+      ],
+      "rationale": "CoI assembling authority Rule 177(3) and Rule 185 special procedure.",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "CIV-008",
+      "stratum": "COMMAND_AUTHORITY",
+      "module": "M09",
+      "inferred_volume_family": "CIV/V8",
+      "kind": "LEGAL_NOTE",
+      "status": "JAG_REVIEW_PENDING",
+      "title": "Competent forum-choice authority",
+      "source_line": 467,
+      "original_line_sha256": "07fed784f69887cfc7ff7e18ee6c67314d09838fe790e78987fb40b3605aa844",
+      "original_canonical_sha256": "befb7a193adf8fb9f76f1b6146d96eb6e658f2d3aa5468224277c5c5dc0ff183",
+      "first_pass_agents": [
+        "statutory-auditor",
+        "procedure-auditor"
+      ],
+      "rationale": "s.125 forum-choice authority vs unit CO; 1978 adjustment rules.",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "EV-016",
+      "stratum": "CROSS_VOLUME",
+      "module": "M13",
+      "inferred_volume_family": "EV/V9",
+      "kind": "LEGAL_NOTE",
+      "status": "JAG_REVIEW_PENDING",
+      "title": "Summary of Evidence rights and scope",
+      "source_line": 578,
+      "original_line_sha256": "b2fe32d5eaee939764ab5011c9f0cc794197f64113f1ad90376c061547a4e293",
+      "original_canonical_sha256": "1e47ed0b2cd36612e504e942475cf453d56e08a9cf9e0c67f2c837ff1d158817",
+      "first_pass_agents": [
+        "cross-volume-auditor"
+      ],
+      "rationale": "SoE caution in V9 vs HCE-010/KB-006/V9-CL-04 (Rule 23(3) wording consistency).",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "CIV-034",
+      "stratum": "CROSS_VOLUME",
+      "module": "M09",
+      "inferred_volume_family": "CIV/V8",
+      "kind": "LEGAL_NOTE",
+      "status": "JAG_REVIEW_PENDING",
+      "title": "BSA applies to courts-martial",
+      "source_line": 493,
+      "original_line_sha256": "9efda464a4e1e926a2088b401e690c500442415a81536f8343aed8dce3c6f1b5",
+      "original_canonical_sha256": "2a5b3bd4ad6f28f856bb69c2d73302ccd5a376c981cdb408f587b066f4ba89b4",
+      "first_pass_agents": [
+        "cross-volume-auditor"
+      ],
+      "rationale": "BSA s.1(2) applies to courts-martial vs CM-025 (AA s.133 names IEA) and CIV-019.",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "AFT-004",
+      "stratum": "CROSS_VOLUME",
+      "module": "M10",
+      "inferred_volume_family": "AFT/V7",
+      "kind": "LEGAL_NOTE",
+      "status": "JAG_REVIEW_PENDING",
+      "title": "Section 14 original application versus section 15 court-martial appeal",
+      "source_line": 365,
+      "original_line_sha256": "9034d57d9b6f05a90bd6403bc44be0b650bc9b3f6583e2e2d23d7b5382242684",
+      "original_canonical_sha256": "231f0c6d5c6259049cc06b95f0c5db7bf492c95aeb02a7154b53c2f3d7d88048",
+      "first_pass_agents": [
+        "cross-volume-auditor",
+        "judgment-auditor"
+      ],
+      "rationale": "AFT s.14 vs s.15 vs CM-036/KB-022 (s.3(o) exclusions); P S Gill 2019 caveat proposed in v2.8.",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "BLIND_BEFORE_FIRST_PASS"
+    },
+    {
+      "record_id": "V9-CL-02",
+      "stratum": "CONTROL",
+      "module": "M13",
+      "inferred_volume_family": "EV/V9",
+      "kind": "CHECKLIST",
+      "status": "JAG_REVIEW_PENDING",
+      "title": "Witness statement",
+      "source_line": 636,
+      "original_line_sha256": "a45c7b3f02299dd9d34a0f230fae3a2c5979a01acd50e9bbb29aeef6786c3147",
+      "original_canonical_sha256": "838a81166f3a74368cf0d542cc7ebcf4fbcb1130c1b4e06157db1968ea0bcb8f",
+      "first_pass_agents": [
+        "independent-reviewer"
+      ],
+      "rationale": "Seeded control (seed MIMAMSA-PILOT-01, lowest SHA-256(seed+id) among 13 records with no high-risk keyword).",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "AFTER_FIRST_PASS_P0_P1_ONLY"
+    },
+    {
+      "record_id": "COI-039",
+      "stratum": "CONTROL",
+      "module": "M04",
+      "inferred_volume_family": "COI (M04)",
+      "kind": "EARLIER_NOTE",
+      "status": "REVIEW_PENDING",
+      "title": "8.6 Case-digest format for the database",
+      "source_line": 69,
+      "original_line_sha256": "d2cea86e4034a98026b4af4aed543055203a50124a32d8d017384d1acb7133de",
+      "original_canonical_sha256": "f5300a389896598d506d6bf3bc527ee81564355717371c0d69747932d95fe0ff",
+      "first_pass_agents": [
+        "independent-reviewer"
+      ],
+      "rationale": "Seeded control (seed MIMAMSA-PILOT-01, lowest SHA-256(seed+id) among 13 records with no high-risk keyword).",
+      "linked_53_case_rows_UNVERIFIED": [],
+      "independent_review": "BLIND_BEFORE_FIRST_PASS"
+    }
+  ]
+}
