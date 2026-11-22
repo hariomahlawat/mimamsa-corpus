@@ -13,6 +13,7 @@ on:
       - "scripts/forensic_p0_source_v32.py"
       - "scripts/archive_precedent_treatment_v32.py"
       - "scripts/archive_gazette_v33.py"
+      - "scripts/archive_sci_office_report_v33.py"
       - "scripts/archive_sc_treatment_v33.py"
       - "scripts/archive_supreme_court_pilot.py"
       - "scripts/verify_sc_source_matches_v29.py"
@@ -75,6 +76,9 @@ jobs:
       - name: Attempt official 2022 eGazette SRO 6(E) PDF acquisition with SHA-256
         continue-on-error: true
         run: python scripts/archive_gazette_v33.py
+      - name: Archive authenticated Supreme Court office report citing Mani Ram Bhaira
+        continue-on-error: true
+        run: python scripts/archive_sci_office_report_v33.py
       - name: Verify existing original corpus PDFs for Bedi and Ranjit Thakur with SHA-256
         run: python scripts/verify_sc_source_matches_v29.py
       - name: Verify checksum and reconstruct original MML archive
