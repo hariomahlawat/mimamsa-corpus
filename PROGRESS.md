@@ -1,5 +1,15 @@
 # Progress
 
+## 2026-11-22 — Crawler security: compromised AFT Jabalpur host removed (PR, not merged)
+
+- `aftjabalpur.in`, formerly the configured host for AFT Regional Bench Jabalpur, was found to serve
+  unrelated betting content. It is removed from `sources.aft.allowed_hosts` and added to `blocked_hosts`
+  (with `www.`). The Jabalpur bench keeps no listing address until an official one is found.
+- `crawler/config.py`: blocked hosts now also block their subdomains; `check_config` reports any URL in a
+  source's config (base_url, listing_urls, ...) whose host is blocked.
+- `tests/test_crawler_security.py` (offline) and `.github/workflows/crawler-security-ci.yml` guard against
+  reintroduction. The domain was not visited at any point.
+
 ## 2026-11-22 — Filter bug fixed; all removed judgments re-checked
 
 - Bug: the keyword "Armed Forces Tribunal" matched only in all-lowercase or all-capitals, not the

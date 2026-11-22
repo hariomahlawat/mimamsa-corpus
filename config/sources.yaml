@@ -190,7 +190,7 @@ sources:
     priority: 1
     heavy: true
     verify: true
-    allowed_hosts: [www.aftdelhi.nic.in, aftdelhi.nic.in, aftlko.up.nic.in, aftkolkata.nic.in, aftjabalpur.in]
+    allowed_hosts: [www.aftdelhi.nic.in, aftdelhi.nic.in, aftlko.up.nic.in, aftkolkata.nic.in]
     base_url: https://www.aftdelhi.nic.in
     discovery: "Per bench: read its judgment listing page(s) and queue every PDF link with what the row says about it."
     benches:
@@ -205,6 +205,9 @@ sources:
           page_link_pattern: "/judgements/index/page:\\d+$" }
       # Layout known (table of PDF links) but the listing page addresses were not recorded in 2023:
       - { key: lucknow,     name: "Regional Bench, Lucknow",  style: table, listing_urls: [] }
+      # Jabalpur: the host previously listed for this bench was removed on 2026-11-22 (it no longer serves
+      # the Tribunal; see blocked_hosts). No official address is known; find one on an official AFT
+      # source before adding any host here.
       - { key: jabalpur,    name: "Regional Bench, Jabalpur", style: table, listing_urls: [] }
       # Nothing known yet:
       - { key: guwahati,    name: "Regional Bench, Guwahati" }
@@ -292,8 +295,12 @@ sources:
       - { identifier: in.ernet.dli.2015.279009, title: "Manual Of Military Law War Office 1907", year: null, note: "British manual; possibly a duplicate scan" }
       - { identifier: dli.ernet.237370,         title: "Manual Of Military Law (1929)", year: 1929, note: "British manual" }
 
-# Explicitly forbidden: never fetch, even if linked.
+# Explicitly forbidden: never fetch, even if linked. Subdomains of a blocked host are blocked too.
 blocked_hosts:
+  # Formerly configured for AFT Regional Bench Jabalpur; found on 2026-11-22 to serve unrelated (betting)
+  # content. Not an official Tribunal host. Never visit; tests/test_crawler_security.py guards this.
+  - aftjabalpur.in
+  - www.aftjabalpur.in
   - indiankanoon.org
   - www.indiankanoon.org
   - www.casemine.com
