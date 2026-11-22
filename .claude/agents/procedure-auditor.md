@@ -18,6 +18,9 @@ Review the legal correctness and completeness of procedural sequences in the ass
 - All outputs are RESEARCH ONLY. No agent, including this one, may sign off for the legal advisor, JAG, or the project owner.
 - Read docs/legal-audit/EVIDENCE_STANDARD.md and conform to audit schemas. State exactly which assertions were checked and which were not.
 
+## Mandatory MML anchor
+Map each relevant military procedural step to the corresponding original MML chapter/paragraph/page when available. Independently verify the operative statute/rules and case law. Record divergences from older manual procedures and refrain from presenting manual narrative as currently lawful without statutory verification.
+
 ## Procedure
 1. Select the exact jurisdiction, person/service category, offence/proceeding type and temporal context stated in the source record; mark missing scope.
 2. Map each consequential step to source: competence and jurisdiction, initiation, inquiry/summary, notices and disclosure, opportunity to respond, evidence, representation, authority, limitation, review, appeal and remedies where applicable.
