@@ -9,7 +9,7 @@ Files:
 - `verify_acquisition.py`: offline post-run check. Currently `PENDING=14 SKIP=7`.
 - `AFT_ROUTE_ASSESSMENT.md`.
 
-The evidence rule throughout is `docs/legal-audit/SOURCE_HIERARCHY.md` (owner rule, 2026-11-22). An archival reproduction of an official Gazette is a **copy of the primary instrument** (`ARCHIVAL_COPY_OF_OFFICIAL`), weighed by its custody checks and never treated as commentary.
+The evidence rule throughout is `docs/legal-audit/SOURCE_AUTHORITY_POLICY.md (v1)` (owner rule, 2026-11-22). An archival reproduction of an official Gazette is a **copy of the primary instrument** (`ARCHIVAL_FACSIMILE_OF_OFFICIAL`), weighed by its custody checks and never treated as commentary.
 
 ## Preservation rules (every batch)
 - Raw bytes are stored unmodified at `data/raw/archive/<yyyy>/<sha256>.pdf` (or the source's own folder), named by SHA-256 and never edited.
