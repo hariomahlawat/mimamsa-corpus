@@ -1,0 +1,49 @@
+{
+  "schema_version": "3.6",
+  "record_type": "proposition",
+  "required": [
+    "proposition_id",
+    "case_id",
+    "research_proposition",
+    "statutory_scope",
+    "evidence_role",
+    "pdf_page_or_secondary_locator",
+    "ratio_status",
+    "jag_approved",
+    "commander_operational_clearance"
+  ],
+  "constraints": {
+    "unique_proposition_ids": true,
+    "original_sources_immutable": true,
+    "source_text_not_approval": true,
+    "publication_rule": "operational_clearance only if primary source, second independent merits check, amendment/version check, precedent treatment and JAG approval all true",
+    "precedent_relationship_values": [
+      "FOLLOWED",
+      "DISTINGUISHED",
+      "OVERRULED_IN_PART",
+      "OVERRULED_IN_FULL",
+      "AFFIRMED",
+      "REFERRED_TO",
+      "COUNSEL_SUBMISSION_ONLY",
+      "INDIRECT_CITATION_CHAIN",
+      "UNKNOWN"
+    ],
+    "evidence_roles": [
+      "COURT_HOLDING",
+      "COURT_ORDER",
+      "COURT_OBSERVATION",
+      "COURT_HEADNOTE",
+      "COUNSEL_ARGUMENT",
+      "SECONDARY_TRANSCRIPT",
+      "SOURCE_SEARCH_RESULT",
+      "UNRESOLVED"
+    ],
+    "default_operational_clearance": false,
+    "default_jag_approved": false
+  },
+  "notes": [
+    "All 28 v3.6 entries are research propositions, not approved current-law answers.",
+    "Court paragraph identity is not supplied for 22 P0 entries; page-only is a review locator.",
+    "Specialist JAG review may reject, narrow or split any proposed statement."
+  ]
+}
