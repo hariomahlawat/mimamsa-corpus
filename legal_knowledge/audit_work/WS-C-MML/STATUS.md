@@ -62,7 +62,13 @@ Parser fix for letter suffixes, list continuation and uncoded case names. Detail
   - The corrections are s.2 in vol 2(AA): the index pointed to a note; the heading is at PDF p.1 / L00011.
   - The remaining 422 rows stay REQUIRES_VERIFICATION.
   - DOC rows are LibreOffice renders of native DOC text (`render_source` column).
-- Next: task 3 (`procedural_contradictions_cycle3.csv`).
+- C3 commit 2, task 3: `procedural_contradictions_cycle3.csv` (20 rows, proposals for independent review).
+  - Each row gives the MML reading (page image + render sha; PC-12 and PC-19 are text-only), the comparator instrument and version, and the exact reviewer question.
+  - Dates are kept distinct: publication, commencement as printed, effective date, status.
+  - Severity: P1 = 5 (PC-02, 08, 09, 10, 11); P2 = 11; P3 = 4.
+  - WSC-PIC-109 added (MML 1 Ch II para 13).
+- Task 4: the parser was not touched in cycle 3; `test_kb_citations.py` re-run at every commit and passes.
+- Fixed determinations unchanged: r.23(3) CONFLICTING; C-08 OPEN; C-09 PROPOSAL.
 
 ## Next (if continued)
 - Image-check the crosswalk locators that the advisor selects. Every crosswalk locator is text-layer only (REQUIRES_VERIFICATION).
