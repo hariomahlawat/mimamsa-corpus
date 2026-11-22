@@ -654,6 +654,429 @@ sources:
         expected_md5: "8a29e71cd63bee5461b55fb1597ea904"
         expected_bytes: 645527
         note: "ACQ-02; archive.org item in.gazette.central.w.1989-12-02.25809; operative page(s) printed p.736; page-image checks PIC-12"
+  archive_acq03:
+    # ACQ-03 (PROPOSED 2026-11-22; NOT authorised for download). Separate approval scope from ACQ-01 (PR #8) and
+    # ACQ-02 (PR #17). Pinned from WS-A acq03_pinned_candidates.csv (md5/bytes from read-only metadata).
+    # OCR/FTS identities are locators only until page-image checks on the record copies.
+    phase: 6
+    enabled: false
+    priority: 3
+    heavy: false
+    allowed_hosts: [archive.org, "*.archive.org"]
+    require_https: true
+    verify: true
+    discovery: "Fetched by address only (crawler/direct.py); approval scope ACQ-03 (archive.org)"
+    documents:
+      - doc_id: acq03-001-b1
+        url: "https://archive.org/download/in.gazette.central.w.1966-08-27.76274/76274.pdf"
+        title: "Army (First Amendment) Rules, 1966 (OCR: Part 1 of Appendix IV)"
+        doc_type: notification
+        year: 1966
+        number: "ACQ03-001"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "db421593aff8a9d834387d16288f2c99"
+        expected_bytes: 216518
+        note: "ACQ-03 batch B1; identity expected: Gazette of India Pt II-Sec 4 weekly, 27-08-1966 (issue Ref.175); closes AR-012; GAP-04; OQ-A-06; file per metadata: original (Text PDF)"
+      - doc_id: acq03-002-b1
+        url: "https://archive.org/download/in.gazette.central.w.1967-01-07.73211/73211.pdf"
+        title: "unknown Army Rules amendment (OCR: further to amend the Army Rules, 1954)"
+        doc_type: notification
+        year: 1967
+        number: "ACQ03-002"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "b563f24104b7db4f7460a28d8eac78df"
+        expected_bytes: 270581
+        note: "ACQ-03 batch B1; identity expected: Pt II-Sec 4 weekly, 07-01-1967 (Ref.1); closes AR-013; GAP-04; OQ-A-06; file per metadata: original (Text PDF)"
+      - doc_id: acq03-003-b1
+        url: "https://archive.org/download/in.gazette.central.w.1967-12-16.75707/75707.pdf"
+        title: "unknown Army Rules amendment (OCR)"
+        doc_type: notification
+        year: 1967
+        number: "ACQ03-003"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "fa551a7f1e5fb34697954af3b046172c"
+        expected_bytes: 217120
+        note: "ACQ-03 batch B1; identity expected: Pt II-Sec 4 weekly, 16-12-1967 (Ref.385); closes AR-041; GAP-04; OQ-A-06; file per metadata: original (Text PDF)"
+      - doc_id: acq03-004-b1
+        url: "https://archive.org/download/in.gazette.central.w.1968-11-16.72289/72289.pdf"
+        title: "Army Amendment Rules, 1968 (OCR: Appendix I)"
+        doc_type: notification
+        year: 1968
+        number: "ACQ03-004"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "d890fc7f2c663eeb103e5623d9a89a75"
+        expected_bytes: 419587
+        note: "ACQ-03 batch B1; identity expected: Pt II-Sec 4 weekly, 16-11-1968 (Ref.334); closes AR-042; GAP-04; OQ-A-06; file per metadata: original (Text PDF)"
+      - doc_id: acq03-005-b1
+        url: "https://archive.org/download/in.gazette.central.w.1969-03-01.68684/68684.pdf"
+        title: "S.R.O. 66 dated 14-02-1969, Army Amendment Rules, 1969 (OCR: App. I Form No. II)"
+        doc_type: notification
+        year: 1969
+        number: "ACQ03-005"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "55514cdfc31328a5a096d6d73a4d906e"
+        expected_bytes: 119819
+        note: "ACQ-03 batch B1; identity expected: Pt II-Sec 4 weekly, 01-03-1969 (Ref.66); closes AR-043; GAP-04; OQ-A-06; file per metadata: original (Text PDF)"
+      - doc_id: acq03-006-b1
+        url: "https://archive.org/download/in.gazette.central.w.1970-01-17.63332/63332.pdf"
+        title: "unknown Army Rules amendment (OCR)"
+        doc_type: notification
+        year: 1970
+        number: "ACQ03-006"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "65222929bec3231ad4e4dda0c9965b40"
+        expected_bytes: 199340
+        note: "ACQ-03 batch B1; identity expected: Pt II-Sec 4 weekly, 17-01-1970 (Ref.14); closes AR-044; GAP-04; OQ-A-06; file per metadata: original (Text PDF)"
+      - doc_id: acq03-007-b1
+        url: "https://archive.org/download/in.gazette.central.w.1972-02-19.59085/59085.pdf"
+        title: "Army (First Amendment) Rules, 1972 (OCR: Appendix)"
+        doc_type: notification
+        year: 1972
+        number: "ACQ03-007"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "02d1de61bf35abe65426114ecf55824b"
+        expected_bytes: 1278060
+        note: "ACQ-03 batch B1; identity expected: weekly (CSL), 19-02-1972; closes AR-045; GAP-04; OQ-A-06; file per metadata: original (Text PDF)"
+      - doc_id: acq03-008-b1
+        url: "https://archive.org/download/in.gazette.central.w.1974-08-17.55730/55730.pdf"
+        title: "Army (Amendment) Rules, 1974 (OCR; commencement clause)"
+        doc_type: notification
+        year: 1974
+        number: "ACQ03-008"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "c2685d66ecf87a6d4e4b6b5e73bfbb21"
+        expected_bytes: 881772
+        note: "ACQ-03 batch B1; identity expected: weekly (CSL), 17-08-1974; closes AR-046; GAP-04; OQ-A-06; file per metadata: original (Text PDF)"
+      - doc_id: acq03-009-b1
+        url: "https://archive.org/download/in.gazette.central.w.1974-11-16.55738/55738.pdf"
+        title: "Army (Second Amendment) Rules, 1974 (OCR: App. 1 Form No.1)"
+        doc_type: notification
+        year: 1974
+        number: "ACQ03-009"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "fcd50df7fd3a6bb11c2b8af7cbb2f8cc"
+        expected_bytes: 963606
+        note: "ACQ-03 batch B1; identity expected: weekly (CSL), 16-11-1974 (probably same as in.gazette.1974.243); closes AR-015; GAP-04; OQ-A-06; file per metadata: original (Text PDF)"
+      - doc_id: acq03-010-b2
+        url: "https://archive.org/download/in.gazette.central.w.1960-10-08.88375/88375.pdf"
+        title: "S.R.O. 331 dated 23-09-1960, Army (Second Amendment) Rules, 1960 (r.168(2))"
+        doc_type: notification
+        year: 1960
+        number: "ACQ03-010"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "55ae76e704c63890433eb09113733d53"
+        expected_bytes: 485922
+        note: "ACQ-03 batch B2; identity expected: Pt II-Sec 4 weekly, 08-10-1960, ~pp.190-191; closes AR-002; GAP-05; file per metadata: original (Text PDF)"
+      - doc_id: acq03-011-b2
+        url: "https://archive.org/download/in.gazette.central.w.1960-10-15.88376/88376.pdf"
+        title: "S.R.O. 348 dated 03-10-1960, Army (Amendment) Rules, 1960 (App. I Forms I, II)"
+        doc_type: notification
+        year: 1960
+        number: "ACQ03-011"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "ed9ca1f86e2f8da64945b942cdb8405a"
+        expected_bytes: 214636
+        note: "ACQ-03 batch B2; identity expected: Pt II-Sec 4 weekly, 15-10-1960; closes AR-003; GAP-05; file per metadata: original (Text PDF)"
+      - doc_id: acq03-012-b2
+        url: "https://archive.org/download/in.gazette.central.w.1960-10-22.88377/88377.pdf"
+        title: "S.R.O. 351 dated 07-10-1960, Army (Third Amendment) Rules, 1960 (Table below r.13)"
+        doc_type: notification
+        year: 1960
+        number: "ACQ03-012"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "83928ad246754eaa82ef38e2dfb01c47"
+        expected_bytes: 491131
+        note: "ACQ-03 batch B2; identity expected: Pt II-Sec 4 weekly, 22-10-1960; closes AR-004; GAP-05; file per metadata: original (Text PDF)"
+      - doc_id: acq03-013-b2
+        url: "https://archive.org/download/in.gazette.central.w.1960-12-03.88383/88383.pdf"
+        title: "S.R.O. 404 dated 21-11-1960, Army (Fourth Amendment) Rules, 1960 (r.168(3), App. IV, V)"
+        doc_type: notification
+        year: 1960
+        number: "ACQ03-013"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "d17443252551a276c5288e154e625c71"
+        expected_bytes: 205584
+        note: "ACQ-03 batch B2; identity expected: Pt II-Sec 4 weekly, 03-12-1960; closes AR-005; GAP-05; file per metadata: original (Text PDF)"
+      - doc_id: acq03-014-b2
+        url: "https://archive.org/download/in.gazette.central.w.2010-05-29.162/162.pdf"
+        title: "S.R.O. 22 dated 13-05-2010, Army (Amendment) Rules, 2010 (Table r.13)"
+        doc_type: notification
+        year: 2010
+        number: "ACQ03-014"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "23fa6e9e7fc4e1fcf0bde0edc54171e5"
+        expected_bytes: 59988
+        note: "ACQ-03 batch B2; identity expected: Pt II-Sec 4 weekly, 29-05-2010, p.86; closes AR-032; GAP-05; file per metadata: original (Text PDF)"
+      - doc_id: acq03-015-b3
+        url: "https://archive.org/download/in.gazette.e.1974.333/E-1272-1974-0084-56281.pdf"
+        title: "Repealing and Amending Act, 1974 (56 of 1974)"
+        doc_type: act
+        year: 1974
+        number: "ACQ03-015"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "7b057ed27bc13f8413777322f229e9f8"
+        expected_bytes: 609985
+        note: "ACQ-03 batch B3; identity expected: Gazette Extraordinary Pt II-Sec 1, 20-12-1974 (md5 equals India Code 1974-56.pdf); closes AA-04; GAP-08; file per metadata: original (Text PDF)"
+      - doc_id: acq03-017-b3
+        url: "https://archive.org/download/in.gazette.central.e.2001-09-03.113421/113421.pdf"
+        title: "Repealing and Amending Act, 2001 (30 of 2001)"
+        doc_type: act
+        year: 2001
+        number: "ACQ03-017"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "ad667445cb12ee87f17f5fc1583434b8"
+        expected_bytes: 654416
+        note: "ACQ-03 batch B3; identity expected: Gazette Extraordinary Pt II-Sec 1, 03-09-2001; closes AA-09; OQ-A-05; file per metadata: original (Text PDF)"
+      - doc_id: acq03-018-b3
+        url: "https://archive.org/download/in.gazette.central.e.2018-12-28.195312/195312.pdf"
+        title: "Bill No.251 of 2018 (Army/Navy/Air Force Acts)"
+        doc_type: act
+        year: 2018
+        number: "ACQ03-018"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "000aae1fe586cb369d9d40822591c9f7"
+        expected_bytes: 2380441
+        note: "ACQ-03 batch B3; identity expected: Gazette Extraordinary Pt II-Sec 2, 28-12-2018; closes AA-11; GAP-09; file per metadata: original (Text PDF)"
+      - doc_id: acq03-019-b4
+        url: "https://archive.org/download/in.gazette.1950.318/O-2345-1950-0013-108766.pdf"
+        title: "probable notification of 22-07-1950 under s.1 of the Army Act, 1950 (commencement; S.R.O. 120?) (OCR)"
+        doc_type: notification
+        year: 1950
+        number: "ACQ03-019"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "c99cf4895e8f7d565cd739d2f411cd0e"
+        expected_bytes: 130078
+        note: "ACQ-03 batch B4; identity expected: Gazette of India weekly 1950 No.318, dated 22-07-1950; closes AA-00; GAP-06; file per metadata: original (Text PDF)"
+      - doc_id: acq03-020-b4
+        url: "https://archive.org/download/in.gazette.e.1955.15/E-2210-1955-0002-101603.pdf"
+        title: "S.R.O. 2(E) of 07-05-1955 appointing 7 May 1955 for Act 19/1955 (OCR)"
+        doc_type: notification
+        year: 1955
+        number: "ACQ03-020"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "00dfb70630574c20c8a7e94be4502b57"
+        expected_bytes: 21902
+        note: "ACQ-03 batch B4; identity expected: Gazette Extraordinary 07-05-1955 (MoD); closes AA-01; GAP-07; OQ-A-03; file per metadata: original (Text PDF)"
+      - doc_id: acq03-021-b4
+        url: "https://archive.org/download/in.gazette.e.1956.717/E-2189-1956-0415-100172.pdf"
+        title: "Adaptation of Laws (No.3) Order, 1956"
+        doc_type: notification
+        year: 1956
+        number: "ACQ03-021"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "cfc5cb5cf1cdeac4cb34784b705d7639"
+        expected_bytes: 1058089
+        note: "ACQ-03 batch B4; identity expected: Gazette Extraordinary 31-12-1956 (Ministry of Law); closes AA-02; GAP-08; file per metadata: original (Text PDF)"
+      - doc_id: acq03-022-b4
+        url: "https://archive.org/download/in.gazette.csl_extraordinary.1975-01-25.E-1236-1975-0004-54581/E-1236-1975-0004-54581.pdf"
+        title: "Air Force and Army Laws (Amendment) Ordinance, 1975 (Ord. 3 of 1975)"
+        doc_type: notification
+        year: 1975
+        number: "ACQ03-022"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "5d1011da90899da51a9c292580f1b391"
+        expected_bytes: 95670
+        note: "ACQ-03 batch B4; identity expected: Gazette Extraordinary 25-01-1975; closes AA-05; OQ-A-04; file per metadata: derivative (Text PDF)"
+      - doc_id: acq03-023-b4
+        url: "https://archive.org/download/in.gazette.e.1983.330/E-0913-1983-0023-39490.pdf"
+        title: "Delegated Legislation Provisions (Amendment) Act, 1983 (20 of 1983)"
+        doc_type: notification
+        year: 1983
+        number: "ACQ03-023"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "0f040ff6e5774797881ce86d2e46f050"
+        expected_bytes: 1076879
+        note: "ACQ-03 batch B4; identity expected: Gazette Extraordinary 01-09-1983 (Act dated 30-08-1983); closes AA-07; GAP-08; file per metadata: original (Text PDF)"
+      - doc_id: acq03-024-b4
+        url: "https://archive.org/download/in.gazette.e.1984.465/E-0871-1984-0057-37466.pdf"
+        title: "Notification under s.1(2) of Act 20/1983 (commencement)"
+        doc_type: notification
+        year: 1984
+        number: "ACQ03-024"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "6280672cd4f711d5cfc76edd381fd9ca"
+        expected_bytes: 41367
+        note: "ACQ-03 batch B4; identity expected: Gazette Extraordinary 29-02-1984; closes AA-07; file per metadata: original (Text PDF)"
+      - doc_id: acq03-025-b4
+        url: "https://archive.org/download/in.gazette.central.e.2018-01-08.181639/181639.pdf"
+        title: "Repealing and Amending (Second) Act, 2017 (4 of 2018)"
+        doc_type: notification
+        year: 2018
+        number: "ACQ03-025"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "d8e102cd6a3f83fcf16b84cfd01ee2b5"
+        expected_bytes: 1489638
+        note: "ACQ-03 batch B4; identity expected: Gazette Extraordinary Pt II-Sec 1, 08-01-2018 (archive.org mirror of egazette 181639.pdf); closes AA-10; OQ-A-03; file per metadata: original (Text PDF)"
+      - doc_id: acq03-030-b5
+        url: "https://archive.org/download/in.gazette.central.e.2008-09-17.2326/2326.pdf"
+        title: "Armed Forces Tribunal (Procedure) Rules, 2008"
+        doc_type: rules
+        year: 2008
+        number: "ACQ03-030"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "50cb5c011bf60c3b800e235061e8eb4e"
+        expected_bytes: 760396
+        note: "ACQ-03 batch B5; identity expected: Gazette Extraordinary 17-09-2008; closes GAP-11; OQ-A-08; OQ-D-005; file per metadata: original (Image Container PDF)"
+      - doc_id: acq03-031-b5
+        url: "https://archive.org/download/in.gazette.central.e.2011-07-29.188/188.pdf"
+        title: "S.R.O. 5(E) 29-07-2011, AFT (Procedure) Amendment Rules, 2011"
+        doc_type: rules
+        year: 2011
+        number: "ACQ03-031"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "b3539b33452f645260495b00ad30fb6b"
+        expected_bytes: 53537
+        note: "ACQ-03 batch B5; identity expected: Gazette Extraordinary Pt II-Sec 4, 29-07-2011; closes GAP-11; OQ-A-08; OQ-A-09; file per metadata: original (Image Container PDF)"
+      - doc_id: acq03-032-b5
+        url: "https://archive.org/download/in.gazette.central.e.2009-05-13.5014/5014.pdf"
+        title: "AFT (Practice) Rules, 2009 (probable; defines Procedure Rules)"
+        doc_type: rules
+        year: 2009
+        number: "ACQ03-032"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "e57de9958b8c03ee23530db1c4626f06"
+        expected_bytes: 4805182
+        note: "ACQ-03 batch B5; identity expected: Gazette Extraordinary 13-05-2009; closes GAP-11; OQ-A-08; file per metadata: original (Image Container PDF)"
+      - doc_id: acq03-036-c2
+        url: "https://archive.org/download/in.gazette.central.w.1956-04-21.100216/100216.pdf"
+        title: "Army Rules amendment (App. I), 1956 (OCR)"
+        doc_type: notification
+        year: 1956
+        number: "ACQ03-036"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "e7beb1e93861fa1675082279d642c2fe"
+        expected_bytes: 301028
+        note: "ACQ-03 batch C2; identity expected: Pt II-Sec 4 weekly, 21-04-1956 (Ref.111); closes AR-037; GAP-13; file per metadata: original (Text PDF)"
+      - doc_id: acq03-037-c2
+        url: "https://archive.org/download/in.gazette.central.w.1958-12-13.95784/95784.pdf"
+        title: "Army Rules amendment of r.187(1) item (r), dated 28-11-1958 (OCR)"
+        doc_type: notification
+        year: 1958
+        number: "ACQ03-037"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "e7bc7dffabd2462806c58548ee8c68bb"
+        expected_bytes: 34281
+        note: "ACQ-03 batch C2; identity expected: Pt II-Sec 4 weekly, 13-12-1958 (Ref. B97); closes AR-038; GAP-13; OQ-A-11; file per metadata: original (Text PDF)"
+      - doc_id: acq03-038-c2
+        url: "https://archive.org/download/in.gazette.central.w.1958-12-27.95984/95984.pdf"
+        title: "Army Rules amendments of r.95, dated 12-12-1958 (OCR)"
+        doc_type: notification
+        year: 1958
+        number: "ACQ03-038"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "149cc60e8fd1ef4a99a8f5b6d9b48bc1"
+        expected_bytes: 273444
+        note: "ACQ-03 batch C2; identity expected: Pt II-Sec 4 weekly, 27-12-1958 (Ref.405); closes AR-039; GAP-13; file per metadata: original (Text PDF)"
+      - doc_id: acq03-039-c2
+        url: "https://archive.org/download/in.gazette.central.w.1959-12-12.90633/90633.pdf"
+        title: "Army Rules amendments, 1959 (OCR)"
+        doc_type: notification
+        year: 1959
+        number: "ACQ03-039"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "46a839209f80079fadcf27bfa742e596"
+        expected_bytes: 469276
+        note: "ACQ-03 batch C2; identity expected: Pt II-Sec 4 weekly, 12-12-1959 (Ref.347); closes AR-040; GAP-13; file per metadata: original (Text PDF)"
+      - doc_id: acq03-040-c2
+        url: "https://archive.org/download/in.gazette.central.w.1964-03-07.83271/83271.pdf"
+        title: "any r.187 amendment"
+        doc_type: notification
+        year: 1964
+        number: "ACQ03-040"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "95a16c6934b66e2cfa0ab54daa9655e7"
+        expected_bytes: 8718476
+        note: "ACQ-03 batch C2; identity expected: Pt II-Sec 4 weekly, 07-03-1964 (8.7 MB); closes GAP-14; OQ-A-11; file per metadata: original (Text PDF)"
+      - doc_id: acq03-041-c2
+        url: "https://archive.org/download/in.gazette.central.w.1964-03-14.83272/83272.pdf"
+        title: "any r.187 amendment"
+        doc_type: notification
+        year: 1964
+        number: "ACQ03-041"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "1c4593472dd7bd2f862f2864ad222b45"
+        expected_bytes: 105994
+        note: "ACQ-03 batch C2; identity expected: Pt II-Sec 4 weekly, 14-03-1964; closes GAP-14; OQ-A-11; file per metadata: original (Text PDF)"
+      - doc_id: acq03-042-c2
+        url: "https://archive.org/download/in.gazette.central.w.1964-03-21.83273/83273.pdf"
+        title: "any r.187 amendment"
+        doc_type: notification
+        year: 1964
+        number: "ACQ03-042"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "ab3e28d6ef54202463ae02082c59b083"
+        expected_bytes: 439029
+        note: "ACQ-03 batch C2; identity expected: Pt II-Sec 4 weekly, 21-03-1964; closes GAP-14; OQ-A-11; file per metadata: original (Text PDF)"
+      - doc_id: acq03-043-c2
+        url: "https://archive.org/download/in.gazette.central.w.1964-03-30.83284/83284.pdf"
+        title: "any r.187 amendment"
+        doc_type: notification
+        year: 1964
+        number: "ACQ03-043"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "da88aeb1d88a544faa49ae47adae36fa"
+        expected_bytes: 47852
+        note: "ACQ-03 batch C2; identity expected: Pt II-Sec 4 (Ref. 11-E), 30-03-1964; closes GAP-14; OQ-A-11; file per metadata: original (Text PDF)"
+      - doc_id: acq03-044-c2
+        url: "https://archive.org/download/in.gazette.central.w.1964-04-04.83285/83285.pdf"
+        title: "any r.187 amendment"
+        doc_type: notification
+        year: 1964
+        number: "ACQ03-044"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        expected_md5: "c461bcb5629e0750444bc74c0859a633"
+        expected_bytes: 236186
+        note: "ACQ-03 batch C2; identity expected: Pt II-Sec 4 weekly, 04-04-1964; closes GAP-14; OQ-A-11; file per metadata: original (Text PDF)"
+  official_instruments_acq03:
+    # ACQ-03 (PROPOSED 2026-11-22; NOT authorised for download). Separate approval scope from ACQ-01 (PR #8) and
+    # ACQ-02 (PR #17). Pinned from WS-A acq03_pinned_candidates.csv (md5/bytes from read-only metadata).
+    # OCR/FTS identities are locators only until page-image checks on the record copies.
+    # India Code watermarks PDFs when serving them (crawler/fetch.py): listing_md5/listing_bytes describe the stored
+    # ORIGINAL bitstream and are NOT expectations for the downloaded bytes. After an approved fetch, verify_batch records
+    # the served SHA-256; once reviewed it may be pinned as expected_served_sha256 so later re-fetches reject any change.
+    # Document identity is established by page-image checks on the record copy (as for ACQ-01's India Code items).
+    phase: 6
+    enabled: false
+    priority: 3
+    heavy: false
+    allowed_hosts: [indiacode.gov.in]
+    require_https: true
+    verify: true
+    discovery: "Fetched by address only; approval scope ACQ-03 (India Code; served bytes watermarked by host)"
+    documents:
+      - doc_id: acq03-033-b5
+        url: "https://indiacode.gov.in/server/api/core/bitstreams/3a17342b-6811-4e2c-98c8-fc4954bf5a53/content"
+        title: "AFT-Procedure-Rules-2008 (India Code)"
+        doc_type: rules
+        year: 2008
+        number: "ACQ03-033"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        listing_md5: "c08af236bfd7c5bf79d25a858226d8f3"
+        listing_bytes: 46767577
+        served_bytes_policy: HOST_WATERMARKS_PDF
+        note: "ACQ-03 batch B5; identity expected: India Code subordinate legislation (issued 2008-09-17); closes GAP-11; OQ-A-08; file per metadata: ORIGINAL bundle; India Code item 29d5b8ff-f51d-4ad4-bccf-ad1ff110ec43 (AFT-Procedure-Rules-2008)"
+      - doc_id: acq03-034-b5
+        url: "https://indiacode.gov.in/server/api/core/bitstreams/5a416087-b3bd-4fa5-8fc8-e9b6768f2966/content"
+        title: "AFT Amendment Procedure Rules 2011 (India Code)"
+        doc_type: rules
+        year: 2011
+        number: "ACQ03-034"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        listing_md5: "dae2291aa84a37ea271b896340739ec6"
+        listing_bytes: 163806
+        served_bytes_policy: HOST_WATERMARKS_PDF
+        note: "ACQ-03 batch B5; identity expected: India Code (issued 2011-07-29); closes GAP-11; OQ-A-08; file per metadata: ORIGINAL bundle; India Code item d80f5448-3d93-42ea-b826-8d2effafa977 (AFT Amendment Procedure Rules 2011)"
+      - doc_id: acq03-035-b5
+        url: "https://indiacode.gov.in/server/api/core/bitstreams/18a102cd-fbb9-49de-9e80-b0c553ff25dd/content"
+        title: "AFT Practice Rules-2009 (India Code)"
+        doc_type: rules
+        year: 2009
+        number: "ACQ03-035"
+        issuing_authority: "As printed in the Gazette / India Code record (to be confirmed from the page image)"
+        listing_md5: "0fa7231285f2022db43a0150fb5817ea"
+        listing_bytes: 1441674
+        served_bytes_policy: HOST_WATERMARKS_PDF
+        note: "ACQ-03 batch B5; identity expected: India Code (issued 2009-05-11); closes GAP-11; OQ-A-08; file per metadata: ORIGINAL bundle; India Code item d76a878a-8672-4e58-9a4e-038595766bad (AFT Practice Rules-2009)"
   official_instruments:
     phase: 2
     enabled: false

@@ -10,6 +10,11 @@ For each pinned document: find data/meta/<doc_id>.json and its raw file, then ch
 Documents not yet acquired are PENDING (never PASS). Documents with no pre-committed checksum (India Code bitstreams,
 which are download-specific) are CHECKSUM_RECORDED_ONLY: their SHA-256 is reported for the register. No network.
 
+India Code (served_bytes_policy: HOST_WATERMARKS_PDF): listing_md5/listing_bytes describe the stored bitstream, not the
+served file, so they are reported (match / differs) but never enforced. The served file must be a PDF; its SHA-256 is
+recorded; identity must be established by a page-image check. If expected_served_sha256 is set (pinned after a reviewed
+first fetch), any later change in the served bytes is a FAIL.
+
   python tools/acquisition/verify_batch.py --source archive_acq02 [--repo .] [--out report.tsv]
 """
 import argparse, hashlib, json, re, sys
@@ -36,6 +41,8 @@ def expectations(doc):
         exp["md5"] = doc["expected_md5"]
     if doc.get("expected_bytes"):
         exp["bytes"] = int(doc["expected_bytes"])
+    if doc.get("expected_served_sha256"):
+        exp["served_sha256"] = doc["expected_served_sha256"]
     m = NOTE_RE.search(doc.get("note", ""))
     if m:
         exp.setdefault("md5", m.group(1))
@@ -60,7 +67,7 @@ def main():
             rows.append((d["doc_id"], "PENDING", "not acquired", "")); continue
         m = json.loads(meta_p.read_text(encoding="utf-8"))
         raw = a.repo / m.get("raw_path", "")
-        probs = []
+        probs, notes = [], []
         if not raw.is_file():
             probs.append("raw file missing"); sha = ""
         else:
@@ -69,12 +76,26 @@ def main():
             if "sha256" in exp and sha != exp["sha256"]: probs.append("sha256 differs from pre-committed value")
             if "md5" in exp and digest(raw, "md5") != exp["md5"]: probs.append("md5 differs from pre-committed value")
             if "bytes" in exp and raw.stat().st_size != exp["bytes"]: probs.append("size differs from pre-committed value")
+            if "served_sha256" in exp and sha != exp["served_sha256"]: probs.append("served SHA-256 differs from the pinned served file (unexpected change)")
+            if d.get("served_bytes_policy") == "HOST_WATERMARKS_PDF":
+                head = raw.open("rb").read(5)
+                if head != b"%PDF-": probs.append("served file is not a PDF")
+                listing = []
+                if d.get("listing_md5"):
+                    listing.append("md5 " + ("matches" if digest(raw, "md5") == d["listing_md5"] else "differs"))
+                if d.get("listing_bytes"):
+                    listing.append("size " + ("matches" if raw.stat().st_size == int(d["listing_bytes"]) else "differs"))
+                notes.append("listing " + "/".join(listing) + " (host watermark; informational)" if listing else "no listing values")
+                notes.append("page-image identity check required")
         if m.get("source_url") != d["url"] and not str(m.get("source_url", "")).startswith("https://"):
             probs.append("source_url missing or not HTTPS")
         if not m.get("retrieved_at"): probs.append("metadata lacks retrieved_at")
         status = "FAIL" if probs else ("PASS" if exp else "CHECKSUM_RECORDED_ONLY")
         failed |= bool(probs)
-        rows.append((d["doc_id"], status, "; ".join(probs) or "ok", sha))
+        detail = "; ".join(probs) or "ok"
+        if notes and not probs:
+            detail = "ok; " + "; ".join(notes)
+        rows.append((d["doc_id"], status, detail, sha))
     lines = ["doc_id\tstatus\tdetail\tsha256"] + ["\t".join(r) for r in rows]
     summary = {s: sum(r[1] == s for r in rows) for s in ("PASS", "FAIL", "PENDING", "CHECKSUM_RECORDED_ONLY")}
     print("\n".join(lines)); print(json.dumps({"source": a.source, "documents": len(rows), **summary}))

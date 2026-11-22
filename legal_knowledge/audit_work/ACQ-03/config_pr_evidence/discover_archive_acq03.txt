@@ -1,0 +1,100 @@
+# Discovery — archive_acq03 — run 20261122T163201Z-669b61
+
+0 listing request(s); politeness delay spent: 0 s. No documents were downloaded.
+
+- acq03-001-b1: queued — https://archive.org/download/in.gazette.central.w.1966-08-27.76274/76274.pdf
+- acq03-002-b1: queued — https://archive.org/download/in.gazette.central.w.1967-01-07.73211/73211.pdf
+- acq03-003-b1: queued — https://archive.org/download/in.gazette.central.w.1967-12-16.75707/75707.pdf
+- acq03-004-b1: queued — https://archive.org/download/in.gazette.central.w.1968-11-16.72289/72289.pdf
+- acq03-005-b1: queued — https://archive.org/download/in.gazette.central.w.1969-03-01.68684/68684.pdf
+- acq03-006-b1: queued — https://archive.org/download/in.gazette.central.w.1970-01-17.63332/63332.pdf
+- acq03-007-b1: queued — https://archive.org/download/in.gazette.central.w.1972-02-19.59085/59085.pdf
+- acq03-008-b1: queued — https://archive.org/download/in.gazette.central.w.1974-08-17.55730/55730.pdf
+- acq03-009-b1: queued — https://archive.org/download/in.gazette.central.w.1974-11-16.55738/55738.pdf
+- acq03-010-b2: queued — https://archive.org/download/in.gazette.central.w.1960-10-08.88375/88375.pdf
+- acq03-011-b2: queued — https://archive.org/download/in.gazette.central.w.1960-10-15.88376/88376.pdf
+- acq03-012-b2: queued — https://archive.org/download/in.gazette.central.w.1960-10-22.88377/88377.pdf
+- acq03-013-b2: queued — https://archive.org/download/in.gazette.central.w.1960-12-03.88383/88383.pdf
+- acq03-014-b2: queued — https://archive.org/download/in.gazette.central.w.2010-05-29.162/162.pdf
+- acq03-015-b3: queued — https://archive.org/download/in.gazette.e.1974.333/E-1272-1974-0084-56281.pdf
+- acq03-017-b3: queued — https://archive.org/download/in.gazette.central.e.2001-09-03.113421/113421.pdf
+- acq03-018-b3: queued — https://archive.org/download/in.gazette.central.e.2018-12-28.195312/195312.pdf
+- acq03-019-b4: queued — https://archive.org/download/in.gazette.1950.318/O-2345-1950-0013-108766.pdf
+- acq03-020-b4: queued — https://archive.org/download/in.gazette.e.1955.15/E-2210-1955-0002-101603.pdf
+- acq03-021-b4: queued — https://archive.org/download/in.gazette.e.1956.717/E-2189-1956-0415-100172.pdf
+- acq03-022-b4: queued — https://archive.org/download/in.gazette.csl_extraordinary.1975-01-25.E-1236-1975-0004-54581/E-1236-1975-0004-54581.pdf
+- acq03-023-b4: queued — https://archive.org/download/in.gazette.e.1983.330/E-0913-1983-0023-39490.pdf
+- acq03-024-b4: queued — https://archive.org/download/in.gazette.e.1984.465/E-0871-1984-0057-37466.pdf
+- acq03-025-b4: queued — https://archive.org/download/in.gazette.central.e.2018-01-08.181639/181639.pdf
+- acq03-030-b5: queued — https://archive.org/download/in.gazette.central.e.2008-09-17.2326/2326.pdf
+- acq03-031-b5: queued — https://archive.org/download/in.gazette.central.e.2011-07-29.188/188.pdf
+- acq03-032-b5: queued — https://archive.org/download/in.gazette.central.e.2009-05-13.5014/5014.pdf
+- acq03-036-c2: queued — https://archive.org/download/in.gazette.central.w.1956-04-21.100216/100216.pdf
+- acq03-037-c2: queued — https://archive.org/download/in.gazette.central.w.1958-12-13.95784/95784.pdf
+- acq03-038-c2: queued — https://archive.org/download/in.gazette.central.w.1958-12-27.95984/95984.pdf
+- acq03-039-c2: queued — https://archive.org/download/in.gazette.central.w.1959-12-12.90633/90633.pdf
+- acq03-040-c2: queued — https://archive.org/download/in.gazette.central.w.1964-03-07.83271/83271.pdf
+- acq03-041-c2: queued — https://archive.org/download/in.gazette.central.w.1964-03-14.83272/83272.pdf
+- acq03-042-c2: queued — https://archive.org/download/in.gazette.central.w.1964-03-21.83273/83273.pdf
+- acq03-043-c2: queued — https://archive.org/download/in.gazette.central.w.1964-03-30.83284/83284.pdf
+- acq03-044-c2: queued — https://archive.org/download/in.gazette.central.w.1964-04-04.83285/83285.pdf
+
+# Dry run — 2026-11-22T16:32:01+00:00
+
+1 source(s), 0 target(s) (0 still need URL discovery), 36 request(s) would be made from known URLs, 0 refused.
+
+**Config warnings:**
+
+- sources.indiacode has the robots-5xx exception (crawls if robots.txt answers 5xx)
+- sources.indiacode has the robots-unreachable exception (crawls if robots.txt cannot be fetched)
+- regs-army-1987 is targeted by both indiacode and mod (first hit wins)
+
+## archive_acq03 (phase 6, disabled)
+
+Hosts: *.archive.org, archive.org  
+State: 36 queued (36 due now, 0 in backoff), 0 fetched, 0 failed, 0 skipped  
+Would fetch now: 36
+
+Discovery: Fetched by address only (crawler/direct.py); approval scope ACQ-03 (archive.org)
+
+- ⚠ marked verify: true; confirm URLs on the live site
+
+| Kind | doc_id / name | URL | State | Action | Notes |
+| --- | --- | --- | --- | --- | --- |
+| queued | acq03-001-b1 | https://archive.org/download/in.gazette.central.w.1966-08-27.76274/76274.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-001-b1 |
+| queued | acq03-002-b1 | https://archive.org/download/in.gazette.central.w.1967-01-07.73211/73211.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-002-b1 |
+| queued | acq03-003-b1 | https://archive.org/download/in.gazette.central.w.1967-12-16.75707/75707.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-003-b1 |
+| queued | acq03-004-b1 | https://archive.org/download/in.gazette.central.w.1968-11-16.72289/72289.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-004-b1 |
+| queued | acq03-005-b1 | https://archive.org/download/in.gazette.central.w.1969-03-01.68684/68684.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-005-b1 |
+| queued | acq03-006-b1 | https://archive.org/download/in.gazette.central.w.1970-01-17.63332/63332.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-006-b1 |
+| queued | acq03-007-b1 | https://archive.org/download/in.gazette.central.w.1972-02-19.59085/59085.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-007-b1 |
+| queued | acq03-008-b1 | https://archive.org/download/in.gazette.central.w.1974-08-17.55730/55730.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-008-b1 |
+| queued | acq03-009-b1 | https://archive.org/download/in.gazette.central.w.1974-11-16.55738/55738.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-009-b1 |
+| queued | acq03-010-b2 | https://archive.org/download/in.gazette.central.w.1960-10-08.88375/88375.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-010-b2 |
+| queued | acq03-011-b2 | https://archive.org/download/in.gazette.central.w.1960-10-15.88376/88376.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-011-b2 |
+| queued | acq03-012-b2 | https://archive.org/download/in.gazette.central.w.1960-10-22.88377/88377.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-012-b2 |
+| queued | acq03-013-b2 | https://archive.org/download/in.gazette.central.w.1960-12-03.88383/88383.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-013-b2 |
+| queued | acq03-014-b2 | https://archive.org/download/in.gazette.central.w.2010-05-29.162/162.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-014-b2 |
+| queued | acq03-015-b3 | https://archive.org/download/in.gazette.e.1974.333/E-1272-1974-0084-56281.pdf | queued | fetch document | category: act; parent_doc_id: acq03-015-b3 |
+| queued | acq03-017-b3 | https://archive.org/download/in.gazette.central.e.2001-09-03.113421/113421.pdf | queued | fetch document | category: act; parent_doc_id: acq03-017-b3 |
+| queued | acq03-018-b3 | https://archive.org/download/in.gazette.central.e.2018-12-28.195312/195312.pdf | queued | fetch document | category: act; parent_doc_id: acq03-018-b3 |
+| queued | acq03-019-b4 | https://archive.org/download/in.gazette.1950.318/O-2345-1950-0013-108766.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-019-b4 |
+| queued | acq03-020-b4 | https://archive.org/download/in.gazette.e.1955.15/E-2210-1955-0002-101603.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-020-b4 |
+| queued | acq03-021-b4 | https://archive.org/download/in.gazette.e.1956.717/E-2189-1956-0415-100172.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-021-b4 |
+| queued | acq03-022-b4 | https://archive.org/download/in.gazette.csl_extraordinary.1975-01-25.E-1236-1975-0004-54581/E-1236-1975-0004-54581.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-022-b4 |
+| queued | acq03-023-b4 | https://archive.org/download/in.gazette.e.1983.330/E-0913-1983-0023-39490.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-023-b4 |
+| queued | acq03-024-b4 | https://archive.org/download/in.gazette.e.1984.465/E-0871-1984-0057-37466.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-024-b4 |
+| queued | acq03-025-b4 | https://archive.org/download/in.gazette.central.e.2018-01-08.181639/181639.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-025-b4 |
+| queued | acq03-030-b5 | https://archive.org/download/in.gazette.central.e.2008-09-17.2326/2326.pdf | queued | fetch document | category: rules; parent_doc_id: acq03-030-b5 |
+| queued | acq03-031-b5 | https://archive.org/download/in.gazette.central.e.2011-07-29.188/188.pdf | queued | fetch document | category: rules; parent_doc_id: acq03-031-b5 |
+| queued | acq03-032-b5 | https://archive.org/download/in.gazette.central.e.2009-05-13.5014/5014.pdf | queued | fetch document | category: rules; parent_doc_id: acq03-032-b5 |
+| queued | acq03-036-c2 | https://archive.org/download/in.gazette.central.w.1956-04-21.100216/100216.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-036-c2 |
+| queued | acq03-037-c2 | https://archive.org/download/in.gazette.central.w.1958-12-13.95784/95784.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-037-c2 |
+| queued | acq03-038-c2 | https://archive.org/download/in.gazette.central.w.1958-12-27.95984/95984.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-038-c2 |
+| queued | acq03-039-c2 | https://archive.org/download/in.gazette.central.w.1959-12-12.90633/90633.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-039-c2 |
+| queued | acq03-040-c2 | https://archive.org/download/in.gazette.central.w.1964-03-07.83271/83271.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-040-c2 |
+| queued | acq03-041-c2 | https://archive.org/download/in.gazette.central.w.1964-03-14.83272/83272.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-041-c2 |
+| queued | acq03-042-c2 | https://archive.org/download/in.gazette.central.w.1964-03-21.83273/83273.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-042-c2 |
+| queued | acq03-043-c2 | https://archive.org/download/in.gazette.central.w.1964-03-30.83284/83284.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-043-c2 |
+| queued | acq03-044-c2 | https://archive.org/download/in.gazette.central.w.1964-04-04.83285/83285.pdf | queued | fetch document | category: notification; parent_doc_id: acq03-044-c2 |
+

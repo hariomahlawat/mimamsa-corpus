@@ -1,0 +1,34 @@
+# Discovery — official_instruments_acq03 — run 20261122T163202Z-4b2063
+
+0 listing request(s); politeness delay spent: 0 s. No documents were downloaded.
+
+- acq03-033-b5: queued — https://indiacode.gov.in/server/api/core/bitstreams/3a17342b-6811-4e2c-98c8-fc4954bf5a53/content
+- acq03-034-b5: queued — https://indiacode.gov.in/server/api/core/bitstreams/5a416087-b3bd-4fa5-8fc8-e9b6768f2966/content
+- acq03-035-b5: queued — https://indiacode.gov.in/server/api/core/bitstreams/18a102cd-fbb9-49de-9e80-b0c553ff25dd/content
+
+# Dry run — 2026-11-22T16:32:02+00:00
+
+1 source(s), 0 target(s) (0 still need URL discovery), 3 request(s) would be made from known URLs, 0 refused.
+
+**Config warnings:**
+
+- sources.indiacode has the robots-5xx exception (crawls if robots.txt answers 5xx)
+- sources.indiacode has the robots-unreachable exception (crawls if robots.txt cannot be fetched)
+- regs-army-1987 is targeted by both indiacode and mod (first hit wins)
+
+## official_instruments_acq03 (phase 6, disabled)
+
+Hosts: indiacode.gov.in  
+State: 3 queued (3 due now, 0 in backoff), 0 fetched, 0 failed, 0 skipped  
+Would fetch now: 3
+
+Discovery: Fetched by address only; approval scope ACQ-03 (India Code)
+
+- ⚠ marked verify: true; confirm URLs on the live site
+
+| Kind | doc_id / name | URL | State | Action | Notes |
+| --- | --- | --- | --- | --- | --- |
+| queued | acq03-033-b5 | https://indiacode.gov.in/server/api/core/bitstreams/3a17342b-6811-4e2c-98c8-fc4954bf5a53/content | queued | fetch document | category: rules; parent_doc_id: acq03-033-b5 |
+| queued | acq03-034-b5 | https://indiacode.gov.in/server/api/core/bitstreams/5a416087-b3bd-4fa5-8fc8-e9b6768f2966/content | queued | fetch document | category: rules; parent_doc_id: acq03-034-b5 |
+| queued | acq03-035-b5 | https://indiacode.gov.in/server/api/core/bitstreams/18a102cd-fbb9-49de-9e80-b0c553ff25dd/content | queued | fetch document | category: rules; parent_doc_id: acq03-035-b5 |
+
