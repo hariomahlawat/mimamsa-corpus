@@ -65,15 +65,17 @@ def patch(obj, **updates):
     return x
 
 
-def validate(sources, finding=FINDING):
+def validate(sources, finding=FINDING, policy_version=None):
     with tempfile.TemporaryDirectory() as temp:
         batch = Path(temp)
         for kind, objs in (("sources", sources), ("findings", [finding]), ("reviews", [])):
             (batch / kind).mkdir()
             (batch / kind / "items.json").write_text(json.dumps(objs), encoding="utf-8")
         manifest = batch / "frozen.json"
-        manifest.write_text(json.dumps({"records": [{
-            "record_id": "KB-TEST", "original_sha256": HASH}]}), encoding="utf-8")
+        m = {"records": [{"record_id": "KB-TEST", "original_sha256": HASH}]}
+        if policy_version is not None:
+            m["source_authority_policy_version"] = policy_version
+        manifest.write_text(json.dumps(m), encoding="utf-8")
         with redirect_stdout(StringIO()) as stream:
             result = V.validate_batch(batch, strict=True, manifest=manifest)
         return result, json.loads(stream.getvalue())["errors"]
@@ -134,6 +136,25 @@ class AuthorityVersusCarrierPolicyTests(unittest.TestCase):
     def test_source_conflict_cannot_be_labelled_verified(self):
         finding = patch(FINDING, asserted_law_status="SOURCE_CONFLICT")
         self.assertFalse(validate([OFFICIAL, GAZETTE], finding)[0])
+
+    def test_future_v1_batch_rejects_unclassified_legacy_style_source(self):
+        ok, errs = validate([OFFICIAL, GAZETTE], policy_version="v1")
+        self.assertFalse(ok)
+        self.assertTrue(any("source authority policy missing" in e for e in errs), errs)
+
+    def test_future_v1_batch_accepts_all_classified_sources(self):
+        official = patch(OFFICIAL, document_authority="GOVERNMENT_COMPILATION",
+                         carrier_provenance="GOVERNMENT_HOSTED_COPY",
+                         copy_fidelity="HASH_ONLY",
+                         amendment_chain_status="NOT_CHECKED",
+                         authority_rationale="Government-maintained compilation, exact edition pending")
+        ok, errs = validate([official, GAZETTE], policy_version="v1")
+        self.assertTrue(ok, errs)
+
+    def test_future_unknown_policy_version_fails_closed(self):
+        ok, errs = validate([OFFICIAL, GAZETTE], policy_version="v99")
+        self.assertFalse(ok)
+        self.assertTrue(any("Unknown source_authority_policy_version" in e for e in errs), errs)
 
     def test_third_party_facsimile_cannot_be_issuing_authority_copy(self):
         src = patch(GAZETTE, authenticity="ORIGINAL_OFFICIAL")
