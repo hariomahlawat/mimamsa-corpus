@@ -59,12 +59,18 @@
    "PARTLY": 77
   },
   "source_searchable": {
+   "ALL": 280,
+   "NONE": 88,
+   "NOT_APPLICABLE": 185,
+   "PARTLY": 105
+  },
+  "source_searchable_instrument_level_informational": {
    "ALL": 473,
    "NOT_APPLICABLE": 185
   },
   "anchored_full": {
-   "NO": 296,
-   "YES": 362
+   "NO": 471,
+   "YES": 187
   },
   "quality_flags_records": {
    "AMBIGUOUS_LOCATOR": 1,
@@ -73,6 +79,7 @@
    "INFERRED_IDENTITY": 61,
    "NO_PINPOINT": 61,
    "PLACEHOLDER": 16,
+   "PROVISION_FILES_ABSENT": 193,
    "STRUCTURAL": 6,
    "UNANCHORED_LOCATOR": 11
   },
@@ -80,21 +87,21 @@
    "CODED": {
     "records": 389,
     "identified_ALL": 236,
-    "searchable_ALL": 297,
-    "anchored_full": 207
+    "searchable_ALL": 181,
+    "anchored_full": 102
    },
    "PLAINTEXT": {
     "records": 269,
     "identified_ALL": 160,
-    "searchable_ALL": 176,
-    "anchored_full": 155
+    "searchable_ALL": 99,
+    "anchored_full": 85
    }
   },
   "items": {
    "total": 983,
    "identified": 718,
    "inferred": 78,
-   "searchable": 718
+   "searchable": 500
   },
   "records_with_citation": 581
  }

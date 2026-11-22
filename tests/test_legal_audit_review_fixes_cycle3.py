@@ -206,7 +206,10 @@ FIXTURE_CORPUS = {
     "ref": "fixture", "commit": "fixture-no-raw-data",
     "meta": {"act-army-1950", "rules-army-rules-1954", "act-armed-forces-tribunal-2007"},
     "sections": {"act-army-1950": {f"s{n}" for n in [2] + list(range(79, 89)) + [120, 121, 122]},
-                 "act-armed-forces-tribunal-2007": {f"s{n}" for n in (2, 3, 14, 15, 21, 22)}},
+                 "act-armed-forces-tribunal-2007": {f"s{n}" for n in (2, 3, 14, 15, 21, 22)},
+                 # KB-003 also cites Army Rules r.22: since the PR #29 P2 fix a rule reference needs its rule file
+                 # (a missing/empty provision index never yields ALL), so the minimal fixture carries it.
+                 "rules-army-rules-1954": {"r22"}},
     "sc_urls": {},
 }
 
