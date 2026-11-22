@@ -17,15 +17,17 @@ AW = ROOT / "legal_knowledge" / "audit_work"
 SPEC = importlib.util.spec_from_file_location("check_csv_wsd", ROOT / "tools" / "legal_audit" / "check_csv.py")
 CC = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(CC)
+SPEC_P = importlib.util.spec_from_file_location("check_provenance_sem", ROOT / "tools" / "legal_audit" / "check_provenance.py")
+CP = importlib.util.module_from_spec(SPEC_P)
+SPEC_P.loader.exec_module(CP)
 KB = ROOT / "legal_knowledge" / "curated_originals" / "knowledge_base" / "v0.9" / "records_658.jsonl"
 CASES = ROOT / "legal_knowledge" / "curated_originals" / "case_law" / "v0.9" / "cases_53.jsonl"
 
 ISO = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 STATE_COL = re.compile(r"(status|state|determination|decision|tier|clearance)", re.I)
-# An approval claim, unless explicitly negated/pending ("unapproved", "approval pending", "NOT_legal_approval").
-APPROVAL = re.compile(r"(?<![A-Za-z])(JAG[ _-]?APPROVED|FORMALLY[ _]APPROVED|LEGALLY[ _](APPROVED|VERIFIED|VALIDATED)|"
-                      r"JAG[ _-]?VALIDATED|ADJUDICATED|APPROVED)(?![ _-]?PENDING)", re.I)
-NEGATION = re.compile(r"(UN|NOT[ _-]?|NO[ _-]|0 |NEVER[ _-]|LACKS? )", re.I)
+# Approval claims: shared detector tools/legal_audit/check_provenance.py::approval_claims (ignores quoted
+# source wording and negated/pending forms; counts explicit state tokens and explicit approval phrases).
+approval_claims = CP.approval_claims
 STATE_VOCAB = ("OPEN", "PROPOSAL", "CONFLICTING", "BLOCKED", "NOT_DETERMINED")
 
 
@@ -95,17 +97,36 @@ class NoAgentAssertedApproval(unittest.TestCase):
                     continue
                 for n, r in enumerate(rows, 2):
                     v = r.get(col) or ""
-                    for m in APPROVAL.finditer(v):
-                        if not NEGATION.search(v[max(0, m.start() - 6):m.start()]):
-                            hits.append(f"{p.relative_to(AW)} row {n} {col}: {v[:80]}")
+                    if approval_claims(v):
+                        hits.append(f"{p.relative_to(AW)} row {n} {col}: {v[:80]}")
         self.assertEqual(hits, [])
 
     def test_approval_pattern_self_check(self):
         for v in ("JAG approved", "APPROVED", "legally verified", "FORMALLY_APPROVED"):
-            self.assertTrue(APPROVAL.search(v), v)
+            self.assertTrue(approval_claims(v), v)
         for v in ("RESEARCH (unapproved)", "JAG_APPROVAL_PENDING", "approved pending"):
-            m = APPROVAL.search(v)
-            self.assertTrue(m is None or NEGATION.search(v[max(0, m.start() - 6):m.start()]), v)
+            self.assertEqual(approval_claims(v), [], v)
+
+    def test_quoted_statute_text_is_not_a_claim(self):
+        """Regression (integration cycle 2): WS-C candidate_corrections.csv current_state quotes manual and
+        statute wording; quoted source text is never an approval state."""
+        wsc = ("MML 2 p.93 reads 'any person approved of by the Judge Advocate General'; "
+               "vol 2(AA) and India Code read 'an officer approved of'")
+        self.assertEqual(approval_claims(wsc), [])
+        for v in ('Compilation reads "approved by the Judge Advocate General"',
+                  "Gazette prints \u2018APPROVED\u2019 in the margin", "manual: \u201cJAG approved\u201d form",
+                  "an officer approved of by the commanding officer"):
+            self.assertEqual(approval_claims(v), [], v)
+
+    def test_genuine_claims_still_fail(self):
+        for v in ("ADVISOR_APPROVED", "approved by JAG", "Approved by the legal advisor on 2026-11-23",
+                  "JAG_VALIDATED", "LEGAL_APPROVAL", "PROPOSAL APPROVED", "ACCEPTED_FOR_CANDIDATE",
+                  "ADJUDICATED", "legally approved", "OPERATIONALLY_CLEARED",
+                  "ADVISOR_APPROVED (see 'notes')", "quoted 'x' then JAG_APPROVED"):
+            self.assertTrue(approval_claims(v), v)
+        for v in ("NOT_APPROVED", "UNAPPROVED", "LEGAL_APPROVAL_PENDING", "ADVISOR_APPROVAL_REQUIRED",
+                  "never JAG approved", "PROPOSAL (pending legal review)"):
+            self.assertEqual(approval_claims(v), [], v)
 
     def test_frozen_originals_carry_no_clearance_or_approval(self):
         kb = [json.loads(l) for l in KB.read_text(encoding="utf-8").splitlines() if l.strip()]

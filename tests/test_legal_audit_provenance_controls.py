@@ -136,6 +136,15 @@ class NoApprovalStates(unittest.TestCase):
             self.assertEqual(rules({"x.csv": f"row_id,status\n1,{ok}\n"}), [], ok)
         self.assertEqual(rules({"x.csv": "row_id,notes\n1,JAG approved\n"}), [], "free-text columns are not states")
 
+    def test_quoted_source_text_ignored_and_explicit_tokens_caught(self):
+        wsc = ("cc_id,current_state\nCC-17,\"MML 2 p.93 reads 'any person approved of by the Judge Advocate General'; "
+               "vol 2(AA) and India Code read 'an officer approved of'\"\n")
+        self.assertEqual(rules({"candidate_corrections.csv": wsc}), [])
+        for bad in ("ADVISOR_APPROVED", "approved by JAG", "APPROVED", "LEGAL_APPROVAL"):
+            self.assertEqual(rules({"x.csv": f"row_id,status\n1,{bad}\n"}), ["APR-1"], bad)
+        self.assertEqual(rules({"f.json": json.dumps({"status": "'APPROVED' as printed on the Gazette form"})}), [])
+        self.assertEqual(rules({"f.json": json.dumps({"status": "APPROVED"})}), ["APR-1"])
+
     def test_json_state_keys(self):
         self.assertEqual(rules({"f.json": json.dumps([{"finding_id": "F", "review_state": "ACCEPTED_FOR_CANDIDATE"}])}), ["APR-1"])
         self.assertEqual(rules({"f.json": json.dumps({"x": {"legal_status": "legally approved"}})}), ["APR-1"])
