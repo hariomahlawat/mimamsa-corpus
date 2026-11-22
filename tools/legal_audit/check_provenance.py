@@ -26,7 +26,10 @@ automatically when they reuse a convention:
          executed without an approval reference (approval_ref / approval_reference / approved_by column with
          a PR/issue/approval identifier).
   APR-1  no legal-advisor / JAG approval state in any state-like CSV column or JSON key (status, state,
-         decision, determination, review, approval, clearance), unless negated or pending.
+         decision, determination, review, approval, clearance), unless negated or pending. Text inside
+         quotation marks (quoted statute/manual wording) is ignored; only explicit state tokens
+         (APPROVED, ADVISOR_APPROVED, JAG_APPROVED/VALIDATED, LEGAL_APPROVAL, ACCEPTED_FOR_CANDIDATE ...)
+         or explicit phrases ("approved by JAG", "legally approved") count. See approval_claims().
 
 Known violations in frozen or not-yet-integrated registers are pinned in provenance_baseline.json; any
 violation not in the baseline fails (exit 1). Baseline entries that no longer occur are reported.
@@ -56,9 +59,34 @@ ENUMS = {
 NA = {"", "n/a", "N/A", "NA", "-"}
 WEAK_EVIDENCE = re.compile(r"^(REQUIRES_VERIFICATION|TEXT_LAYER|HINT|LOCATOR_TEXT_ONLY|TEXT_ONLY|COMPILATION_ONLY)")
 STATE_COL = re.compile(r"(status|state|decision|determination|review|approval|clearance)", re.I)
-APPROVAL = re.compile(r"(?<![A-Za-z])(JAG[ _-]?(APPROVED|VALIDATED|CLEARED)|FORMALLY[ _]APPROVED|LEGAL(LY)?[ _-]?(APPROVED|ADJUDICATED|VALIDATED|CLEARED)|"
-                      r"ADVISOR[ _-]?(APPROVED|ACCEPTED|ADJUDICATED)|APPROVED[ _-]BY[ _-](JAG|LEGAL|ADVISOR)|ACCEPTED_FOR_CANDIDATE|OPERATIONALLY[ _]CLEARED)(?![ _-]?PENDING)", re.I)
+# Approval detection (shared with tests/test_legal_audit_register_semantics.py via approval_claims()).
+# (1) Quoted text is removed first: a register may quote statute or manual wording such as
+#     'any person approved of by the Judge Advocate General'; quoted source text is never a state.
+# (2) Only explicit review/approval STATE tokens (case-sensitive, upper-case/underscore style) or explicit
+#     approval phrases naming a legal authority count; the bare English word "approved" does not.
+QUOTED = re.compile(r"\u201c[^\u201d]*\u201d|\u2018[^\u2019]*\u2019|\"[^\"]*\"|(?<![A-Za-z0-9])'[^']*'(?![A-Za-z0-9])")
+STATE_TOKEN = re.compile(r"(?<![A-Za-z_])((?:ADVISOR|JAG|LEGAL|LEGALLY|FORMALLY|OPERATIONALLY)[ _-]?"
+                         r"(?:APPROVED|VALIDATED|CLEARED|ADJUDICATED|ACCEPTED|VERIFIED)|LEGAL[ _]APPROVAL|"
+                         r"ACCEPTED_FOR_CANDIDATE|APPROVED|ADJUDICATED)(?![A-Za-z_])")
+APPROVAL_PHRASE = re.compile(r"\b(?:JAG|Judge Advocate General|legal[ _-]advis[eo]r|advis[eo]r|legal|legally|formally|operationally)"
+                             r"[ _-]+(?:has[ ]+|have[ ]+)?(?:approved|validated|cleared|adjudicated|verified|accepted)\b|"
+                             r"\bapproved[ ]+by[ ]+(?:the[ ]+)?(?:JAG|Judge Advocate General|legal(?:[ ]+advis[eo]r)?|advis[eo]r|legal branch)\b", re.I)
 NEGATION = re.compile(r"(UN|NOT[ _-]?|NO[ _-]|0 |NEVER[ _-]|LACKS? |WITHOUT )$", re.I)
+PENDING_AFTER = re.compile(r"^[ _-]?(PENDING|REQUIRED|AWAITED|NOT[ _]YET)", re.I)
+
+
+def approval_claims(text):
+    """Explicit legal-advisor/JAG approval claims in a state value, ignoring quoted text and
+    negated/pending forms ("unapproved", "NOT_APPROVED", "JAG_APPROVAL_PENDING", "approved pending")."""
+    t = QUOTED.sub(" ", text or "")
+    hits = []
+    for rx in (STATE_TOKEN, APPROVAL_PHRASE):
+        for m in rx.finditer(t):
+            if NEGATION.search(t[max(0, m.start() - 8):m.start()]) or PENDING_AFTER.match(t[m.end():]):
+                continue
+            hits.append(m.group(0))
+    return hits
+
 FETCHED = re.compile(r"(?<![A-Za-z])(FETCHED|DOWNLOADED|ACQUIRED|EXECUTED|RETRIEVED|HELD)(?![A-Za-z])", re.I)
 NOT_FETCHED = re.compile(r"\b(NOT|NO|UN)[ _-]?(YET[ _-])?(EXECUTED|FETCHED|DOWNLOADED|ACQUIRED)\b|\bPROPOSED\b|\bPENDING\b", re.I)
 APPROVAL_REF_COL = re.compile(r"^(approval_ref|approval_reference|approved_by|approval|authorisation_ref|authorization_ref)$", re.I)
@@ -235,9 +263,8 @@ def scan(dirs):
                 if not STATE_COL.search(c) or "NOT_legal_approval" in c:
                     continue
                 val = r.get(c) or ""
-                for m in APPROVAL.finditer(val):
-                    if not NEGATION.search(val[max(0, m.start() - 8):m.start()]):
-                        v("APR-1", p, r, cols, n, f"{c} = {val[:80]!r}")
+                if approval_claims(val):
+                    v("APR-1", p, r, cols, n, f"{c} = {val[:80]!r}")
     # APR-1 over JSON (state-like keys anywhere in the document)
     for d in dirs:
         for p in sorted(Path(d).rglob("*.json")):
@@ -253,9 +280,8 @@ def scan(dirs):
                 elif isinstance(o, list):
                     stack += [(key, x) for x in o]
                 elif isinstance(o, str) and STATE_COL.search(key) and not key.endswith(("_note", "_notes", "rationale")):
-                    for m in APPROVAL.finditer(o):
-                        if not NEGATION.search(o[max(0, m.start() - 8):m.start()]):
-                            out.append({"rule": "APR-1", "file": str(p.relative_to(d)), "row": f"key={key}", "detail": o[:80]})
+                    if approval_claims(o):
+                        out.append({"rule": "APR-1", "file": str(p.relative_to(d)), "row": f"key={key}", "detail": o[:80]})
     return sorted(out, key=lambda x: (x["rule"], x["file"], x["row"], x["detail"])), files
 
 

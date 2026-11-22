@@ -4,162 +4,10 @@
   "HEAD",
   "origin/claude/ws-a-statutory",
   "origin/claude/ws-b-judgments",
-  "origin/claude/ws-c-mml"
+  "origin/claude/ws-c-mml",
+  "pruned at ed3dcf90 (coordinator merge correcting ACQ-02 copy_fidelity and the AR-029 chain row)"
  ],
  "known_violations": [
-  {
-   "rule": "CA-1",
-   "file": "ACQ-02/supplement_inventory.csv",
-   "row": "supp_id=ACQ02-01",
-   "detail": "copy_fidelity = 'ARCHIVAL_FACSIMILE_OF_OFFICIAL' not in policy v1 copy_fidelity values",
-   "first_seen_in": "HEAD",
-   "reason": "Frozen ACQ-02: copy_fidelity column holds the authenticity value ARCHIVAL_FACSIMILE_OF_OFFICIAL instead of a copy_fidelity value (page images are recorded via page_image_check_id). Fix only by a versioned supersession file.",
-   "route_to": "coordinator (ACQ-02 owner)"
-  },
-  {
-   "rule": "CA-1",
-   "file": "ACQ-02/supplement_inventory.csv",
-   "row": "supp_id=ACQ02-02",
-   "detail": "copy_fidelity = 'ARCHIVAL_FACSIMILE_OF_OFFICIAL' not in policy v1 copy_fidelity values",
-   "first_seen_in": "HEAD",
-   "reason": "Frozen ACQ-02: copy_fidelity column holds the authenticity value ARCHIVAL_FACSIMILE_OF_OFFICIAL instead of a copy_fidelity value (page images are recorded via page_image_check_id). Fix only by a versioned supersession file.",
-   "route_to": "coordinator (ACQ-02 owner)"
-  },
-  {
-   "rule": "CA-1",
-   "file": "ACQ-02/supplement_inventory.csv",
-   "row": "supp_id=ACQ02-03",
-   "detail": "copy_fidelity = 'ARCHIVAL_FACSIMILE_OF_OFFICIAL' not in policy v1 copy_fidelity values",
-   "first_seen_in": "HEAD",
-   "reason": "Frozen ACQ-02: copy_fidelity column holds the authenticity value ARCHIVAL_FACSIMILE_OF_OFFICIAL instead of a copy_fidelity value (page images are recorded via page_image_check_id). Fix only by a versioned supersession file.",
-   "route_to": "coordinator (ACQ-02 owner)"
-  },
-  {
-   "rule": "CA-1",
-   "file": "ACQ-02/supplement_inventory.csv",
-   "row": "supp_id=ACQ02-04",
-   "detail": "copy_fidelity = 'ARCHIVAL_FACSIMILE_OF_OFFICIAL' not in policy v1 copy_fidelity values",
-   "first_seen_in": "HEAD",
-   "reason": "Frozen ACQ-02: copy_fidelity column holds the authenticity value ARCHIVAL_FACSIMILE_OF_OFFICIAL instead of a copy_fidelity value (page images are recorded via page_image_check_id). Fix only by a versioned supersession file.",
-   "route_to": "coordinator (ACQ-02 owner)"
-  },
-  {
-   "rule": "CA-1",
-   "file": "ACQ-02/supplement_inventory.csv",
-   "row": "supp_id=ACQ02-05",
-   "detail": "copy_fidelity = 'ARCHIVAL_FACSIMILE_OF_OFFICIAL' not in policy v1 copy_fidelity values",
-   "first_seen_in": "HEAD",
-   "reason": "Frozen ACQ-02: copy_fidelity column holds the authenticity value ARCHIVAL_FACSIMILE_OF_OFFICIAL instead of a copy_fidelity value (page images are recorded via page_image_check_id). Fix only by a versioned supersession file.",
-   "route_to": "coordinator (ACQ-02 owner)"
-  },
-  {
-   "rule": "CA-1",
-   "file": "ACQ-02/supplement_inventory.csv",
-   "row": "supp_id=ACQ02-06",
-   "detail": "copy_fidelity = 'ARCHIVAL_FACSIMILE_OF_OFFICIAL' not in policy v1 copy_fidelity values",
-   "first_seen_in": "HEAD",
-   "reason": "Frozen ACQ-02: copy_fidelity column holds the authenticity value ARCHIVAL_FACSIMILE_OF_OFFICIAL instead of a copy_fidelity value (page images are recorded via page_image_check_id). Fix only by a versioned supersession file.",
-   "route_to": "coordinator (ACQ-02 owner)"
-  },
-  {
-   "rule": "CA-1",
-   "file": "ACQ-02/supplement_inventory.csv",
-   "row": "supp_id=ACQ02-07",
-   "detail": "copy_fidelity = 'ARCHIVAL_FACSIMILE_OF_OFFICIAL' not in policy v1 copy_fidelity values",
-   "first_seen_in": "HEAD",
-   "reason": "Frozen ACQ-02: copy_fidelity column holds the authenticity value ARCHIVAL_FACSIMILE_OF_OFFICIAL instead of a copy_fidelity value (page images are recorded via page_image_check_id). Fix only by a versioned supersession file.",
-   "route_to": "coordinator (ACQ-02 owner)"
-  },
-  {
-   "rule": "CA-1",
-   "file": "ACQ-02/supplement_inventory.csv",
-   "row": "supp_id=ACQ02-08",
-   "detail": "copy_fidelity = 'ARCHIVAL_FACSIMILE_OF_OFFICIAL' not in policy v1 copy_fidelity values",
-   "first_seen_in": "HEAD",
-   "reason": "Frozen ACQ-02: copy_fidelity column holds the authenticity value ARCHIVAL_FACSIMILE_OF_OFFICIAL instead of a copy_fidelity value (page images are recorded via page_image_check_id). Fix only by a versioned supersession file.",
-   "route_to": "coordinator (ACQ-02 owner)"
-  },
-  {
-   "rule": "CA-1",
-   "file": "ACQ-02/supplement_inventory.csv",
-   "row": "supp_id=ACQ02-09",
-   "detail": "copy_fidelity = 'ARCHIVAL_FACSIMILE_OF_OFFICIAL' not in policy v1 copy_fidelity values",
-   "first_seen_in": "HEAD",
-   "reason": "Frozen ACQ-02: copy_fidelity column holds the authenticity value ARCHIVAL_FACSIMILE_OF_OFFICIAL instead of a copy_fidelity value (page images are recorded via page_image_check_id). Fix only by a versioned supersession file.",
-   "route_to": "coordinator (ACQ-02 owner)"
-  },
-  {
-   "rule": "CA-1",
-   "file": "ACQ-02/supplement_inventory.csv",
-   "row": "supp_id=ACQ02-10",
-   "detail": "copy_fidelity = 'ARCHIVAL_FACSIMILE_OF_OFFICIAL' not in policy v1 copy_fidelity values",
-   "first_seen_in": "HEAD",
-   "reason": "Frozen ACQ-02: copy_fidelity column holds the authenticity value ARCHIVAL_FACSIMILE_OF_OFFICIAL instead of a copy_fidelity value (page images are recorded via page_image_check_id). Fix only by a versioned supersession file.",
-   "route_to": "coordinator (ACQ-02 owner)"
-  },
-  {
-   "rule": "CA-1",
-   "file": "ACQ-02/supplement_inventory.csv",
-   "row": "supp_id=ACQ02-11",
-   "detail": "copy_fidelity = 'ARCHIVAL_FACSIMILE_OF_OFFICIAL' not in policy v1 copy_fidelity values",
-   "first_seen_in": "HEAD",
-   "reason": "Frozen ACQ-02: copy_fidelity column holds the authenticity value ARCHIVAL_FACSIMILE_OF_OFFICIAL instead of a copy_fidelity value (page images are recorded via page_image_check_id). Fix only by a versioned supersession file.",
-   "route_to": "coordinator (ACQ-02 owner)"
-  },
-  {
-   "rule": "CA-1",
-   "file": "ACQ-02/supplement_inventory.csv",
-   "row": "supp_id=ACQ02-12",
-   "detail": "copy_fidelity = 'ARCHIVAL_FACSIMILE_OF_OFFICIAL' not in policy v1 copy_fidelity values",
-   "first_seen_in": "HEAD",
-   "reason": "Frozen ACQ-02: copy_fidelity column holds the authenticity value ARCHIVAL_FACSIMILE_OF_OFFICIAL instead of a copy_fidelity value (page images are recorded via page_image_check_id). Fix only by a versioned supersession file.",
-   "route_to": "coordinator (ACQ-02 owner)"
-  },
-  {
-   "rule": "CA-1",
-   "file": "ACQ-02/supplement_inventory.csv",
-   "row": "supp_id=ACQ02-13",
-   "detail": "copy_fidelity = 'ARCHIVAL_FACSIMILE_OF_OFFICIAL' not in policy v1 copy_fidelity values",
-   "first_seen_in": "HEAD",
-   "reason": "Frozen ACQ-02: copy_fidelity column holds the authenticity value ARCHIVAL_FACSIMILE_OF_OFFICIAL instead of a copy_fidelity value (page images are recorded via page_image_check_id). Fix only by a versioned supersession file.",
-   "route_to": "coordinator (ACQ-02 owner)"
-  },
-  {
-   "rule": "CA-1",
-   "file": "ACQ-02/supplement_inventory.csv",
-   "row": "supp_id=ACQ02-14",
-   "detail": "copy_fidelity = 'ARCHIVAL_FACSIMILE_OF_OFFICIAL' not in policy v1 copy_fidelity values",
-   "first_seen_in": "HEAD",
-   "reason": "Frozen ACQ-02: copy_fidelity column holds the authenticity value ARCHIVAL_FACSIMILE_OF_OFFICIAL instead of a copy_fidelity value (page images are recorded via page_image_check_id). Fix only by a versioned supersession file.",
-   "route_to": "coordinator (ACQ-02 owner)"
-  },
-  {
-   "rule": "CA-1",
-   "file": "ACQ-02/supplement_inventory.csv",
-   "row": "supp_id=ACQ02-15",
-   "detail": "copy_fidelity = 'ARCHIVAL_FACSIMILE_OF_OFFICIAL' not in policy v1 copy_fidelity values",
-   "first_seen_in": "HEAD",
-   "reason": "Frozen ACQ-02: copy_fidelity column holds the authenticity value ARCHIVAL_FACSIMILE_OF_OFFICIAL instead of a copy_fidelity value (page images are recorded via page_image_check_id). Fix only by a versioned supersession file.",
-   "route_to": "coordinator (ACQ-02 owner)"
-  },
-  {
-   "rule": "CA-1",
-   "file": "ACQ-02/supplement_inventory.csv",
-   "row": "supp_id=ACQ02-16",
-   "detail": "copy_fidelity = 'ARCHIVAL_FACSIMILE_OF_OFFICIAL (digitally signed e-Gazette P' not in policy v1 copy_fidelity values",
-   "first_seen_in": "HEAD",
-   "reason": "Frozen ACQ-02: copy_fidelity column holds the authenticity value ARCHIVAL_FACSIMILE_OF_OFFICIAL instead of a copy_fidelity value (page images are recorded via page_image_check_id). Fix only by a versioned supersession file.",
-   "route_to": "coordinator (ACQ-02 owner)"
-  },
-  {
-   "rule": "CA-1",
-   "file": "ACQ-02/supplement_inventory.csv",
-   "row": "supp_id=ACQ02-17",
-   "detail": "copy_fidelity = 'ARCHIVAL_FACSIMILE_OF_OFFICIAL' not in policy v1 copy_fidelity values",
-   "first_seen_in": "HEAD",
-   "reason": "Frozen ACQ-02: copy_fidelity column holds the authenticity value ARCHIVAL_FACSIMILE_OF_OFFICIAL instead of a copy_fidelity value (page images are recorded via page_image_check_id). Fix only by a versioned supersession file.",
-   "route_to": "coordinator (ACQ-02 owner)"
-  },
   {
    "rule": "IMG-1",
    "file": "PILOT-01/registers/page_image_checks.csv",
@@ -186,15 +34,10 @@
    "first_seen_in": "origin/claude/ws-a-statutory",
    "reason": "WS-A branch: baseline row claims copy_fidelity PAGE_IMAGE_CHECKED but cites no instrument_ref, check id or file hash.",
    "route_to": "WS-A"
-  },
-  {
-   "rule": "RV-1",
-   "file": "ARMY-RULES-CHAIN-01/army_rules_instrument_register.csv",
-   "row": "instr_id=AR-029",
-   "detail": "continuation_pages_status weak but evidence_level IMAGE_CHECKED",
-   "first_seen_in": "origin/claude/ws-a-statutory",
-   "reason": "Seen only in the WS-A branch copy of the chain register (pre-integration version): evidence_level IMAGE_CHECKED with continuation pages REQUIRES_VERIFICATION. The integrated HEAD copy passes.",
-   "route_to": "WS-A / coordinator at integration"
   }
+ ],
+ "pruned_after_correction": [
+  "CA-1 ACQ-02/supplement_inventory.csv (17 rows)",
+  "RV-1 ARMY-RULES-CHAIN-01/army_rules_instrument_register.csv (1 rows)"
  ]
 }
