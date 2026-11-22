@@ -438,6 +438,44 @@ sources:
         issuing_authority: "Parliament"
         note: "Gazette of India Extraordinary Part II-Section 1, No. 59, 07-09-1992 (scan on India Code item 53aa36bb-a143-4324-9717-ac946144e169); stored bitstream 1992-37.pdf 162975 bytes md5 007769e174338b0877e114cf35d1457e"
 
+  # B4 (PREPARED ONLY — downloading not yet authorised by the owner). DESW (Department of Ex-Servicemen Welfare,
+  # Ministry of Defence) official host. Verified 2026-11-22: HTTPS with certificate verification passing, no
+  # redirects, plain HTTP answers 503 (not used). robots.txt answers 403, which the crawler treats as "no
+  # robots.txt" (RFC 9309: 4xx = unavailable). Two distinct official copies of Entitlement Rules 2023 exist.
+  desw:
+    phase: 2
+    enabled: false
+    priority: 3
+    heavy: false
+    allowed_hosts: [desw.gov.in]
+    require_https: true      # every request and redirect hop must be HTTPS (owner instruction, 2026-11-22)
+    documents:
+      - doc_id: rules-entitlement-casualty-pensionary-awards-2023
+        url: "https://desw.gov.in/sites/default/files/Entitlement%20Rules%202023.pdf"
+        title: "Entitlement Rules for Casualty Pensionary Awards to the Armed Forces Personnel, 2023"
+        doc_type: rules
+        year: 2023
+        number: "MoD letter dated 21-09-2023"
+        issuing_authority: "Ministry of Defence (Department of Ex-Servicemen Welfare)"
+        note: "Official DESW copy; 49,925,674 bytes; Last-Modified 2026-10-20; ETag 2f9ce2a-65e46bf272800 (HEAD, 2026-11-22)"
+      - doc_id: rules-entitlement-casualty-pensionary-awards-2023-alt
+        url: "https://desw.gov.in/sites/default/files/2026-10/Entitlement%20Rules%202023.pdf"
+        title: "Entitlement Rules 2023 with MoD letter of 21-09-2023 (second official DESW copy)"
+        doc_type: rules
+        year: 2023
+        number: "MoD letter dated 21-09-2023"
+        issuing_authority: "Ministry of Defence (Department of Ex-Servicemen Welfare)"
+        parent_doc_id: rules-entitlement-casualty-pensionary-awards-2023
+        note: "Second official DESW copy; 13,011,188 bytes; Last-Modified 2026-10-20; discovery copy SHA-256 29f6fa2c..."
+      - doc_id: manual-guide-medical-officers-military-pensions-2023
+        url: "https://desw.gov.in/sites/default/files/2026-10/GMO%202023.pdf"
+        title: "Guide to Medical Officers (Military Pensions), 2023"
+        doc_type: manual
+        year: 2023
+        number: null
+        issuing_authority: "Ministry of Defence (Department of Ex-Servicemen Welfare)"
+        note: "Official DESW copy; 36,908,350 bytes; Last-Modified 2026-10-20"
+
 # Explicitly forbidden: never fetch, even if linked. Subdomains of a blocked host are blocked too.
 blocked_hosts:
   # Formerly configured for AFT Regional Bench Jabalpur; found on 2026-11-22 to serve unrelated (betting)
