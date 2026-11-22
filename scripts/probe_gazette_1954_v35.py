@@ -27,6 +27,8 @@ URLS=[
  ("GOVT_EGAZETTE_SEARCH","https://egazette.gov.in/SearchGazette.aspx"),
  ("CSL_WEEKLY_MIRROR_INDEX","https://egazette.servantsofknowledge.in/sources/csl_weekly/"),
  ("CSL_ARCHIVED_GAZETTE_SEARCH","https://egazette.servantsofknowledge.in/search/?q=1954-11-27"),
+ ("CSL_ARCHIVED_GAZETTE_TEXT","https://egazette.servantsofknowledge.in/search/?q=27+November+1954"),
+ ("CSL_ARCHIVED_SRO_TEXT","https://egazette.servantsofknowledge.in/search/?q=S.R.O.+484"),
  ("INTERNET_ARCHIVE_METADATA","https://archive.org/advancedsearch.php?q="+urllib.parse.quote('title:"Gazette of India" AND year:1954')+"&fl%5B%5D=identifier&fl%5B%5D=title&rows=15&page=1&output=json"),
 ]
 def get(path,revision=None):
@@ -64,6 +66,20 @@ def main():
                 if len(possible)>=12:
                     break
             row["candidate_hrefs_observed"]=list(dict.fromkeys(possible))
+            detail_links=[]
+            for m in re.finditer(r'(?:href|src)=["\\']([^"\\']*/details/[^"\\']+)["\\']', sample, re.I):
+                link=urllib.parse.urljoin(r.url,m.group(1))
+                detail_links.append({
+                    "url":link,
+                    "surrounding_index_text":" ".join(re.sub(r"<[^>]+>"," ",
+                                             sample[max(0,m.start()-160):m.end()+300]).split())[:380]
+                })
+            row["gazette_detail_links_on_page"]=detail_links[:35]
+            row["gazette_detail_links_count"]=len(detail_links)
+            row["exact_date_matches_near_results"]=[
+              " ".join(re.sub(r"<[^>]+>"," ",sample[max(0,m.start()-180):m.end()+220]).split())[:420]
+              for m in list(re.finditer(r"(?:27\\s+November\\s+1954|1954-11-27|27-11-1954)",sample,re.I))[:8]
+            ]
         except requests.RequestException as ex:
             row.update({"status":"REQUEST_FAILED",
                         "error_type":type(ex).__name__,
