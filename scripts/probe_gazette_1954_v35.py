@@ -67,7 +67,7 @@ def main():
                     break
             row["candidate_hrefs_observed"]=list(dict.fromkeys(possible))
             detail_links=[]
-            for m in re.finditer(r'(?:href|src)=["\\']([^"\\']*/details/[^"\\']+)["\\']', sample, re.I):
+            for m in re.finditer(r"""(?:href|src)=["']([^"']*/details/[^"']+)["']""", sample, re.I):
                 link=urllib.parse.urljoin(r.url,m.group(1))
                 detail_links.append({
                     "url":link,
@@ -78,7 +78,7 @@ def main():
             row["gazette_detail_links_count"]=len(detail_links)
             row["exact_date_matches_near_results"]=[
               " ".join(re.sub(r"<[^>]+>"," ",sample[max(0,m.start()-180):m.end()+220]).split())[:420]
-              for m in list(re.finditer(r"(?:27\\s+November\\s+1954|1954-11-27|27-11-1954)",sample,re.I))[:8]
+              for m in list(re.finditer(r"(?:27\s+November\s+1954|1954-11-27|27-11-1954)",sample,re.I))[:8]
             ]
         except requests.RequestException as ex:
             row.update({"status":"REQUEST_FAILED",
