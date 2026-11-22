@@ -42,3 +42,5 @@ jobs:
           echo "HF_TOKEN=$TOKEN" >> "$GITHUB_ENV"
       - name: Publish and verify curated text review files
         run: python scripts/push_legal_knowledge.py
+      - name: Reconcile against canonical HF source manifests and verify output
+        run: python scripts/reconcile_legal_sources.py
