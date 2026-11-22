@@ -1,0 +1,12 @@
+provision,version,text_source_instrument,valid_from,valid_to,text_evidence,wording_status,compilation_agrees,determination_state,legal_review_required
+r.23(3),v1954,S.R.O. 484/1954 p.300,1954-11-27,open,IMAGE_CHECKED (2 independent readings),'You are not obliged to say anything...',NO (India Code: 'obliged'),CONFLICTING,YES
+r.193,v1954,S.R.O. 484/1954,1954-11-27,1987-10-10,NOT YET EXTRACTED,to transcribe from 1954 Gazette,-,OPEN,YES
+r.193,v1987,S.R.O. 302/1987 p.367,1987-10-10 (publication; commencement not stated),open?,IMAGE_CHECKED (PIC-24),'...clause (i) of section 91 shall be the Chief of the Army Staff or the Officer Commanding an Army',NO (compilation adds s.90(i)),OPEN (U-04),YES
+r.194,v1954,S.R.O. 484/1954,1954-11-27,1989-12-02,NOT YET EXTRACTED,to transcribe,-,OPEN,YES
+r.194,v1989,S.R.O. 332/1989 p.736,1989-12-02 (publication; commencement not recorded),open,IMAGE_CHECKED (PIC-12),"'...in the case of an officer, the Chief of the Army Staff or the Officer Commanding an Army...'",NO (compilation lacks added words),PROPOSAL (C-04),YES
+r.177,v2003,S.R.O. 8(E)/2003,2003-06-24,open,IMAGE_CHECKED,per R23 chain,to compare,PROPOSAL (C-03),YES
+r.192 proviso,v1965,S.R.O. 215/1965 p.172,1965-07-03,open,IMAGE_CHECKED,per R23 chain,to compare,PROPOSAL (C-02),YES
+r.22,v1993,S.R.O. 17(E)/1993,1993-12-06,open? (AR-030),IMAGE_CHECKED,per R23 chain,to compare,OPEN (S.R.O. 258/2002 gap),YES
+r.25,omitted,S.R.O. 17(E)/1993,1993-12-06,-,IMAGE_CHECKED,omitted,to compare,PROPOSAL,YES
+r.59A,v1982 / omitted 1993,S.R.O. 246/1982; 17(E)/1993,1982-11-13,1993-12-06,IMAGE_CHECKED,inserted 1982; omitted 1993,to compare,PROPOSAL,YES
+r.80A,v1985 (+corrigendum),S.R.O. 55/1985; 68/1985,1985-03-09,open,IMAGE_CHECKED,per PIC-20/21,to compare,PROPOSAL,YES
