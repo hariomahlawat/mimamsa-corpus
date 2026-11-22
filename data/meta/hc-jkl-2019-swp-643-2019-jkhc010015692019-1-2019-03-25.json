@@ -1,0 +1,102 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/court=1_12/bench=kashmirhc/JKHC010015692019_1_2019-03-25.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T05:59:00+00:00",
+  "sha256": "4d2d50af185ef654a8d598e1f4e9e27486864aed2d5bb201e6492e43e964b4bc",
+  "raw_path": "data/raw/hc/2019/4d2d50af185ef654a8d598e1f4e9e27486864aed2d5bb201e6492e43e964b4bc.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2019-swp-643-2019-jkhc010015692019-1-2019-03-25.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2019-swp-643-2019-jkhc010015692019-1-2019-03-25",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s30",
+      "target_ref_raw": "section 30 of the Armed Forces Tribunal Act 2007",
+      "effective_date": null,
+      "evidence": "aims was his erstwhile wife. The preliminary objections has been raised by Mr. T.M. Shamsi who states that the present dispute is covered in terms of section 30 of the Armed Forces Tribunal Act 2007 and that in terms of section 14 the jurisdiction would lie with the Armed Forces Tribunal. There is considerable weight in the objections, this petit",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-jkl-2019-swp-643-2019-jkhc010015692019-1-2019-03-25",
+  "doc_type": "judgment",
+  "title": "SWP/643/2019 of SHOWKAT AHMAD KHAN Vs UNION OF INDIA AND ORS. (HOME AFFAIRS)",
+  "number": "SWP/643/2019",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2019-03-25",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC010015692019_1_2019-03-25.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC010015692019",
+    "collection": "kashmirhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "SWP/643/2019"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SHOWKAT AHMAD KHAN"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS. (HOME AFFAIRS)"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE DHIRAJ SINGH THAKUR"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "30",
+      "raw": "section 30 of the Armed Forces Tribunal Act 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 3,
+    "keywords": {
+      "armed forces tribunal": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

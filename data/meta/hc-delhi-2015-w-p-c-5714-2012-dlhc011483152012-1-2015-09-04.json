@@ -79,9 +79,10 @@
   "topics": [],
   "relevance": {
     "status": "relevant",
-    "hits": 5,
+    "hits": 6,
     "keywords": {
-      "navy act": 5
+      "navy act": 5,
+      "armed forces tribunal": 1
     },
     "note": null
   },

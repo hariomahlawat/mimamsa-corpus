@@ -1,0 +1,101 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2022/court=9_13/bench=cishclko/UPHC020796142022_1_2022-12-23.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T09:57:06+00:00",
+  "sha256": "29036f2a6da8c167c42b75e62b2f9596d2e4a20f63154a15caf04097c624ec96",
+  "raw_path": "data/raw/hc/2022/29036f2a6da8c167c42b75e62b2f9596d2e4a20f63154a15caf04097c624ec96.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2022-untitled-uphc020796142022-1-2022-12-23.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2022-untitled-uphc020796142022-1-2022-12-23",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s14",
+      "target_ref_raw": "Section 14 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "ned counsel for the respondents assisted by Maj Rajshri Nigam, Departmental Representative. By means of the present O.A. filed by the applicant under Section 14 of the Armed Forces Tribunal Act, 2007, the following reliefs have been claimed: (i) That this Hon’ble Tribunal may kindly be pleased to quash the impugned order dated 28.08.2012 passed by",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2022-untitled-uphc020796142022-1-2022-12-23",
+  "doc_type": "judgment",
+  "title": "/8859/2022 of KM BASANTI Vs UNION OF INDIA THRU. ITS SECY. MINISTRY OF DEFENCE NEW DELHI AND 3 OTHERS",
+  "number": null,
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2022-12-23",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC020796142022_1_2022-12-23.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC020796142022",
+    "collection": "cishclko",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "/8859/2022 of KM BASANTI"
+    ],
+    "respondent": [
+      "UNION OF INDIA THRU. ITS SECY. MINISTRY OF DEFENCE NEW DELHI AND 3 OTHERS"
+    ]
+  },
+  "judges": [
+    "DEVENDRA KUMAR UPADHYAYA",
+    "SAURABH LAVANIA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "14",
+      "raw": "Section 14 of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "armed forces tribunal": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

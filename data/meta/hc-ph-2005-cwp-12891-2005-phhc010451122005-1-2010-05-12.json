@@ -1,0 +1,102 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2005/court=3_22/bench=phhc/PHHC010451122005_1_2010-05-12.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T09:37:42+00:00",
+  "sha256": "9b02634488ea32d7d6eae6d50ad500179b9aa3936a833ee58848fc68fcda0374",
+  "raw_path": "data/raw/hc/2005/9b02634488ea32d7d6eae6d50ad500179b9aa3936a833ee58848fc68fcda0374.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2005-cwp-12891-2005-phhc010451122005-1-2010-05-12.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2005-cwp-12891-2005-phhc010451122005-1-2010-05-12",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s4",
+      "target_ref_raw": "Section 4 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "ounsel for the respondents submits that the issue involved in the present writ petition is cognizable by the Armed Forces Tribunal, constituted under Section 4 of the Armed Forces Tribunal Act, 2007, by the Central Government, vide notification dated 07.08.2009. This case is accordingly transferred to the Armed Forces Tribunal, Chandigarh Bench,",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2005-cwp-12891-2005-phhc010451122005-1-2010-05-12",
+  "doc_type": "judgment",
+  "title": "CWP/12891/2005 of MANDIP KUMAR Vs UNION OF INDIA AND OTHERS",
+  "number": "CWP/12891/2005",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2005-08-19",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010451122005_1_2010-05-12.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010451122005",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/12891/2005"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MANDIP KUMAR"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE AUGUSTINE GEORGE MASIH"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "4",
+      "raw": "Section 4 of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 5,
+    "keywords": {
+      "armed forces tribunal": 5
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

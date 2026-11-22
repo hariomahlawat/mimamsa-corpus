@@ -81,10 +81,11 @@
   "cases_cited": [],
   "topics": [],
   "relevance": {
-    "status": "borderline",
-    "hits": 2,
+    "status": "relevant",
+    "hits": 12,
     "keywords": {
-      "navy act": 2
+      "navy act": 2,
+      "armed forces tribunal": 10
     },
     "note": null
   },

@@ -1,0 +1,102 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/court=1_12/bench=kashmirhc/JKHC010000612017_1_2019-12-07.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T05:59:00+00:00",
+  "sha256": "0d81152228d681ca6322c5853354759022b6f4d0b3d4f671b28043befafca4f9",
+  "raw_path": "data/raw/hc/2019/0d81152228d681ca6322c5853354759022b6f4d0b3d4f671b28043befafca4f9.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2019-swp-6-2017-jkhc010000612017-1-2019-12-07.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-jkl-2019-swp-6-2017-jkhc010000612017-1-2019-12-07",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s34",
+      "target_ref_raw": "Section 34 of Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "Nazima Jan, Adv. vice Mr. T. M. Shamsi, ASGI CORAM: HON’BLE MR. JUSTICE DHIRAJ SINGH THAKUR, JUDGE O R D E R 07.12.2019 In terms of the provisions of Section 34 of Armed Forces Tribunal Act, 2007, the present proceedings are transferred to the Armed Forces Tribunal Circuit Bench, Jammu. The requisite records be transmitted forthwith. Disposed",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-jkl-2019-swp-6-2017-jkhc010000612017-1-2019-12-07",
+  "doc_type": "judgment",
+  "title": "SWP/6/2017 of MST. KHALIQ AKHTER Vs UNION OF INDIA AND ORS (DEFENCE)",
+  "number": "SWP/6/2017",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2019-12-07",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC010000612017_1_2019-12-07.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC010000612017",
+    "collection": "kashmirhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "SWP/6/2017"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MST. KHALIQ AKHTER"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS (DEFENCE)"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE DHIRAJ SINGH THAKUR"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "34",
+      "raw": "Section 34 of Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "armed forces tribunal": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

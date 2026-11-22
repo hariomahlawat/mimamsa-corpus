@@ -61,11 +61,14 @@
   "outcome": null,
   "statutes_cited": [],
   "cases_cited": [],
-  "topics": [],
+  "topics": [
+    "disability_pension"
+  ],
   "relevance": {
-    "status": "borderline",
-    "hits": 2,
+    "status": "relevant",
+    "hits": 3,
     "keywords": {
+      "armed forces tribunal": 1,
       "disability pension": 2
     },
     "note": null

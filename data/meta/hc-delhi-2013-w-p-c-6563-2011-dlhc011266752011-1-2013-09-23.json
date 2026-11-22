@@ -199,10 +199,11 @@
   ],
   "relevance": {
     "status": "relevant",
-    "hits": 125,
+    "hits": 143,
     "keywords": {
       "army act": 1,
       "navy act": 19,
+      "armed forces tribunal": 18,
       "court martial": 81,
       "summary of evidence": 24
     },

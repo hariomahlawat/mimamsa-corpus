@@ -1,0 +1,86 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=3_22/bench=phhc/PHHC011399162023_1_2024-12-12.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T06:09:13+00:00",
+  "sha256": "ee374975d3d66c52cdfba3aa346e5004b8533cac873da1498daef874194812af",
+  "raw_path": "data/raw/hc/2024/ee374975d3d66c52cdfba3aa346e5004b8533cac873da1498daef874194812af.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "ocr",
+  "ocr_confidence": 93.2,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2024-cwp-26159-2023-phhc011399162023-1-2024-12-12.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-ph-2024-cwp-26159-2023-phhc011399162023-1-2024-12-12",
+  "doc_type": "judgment",
+  "title": "CWP/26159/2023 of SHIV SHANKAR Vs ARMED FORCES TRIBUNAL AND OTHERS",
+  "number": "CWP/26159/2023",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2024-12-12",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "PHHC011399162023_1_2024-12-12.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC011399162023",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/26159/2023"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SHIV SHANKAR"
+    ],
+    "respondent": [
+      "ARMED FORCES TRIBUNAL AND OTHERS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE SURESHWAR THAKUR",
+    "MS. JUSTICE KIRTI SINGH"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "armed forces tribunal": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "language": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

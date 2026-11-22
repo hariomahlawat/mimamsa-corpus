@@ -65,8 +65,9 @@
   ],
   "relevance": {
     "status": "relevant",
-    "hits": 6,
+    "hits": 16,
     "keywords": {
+      "armed forces tribunal": 10,
       "court martial": 6
     },
     "note": null

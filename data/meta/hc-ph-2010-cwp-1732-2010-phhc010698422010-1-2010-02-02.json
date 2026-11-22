@@ -1,0 +1,84 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2010/court=3_22/bench=phhc/PHHC010698422010_1_2010-02-02.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T09:36:19+00:00",
+  "sha256": "91102a4087e44579ed53da6fb09898c1c6c07f88d75e8fef1ece6f44c29e7c3a",
+  "raw_path": "data/raw/hc/2010/91102a4087e44579ed53da6fb09898c1c6c07f88d75e8fef1ece6f44c29e7c3a.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2010-cwp-1732-2010-phhc010698422010-1-2010-02-02.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-ph-2010-cwp-1732-2010-phhc010698422010-1-2010-02-02",
+  "doc_type": "judgment",
+  "title": "CWP/1732/2010 of AMARJIT LAL Vs UNION OF INDIA & ORS",
+  "number": "CWP/1732/2010",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2010-02-02",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010698422010_1_2010-02-02.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010698422010",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/1732/2010"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "AMARJIT LAL"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE AUGUSTINE GEORGE MASIH"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "armed forces tribunal": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -61,11 +61,14 @@
   "outcome": null,
   "statutes_cited": [],
   "cases_cited": [],
-  "topics": [],
+  "topics": [
+    "medical_board"
+  ],
   "relevance": {
-    "status": "borderline",
-    "hits": 2,
+    "status": "relevant",
+    "hits": 3,
     "keywords": {
+      "armed forces tribunal": 1,
       "release medical board": 2
     },
     "note": null

@@ -128,12 +128,12 @@
   ],
   "relevance": {
     "status": "relevant",
-    "hits": 20,
+    "hits": 24,
     "keywords": {
       "army act": 6,
       "air force act": 1,
       "navy act": 1,
-      "armed forces tribunal": 10,
+      "armed forces tribunal": 14,
       "court martial": 2
     },
     "note": null

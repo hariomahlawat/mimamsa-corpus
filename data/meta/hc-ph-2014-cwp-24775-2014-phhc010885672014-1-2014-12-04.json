@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2014/court=3_22/bench=phhc/PHHC010885672014_1_2014-12-04.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T09:29:26+00:00",
+  "sha256": "61b2e5db526faa42a5b7ae99042e1aae2c75ec58a75b3f32754ba15fe7c29582",
+  "raw_path": "data/raw/hc/2014/61b2e5db526faa42a5b7ae99042e1aae2c75ec58a75b3f32754ba15fe7c29582.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2014-cwp-24775-2014-phhc010885672014-1-2014-12-04.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-ph-2014-cwp-24775-2014-phhc010885672014-1-2014-12-04",
+  "doc_type": "judgment",
+  "title": "CWP/24775/2014 of MUKHTAR MASIH Vs UNION OF INDIA AND OTHERS",
+  "number": "CWP/24775/2014",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2014-12-04",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010885672014_1_2014-12-04.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010885672014",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/24775/2014"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MUKHTAR MASIH"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "MS. JUSTICE NAVITA SINGH",
+    "MR. JUSTICE SUDHIR MITTAL"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "armed forces tribunal": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=9_13/bench=cishclko/UPHC020207462022_1_2024-07-15.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T09:45:58+00:00",
+  "sha256": "57921ce9467f95ebe28ba3d83c87659c7d1904d32d2abc44ba5893a47a6cdb65",
+  "raw_path": "data/raw/hc/2024/57921ce9467f95ebe28ba3d83c87659c7d1904d32d2abc44ba5893a47a6cdb65.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2024-untitled-uphc020207462022-1-2024-07-15.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-allahabad-2024-untitled-uphc020207462022-1-2024-07-15",
+  "doc_type": "judgment",
+  "title": "/2562/2022 of PUSHPA RANI Vs ARMED FORCES TRIBUNAL BENCH LKO. THRU. REGISTRAR AND 4 OTHERS",
+  "number": null,
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2024-07-15",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC020207462022_1_2024-07-15.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC020207462022",
+    "collection": "cishclko",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "/2562/2022 of PUSHPA RANI"
+    ],
+    "respondent": [
+      "ARMED FORCES TRIBUNAL BENCH LKO. THRU. REGISTRAR AND 4 OTHERS"
+    ]
+  },
+  "judges": [
+    "RAJAN ROY",
+    "OM PRAKASH SHUKLA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "armed forces tribunal": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

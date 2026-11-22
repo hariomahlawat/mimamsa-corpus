@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2011/court=7_26/bench=dhcdb/DLHC011461962011_1_2011-10-05.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T05:39:28+00:00",
+  "sha256": "54889f2e1c36684594fb1dd35e4b93ba259cc86a6f1618850e067ad08dd65b82",
+  "raw_path": "data/raw/hc/2011/54889f2e1c36684594fb1dd35e4b93ba259cc86a6f1618850e067ad08dd65b82.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2011-w-p-c-7301-2011-dlhc011461962011-1-2011-10-05.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2011-w-p-c-7301-2011-dlhc011461962011-1-2011-10-05",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s3",
+      "target_ref_raw": "Section 3 of the Armed Forces Tribunal Act 2007",
+      "effective_date": null,
+      "evidence": "rps. 2. Petitioners have been so reverted. 3. Service matters falling within the domain of Armed Forces Tribunal have been defined vide clause (o) of Section 3 of the Armed Forces Tribunal Act 2007, and we would highlight that vide clause (ii) of para (o) of Section 3, reversion related disputes have to be treated as a service dispute adjudicabl",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2011-w-p-c-7301-2011-dlhc011461962011-1-2011-10-05",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/7301/2011 of DILIP KUMAR SASMAL Vs UNION OF INDIA AND OTHERS",
+  "number": "W.P.(C)/7301/2011",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2011-10-05",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC011461962011_1_2011-10-05.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC011461962011",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/7301/2011"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "DILIP KUMAR SASMAL"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE PRADEEP NANDRAJOG",
+    "HON'BLE MR. JUSTICE SUNIL GAUR"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "3",
+      "raw": "Section 3 of the Armed Forces Tribunal Act 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 3,
+    "keywords": {
+      "armed forces tribunal": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

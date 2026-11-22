@@ -1,0 +1,101 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2022/court=9_13/bench=cishclko/UPHC020095172022_1_2022-02-25.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T09:56:58+00:00",
+  "sha256": "a88c00c79ad551883c4656a6fce9502a524bed92b0c21f215060b7fa9fd75485",
+  "raw_path": "data/raw/hc/2022/a88c00c79ad551883c4656a6fce9502a524bed92b0c21f215060b7fa9fd75485.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 6,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2022-untitled-uphc020095172022-1-2022-02-25.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2022-untitled-uphc020095172022-1-2022-02-25",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s31",
+      "target_ref_raw": "Section 31 of Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "is noticeable at this juncture itself that the respondents had moved an application seeking leave to appeal as per requirement of sub-section (2) of Section 31 of Armed Forces Tribunal Act, 2007 which was considered and rejected by the Armed Forces Tribunal on 28.01.2022 itself. Thereafter it appears that an Officer junior to the petitioner,",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2022-untitled-uphc020095172022-1-2022-02-25",
+  "doc_type": "judgment",
+  "title": "/1006/2022 of Brigadier Javed Iqbal Vs Union of India through Secretary Ministry of Defence AND ORS.",
+  "number": null,
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2022-02-25",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC020095172022_1_2022-02-25.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC020095172022",
+    "collection": "cishclko",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "/1006/2022 of Brigadier Javed Iqbal"
+    ],
+    "respondent": [
+      "Union of India through Secretary Ministry of Defence AND ORS."
+    ]
+  },
+  "judges": [
+    "DEVENDRA KUMAR UPADHYAYA",
+    "IRSHAD ALI"
+  ],
+  "outcome": "partly_allowed",
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "31",
+      "raw": "Section 31 of Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 27,
+    "keywords": {
+      "armed forces tribunal": 27
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=7_26/bench=dhcdb/DLHC010196862024_1_2024-07-15.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T05:03:15+00:00",
+  "sha256": "3c00f93d93f6804f61e51a963053df00195551f902f291ca45f6d0b28c8b2139",
+  "raw_path": "data/raw/hc/2024/3c00f93d93f6804f61e51a963053df00195551f902f291ca45f6d0b28c8b2139.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2024-w-p-c-5305-2024-dlhc010196862024-1-2024-07-15.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2024-w-p-c-5305-2024-dlhc010196862024-1-2024-07-15",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s14",
+      "target_ref_raw": "Section 14 of the Armed Forces Tribunal Act",
+      "effective_date": null,
+      "evidence": "e extraordinary jurisdiction of this Court under Article 226 of the Constitution of India. 3. Having perused the provisions of Section 3(o) read with Section 14 of the Armed Forces Tribunal Act(the Act), we are of the view that once the petitioner is entitled to approach the learned Tribunal qua any grievance relating to his service matter,",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2024-w-p-c-5305-2024-dlhc010196862024-1-2024-07-15",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/5305/2024 of SUB M BISHMA RAO THROUGH PAIROKAR M SUJATHA Vs UNION OF INDIA AND ORS.",
+  "number": "W.P.(C)/5305/2024",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2024-07-15",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010196862024_1_2024-07-15.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010196862024",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/5305/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SUB M BISHMA RAO THROUGH PAIROKAR M SUJATHA"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE MS. JUSTICE REKHA PALLI",
+    "HON'BLE MS. JUSTICE SHALINDER KAUR"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "14",
+      "raw": "Section 14 of the Armed Forces Tribunal Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "armed forces tribunal": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

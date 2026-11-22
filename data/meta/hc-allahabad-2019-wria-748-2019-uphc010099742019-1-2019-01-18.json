@@ -1,0 +1,91 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/court=9_13/bench=cisdb_16012018/UPHC010099742019_1_2019-01-18.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T10:03:08+00:00",
+  "sha256": "3fed0a9b10c44c88f6b0130a9f186d1702928343d2c566a96ef02e9fbdd83e98",
+  "raw_path": "data/raw/hc/2019/3fed0a9b10c44c88f6b0130a9f186d1702928343d2c566a96ef02e9fbdd83e98.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2019-wria-748-2019-uphc010099742019-1-2019-01-18.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-allahabad-2019-wria-748-2019-uphc010099742019-1-2019-01-18",
+  "doc_type": "judgment",
+  "title": "WRIA/748/2019 of SMT. SANGEETA Vs UNION OF INDIA AND 3 OTHERS",
+  "number": "WRIA/748/2019",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2019-01-18",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC010099742019_1_2019-01-18.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC010099742019",
+    "collection": "cisdb_16012018",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WRIA/748/2019"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SMT. SANGEETA"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND 3 OTHERS"
+    ]
+  },
+  "judges": [
+    "YASHWANT VARMA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": null,
+      "raw": "Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "armed forces tribunal": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -66,8 +66,9 @@
   ],
   "relevance": {
     "status": "relevant",
-    "hits": 5,
+    "hits": 6,
     "keywords": {
+      "armed forces tribunal": 1,
       "release medical board": 5
     },
     "note": null

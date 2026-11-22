@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=7_26/bench=dhcdb/DLHC010041422024_1_2024-02-06.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T05:03:15+00:00",
+  "sha256": "66315163e5dae5904886e955c04745efb248cecf0a0ed966dd36a277b487e1d7",
+  "raw_path": "data/raw/hc/2024/66315163e5dae5904886e955c04745efb248cecf0a0ed966dd36a277b487e1d7.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2024-w-p-c-1717-2024-dlhc010041422024-1-2024-02-06.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2024-w-p-c-1717-2024-dlhc010041422024-1-2024-02-06",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/1717/2024 of VIJAY KUMAR SAINI, HAV/NA , NO.15422314F Vs UNION OF INDIA AND ORS",
+  "number": "W.P.(C)/1717/2024",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2024-02-06",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010041422024_1_2024-02-06.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010041422024",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/1717/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "VIJAY KUMAR SAINI, HAV/NA , NO.15422314F"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE V. KAMESWAR RAO",
+    "HON'BLE MR. JUSTICE SAURABH BANERJEE"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "armed forces tribunal": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

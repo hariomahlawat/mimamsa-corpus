@@ -1,0 +1,84 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=7_26/bench=dhcdb/DLHC010304242023_1_2024-02-14.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T04:59:26+00:00",
+  "sha256": "cc713ffea9428dc9c4e65bb6ea3d2b729b80a412dc853c68d6b405e650680e2a",
+  "raw_path": "data/raw/hc/2024/cc713ffea9428dc9c4e65bb6ea3d2b729b80a412dc853c68d6b405e650680e2a.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 3,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2024-w-p-c-10410-2023-dlhc010304242023-1-2024-02-14.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-delhi-2024-w-p-c-10410-2023-dlhc010304242023-1-2024-02-14",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/10410/2023 of MS SANTOSH DATTA Vs UNION OF INDIA & ANR.",
+  "number": "W.P.(C)/10410/2023",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2024-02-14",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC010304242023_1_2024-02-14.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC010304242023",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/10410/2023"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "MS SANTOSH DATTA"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ANR."
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE SUBRAMONIUM PRASAD"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 3,
+    "keywords": {
+      "armed forces tribunal": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2014/court=7_26/bench=dhcdb/DLHC011889392014_1_2014-10-28.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T05:27:07+00:00",
+  "sha256": "f0559b356a833f11febd4b0a2bd841579983b18daaecb26940c4e6360a45aa64",
+  "raw_path": "data/raw/hc/2014/f0559b356a833f11febd4b0a2bd841579983b18daaecb26940c4e6360a45aa64.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-delhi-2014-w-p-c-7219-2014-dlhc011889392014-1-2014-10-28.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-delhi-2014-w-p-c-7219-2014-dlhc011889392014-1-2014-10-28",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s14",
+      "target_ref_raw": "Section 14 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "ined under Section 11 of the Code of Civil Procedure, 1908 will not come in the way of the petitioner to seek his remedy by filing the petition under Section 14 of the Armed Forces Tribunal Act, 2007 under which an independent legal remedy was available to him to challenge the correctness and validity of the two ACRs for the period 1.9.2002 to 31.",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-delhi-2014-w-p-c-7219-2014-dlhc011889392014-1-2014-10-28",
+  "doc_type": "judgment",
+  "title": "W.P.(C)/7219/2014 of HITESH BHATNAGAR Vs UNION OF INDIA & ORS",
+  "number": "W.P.(C)/7219/2014",
+  "issuing_authority": "High Court of Delhi",
+  "issue_date": "2014-10-28",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "DLHC011889392014_1_2014-10-28.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "DLHC011889392014",
+    "collection": "dhcdb",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Delhi",
+  "bench": null,
+  "case_numbers": [
+    "W.P.(C)/7219/2014"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "HITESH BHATNAGAR"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS"
+    ]
+  },
+  "judges": [
+    "HON'BLE MR. JUSTICE KAILASH GAMBHIR",
+    "HON'BLE MR. JUSTICE NAJMI WAZIRI"
+  ],
+  "outcome": null,
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "14",
+      "raw": "Section 14 of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 9,
+    "keywords": {
+      "armed forces tribunal": 9
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

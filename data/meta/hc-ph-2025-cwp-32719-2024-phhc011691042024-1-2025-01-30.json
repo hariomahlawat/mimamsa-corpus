@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2025/court=3_22/bench=phhc/PHHC011691042024_1_2025-01-30.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T06:03:20+00:00",
+  "sha256": "89f237c200a0877614e2ed63db753f05f2c1470bb150c0eed74c5bfd6568af1d",
+  "raw_path": "data/raw/hc/2025/89f237c200a0877614e2ed63db753f05f2c1470bb150c0eed74c5bfd6568af1d.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2025-cwp-32719-2024-phhc011691042024-1-2025-01-30.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-ph-2025-cwp-32719-2024-phhc011691042024-1-2025-01-30",
+  "doc_type": "judgment",
+  "title": "CWP/32719/2024 of KULVIR SINGH AND ANOTHER Vs UNION OF INDIA AND OTHERS",
+  "number": "CWP/32719/2024",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2025-01-30",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC011691042024_1_2025-01-30.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC011691042024",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/32719/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "KULVIR SINGH AND ANOTHER"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE SANJEEV PRAKASH SHARMA",
+    "MRS. JUSTICE MEENAKSHI I. MEHTA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "armed forces tribunal": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

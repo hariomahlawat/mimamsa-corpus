@@ -68,11 +68,14 @@
     }
   ],
   "cases_cited": [],
-  "topics": [],
+  "topics": [
+    "court_martial"
+  ],
   "relevance": {
-    "status": "borderline",
-    "hits": 2,
+    "status": "relevant",
+    "hits": 4,
     "keywords": {
+      "armed forces tribunal": 2,
       "court martial": 2
     },
     "note": null

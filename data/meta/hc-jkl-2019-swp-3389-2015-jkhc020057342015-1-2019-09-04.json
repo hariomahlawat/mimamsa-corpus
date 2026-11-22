@@ -1,0 +1,84 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/court=1_12/bench=jammuhc/JKHC020057342015_1_2019-09-04.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T05:58:51+00:00",
+  "sha256": "776cbc5bf705cb9be8afa77fb83146be999dda356cb62fd3bb7ce614b530db11",
+  "raw_path": "data/raw/hc/2019/776cbc5bf705cb9be8afa77fb83146be999dda356cb62fd3bb7ce614b530db11.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2019-swp-3389-2015-jkhc020057342015-1-2019-09-04.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-jkl-2019-swp-3389-2015-jkhc020057342015-1-2019-09-04",
+  "doc_type": "judgment",
+  "title": "SWP/3389/2015 of KULDEEP KUMAR Vs UOI.TH.MINISTRY OF DEFENCE AND ORS.",
+  "number": "SWP/3389/2015",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2019-09-04",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020057342015_1_2019-09-04.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020057342015",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "SWP/3389/2015"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "KULDEEP KUMAR"
+    ],
+    "respondent": [
+      "UOI.TH.MINISTRY OF DEFENCE AND ORS."
+    ]
+  },
+  "judges": [
+    "HON'BLE  MR. JUSTICE RAJESH BINDAL"
+  ],
+  "outcome": null,
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 3,
+    "keywords": {
+      "armed forces tribunal": 3
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

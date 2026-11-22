@@ -1,0 +1,100 @@
+{
+  "schema_version": "0.2.0",
+  "source": "sci",
+  "source_url": "https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/english/2019_13_241_259_EN.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T04:33:08+00:00",
+  "sha256": "e5fdf73e5fbc7cec7083589247d80186b156d12673d06f3b97842c7a53aab9f1",
+  "raw_path": "data/raw/sci/2019/e5fdf73e5fbc7cec7083589247d80186b156d12673d06f3b97842c7a53aab9f1.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 19,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/sc-2019-air-commodore-naveen-jain-2019insc1120.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "sc-2019-air-commodore-naveen-jain-2019insc1120",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s31",
+      "target_ref_raw": "Section 31(1) of the Armed Forces Tribunal Act",
+      "effective_date": null,
+      "evidence": "ereby, the Original Application filed by the appellant was dismissed and also an order of the same date declining leave to appeal to this Court under Section 31(1) of the Armed Forces Tribunal Act, 20072. 1 for short, ‘Tribunal’ 2 for short, ‘Act’ A B C D E F G H 245 2. The appellant was commissioned in the Administrative Branch of the Indian A",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "sc-2019-air-commodore-naveen-jain-2019insc1120",
+  "doc_type": "judgment",
+  "title": "AIR COMMODORE NAVEEN JAIN versus UNION OF INDIA & ORS.",
+  "number": "2019 INSC 1120",
+  "issuing_authority": "Supreme Court of India",
+  "issue_date": "2019-10-03",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "2019_13_241_259_EN.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-supreme-court-judgments",
+    "record_id": "ESCR010002172019",
+    "collection": null,
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-supreme-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the Supreme Court's e-SCR portal. Pre-selected from the index by party names.",
+  "court": "Supreme Court of India",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": "2019 INSC 1120",
+  "reported_citations": [
+    "[2019] 13 S.C.R. 241"
+  ],
+  "parties": {
+    "petitioner": [
+      "AIR COMMODORE NAVEEN JAIN"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS."
+    ]
+  },
+  "judges": [
+    "L. NAGESWARA RAO"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "31",
+      "raw": "Section 31(1) of the Armed Forces Tribunal Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 4,
+    "keywords": {
+      "armed forces tribunal": 4
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

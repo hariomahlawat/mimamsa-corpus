@@ -1,0 +1,85 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=1_12/bench=jammuhc/JKHC020032872024_1_2026-09-02.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T05:40:40+00:00",
+  "sha256": "533f3515c6d9b3e7d6a782ba7d5b7faf758e50f5ce0e5fc6d763dcd40ed5bcd1",
+  "raw_path": "data/raw/hc/2026/533f3515c6d9b3e7d6a782ba7d5b7faf758e50f5ce0e5fc6d763dcd40ed5bcd1.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 2,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-jkl-2026-wp-c-1534-2024-jkhc020032872024-1-2026-09-02.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-jkl-2026-wp-c-1534-2024-jkhc020032872024-1-2026-09-02",
+  "doc_type": "judgment",
+  "title": "WP(C)/1534/2024 of UNION OF INDIA TH. SECRETARY MINISTRY OF DEFENCE, NEW DELHI AND OTHERS Vs JASWANT SINGH",
+  "number": "WP(C)/1534/2024",
+  "issuing_authority": "High Court of Jammu and Kashmir",
+  "issue_date": "2026-09-02",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "JKHC020032872024_1_2026-09-02.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "JKHC020032872024",
+    "collection": "jammuhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Jammu and Kashmir",
+  "bench": null,
+  "case_numbers": [
+    "WP(C)/1534/2024"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA TH. SECRETARY MINISTRY OF DEFENCE, NEW DELHI AND OTHERS"
+    ],
+    "respondent": [
+      "JASWANT SINGH"
+    ]
+  },
+  "judges": [
+    "HON'BLE  THE ACTING CHIEF JUSTICE",
+    "HON'BLE MR. JUSTICE MOHD. YOUSUF WANI"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "armed forces tribunal": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

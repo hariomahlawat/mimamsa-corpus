@@ -60,11 +60,14 @@
   "outcome": "dismissed",
   "statutes_cited": [],
   "cases_cited": [],
-  "topics": [],
+  "topics": [
+    "court_martial"
+  ],
   "relevance": {
-    "status": "borderline",
-    "hits": 1,
+    "status": "relevant",
+    "hits": 2,
     "keywords": {
+      "armed forces tribunal": 1,
       "court martial": 1
     },
     "note": null

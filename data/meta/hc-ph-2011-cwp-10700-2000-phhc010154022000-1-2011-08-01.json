@@ -1,0 +1,102 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2011/court=3_22/bench=phhc/PHHC010154022000_1_2011-08-01.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T09:32:36+00:00",
+  "sha256": "4b4e8fcd20afbb8d673fb6754d40eeed171b7c86b86be6c2b86b26937b196e2a",
+  "raw_path": "data/raw/hc/2011/4b4e8fcd20afbb8d673fb6754d40eeed171b7c86b86be6c2b86b26937b196e2a.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2011-cwp-10700-2000-phhc010154022000-1-2011-08-01.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2011-cwp-10700-2000-phhc010154022000-1-2011-08-01",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s34",
+      "target_ref_raw": "Section 34 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "r the Union of India. ***** RANJIT SINGH, J. The prayer made in the application is for transferring the case to the Armed Forces Tribunal. In view of Section 34 of the Armed Forces Tribunal Act, 2007, the present case is mandatorily required to be transferred to the Armed Forces Tribunal constituted under the Act. The Registry is directed to trans",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2011-cwp-10700-2000-phhc010154022000-1-2011-08-01",
+  "doc_type": "judgment",
+  "title": "CWP/10700/2000 of SAWAN SINGH Vs UNION OF INDIA & ORS",
+  "number": "CWP/10700/2000",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2011-08-01",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010154022000_1_2011-08-01.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010154022000",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/10700/2000"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SAWAN SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA & ORS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE RANJIT SINGH"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "34",
+      "raw": "Section 34 of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "relevant",
+    "hits": 4,
+    "keywords": {
+      "armed forces tribunal": 4
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

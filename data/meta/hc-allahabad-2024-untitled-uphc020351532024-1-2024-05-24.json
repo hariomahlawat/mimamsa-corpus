@@ -1,0 +1,83 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=9_13/bench=cishclko/UPHC020351532024_1_2024-05-24.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T09:44:53+00:00",
+  "sha256": "6ccde8aa2fda18e6dfd7ae2c0c278f61d30807242f39e02254c0878388399ee2",
+  "raw_path": "data/raw/hc/2024/6ccde8aa2fda18e6dfd7ae2c0c278f61d30807242f39e02254c0878388399ee2.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2024-untitled-uphc020351532024-1-2024-05-24.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [],
+  "doc_id": "hc-allahabad-2024-untitled-uphc020351532024-1-2024-05-24",
+  "doc_type": "judgment",
+  "title": "/4018/2024 of NO. 14807676H , PANKAJ KUMAR RAI Vs ARMED FORCES TRIBUNAL REGIONAL BENCH LKO. THRU. ITS REGISTRAR AND OTHERS",
+  "number": null,
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2024-05-24",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC020351532024_1_2024-05-24.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC020351532024",
+    "collection": "cishclko",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "/4018/2024 of NO. 14807676H , PANKAJ KUMAR RAI"
+    ],
+    "respondent": [
+      "ARMED FORCES TRIBUNAL REGIONAL BENCH LKO. THRU. ITS REGISTRAR AND OTHERS"
+    ]
+  },
+  "judges": [
+    "RAJAN ROY",
+    "OM PRAKASH SHUKLA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 1,
+    "keywords": {
+      "armed forces tribunal": 1
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

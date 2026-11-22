@@ -61,11 +61,14 @@
   "outcome": "disposed",
   "statutes_cited": [],
   "cases_cited": [],
-  "topics": [],
+  "topics": [
+    "invalidment"
+  ],
   "relevance": {
-    "status": "borderline",
-    "hits": 2,
+    "status": "relevant",
+    "hits": 4,
     "keywords": {
+      "armed forces tribunal": 2,
       "invalided": 2
     },
     "note": null

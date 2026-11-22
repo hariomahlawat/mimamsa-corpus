@@ -100,10 +100,10 @@
   ],
   "relevance": {
     "status": "relevant",
-    "hits": 8,
+    "hits": 10,
     "keywords": {
       "army act": 3,
-      "armed forces tribunal": 3,
+      "armed forces tribunal": 5,
       "court martial": 2
     },
     "note": null

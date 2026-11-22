@@ -1,0 +1,103 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2026/court=3_22/bench=phhc/PHHC010595072026_1_2026-04-20.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T06:00:49+00:00",
+  "sha256": "afefb817abacf86ec5e5ab803095b0939dcb7dbfb2d8ada0bbcdd5c51efbe3ed",
+  "raw_path": "data/raw/hc/2026/afefb817abacf86ec5e5ab803095b0939dcb7dbfb2d8ada0bbcdd5c51efbe3ed.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "ocr",
+  "ocr_confidence": 92.2,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-ph-2026-cwp-11618-2026-phhc010595072026-1-2026-04-20.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-ph-2026-cwp-11618-2026-phhc010595072026-1-2026-04-20",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s3",
+      "target_ref_raw": "Section 3(0)(i) of the Armed Forces Tribunal Act",
+      "effective_date": null,
+      "evidence": "hdraw the present petition, with liberty to avail appropriate legal remedies, including the alternative remedy available to the petitioner in view of Section 3(0)(i) of the Armed Forces Tribunal Act. Allowed as prayed for. Dismissed as withdrawn with liberty aforesaid. (SANDEEP MOUDGIL) 20.04.2026 JUDGE anuradha Whether speaking/reasoned - Yes/No",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-ph-2026-cwp-11618-2026-phhc010595072026-1-2026-04-20",
+  "doc_type": "judgment",
+  "title": "CWP/11618/2026 of COL TS VIJAY PAL SINGH NARULA RETD IC44764Y Vs UNION OF INDIA AND OTHERS",
+  "number": "CWP/11618/2026",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2026-04-20",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": "en",
+  "parent_doc_id": null,
+  "original_filename": "PHHC010595072026_1_2026-04-20.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010595072026",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "High Court of Punjab and Haryana",
+  "bench": null,
+  "case_numbers": [
+    "CWP/11618/2026"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "COL TS VIJAY PAL SINGH NARULA RETD IC44764Y"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND OTHERS"
+    ]
+  },
+  "judges": [
+    "MR. JUSTICE SANDEEP MOUDGIL"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "3",
+      "raw": "Section 3(0)(i) of the Armed Forces Tribunal Act"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "armed forces tribunal": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "language": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

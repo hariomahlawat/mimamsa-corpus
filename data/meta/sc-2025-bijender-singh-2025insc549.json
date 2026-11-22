@@ -101,8 +101,9 @@
   ],
   "relevance": {
     "status": "relevant",
-    "hits": 110,
+    "hits": 120,
     "keywords": {
+      "armed forces tribunal": 10,
       "disability pension": 50,
       "entitlement rules": 6,
       "invalided": 54

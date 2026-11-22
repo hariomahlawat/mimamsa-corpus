@@ -1,0 +1,102 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2019/court=9_13/bench=cisdb_16012018/UPHC011393612019_1_2019-07-18.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T10:04:21+00:00",
+  "sha256": "f8d0222be3ecda7341ddef0d280bd1f3febc01b14fa23d21f01f37018ead8dc2",
+  "raw_path": "data/raw/hc/2019/f8d0222be3ecda7341ddef0d280bd1f3febc01b14fa23d21f01f37018ead8dc2.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2019-wria-10712-2019-uphc011393612019-1-2019-07-18.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2019-wria-10712-2019-uphc011393612019-1-2019-07-18",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s3",
+      "target_ref_raw": "Section 3(o)(ii) of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "y of the petition is raised by Ms. Aradhana Chauhan, learned counsel appearing on behalf of Union of India. In view of the provisions contained under Section 3(o)(ii) of the Armed Forces Tribunal Act, 2007, remedy of the petitioner would be to approach Armed Forces Tribunal. This petition, therefore, is not liable to be entertained. Leaving it open for",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2019-wria-10712-2019-uphc011393612019-1-2019-07-18",
+  "doc_type": "judgment",
+  "title": "WRIA/10712/2019 of ADARSH PRATAP SINGH Vs UNION OF INDIA AND ANOTHER",
+  "number": "WRIA/10712/2019",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2019-07-18",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC011393612019_1_2019-07-18.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC011393612019",
+    "collection": "cisdb_16012018",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WRIA/10712/2019"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "ADARSH PRATAP SINGH"
+    ],
+    "respondent": [
+      "UNION OF INDIA AND ANOTHER"
+    ]
+  },
+  "judges": [
+    "ASHWANI KUMAR MISHRA"
+  ],
+  "outcome": "dismissed",
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "3",
+      "raw": "Section 3(o)(ii) of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "armed forces tribunal": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

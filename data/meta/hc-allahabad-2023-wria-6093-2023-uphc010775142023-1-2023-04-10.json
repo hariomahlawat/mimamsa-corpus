@@ -1,0 +1,102 @@
+{
+  "schema_version": "0.2.0",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=9_13/bench=cisdb_16012018/UPHC010775142023_1_2023-04-10.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-22T09:48:55+00:00",
+  "sha256": "a5c2ff7653ec7e62a9f1bad6942422469726a01a1f4547165f159a135d2a5733",
+  "raw_path": "data/raw/hc/2023/a5c2ff7653ec7e62a9f1bad6942422469726a01a1f4547165f159a135d2a5733.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 1,
+  "access_marking": null,
+  "text_method": "pdf_text",
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "text_path": "data/text/hc-allahabad-2023-wria-6093-2023-uphc010775142023-1-2023-04-10.txt",
+  "text_quality": "ok",
+  "needs_ocr": false,
+  "pages_without_text": [],
+  "relations": [
+    {
+      "schema_version": "0.2.0",
+      "source_doc_id": "hc-allahabad-2023-wria-6093-2023-uphc010775142023-1-2023-04-10",
+      "type": "cites",
+      "target_doc_id": "act-armed-forces-tribunal-2007#s21",
+      "target_ref_raw": "Section 21 of the Armed Forces Tribunal Act, 2007",
+      "effective_date": null,
+      "evidence": "e instant writ petition stands disposed of on the ground of alternative remedy available to the petitioner by way of raising all his grievances under Section 21 of the Armed Forces Tribunal Act, 2007. Order Date :- 10.4.2023 Shaswat Digitally signed by :- SHASWAT SINGH High Court of Judicature at Allahabad",
+      "confidence": "extracted"
+    }
+  ],
+  "doc_id": "hc-allahabad-2023-wria-6093-2023-uphc010775142023-1-2023-04-10",
+  "doc_type": "judgment",
+  "title": "WRIA/6093/2023 of SMT. NISHA SHARMA Vs Union Of India AND ANOTHER",
+  "number": "WRIA/6093/2023",
+  "issuing_authority": "Allahabad High Court",
+  "issue_date": "2023-04-10",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-22",
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "UPHC010775142023_1_2023-04-10.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "UPHC010775142023",
+    "collection": "cisdb_16012018",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Pre-selected from the index by party names.",
+  "court": "Allahabad High Court",
+  "bench": null,
+  "case_numbers": [
+    "WRIA/6093/2023"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "SMT. NISHA SHARMA"
+    ],
+    "respondent": [
+      "Union Of India AND ANOTHER"
+    ]
+  },
+  "judges": [
+    "SAURABH SRIVASTAVA"
+  ],
+  "outcome": "disposed",
+  "statutes_cited": [
+    {
+      "act": "Armed Forces Tribunal Act 2007",
+      "act_doc_id": "act-armed-forces-tribunal-2007",
+      "section": "21",
+      "raw": "Section 21 of the Armed Forces Tribunal Act, 2007"
+    }
+  ],
+  "cases_cited": [],
+  "topics": [],
+  "relevance": {
+    "status": "borderline",
+    "hits": 2,
+    "keywords": {
+      "armed forces tribunal": 2
+    },
+    "note": null
+  },
+  "field_provenance": {
+    "title": "crawler",
+    "issue_date": "crawler",
+    "judges": "crawler",
+    "outcome": "rule",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "page_count": "rule",
+    "text_method": "rule",
+    "statutes_cited": "rule",
+    "topics": "rule"
+  }
+}

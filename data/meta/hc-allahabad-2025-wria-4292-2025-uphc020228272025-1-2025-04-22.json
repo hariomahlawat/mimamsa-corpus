@@ -81,10 +81,11 @@
   "cases_cited": [],
   "topics": [],
   "relevance": {
-    "status": "borderline",
-    "hits": 2,
+    "status": "relevant",
+    "hits": 5,
     "keywords": {
-      "army act": 2
+      "army act": 2,
+      "armed forces tribunal": 3
     },
     "note": null
   },

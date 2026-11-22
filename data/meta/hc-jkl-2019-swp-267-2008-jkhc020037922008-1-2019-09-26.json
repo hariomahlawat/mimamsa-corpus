@@ -99,11 +99,12 @@
   "topics": [],
   "relevance": {
     "status": "relevant",
-    "hits": 4,
+    "hits": 7,
     "keywords": {
       "army act": 2,
       "air force act": 1,
-      "navy act": 1
+      "navy act": 1,
+      "armed forces tribunal": 3
     },
     "note": null
   },

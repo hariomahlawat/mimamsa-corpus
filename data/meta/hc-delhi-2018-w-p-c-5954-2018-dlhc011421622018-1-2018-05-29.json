@@ -114,9 +114,10 @@
   "topics": [],
   "relevance": {
     "status": "relevant",
-    "hits": 3,
+    "hits": 4,
     "keywords": {
-      "army act": 3
+      "army act": 3,
+      "armed forces tribunal": 1
     },
     "note": null
   },

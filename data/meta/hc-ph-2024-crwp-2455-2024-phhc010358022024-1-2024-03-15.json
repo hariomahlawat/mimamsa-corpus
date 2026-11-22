@@ -61,11 +61,14 @@
   "outcome": "disposed",
   "statutes_cited": [],
   "cases_cited": [],
-  "topics": [],
+  "topics": [
+    "court_martial"
+  ],
   "relevance": {
-    "status": "borderline",
-    "hits": 1,
+    "status": "relevant",
+    "hits": 4,
     "keywords": {
+      "armed forces tribunal": 3,
       "court martial": 1
     },
     "note": null
