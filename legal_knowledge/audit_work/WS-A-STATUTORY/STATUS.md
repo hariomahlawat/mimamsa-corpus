@@ -88,6 +88,16 @@ Updated 2026-11-22 (cycle 3). Branch: `claude/ws-a-statutory` (base 34e75aa9). W
 - [x] Addendum `army_act_amendment_chain_addendum_cycle3.csv` (AA-C3-01..04). New acquisition rows ACQ-C3-05 and -06.
 - [x] Details in `REVIEW_FIX_CYCLE3.md`. AA counts: partial 9 → 8, not established 103 → 104.
 
+## Cycle 3 review follow-up (conditions on bfc9765a)
+- [x] The C2 self-test uses explicit fixtures (no vacuous pass). C1 uses token-boundary matching, with prefix-ID fixtures. Self-test 9/9.
+- [x] Documented limitation: Act 19/1955 "many sections" (OQ-A-13 in `open_questions_cycle3.csv`). Sections are not guessed.
+
+## Requests to the coordinator (other paths), cycle 3
+- **To WS-D (via coordinator):** please add `legal_knowledge/audit_work/WS-A-STATUTORY/army_act_amendment_chain_addendum_cycle3.csv` (AA-C3-01..04) as an input to `build_versioned_edges`.
+  - It covers: A.L.O. (No.3) 1956 for Army Act ss.2, 3, 4, 5, 137, 151, 174; S.O. 3912(E)/2019 for ss.137, 151, 174; Act 36/1957 repeal of s.194; and extension instruments that amend no section text.
+  - Columns follow `army_act_amendment_chain.csv`, plus `supersedes_or_extends` and `compilation_page_render_sha256`.
+  - WS-A has not edited any WS-D file.
+
 ## Next
 - After approval of ACQ-C2:
   - image-check the four pre-1960 instruments;
