@@ -63,8 +63,44 @@ class VersionedEdges(unittest.TestCase):
             if e["valid_from"]:
                 self.assertIn(e["valid_from"], {x["effective_date"] for x in srcs if x["effective_date_status"].startswith("STATED_IN_INSTRUMENT")},
                               e["version_id"])
-            if not e["effective_date_status"].startswith("CONFLICTING_EVIDENCE"):
-                self.assertIn(e["effective_date_status"], {x["effective_date_status"] for x in srcs}, e["version_id"])
+            st = e["effective_date_status"]
+            if st.startswith("CONFLICTING_EVIDENCE"):
+                # every date listed must be a STATED effective date of one of the edge's member evidence rows
+                listed = re.findall(r"\d{4}-\d{2}-\d{2}", st)
+                self.assertGreaterEqual(len(listed), 2, st)
+                stated = {x["effective_date"] for x in srcs if x["effective_date_status"].startswith("STATED_IN_INSTRUMENT")}
+                for d in listed:
+                    self.assertIn(d, stated, (e["version_id"], st))
+                self.assertEqual(e["valid_from"], "", "conflicting stated dates must not be resolved")
+                self.assertIn("EVIDENCE_EFFECTIVE_DATE_CONFLICT", e["flags"].split(";"))
+            else:
+                self.assertIn(st, {x["effective_date_status"] for x in srcs}, e["version_id"])
+
+    def test_conflicting_evidence_path_fixture(self):
+        """Two descriptions of one event (same instrument key and publication date) stating different commencement
+        dates: grouped, flagged, never resolved, and the status lists exactly the stated dates."""
+        base = {"source": "fixture", "change": "x", "sub": False, "ocr": False, "det": "", "conflict": "",
+                "ikey": "SRO-216-1988", "pub": "1988-09-17"}
+        a = dict(base, version_id="FX-1", eff="1988-09-17", status="STATED_IN_INSTRUMENT (on publication)")
+        b = dict(base, version_id="FX-2", eff="1979-06-04", status="STATED_IN_INSTRUMENT (deemed from 4 June 1979)")
+        groups = VE.group_events([a, b])
+        self.assertEqual(len(groups), 1)
+        g = groups[0]
+        self.assertEqual(g["evidence_ids"], ["FX-1", "FX-2"])
+        self.assertEqual(g["eff"], "")
+        self.assertTrue(g["status"].startswith("CONFLICTING_EVIDENCE"))
+        self.assertEqual(sorted(re.findall(r"\d{4}-\d{2}-\d{2}", g["status"])), ["1979-06-04", "1988-09-17"])
+        self.assertIn("EVIDENCE_EFFECTIVE_DATE_CONFLICT", g["conflicts"])
+
+    def test_conflicting_evidence_present_in_real_versions(self):
+        """r.2: PCL-216-1988 (commencement 1988-09-17) vs PCL-BL-02 (deemed effect 1979-06-04) is a flagged,
+        unresolved conflicting-evidence event. No KB record cites r.2, so it yields no edge; asserted on versions()."""
+        groups = VE.versions().get(("AR", "2"), [])
+        g = [x for x in groups if {"PCL-216-1988", "PCL-BL-02"} <= set(x["evidence_ids"])]
+        self.assertEqual(len(g), 1)
+        self.assertTrue(g[0]["status"].startswith("CONFLICTING_EVIDENCE"))
+        self.assertEqual(sorted(re.findall(r"\d{4}-\d{2}-\d{2}", g[0]["status"])), ["1979-06-04", "1988-09-17"])
+        self.assertEqual(g[0]["eff"], "")
 
     def test_valid_to_not_before_valid_from(self):
         for e in EDGES:

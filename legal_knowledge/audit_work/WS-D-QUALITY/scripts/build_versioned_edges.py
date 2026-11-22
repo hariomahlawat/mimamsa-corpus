@@ -109,6 +109,26 @@ def expand_provisions(text, unit):
     return res
 
 
+# References to the AMENDING instrument's own sections or schedules are not Army Act provisions (returned
+# review defect on AA-04: '(s.3 and Second Schedule)' is s.3 of the Repealing and Amending Act 56/1974).
+# Aligned with WS-A tools/check_completeness_cycle3.py: drop 's.N and [the] [Second] Schedule' and
+# 's.N of Act X/YYYY', 's.N of Act X of YYYY', 's.N of the <Name> Act, YYYY' before expansion. The tails are
+# bounded so that following Army Act references ('... inserts words in s.135(1)') are kept.
+AMENDING_OWN = re.compile(r"(?<![A-Za-z])ss?\.\s*\d+[A-Z]?(?:\s*\([^)]*\))*\s+(?:"
+                          r"and\s+(?:the\s+)?(?:\w+\s+)?Sch\w*"
+                          r"|of\s+(?:the\s+)?Act\s+\d+\s*(?:/|of)\s*\d{4}"
+                          r"|of\s+the\s+[A-Z][\w().,'\- ]*?Act,?\s*\d{4})")
+
+
+def strip_amending_refs(text):
+    return AMENDING_OWN.sub(" ", text)
+
+
+def army_act_sections(text):
+    """Army Act section numbers in a WS-A chain row, excluding the amending Act's own sections/schedules."""
+    return expand_provisions(strip_amending_refs(text), "s")
+
+
 # ---- amendment-event identity (review fix PR #25 #2) ---------------------------------------------------
 # One amendment EVENT = same instrument (AA/AR) + same provision number + same amending-instrument key
 # (S.R.O. number/year or Act number/year, normalised from the register text) + same publication date where both
@@ -202,9 +222,9 @@ def versions():
         if (NOT_A_CHANGE.search(r["change_as_printed"]) or (r["effective_date_status"] or "").startswith("NOT_APPLICABLE")
                 or r["sections_affected"].strip().lower().startswith(("proposed", "none", "unknown", "all", "as act"))):
             continue  # not an enacted change to identified sections
-        for n in expand_provisions(r["sections_affected"], "s"):
+        for n in army_act_sections(r["sections_affected"]):
             add("AA", n, version_id=r["chain_id"], source="WS-A-STATUTORY/army_act_amendment_chain.csv",
-                change=f"{r['instrument'][:60]}", sub=bool(re.search(r"ss?\.\s*%s\s*\(" % re.escape(n), r["sections_affected"])),
+                change=f"{r['instrument'][:60]}", sub=bool(re.search(r"ss?\.\s*%s\s*\(" % re.escape(n), strip_amending_refs(r["sections_affected"]))),
                 ocr=r["evidence_level"].startswith(("HINT", "TEXT_LAYER", "REQUIRES_VERIFICATION")),
                 pub=r["publication_date"], eff=r["effective_date"], status=r["effective_date_status"], det="", conflict="",
                 ikey=instrument_key(r["instrument"], r["number_year"], r["gazette_identity"]) or r["chain_id"].rsplit("-s", 1)[0])

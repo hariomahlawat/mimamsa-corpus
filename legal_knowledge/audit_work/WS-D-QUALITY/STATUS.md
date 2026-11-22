@@ -36,6 +36,8 @@ Baseline: 658 KB (9a8f0d19...), 53 cases (8b8d53cd...), 87 codes (72 firm, 75 in
 
 - C3 review fixes (PR #25, 3 Codex P2): REVIEW_FIXES_CYCLE3.md. (1) full provision-list expansion with verification (rr.134,135,136 -> 3 provisions; ranges, en-dash, suffixes, AA lists); (2) amendment-event identity (provision + instrument key + publication date), grouped evidence, no zero-length/reversed intervals (49 -> 0); (3) coded-record locators bound to code targets and section-checked (187 coded records, 658 sections). Regenerated: canonical coverage (ANCHORED_FULL 362 recomputed; identified ALL 396 / PARTLY 77 / NONE 108; searchable ALL 473), versioned edges (380 edges, 119 events, 177 stated / 203 unstated-flagged). Tests `test_legal_audit_review_fixes_cycle3.py` (12).
 
+- Returned defect (independent review of 4a17359e): amending-Act own sections/schedules excluded from Army Act edges (AA-04 '(s.3 and Second Schedule)'); scan: AA-04 corrected, AA-01 unchanged, AA-03 already excluded; edges 380 -> 375, events 119 -> 118, unstated-flagged 203 -> 198. Conditions: CONFLICTING_EVIDENCE asserted (not skipped) + fixture; Fix3 no-ref fixture tests; r.2 and AQ-06 documented in REVIEW_FIXES_CYCLE3.md.
+
 ## In progress
 - Nothing.
 
