@@ -52,6 +52,18 @@ Parser fix for letter suffixes, list continuation and uncoded case names. Detail
 - Coverage states before → after: FULL 379 → 370; PARTIAL 131 → 140; UNRESOLVED 14 → 15; NO_CITATION 78 → 77; SOURCE_GAP unchanged at 56.
 - All dependent artifacts regenerated; `scripts/test_kb_citations.py` passes.
 
+## Cycle 3 (worktree /home/user/ws-c-c3, branch claude/ws-c-cycle3, from 9b48b08e)
+- C3 commit 1, task 1: `mml_edition_evidence_cycle3.csv` (29 evidence items across 8 files).
+  - Each row carries a 'what would authenticate this edition' column.
+  - No edition is asserted official; all stay UNVERIFIED_MANUAL.
+- C3 commit 1, task 2: `mml_provision_crosswalk_v2_cycle3.csv`, a versioned file; the cycle-1 crosswalk is unchanged.
+  - 436 priority rows were rendered at 110 dpi and every crop was viewed: all crosswalk rows for provisions cited by the 46 calibration records, then the procedure-crosswalk provisions.
+  - Result: 434 LOCATOR_IMAGE_CHECKED + 2 LOCATOR_CORRECTED_IMAGE_CHECKED.
+  - The corrections are s.2 in vol 2(AA): the index pointed to a note; the heading is at PDF p.1 / L00011.
+  - The remaining 422 rows stay REQUIRES_VERIFICATION.
+  - DOC rows are LibreOffice renders of native DOC text (`render_source` column).
+- Next: task 3 (`procedural_contradictions_cycle3.csv`).
+
 ## Next (if continued)
 - Image-check the crosswalk locators that the advisor selects. Every crosswalk locator is text-layer only (REQUIRES_VERIFICATION).
 - DOC-vs-PDF comparison for vol 2(AA) and vol 3 beyond the pilot samples.
