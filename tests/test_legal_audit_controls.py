@@ -198,6 +198,14 @@ class IdentityControls(unittest.TestCase):
         ok, errs = run(sources=src, reviews=[self.rev()], identities=ident)
         self.assertTrue(ok, errs)
 
+    def test_per_reviewer_exact_retrieved_by(self):
+        ident = json.loads(json.dumps(self.TWO))
+        ident["reviewers"]["independent-reviewer-A"]["require_exact_retrieved_by"] = True
+        self.assertFalse(run(sources=self.srcs(), reviews=[self.rev()], identities=ident)[0])
+        src = [edit(x, retrieved_by="independent-reviewer-A") if x["source_id"] == "S-REVA-1" else x for x in self.srcs()]
+        ok, errs = run(sources=src, reviews=[self.rev()], identities=ident)
+        self.assertTrue(ok, errs)
+
 
 if __name__ == "__main__":
     unittest.main()
