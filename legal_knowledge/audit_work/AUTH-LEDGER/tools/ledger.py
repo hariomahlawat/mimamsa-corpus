@@ -447,7 +447,7 @@ def is_committed_package(root):
 
 def check_committed_layout(root):
     """Run the package-layout check (no symlink, a real committed directory) before ANY file of the committed ledger is
-    read; a no-op for synthetic roots. Called first by reader.effective_state, auth_ledger.verify and apply_ledger."""
+    read; a no-op for synthetic roots. Called first by reader.effective_state and auth_ledger.verify (apply_ledger relies on them)."""
     if is_committed_package(root):
         binding.check_package_layout(COMMITTED_PACKAGE)
         return True

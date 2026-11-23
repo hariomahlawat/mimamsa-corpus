@@ -2229,6 +2229,7 @@ class C8SecurityRound2b(C8Base):
 
 class C8SecurityRound3(C8Base):
     attacker_package_with_tools = C8SecurityRound2.attacker_package_with_tools
+    CLI_PATH = C8SecurityRound2.CLI_PATH
     """Fable focused re-review of 06a54c66: R-01 relative CLI inside a link, R-02 forged ancestry, R-03 untested
     controls (blob, base manifest, library import), R-04 missing git and refused repositories."""
     def _forge(self, repo, oid, extra=b"\nforged\n"):
@@ -2294,6 +2295,25 @@ class C8SecurityRound3(C8Base):
         p = subprocess.run([sys.executable, "-c", code, str(tools)], capture_output=True, text=True, env=dict(os.environ, PYTHONDONTWRITEBYTECODE="1"))
         self.assertIn("REJECTED", p.stdout, p.stderr)
         self.assertIn("is a symlink", p.stdout)
+
+    def test_n01_library_import_orders_through_a_symlink_are_rejected(self):  # confirmation N-01
+        import os
+        a = self.attacker_package_with_tools()
+        r = self._symlink_repo("legal_knowledge/audit_work/AUTH-LEDGER", a.dir)
+        tools = r / "legal_knowledge/audit_work/AUTH-LEDGER/tools"
+        for first in ("ledger", "binding", "pins", "strength", "auth_ledger"):
+            code = (f"import sys; sys.path.insert(0, sys.argv[1]); import {first}; import reader, common\n"
+                    "try:\n    reader.effective_state(common.LOGICAL_PKG, 0)\nexcept common.LedgerError as e:\n    print('REJECTED', e)\n")
+            p = subprocess.run([sys.executable, "-c", code, str(tools)], capture_output=True, text=True,
+                               env=dict(os.environ, PYTHONDONTWRITEBYTECODE="1"))
+            self.assertIn("REJECTED", p.stdout, (first, p.stderr))
+
+    def test_n05_stale_pwd_is_ignored(self):  # confirmation N-05: $PWD used only when it names the real cwd
+        import os
+        p = subprocess.run([sys.executable, self.CLI_PATH, "verify"], capture_output=True, text=True, cwd=REPO,
+                           env=dict(os.environ, PWD="/nonexistent/stale", PYTHONDONTWRITEBYTECODE="1"))
+        self.assertEqual(p.returncode, 0, p.stderr)  # relative script, stale $PWD: falls back to the real cwd and verifies
+        self.assertIn("v0000 ok", p.stdout)
 
     def test_r04_missing_git_and_refused_repository_fail_closed(self):
         with mock.patch.object(binding.subprocess, "run", side_effect=FileNotFoundError("git")):
