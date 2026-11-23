@@ -83,5 +83,31 @@ class C6Provenance(unittest.TestCase):
             self.assertEqual((REPO / "legal_knowledge/audit_work/SOURCE-LIBRARY-C5/registers" / k).read_text(encoding="utf-8"), t, k)
 
 
+class C6Prep(unittest.TestCase):
+    PREP = REPO / "legal_knowledge/audit_work/C6-PREP/registers"
+
+    def rows(self, name):
+        with open(self.PREP / name, newline="", encoding="utf-8") as f:
+            return list(csv.DictReader(f))
+
+    def test_no_approval_no_correspondence(self):
+        for r in self.rows("c6_02_batch_a_files.csv"):
+            self.assertEqual(r["approval_state"], "NOT_APPROVED")
+            self.assertNotIn("aftjabalpur", r["download_url"])
+        for r in self.rows("c6_03_desw_package.csv"):
+            self.assertIn(r["approval_state"], ("NOT_APPROVED", "n/a"))
+        for r in self.rows("c6_04_custodian_request_inventory.csv"):
+            self.assertEqual(r["correspondence"], "NONE SENT (not authorised)")
+
+    def test_incomplete_er2023_kept_separate(self):
+        self.assertTrue(any("29f6fa2c" in r["size_pin"] and r["acq_c5_id"].startswith("HELD") for r in self.rows("c6_03_desw_package.csv")))
+
+    def test_adviser_pack_unchanged_and_no_determination(self):
+        s = json.loads((self.PREP / "c6_05_adviser_pack_status.json").read_text())
+        self.assertEqual((s["c4_adviser_topics"], s["c4_calibration_escalations"], s["ws_b_inconsistencies_open"], s["determinations_made"]), (13, 29, 13, 0))
+        self.assertEqual(s["reserved_states"]["C5-CF-C-01"], "CONFLICTING (r.23(3))")
+        self.assertEqual(s["reserved_states"]["C5-CF-SC4-01"], "OPEN (r.182)")
+
+
 if __name__ == "__main__":
     unittest.main()
