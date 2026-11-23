@@ -18,8 +18,8 @@ import auth_ledger as CLI  # noqa: E402
 
 EXPECTED_HEAD = "0 443c4bdf348b2a1bcd603d2701f097aa90a8155efd43c10760f5fd86c76c6b6b"  # a ledger change must change this too
 ISAAC = "3f49a31464fec174cdbff5d9e194fa888ca00529b6246eacdc8ac2368eab4653"
-DRAFT = {r["sha256"]: r for r in csv.DictReader(open(AW / "C6-01-PROVENANCE/addendum/authentication_addendum_v1_draft.csv", encoding="utf-8"))}
-PROPS = {r["sha256"]: r for r in csv.DictReader(open(AW / "C6-01-PROVENANCE/registers/source_authentication_proposals.csv", encoding="utf-8"))}
+DRAFT = {r["sha256"]: r for r in common.read_csv(AW / "C6-01-PROVENANCE/addendum/authentication_addendum_v1_draft.csv")}
+PROPS = {r["sha256"]: r for r in common.read_csv(AW / "C6-01-PROVENANCE/registers/source_authentication_proposals.csv")}
 
 
 def sha_of(prefix, pool):
@@ -28,7 +28,7 @@ def sha_of(prefix, pool):
     return hits[0]
 
 
-RECOVERY = [r["sha256"] for r in csv.DictReader(open(AW / "C6-01-PROVENANCE/registers/provenance_recovery_register.csv", encoding="utf-8"))]
+RECOVERY = [r["sha256"] for r in common.read_csv(AW / "C6-01-PROVENANCE/registers/provenance_recovery_register.csv")]
 DHARAMVIR = sha_of("3056712c", DRAFT)
 RAJBIR_C1 = sha_of("970b9680", DRAFT)
 RAJBIR_BOSIR = sha_of("6b495f14", DRAFT)
@@ -36,7 +36,7 @@ GAZETTE_1962 = sha_of("b76bf4aa", DRAFT)
 TRA = sha_of("be619533", DRAFT)
 
 
-C5COPY = {r["sha256"]: r for r in csv.DictReader(open(AW / "SOURCE-LIBRARY-C5/registers/source_copy_register.csv", encoding="utf-8"))}
+C5COPY = {r["sha256"]: r for r in common.read_csv(AW / "SOURCE-LIBRARY-C5/registers/source_copy_register.csv")}
 
 
 def entry_from_draft(sha, n, version=1, **over):
@@ -339,7 +339,7 @@ class Provenance(unittest.TestCase):
             strength.first_class("PILOT-01/sources/independent-reviewer-A.json#S-REVA-021", sha_of("fa51a4b1", RECOVERY))
 
     def test_identifier_only_download_record_rejected(self):
-        act13 = [r for r in csv.DictReader(open(AW / "C6-01-PROVENANCE/registers/provenance_recovery_register.csv", encoding="utf-8")) if "ACT13" in r["source_id"]][0]
+        act13 = [r for r in common.read_csv(AW / "C6-01-PROVENANCE/registers/provenance_recovery_register.csv") if "ACT13" in r["source_id"]][0]
         with self.assertRaisesRegex(common.LedgerError, "identifier, not a URL"):
             strength.first_class("PILOT-01/registers/source_discovery_2026-11-22.csv#T6-03", act13["sha256"])
 
@@ -411,7 +411,7 @@ class Controls(unittest.TestCase):
         e = entry_from_draft(DHARAMVIR, 1, proposed_class="NON_PRIMARY_OFFICIAL_COURT_RENDITION")
         self.t.add_version([e])
         f = self.t.dir / "ledger/v0001.csv"  # change what was decided after the records were pinned, re-pin the file consistently
-        rows_ = list(csv.DictReader(f.open(encoding="utf-8")))
+        rows_ = common.read_csv(f)
         rows_[0]["proposed_class"] = "PRIMARY_OFFICIAL_COURT_COPY"
         f.write_text(common.csv_text(L.COLS, rows_), encoding="utf-8")
         m = self.t.dir / "ledger/manifest.jsonl"
@@ -492,11 +492,11 @@ class Controls(unittest.TestCase):
                 t2.state()
         finally:
             t2.close()
-        rec = {r["source_id"]: r for r in csv.DictReader(open(AW / "SOURCE-LIBRARY-C5/registers/source_master_register.csv", encoding="utf-8"))}
+        rec = {r["source_id"]: r for r in common.read_csv(AW / "SOURCE-LIBRARY-C5/registers/source_master_register.csv")}
         g = entry_from_draft(GAZETTE_1962, 1)
         fake = dict(rec[g["source_id"]], completeness_status="INCOMPLETE: test")
         held = reader._held_index()
-        ctx = L.Context(held, {}, {r["sha256"]: r for r in csv.DictReader(open(AW / "SOURCE-LIBRARY-C5/registers/source_copy_register.csv", encoding="utf-8"))},
+        ctx = L.Context(held, {}, {r["sha256"]: r for r in common.read_csv(AW / "SOURCE-LIBRARY-C5/registers/source_copy_register.csv")},
                         dict(rec, **{g["source_id"]: fake}))
         with self.assertRaisesRegex(common.LedgerError, "incomplete or extract"):
             L._evidence_checks(g, ctx, g["proposed_class"])
@@ -758,7 +758,7 @@ class Transitions(unittest.TestCase):
             self.t.state()
 
     def test_loss_of_only_primary_copy_of_baseline_source(self):
-        base = next(r for r in csv.DictReader(open(AW / "CALIBRATION-02/registers/source_authentication_register.csv", encoding="utf-8"))
+        base = next(r for r in common.read_csv(AW / "CALIBRATION-02/registers/source_authentication_register.csv")
                     if r["effective_source_class"] == "PRIMARY_OFFICIAL_COURT_COPY")
         cop = {r["sha256"]: r for r in rows(v0()["source_copy_register.csv"])}[base["sha256"]]
         e = {k: "" for k in L.COLS}
