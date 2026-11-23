@@ -20,11 +20,18 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Full history and all refs: AUTH-LEDGER BIND-line verification fails closed in a shallow clone, and the
+          # corpus-ref regeneration checks skip when origin/raw-data is absent. Read-only; no credentials are persisted.
+          fetch-depth: 0
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
       - name: Validate audit schemas
         run: python tools/legal_audit/validate.py --schema-check
+      - name: AUTH-LEDGER verification (offline; pins, hash chain, version-zero reproduction, BIND lines)
+        run: python legal_knowledge/audit_work/AUTH-LEDGER/tools/auth_ledger.py verify
       - name: Test fail-closed review checks
         run: python -m unittest discover -s tests -p "test_legal_audit_*.py" -v
       - name: Validate PILOT-01 audit batch (strict, frozen manifest, reviewer identities)
