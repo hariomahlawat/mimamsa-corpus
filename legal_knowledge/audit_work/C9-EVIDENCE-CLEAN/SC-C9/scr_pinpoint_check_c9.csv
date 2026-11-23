@@ -1,0 +1,10 @@
+register_row,copy,sha256_8,pdf_page_stated,para_pinpoint_stated,report_pages_cited,pdf_pages_holding_cited_report_pages,judgment_label_page,in_headnote_zone,result
+holdings_register.csv#WSB-H-009,NAVJOT,3b753548,49,Part 15 (Call records); reporter para 150 per Anvar p16,,,1,NO,NO_REPORT_PAGE_CITED
+holdings_register.csv#WSB-H-031,RANJIT,ed7cf31f,8-9,9-10 (SCR pp.523-524),523-524,8-9,3,NO,CONSISTENT
+holdings_register.csv#WSB-H-032,PPS_BEDI,211dbaf4,34-35,unnumbered (SCR pp.438-439),438-439,34-35,7,NO,CONSISTENT
+holdings_register.csv#WSB-H-033,SN_MUKHERJEE,eb442080,20,unnumbered conclusion,,,3,NO,NO_REPORT_PAGE_CITED
+holdings_register.csv#WSB-H-052,PPS_BEDI,211dbaf4,31,unnumbered (SCR p.433-434),433-434,30-32,7,NO,CONSISTENT
+holdings_register.csv#WSB-H-053,PPS_BEDI,211dbaf4,19-21,unnumbered (SCR p.426-427),426-427,25-27,7,NO,INCONSISTENT
+holdings_register.csv#WSB-H-054,PPS_BEDI,211dbaf4,26-27,unnumbered (SCR p.427),427-427,26-27,7,NO,CONSISTENT
+holdings_register_cycle3.csv#WSB-H3-018,RANJIT,ed7cf31f,6,5-6 (SCR p.519-520),519-520,5-7,3,NO,CONSISTENT
+subsequent_treatment_cycle3.csv#WSB-T3-001,RANJIT,ed7cf31f,6,5,,,3,NO,NO_REPORT_PAGE_CITED
