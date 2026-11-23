@@ -19,8 +19,9 @@
 | `registers/unresolved_provenance_register.csv` | **D5** |
 | `registers/c6_01_summary.json` | outcome counts and the **D4** coverage simulation |
 | `reports/` | `C6-01_METHOD.md`, D1–D6 reports |
-| `review/` | independent verification (D3); `legacy_proposal_id_map.csv` maps the sequential AP-nn IDs used by the first verification and the re-verification to the current sha256-based IDs |
+| `review/` | independent verification (D3), including the final review of e7a10e27 (`final_review_e7a10e27.md`); `legacy_proposal_id_map.csv` maps the sequential AP-nn IDs used by the first verification and the re-verification to the current sha256-based IDs |
 | `tools/build_provenance.py` | deterministic builder (`--check`) |
+| `addendum/` | **draft** versioned authentication-addendum plan and entries (`tools/build_addendum_plan.py`, `--check`); not executed |
 
 Reproduce:
 ```bash

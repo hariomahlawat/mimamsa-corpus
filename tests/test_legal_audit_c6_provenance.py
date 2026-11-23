@@ -1,5 +1,5 @@
 """C6-01 provenance-recovery package: reproducibility and safeguards (offline; no held binaries needed)."""
-import csv, hashlib, json, subprocess, sys, unittest
+import csv, hashlib, io, json, subprocess, sys, unittest
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
@@ -22,8 +22,8 @@ class C6Provenance(unittest.TestCase):
         h = lambda p: hashlib.sha256((REPO / p).read_bytes()).hexdigest()
         self.assertEqual(h("legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.jsonl"), "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1")
         self.assertEqual(h("legal_knowledge/curated_originals/case_law/v0.9/cases_53.jsonl"), "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a")
-        with open(REPO / "legal_knowledge/audit_work/CALIBRATION-02/registers/source_authentication_register.csv", encoding="utf-8") as f:
-            self.assertEqual(sum(1 for _ in csv.DictReader(f)), 13)  # proposals never edit the original register
+        self.assertEqual(h("legal_knowledge/audit_work/CALIBRATION-02/registers/source_authentication_register.csv"),
+                         "cfe5f4081997abbcb88061cd7a8e5cc5b949c585cd7835fa48df51ae1a0c1ece")  # proposals never edit the Cycle 4 register
 
     def test_scope_and_denominators(self):
         s = json.loads((PKG / "registers/c6_01_summary.json").read_text())
@@ -87,8 +87,27 @@ class C6Provenance(unittest.TestCase):
         self.assertEqual(len(ids), len(set(ids)))
         for p in props:
             self.assertEqual(p["proposal_id"], "C6-01-AP-" + p["sha256"][:8])
-        # removing one proposal does not change any other ID (IDs depend on the copy's own bytes only)
-        self.assertEqual([P.proposal_id(p["sha256"]) for p in props[1:]], ids[1:])
+        # removing one proposal from the build does not change any other proposal's ID
+        orig = P.build
+        def drop_first():
+            rec, pr, un, co = orig()
+            return rec, pr[1:], un, co
+        P.build = drop_first
+        try:
+            t = P.outputs()["source_authentication_proposals.csv"]
+        finally:
+            P.build = orig
+        self.assertEqual([r["proposal_id"] for r in csv.DictReader(io.StringIO(t))], ids[1:])
+        # duplicate IDs are rejected
+        def dup():
+            rec, pr, un, co = orig()
+            return rec, pr + [pr[0]], un, co
+        P.build = dup
+        try:
+            with self.assertRaises(SystemExit):
+                P.outputs()
+        finally:
+            P.build = orig
         with open(PKG / "review/legacy_proposal_id_map.csv", newline="", encoding="utf-8") as f:
             legacy = list(csv.DictReader(f))
         cur = {p["sha256"]: p["proposal_id"] for p in props}
@@ -100,6 +119,24 @@ class C6Provenance(unittest.TestCase):
         self.assertEqual({r["sha256"] for r in legacy} >= set(cur), True)
         ap22 = [r for r in legacy if r["id_in_first_verification_9b4ad44d"] == "C6-01-AP-22"][0]
         self.assertTrue(ap22["sha256"].startswith("8358d2b3") and ap22["current_proposal_id"] == "")
+
+    def test_report_counts_match_summary(self):
+        s = json.loads((PKG / "registers/c6_01_summary.json").read_text())
+        d, pt, n = s["outcomes_by_copy"]["PROVENANCE_DOCUMENTED"], s["outcomes_by_copy"]["PROVENANCE_PARTIALLY_DOCUMENTED"], s["proposals"]
+        nonp = sum(v for k, v in s["proposals_by_class"].items() if k.startswith("NON_PRIMARY"))
+        self.assertEqual((d, pt, n, nonp), (34, 2, 34, 4))
+        d6 = (PKG / "reports/D6_CYCLE6_READINESS.md").read_text(encoding="utf-8")
+        status = d6[d6.index("## C6-01 status"):d6.index("## What C6-01 cannot fix")]
+        self.assertIn(f"{d} copies are proposed PROVENANCE_DOCUMENTED", status)
+        self.assertIn(f"{pt} are PROVENANCE_PARTIALLY_DOCUMENTED", status)
+        self.assertIn(f"{n} additions", status)
+        self.assertIn(f"{nonp} non-primary", status)
+        d3 = (PKG / "reports/D3_INDEPENDENT_VERIFICATION.md").read_text(encoding="utf-8")
+        self.assertIn(f"**Current outcomes:** {d} DOCUMENTED and {pt} PARTIALLY_DOCUMENTED", d3)
+        d2 = (PKG / "reports/D2_SOURCE_AUTHENTICATION_PROPOSALS.md").read_text(encoding="utf-8")
+        self.assertIn(f"{n} proposed **additions**", d2)
+        self.assertIn("TRA 2026", d2)
+        self.assertIn("holding-state", (PKG / "reports/D4_COVERAGE_IMPACT.md").read_text(encoding="utf-8"))
 
     def test_c6_page_image_checks(self):
         with open(PKG / "inputs/page_image_checks_c6.csv", newline="", encoding="utf-8") as f:
@@ -145,6 +182,21 @@ class C6Provenance(unittest.TestCase):
             self.assertEqual((REPO / "legal_knowledge/audit_work/SOURCE-LIBRARY-C5/registers" / k).read_text(encoding="utf-8"), t, k)
 
 
+class C6Addendum(unittest.TestCase):
+    def test_addendum_draft_reproducible_and_pending(self):
+        import build_addendum_plan as A
+        out = PKG / "addendum/authentication_addendum_v1_draft.csv"
+        self.assertEqual(out.read_text(encoding="utf-8"), A.text())
+        rows = list(csv.DictReader(out.open(encoding="utf-8")))
+        self.assertEqual(len(rows), len(read("source_authentication_proposals.csv")))
+        for r in rows:
+            self.assertEqual(r["locator_strength"], "FULL")
+            self.assertTrue(r["owner_decision"].startswith("PENDING") and r["reviewer_decision"].startswith("PENDING"))
+            self.assertEqual(r["original_c4_register_state"], "NO_ROW (copy absent from the Cycle 4 register)")
+        changed = {r["crosswalk_effect_this_entry_alone"].split(":")[0] for r in rows if not r["crosswalk_effect_this_entry_alone"].startswith("none")}
+        self.assertEqual(len(changed), 7)  # the seven SC case records, matching D4
+
+
 class C6Prep(unittest.TestCase):
     PREP = REPO / "legal_knowledge/audit_work/C6-PREP/registers"
 
@@ -163,6 +215,30 @@ class C6Prep(unittest.TestCase):
 
     def test_incomplete_er2023_kept_separate(self):
         self.assertTrue(any("29f6fa2c" in r["size_pin"] and r["acq_c5_id"].startswith("HELD") for r in self.rows("c6_03_desw_package.csv")))
+
+    def test_batch_a_pins_and_fail_closed_metadata_attempt(self):
+        rows = self.rows("c6_02_batch_a_files.csv")
+        self.assertEqual(sum(r["pin_status"].startswith("PINNED") for r in rows), 18)
+        unpinned = [r for r in rows if r["pin_status"].startswith("NOT_PINNED")]
+        self.assertEqual({r["candidate_id"] for r in unpinned}, {"C5C-026", "C5C-027"})
+        self.assertTrue(all(r["expected_md5"] == "NOT_PINNED" for r in unpinned))
+        sys.path.insert(0, str(REPO / "legal_knowledge/audit_work/SOURCE-LIBRARY-C5/tools"))
+        import discovery_guard as G
+        with open(REPO / "legal_knowledge/audit_work/C6-PREP/discovery/c6_02_metadata_requests_v2.tsv", newline="", encoding="utf-8") as f:
+            log = list(csv.DictReader(f, delimiter="\t"))
+        self.assertEqual(G.validate_log_v2(log), [])
+        self.assertFalse([r for r in log if r["method"] == "GET" and r["purpose"] != "robots"])  # no non-robots GET was made
+
+    def test_dv_handbook_lead_not_imported(self):
+        with open(REPO / "legal_knowledge/audit_work/C6-PREP/inputs/c6_04_discovery_candidates.csv", newline="", encoding="utf-8") as f:
+            cands = list(csv.DictReader(f))
+        lead = [c for c in cands if c["candidate_id"] == "DV-SOH-2014"][0]
+        self.assertEqual(lead["location_type"], "THIRD_PARTY_UPLOAD")
+        self.assertTrue(lead["examined"].startswith("NO"))
+        self.assertTrue(all(c["reference_status"] in ("DISCOVERY_LEAD", "UNVERIFIED_EXTRACTION_CANDIDATE") for c in cands))
+        req = {r["request_id"]: r for r in self.rows("c6_04_custodian_request_inventory.csv")}
+        self.assertEqual(req["DV-SOH-2014"]["correspondence"], "NONE SENT (not authorised)")
+        self.assertIn("AO-13-2006-PS", req)
 
     def test_adviser_pack_unchanged_and_no_determination(self):
         s = json.loads((self.PREP / "c6_05_adviser_pack_status.json").read_text())

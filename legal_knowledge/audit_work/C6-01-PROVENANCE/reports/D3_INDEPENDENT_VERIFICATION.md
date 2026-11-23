@@ -32,7 +32,7 @@
 | Statute class assigned from title text | P3 | No longer used: the only statute candidate, Act 13/1975, is no longer proposed |
 | Act 13/1975 title "No.16" vs English issue No.15 | P3 | Noted for the C5 master title. The Cycle 5 register is not edited here; the correction is carried to the next C5 maintenance |
 
-**Result after corrections:** 33 copies DOCUMENTED and 3 PARTIALLY_DOCUMENTED (TRA 2026, Delhi HC rules, Act 13/1975). The 33 proposals are 21 primary Gazette facsimiles, 9 primary court copies and 3 non-primary.
+**Result after corrections (as of d58894c4; superseded by the closeout below):** 33 copies DOCUMENTED and 3 PARTIALLY_DOCUMENTED (TRA 2026, Delhi HC rules, Act 13/1975). The 33 proposals are 21 primary Gazette facsimiles, 9 primary court copies and 3 non-primary.
 
 **Coverage:**
 - Documented-primary copies would rise from 12 to 42, and sources from 12 to 41.
@@ -53,4 +53,45 @@ Its four P3 conditions were corrected:
 | N-3 | The sources glob would pick up future packages | Evidence folders are listed explicitly (PILOT-01, R23-VERIFY-01) |
 | N-4 | Title-keyword statute-class rule; Act 13 masthead number | The rule is removed (statutes fall to the conservative non-primary default). The masthead number is recorded in `C6-PREP/C5_CARRYOVER_CORRECTIONS.md` (C5-CO-03). |
 
-These are documentation and ID-stability changes only: the outcomes (33 documented, 3 partial) and the coverage figures are unchanged.
+These are documentation and ID-stability changes only: at f0cd16a7 the outcomes (33 documented, 3 partial) and the coverage figures were unchanged.
+
+## Closeout changes (e7a10e27)
+- README denominators corrected (26 publication/record sources with 26 copies; 8 judgment sources with 10 copies).
+- Method and builder comment now state the executable rule: DOCUMENTED needs FULL only.
+- Page-image identity checks C6-PIC-01..04 on held copies (no download):
+  - **TRA 2026:** CONFIRMED, so it is now DOCUMENTED, conservatively non-primary.
+  - **Delhi HC Ch.6:** PARTIAL, because no court name or volume is printed. It stays PARTIALLY_DOCUMENTED.
+- Act 13/1975 is unchanged, and its masthead finding is carried on the row.
+- Legacy AP-nn to sha256 map added.
+
+**Current outcomes:** 34 DOCUMENTED and 2 PARTIALLY_DOCUMENTED (Delhi HC Ch.6, Act 13/1975). The 34 proposals are 21 primary Gazette facsimiles, 9 primary court copies and 4 non-primary (RS papers-laid, ER 2023 13 MB, Rajbir rendition, TRA 2026). The coverage figures are unchanged, because the Cycle 4 rule gives non-primary classes no effect.
+
+## Final independent review of e7a10e27: VERDICT ACCEPT WITH CONDITIONS (no P1; 2 P2)
+**Review files:** verbatim in `review/final_review_e7a10e27.md` and `review/final_findings_e7a10e27.csv`. It was a separate read-only reviewer with no network access.
+
+**What the reviewer checked:**
+- re-hashed all held copies and recomputed all 36 copy facts;
+- opened every evidence reference for all 34 proposals;
+- confirmed the legacy ID map against 9b4ad44d and d58894c4;
+- forced a duplicate ID and confirmed the builder stops;
+- rendered TRA pp.1 and 15 and Delhi HC pp.1 and 5, which reproduced the C6-PIC render hashes;
+- re-ran the coverage simulation.
+
+**This review is the verification of the TRA proposal and the four C6-PIC checks (R-11).**
+
+| ID | Sev | Finding | Disposition |
+| --- | --- | --- | --- |
+| R-01 | P2 | D2, D3 and D6 still gave 33/3/33 and "TRA partial" | **Corrected:** D2 lists 4 non-primary entries; D3 labels the earlier figures with their commit and adds this section; D6 is rewritten; a test ties report counts to the summary |
+| R-02 | P2 | Incorporation was described as a Cycle 4 addendum only, but the simulation switches off the Cycle 5 holding-state check | **Corrected:** D4, D6 and the addendum plan state that a reviewed Cycle 5 holding-state relabel is also required, and that the build must run with the check on |
+| R-03 | P3 | The Cycle 4 rule has no NON_PRIMARY_* class | Stated in D2 and D4; the addendum plan requires a resolution at incorporation |
+| R-04 | P3 | TRA rationale omitted the Cycle 4 watermark precedent | **Corrected:** the rationale now gives born-digital plus signature byte range as the distinction; the class is an owner decision |
+| R-05 | P3 | Three locator routes are looser than documented | Documented in METHOD "Known rule limits"; current rows were checked by hand |
+| R-06 | P3 | Identity rules are broad; T was attributed to PPS Bedi | Attribution corrected; limits documented |
+| R-07 | P3 | "English No.15" lost its "uncertain" qualifier | **Corrected** on the row and in C5-CO-03 |
+| R-08 | P3 | RS papers-laid authenticity UNCONFIRMED; item-page URL | Stated in its limitations; listed as an owner decision |
+| R-09 | P3 | Carrier and locator vocabulary differs from Cycle 4 | Normalisation is required at incorporation (addendum plan) |
+| R-10 | P3 | Test gaps | **Corrected:** duplicate-rejection test, non-tautological ID-stability test, Cycle 4 register sha256 pinned, report counts tied to the summary |
+| R-11 | P3 | TRA and C6-PIC not covered by earlier reviews | Covered by this review |
+| R-12 | P3 | C5 ER 2023 master cites T3-02 rather than T3-01 | Added as C5-CO-04 |
+
+The corrections after e7a10e27 were re-reviewed (see the re-review section, added once that review completes).

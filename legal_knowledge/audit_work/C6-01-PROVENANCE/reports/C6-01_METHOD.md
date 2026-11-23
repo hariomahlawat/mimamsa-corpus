@@ -15,7 +15,7 @@ Evidence was collected **only from committed registers**. Every item is cited as
 | L6 | WS-A identity register: computed MD5 equals the archived MD5, with an archive identifier | MD5 (never sufficient) |
 | I | page-image identity check with a 64-hex render hash, or an ARMY-RULES-CHAIN-01 row at `IMAGE_CHECKED`, or a C6-01 check (`inputs/page_image_checks_c6.csv`) with `identity_result=CONFIRMED` | — |
 | Ip | a C6-01 page-image check with `identity_result=PARTIAL`: the page was read but a required identity element (for example the issuing authority or volume) is not printed on the copy. **Ip does not satisfy I** | — |
-| T | page-1 text-layer identity. **Court PDFs only**, following the Cycle 4 PPS Bedi precedent; never accepted for a scanned publication | — |
+| T | page-1 text-layer identity: the first two distinctive title words appear in the p.1 text. **Court PDFs only**; never accepted for a scanned publication. This is a C6-01 rule, not a Cycle 4 one (the C4 PPS Bedi row rests on URL+sha256 corroboration, not text identity; final review R-06) | — |
 | X | contradiction: the same official URL recorded with another sha256, or a WS-B identity row marked contradicted | — |
 
 ## Outcomes
@@ -39,7 +39,7 @@ Each class is the same one Cycle 4 used for the same carrier type:
 | `PRIMARY_OFFICIAL_COURT_COPY` | SC copies |
 | `NON_PRIMARY_PARLIAMENTARY_RECORD` | the Rajya Sabha papers-laid record |
 | `NON_PRIMARY_OFFICIAL_COURT_RENDITION` | a court-system rendition whose carrier is unknown (Rajbir bosir copy) |
-| `NON_PRIMARY_OFFICIAL_PUBLICATION_COPY` | the incomplete ER 2023 copy; and, conservatively, the TRA 2026 copy: an e-Gazette text re-hosted by India Code with an IndiaCode watermark. No Cycle 4 class covers a watermarked born-digital re-host (the C4 `PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN` class was given to a scan), so the class is reserved for reviewer and owner decision |
+| `NON_PRIMARY_OFFICIAL_PUBLICATION_COPY` | the incomplete ER 2023 copy; and, conservatively, the TRA 2026 copy: born-digital e-Gazette text re-hosted by India Code with an IndiaCode watermark, whose embedded signature's byte range no longer covers the held file. Cycle 4 gave `PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN` to the watermarked India Code scan of Act 37/1992, so the watermark alone is not the distinction; the class is reserved for owner decision (final review R-04) |
 
 ## Limits
 - A matching hash proves byte identity, not legal authority.
@@ -47,3 +47,10 @@ Each class is the same one Cycle 4 used for the same carrier type:
 - No signature has been verified (the TRA 2026 copy shows a digital-signature stamp; it was not cryptographically checked).
 - Proposal IDs are display IDs (`C6-01-AP-<first 8 hex of sha256>`); the canonical identity is the full sha256. The builder stops on a duplicate.
 - Retrieval dates appear only where a retrieval record gives them. A register date is labelled as such.
+
+## Known rule limits (final review R-05, R-06, R-09; current rows checked by hand)
+- **L3 locator route:** a sha256 stated inside another record's locator is paired with the last URL before it (used only by Rajbir C2, `c6ec489d`; pairing confirmed by the reviewer).
+- **First-URL rules:** L3 takes the first URL in a locator (for the RS papers-laid record that is the archive.org item page), and L4 takes the first URL in a multi-candidate field (Delhi HC T5-03; the first is the right one).
+- **Identity rule:** any external page-image row with a render hash counts as I, because those registers carry no result field; only the C6 checks carry `identity_result`. T needs only the first two title words, and for N S Yadav and S N Mukherjee that is a single surname. The reviewer read every cited I reading and every court p.1 excerpt and found them consistent with the source identity.
+- **Vocabulary:** proposals use Cycle 5 carrier terms and drop "(as reported ...)"; the four court rows resting on L1 alone still have no retrieval record. Normalise to Cycle 4 vocabulary and keep that qualifier at incorporation.
+- These limits do not change any current outcome. Tighten them before the builder is reused for new evidence.

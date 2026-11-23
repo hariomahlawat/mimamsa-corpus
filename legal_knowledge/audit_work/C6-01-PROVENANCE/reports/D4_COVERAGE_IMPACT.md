@@ -2,6 +2,8 @@
 
 **Method:**
 - The Cycle 5 builder is re-run with the D2 proposals added to the Cycle 4 register **in memory only**.
+- The simulation switches off the Cycle 5 holding-state consistency check (`check_holding_vs_copies`). With it on, the builder stops at the first proposal, because the Cycle 5 master still labels those sources `*_PROVENANCE_UNDOCUMENTED`. **Real incorporation therefore needs two reviewed changes:** the authentication addendum (CALIBRATION-02) and a matching relabel of the Cycle 5 holding states (final review R-02). See `addendum/AUTHENTICATION_ADDENDUM_PLAN.md`.
+- The 4 non-primary proposals count as PROVENANCE_UNDOCUMENTED_COPY under the Cycle 4 rule, which has no NON_PRIMARY_* class (R-03); they change no figure.
 - The classification rules are unchanged.
 - A test proves the committed Cycle 5 registers are unaffected.
 

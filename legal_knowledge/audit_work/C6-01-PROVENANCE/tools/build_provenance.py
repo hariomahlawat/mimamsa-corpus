@@ -46,7 +46,7 @@ HEX = re.compile(r"(?<![0-9a-f])[0-9a-f]{64}(?![0-9a-f])")
 # documentary findings carried on the row (not corrections of the C5 register, which is not edited here; see C6-PREP C5-CO-03)
 DOCUMENTARY_FINDINGS = {
     "C5-SRC-P0-AA-AMD-ACT13-1975": ["documentary finding (WSA-PIC-29; C6-01 verification F-04; C5-CO-03): the Gazette masthead reads Hindi "
-                                    "issue No.16 but English issue No.15 on the image; the C5 master title gives No.16 only. Cite the issue as "
+                                    "issue No.16 but English issue No.15 on the image (the English number is recorded as uncertain in WSA-PIC-29); the C5 master title gives No.16 only. Cite the issue as "
                                     "'No.16 (Hindi masthead) / No.15 (English masthead)' until resolved against another copy of the same issue; "
                                     "Part II s.1, 29-03-1975, Act No.13 of 1975 and p.81 are confirmed"],
 }
@@ -301,12 +301,14 @@ def extra_limits(items, cls, c):
     if any(k == "L2" and "derivative" in d for k, _, d in items):
         out.append("the matched archive.org file is a derivative, not the uploaded original")
     if cls == "NON_PRIMARY_PARLIAMENTARY_RECORD":
-        out.append("non-primary: records the laying of a notification, not the instrument; RS Debates authenticity of the archive copy not confirmed")
+        out.append("non-primary: records the laying of a notification, not the instrument; the retrieval record states the RS Debates archive copy's "
+                   "authenticity as UNCONFIRMED and its URL is an archive.org item page, not the file (owner decision, final review R-08)")
     if cls == "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY":
         if c["source_id"] in WATERMARKED_GAZETTE_REHOSTS:
-            out.append("non-primary (conservative): an e-Gazette text re-hosted by India Code with an IndiaCode watermark, so the bytes are not the "
-                       "e-Gazette original; no Cycle 4 class covers a watermarked born-digital re-host (the C4 India Code class is for scans). "
-                       "Class decision reserved for the reviewer/owner; the digital signature was not verified")
+            out.append("non-primary (conservative): born-digital e-Gazette text re-hosted by India Code with an IndiaCode watermark; the embedded "
+                       "signature's byte range ends before the end of the held file, so it cannot cover these bytes (structural observation, "
+                       "not a cryptographic check). Cycle 4 gave PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN to the watermarked India Code scan of "
+                       "Act 37/1992, so the watermark alone is not the distinction; class decision reserved for the owner (final review R-04)")
         else:
             out.append("non-primary: incomplete or extract copy (see completeness)")
     if cls == "NON_PRIMARY_OFFICIAL_COURT_RENDITION":

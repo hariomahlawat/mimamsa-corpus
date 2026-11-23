@@ -65,10 +65,13 @@ def batch_a(cfgs):
             rows.append({"acq_c5_id": acq_id, "candidate_id": cid, "publication": c["publication"], "archive_identifier": ident_s,
                          "file_name": fname.group(1) if fname else "NOT_RECORDED", "download_url": url or "NOT_PINNED",
                          "expected_md5": md5.group(1) if md5 else "NOT_PINNED", "expected_bytes": c["content_length"] or "NOT_PINNED",
+                         "pin_status": ("PINNED (md5 and bytes from archive.org metadata recorded in Cycle 5 discovery)" if md5 and c["content_length"]
+                                        else "NOT_PINNED: C6 guarded metadata attempt 2026-11-23 refused fail-closed (metadata API HEAD 405; "
+                                             "_files.xml HEAD gave no content type); see discovery/c6_02_metadata_requests_v2.tsv; owner decision C6-02-D1"),
                          "identity_evidence": c["identity_evidence"][:240], "identity_status": "METADATA_ONLY (content not examined)",
                          "pr_stack_overlap": overlap(cfgs, ident_s + "/" if ident_s else "", fname.group(1) if fname else ""),
                          "rights": "Government of India Gazette; archive.org carrier recorded as THIRD_PARTY_ARCHIVAL_FACSIMILE; private store until owner decides",
-                         "prerequisites": "owner approval A-C5-1; separate crawler-config PR (not #7/#8/#17/#23); archive.org robots RULES_PARSED at run time; HTTPS; no off-host redirect",
+                         "prerequisites": "owner approval A-C5-1; separate crawler-config PR stacked on #8 (#8 adds *.archive.org; staging lists archive.org only) and not altering #7/#8/#17/#23; archive.org robots RULES_PARSED at run time; HTTPS; redirects only to *.archive.org data nodes, each with its own robots decision (data nodes answered robots 404 on 2026-11-23)",
                          "validation_after_download": "sha256; md5+bytes equal pin; PDF signature; page count; masthead page-image check (issue, date, Part/Section); then a reviewed source-authentication addendum",
                          "approval_state": acq[acq_id]["approval_state"]})
     return rows
@@ -106,6 +109,8 @@ def custodian():
         ("RMSAF-2010", "Regulations for the Medical Services of the Armed Forces, 2010 (revised), with amendments", "C5-SRC-P1-RMSAF-2010", "Scribd copy only (not acceptable)"),
         ("RMSAF-1983", "Regulations for the Medical Services of the Armed Forces, 1983 edition", "C5-SRC-P1-RMSAF-2010", "C5A-018"),
         ("AO-45-2001", "Army Order 45/2001 (as discussed in Pooja Pal (2026); cited by KB ADM-014)", "C5-SRC-P0-ARMY-ORDERS-INSTRUCTIONS", "only specific AO number found in the 658 records"),
+        ("DV-SOH-2014", "Staff Officers' Handbook: Processing of Statutory/Non-Statutory Complaints on D&V Matters (apparently Addl DG Discipline & Vigilance, AG's Branch, IHQ of MoD (Army), May 2014)", "NONE (C6-04 discovery lead; no C5 source row)", "third-party Scribd upload only (document 733107547), not examined; see inputs/c6_04_discovery_candidates.csv"),
+        ("AO-13-2006-PS", "Army Order 13/2006/PS (reported as cited in the D&V handbook; extraction candidate, unverified)", "C5-SRC-P0-ARMY-ORDERS-INSTRUCTIONS", "reported reference only (C6-04 discovery lead DV-SOH-2014)"),
         ("AO-CATEGORY", "Army Orders / Instructions cited by category in COI-002, COI-007, COI-018, COI-029, COI-033, COI-046, CM-040, HCE-030, HCE-031, HCE-033", "C5-SRC-P0-ARMY-ORDERS-INSTRUCTIONS", "owner to identify the specific orders before any request"),
     ]
     out = []
