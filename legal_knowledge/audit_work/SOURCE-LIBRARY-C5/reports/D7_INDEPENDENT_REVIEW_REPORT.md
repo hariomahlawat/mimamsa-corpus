@@ -74,3 +74,29 @@
 | RR-03 | Robots decision for redirect hosts | Now required by `validate_log_v2` |
 | RR-04 | Re-review file not committed | Now committed |
 | RR-05 | curl version requirement | Recorded in the docstring |
+
+## Independent review of the final commit (5bc2d12a..8e4e9dfe)
+- **Verdict: ACCEPT WITH CONDITIONS**, with **one P1 in the guarded runner**. Verbatim: `review/final_commit_review.md` and `review/final_commit_findings.csv`.
+- **Confirmed:** the registers, data and review evidence; the committed re-review is byte-identical to the original; 328 tests, 0 skipped.
+
+**Fix approach:** the curl fetch path was withdrawn. It was replaced by a stdlib streaming fetch that decides on the GET response's own headers before reading, gates on the first 1 KiB, caps the body and never follows redirects automatically.
+
+| ID | Sev | Finding | Disposition |
+| --- | --- | --- | --- |
+| F-01 | P1 | A Range-ignoring server labelling a PDF as text/html could get up to 3 MB written to disk; an unsigned document would be kept | **Fixed.** The GET is decided on its own status and headers; at most 1 KiB is read and checked for text before any further read; nothing is written until all gates pass. Tests reproduce the scenario: nothing written, ≤ 1 KiB read, logged as a violation. |
+| F-02 | P2 | gzip, RTF/unsigned, partial, 3xx and over-cap bodies could be kept | **Fixed.** Identity encoding is required; RTF/ZIP/OLE/PDF signatures are detected anywhere in the first 1 KiB; NUL or control bytes are rejected; read errors and over-cap bodies are discarded; non-200 bodies are never read. Tests added. |
+| F-03 | P2 | curl ≥ 8.4 requirement only in a docstring | **Resolved by removing curl.** Stdlib only; the policy says so; a test asserts there is no subprocess and no TLS bypass. |
+| F-05 | P2 | robots decision ignored the port | **Fixed.** Decisions are keyed by origin (scheme + host + port). Test added. |
+| F-04 | P3 | redirect_hosts validator check cannot fire on the runner's own logs | Column semantics documented in `discovery_guard.py`; the check remains for imported logs; test added |
+| F-06 | P3 | HTML mentioning "%PDF-" is discarded | Accepted as a false positive in the safe direction; documented in the policy; test added |
+| F-07 | P3 | 6-hop limit, missing Location and HTTPS→HTTP downgrade not logged clearly | **Fixed.** Explicit NONE rows; a non-HTTPS origin is refused before any request |
+| F-08 | P3 | No tests for RR-01/RR-03 | Tests added (prefix scan; redirect-host validation) |
+| F-09 | P3 | Gate results file hand-edited | **Fixed.** The gate is re-run and its raw output pasted unedited |
+| F-10 | P3 | robots evaluated only for '*' | **Fixed.** Evaluated with the runner's UA (UA-specific group, else '*'); test added |
+
+**Stated limits after the fix:**
+- Up to 1 KiB of a disguised document can be received in memory.
+- A publication served as plain text cannot be distinguished from a listing.
+- No live run has been made with the revised runner; it is tested with mocks only.
+
+The re-review of this fix is recorded in `review/final_fix_rereview.md`.

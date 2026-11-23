@@ -194,7 +194,8 @@ class C5PreservedCorrections(unittest.TestCase):
             self.assertEqual(m[sid + "-INDIACODE"]["document_authority"], "GOVERNMENT_COMPILATION")
         r95 = [r for r in read("corpus_crosswalk.csv") if r["provision_id"] == "rules-army-rules-1954#r95"]
         self.assertTrue(r95 and all(r["evidence_status"] == "PARTIAL_MATCH" for r in r95))
-        pic = {r["check_id"]: r for r in csv.DictReader(open(PKG / "inputs/page_image_checks_c5.csv", encoding="utf-8"))}
+        with open(PKG / "inputs/page_image_checks_c5.csv", encoding="utf-8") as f:
+            pic = {r["check_id"]: r for r in csv.DictReader(f)}
         self.assertIn("disagreement", pic["C5-PIC-02"]["reader"])
         self.assertIn("S.O. 4010", (PKG / "reports/D7_INDEPENDENT_REVIEW_REPORT.md").read_text())
 
@@ -235,6 +236,17 @@ class C5FinalDiffConditions(unittest.TestCase):
         e = G.validate_log_v2([dict(base, method="HEAD", url="https://x.gov.in/a", robots_state="NO_ROBOTS_FILE", purpose="t")])
         self.assertTrue(any("before a robots decision" in x for x in e))
 
+    def test_rr03_redirect_hosts_need_robots(self):
+        base = {c: "" for c in G.LOG_V2_COLUMNS}
+        rows = [dict(base, method="GET", url="https://a.gov.in/robots.txt", http_status="200", robots_state="RULES_PARSED", purpose="robots"),
+                dict(base, method="HEAD", url="https://a.gov.in/x", redirect_hosts="a.gov.in;c.gov.in", robots_state="RULES_PARSED", purpose="t")]
+        self.assertTrue(any("c.gov.in" in x for x in G.validate_log_v2(rows)))
+
+    def test_f10_user_agent_specific_robots_group(self):
+        st = G.robots_decision(status=200, body=b"User-agent: Mimamsa-legal-research-discovery\nDisallow: /\n\nUser-agent: *\nAllow: /\n", content_type="text/plain")
+        self.assertFalse(G.may_request("https://x.gov.in/a", {"x.gov.in": st}, RG.UA)[0])
+        self.assertTrue(G.may_request("https://x.gov.in/a", {"x.gov.in": st})[0])
+
     def test_fd07_primary_subtype_must_match_documented_copy(self):
         m = read("source_master_register.csv")
         copies = read("source_copy_register.csv")
@@ -243,64 +255,158 @@ class C5FinalDiffConditions(unittest.TestCase):
             B.check_holding_vs_copies(bad, copies)
 
 
+class _FakeResp:
+    def __init__(self, body, fail_after=None):
+        self.body, self.pos, self.fail_after, self.closed, self.bytes_read = body, 0, fail_after, False, 0
+
+    def read(self, n=-1):
+        if self.fail_after is not None and self.pos >= self.fail_after:
+            raise TimeoutError("simulated")
+        n = len(self.body) - self.pos if n is None or n < 0 else n
+        out = self.body[self.pos:self.pos + n]
+        self.pos += len(out)
+        self.bytes_read += len(out)
+        return out
+
+    def close(self):
+        self.closed = True
+
+
 class C5GuardedRunnerMocked(unittest.TestCase):
-    """FD-02: the runner never issues a full GET unless HEAD and a 2 KiB probe both show listing content."""
+    """Runner revision after review F-01..F-05: decisions on the GET response's own headers, a 1 KiB prefix gate,
+    a size cap, no automatic redirects and robots keyed by origin (scheme+host+port). Mocked at http_open."""
 
-    def run_with(self, responses):
-        calls = []
+    ROBOTS_OK = (200, {"content-type": "text/plain"}, b"User-agent: *\nAllow: /\n")
 
-        def fake(method, url, body_path=None, max_bytes=3_000_000, byte_range=None):
-            calls.append((method, url, byte_range))
-            st, heads, body = responses(method, url, byte_range)
-            if body_path and body is not None:
-                with open(body_path, "wb") as f:
-                    f.write(body)
-            return st, heads, ""
-        old, old_delay = RG.curl, RG.DELAY
-        RG.curl, RG.DELAY = fake, 0
+    def run_with(self, responder, targets="T1\tlisting\thttps://a.gov.in/page"):
+        calls, resps = [], []
+
+        def fake(method, url):
+            calls.append((method, url))
+            st, heads, body = responder(method, url)
+            if body is None or method == "HEAD":
+                return st, heads, (_FakeResp(b"") if st == 200 and method == "HEAD" else None), ""
+            r = body if isinstance(body, _FakeResp) else _FakeResp(body)
+            resps.append(r)
+            return st, heads, r, ""
+        old = (RG.http_open, RG.DELAY)
+        RG.http_open, RG.DELAY = fake, 0
         try:
             with tempfile.TemporaryDirectory() as d:
                 t = os.path.join(d, "t.tsv")
-                with open(t, "w") as f:
-                    f.write("target_id\tkind\turl\nT1\tlisting\thttps://a.gov.in/page\n")
+                with open(t, "w", encoding="utf-8") as f:
+                    f.write("target_id\tkind\turl\n" + targets + "\n")
                 rc = RG.main(t, os.path.join(d, "log.tsv"), os.path.join(d, "out"))
                 with open(os.path.join(d, "log.tsv"), encoding="utf-8") as f:
                     rows = list(csv.DictReader(f, delimiter="\t"))
-                left = os.listdir(os.path.join(d, "out"))
+                left = sorted(x for x in os.listdir(os.path.join(d, "out")) if not x.startswith("robots_"))
         finally:
-            RG.curl, RG.DELAY = old, old_delay
-        return calls, rows, rc, left
+            RG.http_open, RG.DELAY = old
+        return calls, rows, rc, left, resps
+
+    def page_responder(self, head, get):
+        def r(m, u):
+            if u.endswith("/robots.txt"):
+                return self.ROBOTS_OK
+            return head if m == "HEAD" else get
+        return r
+
+    def gets(self, calls):
+        return [c for c in calls if c[0] == "GET" and not c[1].endswith("robots.txt")]
 
     def test_no_get_when_head_has_no_content_type(self):
-        def resp(m, u, r):
-            if u.endswith("robots.txt"):
-                return "200", {"content-type": "text/plain"}, b"User-agent: *\nAllow: /\n"
-            return "200", {}, None
-        calls, rows, rc, _ = self.run_with(resp)
-        self.assertFalse(any(c[0] == "GET" and not c[1].endswith("robots.txt") for c in calls))
+        calls, rows, rc, left, _ = self.run_with(self.page_responder((200, {}, None), None))
+        self.assertEqual(self.gets(calls), [])
         self.assertTrue(any("GET refused" in r["note"] for r in rows))
 
-    def test_probe_detects_document_and_stops(self):
-        def resp(m, u, r):
-            if u.endswith("robots.txt"):
-                return "200", {"content-type": "text/plain"}, b"User-agent: *\nAllow: /\n"
-            if m == "HEAD":
-                return "200", {"content-type": "text/html"}, None
-            return "206", {"content-type": "text/html"}, b"%PDF-1.7 fake"  # server lies in its content type
-        calls, rows, rc, left = self.run_with(resp)
-        gets = [c for c in calls if c[0] == "GET" and not c[1].endswith("robots.txt")]
-        self.assertEqual(len(gets), 1)
-        self.assertEqual(gets[0][2], "0-2047")  # only the range probe
-        self.assertNotIn("robots_a.gov.in.txt", [x for x in left if x.endswith(".pdf")])
-        self.assertFalse([x for x in left if x.startswith("T1")])  # probe bytes deleted
+    def test_f01_range_ignoring_server_mislabelled_pdf_nothing_written(self):
+        """Reviewer P1 scenario: HEAD and GET say text/html, no Range support, large body that is a PDF."""
+        pdf = _FakeResp(b"%PDF-1.7\n" + b"x" * 500_000)
+        calls, rows, rc, left, resps = self.run_with(self.page_responder(
+            (200, {"content-type": "text/html"}, None), (200, {"content-type": "text/html", "content-length": "500010"}, pdf)))
+        self.assertEqual(left, [])                       # nothing written
+        self.assertLessEqual(pdf.bytes_read, 1024)       # at most 1 KiB received
+        self.assertTrue(pdf.closed)
         self.assertTrue(any(r["payload_class"] == "DOCUMENT_PAYLOAD" for r in rows))
-        self.assertEqual(rc, 1)  # logged as a violation
+        self.assertEqual(rc, 1)                          # logged as a violation
+
+    def test_f01_unsigned_binary_document_aborted(self):
+        doc = _FakeResp(b"\x00\x01\x02BINARY" + b"\x00" * 5000)
+        calls, rows, rc, left, _ = self.run_with(self.page_responder(
+            (200, {"content-type": "text/html"}, None), (200, {"content-type": "text/html"}, doc)))
+        self.assertEqual(left, [])
+        self.assertLessEqual(doc.bytes_read, 1024)
+
+    def test_f02_header_gates_read_no_body(self):
+        for heads in ({"content-type": "text/html", "content-encoding": "gzip"},
+                      {"content-type": "text/html", "content-disposition": 'attachment; filename="x.pdf"'},
+                      {"content-type": "application/pdf"},
+                      {"content-type": "text/html", "content-length": str(RG.CAP + 1)}):
+            body = _FakeResp(b"<html>ok</html>")
+            calls, rows, rc, left, _ = self.run_with(self.page_responder((200, {"content-type": "text/html"}, None), (200, heads, body)))
+            self.assertEqual(left, [], heads)
+            self.assertEqual(body.bytes_read, 0, heads)
+
+    def test_f02_non_200_get_not_kept(self):
+        body = _FakeResp(b"<html>moved</html>")
+        calls, rows, rc, left, _ = self.run_with(self.page_responder((200, {"content-type": "text/html"}, None), (302, {"content-type": "text/html"}, body)))
+        self.assertEqual(left, [])
+        self.assertEqual(body.bytes_read, 0)
+
+    def test_f02_cap_and_read_errors_discard(self):
+        big = _FakeResp(b"<html>" + b"a" * (RG.CAP + 10))
+        calls, rows, rc, left, _ = self.run_with(self.page_responder((200, {"content-type": "text/html"}, None), (200, {"content-type": "text/html"}, big)))
+        self.assertEqual(left, [])
+        broken = _FakeResp(b"<html>" + b"a" * 200_000, fail_after=70_000)
+        calls, rows, rc, left, _ = self.run_with(self.page_responder((200, {"content-type": "text/html"}, None), (200, {"content-type": "text/html"}, broken)))
+        self.assertEqual(left, [])
+
+    def test_listing_kept_only_after_all_gates(self):
+        calls, rows, rc, left, _ = self.run_with(self.page_responder(
+            (200, {"content-type": "text/html; charset=utf-8"}, None), (200, {"content-type": "text/html; charset=utf-8"}, b"<html>listing</html>")))
+        self.assertEqual(left, ["T1.html"])
+        self.assertEqual(rc, 0)
+
+    def test_html_mentioning_pdf_signature_is_discarded_conservatively(self):
+        calls, rows, rc, left, _ = self.run_with(self.page_responder(
+            (200, {"content-type": "text/html"}, None), (200, {"content-type": "text/html"}, b"<html>files start with %PDF-1.4</html>")))
+        self.assertEqual(left, [])  # documented false positive in the safe direction
+
+    def test_redirect_not_followed_without_robots_for_new_origin(self):
+        def r(m, u):
+            if u == "https://a.gov.in/robots.txt":
+                return self.ROBOTS_OK
+            if u == "https://b.gov.in/robots.txt":
+                return 0, {}, None  # unreadable
+            if u == "https://a.gov.in/page":
+                return 301, {"location": "https://b.gov.in/doc"}, None
+            raise AssertionError(f"unexpected request {m} {u}")
+        calls, rows, rc, left, _ = self.run_with(r)
+        self.assertNotIn(("HEAD", "https://b.gov.in/doc"), calls)
+        self.assertTrue(any("ROBOTS_UNAVAILABLE" in r["note"] for r in rows))
+
+    def test_f05_port_needs_its_own_robots(self):
+        def r(m, u):
+            if u == "https://a.gov.in/robots.txt":
+                return self.ROBOTS_OK
+            if u == "https://a.gov.in:8443/robots.txt":
+                return 0, {}, None
+            if u == "https://a.gov.in/x":
+                return 404, {"content-type": "text/html"}, None
+            raise AssertionError(f"unexpected request {m} {u}")
+        calls, rows, rc, left, _ = self.run_with(r, "T1\tlisting\thttps://a.gov.in/x\nT2\tlisting\thttps://a.gov.in:8443/x")
+        self.assertIn(("GET", "https://a.gov.in:8443/robots.txt"), calls)
+        self.assertNotIn(("HEAD", "https://a.gov.in:8443/x"), calls)
 
     def test_unreadable_robots_means_no_request(self):
-        def resp(m, u, r):
-            return "000", {}, None
-        calls, rows, rc, _ = self.run_with(resp)
-        self.assertEqual([c[1] for c in calls], ["https://a.gov.in/robots.txt"])
+        calls, rows, rc, left, _ = self.run_with(lambda m, u: (0, {}, None))
+        self.assertEqual(calls, [("GET", "https://a.gov.in/robots.txt")])
+
+    def test_no_curl_dependency(self):
+        src = (PKG / "tools/run_guarded_discovery.py").read_text()
+        self.assertNotIn("subprocess", src)
+        self.assertNotIn("check_hostname = False", src)
+        self.assertNotIn("CERT_NONE", src)
 
 
 class C5AdviserIndex(unittest.TestCase):

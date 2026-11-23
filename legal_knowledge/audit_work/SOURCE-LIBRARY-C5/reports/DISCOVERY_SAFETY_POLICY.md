@@ -10,12 +10,19 @@
 | 1 | robots.txt must be **established** before any other request to a host. The result is one of: a 200 text body that is parsed (`RULES_PARSED`); 404 or 410 (`NO_ROBOTS_FILE`, no rules); or anything else (`UNAVAILABLE`). Anything else covers 401, 403, 429, 5xx, a timeout, a TLS or connection error, an HTML or non-text body, an off-host redirect, or no status at all. | `robots_decision` |
 | 2 | An `UNAVAILABLE` host receives **no further automated request** until independently cleared. "Cleared" means a later successful robots read, or an owner decision recorded in the repository. | `may_request` → `ROBOTS_UNAVAILABLE` |
 | 3 | Explicit `Disallow` is respected. | robotparser `can_fetch` |
-| 4 | Each redirect hop to another host is a new host. It needs its own robots decision and must itself be allowed. | `redirect_chain_allowed`; the runner follows redirects hop by hop |
+| 4 | robots decisions are keyed by **origin** (scheme + host + port). Each redirect hop to another origin needs its own robots decision and must itself be allowed. | `redirect_chain_allowed`; the runner follows redirects hop by hop |
 | 5 | HTTPS only. TLS verification is never disabled. No CAPTCHA, login or access-control bypass. | `may_request` → `NON_HTTPS`; curl runs with default verification |
 | 6 | Hosts blocked by repository policy (`aftjabalpur.in` and its subdomains) and bare-IP hosts are always refused. | `host_blocked` |
-| 7 | Probe with HEAD first. GET only when HEAD shows a listing or metadata content type. A GET body that turns out to be a document is discarded unread and logged as a violation. | runner |
+| 7 | Probe with HEAD first. GET only when HEAD returned 200 with an explicit listing content type. The GET is then decided again on **its own** status and headers before any body byte is read: 200; an explicit text listing type; no attachment disposition; identity encoding; declared length within the cap. Next, only the first 1 KiB is read; it must look like text with no document signature (PDF/ZIP/OLE/RTF) anywhere in it. The body is capped at 2 MB, and any read error discards it. Nothing is written to disk until every gate has passed. Redirects are never followed automatically. | `run_guarded_discovery.guarded_get`; `get_response_gate`; `body_prefix_gate` |
 | 8 | A response is classified by method, content type, content disposition, size and (when bytes exist) file signature: `METADATA_OR_LISTING`, `HEADERS_ONLY`, `HEADERS_ONLY_DOCUMENT_INDICATED`, `DOCUMENT_PAYLOAD` or `UNKNOWN`. **The URL extension is never sufficient.** It is only a warning heuristic (`url_suggests_document`), which also catches query endpoints such as `showfile?filename=x.pdf`. | `classify_response` |
 | 9 | A GET returning `DOCUMENT_PAYLOAD` or `UNKNOWN` with no acquisition approval reference is a violation. | `validate_log_v2` |
+
+**Stated limits (review F-01):**
+- Up to 1 KiB of a disguised document can be received in memory before the abort. Nothing is written to disk.
+- A publication served as plain text that passes the text checks cannot be distinguished from a listing.
+- HTML that merely mentions "%PDF-" in its first 1 KiB is discarded. That is a false positive, in the safe direction.
+
+The runner uses only the Python standard library, with TLS verification always on. The earlier curl-based path, and its dependency on curl ≥ 8.4, was withdrawn after review F-01/F-03. This revision has been tested with mocks only; it has not been run live.
 
 ## 2. Log format v2
 The columns are: `utc_time, method, url, final_url, redirect_hosts, http_status, content_type, content_disposition, content_length, payload_class, file_signature, robots_state, purpose, acquisition_approval_ref, note`.

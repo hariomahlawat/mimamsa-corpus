@@ -24,6 +24,8 @@ DOC_TYPES = ("application/pdf", "application/msword", "application/vnd.openxmlfo
              "application/x-zip", "application/octet-stream", "application/vnd.ms-", "image/tiff", "image/jp2")
 LISTING_TYPES = ("text/html", "application/json", "application/xml", "text/xml", "text/plain", "application/ld+json")
 MAGIC = {b"%PDF": "pdf", b"PK\x03\x04": "zip/ooxml", b"\xd0\xcf\x11\xe0": "ole/doc", b"II*\x00": "tiff", b"MM\x00*": "tiff"}
+# redirect_hosts: the hosts of every hop visited so far in the target's chain, including the current URL; a redirect
+# target appears in final_url and is checked when it is itself requested on the next row (review F-04).
 LOG_V2_COLUMNS = ["utc_time", "method", "url", "final_url", "redirect_hosts", "http_status", "content_type",
                   "content_disposition", "content_length", "payload_class", "file_signature", "robots_state",
                   "purpose", "acquisition_approval_ref", "note"]
@@ -31,6 +33,18 @@ LOG_V2_COLUMNS = ["utc_time", "method", "url", "final_url", "redirect_hosts", "h
 
 def host_of(url):
     return (urlsplit(url).hostname or "").lower()
+
+
+def netloc_of(url):
+    p = urlsplit(url)
+    return (p.hostname or "").lower() + (f":{p.port}" if p.port else "")
+
+
+def origin_key(url):
+    """robots.txt applies per scheme + host + port (RFC 9309); decisions are keyed the same way (review F-05)."""
+    p = urlsplit(url)
+    port = p.port or {"https": 443, "http": 80}.get(p.scheme, 0)
+    return f"{p.scheme}://{(p.hostname or '').lower()}:{port}"
 
 
 def host_blocked(host):
@@ -69,16 +83,20 @@ def robots_decision(status, body=b"", content_type="", final_host=None, requeste
     return "RULES_PARSED", rp
 
 
-def may_request(url, robots_by_host, user_agent="*"):
-    """(allowed, reason). robots_by_host maps host -> (state, parser)."""
+def may_request(url, robots_by_origin, user_agent="*"):
+    """(allowed, reason). robots_by_origin maps origin_key(url) -> (state, parser). For backward compatibility a
+    bare-hostname key is accepted only for the default HTTPS port."""
     h = host_of(url)
     if host_blocked(h):
         return False, "BLOCKED_HOST"
     if urlsplit(url).scheme != "https":
         return False, "NON_HTTPS"
-    if h not in robots_by_host:
+    k = origin_key(url)
+    if k not in robots_by_origin and urlsplit(url).port in (None, 443) and h in robots_by_origin:
+        k = h
+    if k not in robots_by_origin:
         return False, "ROBOTS_NOT_ESTABLISHED"
-    state, rp = robots_by_host[h]
+    state, rp = robots_by_origin[k]
     if state == "UNAVAILABLE":
         return False, "ROBOTS_UNAVAILABLE"
     if state == "RULES_PARSED" and not rp.can_fetch(user_agent, url):
@@ -122,6 +140,62 @@ def head_allows_get(content_type):
     return bool(ct) and ct.startswith(LISTING_TYPES)
 
 
+TEXT_LISTING_TYPES = ("text/html", "application/json", "application/xml", "text/xml", "text/plain", "application/ld+json",
+                      "application/xhtml+xml")
+
+
+def get_response_gate(status, headers, cap):
+    """Decide on a GET response's own status and headers BEFORE reading its body (review F-01/F-02)."""
+    try:
+        status = int(status)
+    except (TypeError, ValueError):
+        return False, "no status"
+    if status != 200:
+        return False, f"status {status}"
+    ct = (headers.get("content-type") or "").split(";")[0].strip().lower()
+    if not ct or not ct.startswith(TEXT_LISTING_TYPES):
+        return False, f"content type {ct or 'missing'} is not an explicit listing type"
+    cd = (headers.get("content-disposition") or "").lower()
+    if "attachment" in cd or re.search(r"filename=.*\.(pdf|docx?|zip|tiff?)", cd):
+        return False, "attachment/document disposition"
+    ce = (headers.get("content-encoding") or "identity").strip().lower()
+    if ce not in ("", "identity"):
+        return False, f"content encoding {ce}"
+    cl = headers.get("content-length")
+    if cl is not None:
+        try:
+            if int(cl) > cap:
+                return False, f"declared length {cl} exceeds cap {cap}"
+        except ValueError:
+            return False, "malformed Content-Length"
+    return True, "ok"
+
+
+def body_prefix_gate(first):
+    """The first 1 KiB must look like text and carry no document signature anywhere in it. (ok, reason, signature)."""
+    sig = signature(first)
+    if not sig:
+        for m in (b"PK\x03\x04", b"\xd0\xcf\x11\xe0", b"{\\rtf"):
+            if m in first[:1024]:
+                sig = {b"PK\x03\x04": "zip/ooxml", b"\xd0\xcf\x11\xe0": "ole/doc", b"{\\rtf": "rtf"}[m]
+                break
+    if sig:
+        return False, f"document signature {sig}", sig
+    if b"\x00" in first:
+        return False, "NUL bytes (binary)", ""
+    try:
+        first.decode("utf-8")
+    except UnicodeDecodeError as e:
+        if e.start < len(first) - 4:  # a multibyte character cut at the 1 KiB boundary is tolerated
+            try:
+                first.decode("latin-1")
+                if sum(1 for b in first if b < 9 or 13 < b < 32) > 4:
+                    return False, "control bytes (binary)", ""
+            except UnicodeDecodeError:
+                return False, "not decodable as text", ""
+    return True, "ok", ""
+
+
 def classify_response(method, status, content_type="", content_disposition="", content_length=None, first_bytes=b""):
     ct = (content_type or "").split(";")[0].strip().lower()
     cd = (content_disposition or "").lower()
@@ -141,12 +215,16 @@ def validate_log_v2(rows):
     err, unavailable, decided = [], set(), set()
     for i, r in enumerate(rows, 2):
         h = host_of(r["url"])
+        if r.get("purpose") == "robots" and r["method"].upper() != "NONE":
+            decided.add(origin_key(r["url"]))
         if r["method"].upper() == "NONE":
             continue  # decision record: no request was made
         if r.get("purpose") == "robots":
             decided.add(h)
         else:
-            for x in [h] + [y for y in (r.get("redirect_hosts") or "").split(";") if y]:
+            if origin_key(r["url"]) not in decided:
+                err.append(f"row {i}: request to {netloc_of(r['url'])} before a robots decision for that origin")
+            for x in [y for y in (r.get("redirect_hosts") or "").split(";") if y]:
                 if x not in decided:
                     err.append(f"row {i}: request involving {x} before a robots decision for that host")
         if host_blocked(h) or any(host_blocked(x) for x in (r.get("redirect_hosts") or "").split(";") if x):

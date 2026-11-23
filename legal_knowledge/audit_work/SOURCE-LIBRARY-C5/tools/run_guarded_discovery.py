@@ -1,22 +1,27 @@
-"""Guarded read-only discovery runner (Cycle 5 corrections). Uses curl (system proxy and CA; TLS verification on) and
-discovery_guard for every decision. Designed not to download documents, with a bounded residual risk:
-- robots.txt is fetched first for each host and must be ESTABLISHED (fail closed);
-- every target is probed with HEAD; GET is used only when the target is kind=listing AND HEAD reported an explicit
-  listing/metadata content type (no content type -> no GET);
-- the GET is first a 2 KiB range probe (curl -r 0-2047, --max-filesize 4096): if its content type, disposition or
-  file signature indicates a document, the probe bytes are deleted unread and the event is logged; only a probe
-  classified METADATA_OR_LISTING is followed by the full GET (capped at 3 MB);
-- residual risk: a server that ignores Range and serves a document under a listing content type could deliver up
-  to 4 KiB before curl aborts; such bytes are deleted and logged as DOCUMENT_PAYLOAD (a violation);
-- further residual risk (independent re-review RR-01): after a listing-type probe, the full GET (<= 3 MB) could
-  still carry a document if the server changes content between requests; the full body is classified again
-  (content type, disposition, signature within the first 1 KiB) and deleted if it is a document, but a document
-  disguised beyond those checks would not be detected. Use the runner for listing/metadata URLs only;
-- the 4 KiB abort relies on curl --max-filesize being enforced for streamed bodies (curl >= 8.4; checked 8.5.0);
-- redirects are followed hop by hop, each hop host needing its own robots decision.
+"""Guarded read-only discovery runner (stdlib only; TLS verification always on). Every decision goes through
+discovery_guard. Revised after the independent review of 8e4e9dfe (F-01..F-05): the curl path is withdrawn.
+
+Request discipline (DISCOVERY_SAFETY_POLICY.md):
+- robots.txt is fetched first for each origin (scheme + host + port) and must be ESTABLISHED; otherwise no
+  further request is made to that origin (fail closed). Redirects are never followed automatically: each hop is
+  logged, and the next hop's origin needs its own robots decision.
+- every target is probed with HEAD. A GET is attempted only when the target is kind=listing AND HEAD returned
+  200 with an explicit listing/metadata content type.
+- the GET decision is re-made on the GET response's OWN status and headers before any body byte is read:
+  status must be 200; content type an explicit listing type; no attachment disposition; no content encoding
+  other than identity (Accept-Encoding: identity is sent); declared Content-Length, if any, within the cap.
+  Otherwise the connection is closed without reading the body.
+- then only the first 1024 bytes are read and must look like text (no document signature anywhere in them, no
+  NUL bytes, decodable). Otherwise the connection is closed; at most 1 KiB was received and nothing is written.
+- the rest is read into memory up to the cap (2 MB); a body that exceeds the cap, or a read error / timeout,
+  discards everything. A listing body is written to disk only after the whole response passed these checks.
+Remaining limits (stated, not hidden): up to 1 KiB of a disguised document can be received in memory before
+the abort; a document disguised as plain text beyond the first 1 KiB (e.g. a text file that is itself the
+publication) is not distinguishable from a listing and would be kept. Use the runner for listing/metadata URLs
+only. Mocked tests cover these paths; no live run has been made with this revision.
 Usage: python run_guarded_discovery.py targets.tsv out_log.tsv out_dir
 targets.tsv columns: target_id<TAB>kind(listing|head)<TAB>url"""
-import csv, datetime, os, subprocess, sys, tempfile, time
+import csv, datetime, os, socket, ssl, sys, time, urllib.error, urllib.request
 from urllib.parse import urljoin
 
 sys.path.insert(0, os.path.dirname(__file__))
@@ -24,6 +29,8 @@ import discovery_guard as G  # noqa: E402
 
 UA = "Mimamsa-legal-research-discovery/1.0 (non-commercial research; read-only)"
 DELAY = 2.0
+TIMEOUT = 40
+CAP = 2_000_000
 _last = {}
 
 
@@ -31,34 +38,71 @@ def now():
     return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def curl(method, url, body_path=None, max_bytes=3_000_000, byte_range=None):
-    h = G.host_of(url)
-    wait = DELAY - (time.time() - _last.get(h, 0))
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, *a, **k):
+        return None  # never follow; the caller handles each hop
+
+
+def http_open(method, url):
+    """Open a request without reading the body. Returns (status, headers_lower_dict, response_or_None, error).
+    Tests replace this function."""
+    cafile = os.environ.get("SSL_CERT_FILE") or os.environ.get("REQUESTS_CA_BUNDLE") or None
+    ctx = ssl.create_default_context(cafile=cafile)  # verification on; never disabled
+    opener = urllib.request.build_opener(urllib.request.ProxyHandler(), urllib.request.HTTPSHandler(context=ctx), _NoRedirect)
+    req = urllib.request.Request(url, method=method, headers={"User-Agent": UA, "Accept-Encoding": "identity"})
+    try:
+        resp = opener.open(req, timeout=TIMEOUT)
+        return resp.status, {k.lower(): v for k, v in resp.headers.items()}, resp, ""
+    except urllib.error.HTTPError as e:  # includes 3xx (not followed) and 4xx/5xx; body is not read
+        heads = {k.lower(): v for k, v in (e.headers or {}).items()}
+        e.close()
+        return e.code, heads, None, ""
+    except (urllib.error.URLError, socket.timeout, ssl.SSLError, ConnectionError, OSError) as e:
+        return 0, {}, None, f"{type(e).__name__}: {e}"[:200]
+
+
+def _pace(url):
+    k = G.origin_key(url)
+    wait = DELAY - (time.time() - _last.get(k, 0))
     if wait > 0:
         time.sleep(wait)
-    _last[h] = time.time()
-    hdr = tempfile.NamedTemporaryFile(delete=False).name
-    cmd = ["curl", "-sS", "--max-time", "40", "-A", UA, "-D", hdr, "-o", body_path or os.devnull,
-           "--max-filesize", str(max_bytes), "-w", "%{http_code}"]
-    cmd += ["-I"] if method == "HEAD" else []
-    cmd += ["-r", byte_range] if byte_range else []
-    cmd.append(url)
-    p = subprocess.run(cmd, capture_output=True, text=True)
-    status = (p.stdout or "").strip()[-3:] or "000"
-    proxy_only = status == "000"
-    heads = {}
+    _last[k] = time.time()
+
+
+def guarded_get(url, cap=CAP):
+    """GET with header gate, 1 KiB prefix gate and size cap. Returns (status, headers, body_or_None, payload_class,
+    signature, note). body is returned only for METADATA_OR_LISTING responses that passed every gate."""
+    _pace(url)
+    st, hd, resp, err = http_open("GET", url)
+    if resp is None:
+        return st, hd, None, "", "", err or "no body read"
     try:
-        for line in open(hdr, encoding="latin-1"):
-            if ":" in line:
-                k, v = line.split(":", 1)
-                heads[k.strip().lower()] = v.strip()
-            elif line.startswith("HTTP/"):
-                heads = {}  # keep only the last response block (proxy CONNECT block discarded)
+        ok, why = G.get_response_gate(st, hd, cap)
+        if not ok:
+            pc = G.classify_response("GET", st, hd.get("content-type", ""), hd.get("content-disposition", ""))[0]
+            return st, hd, None, pc, "", f"body not read: {why}"
+        try:
+            first = resp.read(1024)
+        except Exception as e:  # noqa: BLE001
+            return st, hd, None, "UNKNOWN", "", f"read error: {type(e).__name__}"
+        ok, why, sig = G.body_prefix_gate(first)
+        if not ok:
+            return st, hd, None, "DOCUMENT_PAYLOAD" if sig else "UNKNOWN", sig, f"aborted after <=1 KiB: {why}"
+        chunks, total = [first], len(first)
+        while True:
+            try:
+                b = resp.read(65536)
+            except Exception as e:  # noqa: BLE001
+                return st, hd, None, "UNKNOWN", "", f"read error mid-body ({type(e).__name__}); discarded"
+            if not b:
+                break
+            total += len(b)
+            if total > cap:
+                return st, hd, None, "UNKNOWN", "", f"exceeded cap {cap} bytes; discarded"
+            chunks.append(b)
+        return st, hd, b"".join(chunks), "METADATA_OR_LISTING", "", ""
     finally:
-        os.unlink(hdr)
-    if proxy_only:
-        heads = {}  # FD-06: headers seen with status 000 belong to the proxy, not the target
-    return status, heads, (p.stderr or "").strip()[:200]
+        resp.close()
 
 
 def main(targets, log_path, out_dir):
@@ -70,64 +114,76 @@ def main(targets, log_path, out_dir):
         r.update(utc_time=now(), **k)
         rows.append(r)
 
-    def ensure_robots(host):
-        if host in robots:
+    def ensure_robots(url):
+        key = G.origin_key(url)
+        if key in robots:
             return
+        host = G.host_of(url)
+        rurl = f"https://{G.netloc_of(url)}/robots.txt"
         if G.host_blocked(host):
-            robots[host] = ("UNAVAILABLE", None)
-            log(method="NONE", url=f"https://{host}/", robots_state="UNAVAILABLE", purpose="robots", note="blocked host: no request made")
+            robots[key] = ("UNAVAILABLE", None)
+            log(method="NONE", url=rurl, robots_state="UNAVAILABLE", purpose="robots", note="blocked host: no request made")
             return
-        url = f"https://{host}/robots.txt"
-        bp = os.path.join(out_dir, f"robots_{host}.txt")
-        st, hd, err = curl("GET", url, bp, 200_000)
-        body = open(bp, "rb").read() if os.path.exists(bp) else b""
+        if G.urlsplit(url).scheme != "https":
+            robots[key] = ("UNAVAILABLE", None)
+            log(method="NONE", url=rurl, robots_state="UNAVAILABLE", purpose="robots", note="non-HTTPS origin: no request made")
+            return
+        st, hd, body, pc, _sig, note = guarded_get(rurl, cap=200_000)
         loc = hd.get("location", "")
-        final_host = G.host_of(urljoin(url, loc)) if st.startswith("3") and loc else host
-        state, rp = G.robots_decision(st if not st.startswith("3") else 0, body, hd.get("content-type", ""), final_host, host, err or None)
-        robots[host] = (state, rp)
-        log(method="GET", url=url, final_url=urljoin(url, loc) if loc else url, http_status=st, content_type=hd.get("content-type", ""),
-            content_length=str(len(body)), payload_class="METADATA_OR_LISTING" if state == "RULES_PARSED" else "", robots_state=state,
-            purpose="robots", note=err)
+        final_host = G.host_of(urljoin(rurl, loc)) if 300 <= st < 400 and loc else host
+        state, rp = G.robots_decision(st if not (300 <= st < 400) else 0, body or b"", hd.get("content-type", ""), final_host, host,
+                                      None if st else (note or "no response"))
+        if st == 200 and body is None:
+            state, rp = "UNAVAILABLE", None  # a robots body that failed the gates is not an established policy
+        robots[key] = (state, rp)
+        log(method="GET", url=rurl, final_url=urljoin(rurl, loc) if loc else rurl, http_status=str(st or "000"),
+            content_type=hd.get("content-type", ""), content_length=str(len(body or b"")),
+            payload_class=pc if state == "RULES_PARSED" else "", robots_state=state, purpose="robots", note=note)
 
-    for t in csv.DictReader(open(targets, encoding="utf-8"), delimiter="\t"):
+    with open(targets, encoding="utf-8") as tf:
+        tlist = list(csv.DictReader(tf, delimiter="\t"))
+    for t in tlist:
         url, chain = t["url"], []
         for _hop in range(6):
-            h = G.host_of(url)
-            ensure_robots(h)
-            ok, why = G.may_request(url, robots)
+            ensure_robots(url)
+            ok, why = G.may_request(url, robots, UA)  # UA-specific robots groups apply, else '*' (review F-10)
             chain.append(url)
+            key = G.origin_key(url)
             if not ok:
-                log(method="NONE", url=url, robots_state=robots.get(h, ("", None))[0] or why, purpose=t["target_id"],
+                log(method="NONE", url=url, robots_state=robots.get(key, ("", None))[0] or why, purpose=t["target_id"],
                     note=f"not requested: {why}")
                 break
-            st, hd, err = curl("HEAD", url)
+            _pace(url)
+            st, hd, resp, err = http_open("HEAD", url)
+            if resp is not None:
+                resp.close()
             pc, _ = G.classify_response("HEAD", st, hd.get("content-type", ""), hd.get("content-disposition", ""))
             loc = hd.get("location", "")
-            log(method="HEAD", url=url, final_url=urljoin(url, loc) if loc else url, redirect_hosts=";".join(sorted({G.host_of(c) for c in chain})),
-                http_status=st, content_type=hd.get("content-type", ""), content_disposition=hd.get("content-disposition", ""),
-                content_length=hd.get("content-length", ""), payload_class=pc, robots_state=robots[h][0], purpose=t["target_id"], note=err)
-            if st.startswith("3") and loc:
+            log(method="HEAD", url=url, final_url=urljoin(url, loc) if loc else url,
+                redirect_hosts=";".join(sorted({G.host_of(c) for c in chain})), http_status=str(st or "000"),
+                content_type=hd.get("content-type", ""), content_disposition=hd.get("content-disposition", ""),
+                content_length=hd.get("content-length", ""), payload_class=pc, robots_state=robots[key][0],
+                purpose=t["target_id"], note=err)
+            if 300 <= st < 400:
+                if not loc:
+                    log(method="NONE", url=url, robots_state=robots[key][0], purpose=t["target_id"], note="redirect without Location: stopped")
+                    break
                 url = urljoin(url, loc)
                 continue
-            if t["kind"] == "listing" and st == "200" and pc == "HEADERS_ONLY" and G.head_allows_get(hd.get("content-type", "")):
-                bp = os.path.join(out_dir, f"{t['target_id']}.html")
-                st2, hd2, err2 = curl("GET", url, bp, 4096, "0-2047")  # range probe
-                first = open(bp, "rb").read(1024) if os.path.exists(bp) else b""
-                pc2, sig = G.classify_response("GET", st2, hd2.get("content-type", ""), hd2.get("content-disposition", ""), None, first)
-                if pc2 == "METADATA_OR_LISTING":
-                    st2, hd2, err2 = curl("GET", url, bp)
-                    first = open(bp, "rb").read(1024) if os.path.exists(bp) else b""
-                    pc2, sig = G.classify_response("GET", st2, hd2.get("content-type", ""), hd2.get("content-disposition", ""), None, first)
-                if pc2 != "METADATA_OR_LISTING" and os.path.exists(bp):
-                    os.unlink(bp)  # discarded unread
-                log(method="GET", url=url, final_url=url, http_status=st2, content_type=hd2.get("content-type", ""),
+            if t["kind"] == "listing" and st == 200 and pc == "HEADERS_ONLY" and G.head_allows_get(hd.get("content-type", "")):
+                st2, hd2, body, pc2, sig, note = guarded_get(url)
+                if body is not None:
+                    with open(os.path.join(out_dir, f"{t['target_id']}.html"), "wb") as f:
+                        f.write(body)
+                log(method="GET", url=url, final_url=url, http_status=str(st2 or "000"), content_type=hd2.get("content-type", ""),
                     content_disposition=hd2.get("content-disposition", ""), content_length=hd2.get("content-length", ""),
-                    payload_class=pc2, file_signature=sig, robots_state=robots[h][0], purpose=t["target_id"],
-                    note=err2 + ("" if pc2 == "METADATA_OR_LISTING" else " body discarded unread"))
+                    payload_class=pc2, file_signature=sig, robots_state=robots[key][0], purpose=t["target_id"], note=note)
             elif t["kind"] == "listing":
-                log(method="NONE", url=url, robots_state=robots[h][0], purpose=t["target_id"],
-                    note="GET refused: HEAD gave no explicit listing content type (FD-02)")
+                log(method="NONE", url=url, robots_state=robots[key][0], purpose=t["target_id"],
+                    note="GET refused: HEAD did not return 200 with an explicit listing content type")
             break
+        else:
+            log(method="NONE", url=url, purpose=t["target_id"], note="more than 5 redirects: stopped")
     with open(log_path, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=G.LOG_V2_COLUMNS, delimiter="\t", lineterminator="\n")
         w.writeheader()
