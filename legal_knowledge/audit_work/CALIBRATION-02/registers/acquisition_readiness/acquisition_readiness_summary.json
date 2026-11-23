@@ -1,0 +1,77 @@
+{
+ "already_held_yes": 37,
+ "by_scope": {
+  "ACQ-01": 20,
+  "ACQ-02": 17,
+  "ACQ-03": 43,
+  "MML authentication": 8,
+  "WS-A cycle 3": 4,
+  "WS-B judgments": 55
+ },
+ "by_tier": {
+  "EXCLUDED": 1,
+  "T1": 1,
+  "T2": 27,
+  "T3": 22,
+  "T4": 8,
+  "T5": 31,
+  "T6": 12,
+  "T7": 45
+ },
+ "calibration_records_covered": 35,
+ "calibration_records_total": 46,
+ "calibration_records_without_candidate": [
+  "ADM-CL-02",
+  "ADM-CL-03",
+  "ADM-CL-07",
+  "CM-040",
+  "CM-JD-01",
+  "J-03",
+  "PEN-003",
+  "PEN-006",
+  "PEN-024",
+  "PEN-CL-06",
+  "PEN-WF-03"
+ ],
+ "config_branch_commits": {
+  "claude/acq-01-config": "1b948727eeb359da45886c208e6433c394d251ba",
+  "claude/acq-02-config": "b8ee3176cfbb587b0df10f8344f0665503a0de80",
+  "claude/acq-03-config": "60715342b3f002dc4c08778c3eef672abcd1226f",
+  "claude/desw-allowlist": "97933ccf4e7deb27715c18ea767eeec01cdcd802"
+ },
+ "config_label_mismatches": [
+  "ACQ-01:guide-medical-officers-mil-pensions-2023: schedule batch 'ACQ-01-B4 (not configured)' but a config branch lists the document",
+  "ACQ-01:rules-entitlement-2023: schedule batch 'ACQ-01-B4 (not configured)' but a config branch lists the document",
+  "ACQ03-029: schedule batch 'ACQ-03 B4 (archive_acq03 (PR #23, unmerged))' but the document is not listed in any config branch"
+ ],
+ "configured_yes": 72,
+ "folded_duplicates": {
+  "ACQ03-029": "ACQ-C3-01"
+ },
+ "integrity_pinned_yes": 72,
+ "legal_question_counts": {
+  "AQ-05": 28,
+  "AQ-06": 1,
+  "C-08": 4,
+  "C-09": 4,
+  "OQ-A-13": 2,
+  "r.15": 12,
+  "r.187(1)": 9,
+  "r.23(3)": 17,
+  "s.129": 4
+ },
+ "owner_approval_outstanding_yes": 146,
+ "raw_data_commit": "ad77758d4569ba6aafa955cc7843d874489e10f7",
+ "rows": 147,
+ "t2_gap_ids": [
+  "GAP-01",
+  "GAP-02",
+  "GAP-03",
+  "GAP-04",
+  "GAP-05",
+  "GAP-13",
+  "GAP-14",
+  "GAP-15"
+ ],
+ "with_calibration_records": 46
+}
