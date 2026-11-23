@@ -1,0 +1,104 @@
+{
+ "coverage_impact": {
+  "authentication_baseline": {
+   "authentication_pending_copies": 1,
+   "c4_register_by_state_and_class": {
+    "AUTHENTICATION_PENDING/AUTHENTICATION_PENDING": 1,
+    "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE": 4,
+    "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN": 1,
+    "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY": 7
+   },
+   "c4_register_rows": 13,
+   "copies_by_evidence_class": {
+    "AUTHENTICATION_PENDING_COPY": 1,
+    "DOCUMENTED_PRIMARY_COPY": 12,
+    "PROVENANCE_UNDOCUMENTED_COPY": 54
+   },
+   "copies_total": 67,
+   "documented_primary_copies": 12,
+   "sources_authentication_pending_only": 1,
+   "sources_with_documented_primary_copy": 12
+  },
+  "authentication_proposed": {
+   "authentication_pending_copies": 1,
+   "c4_register_by_state_and_class": {
+    "AUTHENTICATION_PENDING/AUTHENTICATION_PENDING": 1,
+    "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE": 4,
+    "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN": 1,
+    "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY": 7
+   },
+   "c4_register_rows": 13,
+   "copies_by_evidence_class": {
+    "AUTHENTICATION_PENDING_COPY": 1,
+    "DOCUMENTED_PRIMARY_COPY": 40,
+    "PROVENANCE_UNDOCUMENTED_COPY": 26
+   },
+   "copies_total": 67,
+   "documented_primary_copies": 40,
+   "sources_authentication_pending_only": 1,
+   "sources_with_documented_primary_copy": 40
+  },
+  "baseline": {
+   "crosswalk_case_rows_by_status": {
+    "EXACT_ANCHOR": 6,
+    "MISSING_EVIDENCE": 40,
+    "PARTIAL_MATCH": 7
+   },
+   "crosswalk_kb_items_by_status": {
+    "EXACT_ANCHOR": 42,
+    "MISSING_EVIDENCE": 366,
+    "PARTIAL_MATCH": 652
+   },
+   "kb_records_by_anchor_class": {
+    "ALL_EXACT": 10,
+    "NO_EXACT_ANCHOR": 618,
+    "SOME_EXACT": 30
+   }
+  },
+  "note": "c4_register_by_state_and_class counts the real Cycle 4 register rows only (13); simulated proposals are not counted in it",
+  "proposed": {
+   "crosswalk_case_rows_by_status": {
+    "EXACT_ANCHOR": 13,
+    "MISSING_EVIDENCE": 40
+   },
+   "crosswalk_kb_items_by_status": {
+    "EXACT_ANCHOR": 42,
+    "MISSING_EVIDENCE": 366,
+    "PARTIAL_MATCH": 652
+   },
+   "kb_records_by_anchor_class": {
+    "ALL_EXACT": 10,
+    "NO_EXACT_ANCHOR": 618,
+    "SOME_EXACT": 30
+   }
+  },
+  "rule": "Cycle 5 crosswalk rules unchanged; proposals simulated as register rows"
+ },
+ "denominators": {
+  "held_binary_paths_c5": 93,
+  "held_unique_binaries_c5": 67,
+  "scope_copies": 36,
+  "scope_sources": 34,
+  "undocumented_copies_c5": 54
+ },
+ "outcomes_by_copy": {
+  "PROVENANCE_DOCUMENTED": 32,
+  "PROVENANCE_PARTIALLY_DOCUMENTED": 4
+ },
+ "outcomes_by_source_type": {
+  "PROVENANCE_DOCUMENTED|court": 9,
+  "PROVENANCE_DOCUMENTED|publication": 23,
+  "PROVENANCE_PARTIALLY_DOCUMENTED|court": 1,
+  "PROVENANCE_PARTIALLY_DOCUMENTED|publication": 3
+ },
+ "proposals": 32,
+ "proposals_by_class": {
+  "NON_PRIMARY_OFFICIAL_COURT_RENDITION": 1,
+  "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY": 3,
+  "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE": 20,
+  "PRIMARY_OFFICIAL_COURT_COPY": 8
+ },
+ "proposals_by_status": {
+  "PROPOSED": 32
+ }
+}
