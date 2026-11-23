@@ -36,7 +36,7 @@
 3. Government text renderings.
 4. Secondary compilations and commentaries.
 
-Commencement needs the commencement notification itself. Publication is never commencement.
+Commencement is evidenced by the instrument's own commencement provision (which may state that it commences on publication) or by the commencement notification it requires. A publication date is never assumed to be the commencement date. This is an evidence rule for this corpus, not a statement of law (review RC-03).
 
 **Rules, orders and notifications (S.R.O. and S.O.)**
 1. The Gazette issue carrying the instrument.
@@ -47,8 +47,9 @@ Commencement needs the commencement notification itself. Publication is never co
 1. The signed judgment from the court's own portal: the `api.sci.gov.in` judgment PDF.
 2. The corrected or reportable version, where the court issues one. Record which version a pinpoint uses (Mullikote has two versions in one file).
 3. A court-system text rendition (JUDIS). Good evidence of identity; headnotes and editorial matter are not judgment text (P-D3 option (c)).
-4. Law-report renditions (SCR and others). A comparator only, after its own identity and provenance are recorded; it is never treated as a signed original.
-5. Third-party mirrors. They establish identity at most.
+4. Open-data bulk copies of court judgments, such as the AWS S3 buckets that supplied all 346 `data/raw/sci` and 3,605 `data/raw/hc` files. Provenance of the copy is documented, but the copy is not court-hosted or certified (review RC-03).
+5. Law-report renditions (SCR and others). A comparator only, after its own identity and provenance are recorded; it is never treated as a signed original.
+6. Third-party mirrors. They establish identity at most.
 
 **High Court and AFT judgments**
 1. The court's own portal copy.

@@ -1,0 +1,21 @@
+rank,acq_id,requirement,score,legal_consequence,dependent_records,dependent_records_level,source_quality_gap,no_authoritative_alternative,amendment_commencement_significance,acquisition_readiness,access_restriction_penalty,records_basis,route
+1,AQ-AR-POST2022,Army Rules amendments after 06-06-2022 (10 candidates),32,3,122,3,3,3,3,2,0,Army Rules chain dependents (C9 122),A-C5-1 + config PR (pins C5C-004..013)
+2,AQ-SANHITA-COMM,BNS/BNSS/BSA commencement notifications S.O. 850/848/849(E) of 2024,32,3,114,3,3,3,3,2,0,upper bound 114 (1 direct); commencement affects every provision,A-C5-1 + config PR (pins C5C-021..023)
+3,AQ-AA-SRO120,Army Act commencement S.R.O. 120/1950,31,3,185,3,3,3,3,1,0,upper bound 185 (0 direct); commencement affects every provision,PR #23 candidate ACQ03-019 (config + download approval)
+4,AQ-AA-GAZ,Army Act 1950 as enacted (Gazette Extraordinary 1950),28,3,185,3,2,3,2,2,0,C9 gross 185 KB records,A-C5-1 + new crawler-config PR (archive.org pin md5 68bcdd4e...)
+5,AQ-AFT-SO14E,AFT Act s.1(2) commencement S.O. 14(E)/2008,28,3,89,2,3,3,3,0,0,upper bound 89 (0 direct); commencement affects every provision,discovery approval (AP-C9-05); Indian-network egazette run
+6,AQ-PRA-2008,Pension Regulations for the Army 2008 Parts I and II,24,3,34,2,3,3,1,1,1,crosswalk 25 + 9 MISSING_EVIDENCE,A-C5-2 + allow-list beyond PR #9; robots 403 -> owner-side manual retrieval with sha256
+7,AQ-CCCM,CCCM (Adjustment of Jurisdiction) Rules 1978 and S.O. 4010/1986,24,2,8,1,3,3,2,3,0,crosswalk 8 MISSING_EVIDENCE,AP-C9-01: PR #8 approval + logged download run (scope already authorised)
+8,AQ-AR-1960-2010,Army Rules S.R.O. 331/348/351/404 of 1960 and S.R.O. 22/2010,24,2,10,1,3,3,3,1,0,"C9: AR-004 5, AR-032 5",locate exact Gazette issues; A-C5-1
+9,AQ-ER-2008-CIRC,Entitlement Rules 2008 and PRA/ER amending circulars,21,2,5,1,3,3,2,1,1,circulars 5,A-C5-2; robots 403
+10,AQ-TRA2026-COMM,TRA 2026 commencement notification(s),21,2,0,0,3,3,3,0,0,0 direct,discovery approval
+11,AQ-GMO-ER-2023,Guide to Medical Officers 2023 and complete Entitlement Rules 2023,20,3,14,1,2,3,1,1,1,GMO 11 + ER 3,A-C5-2; PR #9 needs integrity pin; robots 403
+12,AQ-SANHITA-GAZ-EN,BNS/BNSS/BSA English Gazette texts,20,2,125,3,1,2,1,2,0,BSA 64 + BNSS 49 + BNS 12 (Hindi Gazette text already held),A-C5-1 + config PR (pins C5C-018..020)
+13,AQ-AR-GAPS,E-7/1960 and S.R.O. 258/2002,20,2,0,0,3,3,3,0,1,C9: 0 direct,custodian request (A-C5-3) or Indian-network egazette
+14,AQ-AA-NOTIFS,"Army Act notifications (s.4, s.9 active service etc.)",19,2,0,0,3,3,2,0,0,0 direct,discovery (phase 6)
+15,AQ-AA-AMD-PR23,"ALO 1956, Ordinance 3/1975, Act 20/1983",19,1,18,1,3,3,2,1,0,ALO 18,PR #23 (config + download approval)
+16,AQ-ISO,Inter-Services Organisations Act 2023 and Rules 2025,17,2,4,0,3,3,1,0,0,crosswalk 4 MISSING_EVIDENCE,discovery
+17,AQ-AFT-PRAC-MAST,AFT Practice Rules 2009 Gazette masthead,16,1,43,2,1,2,2,1,0,AFT rules 43 (shared),PR #23 ACQ03-032
+18,AQ-SRO34-1963,1963 Part II-S4 issues (June-July) for S.R.O. 34,16,1,0,0,3,3,2,0,0,0 direct,discovery approval (AP-C9-05)
+19,AQ-RA-1987,Regulations for the Army 1987 complete,13,2,4,0,2,3,1,0,2,crosswalk 4 MISSING_EVIDENCE,custodian (A-C5-3); access-marking handling
+20,AQ-DPP-2000,DPP Amendment Act 2000,11,0,0,0,3,3,1,0,0,0,P-C7-02-META then A-C5-1

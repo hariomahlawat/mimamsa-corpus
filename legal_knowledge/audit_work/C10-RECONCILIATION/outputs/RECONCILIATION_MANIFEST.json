@@ -1,4 +1,10 @@
 {
+ "companion_files": {
+  "CORPUS_AUTHORITY_MATRIX.md": "a5a0aee710530ca5c0821baaa53f1371feaf08f93cbbdc3307711b9b4dbc3485",
+  "DATASET_INTEGRITY_ISSUES.csv": "fb36afb59192ab7ee1eaa1107f923a4db7589789b7047cbf113bc90e0ef7e4da",
+  "DATASET_INTEGRITY_NOTES.md": "62f64fa7f341bb304ed6d5e7b7a6183dcfa2d2ba18638e6c2029980506fd0abe",
+  "DATASET_INTEGRITY_SUMMARY.csv": "64c9b3dcb862b5609c07fe144465ec0aa83f48fd16e754392f5a24b94cdaf809"
+ },
  "github": {
   "c9_statutory_mapping_commit": "cfc52d5792796050dcae351afda5609f7db41a5f",
   "raw_data_commit": "ad77758d4569ba6aafa955cc7843d874489e10f7",
@@ -15,7 +21,7 @@
   "sha256sums_sha256": "53256e71e9adb37685a733915724c055adfe71453597701316acdb8c0c3db9dc"
  },
  "hf_snapshot_inputs": {
-  "CAPTURE.md": "6746cbb715690c8723182926ff31cf09ff254d226a79bde53bd0239f823f6e8c",
+  "CAPTURE.md": "69e0cc5f36b0cdb9be8659f004e8b82fab111bbbc262f9b715d893312468e2ad",
   "dir_totals.tsv": "23c4296906c2fbbdb68a11079a1efcb157af2eeb8b791cce6131e09af681e44a",
   "hf_commits_from_logs.tsv": "ebf5307b22c994a28eee05b01a3bfcf9b4f2d309826ad53a7e1108f62ad49392",
   "hf_manifest_samples.json": "4860e0b7ee8a222fde827ba3eb25d287d204e4c308aef2959aef5437f0de9eaa",
@@ -28,7 +34,7 @@
   "listing_legal_knowledge.tsv": "5e7a482df3c67ae082489ee0df44367369bd23f9f865ac9921efbece500837a5",
   "listing_other.tsv": "c7d27208c71c2ca4c79c691c546daab546cee62ac1a210ce31c97eecc5f1dcd9",
   "listing_sci.tsv": "8c744b08ebbcaf0f21c6c7c6b4f236e1e086fc49cac8553e77d1e0d921343185",
-  "lk_declared_sidecars.tsv": "750b8fbeb5d428dadd8f0812cc19202242f9f03d97520fca48d2003da4012acb",
+  "lk_declared_sidecars.tsv": "be154debd080243cf33417c36fa520e1fabbeebeb9e6d12942c7de3589e619d5",
   "upload_run_remote_verified.tsv": "247bb2e0e780a1af662a2b4e86cf6b7f6e2bd333f583becbc7296136bf13d3d0"
  },
  "huggingface": {
@@ -45,13 +51,13 @@
   "visibility": "private"
  },
  "outputs": {
-  "COPY_EQUIVALENCE_REGISTER.csv": "c50c69458c2133219e1ba541abc90f8f2e3a8a429428cea96a66ae28682ce7e1",
-  "CORPUS_RECONCILIATION_REPORT.md": "c7d087198d290c7386295af2cb4ec8c07391d624479d032ddeca479452b9f7d5",
+  "COPY_EQUIVALENCE_REGISTER.csv": "8840e10e8ebf940677bba5045e1283d6189c34474517db6ecb8f0210cbe9d725",
+  "CORPUS_RECONCILIATION_REPORT.md": "e22cfd7dc473b513766feb2e802e31e5f35a9a25ba2c3548bbccc603aa0c34a0",
   "MISSING_SOURCE_EVIDENCE.csv": "3aa947cb076431d40d27d6bc3e0d285f6304c36980d6043e2e41520bfbb95b21",
-  "REPOSITORY_RECONCILIATION.csv": "5df026778f5bd7b8cf63843248cee47e1da9ce5477246f7946695876c99c3ce5",
+  "REPOSITORY_RECONCILIATION.csv": "6596d59a14b9d87790c7deb7f39fc968bd6b91a7b08bd0c7e7d6e1afacdbf9a1",
   "SOURCE_IDENTITY_CONFLICTS.csv": "379bc1d79c09da85391130cbd2482a3e39270ae3515e78b0f4b1836d6deaa832",
-  "UNIFIED_CORPUS_INVENTORY.csv": "a89673dc2de9c2e12393a054bbc34d05a6d986d70f5ae7f0d7949d90584e772b",
-  "UNREGISTERED_HELD_SOURCES.csv": "0b3b6ddb5bdb54a9362f38b8ed9f74400a22f3ac0bfb6a0402f0f377197592a1"
+  "UNIFIED_CORPUS_INVENTORY.csv": "91519458af20c6bd849ccb8ab72d4dd32057fa0382738fa240055fe8a5b22e91",
+  "UNREGISTERED_HELD_SOURCES.csv": "3f6be222e5cd48962819d0ba31572fee0a23cf321cbe23128db75e57d68977d6"
  },
  "schema": "c10-reconciliation-manifest/1",
  "summary": {
@@ -83,8 +89,8 @@
   "equivalence": {
    "SAME_BYTES_SAME_DOCUMENT (CROSS_STORE_OR_MULTI_PATH)": 27,
    "SAME_BYTES_SAME_DOCUMENT (HF_GITHUB_MIRROR_SAME_PATH)": 4032,
-   "SAME_DOC_ID_DIFFERENT_BYTES_REQUIRES_IDENTITY_REVIEW": 8,
-   "SAME_LEGAL_DOCUMENT_DIFFERENT_BYTES": 3
+   "SAME_C5_SOURCE_ID_DIFFERENT_BYTES": 3,
+   "SAME_DOC_ID_DIFFERENT_BYTES_REQUIRES_IDENTITY_REVIEW": 13
   },
   "gh_raw_files": 4039,
   "gh_raw_rehash_match": 4039,

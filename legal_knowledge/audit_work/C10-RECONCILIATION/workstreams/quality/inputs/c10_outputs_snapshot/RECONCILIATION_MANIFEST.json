@@ -1,0 +1,116 @@
+{
+ "companion_files": {
+  "CORPUS_AUTHORITY_MATRIX.md": "a5a0aee710530ca5c0821baaa53f1371feaf08f93cbbdc3307711b9b4dbc3485",
+  "DATASET_INTEGRITY_ISSUES.csv": "fb36afb59192ab7ee1eaa1107f923a4db7589789b7047cbf113bc90e0ef7e4da",
+  "DATASET_INTEGRITY_NOTES.md": "62f64fa7f341bb304ed6d5e7b7a6183dcfa2d2ba18638e6c2029980506fd0abe",
+  "DATASET_INTEGRITY_SUMMARY.csv": "64c9b3dcb862b5609c07fe144465ec0aa83f48fd16e754392f5a24b94cdaf809"
+ },
+ "github": {
+  "c9_statutory_mapping_commit": "cfc52d5792796050dcae351afda5609f7db41a5f",
+  "raw_data_commit": "ad77758d4569ba6aafa955cc7843d874489e10f7",
+  "register_commit": "21e73b8348767d5f1524167fcec538e1aad6e732",
+  "register_paths": {
+   "copy_register": "legal_knowledge/audit_work/SOURCE-LIBRARY-C5/registers/source_copy_register.csv",
+   "crosswalk": "legal_knowledge/audit_work/SOURCE-LIBRARY-C5/registers/corpus_crosswalk.csv",
+   "held_manifest": "legal_knowledge/audit_work/SOURCE-LIBRARY-C5/baseline/held_binaries_manifest.csv",
+   "ledger_copy_facts": "legal_knowledge/audit_work/AUTH-LEDGER/evidence/copy_facts.csv",
+   "master_register": "legal_knowledge/audit_work/SOURCE-LIBRARY-C5/registers/source_master_register.csv",
+   "mml_manifest": "legal_knowledge/manual_sources/MML_Originals_Manifest.csv"
+  },
+  "repository": "hariomahlawat/mimamsa-corpus",
+  "sha256sums_sha256": "53256e71e9adb37685a733915724c055adfe71453597701316acdb8c0c3db9dc"
+ },
+ "hf_snapshot_inputs": {
+  "CAPTURE.md": "69e0cc5f36b0cdb9be8659f004e8b82fab111bbbc262f9b715d893312468e2ad",
+  "dir_totals.tsv": "23c4296906c2fbbdb68a11079a1efcb157af2eeb8b791cce6131e09af681e44a",
+  "hf_commits_from_logs.tsv": "ebf5307b22c994a28eee05b01a3bfcf9b4f2d309826ad53a7e1108f62ad49392",
+  "hf_manifest_samples.json": "4860e0b7ee8a222fde827ba3eb25d287d204e4c308aef2959aef5437f0de9eaa",
+  "hf_revision_evidence.json": "d10c1de52488d242a0fa29964624e1a0cda8507e255192d8cbfaf5ce569f05c0",
+  "listing_data_top.tsv": "abc60bc7514b1f8750c790c340e351cc46a9112f755aedd289fd70c996cd5f8b",
+  "listing_hc_2001_2023.tsv": "b37d9f8cfab8d17685873ba6a459126b3698d87d8c4b4da86276dd1967872dd0",
+  "listing_hc_2024_2026.tsv": "cea598843476cdaef4c9c1bd305cf851af89c434d39ae3ba823b85c5f6128cdb",
+  "listing_hc_2025.tsv": "48eab8ade0de9d168791044b8b484ead4a4ffcc01dfabf6bc296cc07d1e79731",
+  "listing_indiacode_official.tsv": "5d8d15207c2f6932046949f899fb6c22192ad3a39f3339ab4446dcec304ec630",
+  "listing_legal_knowledge.tsv": "5e7a482df3c67ae082489ee0df44367369bd23f9f865ac9921efbece500837a5",
+  "listing_other.tsv": "c7d27208c71c2ca4c79c691c546daab546cee62ac1a210ce31c97eecc5f1dcd9",
+  "listing_sci.tsv": "8c744b08ebbcaf0f21c6c7c6b4f236e1e086fc49cac8553e77d1e0d921343185",
+  "lk_declared_sidecars.tsv": "be154debd080243cf33417c36fa520e1fabbeebeb9e6d12942c7de3589e619d5",
+  "upload_run_remote_verified.tsv": "247bb2e0e780a1af662a2b4e86cf6b7f6e2bd333f583becbc7296136bf13d3d0"
+ },
+ "huggingface": {
+  "byte_level_verification": "NOT_CHECKED (no download access)",
+  "capture": "2026-11-24, read-only listing through the Hugging Face MCP connector (find/ls/stat/cat of small text files); per-directory listings transcribed into listing_*.tsv by helper agents and cross-checked against GitHub path and size (any transcription error would surface as a mismatch); counts for data/meta and data/text from the connector's 'showing N of M' totals",
+  "last_recorded_commit": {
+   "note": "latest of 119 distinct HF commits found in 64 successful sync-run logs (hf_commits_from_logs.tsv); the dataset card reports 'Updated 22 Nov 2026'. Not proven to be the current head.",
+   "sha": "e1a7fa472ba68b64ac0a79478a02916ff59ce202",
+   "source": "GitHub Actions job 137246139406 (run 45034830558) log line 'HF commit e1a7fa47...'",
+   "time": "2026-11-22T14:49:25Z"
+  },
+  "repository": "datasets/hariomahlawat/mimamsa-corpus",
+  "revision_pinned": "NO (the connector available to this audit exposes paths and sizes but no revision id; anonymous API returns 401 for this private dataset)",
+  "visibility": "private"
+ },
+ "outputs": {
+  "COPY_EQUIVALENCE_REGISTER.csv": "8840e10e8ebf940677bba5045e1283d6189c34474517db6ecb8f0210cbe9d725",
+  "CORPUS_RECONCILIATION_REPORT.md": "e22cfd7dc473b513766feb2e802e31e5f35a9a25ba2c3548bbccc603aa0c34a0",
+  "MISSING_SOURCE_EVIDENCE.csv": "3aa947cb076431d40d27d6bc3e0d285f6304c36980d6043e2e41520bfbb95b21",
+  "REPOSITORY_RECONCILIATION.csv": "6596d59a14b9d87790c7deb7f39fc968bd6b91a7b08bd0c7e7d6e1afacdbf9a1",
+  "SOURCE_IDENTITY_CONFLICTS.csv": "379bc1d79c09da85391130cbd2482a3e39270ae3515e78b0f4b1836d6deaa832",
+  "UNIFIED_CORPUS_INVENTORY.csv": "91519458af20c6bd849ccb8ab72d4dd32057fa0382738fa240055fe8a5b22e91",
+  "UNREGISTERED_HELD_SOURCES.csv": "3f6be222e5cd48962819d0ba31572fee0a23cf321cbe23128db75e57d68977d6"
+ },
+ "schema": "c10-reconciliation-manifest/1",
+ "summary": {
+  "bulk_unregistered_judgments": 3951,
+  "category": {
+   "COMPILATION": 1,
+   "GAZETTE_NOTIFICATION": 24,
+   "JUDICIAL": 14,
+   "PARLIAMENTARY_RECORD": 1,
+   "REGULATION": 1,
+   "STATUTE": 5,
+   "SUBORDINATE_LEGISLATION": 2,
+   "act": 20,
+   "act_amendment": 2,
+   "judgment": 3959,
+   "linked_records": 21,
+   "manual": 8,
+   "notification": 16,
+   "order": 1,
+   "reference": 3,
+   "regulation": 6,
+   "rule": 15,
+   "schedule": 4
+  },
+  "conflicts": {
+   "CRAWLER_CATEGORY_DOUBTFUL": 1
+  },
+  "distinct_copies": 4103,
+  "equivalence": {
+   "SAME_BYTES_SAME_DOCUMENT (CROSS_STORE_OR_MULTI_PATH)": 27,
+   "SAME_BYTES_SAME_DOCUMENT (HF_GITHUB_MIRROR_SAME_PATH)": 4032,
+   "SAME_C5_SOURCE_ID_DIFFERENT_BYTES": 3,
+   "SAME_DOC_ID_DIFFERENT_BYTES_REQUIRES_IDENTITY_REVIEW": 13
+  },
+  "gh_raw_files": 4039,
+  "gh_raw_rehash_match": 4039,
+  "hf_files_listed_total": 4221,
+  "hf_legal_knowledge_binaries": 16,
+  "hf_raw_files_listed": 4039,
+  "hf_raw_same_path_size": 4039,
+  "missing": {
+   "REGISTERED_COPY_BYTES_NOT_IN_CANONICAL_STORE": 48,
+   "SOURCE_NOT_HELD_IN_C5_REGISTER": 50
+  },
+  "presence": {
+   "C5_WORKING_STORE_ONLY_NOT_IN_HF_OR_GITHUB": 48,
+   "HF_AND_GITHUB_RAW_DATA": 4039,
+   "HF_ONLY": 16
+  },
+  "register_state": {
+   "REGISTERED": 67,
+   "UNREGISTERED_HELD": 4036
+  },
+  "unregistered_listed": 85
+ }
+}

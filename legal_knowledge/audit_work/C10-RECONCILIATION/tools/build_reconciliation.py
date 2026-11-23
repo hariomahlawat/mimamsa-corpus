@@ -153,7 +153,7 @@ def build(repo):
     try:
         stat = rcsv_bytes(g.show(C9_STAT_COMMIT, STAT_HOLDINGS))
     except subprocess.CalledProcessError:
-        stat = []
+        raise SystemExit(f"pinned C9 statutory mapping {C9_STAT_COMMIT[:8]}:{STAT_HOLDINGS} is not in this clone (fetch PR #41); refusing to build without it")
     copy_by_sha = defaultdict(list)
     for r in reg["copy_register"]:
         copy_by_sha[r["sha256"]].append(r)
@@ -199,7 +199,7 @@ def build(repo):
             elif sc:
                 h, lvl = sc["declared_sha256"], "HF_SIDECAR_DECLARED"
             elif mml:
-                h, lvl = mml["sha256"], "HF_SIDECAR_DECLARED"
+                h, lvl = mml["sha256"], "GITHUB_MML_MANIFEST_DECLARED"
             if sc and int(sc["declared_bytes"]) != s:
                 lvl += ";DECLARED_BYTES_DIFFER_FROM_LISTING"
             hf_lk_status[p] = (h, lvl, s)
@@ -226,7 +226,7 @@ def build(repo):
         st = stat_by_sha.get(h)
         cat = rm.get("category", "") or ("judgment" if any("/judgment" in p for p in lk_paths) else "") or (
             "manual" if mml else "") or (master[src_ids[0]]["publication_type"] if src_ids and src_ids[0] in master else "")
-        title = rm.get("title", "") or (sc and sc.get("declared_title", "")) or (mml and mml["filename"]) or (
+        title = rm.get("title", "") or (sc and sc.get("declared_case_name", "")) or (mml and mml["filename"]) or (
             master[src_ids[0]]["title"] if src_ids and src_ids[0] in master else "")
         in_hf = bool(L.get("hf_data_raw") or L.get("hf_legal_knowledge"))
         in_gh = bool(L.get("gh_raw_data"))
@@ -271,12 +271,13 @@ def build(repo):
             kb_exact_anchor_rows=kb_refs, kb_source_rows=kb_src_refs,
             c9_statutory_raw_store="YES" if st else "",
             authentication_state="NOT_AUTHENTICATED_BY_THIS_RECONCILIATION",
+            hf_snapshot="UNPINNED_LISTING_2026-11-24" if in_hf else "",
         ))
     inv_fields = ["sha256", "bytes", "format", "category", "title", "doc_id", "parent_doc_id", "source_url", "retrieved_at",
                   "presence", "hf_paths", "gh_raw_data_paths", "c5_working_store_paths", "gh_byte_verification",
                   "hf_byte_verification", "register_state", "registered_in", "c5_copy_ids", "c5_source_ids",
                   "c5_copy_evidence_class", "auth_ledger_copy_facts", "kb_exact_anchor_rows", "kb_source_rows",
-                  "c9_statutory_raw_store", "authentication_state"]
+                  "c9_statutory_raw_store", "authentication_state", "hf_snapshot"]
 
     # ---------------- REPOSITORY_RECONCILIATION (per tree segment)
     def seg(path):
@@ -314,7 +315,7 @@ def build(repo):
             hf_total, how = int(t["hf_total_files"]), t["how_obtained"]
         else:
             hf_total, how = listed, "full listing" if listed else ""
-        if k.startswith("data/raw"):
+        if k.startswith("data/raw/"):
             lvl = "GITHUB_REHASHED;HF_PATH_SIZE_DECLARED"
         elif listed:
             lvl = "PATH_SIZE_ONLY"
@@ -327,10 +328,10 @@ def build(repo):
                         hf_files_listed=listed, hf_bytes_listed=c["hf_bytes_listed"],
                         same_path_same_size=c["same_path_same_size"], same_path_size_differs=c["same_path_size_differs"],
                         hf_only=c["hf_only"], gh_not_in_hf_listing=c["gh_only_or_not_listed"] if listed else "NOT_COMPARED",
-                        verification_level=lvl))
+                        verification_level=lvl, hf_snapshot="UNPINNED_LISTING_2026-11-24" if listed or t else ""))
     rep_fields = ["segment", "gh_commit", "gh_files", "gh_bytes", "hf_total_files", "hf_total_how", "hf_files_listed",
                   "hf_bytes_listed", "same_path_same_size", "same_path_size_differs", "hf_only", "gh_not_in_hf_listing",
-                  "verification_level"]
+                  "verification_level", "hf_snapshot"]
 
     # ---------------- COPY_EQUIVALENCE_REGISTER
     eq = []
@@ -339,25 +340,31 @@ def build(repo):
         npaths = sum(len(set(loc[r["sha256"]].get(x, []))) for x in locs)
         if len(locs) > 1 or npaths > 1:
             mirror = set(locs) == {"hf_data_raw", "gh_raw_data"} and set(loc[r["sha256"]]["hf_data_raw"]) == set(loc[r["sha256"]]["gh_raw_data"])
+            has_hf = any(x.startswith("hf_") for x in locs)
+            hashed = [x for x in locs if not x.startswith("hf_")]
+            basis = ("SHA-256 re-hashed identical across " + ", ".join(hashed) if len(hashed) > 1 or npaths > len(locs) else
+                     "SHA-256 re-hashed for " + ", ".join(hashed) if hashed else "declared SHA-256 only")
+            if has_hf:
+                basis += "; HF copy: same path and size with the HF-declared SHA-256, HF bytes NOT_CHECKED (review RC-01)"
             eq.append(dict(group_id=f"SB-{r['sha256'][:12]}", classification="SAME_BYTES_SAME_DOCUMENT",
                            kind="HF_GITHUB_MIRROR_SAME_PATH" if mirror else "CROSS_STORE_OR_MULTI_PATH",
-                           basis="identical SHA-256 (byte identity only; not authenticity or legal status)",
+                           basis=basis + " (byte identity only; not authenticity or legal status)",
                            sha256s=r["sha256"], locations=";".join(locs), copies=npaths, identity=r["title"],
-                           c5_source_ids=r["c5_source_ids"], review="NONE_NEEDED_FOR_IDENTITY"))
+                           c5_source_ids=r["c5_source_ids"], review="HF_BYTES_NOT_CHECKED" if has_hf else "NONE_NEEDED_FOR_IDENTITY"))
     by_source = defaultdict(set)
     for c in reg["copy_register"]:
         by_source[c["source_id"]].add(c["sha256"])
     for s, hs in sorted(by_source.items()):
         if len(hs) > 1:
             roles = sorted({c["copy_role"] for c in reg["copy_register"] if c["source_id"] == s})
-            eq.append(dict(group_id=f"SD-{s}", classification="SAME_LEGAL_DOCUMENT_DIFFERENT_BYTES",
+            eq.append(dict(group_id=f"SD-{s}", classification="SAME_C5_SOURCE_ID_DIFFERENT_BYTES",
                            basis=f"one C5 source_id, {len(hs)} distinct copies (copy roles: {', '.join(roles)})",
                            sha256s=";".join(sorted(hs)), locations="", copies=len(hs), identity=master.get(s, {}).get("title", ""),
-                           c5_source_ids=s, review="RENDITION_OR_EDITION_REVIEW (see copy_role / page_equivalent_to)"))
+                           c5_source_ids=s, review="RENDITION_LANGUAGE_OR_EDITION_REVIEW: a shared C5 source id does not prove the same legal text (see copy_role; review RC-06)"))
     by_doc = defaultdict(set)
     for p, r in raw_manifest.items():
         key = r.get("doc_id") or r.get("parent_doc_id")
-        if key and r.get("category") not in ("judgment",):
+        if key:
             by_doc[key].add(r["sha256"])
     for d, hs in sorted(by_doc.items()):
         if len(hs) > 1:
@@ -486,7 +493,9 @@ def build(repo):
                          revision_pinned=rev.get("revision_pinned"), last_recorded_commit=rev.get("last_recorded_commit"),
                          capture=rev.get("capture"), byte_level_verification="NOT_CHECKED (no download access)"),
         hf_snapshot_inputs=in_hashes, summary=summary,
-        outputs={k: hashlib.sha256(v.encode()).hexdigest() for k, v in sorted(out.items())})
+        outputs={k: hashlib.sha256(v.encode()).hexdigest() for k, v in sorted(out.items())},
+        companion_files={p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(OUT.glob("*"))
+                         if p.is_file() and p.name not in out and p.name != "RECONCILIATION_MANIFEST.json"})
     out["RECONCILIATION_MANIFEST.json"] = json.dumps(manifest, indent=1, sort_keys=True) + "\n"
     return out
 
@@ -520,10 +529,10 @@ def report_md(s, rev, samples, rep, listing_files):
     L += [f"| missing: {k} | {v} |" for k, v in s["missing"].items()]
     L += [f"| unregistered held copies listed individually | {s['unregistered_listed']} |",
           f"| crawler judgment copies not in the C5 register (summarised) | {s['bulk_unregistered_judgments']} |", "",
-          "## Repository segments", "", "| Segment | GitHub files | HF files (total) | HF how | same path+size | HF only | level |",
-          "| --- | --- | --- | --- | --- | --- | --- |"]
+          "## Repository segments", "", "| Segment | GitHub files | HF files (total) | HF how | same path+size | size differs | HF only | level |",
+          "| --- | --- | --- | --- | --- | --- | --- | --- |"]
     L += [f"| {r['segment']} | {r['gh_files']} | {r['hf_total_files']} | {r['hf_total_how']} | {r['same_path_same_size']} | "
-          f"{r['hf_only']} | {r['verification_level']} |" for r in rep]
+          f"{r['same_path_size_differs']} | {r['hf_only']} | {r['verification_level']} |" for r in rep]
     return "\n".join(L) + "\n"
 
 

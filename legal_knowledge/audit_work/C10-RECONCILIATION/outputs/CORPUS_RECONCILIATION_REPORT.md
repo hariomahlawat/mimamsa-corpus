@@ -56,8 +56,8 @@ Total distinct copies: 4103.
 | --- | --- |
 | equivalence: SAME_BYTES_SAME_DOCUMENT (CROSS_STORE_OR_MULTI_PATH) | 27 |
 | equivalence: SAME_BYTES_SAME_DOCUMENT (HF_GITHUB_MIRROR_SAME_PATH) | 4032 |
-| equivalence: SAME_DOC_ID_DIFFERENT_BYTES_REQUIRES_IDENTITY_REVIEW | 8 |
-| equivalence: SAME_LEGAL_DOCUMENT_DIFFERENT_BYTES | 3 |
+| equivalence: SAME_C5_SOURCE_ID_DIFFERENT_BYTES | 3 |
+| equivalence: SAME_DOC_ID_DIFFERENT_BYTES_REQUIRES_IDENTITY_REVIEW | 13 |
 | conflict: CRAWLER_CATEGORY_DOUBTFUL | 1 |
 | missing: REGISTERED_COPY_BYTES_NOT_IN_CANONICAL_STORE | 48 |
 | missing: SOURCE_NOT_HELD_IN_C5_REGISTER | 50 |
@@ -66,49 +66,49 @@ Total distinct copies: 4103.
 
 ## Repository segments
 
-| Segment | GitHub files | HF files (total) | HF how | same path+size | HF only | level |
-| --- | --- | --- | --- | --- | --- | --- |
-| .gitattributes | 0 | 1 | full listing | 0 | 1 | PATH_SIZE_ONLY |
-| README.md | 0 | 1 | full listing | 0 | 1 | PATH_SIZE_ONLY |
-| data/SHA256SUMS | 1 | 1 | full listing | 1 | 0 | PATH_SIZE_ONLY |
-| data/correspondence | 3 | 3 | full listing | 3 | 0 | PATH_SIZE_ONLY |
-| data/excluded_judgments.jsonl | 1 | 1 | full listing | 1 | 0 | PATH_SIZE_ONLY |
-| data/manifest.csv | 1 | 1 | full listing | 1 | 0 | PATH_SIZE_ONLY |
-| data/meta | 4327 | 4327 | showing 712 of 4327 | 0 | 0 | COUNT_ONLY |
-| data/raw/hc | 3605 | 3605 | full listing | 3605 | 0 | GITHUB_REHASHED;HF_PATH_SIZE_DECLARED |
-| data/raw/indiacode | 84 | 84 | full listing | 84 | 0 | GITHUB_REHASHED;HF_PATH_SIZE_DECLARED |
-| data/raw/official_copies | 4 | 4 | full listing | 4 | 0 | GITHUB_REHASHED;HF_PATH_SIZE_DECLARED |
-| data/raw/sci | 346 | 346 | full listing | 346 | 0 | GITHUB_REHASHED;HF_PATH_SIZE_DECLARED |
-| data/raw_manifest.csv | 1 | 1 | full listing | 0 | 0 | GITHUB_REHASHED;HF_PATH_SIZE_DECLARED |
-| data/relations.jsonl | 1 | 1 | full listing | 1 | 0 | PATH_SIZE_ONLY |
-| data/sections/act-air-force-1950 | 195 | 195 | full listing (manual count of untruncated output) | 0 | 0 | COUNT_ONLY |
-| data/sections/act-armed-forces-tribunal-2007 | 44 | 44 | full listing (manual count of untruncated output) | 0 | 0 | COUNT_ONLY |
-| data/sections/act-army-1950 | 198 | 198 | full listing (manual count of untruncated output) | 0 | 0 | COUNT_ONLY |
-| data/sections/act-army-af-disposal-private-property-1950 | 17 | 17 | full listing (manual count of untruncated output) | 0 | 0 | COUNT_ONLY |
-| data/sections/act-bns-2023 | 358 | 358 | full listing | 0 | 0 | COUNT_ONLY |
-| data/sections/act-bnss-2023 | 531 | 531 | full listing | 0 | 0 | COUNT_ONLY |
-| data/sections/act-bsa-2023 | 170 | 170 | full listing | 0 | 0 | COUNT_ONLY |
-| data/sections/act-crpc-1973 | 532 | 532 | showing 8 of 532 | 0 | 0 | COUNT_ONLY |
-| data/sections/act-evidence-1872 | 185 | 185 | full listing | 0 | 0 | COUNT_ONLY |
-| data/sections/act-ipc-1860 | 574 | 574 | full listing | 0 | 0 | COUNT_ONLY |
-| data/sections/act-navy-1957 | 194 | 194 | full listing | 0 | 0 | COUNT_ONLY |
-| data/text | 4318 | 4318 | showing 710 of 4318 | 0 | 0 | COUNT_ONLY |
-| legal_knowledge/DATA_AUTHORITY.md | 1 | 1 | full listing | 1 | 0 | PATH_SIZE_ONLY |
-| legal_knowledge/README.md | 1 | 1 | full listing | 1 | 0 | PATH_SIZE_ONLY |
-| legal_knowledge/crosswalk | 0 | 14 | full listing | 0 | 14 | PATH_SIZE_ONLY |
-| legal_knowledge/curated_originals | 2 | 2 | full listing | 2 | 0 | PATH_SIZE_ONLY |
-| legal_knowledge/full_text_working | 0 | 12 | full listing | 0 | 12 | PATH_SIZE_ONLY |
-| legal_knowledge/gazette_discovery | 0 | 1 | full listing | 0 | 1 | PATH_SIZE_ONLY |
-| legal_knowledge/holding_review | 0 | 9 | full listing | 0 | 9 | PATH_SIZE_ONLY |
-| legal_knowledge/judgment_originals | 0 | 13 | full listing | 0 | 13 | PATH_SIZE_ONLY |
-| legal_knowledge/judgment_sources | 0 | 2 | full listing | 0 | 2 | PATH_SIZE_ONLY |
-| legal_knowledge/judicial_treatment | 2 | 6 | full listing | 2 | 4 | PATH_SIZE_ONLY |
-| legal_knowledge/legal_review | 17 | 17 | full listing | 17 | 0 | PATH_SIZE_ONLY |
-| legal_knowledge/manual_sources | 3 | 11 | full listing | 3 | 8 | PATH_SIZE_ONLY |
-| legal_knowledge/quality_audit | 0 | 9 | full listing | 0 | 9 | PATH_SIZE_ONLY |
-| legal_knowledge/reconciliation | 8 | 8 | full listing | 8 | 0 | PATH_SIZE_ONLY |
-| legal_knowledge/reference_data | 0 | 4 | full listing | 0 | 4 | PATH_SIZE_ONLY |
-| legal_knowledge/source_acquisition | 0 | 1 | full listing | 0 | 1 | PATH_SIZE_ONLY |
-| legal_knowledge/verification_batches | 55 | 55 | full listing | 55 | 0 | PATH_SIZE_ONLY |
-| reports | 0 | 2 | full listing | 0 | 2 | PATH_SIZE_ONLY |
-| schema | 4 | 4 | full listing | 4 | 0 | PATH_SIZE_ONLY |
+| Segment | GitHub files | HF files (total) | HF how | same path+size | size differs | HF only | level |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| .gitattributes | 0 | 1 | full listing | 0 | 0 | 1 | PATH_SIZE_ONLY |
+| README.md | 0 | 1 | full listing | 0 | 0 | 1 | PATH_SIZE_ONLY |
+| data/SHA256SUMS | 1 | 1 | full listing | 1 | 0 | 0 | PATH_SIZE_ONLY |
+| data/correspondence | 3 | 3 | full listing | 3 | 0 | 0 | PATH_SIZE_ONLY |
+| data/excluded_judgments.jsonl | 1 | 1 | full listing | 1 | 0 | 0 | PATH_SIZE_ONLY |
+| data/manifest.csv | 1 | 1 | full listing | 1 | 0 | 0 | PATH_SIZE_ONLY |
+| data/meta | 4327 | 4327 | showing 712 of 4327 | 0 | 0 | 0 | COUNT_ONLY |
+| data/raw/hc | 3605 | 3605 | full listing | 3605 | 0 | 0 | GITHUB_REHASHED;HF_PATH_SIZE_DECLARED |
+| data/raw/indiacode | 84 | 84 | full listing | 84 | 0 | 0 | GITHUB_REHASHED;HF_PATH_SIZE_DECLARED |
+| data/raw/official_copies | 4 | 4 | full listing | 4 | 0 | 0 | GITHUB_REHASHED;HF_PATH_SIZE_DECLARED |
+| data/raw/sci | 346 | 346 | full listing | 346 | 0 | 0 | GITHUB_REHASHED;HF_PATH_SIZE_DECLARED |
+| data/raw_manifest.csv | 1 | 1 | full listing | 0 | 1 | 0 | PATH_SIZE_ONLY |
+| data/relations.jsonl | 1 | 1 | full listing | 1 | 0 | 0 | PATH_SIZE_ONLY |
+| data/sections/act-air-force-1950 | 195 | 195 | full listing (manual count of untruncated output) | 0 | 0 | 0 | COUNT_ONLY |
+| data/sections/act-armed-forces-tribunal-2007 | 44 | 44 | full listing (manual count of untruncated output) | 0 | 0 | 0 | COUNT_ONLY |
+| data/sections/act-army-1950 | 198 | 198 | full listing (manual count of untruncated output) | 0 | 0 | 0 | COUNT_ONLY |
+| data/sections/act-army-af-disposal-private-property-1950 | 17 | 17 | full listing (manual count of untruncated output) | 0 | 0 | 0 | COUNT_ONLY |
+| data/sections/act-bns-2023 | 358 | 358 | full listing | 0 | 0 | 0 | COUNT_ONLY |
+| data/sections/act-bnss-2023 | 531 | 531 | full listing | 0 | 0 | 0 | COUNT_ONLY |
+| data/sections/act-bsa-2023 | 170 | 170 | full listing | 0 | 0 | 0 | COUNT_ONLY |
+| data/sections/act-crpc-1973 | 532 | 532 | showing 8 of 532 | 0 | 0 | 0 | COUNT_ONLY |
+| data/sections/act-evidence-1872 | 185 | 185 | full listing | 0 | 0 | 0 | COUNT_ONLY |
+| data/sections/act-ipc-1860 | 574 | 574 | full listing | 0 | 0 | 0 | COUNT_ONLY |
+| data/sections/act-navy-1957 | 194 | 194 | full listing | 0 | 0 | 0 | COUNT_ONLY |
+| data/text | 4318 | 4318 | showing 710 of 4318 | 0 | 0 | 0 | COUNT_ONLY |
+| legal_knowledge/DATA_AUTHORITY.md | 1 | 1 | full listing | 1 | 0 | 0 | PATH_SIZE_ONLY |
+| legal_knowledge/README.md | 1 | 1 | full listing | 1 | 0 | 0 | PATH_SIZE_ONLY |
+| legal_knowledge/crosswalk | 0 | 14 | full listing | 0 | 0 | 14 | PATH_SIZE_ONLY |
+| legal_knowledge/curated_originals | 2 | 2 | full listing | 2 | 0 | 0 | PATH_SIZE_ONLY |
+| legal_knowledge/full_text_working | 0 | 12 | full listing | 0 | 0 | 12 | PATH_SIZE_ONLY |
+| legal_knowledge/gazette_discovery | 0 | 1 | full listing | 0 | 0 | 1 | PATH_SIZE_ONLY |
+| legal_knowledge/holding_review | 0 | 9 | full listing | 0 | 0 | 9 | PATH_SIZE_ONLY |
+| legal_knowledge/judgment_originals | 0 | 13 | full listing | 0 | 0 | 13 | PATH_SIZE_ONLY |
+| legal_knowledge/judgment_sources | 0 | 2 | full listing | 0 | 0 | 2 | PATH_SIZE_ONLY |
+| legal_knowledge/judicial_treatment | 2 | 6 | full listing | 2 | 0 | 4 | PATH_SIZE_ONLY |
+| legal_knowledge/legal_review | 17 | 17 | full listing | 17 | 0 | 0 | PATH_SIZE_ONLY |
+| legal_knowledge/manual_sources | 3 | 11 | full listing | 3 | 0 | 8 | PATH_SIZE_ONLY |
+| legal_knowledge/quality_audit | 0 | 9 | full listing | 0 | 0 | 9 | PATH_SIZE_ONLY |
+| legal_knowledge/reconciliation | 8 | 8 | full listing | 8 | 0 | 0 | PATH_SIZE_ONLY |
+| legal_knowledge/reference_data | 0 | 4 | full listing | 0 | 0 | 4 | PATH_SIZE_ONLY |
+| legal_knowledge/source_acquisition | 0 | 1 | full listing | 0 | 0 | 1 | PATH_SIZE_ONLY |
+| legal_knowledge/verification_batches | 55 | 55 | full listing | 55 | 0 | 0 | PATH_SIZE_ONLY |
+| reports | 0 | 2 | full listing | 0 | 0 | 2 | PATH_SIZE_ONLY |
+| schema | 4 | 4 | full listing | 4 | 0 | 0 | PATH_SIZE_ONLY |
