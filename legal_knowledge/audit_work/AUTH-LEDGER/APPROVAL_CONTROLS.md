@@ -61,10 +61,15 @@ Further rules:
 - replace refs, grafts and the commit-graph;
 - nested repositories, with the repository top pinned from the logical package path;
 - a symlinked package or a symlinked parent directory, on disk or committed as mode 120000, which fails closed before any ledger file is read (Cycle 8, closing Fable C-02);
-- forged commit objects for the merge, the reviewed head and both parents, which are re-hashed from their stored bytes (Cycle 8, closing C-04);
+- forged commit, tree or blob objects on every path the verdict reads (the merge, the reviewed head, both parents and every tree and blob below them), all re-hashed from their stored bytes (Cycle 8, closing C-04 and review F-02 of be861ec0);
 - the inherited environment.
 
-An auditor should still verify from a fresh clone or bundle, not from a working copy supplied by the party being audited.
+Every tree and blob along each path the verdict reads is re-hashed, as well as the four commit objects.
+
+An auditor should still:
+- verify from a fresh `git clone --no-local` or a bundle clone, not from a working copy supplied by the party being audited (a plain local-path clone shares or hard-links objects);
+- confirm by hand that `legal_knowledge/audit_work/AUTH-LEDGER` and its parent directories are real directories;
+- run the command-line tool by its repository path from outside the package. If the working directory is already inside a symlink target and the script is named relatively, the operating system reports the resolved path, and the link cannot be seen (stated residual).
 
 ## Owner decisions needed (nothing here is adopted)
 - **O-1 Owner signature.** Optionally require an owner signature over each BIND line, checked against a public key supplied out of band. Options are SSH (`ssh-keygen -Y verify`) or OpenPGP.

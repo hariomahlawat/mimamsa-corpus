@@ -7,11 +7,11 @@ crosswalk and the row builders on those statuses. The frozen Cycle 5 builder is 
 and its build() is never called. Source holding states are derived by the explicit transition table in
 derive_holding(); no source-status register is kept by hand. With zero entries the outputs are byte-identical to the
 frozen Cycle 5 registers (tested)."""
-import json, sys
+import json, sys, os
 from collections import Counter, defaultdict
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # not resolved: keeps a symlinked path detectable (C8)
 from common import AW, PKG, LedgerError, csv_text, read_csv  # noqa: E402
 import ledger as L  # noqa: E402
 import pins  # noqa: E402

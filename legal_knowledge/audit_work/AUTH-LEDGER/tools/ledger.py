@@ -14,10 +14,10 @@ stop a repository writer from re-deriving the whole chain. Detection of that res
 HEAD is pinned in the test suite as well as in ledger/HEAD (a two-place change visible in review), and every version is
 added by a reviewed PR. There are no cryptographic signatures; authority is the reviewed merge, and since AUTH-LEDGER-02 an
 approved version is effective only after a BIND line whose git facts tools/binding.py verifies offline (APPROVAL_CONTROLS.md)."""
-import json, posixpath, re, sys
+import json, posixpath, re, sys, os
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # not resolved: keeps a symlinked path detectable (C8)
 from common import LOGICAL_PKG, PKG, LedgerError, read_csv, sha256_file, sha256_text  # noqa: E402
 import rules_v1  # noqa: E402
 import strength  # noqa: E402
@@ -462,7 +462,7 @@ def apply_ledger(root, ctx, as_of=None, require_binding=True):
     manifest line is a BIND line that binding.verify() accepts against local git history. Only the last line may be an
     unbound entry version. require_binding=False is the AUTH-LEDGER-01 semantics, kept for synthetic evidence-rule tests."""
     import copy as _copy
-    committed = check_committed_layout(root)  # a symlinked package is never read as the authoritative ledger (C8, C-02)
+    committed = is_committed_package(root)  # the layout check itself runs before any read, in reader / auth_ledger.verify
     lines = read_manifest(root)
     as_of = len(lines) - 1 if as_of is None else as_of
     if not 0 <= as_of < len(lines):

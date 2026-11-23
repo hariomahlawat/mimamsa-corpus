@@ -19,3 +19,15 @@ A mutation run on the 8 new controls killed all 8.
 - CI still checks out depth 1 until the separate full-history PR is approved (O-3).
 - Verification trusts the local object store beyond the mechanisms checked; audit from a fresh clone or bundle.
 - Legal or JAG approval is outside the ledger.
+
+## Round 2: corrections after the Fable review of be861ec0 (REJECT); see `review/DISPOSITIONS_be861ec0.md`
+- **C-02 at the production entry point.** The tools no longer resolve their own directory, and the command-line tool pins the committed package to the invoked script path. Real-CLI subprocess tests through a committed package symlink and through a symlinked parent are rejected.
+- **Forged trees and blobs.** Every tree and blob on each path the binding verdict reads is re-hashed (`binding._read_verified`).
+- **Fail-closed committed layout.** A missing HEAD, a component absent from HEAD, a top mismatch, or a gitlink is rejected.
+- **Bundle clone** reproducibility is tested.
+- **Documentation:** the manual auditor instruction is restored, and the O-5 gaps are corrected.
+
+**Revised residuals:**
+- If the working directory is inside a symlink target and the script is named relatively, the link cannot be seen.
+- Objects that the verdict never reads are not hashed. Audit from a `--no-local` or bundle clone, and optionally run `git fsck`.
+- Owner identity (O-1, O-4) and branch protection (O-2) are unchanged.

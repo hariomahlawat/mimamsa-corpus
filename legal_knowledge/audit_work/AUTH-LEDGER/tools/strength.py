@@ -8,10 +8,10 @@ FULL locator (the only strength an ADD/CORRECTION may rely on), from the entry's
   DL   a PILOT-01 discovery-register row whose downloaded_sha256 equals the key, with a URL (identifier-only -> IDENTIFIER_SHA, rejected)
   ARC  an ACQ-02 supplement row whose sha256 equals the key, with archive size, md5 and sha1 all OK
 Anything else (snapshot entries, sha256 mentioned inside another record, md5-only rows) is not first-class."""
-import json, re, sys
+import json, re, sys, os
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # not resolved: keeps a symlinked path detectable (C8)
 from common import AW, PKG, LedgerError, read_csv  # noqa: E402
 import urlcheck  # noqa: E402
 
