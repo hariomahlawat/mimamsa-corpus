@@ -88,20 +88,20 @@ Yours faithfully,
 
 ---
 
-## CR-04: Army Order 45/2001 and Army Order 13/2006/PS
+## CR-04: Army Order 45/2001 and Army Order 13/2006/PS (the latter an UNVERIFIED reference)
 
 **DRAFT — NO CORRESPONDENCE AUTHORISED.** Not sent. Not to be sent without owner approval of scope (P-C6-04-SCOPE), of the request text and of access-marking handling (A-C5-3). Placeholders in [brackets]; no personal details are included.
 
 - **To:** [Custodian: Army HQ (AG's Branch)]
 - **From:** [project owner / authorised signatory]
 - **Request ids:** AO-45-2001; AO-13-2006-PS
-- **Subject:** Request for an authorised copy: Army Order 45/2001 and Army Order 13/2006/PS
+- **Subject:** Request for an authorised copy: Army Order 45/2001 and Army Order 13/2006/PS (the latter an UNVERIFIED reference)
 
 Dear [title],
 
 The [project name] research project is compiling a record of publicly published military-law instruments for an offline reference system. We respectfully request:
 
-1. confirmation of existence and publication status of each order;
+1. confirmation of existence and publication status of each order. Army Order 13/2006/PS is known to the project only as a reported reference in an unopened third-party listing of the D&V handbook (C6-PREP DV-SOH-2014-R4, UNVERIFIED_EXTRACTION_CANDIDATE); its number, year and existence are unverified;
 2. if publicly releasable, an authorised copy with its access marking; if not, a statement to that effect (no restricted material is requested).
 
 Handling: any copy supplied will be kept in a private store; printed access markings will be recorded and respected; restricted material will not be placed in any public store, and no third-party copy will be relied on.
@@ -142,14 +142,14 @@ Yours faithfully,
 
 ---
 
-## CR-06: Criminal Courts and Court-martial (Adjustment of Jurisdiction) Rules 1978 and Amendment Rules 1986 (S.O. 4010 of 06-12-1986)
+## CR-06: Criminal Courts and Court-martial (Adjustment of Jurisdiction) Rules 1978 and Amendment Rules 1986 (S.O. 4010 of 1986; date as printed to be confirmed: 24-11-1986 per ACQ-01/PILOT-01, 6 December 1986 per the C5 master title)
 
 **DRAFT — NO CORRESPONDENCE AUTHORISED.** Not sent. Not to be sent without owner approval of scope (P-C6-04-SCOPE), of the request text and of access-marking handling (A-C5-3). Placeholders in [brackets]; no personal details are included.
 
 - **To:** [Custodian: Ministry of Home Affairs / Gazette publication authority]
 - **From:** [project owner / authorised signatory]
 - **Request ids:** (C8-D; C5-SRC-P1-CCCM-ADJ-RULES)
-- **Subject:** Request for an authorised copy: Criminal Courts and Court-martial (Adjustment of Jurisdiction) Rules 1978 and Amendment Rules 1986 (S.O. 4010 of 06-12-1986)
+- **Subject:** Request for an authorised copy: Criminal Courts and Court-martial (Adjustment of Jurisdiction) Rules 1978 and Amendment Rules 1986 (S.O. 4010 of 1986; date as printed to be confirmed: 24-11-1986 per ACQ-01/PILOT-01, 6 December 1986 per the C5 master title)
 
 Dear [title],
 

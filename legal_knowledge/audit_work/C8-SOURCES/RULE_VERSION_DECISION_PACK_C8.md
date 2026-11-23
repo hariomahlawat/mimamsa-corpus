@@ -2,7 +2,13 @@
 
 **Status.** Nothing here is implemented or adopted. Rule version 1 remains the only rule and stays reproducible. Any eligibility-changing rule needs owner approval, then a separately reviewed rule-version-2 PR with `--as-of` diffs. Agreement between agents is not a reason to adopt anything.
 
-This pack updates `AUTH-LEDGER/RULE_DECISION_PACK.md` (Cycle 7) with evidence from Cycle 8 (`C8-EVIDENCE/`). Counts refer to the 32 C6-01 drafts unless stated.
+This pack updates `AUTH-LEDGER/RULE_DECISION_PACK.md` (Cycle 7) with evidence from Cycle 8. Counts refer to the 32 C6-01 drafts unless stated.
+
+**Where the evidence is (Fable RC-06).** The Cycle 8 evidence lives in separate draft PRs, which are reviewed separately and not merged:
+- `legal_knowledge/audit_work/C8-EVIDENCE/` is on branch `claude/c8-evidence-verification` (PR B). It holds the page checks, the born-digital signature results and the exact-anchor simulation.
+- `AUTH-LEDGER/DEMOTION_SEMANTICS_O5.md` is on branch `claude/c8-security-closeout` (PR A).
+
+The facts this pack relies on are restated below with their source files, so the pack can be read on its own. A decision on any item that depends on them should wait until PR B, or PR A for O-5, has passed its review.
 
 ## A3: retrieval provenance and content identity treated separately
 - **Current rule 1:** a retrieval record is first-class unless it is disclaimed, NOT_FOUND or CONFLICTING. SOURCE_LOCATED and SOURCE_VERIFIED count the same.
@@ -42,7 +48,7 @@ This pack updates `AUTH-LEDGER/RULE_DECISION_PACK.md` (Cycle 7) with evidence fr
 - **False-positive risk:** low, since equivalence-preserving rules only. **False-negative risk:** reduced.
 - **Reproducibility:** rule 2, with the alias table as a pinned input.
 - **Tests:** each safe normalisation; each unsafe one is not applied; an alias needs a decision reference.
-- **Recommendation:** adopt C2 with the archive.org item alias. Add a court-path alias only on evidence that both paths serve identical bytes.
+- **Recommendation:** adopt C2 with the archive.org item alias. The alias is **item identity plus hash agreement**, not URL equivalence, as the Fable review noted. Add a court-path alias only on evidence that both paths serve identical bytes.
 
 ## Copy-fidelity classification (POLICY_OPTIONS D): Cycle 8 refinement
 - **Current rule 1:** a born-digital file whose signature byte range spans the file is primary, provisionally. Rule 1 never checks the signature value.
@@ -58,22 +64,29 @@ This pack updates `AUTH-LEDGER/RULE_DECISION_PACK.md` (Cycle 7) with evidence fr
 - **Records affected:** T1-20 (`138c1da0`) would become ineligible for a primary class. T1-19 (`7c12a7ec`) is unchanged.
 - **False-positive risk:** removed for T1-20. **False-negative risk:** a genuine document with a defective signature waits for another copy.
 - **Reproducibility:** rule 2. Signature checks need `openssl` or the Python `cryptography` package, both already present. Results must be pinned as evidence, not recomputed silently.
-- **Tests:** an integrity-OK file is accepted; a failing signature is rejected; a file with no signature follows the scanned-facsimile route.
+- **Tests:** an integrity-OK file is accepted; a failing signature is rejected; a scanned facsimile is unchanged. An **unsigned born-digital or text-layer file**, such as S.R.O. 6(E)/2022, needs its own class, not the scanned-facsimile route (Fable review, task 8).
 - **Recommendation:** adopt the split (P-D2a). Until then, the preparer recommends that the owner not approve T1-20.
 
 ## JUDIS court-copy treatment (P-D3)
 - **Current rule 1:** a JUDIS text rendition on a court host with a court carrier can be `PRIMARY_OFFICIAL_COURT_COPY`.
-- **Evidence (C8):** Ranjit Thakur, S N Mukherjee and Navjot are Ghostscript 7.05 text renditions with a JUDIS header and watermark and no signature or date block.
+- **This already happened at baseline (Fable RC-03).** The Cycle 4 register, a frozen historical record, classes the PPS Bedi copy (`211dbaf4…`, DCLR-SC-1982-001) as a primary court copy, and it is one of the 6 exact anchors at version 0. Its file is the same kind as the three drafts: GNU Ghostscript 7.05, 38 pages, "http://JUDIS.NIC.IN … Page 1 of 38" header. The coordinator checked this against the held file.
+- **Evidence (C8, PR B):**
+  - Ranjit Thakur, S N Mukherjee and Navjot are Ghostscript 7.05 text renditions with a JUDIS header and watermark and no signature or date block.
   - The 1987 and 1990 files carry headnotes and consecutive law-report page numbers, which suggests keying from a law report; that is an inference.
   - The Ranjit headnote refers to a later review order dated 10.8.88, which is not held.
   - Dharamvir and Rajbir C1, also from `/jonew/judis/` paths, are court-layout PDFs.
-- **Options:**
+- **Options, applied consistently to all four JUDIS renditions (PPS Bedi and the three drafts):**
   - (a) Court-system dissemination is official, so primary. Anchors go 6 → 13.
-  - (b) Court-system rendition, so non-primary. Anchors go 6 → 10.
-  - (c) Primary for identity, but anchors limited to judgment text: excluding headnotes, and only where no later order is known.
-- **Records affected:** 3 drafts and 3 anchors.
-- **False-positive risk under (a):** headnote text or a superseded paragraph is treated as the judgment. **False-negative risk under (b):** older judgments with no court-layout copy cannot anchor.
-- **Recommendation:** (b) for now. Obtain court-layout copies, or certified reprints, under an approved acquisition. Revisit (c) if none exists.
+  - (b) Court-system rendition, so non-primary. The three drafts are not added and PPS Bedi's baseline row is demoted by a CORRECTION, so anchors go **6 → 9**. The demotion is itself a ledger transaction, needing records, review and binding, and its timing depends on O-5.
+  - (c) Primary for identity, but anchors limited to the judgment text: excluding headnotes and editorial notes, and only where no later order is known. This needs rule-2 support for copy-level or page-range anchors.
+- **Records affected:** 3 drafts and 1 baseline row; 4 anchors in total.
+- **False-positive risk under (a):** headnote or editorial text, or a superseded paragraph, is treated as the judgment.
+- **False-negative risk under (b):** older judgments with no court-layout copy cannot anchor at all, including one current baseline anchor.
+- **Recommendation (revised after RC-03):**
+  - The end state should be **(c)**: the identity of a JUDIS rendition is well evidenced, but its headnotes are not judgment text.
+  - Until rule 2 supports (c), **do not add** the three JUDIS drafts.
+  - Leave PPS Bedi's baseline row unchanged. Record its JUDIS character as a known limitation, and refer it to the owner as part of P-D3, rather than demoting it unilaterally.
+  - Obtain court-layout copies or certified reprints under an approved acquisition where they exist.
 
 ## Owner and reviewer identity assurance (O-1, O-4)
 - **Current rule:** names in decision and review records are text. An AI-agent owner name is rejected as a lint. A BIND line proves merge topology, not identity.
@@ -95,7 +108,7 @@ See `AUTH-LEDGER/DEMOTION_SEMANTICS_O5.md` on the security branch.
 | P-D1 | Confirm the fidelity table |
 | P-D2 | T1-19: provisionally primary, integrity only |
 | P-D2a | Split born-digital files whose signature fails into a non-primary class (T1-20) |
-| P-D3 | JUDIS renditions non-primary for now (option b) |
+| P-D3 | End state option (c). Until then, do not add the three JUDIS drafts; keep PPS Bedi's baseline row, with its JUDIS limitation referred to the owner |
 | O-1 / O-4 | Identity assurance, decided before the first BIND line |
 | O-5 | Activation policy 2 |
 

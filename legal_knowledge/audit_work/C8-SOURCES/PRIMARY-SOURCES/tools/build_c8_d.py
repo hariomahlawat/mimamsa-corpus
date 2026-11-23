@@ -30,6 +30,14 @@ TOOLS = os.path.dirname(os.path.abspath(__file__))
 INPUTS = os.path.join(TOOLS, 'inputs')
 
 CNR = 'COMMENCEMENT NOTIFICATION REQUIRED'
+# Review 44fd72d6 RC-04: amending instruments whose separate commencement notification is known
+# (a pinned candidate exists) but not held. Their gap is CNR even though C5 records NOT_DETERMINED.
+COMM_NOTIF_KNOWN = {'AA-07': 'separate commencement notification under s.1(2) of Act 20/1983 known, not held: ACQ03-024 (candidate, not fetched)'}
+# Review 44fd72d6 RC-11: held file whose embedded CMS signature does not verify (C8 Gazette finding T1-20).
+SIG_FAIL = {'138c1da0d3d9ffafe50603fb810a6d0857c942f845d52e36f355ec8b5add2f8c':
+            'CAVEAT: the embedded CMS signature of this file does not verify, although the SHA-256 of the signed byte range '
+            'matches the messageDigest attribute (C8 Gazette finding T1-20, RULE_VERSION_DECISION_PACK_C8.md fidelity section; '
+            'independently re-checked by review RC-11). Dates are read from the printed page text; the copy\'s fidelity class awaits the owner decision.'}
 
 
 # ----------------------------------------------------------------------------- io
@@ -392,6 +400,12 @@ def task_matrix(d):
         if copy_id:
             r.update(copy_fields(d, copy_id))
             evidence = (CP + copy_id + '; ' + evidence).strip('; ')
+            if sum(1 for c in d.copies if c['source_id'] == source_id) > 1:
+                r['c5_holding_state'] = 'source-level: %s; this copy: %s (eligible=%s)' % (
+                    r['c5_holding_state'], r['provenance_class'], r['eligible_for_exact_anchor'])
+            if r['sha256'] in SIG_FAIL:
+                r['gap_flags'] = (r['gap_flags'] + '; ' if r['gap_flags'] else '') + 'SIGNATURE_DOES_NOT_VERIFY (T1-20)'
+                r['what_is_missing'] = (r['what_is_missing'] + '; ' if r['what_is_missing'] else '') + SIG_FAIL[r['sha256']]
             r['evidence'] = evidence
         elif derived:
             r.update(derived_fields(d, derived))
@@ -419,8 +433,8 @@ def task_matrix(d):
     add(k, 'AUTHORITATIVE_AMENDMENT', 'Army (Amendment) Act 1992: second held copy (PDF trailer /ID variant)', 'C5-SRC-P0-AA-AMD-ACT37-1992',
         copy_id='C5-SRC-P0-AA-AMD-ACT37-1992~C2', missing='duplicate carrier; provenance undocumented', gaps='DUPLICATE_COPY (C5-CF-C5-01 CLOSED_TECHNICAL)',
         evidence='SOURCE-LIBRARY-C5/registers/source_conflict_register.csv#C5-CF-C5-01')
-    add(k, 'OFFICIAL_CONSOLIDATION', 'Army (Amendment) Act 1992: India Code text rendering (3 pp.; not a Gazette image)', 'C5-SRC-P0-AA-AMD-ACT37-1992',
-        copy_id='C5-SRC-P0-AA-AMD-ACT37-1992~C3', missing='text rendering only', gaps='CONSOLIDATION_NOT_ENACTMENT')
+    add(k, 'OFFICIAL_TEXT_RENDERING', 'Army (Amendment) Act 1992: India Code text rendering (3 pp.; not a Gazette image)', 'C5-SRC-P0-AA-AMD-ACT37-1992',
+        copy_id='C5-SRC-P0-AA-AMD-ACT37-1992~C3', missing='text rendering of the amending Act only (not a consolidation, not a Gazette image)', gaps='TEXT_RENDERING_NOT_GAZETTE')
     add(k, 'AUTHORITATIVE_AMENDMENT', 'Air Force and Army Laws (Amendment) Act 1975 (13 of 1975): Gazette Extraordinary (2 pp.)', 'C5-SRC-P0-AA-AMD-ACT13-1975',
         copy_id='C5-SRC-P0-AA-AMD-ACT13-1975~C1', missing='retrieval provenance undocumented; no commencement section (s.4(2) saving); compilation states w.e.f. 25-1-1975', gaps='PROVENANCE_UNDOCUMENTED; COMMENCEMENT_NOT_DETERMINED',
         evidence=AM + 'C5-AMD-AA-06')
@@ -434,7 +448,8 @@ def task_matrix(d):
                       ('C5-AMD-AA-C3-03', 'Repealing and Amending Act 1957 (36 of 1957) (s.194 and Schedule repealed)'),
                       ('C5-AMD-AA-13', 'Any amending Act after 1992 (NOT_FOUND in searched sources; not proof of none)')]:
         a = next(x for x in d.amend if x['amendment_id'] == aid)
-        add(k, 'NO_RELIABLE_COPY', item, 'C5-SRC-P0-AA-AMD-OTHER', missing='instrument not held; known only from %s' % a['evidence_level'], gaps='AMENDMENT_INSTRUMENT_NOT_HELD',
+        add(k, 'NO_RELIABLE_COPY', item, 'C5-SRC-P0-AA-AMD-OTHER', missing='instrument not held; known only from %s' % a['evidence_level'] + ('; ' + COMM_NOTIF_KNOWN[a['origin_id']] if a['origin_id'] in COMM_NOTIF_KNOWN else ''),
+            gaps='AMENDMENT_INSTRUMENT_NOT_HELD' + ('; ' + CNR if a['origin_id'] in COMM_NOTIF_KNOWN else ''),
             route=sched_txt(d, AA_SCHED.get(a['origin_id'], [])) or master_row(d, 'C5-SRC-P0-AA-AMD-OTHER').get('acquisition_state', ''), evidence=AM + aid + '; ' + SCHED + ','.join(AA_SCHED.get(a['origin_id'], [])))
     add(k, 'NOTIFICATION', 'Gazette notifications under the Army Act (s.4 application, s.9 active service, etc.)', 'C5-SRC-P1-AA-NOTIFICATIONS',
         missing='none held; discovery not performed', gaps='NOT_CHECKED', route='DISCOVERY_REQUIRED (phase 6)', evidence=M + 'C5-SRC-P1-AA-NOTIFICATIONS')
@@ -503,7 +518,7 @@ def task_matrix(d):
         route='NOT REGISTERED: string "S.O. 14(E)" %s in acquisition_register.csv / c6_02_batch_a_files.csv / COORDINATION acquisition_schedule.csv; discovery required' % ('FOUND' if so14 else 'NOT FOUND'),
         evidence=d.reading('R03') + '; ' + d.reading('R04'))
     add(k, 'NO_RELIABLE_COPY', 'Finance Act 2017 (7 of 2017) s.181 (inserted s.9A; compilation says w.e.f. 26-5-2017)', '',
-        missing='amending instrument not held and not in the C5 master register', gaps='AMENDMENT_INSTRUMENT_NOT_HELD; NOT_REGISTERED; COMMENCEMENT_BASIS_NOT_EVIDENCED',
+        missing='amending instrument not held and not in the C5 master register', gaps='AMENDMENT_INSTRUMENT_NOT_HELD; NOT_REGISTERED; NOTIFICATION_STATUS_UNKNOWN (instrument not held)',
         route='discovery required (Gazette of India 2017)', evidence=d.reading('R02') + '; ' + d.reading('R06'))
     pg = next((g for g in d.pilot_gaps if g['gap_id'] == 'AMD-16'), {})
     add(k, 'NO_RELIABLE_COPY', 'Tribunals Reforms Act 2021 (33 of 2021) (listed as an amending Act; no footnote in the held compilation shows which AFT provisions it changed)', '',
@@ -640,6 +655,8 @@ def task_amend(d):
 
     def gap_from(a):
         s = a['effective_date_status']
+        if a['origin_id'] in COMM_NOTIF_KNOWN:
+            return CNR
         if s.startswith('STATED_IN_INSTRUMENT'):
             return 'NONE (commencement stated in the instrument)'
         if 'notification' in s.lower() or 'appointing' in s.lower():
@@ -691,10 +708,12 @@ def task_amend(d):
             enactment_or_issue_date=a['notification_date'], publication_date=a['publication_date'],
             commencement_as_printed=a['commencement_as_printed'],
             commencement_date_evidenced=a['effective_date'] if a['effective_date_status'].startswith('STATED_IN_INSTRUMENT') else '',
-            commencement_status_preserved=a['effective_date_status'], commencement_gap=gap_from(a),
+            commencement_status_preserved=a['effective_date_status'] + ((' (C5 state preserved); ' + COMM_NOTIF_KNOWN[oid]) if oid in COMM_NOTIF_KNOWN else ''),
+            commencement_gap=gap_from(a),
             supporting_document_held='YES' if held else 'NO', document_sha256=a['sha256'], copy_id=cp.get('copy_id', ''),
             copy_evidence_class=cp.get('copy_evidence_class', ''), gazette_identity=a['gazette_identity'],
-            evidence_level=a['evidence_level'], verification_status=a['verification_status'], amendment_chain_status=a['amendment_chain_status'],
+            evidence_level=a['evidence_level'], verification_status=a['verification_status'] + (('; ' + SIG_FAIL[a['sha256']]) if a['sha256'] in SIG_FAIL else ''),
+            amendment_chain_status=a['amendment_chain_status'],
             provision_chain_rows='%d: %s' % (len(chains), ids([c['chain_row_id'] for c in chains], 12)) if chains else '0',
             unresolved_conflicts='; '.join(conflict_state(d, c) for c in sorted(confs)),
             historical_applicability_interval=hist or 'NOT EVIDENCED',
@@ -731,7 +750,7 @@ def task_amend(d):
          'NOT_DETERMINED from primary evidence: compilation footnote states 15-06-2008 vide S.O. 14(E)', CNR, 'NO (compilation only)', aft, 'C5-SRC-P0-AFT-ACT-2007-INDIACODE~C1',
          'COMPILATION_FOOTNOTE_ONLY', '', 'NOT EVIDENCED', '; '.join(R(x) for x in ('R03', 'R04', 'R05')))
     hand('D-AMC-AFT-01', 'AFT Act 2007', 's.9A (inserted)', 'Finance Act 2017 (7 of 2017) s.181', 'insertion (per compilation footnote)', 'NOT_DETERMINED (instrument not held)', '',
-         'NOT_DETERMINED: compilation says w.e.f. 26-5-2017; commencement basis of the Finance Act provision not evidenced', 'COMMENCEMENT_BASIS_NOT_EVIDENCED (instrument not held)',
+         'NOT_DETERMINED: compilation says w.e.f. 26-5-2017; commencement basis of the Finance Act provision not evidenced', 'NOTIFICATION_STATUS_UNKNOWN (instrument not held; whether s.181 commenced by a separate notification is not evidenced)',
          'NO', '', '', 'COMPILATION_FOOTNOTE_ONLY', '', 'NOT EVIDENCED', R('R06') + '; ' + R('R02'))
     hand('D-AMC-AFT-02', 'AFT Act 2007', 'UNKNOWN (no footnote in the held compilation attributes any AFT provision to Act 33 of 2021)', 'Tribunals Reforms Act 2021 (33 of 2021)',
          'listed as an amending Act only', 'NOT_DETERMINED (instrument not held)', '', 'NOT_DETERMINED', 'INSTRUMENT_NOT_HELD',
@@ -1062,7 +1081,7 @@ def task_regs(d):
     for sid, cand in [('C5-SRC-P2-RAF-1964', 'C5A-019'), ('C5-SRC-P2-RNAVY-PT1', 'C5A-020'), ('C5-SRC-P2-RNAVY-PT2', 'C5A-021'), ('C5-SRC-P2-RNAVY-PT3', 'C5A-022'),
                       ('C5-SRC-P2-INAS-1973', 'C5A-023'), ('C5-SRC-P2-RNAVY-AMDT-2022-2024', 'C5A-024')]:
         c = d.cand.get(cand, {})
-        add(d.master[sid]['title'], 'PUBLICLY_AVAILABLE', sid, '', cand, M + sid + '; ' + A + cand,
+        add(d.master[sid]['title'], 'PUBLICLY_AVAILABLE (QUALIFIED: official host reachable; a FOUO marking is reported, release status to be confirmed from the printed copy)' if cand == 'C5A-019' else 'PUBLICLY_AVAILABLE', sid, '', cand, M + sid + '; ' + A + cand,
             note='official host %s (HTTP %s); not held; cross-service comparator (P2)%s' % (c.get('host', ''), c.get('http_status', ''), '; FOUO marking reported by a search snippet - record the printed marking on receipt' if cand == 'C5A-019' else ''),
             marking=('REPORTED FOUO (search snippet)' if cand == 'C5A-019' else ''))
     add('Territorial Army Regulations 1948 (Revised Edition 1976)', 'PUBLICLY_AVAILABLE', 'C5-SRC-P1-TA-REGULATIONS', '', 'C5D-002', M + 'C5-SRC-P1-TA-REGULATIONS; SOURCE-LIBRARY-C5/discovery/D_candidates.csv#C5D-002',
@@ -1407,7 +1426,7 @@ def md_baseline(rows):
 
 def md_matrix(rows, dep):
     out = ['# C8-D Task 2: priority statutory instrument completeness matrix', '',
-           'Source: `statutory_source_matrix.csv` (%d rows). Categories are kept apart: **ORIGINAL_ENACTMENT** (Gazette/notified text), **OFFICIAL_CONSOLIDATION** (India Code compilation or government text rendering), **AUTHORITATIVE_AMENDMENT** (amending instrument as published), **NOTIFICATION** (commencement / declarations), **SECONDARY_COMPILATION** (manuals, correspondence tables, parliamentary records), **INCOMPLETE_EXTRACT**, **NO_RELIABLE_COPY** (including derived text with no source binary). A consolidation is never treated as the enactment, and no current text is reconstructed from an old enactment plus an incomplete amendment list.' % len(rows), '',
+           'Source: `statutory_source_matrix.csv` (%d rows). Categories are kept apart: **ORIGINAL_ENACTMENT** (Gazette/notified text), **OFFICIAL_CONSOLIDATION** (India Code compilation of the instrument as amended), **OFFICIAL_TEXT_RENDERING** (government-hosted text rendering of a single instrument; neither a consolidation nor a Gazette image), **AUTHORITATIVE_AMENDMENT** (amending instrument as published), **NOTIFICATION** (commencement / declarations), **SECONDARY_COMPILATION** (manuals, correspondence tables, parliamentary records), **INCOMPLETE_EXTRACT**, **NO_RELIABLE_COPY** (including derived text with no source binary). A consolidation is never treated as the enactment, and no current text is reconstructed from an old enactment plus an incomplete amendment list.' % len(rows), '',
            'Commencement: where an Act or Rules commence by a separate notification that is not held, the row carries **%s**. Compilation footnotes naming a date are recorded as such and are not treated as evidence of commencement.' % CNR, '']
     hdr = ['instrument', 'original enactment held', 'consolidation held', 'commencement notification held', 'amending instrument rows (held / not held or not located)', 'KB items (crosswalk)', 'KB records (crosswalk)', 'KB records (text mention)']
     tab = []
@@ -1532,11 +1551,11 @@ def md_drafts(regs):
          ['an authorised copy (or confirmation that none is held for release);', 'the record of its replacement, if any, by the 1987 edition (no supersession is assumed by the project).']),
         ('CR-03', 'Regulations for the Medical Services of the Armed Forces (2010 revised, and 1983 edition), with amendments', '[Custodian: DGAFMS]', 'RMSAF-2010; RMSAF-1983',
          ['authorised copies with title page and access marking;', 'the amendment record since 2010.']),
-        ('CR-04', 'Army Order 45/2001 and Army Order 13/2006/PS', '[Custodian: Army HQ (AG\'s Branch)]', 'AO-45-2001; AO-13-2006-PS',
-         ['confirmation of existence and publication status of each order;', 'if publicly releasable, an authorised copy with its access marking; if not, a statement to that effect (no restricted material is requested).']),
+        ('CR-04', 'Army Order 45/2001 and Army Order 13/2006/PS (the latter an UNVERIFIED reference)', '[Custodian: Army HQ (AG\'s Branch)]', 'AO-45-2001; AO-13-2006-PS',
+         ['confirmation of existence and publication status of each order. Army Order 13/2006/PS is known to the project only as a reported reference in an unopened third-party listing of the D&V handbook (C6-PREP DV-SOH-2014-R4, UNVERIFIED_EXTRACTION_CANDIDATE); its number, year and existence are unverified;', 'if publicly releasable, an authorised copy with its access marking; if not, a statement to that effect (no restricted material is requested).']),
         ('CR-05', "Staff Officers' Handbook: Processing of Statutory/Non-Statutory Complaints on D&V Matters (May 2014, apparent)", '[Custodian: Addl DG Discipline & Vigilance, AG\'s Branch (apparent issuer, unverified)]', 'DV-SOH-2014',
          ['confirmation whether this handbook was issued, its date and current status;', 'if releasable, an authorised copy with access marking. The project has NOT opened or used the third-party (Scribd) upload and treats it as non-authoritative.']),
-        ('CR-06', 'Criminal Courts and Court-martial (Adjustment of Jurisdiction) Rules 1978 and Amendment Rules 1986 (S.O. 4010 of 06-12-1986)', '[Custodian: Ministry of Home Affairs / Gazette publication authority]', '(C8-D; C5-SRC-P1-CCCM-ADJ-RULES)',
+        ('CR-06', 'Criminal Courts and Court-martial (Adjustment of Jurisdiction) Rules 1978 and Amendment Rules 1986 (S.O. 4010 of 1986; date as printed to be confirmed: 24-11-1986 per ACQ-01/PILOT-01, 6 December 1986 per the C5 master title)', '[Custodian: Ministry of Home Affairs / Gazette publication authority]', '(C8-D; C5-SRC-P1-CCCM-ADJ-RULES)',
          ['FALLBACK ONLY: both instruments are already pinned as archive.org Gazette facsimiles in ACQ-01-B2; send only if those copies fail post-download verification or a certified copy is required;',
           'certified or official Gazette copies of the 1978 Rules (S.O. 488) and of S.O. 4010/1986, including the date of S.O. 4010 as printed;', 'any later amendment notifications (including any made after BNSS 2023).']),
         ('CR-07', 'Historical pension instruments: Entitlement Rules 1982; Pension Regulations for the Army 1961 (Parts I and II); Guide to Medical Officers (Military Pensions) 2002 and 2008', '[Custodian: Department of Ex-Servicemen Welfare]', '(C8-D; C5-SRC-P1-ER-1982, -PRA-1961, -GMO-2002-2008)',
@@ -1562,7 +1581,7 @@ def md_findings(base, matrix_rows, dep, amend_rows, c602, pen_rows, pen_sum, reg
     out += ['', '**Discrepancy:** "1,060 KB citation items" counts crosswalk rows, including 77 NO_CITATION placeholders; the true number of citation items is **983**, and genuine MISSING items are **289** (not 366). 618 reproduces, but 77 of those records cite nothing (541 have citations and no exact anchor). Details: `BASELINE_RECOMPUTE.md`.', '',
             '## 2. Key gaps per instrument', '']
     gl = {
-        'AA1950': 'Gazette as enacted NOT held (pinned C5-ACQ-01 = ACQ03-029 = ACQ-C3-01); only an India Code compilation (provenance undocumented). Commencement S.R.O. 120/1950 not held (%s; probable candidate ACQ03-019 in PR #23). Act 37/1992 held with documented provenance; Act 13/1975 held (undocumented); Act 19/1955 extract lacks its Schedule (Gazette pinned ACQ-01-B6; appointing S.R.O. 2(E)/1955 candidate ACQ03-020). ALO 1956, Act 56/1974, Ordinance 1975 and Act 20/1983 (+ its commencement notification) not held but pinned in ACQ-03 (PR #23); RAA 1957 and S.O. 3912(E)/2019 not located.' % CNR,
+        'AA1950': 'Gazette as enacted NOT held (pinned C5-ACQ-01 = ACQ03-029 = ACQ-C3-01); only an India Code compilation (provenance undocumented). Commencement S.R.O. 120/1950 not held (%s; probable candidate ACQ03-019 in PR #23). Act 37/1992 held with documented provenance; Act 13/1975 held (undocumented); Act 19/1955 extract lacks its Schedule (Gazette pinned ACQ-01-B6; appointing S.R.O. 2(E)/1955 candidate ACQ03-020; %s). ALO 1956, Act 56/1974, Ordinance 1975 and Act 20/1983 (+ its commencement notification ACQ03-024; %s) not held but pinned in ACQ-03 (PR #23); RAA 1957 and S.O. 3912(E)/2019 not located.' % (CNR, CNR, CNR),
         'AR1954': '1954 S.R.O. 484 held (documented primary). 24 amending/declaration Gazettes held, only 3 with documented provenance (AR-006, AR-029, AR-031). Chain open after 06-06-2022 (10 candidate S.R.O.s, subject unconfirmed); AR-001 and AR-030 not found; 5 text-layer-only; 13 hints unopened. Reserved: r.23(3) CONFLICTING, r.182 OPEN, r.193 OPEN, r.194 PROPOSAL.',
         'AFT2007': 'Gazette as enacted NOT held (pinned C5-ACQ-02); compilation as on 01-09-2026 held (undocumented). Commencement S.O. 14(E)/2008 not held and not registered (%s). Finance Act 2017 and TRA 2021 not held or registered; TRA 2021 provisions affected unknown. TRA 2026 held (undocumented) - substitutes s.9A and repeals TRA 2021, but commences by notification (%s). AFT Procedure Rules 2008/2011 and Practice Rules 2009: no held copy, although archive.org candidates are pinned in ACQ-03 (ACQ03-030..032, PR #23) - the C5 master still says DISCOVERY_REQUIRED.' % (CNR, CNR),
         'BNS2023': 'No reliable copy at all (derived text only); Gazette pinned (C5-ACQ-20); commencement notification not held (%s).' % CNR,

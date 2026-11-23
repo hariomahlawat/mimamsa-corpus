@@ -2,22 +2,36 @@
 """Deterministic, offline judgment-batch reconciliation (Mimamsa C8 / WS-E).
 
 Classifies each item of an incoming judgment batch against the existing corpus.
-It NEVER merges, NEVER overwrites, NEVER downloads and NEVER edits any input:
-it only writes the CSV report named by --out (refused if --out is an input path).
+It NEVER merges, NEVER downloads and NEVER edits any input. It only writes the CSV
+report named by --out, and it refuses (exit 2) an --out that:
+  - resolves to any input file (same real path after symlinks, os.path.samefile, or
+    the same device+inode, i.e. a hard link), even with --overwrite;
+  - lies inside a 'curated_originals' directory;
+  - already exists, unless --overwrite is given;
+  - is a directory, or whose parent directory does not exist.
+The report is written atomically: a temporary file is created in the target
+directory and then linked (no-clobber) or, with --overwrite, renamed into place.
 
 Classes (first matching rule wins, evaluated in this order):
   EXACT_DUPLICATE        sha256 equals a copy already known to the corpus (or an
-                         earlier row of the same batch).
-  VERSION_RELATIONSHIP   same court + overlapping case number + same judgment date,
+                         earlier row of the same batch). If the item's court, case
+                         number or date contradicts what the corpus records for that
+                         hash, the row is flagged METADATA_CONFLICT_WITH_KNOWN_HASH
+                         (flags column + stderr warning) and must be reviewed: a
+                         wrongly pasted hash would otherwise hide a new judgment.
+  VERSION_RELATIONSHIP   same court + overlapping TYPED case number (same case type,
+                         number and year) + same judgment date,
                          different sha256, AND the incoming item (or the matched corpus
                          copy) carries an explicit version marker (corrected,
                          corrigendum, uncorrected, revised, modified, amended,
                          reportable/non-reportable version, signed copy ...).
-  SAME_JUDGMENT_NEW_COPY same court + overlapping case number + same judgment date,
+  SAME_JUDGMENT_NEW_COPY same court + overlapping TYPED case number + same judgment date,
                          different sha256, no version marker.
   POSSIBLE_MATCH_REVIEW  only a fuzzy signal: same case number with a different date
-                         (possible later order in the same case), shared citation,
-                         or party-name similarity >= threshold. Human review required.
+                         (possible later order in the same case), an UNTYPED case
+                         number (bare 'n/yyyy') matching a corpus number, shared
+                         citation, or party-name similarity >= threshold. Human review
+                         required.
   NEW                    no match in the SUPPLIED corpus snapshot. This is not a claim
                          that the judgment is absent from any other collection.
 
@@ -29,7 +43,14 @@ case_numbers / citations may be a JSON list or a ';'-separated string.
 parties may be a string ("A v B") or an object {"petitioner":..,"respondent":..}.
 
 Validation fails closed: if ANY item is malformed the tool prints every problem to
-stderr, writes no report, and exits with status 2.
+stderr, writes no report, and exits with status 2. Malformed includes: missing or
+empty required fields, bad sha256, invalid or implausible dates (before 1800 or
+after today), duplicate JSON keys, duplicate item_id, NUL or other control
+characters, non-string list members, duplicate CSV header columns, ragged CSV rows,
+and a batch that is not valid UTF-8.
+
+Report cells that begin with '=', '+', '-', '@', TAB or CR are prefixed with a single
+quote so that a spreadsheet does not evaluate them as formulas.
 
 Corpus (read-only):
   --repo <snapshot root>  uses
@@ -44,8 +65,8 @@ Corpus (read-only):
   duplicates into false NEWs, so the tool fails closed).
 
 Usage:
-  python3 reconcile_judgments.py --incoming batch.jsonl --repo <root> --out report.csv
-Exit status: 0 ok, 2 malformed input / missing corpus / unsafe output path.
+  python3 reconcile_judgments.py --incoming batch.jsonl --repo <root> --out report.csv [--overwrite]
+Exit status: 0 ok, 2 malformed input / unreadable or missing corpus / unsafe output path.
 """
 import argparse
 import csv
@@ -55,6 +76,7 @@ import json
 import os
 import re
 import sys
+import tempfile
 
 CLASSES = ("EXACT_DUPLICATE", "VERSION_RELATIONSHIP", "SAME_JUDGMENT_NEW_COPY",
            "POSSIBLE_MATCH_REVIEW", "NEW")
@@ -92,6 +114,9 @@ CASE_TYPES = [
     (r"transfer(?:red)?\s+applications?|t\.?\s*a\.?", "TA"),
     (r"diary", "DIARY"),
 ]
+CONTROL_RE = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")
+FORMULA_LEAD = ("=", "+", "-", "@", "\t", "\r")
+MIN_YEAR = 1800
 NUM_TAIL = r"\s*(?:nos?\.?|numbers?)?\s*(\d+)(?:\s*[-–—]\s*(\d+))?\s*(?:of|/)\s*(\d{4})"
 
 
@@ -208,43 +233,98 @@ def valid_date(s):
         return False
 
 
+def plausible_date(s, today=None):
+    """Return an error string for an implausible judgment date, or ''."""
+    d = datetime.date.fromisoformat(str(s))
+    today = today or datetime.date.today()
+    if d.year < MIN_YEAR:
+        return f"judgment_date '{s}' is before {MIN_YEAR} (implausible)"
+    if d > today:
+        return f"judgment_date '{s}' is in the future (after {today.isoformat()})"
+    return ""
+
+
+def _no_dup_keys(pairs):
+    obj = {}
+    for k, v in pairs:
+        if k in obj:
+            raise InputError(f"duplicate JSON key '{k}'")
+        obj[k] = v
+    return obj
+
+
 # ----------------------------------------------------------------- input loading
 def load_batch(path):
     if not os.path.isfile(path):
         raise InputError(f"incoming batch not found: {path}")
     ext = os.path.splitext(path)[1].lower()
     rows = []
-    with open(path, encoding="utf-8", newline="") as f:
-        if ext == ".jsonl":
-            for i, line in enumerate(f, start=1):
-                if not line.strip():
-                    continue
-                try:
-                    obj = json.loads(line)
-                except ValueError as e:
-                    raise InputError(f"line {i}: invalid JSON ({e})")
-                if not isinstance(obj, dict):
-                    raise InputError(f"line {i}: item is not a JSON object")
-                rows.append((i, obj))
-        elif ext == ".csv":
-            rd = csv.DictReader(f)
-            if rd.fieldnames is None:
-                raise InputError("CSV has no header")
-            for i, obj in enumerate(rd, start=2):
-                if None in obj:
-                    raise InputError(f"line {i}: more fields than header columns")
-                rows.append((i, obj))
-        else:
-            raise InputError("incoming batch must be .csv or .jsonl")
+    try:
+        with open(path, encoding="utf-8", newline="") as f:
+            if ext == ".jsonl":
+                for i, line in enumerate(f, start=1):
+                    if not line.strip():
+                        continue
+                    try:
+                        obj = json.loads(line, object_pairs_hook=_no_dup_keys)
+                    except InputError as e:
+                        raise InputError(f"line {i}: {e}")
+                    except ValueError as e:
+                        raise InputError(f"line {i}: invalid JSON ({e})")
+                    if not isinstance(obj, dict):
+                        raise InputError(f"line {i}: item is not a JSON object")
+                    rows.append((i, obj))
+            elif ext == ".csv":
+                rd = csv.DictReader(f)
+                if rd.fieldnames is None:
+                    raise InputError("CSV has no header")
+                dup = sorted({h for h in rd.fieldnames if rd.fieldnames.count(h) > 1})
+                if dup:
+                    raise InputError("CSV header has duplicate column(s): " + ", ".join(dup))
+                for i, obj in enumerate(rd, start=2):
+                    if None in obj:
+                        raise InputError(f"line {i}: more fields than header columns")
+                    rows.append((i, obj))
+            else:
+                raise InputError("incoming batch must be .csv or .jsonl")
+    except UnicodeDecodeError as e:
+        raise InputError(f"incoming batch is not valid UTF-8 ({e})")
+    except csv.Error as e:
+        raise InputError(f"CSV parse error ({e})")
     if not rows:
         raise InputError("incoming batch is empty")
     return rows
 
 
-def validate(rows):
+def _walk_strings(v):
+    if isinstance(v, str):
+        yield v
+    elif isinstance(v, dict):
+        for k, x in v.items():
+            yield str(k)
+            yield from _walk_strings(x)
+    elif isinstance(v, list):
+        for x in v:
+            yield from _walk_strings(x)
+
+
+def validate(rows, today=None):
     errors, items = [], []
+    seen_ids = {}
     for line, obj in rows:
         e = []
+        if any(CONTROL_RE.search(x) for k, v in obj.items() for x in _walk_strings({k: v})):
+            e.append("NUL or other control character in a field (not allowed)")
+        for k in ("case_numbers", "citations"):
+            v = obj.get(k)
+            if isinstance(v, list) and any(not isinstance(x, str) for x in v):
+                e.append(f"'{k}' list members must be strings")
+        iid = norm_space(obj.get("item_id"))
+        if iid:
+            if iid in seen_ids:
+                e.append(f"duplicate item_id '{iid}' (first at input line {seen_ids[iid]})")
+            else:
+                seen_ids[iid] = line
         for k in REQUIRED:
             v = obj.get(k)
             if v is None or (isinstance(v, (str, list, dict)) and not (v if not isinstance(v, str) else v.strip())):
@@ -255,6 +335,10 @@ def validate(rows):
         jd = str(obj.get("judgment_date") or "").strip()
         if jd and not valid_date(jd):
             e.append(f"judgment_date '{jd}' is not a valid YYYY-MM-DD date")
+        elif jd:
+            pe = plausible_date(jd, today)
+            if pe:
+                e.append(pe)
         prov = norm_space(obj.get("source_url")) or norm_space(obj.get("provenance"))
         if not prov:
             e.append("one of source_url / provenance is required")
@@ -368,34 +452,75 @@ def jaccard(a, b):
     return len(a & b) / len(a | b)
 
 
-def classify(items, ents, shas, party_threshold=0.5):
+def metadata_conflicts(it, courts, ckeys, dates):
+    """Fields on which an item contradicts what is recorded for a known hash."""
+    bad = []
+    if courts and it["court"] not in courts:
+        bad.append("court " + repr(it["court_raw"]) + " vs " + "/".join(sorted(courts)))
+    if ckeys and it["case_keys"] and not keys_overlap(it["case_keys"], ckeys):
+        bad.append("case number " + "; ".join(it["case_numbers"]) + " vs "
+                   + ",".join(f"{t} {n}/{y}" for t, n, y in sorted(ckeys)[:6]))
+    if dates and it["date"] not in dates:
+        bad.append(f"date {it['date']} vs " + ",".join(sorted(dates)))
+    return bad
+
+
+def typed_overlap(a, b):
+    """Overlap on identical (TYPE, number, year) keys where TYPE is not UNTYPED."""
+    return sorted(k for k in (a & b) if k[0] != "UNTYPED")
+
+
+def classify(items, ents, shas, party_threshold=0.5, warn=None):
     out, seen_batch = [], {}
     for it in items:
         row = dict(line=it["line"], item_id=it["item_id"], sha256=it["sha256"], court=it["court_raw"],
                    case_numbers="; ".join(it["case_numbers"]), judgment_date=it["date"], parties=it["parties"],
-                   provenance=it["provenance"])
+                   provenance=it["provenance"], flags="")
         # 1. exact duplicate (corpus, then earlier batch rows)
         if it["sha256"] in shas:
             hits = sorted(shas[it["sha256"]])
-            row.update(classification="EXACT_DUPLICATE", matched_corpus_keys=";".join(sorted({k for k, _, _ in hits})),
-                       matched_on="sha256",
-                       reasons="sha256 equals known copy: " + ";".join(l for _, l, _ in hits))
+            keys = sorted({k for k, _, _ in hits})
+            courts, ckeys, dates = set(), set(), set()
+            for k in keys:
+                e = ents.get(k) or {}
+                courts |= e.get("courts", set())
+                ckeys |= e.get("case_keys", set())
+                dates |= e.get("dates", set())
+            bad = metadata_conflicts(it, courts, ckeys, dates)
+            reasons = "sha256 equals known copy: " + ";".join(l for _, l, _ in hits)
+            if bad:
+                row["flags"] = "METADATA_CONFLICT_WITH_KNOWN_HASH"
+                reasons += (" | WARNING: incoming metadata contradicts the known copy (" + "; ".join(bad)
+                            + "); check the hash before treating this item as a duplicate")
+                if warn:
+                    warn(f"WARNING: item {it['item_id']}: sha256 is known but metadata conflicts: " + "; ".join(bad))
+            row.update(classification="EXACT_DUPLICATE", matched_corpus_keys=";".join(keys),
+                       matched_on="sha256", reasons=reasons)
             out.append(row)
-            seen_batch.setdefault(it["sha256"], it["item_id"])
+            seen_batch.setdefault(it["sha256"], it)
             continue
         if it["sha256"] in seen_batch:
+            first = seen_batch[it["sha256"]]
+            bad = metadata_conflicts(it, {first["court"]}, first["case_keys"], {first["date"]})
+            reasons = f"sha256 equals earlier incoming item {first['item_id']}; not in corpus"
+            if bad:
+                row["flags"] = "METADATA_CONFLICT_WITH_KNOWN_HASH"
+                reasons += " | WARNING: metadata differs from the earlier item (" + "; ".join(bad) + ")"
+                if warn:
+                    warn(f"WARNING: item {it['item_id']}: same sha256 as {first['item_id']} but metadata conflicts: "
+                         + "; ".join(bad))
             row.update(classification="EXACT_DUPLICATE", matched_corpus_keys="",
-                       matched_on="sha256 (within batch)",
-                       reasons=f"sha256 equals earlier incoming item {seen_batch[it['sha256']]}; not in corpus")
+                       matched_on="sha256 (within batch)", reasons=reasons)
             out.append(row)
             continue
-        seen_batch[it["sha256"]] = it["item_id"]
+        seen_batch[it["sha256"]] = it
         # 2. same court + case number (+ date)
         strong, same_case_other_date, fuzzy = [], [], []
         for key in sorted(ents):
             e = ents[key]
             court_ok = (not e["courts"]) or (it["court"] in e["courts"])
-            ov = keys_overlap(it["case_keys"], e["case_keys"])
+            ov = typed_overlap(it["case_keys"], e["case_keys"])
+            ov_any = keys_overlap(it["case_keys"], e["case_keys"])
             if ov and court_ok and e["courts"]:
                 if it["date"] in e["dates"]:
                     strong.append((key, ov))
@@ -406,6 +531,9 @@ def classify(items, ents, shas, party_threshold=0.5):
             if ov and not e["courts"]:
                 reasons.append("case number overlap " + ",".join(f"{t} {n}/{y}" for t, n, y in ov)
                                + " but corpus entity has no court recorded")
+            elif ov_any and not ov and court_ok:
+                reasons.append("case number " + ",".join(f"{n}/{y}" for _, n, y in ov_any)
+                               + " matches only through an UNTYPED number (case type not stated on both sides)")
             cit = it["citations"] & e["citations"]
             if cit:
                 reasons.append("shared citation " + "; ".join(sorted(cit)))
@@ -454,17 +582,79 @@ def classify(items, ents, shas, party_threshold=0.5):
 
 
 FIELDS = ["line", "item_id", "classification", "matched_corpus_keys", "matched_on", "reasons", "sha256", "court",
-          "case_numbers", "judgment_date", "parties", "provenance"]
+          "case_numbers", "judgment_date", "parties", "provenance", "flags"]
 
 
-def write_report(rows, out):
+class OutputError(Exception):
+    pass
+
+
+def safe_cell(v):
+    s = "" if v is None else str(v)
+    return "'" + s if s.startswith(FORMULA_LEAD) else s
+
+
+def _same_file(a, b):
+    try:
+        if os.path.realpath(a) == os.path.realpath(b):
+            return True
+        if os.path.exists(a) and os.path.exists(b):
+            if os.path.samefile(a, b):
+                return True
+            sa, sb = os.stat(a), os.stat(b)
+            return (sa.st_dev, sa.st_ino) == (sb.st_dev, sb.st_ino)
+    except OSError:
+        return False
+    return False
+
+
+def check_out_path(out, inputs, overwrite=False):
+    """Raise OutputError if writing the report to `out` could touch an input or an original."""
+    for p in inputs:
+        if _same_file(out, p):
+            raise OutputError(f"--out resolves to input file {p} (refused, even with --overwrite)")
+    real = os.path.realpath(out)
+    parts = re.split(r"[\\/]+", os.path.abspath(out)) + re.split(r"[\\/]+", real)
+    if "curated_originals" in parts:
+        raise OutputError("--out lies inside a curated_originals directory (originals are never written)")
+    if os.path.isdir(out):
+        raise OutputError(f"--out is a directory: {out}")
+    parent = os.path.dirname(os.path.abspath(out))
+    if not os.path.isdir(parent):
+        raise OutputError(f"--out parent directory does not exist: {parent}")
+    if os.path.lexists(out) and not overwrite:
+        raise OutputError(f"--out already exists: {out} (pass --overwrite to replace a non-input file)")
+
+
+def write_report(rows, out, inputs=(), overwrite=False):
     buf = io.StringIO()
     w = csv.DictWriter(buf, fieldnames=FIELDS, lineterminator="\n")
     w.writeheader()
     for r in rows:
-        w.writerow({k: r.get(k, "") for k in FIELDS})
-    with open(out, "w", encoding="utf-8", newline="") as f:
-        f.write(buf.getvalue())
+        w.writerow({k: safe_cell(r.get(k, "")) for k in FIELDS})
+    data = buf.getvalue().encode("utf-8")
+    parent = os.path.dirname(os.path.abspath(out))
+    fd, tmp = tempfile.mkstemp(prefix=".reconcile-", suffix=".tmp", dir=parent)
+    try:
+        with os.fdopen(fd, "wb") as f:
+            f.write(data)
+            f.flush()
+            os.fsync(f.fileno())
+        check_out_path(out, inputs, overwrite)  # re-check immediately before the switch
+        if overwrite:
+            os.replace(tmp, out)
+        else:
+            try:
+                os.link(tmp, out)  # atomic and never clobbers: fails if out appeared meanwhile
+            except FileExistsError:
+                raise OutputError(f"--out already exists: {out}")
+            except OSError:
+                if os.path.lexists(out):
+                    raise OutputError(f"--out already exists: {out}")
+                os.replace(tmp, out)
+    finally:
+        if os.path.lexists(tmp):
+            os.unlink(tmp)
 
 
 def main(argv=None):
@@ -478,6 +668,8 @@ def main(argv=None):
     ap.add_argument("--copies")
     ap.add_argument("--case-source-map")
     ap.add_argument("--party-threshold", type=float, default=0.5)
+    ap.add_argument("--overwrite", action="store_true",
+                    help="replace an existing --out file (never an input file)")
     a = ap.parse_args(argv)
     if a.repo:
         lk = os.path.join(a.repo, "legal_knowledge")
@@ -495,8 +687,10 @@ def main(argv=None):
     if missing:
         print("ERROR: missing input file(s): " + "; ".join(missing), file=sys.stderr)
         return 2
-    if os.path.abspath(a.out) in {os.path.abspath(p) for p in inputs}:
-        print("ERROR: --out must not be one of the input files", file=sys.stderr)
+    try:
+        check_out_path(a.out, inputs, a.overwrite)
+    except OutputError as e:
+        print(f"ERROR: {e}", file=sys.stderr)
         return 2
     try:
         rows = load_batch(a.incoming)
@@ -509,9 +703,18 @@ def main(argv=None):
             print("ERROR: " + e, file=sys.stderr)
         print(f"ERROR: {len(errors)} malformed item(s); no report written (fail closed)", file=sys.stderr)
         return 2
-    ents, shas = load_corpus(a.cases, a.identity, a.holdings, a.copies, a.case_source_map)
-    out = classify(items, ents, shas, a.party_threshold)
-    write_report(out, a.out)
+    try:
+        ents, shas = load_corpus(a.cases, a.identity, a.holdings, a.copies, a.case_source_map)
+    except (UnicodeDecodeError, ValueError, KeyError, csv.Error, OSError) as e:
+        print(f"ERROR: corpus file unreadable or malformed ({type(e).__name__}: {e}); no report written",
+              file=sys.stderr)
+        return 2
+    out = classify(items, ents, shas, a.party_threshold, warn=lambda m: print(m, file=sys.stderr))
+    try:
+        write_report(out, a.out, inputs, a.overwrite)
+    except (OutputError, OSError) as e:
+        print(f"ERROR: {e}; no report written", file=sys.stderr)
+        return 2
     counts = {c: sum(1 for r in out if r["classification"] == c) for c in CLASSES}
     print(json.dumps({"items": len(out), "corpus_entities": len(ents), "corpus_copies": len(shas), **counts}))
     return 0

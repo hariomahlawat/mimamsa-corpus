@@ -22,15 +22,15 @@ Source: `amendment_commencement_matrix.csv` (105 rows). Army Rules and Army Act 
 | family | commencement_gap | rows |
 | --- | --- | --- |
 | AFT Act 2007 | COMMENCEMENT NOTIFICATION REQUIRED | 2 |
-| AFT Act 2007 | COMMENCEMENT_BASIS_NOT_EVIDENCED (instrument not held) | 1 |
 | AFT Act 2007 | INSTRUMENT_NOT_HELD | 1 |
+| AFT Act 2007 | NOTIFICATION_STATUS_UNKNOWN (instrument not held; whether s.181 commenced by a separate notification is not evidenced) | 1 |
 | AFT Act 2007 / TRA 2021 | COMMENCEMENT NOTIFICATION REQUIRED | 1 |
 | AFT Procedure Rules | INSTRUMENT_NOT_HELD | 1 |
-| Army Act 1950 | COMMENCEMENT NOTIFICATION REQUIRED | 2 |
+| Army Act 1950 | COMMENCEMENT NOTIFICATION REQUIRED | 3 |
 | Army Act 1950 | INSTRUMENT_NOT_HELD (known from compilation footnotes only) | 4 |
 | Army Act 1950 | INSTRUMENT_NOT_LOCATED | 2 |
 | Army Act 1950 | NOT_APPLICABLE | 7 |
-| Army Act 1950 | NOT_DETERMINED (preserved) | 3 |
+| Army Act 1950 | NOT_DETERMINED (preserved) | 2 |
 | Army Act 1950 | NOT_STATED_PENDING_ADVICE (AQ-05; preserved, no date inferred) | 18 |
 | Army Rules 1954 | INSTRUMENT_NOT_LOCATED | 16 |
 | Army Rules 1954 | NONE (commencement stated in the instrument) | 11 |
@@ -57,7 +57,7 @@ Source: `amendment_commencement_matrix.csv` (105 rows). Army Rules and Army Act 
 ## New rows (outside the C5 amendment register)
 
 - `D-AMC-AFT-00` Act 55 of 2007 (principal); appointing Notifn. S.O. 14(E) of 13-06-2008 - s.1(2) commencement of the whole Act: NOT_DETERMINED from primary evidence: compilation footnote states 15-06-2008 vide S.O. 14(E); commencement gap **COMMENCEMENT NOTIFICATION REQUIRED**.
-- `D-AMC-AFT-01` Finance Act 2017 (7 of 2017) s.181 - s.9A (inserted): NOT_DETERMINED: compilation says w.e.f. 26-5-2017; commencement basis of the Finance Act provision not evidenced; commencement gap **COMMENCEMENT_BASIS_NOT_EVIDENCED (instrument not held)**.
+- `D-AMC-AFT-01` Finance Act 2017 (7 of 2017) s.181 - s.9A (inserted): NOT_DETERMINED: compilation says w.e.f. 26-5-2017; commencement basis of the Finance Act provision not evidenced; commencement gap **NOTIFICATION_STATUS_UNKNOWN (instrument not held; whether s.181 commenced by a separate notification is not evidenced)**.
 - `D-AMC-AFT-02` Tribunals Reforms Act 2021 (33 of 2021) - UNKNOWN (no footnote in the held compilation attributes any AFT provision to Act 33 of 2021): NOT_DETERMINED; commencement gap **INSTRUMENT_NOT_HELD**.
 - `D-AMC-AFT-03` Tribunals Reforms Act 2026 (17 of 2026) s.18 and Second Schedule item 9 - s.9A (substituted): NOT_DETERMINED from primary evidence: s.1(2) commencement by notification; compilation says w.e.f. 25-08-2026; commencement gap **COMMENCEMENT NOTIFICATION REQUIRED**.
 - `D-AMC-AFT-04` Tribunals Reforms Act 2026 s.24 - whole of TRA 2021 (repeal); savings for appointments and selections: NOT_DETERMINED: depends on the s.1(2) notification; commencement gap **COMMENCEMENT NOTIFICATION REQUIRED**.

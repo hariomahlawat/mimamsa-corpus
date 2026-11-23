@@ -17,6 +17,13 @@ Method (documented in HIGH_RISK_REVIEW.md):
  3. Top <per_domain> records per domain by (score desc, id asc), de-duplicated in domain order.
  4. Three case records (cases_53) with recorded negative/qualifying later treatment in
     WS-B case_relations.csv are added for the overruling/conflicting-precedent domain.
+
+Known weak terms (review RC-15; kept unchanged so the reviewed C8 sample reproduces):
+ - date_dependency matches any year 1950-2029 (regex 19[5-9]\\d|20[0-2]\\d), so nearly every
+   record that names a year scores +2; it barely discriminates amendment-dependent text.
+ - the three case records are the first three ids in sort order (tg[:3]), not the three
+   highest-risk cases.
+ Tightening either term selects a different sample; see HIGH_RISK_REVIEW.md.
 """
 import csv
 import json

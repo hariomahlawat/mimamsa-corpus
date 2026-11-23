@@ -261,15 +261,27 @@ def main(repo, held_root, out):
                  f"relation_graph_versioned_edges.csv#L{i}")
 
     # ---------------- X14 WS-B registers --------------------------------------------------
+    # X14 (case ids) and X14c (copy hashes) cover the cycle-3 registers, as in the original run.
+    # X14b (affected_kb_ids) covers the base AND cycle-3 registers (review RC-08): each value is
+    # split on ';', ',' or '|' and every whole token that is not a records_658 id is reported
+    # (codes such as 'V6-S18 users', wildcards such as 'PEN-*', ids with trailing prose).
+    # Placeholder tokens ('—', '-', 'n/a', 'none') are not reported.
+    hold1 = rcsv(os.path.join(aw, "WS-B-JUDGMENTS/holdings_register.csv"))
+    st1_x14 = rcsv(os.path.join(aw, "WS-B-JUDGMENTS/subsequent_treatment.csv"))
+    placeholder = {"", "\u2014", "-", "n/a", "none"}
+    for reg, nm in ((hold1, "holdings_register.csv"), (st1_x14, "subsequent_treatment.csv"),
+                    (hold3, "holdings_register_cycle3.csv"), (st3, "subsequent_treatment_cycle3.csv")):
+        for r in reg:
+            for kbx in re.split(r"[;,|]", r.get("affected_kb_ids") or ""):
+                kbx = kbx.strip()
+                if kbx.lower() not in placeholder and kbx not in kbid:
+                    emit("X14b", r["row_id"], "affected_kb_ids", kbx, "must exist in records_658", nm)
     for reg, nm in ((hold3, "holdings_register_cycle3.csv"), (st3, "subsequent_treatment_cycle3.csv")):
         for r in reg:
             for k in (r.get("case53_id") or r.get("earlier_case53_ids") or "").split(";"):
                 k = k.strip()
                 if k and k not in cid:
                     emit("X14", r["row_id"], "case53_id", k, "must exist in cases_53", nm)
-            for kbx in re.split(r"[;, ]+", r.get("affected_kb_ids") or ""):
-                if kbx and re.match(r"[A-Z]", kbx) and kbx not in kbid:
-                    emit("X14b", r["row_id"], "affected_kb_ids", kbx, "must exist in records_658", nm)
             for f in ("copy_sha256", "later_copy_sha256"):
                 s = r.get(f) or ""
                 if re.fullmatch(r"[0-9a-f]{64}", s) and s not in held_sha:

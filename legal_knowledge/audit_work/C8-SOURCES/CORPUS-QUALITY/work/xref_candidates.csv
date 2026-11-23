@@ -58,25 +58,64 @@ X07,V8-JD-01,body,CrPC,legacy code reference without a 2024 transition marker,re
 X07,V8-JD-02,body,IPC,legacy code reference without a 2024 transition marker,records_658.jsonl
 X08,AR_ALT,resolution_class,PROBABLE / UNRESOLVED,citation code should resolve to an identified source,WS-D source_code_resolution_v4_proposed.csv records=HCE-010
 X08,V6-S03,resolution_class,UNRESOLVABLE / UNRESOLVED,citation code should resolve to an identified source,WS-D source_code_resolution_v4_proposed.csv records=PEN-002;PEN-049
-X14b,WSB-H3-001,affected_kb_ids,V8-S15,must exist in records_658,holdings_register_cycle3.csv
-X14c,WSB-H3-001,copy_sha256,00a6512e374c880e113494dfc51e085bb91d0fc134a0aa2cb09daa739e278531,copy sha should be in held manifest,holdings_register_cycle3.csv
-X14b,WSB-H3-002,affected_kb_ids,V8-S15,must exist in records_658,holdings_register_cycle3.csv
-X14c,WSB-H3-002,copy_sha256,00a6512e374c880e113494dfc51e085bb91d0fc134a0aa2cb09daa739e278531,copy sha should be in held manifest,holdings_register_cycle3.csv
-X14b,WSB-H3-003,affected_kb_ids,V8-S15,must exist in records_658,holdings_register_cycle3.csv
-X14c,WSB-H3-003,copy_sha256,00a6512e374c880e113494dfc51e085bb91d0fc134a0aa2cb09daa739e278531,copy sha should be in held manifest,holdings_register_cycle3.csv
-X14b,WSB-H3-004,affected_kb_ids,V8-S15,must exist in records_658,holdings_register_cycle3.csv
-X14c,WSB-H3-004,copy_sha256,00a6512e374c880e113494dfc51e085bb91d0fc134a0aa2cb09daa739e278531,copy sha should be in held manifest,holdings_register_cycle3.csv
-X14b,WSB-H3-005,affected_kb_ids,V8-S15,must exist in records_658,holdings_register_cycle3.csv
-X14c,WSB-H3-005,copy_sha256,00a6512e374c880e113494dfc51e085bb91d0fc134a0aa2cb09daa739e278531,copy sha should be in held manifest,holdings_register_cycle3.csv
+X14b,WSB-H-009,affected_kb_ids,EV-*,must exist in records_658,holdings_register.csv
+X14b,WSB-H-009,affected_kb_ids,V9-JD-02 (lexical,must exist in records_658,holdings_register.csv
+X14b,WSB-H-009,affected_kb_ids,see crosswalk),must exist in records_658,holdings_register.csv
+X14b,WSB-H-010,affected_kb_ids,V9-S05 users,must exist in records_658,holdings_register.csv
+X14b,WSB-H-011,affected_kb_ids,V9-S04 users,must exist in records_658,holdings_register.csv
+X14b,WSB-H-013,affected_kb_ids,V7-S08 users,must exist in records_658,holdings_register.csv
+X14b,WSB-H-013,affected_kb_ids,V7-S09 users,must exist in records_658,holdings_register.csv
+X14b,WSB-H-016,affected_kb_ids,V7-S01 users,must exist in records_658,holdings_register.csv
+X14b,WSB-H-021,affected_kb_ids,V6-S14 users,must exist in records_658,holdings_register.csv
+X14b,WSB-H-023,affected_kb_ids,V6-S15 users,must exist in records_658,holdings_register.csv
+X14b,WSB-H-025,affected_kb_ids,V6-S16 users,must exist in records_658,holdings_register.csv
+X14b,WSB-H-027,affected_kb_ids,V6-S18 users,must exist in records_658,holdings_register.csv
+X14b,WSB-H-029,affected_kb_ids,V6-S20 users,must exist in records_658,holdings_register.csv
+X14b,WSB-H-030,affected_kb_ids,V8-S07 users,must exist in records_658,holdings_register.csv
+X14b,WSB-H-031,affected_kb_ids,SRC-RANJIT users,must exist in records_658,holdings_register.csv
+X14b,WSB-H-032,affected_kb_ids,SC_PPS users,must exist in records_658,holdings_register.csv
+X14b,WSB-H-033,affected_kb_ids,V7-S10 users,must exist in records_658,holdings_register.csv
+X14b,WSB-H-034,affected_kb_ids,PEN-* (v3.4 impact queue),must exist in records_658,holdings_register.csv
+X14b,WSB-H-035,affected_kb_ids,PEN-* (v3.4 impact queue),must exist in records_658,holdings_register.csv
+X14b,WSB-H-036,affected_kb_ids,PEN-*,must exist in records_658,holdings_register.csv
+X14b,WSB-H-037,affected_kb_ids,PEN-*,must exist in records_658,holdings_register.csv
+X14b,WSB-H-038,affected_kb_ids,PEN-*,must exist in records_658,holdings_register.csv
+X14b,WSB-H-039,affected_kb_ids,PEN-*,must exist in records_658,holdings_register.csv
+X14b,WSB-H-043,affected_kb_ids,V8-S15 users,must exist in records_658,holdings_register.csv
+X14b,WSB-H-048,affected_kb_ids,CIV-*,must exist in records_658,holdings_register.csv
+X14b,WSB-H-055,affected_kb_ids,PEN-*,must exist in records_658,holdings_register.csv
+X14b,WSB-H-057,affected_kb_ids,V6-S17 users,must exist in records_658,holdings_register.csv
+X14b,WSB-T-001,affected_kb_ids,EV-*,must exist in records_658,subsequent_treatment.csv
+X14b,WSB-T-003,affected_kb_ids,V9-* (see crosswalk),must exist in records_658,subsequent_treatment.csv
+X14b,WSB-T-004,affected_kb_ids,V7-S09 users,must exist in records_658,subsequent_treatment.csv
+X14b,WSB-T-009,affected_kb_ids,PEN-*,must exist in records_658,subsequent_treatment.csv
+X14b,WSB-T-010,affected_kb_ids,PEN-*,must exist in records_658,subsequent_treatment.csv
+X14b,WSB-T-011,affected_kb_ids,PEN-*,must exist in records_658,subsequent_treatment.csv
+X14b,WSB-T-012,affected_kb_ids,PEN-*,must exist in records_658,subsequent_treatment.csv
+X14b,WSB-T-013,affected_kb_ids,PEN-*,must exist in records_658,subsequent_treatment.csv
+X14b,WSB-T-014,affected_kb_ids,PEN-*,must exist in records_658,subsequent_treatment.csv
+X14b,WSB-T-015,affected_kb_ids,PEN-*,must exist in records_658,subsequent_treatment.csv
+X14b,WSB-T-018,affected_kb_ids,COI-*,must exist in records_658,subsequent_treatment.csv
+X14b,WSB-T-023,affected_kb_ids,CIV-*,must exist in records_658,subsequent_treatment.csv
+X14b,WSB-H3-001,affected_kb_ids,V8-S15 users,must exist in records_658,holdings_register_cycle3.csv
+X14b,WSB-H3-002,affected_kb_ids,V8-S15 users,must exist in records_658,holdings_register_cycle3.csv
+X14b,WSB-H3-003,affected_kb_ids,V8-S15 users,must exist in records_658,holdings_register_cycle3.csv
+X14b,WSB-H3-004,affected_kb_ids,V8-S15 users,must exist in records_658,holdings_register_cycle3.csv
+X14b,WSB-H3-005,affected_kb_ids,V8-S15 users,must exist in records_658,holdings_register_cycle3.csv
 X14b,WSB-H3-006,affected_kb_ids,PEN-*,must exist in records_658,holdings_register_cycle3.csv
-X14c,WSB-H3-006,copy_sha256,c2f51fac25017d104cf5040bfc4eeac88b9111f5ea1f514eddb11d81465741dc,copy sha should be in held manifest,holdings_register_cycle3.csv
 X14b,WSB-H3-007,affected_kb_ids,PEN-*,must exist in records_658,holdings_register_cycle3.csv
-X14c,WSB-H3-007,copy_sha256,77919f00c20215f08db90327b55431559a291f171d001dcdfe789d04b150daf1,copy sha should be in held manifest,holdings_register_cycle3.csv
 X14b,WSB-H3-008,affected_kb_ids,PEN-*,must exist in records_658,holdings_register_cycle3.csv
-X14c,WSB-H3-008,copy_sha256,89eb15de4987dc7b46c2acf1c2c448d38528e066b3d2479146b2154f3df8676a,copy sha should be in held manifest,holdings_register_cycle3.csv
 X14b,WSB-H3-016,affected_kb_ids,AFT-*,must exist in records_658,holdings_register_cycle3.csv
 X14b,WSB-H3-019,affected_kb_ids,PEN-*,must exist in records_658,holdings_register_cycle3.csv
 X14b,WSB-T3-004,affected_kb_ids,PEN-*,must exist in records_658,subsequent_treatment_cycle3.csv
+X14c,WSB-H3-001,copy_sha256,00a6512e374c880e113494dfc51e085bb91d0fc134a0aa2cb09daa739e278531,copy sha should be in held manifest,holdings_register_cycle3.csv
+X14c,WSB-H3-002,copy_sha256,00a6512e374c880e113494dfc51e085bb91d0fc134a0aa2cb09daa739e278531,copy sha should be in held manifest,holdings_register_cycle3.csv
+X14c,WSB-H3-003,copy_sha256,00a6512e374c880e113494dfc51e085bb91d0fc134a0aa2cb09daa739e278531,copy sha should be in held manifest,holdings_register_cycle3.csv
+X14c,WSB-H3-004,copy_sha256,00a6512e374c880e113494dfc51e085bb91d0fc134a0aa2cb09daa739e278531,copy sha should be in held manifest,holdings_register_cycle3.csv
+X14c,WSB-H3-005,copy_sha256,00a6512e374c880e113494dfc51e085bb91d0fc134a0aa2cb09daa739e278531,copy sha should be in held manifest,holdings_register_cycle3.csv
+X14c,WSB-H3-006,copy_sha256,c2f51fac25017d104cf5040bfc4eeac88b9111f5ea1f514eddb11d81465741dc,copy sha should be in held manifest,holdings_register_cycle3.csv
+X14c,WSB-H3-007,copy_sha256,77919f00c20215f08db90327b55431559a291f171d001dcdfe789d04b150daf1,copy sha should be in held manifest,holdings_register_cycle3.csv
+X14c,WSB-H3-008,copy_sha256,89eb15de4987dc7b46c2acf1c2c448d38528e066b3d2479146b2154f3df8676a,copy sha should be in held manifest,holdings_register_cycle3.csv
 X14c,WSB-T3-004,later_copy_sha256,89eb15de4987dc7b46c2acf1c2c448d38528e066b3d2479146b2154f3df8676a,copy sha should be in held manifest,subsequent_treatment_cycle3.csv
 X15,DCLR-SC-1982-001,reporter_citation (neutral citation),case '(1982) 3 SCC 140; 1983 1 SCR 393' lacks '1982 INSC 65',neutral_citation is a schema field; WS-B identity evidence carries it,WS-B identity_resolution.csv spec_key=PPS_BEDI spec=1982 INSC 65 intern=1982 INSC 65 official_copy_held=True
 X15,DCLR-SC-2019-003,reporter_citation (neutral citation),case '' lacks '2019 INSC 1083',neutral_citation is a schema field; WS-B identity evidence carries it,WS-B identity_resolution.csv spec_key=KULDEEP spec= intern=2019 INSC 1083 official_copy_held=False

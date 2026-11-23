@@ -1,30 +1,49 @@
 test_case_key_range_expansion (test_reconcile_judgments.ReconcileTests.test_case_key_range_expansion) ... ok
 test_case_key_types (test_reconcile_judgments.ReconcileTests.test_case_key_types) ... ok
+test_csv_duplicate_header_exit_2 (test_reconcile_judgments.ReconcileTests.test_csv_duplicate_header_exit_2) ... ok
 test_csv_input (test_reconcile_judgments.ReconcileTests.test_csv_input) ... ok
 test_deterministic_output (test_reconcile_judgments.ReconcileTests.test_deterministic_output) ... ok
 test_different_court_same_number_not_strong (test_reconcile_judgments.ReconcileTests.test_different_court_same_number_not_strong) ... ok
 test_exact_duplicate_c5_copy_mapped_to_case (test_reconcile_judgments.ReconcileTests.test_exact_duplicate_c5_copy_mapped_to_case) ... ok
 test_exact_duplicate_corpus (test_reconcile_judgments.ReconcileTests.test_exact_duplicate_corpus) ... ok
 test_exact_duplicate_within_batch (test_reconcile_judgments.ReconcileTests.test_exact_duplicate_within_batch) ... ok
+test_formula_cells_neutralised (test_reconcile_judgments.ReconcileTests.test_formula_cells_neutralised) ... ok
 test_inputs_not_modified (test_reconcile_judgments.ReconcileTests.test_inputs_not_modified) ... ok
+test_known_hash_consistent_metadata_not_flagged (test_reconcile_judgments.ReconcileTests.test_known_hash_consistent_metadata_not_flagged) ... ok
+test_known_hash_with_contradictory_metadata_flagged (test_reconcile_judgments.ReconcileTests.test_known_hash_with_contradictory_metadata_flagged) ... ok
+test_malformed_ancient_date (test_reconcile_judgments.ReconcileTests.test_malformed_ancient_date) ... ok
 test_malformed_bad_date (test_reconcile_judgments.ReconcileTests.test_malformed_bad_date) ... ok
 test_malformed_bad_sha (test_reconcile_judgments.ReconcileTests.test_malformed_bad_sha) ... ok
+test_malformed_duplicate_item_id (test_reconcile_judgments.ReconcileTests.test_malformed_duplicate_item_id) ... ok
+test_malformed_duplicate_json_key (test_reconcile_judgments.ReconcileTests.test_malformed_duplicate_json_key) ... ok
+test_malformed_future_date (test_reconcile_judgments.ReconcileTests.test_malformed_future_date) ... ok
 test_malformed_json_line (test_reconcile_judgments.ReconcileTests.test_malformed_json_line) ... ok
 test_malformed_missing_field (test_reconcile_judgments.ReconcileTests.test_malformed_missing_field) ... ok
 test_malformed_no_provenance (test_reconcile_judgments.ReconcileTests.test_malformed_no_provenance) ... ok
+test_malformed_non_string_list_member (test_reconcile_judgments.ReconcileTests.test_malformed_non_string_list_member) ... ok
+test_malformed_nul_byte (test_reconcile_judgments.ReconcileTests.test_malformed_nul_byte) ... ok
 test_malformed_unparseable_case_number (test_reconcile_judgments.ReconcileTests.test_malformed_unparseable_case_number) ... ok
 test_missing_corpus_file_fails_closed (test_reconcile_judgments.ReconcileTests.test_missing_corpus_file_fails_closed) ... ok
 test_new (test_reconcile_judgments.ReconcileTests.test_new) ... ok
+test_non_utf8_csv_exit_2 (test_reconcile_judgments.ReconcileTests.test_non_utf8_csv_exit_2) ... ok
 test_one_bad_item_blocks_whole_batch (test_reconcile_judgments.ReconcileTests.test_one_bad_item_blocks_whole_batch) ... ok
+test_out_directory_or_missing_parent_exit_2 (test_reconcile_judgments.ReconcileTests.test_out_directory_or_missing_parent_exit_2) ... ok
 test_out_equal_to_input_refused (test_reconcile_judgments.ReconcileTests.test_out_equal_to_input_refused) ... ok
+test_out_existing_non_input_refused_without_overwrite (test_reconcile_judgments.ReconcileTests.test_out_existing_non_input_refused_without_overwrite) ... ok
+test_out_hardlink_to_input_refused (test_reconcile_judgments.ReconcileTests.test_out_hardlink_to_input_refused) ... ok
+test_out_input_path_refused_even_with_overwrite (test_reconcile_judgments.ReconcileTests.test_out_input_path_refused_even_with_overwrite) ... ok
+test_out_inside_curated_originals_refused (test_reconcile_judgments.ReconcileTests.test_out_inside_curated_originals_refused) ... ok
+test_out_symlink_to_input_refused (test_reconcile_judgments.ReconcileTests.test_out_symlink_to_input_refused) ... ok
 test_possible_match_citation_only (test_reconcile_judgments.ReconcileTests.test_possible_match_citation_only) ... ok
 test_possible_match_party_only (test_reconcile_judgments.ReconcileTests.test_possible_match_party_only) ... ok
 test_possible_match_same_case_other_date (test_reconcile_judgments.ReconcileTests.test_possible_match_same_case_other_date) ... ok
 test_same_judgment_new_copy (test_reconcile_judgments.ReconcileTests.test_same_judgment_new_copy) ... ok
+test_untyped_case_number_not_strong (test_reconcile_judgments.ReconcileTests.test_untyped_case_number_not_strong) ... ok
 test_version_relationship_marker_on_corpus_copy (test_reconcile_judgments.ReconcileTests.test_version_relationship_marker_on_corpus_copy) ... ok
 test_version_relationship_marker_on_incoming (test_reconcile_judgments.ReconcileTests.test_version_relationship_marker_on_incoming) ... ok
+test_within_batch_duplicate_conflict_flagged (test_reconcile_judgments.ReconcileTests.test_within_batch_duplicate_conflict_flagged) ... ok
 
 ----------------------------------------------------------------------
-Ran 25 tests in 0.041s
+Ran 44 tests in 0.125s
 
 OK

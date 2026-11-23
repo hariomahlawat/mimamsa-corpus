@@ -115,6 +115,8 @@ class ReconcileTests(unittest.TestCase):
                 w.writeheader()
                 for it in items:
                     w.writerow({k: (";".join(v) if isinstance(v, list) else v) for k, v in it.items()})
+        if os.path.lexists(self.out):  # the tool refuses an existing --out without --overwrite
+            os.remove(self.out)
         err, outbuf = io.StringIO(), io.StringIO()
         with redirect_stderr(err), redirect_stdout(outbuf):
             code = rj.main(self.fx.args(p, self.out))
@@ -265,6 +267,166 @@ class ReconcileTests(unittest.TestCase):
             code = rj.main(["--incoming", p, "--out", self.out, "--repo", os.path.join(self.tmp.name, "nope")])
         self.assertEqual(code, 2)
         self.assertIn("missing input", err.getvalue())
+
+    # --- output-path guard (review RC-02) ------------------------------------------------------
+    def _batch_file(self):
+        p = os.path.join(self.tmp.name, "b.jsonl")
+        with open(p, "w") as f:
+            f.write(json.dumps(item()) + "\n")
+        return p
+
+    def _main(self, argv):
+        err = io.StringIO()
+        with redirect_stderr(err), redirect_stdout(io.StringIO()):
+            code = rj.main(argv)
+        return code, err.getvalue()
+
+    def _no_temp_left(self):
+        left = [n for n in os.listdir(self.tmp.name) if n.startswith(".reconcile-")]
+        self.assertEqual(left, [], "temporary report file left behind")
+
+    def test_out_symlink_to_input_refused(self):
+        p = self._batch_file()
+        link = os.path.join(self.tmp.name, "link.csv")
+        os.symlink(self.fx.cases, link)
+        before = rb(self.fx.cases)
+        for extra in ([], ["--overwrite"]):
+            code, err = self._main(self.fx.args(p, link) + extra)
+            self.assertEqual(code, 2)
+            self.assertIn("resolves to input", err)
+            self.assertEqual(rb(self.fx.cases), before)
+        self._no_temp_left()
+
+    def test_out_hardlink_to_input_refused(self):
+        p = self._batch_file()
+        hl = os.path.join(self.tmp.name, "hard.csv")
+        os.link(self.fx.identity, hl)
+        before = rb(self.fx.identity)
+        for extra in ([], ["--overwrite"]):
+            code, err = self._main(self.fx.args(p, hl) + extra)
+            self.assertEqual(code, 2)
+            self.assertIn("resolves to input", err)
+            self.assertEqual(rb(self.fx.identity), before)
+
+    def test_out_existing_non_input_refused_without_overwrite(self):
+        p = self._batch_file()
+        other = os.path.join(self.tmp.name, "records_copy.jsonl")
+        with open(other, "w") as f:
+            f.write('{"id": "KEEP"}\n')
+        code, err = self._main(self.fx.args(p, other))
+        self.assertEqual(code, 2)
+        self.assertIn("already exists", err)
+        self.assertEqual(rb(other), b'{"id": "KEEP"}\n')
+        code, err = self._main(self.fx.args(p, other) + ["--overwrite"])
+        self.assertEqual(code, 0)
+        self.assertTrue(rb(other).startswith(b"line,item_id,classification"))
+        self._no_temp_left()
+
+    def test_out_input_path_refused_even_with_overwrite(self):
+        p = self._batch_file()
+        for target in (p, self.fx.cases, os.path.join(self.tmp.name, ".", "holdings.csv")):
+            before = rb(target)
+            code, err = self._main(self.fx.args(p, target) + ["--overwrite"])
+            self.assertEqual(code, 2)
+            self.assertEqual(rb(target), before)
+
+    def test_out_inside_curated_originals_refused(self):
+        p = self._batch_file()
+        d = os.path.join(self.tmp.name, "curated_originals")
+        os.mkdir(d)
+        code, err = self._main(self.fx.args(p, os.path.join(d, "r.csv")))
+        self.assertEqual(code, 2)
+        self.assertIn("curated_originals", err)
+        self.assertEqual(os.listdir(d), [])
+
+    def test_out_directory_or_missing_parent_exit_2(self):
+        p = self._batch_file()
+        code, err = self._main(self.fx.args(p, self.tmp.name))
+        self.assertEqual(code, 2)
+        code, err = self._main(self.fx.args(p, os.path.join(self.tmp.name, "nodir", "r.csv")))
+        self.assertEqual(code, 2)
+        self.assertIn("parent directory", err)
+
+    # --- input hygiene and fail-open cases (review RC-10) --------------------------------------
+    def test_known_hash_with_contradictory_metadata_flagged(self):
+        err = io.StringIO()
+        code, rows, errtxt = self.run_batch([item(sha256=SHA_A, court="High Court of Delhi",
+                                                  case_numbers=["W.P.(C) 77/2015"], judgment_date="2015-05-05",
+                                                  parties="Foxtrot v Golf")])
+        self.assertEqual(code, 0)
+        self.assertEqual(rows[0]["classification"], "EXACT_DUPLICATE")
+        self.assertEqual(rows[0]["flags"], "METADATA_CONFLICT_WITH_KNOWN_HASH")
+        self.assertIn("WARNING", rows[0]["reasons"])
+        self.assertIn("metadata conflicts", errtxt)
+
+    def test_known_hash_consistent_metadata_not_flagged(self):
+        code, rows, _ = self.run_batch([item(sha256=SHA_A, case_numbers=["Civil Appeal No. 1111 of 2018"],
+                                             judgment_date="2019-03-01", parties="Union of India v Alpha Kumar")])
+        self.assertEqual(rows[0]["classification"], "EXACT_DUPLICATE")
+        self.assertEqual(rows[0]["flags"], "")
+
+    def test_within_batch_duplicate_conflict_flagged(self):
+        s = h("twice-conflict")
+        code, rows, _ = self.run_batch([item(sha256=s, item_id="a"),
+                                        item(sha256=s, item_id="b", judgment_date="2010-01-01")])
+        self.assertEqual(rows[1]["classification"], "EXACT_DUPLICATE")
+        self.assertEqual(rows[1]["flags"], "METADATA_CONFLICT_WITH_KNOWN_HASH")
+
+    def test_untyped_case_number_not_strong(self):
+        code, rows, _ = self.run_batch([item(case_numbers=["2202/2019"], judgment_date="2020-07-10",
+                                             parties="Hotel v India")])
+        self.assertEqual(rows[0]["classification"], "POSSIBLE_MATCH_REVIEW")
+        self.assertIn("UNTYPED", rows[0]["reasons"])
+
+    def test_formula_cells_neutralised(self):
+        code, rows, _ = self.run_batch([item(item_id="@SUM(1+1)", parties="=cmd|' /C calc'!A0 v India")])
+        self.assertEqual(code, 0)
+        self.assertEqual(rows[0]["item_id"], "'@SUM(1+1)")
+        self.assertTrue(rows[0]["parties"].startswith("'="))
+
+    def test_malformed_duplicate_json_key(self):
+        p = os.path.join(self.tmp.name, "dupkey.jsonl")
+        line = json.dumps(item())[:-1] + ', "court": "High Court of Delhi"}'
+        with open(p, "w") as f:
+            f.write(line + "\n")
+        code, err = self._main(self.fx.args(p, self.out))
+        self.assertEqual(code, 2)
+        self.assertIn("duplicate JSON key 'court'", err)
+        self.assertFalse(os.path.exists(self.out))
+
+    def test_malformed_duplicate_item_id(self):
+        self.assert_fail_closed([item(item_id="x"), item(item_id="x", sha256=h("other"))], "duplicate item_id")
+
+    def test_malformed_nul_byte(self):
+        self.assert_fail_closed([item(parties="Union of India v Echo\x00 Prasad")], "control character")
+
+    def test_malformed_future_date(self):
+        self.assert_fail_closed([item(judgment_date="2999-01-01")], "in the future")
+
+    def test_malformed_ancient_date(self):
+        self.assert_fail_closed([item(judgment_date="1700-01-01")], "implausible")
+
+    def test_malformed_non_string_list_member(self):
+        self.assert_fail_closed([item(case_numbers=["CA 1/2020", 5])], "must be strings")
+
+    def test_non_utf8_csv_exit_2(self):
+        p = os.path.join(self.tmp.name, "latin.csv")
+        with open(p, "wb") as f:
+            f.write(b"court,case_numbers,judgment_date,parties,sha256,source_url\n"
+                    b"Supreme Court,CA 1/2020,2020-01-01,Jos\xe9 v India," + SHA_B.encode() + b",x\n")
+        code, err = self._main(self.fx.args(p, self.out))
+        self.assertEqual(code, 2)
+        self.assertIn("not valid UTF-8", err)
+        self.assertFalse(os.path.exists(self.out))
+
+    def test_csv_duplicate_header_exit_2(self):
+        p = os.path.join(self.tmp.name, "duphdr.csv")
+        with open(p, "w") as f:
+            f.write("court,court,case_numbers,judgment_date,parties,sha256,source_url\n"
+                    "SC,HC,CA 1/2020,2020-01-01,A v B," + SHA_B + ",x\n")
+        code, err = self._main(self.fx.args(p, self.out))
+        self.assertEqual(code, 2)
+        self.assertIn("duplicate column", err)
 
     # --- helpers ------------------------------------------------------------------------------
     def test_case_key_range_expansion(self):
