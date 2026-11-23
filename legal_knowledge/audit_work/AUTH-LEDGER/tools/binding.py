@@ -62,6 +62,46 @@ def _show(top, commit, path):
     return p.stdout if p.returncode == 0 else None
 
 
+PACKAGE_PARTS = ("legal_knowledge", "audit_work", "AUTH-LEDGER")
+
+
+def check_package_layout(package):
+    """Fail closed unless the committed ledger package is a real directory inside its repository (C8, Fable C-02).
+
+    `package` is the logical (unresolved) package path. Every component from the repository top down to the package
+    (legal_knowledge/audit_work/AUTH-LEDGER) must exist and must not be a symlink, including a broken one. Where git is
+    available, the checked-out commit must also record each of those components as a tree (mode 040000), never as a
+    committed symlink (120000). Returns the logical repository top."""
+    package = Path(os.path.abspath(package))
+    if tuple(package.parts[-3:]) != PACKAGE_PARTS:
+        raise LedgerError(f"ledger package {package} is not at legal_knowledge/audit_work/AUTH-LEDGER")
+    top = package.parents[2]
+    cur = top
+    for part in PACKAGE_PARTS:
+        cur = cur / part
+        if cur.is_symlink():
+            raise LedgerError(f"ledger package path component {cur} is a symlink; a symlinked package could redirect verification")
+        if not cur.is_dir():
+            raise LedgerError(f"ledger package path component {cur} is not a directory")
+    p = _git(top, "rev-parse", "--show-toplevel", check=False)
+    if p.returncode == 0 and Path(p.stdout.decode().strip()).resolve() == top.resolve():
+        for i in range(1, len(PACKAGE_PARTS) + 1):
+            rel = "/".join(PACKAGE_PARTS[:i])
+            out = _git(top, "ls-tree", "HEAD", "--", rel, check=False).stdout.decode().split()
+            if out and out[0] != "040000":
+                raise LedgerError(f"{rel} is committed with mode {out[0]} (not a directory tree); a committed symlink could redirect verification")
+    return top
+
+
+def _object_ok(top, sha, kind):
+    """Re-hash a commit object from its stored bytes (C8, Fable C-04): a forged loose or packed object stored under a
+    genuine id is rejected here, not only incidentally by merge-base."""
+    body = _git(top, "cat-file", kind, sha, check=False)
+    if body.returncode != 0:
+        return False
+    return hashlib.sha1(f"{kind} {len(body.stdout)}\0".encode() + body.stdout).hexdigest() == sha
+
+
 def check_shape(b):
     if not isinstance(b, dict) or list(b) != BIND_KEYS:
         raise LedgerError(f"binding keys must be exactly {BIND_KEYS}")
@@ -124,9 +164,14 @@ def verify(root, line, lines, canonical_line, expected_top=None):
     for c in (mc, rh):
         if _git(top, "cat-file", "-t", c, check=False).stdout.decode().strip() != "commit":
             raise LedgerError(f"version {line['version']}: commit {c[:12]} is not in the local history")
+    for c in (mc, rh):
+        if not _object_ok(top, c, "commit"):
+            raise LedgerError(f"version {line['version']}: commit object {c[:12]} does not hash to its id (forged or corrupt object)")
     parents = _git(top, "rev-list", "--parents", "-n", "1", mc).stdout.decode().split()[1:]
     if len(parents) != 2:
         raise LedgerError(f"version {line['version']}: merge_commit has {len(parents)} parent(s); an ordinary two-parent merge is required")
+    if not all(_object_ok(top, x, "commit") for x in parents):
+        raise LedgerError(f"version {line['version']}: a parent commit object of merge_commit does not hash to its id")
     if parents[1] != rh:
         raise LedgerError(f"version {line['version']}: merge_commit's second parent {parents[1][:12]} is not reviewed_head {rh[:12]}")
     if _git(top, "merge-base", "--is-ancestor", mc, "HEAD", check=False).returncode != 0:

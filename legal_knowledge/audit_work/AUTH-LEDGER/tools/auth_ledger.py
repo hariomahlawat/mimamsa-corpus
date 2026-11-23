@@ -46,6 +46,7 @@ def genesis(root=PKG):
 
 def verify(root=PKG):
     root = Path(root)
+    L.check_committed_layout(root)  # before any file is read (C8, Fable C-02)
     lines = L.read_manifest(root)
     report = []
     for line in lines:

@@ -57,7 +57,14 @@ Further rules:
 
 `require_binding=False` keeps the AUTH-LEDGER-01 semantics. It is used only for the synthetic evidence-rule tests and for the tranche simulation, both in temporary directories. The command-line tool never selects it, and a test checks that.
 
-**Trust assumption.** Verification assumes that the local object store and `.git` directory handed to the verifier have not been tampered with beyond the mechanisms checked (replace refs, grafts, commit-graph, nested repositories, inherited environment). An auditor should verify from a fresh clone or bundle, not from a working copy supplied by the party being audited. This includes a committed symlink in place of the package directory (git mode 120000), which could point verification at another repository (Fable C-02). Before verifying, an auditor should check that `legal_knowledge/audit_work/AUTH-LEDGER` is a real directory in the clone. A fail-closed code check is recorded as open item C-02.
+**Trust assumption.** Verification assumes that the local object store and `.git` directory handed to the verifier have not been tampered with beyond the mechanisms checked. The checked mechanisms are:
+- replace refs, grafts and the commit-graph;
+- nested repositories, with the repository top pinned from the logical package path;
+- a symlinked package or a symlinked parent directory, on disk or committed as mode 120000, which fails closed before any ledger file is read (Cycle 8, closing Fable C-02);
+- forged commit objects for the merge, the reviewed head and both parents, which are re-hashed from their stored bytes (Cycle 8, closing C-04);
+- the inherited environment.
+
+An auditor should still verify from a fresh clone or bundle, not from a working copy supplied by the party being audited.
 
 ## Owner decisions needed (nothing here is adopted)
 - **O-1 Owner signature.** Optionally require an owner signature over each BIND line, checked against a public key supplied out of band. Options are SSH (`ssh-keygen -Y verify`) or OpenPGP.
@@ -70,6 +77,6 @@ Further rules:
   - no bypass.
 
   These are GitHub settings, outside the repository files. The BIND line records the review, and an auditor can confirm it online.
-- **O-3 CI full history.** Approve the `fetch-depth: 0` workflow change before the first BIND line.
-- **O-5 Demotions.** Should a WITHDRAW or demoting CORRECTION take effect before its BIND line? Today every version is staged (Fable F-14).
+- **O-3 CI full history.** Approve the `fetch-depth: 0` workflow change before the first BIND line. It is prepared as its own draft PR (Cycle 8); see `REPOSITORY_BINDING_READINESS.md`.
+- **O-5 Demotions.** Should a WITHDRAW or demoting CORRECTION take effect before its BIND line? Today every version is staged (Fable F-14). Analysis and recommended procedure: `DEMOTION_SEMANTICS_O5.md`. No semantic change is implemented.
 - **O-4 Who may be named.** Optionally keep a committed list of authorised owner and reviewer identities. It would be authoritative only together with O-1.

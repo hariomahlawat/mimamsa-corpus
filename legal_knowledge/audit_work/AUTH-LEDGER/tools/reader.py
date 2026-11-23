@@ -158,6 +158,7 @@ def summary(B, master, copies, cw, out):
 
 def effective_state(root=PKG, as_of=None, require_binding=True):
     """Return {output name: text} for the ledger at `root` as of version `as_of` (default: HEAD)."""
+    L.check_committed_layout(root)  # before any file is read (C8, Fable C-02)
     B = frozen_builder(root)
     held_c5, by_name = defaultdict(list), {}
     for h in read_csv(AW / "SOURCE-LIBRARY-C5/baseline/held_binaries_manifest.csv"):

@@ -3,6 +3,9 @@ import csv, hashlib, io, json
 from pathlib import Path
 
 PKG = Path(__file__).resolve().parents[1]
+# The package path as reached, WITHOUT resolving symlinks (C8, Fable C-02): a symlinked package must be detectable, so the
+# repository pin and the symlink check use this logical path rather than the resolved one.
+LOGICAL_PKG = Path(__import__("os").path.abspath(__file__)).parents[1]
 AW = PKG.parent
 REPO = AW.parents[1]
 HEX64 = __import__("re").compile(r"[0-9a-f]{64}")
