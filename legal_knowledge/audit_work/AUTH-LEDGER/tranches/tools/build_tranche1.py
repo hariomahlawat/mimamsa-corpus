@@ -151,7 +151,8 @@ def l5_observations(evidence_refs, sha):
 
 
 def identity_text(refs):
-    """Text that a person read from the page image (image-check observations and independent transcriptions) only.
+    """Text recorded from the page image in image-check observations and independent transcriptions. Whether each record
+    was made by a person or by an agent is not established here (Fable R-03); no record is described as human-confirmed.
     Register rows (ARMY-RULES-CHAIN-01) restate the expected identity and are excluded, so the check is not circular."""
     parts = []
     for ref in [x for x in refs.split("; ") if x and not x.startswith("T:")]:
@@ -192,13 +193,18 @@ def build():
         verdict, why = rule1(e)
         fc = fidelity_class(T, C["text_layer_class"], F["pages"])
         l5 = l5_observations(e["evidence_refs"], s)
-        idtxt = identity_text(e["identity_refs"]) + " " + " ".join(r.get("identity_evidence", "") for _x, r in l5)
+        imgtxt = identity_text(e["identity_refs"])
+        l5txt = " ".join(r.get("identity_evidence", "") for _x, r in l5)
+        idtxt = imgtxt + " " + l5txt
         sros = sro_numbers(d["document_identity"])
         pat = lambda n: r"S\.?\s*R\.?\s*O\.?\s*" + re.escape(n.split("(")[0].strip()) + r"\b"
         sro_img = [n for n in sros if re.search(pat(n), idtxt)]
         sro_p1 = [n for n in sros if re.search(pat(n), F["p1_text_excerpt"])]
         exact = strength.contradiction(url, s)
         id_read = bool(sros) and set(sro_img) == set(sros)
+        in_checks = bool(sros) and all(re.search(pat(n), imgtxt) for n in sros)
+        id_source = ("IMAGE_CHECK_OR_TRANSCRIPTION" if in_checks else
+                     "L5_DISCOVERY_REGISTER_ONLY" if id_read else "NOT_RECORDED")
         sub = "1B-FIDELITY" if fc.startswith("BORN_DIGITAL") else ("1A-READY" if id_read else "1A-CONFIRM-ID")
         special = ""
         if "S.R.O. 34 (1963" in d["document_identity"]:
@@ -225,18 +231,24 @@ def build():
                    "recorded verbatim (no amendment-chain inference)")
         else:
             rcm = "ELIGIBLE UNDER RULE 1; READY for an owner decision with the stated limitations"
+        if id_source == "L5_DISCOVERY_REGISTER_ONLY" and verdict == "PASS":
+            rcm += ("; ADVISABLE FIRST: a CONFIRMED identity check transcribing the S.R.O. number and date line (they are quoted only "
+                    "in an agent-produced discovery register)")
         reg.append({"tranche_id": tid, "sub_tranche": sub, "sha256": s, "source_id": d["source_id"], "copy_id": d["copy_id"],
                     "document_identity": neutral_identity(d["document_identity"]), "issuing_authority": M["authority"], "publication_type": M["publication_type"],
                     "notification_identifiers": "; ".join(f"S.R.O. {n}" for n in sros),
-                    "identifier_read_on_image": "YES" if id_read else "NOT_RECORDED", "carrier": C["copy_carrier_provenance"].split(" ")[0],
+                    "identifier_source": id_source, "carrier": C["copy_carrier_provenance"].split(" ")[0],
                     "fidelity_class": fc, "first_class_locator": url, "proposed_class": CLS, "rule1_result": verdict, "recommendation": rcm})
         matrix.append({
             "tranche_id": tid, "sha256": s,
             "v01_exact_source": f"{d['source_id']} / {d['copy_id']}: {neutral_identity(M['title'])}",
             "v02_held_file_sha256": f"{s} (held: {R['held_paths']})",
             "v03_issuing_authority": M["authority"],
-            "v04_title_and_identifier": (f"{neutral_identity(d['document_identity'])}; S.R.O. number(s) {sros}: read in image-check, transcription or L5 image-quote text {sro_img or 'NOT FOUND'}; "
-                                         f"in page-1 text layer {sro_p1 or 'NOT FOUND'} (text-layer absence is not adverse for a scanned page)"),
+            "v04_title_and_identifier": (f"{neutral_identity(d['document_identity'])}; S.R.O. number(s) {sros}: found in image-check or transcription text {[n for n in sros if re.search(pat(n), imgtxt)] or 'NOT FOUND'}; "
+                                         f"in the L5 R23 discovery-register quotation {[n for n in sros if re.search(pat(n), l5txt)] or 'NOT FOUND'}; "
+                                         f"in the held page-1 text excerpt {sro_p1 or 'NOT FOUND'}"
+                                         + (" (text-layer absence is not adverse for a scanned page)" if fc == "SCANNED_FACSIMILE" else
+                                            " (the search covered the held page-1 excerpt only; the instrument is printed on a later page)")),
             "v05_carrier_classification": f"{C['copy_carrier_provenance']}; class {CLS}; publication type {M['publication_type']}",
             "v06_provenance_evidence": (f"first-class {kind}/{strg}: {d['first_class_record_ref']} -> {url}; checksums: {R['checksum_evidence']}; "
                                         f"retrieval date: {R['retrieval_date']}"),
@@ -265,7 +277,11 @@ def build():
         if sub == "1B-FIDELITY":
             extra.append("FIDELITY: born-digital; embedded signature byte range spans the file - STRUCTURAL ONLY, signature NOT "
                          "cryptographically validated; held pending the owner's fidelity-class decision")
-        if not id_read:
+        if id_source == "L5_DISCOVERY_REGISTER_ONLY":
+            extra.append("IDENTIFIER: the S.R.O. number and date line are quoted only in the R23 amendment-search register, which was produced "
+                         "by a read-only discovery agent and is a review proposal, not approved; it is not an identity-reference kind under "
+                         "rule 1. A CONFIRMED identity check transcribing them is advisable before approval")
+        elif not id_read:
             extra.append("IDENTIFIER: S.R.O. number and date line not found in a committed image observation; confirm before approval")
         e = dict(e, limitations="; ".join([e["limitations"]] + extra))
         pending.append(dict(e, tranche_status="PENDING_NOT_IN_LEDGER", tranche_note=(

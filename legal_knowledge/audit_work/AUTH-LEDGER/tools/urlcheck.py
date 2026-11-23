@@ -26,6 +26,7 @@ import unicodedata
 import urllib.parse
 
 MAX_LEN = 2048
+LOOKALIKES = {"\u2215", "\u2044", "\u29f8", "\ufffd"}  # division slash, fraction slash, big solidus, replacement character
 _URI_CHARS = re.compile(r"[A-Za-z0-9\-._~:/?#@!$&'()*+,;=%]*")  # RFC 3986 reserved + unreserved + '%' (no '[' ']')
 _PCT = re.compile(r"%(..)?", re.S)
 _LABEL = re.compile(r"[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?")
@@ -62,6 +63,9 @@ def _decoded_problem(part, where):
         cat = unicodedata.category(ch)
         if cat in ("Cc", "Cf", "Cs", "Co", "Cn", "Zl", "Zp") or (cat == "Zs" and ch != " "):
             return f"decoded {where} contains a control, format, separator or unassigned character U+{ord(ch):04X}"
+    bad = sorted(set(dec) & LOOKALIKES)
+    if bad:
+        return f"decoded {where} contains a slash look-alike or replacement character U+{ord(bad[0]):04X} (Fable R-05)"
     if unicodedata.normalize("NFKC", dec) != dec:
         return f"decoded {where} contains compatibility characters (e.g. fullwidth '.' or '/') that NFKC would change"
     return ""
@@ -128,8 +132,10 @@ def parse(url):
         if ";" in s:
             raise ValueError("';' path parameters are not allowed")
         dec = urllib.parse.unquote_to_bytes(s).decode("utf-8")  # already proven strict UTF-8 by _decoded_problem
-        if dec.strip(" ") in (".", "..") or "/" in dec or "\\" in dec:
-            raise ValueError("a path segment decodes to traversal or a separator (including '..' padded with spaces)")
+        if set(dec) <= {".", " "} and dec != "":
+            raise ValueError("a path segment decodes to dots and/or spaces only (traversal look-alike: Fable R-05)")
+        if "/" in dec or "\\" in dec:
+            raise ValueError("a path segment decodes to a separator")
     return host, segs, parts.query
 
 

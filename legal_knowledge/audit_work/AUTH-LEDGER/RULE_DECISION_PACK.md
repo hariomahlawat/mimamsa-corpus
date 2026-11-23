@@ -43,11 +43,11 @@ Only C6 checks carry `identity_result`, and only CONFIRMED counts.
 
 | Option | Changes | Newly ineligible (until new evidence) | Newly eligible | False-positive risk | False-negative risk | Reproducibility | Tests needed |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| B1 accept as now | nothing | 0 | 0 | an old row that read something other than the identity elements still counts. For the 20 Gazettes, the S.R.O. number and date line are in fact quoted from the page image in the cited L5 R23 records, so the risk there is low. For the 9 court entries, identity is text-layer only | none | unchanged | none |
+| B1 accept as now | nothing | 0 | 0 | an old row that read something other than the identity elements still counts. For the 20 Gazettes, the S.R.O. number and date line are quoted from the page image: for 13, in image checks or WS-A transcriptions; for 7, only in the L5 R23 register, which is agent-produced and not approved (Fable R-03). So the risk is low for 13, and for 7 it is lower than "none recorded" but not human-confirmed. For the 9 court entries, identity is text-layer only | none | unchanged | none |
 | **B2 (recommended)** fresh check where an anchor is created | an entry whose approval creates an EXACT_ANCHOR needs a CONFIRMED check or a reviewer statement naming the identity elements | 7 court entries | 0 | low where it matters; Gazette rows without crosswalk effect still rely on legacy evidence, with a limitation | low | rule 2; anchors computed by the reader, never typed | anchor-creating entry without a CONFIRMED check is rejected; non-anchoring entry is accepted with the limitation |
 | B3 fresh check for all legacy | every legacy-only or text-only entry needs a CONFIRMED check | 31 | 0 | lowest | high: 31 entries wait, 22 of which have no coverage effect | rule 2 | same as B2, for all |
 
-**Safest rule.** B2. B3 is safest in isolation but delays entries with no coverage effect. The first tranche-1 build wrongly reported 7 Gazette rows as lacking an identifier transcription. Fable F-02 showed that the cited L5 records quote it, so the earlier text here has been withdrawn.
+**Safest rule.** B2. B3 is safest in isolation but delays entries with no coverage effect. The "creates exact anchor" figures come from the C6-01 draft column. They were independently recomputed with the reader by the Fable reviewer, and agree (R-08). The first tranche-1 build wrongly reported 7 Gazette rows as lacking an identifier transcription. Fable F-02 showed that the cited L5 records quote it, so the earlier text here has been withdrawn.
 
 ## C. URL normalisation for contradiction detection
 **What rule 1 does.** Exact-string comparison of a locator with every committed (URL, sha256) pair.

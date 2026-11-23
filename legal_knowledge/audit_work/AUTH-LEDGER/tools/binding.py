@@ -49,7 +49,8 @@ def _env():
 
 
 def _git(cwd, *args, check=True):
-    p = subprocess.run(["git", "-c", "protocol.allow=never", "-c", "core.useReplaceRefs=false", "-C", str(cwd), *args],
+    p = subprocess.run(["git", "-c", "protocol.allow=never", "-c", "core.useReplaceRefs=false", "-c", "core.commitGraph=false",
+                        "-C", str(cwd), *args],
                        capture_output=True, env=_env())
     if check and p.returncode != 0:
         raise LedgerError(f"git {' '.join(args[:2])} failed: {p.stderr.decode(errors='replace').strip()[:200]}")
@@ -86,8 +87,11 @@ def check_shape(b):
         raise LedgerError("binding: merge_commit equals reviewed_head (a fast-forward is not a reviewed merge)")
 
 
-def verify(root, line, lines, canonical_line):
-    """Verify the BIND line `line` against local git history. Returns a report dict; raises LedgerError on any failure."""
+def verify(root, line, lines, canonical_line, expected_top=None):
+    """Verify the BIND line `line` against local git history. Returns a report dict; raises LedgerError on any failure.
+    expected_top pins the repository top (Fable R-02): for the committed ledger it is the repository that contains the
+    package, so a `.git` directory or `gitdir:` file planted inside the ledger root cannot divert verification to
+    another history."""
     b = line["binding"]
     check_shape(b)
     n = b["binds_version"]
@@ -103,6 +107,9 @@ def verify(root, line, lines, canonical_line):
     if p.returncode != 0:
         raise LedgerError(f"version {line['version']}: no git history at the ledger root; a binding can be verified only in a git clone or bundle")
     top = Path(p.stdout.decode().strip()).resolve()
+    if expected_top is not None and top != Path(expected_top).resolve():
+        raise LedgerError(f"version {line['version']}: git repository top {top} is not the expected repository {Path(expected_top).resolve()} "
+                          "(a nested .git would divert verification)")
     if _git(top, "rev-parse", "--is-shallow-repository").stdout.decode().strip() == "true":
         raise LedgerError(f"version {line['version']}: shallow clone; binding verification needs full history (fetch-depth: 0)")
     # history-rewriting mechanisms make topology claims unverifiable: fail closed if any is present (Fable F-01)

@@ -24,10 +24,10 @@ The checks run were:
 ## Summary
 | Group | Count | Rows | Recommendation |
 | --- | --- | --- | --- |
-| 1A-READY | 18 | T1-01 to T1-18 | Ready for an owner decision, with each row's limitations recorded verbatim. T1-02 (S.R.O. 34/1963) is for copy provenance only (F-T1-2) |
+| 1A-READY | 18 | T1-01 to T1-18 | Ready for an owner decision, with each row's limitations recorded verbatim. T1-02 (S.R.O. 34/1963) is for copy provenance only (F-T1-2). For T1-02, 11, 14, 16, 17 and 18, a CONFIRMED identifier check is advisable first (F-T1-1) |
 | 1B-FIDELITY | 2 | T1-19 (S.R.O. 2(E)/2018), T1-20 (S.R.O. 17(E)/2019) | Hold until the owner confirms fidelity class 2 |
 
-**Correction after independent review (Fable F-02).** The first build of this tranche (commit 924047b1) reported a "1A-CONFIRM-ID" group of 6 rows, plus T1-19. It said their S.R.O. number and date line were not transcribed in any committed observation. That was wrong. The builder scanned only `identity_refs`. Each of those entries also cites, as L5 evidence, an R23 amendment-search record (`R23-VERIFY-01/registers/amendment_search_2026-11-22.csv`, status `LOCATED_IMAGE_CHECKED`, with a render hash) that quotes the masthead and the S.R.O. line from the page image. An example, for T1-16: "'New Delhi, the 26th September, 1989 S.R.O. 332... Army (Amendment) Rules, 1989'". The builder now reads those records too. All 20 have the number read from the image, and the split is 18 / 2.
+**Correction after independent review (Fable F-02).** The first build of this tranche (commit 924047b1) reported a "1A-CONFIRM-ID" group of 6 rows, plus T1-19. It said their S.R.O. number and date line were not transcribed in any committed observation. That was wrong. The builder scanned only `identity_refs`. Each of those entries also cites, as L5 evidence, an R23 amendment-search record (`R23-VERIFY-01/registers/amendment_search_2026-11-22.csv`, status `LOCATED_IMAGE_CHECKED`, with a render hash) that quotes the masthead and the S.R.O. line from the page image. An example, for T1-16: "'New Delhi, the 26th September, 1989 S.R.O. 332... Army (Amendment) Rules, 1989'". The builder now reads those records too. All 20 have the number quoted from the page image, and the split is 18 / 2. The source of the quotation, and its limits, are set out in F-T1-1, which was corrected again after the re-review (Fable R-03).
 
 **Common facts for all 20:**
 - The carrier is `THIRD_PARTY_ARCHIVAL_FACSIMILE`: archive.org re-hosting of Government of India Gazette issues.
@@ -38,7 +38,14 @@ The checks run were:
 - No exact-string contradiction is found for any locator.
 
 ## Findings
-**F-T1-1. Notification identifiers (corrected).** For all 20 rows, the S.R.O. number(s) in the identity appear in text that a person read from the page image. That text comes from image-check observations, independent transcriptions, or the L5 R23 records' quoted identity evidence. Register rows are excluded, so the check is not circular. Rule 1 itself accepts these rows on their image checks and ARMY-RULES-CHAIN-01 register rows. See the correction note above.
+**F-T1-1. Notification identifiers (corrected twice; see `../../review/`).** For all 20 rows, the S.R.O. number(s) in the identity appear in a committed quotation from the page image. The sources differ, and `tranche1_source_register.csv` column `identifier_source` records which applies:
+- **13 rows (`IMAGE_CHECK_OR_TRANSCRIPTION`).** The number is in an image-check observation or an independent transcription (WS-A) cited in `identity_refs`.
+- **7 rows (`L5_DISCOVERY_REGISTER_ONLY`): T1-02, T1-11, T1-14, T1-16, T1-17, T1-18 and T1-19.** The number is quoted only in the R23 amendment-search register (L5).
+  - Its own README says it was produced by a read-only discovery agent and is a review proposal, not approved.
+  - It is not an identity-reference kind under rule 1.
+  - These rows pass rule 1 on their image checks and ARMY-RULES-CHAIN-01 register rows. Their limitations now say all this, and the recommendation advises a CONFIRMED identity check that transcribes the number and date line before approval.
+
+Whether the image-check and transcription records behind the 13 rows were made by a person or by an agent is not established here; no record is described as human-confirmed. Register rows are excluded from this search, so it is not circular.
 
 **F-T1-2. S.R.O. 34/1963 (T1-02): uncertainty preserved.**
 - The held file is the 05-01-1963 declaration under r.188(e) (PIC-15). It is a declaration, not an amendment.

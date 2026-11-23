@@ -49,6 +49,8 @@ def class_path_problem(host, segs, cls, query=""):
         if ok:
             return "archive.org locators carry no query (it would be ignored by the server: Fable F-03)"
         return "archive.org locator must be /download/<item>/<file> or /details/<item>"
+    if query:
+        return "first-class locators carry no query (none of the committed first-class locators has one: Fable R-04)"
     # exact host, or a sub-domain of a listed domain; a bare public suffix (gov.in, nic.in) is never a document host (F-06)
     if not any((not a.startswith(".") and (host == a or host.endswith("." + a))) or (a.startswith(".") and host.endswith(a))
                for a in allowed):

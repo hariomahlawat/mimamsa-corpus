@@ -468,7 +468,8 @@ def apply_ledger(root, ctx, as_of=None, require_binding=True):
                 raise LedgerError(f"version {line['version']}: BIND lines are evaluated only with require_binding")
             if pending is None or pending[0] != line["version"] - 1:
                 raise LedgerError(f"version {line['version']}: BIND line binds nothing pending")
-            report = binding.verify(root, line, lines, canonical_line)
+            pinned_top = PKG.parents[2] if Path(root).resolve() == PKG.resolve() else None  # repo/legal_knowledge/audit_work/AUTH-LEDGER
+            report = binding.verify(root, line, lines, canonical_line, expected_top=pinned_top)
             st = pending[1]
             for t in st["transitions"]:
                 if t["version"] == pending[0]:

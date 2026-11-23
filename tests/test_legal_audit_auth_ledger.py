@@ -1730,7 +1730,15 @@ class ReviewFixes02More(unittest.TestCase):
     def test_f02_tranche1_reports_l5_image_quotations(self):
         m = common.read_csv(PKG / "tranches/T1-GAZETTE/evidence_verification_matrix.csv")
         reg = common.read_csv(PKG / "tranches/T1-GAZETTE/tranche1_source_register.csv")
-        self.assertTrue(all(r["identifier_read_on_image"] == "YES" for r in reg))
+        src = {r["tranche_id"]: r["identifier_source"] for r in reg}
+        self.assertEqual(sorted(k for k, v in src.items() if v == "L5_DISCOVERY_REGISTER_ONLY"),
+                         ["T1-02", "T1-11", "T1-14", "T1-16", "T1-17", "T1-18", "T1-19"])
+        self.assertTrue(all(v in ("IMAGE_CHECK_OR_TRANSCRIPTION", "L5_DISCOVERY_REGISTER_ONLY") for v in src.values()))
+        pend = {r["sha256"]: r for r in common.read_csv(PKG / "tranches/T1-GAZETTE/proposed_entries_PENDING.csv")}
+        for r in reg:
+            if r["identifier_source"] == "L5_DISCOVERY_REGISTER_ONLY":
+                self.assertIn("read-only discovery agent", pend[r["sha256"]]["limitations"])
+                self.assertIn("ADVISABLE FIRST", r["recommendation"])
         self.assertEqual(sorted({r["sub_tranche"] for r in reg}), ["1A-READY", "1B-FIDELITY"])
         t16 = [r for r in m if r["tranche_id"] == "T1-16"][0]
         self.assertIn("S.R.O. 332", t16["v07_identity_page_evidence"])
@@ -1742,3 +1750,156 @@ class ReviewFixes02More(unittest.TestCase):
         for r in rows.values():
             if r["sha256"] in {x["sha256"] for x in reg if x["sub_tranche"] == "1B-FIDELITY"}:
                 self.assertIn("STRUCTURAL ONLY", r["limitations"])
+
+
+def _forge_commit_graph(t, chain=False):
+    """Fable R-01 vector: a direct push whose commit-graph entry claims two parents (base, version commit)."""
+    import struct, hashlib
+    base = _git(t.dir, "rev-parse", "HEAD")
+    t.add_version([entry_from_draft(GAZETTE_1962, 1)])
+    c1 = t.commit("direct push version")
+    _git(t.dir, "commit", "-q", "--allow-empty", "-m", "innocent")
+    c2 = _git(t.dir, "rev-parse", "HEAD")
+    t.add_bind(c1, c2)
+    t.commit("bind")
+    _git(t.dir, "commit-graph", "write", "--reachable", *(["--split"] if chain else []))
+    f = next((t.dir / ".git/objects/info/commit-graphs").glob("graph-*.graph")) if chain else t.dir / ".git/objects/info/commit-graph"
+    b = bytearray(f.read_bytes())
+    ch = {bytes(b[8 + 12 * i:12 + 12 * i]): struct.unpack(">Q", b[12 + 12 * i:20 + 12 * i])[0] for i in range(b[6] + 1)}
+    oids = [bytes(b[ch[b"OIDL"] + 20 * i:ch[b"OIDL"] + 20 * i + 20]).hex() for i in range((ch[b"CDAT"] - ch[b"OIDL"]) // 20)]
+    o = ch[b"CDAT"] + 36 * oids.index(c2) + 20
+    b[o:o + 4], b[o + 4:o + 8] = struct.pack(">I", oids.index(base)), struct.pack(">I", oids.index(c1))
+    b[-20:] = hashlib.sha1(bytes(b[:-20])).digest()
+    __import__("os").chmod(f, 0o644)
+    f.write_bytes(bytes(b))
+    if chain:
+        new = f.with_name("graph-" + bytes(b[-20:]).hex() + ".graph")
+        f.rename(new)
+        (f.parent / "commit-graph-chain").write_text(bytes(b[-20:]).hex() + "\n")
+    return c1, c2
+
+
+class NestedGitLedger(GitLedger):
+    """The ledger root is a sub-directory of the git repository (as in the real layout)."""
+    def __init__(self):
+        Synthetic.__init__(self)
+        self.repo = Path(tempfile.mkdtemp(prefix="authledger_repo_"))
+        shutil.move(str(self.dir), str(self.repo / "pkg"))
+        self.dir = self.repo / "pkg"
+        _git(self.repo, "init", "-q", "-b", "main")
+        _git(self.repo, "config", "user.email", "test@example.invalid")
+        _git(self.repo, "config", "user.name", "test")
+        _git(self.repo, "config", "commit.gpgsign", "false")
+        self.commit("genesis")
+
+    def close(self):
+        shutil.rmtree(self.repo, ignore_errors=True)
+
+
+class ReviewFixes03(unittest.TestCase):
+    """Corrections for the Fable re-review of 64859d4d (review/fable_rereview_64859d4d.md)."""
+    def test_r01_forged_commit_graph_single_and_split(self):
+        for chain in (False, True):
+            t = GitLedger()
+            try:
+                _forge_commit_graph(t, chain)
+                with self.assertRaisesRegex(common.LedgerError, r"has 1 parent\(s\)"):
+                    t.state(require_binding=True)
+            finally:
+                t.close()
+
+    def test_r02_repository_top_is_pinned(self):
+        t = GitLedger()
+        try:
+            head, merge = t.pr([entry_from_draft(GAZETTE_1962, 1)])
+            t.add_bind(head, merge)
+            t.commit("bind")
+            lines = L.read_manifest(t.dir)
+            binding.verify(t.dir, lines[2], lines, L.canonical_line, expected_top=t.dir)
+            with self.assertRaisesRegex(common.LedgerError, "is not the expected repository"):
+                binding.verify(t.dir, lines[2], lines, L.canonical_line, expected_top=t.dir.parent)
+        finally:
+            t.close()
+        import inspect
+        src = inspect.getsource(L.apply_ledger)
+        self.assertIn("PKG.parents[2] if Path(root).resolve() == PKG.resolve()", src)
+        self.assertEqual(PKG.parents[2], REPO)
+
+    def test_r06_nested_prefix_merge_checks_only_the_package(self):
+        t = NestedGitLedger()
+        try:
+            _git(t.repo, "checkout", "-q", "-b", "pr1")
+            t.add_version([entry_from_draft(GAZETTE_1962, 1)])
+            head = t.commit("reviewed")
+            _git(t.repo, "checkout", "-q", "main")
+            (t.repo / "outside.txt").write_text("base moved on outside the package\n", encoding="utf-8")
+            t.commit("unrelated base change")
+            _git(t.repo, "merge", "-q", "--no-ff", "-m", "merge", "pr1")
+            merge = _git(t.repo, "rev-parse", "HEAD")
+            t.add_bind(head, merge)
+            t.commit("bind")
+            self.assertEqual([x["effect"] for x in json.loads(t.state(require_binding=True)["transitions.json"])], ["APPLIED"])
+        finally:
+            t.close()
+        t = NestedGitLedger()
+        try:
+            _git(t.repo, "checkout", "-q", "-b", "pr1")
+            t.add_version([entry_from_draft(GAZETTE_1962, 1)])
+            head = t.commit("reviewed")
+            _git(t.repo, "checkout", "-q", "main")
+            _git(t.repo, "merge", "-q", "--no-ff", "--no-commit", "pr1")
+            (t.dir / "tools_added_in_merge.py").write_text("x = 1\n", encoding="utf-8")
+            merge = t.commit("merge with a package change")
+            t.add_bind(head, merge)
+            with self.assertRaisesRegex(common.LedgerError, "package tree differs"):
+                t.state(require_binding=True)
+        finally:
+            t.close()
+
+    def test_r06_environment_and_git_options(self):
+        env = binding._env()
+        self.assertEqual(env["GIT_GRAFT_FILE"], __import__("os").devnull)
+        self.assertEqual((env["GIT_CONFIG_NOSYSTEM"], env["GIT_CONFIG_GLOBAL"]), ("1", __import__("os").devnull))
+        with mock.patch.object(binding.subprocess, "run", return_value=subprocess.CompletedProcess([], 0, b"", b"")) as run:
+            binding._git(".", "status")
+        args = run.call_args[0][0]
+        for opt in ("protocol.allow=never", "core.useReplaceRefs=false", "core.commitGraph=false"):
+            self.assertIn(opt, args)
+
+    def test_r05_r04_url_residuals(self):
+        for u in ("https://archive.org/download/x/.../y.pdf", "https://archive.org/download/x/%20/y.pdf", "https://archive.org/download/x/a%E2%88%95b.pdf",
+                  "https://archive.org/download/x/a%E2%81%84b.pdf", "https://archive.org/download/x/a%E2%A7%B8b.pdf", "https://archive.org/download/x/a%EF%BF%BDb.pdf",
+                  "https://archive.org/download/x/a%E1%9A%80b.pdf"):
+            self.assertNotEqual(urlcheck.problem(u), "", u)
+        self.assertNotEqual(urlcheck.problem("https://1.0x7f/x"), "")
+        self.assertNotEqual(urlcheck.problem("https://example.1a/x"), "")
+        for u in ("https://api.sci.gov.in/jonew/judis/1234.pdf?redirect=//evil", "https://desw.gov.in/a.pdf?x=1"):
+            self.assertFalse(strength.host_ok(u, COURT) or strength.host_ok(u, GOVPUB), u)
+        for u in ("https://api.sci.gov.in/x/jonew/judis/1.pdf", "https://api.sci.gov.in/jonew/judis/1.pdf.html"):
+            self.assertFalse(strength.host_ok(u, COURT), u)
+
+    def test_r06_untruncated_is_applied_at_both_call_sites(self):
+        sha = GAZETTE_1962
+        ret = {"sha256": sha, "authenticity": "ORIGINAL_OFFICIAL", "verification_state": "SOURCE_VERIFIED",
+               "locator": "https://archive.org/download/x/y.pdf)evil"}
+        json_src = [p for p in pins.EVIDENCE_INPUTS if strength._json_source(p)][0]
+        with mock.patch.object(strength, "resolve", return_value=(json_src, ret)):
+            with self.assertRaisesRegex(common.LedgerError, "would be truncated"):
+                strength._first_class("x", sha)
+        dl = {"downloaded_sha256": sha, "candidate_url_or_identifier": "https://desw.gov.in/a.pdf|b"}
+        with mock.patch.object(strength, "resolve", return_value=("PILOT-01/registers/source_discovery_2026-11-22.csv", dl)):
+            with self.assertRaisesRegex(common.LedgerError, "would be truncated"):
+                strength._first_class("x", sha)
+
+    def test_r06_l5_observation_conditions(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("bt1", PKG / "tranches/tools/build_tranche1.py")
+        bt1 = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(bt1)
+        sha = GAZETTE_1962
+        good = {"status": "LOCATED_IMAGE_CHECKED", "sha256": sha, "render_sha256": "a" * 64, "identity_evidence": "S.R.O. 1"}
+        for bad in ({"status": "NOT_FOUND"}, {"sha256": "b" * 64}, {"render_sha256": ""}):
+            with mock.patch.object(bt1.strength, "resolve", return_value=("p", dict(good, **bad))):
+                self.assertEqual(bt1.l5_observations("L5:x#y", sha), [], bad)
+        with mock.patch.object(bt1.strength, "resolve", return_value=("p", good)):
+            self.assertEqual(len(bt1.l5_observations("L5:x#y", sha)), 1)

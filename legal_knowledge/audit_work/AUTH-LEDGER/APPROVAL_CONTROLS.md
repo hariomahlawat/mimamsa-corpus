@@ -43,7 +43,7 @@ An approved version is **staged**, not effective, when it is recorded. All its c
 2. `merge_commit` is an ordinary two-parent merge; its second parent is `reviewed_head`; it is in the history of the checked-out HEAD.
 3. At `reviewed_head` the manifest ends exactly at the bound version. At the merge's first parent the version is absent, so it entered through this merge.
 4. The ledger package tree is identical at `reviewed_head` and at the merge. The manifest and every pinned file hash to the pins.
-5. The clone is not shallow, and has no `refs/replace` and no `info/grafts`; otherwise verification fails closed. git runs with a sanitised environment: every inherited `GIT_*` variable is dropped, replace objects and grafts are disabled, and no system or global config is read (Fable F-01).
+5. The clone is not shallow, and has no `refs/replace` and no `info/grafts`; otherwise verification fails closed. The commit-graph file is not consulted (`core.commitGraph=false`; Fable R-01). For the committed ledger, the repository top must be the repository that contains `legal_knowledge/audit_work/AUTH-LEDGER`, so a planted nested `.git` cannot divert verification (Fable R-02). git runs with a sanitised environment: every inherited `GIT_*` variable is dropped, replace objects and grafts are disabled, and no system or global config is read (Fable F-01).
 
 Further rules:
 - Only the last line may be an unbound entry version.
@@ -55,7 +55,9 @@ Further rules:
 
 **Before the first BIND line,** the audit CI workflow must check out full history (`fetch-depth: 0`); otherwise verification fails closed. That is a `.github` change, so it needs its own reviewed PR and was not made here.
 
-`require_binding=False` keeps the AUTH-LEDGER-01 semantics for the synthetic evidence-rule tests only. The command-line tool never selects it, and a test checks that.
+`require_binding=False` keeps the AUTH-LEDGER-01 semantics. It is used only for the synthetic evidence-rule tests and for the tranche simulation, both in temporary directories. The command-line tool never selects it, and a test checks that.
+
+**Trust assumption.** Verification assumes that the local object store and `.git` directory handed to the verifier have not been tampered with beyond the mechanisms checked (replace refs, grafts, commit-graph, nested repositories, inherited environment). An auditor should verify from a fresh clone or bundle, not from a working copy supplied by the party being audited.
 
 ## Owner decisions needed (nothing here is adopted)
 - **O-1 Owner signature.** Optionally require an owner signature over each BIND line, checked against a public key supplied out of band. Options are SSH (`ssh-keygen -Y verify`) or OpenPGP.
