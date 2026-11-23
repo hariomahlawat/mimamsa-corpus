@@ -67,8 +67,10 @@ def build():
             "identity_evidence_refs": r["identity_verification"],
             "proposed_authentication_state": p["authentication_state"], "proposed_effective_source_class": cls,
             "primary_or_non_primary": "NON_PRIMARY" if cls.startswith("NON_PRIMARY") else "PRIMARY",
-            "justification": "FULL-strength locator (" + p["provenance_evidence"] + "); no contradiction in the searched registers; class follows the Cycle 4 class for the same carrier type"
-                             + (" (non-primary: see limitations)" if cls.startswith("NON_PRIMARY") else ""),
+            "justification": "FULL-strength locator (" + p["provenance_evidence"] + "); no contradiction in the searched registers; "
+                             + ("non-primary class proposed by C6-01; the Cycle 4 register has no NON_PRIMARY_* class (see limitations)"
+                                + ("; class reserved for owner decision (final review R-04)" if r["source_id"] in P.WATERMARKED_GAZETTE_REHOSTS else "")
+                                if cls.startswith("NON_PRIMARY") else "class follows the Cycle 4 class for the same carrier type"),
             "limitations": p["limitations"],
             "crosswalk_effect_this_entry_alone": crosswalk_effect(p),
             "reviewer_decision": "PENDING (C6-01 final review covers the proposal; an addendum-specific review is required before incorporation)",

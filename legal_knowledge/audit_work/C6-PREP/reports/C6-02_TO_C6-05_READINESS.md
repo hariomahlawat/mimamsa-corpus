@@ -4,7 +4,7 @@
 | Item | State |
 | --- | --- |
 | Files | 20 archive.org files: the Army Act 1950 as enacted, the AFT Act 2007, BNSS/BSA/BNS 2023, three 2024 commencement notifications, 10 possible Army Rules S.R.O.s (subject **not** confirmed) and 2 DPP Amendment Act 2000 items (`registers/c6_02_batch_a_files.csv`) |
-| Integrity pins | **18 of 20** pinned (md5 + bytes, from archive.org metadata recorded in Cycle 5). **The 2 DPP Amendment Act 2000 items remain NOT_PINNED.** On 2026-11-23 the guarded runner tried the item metadata. archive.org `/metadata/<id>` answers HEAD with 405, and the data-node `_files.xml` HEAD has no content type. Both were refused fail-closed, and no GET was made (`discovery/c6_02_metadata_requests_v2.tsv`, 14 requests and decisions, 0 log errors). The policy was not overridden. |
+| Integrity pins | **18 of 20** pinned (md5 + bytes, from archive.org metadata recorded in Cycle 5). **The 2 DPP Amendment Act 2000 items remain NOT_PINNED.** On 2026-11-23 the guarded runner tried the item metadata. archive.org `/metadata/<id>` answers HEAD with 405, and the data-node `_files.xml` HEAD has no content type. Both were refused fail-closed, and no GET other than robots.txt was made (`discovery/c6_02_metadata_requests_v2.tsv`, 14 requests and decisions, 0 log errors). The policy was not overridden. |
 | Identity | metadata only: archive.org title, date and the description's Ministry/Subject. Content is not examined. For the 10 S.R.O. candidates the subject is not confirmed |
 | Overlap with PRs #8, #17, #23 | none: every row reads `NOT_CONFIGURED_IN_PR_STACK` (checked against the PR heads 1b948727, b8ee3176, 60715342) |
 | Crawler security dependencies | PR #7 (aftjabalpur block) is the base of the stack and is unmerged. Staging `config/sources.yaml` lists `archive.org` only, but downloads redirect to `dn*.archive.org` data nodes. PR #8 adds `*.archive.org`, so a Batch A config PR must stack on #8. The discovery guard (fail-closed robots, payload classification) is **not** in the crawler (proposal C5-CRAWL-01). The India Code robots exception does not apply to archive.org and is not changed. |
@@ -33,11 +33,11 @@
 - **Not established:** authenticity, completeness, currency and redistribution rights.
 - **Not to be done:** import the text into the verified corpus, download it or redistribute it.
 - **Reported references.** These are extraction candidates only, to be checked against an authorised copy and the original instruments: Army Act ss.26, 27 and 164; RA 1987 paras 364, 365 and 368; AO 13/2006/PS; D&V policy letters.
-- **Guidance versus authority.** The handbook is staff guidance. The governing authority is the Army Act and the regulations and orders it cites. RA 1987 is not held, so the RA paragraph citations cannot be checked now. Internal policy letters are outside the public-document scope in CLAUDE.md, so the owner decides whether they are in scope.
+- **Guidance versus authority.** The handbook is staff guidance. The governing authority is the Army Act and the regulations and orders it cites. RA 1987 is not held, so the RA paragraph citations cannot be checked now. CLAUDE.md puts Army Orders, internal policy letters and anything not publicly published out of scope for this phase. That covers AO 13/2006/PS, the D&V policy letters and possibly the handbook itself (and the earlier AO requests), so the owner must decide scope before any request.
 - **Custodian question.** Can the issuing directorate (Addl DG D&V, AG's Branch) supply an authorised copy, and what is its access marking?
 - **Future task:** once a permitted copy is held, inventory every regulation, order, instruction and policy letter it cites, tagged guidance or authority.
 
-**Approval needed:** **A-C5-3**, covering the custodian route, the request text, the handling of access markings and the CDA archived copies. A further decision is needed on whether internal D&V policy letters are in scope.
+**Approval needed:** **A-C5-3**, covering the custodian route, the request text, the handling of access markings and the CDA archived copies. A further scope decision is needed for Army Orders, D&V policy letters and the handbook, because CLAUDE.md excludes unpublished material.
 
 ## C6-05 Legal-adviser evidence pack
 Unchanged: 13 topics, 29 escalations, 9 reserved items, 13 open WS-B inconsistencies and 0 determinations. Reserved states are preserved: r.23(3) CONFLICTING; r.182 SC4-01 OPEN; r.193 C-08 OPEN; r.194 C-09 PROPOSAL.

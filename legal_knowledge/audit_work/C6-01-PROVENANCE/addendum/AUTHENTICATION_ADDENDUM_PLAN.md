@@ -28,7 +28,7 @@
 | `crosswalk_effect_this_entry_alone` | Cycle 5 crosswalk rows that would change if this entry alone were added (simulated) |
 | `reviewer_decision`, `owner_decision` | always `PENDING` in the draft |
 
-**Crosswalk effect.** Only the 8 Supreme Court primary entries change a crosswalk row: 7 case records move from PARTIAL_MATCH to EXACT_ANCHOR. The two Rajbir copies each lift the same case. The 21 Gazette entries, the 4 non-primary entries and the Girish/Navjot second copies change no row; in particular, no KB citation item changes.
+**Crosswalk effect.** Only the 8 Supreme Court primary entries change a crosswalk row: 7 case records move from PARTIAL_MATCH to EXACT_ANCHOR. The two Rajbir copies each lift the same case. The 21 Gazette entries, the 4 non-primary entries and the N S Yadav entry (not one of the 53 cases) change no row; in particular, no KB citation item changes.
 
 ## 3. Steps at execution (each a separate approval)
 1. **Owner approval** of this plan and of the entry list. Entries may be approved individually.

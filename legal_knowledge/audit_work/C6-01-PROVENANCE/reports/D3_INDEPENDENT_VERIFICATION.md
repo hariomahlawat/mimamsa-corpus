@@ -94,4 +94,20 @@ These are documentation and ID-stability changes only: at f0cd16a7 the outcomes 
 | R-11 | P3 | TRA and C6-PIC not covered by earlier reviews | Covered by this review |
 | R-12 | P3 | C5 ER 2023 master cites T3-02 rather than T3-01 | Added as C5-CO-04 |
 
-The corrections after e7a10e27 were re-reviewed (see the re-review section, added once that review completes).
+## Re-review of e7a10e27..c3235312: VERDICT ACCEPT (no P1 or P2)
+**Review files:** verbatim in `review/final_rereview_c3235312.md` and `review/final_rereview_findings_c3235312.csv`. The same reviewer confirmed:
+- both P2s are fixed;
+- no outcome or class changed: the summary JSON is byte-identical, and only limitation text differs;
+- the addendum draft is deterministic, with crosswalk effects on 7 cases;
+- the prep changes make no download, correspondence or legal claim; the metadata log validates, and the only GETs are robots.txt;
+- the scope is limited to C6 paths, and the tests pass.
+
+Its five P3 wording items are corrected in the following documentation-only commit:
+
+| ID | Item | Disposition |
+| --- | --- | --- |
+| RR-01 | the plan named non-existent Girish/Navjot second copies | corrected: the primary entry that changes no row is N S Yadav |
+| RR-02 | the draft justification claimed a Cycle 4 class for non-primary entries | corrected: non-primary entries say there is no Cycle 4 class; TRA says its class is reserved |
+| RR-03 | D3 said "were re-reviewed" before the re-review existed | corrected by this section |
+| RR-04 | "no GET was made" | corrected to "no GET other than robots.txt" |
+| RR-05 | only internal policy letters were flagged as outside the CLAUDE.md scope | corrected: Army Orders and unpublished material, which covers AO 13/2006/PS and possibly the handbook, are flagged for an owner scope decision |
