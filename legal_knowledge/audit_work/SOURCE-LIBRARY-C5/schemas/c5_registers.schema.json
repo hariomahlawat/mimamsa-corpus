@@ -1,0 +1,220 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "title": "Mimamsa Cycle 5 source-library registers (CSV column contracts)",
+ "version": "c5-1",
+ "note": "CSV registers; each entry fixes column order (enforced by tools/check_c5.py) and controlled values. Identifiers from earlier registers (instr_id, chain_id, change_id, conflict_id, acq_id, record and case ids) are referenced, never overwritten. Enumerated columns are checked on their first token; a parenthesised qualifier may follow (e.g. 'PARTIAL (AMENDMENT_CHAIN_INCOMPLETE)', the brief's label, kept compatible with policy v1).",
+ "registers": {
+  "source_master_register.csv": {
+   "columns": [
+    "source_id",
+    "priority",
+    "title",
+    "authority",
+    "publication_type",
+    "edition",
+    "volume_or_part",
+    "publication_date",
+    "effective_date",
+    "effective_date_status",
+    "source_url",
+    "provenance",
+    "document_authority",
+    "carrier_provenance",
+    "authentication_status",
+    "rights_status",
+    "access_marking",
+    "sha256",
+    "held_paths",
+    "pages",
+    "text_layer_class",
+    "completeness_status",
+    "amendment_chain_status",
+    "currency_status",
+    "holding_state",
+    "discovery_state",
+    "discovery_candidate_ids",
+    "acquisition_state",
+    "existing_register_refs",
+    "identity_notes",
+    "evidence"
+   ],
+   "enums": {
+    "publication_type": [
+     "ADMINISTRATIVE_INSTRUCTION",
+     "CATALOGUE_RECORD",
+     "COMPILATION",
+     "GAZETTE_NOTIFICATION",
+     "JUDICIAL",
+     "MANUAL",
+     "REGULATION",
+     "SECONDARY_COMMENTARY",
+     "STATUTE",
+     "SUBORDINATE_LEGISLATION"
+    ],
+    "holding_state": [
+     "HELD_GOVERNMENT_COMPILATION",
+     "HELD_GOVERNMENT_COMPILATION_EXTRACT",
+     "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
+     "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+     "HELD_PRIMARY_AUTHENTICATION_PENDING",
+     "HELD_PRIMARY_GAZETTE_FACSIMILE",
+     "HELD_PRIMARY_GAZETTE_GOVERNMENT_SCAN",
+     "HELD_PRIMARY_OFFICIAL_COURT_COPY",
+     "HELD_UNVERIFIED_MANUAL",
+     "NOT_HELD_LOCATED",
+     "NOT_HELD_NOT_CHECKED",
+     "NOT_HELD_NOT_FOUND",
+     "NOT_HELD_RESTRICTED_SUSPECTED"
+    ],
+    "currency_status": [
+     "AMENDMENT_INSTRUMENT",
+     "CURRENCY_NOT_ESTABLISHED",
+     "HISTORICAL_SUPERSEDED",
+     "HISTORICAL_VERSION",
+     "NOT_APPLICABLE_JUDGMENT"
+    ],
+    "amendment_chain_status": [
+     "CHECKED_FOR_RELEVANT_PERIOD",
+     "NOT_APPLICABLE",
+     "NOT_CHECKED",
+     "PARTIAL"
+    ],
+    "discovery_state": [
+     "BLOCKED_ACCESS",
+     "FOUND_CANDIDATE",
+     "NOT_CHECKED",
+     "NOT_FOUND",
+     "RESTRICTED_MARKING_SUSPECTED"
+    ]
+   },
+   "reuse": "Brief fields A (source_id..completeness_status) plus SOURCE_AUTHORITY_POLICY v1 fields (document_authority, carrier_provenance) from docs/legal-audit/schemas/source.schema.json; authentication_status carries CALIBRATION-02 source_authentication_register state when a row exists."
+  },
+  "acquisition_register.csv": {
+   "columns": [
+    "rank",
+    "acq_c5_id",
+    "source_id",
+    "title",
+    "exact_location",
+    "location_check",
+    "justification",
+    "dependencies",
+    "access_restrictions",
+    "integrity_pin",
+    "required_approval",
+    "approval_state",
+    "existing_acq_refs",
+    "batch"
+   ],
+   "enums": {
+    "approval_state": [
+     "NOT_APPROVED"
+    ]
+   },
+   "reuse": "D3 ranked acquisition list; existing ACQ ids referenced, never renumbered."
+  },
+  "amendment_register.csv": {
+   "columns": [
+    "amendment_id",
+    "publication_source_id",
+    "notification_number",
+    "issuing_authority",
+    "notification_date",
+    "publication_date",
+    "commencement_as_printed",
+    "effective_date",
+    "effective_date_status",
+    "affected_provisions",
+    "gazette_identity",
+    "sha256",
+    "evidence_level",
+    "verification_status",
+    "amendment_chain_status",
+    "origin_register",
+    "origin_id"
+   ],
+   "enums": {},
+   "reuse": "Brief fields C; carries ARMY-RULES-CHAIN-01 instrument register and WS-A army_act_amendment_chain columns verbatim (publication_date / commencement_as_printed / effective_date_status kept distinct)."
+  },
+  "provision_amendment_chain.csv": {
+   "columns": [
+    "chain_row_id",
+    "publication_source_id",
+    "provision",
+    "instrument_ref",
+    "amendment_instrument",
+    "change_type",
+    "before_text_ref",
+    "after_text_ref",
+    "publication_date",
+    "effective_date",
+    "effective_date_status",
+    "applicable_period",
+    "evidence",
+    "evidence_level",
+    "superseded_by",
+    "origin_register",
+    "origin_id"
+   ],
+   "enums": {},
+   "reuse": "Brief chain Publication->Provision->Instrument->Before->After->Effective->Period->Evidence; derived from WS-A provision_change_log (+ supersessions) and ARMY-RULES-CHAIN-01 provision chronology."
+  },
+  "provision_register.csv": {
+   "columns": [
+    "provision_id",
+    "source_id",
+    "chapter",
+    "section_or_rule",
+    "paragraph",
+    "subparagraph",
+    "page",
+    "exact_text_reference",
+    "effective_from",
+    "effective_to",
+    "verification_status",
+    "completeness_status",
+    "origin_register"
+   ],
+   "enums": {},
+   "reuse": "Brief fields B; locator form follows CALIBRATION-02 rule_index_spec/provision_record.schema.json (doc_id#rNN); provision ids reuse WS-D doc ids (rules-army-rules-1954)."
+  },
+  "source_conflict_register.csv": {
+   "columns": [
+    "conflict_id",
+    "affected_source",
+    "affected_provision",
+    "source_a",
+    "source_b",
+    "nature_of_conflict",
+    "evidence",
+    "legal_adviser_required",
+    "status",
+    "reserved_status",
+    "origin_register",
+    "origin_id"
+   ],
+   "enums": {},
+   "reuse": "Brief fields D; union of SOURCE-CONFLICTS-01, CALIBRATION-02 source_conflicts_c4, WS-B open inconsistencies, ARMY-RULES-CHAIN-01 official-note discrepancies, plus C5 documentary conflicts."
+  },
+  "corpus_crosswalk.csv": {
+   "columns": [
+    "source_id",
+    "provision_id",
+    "knowledge_base_record_id",
+    "case_id",
+    "relationship_type",
+    "evidence_status",
+    "review_status",
+    "basis"
+   ],
+   "enums": {
+    "evidence_status": [
+     "EXACT_ANCHOR",
+     "MISSING_EVIDENCE",
+     "PARTIAL_MATCH"
+    ]
+   },
+   "reuse": "Brief fields E; items parsed from WS-D canonical_coverage.csv; case rows from cases_53.jsonl ids."
+  }
+ }
+}
