@@ -2,7 +2,7 @@
 
 **Current behaviour (rule 1, AUTH-LEDGER-02).** Every ledger version is staged until its BIND line verifies. This covers ADD, CORRECTION and WITHDRAW alike. A WITHDRAW for cause, for example after an authentication record proves false, therefore leaves the earlier PROVENANCE_DOCUMENTED row effective until a second PR adds the BIND line.
 
-**The risk.** Between discovery and binding, the effective register keeps evidence the project knows to be invalid, and any crosswalk anchor resting on it stays EXACT_ANCHOR. Staging protects against unreviewed *promotion*. Applied to *demotion*, it protects nothing, because a demotion is never less safe than the status quo.
+**The risk.** Between discovery and binding, the effective register keeps evidence the project knows to be invalid, and any crosswalk anchor resting on it stays EXACT_ANCHOR. Staging protects against unreviewed *promotion*. Applied to *demotion*, it mainly delays removing known-invalid evidence. A demotion is not risk-free, since unjustified suppression removes anchors; that is what the safeguards below address.
 
 **Constraints:**
 - An unreviewed actor must not be able to use "emergency demotion" to suppress legitimate evidence silently. Suppression is a harm too: it removes anchors.

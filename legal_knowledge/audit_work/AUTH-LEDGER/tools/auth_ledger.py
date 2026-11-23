@@ -1,4 +1,5 @@
-"""AUTH-LEDGER command line (offline).
+"""AUTH-LEDGER command line (offline). Run it by its repository path from the repository top (or above), or by an
+absolute path, e.g. `python legal_knowledge/audit_work/AUTH-LEDGER/tools/auth_ledger.py verify`.
   python auth_ledger.py verify            pins + hash chain + HEAD + every version's entries + every committed effective/vNNNN
                                           rebuilt byte-for-byte; v0000 must equal the frozen Cycle 5 registers
   python auth_ledger.py build --as-of N --out DIR    write the effective outputs of version N to DIR (no repository change)
@@ -80,8 +81,15 @@ def main():
     # The package as INVOKED (argv[0], not symlink-resolved): Python resolves the script directory on sys.path, so the
     # module paths alone cannot see a symlinked package (Fable review of be861ec0, F-01). Residual: if the caller's
     # working directory is already inside a symlink target and the script is named relatively, the OS reports the
-    # resolved path and the link cannot be seen; run the tool by its repository path from outside the package.
-    invoked = Path(os.path.abspath(sys.argv[0]))
+    # resolved path and the link cannot be seen ($PWD is used where the shell provides it); run the tool by an absolute
+    # path or from the repository top or above.
+    invoked = Path(sys.argv[0])
+    if not invoked.is_absolute():
+        # os.getcwd() is symlink-resolved; $PWD keeps the logical path the caller is in (re-review R-01). Use it only when
+        # it names the same directory as the real working directory.
+        pwd = os.environ.get("PWD", "")
+        base = pwd if pwd and os.path.isabs(pwd) and os.path.realpath(pwd) == os.path.realpath(os.getcwd()) else os.getcwd()
+        invoked = Path(os.path.normpath(os.path.join(base, str(invoked))))
     if invoked.name == "auth_ledger.py" and invoked.parent.name == "tools":
         L.COMMITTED_PACKAGE = invoked.parents[1]
     root = L.COMMITTED_PACKAGE

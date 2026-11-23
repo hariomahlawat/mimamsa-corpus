@@ -48,10 +48,13 @@ def _env():
     return env
 
 
-def _git(cwd, *args, check=True):
-    p = subprocess.run(["git", "-c", "protocol.allow=never", "-c", "core.useReplaceRefs=false", "-c", "core.commitGraph=false",
-                        "-C", str(cwd), *args],
-                       capture_output=True, env=_env())
+def _git(cwd, *args, check=True, input=None):
+    try:
+        p = subprocess.run(["git", "-c", "protocol.allow=never", "-c", "core.useReplaceRefs=false", "-c", "core.commitGraph=false",
+                            "-C", str(cwd), *args],
+                           capture_output=True, env=_env(), input=input)
+    except FileNotFoundError:  # no git on PATH: fail closed with a ledger error, not a traceback (re-review R-04)
+        raise LedgerError("git is not installed or not on PATH; the repository checks cannot run")
     if check and p.returncode != 0:
         raise LedgerError(f"git {' '.join(args[:2])} failed: {p.stderr.decode(errors='replace').strip()[:200]}")
     return p
@@ -85,7 +88,9 @@ def check_package_layout(package):
             raise LedgerError(f"ledger package path component {cur} is not a directory")
     p = _git(top, "rev-parse", "--show-toplevel", check=False)
     if p.returncode != 0:
-        return top  # no git repository (e.g. an exported snapshot): the filesystem checks above apply; BIND lines cannot verify
+        if (top / ".git").exists():  # a repository git refuses (e.g. "dubious ownership"): fail closed (re-review R-04)
+            raise LedgerError(f"git cannot read the repository at {top}: {p.stderr.decode(errors='replace').strip()[:160]}")
+        return top  # no git repository at all (an exported snapshot): the filesystem checks above apply; BIND lines cannot verify
     if Path(p.stdout.decode().strip()).resolve() != top.resolve():
         raise LedgerError(f"the git repository top {p.stdout.decode().strip()} is not the package's own repository top {top}")
     if _git(top, "rev-parse", "--verify", "-q", "HEAD", check=False).returncode != 0:
@@ -98,6 +103,25 @@ def check_package_layout(package):
         if out[0] != "040000":
             raise LedgerError(f"{rel} is committed with mode {out[0]} (not a directory tree); a committed symlink or gitlink could redirect verification")
     return top
+
+
+def _ancestry_ok(top, ancestor):
+    """Re-hash every commit on the ancestry path from `ancestor` to HEAD (re-review R-02): `merge-base --is-ancestor`
+    reads those commits unhashed, so a forged interior commit could otherwise fake the ancestry. One batched read."""
+    ids = _git(top, "rev-list", "--ancestry-path", f"{ancestor}..HEAD").stdout.decode().split() + [ancestor]
+    out = _git(top, "cat-file", "--batch", input=("\n".join(ids) + "\n").encode()).stdout
+    i = 0
+    for oid in ids:
+        nl = out.index(b"\n", i)
+        hdr = out[i:nl].split()
+        if len(hdr) != 3 or hdr[0].decode() != oid or hdr[1] != b"commit":
+            return False
+        size = int(hdr[2])
+        body = out[nl + 1:nl + 1 + size]
+        if hashlib.sha1(b"commit %d\0" % size + body).hexdigest() != oid:
+            return False
+        i = nl + 1 + size + 1
+    return True
 
 
 def _object_ok(top, sha, kind):
@@ -215,7 +239,7 @@ def verify(root, line, lines, canonical_line, expected_top=None):
         raise LedgerError(f"version {line['version']}: a parent commit object of merge_commit does not hash to its id")
     if parents[1] != rh:
         raise LedgerError(f"version {line['version']}: merge_commit's second parent {parents[1][:12]} is not reviewed_head {rh[:12]}")
-    if _git(top, "merge-base", "--is-ancestor", mc, "HEAD", check=False).returncode != 0:
+    if _git(top, "merge-base", "--is-ancestor", mc, "HEAD", check=False).returncode != 0 or not _ancestry_ok(top, mc):
         raise LedgerError(f"version {line['version']}: merge_commit is not in the history of the checked-out HEAD")
     mpath = rel("ledger/manifest.jsonl")
     want = [canonical_line(x) for x in lines[: n + 1]]
