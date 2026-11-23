@@ -12,7 +12,8 @@ What the mechanism does and does not establish (Fable review F-14): the chain is
 reordering or replacement that is not followed by a consistent re-derivation of every later line and of HEAD. It cannot
 stop a repository writer from re-deriving the whole chain. Detection of that rests on two further controls: the expected
 HEAD is pinned in the test suite as well as in ledger/HEAD (a two-place change visible in review), and every version is
-added by a reviewed PR. There are no cryptographic signatures; authority is the reviewed merge."""
+added by a reviewed PR. There are no cryptographic signatures; authority is the reviewed merge, and since AUTH-LEDGER-02 an
+approved version is effective only after a BIND line whose git facts tools/binding.py verifies offline (APPROVAL_CONTROLS.md)."""
 import json, posixpath, re, sys
 from pathlib import Path
 
@@ -20,6 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import PKG, LedgerError, read_csv, sha256_file, sha256_text  # noqa: E402
 import rules_v1  # noqa: E402
 import strength  # noqa: E402
+import binding  # noqa: E402
 
 SCHEMA = json.loads((PKG / "schema/ledger_entry.schema.json").read_text(encoding="utf-8"))
 COLS = SCHEMA["required"]
@@ -48,12 +50,16 @@ KIND_FILES = {  # each evidence kind label is tied to its file family (re-review
 }
 DIGEST_EXCLUDE = {"decision_record_ref", "decision_record_sha256", "reviewer_ref", "reviewer_record_sha256"}
 DATE = re.compile(r"\d{4}-\d{2}-\d{2}$")
+AGENT = re.compile(r"(?i)\b(claude|fable|opus|sonnet|haiku|anthropic|gpt|chatgpt|openai|gemini|copilot|llm|ai|agent|assistant|bot|model)\b")
 
 
 def canonical_line(d):
-    if sorted(d) != sorted(LINE_KEYS):
+    """Entry and genesis lines carry LINE_KEYS; a BIND line (AUTH-LEDGER-02) carries LINE_KEYS + ['binding']. Genesis is
+    unchanged, so the committed chain and HEAD are unchanged."""
+    keys = LINE_KEYS + ["binding"] if "binding" in d else LINE_KEYS
+    if sorted(d) != sorted(keys):
         raise LedgerError(f"manifest line keys {sorted(d)} differ from the contract")
-    return json.dumps({k: d[k] for k in LINE_KEYS}, sort_keys=False, separators=(",", ":"), ensure_ascii=True)
+    return json.dumps({k: d[k] for k in keys}, sort_keys=False, separators=(",", ":"), ensure_ascii=True)
 
 
 def entry_digest(e):
@@ -80,7 +86,10 @@ def read_manifest(root):
             raise LedgerError(f"manifest line {i}: version {d['version']} out of order (lines deleted or reordered?)")
         if d["prev"] != prev:
             raise LedgerError(f"manifest line {i}: hash chain broken (prev {str(d['prev'])[:12]} != {prev[:12]})")
-        if i > 0 and d["file"] != f"ledger/v{i:04d}.csv":
+        if "binding" in d:
+            if i == 0 or d["file"] is not None or d["file_sha256"] is not None or d["decisions"] or d["reviews"]:
+                raise LedgerError(f"manifest line {i}: a BIND line carries no entry file and no records")
+        elif i > 0 and d["file"] != f"ledger/v{i:04d}.csv":
             raise LedgerError(f"manifest line {i}: entry file must be ledger/v{i:04d}.csv, not {d['file']!r}")
         prev = sha256_text(s)
         lines.append(d)
@@ -169,11 +178,19 @@ def _check_record(root, line, kind, ref, sha_declared, entry):
         datetime.date.fromisoformat(rec["date"])
     except (ValueError, KeyError):
         raise LedgerError(f"{entry['entry_id']}: {kind} record date must be a valid YYYY-MM-DD date")
+    if rec["date"] > line["date"]:
+        raise LedgerError(f"{entry['entry_id']}: {kind} record is dated after its manifest line ({rec['date']} > {line['date']})")
+    want_scope = "AUTHENTICATION_PROVENANCE_ONLY" if kind == "decision" else "TECHNICAL_AND_EVIDENCE_REVIEW"
+    if rec.get("scope") != want_scope or rec.get("legal_approval") != "NOT_GIVEN":
+        raise LedgerError(f"{entry['entry_id']}: {kind} record must state scope: {want_scope} and legal_approval: NOT_GIVEN "
+                          f"(technical review, evidence authentication, owner approval and legal approval stay distinct)")
     if kind == "decision":
         if rec.get("decision") != entry["owner_decision"]:
             raise LedgerError(f"{entry['entry_id']}: decision record says {rec.get('decision')!r}, entry says {entry['owner_decision']!r}")
         if not re.search(r"[A-Za-z]{2}", rec.get("decided_by", "")):
             raise LedgerError(f"{entry['entry_id']}: decision record lacks decided_by")
+        if AGENT.search(rec["decided_by"]):
+            raise LedgerError(f"{entry['entry_id']}: decided_by names an AI model or agent; an agent's statement is never owner approval")
         return rec
     verdict = rec.get("verdict")
     if verdict not in ("ACCEPT", "ACCEPT_WITH_CONDITIONS"):
@@ -297,105 +314,164 @@ def register_row(e, ctx, kind):
             "limitations": e["limitations"], "rationale": e["justification"], "origin": f"AUTH-LEDGER {e['entry_id']}"}
 
 
-def apply_ledger(root, ctx, as_of=None):
-    """Validate every version up to as_of and return (effective_register, transitions, withdrawn, lines)."""
+def _record_set_checks(root, line, entries):
+    """Every pinned record is used by an entry of this version, and every entry a record names exists in this version and
+    cites that record: no orphan, extra, duplicated or cross-version approvals (AUTH-LEDGER-02)."""
+    by_id = {e["entry_id"]: e for e in entries}
+    for kind, pins, col in (("decision", line["decisions"], "decision_record_ref"), ("review", line["reviews"], "reviewer_ref")):
+        named = {}
+        for ref in pins:
+            if not any(e[col] == ref for e in entries):
+                raise LedgerError(f"version {line['version']}: pinned {kind} record {ref} is cited by no entry")
+            rec = _parse_record(Path(root) / ref)
+            for x in rec.get("entries", "").split(";"):
+                eid = x.split("=", 1)[0].strip()
+                if not eid:
+                    continue
+                if eid not in by_id or by_id[eid][col] != ref:
+                    raise LedgerError(f"version {line['version']}: {kind} record {ref} names {eid}, which is not an entry of this version citing it")
+                if eid in named:
+                    raise LedgerError(f"version {line['version']}: {eid} is named by two {kind} records ({named[eid]}, {ref})")
+                named[eid] = ref
+
+
+def _apply_version(root, ctx, line, st):
+    """Validate one entry version and apply it to the state st (eff, live, by_sha, seen_ids, transitions, withdrawn)."""
+    eff, live, by_sha, seen_ids, transitions, withdrawn = (st[k] for k in ("eff", "live", "by_sha", "seen_ids", "transitions", "withdrawn"))
+    for k in list(line["decisions"]) + list(line["reviews"]):
+        _safe_ref(k, "decisions/")
+    if set(line["decisions"]) & set(line["reviews"]):
+        raise LedgerError(f"version {line['version']}: a file cannot be both a decision record and a review record")
+    f = Path(root) / line["file"]
+    if not f.is_file() or sha256_file(f) != line["file_sha256"]:
+        raise LedgerError(f"version {line['version']}: entry file missing or modified after it was recorded")
+    for k, h in list(line["decisions"].items()) + list(line["reviews"].items()):
+        if not (Path(root) / k).is_file() or sha256_file(Path(root) / k) != h:
+            raise LedgerError(f"version {line['version']}: pinned record {k} missing or modified")
+    with open(f, newline="", encoding="utf-8") as fh:
+        header = fh.readline().rstrip("\r\n").split(",")
+    if header != COLS:
+        raise LedgerError(f"version {line['version']}: version file header must equal the schema columns exactly (got {header})")
+    entries = read_csv(f)
+    ids = [e.get("entry_id") for e in entries]
+    dup = sorted({i for i in ids if ids.count(i) > 1} | {i for i in ids if i in seen_ids})
+    if dup:
+        raise LedgerError(f"version {line['version']}: duplicate entry id(s) {dup}")
+    _record_set_checks(root, line, entries)
+    for e in entries:
+        schema_check(e, header)
+        if e["entry_version"] != f"{line['version']:04d}":
+            raise LedgerError(f"{e['entry_id']}: entry_version {e['entry_version']} in version file {line['version']}")
+        seen_ids.add(e["entry_id"])
+        _association(e, ctx)  # every entry type names the real copy and source of its sha256 (F-09)
+        dec = _check_record(root, line, "decision", e["decision_record_ref"], e["decision_record_sha256"], e)
+        if e["owner_decision"] != "APPROVED":
+            transitions.append({"version": line["version"], "entry_id": e["entry_id"], "entry_type": e["entry_type"], "sha256": e["sha256"],
+                                "effect": f"NONE (owner_decision {e['owner_decision']})", "before": "", "after": ""})
+            continue
+        rev = _check_record(root, line, "review", e["reviewer_ref"], e["reviewer_record_sha256"], e)
+        if e["decision_record_ref"] == e["reviewer_ref"] or _person(dec["decided_by"]) == _person(rev["reviewer"]):
+            raise LedgerError(f"{e['entry_id']}: decision and review must be separate records by different persons (F-04)")
+        if dec["date"] < rev["date"]:
+            raise LedgerError(f"{e['entry_id']}: the owner decision ({dec['date']}) predates the independent review ({rev['date']})")
+        s = e["sha256"]
+        before = f"{eff[s]['authentication_state']}/{eff[s]['effective_source_class']}" if s in eff else "NO_ROW"
+        if e["entry_type"] == "ADD":
+            if s in by_sha:
+                raise LedgerError(f"{e['entry_id']}: a live row already exists for this sha256 ({by_sha[s]}); use CORRECTION")
+            if e["proposed_authentication_state"] != "PROVENANCE_DOCUMENTED" or e["proposed_class"] == "AUTHENTICATION_PENDING":
+                raise LedgerError(f"{e['entry_id']}: an ADD records documented provenance only")
+            eff[s] = register_row(e, ctx, _evidence_checks(e, ctx, e["proposed_class"]))
+            live[e["entry_id"]] = e
+            by_sha[s] = e["entry_id"]
+        else:
+            tgt = live.get(e["target_entry_id"])
+            if tgt is None or by_sha.get(s) != e["target_entry_id"]:
+                raise LedgerError(f"{e['entry_id']}: target {e['target_entry_id']} is not the live row for this sha256")
+            if e["entry_type"] == "WITHDRAW" and tgt.get("entry_type") in ("WITHDRAW", "CORRECTION"):
+                raise LedgerError(f"{e['entry_id']}: a WITHDRAW may target only an ADD or a BASELINE row; revert a "
+                                  f"{tgt.get('entry_type')} with a new CORRECTION (F-09)")
+            if e["entry_type"] == "CORRECTION":
+                if e["proposed_authentication_state"] == "PROVENANCE_DOCUMENTED":
+                    if e["proposed_class"] == "AUTHENTICATION_PENDING":
+                        raise LedgerError(f"{e['entry_id']}: documented state with a pending class")
+                    eff[s] = register_row(e, ctx, _evidence_checks(e, ctx, e["proposed_class"]))
+                else:
+                    if e["proposed_class"] != "AUTHENTICATION_PENDING":
+                        raise LedgerError(f"{e['entry_id']}: a pending correction must carry class AUTHENTICATION_PENDING")
+                    resolve_refs(e, ctx)
+                    base = eff.get(s) or {"sha256": s, "held_paths": "; ".join(sorted(ctx.held.get(s, [])))}
+                    eff[s] = dict(base, authentication_state="AUTHENTICATION_PENDING", effective_source_class="AUTHENTICATION_PENDING",
+                                  rationale=f"corrected by {e['entry_id']}: {e['justification']}", origin=f"AUTH-LEDGER {e['entry_id']}")
+                del live[e["target_entry_id"]]
+                live[e["entry_id"]] = e
+                by_sha[s] = e["entry_id"]
+            else:  # WITHDRAW of an ADD or a BASELINE row: its effect ends; the record stays
+                del live[e["target_entry_id"]]
+                by_sha.pop(s, None)
+                if e["resulting_state"] == "AUTHENTICATION_PENDING":
+                    eff[s] = dict(eff.get(s) or {"sha256": s, "held_paths": "; ".join(sorted(ctx.held.get(s, [])))},
+                                  authentication_state="AUTHENTICATION_PENDING", effective_source_class="AUTHENTICATION_PENDING",
+                                  rationale=f"withdrawn by {e['entry_id']} ({e['withdrawal_reason']})", origin=f"AUTH-LEDGER {e['entry_id']}")
+                    live[e["entry_id"]] = e  # the pending state is live: it can be CORRECTED, not withdrawn again
+                    by_sha[s] = e["entry_id"]
+                else:
+                    eff.pop(s, None)
+                withdrawn.append({"version": line["version"], "entry_id": e["entry_id"], "target_entry_id": e["target_entry_id"], "sha256": s,
+                                  "withdrawal_reason": e["withdrawal_reason"], "resulting_state": e["resulting_state"] or "NO_ROW"})
+        after = f"{eff[s]['authentication_state']}/{eff[s]['effective_source_class']}" if s in eff else "NO_ROW"
+        transitions.append({"version": line["version"], "entry_id": e["entry_id"], "entry_type": e["entry_type"], "sha256": s,
+                            "effect": "APPLIED", "before": before, "after": after})
+
+
+def apply_ledger(root, ctx, as_of=None, require_binding=True):
+    """Validate every version up to as_of and return (effective_register, transitions, withdrawn, lines).
+
+    With require_binding (the default, and the only mode the CLI uses) an entry version is fully validated but STAGED:
+    its effect appears in transitions as PENDING_REPOSITORY_BINDING and the effective register is unchanged until the next
+    manifest line is a BIND line that binding.verify() accepts against local git history. Only the last line may be an
+    unbound entry version. require_binding=False is the AUTH-LEDGER-01 semantics, kept for synthetic evidence-rule tests."""
+    import copy as _copy
     lines = read_manifest(root)
     as_of = len(lines) - 1 if as_of is None else as_of
     if not 0 <= as_of < len(lines):
         raise LedgerError(f"--as-of {as_of} outside 0..{len(lines) - 1}")
     frozen_sha = sha256_file(Path(root) / "frozen_inputs.json")
-    eff = {s: dict(r, origin="CALIBRATION-02 baseline") for s, r in ctx.baseline.items()}
-    live = {"BASELINE:" + s: {"sha256": s, "entry_type": "BASELINE"} for s in ctx.baseline}
-    by_sha = {s: "BASELINE:" + s for s in ctx.baseline}
-    seen_ids, transitions, withdrawn = set(), [], []
+    st = {"eff": {s: dict(r, origin="CALIBRATION-02 baseline") for s, r in ctx.baseline.items()},
+          "live": {"BASELINE:" + s: {"sha256": s, "entry_type": "BASELINE"} for s in ctx.baseline},
+          "by_sha": {s: "BASELINE:" + s for s in ctx.baseline}, "seen_ids": set(), "transitions": [], "withdrawn": []}
+    pending = None
     for line in lines[: as_of + 1]:
         if line["rule_version"] != 1:
             raise LedgerError(f"version {line['version']}: rule version {line['rule_version']} is not implemented (only rule 1)")
         if line["frozen_inputs_sha256"] != frozen_sha:
             raise LedgerError(f"version {line['version']}: frozen_inputs.json changed since this version was recorded")
         if line["version"] == 0:
-            if line["file"] is not None or line["decisions"] or line["reviews"]:
-                raise LedgerError("genesis line must carry no entries, decisions or reviews")
+            if line["file"] is not None or line["decisions"] or line["reviews"] or "binding" in line:
+                raise LedgerError("genesis line must carry no entries, decisions, reviews or binding")
             continue
-        for k in list(line["decisions"]) + list(line["reviews"]):
-            _safe_ref(k, "decisions/")
-        if set(line["decisions"]) & set(line["reviews"]):
-            raise LedgerError(f"version {line['version']}: a file cannot be both a decision record and a review record")
-        f = Path(root) / line["file"]
-        if not f.is_file() or sha256_file(f) != line["file_sha256"]:
-            raise LedgerError(f"version {line['version']}: entry file missing or modified after it was recorded")
-        for k, h in list(line["decisions"].items()) + list(line["reviews"].items()):
-            if not (Path(root) / k).is_file() or sha256_file(Path(root) / k) != h:
-                raise LedgerError(f"version {line['version']}: pinned record {k} missing or modified")
-        with open(f, newline="", encoding="utf-8") as fh:
-            header = fh.readline().rstrip("\r\n").split(",")
-        if header != COLS:
-            raise LedgerError(f"version {line['version']}: version file header must equal the schema columns exactly (got {header})")
-        entries = read_csv(f)
-        ids = [e.get("entry_id") for e in entries]
-        dup = sorted({i for i in ids if ids.count(i) > 1} | {i for i in ids if i in seen_ids})
-        if dup:
-            raise LedgerError(f"version {line['version']}: duplicate entry id(s) {dup}")
-        for e in entries:
-            schema_check(e, header)
-            if e["entry_version"] != f"{line['version']:04d}":
-                raise LedgerError(f"{e['entry_id']}: entry_version {e['entry_version']} in version file {line['version']}")
-            seen_ids.add(e["entry_id"])
-            _association(e, ctx)  # every entry type names the real copy and source of its sha256 (F-09)
-            dec = _check_record(root, line, "decision", e["decision_record_ref"], e["decision_record_sha256"], e)
-            if e["owner_decision"] != "APPROVED":
-                transitions.append({"version": line["version"], "entry_id": e["entry_id"], "entry_type": e["entry_type"], "sha256": e["sha256"],
-                                    "effect": f"NONE (owner_decision {e['owner_decision']})", "before": "", "after": ""})
-                continue
-            rev = _check_record(root, line, "review", e["reviewer_ref"], e["reviewer_record_sha256"], e)
-            if e["decision_record_ref"] == e["reviewer_ref"] or _person(dec["decided_by"]) == _person(rev["reviewer"]):
-                raise LedgerError(f"{e['entry_id']}: decision and review must be separate records by different persons (F-04)")
-            s = e["sha256"]
-            before = f"{eff[s]['authentication_state']}/{eff[s]['effective_source_class']}" if s in eff else "NO_ROW"
-            if e["entry_type"] == "ADD":
-                if s in by_sha:
-                    raise LedgerError(f"{e['entry_id']}: a live row already exists for this sha256 ({by_sha[s]}); use CORRECTION")
-                if e["proposed_authentication_state"] != "PROVENANCE_DOCUMENTED" or e["proposed_class"] == "AUTHENTICATION_PENDING":
-                    raise LedgerError(f"{e['entry_id']}: an ADD records documented provenance only")
-                eff[s] = register_row(e, ctx, _evidence_checks(e, ctx, e["proposed_class"]))
-                live[e["entry_id"]] = e
-                by_sha[s] = e["entry_id"]
-            else:
-                tgt = live.get(e["target_entry_id"])
-                if tgt is None or by_sha.get(s) != e["target_entry_id"]:
-                    raise LedgerError(f"{e['entry_id']}: target {e['target_entry_id']} is not the live row for this sha256")
-                if e["entry_type"] == "WITHDRAW" and tgt.get("entry_type") in ("WITHDRAW", "CORRECTION"):
-                    raise LedgerError(f"{e['entry_id']}: a WITHDRAW may target only an ADD or a BASELINE row; revert a "
-                                      f"{tgt.get('entry_type')} with a new CORRECTION (F-09)")
-                if e["entry_type"] == "CORRECTION":
-                    if e["proposed_authentication_state"] == "PROVENANCE_DOCUMENTED":
-                        if e["proposed_class"] == "AUTHENTICATION_PENDING":
-                            raise LedgerError(f"{e['entry_id']}: documented state with a pending class")
-                        eff[s] = register_row(e, ctx, _evidence_checks(e, ctx, e["proposed_class"]))
-                    else:
-                        if e["proposed_class"] != "AUTHENTICATION_PENDING":
-                            raise LedgerError(f"{e['entry_id']}: a pending correction must carry class AUTHENTICATION_PENDING")
-                        resolve_refs(e, ctx)
-                        base = eff.get(s) or {"sha256": s, "held_paths": "; ".join(sorted(ctx.held.get(s, [])))}
-                        eff[s] = dict(base, authentication_state="AUTHENTICATION_PENDING", effective_source_class="AUTHENTICATION_PENDING",
-                                      rationale=f"corrected by {e['entry_id']}: {e['justification']}", origin=f"AUTH-LEDGER {e['entry_id']}")
-                    del live[e["target_entry_id"]]
-                    live[e["entry_id"]] = e
-                    by_sha[s] = e["entry_id"]
-                else:  # WITHDRAW of an ADD or a BASELINE row: its effect ends; the record stays
-                    del live[e["target_entry_id"]]
-                    by_sha.pop(s, None)
-                    if e["resulting_state"] == "AUTHENTICATION_PENDING":
-                        eff[s] = dict(eff.get(s) or {"sha256": s, "held_paths": "; ".join(sorted(ctx.held.get(s, [])))},
-                                      authentication_state="AUTHENTICATION_PENDING", effective_source_class="AUTHENTICATION_PENDING",
-                                      rationale=f"withdrawn by {e['entry_id']} ({e['withdrawal_reason']})", origin=f"AUTH-LEDGER {e['entry_id']}")
-                        live[e["entry_id"]] = e  # the pending state is live: it can be CORRECTED, not withdrawn again
-                        by_sha[s] = e["entry_id"]
-                    else:
-                        eff.pop(s, None)
-                    withdrawn.append({"version": line["version"], "entry_id": e["entry_id"], "target_entry_id": e["target_entry_id"], "sha256": s,
-                                      "withdrawal_reason": e["withdrawal_reason"], "resulting_state": e["resulting_state"] or "NO_ROW"})
-            after = f"{eff[s]['authentication_state']}/{eff[s]['effective_source_class']}" if s in eff else "NO_ROW"
-            transitions.append({"version": line["version"], "entry_id": e["entry_id"], "entry_type": e["entry_type"], "sha256": s,
-                                "effect": "APPLIED", "before": before, "after": after})
-    return eff, transitions, withdrawn, lines[: as_of + 1]
+        if "binding" in line:
+            if not require_binding:
+                raise LedgerError(f"version {line['version']}: BIND lines are evaluated only with require_binding")
+            if pending is None or pending[0] != line["version"] - 1:
+                raise LedgerError(f"version {line['version']}: BIND line binds nothing pending")
+            report = binding.verify(root, line, lines, canonical_line)
+            st = pending[1]
+            for t in st["transitions"]:
+                if t["version"] == pending[0]:
+                    t["bound_by"] = report["bound_by"]
+            pending = None
+            continue
+        if pending is not None:
+            raise LedgerError(f"version {line['version']}: entry version appended before version {pending[0]} was bound")
+        if require_binding:
+            staged = _copy.deepcopy(st)
+            _apply_version(root, ctx, line, staged)
+            pending = (line["version"], staged)
+        else:
+            _apply_version(root, ctx, line, st)
+    if pending is not None:  # the last version awaits its BIND line: report, do not apply
+        log = [dict(t, effect="PENDING_REPOSITORY_BINDING") if t["effect"] == "APPLIED" else dict(t)
+               for t in pending[1]["transitions"] if t["version"] == pending[0]]
+        return st["eff"], st["transitions"] + log, st["withdrawn"], lines[: as_of + 1]
+    return st["eff"], st["transitions"], st["withdrawn"], lines[: as_of + 1]

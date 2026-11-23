@@ -13,6 +13,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import AW, PKG, LedgerError, read_csv  # noqa: E402
+import urlcheck  # noqa: E402
 
 URL = re.compile(r"https?://[^ ;),|]+")
 # Allow-lists (Fable review F-02): a retrieval record is first-class only with an official or archival-facsimile
@@ -28,22 +29,42 @@ CLASS_HOSTS = {
 }
 
 
-def host_ok(url, cls):
-    """HTTPS only; exact host or dot-suffix; archive.org only for its item and download paths (never web.archive.org
-    captures of other sites: re-review N-03)."""
-    # host, optional numeric port, then '/', '?', '#' or end: userinfo ('user@host', 'host:pw@evil') never matches (C-01)
-    m = re.match(r"^https://([A-Za-z0-9.-]+)(?::[0-9]+)?(?=[/?#]|$)(/[^?#]*)?", url or "")
-    if not m:
-        return False
-    h, path = m.group(1).lower(), m.group(2) or "/"
-    if any(seg in ("..", ".") for seg in path.split("/")):
-        return False
+def class_path_problem(host, segs, cls):
+    """'' when the strictly parsed locator's host and path suit the class, else the reason. Hosts: exact or dot-suffix
+    match on the allow-list; archive.org only as the item host itself, for /download/<item>/<file...> or /details/<item>
+    (never web.archive.org captures of other sites: re-review N-03)."""
     allowed = CLASS_HOSTS.get(cls)
     if allowed is None:
-        return False
-    if h == "archive.org" or h.endswith(".archive.org"):
-        return "archive.org" in allowed and h == "archive.org" and path.startswith(("/download/", "/details/"))
-    return any(h == a.lstrip(".") or h.endswith(a if a.startswith(".") else "." + a) for a in allowed)
+        return f"class {cls} has no locator host rule"
+    if host == "archive.org" or host.endswith(".archive.org"):
+        if "archive.org" not in allowed or host != "archive.org":
+            return f"host {host} does not suit class {cls}"
+        item = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
+        if len(segs) >= 3 and segs[0] == "download" and item.fullmatch(segs[1]) and all(segs[2:]):
+            return ""
+        if len(segs) == 2 and segs[0] == "details" and item.fullmatch(segs[1]):
+            return ""
+        return "archive.org locator must be /download/<item>/<file> or /details/<item>"
+    if not any(host == a.lstrip(".") or host.endswith(a if a.startswith(".") else "." + a) for a in allowed):
+        return f"host {host} does not suit class {cls}"
+    if segs == [""]:
+        return "locator names a site root, not a document"
+    return ""
+
+
+def locator_problem(url, cls):
+    """'' when the locator is strictly valid (urlcheck.parse: D-01) and suits the class, else the reason."""
+    try:
+        host, segs, _q = urlcheck.parse(url)
+    except ValueError as e:
+        return str(e)
+    return class_path_problem(host, segs, cls)
+
+
+def host_ok(url, cls):
+    return locator_problem(url, cls) == ""
+
+
 CSV_KEYS = {  # path -> (key column, own-sha256 column)
     "PILOT-01/registers/source_code_resolution_v3.csv": ("code", "official_sha256"),
     "PILOT-01/registers/source_discovery_2026-11-22.csv": ("target_id", "downloaded_sha256"),
@@ -121,8 +142,9 @@ def first_class(ref, sha, cls=None):
     """(kind, strength, url) for the entry's first-class record. Raises unless the record is first-class for THIS sha256
     and, when a class is given, its locator host suits the class."""
     kind, st, url = _first_class(ref, sha)
-    if cls is not None and not host_ok(url, cls):
-        raise LedgerError(f"{ref}: locator host of {url} does not suit class {cls}")
+    why = locator_problem(url, cls) if cls is not None else ""
+    if why:
+        raise LedgerError(f"{ref}: locator {url!r} rejected for class {cls}: {why}")
     return kind, st, url
 
 
