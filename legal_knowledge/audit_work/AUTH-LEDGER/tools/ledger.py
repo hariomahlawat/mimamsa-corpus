@@ -50,7 +50,10 @@ KIND_FILES = {  # each evidence kind label is tied to its file family (re-review
 }
 DIGEST_EXCLUDE = {"decision_record_ref", "decision_record_sha256", "reviewer_ref", "reviewer_record_sha256"}
 DATE = re.compile(r"\d{4}-\d{2}-\d{2}$")
-AGENT = re.compile(r"(?i)\b(claude|fable|opus|sonnet|haiku|anthropic|gpt|chatgpt|openai|gemini|copilot|llm|ai|agent|assistant|bot|model)\b")
+# Letter boundaries, not word boundaries, so 'Fable5', 'claude_code' and 'GPT4' are caught (Fable F-09). This is
+# deliberately over-inclusive: a person whose name contains one of these words (e.g. 'Claude') must be identified in
+# decided_by by another form of their name. The list is a guard against agent self-approval, not an identity control.
+AGENT = re.compile(r"(?i)(?<![a-z])(claude|fable|opus|sonnet|haiku|anthropic|gpt|chatgpt|openai|gemini|copilot|llm|ai|agent|assistant|bot|model)(?![a-z])")
 
 
 def canonical_line(d):
@@ -82,6 +85,16 @@ def read_manifest(root):
             raise LedgerError(f"manifest line {i}: not JSON ({e})")
         if canonical_line(d) != s:
             raise LedgerError(f"manifest line {i}: not in canonical form (edited by hand?)")
+        for k in ("version", "rule_version"):  # bool is an int subclass and 1.0 == 1: both refused (Fable F-10)
+            if type(d[k]) is not int:
+                raise LedgerError(f"manifest line {i}: {k} must be an integer, not {d[k]!r}")
+        try:
+            import datetime
+            if not (isinstance(d["date"], str) and DATE.match(d["date"])):
+                raise ValueError
+            datetime.date.fromisoformat(d["date"])
+        except ValueError:
+            raise LedgerError(f"manifest line {i}: date {d['date']!r} is not a valid YYYY-MM-DD date")
         if d["version"] != i:
             raise LedgerError(f"manifest line {i}: version {d['version']} out of order (lines deleted or reordered?)")
         if d["prev"] != prev:
@@ -460,6 +473,7 @@ def apply_ledger(root, ctx, as_of=None, require_binding=True):
             for t in st["transitions"]:
                 if t["version"] == pending[0]:
                     t["bound_by"] = report["bound_by"]
+                    t["binding_assurance"] = f"git topology {report['git']}; GitHub review {report['github_review']}"
             pending = None
             continue
         if pending is not None:

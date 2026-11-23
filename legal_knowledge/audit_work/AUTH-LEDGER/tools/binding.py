@@ -37,9 +37,20 @@ BIND_KEYS = ["binds_version", "bound_line_sha256", "repository", "pr_number", "r
 SHA1 = re.compile(r"[0-9a-f]{40}")
 
 
+def _env():
+    """Sanitised environment (Fable F-01): no inherited GIT_* variable (GIT_DIR, GIT_OBJECT_DIRECTORY, GIT_GRAFT_FILE,
+    GIT_REPLACE_REF_BASE ...), no system or global config, replace objects and grafts disabled, no prompts. Network
+    transports are refused by protocol.allow=never on every call; GIT_NO_LAZY_FETCH additionally blocks partial-clone
+    lazy fetches on git >= 2.44 (older git ignores it; protocol.allow=never still applies)."""
+    env = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
+    env.update(GIT_NO_REPLACE_OBJECTS="1", GIT_GRAFT_FILE=os.devnull, GIT_CONFIG_NOSYSTEM="1", GIT_CONFIG_GLOBAL=os.devnull,
+               GIT_NO_LAZY_FETCH="1", GIT_TERMINAL_PROMPT="0", GIT_OPTIONAL_LOCKS="0")
+    return env
+
+
 def _git(cwd, *args, check=True):
-    env = dict(os.environ, GIT_NO_LAZY_FETCH="1", GIT_TERMINAL_PROMPT="0", GIT_OPTIONAL_LOCKS="0")
-    p = subprocess.run(["git", "-c", "protocol.allow=never", "-C", str(cwd), *args], capture_output=True, env=env)
+    p = subprocess.run(["git", "-c", "protocol.allow=never", "-c", "core.useReplaceRefs=false", "-C", str(cwd), *args],
+                       capture_output=True, env=_env())
     if check and p.returncode != 0:
         raise LedgerError(f"git {' '.join(args[:2])} failed: {p.stderr.decode(errors='replace').strip()[:200]}")
     return p
@@ -94,6 +105,12 @@ def verify(root, line, lines, canonical_line):
     top = Path(p.stdout.decode().strip()).resolve()
     if _git(top, "rev-parse", "--is-shallow-repository").stdout.decode().strip() == "true":
         raise LedgerError(f"version {line['version']}: shallow clone; binding verification needs full history (fetch-depth: 0)")
+    # history-rewriting mechanisms make topology claims unverifiable: fail closed if any is present (Fable F-01)
+    if _git(top, "for-each-ref", "refs/replace/").stdout.strip():
+        raise LedgerError(f"version {line['version']}: refs/replace exists; replaced objects make the history unverifiable")
+    common = Path(_git(top, "rev-parse", "--git-common-dir").stdout.decode().strip())  # not --git-path: GIT_GRAFT_FILE is /dev/null here
+    if ((common if common.is_absolute() else top / common) / "info/grafts").exists():
+        raise LedgerError(f"version {line['version']}: info/grafts exists; grafted parents make the history unverifiable")
     prefix = root.relative_to(top).as_posix()
     rel = (lambda x: x) if prefix == "." else (lambda x: f"{prefix}/{x}")
     mc, rh = b["merge_commit"], b["reviewed_head"]
@@ -117,6 +134,12 @@ def verify(root, line, lines, canonical_line):
     if len(base_lines) != n or base_lines != want[:n]:
         raise LedgerError(f"version {line['version']}: the merge base does not stop at version {n - 1} (version {n} did not enter through this merge)")
     pinned = {bound["file"]: bound["file_sha256"], **bound["decisions"], **bound["reviews"]}
+    # the whole ledger package (tools, records, ledger, evidence) must be unchanged between review and merge (Fable F-04)
+    pkg = "" if prefix == "." else prefix
+    tr = _git(top, "rev-parse", f"{rh}^{{tree}}" if not pkg else f"{rh}:{pkg}", check=False).stdout.decode().strip()
+    tm = _git(top, "rev-parse", f"{mc}^{{tree}}" if not pkg else f"{mc}:{pkg}", check=False).stdout.decode().strip()
+    if not tr or tr != tm:
+        raise LedgerError(f"version {line['version']}: the ledger package tree differs between reviewed_head and merge_commit (changed after review)")
     for path in [mpath] + [rel(x) for x in sorted(pinned)]:
         a = _git(top, "rev-parse", f"{rh}:{path}", check=False).stdout.decode().strip()
         m = _git(top, "rev-parse", f"{mc}:{path}", check=False).stdout.decode().strip()

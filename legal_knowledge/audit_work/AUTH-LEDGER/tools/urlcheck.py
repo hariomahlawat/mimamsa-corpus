@@ -22,6 +22,7 @@ Rejected (each with a stated reason):
   - an empty query ('?' with nothing after it) and any fragment
 The host and path rules per evidence class are in strength.CLASS_HOSTS / class_path_problem()."""
 import re
+import unicodedata
 import urllib.parse
 
 MAX_LEN = 2048
@@ -50,10 +51,28 @@ def _escape_problem(part, where):
     return ""
 
 
+def _decoded_problem(part, where):
+    """The percent-decoded bytes must be strict UTF-8 with no control, format (bidi) or compatibility characters: a
+    decoded fullwidth dot or solidus would be read as '.' or '/' by a handler that applies NFKC (Fable F-07)."""
+    try:
+        dec = urllib.parse.unquote_to_bytes(part).decode("utf-8")
+    except UnicodeDecodeError:
+        return f"percent-encoded bytes in the {where} are not valid UTF-8"
+    for ch in dec:
+        cat = unicodedata.category(ch)
+        if cat in ("Cc", "Cf", "Cs", "Co", "Cn", "Zl", "Zp") or (cat == "Zs" and ch != " "):
+            return f"decoded {where} contains a control, format, separator or unassigned character U+{ord(ch):04X}"
+    if unicodedata.normalize("NFKC", dec) != dec:
+        return f"decoded {where} contains compatibility characters (e.g. fullwidth '.' or '/') that NFKC would change"
+    return ""
+
+
 def parse(url):
-    """Return (host, path_segments, query) for a strictly valid HTTPS locator. Every second spelling of a URL (case,
-    explicit default port, needless or lower-case escapes) is rejected, so exact-string contradiction checks cannot be
-    evaded by re-spelling a recorded locator; raise ValueError(reason) otherwise."""
+    """Return (host, path_segments, query) for a strictly valid HTTPS locator. The common second spellings of a URL
+    (case, explicit port, escapes of unreserved characters, lower-case escapes) are rejected. NOT every equivalent
+    spelling is: '@' versus '%40' and other reserved-character escapes, query-parameter order, and different paths that
+    serve one resource (e.g. archive.org /details/<item> and /download/<item>/<file>) are not canonicalised (Fable
+    F-03); contradiction checks therefore remain exact-string (rule 1) and RULE_DECISION_PACK.md C covers aliases; raise ValueError(reason) otherwise."""
     if not isinstance(url, str) or not url:
         raise ValueError("locator is empty")
     if len(url) > MAX_LEN:
@@ -77,8 +96,8 @@ def parse(url):
     labels = host.split(".")
     if len(labels) < 2 or not all(_LABEL.fullmatch(x) for x in labels) or len(host) > 253:
         raise ValueError(f"host {host!r} is not a lower-case DNS name of two or more labels")
-    if labels[-1].isdigit():
-        raise ValueError(f"host {host!r} looks like an IP address")
+    if not re.fullmatch(r"[a-z]{2,63}", labels[-1]):
+        raise ValueError(f"host {host!r} has a non-alphabetic top-level label (IP-address forms such as 1.0x7f are rejected: Fable F-15)")
     try:
         sp = parts.port
     except ValueError:
@@ -96,6 +115,10 @@ def parse(url):
         p = _escape_problem(part, where)
         if p:
             raise ValueError(p)
+    for where, part in (("path", path), ("query", parts.query)):
+        p = _decoded_problem(part, where)
+        if p:
+            raise ValueError(p)
     segs = path.split("/")[1:]
     if any(s == "" for s in segs[:-1]):
         raise ValueError("empty path segment ('//') is not allowed")
@@ -104,9 +127,9 @@ def parse(url):
             raise ValueError(f"dot segment {s!r} in the path")
         if ";" in s:
             raise ValueError("';' path parameters are not allowed")
-        dec = urllib.parse.unquote(s, errors="strict")
-        if dec in (".", "..") or "/" in dec or "\\" in dec:  # defence in depth: already excluded by the escape rules
-            raise ValueError("a path segment decodes to traversal or a separator")
+        dec = urllib.parse.unquote_to_bytes(s).decode("utf-8")  # already proven strict UTF-8 by _decoded_problem
+        if dec.strip(" ") in (".", "..") or "/" in dec or "\\" in dec:
+            raise ValueError("a path segment decodes to traversal or a separator (including '..' padded with spaces)")
     return host, segs, parts.query
 
 

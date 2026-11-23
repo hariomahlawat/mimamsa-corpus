@@ -24,9 +24,10 @@ The checks run were:
 ## Summary
 | Group | Count | Rows | Recommendation |
 | --- | --- | --- | --- |
-| 1A-READY | 12 | T1-01, 03, 04, 05, 06, 07, 08, 09, 10, 12, 13, 15 | Ready for an owner decision, with each row's limitations recorded verbatim |
-| 1A-CONFIRM-ID | 6 | T1-02 (S.R.O. 34/1963), T1-11 (S.R.O. 68/1985), T1-14 (S.R.O. 302/1987), T1-16 (S.R.O. 332/1989), T1-17 (S.R.O. 44 and 61/1991), T1-18 (S.R.O. 235/1991) | First, a CONFIRMED image check that transcribes the S.R.O. number and date line (see finding F-T1-1) |
-| 1B-FIDELITY | 2 | T1-19 (S.R.O. 2(E)/2018), T1-20 (S.R.O. 17(E)/2019) | Hold until the owner confirms fidelity class 2. T1-19 also needs the identifier check |
+| 1A-READY | 18 | T1-01 to T1-18 | Ready for an owner decision, with each row's limitations recorded verbatim. T1-02 (S.R.O. 34/1963) is for copy provenance only (F-T1-2) |
+| 1B-FIDELITY | 2 | T1-19 (S.R.O. 2(E)/2018), T1-20 (S.R.O. 17(E)/2019) | Hold until the owner confirms fidelity class 2 |
+
+**Correction after independent review (Fable F-02).** The first build of this tranche (commit 924047b1) reported a "1A-CONFIRM-ID" group of 6 rows, plus T1-19. It said their S.R.O. number and date line were not transcribed in any committed observation. That was wrong. The builder scanned only `identity_refs`. Each of those entries also cites, as L5 evidence, an R23 amendment-search record (`R23-VERIFY-01/registers/amendment_search_2026-11-22.csv`, status `LOCATED_IMAGE_CHECKED`, with a render hash) that quotes the masthead and the S.R.O. line from the page image. An example, for T1-16: "'New Delhi, the 26th September, 1989 S.R.O. 332... Army (Amendment) Rules, 1989'". The builder now reads those records too. All 20 have the number read from the image, and the split is 18 / 2.
 
 **Common facts for all 20:**
 - The carrier is `THIRD_PARTY_ARCHIVAL_FACSIMILE`: archive.org re-hosting of Government of India Gazette issues.
@@ -37,18 +38,11 @@ The checks run were:
 - No exact-string contradiction is found for any locator.
 
 ## Findings
-**F-T1-1. The identifier is not transcribed for 7 rows (6 in 1A plus T1-19).**
-- The builder looked for the S.R.O. number in text a person read from the page image: image-check observations and independent transcriptions. Register rows are excluded, because they restate the expected identity.
-- For 13 rows the number is there, for example WSA-PIC-37: "New Delhi, the 27th March 1965 S.R.O. 116.-".
-- For T1-02, T1-11, T1-14, T1-16, T1-17, T1-18 and T1-19, the recorded observations confirm the page **content** but do not record the S.R.O. number or date line. Examples:
-  - PIC-39 for T1-16 records r.1, the short title "Army (Amendment) Rules, 1989", and the substitution of r.194 at printed p.736.
-  - PIC-21 for T1-11 records a corrigendum to S.R.O. 55.
-- For these rows the number comes from the ARMY-RULES-CHAIN-01 instrument register (`evidence_level IMAGE_CHECKED`).
-- Rule 1 accepts that register row as identity evidence, so these rows are eligible. But item 4 (title and notification identifier) is **not independently evidenced** in a committed observation.
-- Recommended remedy: a C6-style check with `identity_result=CONFIRMED` that transcribes the number and date line. This is offline work on held files; no download is needed.
+**F-T1-1. Notification identifiers (corrected).** For all 20 rows, the S.R.O. number(s) in the identity appear in text that a person read from the page image. That text comes from image-check observations, independent transcriptions, or the L5 R23 records' quoted identity evidence. Register rows are excluded, so the check is not circular. Rule 1 itself accepts these rows on their image checks and ARMY-RULES-CHAIN-01 register rows. See the correction note above.
 
 **F-T1-2. S.R.O. 34/1963 (T1-02): uncertainty preserved.**
 - The held file is the 05-01-1963 declaration under r.188(e) (PIC-15). It is a declaration, not an amendment.
+- The C5 master title and the C6-01 draft say "notes misdate as 05-06-1963". That wording asserts something unverified. The prepared files therefore use neutral wording (`build_tranche1.neutral_identity`): the notes list an 'S.R.O. 34 dated 5-6-1963', and whether that is this instrument is UNVERIFIED. The frozen C5 and C6-01 files are not changed.
 - The government notes' "S.R.O. 34 dated 5-6-1963" is **not** shown to be this instrument, and the identity of the instrument that the notes list stays **UNVERIFIED** (Fable F-03 in C6-01).
 - Any entry for this copy authenticates **copy provenance only**. Its limitation must say that no amendment-chain inference may rest on it. Nothing in this tranche infers a chain.
 
@@ -76,13 +70,12 @@ This is a simulation only, with synthetic records in a temporary directory; it i
 - documented primary copies would rise from 12 to 32;
 - **no crosswalk row would change.**
 
-With 1A-READY only, 12 copies and 12 sources change, documented primary copies rise from 12 to 24, and no crosswalk row changes.
+With 1A-READY only (18), 18 copies and 18 sources change, documented primary copies rise from 12 to 30, and no crosswalk row changes.
 
 ## Evidence still to verify before any approval
-1. F-T1-1: a CONFIRMED identifier transcription for the 7 rows.
-2. The owner's position on fidelity class 2, for T1-19 and T1-20.
-3. Optionally, retrieval dates for the 14 rows that lack one. This needs no download if the archive metadata snapshot dates are accepted.
-4. For conversion:
+1. The owner's position on fidelity class 2, for T1-19 and T1-20.
+2. Optionally, retrieval dates for the 14 rows that lack one. This needs no download if the archive metadata snapshot dates are accepted.
+3. For conversion:
    - committed D- and R- records naming each `entry_id=sha256:entry_digest`;
    - an independent review of the tranche PR;
    - a BIND line after the merge (`../../APPROVAL_CONTROLS.md`).

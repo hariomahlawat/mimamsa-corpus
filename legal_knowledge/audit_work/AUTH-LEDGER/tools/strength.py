@@ -20,6 +20,8 @@ URL = re.compile(r"https?://[^ ;),|]+")
 # authenticity value, and every first-class locator host must suit the class.
 RET_AUTHENTICITY = {"OFFICIAL_COURT_ARCHIVE", "ORIGINAL_OFFICIAL", "ARCHIVAL_FACSIMILE_OF_OFFICIAL", "OFFICIAL_COMPILATION"}
 COURT_HOSTS = ("sci.gov.in",)
+# path shapes of every committed court locator (Fable F-06); a new shape needs a reviewed change here
+COURT_PATH = re.compile(r"/(?:jonew/(?:judis|bosir/orderpdf)|judgment/judis)/\d+\.pdf|/supremecourt/\d{4}/\d+/[A-Za-z0-9_-]+\.pdf")
 GOV_HOSTS = (".gov.in", ".nic.in")
 ARCHIVE_HOSTS = ("archive.org",)
 CLASS_HOSTS = {
@@ -29,7 +31,7 @@ CLASS_HOSTS = {
 }
 
 
-def class_path_problem(host, segs, cls):
+def class_path_problem(host, segs, cls, query=""):
     """'' when the strictly parsed locator's host and path suit the class, else the reason. Hosts: exact or dot-suffix
     match on the allow-list; archive.org only as the item host itself, for /download/<item>/<file...> or /details/<item>
     (never web.archive.org captures of other sites: re-review N-03)."""
@@ -40,25 +42,31 @@ def class_path_problem(host, segs, cls):
         if "archive.org" not in allowed or host != "archive.org":
             return f"host {host} does not suit class {cls}"
         item = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")
-        if len(segs) >= 3 and segs[0] == "download" and item.fullmatch(segs[1]) and all(segs[2:]):
+        ok = ((len(segs) >= 3 and segs[0] == "download" and item.fullmatch(segs[1]) and all(segs[2:]))
+              or (len(segs) == 2 and segs[0] == "details" and item.fullmatch(segs[1])))
+        if ok and not query:
             return ""
-        if len(segs) == 2 and segs[0] == "details" and item.fullmatch(segs[1]):
-            return ""
+        if ok:
+            return "archive.org locators carry no query (it would be ignored by the server: Fable F-03)"
         return "archive.org locator must be /download/<item>/<file> or /details/<item>"
-    if not any(host == a.lstrip(".") or host.endswith(a if a.startswith(".") else "." + a) for a in allowed):
+    # exact host, or a sub-domain of a listed domain; a bare public suffix (gov.in, nic.in) is never a document host (F-06)
+    if not any((not a.startswith(".") and (host == a or host.endswith("." + a))) or (a.startswith(".") and host.endswith(a))
+               for a in allowed):
         return f"host {host} does not suit class {cls}"
-    if segs == [""]:
-        return "locator names a site root, not a document"
+    if not segs or segs[-1] == "":
+        return "locator names a site root or a directory, not a document (no trailing '/')"
+    if allowed is COURT_HOSTS and not COURT_PATH.fullmatch("/" + "/".join(segs)):
+        return "court locator path is not a known Supreme Court document path (/jonew/..., /judgment/..., /supremecourt/<year>/<n>/...pdf)"
     return ""
 
 
 def locator_problem(url, cls):
     """'' when the locator is strictly valid (urlcheck.parse: D-01) and suits the class, else the reason."""
     try:
-        host, segs, _q = urlcheck.parse(url)
+        host, segs, query = urlcheck.parse(url)
     except ValueError as e:
         return str(e)
-    return class_path_problem(host, segs, cls)
+    return class_path_problem(host, segs, cls, query)
 
 
 def host_ok(url, cls):
@@ -148,6 +156,14 @@ def first_class(ref, sha, cls=None):
     return kind, st, url
 
 
+def _untruncated(ref, text, m):
+    """The URL taken from free text must be the whole whitespace-delimited token, apart from trailing separator
+    punctuation; otherwise the extraction would silently cut the recorded URL at ')', ',', ';' or '|' (Fable F-08)."""
+    tok = re.match(r"\S+", text[m.start():]).group(0)
+    if tok.rstrip(",;|)") != m.group(0):
+        raise LedgerError(f"{ref}: recorded locator {tok!r} contains a separator character; the URL would be truncated")
+
+
 def _first_class(ref, sha):
     path, rec = resolve(ref)
     if _json_source(path):
@@ -160,6 +176,7 @@ def _first_class(ref, sha):
         m = URL.search(rec.get("locator") or "")
         if not m:
             raise LedgerError(f"{ref}: retrieval record has no URL locator")
+        _untruncated(ref, rec.get("locator"), m)
         return "RET", "FULL", m.group(0)
     if path in CSV_KEYS and path in ("PILOT-01/registers/source_code_resolution_v3.csv", "PILOT-01/registers/source_discovery_2026-11-22.csv", "ACQ-02/supplement_inventory.csv"):
         own = (rec.get(CSV_KEYS[path][1]) or "").strip()[:64]
@@ -174,6 +191,7 @@ def _first_class(ref, sha):
             m = URL.search(rec.get("candidate_url_or_identifier") or "")
             if not m:
                 raise LedgerError(f"{ref}: download record gives an identifier, not a URL (IDENTIFIER_SHA is below FULL)")
+            _untruncated(ref, rec.get("candidate_url_or_identifier"), m)
             return "DL", "FULL", m.group(0)
         ok = lambda v: (v or "").strip().lower() in ("yes", "true")
         if not (ok(rec.get("archive_size_ok")) and ok(rec.get("archive_md5_ok")) and ok(rec.get("archive_sha1_ok"))):

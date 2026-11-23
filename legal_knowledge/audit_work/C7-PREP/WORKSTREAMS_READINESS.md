@@ -78,5 +78,5 @@
   - No correspondence.
 - **C6-05.** Unchanged. `AUTH-LEDGER/tranches/T2-SUPREME-COURT/EVIDENCE_REVIEW_PLAN.md` adds R-T2-7: provenance of a judgment copy never settles subsequent treatment. One example is Dharamvir Singh (2013) and the later ruling on the 2008 Rules. That stays an adviser question.
 - **Tranches.**
-  - Tranche 1 is now prepared in `AUTH-LEDGER/tranches/T1-GAZETTE/`: 12 ready, 6 needing a CONFIRMED identifier transcription, and 2 born-digital rows held for the fidelity decision.
+  - Tranche 1 is now prepared in `AUTH-LEDGER/tranches/T1-GAZETTE/`: 18 ready (S.R.O. 34/1963 for copy provenance only) and 2 born-digital rows held for the fidelity decision. The first build's "6 needing an identifier transcription" was corrected after Fable review F-02.
   - Tranche 2 has a review plan with an open owner decision on JUDIS renditions (P-D3 in `AUTH-LEDGER/RULE_DECISION_PACK.md`).

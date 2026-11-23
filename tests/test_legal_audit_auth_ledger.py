@@ -509,7 +509,7 @@ class Controls(unittest.TestCase):
         with self.assertRaisesRegex(common.LedgerError, "authenticity 'SECONDARY'"):
             strength.first_class("PILOT-01/sources/judgment-auditor.json#S-JUD-008", ISAAC)
         self.assertFalse(strength.host_ok("https://www.livelaw.in/x", "PRIMARY_OFFICIAL_COURT_COPY"))
-        self.assertTrue(strength.host_ok("https://api.sci.gov.in/x.pdf", "PRIMARY_OFFICIAL_COURT_COPY"))
+        self.assertTrue(strength.host_ok("https://api.sci.gov.in/jonew/judis/1.pdf", "PRIMARY_OFFICIAL_COURT_COPY"))
         self.assertFalse(strength.host_ok("https://evilsci.gov.in.example.com/x", "PRIMARY_OFFICIAL_COURT_COPY"))
         held = reader._held_index()
         self.assertEqual(R.copy_status(ISAAC, held[ISAAC], {"authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "NON_PRIMARY_OFFICIAL_COURT_RENDITION",
@@ -739,7 +739,7 @@ class ReReview(unittest.TestCase):
         self.assertFalse(strength.host_ok("https://archive.org/download/../web/x", "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE"))
         # AUTH-LEDGER-02 (D-01 hardening): an explicit ':443' is now rejected as a second spelling of the URL
         self.assertFalse(strength.host_ok("https://api.sci.gov.in:443/x.pdf", "PRIMARY_OFFICIAL_COURT_COPY"))
-        self.assertTrue(strength.host_ok("https://api.sci.gov.in/x.pdf", "PRIMARY_OFFICIAL_COURT_COPY"))
+        self.assertTrue(strength.host_ok("https://api.sci.gov.in/jonew/judis/1.pdf", "PRIMARY_OFFICIAL_COURT_COPY"))
         self.assertTrue(strength.host_ok("https://indiacode.gov.in/server/api/core/bitstreams/x/content", "PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN"))
 
     def test_n04_record_parsing(self):
@@ -1107,6 +1107,12 @@ HOSTILE = [
     "https://sci.gov.in.evil.example/x.pdf", "https://evilsci.gov.in.example/x.pdf", "https://api.sci.gov.in/", "https://api.sci.gov.in",
     "https://api.sci.gov.in/jonew/judis/%38566.pdf", "https://api.sci.gov.in/jonew//judis/8566.pdf", "https://desw.gov.in/sites//a.pdf", "https://api.sci.gov.in/jonew/judis/8566.pdf?#", "javascript:alert(1)", "", None, 42,
     "https://archive.org/download/x/" + "a" * 2100,
+    # AUTH-LEDGER-02 review fixes (Fable F-03, F-06, F-07, F-15; F-11 survivors)
+    "https://gov.in/x.pdf", "https://nic.in/x.pdf", "https://desw.gov.in/sites/", "https://archive.org/download/x/y.pdf?a=1",
+    "https://archive.org/details/x?view=theater", "https://archive.org/download/x/%EF%BC%8E%EF%BC%8E/y.pdf", "https://archive.org/download/x/%EF%BC%8F.pdf",
+    "https://archive.org/download/x/..%20/y.pdf", "https://archive.org/download/x/a%E2%80%AEb.pdf", "https://archive.org/download/x/a%C2%85b.pdf",
+    "https://archive.org/download/x/a%FFb.pdf", "https://desw.gov.in/a.pdf?q=%FF", "https://1.0x7f/x.pdf", "https://x.gov.in.1/x.pdf",
+    "https://-api.sci.gov.in/x.pdf", "https://api_x.sci.gov.in/x.pdf", "https://api.sci.gov.in/x%3F.pdf", "https://api.sci.gov.in/x%23.pdf",
 ]
 LEGIT = [
     ("https://archive.org/download/in.gazette.central.w.1962-01-06.85365/85365.pdf", GAZ),
@@ -1566,3 +1572,173 @@ class TranchePreparation(unittest.TestCase):
         self.assertTrue(j["label"].startswith("SIMULATION ONLY"))
         self.assertEqual(j["joint_all_20"]["crosswalk_row_changes"], 0)
         self.assertEqual(j["joint_all_20"]["copy_status_changes"], 20)
+
+
+class ReviewFixes02(unittest.TestCase):
+    """Corrections for the independent Fable review of 924047b1 (review/fable_review_924047b1.md)."""
+    def setUp(self):
+        self.t = GitLedger()
+
+    def tearDown(self):
+        self.t.close()
+
+    def bound(self):
+        head, merge = self.t.pr([entry_from_draft(GAZETTE_1962, 1)])
+        self.t.add_bind(head, merge)
+        self.t.commit("bind")
+        return head, merge
+
+    def test_f01_replace_refs_fail_closed(self):
+        self.bound()
+        self.t.state(require_binding=True)
+        _git(self.t.dir, "replace", "--graft", "HEAD", _git(self.t.dir, "rev-list", "--max-parents=0", "HEAD"))
+        with self.assertRaisesRegex(common.LedgerError, "refs/replace exists"):
+            self.t.state(require_binding=True)
+
+    def test_f01_grafts_file_fail_closed(self):
+        self.bound()
+        (self.t.dir / ".git/info").mkdir(exist_ok=True)
+        (self.t.dir / ".git/info/grafts").write_text(_git(self.t.dir, "rev-parse", "HEAD") + "\n", encoding="utf-8")
+        with self.assertRaisesRegex(common.LedgerError, "info/grafts exists"):
+            self.t.state(require_binding=True)
+
+    def test_f01_inherited_git_environment_is_ignored(self):
+        self.bound()
+        other = GitLedger()
+        try:
+            env = {"GIT_DIR": str(other.dir / ".git"), "GIT_WORK_TREE": str(other.dir), "GIT_GRAFT_FILE": str(other.dir / "g"),
+                   "GIT_REPLACE_REF_BASE": "refs/x/", "GIT_OBJECT_DIRECTORY": str(other.dir / ".git/objects")}
+            with mock.patch.dict(__import__("os").environ, env):
+                texts = self.t.state(require_binding=True)
+            self.assertEqual([x["effect"] for x in json.loads(texts["transitions.json"])], ["APPLIED"])
+            self.assertNotIn("GIT_DIR", binding._env())
+            self.assertEqual(binding._env()["GIT_NO_REPLACE_OBJECTS"], "1")
+        finally:
+            other.close()
+
+    def test_f04_package_change_in_the_merge_is_rejected(self):
+        _git(self.t.dir, "checkout", "-q", "-b", "pr1")
+        self.t.add_version([entry_from_draft(GAZETTE_1962, 1)])
+        head = self.t.commit("reviewed")
+        _git(self.t.dir, "checkout", "-q", "main")
+        _git(self.t.dir, "merge", "-q", "--no-ff", "--no-commit", "pr1")
+        (self.t.dir / "tools_changed_in_merge.py").write_text("x = 1\n", encoding="utf-8")
+        merge = self.t.commit("merge that also changes code")
+        self.t.add_bind(head, merge)
+        with self.assertRaisesRegex(common.LedgerError, "package tree differs between reviewed_head and merge_commit"):
+            self.t.state(require_binding=True)
+
+    def test_f05_transitions_carry_the_assurance_level(self):
+        self.bound()
+        tr = json.loads(self.t.state(require_binding=True)["transitions.json"])
+        self.assertIn("ASSERTED_NOT_VERIFIED_OFFLINE", tr[0]["binding_assurance"])
+        self.assertIn("VERIFIED_OFFLINE", tr[0]["binding_assurance"])
+
+    def test_f08_truncated_locator_is_refused(self):
+        m = strength.URL.search("see https://archive.org/download/x/y.pdf)evil")
+        with self.assertRaisesRegex(common.LedgerError, "would be truncated"):
+            strength._untruncated("r", "see https://archive.org/download/x/y.pdf)evil", m)
+        for ok in ("https://archive.org/download/x/y.pdf; next", "(https://archive.org/download/x/y.pdf)", "https://archive.org/download/x/y.pdf"):
+            mm = strength.URL.search(ok)
+            strength._untruncated("r", ok, mm)
+
+
+class ReviewFixes02Records(unittest.TestCase):
+    def setUp(self):
+        self.t = Synthetic()
+
+    def tearDown(self):
+        self.t.close()
+
+    def test_f09_agent_names_with_digits_or_underscores(self):
+        for name in ("Fable5", "claude_code", "GPT4", "ai-assistant"):
+            t = Synthetic()
+            try:
+                t.add_version([entry_from_draft(GAZETTE_1962, 1)], decided_by=name)
+                with self.assertRaisesRegex(common.LedgerError, "names an AI model or agent"):
+                    t.state()
+            finally:
+                t.close()
+        self.assertIsNone(L.AGENT.search("Kai Raina"))  # letters around a listed word do not match
+
+    def test_f10_manifest_types_and_date(self):
+        for over, rx in (({"version": True}, "version must be an integer"), ({"rule_version": 1.0}, "rule_version must be an integer"),
+                         ({"date": "2026-13-40"}, "not a valid YYYY-MM-DD date"), ({"date": "9999"}, "not a valid YYYY-MM-DD date"), ({"date": "20261123"}, "not a valid YYYY-MM-DD date")):
+            t = Synthetic()
+            try:
+                t.add_version([entry_from_draft(GAZETTE_1962, 1)], tamper=lambda line, o=over: line.update(o))
+                with self.assertRaisesRegex(common.LedgerError, rx):
+                    L.read_manifest(t.dir)
+            finally:
+                t.close()
+
+    def test_f11_wrong_scope_is_rejected(self):
+        e = entry_from_draft(GAZETTE_1962, 1)
+        pairs = f"{e['entry_id']}={e['sha256']}:{L.entry_digest(e)}"
+        ref, h = self.t.write_record("D-v0001.md", f"decision_id: D-v0001\ndecision: APPROVED\nledger_version: 0001\nentries: {pairs}\n"
+                                                    f"decided_by: test owner\ndate: 2026-11-23\nscope: LEGAL_APPROVAL\nlegal_approval: NOT_GIVEN\n")
+        e["decision_record_ref"], e["decision_record_sha256"] = ref, h
+        self.t.add_version([e], decision=False, tamper=lambda line: line["decisions"].update({ref: h}))
+        with self.assertRaisesRegex(common.LedgerError, "must state scope: AUTHENTICATION_PROVENANCE_ONLY"):
+            self.t.state()
+
+    def test_f11_declared_record_hash_must_match(self):
+        e = entry_from_draft(GAZETTE_1962, 1)
+        self.t.add_version([e])
+        f = self.t.dir / "ledger/v0001.csv"
+        rows = common.read_csv(f)
+        rows[0]["decision_record_sha256"] = "0" * 64
+        f.write_text(common.csv_text(L.COLS, rows), encoding="utf-8")
+        mf = self.t.dir / "ledger/manifest.jsonl"
+        ls = mf.read_text(encoding="utf-8").split("\n")
+        d = json.loads(ls[1])
+        d["file_sha256"] = common.sha256_file(f)
+        ls[1] = L.canonical_line(d)
+        mf.write_text("\n".join(ls), encoding="utf-8")
+        (self.t.dir / "ledger/HEAD").write_text(f"1 {common.sha256_text(ls[1])}\n", encoding="utf-8")
+        with self.assertRaisesRegex(common.LedgerError, "hash does not match the entry and the manifest pin"):
+            self.t.state()
+
+
+class ReviewFixes02More(unittest.TestCase):
+    def test_f11_urlcheck_alone_rejects_bad_hosts_and_escapes(self):
+        for u in ("https://-a.example.org/x", "https://a_b.example.org/x", "https://a..example.org/x", "https://example.123/x",
+                  "https://example.org/x%3Fy", "https://example.org/x%23y", "https://example.org/x%2Fy", "https://example.org/x%25y"):
+            self.assertNotEqual(urlcheck.problem(u), "", u)
+        self.assertEqual(urlcheck.problem("https://example.org/a%20b.pdf"), "")
+
+    def test_f06_court_path_shapes(self):
+        self.assertFalse(strength.host_ok("https://api.sci.gov.in/uploads/x.pdf", COURT))
+        self.assertFalse(strength.host_ok("https://api.sci.gov.in/jonew/judis/../x.pdf", COURT))
+        for u in {u for u, _ in strength.url_pairs() if "sci.gov.in" in u}:
+            self.assertTrue(strength.host_ok(u, COURT), u)
+
+    def test_f11_genesis_line_with_content_is_rejected(self):
+        t = Synthetic()
+        try:
+            mf = t.dir / "ledger/manifest.jsonl"
+            d = json.loads(mf.read_text(encoding="utf-8").split("\n")[0])
+            d["decisions"] = {"decisions/D-v0000.md": "0" * 64}
+            s = L.canonical_line(d)
+            mf.write_text(s + "\n", encoding="utf-8")
+            (t.dir / "ledger/HEAD").write_text(f"0 {common.sha256_text(s)}\n", encoding="utf-8")
+            with self.assertRaisesRegex(common.LedgerError, "genesis line must carry no entries"):
+                t.state()
+        finally:
+            t.close()
+
+    def test_f02_tranche1_reports_l5_image_quotations(self):
+        m = common.read_csv(PKG / "tranches/T1-GAZETTE/evidence_verification_matrix.csv")
+        reg = common.read_csv(PKG / "tranches/T1-GAZETTE/tranche1_source_register.csv")
+        self.assertTrue(all(r["identifier_read_on_image"] == "YES" for r in reg))
+        self.assertEqual(sorted({r["sub_tranche"] for r in reg}), ["1A-READY", "1B-FIDELITY"])
+        t16 = [r for r in m if r["tranche_id"] == "T1-16"][0]
+        self.assertIn("S.R.O. 332", t16["v07_identity_page_evidence"])
+        self.assertIn("not an identity-reference kind under rule 1", t16["v07_identity_page_evidence"])
+        rows = {r["sha256"]: r for r in common.read_csv(PKG / "tranches/T1-GAZETTE/proposed_entries_PENDING.csv")}
+        sro34 = [r for r in rows.values() if "S.R.O. 34 (1963" in r["document_identity"]][0]
+        self.assertNotIn("notes misdate as", sro34["document_identity"])
+        self.assertIn("UNVERIFIED", sro34["limitations"])
+        for r in rows.values():
+            if r["sha256"] in {x["sha256"] for x in reg if x["sub_tranche"] == "1B-FIDELITY"}:
+                self.assertIn("STRUCTURAL ONLY", r["limitations"])

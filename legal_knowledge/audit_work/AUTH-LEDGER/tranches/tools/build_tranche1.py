@@ -43,10 +43,20 @@ def load():
     return drafts, rec, st, fa, cp, ms
 
 
+SRO34_C6 = "(1963-01-05 (notes misdate as 05-06-1963))"
+SRO34_NEUTRAL = ("(1963-01-05; the government notes list an 'S.R.O. 34 dated 5-6-1963', and whether that is this instrument is "
+                 "UNVERIFIED)")
+
+
+def neutral_identity(identity):
+    """The C6-01 draft wording 'notes misdate' asserts what is unverified (Fable F-12); the prepared rows use neutral wording."""
+    return identity.replace(SRO34_C6, SRO34_NEUTRAL)
+
+
 def to_entry(d, n, cp, version=1):
     e = {k: "" for k in L.COLS}
     e.update({"entry_id": f"AL-v{version:04d}-{n:03d}", "entry_version": f"{version:04d}", "entry_type": "ADD", "sha256": d["sha256"],
-              "source_id": d["source_id"], "copy_id": d["copy_id"], "document_identity": d["document_identity"],
+              "source_id": d["source_id"], "copy_id": d["copy_id"], "document_identity": neutral_identity(d["document_identity"]),
               "evidence_refs": d["evidence_refs"], "first_class_record_ref": d["first_class_record_ref"],
               "identity_refs": d["identity_refs"].replace("T:C6-01-PROVENANCE/inputs/held_copy_facts.csv#", "T:AUTH-LEDGER/evidence/copy_facts.csv#"),
               "proposed_authentication_state": "PROVENANCE_DOCUMENTED", "proposed_class": d["proposed_class"],
@@ -116,15 +126,28 @@ def identity_summary(refs):
             continue
         path, rec = strength.resolve(r)
         if path == INSTR:
-            out.append(f"{rec.get('instr_id')}: evidence_level {rec.get('evidence_level')}; {rec.get('instrument', '')[:60]}; {rec.get('gazette_publication', '')[:60]}")
+            out.append(f"{rec.get('instr_id')}: evidence_level {rec.get('evidence_level')}; {rec.get('instrument', '')}; {rec.get('gazette_publication', '')}")
         elif path.startswith("WS-A-STATUTORY/"):
-            out.append(f"{rec.get('check_id')}: pdf p.{rec.get('pdf_page')} printed p.{rec.get('printed_page')}; render {rec.get('render_png_sha256', '')[:12]}; "
-                       f"transcription: {rec.get('independent_transcription', '')[:90]}")
+            out.append(f"{rec.get('check_id')}: pdf p.{rec.get('pdf_page')} printed p.{rec.get('printed_page')}; render {rec.get('render_png_sha256', '')}; "
+                       f"transcription: {rec.get('independent_transcription', '')}")
         else:
             seen = rec.get("observed_on_image") or rec.get("reading") or rec.get("what_was_read") or ""
-            out.append(f"{rec.get('check_id')}: {rec.get('page', '')}; render {rec.get('render_png_sha256', '')[:12]}; observed: {seen[:90]}"
+            out.append(f"{rec.get('check_id')}: {rec.get('page', '')}; render {rec.get('render_png_sha256', '')}; observed: {seen}"
                        + (f"; identity_result {rec['identity_result']}" if rec.get("identity_result") else ""))
     return " | ".join(out)
+
+
+def l5_observations(evidence_refs, sha):
+    """R23 amendment-search records cited as L5 evidence that quote the page image (status LOCATED_IMAGE_CHECKED, a
+    64-hex render hash, and this sha256). Their identity_evidence field quotes the masthead and the S.R.O. line
+    (Fable review F-02: the first build scanned identity_refs only and missed these)."""
+    out = []
+    for ref in [x for x in evidence_refs.split("; ") if x.startswith("L5:")]:
+        _p, rec = strength.resolve(ref[3:])
+        if (rec.get("status") == "LOCATED_IMAGE_CHECKED" and (rec.get("sha256") or "").strip() == sha
+                and re.fullmatch(r"[0-9a-f]{64}", (rec.get("render_sha256") or "").strip())):
+            out.append((ref, rec))
+    return out
 
 
 def identity_text(refs):
@@ -168,7 +191,8 @@ def build():
         kind, strg, url = strength._first_class(d["first_class_record_ref"], s)
         verdict, why = rule1(e)
         fc = fidelity_class(T, C["text_layer_class"], F["pages"])
-        idtxt = identity_text(e["identity_refs"])
+        l5 = l5_observations(e["evidence_refs"], s)
+        idtxt = identity_text(e["identity_refs"]) + " " + " ".join(r.get("identity_evidence", "") for _x, r in l5)
         sros = sro_numbers(d["document_identity"])
         pat = lambda n: r"S\.?\s*R\.?\s*O\.?\s*" + re.escape(n.split("(")[0].strip()) + r"\b"
         sro_img = [n for n in sros if re.search(pat(n), idtxt)]
@@ -196,27 +220,32 @@ def build():
         elif not id_read:
             rcm = ("ELIGIBLE UNDER RULE 1; RECOMMEND a CONFIRMED image check transcribing the S.R.O. number and date line before the owner decision"
                    + ("; then copy provenance only, with the S.R.O. 34 limitation recorded verbatim" if "S.R.O. 34/1963" in special else ""))
+        elif "S.R.O. 34/1963" in special:
+            rcm = ("ELIGIBLE UNDER RULE 1 FOR COPY PROVENANCE ONLY; READY for an owner decision with the S.R.O. 34 identity limitation "
+                   "recorded verbatim (no amendment-chain inference)")
         else:
             rcm = "ELIGIBLE UNDER RULE 1; READY for an owner decision with the stated limitations"
         reg.append({"tranche_id": tid, "sub_tranche": sub, "sha256": s, "source_id": d["source_id"], "copy_id": d["copy_id"],
-                    "document_identity": d["document_identity"], "issuing_authority": M["authority"], "publication_type": M["publication_type"],
+                    "document_identity": neutral_identity(d["document_identity"]), "issuing_authority": M["authority"], "publication_type": M["publication_type"],
                     "notification_identifiers": "; ".join(f"S.R.O. {n}" for n in sros),
                     "identifier_read_on_image": "YES" if id_read else "NOT_RECORDED", "carrier": C["copy_carrier_provenance"].split(" ")[0],
                     "fidelity_class": fc, "first_class_locator": url, "proposed_class": CLS, "rule1_result": verdict, "recommendation": rcm})
         matrix.append({
             "tranche_id": tid, "sha256": s,
-            "v01_exact_source": f"{d['source_id']} / {d['copy_id']}: {M['title'][:120]}",
-            "v02_held_file_sha256": f"{s} (held: {R['held_paths'][:120]})",
+            "v01_exact_source": f"{d['source_id']} / {d['copy_id']}: {neutral_identity(M['title'])}",
+            "v02_held_file_sha256": f"{s} (held: {R['held_paths']})",
             "v03_issuing_authority": M["authority"],
-            "v04_title_and_identifier": (f"{d['document_identity']}; S.R.O. number(s) {sros}: read in image-check/transcription text {sro_img or 'NOT FOUND'}; "
+            "v04_title_and_identifier": (f"{neutral_identity(d['document_identity'])}; S.R.O. number(s) {sros}: read in image-check, transcription or L5 image-quote text {sro_img or 'NOT FOUND'}; "
                                          f"in page-1 text layer {sro_p1 or 'NOT FOUND'} (text-layer absence is not adverse for a scanned page)"),
-            "v05_carrier_classification": f"{C['copy_carrier_provenance'][:80]}; class {CLS}; publication type {M['publication_type']}",
-            "v06_provenance_evidence": (f"first-class {kind}/{strg}: {d['first_class_record_ref']} -> {url}; checksums: {R['checksum_evidence'][:160]}; "
+            "v05_carrier_classification": f"{C['copy_carrier_provenance']}; class {CLS}; publication type {M['publication_type']}",
+            "v06_provenance_evidence": (f"first-class {kind}/{strg}: {d['first_class_record_ref']} -> {url}; checksums: {R['checksum_evidence']}; "
                                         f"retrieval date: {R['retrieval_date']}"),
-            "v07_identity_page_evidence": identity_summary(e["identity_refs"]),
-            "v08_completeness": f"{M['completeness_status'][:120]}; pages {F['pages']}; master pages {M['pages']}",
+            "v07_identity_page_evidence": identity_summary(e["identity_refs"]) + "".join(
+                f" | {x}: {r.get('status')}; render {r.get('render_sha256', '')}; quoted: {r.get('identity_evidence', '')} "
+                "(L5 R23 amendment-search record: an image quotation by the R23 examiner; not an identity-reference kind under rule 1)" for x, r in l5),
+            "v08_completeness": f"{M['completeness_status']}; pages {F['pages']}; master pages {M['pages']}",
             "v09_derivative_or_rehosting": (f"re-hosted by archive.org (third-party archival facsimile of a Government of India Gazette); producer "
-                                            f"'{T['producer'][:60]}'; {'not' if fc != 'ARCHIVE_DERIVATIVE' else 'IS'} an Internet Archive derivative producer"),
+                                            f"'{T['producer']}'; {'not' if fc != 'ARCHIVE_DERIVATIVE' else 'IS'} an Internet Archive derivative producer"),
             "v10_signed_or_scanned": f"{C['text_layer_class']}; embedded images {T['embedded_images']}; text chars {T['text_chars']}; EOF markers {T['eof_markers']}",
             "v11_signature_coverage": (f"signature byte range {T['signature_byte_ranges']} covers file: {T['signed_range_covers_file']}; NOT CRYPTOGRAPHICALLY VERIFIED"
                                        if T["signature_byte_ranges"].strip() else "no embedded signature (scanned facsimile)"),
@@ -229,6 +258,16 @@ def build():
                        "recovery_register_contradictions": R["contradictions"],
                        "identity_discrepancy": special if special.startswith("S.R.O. 34") else "NONE_RECORDED",
                        "status": "DOCUMENTED_UNCERTAINTY" if special.startswith("S.R.O. 34") else "NO_CONTRADICTION_FOUND_IN_SEARCHED_REGISTERS"})
+        extra = []
+        if "S.R.O. 34/1963" in special:
+            extra.append("IDENTITY: the notes' 'S.R.O. 34 dated 5-6-1963' is not shown to be this 05-01-1963 instrument (UNVERIFIED); "
+                         "copy provenance only; no amendment-chain inference")
+        if sub == "1B-FIDELITY":
+            extra.append("FIDELITY: born-digital; embedded signature byte range spans the file - STRUCTURAL ONLY, signature NOT "
+                         "cryptographically validated; held pending the owner's fidelity-class decision")
+        if not id_read:
+            extra.append("IDENTIFIER: S.R.O. number and date line not found in a committed image observation; confirm before approval")
+        e = dict(e, limitations="; ".join([e["limitations"]] + extra))
         pending.append(dict(e, tranche_status="PENDING_NOT_IN_LEDGER", tranche_note=(
             "PREPARED ONLY. owner_decision is deliberately EMPTY (fails the ledger schema). Converting this row needs committed D-/R- records, "
             "its own PR and review, and a BIND line after the merge.")))

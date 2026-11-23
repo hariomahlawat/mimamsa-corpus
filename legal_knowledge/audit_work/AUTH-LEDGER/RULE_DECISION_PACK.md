@@ -20,10 +20,12 @@
 | Option | Changes | Newly ineligible | Newly eligible | False-positive risk | False-negative risk | Reproducibility | Tests needed |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | A1 keep | nothing | 0 | 0 | a located-but-unverified record counts as FULL | none added | unchanged | none |
-| A2 require SOURCE_VERIFIED | first-class RET must be VERIFIED | 3 (above) | 0 | lowest | the 3 lose FULL, although byte identity is proven by their own sha256 | rule 2; history keeps rule 1 | per-state acceptance, one test per affected record |
+| A2 require SOURCE_VERIFIED | first-class RET must be VERIFIED | **2**: Navjot (3b753548) and the Rajbir rendition (6b495f14). S.R.O. 34/1963 (4acdb1a8) can be re-pointed to its second FULL record, `ACQ-02/supplement_inventory.csv#ACQ02-03`, and stays eligible (corrected after Fable F-13) | 0 | lowest | the 2 lose FULL, although byte identity is proven by their own sha256 | rule 2; history keeps rule 1 | per-state acceptance, one test per affected record, and a test of the re-pointing |
 | **A3 (recommended)** separate questions | entry gains `retrieval_verification_state`; a LOCATED record supports retrieval provenance only, and content identity must come from an identity check | 0 | 0 | low: identity is already mandatory | none | rule 2 with a new column; v0000 unchanged | column presence; limitation text for LOCATED; identity still required; state copied from the record, not typed |
 
 **Safest rule.** A3 keeps every eligibility decision rule 1 makes, and makes the evidence gap explicit. A2 is stricter, but would demote records whose bytes are hash-proven.
+
+**A3 is safe only together with B2** (Fable F-13). Navjot (3b753548) has a `SOURCE_LOCATED` record as its only first-class evidence and page-1 text as its only identity evidence, yet on its own it creates the EXACT_ANCHOR for DCLR-SC-2005-L01. Under A3 with B1, that anchor would rest on a located-but-unverified record plus a text-layer match. A3 must therefore not be adopted without B2, or without an equivalent requirement for a CONFIRMED image check on anchor-creating entries.
 
 ## B. Legacy page-image evidence (no `identity_result` field)
 **What rule 1 does.** Each of the following counts as identity evidence:
@@ -39,36 +41,44 @@ Only C6 checks carry `identity_result`, and only CONFIRMED counts.
 - 1 draft (TRA) has a C6 CONFIRMED check.
 - 7 drafts would create an exact anchor alone. All 7 are court copies that rest on the text rule: 10e1954f, 3056712c, 3b753548, 4f7ea3a4, 970b9680, eb442080, ed7cf31f.
 
-| Option | Changes | Newly ineligible (until new evidence) | False-positive risk | False-negative risk | Reproducibility | Tests needed |
-| --- | --- | --- | --- | --- | --- | --- |
-| B1 accept as now | nothing | 0 | an old row that read something other than the identity elements still counts (tranche finding F-T1-1 shows 7 Gazette rows whose observation does not transcribe the S.R.O. number) | none | unchanged | none |
-| **B2 (recommended)** fresh check where an anchor is created | an entry whose approval creates an EXACT_ANCHOR needs a CONFIRMED check or a reviewer statement naming the identity elements | 7 court entries | low where it matters; Gazette rows without crosswalk effect still rely on legacy evidence, with a limitation | low | rule 2; anchors computed by the reader, never typed | anchor-creating entry without a CONFIRMED check is rejected; non-anchoring entry is accepted with the limitation |
-| B3 fresh check for all legacy | every legacy-only or text-only entry needs a CONFIRMED check | 31 | lowest | high: 31 entries wait, 22 of which have no coverage effect | rule 2 | same as B2, for all |
+| Option | Changes | Newly ineligible (until new evidence) | Newly eligible | False-positive risk | False-negative risk | Reproducibility | Tests needed |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| B1 accept as now | nothing | 0 | 0 | an old row that read something other than the identity elements still counts. For the 20 Gazettes, the S.R.O. number and date line are in fact quoted from the page image in the cited L5 R23 records, so the risk there is low. For the 9 court entries, identity is text-layer only | none | unchanged | none |
+| **B2 (recommended)** fresh check where an anchor is created | an entry whose approval creates an EXACT_ANCHOR needs a CONFIRMED check or a reviewer statement naming the identity elements | 7 court entries | 0 | low where it matters; Gazette rows without crosswalk effect still rely on legacy evidence, with a limitation | low | rule 2; anchors computed by the reader, never typed | anchor-creating entry without a CONFIRMED check is rejected; non-anchoring entry is accepted with the limitation |
+| B3 fresh check for all legacy | every legacy-only or text-only entry needs a CONFIRMED check | 31 | 0 | lowest | high: 31 entries wait, 22 of which have no coverage effect | rule 2 | same as B2, for all |
 
-**Safest rule.** B2, plus the tranche-1 recommendation to obtain CONFIRMED identifier transcriptions for the 7 Gazette rows (F-T1-1), as a matter of review practice rather than a rule. B3 is safest in isolation but delays entries with no coverage effect.
+**Safest rule.** B2. B3 is safest in isolation but delays entries with no coverage effect. The first tranche-1 build wrongly reported 7 Gazette rows as lacking an identifier transcription. Fable F-02 showed that the cited L5 records quote it, so the earlier text here has been withdrawn.
 
 ## C. URL normalisation for contradiction detection
 **What rule 1 does.** Exact-string comparison of a locator with every committed (URL, sha256) pair.
 
-**Interaction with AUTH-LEDGER-02.** The strict parser now rejects every second spelling of a first-class locator:
+**Interaction with AUTH-LEDGER-02.** The strict parser rejects the common second spellings of a first-class locator:
 - case variants, explicit ports and fragments;
-- needless or lower-case escapes.
+- escapes of unreserved characters, and lower-case escapes;
+- archive.org queries;
+- trailing-slash directory paths.
 
-So the RFC-safe normalisations in C2 can no longer change a first-class locator. What remains is the committed comparison set.
+It does **not** reject every equivalent spelling (Fable F-03). Still accepted are:
+- reserved-character escapes such as `@` versus `%40`;
+- query-parameter order;
+- different paths that serve one resource, notably archive.org `/details/<item>` versus `/download/<item>/<file>`.
+
+So the RFC-safe normalisations in C2 no longer change a first-class locator, but aliasing remains a real question.
 
 **Records affected.**
 - 75 committed pairs, 74 distinct URLs.
 - No committed URL changes under C2 normalisation.
 - One existing exact-string contradiction: India Code bitstream `7a05a1f5-…/content`, recorded with two sha256 values (the known TRA 2026 case). It is unchanged under C2 and under a `/jonew/judis/` ↔ `/judgment/judis/` alias.
 - No new contradiction appears under any option.
+- **10 archive.org items** are recorded under both `/details/<item>` and `/download/<item>/<file>`. None of them carries differing sha256 values today, but an alias table would have real content now.
 
-| Option | Changes | Newly ineligible | False-positive risk | False-negative risk | Reproducibility | Tests needed |
-| --- | --- | --- | --- | --- | --- | --- |
-| C1 exact string (rule 1) | nothing | 0 | none | a re-spelled committed URL could escape matching; for new locators this is now closed by the strict parser | unchanged | none |
-| **C2 (recommended)** RFC-safe normalisation of the comparison set, plus a decision-referenced alias table; matches are reported as candidates | committed variants compared in normal form; aliases only with a decision record | 0 on current data | low: equivalence-preserving only | low | rule 2; the alias table is a pinned, versioned input | each safe normalisation; each unsafe one (trailing slash, http↔https, query drop) is NOT applied; alias needs a decision reference; a match is reported, never merged |
-| C3 broad normalisation (trailing slash, http→https, query drop) | merges distinct resources | unpredictable | high: false contradictions, and false identity of distinct documents | — | poor | — (not recommended) |
+| Option | Changes | Newly ineligible | Newly eligible | False-positive risk | False-negative risk | Reproducibility | Tests needed |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| C1 exact string (rule 1) | nothing | 0 | 0 | none | a differently spelled or aliased URL (e.g. `/details/` versus `/download/`) escapes matching | unchanged | none |
+| **C2 (recommended)** RFC-safe normalisation of the comparison set, plus a decision-referenced alias table (archive.org `/details/<item>` ↔ `/download/<item>/<file>` first); matches are reported as candidates | committed variants compared in normal form; aliases only with a decision record | 0 on current data | 0 | low: equivalence-preserving only | low | rule 2; the alias table is a pinned, versioned input | each safe normalisation; each unsafe one (trailing slash, http↔https, query drop) is NOT applied; alias needs a decision reference; a match is reported, never merged |
+| C3 broad normalisation (trailing slash, http→https, query drop) | merges distinct resources | unpredictable | unpredictable | high: false contradictions, and false identity of distinct documents | — | poor | — (not recommended) |
 
-**Safest rule.** C2, but its practical value is now small. It matters only for committed comparison data, and on current data it changes nothing. It can wait until a variant actually appears.
+**Safest rule.** C2, with the archive.org item alias as its first table entry. On current data it changes no outcome, but 10 items already appear in both forms. The earlier recommendation to defer C2 rested on an over-broad claim about the parser and is withdrawn (Fable F-03).
 
 ## Copy-fidelity table: independent assessment
 Fidelity describes **how the held bytes relate to the official publication**. It is not legal validity (in force, applicable), not source authority (who issued it), and not cryptographic signature verification.
@@ -84,9 +94,9 @@ Fidelity describes **how the held bytes relate to the official publication**. It
 | Incomplete | no | parts missing | keep non-primary; the ER 2023 13 MB copy stays distinguishable from the full publication |
 
 ## Owner decisions required
-- **P-A.** Adopt A3 as part of a rule-2 transition, or keep rule 1. Recommended: A3.
+- **P-A.** Adopt A3 as part of a rule-2 transition, or keep rule 1. Recommended: A3, **only together with B2**.
 - **P-B.** Adopt B2, or keep rule 1. Recommended: B2.
-- **P-C.** Adopt C2 now, or defer. Recommended: defer until a variant appears; the strict parser covers new locators.
+- **P-C.** Adopt C2, with the archive.org `/details` ↔ `/download` item alias, in the rule-2 transition. Recommended: adopt; candidates are reported, never merged.
 - **P-D1.** Confirm the fidelity table.
 - **P-D2.** Confirm that born-digital files with a spanning signed range stay primary provisionally, without cryptographic validation (tranche 1B).
 - **P-D3.** Classify JUDIS renditions on a court host as court-issued or as court-system renditions. This must be decided before tranche 2.

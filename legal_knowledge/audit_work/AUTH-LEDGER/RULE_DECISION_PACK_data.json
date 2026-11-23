@@ -5,10 +5,14 @@
    "newly_ineligible": 0
   },
   "A2_require_SOURCE_VERIFIED": {
-   "newly_ineligible": 3,
+   "first_class_record_fails": 3,
+   "newly_eligible": 0,
+   "newly_ineligible": 2,
+   "re_pointable_to_another_full_record": [
+    "4acdb1a8 -> ARC:ACQ-02/supplement_inventory.csv#ACQ02-03"
+   ],
    "which": [
     "3b753548 PRIMARY_OFFICIAL_COURT_COPY",
-    "4acdb1a8 PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
     "6b495f14 NON_PRIMARY_OFFICIAL_COURT_RENDITION"
    ]
   },
@@ -31,6 +35,7 @@
  },
  "B": {
   "B1_accept_as_now": {
+   "newly_eligible": 0,
    "newly_ineligible": 0
   },
   "B2_fresh_check_only_where_anchor_created": {
@@ -379,6 +384,19 @@
   "C2_contradictions": [
    "https://indiacode.gov.in/server/api/core/bitstreams/7a05a1f5-506a-4e9c-afae-c2e4fc1e989e/content"
   ],
+  "archive_items_details_download_with_differing_sha256": [],
+  "archive_items_recorded_under_details_and_download": [
+   "in.gazette.central.e.1993-12-06.16490",
+   "in.gazette.central.e.2003-06-24.153",
+   "in.gazette.central.e.2019-12-28.214956",
+   "in.gazette.central.e.2022-06-06.236353",
+   "in.gazette.central.w.1954-11-27.103686",
+   "in.gazette.central.w.1963-01-19.84713",
+   "in.gazette.central.w.1965-04-10.81813",
+   "in.gazette.central.w.1965-07-03.79361",
+   "in.gazette.central.w.1979-07-28.46533",
+   "in.gazette.central.w.1988-09-17.28081"
+  ],
   "committed_url_sha_pairs": 75,
   "contradictions_if_jonew_judgment_alias_adopted": [
    "https://indiacode.gov.in/server/api/core/bitstreams/7a05a1f5-506a-4e9c-afae-c2e4fc1e989e/content"
@@ -388,6 +406,7 @@
    "https://indiacode.gov.in/server/api/core/bitstreams/7a05a1f5-506a-4e9c-afae-c2e4fc1e989e/content"
   ],
   "first_class_locators_rejected_by_AUTH_LEDGER_02_strict_parser": [],
+  "newly_eligible_under_any_C_option": 0,
   "urls_changed_by_C2_normalisation": []
  },
  "drafts": 32,
