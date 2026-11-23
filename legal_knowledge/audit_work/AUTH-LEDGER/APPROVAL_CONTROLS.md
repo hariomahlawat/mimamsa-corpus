@@ -57,7 +57,7 @@ Further rules:
 
 `require_binding=False` keeps the AUTH-LEDGER-01 semantics. It is used only for the synthetic evidence-rule tests and for the tranche simulation, both in temporary directories. The command-line tool never selects it, and a test checks that.
 
-**Trust assumption.** Verification assumes that the local object store and `.git` directory handed to the verifier have not been tampered with beyond the mechanisms checked (replace refs, grafts, commit-graph, nested repositories, inherited environment). An auditor should verify from a fresh clone or bundle, not from a working copy supplied by the party being audited.
+**Trust assumption.** Verification assumes that the local object store and `.git` directory handed to the verifier have not been tampered with beyond the mechanisms checked (replace refs, grafts, commit-graph, nested repositories, inherited environment). An auditor should verify from a fresh clone or bundle, not from a working copy supplied by the party being audited. This includes a committed symlink in place of the package directory (git mode 120000), which could point verification at another repository (Fable C-02). Before verifying, an auditor should check that `legal_knowledge/audit_work/AUTH-LEDGER` is a real directory in the clone. A fail-closed code check is recorded as open item C-02.
 
 ## Owner decisions needed (nothing here is adopted)
 - **O-1 Owner signature.** Optionally require an owner signature over each BIND line, checked against a public key supplied out of band. Options are SSH (`ssh-keygen -Y verify`) or OpenPGP.
