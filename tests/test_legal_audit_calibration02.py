@@ -138,7 +138,7 @@ class Reconciliation(unittest.TestCase):
         (base / "tools").mkdir(parents=True); (base / "registers").mkdir()
         shutil.copy(C2 / "tools/reconcile.py", base / "tools")
         (base / "registers/held_sources_scratchpad.csv").write_text(
-            "scratchpad_relative_path,bytes,sha256,note\ndownloads/official.pdf,10," + "e" * 64 + ",\nderived/x.txt,10," + "f" * 64 + ",\n", encoding="utf-8")
+            "scratchpad_relative_path,bytes,sha256,note\ndownloads/official.pdf,10," + "e" * 64 + ",\nderived/x.txt,10," + "f" * 64 + ",\ndownloads/ambiguous.pdf,10," + "9" * 64 + ",\nsecondary/ambiguous_copy.pdf,10," + "9" * 64 + ",\n", encoding="utf-8")
         props = [["1", "R-1", f"R-1#P{i}", "body_sentence", f"text {i}", "M", "T", "K", "S", "0" * 64] for i in range(1, n + 1)]
         with open(base / "propositions.csv", "w", newline="", encoding="utf-8") as f:
             w = csv.writer(f, lineterminator="\n")
@@ -177,8 +177,9 @@ class Reconciliation(unittest.TestCase):
              ("A", 9): dict(evidence_state="SUPPORTED_BY_SECONDARY_SOURCE_ONLY"),                         # no material defect
              ("A", 10): dict(P2, **VER, proposed_correction="primary-backed correction"),                 # PRIMARY
              ("A", 11): dict(P2, proposed_correction="", missing_evidence="needs Gazette page", source_sha256="", locator=""),  # GAP
-             ("A", 12): dict(P2, evidence_state="VERIFIED_AGAINST_HELD_PRIMARY_SOURCE", source_sha256=DV)}  # derived file is not primary
-        t, m, p, d = self._tree(f)
+             ("A", 12): dict(P2, evidence_state="VERIFIED_AGAINST_HELD_PRIMARY_SOURCE", source_sha256=DV),  # derived file is not primary
+             ("A", 13): dict(P2, evidence_state="VERIFIED_AGAINST_HELD_PRIMARY_SOURCE", source_sha256="9" * 64)}  # bytes also held as secondary
+        t, m, p, d = self._tree(f, n=13)
         try:
             ag = {k: v["agreement"] for k, v in m.items()}
             self.assertEqual(ag["R-1#P1"], "DISAGREE")
@@ -200,6 +201,7 @@ class Reconciliation(unittest.TestCase):
             self.assertEqual(st[("R-1#P10", "A")], "PRIMARY_EVIDENCE_SUPPORTED")
             self.assertEqual(st[("R-1#P11", "A")], "EVIDENCE_GAP")
             self.assertEqual(st[("R-1#P12", "A")], "SECONDARY_EVIDENCE_ONLY")
+            self.assertEqual(st[("R-1#P13", "A")], "SECONDARY_EVIDENCE_ONLY")
             for x in p:
                 self.assertEqual(x["incorporation_state"], "PROPOSED_NOT_INCORPORATED (original record unchanged)")
         finally:

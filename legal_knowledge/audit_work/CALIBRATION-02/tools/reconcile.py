@@ -44,18 +44,21 @@ def write(p, cols, rows):
         w.writerows(rows)
 
 
-HELD = {}
+HELD = {}  # sha256 -> list of held paths
 
 
 def is_primary(sha):
-    hp = HELD.get(sha, "").lower()
-    return bool(hp) and hp.endswith((".pdf", ".doc", ".docx")) and "/secondary/" not in "/" + hp
+    """Primary only if every held path for these bytes is a pdf/doc outside a 'secondary' folder. Bytes also held as a
+    secondary copy (e.g. the Isaac file, QC-09) are not counted as primary-backed until authenticated."""
+    ps = [p.lower() for p in HELD.get(sha, [])]
+    return bool(ps) and all(p.endswith((".pdf", ".doc", ".docx")) and "/secondary/" not in "/" + p for p in ps)
 
 
 def main():
     hi = C2 / "registers/held_sources_scratchpad.csv"
     if hi.exists():
-        HELD.update({r["sha256"]: r["scratchpad_relative_path"] for r in read(hi)})
+        for r in read(hi):
+            HELD.setdefault(r["sha256"], []).append(r["scratchpad_relative_path"])
     props = read(C2 / "propositions.csv")
     F = {r: read(C2 / "reviews" / r / "findings.csv") for r in REVIEWERS}
     by = defaultdict(lambda: defaultdict(list))

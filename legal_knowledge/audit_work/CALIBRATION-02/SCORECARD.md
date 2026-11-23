@@ -52,8 +52,8 @@ There are 47 proposals across 19 records:
 
 | Status | Count |
 | --- | --- |
-| PRIMARY_EVIDENCE_SUPPORTED (the raising finding is verified against a held primary file, with a locator) | 6: CM-026#P7, CM-028#P8, CM-028#REF, J-03#P1, PEN-WF-03#P2 (Isaac; see QC-09), SC13#P4 |
-| SECONDARY_EVIDENCE_ONLY | 16 |
+| PRIMARY_EVIDENCE_SUPPORTED (the raising finding is verified against a held primary file, with a locator; bytes also held as a secondary copy do not count) | 5: CM-026#P7, CM-028#P8, CM-028#REF, J-03#P1, SC13#P4 |
+| SECONDARY_EVIDENCE_ONLY | 17, including PEN-WF-03#P2: the Isaac bytes are also held as a secondary copy and await authentication (QC-09) |
 | DISPUTED_ESCALATED | 16 |
 | SOURCE_CONFLICT_OPEN (r.182 Gazette omission SC4-01; Santosh Lohar copy and date) | 6 |
 | EVIDENCE_GAP | 3 |

@@ -3,8 +3,8 @@
  "correction_proposals_by_support": {
   "DISPUTED_ESCALATED": 16,
   "EVIDENCE_GAP": 3,
-  "PRIMARY_EVIDENCE_SUPPORTED": 6,
-  "SECONDARY_EVIDENCE_ONLY": 16,
+  "PRIMARY_EVIDENCE_SUPPORTED": 5,
+  "SECONDARY_EVIDENCE_ONLY": 17,
   "SOURCE_CONFLICT_OPEN": 6
  },
  "cross_volume_findings": 15,
