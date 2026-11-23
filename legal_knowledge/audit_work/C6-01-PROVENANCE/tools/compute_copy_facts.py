@@ -54,9 +54,17 @@ def main():
         rows.append({"copy_id": c["copy_id"], "source_id": c["source_id"], "sha256": c["sha256"], "md5": hashlib.md5(b).hexdigest(),
                      "sha1": hashlib.sha1(b).hexdigest(), "bytes": str(len(b)), "pages": str(d.page_count), "p1_text_excerpt": text})
         ranges = [tuple(int(x) for x in m) for m in BR.findall(b)]
-        covers = "NO_SIGNATURE" if not ranges else ("YES" if any(r[0] == 0 and r[2] + r[3] == len(b) for r in ranges) else "NO")
-        struct.append({"copy_id": c["copy_id"], "sha256": c["sha256"], "bytes": str(len(b)), "producer": (d.metadata or {}).get("producer", ""),
-                       "eof_markers": str(b.count(b"%%EOF")), "signature_byte_ranges": " ".join("[%d %d %d %d]" % r for r in ranges),
+        off = b.find(b"%PDF")  # byte offsets in /ByteRange count from the PDF header; a host may prepend bytes (JUDIS quirk)
+        if not ranges:
+            covers = "NO_SIGNATURE"
+        elif any(r[0] == 0 and r[2] + r[3] == len(b) for r in ranges):
+            covers = "YES"
+        elif off > 0 and any(r[0] == 0 and r[2] + r[3] == len(b) - off for r in ranges):
+            covers = "YES_AFTER_PREFIX"
+        else:
+            covers = "NO"
+        struct.append({"copy_id": c["copy_id"], "sha256": c["sha256"], "bytes": str(len(b)), "producer": ((d.metadata or {}).get("producer", "") or "").encode("ascii", "replace").decode("ascii"),
+                       "eof_markers": str(b.count(b"%%EOF")), "pdf_header_offset": str(off), "signature_byte_ranges": " ".join("[%d %d %d %d]" % r for r in ranges),
                        "signed_range_covers_file": covers, "embedded_images": str(sum(len(pg.get_images()) for pg in d)),
                        "text_chars": str(sum(len(pg.get_text()) for pg in d))})
     rows.sort(key=lambda r: r["copy_id"])

@@ -207,11 +207,15 @@ class C6Provenance(unittest.TestCase):
         sro34 = [p for p in read("source_authentication_proposals.csv") if p["sha256"].startswith("4acdb1a8")][0]
         self.assertIn("UNVERIFIED", sro34["document_identity"])
         self.assertIn("UNVERIFIED", sro34["limitations"])
-        # T rule needs the year or case number too
-        for r in rec.values():
-            for x in r["identity_verification"].split("; "):
-                if x.startswith("T:"):
-                    self.assertTrue(r["source_id"].split("-")[4].isdigit())
+        # T rule needs the year or case number too: a same-surname decoy without the number fails
+        title = "Union of India v Rajbir Singh, C.A. 2904/2011, SC 13-02-2015 (JUDIS 42379)"
+        self.assertTrue(P.text_identity(title, "IN THE SUPREME COURT ... CIVIL APPEAL NO. 2904 OF 2011 Union of India v. Rajbir Singh", True))
+        self.assertEqual(P.text_identity(title, "Rajbir Singh v. State of Haryana, Criminal Appeal 77 of 1999", True), [])
+        self.assertEqual(P.text_identity(title, "CIVIL APPEAL NO. 2904 OF 2011 Union of India v. Rajbir Singh", False), [])  # never for publications
+        # a disclaimed retrieval record is a lead, not a locator
+        self.assertEqual(P.l3_kind({"authenticity": "UNCONFIRMED", "verification_state": "SOURCE_LOCATED"}), "L3x")
+        self.assertEqual(P.l3_kind({"authenticity": "OFFICIAL_COURT_ARCHIVE", "verification_state": "CONFLICTING"}), "L3x")
+        self.assertEqual(P.l3_kind({"authenticity": "OFFICIAL_COURT_ARCHIVE", "verification_state": "SOURCE_VERIFIED"}), "L3")
         # direct file URL preferred over an archive.org item page
         for p in read("source_authentication_proposals.csv"):
             self.assertNotIn("archive.org/details/", p["official_locator_recorded"], p["proposal_id"])
@@ -279,6 +283,19 @@ class C6Addendum(unittest.TestCase):
         self.assertTrue(A.validate([bad]))  # an unresolvable reference is rejected
         bad = dict(rows[0], owner_decision="APPROVED")
         self.assertTrue(A.validate([bad]))  # APPROVED without decision record and reviewer is rejected
+        # first-class record must carry this entry's own sha256 (Fable re-review N-01)
+        other = [r for r in rows if r["sha256"] != rows[0]["sha256"]][0]
+        bad = dict(rows[0], first_class_record_ref=other["first_class_record_ref"])
+        self.assertTrue(any("own sha256" in e for e in A.validate([bad])))
+        # exact-key resolution: a key that is only a prefix of a real key does not resolve
+        ref = rows[0]["first_class_record_ref"]
+        self.assertFalse(A.resolves(ref.split("#")[0] + "#" + ref.split("#")[1][:3] + "_NO_SUCH_KEY"))
+        # snapshot entries without a sha256 never qualify as first-class
+        self.assertEqual(A.own_sha("ACQ-01/archive_org_metadata_snapshot.json#in.gazette.central.e.2022-06-06.236353/236353.pdf"), "")
+        # conditional schema: a WITHDRAW needs a target and a reason
+        w = dict(rows[0], entry_type="WITHDRAW", first_class_record_ref="", proposed_class="", locator_strength="")
+        errs = A.validate([w])
+        self.assertTrue(any("target_entry_id must be set" in e for e in errs) and any("withdrawal_reason must be set" in e for e in errs))
         changed = {r["crosswalk_effect_this_entry_alone"].split(":")[0] for r in rows if not r["crosswalk_effect_this_entry_alone"].startswith("none")}
         self.assertEqual(len(changed), 7)  # the seven SC case records, matching D4
 
@@ -325,6 +342,18 @@ class C6Prep(unittest.TestCase):
         req = {r["request_id"]: r for r in self.rows("c6_04_custodian_request_inventory.csv")}
         self.assertEqual(req["DV-SOH-2014"]["correspondence"], "NONE SENT (not authorised)")
         self.assertIn("AO-13-2006-PS", req)
+
+    def test_prep_registers_rebuild_outside_pr_overlap_columns(self):
+        sys.path.insert(0, str(REPO / "legal_knowledge/audit_work/C6-PREP/tools"))
+        import build_prep as BP
+        texts = BP.outputs()
+        skip = {"pr_stack_overlap", "pr9_allow_list"}  # need the crawler PR commits as local git objects (Fable F-22)
+        for name, txt in texts.items():
+            if not name.endswith(".csv"):
+                self.assertEqual((self.PREP / name).read_text(encoding="utf-8"), txt, name)
+                continue
+            built = [{k: v for k, v in r.items() if k not in skip} for r in csv.DictReader(io.StringIO(txt))]
+            self.assertEqual([{k: v for k, v in r.items() if k not in skip} for r in self.rows(name)], built, name)
 
     def test_adviser_pack_unchanged_and_no_determination(self):
         s = json.loads((self.PREP / "c6_05_adviser_pack_status.json").read_text())

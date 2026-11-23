@@ -85,8 +85,10 @@ COPY_FINDINGS = {
     "C5-SRC-J-SC-2015-RAJBIR~C2": ["copy finding (Fable F-01): its only locator is a parenthesis inside copy C1's retrieval record S-BLIND-013 "
                                    "(retrieved_on/by belong to C1); it is not a duplicate of C1 (163,859 bytes / 21 pp. vs 230,938 / 20 pp.); pp.20-21 are "
                                    "a Record of Proceedings ending '(Signed reportable judgment is placed on the file)'; describe it as 'judgment text + ROP of "
-                                   "13-02-2015'; page equivalence to the JUDIS copy NOT established (C5 copy register); its embedded signature range does not "
-                                   "cover the file (inputs/copy_structure_c6.csv); needs its own retrieval record and a page comparison"],
+                                   "13-02-2015'; page equivalence to the JUDIS copy NOT established (C5 copy register); needs its own retrieval record and a page "
+                                   "comparison. Structural note (coordinator, corrected after Fable re-review N-02): the file begins with 4 non-PDF bytes "
+                                   "(the JUDIS host prefix quirk recorded in PILOT-01 S-JUD-003); measured from the %PDF header the embedded signature "
+                                   "range spans the PDF (YES_AFTER_PREFIX), so it is NOT evidence of post-signing change"],
 }
 NEXT_STEP_OVERRIDES = {
     "C5-SRC-J-SC-2015-RAJBIR~C2": "its own retrieval record (URL, date, sha256 of these bytes) and a page-level comparison with the JUDIS copy; until then not an anchor copy",
@@ -140,8 +142,7 @@ def collect():
                                    f"{before[-1].group(0)} | retrieved_on={o.get('retrieved_on')} | retrieved_by={o.get('retrieved_by')} | sha256 stated in locator"))
             if HEX.fullmatch(s) and re.search(r"https?://", loc):
                 # a record that itself disclaims authenticity, or reports NOT_FOUND / CONFLICTING, is a lead, not a locator (Fable F-02)
-                disclaimed = str(o.get("authenticity", "")).upper() == "UNCONFIRMED" or o.get("verification_state") in ("NOT_FOUND", "CONFLICTING")
-                ev[s].append(("L3x" if disclaimed else "L3", f"{Path(fn).parent.parent.name}/sources/{Path(fn).name}#{o.get('source_id', '')}",
+                ev[s].append((l3_kind(o), f"{Path(fn).parent.parent.name}/sources/{Path(fn).name}#{o.get('source_id', '')}",
                               f"{re.search(r'https?://[^ ;)]+', loc).group(0)} | retrieved_on={o.get('retrieved_on')} | retrieved_by={o.get('retrieved_by')}"))
     for r in read(AW / "PILOT-01/registers/source_discovery_2026-11-22.csv"):
         s = r["downloaded_sha256"].strip()
@@ -186,6 +187,25 @@ def collect():
         if HEX.fullmatch(r["sha256"]):
             ev[r["sha256"]].append(("WSB", f"WS-B-JUDGMENTS/tools/held_copies.csv#{r['spec_key']}", f"{r['official_url']} | {r['basis']}"))
     return ev
+
+
+def l3_kind(o):
+    """A retrieval record that itself disclaims authenticity, or reports NOT_FOUND / CONFLICTING, is a lead (L3x), not a
+    locator (Fable F-02). This is a deny-list; the reviewer's affirmative-state alternative would also exclude SOURCE_LOCATED
+    records (for example S-REVB-012, S-JUD-005 and the R23 S-REVD Gazette records) and is recorded as an open option."""
+    disclaimed = str(o.get("authenticity", "")).upper() == "UNCONFIRMED" or o.get("verification_state") in ("NOT_FOUND", "CONFLICTING")
+    return "L3x" if disclaimed else "L3"
+
+
+def text_identity(title, p1, court):
+    """T rule (court PDFs only): the first two distinctive title words AND a 3-5 digit number from the title outside
+    parentheses (a year or case number) appear in the p.1 text (Fable F-10). Returns the matched numbers or []."""
+    keys = title_keys(title)
+    nums = re.findall(r"\d{3,5}", re.sub(r"\(.*?\)", " ", title))
+    p1 = p1.lower()
+    if court and keys and all(k.lower() in p1 for k in keys[:2]):
+        return [n for n in nums if n in p1]
+    return []
 
 
 def contradictions(sha, url_by_sha):
@@ -249,10 +269,10 @@ def build():
         court = m["publication_type"] == "JUDICIAL"
         keys = title_keys(m["title"])
         p1 = f["p1_text_excerpt"].lower()
-        nums = re.findall(r"\d{3,5}", re.sub(r"\(.*?\)", " ", m["title"]))  # year or case number outside parentheses (Fable F-10)
-        t_ok = bool(court and keys and all(k.lower() in p1 for k in keys[:2]) and any(n in p1 for n in nums))
+        tnums = text_identity(m["title"], f["p1_text_excerpt"], court)
+        t_ok = bool(tnums)
         if t_ok:
-            items.append(("T", "C6-01-PROVENANCE/inputs/held_copy_facts.csv#" + c["copy_id"], f"p.1 text contains {keys[:2]} and {[n for n in nums if n in p1]}"))
+            items.append(("T", "C6-01-PROVENANCE/inputs/held_copy_facts.csv#" + c["copy_id"], f"p.1 text contains {keys[:2]} and {tnums}"))
         L = sorted(k for k in {k for k, _, _ in items} if k in ("L1", "L2", "L3", "L4", "L5", "L6"))
         # locator strength: FULL = sha256 recorded with a URL locator (L1/L3/L4-with-URL) or archive size+md5+sha1 (L2);
         # MD5_SIZE = archive md5 and size only; IDENTIFIER_SHA = sha256 with a repository identifier but no URL (L4);
@@ -320,7 +340,7 @@ def build():
                                                           "L3": "retrieval record with URL and sha256", "L4": "discovery download record with URL and sha256",
                                                           "L5": "archive identifier with md5 match", "L6": "archive identifier with md5 equal to archived md5 (WS-A)"}[k] for k in L})) + ("; identity image-checked" if I else "; identity read from p.1 text (court PDF)"),
                 "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": cls,
-                "limitations": "; ".join(x for x in ["C6-01 PROPOSAL - not incorporated; no signature verified"] + gaps + extra_limits(items, cls, c, struct.get(s)) if x),
+                "limitations": "; ".join(x for x in ["C6-01 PROPOSAL - not incorporated; no signature verified"] + gaps + extra_limits(items, cls, c, struct.get(s), f) if x),
                 "rationale": "Meets the same evidence criteria as the Cycle 4 register rows of its class; requires independent verification (D3) and owner approval before incorporation",
             })
         else:
@@ -344,7 +364,7 @@ def classify(strength, identity_ok, contradicted, has_locator, lead):
     return "NO_RECOVERABLE_PROVENANCE"
 
 
-def extra_limits(items, cls, c, st=None):
+def extra_limits(items, cls, c, st=None, f=None):
     out = []
     kinds = {k for k, _, _ in items}
     if "L1" in kinds and not ({"L3", "L4"} & kinds):
@@ -353,7 +373,14 @@ def extra_limits(items, cls, c, st=None):
         out.append("the matched archive.org file is a derivative, not the uploaded original")
     urls = " ".join(d for k, _, d in items if k in ("L1", "L3", "WSB"))
     if "/jonew/judis/" in urls or "/judgment/judis/" in urls:
-        out.append("JUDIS rendition: re-typed text with CITATION/CITATOR INFO/HEADNOTE material that is not part of the judgment; pinpoints must exclude it (Fable F-16)")
+        p1 = (f or {}).get("p1_text_excerpt", "").upper()
+        marks = [m for m in ("CITATION", "CITATOR INFO", "HEADNOTE") if m in p1]
+        out.append(("JUDIS rendition: p.1 shows " + "/".join(marks) + " material that is not part of the judgment; pinpoints must exclude it (Fable F-16)") if marks
+                   else "JUDIS-hosted copy; headnote/citator presence not checked beyond p.1 (none seen on p.1) (Fable re-review N-03)")
+    if cls.startswith("PRIMARY_GAZETTE_ARCHIVAL") and st:
+        out.append("archive derivative status: producer '" + st["producer"][:60] + "' is not an Internet Archive derivative producer"
+                   + ("" if any(k == "L2" and "ACQ-01" in ref for k, ref, _ in items) else "; the ACQ-02 snapshot carries no file-level source field, so derivative status is inferred from the producer only")
+                   + " (Fable re-review N-04)")
     if "/judgment/judis/" in urls:
         out.append("locator path /judgment/judis/ differs from the /jonew/judis/ form of the other JUDIS rows; locator consistency NOT_CHECKED in V7-S10 (Fable F-17)")
     if "corrected" in c.get("copy_id", "").lower() or "MULLIKOTE" in c["source_id"]:
@@ -395,8 +422,8 @@ def fidelity_issue(st, items):
         return ("embedded signature byte range " + st["signature_byte_ranges"] + " does not cover the " + st["bytes"] + "-byte held file ("
                 + st["eof_markers"] + " %%EOF marker(s); " + ("not an incremental update, so no signed revision can be extracted" if st["eof_markers"] == "1"
                                                             else "the signed revision may be extractable offline") + ")")
-    if any(k == "L2" and "derivative" in d for k, _, d in items):
-        return "the matched archive.org file is a derivative re-rendered by the archive (producer " + (st or {}).get("producer", "?") + "), not the uploaded original"
+    if any(k == "L2" and "derivative" in d for k, _, d in items) or (st or {}).get("producer", "").startswith("Internet Archive"):
+        return "the held file is an archive.org derivative re-rendered by the archive (producer " + (st or {}).get("producer", "?") + "), not the uploaded original"
     return ""
 
 
@@ -457,7 +484,8 @@ def coverage_impact(props):
         EC.Evidence.from_dir = orig_descriptor
         B.check_holding_vs_copies = orig_check
     keys = ("crosswalk_kb_items_by_status", "crosswalk_case_rows_by_status", "kb_records_by_anchor_class")
-    return {"rule": "Cycle 5 crosswalk rules unchanged; proposals simulated as register rows", "baseline": {k: base[k] for k in keys},
+    return {"rule": "Cycle 5 crosswalk rules unchanged; proposals simulated as register rows",
+            "note": "c4_register_by_state_and_class counts the real Cycle 4 register rows only (13); simulated proposals are not counted in it", "baseline": {k: base[k] for k in keys},
             "proposed": {k: sim[k] for k in keys}, "authentication_baseline": base["authentication"], "authentication_proposed": sim["authentication"]}
 
 

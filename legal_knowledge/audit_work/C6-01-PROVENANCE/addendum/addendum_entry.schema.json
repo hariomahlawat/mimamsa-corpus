@@ -1,32 +1,206 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "mimamsa/c6-01/addendum_entry.schema.json",
-  "title": "Source-authentication addendum entry (draft v1)",
-  "description": "One row of an append-only authentication addendum. Canonical key: full sha256 of the held bytes. Draft rows are never effective; only an entry with owner_decision=APPROVED, a resolvable decision_record_ref and a reviewer_ref may take effect, and only through the overlay reader described in INTEGRATION_ARCHITECTURE.md.",
-  "type": "object",
-  "required": ["entry_id", "entry_version", "entry_type", "sha256", "proposal_id", "source_id", "copy_id", "document_identity",
-               "prior_effective_state", "evidence_refs", "first_class_record_ref", "locator_strength", "identity_refs",
-               "proposed_authentication_state", "proposed_class", "primary_or_non_primary", "justification", "limitations",
-               "crosswalk_effect_this_entry_alone", "entry_status", "reviewer_decision", "reviewer_ref", "owner_decision", "decision_record_ref"],
-  "properties": {
-    "entry_id": {"type": "string", "pattern": "^C6-ADD-v[0-9]+-[0-9a-f]{8,64}$"},
-    "entry_version": {"type": "string", "pattern": "^v[0-9]+$"},
-    "entry_type": {"enum": ["ADD", "CORRECTION", "WITHDRAW"]},
-    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
-    "locator_strength": {"enum": ["FULL"]},
-    "proposed_authentication_state": {"enum": ["PROVENANCE_DOCUMENTED"]},
-    "proposed_class": {"enum": ["PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE", "PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN", "PRIMARY_OFFICIAL_COURT_COPY",
-                                "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY", "NON_PRIMARY_OFFICIAL_COURT_RENDITION", "NON_PRIMARY_PARLIAMENTARY_RECORD"]},
-    "primary_or_non_primary": {"enum": ["PRIMARY", "NON_PRIMARY"]},
-    "entry_status": {"enum": ["DRAFT", "WITHHELD", "APPROVED", "REJECTED"]},
-    "reviewer_decision": {"enum": ["PENDING", "ACCEPT", "ACCEPT_WITH_CONDITIONS", "REJECT"]},
-    "owner_decision": {"enum": ["PENDING", "APPROVED", "WITHHELD", "REJECTED"]}
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "mimamsa/c6-01/addendum_entry.schema.json",
+ "title": "Source-authentication addendum entry (draft v1)",
+ "description": "One row of an append-only authentication addendum. Canonical key: full sha256 of the held bytes. Draft rows are never effective; only an entry with owner_decision=APPROVED, a resolvable decision_record_ref and a reviewer_ref may take effect, and only through the overlay reader described in INTEGRATION_ARCHITECTURE.md. All columns are always present (CSV); which must be non-empty depends on entry_type (allOf below).",
+ "type": "object",
+ "required": [
+  "entry_id",
+  "entry_version",
+  "entry_type",
+  "sha256",
+  "proposal_id",
+  "source_id",
+  "copy_id",
+  "document_identity",
+  "prior_effective_state",
+  "target_entry_id",
+  "withdrawal_reason",
+  "resulting_state",
+  "evidence_refs",
+  "first_class_record_ref",
+  "locator_strength",
+  "identity_refs",
+  "proposed_authentication_state",
+  "proposed_class",
+  "primary_or_non_primary",
+  "justification",
+  "limitations",
+  "crosswalk_effect_this_entry_alone",
+  "entry_status",
+  "reviewer_decision",
+  "reviewer_ref",
+  "owner_decision",
+  "decision_record_ref"
+ ],
+ "properties": {
+  "entry_id": {
+   "type": "string",
+   "pattern": "^C6-ADD-v[0-9]+-[0-9a-f]{8,64}$"
   },
-  "x-rules": [
-    "every ref in evidence_refs, identity_refs and first_class_record_ref must resolve to an existing committed file and row key",
-    "first_class_record_ref must be a record whose OWN sha256 equals the entry sha256 (not a sibling copy's record, not a locator mention)",
-    "owner_decision=APPROVED requires entry_status=APPROVED, a decision_record_ref naming a committed, hash-pinned decision file, and a reviewer_ref",
-    "proposed_class NON_PRIMARY_* never yields EFFECTIVE_PRIMARY and therefore never an exact anchor",
-    "draft files are regenerated; merged addendum versions are immutable (hash-pinned in a chained manifest)"
-  ]
+  "entry_version": {
+   "type": "string",
+   "pattern": "^v[0-9]+$"
+  },
+  "entry_type": {
+   "enum": [
+    "ADD",
+    "CORRECTION",
+    "WITHDRAW"
+   ]
+  },
+  "sha256": {
+   "type": "string",
+   "pattern": "^[0-9a-f]{64}$"
+  },
+  "locator_strength": {
+   "enum": [
+    "FULL",
+    ""
+   ]
+  },
+  "proposed_authentication_state": {
+   "enum": [
+    "PROVENANCE_DOCUMENTED",
+    "AUTHENTICATION_PENDING",
+    ""
+   ]
+  },
+  "proposed_class": {
+   "enum": [
+    "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN",
+    "PRIMARY_OFFICIAL_COURT_COPY",
+    "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY",
+    "NON_PRIMARY_OFFICIAL_COURT_RENDITION",
+    "NON_PRIMARY_PARLIAMENTARY_RECORD",
+    ""
+   ]
+  },
+  "primary_or_non_primary": {
+   "enum": [
+    "PRIMARY",
+    "NON_PRIMARY",
+    ""
+   ]
+  },
+  "entry_status": {
+   "enum": [
+    "DRAFT",
+    "WITHHELD",
+    "APPROVED",
+    "REJECTED"
+   ]
+  },
+  "reviewer_decision": {
+   "enum": [
+    "PENDING",
+    "ACCEPT",
+    "ACCEPT_WITH_CONDITIONS",
+    "REJECT"
+   ]
+  },
+  "owner_decision": {
+   "enum": [
+    "PENDING",
+    "APPROVED",
+    "WITHHELD",
+    "REJECTED"
+   ]
+  },
+  "withdrawal_reason": {
+   "enum": [
+    "",
+    "CONTRADICTION",
+    "EVIDENCE_REVOKED",
+    "CLASSIFICATION_ERROR",
+    "OTHER"
+   ]
+  },
+  "resulting_state": {
+   "enum": [
+    "",
+    "AUTHENTICATION_PENDING",
+    "PROVENANCE_UNKNOWN"
+   ]
+  },
+  "target_entry_id": {
+   "type": "string"
+  }
+ },
+ "x-rules": [
+  "every ref must resolve to an existing committed file and an EXACT row key (a CSV cell equal to the key, a JSON record whose source_id equals it, or a JSON object key)",
+  "first_class_record_ref (ADD) must be a record whose OWN sha256 field equals the entry sha256, chosen by priority: L3 retrieval record, then L1 corroboration, then L4 download record, then the ACQ-02 supplement row; snapshot entries without a sha256 never qualify (Fable re-review N-01)",
+  "owner_decision=APPROVED requires entry_status=APPROVED, a decision_record_ref naming a committed, hash-pinned decision file, and a reviewer_ref",
+  "proposed_class NON_PRIMARY_* never yields EFFECTIVE_PRIMARY and therefore never an exact anchor",
+  "draft files are regenerated; merged addendum versions are immutable (hash-pinned in a chained manifest)"
+ ],
+ "allOf": [
+  {
+   "if": {
+    "properties": {
+     "entry_type": {
+      "const": "ADD"
+     }
+    }
+   },
+   "then": {
+    "x-nonempty": [
+     "first_class_record_ref",
+     "evidence_refs",
+     "identity_refs",
+     "locator_strength",
+     "proposed_authentication_state",
+     "proposed_class",
+     "primary_or_non_primary"
+    ],
+    "x-empty": [
+     "target_entry_id",
+     "withdrawal_reason",
+     "resulting_state"
+    ]
+   }
+  },
+  {
+   "if": {
+    "properties": {
+     "entry_type": {
+      "const": "CORRECTION"
+     }
+    }
+   },
+   "then": {
+    "x-nonempty": [
+     "target_entry_id",
+     "evidence_refs",
+     "proposed_authentication_state",
+     "proposed_class",
+     "primary_or_non_primary"
+    ],
+    "x-empty": [
+     "withdrawal_reason"
+    ]
+   }
+  },
+  {
+   "if": {
+    "properties": {
+     "entry_type": {
+      "const": "WITHDRAW"
+     }
+    }
+   },
+   "then": {
+    "x-nonempty": [
+     "target_entry_id",
+     "withdrawal_reason"
+    ],
+    "x-empty": [
+     "first_class_record_ref",
+     "proposed_class",
+     "locator_strength"
+    ]
+   }
+  }
+ ]
 }

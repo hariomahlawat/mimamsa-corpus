@@ -116,7 +116,7 @@ Its five P3 wording items are corrected in the following documentation-only comm
 - **Reviewer:** Claude Fable 5.2 (`claude-fable-5-2`), as the model self-reported. It was requested through the Claude Code Agent tool (model `fable`, agent type `independent-reviewer`).
 - **Tools:** Read, Glob and Grep only, so it had no write, shell, git or commit capability, and it was instructed not to use the network.
 - **What it received:** the commit, file locations and criteria, not the coordinator's conclusions.
-- **Record:** verbatim in `review/fable_review_a165b0f3.md`.
+- **Record:** a condensed record in `review/fable_review_a165b0f3.md`, confirmed faithful in substance by the reviewer (re-review N-08).
 - **What it could not do:** hash files or run code. The coordinator's gate re-hashes held files and runs the builders separately.
 
 | ID | Sev | Finding | Disposition (commit after a165b0f3) |
@@ -148,4 +148,23 @@ Its five P3 wording items are corrected in the following documentation-only comm
 | F-25 | P3 | WITHHELD simulated; descriptor restore | **Corrected:** WITHHELD is never simulated; the original classmethod descriptor is restored |
 | F-26 | P3 | Diff-scope and hash checks not possible for the reviewer | **Done in the coordinator's gate** (git diff scope, held-file re-hash, corpus and Cycle 4 hashes) and recorded in the PR |
 
-**Current outcomes:** 32 DOCUMENTED and 4 PARTIALLY_DOCUMENTED. The 32 proposals are 20 primary Gazette copies, 8 primary court copies and 4 non-primary. Simulated coverage: documented-primary copies 12 to 40; sources 12 to 40; cases 6 to 13; KB unchanged. The re-review of the corrections is recorded below once complete.
+**Current outcomes:** 32 DOCUMENTED and 4 PARTIALLY_DOCUMENTED. The 32 proposals are 20 primary Gazette copies, 8 primary court copies and 4 non-primary. Simulated coverage: documented-primary copies 12 to 40; sources 12 to 40; cases 6 to 13; KB unchanged. 
+## Fable 5.2 re-review of 4bf0a96a: VERDICT ACCEPT WITH CONDITIONS (no P1; 1 new P2)
+The same reviewer, so not independent of its first review. Condensed record: `review/fable_rereview_4bf0a96a.md`. Of F-01..F-26 it marked 15 FIXED and 11 PARTLY (F-02, F-07, F-08, F-09, F-10, F-16, F-17, F-22, F-26 and design residuals). Answers: no DOCUMENTED row rests on a sibling-copy or disclaimed record; the fidelity rule is applied in code to every non-judicial copy and the 2022 reclassification is supported; report counts match the summary.
+
+| ID | Sev | Finding | Disposition |
+| --- | --- | --- | --- |
+| N-01 | P2 | `first_class_record_ref` took the first sorted item (snapshot rows without sha256); no own-sha256 check; substring resolution | **Corrected:** priority L3, L1, L4, ACQ-02 supplement; the referenced record is parsed and must carry the entry's own sha256; resolution is by exact row key; negative tests added. Result: 14 ACQ-02 supplement rows, 7 R23 retrieval records, 11 PILOT-01 records |
+| N-02 | P3 | Rajbir C2 "signature range does not cover the file" was a 4-byte host prefix; misattributed | **Corrected:** coverage is measured from the %PDF header (`YES_AFTER_PREFIX`); the finding now says the range spans the PDF and is attributed to the coordinator |
+| N-03 | P3 | JUDIS headnote limitation applied by URL pattern | **Corrected:** only where p.1 shows the markers (Ranjit, S N Mukherjee); otherwise "headnote presence not checked beyond p.1" |
+| N-04 | P3 | Derivative trigger not evidentially uniform | **Corrected:** derivative also detected by an Internet Archive producer; each archive.org primary row states its producer and whether derivative status is inferred; "signed range spans the file" wording |
+| N-05 | P3 | Schema could not express CORRECTION/WITHDRAW | **Corrected:** `target_entry_id`, `withdrawal_reason`, `resulting_state`; conditional non-empty/empty rules per entry type, enforced by the builder's validator; tested |
+| N-06 | P3 | Architecture gaps (v0 anchoring, transition table, inputs, frozen C5) | **Corrected:** copy-level anchoring is rule version 2 (v0 uses the frozen rule 1); HELD_PRIMARY without a primary copy needs a resulting_state or is a hard error; evidence facts copied into the overlay as pinned inputs; discovery tooling not frozen; carry-over corrections become overlay correction records |
+| N-07 | P3 | Stale METHOD text; tautological T test | **Corrected:** METHOD limits and class table rewritten; T decoy test and synthetic UNCONFIRMED test added |
+| N-08 | P3 | Review file labelled verbatim | **Corrected:** relabelled as a condensed record |
+| N-09 | INFO | Mis-decoded producer | Producer values are now ASCII-normalised |
+| F-03 residual | - | C5 title still says "notes misdate" | Added as C5-CO-05 |
+| F-22 residual | - | No C6-PREP rebuild test | Added (all columns except the two that need the crawler PR commits) |
+| F-25 residual | - | Unlabelled 13-row block | Labelled in the summary |
+
+**Still open by design (owner options, not defects):** the affirmative-state L3 rule (F-02); external image rows without a result field (F-10); URL normalisation in the builder's contradiction test (F-17); independent, git-capable verification of diff scope and hashes (F-26), which the coordinator's gate performs but no independent reviewer with git access has repeated at this head.

@@ -48,31 +48,89 @@ def crosswalk_effect(prop):
     return "; ".join(ch) or "none (no crosswalk row changes)"
 
 
-def resolves(ref):
-    """'<audit_work-relative path>#<row key>' must name an existing committed file containing that key (Fable F-08)."""
-    path, _, key = ref.partition("#")
-    key = key.replace(" (locator)", "").split("/")[0].strip()
+def _load(path):
     f = AW / path
-    return f.is_file() and (not key or key in f.read_text(encoding="utf-8", errors="replace"))
+    if not f.is_file():
+        return None
+    if f.suffix == ".csv":
+        return read(f)
+    with open(f, encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def _record(ref):
+    """Return the record an exact '<path>#<key>' reference names, or None (exact key match, Fable re-review N-01)."""
+    path, _, key = ref.partition("#")
+    key = key.replace(" (locator)", "").strip()
+    data = _load(path)
+    if data is None:
+        return None
+    if isinstance(data, dict):  # metadata snapshot: '<identifier>/<file>'
+        return data.get(key.split("/")[0])
+    for r in data:
+        if isinstance(r, dict) and (r.get("source_id") == key or key in [str(v) for v in r.values()]):
+            return r
+    return None
+
+
+def resolves(ref):
+    return _record(ref) is not None
+
+
+SHA_FIELDS = ("sha256", "official_sha256", "downloaded_sha256", "document_sha256")
+
+
+def own_sha(ref):
+    r = _record(ref)
+    if not isinstance(r, dict):
+        return ""
+    for k in SHA_FIELDS:
+        v = str(r.get(k) or "").strip()[:64]
+        if v:
+            return v
+    return ""
+
+
+def first_class(items, sha):
+    """Priority: L3 retrieval record, L1 corroboration, L4 download record, ACQ-02 supplement (L2 from the supplement).
+    A candidate qualifies only if the referenced record's own sha256 equals the entry key."""
+    order = {"L3": 0, "L1": 1, "L4": 2, "L2": 3}
+    cands = sorted((order[x.split(":")[0]], x.split(":", 1)[1]) for x in items
+                   if x.split(":")[0] in order and "(locator)" not in x)
+    for _, ref in cands:
+        if own_sha(ref) == sha:
+            return ref
+    return ""
+
+
+def _nonempty_rules(entry_type):
+    for rule in SCHEMA["allOf"]:
+        if rule["if"]["properties"]["entry_type"]["const"] == entry_type:
+            return rule["then"]
+    return {}
 
 
 def validate(rows):
     errs = []
-    req = SCHEMA["required"]
     for r in rows:
-        for k in req:
-            if r.get(k) is None:
-                errs.append(f"{r.get('entry_id')}: missing {k}")
+        for k in SCHEMA["required"]:
+            if k not in r:
+                errs.append(f"{r.get('entry_id')}: missing column {k}")
         for k, spec in SCHEMA["properties"].items():
             v = r.get(k, "")
             if "enum" in spec and v not in spec["enum"]:
                 errs.append(f"{r['entry_id']}: {k}={v!r} not in schema enum")
             if "pattern" in spec and not re.fullmatch(spec["pattern"], v):
                 errs.append(f"{r['entry_id']}: {k} does not match {spec['pattern']}")
+        rule = _nonempty_rules(r.get("entry_type", ""))
+        errs += [f"{r['entry_id']}: {k} must be set for {r['entry_type']}" for k in rule.get("x-nonempty", []) if not r.get(k)]
+        errs += [f"{r['entry_id']}: {k} must be empty for {r['entry_type']}" for k in rule.get("x-empty", []) if r.get(k)]
         refs = [x.split(":", 1)[1] for x in (r["evidence_refs"] + "; " + r["identity_refs"]).split("; ") if ":" in x]
-        for ref in refs + [r["first_class_record_ref"]]:
+        for ref in refs + ([r["first_class_record_ref"]] if r["first_class_record_ref"] else []):
             if not resolves(ref):
                 errs.append(f"{r['entry_id']}: unresolvable ref {ref}")
+        if r["entry_type"] == "ADD" and own_sha(r["first_class_record_ref"]) != r["sha256"]:
+            errs.append(f"{r['entry_id']}: first_class_record_ref does not carry this entry's own sha256")
         if r["owner_decision"] == "APPROVED" and not (r["entry_status"] == "APPROVED" and r["decision_record_ref"] and r["reviewer_ref"]):
             errs.append(f"{r['entry_id']}: APPROVED without decision record and reviewer ref")
     if len({r["sha256"] for r in rows}) != len(rows):
@@ -93,13 +151,13 @@ def build():
         withheld = p["proposal_status"].startswith("WITHHELD")
         items = [x for x in r["evidence_items"].split(" | ") if x]
         # first-class record: a locator record whose own sha256 is this copy's (L1/L3/L4/L2 rows are keyed by this sha; '(locator)' mentions are not)
-        first = [x.split(":", 1)[1] for x in items if x.split(":")[0] in ("L3", "L1", "L4", "L2") and "(locator)" not in x]
         rows.append({
             "entry_id": f"C6-ADD-v1-{p['sha256'][:8]}", "entry_version": "v1", "entry_type": "ADD", "sha256": p["sha256"],
             "proposal_id": p["proposal_id"], "source_id": r["source_id"], "copy_id": r["copy_id"], "document_identity": p["document_identity"],
             "prior_effective_state": "C4: NO_ROW; C5 holding_state: " + r["current_authentication_status"].split(" / ")[0],
             "evidence_refs": "; ".join(x for x in items if x.split(":")[0] in ("L1", "L2", "L3", "L4", "L5", "L6", "WSB")),
-            "first_class_record_ref": first[0] if first else "",
+            "target_entry_id": "", "withdrawal_reason": "", "resulting_state": "",
+            "first_class_record_ref": first_class(items, p["sha256"]),
             "locator_strength": r["locator_strength"], "identity_refs": r["identity_verification"],
             "proposed_authentication_state": p["authentication_state"], "proposed_class": cls,
             "primary_or_non_primary": "NON_PRIMARY" if cls.startswith("NON_PRIMARY") else "PRIMARY",

@@ -55,6 +55,7 @@
     "SOME_EXACT": 30
    }
   },
+  "note": "c4_register_by_state_and_class counts the real Cycle 4 register rows only (13); simulated proposals are not counted in it",
   "proposed": {
    "crosswalk_case_rows_by_status": {
     "EXACT_ANCHOR": 13,

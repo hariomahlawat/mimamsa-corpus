@@ -9,7 +9,9 @@
 ## 1. Fixed points (never edited)
 - **Cycle 4, frozen:** `CALIBRATION-02/registers/source_authentication_register.csv` (sha256 `cfe5f408…`), `held_sources_scratchpad.csv` and `tools/evidence_classification.py`.
 - **Cycle 5 snapshot, frozen:** all `SOURCE-LIBRARY-C5/` inputs, tools and registers, which are the merged snapshot.
-- **CI pins.** A test pins the sha256 of every file above. The overlay only reads them.
+- **CI pins.** A test pins the sha256 of every file above **that the effective view reads**: the Cycle 4 registers and rule, and the Cycle 5 inputs, registers and builder. The overlay only reads them.
+- **Discovery tooling is not frozen.** `SOURCE-LIBRARY-C5/tools/discovery_guard.py` and `run_guarded_discovery.py` are not read by the effective view, so a reviewed change to them (for example P-C6-02-META) does not touch the frozen snapshot.
+- **Cycle 5 carry-over corrections** (`C6-PREP/C5_CARRYOVER_CORRECTIONS.md`) are applied as overlay correction records, not as edits to frozen files. A future owner decision to edit a frozen Cycle 5 file would require re-pinning, a documented correction record and a new `effective/v0000` baseline version (Fable re-review N-06).
 
 ## 2. Overlay package
 A new package, for example `legal_knowledge/audit_work/AUTH-LEDGER/`. Its only code dependency is reading the frozen files.
@@ -24,9 +26,10 @@ A new package, for example `legal_knowledge/audit_work/AUTH-LEDGER/`. Its only c
 | `tools/reader.py` | applies v0 (the baseline) plus approved entries to produce the effective view |
 | `effective/vNNNN/` | derived outputs per version: copy states, source states, crosswalk, coverage, `transitions.csv` (audit trail) and `newly_withdrawn.csv` (change list); each folder hash-pinned in the manifest |
 
-`effective/v0000/` is the frozen state. The test is that the reader with zero entries reproduces the Cycle 5 copy and source states and crosswalk **byte-for-byte**.
+`effective/v0000/` is the frozen state. The test is that the reader with zero entries **and rule version 1** reproduces the Cycle 5 copy and source states and crosswalk **byte-for-byte**. Rule version 1 is the Cycle 5 source-level anchoring rule exactly as frozen.
 
 ## 3. Entries
+- **Schema:** `addendum_entry.schema.json`. All columns are always present; which must be set depends on `entry_type` (`target_entry_id`, `withdrawal_reason` and `resulting_state` for CORRECTION/WITHDRAW; Fable re-review N-05).
 - **Key:** the full sha256. Entry types:
   - `ADD`: a new copy row;
   - `CORRECTION`: names the entry or baseline row it supersedes, with evidence;
@@ -55,9 +58,10 @@ A new package, for example `legal_knowledge/audit_work/AUTH-LEDGER/`. Its only c
    | `HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED` | ≥1 effective primary court copy | `HELD_PRIMARY_OFFICIAL_COURT_COPY` |
    | any HELD state | a pending copy and no primary copy | `HELD_AUTHENTICATION_PENDING` |
    | any | otherwise | unchanged |
+   | `HELD_PRIMARY_*` | no effective primary copy remains (after a CORRECTION or WITHDRAW) | the `resulting_state` named by that entry; if none is named, **hard error** (a source can never stay HELD_PRIMARY without a primary copy) |
 
    No column of the frozen Cycle 5 input is split or edited. The Cycle 5 consistency rule is applied by the overlay to its own outputs, so it stays **on**.
-4. **Copy-level anchoring (F-09).** EXACT_ANCHOR needs a citation's checked copy to be the effective primary copy. Otherwise a recorded page-equivalence check between the checked copy and that copy is required. A source never lends EXACT_ANCHOR from one copy to another. A non-primary copy never anchors.
+4. **Copy-level anchoring (F-09).** Introduced as **rule version 2**, not at version 0. EXACT_ANCHOR needs a citation's checked copy to be the effective primary copy, or a recorded page-equivalence check between the checked copy and that copy. A source never lends EXACT_ANCHOR from one copy to another. A non-primary copy never anchors. Moving from rule 1 (source-level, as frozen) to rule 2 is itself a reviewed version step, with its own diff. Citations that record no checked copy become PARTIAL under rule 2 until one is recorded (Fable re-review N-06).
 
 ## 5. Reproducibility, withdrawal and change lists
 - `reader.py --as-of N` reads manifest lines 1..N and the rule version pinned there. Outputs are compared with `effective/vN/` hashes.
@@ -81,7 +85,9 @@ A new package, for example `legal_knowledge/audit_work/AUTH-LEDGER/`. Its only c
 ## 7. Dependency order (acyclic)
 frozen files, then ledger plus decisions, then `strength.py` and the copy rule, then copy states, then source transitions, then crosswalk and coverage, then the effective folder.
 
-C6-01 depends on nothing in the overlay. The overlay depends on nothing in C6-01 at run time: the C6-01 draft is converted to `v0001.csv` once, by a reviewed PR.
+C6-01 depends on nothing in the overlay. The overlay depends on nothing in C6-01 at run time:
+- the C6-01 draft is converted to `v0001.csv` once, by a reviewed PR;
+- the evidence facts the validator needs (md5/sha1/bytes and the copy-structure facts used by the fidelity rule) are copied once into the overlay as committed, hash-pinned evidence inputs (`evidence/copy_facts.csv`, `evidence/copy_structure.csv`) with their provenance (the C6-01 file and commit). The overlay never imports C6-01 code (Fable re-review N-06).
 
 ## 8. Sequencing
 1. **PR 1:** overlay skeleton, schema, versioned rule with non-primary vocabulary, validator, frozen-file pins and `--as-of 0` byte-identity, with **zero entries**.

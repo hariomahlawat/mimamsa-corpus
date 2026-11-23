@@ -39,9 +39,32 @@ Each class is the same one Cycle 4 used for the same carrier type:
 | `PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE` | archive.org Gazettes |
 | `PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN` | a Gazette scan hosted on India Code (Cycle 4 class; assigned to no C6-01 proposal: the only in-scope India Code scan, Act 13/1975, is not DOCUMENTED) |
 | `PRIMARY_OFFICIAL_COURT_COPY` | SC copies |
-| `NON_PRIMARY_PARLIAMENTARY_RECORD` | the Rajya Sabha papers-laid record |
 | `NON_PRIMARY_OFFICIAL_COURT_RENDITION` | a court-system rendition whose carrier is unknown (Rajbir bosir copy) |
-| `NON_PRIMARY_OFFICIAL_PUBLICATION_COPY` | the incomplete ER 2023 copy; and, conservatively, the TRA 2026 copy: born-digital e-Gazette text re-hosted by India Code with an IndiaCode watermark, whose embedded signature's byte range no longer covers the held file. Cycle 4 gave `PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN` to the watermarked India Code scan of Act 37/1992, so the watermark alone is not the distinction; the class is reserved for owner decision (final review R-04) |
+| `NON_PRIMARY_OFFICIAL_PUBLICATION_COPY` | the incomplete ER 2023 copy; the 2022 archive.org derivative e-Gazette (S.R.O. 6(E)/2022); and the TRA 2026 copy: born-digital e-Gazette text re-hosted by India Code with an IndiaCode watermark, whose embedded signature's byte range no longer covers the held file. Cycle 4 gave `PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN` to the watermarked India Code scan of Act 37/1992, so the watermark alone is not the distinction; the class is reserved for owner decision (final review R-04) |
+
+## Copy-fidelity rule for born-digital copies (Fable F-04)
+A non-judicial copy that is otherwise DOCUMENTED is classed `NON_PRIMARY_OFFICIAL_PUBLICATION_COPY` when the held bytes are shown to differ from the publication as issued:
+- its embedded signature's `/ByteRange` does not cover the whole held file; or
+- it is an archive.org derivative, re-rendered by the archive rather than the uploaded file.
+
+The facts come from `inputs/copy_structure_c6.csv`, produced locally by `tools/compute_copy_facts.py`. They are structural observations; no signature is cryptographically validated. The rule applies uniformly: 2018 and 2019 archive.org e-Gazettes (signature covers the file) stay primary; TRA 2026 and the 2022 derivative do not. See `reports/TRA2026_CLASS_COMPARISON.md`.
+
+## Limits
+- A matching hash proves byte identity, not legal authority.
+- A filename or path identifier is treated as a lead only, never as a locator.
+- No signature has been verified (the TRA 2026 copy shows a digital-signature stamp; it was not cryptographically checked).
+- Proposal IDs are display IDs (`C6-01-AP-<first 8 hex of sha256>`); the canonical identity is the full sha256. The builder stops on a duplicate.
+- Retrieval dates appear only where a retrieval record gives them. A register date is labelled as such.
+
+## Known rule limits (current; after the Fable 5.2 review and re-review)
+- **L3 deny-list.** A retrieval record counts as a locator unless it disclaims authenticity or reports NOT_FOUND/CONFLICTING (`l3_kind`). The reviewer's alternative, requiring an affirmative verification state, would also exclude SOURCE_LOCATED records (Navjot S-REVB-012, the Rajbir rendition S-JUD-005 and the R23 S-REVD Gazette records). It is left open for the owner.
+- **External image checks.** An external page-image row with a render hash counts as I, because those registers carry no result field. Only the C6 checks carry `identity_result` (CONFIRMED/PARTIAL).
+- **T rule.** Two title words plus a 3-5 digit number from the title. For several rows the number is only the year.
+- **First-URL rule.** L4 takes the first URL in a multi-candidate field (Delhi HC T5-03; the first is the right one).
+- **Contradiction test.** It is exact-string on URLs. Path variants (for example `/judgment/judis/` and `/jonew/judis/`) are not equated; the S N Mukherjee row carries a limitation, and normalisation is specified for the ledger validator.
+- **Carrier wording.** Proposals keep "(as reported; retrieval record not documented)" unless a direct L3 retrieval record exists.
+- **Derivative status of the archive.org files.** It is evidenced by a file-level `source` field only for ACQ-01 snapshot matches; otherwise it is inferred from the producer.
+- These limits do not change any current outcome.
 
 ## Copy-fidelity rule for born-digital copies (Fable F-04)
 A non-judicial copy that is otherwise DOCUMENTED is classed `NON_PRIMARY_OFFICIAL_PUBLICATION_COPY` when the held bytes are shown to differ from the publication as issued:

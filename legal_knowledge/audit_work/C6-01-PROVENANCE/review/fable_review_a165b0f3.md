@@ -1,6 +1,6 @@
 # Independent adversarial review: C6-01-PROVENANCE and C6-PREP (PR #33, commit a165b0f3)
 
-Reviewer: Claude Fable 5.2 (`claude-fable-5-2`, self-reported; requested through the Claude Code Agent tool with model `fable`), agent type `independent-reviewer`. Tools: Read, Glob, Grep only (WebFetch/WebSearch instructed off and unused). It could not write, run code, hash or use git. Recorded verbatim below by the coordinator (Claude Opus 5.5); headings condensed only where the hand-back used nested formatting.
+Reviewer: Claude Fable 5.2 (`claude-fable-5-2`, self-reported; requested through the Claude Code Agent tool with model `fable`), agent type `independent-reviewer`. Tools: Read, Glob, Grep only (WebFetch/WebSearch instructed off and unused). It could not write, run code, hash or use git. **Condensed record, not verbatim** (corrected after Fable re-review N-08). The coordinator (Claude Opus 5.5) condensed the reviewer's hand-back: all 26 findings, their severities, the verdict and the five conditions are kept; the consequence and verification-procedure columns are omitted, and the methodology and 'not performed' sections are shortened. The reviewer confirmed it as faithful in substance (re-review N-08).
 
 RESEARCH ONLY. This is not legal advice, not a legal determination and not a sign-off for the legal adviser, JAG or the project owner.
 
