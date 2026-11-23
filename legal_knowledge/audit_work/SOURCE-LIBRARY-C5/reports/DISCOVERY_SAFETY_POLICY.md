@@ -11,13 +11,18 @@
 | 2 | An `UNAVAILABLE` host receives **no further automated request** until independently cleared. "Cleared" means a later successful robots read, or an owner decision recorded in the repository. | `may_request` → `ROBOTS_UNAVAILABLE` |
 | 3 | Explicit `Disallow` is respected. | robotparser `can_fetch` |
 | 4 | robots decisions are keyed by **origin** (scheme + host + port). Each redirect hop to another origin needs its own robots decision and must itself be allowed. | `redirect_chain_allowed`; the runner follows redirects hop by hop |
-| 5 | HTTPS only. TLS verification is never disabled. No CAPTCHA, login or access-control bypass. | `may_request` → `NON_HTTPS`; curl runs with default verification |
+| 5 | HTTPS only. TLS verification is never disabled. No CAPTCHA, login or access-control bypass. | `may_request` → `NON_HTTPS`; the runner uses Python `ssl.create_default_context` (verification on; never disabled) |
 | 6 | Hosts blocked by repository policy (`aftjabalpur.in` and its subdomains) and bare-IP hosts are always refused. | `host_blocked` |
 | 7 | Probe with HEAD first. GET only when HEAD returned 200 with an explicit listing content type. The GET is then decided again on **its own** status and headers before any body byte is read: 200; an explicit text listing type; no attachment disposition; identity encoding; declared length within the cap. Next, only the first 1 KiB is read; it must look like text with no document signature (PDF/ZIP/OLE/RTF) anywhere in it. The body is capped at 2 MB, and any read error discards it. Nothing is written to disk until every gate has passed. Redirects are never followed automatically. | `run_guarded_discovery.guarded_get`; `get_response_gate`; `body_prefix_gate` |
 | 8 | A response is classified by method, content type, content disposition, size and (when bytes exist) file signature: `METADATA_OR_LISTING`, `HEADERS_ONLY`, `HEADERS_ONLY_DOCUMENT_INDICATED`, `DOCUMENT_PAYLOAD` or `UNKNOWN`. **The URL extension is never sufficient.** It is only a warning heuristic (`url_suggests_document`), which also catches query endpoints such as `showfile?filename=x.pdf`. | `classify_response` |
 | 9 | A GET returning `DOCUMENT_PAYLOAD` or `UNKNOWN` with no acquisition approval reference is a violation. | `validate_log_v2` |
 
-**Stated limits (review F-01):**
+**Stated limits (reviews F-01 and the fix re-review):**
+- A binary document placed behind a text lead-in longer than 1 KiB passes the prefix gate and is kept (the full body is not rescanned).
+- A body truncated below its declared Content-Length is kept, because Python's `http.client` raises no error for it.
+- The control-byte check runs only when the first 1 KiB is not valid UTF-8.
+- "At most 1 KiB received" holds at the application layer; the TLS and socket buffers may hold more before the connection closes.
+- An unexpected exception from the HTTP library ends the run without writing the request log.
 - Up to 1 KiB of a disguised document can be received in memory before the abort. Nothing is written to disk.
 - A publication served as plain text that passes the text checks cannot be distinguished from a listing.
 - HTML that merely mentions "%PDF-" in its first 1 KiB is discarded. That is a false positive, in the safe direction.

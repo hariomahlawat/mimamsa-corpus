@@ -100,3 +100,20 @@
 - No live run has been made with the revised runner; it is tested with mocks only.
 
 The re-review of this fix is recorded in `review/final_fix_rereview.md`.
+
+**Re-review of the fix (8e4e9dfe..efde223c): VERDICT ACCEPT** (`review/final_fix_rereview.md`), with no P1 or P2 remaining.
+
+**Remaining P3s are accepted by the coordinator**, each recorded in DISCOVERY_SAFETY_POLICY "Stated limits":
+- binary content after a text lead-in longer than 1 KiB;
+- a truncated body under its declared Content-Length;
+- the control-byte check runs only on non-UTF-8 prefixes;
+- "1 KiB" is an application-layer figure;
+- an unexpected library exception loses the log.
+
+They are accepted for these reasons:
+- the runner is permitted only for listing and metadata URLs;
+- no live run is planned without separate approval (A-C5-5);
+- each case either discards data or keeps a non-document listing; none bypasses a robots or TLS control;
+- they are listed as hardening items for the crawler proposal C5-CRAWL-01.
+
+The documentation P3s are corrected without any code change: policy rule 5 no longer mentions curl; the gate-file header accurately describes the captured output; this re-review file is committed.

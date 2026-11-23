@@ -1,4 +1,4 @@
-# Raw local gate output (unedited except replacing the session scratchpad path with <scratch>); commit under test: 2e01aa17b23e09f89378211a511395e2fc462d66; python Python 3.13.18
+# Local gate output: for each command, its exit code and the last 6 non-dot lines of its output, captured by script (no manual edits; the session scratchpad path is replaced with <scratch>); commit under test: 2e01aa17b23e09f89378211a511395e2fc462d66; python Python 3.13.18
 ## $ python tools/legal_audit/validate.py --schema-check
 Audit schema files readable and internally consistent (not legal verification).
 ## exit=0
