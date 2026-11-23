@@ -64,6 +64,9 @@ def verify(root=PKG):
                 if texts[k] != (AW / "SOURCE-LIBRARY-C5/registers" / k).read_text(encoding="utf-8"):
                     raise LedgerError(f"v0000 {k} is not byte-identical to the frozen Cycle 5 register")
         report.append(f"v{v:04d} ok")
+    extra = L.unexpected_files(root, lines)
+    if extra:
+        raise LedgerError(f"files in ledger/ or decisions/ not accounted for by the manifest: {extra}")
     return report
 
 
@@ -81,14 +84,17 @@ def main():
             if not a.out:
                 raise LedgerError("--out is required")
             texts, lines = reader.effective_state(PKG, a.as_of)
+            pinned = lines[-1]["effective_sha256"]
+            if pinned and sha256_text(output_manifest(texts)) != pinned:
+                raise LedgerError(f"rebuilt outputs of version {lines[-1]['version']} do not match the manifest pin")
             write_outputs(texts, Path(a.out))
             print(f"built as of version {lines[-1]['version']} -> {a.out}")
         else:
             for r in verify():
                 print(r)
             print(f"HEAD {L.head_value(PKG)}; frozen pins ok; ledger verified")
-    except LedgerError as e:
-        print(f"LEDGER ERROR: {e}", file=sys.stderr)
+    except (LedgerError, reader.R.RuleError, KeyError, TypeError, ValueError, SystemExit) as e:  # fail closed, uniformly (F-13)
+        print(f"LEDGER ERROR: {type(e).__name__}: {e}", file=sys.stderr)
         return 2
     return 0
 

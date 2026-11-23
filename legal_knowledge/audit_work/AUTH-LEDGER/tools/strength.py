@@ -15,6 +15,26 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import AW, PKG, LedgerError, read_csv  # noqa: E402
 
 URL = re.compile(r"https?://[^ ;),|]+")
+# Allow-lists (Fable review F-02): a retrieval record is first-class only with an official or archival-facsimile
+# authenticity value, and every first-class locator host must suit the class.
+RET_AUTHENTICITY = {"OFFICIAL_COURT_ARCHIVE", "ORIGINAL_OFFICIAL", "ARCHIVAL_FACSIMILE_OF_OFFICIAL", "OFFICIAL_COMPILATION"}
+COURT_HOSTS = ("sci.gov.in",)
+GOV_HOSTS = (".gov.in", ".nic.in")
+ARCHIVE_HOSTS = ("archive.org",)
+CLASS_HOSTS = {
+    "PRIMARY_OFFICIAL_COURT_COPY": COURT_HOSTS, "NON_PRIMARY_OFFICIAL_COURT_RENDITION": COURT_HOSTS,
+    "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE": ARCHIVE_HOSTS, "PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN": GOV_HOSTS,
+    "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY": GOV_HOSTS + ARCHIVE_HOSTS, "NON_PRIMARY_PARLIAMENTARY_RECORD": GOV_HOSTS + ARCHIVE_HOSTS,
+}
+
+
+def host_ok(url, cls):
+    m = re.match(r"^https?://([^/:?#]+)", url or "")
+    h = (m.group(1) if m else "").lower()
+    allowed = CLASS_HOSTS.get(cls)
+    if allowed is None:
+        return False
+    return any(h == a.lstrip(".") or h.endswith(a if a.startswith(".") else "." + a) or h == a for a in allowed)
 CSV_KEYS = {  # path -> (key column, own-sha256 column)
     "PILOT-01/registers/source_code_resolution_v3.csv": ("code", "official_sha256"),
     "PILOT-01/registers/source_discovery_2026-11-22.csv": ("target_id", "downloaded_sha256"),
@@ -88,14 +108,24 @@ def disclaimed(o):
     return str(o.get("authenticity", "")).upper() == "UNCONFIRMED" or o.get("verification_state") in ("NOT_FOUND", "CONFLICTING")
 
 
-def first_class(ref, sha):
-    """(kind, strength, url) for the entry's first-class record. Raises unless the record is first-class for THIS sha256."""
+def first_class(ref, sha, cls=None):
+    """(kind, strength, url) for the entry's first-class record. Raises unless the record is first-class for THIS sha256
+    and, when a class is given, its locator host suits the class."""
+    kind, st, url = _first_class(ref, sha)
+    if cls is not None and not host_ok(url, cls):
+        raise LedgerError(f"{ref}: locator host of {url} does not suit class {cls}")
+    return kind, st, url
+
+
+def _first_class(ref, sha):
     path, rec = resolve(ref)
     if _json_source(path):
         if (rec.get("sha256") or "") != sha:
             raise LedgerError(f"{ref}: the record's own sha256 is not the entry key (a mention inside another record is a lead only)")
         if disclaimed(rec):
             raise LedgerError(f"{ref}: the retrieval record disclaims authenticity or reports NOT_FOUND/CONFLICTING")
+        if str(rec.get("authenticity", "")) not in RET_AUTHENTICITY:
+            raise LedgerError(f"{ref}: retrieval record authenticity {rec.get('authenticity')!r} is not an official or archival-facsimile value")
         m = URL.search(rec.get("locator") or "")
         if not m:
             raise LedgerError(f"{ref}: retrieval record has no URL locator")
@@ -195,6 +225,19 @@ def url_pairs():
             m = URL.search(o.get("locator") or "")
             if m and re.fullmatch(r"[0-9a-f]{64}", o.get("sha256") or ""):
                 pairs.add((m.group(0), o["sha256"]))
+    for r in _rows("PILOT-01/registers/source_discovery_2026-11-22.csv"):
+        m = URL.search(r.get("candidate_url_or_identifier") or "")
+        if m and re.fullmatch(r"[0-9a-f]{64}", (r.get("downloaded_sha256") or "").strip()):
+            pairs.add((m.group(0), r["downloaded_sha256"].strip()))
+    for r in _rows("ACQ-02/supplement_inventory.csv"):
+        if (r.get("url") or "").strip() and re.fullmatch(r"[0-9a-f]{64}", (r.get("sha256") or "").strip()):
+            pairs.add((r["url"].strip(), r["sha256"].strip()))
+    for rel in [x for x in __import__("pins").EVIDENCE_INPUTS if _json_source(x)]:
+        for o in _rows(rel):  # further URLs in a locator are paired only when the locator names no other sha256
+            loc, s = o.get("locator") or "", o.get("sha256") or ""
+            if re.fullmatch(r"[0-9a-f]{64}", s) and not (set(re.findall(r"[0-9a-f]{64}", loc)) - {s}):
+                for u in URL.findall(loc)[1:]:
+                    pairs.add((u, s))
     for r in _rows("WS-B-JUDGMENTS/tools/held_copies.csv"):
         if re.fullmatch(r"[0-9a-f]{64}", r.get("sha256", "")) and r.get("official_url", "").strip():
             pairs.add((r["official_url"].strip(), r["sha256"]))

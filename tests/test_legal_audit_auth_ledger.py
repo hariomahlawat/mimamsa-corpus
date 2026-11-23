@@ -16,7 +16,7 @@ import rules_v1 as R  # noqa: E402
 import strength  # noqa: E402
 import auth_ledger as CLI  # noqa: E402
 
-EXPECTED_HEAD = "0 fb38d0b31234a8fa6f41156dab9b2ed8463c2c8c55284c4c142ce78b54b35fa8"  # a ledger change must change this too
+EXPECTED_HEAD = "0 443c4bdf348b2a1bcd603d2701f097aa90a8155efd43c10760f5fd86c76c6b6b"  # a ledger change must change this too
 ISAAC = "3f49a31464fec174cdbff5d9e194fa888ca00529b6246eacdc8ac2368eab4653"
 DRAFT = {r["sha256"]: r for r in csv.DictReader(open(AW / "C6-01-PROVENANCE/addendum/authentication_addendum_v1_draft.csv", encoding="utf-8"))}
 PROPS = {r["sha256"]: r for r in csv.DictReader(open(AW / "C6-01-PROVENANCE/registers/source_authentication_proposals.csv", encoding="utf-8"))}
@@ -36,14 +36,17 @@ GAZETTE_1962 = sha_of("b76bf4aa", DRAFT)
 TRA = sha_of("be619533", DRAFT)
 
 
+C5COPY = {r["sha256"]: r for r in csv.DictReader(open(AW / "SOURCE-LIBRARY-C5/registers/source_copy_register.csv", encoding="utf-8"))}
+
+
 def entry_from_draft(sha, n, version=1, **over):
     d, p = DRAFT[sha], PROPS[sha]
     e = {k: "" for k in L.COLS}
     e.update({"entry_id": f"AL-v{version:04d}-{n:03d}", "entry_version": f"{version:04d}", "entry_type": "ADD", "sha256": sha,
               "source_id": d["source_id"], "copy_id": d["copy_id"], "document_identity": d["document_identity"],
               "evidence_refs": d["evidence_refs"], "first_class_record_ref": d["first_class_record_ref"], "identity_refs": d["identity_refs"],
-              "proposed_authentication_state": "PROVENANCE_DOCUMENTED", "proposed_class": d["proposed_class"], "carrier": p["carrier"],
-              "official_locator_recorded": p["official_locator_recorded"], "limitations": d["limitations"], "justification": "synthetic test entry",
+              "proposed_authentication_state": "PROVENANCE_DOCUMENTED", "proposed_class": d["proposed_class"], "carrier": C5COPY[sha]["copy_carrier_provenance"],
+              "official_locator_recorded": strength._first_class(d["first_class_record_ref"], sha)[2], "limitations": d["limitations"], "justification": "synthetic test entry",
               "rule_version": "1", "owner_decision": "APPROVED"})
     e.update(over)
     return e
@@ -59,29 +62,37 @@ class Synthetic:
         shutil.copy(PKG / "ledger/manifest.jsonl", self.dir / "ledger/manifest.jsonl")
         shutil.copy(PKG / "ledger/HEAD", self.dir / "ledger/HEAD")
 
-    def add_version(self, entries, decision=True, review=True, rule_version=1, tamper=None):
+    def write_record(self, name, text):
+        (self.dir / "decisions" / name).write_text(text, encoding="utf-8")
+        return f"decisions/{name}", common.sha256_file(self.dir / "decisions" / name)
+
+    def add_version(self, entries, decision=True, review=True, rule_version=1, tamper=None, reviewer="test reviewer", decided_by="test owner",
+                    review_extra=""):
         lines = L.read_manifest(self.dir)
         v = len(lines)
         decisions, reviews = {}, {}
-        approved = [e for e in entries if e["owner_decision"] == "APPROVED"]
-        pairs = ";".join(f"{e['entry_id']}={e['sha256']}" for e in approved)
-        if approved and decision:
-            ref = f"decisions/D-v{v:04d}.md"
-            (self.dir / ref).write_text(f"decision_id: D-v{v:04d}\ndecision: APPROVED\nledger_version: {v:04d}\nentries: {pairs}\n"
-                                        "decided_by: test owner\ndate: 2026-11-23\n", encoding="utf-8")
-            decisions[ref] = common.sha256_file(self.dir / ref)
+        by_decision = {}
+        for e in entries:
+            by_decision.setdefault(e["owner_decision"], []).append(e)
+        if decision:
+            for dec, group in sorted(by_decision.items()):
+                name = f"D-v{v:04d}.md" if dec == "APPROVED" else f"D-v{v:04d}-{dec.lower()}.md"
+                pairs = ";".join(f"{e['entry_id']}={e['sha256']}:{L.entry_digest(e)}" for e in group)
+                ref, h = self.write_record(name, f"decision_id: {name[:-3]}\ndecision: {dec}\nledger_version: {v:04d}\nentries: {pairs}\n"
+                                                 f"decided_by: {decided_by}\ndate: 2026-11-23\n")
+                decisions[ref] = h
+                for e in group:
+                    if not e.get("decision_record_ref"):
+                        e["decision_record_ref"], e["decision_record_sha256"] = ref, h
+        approved = by_decision.get("APPROVED", [])
         if approved and review:
-            ref = f"decisions/R-v{v:04d}.md"
-            (self.dir / ref).write_text(f"review_id: R-v{v:04d}\nverdict: ACCEPT\nledger_version: {v:04d}\nentries: {pairs}\n"
-                                        "reviewer: test reviewer\ndate: 2026-11-23\n", encoding="utf-8")
-            reviews[ref] = common.sha256_file(self.dir / ref)
-        for e in approved:
-            if decision and not e.get("decision_record_ref"):
-                e["decision_record_ref"] = f"decisions/D-v{v:04d}.md"
-                e["decision_record_sha256"] = decisions[e["decision_record_ref"]]
-            if review and not e.get("reviewer_ref"):
-                e["reviewer_ref"] = f"decisions/R-v{v:04d}.md"
-                e["reviewer_record_sha256"] = reviews[e["reviewer_ref"]]
+            pairs = ";".join(f"{e['entry_id']}={e['sha256']}:{L.entry_digest(e)}" for e in approved)
+            ref, h = self.write_record(f"R-v{v:04d}.md", f"review_id: R-v{v:04d}\nverdict: ACCEPT\nledger_version: {v:04d}\nentries: {pairs}\n"
+                                                           f"reviewer: {reviewer}\ndate: 2026-11-23\n{review_extra}")
+            reviews[ref] = h
+            for e in approved:
+                if not e.get("reviewer_ref"):
+                    e["reviewer_ref"], e["reviewer_record_sha256"] = ref, h
         f = f"ledger/v{v:04d}.csv"
         (self.dir / f).write_text(common.csv_text(L.COLS, entries), encoding="utf-8")
         prev = common.sha256_text((self.dir / "ledger/manifest.jsonl").read_text(encoding="utf-8").split("\n")[-2])
@@ -267,11 +278,10 @@ class LedgerIntegrity(unittest.TestCase):
 
     def test_file_merely_saying_approved_is_not_enough(self):
         e = entry_from_draft(DHARAMVIR, 1)
-        (self.t.dir / "decisions/fake.md").write_text("APPROVED APPROVED decision: APPROVED\n")
-        e["decision_record_ref"] = "decisions/fake.md"
-        e["decision_record_sha256"] = common.sha256_file(self.t.dir / "decisions/fake.md")
-        self.t.add_version([e], decision=False)
-        with self.assertRaisesRegex(common.LedgerError, "manifest pin|does not name this entry"):
+        ref, h = self.t.write_record("D-v0001.md", "APPROVED APPROVED\ndecision: APPROVED\n")
+        e["decision_record_ref"], e["decision_record_sha256"] = ref, h
+        self.t.add_version([e], decision=False, tamper=lambda line: line["decisions"].update({ref: h}))  # pinned, so content is checked
+        with self.assertRaisesRegex(common.LedgerError, "decision_id must equal its file name"):
             self.t.state()
 
     def test_decision_contradicting_entry_rejected(self):
@@ -318,8 +328,11 @@ class Provenance(unittest.TestCase):
     def test_sibling_copy_provenance_rejected(self):
         c2 = sha_of("c6ec489d", RECOVERY)
         e = entry_from_draft(RAJBIR_C1, 1, sha256=c2, copy_id="C5-SRC-J-SC-2015-RAJBIR~C2",
-                             first_class_record_ref="PILOT-01/sources/independent-reviewer-blind.json#S-BLIND-013")
-        self.reject(e, "own sha256 is not the entry key")
+                             first_class_record_ref="PILOT-01/sources/independent-reviewer-blind.json#S-BLIND-013",
+                             evidence_refs="L3:PILOT-01/sources/independent-reviewer-blind.json#S-BLIND-013")
+        self.reject(e, "does not concern this sha256")
+        with self.assertRaisesRegex(common.LedgerError, "own sha256 is not the entry key"):
+            strength.first_class("PILOT-01/sources/independent-reviewer-blind.json#S-BLIND-013", c2)
 
     def test_disclaimed_retrieval_record_rejected(self):
         with self.assertRaisesRegex(common.LedgerError, "disclaims authenticity"):
@@ -335,7 +348,8 @@ class Provenance(unittest.TestCase):
             strength.first_class("ACQ-01/archive_org_metadata_snapshot.json#in.gazette.central.e.2022-06-06.236353/236353.pdf", sha_of("2bdab5b7", DRAFT))
 
     def test_unresolved_and_prefix_references_rejected(self):
-        self.reject(entry_from_draft(DHARAMVIR, 1, first_class_record_ref="PILOT-01/sources/nonexistent.json#S-X"), "not found")
+        self.reject(entry_from_draft(DHARAMVIR, 1, first_class_record_ref="PILOT-01/sources/nonexistent.json#S-X",
+                                     evidence_refs="L3:PILOT-01/sources/nonexistent.json#S-X"), "not found")
         for bad in ("PILOT-01/registers/source_code_resolution_v3.csv#SRC-RANJI", "PILOT-01/sources/independent-reviewer-blind.json#S-BLIND-01"):
             with self.assertRaises(common.LedgerError):
                 strength.resolve(bad)
@@ -348,10 +362,16 @@ class Provenance(unittest.TestCase):
         self.reject(entry_from_draft(DHARAMVIR, 1, proposed_class="PRIMARY_INVENTED_CLASS"), "proposed_class.*not allowed")
 
     def test_primary_class_failing_fidelity_rejected(self):
-        self.reject(entry_from_draft(TRA, 1, proposed_class="PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN"), "fails copy fidelity")
+        self.reject(entry_from_draft(sha_of("2bdab5b7", DRAFT), 1, proposed_class="PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE"), "fails copy fidelity")
+
+    def test_scan_class_needs_scanned_copy(self):
+        self.reject(entry_from_draft(TRA, 1, proposed_class="PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN"), "needs a scanned copy")
 
     def test_court_class_on_publication_rejected(self):
-        self.reject(entry_from_draft(GAZETTE_1962, 1, proposed_class="PRIMARY_OFFICIAL_COURT_COPY"), "does not fit publication type")
+        self.reject(entry_from_draft(GAZETTE_1962, 1, proposed_class="NON_PRIMARY_PARLIAMENTARY_RECORD"), "does not fit publication type")
+
+    def test_locator_host_must_suit_class(self):
+        self.reject(entry_from_draft(GAZETTE_1962, 1, proposed_class="PRIMARY_OFFICIAL_COURT_COPY"), "does not suit class")
 
     def test_contradiction_rejected_and_urls_not_silently_equated(self):
         url = strength.first_class(DRAFT[DHARAMVIR]["first_class_record_ref"], DHARAMVIR)[2]
@@ -366,6 +386,298 @@ class Provenance(unittest.TestCase):
     def test_ledger_has_no_legal_status_field(self):
         for k in L.COLS:
             self.assertFalse(any(w in k for w in ("legal", "in_force", "currency", "applicab")), k)
+
+
+def withdraw(sha, n, version, target, reason="OTHER", resulting=""):
+    return entry_from_draft(sha, n, version=version, entry_type="WITHDRAW", target_entry_id=target, withdrawal_reason=reason,
+                            resulting_state=resulting, first_class_record_ref="", proposed_authentication_state="", proposed_class="",
+                            justification="test withdrawal")
+
+
+class Controls(unittest.TestCase):
+    """One negative test per control (Fable review F-06 mutation survivors and F-01..F-13), each asserting its own message."""
+    def setUp(self):
+        self.t = Synthetic()
+
+    def tearDown(self):
+        self.t.close()
+
+    def reject(self, entries, why, **kw):
+        self.t.add_version(entries, **kw)
+        with self.assertRaisesRegex(common.LedgerError, why):
+            self.t.state()
+
+    def test_record_must_name_entry_sha_and_digest(self):  # M02, F-03
+        e = entry_from_draft(DHARAMVIR, 1, proposed_class="NON_PRIMARY_OFFICIAL_COURT_RENDITION")
+        self.t.add_version([e])
+        f = self.t.dir / "ledger/v0001.csv"  # change what was decided after the records were pinned, re-pin the file consistently
+        rows_ = list(csv.DictReader(f.open(encoding="utf-8")))
+        rows_[0]["proposed_class"] = "PRIMARY_OFFICIAL_COURT_COPY"
+        f.write_text(common.csv_text(L.COLS, rows_), encoding="utf-8")
+        m = self.t.dir / "ledger/manifest.jsonl"
+        line = json.loads(m.read_text().split("\n")[1])
+        line["file_sha256"] = common.sha256_file(f)
+        s0 = m.read_text().split("\n")[0]
+        s1 = L.canonical_line(line)
+        m.write_text(s0 + "\n" + s1 + "\n")
+        (self.t.dir / "ledger/HEAD").write_text(f"1 {common.sha256_text(s1)}\n")
+        with self.assertRaisesRegex(common.LedgerError, "content digest"):
+            self.t.state()
+
+    def test_record_version_must_match(self):  # M01
+        e = entry_from_draft(DHARAMVIR, 1)
+        pairs = f"{e['entry_id']}={e['sha256']}:{L.entry_digest(e)}"
+        dref, dh = self.t.write_record("D-v0001.md", f"decision_id: D-v0001\ndecision: APPROVED\nledger_version: 0007\nentries: {pairs}\ndecided_by: owner\ndate: 2026-11-23\n")
+        e["decision_record_ref"], e["decision_record_sha256"] = dref, dh
+        self.reject([e], "is for ledger version '0007'", decision=False, tamper=lambda line: line["decisions"].update({dref: dh}))
+
+    def test_accept_with_conditions_needs_discharge(self):
+        e = entry_from_draft(DHARAMVIR, 1)
+        pairs = f"{e['entry_id']}={e['sha256']}:{L.entry_digest(e)}"
+        rref, rh = self.t.write_record("R-v0001.md", f"review_id: R-v0001\nverdict: ACCEPT_WITH_CONDITIONS\nledger_version: 0001\nentries: {pairs}\nreviewer: rev\ndate: 2026-11-23\n")
+        e["reviewer_ref"], e["reviewer_record_sha256"] = rref, rh
+        self.reject([e], "requires conditions_status: DISCHARGED", review=False, tamper=lambda line: line["reviews"].update({rref: rh}))
+
+    def test_review_reject_verdict(self):
+        e = entry_from_draft(DHARAMVIR, 1)
+        pairs = f"{e['entry_id']}={e['sha256']}:{L.entry_digest(e)}"
+        rref, rh = self.t.write_record("R-v0001.md", f"review_id: R-v0001\nverdict: REJECT\nledger_version: 0001\nentries: {pairs}\nreviewer: rev\ndate: 2026-11-23\n")
+        e["reviewer_ref"], e["reviewer_record_sha256"] = rref, rh
+        self.reject([e], "does not support approval", review=False, tamper=lambda line: line["reviews"].update({rref: rh}))
+
+    def test_decided_by_and_date_required(self):  # M04
+        self.reject([entry_from_draft(DHARAMVIR, 1)], "lacks decided_by", decided_by="?")
+
+    def test_same_person_cannot_decide_and_review(self):  # F-04
+        self.reject([entry_from_draft(DHARAMVIR, 1)], "different persons", decided_by="Same Person", reviewer="same person")
+
+    def test_one_file_cannot_be_both_records(self):  # F-04 A1
+        e = entry_from_draft(DHARAMVIR, 1)
+        pairs = f"{e['entry_id']}={e['sha256']}:{L.entry_digest(e)}"
+        ref, h = self.t.write_record("D-v0001.md", f"decision_id: D-v0001\ndecision: APPROVED\nverdict: ACCEPT\nledger_version: 0001\nentries: {pairs}\n"
+                                                    "decided_by: me\nreviewer: you\ndate: 2026-11-23\n")
+        e.update(decision_record_ref=ref, decision_record_sha256=h, reviewer_ref=ref, reviewer_record_sha256=h)
+        self.reject([e], "both a decision record and a review record", decision=False, review=False,
+                    tamper=lambda line: (line["decisions"].update({ref: h}), line["reviews"].update({ref: h})))
+
+    def test_duplicate_keys_in_record_rejected(self):  # F-04 A6
+        e = entry_from_draft(DHARAMVIR, 1)
+        pairs = f"{e['entry_id']}={e['sha256']}:{L.entry_digest(e)}"
+        ref, h = self.t.write_record("D-v0001.md", f"decision_id: D-v0001\ndecision: APPROVED\nledger_version: 0001\nentries: {pairs}\n"
+                                                    "decided_by: owner\ndate: 2026-11-23\ndecision: REJECTED\n")
+        e["decision_record_ref"], e["decision_record_sha256"] = ref, h
+        self.reject([e], "appears more than once", decision=False, tamper=lambda line: line["decisions"].update({ref: h}))
+
+    def test_non_approved_entry_needs_decision_record(self):  # F-04 A10
+        self.reject([entry_from_draft(DHARAMVIR, 1, owner_decision="REJECTED")], "missing decision record", decision=False)
+
+    def test_identity_evidence_required(self):  # M08
+        self.reject([entry_from_draft(DHARAMVIR, 1, identity_refs="I:SOURCE-LIBRARY-C5/inputs/page_image_checks_c5.csv#C5-PIC-01")], "no valid identity evidence")
+
+    def test_text_identity_only_for_court_copies(self):  # M42
+        g = entry_from_draft(GAZETTE_1962, 1)
+        g["identity_refs"] = f"T:C6-01-PROVENANCE/inputs/held_copy_facts.csv#{g['copy_id']}"
+        self.reject([g], "no valid identity evidence")
+
+    def test_court_primary_needs_issuing_carrier(self):  # M05
+        self.reject([entry_from_draft(RAJBIR_BOSIR, 1, proposed_class="PRIMARY_OFFICIAL_COURT_COPY")], "does not fit copy carrier UNKNOWN")
+
+    def test_incomplete_copy_never_primary(self):  # F-01
+        er = sha_of("29f6fa2c", DRAFT)
+        self.reject([entry_from_draft(er, 1, proposed_class="PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN")], "does not fit publication type REGULATION")
+        t2 = Synthetic()
+        try:  # the archival class is refused too (its desw.gov.in locator does not suit an archival facsimile)
+            t2.add_version([entry_from_draft(er, 1, proposed_class="PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE")])
+            with self.assertRaisesRegex(common.LedgerError, "does not suit class PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE"):
+                t2.state()
+        finally:
+            t2.close()
+        rec = {r["source_id"]: r for r in csv.DictReader(open(AW / "SOURCE-LIBRARY-C5/registers/source_master_register.csv", encoding="utf-8"))}
+        g = entry_from_draft(GAZETTE_1962, 1)
+        fake = dict(rec[g["source_id"]], completeness_status="INCOMPLETE: test")
+        held = reader._held_index()
+        ctx = L.Context(held, {}, {r["sha256"]: r for r in csv.DictReader(open(AW / "SOURCE-LIBRARY-C5/registers/source_copy_register.csv", encoding="utf-8"))},
+                        dict(rec, **{g["source_id"]: fake}))
+        with self.assertRaisesRegex(common.LedgerError, "incomplete or extract"):
+            L._evidence_checks(g, ctx, g["proposed_class"])
+
+    def test_secondary_authenticity_and_host_not_first_class(self):  # F-02
+        with self.assertRaisesRegex(common.LedgerError, "authenticity 'SECONDARY'"):
+            strength.first_class("PILOT-01/sources/judgment-auditor.json#S-JUD-008", ISAAC)
+        self.assertFalse(strength.host_ok("https://www.livelaw.in/x", "PRIMARY_OFFICIAL_COURT_COPY"))
+        self.assertTrue(strength.host_ok("https://api.sci.gov.in/x.pdf", "PRIMARY_OFFICIAL_COURT_COPY"))
+        self.assertFalse(strength.host_ok("https://evilsci.gov.in.example.com/x", "PRIMARY_OFFICIAL_COURT_COPY"))
+        held = reader._held_index()
+        self.assertEqual(R.copy_status(ISAAC, held[ISAAC], {"authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "NON_PRIMARY_OFFICIAL_COURT_RENDITION",
+                                                            "provenance_references": "x", "held_paths": "; ".join(held[ISAAC])})[0], R.PENDING)
+
+    def test_csv_record_own_sha(self):  # M20
+        with self.assertRaisesRegex(common.LedgerError, "own sha256 is not the entry key"):
+            strength.first_class("PILOT-01/registers/source_code_resolution_v3.csv#SRC-RANJIT", DHARAMVIR)
+
+    def test_archive_match_must_be_complete(self):  # M22
+        key = "ACQ-02/supplement_inventory.csv"
+        strength._rows(key)
+        orig = strength._cache[key]
+        strength._cache[key] = [dict(r, archive_sha1_ok="False") if r["supp_id"] == "ACQ02-02" else r for r in orig]
+        try:
+            with self.assertRaisesRegex(common.LedgerError, "not all OK"):
+                strength.first_class("ACQ-02/supplement_inventory.csv#ACQ02-02", GAZETTE_1962)
+        finally:
+            strength._cache[key] = orig
+
+    def test_exactly_one_record(self):  # M40, M25
+        key = "ACQ-02/supplement_inventory.csv"
+        strength._rows(key)
+        orig = strength._cache[key]
+        strength._cache[key] = orig + [r for r in orig if r["supp_id"] == "ACQ02-02"]
+        try:
+            with self.assertRaisesRegex(common.LedgerError, "resolves to 2 records"):
+                strength.resolve("ACQ-02/supplement_inventory.csv#ACQ02-02")
+        finally:
+            strength._cache[key] = orig
+        with self.assertRaisesRegex(common.LedgerError, "resolves to 0 records"):
+            strength.resolve("ACQ-02/supplement_inventory.csv#ACQ02-99")
+
+    def test_per_type_schema_rules(self):  # M33, M34
+        self.reject([entry_from_draft(DHARAMVIR, 1, withdrawal_reason="OTHER")], "withdrawal_reason must be empty for ADD")
+        t2 = Synthetic()
+        try:
+            t2.add_version([entry_from_draft(DHARAMVIR, 1)])
+            t2.add_version([withdraw(DHARAMVIR, 1, 2, "AL-v0001-001", reason="")])
+            with self.assertRaisesRegex(common.LedgerError, "withdrawal_reason must be set for WITHDRAW"):
+                t2.state()
+        finally:
+            t2.close()
+
+    def test_chain_prev_and_canonical_form(self):  # M27, M28
+        self.t.add_version([entry_from_draft(DHARAMVIR, 1)], tamper=lambda line: line.update(prev="0" * 64))
+        with self.assertRaisesRegex(common.LedgerError, "hash chain broken"):
+            L.read_manifest(self.t.dir)
+        t2 = Synthetic()
+        try:
+            m = t2.dir / "ledger/manifest.jsonl"
+            s = m.read_text().split("\n")[0]
+            spaced = json.dumps(json.loads(s))
+            m.write_text(spaced + "\n")
+            (t2.dir / "ledger/HEAD").write_text(f"0 {common.sha256_text(spaced)}\n")
+            with self.assertRaisesRegex(common.LedgerError, "not in canonical form"):
+                L.read_manifest(t2.dir)
+        finally:
+            t2.close()
+
+    def test_frozen_data_pin_checked_before_frozen_code_runs(self):  # M14
+        pj = json.loads((self.t.dir / "frozen_inputs.json").read_text())
+        pj["files"]["legal_knowledge/audit_work/WS-D-QUALITY/canonical_coverage.csv"] = "1" * 64
+        (self.t.dir / "frozen_inputs.json").write_text(json.dumps(pj))
+        with self.assertRaisesRegex(common.LedgerError, "frozen inputs: hash mismatch"):
+            reader.frozen_builder(self.t.dir)
+
+    def test_frozen_code_executed_from_pinned_bytes_not_imported(self):  # F-05
+        src = (PKG / "tools/reader.py").read_text(encoding="utf-8")
+        self.assertNotIn("import build_registers", src)
+        decoy = Path(tempfile.mkdtemp())
+        (decoy / "build_registers.py").write_text("raise RuntimeError('decoy imported')\n")
+        (decoy / "evidence_classification.py").write_text("raise RuntimeError('decoy imported')\n")
+        sys.path.insert(0, str(decoy))
+        try:
+            texts, _ = reader.effective_state(PKG, 0)
+        finally:
+            sys.path.remove(str(decoy))
+            shutil.rmtree(decoy)
+        self.assertEqual(texts["corpus_crosswalk.csv"], (AW / "SOURCE-LIBRARY-C5/registers/corpus_crosswalk.csv").read_text(encoding="utf-8"))
+
+    def test_extra_columns_rejected(self):  # F-08
+        e = entry_from_draft(DHARAMVIR, 1)
+        self.t.add_version([e])
+        f = self.t.dir / "ledger/v0001.csv"
+        txt = f.read_text().split("\n")
+        txt[0] += ",legal_status"
+        txt[1] += ",IN_FORCE"
+        f.write_text("\n".join(txt))
+        m = self.t.dir / "ledger/manifest.jsonl"
+        line = json.loads(m.read_text().split("\n")[1])
+        line["file_sha256"] = common.sha256_file(f)
+        s0, s1 = m.read_text().split("\n")[0], L.canonical_line(line)
+        m.write_text(s0 + "\n" + s1 + "\n")
+        (self.t.dir / "ledger/HEAD").write_text(f"1 {common.sha256_text(s1)}\n")
+        with self.assertRaisesRegex(common.LedgerError, "header must equal the schema columns"):
+            self.t.state()
+
+    def test_withdraw_of_correction_and_resulting_state_and_association(self):  # F-09
+        self.t.add_version([entry_from_draft(DHARAMVIR, 1)])
+        self.t.add_version([entry_from_draft(DHARAMVIR, 1, version=2, entry_type="CORRECTION", target_entry_id="AL-v0001-001",
+                                             proposed_class="NON_PRIMARY_OFFICIAL_COURT_RENDITION", justification="c")])
+        self.reject([withdraw(DHARAMVIR, 1, 3, "AL-v0002-001")], "may target only an ADD or a BASELINE")
+        t2 = Synthetic()
+        try:
+            held = reader._held_index()
+            cop = {r["sha256"]: r for r in rows(v0()["source_copy_register.csv"])}[ISAAC]
+            w = {k: "" for k in L.COLS}
+            w.update(entry_id="AL-v0001-001", entry_version="0001", entry_type="WITHDRAW", sha256=ISAAC, source_id=cop["source_id"], copy_id=cop["copy_id"],
+                     document_identity="Isaac", target_entry_id="BASELINE:" + ISAAC, withdrawal_reason="OTHER", resulting_state="PROVENANCE_UNKNOWN",
+                     justification="test", rule_version="1", owner_decision="APPROVED")
+            t2.add_version([w])
+            with self.assertRaisesRegex(common.LedgerError, "derived copy status is AUTHENTICATION_PENDING"):
+                t2.state()
+            self.assertTrue(held[ISAAC])
+        finally:
+            t2.close()
+        t3 = Synthetic()
+        try:
+            t3.add_version([entry_from_draft(DHARAMVIR, 1)])
+            t3.add_version([withdraw(DHARAMVIR, 1, 2, "AL-v0001-001") | {"copy_id": "NOT-A-COPY"}])
+            with self.assertRaisesRegex(common.LedgerError, "is not the Cycle 5 copy"):
+                t3.state()
+        finally:
+            t3.close()
+
+    def test_evidence_refs_bound_to_this_copy(self):  # F-10
+        d = entry_from_draft(DHARAMVIR, 1)
+        self.reject([dict(d, evidence_refs=d["evidence_refs"] + "; OFFICIALGAZETTE:ACQ-02/supplement_inventory.csv#ACQ02-02")], "not KIND:path#key")
+        for over, why in ((dict(evidence_refs=d["evidence_refs"] + "; L2:ACQ-02/supplement_inventory.csv#ACQ02-02"), "does not concern this sha256"),
+                          (dict(identity_refs="T:this/does/not/exist#nothing"), "must name this copy's facts row"),
+                          (dict(official_locator_recorded="https://api.sci.gov.in/other.pdf"), "must equal the first-class record's URL"),
+                          (dict(carrier="ISSUING_AUTHORITY (edited)"), "carrier must equal"),
+                          (dict(evidence_refs="WSB:" + [x for x in d["evidence_refs"].split("; ") if x.startswith("WSB:")][0].split(":", 1)[1]), "must also be listed")):
+            t2 = Synthetic()
+            try:
+                t2.add_version([dict(entry_from_draft(DHARAMVIR, 1), **over)])
+                with self.assertRaisesRegex(common.LedgerError, why):
+                    t2.state()
+            finally:
+                t2.close()
+
+    def test_paths_and_ids_confined(self):  # F-12
+        self.assertRaises(common.LedgerError, L._safe_ref, "decisions/../ledger/R.md", "decisions/")
+        self.reject([entry_from_draft(DHARAMVIR, 1, entry_id="AL-v0009-001")], "entry_id version part differs")
+        t2 = Synthetic()
+        try:
+            t2.add_version([entry_from_draft(DHARAMVIR, 1)], tamper=lambda line: line.update(file="anything.txt"))
+            with self.assertRaisesRegex(common.LedgerError, "entry file must be ledger/v0001.csv"):
+                L.read_manifest(t2.dir)
+        finally:
+            t2.close()
+        (self.t.dir / "decisions/stray.md").write_text("x")
+        self.assertIn("decisions/stray.md", L.unexpected_files(self.t.dir, L.read_manifest(self.t.dir)))
+
+    def test_cli_fails_closed_uniformly(self):  # F-13
+        orig = reader.effective_state
+        reader.effective_state = lambda *a, **k: (_ for _ in ()).throw(KeyError("boom"))
+        argv = sys.argv
+        sys.argv = ["auth_ledger.py", "build", "--out", tempfile.mkdtemp()]
+        try:
+            self.assertEqual(CLI.main(), 2)
+        finally:
+            reader.effective_state, sys.argv = orig, argv
+
+    def test_all_32_drafts_jointly_acceptable_but_inactive(self):  # F-16: the validator is not over-strict for the drafts
+        es = [entry_from_draft(s, i + 1) for i, s in enumerate(sorted(DRAFT))]
+        self.t.add_version(es)
+        s = self.t.state()
+        a = json.loads(s["coverage_summary.json"])
+        self.assertEqual((a["authentication"]["documented_primary_copies"], a["crosswalk_case_rows_by_status"]["EXACT_ANCHOR"]), (40, 13))
+        self.assertEqual(json.loads(v0()["coverage_summary.json"])["authentication"]["documented_primary_copies"], 12)  # committed ledger unchanged
 
 
 class Transitions(unittest.TestCase):
@@ -442,7 +754,7 @@ class Transitions(unittest.TestCase):
                                              first_class_record_ref="", proposed_authentication_state="", proposed_class="", justification="w")])
         self.t.add_version([entry_from_draft(DHARAMVIR, 1, version=3, entry_type="WITHDRAW", target_entry_id="AL-v0002-001",
                                              withdrawal_reason="OTHER", first_class_record_ref="", proposed_authentication_state="", proposed_class="", justification="w")])
-        with self.assertRaisesRegex(common.LedgerError, "WITHDRAW of a WITHDRAW"):
+        with self.assertRaisesRegex(common.LedgerError, "may target only an ADD or a BASELINE"):
             self.t.state()
 
     def test_loss_of_only_primary_copy_of_baseline_source(self):

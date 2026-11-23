@@ -37,7 +37,16 @@ Version zero implements the current behaviour as **rule version 1**. Any change 
 ## D. Copy-fidelity classification (controlled vocabulary)
 The overlay keeps fidelity separate from identity, provenance, authority, completeness, currency and applicability.
 
-| Fidelity class | Meaning | Primary eligibility at rule 1 | Examples |
+Rule 1 **enforces** primary eligibility through these mechanisms (Fable F-01/F-15):
+- `ledger.COMPAT`: publication type and carrier per class;
+- the completeness check: no INCOMPLETE or EXTRACT;
+- the scan check for the government-hosted scan class;
+- `strength.fidelity_issue`: signature range and Internet Archive producer;
+- `strength.CLASS_HOSTS`: locator host.
+
+The table below maps each fidelity class to these checks.
+
+| Fidelity class | Meaning | Primary eligibility at rule 1 (enforced by) | Examples |
 | --- | --- | --- | --- |
 | `SCANNED_FACSIMILE` | page images of a printed official publication | yes (as in Cycle 4) | 1954-1991 Army Rules Gazettes on archive.org |
 | `BORN_DIGITAL_SIGNED_RANGE_SPANS_FILE` | e-Gazette whose embedded signature byte range spans the file (**not** a validated signature) | yes (provisionally) | S.R.O. 2(E)/2018, 17(E)/2019 |

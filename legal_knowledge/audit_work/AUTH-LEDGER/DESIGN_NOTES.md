@@ -5,7 +5,7 @@ The specification is `C6-01-PROVENANCE/addendum/INTEGRATION_ARCHITECTURE.md` rev
 ## Decisions and discrepancies
 | # | Topic | Specification | Implementation | Reason |
 | --- | --- | --- | --- | --- |
-| D-1 | Rule 1 crosswalk and master rows | "Rule version 1 is the Cycle 5 source-level anchoring rule exactly as frozen"; "the overlay only reads [frozen files]" | `reader.py` imports the **hash-pinned frozen** `SOURCE-LIBRARY-C5/tools/build_registers.py` **after** `pins.verify()` and calls its pure functions: `master_rows`, `check_holding_vs_copies`, `crosswalk` and the row builders for counts. It never calls the frozen `build()` or `copy_rows`, and never uses the frozen Cycle 4 module for status | Re-implementing the 120-line crosswalk risks silent divergence. Running the frozen, pinned code is the most exact form of "rule 1 exactly as frozen". The **copy-status rule is reimplemented** (`rules_v1.py`), as required, and proven equal to the frozen rule |
+| D-1 | Rule 1 crosswalk and master rows | "Rule version 1 is the Cycle 5 source-level anchoring rule exactly as frozen"; "the overlay only reads [frozen files]" | `reader.py` **executes the verified bytes** of the hash-pinned frozen `SOURCE-LIBRARY-C5/tools/build_registers.py` (and of the Cycle 4 module it imports), never via the import system, after `pins.verify()`, and calls its pure functions: `master_rows`, `check_holding_vs_copies`, `crosswalk` and the row builders for counts. It never calls the frozen `build()` or `copy_rows`, and never uses the frozen Cycle 4 module for status | Re-implementing the 120-line crosswalk risks silent divergence. Running the frozen, pinned code is the most exact form of "rule 1 exactly as frozen". The **copy-status rule is reimplemented** (`rules_v1.py`), as required, and proven equal to the frozen rule |
 | D-2 | Coverage summary | v0000 byte identity for copy states, source states and crosswalk | Also byte identity for `coverage_summary.json` and `source_master_register.csv`. `reader.summary()` mirrors the frozen summary structure | Stronger check; the brief requires coverage equality too |
 | D-3 | Source-state representation | Derived source states | `source_states.csv` (new) plus the frozen-format `source_master_register.csv`. The master is rebuilt by the frozen `master_rows` from the input rows with the **derived** holding state substituted. Nothing is edited on disk | No second hand-kept register; the frozen consistency check runs on the derived output |
 | D-4 | Losing the only primary copy | Basis "from the copies' resulting states" | A source that is `HELD_PRIMARY_*` or `HELD_AUTHENTICATION_PENDING` at version 0, with no primary or pending copy left, falls to `HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED` if its publication type is JUDICIAL, otherwise to `HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED`. This happens **only** if an applied WITHDRAW or CORRECTION touched that source; otherwise it is a hard error | Resolves the Fable INFO note on the frozen basis; fails closed |
@@ -32,8 +32,12 @@ The specification is `C6-01-PROVENANCE/addendum/INTEGRATION_ARCHITECTURE.md` rev
 - **WITHDRAW**
   - It targets the live row and must give a reason.
   - With `resulting_state` AUTHENTICATION_PENDING, a pending row remains: it is live and can be corrected, but not withdrawn again. Otherwise the row ends and the copy falls back to the rule's no-row status.
-  - The record is never deleted. `newly_withdrawn.csv` lists it.
-- **Only APPROVED entries take effect.** WITHHELD and REJECTED entries are recorded in `transitions.csv` with no effect.
+  - The record is never deleted. `newly_withdrawn.json` lists it.
+  - A WITHDRAW may target only an ADD or a BASELINE row. A CORRECTION is reverted by a new CORRECTION (Fable F-09).
+- **Only APPROVED entries take effect.** WITHHELD and REJECTED entries need a decision record and are logged in `transitions.json` with no effect.
+- **Class compatibility (`ledger.COMPAT`, Fable F-01/F-07):** each class has allowed publication types and copy-carrier prefixes. Primary classes also reject INCOMPLETE/EXTRACT completeness; the government-hosted scan class needs a scanned copy; and every first-class locator host must suit the class.
+- **Records (Fable F-03/F-04):** decision `D-vNNNN*.md` and review `R-vNNNN*.md` are separate files by different persons. Each names `entry_id=sha256:entry_digest`, has no duplicate keys, has an id equal to its file name and a `YYYY-MM-DD` date. ACCEPT_WITH_CONDITIONS needs `conditions_status: DISCHARGED`.
+- **Frozen code (Fable F-05):** it is executed from its verified bytes and never imported.
 
 ## Limitations
 - No cryptographic signature verification of any document or decision; see D-7.

@@ -22,11 +22,34 @@ OUT_NAMES = ["source_copy_register.csv", "source_master_register.csv", "corpus_c
 FROZEN_EQUAL = {"source_copy_register.csv", "source_master_register.csv", "corpus_crosswalk.csv", "coverage_summary.json"}
 
 
+FROZEN_CODE = {"evidence_classification": "CALIBRATION-02/tools/evidence_classification.py",
+               "build_registers": "SOURCE-LIBRARY-C5/tools/build_registers.py"}
+
+
+def _exec_pinned(name, rel, pinmap):
+    """Execute exactly the pinned bytes of a frozen module (no import system, no bytecode cache, no sys.path lookup)."""
+    import hashlib, types
+    path = AW / rel
+    data = path.read_bytes()
+    if hashlib.sha256(data).hexdigest() != pinmap["legal_knowledge/audit_work/" + rel]:
+        raise LedgerError(f"frozen code {rel} does not match its pin")
+    mod = types.ModuleType(name)
+    mod.__file__ = str(path)
+    code = compile(data, str(path), "exec", dont_inherit=True)
+    sys.modules[name] = mod  # the frozen builder's own 'import evidence_classification' resolves to this verified module
+    exec(code, mod.__dict__)
+    return mod
+
+
 def frozen_builder(root=PKG):
-    pins.verify(root)  # fail closed before any frozen code runs
-    sys.path.insert(0, str(AW / "SOURCE-LIBRARY-C5/tools"))
-    import build_registers as B
-    return B
+    """Verify every pin, then execute the frozen Cycle 4 rule module and the frozen Cycle 5 builder from their verified
+    bytes (Fable review F-05: an import could load a stale or crafted __pycache__ file instead of the pinned source)."""
+    pins.verify(root)
+    pinmap = json.loads((Path(root) / "frozen_inputs.json").read_text(encoding="utf-8"))["files"]
+    for n in FROZEN_CODE:
+        sys.modules.pop(n, None)
+    _exec_pinned("evidence_classification", FROZEN_CODE["evidence_classification"], pinmap)
+    return _exec_pinned("build_registers", FROZEN_CODE["build_registers"], pinmap)
 
 
 def _held_index():
@@ -143,18 +166,31 @@ def effective_state(root=PKG, as_of=None):
     held_c4 = _held_index()
     ctx = L.Context(held_c4, baseline, c5_copies, master_by)
     eff, transitions, withdrawn, lines = L.apply_ledger(root, ctx, as_of)
-    copies = copy_rows(B, frozen_master, held_c5, held_c4, eff)
+    try:
+        copies = copy_rows(B, frozen_master, held_c5, held_c4, eff)
+    except R.RuleError as e:
+        raise LedgerError(f"copy-status rule: {e}")
+    derived = {c["sha256"]: c["copy_effective_status"] for c in copies}
+    for w in withdrawn:  # the change list may not state a state that was not derived (F-09)
+        want = {"AUTHENTICATION_PENDING": R.PENDING, "NO_ROW": None, "PROVENANCE_UNKNOWN": R.UNKNOWN}[w["resulting_state"]]
+        if want is not None and derived.get(w["sha256"]) != want:
+            raise LedgerError(f"{w['entry_id']}: resulting_state {w['resulting_state']} but the derived copy status is {derived.get(w['sha256'])}")
     touched = {c5_copies[t["sha256"]]["source_id"] for t in transitions
                if t["effect"] == "APPLIED" and t["entry_type"] in ("WITHDRAW", "CORRECTION") and t["sha256"] in c5_copies}
     states, new_targets = [], []
     for t in targets:
         cs = [c for c in copies if c["source_id"] == t["source_id"]]
         hs, why = derive_holding(t["holding_state"], cs, t["source_id"] in touched, master_by[t["source_id"]]["publication_type"])
-        states.append({"source_id": t["source_id"], "frozen_holding_state": t["holding_state"], "effective_holding_state": hs, "basis": why})
+        origins = sorted({eff[c["sha256"]].get("origin", "") for c in cs if c["sha256"] in eff} - {""})
+        states.append({"source_id": t["source_id"], "frozen_holding_state": t["holding_state"], "effective_holding_state": hs, "basis": why,
+                       "evidence_origin": "; ".join(origins) or "NO_REGISTER_ROW"})
         new_targets.append(dict(t, holding_state=hs))
-    master = B.master_rows(held_c5, cands, eff, new_targets)
-    B.check_holding_vs_copies(master, copies)  # the frozen consistency rule stays on
-    cw = B.crosswalk(master, copies)
+    try:
+        master = B.master_rows(held_c5, cands, eff, new_targets)
+        B.check_holding_vs_copies(master, copies)  # the frozen consistency rule stays on
+        cw = B.crosswalk(master, copies)
+    except SystemExit as e:  # the frozen builder signals rule violations with SystemExit (F-13)
+        raise LedgerError(f"frozen Cycle 5 rule: {e}")
     out = {"acquisition": B.acquisition_rows(master), "amendment": B.amendment_rows(), "chain": B.chain_rows(),
            "provision": B.provision_rows(by_name), "conflict": B.conflict_rows()}
     texts = {
@@ -162,7 +198,7 @@ def effective_state(root=PKG, as_of=None):
         "source_master_register.csv": B.csv_text(B.COLS["source_master_register.csv"], master),
         "corpus_crosswalk.csv": B.csv_text(B.COLS["corpus_crosswalk.csv"], cw),
         "coverage_summary.json": json.dumps(summary(B, master, copies, cw, out), indent=1, sort_keys=True) + "\n",
-        "source_states.csv": csv_text(["source_id", "frozen_holding_state", "effective_holding_state", "basis"], states),
+        "source_states.csv": csv_text(["source_id", "frozen_holding_state", "effective_holding_state", "basis", "evidence_origin"], states),
         "transitions.json": json.dumps(transitions, indent=1) + "\n",
         "newly_withdrawn.json": json.dumps(withdrawn, indent=1) + "\n",
     }

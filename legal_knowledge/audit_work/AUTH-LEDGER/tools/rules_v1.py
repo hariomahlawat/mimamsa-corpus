@@ -64,6 +64,8 @@ def copy_status(sha, held_paths, reg):
         if st == "PROVENANCE_DOCUMENTED" and cls_.startswith("NON_PRIMARY_"):
             if cls_ not in NON_PRIMARY_CLASSES:
                 raise RuleError(f"{sha[:12]}: unsupported non-primary class {cls_}")
+            if any(_secondary(p) for p in paths):  # same guard as the primary branch (Fable review F-02)
+                return PENDING, "documented non-primary provenance but the same bytes are also held under a secondary path"
             return DOC_NON_PRIMARY, f"documented non-primary copy: {cls_}"
         return UNKNOWN, f"authentication register row incomplete ({st}/{cls_})"
     prim = [p for p in paths if p.lower().endswith(PRIMARY_EXT) and not _secondary(p)]

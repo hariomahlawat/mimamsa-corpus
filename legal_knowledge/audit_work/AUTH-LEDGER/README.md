@@ -17,6 +17,7 @@
 | `decisions/` | committed owner decision records and reviewer reports (none yet) |
 | `corrections/` | documentary corrections to frozen texts (none recorded yet; `notes.csv` is created with the first note) |
 | `effective/v0000/` | derived outputs of version 0, pinned by `effective_sha256` in the genesis line |
+| `review/` | the independent Fable 5.2 review of 82a8ce0e (verbatim) and its dispositions |
 | `tools/` | `rules_v1.py` (copy-status rule), `strength.py` (evidence checks), `ledger.py` (chain, approvals, entry semantics), `reader.py` (effective state), `pins.py`, `auth_ledger.py` (command line) |
 
 ## Commands (offline)
