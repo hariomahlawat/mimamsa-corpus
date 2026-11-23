@@ -1,0 +1,21 @@
+link_id,record_id,other_record_ids,relation,evidence,severity
+D-CV-001,CM-001,CM-013;CM-SC-18,INCONSISTENT,"CM-001 cites 'AA §§2, 108-127' without flag; CM-013/CM-SC-18 state s.127 omitted 1992 (Act 37 of 1992 s.11, Gazette text sha d1114517...)",P3
+D-CV-002,KB-030,CM-013;CM-SC-18,INCONSISTENT,KB-030 locator 'ss 108-130' spans omitted s.127 without flag,P3
+D-CV-003,HCE-033,HCE-015;HCE-031,INCONSISTENT,"HCE-033 cites 'AR rr 22-26' incl. r.25 omitted by SRO 17(E) 6 Dec 1993 (AR compilation p.45); HCE-015 marks it obsolete; HCE-031 cites rr 22-24, 26",P3
+D-CV-004,COI-003,KB-012;EV-014;EV-008,INCONSISTENT,COI-003 'do not treat all CoI statements as admissible' vs r.182 general inadmissibility stated in KB-012/EV-014/EV-008 (AR r.182 p.197),P2
+D-CV-005,HCE-016,KB-003,INCONSISTENT,HCE-016 's.80 primarily addresses persons other than officers/JCOs/WOs' vs KB-003 and AA s.80 text (applies only to such persons),P2
+D-CV-006,CM-026,CM-025;EV-023;EV-024;EV-025;EV-027;EV-028,MISSING_LINK,CM-026 leaves evidence law '[VERIFY]' and omits BSA s.63 certificate; CM-025 and EV electronic-evidence records address it,P2
+D-CV-007,V8-JD-02,CIV-010;CIV-011,CONFLICTING_VERSION,"V8-JD-02 says '1952 rules'; held Som Datt text quotes 1962 Rules (S.R.O. 709, 17 Apr 1962; 7-day notice); CIV-011 states 1978 Rules 15-day interval; no record sets out the 1962->1978->BNSS s.521 chain",P2
+D-CV-008,SC13,J-03;HCE-032,MISLINKED,"SC13 cites P S Gill 2019 as controlling on a retired officer's s.123 question; Gill 2019 (paras 3, 13-21) decided AFT s.14 jurisdiction and prima facie case, not s.123; name collision with Brig P.S. Gill 2012 INSC 146 (ss.30-31) held in corpus",P3
+D-CV-009,ADM-CL-02,ADM-005;ADM-006;ADM-007,MISSING_PREREQUISITE,"ADM-CL-02 omits r.13-A, r.14(1) provisos, r.14(3) conviction route and r.15-A medical route (AR pp.17-22); ADM-007 covers r.15-A; r.15 remains reserved OPEN",P2
+D-CV-010,KB-018,ADM-007,MISLINKED,KB-018 lists 'medical grounds' under rr 14-15; officer medical release is r.15-A (AR p.22; r.15 note 2),P3
+D-CV-011,KB-018,ADM-JD-02;ADM-005;ADM-SC-02,MISSING_LINK,KB-018 P4 and ADM-SC-02 do not link ADM-JD-02 (Harjeet Singh Sandhu: s.122 time bar does not by itself bar s.19/r.14),P3
+D-CV-012,PEN-CL-06,PEN-WF-03;PEN-003;PEN-J-01;PEN-J-02;PEN-013,MISSING_LINK,No record among 658 cites Isaac 2026 INSC 993 (15 Sep 2026; para 39: medical board weight; ER 2008 r.7 onus after 15 years); pension checklists and Dharamvir/Rajbir digests lack it,P2
+D-CV-013,COI-031,COI-006,MISSING_PREREQUISITE,Both records rely on AR rr.185-186 and omit AA s.89 (statutory basis; percentage-of-pay measure; JCOs/WOs/NCOs/men only),P2
+D-CV-014,V7-JD-05,AFT-005;V7-SC-05;AFT-003,MISSING_PREREQUISITE,"AFT-005/V7-SC-05/AFT-003 rely on Santosh Lohar for s.15 SCM appeals; held copy dated 3 Oct 2023 (record: 4 Oct), neutral citation illegible, key passage appears quoted from another judgment",P2
+D-CV-015,CM-008,AFT-005,MISSING_LINK,CM-008 SCM sentence limits not linked to AFT s.3(o)(iv) 3-month threshold record,P3
+D-CV-016,COI-018,CIV-010;CIV-011,MISSING_LINK,COI-018 parallel civil processes not linked to adjustment-rules records; s.70 bar not stated,P3
+D-CV-017,AFT-039,V7-JD-02;V7-JD-03;KB-025;AFT-001,DUPLICATE,Consistent restatements of Parashotam Dass para 32; no conflict,P3
+D-CV-018,ADM-026,ADM-JD-01;ADM-031;ADM-013,DUPLICATE,Consistent restatements of Kuldeep Yadav paras 22-26; ADM-JD-01 operative outcome verified at para 34,P3
+D-CV-019,CM-012,CM-SC-11;CM-CL-01;CIV-007;SC13,DUPLICATE,Consistent s.122/s.123 statements; no conflict,P3
+D-CV-020,ADM-SC-02,ADM-005,DUPLICATE,ADM-SC-02 checklist text duplicates ADM-005 verbatim; consistent,P3
