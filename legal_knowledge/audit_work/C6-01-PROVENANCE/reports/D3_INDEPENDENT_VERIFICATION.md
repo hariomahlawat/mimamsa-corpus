@@ -146,7 +146,7 @@ Its five P3 wording items are corrected in the following documentation-only comm
 | F-23 | P3 | Hard-coded counts; no report check | **Corrected:** denominators derived from Cycle 5; reports gain `--check`; UTF-8 writes |
 | F-24 | P3 | Tests keyed by prefix; collision remedy | **Corrected:** tests key by full sha256; synthetic prefix-collision test; the remedy lengthens only colliding IDs |
 | F-25 | P3 | WITHHELD simulated; descriptor restore | **Corrected:** WITHHELD is never simulated; the original classmethod descriptor is restored |
-| F-26 | P3 | Diff-scope and hash checks not possible for the reviewer | **Done in the coordinator's gate** (git diff scope, held-file re-hash, corpus and Cycle 4 hashes) and recorded in the PR |
+| F-26 | P3 | Diff-scope and hash checks not possible for the reviewer | **Done in the coordinator's gate** (git diff scope, held-file re-hash, corpus and Cycle 4 hashes) and recorded in the PR; **independently closed** at `634016ee` by a separate read-only Fable 5.2 agent with git access (`review/f26_independent_git_verification_634016ee.md`) |
 
 **Current outcomes:** 32 DOCUMENTED and 4 PARTIALLY_DOCUMENTED. The 32 proposals are 20 primary Gazette copies, 8 primary court copies and 4 non-primary. Simulated coverage: documented-primary copies 12 to 40; sources 12 to 40; cases 6 to 13; KB unchanged. 
 ## Fable 5.2 re-review of 4bf0a96a: VERDICT ACCEPT WITH CONDITIONS (no P1; 1 new P2)
@@ -179,4 +179,4 @@ Same reviewer (not independent of its earlier rounds). N-01 (the P2) FIXED: all 
 
 Residual by construction: the per-type rules in the schema use custom `x-nonempty`/`x-empty` keywords that the builder enforces; a standard JSON Schema validator would not.
 
-**Still open by design (owner options, not defects):** the affirmative-state L3 rule (F-02); external image rows without a result field (F-10); URL normalisation in the builder's contradiction test (F-17); independent, git-capable verification of diff scope and hashes (F-26), which the coordinator's gate performs but no independent reviewer with git access has repeated at this head.
+**Still open by design (owner options, not defects):** the affirmative-state L3 rule (F-02); external image rows without a result field (F-10); URL normalisation in the builder's contradiction test (F-17); independent, git-capable verification of diff scope and hashes (F-26): **CLOSED** for `634016ee` by a separate read-only Fable 5.2 agent with git access (all checks PASS; record `review/f26_independent_git_verification_634016ee.md`).
