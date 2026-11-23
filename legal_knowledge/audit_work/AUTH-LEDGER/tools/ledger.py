@@ -130,6 +130,17 @@ def unexpected_files(root, lines):
     return sorted(found - known)
 
 
+def check_ledger_dirs(root):
+    """ledger/, decisions/ and effective/ must be real directories (not symlinks, not files) when present (C10 review AL-01)."""
+    root = Path(root)
+    for sub in ("ledger", "decisions", "effective"):
+        p = root / sub
+        if p.is_symlink():
+            raise LedgerError(f"{sub}/ is a symbolic link; the ledger layout requires a real directory")
+        if p.exists() and not p.is_dir():
+            raise LedgerError(f"{sub} is not a directory")
+
+
 def unexpected_effective(root, expected):
     """Entries under effective/ that the manifest does not account for (C9 synthetic transaction finding TXN-1).
 
@@ -138,6 +149,8 @@ def unexpected_effective(root, expected):
     is reported. Returns a sorted list of relative paths."""
     root = Path(root)
     base = root / "effective"
+    if base.is_symlink():
+        return ["effective"]
     if not base.exists():
         return []
     bad = []

@@ -2381,3 +2381,70 @@ class C10EffectiveIntegrity(unittest.TestCase):
         exp = {"v0000": {p.name for p in (PKG / "effective/v0000").iterdir()}}
         self.assertEqual(L.unexpected_effective(self.t.dir, exp), [])
         self.assertEqual(L.unexpected_effective(self.t.dir, {}), ["effective/v0000"])
+
+
+class C10EffectiveIntegrityReview(C10EffectiveIntegrity):
+    """C10 review AL-01, AL-03, AL-04: further strays and layout cases (all inside the temporary Synthetic copy)."""
+    def test_hidden_file_rejected(self):
+        (self.eff / "v0000/.hidden").write_text("x")
+        self.bad("effective/v0000/.hidden")
+
+    def test_hidden_dir_rejected(self):
+        (self.eff / ".git_like").mkdir()
+        self.bad("effective/.git_like")
+
+    def test_case_variant_file_rejected(self):
+        (self.eff / "v0000/Transitions.json").write_text("x")
+        self.bad("effective/v0000/Transitions.json")
+
+    def test_trailing_space_file_rejected(self):
+        (self.eff / "v0000/transitions.json ").write_text("x")
+        self.bad("transitions.json ")
+
+    def test_case_variant_version_dir_rejected(self):
+        (self.eff / "V0000").mkdir()
+        self.bad("effective/V0000")
+
+    def test_unusual_extension_rejected(self):
+        (self.eff / "v0000/payload.bin").write_bytes(b"\0")
+        self.bad("effective/v0000/payload.bin")
+
+    def test_empty_stray_dir_rejected(self):
+        (self.eff / "empty").mkdir()
+        self.bad("effective/empty")
+
+    def test_nested_version_named_dir_rejected(self):
+        (self.eff / "v0000/v0000").mkdir()
+        self.bad("effective/v0000/v0000")
+
+    def test_fifo_at_expected_name_rejected_without_hanging(self):  # AL-04: walk runs before any read
+        f = self.eff / "v0000/transitions.json"
+        f.unlink()
+        import os
+        os.mkfifo(f)
+        self.bad("effective/v0000/transitions.json")
+
+    def test_directory_at_expected_name_rejected(self):
+        f = self.eff / "v0000/OUTPUT_MANIFEST.json"
+        f.unlink()
+        f.mkdir()
+        self.bad("effective/v0000/OUTPUT_MANIFEST.json")
+
+    def test_symlinked_effective_dir_rejected(self):  # AL-01
+        real = self.t.dir / "real_effective"
+        shutil.move(str(self.eff), real)
+        (self.t.dir / "effective").symlink_to(real, target_is_directory=True)
+        self.bad("effective/ is a symbolic link")
+
+    def test_symlinked_ledger_dir_rejected(self):  # AL-01 (pre-existing gap for ledger/)
+        real = self.t.dir / "real_ledger"
+        shutil.move(str(self.t.dir / "ledger"), real)
+        (self.t.dir / "ledger").symlink_to(real, target_is_directory=True)
+        self.bad("ledger/ is a symbolic link")
+
+    def test_two_version_expected_set(self):
+        names = {p.name for p in (PKG / "effective/v0000").iterdir()}
+        shutil.copytree(self.eff / "v0000", self.eff / "v0001")
+        self.assertEqual(L.unexpected_effective(self.t.dir, {"v0000": names, "v0001": names}), [])
+        (self.eff / "v0001/extra.csv").write_text("x")
+        self.assertEqual(L.unexpected_effective(self.t.dir, {"v0000": names, "v0001": names}), ["effective/v0001/extra.csv"])

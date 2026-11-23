@@ -48,16 +48,24 @@ def genesis(root=PKG):
 def verify(root=PKG):
     root = Path(root)
     L.check_committed_layout(root)  # before any file is read (C8, Fable C-02)
+    L.check_ledger_dirs(root)  # C10 review AL-01: ledger/, decisions/, effective/ must be real directories, not symlinks
     lines = L.read_manifest(root)
     report = []
-    expected = {}
-    for line in lines:
+    expected, rebuilt = {}, []
+    for line in lines:  # phase 1: rebuild every version from the manifest and inputs (effective/ is not read)
         v = line["version"]
         texts, _ = reader.effective_state(root, v)
         expected[f"v{v:04d}"] = set(texts) | {"OUTPUT_MANIFEST.json"}
-        d = root / f"effective/v{v:04d}"
         if sha256_text(output_manifest(texts)) != line["effective_sha256"]:
             raise LedgerError(f"version {v}: rebuilt outputs do not match effective_sha256 in the manifest")
+        rebuilt.append((v, texts))
+    # phase 2 (C10 review AL-04): reject unaccounted or non-regular entries BEFORE reading any committed output, so a FIFO
+    # or a directory at an expected name cannot hang or crash verify
+    stray = L.unexpected_effective(root, expected)  # C9 synthetic transaction TXN-1
+    if stray:
+        raise LedgerError(f"entries in effective/ not accounted for by the manifest: {stray}")
+    for v, texts in rebuilt:  # phase 3: compare committed outputs with the rebuild
+        d = root / f"effective/v{v:04d}"
         for k, t in texts.items():
             if not (d / k).is_file() or (d / k).read_text(encoding="utf-8") != t:
                 raise LedgerError(f"version {v}: committed effective/v{v:04d}/{k} differs from the rebuild")
@@ -71,9 +79,6 @@ def verify(root=PKG):
     extra = L.unexpected_files(root, lines)
     if extra:
         raise LedgerError(f"files in ledger/ or decisions/ not accounted for by the manifest: {extra}")
-    stray = L.unexpected_effective(root, expected)  # C9 synthetic transaction TXN-1
-    if stray:
-        raise LedgerError(f"entries in effective/ not accounted for by the manifest: {stray}")
     return report
 
 
