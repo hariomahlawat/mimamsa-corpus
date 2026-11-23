@@ -142,7 +142,7 @@ class Reconciliation(unittest.TestCase):
         (base / "registers/held_sources_scratchpad.csv").write_text(
             "scratchpad_relative_path,bytes,sha256,note\ndownloads/official.pdf,10," + "e" * 64 + ",\nderived/x.txt,10," + "f" * 64 + ",\ndownloads/ambiguous.pdf,10," + "9" * 64 + ",\nsecondary/ambiguous_copy.pdf,10," + "9" * 64 + ",\n", encoding="utf-8")
         (base / "registers/source_authentication_register.csv").write_text(
-            "sha256,authentication_state,effective_source_class\n" + "e" * 64 + ",PROVENANCE_DOCUMENTED,PRIMARY_OFFICIAL_COURT_COPY\n", encoding="utf-8")
+            "sha256,authentication_state,effective_source_class,provenance_references\n" + "e" * 64 + ",PROVENANCE_DOCUMENTED,PRIMARY_OFFICIAL_COURT_COPY,SRC-e retrieval record\n", encoding="utf-8")
         props = [["1", "R-1", f"R-1#P{i}", "body_sentence", f"text {i}", "M", "T", "K", "S", "0" * 64] for i in range(1, n + 1)]
         with open(base / "propositions.csv", "w", newline="", encoding="utf-8") as f:
             w = csv.writer(f, lineterminator="\n")
@@ -214,7 +214,8 @@ class Reconciliation(unittest.TestCase):
     def test_committed_outputs_reproduce(self):
         names = ["reconciliation/proposition_matrix.csv", "reconciliation/disagreements.csv", "reconciliation/record_scorecard.csv",
                  "reconciliation/scorecard.json", "proposals/correction_proposals.csv", "proposals/proposed_versions.jsonl",
-                 "registers/cross_volume_register.csv", "adviser/legal_adviser_questions.csv", "reconciliation/rule_sensitivity.json"]
+                 "registers/cross_volume_register.csv", "adviser/legal_adviser_questions.csv", "reconciliation/rule_sensitivity.json",
+                 "reconciliation/effective_evidence.csv", "reconciliation/legal_advisor_questions_raw.csv"]
         before = {n: (C2 / n).read_bytes() for n in names}
         try:
             subprocess.run([sys.executable, str(C2 / "tools/reconcile.py")], check=True, capture_output=True)
@@ -243,8 +244,8 @@ class EvidenceClassification(unittest.TestCase):
                 ("downloads/secondary/mirror.pdf", self.H_MIR), ("downloads/claimed_official.pdf", self.H_AMB),
                 ("downloads/secondary/news_copy.pdf", self.H_AMB), ("downloads/pending.pdf", self.H_PEND),
                 ("downloads/official.pdf", self.real)]
-        reg = [{"sha256": self.H_OFF, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY"},
-               {"sha256": self.real, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY"},
+        reg = [{"sha256": self.H_OFF, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY", "provenance_references": "SRC-1 retrieval record"},
+               {"sha256": self.real, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY", "provenance_references": "SRC-2 retrieval record"},
                {"sha256": self.H_PEND, "authentication_state": "AUTHENTICATION_PENDING", "effective_source_class": "AUTHENTICATION_PENDING"}]
         self.ev = self.ev_mod.Evidence([{"scratchpad_relative_path": p, "sha256": h} for p, h in held], reg)
         self.ev_files = self.ev_mod.Evidence([{"scratchpad_relative_path": p, "sha256": h} for p, h in held], reg, root=root)
@@ -289,6 +290,22 @@ class EvidenceClassification(unittest.TestCase):
         self.assertFalse(self.ev.counts_as_primary(row))
         self.assertEqual(row, before)  # claimed state untouched
 
+    def test_11_missing_held_file_under_verification_root(self):
+        ev = self.ev_mod.Evidence([{"scratchpad_relative_path": "downloads/absent.pdf", "sha256": self.H_OFF}],
+                                  [{"sha256": self.H_OFF, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY", "provenance_references": "x"}],
+                                  root=Path(self.t.name))
+        self.assertEqual(ev.classify_finding(self.f(self.H_OFF))[0], "HELD_FILE_MISSING")
+
+    def test_12_register_row_without_provenance_is_not_primary(self):
+        ev = self.ev_mod.Evidence([{"scratchpad_relative_path": "downloads/a.pdf", "sha256": self.H_OFF}],
+                                  [{"sha256": self.H_OFF, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY", "provenance_references": " "}])
+        self.assertEqual(ev.classify_finding(self.f(self.H_OFF))[0], "PROVENANCE_UNKNOWN")
+
+    def test_13_register_held_paths_must_match_index(self):
+        ev = self.ev_mod.Evidence([{"scratchpad_relative_path": "downloads/a.pdf", "sha256": self.H_OFF}],
+                                  [{"sha256": self.H_OFF, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY", "provenance_references": "x", "held_paths": "downloads/other.pdf"}])
+        self.assertEqual(ev.classify_finding(self.f(self.H_OFF))[0], "PROVENANCE_UNKNOWN")
+
     def test_10_genuine_source_conflict_passes_through(self):
         st, _ = self.ev.classify_finding(self.f(self.H_OFF, state="CONTRADICTORY_EVIDENCE"))
         self.assertEqual(st, "CONTRADICTORY_EVIDENCE")
@@ -306,7 +323,7 @@ class EvidenceIntegration(unittest.TestCase):
         with open(base / "registers/held_sources_scratchpad.csv", "w", newline="", encoding="utf-8") as f:
             w = csv.writer(f, lineterminator="\n"); w.writerow(["scratchpad_relative_path", "bytes", "sha256", "note"]); w.writerows([[p, 10, h, ""] for p, h in held])
         with open(base / "registers/source_authentication_register.csv", "w", newline="", encoding="utf-8") as f:
-            w = csv.writer(f, lineterminator="\n"); w.writerow(["sha256", "authentication_state", "effective_source_class"]); w.writerows(register)
+            w = csv.writer(f, lineterminator="\n"); w.writerow(["sha256", "authentication_state", "effective_source_class", "provenance_references"]); w.writerows([r + ["SRC-x retrieval record"] for r in register])
         with open(base / "propositions.csv", "w", newline="", encoding="utf-8") as f:
             w = csv.writer(f, lineterminator="\n")
             w.writerow(["calibration_rank", "record_id", "proposition_id", "proposition_kind", "text_verbatim", "module", "title", "kind", "status_as_recorded", "record_canonical_sha256"])
@@ -369,6 +386,8 @@ class EvidenceIntegration(unittest.TestCase):
             root = Path(t.name) / "scratch"; (root / "downloads").mkdir(parents=True); (root / "downloads/doc.pdf").write_bytes(b"different bytes")
             p = subprocess.run([sys.executable, str(base / "tools/check_calibration02.py"), "--verify-files", str(root)], capture_output=True, text=True)
             self.assertEqual(p.returncode, 1); self.assertIn("HASH_MISMATCH", p.stdout)
+            p = subprocess.run([sys.executable, str(base / "tools/check_calibration02.py"), "--verify-files", str(Path(t.name) / "nonexistent")], capture_output=True, text=True)
+            self.assertEqual(p.returncode, 1); self.assertIn("HELD_FILE_MISSING", p.stdout)
         finally:
             t.cleanup()
 

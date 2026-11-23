@@ -23,7 +23,7 @@
 
 ## Deficiencies to fix before scaling
 1. **Primary sources (the binding constraint).**
-   - No Gazette text of the Army Act 1950, the AFT Act 2007, the BNSS or the BSA is held. Statutory propositions on these therefore stop at "secondary only": 294 findings.
+   - No Gazette text of the Army Act 1950, the AFT Act 2007, the BNSS or the BSA is held. Statutory propositions on these therefore stop at "secondary only". 294 findings in total are secondary-only, mostly for this reason, though some rest on mirror judgments or derived text.
    - The Army Rules amendment chain is incomplete: OCR-only, hint and not-found instruments, with nothing searched after June 2022.
    - Eleven calibration records cannot progress at all.
    - Acquisition order: ACQ-C3-01 (Army Act as enacted) first; then the record copy of S.R.O. 484/1954 and the Army Rules hint instruments; then official judgments to replace mirrors (Kuldeep Yadav, Som Datt, Santosh Lohar, Harjeet, Pandappa, Pooja Pal). See `registers/acquisition_readiness/`.

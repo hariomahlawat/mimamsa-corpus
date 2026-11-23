@@ -19,6 +19,7 @@ Effective statuses for a finding whose claimed state is VERIFIED_AGAINST_HELD_PR
   NOT_PRIMARY_MIRROR_OR_SECONDARY  register class MIRROR/SECONDARY, or held only under secondary paths [protocol error]
   SOURCE_NOT_HELD_IN_INDEX         sha256 malformed or not in the held index                          [protocol error]
   HASH_MISMATCH                    a held file's bytes do not hash to the cited sha256 (when files are checked) [protocol error]
+  HELD_FILE_MISSING                a held path is absent under the verification root (when files are checked)  [protocol error]
   PINPOINT_MISSING                 no locator                                                          [protocol error]
 Findings with any other claimed state pass through unchanged as their effective status."""
 import csv, hashlib, re
@@ -32,8 +33,9 @@ DERIVED = "NOT_PRIMARY_DERIVED_TEXT"
 MIRROR = "NOT_PRIMARY_MIRROR_OR_SECONDARY"
 NOTHELD = "SOURCE_NOT_HELD_IN_INDEX"
 MISMATCH = "HASH_MISMATCH"
+MISSING_FILE = "HELD_FILE_MISSING"
 NOPIN = "PINPOINT_MISSING"
-PROTOCOL_ERRORS = {DERIVED, MIRROR, NOTHELD, MISMATCH, NOPIN}
+PROTOCOL_ERRORS = {DERIVED, MIRROR, NOTHELD, MISMATCH, NOPIN, MISSING_FILE}
 NOT_EFFECTIVE_PRIMARY = {PENDING, UNKNOWN}
 PRIMARY_EXT = (".pdf", ".doc", ".docx")
 DERIVED_EXT = (".txt", ".json", ".html", ".htm", ".md")
@@ -76,7 +78,9 @@ class Evidence:
         if self.root is not None:
             for p in paths:
                 h = self._file_hash(p)
-                if h is not None and h != sha:
+                if h is None:
+                    return MISSING_FILE, f"{p} not found under the verification root"
+                if h != sha:
                     return MISMATCH, f"{p} hashes to {h}, not {sha}"
         reg = self.register.get(sha)
         if reg:
@@ -86,6 +90,13 @@ class Evidence:
             if cls_.startswith(("MIRROR", "SECONDARY")):
                 return MIRROR, f"authentication register class {cls_}"
             if st == "PROVENANCE_DOCUMENTED" and cls_.startswith("PRIMARY_"):
+                if not reg.get("provenance_references", "").strip():
+                    return UNKNOWN, "authentication register row has no provenance_references"
+                rp = {x.strip() for x in reg.get("held_paths", "").split(";") if x.strip()}
+                if rp and rp != set(paths):
+                    return UNKNOWN, "authentication register held_paths differ from the held index"
+                if any(_secondary(p) for p in paths):
+                    return PENDING, "documented provenance but the same bytes are also held under a secondary path"
                 return EFFECTIVE_PRIMARY, f"authentication register: {cls_}"
             return UNKNOWN, f"authentication register row incomplete ({st}/{cls_})"
         prim = [p for p in paths if p.lower().endswith(PRIMARY_EXT) and not _secondary(p)]

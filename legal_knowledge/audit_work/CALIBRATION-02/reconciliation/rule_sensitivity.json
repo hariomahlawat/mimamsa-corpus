@@ -5,6 +5,7 @@
   "A VERIFIED row counts against a negative finding only if it verified the proposition as stated (severity NONE).",
   "CONTRADICTORY_EVIDENCE between sources is a source conflict (SOURCE_CONFLICT_OPEN), taking precedence over DISPUTED.",
   "EVIDENCE_SUPPORTED split into PRIMARY_EVIDENCE_SUPPORTED and SECONDARY_EVIDENCE_ONLY (technical review P2).",
+  "Evidence harmonisation (QC-12): one shared rule (evidence_classification.py) for validator and reconciler; effective status from the source-authentication register; proposals gain AUTHENTICATION_PENDING (PRIMARY 6 -> 5 after QC-11, then CP2-B-0109 SECONDARY -> AUTHENTICATION_PENDING).",
   "NOT_YET_REVIEWED (out of a reviewer's scope) is not a source gap; FULLY_EVIDENCE_SUPPORTED additionally requires that no reviewer recorded INTERPRETATION_REQUIRES_LEGAL_ADVICE, UNSUPPORTED, CONTRADICTORY_EVIDENCE, SOURCE_NOT_HELD or HISTORICAL_VERSION_UNRESOLVED."
  ],
  "final": {

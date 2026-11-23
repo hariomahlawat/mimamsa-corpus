@@ -49,7 +49,7 @@ The sample is `COORDINATION/CALIBRATION-01/calibration_package.csv`, unchanged: 
 | # | Deliverable | Location |
 | --- | --- | --- |
 | 1 | 46-record substantive review: propositions and per-record results | `propositions.csv`, `reconciliation/record_scorecard.csv`, `reconciliation/proposition_matrix.csv` |
-| 2 | Independent reviewer findings and reconciliation | `reviews/{A,B,C,D}/` (findings, READMEs, page-image checks A/C); `reconciliation/disagreements.csv`, `reconciliation/coordinator_qc.csv` (QC-01..10), `reconciliation/rule_sensitivity.json` (pre-registered vs final rule) |
+| 2 | Independent reviewer findings and reconciliation | `reviews/{A,B,C,D}/` (findings, READMEs, page-image checks A/C); `reconciliation/disagreements.csv`, `reconciliation/coordinator_qc.csv` (QC-01..14), `reconciliation/rule_sensitivity.json` (pre-registered vs final rule) |
 | 3 | Proposed corrections, before and after, with evidence | `proposals/correction_proposals.csv`, `proposals/proposed_versions.jsonl` (originals unchanged) |
 | 4 | Cross-volume missing-link and contradiction register | `registers/cross_volume_register.csv` (with D's `reviews/D/cross_volume_register.csv`) |
 | 5 | Acquisition-readiness matrix | `registers/acquisition_readiness/` |

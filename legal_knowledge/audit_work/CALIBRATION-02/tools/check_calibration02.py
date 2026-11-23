@@ -94,7 +94,8 @@ def check(require=(), verify_root=None):
                 st, detail = ev.classify_finding(d)
                 if st in EC.NOT_EFFECTIVE_PRIMARY:
                     warn.append(f"{rv} {d['finding_id']} claimed VERIFIED; effective {st} ({detail}); claim preserved, not counted as primary")
-    print(f"propositions={len(pid)} reviewers={found} errors={len(err)} warnings={len(warn)} effective_status_of_VERIFIED_claims={dict(sorted(effective.items()))}")
+    print(f"propositions={len(pid)} reviewers={found} errors={len(err)} warnings={len(warn)} effective_status_of_VERIFIED_claims={dict(sorted(effective.items()))}"
+          + (f" files_hashed={sum(1 for h in ev._hash_cache.values() if h)} files_missing={sum(1 for h in ev._hash_cache.values() if h is None)}" if verify_root else ""))
     for w in warn: print("WARNING", w)
     for e in err[:200]: print("ERROR", e)
     return 1 if err else 0

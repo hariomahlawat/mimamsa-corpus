@@ -83,7 +83,8 @@ def main():
                    "legal_status": "NOT_LEGALLY_APPROVED",
                    "changes": [{"proposition_id": c["proposition_id"], "original_text_verbatim": c["original_text_verbatim"],
                                 "proposed_text_or_action": c["proposed_text_or_action"], "severity": c["severity"],
-                                "support_status": c["support_status"], "proposal_id": c["proposal_id"], "reviewer": c["reviewer"],
+                                "support_status": c["support_status"], "claimed_evidence_state": c["claimed_evidence_state"],
+                                "effective_evidence_status": c["effective_evidence_status"], "proposal_id": c["proposal_id"], "reviewer": c["reviewer"],
                                 "source_sha256": c["source_sha256"], "locator": c["locator"]} for c in items]}
             f.write(json.dumps(obj, ensure_ascii=False, sort_keys=True) + "\n")
     # adviser questions
