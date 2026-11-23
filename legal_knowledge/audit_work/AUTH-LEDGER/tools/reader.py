@@ -18,7 +18,7 @@ import pins  # noqa: E402
 import rules_v1 as R  # noqa: E402
 
 OUT_NAMES = ["source_copy_register.csv", "source_master_register.csv", "corpus_crosswalk.csv", "coverage_summary.json",
-             "source_states.csv", "transitions.csv", "newly_withdrawn.csv"]
+             "source_states.csv", "transitions.json", "newly_withdrawn.json"]  # logs are JSON arrays (may be empty; CSV must not be header-only)
 FROZEN_EQUAL = {"source_copy_register.csv", "source_master_register.csv", "corpus_crosswalk.csv", "coverage_summary.json"}
 
 
@@ -163,7 +163,7 @@ def effective_state(root=PKG, as_of=None):
         "corpus_crosswalk.csv": B.csv_text(B.COLS["corpus_crosswalk.csv"], cw),
         "coverage_summary.json": json.dumps(summary(B, master, copies, cw, out), indent=1, sort_keys=True) + "\n",
         "source_states.csv": csv_text(["source_id", "frozen_holding_state", "effective_holding_state", "basis"], states),
-        "transitions.csv": csv_text(["version", "entry_id", "entry_type", "sha256", "effect", "before", "after"], transitions),
-        "newly_withdrawn.csv": csv_text(["version", "entry_id", "target_entry_id", "sha256", "withdrawal_reason", "resulting_state"], withdrawn),
+        "transitions.json": json.dumps(transitions, indent=1) + "\n",
+        "newly_withdrawn.json": json.dumps(withdrawn, indent=1) + "\n",
     }
     return texts, lines

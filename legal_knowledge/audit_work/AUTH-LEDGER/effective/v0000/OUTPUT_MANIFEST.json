@@ -1,9 +1,9 @@
 {
  "corpus_crosswalk.csv": "5fae890a493eea2050488a05e54547c1f537f346e348b8e55d7c5fc12f95efa8",
  "coverage_summary.json": "bfbd848cf8923add75fa9dcb59c74dc26c10b63e932d6986a145bede5edb0bda",
- "newly_withdrawn.csv": "ab7f7915e6fdba7e94941b740dab922c114c5ea9c68d8a6127d43f462f785213",
+ "newly_withdrawn.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
  "source_copy_register.csv": "415c85f4a2434dfbdd9e0ea0c35a3c0abbb9d64b9481c8b043c8256d145ff73b",
  "source_master_register.csv": "d4c4b9b21bcf18c607856873bb2beb9aa7db5bc5141ee2b8848c5f7be4104261",
  "source_states.csv": "4d871c8fd0dd880fe9130e9407ee02091f8fa72b4dfd656a8599c7e21b22b0fa",
- "transitions.csv": "131db3ea8fa63f777dc160ee752c0ec31c94371cc25855447cbb72d155598c02"
+ "transitions.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
 }

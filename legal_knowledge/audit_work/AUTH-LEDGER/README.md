@@ -15,7 +15,7 @@
 | `ledger/manifest.jsonl`, `ledger/HEAD` | hash-chained manifest; currently only the **genesis line (version 0)** |
 | `ledger/vNNNN.csv` | immutable entry files (none yet) |
 | `decisions/` | committed owner decision records and reviewer reports (none yet) |
-| `corrections/notes.csv` | documentary corrections to frozen texts (header only; none recorded yet) |
+| `corrections/` | documentary corrections to frozen texts (none recorded yet; `notes.csv` is created with the first note) |
 | `effective/v0000/` | derived outputs of version 0, pinned by `effective_sha256` in the genesis line |
 | `tools/` | `rules_v1.py` (copy-status rule), `strength.py` (evidence checks), `ledger.py` (chain, approvals, entry semantics), `reader.py` (effective state), `pins.py`, `auth_ledger.py` (command line) |
 
@@ -35,4 +35,4 @@ python -m unittest tests.test_legal_audit_auth_ledger
 - Copy statuses are computed by the overlay's own rule (`rules_v1.py`), not by the frozen Cycle 4 module. A test proves the overlay rule gives the frozen rule's status for every one of the 328 held sha256 values.
 - **Isaac stays AUTHENTICATION_PENDING.** The 13 Cycle 4 register rows keep their treatment, and none of the 32 C6-01 proposals is active.
 - `source_states.csv` is a new representation. It holds one row per source with the frozen and effective holding states and the basis. At version 0 the two states are equal for every source (tested).
-- `transitions.csv` and `newly_withdrawn.csv` are empty.
+- `transitions.json` and `newly_withdrawn.json` are empty arrays.

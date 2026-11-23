@@ -16,7 +16,7 @@ import rules_v1 as R  # noqa: E402
 import strength  # noqa: E402
 import auth_ledger as CLI  # noqa: E402
 
-EXPECTED_HEAD = "0 c62c7769d6f5df66ea2afce5a494b81b6b9dbc945a3a86fe4baf9a9b3deda3ac"  # a ledger change must change this too
+EXPECTED_HEAD = "0 fb38d0b31234a8fa6f41156dab9b2ed8463c2c8c55284c4c142ce78b54b35fa8"  # a ledger change must change this too
 ISAAC = "3f49a31464fec174cdbff5d9e194fa888ca00529b6246eacdc8ac2368eab4653"
 DRAFT = {r["sha256"]: r for r in csv.DictReader(open(AW / "C6-01-PROVENANCE/addendum/authentication_addendum_v1_draft.csv", encoding="utf-8"))}
 PROPS = {r["sha256"]: r for r in csv.DictReader(open(AW / "C6-01-PROVENANCE/registers/source_authentication_proposals.csv", encoding="utf-8"))}
@@ -134,8 +134,8 @@ class Baseline(unittest.TestCase):
             self.assertEqual(v0()[k], (AW / "SOURCE-LIBRARY-C5/registers" / k).read_text(encoding="utf-8"), k)
         st = rows(v0()["source_states.csv"])
         self.assertTrue(all(r["frozen_holding_state"] == r["effective_holding_state"] for r in st))
-        self.assertEqual(rows(v0()["transitions.csv"]), [])
-        self.assertEqual(rows(v0()["newly_withdrawn.csv"]), [])
+        self.assertEqual(json.loads(v0()["transitions.json"]), [])
+        self.assertEqual(json.loads(v0()["newly_withdrawn.json"]), [])
 
     def test_rule_v1_equals_frozen_cycle4_rule_on_every_held_sha(self):
         reader.frozen_builder()
@@ -415,8 +415,8 @@ class Transitions(unittest.TestCase):
         s = self.t.state()
         for k in reader.FROZEN_EQUAL:
             self.assertEqual(s[k], v0()[k], k)
-        self.assertEqual(len(rows(s["newly_withdrawn.csv"])), 1)
-        self.assertEqual(len(rows(s["transitions.csv"])), 2)  # the record stays
+        self.assertEqual(len(json.loads(s["newly_withdrawn.json"])), 1)
+        self.assertEqual(len(json.loads(s["transitions.json"])), 2)  # the record stays
 
     def test_withdraw_then_new_add(self):
         self.t.add_version([entry_from_draft(DHARAMVIR, 1)])
