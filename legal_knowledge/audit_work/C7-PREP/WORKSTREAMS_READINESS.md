@@ -63,3 +63,20 @@
 - **Tranche 2, Supreme Court:** the 8 primary court entries, which carry 7 case anchors. If the owner adopts policy B2, each needs a C6-style CONFIRMED identity check or a reviewer statement.
 - **Non-primary entries** (4) are recorded only after the owner adopts the fidelity table, and they never anchor.
 - **Not entries:** the RS papers-laid record (WITHHELD) and Rajbir C2.
+
+## Update for AUTH-LEDGER-02 (hardening branch; still preparation only)
+- **C6-02.**
+  - Unchanged: 18 of 20 files pinned; the 2 DPP Amendment Act 2000 files unpinned.
+  - **P-C7-02-META** stays as proposed above: metadata-only access for the two named identifiers; JSON only; size cap; no redirects followed; fail closed. It is **not** executed.
+  - No download, no crawler or robots change, and no `config/` or security change was made.
+  - Locators of any future acquisition must pass the AUTH-LEDGER-02 strict parser before they can be first-class evidence.
+- **C6-03.** Unchanged. The DESW package and its blockers (allow-list, robots 403) are preserved. The incomplete ER 2023 copy (`29f6fa2c…`) stays non-primary and distinct from the full publication. No DESW download is authorised.
+- **C6-04.** Unchanged:
+  - The acquisition planning covers RA 1987, RA 1962, RMSAF, the named Army Orders and the D&V handbook.
+  - The handbook stays an unverified discovery lead, and the Scribd copy is not imported.
+  - Nothing unpublished or access-controlled is requested without an approved scope and an authorised custodian route.
+  - No correspondence.
+- **C6-05.** Unchanged. `AUTH-LEDGER/tranches/T2-SUPREME-COURT/EVIDENCE_REVIEW_PLAN.md` adds R-T2-7: provenance of a judgment copy never settles subsequent treatment. One example is Dharamvir Singh (2013) and the later ruling on the 2008 Rules. That stays an adviser question.
+- **Tranches.**
+  - Tranche 1 is now prepared in `AUTH-LEDGER/tranches/T1-GAZETTE/`: 18 ready (S.R.O. 34/1963 for copy provenance only) and 2 born-digital rows held for the fidelity decision. The first build's "6 needing an identifier transcription" was corrected after Fable review F-02.
+  - Tranche 2 has a review plan with an open owner decision on JUDIS renditions (P-D3 in `AUTH-LEDGER/RULE_DECISION_PACK.md`).

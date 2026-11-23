@@ -156,7 +156,7 @@ def summary(B, master, copies, cw, out):
     }
 
 
-def effective_state(root=PKG, as_of=None):
+def effective_state(root=PKG, as_of=None, require_binding=True):
     """Return {output name: text} for the ledger at `root` as of version `as_of` (default: HEAD)."""
     B = frozen_builder(root)
     held_c5, by_name = defaultdict(list), {}
@@ -174,7 +174,7 @@ def effective_state(root=PKG, as_of=None):
     c5_copies = {r["sha256"]: r for r in read_csv(AW / "SOURCE-LIBRARY-C5/registers/source_copy_register.csv")}
     held_c4 = _held_index()
     ctx = L.Context(held_c4, baseline, c5_copies, master_by)
-    eff, transitions, withdrawn, lines = L.apply_ledger(root, ctx, as_of)
+    eff, transitions, withdrawn, lines = L.apply_ledger(root, ctx, as_of, require_binding)
     try:
         copies = copy_rows(B, frozen_master, held_c5, held_c4, eff)
     except R.RuleError as e:

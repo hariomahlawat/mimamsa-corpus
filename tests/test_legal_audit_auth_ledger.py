@@ -80,7 +80,7 @@ class Synthetic:
                 name = f"D-v{v:04d}.md" if dec == "APPROVED" else f"D-v{v:04d}-{dec.lower()}.md"
                 pairs = ";".join(f"{e['entry_id']}={e['sha256']}:{L.entry_digest(e)}" for e in group)
                 ref, h = self.write_record(name, f"decision_id: {name[:-3]}\ndecision: {dec}\nledger_version: {v:04d}\nentries: {pairs}\n"
-                                                 f"decided_by: {decided_by}\ndate: 2026-11-23\n")
+                                                 f"decided_by: {decided_by}\ndate: 2026-11-23\nscope: AUTHENTICATION_PROVENANCE_ONLY\nlegal_approval: NOT_GIVEN\n")
                 decisions[ref] = h
                 for e in group:
                     if not e.get("decision_record_ref"):
@@ -89,7 +89,7 @@ class Synthetic:
         if approved and review:
             pairs = ";".join(f"{e['entry_id']}={e['sha256']}:{L.entry_digest(e)}" for e in approved)
             ref, h = self.write_record(f"R-v{v:04d}.md", f"review_id: R-v{v:04d}\nverdict: ACCEPT\nledger_version: {v:04d}\nentries: {pairs}\n"
-                                                           f"reviewer: {reviewer}\ndate: 2026-11-23\n{review_extra}")
+                                                           f"reviewer: {reviewer}\ndate: 2026-11-23\nscope: TECHNICAL_AND_EVIDENCE_REVIEW\nlegal_approval: NOT_GIVEN\n{review_extra}")
             reviews[ref] = h
             for e in approved:
                 if not e.get("reviewer_ref"):
@@ -108,8 +108,9 @@ class Synthetic:
         (self.dir / "ledger/HEAD").write_text(f"{v} {common.sha256_text(s)}\n", encoding="utf-8")
         return v
 
-    def state(self, as_of=None):
-        texts, _ = reader.effective_state(self.dir, as_of)
+    def state(self, as_of=None, require_binding=False):
+        """Evidence-rule tests use the AUTH-LEDGER-01 activation semantics (no BIND line); Binding tests pass True."""
+        texts, _ = reader.effective_state(self.dir, as_of, require_binding)
         return texts
 
     def close(self):
@@ -435,14 +436,16 @@ class Controls(unittest.TestCase):
     def test_accept_with_conditions_needs_discharge(self):
         e = entry_from_draft(DHARAMVIR, 1)
         pairs = f"{e['entry_id']}={e['sha256']}:{L.entry_digest(e)}"
-        rref, rh = self.t.write_record("R-v0001.md", f"review_id: R-v0001\nverdict: ACCEPT_WITH_CONDITIONS\nledger_version: 0001\nentries: {pairs}\nreviewer: rev\ndate: 2026-11-23\n")
+        rref, rh = self.t.write_record("R-v0001.md", f"review_id: R-v0001\nverdict: ACCEPT_WITH_CONDITIONS\nledger_version: 0001\nentries: {pairs}\nreviewer: rev\ndate: 2026-11-23\n"
+                                                       "scope: TECHNICAL_AND_EVIDENCE_REVIEW\nlegal_approval: NOT_GIVEN\n")
         e["reviewer_ref"], e["reviewer_record_sha256"] = rref, rh
         self.reject([e], "requires conditions_status: DISCHARGED", review=False, tamper=lambda line: line["reviews"].update({rref: rh}))
 
     def test_review_reject_verdict(self):
         e = entry_from_draft(DHARAMVIR, 1)
         pairs = f"{e['entry_id']}={e['sha256']}:{L.entry_digest(e)}"
-        rref, rh = self.t.write_record("R-v0001.md", f"review_id: R-v0001\nverdict: REJECT\nledger_version: 0001\nentries: {pairs}\nreviewer: rev\ndate: 2026-11-23\n")
+        rref, rh = self.t.write_record("R-v0001.md", f"review_id: R-v0001\nverdict: REJECT\nledger_version: 0001\nentries: {pairs}\nreviewer: rev\ndate: 2026-11-23\n"
+                                                       "scope: TECHNICAL_AND_EVIDENCE_REVIEW\nlegal_approval: NOT_GIVEN\n")
         e["reviewer_ref"], e["reviewer_record_sha256"] = rref, rh
         self.reject([e], "does not support approval", review=False, tamper=lambda line: line["reviews"].update({rref: rh}))
 
@@ -506,7 +509,7 @@ class Controls(unittest.TestCase):
         with self.assertRaisesRegex(common.LedgerError, "authenticity 'SECONDARY'"):
             strength.first_class("PILOT-01/sources/judgment-auditor.json#S-JUD-008", ISAAC)
         self.assertFalse(strength.host_ok("https://www.livelaw.in/x", "PRIMARY_OFFICIAL_COURT_COPY"))
-        self.assertTrue(strength.host_ok("https://api.sci.gov.in/x.pdf", "PRIMARY_OFFICIAL_COURT_COPY"))
+        self.assertTrue(strength.host_ok("https://api.sci.gov.in/jonew/judis/1.pdf", "PRIMARY_OFFICIAL_COURT_COPY"))
         self.assertFalse(strength.host_ok("https://evilsci.gov.in.example.com/x", "PRIMARY_OFFICIAL_COURT_COPY"))
         held = reader._held_index()
         self.assertEqual(R.copy_status(ISAAC, held[ISAAC], {"authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "NON_PRIMARY_OFFICIAL_COURT_RENDITION",
@@ -734,7 +737,9 @@ class ReReview(unittest.TestCase):
         self.assertFalse(strength.host_ok("https://x.gov.in@evil.example/x", "PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN"))
         self.assertFalse(strength.host_ok("https://api.sci.gov.in:pw@evil.example/x", "PRIMARY_OFFICIAL_COURT_COPY"))
         self.assertFalse(strength.host_ok("https://archive.org/download/../web/x", "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE"))
-        self.assertTrue(strength.host_ok("https://api.sci.gov.in:443/x.pdf", "PRIMARY_OFFICIAL_COURT_COPY"))
+        # AUTH-LEDGER-02 (D-01 hardening): an explicit ':443' is now rejected as a second spelling of the URL
+        self.assertFalse(strength.host_ok("https://api.sci.gov.in:443/x.pdf", "PRIMARY_OFFICIAL_COURT_COPY"))
+        self.assertTrue(strength.host_ok("https://api.sci.gov.in/jonew/judis/1.pdf", "PRIMARY_OFFICIAL_COURT_COPY"))
         self.assertTrue(strength.host_ok("https://indiacode.gov.in/server/api/core/bitstreams/x/content", "PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN"))
 
     def test_n04_record_parsing(self):
@@ -1041,12 +1046,21 @@ class Operational(unittest.TestCase):
             socket.socket = orig
 
     def test_no_network_or_ai_imports(self):
-        bad = ("urllib", "requests", "http.client", "httpx", "socket", "anthropic", "openai", "transformers")
+        # urllib.parse (pure RFC 3986 string parsing, used by urlcheck.py for D-01) is the only urllib module allowed;
+        # every other urllib import, and any network or AI client, fails this test.
+        import re as _re
+        bad = ("requests", "http.client", "httpx", "socket", "anthropic", "openai", "transformers", "urllib3", "ftplib", "smtplib")
         for f in (PKG / "tools").glob("*.py"):
             src = f.read_text(encoding="utf-8")
             for b in bad:
                 self.assertNotIn(f"import {b}", src, f.name)
                 self.assertNotIn(f"from {b}", src, f.name)
+            for m in _re.finditer(r"(?m)^\s*(?:import|from)\s+(urllib\S*)", src):
+                self.assertEqual(m.group(1), "urllib.parse", f.name)
+            if "subprocess" in src:  # only binding.py runs a subprocess: local git with every transport protocol disabled
+                self.assertEqual(f.name, "binding.py")
+                self.assertIn('"protocol.allow=never"', src)
+                self.assertIn('GIT_NO_LAZY_FETCH="1"', src)
 
     def test_historical_files_unchanged_after_runs(self):
         reader.effective_state(PKG, 0)
@@ -1058,3 +1072,837 @@ class Operational(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# ---------------------------------------------------------------------------------------------------------------------
+# AUTH-LEDGER-02: URL validation hardening (Fable D-01), repository binding of approvals, approval-record integrity.
+# ---------------------------------------------------------------------------------------------------------------------
+import urlcheck  # noqa: E402
+import binding  # noqa: E402
+from unittest import mock  # noqa: E402
+
+GAZ = "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE"
+COURT = "PRIMARY_OFFICIAL_COURT_COPY"
+GOVPUB = "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY"
+ALL_CLASSES = sorted(strength.CLASS_HOSTS)
+D01 = "https://archive.org/download/example/%2e%2e/other"
+HOSTILE = [
+    D01, "https://archive.org/download/example/%2E%2E/other", "https://archive.org/download/x/%2e/y", "https://archive.org/download/x/.%2e/y",
+    "https://archive.org/download/x/..%2Fy.pdf", "https://archive.org/download/x/%2F..%2Fy.pdf", "https://archive.org/download/x%5C..%5Cy.pdf",
+    "https://archive.org/download/x/%252e%252e/y.pdf", "https://archive.org/download/x/%25252e/y.pdf", "https://archive.org/download/x/%zz.pdf",
+    "https://archive.org/download/x/%2.pdf", "https://archive.org/download/x/y.pdf%", "https://archive.org/download/x/%00.pdf",
+    "https://archive.org/download/x/y%0A.pdf", "https://archive.org/download/x/y%7F.pdf", "https://archive.org/download/x/y%3B.pdf",
+    "https://archive.org/download/x/../../etc/y.pdf", "https://archive.org/download/x/./y.pdf", "https://archive.org/download//x/y.pdf",
+    "https://archive.org/download/x/..;/y.pdf", "https://archive.org/download/x/y.pdf;jsessionid=1", "https://archive.org/download/x\\..\\y.pdf",
+    "https://archive.org/download/x/y .pdf", "https://archive.org/download/x/é.pdf", "https://archive.org/download/x/y.pdf\n",
+    "https://archive.org/download/x/y.pdf#frag", "https://archive.org/download/x/y.pdf?", "https://archive.org/download/%78/y.pdf",
+    "https://archive.org/download/x/%c3%a9.pdf", "https://archive.org:443/download/x/y.pdf", "https://archive.org:/download/x/y.pdf",
+    "https://archive.org:0443/download/x/y.pdf", "https://archive.org:8443/download/x/y.pdf", "https://user@archive.org/download/x/y.pdf",
+    "https://archive.org@evil.example/download/x/y.pdf", "https://archive.org:pw@evil.example/download/x/y.pdf", "https://ARCHIVE.org/download/x/y.pdf",
+    "HTTPS://archive.org/download/x/y.pdf", "http://archive.org/download/x/y.pdf", "https:/archive.org/download/x/y.pdf", "//archive.org/download/x/y.pdf",
+    "https:///download/x/y.pdf", "https://archive.org./download/x/y.pdf", "https://archive..org/download/x/y.pdf", "https://[::1]/download/x/y.pdf",
+    "https://127.0.0.1/download/x/y.pdf", "https://arch_ive.org/download/x/y.pdf", "https://web.archive.org/web/2020/https://sci.gov.in/x.pdf",
+    "https://archive.org/download/", "https://archive.org/download/x", "https://archive.org/download/x/", "https://archive.org/details/x/",
+    "https://archive.org/details/x/page/2", "https://archive.org/search?query=x", "https://archive.org/download/.x/y.pdf",
+    "https://sci.gov.in.evil.example/x.pdf", "https://evilsci.gov.in.example/x.pdf", "https://api.sci.gov.in/", "https://api.sci.gov.in",
+    "https://api.sci.gov.in/jonew/judis/%38566.pdf", "https://api.sci.gov.in/jonew//judis/8566.pdf", "https://desw.gov.in/sites//a.pdf", "https://api.sci.gov.in/jonew/judis/8566.pdf?#", "javascript:alert(1)", "", None, 42,
+    "https://archive.org/download/x/" + "a" * 2100,
+    # AUTH-LEDGER-02 review fixes (Fable F-03, F-06, F-07, F-15; F-11 survivors)
+    "https://gov.in/x.pdf", "https://nic.in/x.pdf", "https://desw.gov.in/sites/", "https://archive.org/download/x/y.pdf?a=1",
+    "https://archive.org/details/x?view=theater", "https://archive.org/download/x/%EF%BC%8E%EF%BC%8E/y.pdf", "https://archive.org/download/x/%EF%BC%8F.pdf",
+    "https://archive.org/download/x/..%20/y.pdf", "https://archive.org/download/x/a%E2%80%AEb.pdf", "https://archive.org/download/x/a%C2%85b.pdf",
+    "https://archive.org/download/x/a%FFb.pdf", "https://desw.gov.in/a.pdf?q=%FF", "https://1.0x7f/x.pdf", "https://x.gov.in.1/x.pdf",
+    "https://-api.sci.gov.in/x.pdf", "https://api_x.sci.gov.in/x.pdf", "https://api.sci.gov.in/x%3F.pdf", "https://api.sci.gov.in/x%23.pdf",
+]
+LEGIT = [
+    ("https://archive.org/download/in.gazette.central.w.1962-01-06.85365/85365.pdf", GAZ),
+    ("https://archive.org/details/in.gazette.central.w.1963-01-19.84713", GAZ),
+    ("https://archive.org/download/in.gazette.central.e.2018-02-20.183010/183010.pdf", GAZ),
+    ("https://api.sci.gov.in/jonew/judis/8566.pdf", COURT),
+    ("https://api.sci.gov.in/supremecourt/2017/27850/27850_2017_9_1502_17253_Judgement_03-Oct-2019.pdf", COURT),
+    ("https://indiacode.gov.in/server/api/core/bitstreams/6a3e7da4-d157-4ec6-a65a-ad6700d202df/content", GOVPUB),
+    ("https://desw.gov.in/sites/default/files/2026-10/Entitlement%20Rules%202023.pdf", GOVPUB),
+]
+
+
+class UrlSecurity(unittest.TestCase):
+    def test_d01_reproduction_is_rejected(self):
+        self.assertFalse(strength.host_ok(D01, GAZ))
+        self.assertRegex(strength.locator_problem(D01, GAZ), r"percent-encoded unreserved character %2e")
+
+    def test_every_hostile_locator_is_rejected_for_every_class(self):
+        for u in HOSTILE:
+            for cls in ALL_CLASSES:
+                self.assertFalse(strength.host_ok(u, cls), (u, cls))
+                self.assertNotEqual(strength.locator_problem(u, cls), "", (u, cls))
+
+    def test_known_legitimate_locators_pass_for_their_class(self):
+        for u, cls in LEGIT:
+            self.assertEqual(strength.locator_problem(u, cls), "", u)
+
+    def test_class_host_restrictions_still_apply(self):
+        self.assertFalse(strength.host_ok("https://api.sci.gov.in/jonew/judis/8566.pdf", GAZ))
+        self.assertFalse(strength.host_ok("https://archive.org/download/x/y.pdf", COURT))
+        self.assertFalse(strength.host_ok("https://indiacode.gov.in/x.pdf", COURT))
+        self.assertFalse(strength.host_ok("https://archive.org/download/x/y.pdf", "UNKNOWN_CLASS"))
+
+    def test_all_committed_locators_and_all_32_draft_locators_still_pass(self):
+        urls = {u for u, _ in strength.url_pairs()}
+        self.assertEqual(len(urls), 74)
+        self.assertEqual([u for u in urls if urlcheck.problem(u)], [])
+        for d in DRAFT.values():
+            url = strength._first_class(d["first_class_record_ref"], d["sha256"])[2]
+            self.assertEqual(strength.locator_problem(url, d["proposed_class"]), "", url)
+
+    def test_no_url_is_normalised_or_repaired(self):
+        for u in ("https://archive.org/download/x/y.pdf", "https://desw.gov.in/a%20b.pdf"):
+            host, segs, q = urlcheck.parse(u)
+            self.assertEqual("https://" + host + "/" + "/".join(segs), u)  # components reproduce the input exactly
+
+    def test_first_class_record_with_hostile_locator_is_refused(self):
+        d = DRAFT[GAZETTE_1962]
+        with mock.patch.object(strength, "_first_class", return_value=("RET", "FULL", D01)):
+            with self.assertRaisesRegex(common.LedgerError, r"rejected for class .*%2e"):
+                strength.first_class(d["first_class_record_ref"], GAZETTE_1962, GAZ)
+
+    def test_ledger_entry_with_hostile_locator_is_rejected(self):
+        t = Synthetic()
+        try:
+            e = entry_from_draft(GAZETTE_1962, 1, official_locator_recorded=D01)
+            t.add_version([e])
+            with mock.patch.object(strength, "_first_class", return_value=("RET", "FULL", D01)):
+                with self.assertRaisesRegex(common.LedgerError, r"rejected for class"):
+                    t.state()
+        finally:
+            t.close()
+
+    def test_version_zero_is_unchanged_by_the_hardening(self):
+        for k in reader.FROZEN_EQUAL:
+            self.assertEqual(v0()[k], (AW / "SOURCE-LIBRARY-C5/registers" / k).read_text(encoding="utf-8"))
+        self.assertEqual(L.head_value(PKG), EXPECTED_HEAD)
+
+
+def _git(cwd, *a):
+    p = subprocess.run(["git", "-C", str(cwd), *a], capture_output=True, text=True)
+    if p.returncode != 0:
+        raise AssertionError(f"git {a}: {p.stderr}")
+    return p.stdout.strip()
+
+
+class GitLedger(Synthetic):
+    """A Synthetic ledger that is also a git repository (local only), for BIND-line tests."""
+    def __init__(self):
+        super().__init__()
+        _git(self.dir, "init", "-q", "-b", "main")
+        _git(self.dir, "config", "user.email", "test@example.invalid")
+        _git(self.dir, "config", "user.name", "test")
+        _git(self.dir, "config", "commit.gpgsign", "false")
+        self.commit("genesis")
+
+    def commit(self, msg):
+        _git(self.dir, "add", "-A")
+        _git(self.dir, "commit", "-q", "--allow-empty", "-m", msg)
+        return _git(self.dir, "rev-parse", "HEAD")
+
+    def pr(self, entries, branch="pr1", **kw):
+        """Add a version on a branch, then merge it into main with an ordinary merge commit. Returns (head, merge)."""
+        _git(self.dir, "checkout", "-q", "-b", branch)
+        self.add_version(entries, **kw)
+        head = self.commit("version")
+        _git(self.dir, "checkout", "-q", "main")
+        _git(self.dir, "merge", "-q", "--no-ff", "-m", "merge", branch)
+        return head, _git(self.dir, "rev-parse", "HEAD")
+
+    def add_bind(self, head, merge, **over):
+        lines = L.read_manifest(self.dir)
+        v = len(lines)
+        b = {"binds_version": v - 1, "bound_line_sha256": common.sha256_text(L.canonical_line(lines[-1])), "repository": "owner/repo",
+             "pr_number": 7, "reviewed_head": head, "merge_commit": merge, "github_review_id": 123, "github_review_login": "owner-login",
+             "github_review_commit": head}
+        b.update(over)
+        prev = common.sha256_text((self.dir / "ledger/manifest.jsonl").read_text(encoding="utf-8").split("\n")[-2])
+        line = {"version": v, "prev": prev, "date": "2026-11-23", "rule_version": 1, "frozen_inputs_sha256": common.sha256_file(self.dir / "frozen_inputs.json"),
+                "file": None, "file_sha256": None, "decisions": {}, "reviews": {}, "effective_sha256": "", "note": "bind", "binding": b}
+        s = L.canonical_line(line)
+        with open(self.dir / "ledger/manifest.jsonl", "a", encoding="utf-8") as fh:
+            fh.write(s + "\n")
+        (self.dir / "ledger/HEAD").write_text(f"{v} {common.sha256_text(s)}\n", encoding="utf-8")
+        return v
+
+
+class Binding(unittest.TestCase):
+    def setUp(self):
+        self.t = GitLedger()
+
+    def tearDown(self):
+        self.t.close()
+
+    def bound(self):
+        head, merge = self.t.pr([entry_from_draft(GAZETTE_1962, 1)])
+        self.t.add_bind(head, merge)
+        self.t.commit("bind")
+        return head, merge
+
+    def bad(self, regex):
+        with self.assertRaisesRegex(common.LedgerError, regex):
+            self.t.state(require_binding=True)
+
+    def test_unbound_approved_version_is_pending_and_changes_nothing(self):
+        self.t.pr([entry_from_draft(GAZETTE_1962, 1)])
+        texts = self.t.state(require_binding=True)
+        for k in reader.FROZEN_EQUAL:
+            self.assertEqual(texts[k], v0()[k], k)
+        self.assertEqual([x["effect"] for x in json.loads(texts["transitions.json"])], ["PENDING_REPOSITORY_BINDING"])
+
+    def test_verified_bind_line_activates_exactly_the_reviewed_version(self):
+        self.bound()
+        texts = self.t.state(require_binding=True)
+        legacy = self.t.state(as_of=1, require_binding=False)
+        for k in ("source_copy_register.csv", "source_master_register.csv", "corpus_crosswalk.csv", "coverage_summary.json"):
+            self.assertEqual(texts[k], legacy[k], k)
+        tr = json.loads(texts["transitions.json"])
+        self.assertEqual([(x["effect"], x["bound_by"]) for x in tr], [("APPLIED", 2)])
+        self.assertNotEqual(texts["source_copy_register.csv"], v0()["source_copy_register.csv"])
+
+    def test_history_is_reproducible_before_the_bind(self):
+        self.bound()
+        self.assertEqual(self.t.state(as_of=1, require_binding=True)["source_copy_register.csv"], v0()["source_copy_register.csv"])
+
+    def test_report_marks_github_review_as_asserted_not_verified(self):
+        self.bound()
+        lines = L.read_manifest(self.t.dir)
+        rep = binding.verify(self.t.dir, lines[2], lines, L.canonical_line)
+        self.assertEqual(rep["git"], "VERIFIED_OFFLINE")
+        self.assertTrue(rep["github_review"].startswith("ASSERTED_NOT_VERIFIED_OFFLINE"))
+
+    def test_wrong_reviewed_head_is_rejected(self):
+        head, merge = self.t.pr([entry_from_draft(GAZETTE_1962, 1)])
+        genesis = _git(self.t.dir, "rev-list", "--max-parents=0", "HEAD")
+        self.t.add_bind(genesis, merge)
+        self.bad("second parent .* is not reviewed_head")
+
+    def test_review_of_an_earlier_commit_does_not_cover_later_pushes(self):
+        head, merge = self.t.pr([entry_from_draft(GAZETTE_1962, 1)])
+        self.t.add_bind(head, merge, github_review_commit=_git(self.t.dir, "rev-parse", f"{head}^"))
+        self.bad("review must be of reviewed_head")
+
+    def test_fast_forward_or_direct_commit_is_not_a_reviewed_merge(self):
+        self.t.add_version([entry_from_draft(GAZETTE_1962, 1)])
+        c = self.t.commit("direct commit to main")
+        self.t.add_bind(c, c)
+        self.bad("fast-forward")
+        self.t.close()
+        self.t = GitLedger()
+        self.t.add_version([entry_from_draft(GAZETTE_1962, 1)])
+        c = self.t.commit("direct")
+        self.t.add_bind(c, _git(self.t.dir, "rev-parse", "HEAD^"))
+        self.bad(r"has [01] parent\(s\)")
+
+    def test_version_already_in_the_base_did_not_enter_through_the_merge(self):
+        self.t.add_version([entry_from_draft(GAZETTE_1962, 1)])
+        self.t.commit("direct to main")
+        _git(self.t.dir, "checkout", "-q", "-b", "side")
+        head = self.t.commit("empty side commit")
+        _git(self.t.dir, "checkout", "-q", "main")
+        _git(self.t.dir, "merge", "-q", "--no-ff", "-m", "merge", "side")
+        self.t.add_bind(head, _git(self.t.dir, "rev-parse", "HEAD"))
+        self.bad("did not enter through this merge")
+
+    def test_change_between_review_and_merge_is_rejected(self):
+        _git(self.t.dir, "checkout", "-q", "-b", "pr1")
+        self.t.add_version([entry_from_draft(GAZETTE_1962, 1)])
+        head = self.t.commit("reviewed")
+        _git(self.t.dir, "checkout", "-q", "main")
+        _git(self.t.dir, "merge", "-q", "--no-ff", "--no-commit", "pr1")
+        (self.t.dir / "decisions/R-v0001.md").write_text("altered in the merge\n", encoding="utf-8")
+        merge = self.t.commit("merge with an edit")
+        self.t.add_bind(head, merge)
+        self.bad("R-v0001.md (missing or modified|differs between reviewed_head and merge_commit)")
+
+    def test_merge_content_must_equal_reviewed_content_even_if_later_restored(self):
+        _git(self.t.dir, "checkout", "-q", "-b", "pr1")
+        self.t.add_version([entry_from_draft(GAZETTE_1962, 1)])
+        head = self.t.commit("reviewed")
+        rec = self.t.dir / "decisions/R-v0001.md"
+        good = rec.read_bytes()
+        _git(self.t.dir, "checkout", "-q", "main")
+        _git(self.t.dir, "merge", "-q", "--no-ff", "--no-commit", "pr1")
+        rec.write_text("different content at the merge\n", encoding="utf-8")
+        merge = self.t.commit("merge with an edit")
+        rec.write_bytes(good)
+        self.t.commit("restore the reviewed bytes afterwards")
+        self.t.add_bind(head, merge)
+        self.bad("differs between reviewed_head and merge_commit")
+
+    def test_reviewed_head_must_end_exactly_at_the_bound_version(self):
+        _git(self.t.dir, "checkout", "-q", "-b", "pr1")
+        self.t.add_version([entry_from_draft(GAZETTE_1962, 1)])
+        self.t.add_bind("a" * 40, "b" * 40)  # a self-binding line smuggled into the reviewed PR
+        head = self.t.commit("version plus bind")
+        _git(self.t.dir, "checkout", "-q", "main")
+        _git(self.t.dir, "merge", "-q", "--no-ff", "-m", "merge", "pr1")
+        merge = _git(self.t.dir, "rev-parse", "HEAD")
+        mf = self.t.dir / "ledger/manifest.jsonl"
+        mf.write_text("\n".join(mf.read_text(encoding="utf-8").split("\n")[:2]) + "\n", encoding="utf-8")
+        (self.t.dir / "ledger/HEAD").write_text(f"1 {common.sha256_text(mf.read_text(encoding='utf-8').split(chr(10))[1])}\n", encoding="utf-8")
+        self.t.add_bind(head, merge)
+        self.bad("does not end exactly at version 1")
+
+    def test_merge_must_be_in_the_checked_out_history(self):
+        head, merge = self.t.pr([entry_from_draft(GAZETTE_1962, 1)])
+        _git(self.t.dir, "checkout", "-q", "pr1")
+        self.t.add_bind(head, merge)
+        self.bad("not in the history of the checked-out HEAD")
+
+    def test_unknown_commit_and_no_git_fail_closed(self):
+        head, merge = self.t.pr([entry_from_draft(GAZETTE_1962, 1)])
+        self.t.add_bind(head, "c" * 40)
+        self.bad("not in the local history")
+        shutil.rmtree(self.t.dir / ".git")
+        self.bad("no git history")
+
+    def test_shallow_clone_fails_closed(self):
+        self.bound()
+        d = Path(tempfile.mkdtemp(prefix="authledger_shallow_"))
+        try:
+            subprocess.run(["git", "clone", "-q", "--depth", "1", f"file://{self.t.dir}", str(d / "c")], check=True, capture_output=True)
+            with self.assertRaisesRegex(common.LedgerError, "shallow clone"):
+                reader.effective_state(d / "c", None, True)
+        finally:
+            shutil.rmtree(d, ignore_errors=True)
+
+    def test_entry_version_cannot_be_appended_before_the_previous_is_bound(self):
+        self.t.pr([entry_from_draft(GAZETTE_1962, 1)])
+        self.t.add_version([entry_from_draft(DHARAMVIR, 1, version=2)])
+        self.bad("appended before version 1 was bound")
+
+    def test_bind_line_must_bind_the_immediately_preceding_entry_version(self):
+        head = _git(self.t.dir, "rev-parse", "HEAD")
+        lines = L.read_manifest(self.t.dir)
+        with self.assertRaisesRegex(common.LedgerError, "binds nothing pending"):
+            self.t.add_bind(head, head, binds_version=1)
+            self.t.state(require_binding=True)
+
+    def test_tampered_binding_fields_are_rejected(self):
+        head, merge = self.t.pr([entry_from_draft(GAZETTE_1962, 1)])
+        for over, rx in (({"bound_line_sha256": "0" * 64}, "bound_line_sha256 does not match"), ({"github_review_login": "bad login"}, "not a GitHub login"),
+                         ({"github_review_id": 0}, "positive integer"), ({"pr_number": True}, "positive integer"), ({"merge_commit": merge[:12]}, "40-hex"),
+                         ({"repository": "no-slash"}, "owner/name")):
+            t = GitLedger()
+            try:
+                h2, m2 = t.pr([entry_from_draft(GAZETTE_1962, 1)])
+                o = {k: (m2[:12] if v == merge[:12] else v) for k, v in over.items()}
+                t.add_bind(h2, m2, **o)
+                with self.assertRaisesRegex(common.LedgerError, rx):
+                    t.state(require_binding=True)
+            finally:
+                t.close()
+
+    def test_binding_keys_are_exact(self):
+        with self.assertRaisesRegex(common.LedgerError, "binding keys"):
+            binding.check_shape({"binds_version": 1})
+
+    def test_bind_line_is_refused_in_legacy_mode(self):
+        self.bound()
+        with self.assertRaisesRegex(common.LedgerError, "only with require_binding"):
+            self.t.state(require_binding=False)
+
+    def test_bind_line_cannot_carry_records(self):
+        head, merge = self.t.pr([entry_from_draft(GAZETTE_1962, 1)])
+        self.t.add_bind(head, merge)
+        mf = self.t.dir / "ledger/manifest.jsonl"
+        ls = mf.read_text(encoding="utf-8").split("\n")
+        d = json.loads(ls[2])
+        d["decisions"] = {"decisions/D-v0001.md": "0" * 64}
+        ls[2] = L.canonical_line(d)
+        mf.write_text("\n".join(ls), encoding="utf-8")
+        (self.t.dir / "ledger/HEAD").write_text(f"2 {common.sha256_text(ls[2])}\n", encoding="utf-8")
+        self.bad("BIND line carries no entry file and no records")
+
+    def test_cli_and_committed_ledger_use_binding_mode(self):
+        import inspect
+        self.assertIn("require_binding=True", inspect.signature(reader.effective_state).__str__())
+        self.assertNotIn("require_binding", inspect.getsource(CLI))  # the CLI never selects the legacy mode
+        self.assertEqual(CLI.verify(), ["v0000 ok"])
+
+
+class ApprovalIntegrity(unittest.TestCase):
+    def setUp(self):
+        self.t = Synthetic()
+
+    def tearDown(self):
+        self.t.close()
+
+    def reject(self, regex):
+        with self.assertRaisesRegex(common.LedgerError, regex):
+            self.t.state()
+
+    def _pairs(self, *es):
+        return ";".join(f"{e['entry_id']}={e['sha256']}:{L.entry_digest(e)}" for e in es)
+
+    def _extra_record(self, name, body):
+        ref, h = self.t.write_record(name, body)
+        return ref, h
+
+    def test_orphan_pinned_record_is_rejected(self):
+        ref, h = self._extra_record("D-v0001-orphan.md", "decision_id: D-v0001-orphan\n")
+        self.t.add_version([entry_from_draft(GAZETTE_1962, 1)], tamper=lambda line: line["decisions"].update({ref: h}))
+        self.reject("cited by no entry")
+
+    def test_record_naming_an_entry_outside_the_version_is_rejected(self):
+        e = entry_from_draft(GAZETTE_1962, 1)
+        ghost = entry_from_draft(DHARAMVIR, 2)
+        body = (f"decision_id: D-v0001\ndecision: APPROVED\nledger_version: 0001\nentries: {self._pairs(e, ghost)}\ndecided_by: test owner\n"
+                f"date: 2026-11-23\nscope: AUTHENTICATION_PROVENANCE_ONLY\nlegal_approval: NOT_GIVEN\n")
+        ref, h = self._extra_record("D-v0001.md", body)
+        e["decision_record_ref"], e["decision_record_sha256"] = ref, h
+        self.t.add_version([e], decision=False, tamper=lambda line: line["decisions"].update({ref: h}))
+        self.reject("names AL-v0001-002, which is not an entry of this version")
+
+    def test_entry_named_by_two_decision_records_is_rejected(self):
+        e = entry_from_draft(GAZETTE_1962, 1)
+        body = lambda n: (f"decision_id: {n}\ndecision: APPROVED\nledger_version: 0001\nentries: {self._pairs(e)}\ndecided_by: test owner\n"
+                          f"date: 2026-11-23\nscope: AUTHENTICATION_PROVENANCE_ONLY\nlegal_approval: NOT_GIVEN\n")
+        r1, h1 = self._extra_record("D-v0001.md", body("D-v0001"))
+        r2, h2 = self._extra_record("D-v0001-dup.md", body("D-v0001-dup"))
+        e["decision_record_ref"], e["decision_record_sha256"] = r1, h1
+        self.t.add_version([e], decision=False, tamper=lambda line: line["decisions"].update({r1: h1, r2: h2}))
+        self.reject("(cited by no entry|named by two decision records)")
+
+    def test_earlier_decision_cannot_be_reused_for_a_later_version(self):
+        e1 = entry_from_draft(GAZETTE_1962, 1)
+        self.t.add_version([e1])
+        e2 = entry_from_draft(DHARAMVIR, 1, version=2)
+        e2["decision_record_ref"], e2["decision_record_sha256"] = e1["decision_record_ref"], e1["decision_record_sha256"]
+        self.t.add_version([e2], decision=False, tamper=lambda line: line["decisions"].update({e1["decision_record_ref"]: e1["decision_record_sha256"]}))
+        self.reject("(decision record must be decisions/D-v0002|does not name this entry|not an entry of this version citing it)")
+
+    def test_ai_agent_cannot_be_the_owner(self):
+        for name in ("Claude Fable 5.2", "opus agent", "AI assistant", "review bot"):
+            t = Synthetic()
+            try:
+                t.add_version([entry_from_draft(GAZETTE_1962, 1)], decided_by=name)
+                with self.assertRaisesRegex(common.LedgerError, "names an AI model or agent"):
+                    t.state()
+            finally:
+                t.close()
+
+    def test_scope_and_legal_approval_statements_are_required(self):
+        e = entry_from_draft(GAZETTE_1962, 1)
+        body = (f"decision_id: D-v0001\ndecision: APPROVED\nledger_version: 0001\nentries: {self._pairs(e)}\ndecided_by: test owner\n"
+                f"date: 2026-11-23\nscope: AUTHENTICATION_PROVENANCE_ONLY\nlegal_approval: GIVEN\n")
+        ref, h = self._extra_record("D-v0001.md", body)
+        e["decision_record_ref"], e["decision_record_sha256"] = ref, h
+        self.t.add_version([e], decision=False, tamper=lambda line: line["decisions"].update({ref: h}))
+        self.reject("legal_approval: NOT_GIVEN")
+
+    def test_decision_may_not_predate_review_or_postdate_the_manifest_line(self):
+        e = entry_from_draft(GAZETTE_1962, 1)
+        body = lambda d: (f"decision_id: D-v0001\ndecision: APPROVED\nledger_version: 0001\nentries: {self._pairs(e)}\ndecided_by: test owner\n"
+                          f"date: {d}\nscope: AUTHENTICATION_PROVENANCE_ONLY\nlegal_approval: NOT_GIVEN\n")
+        ref, h = self._extra_record("D-v0001.md", body("2026-11-22"))
+        e["decision_record_ref"], e["decision_record_sha256"] = ref, h
+        self.t.add_version([e], decision=False, tamper=lambda line: line["decisions"].update({ref: h}))
+        self.reject("predates the independent review")
+        self.t.close()
+        self.t = Synthetic()
+        e = entry_from_draft(GAZETTE_1962, 1)
+        ref, h = self._extra_record("D-v0001.md", body("2026-11-24"))
+        e["decision_record_ref"], e["decision_record_sha256"] = ref, h
+        self.t.add_version([e], decision=False, tamper=lambda line: line["decisions"].update({ref: h}))
+        self.reject("dated after its manifest line")
+
+    def test_no_correction_of_a_withdrawn_entry(self):
+        a = entry_from_draft(GAZETTE_1962, 1)
+        self.t.add_version([a])
+        w = entry_from_draft(GAZETTE_1962, 1, version=2, entry_type="WITHDRAW", target_entry_id=a["entry_id"], withdrawal_reason="OTHER",
+                             first_class_record_ref="", proposed_authentication_state="", proposed_class="", justification="w")
+        self.t.add_version([w])
+        self.t.state()  # the withdrawal itself is valid
+        c = entry_from_draft(GAZETTE_1962, 1, version=3, entry_type="CORRECTION", target_entry_id=a["entry_id"])
+        self.t.add_version([c])
+        self.reject("is not the live row for this sha256")
+
+
+class TranchePreparation(unittest.TestCase):
+    """Prepared tranche material reproduces, stays inactive and never touches the committed ledger."""
+    TOOLS = PKG / "tranches/tools"
+
+    def run_tool(self, name):
+        return subprocess.run([sys.executable, str(self.TOOLS / name), "--check"], capture_output=True, text=True,
+                              env=dict(__import__("os").environ, PYTHONDONTWRITEBYTECODE="1"))
+
+    def test_tranche1_and_policy_data_reproduce(self):
+        for t in ("build_tranche1.py", "policy_impact.py"):
+            r = self.run_tool(t)
+            self.assertEqual(r.returncode, 0, r.stderr)
+
+    def test_prepared_rows_are_inactive_and_cannot_enter_the_ledger_unchanged(self):
+        rows = common.read_csv(PKG / "tranches/T1-GAZETTE/proposed_entries_PENDING.csv")
+        self.assertEqual(len(rows), 20)
+        for r in rows:
+            self.assertEqual(r["owner_decision"], "")
+            self.assertEqual(r["tranche_status"], "PENDING_NOT_IN_LEDGER")
+            self.assertEqual((r["decision_record_ref"], r["reviewer_ref"]), ("", ""))
+            with self.assertRaisesRegex(common.LedgerError, "owner_decision=''"):
+                L.schema_check({k: r[k] for k in L.COLS}, L.COLS)
+
+    def test_committed_ledger_still_has_only_genesis(self):
+        self.assertEqual(len(L.read_manifest(PKG)), 1)
+        self.assertEqual(sorted(p.name for p in (PKG / "ledger").iterdir()), ["HEAD", "manifest.jsonl"])
+        self.assertEqual(sorted(p.name for p in (PKG / "decisions").iterdir()), ["README.md"])
+
+    def test_tranche1_is_exactly_the_20_primary_gazette_drafts_and_excludes_non_primary(self):
+        reg = common.read_csv(PKG / "tranches/T1-GAZETTE/tranche1_source_register.csv")
+        want = sorted(s for s, d in DRAFT.items() if d["proposed_class"] == "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE")
+        self.assertEqual(sorted(r["sha256"] for r in reg), want)
+        self.assertNotIn(TRA, {r["sha256"] for r in reg})
+        self.assertTrue(all(r["rule1_result"] == "PASS" for r in reg))
+        sro34 = [r for r in reg if "S.R.O. 34 (1963" in r["document_identity"]][0]
+        self.assertIn("COPY PROVENANCE ONLY", sro34["recommendation"].upper())
+        born = [r for r in reg if r["fidelity_class"].startswith("BORN_DIGITAL")]
+        self.assertEqual(len(born), 2)
+        self.assertTrue(all(r["sub_tranche"] == "1B-FIDELITY" for r in born))
+        m = {r["tranche_id"]: r for r in common.read_csv(PKG / "tranches/T1-GAZETTE/evidence_verification_matrix.csv")}
+        for r in born:
+            self.assertIn("NOT CRYPTOGRAPHICALLY VERIFIED", m[r["tranche_id"]]["v11_signature_coverage"])
+
+    def test_simulated_impact_has_no_crosswalk_change(self):
+        j = json.loads((PKG / "tranches/T1-GAZETTE/simulated_joint_impact.json").read_text(encoding="utf-8"))
+        self.assertTrue(j["label"].startswith("SIMULATION ONLY"))
+        self.assertEqual(j["joint_all_20"]["crosswalk_row_changes"], 0)
+        self.assertEqual(j["joint_all_20"]["copy_status_changes"], 20)
+
+
+class ReviewFixes02(unittest.TestCase):
+    """Corrections for the independent Fable review of 924047b1 (review/fable_review_924047b1.md)."""
+    def setUp(self):
+        self.t = GitLedger()
+
+    def tearDown(self):
+        self.t.close()
+
+    def bound(self):
+        head, merge = self.t.pr([entry_from_draft(GAZETTE_1962, 1)])
+        self.t.add_bind(head, merge)
+        self.t.commit("bind")
+        return head, merge
+
+    def test_f01_replace_refs_fail_closed(self):
+        self.bound()
+        self.t.state(require_binding=True)
+        _git(self.t.dir, "replace", "--graft", "HEAD", _git(self.t.dir, "rev-list", "--max-parents=0", "HEAD"))
+        with self.assertRaisesRegex(common.LedgerError, "refs/replace exists"):
+            self.t.state(require_binding=True)
+
+    def test_f01_grafts_file_fail_closed(self):
+        self.bound()
+        (self.t.dir / ".git/info").mkdir(exist_ok=True)
+        (self.t.dir / ".git/info/grafts").write_text(_git(self.t.dir, "rev-parse", "HEAD") + "\n", encoding="utf-8")
+        with self.assertRaisesRegex(common.LedgerError, "info/grafts exists"):
+            self.t.state(require_binding=True)
+
+    def test_f01_inherited_git_environment_is_ignored(self):
+        self.bound()
+        other = GitLedger()
+        try:
+            env = {"GIT_DIR": str(other.dir / ".git"), "GIT_WORK_TREE": str(other.dir), "GIT_GRAFT_FILE": str(other.dir / "g"),
+                   "GIT_REPLACE_REF_BASE": "refs/x/", "GIT_OBJECT_DIRECTORY": str(other.dir / ".git/objects")}
+            with mock.patch.dict(__import__("os").environ, env):
+                texts = self.t.state(require_binding=True)
+            self.assertEqual([x["effect"] for x in json.loads(texts["transitions.json"])], ["APPLIED"])
+            self.assertNotIn("GIT_DIR", binding._env())
+            self.assertEqual(binding._env()["GIT_NO_REPLACE_OBJECTS"], "1")
+        finally:
+            other.close()
+
+    def test_f04_package_change_in_the_merge_is_rejected(self):
+        _git(self.t.dir, "checkout", "-q", "-b", "pr1")
+        self.t.add_version([entry_from_draft(GAZETTE_1962, 1)])
+        head = self.t.commit("reviewed")
+        _git(self.t.dir, "checkout", "-q", "main")
+        _git(self.t.dir, "merge", "-q", "--no-ff", "--no-commit", "pr1")
+        (self.t.dir / "tools_changed_in_merge.py").write_text("x = 1\n", encoding="utf-8")
+        merge = self.t.commit("merge that also changes code")
+        self.t.add_bind(head, merge)
+        with self.assertRaisesRegex(common.LedgerError, "package tree differs between reviewed_head and merge_commit"):
+            self.t.state(require_binding=True)
+
+    def test_f05_transitions_carry_the_assurance_level(self):
+        self.bound()
+        tr = json.loads(self.t.state(require_binding=True)["transitions.json"])
+        self.assertIn("ASSERTED_NOT_VERIFIED_OFFLINE", tr[0]["binding_assurance"])
+        self.assertIn("VERIFIED_OFFLINE", tr[0]["binding_assurance"])
+
+    def test_f08_truncated_locator_is_refused(self):
+        m = strength.URL.search("see https://archive.org/download/x/y.pdf)evil")
+        with self.assertRaisesRegex(common.LedgerError, "would be truncated"):
+            strength._untruncated("r", "see https://archive.org/download/x/y.pdf)evil", m)
+        for ok in ("https://archive.org/download/x/y.pdf; next", "(https://archive.org/download/x/y.pdf)", "https://archive.org/download/x/y.pdf"):
+            mm = strength.URL.search(ok)
+            strength._untruncated("r", ok, mm)
+
+
+class ReviewFixes02Records(unittest.TestCase):
+    def setUp(self):
+        self.t = Synthetic()
+
+    def tearDown(self):
+        self.t.close()
+
+    def test_f09_agent_names_with_digits_or_underscores(self):
+        for name in ("Fable5", "claude_code", "GPT4", "ai-assistant"):
+            t = Synthetic()
+            try:
+                t.add_version([entry_from_draft(GAZETTE_1962, 1)], decided_by=name)
+                with self.assertRaisesRegex(common.LedgerError, "names an AI model or agent"):
+                    t.state()
+            finally:
+                t.close()
+        self.assertIsNone(L.AGENT.search("Kai Raina"))  # letters around a listed word do not match
+
+    def test_f10_manifest_types_and_date(self):
+        for over, rx in (({"version": True}, "version must be an integer"), ({"rule_version": 1.0}, "rule_version must be an integer"),
+                         ({"date": "2026-13-40"}, "not a valid YYYY-MM-DD date"), ({"date": "9999"}, "not a valid YYYY-MM-DD date"), ({"date": "20261123"}, "not a valid YYYY-MM-DD date")):
+            t = Synthetic()
+            try:
+                t.add_version([entry_from_draft(GAZETTE_1962, 1)], tamper=lambda line, o=over: line.update(o))
+                with self.assertRaisesRegex(common.LedgerError, rx):
+                    L.read_manifest(t.dir)
+            finally:
+                t.close()
+
+    def test_f11_wrong_scope_is_rejected(self):
+        e = entry_from_draft(GAZETTE_1962, 1)
+        pairs = f"{e['entry_id']}={e['sha256']}:{L.entry_digest(e)}"
+        ref, h = self.t.write_record("D-v0001.md", f"decision_id: D-v0001\ndecision: APPROVED\nledger_version: 0001\nentries: {pairs}\n"
+                                                    f"decided_by: test owner\ndate: 2026-11-23\nscope: LEGAL_APPROVAL\nlegal_approval: NOT_GIVEN\n")
+        e["decision_record_ref"], e["decision_record_sha256"] = ref, h
+        self.t.add_version([e], decision=False, tamper=lambda line: line["decisions"].update({ref: h}))
+        with self.assertRaisesRegex(common.LedgerError, "must state scope: AUTHENTICATION_PROVENANCE_ONLY"):
+            self.t.state()
+
+    def test_f11_declared_record_hash_must_match(self):
+        e = entry_from_draft(GAZETTE_1962, 1)
+        self.t.add_version([e])
+        f = self.t.dir / "ledger/v0001.csv"
+        rows = common.read_csv(f)
+        rows[0]["decision_record_sha256"] = "0" * 64
+        f.write_text(common.csv_text(L.COLS, rows), encoding="utf-8")
+        mf = self.t.dir / "ledger/manifest.jsonl"
+        ls = mf.read_text(encoding="utf-8").split("\n")
+        d = json.loads(ls[1])
+        d["file_sha256"] = common.sha256_file(f)
+        ls[1] = L.canonical_line(d)
+        mf.write_text("\n".join(ls), encoding="utf-8")
+        (self.t.dir / "ledger/HEAD").write_text(f"1 {common.sha256_text(ls[1])}\n", encoding="utf-8")
+        with self.assertRaisesRegex(common.LedgerError, "hash does not match the entry and the manifest pin"):
+            self.t.state()
+
+
+class ReviewFixes02More(unittest.TestCase):
+    def test_f11_urlcheck_alone_rejects_bad_hosts_and_escapes(self):
+        for u in ("https://-a.example.org/x", "https://a_b.example.org/x", "https://a..example.org/x", "https://example.123/x",
+                  "https://example.org/x%3Fy", "https://example.org/x%23y", "https://example.org/x%2Fy", "https://example.org/x%25y"):
+            self.assertNotEqual(urlcheck.problem(u), "", u)
+        self.assertEqual(urlcheck.problem("https://example.org/a%20b.pdf"), "")
+
+    def test_f06_court_path_shapes(self):
+        self.assertFalse(strength.host_ok("https://api.sci.gov.in/uploads/x.pdf", COURT))
+        self.assertFalse(strength.host_ok("https://api.sci.gov.in/jonew/judis/../x.pdf", COURT))
+        for u in {u for u, _ in strength.url_pairs() if "sci.gov.in" in u}:
+            self.assertTrue(strength.host_ok(u, COURT), u)
+
+    def test_f11_genesis_line_with_content_is_rejected(self):
+        t = Synthetic()
+        try:
+            mf = t.dir / "ledger/manifest.jsonl"
+            d = json.loads(mf.read_text(encoding="utf-8").split("\n")[0])
+            d["decisions"] = {"decisions/D-v0000.md": "0" * 64}
+            s = L.canonical_line(d)
+            mf.write_text(s + "\n", encoding="utf-8")
+            (t.dir / "ledger/HEAD").write_text(f"0 {common.sha256_text(s)}\n", encoding="utf-8")
+            with self.assertRaisesRegex(common.LedgerError, "genesis line must carry no entries"):
+                t.state()
+        finally:
+            t.close()
+
+    def test_f02_tranche1_reports_l5_image_quotations(self):
+        m = common.read_csv(PKG / "tranches/T1-GAZETTE/evidence_verification_matrix.csv")
+        reg = common.read_csv(PKG / "tranches/T1-GAZETTE/tranche1_source_register.csv")
+        src = {r["tranche_id"]: r["identifier_source"] for r in reg}
+        self.assertEqual(sorted(k for k, v in src.items() if v == "L5_DISCOVERY_REGISTER_ONLY"),
+                         ["T1-02", "T1-11", "T1-14", "T1-16", "T1-17", "T1-18", "T1-19"])
+        self.assertTrue(all(v in ("IMAGE_CHECK_OR_TRANSCRIPTION", "L5_DISCOVERY_REGISTER_ONLY") for v in src.values()))
+        pend = {r["sha256"]: r for r in common.read_csv(PKG / "tranches/T1-GAZETTE/proposed_entries_PENDING.csv")}
+        for r in reg:
+            if r["identifier_source"] == "L5_DISCOVERY_REGISTER_ONLY":
+                self.assertIn("read-only discovery agent", pend[r["sha256"]]["limitations"])
+                self.assertIn("ADVISABLE FIRST", r["recommendation"])
+        self.assertEqual(sorted({r["sub_tranche"] for r in reg}), ["1A-READY", "1B-FIDELITY"])
+        t16 = [r for r in m if r["tranche_id"] == "T1-16"][0]
+        self.assertIn("S.R.O. 332", t16["v07_identity_page_evidence"])
+        self.assertIn("not an identity-reference kind under rule 1", t16["v07_identity_page_evidence"])
+        rows = {r["sha256"]: r for r in common.read_csv(PKG / "tranches/T1-GAZETTE/proposed_entries_PENDING.csv")}
+        sro34 = [r for r in rows.values() if "S.R.O. 34 (1963" in r["document_identity"]][0]
+        self.assertNotIn("notes misdate as", sro34["document_identity"])
+        self.assertIn("UNVERIFIED", sro34["limitations"])
+        for r in rows.values():
+            if r["sha256"] in {x["sha256"] for x in reg if x["sub_tranche"] == "1B-FIDELITY"}:
+                self.assertIn("STRUCTURAL ONLY", r["limitations"])
+
+
+def _forge_commit_graph(t, chain=False):
+    """Fable R-01 vector: a direct push whose commit-graph entry claims two parents (base, version commit)."""
+    import struct, hashlib
+    base = _git(t.dir, "rev-parse", "HEAD")
+    t.add_version([entry_from_draft(GAZETTE_1962, 1)])
+    c1 = t.commit("direct push version")
+    _git(t.dir, "commit", "-q", "--allow-empty", "-m", "innocent")
+    c2 = _git(t.dir, "rev-parse", "HEAD")
+    t.add_bind(c1, c2)
+    t.commit("bind")
+    _git(t.dir, "commit-graph", "write", "--reachable", *(["--split"] if chain else []))
+    f = next((t.dir / ".git/objects/info/commit-graphs").glob("graph-*.graph")) if chain else t.dir / ".git/objects/info/commit-graph"
+    b = bytearray(f.read_bytes())
+    ch = {bytes(b[8 + 12 * i:12 + 12 * i]): struct.unpack(">Q", b[12 + 12 * i:20 + 12 * i])[0] for i in range(b[6] + 1)}
+    oids = [bytes(b[ch[b"OIDL"] + 20 * i:ch[b"OIDL"] + 20 * i + 20]).hex() for i in range((ch[b"CDAT"] - ch[b"OIDL"]) // 20)]
+    o = ch[b"CDAT"] + 36 * oids.index(c2) + 20
+    b[o:o + 4], b[o + 4:o + 8] = struct.pack(">I", oids.index(base)), struct.pack(">I", oids.index(c1))
+    b[-20:] = hashlib.sha1(bytes(b[:-20])).digest()
+    __import__("os").chmod(f, 0o644)
+    f.write_bytes(bytes(b))
+    if chain:
+        new = f.with_name("graph-" + bytes(b[-20:]).hex() + ".graph")
+        f.rename(new)
+        chain_file = f.parent / "commit-graph-chain"
+        if chain_file.exists():  # newer git (e.g. 2.56) writes it read-only
+            __import__("os").chmod(chain_file, 0o644)
+        chain_file.write_text(bytes(b[-20:]).hex() + "\n")
+    return c1, c2
+
+
+class NestedGitLedger(GitLedger):
+    """The ledger root is a sub-directory of the git repository (as in the real layout)."""
+    def __init__(self):
+        Synthetic.__init__(self)
+        self.repo = Path(tempfile.mkdtemp(prefix="authledger_repo_"))
+        shutil.move(str(self.dir), str(self.repo / "pkg"))
+        self.dir = self.repo / "pkg"
+        _git(self.repo, "init", "-q", "-b", "main")
+        _git(self.repo, "config", "user.email", "test@example.invalid")
+        _git(self.repo, "config", "user.name", "test")
+        _git(self.repo, "config", "commit.gpgsign", "false")
+        self.commit("genesis")
+
+    def close(self):
+        shutil.rmtree(self.repo, ignore_errors=True)
+
+
+class ReviewFixes03(unittest.TestCase):
+    """Corrections for the Fable re-review of 64859d4d (review/fable_rereview_64859d4d.md)."""
+    def test_r01_forged_commit_graph_single_and_split(self):
+        for chain in (False, True):
+            t = GitLedger()
+            try:
+                _forge_commit_graph(t, chain)
+                with self.assertRaisesRegex(common.LedgerError, r"has 1 parent\(s\)"):
+                    t.state(require_binding=True)
+            finally:
+                t.close()
+
+    def test_r02_repository_top_is_pinned(self):
+        t = GitLedger()
+        try:
+            head, merge = t.pr([entry_from_draft(GAZETTE_1962, 1)])
+            t.add_bind(head, merge)
+            t.commit("bind")
+            lines = L.read_manifest(t.dir)
+            binding.verify(t.dir, lines[2], lines, L.canonical_line, expected_top=t.dir)
+            with self.assertRaisesRegex(common.LedgerError, "is not the expected repository"):
+                binding.verify(t.dir, lines[2], lines, L.canonical_line, expected_top=t.dir.parent)
+        finally:
+            t.close()
+        import inspect
+        src = inspect.getsource(L.apply_ledger)
+        self.assertIn("PKG.parents[2] if Path(root).resolve() == PKG.resolve()", src)
+        self.assertEqual(PKG.parents[2], REPO)
+
+    def test_r06_nested_prefix_merge_checks_only_the_package(self):
+        t = NestedGitLedger()
+        try:
+            _git(t.repo, "checkout", "-q", "-b", "pr1")
+            t.add_version([entry_from_draft(GAZETTE_1962, 1)])
+            head = t.commit("reviewed")
+            _git(t.repo, "checkout", "-q", "main")
+            (t.repo / "outside.txt").write_text("base moved on outside the package\n", encoding="utf-8")
+            t.commit("unrelated base change")
+            _git(t.repo, "merge", "-q", "--no-ff", "-m", "merge", "pr1")
+            merge = _git(t.repo, "rev-parse", "HEAD")
+            t.add_bind(head, merge)
+            t.commit("bind")
+            self.assertEqual([x["effect"] for x in json.loads(t.state(require_binding=True)["transitions.json"])], ["APPLIED"])
+        finally:
+            t.close()
+        t = NestedGitLedger()
+        try:
+            _git(t.repo, "checkout", "-q", "-b", "pr1")
+            t.add_version([entry_from_draft(GAZETTE_1962, 1)])
+            head = t.commit("reviewed")
+            _git(t.repo, "checkout", "-q", "main")
+            _git(t.repo, "merge", "-q", "--no-ff", "--no-commit", "pr1")
+            (t.dir / "tools_added_in_merge.py").write_text("x = 1\n", encoding="utf-8")
+            merge = t.commit("merge with a package change")
+            t.add_bind(head, merge)
+            with self.assertRaisesRegex(common.LedgerError, "package tree differs"):
+                t.state(require_binding=True)
+        finally:
+            t.close()
+
+    def test_r06_environment_and_git_options(self):
+        env = binding._env()
+        self.assertEqual(env["GIT_GRAFT_FILE"], __import__("os").devnull)
+        self.assertEqual((env["GIT_CONFIG_NOSYSTEM"], env["GIT_CONFIG_GLOBAL"]), ("1", __import__("os").devnull))
+        with mock.patch.object(binding.subprocess, "run", return_value=subprocess.CompletedProcess([], 0, b"", b"")) as run:
+            binding._git(".", "status")
+        args = run.call_args[0][0]
+        for opt in ("protocol.allow=never", "core.useReplaceRefs=false", "core.commitGraph=false"):
+            self.assertIn(opt, args)
+
+    def test_r05_r04_url_residuals(self):
+        for u in ("https://archive.org/download/x/.../y.pdf", "https://archive.org/download/x/%20/y.pdf", "https://archive.org/download/x/a%E2%88%95b.pdf",
+                  "https://archive.org/download/x/a%E2%81%84b.pdf", "https://archive.org/download/x/a%E2%A7%B8b.pdf", "https://archive.org/download/x/a%EF%BF%BDb.pdf",
+                  "https://archive.org/download/x/a%E1%9A%80b.pdf"):
+            self.assertNotEqual(urlcheck.problem(u), "", u)
+        self.assertNotEqual(urlcheck.problem("https://1.0x7f/x"), "")
+        self.assertNotEqual(urlcheck.problem("https://example.1a/x"), "")
+        for u in ("https://api.sci.gov.in/jonew/judis/1234.pdf?redirect=//evil", "https://desw.gov.in/a.pdf?x=1"):
+            self.assertFalse(strength.host_ok(u, COURT) or strength.host_ok(u, GOVPUB), u)
+        for u in ("https://api.sci.gov.in/x/jonew/judis/1.pdf", "https://api.sci.gov.in/jonew/judis/1.pdf.html"):
+            self.assertFalse(strength.host_ok(u, COURT), u)
+
+    def test_r06_untruncated_is_applied_at_both_call_sites(self):
+        sha = GAZETTE_1962
+        ret = {"sha256": sha, "authenticity": "ORIGINAL_OFFICIAL", "verification_state": "SOURCE_VERIFIED",
+               "locator": "https://archive.org/download/x/y.pdf)evil"}
+        json_src = [p for p in pins.EVIDENCE_INPUTS if strength._json_source(p)][0]
+        with mock.patch.object(strength, "resolve", return_value=(json_src, ret)):
+            with self.assertRaisesRegex(common.LedgerError, "would be truncated"):
+                strength._first_class("x", sha)
+        dl = {"downloaded_sha256": sha, "candidate_url_or_identifier": "https://desw.gov.in/a.pdf|b"}
+        with mock.patch.object(strength, "resolve", return_value=("PILOT-01/registers/source_discovery_2026-11-22.csv", dl)):
+            with self.assertRaisesRegex(common.LedgerError, "would be truncated"):
+                strength._first_class("x", sha)
+
+    def test_r06_l5_observation_conditions(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("bt1", PKG / "tranches/tools/build_tranche1.py")
+        bt1 = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(bt1)
+        sha = GAZETTE_1962
+        good = {"status": "LOCATED_IMAGE_CHECKED", "sha256": sha, "render_sha256": "a" * 64, "identity_evidence": "S.R.O. 1"}
+        for bad in ({"status": "NOT_FOUND"}, {"sha256": "b" * 64}, {"render_sha256": ""}):
+            with mock.patch.object(bt1.strength, "resolve", return_value=("p", dict(good, **bad))):
+                self.assertEqual(bt1.l5_observations("L5:x#y", sha), [], bad)
+        with mock.patch.object(bt1.strength, "resolve", return_value=("p", good)):
+            self.assertEqual(len(bt1.l5_observations("L5:x#y", sha)), 1)

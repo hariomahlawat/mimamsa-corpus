@@ -1,10 +1,12 @@
-# AUTH-LEDGER: immutable authentication overlay (Cycle 7, AUTH-LEDGER-01)
+# AUTH-LEDGER: immutable authentication overlay (Cycle 7, AUTH-LEDGER-01; hardened by AUTH-LEDGER-02)
 
 **Status: version zero only.** There are **no ledger entries, no approvals and no authentication promotions.** The overlay reads the frozen Cycle 4 and Cycle 5 records and reproduces the merged Cycle 5 state byte-for-byte. Nothing here changes legal status, currency or applicability.
 
 - **Specification:** `../C6-01-PROVENANCE/addendum/INTEGRATION_ARCHITECTURE.md` (revision 2).
 - **Implementation decisions and discrepancies:** `DESIGN_NOTES.md`.
-- **Open rule policy questions:** `POLICY_OPTIONS.md`.
+- **Open rule policy questions:** `POLICY_OPTIONS.md`; the rule-version decision pack is `RULE_DECISION_PACK.md`.
+- **Approval controls, threat review and BIND lines (AUTH-LEDGER-02):** `APPROVAL_CONTROLS.md`.
+- **Prepared but inactive evidence tranches:** `tranches/` (Gazette tranche 1, Supreme Court tranche 2 plan). Nothing there is a ledger entry.
 
 ## Layout
 | Path | Content |
@@ -17,8 +19,8 @@
 | `decisions/` | committed owner decision records and reviewer reports (none yet) |
 | `corrections/` | documentary corrections to frozen texts (none recorded yet; `notes.csv` is created with the first note) |
 | `effective/v0000/` | derived outputs of version 0, pinned by `effective_sha256` in the genesis line |
-| `review/` | the independent Fable 5.2 review of 82a8ce0e (verbatim) and its dispositions |
-| `tools/` | `rules_v1.py` (copy-status rule), `strength.py` (evidence checks), `ledger.py` (chain, approvals, entry semantics), `reader.py` (effective state), `pins.py`, `auth_ledger.py` (command line) |
+| `review/` | the independent Fable 5.2 reviews (verbatim), findings and dispositions, for AUTH-LEDGER-01 and AUTH-LEDGER-02 |
+| `tools/` | `rules_v1.py` (copy-status rule), `strength.py` (evidence checks), `urlcheck.py` (strict locator parsing, D-01), `ledger.py` (chain, approvals, entry semantics), `binding.py` (offline git verification of BIND lines), `reader.py` (effective state), `pins.py`, `auth_ledger.py` (command line) |
 
 ## Commands (offline)
 ```bash
