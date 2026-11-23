@@ -1,0 +1,31 @@
+domain,record_id,record_type,score,prior_P0P1,missing_evidence_rows,title
+disciplinary_authority,HCE-017,KB,10,3,0,Section 80: statutory punishments and limitations
+disciplinary_authority,EV-016,KB,7,2,0,Summary of Evidence rights and scope
+disciplinary_authority,HCE-010,KB,6,1,1,"Accused statement, silence and defence witnesses"
+court_martial_jurisdiction,CIV-034,KB,9,2,0,BSA applies to courts-martial
+court_martial_jurisdiction,AFT-004,KB,6,1,1,Section 14 original application versus section 15 court-martial appeal
+court_martial_jurisdiction,CIV-008,KB,6,1,1,Competent forum-choice authority
+statutory_complaints,ADM-013,KB,3,0,1,Recordable censure and promotion inputs
+statutory_complaints,ADM-023,KB,3,0,0,Redress of complaints: reasoned record and privacy
+statutory_complaints,AFT-009,KB,3,0,1,Exhaustion of statutory remedies
+administrative_remedies,ADM-027,KB,10,0,3,Judicial review of promotion: limits and exceptions
+administrative_remedies,ADM-014,KB,5,0,1,Confidential Report (CR/ACR): which scheme applies?
+administrative_remedies,ADM-015,KB,5,0,1,Communications of adverse CR material
+pension_disability,PEN-001,KB,9,0,4,Which pension code applies to this individual?
+pension_disability,PEN-013,KB,9,0,3,2023 entitlement rules: commencement
+pension_disability,PEN-019,KB,9,0,3,Non-battle versus battle casualties
+procedural_time_limits,CM-011,KB,8,2,0,Limitation to commence trial
+procedural_time_limits,AFT-032,KB,7,0,2,Review application within AFT
+procedural_time_limits,COI-046,KB,7,0,2,10.4 Limitations and research backlog
+competing_provisions,CIV-032,KB,7,0,2,1 July 2024 law transition
+competing_provisions,V8-JD-02,KB,6,0,1,Som Datt Datta v Union of India
+competing_provisions,V8-JD-03,KB,6,0,1,Balbir Singh v State of Punjab
+statutory_amendments,CM-SC-18,KB,3,0,0,An order quotes old Section 127
+statutory_amendments,HCE-015,KB,3,0,0,Army Rule 25: obsolete references
+statutory_amendments,SC03,KB,3,0,0,Defence witness is not recorded in SoE
+judicial_overruling,AFT-035,KB,9,0,3,Constitutional route after Parashotam Dass
+judicial_overruling,PEN-WF-08,KB,9,0,3,Broad-banding appeal
+judicial_overruling,AFT-039,KB,7,0,2,Judgment treatment and precedent checking
+judicial_overruling,DCLR-SC-2005-L01,CASE,,,,(cases_53)
+judicial_overruling,DCLR-SC-2008-N10,CASE,,,,(cases_53)
+judicial_overruling,DCLR-SC-2013-N08,CASE,,,,(cases_53)
