@@ -11,7 +11,7 @@
 - **Cycle 5 snapshot, frozen:** all `SOURCE-LIBRARY-C5/` inputs, tools and registers, which are the merged snapshot.
 - **CI pins.** A test pins the sha256 of every file above **that the effective view reads**: the Cycle 4 registers and rule, and the Cycle 5 inputs, registers and builder. The overlay only reads them.
 - **Discovery tooling is not frozen.** `SOURCE-LIBRARY-C5/tools/discovery_guard.py` and `run_guarded_discovery.py` are not read by the effective view, so a reviewed change to them (for example P-C6-02-META) does not touch the frozen snapshot.
-- **Cycle 5 carry-over corrections** (`C6-PREP/C5_CARRYOVER_CORRECTIONS.md`) are applied as overlay correction records, not as edits to frozen files. A future owner decision to edit a frozen Cycle 5 file would require re-pinning, a documented correction record and a new `effective/v0000` baseline version (Fable re-review N-06).
+- **Cycle 5 carry-over corrections** (`C6-PREP/C5_CARRYOVER_CORRECTIONS.md`) are documentary (a report sentence, a docstring, a master title), so they are **not** ledger entries, which carry copy authentication only. They go to a separate append-only `corrections/notes.csv` in the overlay (target file and location, the frozen text, the corrected statement, evidence and decision reference), shown beside the frozen text by any export (Fable re-review M-04). A future owner decision to edit a frozen Cycle 5 file would require re-pinning, a documented correction record and a new `effective/v0000` baseline version (Fable re-review N-06).
 
 ## 2. Overlay package
 A new package, for example `legal_knowledge/audit_work/AUTH-LEDGER/`. Its only code dependency is reading the frozen files.
@@ -58,7 +58,7 @@ A new package, for example `legal_knowledge/audit_work/AUTH-LEDGER/`. Its only c
    | `HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED` | ≥1 effective primary court copy | `HELD_PRIMARY_OFFICIAL_COURT_COPY` |
    | any HELD state | a pending copy and no primary copy | `HELD_AUTHENTICATION_PENDING` |
    | any | otherwise | unchanged |
-   | `HELD_PRIMARY_*` | no effective primary copy remains (after a CORRECTION or WITHDRAW) | the `resulting_state` named by that entry; if none is named, **hard error** (a source can never stay HELD_PRIMARY without a primary copy) |
+   | `HELD_PRIMARY_*` | no effective primary copy remains (after a CORRECTION or WITHDRAW) | derived from the copies' resulting states: `HELD_AUTHENTICATION_PENDING` if any copy's resulting state is `AUTHENTICATION_PENDING`; otherwise the frozen basis's `*_PROVENANCE_UNDOCUMENTED` state (publication or court copy) when the copies are `PROVENANCE_UNKNOWN`. If no WITHDRAW/CORRECTION names a resulting state, **hard error** (Fable re-review M-04) |
 
    No column of the frozen Cycle 5 input is split or edited. The Cycle 5 consistency rule is applied by the overlay to its own outputs, so it stays **on**.
 4. **Copy-level anchoring (F-09).** Introduced as **rule version 2**, not at version 0. EXACT_ANCHOR needs a citation's checked copy to be the effective primary copy, or a recorded page-equivalence check between the checked copy and that copy. A source never lends EXACT_ANCHOR from one copy to another. A non-primary copy never anchors. Moving from rule 1 (source-level, as frozen) to rule 2 is itself a reviewed version step, with its own diff. Citations that record no checked copy become PARTIAL under rule 2 until one is recorded (Fable re-review N-06).

@@ -290,6 +290,11 @@ class C6Addendum(unittest.TestCase):
         # exact-key resolution: a key that is only a prefix of a real key does not resolve
         ref = rows[0]["first_class_record_ref"]
         self.assertFalse(A.resolves(ref.split("#")[0] + "#" + ref.split("#")[1][:3] + "_NO_SUCH_KEY"))
+        # a true prefix of an existing key must not resolve (substring matching would accept it; Fable M-01)
+        full = "PILOT-01/registers/source_code_resolution_v3.csv#SRC-RANJIT"
+        self.assertTrue(A.resolves(full))
+        self.assertFalse(A.resolves(full[:-1]))  # "SRC-RANJI"
+        self.assertFalse(A.resolves("PILOT-01/sources/independent-reviewer-blind.json#S-BLIND-01"))  # prefix of S-BLIND-013
         # snapshot entries without a sha256 never qualify as first-class
         self.assertEqual(A.own_sha("ACQ-01/archive_org_metadata_snapshot.json#in.gazette.central.e.2022-06-06.236353/236353.pdf"), "")
         # conditional schema: a WITHDRAW needs a target and a reason

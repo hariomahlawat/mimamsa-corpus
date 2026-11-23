@@ -19,7 +19,7 @@ Following SOURCE_AUTHORITY_POLICY v1, the table reports document authority, carr
 
 ## What the comparison shows
 - **The watermark is not the distinction.** Cycle 4 accepted a watermarked India Code scan.
-- **The host is not the distinction either.** Third-party archive.org copies whose signed range spans the whole file (2018, 2019) stay primary. Their derivative status is inferred from the producer only, because the ACQ-02 snapshot carries no file-level source field (Fable re-review N-04). A Government-hosted copy whose bytes were re-written (TRA) and an archive-rendered derivative (2022) do not.
+- **The host is not the distinction either.** Third-party archive.org copies whose signed range spans the whole file (2018, 2019) stay primary. The 2019 file is in the ACQ-01 snapshot, which records `source: original`; the 2018 file is matched only in the ACQ-02 snapshot, which carries no file-level source field, so its derivative status is inferred from the producer (Fable re-review N-04, M-03). A Government-hosted copy whose bytes were re-written (TRA) and an archive-rendered derivative (2022) do not.
 - **Why a scan is treated differently.** For a scan, the page image *is* the evidence of the printed Gazette. For a born-digital e-Gazette, the issued object is the signed PDF. A copy re-written after signing, or re-rendered, is a derivative whose fidelity has to be shown.
 - **Identity, authority and provenance** are documented for all five copies by the same kinds of evidence.
 

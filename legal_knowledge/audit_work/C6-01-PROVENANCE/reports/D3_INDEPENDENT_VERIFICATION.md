@@ -150,7 +150,7 @@ Its five P3 wording items are corrected in the following documentation-only comm
 
 **Current outcomes:** 32 DOCUMENTED and 4 PARTIALLY_DOCUMENTED. The 32 proposals are 20 primary Gazette copies, 8 primary court copies and 4 non-primary. Simulated coverage: documented-primary copies 12 to 40; sources 12 to 40; cases 6 to 13; KB unchanged. 
 ## Fable 5.2 re-review of 4bf0a96a: VERDICT ACCEPT WITH CONDITIONS (no P1; 1 new P2)
-The same reviewer, so not independent of its first review. Condensed record: `review/fable_rereview_4bf0a96a.md`. Of F-01..F-26 it marked 15 FIXED and 11 PARTLY (F-02, F-07, F-08, F-09, F-10, F-16, F-17, F-22, F-26 and design residuals). Answers: no DOCUMENTED row rests on a sibling-copy or disclaimed record; the fidelity rule is applied in code to every non-judicial copy and the 2022 reclassification is supported; report counts match the summary.
+The same reviewer, so not independent of its first review. Condensed record: `review/fable_rereview_4bf0a96a.md`. Of F-01..F-26 it marked 17 FIXED and 9 PARTLY (F-02, F-07, F-08, F-09, F-10, F-16, F-17, F-22, F-26). Answers: no DOCUMENTED row rests on a sibling-copy or disclaimed record; the fidelity rule is applied in code to every non-judicial copy and the 2022 reclassification is supported; report counts match the summary.
 
 | ID | Sev | Finding | Disposition |
 | --- | --- | --- | --- |
@@ -166,5 +166,17 @@ The same reviewer, so not independent of its first review. Condensed record: `re
 | F-03 residual | - | C5 title still says "notes misdate" | Added as C5-CO-05 |
 | F-22 residual | - | No C6-PREP rebuild test | Added (all columns except the two that need the crawler PR commits) |
 | F-25 residual | - | Unlabelled 13-row block | Labelled in the summary |
+
+## Fable 5.2 focused re-review of 2964a477: VERDICT ACCEPT WITH CONDITIONS (no P1, no P2)
+Same reviewer (not independent of its earlier rounds). N-01 (the P2) FIXED: all 32 first-class references verified against the referenced records (rows 11 and 14 now name ACQ02-02 and S-REVD-003). N-02 to N-06, N-08 and the three residuals FIXED; N-07 and N-09 PARTLY. No outcome or class changed. Four new P3 items, corrected in the following commit:
+
+| ID | Finding | Disposition |
+| --- | --- | --- |
+| M-01 | prefix-resolution test would pass under substring logic | **Corrected:** tests assert that true prefixes (`SRC-RANJI`, `S-BLIND-01`) do not resolve and the full key does |
+| M-02 | superseded block still in METHOD | **Corrected:** duplicated sections and the old limits block removed |
+| M-03 | D3 count slip; 2019 derivative status wording | **Corrected:** 17 FIXED / 9 PARTLY; the 2019 file is in the ACQ-01 snapshot (`source: original`), so only 2018 is producer-inferred |
+| M-04 | carry-over corrections cannot be ledger entries; resulting_state is copy-level | **Corrected in the design:** documentary corrections go to a separate `corrections/notes.csv` (not the ledger); a source-level mapping for `resulting_state` is given |
+
+Residual by construction: the per-type rules in the schema use custom `x-nonempty`/`x-empty` keywords that the builder enforces; a standard JSON Schema validator would not.
 
 **Still open by design (owner options, not defects):** the affirmative-state L3 rule (F-02); external image rows without a result field (F-10); URL normalisation in the builder's contradiction test (F-17); independent, git-capable verification of diff scope and hashes (F-26), which the coordinator's gate performs but no independent reviewer with git access has repeated at this head.
