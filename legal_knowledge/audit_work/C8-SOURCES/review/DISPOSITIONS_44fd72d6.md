@@ -5,7 +5,7 @@ Review: `fable_review_c8_sources_44fd72d6.md` and `fable_review_c8_sources_44fd7
 Scope of these corrections:
 - Implementation only: no legal status was changed, no original record or frozen register was edited, nothing was downloaded and no one was contacted.
 - Generators were fixed and the outputs regenerated wherever a generator exists.
-- RC-03 and RC-06 concern `RULE_VERSION_DECISION_PACK_C8.md`, which the coordinator handles. They are not addressed here.
+- RC-03 and RC-06 concern `RULE_VERSION_DECISION_PACK_C8.md`, which the coordinator handles. They are addressed by the coordinator in the same commit, in RULE_VERSION_DECISION_PACK_C8.md (see DISPOSITIONS_f98f7a2a.md).
 
 | ID | Sev | Disposition | Change made | Files |
 | --- | --- | --- | --- | --- |

@@ -5,8 +5,8 @@
 This pack updates `AUTH-LEDGER/RULE_DECISION_PACK.md` (Cycle 7) with evidence from Cycle 8. Counts refer to the 32 C6-01 drafts unless stated.
 
 **Where the evidence is (Fable RC-06).** The Cycle 8 evidence lives in separate draft PRs, which are reviewed separately and not merged:
-- `legal_knowledge/audit_work/C8-EVIDENCE/` is on branch `claude/c8-evidence-verification` (PR B). It holds the page checks, the born-digital signature results and the exact-anchor simulation.
-- `AUTH-LEDGER/DEMOTION_SEMANTICS_O5.md` is on branch `claude/c8-security-closeout` (PR A).
+- `legal_knowledge/audit_work/C8-EVIDENCE/` is on branch `claude/c8-evidence-verification` (draft PR #36), pinned at commit `152045bd5ae851692ee349ff9e78b42ed477e05f`, which an independent re-review accepted. It holds the page checks, the born-digital signature results and the exact-anchor simulation.
+- `AUTH-LEDGER/DEMOTION_SEMANTICS_O5.md` is on branch `claude/c8-security-closeout` (PR A), pinned at commit `81df0e6c1e6d4631b6f9511a41b1e233f9fbfe53`.
 
 The facts this pack relies on are restated below with their source files, so the pack can be read on its own. A decision on any item that depends on them should wait until PR B, or PR A for O-5, has passed its review.
 

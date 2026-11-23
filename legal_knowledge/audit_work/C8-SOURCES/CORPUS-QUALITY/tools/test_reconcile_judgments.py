@@ -322,6 +322,45 @@ class ReconcileTests(unittest.TestCase):
         self.assertTrue(rb(other).startswith(b"line,item_id,classification"))
         self._no_temp_left()
 
+    def test_out_non_regular_target_refused_even_with_overwrite(self):  # re-review RR-01
+        p = self._batch_file()
+        fifo = os.path.join(self.tmp.name, "a.fifo")
+        os.mkfifo(fifo)
+        link = os.path.join(self.tmp.name, "link.csv")
+        target = os.path.join(self.tmp.name, "target.csv")
+        with open(target, "w") as f:
+            f.write("keep\n")
+        os.symlink(target, link)
+        for out in (fifo, link):
+            code, err = self._main(self.fx.args(p, out) + ["--overwrite"])
+            self.assertEqual(code, 2, err)
+            self.assertIn("not a regular file", err)
+        self.assertTrue(os.path.islink(link))
+        self.assertEqual(rb(target), b"keep\n")
+        import stat as _stat
+        self.assertTrue(_stat.S_ISFIFO(os.lstat(fifo).st_mode))
+        self._no_temp_left()
+
+    def test_out_existing_file_inside_repo_refused_with_overwrite(self):  # re-review RR-02
+        p = self._batch_file()
+        repo = os.path.join(self.tmp.name, "repo")
+        os.makedirs(repo)
+        reg = os.path.join(repo, "register.csv")
+        with open(reg, "w") as f:
+            f.write("keep\n")
+        code, err = self._main(self.fx.args(p, reg) + ["--overwrite", "--repo", repo])
+        self.assertEqual(code, 2, err)
+        self.assertIn("inside the repository", err)
+        self.assertEqual(rb(reg), b"keep\n")
+
+    def test_deeply_nested_json_fails_closed(self):  # re-review RR-03
+        p = os.path.join(self.tmp.name, "deep.jsonl")
+        with open(p, "w") as f:
+            f.write("[" * 100000 + "]" * 100000 + "\n")
+        code, err = self._main(self.fx.args(p, self.out))
+        self.assertEqual(code, 2, err)
+        self.assertFalse(os.path.exists(self.out))
+
     def test_out_input_path_refused_even_with_overwrite(self):
         p = self._batch_file()
         for target in (p, self.fx.cases, os.path.join(self.tmp.name, ".", "holdings.csv")):

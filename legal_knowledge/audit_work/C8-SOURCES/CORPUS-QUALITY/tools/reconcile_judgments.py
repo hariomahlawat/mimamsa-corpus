@@ -75,6 +75,7 @@ import io
 import json
 import os
 import re
+import stat
 import sys
 import tempfile
 
@@ -608,7 +609,7 @@ def _same_file(a, b):
     return False
 
 
-def check_out_path(out, inputs, overwrite=False):
+def check_out_path(out, inputs, overwrite=False, repo=None):
     """Raise OutputError if writing the report to `out` could touch an input or an original."""
     for p in inputs:
         if _same_file(out, p):
@@ -622,11 +623,16 @@ def check_out_path(out, inputs, overwrite=False):
     parent = os.path.dirname(os.path.abspath(out))
     if not os.path.isdir(parent):
         raise OutputError(f"--out parent directory does not exist: {parent}")
-    if os.path.lexists(out) and not overwrite:
-        raise OutputError(f"--out already exists: {out} (pass --overwrite to replace a non-input file)")
+    if os.path.lexists(out):
+        if not overwrite:
+            raise OutputError(f"--out already exists: {out} (pass --overwrite to replace a non-input file)")
+        if not stat.S_ISREG(os.lstat(out).st_mode):  # never replace a device, FIFO, socket or symlink (re-review RR-01)
+            raise OutputError(f"--out exists and is not a regular file: {out} (refused, even with --overwrite)")
+        if repo and os.path.realpath(out).startswith(os.path.realpath(repo) + os.sep):  # re-review RR-02
+            raise OutputError(f"--out is an existing file inside the repository {repo} (never overwritten; choose a new path)")
 
 
-def write_report(rows, out, inputs=(), overwrite=False):
+def write_report(rows, out, inputs=(), overwrite=False, repo=None):
     buf = io.StringIO()
     w = csv.DictWriter(buf, fieldnames=FIELDS, lineterminator="\n")
     w.writeheader()
@@ -640,7 +646,7 @@ def write_report(rows, out, inputs=(), overwrite=False):
             f.write(data)
             f.flush()
             os.fsync(f.fileno())
-        check_out_path(out, inputs, overwrite)  # re-check immediately before the switch
+        check_out_path(out, inputs, overwrite, repo)  # re-check immediately before the switch
         if overwrite:
             os.replace(tmp, out)
         else:
@@ -688,12 +694,15 @@ def main(argv=None):
         print("ERROR: missing input file(s): " + "; ".join(missing), file=sys.stderr)
         return 2
     try:
-        check_out_path(a.out, inputs, a.overwrite)
+        check_out_path(a.out, inputs, a.overwrite, a.repo)
     except OutputError as e:
         print(f"ERROR: {e}", file=sys.stderr)
         return 2
     try:
         rows = load_batch(a.incoming)
+    except RecursionError:  # pathologically nested JSON: fail closed with exit 2 (re-review RR-03)
+        print("ERROR: input nesting too deep; no report written (fail closed)", file=sys.stderr)
+        return 2
     except InputError as e:
         print(f"ERROR: {e}", file=sys.stderr)
         return 2
@@ -711,7 +720,7 @@ def main(argv=None):
         return 2
     out = classify(items, ents, shas, a.party_threshold, warn=lambda m: print(m, file=sys.stderr))
     try:
-        write_report(out, a.out, inputs, a.overwrite)
+        write_report(out, a.out, inputs, a.overwrite, a.repo)
     except (OutputError, OSError) as e:
         print(f"ERROR: {e}; no report written", file=sys.stderr)
         return 2
