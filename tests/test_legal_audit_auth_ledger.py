@@ -1775,7 +1775,10 @@ def _forge_commit_graph(t, chain=False):
     if chain:
         new = f.with_name("graph-" + bytes(b[-20:]).hex() + ".graph")
         f.rename(new)
-        (f.parent / "commit-graph-chain").write_text(bytes(b[-20:]).hex() + "\n")
+        chain_file = f.parent / "commit-graph-chain"
+        if chain_file.exists():  # newer git (e.g. 2.56) writes it read-only
+            __import__("os").chmod(chain_file, 0o644)
+        chain_file.write_text(bytes(b[-20:]).hex() + "\n")
     return c1, c2
 
 
