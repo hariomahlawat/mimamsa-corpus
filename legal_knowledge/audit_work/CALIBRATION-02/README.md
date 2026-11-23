@@ -44,3 +44,31 @@ The sample is `COORDINATION/CALIBRATION-01/calibration_package.csv`, unchanged: 
 ## Validation
 - `python3 legal_knowledge/audit_work/CALIBRATION-02/tools/check_calibration02.py --require A,B,C,D`
 - `tests/test_legal_audit_calibration02.py`
+
+## Deliverables (Cycle 4)
+| # | Deliverable | Location |
+| --- | --- | --- |
+| 1 | 46-record substantive review: propositions and per-record results | `propositions.csv`, `reconciliation/record_scorecard.csv`, `reconciliation/proposition_matrix.csv` |
+| 2 | Independent reviewer findings and reconciliation | `reviews/{A,B,C,D}/` (findings, READMEs, page-image checks A/C); `reconciliation/disagreements.csv`, `reconciliation/coordinator_qc.csv` |
+| 3 | Proposed corrections, before and after, with evidence | `proposals/correction_proposals.csv`, `proposals/proposed_versions.jsonl` (originals unchanged) |
+| 4 | Cross-volume missing-link and contradiction register | `registers/cross_volume_register.csv` (with D's `reviews/D/cross_volume_register.csv`) |
+| 5 | Acquisition-readiness matrix | `registers/acquisition_readiness/` |
+| 6 | Legal-adviser packet | `adviser/LEGAL_ADVISER_PACKET.md`, `adviser/legal_adviser_questions.csv` |
+| 7 | Rule-level indexing specification (planning only) | `registers/rule_index_spec/` |
+| 8 | Quality scorecard | `SCORECARD.md`, `reconciliation/scorecard.json` |
+| 9 | Readiness assessment | `READINESS_ASSESSMENT.md` |
+| — | New source conflict | `registers/source_conflicts_c4.csv` (SC4-01, r.182, OPEN) |
+
+Build order, all deterministic:
+1. `tools/build_propositions.py`
+2. reviews A–D (independent)
+3. `tools/check_calibration02.py --require A,B,C,D`
+4. `tools/reconcile.py`
+5. `tools/build_packages.py`
+
+Earlier artifacts linked:
+- `COORDINATION/CALIBRATION-01/` (the sample);
+- `COORDINATION/CYCLE3-PLANNING/` (the 140-item acquisition schedule and the 63-item authentication queue);
+- `COORDINATION/INTEGRATION_CYCLE3.md`;
+- `ARMY-RULES-CHAIN-01/`;
+- `WS-A-STATUTORY/`, `WS-B-JUDGMENTS/` (OI-01..13), `WS-C-MML/` and `WS-D-QUALITY/` (canonical coverage; ANCHORED_FULL 187).
