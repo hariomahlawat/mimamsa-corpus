@@ -44,7 +44,8 @@ def entry_from_draft(sha, n, version=1, **over):
     e = {k: "" for k in L.COLS}
     e.update({"entry_id": f"AL-v{version:04d}-{n:03d}", "entry_version": f"{version:04d}", "entry_type": "ADD", "sha256": sha,
               "source_id": d["source_id"], "copy_id": d["copy_id"], "document_identity": d["document_identity"],
-              "evidence_refs": d["evidence_refs"], "first_class_record_ref": d["first_class_record_ref"], "identity_refs": d["identity_refs"],
+              "evidence_refs": d["evidence_refs"], "first_class_record_ref": d["first_class_record_ref"],
+              "identity_refs": d["identity_refs"].replace("T:C6-01-PROVENANCE/inputs/held_copy_facts.csv#", "T:AUTH-LEDGER/evidence/copy_facts.csv#"),
               "proposed_authentication_state": "PROVENANCE_DOCUMENTED", "proposed_class": d["proposed_class"], "carrier": C5COPY[sha]["copy_carrier_provenance"],
               "official_locator_recorded": strength._first_class(d["first_class_record_ref"], sha)[2], "limitations": d["limitations"], "justification": "synthetic test entry",
               "rule_version": "1", "owner_decision": "APPROVED"})
@@ -476,7 +477,7 @@ class Controls(unittest.TestCase):
 
     def test_text_identity_only_for_court_copies(self):  # M42
         g = entry_from_draft(GAZETTE_1962, 1)
-        g["identity_refs"] = f"T:C6-01-PROVENANCE/inputs/held_copy_facts.csv#{g['copy_id']}"
+        g["identity_refs"] = f"T:AUTH-LEDGER/evidence/copy_facts.csv#{g['copy_id']}"
         self.reject([g], "no valid identity evidence")
 
     def test_court_primary_needs_issuing_carrier(self):  # M05
@@ -570,6 +571,12 @@ class Controls(unittest.TestCase):
         pj = json.loads((self.t.dir / "frozen_inputs.json").read_text())
         pj["files"]["legal_knowledge/audit_work/WS-D-QUALITY/canonical_coverage.csv"] = "1" * 64
         (self.t.dir / "frozen_inputs.json").write_text(json.dumps(pj))
+        m = self.t.dir / "ledger/manifest.jsonl"  # re-derive a consistent genesis so only the data pin itself is wrong
+        g = json.loads(m.read_text().split("\n")[0])
+        g["frozen_inputs_sha256"] = common.sha256_file(self.t.dir / "frozen_inputs.json")
+        s = L.canonical_line(g)
+        m.write_text(s + "\n")
+        (self.t.dir / "ledger/HEAD").write_text(f"0 {common.sha256_text(s)}\n")
         with self.assertRaisesRegex(common.LedgerError, "frozen inputs: hash mismatch"):
             reader.frozen_builder(self.t.dir)
 
@@ -636,7 +643,7 @@ class Controls(unittest.TestCase):
         d = entry_from_draft(DHARAMVIR, 1)
         self.reject([dict(d, evidence_refs=d["evidence_refs"] + "; OFFICIALGAZETTE:ACQ-02/supplement_inventory.csv#ACQ02-02")], "not KIND:path#key")
         for over, why in ((dict(evidence_refs=d["evidence_refs"] + "; L2:ACQ-02/supplement_inventory.csv#ACQ02-02"), "does not concern this sha256"),
-                          (dict(identity_refs="T:this/does/not/exist#nothing"), "must name this copy's facts row"),
+                          (dict(identity_refs="T:this/does/not/exist#nothing"), "must name this copy's row in the pinned evidence/copy_facts.csv"),
                           (dict(official_locator_recorded="https://api.sci.gov.in/other.pdf"), "must equal the first-class record's URL"),
                           (dict(carrier="ISSUING_AUTHORITY (edited)"), "carrier must equal"),
                           (dict(evidence_refs="WSB:" + [x for x in d["evidence_refs"].split("; ") if x.startswith("WSB:")][0].split(":", 1)[1]), "must also be listed")):
@@ -678,6 +685,199 @@ class Controls(unittest.TestCase):
         a = json.loads(s["coverage_summary.json"])
         self.assertEqual((a["authentication"]["documented_primary_copies"], a["crosswalk_case_rows_by_status"]["EXACT_ANCHOR"]), (40, 13))
         self.assertEqual(json.loads(v0()["coverage_summary.json"])["authentication"]["documented_primary_copies"], 12)  # committed ledger unchanged
+
+
+class ReReview(unittest.TestCase):
+    """Fable re-review N-01..N-05 and the surviving mutants of its second mutation run, one assertion each."""
+    def setUp(self):
+        self.t = Synthetic()
+
+    def tearDown(self):
+        self.t.close()
+
+    def reject(self, entries, why, **kw):
+        self.t.add_version(entries, **kw)
+        with self.assertRaisesRegex(common.LedgerError, why):
+            self.t.state()
+
+    def test_n01_recertify_after_withdrawal_with_resulting_state(self):
+        self.t.add_version([entry_from_draft(DHARAMVIR, 1)])
+        self.t.add_version([withdraw(DHARAMVIR, 1, 2, "AL-v0001-001", reason="CONTRADICTION", resulting="AUTHENTICATION_PENDING")])
+        self.t.add_version([entry_from_draft(DHARAMVIR, 1, version=3, entry_type="CORRECTION", target_entry_id="AL-v0002-001", justification="re-verified")])
+        self.assertEqual(case_status(self.t.state(), "DCLR-SC-2013-N08"), "EXACT_ANCHOR")  # R1
+        self.assertEqual(case_status(self.t.state(2), "DCLR-SC-2013-N08"), "PARTIAL_MATCH")
+        t2 = Synthetic()
+        try:  # R2: withdrawal to PROVENANCE_UNKNOWN, then a new ADD
+            t2.add_version([entry_from_draft(DHARAMVIR, 1)])
+            t2.add_version([withdraw(DHARAMVIR, 1, 2, "AL-v0001-001", resulting="PROVENANCE_UNKNOWN")])
+            t2.add_version([entry_from_draft(DHARAMVIR, 1, version=3)])
+            self.assertEqual(case_status(t2.state(), "DCLR-SC-2013-N08"), "EXACT_ANCHOR")
+        finally:
+            t2.close()
+
+    def test_n02_frozen_inputs_checked_against_manifest_before_frozen_code(self):  # also M11
+        p = self.t.dir / "frozen_inputs.json"
+        p.write_text(p.read_text() + "\n")  # same pins, different file hash than the genesis line recorded
+        with self.assertRaisesRegex(common.LedgerError, "frozen_inputs.json changed since this version was recorded"):
+            reader.frozen_builder(self.t.dir)
+        before = list(sys.path)
+        reader.frozen_builder()
+        self.assertEqual(sys.path, before)  # sys.path restored after executing frozen code
+
+    def test_n03_hosts(self):
+        self.assertFalse(strength.host_ok("https://web.archive.org/web/2020/https://www.livelaw.in/x.pdf", "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE"))
+        self.assertFalse(strength.host_ok("http://archive.org/download/x/y.pdf", "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE"))
+        self.assertFalse(strength.host_ok("https://archive.org/search?q=x", "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE"))
+        self.assertTrue(strength.host_ok("https://archive.org/download/x/y.pdf", "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE"))
+        self.assertFalse(strength.host_ok("https://user@api.sci.gov.in/x", "PRIMARY_OFFICIAL_COURT_COPY"))
+
+    def test_n04_record_parsing(self):
+        self.reject([entry_from_draft(DHARAMVIR, 1)], "different persons", decided_by="A. Owner", reviewer="A Owner")
+        e = entry_from_draft(DHARAMVIR, 1)
+        pairs = f"{e['entry_id']}={e['sha256']}:{L.entry_digest(e)}"
+        t2 = Synthetic()
+        try:
+            ref, h = t2.write_record("D-v0001.md", f"decision_id: D-v0001\ndecision: APPROVED\nledger_version: 0001\nentries: {pairs}\n"
+                                                    "decided_by: owner\ndate: 2026-11-23\n   Decision: REJECTED\n")
+            e["decision_record_ref"], e["decision_record_sha256"] = ref, h
+            t2.add_version([e], decision=False, tamper=lambda line: line["decisions"].update({ref: h}))
+            with self.assertRaisesRegex(common.LedgerError, "appears more than once"):
+                t2.state()
+        finally:
+            t2.close()
+
+    def test_m04b_reviewer_and_m04c_date(self):
+        self.reject([entry_from_draft(DHARAMVIR, 1)], "review record lacks reviewer", reviewer="?")
+        e = entry_from_draft(DHARAMVIR, 1)
+        pairs = f"{e['entry_id']}={e['sha256']}:{L.entry_digest(e)}"
+        t2 = Synthetic()
+        try:
+            ref, h = t2.write_record("D-v0001.md", f"decision_id: D-v0001\ndecision: APPROVED\nledger_version: 0001\nentries: {pairs}\n"
+                                                    "decided_by: owner\ndate: 9999-99-99\n")
+            e["decision_record_ref"], e["decision_record_sha256"] = ref, h
+            t2.add_version([e], decision=False, tamper=lambda line: line["decisions"].update({ref: h}))
+            with self.assertRaisesRegex(common.LedgerError, "valid YYYY-MM-DD date"):
+                t2.state()
+        finally:
+            t2.close()
+
+    def test_m14b_per_module_pin_and_n67_not_imported(self):
+        pinmap = json.loads((PKG / "frozen_inputs.json").read_text())["files"]
+        bad = dict(pinmap, **{"legal_knowledge/audit_work/" + reader.FROZEN_CODE["build_registers"]: "2" * 64})
+        with self.assertRaisesRegex(common.LedgerError, "does not match its pin"):
+            reader._exec_pinned("build_registers", reader.FROZEN_CODE["build_registers"], bad)
+        B = reader.frozen_builder()
+        self.assertIsNone(B.__spec__)  # executed from bytes, not loaded by the import system
+        self.assertFalse(getattr(B, "__cached__", None))
+
+    def test_m17_entry_version_must_match_file(self):
+        self.reject([entry_from_draft(DHARAMVIR, 1, version=2)], "entry_version 0002 in version file 1")
+
+    def test_m19_partial_c6_check_is_not_identity(self):
+        dhc = [r["sha256"] for r in common.read_csv(AW / "C6-01-PROVENANCE/registers/provenance_recovery_register.csv") if "DHC-RULES" in r["source_id"]][0]
+        with self.assertRaisesRegex(common.LedgerError, "identity_result PARTIAL"):
+            strength.identity_ok(["I:C6-01-PROVENANCE/inputs/page_image_checks_c6.csv#C6-PIC-03"], dhc, False, "x", "")
+
+    def test_m23_add_records_documented_only(self):
+        self.reject([entry_from_draft(DHARAMVIR, 1, proposed_authentication_state="AUTHENTICATION_PENDING")], "records documented provenance only")
+
+    def test_m25c_snapshot_must_match_copy(self):
+        d = entry_from_draft(GAZETTE_1962, 1)
+        snap = "L2:ACQ-01/archive_org_metadata_snapshot.json#in.gazette.central.e.2022-06-06.236353/236353.pdf"
+        self.reject([dict(d, evidence_refs=d["evidence_refs"] + "; " + snap)], "does not match this copy's md5 and size")
+
+    def test_m31_correction_target_must_be_this_sha(self):
+        self.t.add_version([entry_from_draft(DHARAMVIR, 1), entry_from_draft(GAZETTE_1962, 2)])
+        self.reject([entry_from_draft(DHARAMVIR, 1, version=2, entry_type="CORRECTION", target_entry_id="AL-v0001-002", justification="x")], "not the live row")
+
+    def test_m35_retrieval_record_needs_url(self):
+        ref = DRAFT[DHARAMVIR]["first_class_record_ref"]
+        path = ref.split("#")[0]
+        strength._rows(path)
+        orig = strength._cache[path]
+        strength._cache[path] = [dict(o, locator="no url here") if o.get("source_id") == ref.split("#")[1] else o for o in orig]
+        try:
+            with self.assertRaisesRegex(common.LedgerError, "no URL locator"):
+                strength.first_class(ref, DHARAMVIR)
+        finally:
+            strength._cache[path] = orig
+
+    def test_m36_pending_correction_class(self):
+        self.t.add_version([entry_from_draft(DHARAMVIR, 1)])
+        self.reject([entry_from_draft(DHARAMVIR, 1, version=2, entry_type="CORRECTION", target_entry_id="AL-v0001-001",
+                                      proposed_authentication_state="AUTHENTICATION_PENDING", justification="x")], "must carry class AUTHENTICATION_PENDING")
+
+    def test_m38_pin_set_must_match_declared_list(self):
+        pj = json.loads((self.t.dir / "frozen_inputs.json").read_text())
+        pj["files"]["legal_knowledge/audit_work/C6-PREP/README.md"] = common.sha256_file(AW / "C6-PREP/README.md")
+        (self.t.dir / "frozen_inputs.json").write_text(json.dumps(pj))
+        with self.assertRaisesRegex(common.LedgerError, "pin set differs"):
+            pins.verify(self.t.dir)
+
+    def test_m43_held_index_required(self):
+        e = entry_from_draft(DHARAMVIR, 1)
+        ctx = L.Context({}, {}, {r["sha256"]: r for r in common.read_csv(AW / "SOURCE-LIBRARY-C5/registers/source_copy_register.csv")}, {})
+        with self.assertRaisesRegex(common.LedgerError, "not in the held-source index"):
+            L._association(e, ctx)
+
+    def test_n56_record_file_name_and_n58_safe_ref(self):
+        e = entry_from_draft(DHARAMVIR, 1)
+        pairs = f"{e['entry_id']}={e['sha256']}:{L.entry_digest(e)}"
+        ref, h = self.t.write_record("X.md", f"decision_id: X\ndecision: APPROVED\nledger_version: 0001\nentries: {pairs}\ndecided_by: o\ndate: 2026-11-23\n")
+        e["decision_record_ref"], e["decision_record_sha256"] = ref, h
+        self.reject([e], "must be decisions/D-v0001", decision=False, tamper=lambda line: line["decisions"].update({ref: h}))
+        with self.assertRaisesRegex(common.LedgerError, "normalised path"):
+            L._check_record(self.t.dir, {"decisions": {}, "reviews": {}}, "decision", "decisions/./D-v0001.md", "", entry_from_draft(DHARAMVIR, 1))
+
+    def test_n63_build_refuses_output_differing_from_manifest(self):
+        orig = reader.effective_state
+        def altered(*a, **k):
+            texts, lines = orig(*a, **k)
+            return dict(texts, **{"corpus_crosswalk.csv": texts["corpus_crosswalk.csv"] + "x\n"}), lines
+        reader.effective_state = altered
+        argv = sys.argv
+        sys.argv = ["auth_ledger.py", "build", "--as-of", "0", "--out", tempfile.mkdtemp()]
+        try:
+            self.assertEqual(CLI.main(), 2)
+        finally:
+            reader.effective_state, sys.argv = orig, argv
+
+    def test_n64_verify_reports_unexpected_files(self):
+        shutil.copytree(PKG / "effective", self.t.dir / "effective")
+        self.assertEqual(CLI.verify(self.t.dir), ["v0000 ok"])
+        (self.t.dir / "decisions/stray.md").write_text("x")
+        with self.assertRaisesRegex(common.LedgerError, "not accounted for"):
+            CLI.verify(self.t.dir)
+
+    def test_n05_header_kind_and_t_reference(self):
+        f = self.t.dir / "ledger/v0001.csv"
+        f.write_text("legal_status,in_force\n")
+        prev = common.sha256_text((self.t.dir / "ledger/manifest.jsonl").read_text().split("\n")[0])
+        line = {"version": 1, "prev": prev, "date": "2026-11-23", "rule_version": 1, "frozen_inputs_sha256": common.sha256_file(self.t.dir / "frozen_inputs.json"),
+                "file": "ledger/v0001.csv", "file_sha256": common.sha256_file(f), "decisions": {}, "reviews": {}, "effective_sha256": "", "note": "x"}
+        s = L.canonical_line(line)
+        with open(self.t.dir / "ledger/manifest.jsonl", "a") as fh:
+            fh.write(s + "\n")
+        (self.t.dir / "ledger/HEAD").write_text(f"1 {common.sha256_text(s)}\n")
+        with self.assertRaisesRegex(common.LedgerError, "header must equal the schema columns"):
+            self.t.state()
+        t2 = Synthetic()
+        try:
+            d = entry_from_draft(DHARAMVIR, 1)
+            wsb = [x for x in d["evidence_refs"].split("; ") if x.startswith("WSB:")][0]
+            t2.add_version([dict(d, evidence_refs=d["evidence_refs"].replace(wsb, "L6:" + wsb.split(":", 1)[1]))])
+            with self.assertRaisesRegex(common.LedgerError, "does not belong to file"):
+                t2.state()
+        finally:
+            t2.close()
+        t3 = Synthetic()
+        try:
+            d = entry_from_draft(DHARAMVIR, 1)
+            t3.add_version([dict(d, identity_refs=d["identity_refs"].replace("T:AUTH-LEDGER/evidence/copy_facts.csv#", "T:C6-01-PROVENANCE/inputs/held_copy_facts.csv#"))])
+            with self.assertRaisesRegex(common.LedgerError, "pinned evidence/copy_facts.csv"):
+                t3.state()
+        finally:
+            t3.close()
 
 
 class Transitions(unittest.TestCase):

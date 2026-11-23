@@ -59,7 +59,7 @@
 - **Effect of AUTH-LEDGER:** it records **authentication** only. An EXACT_ANCHOR created by a future approved entry means a documented copy is held. It does not settle statutory interpretation, subsequent judicial treatment (for example Navjot Sandhu after Anvar) or applicability. Those remain adviser questions.
 
 ## Authentication tranche proposal (for owner decision; nothing is approved here)
-- **Tranche 1, Gazette:** the 20 primary Gazette entries. They have no crosswalk effect, so they test the ledger mechanics at zero coverage risk. Policy B2 allows legacy image checks with a recorded limitation.
-- **Tranche 2, Supreme Court:** the 8 primary court entries, which carry 7 case anchors. Under policy B2, each needs a C6-style CONFIRMED identity check or a reviewer statement.
+- **Tranche 1, Gazette:** the 20 primary Gazette entries. They have no crosswalk effect, so they test the ledger mechanics at zero coverage risk. If the owner adopts policy B2, legacy image checks are allowed with a recorded limitation; rule 1 currently accepts them (B1).
+- **Tranche 2, Supreme Court:** the 8 primary court entries, which carry 7 case anchors. If the owner adopts policy B2, each needs a C6-style CONFIRMED identity check or a reviewer statement.
 - **Non-primary entries** (4) are recorded only after the owner adopts the fidelity table, and they never anchor.
 - **Not entries:** the RS papers-laid record (WITHHELD) and Rajbir C2.

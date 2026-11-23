@@ -37,6 +37,15 @@ COMPAT = {
     "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY": {"pub_not": {"JUDICIAL", "PARLIAMENTARY_RECORD"}, "carrier": None},
 }
 EVIDENCE_KINDS = {"L1", "L2", "L3", "L4", "L5", "L6", "WSB"}
+KIND_FILES = {  # each evidence kind label is tied to its file family (re-review N-05)
+    "L1": lambda p: p == "PILOT-01/registers/source_code_resolution_v3.csv",
+    "L2": lambda p: p in ("ACQ-02/supplement_inventory.csv",) + strength.SNAPSHOTS,
+    "L3": lambda p: strength._json_source(p),
+    "L4": lambda p: p == "PILOT-01/registers/source_discovery_2026-11-22.csv",
+    "L5": lambda p: p == "R23-VERIFY-01/registers/amendment_search_2026-11-22.csv",
+    "L6": lambda p: p == "WS-A-STATUTORY/identity_transcription_register.csv",
+    "WSB": lambda p: p == "WS-B-JUDGMENTS/tools/held_copies.csv",
+}
 DIGEST_EXCLUDE = {"decision_record_ref", "decision_record_sha256", "reviewer_ref", "reviewer_record_sha256"}
 DATE = re.compile(r"\d{4}-\d{2}-\d{2}$")
 
@@ -103,13 +112,18 @@ def _parse_record(path):
     """key: value lines; duplicate keys are an error (an ambiguous record is never read in the approving sense)."""
     out = {}
     for n, line in enumerate(Path(path).read_text(encoding="utf-8").splitlines(), 1):
-        m = re.match(r"^([a-z_]+):\s*(.*)$", line)
+        m = re.match(r"^\s*([A-Za-z_]+)\s*:\s*(.*)$", line)  # keys are case- and indentation-insensitive (re-review N-04)
         if not m:
             continue
-        if m.group(1) in out:
-            raise LedgerError(f"{path.name}: key {m.group(1)!r} appears more than once (line {n})")
-        out[m.group(1)] = m.group(2).strip()
+        k = m.group(1).lower()
+        if k in out:
+            raise LedgerError(f"{path.name}: key {k!r} appears more than once (line {n})")
+        out[k] = m.group(2).strip()
     return out
+
+
+def _person(s):
+    return re.sub(r"[^a-z0-9]", "", (s or "").lower())
 
 
 def _safe_ref(ref, prefix):
@@ -148,8 +162,13 @@ def _check_record(root, line, kind, ref, sha_declared, entry):
         raise LedgerError(f"{entry['entry_id']}: {kind} record does not name this entry with this sha256 and content digest")
     if rec.get("ledger_version") != entry["entry_version"]:
         raise LedgerError(f"{entry['entry_id']}: {kind} record is for ledger version {rec.get('ledger_version')!r}")
-    if not DATE.match(rec.get("date", "")):
-        raise LedgerError(f"{entry['entry_id']}: {kind} record date must be YYYY-MM-DD")
+    import datetime
+    try:
+        if not DATE.match(rec.get("date", "")):
+            raise ValueError
+        datetime.date.fromisoformat(rec["date"])
+    except (ValueError, KeyError):
+        raise LedgerError(f"{entry['entry_id']}: {kind} record date must be a valid YYYY-MM-DD date")
     if kind == "decision":
         if rec.get("decision") != entry["owner_decision"]:
             raise LedgerError(f"{entry['entry_id']}: decision record says {rec.get('decision')!r}, entry says {entry['owner_decision']!r}")
@@ -210,6 +229,8 @@ def resolve_refs(e, ctx):
         if not sep or kind not in EVIDENCE_KINDS:
             raise LedgerError(f"{e['entry_id']}: evidence reference {x!r} is not KIND:path#key with KIND in {sorted(EVIDENCE_KINDS)}")
         path, rec = strength.resolve(ref)
+        if not KIND_FILES[kind](path):
+            raise LedgerError(f"{e['entry_id']}: evidence kind {kind} does not belong to file {path}")
         own = ""
         for col in ("sha256", "official_sha256", "downloaded_sha256", "file_sha256", "document_sha256"):
             if isinstance(rec, dict) and (rec.get(col) or "").strip():
@@ -257,8 +278,10 @@ def _evidence_checks(e, ctx, cls):
     p1 = {r["sha256"]: r for r in read_csv(PKG / "evidence/copy_facts.csv")}.get(e["sha256"], {}).get("p1_text_excerpt", "")
     ids = [y for y in e["identity_refs"].split("; ") if y]
     for y in ids:
-        if y.startswith("T:") and y != f"T:C6-01-PROVENANCE/inputs/held_copy_facts.csv#{e['copy_id']}":
-            raise LedgerError(f"{e['entry_id']}: text-identity reference must name this copy's facts row")
+        if y.startswith("T:"):
+            if y != f"T:AUTH-LEDGER/evidence/copy_facts.csv#{e['copy_id']}":
+                raise LedgerError(f"{e['entry_id']}: text-identity reference must name this copy's row in the pinned evidence/copy_facts.csv")
+            strength.resolve(y[2:])
     strength.identity_ok(ids, e["sha256"], court, m["title"], p1)
     bad = strength.contradiction(url, e["sha256"])
     if bad:
@@ -306,6 +329,8 @@ def apply_ledger(root, ctx, as_of=None):
                 raise LedgerError(f"version {line['version']}: pinned record {k} missing or modified")
         with open(f, newline="", encoding="utf-8") as fh:
             header = fh.readline().rstrip("\r\n").split(",")
+        if header != COLS:
+            raise LedgerError(f"version {line['version']}: version file header must equal the schema columns exactly (got {header})")
         entries = read_csv(f)
         ids = [e.get("entry_id") for e in entries]
         dup = sorted({i for i in ids if ids.count(i) > 1} | {i for i in ids if i in seen_ids})
@@ -323,7 +348,7 @@ def apply_ledger(root, ctx, as_of=None):
                                     "effect": f"NONE (owner_decision {e['owner_decision']})", "before": "", "after": ""})
                 continue
             rev = _check_record(root, line, "review", e["reviewer_ref"], e["reviewer_record_sha256"], e)
-            if e["decision_record_ref"] == e["reviewer_ref"] or dec["decided_by"].strip().lower() == rev["reviewer"].strip().lower():
+            if e["decision_record_ref"] == e["reviewer_ref"] or _person(dec["decided_by"]) == _person(rev["reviewer"]):
                 raise LedgerError(f"{e['entry_id']}: decision and review must be separate records by different persons (F-04)")
             s = e["sha256"]
             before = f"{eff[s]['authentication_state']}/{eff[s]['effective_source_class']}" if s in eff else "NO_ROW"

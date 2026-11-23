@@ -29,12 +29,18 @@ CLASS_HOSTS = {
 
 
 def host_ok(url, cls):
-    m = re.match(r"^https?://([^/:?#]+)", url or "")
-    h = (m.group(1) if m else "").lower()
+    """HTTPS only; exact host or dot-suffix; archive.org only for its item and download paths (never web.archive.org
+    captures of other sites: re-review N-03)."""
+    m = re.match(r"^https://([^/:?#@]+)(/[^?#]*)?", url or "")
+    if not m:
+        return False
+    h, path = m.group(1).lower(), m.group(2) or "/"
     allowed = CLASS_HOSTS.get(cls)
     if allowed is None:
         return False
-    return any(h == a.lstrip(".") or h.endswith(a if a.startswith(".") else "." + a) or h == a for a in allowed)
+    if h == "archive.org" or h.endswith(".archive.org"):
+        return "archive.org" in allowed and h == "archive.org" and path.startswith(("/download/", "/details/"))
+    return any(h == a.lstrip(".") or h.endswith(a if a.startswith(".") else "." + a) for a in allowed)
 CSV_KEYS = {  # path -> (key column, own-sha256 column)
     "PILOT-01/registers/source_code_resolution_v3.csv": ("code", "official_sha256"),
     "PILOT-01/registers/source_discovery_2026-11-22.csv": ("target_id", "downloaded_sha256"),

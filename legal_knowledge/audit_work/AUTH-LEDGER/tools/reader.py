@@ -44,12 +44,21 @@ def _exec_pinned(name, rel, pinmap):
 def frozen_builder(root=PKG):
     """Verify every pin, then execute the frozen Cycle 4 rule module and the frozen Cycle 5 builder from their verified
     bytes (Fable review F-05: an import could load a stale or crafted __pycache__ file instead of the pinned source)."""
+    from common import sha256_file
+    fsha = sha256_file(Path(root) / "frozen_inputs.json")
+    for line in L.read_manifest(root):  # the pin set itself must be the one every manifest line recorded (re-review N-02)
+        if line["frozen_inputs_sha256"] != fsha:
+            raise LedgerError(f"version {line['version']}: frozen_inputs.json changed since this version was recorded")
     pins.verify(root)
     pinmap = json.loads((Path(root) / "frozen_inputs.json").read_text(encoding="utf-8"))["files"]
-    for n in FROZEN_CODE:
-        sys.modules.pop(n, None)
-    _exec_pinned("evidence_classification", FROZEN_CODE["evidence_classification"], pinmap)
-    return _exec_pinned("build_registers", FROZEN_CODE["build_registers"], pinmap)
+    saved = list(sys.path)
+    try:
+        for n in FROZEN_CODE:
+            sys.modules.pop(n, None)
+        _exec_pinned("evidence_classification", FROZEN_CODE["evidence_classification"], pinmap)
+        return _exec_pinned("build_registers", FROZEN_CODE["build_registers"], pinmap)
+    finally:
+        sys.path[:] = saved
 
 
 def _held_index():
@@ -171,7 +180,11 @@ def effective_state(root=PKG, as_of=None):
     except R.RuleError as e:
         raise LedgerError(f"copy-status rule: {e}")
     derived = {c["sha256"]: c["copy_effective_status"] for c in copies}
-    for w in withdrawn:  # the change list may not state a state that was not derived (F-09)
+    latest = {}
+    for t_ in transitions:
+        if t_["effect"] == "APPLIED":
+            latest[t_["sha256"]] = t_["entry_id"]
+    for w in [x for x in withdrawn if latest.get(x["sha256"]) == x["entry_id"]]:  # only the latest event for a sha256 (re-review N-01)
         want = {"AUTHENTICATION_PENDING": R.PENDING, "NO_ROW": None, "PROVENANCE_UNKNOWN": R.UNKNOWN}[w["resulting_state"]]
         if want is not None and derived.get(w["sha256"]) != want:
             raise LedgerError(f"{w['entry_id']}: resulting_state {w['resulting_state']} but the derived copy status is {derived.get(w['sha256'])}")
