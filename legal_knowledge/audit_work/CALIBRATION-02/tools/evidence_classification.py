@@ -90,10 +90,17 @@ class Evidence:
             if cls_.startswith(("MIRROR", "SECONDARY")):
                 return MIRROR, f"authentication register class {cls_}"
             if st == "PROVENANCE_DOCUMENTED" and cls_.startswith("PRIMARY_"):
+                # the file-type rule applies even when a register row exists: a register cannot make derived text primary
+                if all(p.lower().endswith(DERIVED_EXT) for p in paths):
+                    return DERIVED, "only derived text of the source is held (register row notwithstanding)"
+                if not any(p.lower().endswith(PRIMARY_EXT) for p in paths):
+                    return UNKNOWN, "no held pdf/doc for a register-documented source"
                 if not reg.get("provenance_references", "").strip():
                     return UNKNOWN, "authentication register row has no provenance_references"
                 rp = {x.strip() for x in reg.get("held_paths", "").split(";") if x.strip()}
-                if rp and rp != set(paths):
+                if not rp:
+                    return UNKNOWN, "authentication register row has no held_paths"
+                if rp != set(paths):
                     return UNKNOWN, "authentication register held_paths differ from the held index"
                 if any(_secondary(p) for p in paths):
                     return PENDING, "documented provenance but the same bytes are also held under a secondary path"

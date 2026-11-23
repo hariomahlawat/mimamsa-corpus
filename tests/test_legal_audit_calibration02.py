@@ -142,7 +142,7 @@ class Reconciliation(unittest.TestCase):
         (base / "registers/held_sources_scratchpad.csv").write_text(
             "scratchpad_relative_path,bytes,sha256,note\ndownloads/official.pdf,10," + "e" * 64 + ",\nderived/x.txt,10," + "f" * 64 + ",\ndownloads/ambiguous.pdf,10," + "9" * 64 + ",\nsecondary/ambiguous_copy.pdf,10," + "9" * 64 + ",\n", encoding="utf-8")
         (base / "registers/source_authentication_register.csv").write_text(
-            "sha256,authentication_state,effective_source_class,provenance_references\n" + "e" * 64 + ",PROVENANCE_DOCUMENTED,PRIMARY_OFFICIAL_COURT_COPY,SRC-e retrieval record\n", encoding="utf-8")
+            "sha256,authentication_state,effective_source_class,provenance_references,held_paths\n" + "e" * 64 + ",PROVENANCE_DOCUMENTED,PRIMARY_OFFICIAL_COURT_COPY,SRC-e retrieval record,downloads/official.pdf\n", encoding="utf-8")
         props = [["1", "R-1", f"R-1#P{i}", "body_sentence", f"text {i}", "M", "T", "K", "S", "0" * 64] for i in range(1, n + 1)]
         with open(base / "propositions.csv", "w", newline="", encoding="utf-8") as f:
             w = csv.writer(f, lineterminator="\n")
@@ -244,8 +244,8 @@ class EvidenceClassification(unittest.TestCase):
                 ("downloads/secondary/mirror.pdf", self.H_MIR), ("downloads/claimed_official.pdf", self.H_AMB),
                 ("downloads/secondary/news_copy.pdf", self.H_AMB), ("downloads/pending.pdf", self.H_PEND),
                 ("downloads/official.pdf", self.real)]
-        reg = [{"sha256": self.H_OFF, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY", "provenance_references": "SRC-1 retrieval record"},
-               {"sha256": self.real, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY", "provenance_references": "SRC-2 retrieval record"},
+        reg = [{"sha256": self.H_OFF, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY", "provenance_references": "SRC-1 retrieval record", "held_paths": "downloads/official.pdf"},
+               {"sha256": self.real, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY", "provenance_references": "SRC-2 retrieval record", "held_paths": "downloads/official.pdf"},
                {"sha256": self.H_PEND, "authentication_state": "AUTHENTICATION_PENDING", "effective_source_class": "AUTHENTICATION_PENDING"}]
         self.ev = self.ev_mod.Evidence([{"scratchpad_relative_path": p, "sha256": h} for p, h in held], reg)
         self.ev_files = self.ev_mod.Evidence([{"scratchpad_relative_path": p, "sha256": h} for p, h in held], reg, root=root)
@@ -292,7 +292,7 @@ class EvidenceClassification(unittest.TestCase):
 
     def test_11_missing_held_file_under_verification_root(self):
         ev = self.ev_mod.Evidence([{"scratchpad_relative_path": "downloads/absent.pdf", "sha256": self.H_OFF}],
-                                  [{"sha256": self.H_OFF, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY", "provenance_references": "x"}],
+                                  [{"sha256": self.H_OFF, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY", "provenance_references": "x", "held_paths": "downloads/absent.pdf"}],
                                   root=Path(self.t.name))
         self.assertEqual(ev.classify_finding(self.f(self.H_OFF))[0], "HELD_FILE_MISSING")
 
@@ -305,6 +305,23 @@ class EvidenceClassification(unittest.TestCase):
         ev = self.ev_mod.Evidence([{"scratchpad_relative_path": "downloads/a.pdf", "sha256": self.H_OFF}],
                                   [{"sha256": self.H_OFF, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY", "provenance_references": "x", "held_paths": "downloads/other.pdf"}])
         self.assertEqual(ev.classify_finding(self.f(self.H_OFF))[0], "PROVENANCE_UNKNOWN")
+
+    def _reg(self, **kw):
+        r = {"sha256": self.H_OFF, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY", "provenance_references": "x"}
+        r.update(kw); return r
+
+    def test_14_register_row_needs_held_paths(self):  # N1
+        ev = self.ev_mod.Evidence([{"scratchpad_relative_path": "downloads/a.pdf", "sha256": self.H_OFF}], [self._reg(held_paths="")])
+        self.assertEqual(ev.classify_finding(self.f(self.H_OFF))[0], "PROVENANCE_UNKNOWN")
+
+    def test_15_register_cannot_make_derived_text_primary(self):  # N2
+        ev = self.ev_mod.Evidence([{"scratchpad_relative_path": "derived/a.txt", "sha256": self.H_OFF}], [self._reg(held_paths="derived/a.txt")])
+        self.assertEqual(ev.classify_finding(self.f(self.H_OFF))[0], "NOT_PRIMARY_DERIVED_TEXT")
+
+    def test_16_documented_bytes_also_held_as_secondary_are_pending(self):  # N3
+        held = [{"scratchpad_relative_path": "downloads/a.pdf", "sha256": self.H_OFF}, {"scratchpad_relative_path": "downloads/secondary/a.pdf", "sha256": self.H_OFF}]
+        ev = self.ev_mod.Evidence(held, [self._reg(held_paths="downloads/a.pdf; downloads/secondary/a.pdf")])
+        self.assertEqual(ev.classify_finding(self.f(self.H_OFF))[0], "AUTHENTICATION_PENDING")
 
     def test_10_genuine_source_conflict_passes_through(self):
         st, _ = self.ev.classify_finding(self.f(self.H_OFF, state="CONTRADICTORY_EVIDENCE"))
@@ -323,7 +340,11 @@ class EvidenceIntegration(unittest.TestCase):
         with open(base / "registers/held_sources_scratchpad.csv", "w", newline="", encoding="utf-8") as f:
             w = csv.writer(f, lineterminator="\n"); w.writerow(["scratchpad_relative_path", "bytes", "sha256", "note"]); w.writerows([[p, 10, h, ""] for p, h in held])
         with open(base / "registers/source_authentication_register.csv", "w", newline="", encoding="utf-8") as f:
-            w = csv.writer(f, lineterminator="\n"); w.writerow(["sha256", "authentication_state", "effective_source_class", "provenance_references"]); w.writerows([r + ["SRC-x retrieval record"] for r in register])
+            hp = {}
+            for pth, h in held:
+                hp.setdefault(h, []).append(pth)
+            w = csv.writer(f, lineterminator="\n"); w.writerow(["sha256", "authentication_state", "effective_source_class", "provenance_references", "held_paths"])
+            w.writerows([r + ["SRC-x retrieval record", "; ".join(hp.get(r[0], []))] for r in register])
         with open(base / "propositions.csv", "w", newline="", encoding="utf-8") as f:
             w = csv.writer(f, lineterminator="\n")
             w.writerow(["calibration_rank", "record_id", "proposition_id", "proposition_kind", "text_verbatim", "module", "title", "kind", "status_as_recorded", "record_canonical_sha256"])
