@@ -119,7 +119,7 @@ The new and refined findings:
 
 No good-law conclusions are drawn.
 
-## 7. Files (all in `c9out/SC/`)
+## 7. Files (all in this `SC-C9/` folder; originally produced under `c9out/SC/` in the working area; review FR-04)
 - `HUMAN_VERIFICATION_PACK.md`, `human_verification_checklist.csv`
 - `JUDIS_POLICY_DECISION.md`
 - `EXACT_ANCHOR_C9.md`, `exact_anchor_simulations_c9.json`
