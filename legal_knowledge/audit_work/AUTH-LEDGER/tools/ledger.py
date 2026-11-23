@@ -14,7 +14,7 @@ stop a repository writer from re-deriving the whole chain. Detection of that res
 HEAD is pinned in the test suite as well as in ledger/HEAD (a two-place change visible in review), and every version is
 added by a reviewed PR. There are no cryptographic signatures; authority is the reviewed merge, and since AUTH-LEDGER-02 an
 approved version is effective only after a BIND line whose git facts tools/binding.py verifies offline (APPROVAL_CONTROLS.md)."""
-import json, posixpath, re, sys, os
+import json, posixpath, re, stat, sys, os
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # not resolved: keeps a symlinked path detectable (C8)
@@ -128,6 +128,35 @@ def unexpected_files(root, lines):
         known |= set(d["decisions"]) | set(d["reviews"])
     found = {str(p.relative_to(root)) for sub in ("ledger", "decisions") if (root / sub).is_dir() for p in (root / sub).rglob("*") if p.is_file()}
     return sorted(found - known)
+
+
+def unexpected_effective(root, expected):
+    """Entries under effective/ that the manifest does not account for (C9 synthetic transaction finding TXN-1).
+
+    `expected` maps each committed version directory name (vNNNN) to the set of file names its rebuild produces.
+    The walk never follows symbolic links; a symlink, a non-regular file, an unknown directory or an unknown file
+    is reported. Returns a sorted list of relative paths."""
+    root = Path(root)
+    base = root / "effective"
+    if not base.exists():
+        return []
+    bad = []
+    for dirpath, dirnames, filenames in os.walk(base, followlinks=False):
+        rel = Path(dirpath).relative_to(base)
+        depth = len(rel.parts)
+        for name in sorted(dirnames):
+            p = Path(dirpath) / name
+            r = str(p.relative_to(root))
+            if p.is_symlink() or depth != 0 or name not in expected:
+                bad.append(r)
+        dirnames[:] = [n for n in dirnames if depth == 0 and n in expected and not (Path(dirpath) / n).is_symlink()]
+        for name in sorted(filenames):
+            p = Path(dirpath) / name
+            r = str(p.relative_to(root))
+            st = os.lstat(p)
+            if depth != 1 or not stat.S_ISREG(st.st_mode) or name not in expected.get(rel.parts[0], set()):
+                bad.append(r)
+    return sorted(bad)
 
 
 def _parse_record(path):

@@ -2325,3 +2325,59 @@ class C8SecurityRound3(C8Base):
         with mock.patch.object(binding, "_git", side_effect=lambda cwd, *a, **k: refused if a[:2] == ("rev-parse", "--show-toplevel") else real(cwd, *a, **k)):
             with self.assertRaisesRegex(common.LedgerError, "git cannot read the repository"):
                 binding.check_package_layout(t.dir)
+
+
+class C10EffectiveIntegrity(unittest.TestCase):
+    """C9 synthetic transaction finding TXN-1: verify must reject entries under effective/ that no manifest line accounts for.
+    All mutations happen inside a temporary copy (Synthetic); the committed ledger is never touched."""
+    def setUp(self):
+        self.t = Synthetic()
+        shutil.copytree(PKG / "effective", self.t.dir / "effective")
+        self.eff = self.t.dir / "effective"
+
+    def tearDown(self):
+        self.t.close()
+
+    def bad(self, why="not accounted for"):
+        with self.assertRaisesRegex(common.LedgerError, why):
+            CLI.verify(self.t.dir)
+
+    def test_clean_copy_verifies(self):
+        self.assertEqual(CLI.verify(self.t.dir), ["v0000 ok"])
+
+    def test_stray_file_in_version_dir(self):
+        (self.eff / "v0000/extra.csv").write_text("x")
+        self.bad("effective/v0000/extra.csv")
+
+    def test_stray_file_at_effective_root(self):
+        (self.eff / "notes.txt").write_text("x")
+        self.bad("effective/notes.txt")
+
+    def test_unmanifested_version_dir(self):
+        shutil.copytree(self.eff / "v0000", self.eff / "v0001")
+        self.bad("effective/v0001")
+
+    def test_nested_dir_in_version_dir(self):
+        (self.eff / "v0000/sub").mkdir()
+        (self.eff / "v0000/sub/x.csv").write_text("x")
+        self.bad("effective/v0000/sub")
+
+    def test_symlinked_output_rejected_even_with_identical_content(self):
+        f = self.eff / "v0000/coverage_summary.json"
+        copy = self.t.dir / "elsewhere.json"
+        shutil.copy(f, copy)
+        f.unlink()
+        f.symlink_to(copy)
+        self.assertEqual(f.read_text(encoding="utf-8"), copy.read_text(encoding="utf-8"))
+        self.bad("effective/v0000/coverage_summary.json")
+
+    def test_symlinked_version_dir_rejected(self):
+        real = self.t.dir / "real_v0000"
+        shutil.move(str(self.eff / "v0000"), real)
+        (self.eff / "v0000").symlink_to(real, target_is_directory=True)
+        self.bad("effective/v0000")
+
+    def test_unexpected_effective_unit(self):
+        exp = {"v0000": {p.name for p in (PKG / "effective/v0000").iterdir()}}
+        self.assertEqual(L.unexpected_effective(self.t.dir, exp), [])
+        self.assertEqual(L.unexpected_effective(self.t.dir, {}), ["effective/v0000"])

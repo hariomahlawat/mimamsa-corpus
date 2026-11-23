@@ -50,9 +50,11 @@ def verify(root=PKG):
     L.check_committed_layout(root)  # before any file is read (C8, Fable C-02)
     lines = L.read_manifest(root)
     report = []
+    expected = {}
     for line in lines:
         v = line["version"]
         texts, _ = reader.effective_state(root, v)
+        expected[f"v{v:04d}"] = set(texts) | {"OUTPUT_MANIFEST.json"}
         d = root / f"effective/v{v:04d}"
         if sha256_text(output_manifest(texts)) != line["effective_sha256"]:
             raise LedgerError(f"version {v}: rebuilt outputs do not match effective_sha256 in the manifest")
@@ -69,6 +71,9 @@ def verify(root=PKG):
     extra = L.unexpected_files(root, lines)
     if extra:
         raise LedgerError(f"files in ledger/ or decisions/ not accounted for by the manifest: {extra}")
+    stray = L.unexpected_effective(root, expected)  # C9 synthetic transaction TXN-1
+    if stray:
+        raise LedgerError(f"entries in effective/ not accounted for by the manifest: {stray}")
     return report
 
 
