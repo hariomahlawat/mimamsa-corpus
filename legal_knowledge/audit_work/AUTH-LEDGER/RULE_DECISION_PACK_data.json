@@ -1,0 +1,395 @@
+{
+ "A": {
+  "A1_keep_deny_list": {
+   "newly_eligible": 0,
+   "newly_ineligible": 0
+  },
+  "A2_require_SOURCE_VERIFIED": {
+   "newly_ineligible": 3,
+   "which": [
+    "3b753548 PRIMARY_OFFICIAL_COURT_COPY",
+    "4acdb1a8 PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "6b495f14 NON_PRIMARY_OFFICIAL_COURT_RENDITION"
+   ]
+  },
+  "A3_split_provenance_and_content": {
+   "entries_needing_limitation_text": 3,
+   "newly_eligible": 0,
+   "newly_ineligible": 0
+  },
+  "first_class_kinds": {
+   "ARC": 14,
+   "COR": 4,
+   "DL": 1,
+   "RET": 13
+  },
+  "retrieval_verification_states": {
+   "SOURCE_LOCATED": 3,
+   "SOURCE_VERIFIED": 10,
+   "n/a (not a retrieval record)": 19
+  }
+ },
+ "B": {
+  "B1_accept_as_now": {
+   "newly_ineligible": 0
+  },
+  "B2_fresh_check_only_where_anchor_created": {
+   "needing_fresh_check_or_reviewer_statement": [
+    "10e1954f",
+    "3056712c",
+    "3b753548",
+    "4f7ea3a4",
+    "970b9680",
+    "eb442080",
+    "ed7cf31f"
+   ]
+  },
+  "B3_fresh_check_for_all_legacy": {
+   "needing_fresh_check": [
+    "0e4b8e47",
+    "10e1954f",
+    "138c1da0",
+    "1d67bddd",
+    "225f624b",
+    "29f6fa2c",
+    "2bdab5b7",
+    "3056712c",
+    "31fedb68",
+    "3b753548",
+    "3c50cdb7",
+    "4392f326",
+    "4acdb1a8",
+    "4f7ea3a4",
+    "5126efa2",
+    "682afce5",
+    "6b495f14",
+    "7c12a7ec",
+    "7edc4de1",
+    "970b9680",
+    "972e5aa1",
+    "b76bf4aa",
+    "be7fefc9",
+    "cce0d06e",
+    "d283767e",
+    "d8ce1958",
+    "dc67b628",
+    "dd6978db",
+    "eaa233f8",
+    "eb442080",
+    "ed7cf31f"
+   ]
+  },
+  "court_text_only": 9,
+  "identity_basis_by_draft": [
+   {
+    "class": "PRIMARY_OFFICIAL_COURT_COPY",
+    "court_text_rule": true,
+    "creates_exact_anchor_alone": true,
+    "image_kinds": [],
+    "sha256": "ed7cf31f"
+   },
+   {
+    "class": "PRIMARY_OFFICIAL_COURT_COPY",
+    "court_text_rule": true,
+    "creates_exact_anchor_alone": true,
+    "image_kinds": [],
+    "sha256": "eb442080"
+   },
+   {
+    "class": "PRIMARY_OFFICIAL_COURT_COPY",
+    "court_text_rule": true,
+    "creates_exact_anchor_alone": true,
+    "image_kinds": [],
+    "sha256": "3b753548"
+   },
+   {
+    "class": "PRIMARY_OFFICIAL_COURT_COPY",
+    "court_text_rule": true,
+    "creates_exact_anchor_alone": true,
+    "image_kinds": [],
+    "sha256": "3056712c"
+   },
+   {
+    "class": "NON_PRIMARY_OFFICIAL_COURT_RENDITION",
+    "court_text_rule": true,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [],
+    "sha256": "6b495f14"
+   },
+   {
+    "class": "PRIMARY_OFFICIAL_COURT_COPY",
+    "court_text_rule": true,
+    "creates_exact_anchor_alone": true,
+    "image_kinds": [],
+    "sha256": "970b9680"
+   },
+   {
+    "class": "PRIMARY_OFFICIAL_COURT_COPY",
+    "court_text_rule": true,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [],
+    "sha256": "3c50cdb7"
+   },
+   {
+    "class": "PRIMARY_OFFICIAL_COURT_COPY",
+    "court_text_rule": true,
+    "creates_exact_anchor_alone": true,
+    "image_kinds": [],
+    "sha256": "4f7ea3a4"
+   },
+   {
+    "class": "PRIMARY_OFFICIAL_COURT_COPY",
+    "court_text_rule": true,
+    "creates_exact_anchor_alone": true,
+    "image_kinds": [],
+    "sha256": "10e1954f"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "b76bf4aa"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "4acdb1a8"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "cce0d06e"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "682afce5"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "be7fefc9"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "5126efa2"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "7edc4de1"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "d283767e"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "dd6978db"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "d8ce1958"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "225f624b"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "972e5aa1"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "eaa233f8"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "4392f326"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "1d67bddd"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "31fedb68"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "0e4b8e47"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "dc67b628"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "7c12a7ec"
+   },
+   {
+    "class": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "138c1da0"
+   },
+   {
+    "class": "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD",
+     "REGISTER_ROW_IMAGE_CHECKED"
+    ],
+    "sha256": "2bdab5b7"
+   },
+   {
+    "class": "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "C6_CHECK_CONFIRMED"
+    ],
+    "sha256": "be619533"
+   },
+   {
+    "class": "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY",
+    "court_text_rule": false,
+    "creates_exact_anchor_alone": false,
+    "image_kinds": [
+     "LEGACY_IMAGE_CHECK_NO_RESULT_FIELD"
+    ],
+    "sha256": "29f6fa2c"
+   }
+  ],
+  "legacy_or_register_only": 22
+ },
+ "C": {
+  "C2_contradictions": [
+   "https://indiacode.gov.in/server/api/core/bitstreams/7a05a1f5-506a-4e9c-afae-c2e4fc1e989e/content"
+  ],
+  "committed_url_sha_pairs": 75,
+  "contradictions_if_jonew_judgment_alias_adopted": [
+   "https://indiacode.gov.in/server/api/core/bitstreams/7a05a1f5-506a-4e9c-afae-c2e4fc1e989e/content"
+  ],
+  "distinct_urls": 74,
+  "exact_string_contradictions": [
+   "https://indiacode.gov.in/server/api/core/bitstreams/7a05a1f5-506a-4e9c-afae-c2e4fc1e989e/content"
+  ],
+  "first_class_locators_rejected_by_AUTH_LEDGER_02_strict_parser": [],
+  "urls_changed_by_C2_normalisation": []
+ },
+ "drafts": 32,
+ "label": "Analysis only. Rule 1 remains the effective rule; no option is adopted or implemented."
+}

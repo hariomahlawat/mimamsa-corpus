@@ -1,0 +1,334 @@
+{
+ "entries_simulated": 20,
+ "joint_all_20": {
+  "copy_status_changes": 20,
+  "copy_status_transitions": [
+   "PROVENANCE_UNKNOWN -> EFFECTIVE_PRIMARY_VERIFIED"
+  ],
+  "coverage_summary_changes": {
+   "authentication": {
+    "after": {
+     "authentication_pending_copies": 1,
+     "c4_register_by_state_and_class": {
+      "AUTHENTICATION_PENDING/AUTHENTICATION_PENDING": 1,
+      "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE": 4,
+      "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN": 1,
+      "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY": 7
+     },
+     "c4_register_rows": 13,
+     "copies_by_evidence_class": {
+      "AUTHENTICATION_PENDING_COPY": 1,
+      "DOCUMENTED_PRIMARY_COPY": 32,
+      "PROVENANCE_UNDOCUMENTED_COPY": 34
+     },
+     "copies_total": 67,
+     "documented_primary_copies": 32,
+     "sources_authentication_pending_only": 1,
+     "sources_with_documented_primary_copy": 32
+    },
+    "before": {
+     "authentication_pending_copies": 1,
+     "c4_register_by_state_and_class": {
+      "AUTHENTICATION_PENDING/AUTHENTICATION_PENDING": 1,
+      "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE": 4,
+      "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN": 1,
+      "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY": 7
+     },
+     "c4_register_rows": 13,
+     "copies_by_evidence_class": {
+      "AUTHENTICATION_PENDING_COPY": 1,
+      "DOCUMENTED_PRIMARY_COPY": 12,
+      "PROVENANCE_UNDOCUMENTED_COPY": 54
+     },
+     "copies_total": 67,
+     "documented_primary_copies": 12,
+     "sources_authentication_pending_only": 1,
+     "sources_with_documented_primary_copy": 12
+    }
+   },
+   "master_by_holding_state": {
+    "after": {
+     "HELD_AUTHENTICATION_PENDING": 1,
+     "HELD_GOVERNMENT_COMPILATION": 5,
+     "HELD_GOVERNMENT_COMPILATION_EXTRACT": 2,
+     "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED": 8,
+     "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED": 6,
+     "HELD_PRIMARY_GAZETTE_FACSIMILE": 24,
+     "HELD_PRIMARY_GAZETTE_GOVERNMENT_SCAN": 1,
+     "HELD_PRIMARY_OFFICIAL_COURT_COPY": 7,
+     "HELD_UNVERIFIED_MANUAL": 8,
+     "NOT_HELD_CANDIDATE_LOCATED": 33,
+     "NOT_HELD_LEAD_ONLY": 1,
+     "NOT_HELD_NOT_CHECKED": 7,
+     "NOT_HELD_NOT_FOUND_IN_SEARCHED_SOURCES": 8,
+     "NOT_HELD_RESTRICTED_SUSPECTED": 1
+    },
+    "before": {
+     "HELD_AUTHENTICATION_PENDING": 1,
+     "HELD_GOVERNMENT_COMPILATION": 5,
+     "HELD_GOVERNMENT_COMPILATION_EXTRACT": 2,
+     "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED": 8,
+     "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED": 26,
+     "HELD_PRIMARY_GAZETTE_FACSIMILE": 4,
+     "HELD_PRIMARY_GAZETTE_GOVERNMENT_SCAN": 1,
+     "HELD_PRIMARY_OFFICIAL_COURT_COPY": 7,
+     "HELD_UNVERIFIED_MANUAL": 8,
+     "NOT_HELD_CANDIDATE_LOCATED": 33,
+     "NOT_HELD_LEAD_ONLY": 1,
+     "NOT_HELD_NOT_CHECKED": 7,
+     "NOT_HELD_NOT_FOUND_IN_SEARCHED_SOURCES": 8,
+     "NOT_HELD_RESTRICTED_SUSPECTED": 1
+    }
+   }
+  },
+  "crosswalk_row_changes": 0,
+  "source_holding_changes": [
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-007"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-008"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-009"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-010"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-011"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-014"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-016"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-017"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-018"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-019"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-020"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-021"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-022"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-023"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-024"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-025"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-026+AR-027"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-028"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-033"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-034"
+   }
+  ]
+ },
+ "label": "SIMULATION ONLY: synthetic approval records in a temporary directory, deleted after the run. Not a ledger version, not an approval, not evidence of owner or legal approval. The committed ledger stays at version 0.",
+ "sub_tranche_1A_READY_only": {
+  "copy_status_changes": 12,
+  "copy_status_transitions": [
+   "PROVENANCE_UNKNOWN -> EFFECTIVE_PRIMARY_VERIFIED"
+  ],
+  "coverage_summary_changes": {
+   "authentication": {
+    "after": {
+     "authentication_pending_copies": 1,
+     "c4_register_by_state_and_class": {
+      "AUTHENTICATION_PENDING/AUTHENTICATION_PENDING": 1,
+      "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE": 4,
+      "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN": 1,
+      "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY": 7
+     },
+     "c4_register_rows": 13,
+     "copies_by_evidence_class": {
+      "AUTHENTICATION_PENDING_COPY": 1,
+      "DOCUMENTED_PRIMARY_COPY": 24,
+      "PROVENANCE_UNDOCUMENTED_COPY": 42
+     },
+     "copies_total": 67,
+     "documented_primary_copies": 24,
+     "sources_authentication_pending_only": 1,
+     "sources_with_documented_primary_copy": 24
+    },
+    "before": {
+     "authentication_pending_copies": 1,
+     "c4_register_by_state_and_class": {
+      "AUTHENTICATION_PENDING/AUTHENTICATION_PENDING": 1,
+      "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE": 4,
+      "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN": 1,
+      "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY": 7
+     },
+     "c4_register_rows": 13,
+     "copies_by_evidence_class": {
+      "AUTHENTICATION_PENDING_COPY": 1,
+      "DOCUMENTED_PRIMARY_COPY": 12,
+      "PROVENANCE_UNDOCUMENTED_COPY": 54
+     },
+     "copies_total": 67,
+     "documented_primary_copies": 12,
+     "sources_authentication_pending_only": 1,
+     "sources_with_documented_primary_copy": 12
+    }
+   },
+   "master_by_holding_state": {
+    "after": {
+     "HELD_AUTHENTICATION_PENDING": 1,
+     "HELD_GOVERNMENT_COMPILATION": 5,
+     "HELD_GOVERNMENT_COMPILATION_EXTRACT": 2,
+     "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED": 8,
+     "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED": 14,
+     "HELD_PRIMARY_GAZETTE_FACSIMILE": 16,
+     "HELD_PRIMARY_GAZETTE_GOVERNMENT_SCAN": 1,
+     "HELD_PRIMARY_OFFICIAL_COURT_COPY": 7,
+     "HELD_UNVERIFIED_MANUAL": 8,
+     "NOT_HELD_CANDIDATE_LOCATED": 33,
+     "NOT_HELD_LEAD_ONLY": 1,
+     "NOT_HELD_NOT_CHECKED": 7,
+     "NOT_HELD_NOT_FOUND_IN_SEARCHED_SOURCES": 8,
+     "NOT_HELD_RESTRICTED_SUSPECTED": 1
+    },
+    "before": {
+     "HELD_AUTHENTICATION_PENDING": 1,
+     "HELD_GOVERNMENT_COMPILATION": 5,
+     "HELD_GOVERNMENT_COMPILATION_EXTRACT": 2,
+     "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED": 8,
+     "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED": 26,
+     "HELD_PRIMARY_GAZETTE_FACSIMILE": 4,
+     "HELD_PRIMARY_GAZETTE_GOVERNMENT_SCAN": 1,
+     "HELD_PRIMARY_OFFICIAL_COURT_COPY": 7,
+     "HELD_UNVERIFIED_MANUAL": 8,
+     "NOT_HELD_CANDIDATE_LOCATED": 33,
+     "NOT_HELD_LEAD_ONLY": 1,
+     "NOT_HELD_NOT_CHECKED": 7,
+     "NOT_HELD_NOT_FOUND_IN_SEARCHED_SOURCES": 8,
+     "NOT_HELD_RESTRICTED_SUSPECTED": 1
+    }
+   }
+  },
+  "crosswalk_row_changes": 0,
+  "source_holding_changes": [
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-007"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-009"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-010"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-011"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-014"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-016"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-017"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-018"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-019"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-021"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-022"
+   },
+   {
+    "after": "HELD_PRIMARY_GAZETTE_FACSIMILE",
+    "before": "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED",
+    "source_id": "C5-SRC-P0-AR-AMD-AR-024"
+   }
+  ]
+ }
+}

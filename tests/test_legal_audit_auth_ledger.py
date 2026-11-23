@@ -1516,3 +1516,53 @@ class ApprovalIntegrity(unittest.TestCase):
         c = entry_from_draft(GAZETTE_1962, 1, version=3, entry_type="CORRECTION", target_entry_id=a["entry_id"])
         self.t.add_version([c])
         self.reject("is not the live row for this sha256")
+
+
+class TranchePreparation(unittest.TestCase):
+    """Prepared tranche material reproduces, stays inactive and never touches the committed ledger."""
+    TOOLS = PKG / "tranches/tools"
+
+    def run_tool(self, name):
+        return subprocess.run([sys.executable, str(self.TOOLS / name), "--check"], capture_output=True, text=True,
+                              env=dict(__import__("os").environ, PYTHONDONTWRITEBYTECODE="1"))
+
+    def test_tranche1_and_policy_data_reproduce(self):
+        for t in ("build_tranche1.py", "policy_impact.py"):
+            r = self.run_tool(t)
+            self.assertEqual(r.returncode, 0, r.stderr)
+
+    def test_prepared_rows_are_inactive_and_cannot_enter_the_ledger_unchanged(self):
+        rows = common.read_csv(PKG / "tranches/T1-GAZETTE/proposed_entries_PENDING.csv")
+        self.assertEqual(len(rows), 20)
+        for r in rows:
+            self.assertEqual(r["owner_decision"], "")
+            self.assertEqual(r["tranche_status"], "PENDING_NOT_IN_LEDGER")
+            self.assertEqual((r["decision_record_ref"], r["reviewer_ref"]), ("", ""))
+            with self.assertRaisesRegex(common.LedgerError, "owner_decision=''"):
+                L.schema_check({k: r[k] for k in L.COLS}, L.COLS)
+
+    def test_committed_ledger_still_has_only_genesis(self):
+        self.assertEqual(len(L.read_manifest(PKG)), 1)
+        self.assertEqual(sorted(p.name for p in (PKG / "ledger").iterdir()), ["HEAD", "manifest.jsonl"])
+        self.assertEqual(sorted(p.name for p in (PKG / "decisions").iterdir()), ["README.md"])
+
+    def test_tranche1_is_exactly_the_20_primary_gazette_drafts_and_excludes_non_primary(self):
+        reg = common.read_csv(PKG / "tranches/T1-GAZETTE/tranche1_source_register.csv")
+        want = sorted(s for s, d in DRAFT.items() if d["proposed_class"] == "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE")
+        self.assertEqual(sorted(r["sha256"] for r in reg), want)
+        self.assertNotIn(TRA, {r["sha256"] for r in reg})
+        self.assertTrue(all(r["rule1_result"] == "PASS" for r in reg))
+        sro34 = [r for r in reg if "S.R.O. 34 (1963" in r["document_identity"]][0]
+        self.assertIn("COPY PROVENANCE ONLY", sro34["recommendation"].upper())
+        born = [r for r in reg if r["fidelity_class"].startswith("BORN_DIGITAL")]
+        self.assertEqual(len(born), 2)
+        self.assertTrue(all(r["sub_tranche"] == "1B-FIDELITY" for r in born))
+        m = {r["tranche_id"]: r for r in common.read_csv(PKG / "tranches/T1-GAZETTE/evidence_verification_matrix.csv")}
+        for r in born:
+            self.assertIn("NOT CRYPTOGRAPHICALLY VERIFIED", m[r["tranche_id"]]["v11_signature_coverage"])
+
+    def test_simulated_impact_has_no_crosswalk_change(self):
+        j = json.loads((PKG / "tranches/T1-GAZETTE/simulated_joint_impact.json").read_text(encoding="utf-8"))
+        self.assertTrue(j["label"].startswith("SIMULATION ONLY"))
+        self.assertEqual(j["joint_all_20"]["crosswalk_row_changes"], 0)
+        self.assertEqual(j["joint_all_20"]["copy_status_changes"], 20)
