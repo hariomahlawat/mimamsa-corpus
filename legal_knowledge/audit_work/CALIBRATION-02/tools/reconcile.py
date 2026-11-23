@@ -3,14 +3,18 @@
 Inputs: propositions.csv and reviews/{A,B,C,D}/findings.csv (validated by check_calibration02.py).
 Outputs (reconciliation/ and proposals/):
 - proposition_matrix.csv: one row per proposition, giving each reviewer's worst severity and evidence states, and the agreement class.
-- disagreements.csv: propositions where reviewers' severities differ by >= 1 band with at least one P1/P2, or one
-  reviewer marks VERIFIED while another marks UNSUPPORTED/CONTRADICTORY. Escalated, never resolved by majority.
+- disagreements.csv: escalations, never resolved by majority:
+    DISAGREE: a reviewer raised P1/P2 while another positively assessed the proposition with no defect, or classed it as
+      not a legal proposition; or a VERIFIED-as-stated row (severity NONE) faces UNSUPPORTED/CONTRADICTORY;
+    SEVERITY_SPLIT: reviewers who rated a defect gave different severities (P1/P2/P3), including corroborated defects.
 - correction_proposals.csv: every P1/P2 finding with a proposed correction, keeping the original verbatim text, the
   proposed text, the reviewer, the evidence (source sha256 + locator) and corroboration by other reviewers.
   support_status:
-    EVIDENCE_SUPPORTED: a held-source sha256 and locator back the correction, and no other reviewer marks the
-      same proposition CONTRADICTORY_EVIDENCE;
-    EVIDENCE_GAP: the correction rests on missing evidence or no held source;
+    PRIMARY_EVIDENCE_SUPPORTED: the raising finding is VERIFIED_AGAINST_HELD_PRIMARY_SOURCE against a held primary file
+      (pdf/doc in the held index, not secondary) with a locator;
+    SECONDARY_EVIDENCE_ONLY: a hash and locator are given but the evidence is secondary (compilation, mirror, derived text);
+    EVIDENCE_GAP: the correction rests on missing evidence or no cited source;
+  Precedence: SOURCE_CONFLICT_OPEN > DISPUTED_ESCALATED > PRIMARY > SECONDARY > GAP.
     DISPUTED_ESCALATED: the proposition is in reviewer DISAGREE (a reviewer positively assessed it with no defect);
     SOURCE_CONFLICT_OPEN: some reviewer records CONTRADICTORY_EVIDENCE between sources for the proposition (kept OPEN).
 - record_scorecard.csv and scorecard.json: per-record and overall counts.
@@ -40,7 +44,18 @@ def write(p, cols, rows):
         w.writerows(rows)
 
 
+HELD = {}
+
+
+def is_primary(sha):
+    hp = HELD.get(sha, "").lower()
+    return bool(hp) and hp.endswith((".pdf", ".doc", ".docx")) and "/secondary/" not in "/" + hp
+
+
 def main():
+    hi = C2 / "registers/held_sources_scratchpad.csv"
+    if hi.exists():
+        HELD.update({r["sha256"]: r["scratchpad_relative_path"] for r in read(hi)})
     props = read(C2 / "propositions.csv")
     F = {r: read(C2 / "reviews" / r / "findings.csv") for r in REVIEWERS}
     by = defaultdict(lambda: defaultdict(list))
@@ -66,14 +81,18 @@ def main():
         fine = sorted(r for r in REVIEWERS if r not in raisers and any(
             x["evidence_state"] in POSITIVE for x in by[pid][r]) and all(x["severity"] == "NONE" for x in by[pid][r]))
         lower = sorted(r for r in REVIEWERS if r not in raisers and sev[r] == "P3")
+        # a reviewer that classed the proposition as non-legal while another raised P1/P2 is a dissent, not silence
+        nonlegal = sorted(r for r in REVIEWERS if r not in raisers and by[pid][r] and all(x["evidence_state"] == "NOT_A_LEGAL_PROPOSITION" for x in by[pid][r]))
+        rated = [sev[r] for r in raisers + lower]
+        spread = len(set(rated)) > 1
         # VERIFIED counts against a negative finding only when it verified the proposition as stated (severity NONE)
         verified_ok = any(x["evidence_state"] == "VERIFIED_AGAINST_HELD_PRIMARY_SOURCE" and x["severity"] == "NONE" for r in REVIEWERS for x in by[pid][r])
         verified_vs_neg = verified_ok and bool(allst & NEG)
         if not legal and not raisers:
             agree = "ALL_NON_LEGAL_OR_OUT_OF_SCOPE"
-        elif verified_vs_neg or (raisers and fine):
+        elif verified_vs_neg or (raisers and (fine or nonlegal)):
             agree = "DISAGREE"
-        elif raisers and lower and len(raisers) == 1:
+        elif raisers and spread and len(raisers) == 1:
             agree = "SEVERITY_SPLIT"
         elif len(raisers) >= 2:
             agree = "CORROBORATED_DEFECT"
@@ -84,16 +103,24 @@ def main():
         row["defect_raised_by"] = ";".join(raisers)
         row["assessed_supported_by"] = ";".join(fine)
         row["rated_minor_by"] = ";".join(lower)
+        row["classed_non_legal_by"] = ";".join(nonlegal) if raisers else ""
+        row["severity_spread"] = "YES" if (raisers and spread) else "NO"
         row["worst_severity"] = worst
         row["agreement"] = agree
         row["any_verified"] = "YES" if "VERIFIED_AGAINST_HELD_PRIMARY_SOURCE" in allst else "NO"
         row["any_source_gap"] = "YES" if allst & GAP else "NO"
         matrix.append(row)
-        if agree in ("DISAGREE", "SEVERITY_SPLIT"):
+        escalate_spread = agree == "CORROBORATED_DEFECT" and spread
+        if agree in ("DISAGREE", "SEVERITY_SPLIT") or escalate_spread:
             dis.append({"record_id": p["record_id"], "proposition_id": pid,
                         **{f"{r}_worst_severity": sev[r] for r in REVIEWERS},
                         **{f"{r}_states": ";".join(states[r]) for r in REVIEWERS},
-                        "kind": agree, "reason": ("VERIFIED vs UNSUPPORTED/CONTRADICTORY" if verified_vs_neg else (f"P1/P2 raised by {';'.join(raisers)}; positively assessed with no defect by {';'.join(fine)}" if fine else f"P1/P2 raised by {';'.join(raisers)}; rated P3 by {';'.join(lower)}")),
+                        "kind": "SEVERITY_SPLIT" if escalate_spread else agree,
+                        "reason": ("VERIFIED vs UNSUPPORTED/CONTRADICTORY" if verified_vs_neg else
+                                   f"P1/P2 raised by {';'.join(raisers)}"
+                                   + (f"; positively assessed with no defect by {';'.join(fine)}" if fine else "")
+                                   + (f"; classed as not a legal proposition by {';'.join(nonlegal)}" if nonlegal and agree == "DISAGREE" else "")
+                                   + (f"; severities differ ({', '.join(f'{r}={sev[r]}' for r in raisers + lower)})" if spread else "")),
                         "disposition": "ESCALATED (not resolved by majority)"})
         for r in REVIEWERS:
             for x in by[pid][r]:
@@ -107,12 +134,15 @@ def main():
                     corro = sorted(o for o, ys in others.items() if any(RANK[y["severity"]] >= 2 for y in ys))
                     none_others = sorted(o for o, ys in others.items() if ys and all(y["severity"] == "NONE" and y["evidence_state"] not in ("NOT_A_LEGAL_PROPOSITION",) for y in ys))
                     has_ev = bool(re.fullmatch(r"[0-9a-f]{64}", x["source_sha256"])) and bool(x["locator"].strip())
-                    if agree == "DISAGREE":
-                        st = "DISPUTED_ESCALATED"
-                    elif contra:
+                    primary = x["evidence_state"] == "VERIFIED_AGAINST_HELD_PRIMARY_SOURCE" and is_primary(x["source_sha256"])
+                    if contra:  # an open conflict between sources takes precedence (QC-07)
                         st = "SOURCE_CONFLICT_OPEN"
+                    elif agree == "DISAGREE":
+                        st = "DISPUTED_ESCALATED"
+                    elif x["proposed_correction"].strip() and primary and x["locator"].strip():
+                        st = "PRIMARY_EVIDENCE_SUPPORTED"
                     elif x["proposed_correction"].strip() and has_ev:
-                        st = "EVIDENCE_SUPPORTED"
+                        st = "SECONDARY_EVIDENCE_ONLY"
                     else:
                         st = "EVIDENCE_GAP"
                     props_out.append({
@@ -124,7 +154,7 @@ def main():
                         "missing_evidence": x["missing_evidence"], "corroborated_by_reviewers": ";".join(corro),
                         "reviewers_marking_no_defect": ";".join(none_others), "support_status": st,
                         "incorporation_state": "PROPOSED_NOT_INCORPORATED (original record unchanged)"})
-    mcols = ["record_id", "proposition_id", "text_verbatim"] + [f"{r}_{k}" for r in REVIEWERS for k in ("worst_severity", "states")] + ["worst_severity", "agreement", "defect_raised_by", "assessed_supported_by", "rated_minor_by", "any_verified", "any_source_gap"]
+    mcols = ["record_id", "proposition_id", "text_verbatim"] + [f"{r}_{k}" for r in REVIEWERS for k in ("worst_severity", "states")] + ["worst_severity", "agreement", "defect_raised_by", "assessed_supported_by", "rated_minor_by", "classed_non_legal_by", "severity_spread", "any_verified", "any_source_gap"]
     write(C2 / "reconciliation/proposition_matrix.csv", mcols, matrix)
     write(C2 / "reconciliation/disagreements.csv", ["record_id", "proposition_id"] + [f"{r}_worst_severity" for r in REVIEWERS] + [f"{r}_states" for r in REVIEWERS] + ["kind", "reason", "disposition"], dis)
     pcols = ["proposal_id", "record_id", "proposition_id", "original_text_verbatim", "proposed_text_or_action", "severity", "defect_class", "dimension", "reviewer", "finding_id", "source_identity", "source_sha256", "locator", "rationale", "missing_evidence", "corroborated_by_reviewers", "reviewers_marking_no_defect", "support_status", "incorporation_state"]
@@ -139,7 +169,8 @@ def main():
         ms = recs[rid]
         legal = [m for m in ms if m["agreement"] != "ALL_NON_LEGAL_OR_OUT_OF_SCOPE"]
         worst = max((m["worst_severity"] for m in ms), key=lambda s: RANK[s])
-        fully = bool(legal) and all(m["any_verified"] == "YES" and RANK[m["worst_severity"]] <= 1 and m["any_source_gap"] == "NO" for m in legal)
+        BLOCK = {"INTERPRETATION_REQUIRES_LEGAL_ADVICE", "UNSUPPORTED", "CONTRADICTORY_EVIDENCE", "SOURCE_NOT_HELD", "HISTORICAL_VERSION_UNRESOLVED"}
+        fully = bool(legal) and all(m["any_verified"] == "YES" and RANK[m["worst_severity"]] <= 1 and not (BLOCK & set(";".join(m[f"{r}_states"] for r in REVIEWERS).split(";"))) for m in legal)
         if not legal:
             cls = "NO_LEGAL_PROPOSITIONS"
         elif RANK[worst] >= 2:
@@ -171,7 +202,7 @@ def main():
         "findings_by_evidence_state": dict(sorted(Counter(x["evidence_state"] for x in allf).items())),
         "findings_by_defect_class_P1_P2": dict(sorted(Counter(x["defect_class"] for x in allf if x["severity"] in ("P1", "P2")).items())),
         "proposition_agreement": dict(sorted(Counter(m["agreement"] for m in matrix).items())),
-        "disagreements": sum(d["kind"] == "DISAGREE" for d in dis), "severity_splits": sum(d["kind"] == "SEVERITY_SPLIT" for d in dis),
+        "disagreements": sum(d["kind"] == "DISAGREE" for d in dis), "severity_splits_escalated": sum(d["kind"] == "SEVERITY_SPLIT" for d in dis),
         "correction_proposals": len(props_out),
         "correction_proposals_by_support": dict(sorted(Counter(p["support_status"] for p in props_out).items())),
         "legal_advisor_questions_raw": len(questions),

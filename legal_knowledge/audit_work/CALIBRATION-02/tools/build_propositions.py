@@ -3,7 +3,7 @@
 Input (read-only): COORDINATION/CALIBRATION-01/calibration_package.csv (the authoritative sample, unchanged) and
 curated_originals/knowledge_base/v0.9/records_658.jsonl (immutable). Output: CALIBRATION-02/propositions.csv.
 Each record's body is split into sentences (stable IDs <record>#P<n>); the 'references' field is one extra
-proposition <record>#REF. Original text is copied verbatim. Stdlib only; byte-identical on re-run."""
+proposition <record>#REF. Original text is copied whitespace-normalised (runs of whitespace collapsed to one space); no other change. Stdlib only; byte-identical on re-run."""
 import csv, hashlib, json, re, sys
 from pathlib import Path
 

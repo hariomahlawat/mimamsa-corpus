@@ -5,7 +5,7 @@
 ## Sample
 The sample is `COORDINATION/CALIBRATION-01/calibration_package.csv`, unchanged: 46 records, with the same denominator and selection.
 
-`tools/build_propositions.py` splits each record body into sentences, producing `propositions.csv` (382 propositions). IDs are `<record>#P<n>`, plus `<record>#REF` for the references field. Text is copied verbatim. The script is deterministic and reruns byte-identically.
+`tools/build_propositions.py` splits each record body into sentences, producing `propositions.csv` (382 propositions). IDs are `<record>#P<n>`, plus `<record>#REF` for the references field. Text is copied from the record, whitespace-normalised: runs of whitespace collapse to one space; 30 propositions differ from the raw body only in whitespace. The script is deterministic and reruns byte-identically.
 
 ## Protocol
 1. **Independent reviews**, each in its own branch and worktree, written without access to the others' findings:
@@ -15,7 +15,7 @@ The sample is `COORDINATION/CALIBRATION-01/calibration_package.csv`, unchanged: 
    - **D Challenge:** an independent assessment of the same 46 records that does not read A–C.
 2. **Output:** each reviewer writes `reviews/<R>/findings.csv`, with exactly the columns in `tools/check_calibration02.py`. Every proposition gets at least one row.
 3. **Evidence states:**
-   - VERIFIED_AGAINST_HELD_PRIMARY_SOURCE: needs the held file's SHA-256 and an exact locator;
+   - VERIFIED_AGAINST_HELD_PRIMARY_SOURCE: needs an exact locator and the SHA-256 of a held primary file (pdf/doc in `registers/held_sources_scratchpad.csv`, not derived text or a mirror); the validator enforces this;
    - SUPPORTED_BY_SECONDARY_SOURCE_ONLY;
    - SOURCE_NOT_HELD;
    - HISTORICAL_VERSION_UNRESOLVED;
@@ -49,7 +49,7 @@ The sample is `COORDINATION/CALIBRATION-01/calibration_package.csv`, unchanged: 
 | # | Deliverable | Location |
 | --- | --- | --- |
 | 1 | 46-record substantive review: propositions and per-record results | `propositions.csv`, `reconciliation/record_scorecard.csv`, `reconciliation/proposition_matrix.csv` |
-| 2 | Independent reviewer findings and reconciliation | `reviews/{A,B,C,D}/` (findings, READMEs, page-image checks A/C); `reconciliation/disagreements.csv`, `reconciliation/coordinator_qc.csv` |
+| 2 | Independent reviewer findings and reconciliation | `reviews/{A,B,C,D}/` (findings, READMEs, page-image checks A/C); `reconciliation/disagreements.csv`, `reconciliation/coordinator_qc.csv` (QC-01..10), `reconciliation/rule_sensitivity.json` (pre-registered vs final rule) |
 | 3 | Proposed corrections, before and after, with evidence | `proposals/correction_proposals.csv`, `proposals/proposed_versions.jsonl` (originals unchanged) |
 | 4 | Cross-volume missing-link and contradiction register | `registers/cross_volume_register.csv` (with D's `reviews/D/cross_volume_register.csv`) |
 | 5 | Acquisition-readiness matrix | `registers/acquisition_readiness/` |
@@ -65,6 +65,7 @@ Build order, all deterministic:
 3. `tools/check_calibration02.py --require A,B,C,D`
 4. `tools/reconcile.py`
 5. `tools/build_packages.py`
+6. `tools/rule_sensitivity.py`
 
 Earlier artifacts linked:
 - `COORDINATION/CALIBRATION-01/` (the sample);
