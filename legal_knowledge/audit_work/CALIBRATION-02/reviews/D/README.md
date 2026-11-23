@@ -12,7 +12,7 @@ Written in worktree `/home/user/c4-d`, branch `claude/c4-rev-d`, from base `67c6
 4. `findings.csv` was generated from a single reviewed table. The generator script stayed in the scratchpad; the CSV is the deliverable.
 
 ### Evidence-state policy used
-- **VERIFIED_AGAINST_HELD_PRIMARY_SOURCE** is used only for official court copies (signed SC PDFs; the JUDIS copy of PPS Bedi) and for the Gazette text of Act 37 of 1992. SCR or mirror reproductions in the `origin/raw-data` corpus are SUPPORTED_BY_SECONDARY_SOURCE_ONLY (see Correction below).
+- **VERIFIED_AGAINST_HELD_PRIMARY_SOURCE** is used only when the cited hash is a held-index PDF of an official court copy (signed SC PDFs; the JUDIS copy of PPS Bedi) or the Gazette facsimile of Act 37 of 1992, with the wording read at a PDF page. A derived text file is never cited for VERIFIED (see the third correction). SCR or mirror reproductions in the `origin/raw-data` corpus are SUPPORTED_BY_SECONDARY_SOURCE_ONLY (see Correction below).
 - **Act and rule text read from India Code or MoD compilations is SUPPORTED_BY_SECONDARY_SOURCE_ONLY** (comparison text under SOURCE_AUTHORITY_POLICY v1). The hash and locator are still given. This is deliberately conservative: an Army Act or Army Rules proposition that matches the compilation is not marked VERIFIED.
 - The MML is used only once, to identify the 1978 Rules notification number (S.O. 488), and is never treated as authority.
 
@@ -25,6 +25,10 @@ Written in worktree `/home/user/c4-d`, branch `claude/c4-rev-d`, from base `67c6
 | BNSS | scratchpad `derived/statutes/act-bnss-2023.txt` | 3672ebd3fae8f2e254bd6506ecba5deb98879acf2edab320a1d962db0236fe27 |
 | BSA | scratchpad `derived/statutes/act-bsa-2023.txt` | a88c574ddac5fd0713bd14be4219b6a69447b54771d200461e351a0178f702ed |
 | A92 | scratchpad `downloads/statutory-auditor/1992-37.txt` (Act 37 of 1992, Gazette) | d1114517c003483e7d3fa19e849044b4e3e6b85e3c2c083cd6abbc9c916c15ec |
+| VKPDF | scratchpad `downloads/judgment-auditor/virendra_2020.pdf` (official SC PDF; pp.1-21 CORRECTED copy cited) | 0ff9d2fc8ef36dfebe862739e517b5ec51f4fff9b4f9b3f7b86beece5d85e819 |
+| A92PDF | scratchpad `downloads/statutory-auditor/1992-37.pdf` (Gazette Extraordinary No.59, 7 Sep 1992; scanned) | f11d443ebfdada41780974c25612d85f7f62853bc552a38e1e2750a209067185 |
+| PARPDF | scratchpad `downloads/judgment-auditor/parashotam_2023.pdf` (official SC PDF) | fe19875b19ed5a4efa257273cd2fb1f1cbb57c4f383117cc40e9a90046568377 |
+| ISAACPDF | scratchpad `downloads/orchestrator/isaac_2026.pdf` (also indexed as LiveLaw secondary copy) | 3f49a31464fec174cdbff5d9e194fa888ca00529b6246eacdc8ac2368eab4653 |
 | GILL19 | scratchpad `downloads/citation-codes/psgill_2019.pdf` (Crl.A. 404/2013, 27 Nov 2019) | 7c32b8e87984c9f3dd52218f9030dffad3ea5aedc98d256744fd5e97d044a0ac |
 | PARASH | scratchpad `derived_jud/parashotam_2023.txt` | 6b27be394632f8f60c1775da340b62dd6007142f800394696c57b40825203ccd |
 | VK | scratchpad `derived_jud/virendra_2020.txt` | f73ee765c079fa6a9e34b27a2902b155b02e57f493e7448d6381104e7f443cee |
@@ -43,7 +47,7 @@ For raw-data items, the SHA-256 is the raw-file hash recorded in `data/meta/<doc
 ## Counts
 - `findings.csv`: 382 rows, one per proposition, covering all 46 records.
 - By severity: P1 1, P2 13, P3 69, NONE 299.
-- By evidence state: VERIFIED 22; SECONDARY_ONLY 121; SOURCE_NOT_HELD 35; INTERPRETATION 5; HISTORICAL_UNRESOLVED 2; CONTRADICTORY 1; UNSUPPORTED 5; NOT_A_LEGAL_PROPOSITION 191.
+- By evidence state: VERIFIED 18; SECONDARY_ONLY 125; SOURCE_NOT_HELD 35; INTERPRETATION 5; HISTORICAL_UNRESOLVED 2; CONTRADICTORY 1; UNSUPPORTED 5; NOT_A_LEGAL_PROPOSITION 191.
 - `cross_volume_register.csv`: 20 links: 5 INCONSISTENT, 5 MISSING_LINK, 3 MISSING_PREREQUISITE, 1 CONFLICTING_VERSION, 2 MISLINKED, 4 DUPLICATE.
 
 The P1 row is COI-003 P6, which understates the r.182 exclusion (re-assessed in the second commit; see below).
@@ -73,6 +77,27 @@ The 13 P2 rows cover 10 distinct defects:
 - **COI-003 P6: P2 raised to P1.** The sentence affirmatively implies that some CoI statements are admissible substantive evidence against the accused. Relied on, it leads to admitting evidence that r.182 excludes, and to a conviction open to being set aside. Cross-volume link D-CV-004 is raised to P1 as well.
 - **HCE-016 P2: kept at P2.** "Primarily" misstates the scope of s.80 and could invite an unlawful award, but it neither affirmatively authorises an award nor states a wrong power.
 - **CM-028 P8: kept at P2.** The wrong provision misdirects the procedure, but the record itself flags the citation "[exact rule verify]", and the substantive s.117(2) proposition is correct.
+
+## Correction (third commit, after an independent technical review)
+Fifteen VERIFIED rows cited derived text files (`vk.txt`/`virendra_2020.txt`, `1992-37.txt`, `isaac_2026_INSC_993.txt`, `parashotam_2023.txt`). Nothing records which PDF bytes those files came from. Each row was dealt with as follows.
+
+- **Virendra Kumar** (D-0017 HCE-001#P6, D-0078 COI-003#P5, D-0080 COI-003#REF, D-0090 HCE-008#REF).
+  - Re-pointed to the official PDF (sha 0ff9d2fc...) and re-read in its born-digital text layer. They stay VERIFIED.
+  - The PDF itself holds two copies: pp.1-21 are marked "CORRECTED" and pp.22-42 are uncorrected. The **corrected copy** is cited: para 9 at pp.10-11, para 10 at pp.13-14, paras 9-13 at pp.10-17.
+  - A word diff shows paras 9-13 are identical in both copies apart from footnote numbering. The corrected copy adds one operative sentence ("the Respondent shall not be sentenced to any imprisonment in view of his having already undergone the sentence of more than 10 years") that the uncorrected copy lacks. Any digest of the outcome should use the corrected copy.
+- **Act 37 of 1992** (D-0036 CM-001#P7, D-0039 CM-001#REF, D-0061 KB-030#REF, D-0165 CM-012#P1, D-0228 KB-004#P3).
+  - Re-pointed to the Gazette PDF (sha f11d443e...), which is a scan.
+  - The wording was read from page renders (110 dpi): s.5 at p.2 (render sha 08c603c3...); s.10 and s.11 at p.3 (render sha 06e59d9b...). They stay VERIFIED.
+  - The scan carries an India Code watermark, so it is a government-hosted facsimile.
+- **Parashotam Dass** (D-0146 AFT-039#P17, D-0287 AFT-001#P4).
+  - Re-pointed to the official signed PDF (sha fe19875b...): paras 24-25 at pp.16-17, para 32 at p.22. They stay VERIFIED.
+- **Isaac** (D-0108 PEN-WF-03#P2, D-0110 PEN-WF-03#P4, D-0245 PEN-003#P7, D-0269 PEN-CL-06#P1).
+  - Re-pointed to the PDF (sha 3f49a314...) but **downgraded to SUPPORTED_BY_SECONDARY_SOURCE_ONLY**.
+  - Reasons: the same bytes are also indexed as `judgment-auditor/secondary/isaac_livelaw_copy.pdf`; the file was modified with pdftk; and its embedded SC signature reads "Signature Not Verified".
+  - The para 39 wording was read at PDF pp.92-93. Severities are unchanged: the finding is that the knowledge base omits the case entirely, and that risk does not depend on the copy's authenticity.
+- **D-0181 CM-028#REF (P2).** The placeholder correction ("As P8.") is replaced with a full replacement reference and finding. The severity is unchanged.
+
+No other finding or severity changed. Every VERIFIED row now cites a held-index PDF hash: 1992-37.pdf (5 rows), psgill_2019.pdf (5), virendra_2020.pdf (4), ppsbedi_judis9884.pdf (2) and parashotam_2023.pdf (2).
 
 ## Limitations
 - The Gazette text of the Army Act, Army Rules, AFT Act, BNSS and BSA was not held, so statutory propositions stop at SECONDARY_ONLY.
