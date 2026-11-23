@@ -38,7 +38,7 @@ class C6Provenance(unittest.TestCase):
             self.assertIn(r["proposed_outcome"], allowed)
             ids = r["identity_verification"]
             if r["proposed_outcome"] == "PROVENANCE_DOCUMENTED":
-                self.assertIn(r["locator_strength"], ("FULL", "MD5_SIZE"), r["copy_id"])
+                self.assertEqual(r["locator_strength"], "FULL", r["copy_id"])
                 court = "-J-" in r["source_id"]
                 self.assertTrue(("I:" in ids) or (court and "T:" in ids), r["copy_id"])
                 self.assertEqual(r["contradictions"], "NONE_FOUND_IN_SEARCHED_REGISTERS")
@@ -68,6 +68,8 @@ class C6Provenance(unittest.TestCase):
         cls = {p["sha256"][:8]: p["effective_source_class"] for p in read("source_authentication_proposals.csv")}
         self.assertEqual(cls.get("fa51a4b1"), "NON_PRIMARY_PARLIAMENTARY_RECORD")   # RS papers-laid page
         self.assertEqual(cls.get("29f6fa2c"), "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY")  # incomplete ER 2023 copy
+        self.assertEqual(cls.get("6b495f14"), "NON_PRIMARY_OFFICIAL_COURT_RENDITION")  # Rajbir bosir rendition
+        self.assertNotIn("8358d2b3", cls)  # Act 13/1975 downgraded (identifier-only download record)
 
     def test_coverage_baseline_matches_cycle5(self):
         s = json.loads((PKG / "registers/c6_01_summary.json").read_text())["coverage_impact"]

@@ -12,6 +12,8 @@ its file and row key. Classification rules (also in reports/C6-01_METHOD.md):
         an ACQ-01/ACQ-02 metadata snapshot file whose md5 and sha1 and size equal the copy's (held_copy_facts.csv)
      L3 a PILOT-01 sources/*.json record whose sha256 equals the copy's, with a URL locator
      L4 PILOT-01 source_discovery register row whose downloaded_sha256 equals the copy's, with a URL
+     (strength FULL = sha256 recorded with a URL (L1/L3/L4-with-URL) or archive size+md5+sha1 (L2); MD5_SIZE,
+      IDENTIFIER_SHA and MD5 are weaker and never reach PROVENANCE_DOCUMENTED - Cycle 4 evidence bar)
      L5 R23 amendment_search register row with this sha256, an archive identifier and md5_ok=YES
      L6 WS-A identity_transcription row for this sha256 whose computed md5 equals the archived md5, with an
         archive identifier in the recorded path
@@ -24,7 +26,7 @@ its file and row key. Classification rules (also in reports/C6-01_METHOD.md):
      identity row for the case marked as contradicted/disputed
 Outcome:
   AUTHENTICATION_PENDING                     X present
-  PROVENANCE_DOCUMENTED                      L and (I, or T for a court copy) and no X
+  PROVENANCE_DOCUMENTED                      FULL-strength L and (I, or T for a court copy) and no X
   PROVENANCE_PARTIALLY_DOCUMENTED            L without the required identity evidence, or identity evidence plus a
                                              locator lead without byte identity
   IDENTITY_VERIFIED_PROVENANCE_UNDOCUMENTED  I or T but no L and no lead
@@ -68,21 +70,22 @@ def collect():
             ev[s].append(("L1", f"PILOT-01/registers/source_code_resolution_v3.csv#{r['code']}", r["official_corroboration_url"]))
     for r in read(AW / "ACQ-02/supplement_inventory.csv"):
         s = r["sha256"].strip()
-        if HEX.fullmatch(s) and r["archive_size_ok"] == "YES" and r["archive_md5_ok"] == "YES" and r["archive_sha1_ok"] == "YES":
+        ok = lambda v: (v or "").strip().lower() in ("yes", "true")  # the register records True/False (verification F: route was dead)
+        if HEX.fullmatch(s) and ok(r["archive_size_ok"]) and ok(r["archive_md5_ok"]) and ok(r["archive_sha1_ok"]):
             ev[s].append(("L2", f"ACQ-02/supplement_inventory.csv#{r['supp_id']}", f"{r['url']} (archive size/md5/sha1 OK)"))
         if HEX.fullmatch(s) and r.get("page_image_check_id"):
             ev[s].append(("I?", f"ACQ-02/supplement_inventory.csv#{r['supp_id']}", r["page_image_check_id"]))
-    for fn in sorted(glob.glob(str(AW / "PILOT-01/sources/*.json"))):
+    for fn in sorted(glob.glob(str(AW / "*/sources/*.json"))):  # PILOT-01 and R23-VERIFY-01 retrieval records
         for o in json.load(open(fn, encoding="utf-8")):
             s = o.get("sha256") or ""
             loc = o.get("locator") or ""
             for s2 in sorted(set(HEX.findall(loc)) - {s}):  # another copy's sha256 recorded inside a retrieval record's locator
                 before = [u for u in re.finditer(r"https?://[^ ;),]+", loc) if u.end() <= loc.index(s2)]
                 if before:
-                    ev[s2].append(("L3", f"PILOT-01/sources/{Path(fn).name}#{o.get('source_id', '')} (locator)",
+                    ev[s2].append(("L3", f"{Path(fn).parent.parent.name}/sources/{Path(fn).name}#{o.get('source_id', '')} (locator)",
                                    f"{before[-1].group(0)} | retrieved_on={o.get('retrieved_on')} | retrieved_by={o.get('retrieved_by')} | sha256 stated in locator"))
             if HEX.fullmatch(s) and re.search(r"https?://", loc):
-                ev[s].append(("L3", f"PILOT-01/sources/{Path(fn).name}#{o.get('source_id', '')}",
+                ev[s].append(("L3", f"{Path(fn).parent.parent.name}/sources/{Path(fn).name}#{o.get('source_id', '')}",
                               f"{re.search(r'https?://[^ ;)]+', loc).group(0)} | retrieved_on={o.get('retrieved_on')} | retrieved_by={o.get('retrieved_by')}"))
     for r in read(AW / "PILOT-01/registers/source_discovery_2026-11-22.csv"):
         s = r["downloaded_sha256"].strip()
@@ -156,7 +159,8 @@ def build():
     for rel in ("ACQ-01/archive_org_metadata_snapshot.json", "ACQ-02/archive_org_metadata_snapshot_acq02.json"):
         for ident, d in json.load(open(AW / rel, encoding="utf-8")).items():
             for f in d.get("pdf_files", []) + d.get("files", []):
-                snaps[(f.get("md5"), f.get("sha1") or "", str(f.get("size")))] = (f"{rel}#{ident}/{f.get('name')}", f"https://archive.org/download/{ident}/{f.get('name')}")
+                snaps[(f.get("md5"), f.get("sha1") or "", str(f.get("size")))] = (f"{rel}#{ident}/{f.get('name')}", f"https://archive.org/download/{ident}/{f.get('name')}"
+                                                                                  + (" [archive file source=derivative]" if f.get("source") == "derivative" else ""))
     ev = collect()
     url_by_sha = defaultdict(set)
     for s, items in ev.items():
@@ -187,14 +191,17 @@ def build():
         L = sorted(k for k in {k for k, _, _ in items} if k in ("L1", "L2", "L3", "L4", "L5", "L6"))
         # locator strength: FULL = sha256 recorded with the locator (L1/L3/L4) or archive size+md5+sha1 (L2 full);
         # MD5_SIZE = archive md5 and size only; MD5 = md5 only (L5/L6). PROVENANCE_DOCUMENTED needs FULL or MD5_SIZE.
-        strength = ("FULL" if ({"L1", "L3", "L4"} & set(L) or any(k == "L2" and "sha1" in d and "no sha1" not in d or k == "L2" and "OK)" in d for k, _, d in items))
-                    else "MD5_SIZE" if any(k == "L2" for k, _, _ in items) else "MD5" if L else "NONE")
+        full = (any(k in ("L1", "L3") for k, _, _ in items) or any(k == "L4" and d.startswith("http") for k, _, d in items)
+                or any(k == "L2" and ("size/md5/sha1 OK" in d or ("sha1" in d and "no sha1" not in d)) for k, _, d in items))
+        strength = ("FULL" if full
+                    else "MD5_SIZE" if any(k == "L2" for k, _, _ in items)
+                    else "IDENTIFIER_SHA" if any(k == "L4" for k, _, _ in items) else "MD5" if L else "NONE")
         I = "I" in kinds
         X = contradictions(s, url_by_sha)
         lead = bool(re.search(r"in\.gazette\.[a-z.]+\d", c["held_paths"])) or "I?" in kinds
         if X:
             outcome = "AUTHENTICATION_PENDING"
-        elif strength in ("FULL", "MD5_SIZE") and (I or t_ok):
+        elif strength == "FULL" and (I or t_ok):  # same evidence bar as the Cycle 4 register (verification F-02)
             outcome = "PROVENANCE_DOCUMENTED"
         elif L or ((I or t_ok) and lead):
             outcome = "PROVENANCE_PARTIALLY_DOCUMENTED"
@@ -211,12 +218,16 @@ def build():
             gaps.append("no locator with byte identity")
         elif strength == "MD5":
             gaps.append("locator matched by md5 only (no size or sha1 record)")
+        elif strength == "MD5_SIZE":
+            gaps.append("archive match on md5 and size only (no sha1 or sha256 retrieval record)")
+        elif strength == "IDENTIFIER_SHA":
+            gaps.append("download record gives a repository identifier, not a retrieval URL; no retrieval date")
         if not (I or t_ok):
             gaps.append("identity not verified on a page image" + ("" if court else " (scanned/official publication: text layer not accepted)"))
         if not dates:
             gaps.append("no retrieval date in a retrieval record" + (" (only a register date)" if regdates else ""))
         siblings = [x["copy_id"] for x in read(AW / "SOURCE-LIBRARY-C5/registers/source_copy_register.csv") if x["source_id"] == c["source_id"] and x["copy_id"] != c["copy_id"]]
-        cls = proposed_class(m, outcome)
+        cls = proposed_class(m, outcome, c)
         row = {
             "copy_id": c["copy_id"], "source_id": c["source_id"], "sha256": s, "held_paths": c["held_paths"],
             "source_identity": m["title"], "issuing_authority": m["authority"], "carrier": c["copy_carrier_provenance"],
@@ -239,11 +250,12 @@ def build():
                 "sha256": s, "document_identity": m["title"], "issuer_or_authority": m["authority"],
                 "held_paths": "; ".join(sorted(held_index[s])), "carrier": c["copy_carrier_provenance"].split(" (as reported")[0],
                 "official_locator_recorded": urls[0] if urls else "; ".join(d.split(" | ")[0] for k, _, d in items if k == "L4"), "provenance_references": "; ".join(ref for k, ref, _ in sorted(items) if k in ("L1", "L2", "L3", "L4", "L5", "L6", "I", "T", "WSB")),
-                "provenance_evidence": "; ".join(sorted({{"L1": "official URL with recorded sha256 equal to held bytes", "L2": "size, MD5 and SHA-1 equal to archive.org metadata",
+                "provenance_evidence": "; ".join(sorted({{"L1": "official URL with recorded sha256 equal to held bytes",
+                                                          "L2": ("size, MD5 and SHA-1 equal to archive.org metadata" if any(k == "L2" and ("size/md5/sha1 OK" in d or ("sha1" in d and "no sha1" not in d)) for k, _, d in items) else "MD5 and size equal to archive.org metadata"),
                                                           "L3": "retrieval record with URL and sha256", "L4": "discovery download record with URL and sha256",
                                                           "L5": "archive identifier with md5 match", "L6": "archive identifier with md5 equal to archived md5 (WS-A)"}[k] for k in L})) + ("; identity image-checked" if I else "; identity read from p.1 text (court PDF)"),
                 "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": cls,
-                "limitations": "C6-01 PROPOSAL - not incorporated; no signature verified; " + ("; ".join(gaps) if gaps else "no further gap recorded"),
+                "limitations": "; ".join(x for x in ["C6-01 PROPOSAL - not incorporated; no signature verified"] + gaps + extra_limits(items, cls, c) if x),
                 "rationale": "Meets the same evidence criteria as the Cycle 4 register rows of its class; requires independent verification (D3) and owner approval before incorporation",
             })
         else:
@@ -253,10 +265,30 @@ def build():
     return rec, props, unresolved, copies
 
 
-def proposed_class(m, outcome):
+def extra_limits(items, cls, c):
+    out = []
+    kinds = {k for k, _, _ in items}
+    if "L1" in kinds and not ({"L3", "L4"} & kinds):
+        out.append("provenance rests on a register corroboration record (official URL + sha256) without a separate retrieval record; accepted because uncontradicted (Cycle 4 PPS Bedi precedent)")
+    if any(k == "L3" and "(locator)" in ref for k, ref, _ in items) and not any(k == "L3" and "(locator)" not in ref for k, ref, _ in items):
+        out.append("URL and sha256 are stated inside another copy's retrieval record only")
+    if any(k == "L2" and "derivative" in d for k, _, d in items):
+        out.append("the matched archive.org file is a derivative, not the uploaded original")
+    if cls == "NON_PRIMARY_PARLIAMENTARY_RECORD":
+        out.append("non-primary: records the laying of a notification, not the instrument; RS Debates authenticity of the archive copy not confirmed")
+    if cls == "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY":
+        out.append("non-primary: incomplete or extract copy (see completeness)")
+    if cls == "NON_PRIMARY_OFFICIAL_COURT_RENDITION":
+        out.append("non-primary: court-system rendition with unknown carrier status, not the judgment copy as issued")
+    return out
+
+
+def proposed_class(m, outcome, copy=None):
     if outcome != "PROVENANCE_DOCUMENTED":
         return ""
     if m["publication_type"] == "JUDICIAL":
+        if copy and copy["copy_carrier_provenance"].startswith("UNKNOWN"):
+            return "NON_PRIMARY_OFFICIAL_COURT_RENDITION"  # e.g. a court-system text rendition (verification P3)
         return "PRIMARY_OFFICIAL_COURT_COPY"
     if m["publication_type"] == "PARLIAMENTARY_RECORD":
         return "NON_PRIMARY_PARLIAMENTARY_RECORD"
