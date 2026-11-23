@@ -29,7 +29,7 @@ Because the tree ids are equal, every byte of the reviewed evidence is preserved
 **Intermediate blobs.**
 - The old branch has 3 commits, which together hold 190 distinct `C8-EVIDENCE` blobs.
 - Of these, 106 are in the final reviewed tree and **84 are intermediate** (removed or later changed).
-- **0 of the 84 are reachable** from this branch (`git rev-list --objects`, 4,465 objects).
+- **0 of the 84 are reachable** from this branch (`git rev-list --objects`: 4,465 objects at the transfer commit `b78b11de`, the value in the committed outputs; 4,492 at review head `2cc82792`, with the same result; review CR-04).
 - This includes the 3 blob versions removed under review finding B-03: `SC-T2/tools/render_run1.jsonl`, `render_run2.jsonl` and the earlier `page_structure.json`.
 
 **Fragment search.**
@@ -40,14 +40,24 @@ Because the tree ids are equal, every byte of the reviewed evidence is preserved
   - 9 contain a run of five or more digits. 7 of those contain a case-number form `NNN/YYYY`, and none contains a service-number-shaped token.
   - 7 come from the N S Yadav copy. All 7 occur only in `SC-T2/page_checks_sc_c8.csv` and its builder `SC-T2/tools/build_c8_registers.py`, which hold the page-1 and last-page identity readings.
   - **Interpretation (judgement, not a machine result):** the matches are the identity elements the reviewed tree quotes on purpose, namely cause titles, case numbers, dates and running headers.
-  - **Limitation (review CL-04):** fixed-width windows cannot prove that a short token is absent if it is re-quoted in different surrounding text. Absence of the diagnosis term and the two N S Yadav service numbers therefore rests on a direct token search: the 801d2c41 re-review (`C8-EVIDENCE/review/fable_rereview_c8_evidence_801d2c41.md`, B-03 row) and the fresh review of this branch.
+  - **Window size (review CR-03):** the file counts in this section hold at the tool's window size. A finer search by the reviewer (25 characters, step 1) finds shared runs in 24 C8 files, including `SC-T2/evidence/ns_yadav.md` and one review file. None of them contains a sensitive token, and all are in the already-reviewed tree.
+  - **Limitation (review CL-04):** fixed-width windows cannot prove that a short token is absent if it is re-quoted in different surrounding text. The removed dumps held three sensitive tokens: the diagnosis term, one N S Yadav service number (p.1) and one service number from the Ranjit Thakur copy (p.4). The earlier wording "two N S Yadav service numbers" was wrong (review CR-02). Absence was therefore checked by a direct token search over every reachable blob in the fresh review of this branch (`review/fable_review_clean_2cc82792.md`). Its results are below.
+
+**Direct token search (fresh review, counts only).**
+| Token | In `C8-EVIDENCE/` | In `C9-EVIDENCE-CLEAN/` | Elsewhere in the tip tree (pre-existing staging files) |
+| --- | --- | --- | --- |
+| Diagnosis term | 0 | 0 | **6 occurrences in 4 files**, each on a line that also names the individual: `PILOT-01/findings/independent-reviewer-blind.json`, `WS-B-JUDGMENTS/holdings_register.csv`, `WS-B-JUDGMENTS/tools/manual_registers.py`, and the protected `curated_originals/knowledge_base/v0.9/records_658.jsonl`. Three older versions of the two WS-B files are also reachable through staging history |
+| N S Yadav service number | 0 | 0 | **1 each in 3 files**: `AUTH-LEDGER/evidence/copy_facts.csv`, `C6-01-PROVENANCE/inputs/held_copy_facts.csv`, `PILOT-01/sources/independent-reviewer-blind.json` |
+| Ranjit Thakur service number | 0 | 0 | 0 (in all 1,929 reachable blobs) |
+
+**Scope of the absence statement (review CR-01).** This branch **adds** none of the three tokens, and nothing from the old branch's intermediate history is reachable from it. But two of the tokens are already in the staging base, in the files listed above, so they are in this branch's tip tree. Retiring PR #36 removes the old-branch copies only. It does not remove these. The PRIV-01 scan does not catch the N S Yadav number, which is not in the officer `M` form. See owner decision **PRIV-02** below.
 - **Elsewhere in the repository:** `tools/repo_sweep.py` covers all text blobs outside `C8-EVIDENCE/`, with fragments of at least 20 letters. Matches occur in 41 files.
   - Every one is a pre-existing staging file, such as `AUTH-LEDGER/evidence/copy_facts.csv` or the WS-B registers.
   - These files predate the old branch and quote identity lines from the same public judgments.
   - The branch adds no object outside the byte-identical `C8-EVIDENCE/` tree and this directory.
 
 **Reports, logs and review material.**
-- `C8-EVIDENCE/review/` describes the removed material only generically ("a named individual's medical detail"); no fragment matched any file there.
+- `C8-EVIDENCE/review/` describes the removed material only generically ("a named individual's medical detail"). No fragment matched any file there at the tool's window size, and the reviewer's finer search found shared runs in one review file with no sensitive token. The direct token search found none of the three tokens in `review/`.
 - The outputs in this directory hold counts, blob ids and paths only.
 
 **Residual privacy item (PRIV-01).** Officer service numbers printed in the published Mullikote judgment appear in the evidence. `tools/pii_scan.py` counts tokens of the officer form, 6 to 8 digits followed by an optional space and `M`. Output is in `outputs/pii_scan_output.txt`.
@@ -55,7 +65,17 @@ Because the tree ids are equal, every byte of the reviewed evidence is preserved
 - **Inside `C8-EVIDENCE/`:** 36 tokens in 12 files. These include the evidence file, the page checks, the register, the subsequent-treatment leads, the findings, the Mullikote template, four builder or tool files, and two review files.
 - **Elsewhere:** 36 tokens in 11 pre-existing staging files from earlier cycles, such as the WS-B intake manifest and the C5 registers.
 
-The C8-EVIDENCE files are transferred unchanged, because reviewed evidence may not be changed silently. **Owner decision:** either mask these numbers repository-wide in a separate reviewed change (C8-EVIDENCE would need regeneration through its builders, and pre-existing registers would need their own correction route), or accept them as printed in a published judgment.
+The C8-EVIDENCE files are transferred unchanged, because reviewed evidence may not be changed silently. **Owner decision PRIV-01:** either mask these numbers repository-wide in a separate reviewed change (C8-EVIDENCE would need regeneration through its builders, and pre-existing registers would need their own correction route), or accept them as printed in a published judgment.
+
+**Pre-existing personal data on staging (PRIV-02, review CR-01).** The diagnosis term, which names an individual's medical condition, sits in 4 pre-existing staging files; the N S Yadav service number sits in 3 (table above).
+- One of the files is the protected original `records_658.jsonl` (pinned hash `9a8f0d19…`). Agents may not modify it. Any change needs an owner decision and a new protected-hash baseline.
+- The other files are audit registers, tools and review findings from Cycles 1 to 6. Changing them needs their own reviewed correction route, and earlier blob versions stay in staging history.
+- **Owner decision:**
+  - (a) accept the data as published in a public judgment;
+  - (b) mask it in the derived audit files by a reviewed change, and decide separately on the protected original;
+  - (c) additionally purge the history through a coordinated rewrite of staging, which needs the owner's explicit decision and platform support.
+
+  No action was taken.
 
 ## 5. Document and render hashes
 **Tool:** `tools/verify_renders.py`; output in `outputs/verify_renders_output.txt`.
@@ -88,4 +108,4 @@ No file under `C8-EVIDENCE/` differs from the reviewed tree. So no provenance re
    - **Locally,** the working repository's object store is shared by many worktrees. The local branch `claude/c8-evidence-verification` and its reflog keep `5212a95b` alive whatever happens on the remote.
    - Retiring the local copy means deleting the local branch, expiring its reflog and pruning. Those are destructive local steps, also left to the owner.
    - The remote state, that the branch and `refs/pull/36/head` contain `5212a95b`, follows from the PR #36 commit list and should be confirmed by the owner on GitHub.
-6. Decide PRIV-01 (section 4).
+6. Decide PRIV-01 and PRIV-02 (section 4).
