@@ -737,7 +737,9 @@ def build_graph(ctx):
                                  "[C9-LEGAL-EVIDENCE/CORRECTIONS matter B, re-rendered pages; AI-agent reading, not human-confirmed] || "
                                  f"register source_a: {c.get('source_a', '')} || register source_b: {c.get('source_b', '')}")
             elif c and (c.get("source_a") or c.get("source_b")):
-                readings_pres = f"(a) {c.get('source_a', '')} || (b) {c.get('source_b', '')}"
+                # review FL-03: the register's source_a / source_b describe the competing sources, not the readings themselves
+                readings_pres = (f"register summary of the competing sources (not verbatim readings): (a) {c.get('source_a', '')} || "
+                                 f"(b) {c.get('source_b', '')}; conflict: {c.get('nature_of_conflict', '')}")
             elif c:
                 readings_pres = (f"readings not itemised in the C5 conflict register ({cid}); conflict: {c.get('nature_of_conflict', '')}; "
                                  f"evidence: {c.get('evidence', '')}")
@@ -754,7 +756,8 @@ def build_graph(ctx):
         else:
             status = "UNRESOLVED_COMMENCEMENT"
             detail = f"held instrument; commencement not evidenced: {r['commencement_gap']}"
-        evidence = f"C8 amendment_commencement_matrix.csv#{rid}; {r['source_evidence'][:200]}"
+        se = r['source_evidence']
+        evidence = f"C8 amendment_commencement_matrix.csv#{rid}; {se[:200]}" + (" [...truncated; full text in the C8 matrix]" if len(se) > 200 else "")  # review FL-06
         if r["document_sha256"]:
             evidence += f"; held sha256 {r['document_sha256'][:16]}"
         interval = "NOT EVIDENCED"

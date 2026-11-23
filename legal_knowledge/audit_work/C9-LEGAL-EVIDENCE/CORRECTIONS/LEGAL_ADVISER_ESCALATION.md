@@ -31,7 +31,7 @@
 - AFT-013 and V7-SC-02 present Tarsem as the governing arrears authority, with no later treatment.
 - V7-JD-04 (the Tarsem digest) has no later-treatment note, although WS-B lists it as affected by both Girish (WSB-T-005) and Mullikote (WSB-T3-003).
 - DCLR-SC-2008-N10 reads `NOT_EXHAUSTIVELY_CHECKED`.
-- **No official court copy** of Tarsem is held. An unregistered SCR-format copy ([2008] 12 S.C.R. 104) is in the raw store, with undocumented provenance; registering it needs AP-C9-02 (review LG-05; the earlier "not held" was wrong). Its citation is corroborated by the two official judgments that cite it (Girish p.6 footnote; Mullikote p.26). Its date and case number come from an intern mirror only, and its URL is a commercial database.
+- **No official court copy** of Tarsem is held. An unregistered SCR-format copy ([2008] 12 S.C.R. 104) is in the raw store, whose only provenance is a crawler retrieval record from a third-party mirror bucket; AP-C9-02 as drafted covers statutory copies only, so registering it needs an extension of that package (review LG-05; the earlier "not held" was wrong). Its citation is corroborated by the two official judgments that cite it (Girish p.6 footnote; Mullikote p.26). Its date and case number appear in an intern mirror and on that SCR-format copy, neither official, and its recorded URL is a commercial database (review FL-04).
 
 **Waiting on this decision.** C9-CP-A01, A02, A03, A04 (and A05, metadata only). The proposals state expressly that Tarsem is **not** recorded as overruled.
 

@@ -151,10 +151,10 @@ FINDINGS = [
          field="post_decision_treatment_status; reporter_citation; accessible_source_url",
          observation=("Identity check: the citation (2008) 8 SCC 648 is printed in two held official Supreme Court copies (Girish p.6 footnote; "
                       "Mullikote p.26 para 43), so the citation is corroborated by official documents that cite Tarsem; the decision date 2008-08-13 "
-                      "and C.A. 5151-5152/2008 rest only on the intern mirror (WS-B identity IDENTITY_CORROBORATED_INTERN_MIRROR_ONLY). "
+                      "and C.A. 5151-5152/2008 rested on the intern mirror (WS-B identity IDENTITY_CORROBORATED_INTERN_MIRROR_ONLY) and are also printed on the raw-store SCR-format copy below; neither is an official court copy. "
                       "No official court copy of Tarsem is held. The raw store holds an unregistered 6-page SCR-format copy ([2008] 12 S.C.R. 104; "
                       "C.A. 5151-52 of 2008; August 13, 2008; raw-data ad77758d, data/raw/sci/2008/f8a14181...pdf), which agrees with the mirror date "
-                      "and case number but whose provenance is undocumented (review LG-05); the holding and pinpoints ('Paras 4-7') remain unverified "
+                      "and case number but whose provenance is only a crawler retrieval record from a third-party mirror bucket, not a court site (review LG-05, FL-04); the holding and pinpoints ('Paras 4-7') remain unverified "
                       "against an official copy, and the record's only URL is a commercial database. The case record still shows NOT_EXHAUSTIVELY_CHECKED with no treatment edge."),
          primary_evidence=("%s PDF p.6 fn ('Tarsem Singh (2008) 8 SCC 648'); %s PDF p.26 para 43; WS-B identity_resolution.csv#TARSEM; "
                            "case_relations.csv edge DCLR-SC-2026-007 -> DCLR-SC-2008-N10 DISTINGUISHED") % (h("GIRISH"), h("MULLIKOTE")),
@@ -464,7 +464,7 @@ PROPOSALS = [
          field="reporter_citation", current_text_quote="(2008) 8 SCC 648",
          proposal_type="METADATA_EVIDENCE_NOTE (overlay)",
          proposed_change=("Annotate: citation corroborated as printed in two held official SC copies that cite Tarsem (Girish p.6 fn; Mullikote p.26 "
-                          "para 43). decision_date 2008-08-13 and C.A. 5151-5152/2008 rest on an intern mirror only. Tarsem's own official copy is "
+                          "para 43). decision_date 2008-08-13 and C.A. 5151-5152/2008 appear in an intern mirror and on an unregistered SCR-format raw-store copy (not official). Tarsem's own official copy is "
                           "not held, and accessible_source_url is a commercial database (E8-XR-11). Acquire the official copy before relying on 'Paras 4-7'."),
          primary_evidence="%s PDF p.6; %s PDF p.26; WS-B identity_resolution.csv#TARSEM" % (GIR, MUL),
          record_level_impact="V7-JD-04 (same citation/date)", priority_evidence_standard="P3", escalation_ref=""),

@@ -33,8 +33,8 @@
   - The neutral citation is printed on p.1.
   - It is a two-Judge Bench (P.S. Narasimha and Alok Aradhe JJ, signatures on p.17).
 - **Tarsem Singh.** The citation (2008) 8 SCC 648 is printed in two official judgments that cite Tarsem: Girish p.6 footnote, and Mullikote p.26 para 43.
-  - The date 2008-08-13 and C.A. 5151-5152/2008 come from an intern mirror only.
-  - No official court copy of Tarsem is held. The raw store (`raw-data` `ad77758d`, `data/raw/sci/2008/f8a14181…pdf`) holds an unregistered 6-page SCR-format copy, [2008] 12 S.C.R. 104, C.A. 5151-52 of 2008, dated 13 August 2008. It agrees with the mirror date and case number, but its provenance is undocumented. The holding and pinpoints stay unverified against an official copy (review LG-05; the earlier "not held" was wrong).
+  - The date 2008-08-13 and C.A. 5151-5152/2008 come from an intern mirror and from the unregistered SCR-format raw-store copy. Neither is an official court copy (review FL-04).
+  - No official court copy of Tarsem is held. The raw store (`raw-data` `ad77758d`, `data/raw/sci/2008/f8a14181…pdf`) holds an unregistered 6-page SCR-format copy, [2008] 12 S.C.R. 104, C.A. 5151-52 of 2008, dated 13 August 2008. It agrees with the mirror date and case number, but its only provenance is a crawler retrieval record from a third-party mirror, not a court site. The holding and pinpoints stay unverified against an official copy (review LG-05; the earlier "not held" was wrong).
 
 **Operative holding.** Girish para 22 (pp.15-16) gives two grounds:
 - "of no assistance", because the law changed after the three-Judge Ram Avtar order (in rem);
@@ -160,6 +160,6 @@ The items are classified as incorrect citations or as unsupported or incomplete 
 
 ```
 python -I legal_knowledge/audit_work/C9-LEGAL-EVIDENCE/CORRECTIONS/tools/build_corr.py <repo root> --check
-python -I legal_knowledge/audit_work/C9-LEGAL-EVIDENCE/CORRECTIONS/tools/build_corr.py <repo root> --verify-held <scratchpad>   # PyMuPDF; 8 hashes, 33 anchors
+python -I legal_knowledge/audit_work/C9-LEGAL-EVIDENCE/CORRECTIONS/tools/build_corr.py <repo root> --check --verify-held <scratchpad>   # PyMuPDF; 8 hashes, 33 anchors (always with --check: without it the command rewrites the outputs; review FL-02)
 cd legal_knowledge/audit_work/C9-LEGAL-EVIDENCE/CORRECTIONS && sha256sum -c OUTPUT_SHA256SUMS
 ```
