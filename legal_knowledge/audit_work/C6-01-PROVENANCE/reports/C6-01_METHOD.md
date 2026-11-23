@@ -8,14 +8,16 @@ Evidence was collected **only from committed registers**. Every item is cited as
 | L1 | PILOT-01 code register: the official URL's recorded `official_sha256` equals the held sha256 | FULL |
 | L2 | archive.org metadata: ACQ-02 supplement with size, MD5 and SHA-1 all OK; or the ACQ-01/ACQ-02 snapshot matched on MD5, SHA-1 and size | FULL |
 | L2 | as above, matched on MD5 and size only (the ACQ-01 snapshot has no SHA-1) | MD5_SIZE (never sufficient for DOCUMENTED) |
-| L3 | PILOT-01 `sources/*.json` retrieval record with URL and sha256 (including a sha256 stated inside a locator) | FULL |
+| L3 | PILOT-01 / R23-VERIFY-01 `sources/*.json` retrieval record whose **own** sha256 is the copy's, with a URL | FULL |
+| L3lead | a sha256 merely mentioned inside **another** record's locator (a sibling copy's record) | lead only, never FULL (Fable F-01) |
+| L3x | a retrieval record that itself disclaims authenticity (`authenticity=UNCONFIRMED`) or reports NOT_FOUND / CONFLICTING | lead only, never FULL (Fable F-02) |
 | L4 | PILOT-01 source-discovery register download record (`downloaded_sha256`) with a URL | FULL |
 | L4 | the same record with a repository identifier but no URL | IDENTIFIER_SHA (never sufficient for DOCUMENTED) |
 | L5 | R23 amendment-search register: archive identifier with `md5_ok` | MD5 (never sufficient) |
 | L6 | WS-A identity register: computed MD5 equals the archived MD5, with an archive identifier | MD5 (never sufficient) |
 | I | page-image identity check with a 64-hex render hash, or an ARMY-RULES-CHAIN-01 row at `IMAGE_CHECKED`, or a C6-01 check (`inputs/page_image_checks_c6.csv`) with `identity_result=CONFIRMED` | — |
 | Ip | a C6-01 page-image check with `identity_result=PARTIAL`: the page was read but a required identity element (for example the issuing authority or volume) is not printed on the copy. **Ip does not satisfy I** | — |
-| T | page-1 text-layer identity: the first two distinctive title words appear in the p.1 text. **Court PDFs only**; never accepted for a scanned publication. This is a C6-01 rule, not a Cycle 4 one (the C4 PPS Bedi row rests on URL+sha256 corroboration, not text identity; final review R-06) | — |
+| T | page-1 text-layer identity: the first two distinctive title words **and** the year or case number from the title (outside parentheses) appear in the p.1 text (Fable F-10). **Court PDFs only**; never accepted for a scanned publication. This is a C6-01 rule, not a Cycle 4 one (the C4 PPS Bedi row rests on URL+sha256 corroboration, not text identity; final review R-06) | — |
 | X | contradiction: the same official URL recorded with another sha256, or a WS-B identity row marked contradicted | — |
 
 ## Outcomes
@@ -40,6 +42,13 @@ Each class is the same one Cycle 4 used for the same carrier type:
 | `NON_PRIMARY_PARLIAMENTARY_RECORD` | the Rajya Sabha papers-laid record |
 | `NON_PRIMARY_OFFICIAL_COURT_RENDITION` | a court-system rendition whose carrier is unknown (Rajbir bosir copy) |
 | `NON_PRIMARY_OFFICIAL_PUBLICATION_COPY` | the incomplete ER 2023 copy; and, conservatively, the TRA 2026 copy: born-digital e-Gazette text re-hosted by India Code with an IndiaCode watermark, whose embedded signature's byte range no longer covers the held file. Cycle 4 gave `PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN` to the watermarked India Code scan of Act 37/1992, so the watermark alone is not the distinction; the class is reserved for owner decision (final review R-04) |
+
+## Copy-fidelity rule for born-digital copies (Fable F-04)
+A non-judicial copy that is otherwise DOCUMENTED is classed `NON_PRIMARY_OFFICIAL_PUBLICATION_COPY` when the held bytes are shown to differ from the publication as issued:
+- its embedded signature's `/ByteRange` does not cover the whole held file; or
+- it is an archive.org derivative, re-rendered by the archive rather than the uploaded file.
+
+The facts come from `inputs/copy_structure_c6.csv`, produced locally by `tools/compute_copy_facts.py`. They are structural observations; no signature is cryptographically validated. The rule applies uniformly: 2018 and 2019 archive.org e-Gazettes (signature covers the file) stay primary; TRA 2026 and the 2022 derivative do not. See `reports/TRA2026_CLASS_COMPARISON.md`.
 
 ## Limits
 - A matching hash proves byte identity, not legal authority.

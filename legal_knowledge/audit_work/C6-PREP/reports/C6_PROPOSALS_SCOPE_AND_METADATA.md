@@ -3,6 +3,8 @@
 Neither proposal is implemented. Both need explicit owner approval, and neither changes CLAUDE.md, the crawler, the crawler config or the guarded runner in this PR.
 
 ## P-C6-02-META: pin the two DPP Amendment Act 2000 items from archive.org metadata
+**Authorisation basis for these requests (Fable F-26):** the owner's Cycle 6 closeout instruction (Part VI item 12.1) asked for the missing integrity pins to be completed, with no downloads. The requests were metadata-only, made through the Cycle 5 guarded discovery runner (robots first; HEAD before any GET; no redirects followed; no document body). No GET other than robots.txt was made. No further request has been made since.
+
 **Facts (2026-11-23, `discovery/c6_02_metadata_requests_v2.tsv`):**
 - archive.org robots.txt was read (RULES_PARSED).
 - `https://archive.org/metadata/<id>` answers HEAD with 405 (text/html), so the runner's HEAD-first rule refused the GET.

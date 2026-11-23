@@ -1,7 +1,7 @@
 """C6-02..C6-05 preparation registers (no network, no downloads). Run locally: the overlap check reads the crawler
 PR heads with `git show <sha>:config/sources.yaml` (the PRs themselves are not modified). Outputs are committed;
-`--check` re-derives them when the PR commits are available locally, and otherwise checks only the rows that do
-not depend on them.
+`--check` re-derives ALL outputs and compares whole files, so it needs the crawler PR commits as local git objects; without
+them the overlap column reads UNKNOWN and the check reports STALE (it does not degrade to a partial check; Fable F-22).
 
 C6-02 registers/c6_02_batch_a_files.csv   one row per archive.org file in Batch A, with pins and PR overlap
 C6-03 registers/c6_03_desw_package.csv    DESW items, PR #9 allow-list overlap, the held incomplete ER-2023 copy

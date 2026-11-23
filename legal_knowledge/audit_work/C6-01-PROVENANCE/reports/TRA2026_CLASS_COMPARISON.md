@@ -1,33 +1,34 @@
-# TRA 2026 copy versus the Cycle 4 Act 37/1992 precedent (class comparison; no decision)
+# Born-digital Gazette copies: one copy-fidelity rule (TRA 2026 and comparators; owner decision)
 
-**Purpose:** set out the evidence for the owner's decision on the class of the held TRA 2026 copy. The draft keeps `NON_PRIMARY_OFFICIAL_PUBLICATION_COPY`. Nothing here promotes it.
+**Purpose:** give the owner a complete comparison for classifying born-digital Gazette copies. The Fable 5.2 review (F-04) found that the first version left out the closest comparators.
 
-The structural facts below were read from the held files with PyMuPDF and a byte search, run locally on 2026-11-23. They are observations, not cryptographic verification.
+**Rule applied uniformly in the builder** (`fidelity_issue()` in `tools/build_provenance.py`):
+- A born-digital copy is classed primary only if nothing shows the held bytes were changed after issue.
+- A copy is not primary if its embedded signature's byte range does not cover the held file, or if it is an archive.org derivative re-rendered by the archive.
+- Structural facts come from `inputs/copy_structure_c6.csv`, produced locally by `tools/compute_copy_facts.py`. **No signature was cryptographically validated for any copy.**
 
-| Dimension | Act 37/1992 (Cycle 4 row, `PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN`) | TRA 2026 (C6-01 `C6-01-AP-be619533`) |
-| --- | --- | --- |
-| Held bytes | sha256 `f11d443e…`, 165,367 bytes, 4 pages | sha256 `be619533…`, 637,026 bytes, 15 pages |
-| Nature of the file | **Scanned Gazette facsimile**: one image per page with an added text layer (`SCANNED_IMAGE_WITH_TEXT_LAYER_ALL_PAGES`; 4 images) | **Born-digital publication**: text on every page (`TEXT_LAYER_NO_IMAGES_ALL_PAGES`; 7 small embedded images such as the emblem) |
-| Host and re-hosting | India Code bitstream (re-hosted; the original printed Gazette is not on India Code) | India Code bitstream (re-hosted e-Gazette; the e-Gazette original is on egazette.gov.in) |
-| Watermark | India Code watermarks served PDFs; Cycle 4 recorded "bytes are host-specific" | IndiaCode watermark on every page (C6-PIC-01/02) |
-| Producer | iText# (r0.95) | iTextSharp 5.5.13.1 |
-| Embedded signature | none (a scan carries none) | one `/ByteRange [0 577400 600412 8230]`, so the signed range ends at byte 608,642 of 637,026. The 28,384 bytes after it are not covered, so the signature cannot validate the held bytes. Not cryptographically checked. |
-| Document identity | image-checked (WS-A WSA-PIC-25..28) | image-checked (C6-PIC-01/02, CONFIRMED; final review reproduced the renders) |
-| Issuing authority on the face | Gazette of India, Ministry of Law (Legislative Department) | Gazette of India, Ministry of Law and Justice (Legislative Department); printer line and signatory on p.15 |
-| Provenance | retrieval record with URL + sha256 (PILOT-01 S-STAT-008) | retrieval record with URL + sha256 (R23/PILOT-01 L3; retrieved 2026-11-22) |
-| Completeness | complete issue pages for the Act | complete on its face (ends at signatory and printer line) |
+Following SOURCE_AUTHORITY_POLICY v1, the table reports document authority, carrier and copy fidelity separately.
 
-## What distinguishes the two
-- **The watermark does not.** Cycle 4 accepted a watermarked India Code copy as primary.
-- **Scan versus born-digital.** For a scan, the page image *is* the evidence of the printed Gazette. A watermark adds a layer but leaves the image of the printed page intact. For a born-digital e-Gazette, the authoritative object is the signed PDF as issued; a re-hosted, re-written file is a derivative of it.
-- **Signature integrity.** The e-Gazette is digitally signed. In the held copy the signature no longer covers the file, which shows the bytes were changed after signing (consistent with watermarking). The content can still be identical to the issued Gazette, but integrity cannot be shown from these bytes.
-- **Identity, authority and provenance are the same kind of evidence in both:** an official host, a recorded sha256, and identity read on page images.
+| Copy | Document authority | Carrier | File nature | Signature structure (`/ByteRange`; %%EOF markers) | Copy fidelity | Proposed class |
+| --- | --- | --- | --- | --- | --- | --- |
+| Act 37/1992 (Cycle 4 precedent, `f11d443e`) | Gazette of India Extraordinary, Ministry of Law | India Code bitstream (re-hosted; IndiaCode watermark) | **scan**: 4 page images plus a text layer | none (a scan carries none) | image of the printed page; watermark recorded by Cycle 4 | `PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN` (Cycle 4) |
+| S.R.O. 2(E)/2018 (`7c12a7ec`, AR-033) | Gazette of India Extraordinary, MoD | archive.org item (third party) | born-digital e-Gazette (Ghostscript 8.15) | `[0 260473 1699735 7652]` **covers all 1,707,387 bytes**; 2 markers | signed bytes structurally intact | `PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE` |
+| S.R.O. 17(E)/2019 (`138c1da0`, AR-034) | as above | archive.org item | born-digital e-Gazette (Ghostscript 8.15) | `[0 324995 332029 7495]` **covers all 339,524 bytes**; 2 markers | signed bytes structurally intact | `PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE` |
+| S.R.O. 6(E)/2022 (`2bdab5b7`, AR-035) | as above | archive.org **derivative** file (`source: derivative` in the ACQ-01 snapshot; producer "Internet Archive PDF … mupdf"; 4 page images) | re-rendered by the archive from an upload | **no signature** | not the uploaded file; fidelity to the issued e-Gazette not shown | **`NON_PRIMARY_OFFICIAL_PUBLICATION_COPY`** (changed in this revision; previously primary) |
+| TRA 2026 (`be619533`) | Gazette of India Extraordinary, Ministry of Law and Justice | India Code bitstream (re-hosted; IndiaCode watermark) | born-digital e-Gazette re-written by iTextSharp 5.5.13.1 | `[0 577400 600412 8230]`, ending at byte 608,642 of **637,026**; **1 marker** | bytes changed after signing; signed revision not extractable (see below) | `NON_PRIMARY_OFFICIAL_PUBLICATION_COPY` |
+
+## What the comparison shows
+- **The watermark is not the distinction.** Cycle 4 accepted a watermarked India Code scan.
+- **The host is not the distinction either.** Third-party archive.org copies whose signed bytes are intact (2018, 2019) stay primary. A Government-hosted copy whose bytes were re-written (TRA) and an archive-rendered derivative (2022) do not.
+- **Why a scan is treated differently.** For a scan, the page image *is* the evidence of the printed Gazette. For a born-digital e-Gazette, the issued object is the signed PDF. A copy re-written after signing, or re-rendered, is a derivative whose fidelity has to be shown.
+- **Identity, authority and provenance** are documented for all five copies by the same kinds of evidence.
+
+## Offline revision check (Fable F-12)
+Some signed PDFs carry later changes as an *incremental update* appended after the signed bytes; the signed revision can then be cut out and validated offline. The held TRA file has a **single** %%EOF marker, so it was rewritten, not incrementally updated. Bytes 0–608,642 are not a self-contained PDF revision, and no signed revision can be extracted from these bytes. This is a structural finding, not a cryptographic validation.
 
 ## Options for the owner
-1. **Keep `NON_PRIMARY_OFFICIAL_PUBLICATION_COPY`** (current draft). It is safe: no coverage change, since TRA has no exact-anchor dependency today.
-2. **Introduce a separate class**, for example `PRIMARY_GAZETTE_GOVERNMENT_HOSTED_DIGITAL_REHOST`, with a stated rule. Content identity must be shown against the signed e-Gazette original, either by an approved acquisition of the egazette.gov.in file with a valid signature, or by a text comparison against it. This needs the evidence first.
-3. **Apply the Act 37 class.** Not recommended without option 2's evidence, because the Cycle 4 class was defined for scans.
+1. **Keep the uniform rule (recommended).** TRA 2026 and the 2022 derivative stay non-primary. Neither has an exact-anchor dependency today, so coverage is unaffected.
+2. **Add a class** such as `PRIMARY_GAZETTE_DIGITAL_REHOST`, used only where content identity against the signed original is shown: either an approved acquisition of the egazette.gov.in original with a validated signature (egazette.gov.in failed TLS verification in Cycle 5, and verification must not be disabled), or a full text comparison against such an original.
+3. **Apply a primary class to re-written copies on host trust alone.** Not recommended: it ranks by host, which SOURCE_AUTHORITY_POLICY v1 warns against.
 
-**Evidence that would settle it:** the signed e-Gazette PDF for CG-DL-E-13082026-275447 from egazette.gov.in, acquired under an approved route with its signature validated, then compared with the held copy page by page. egazette.gov.in failed TLS verification in Cycle 5, and verification must not be disabled.
-
-No legal status follows from either class. Commencement of TRA 2026 is by notification (s.1(2)) and must be evidenced separately.
+No legal status follows from any class. TRA 2026 s.1(2) provides commencement by notification, which must be evidenced separately.

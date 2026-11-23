@@ -64,7 +64,7 @@ These are documentation and ID-stability changes only: at f0cd16a7 the outcomes 
 - Act 13/1975 is unchanged, and its masthead finding is carried on the row.
 - Legacy AP-nn to sha256 map added.
 
-**Current outcomes:** 34 DOCUMENTED and 2 PARTIALLY_DOCUMENTED (Delhi HC Ch.6, Act 13/1975). The 34 proposals are 21 primary Gazette facsimiles, 9 primary court copies and 4 non-primary (RS papers-laid, ER 2023 13 MB, Rajbir rendition, TRA 2026). The coverage figures are unchanged, because the Cycle 4 rule gives non-primary classes no effect.
+**Outcomes at e7a10e27 (superseded below):** 34 DOCUMENTED and 2 PARTIALLY_DOCUMENTED (Delhi HC Ch.6, Act 13/1975). The 34 proposals are 21 primary Gazette facsimiles, 9 primary court copies and 4 non-primary (RS papers-laid, ER 2023 13 MB, Rajbir rendition, TRA 2026). The coverage figures are unchanged, because the Cycle 4 rule gives non-primary classes no effect.
 
 ## Final independent review of e7a10e27: VERDICT ACCEPT WITH CONDITIONS (no P1; 2 P2)
 **Review files:** verbatim in `review/final_review_e7a10e27.md` and `review/final_findings_e7a10e27.csv`. It was a separate read-only reviewer with no network access.
@@ -111,3 +111,41 @@ Its five P3 wording items are corrected in the following documentation-only comm
 | RR-03 | D3 said "were re-reviewed" before the re-review existed | corrected by this section |
 | RR-04 | "no GET was made" | corrected to "no GET other than robots.txt" |
 | RR-05 | only internal policy letters were flagged as outside the CLAUDE.md scope | corrected: Army Orders and unpublished material, which covers AO 13/2006/PS and possibly the handbook, are flagged for an owner scope decision |
+
+## Independent Fable 5.2 review of a165b0f3: VERDICT ACCEPT WITH CONDITIONS (no P1; 9 P2, 17 P3)
+- **Reviewer:** Claude Fable 5.2 (`claude-fable-5-2`), as the model self-reported. It was requested through the Claude Code Agent tool (model `fable`, agent type `independent-reviewer`).
+- **Tools:** Read, Glob and Grep only, so it had no write, shell, git or commit capability, and it was instructed not to use the network.
+- **What it received:** the commit, file locations and criteria, not the coordinator's conclusions.
+- **Record:** verbatim in `review/fable_review_a165b0f3.md`.
+- **What it could not do:** hash files or run code. The coordinator's gate re-hashes held files and runs the builders separately.
+
+| ID | Sev | Finding | Disposition (commit after a165b0f3) |
+| --- | --- | --- | --- |
+| F-01 | P2 | Rajbir C2 proposed primary on C1's record | **Corrected by rule:** a sha256 mentioned inside another record's locator is now `L3lead` (a lead, never FULL). C2 is PARTIALLY_DOCUMENTED with a copy-level finding (ROP pages; not a duplicate; signature range not covering the file). The Rajbir case is anchored by C1 alone |
+| F-02 | P2 | Disclaiming retrieval records counted as FULL; RS stayed DOCUMENTED | **Corrected by rule:** a record with `authenticity=UNCONFIRMED`, or `verification_state` NOT_FOUND/CONFLICTING, is `L3x` (a lead). The RS record is PARTIALLY_DOCUMENTED by rule and also WITHHELD; its sitting date is recorded as resting on the file name |
+| F-03 | P2 | S.R.O. 34 identity inference written as fact | **Corrected:** the identity is annotated UNVERIFIED (05-01-1963 declaration versus the notes' "5-6-1963"), with a documentary finding forbidding amendment-chain inference |
+| F-04 | P2 | TRA comparison omitted comparators | **Corrected:** one uniform copy-fidelity rule for born-digital copies (signature range must cover the file; archive derivatives are not the issued file), computed from `inputs/copy_structure_c6.csv`. 2018/2019 stay primary (signature covers the file). **2022 (`2bdab5b7`) moves to non-primary** (archive derivative). TRA stays non-primary. The comparison now has four comparators |
+| F-05 | P2 | D3/D4/D6 contradicted the plan and architecture | **Corrected:** D4 and D6 rewritten for the overlay design; counts derived from the summary; tests assert no "relabel" and the current counts |
+| F-06 | P2 | Architecture "either way" output option broke reproducibility | **Corrected:** architecture revision 2 (overlay package C′). C4/C5 files and tools are frozen and hash-pinned; outputs are versioned in `effective/vNNNN/`; the rule version is pinned per manifest line |
+| F-07 | P2 | Plan, architecture and draft disagreed | **Corrected:** the architecture is the single specification. The plan covers process only. The draft follows `addendum_entry.schema.json` (entry type, first-class record, reviewer ref), validated on every build; a hash-chained manifest is specified |
+| F-08 | P2 | Classification change possible without evidence | **Corrected in the design and the draft:** references must resolve (checked by the builder); an ADD needs a first-class record keyed by its own sha256; decisions are committed, hash-pinned files; carrier/class changes go only through the ledger; strength computation moves into the ledger package (no code cycle) |
+| F-09 | P2 | Anchoring and withdrawal under-specified | **Corrected in the design:** copy-level anchoring with page equivalence; WITHDRAW with a mandatory reason and an optional resulting state; orphan rules; audit trail in a separate file; joint-effect diffs; a newly-withdrawn change list |
+| F-10 | P3 | T rule too weak | **Corrected:** T also needs the year or case number from the title on p.1 |
+| F-11 | P3 | C6-PIC-02 misreading | **Corrected** in the reading (render hash unchanged); the correlated error is noted |
+| F-12 | P3 | Offline signed-revision check | **Done:** the TRA file has one %%EOF marker (a rewrite, not an incremental update), so no signed revision is extractable |
+| F-13 | P3 | Item page shown instead of file URL | **Corrected:** the direct file URL is preferred |
+| F-14 | P3 | "as reported" qualifier stripped | **Corrected:** kept unless a direct retrieval record exists |
+| F-15 | P3 | Mullikote corrected judgment | Limitation added |
+| F-16 | P3 | JUDIS headnote/citator material | Limitation added to the JUDIS rows |
+| F-17 | P3 | `/judgment/judis/` locator variant | Limitation added; URL normalisation is specified for the ledger validator |
+| F-18 | P3 | Re-acquisition yields a new copy; handwritten mark | **Corrected:** next steps and evidence-recovery text updated; mark recorded after the coordinator's re-read |
+| F-19 | P3 | Delhi HC currency markers | Recorded; currency UNKNOWN, historical text |
+| F-20 | P3 | S.O. 4010 date semantics | Recorded as UNVERIFIED (reviewer's Saturday inference noted as inference) |
+| F-21 | P3 | Copy facts hashed one path; silent extraction failure | **Corrected:** every path (43) is hashed; failures stop the run |
+| F-22 | P3 | build_prep docstring | **Corrected** to state that `--check` needs local git objects |
+| F-23 | P3 | Hard-coded counts; no report check | **Corrected:** denominators derived from Cycle 5; reports gain `--check`; UTF-8 writes |
+| F-24 | P3 | Tests keyed by prefix; collision remedy | **Corrected:** tests key by full sha256; synthetic prefix-collision test; the remedy lengthens only colliding IDs |
+| F-25 | P3 | WITHHELD simulated; descriptor restore | **Corrected:** WITHHELD is never simulated; the original classmethod descriptor is restored |
+| F-26 | P3 | Diff-scope and hash checks not possible for the reviewer | **Done in the coordinator's gate** (git diff scope, held-file re-hash, corpus and Cycle 4 hashes) and recorded in the PR |
+
+**Current outcomes:** 32 DOCUMENTED and 4 PARTIALLY_DOCUMENTED. The 32 proposals are 20 primary Gazette copies, 8 primary court copies and 4 non-primary. Simulated coverage: documented-primary copies 12 to 40; sources 12 to 40; cases 6 to 13; KB unchanged. The re-review of the corrections is recorded below once complete.

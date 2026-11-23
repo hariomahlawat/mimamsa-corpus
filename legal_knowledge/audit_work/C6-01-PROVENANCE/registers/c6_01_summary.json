@@ -30,13 +30,13 @@
    "c4_register_rows": 13,
    "copies_by_evidence_class": {
     "AUTHENTICATION_PENDING_COPY": 1,
-    "DOCUMENTED_PRIMARY_COPY": 42,
-    "PROVENANCE_UNDOCUMENTED_COPY": 24
+    "DOCUMENTED_PRIMARY_COPY": 40,
+    "PROVENANCE_UNDOCUMENTED_COPY": 26
    },
    "copies_total": 67,
-   "documented_primary_copies": 42,
+   "documented_primary_copies": 40,
    "sources_authentication_pending_only": 1,
-   "sources_with_documented_primary_copy": 41
+   "sources_with_documented_primary_copy": 40
   },
   "baseline": {
    "crosswalk_case_rows_by_status": {
@@ -81,24 +81,23 @@
   "undocumented_copies_c5": 54
  },
  "outcomes_by_copy": {
-  "PROVENANCE_DOCUMENTED": 34,
-  "PROVENANCE_PARTIALLY_DOCUMENTED": 2
+  "PROVENANCE_DOCUMENTED": 32,
+  "PROVENANCE_PARTIALLY_DOCUMENTED": 4
  },
  "outcomes_by_source_type": {
-  "PROVENANCE_DOCUMENTED|court": 10,
-  "PROVENANCE_DOCUMENTED|publication": 24,
-  "PROVENANCE_PARTIALLY_DOCUMENTED|publication": 2
+  "PROVENANCE_DOCUMENTED|court": 9,
+  "PROVENANCE_DOCUMENTED|publication": 23,
+  "PROVENANCE_PARTIALLY_DOCUMENTED|court": 1,
+  "PROVENANCE_PARTIALLY_DOCUMENTED|publication": 3
  },
- "proposals": 34,
+ "proposals": 32,
  "proposals_by_class": {
   "NON_PRIMARY_OFFICIAL_COURT_RENDITION": 1,
-  "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY": 2,
-  "NON_PRIMARY_PARLIAMENTARY_RECORD": 1,
-  "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE": 21,
-  "PRIMARY_OFFICIAL_COURT_COPY": 9
+  "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY": 3,
+  "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE": 20,
+  "PRIMARY_OFFICIAL_COURT_COPY": 8
  },
  "proposals_by_status": {
-  "PROPOSED": 33,
-  "WITHHELD": 1
+  "PROPOSED": 32
  }
 }

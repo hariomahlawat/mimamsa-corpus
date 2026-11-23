@@ -48,24 +48,49 @@ DOCUMENTARY_FINDINGS = {
     "C5-SRC-P0-AA-AMD-ACT13-1975": ["documentary finding (WSA-PIC-29; C6-01 verification F-04; C5-CO-03): the Gazette masthead reads Hindi "
                                     "issue No.16 but English issue No.15 on the image (the English number is recorded as uncertain in WSA-PIC-29); the C5 master title gives No.16 only. Cite the issue as "
                                     "'No.16 (Hindi masthead) / No.15 (English masthead)' until resolved against another copy of the same issue; "
-                                    "Part II s.1, 29-03-1975, Act No.13 of 1975 and p.81 are confirmed"],
+                                    "Part II s.1, 29-03-1975, Act No.13 of 1975 and p.81 are confirmed; a handwritten '17'-like mark and a faint circular "
+                                    "stamp appear right of the masthead on p.1 (Fable F-18; coordinator re-read 2026-11-23), unexplained; India Code serves "
+                                    "download-specific bytes, so a re-acquisition would be a NEW copy with a new sha256 and could document these held bytes only "
+                                    "through a defined equivalence test (cf. C5 RV-13: Act 37 copies differ only in a trailer ID)"],
 }
 # Disputed facts inside a transcribed identity (not resolved here; see SOURCE-LIBRARY-C5 D7 "Disagreements").
 SO4010_DISPUTE = ("date of MHA Notification S.O. No. 4010 as transcribed from the RS page ('6th December, 1986', C5-PIC-02 4x zoom; "
                   "PILOT-01 S-REVA-021) is DISPUTED: the Cycle 5 independent reviewer read '08-12-1986' (SOURCE-LIBRARY-C5 review RV-01); "
                   "the disagreement is OPEN (SOURCE-LIBRARY-C5/reports/D7_INDEPENDENT_REVIEW_REPORT.md, Disagreements); the notification "
-                  "itself is not held and its authoritative date is NOT_VERIFIED; the Gazette of S.O. 4010/1986 is the evidence required to settle it")
+                  "itself is not held and its authoritative date is NOT_VERIFIED; the Gazette of S.O. 4010/1986 is the evidence required to settle it; date semantics are also UNVERIFIED (whether 'dated' is the "
+                  "signing date or the Gazette issue date; 6 December 1986 fell on a Saturday, the weekly Gazette day: reviewer inference, Fable F-20); "
+                  "the sitting date 03-03-1987 rests on the archive file name, not on the printed page (Fable F-02)")
 IDENTITY_ANNOTATIONS = {
+    "C5-SRC-P0-AR-AMD-AR-008": " [the held file is the 05-01-1963 r.188(e) declaration; whether the 'S.R.O. 34 dated 5-6-1963' listed in the 1988, "
+                               "1993 and 2003 Government notes is a misdate of this instrument or a different, unlocated instrument is UNVERIFIED "
+                               "(R23 S-REVD-002 'IDENTITY MISMATCH WITH TARGET'; amendment search: 'absence not proven')]",
     "C5-SRC-P2-RS-PAPERS-LAID-1987": " [S.O. 4010 date as transcribed from the RS page; DISPUTED (C5 RV-01 reads 08-12-1986; C5 D7 disagreement OPEN); "
                                      "authoritative notification date NOT_VERIFIED]",
 }
-DOCUMENTARY_FINDINGS_EXTRA = {"C5-SRC-P2-RS-PAPERS-LAID-1987": ["documentary finding: " + SO4010_DISPUTE]}
+DOCUMENTARY_FINDINGS_EXTRA = {
+    "C5-SRC-P0-AR-AMD-AR-008": ["documentary finding (Fable F-03): the notes' 'S.R.O. 34 dated 5-6-1963' is not shown to be this 05-01-1963 "
+                                "instrument; identity of the listed amending instrument UNVERIFIED; no amendment-chain inference may rest on this copy"],
+    "C5-SRC-P2-DHC-RULES-CH6": ["currency markers (Fable F-19): p.5 cites Army Act ss.125, 126 and 127, but s.127 was omitted by Act 37/1992 "
+                                "(SOURCE-LIBRARY-C5 RV-26), and the chapter reproduces the 1952 Rules (PILOT-01 T5-03); currency UNKNOWN, treat as historical text"],
+"C5-SRC-P2-RS-PAPERS-LAID-1987": ["documentary finding: " + SO4010_DISPUTE]}
 # Proposals withheld by owner instruction: kept on record (append-only) but never simulated or approvable as they stand.
 WITHHELD = {
     "C5-SRC-P2-RS-PAPERS-LAID-1987": "WITHHELD (owner instruction, PR #33 finalisation 2026-11-23): retained as a discovery/evidence candidate, "
                                      "not approved as authenticated parliamentary evidence; the retrieval record marks authenticity UNCONFIRMED and "
                                      "the URL is an archive.org item page, not a verified file URL; its procedural value as a record of laying "
                                      "is distinct from the legal authority of the notification it mentions",
+}
+# copy-level findings (keyed by copy_id, never by source: one copy's facts do not attach to its siblings)
+COPY_FINDINGS = {
+    "C5-SRC-J-SC-2015-RAJBIR~C2": ["copy finding (Fable F-01): its only locator is a parenthesis inside copy C1's retrieval record S-BLIND-013 "
+                                   "(retrieved_on/by belong to C1); it is not a duplicate of C1 (163,859 bytes / 21 pp. vs 230,938 / 20 pp.); pp.20-21 are "
+                                   "a Record of Proceedings ending '(Signed reportable judgment is placed on the file)'; describe it as 'judgment text + ROP of "
+                                   "13-02-2015'; page equivalence to the JUDIS copy NOT established (C5 copy register); its embedded signature range does not "
+                                   "cover the file (inputs/copy_structure_c6.csv); needs its own retrieval record and a page comparison"],
+}
+NEXT_STEP_OVERRIDES = {
+    "C5-SRC-J-SC-2015-RAJBIR~C2": "its own retrieval record (URL, date, sha256 of these bytes) and a page-level comparison with the JUDIS copy; until then not an anchor copy",
+    "C5-SRC-P2-RS-PAPERS-LAID-1987~C1": "an RS Debates record with affirmative authenticity and the printed sitting date; separately, the Gazette of S.O. 4010/1986 to settle the date dispute; WITHHELD meanwhile",
 }
 WATERMARKED_GAZETTE_REHOSTS = {"C5-SRC-P0-TRA-2026"}  # C6-PIC-01/02: IndiaCode watermark over an e-Gazette page
 SCOPE = ("HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED", "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED")
@@ -111,10 +136,12 @@ def collect():
             for s2 in sorted(set(HEX.findall(loc)) - {s}):  # another copy's sha256 recorded inside a retrieval record's locator
                 before = [u for u in re.finditer(r"https?://[^ ;),]+", loc) if u.end() <= loc.index(s2)]
                 if before:
-                    ev[s2].append(("L3", f"{Path(fn).parent.parent.name}/sources/{Path(fn).name}#{o.get('source_id', '')} (locator)",
+                    ev[s2].append(("L3lead", f"{Path(fn).parent.parent.name}/sources/{Path(fn).name}#{o.get('source_id', '')} (locator)",
                                    f"{before[-1].group(0)} | retrieved_on={o.get('retrieved_on')} | retrieved_by={o.get('retrieved_by')} | sha256 stated in locator"))
             if HEX.fullmatch(s) and re.search(r"https?://", loc):
-                ev[s].append(("L3", f"{Path(fn).parent.parent.name}/sources/{Path(fn).name}#{o.get('source_id', '')}",
+                # a record that itself disclaims authenticity, or reports NOT_FOUND / CONFLICTING, is a lead, not a locator (Fable F-02)
+                disclaimed = str(o.get("authenticity", "")).upper() == "UNCONFIRMED" or o.get("verification_state") in ("NOT_FOUND", "CONFLICTING")
+                ev[s].append(("L3x" if disclaimed else "L3", f"{Path(fn).parent.parent.name}/sources/{Path(fn).name}#{o.get('source_id', '')}",
                               f"{re.search(r'https?://[^ ;)]+', loc).group(0)} | retrieved_on={o.get('retrieved_on')} | retrieved_by={o.get('retrieved_by')}"))
     for r in read(AW / "PILOT-01/registers/source_discovery_2026-11-22.csv"):
         s = r["downloaded_sha256"].strip()
@@ -186,6 +213,7 @@ def build():
     master = {r["source_id"]: r for r in read(AW / "SOURCE-LIBRARY-C5/registers/source_master_register.csv")}
     copies = [c for c in read(AW / "SOURCE-LIBRARY-C5/registers/source_copy_register.csv") if master[c["source_id"]]["holding_state"] in SCOPE]
     facts = {r["sha256"]: r for r in read(PKG / "inputs/held_copy_facts.csv")}
+    struct = {r["sha256"]: r for r in read(PKG / "inputs/copy_structure_c6.csv")}
     held_index = defaultdict(list)
     for r in read(AW / "CALIBRATION-02/registers/held_sources_scratchpad.csv"):
         held_index[r["sha256"]].append(r["scratchpad_relative_path"])
@@ -201,7 +229,7 @@ def build():
     url_by_sha = defaultdict(set)
     for s, items in ev.items():
         for k, _ref, det in items:
-            if k in ("L1", "L3", "WSB", "L4") and "(locator)" not in _ref:
+            if k in ("L1", "L3", "L3x", "WSB", "L4") and "(locator)" not in _ref:
                 m = re.match(r"https?://\S+", det)
                 if m:
                     url_by_sha[s].add(m.group(0).rstrip("|").strip())
@@ -221,9 +249,10 @@ def build():
         court = m["publication_type"] == "JUDICIAL"
         keys = title_keys(m["title"])
         p1 = f["p1_text_excerpt"].lower()
-        t_ok = court and keys and all(k.lower() in p1 for k in keys[:2])
+        nums = re.findall(r"\d{3,5}", re.sub(r"\(.*?\)", " ", m["title"]))  # year or case number outside parentheses (Fable F-10)
+        t_ok = bool(court and keys and all(k.lower() in p1 for k in keys[:2]) and any(n in p1 for n in nums))
         if t_ok:
-            items.append(("T", "C6-01-PROVENANCE/inputs/held_copy_facts.csv#" + c["copy_id"], f"p.1 text contains {keys[:2]}"))
+            items.append(("T", "C6-01-PROVENANCE/inputs/held_copy_facts.csv#" + c["copy_id"], f"p.1 text contains {keys[:2]} and {[n for n in nums if n in p1]}"))
         L = sorted(k for k in {k for k, _, _ in items} if k in ("L1", "L2", "L3", "L4", "L5", "L6"))
         # locator strength: FULL = sha256 recorded with a URL locator (L1/L3/L4-with-URL) or archive size+md5+sha1 (L2);
         # MD5_SIZE = archive md5 and size only; IDENTIFIER_SHA = sha256 with a repository identifier but no URL (L4);
@@ -236,7 +265,7 @@ def build():
                     else "IDENTIFIER_SHA" if any(k == "L4" for k, _, _ in items) else "MD5" if L else "NONE")
         I = "I" in kinds
         X = contradictions(s, url_by_sha)
-        lead = bool(re.search(r"in\.gazette\.[a-z.]+\d", c["held_paths"])) or "I?" in kinds
+        lead = bool(re.search(r"in\.gazette\.[a-z.]+\d", c["held_paths"])) or bool({"I?", "L3lead", "L3x"} & kinds)
         outcome = classify(strength, bool(I or t_ok), bool(X), bool(L), lead)
         urls = sorted(url_by_sha.get(s, set())) or sorted({re.search(r"https?://[^ |]+", d).group(0) for k, _, d in items
                                                            if k in ("L2", "L3", "L5", "L6") and re.search(r"https?://[^ |]+", d)})
@@ -258,9 +287,11 @@ def build():
                 gaps.append("identity not verified on a page image" + ("" if court else " (scanned/official publication: text layer not accepted)"))
         if not dates:
             gaps.append("no retrieval date in a retrieval record" + (" (only a register date)" if regdates else ""))
-        gaps += DOCUMENTARY_FINDINGS.get(c["source_id"], []) + DOCUMENTARY_FINDINGS_EXTRA.get(c["source_id"], [])
+        gaps += DOCUMENTARY_FINDINGS.get(c["source_id"], []) + DOCUMENTARY_FINDINGS_EXTRA.get(c["source_id"], []) + COPY_FINDINGS.get(c["copy_id"], [])
+        if c["source_id"] in WITHHELD:
+            gaps.append(WITHHELD[c["source_id"]])
         siblings = [x["copy_id"] for x in read(AW / "SOURCE-LIBRARY-C5/registers/source_copy_register.csv") if x["source_id"] == c["source_id"] and x["copy_id"] != c["copy_id"]]
-        cls = proposed_class(m, outcome, c)
+        cls = proposed_class(m, outcome, c, struct.get(s), items)
         row = {
             "copy_id": c["copy_id"], "source_id": c["source_id"], "sha256": s, "held_paths": c["held_paths"],
             "source_identity": m["title"] + IDENTITY_ANNOTATIONS.get(c["source_id"], ""), "issuing_authority": m["authority"], "carrier": c["copy_carrier_provenance"],
@@ -282,20 +313,20 @@ def build():
             props.append({
                 "sha256": s, "document_identity": m["title"] + IDENTITY_ANNOTATIONS.get(c["source_id"], ""), "issuer_or_authority": m["authority"],
                 "proposal_status": WITHHELD.get(c["source_id"], "PROPOSED (pending review and owner approval)"),
-                "held_paths": "; ".join(sorted(held_index[s])), "carrier": c["copy_carrier_provenance"].split(" (as reported")[0],
-                "official_locator_recorded": urls[0] if urls else "; ".join(d.split(" | ")[0] for k, _, d in items if k == "L4"), "provenance_references": "; ".join(ref for k, ref, _ in sorted(items) if k in ("L1", "L2", "L3", "L4", "L5", "L6", "I", "T", "WSB")),
+                "held_paths": "; ".join(sorted(held_index[s])), "carrier": c["copy_carrier_provenance"] if not any(k == "L3" for k, _, _ in items) else c["copy_carrier_provenance"].split(" (as reported")[0],
+                "official_locator_recorded": file_url(urls, items) if urls else "; ".join(d.split(" | ")[0] for k, _, d in items if k == "L4"), "provenance_references": "; ".join(ref for k, ref, _ in sorted(items) if k in ("L1", "L2", "L3", "L4", "L5", "L6", "I", "T", "WSB")),
                 "provenance_evidence": "; ".join(sorted({{"L1": "official URL with recorded sha256 equal to held bytes",
                                                           "L2": ("size, MD5 and SHA-1 equal to archive.org metadata" if any(k == "L2" and ("size/md5/sha1 OK" in d or ("sha1" in d and "no sha1" not in d)) for k, _, d in items) else "MD5 and size equal to archive.org metadata"),
                                                           "L3": "retrieval record with URL and sha256", "L4": "discovery download record with URL and sha256",
                                                           "L5": "archive identifier with md5 match", "L6": "archive identifier with md5 equal to archived md5 (WS-A)"}[k] for k in L})) + ("; identity image-checked" if I else "; identity read from p.1 text (court PDF)"),
                 "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": cls,
-                "limitations": "; ".join(x for x in ["C6-01 PROPOSAL - not incorporated; no signature verified"] + gaps + extra_limits(items, cls, c) if x),
+                "limitations": "; ".join(x for x in ["C6-01 PROPOSAL - not incorporated; no signature verified"] + gaps + extra_limits(items, cls, c, struct.get(s)) if x),
                 "rationale": "Meets the same evidence criteria as the Cycle 4 register rows of its class; requires independent verification (D3) and owner approval before incorporation",
             })
         else:
             unresolved.append({"copy_id": c["copy_id"], "source_id": c["source_id"], "sha256": s, "proposed_outcome": outcome,
                                "what_is_missing": row["remaining_gaps"], "evidence_found": row["evidence_items"] or "none",
-                               "next_step": next_step(outcome, m, gaps)})
+                               "next_step": NEXT_STEP_OVERRIDES.get(c["copy_id"], next_step(outcome, m, gaps))})
     return rec, props, unresolved, copies
 
 
@@ -313,19 +344,29 @@ def classify(strength, identity_ok, contradicted, has_locator, lead):
     return "NO_RECOVERABLE_PROVENANCE"
 
 
-def extra_limits(items, cls, c):
+def extra_limits(items, cls, c, st=None):
     out = []
     kinds = {k for k, _, _ in items}
     if "L1" in kinds and not ({"L3", "L4"} & kinds):
         out.append("provenance rests on a register corroboration record (official URL + sha256) without a separate retrieval record; accepted because uncontradicted (Cycle 4 PPS Bedi precedent)")
-    if any(k == "L3" and "(locator)" in ref for k, ref, _ in items) and not any(k == "L3" and "(locator)" not in ref for k, ref, _ in items):
-        out.append("URL and sha256 are stated inside another copy's retrieval record only")
-    if any(k == "L2" and "derivative" in d for k, _, d in items):
+    if any(k == "L2" and "derivative" in d for k, _, d in items) and cls.startswith("PRIMARY"):
         out.append("the matched archive.org file is a derivative, not the uploaded original")
+    urls = " ".join(d for k, _, d in items if k in ("L1", "L3", "WSB"))
+    if "/jonew/judis/" in urls or "/judgment/judis/" in urls:
+        out.append("JUDIS rendition: re-typed text with CITATION/CITATOR INFO/HEADNOTE material that is not part of the judgment; pinpoints must exclude it (Fable F-16)")
+    if "/judgment/judis/" in urls:
+        out.append("locator path /judgment/judis/ differs from the /jonew/judis/ form of the other JUDIS rows; locator consistency NOT_CHECKED in V7-S10 (Fable F-17)")
+    if "corrected" in c.get("copy_id", "").lower() or "MULLIKOTE" in c["source_id"]:
+        out.append("the copy is a CORRECTED judgment at a URL that can be re-served; evidence is a corroboration record with no retrieval date, so the version-to-date link is not evidenced (Fable F-15)")
     if cls == "NON_PRIMARY_PARLIAMENTARY_RECORD":
         out.append("non-primary: records the laying of a notification, not the instrument; the retrieval record states the RS Debates archive copy's "
                    "authenticity as UNCONFIRMED and its URL is an archive.org item page, not the file (owner decision, final review R-08)")
-    if cls == "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY":
+    if cls == "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY" and fidelity_issue(st, items):
+        out.append("non-primary (uniform copy-fidelity rule, Fable F-04): " + fidelity_issue(st, items)
+                   + ". Document authority (Gazette of India), carrier and copy fidelity are reported separately: identity and provenance are documented, "
+                   "fidelity to the issued publication is not. Copies of the same series whose signature range covers the whole file stay primary. "
+                   "Class decision reserved for the owner; see reports/TRA2026_CLASS_COMPARISON.md")
+    elif cls == "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY":
         if c["source_id"] in WATERMARKED_GAZETTE_REHOSTS:
             out.append("non-primary (conservative): born-digital e-Gazette text re-hosted by India Code with an IndiaCode watermark; the embedded "
                        "signature's byte range ends before the end of the held file, so it cannot cover these bytes (structural observation, "
@@ -338,9 +379,32 @@ def extra_limits(items, cls, c):
     return out
 
 
-def proposed_class(m, outcome, copy=None):
+def file_url(urls, items):
+    """Prefer a direct file URL (archive.org /download/ or a .pdf) over an item page (Fable F-13)."""
+    cands = list(urls) + [re.search(r"https?://[^ |]+", d).group(0) for k, _, d in sorted(items)
+                          if k in ("L2", "L3", "L5", "L6") and re.search(r"https?://[^ |]+", d)]
+    direct = [u for u in cands if "/download/" in u or u.lower().endswith(".pdf") or "/bitstreams/" in u]
+    return (direct or cands)[0]
+
+
+def fidelity_issue(st, items):
+    """Copy-fidelity rule for born-digital copies (Fable F-04/F-12), applied uniformly: a copy whose embedded signature's byte
+    range does not cover the held file, or an archive.org derivative (re-rendered by the archive, not the uploaded file),
+    is not shown to be the publication as issued. Structural observation only (inputs/copy_structure_c6.csv)."""
+    if st and st["signed_range_covers_file"] == "NO":
+        return ("embedded signature byte range " + st["signature_byte_ranges"] + " does not cover the " + st["bytes"] + "-byte held file ("
+                + st["eof_markers"] + " %%EOF marker(s); " + ("not an incremental update, so no signed revision can be extracted" if st["eof_markers"] == "1"
+                                                            else "the signed revision may be extractable offline") + ")")
+    if any(k == "L2" and "derivative" in d for k, _, d in items):
+        return "the matched archive.org file is a derivative re-rendered by the archive (producer " + (st or {}).get("producer", "?") + "), not the uploaded original"
+    return ""
+
+
+def proposed_class(m, outcome, copy=None, st=None, items=()):
     if outcome != "PROVENANCE_DOCUMENTED":
         return ""
+    if m["publication_type"] != "JUDICIAL" and fidelity_issue(st, items):
+        return "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY"  # copy fidelity not established (uniform born-digital rule)
     if m["publication_type"] == "JUDICIAL":
         if copy and copy["copy_carrier_provenance"].startswith("UNKNOWN"):
             return "NON_PRIMARY_OFFICIAL_COURT_RENDITION"  # e.g. a court-system text rendition (verification P3)
@@ -361,7 +425,8 @@ def next_step(outcome, m, gaps=()):
             steps.append("identity elements absent from the held copy (issuing authority, volume, edition/date) must come from another record: the "
                          "printed rules volume, or a court-registry confirmation of the file; the image check cannot supply them")
         if any(("identifier" in g) or ("md5" in g) or ("no locator" in g) for g in gaps):
-            steps.append("a retrieval record with URL and sha256, i.e. an approved re-acquisition from the official host")
+            steps.append("a retrieval record with URL and sha256 for THESE bytes; an approved re-acquisition creates a new copy (new sha256) and "
+                         "documents the held bytes only through a defined equivalence test")
         return "; ".join(steps) or "see remaining gaps"
     if outcome == "IDENTITY_VERIFIED_PROVENANCE_UNDOCUMENTED":
         return "locate a retrieval or corroboration record; otherwise an approved re-acquisition from the official host with sha256 recorded"
@@ -376,6 +441,7 @@ def coverage_impact(props):
     import build_registers as B
     EC = B.EC
     orig_from_dir, orig_check = EC.Evidence.from_dir, B.check_holding_vs_copies
+    orig_descriptor = EC.Evidence.__dict__["from_dir"]  # restore the original classmethod descriptor (Fable F-25)
     base = json.loads(B.build()["coverage_summary.json"])
 
     def from_dir(c2, root=None):
@@ -388,7 +454,8 @@ def coverage_impact(props):
     try:
         sim = json.loads(B.build()["coverage_summary.json"])
     finally:
-        EC.Evidence.from_dir, B.check_holding_vs_copies = orig_from_dir, orig_check
+        EC.Evidence.from_dir = orig_descriptor
+        B.check_holding_vs_copies = orig_check
     keys = ("crosswalk_kb_items_by_status", "crosswalk_case_rows_by_status", "kb_records_by_anchor_class")
     return {"rule": "Cycle 5 crosswalk rules unchanged; proposals simulated as register rows", "baseline": {k: base[k] for k in keys},
             "proposed": {k: sim[k] for k in keys}, "authentication_baseline": base["authentication"], "authentication_proposed": sim["authentication"]}
@@ -406,15 +473,18 @@ def outputs():
     rec_cols = list(rec[0])
     ids = [proposal_id(p["sha256"]) for p in props]
     if len(set(ids)) != len(ids) or len({p["sha256"] for p in props}) != len(props):
-        raise SystemExit("duplicate proposal_id or sha256 in proposals: lengthen the display prefix")
+        raise SystemExit("duplicate proposal_id or sha256 in proposals: give ONLY the colliding proposals a longer prefix (other IDs must not change)")
     texts = {
         "provenance_recovery_register.csv": csv_text(rec_cols, rec),
         "source_authentication_proposals.csv": csv_text(["proposal_id", "proposal_status"] + AUTH_COLS, [dict(p, proposal_id=proposal_id(p["sha256"])) for p in props]),
         "unresolved_provenance_register.csv": csv_text(["copy_id", "source_id", "sha256", "proposed_outcome", "what_is_missing", "evidence_found", "next_step"], unresolved),
     }
+    with open(AW / "SOURCE-LIBRARY-C5/registers/coverage_summary.json", encoding="utf-8") as fh:
+        c5auth = json.load(fh)["authentication"]  # denominators derived, not hard-coded (Fable F-23)
     impact = coverage_impact([p for p in props if p["proposal_status"].startswith("PROPOSED")])  # withheld entries are never simulated
     summary = {
-        "denominators": {"held_unique_binaries_c5": 67, "held_binary_paths_c5": 93, "undocumented_copies_c5": 54,
+        "denominators": {"held_unique_binaries_c5": c5auth["copies_total"], "held_binary_paths_c5": len(read(AW / "SOURCE-LIBRARY-C5/baseline/held_binaries_manifest.csv")),
+                         "undocumented_copies_c5": c5auth["copies_by_evidence_class"]["PROVENANCE_UNDOCUMENTED_COPY"],
                          "scope_sources": len({c["source_id"] for c in copies}), "scope_copies": len(copies)},
         "outcomes_by_copy": dict(sorted(Counter(r["proposed_outcome"] for r in rec).items())),
         "outcomes_by_source_type": dict(sorted(Counter(f'{r["proposed_outcome"]}|{"court" if "-J-" in r["source_id"] else "publication"}' for r in rec).items())),

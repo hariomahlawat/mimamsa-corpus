@@ -114,9 +114,22 @@ class C6Provenance(unittest.TestCase):
         for r in legacy:
             self.assertEqual(r["current_proposal_id"], cur.get(r["sha256"], ""), r["sha256"])
         first = [r["id_in_first_verification_9b4ad44d"] for r in legacy if r["id_in_first_verification_9b4ad44d"]]
-        self.assertEqual(len(first), 34)
+        self.assertEqual(len(first), 34)  # all 34 sequential IDs of the first verification remain traceable
         self.assertEqual(len(set(first)), 34)
         self.assertEqual({r["sha256"] for r in legacy} >= set(cur), True)
+        # synthetic prefix collision: two different sha256 with the same 8-hex prefix must stop the build
+        orig = P.build
+        def collide():
+            rec, pr, un, co = orig()
+            twin = dict(pr[0], sha256=pr[0]["sha256"][:8] + "f" * 56)
+            return rec, pr + [twin], un, co
+        P.build = collide
+        try:
+            with self.assertRaises(SystemExit) as cm:
+                P.outputs()
+            self.assertIn("ONLY the colliding", str(cm.exception))
+        finally:
+            P.build = orig
         ap22 = [r for r in legacy if r["id_in_first_verification_9b4ad44d"] == "C6-01-AP-22"][0]
         self.assertTrue(ap22["sha256"].startswith("8358d2b3") and ap22["current_proposal_id"] == "")
 
@@ -124,7 +137,7 @@ class C6Provenance(unittest.TestCase):
         s = json.loads((PKG / "registers/c6_01_summary.json").read_text())
         d, pt, n = s["outcomes_by_copy"]["PROVENANCE_DOCUMENTED"], s["outcomes_by_copy"]["PROVENANCE_PARTIALLY_DOCUMENTED"], s["proposals"]
         nonp = sum(v for k, v in s["proposals_by_class"].items() if k.startswith("NON_PRIMARY"))
-        self.assertEqual((d, pt, n, nonp), (34, 2, 34, 4))
+        self.assertEqual((d, pt, n, nonp), (32, 4, 32, 4))
         d6 = (PKG / "reports/D6_CYCLE6_READINESS.md").read_text(encoding="utf-8")
         status = d6[d6.index("## C6-01 status"):d6.index("## What C6-01 cannot fix")]
         self.assertIn(f"{d} copies are proposed PROVENANCE_DOCUMENTED", status)
@@ -136,7 +149,11 @@ class C6Provenance(unittest.TestCase):
         d2 = (PKG / "reports/D2_SOURCE_AUTHENTICATION_PROPOSALS.md").read_text(encoding="utf-8")
         self.assertIn(f"{n} proposed **additions**", d2)
         self.assertIn("TRA 2026", d2)
-        self.assertIn("holding-state", (PKG / "reports/D4_COVERAGE_IMPACT.md").read_text(encoding="utf-8"))
+        d4 = (PKG / "reports/D4_COVERAGE_IMPACT.md").read_text(encoding="utf-8")
+        self.assertIn("overlay design", d4)
+        self.assertNotIn("relabel", d6)
+        self.assertIn("WITHHELD", d6)
+        self.assertEqual(subprocess.run([sys.executable, str(PKG / "tools/build_reports.py"), "--check"], capture_output=True).returncode, 0)
 
     def test_c6_page_image_checks(self):
         with open(PKG / "inputs/page_image_checks_c6.csv", newline="", encoding="utf-8") as f:
@@ -157,13 +174,14 @@ class C6Provenance(unittest.TestCase):
         self.assertEqual(act13["retrieval_date"], "register dated 2026-11-22")  # no invented retrieval date
 
     def test_so4010_date_dispute_and_rs_withheld(self):
-        props = {p["sha256"][:8]: p for p in read("source_authentication_proposals.csv")}
-        rs = props["fa51a4b1"]
-        self.assertTrue(rs["proposal_status"].startswith("WITHHELD"))
-        self.assertIn("DISPUTED", rs["document_identity"])
-        self.assertIn("NOT_VERIFIED", rs["document_identity"])
-        self.assertEqual(sum(p["proposal_status"].startswith("PROPOSED") for p in props.values()), 33)
+        props = {p["sha256"]: p for p in read("source_authentication_proposals.csv")}
+        self.assertFalse([s for s in props if s.startswith("fa51a4b1")])
         rec = {r["source_id"]: r for r in read("provenance_recovery_register.csv")}["C5-SRC-P2-RS-PAPERS-LAID-1987"]
+        self.assertEqual(rec["proposed_outcome"], "PROVENANCE_PARTIALLY_DOCUMENTED")
+        self.assertIn("DISPUTED", rec["source_identity"])
+        self.assertIn("NOT_VERIFIED", rec["source_identity"])
+        self.assertIn("WITHHELD", rec["remaining_gaps"])
+        self.assertIn("L3x:", rec["evidence_items"])
         for k in ("08-12-1986", "RV-01", "D7_INDEPENDENT_REVIEW_REPORT", "Gazette of S.O. 4010/1986"):
             self.assertIn(k, rec["remaining_gaps"])
         self.assertIn("6th December", rec["remaining_gaps"])  # the transcription is preserved, attributed
@@ -171,7 +189,42 @@ class C6Provenance(unittest.TestCase):
         c5 = (REPO / "legal_knowledge/audit_work/SOURCE-LIBRARY-C5/reports/D7_INDEPENDENT_REVIEW_REPORT.md").read_text(encoding="utf-8")
         self.assertIn("OPEN, documentary", c5)
         s = json.loads((PKG / "registers/c6_01_summary.json").read_text())
-        self.assertEqual(s["proposals_by_status"], {"PROPOSED": 33, "WITHHELD": 1})
+        self.assertEqual(s["proposals_by_status"], {"PROPOSED": 32})
+
+    def test_locator_rules_after_fable_review(self):
+        rec = {r["copy_id"]: r for r in read("provenance_recovery_register.csv")}
+        c2 = rec["C5-SRC-J-SC-2015-RAJBIR~C2"]
+        self.assertEqual(c2["proposed_outcome"], "PROVENANCE_PARTIALLY_DOCUMENTED")
+        self.assertIn("L3lead:", c2["evidence_items"])
+        self.assertNotIn("L3:", c2["evidence_items"].replace("L3lead:", ""))
+        self.assertIn("Record of Proceedings", c2["remaining_gaps"])
+        # every documented row rests on a locator that is not a mention inside another copy's record and not disclaimed
+        for r in rec.values():
+            if r["proposed_outcome"] == "PROVENANCE_DOCUMENTED":
+                kinds = {x.split(":")[0] for x in r["evidence_items"].split(" | ")}
+                self.assertTrue(kinds & {"L1", "L2", "L3", "L4"}, r["copy_id"])
+        # S.R.O. 34 identity is not written as fact
+        sro34 = [p for p in read("source_authentication_proposals.csv") if p["sha256"].startswith("4acdb1a8")][0]
+        self.assertIn("UNVERIFIED", sro34["document_identity"])
+        self.assertIn("UNVERIFIED", sro34["limitations"])
+        # T rule needs the year or case number too
+        for r in rec.values():
+            for x in r["identity_verification"].split("; "):
+                if x.startswith("T:"):
+                    self.assertTrue(r["source_id"].split("-")[4].isdigit())
+        # direct file URL preferred over an archive.org item page
+        for p in read("source_authentication_proposals.csv"):
+            self.assertNotIn("archive.org/details/", p["official_locator_recorded"], p["proposal_id"])
+
+    def test_copy_structure_and_fidelity_rule(self):
+        with open(PKG / "inputs/copy_structure_c6.csv", newline="", encoding="utf-8") as f:
+            st = {r["sha256"]: r for r in csv.DictReader(f)}
+        self.assertEqual(len(st), 36)
+        for p in read("source_authentication_proposals.csv"):
+            s = st[p["sha256"]]
+            if p["effective_source_class"].startswith("PRIMARY_GAZETTE"):
+                self.assertNotEqual(s["signed_range_covers_file"], "NO", p["proposal_id"])
+        self.assertEqual(st[[k for k in st if k.startswith("be619533")][0]]["eof_markers"], "1")  # rewrite, not incremental (F-12)
 
     def test_isaac_untouched(self):
         isaac = "3f49a31464fec174cdbff5d9e194fa888ca00529b6246eacdc8ac2368eab4653"
@@ -180,7 +233,12 @@ class C6Provenance(unittest.TestCase):
 
     def test_non_primary_classes_for_records_and_incomplete_copies(self):
         cls = {p["sha256"][:8]: p["effective_source_class"] for p in read("source_authentication_proposals.csv")}
-        self.assertEqual(cls.get("fa51a4b1"), "NON_PRIMARY_PARLIAMENTARY_RECORD")   # RS papers-laid page
+        self.assertNotIn("fa51a4b1", cls)  # RS papers-laid: PARTIALLY_DOCUMENTED by rule (Fable F-02) and WITHHELD
+        self.assertNotIn("c6ec489d", cls)  # Rajbir C2: locator only inside C1's record (Fable F-01)
+        self.assertEqual(cls.get("2bdab5b7"), "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY")  # archive.org derivative (Fable F-04)
+        self.assertEqual(cls.get("7c12a7ec"), "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE")  # signature range covers the file
+        self.assertEqual(cls.get("138c1da0"), "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE")
+        self.assertEqual(cls.get("be619533"), "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY")
         self.assertEqual(cls.get("29f6fa2c"), "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY")  # incomplete ER 2023 copy
         self.assertEqual(cls.get("6b495f14"), "NON_PRIMARY_OFFICIAL_COURT_RENDITION")  # Rajbir bosir rendition
         self.assertNotIn("8358d2b3", cls)  # Act 13/1975 downgraded (identifier-only download record)
@@ -209,14 +267,18 @@ class C6Addendum(unittest.TestCase):
         for r in rows:
             self.assertEqual(r["locator_strength"], "FULL")
             self.assertTrue(r["reviewer_decision"].startswith("PENDING"))
-            if r["entry_status"] == "WITHHELD":
-                self.assertTrue(r["owner_decision"].startswith("WITHHELD") and r["decision_record_ref"])
-                self.assertIn("WITHHELD: not applied", r["crosswalk_effect_this_entry_alone"])
-            else:
-                self.assertEqual((r["entry_status"], r["owner_decision"]), ("DRAFT_PENDING", "PENDING (not approved)"))
+            self.assertEqual((r["entry_type"], r["entry_status"], r["owner_decision"]), ("ADD", "DRAFT", "PENDING"))
+            self.assertTrue(r["first_class_record_ref"] and "(locator)" not in r["first_class_record_ref"])
+            self.assertTrue(A.resolves(r["first_class_record_ref"]))
+            if True:
                 if r["primary_or_non_primary"] == "NON_PRIMARY":  # non-primary never yields an exact anchor
                     self.assertTrue(r["crosswalk_effect_this_entry_alone"].startswith("none"), r["proposal_id"])
-            self.assertEqual(r["original_c4_register_state"], "NO_ROW (copy absent from the Cycle 4 register)")
+            self.assertTrue(r["prior_effective_state"].startswith("C4: NO_ROW"))
+        self.assertEqual(A.validate(rows), [])
+        bad = dict(rows[0], first_class_record_ref="PILOT-01/sources/nonexistent.json#X")
+        self.assertTrue(A.validate([bad]))  # an unresolvable reference is rejected
+        bad = dict(rows[0], owner_decision="APPROVED")
+        self.assertTrue(A.validate([bad]))  # APPROVED without decision record and reviewer is rejected
         changed = {r["crosswalk_effect_this_entry_alone"].split(":")[0] for r in rows if not r["crosswalk_effect_this_entry_alone"].startswith("none")}
         self.assertEqual(len(changed), 7)  # the seven SC case records, matching D4
 

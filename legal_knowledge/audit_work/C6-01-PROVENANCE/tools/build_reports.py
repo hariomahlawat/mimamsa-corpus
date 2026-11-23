@@ -11,6 +11,9 @@ def read(n):
         return list(csv.DictReader(f))
 
 
+OUT = {}
+
+
 def main():
     s = json.loads((PKG / "registers/c6_01_summary.json").read_text())
     rec, props, unres = read("provenance_recovery_register.csv"), read("source_authentication_proposals.csv"), read("unresolved_provenance_register.csv")
@@ -18,7 +21,7 @@ def main():
     o = s["outcomes_by_source_type"]
     doc = [r for r in rec if r["proposed_outcome"] == "PROVENANCE_DOCUMENTED"]
     L = ["# D1. Provenance recovery register (summary)", "",
-         "**Register:** `registers/provenance_recovery_register.csv`, 36 copies in 34 sources.",
+         f"**Register:** `registers/provenance_recovery_register.csv`, {s['denominators']['scope_copies']} copies in {s['denominators']['scope_sources']} sources.",
          "",
          "Each row carries:",
          "- source identity, issuing authority and carrier;",
@@ -35,26 +38,25 @@ def main():
           "Only FULL can reach DOCUMENTED: a sha256 recorded with a URL, or archive size, md5 and sha1. This is the Cycle 4 bar.", "",
           f"**Retrieval dates:** {sum(1 for r in rec if r['retrieval_date'][:4].isdigit())} rows carry a date from a retrieval record. The rest have only a register date, or none (`NOT_EVIDENCED`).", "",
           "**The seven Supreme Court case records that were partial in Cycle 5:**",
-          "- Dharamvir Singh, Rajbir Singh, Girish Kumar (Feb 2026), Mullikote, Ranjit Thakur, S N Mukherjee and Navjot Sandhu.",
-          "- Each has a FULL locator (an official URL with a sha256 equal to the held bytes) and a page-1 text identity match. No contradiction was found.",
-          "- Where the evidence is a register corroboration only, the row carries the Cycle 4 caveat \"accepted because uncontradicted\".",
-          "- Rajbir's third copy (a court-system text rendition with unknown carrier) is proposed as non-primary.",
+          "- Dharamvir Singh, Rajbir Singh (copy C1 only), Girish Kumar (Feb 2026), Mullikote, Ranjit Thakur, S N Mukherjee and Navjot Sandhu.",
+          "- Each anchor copy has a FULL locator (an official URL with a sha256 equal to the held bytes) and a page-1 text identity match on two title words plus the year or case number. No contradiction was found.",
+          "- Where the evidence is a register corroboration only, the row carries the Cycle 4 caveat \"accepted because uncontradicted\" and keeps its \"as reported\" carrier qualifier.",
+          "- Rajbir copy C2 is PARTIALLY_DOCUMENTED: its only locator is a mention inside C1's record (Fable F-01). Rajbir's third copy (a court-system rendition with unknown carrier) is non-primary.",
           "- N S Yadav, which is not one of the 53 cases, meets the same criteria.",
           "", "**Isaac is out of scope and unchanged (AUTHENTICATION_PENDING).**"]
-    (PKG / "reports/D1_PROVENANCE_RECOVERY_REGISTER.md").write_text("\n".join(L) + "\n")
+    OUT["D1_PROVENANCE_RECOVERY_REGISTER.md"] = "\n".join(L) + "\n"
     L = ["# D2. Source authentication proposals", "",
          f"**Register:** `registers/source_authentication_proposals.csv`, {len(props)} proposed **additions** in the CALIBRATION-02 register columns.",
          "- **The original register is not edited.**",
          "- Each row reads `C6-01 PROPOSAL - not incorporated`.",
          "- Before any addendum, each needs independent verification (D3) and owner approval.",
-         "- **Status:** " + ", ".join(f"{v} {k}" for k, v in s["proposals_by_status"].items()) + ". The withheld entry (the Rajya Sabha papers-laid record) stays on record as a discovery/evidence candidate by owner instruction; it is never simulated or approvable as it stands.", "",
+         "- **Status:** " + ", ".join(f"{v} {k}" for k, v in s["proposals_by_status"].items()) + ".",
+         "- **Not proposals:** the Rajya Sabha papers-laid record and Rajbir copy C2 fall to PROVENANCE_PARTIALLY_DOCUMENTED by rule (Fable F-01, F-02). The RS record is also WITHHELD by owner instruction and stays a discovery/evidence candidate; the S.O. 4010 date it transcribes ('6th December, 1986') is DISPUTED (C5 RV-01 reads 08-12-1986; C5 D7 disagreement OPEN); the notification's authoritative date and its date semantics are NOT_VERIFIED, and only the Gazette of S.O. 4010/1986 can settle the date.", "",
          "| Proposed class | Rows |", "| --- | --- |"] + [f"| {k} | {v} |" for k, v in s["proposals_by_class"].items()] + ["",
-         "**Non-primary on purpose:**",
-         "- the Rajya Sabha papers-laid page, which records the laying of a notification and is not the instrument. **WITHHELD.** The S.O. 4010 date it transcribes ('6th December, 1986') is DISPUTED: the Cycle 5 reviewer read 08-12-1986 (RV-01; C5 D7 disagreement OPEN). The notification's authoritative date is NOT_VERIFIED, and only the Gazette of S.O. 4010/1986 can settle it;",
-         "- the 13 MB ER 2023 copy, which is incomplete because GMO-2023 is absent;",
-         "- Rajbir's court-system text rendition;",
-         "- the TRA 2026 copy, conservatively: born-digital e-Gazette text re-hosted by India Code (IndiaCode watermark), whose embedded signature's byte range no longer covers the held file. Cycle 4 gave PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN to the India Code copy of Act 37/1992 despite its watermark, so the class is reserved for the owner (final review R-04).", "",
-         "**Note on the Cycle 4 rule:** the shared Cycle 4 evidence rule does not recognise NON_PRIMARY_* classes, so in the D4 simulation these 4 copies count as PROVENANCE_UNDOCUMENTED_COPY (final review R-03). They have no coverage effect.", "",
+         "**Non-primary on purpose** (" + str(sum(1 for p in props if p["effective_source_class"].startswith("NON_PRIMARY"))) + "):"] + [
+         f"- {p['document_identity'][:110]}: `{p['effective_source_class']}`" for p in props if p["effective_source_class"].startswith("NON_PRIMARY")] + ["",
+         "The two Gazette-copy entries above (TRA 2026 and the 2022 archive.org derivative) follow one copy-fidelity rule for born-digital copies (Fable F-04); see `reports/TRA2026_CLASS_COMPARISON.md`. Class decisions are reserved for the owner.", "",
+         "**Note on the Cycle 4 rule:** the shared Cycle 4 evidence rule does not recognise NON_PRIMARY_* classes, so non-primary entries have no coverage effect in the D4 simulation (final review R-03).", "",
          "**Exclusions:** no proposal for Isaac, and no promotion of anything AUTHENTICATION_PENDING.",
          "",
          "**Downgraded after independent verification:** Act 13/1975. Its download record gives an India Code identifier, not a retrieval URL, and has no date.",
@@ -63,15 +65,15 @@ def main():
          "- no signature verified;",
          "- the gaps from D1;",
          "- the Cycle 4 caveat \"accepted because uncontradicted\", where the evidence is a corroboration record only."]
-    (PKG / "reports/D2_SOURCE_AUTHENTICATION_PROPOSALS.md").write_text("\n".join(L) + "\n")
+    OUT["D2_SOURCE_AUTHENTICATION_PROPOSALS.md"] = "\n".join(L) + "\n"
     b, p, ab, ap = ci["baseline"], ci["proposed"], ci["authentication_baseline"], ci["authentication_proposed"]
     f = lambda d, k: " / ".join(str(d[k].get(x, 0)) for x in ("EXACT_ANCHOR", "PARTIAL_MATCH", "MISSING_EVIDENCE"))
     g = lambda d: " / ".join(str(d["kb_records_by_anchor_class"].get(x, 0)) for x in ("ALL_EXACT", "SOME_EXACT", "NO_EXACT_ANCHOR"))
     L = ["# D4. Coverage impact assessment", "",
          "**Method:**",
          "- The Cycle 5 builder is re-run with the D2 proposals added to the Cycle 4 register **in memory only**.",
-         "- The simulation switches off the Cycle 5 holding-state consistency check (`check_holding_vs_copies`). With it on, the builder stops at the first proposal, because the Cycle 5 master still labels those sources `*_PROVENANCE_UNDOCUMENTED`. **Real incorporation therefore needs two reviewed changes:** the authentication addendum (CALIBRATION-02) and a matching relabel of the Cycle 5 holding states (final review R-02). See `addendum/AUTHENTICATION_ADDENDUM_PLAN.md`.",
-         "- The 4 non-primary proposals count as PROVENANCE_UNDOCUMENTED_COPY under the Cycle 4 rule, which has no NON_PRIMARY_* class (R-03); they change no figure.",
+         "- The simulation switches off the Cycle 5 holding-state consistency check (`check_holding_vs_copies`), because the frozen Cycle 5 master still labels those sources `*_PROVENANCE_UNDOCUMENTED`. Real incorporation would **not** relabel or edit Cycle 5: it would use the overlay design (`addendum/INTEGRATION_ARCHITECTURE.md`, revision 2), where source states are derived in a separate package with the consistency rule on (final review R-02; Fable F-05/F-06).",
+         f"- {sum(1 for p in props if p['effective_source_class'].startswith('NON_PRIMARY'))} non-primary proposals are included in the simulation but have no effect: the Cycle 4 rule has no NON_PRIMARY_* class (R-03).",
          "- The classification rules are unchanged.",
          "- A test proves the committed Cycle 5 registers are unaffected.", "",
          "| Measure | Previous (Cycle 5, as merged) | Proposed (if D2 were incorporated) |", "| --- | --- | --- |",
@@ -88,12 +90,27 @@ def main():
          "**The case gain** comes entirely from the seven SC case records in D1.",
          "",
          "Nothing is incorporated, and nothing changes legal status."]
-    (PKG / "reports/D4_COVERAGE_IMPACT.md").write_text("\n".join(L) + "\n")
+    OUT["D4_COVERAGE_IMPACT.md"] = "\n".join(L) + "\n"
     L = ["# D5. Unresolved provenance register", "", f"**Register:** `registers/unresolved_provenance_register.csv`, {len(unres)} copies.", ""] + [
         f"- **{r['copy_id']}**: {r['proposed_outcome']}.\n  - Missing: {r['what_is_missing']}.\n  - Next step: {r['next_step']}." for r in unres] + ["",
-        "The other 18 Cycle 5 undocumented copies (compilations and MML manuals: 54 − 36) are outside this scope. They are not investigated here and their status is unchanged."]
-    (PKG / "reports/D5_UNRESOLVED_PROVENANCE.md").write_text("\n".join(L) + "\n")
+        f"The other {s['denominators']['undocumented_copies_c5'] - s['denominators']['scope_copies']} Cycle 5 undocumented copies (compilations and MML manuals: {s['denominators']['undocumented_copies_c5']} − {s['denominators']['scope_copies']}) are outside this scope. They are not investigated here and their status is unchanged."]
+    OUT["D5_UNRESOLVED_PROVENANCE.md"] = "\n".join(L) + "\n"
+
+
+def run(argv=None):
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--check", action="store_true")
+    a = ap.parse_args(argv)
+    OUT.clear()
+    main()
+    stale = [k for k, v in OUT.items() if (PKG / "reports" / k).read_text(encoding="utf-8") != v] if a.check else []
+    if not a.check:
+        for k, v in OUT.items():
+            (PKG / "reports" / k).write_text(v, encoding="utf-8")
+    print("STALE: " + ", ".join(stale) if stale else "ok")
+    return 1 if stale else 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(run())

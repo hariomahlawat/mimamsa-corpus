@@ -1,84 +1,104 @@
-# Source-authentication integration architecture (DESIGN; not implemented)
+# Source-authentication integration architecture, revision 2 (DESIGN; not implemented)
 
-**Status:** design for owner and reviewer decision. No code, register or schema outside this package changes in PR #33.
+**Status:** design for owner and reviewer decision. Nothing outside this package changes in PR #33.
 
-**Goal:** let approved C6-01 evidence change the *effective* authentication view, without rewriting historical registers, without two hand-synchronised registers, and without letting coverage targets drive status.
+**Revision 2** adopts the overlay design (option C′) recommended by the independent Fable 5.2 review of a165b0f3 (F-06 to F-09) and replaces revision 1. This document is the **single specification**. `AUTHENTICATION_ADDENDUM_PLAN.md` describes process only, and the draft entries follow `addendum_entry.schema.json`.
 
-## 1. Current mechanism (as merged)
-| Layer | File | How it is produced |
-| --- | --- | --- |
-| Held bytes | `CALIBRATION-02/registers/held_sources_scratchpad.csv` | Cycle 4, committed |
-| Copy authentication | `CALIBRATION-02/registers/source_authentication_register.csv` (13 rows, sha256 `cfe5f408…`) | Cycle 4, hand-authored and reviewed |
-| Shared rule | `CALIBRATION-02/tools/evidence_classification.py` `Evidence.source_status(sha)` | Returns EFFECTIVE_PRIMARY_VERIFIED, AUTHENTICATION_PENDING, PROVENANCE_UNKNOWN, NOT_PRIMARY_MIRROR_OR_SECONDARY or DERIVED |
-| Source holding state | `SOURCE-LIBRARY-C5/inputs/target_publications.csv` `holding_state` | **hand-authored**; `build_registers.check_holding_vs_copies` fails if it disagrees with copy-level evidence |
-| Crosswalk and coverage | `SOURCE-LIBRARY-C5/registers/corpus_crosswalk.csv`, `coverage_summary.json` | derived by `build_registers.py` |
+**Goal:** let individually approved evidence change an *effective* authentication view without editing any historical register or tool, without two hand-synchronised registers, and without coverage targets driving status.
 
-**The problem.** Adding authentication rows makes the hand-authored `holding_state` wrong, and the consistency check (correctly) stops the build. Fixing that by hand creates two manually synchronised registers. That is the failure mode to avoid.
+## 1. Fixed points (never edited)
+- **Cycle 4, frozen:** `CALIBRATION-02/registers/source_authentication_register.csv` (sha256 `cfe5f408…`), `held_sources_scratchpad.csv` and `tools/evidence_classification.py`.
+- **Cycle 5 snapshot, frozen:** all `SOURCE-LIBRARY-C5/` inputs, tools and registers, which are the merged snapshot.
+- **CI pins.** A test pins the sha256 of every file above. The overlay only reads them.
 
-## 2. Proposed design: one evidence-driven derivation
-```
-baseline register (Cycle 4, immutable, hash-pinned)
-  + approved addendum entries v1..vn (append-only; each with decision ref)
-  - entries withdrawn by a later version
-  = effective copy-authentication view          (derived, never edited)
-      -> copy effective status (shared rule, by full sha256)
-      -> source authentication component (derived from its copies)
-      + hand-authored holding basis (held / not held, carrier, completeness)
-      = effective holding_state                 (derived)
-      -> crosswalk + coverage                    (derived)
-```
+## 2. Overlay package
+A new package, for example `legal_knowledge/audit_work/AUTH-LEDGER/`. Its only code dependency is reading the frozen files.
 
-### 2.1 Reading the Cycle 4 register
-- Read it byte-for-byte and verify its sha256 against a pinned value in an `authentication_baseline.json` manifest. A mismatch is a hard error.
-- The baseline is never edited. A later correction to a baseline row is an addendum entry of type `CORRECTION` that names the baseline row.
+| Part | Content |
+| --- | --- |
+| `schema/addendum_entry.schema.json` | entry contract (the C6-01 draft schema is its seed) |
+| `ledger/v0001.csv`, `v0002.csv`, … | **immutable** addendum versions; a merged version is never edited |
+| `ledger/manifest.jsonl` | one line per version: version, file sha256, previous line's sha256 (**hash chain**), rule version, decision-record sha256s |
+| `decisions/<id>.md` | committed owner decision records and reviewer reports; each hash-pinned in the manifest line that uses it |
+| `tools/strength.py` | locator-strength and identity computation, moved here from C6-01, so the validator never imports C6-01 or C5 builders |
+| `tools/reader.py` | applies v0 (the baseline) plus approved entries to produce the effective view |
+| `effective/vNNNN/` | derived outputs per version: copy states, source states, crosswalk, coverage, `transitions.csv` (audit trail) and `newly_withdrawn.csv` (change list); each folder hash-pinned in the manifest |
 
-### 2.2 Applying approved addenda
-- Addenda live in `CALIBRATION-02/registers/addenda/source_authentication_addendum_vN.csv`. Each file is immutable once merged, and its sha256 is listed in an `addenda_manifest.json` with version, date and decision reference.
-- Entry types: `ADD` (new copy row), `CORRECTION` (supersedes a baseline or earlier addendum entry for the same sha256), `WITHDRAW` (removes an earlier entry's effect). Every entry carries `entry_id`, the full `sha256`, `owner_decision` (`APPROVED` only takes effect), `decision_record_ref`, `reviewer_ref` and `evidence_refs`.
-- Order of application: baseline, then versions in manifest order, then entries in file order.
+`effective/v0000/` is the frozen state. The test is that the reader with zero entries reproduces the Cycle 5 copy and source states and crosswalk **byte-for-byte**.
 
-### 2.3 Resolving copy states
-- Key: the **full sha256** of the held bytes. A source's documented copy never authenticates another copy of the same source; each copy needs its own entry (C6-01 Rajbir: three copies, three entries, one non-primary).
-- The shared rule is unchanged for primary classes. **Non-primary classes** are added as a controlled vocabulary (`NON_PRIMARY_OFFICIAL_PUBLICATION_COPY`, `NON_PRIMARY_OFFICIAL_COURT_RENDITION`, `NON_PRIMARY_PARLIAMENTARY_RECORD`) that maps to a **new** status `DOCUMENTED_NON_PRIMARY`. It is never EFFECTIVE_PRIMARY, so it can never produce an EXACT_ANCHOR. Unknown classes stay a hard error. This replaces today's accidental mapping of NON_PRIMARY_* to "register row incomplete" (C6-01 final review R-03).
+## 3. Entries
+- **Key:** the full sha256. Entry types:
+  - `ADD`: a new copy row;
+  - `CORRECTION`: names the entry or baseline row it supersedes, with evidence;
+  - `WITHDRAW`: names its target and gives a **mandatory reason** (`CONTRADICTION`, `EVIDENCE_REVOKED`, `CLASSIFICATION_ERROR`, `OTHER`) and an optional `resulting_state`, for example `AUTHENTICATION_PENDING`, so a withdrawal for cause keeps the adverse fact rather than falling back to "no row".
+- **Effect.** Only `owner_decision=APPROVED` takes effect. That requires a `decision_record_ref` to a committed decision file whose sha256 is in the manifest, and a `reviewer_ref` to a committed review.
+- **ADD evidence.** An `ADD` must name a `first_class_record_ref`: a committed record whose **own** sha256 equals the key. A mention of the sha256 inside another copy's record is a lead only. This closes the sibling-evidence route behind F-01 (Rajbir C2).
+- **Resolvable references.** `evidence_refs` and `identity_refs` must resolve to an existing file and row.
+- **Strength.** `strength.py` computes it from the referenced records and refuses anything below FULL. A record that disclaims authenticity, or reports NOT_FOUND or CONFLICTING, is not a locator (F-02).
+- **Classification changes go through the ledger.** A carrier, class or fidelity change is a `CORRECTION` with evidence. Hand edits to frozen inputs are impossible because they are hash-pinned (F-08).
 
-### 2.4 Deriving source holding states
-- Split today's hand-authored `holding_state` into:
-  - `holding_basis` (hand-authored, evidence-referenced): held or not, carrier, completeness, compilation versus publication. These are facts about the holding, not about authentication.
-  - the authentication component, **derived** from the copies: `HELD_PRIMARY_<subtype>` if at least one copy is EFFECTIVE_PRIMARY (subtype from that copy's class), `HELD_AUTHENTICATION_PENDING` if a pending copy and no primary copy, otherwise the basis' `*_PROVENANCE_UNDOCUMENTED` state.
-- `check_holding_vs_copies` stays **on**. It then checks the hand-authored basis against the derived component (for example that a source marked NOT_HELD has no copies), instead of checking a value a human must keep in sync.
-- About 29 Cycle 5 sources would change derived state if the 33 PROPOSED entries were approved (21 Gazette + 8 SC sources; the 4 non-primary entries change none).
+## 4. Effective-state derivation
+1. Copy authentication is the baseline row, or the latest approved entry chain for that sha256. Orphan rules:
+   - a `CORRECTION` whose target is withdrawn is void;
+   - a `WITHDRAW` of a `WITHDRAW` is invalid; re-adding needs a new `ADD`;
+   - two live entries for one key is an error.
+2. Copy status uses a rule **versioned with the ledger** (`rule_version` in the manifest). It is the Cycle 4 rule plus a controlled non-primary vocabulary:
+   - `NON_PRIMARY_*` maps to `DOCUMENTED_NON_PRIMARY`, which is never EFFECTIVE_PRIMARY;
+   - unknown classes are errors.
 
-### 2.5 Historical snapshots
-- The merged Cycle 5 registers are a snapshot of the effective view at `addenda_manifest` version 0 (baseline only). The builder gains `--as-of <manifest version>`. `--as-of 0` must reproduce the merged Cycle 5 registers byte-for-byte; this is a CI test.
-- New effective registers are written to a versioned output folder (`SOURCE-LIBRARY-C5/registers/effective/vN/`) or replace the current outputs with the previous version retained under `snapshots/`. Either way the Cycle 5 integration state stays reproducible from git alone.
+   The frozen Cycle 4 tool is not edited. The overlay carries its own versioned copy of the rule, and a test proves its primary-class behaviour equals the frozen tool's on every baseline row.
+3. Source state is an **explicit transition table** from the frozen v0 state, using copy statuses:
 
-### 2.6 Duplicate and contradiction detection (hard errors)
-- Two effective entries for one sha256; an `ADD` for a sha256 already in the baseline (must be `CORRECTION`); an entry whose `held_paths` differ from the held index; a locator URL recorded with a different sha256 anywhere in the committed registers (the C6-01 contradiction rule); an entry below FULL locator strength; a primary class on a copy whose carrier is UNKNOWN.
+   | v0 state | condition | resulting state |
+   | --- | --- | --- |
+   | `HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED` | ≥1 effective primary copy of class X | `HELD_PRIMARY_<X subtype>` |
+   | `HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED` | ≥1 effective primary court copy | `HELD_PRIMARY_OFFICIAL_COURT_COPY` |
+   | any HELD state | a pending copy and no primary copy | `HELD_AUTHENTICATION_PENDING` |
+   | any | otherwise | unchanged |
 
-### 2.7 Withdrawal and supersession
-- `WITHDRAW` removes the target entry's effect; the effective view then falls back to the previous applicable entry or to "no row". `CORRECTION` replaces the target's fields. Neither deletes a row. Tests: approve, then withdraw, must reproduce the pre-approval effective view byte-for-byte.
+   No column of the frozen Cycle 5 input is split or edited. The Cycle 5 consistency rule is applied by the overlay to its own outputs, so it stays **on**.
+4. **Copy-level anchoring (F-09).** EXACT_ANCHOR needs a citation's checked copy to be the effective primary copy. Otherwise a recorded page-equivalence check between the checked copy and that copy is required. A source never lends EXACT_ANCHOR from one copy to another. A non-primary copy never anchors.
 
-### 2.8 Coverage regeneration
-- The crosswalk and coverage counts are always derived by the builder; no count is hand-entered. The PR that applies an addendum must show the crosswalk diff and it must equal the per-entry simulation recorded in the addendum draft (`crosswalk_effect_this_entry_alone`).
+## 5. Reproducibility, withdrawal and change lists
+- `reader.py --as-of N` reads manifest lines 1..N and the rule version pinned there. Outputs are compared with `effective/vN/` hashes.
+- **Round trip.** Approve-then-withdraw (reason `OTHER`, no resulting state) reproduces the previous version's state columns byte-for-byte. The audit columns live in `transitions.csv`, not in the state files.
+- **Composition (F-09).** The PR that adds a version shows the **joint** effect of exactly the entries it approves, computed by the reader. Per-entry simulations in the C6-01 draft are informational only, because they do not compose (the Rajbir example).
+- `newly_withdrawn.csv` feeds offline snapshot refreshes ("added / updated / newly withdrawn").
 
-### 2.9 Invalid transitions (validator rules)
-- `owner_decision` other than APPROVED has no effect; an APPROVED entry without `decision_record_ref` and `reviewer_ref` is an error; WITHHELD entries cannot become APPROVED in place (a new entry in a later version is required); class changes on an existing sha256 require a `CORRECTION` with evidence references; no entry may touch legal status, in-force status or reserved items (the schema has no such fields).
+## 6. Validator (hard errors, all offline)
+- a frozen-file hash mismatch;
+- a broken manifest chain, or a modified earlier version;
+- a schema violation;
+- an unresolvable reference;
+- an ADD without a first-class record;
+- strength below FULL;
+- APPROVED without a decision file and reviewer reference;
+- duplicate live entries;
+- a URL recorded with a different sha256 anywhere in the committed registers (normalised URLs; F-17);
+- a primary class on a copy that fails the copy-fidelity rule (signature range not covering the file, or an archive derivative);
+- any field that would express legal status, in-force status or applicability (the schema has none).
 
-### 2.10 Audit trail
-- Every effective copy row carries `effective_from_entry` (baseline row or addendum entry id). The manifest records each version's hash, decision reference and review reference. `git log` plus the manifest reconstruct every state.
+## 7. Dependency order (acyclic)
+frozen files, then ledger plus decisions, then `strength.py` and the copy rule, then copy states, then source transitions, then crosswalk and coverage, then the effective folder.
 
-## 3. Alternatives considered
+C6-01 depends on nothing in the overlay. The overlay depends on nothing in C6-01 at run time: the C6-01 draft is converted to `v0001.csv` once, by a reviewed PR.
+
+## 8. Sequencing
+1. **PR 1:** overlay skeleton, schema, versioned rule with non-primary vocabulary, validator, frozen-file pins and `--as-of 0` byte-identity, with **zero entries**.
+2. **PR 2..n:** tranches of approved entries, each with its own review and joint-effect diff.
+   - The Gazette tranche has no crosswalk effect, so it can go first.
+   - The SC tranche carries the case anchors.
+
+## 9. Alternatives
 | Option | Pros | Cons | Verdict |
 | --- | --- | --- | --- |
-| A. Edit the Cycle 4 register in place | simplest | destroys the auditable baseline; no withdrawal history | rejected |
-| B. Addendum + hand-relabel Cycle 5 `holding_state` (the earlier draft plan) | small change | two hand-synchronised registers; the check only detects drift after the fact | superseded by this design |
-| C. **Addendum + derived holding state (this design)** | single derivation; historical `--as-of`; check stays on | builder and schema change; needs a migration review | **recommended** |
-| D. Event-sourced ledger for all registers | most general | large change, beyond database scope needs now | deferred |
+| A. Edit the Cycle 4 register in place | simplest | destroys the baseline; no withdrawal history | rejected |
+| B. Addendum plus a hand relabel of Cycle 5 `holding_state` | small | two hand-synchronised registers | rejected |
+| C. Addendum plus a derived holding state inside C4/C5 (revision 1) | single derivation | edits frozen tools and inputs; a moving historical record (F-06) | superseded |
+| **C′. Overlay package (this revision)** | frozen history; derived state; hash-chained ledger; offline | new package; the rule copy must be kept equivalent (tested) | **recommended** |
+| D. Event-sourced ledger for all registers | general | beyond current need | deferred |
 
-## 4. Circularity and offline testing
-- Dependency order is strictly: held index and baseline, then addenda, then copy status, then source state, then crosswalk. No step reads a later step's output.
-- Everything reads committed files; no network, no held binaries. Tests: baseline hash pin; `--as-of 0` byte-identity; approve/withdraw round trip; duplicate/contradiction errors; non-primary never EXACT_ANCHOR; WITHHELD never applied; per-entry crosswalk diff equals the recorded simulation.
-
-## 5. What must not happen
-- No migration merely to raise exact-anchor counts. Each entry is decided on its evidence.
-- No legal-status, currency or applicability change: authentication says where a copy came from and that it is what it claims to be, nothing more.
+## 10. What must not happen
+- No migration merely to raise exact-anchor counts.
+- No legal-status, currency or applicability change. Authentication says where a copy came from and that it is what it claims to be.
+- An EXACT_ANCHOR says a documented copy is held. It says nothing about later treatment. For example, Navjot Sandhu's s.65B statement was later overruled (Anvar, PILOT-01 S-JUD-006); that is for the adviser.
