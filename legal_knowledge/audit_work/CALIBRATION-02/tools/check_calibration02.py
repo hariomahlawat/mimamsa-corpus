@@ -12,9 +12,16 @@ Checks every reviewer findings file reviews/<R>/findings.csv against proposition
 - severity P1/P2 needs a defect_class other than NONE and either a proposed_correction or missing_evidence;
 - no row claims legal approval (APPROVED / JAG_VALIDATED / LEGALLY_VERIFIED / ADJUDICATED as a state);
 - reviewer field equals the directory name; finding_id unique within the file.
-Usage: check_calibration02.py [--require A,B,C,D]"""
+Evidence: VERIFIED claims are classified by the shared rule in evidence_classification.py. Protocol errors (not held,
+derived text, mirror/secondary, hash mismatch, missing pinpoint) fail; AUTHENTICATION_PENDING / PROVENANCE_UNKNOWN are
+reported as warnings: the reviewer's claim is preserved but never counted as primary downstream.
+Usage: check_calibration02.py [--require A,B,C,D] [--verify-files <scratchpad root>]"""
 import csv, re, sys
+from collections import Counter
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import evidence_classification as EC  # noqa: E402  shared rule with reconcile.py
 
 C2 = Path(__file__).resolve().parents[1]
 STATES = {"VERIFIED_AGAINST_HELD_PRIMARY_SOURCE", "SUPPORTED_BY_SECONDARY_SOURCE_ONLY", "SOURCE_NOT_HELD",
@@ -29,23 +36,6 @@ COLS = ["finding_id", "reviewer", "record_id", "proposition_id", "dimension", "e
         "severity", "source_identity", "source_sha256", "locator", "version_or_date_note", "finding",
         "proposed_correction", "rationale", "missing_evidence", "legal_advisor_question", "uncertainty", "method"]
 APPROVAL = re.compile(r"(?<!NOT_)(?<![A-Z_])(JAG_VALIDATED|LEGALLY_VERIFIED|LEGAL_APPROVED|LEGALLY_APPROVED|ADJUDICATED|APPROVED)(?![A-Z_])")
-PRIMARY_EXT = (".pdf", ".doc", ".docx")
-
-
-def held_index():
-    p = C2 / "registers/held_sources_scratchpad.csv"
-    if not p.exists():
-        return {}
-    rows = list(csv.DictReader(open(p, newline="", encoding="utf-8")))
-    sec = {r["sha256"] for r in rows if "/secondary/" in "/" + r["scratchpad_relative_path"].lower()}
-    out = {}
-    for r in rows:  # prefer a non-secondary path for the primary-file test; keep note of secondary duplicates
-        if r["sha256"] not in out or "/secondary/" in "/" + out[r["sha256"]].lower():
-            out[r["sha256"]] = r["scratchpad_relative_path"]
-    held_index.secondary_duplicates = sec
-    return out
-
-
 def substantive(x):
     return len(re.sub(r"\s", "", x)) >= 10
 
@@ -55,11 +45,12 @@ def rows(p):
         return list(csv.reader(f))
 
 
-def check(require=()):
+def check(require=(), verify_root=None):
     err = []
+    ev = EC.Evidence.from_dir(C2, root=verify_root)
+    effective = Counter()
     props = list(csv.DictReader(open(C2 / "propositions.csv", newline="", encoding="utf-8")))
     pid = {p["proposition_id"]: p["record_id"] for p in props}
-    held = held_index()
     found = sorted(d.name for d in (C2 / "reviews").iterdir() if (d / "findings.csv").exists()) if (C2 / "reviews").exists() else []
     for r in require:
         if r not in found:
@@ -85,14 +76,11 @@ def check(require=()):
             if d["severity"] not in SEV: err.append(f"{tag} bad severity")
             if d["defect_class"] not in DEFECT: err.append(f"{tag} bad defect_class")
             if d["dimension"] not in DIM: err.append(f"{tag} bad dimension")
-            if d["evidence_state"] == "VERIFIED_AGAINST_HELD_PRIMARY_SOURCE":
-                if not re.fullmatch(r"[0-9a-f]{64}", d["source_sha256"]): err.append(f"{tag} VERIFIED without full source_sha256")
-                elif d["source_sha256"] not in held: err.append(f"{tag} VERIFIED sha256 not in the held-source index")
-                else:
-                    hp = held[d["source_sha256"]].lower()
-                    if not hp.endswith(PRIMARY_EXT) or "/secondary/" in "/" + hp:
-                        err.append(f"{tag} VERIFIED cites a derived or secondary file ({held[d['source_sha256']]})")
-                if not d["locator"].strip(): err.append(f"{tag} VERIFIED without locator")
+            if d["evidence_state"] == EC.VERIFIED:
+                st, detail = ev.classify_finding(d)
+                effective[st] += 1
+                if st in EC.PROTOCOL_ERRORS:
+                    err.append(f"{tag} VERIFIED claim fails the shared evidence rule: {st} ({detail})")
             if d["severity"] in ("P1", "P2"):
                 if d["defect_class"] == "NONE": err.append(f"{tag} {d['severity']} with defect_class NONE")
                 if not (substantive(d["proposed_correction"]) or substantive(d["missing_evidence"])): err.append(f"{tag} {d['severity']} without correction or missing_evidence")
@@ -102,9 +90,11 @@ def check(require=()):
     warn = []
     for rv in found:
         for d in csv.DictReader(open(C2 / "reviews" / rv / "findings.csv", newline="", encoding="utf-8")):
-            if d.get("evidence_state") == "VERIFIED_AGAINST_HELD_PRIMARY_SOURCE" and d.get("source_sha256") in getattr(held_index, "secondary_duplicates", set()):
-                warn.append(f"{rv} {d['finding_id']} VERIFIED file also indexed under a secondary path (authentication of the bytes rests on provenance records)")
-    print(f"propositions={len(pid)} reviewers={found} errors={len(err)} warnings={len(warn)}")
+            if d.get("evidence_state") == EC.VERIFIED:
+                st, detail = ev.classify_finding(d)
+                if st in EC.NOT_EFFECTIVE_PRIMARY:
+                    warn.append(f"{rv} {d['finding_id']} claimed VERIFIED; effective {st} ({detail}); claim preserved, not counted as primary")
+    print(f"propositions={len(pid)} reviewers={found} errors={len(err)} warnings={len(warn)} effective_status_of_VERIFIED_claims={dict(sorted(effective.items()))}")
     for w in warn: print("WARNING", w)
     for e in err[:200]: print("ERROR", e)
     return 1 if err else 0
@@ -113,4 +103,5 @@ def check(require=()):
 if __name__ == "__main__":
     req = []
     if "--require" in sys.argv: req = sys.argv[sys.argv.index("--require") + 1].split(",")
-    sys.exit(check(req))
+    root = sys.argv[sys.argv.index("--verify-files") + 1] if "--verify-files" in sys.argv else None
+    sys.exit(check(req, root))

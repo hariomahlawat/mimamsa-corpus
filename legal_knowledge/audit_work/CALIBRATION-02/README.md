@@ -25,7 +25,7 @@ The sample is `COORDINATION/CALIBRATION-01/calibration_package.csv`, unchanged: 
    - NOT_YET_REVIEWED;
    - NOT_A_LEGAL_PROPOSITION: for design or administrative statements, e.g. on the eventual application.
 
-   A citation existing, or a document being searchable, is never verification. The MML is a manual, not authority. Compilations (India Code, MoD) are comparison text under SOURCE_AUTHORITY_POLICY v1, never Gazette authority.
+   A citation existing, or a document being searchable, is never verification. Reviewer-claimed states are preserved as submitted. Downstream figures use an **effective** status from the shared rule (`tools/evidence_classification.py`). Under it, held bytes are effective primary only if `registers/source_authentication_register.csv` documents their source-specific provenance. Ambiguous or undocumented provenance gives AUTHENTICATION_PENDING or PROVENANCE_UNKNOWN, never primary. The MML is a manual, not authority. Compilations (India Code, MoD) are comparison text under SOURCE_AUTHORITY_POLICY v1, never Gazette authority.
 4. **Severity:**
    - P1: materially incorrect or unsupported, and could lead to unlawful or seriously flawed action.
    - P2: a significant omission, wrong authority, historical-version error, wrong citation or misleading procedure.
@@ -58,6 +58,7 @@ The sample is `COORDINATION/CALIBRATION-01/calibration_package.csv`, unchanged: 
 | 8 | Quality scorecard | `SCORECARD.md`, `reconciliation/scorecard.json` |
 | 9 | Readiness assessment | `READINESS_ASSESSMENT.md` |
 | — | New source conflict | `registers/source_conflicts_c4.csv` (SC4-01, r.182, OPEN) |
+| — | Evidence classification (shared rule) | `tools/evidence_classification.py`, `registers/source_authentication_register.csv` (13 sources), `reconciliation/effective_evidence.csv`, `reconciliation/evidence_regression/` |
 
 Build order, all deterministic:
 1. `tools/build_propositions.py`

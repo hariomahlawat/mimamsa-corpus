@@ -10,11 +10,14 @@ Outputs (reconciliation/ and proposals/):
 - correction_proposals.csv: every P1/P2 finding with a proposed correction, keeping the original verbatim text, the
   proposed text, the reviewer, the evidence (source sha256 + locator) and corroboration by other reviewers.
   support_status:
-    PRIMARY_EVIDENCE_SUPPORTED: the raising finding is VERIFIED_AGAINST_HELD_PRIMARY_SOURCE against a held primary file
-      (pdf/doc in the held index, not secondary) with a locator;
+    PRIMARY_EVIDENCE_SUPPORTED: the raising finding's EFFECTIVE status (shared rule, evidence_classification.py) is
+      EFFECTIVE_PRIMARY_VERIFIED, i.e. source-specific provenance documented in registers/source_authentication_register.csv;
+    AUTHENTICATION_PENDING: the finding claims primary verification but the source's authentication is pending or its
+      provenance is unknown (the claim is preserved; it is not counted as primary);
     SECONDARY_EVIDENCE_ONLY: a hash and locator are given but the evidence is secondary (compilation, mirror, derived text);
     EVIDENCE_GAP: the correction rests on missing evidence or no cited source;
-  Precedence: SOURCE_CONFLICT_OPEN > DISPUTED_ESCALATED > PRIMARY > SECONDARY > GAP.
+  Precedence: SOURCE_CONFLICT_OPEN > DISPUTED_ESCALATED > PRIMARY > AUTHENTICATION_PENDING > SECONDARY > GAP.
+- effective_evidence.csv: every finding with its claimed state and its effective status under the shared rule.
     DISPUTED_ESCALATED: the proposition is in reviewer DISAGREE (a reviewer positively assessed it with no defect);
     SOURCE_CONFLICT_OPEN: some reviewer records CONTRADICTORY_EVIDENCE between sources for the proposition (kept OPEN).
 - record_scorecard.csv and scorecard.json: per-record and overall counts.
@@ -22,6 +25,9 @@ Agreement is reported, not used to decide legal questions. The legal-advisor que
 import csv, json, re, sys
 from collections import Counter, defaultdict
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import evidence_classification as EC  # noqa: E402  shared rule with check_calibration02.py
 
 C2 = Path(__file__).resolve().parents[1]
 REVIEWERS = ["A", "B", "C", "D"]
@@ -44,21 +50,16 @@ def write(p, cols, rows):
         w.writerows(rows)
 
 
-HELD = {}  # sha256 -> list of held paths
+EV = None  # evidence_classification.Evidence, set in main()
 
 
-def is_primary(sha):
-    """Primary only if every held path for these bytes is a pdf/doc outside a 'secondary' folder. Bytes also held as a
-    secondary copy (e.g. the Isaac file, QC-09) are not counted as primary-backed until authenticated."""
-    ps = [p.lower() for p in HELD.get(sha, [])]
-    return bool(ps) and all(p.endswith((".pdf", ".doc", ".docx")) and "/secondary/" not in "/" + p for p in ps)
+def is_primary_finding(x):
+    return EV.counts_as_primary(x)
 
 
 def main():
-    hi = C2 / "registers/held_sources_scratchpad.csv"
-    if hi.exists():
-        for r in read(hi):
-            HELD.setdefault(r["sha256"], []).append(r["scratchpad_relative_path"])
+    global EV
+    EV = EC.Evidence.from_dir(C2)
     props = read(C2 / "propositions.csv")
     F = {r: read(C2 / "reviews" / r / "findings.csv") for r in REVIEWERS}
     by = defaultdict(lambda: defaultdict(list))
@@ -110,7 +111,8 @@ def main():
         row["severity_spread"] = "YES" if (raisers and spread) else "NO"
         row["worst_severity"] = worst
         row["agreement"] = agree
-        row["any_verified"] = "YES" if "VERIFIED_AGAINST_HELD_PRIMARY_SOURCE" in allst else "NO"
+        row["any_verified"] = "YES" if any(EV.counts_as_primary(x) for r in REVIEWERS for x in by[pid][r]) else "NO"  # effective primary only
+        row["any_verified_claim"] = "YES" if "VERIFIED_AGAINST_HELD_PRIMARY_SOURCE" in allst else "NO"
         row["any_source_gap"] = "YES" if allst & GAP else "NO"
         matrix.append(row)
         escalate_spread = agree == "CORROBORATED_DEFECT" and spread
@@ -137,13 +139,16 @@ def main():
                     corro = sorted(o for o, ys in others.items() if any(RANK[y["severity"]] >= 2 for y in ys))
                     none_others = sorted(o for o, ys in others.items() if ys and all(y["severity"] == "NONE" and y["evidence_state"] not in ("NOT_A_LEGAL_PROPOSITION",) for y in ys))
                     has_ev = bool(re.fullmatch(r"[0-9a-f]{64}", x["source_sha256"])) and bool(x["locator"].strip())
-                    primary = x["evidence_state"] == "VERIFIED_AGAINST_HELD_PRIMARY_SOURCE" and is_primary(x["source_sha256"])
+                    eff_status = EV.classify_finding(x)[0]
+                    primary = eff_status == EC.EFFECTIVE_PRIMARY
                     if contra:  # an open conflict between sources takes precedence (QC-07)
                         st = "SOURCE_CONFLICT_OPEN"
                     elif agree == "DISAGREE":
                         st = "DISPUTED_ESCALATED"
-                    elif x["proposed_correction"].strip() and primary and x["locator"].strip():
+                    elif x["proposed_correction"].strip() and primary:
                         st = "PRIMARY_EVIDENCE_SUPPORTED"
+                    elif x["proposed_correction"].strip() and eff_status in EC.NOT_EFFECTIVE_PRIMARY:
+                        st = "AUTHENTICATION_PENDING"
                     elif x["proposed_correction"].strip() and has_ev:
                         st = "SECONDARY_EVIDENCE_ONLY"
                     else:
@@ -155,12 +160,13 @@ def main():
                         "reviewer": r, "finding_id": x["finding_id"], "source_identity": x["source_identity"],
                         "source_sha256": x["source_sha256"], "locator": x["locator"], "rationale": x["rationale"],
                         "missing_evidence": x["missing_evidence"], "corroborated_by_reviewers": ";".join(corro),
-                        "reviewers_marking_no_defect": ";".join(none_others), "support_status": st,
+                        "reviewers_marking_no_defect": ";".join(none_others), "claimed_evidence_state": x["evidence_state"],
+                        "effective_evidence_status": eff_status, "support_status": st,
                         "incorporation_state": "PROPOSED_NOT_INCORPORATED (original record unchanged)"})
-    mcols = ["record_id", "proposition_id", "text_verbatim"] + [f"{r}_{k}" for r in REVIEWERS for k in ("worst_severity", "states")] + ["worst_severity", "agreement", "defect_raised_by", "assessed_supported_by", "rated_minor_by", "classed_non_legal_by", "severity_spread", "any_verified", "any_source_gap"]
+    mcols = ["record_id", "proposition_id", "text_verbatim"] + [f"{r}_{k}" for r in REVIEWERS for k in ("worst_severity", "states")] + ["worst_severity", "agreement", "defect_raised_by", "assessed_supported_by", "rated_minor_by", "classed_non_legal_by", "severity_spread", "any_verified", "any_verified_claim", "any_source_gap"]
     write(C2 / "reconciliation/proposition_matrix.csv", mcols, matrix)
     write(C2 / "reconciliation/disagreements.csv", ["record_id", "proposition_id"] + [f"{r}_worst_severity" for r in REVIEWERS] + [f"{r}_states" for r in REVIEWERS] + ["kind", "reason", "disposition"], dis)
-    pcols = ["proposal_id", "record_id", "proposition_id", "original_text_verbatim", "proposed_text_or_action", "severity", "defect_class", "dimension", "reviewer", "finding_id", "source_identity", "source_sha256", "locator", "rationale", "missing_evidence", "corroborated_by_reviewers", "reviewers_marking_no_defect", "support_status", "incorporation_state"]
+    pcols = ["proposal_id", "record_id", "proposition_id", "original_text_verbatim", "proposed_text_or_action", "severity", "defect_class", "dimension", "reviewer", "finding_id", "source_identity", "source_sha256", "locator", "rationale", "missing_evidence", "corroborated_by_reviewers", "reviewers_marking_no_defect", "claimed_evidence_state", "effective_evidence_status", "support_status", "incorporation_state"]
     write(C2 / "proposals/correction_proposals.csv", pcols, sorted(props_out, key=lambda d: (d["record_id"], d["proposition_id"], d["proposal_id"])))
     write(C2 / "reconciliation/legal_advisor_questions_raw.csv", ["record_id", "proposition_id", "reviewer", "finding_id", "question", "context_finding"], questions)
     # record scorecard
@@ -197,12 +203,25 @@ def main():
                    "review_state": "REVIEWED (not legally approved)"})
     write(C2 / "reconciliation/record_scorecard.csv", list(rs[0].keys()), rs)
     allf = [x for r in REVIEWERS for x in F[r]]
+    eff_rows = []
+    for x in allf:
+        st, detail = EV.classify_finding(x)
+        reg = EV.register.get(x["source_sha256"], {})
+        eff_rows.append({"finding_id": x["finding_id"], "reviewer": x["reviewer"], "record_id": x["record_id"], "proposition_id": x["proposition_id"],
+                         "claimed_evidence_state": x["evidence_state"], "effective_evidence_status": st, "classification_basis": detail,
+                         "source_sha256": x["source_sha256"], "locator": x["locator"], "source_class_in_register": reg.get("effective_source_class", ""),
+                         "provenance_references": reg.get("provenance_references", "")})
+    write(C2 / "reconciliation/effective_evidence.csv", list(eff_rows[0].keys()),
+          sorted(eff_rows, key=lambda d: (d["reviewer"], d["finding_id"])))
     sc = {
         "records_reviewed": len(rs), "of": 46, "propositions": len(props),
         "record_classification": dict(sorted(Counter(r["classification"] for r in rs).items())),
         "findings_by_reviewer": {r: len(F[r]) for r in REVIEWERS},
         "findings_by_severity": dict(sorted(Counter(x["severity"] for x in allf).items())),
         "findings_by_evidence_state": dict(sorted(Counter(x["evidence_state"] for x in allf).items())),
+        "findings_by_evidence_state_note": "claimed reviewer states, preserved exactly as submitted",
+        "verified_claims_by_effective_status": dict(sorted(Counter(e["effective_evidence_status"] for e in eff_rows if e["claimed_evidence_state"] == EC.VERIFIED).items())),
+        "effective_primary_findings": sum(e["effective_evidence_status"] == EC.EFFECTIVE_PRIMARY for e in eff_rows),
         "findings_by_defect_class_P1_P2": dict(sorted(Counter(x["defect_class"] for x in allf if x["severity"] in ("P1", "P2")).items())),
         "proposition_agreement": dict(sorted(Counter(m["agreement"] for m in matrix).items())),
         "disagreements": sum(d["kind"] == "DISAGREE" for d in dis), "severity_splits_escalated": sum(d["kind"] == "SEVERITY_SPLIT" for d in dis),

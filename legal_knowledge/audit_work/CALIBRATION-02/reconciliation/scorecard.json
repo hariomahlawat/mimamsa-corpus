@@ -1,14 +1,16 @@
 {
  "correction_proposals": 47,
  "correction_proposals_by_support": {
+  "AUTHENTICATION_PENDING": 1,
   "DISPUTED_ESCALATED": 16,
   "EVIDENCE_GAP": 3,
   "PRIMARY_EVIDENCE_SUPPORTED": 5,
-  "SECONDARY_EVIDENCE_ONLY": 17,
+  "SECONDARY_EVIDENCE_ONLY": 16,
   "SOURCE_CONFLICT_OPEN": 6
  },
  "cross_volume_findings": 15,
  "disagreements": 12,
+ "effective_primary_findings": 134,
  "findings_by_defect_class_P1_P2": {
   "CITATION_ERROR": 2,
   "CROSS_VOLUME_INCONSISTENCY": 1,
@@ -33,6 +35,7 @@
   "UNSUPPORTED": 22,
   "VERIFIED_AGAINST_HELD_PRIMARY_SOURCE": 138
  },
+ "findings_by_evidence_state_note": "claimed reviewer states, preserved exactly as submitted",
  "findings_by_reviewer": {
   "A": 384,
   "B": 387,
@@ -69,5 +72,9 @@
  "records_unable_to_progress_missing_primary_sources": 11,
  "records_with_source_gap_propositions": 29,
  "severity_splits_escalated": 17,
- "unsupported_propositions": 13
+ "unsupported_propositions": 13,
+ "verified_claims_by_effective_status": {
+  "AUTHENTICATION_PENDING": 4,
+  "EFFECTIVE_PRIMARY_VERIFIED": 134
+ }
 }

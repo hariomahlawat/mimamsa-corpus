@@ -9,10 +9,11 @@
  ],
  "final": {
   "correction_proposals_by_support": {
+   "AUTHENTICATION_PENDING": 1,
    "DISPUTED_ESCALATED": 16,
    "EVIDENCE_GAP": 3,
    "PRIMARY_EVIDENCE_SUPPORTED": 5,
-   "SECONDARY_EVIDENCE_ONLY": 17,
+   "SECONDARY_EVIDENCE_ONLY": 16,
    "SOURCE_CONFLICT_OPEN": 6
   },
   "disagreements": 12,

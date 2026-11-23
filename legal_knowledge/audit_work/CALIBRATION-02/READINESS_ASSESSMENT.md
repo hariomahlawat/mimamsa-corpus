@@ -28,11 +28,16 @@
    - Eleven calibration records cannot progress at all.
    - Acquisition order: ACQ-C3-01 (Army Act as enacted) first; then the record copy of S.R.O. 484/1954 and the Army Rules hint instruments; then official judgments to replace mirrors (Kuldeep Yadav, Som Datt, Santosh Lohar, Harjeet, Pandappa, Pooja Pal). See `registers/acquisition_readiness/`.
 2. **Legal decisions upstream of record-level review.** Thirteen adviser topics recur across records: s.133/BSA, the Entitlement Rules trigger date and Isaac, AFT s.15 for SCMs, and others. Each answer will change many records, so they should be answered before the 612-record pass. Otherwise the same question is reworked record by record.
-3. **Scope boundaries between reviewers.** 151 propositions were non-legal or outside every reviewer's scope, and B marked 126 statutory rows "not yet reviewed". At scale, every legal proposition needs a declared owning dimension, so that no proposition is reviewed by nobody.
-4. **Proposition splitting.** Sentence segmentation is deterministic but coarse: references are one block, and checklists are split mid-item. Before scaling, add typed segmentation that separates statutory citations, case citations and procedural steps.
-5. **Severity calibration.** There is one P1 (COI-003#P6), and it came from Reviewer D after coordinator feedback that severity follows content, not record status (QC-03). The other three reviewers rated the same defect lower: A and C P2, B P3. Write anchor examples per severity, e.g. "implies admissibility of excluded evidence = P1", and give them to every reviewer before review starts.
-6. **Rule-level indexing.** ANCHORED_FULL is 187 of 658. A verified rule index could make 155–188 of the 193 PROVISION_FILES_ABSENT records technically searchable (`registers/rule_index_spec/`). That would speed review, but searchability is not correctness.
-7. **Cost.** Four full reviews of 46 records took about 1.1M reviewer tokens. At this depth, 612 records would need about 15M. Batches should be prioritised by the 349-record affected list, and the source and legal decisions above settled first.
+3. **Source authentication.**
+   - Effective primary evidence depends on a source-authentication register that currently documents 13 files.
+   - No signature has been cryptographically verified.
+   - The Isaac file is AUTHENTICATION_PENDING (QC-13).
+   - Before scaling, every new primary source needs a register row with source-specific provenance, and the Isaac bytes need an approved re-fetch or signature check.
+4. **Scope boundaries between reviewers.** 151 propositions were non-legal or outside every reviewer's scope, and B marked 126 statutory rows "not yet reviewed". At scale, every legal proposition needs a declared owning dimension, so that no proposition is reviewed by nobody.
+5. **Proposition splitting.** Sentence segmentation is deterministic but coarse: references are one block, and checklists are split mid-item. Before scaling, add typed segmentation that separates statutory citations, case citations and procedural steps.
+6. **Severity calibration.** There is one P1 (COI-003#P6), and it came from Reviewer D after coordinator feedback that severity follows content, not record status (QC-03). The other three reviewers rated the same defect lower: A and C P2, B P3. Write anchor examples per severity, e.g. "implies admissibility of excluded evidence = P1", and give them to every reviewer before review starts.
+7. **Rule-level indexing.** ANCHORED_FULL is 187 of 658. A verified rule index could make 155–188 of the 193 PROVISION_FILES_ABSENT records technically searchable (`registers/rule_index_spec/`). That would speed review, but searchability is not correctness.
+8. **Cost.** Four full reviews of 46 records took about 1.1M reviewer tokens. At this depth, 612 records would need about 15M. Batches should be prioritised by the 349-record affected list, and the source and legal decisions above settled first.
 
 ## Recommended next stage (needs owner approval)
 1. Approve the targeted acquisitions in priority order.

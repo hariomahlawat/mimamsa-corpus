@@ -8,6 +8,15 @@
 
 The finding-level counts do not depend on the rule.
 
+## Six distinct layers
+None of these implies the next:
+1. **Reviewer-submitted evidence assessments** (claimed states): preserved exactly as submitted in `reviews/<R>/findings.csv`.
+2. **Effective evidence classification:** derived by the shared rule `tools/evidence_classification.py` and listed per finding in `reconciliation/effective_evidence.csv`.
+3. **Primary-source authenticity:** source-specific provenance in `registers/source_authentication_register.csv`. No signature has been cryptographically verified, and the Isaac file is AUTHENTICATION_PENDING.
+4. **Source searchability:** WS-D canonical coverage; ANCHORED_FULL is 187 of 658.
+5. **Substantive legal verification:** not established by this package. The reviews are evidence reviews.
+6. **Formal legal-adviser or JAG approval:** none exists or is claimed.
+
 ## Records (46 of 46 reviewed)
 | Classification | Count | Records |
 | --- | --- | --- |
@@ -24,7 +33,7 @@ The finding-level counts do not depend on the rule.
 | Findings, all reviewers (A / B / C / D) | 1,536 (384 / 387 / 383 / 382) |
 | Severity: P1 / P2 / P3 | 1 / 46 / 199 |
 | Distinct propositions with a P1 or P2 | 32 |
-| Evidence states | 138 VERIFIED against a held primary source; 294 secondary only; 125 source not held; 21 historical version unresolved; 26 interpretation needs legal advice; 22 unsupported; 4 contradictory; 780 not a legal proposition; 126 out of a reviewer's scope |
+| Evidence states (claimed by reviewers, as submitted) | 138 VERIFIED against a held primary source (134 effective primary, 4 authentication pending); 294 secondary only; 125 source not held; 21 historical version unresolved; 26 interpretation needs legal advice; 22 unsupported; 4 contradictory; 780 not a legal proposition; 126 out of a reviewer's scope |
 | Unsupported legal propositions (any reviewer) | 13 |
 | Historical-version findings | 44 |
 | Judicial relationship findings (mislinked case or missing authority) | 32 |
@@ -33,7 +42,12 @@ The finding-level counts do not depend on the rule.
 
 The only P1 (COI-003#P6, Reviewer D) was raised from P2 after coordinator feedback that severity follows content (QC-03). A and C rated the same defect P2 and B rated it P3.
 
-Every VERIFIED row cites a held primary file: pdf or doc, in the held-source index, not derived text. Four of B's VERIFIED rows cite the Isaac (2026 INSC 993) file. Its official status rests on a provenance record, and Reviewer D treats the same bytes as secondary (QC-09).
+**Claimed versus effective primary evidence.**
+- Reviewers claimed VERIFIED_AGAINST_HELD_PRIMARY_SOURCE on **138** findings.
+- Under the shared rule, **134** are effective primary: the source's provenance is documented in the authentication register.
+- **4** are AUTHENTICATION_PENDING: Reviewer B's Isaac findings B-0109, B-0111, B-0248 and B-0272. The Isaac bytes' official provenance is contested (QC-09, QC-13).
+- Those four claims are preserved but not counted as primary. Reviewer D's secondary-only assessments of the same propositions are also preserved.
+- **0** VERIFIED claims fail on protocol grounds: none is unheld, derived text, a mirror, a hash mismatch or missing a pinpoint. All held files re-hashed correctly.
 
 ## Agreement between reviewers (by proposition)
 | Class | Propositions |
@@ -52,13 +66,14 @@ There are 47 proposals across 19 records:
 
 | Status | Count |
 | --- | --- |
-| PRIMARY_EVIDENCE_SUPPORTED (the raising finding is verified against a held primary file, with a locator; bytes also held as a secondary copy do not count) | 5: CM-026#P7, CM-028#P8, CM-028#REF, J-03#P1, SC13#P4 |
-| SECONDARY_EVIDENCE_ONLY | 17, including PEN-WF-03#P2: the Isaac bytes are also held as a secondary copy and await authentication (QC-09) |
+| PRIMARY_EVIDENCE_SUPPORTED (the raising finding's effective status is primary, with source provenance documented) | 5: CM-026#P7, CM-028#P8, CM-028#REF, J-03#P1, SC13#P4 |
+| AUTHENTICATION_PENDING (claims primary verification; source authentication pending) | 1: PEN-WF-03#P2 (CP2-B-0109, Isaac) |
+| SECONDARY_EVIDENCE_ONLY | 16 |
 | DISPUTED_ESCALATED | 16 |
 | SOURCE_CONFLICT_OPEN (r.182 Gazette omission SC4-01; Santosh Lohar copy and date) | 6 |
 | EVIDENCE_GAP | 3 |
 
-None is incorporated. Each carries the original text and is linked to its record ID and canonical hash in `proposals/proposed_versions.jsonl`.
+None is incorporated. Each carries the original text, the claimed and effective evidence status, and its record ID and canonical hash (`proposals/correction_proposals.csv`, `proposals/proposed_versions.jsonl`). Primary-backed support exists for only 5 of the 47.
 
 ## Legal-adviser and source questions
 - **Legal-adviser questions:** 36 from the reviewers, grouped into 13 topics, plus the 9 reserved items unchanged (`adviser/`).

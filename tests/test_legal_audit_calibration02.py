@@ -27,6 +27,7 @@ class Validator(unittest.TestCase):
         self.t = tempfile.TemporaryDirectory(); base = Path(self.t.name) / "CALIBRATION-02"
         (base / "tools").mkdir(parents=True); (base / "reviews" / "A").mkdir(parents=True)
         shutil.copy(C2 / "tools/check_calibration02.py", base / "tools")
+        shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
         shutil.copy(C2 / "propositions.csv", base / "propositions.csv")
         self.base = base
         cv = load("check_calibration02"); self.cols = cv.COLS
@@ -57,7 +58,7 @@ class Validator(unittest.TestCase):
 
     def test_verified_without_hash_fails(self):
         self.write(lambda d: d.update(evidence_state="VERIFIED_AGAINST_HELD_PRIMARY_SOURCE", locator="p.1"))
-        rc, out = self.run_check(); self.assertEqual(rc, 1); self.assertIn("without full source_sha256", out)
+        rc, out = self.run_check(); self.assertEqual(rc, 1); self.assertIn("SOURCE_NOT_HELD_IN_INDEX", out)
 
     def test_p1_without_correction_fails(self):
         self.write(lambda d: d.update(severity="P1", defect_class="OMISSION"))
@@ -87,7 +88,7 @@ class Validator(unittest.TestCase):
     def test_verified_derived_text_fails(self):
         self._held("derived/vk.txt", "c" * 64)
         self.write(lambda d: d.update(evidence_state="VERIFIED_AGAINST_HELD_PRIMARY_SOURCE", source_sha256="c" * 64, locator="p.1"))
-        rc, out = self.run_check(); self.assertEqual(rc, 1); self.assertIn("derived or secondary", out)
+        rc, out = self.run_check(); self.assertEqual(rc, 1); self.assertIn("NOT_PRIMARY_DERIVED_TEXT", out)
 
     def test_verified_primary_pdf_passes(self):
         self._held("downloads/judgment.pdf", "d" * 64)
@@ -137,8 +138,11 @@ class Reconciliation(unittest.TestCase):
         t = tempfile.TemporaryDirectory(); base = Path(t.name) / "CALIBRATION-02"
         (base / "tools").mkdir(parents=True); (base / "registers").mkdir()
         shutil.copy(C2 / "tools/reconcile.py", base / "tools")
+        shutil.copy(C2 / "tools/evidence_classification.py", base / "tools")
         (base / "registers/held_sources_scratchpad.csv").write_text(
             "scratchpad_relative_path,bytes,sha256,note\ndownloads/official.pdf,10," + "e" * 64 + ",\nderived/x.txt,10," + "f" * 64 + ",\ndownloads/ambiguous.pdf,10," + "9" * 64 + ",\nsecondary/ambiguous_copy.pdf,10," + "9" * 64 + ",\n", encoding="utf-8")
+        (base / "registers/source_authentication_register.csv").write_text(
+            "sha256,authentication_state,effective_source_class\n" + "e" * 64 + ",PROVENANCE_DOCUMENTED,PRIMARY_OFFICIAL_COURT_COPY\n", encoding="utf-8")
         props = [["1", "R-1", f"R-1#P{i}", "body_sentence", f"text {i}", "M", "T", "K", "S", "0" * 64] for i in range(1, n + 1)]
         with open(base / "propositions.csv", "w", newline="", encoding="utf-8") as f:
             w = csv.writer(f, lineterminator="\n")
@@ -201,7 +205,7 @@ class Reconciliation(unittest.TestCase):
             self.assertEqual(st[("R-1#P10", "A")], "PRIMARY_EVIDENCE_SUPPORTED")
             self.assertEqual(st[("R-1#P11", "A")], "EVIDENCE_GAP")
             self.assertEqual(st[("R-1#P12", "A")], "SECONDARY_EVIDENCE_ONLY")
-            self.assertEqual(st[("R-1#P13", "A")], "SECONDARY_EVIDENCE_ONLY")
+            self.assertEqual(st[("R-1#P13", "A")], "AUTHENTICATION_PENDING")  # same bytes official-claimed and secondary
             for x in p:
                 self.assertEqual(x["incorporation_state"], "PROPOSED_NOT_INCORPORATED (original record unchanged)")
         finally:
@@ -221,6 +225,152 @@ class Reconciliation(unittest.TestCase):
         finally:
             for n, b in before.items():
                 (C2 / n).write_bytes(b)
+
+
+
+class EvidenceClassification(unittest.TestCase):
+    """Shared evidence rule (tools/evidence_classification.py): the ten owner-specified scenarios.
+    The claimed reviewer state is never modified; an effective status is derived for downstream use."""
+
+    H_OFF, H_UNK, H_DER, H_MIR, H_AMB, H_PEND = ("1" * 64, "2" * 64, "3" * 64, "4" * 64, "5" * 64, "6" * 64)
+
+    def setUp(self):
+        self.ev_mod = load("evidence_classification")
+        self.t = tempfile.TemporaryDirectory(); root = Path(self.t.name)
+        (root / "downloads").mkdir(); (root / "downloads/official.pdf").write_bytes(b"official judgment bytes")
+        self.real = __import__("hashlib").sha256(b"official judgment bytes").hexdigest()
+        held = [("downloads/official.pdf", self.H_OFF), ("downloads/unknown.pdf", self.H_UNK), ("derived/official.txt", self.H_DER),
+                ("downloads/secondary/mirror.pdf", self.H_MIR), ("downloads/claimed_official.pdf", self.H_AMB),
+                ("downloads/secondary/news_copy.pdf", self.H_AMB), ("downloads/pending.pdf", self.H_PEND),
+                ("downloads/official.pdf", self.real)]
+        reg = [{"sha256": self.H_OFF, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY"},
+               {"sha256": self.real, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY"},
+               {"sha256": self.H_PEND, "authentication_state": "AUTHENTICATION_PENDING", "effective_source_class": "AUTHENTICATION_PENDING"}]
+        self.ev = self.ev_mod.Evidence([{"scratchpad_relative_path": p, "sha256": h} for p, h in held], reg)
+        self.ev_files = self.ev_mod.Evidence([{"scratchpad_relative_path": p, "sha256": h} for p, h in held], reg, root=root)
+
+    def tearDown(self): self.t.cleanup()
+
+    def f(self, sha, loc="p.3 para 9", state="VERIFIED_AGAINST_HELD_PRIMARY_SOURCE"):
+        return {"evidence_state": state, "source_sha256": sha, "locator": loc}
+
+    def test_01_official_with_documented_provenance(self):
+        self.assertEqual(self.ev.classify_finding(self.f(self.H_OFF))[0], "EFFECTIVE_PRIMARY_VERIFIED")
+
+    def test_02_held_pdf_provenance_unknown(self):
+        self.assertEqual(self.ev.classify_finding(self.f(self.H_UNK))[0], "PROVENANCE_UNKNOWN")
+        self.assertFalse(self.ev.counts_as_primary(self.f(self.H_UNK)))
+
+    def test_03_derived_text_of_official_document(self):
+        self.assertEqual(self.ev.classify_finding(self.f(self.H_DER))[0], "NOT_PRIMARY_DERIVED_TEXT")
+
+    def test_04_mirror_only_judgment(self):
+        self.assertEqual(self.ev.classify_finding(self.f(self.H_MIR))[0], "NOT_PRIMARY_MIRROR_OR_SECONDARY")
+
+    def test_05_identical_bytes_official_claimed_and_secondary(self):
+        st, detail = self.ev.classify_finding(self.f(self.H_AMB))
+        self.assertEqual(st, "AUTHENTICATION_PENDING"); self.assertIn("secondary", detail)
+        self.assertEqual(self.ev.classify_finding(self.f(self.H_PEND))[0], "AUTHENTICATION_PENDING")  # register says pending
+
+    def test_06_missing_held_source_entry(self):
+        self.assertEqual(self.ev.classify_finding(self.f("7" * 64))[0], "SOURCE_NOT_HELD_IN_INDEX")
+        self.assertEqual(self.ev.classify_finding(self.f(""))[0], "SOURCE_NOT_HELD_IN_INDEX")
+
+    def test_07_hash_mismatch(self):
+        # the held file at downloads/official.pdf does not hash to H_OFF
+        self.assertEqual(self.ev_files.classify_finding(self.f(self.H_OFF))[0], "HASH_MISMATCH")
+        self.assertEqual(self.ev_files.classify_finding(self.f(self.real))[0], "EFFECTIVE_PRIMARY_VERIFIED")
+
+    def test_08_valid_source_missing_pinpoint(self):
+        self.assertEqual(self.ev.classify_finding(self.f(self.H_OFF, loc=" "))[0], "PINPOINT_MISSING")
+
+    def test_09_reviewer_verified_claim_failing_effective_test_is_preserved(self):
+        row = self.f(self.H_PEND); before = dict(row)
+        self.assertFalse(self.ev.counts_as_primary(row))
+        self.assertEqual(row, before)  # claimed state untouched
+
+    def test_10_genuine_source_conflict_passes_through(self):
+        st, _ = self.ev.classify_finding(self.f(self.H_OFF, state="CONTRADICTORY_EVIDENCE"))
+        self.assertEqual(st, "CONTRADICTORY_EVIDENCE")
+
+
+class EvidenceIntegration(unittest.TestCase):
+    """End-to-end: validator and reconciler both apply the shared rule (fail on the pre-harmonisation code)."""
+
+    def _tree(self, rows_A, register, held):
+        t = tempfile.TemporaryDirectory(); base = Path(t.name) / "CALIBRATION-02"
+        (base / "tools").mkdir(parents=True); (base / "registers").mkdir()
+        for n in ("reconcile.py", "check_calibration02.py", "evidence_classification.py"):
+            if (C2 / "tools" / n).exists():
+                shutil.copy(C2 / "tools" / n, base / "tools")
+        with open(base / "registers/held_sources_scratchpad.csv", "w", newline="", encoding="utf-8") as f:
+            w = csv.writer(f, lineterminator="\n"); w.writerow(["scratchpad_relative_path", "bytes", "sha256", "note"]); w.writerows([[p, 10, h, ""] for p, h in held])
+        with open(base / "registers/source_authentication_register.csv", "w", newline="", encoding="utf-8") as f:
+            w = csv.writer(f, lineterminator="\n"); w.writerow(["sha256", "authentication_state", "effective_source_class"]); w.writerows(register)
+        with open(base / "propositions.csv", "w", newline="", encoding="utf-8") as f:
+            w = csv.writer(f, lineterminator="\n")
+            w.writerow(["calibration_rank", "record_id", "proposition_id", "proposition_kind", "text_verbatim", "module", "title", "kind", "status_as_recorded", "record_canonical_sha256"])
+            w.writerows([["1", "R-1", f"R-1#P{i}", "body_sentence", f"t{i}", "M", "T", "K", "S", "0" * 64] for i in range(1, len(rows_A) + 1)])
+        cols = load("check_calibration02").COLS
+        for rv in "ABCD":
+            (base / "reviews" / rv).mkdir(parents=True)
+            out = []
+            for i in range(1, len(rows_A) + 1):
+                d = {c: "" for c in cols}
+                d.update(finding_id=f"{rv}-{i}", reviewer=rv, record_id="R-1", proposition_id=f"R-1#P{i}", dimension="STATUTORY",
+                         evidence_state="NOT_YET_REVIEWED", defect_class="NONE", severity="NONE")
+                if rv == "A":
+                    d.update(rows_A[i - 1])
+                out.append(d)
+            with open(base / "reviews" / rv / "findings.csv", "w", newline="", encoding="utf-8") as f:
+                w = csv.DictWriter(f, fieldnames=cols, lineterminator="\n"); w.writeheader(); w.writerows(out)
+        return t, base
+
+    def test_pending_and_unknown_never_primary_in_reconciler(self):
+        P2 = dict(severity="P2", defect_class="OMISSION", evidence_state="VERIFIED_AGAINST_HELD_PRIMARY_SOURCE", proposed_correction="replace with the official wording", locator="p.4")
+        rows = [dict(P2, source_sha256="a" * 64), dict(P2, source_sha256="b" * 64), dict(P2, source_sha256="c" * 64)]
+        held = [("downloads/doc.pdf", "a" * 64), ("downloads/claimed.pdf", "b" * 64), ("downloads/secondary/copy.pdf", "b" * 64), ("downloads/unknown.pdf", "c" * 64)]
+        reg = [["a" * 64, "PROVENANCE_DOCUMENTED", "PRIMARY_OFFICIAL_COURT_COPY"]]
+        t, base = self._tree(rows, reg, held)
+        try:
+            subprocess.run([sys.executable, str(base / "tools/reconcile.py")], check=True, capture_output=True)
+            st = {r["proposition_id"]: r["support_status"] for r in csv.DictReader(open(base / "proposals/correction_proposals.csv", newline="", encoding="utf-8"))}
+            self.assertEqual(st["R-1#P3"], "AUTHENTICATION_PENDING", "held pdf with unknown provenance must not be primary-backed")
+            self.assertEqual(st["R-1#P2"], "AUTHENTICATION_PENDING", "same bytes official-claimed and secondary must be pending")
+            self.assertEqual(st["R-1#P1"], "PRIMARY_EVIDENCE_SUPPORTED")
+            eff = {r["finding_id"]: r for r in csv.DictReader(open(base / "reconciliation/effective_evidence.csv", newline="", encoding="utf-8"))}
+            self.assertEqual(eff["A-2"]["claimed_evidence_state"], "VERIFIED_AGAINST_HELD_PRIMARY_SOURCE")
+            self.assertEqual(eff["A-2"]["effective_evidence_status"], "AUTHENTICATION_PENDING")
+            self.assertEqual(eff["A-3"]["effective_evidence_status"], "PROVENANCE_UNKNOWN")
+        finally:
+            t.cleanup()
+
+    def test_validator_reports_effective_status_and_rejects_protocol_errors(self):
+        V = dict(evidence_state="VERIFIED_AGAINST_HELD_PRIMARY_SOURCE", locator="p.1")
+        held = [("downloads/claimed.pdf", "b" * 64), ("downloads/secondary/copy.pdf", "b" * 64), ("downloads/secondary/mirror.pdf", "d" * 64)]
+        t, base = self._tree([dict(V, source_sha256="b" * 64)], [], held)
+        try:
+            p = subprocess.run([sys.executable, str(base / "tools/check_calibration02.py")], capture_output=True, text=True)
+            self.assertEqual(p.returncode, 0, p.stdout)  # a pending claim is preserved, not rejected
+            self.assertIn("AUTHENTICATION_PENDING", p.stdout)
+        finally:
+            t.cleanup()
+        t, base = self._tree([dict(V, source_sha256="d" * 64)], [], held)
+        try:
+            p = subprocess.run([sys.executable, str(base / "tools/check_calibration02.py")], capture_output=True, text=True)
+            self.assertEqual(p.returncode, 1); self.assertIn("NOT_PRIMARY_MIRROR_OR_SECONDARY", p.stdout)
+        finally:
+            t.cleanup()
+
+    def test_validator_hash_mismatch_with_files(self):
+        V = dict(evidence_state="VERIFIED_AGAINST_HELD_PRIMARY_SOURCE", locator="p.1")
+        t, base = self._tree([dict(V, source_sha256="a" * 64)], [["a" * 64, "PROVENANCE_DOCUMENTED", "PRIMARY_OFFICIAL_COURT_COPY"]], [("downloads/doc.pdf", "a" * 64)])
+        try:
+            root = Path(t.name) / "scratch"; (root / "downloads").mkdir(parents=True); (root / "downloads/doc.pdf").write_bytes(b"different bytes")
+            p = subprocess.run([sys.executable, str(base / "tools/check_calibration02.py"), "--verify-files", str(root)], capture_output=True, text=True)
+            self.assertEqual(p.returncode, 1); self.assertIn("HASH_MISMATCH", p.stdout)
+        finally:
+            t.cleanup()
 
 
 if __name__ == "__main__":
