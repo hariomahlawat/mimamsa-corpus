@@ -1,6 +1,6 @@
 # D2. Source authentication proposals
 
-**Register:** `registers/source_authentication_proposals.csv`, 33 proposed **additions** in the CALIBRATION-02 register columns.
+**Register:** `registers/source_authentication_proposals.csv`, 34 proposed **additions** in the CALIBRATION-02 register columns.
 - **The original register is not edited.**
 - Each row reads `C6-01 PROPOSAL - not incorporated`.
 - Before any addendum, each needs independent verification (D3) and owner approval.
@@ -8,7 +8,7 @@
 | Proposed class | Rows |
 | --- | --- |
 | NON_PRIMARY_OFFICIAL_COURT_RENDITION | 1 |
-| NON_PRIMARY_OFFICIAL_PUBLICATION_COPY | 1 |
+| NON_PRIMARY_OFFICIAL_PUBLICATION_COPY | 2 |
 | NON_PRIMARY_PARLIAMENTARY_RECORD | 1 |
 | PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE | 21 |
 | PRIMARY_OFFICIAL_COURT_COPY | 9 |

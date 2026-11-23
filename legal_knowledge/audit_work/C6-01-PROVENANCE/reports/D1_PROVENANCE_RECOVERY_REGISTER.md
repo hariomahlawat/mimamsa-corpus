@@ -12,13 +12,13 @@ Each row carries:
 
 | Outcome | Court copies | Publication/record copies | Total |
 | --- | --- | --- | --- |
-| PROVENANCE_DOCUMENTED | 10 | 23 | 33 |
-| PROVENANCE_PARTIALLY_DOCUMENTED | 0 | 3 | 3 |
+| PROVENANCE_DOCUMENTED | 10 | 24 | 34 |
+| PROVENANCE_PARTIALLY_DOCUMENTED | 0 | 2 | 2 |
 | IDENTITY_VERIFIED_PROVENANCE_UNDOCUMENTED | 0 | 0 | 0 |
 | NO_RECOVERABLE_PROVENANCE | 0 | 0 | 0 |
 | AUTHENTICATION_PENDING | 0 | 0 | 0 |
 
-**Locator strength of the DOCUMENTED rows:** FULL 33.
+**Locator strength of the DOCUMENTED rows:** FULL 34.
 Only FULL can reach DOCUMENTED: a sha256 recorded with a URL, or archive size, md5 and sha1. This is the Cycle 4 bar.
 
 **Retrieval dates:** 15 rows carry a date from a retrieval record. The rest have only a register date, or none (`NOT_EVIDENCED`).

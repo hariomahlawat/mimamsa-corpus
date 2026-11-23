@@ -59,6 +59,66 @@ class C6Provenance(unittest.TestCase):
             self.assertEqual({x.strip() for x in p["held_paths"].split(";")}, held[p["sha256"]])
             self.assertIn("PROPOSAL - not incorporated", p["limitations"])
 
+    def test_scope_split_publications_and_judgments(self):
+        rec = read("provenance_recovery_register.csv")
+        court = [r for r in rec if "-J-" in r["source_id"]]
+        pub = [r for r in rec if "-J-" not in r["source_id"]]
+        self.assertEqual((len({r["source_id"] for r in pub}), len(pub)), (26, 26))
+        self.assertEqual((len({r["source_id"] for r in court}), len(court)), (8, 10))
+        readme = (PKG / "README.md").read_text(encoding="utf-8")
+        self.assertIn("26 publication or record sources with 26 copies", readme)
+        self.assertIn("8 Supreme Court judgment sources with 10 copies", readme)
+        self.assertNotIn("(28 copies)", readme)
+
+    def test_weaker_locators_never_documented(self):
+        for strength in ("MD5_SIZE", "IDENTIFIER_SHA", "MD5", "NONE"):
+            for lead in (True, False):
+                self.assertNotEqual(P.classify(strength, True, False, strength != "NONE", lead), "PROVENANCE_DOCUMENTED", strength)
+        self.assertEqual(P.classify("FULL", True, False, True, False), "PROVENANCE_DOCUMENTED")
+        self.assertEqual(P.classify("FULL", False, False, True, False), "PROVENANCE_PARTIALLY_DOCUMENTED")
+        self.assertEqual(P.classify("FULL", True, True, True, False), "AUTHENTICATION_PENDING")
+        method = (PKG / "reports/C6-01_METHOD.md").read_text(encoding="utf-8")
+        self.assertNotIn("FULL or MD5_SIZE", method)
+        self.assertNotIn("needs FULL or MD5_SIZE", (PKG / "tools/build_provenance.py").read_text(encoding="utf-8"))
+
+    def test_proposal_ids_stable_unique_and_traceable(self):
+        props = read("source_authentication_proposals.csv")
+        ids = [p["proposal_id"] for p in props]
+        self.assertEqual(len(ids), len(set(ids)))
+        for p in props:
+            self.assertEqual(p["proposal_id"], "C6-01-AP-" + p["sha256"][:8])
+        # removing one proposal does not change any other ID (IDs depend on the copy's own bytes only)
+        self.assertEqual([P.proposal_id(p["sha256"]) for p in props[1:]], ids[1:])
+        with open(PKG / "review/legacy_proposal_id_map.csv", newline="", encoding="utf-8") as f:
+            legacy = list(csv.DictReader(f))
+        cur = {p["sha256"]: p["proposal_id"] for p in props}
+        for r in legacy:
+            self.assertEqual(r["current_proposal_id"], cur.get(r["sha256"], ""), r["sha256"])
+        first = [r["id_in_first_verification_9b4ad44d"] for r in legacy if r["id_in_first_verification_9b4ad44d"]]
+        self.assertEqual(len(first), 34)
+        self.assertEqual(len(set(first)), 34)
+        self.assertEqual({r["sha256"] for r in legacy} >= set(cur), True)
+        ap22 = [r for r in legacy if r["id_in_first_verification_9b4ad44d"] == "C6-01-AP-22"][0]
+        self.assertTrue(ap22["sha256"].startswith("8358d2b3") and ap22["current_proposal_id"] == "")
+
+    def test_c6_page_image_checks(self):
+        with open(PKG / "inputs/page_image_checks_c6.csv", newline="", encoding="utf-8") as f:
+            checks = list(csv.DictReader(f))
+        for c in checks:
+            png = PKG / c["render_file"]
+            self.assertEqual(hashlib.sha256(png.read_bytes()).hexdigest(), c["render_png_sha256"], c["check_id"])
+            self.assertIn(c["identity_result"], ("CONFIRMED", "PARTIAL"))
+        rec = {r["source_id"]: r for r in read("provenance_recovery_register.csv")}
+        self.assertEqual(rec["C5-SRC-P0-TRA-2026"]["proposed_outcome"], "PROVENANCE_DOCUMENTED")
+        self.assertEqual(rec["C5-SRC-P0-TRA-2026"]["proposed_effective_source_class"], "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY")
+        dhc = rec["C5-SRC-P2-DHC-RULES-CH6"]
+        self.assertEqual(dhc["proposed_outcome"], "PROVENANCE_PARTIALLY_DOCUMENTED")  # PARTIAL image check never counts as I
+        self.assertNotIn("I:", dhc["identity_verification"].replace("Ip:", ""))
+        act13 = rec["C5-SRC-P0-AA-AMD-ACT13-1975"]
+        self.assertEqual((act13["proposed_outcome"], act13["locator_strength"]), ("PROVENANCE_PARTIALLY_DOCUMENTED", "IDENTIFIER_SHA"))
+        self.assertIn("Hindi issue No.16 but English issue No.15", act13["remaining_gaps"])
+        self.assertEqual(act13["retrieval_date"], "register dated 2026-11-22")  # no invented retrieval date
+
     def test_isaac_untouched(self):
         isaac = "3f49a31464fec174cdbff5d9e194fa888ca00529b6246eacdc8ac2368eab4653"
         self.assertNotIn(isaac, {r["sha256"] for r in read("provenance_recovery_register.csv")})

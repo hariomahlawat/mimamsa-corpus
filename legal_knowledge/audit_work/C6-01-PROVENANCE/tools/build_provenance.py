@@ -19,7 +19,9 @@ its file and row key. Classification rules (also in reports/C6-01_METHOD.md):
         archive identifier in the recorded path
   I  identity verified on a page image: a page-image check record (with a 64-hex render hash) for this sha256 in
      ACQ-02 / WS-A / ARMY-RULES-CHAIN-01 / R23 / CALIBRATION-02 / SOURCE-LIBRARY-C5 registers, or an
-     ARMY-RULES-CHAIN-01 instrument row for this sha256 with evidence_level IMAGE_CHECKED
+     ARMY-RULES-CHAIN-01 instrument row for this sha256 with evidence_level IMAGE_CHECKED, or a C6-01 check
+     (inputs/page_image_checks_c6.csv) whose identity_result is CONFIRMED. A C6 check marked PARTIAL (page read,
+     but a required identity element is not on the copy) is recorded as Ip and does NOT satisfy I.
   T  identity read from the page-1 text layer (C6 held_copy_facts.csv) and matching the source title keys
      (accepted as identity evidence only for born-digital court PDFs, as in the Cycle 4 PPS Bedi precedent)
   X  contradiction: any committed record pairing this copy's official URL with a different sha256, or a WS-B
@@ -41,6 +43,14 @@ PKG = Path(__file__).resolve().parents[1]
 AW = PKG.parent
 REPO = AW.parents[1]
 HEX = re.compile(r"(?<![0-9a-f])[0-9a-f]{64}(?![0-9a-f])")
+# documentary findings carried on the row (not corrections of the C5 register, which is not edited here; see C6-PREP C5-CO-03)
+DOCUMENTARY_FINDINGS = {
+    "C5-SRC-P0-AA-AMD-ACT13-1975": ["documentary finding (WSA-PIC-29; C6-01 verification F-04; C5-CO-03): the Gazette masthead reads Hindi "
+                                    "issue No.16 but English issue No.15 on the image; the C5 master title gives No.16 only. Cite the issue as "
+                                    "'No.16 (Hindi masthead) / No.15 (English masthead)' until resolved against another copy of the same issue; "
+                                    "Part II s.1, 29-03-1975, Act No.13 of 1975 and p.81 are confirmed"],
+}
+WATERMARKED_GAZETTE_REHOSTS = {"C5-SRC-P0-TRA-2026"}  # C6-PIC-01/02: IndiaCode watermark over an e-Gazette page
 SCOPE = ("HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED", "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED")
 AUTH_COLS = ["sha256", "document_identity", "issuer_or_authority", "held_paths", "carrier", "official_locator_recorded",
              "provenance_references", "provenance_evidence", "authentication_state", "effective_source_class",
@@ -116,6 +126,11 @@ def collect():
             s = (r.get(shacol) or "").strip()[:64]
             if HEX.fullmatch(s) and HEX.fullmatch((r.get("render_png_sha256") or "").strip()[:64]):
                 ev[s].append(("I", f"{rel}#{r['check_id']}", (r.get("observed_on_image") or r.get("reading") or r.get("independent_transcription") or "")[:160]))
+    for r in read(PKG / "inputs/page_image_checks_c6.csv"):  # C6-01 checks on held copies (no download); PARTIAL never counts as I
+        s = r["document_sha256"].strip()
+        if HEX.fullmatch(s) and HEX.fullmatch(r["render_png_sha256"].strip()) and r["identity_result"] in ("CONFIRMED", "PARTIAL"):
+            ev[s].append(("I" if r["identity_result"] == "CONFIRMED" else "Ip", f"C6-01-PROVENANCE/inputs/page_image_checks_c6.csv#{r['check_id']}",
+                          f"{r['identity_result']}: {r['register_mismatch']}"[:200]))
     for r in read(AW / "ARMY-RULES-CHAIN-01/army_rules_instrument_register.csv"):
         m = HEX.search(r["sha256"])
         if m and r["evidence_level"].startswith("IMAGE_CHECKED"):
@@ -189,8 +204,10 @@ def build():
         if t_ok:
             items.append(("T", "C6-01-PROVENANCE/inputs/held_copy_facts.csv#" + c["copy_id"], f"p.1 text contains {keys[:2]}"))
         L = sorted(k for k in {k for k, _, _ in items} if k in ("L1", "L2", "L3", "L4", "L5", "L6"))
-        # locator strength: FULL = sha256 recorded with the locator (L1/L3/L4) or archive size+md5+sha1 (L2 full);
-        # MD5_SIZE = archive md5 and size only; MD5 = md5 only (L5/L6). PROVENANCE_DOCUMENTED needs FULL or MD5_SIZE.
+        # locator strength: FULL = sha256 recorded with a URL locator (L1/L3/L4-with-URL) or archive size+md5+sha1 (L2);
+        # MD5_SIZE = archive md5 and size only; IDENTIFIER_SHA = sha256 with a repository identifier but no URL (L4);
+        # MD5 = md5 only (L5/L6). PROVENANCE_DOCUMENTED needs FULL only (Cycle 4 bar; verification F-02).
+        # MD5_SIZE, IDENTIFIER_SHA and MD5 never qualify.
         full = (any(k in ("L1", "L3") for k, _, _ in items) or any(k == "L4" and d.startswith("http") for k, _, d in items)
                 or any(k == "L2" and ("size/md5/sha1 OK" in d or ("sha1" in d and "no sha1" not in d)) for k, _, d in items))
         strength = ("FULL" if full
@@ -199,16 +216,7 @@ def build():
         I = "I" in kinds
         X = contradictions(s, url_by_sha)
         lead = bool(re.search(r"in\.gazette\.[a-z.]+\d", c["held_paths"])) or "I?" in kinds
-        if X:
-            outcome = "AUTHENTICATION_PENDING"
-        elif strength == "FULL" and (I or t_ok):  # same evidence bar as the Cycle 4 register (verification F-02)
-            outcome = "PROVENANCE_DOCUMENTED"
-        elif L or ((I or t_ok) and lead):
-            outcome = "PROVENANCE_PARTIALLY_DOCUMENTED"
-        elif I or t_ok:
-            outcome = "IDENTITY_VERIFIED_PROVENANCE_UNDOCUMENTED"
-        else:
-            outcome = "NO_RECOVERABLE_PROVENANCE"
+        outcome = classify(strength, bool(I or t_ok), bool(X), bool(L), lead)
         urls = sorted(url_by_sha.get(s, set())) or sorted({re.search(r"https?://[^ |]+", d).group(0) for k, _, d in items
                                                            if k in ("L2", "L3", "L5", "L6") and re.search(r"https?://[^ |]+", d)})
         dates = sorted({re.search(r"retrieved_on=(\S+)", d).group(1) for k, _, d in items if k == "L3" and "retrieved_on=" in d})
@@ -223,9 +231,13 @@ def build():
         elif strength == "IDENTIFIER_SHA":
             gaps.append("download record gives a repository identifier, not a retrieval URL")
         if not (I or t_ok):
-            gaps.append("identity not verified on a page image" + ("" if court else " (scanned/official publication: text layer not accepted)"))
+            if "Ip" in kinds:
+                gaps.append("identity page image-checked but only PARTIAL: " + "; ".join(sorted({d.split(': ', 1)[1] for k, _, d in items if k == "Ip"})))
+            else:
+                gaps.append("identity not verified on a page image" + ("" if court else " (scanned/official publication: text layer not accepted)"))
         if not dates:
             gaps.append("no retrieval date in a retrieval record" + (" (only a register date)" if regdates else ""))
+        gaps += DOCUMENTARY_FINDINGS.get(c["source_id"], [])
         siblings = [x["copy_id"] for x in read(AW / "SOURCE-LIBRARY-C5/registers/source_copy_register.csv") if x["source_id"] == c["source_id"] and x["copy_id"] != c["copy_id"]]
         cls = proposed_class(m, outcome, c)
         row = {
@@ -239,7 +251,7 @@ def build():
             "checksum_evidence": f"sha256 {s}; md5 {f['md5']}; sha1 {f['sha1']}; bytes {f['bytes']}" + ("; byte match: " + ",".join(L) if L else ""),
             "locator_strength": strength,
             "pages": f["pages"], "completeness": m["completeness_status"],
-            "identity_verification": "; ".join(f"{k}:{ref}" for k, ref, _ in items if k in ("I", "T")) or "NONE",
+            "identity_verification": "; ".join(f"{k}:{ref}" for k, ref, _ in items if k in ("I", "Ip", "T")) or "NONE",
             "related_copies": ";".join(siblings), "current_authentication_status": f"{m['holding_state']} / C4 register: {c['c4_register_state']}",
             "evidence_items": " | ".join(f"{k}:{ref}" for k, ref, _ in sorted(items)), "contradictions": " | ".join(X) or "NONE_FOUND_IN_SEARCHED_REGISTERS",
             "proposed_outcome": outcome, "proposed_effective_source_class": cls, "remaining_gaps": "; ".join(gaps) or "none recorded",
@@ -265,6 +277,20 @@ def build():
     return rec, props, unresolved, copies
 
 
+def classify(strength, identity_ok, contradicted, has_locator, lead):
+    """Outcome decision. PROVENANCE_DOCUMENTED requires FULL strength AND identity evidence AND no contradiction
+    (Cycle 4 bar; verification F-02). MD5_SIZE, IDENTIFIER_SHA and MD5 never qualify."""
+    if contradicted:
+        return "AUTHENTICATION_PENDING"
+    if strength == "FULL" and identity_ok:
+        return "PROVENANCE_DOCUMENTED"
+    if has_locator or (identity_ok and lead):
+        return "PROVENANCE_PARTIALLY_DOCUMENTED"
+    if identity_ok:
+        return "IDENTITY_VERIFIED_PROVENANCE_UNDOCUMENTED"
+    return "NO_RECOVERABLE_PROVENANCE"
+
+
 def extra_limits(items, cls, c):
     out = []
     kinds = {k for k, _, _ in items}
@@ -277,7 +303,12 @@ def extra_limits(items, cls, c):
     if cls == "NON_PRIMARY_PARLIAMENTARY_RECORD":
         out.append("non-primary: records the laying of a notification, not the instrument; RS Debates authenticity of the archive copy not confirmed")
     if cls == "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY":
-        out.append("non-primary: incomplete or extract copy (see completeness)")
+        if c["source_id"] in WATERMARKED_GAZETTE_REHOSTS:
+            out.append("non-primary (conservative): an e-Gazette text re-hosted by India Code with an IndiaCode watermark, so the bytes are not the "
+                       "e-Gazette original; no Cycle 4 class covers a watermarked born-digital re-host (the C4 India Code class is for scans). "
+                       "Class decision reserved for the reviewer/owner; the digital signature was not verified")
+        else:
+            out.append("non-primary: incomplete or extract copy (see completeness)")
     if cls == "NON_PRIMARY_OFFICIAL_COURT_RENDITION":
         out.append("non-primary: court-system rendition with unknown carrier status, not the judgment copy as issued")
     return out
@@ -302,6 +333,9 @@ def next_step(outcome, m, gaps=()):
         steps = []
         if any("identity not verified" in g for g in gaps):
             steps.append("page-image identity check of the identity page with a render hash (file is held; no download needed)")
+        if any("only PARTIAL" in g for g in gaps):
+            steps.append("identity elements absent from the held copy (issuing authority, volume, edition/date) must come from another record: the "
+                         "printed rules volume, or a court-registry confirmation of the file; the image check cannot supply them")
         if any(("identifier" in g) or ("md5" in g) or ("no locator" in g) for g in gaps):
             steps.append("a retrieval record with URL and sha256, i.e. an approved re-acquisition from the official host")
         return "; ".join(steps) or "see remaining gaps"
@@ -336,12 +370,22 @@ def coverage_impact(props):
             "proposed": {k: sim[k] for k in keys}, "authentication_baseline": base["authentication"], "authentication_proposed": sim["authentication"]}
 
 
+def proposal_id(sha256):
+    """Short display ID. The canonical identity of a proposal is its full sha256 (column `sha256`); the ID depends only on
+    that copy's bytes, so adding or removing another proposal never renumbers it. Legacy sequential IDs used by the first
+    verification and the re-verification are mapped in review/legacy_proposal_id_map.csv."""
+    return f"C6-01-AP-{sha256[:8]}"
+
+
 def outputs():
     rec, props, unresolved, copies = build()
     rec_cols = list(rec[0])
+    ids = [proposal_id(p["sha256"]) for p in props]
+    if len(set(ids)) != len(ids) or len({p["sha256"] for p in props}) != len(props):
+        raise SystemExit("duplicate proposal_id or sha256 in proposals: lengthen the display prefix")
     texts = {
         "provenance_recovery_register.csv": csv_text(rec_cols, rec),
-        "source_authentication_proposals.csv": csv_text(["proposal_id"] + AUTH_COLS, [dict(p, proposal_id=f"C6-01-AP-{p['sha256'][:8]}") for p in props]),
+        "source_authentication_proposals.csv": csv_text(["proposal_id"] + AUTH_COLS, [dict(p, proposal_id=proposal_id(p["sha256"])) for p in props]),
         "unresolved_provenance_register.csv": csv_text(["copy_id", "source_id", "sha256", "proposed_outcome", "what_is_missing", "evidence_found", "next_step"], unresolved),
     }
     impact = coverage_impact(props)
