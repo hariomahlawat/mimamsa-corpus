@@ -50,7 +50,7 @@ python3 reconcile_judgments.py --incoming batch.csv --out report.csv \
 - Courts are normalised. For example, "Supreme Court of India", "SC" and "Hon'ble Supreme Court" all become `supreme court`.
 - A strong match also requires the corpus entity to have a recorded court. Other matches can only reach `POSSIBLE_MATCH_REVIEW`.
 
-**Tests.** `python3 -m unittest test_reconcile_judgments -v` (44 tests; also run from the repository root as `python -m unittest tests.test_legal_audit_reconcile_judgments`). They cover each class, within-batch duplicates, version markers on either side, the same case number from a different court, CSV and JSONL input, determinism, unmodified inputs, malformed-input cases (fail closed), parsing of case-number types and ranges, and, after review RC-02/RC-10: `--out` as a symlink or hard link to an input, an existing non-input file (refused, then replaced with `--overwrite`), an input path with `--overwrite`, a `curated_originals` path, a directory or missing parent, a known hash with contradictory metadata, an untyped case number, formula-leading cells, duplicate keys and ids, NUL bytes, future and ancient dates, non-string list members, non-UTF-8 CSV and duplicate CSV headers.
+**Tests.** `python3 -m unittest test_reconcile_judgments -v` (47 tests; also run from the repository root as `python -m unittest tests.test_legal_audit_reconcile_judgments`). They cover each class, within-batch duplicates, version markers on either side, the same case number from a different court, CSV and JSONL input, determinism, unmodified inputs, malformed-input cases (fail closed), parsing of case-number types and ranges, and, after review RC-02/RC-10: `--out` as a symlink or hard link to an input, an existing non-input file (refused, then replaced with `--overwrite`), an input path with `--overwrite`, a `curated_originals` path, a directory or missing parent, a known hash with contradictory metadata, an untyped case number, formula-leading cells, duplicate keys and ids, NUL bytes, future and ancient dates, non-string list members, non-UTF-8 CSV and duplicate CSV headers.
 
 **Known limits.**
 
@@ -58,7 +58,7 @@ python3 reconcile_judgments.py --incoming batch.csv --out report.csv \
 - Party similarity is token-based. Transliteration variants (for example Baljit/Baltit) can fall below the threshold, so items like that may come out as `NEW`.
 - High Court and AFT bench names need explicit aliases in `COURT_ALIASES`.
 - The metadata-conflict flag compares court, case number and date only. It cannot detect a wrong hash whose metadata happens to match.
-- The guard refuses paths inside `curated_originals` but does not refuse other paths under `--repo`. Write reports outside the repository or under an audit-work folder.
+- The guard refuses: any path resolving to an input (realpath, samefile or inode); paths inside `curated_originals`; any existing non-regular target (device, FIFO, socket, symlink), even with `--overwrite`; and, when `--repo` is given, any existing file inside the repository, even with `--overwrite`. New files inside the repository are allowed. **Without `--repo`, an existing file elsewhere is replaced if `--overwrite` is given**, so always pass `--repo` or write outside the repository. A narrow race remains between the final re-check and the rename, for an attacker who can write to the output directory at that moment.
 
 ## xref_checks.py / select_sample.py
 
