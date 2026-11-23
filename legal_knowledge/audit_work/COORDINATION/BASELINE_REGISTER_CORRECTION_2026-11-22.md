@@ -36,7 +36,7 @@ Full hashes are in `ARMY-RULES-CHAIN-01/page_image_checks_chain.csv`. These find
 - WS-C `procedure_crosswalk.csv`: PX-06 (r.192) and PX-20 (r.194), generated from this chronology by `build_procedure_crosswalk.py`.
 - WS-C `procedure_gap_conflict_register.csv` PG-02, and WS-C Cycle 3 `procedural_contradictions_cycle3.csv` PC-16: both still say "not recorded" for AR-025 (S.R.O. 332/1989).
 - WS-D (Cycle 3) `relation_graph_versioned_report.md` and `relation_graph_versioned_summary.json`: the pinned input hash of `statutory_version_register_seed.csv` changes, so the WS-D guards require a deterministic regeneration in whichever of this PR and the Cycle 3 integration (#29) merges second.
-- WS-D shows r.2 as CONFLICTING_EVIDENCE (1979-06-04 / 1988-09-17), taken from WS-A's change log. That is commencement versus deemed effect, which this register now models as separate fields; WS-A and WS-D align to that.
+- WS-D formerly showed r.2 as CONFLICTING_EVIDENCE (1979-06-04 / 1988-09-17). That came from WS-A's change log, which held the deemed date in `effective_date`. **Resolved in the final Cycle 3 reconciliation:** WS-A corrected `provision_change_log.csv` in place (18ae1078), and WS-D (aef02e0e) now models r.2 and r.16A as one event each, with commencement 1988-09-17 and `retrospective_deemed_effect_from` 1979-06-04, flagged RETROSPECTIVE_DEEMED_EFFECT_AQ06. Legal applicability remains with AQ-06.
 
 ## Gates (run on this branch; exit codes checked directly)
 - `check_registers.py`: 0 (47 instruments, 47 chronology rows, 12 versions, 40 PICs, 0 errors);
