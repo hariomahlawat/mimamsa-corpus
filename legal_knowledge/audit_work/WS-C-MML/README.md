@@ -107,3 +107,10 @@ None of these is an edition date. No MML file contains anything on the AFT Act 2
 
 ## Parser fix 2026-11-22
 See `PARSER_FIX_2026-11-22.md`, which gives before and after counts and the list of changed records. Regression check: `scripts/test_kb_citations.py`.
+
+## Cycle 3 (branch claude/ws-c-cycle3)
+| File | Rows | Content |
+| --- | ---: | --- |
+| `mml_edition_evidence_cycle3.csv` | 29 | Edition and provenance indicators per original file: imprints, printer marks, DOC/PDF metadata, internal dates, pagination, markings. Each row records what the indicator does **not** establish and what would authenticate the edition. All files stay UNVERIFIED_MANUAL / USER_SUPPLIED / HASH_ONLY |
+| `mml_provision_crosswalk_v2_cycle3.csv` | 858 | Versioned copy of the crosswalk with a per-row verification state. 436 LOCATOR_IMAGE_CHECKED (including 2 corrections for s.2 in vol 2(AA)); 422 REQUIRES_VERIFICATION. `render_source` separates original PDF pages from LibreOffice renders of DOC text. Built by `scripts/build_crosswalk_v2_cycle3.py` |
+| `procedural_contradictions_cycle3.csv` | 20 | Contradictions between MML guidance or transcriptions and the comparator statutory text/version, each with an exact question for an independent reviewer. Proposals only |

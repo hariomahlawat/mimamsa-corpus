@@ -55,6 +55,65 @@ Updated 2026-11-22 (cycle 3). Branch: `claude/ws-a-statutory` (base 34e75aa9). W
     - 6 rows cite baseline PICs that carry a render SHA-256.
   - No rows were left without evidence.
 
+## Cycle 3 statutory completeness (branch `claude/ws-a-cycle3`, worktree `/home/user/ws-a-c3`, base 9b48b08e)
+- [x] **r.15 "or Military Secretary"** (`r15_military_secretary_trace_cycle3.csv`).
+  - The 1961 substituted r.15 (printed p.142, image-checked WSA-PIC-55/WSA-PIC-56) does **not** contain the words.
+  - No held instrument from 1961 to 2022 adds them:
+    - S.R.O. 235/1991 adds them to r.13A only (WSA-PIC-58);
+    - S.R.O. 61/1991 adds "or the Adjutant General" to r.15A;
+    - S.R.O. 17(E)/1993 has no r.15 item.
+  - The source remains unidentified (OQ-A-10; WS-C XC-03 agrees). For independent coordinator check.
+- [x] **r.187(1) dossier** (`r187_evidence_dossier_cycle3.md`): consolidated. It stays OPEN until ACQ03 C2-05..09 are checked.
+- [x] **Army Act s.129** (`s129_trace_cycle3.csv`).
+  - The India Code compilation p.36 reads "an officer approved of" (image-checked WSA-PIC-59).
+  - Acts 37/1992 and 13/1975 do not touch s.129.
+  - The enacted Army Act 1950 was **located** on archive.org (Gazette Extraordinary 23-05-1950, `in.gazette.e.1950.306`). Its OCR reads "an officer approved of" (locator only). Acquisition request ACQ-C3-01.
+  - MML 2 "any person" stands alone. For independent coordinator check.
+- [x] **Completeness table** (`statutory_version_completeness_cycle3.csv`): 107 AR rules and 112 AA sections cited by the KB.
+
+  | Status | AR rules | AA sections |
+  | --- | --- | --- |
+  | ESTABLISHED_SUBJECT_TO_REGISTER_GAPS | 2 (r.13A, r.15A) | 0 |
+  | PARTIALLY_ESTABLISHED | 31 | 8 |
+  | NOT_ESTABLISHED | 74 | 104 |
+
+  - No AA section is established because the enacted 1950 text is not held.
+  - Base-text page numbers come from the text layer and are locators only.
+- [x] **Commencement readings** (`commencement_readings_cycle3.csv`): AR-010, AR-011 and AR-025 print no commencement clause (NOT_STATED_PENDING_ADVICE). AR-024 is corrected: r.1(2) states commencement on publication, and **both** items 2 and 3 carry the 04-06-1979 deeming clause.
+- [x] New PICs: `identity_transcription_register_cycle3.csv` (WSA-PIC-55..59). New acquisition needs: `acquisition_requests_cycle3.csv` (ACQ-C3-01..04).
+
+## Cycle 3 review fix (PR #24)
+- [x] Army Act s.137 was overstated. It now lists Act 37/1992, A.L.O. (No.3) 1956 and S.O. 3912(E)/2019; amendments are NOT ALL image-checked; status NOT_ESTABLISHED. s.2 now lists A.L.O. 1956.
+- [x] Regression check `tools/check_completeness_cycle3.py` (C1/C2 plus self-test): it fails on the old table and passes on the new one.
+- [x] Addendum `army_act_amendment_chain_addendum_cycle3.csv` (AA-C3-01..04). New acquisition rows ACQ-C3-05 and -06.
+- [x] Details in `REVIEW_FIX_CYCLE3.md`. AA counts: partial 9 → 8, not established 103 → 104.
+
+## Cycle 3 review follow-up (conditions on bfc9765a)
+- [x] The C2 self-test uses explicit fixtures (no vacuous pass). C1 uses token-boundary matching, with prefix-ID fixtures. Self-test 9/9.
+- [x] Documented limitation: Act 19/1955 "many sections" (OQ-A-13 in `open_questions_cycle3.csv`). Sections are not guessed.
+
+## Requests to the coordinator (other paths), cycle 3
+- **To WS-D (via coordinator):** please add `legal_knowledge/audit_work/WS-A-STATUTORY/army_act_amendment_chain_addendum_cycle3.csv` (AA-C3-01..04) as an input to `build_versioned_edges`.
+  - It covers: A.L.O. (No.3) 1956 for Army Act ss.2, 3, 4, 5, 137, 151, 174; S.O. 3912(E)/2019 for ss.137, 151, 174; Act 36/1957 repeal of s.194; and extension instruments that amend no section text.
+  - Columns follow `army_act_amendment_chain.csv`, plus `supersedes_or_extends` and `compilation_page_render_sha256`.
+  - WS-A has not edited any WS-D file.
+
+## Cycle 3 final reconciliation (branch claude/ws-a-cycle3-reconcile, base 2a66cd04)
+- [x] AA-C3-01 acquisition reference corrected from ACQ03-020 to ACQ03-021.
+- [x] ACQ03-029 now points to `in.gazette.e.1950.306` (UNVERIFIED; not fetched). AA-00 is superseded through a versioned note row AA-C3-05; AA-00 itself is not edited.
+- [x] Commencement fields agree with PR #28. Six stale carried rows are corrected from images. Commencement and deemed effect are now distinct columns (`retrospective_deemed_effect_from`). Legal effect is left to AQ-06.
+- [x] Details in `RECONCILE_CYCLE3.md`. Completeness self-test 9/9.
+- [x] Coordinator decision on 192ea2e6, applied:
+  - The nine commencement corrections are made **in place** in `provision_change_log.csv`, with a new `retrospective_deemed_effect_from` column.
+  - `provision_change_log_supersessions_cycle3.csv` is re-labelled as a change record (audit trail), not an authoritative source.
+- **WS-D tests expected to fail on this branch alone** until WS-D regenerates from the corrected log (no WS-D file edited), all in `test_legal_audit_versioned_edges.VersionedEdges`:
+  - `test_inputs_pinned_and_current`;
+  - `test_regeneration_is_byte_identical`;
+  - `test_stated_dates_are_the_registers_own`;
+  - `test_conflicting_evidence_present_in_real_versions`.
+
+  The first two already failed at base 2a66cd04.
+
 ## Next
 - After approval of ACQ-C2:
   - image-check the four pre-1960 instruments;

@@ -1,0 +1,108 @@
+{
+ "artifact": "WS-D canonical coverage (CP-01)",
+ "not_legal_correctness": true,
+ "supersedes_preserved": [
+  "coverage_scorecard.json",
+  "coverage_scorecard.md",
+  "coverage_reconciliation.csv",
+  "coverage_reconciliation.md",
+  "coverage_reconciliation.meta.json"
+ ],
+ "inputs": {
+  "kb": {
+   "path": "legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.jsonl",
+   "sha256": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1"
+  },
+  "cases": {
+   "path": "legal_knowledge/curated_originals/case_law/v0.9/cases_53.jsonl",
+   "sha256": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a"
+  },
+  "register": {
+   "path": "legal_knowledge/audit_work/PILOT-01/registers/source_code_resolution_v3.csv",
+   "sha256": "40b18c3dfff3ad81c099118a0ee058c28db5255a8c4ba47d4391bd1685e8d944"
+  },
+  "wsc_inventory": {
+   "path": "legal_knowledge/audit_work/WS-C-MML/kb658_source_coverage_inventory.csv",
+   "sha256": "da06631f9b3ac5207dc84508b03cd631831e3e88b825ac356e9fea2247bc17bc"
+  },
+  "wsc_lexicon": {
+   "path": "legal_knowledge/audit_work/WS-C-MML/case_name_lexicon.csv",
+   "sha256": "fc3055d4c0622d2770cda2488d0e766f1a0c72664f8a26fca121ea93add5a295"
+  },
+  "plaintext_index": {
+   "path": "legal_knowledge/audit_work/WS-D-QUALITY/plaintext_citation_index.csv",
+   "sha256": "7bd6d9b3f62aeef8a6505b07ad0026b28817dd50a4017b4b038bdd53eecf1ff6"
+  },
+  "scorecard_script": {
+   "path": "legal_knowledge/audit_work/WS-D-QUALITY/scripts/coverage_scorecard.py",
+   "sha256": "919d8a741a33c0152f7dc982910ce4ff221ed5fcf257956ee7b8b7c702e416a9"
+  },
+  "index_script": {
+   "path": "legal_knowledge/audit_work/WS-D-QUALITY/scripts/build_plaintext_index.py",
+   "sha256": "dac2d3d919640f6f758fec66dba41c981751dc08e62aedf7b2d407cd86fc6d82"
+  },
+  "crawler_corpus": {
+   "ref": "origin/raw-data",
+   "commit": "ad77758d4569ba6aafa955cc7843d874489e10f7"
+  }
+ },
+ "summary": {
+  "denominator_records": 658,
+  "citation_present": {
+   "NO": 77,
+   "YES": 581
+  },
+  "source_identified": {
+   "ALL": 396,
+   "NONE": 108,
+   "NOT_APPLICABLE": 77,
+   "PARTLY": 77
+  },
+  "source_searchable": {
+   "ALL": 280,
+   "NONE": 88,
+   "NOT_APPLICABLE": 185,
+   "PARTLY": 105
+  },
+  "source_searchable_instrument_level_informational": {
+   "ALL": 473,
+   "NOT_APPLICABLE": 185
+  },
+  "anchored_full": {
+   "NO": 471,
+   "YES": 187
+  },
+  "quality_flags_records": {
+   "AMBIGUOUS_LOCATOR": 1,
+   "CASE_NAME_WITHOUT_CODE": 21,
+   "IDENTITY_KNOWN_TARGET_ABSENT": 9,
+   "INFERRED_IDENTITY": 61,
+   "NO_PINPOINT": 61,
+   "PLACEHOLDER": 16,
+   "PROVISION_FILES_ABSENT": 193,
+   "STRUCTURAL": 6,
+   "UNANCHORED_LOCATOR": 11
+  },
+  "by_family": {
+   "CODED": {
+    "records": 389,
+    "identified_ALL": 236,
+    "searchable_ALL": 181,
+    "anchored_full": 102
+   },
+   "PLAINTEXT": {
+    "records": 269,
+    "identified_ALL": 160,
+    "searchable_ALL": 99,
+    "anchored_full": 85
+   }
+  },
+  "items": {
+   "total": 983,
+   "identified": 718,
+   "inferred": 78,
+   "searchable": 500
+  },
+  "records_with_citation": 581
+ }
+}

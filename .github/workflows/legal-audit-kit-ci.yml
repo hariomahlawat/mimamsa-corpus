@@ -43,6 +43,12 @@ jobs:
         run: python legal_knowledge/audit_work/WS-D-QUALITY/scripts/hash_reproduction.py --out "$RUNNER_TEMP/hash_reproduction.json"
       - name: Relation graph integrity (no dangling KB/case/source/finding/review edges, no ID collisions)
         run: python legal_knowledge/audit_work/WS-D-QUALITY/scripts/relation_graph.py --no-write
+      - name: Versioned statutory edges regenerate byte-identically (no unstated effective date without a flag)
+        run: python legal_knowledge/audit_work/WS-D-QUALITY/scripts/build_versioned_edges.py --check
+      - name: Canonical coverage (CP-01) pinned inputs unchanged; full regeneration where the corpus ref exists
+        run: python legal_knowledge/audit_work/WS-D-QUALITY/scripts/canonical_coverage.py --check
+      - name: Proposed identity map pinned inputs unchanged; full regeneration where the corpus ref exists
+        run: python legal_knowledge/audit_work/WS-D-QUALITY/scripts/build_identity_map.py --check
       - name: Check frozen originals are unchanged
         run: |
           echo "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1  legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.jsonl" > /tmp/originals.sha256

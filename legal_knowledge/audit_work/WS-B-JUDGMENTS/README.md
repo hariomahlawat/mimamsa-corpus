@@ -113,3 +113,48 @@ All counts come from `intake_stats.json`.
   - S P Rathore on Ram Avtar (mirror);
   - Pandappa (mirror).
 - **Page images.** 5 more pages were checked (Isaac pp.61 and 69, PPS Bedi p.31, Jasbir p.32, Virendra p.13). The cycle-1 Isaac para 19.4 row (p.69) moved from text layer to page image.
+
+## Cycle 3 (2026-11-22, branch claude/ws-b-cycle3)
+New files only. No cycle 1–2 row was rewritten; supersessions are recorded in `corrections_cycle3.csv`.
+
+| File | What | Rows |
+| --- | --- | --- |
+| `authoritative_copy_status_cycle3.csv` | the 27 curated cases held only as intern mirror copies: is an official copy held, or locatable read-only? | 27 |
+| `pending_acquisition_cycle3.csv` | official copies still needed (27 mirror-only plus 5 unresolved) | 32 |
+| `identity_resolution_cycle3.csv` | the 5 unresolved cases, plus proposed resolutions of A-C2-01 (Ram Avtar) and A-C2-02 (Ram Sarup) | 7 |
+| `holdings_register_cycle3.csv` | Naga conclusions; Manjeet, Angad and Keshar ratio (mirror); Mullikote CORRECTED version; Girish paras 13–15; Parashotam paras 18–21; Ranjit s.130 | 20 |
+| `subsequent_treatment_cycle3.csv` | 4 classified rows, plus citation leads from a name scan of the intern corpus (editorial headnote labels marked as not evidence) | 81 |
+| `citation_scan_summary_cycle3.csv` | per-case counts of later citing documents (discovery only; no strength inferred) | 18 |
+| `kb658_case_name_links_cycle3.csv` | the 37 KB records flagged by WS-C (`case_names_matched` / CASE_NAME_WITHOUT_CODE / PLAIN_CASE_CITATION_UNRESOLVED), mapped to case identities with KB text evidence | 43 |
+| `corrections_cycle3.csv` | versioned corrections and process deviations | 3 |
+| `network_lookup_log_cycle3.csv` | every network request in cycles 2–3 | 14 |
+
+**Rebuild:**
+```
+python3 tools/cycle3_citescan.py <scan.json> <snap>
+python3 tools/cycle3_registers.py --snapshot <snap> --citescan <scan.json> --wsc-inventory <WS-C inventory csv> --netlog <tsv>
+```
+
+**Findings**
+
+*Official copies for the 27 mirror-only cases*
+- None is held in the scratchpad. I identified the 33 JUDIS "probe" PDFs and the other held PDFs by their cover pages; none is one of the 27.
+- 11 have an official-host URL in the curated record. 10 of those are on `api.sci.gov.in`, where a HEAD request gave 404 for every URL, including a control URL whose bytes were obtained earlier. The result is therefore inconclusive.
+- Buttar's URL is a government-hosted SCR volume (s3waas), which answered HEAD 200 with a PDF.
+- 16 have no official URL located. All 27 are queued for acquisition.
+
+*Identities*
+- Ram Avtar: the official Girish judgment (p.10, page image) and the court's office report support the identity "SC order of 10.12.2014, C.A. 418/2012". The curated URL is the S P Rathore judgment, so it is the wrong document.
+- Ram Sarup: the official P.P.S. Bedi copy and four mirror judgments print [1964] 5 SCR 931. Only Jasbir prints volume 4. The proposal is volume 5; agreement between copies is not authority, so confirmation from the Hugging Face copy is still needed.
+- Ravinder Kumar: a Delhi HC 2025 mirror judgment gives a lead citation, (2015) 12 SCC 291.
+- Girish clarification, Praful Desai and the Ranjit Thakur review order remain unresolved.
+
+*Holdings*
+- Of the 10 curated cases with an empty holding, 8 now have proposals:
+  - Navjot, on an official copy (cycle 1);
+  - Manjeet, Angad, Baljit, Balachandran, Surinder, Keshar and Naga, on mirror copies only.
+- Mani Ram and Dhingra cannot be done, because no copy is held.
+- 8 new page images. Each is listed with its SHA-256 in the holdings rows.
+
+*Correction CR-C3-01*
+- Cycle-1 row WSB-H-030 cites the second, uncorrected version of the Mullikote PDF. That version is numbered differently from the CORRECTED one.

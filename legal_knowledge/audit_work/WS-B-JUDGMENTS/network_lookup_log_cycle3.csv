@@ -1,0 +1,15 @@
+utc_time,purpose,method,url,result,note
+2026-11-22T17:06:59Z,KULDEEP,HEAD,https://api.sci.gov.in/supremecourt/2017/17096/17096_2017_8_1501_17034_Judgement_25-Sep-2019.pdf,404 text/html 0 Content-Length: 3283;,NO_BODY_BYTES_REQUESTED
+2026-11-22T17:07:04Z,NITISHA,HEAD,https://api.sci.gov.in/supremecourt/2020/20645/20645_2020_35_1501_27144_Judgement_25-Mar-2021.pdf,404 text/html 0 Content-Length: 3284;,NO_BODY_BYTES_REQUESTED
+2026-11-22T17:07:09Z,RANDHIR,HEAD,https://api.sci.gov.in/supremecourt/2016/42844/42844_2016_10_43_14804_Judgement_08-Jul-2019.pdf,404 text/html 0 Content-Length: 3283;,NO_BODY_BYTES_REQUESTED
+2026-11-22T17:07:14Z,BABITA,HEAD,https://api.sci.gov.in/supremecourt/2010/20695/20695_2010_8_1501_20635_Judgement_17-Feb-2020.pdf,404 text/html 0 Content-Length: 3283;,NO_BODY_BYTES_REQUESTED
+2026-11-22T17:07:19Z,VISWAN,HEAD,https://api.sci.gov.in/jonew/judis/9784.pdf,404 text/html 0 Content-Length: 3283;,NO_BODY_BYTES_REQUESTED
+2026-11-22T17:07:24Z,ANNIE,HEAD,https://api.sci.gov.in/supremecourt/2015/35837/35837_2015_3_1502_21539_Judgement_17-Mar-2020.pdf,404 text/html 0 Content-Length: 3284;,NO_BODY_BYTES_REQUESTED
+2026-11-22T17:07:29Z,HIMMAT,HEAD,https://api.sci.gov.in/jonew/judis/16822.pdf,404 text/html 0 Content-Length: 3283;,NO_BODY_BYTES_REQUESTED
+2026-11-22T17:07:34Z,SP_RATHORE,HEAD,https://api.sci.gov.in/supremecourt/2018/33390/33390_2018_11_15_19085_Judgement_11-Dec-2019.pdf,404 text/html 0 Content-Length: 3284;,NO_BODY_BYTES_REQUESTED
+2026-11-22T17:07:39Z,EEVFAM,HEAD,https://api.sci.gov.in/jonew/judis/43775.pdf,404 text/html 0 Content-Length: 3283;,NO_BODY_BYTES_REQUESTED
+2026-11-22T17:07:44Z,SHIVENDRA,HEAD,https://api.sci.gov.in/jonew/judis/20849.pdf,404 text/html 0 Content-Length: 3284;,NO_BODY_BYTES_REQUESTED
+2026-11-22T17:07:49Z,BUTTAR,HEAD,https://cdnbbsr.s3waas.gov.in/s3ec0490f1f4972d133619a60c30f3559e/documents/supremecourtreport/2011_v4_pi.pdf,"200 application/pdf 0 content-length: 507320;last-modified: Sat, 04 May 2024 18:05:30 GMT;",NO_BODY_BYTES_REQUESTED
+2026-11-22T17:08:06Z,CONTROL_DHARAMVIR,HEAD,https://api.sci.gov.in/jonew/judis/40493.pdf,HTTP/1.1 200 Connection Established;HTTP/1.1 404 Not Found;Content-Type: text/html;Content-Length: 3284;,NO_BODY_BYTES_REQUESTED
+2026-11-22 (cycle 2),MANI_RAM/RAM_AVTAR office reports,GET,api.sci.gov.in officereport x2 (HTML),200,HTML text only; sha recorded in reviewed_matches.py
+2026-11-22 (cycle 2),diary directory probes,GET,api.sci.gov.in/supremecourt/2011/13135/ and /21005/,200 empty,no listing

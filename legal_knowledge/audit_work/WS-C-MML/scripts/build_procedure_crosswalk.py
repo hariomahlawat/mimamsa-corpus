@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """procedure_crosswalk.csv: procedural step -> Army Act section(s) -> Army Rule(s) with version events
 (ARMY-RULES-CHAIN-01 chronology + WS-A provision_change_log; publication date, commencement as printed and
-effective date kept distinct) -> MML locators (MML 2 page, image-verified where in crosswalk_locator_verification.csv;
+effective date kept distinct; a chain retrospective_deemed_effect_from value is carried in its own column) -> MML locators (MML 2 page, image-verified where in crosswalk_locator_verification.csv;
 MML 1 Part I paras citing the provisions; vol 2 DOC locators) -> KB records citing the provisions; and a flag where
 MML text predates an amendment. Stdlib; deterministic. Coverage/locator work only; no legal determination.
 Usage (repo root): python3 .../build_procedure_crosswalk.py <path to WS-A provision_change_log.csv>"""
@@ -63,10 +63,10 @@ def main():
         for n in nums(ar):
             for c in chron:
                 if c["instrument_id"] and c["instrument_id"] != "AR-029" and rule_hits(c["provision"], n):
-                    evs.append((f"r.{n}", c["instrument_id"], c["instrument"], c["event"], c["publication_date"], c["commencement_as_printed"], c["effective_date"], c["effective_date_status"]))
+                    evs.append((f"r.{n}", c["instrument_id"], c["instrument"], c["event"], c["publication_date"], c["commencement_as_printed"], c["effective_date"], c["effective_date_status"], c.get("retrospective_deemed_effect_from", "")))
             for p in pcl:
                 if p["change_id"].startswith("PCL-93-") and p["change_id"] != "PCL-93-N" and rule_hits(p["provision"], n):
-                    evs.append((f"r.{n}", "AR-029 " + p["change_id"], "S.R.O. 17(E)/1993", p["change_type"], p["publication_date"], p["commencement_as_printed"][:40], p["effective_date"], p["effective_date_status"][:40]))
+                    evs.append((f"r.{n}", "AR-029 " + p["change_id"], "S.R.O. 17(E)/1993", p["change_type"], p["publication_date"], p["commencement_as_printed"][:40], p["effective_date"], p["effective_date_status"][:40], ""))
         seen, ev2 = set(), []
         for e in evs:
             if e[:4] not in seen:
@@ -106,6 +106,8 @@ def main():
                      "commencement_as_printed": " | ".join(f"{e[0]}:{e[5] or 'n/a'}" for e in ev2),
                      "effective_dates": " | ".join(f"{e[0]}:{e[6] or ''}" for e in ev2),
                      "effective_date_status": " | ".join(f"{e[0]}:{e[7] or 'n/a'}" for e in ev2),
+                     # separate field, never merged into effective dates (ARMY-RULES-CHAIN-01 column added by PR #28)
+                     "retrospective_deemed_effect_from": " | ".join(f"{e[0]}:{e[1]}:{e[8]}" for e in ev2 if e[8]),
                      "mml2_locators": "; ".join(mml2), "mml1_paras": "; ".join(m1p), "vol2_doc_locators": "; ".join(doc[:30]),
                      "mml_currency_flag": flag, "mml_currency_notes": note,
                      "kb_record_ids": ";".join(recs), "n_kb_records": len(recs), "calibration_records": ";".join(r for r in recs if r in cal),
