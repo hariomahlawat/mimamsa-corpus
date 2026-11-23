@@ -2,8 +2,8 @@ key,source_id,basis
 act-army-1950,C5-SRC-P0-ARMY-ACT-1950-INDIACODE,WS-D doc id; only the compilation is held (Gazette as enacted not held)
 rules-army-rules-1954,C5-SRC-P0-ARMY-RULES-1954,"WS-D doc id; 1954 Gazette facsimile held (text as notified, not current text)"
 act-armed-forces-tribunal-2007,C5-SRC-P0-AFT-ACT-2007-INDIACODE,"WS-D doc id; compilation held, Gazette not held"
-act-bnss-2023,C5-SRC-P0-BNSS-2023,WS-D doc id; compilation held
-act-bsa-2023,C5-SRC-P0-BSA-2023,WS-D doc id; compilation held
+act-bnss-2023,C5-SRC-P0-BNSS-2023-INDIACODE,WS-D doc id; compilation held
+act-bsa-2023,C5-SRC-P0-BSA-2023-INDIACODE,WS-D doc id; compilation held
 act-bns-2023,C5-SRC-P1-BNS-2023,WS-D doc id; not held
 rules-aft-procedure-rules-2008,C5-SRC-P1-AFT-PROC-RULES,WS-D doc id
 rules-aft-amendment-procedure-rules-2011,C5-SRC-P1-AFT-PROC-RULES,WS-D doc id

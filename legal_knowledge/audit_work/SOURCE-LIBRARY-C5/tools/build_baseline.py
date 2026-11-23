@@ -41,7 +41,11 @@ def pdf_profile(p):
         d = pymupdf.open(p)
         n = d.page_count
         chars = [len(d[i].get_text("text").strip()) for i in range(n)]
-        imgs = [len(d[i].get_images()) for i in range(n)]
+        def drawn(pg):  # fraction of the page covered by images actually drawn (independent review RV-17)
+            area = abs(pg.rect)
+            cov = sum(abs(pymupdf.Rect(x["bbox"]) & pg.rect) for x in pg.get_image_info())
+            return min(cov / area, 1.0) if area else 0.0
+        imgs = [1 if drawn(d[i]) >= 0.5 else 0 for i in range(n)]
     except Exception as e:  # damaged file: report, do not guess
         return "", f"OPEN_FAILED:{type(e).__name__}"
     texty = sum(1 for c in chars if c >= 200)
@@ -49,14 +53,14 @@ def pdf_profile(p):
     if n == 0:
         cls = "EMPTY"
     elif texty == 0:
-        cls = "IMAGE_ONLY_NO_TEXT_LAYER" if any(imgs) else "NO_TEXT_NO_IMAGES"
+        cls = "IMAGE_ONLY_NO_TEXT_LAYER" if any(imgs) else "NO_TEXT_LAYER_NO_PAGE_IMAGE"
     elif scanned == texty == n:
         cls = "SCANNED_IMAGE_WITH_TEXT_LAYER_ALL_PAGES"  # text layer is OCR or overlay; not born-digital
     elif scanned == 0 and texty == n:
         cls = "TEXT_LAYER_NO_IMAGES_ALL_PAGES"  # consistent with born-digital or retyped; not proof of either
     else:
         cls = f"MIXED_TEXT_{texty}_SCANNED_{scanned}_OF_{n}"
-    return str(n), cls
+    return str(n), cls  # heuristic: a page is "scanned" when drawn images cover >= 50% of it
 
 
 def main():

@@ -1,3 +1,4 @@
+utc_time	method	url	http_status	bytes_or_content_length	purpose
 2026-11-23T04:20:20Z	GET	https://archive.org/robots.txt	200	238	robots
 2026-11-23T04:21:02Z	GET	https://www.indiacode.nic.in/robots.txt	000	0	robots
 2026-11-23T04:21:03Z	GET	https://egazette.gov.in/robots.txt	000	0	robots

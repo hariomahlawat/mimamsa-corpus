@@ -15,10 +15,11 @@ The rules that bound this cycle:
 | --- | --- |
 | `baseline/` | frozen manifest (original hashes, open PRs), `held_binaries_manifest.csv` (93 held binary paths, 67 unique files, all re-hashed MATCH, with page count and text-layer class), `existing_register_index.csv` (147 earlier CSV registers with sha256) |
 | `discovery/` | brief, candidates (`A_` DSR/regulations, `B_` pension/service, `C_` statutes/Gazette: 86 rows) and request logs (`*_requests.tsv`) |
-| `inputs/` | hand-authored, evidence-referenced inputs: target publications, acquisition batches, corpus/case source maps, C5 conflict and amendment additions |
+| `inputs/` | hand-authored, evidence-referenced inputs: target publications, acquisition batches, corpus/case source maps, C5 conflict and amendment additions, C5 page-image checks (`page_image_checks_c5.csv`, renders in `reports/evidence/`) |
 | `registers/` | **built** registers (do not edit): source master (D1), acquisition (D3), amendment + provision chain (D4), provision register, source conflicts, corpus crosswalk + coverage summary (D6) |
 | `schemas/c5_registers.schema.json` | column contracts and controlled values; which existing schema each register reuses |
 | `reports/` | D1–D8 |
+| `review/` | independent reviewer output, verbatim (`review_findings.csv`, `review_log.md`) |
 | `tools/` | `build_baseline.py` (local; needs the held files), `build_registers.py` (deterministic, CI-safe), `check_c5.py` (validator) |
 
 ## Reproduce

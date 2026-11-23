@@ -1,3 +1,4 @@
+utc_time	method	url	http_status	bytes_or_content_length	purpose
 2026-11-23T04:20:25Z	GET	https://desw.gov.in/robots.txt	403	199	robots
 2026-11-23T04:20:29Z	GET	https://desw.gov.in/en/pension-regulations	200	42942	listing
 2026-11-23T04:20:32Z	GET	https://desw.gov.in/en/Publications	200	42554	listing

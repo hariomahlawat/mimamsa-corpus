@@ -120,15 +120,20 @@ def chain_rows():
             "evidence": "; ".join(x for x in (f'sha256={r["file_sha256"]}' if r["file_sha256"] else "", r["page_anchor"], r["image_check_ids"]) if x) or "NOT_CAPTURED",
             "evidence_level": r["evidence_level"], "superseded_by": ";".join(sup.get(r["change_id"], [])),
             "origin_register": "WS-A-STATUTORY/provision_change_log.csv", "origin_id": r["change_id"]})
+    loc = {r["instr_id"]: r for r in read(AW / "ARMY-RULES-CHAIN-01/army_rules_instrument_register.csv")}
     for i, r in enumerate(read(AW / "ARMY-RULES-CHAIN-01/army_rules_provision_chronology.csv"), 1):
+        ir = loc.get(r["instrument_id"], {})
         rows.append({
             "chain_row_id": f"C5-PCH-ARC-{i:03d}", "publication_source_id": base_source("army-rules"), "provision": r["provision"], "instrument_ref": r["instrument_id"],
             "amendment_instrument": f'{r["instrument_id"]} {r["instrument"]}'.strip(), "change_type": r["event"],
             "before_text_ref": "NOT_CAPTURED (see text registers)", "after_text_ref": "NOT_CAPTURED (see text registers)",
             "publication_date": r["publication_date"] or "NOT_CAPTURED", "effective_date": r["effective_date"],
             "effective_date_status": r["effective_date_status"], "applicable_period": r["temporal_note"] or "NOT_DETERMINED",
-            "evidence": r["evidence_level"], "evidence_level": r["evidence_level"], "superseded_by": "",
-            "origin_register": "ARMY-RULES-CHAIN-01/army_rules_provision_chronology.csv", "origin_id": f"data row {i}"})
+            "evidence": "; ".join(x for x in (f'sha256={ir["sha256"]}' if re.fullmatch(r"[0-9a-f]{64}", ir.get("sha256", "")) else "",
+                                               ir.get("evidence_locator", ""), ir.get("gazette_publication", "")) if x) or "NOT_CAPTURED",
+            "evidence_level": r["evidence_level"], "superseded_by": "",
+            "origin_register": "ARMY-RULES-CHAIN-01/army_rules_provision_chronology.csv",
+            "origin_id": f'{r["instrument_id"]}|{r["provision"]}|{r["event"]} (data row {i})'})
     return rows
 
 
@@ -260,6 +265,8 @@ def amended_rules():
     out = {"r23", "r182", "r193", "r194"}  # reserved conflicts (C-01, SC4-01, C-08, C-09)
     texts = [r["provision"] for r in read(AW / "WS-A-STATUTORY/provision_change_log.csv") if not r["instrument_ref"].startswith("AA")]
     texts += [r["provision"] for r in read(AW / "ARMY-RULES-CHAIN-01/army_rules_provision_chronology.csv") if r["event"].lower() not in ("enacted", "enacts", "principal")]
+    # instrument-register provisions_affected, including HINT_ONLY / TO_CHECK instruments (independent review RV-31)
+    texts += [r["provisions_affected"] for r in read(AW / "ARMY-RULES-CHAIN-01/army_rules_instrument_register.csv") if r["instr_id"] != "AR-000"]
     for t in texts:
         for n in re.findall(r"\br{1,2}\.?\s*(\d+[A-Z]?)", t):
             out.add("r" + n)
@@ -297,7 +304,8 @@ def crosswalk(master):
                   and set(loc.split(",")) & amended):
                 status, why = "PARTIAL_MATCH", "as-notified 1954 text held, but a cited rule has a recorded amendment or reserved conflict: current wording needs the chain"
             elif st == "id" and loc and src["holding_state"].startswith("HELD_PRIMARY"):
-                status, why = "EXACT_ANCHOR", "identified, provision locator present, primary copy held (anchor to the held version; currency not implied)"
+                status, why = "EXACT_ANCHOR", ("identified, provision locator present, primary copy held (anchor to the held version; currency not implied"
+                                               + ("; Army Rules chain incomplete: instruments with unknown provisions affected exist)" if sid == "C5-SRC-P0-ARMY-RULES-1954" else ")"))
             else:
                 status, why = "PARTIAL_MATCH", f"{'inferred identity' if st != 'id' else 'no provision locator' if not loc else 'held copy is ' + src['holding_state']}"
             rows.append({"source_id": sid, "provision_id": f"{key}#{loc}" if loc else "", "knowledge_base_record_id": r["record_id"], "case_id": "",

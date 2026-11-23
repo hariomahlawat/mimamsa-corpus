@@ -10,7 +10,7 @@ Checks:
     CHECKED_FOR_RELEVANT_PERIOD, which no row in this package has);
  6. every acquisition item is NOT_APPROVED and names a required approval;
  7. discovery request logs exist for every candidate file, never touch blocked hosts, and record no binary GET;
- 8. reserved conflict states equal the owner's reserved list;
+ 8. reserved conflict states equal the owner's reserved list; committed page renders match their recorded hashes;
  9. with --verify-files <held-root>: every held path re-hashes to its manifest value.
 Exit 0 when clean; 1 with a list of errors otherwise."""
 import argparse, csv, hashlib, json, re, sys
@@ -23,14 +23,14 @@ PKG = B.PKG
 REPO = B.REPO
 VOCAB = {
     "publication_type": {"STATUTE", "SUBORDINATE_LEGISLATION", "REGULATION", "ADMINISTRATIVE_INSTRUCTION", "MANUAL",
-                         "GAZETTE_NOTIFICATION", "JUDICIAL", "SECONDARY_COMMENTARY", "CATALOGUE_RECORD", "COMPILATION"},
+                         "GAZETTE_NOTIFICATION", "JUDICIAL", "SECONDARY_COMMENTARY", "CATALOGUE_RECORD", "COMPILATION", "PARLIAMENTARY_RECORD"},
     "holding_state": {"HELD_PRIMARY_GAZETTE_FACSIMILE", "HELD_PRIMARY_GAZETTE_GOVERNMENT_SCAN", "HELD_PRIMARY_OFFICIAL_COURT_COPY",
-                      "HELD_PRIMARY_AUTHENTICATION_PENDING", "HELD_GOVERNMENT_COMPILATION", "HELD_GOVERNMENT_COMPILATION_EXTRACT",
+                      "HELD_AUTHENTICATION_PENDING", "HELD_GOVERNMENT_COMPILATION", "HELD_GOVERNMENT_COMPILATION_EXTRACT",
                       "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED", "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
                       "HELD_UNVERIFIED_MANUAL", "NOT_HELD_LOCATED", "NOT_HELD_NOT_FOUND", "NOT_HELD_NOT_CHECKED",
                       "NOT_HELD_RESTRICTED_SUSPECTED"},
     "currency_status": {"HISTORICAL_SUPERSEDED", "HISTORICAL_VERSION", "CURRENCY_NOT_ESTABLISHED", "NOT_APPLICABLE_JUDGMENT",
-                        "AMENDMENT_INSTRUMENT"},
+                        "AMENDMENT_INSTRUMENT", "DECLARATION_INSTRUMENT", "CORRIGENDUM_INSTRUMENT", "NOT_APPLICABLE_RECORD"},
     "amendment_chain_status": {"NOT_CHECKED", "PARTIAL", "NOT_APPLICABLE", "CHECKED_FOR_RELEVANT_PERIOD"},  # policy v1; brief label AMENDMENT_CHAIN_INCOMPLETE is a parenthesised qualifier
     "discovery_state": {"FOUND_CANDIDATE", "NOT_FOUND", "NOT_CHECKED", "BLOCKED_ACCESS", "RESTRICTED_MARKING_SUSPECTED"},
     "evidence_status": {"EXACT_ANCHOR", "PARTIAL_MATCH", "MISSING_EVIDENCE"},
@@ -114,6 +114,10 @@ def main():
     for cid, st in EXPECTED_RESERVED.items():
         if cid not in conf or conf[cid]["reserved_status"] != st:
             err.append(f"reserved state for {cid} missing or changed")
+    for r in read(PKG / "inputs/page_image_checks_c5.csv"):
+        f = PKG / r["render_file"]
+        if not re.fullmatch(r"[0-9a-f]{64}", r["render_png_sha256"]) or not f.exists() or sha(f) != r["render_png_sha256"]:
+            err.append(f"{r['check_id']}: render file missing or hash mismatch")
     disc = PKG / "discovery"
     for cf in sorted(disc.glob("*_candidates.csv")):
         log = disc / cf.name.replace("_candidates.csv", "_requests.tsv")

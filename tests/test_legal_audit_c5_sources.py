@@ -51,7 +51,7 @@ class C5Package(unittest.TestCase):
     def test_primary_only_with_register_or_held_primary_class(self):
         auth = {r["sha256"]: r for r in csv.DictReader(open(REPO / "legal_knowledge/audit_work/CALIBRATION-02/registers/source_authentication_register.csv", encoding="utf-8"))}
         for r in read("source_master_register.csv"):
-            if r["holding_state"].startswith("HELD_PRIMARY") and r["holding_state"] != "HELD_PRIMARY_AUTHENTICATION_PENDING":
+            if r["holding_state"].startswith("HELD_PRIMARY"):
                 self.assertTrue(any(s in auth and auth[s]["authentication_state"] == "PROVENANCE_DOCUMENTED" for s in r["sha256"].split(";")),
                                 f"{r['source_id']} is HELD_PRIMARY without a PROVENANCE_DOCUMENTED register row")
 
