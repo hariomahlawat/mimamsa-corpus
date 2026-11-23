@@ -1,7 +1,7 @@
 # Final gate (exit codes read directly; recorded before commit)
 check_calibration02_verify_files: exit 0
 schema: exit 0
-unittests: exit 0
+unittests: exit 0 (293 tests at final head)
 pilot01_strict: exit 0
 r23_strict: exit 0
 code_inventory: exit 0

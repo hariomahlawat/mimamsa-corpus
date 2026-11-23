@@ -298,7 +298,7 @@ class EvidenceClassification(unittest.TestCase):
 
     def test_12_register_row_without_provenance_is_not_primary(self):
         ev = self.ev_mod.Evidence([{"scratchpad_relative_path": "downloads/a.pdf", "sha256": self.H_OFF}],
-                                  [{"sha256": self.H_OFF, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY", "provenance_references": " "}])
+                                  [{"sha256": self.H_OFF, "authentication_state": "PROVENANCE_DOCUMENTED", "effective_source_class": "PRIMARY_OFFICIAL_COURT_COPY", "provenance_references": " ", "held_paths": "downloads/a.pdf"}])
         self.assertEqual(ev.classify_finding(self.f(self.H_OFF))[0], "PROVENANCE_UNKNOWN")
 
     def test_13_register_held_paths_must_match_index(self):
@@ -317,6 +317,10 @@ class EvidenceClassification(unittest.TestCase):
     def test_15_register_cannot_make_derived_text_primary(self):  # N2
         ev = self.ev_mod.Evidence([{"scratchpad_relative_path": "derived/a.txt", "sha256": self.H_OFF}], [self._reg(held_paths="derived/a.txt")])
         self.assertEqual(ev.classify_finding(self.f(self.H_OFF))[0], "NOT_PRIMARY_DERIVED_TEXT")
+
+    def test_17_register_row_without_held_pdf_or_doc(self):
+        ev = self.ev_mod.Evidence([{"scratchpad_relative_path": "downloads/a.png", "sha256": self.H_OFF}], [self._reg(held_paths="downloads/a.png")])
+        self.assertEqual(ev.classify_finding(self.f(self.H_OFF))[0], "PROVENANCE_UNKNOWN")
 
     def test_16_documented_bytes_also_held_as_secondary_are_pending(self):  # N3
         held = [{"scratchpad_relative_path": "downloads/a.pdf", "sha256": self.H_OFF}, {"scratchpad_relative_path": "downloads/secondary/a.pdf", "sha256": self.H_OFF}]
