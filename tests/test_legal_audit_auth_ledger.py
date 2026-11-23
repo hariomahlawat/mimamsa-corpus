@@ -730,6 +730,12 @@ class ReReview(unittest.TestCase):
         self.assertFalse(strength.host_ok("https://archive.org/search?q=x", "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE"))
         self.assertTrue(strength.host_ok("https://archive.org/download/x/y.pdf", "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE"))
         self.assertFalse(strength.host_ok("https://user@api.sci.gov.in/x", "PRIMARY_OFFICIAL_COURT_COPY"))
+        # confirmation C-01: userinfo on any host, and dot segments, never pass
+        self.assertFalse(strength.host_ok("https://x.gov.in@evil.example/x", "PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN"))
+        self.assertFalse(strength.host_ok("https://api.sci.gov.in:pw@evil.example/x", "PRIMARY_OFFICIAL_COURT_COPY"))
+        self.assertFalse(strength.host_ok("https://archive.org/download/../web/x", "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE"))
+        self.assertTrue(strength.host_ok("https://api.sci.gov.in:443/x.pdf", "PRIMARY_OFFICIAL_COURT_COPY"))
+        self.assertTrue(strength.host_ok("https://indiacode.gov.in/server/api/core/bitstreams/x/content", "PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN"))
 
     def test_n04_record_parsing(self):
         self.reject([entry_from_draft(DHARAMVIR, 1)], "different persons", decided_by="A. Owner", reviewer="A Owner")

@@ -44,3 +44,4 @@ The specification is `C6-01-PROVENANCE/addendum/INTEGRATION_ARCHITECTURE.md` rev
 - Copy fidelity relies on structural facts captured locally in C6-01. A signature byte range that spans the file is **not** proof of a valid signature.
 - Copy-structure facts exist only for the 36 C6-01 copies. A primary non-judicial class for any other copy fails closed until facts are captured.
 - Legacy image-check rows carry no result field and are accepted as identity evidence, as in Cycle 4. See `POLICY_OPTIONS.md` B.
+- **Converting the C6-01 draft to a ledger version** (a future reviewed PR) must rewrite each text-identity reference from the C6-01 path to `T:AUTH-LEDGER/evidence/copy_facts.csv#<copy_id>`. It must also fill the decision-chain fields from committed D-/R- records. The literal draft rows are rejected by design (Fable confirmation C-02).

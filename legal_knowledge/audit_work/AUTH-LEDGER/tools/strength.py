@@ -31,10 +31,13 @@ CLASS_HOSTS = {
 def host_ok(url, cls):
     """HTTPS only; exact host or dot-suffix; archive.org only for its item and download paths (never web.archive.org
     captures of other sites: re-review N-03)."""
-    m = re.match(r"^https://([^/:?#@]+)(/[^?#]*)?", url or "")
+    # host, optional numeric port, then '/', '?', '#' or end: userinfo ('user@host', 'host:pw@evil') never matches (C-01)
+    m = re.match(r"^https://([A-Za-z0-9.-]+)(?::[0-9]+)?(?=[/?#]|$)(/[^?#]*)?", url or "")
     if not m:
         return False
     h, path = m.group(1).lower(), m.group(2) or "/"
+    if any(seg in ("..", ".") for seg in path.split("/")):
+        return False
     allowed = CLASS_HOSTS.get(cls)
     if allowed is None:
         return False

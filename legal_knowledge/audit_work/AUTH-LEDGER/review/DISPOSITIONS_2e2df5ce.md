@@ -15,3 +15,14 @@ The re-review is filed verbatim in `fable_rereview_2e2df5ce.md` and `fable_rerev
 | N-06 | P3 | C7-PREP wording read as if B2 were adopted | **Fixed:** "If the owner adopts policy B2 …; rule 1 currently accepts them (B1)" |
 | F-06 residual | P3 | 18 of 76 mutants survived | **Addressed.** Each named survivor now has a test asserting its own message: M04b, M04c, M11, M14b, M17, M19, M23, M25c, M31, M35, M36, M38, M43, N56, N58, N63, N64 and N67 (the last via `__spec__ is None` and no `__cached__`). The suite has 96 tests |
 | F-08 / F-10 / F-12 / F-13 residuals | P3 | Edges | Zero-entry header and kind mapping fixed. The `D-v00019.md` prefix match is accepted as harmless, because the record must also name the exact version and entry. `effective_state` raising KeyError inside the library is accepted; the command line maps it to `LEDGER ERROR` exit 2 |
+
+## Focused confirmation of 96e0d251: VERDICT ACCEPT (no P1 or P2)
+The confirmation is filed verbatim in `fable_confirm_96e0d251.md`.
+- N-01 is fixed without reopening F-09.
+- N-02 to N-06 are fixed.
+- 84 of 86 mutants are killed. The two survivors are redundant controls: M11 is masked by the earlier reader-side check, and the T-reference `resolve` call is redundant with the exact-string check.
+
+| ID | Sev | Finding | Disposition |
+| --- | --- | --- | --- |
+| C-01 | P3 | Userinfo on non-archive hosts and `..` segments passed `host_ok` (latent) | **Fixed** in the next commit. The host must be followed by an optional numeric port and then `/`, `?`, `#` or end, so userinfo never matches. `.` and `..` path segments are refused. Tests are added to `test_n03_hosts` |
+| C-02 | INFO | Drafts pass only after their T reference is rewritten to the pinned `evidence/copy_facts.csv` | Expected. The reviewed PR that converts the draft into `v0001.csv` must make this substitution (recorded in DESIGN_NOTES) |
