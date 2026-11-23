@@ -71,6 +71,25 @@ def host_of(url):
     return (urlparse(u).hostname or "").lower()
 
 
+OFFICIAL_HOST_SUFFIXES = (".gov.in", ".nic.in")
+URL_RX = re.compile(r"https?://[^\s;|,)]+")
+
+
+def official_target(r):
+    """WS-B queue target text: new schema `official_target`, older schema `official_url_or_holder_if_known`."""
+    return (r.get("official_target") or r.get("official_url_or_holder_if_known") or "").strip()
+
+
+def official_host(text):
+    """Host of the first URL in the text, only when it is an official Indian government/court host (*.gov.in, *.nic.in).
+    A commercial database, a mirror (e.g. AWS Open Data) or any other host never yields a host."""
+    for u in URL_RX.findall(text or ""):
+        h = host_of(u)
+        if h and h not in COMMERCIAL_HOSTS and h not in EXCLUDED_HOSTS and not IPV4.match(h) and h.endswith(OFFICIAL_HOST_SUFFIXES):
+            return h, u
+    return "", ""
+
+
 def tokens(text):
     return set(re.findall(r"\b(?:AR|AA|GAP|OQ|CC|FID|XC|PG|C)-[A-Z0-9]+(?:-[A-Z0-9]+)*\b", text or ""))
 
@@ -283,6 +302,7 @@ def build_acquisitions():
         if 40 <= n <= 44:
             aliases.append("ACQ-C3-04")
             extra_deps.append(c3["ACQ-C3-04"]["closes"])
+        aliases += sorted(k for k, v in c3.items() if v["url"] and v["url"] == r["download_url"])
         h = r["host"]
         if aid == "ACQ03-016":
             scope = "not pinned in PR #23 config (owner keep/drop decision)"
@@ -334,7 +354,9 @@ def build_acquisitions():
         pin = (f"md5={r['expected_md5']}; bytes={r['expected_bytes']}" if r["expected_md5"] and r["expected_bytes"]
                else "NOT_PINNED")
         items.append(dict(
-            acq_id=rid, scope="WS-A-C3", aliases="", batch="WS-A cycle 3 (not configured; no config PR exists)",
+            acq_id=rid, scope="WS-A-C3",
+            aliases=";".join(sorted(x["acq03_id"] for x in rows("WS-A-STATUTORY/acq03_pinned_candidates.csv")
+                                    if r["url"] and x["download_url"] == r["url"])), batch="WS-A cycle 3 (not configured; no config PR exists)",
             item=r["target"], host=host_of(r["url"]) or "NOT_RECORDED", url_as_recorded=r["url"] or r["source"],
             authority_class=auth, pinned_integrity=pin, source_located="YES" if r["url"] else "NO",
             status_as_recorded=r["status"], deps=[r["closes"], r["reason"]], recorded_priority="NOT_RECORDED",
@@ -351,40 +373,42 @@ def build_acquisitions():
     rel = "WS-B-JUDGMENTS/pending_acquisition_cycle3.csv"
     c3rows = rows(rel)
     c3_specs = {r["spec_key"] for r in c3rows}
+    held_specs = {r["spec_key"] for r in rows("WS-B-JUDGMENTS/identity_resolution.csv")
+                  if "OFFICIAL_COPY_HELD" in r["identity_state"]}
     queue_rows = [(rel, i, r, "WS-B pending_acquisition_cycle3 (cycle C3 queue)") for i, r in enumerate(c3rows, 1)]
     rel1 = "WS-B-JUDGMENTS/pending_source_queue.csv"
     for i, r in enumerate(rows(rel1), 1):
         specs = [s for s in r["spec_key"].split(";") if s]
-        if specs and all(s in c3_specs for s in specs):
-            continue          # restated by a cycle-3 queue row (same spec_key)
+        if specs and all(s in c3_specs or s in held_specs for s in specs):
+            continue          # restated by a cycle-3 queue row (same spec_key), or official copy already held
         queue_rows.append((rel1, i, r, f"WS-B pending_source_queue (cycle {r['cycle']} queue; not restated in C3)"))
     for rel_, i, r, batch in queue_rows:
-        u = r["official_url_or_holder_if_known"].strip()
-        h = host_of(u)
+        tgt = official_target(r)
+        h, u = official_host(tgt)
         excl, notes = "", r["note"]
-        if h in COMMERCIAL_HOSTS:
-            excl = (f"COMMERCIAL_HOLDER_NOT_A_SOURCE: recorded holder {h} is a commercial legal database; never evidence, "
+        if any(host_of(x) in COMMERCIAL_HOSTS for x in URL_RX.findall(tgt)):
+            excl = ("COMMERCIAL_HOLDER_NOT_A_SOURCE: the recorded target names a commercial legal database; never evidence, "
                     "never contacted; an official court copy is still required")
             finding(f"CF-WSB-{r['queue_id']}", "COMMERCIAL_DATABASE_RECORDED_AS_HOLDER",
-                    f"{r['queue_id']} official_url_or_holder_if_known is {u}; must not be used as a source",
-                    f"{PFX}{rel_}")
-        located = "YES" if (h and h not in COMMERCIAL_HOSTS and h not in EXCLUDED_HOSTS and not IPV4.match(h)) else "NO"
+                    f"{r['queue_id']} target names a commercial legal database; must not be used as a source", f"{PFX}{rel_}")
+        located = "YES" if h else "NO"
         specs = [s for s in r["spec_key"].split(";") if s]
         cases = [c for c in (r.get("case53_id") or "").split(";") if c]
-        deps = set()
+        deps = set(re.findall(r"\b[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+\b|\bSC\d+\b", r.get("dependent_kb_records", "")))
         for c in cases:
             deps |= xw_by_case.get(c, set())
-        for s in specs:
-            deps |= xw_by_spec.get(s, set())
+        for s_ in specs:
+            deps |= xw_by_spec.get(s_, set())
         chk = r.get("official_url_http_check", "")
+        prior = [x for x in re.split(r"[;\s]+", r.get("prior_queue_ids", "")) if re.match(r"PQ-", x)]
+        status = r["action"] + "".join(f"; {c}={r[c]}" for c in ("approval_state", "downloaded_by_ws_b") if r.get(c))
         items.append(dict(
-            acq_id=r["queue_id"], scope="WS-B", aliases="", batch=batch,
+            acq_id=r["queue_id"], scope="WS-B", aliases=";".join(prior), batch=batch,
             item=" ".join(x for x in [r["spec_key"], r.get("case53_id", ""), r["court"], r["case_number"], r["decision_date"]] if x),
-            host=(f"NONE (commercial holder {h} recorded upstream; not a source, never contacted)" if h in COMMERCIAL_HOSTS
-                  else (h if h else "NOT_RECORDED")), url_as_recorded=u,
+            host=h or "NOT_RECORDED (no official-host URL recorded)", url_as_recorded=u or tgt,
             authority_class="NOT_RECORDED (target: official court copy)",
             pinned_integrity="NOT_PINNED (no expected hash recorded)", source_located=located,
-            status_as_recorded=r["action"] + (f"; downloaded_by_ws_b={r['downloaded_by_ws_b']}" if r.get("downloaded_by_ws_b") else ""),
+            status_as_recorded=status,
             deps=sorted(deps), recorded_priority=r["priority"] or "NOT_RECORDED", rec_norm=norm_priority(r["priority"]),
             exclusion=excl, notes="; ".join(x for x in [notes, (f"official_url_http_check={chk}" if chk else "")] if x)[:400],
             source_file_row=cite(rel_, r["queue_id"], i)))
@@ -611,6 +635,7 @@ def build_auth(acq):
             case53_id="n/a", official_copy="n/a (manual; see current_state)", mirror_copy="n/a",
             http_availability="n/a (user-supplied file; no online source recorded)", identity_status="n/a",
             identification_uncertainty="edition undated; see current_state", acquisition_request="NO_ACQUISITION_REQUEST",
+            open_inconsistencies="n/a",
             current_state=(f"edition_status={e['edition_status']}; authentication_evidence={e['authentication_evidence']}; "
                            f"document_authority={e['document_authority']}; carrier_provenance={e['carrier_provenance']}; "
                            f"copy_fidelity={e['copy_fidelity']} (all as recorded)"),
@@ -641,7 +666,7 @@ def build_auth(acq):
 
     def entry(spec):
         return J.setdefault(spec, {"case53": set(), "label": "", "src": [], "official": [], "mirror": [], "http": [],
-                                   "identity": [], "uncert": [], "queues": {}, "notes": [], "ev": []})
+                                   "identity": [], "uncert": [], "queues": {}, "notes": [], "ev": [], "c3prio": []})
 
     def needs(spec):
         return bool(spec) and spec not in held
@@ -711,8 +736,22 @@ def build_auth(acq):
                 d["label"] = d["label"] or k
                 pk = ps[ks.index(k)] if len(ks) == len(ps) and len(ps) > 1 else r["priority"]
                 d["queues"][r["queue_id"]] = pk
-                if has_check and r.get("official_url_http_check"):
-                    d["http"].append(f"{r['official_url_http_check']} (pending_acquisition_cycle3.csv {r['queue_id']})")
+                if has_check:
+                    d["c3prio"].append(pk)
+                    q = f"(pending_acquisition_cycle3.csv {r['queue_id']})"
+                    tgt = official_target(r)
+                    oh, ou = official_host(tgt)
+                    if r.get("official_url_http_check") or tgt:
+                        d["http"].append(f"{r.get('official_url_http_check') or 'NOT_RECORDED'}; target: "
+                                         f"{(ou + ' (official host ' + oh + ')') if oh else (tgt or 'NOT_RECORDED')} {q}")
+                    if r.get("official_copy_held"):
+                        d["official"].append(f"{r['official_copy_held']} {q}")
+                    if r.get("mirror_copy") and r["mirror_copy"].strip().lower() != "none":
+                        d["mirror"].append(f"{r['mirror_copy']} {q}")
+                    if r.get("identity_status"):
+                        d["identity"].append(f"{r['identity_status']} {q}")
+                    if r.get("identity_uncertainty"):
+                        d["uncert"].append(f"{r['identity_uncertainty']} {q}")
                 if r["note"].strip():
                     d["notes"].append(f"{r['queue_id']}: {r['note'].strip()[:200]}")
                 d["src"].append(cite(rel_, r["queue_id"], i))
@@ -722,7 +761,9 @@ def build_auth(acq):
             finding(f"CF-WSB-ID-{spec}", "CASE53_ID_DIFFERS_ACROSS_REGISTERS", f"{spec}: {';'.join(c53)}",
                     f"{PFX}{idr_rel}; {PFX}{pq3_rel}; {PFX}{pq_rel}")
         qids = sorted(d["queues"])
-        rec_p = [norm_priority(v) for _, v in sorted(d["queues"].items())]
+        # the consolidated cycle-3 queue supersedes earlier queue priorities when it has a row for this case
+        rec_p = ([norm_priority(v) for v in d["c3prio"]] if d["c3prio"]
+                 else [norm_priority(v) for _, v in sorted(d["queues"].items())])
         recs = sorted(xw.get(spec, set()))
         cal = sorted(set(recs) & CAL)
         mirror = bool(d["mirror"])
@@ -753,7 +794,10 @@ def build_auth(acq):
                                      + (". WS-B notes: " + " ; ".join(uniq(d["notes"])) if d["notes"] else "")),
             acquisition_request=";".join(qids) if qids else "NO_ACQUISITION_REQUEST",
             who_or_acquisition="Owner approval required for any fetch; acquisition per acquisition_request column",
-            linked_records=";".join(recs), contradictions="", priority=pr, priority_basis=basis,
+            linked_records=";".join(recs), contradictions="",
+            open_inconsistencies=";".join(f"WSB-{o['item_id']} ({o['state']})" for o in open_inconsistencies()
+                                          if o["spec_key"] == spec) or "NONE_RECORDED",
+            priority=pr, priority_basis=basis,
             source_file_row=" | ".join(uniq(d["src"]))))
     out.sort(key=lambda x: (PRANK[x["priority"]], x["item_type"] != "MML_EDITION", x["auth_id"]))
     return out
@@ -801,6 +845,92 @@ def consistency_checks():
                 f"{PFX}ACQ-01/batches.json; {PFX}ACQ-02/supplement_inventory.csv")
 
 
+OI_REL = "WS-B-JUDGMENTS/open_inconsistencies_cycle3.csv"
+
+
+def open_inconsistencies():
+    p = AW / OI_REL
+    return rows(OI_REL) if p.is_file() else []
+
+
+# Findings reported by the first planning build (commit 560d1d2d). Each is re-checked on every build by the same code
+# path that first raised it: if the check no longer fires on the current registers it is RESOLVED, otherwise OPEN.
+# FIX_REPORTED holds the fixing commits as reported by the coordinator (PR #30 follow-up); they are references only and
+# never decide the disposition. RECORD_DOCS are searched for the finding ID to cite the workstream's own record.
+PRIOR_FINDINGS = {
+    "CF-CHAIN-AA-C3-01": "ACQUISITION_ID_POINTS_TO_DIFFERENT_INSTRUMENT",
+    "CF-ACQ03-029": "SOURCE_STATUS_SUPERSEDED_NOT_PROPAGATED",
+    "CF-WSB-PQ-C3-32": "COMMERCIAL_DATABASE_RECORDED_AS_HOLDER",
+    "CF-WSB-NOQUEUE": "UNRESOLVED_CASE_WITHOUT_ACQUISITION_REQUEST",
+}
+INFORMATIONAL = {"CF-ACQ01-EXCLUDED", "CF-C3-01-VERIFY"}
+FIX_REPORTED = {
+    "CF-CHAIN-AA-C3-01": "WS-A 192ea2e6 / 18ae1078 (merged into integration at 0b48c070), as reported by coordinator",
+    "CF-ACQ03-029": ("WS-A 192ea2e6 / 18ae1078 (merged at 0b48c070); ACQ-03 docs 60715342 on the PR #23 branch "
+                     "(acq3wt worktree, not part of this branch), as reported by coordinator"),
+    "CF-WSB-PQ-C3-32": "WS-B e4191114 (merged into integration at 8b3bf77c), as reported by coordinator",
+    "CF-WSB-NOQUEUE": "WS-B e4191114 (merged into integration at 8b3bf77c), as reported by coordinator",
+}
+RECORD_DOCS = ("WS-A-STATUTORY/RECONCILE_CYCLE3.md", "WS-A-STATUTORY/STATUS.md", "WS-B-JUDGMENTS/STATUS.md",
+               "WS-B-JUDGMENTS/REVIEW_FIXES_CYCLE3.md")
+
+
+def record_mentions(fid):
+    out = []
+    for rel in RECORD_DOCS:
+        p = AW / rel
+        if p.is_file():
+            for n, line in enumerate(p.read_text(encoding="utf-8").splitlines(), 1):
+                if re.search(re.escape(fid) + r"(?![\w-])", line):
+                    out.append(f"{PFX}{rel}:{n}")
+                    break
+    return out
+
+
+RESOLVED_BASIS = {
+    "CF-CHAIN-AA-C3-01": lambda: "check re-run: AA-C3-01 acquisition_request now names " + ";".join(
+        r["acquisition_request"] for r in CHAIN_ADD if r["chain_id"] == "AA-C3-01") + ", whose target matches the instrument",
+    "CF-ACQ03-029": lambda: "check re-run: ACQ03-029 status is now " + ";".join(
+        r["status"][:80] for r in rows("WS-A-STATUTORY/acq03_pinned_candidates.csv") if r["acq03_id"] == "ACQ03-029"),
+    "CF-WSB-PQ-C3-32": lambda: "check re-run: no WS-B queue row names a commercial legal database in its target",
+    "CF-WSB-NOQUEUE": lambda: "check re-run: every unresolved case linked to a KB record has a WS-B queue row",
+}
+
+
+def dispositions(oi):
+    fired = {f["finding_id"]: f for f in FINDINGS}
+    out = []
+    for f in FINDINGS:
+        fid = f["finding_id"]
+        if fid in INFORMATIONAL:
+            disp = "VERIFIED" if fid == "CF-C3-01-VERIFY" and "MISMATCH" not in f["detail"] else "INFORMATIONAL"
+            basis = "no defect; recorded for traceability"
+        else:
+            disp, basis = "OPEN", "check still fires on the current registers"
+        out.append(dict(f, disposition=disp, disposition_basis=basis,
+                        fixing_commit_reported="n/a" if disp != "RESOLVED" else ""))
+    for fid, kind in PRIOR_FINDINGS.items():
+        if fid in fired:
+            continue
+        rec = record_mentions(fid)
+        out.append({"finding_id": fid, "kind": kind,
+                    "detail": "reported by the first planning build (560d1d2d); see disposition",
+                    "disposition": "RESOLVED",
+                    "disposition_basis": RESOLVED_BASIS[fid]() + ("; workstream record: " + "; ".join(rec) if rec else ""),
+                    "fixing_commit_reported": FIX_REPORTED.get(fid, "NOT_RECORDED"),
+                    "source_files": "; ".join(rec) or "NOT_RECORDED"})
+    for i, r in enumerate(oi, 1):
+        out.append({"finding_id": f"WSB-{r['item_id']}", "kind": f"WS-B open inconsistency: {r['kind']}",
+                    "detail": f"{r['spec_key']}: {r['inconsistency']} | evidence: {r['evidence']} | cross-reference: "
+                              f"{r['cross_reference']}",
+                    "disposition": r["state"] or "NOT_RECORDED",
+                    "disposition_basis": (f"as recorded by WS-B; legal_advisor_state={r['legal_advisor_state']}; "
+                                          f"jag_validation_state={r['jag_validation_state']}"),
+                    "fixing_commit_reported": "n/a",
+                    "source_files": cite(OI_REL, r["item_id"], i)})
+    return sorted(out, key=lambda x: x["finding_id"])
+
+
 def main(argv=None):
     global OUT
     ap = argparse.ArgumentParser()
@@ -828,7 +958,7 @@ def main(argv=None):
                    ["auth_id", "item_type", "case_key", "case53_id", "item", "current_state", "official_copy", "mirror_copy",
                     "http_availability", "identity_status", "identification_uncertainty", "evidence_held",
                     "authentication_requires", "acquisition_request", "who_or_acquisition", "linked_records",
-                    "contradictions", "priority", "priority_basis", "source_file_row"],
+                    "contradictions", "open_inconsistencies", "priority", "priority_basis", "source_file_row"],
                    auth)
     FINDINGS.append({"finding_id": "CF-C3-01-VERIFY", "kind": "VERIFICATION_RESULT",
                      "detail": ("ACQ-C3-01 identifier/bytes/md5 equal the brief values "
@@ -836,8 +966,9 @@ def main(argv=None):
                                 "acquisition_requests_cycle3.csv; s129_trace_cycle3.csv step 1 agrees="
                                 f"{s129_ok}" if not mism else f"MISMATCH {mism}"),
                      "source_files": f"{PFX}WS-A-STATUTORY/acquisition_requests_cycle3.csv; {PFX}WS-A-STATUTORY/s129_trace_cycle3.csv"})
-    n4 = write_csv("consistency_findings.csv", ["finding_id", "kind", "detail", "source_files"],
-                   sorted(FINDINGS, key=lambda x: x["finding_id"]))
+    findings_out = dispositions(open_inconsistencies())
+    n4 = write_csv("consistency_findings.csv", ["finding_id", "kind", "detail", "disposition", "disposition_basis",
+                                                "fixing_commit_reported", "source_files"], findings_out)
     pc = {}
     for a in acq:
         pc[a["priority"]] = pc.get(a["priority"], 0) + 1
@@ -851,7 +982,9 @@ def main(argv=None):
                "authentication_queue": n3, "auth_mml": sum(1 for x in auth if x["item_type"] == "MML_EDITION"),
                "auth_judgments": sum(1 for x in auth if x["item_type"] != "MML_EDITION"),
                "auth_by_priority": {p: sum(1 for x in auth if x["priority"] == p) for p in ("P0", "P1", "P2")},
-               "consistency_findings": n4, "acq_c3_01_mismatch": mism, "top10": [x["record_id"] for x in aff[:10]]}
+               "consistency_findings": n4,
+               "findings_by_disposition": {k: sum(1 for f in findings_out if f["disposition"] == k)
+                                           for k in sorted({f["disposition"] for f in findings_out})}, "acq_c3_01_mismatch": mism, "top10": [x["record_id"] for x in aff[:10]]}
     (OUT / "planning_summary.json").write_text(json.dumps(summary, indent=1, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps(summary, sort_keys=True))
     return 0

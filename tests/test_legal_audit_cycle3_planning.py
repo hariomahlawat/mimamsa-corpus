@@ -120,6 +120,43 @@ class NoCommercialSource(unittest.TestCase):
                         self.assertNotIn(c, (v or "").lower(), f"{name} row {n} {col} names {c}")
 
 
+class OpenInconsistenciesAndDispositions(unittest.TestCase):
+    def test_ws_b_open_inconsistencies_listed_as_open_items(self):
+        p = WSB / "open_inconsistencies_cycle3.csv"
+        if not p.is_file():
+            self.skipTest("register not present")
+        oi = read(p)
+        found = {r["finding_id"]: r for r in read(PLAN / "consistency_findings.csv")}
+        for r in oi:
+            fid = f"WSB-{r['item_id']}"
+            self.assertIn(fid, found)
+            self.assertEqual(found[fid]["disposition"], r["state"])
+        by_spec = {}
+        for r in oi:
+            by_spec.setdefault(r["spec_key"], set()).add(f"WSB-{r['item_id']}")
+        for r in judgment_rows():
+            listed = {x.split(" ")[0] for x in r["open_inconsistencies"].split(";") if x.startswith("WSB-")}
+            self.assertEqual(listed, by_spec.get(row_key(r), set()), row_key(r))
+
+    def test_every_finding_has_a_disposition(self):
+        for r in read(PLAN / "consistency_findings.csv"):
+            self.assertIn(r["disposition"], ("OPEN", "RESOLVED", "VERIFIED", "INFORMATIONAL"), r["finding_id"])
+            self.assertTrue(r["disposition_basis"].strip(), r["finding_id"])
+            if r["disposition"] == "RESOLVED":
+                self.assertTrue(r["fixing_commit_reported"].strip(), r["finding_id"])
+                self.assertIn("check re-run", r["disposition_basis"], r["finding_id"])
+
+
+class OfficialHostOnly(unittest.TestCase):
+    def test_ws_b_host_is_official_or_not_recorded(self):
+        for r in read(PLAN / "acquisition_schedule.csv"):
+            if not r["acq_id"].startswith("PQ-"):
+                continue
+            h = r["host"]
+            self.assertTrue(h.startswith("NOT_RECORDED") or h.endswith((".gov.in", ".nic.in")), f"{r['acq_id']}: {h}")
+            self.assertEqual(r["source_located"] == "YES", not h.startswith("NOT_RECORDED"), r["acq_id"])
+
+
 class Determinism(unittest.TestCase):
     def test_two_builds_byte_identical_and_committed_outputs_current(self):
         with tempfile.TemporaryDirectory() as d:

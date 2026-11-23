@@ -2,7 +2,7 @@
  "acq_by_priority": {
   "EXCLUDED": 1,
   "P0": 29,
-  "P1": 66,
+  "P1": 71,
   "P2": 39
  },
  "acq_by_scope": {
@@ -10,25 +10,31 @@
   "ACQ-02": 17,
   "ACQ-03": 44,
   "WS-A-C3": 4,
-  "WS-B": 50
+  "WS-B": 55
  },
  "acq_c3_01_mismatch": {},
- "acq_pinned": 69,
- "acq_source_located_yes": 90,
- "acquisition_schedule": 135,
+ "acq_pinned": 70,
+ "acq_source_located_yes": 92,
+ "acquisition_schedule": 140,
  "affected_in_calibration": 35,
  "affected_records": 349,
  "affected_with_cases": 78,
  "affected_with_reserved": 36,
  "auth_by_priority": {
-  "P0": 16,
-  "P1": 35,
+  "P0": 17,
+  "P1": 34,
   "P2": 12
  },
  "auth_judgments": 55,
  "auth_mml": 8,
  "authentication_queue": 63,
- "consistency_findings": 6,
+ "consistency_findings": 19,
+ "findings_by_disposition": {
+  "INFORMATIONAL": 1,
+  "OPEN": 13,
+  "RESOLVED": 4,
+  "VERIFIED": 1
+ },
  "top10": [
   "KB-030",
   "HCE-002",
@@ -36,8 +42,8 @@
   "CM-CL-04",
   "HCE-001",
   "CM-001",
-  "HCE-033",
   "CM-CL-01",
+  "HCE-033",
   "CM-CL-06",
   "CM-CL-02"
  ]
