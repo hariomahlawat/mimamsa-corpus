@@ -25,6 +25,17 @@ jobs:
           # corpus-ref regeneration checks skip when origin/raw-data is absent. Read-only; no credentials are persisted.
           fetch-depth: 0
           persist-credentials: false
+      - name: Pin the crawler corpus ref to the commit recorded by the committed WS-D outputs
+        # Decouples audit PRs from the moving tip of raw-data: the corpus-ref regeneration tests compare against outputs
+        # generated from this commit. If it is unavailable, the ref is removed and those tests skip (with a warning).
+        run: |
+          PIN=ad77758d4569ba6aafa955cc7843d874489e10f7
+          if git cat-file -e "${PIN}^{commit}" 2>/dev/null; then
+            git update-ref refs/remotes/origin/raw-data "$PIN"
+          else
+            git update-ref -d refs/remotes/origin/raw-data || true
+            echo "::warning::pinned crawler corpus commit unavailable; corpus-ref tests will skip"
+          fi
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
