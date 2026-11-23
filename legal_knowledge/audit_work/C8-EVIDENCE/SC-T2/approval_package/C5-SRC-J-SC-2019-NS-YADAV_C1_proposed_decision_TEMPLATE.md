@@ -12,7 +12,8 @@ written at conversion with the ledger `entry_id=sha256:entry_digest`, alongside 
 - recommendation (preparer, not a decision): READY FOR OWNER CONSIDERATION after P-B (no case record: no anchor effect)
 - evidence file: sc_copy_evidence_register.csv; evidence/
 - C8 page checks: C8-SCPIC-15;16
-- limitations to be recorded verbatim in the entry: printed name 'NARSINGH YADAV' vs corpus label 'N S Yadav'; judgment date not in C6-01 identity; no cases_53 record (so no crosswalk case row can change)
+- limitations to be recorded verbatim in the entry: C8 page readings are AI-agent readings, not human-confirmed; a human should re-check from the render hashes before approval; the printed appellant name is 'NARSINGH YADAV'; the corpus label 'N S Yadav' is not supported by the document; no cases_53 record; C6-01 draft-addendum limitation carried verbatim (C6-01-PROVENANCE/addendum/authentication_addendum_v1_draft.csv#C6-ADD-v1-3c50cdb7): C6-01 PROPOSAL - not incorporated; no signature verified
+- discrepancies recorded by C8 (sc_copy_evidence_register.csv 'discrepancies'): printed name 'NARSINGH YADAV' vs corpus label 'N S Yadav'; judgment date not in C6-01 identity; no cases_53 record (so no crosswalk case row can change)
 - scope if decided: AUTHENTICATION_PROVENANCE_ONLY
 - legal_approval: NOT_GIVEN
 - decision: <owner to complete: APPROVED | WITHHELD | REJECTED>

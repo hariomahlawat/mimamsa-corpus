@@ -2,12 +2,16 @@
 """Build the C8 Workstream B (Gazette tranche 1) evidence outputs. Offline.
 
 Usage:
-  python -I build_c8b.py --base <repo snapshot root> --out <c8out/B>
+  python -I build_c8b.py --base <repo root> --out legal_knowledge/audit_work/C8-EVIDENCE/GAZETTE-T1
 
 Inputs (read-only): tranche1 files, C6-01 recovery register, ARMY-RULES-CHAIN-01
 register, ACQ-01/ACQ-02 archive metadata snapshots; plus C8 work files in --out:
 render_log.csv, crop_log.csv, tools/readings_notes.txt (AI-agent page readings),
-bd_work/T1-19.json, bd_work/T1-20.json, bd_work/*_rsa_diag.json.
+born_digital/T1-19.json, born_digital/T1-20.json, born_digital/*_rsa_diag.json (all committed,
+so the outputs can be rebuilt from the committed package plus the pinned registers in --base).
+Revised after review 5212a95b (see ../review/DISPOSITIONS_5212a95b.md): limitations now carry the decisive
+C8 contradiction-register limitations and the pending-entry limitations verbatim; T1-20 PDF p.6 check added;
+C8-CR-02 quotes taken from the page checks; carried-forward rows keep the original locator; C8-CR-14 added.
 Outputs (in --out): page_image_checks_c8.csv, gazette_evidence_register.csv,
 evidence/T1-NN.md, contradiction_register_c8.csv, eligibility_recommendations.csv,
 born_digital_structure.csv.
@@ -60,7 +64,14 @@ CHECKS = {
  ('T1-19', 1): ("masthead (Extraordinary, issue no., date, Part/Section) + Hindi version", "CONFIRMED", "none: Extraordinary, PART II-Section 4, No. 02, 20-02-2018 consistent (register gives no issue no.; image shows No. 02)"),
  ('T1-19', 2): ("S.R.O. heading, date line, nature (declaration), signature block, Note, visible digital-signature appearance; running header", "CONFIRMED", "none against the register (S.R.O. 2(E), 20-02-2018, p.2, r.188(e) declaration). NEW C8-CR-01: Note dates 'S.R.O. 240 dated 05th June, 1955' whereas held S.R.O. 34/1963 recites 'SRO 240, dated the 25th June, 1955'. The visible 'Digitally signed by RAKESH SUKUL' appearance is an image/text element, not a validation"),
  ('T1-20', 1): ("masthead (Extraordinary, issue no., date, Part/Section)", "CONFIRMED", "none: Extraordinary, PART II-Section 4, No. 13, 28-12-2019 consistent"),
- ('T1-20', 2): ("S.R.O. heading, date line, short title, commencement, signature block, Foot Note; running header", "CONFIRMED", "none: S.R.O. 17(E), 28-12-2019, p.2 consistent"),
+ ('T1-20', 2): ("S.R.O. heading, date line, short title, commencement, signature block, Foot Note; running header", "CONFIRMED", "none: S.R.O. 17(E), 28-12-2019, p.2 consistent. Hindi and English footnotes differ (C8-CR-14)"),
+ ('T1-20', 6): ("last page of the copy (added after review 5212a95b, B-04): running header, the instrument printed on it, signature block, footer, visible digital-signature appearance", "CONFIRMED", "context check, not an identity element of S.R.O. 17(E): the page carries S.R.O. 21(E) of 28-12-2019 (Air Force (Amendment) Regulations, 2019), signed M. SUBBARAYAN, Jt. Secy. The visible appearance 'Digitally signed by MANOJ KUMAR VERMA Date: 2019.12.28 20:01:43 +05'30'' (small type at the bottom right; wording taken from the text layer, layout seen on the render) is an image/text element, not a validation; its time equals the signature dictionary /M and the Info ModDate (born_digital_structure.csv#T1-20), and the embedded signature fails verification (C8-CR-03). The copy also carries, on PDF pp.3-5 (text layer only, not rendered), S.R.O. 18(E) (Navy (Discipline and Miscellaneous Provisions) Amendment Regulations, 2019), S.R.O. 19(E) (Naval Ceremonial, Conditions of Service and Miscellaneous (Amendment) Regulations, 2019) and S.R.O. 20(E) (Air Force (Amendment) Rules, 2019), each dated 28-12-2019 and signed M. SUBBARAYAN"),
+}
+# Glyph-level variances raised by the independent review 5212a95b (B-12, INFO, low confidence). Not identity elements.
+REVIEW_VARIANCE = {
+ ('T1-11', 1): "review 5212a95b B-12 (low confidence): the reviewer could not clearly read the handwritten mark as '5/8/85'; treat that mark as UNCERTAIN on human re-check",
+ ('T1-11', 2): "review 5212a95b B-12 (low confidence): the printer-line PIN digits are unclear to the reviewer; treat them as UNCERTAIN on human re-check",
+ ('T1-18', 2): "review 5212a95b B-12 (low confidence): the reviewer reads 'ocuer' and 'Military Secretery' where 'occur' and 'Secretory' are recorded; treat these glyphs as UNCERTAIN on human re-check",
 }
 
 # Facts as printed, from the C8 page readings (AI agent, not human-confirmed).
@@ -71,20 +82,20 @@ FACTS = {
  'T1-04': dict(issue="No. 15, Saturday 10-04-1965 (weekly)", part="Part II-Section 4", sro="S.R.O. 116", dateline="New Delhi, the 27th March 1965", nature="amendment: Army (1st Amendment) Rules, 1965 (Table below r.13; App. I)", sign="not re-read in C8 (on p.97; WSA-PIC-38: S. DEVANATH, Dy. Secy.)", pages="printed pp.96-97 (PDF pp.2-3)"),
  'T1-05': dict(issue="No. 27, Saturday 03-07-1965 (weekly)", part="Part II-Section 4", sro="S.R.O. 215", dateline="New Delhi, the 17th June 1965", nature="amendment: Army (2nd Amendment) Rules, 1965 (proviso to r.192)", sign="[Case No. 43448|PS1.] S. DEVANATH, Dy. Secy.", pages="printed p.172 (PDF p.2)"),
  'T1-06': dict(issue="No. 2, Saturday 11-01-1969 (weekly)", part="Part II-Section 4", sro="S.R.O. 5", dateline="New Delhi, the 23rd December 1968", nature="amendment: Army (——— Amendment) Rules, 1968 (r.13-A ins.)", sign="not re-read in C8 (on p.10; PIC-33: S. Devanath)", pages="printed pp.9-10 (PDF pp.1-2)"),
- 'T1-07': dict(issue="No. 30, Saturday 28-07-1979 (weekly)", part="Part II-Section 4", sro="S.R.O. 188", dateline="New Delhi, the 4th June, 1979", nature="amendment: Army (Amendment) Rules 1979; in force on publication", sign="not re-read in C8 (instrument continues to p.261)", pages="printed pp.258-261 (PDF pp.6-9)"),
+ 'T1-07': dict(issue="No. 30, Saturday 28-07-1979 (weekly)", part="Part II-Section 4", sro="S.R.O. 188", dateline="New Delhi, the 4th June, 1979", nature="amendment: Army (Amendment) Rules 1979; commencement clause as printed: '(2) They shall come into force on the date of their publication in the Official Gazette.'", sign="not re-read in C8 (instrument continues to p.261)", pages="printed pp.258-261 (PDF pp.6-9)"),
  'T1-08': dict(issue="No. 45, Saturday 13-11-1982 (weekly)", part="Part II-Section 4", sro="S.R.O. 246", dateline="New Delhi, the 12th October, 1982", nature="amendment: Army (Amendment) Rules, 1982 (r.59A ins.)", sign="[File No 95678/AG/DV-1|934-S|D (AG)]; no signatory name printed under the English text", pages="printed p.413 (PDF p.11)"),
  'T1-09': dict(issue="No. 6, Saturday 16-02-1985 (weekly)", part="Part II-Section 4", sro="S.R.O. 44 (1985)", dateline="New Delhi, the 24th January, 1985", nature="amendment: Army (Amendment) Rules, 1985 (r.184 subs.)", sign="[File No. B|80290|JAG/449(AG)] PAVAN RAINA, Director (Works)", pages="printed p.60 (PDF p.2)"),
  'T1-10': dict(issue="No. 9, Saturday 09-03-1985 (weekly)", part="Part II-Section 4", sro="S.R.O. 55", dateline="New Delhi, the 22nd February, 1985", nature="amendment: Army (Amendment) Rules, 1985 (r.80-A ins.; r.164 amended)", sign="[File No. 4(2)|84|D(AG)] V. M. LABROO, Dy. Secy. (AG)", pages="printed p.97 (PDF p.11)"),
  'T1-11': dict(issue="No. 14, Saturday 20-04-1985 (weekly)", part="Part II-Section IV (masthead) / PART II-SEC. 4 (running header)", sro="S.R.O. 68", dateline="New Delhi, the 1st April, 1985", nature="CORRIGENDUM to S.R.O. 55 (Army (Amendment) Rules, 1985; Gazette Pt II s.4, 09-03-1985, p.97, col.1, line 20: after 'trial' for 'or' read 'of')", sign="[File No. 4(2)/884/D (AG)] V. M. LABROO, Dy. Secy. (AG)", pages="printed p.142 (PDF p.2)"),
- 'T1-12': dict(issue="No. 50, Saturday 28-12-1985 (weekly)", part="Part II-Section 4", sro="S.R.O. 278", dateline="New Delhi, the 29th November, 1985", nature="amendment: Army (Third Amendment) Rules, 1985; in force on publication (r.16-A(5))", sign="not re-read in C8 (on p.532; PIC-34: M.S. Sokhanda)", pages="printed pp.531-532 (PDF pp.31-32)"),
+ 'T1-12': dict(issue="No. 50, Saturday 28-12-1985 (weekly)", part="Part II-Section 4", sro="S.R.O. 278", dateline="New Delhi, the 29th November, 1985", nature="amendment: Army (Third Amendment) Rules, 1985 (r.16-A(5)); commencement clause as printed: '(2) They shall come into force on the date of their publication in the Official Gazette.'", sign="not re-read in C8 (on p.532; PIC-34: M.S. Sokhanda)", pages="printed pp.531-532 (PDF pp.31-32)"),
  'T1-13': dict(issue="No. 21, Saturday 30-05-1987 (weekly)", part="Part II-Section 4", sro="S.R.O. 169", dateline="New Delhi, the 15th May, 1987", nature="amendment: Army (Amendment) Rules, 1987 (r.147 subs.)", sign="no file number or signatory printed for the English text on p.197 (as read)", pages="printed p.197 (PDF p.5)"),
  'T1-14': dict(issue="No. 38, Saturday 10-10-1987 (weekly)", part="Part II-Section 4", sro="S.R.O. 302", dateline="New Delhi, the 18th September, 1987", nature="amendment: Army (Amendment) Rules, 1987 (r.193 subs.)", sign="M. S. SOKHANDA, Dy. Secy. (A.G.) (no file no. printed in the English block)", pages="printed p.367 (PDF p.21)"),
- 'T1-15': dict(issue="No. 36, Saturday 17-09-1988 (weekly)", part="Part II-Section 4", sro="S.R.O. 216", dateline="New Delhi, the 30th August, 1988", nature="amendment: Army (Amendment) Rules, 1988; in force on publication; items deemed from 04-06-1979", sign="[File No. PC A/39123/AG/PS 2(a)/5792/D(AG)] M. S. SOKHANDA, Dy. Secy. (AG)", pages="printed p.617 (PDF p.9)"),
+ 'T1-15': dict(issue="No. 36, Saturday 17-09-1988 (weekly)", part="Part II-Section 4", sro="S.R.O. 216", dateline="New Delhi, the 30th August, 1988", nature="amendment: Army (Amendment) Rules, 1988; commencement clause as printed: '(2) They shall come into force on the date of their publication in the Official Gazette.'; rr.2-3 as printed: 'shall be deemed to have been omitted from the 4th June, 1979' / 'shall be deemed to have been added from the 4th June, 1979'", sign="[File No. PC A/39123/AG/PS 2(a)/5792/D(AG)] M. S. SOKHANDA, Dy. Secy. (AG)", pages="printed p.617 (PDF p.9)"),
  'T1-16': dict(issue="No. 46, Saturday 02-12-1989 (weekly)", part="Part II-Section 4", sro="S.R.O. 332", dateline="New Delhi, the 26th September, 1989", nature="amendment: Army (Amendment) Rules, 1989 (r.194 subs.)", sign="[F. No. PCA/39123/AG/PS2(A)/5792|D(AG)] BHAG MALL, Dy. Secy. (AG)", pages="printed p.736 (PDF p.12)"),
- 'T1-17': dict(issue="No. 8, Saturday 23-02-1991 (weekly)", part="Part II-Section 4", sro="S.R.O. 44 (1991); S.R.O. 61 (1991)", dateline="New Delhi, the 1st February, 1991 (S.R.O. 44); New Delhi, the 7th February, 1991 (S.R.O. 61)", nature="amendments: 'Army (Second Amendment) Rules, 1990' (S.R.O. 44; r.16A(5)(g)); 'Army (Amendment) Rules, 1990' (S.R.O. 61; r.15-A(3),(4)); both in force on publication", sign="S.R.O. 44: [File No. PC: B/32232/RVC/AG|PS2(a)|172|D(AG)] BHAG MALL, Dy. Secy.; S.R.O. 61: [File No. B/32284/AG/PS2(a)|7763|D(AG)] BHAG MALL, Dy. Secy. (AG)", pages="printed p.214 (PDF p.2) and p.217 (PDF p.5)"),
- 'T1-18': dict(issue="No. 41, Saturday 09-11-1991 (weekly)", part="Part II-Section 4", sro="S.R.O. 235", dateline="New Delhi, the 1st October, 1991", nature="amendment: Army (Amendment) Rules, 1991; in force on publication (r.13A)", sign="[Case No. 00470|DP-SCN|MS8C|5652|D(AG)] A. P. JOSHI, Dy Secy.(AG)", pages="printed p.614 (PDF p.2)"),
+ 'T1-17': dict(issue="No. 8, Saturday 23-02-1991 (weekly)", part="Part II-Section 4", sro="S.R.O. 44 (1991); S.R.O. 61 (1991)", dateline="New Delhi, the 1st February, 1991 (S.R.O. 44); New Delhi, the 7th February, 1991 (S.R.O. 61)", nature="amendments: 'Army (Second Amendment) Rules, 1990' (S.R.O. 44; r.16A(5)(g)); 'Army (Amendment) Rules, 1990' (S.R.O. 61; r.15-A(3),(4)); commencement clause in each, as printed: '(2) They shall come into force on the date of their publication in the Official Gazette.'", sign="S.R.O. 44: [File No. PC: B/32232/RVC/AG|PS2(a)|172|D(AG)] BHAG MALL, Dy. Secy.; S.R.O. 61: [File No. B/32284/AG/PS2(a)|7763|D(AG)] BHAG MALL, Dy. Secy. (AG)", pages="printed p.214 (PDF p.2) and p.217 (PDF p.5)"),
+ 'T1-18': dict(issue="No. 41, Saturday 09-11-1991 (weekly)", part="Part II-Section 4", sro="S.R.O. 235", dateline="New Delhi, the 1st October, 1991", nature="amendment: Army (Amendment) Rules, 1991 (r.13A); commencement clause as printed: '(2) These shall come into force on the date of their publication in the Official Gazette.'", sign="[Case No. 00470|DP-SCN|MS8C|5652|D(AG)] A. P. JOSHI, Dy Secy.(AG)", pages="printed p.614 (PDF p.2)"),
  'T1-19': dict(issue="Extraordinary No. 02, Tuesday 20-02-2018", part="Part II-Section 4", sro="S.R.O. 2(E)", dateline="New Delhi, the 20th February, 2018", nature="declaration under r.188(e) Army Rules 1954; Note amends S.R.O.s 609/1950 ... 34/1963 'from the date of this notification'; not an amendment of the Rules", sign="[F. No. 23(20)/2009/D(GS-III-B)] RAJEEV SINGH THAKUR, Jt. Secy.; visible appearance 'Digitally signed by RAKESH SUKUL Date: 2018.02.20 19:22:55 +05'30''", pages="printed p.2 (PDF p.2; Hindi version p.1)"),
- 'T1-20': dict(issue="Extraordinary No. 13, Saturday 28-12-2019", part="Part II-Section 4", sro="S.R.O. 17(E)", dateline="New Delhi, the 28th December, 2019", nature="amendment: Army (Amendment) Rules, 2019; in force on publication (r.15B ins.; r.16A)", sign="[F. No. F.14(3)/98/D(AG)] M. SUBBARAYAN, Jt. Secy.", pages="printed p.2 (PDF p.2; Hindi version p.1-2)"),
+ 'T1-20': dict(issue="Extraordinary No. 13, Saturday 28-12-2019", part="Part II-Section 4", sro="S.R.O. 17(E)", dateline="New Delhi, the 28th December, 2019", nature="amendment: Army (Amendment) Rules, 2019 (r.15B ins.; r.16A); commencement clause as printed: '(2) They shall come into force on the date of their publication in the Official Gazette.'. The copy also carries S.R.O. 18(E), 19(E), 20(E) and 21(E) of 28-12-2019 (Navy and Air Force instruments) on PDF pp.3-6", sign="[F. No. F.14(3)/98/D(AG)] M. SUBBARAYAN, Jt. Secy.; visible appearance on PDF p.6 (end of the copy, after S.R.O. 21(E)) 'Digitally signed by MANOJ KUMAR VERMA Date: 2019.12.28 20:01:43 +05'30'' (C8-PIC-40); none on p.2", pages="printed p.2 (PDF p.2; Hindi version p.1-2); copy has 6 pages, pp.3-6 carry other instruments"),
 }
 
 
@@ -138,14 +149,15 @@ def main():
     mat = {r['tranche_id']: r for r in rd(os.path.join(T, 'evidence_verification_matrix.csv'))}
     con = rd(os.path.join(T, 'contradiction_register.csv'))
     rec = {r['copy_id']: r for r in rd(os.path.join(B, 'C6-01-PROVENANCE/registers/provenance_recovery_register.csv'))}
+    pend = {r['copy_id']: r for r in rd(os.path.join(T, 'proposed_entries_PENDING.csv'))}
     arc = {r['instr_id']: r for r in rd(os.path.join(B, 'ARMY-RULES-CHAIN-01/army_rules_instrument_register.csv'))}
     snap1 = json.load(open(os.path.join(B, 'ACQ-01/archive_org_metadata_snapshot.json')))
     snap2 = json.load(open(os.path.join(B, 'ACQ-02/archive_org_metadata_snapshot_acq02.json')))
     rlog = rd(os.path.join(O, 'render_log.csv'))
     clog = rd(os.path.join(O, 'crop_log.csv'))
     notes = parse_notes(os.path.join(O, 'tools/readings_notes.txt'))
-    bd = {t: json.load(open(os.path.join(O, f'bd_work/{t}.json'))) for t in ('T1-19', 'T1-20')}
-    rsa = {t: json.load(open(os.path.join(O, f'bd_work/{t}_rsa_diag.json'))) for t in ('T1-19', 'T1-20')}
+    bd = {t: json.load(open(os.path.join(O, f'born_digital/{t}.json'))) for t in ('T1-19', 'T1-20')}
+    rsa = {t: json.load(open(os.path.join(O, f'born_digital/{t}_rsa_diag.json'))) for t in ('T1-19', 'T1-20')}
 
     # ---- page image checks
     order = sorted(rlog, key=lambda r: (r['tranche_id'], int(r['pdf_page'])))
@@ -164,9 +176,9 @@ def main():
         cid[(t, p)] = k
         checks.append(dict(check_id=k, tranche_id=t, source_id=srcmap[t]['source_id'], document_sha256=r['sha256'],
                            pdf_page=p, printed_page=pp, what_was_read=what, reading=reading, identity_result=res,
-                           discrepancies=disc + (('; reader note: ' + comm) if comm else ''),
+                           discrepancies=disc + (('; reader note: ' + comm) if comm else '') + (('; ' + REVIEW_VARIANCE[(t, p)]) if (t, p) in REVIEW_VARIANCE else ''),
                            render_png_sha256=r['png_sha256'],
-                           render_settings=f"{r['render_settings']}; output {r['width']}x{r['height']} px 8-bit gray; file renders/{r['png']} (not committed)" + (('; ' + cs) if cs else ''),
+                           render_settings=f"{r['render_settings']}; output {r['width']}x{r['height']} px 8-bit gray; render file {r['png']} (not committed; reproducible with tools/rehash_and_render.py)" + (('; ' + cs) if cs else ''),
                            reader=READER, checked_on=CHECKED_ON))
     # cross-reference placeholders in discrepancy texts
     for c in checks:
@@ -193,7 +205,29 @@ def main():
                         description=f"exact-string: {r['exact_string_contradictions']}; recovery register: {r['recovery_register_contradictions']}; identity: {r['identity_discrepancy']}",
                         evidence_refs=f"{AW}/AUTH-LEDGER/tranches/T1-GAZETTE/contradiction_register.csv#{r['tranche_id']}",
                         affects='identity' if r['identity_discrepancy'] != 'NONE_RECORDED' else 'none recorded',
-                        status=r['status'], c8_update='unchanged; C8 page inspection (see page_image_checks_c8.csv) found no conflict with the register identity' if r['tranche_id'] != 'T1-02' else 'status kept; relationship restated as UNRESOLVED in C8-CR-02'))
+                        status=r['status'], original_locator=r['locator'],
+                        c8_update=('content and status unchanged; structure changed in C8 (entry id assigned; exact_string_contradictions, recovery_register_contradictions and identity_discrepancy merged into description; locator kept in original_locator); ' +
+                                   ('C8 page inspection (see page_image_checks_c8.csv) found no conflict with the register identity' if r['tranche_id'] != 'T1-02' else 'relationship restated as UNRESOLVED in C8-CR-02'))))
+    # B-06: the NOTE forms quoted in C8-CR-02 are taken verbatim from the page-check readings, not retyped.
+    notes_forms = []
+    for (nt, npg, lab) in [('T1-08', 11, 'S.R.O. 246/1982 p.413'), ('T1-09', 2, 'S.R.O. 44/1985 p.60'), ('T1-10', 11, 'S.R.O. 55/1985 p.97'),
+                           ('T1-13', 5, 'S.R.O. 169/1987 p.197'), ('T1-14', 21, 'S.R.O. 302/1987 p.367'), ('T1-15', 9, 'S.R.O. 216/1988 p.617'),
+                           ('T1-16', 12, 'S.R.O. 332/1989 p.736'), ('T1-17', 2, 'S.R.O. 44/1991 p.214'), ('T1-18', 2, 'S.R.O. 235/1991 p.614')]:
+        rd_ = next(c for c in checks if c['tranche_id'] == nt and c['pdf_page'] == npg)['reading']
+        m = re.search(r'(?:SRO|S\.R\.O\.) 34 dated[^/"]*?(?=\s*/|"|$)', rd_)
+        if not m:
+            raise SystemExit('S.R.O. 34 NOTE form not found in reading ' + nt)
+        f_ = m.group(0).strip()
+        for e in notes_forms:
+            if e[0] == f_:
+                e[1].append(lab); break
+        else:
+            notes_forms.append([f_, [lab]])
+    notes_quoted = ', '.join(f"'{f_}' ({'; '.join(labs)})" for f_, labs in notes_forms)
+    hindi = re.search(r'का\. नि\. आ\. 34 तारीख 5 जून 1963', next(c for c in checks if c['tranche_id'] == 'T1-12' and c['pdf_page'] == 31)['reading'])
+    hindi2 = re.search(r'सं\. 34, दिनांक 5-6-1963', next(c for c in checks if c['tranche_id'] == 'T1-17' and c['pdf_page'] == 5)['reading'])
+    if not (hindi and hindi2):
+        raise SystemExit('Hindi S.R.O. 34 forms not found')
     s02 = srcmap['T1-02']['sha256']; s19 = srcmap['T1-19']['sha256']; s20 = srcmap['T1-20']['sha256']; s08 = srcmap['T1-08']['sha256']
     new = [
      dict(entry_id='C8-CR-01', tranche_id='T1-19; T1-02', sha256=f"{s19}; {s02}", kind='document_to_document date discrepancy (NEW, C8 page inspection)',
@@ -201,20 +235,34 @@ def main():
           evidence_refs=f"{cid[('T1-19',2)]} ({s19} PDF p.2), {cid[('T1-19',1)]} ({s19} PDF p.1), {cid[('T1-02',2)]} ({s02} PDF p.2)",
           affects='none of the 20 identities (S.R.O. 240/1955 is not a tranche candidate); relevant to any future r.188(e) declaration chain', status='UNRESOLVED', c8_update='new'),
      dict(entry_id='C8-CR-02', tranche_id='T1-02', sha256=s02, kind='identity relationship (restated with new documentary context)',
-          description="The held instrument is S.R.O. 34 dated 'New Delhi, the 5th January 1963', a declaration under r.188(e), printed in No.3 of 19-01-1963, Pt II-S4, p.14. Gazette-printed NOTEs of previous S.R.O.s appended to later Army Rules amendments list 'SRO 34 dated 5 Jun 63' (S.R.O. 246/1982 p.413), 'SRO 34 dated 5 jun 1963' (S.R.O. 44/1985 p.60), 'SRO 34 dated 5th June, 1963' (S.R.O. 55/1985 p.97; S.R.O. 302/1987 p.367; S.R.O. 216/1988 p.617; S.R.O. 332/1989 p.736; S.R.O. 44/1991 p.214; S.R.O. 235/1991 p.614), 'SRO 34 dated 5 Jun 1963' (S.R.O. 169/1987 p.197) and Hindi equivalents ('5 जून, 1963'); these NOTEs give no Gazette issue or page for it and present it among amendments of the Rules. S.R.O. 2(E)/2018 (a later r.188(e) declaration) lists 'S.R.O. 34 dated 05th January, 1963' among the r.188(e) S.R.O.s it amends. Whether the NOTEs' 'SRO 34 dated 5 Jun 63' denotes this 05-01-1963 declaration (misdated) or a different, unlocated instrument is NOT proved by any held document. No amendment-chain inference is made.",
+          description="The held instrument is S.R.O. 34 dated 'New Delhi, the 5th January 1963', a declaration under r.188(e), printed in No.3 of 19-01-1963, Pt II-S4, p.14. Gazette-printed NOTEs of previous S.R.O.s appended to later Army Rules amendments list, as transcribed in the page checks: " + notes_quoted + ", and Hindi forms such as '" + hindi.group(0) + "' (S.R.O. 278/1985 p.531) and '" + hindi2.group(0) + "' (Hindi S.R.O. 61/1991 p.217); these NOTEs give no Gazette issue or page for it and present it among amendments of the Rules. S.R.O. 2(E)/2018 (a later r.188(e) declaration) lists 'S.R.O. 34 dated 05th January, 1963' among the r.188(e) S.R.O.s it amends. Whether the NOTEs' 'SRO 34 dated 5 Jun 63' denotes this 05-01-1963 declaration (misdated) or a different, unlocated instrument is NOT proved by any held document. No amendment-chain inference is made.",
           evidence_refs=f"{cid[('T1-02',2)]}, {cid[('T1-02',1)]}, {cid[('T1-08',11)]}, {cid[('T1-09',2)]}, {cid[('T1-10',11)]}, {cid[('T1-13',5)]}, {cid[('T1-14',21)]}, {cid[('T1-15',9)]}, {cid[('T1-16',12)]}, {cid[('T1-17',2)]}, {cid[('T1-17',5)]}, {cid[('T1-18',2)]}, {cid[('T1-19',2)]}; {AW}/R23-VERIFY-01/registers/amendment_search_2026-11-22.csv#S.R.O. 34 (agent discovery register, not approved: its 'apparent misdating' note is a proposal, not proof); {AW}/ARMY-RULES-CHAIN-01/army_rules_instrument_register.csv#AR-008 ('notes misdate' wording is unverified)",
           affects='amendment chronology only (not the copy identity of T1-02)', status='UNRESOLVED', c8_update='new context: the 5-6-1963 listing also appears in Gazette-printed NOTEs 1982-1991, not only in the 1988/1993/2003 Government notes'),
      dict(entry_id='C8-CR-03', tranche_id='T1-20', sha256=s20, kind='born-digital signature integrity (NEW, C8 structural parse)',
           description=f"Embedded CMS (adbe.pkcs7.detached) signature: messageDigest attribute equals SHA-256 of the signed byte ranges ({rsa['T1-20']['sha256_signed_content']}), but the RSA signature value does not verify with the only embedded certificate (CN=MANOJ KUMAR VERMA; serial matches the SignerInfo sid): the RSA public operation does not yield a PKCS#1 v1.5 block (openssl cms -verify -noverify: 'CMS Verification failure ... RSA_padding_check_PKCS1_type_1:invalid padding'). Cause UNCERTAIN (signing-software defect at origin, wrong certificate embedded, or alteration of the signature value); the held bytes cannot distinguish these.",
-          evidence_refs="born_digital_structure.csv#T1-20; bd_work/T1-20.json; bd_work/T1-20_rsa_diag.json; tools/born_digital.py; tools/rsa_diag.py",
+          evidence_refs="born_digital_structure.csv#T1-20; born_digital/T1-20.json; born_digital/T1-20_rsa_diag.json; tools/born_digital.py; tools/rsa_diag.py",
           affects='copy fidelity / documentary authenticity evidence for T1-20 (not identity: page text CONFIRMED)', status='OPEN', c8_update='new'),
      dict(entry_id='C8-CR-04', tranche_id='T1-19', sha256=s19, kind='born-digital signature integrity (C8 structural parse; no conflict)',
           description=f"Embedded CMS signature verifies at the integrity level only: messageDigest equals SHA-256 of the signed ranges and the RSA signature over signedAttrs verifies with the embedded signer certificate CN=RAKESH SUKUL (openssl cms -verify -noverify: 'CMS Verification successful'; independent raw-RSA check agrees). Certificate chain, trust anchor, validity at signing time against a trusted clock and revocation were NOT validated.",
-          evidence_refs="born_digital_structure.csv#T1-19; bd_work/T1-19.json; bd_work/T1-19_rsa_diag.json",
+          evidence_refs="born_digital_structure.csv#T1-19; born_digital/T1-19.json; born_digital/T1-19_rsa_diag.json",
           affects='copy fidelity evidence (supporting, limited)', status='NO_CONTRADICTION (recorded for completeness)', c8_update='new'),
      dict(entry_id='C8-CR-05', tranche_id='T1-08', sha256=s08, kind='observation (not an identity discrepancy)', description="English S.R.O. 246/1982 on p.413 carries a file number but no printed signatory name.", evidence_refs=cid[('T1-08',11)], affects='none', status='OBSERVATION', c8_update='new'),
      dict(entry_id='C8-CR-06', tranche_id='T1-02', sha256=s02, kind='observation (not an identity discrepancy)', description="Running header of p.14 ends '[PART II-' (section not printed on that page); Part II-Section 4 is read on the masthead p.13.", evidence_refs=f"{cid[('T1-02',2)]}, {cid[('T1-02',1)]}", affects='none', status='OBSERVATION', c8_update='new'),
     ]
+    new.append(dict(entry_id='C8-CR-14', tranche_id='T1-20; T1-19', sha256=f"{s20}; {s19}", kind='document-internal Hindi/English difference (NEW, raised by review 5212a95b B-11)',
+          description="S.R.O. 17(E)/2019, PDF p.2: the Hindi footnote ('पाद टिप्पण') says the principal rules were last amended by 'का.नि.आ. 2(अ), तारीख 20 फरवरी, 2018'; the English 'Foot Note' says only that they 'were last amended in 2018' and names no instrument. S.R.O. 2(E) of 20-02-2018 (T1-19) is on its face a declaration under r.188(e) of the Army Rules, not an amendment of the Rules. The held documents do not show whether the Hindi reference is accurate, denotes another instrument, or is an error. No inference about the amendment chronology is drawn.",
+          evidence_refs=f"{cid[('T1-20',2)]} ({s20} PDF p.2), {cid[('T1-19',2)]} ({s19} PDF p.2)",
+          affects='amendment chronology only (not the copy identity of T1-20 or T1-19)', status='UNRESOLVED', c8_update='new (after review 5212a95b)'))
+    # Short limitation wording carried into the eligibility register and the unsigned templates (B-02). Applied to every
+    # candidate the register entry names; the full entry stays in contradiction_register_c8.csv.
+    CR_LIMIT = {
+     'C8-CR-01': "S.R.O. 240/1955 is dated '05th June, 1955' in S.R.O. 2(E)/2018 but 'the 25th June, 1955' in S.R.O. 34/1963; not resolved by the held documents",
+     'C8-CR-02': "COPY PROVENANCE ONLY: the relationship between this S.R.O. 34 of 05-01-1963 and the 'SRO 34 dated 5 June 1963' listed in Government and Gazette-printed notes is UNRESOLVED; no amendment-chain inference may rest on this copy",
+     'C8-CR-03': "the embedded CMS signature FAILS verification: messageDigest matches the signed bytes but the RSA signature value does not verify with the only embedded certificate (CN=MANOJ KUMAR VERMA); cause UNCERTAIN; the signature gives no support to the fidelity or authenticity of this copy",
+     'C8-CR-04': "INTEGRITY ONLY, NOT AUTHENTICITY: the embedded CMS signature verifies against its embedded certificate (CN=RAKESH SUKUL), but no certificate chain, trust anchor, validity at signing time or revocation was checked, so documentary authenticity is not established",
+     'C8-CR-14': "the Hindi footnote names S.R.O. 2(E)/2018 as the last amendment of the Rules while the English footnote names no instrument; not resolved; no chronology inference",
+    }
+    CR_LIMIT_SCOPE = {'C8-CR-14': {'T1-20'}}   # the footnote is printed in T1-20; T1-19 is named only as the instrument it cites
     obs = [
      ('C8-CR-08', 'T1-11', "Corrigendum S.R.O. 68/1985 prints file no. '4(2)/884/D (AG)'; the corrected S.R.O. 55/1985 (T1-10 p.97) prints '[File No. 4(2)|84|D(AG)]'. Possibly a misprint; not established.", f"{cid[('T1-11',2)]}, {cid[('T1-10',11)]}"),
      ('C8-CR-09', 'T1-13', "English S.R.O. 169/1987 on p.197 has no printed file number or signatory between the rule text and the Note.", cid[('T1-13',5)]),
@@ -227,7 +275,7 @@ def main():
         new.append(dict(entry_id=eid, tranche_id=t, sha256=srcmap[t]['sha256'], kind='observation (not an identity discrepancy)', description=d, evidence_refs=ev, affects='none for identity; text-fidelity note', status='OBSERVATION', c8_update='new'))
     for n in new:
         n['origin'] = 'C8 Workstream B (AI agent, not human-confirmed)'
-    cr_fields = ['entry_id', 'origin', 'tranche_id', 'sha256', 'kind', 'description', 'evidence_refs', 'affects', 'status', 'c8_update']
+    cr_fields = ['entry_id', 'origin', 'tranche_id', 'sha256', 'kind', 'description', 'evidence_refs', 'affects', 'status', 'c8_update', 'original_locator']
     wr(os.path.join(O, 'contradiction_register_c8.csv'), crs + new, cr_fields)
 
     # ---- born-digital structure csv
@@ -253,7 +301,7 @@ def main():
             embedded_certificates=c['embedded_certs'].replace('\n\n', ' || ').replace('\n', ' / '),
             cryptographic_validation_performed='PARTIAL INTEGRITY ONLY: messageDigest and RSA signature value checked against the embedded certificate with installed openssl/cryptography; NO certificate-chain, trust-anchor, validity-at-signing or revocation validation; no timestamp token checked',
             derivative_generation_evidence=('none: producer GPL Ghostscript 8.15 / creator PScript5.dll; no Internet Archive markers; ' + ('ACQ-01 snapshot files[].source = original' if t == 'T1-20' else 'ACQ-02 snapshot records name/size/md5/sha1/mtime 1534716964 but no source field (original/derivative not recorded)')),
-            evidence_refs=f"tools/born_digital.py; tools/rsa_diag.py; bd_work/{t}.json; bd_work/{t}_rsa_diag.json; {AW}/AUTH-LEDGER/evidence/copy_structure.csv#{srcmap[t]['copy_id']}"))
+            evidence_refs=f"tools/born_digital.py; tools/rsa_diag.py; born_digital/{t}.json; born_digital/{t}_rsa_diag.json; {AW}/AUTH-LEDGER/evidence/copy_structure.csv#{srcmap[t]['copy_id']}"))
     wr(os.path.join(O, 'born_digital_structure.csv'), bds, list(bds[0].keys()))
 
     # ---- evidence register + md + eligibility
@@ -290,12 +338,21 @@ def main():
             rec_ = 'READY_FOR_OWNER_CONSIDERATION'
             why = "rule 1 PASS; masthead and S.R.O. line freshly read on page images and CONFIRMED against the register" + ('' if r['identifier_source'] != 'L5_DISCOVERY_REGISTER_ONLY' else ' (closes the F-T1-1 advisory: the number is no longer quoted only in the R23 discovery register)')
         lim = ['C8 page readings are AI-agent readings, not human-confirmed; a human should re-check from the render hashes before approval']
+        for n in new:
+            if t in n['tranche_id'].split('; ') and n['entry_id'] in CR_LIMIT and t in CR_LIMIT_SCOPE.get(n['entry_id'], {t}):
+                lim.append(f"{n['entry_id']} ({n['status']}): {CR_LIMIT[n['entry_id']]}")
         if 'register dated' in m['v06_provenance_evidence']:
             lim.append('no retrieval date in a retrieval record (register date 2026-11-22 only)')
         if any(c['identity_result'] == 'PARTIAL' for c in mychecks):
             lim.append('running header partly illegible on the S.R.O. page; issue date taken from the masthead page of the same file')
         if t == 'T1-17':
             lim.append('one copy carries two instruments (S.R.O. 44/1991 and 61/1991); entry covers the copy')
+        if t == 'T1-20':
+            lim.append('one copy carries five instruments (S.R.O. 17(E)/2019 on pp.1-2; Navy and Air Force instruments S.R.O. 18(E)-21(E)/2019 on pp.3-6); entry covers the copy; the visible signature appearance is on p.6 only')
+        pe = pend.get(r['copy_id'])
+        if pe:
+            lim.append(f"pending-entry limitation carried verbatim from {AW}/AUTH-LEDGER/tranches/T1-GAZETTE/proposed_entries_PENDING.csv#{pe['entry_id']}: {pe['limitations']}"
+                       + (" [C8 note: the pending wording 'signature NOT cryptographically validated' predates C8; C8 checked the CMS signature, see " + ('C8-CR-03 (fails)' if t == 'T1-20' else 'C8-CR-04 (integrity only)') + ']' if t in ('T1-19', 'T1-20') else ''))
         outstanding = []
         if t in ('T1-19', 'T1-20'):
             outstanding.append('owner decision P-D2')
@@ -312,7 +369,8 @@ def main():
                   held_sha256=r['sha256'], sha256_rehash='MATCH (re-hashed 2026-11-23; render_log.csv)', held_path=next(x['held_path'] for x in rlog if x['tranche_id'] == t),
                   provenance_first_class=m['v06_provenance_evidence'].split(';')[0], provenance_what_it_proves='that the held bytes equal the file published at the archive.org locator (size/md5/sha1 match to item metadata); it does not prove the Government of India originated those bytes (documentary authenticity) or that the scan is complete beyond the page count',
                   retrieval_evidence=f"{rc.get('retrieval_url','')} ; date {rc.get('retrieval_date','')} ; method {rc.get('retrieval_method','')}", retrieval_limitations=('no retrieval date in a retrieval record (register date only)' if 'register dated' in m['v06_provenance_evidence'] else 'retrieval date from agent retrieval record (R23 independent-reviewer-D source JSON)') + f"; archive snapshot: {snaptxt}",
-                  original_carrier='Government of India Gazette (printed weekly issue)' if 'BORN' not in r['fidelity_class'] else 'Government of India e-Gazette (digitally signed PDF, Extraordinary)',
+                  original_carrier=('apparent original carrier (inferred from the printed masthead only; origin not established): printed weekly issue of the Gazette of India' if 'BORN' not in r['fidelity_class'] else
+                                    'apparent original carrier (inferred from the masthead and the digital-signature structure only; origin not established' + ('; the embedded signature fails verification, C8-CR-03' if t == 'T1-20' else '; signature integrity only, C8-CR-04') + '): digitally signed PDF issue of the Gazette of India, Extraordinary'),
                   current_host='archive.org (third-party archival host; item ' + item + ')', scanned_or_born_digital=scanned, fidelity_class=r['fidelity_class'],
                   page_count_and_completeness=f"{m['v08_completeness']}", identity_page_refs_prior=' | '.join(x.split(';')[0] for x in m['v07_identity_page_evidence'].split(' | ')),
                   c8_checks_and_render_hashes=renders, c8_identity_result=cand_id[t], contradictions=';'.join(crlist),

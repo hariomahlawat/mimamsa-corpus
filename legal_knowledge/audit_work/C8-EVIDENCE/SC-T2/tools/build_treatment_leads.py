@@ -1,4 +1,4 @@
-"""Write c8out/C/subsequent_treatment_leads.csv: research questions per judgment, with what the corpus currently records.
+"""Write <out_dir>/subsequent_treatment_leads.csv (committed as SC-T2/subsequent_treatment_leads.csv): research questions per judgment, with what the corpus currently records.
 usage: python build_treatment_leads.py <out_dir_C>. Every row is RESEARCH_LEAD_UNVERIFIED; nothing here states that a judgment is or
 is not good law. Sources: WS-B-JUDGMENTS/subsequent_treatment.csv (WSB-T-*), subsequent_treatment_cycle3.csv (WSB-T3-*),
 case_relations.csv, open_inconsistencies_cycle3.csv (OI-*), identity_resolution_cycle3.csv, cases_53.jsonl (by id#field), and C8 page checks."""
@@ -34,7 +34,7 @@ L = [
      "WSB-T-001 / case_relations: Anvar P.V. v P.K. Basheer (CA 4226/2012) OVERRULED_IN_PART (p.18 para 22), scope 'only the s.65B/secondary electronic evidence proposition'; cases_53 v09_treatment_note cites Arjun (2020) and Sundar (2023); v09_suppress_from_current_guidance true",
      "WS-B notes later 2024/2025 treatments (Ravishankar Tandon, Chandrabhan) not re-read. OI-11: JUDIS copy has no paragraph numbers; Anvar quotes SCC para 150"),
     ("NAVJOT-2", "DCLR-SC-2005-L01", "C5-SRC-J-SC-2005-NAVJOT~C1", "State (NCT of Delhi) v Navjot Sandhu (04-08-2005)",
-     "Statutory change: Indian Evidence Act 1872 replaced by Bharatiya Sakshya Adhiniyam 2023 (from 01-07-2024); IPC (s.123 conviction on p.107) replaced by BNS; POTA 2002 repealed (2004) - applicability of any proposition under current law",
+     "Statutory change - UNVERIFIED ASSERTIONS, no primary source cited here; each needs the enacting or repealing instrument (India Code / Gazette) before use: Indian Evidence Act 1872 said to be replaced by the Bharatiya Sakshya Adhiniyam 2023 from 01-07-2024; IPC (s.123 conviction on p.107) said to be replaced by BNS; POTA 2002 said to have been repealed in 2004. Question: applicability of any proposition under current law",
      "cases_53 provisions empty; record_type CITATION_LEAD; holding empty; WS-B crosswalk citability NOT_CITABLE_AS_AUTHORITY_HOLDING_EMPTY", "Transitional application to pre-2024 trials needs separate legal research"),
     ("NAVJOT-3", "DCLR-SC-2005-L01", "C5-SRC-J-SC-2005-NAVJOT~C1", "State (NCT of Delhi) v Navjot Sandhu (04-08-2005)",
      "Other subsequent citations (relied on / distinguished) of Navjot Sandhu",

@@ -1,6 +1,6 @@
 # Exact-anchor recalculation for the Supreme Court primary candidates
 
-> **SIMULATION ONLY.** The approval records here are synthetic. They were written in a temporary directory under `c8out/C/tmp_sim/`, which is deleted after each run. This is not a ledger version, not an approval, and not evidence of any owner or legal approval. The committed ledger stays at version 0. `git status` on the snapshot was empty after the runs.
+> **SIMULATION ONLY.** The approval records here are synthetic. They were written in a temporary directory under the preparer's scratch area (`<scratchpad>/c8out/C/tmp_sim/`, outside the repository), which is deleted after each run. This is not a ledger version, not an approval, and not evidence of any owner or legal approval. The committed ledger stays at version 0. `git status` on the snapshot was empty after the runs.
 
 ## Method
 - **Tool:** `tools/sim_anchor.py <audit_work> <tmp_parent> <out_json>`.
@@ -61,5 +61,5 @@ The joint run changes the seven case rows below:
 
 ## Caveats
 - All eight entries pass rule 1 on the **page-1 text rule** for identity. None has a CONFIRMED image check recorded in the snapshot.
-- The C8 checks are agent readings and are not committed evidence. Whether an agent reading meets policy B2 is for the owner to decide.
+- The C8 checks are committed in `page_checks_sc_c8.csv`, but they are AI-agent readings, not human-confirmed, and none is recorded in the snapshot the reader uses. Whether an agent reading meets policy B2 is for the owner to decide.
 - These results say nothing about whether any proposition is current, binding, followed or overruled.

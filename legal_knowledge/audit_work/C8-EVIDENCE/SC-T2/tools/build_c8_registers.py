@@ -1,7 +1,8 @@
-"""Build c8out/C/page_checks_sc_c8.csv and sc_copy_evidence_register.csv from the agent's recorded page readings
-(the READINGS/COPIES tables below) plus render facts produced by render_pages.py (render_run*.jsonl).
+"""Build <out_dir>/page_checks_sc_c8.csv (committed as SC-T2/page_checks_sc_c8.csv) from the agent's recorded page readings
+(the READINGS/COPIES tables below) plus render facts produced by render_pages.py (committed as tools/render_facts.jsonl: hashes,
+page numbers and render settings only; the page text layers of the original run logs were removed under C8 review B-03).
 
-usage: python build_c8_registers.py <out_dir_C> <render_jsonl> [<render_jsonl> ...]
+usage: python build_c8_registers.py <out_dir_C> tools/render_facts.jsonl [<render_jsonl> ...]
 Offline. The readings are transcriptions made by an AI agent from the 150-dpi renders; they are not human-confirmed."""
 import csv, json, sys
 from pathlib import Path
@@ -117,7 +118,7 @@ READINGS = [
      "CONFIRMED", "Signature lines are dotted placeholders; no signature stamp on this copy"),
     ("NSY", 1, "page 1: cover of court judgment",
      "REPORTABLE / IN THE SUPREME COURT OF INDIA / CIVIL APPELLATE JURISDICTION / CIVIL APPEAL NO. 7672 OF 2019 / (DIARY NO. 27850 OF 2017) / "
-     "NO. 14666828M EX CFN NARSINGH YADAV .....APPELLANT(S) / VERSUS / UNION OF INDIA & ORS. .....RESPONDENT(S) / J U D G M E N T / HEMANT GUPTA, J. / "
+     "NO. [service number masked: 8 digits + letter, as printed] EX CFN NARSINGH YADAV .....APPELLANT(S) / VERSUS / UNION OF INDIA & ORS. .....RESPONDENT(S) / J U D G M E N T / HEMANT GUPTA, J. / "
      "1) The challenge in the present appeal is to an order passed by the Armed Forces Tribunal, Lucknow1 on September 23, 2011 ... / 1",
      "CONFIRMED",
      "Appellant's printed name is 'NARSINGH YADAV'; corpus labels use 'N S Yadav' / 'Ex Cfn N S Yadav' (C6-01 identity, source id NS-YADAV); "
@@ -158,7 +159,7 @@ READINGS = [
      "PARTIAL",
      "Second version of the judgment begins here: no 'CORRECTED' marking, no neutral citation, no QR code or signature appearance; respondent "
      "service number '256812 M' differs from '2568912 M' on p.1; text-layer comparison (tools/mullikote_half_diff.txt) shows pp.32-62 repeat "
-     "pp.1-31 with paragraph numbers continued (52-99), list letters C/D for A/B, footnote 2 for 1, and 'Balakrishanan' for 'Balakrishnan' once"),
+     "pp.1-31 with paragraphs renumbered (first-version paras 1-3 become 4-6, paras 4-51 become 52-99), list letters C/D for A/B, footnote 2 for 1, and 'Balakrishanan' for 'Balakrishnan' once"),
     ("MULLIKOTE", 62, "final page: conclusion of second version, signature lines, place and date",
      "CONCLUSION / 99. For the reasons aforesaid, this Court holds that the present Appeals are devoid of merit. The Appeals are accordingly dismissed, "
      "with no order as to costs. ... / .........J. [MANOJ MISRA,J] / .........J. [MANMOHAN,J] / New Delhi; March 24, 2026 / footer ... Page 62 of 62",
@@ -167,7 +168,7 @@ READINGS = [
      "REPORTABLE / IN THE SUPREME COURT OF INDIA / CIVIL APPELLATE JURISDICTION / CIVIL APPEAL NO.2904 OF 2011 / Union of India & Anr. ...Appellants "
      "/ Versus / Rajbir Singh ...Respondent / With / CIVIL APPEAL NO.2905 OF 2011 ... CIVILL APPEAL D.16394 OF 2013 / [signature appearance:] Signature "
      "Not Verified / Digitally signed by Sarita Purohit / Date: 2015.04.29 16:27:19 IST / Reason: / 1",
-     "CONFIRMED", "Context copy; no watermark and no 'Page N' footer (unlike C1); signature appearance present; not in AUTH-LEDGER copy_structure.csv"),
+     "CONFIRMED", "Context copy; no watermark and no 'Page N' footer (unlike C1); signature appearance present; AUTH-LEDGER/evidence/copy_structure.csv#C5-SRC-J-SC-2015-RAJBIR~C2 records one signature byte range [0 149839 159611 4244], signed_range_covers_file YES_AFTER_PREFIX (structural record only; the signature has not been validated)"),
     ("RAJBIR_C2", 18, "context only (C2): end of judgment",
      "... 17. In the result these appeals fail and are hereby dismissed without any order as to costs. / ..........J. (T.S. THAKUR) / ..........J. "
      "(R. BANUMATHI) / New Delhi February 13, 2015 / 18",

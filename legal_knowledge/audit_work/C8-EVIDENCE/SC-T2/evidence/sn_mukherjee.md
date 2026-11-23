@@ -30,3 +30,7 @@ Same JUDIS rendition format as Ranjit Thakur, with inline report pagination and 
 
 ## Identity result
 **CONFIRMED** (case identity).
+
+## Retrieval record and limitations (added after review 5212a95b, B-02)
+- Retrieval (C6-01): url https://api.sci.gov.in/judgment/judis/7439.pdf; date NOT_EVIDENCED; method official URL corroborated by recorded sha256; remaining gaps: no retrieval date in a retrieval record (C6-01-PROVENANCE/registers/provenance_recovery_register.csv#C5-SRC-J-SC-1990-SN-MUKHERJEE~C1)
+- Limitations to be carried into any entry, verbatim: see `../sc_copy_evidence_register.csv#C5-SRC-J-SC-1990-SN-MUKHERJEE~C1` column `limitations` (it includes: retrieval date NOT_EVIDENCED).

@@ -1,6 +1,6 @@
 # Born-digital Gazettes T1-19 and T1-20: structural findings (C8 Workstream B)
 
-Evidence only. Nothing here approves, activates or changes legal status. The parsing was done by an AI agent (Claude Opus 5.5 subagent); the results are not human-confirmed. Each figure can be reproduced offline with `tools/born_digital.py` and `tools/rsa_diag.py`. The per-file output is in `bd_work/T1-19.json`, `bd_work/T1-20.json` and `bd_work/*_rsa_diag.json`, and is tabulated in `born_digital_structure.csv`.
+Evidence only. Nothing here approves, activates or changes legal status. The parsing was done by an AI agent (Claude Opus 5.5 subagent); the results are not human-confirmed. Each figure can be reproduced offline with `tools/born_digital.py` and `tools/rsa_diag.py`. The per-file output is in `born_digital/T1-19.json`, `born_digital/T1-20.json` and `born_digital/*_rsa_diag.json` (absolute paths replaced by `<scratchpad>/...`), and is tabulated in `born_digital_structure.csv`.
 
 ## Held bytes
 | Row | Instrument | Held path (scratchpad) | sha256 (re-hashed 2026-11-23) | Bytes | Result |
@@ -31,7 +31,8 @@ Evidence only. Nothing here approves, activates or changes legal status. The par
 | CreationDate / ModDate | D:20180220185951Z / D:20180220192255+05'30' | D:20191228195452Z / D:20191228200143+05'30' |
 | Internet Archive or re-render markers in the bytes | none found | none found |
 | archive.org metadata snapshot | ACQ-02 snapshot: name, size, md5, sha1 and mtime 1534716964 match; no `source` (original or derivative) field is recorded | ACQ-01 snapshot: `files[].source = original`; md5 and size match |
-| Visible signature appearance | p.2: "Digitally signed by RAKESH SUKUL Date: 2018.02.20 19:22:55 +05'30'" (C8-PIC-37) | none on p.2; pp.3-6 not rendered |
+| Visible signature appearance | p.2: "Digitally signed by RAKESH SUKUL Date: 2018.02.20 19:22:55 +05'30'" (C8-PIC-37) | none on p.2; on PDF p.6, the last page, bottom right: "Digitally signed by MANOJ KUMAR VERMA Date: 2019.12.28 20:01:43 +05'30'", with one Signature widget on that page (C8-PIC-40, rendered after review 5212a95b; the small type was read from the text layer). Its time equals /M and ModDate. It is an appearance, not a validation |
+| Instruments in the file | S.R.O. 2(E)/2018 only (Hindi p.1, English p.2) | five: S.R.O. 17(E)/2019 (pp.1-2), and on pp.3-6 S.R.O. 18(E) and 19(E) (Navy regulations), 20(E) (Air Force (Amendment) Rules, 2019) and 21(E) (Air Force (Amendment) Regulations, 2019), all dated 28-12-2019 and signed M. SUBBARAYAN. pp.3-5 were read from the text layer only. An entry would cover the whole copy |
 
 ## CMS signature (integrity checks with installed tools only)
 - Method: `openssl cms -verify -inform DER -binary -noverify -purpose any` (OpenSSL 3.0.13, already installed). The /Contents DER was used as the signature and the concatenated signed ranges as the detached content. An independent raw-RSA check (`tools/rsa_diag.py`, Python `cryptography`, already installed in the venv) computed s^e mod n for every embedded certificate.
@@ -44,7 +45,7 @@ Evidence only. Nothing here approves, activates or changes legal status. The par
   - "CMS Verification failure ... RSA_padding_check_PKCS1_type_1: invalid padding".
   - messageDigest = SHA-256 of the signed ranges = 739566ad9d5ff3ae8b8f6cf380fb1541c29a64fd3b7c134bf8e1a012e21c49a2 (it matches).
   - The RSA signature value does **not** decode to a PKCS#1 v1.5 block with the only embedded certificate. That certificate is CN=MANOJ KUMAR VERMA (O=GOVT. OF INDIA PRESS; serial 5391176F = SignerInfo sid 1402017647; validity 2018-06-11 to 2020-06-10; issuer "(n)Code Solutions CA 2014"). No issuer certificate is embedded, and the revocation attribute is an empty SEQUENCE.
-  - The cause is UNCERTAIN. It could be a signing-software defect at origin, a wrong certificate embedded, or alteration of the signature value. The held bytes cannot tell these apart. The page text itself is CONFIRMED (C8-PIC-38, C8-PIC-39). Recorded as **C8-CR-03 (OPEN)**.
+  - The cause is UNCERTAIN. It could be a signing-software defect at origin, a wrong certificate embedded, or alteration of the signature value. The held bytes cannot tell these apart. The page text itself is CONFIRMED (C8-PIC-38, C8-PIC-39). Recorded as **C8-CR-03 (OPEN)**. The visible appearance on p.6 carries the same time as /M (2019.12.28 20:01:43 +05'30'); this does not bear on why the signature value fails.
 - **What was NOT done, for either file:**
   - no certificate-chain building or validation;
   - no trust anchor (CCA India) check;

@@ -10,7 +10,7 @@ Reader: AI agent (Claude Opus 5.5 subagent), not human-confirmed. Checked 2026-1
 | Item | Reading | Source |
 | --- | --- | --- |
 | Case number | CIVIL APPEAL NO. 7672 OF 2019 (DIARY NO. 27850 OF 2017) | C8-SCPIC-15 p.1 |
-| Parties | NO. 14666828M EX CFN **NARSINGH YADAV** .....APPELLANT(S) VERSUS UNION OF INDIA & ORS. | p.1 |
+| Parties | NO. [service number masked: 8 digits + letter, as printed] EX CFN **NARSINGH YADAV** .....APPELLANT(S) VERSUS UNION OF INDIA & ORS. | p.1 |
 | Reportable | REPORTABLE | p.1 |
 | Author | HEMANT GUPTA, J. | p.1 |
 | Last page | Dotted signature lines for (L. NAGESWARA RAO) and (HEMANT GUPTA); "NEW DELHI; OCTOBER 03, 2019." | C8-SCPIC-16 p.15 |
@@ -26,3 +26,7 @@ Reader: AI agent (Claude Opus 5.5 subagent), not human-confirmed. Checked 2026-1
 
 ## Identity result
 **CONFIRMED** (case identity). The corpus label needs correcting by its owner.
+
+## Retrieval record and limitations (added after review 5212a95b, B-02)
+- Retrieval (C6-01): url https://api.sci.gov.in/supremecourt/2017/27850/27850_2017_9_1502_17253_Judgement_03-Oct-2019.pdf; date 2026-11-22; method agent retrieval record (source JSON); official URL corroborated by recorded sha256; remaining gaps: none recorded (C6-01-PROVENANCE/registers/provenance_recovery_register.csv#C5-SRC-J-SC-2019-NS-YADAV~C1)
+- Limitations to be carried into any entry, verbatim: see `../sc_copy_evidence_register.csv#C5-SRC-J-SC-2019-NS-YADAV~C1` column `limitations`.

@@ -6,7 +6,7 @@ Reader: AI agent (Claude Opus 5.5 subagent), not human-confirmed. Checked 2026-1
 | Copy | sha256 | Pages | Held path(s) | Carrier/role (register) | What the file is (C8 observation) |
 | --- | --- | --- | --- | --- | --- |
 | **C1 (proposed primary)** | `970b96807bcbf8a1255fe16c574b575f64fe2edee1cbb271485fa7661a62c666` | 20 | independent-reviewer-B/rajbir_42379.pdf; independent-reviewer/judis_42379.pdf; judgment-auditor/rajbir_judis_42379.pdf | JUDIS_COPY; locator https://api.sci.gov.in/jonew/judis/42379.pdf | Judgment only, pp.1-20. Court layout with watermark and "Page N" footer. LibreOffice 3.5, created 2015-02-14. No signature |
-| C2 (context) | `c6ec489dff7a107b630a8646190a8cda303a54e4e9f5463eaed748ae0a42a1dd` | 21 | independent-reviewer/rop_275403.pdf | SC_ROP_PATH_COPY | Judgment on pp.1-18, then Record of Proceedings dated 13/02/2015 on pp.19-21. PDF title "Record Of Proceedings_SUPREME COURT", LibreOffice 4.1 modified by iText 5.2.1, created 2015-04-29. Signature appearance "Digitally signed by Sarita Purohit, Date: 2015.04.29 16:27:19 IST" on p.1. **No row in AUTH-LEDGER/evidence/copy_structure.csv** |
+| C2 (context) | `c6ec489dff7a107b630a8646190a8cda303a54e4e9f5463eaed748ae0a42a1dd` | 21 | independent-reviewer/rop_275403.pdf | SC_ROP_PATH_COPY | Judgment on pp.1-18, then Record of Proceedings dated 13/02/2015 on pp.19-21. PDF title "Record Of Proceedings_SUPREME COURT", LibreOffice 4.1 modified by iText 5.2.1, created 2015-04-29. Signature appearance "Digitally signed by Sarita Purohit, Date: 2015.04.29 16:27:19 IST" on p.1. `AUTH-LEDGER/evidence/copy_structure.csv#C5-SRC-J-SC-2015-RAJBIR~C2` records one signature byte range [0 149839 159611 4244], YES_AFTER_PREFIX (structural record; not validated) |
 | C3 (non-primary rendition) | `6b495f1483657581965b808b18aa23c09b424989e41d43226c90d35845855cde` | 15 | judgment-auditor/rajbir_bosir_2213461.pdf | OTHER_COURT_SYSTEM_COPY | GNU enscript plain-text rendition ("Enscript Output", Ghostscript 8.71, created 2017-07-12) of the **C2** content. It includes the signature appearance as text and the ROP. C2 page numbers 1-21 survive inline |
 
 Page checks: C1 is C8-SCPIC-12, 13 and 14. C2 is C8-SCPIC-23 to 26, and C3 is C8-SCPIC-27 and 28 (context only).
@@ -36,8 +36,12 @@ Page checks: C1 is C8-SCPIC-12, 13 and 14. C2 is C8-SCPIC-23 to 26, and C3 is C8
 
 ## Classification observations
 - C1 follows the same JUDIS-path pattern as Dharamvir: court layout with a watermark and a second page series.
-- C2 is the only Rajbir copy with a signature appearance. Its embedded signature has not been checked (no copy_structure row).
+- C2 is the only Rajbir copy with a signature appearance. Its embedded signature has not been validated. `AUTH-LEDGER/evidence/copy_structure.csv#C5-SRC-J-SC-2015-RAJBIR~C2` records the signature byte range [0 149839 159611 4244] as YES_AFTER_PREFIX; that is a structural record only, and no CMS or certificate check was done in C8.
 - C3 is a derivative text rendition of C2 and must never anchor.
 
 ## Identity result
 C1: **CONFIRMED**
+
+## Retrieval record and limitations (added after review 5212a95b, B-02)
+- Retrieval (C6-01): url https://api.sci.gov.in/jonew/judis/42379.pdf; date 2026-11-22; method agent retrieval record (source JSON); official URL corroborated by recorded sha256; remaining gaps: none recorded (C6-01-PROVENANCE/registers/provenance_recovery_register.csv#C5-SRC-J-SC-2015-RAJBIR~C1)
+- Limitations to be carried into any entry, verbatim: see `../sc_copy_evidence_register.csv#C5-SRC-J-SC-2015-RAJBIR~C1` column `limitations`.

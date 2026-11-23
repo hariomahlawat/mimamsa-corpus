@@ -36,3 +36,7 @@ Reader: AI agent (Claude Opus 5.5 subagent), not human-confirmed. Checked 2026-1
 
 ## Identity result
 **CONFIRMED**
+
+## Retrieval record and limitations (added after review 5212a95b, B-02)
+- Retrieval (C6-01): url https://api.sci.gov.in/jonew/judis/40493.pdf; date 2026-11-22; method agent retrieval record (source JSON); official URL corroborated by recorded sha256; remaining gaps: none recorded (C6-01-PROVENANCE/registers/provenance_recovery_register.csv#C5-SRC-J-SC-2013-DHARAMVIR~C1)
+- Limitations to be carried into any entry, verbatim: see `../sc_copy_evidence_register.csv#C5-SRC-J-SC-2013-DHARAMVIR~C1` column `limitations`.

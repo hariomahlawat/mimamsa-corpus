@@ -25,7 +25,7 @@ Reader: AI agent (Claude Opus 5.5 subagent), not human-confirmed. Checked 2026-1
   - the cover markings (CORRECTED, INSC, signature appearance);
   - the service number, 2568912 M against 256812 M;
   - one spelling, "Balakrishnan" against "Balakrishanan";
-  - continued automatic numbering in the second half: paragraphs 52-99 for 1-51, list letters C/D for A/B, footnote 2 for 1.
+  - continued automatic numbering in the second half: paragraphs 1-3 renumbered 4-6 and paragraphs 4-51 renumbered 52-99 (so the second version runs 4-6, then 52-99), list letters C/D for A/B, footnote 2 for 1.
 - That pattern fits a corrected version that was concatenated with an earlier version in one word-processing document. The file does not say which change was the correction.
 - This is already recorded as WS-B open_inconsistencies_cycle3.csv#OI-03 (OPEN). WS-B cites render 1f23da6a... for p.31; the C8 render hash differs because the render settings differ.
 
@@ -41,3 +41,7 @@ Reader: AI agent (Claude Opus 5.5 subagent), not human-confirmed. Checked 2026-1
 - **CONFIRMED** for case identity, from pp.1 and 31.
 - **PARTIAL** for the pp.32-62 version.
 - Recommendation: any anchor or pinpoint should name pp.1-31 explicitly.
+
+## Retrieval record and limitations (added after review 5212a95b, B-02)
+- Retrieval (C6-01): url https://api.sci.gov.in/supremecourt/2023/27246/27246_2023_14_1501_69641_Judgement_24-Mar-2026.pdf; date NOT_EVIDENCED; method official URL corroborated by recorded sha256; remaining gaps: no retrieval date in a retrieval record (C6-01-PROVENANCE/registers/provenance_recovery_register.csv#C5-SRC-J-SC-2026-MULLIKOTE~C1)
+- Limitations to be carried into any entry, verbatim: see `../sc_copy_evidence_register.csv#C5-SRC-J-SC-2026-MULLIKOTE~C1` column `limitations` (it includes: retrieval date NOT_EVIDENCED).

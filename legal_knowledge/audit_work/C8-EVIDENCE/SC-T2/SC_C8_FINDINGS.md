@@ -6,6 +6,7 @@
 - Snapshot `c8base` (commit bb1f0971) was not modified (`git status` empty).
 - Page readings were made by an AI agent (Claude Opus 5.5 subagent) and have not been confirmed by a person.
 - All held files were re-hashed before use: 10 of 10 MATCH. That covers the 8 candidates plus Rajbir C2 and C3.
+- Revised after independent review 5212a95b; the changes are listed in `../review/DISPOSITIONS_5212a95b.md`.
 
 ## 1. Identities read from the documents
 | Copy | Printed identity (C8 reading) | Result | Main discrepancies |
@@ -17,7 +18,7 @@
 | Rajbir Singh C1 `970b9680` (20 pp.) | UOI & Anr v Rajbir Singh; CA 2904/2011 with connected appeals; February 13, 2015; T.S. Thakur & Banumathi JJ; REPORTABLE | CONFIRMED | The C6-01 identity string for C1 cites C2/C3 identifiers ("rop_275403; bosir copy"). C1 and C2 paginate differently |
 | N S Yadav `3c50cdb7` (15 pp.) | **Ex Cfn Narsingh Yadav** v UOI & Ors; CA 7672/2019 (Diary 27850/2017); October 03, 2019; L. Nageswara Rao & Hemant Gupta JJ | CONFIRMED | The corpus label "N S Yadav" is not supported by the document. Date missing from identity. Not in cases_53 |
 | Girish Kumar `4f7ea3a4` (17 pp.) | UOI v Sgt Girish Kumar & Ors; CA 6820-6824/2018 with connected appeals; **2026 INSC 149**; February 12, 2026; P.S. Narasimha & Alok Aradhe JJ | CONFIRMED | cases_53 reporter_citation empty. Signature appearance: "Digitally signed by KAPIL TANDON 2026.02.12" (structural, not validated) |
-| Mullikote `10e1954f` (62 pp.) | UOI & Ors v Balakrishnan Mullikote (Ex Hav 2568912 M); CA ___/2026 arising out of Diary 27246/2023; **2026 INSC 286**; **CORRECTED**; March 24, 2026; Manoj Misra & Manmohan JJ | CONFIRMED (pp.1-31); PARTIAL (pp.32-62) | **The file holds the judgment twice.** pp.1-31 are the CORRECTED version (paras 1-51). pp.32-62 are an unmarked version (paras 52-99; service number "256812 M"). Lead appeal number blank. Signed and created 2026-04-04, after the judgment date. Already recorded as WS-B OI-03 |
+| Mullikote `10e1954f` (62 pp.) | UOI & Ors v Balakrishnan Mullikote (Ex Hav 2568912 M); CA ___/2026 arising out of Diary 27246/2023; **2026 INSC 286**; **CORRECTED**; March 24, 2026; Manoj Misra & Manmohan JJ | CONFIRMED (pp.1-31); PARTIAL (pp.32-62) | **The file holds the judgment twice.** pp.1-31 are the CORRECTED version (paras 1-51). pp.32-62 are an unmarked version (paragraphs numbered 4-6 then 52-99, for 1-3 and 4-51 of the first version; service number "256812 M"). Lead appeal number blank. Signed and created 2026-04-04, after the judgment date. Already recorded as WS-B OI-03 |
 
 Details are in `sc_copy_evidence_register.csv` (8 rows), `page_checks_sc_c8.csv` (28 rows: C8-SCPIC-01 to 28, with PNG sha256 and render settings), and `evidence/*.md`.
 
@@ -31,7 +32,7 @@ Details are in `sc_copy_evidence_register.csv` (8 rows), `page_checks_sc_c8.csv`
 - **Two files come from /jonew/judis/ paths but are court-layout PDFs:** Dharamvir and Rajbir C1. Each has a watermark and a second page series overlaid. "JUDIS" is therefore a hosting system, not one format.
 - **Three are current-format court PDFs:** N S Yadav, Girish and Mullikote. Girish and Mullikote carry embedded signature ranges that span the file. That fact is structural only; no cryptographic validation was done.
 - **Rajbir copies:**
-  - C2 `c6ec489d` (21 pp.) is the judgment on pp.1-18 plus the Record of Proceedings on pp.19-21. Its p.1 carries the signature appearance of Court Master Sarita Purohit, dated 2015-04-29. It has no AUTH-LEDGER copy_structure row.
+  - C2 `c6ec489d` (21 pp.) is the judgment on pp.1-18 plus the Record of Proceedings on pp.19-21. Its p.1 carries the signature appearance of Court Master Sarita Purohit, dated 2015-04-29. Its row in `AUTH-LEDGER/evidence/copy_structure.csv#C5-SRC-J-SC-2015-RAJBIR~C2` records one signature byte range [0 149839 159611 4244], YES_AFTER_PREFIX; that is a structural record, and the signature has not been validated.
   - C3 `6b495f14` (15 pp.) is a GNU-enscript plain-text rendition of C2, created in 2017. It is non-primary and must never anchor.
   - The text of C1 matches C2 pp.1-18 apart from watermark text and hyphenation.
 
@@ -78,7 +79,7 @@ This is a simulation in a temporary directory, not an approval. Details are in `
 - the HEADNOTE in Ranjit and S N Mukherjee, which leaves R-T2-5 understated;
 - the Ranjit editorial note on the 10.8.88 order;
 - C6-01's merged Rajbir C1 identity string;
-- C2's signature appearance and missing copy_structure row;
+- C2's signature appearance (its copy_structure row, recording one signature range, YES_AFTER_PREFIX, already exists);
 - the "Narsingh" name.
 
 **Not verified by C8:** the plan's statement that the AUTH-LEDGER-01 tests cover Rajbir C1 plus the rendition.
@@ -109,12 +110,14 @@ No conclusion is drawn on whether any judgment is good law.
    - Navjot date and number;
    - N S Yadav name;
    - Rajbir C1 identity string;
-   - copy_structure.csv rows for Rajbir C2, and the Dharamvir producer encoding.
+   - the Dharamvir producer encoding in copy_structure.csv.
 6. Whether the /judgment/judis/ and /jonew/judis/ paths serve one resource (S N Mukherjee, Fable F-17).
 
 ## 8. Limitations
 - Only page 1, the final page and a few identity-bearing pages were image-read for each copy. Other pages were examined through the text layer only: header sequences, labels, inline numbers and copy diffs.
 - No digital signature was validated.
 - No web retrieval was done.
+- Four copies have no retrieval date in a retrieval record (C6-01 `provenance_recovery_register.csv` remaining_gaps): Ranjit Thakur, S N Mukherjee, Girish Kumar and Mullikote. This is now recorded per copy in `sc_copy_evidence_register.csv` (`retrieval_evidence_c6_01`, `limitations`) and carried into the templates.
+- Page text layers are not committed. The render facts keep only hashes, page numbers and settings (`tools/render_facts.jsonl`).
 - The treatment leads come from corpus records and were not researched.
 - Render hashes depend on PyMuPDF version and settings, which are recorded per row.

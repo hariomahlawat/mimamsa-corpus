@@ -6,7 +6,11 @@ decision is entered at conversion), so it can never pass AUTH-LEDGER record chec
 approval, a ledger entry or a BIND line, and nothing changes legal status.
 
   python build_packages.py           write GAZETTE-T1/APPROVAL_PACKAGE.md, SC-T2/APPROVAL_PACKAGE.md and the per-candidate templates
-  python build_packages.py --check   fail if any committed output differs from a rebuild"""
+  python build_packages.py --check   fail if any committed output differs from a rebuild
+
+The limitations line of each template is copied from the register column (GAZETTE-T1/eligibility_recommendations.csv
+'limitations'; SC-T2/sc_copy_evidence_register.csv 'limitations'), which carries the decisive limitations (review
+5212a95b, B-02). No text is truncated (B-08)."""
 import argparse, csv, json, sys
 from pathlib import Path
 
@@ -35,6 +39,7 @@ written at conversion with the ledger `entry_id=sha256:entry_digest`, alongside 
 - evidence file: {evf}
 - C8 page checks: {checks}
 - limitations to be recorded verbatim in the entry: {lim}
+- {ctx_label}: {ctx}
 - scope if decided: AUTHENTICATION_PROVENANCE_ONLY
 - legal_approval: NOT_GIVEN
 - decision: <owner to complete: APPROVED | WITHHELD | REJECTED>
@@ -61,7 +66,8 @@ def gazette():
         out.append(f"| {tid} | `{r['sha256'][:12]}` | {r['recommendation']} | {', '.join(checks.get(tid, []))} | `{evf}` |")
         files[f"approval_package/{tid}_proposed_decision_TEMPLATE.md"] = TEMPLATE.format(
             cid=tid, sha=r["sha256"], src=r["source_id"], cls="PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE", rec=r["recommendation"],
-            evf=evf, checks=", ".join(checks.get(tid, [])) or "none", lim=r["limitations"])
+            evf=evf, checks=", ".join(checks.get(tid, [])) or "none", lim=r["limitations"],
+            ctx_label="contradiction-register entries for this candidate (contradiction_register_c8.csv)", ctx=ev.get(tid, {}).get("contradictions") or "none")
     counts = {}
     for r in rec.values():
         counts[r["recommendation"]] = counts.get(r["recommendation"], 0) + 1
@@ -82,7 +88,7 @@ def court():
     out, files = [], {}
     out.append("# Package 2: Supreme Court tranche 2 — approval-ready evidence (NOT approved, NOT active)\n")
     out.append(f"Built by `../tools/build_packages.py` from `sc_copy_evidence_register.csv` and `exact_anchor_simulation.json` "
-               f"({sim['label'][:60]}…). Exact-anchor cases at version 0: {v0}; all 8 jointly: {sim['joint_all_8']['summary']['exact_anchor_case_count']}. "
+               f"({sim['label']}). Exact-anchor cases at version 0: {v0}; all 8 jointly: {sim['joint_all_8']['summary']['exact_anchor_case_count']}. "
                "Identity readings are AI-agent readings with render hashes. No judicial authentication entry is active, and provenance never "
                "makes a holding current or binding.\n")
     out.append("| Copy | Identity | Anchors alone (v0 → after) | Depends on | Preparer recommendation |\n| --- | --- | --- | --- | --- |")
@@ -98,10 +104,11 @@ def court():
             "READY FOR OWNER CONSIDERATION after P-D3 and P-B" if cid in judis else "READY FOR OWNER CONSIDERATION after P-B")
         if after == v0:
             recm += " (no case record: no anchor effect)"
-        out.append(f"| {cid} | {r['identity_result'][:40]} | {v0} → {after} | {'; '.join(dep)} | {recm} |")
+        out.append(f"| {cid} | {r['identity_result']} | {v0} → {after} | {'; '.join(dep)} | {recm} |")
         files[f"approval_package/{cid.replace('~', '_')}_proposed_decision_TEMPLATE.md"] = TEMPLATE.format(
             cid=cid, sha=r["sha256"], src=r["source_id"], cls="PRIMARY_OFFICIAL_COURT_COPY", rec=recm,
-            evf="sc_copy_evidence_register.csv; evidence/", checks=r["page_check_ids"], lim=r["discrepancies"])
+            evf="sc_copy_evidence_register.csv; evidence/", checks=r["page_check_ids"], lim=r["limitations"],
+            ctx_label="discrepancies recorded by C8 (sc_copy_evidence_register.csv 'discrepancies')", ctx=r["discrepancies"])
     out.append("\n**Owner decisions needed:** P-D3 (JUDIS renditions), P-B (B2), and per-copy decisions. Corpus corrections proposed by "
                "the evidence (case numbers, neutral citations, the N S Yadav name, the Rajbir C1 identity string) are separate correction "
                "proposals and are not applied.\n")

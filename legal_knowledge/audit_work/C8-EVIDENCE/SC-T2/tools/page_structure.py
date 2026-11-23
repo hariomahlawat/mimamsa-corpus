@@ -4,7 +4,7 @@ usage: python page_structure.py <scratchpad_root> <held_manifest_csv> <out_json>
 For each file (re-hashed first): page count, printed page markers per page ('Page X of N', 'Page X', bare footer number),
 JUDIS header presence per page, positions of database-block labels (CITATION, CITATOR INFO, ACT, HEADNOTE, JUDGMENT:),
 reported-report page numbers inline (bare 3-digit lines in JUDIS text), signature widgets, PDF metadata.
-Text-layer facts only; they are not readings of the page image."""
+Text-layer facts only; they are not readings of the page image. First and last lines are recorded as sha256 only, not as text."""
 import csv, hashlib, json, re, sys
 from pathlib import Path
 import pymupdf
@@ -12,6 +12,11 @@ import pymupdf
 LABELS = ["PETITIONER:", "RESPONDENT:", "DATE OF JUDGMENT", "BENCH:", "CITATION:", "CITATOR INFO", "ACT:", "HEADNOTE:",
           "JUDGMENT:", "CASE NO.:", "REPORTABLE", "CORRECTED", "INSC", "Signature Not Verified", "Digitally signed by",
           "RECORD OF PROCEEDINGS", "Court Master", "http://JUDIS.NIC.IN", "SCC", "AIR", "SCR"]
+
+
+def _h(s):
+    # Line text is not written out: page text can carry personal data (C8 review B-03). Only its sha256 is kept.
+    return hashlib.sha256(s.encode("utf-8")).hexdigest()
 
 
 def main():
@@ -34,7 +39,7 @@ def main():
             pn = re.findall(r"^Page\s+(\d+)\s*$", t, re.M)
             widgets = [w.field_type_string for w in (pg.widgets() or [])]
             pages.append({"pdf_page": i, "chars": len(t), "page_x_of_n": pof, "page_x": pn,
-                          "first_line": lines[0] if lines else "", "last_line": lines[-1] if lines else "",
+                          "first_line_sha256": _h(lines[0]) if lines else "", "last_line_sha256": _h(lines[-1]) if lines else "",
                           "labels": {l: t.count(l) for l in LABELS if l in t}, "widgets": widgets,
                           "annots": [a.type[1] for a in pg.annots()] if pg.annots() else []})
         res[sha] = {"held_path": hp, "page_count": doc.page_count, "metadata": doc.metadata, "pages": pages}

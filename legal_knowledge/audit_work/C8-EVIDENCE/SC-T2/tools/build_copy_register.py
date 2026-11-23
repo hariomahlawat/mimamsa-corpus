@@ -1,6 +1,10 @@
-"""Write c8out/C/sc_copy_evidence_register.csv (one row per candidate copy) from the agent's readings recorded in
+"""Write <out_dir>/sc_copy_evidence_register.csv (committed as SC-T2/sc_copy_evidence_register.csv) (one row per candidate copy) from the agent's readings recorded in
 page_checks_sc_c8.csv and the structural facts gathered by page_structure.py. usage: python build_copy_register.py <out_dir_C>
-Offline; the values below are the agent's recorded observations with their sources cited per field."""
+Offline; the values below are the agent's recorded observations with their sources cited per field.
+Revised after review 5212a95b (B-02): two columns are derived from pinned registers rather than typed here:
+retrieval_evidence_c6_01 (C6-01-PROVENANCE/registers/provenance_recovery_register.csv: retrieval url, date, method,
+remaining_gaps) and limitations (the C6-01 draft-addendum limitations verbatim, the retrieval-date gap, and the C8
+limitations below). usage: python build_copy_register.py <out_dir_C> [<audit_work_dir>]  (default: three levels up)"""
 import csv, sys
 from pathlib import Path
 
@@ -10,7 +14,7 @@ COLS = ["copy_id", "source_id", "sha256", "held_paths_checked", "rehash_result",
         "court", "parties_as_printed", "case_numbers_as_printed", "judgment_date_as_printed", "bench_as_printed", "author_as_printed",
         "neutral_citation_printed", "reported_citations_printed", "reportable_marking", "corrected_marking", "last_page_block",
         "signature_appearance", "header_footer_watermark", "database_or_headnote_material", "layout_observation", "producer_and_pdf_metadata",
-        "recorded_official_locator", "c6_addendum_identity", "cases53_id", "cases53_identity_fields", "discrepancies", "completeness_observation",
+        "recorded_official_locator", "c6_addendum_identity", "cases53_id", "cases53_identity_fields", "discrepancies", "retrieval_evidence_c6_01", "limitations", "completeness_observation",
         "identity_result", "page_check_ids", "reader", "checked_on"]
 
 R = [
@@ -108,7 +112,7 @@ R = [
     dict(copy_id="C5-SRC-J-SC-2019-NS-YADAV~C1", source_id="C5-SRC-J-SC-2019-NS-YADAV",
          sha256="3c50cdb7f30d1a84b488a72052bdf1868cea18ec4e02aee292cf1e97ebf5bbe6", held_paths_checked="downloads/citation-codes/nsyadav_2019.pdf (also independent-reviewer/nsyadav_2019.pdf)",
          bytes="92197", pages_actual="15", printed_pagination="document numbers 1-15 bottom right (italic bold); no 'of N'",
-         court="IN THE SUPREME COURT OF INDIA, CIVIL APPELLATE JURISDICTION", parties_as_printed="NO. 14666828M EX CFN NARSINGH YADAV .....APPELLANT(S) VERSUS UNION OF INDIA & ORS. .....RESPONDENT(S)",
+         court="IN THE SUPREME COURT OF INDIA, CIVIL APPELLATE JURISDICTION", parties_as_printed="NO. [service number masked: 8 digits + letter, as printed] EX CFN NARSINGH YADAV .....APPELLANT(S) VERSUS UNION OF INDIA & ORS. .....RESPONDENT(S)",
          case_numbers_as_printed="CIVIL APPEAL NO. 7672 OF 2019 (DIARY NO. 27850 OF 2017)", judgment_date_as_printed="NEW DELHI; OCTOBER 03, 2019. (p.15)",
          bench_as_printed="(L. NAGESWARA RAO) J.; (HEMANT GUPTA) J. (p.15)", author_as_printed="HEMANT GUPTA, J. (p.1)", neutral_citation_printed="none",
          reported_citations_printed="none", reportable_marking="REPORTABLE (p.1)", corrected_marking="none", last_page_block="two dotted signature lines with names; NEW DELHI; OCTOBER 03, 2019.",
@@ -149,7 +153,7 @@ R = [
          last_page_block="p.62: CONCLUSION para 99, two dotted signature lines, New Delhi; March 24, 2026 (p.31 has the same block as para 51)",
          signature_appearance="p.1 appearance: 'Signature Not Verified / Digitally signed by KAVITA PAHUJA / Date: 2026.04.04 10:11:55 IST / Reason:'; copy_structure byte range [0 721447 726255 4508] covers file YES (structural only)",
          header_footer_watermark="QR code p.1; running footer", database_or_headnote_material="none",
-         layout_observation="Court judgment layout (current sci.gov.in type). The file holds TWO renditions of the judgment: pp.1-31 (CORRECTED, INSC 286, signature appearance, paras 1-51) and pp.32-62 (no CORRECTED/INSC/signature, paras numbered 52-99, service no. 256812 M)",
+         layout_observation="Court judgment layout (current sci.gov.in type). The file holds TWO renditions of the judgment: pp.1-31 (CORRECTED, INSC 286, signature appearance, paras 1-51) and pp.32-62 (no CORRECTED/INSC/signature, paras numbered 4-6 then 52-99, service no. 256812 M)",
          producer_and_pdf_metadata="creator pdftk 2.02; producer itext-paulo-155 modified using iText 5.2.1; created 2026-04-04 10:09:20, modified 10:11:55 +05:30; 2 EOF markers",
          recorded_official_locator="https://api.sci.gov.in/supremecourt/2023/27246/27246_2023_14_1501_69641_Judgement_24-Mar-2026.pdf (held_copies.csv#MULLIKOTE)",
          c6_addendum_identity="Union of India v Balakrishnan Mullikote (Ex Hav), 2026 INSC 286 (corrected), SC", cases53_id="DCLR-SC-2026-N16",
@@ -160,8 +164,40 @@ R = [
 ]
 
 
+AI_CAVEAT = "C8 page readings are AI-agent readings, not human-confirmed; a human should re-check from the render hashes before approval"
+JUDIS_LIM = ("JUDIS typed-text rendition with no signature, judges' names or date block; whether it may be classed PRIMARY_OFFICIAL_COURT_COPY "
+             "is owner decision P-D3 (JUDIS_CLASSIFICATION_ANALYSIS.md), not decided; completeness against a signed original cannot be shown")
+# C8 limitations per copy (from the C8 readings above and EXACT_ANCHOR_FINDINGS.md); carried verbatim into the unsigned templates.
+LIM_C8 = {
+    "C5-SRC-J-SC-1987-RANJIT-THAKUR~C1": [JUDIS_LIM, "pp.1-3 carry database CITATION, CITATOR INFO, ACT and HEADNOTE material that is not part of the judgment; pinpoints must exclude it; an editorial note points to a later order of 10.8.88 that is not held"],
+    "C5-SRC-J-SC-1990-SN-MUKHERJEE~C1": [JUDIS_LIM, "pp.1-3 carry database CITATION, CITATOR INFO, ACT and HEADNOTE material that is not part of the judgment; pinpoints must exclude it; locator path /judgment/judis/ not shown to serve the same resource as /jonew/judis/"],
+    "C5-SRC-J-SC-2005-NAVJOT~C1": [JUDIS_LIM, "first-class record S-REVB-012 is SOURCE_LOCATED, not verified; the case record (cases_53 DCLR-SC-2005-L01) is a CITATION_LEAD without date or case number; no paragraph numbers in this rendition"],
+    "C5-SRC-J-SC-2013-DHARAMVIR~C1": ["(2013) 7 SCC 316 is not printed on this copy and cannot be confirmed from it; watermark and a second page series overlay the court layout"],
+    "C5-SRC-J-SC-2015-RAJBIR~C1": ["entry covers copy C1 only: the C6-01 identity string names C2 and C3 identifiers ('rop_275403; bosir copy') and must be corrected before any real entry; pinpoints apply to C1 pagination (20 pp.) only"],
+    "C5-SRC-J-SC-2019-NS-YADAV~C1": ["the printed appellant name is 'NARSINGH YADAV'; the corpus label 'N S Yadav' is not supported by the document; no cases_53 record"],
+    "C5-SRC-J-SC-2026-GIRISH-FEB~C1": ["signature appearance and spanning byte range are structural only; the signature was not validated"],
+    "C5-SRC-J-SC-2026-MULLIKOTE~C1": ["the file holds two versions of the judgment: pp.1-31 CORRECTED (2026 INSC 286, paras 1-51) and pp.32-62 unmarked (paras 4-6 then 52-99; service number variant); any entry or anchor must name pp.1-31; which version is canonical and the correction date are not established (WS-B OI-03 OPEN); signature structural only, not validated"],
+}
+
+
 def main():
     out = Path(sys.argv[1])
+    aw = Path(sys.argv[2]) if len(sys.argv) > 2 else Path(__file__).resolve().parents[3]
+    with open(aw / "C6-01-PROVENANCE/registers/provenance_recovery_register.csv", newline="", encoding="utf-8") as fh:
+        prov = {r["copy_id"]: r for r in csv.DictReader(fh)}
+    with open(aw / "C6-01-PROVENANCE/addendum/authentication_addendum_v1_draft.csv", newline="", encoding="utf-8") as fh:
+        add = {r["copy_id"]: r for r in csv.DictReader(fh)}
+    for r in R:
+        pv, ad = prov[r["copy_id"]], add[r["copy_id"]]
+        r["retrieval_evidence_c6_01"] = (f"url {pv['retrieval_url']}; date {pv['retrieval_date']}; method {pv['retrieval_method']}; remaining gaps: {pv['remaining_gaps']} "
+                                         f"(C6-01-PROVENANCE/registers/provenance_recovery_register.csv#{r['copy_id']})")
+        lim = [AI_CAVEAT]
+        if pv["retrieval_date"] == "NOT_EVIDENCED":
+            lim.append("RETRIEVAL DATE NOT EVIDENCED: no retrieval date in a retrieval record (C6-01 provenance_recovery_register remaining_gaps); "
+                       "provenance rests on a corroboration record (official URL + sha256)")
+        lim += LIM_C8[r["copy_id"]]
+        lim.append(f"C6-01 draft-addendum limitation carried verbatim (C6-01-PROVENANCE/addendum/authentication_addendum_v1_draft.csv#{ad['entry_id']}): {ad['limitations']}")
+        r["limitations"] = "; ".join(lim)
     with open(out / "sc_copy_evidence_register.csv", "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=COLS, lineterminator="\n")
         w.writeheader()
