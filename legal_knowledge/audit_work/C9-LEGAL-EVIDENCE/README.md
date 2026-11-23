@@ -18,8 +18,8 @@
 The Supreme Court eight-copy package is on the clean evidence branch (draft PR #40, `C9-EVIDENCE-CLEAN/SC-C9/`). It holds the human page-verification pack, the JUDIS policy paper and the joint anchor simulations.
 
 ## Principal results
-- **Raw store missed in C8.** The `raw-data` branch (`ad77758d`) holds 67 statutory PDFs from the approved India Code run. They include the AFT Act 2007 Gazette, the AFT Procedure Rules 2008 and Amendment Rules 2011, the Practice Rules 2009, the Finance Act 2017 and the Tribunals Reforms Act 2021.
-  - Ten C8 "not held" statements are superseded. These copies need registration (AP-C9-02), not acquisition.
+- **Raw store missed in C8.** The `raw-data` branch (`ad77758d`) holds 67 statutory PDFs: 63 India Code files from the approved run and 4 official copies from other hosts, 3 of them correspondence tables (review LG-08). They include the AFT Act 2007 Gazette, the AFT Procedure Rules 2008 and Amendment Rules 2011, the Practice Rules 2009, the Finance Act 2017 and the Tribunals Reforms Act 2021.
+  - Eleven instrument records correct a C8 "not held" statement, and a twelfth (GMO 2023) corrects a PR #9 listing statement (review LG-07). These copies need registration (AP-C9-02), not acquisition.
   - Their authenticity is not established.
 - **Commencement.** The BNS, BNSS and BSA commencement notifications are distinct (S.O. 850(E), 848(E) and 849(E), dated 23-02-2024 per the footnotes). None is held.
   - Act 37/1992 has no commencement clause. The compilation prints "w.e.f. 6-9-1992" only against ss.75-76, s.127 and Chapter XVI. This stays with the legal adviser (AQ-05).
@@ -36,6 +36,6 @@ The Supreme Court eight-copy package is on the clean evidence branch (draft PR #
 - **Synthetic transaction.** The full lifecycle works through the real CLI on the integrated code. The real ledger was untouched.
 
 ## Tests and checks
-- **Reconciliation tool** (`C8-SOURCES/CORPUS-QUALITY/tools/`): BOM handling and field-type validation added, with 54 tests (7 new, each failing against the previous tool).
+- **Reconciliation tool** (`C8-SOURCES/CORPUS-QUALITY/tools/`): BOM handling and field-type validation added, with 57 tests. 10 are new: 7 fail against the Cycle 8 tool, and 3 are regression guards (review LG-01, LG-02).
 - **AUTH-LEDGER:** 190 tests, including the new F-01 test.
 - **Builders:** every one above reproduces with `--check`.

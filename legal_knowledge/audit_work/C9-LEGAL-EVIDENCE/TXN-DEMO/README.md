@@ -5,7 +5,7 @@
 ## What the demo does
 `tools/synthetic_transaction_demo.py` runs offline and deterministically.
 
-1. It copies the real AUTH-LEDGER package from `--source` (default: the repository that contains this folder). The recorded run used the **fully integrated staging** `21e73b83`, after PRs #37, #38 and #39. Its AUTH-LEDGER tools tree, `22b4e6d7`, is identical to the reviewed security head `562a55ef`; all 43 recorded values are identical to the first run on `562a55ef`, and `--check` passes against both. The package is copied into a fresh temporary git repository, created with `mktemp`-style naming under `TXN/work/` and uses the real layout `legal_knowledge/audit_work/AUTH-LEDGER`. The copy includes:
+1. It copies the real AUTH-LEDGER package from `--source` (default: the repository that contains this folder). The recorded run used the **fully integrated staging** `21e73b83`, after PRs #37, #38 and #39. Its AUTH-LEDGER tools tree, `22b4e6d7`, is identical to the reviewed security head `562a55ef`; all 43 recorded values are identical to the first run on `562a55ef`, and `--check` passes against both. The package is copied into a fresh temporary git repository, created with `mktemp`-style naming under `TXN-DEMO/work/` and uses the real layout `legal_knowledge/audit_work/AUTH-LEDGER`. The copy includes:
    - `tools/*.py`, `schema/`, `frozen_inputs.json`;
    - the genesis `ledger/manifest.jsonl` and `ledger/HEAD`;
    - `decisions/README.md`, `evidence/` and `effective/v0000/`;
@@ -45,13 +45,13 @@ It does this through the real CLI, at the real package path, with commit ids tha
 
 ## Re-run
 ```bash
-PYTHONDONTWRITEBYTECODE=1 <venv>/bin/python -B TXN/tools/synthetic_transaction_demo.py --check     # compare (about 50 s)
+PYTHONDONTWRITEBYTECODE=1 <venv>/bin/python -B TXN-DEMO/tools/synthetic_transaction_demo.py --check     # compare (about 50 s)
 ```
 ```bash
-PYTHONDONTWRITEBYTECODE=1 <venv>/bin/python -B TXN/tools/synthetic_transaction_demo.py             # regenerate TRANSCRIPT.md + expected_hashes.json
+PYTHONDONTWRITEBYTECODE=1 <venv>/bin/python -B TXN-DEMO/tools/synthetic_transaction_demo.py             # regenerate TRANSCRIPT.md + expected_hashes.json
 ```
 ```bash
-PYTHONDONTWRITEBYTECODE=1 <venv>/bin/python -B -m unittest discover -s TXN/tools -p 'test_synthetic_transaction.py'
+PYTHONDONTWRITEBYTECODE=1 <venv>/bin/python -B -m unittest discover -s TXN-DEMO/tools -p 'test_synthetic_transaction.py'
 ```
 
 Options:

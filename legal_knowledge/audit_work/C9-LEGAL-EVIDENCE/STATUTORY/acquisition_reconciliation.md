@@ -39,7 +39,7 @@ Source: `acquisition_reconciliation.csv` (one row per required document). Pendin
 
 ## Holdings C8 missed: corpus raw store
 
-The corpus raw store `origin/raw-data` @ad77758d (India Code run approved 2026-11-21, PROGRESS.md) holds 67 statutory PDFs (`tools/inputs/rawdata_statutory_holdings.csv`). C8 counted only the scratchpad held binaries, so it missed these. Among them:
+The corpus raw store `origin/raw-data` @ad77758d holds 67 statutory PDFs: 63 India Code files from the run approved 2026-11-21 (PROGRESS.md) and 4 official copies from other hosts, 3 of them correspondence tables (review LG-08) (`tools/inputs/rawdata_statutory_holdings.csv`). C8 counted only the scratchpad held binaries, so it missed these. Among them:
 - AFT Act 2007 as published (Gazette Extraordinary No.66, 28-12-2007) - C9R-RD-AFT07-IMG [corpus raw store sha256 338d43addeaa14b7 p.1; render sha256 5cdf8ff7726f02f1] (crawl category 'rule', title 'AFT-Act2007': mislabelled);
 - AFT (Procedure) Rules 2008 C9R-RD-AFTPR08-IMG2 [corpus raw store sha256 590cf7cd393564ea p.23; render sha256 8467a704581bf208], Amendment Rules 2011 C9R-RD-AFTPR11-IMG2 [corpus raw store sha256 fc27032fadfe44fd p.2; render sha256 a9fc6364bb179d12], Practice Rules 2009 C9R-RD-AFTPRAC09-IMG [corpus raw store sha256 c57b113a310d5ec1 p.1; render sha256 837a212e83999bfc];
 - AFT Act (Removal of Difficulties) Order 2008 C9R-RD-AFTRDO-IMG2 [corpus raw store sha256 1c6db257efe5ac07 p.1; render sha256 6796fdc90e4bc181] and S.R.O. 9(E)/2009 (establishment, appointed day 10-08-2009) C9R-RD-AFTAPPT-IMG [corpus raw store sha256 8d774f1fcc3358e8 p.1; render sha256 4b943bdc84eda313] - in no C5/C8 register;

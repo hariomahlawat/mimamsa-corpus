@@ -513,6 +513,24 @@ class ReconcileTests(unittest.TestCase):
         self.assert_fail_closed([item(parties=42)], "'parties' must be a string or an object")
         self.assert_fail_closed([item(parties={"petitioner": "A", "respondent": 7})], "object values must be strings")
 
+    def test_corpus_cases_jsonl_with_bom_read(self):  # review LG-02
+        with open(self.fx.cases, "rb") as f:
+            data = f.read()
+        with open(self.fx.cases, "wb") as f:
+            f.write(b"\xef\xbb\xbf" + data)
+        code, rows, err = self.run_batch([item()])
+        self.assertEqual(code, 0, err)
+
+    def test_all_string_fields_type_checked(self):  # review LG-02: every field in STRING_FIELDS
+        for field in ("court", "judgment_date", "sha256", "source_url", "provenance", "item_id",
+                      "version_label", "copy_note", "title", "notes", "citation"):  # pinned here, not read from the tool
+            with self.subTest(field=field):
+                self.assert_fail_closed([item(**{field: 7})], f"'{field}' must be a string")
+
+    def test_null_party_value_accepted(self):  # review LG-02: null object values are allowed
+        code, rows, err = self.run_batch([item(parties={"petitioner": "India Kumar", "respondent": "Union of India", "appellant": None})])
+        self.assertEqual(code, 0, err)
+
     def test_string_types_still_accepted(self):
         code, rows, err = self.run_batch([item(parties={"petitioner": "Hotel Singh", "respondent": "Union of India"},
                                                citations=["(2020) 1 SCC 1"], version_label=None)])

@@ -2,7 +2,7 @@
 """SYNTHETIC first-transaction demonstration of the Project Mimamsa AUTH-LEDGER (offline, deterministic).
 
 Nothing here is an approval. Every decision (D-) and review (R-) record written by this script is SYNTHETIC, lives only
-in a temporary git repository created under TXN/work/, and is deleted at the end of the run. The real ledger is only READ
+in a temporary git repository created under TXN-DEMO/work/, and is deleted at the end of the run. The real ledger is only READ
 (its package code, schema, frozen pins, genesis line and pinned input files are copied); it stays at version 0.
 
 What the script does, through the REAL AUTH-LEDGER code copied from --source:
@@ -21,7 +21,7 @@ The CLI (auth_ledger.py verify / build --as-of N) is invoked by its absolute pat
 tool treats that package as the committed ledger (COMMITTED_PACKAGE, layout check, pinned repository top).
 
 Usage:
-  synthetic_transaction_demo.py [--source REPO]            run, write TXN/TRANSCRIPT.md and TXN/expected_hashes.json
+  synthetic_transaction_demo.py [--source REPO]            run, write TXN-DEMO/TRANSCRIPT.md and TXN-DEMO/expected_hashes.json
   synthetic_transaction_demo.py --check [--source REPO]    run, compare with expected_hashes.json and TRANSCRIPT.md
 Options: --keep (do not delete the temporary repository), --work DIR (parent for the temporary directory)."""
 import argparse, csv, hashlib, importlib, io, json, os, re, shutil, subprocess, sys, tempfile

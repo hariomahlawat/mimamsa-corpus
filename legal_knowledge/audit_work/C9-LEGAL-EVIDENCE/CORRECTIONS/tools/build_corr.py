@@ -152,8 +152,10 @@ FINDINGS = [
          observation=("Identity check: the citation (2008) 8 SCC 648 is printed in two held official Supreme Court copies (Girish p.6 footnote; "
                       "Mullikote p.26 para 43), so the citation is corroborated by official documents that cite Tarsem; the decision date 2008-08-13 "
                       "and C.A. 5151-5152/2008 rest only on the intern mirror (WS-B identity IDENTITY_CORROBORATED_INTERN_MIRROR_ONLY). "
-                      "Tarsem's own text is not held, so its holding and pinpoints ('Paras 4-7') remain unverified, and its only URL is a commercial "
-                      "database. The case record still shows NOT_EXHAUSTIVELY_CHECKED with no treatment edge."),
+                      "No official court copy of Tarsem is held. The raw store holds an unregistered 6-page SCR-format copy ([2008] 12 S.C.R. 104; "
+                      "C.A. 5151-52 of 2008; August 13, 2008; raw-data ad77758d, data/raw/sci/2008/f8a14181...pdf), which agrees with the mirror date "
+                      "and case number but whose provenance is undocumented (review LG-05); the holding and pinpoints ('Paras 4-7') remain unverified "
+                      "against an official copy, and the record's only URL is a commercial database. The case record still shows NOT_EXHAUSTIVELY_CHECKED with no treatment edge."),
          primary_evidence=("%s PDF p.6 fn ('Tarsem Singh (2008) 8 SCC 648'); %s PDF p.26 para 43; WS-B identity_resolution.csv#TARSEM; "
                            "case_relations.csv edge DCLR-SC-2026-007 -> DCLR-SC-2008-N10 DISTINGUISHED") % (h("GIRISH"), h("MULLIKOTE")),
          page_reading_by=READER, proposal_refs="C9-CP-A04; C9-CP-A05", escalation_ref="ESC-01", status="PROPOSAL_NOT_APPLIED"),
@@ -444,8 +446,8 @@ PROPOSALS = [
          proposal_type="SUPPLEMENTATION (append later-treatment note)",
          proposed_change=("Append: 'Later treatment (not exhaustive; not overruled on the documents held): DISTINGUISHED in Girish Kumar (2026 "
                           "INSC 149) para 22 for re-computation claims by existing disability pensioners, with the AFT Act s.22(1)(c) bar held "
-                          "inapplicable; Mullikote (2026 INSC 286) para 43 left the limitation question open. Tarsem Singh's own text is not held; "
-                          "its holding and pinpoints here are unverified.'"),
+                          "inapplicable; Mullikote (2026 INSC 286) para 43 left the limitation question open. No official copy of Tarsem Singh is held "
+                          "(an unregistered SCR-format copy is in the raw store); its holding and pinpoints here are unverified against an official copy.'"),
          primary_evidence="%s PDF pp.15-16 para 22; %s PDF pp.26-27 para 43; WSB-T-005; WSB-T3-003" % (GIR, MUL),
          record_level_impact="DCLR-SC-2008-N10; AFT-013; V7-SC-02", priority_evidence_standard="P1", escalation_ref="ESC-01"),
     dict(proposal_id="C9-CP-A04", supersedes="E8-CP-03", finding_ref="C9-F-A03", matter="A", target_kind="case", record_id="DCLR-SC-2008-N10",

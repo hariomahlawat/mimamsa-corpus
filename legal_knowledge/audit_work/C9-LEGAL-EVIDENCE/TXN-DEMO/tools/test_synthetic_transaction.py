@@ -1,7 +1,7 @@
 """unittest wrapper: re-run the SYNTHETIC AUTH-LEDGER transaction demonstration with --check (deterministic hashes and
-transcript). Offline. The demo builds and deletes its own temporary repository under TXN/work/; the real ledger is only read.
+transcript). Offline. The demo builds and deletes its own temporary repository under TXN-DEMO/work/; the real ledger is only read.
 
-  python -m unittest discover -s TXN/tools -p 'test_synthetic_transaction.py'
+  python -m unittest discover -s TXN-DEMO/tools -p 'test_synthetic_transaction.py'
 Set AUTH_LEDGER_SOURCE to the repository whose AUTH-LEDGER package is to be exercised (default: the demo's built-in path)."""
 import os, subprocess, sys, unittest
 from pathlib import Path

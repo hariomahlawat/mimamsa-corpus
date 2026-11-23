@@ -19,7 +19,7 @@
 
 **Evidence that the treatment is narrow, or that the question is open.**
 - Girish para 22 gives the re-computation ground expressly: Tarsem "has no application to the case in hand as ex-servicemen in the instant appeals are already in receipt of disability pension and are only seeking re-computation" (held `4f7ea3a4…`, PDF p.16).
-- Girish is a two-Judge Bench (two signatories, p.17), the same strength as Tarsem, so it is a coordinate Bench and cannot overrule Tarsem.
+- Girish is a two-Judge Bench (two signatories, p.17). Tarsem is reported as a two-Judge Bench (R.V. Raveendran and Lokeshwar Singh Panta JJ on the unregistered SCR-format copy in the raw store). Whether a coordinate Bench could overrule it, and what relation to record, is for the adviser to decide; it is not stated here as a conclusion (review LG-09).
 - Union of India v Balakrishnan Mullikote (2026 INSC 286, official copy `10e1954f…`, CORRECTED version, PDF pp.26-27, para 43) declined to examine limitation because Tarsem was not invoked. It quoted Girish para 22 and stated: "the said question of law is left open".
 
 **Evidence that the treatment is broader.**
@@ -31,7 +31,7 @@
 - AFT-013 and V7-SC-02 present Tarsem as the governing arrears authority, with no later treatment.
 - V7-JD-04 (the Tarsem digest) has no later-treatment note, although WS-B lists it as affected by both Girish (WSB-T-005) and Mullikote (WSB-T3-003).
 - DCLR-SC-2008-N10 reads `NOT_EXHAUSTIVELY_CHECKED`.
-- Tarsem's own text is **not held**. Its citation is corroborated by the two official judgments that cite it (Girish p.6 footnote; Mullikote p.26). Its date and case number come from an intern mirror only, and its URL is a commercial database.
+- **No official court copy** of Tarsem is held. An unregistered SCR-format copy ([2008] 12 S.C.R. 104) is in the raw store, with undocumented provenance; registering it needs AP-C9-02 (review LG-05; the earlier "not held" was wrong). Its citation is corroborated by the two official judgments that cite it (Girish p.6 footnote; Mullikote p.26). Its date and case number come from an intern mirror only, and its URL is a commercial database.
 
 **Waiting on this decision.** C9-CP-A01, A02, A03, A04 (and A05, metadata only). The proposals state expressly that Tarsem is **not** recorded as overruled.
 
@@ -183,7 +183,7 @@ This updates F-STAT-002 (C9-CP-B07).
 ### ESC-04: Approve acquisition of official copies
 
 The following official copies are needed before Part 1 items can be closed:
-- Tarsem Singh (C.A. 5151-5152/2008);
+- Tarsem Singh (C.A. 5151-5152/2008): an official court copy is still needed; the raw store holds only an unregistered SCR-format copy, so registering it under AP-C9-02 is a separate, cheaper step (review LG-05);
 - the 12-10-2026 Girish Kumar order;
 - Union of India v Wg Cdr S P Rathore (C.A. 10870/2018);
 - the Ram Avtar order (C.A. 418/2012);

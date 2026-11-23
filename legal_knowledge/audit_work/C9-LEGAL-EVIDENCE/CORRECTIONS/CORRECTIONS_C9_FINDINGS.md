@@ -34,7 +34,7 @@
   - It is a two-Judge Bench (P.S. Narasimha and Alok Aradhe JJ, signatures on p.17).
 - **Tarsem Singh.** The citation (2008) 8 SCC 648 is printed in two official judgments that cite Tarsem: Girish p.6 footnote, and Mullikote p.26 para 43.
   - The date 2008-08-13 and C.A. 5151-5152/2008 come from an intern mirror only.
-  - Tarsem's own text is not held, so its holding and pinpoints are unverified.
+  - No official court copy of Tarsem is held. The raw store (`raw-data` `ad77758d`, `data/raw/sci/2008/f8a14181…pdf`) holds an unregistered 6-page SCR-format copy, [2008] 12 S.C.R. 104, C.A. 5151-52 of 2008, dated 13 August 2008. It agrees with the mirror date and case number, but its provenance is undocumented. The holding and pinpoints stay unverified against an official copy (review LG-05; the earlier "not held" was wrong).
 
 **Operative holding.** Girish para 22 (pp.15-16) gives two grounds:
 - "of no assistance", because the law changed after the three-Judge Ram Avtar order (in rem);
@@ -159,7 +159,7 @@ The items are classified as incorrect citations or as unsupported or incomplete 
 ## Reproduce
 
 ```
-python c9out/CORR/tools/build_corr.py <c9src> --check
-python c9out/CORR/tools/build_corr.py <c9src> --verify-held <scratchpad>   # PyMuPDF; 8 hashes, 33 anchors
-cd c9out/CORR && sha256sum -c OUTPUT_SHA256SUMS
+python -I legal_knowledge/audit_work/C9-LEGAL-EVIDENCE/CORRECTIONS/tools/build_corr.py <repo root> --check
+python -I legal_knowledge/audit_work/C9-LEGAL-EVIDENCE/CORRECTIONS/tools/build_corr.py <repo root> --verify-held <scratchpad>   # PyMuPDF; 8 hashes, 33 anchors
+cd legal_knowledge/audit_work/C9-LEGAL-EVIDENCE/CORRECTIONS && sha256sum -c OUTPUT_SHA256SUMS
 ```

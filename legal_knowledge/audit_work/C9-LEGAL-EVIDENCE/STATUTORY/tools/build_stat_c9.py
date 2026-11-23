@@ -729,7 +729,20 @@ def build_graph(ctx):
             status = "DISPUTED_PRESERVE_BOTH"
             cid = "C5-CF-" + rid.split("D-AMC-RES-")[1]
             c = ctx.conf.get(cid, {})
-            readings_pres = f"(a) {c.get('source_a', '')[:220]} || (b) {c.get('source_b', '')[:220]}" if c else "see conflict register"
+            # Review LG-06: readings are carried in full, never truncated; where the C5 register does not itemise the two
+            # sources, say so and carry its conflict description and evidence instead of an empty cell.
+            if cid == "C5-CF-C-01":
+                readings_pres = ("(a) Gazette of 27-11-1954 (S.R.O. 484, archival facsimile c5ef95a9, printed p.300): 'You are not obliged to say anything unless "
+                                 "you wish to do so' || (b) India Code compilation (48f52219) p.41: 'You are obliged to say anything unless you wish to do so' "
+                                 "[C9-LEGAL-EVIDENCE/CORRECTIONS matter B, re-rendered pages; AI-agent reading, not human-confirmed] || "
+                                 f"register source_a: {c.get('source_a', '')} || register source_b: {c.get('source_b', '')}")
+            elif c and (c.get("source_a") or c.get("source_b")):
+                readings_pres = f"(a) {c.get('source_a', '')} || (b) {c.get('source_b', '')}"
+            elif c:
+                readings_pres = (f"readings not itemised in the C5 conflict register ({cid}); conflict: {c.get('nature_of_conflict', '')}; "
+                                 f"evidence: {c.get('evidence', '')}")
+            else:
+                readings_pres = f"{cid} not found in the C5 conflict register"
             detail = r["verification_status"]
             owner = "qualified legal adviser (conflict register: legal_adviser_required)"
         elif not held:
@@ -888,7 +901,7 @@ def build_graph(ctx):
             raise SystemExit(f"bad status {e['status']} on {e['edge_id']}")
         if e["status"] != "EVIDENCED" and e.get("commencement_date_evidenced"):
             raise SystemExit(f"date on non-evidenced edge {e['edge_id']}")
-        if e["status"] == "DISPUTED_PRESERVE_BOTH" and not e.get("preserved_readings") and not e["origin"].startswith("D-AMC-RES"):
+        if e["status"] == "DISPUTED_PRESERVE_BOTH" and not e.get("preserved_readings", "").replace("(a)", "").replace("(b)", "").replace("||", "").strip():
             raise SystemExit(f"disputed edge without readings {e['edge_id']}")
     return fields, rows
 
