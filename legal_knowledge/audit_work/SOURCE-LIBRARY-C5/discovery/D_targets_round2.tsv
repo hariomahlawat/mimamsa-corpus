@@ -1,0 +1,13 @@
+target_id	kind	url
+WB-TA-RULES-1948	listing	https://archive.org/wayback/available?url=https%3A%2F%2Fupload.indiacode.nic.in%2Fshowfile%3Factid%3DAC_CEN_28_38_00001_194856_1517807318980%26filename%3DTA%2BRules%2B1948.pdf%26type%3Drule
+WB-TA-REGS-1976	listing	https://archive.org/wayback/available?url=https%3A%2F%2Fupload.indiacode.nic.in%2Fshowfile%3Factid%3DAC_CEN_28_38_00001_194856_1517807318980%26filename%3DTA%2BRegs%2B1948%2B%2528RE%2B1976%2529.pdf%26type%3Dregulation
+WB-TA-ACT-INDEX	listing	https://archive.org/wayback/available?url=https%3A%2F%2Fwww.indiacode.nic.in%2Fhandle%2F123456789%2F1497
+WB-RA-CDAG-V1	listing	https://archive.org/wayback/available?url=http%3A%2F%2Fcdaguwahati.gov.in%2Fdocs%2Fdsr1.pdf
+WB-RA-CDAG-V2	listing	https://archive.org/wayback/available?url=http%3A%2F%2Fcdaguwahati.gov.in%2Fdocs%2Fdsr2.pdf
+WB-RA-CDAS-V1	listing	https://archive.org/wayback/available?url=https%3A%2F%2Fcdasecbad.ap.nic.in%2Fsankalan%2FARMY%2FDSR%2520for%2520Army%2520V-1.pdf
+WB-RA-CDAS-V2	listing	https://archive.org/wayback/available?url=https%3A%2F%2Fcdasecbad.ap.nic.in%2Fsankalan%2FARMY%2FDSR%2520for%2520Army%2520Vol%25202.pdf
+RA-CDAG-V1	head	https://cdaguwahati.gov.in/docs/dsr1.pdf
+RA-CDAG-V2	head	https://cdaguwahati.gov.in/docs/dsr2.pdf
+RA-CDAS-V1	head	https://cdasecbad.ap.nic.in/sankalan/ARMY/DSR%20for%20Army%20V-1.pdf
+RA-CDAS-V2	head	https://cdasecbad.ap.nic.in/sankalan/ARMY/DSR%20for%20Army%20Vol%202.pdf
+TA-RULES-1948-RETRY	head	https://upload.indiacode.nic.in/showfile?actid=AC_CEN_28_38_00001_194856_1517807318980&filename=TA+Rules+1948.pdf&type=rule

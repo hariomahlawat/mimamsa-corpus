@@ -1,0 +1,561 @@
+"""Cycle 5 register builder (stdlib, deterministic, CI-runnable: reads only files in the repository).
+
+Inputs (never modified):
+- earlier registers: ARMY-RULES-CHAIN-01, WS-A-STATUTORY, SOURCE-CONFLICTS-01, CALIBRATION-02, WS-B-JUDGMENTS, WS-D-QUALITY
+- this package: baseline/*.csv, discovery/*_candidates.csv, inputs/*.csv (hand-authored, evidence-referenced)
+
+Outputs (registers/): source_master_register.csv (D1), acquisition_register.csv (D3), amendment_register.csv and
+provision_amendment_chain.csv (D4), provision_register.csv, source_conflict_register.csv, corpus_crosswalk.csv and
+coverage_summary.json (D6). `--check` rebuilds in memory and fails if any committed output differs.
+
+Rules: values from earlier registers are carried verbatim with their origin file and row id; nothing is promoted.
+A value the inputs do not give is written as NOT_CAPTURED / NOT_DETERMINED, never inferred."""
+import argparse, csv, io, json, re, sys
+from collections import Counter, defaultdict
+from pathlib import Path
+
+PKG = Path(__file__).resolve().parents[1]
+AW = PKG.parent
+sys.path.insert(0, str(AW / "CALIBRATION-02/tools"))
+import evidence_classification as EC  # noqa: E402  (Cycle 4 shared rule: copy-level effective status by sha256)
+REPO = AW.parents[1]
+OUT = PKG / "registers"
+
+
+def read(p):
+    with open(p, newline="", encoding="utf-8") as f:
+        return list(csv.DictReader(f))
+
+
+def csv_text(cols, rows):
+    b = io.StringIO()
+    w = csv.DictWriter(b, fieldnames=cols, lineterminator="\n", extrasaction="raise")
+    w.writeheader()
+    for r in rows:
+        w.writerow({c: r.get(c, "") for c in cols})
+    return b.getvalue()
+
+
+# ---------------------------------------------------------------- schemas (column order is the contract)
+COLS = {
+    "source_master_register.csv": [
+        "source_id", "priority", "title", "authority", "publication_type", "edition", "volume_or_part", "publication_date",
+        "effective_date", "effective_date_status", "source_url", "provenance", "document_authority", "carrier_provenance", "authentication_status",
+        "rights_status", "access_marking", "sha256", "held_paths", "pages", "text_layer_class", "completeness_status",
+        "amendment_chain_status", "currency_status", "holding_state", "evidence_stage", "direct_verification_state",
+        "verification_limitations", "discovery_state", "discovery_candidate_ids", "superseded_candidate_ids",
+        "acquisition_state", "existing_register_refs", "identity_notes", "evidence"],
+    "acquisition_register.csv": [
+        "rank", "acq_c5_id", "source_id", "title", "exact_location", "location_check", "justification", "dependencies",
+        "access_restrictions", "integrity_pin", "required_approval", "approval_state", "existing_acq_refs", "batch"],
+    "amendment_register.csv": [
+        "amendment_id", "publication_source_id", "notification_number", "issuing_authority", "notification_date",
+        "publication_date", "commencement_as_printed", "effective_date", "effective_date_status", "affected_provisions",
+        "gazette_identity", "sha256", "evidence_level", "verification_status", "amendment_chain_status", "origin_register",
+        "origin_id"],
+    "provision_amendment_chain.csv": [
+        "chain_row_id", "publication_source_id", "provision", "instrument_ref", "amendment_instrument", "change_type", "before_text_ref",
+        "after_text_ref", "publication_date", "effective_date", "effective_date_status", "applicable_period", "evidence",
+        "evidence_level", "superseded_by", "origin_register", "origin_id"],
+    "provision_register.csv": [
+        "provision_id", "source_id", "chapter", "section_or_rule", "paragraph", "subparagraph", "page",
+        "exact_text_reference", "effective_from", "effective_to", "verification_status", "completeness_status",
+        "origin_register"],
+    "source_conflict_register.csv": [
+        "conflict_id", "affected_source", "affected_provision", "source_a", "source_b", "nature_of_conflict", "evidence",
+        "legal_adviser_required", "status", "reserved_status", "origin_register", "origin_id"],
+    "corpus_crosswalk.csv": [
+        "source_id", "provision_id", "knowledge_base_record_id", "case_id", "relationship_type", "evidence_status",
+        "review_status", "basis", "anchor_copy_id"],
+    "legal_adviser_evidence_index.csv": [
+        "item_id", "item_type", "subject", "records_or_provisions", "current_state", "origin_register", "origin_id",
+        "evidence_pointers", "determination"],
+    "source_copy_register.csv": [
+        "copy_id", "source_id", "sha256", "held_paths", "bytes", "pages", "text_layer_class", "copy_role",
+        "page_equivalent_to", "equivalence_basis", "copy_carrier_provenance", "acquisition_provenance",
+        "c4_register_state", "c4_effective_source_class", "copy_effective_status", "copy_evidence_class",
+        "eligible_for_exact_anchor"],
+}
+
+# Reserved states fixed by the owner (Cycle 4 closeout); carried, never changed here.
+RESERVED = {"C-01": "CONFLICTING (r.23(3))", "C-08": "OPEN (r.193)", "C-09": "PROPOSAL (r.194)", "SC4-01": "OPEN (r.182)"}
+
+
+def base_source(doc):
+    return {"army-rules": "C5-SRC-P0-ARMY-RULES-1954", "army-act": "C5-SRC-P0-ARMY-ACT-1950"}[doc]
+
+
+# ---------------------------------------------------------------- D4 amendment registers (derived)
+def amendment_rows():
+    rows = []
+    for r in read(AW / "ARMY-RULES-CHAIN-01/army_rules_instrument_register.csv"):
+        rows.append({
+            "amendment_id": "C5-AMD-" + r["instr_id"], "publication_source_id": base_source("army-rules"),
+            "notification_number": r["instrument"], "issuing_authority": "Central Government (Ministry of Defence) under AA s.191 (as printed in instruments; per instrument)",
+            "notification_date": r["instrument_date"], "publication_date": r["publication_date"] or "NOT_CAPTURED",
+            "commencement_as_printed": r["commencement_as_printed"], "effective_date": r["effective_date"],
+            "effective_date_status": r["effective_date_status"], "affected_provisions": r["provisions_affected"],
+            "gazette_identity": r["gazette_publication"], "sha256": r["sha256"], "evidence_level": r["evidence_level"],
+            "verification_status": r["status"], "amendment_chain_status": "PARTIAL (Army Rules chain: AMENDMENT_CHAIN_INCOMPLETE)",
+            "origin_register": "ARMY-RULES-CHAIN-01/army_rules_instrument_register.csv", "origin_id": r["instr_id"]})
+    for fn in ("army_act_amendment_chain.csv", "army_act_amendment_chain_addendum_cycle3.csv"):
+        for r in read(AW / "WS-A-STATUTORY" / fn):
+            rows.append({
+                "amendment_id": "C5-AMD-" + r["chain_id"], "publication_source_id": base_source("army-act"),
+                "notification_number": f'{r["instrument"]} ({r["number_year"]})' if r["number_year"] else r["instrument"],
+                "issuing_authority": "Parliament / Central Government (per instrument)", "notification_date": r["date_of_instrument"],
+                "publication_date": r["publication_date"] or "NOT_CAPTURED", "commencement_as_printed": r["commencement_as_printed"],
+                "effective_date": r["effective_date"], "effective_date_status": r["effective_date_status"],
+                "affected_provisions": r["sections_affected"], "gazette_identity": r["gazette_identity"], "sha256": r["file_sha256"],
+                "evidence_level": r["evidence_level"], "verification_status": r["copy_fidelity"],
+                "amendment_chain_status": r["amendment_chain_status"], "origin_register": "WS-A-STATUTORY/" + fn, "origin_id": r["chain_id"]})
+    extra = PKG / "inputs/amendment_register_additions.csv"
+    if extra.exists():
+        rows += read(extra)
+    return rows
+
+
+def chain_rows():
+    sup = {}
+    for r in read(AW / "WS-A-STATUTORY/provision_change_log_supersessions_cycle3.csv"):
+        sup.setdefault(r["supersedes_change_id"], []).append(r["supersession_id"])
+    rows = []
+    for r in read(AW / "WS-A-STATUTORY/provision_change_log.csv"):
+        pub = base_source("army-act") if r["instrument_ref"].startswith("AA") else base_source("army-rules")
+        rows.append({
+            "chain_row_id": "C5-PCH-" + r["change_id"], "publication_source_id": pub, "provision": r["provision"], "instrument_ref": r["instrument_ref"],
+            "amendment_instrument": r["instrument"], "change_type": r["change_type"],
+            "before_text_ref": r["text_before"] or "NOT_CAPTURED", "after_text_ref": r["text_after_or_summary"] or "NOT_CAPTURED",
+            "publication_date": r["publication_date"] or "NOT_CAPTURED", "effective_date": r["effective_date"],
+            "effective_date_status": r["effective_date_status"], "applicable_period": r["valid_span"] or "NOT_DETERMINED",
+            "evidence": "; ".join(x for x in (f'sha256={r["file_sha256"]}' if r["file_sha256"] else "", r["page_anchor"], r["image_check_ids"]) if x) or "NOT_CAPTURED",
+            "evidence_level": r["evidence_level"], "superseded_by": ";".join(sup.get(r["change_id"], [])),
+            "origin_register": "WS-A-STATUTORY/provision_change_log.csv", "origin_id": r["change_id"]})
+    loc = {r["instr_id"]: r for r in read(AW / "ARMY-RULES-CHAIN-01/army_rules_instrument_register.csv")}
+    for i, r in enumerate(read(AW / "ARMY-RULES-CHAIN-01/army_rules_provision_chronology.csv"), 1):
+        ir = loc.get(r["instrument_id"], {})
+        rows.append({
+            "chain_row_id": f"C5-PCH-ARC-{i:03d}", "publication_source_id": base_source("army-rules"), "provision": r["provision"], "instrument_ref": r["instrument_id"],
+            "amendment_instrument": f'{r["instrument_id"]} {r["instrument"]}'.strip(), "change_type": r["event"],
+            "before_text_ref": "NOT_CAPTURED (see text registers)", "after_text_ref": "NOT_CAPTURED (see text registers)",
+            "publication_date": r["publication_date"] or "NOT_CAPTURED", "effective_date": r["effective_date"],
+            "effective_date_status": r["effective_date_status"], "applicable_period": r["temporal_note"] or "NOT_DETERMINED",
+            "evidence": "; ".join(x for x in (f'sha256={ir["sha256"]}' if re.fullmatch(r"[0-9a-f]{64}", ir.get("sha256", "")) else "",
+                                               ir.get("evidence_locator", ""), ir.get("gazette_publication", "")) if x) or "NOT_CAPTURED",
+            "evidence_level": r["evidence_level"], "superseded_by": "",
+            "origin_register": "ARMY-RULES-CHAIN-01/army_rules_provision_chronology.csv",
+            "origin_id": f'{r["instrument_id"]}|{r["provision"]}|{r["event"]} (data row {i})'})
+    return rows
+
+
+# ---------------------------------------------------------------- provision register (derived)
+def provision_rows(held_sha_by_name):
+    comp = {}
+    for r in read(AW / "WS-A-STATUTORY/statutory_version_completeness_cycle3.csv"):
+        comp[r["provision"].strip()] = r
+    rules_sha = held_sha_by_name["army-rules.pdf"]
+    rows = []
+    for r in read(AW / "CALIBRATION-02/registers/rule_index_spec/compilation_rule_presence.csv"):
+        if r["doc_id"] != "rules-army-rules-1954":
+            continue
+        key = r["rule_key"]  # e.g. r23, r12A
+        m = re.fullmatch(r"r(\d+)([A-Z]*)", key)
+        label = f"r.{m.group(1)}{m.group(2)}" if m else key
+        c = comp.get(label, {})
+        rows.append({
+            "provision_id": f"army-rules-1954#{key}", "source_id": "C5-SRC-P0-ARMY-RULES-1954-INDIACODE",
+            "chapter": "NOT_CAPTURED", "section_or_rule": label, "paragraph": "", "subparagraph": "", "page": r["page"],
+            "exact_text_reference": f"sha256:{rules_sha} compilation p.{r['page']} text line {r['text_line']} ({r['basis']})",
+            "effective_from": "NOT_DETERMINED", "effective_to": "NOT_DETERMINED",
+            "verification_status": "LOCATED_IN_GOVERNMENT_COMPILATION (heading match; wording not verified against Gazette)",
+            "completeness_status": c.get("completeness_status", "NOT_ASSESSED_IN_WS-A"),
+            "origin_register": "CALIBRATION-02/registers/rule_index_spec/compilation_rule_presence.csv; WS-A-STATUTORY/statutory_version_completeness_cycle3.csv"})
+    return rows
+
+
+# ---------------------------------------------------------------- source conflicts (derived + C5 additions)
+def conflict_rows():
+    rows = []
+    sc = AW / "SOURCE-CONFLICTS-01"
+    for fn in ("conflict_determinations.csv",):
+        for r in read(sc / fn):
+            cid = r["conflict_id"].split()[0]
+            rows.append({"conflict_id": "C5-CF-" + cid, "affected_source": r["documents_compared"][:300], "affected_provision": r["provision"],
+                         "source_a": r["authority_each"][:300], "source_b": r["provenance_each"][:300],
+                         "nature_of_conflict": r["preferred_text_research_determination"][:400], "evidence": r["amendment_history"][:400],
+                         "legal_adviser_required": r["legal_review_required"], "status": r["status"], "reserved_status": RESERVED.get(cid, ""),
+                         "origin_register": "SOURCE-CONFLICTS-01/" + fn, "origin_id": r["conflict_id"]})
+    for fn in ("conflict_determinations_update_2026-11-22b.csv", "conflict_determinations_update_2026-11-22c.csv",
+               "conflict_determinations_update_2026-11-22e.csv"):
+        for r in read(sc / fn):
+            cid = r["conflict_id"].split()[0]
+            rows.append({"conflict_id": f"C5-CF-{r['update_id']}", "affected_source": r.get("new_evidence", "")[:300], "affected_provision": r["conflict_id"],
+                         "source_a": "", "source_b": "", "nature_of_conflict": r.get("change", "")[:400],
+                         "evidence": r.get("revised_research_determination", "")[:400], "legal_adviser_required": r.get("legal_review_required", ""),
+                         "status": r.get("status", ""), "reserved_status": RESERVED.get(cid, ""), "origin_register": "SOURCE-CONFLICTS-01/" + fn,
+                         "origin_id": r["update_id"]})
+    for r in read(sc / "conflict_split_2026-11-22d.csv"):
+        rows.append({"conflict_id": "C5-CF-" + r["conflict_id"], "affected_source": f'split from {r["split_from"]}', "affected_provision": r["provision"],
+                     "source_a": "", "source_b": "", "nature_of_conflict": r["question"][:400], "evidence": r["evidence_and_links"][:400],
+                     "legal_adviser_required": r["legal_review_required"], "status": r["current_state"], "reserved_status": RESERVED.get(r["conflict_id"], ""),
+                     "origin_register": "SOURCE-CONFLICTS-01/conflict_split_2026-11-22d.csv", "origin_id": r["conflict_id"]})
+    for r in read(AW / "CALIBRATION-02/registers/source_conflicts_c4.csv"):
+        rows.append({"conflict_id": "C5-CF-" + r["conflict_id"], "affected_source": "Army Rules 1954 r.182 (S.R.O. 17(E)/1993 item 36)", "affected_provision": r["provision"],
+                     "source_a": f'{r["source_1"]} sha256={r["source_1_sha256"]} {r["source_1_locator"]}: {r["source_1_reading"]}'[:400],
+                     "source_b": f'{r["source_2"]} sha256={r["source_2_sha256"]} {r["source_2_locator"]}: {r["source_2_reading"]}'[:400],
+                     "nature_of_conflict": "printed wording differs between instrument and other texts", "evidence": r["independent_readings"][:400],
+                     "legal_adviser_required": "YES", "status": r["state"], "reserved_status": RESERVED.get(r["conflict_id"], ""),
+                     "origin_register": "CALIBRATION-02/registers/source_conflicts_c4.csv", "origin_id": r["conflict_id"]})
+    for r in read(AW / "WS-B-JUDGMENTS/open_inconsistencies_cycle3.csv"):
+        rows.append({"conflict_id": "C5-CF-WSB-" + r["item_id"], "affected_source": r["spec_key"], "affected_provision": "", "source_a": "", "source_b": "",
+                     "nature_of_conflict": f'{r["kind"]}: {r["inconsistency"]}'[:400], "evidence": r["evidence"][:400],
+                     "legal_adviser_required": r["legal_advisor_state"], "status": r["state"], "reserved_status": "WS-B inconsistency (OPEN; unchanged)",
+                     "origin_register": "WS-B-JUDGMENTS/open_inconsistencies_cycle3.csv", "origin_id": r["item_id"]})
+    for i, r in enumerate(read(AW / "ARMY-RULES-CHAIN-01/official_note_discrepancies.csv"), 1):
+        rows.append({"conflict_id": f"C5-CF-OND-{i:02d}", "affected_source": r["note_in_instrument"], "affected_provision": "Army Rules amendment-history note",
+                     "source_a": r["note_in_instrument"], "source_b": "located Gazette instruments (ARMY-RULES-CHAIN-01)",
+                     "nature_of_conflict": f'official note lists through {r["listed_through"]}; {r["omits_or_errs"]}'[:400], "evidence": r["observed_on"],
+                     "legal_adviser_required": "NO (documentary)", "status": "OPEN (recorded)", "reserved_status": "",
+                     "origin_register": "ARMY-RULES-CHAIN-01/official_note_discrepancies.csv", "origin_id": f"data row {i}"})
+    extra = PKG / "inputs/conflict_additions.csv"
+    if extra.exists():
+        rows += read(extra)
+    return rows
+
+
+# ---------------------------------------------------------------- C6-05 legal-adviser evidence index (derived; no determination)
+def adviser_rows(conflicts):
+    rows = []
+    q = read(AW / "CALIBRATION-02/adviser/legal_adviser_questions.csv")
+    topics = defaultdict(list)
+    for r in q:
+        topics[r["topic_id"]].append(r)
+    for t in sorted(topics):
+        rs = topics[t]
+        rows.append({"item_id": f"C6-05-{t}", "item_type": "RESERVED_ITEM" if t.startswith("RES-") else "ADVISER_TOPIC",
+                     "subject": rs[0]["topic"], "records_or_provisions": ";".join(sorted({r["proposition_id"] or r["record_id"] for r in rs if r["proposition_id"] or r["record_id"]})),
+                     "current_state": rs[0]["state"], "origin_register": "CALIBRATION-02/adviser/legal_adviser_questions.csv",
+                     "origin_id": t, "evidence_pointers": ";".join(sorted({f'{r["reviewer"]}:{r["finding_id"]}' for r in rs if r["finding_id"]})),
+                     "determination": "NONE (for the qualified legal adviser)"})
+    for r in read(AW / "CALIBRATION-02/reconciliation/disagreements.csv"):
+        rows.append({"item_id": f'C6-05-ESC-{r["proposition_id"]}', "item_type": f'C4_ESCALATION_{r["kind"]}', "subject": r["reason"][:300],
+                     "records_or_provisions": r["proposition_id"], "current_state": r["disposition"],
+                     "origin_register": "CALIBRATION-02/reconciliation/disagreements.csv", "origin_id": r["proposition_id"],
+                     "evidence_pointers": f'A={r["A_worst_severity"]} B={r["B_worst_severity"]} C={r["C_worst_severity"]} D={r["D_worst_severity"]}',
+                     "determination": "NONE (not resolved by majority)"})
+    for c in conflicts:
+        if c["reserved_status"] or c["legal_adviser_required"].upper().startswith("YES"):
+            rows.append({"item_id": f'C6-05-{c["conflict_id"]}', "item_type": "SOURCE_CONFLICT", "subject": c["nature_of_conflict"][:300],
+                         "records_or_provisions": c["affected_provision"][:200], "current_state": c["reserved_status"] or c["status"],
+                         "origin_register": c["origin_register"], "origin_id": c["origin_id"], "evidence_pointers": c["evidence"][:300],
+                         "determination": "NONE (for the qualified legal adviser)"})
+    return rows
+
+
+# ---------------------------------------------------------------- copy-level provenance (derived)
+OFFICIAL_CARRIERS = ("ISSUING_AUTHORITY", "GOVERNMENT_HOSTED_COPY")
+STAGE_BY_HOLDING = {"NOT_HELD_LEAD_ONLY": "LEAD_ONLY", "NOT_HELD_NOT_FOUND_IN_SEARCHED_SOURCES": "NOT_FOUND_IN_SEARCHED_SOURCES",
+                    "NOT_HELD_NOT_CHECKED": "NOT_CHECKED", "NOT_HELD_BLOCKED_ACCESS": "BLOCKED_ACCESS",
+                    "NOT_HELD_RESTRICTED_SUSPECTED": "RESTRICTED_MARKING_SUSPECTED"}
+
+
+def evidence_stage(row):
+    """Discovery/acquisition stage derived from holding_state and carrier (single source of truth: holding_state).
+    DOCUMENT_AUTHENTICATED is never derived: documented provenance is not custodian authentication."""
+    hs = row["holding_state"]
+    if hs.startswith("HELD"):
+        return "DOCUMENT_ACQUIRED"
+    if hs == "NOT_HELD_CANDIDATE_LOCATED":
+        return "OFFICIAL_CANDIDATE_LOCATED" if row["carrier_provenance"].split(" ")[0] in OFFICIAL_CARRIERS else "ARCHIVAL_OR_THIRD_PARTY_CANDIDATE_LOCATED"
+    return STAGE_BY_HOLDING[hs]
+
+
+DIRECT_VERIFICATION = {"NOT_APPLICABLE_HELD", "BLOCKED_ACCESS", "PERFORMED_SEE_CANDIDATES", "NOT_ATTEMPTED"}
+
+
+def direct_verification(t, cands):
+    """Structured state of direct (non-search-engine) verification of a not-held source's location.
+    An explicit input value (e.g. BLOCKED_ACCESS) wins; otherwise derived from the candidates' check methods."""
+    if t["holding_state"].startswith("HELD"):
+        return "NOT_APPLICABLE_HELD"
+    v = (t.get("direct_verification_state") or "").strip()
+    if v:
+        if v not in DIRECT_VERIFICATION:
+            raise SystemExit(f"{t['source_id']}: direct_verification_state {v} not in vocabulary")
+        return v
+    if any(c["check_method"] in ("HEAD_ONLY", "METADATA_API", "LISTING_PAGE_FETCHED") for c in cands):
+        return "PERFORMED_SEE_CANDIDATES"
+    return "NOT_ATTEMPTED"
+
+
+def copy_class(st):
+    return {EC.EFFECTIVE_PRIMARY: "DOCUMENTED_PRIMARY_COPY", EC.PENDING: "AUTHENTICATION_PENDING_COPY",
+            EC.UNKNOWN: "PROVENANCE_UNDOCUMENTED_COPY", EC.DERIVED: "DERIVED_TEXT_ONLY", EC.MIRROR: "MIRROR_OR_SECONDARY_COPY"}.get(st, "NOT_CLASSIFIED")
+
+
+def copy_rows(master, held):
+    """One row per (source, binary sha256). Status comes only from that sha's own C4 register row via the shared
+    rule; it never transfers between copies of the same instrument, however page-equivalent."""
+    ev = EC.Evidence.from_dir(AW / "CALIBRATION-02")
+    auth = ev.register
+    ann = {(r["source_id"], r["sha256"]): r for r in read(PKG / "inputs/copy_annotations.csv")}
+    rows = []
+    for m in master:
+        shas = [x for x in m["sha256"].split(";") if x]
+        for i, s in enumerate(shas, 1):
+            hs = held[s]
+            st, _detail = ev.source_status(s)
+            a = ann.get((m["source_id"], s), {})
+            reg = auth.get(s, {})
+            rows.append({
+                "copy_id": f'{m["source_id"]}~C{i}', "source_id": m["source_id"], "sha256": s,
+                "held_paths": ";".join(sorted(h["held_path"] for h in hs)), "bytes": hs[0]["bytes"], "pages": hs[0]["pages"],
+                "text_layer_class": hs[0]["text_layer_class"], "copy_role": a.get("copy_role", "COPY"),
+                "page_equivalent_to": a.get("page_equivalent_to", ""), "equivalence_basis": a.get("equivalence_basis", ""),
+                "copy_carrier_provenance": a.get("copy_carrier_provenance", "") or m["carrier_provenance"],
+                "acquisition_provenance": reg.get("provenance_references", "") or a.get("acquisition_provenance", "") or "NOT_DOCUMENTED",
+                "c4_register_state": reg.get("authentication_state", "NO_REGISTER_ROW"),
+                "c4_effective_source_class": reg.get("effective_source_class", ""),
+                "copy_effective_status": st, "copy_evidence_class": copy_class(st),
+                "eligible_for_exact_anchor": "YES" if st == EC.EFFECTIVE_PRIMARY else "NO"})
+    for (sid, s) in ann:
+        if not any(r["source_id"] == sid and r["sha256"] == s for r in rows):
+            raise SystemExit(f"copy annotation for unknown copy {sid} {s[:12]}")
+    return rows
+
+
+def check_holding_vs_copies(master, copies):
+    """Source-level holding_state must agree with copy-level evidence: HELD_PRIMARY_* iff at least one copy has its own
+    documented provenance; HELD_AUTHENTICATION_PENDING iff a pending copy and no documented copy. No prefix shortcut."""
+    docs = {c["source_id"] for c in copies if c["copy_effective_status"] == EC.EFFECTIVE_PRIMARY}
+    pend = {c["source_id"] for c in copies if c["copy_effective_status"] == EC.PENDING}
+    subtype = {"HELD_PRIMARY_GAZETTE_FACSIMILE": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+               "HELD_PRIMARY_GAZETTE_GOVERNMENT_SCAN": "PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN",
+               "HELD_PRIMARY_OFFICIAL_COURT_COPY": "PRIMARY_OFFICIAL_COURT_COPY"}
+    for r in master:
+        hs = r["holding_state"]
+        if hs in subtype and not any(c["source_id"] == r["source_id"] and c["copy_effective_status"] == EC.EFFECTIVE_PRIMARY
+                                     and c["c4_effective_source_class"] == subtype[hs] for c in copies):
+            raise SystemExit(f"{r['source_id']}: {hs} does not match the class of its documented copy")
+        if hs.startswith("HELD_PRIMARY") != (r["source_id"] in docs):
+            raise SystemExit(f"{r['source_id']}: holding_state {hs} disagrees with copy-level evidence")
+        if (hs == "HELD_AUTHENTICATION_PENDING") != (r["source_id"] in pend and r["source_id"] not in docs):
+            raise SystemExit(f"{r['source_id']}: authentication-pending state disagrees with copy-level evidence")
+
+
+# ---------------------------------------------------------------- D1 / D3 (inputs + derived columns)
+def master_rows(held, cands, auth, targets=None):
+    rows = []
+    for t in (targets if targets is not None else read(PKG / "inputs/target_publications.csv")):
+        shas = [s for s in t["held_sha256"].split(";") if s]
+        paths, pages, tl = [], set(), set()
+        for s in shas:
+            if s not in held:
+                raise SystemExit(f"{t['source_id']}: held_sha256 {s} not in baseline/held_binaries_manifest.csv")
+            for h in held[s]:
+                paths.append(h["held_path"]); pages.add(h["pages"]); tl.add(h["text_layer_class"])
+        cids = [c for c in t["discovery_candidate_ids"].split(";") if c]
+        for c in cids:
+            if c not in cands:
+                raise SystemExit(f"{t['source_id']}: discovery candidate {c} not found")
+        sup = [c for c in t.get("superseded_candidate_ids", "").split(";") if c]
+        for c in sup:
+            if c not in cids:
+                raise SystemExit(f"{t['source_id']}: superseded candidate {c} is not among its discovery candidates")
+        states = sorted({cands[c]["discovery_state"] for c in cids if c not in sup})
+        a = [auth[s] for s in shas if s in auth]
+        r = dict(t)
+        r.update({
+            "sha256": ";".join(shas), "held_paths": ";".join(sorted(paths)), "pages": ";".join(sorted(p for p in pages if p)),
+            "text_layer_class": ";".join(sorted(tl)),
+            "holding_state": t["holding_state"],
+            "evidence_stage": evidence_stage(t),
+            "direct_verification_state": direct_verification(t, [cands[c] for c in cids if c not in sup]),
+            "discovery_state": ";".join(states) if states else t.get("discovery_state", "") or "NOT_CHECKED",
+            "authentication_status": t["authentication_status"] + (f" | C4 register: {a[0]['authentication_state']}/{a[0]['effective_source_class']}" if a else ""),
+        })
+        if shas and t["holding_state"].startswith("NOT_HELD"):
+            raise SystemExit(f"{t['source_id']}: holding_state NOT_HELD but sha256 given")
+        if not shas and t["holding_state"].startswith("HELD"):
+            raise SystemExit(f"{t['source_id']}: holding_state HELD without sha256")
+        rows.append(r)
+    return rows
+
+
+def acquisition_rows(master, rows=None):
+    ids = {m["source_id"] for m in master}
+    rows = rows if rows is not None else read(PKG / "inputs/acquisition_batches.csv")
+    for r in rows:
+        if r["source_id"] not in ids:
+            raise SystemExit(f"{r['acq_c5_id']}: unknown source_id {r['source_id']}")
+        for d in [x for x in r["dependencies"].split(";") if x.startswith("C5-ACQ-")]:
+            if d not in {q["acq_c5_id"] for q in rows}:
+                raise SystemExit(f"{r['acq_c5_id']}: unknown dependency {d}")
+        if r["approval_state"] != "NOT_APPROVED":
+            raise SystemExit(f"{r['acq_c5_id']}: approval_state must be NOT_APPROVED in this package")
+    return sorted(rows, key=lambda r: int(r["rank"]))
+
+
+# ---------------------------------------------------------------- D6 crosswalk
+def amended_rules():
+    """Army Rules provisions with any recorded amendment event or reserved conflict (rule numbers only)."""
+    out = {"r23", "r182", "r193", "r194"}  # reserved conflicts (C-01, SC4-01, C-08, C-09)
+    texts = [r["provision"] for r in read(AW / "WS-A-STATUTORY/provision_change_log.csv") if not r["instrument_ref"].startswith("AA")]
+    texts += [r["provision"] for r in read(AW / "ARMY-RULES-CHAIN-01/army_rules_provision_chronology.csv") if r["event"].lower() not in ("enacted", "enacts", "principal")]
+    # instrument-register provisions_affected, including HINT_ONLY / TO_CHECK instruments (independent review RV-31)
+    texts += [r["provisions_affected"] for r in read(AW / "ARMY-RULES-CHAIN-01/army_rules_instrument_register.csv") if r["instr_id"] != "AR-000"]
+    for t in texts:
+        for n in re.findall(r"\br{1,2}\.?\s*(\d+[A-Z]?)", t):
+            out.add("r" + n)
+    return out
+
+
+def crosswalk(master, copies):
+    m = {x["source_id"]: x for x in master}
+    amended = amended_rules()
+    anchor_copy = {}
+    for c in copies:
+        if c["eligible_for_exact_anchor"] == "YES":
+            anchor_copy.setdefault(c["source_id"], c["copy_id"])
+    mp = {r["key"]: r for r in read(PKG / "inputs/corpus_source_map.csv")}
+    rows = []
+    for r in read(AW / "WS-D-QUALITY/canonical_coverage.csv"):
+        if not r["items"].strip():
+            rows.append({"source_id": "NONE", "provision_id": "", "knowledge_base_record_id": r["record_id"], "case_id": "",
+                         "relationship_type": "NO_CITATION", "evidence_status": "MISSING_EVIDENCE", "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+                         "basis": "record carries no source citation (WS-D canonical_coverage items empty)"})
+            continue
+        for it in [x for x in r["items"].split(" | ") if x]:
+            mm = re.match(r"([a-z]+):(.*?)(?:=>([^\[#]+))?\[([a-z-]+)\](?:#(.*))?$", it)
+            if not mm:
+                rows.append({"source_id": "UNMAPPED", "provision_id": "", "knowledge_base_record_id": r["record_id"], "case_id": "",
+                             "relationship_type": "CITES", "evidence_status": "MISSING_EVIDENCE", "review_status": "NOT_REVIEWED",
+                             "basis": f"unparsed WS-D item: {it[:120]}"})
+                continue
+            kind, code, tgt, st, loc = mm.groups()
+            key = (tgt or "").strip() or code.strip()
+            e = mp.get(key) or mp.get(code.strip())
+            sid = e["source_id"] if e else "UNMAPPED"
+            src = m.get(sid)
+            if sid == "UNMAPPED" or src is None:
+                status, why = "MISSING_EVIDENCE", "citation not identified to a C5 source"
+            elif not src["holding_state"].startswith("HELD"):
+                status, why = "MISSING_EVIDENCE", f"source identified but not held ({src['holding_state']})"
+            elif (st == "id" and loc and sid in anchor_copy and sid == "C5-SRC-P0-ARMY-RULES-1954"
+                  and set(loc.split(",")) & amended):
+                status, why = "PARTIAL_MATCH", "as-notified 1954 text held, but a cited rule has a recorded amendment or reserved conflict: current wording needs the chain"
+            elif st == "id" and loc and sid in anchor_copy:
+                status, why = "EXACT_ANCHOR", ("identified, provision locator present, a documented-primary copy held (anchor to the held version; currency not implied"
+                                               + ("; Army Rules chain incomplete: instruments with unknown provisions affected exist)" if sid == "C5-SRC-P0-ARMY-RULES-1954" else ")"))
+            else:
+                status, why = "PARTIAL_MATCH", f"{'inferred identity' if st != 'id' else 'no provision locator' if not loc else 'held copy is ' + src['holding_state']}"
+            rows.append({"source_id": sid, "provision_id": f"{key}#{loc}" if loc else "", "knowledge_base_record_id": r["record_id"], "case_id": "",
+                         "relationship_type": "CITES", "evidence_status": status, "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+                         "basis": f"WS-D {kind}:{code}[{st}]; {why}", "anchor_copy_id": anchor_copy.get(sid, "") if status == "EXACT_ANCHOR" else ""})
+    cases = [json.loads(l) for l in open(REPO / "legal_knowledge/curated_originals/case_law/v0.9/cases_53.jsonl", encoding="utf-8")]
+    cmap = {r["key"]: r for r in read(PKG / "inputs/case_source_map.csv")}
+    for c in cases:
+        e = cmap.get(c["id"])
+        sid = e["source_id"] if e else "UNMAPPED"
+        src = m.get(sid)
+        if src is None:
+            status, why = "MISSING_EVIDENCE", "no held official copy mapped"
+        elif sid in anchor_copy:
+            status, why = "EXACT_ANCHOR", "documented-primary official judgment copy held (identity per mapping input)"
+        else:
+            status, why = "PARTIAL_MATCH", f"held copy is {src['holding_state']}"
+        rows.append({"source_id": sid, "provision_id": "", "knowledge_base_record_id": "", "case_id": c["id"], "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
+                     "evidence_status": status, "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
+                     "basis": f"case source_status={c['source_status']}; {why}", "anchor_copy_id": anchor_copy.get(sid, "") if status == "EXACT_ANCHOR" else ""})
+    return rows
+
+
+def build():
+    held = defaultdict(list)
+    by_name = {}
+    for h in read(PKG / "baseline/held_binaries_manifest.csv"):
+        held[h["rehashed_sha256"]].append(h)
+        by_name.setdefault(h["held_path"].rsplit("/", 1)[-1], h["rehashed_sha256"])
+    cands = {}
+    for p in sorted((PKG / "discovery").glob("*_candidates.csv")):
+        for r in read(p):
+            if r["candidate_id"] in cands:
+                raise SystemExit(f"duplicate candidate id {r['candidate_id']}")
+            cands[r["candidate_id"]] = r
+    auth = {r["sha256"]: r for r in read(AW / "CALIBRATION-02/registers/source_authentication_register.csv")}
+    master = master_rows(held, cands, auth)
+    copies = copy_rows(master, held)
+    check_holding_vs_copies(master, copies)
+    out = {
+        "source_master_register.csv": master,
+        "acquisition_register.csv": acquisition_rows(master),
+        "amendment_register.csv": amendment_rows(),
+        "provision_amendment_chain.csv": chain_rows(),
+        "provision_register.csv": provision_rows(by_name),
+        "source_conflict_register.csv": conflict_rows(),
+        "corpus_crosswalk.csv": crosswalk(master, copies),
+        "source_copy_register.csv": copies,
+    }
+    out["legal_adviser_evidence_index.csv"] = adviser_rows(out["source_conflict_register.csv"])
+    texts = {k: csv_text(COLS[k], v) for k, v in out.items()}
+    cw = out["corpus_crosswalk.csv"]
+    kb = defaultdict(set)
+    for r in cw:
+        if r["knowledge_base_record_id"]:
+            kb[r["knowledge_base_record_id"]].add(r["evidence_status"])
+    def rec_class(s):
+        return "ALL_EXACT" if s == {"EXACT_ANCHOR"} else "NO_EXACT_ANCHOR" if "EXACT_ANCHOR" not in s else "SOME_EXACT"
+    reg = read(AW / "CALIBRATION-02/registers/source_authentication_register.csv")
+    docs = {c["source_id"] for c in copies if c["copy_effective_status"] == EC.EFFECTIVE_PRIMARY}
+    pend = {c["source_id"] for c in copies if c["copy_effective_status"] == EC.PENDING}
+    summary = {
+        "authentication": {
+            "c4_register_rows": len(reg),
+            "c4_register_by_state_and_class": dict(sorted(Counter(f'{r["authentication_state"]}/{r["effective_source_class"]}' for r in reg).items())),
+            "copies_total": len(copies),
+            "copies_by_evidence_class": dict(sorted(Counter(c["copy_evidence_class"] for c in copies).items())),
+            "documented_primary_copies": sum(1 for c in copies if c["copy_effective_status"] == EC.EFFECTIVE_PRIMARY),
+            "authentication_pending_copies": sum(1 for c in copies if c["copy_effective_status"] == EC.PENDING),
+            "sources_with_documented_primary_copy": len(docs),
+            "sources_authentication_pending_only": len(pend - docs),
+        },
+        "master_by_evidence_stage": dict(sorted(Counter(r["evidence_stage"] for r in master).items())),
+        "master_sources": len(master),
+        "master_by_priority": dict(sorted(Counter(r["priority"] for r in master).items())),
+        "master_by_holding_state": dict(sorted(Counter(r["holding_state"].split(" ")[0] for r in master).items())),
+        "acquisition_items": len(out["acquisition_register.csv"]),
+        "amendment_rows": len(out["amendment_register.csv"]), "provision_chain_rows": len(out["provision_amendment_chain.csv"]),
+        "provision_register_rows": len(out["provision_register.csv"]), "conflict_rows": len(out["source_conflict_register.csv"]),
+        "crosswalk_rows": len(cw),
+        "crosswalk_kb_items_by_status": dict(sorted(Counter(r["evidence_status"] for r in cw if r["knowledge_base_record_id"]).items())),
+        "crosswalk_case_rows_by_status": dict(sorted(Counter(r["evidence_status"] for r in cw if r["case_id"]).items())),
+        "kb_records_in_crosswalk": len(kb),
+        "kb_records_by_anchor_class": dict(sorted(Counter(rec_class(s) for s in kb.values()).items())),
+        "kb_items_by_source": dict(sorted(Counter(r["source_id"] for r in cw if r["knowledge_base_record_id"]).items())),
+    }
+    texts["coverage_summary.json"] = json.dumps(summary, indent=1, sort_keys=True) + "\n"
+    return texts
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--check", action="store_true")
+    a = ap.parse_args()
+    texts = build()
+    bad = []
+    for k, t in texts.items():
+        p = OUT / k
+        if a.check:
+            if not p.exists() or p.read_text(encoding="utf-8") != t:
+                bad.append(k)
+        else:
+            p.write_text(t, encoding="utf-8")
+    if bad:
+        print("STALE OR DIFFERENT:", ", ".join(bad))
+        return 1
+    print(texts["coverage_summary.json"])
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

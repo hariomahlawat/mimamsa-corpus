@@ -1,0 +1,48 @@
+utc_time	method	url	http_status	bytes_or_content_length	purpose
+2026-11-23T04:20:27Z	GET	https://archive.org/robots.txt	200	238	robots
+2026-11-23T04:20:30Z	GET	https://archive.org/advancedsearch.php?q=title%3A%28%22regulations%20for%20the%20army%22%29%20OR%20title%3A%28%22defence%20services%20regulations%22%29%20OR%20title%3A%28%22regulations%20for%20the%20medical%20services%22%29%20OR%20title%3A%28%22regulations%20for%20the%20air%20force%22%29%20OR%20title%3A%28%22regulations%20for%20the%20navy%22%29&fl[]=identifier&fl[]=title&fl[]=date&fl[]=year&fl[]=creator&fl[]=publisher&fl[]=collection&fl[]=imagecount&rows=100&output=json	200	33575	IA search DSR titles
+2026-11-23T04:20:40Z	GET	https://archive.org/advancedsearch.php?q=%28title%3A%28regulations%29%20AND%20title%3A%28india%29%20AND%20%28title%3A%28army%29%20OR%20title%3A%28defence%29%20OR%20title%3A%28navy%29%20OR%20title%3A%28%22air%20force%22%29%20OR%20title%3A%28medical%29%29%29%20OR%20title%3A%28%22army%20instructions%22%29%20OR%20title%3A%28%22army%20orders%22%20AND%20india%29%20OR%20title%3A%28%22defence%20services%22%29%20OR%20title%3A%28%22regulations%20for%20the%20indian%22%29&fl[]=identifier&fl[]=title&fl[]=date&fl[]=year&fl[]=publisher&fl[]=imagecount&rows=150&output=json	200	34663	IA search India army regulations
+2026-11-23T04:20:50Z	GET	https://archive.org/metadata/in.ernet.dli.2015.548585	200	7981	IA metadata in.ernet.dli.2015.548585
+2026-11-23T04:20:54Z	GET	https://archive.org/metadata/in.ernet.dli.2015.548544	200	8260	IA metadata in.ernet.dli.2015.548544
+2026-11-23T04:20:57Z	GET	https://archive.org/metadata/regulations-for-the-army-in-india	200	7608	IA metadata regulations-for-the-army-in-india
+2026-11-23T04:21:00Z	GET	https://archive.org/metadata/in.ernet.dli.2015.548435	200	7988	IA metadata in.ernet.dli.2015.548435
+2026-11-23T04:21:03Z	GET	https://archive.org/metadata/1945-regs-brit-india-release-regulations-for-the-army	200	8051	IA metadata 1945-regs-brit-india-release-regulations-for-the-army
+2026-11-23T04:21:22Z	GET	https://www.mod.gov.in/robots.txt	000		robots
+2026-11-23T04:21:26Z	GET	https://www.mod.gov.in/acts-rules-army	200	8802	MoD acts-rules-army listing
+2026-11-23T04:21:43Z	GET	https://www.mod.gov.in/robots.txt	200	23	robots retry
+2026-11-23T04:21:55Z	HEAD	https://www.mod.gov.in/sites/default/files/AR8.pdf	404	4789	HEAD MoD AR8.pdf
+2026-11-23T04:21:58Z	HEAD	https://www.mod.gov.in/sites/default/files/AFRegulations.pdf	404	4789	HEAD MoD AFRegulations.pdf
+2026-11-23T04:22:01Z	HEAD	https://www.mod.gov.in/sites/default/files/RegsNavyI.pdf	404	4789	HEAD MoD RegsNavyI.pdf
+2026-11-23T04:22:04Z	HEAD	https://www.mod.gov.in/sites/default/files/RegsNavyIII.pdf	404	4789	HEAD MoD RegsNavyIII.pdf
+2026-11-23T04:22:06Z	HEAD	https://www.mod.gov.in/sites/default/files/AR-eng-2009_0.pdf	404	4789	HEAD MoD AR-eng-2009_0.pdf
+2026-11-23T04:22:26Z	GET	https://archive.claws.co.in/robots.txt	200	89	robots
+2026-11-23T04:22:29Z	GET	https://archive.claws.co.in/360/a-relook-at-outdated-army-regulations-nilendra-kumar.html	200	0	CLAWS article RA 1987 revision status
+2026-11-23T04:22:53Z	GET	https://archive.org/metadata/in.gazette.central.e.1987-01-26.30784	200	4559	IA metadata gazette 1987 citing RA 1962
+2026-11-23T04:22:57Z	GET	https://www.desw.gov.in/robots.txt	000		robots
+2026-11-23T04:23:01Z	GET	https://www.desw.gov.in/sites/default/files/VOL-1%20E-BOOK/files/basic-html/page17.html	404	38712	DESW compendium page mentioning RA
+2026-11-23T04:23:11Z	GET	https://www.dmamod.gov.in/robots.txt	200	25	robots
+2026-11-23T04:23:22Z	GET	https://www.dmamod.gov.in/cms/wp-json/post-page/central_documents	200	153643	DMA central_documents listing JSON
+2026-11-23T04:23:39Z	HEAD	https://dmamod.gov.in/static//uploads/2025/11/a23e07d261e7fedd2781e7c3b33c8ba3.pdf	200	4161184	HEAD DMA DSR volume
+2026-11-23T04:23:43Z	HEAD	https://dmamod.gov.in/static//uploads/2025/11/c28072bacee8d1f0951c3e8c27ab434b.pdf	200	1871252	HEAD DMA DSR volume
+2026-11-23T04:23:48Z	HEAD	https://dmamod.gov.in/static//uploads/2025/11/c810de805f7a805a3a7b5e626815a886.pdf	200	699393	HEAD DMA DSR volume
+2026-11-23T04:23:53Z	HEAD	https://dmamod.gov.in/static//uploads/2025/11/aaea1a735a2df20349aca3b1c958884d.pdf	200	1146146	HEAD DMA DSR volume
+2026-11-23T04:23:57Z	HEAD	https://dmamod.gov.in/static//uploads/2025/11/a152ed0ae5be40767092244e88bb8cff.pdf	200	369390	HEAD DMA DSR volume
+2026-11-23T04:24:14Z	GET	https://archive.org/advancedsearch.php?q=%28title%3A%28regulations%29%20AND%20%28title%3A%28army%29%20OR%20title%3A%28medical%29%20OR%20title%3A%28defence%29%20OR%20title%3A%28services%29%29%20AND%20date%3A%5B1947-01-01%20TO%202026-12-31%5D%20AND%20%28collection%3Adigitallibraryindia%20OR%20collection%3Ain.gov%20OR%20collection%3AJaiGyan%20OR%20subject%3A%28india%29%20OR%20title%3A%28india%29%20OR%20title%3A%28indian%29%29%29&fl[]=identifier&fl[]=title&fl[]=date&fl[]=collection&rows=100&output=json	200	8551	IA search post-1947 Indian regulations
+2026-11-23T04:24:41Z	GET	https://beta.nationalarchives.gov.uk/robots.txt	200	6339	robots
+2026-11-23T04:24:50Z	GET	https://beta.nationalarchives.gov.uk/catalogue/id/4323f32c-667c-41ed-80b9-db9411e64cc2	200	60245	TNA catalogue RAI 1925-1944
+2026-11-23T04:25:15Z	WEBSEARCH	"Regulations for the Army" 1987 revised edition pdf	n/a	n/a	WebSearch tool query (time logged at batch end; issued earlier in session)
+2026-11-23T04:25:15Z	WEBSEARCH	"Regulations for the Army 2008" India	n/a	n/a	WebSearch tool query (time logged at batch end; issued earlier in session)
+2026-11-23T04:25:15Z	WEBSEARCH	"Defence Services Regulations" "Regulations for the Army" 1962 edition	n/a	n/a	WebSearch tool query (time logged at batch end; issued earlier in session)
+2026-11-23T04:25:15Z	WEBSEARCH	"Regulations for the Army" "Revised Edition 1987" para	n/a	n/a	WebSearch tool query (time logged at batch end; issued earlier in session)
+2026-11-23T04:25:15Z	WEBSEARCH	"Regulations for the Army" 1987 "correction slip" OR "amendment" India para 349 OR para 364	n/a	n/a	WebSearch tool query (time logged at batch end; issued earlier in session)
+2026-11-23T04:25:15Z	WEBSEARCH	Regulations for the Medical Services of the Armed Forces 2010 RMSAF pdf	n/a	n/a	WebSearch tool query (time logged at batch end; issued earlier in session)
+2026-11-23T04:25:15Z	WEBSEARCH	"Defence Services Regulations" "Regulations for the Army" last revised 1987 Nilendra Kumar	n/a	n/a	WebSearch tool query (time logged at batch end; issued earlier in session)
+2026-11-23T04:25:15Z	WEBSEARCH	"Regulations for the Army" 1987 site:aftdelhi.nic.in OR site:sci.gov.in OR site:delhihighcourt.nic.in para	n/a	n/a	WebSearch tool query (time logged at batch end; issued earlier in session)
+2026-11-23T04:25:15Z	WEBSEARCH	"Regulations for the Air Force" 1964 OR "Regulations for the Navy" Part I Defence Services Regulations mod.gov.in	n/a	n/a	WebSearch tool query (time logged at batch end; issued earlier in session)
+2026-11-23T04:25:15Z	WEBSEARCH	"Regulations for the Army" 1962 India "Defence Services Regulations" Manager of Publications	n/a	n/a	WebSearch tool query (time logged at batch end; issued earlier in session)
+2026-11-23T04:25:15Z	WEBSEARCH	"Regulations for the Army" India 1987 worldcat OR "Controller of Publications" OR "Govt. of India Press"	n/a	n/a	WebSearch tool query (time logged at batch end; issued earlier in session)
+2026-11-23T04:25:15Z	WEBSEARCH	"Regulations for the Medical Services of the Armed Forces" 1983 OR 2010 site:gov.in OR site:nic.in	n/a	n/a	WebSearch tool query (time logged at batch end; issued earlier in session)
+2026-11-23T04:25:15Z	WEBSEARCH	gazette notification "in the Regulations for the Army" amendment para substituted Ministry of Defence	n/a	n/a	WebSearch tool query (time logged at batch end; issued earlier in session)
+2026-11-23T04:25:15Z	WEBSEARCH	"Regulations for the Army" "Volume I" OR "Volume II" India DSR "For Official Use Only"	n/a	n/a	WebSearch tool query (time logged at batch end; issued earlier in session)
+2026-11-23T04:25:15Z	WEBSEARCH	"Regulations for the Army, 1987" para judgment Armed Forces Tribunal	n/a	n/a	WebSearch tool query (time logged at batch end; issued earlier in session)
+2026-11-23T04:25:15Z	WEBSEARCH	"Regulations for the Army" 1987 indianarmy.nic.in OR desw.gov.in OR cgda.nic.in download	n/a	n/a	WebSearch tool query (time logged at batch end; issued earlier in session)
