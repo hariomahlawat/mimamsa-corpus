@@ -14,7 +14,7 @@ AW = PKG.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import build_provenance as P  # noqa: E402
 
-COLS = ["addendum_entry_id", "proposal_id", "sha256", "source_id", "copy_id", "document_identity", "original_c5_holding_state",
+COLS = ["addendum_entry_id", "proposal_id", "entry_status", "sha256", "source_id", "copy_id", "document_identity", "original_c5_holding_state",
         "original_c4_register_state", "provenance_evidence_refs", "locator_strength", "identity_evidence_refs",
         "proposed_authentication_state", "proposed_effective_source_class", "primary_or_non_primary", "justification",
         "limitations", "crosswalk_effect_this_entry_alone", "reviewer_decision", "owner_decision", "decision_record_ref"]
@@ -58,7 +58,8 @@ def build():
         assert p["sha256"] not in c4, "an addendum entry must not duplicate a Cycle 4 register row"
         cls = p["effective_source_class"]
         rows.append({
-            "addendum_entry_id": f"C6-ADD-v1-{p['sha256'][:8]}", "proposal_id": p["proposal_id"], "sha256": p["sha256"],
+            "addendum_entry_id": f"C6-ADD-v1-{p['sha256'][:8]}", "proposal_id": p["proposal_id"],
+            "entry_status": "WITHHELD" if p["proposal_status"].startswith("WITHHELD") else "DRAFT_PENDING", "sha256": p["sha256"],
             "source_id": r["source_id"], "copy_id": r["copy_id"], "document_identity": p["document_identity"],
             "original_c5_holding_state": r["current_authentication_status"].split(" / ")[0],
             "original_c4_register_state": "NO_ROW (copy absent from the Cycle 4 register)",
@@ -72,9 +73,10 @@ def build():
                                 + ("; class reserved for owner decision (final review R-04)" if r["source_id"] in P.WATERMARKED_GAZETTE_REHOSTS else "")
                                 if cls.startswith("NON_PRIMARY") else "class follows the Cycle 4 class for the same carrier type"),
             "limitations": p["limitations"],
-            "crosswalk_effect_this_entry_alone": crosswalk_effect(p),
+            "crosswalk_effect_this_entry_alone": crosswalk_effect(p) + (" (WITHHELD: not applied)" if p["proposal_status"].startswith("WITHHELD") else ""),
             "reviewer_decision": "PENDING (C6-01 final review covers the proposal; an addendum-specific review is required before incorporation)",
-            "owner_decision": "PENDING (not approved)", "decision_record_ref": "",
+            "owner_decision": p["proposal_status"] if p["proposal_status"].startswith("WITHHELD") else "PENDING (not approved)",
+            "decision_record_ref": "owner instruction, PR #33 finalisation (2026-11-23)" if p["proposal_status"].startswith("WITHHELD") else "",
         })
     return rows
 

@@ -50,6 +50,23 @@ DOCUMENTARY_FINDINGS = {
                                     "'No.16 (Hindi masthead) / No.15 (English masthead)' until resolved against another copy of the same issue; "
                                     "Part II s.1, 29-03-1975, Act No.13 of 1975 and p.81 are confirmed"],
 }
+# Disputed facts inside a transcribed identity (not resolved here; see SOURCE-LIBRARY-C5 D7 "Disagreements").
+SO4010_DISPUTE = ("date of MHA Notification S.O. No. 4010 as transcribed from the RS page ('6th December, 1986', C5-PIC-02 4x zoom; "
+                  "PILOT-01 S-REVA-021) is DISPUTED: the Cycle 5 independent reviewer read '08-12-1986' (SOURCE-LIBRARY-C5 review RV-01); "
+                  "the disagreement is OPEN (SOURCE-LIBRARY-C5/reports/D7_INDEPENDENT_REVIEW_REPORT.md, Disagreements); the notification "
+                  "itself is not held and its authoritative date is NOT_VERIFIED; the Gazette of S.O. 4010/1986 is the evidence required to settle it")
+IDENTITY_ANNOTATIONS = {
+    "C5-SRC-P2-RS-PAPERS-LAID-1987": " [S.O. 4010 date as transcribed from the RS page; DISPUTED (C5 RV-01 reads 08-12-1986; C5 D7 disagreement OPEN); "
+                                     "authoritative notification date NOT_VERIFIED]",
+}
+DOCUMENTARY_FINDINGS_EXTRA = {"C5-SRC-P2-RS-PAPERS-LAID-1987": ["documentary finding: " + SO4010_DISPUTE]}
+# Proposals withheld by owner instruction: kept on record (append-only) but never simulated or approvable as they stand.
+WITHHELD = {
+    "C5-SRC-P2-RS-PAPERS-LAID-1987": "WITHHELD (owner instruction, PR #33 finalisation 2026-11-23): retained as a discovery/evidence candidate, "
+                                     "not approved as authenticated parliamentary evidence; the retrieval record marks authenticity UNCONFIRMED and "
+                                     "the URL is an archive.org item page, not a verified file URL; its procedural value as a record of laying "
+                                     "is distinct from the legal authority of the notification it mentions",
+}
 WATERMARKED_GAZETTE_REHOSTS = {"C5-SRC-P0-TRA-2026"}  # C6-PIC-01/02: IndiaCode watermark over an e-Gazette page
 SCOPE = ("HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED", "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED")
 AUTH_COLS = ["sha256", "document_identity", "issuer_or_authority", "held_paths", "carrier", "official_locator_recorded",
@@ -86,7 +103,9 @@ def collect():
         if HEX.fullmatch(s) and r.get("page_image_check_id"):
             ev[s].append(("I?", f"ACQ-02/supplement_inventory.csv#{r['supp_id']}", r["page_image_check_id"]))
     for fn in sorted(glob.glob(str(AW / "PILOT-01/sources/*.json")) + glob.glob(str(AW / "R23-VERIFY-01/sources/*.json"))):  # explicit evidence folders (re-verification N-3)
-        for o in json.load(open(fn, encoding="utf-8")):
+        with open(fn, encoding="utf-8") as fh:
+            recs = json.load(fh)
+        for o in recs:
             s = o.get("sha256") or ""
             loc = o.get("locator") or ""
             for s2 in sorted(set(HEX.findall(loc)) - {s}):  # another copy's sha256 recorded inside a retrieval record's locator
@@ -172,7 +191,9 @@ def build():
         held_index[r["sha256"]].append(r["scratchpad_relative_path"])
     snaps = {}
     for rel in ("ACQ-01/archive_org_metadata_snapshot.json", "ACQ-02/archive_org_metadata_snapshot_acq02.json"):
-        for ident, d in json.load(open(AW / rel, encoding="utf-8")).items():
+        with open(AW / rel, encoding="utf-8") as fh:
+            snapdata = json.load(fh)
+        for ident, d in snapdata.items():
             for f in d.get("pdf_files", []) + d.get("files", []):
                 snaps[(f.get("md5"), f.get("sha1") or "", str(f.get("size")))] = (f"{rel}#{ident}/{f.get('name')}", f"https://archive.org/download/{ident}/{f.get('name')}"
                                                                                   + (" [archive file source=derivative]" if f.get("source") == "derivative" else ""))
@@ -237,12 +258,12 @@ def build():
                 gaps.append("identity not verified on a page image" + ("" if court else " (scanned/official publication: text layer not accepted)"))
         if not dates:
             gaps.append("no retrieval date in a retrieval record" + (" (only a register date)" if regdates else ""))
-        gaps += DOCUMENTARY_FINDINGS.get(c["source_id"], [])
+        gaps += DOCUMENTARY_FINDINGS.get(c["source_id"], []) + DOCUMENTARY_FINDINGS_EXTRA.get(c["source_id"], [])
         siblings = [x["copy_id"] for x in read(AW / "SOURCE-LIBRARY-C5/registers/source_copy_register.csv") if x["source_id"] == c["source_id"] and x["copy_id"] != c["copy_id"]]
         cls = proposed_class(m, outcome, c)
         row = {
             "copy_id": c["copy_id"], "source_id": c["source_id"], "sha256": s, "held_paths": c["held_paths"],
-            "source_identity": m["title"], "issuing_authority": m["authority"], "carrier": c["copy_carrier_provenance"],
+            "source_identity": m["title"] + IDENTITY_ANNOTATIONS.get(c["source_id"], ""), "issuing_authority": m["authority"], "carrier": c["copy_carrier_provenance"],
             "retrieval_url": " ; ".join(urls[:3]) or "; ".join(d.split(" | ")[0] for k, _, d in items if k == "L4") or "NOT_EVIDENCED", "retrieval_date": "; ".join(dates) or ("; ".join(regdates) if regdates else "NOT_EVIDENCED"),
             "retrieval_method": "; ".join(sorted({{"L1": "official URL corroborated by recorded sha256", "L2": "archive.org file matched to item metadata (size/md5/sha1)",
                                                    "L3": "agent retrieval record (source JSON)", "L4": "discovery register download record",
@@ -259,7 +280,8 @@ def build():
         rec.append(row)
         if outcome == "PROVENANCE_DOCUMENTED":
             props.append({
-                "sha256": s, "document_identity": m["title"], "issuer_or_authority": m["authority"],
+                "sha256": s, "document_identity": m["title"] + IDENTITY_ANNOTATIONS.get(c["source_id"], ""), "issuer_or_authority": m["authority"],
+                "proposal_status": WITHHELD.get(c["source_id"], "PROPOSED (pending review and owner approval)"),
                 "held_paths": "; ".join(sorted(held_index[s])), "carrier": c["copy_carrier_provenance"].split(" (as reported")[0],
                 "official_locator_recorded": urls[0] if urls else "; ".join(d.split(" | ")[0] for k, _, d in items if k == "L4"), "provenance_references": "; ".join(ref for k, ref, _ in sorted(items) if k in ("L1", "L2", "L3", "L4", "L5", "L6", "I", "T", "WSB")),
                 "provenance_evidence": "; ".join(sorted({{"L1": "official URL with recorded sha256 equal to held bytes",
@@ -387,16 +409,17 @@ def outputs():
         raise SystemExit("duplicate proposal_id or sha256 in proposals: lengthen the display prefix")
     texts = {
         "provenance_recovery_register.csv": csv_text(rec_cols, rec),
-        "source_authentication_proposals.csv": csv_text(["proposal_id"] + AUTH_COLS, [dict(p, proposal_id=proposal_id(p["sha256"])) for p in props]),
+        "source_authentication_proposals.csv": csv_text(["proposal_id", "proposal_status"] + AUTH_COLS, [dict(p, proposal_id=proposal_id(p["sha256"])) for p in props]),
         "unresolved_provenance_register.csv": csv_text(["copy_id", "source_id", "sha256", "proposed_outcome", "what_is_missing", "evidence_found", "next_step"], unresolved),
     }
-    impact = coverage_impact(props)
+    impact = coverage_impact([p for p in props if p["proposal_status"].startswith("PROPOSED")])  # withheld entries are never simulated
     summary = {
         "denominators": {"held_unique_binaries_c5": 67, "held_binary_paths_c5": 93, "undocumented_copies_c5": 54,
                          "scope_sources": len({c["source_id"] for c in copies}), "scope_copies": len(copies)},
         "outcomes_by_copy": dict(sorted(Counter(r["proposed_outcome"] for r in rec).items())),
         "outcomes_by_source_type": dict(sorted(Counter(f'{r["proposed_outcome"]}|{"court" if "-J-" in r["source_id"] else "publication"}' for r in rec).items())),
-        "proposals": len(props), "proposals_by_class": dict(sorted(Counter(p["effective_source_class"] for p in props).items())),
+        "proposals": len(props), "proposals_by_status": dict(sorted(Counter(p["proposal_status"].split(" ")[0] for p in props).items())),
+        "proposals_by_class": dict(sorted(Counter(p["effective_source_class"] for p in props).items())),
         "coverage_impact": impact,
     }
     texts["c6_01_summary.json"] = json.dumps(summary, indent=1, sort_keys=True) + "\n"

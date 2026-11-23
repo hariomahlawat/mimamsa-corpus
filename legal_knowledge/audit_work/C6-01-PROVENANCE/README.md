@@ -21,7 +21,8 @@
 | `reports/` | `C6-01_METHOD.md`, D1–D6 reports |
 | `review/` | independent verification (D3), including the final review of e7a10e27 (`final_review_e7a10e27.md`); `legacy_proposal_id_map.csv` maps the sequential AP-nn IDs used by the first verification and the re-verification to the current sha256-based IDs |
 | `tools/build_provenance.py` | deterministic builder (`--check`) |
-| `addendum/` | **draft** versioned authentication-addendum plan and entries (`tools/build_addendum_plan.py`, `--check`); not executed |
+| `addendum/` | **draft** versioned authentication-addendum plan and entries (`tools/build_addendum_plan.py`, `--check`) and `INTEGRATION_ARCHITECTURE.md` (derived effective-state design); not executed |
+| `reports/TRA2026_CLASS_COMPARISON.md`, `reports/EVIDENCE_RECOVERY_REQUIREMENTS.md` | TRA 2026 versus the Act 37/1992 precedent; what would complete the two partial copies |
 
 Reproduce:
 ```bash

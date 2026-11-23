@@ -156,6 +156,23 @@ class C6Provenance(unittest.TestCase):
         self.assertIn("Hindi issue No.16 but English issue No.15", act13["remaining_gaps"])
         self.assertEqual(act13["retrieval_date"], "register dated 2026-11-22")  # no invented retrieval date
 
+    def test_so4010_date_dispute_and_rs_withheld(self):
+        props = {p["sha256"][:8]: p for p in read("source_authentication_proposals.csv")}
+        rs = props["fa51a4b1"]
+        self.assertTrue(rs["proposal_status"].startswith("WITHHELD"))
+        self.assertIn("DISPUTED", rs["document_identity"])
+        self.assertIn("NOT_VERIFIED", rs["document_identity"])
+        self.assertEqual(sum(p["proposal_status"].startswith("PROPOSED") for p in props.values()), 33)
+        rec = {r["source_id"]: r for r in read("provenance_recovery_register.csv")}["C5-SRC-P2-RS-PAPERS-LAID-1987"]
+        for k in ("08-12-1986", "RV-01", "D7_INDEPENDENT_REVIEW_REPORT", "Gazette of S.O. 4010/1986"):
+            self.assertIn(k, rec["remaining_gaps"])
+        self.assertIn("6th December", rec["remaining_gaps"])  # the transcription is preserved, attributed
+        # the Cycle 5 records are not rewritten
+        c5 = (REPO / "legal_knowledge/audit_work/SOURCE-LIBRARY-C5/reports/D7_INDEPENDENT_REVIEW_REPORT.md").read_text(encoding="utf-8")
+        self.assertIn("OPEN, documentary", c5)
+        s = json.loads((PKG / "registers/c6_01_summary.json").read_text())
+        self.assertEqual(s["proposals_by_status"], {"PROPOSED": 33, "WITHHELD": 1})
+
     def test_isaac_untouched(self):
         isaac = "3f49a31464fec174cdbff5d9e194fa888ca00529b6246eacdc8ac2368eab4653"
         self.assertNotIn(isaac, {r["sha256"] for r in read("provenance_recovery_register.csv")})
@@ -191,7 +208,14 @@ class C6Addendum(unittest.TestCase):
         self.assertEqual(len(rows), len(read("source_authentication_proposals.csv")))
         for r in rows:
             self.assertEqual(r["locator_strength"], "FULL")
-            self.assertTrue(r["owner_decision"].startswith("PENDING") and r["reviewer_decision"].startswith("PENDING"))
+            self.assertTrue(r["reviewer_decision"].startswith("PENDING"))
+            if r["entry_status"] == "WITHHELD":
+                self.assertTrue(r["owner_decision"].startswith("WITHHELD") and r["decision_record_ref"])
+                self.assertIn("WITHHELD: not applied", r["crosswalk_effect_this_entry_alone"])
+            else:
+                self.assertEqual((r["entry_status"], r["owner_decision"]), ("DRAFT_PENDING", "PENDING (not approved)"))
+                if r["primary_or_non_primary"] == "NON_PRIMARY":  # non-primary never yields an exact anchor
+                    self.assertTrue(r["crosswalk_effect_this_entry_alone"].startswith("none"), r["proposal_id"])
             self.assertEqual(r["original_c4_register_state"], "NO_ROW (copy absent from the Cycle 4 register)")
         changed = {r["crosswalk_effect_this_entry_alone"].split(":")[0] for r in rows if not r["crosswalk_effect_this_entry_alone"].startswith("none")}
         self.assertEqual(len(changed), 7)  # the seven SC case records, matching D4

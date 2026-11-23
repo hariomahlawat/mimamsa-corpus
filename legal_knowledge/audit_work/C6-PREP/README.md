@@ -12,3 +12,4 @@
 | **C6-05** Legal-adviser evidence pack | `registers/c6_05_adviser_pack_status.json` | Unchanged: 13 adviser topics, 29 calibration escalations, 9 reserved items and 13 open WS-B inconsistencies. Reserved states: r.23(3) CONFLICTING, r.182 SC4-01 OPEN, r.193 OPEN, r.194 PROPOSAL. **0 determinations.** The full pointer index is `SOURCE-LIBRARY-C5/registers/legal_adviser_evidence_index.csv`. |
 
 **Readiness summary and approvals:** `reports/C6-02_TO_C6-05_READINESS.md`.
+- **Owner proposals:** `reports/C6_PROPOSALS_SCOPE_AND_METADATA.md`: archive.org metadata pin rule (P-C6-02-META) and the narrow C6-04 scope extension (P-C6-04-SCOPE).
