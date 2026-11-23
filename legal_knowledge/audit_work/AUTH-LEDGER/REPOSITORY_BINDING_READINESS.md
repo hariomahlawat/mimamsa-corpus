@@ -4,7 +4,7 @@ A BIND line is the step that makes an approved ledger version effective (`APPROV
 
 | Dependency | State at Cycle 8 | Needed before the first BIND line | Who |
 | --- | --- | --- | --- |
-| Full git history in CI | The audit workflow uses `actions/checkout@v4` with its default depth of 1. A shallow clone makes binding verification fail closed, by design | The `fetch-depth: 0` change, prepared as a separate draft PR. That PR also runs `auth_ledger.py verify` as an explicit CI step | owner (O-3) |
+| Full git history in CI | The audit workflow uses `actions/checkout@v4` with its default depth of 1. A shallow clone makes binding verification fail closed, by design | The `fetch-depth: 0` change, prepared as a separate draft PR. That PR also runs `auth_ledger.py verify` as an explicit CI step. **Update (Cycle 9):** done; PR #37 merged at `ff425a9a` | owner (O-3); done |
 | Shallow-clone detection | Implemented: `git rev-parse --is-shallow-repository` must be false | — | done |
 | Branch protection on `legal-knowledge/v2.5-staging` | Unknown. Not readable or changeable from here, and not changed | Require a PR, at least one approving review, dismissal of stale approvals on new pushes, no force-push, no bypass | owner (O-2) |
 | Required independent review | Recorded in the BIND line as asserted values (review id, login, commit). The commit must equal `reviewed_head` | An auditor confirms them online (GitHub API: pull request reviews), because git history does not contain reviews | auditor |

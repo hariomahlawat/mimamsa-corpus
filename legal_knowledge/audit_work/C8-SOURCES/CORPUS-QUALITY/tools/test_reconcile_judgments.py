@@ -467,6 +467,57 @@ class ReconcileTests(unittest.TestCase):
         self.assertEqual(code, 2)
         self.assertIn("duplicate column", err)
 
+    # --- C9 N-05: BOM and field types ------------------------------------------------------
+    def _write_bytes(self, name, data):
+        p = os.path.join(self.tmp.name, name)
+        with open(p, "wb") as f:
+            f.write(data)
+        return p
+
+    def test_csv_with_bom_accepted(self):
+        hdr = "court,case_numbers,judgment_date,parties,sha256,source_url\n"
+        row = "Supreme Court,CA 77/2020,2020-01-01,Golf v India," + SHA_B + ",x\n"
+        p = self._write_bytes("bom.csv", b"\xef\xbb\xbf" + (hdr + row).encode())
+        code, err = self._main(self.fx.args(p, self.out))
+        self.assertEqual(code, 0, err)
+        with open(self.out, newline="") as f:
+            self.assertEqual(len(list(csv.DictReader(f))), 1)
+
+    def test_jsonl_with_bom_accepted(self):
+        p = self._write_bytes("bom.jsonl", b"\xef\xbb\xbf" + (json.dumps(item()) + "\n").encode())
+        code, err = self._main(self.fx.args(p, self.out))
+        self.assertEqual(code, 0, err)
+
+    def test_corpus_csv_with_bom_read(self):
+        with open(self.fx.identity, "rb") as f:
+            data = f.read()
+        with open(self.fx.identity, "wb") as f:
+            f.write(b"\xef\xbb\xbf" + data)
+        self.assertNotIn("\ufeff", "".join(rj.rcsv(self.fx.identity)[0].keys()))
+
+    def test_bom_not_at_start_is_data(self):
+        p = self._write_bytes("midbom.jsonl", (json.dumps(item()) + "\n").encode() + b"\xef\xbb\xbf" + (json.dumps(item(sha256=SHA_A2)) + "\n").encode())
+        code, err = self._main(self.fx.args(p, self.out))
+        self.assertEqual(code, 2)
+        self.assertIn("invalid JSON", err)
+
+    def test_non_string_scalars_fail_closed(self):
+        for field, val in (("court", 5), ("judgment_date", 20200101), ("sha256", 123), ("source_url", {"u": "x"}),
+                           ("item_id", True), ("version_label", ["corrected"]), ("citation", 1.5)):
+            with self.subTest(field=field):
+                self.assert_fail_closed([item(**{field: val})], f"'{field}' must be a string")
+
+    def test_non_string_list_or_party_types_fail_closed(self):
+        self.assert_fail_closed([item(case_numbers=1234)], "'case_numbers' must be a string or a list")
+        self.assert_fail_closed([item(citations={"a": "b"})], "'citations' must be a string or a list")
+        self.assert_fail_closed([item(parties=42)], "'parties' must be a string or an object")
+        self.assert_fail_closed([item(parties={"petitioner": "A", "respondent": 7})], "object values must be strings")
+
+    def test_string_types_still_accepted(self):
+        code, rows, err = self.run_batch([item(parties={"petitioner": "Hotel Singh", "respondent": "Union of India"},
+                                               citations=["(2020) 1 SCC 1"], version_label=None)])
+        self.assertEqual(code, 0, err)
+
     # --- helpers ------------------------------------------------------------------------------
     def test_case_key_range_expansion(self):
         keys = rj.case_keys(["C.A. 6820–6824/2018"])
