@@ -1,0 +1,8 @@
+{
+ "description": "Evidence facts copied once from C6-01 (no C6-01 code is used by the overlay). Produced locally from the held binaries by C6-01-PROVENANCE/tools/compute_copy_facts.py; structural observations only (no signature is cryptographically validated).",
+ "copied_at_commit": "939a128af242abf268b759b2dff9abf8a2adc585",
+ "files": {
+  "copy_facts.csv": {"from": "legal_knowledge/audit_work/C6-01-PROVENANCE/inputs/held_copy_facts.csv", "sha256": "b4709f06cc4f3d2837109ae19fe36de195a406c422dbb76c35796f862c91667c"},
+  "copy_structure.csv": {"from": "legal_knowledge/audit_work/C6-01-PROVENANCE/inputs/copy_structure_c6.csv", "sha256": "2aeefc811c33e80949e7be7f917382b9ae0b6aa51407f1dd0e15ba990397b67d"}
+ }
+}
