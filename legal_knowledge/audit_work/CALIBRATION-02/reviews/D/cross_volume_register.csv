@@ -2,7 +2,7 @@ link_id,record_id,other_record_ids,relation,evidence,severity
 D-CV-001,CM-001,CM-013;CM-SC-18,INCONSISTENT,"CM-001 cites 'AA §§2, 108-127' without flag; CM-013/CM-SC-18 state s.127 omitted 1992 (Act 37 of 1992 s.11, Gazette text sha d1114517...)",P3
 D-CV-002,KB-030,CM-013;CM-SC-18,INCONSISTENT,KB-030 locator 'ss 108-130' spans omitted s.127 without flag,P3
 D-CV-003,HCE-033,HCE-015;HCE-031,INCONSISTENT,"HCE-033 cites 'AR rr 22-26' incl. r.25 omitted by SRO 17(E) 6 Dec 1993 (AR compilation p.45); HCE-015 marks it obsolete; HCE-031 cites rr 22-24, 26",P3
-D-CV-004,COI-003,KB-012;EV-014;EV-008,INCONSISTENT,COI-003 'do not treat all CoI statements as admissible' vs r.182 general inadmissibility stated in KB-012/EV-014/EV-008 (AR r.182 p.197),P2
+D-CV-004,COI-003,KB-012;EV-014;EV-008,INCONSISTENT,COI-003 'do not treat all CoI statements as admissible' vs r.182 general inadmissibility stated in KB-012/EV-014/EV-008 (AR r.182 p.197),P1
 D-CV-005,HCE-016,KB-003,INCONSISTENT,HCE-016 's.80 primarily addresses persons other than officers/JCOs/WOs' vs KB-003 and AA s.80 text (applies only to such persons),P2
 D-CV-006,CM-026,CM-025;EV-023;EV-024;EV-025;EV-027;EV-028,MISSING_LINK,CM-026 leaves evidence law '[VERIFY]' and omits BSA s.63 certificate; CM-025 and EV electronic-evidence records address it,P2
 D-CV-007,V8-JD-02,CIV-010;CIV-011,CONFLICTING_VERSION,"V8-JD-02 says '1952 rules'; held Som Datt text quotes 1962 Rules (S.R.O. 709, 17 Apr 1962; 7-day notice); CIV-011 states 1978 Rules 15-day interval; no record sets out the 1962->1978->BNSS s.521 chain",P2
