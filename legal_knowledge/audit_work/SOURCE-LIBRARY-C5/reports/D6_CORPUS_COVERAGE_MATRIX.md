@@ -7,7 +7,7 @@
 The crosswalk is **technical**. It says whether authoritative text is *held* for a citation. It says nothing about whether the record is legally correct, and every row is `NOT_REVIEWED`.
 
 ## Classes
-- **EXACT_ANCHOR:** the source is identified, a provision locator is present, and a *primary* copy is held with documented provenance. For the Army Rules this applies only to rules that have no recorded amendment and no reserved conflict. The anchor is to the held version: **currency is not implied**, because the Army Rules chain is incomplete.
+- **EXACT_ANCHOR:** the source is identified, a provision locator is present, and **a copy with its own documented provenance** is held. That copy is named in `anchor_copy_id` (schema c5-2). The state of one copy never transfers to another. For the Army Rules this applies only to rules that have no recorded amendment and no reserved conflict. The anchor is to the held version: **currency is not implied**, because the Army Rules chain is incomplete.
 - **PARTIAL_MATCH:** the source is identified but one of these applies:
   - only a compilation or a copy with undocumented provenance is held;
   - the identity is inferred;
@@ -32,7 +32,7 @@ The 42 exact KB anchors all point to Army Rules 1954 provisions with no recorded
 - **AFT Act (89), BNSS (50) and BSA (64):** compilations only.
 - **Pension records (PEN module, M08):** 75 of 96 have only MISSING items, because PRA 2008, ER and GMO are not held.
 
-The six exact case anchors are PPS Bedi, Virendra Kumar, Jasbir Singh, Parashotam Dass, Anvar and Arjun Panditrao: official SC copies with documented provenance. Seven case records are partial, because their official SC copies are held but their provenance is not registered: Girish Kumar (Feb), Mullikote, Dharamvir, Rajbir, Ranjit Thakur, S N Mukherjee and Navjot Sandhu. The other 40 cases have no held official copy in this index.
+These figures were recomputed after the c5-2 copy-level change and are unchanged: no exact anchor depended on an undocumented copy. The six exact case anchors are PPS Bedi, Virendra Kumar, Jasbir Singh, Parashotam Dass, Anvar and Arjun Panditrao: official SC copies with documented provenance. Seven case records are partial, because their official SC copies are held but their provenance is not registered: Girish Kumar (Feb), Mullikote, Dharamvir, Rajbir, Ranjit Thakur, S N Mukherjee and Navjot Sandhu. The other 40 cases have no held official copy in this index.
 
 ## Module view (KB records)
 | Module | All exact | Some exact | Partial only | Missing only |

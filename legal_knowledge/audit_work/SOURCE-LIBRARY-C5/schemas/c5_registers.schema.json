@@ -1,7 +1,7 @@
 {
  "$schema": "https://json-schema.org/draft/2020-12/schema",
  "title": "Mimamsa Cycle 5 source-library registers (CSV column contracts)",
- "version": "c5-1",
+ "version": "c5-2",
  "note": "CSV registers; each entry fixes column order (enforced by tools/check_c5.py) and controlled values. Identifiers from earlier registers (instr_id, chain_id, change_id, conflict_id, acq_id, record and case ids) are referenced, never overwritten. Enumerated columns are checked on their first token; a parenthesised qualifier may follow (e.g. 'PARTIAL (AMENDMENT_CHAIN_INCOMPLETE)', the brief's label, kept compatible with policy v1).",
  "registers": {
   "source_master_register.csv": {
@@ -31,6 +31,8 @@
     "amendment_chain_status",
     "currency_status",
     "holding_state",
+    "evidence_stage",
+    "verification_limitations",
     "discovery_state",
     "discovery_candidate_ids",
     "acquisition_state",
@@ -62,10 +64,23 @@
      "HELD_PRIMARY_GAZETTE_GOVERNMENT_SCAN",
      "HELD_PRIMARY_OFFICIAL_COURT_COPY",
      "HELD_UNVERIFIED_MANUAL",
-     "NOT_HELD_LOCATED",
+     "NOT_HELD_BLOCKED_ACCESS",
+     "NOT_HELD_CANDIDATE_LOCATED",
+     "NOT_HELD_LEAD_ONLY",
      "NOT_HELD_NOT_CHECKED",
-     "NOT_HELD_NOT_FOUND",
+     "NOT_HELD_NOT_FOUND_IN_SEARCHED_SOURCES",
      "NOT_HELD_RESTRICTED_SUSPECTED"
+    ],
+    "evidence_stage": [
+     "ARCHIVAL_OR_THIRD_PARTY_CANDIDATE_LOCATED",
+     "BLOCKED_ACCESS",
+     "DOCUMENT_ACQUIRED",
+     "DOCUMENT_AUTHENTICATED",
+     "LEAD_ONLY",
+     "NOT_CHECKED",
+     "NOT_FOUND_IN_SEARCHED_SOURCES",
+     "OFFICIAL_CANDIDATE_LOCATED",
+     "RESTRICTED_MARKING_SUSPECTED"
     ],
     "currency_status": [
      "AMENDMENT_INSTRUMENT",
@@ -209,7 +224,8 @@
     "relationship_type",
     "evidence_status",
     "review_status",
-    "basis"
+    "basis",
+    "anchor_copy_id"
    ],
    "enums": {
     "evidence_status": [
@@ -219,6 +235,65 @@
     ]
    },
    "reuse": "Brief fields E; items parsed from WS-D canonical_coverage.csv; case rows from cases_53.jsonl ids."
+  },
+  "source_copy_register.csv": {
+   "enums": {
+    "copy_evidence_class": [
+     "DOCUMENTED_PRIMARY_COPY",
+     "AUTHENTICATION_PENDING_COPY",
+     "PROVENANCE_UNDOCUMENTED_COPY",
+     "DERIVED_TEXT_ONLY",
+     "MIRROR_OR_SECONDARY_COPY",
+     "NOT_CLASSIFIED"
+    ],
+    "eligible_for_exact_anchor": [
+     "YES",
+     "NO"
+    ]
+   },
+   "reuse": "NEW in c5-2. One row per (source_id, binary sha256). copy_effective_status comes from that sha's own CALIBRATION-02 source-authentication register row through the Cycle 4 shared rule (CALIBRATION-02/tools/evidence_classification.py); it never transfers between copies, however page-equivalent.",
+   "columns": [
+    "copy_id",
+    "source_id",
+    "sha256",
+    "held_paths",
+    "bytes",
+    "pages",
+    "text_layer_class",
+    "copy_role",
+    "page_equivalent_to",
+    "equivalence_basis",
+    "copy_carrier_provenance",
+    "acquisition_provenance",
+    "c4_register_state",
+    "c4_effective_source_class",
+    "copy_effective_status",
+    "copy_evidence_class",
+    "eligible_for_exact_anchor"
+   ]
+  },
+  "legal_adviser_evidence_index.csv": {
+   "enums": {},
+   "reuse": "NEW in c5-2 (C6-05). Pointer index over CALIBRATION-02 adviser questions, the 29 C4 escalations and source conflicts needing legal review; carries states verbatim; determination is always NONE.",
+   "columns": [
+    "item_id",
+    "item_type",
+    "subject",
+    "records_or_provisions",
+    "current_state",
+    "origin_register",
+    "origin_id",
+    "evidence_pointers",
+    "determination"
+   ]
   }
+ },
+ "migration_c5_1_to_c5_2": {
+  "source_master_register.csv": "added evidence_stage (derived) and verification_limitations after holding_state; holding_state NOT_HELD_NOT_FOUND -> NOT_HELD_NOT_FOUND_IN_SEARCHED_SOURCES, NOT_HELD_LOCATED -> NOT_HELD_CANDIDATE_LOCATED, HELD_PRIMARY_AUTHENTICATION_PENDING -> HELD_AUTHENTICATION_PENDING (applied in 33c2e1b4); new values NOT_HELD_LEAD_ONLY, NOT_HELD_BLOCKED_ACCESS; source_id values unchanged except the BNSS/BSA split (-INDIACODE rows added in 33c2e1b4)",
+  "corpus_crosswalk.csv": "added anchor_copy_id (non-empty only on EXACT_ANCHOR rows); EXACT_ANCHOR eligibility now requires a copy with its own documented provenance instead of a source-level HELD_PRIMARY prefix",
+  "source_copy_register.csv": "new register",
+  "acquisition_register.csv": "acq_c5_id values are stable identifiers; rank is a separate ordering column (C5-ACQ-23..26 added, ranks renumbered)",
+  "compatibility": "no downstream consumer outside SOURCE-LIBRARY-C5 reads these registers; earlier-cycle registers are unchanged",
+  "legal_adviser_evidence_index.csv": "new register (pointer index; no legal content created)"
  }
 }

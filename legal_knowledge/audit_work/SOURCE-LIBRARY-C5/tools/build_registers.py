@@ -16,6 +16,8 @@ from pathlib import Path
 
 PKG = Path(__file__).resolve().parents[1]
 AW = PKG.parent
+sys.path.insert(0, str(AW / "CALIBRATION-02/tools"))
+import evidence_classification as EC  # noqa: E402  (Cycle 4 shared rule: copy-level effective status by sha256)
 REPO = AW.parents[1]
 OUT = PKG / "registers"
 
@@ -40,7 +42,8 @@ COLS = {
         "source_id", "priority", "title", "authority", "publication_type", "edition", "volume_or_part", "publication_date",
         "effective_date", "effective_date_status", "source_url", "provenance", "document_authority", "carrier_provenance", "authentication_status",
         "rights_status", "access_marking", "sha256", "held_paths", "pages", "text_layer_class", "completeness_status",
-        "amendment_chain_status", "currency_status", "holding_state", "discovery_state", "discovery_candidate_ids",
+        "amendment_chain_status", "currency_status", "holding_state", "evidence_stage", "verification_limitations",
+        "discovery_state", "discovery_candidate_ids",
         "acquisition_state", "existing_register_refs", "identity_notes", "evidence"],
     "acquisition_register.csv": [
         "rank", "acq_c5_id", "source_id", "title", "exact_location", "location_check", "justification", "dependencies",
@@ -63,7 +66,15 @@ COLS = {
         "legal_adviser_required", "status", "reserved_status", "origin_register", "origin_id"],
     "corpus_crosswalk.csv": [
         "source_id", "provision_id", "knowledge_base_record_id", "case_id", "relationship_type", "evidence_status",
-        "review_status", "basis"],
+        "review_status", "basis", "anchor_copy_id"],
+    "legal_adviser_evidence_index.csv": [
+        "item_id", "item_type", "subject", "records_or_provisions", "current_state", "origin_register", "origin_id",
+        "evidence_pointers", "determination"],
+    "source_copy_register.csv": [
+        "copy_id", "source_id", "sha256", "held_paths", "bytes", "pages", "text_layer_class", "copy_role",
+        "page_equivalent_to", "equivalence_basis", "copy_carrier_provenance", "acquisition_provenance",
+        "c4_register_state", "c4_effective_source_class", "copy_effective_status", "copy_evidence_class",
+        "eligible_for_exact_anchor"],
 }
 
 # Reserved states fixed by the owner (Cycle 4 closeout); carried, never changed here.
@@ -212,6 +223,102 @@ def conflict_rows():
     return rows
 
 
+# ---------------------------------------------------------------- C6-05 legal-adviser evidence index (derived; no determination)
+def adviser_rows(conflicts):
+    rows = []
+    q = read(AW / "CALIBRATION-02/adviser/legal_adviser_questions.csv")
+    topics = defaultdict(list)
+    for r in q:
+        topics[r["topic_id"]].append(r)
+    for t in sorted(topics):
+        rs = topics[t]
+        rows.append({"item_id": f"C6-05-{t}", "item_type": "RESERVED_ITEM" if t.startswith("RES-") else "ADVISER_TOPIC",
+                     "subject": rs[0]["topic"], "records_or_provisions": ";".join(sorted({r["proposition_id"] or r["record_id"] for r in rs if r["proposition_id"] or r["record_id"]})),
+                     "current_state": rs[0]["state"], "origin_register": "CALIBRATION-02/adviser/legal_adviser_questions.csv",
+                     "origin_id": t, "evidence_pointers": ";".join(sorted({f'{r["reviewer"]}:{r["finding_id"]}' for r in rs if r["finding_id"]})),
+                     "determination": "NONE (for the qualified legal adviser)"})
+    for r in read(AW / "CALIBRATION-02/reconciliation/disagreements.csv"):
+        rows.append({"item_id": f'C6-05-ESC-{r["proposition_id"]}', "item_type": f'C4_ESCALATION_{r["kind"]}', "subject": r["reason"][:300],
+                     "records_or_provisions": r["proposition_id"], "current_state": r["disposition"],
+                     "origin_register": "CALIBRATION-02/reconciliation/disagreements.csv", "origin_id": r["proposition_id"],
+                     "evidence_pointers": f'A={r["A_worst_severity"]} B={r["B_worst_severity"]} C={r["C_worst_severity"]} D={r["D_worst_severity"]}',
+                     "determination": "NONE (not resolved by majority)"})
+    for c in conflicts:
+        if c["reserved_status"] or c["legal_adviser_required"].upper().startswith("YES"):
+            rows.append({"item_id": f'C6-05-{c["conflict_id"]}', "item_type": "SOURCE_CONFLICT", "subject": c["nature_of_conflict"][:300],
+                         "records_or_provisions": c["affected_provision"][:200], "current_state": c["reserved_status"] or c["status"],
+                         "origin_register": c["origin_register"], "origin_id": c["origin_id"], "evidence_pointers": c["evidence"][:300],
+                         "determination": "NONE (for the qualified legal adviser)"})
+    return rows
+
+
+# ---------------------------------------------------------------- copy-level provenance (derived)
+OFFICIAL_CARRIERS = ("ISSUING_AUTHORITY", "GOVERNMENT_HOSTED_COPY")
+STAGE_BY_HOLDING = {"NOT_HELD_LEAD_ONLY": "LEAD_ONLY", "NOT_HELD_NOT_FOUND_IN_SEARCHED_SOURCES": "NOT_FOUND_IN_SEARCHED_SOURCES",
+                    "NOT_HELD_NOT_CHECKED": "NOT_CHECKED", "NOT_HELD_BLOCKED_ACCESS": "BLOCKED_ACCESS",
+                    "NOT_HELD_RESTRICTED_SUSPECTED": "RESTRICTED_MARKING_SUSPECTED"}
+
+
+def evidence_stage(row):
+    """Discovery/acquisition stage derived from holding_state and carrier (single source of truth: holding_state).
+    DOCUMENT_AUTHENTICATED is never derived: documented provenance is not custodian authentication."""
+    hs = row["holding_state"]
+    if hs.startswith("HELD"):
+        return "DOCUMENT_ACQUIRED"
+    if hs == "NOT_HELD_CANDIDATE_LOCATED":
+        return "OFFICIAL_CANDIDATE_LOCATED" if row["carrier_provenance"].split(" ")[0] in OFFICIAL_CARRIERS else "ARCHIVAL_OR_THIRD_PARTY_CANDIDATE_LOCATED"
+    return STAGE_BY_HOLDING[hs]
+
+
+def copy_class(st):
+    return {EC.EFFECTIVE_PRIMARY: "DOCUMENTED_PRIMARY_COPY", EC.PENDING: "AUTHENTICATION_PENDING_COPY",
+            EC.UNKNOWN: "PROVENANCE_UNDOCUMENTED_COPY", EC.DERIVED: "DERIVED_TEXT_ONLY", EC.MIRROR: "MIRROR_OR_SECONDARY_COPY"}.get(st, "NOT_CLASSIFIED")
+
+
+def copy_rows(master, held):
+    """One row per (source, binary sha256). Status comes only from that sha's own C4 register row via the shared
+    rule; it never transfers between copies of the same instrument, however page-equivalent."""
+    ev = EC.Evidence.from_dir(AW / "CALIBRATION-02")
+    auth = ev.register
+    ann = {(r["source_id"], r["sha256"]): r for r in read(PKG / "inputs/copy_annotations.csv")}
+    rows = []
+    for m in master:
+        shas = [x for x in m["sha256"].split(";") if x]
+        for i, s in enumerate(shas, 1):
+            hs = held[s]
+            st, _detail = ev.source_status(s)
+            a = ann.get((m["source_id"], s), {})
+            reg = auth.get(s, {})
+            rows.append({
+                "copy_id": f'{m["source_id"]}~C{i}', "source_id": m["source_id"], "sha256": s,
+                "held_paths": ";".join(sorted(h["held_path"] for h in hs)), "bytes": hs[0]["bytes"], "pages": hs[0]["pages"],
+                "text_layer_class": hs[0]["text_layer_class"], "copy_role": a.get("copy_role", "COPY"),
+                "page_equivalent_to": a.get("page_equivalent_to", ""), "equivalence_basis": a.get("equivalence_basis", ""),
+                "copy_carrier_provenance": a.get("copy_carrier_provenance", "") or m["carrier_provenance"],
+                "acquisition_provenance": reg.get("provenance_references", "") or a.get("acquisition_provenance", "") or "NOT_DOCUMENTED",
+                "c4_register_state": reg.get("authentication_state", "NO_REGISTER_ROW"),
+                "c4_effective_source_class": reg.get("effective_source_class", ""),
+                "copy_effective_status": st, "copy_evidence_class": copy_class(st),
+                "eligible_for_exact_anchor": "YES" if st == EC.EFFECTIVE_PRIMARY else "NO"})
+    for (sid, s) in ann:
+        if not any(r["source_id"] == sid and r["sha256"] == s for r in rows):
+            raise SystemExit(f"copy annotation for unknown copy {sid} {s[:12]}")
+    return rows
+
+
+def check_holding_vs_copies(master, copies):
+    """Source-level holding_state must agree with copy-level evidence: HELD_PRIMARY_* iff at least one copy has its own
+    documented provenance; HELD_AUTHENTICATION_PENDING iff a pending copy and no documented copy. No prefix shortcut."""
+    docs = {c["source_id"] for c in copies if c["copy_effective_status"] == EC.EFFECTIVE_PRIMARY}
+    pend = {c["source_id"] for c in copies if c["copy_effective_status"] == EC.PENDING}
+    for r in master:
+        hs = r["holding_state"]
+        if hs.startswith("HELD_PRIMARY") != (r["source_id"] in docs):
+            raise SystemExit(f"{r['source_id']}: holding_state {hs} disagrees with copy-level evidence")
+        if (hs == "HELD_AUTHENTICATION_PENDING") != (r["source_id"] in pend and r["source_id"] not in docs):
+            raise SystemExit(f"{r['source_id']}: authentication-pending state disagrees with copy-level evidence")
+
+
 # ---------------------------------------------------------------- D1 / D3 (inputs + derived columns)
 def master_rows(held, cands, auth, targets=None):
     rows = []
@@ -234,6 +341,7 @@ def master_rows(held, cands, auth, targets=None):
             "sha256": ";".join(shas), "held_paths": ";".join(sorted(paths)), "pages": ";".join(sorted(p for p in pages if p)),
             "text_layer_class": ";".join(sorted(tl)),
             "holding_state": t["holding_state"],
+            "evidence_stage": evidence_stage(t),
             "discovery_state": ";".join(states) if states else t.get("discovery_state", "") or "NOT_CHECKED",
             "authentication_status": t["authentication_status"] + (f" | C4 register: {a[0]['authentication_state']}/{a[0]['effective_source_class']}" if a else ""),
         })
@@ -273,9 +381,13 @@ def amended_rules():
     return out
 
 
-def crosswalk(master):
+def crosswalk(master, copies):
     m = {x["source_id"]: x for x in master}
     amended = amended_rules()
+    anchor_copy = {}
+    for c in copies:
+        if c["eligible_for_exact_anchor"] == "YES":
+            anchor_copy.setdefault(c["source_id"], c["copy_id"])
     mp = {r["key"]: r for r in read(PKG / "inputs/corpus_source_map.csv")}
     rows = []
     for r in read(AW / "WS-D-QUALITY/canonical_coverage.csv"):
@@ -300,17 +412,17 @@ def crosswalk(master):
                 status, why = "MISSING_EVIDENCE", "citation not identified to a C5 source"
             elif not src["holding_state"].startswith("HELD"):
                 status, why = "MISSING_EVIDENCE", f"source identified but not held ({src['holding_state']})"
-            elif (st == "id" and loc and src["holding_state"].startswith("HELD_PRIMARY") and sid == "C5-SRC-P0-ARMY-RULES-1954"
+            elif (st == "id" and loc and sid in anchor_copy and sid == "C5-SRC-P0-ARMY-RULES-1954"
                   and set(loc.split(",")) & amended):
                 status, why = "PARTIAL_MATCH", "as-notified 1954 text held, but a cited rule has a recorded amendment or reserved conflict: current wording needs the chain"
-            elif st == "id" and loc and src["holding_state"].startswith("HELD_PRIMARY"):
-                status, why = "EXACT_ANCHOR", ("identified, provision locator present, primary copy held (anchor to the held version; currency not implied"
+            elif st == "id" and loc and sid in anchor_copy:
+                status, why = "EXACT_ANCHOR", ("identified, provision locator present, a documented-primary copy held (anchor to the held version; currency not implied"
                                                + ("; Army Rules chain incomplete: instruments with unknown provisions affected exist)" if sid == "C5-SRC-P0-ARMY-RULES-1954" else ")"))
             else:
                 status, why = "PARTIAL_MATCH", f"{'inferred identity' if st != 'id' else 'no provision locator' if not loc else 'held copy is ' + src['holding_state']}"
             rows.append({"source_id": sid, "provision_id": f"{key}#{loc}" if loc else "", "knowledge_base_record_id": r["record_id"], "case_id": "",
                          "relationship_type": "CITES", "evidence_status": status, "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
-                         "basis": f"WS-D {kind}:{code}[{st}]; {why}"})
+                         "basis": f"WS-D {kind}:{code}[{st}]; {why}", "anchor_copy_id": anchor_copy.get(sid, "") if status == "EXACT_ANCHOR" else ""})
     cases = [json.loads(l) for l in open(REPO / "legal_knowledge/curated_originals/case_law/v0.9/cases_53.jsonl", encoding="utf-8")]
     cmap = {r["key"]: r for r in read(PKG / "inputs/case_source_map.csv")}
     for c in cases:
@@ -319,13 +431,13 @@ def crosswalk(master):
         src = m.get(sid)
         if src is None:
             status, why = "MISSING_EVIDENCE", "no held official copy mapped"
-        elif src["holding_state"].startswith("HELD_PRIMARY"):
-            status, why = "EXACT_ANCHOR", "official judgment copy held (identity per mapping input)"
+        elif sid in anchor_copy:
+            status, why = "EXACT_ANCHOR", "documented-primary official judgment copy held (identity per mapping input)"
         else:
             status, why = "PARTIAL_MATCH", f"held copy is {src['holding_state']}"
         rows.append({"source_id": sid, "provision_id": "", "knowledge_base_record_id": "", "case_id": c["id"], "relationship_type": "IS_SOURCE_OF_CASE_RECORD",
                      "evidence_status": status, "review_status": "NOT_REVIEWED (C5 crosswalk is technical)",
-                     "basis": f"case source_status={c['source_status']}; {why}"})
+                     "basis": f"case source_status={c['source_status']}; {why}", "anchor_copy_id": anchor_copy.get(sid, "") if status == "EXACT_ANCHOR" else ""})
     return rows
 
 
@@ -343,6 +455,8 @@ def build():
             cands[r["candidate_id"]] = r
     auth = {r["sha256"]: r for r in read(AW / "CALIBRATION-02/registers/source_authentication_register.csv")}
     master = master_rows(held, cands, auth)
+    copies = copy_rows(master, held)
+    check_holding_vs_copies(master, copies)
     out = {
         "source_master_register.csv": master,
         "acquisition_register.csv": acquisition_rows(master),
@@ -350,8 +464,10 @@ def build():
         "provision_amendment_chain.csv": chain_rows(),
         "provision_register.csv": provision_rows(by_name),
         "source_conflict_register.csv": conflict_rows(),
-        "corpus_crosswalk.csv": crosswalk(master),
+        "corpus_crosswalk.csv": crosswalk(master, copies),
+        "source_copy_register.csv": copies,
     }
+    out["legal_adviser_evidence_index.csv"] = adviser_rows(out["source_conflict_register.csv"])
     texts = {k: csv_text(COLS[k], v) for k, v in out.items()}
     cw = out["corpus_crosswalk.csv"]
     kb = defaultdict(set)
@@ -360,7 +476,21 @@ def build():
             kb[r["knowledge_base_record_id"]].add(r["evidence_status"])
     def rec_class(s):
         return "ALL_EXACT" if s == {"EXACT_ANCHOR"} else "NO_EXACT_ANCHOR" if "EXACT_ANCHOR" not in s else "SOME_EXACT"
+    reg = read(AW / "CALIBRATION-02/registers/source_authentication_register.csv")
+    docs = {c["source_id"] for c in copies if c["copy_effective_status"] == EC.EFFECTIVE_PRIMARY}
+    pend = {c["source_id"] for c in copies if c["copy_effective_status"] == EC.PENDING}
     summary = {
+        "authentication": {
+            "c4_register_rows": len(reg),
+            "c4_register_by_state_and_class": dict(sorted(Counter(f'{r["authentication_state"]}/{r["effective_source_class"]}' for r in reg).items())),
+            "copies_total": len(copies),
+            "copies_by_evidence_class": dict(sorted(Counter(c["copy_evidence_class"] for c in copies).items())),
+            "documented_primary_copies": sum(1 for c in copies if c["copy_effective_status"] == EC.EFFECTIVE_PRIMARY),
+            "authentication_pending_copies": sum(1 for c in copies if c["copy_effective_status"] == EC.PENDING),
+            "sources_with_documented_primary_copy": len(docs),
+            "sources_authentication_pending_only": len(pend - docs),
+        },
+        "master_by_evidence_stage": dict(sorted(Counter(r["evidence_stage"] for r in master).items())),
         "master_sources": len(master),
         "master_by_priority": dict(sorted(Counter(r["priority"] for r in master).items())),
         "master_by_holding_state": dict(sorted(Counter(r["holding_state"].split(" ")[0] for r in master).items())),

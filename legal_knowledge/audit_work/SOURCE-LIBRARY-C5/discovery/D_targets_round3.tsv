@@ -1,0 +1,4 @@
+target_id	kind	url
+CDX-TA-ACTID	listing	https://web.archive.org/cdx/search/cdx?url=upload.indiacode.nic.in/showfile*&filter=original:.*194856.*&output=json&limit=50&fl=timestamp,original,mimetype,statuscode,digest,length
+CDX-CDAS-SANKALAN	listing	https://web.archive.org/cdx/search/cdx?url=cdasecbad.ap.nic.in/sankalan/ARMY/DSR*&output=json&limit=20&fl=timestamp,original,mimetype,statuscode,digest,length
+CDX-CDAG-DOCS	listing	https://web.archive.org/cdx/search/cdx?url=cdaguwahati.gov.in/docs/dsr*&output=json&limit=20&fl=timestamp,original,mimetype,statuscode,digest,length

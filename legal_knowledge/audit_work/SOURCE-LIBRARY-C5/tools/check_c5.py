@@ -9,7 +9,10 @@ Checks:
     (currency_status may only be one of the controlled values; IN_FORCE_* requires amendment_chain_status
     CHECKED_FOR_RELEVANT_PERIOD, which no row in this package has);
  6. every acquisition item is NOT_APPROVED and names a required approval;
- 7. discovery request logs exist for every candidate file, never touch blocked hosts, and record no binary GET;
+ 7. discovery request logs exist for every candidate file and never touch blocked hosts; v2 logs (content type, payload
+    class, robots state) are validated by discovery_guard.validate_log_v2; v1 logs can only show method and URL, so a GET
+    to a document-like URL (extension or filename/showfile query) is reported as a warning, not proven absent;
+    copy-level: exact anchors and HELD_PRIMARY need a copy with its own documented provenance;
  8. reserved conflict states equal the owner's reserved list; committed page renders match their recorded hashes;
  9. with --verify-files <held-root>: every held path re-hashes to its manifest value.
 Exit 0 when clean; 1 with a list of errors otherwise."""
@@ -27,8 +30,14 @@ VOCAB = {
     "holding_state": {"HELD_PRIMARY_GAZETTE_FACSIMILE", "HELD_PRIMARY_GAZETTE_GOVERNMENT_SCAN", "HELD_PRIMARY_OFFICIAL_COURT_COPY",
                       "HELD_AUTHENTICATION_PENDING", "HELD_GOVERNMENT_COMPILATION", "HELD_GOVERNMENT_COMPILATION_EXTRACT",
                       "HELD_OFFICIAL_PUBLICATION_PROVENANCE_UNDOCUMENTED", "HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED",
-                      "HELD_UNVERIFIED_MANUAL", "NOT_HELD_LOCATED", "NOT_HELD_NOT_FOUND", "NOT_HELD_NOT_CHECKED",
+                      "HELD_UNVERIFIED_MANUAL", "NOT_HELD_CANDIDATE_LOCATED", "NOT_HELD_LEAD_ONLY",
+                      "NOT_HELD_NOT_FOUND_IN_SEARCHED_SOURCES", "NOT_HELD_NOT_CHECKED", "NOT_HELD_BLOCKED_ACCESS",
                       "NOT_HELD_RESTRICTED_SUSPECTED"},
+    # evidence_stage is derived (build_registers.evidence_stage). DOCUMENT_AUTHENTICATED and AMENDMENT_CHAIN_COMPLETE are
+    # reserved values that no evidence in this package reaches (no custodian authentication; no chain checked for a period).
+    "evidence_stage": {"NOT_CHECKED", "BLOCKED_ACCESS", "NOT_FOUND_IN_SEARCHED_SOURCES", "LEAD_ONLY", "OFFICIAL_CANDIDATE_LOCATED",
+                       "ARCHIVAL_OR_THIRD_PARTY_CANDIDATE_LOCATED", "RESTRICTED_MARKING_SUSPECTED", "DOCUMENT_ACQUIRED",
+                       "DOCUMENT_AUTHENTICATED"},
     "currency_status": {"HISTORICAL_SUPERSEDED", "HISTORICAL_VERSION", "CURRENCY_NOT_ESTABLISHED", "NOT_APPLICABLE_JUDGMENT",
                         "AMENDMENT_INSTRUMENT", "DECLARATION_INSTRUMENT", "CORRIGENDUM_INSTRUMENT", "NOT_APPLICABLE_RECORD"},
     "amendment_chain_status": {"NOT_CHECKED", "PARTIAL", "NOT_APPLICABLE", "CHECKED_FOR_RELEVANT_PERIOD"},  # policy v1; brief label AMENDMENT_CHAIN_INCOMPLETE is a parenthesised qualifier
@@ -81,7 +90,11 @@ def main():
         if sid in ids:
             err.append(f"duplicate source_id {sid}")
         ids.add(sid)
-        for col in ("publication_type", "holding_state", "currency_status", "amendment_chain_status"):
+        if r["evidence_stage"] == "DOCUMENT_AUTHENTICATED":
+            err.append(f"{sid}: DOCUMENT_AUTHENTICATED is not supported by any custodian authentication in this package")
+        if r["evidence_stage"] != B.evidence_stage(r):
+            err.append(f"{sid}: evidence_stage not derived from holding_state/carrier")
+        for col in ("publication_type", "holding_state", "currency_status", "amendment_chain_status", "evidence_stage"):
             v = r[col].split(" ")[0]
             if v not in VOCAB[col]:
                 err.append(f"{sid}: {col}={r[col]!r} not in vocabulary")
@@ -98,6 +111,23 @@ def main():
             err.append(f"{sid}: forbidden approval/currency term present")
         if r["amendment_chain_status"].split(" ")[0] == "CHECKED_FOR_RELEVANT_PERIOD":
             err.append(f"{sid}: CHECKED_FOR_RELEVANT_PERIOD is not established by any evidence in this package")
+    copies = read(PKG / "registers/source_copy_register.csv")
+    by_src = {}
+    for c in copies:
+        by_src.setdefault(c["source_id"], []).append(c)
+        if c["sha256"] not in held:
+            err.append(f"{c['copy_id']}: copy sha256 not in frozen held manifest")
+        if (c["eligible_for_exact_anchor"] == "YES") != (c["copy_effective_status"] == "EFFECTIVE_PRIMARY_VERIFIED"):
+            err.append(f"{c['copy_id']}: eligibility does not follow the copy's own effective status")
+        if c["c4_register_state"] != "PROVENANCE_DOCUMENTED" and c["eligible_for_exact_anchor"] == "YES":
+            err.append(f"{c['copy_id']}: eligible without its own PROVENANCE_DOCUMENTED register row")
+    for r in master:
+        cs = by_src.get(r["source_id"], [])
+        if sorted(c["sha256"] for c in cs) != sorted(x for x in r["sha256"].split(";") if x):
+            err.append(f"{r['source_id']}: copy register does not match source sha256 list")
+        if r["holding_state"].startswith("HELD_PRIMARY") != any(c["eligible_for_exact_anchor"] == "YES" for c in cs):
+            err.append(f"{r['source_id']}: HELD_PRIMARY state not backed by a documented-primary copy (or vice versa)")
+    eligible = {c["copy_id"]: c for c in copies if c["eligible_for_exact_anchor"] == "YES"}
     for r in read(PKG / "registers/acquisition_register.csv"):
         if r["approval_state"] != "NOT_APPROVED" or not r["required_approval"].strip():
             err.append(f"{r['acq_c5_id']}: approval fields invalid")
@@ -106,6 +136,10 @@ def main():
         if any(h in r["exact_location"] for h in BLOCKED_HOSTS):
             err.append(f"{r['acq_c5_id']}: blocked host in location")
     for r in read(PKG / "registers/corpus_crosswalk.csv"):
+        if r["evidence_status"] == "EXACT_ANCHOR" and (r["anchor_copy_id"] not in eligible or eligible[r["anchor_copy_id"]]["source_id"] != r["source_id"]):
+            err.append(f"crosswalk: EXACT_ANCHOR without an eligible copy of the same source ({r['source_id']})")
+        if r["evidence_status"] != "EXACT_ANCHOR" and r["anchor_copy_id"]:
+            err.append("crosswalk: anchor_copy_id on a non-exact row")
         if r["evidence_status"] not in VOCAB["evidence_status"]:
             err.append(f"crosswalk: bad evidence_status {r['evidence_status']}")
         if r["source_id"] not in ("UNMAPPED", "NONE") and r["source_id"] not in ids:
@@ -119,20 +153,22 @@ def main():
         if not re.fullmatch(r"[0-9a-f]{64}", r["render_png_sha256"]) or not f.exists() or sha(f) != r["render_png_sha256"]:
             err.append(f"{r['check_id']}: render file missing or hash mismatch")
     disc = PKG / "discovery"
+    import discovery_guard as DG
     for cf in sorted(disc.glob("*_candidates.csv")):
-        log = disc / cf.name.replace("_candidates.csv", "_requests.tsv")
-        if not log.exists():
+        stem = cf.name.replace("_candidates.csv", "")
+        v1, v2 = disc / f"{stem}_requests.tsv", disc / f"{stem}_requests_v2.tsv"
+        if v2.exists():
+            with open(v2, newline="", encoding="utf-8") as f:
+                rows = list(csv.DictReader(f, delimiter="\t"))
+            err += [f"{v2.name}: {e}" for e in DG.validate_log_v2([r for r in rows if r["method"] != "WEBSEARCH"])]
+        elif v1.exists():
+            rows = [l.rstrip("\n").split("\t") for l in open(v1, encoding="utf-8")]
+            e1, sus = DG.legacy_log_findings(rows)
+            err += [f"{v1.name}: {e}" for e in e1]
+            warn += [f"{v1.name}: {x}" for x in sus]
+            # legacy (v1) logs record no content type: they show method and URL only, not the absence of document payloads
+        else:
             err.append(f"{cf.name}: request log missing")
-            continue
-        for i, line in enumerate(open(log, encoding="utf-8"), 1):
-            parts = line.rstrip("\n").split("\t")
-            if len(parts) < 3:
-                continue
-            method, url = parts[1].upper(), parts[2]
-            if any(h in url for h in BLOCKED_HOSTS):
-                err.append(f"{log.name}:{i} blocked host contacted")
-            if method == "GET" and re.search(r"\.(pdf|docx?|zip)(\?|$)", url, re.I):
-                err.append(f"{log.name}:{i} binary GET recorded: {url[:100]}")
     if a.verify_files:
         root = Path(a.verify_files)
         for s, hs in held.items():

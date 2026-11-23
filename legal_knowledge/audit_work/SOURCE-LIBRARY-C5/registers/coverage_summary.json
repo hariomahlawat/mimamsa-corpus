@@ -1,6 +1,25 @@
 {
- "acquisition_items": 22,
+ "acquisition_items": 26,
  "amendment_rows": 87,
+ "authentication": {
+  "authentication_pending_copies": 1,
+  "c4_register_by_state_and_class": {
+   "AUTHENTICATION_PENDING/AUTHENTICATION_PENDING": 1,
+   "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE": 4,
+   "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN": 1,
+   "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY": 7
+  },
+  "c4_register_rows": 13,
+  "copies_by_evidence_class": {
+   "AUTHENTICATION_PENDING_COPY": 1,
+   "DOCUMENTED_PRIMARY_COPY": 12,
+   "PROVENANCE_UNDOCUMENTED_COPY": 54
+  },
+  "copies_total": 67,
+  "documented_primary_copies": 12,
+  "sources_authentication_pending_only": 1,
+  "sources_with_documented_primary_copy": 12
+ },
  "conflict_rows": 49,
  "crosswalk_case_rows_by_status": {
   "EXACT_ANCHOR": 6,
@@ -53,6 +72,15 @@
   "SOME_EXACT": 30
  },
  "kb_records_in_crosswalk": 658,
+ "master_by_evidence_stage": {
+  "ARCHIVAL_OR_THIRD_PARTY_CANDIDATE_LOCATED": 18,
+  "DOCUMENT_ACQUIRED": 62,
+  "LEAD_ONLY": 1,
+  "NOT_CHECKED": 7,
+  "NOT_FOUND_IN_SEARCHED_SOURCES": 8,
+  "OFFICIAL_CANDIDATE_LOCATED": 15,
+  "RESTRICTED_MARKING_SUSPECTED": 1
+ },
  "master_by_holding_state": {
   "HELD_AUTHENTICATION_PENDING": 1,
   "HELD_GOVERNMENT_COMPILATION": 5,
@@ -63,9 +91,10 @@
   "HELD_PRIMARY_GAZETTE_GOVERNMENT_SCAN": 1,
   "HELD_PRIMARY_OFFICIAL_COURT_COPY": 7,
   "HELD_UNVERIFIED_MANUAL": 8,
-  "NOT_HELD_LOCATED": 30,
-  "NOT_HELD_NOT_CHECKED": 8,
-  "NOT_HELD_NOT_FOUND": 11,
+  "NOT_HELD_CANDIDATE_LOCATED": 33,
+  "NOT_HELD_LEAD_ONLY": 1,
+  "NOT_HELD_NOT_CHECKED": 7,
+  "NOT_HELD_NOT_FOUND_IN_SEARCHED_SOURCES": 8,
   "NOT_HELD_RESTRICTED_SUSPECTED": 1
  },
  "master_by_priority": {

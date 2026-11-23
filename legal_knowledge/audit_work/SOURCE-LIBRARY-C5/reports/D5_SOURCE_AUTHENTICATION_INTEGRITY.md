@@ -7,7 +7,10 @@
 
 ## 1. Integrity of held files
 - **Re-hashing:** all 93 held binary paths in the CALIBRATION-02 index (67 unique files) were re-hashed from disk. **93 MATCH, 0 MISMATCH, 0 missing** (`baseline/held_binaries_manifest.csv`). `check_c5.py --verify-files` repeats this check.
-- **Act 37/1992 copies:** two held copies of the India Code Gazette scan have the same length and 122 differing bytes. The differences all fall at offsets 165208–165338, inside the PDF trailer `/ID`. **C5-CF-C5-01 is closed as technical:** the page content is identical.
+- **Act 37/1992 copies:** two held copies of the India Code Gazette scan have the same length and 122 differing bytes. The differences all fall at offsets 165208–165338, inside the PDF trailer `/ID`. **C5-CF-C5-01 is closed as technical.**
+  - **Page-equivalence is not provenance-equivalence.** The copy register records `a5943b72` as `GAZETTE_SCAN_TRAILER_ID_VARIANT`, page-equivalent to `f11d443e`. It has **no register row of its own** and is **not eligible** as primary.
+  - The India Code text rendering `f1e69a74` is a separate, non-eligible copy.
+  - Exact-anchor counts are unchanged (KB 42, cases 6), because no crosswalk citation resolves to Act 37/1992.
 - **Duplicates:** the same bytes are held at several paths (for example Virendra Kumar at four paths, and the Army Rules compilation at four). Each is one source with several held paths.
 
 ## 2. Text layer and OCR
@@ -48,12 +51,18 @@ The registers were right in each case, because their values had been taken from 
 - **RV-11 (P2): BNSS and BSA.** Each is split into a NOT_HELD Gazette row and a HELD India Code compilation row with GOVERNMENT_COMPILATION authority.
 
 ## 4. Authentication state (unchanged rules)
-- **13 files** have documented provenance in the CALIBRATION-02 register, and only these are `HELD_PRIMARY_*`. RV-15 confirmed an exact match.
+- **The CALIBRATION-02 register has 13 rows:**
+  - **12 PROVENANCE_DOCUMENTED primary copies:** 5 Gazette and 7 official court copies;
+  - **1 AUTHENTICATION_PENDING copy:** Isaac.
+- **Only sources with at least one documented-primary *copy* are `HELD_PRIMARY_*`.** There are 12 such sources. This is enforced at copy level (`registers/source_copy_register.csv`, `check_holding_vs_copies`), not by a state prefix or a summary count. Figures are derived in `coverage_summary.json` → `authentication`.
+- **A register row is not authentication.** PROVENANCE_DOCUMENTED means source-specific provenance is recorded. It is not custodian authentication, and no signature has been verified.
 - **Isaac (2026 INSC 993)** stays AUTHENTICATION_PENDING, renamed `HELD_AUTHENTICATION_PENDING` so that no prefix logic treats it as primary (RV-12).
 - **34 held official copies have undocumented provenance**: 26 publications or records and 8 SC judgments. They need register rows, which require source-specific evidence of where and when each was obtained. **No download is needed for this.**
 - **No signature has been cryptographically verified.** No MML edition is authenticated (8 files, `HELD_UNVERIFIED_MANUAL`).
 
 ## 5. Discovery protocol deviations (disclosed, not hidden)
+The fail-closed discovery policy, v2 logging and the crawler proposal are in `reports/DISCOVERY_SAFETY_POLICY.md`. The Cycle 5 correction discovery (`D_requests_v2.tsv`) applied it, and India Code, cdasecbad.ap.nic.in and web.archive.org were **not contacted** after their robots.txt could not be read. The historical v1 logs below cannot prove that no document payload was received (policy §3).
+
 - **UK National Archives:** robots.txt disallows `/catalogue`, but one page was fetched before this was noticed (Group A).
 - **desw.gov.in:** robots.txt returned 403 or failed, but listing and HEAD requests continued (Groups A and B). **mod.gov.in:** one listing request ran before a successful robots retry, which turned out to allow all.
 - **Log repairs:**
@@ -62,4 +71,4 @@ The registers were right in each case, because their values had been taken from 
 - **Blocked or unreachable hosts:** India Code (timeouts and a TLS name error), egazette.gov.in (TLS chain failure), pcdapension.nic.in and cgda.nic.in (connection reset), indianarmy.nic.in, thc.nic.in and web.archive.org. TLS verification was **never** disabled, and no CAPTCHA or login was attempted.
 - **No binary GET and no aftjabalpur.in request** appears in any log. The validator and tests enforce this.
 
-**Recommendation for the brief:** if robots.txt cannot be read, make no further requests to that host. This is a stricter rule than was applied this cycle.
+**Adopted:** if robots.txt cannot be read, make no further automated requests to that host (DISCOVERY_SAFETY_POLICY rule 2).

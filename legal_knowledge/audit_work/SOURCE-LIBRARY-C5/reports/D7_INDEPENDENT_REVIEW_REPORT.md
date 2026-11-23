@@ -34,7 +34,7 @@
 | RV-25 `chain_row_id` stability | prefers stable ids | the stable key is carried in `origin_id`, and the derived file is rebuilt deterministically | Recorded; low severity |
 
 ## Confirmed by the reviewer (INFO)
-- **HELD_PRIMARY gating:** exactly the 13 register-documented files are primary (RV-15).
+- **HELD_PRIMARY gating:** the reviewer matched the 13 HELD_PRIMARY-era rows to the 13 register rows (RV-15). As restated in the C5 corrections, that is **12 documented-primary copies plus 1 authentication-pending copy** (Isaac, not primary).
 - **Derivation fidelity:** all 241 amendment and chain rows match their origin field by field, and no effective date was invented (RV-24).
 - **Act 37/1992:** s.2 omits ss.75–76 and s.11 omits s.127; confirmed on the image (RV-26).
 - **Discovery:** md5, size and date match the live archive.org metadata for 1950.306 and 2007-12-28.020. No binary GET or blocked host appears in the logs (RV-27/28).
