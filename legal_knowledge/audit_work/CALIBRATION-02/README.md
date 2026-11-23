@@ -1,0 +1,76 @@
+# CALIBRATION-02: substantive review of the 46 CALIBRATION-01 records (Cycle 4)
+
+**DATABASE ONLY. Evidence review, not legal approval.** No state here is legal-advisor or JAG validation. The 658 records and 53 cases are immutable. Reserved states are unchanged: r.23(3) CONFLICTING; r.193 C-08 OPEN; r.194 C-09 PROPOSAL; r.15, r.187(1) and s.129 OPEN; AQ-05, AQ-06 and OQ-A-13 reserved. The 13 WS-B inconsistencies stay OPEN.
+
+## Sample
+The sample is `COORDINATION/CALIBRATION-01/calibration_package.csv`, unchanged: 46 records, with the same denominator and selection.
+
+`tools/build_propositions.py` splits each record body into sentences, producing `propositions.csv` (382 propositions). IDs are `<record>#P<n>`, plus `<record>#REF` for the references field. Text is copied from the record, whitespace-normalised: runs of whitespace collapse to one space; 30 propositions differ from the raw body only in whitespace. The script is deterministic and reruns byte-identically.
+
+## Protocol
+1. **Independent reviews**, each in its own branch and worktree, written without access to the others' findings:
+   - **A Statutory:** Acts, Rules, Gazette instruments, amendment chains, versions and dates.
+   - **B Judicial:** case identity, holding vs obiter vs headnote, subsequent treatment, copy authenticity.
+   - **C Procedure:** competent authority, initiation, safeguards, hearing, evidence, limitation, review and remedies.
+   - **D Challenge:** an independent assessment of the same 46 records that does not read A–C.
+2. **Output:** each reviewer writes `reviews/<R>/findings.csv`, with exactly the columns in `tools/check_calibration02.py`. Every proposition gets at least one row.
+3. **Evidence states:**
+   - VERIFIED_AGAINST_HELD_PRIMARY_SOURCE: needs an exact locator and the SHA-256 of a held primary file (pdf/doc in `registers/held_sources_scratchpad.csv`, not derived text or a mirror); the validator enforces this;
+   - SUPPORTED_BY_SECONDARY_SOURCE_ONLY;
+   - SOURCE_NOT_HELD;
+   - HISTORICAL_VERSION_UNRESOLVED;
+   - CONTRADICTORY_EVIDENCE;
+   - INTERPRETATION_REQUIRES_LEGAL_ADVICE;
+   - UNSUPPORTED;
+   - NOT_YET_REVIEWED;
+   - NOT_A_LEGAL_PROPOSITION: for design or administrative statements, e.g. on the eventual application.
+
+   A citation existing, or a document being searchable, is never verification. Reviewer-claimed states are preserved as submitted. Downstream figures use an **effective** status from the shared rule (`tools/evidence_classification.py`). Under it, held bytes are effective primary only if `registers/source_authentication_register.csv` documents their source-specific provenance. Ambiguous or undocumented provenance gives AUTHENTICATION_PENDING or PROVENANCE_UNKNOWN, never primary. The MML is a manual, not authority. Compilations (India Code, MoD) are comparison text under SOURCE_AUTHORITY_POLICY v1, never Gazette authority.
+4. **Severity:**
+   - P1: materially incorrect or unsupported, and could lead to unlawful or seriously flawed action.
+   - P2: a significant omission, wrong authority, historical-version error, wrong citation or misleading procedure.
+   - P3: minor.
+
+   A P1 or P2 needs a proposed correction, or the missing evidence that blocks one.
+5. **Reconciliation:** the coordinator reconciles by proposition (`reconciliation/`) only after all four reviews are committed. A disagreement is preserved and escalated; nothing is settled by majority.
+6. **Proposals:** corrected text goes in `proposals/`, linked to the original record ID and proposition. The originals are never edited.
+
+## Held sources (read-only; no downloads)
+- **Index:** `registers/held_sources_scratchpad.csv` lists every held scratchpad file with its SHA-256. The scratchpad is not the evidence of record; the hash is the identity.
+- **In the repository:**
+  - audit batches PILOT-01, R23-VERIFY-01, ACQ-01/02, ARMY-RULES-CHAIN-01 and WS-A/B/C/D (registers and page-image checks);
+  - `origin/raw-data` crawler corpus: `data/text` (Army Rules 1954 compilation, Acts, SC/HC judgments) and `data/sections`.
+
+## Validation
+- `python3 legal_knowledge/audit_work/CALIBRATION-02/tools/check_calibration02.py --require A,B,C,D`
+- `tests/test_legal_audit_calibration02.py`
+
+## Deliverables (Cycle 4)
+| # | Deliverable | Location |
+| --- | --- | --- |
+| 1 | 46-record substantive review: propositions and per-record results | `propositions.csv`, `reconciliation/record_scorecard.csv`, `reconciliation/proposition_matrix.csv` |
+| 2 | Independent reviewer findings and reconciliation | `reviews/{A,B,C,D}/` (findings, READMEs, page-image checks A/C); `reconciliation/disagreements.csv`, `reconciliation/coordinator_qc.csv` (QC-01..14), `reconciliation/rule_sensitivity.json` (pre-registered vs final rule) |
+| 3 | Proposed corrections, before and after, with evidence | `proposals/correction_proposals.csv`, `proposals/proposed_versions.jsonl` (originals unchanged) |
+| 4 | Cross-volume missing-link and contradiction register | `registers/cross_volume_register.csv` (with D's `reviews/D/cross_volume_register.csv`) |
+| 5 | Acquisition-readiness matrix | `registers/acquisition_readiness/` |
+| 6 | Legal-adviser packet | `adviser/LEGAL_ADVISER_PACKET.md`, `adviser/legal_adviser_questions.csv` |
+| 7 | Rule-level indexing specification (planning only) | `registers/rule_index_spec/` |
+| 8 | Quality scorecard | `SCORECARD.md`, `reconciliation/scorecard.json` |
+| 9 | Readiness assessment | `READINESS_ASSESSMENT.md` |
+| — | New source conflict | `registers/source_conflicts_c4.csv` (SC4-01, r.182, OPEN) |
+| — | Evidence classification (shared rule) | `tools/evidence_classification.py`, `registers/source_authentication_register.csv` (13 sources), `reconciliation/effective_evidence.csv`, `reconciliation/evidence_regression/` |
+
+Build order, all deterministic:
+1. `tools/build_propositions.py`
+2. reviews A–D (independent)
+3. `tools/check_calibration02.py --require A,B,C,D`
+4. `tools/reconcile.py`
+5. `tools/build_packages.py`
+6. `tools/rule_sensitivity.py`
+
+Earlier artifacts linked:
+- `COORDINATION/CALIBRATION-01/` (the sample);
+- `COORDINATION/CYCLE3-PLANNING/` (the 140-item acquisition schedule and the 63-item authentication queue);
+- `COORDINATION/INTEGRATION_CYCLE3.md`;
+- `ARMY-RULES-CHAIN-01/`;
+- `WS-A-STATUTORY/`, `WS-B-JUDGMENTS/` (OI-01..13), `WS-C-MML/` and `WS-D-QUALITY/` (canonical coverage; ANCHORED_FULL 187).

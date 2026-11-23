@@ -1,0 +1,70 @@
+{
+ "changes_and_reasons": [
+  "Disagreement made dimension-aware: a reviewer silent in another dimension is not a dissenter; but a reviewer that classes the proposition as not a legal proposition IS a dissenter (technical review P2).",
+  "Severity splits escalated for corroborated defects too, including the only P1 (technical review P2).",
+  "A VERIFIED row counts against a negative finding only if it verified the proposition as stated (severity NONE).",
+  "CONTRADICTORY_EVIDENCE between sources is a source conflict (SOURCE_CONFLICT_OPEN), taking precedence over DISPUTED.",
+  "EVIDENCE_SUPPORTED split into PRIMARY_EVIDENCE_SUPPORTED and SECONDARY_EVIDENCE_ONLY (technical review P2).",
+  "Evidence harmonisation (QC-12): one shared rule (evidence_classification.py) for validator and reconciler; effective status from the source-authentication register; proposals gain AUTHENTICATION_PENDING (PRIMARY 6 -> 5 after QC-11, then CP2-B-0109 SECONDARY -> AUTHENTICATION_PENDING).",
+  "NOT_YET_REVIEWED (out of a reviewer's scope) is not a source gap; FULLY_EVIDENCE_SUPPORTED additionally requires that no reviewer recorded INTERPRETATION_REQUIRES_LEGAL_ADVICE, UNSUPPORTED, CONTRADICTORY_EVIDENCE, SOURCE_NOT_HELD or HISTORICAL_VERSION_UNRESOLVED."
+ ],
+ "final": {
+  "correction_proposals_by_support": {
+   "AUTHENTICATION_PENDING": 1,
+   "DISPUTED_ESCALATED": 16,
+   "EVIDENCE_GAP": 3,
+   "PRIMARY_EVIDENCE_SUPPORTED": 5,
+   "SECONDARY_EVIDENCE_ONLY": 16,
+   "SOURCE_CONFLICT_OPEN": 6
+  },
+  "disagreements": 12,
+  "findings_by_severity": {
+   "NONE": 1290,
+   "P1": 1,
+   "P2": 46,
+   "P3": 199
+  },
+  "proposition_agreement": {
+   "ALL_NON_LEGAL_OR_OUT_OF_SCOPE": 151,
+   "CORROBORATED_DEFECT": 8,
+   "DISAGREE": 12,
+   "NO_MATERIAL_DEFECT_RAISED": 199,
+   "SEVERITY_SPLIT": 11,
+   "SINGLE_REVIEWER_DEFECT": 1
+  },
+  "record_classification": {
+   "FULLY_EVIDENCE_SUPPORTED": 1,
+   "PARTIALLY_SUPPORTED": 15,
+   "SUBSTANTIVE_DEFECT_FOUND": 19,
+   "UNSUPPORTED_OR_SOURCE_GAP": 11
+  },
+  "severity_splits_escalated": 17
+ },
+ "final_rule": "tools/reconcile.py",
+ "note": "Readers should treat record-classification and agreement figures as rule-dependent; both rule outputs are disclosed.",
+ "pre_registered": {
+  "correction_proposals_by_support": {
+   "DISPUTED": 6,
+   "EVIDENCE_GAP": 3,
+   "EVIDENCE_SUPPORTED": 38
+  },
+  "disagreements": 32,
+  "findings_by_severity": {
+   "NONE": 1290,
+   "P1": 1,
+   "P2": 46,
+   "P3": 199
+  },
+  "proposition_agreement": {
+   "AGREE_NO_MATERIAL_DEFECT": 203,
+   "ALL_NON_LEGAL": 147,
+   "DISAGREE": 32
+  },
+  "record_classification": {
+   "PARTIALLY_SUPPORTED": 16,
+   "SUBSTANTIVE_DEFECT_FOUND": 19,
+   "UNSUPPORTED_OR_SOURCE_GAP": 11
+  }
+ },
+ "pre_registered_rule": "tools/reconcile_preregistered_3af63ee3.py (commit 3af63ee3, before any review was seen)"
+}

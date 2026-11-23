@@ -1,0 +1,76 @@
+{
+ "absent_keys_by_basis": {
+  "AMENDED_PROVISION_INSERTED_TEXT": 7,
+  "AMENDED_PROVISION_REFERENCED": 3,
+  "INVALID_KEY": 2,
+  "RULE_HEADING": 507,
+  "RULE_NOT_FOUND_IN_TEXT_LAYER": 4,
+  "RULE_OMITTED_MARKER": 2,
+  "VIA_AMENDING_INSTRUMENT": 2
+ },
+ "absent_keys_by_target": {
+  "rules-aft-amendment-procedure-rules-2011": 11,
+  "rules-aft-procedure-rules-2008": 67,
+  "rules-army-rules-1954": 449
+ },
+ "assumptions": [
+  "Held compilation texts are comparison-grade (government compilation / India Code), never Gazette authority.",
+  "Every resolved provision still requires verification against Gazette page images and the amendment chain.",
+  "Technically searchable means a provision record would exist; it is not legal correctness or currency.",
+  "A rule heading found in the text layer is evidence of presence in that compilation only; omitted-marker and via-amending-instrument resolutions are excluded from the conservative count."
+ ],
+ "becomes_searchable_conservative_with_no_other_flag": 148,
+ "becomes_searchable_with_no_other_flag": 180,
+ "by_target_outcome": {
+  "rules-aft-amendment-procedure-rules-2011": {
+   "BECOMES_PROVISION_SEARCHABLE": 7,
+   "PARTIAL_IMPROVEMENT": 2
+  },
+  "rules-aft-procedure-rules-2008": {
+   "BECOMES_PROVISION_SEARCHABLE": 32,
+   "PARTIAL_IMPROVEMENT": 4
+  },
+  "rules-army-rules-1954": {
+   "BECOMES_PROVISION_SEARCHABLE": 156,
+   "PARTIAL_IMPROVEMENT": 1
+  }
+ },
+ "compilations": {
+  "rules-aft-amendment-procedure-rules-2011": {
+   "meta_sha256": "fc27032fadfe44fdd20f899612d45b690f469bcdc96463ac8ea4ae9f82e29904",
+   "page_count": 2,
+   "rule_keys_found": 3,
+   "source_url": "https://indiacode.gov.in/server/api/core/bitstreams/5a416087-b3bd-4fa5-8fc8-e9b6768f2966/content",
+   "text_chars": 3030,
+   "text_method": "pdf_text"
+  },
+  "rules-aft-procedure-rules-2008": {
+   "meta_sha256": "590cf7cd393564eacab37566d605357662429f900ea58a96f0ce0e5bb0e0e317",
+   "page_count": 47,
+   "rule_keys_found": 28,
+   "source_url": "https://indiacode.gov.in/server/api/core/bitstreams/3a17342b-6811-4e2c-98c8-fc4954bf5a53/content",
+   "text_chars": 68939,
+   "text_method": "pdf_text"
+  },
+  "rules-army-rules-1954": {
+   "meta_sha256": "48f52219121bf74d070bc832e4573f2f512b239e0a0441ba96b1daca2983a727",
+   "page_count": 214,
+   "rule_keys_found": 212,
+   "source_url": "https://indiacode.gov.in/server/api/core/bitstreams/a7bf1768-b4b2-4729-98de-c1cf0da72b9e/content",
+   "text_chars": 372659,
+   "text_method": "pdf_text"
+  }
+ },
+ "flag_reproduced_by_recheck": 193,
+ "flagged_records": 193,
+ "outcome": {
+  "BECOMES_PROVISION_SEARCHABLE": 188,
+  "PARTIAL_IMPROVEMENT": 5
+ },
+ "outcome_conservative": {
+  "BECOMES_PROVISION_SEARCHABLE": 155,
+  "NO_CHANGE": 36,
+  "PARTIAL_IMPROVEMENT": 2
+ },
+ "raw_data_commit": "ad77758d4569ba6aafa955cc7843d874489e10f7"
+}

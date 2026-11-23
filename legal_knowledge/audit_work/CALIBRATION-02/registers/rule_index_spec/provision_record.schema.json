@@ -1,0 +1,194 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mimamsa/provision_record.schema.json",
+  "title": "Provision record (rule-level index of subordinate legislation) - DRAFT 0.1",
+  "description": "DRAFT for review (Cycle 4 planning; DATABASE ONLY). One record per provision VERSION of a rule, sub-rule, clause, proviso, explanation, appendix item, form, table or schedule entry of an instrument (Army Rules 1954, AFT (Procedure) Rules 2008, AFT (Procedure) Amendment Rules 2011, and other subordinate legislation). Records carry provenance, exact text with page location, separate date fields, amendment links and extraction uncertainty. No field here records a legal determination: determination states are carried unchanged from the registers. Fields that cannot be filled are null, never guessed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "provision_id", "version_id", "doc_id", "unit", "number", "instrument", "text", "source_locations", "provenance", "dates", "version", "extraction", "reproducibility"],
+  "properties": {
+    "schema_version": {"const": "0.1.0-draft"},
+    "provision_id": {
+      "description": "Stable, version-free id: <doc_id>#r<number><suffix-lowercase>[(<sub>)...]. Matches the Act convention act-army-1950#s69; file key = 'r' + number + lowercase suffix, as WS-D canonical_coverage provision_searchable expects (r13A -> r13a).",
+      "type": "string",
+      "pattern": "^[a-z0-9-]+#(r|app|form|sch|tab)[0-9]{1,3}[a-z]{0,2}(\\([0-9a-z]+\\))*$"
+    },
+    "version_id": {
+      "description": "<provision_id>@<version_label>, e.g. rules-army-rules-1954#r15@v1961-SRO-205. One record per version; the version-free id groups them.",
+      "type": "string",
+      "pattern": "^[a-z0-9-]+#[a-z0-9()]+@v[0-9]{4}[A-Za-z0-9().-]*$"
+    },
+    "doc_id": {"description": "Corpus document id of the principal instrument (origin/raw-data data/meta).", "type": "string"},
+    "unit": {"enum": ["rule", "sub_rule", "clause", "sub_clause", "proviso", "explanation", "note_in_instrument", "appendix", "appendix_part", "form", "table", "schedule_entry"]},
+    "number": {"description": "Number as printed (e.g. '23', '13A', '15-A' normalised to '15A'; sub-rule '(3)').", "type": "string"},
+    "number_as_printed": {"type": ["string", "null"]},
+    "path": {"description": "Ordered numbering path from the rule down, e.g. ['23', '(3)'].", "type": "array", "items": {"type": "string"}, "minItems": 1},
+    "parent_provision_id": {"type": ["string", "null"]},
+    "order": {"description": "Position within the instrument for stable sorting.", "type": "integer", "minimum": 0},
+    "heading": {"type": ["string", "null"]},
+    "chapter": {"type": ["string", "null"]},
+    "instrument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["instrument_register_id", "title_as_printed", "notification_number", "instrument_date", "gazette"],
+      "properties": {
+        "instrument_register_id": {"description": "ARMY-RULES-CHAIN-01 instr_id (AR-000 ... AR-046) or the equivalent register id for other instruments; null only if no register row exists yet.", "type": ["string", "null"]},
+        "title_as_printed": {"type": "string"},
+        "short_title_as_printed": {"type": ["string", "null"]},
+        "notification_number": {"description": "e.g. 'S.R.O. 484', 'S.R.O. 26(E)', 'S.R.O. 5(E)'.", "type": ["string", "null"]},
+        "instrument_date": {"type": ["string", "null"], "format": "date"},
+        "issuing_authority_as_printed": {"type": ["string", "null"]},
+        "enabling_provision_as_printed": {"description": "e.g. 'section 191 of the Army Act, 1950'; 'clauses (f), (g) and (k) of sub-section (2) of section 41 of the AFT Act, 2007'.", "type": ["string", "null"]},
+        "gazette": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "part_section": {"type": ["string", "null"]},
+            "issue_number": {"type": ["string", "null"]},
+            "extraordinary": {"type": ["boolean", "null"]},
+            "issue_date": {"type": ["string", "null"], "format": "date"},
+            "printed_pages": {"type": ["string", "null"]}
+          }
+        },
+        "role": {"enum": ["principal", "amending", "corrigendum", "declaration_not_amendment", "repealing", "compilation"]}
+      }
+    },
+    "text": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exact_text", "text_sha256", "normalisation", "language"],
+      "properties": {
+        "exact_text": {"description": "Wording of THIS version as read from the cited source location; null for an omitted/repealed version that has no operative wording (the omission marker goes in version.change_event).", "type": ["string", "null"]},
+        "text_sha256": {"description": "SHA-256 of exact_text after the declared normalisation; null when exact_text is null.", "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "normalisation": {"description": "Declared, reversible normalisation, e.g. 'NFC; CRLF->LF; hyphenated line breaks joined; runs of spaces collapsed'. Quotation marks, punctuation, negations and numbers are never altered.", "type": "string"},
+        "language": {"enum": ["en", "hi", "bilingual"]},
+        "editorial_annotations_excluded": {"description": "Compilation annotations removed from exact_text and kept here (e.g. '(Authority: SRO 188 of 4 Jun 1979)', 'NOTES 1. See AA. s. 23 ...'). Never part of the provision wording.", "type": "array", "items": {"type": "object", "additionalProperties": false, "properties": {"kind": {"enum": ["authority_line", "compiler_note", "manual_note", "footnote", "marginal_note"]}, "text": {"type": "string"}, "source_location_index": {"type": "integer", "minimum": 0}}}}
+      }
+    },
+    "source_locations": {
+      "description": "Every carrier the wording was read from or compared with. At least one entry. The entry with role WORDING_SOURCE is the one exact_text was taken from.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "carrier_sha256", "pdf_page"],
+        "properties": {
+          "role": {"enum": ["WORDING_SOURCE", "COMPARISON_ONLY", "LOCATOR_ONLY"]},
+          "carrier_kind": {"enum": ["GAZETTE_FACSIMILE", "GOVERNMENT_COMPILATION", "GOVERNMENT_HOSTED_GAZETTE_SCAN", "MANUAL", "OTHER"]},
+          "carrier_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "carrier_doc_id": {"type": ["string", "null"]},
+          "source_url": {"type": ["string", "null"]},
+          "acquisition_id": {"description": "e.g. ACQ-01:notif-army-rules-1954-sro-484, ACQ02-01, ACQ03-030.", "type": ["string", "null"]},
+          "pdf_page": {"type": "integer", "minimum": 1},
+          "pdf_page_end": {"type": ["integer", "null"], "minimum": 1},
+          "printed_page": {"type": ["string", "null"]},
+          "text_layer_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+          "char_start": {"type": ["integer", "null"], "minimum": 0},
+          "char_end": {"type": ["integer", "null"], "minimum": 0},
+          "render_png_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+          "render_dpi": {"type": ["integer", "null"]},
+          "page_image_check_id": {"description": "Complete check id (PIC-n / WSA-PIC-n / ...); never prefix-stripped.", "type": ["string", "null"]},
+          "agrees_with_wording_source": {"enum": ["YES", "NO", "NOT_COMPARED", "NOT_APPLICABLE"]}
+        }
+      }
+    },
+    "provenance": {
+      "description": "SOURCE_AUTHORITY_POLICY v1 fields for the WORDING_SOURCE carrier.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_authority_policy_version", "document_authority", "carrier_provenance", "copy_fidelity", "amendment_chain_status", "authority_rationale"],
+      "properties": {
+        "source_authority_policy_version": {"const": "v1"},
+        "document_authority": {"enum": ["ENACTED_OR_NOTIFIED_PRIMARY", "OFFICIAL_JUDICIAL_DECISION", "GOVERNMENT_COMPILATION", "GOVERNMENT_ISSUED_MANUAL", "UNVERIFIED_MANUAL", "THIRD_PARTY_COMMENTARY", "UNKNOWN"]},
+        "carrier_provenance": {"enum": ["ISSUING_AUTHORITY", "GOVERNMENT_HOSTED_COPY", "THIRD_PARTY_ARCHIVAL_FACSIMILE", "USER_SUPPLIED", "THIRD_PARTY_TRANSCRIPTION", "UNKNOWN"]},
+        "copy_fidelity": {"enum": ["NOT_CHECKED", "HASH_ONLY", "PAGE_IMAGE_CHECKED", "CUSTODIAN_AUTHENTICATED"]},
+        "amendment_chain_status": {"enum": ["NOT_CHECKED", "PARTIAL", "CHECKED_FOR_RELEVANT_PERIOD", "NOT_APPLICABLE"]},
+        "authenticity": {"enum": ["ARCHIVAL_FACSIMILE_OF_OFFICIAL", "OFFICIAL_ORIGINAL", "NOT_ESTABLISHED", null]},
+        "authority_rationale": {"type": "string"},
+        "approval_ref": {"description": "Owner approval of the acquisition run that produced the carrier (PR/issue id); null while none is recorded.", "type": ["string", "null"]}
+      }
+    },
+    "dates": {
+      "description": "Distinct date fields. A publication date is never copied into effective_date; a retrospective deemed effect never becomes valid_from.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["publication_date", "commencement_as_printed", "effective_date", "effective_date_status", "retrospective_deemed_effect_from"],
+      "properties": {
+        "publication_date": {"type": ["string", "null"], "format": "date"},
+        "commencement_as_printed": {"description": "Commencement words as printed, or 'not stated' / 'not yet read'.", "type": ["string", "null"]},
+        "effective_date": {"description": "Filled only when the instrument states its commencement (effective_date_status STATED_IN_INSTRUMENT...).", "type": ["string", "null"], "format": "date"},
+        "effective_date_status": {"type": "string", "pattern": "^(STATED_IN_INSTRUMENT|NOT_STATED_PENDING_ADVICE|NOT_DETERMINED|NOT_APPLICABLE|UNKNOWN)( .*)?$"},
+        "retrospective_deemed_effect_from": {"description": "Date from which the instrument deems the change effective (e.g. S.R.O. 216/1988 -> 1979-06-04). Separate field; legal effect reserved (AQ-06).", "type": ["string", "null"], "format": "date"},
+        "retrospective_basis_as_printed": {"type": ["string", "null"]},
+        "valid_from": {"description": "= effective_date when stated; otherwise null with flag EFFECTIVE_DATE_UNSTATED (WS-D versioned-edge rule).", "type": ["string", "null"], "format": "date"},
+        "valid_to": {"type": ["string", "null"], "format": "date"},
+        "valid_to_status": {"enum": ["OPEN_LATER_CHAIN_INCOMPLETE", "SUCCESSOR_STATED", "SUCCESSOR_EFFECTIVE_DATE_UNSTATED", "NOT_APPLICABLE"]},
+        "date_flags": {"type": "array", "items": {"enum": ["EFFECTIVE_DATE_UNSTATED", "VALID_TO_UNSTATED", "RETROSPECTIVE_DEEMED_EFFECT_AQ06", "EVIDENCE_EFFECTIVE_DATE_CONFLICT", "SILENT_INSTRUMENT_AQ05"]}}
+      }
+    },
+    "version": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version_label", "change_event", "predecessor_version_id", "successor_version_id", "chain_state"],
+      "properties": {
+        "version_label": {"type": "string"},
+        "change_event": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["event_type", "by_instrument_register_id"],
+          "properties": {
+            "event_type": {"enum": ["enacted", "inserted", "substituted", "amended", "renumbered", "omitted", "repealed", "superseded", "corrigendum", "declaration_not_amendment"]},
+            "by_instrument_register_id": {"type": ["string", "null"]},
+            "by_provision_id": {"description": "Provision of the amending instrument that makes the change (e.g. rules-aft-amendment-procedure-rules-2011#r3).", "type": ["string", "null"]},
+            "event_key": {"description": "WS-D build_versioned_edges event key, e.g. SRO-205-1961.", "type": ["string", "null"]},
+            "change_log_ids": {"description": "WS-A provision_change_log change_id(s) / seed rows grouped into this event.", "type": "array", "items": {"type": "string"}},
+            "change_as_printed": {"type": ["string", "null"]}
+          }
+        },
+        "predecessor_version_id": {"type": ["string", "null"]},
+        "successor_version_id": {"type": ["string", "null"]},
+        "chain_state": {"description": "State of the registered chain for this provision as recorded (never a legal finding).", "enum": ["CHAIN_PARTIAL", "CHAIN_COMPLETE_FOR_REGISTERED_INSTRUMENTS", "CHAIN_NOT_CHECKED"]},
+        "known_chain_gaps": {"description": "Register gaps that may affect this version (e.g. AR-001, AR-030, AR-036, unverified hints).", "type": "array", "items": {"type": "string"}},
+        "determination_state": {"description": "Carried unchanged from the registers (e.g. CONFLICTING for r.23(3) C-01; OPEN for r.193 C-08; PROPOSAL for r.194 C-09).", "type": ["string", "null"]},
+        "conflict_id": {"type": ["string", "null"]},
+        "legal_review_required": {"type": "boolean"}
+      }
+    },
+    "extraction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "verification_state", "uncertainty_flags", "searchable"],
+      "properties": {
+        "method": {"enum": ["pdf_text", "ocr", "page_image_transcription", "html"]},
+        "ocr_engine": {"type": ["string", "null"]},
+        "ocr_mean_confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+        "ocr_page_confidence": {"type": "array", "items": {"type": "object", "additionalProperties": false, "properties": {"pdf_page": {"type": "integer"}, "confidence": {"type": "number"}}}},
+        "verification_state": {"enum": ["UNVERIFIED_EXTRACTION", "COMPILATION_COMPARISON_ONLY", "PAGE_IMAGE_CHECKED", "PAGE_IMAGE_CHECKED_SECOND_READING"]},
+        "uncertainty_flags": {"type": "array", "items": {"enum": ["OCR_ONLY", "TEXT_LAYER_ONLY", "BILINGUAL_TEXT_LAYER", "LOW_OCR_CONFIDENCE", "HEADING_NOT_FOUND_IN_TEXT_LAYER", "NUMBER_INFERRED_FROM_SEQUENCE", "BOUNDARY_UNCERTAIN", "CONTINUATION_PAGE_UNREAD", "EDITORIAL_TEXT_INTERLEAVED", "COMPILATION_ONLY", "HINT_ONLY_INSTRUMENT", "INSTRUMENT_NOT_HELD"]}},
+        "searchable": {"description": "TRUE when the record is in the offline index. Searchable never means verified or current.", "type": "boolean"},
+        "review_queue_id": {"type": ["string", "null"]}
+      }
+    },
+    "reproducibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["extractor", "extractor_sha256", "input_sha256s", "record_sha256"],
+      "properties": {
+        "extractor": {"description": "Script path and version that produced the record.", "type": "string"},
+        "extractor_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "input_sha256s": {"description": "SHA-256 of every input file (carrier PDFs, text layers, registers).", "type": "array", "items": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "minItems": 1},
+        "register_rows": {"description": "Register rows used (file:row id), e.g. ARMY-RULES-CHAIN-01/army_rules_instrument_register.csv:AR-006.", "type": "array", "items": {"type": "string"}},
+        "record_sha256": {"description": "SHA-256 of the canonical JSON of this record with record_sha256 set to 64 zeros (sorted keys, UTF-8, no insignificant whitespace).", "type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  },
+  "allOf": [
+    {"if": {"properties": {"dates": {"properties": {"effective_date": {"type": "string"}}, "required": ["effective_date"]}}},
+     "then": {"properties": {"dates": {"properties": {"effective_date_status": {"pattern": "^STATED_IN_INSTRUMENT"}}}}}},
+    {"if": {"properties": {"extraction": {"properties": {"verification_state": {"pattern": "^PAGE_IMAGE_CHECKED"}}}}},
+     "then": {"properties": {"source_locations": {"contains": {"properties": {"role": {"const": "WORDING_SOURCE"}, "render_png_sha256": {"type": "string"}}, "required": ["render_png_sha256"]}}}}},
+    {"if": {"properties": {"provenance": {"properties": {"document_authority": {"const": "GOVERNMENT_COMPILATION"}}}}},
+     "then": {"properties": {"extraction": {"properties": {"verification_state": {"enum": ["UNVERIFIED_EXTRACTION", "COMPILATION_COMPARISON_ONLY"]}}}}}}
+  ]
+}
