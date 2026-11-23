@@ -14,11 +14,11 @@ stop a repository writer from re-deriving the whole chain. Detection of that res
 HEAD is pinned in the test suite as well as in ledger/HEAD (a two-place change visible in review), and every version is
 added by a reviewed PR. There are no cryptographic signatures; authority is the reviewed merge, and since AUTH-LEDGER-02 an
 approved version is effective only after a BIND line whose git facts tools/binding.py verifies offline (APPROVAL_CONTROLS.md)."""
-import json, posixpath, re, sys
+import json, posixpath, re, sys, os
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import PKG, LedgerError, read_csv, sha256_file, sha256_text  # noqa: E402
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # not resolved: keeps a symlinked path detectable (C8)
+from common import LOGICAL_PKG, PKG, LedgerError, read_csv, sha256_file, sha256_text  # noqa: E402
 import rules_v1  # noqa: E402
 import strength  # noqa: E402
 import binding  # noqa: E402
@@ -437,6 +437,23 @@ def _apply_version(root, ctx, line, st):
                             "effect": "APPLIED", "before": before, "after": after})
 
 
+COMMITTED_PACKAGE = LOGICAL_PKG  # the authoritative ledger package (logical path); tests may point it at a temporary layout
+
+
+def is_committed_package(root):
+    import os
+    return Path(os.path.abspath(root)) == Path(COMMITTED_PACKAGE) or Path(root).resolve() == Path(COMMITTED_PACKAGE).resolve()
+
+
+def check_committed_layout(root):
+    """Run the package-layout check (no symlink, a real committed directory) before ANY file of the committed ledger is
+    read; a no-op for synthetic roots. Called first by reader.effective_state and auth_ledger.verify (apply_ledger relies on them)."""
+    if is_committed_package(root):
+        binding.check_package_layout(COMMITTED_PACKAGE)
+        return True
+    return False
+
+
 def apply_ledger(root, ctx, as_of=None, require_binding=True):
     """Validate every version up to as_of and return (effective_register, transitions, withdrawn, lines).
 
@@ -445,6 +462,7 @@ def apply_ledger(root, ctx, as_of=None, require_binding=True):
     manifest line is a BIND line that binding.verify() accepts against local git history. Only the last line may be an
     unbound entry version. require_binding=False is the AUTH-LEDGER-01 semantics, kept for synthetic evidence-rule tests."""
     import copy as _copy
+    committed = is_committed_package(root)  # the layout check itself runs before any read, in reader / auth_ledger.verify
     lines = read_manifest(root)
     as_of = len(lines) - 1 if as_of is None else as_of
     if not 0 <= as_of < len(lines):
@@ -468,7 +486,8 @@ def apply_ledger(root, ctx, as_of=None, require_binding=True):
                 raise LedgerError(f"version {line['version']}: BIND lines are evaluated only with require_binding")
             if pending is None or pending[0] != line["version"] - 1:
                 raise LedgerError(f"version {line['version']}: BIND line binds nothing pending")
-            pinned_top = PKG.parents[2] if Path(root).resolve() == PKG.resolve() else None  # repo/legal_knowledge/audit_work/AUTH-LEDGER
+            # the repository that contains the logical package path (Fable R-02, C-01, C-02); None only for synthetic roots
+            pinned_top = Path(COMMITTED_PACKAGE).parents[2] if committed else None
             report = binding.verify(root, line, lines, canonical_line, expected_top=pinned_top)
             st = pending[1]
             for t in st["transitions"]:

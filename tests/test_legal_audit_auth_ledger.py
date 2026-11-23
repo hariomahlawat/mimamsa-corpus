@@ -1776,9 +1776,11 @@ def _forge_commit_graph(t, chain=False):
         new = f.with_name("graph-" + bytes(b[-20:]).hex() + ".graph")
         f.rename(new)
         chain_file = f.parent / "commit-graph-chain"
-        if chain_file.exists():  # newer git (e.g. 2.56) writes it read-only
+        if chain_file.exists():  # git writes it read-only (0444); a non-root runner cannot overwrite it otherwise (Fable F-01 of bb1f0971)
             __import__("os").chmod(chain_file, 0o644)
         chain_file.write_text(bytes(b[-20:]).hex() + "\n")
+    # the forgery must be live for the installed git, or the rejection test would be vacuous (Fable F-04 of bb1f0971)
+    assert len(_git(t.dir, "rev-list", "--parents", "-n", "1", c2).split()) == 3, "plain git does not honour the forged commit-graph"
     return c1, c2
 
 
@@ -1823,9 +1825,7 @@ class ReviewFixes03(unittest.TestCase):
                 binding.verify(t.dir, lines[2], lines, L.canonical_line, expected_top=t.dir.parent)
         finally:
             t.close()
-        import inspect
-        src = inspect.getsource(L.apply_ledger)
-        self.assertIn("PKG.parents[2] if Path(root).resolve() == PKG.resolve()", src)
+        self.assertTrue(L.is_committed_package(PKG))  # the call-site behaviour is tested end to end in C8Security
         self.assertEqual(PKG.parents[2], REPO)
 
     def test_r06_nested_prefix_merge_checks_only_the_package(self):
@@ -1906,3 +1906,422 @@ class ReviewFixes03(unittest.TestCase):
                 self.assertEqual(bt1.l5_observations("L5:x#y", sha), [], bad)
         with mock.patch.object(bt1.strength, "resolve", return_value=("p", good)):
             self.assertEqual(len(bt1.l5_observations("L5:x#y", sha)), 1)
+
+
+class LayoutGitLedger(GitLedger):
+    """A git repository whose ledger sits at the real package path legal_knowledge/audit_work/AUTH-LEDGER (C8)."""
+    def __init__(self):
+        Synthetic.__init__(self)
+        self.repo = Path(tempfile.mkdtemp(prefix="authledger_layout_"))
+        target = self.repo / "legal_knowledge/audit_work/AUTH-LEDGER"
+        target.parent.mkdir(parents=True)
+        shutil.move(str(self.dir), str(target))
+        self.dir = target
+        _git(self.repo, "init", "-q", "-b", "main")
+        _git(self.repo, "config", "user.email", "test@example.invalid")
+        _git(self.repo, "config", "user.name", "test")
+        _git(self.repo, "config", "commit.gpgsign", "false")
+        self.commit("genesis")
+
+    def bound(self):
+        head, merge = self.pr([entry_from_draft(GAZETTE_1962, 1)])
+        self.add_bind(head, merge)
+        self.commit("bind")
+        return head, merge
+
+    def close(self):
+        shutil.rmtree(self.repo, ignore_errors=True)
+
+
+def _effects(texts):
+    return [x["effect"] for x in json.loads(texts["transitions.json"])]
+
+
+class C8Base(unittest.TestCase):
+    """Helpers for the Cycle 8 security tests (no tests of its own)."""
+    def setUp(self):
+        self.cleanup = []
+
+    def tearDown(self):
+        for c in self.cleanup:
+            c()
+
+    def ledger(self, cls=LayoutGitLedger):
+        t = cls()
+        self.cleanup.append(t.close)
+        return t
+
+    def tmp(self):
+        d = Path(tempfile.mkdtemp(prefix="authledger_c8_"))
+        self.cleanup.append(lambda: shutil.rmtree(d, ignore_errors=True))
+        return d
+
+    def state_as_committed(self, package, root=None):
+        with mock.patch.object(L, "COMMITTED_PACKAGE", Path(package)):
+            texts, _ = reader.effective_state(root or package, None, True)
+        return texts
+
+    def attacker_copy(self, victim):
+        """An attacker repository with an honest reviewed merge; its ledger bytes are copied into the victim package by a
+        direct commit, so only a diverted history could make the victim's BIND line verify."""
+        a = self.ledger(GitLedger)
+        h, m = a.pr([entry_from_draft(GAZETTE_1962, 1)])
+        a.add_bind(h, m)
+        a.commit("bind")
+        for sub in ("ledger", "decisions"):
+            shutil.rmtree(victim.dir / sub, ignore_errors=True)
+            shutil.copytree(a.dir / sub, victim.dir / sub)
+        victim.commit("direct commit of copied ledger bytes (no reviewed merge)")
+        return a
+
+
+
+class C8Security(C8Base):
+    """Cycle 8 closeout of Fable C-01 (call-site pin tested end to end) and C-02 (symlinked package) plus C-04."""
+    def test_c01_honest_binding_in_the_real_layout_applies(self):
+        t = self.ledger()
+        t.bound()
+        self.assertEqual(_effects(self.state_as_committed(t.dir)), ["APPLIED"])
+
+    def test_c01_nested_gitdir_file_is_rejected_at_the_call_site(self):
+        v = self.ledger()
+        a = self.attacker_copy(v)
+        (v.dir / ".git").write_text(f"gitdir: {a.dir / '.git'}\n", encoding="utf-8")
+        self.assertEqual(_effects(reader.effective_state(v.dir, None, True)[0]), ["APPLIED"])  # unpinned: the diversion works
+        with self.assertRaisesRegex(common.LedgerError, "is not the expected repository"):
+            self.state_as_committed(v.dir)  # pinned at the real call site: rejected
+
+    def test_c01_nested_git_directory_is_rejected_at_the_call_site(self):
+        v = self.ledger()
+        a = self.attacker_copy(v)
+        shutil.copytree(a.dir / ".git", v.dir / ".git")
+        with self.assertRaisesRegex(common.LedgerError, "is not the expected repository"):
+            self.state_as_committed(v.dir)
+
+    def test_c04_forged_commit_object_under_a_genuine_id_is_rejected(self):
+        import zlib, os
+        t = self.ledger()
+        base = _git(t.repo, "rev-parse", "HEAD")
+        t.add_version([entry_from_draft(GAZETTE_1962, 1)])
+        c1 = t.commit("direct push version")
+        _git(t.repo, "commit", "-q", "--allow-empty", "-m", "innocent")
+        c2 = _git(t.repo, "rev-parse", "HEAD")
+        t.add_bind(c1, c2)
+        t.commit("bind")
+        raw = subprocess.run(["git", "-C", str(t.repo), "cat-file", "commit", c2], capture_output=True).stdout
+        fake = raw.split(b"\n")[0] + b"\nparent " + base.encode() + b"\nparent " + c1.encode() + b"\n" + raw.split(b"\n", 2)[2]
+        obj = t.repo / ".git/objects" / c2[:2] / c2[2:]
+        os.chmod(obj, 0o644)
+        obj.write_bytes(zlib.compress(b"commit %d\0" % len(fake) + fake))
+        with self.assertRaisesRegex(common.LedgerError, "does not hash to its id"):
+            self.state_as_committed(t.dir)
+
+    def _symlink_repo(self, link_rel, target):
+        import os
+        r = self.tmp()
+        (r / link_rel).parent.mkdir(parents=True, exist_ok=True)
+        os.symlink(target, r / link_rel)
+        _git(r, "init", "-q", "-b", "main")
+        _git(r, "config", "user.email", "test@example.invalid")
+        _git(r, "config", "user.name", "test")
+        _git(r, "add", "-A")
+        _git(r, "commit", "-q", "-m", "committed symlink")
+        return r
+
+    def test_c02_symlinked_package_to_another_repository_is_rejected(self):
+        a = self.ledger()
+        a.bound()
+        r = self._symlink_repo("legal_knowledge/audit_work/AUTH-LEDGER", a.dir)
+        self.assertIn("120000", _git(r, "ls-tree", "HEAD", "--", "legal_knowledge/audit_work/AUTH-LEDGER"))
+        with self.assertRaisesRegex(common.LedgerError, "is a symlink"):
+            self.state_as_committed(r / "legal_knowledge/audit_work/AUTH-LEDGER")
+
+    def test_c02_nested_symlink_is_rejected(self):
+        a = self.ledger()
+        a.bound()
+        r = self._symlink_repo("legal_knowledge/audit_work", a.repo / "legal_knowledge/audit_work")
+        with self.assertRaisesRegex(common.LedgerError, "is a symlink"):
+            self.state_as_committed(r / "legal_knowledge/audit_work/AUTH-LEDGER")
+
+    def test_c02_broken_symlink_is_rejected(self):
+        r = self._symlink_repo("legal_knowledge/audit_work/AUTH-LEDGER", "/nonexistent/authledger")
+        with self.assertRaisesRegex(common.LedgerError, "is a symlink"):
+            self.state_as_committed(r / "legal_knowledge/audit_work/AUTH-LEDGER")
+
+    def test_c02_committed_symlink_replaced_by_a_real_directory_is_rejected(self):
+        a = self.ledger()
+        a.bound()
+        r = self._symlink_repo("legal_knowledge/audit_work/AUTH-LEDGER", a.dir)
+        pkg = r / "legal_knowledge/audit_work/AUTH-LEDGER"
+        pkg.unlink()
+        shutil.copytree(a.dir, pkg, ignore=shutil.ignore_patterns(".git"))
+        with self.assertRaisesRegex(common.LedgerError, "committed with mode 120000"):
+            self.state_as_committed(pkg)
+
+    def test_c02_fresh_clone_of_an_honest_layout_applies(self):
+        t = self.ledger()
+        t.bound()
+        d = self.tmp()
+        subprocess.run(["git", "clone", "-q", str(t.repo), str(d / "clone")], check=True, capture_output=True)
+        pkg = d / "clone/legal_knowledge/audit_work/AUTH-LEDGER"
+        self.assertEqual(_effects(self.state_as_committed(pkg)), ["APPLIED"])
+
+    def test_c02_layout_check_runs_for_the_committed_ledger_even_at_version_zero(self):
+        self.assertEqual(CLI.verify(), ["v0000 ok"])
+        with mock.patch.object(binding, "check_package_layout", side_effect=common.LedgerError("layout check ran")):
+            with self.assertRaisesRegex(common.LedgerError, "layout check ran"):
+                reader.effective_state(PKG, 0)
+        self.assertFalse(L.is_committed_package(self.tmp()))
+
+
+class C8SecurityMore(C8Base):
+    def test_c04_forged_parent_object_is_rejected(self):
+        import zlib, os
+        t = self.ledger()
+        head, merge = t.bound()
+        p0 = _git(t.repo, "rev-parse", f"{merge}^1")
+        obj = t.repo / ".git/objects" / p0[:2] / p0[2:]
+        raw = subprocess.run(["git", "-C", str(t.repo), "cat-file", "commit", p0], capture_output=True).stdout
+        os.chmod(obj, 0o644)
+        forged = raw + b"\nforged\n"
+        obj.write_bytes(zlib.compress(b"commit %d\0" % len(forged) + forged))
+        with self.assertRaisesRegex(common.LedgerError, "parent commit object of merge_commit does not hash"):
+            self.state_as_committed(t.dir)
+
+    def test_c02_logical_package_path_is_not_symlink_resolved(self):
+        import os
+        d = self.tmp()
+        os.symlink(PKG, d / "linked-AUTH-LEDGER")
+        out = subprocess.run([sys.executable, "-c", "import sys; sys.path.insert(0, sys.argv[1]); import common; print(common.LOGICAL_PKG); print(common.PKG)",
+                              str(d / "linked-AUTH-LEDGER/tools")], capture_output=True, text=True, env=dict(os.environ, PYTHONDONTWRITEBYTECODE="1"))
+        logical, resolved = out.stdout.split()
+        self.assertEqual(Path(logical), d / "linked-AUTH-LEDGER")
+        self.assertEqual(Path(resolved), PKG.resolve())
+
+
+C8Base._symlink_repo = C8Security._symlink_repo  # shared helper (a committed symlink in a fresh repository)
+
+
+class C8SecurityRound2(C8Base):
+    """Corrections for the Fable review of be861ec0 (REJECT): F-01 real CLI through symlinks, F-02 forged tree objects,
+    F-03 surviving mutants, F-04 fail-closed committed-layout check, F-07 bundle reproducibility."""
+    CLI_PATH = "legal_knowledge/audit_work/AUTH-LEDGER/tools/auth_ledger.py"
+
+    def run_cli(self, script, *args, cwd=None):
+        import os
+        return subprocess.run([sys.executable, str(script), *args], capture_output=True, text=True, cwd=cwd or self.tmp(),
+                              env=dict(os.environ, PYTHONDONTWRITEBYTECODE="1"))
+
+    def attacker_package_with_tools(self):
+        a = self.ledger()
+        a.bound()
+        shutil.copytree(PKG / "tools", a.dir / "tools", ignore=shutil.ignore_patterns("__pycache__"))
+        shutil.copytree(PKG / "schema", a.dir / "schema")  # read at import time by ledger.py
+        return a
+
+    def test_f01_real_cli_through_a_committed_package_symlink_is_rejected(self):
+        a = self.attacker_package_with_tools()
+        r = self._symlink_repo("legal_knowledge/audit_work/AUTH-LEDGER", a.dir)
+        for cmd in (["verify"], ["build", "--out", str(self.tmp() / "out")]):
+            p = self.run_cli(r / self.CLI_PATH, *cmd)
+            self.assertEqual(p.returncode, 2, p.stdout + p.stderr)
+            self.assertIn("is a symlink", p.stderr)
+
+    def test_f01_real_cli_through_a_symlinked_parent_is_rejected(self):
+        a = self.attacker_package_with_tools()
+        r = self._symlink_repo("legal_knowledge", a.repo / "legal_knowledge")
+        p = self.run_cli(r / self.CLI_PATH, "verify")
+        self.assertEqual(p.returncode, 2, p.stdout + p.stderr)
+        self.assertIn("is a symlink", p.stderr)
+
+    def test_f01_real_cli_on_the_real_repository_still_verifies(self):
+        p = self.run_cli(REPO / self.CLI_PATH, "verify")
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertIn("v0000 ok", p.stdout)
+
+    def test_f02_forged_tree_object_under_a_genuine_id_is_rejected(self):
+        import os
+        t = self.ledger()
+        _git(t.repo, "checkout", "-q", "-b", "unrelated")
+        (t.repo / "unrelated.txt").write_text("an honest, reviewed but unrelated change\n", encoding="utf-8")
+        rh = t.commit("unrelated reviewed change")
+        _git(t.repo, "checkout", "-q", "main")
+        _git(t.repo, "merge", "-q", "--no-ff", "-m", "merge unrelated", "unrelated")
+        mc = _git(t.repo, "rev-parse", "HEAD")
+        t.add_version([entry_from_draft(GAZETTE_1962, 1)])
+        c = t.commit("direct, unreviewed ledger version")
+        t.add_bind(rh, mc)
+        t.commit("bind naming the unrelated merge")
+        with self.assertRaises(common.LedgerError):
+            self.state_as_committed(t.dir)  # honest objects: rejected
+        src = _git(t.repo, "rev-parse", f"{c}^{{tree}}")
+        for victim in (_git(t.repo, "rev-parse", f"{rh}^{{tree}}"), _git(t.repo, "rev-parse", f"{mc}^{{tree}}")):
+            dst = t.repo / ".git/objects" / victim[:2] / victim[2:]
+            os.chmod(dst, 0o644)
+            dst.write_bytes((t.repo / ".git/objects" / src[:2] / src[2:]).read_bytes())
+        with self.assertRaisesRegex(common.LedgerError, "tree object .* does not hash to its id"):
+            self.state_as_committed(t.dir)
+
+    def test_f03_committed_package_is_the_logical_path_not_the_resolved_one(self):
+        import os
+        a = self.ledger()
+        a.bound()
+        r = self._symlink_repo("legal_knowledge/audit_work/AUTH-LEDGER", a.dir)
+        logical = r / "legal_knowledge/audit_work/AUTH-LEDGER"
+        with mock.patch.object(L, "COMMITTED_PACKAGE", logical):
+            self.assertTrue(L.is_committed_package(logical))                 # abspath clause
+            self.assertTrue(L.is_committed_package(Path(os.path.realpath(logical))))  # resolve clause
+            with self.assertRaisesRegex(common.LedgerError, "is a symlink"):
+                reader.effective_state(Path(os.path.realpath(logical)), None, True)  # resolved root still checked
+
+    def test_f04_gitlink_unborn_head_and_untracked_package_fail_closed(self):
+        t = self.ledger()
+        t.bound()
+        head = _git(t.repo, "rev-parse", "HEAD")
+        _git(t.repo, "rm", "-r", "-q", "--cached", "legal_knowledge/audit_work")
+        _git(t.repo, "update-index", "--add", "--cacheinfo", f"160000,{head},legal_knowledge/audit_work")
+        _git(t.repo, "commit", "-q", "-m", "audit_work committed as a gitlink")
+        with self.assertRaisesRegex(common.LedgerError, "committed with mode 160000"):
+            self.state_as_committed(t.dir)
+        u = self.tmp()
+        pkg = u / "legal_knowledge/audit_work/AUTH-LEDGER"
+        shutil.copytree(t.dir, pkg)
+        _git(u, "init", "-q", "-b", "main")
+        with self.assertRaisesRegex(common.LedgerError, "no HEAD commit"):
+            binding.check_package_layout(pkg)
+        (u / "other.txt").write_text("x\n", encoding="utf-8")
+        _git(u, "add", "other.txt")
+        _git(u, "-c", "user.email=t@example.invalid", "-c", "user.name=t", "commit", "-q", "-m", "package untracked")
+        with self.assertRaisesRegex(common.LedgerError, "not recorded in HEAD"):
+            binding.check_package_layout(pkg)
+
+    def test_f03_intermediate_committed_symlink_with_real_worktree_directory_is_rejected(self):
+        a = self.ledger()
+        a.bound()
+        r = self._symlink_repo("legal_knowledge/audit_work", a.repo / "legal_knowledge/audit_work")
+        (r / "legal_knowledge/audit_work").unlink()
+        shutil.copytree(a.repo / "legal_knowledge/audit_work", r / "legal_knowledge/audit_work", ignore=shutil.ignore_patterns(".git"))
+        with self.assertRaisesRegex(common.LedgerError, "legal_knowledge/audit_work is committed with mode 120000"):
+            self.state_as_committed(r / "legal_knowledge/audit_work/AUTH-LEDGER")
+
+    def test_f07_bundle_clone_verifies(self):
+        t = self.ledger()
+        t.bound()
+        d = self.tmp()
+        _git(t.repo, "bundle", "create", "-q", str(d / "ledger.bundle"), "--all")
+        subprocess.run(["git", "clone", "-q", str(d / "ledger.bundle"), str(d / "clone")], check=True, capture_output=True)
+        self.assertEqual(_effects(self.state_as_committed(d / "clone/legal_knowledge/audit_work/AUTH-LEDGER")), ["APPLIED"])
+
+
+class C8SecurityRound2b(C8Base):
+    def test_f04_package_inside_a_larger_repository_fails_closed(self):
+        outer = self.tmp()
+        _git(outer, "init", "-q", "-b", "main")
+        pkg = outer / "nested/legal_knowledge/audit_work/AUTH-LEDGER"
+        t = Synthetic()
+        self.cleanup.append(t.close)
+        shutil.copytree(t.dir, pkg)
+        _git(outer, "add", "-A")
+        _git(outer, "-c", "user.email=t@example.invalid", "-c", "user.name=t", "commit", "-q", "-m", "package nested below the repository top")
+        with self.assertRaisesRegex(common.LedgerError, "is not the package's own repository top"):
+            binding.check_package_layout(pkg)
+
+
+class C8SecurityRound3(C8Base):
+    attacker_package_with_tools = C8SecurityRound2.attacker_package_with_tools
+    CLI_PATH = C8SecurityRound2.CLI_PATH
+    """Fable focused re-review of 06a54c66: R-01 relative CLI inside a link, R-02 forged ancestry, R-03 untested
+    controls (blob, base manifest, library import), R-04 missing git and refused repositories."""
+    def _forge(self, repo, oid, extra=b"\nforged\n"):
+        import zlib, os
+        kind = subprocess.run(["git", "-C", str(repo), "cat-file", "-t", oid], capture_output=True, text=True).stdout.strip()
+        raw = subprocess.run(["git", "-C", str(repo), "cat-file", kind, oid], capture_output=True).stdout + extra
+        obj = repo / ".git/objects" / oid[:2] / oid[2:]
+        os.chmod(obj, 0o644)
+        obj.write_bytes(zlib.compress(f"{kind} {len(raw)}\0".encode() + raw))
+
+    def test_r01_relative_cli_inside_the_link_target_uses_the_logical_cwd(self):
+        import os
+        a = self.attacker_package_with_tools()
+        r = self._symlink_repo("legal_knowledge/audit_work/AUTH-LEDGER", a.dir)
+        logical = r / "legal_knowledge/audit_work/AUTH-LEDGER"
+        p = subprocess.run([sys.executable, "tools/auth_ledger.py", "verify"], capture_output=True, text=True, cwd=os.path.realpath(logical),
+                           env=dict(os.environ, PWD=str(logical), PYTHONDONTWRITEBYTECODE="1"))
+        self.assertEqual(p.returncode, 2, p.stdout + p.stderr)
+        self.assertIn("is a symlink", p.stderr)
+
+    def test_r02_forged_interior_ancestry_commit_is_rejected(self):
+        t = self.ledger()
+        head, merge = t.pr([entry_from_draft(GAZETTE_1962, 1)])
+        (t.repo / "interim.txt").write_text("interim\n", encoding="utf-8")
+        interim = t.commit("interim commit between merge and bind")
+        t.add_bind(head, merge)
+        t.commit("bind")
+        self.assertEqual(_effects(self.state_as_committed(t.dir)), ["APPLIED"])
+        self._forge(t.repo, interim)
+        with self.assertRaisesRegex(common.LedgerError, "not in the history of the checked-out HEAD"):
+            self.state_as_committed(t.dir)
+
+    def test_r03_forged_pinned_blob_is_rejected(self):
+        t = self.ledger()
+        head, merge = t.bound()
+        blob = _git(t.repo, "rev-parse", f"{head}:legal_knowledge/audit_work/AUTH-LEDGER/decisions/R-v0001.md")
+        self._forge(t.repo, blob)
+        with self.assertRaisesRegex(common.LedgerError, "blob object .* does not hash to its id"):
+            self.state_as_committed(t.dir)
+
+    def test_r03_forged_base_manifest_is_rejected(self):
+        t = self.ledger()
+        head, merge = t.bound()
+        base_manifest = _git(t.repo, "rev-parse", f"{merge}^1:legal_knowledge/audit_work/AUTH-LEDGER/ledger/manifest.jsonl")
+        self._forge(t.repo, base_manifest, extra=b"")
+        raw_ok = True
+        try:
+            self.state_as_committed(t.dir)
+        except common.LedgerError:
+            raw_ok = False
+        self.assertTrue(raw_ok)  # an unchanged object is fine; now really forge it
+        self._forge(t.repo, base_manifest, extra=b'{"forged":1}\n')
+        with self.assertRaisesRegex(common.LedgerError, "does not hash to its id"):
+            self.state_as_committed(t.dir)
+
+    def test_r03_library_import_through_a_symlink_is_rejected(self):
+        import os
+        a = self.attacker_package_with_tools()
+        r = self._symlink_repo("legal_knowledge/audit_work/AUTH-LEDGER", a.dir)
+        tools = r / "legal_knowledge/audit_work/AUTH-LEDGER/tools"
+        code = ("import sys; sys.path.insert(0, sys.argv[1]); import reader, common\n"
+                "try:\n    reader.effective_state(common.LOGICAL_PKG, 0)\nexcept common.LedgerError as e:\n    print('REJECTED', e)\n")
+        p = subprocess.run([sys.executable, "-c", code, str(tools)], capture_output=True, text=True, env=dict(os.environ, PYTHONDONTWRITEBYTECODE="1"))
+        self.assertIn("REJECTED", p.stdout, p.stderr)
+        self.assertIn("is a symlink", p.stdout)
+
+    def test_n01_library_import_orders_through_a_symlink_are_rejected(self):  # confirmation N-01
+        import os
+        a = self.attacker_package_with_tools()
+        r = self._symlink_repo("legal_knowledge/audit_work/AUTH-LEDGER", a.dir)
+        tools = r / "legal_knowledge/audit_work/AUTH-LEDGER/tools"
+        for first in ("ledger", "binding", "pins", "strength", "auth_ledger"):
+            code = (f"import sys; sys.path.insert(0, sys.argv[1]); import {first}; import reader, common\n"
+                    "try:\n    reader.effective_state(common.LOGICAL_PKG, 0)\nexcept common.LedgerError as e:\n    print('REJECTED', e)\n")
+            p = subprocess.run([sys.executable, "-c", code, str(tools)], capture_output=True, text=True,
+                               env=dict(os.environ, PYTHONDONTWRITEBYTECODE="1"))
+            self.assertIn("REJECTED", p.stdout, (first, p.stderr))
+
+    def test_n05_stale_pwd_is_ignored(self):  # confirmation N-05: $PWD used only when it names the real cwd
+        import os
+        p = subprocess.run([sys.executable, self.CLI_PATH, "verify"], capture_output=True, text=True, cwd=REPO,
+                           env=dict(os.environ, PWD="/nonexistent/stale", PYTHONDONTWRITEBYTECODE="1"))
+        self.assertEqual(p.returncode, 0, p.stderr)  # relative script, stale $PWD: falls back to the real cwd and verifies
+        self.assertIn("v0000 ok", p.stdout)
+
+    def test_r04_missing_git_and_refused_repository_fail_closed(self):
+        with mock.patch.object(binding.subprocess, "run", side_effect=FileNotFoundError("git")):
+            with self.assertRaisesRegex(common.LedgerError, "git is not installed"):
+                binding._git(".", "status")
+        t = self.ledger()
+        refused = subprocess.CompletedProcess([], 128, b"", b"fatal: detected dubious ownership")
+        real = binding._git
+        with mock.patch.object(binding, "_git", side_effect=lambda cwd, *a, **k: refused if a[:2] == ("rev-parse", "--show-toplevel") else real(cwd, *a, **k)):
+            with self.assertRaisesRegex(common.LedgerError, "git cannot read the repository"):
+                binding.check_package_layout(t.dir)

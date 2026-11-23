@@ -1,12 +1,13 @@
-"""AUTH-LEDGER command line (offline).
+"""AUTH-LEDGER command line (offline). Run it by its repository path from the repository top (or above), or by an
+absolute path, e.g. `python legal_knowledge/audit_work/AUTH-LEDGER/tools/auth_ledger.py verify`.
   python auth_ledger.py verify            pins + hash chain + HEAD + every version's entries + every committed effective/vNNNN
                                           rebuilt byte-for-byte; v0000 must equal the frozen Cycle 5 registers
   python auth_ledger.py build --as-of N --out DIR    write the effective outputs of version N to DIR (no repository change)
   python auth_ledger.py genesis           create ledger/manifest.jsonl line 0, ledger/HEAD and effective/v0000 (only if absent)"""
-import argparse, json, sys
+import argparse, json, sys, os
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # not resolved: keeps a symlinked path detectable (C8)
 from common import AW, PKG, LedgerError, sha256_file, sha256_text  # noqa: E402
 import ledger as L  # noqa: E402
 import reader  # noqa: E402
@@ -46,6 +47,7 @@ def genesis(root=PKG):
 
 def verify(root=PKG):
     root = Path(root)
+    L.check_committed_layout(root)  # before any file is read (C8, Fable C-02)
     lines = L.read_manifest(root)
     report = []
     for line in lines:
@@ -76,6 +78,21 @@ def main():
     ap.add_argument("--as-of", type=int)
     ap.add_argument("--out")
     a = ap.parse_args()
+    # The package as INVOKED (argv[0], not symlink-resolved): Python resolves the script directory on sys.path, so the
+    # module paths alone cannot see a symlinked package (Fable review of be861ec0, F-01). Residual: if the caller's
+    # working directory is already inside a symlink target and the script is named relatively, the OS reports the
+    # resolved path and the link cannot be seen ($PWD is used where the shell provides it); run the tool by an absolute
+    # path or from the repository top or above.
+    invoked = Path(sys.argv[0])
+    if not invoked.is_absolute():
+        # os.getcwd() is symlink-resolved; $PWD keeps the logical path the caller is in (re-review R-01). Use it only when
+        # it names the same directory as the real working directory.
+        pwd = os.environ.get("PWD", "")
+        base = pwd if pwd and os.path.isabs(pwd) and os.path.realpath(pwd) == os.path.realpath(os.getcwd()) else os.getcwd()
+        invoked = Path(os.path.normpath(os.path.join(base, str(invoked))))
+    if invoked.name == "auth_ledger.py" and invoked.parent.name == "tools":
+        L.COMMITTED_PACKAGE = invoked.parents[1]
+    root = L.COMMITTED_PACKAGE
     try:
         if a.cmd == "genesis":
             genesis()
@@ -83,16 +100,16 @@ def main():
         elif a.cmd == "build":
             if not a.out:
                 raise LedgerError("--out is required")
-            texts, lines = reader.effective_state(PKG, a.as_of)
+            texts, lines = reader.effective_state(root, a.as_of)
             pinned = lines[-1]["effective_sha256"]
             if pinned and sha256_text(output_manifest(texts)) != pinned:
                 raise LedgerError(f"rebuilt outputs of version {lines[-1]['version']} do not match the manifest pin")
             write_outputs(texts, Path(a.out))
             print(f"built as of version {lines[-1]['version']} -> {a.out}")
         else:
-            for r in verify():
+            for r in verify(root):
                 print(r)
-            print(f"HEAD {L.head_value(PKG)}; frozen pins ok; ledger verified")
+            print(f"HEAD {L.head_value(root)}; frozen pins ok; ledger verified")
     except (LedgerError, reader.R.RuleError, KeyError, TypeError, ValueError, SystemExit) as e:  # fail closed, uniformly (F-13)
         print(f"LEDGER ERROR: {type(e).__name__}: {e}", file=sys.stderr)
         return 2

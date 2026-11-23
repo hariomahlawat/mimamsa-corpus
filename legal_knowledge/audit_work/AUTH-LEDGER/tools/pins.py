@@ -2,10 +2,10 @@
 Any mismatch fails closed (LedgerError). `python pins.py --write` regenerates the file and is used ONLY when the pin
 set itself is deliberately changed in a reviewed PR; the manifest genesis line pins the sha256 of frozen_inputs.json,
 so a silent re-pin breaks the ledger chain."""
-import argparse, glob, json, sys
+import argparse, glob, json, sys, os
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # not resolved: keeps a symlinked path detectable (C8)
 from common import AW, PKG, REPO, LedgerError, sha256_file  # noqa: E402
 
 # Files read by the frozen Cycle 5 builder (traced with an open() hook on 2026-11-23 at staging 939a128a), plus the two

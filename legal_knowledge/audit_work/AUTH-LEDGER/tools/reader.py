@@ -7,11 +7,11 @@ crosswalk and the row builders on those statuses. The frozen Cycle 5 builder is 
 and its build() is never called. Source holding states are derived by the explicit transition table in
 derive_holding(); no source-status register is kept by hand. With zero entries the outputs are byte-identical to the
 frozen Cycle 5 registers (tested)."""
-import json, sys
+import json, sys, os
 from collections import Counter, defaultdict
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # not resolved: keeps a symlinked path detectable (C8)
 from common import AW, PKG, LedgerError, csv_text, read_csv  # noqa: E402
 import ledger as L  # noqa: E402
 import pins  # noqa: E402
@@ -158,6 +158,7 @@ def summary(B, master, copies, cw, out):
 
 def effective_state(root=PKG, as_of=None, require_binding=True):
     """Return {output name: text} for the ledger at `root` as of version `as_of` (default: HEAD)."""
+    L.check_committed_layout(root)  # before any file is read (C8, Fable C-02)
     B = frozen_builder(root)
     held_c5, by_name = defaultdict(list), {}
     for h in read_csv(AW / "SOURCE-LIBRARY-C5/baseline/held_binaries_manifest.csv"):
