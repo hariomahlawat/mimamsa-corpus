@@ -1,0 +1,4 @@
+matched distinct fragments: 88
+matched fragments containing a run of >=5 digits: 9
+by source copy: {'ranjit_judis8566.pdf': 10, 'mullikote_2026.pdf': 25, 'rajbir_bosir_2213461.pdf': 12, 'snmukherjee_judis7439.pdf': 5, 'navjot_sandhu_2005.pdf': 14, 'rajbir_42379.pdf': 4, 'nsyadav_2019.pdf': 7, 'girish_feb2026.pdf': 2, 'rop_275403.pdf': 10}
+matched fragments originating from the N S Yadav copy: 7
