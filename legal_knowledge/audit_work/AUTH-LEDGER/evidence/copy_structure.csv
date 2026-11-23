@@ -1,0 +1,37 @@
+copy_id,sha256,bytes,producer,eof_markers,pdf_header_offset,signature_byte_ranges,signed_range_covers_file,embedded_images,text_chars
+C5-SRC-J-SC-1987-RANJIT-THAKUR~C1,ed7cf31fd8fbe50822e0a60f80b96ed1187dcd465dc4ae2649424c58001ff399,37351,GNU Ghostscript 7.05,1,4,,NO_SIGNATURE,0,29538
+C5-SRC-J-SC-1990-SN-MUKHERJEE~C1,eb4420801e978469e9c7407f8c079273f9cd483ad45a4427daa53e3d229969cc,92905,GNU Ghostscript 7.05,1,4,,NO_SIGNATURE,0,84851
+C5-SRC-J-SC-2005-NAVJOT~C1,3b75354869ffb928f73532f475f5f920e2f2a1f8817163caba2f7fb5e1eb215d,464857,GNU Ghostscript 7.05,1,4,,NO_SIGNATURE,0,484329
+C5-SRC-J-SC-2013-DHARAMVIR~C1,3056712cc7614399f72ee19f529f91990e70dba8a317dd3bd07e76e4ac546b75,378887,??????????????????????????,1,4,,NO_SIGNATURE,0,50157
+C5-SRC-J-SC-2015-RAJBIR~C1,970b96807bcbf8a1255fe16c574b575f64fe2edee1cbb271485fa7661a62c666,230938,LibreOffice 3.5,1,4,,NO_SIGNATURE,20,26323
+C5-SRC-J-SC-2015-RAJBIR~C2,c6ec489dff7a107b630a8646190a8cda303a54e4e9f5463eaed748ae0a42a1dd,163859,LibreOffice 4.1; modified using iText? 5.2.1 ?2000-2012 1T3XT BVBA,2,4,[0 149839 159611 4244],YES_AFTER_PREFIX,21,29033
+C5-SRC-J-SC-2015-RAJBIR~C3,6b495f1483657581965b808b18aa23c09b424989e41d43226c90d35845855cde,24065,GPL Ghostscript 8.71,1,0,,NO_SIGNATURE,0,36721
+C5-SRC-J-SC-2019-NS-YADAV~C1,3c50cdb7f30d1a84b488a72052bdf1868cea18ec4e02aee292cf1e97ebf5bbe6,92197,LibreOffice 5.1,1,0,,NO_SIGNATURE,0,22542
+C5-SRC-J-SC-2026-GIRISH-FEB~C1,4f7ea3a451c6f9a11d7e4dd96822e68cd9cd7a01d8dc74cf46ad34e79029b86c,233359,itext-paulo-155 (itextpdf.sf.net-lowagie.com); modified using iText? 5.2.1 ?2000-2012 1T3XT BVBA,2,0,[0 215144 229236 4123],YES,1,22308
+C5-SRC-J-SC-2026-MULLIKOTE~C1,10e1954f2e39916ea0f0e8e759c3823581becf752dd6ad2e9058569a1fd97444,730763,itext-paulo-155 (itextpdf.sf.net-lowagie.com); modified using iText? 5.2.1 ?2000-2012 1T3XT BVBA,2,0,[0 721447 726255 4508],YES,1,125535
+C5-SRC-P0-AA-AMD-ACT13-1975~C1,8358d2b3882b2a7407655fe5f0cd469879b2b9d27bf458b129020af17de9b7f4,69521,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,2,2357
+C5-SRC-P0-AR-AMD-AR-007~C1,b76bf4aac230f922b472a8ce69fb6f75bfe67f311591c39c21fca10996d8b778,81214,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,2,3914
+C5-SRC-P0-AR-AMD-AR-008~C1,4acdb1a8bc6430db30edb1046d839c177f90f97e82466d7373039d0f5289c935,382036,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,8,21950
+C5-SRC-P0-AR-AMD-AR-009~C1,cce0d06e8624cc677eb3165e5cb9dd569766286175013323398e2dd8490ca07a,563644,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,16,27575
+C5-SRC-P0-AR-AMD-AR-010~C1,682afce5e2f1f3ce8381e74664fb2fb8d98a4571c9fb8a92160ff11193a8c046,153228,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,4,7270
+C5-SRC-P0-AR-AMD-AR-011~C1,be7fefc966764bb0041d24289b7fcc0173c047115b7965dff9f2a2d0588172b1,114952,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,4,5220
+C5-SRC-P0-AR-AMD-AR-014~C1,5126efa258a7e7502d20d1539618aba549a4a5977068480eac0ceb00b780e3c3,275520,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,8,12867
+C5-SRC-P0-AR-AMD-AR-016~C1,7edc4de1f9a78b51746dcb688393eda415ce819852a0d63955baba7984f0384d,866906,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,12,29800
+C5-SRC-P0-AR-AMD-AR-017~C1,d283767e91508eb9239ca8291904d381a94dc27abb5275a3870b318b57d3d868,862174,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,18,26891
+C5-SRC-P0-AR-AMD-AR-018~C1,dd6978db8cf47f2f7b3c9ea1fecaeaf462f03d6562a20268edc68d5d0514c7b7,158127,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,2,3018
+C5-SRC-P0-AR-AMD-AR-019~C1,d8ce1958a9bf8fd1581e665190b245a7dd0f265f91ebb4330813728a00e1e1f1,548961,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,11,18250
+C5-SRC-P0-AR-AMD-AR-020~C1,225f624b866c8ab0931492e245b5cb3dbfb9b996bad627a9acbe8dff89e5392b,99582,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,2,3276
+C5-SRC-P0-AR-AMD-AR-021~C1,972e5aa18dda6f41737f1d726451ad231b13adf79c297f1f2aeb096230efbc67,2008876,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,36,64471
+C5-SRC-P0-AR-AMD-AR-022~C1,eaa233f8c70ae0b9ba15b7fc26154f98d61a4c3812e87a4779d0838c9befa682,457546,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,8,14542
+C5-SRC-P0-AR-AMD-AR-023~C1,4392f326c1b9bbc906b99e9b811c95d99f5e8887ee229848af148bef3f82b0da,1827754,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,32,52212
+C5-SRC-P0-AR-AMD-AR-024~C1,1d67bddd37201ed116822e37f4b12ec14b0fb64802b10b1376b2801a37dd7881,745123,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,14,21300
+C5-SRC-P0-AR-AMD-AR-025~C1,31fedb68e25a1ffa999b8d809b6138b272275c0acc1abd9f5da502564b485147,645527,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,12,17404
+C5-SRC-P0-AR-AMD-AR-026+AR-027~C1,0e4b8e47e299867f8a8ead184cd88dfe2b2a0e08ea8faca70bec42be58e12a18,376217,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,6,12324
+C5-SRC-P0-AR-AMD-AR-028~C1,dc67b628878ea4c5ac11b4013fecd6bf29d852ab5d6c7601f4d58a6f3ac3ac24,345814,"iText# by Gerald Henson (r0.95 of lowagie.com, based on version Paulo build 103)",1,0,,NO_SIGNATURE,8,10322
+C5-SRC-P0-AR-AMD-AR-033~C1,7c12a7ecc849c8f6df96830b093fda3c16bf9e943a5cb5d331ae3352b9455551,1707387,GPL Ghostscript 8.15,2,0,[0 260473 1699735 7652],YES,0,3726
+C5-SRC-P0-AR-AMD-AR-034~C1,138c1da0d3d9ffafe50603fb810a6d0857c942f845d52e36f355ec8b5add2f8c,339524,GPL Ghostscript 8.15,2,0,[0 324995 332029 7495],YES,0,14988
+C5-SRC-P0-AR-AMD-AR-035~C1,2bdab5b73084c3a73e3ecf7255e4b14aa462e001468ed313500148e7504d407b,115072,Internet Archive PDF 1.4.16; including mupdf and pymupdf/skimage,1,0,,NO_SIGNATURE,4,3894
+C5-SRC-P0-TRA-2026~C1,be619533e45739bf8e975bd4b39c826d99e2bc7627942252020360fcc1a63423,637026,iTextSharp? 5.5.13.1 ?2000-2019 iText Group NV (AGPL-version),1,0,[0 577400 600412 8230],NO,7,42767
+C5-SRC-P1-ER-2023-HELD-13MB~C1,29f6fa2cfcd961aadce490679a686b5a3b7b2e683a0eaceb42bc2cd2ebb70dad,13011188,PDFium,1,0,,NO_SIGNATURE,35,0
+C5-SRC-P2-DHC-RULES-CH6~C1,f69e18bee8846fa56eeec8807991b04d4f7dd62d98f388fa4302df98ae1cd5e1,125472,Microsoft? Office Word 2007,2,0,,NO_SIGNATURE,0,13485
+C5-SRC-P2-RS-PAPERS-LAID-1987~C1,fa51a4b132c409eda394d94eef2f81a54e6f788bac41000be1e53e9390b9f1f1,62577,ABBYY FineReader 8.0 Professional Edition,1,0,,NO_SIGNATURE,1,0

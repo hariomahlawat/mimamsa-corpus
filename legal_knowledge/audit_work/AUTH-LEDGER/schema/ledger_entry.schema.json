@@ -1,0 +1,35 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "mimamsa/auth-ledger/ledger_entry.schema.json",
+ "title": "AUTH-LEDGER entry (one CSV row of an immutable ledger version)",
+ "description": "Seeded from C6-01-PROVENANCE/addendum/addendum_entry.schema.json and extended with decision-chain fields. All columns are always present; per-type non-empty/empty rules are in x-type-rules and are enforced by tools/ledger.py (a standard JSON Schema validator will not enforce the x- keywords). There is deliberately no field for legal status, currency or applicability.",
+ "type": "object",
+ "required": ["entry_id", "entry_version", "entry_type", "sha256", "source_id", "copy_id", "document_identity", "target_entry_id",
+              "withdrawal_reason", "resulting_state", "evidence_refs", "first_class_record_ref", "identity_refs", "proposed_authentication_state",
+              "proposed_class", "carrier", "official_locator_recorded", "limitations", "justification", "rule_version", "reviewer_ref",
+              "reviewer_record_sha256", "owner_decision", "decision_record_ref", "decision_record_sha256"],
+ "properties": {
+  "entry_id": {"pattern": "^AL-v[0-9]{4}-[0-9]{3}$"},
+  "entry_version": {"pattern": "^[0-9]{4}$"},
+  "entry_type": {"enum": ["ADD", "CORRECTION", "WITHDRAW"]},
+  "sha256": {"pattern": "^[0-9a-f]{64}$"},
+  "withdrawal_reason": {"enum": ["", "CONTRADICTION", "EVIDENCE_REVOKED", "CLASSIFICATION_ERROR", "OTHER"]},
+  "resulting_state": {"enum": ["", "AUTHENTICATION_PENDING", "PROVENANCE_UNKNOWN"]},
+  "proposed_authentication_state": {"enum": ["", "PROVENANCE_DOCUMENTED", "AUTHENTICATION_PENDING"]},
+  "proposed_class": {"enum": ["", "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE", "PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN", "PRIMARY_OFFICIAL_COURT_COPY",
+                              "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY", "NON_PRIMARY_OFFICIAL_COURT_RENDITION", "NON_PRIMARY_PARLIAMENTARY_RECORD",
+                              "AUTHENTICATION_PENDING"]},
+  "rule_version": {"enum": ["1"]},
+  "owner_decision": {"enum": ["APPROVED", "REJECTED", "WITHHELD"]},
+  "reviewer_record_sha256": {"pattern": "^([0-9a-f]{64})?$"},
+  "decision_record_sha256": {"pattern": "^([0-9a-f]{64})?$"}
+ },
+ "x-type-rules": {
+  "ADD": {"nonempty": ["first_class_record_ref", "identity_refs", "evidence_refs", "proposed_authentication_state", "proposed_class", "copy_id", "source_id"],
+          "empty": ["target_entry_id", "withdrawal_reason", "resulting_state"]},
+  "CORRECTION": {"nonempty": ["target_entry_id", "evidence_refs", "proposed_authentication_state", "proposed_class", "justification"],
+                 "empty": ["withdrawal_reason", "resulting_state"]},
+  "WITHDRAW": {"nonempty": ["target_entry_id", "withdrawal_reason", "justification"],
+               "empty": ["first_class_record_ref", "proposed_authentication_state", "proposed_class"]}
+ }
+}
