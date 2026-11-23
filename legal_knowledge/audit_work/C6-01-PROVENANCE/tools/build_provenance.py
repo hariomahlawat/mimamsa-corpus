@@ -75,7 +75,7 @@ def collect():
             ev[s].append(("L2", f"ACQ-02/supplement_inventory.csv#{r['supp_id']}", f"{r['url']} (archive size/md5/sha1 OK)"))
         if HEX.fullmatch(s) and r.get("page_image_check_id"):
             ev[s].append(("I?", f"ACQ-02/supplement_inventory.csv#{r['supp_id']}", r["page_image_check_id"]))
-    for fn in sorted(glob.glob(str(AW / "*/sources/*.json"))):  # PILOT-01 and R23-VERIFY-01 retrieval records
+    for fn in sorted(glob.glob(str(AW / "PILOT-01/sources/*.json")) + glob.glob(str(AW / "R23-VERIFY-01/sources/*.json"))):  # explicit evidence folders (re-verification N-3)
         for o in json.load(open(fn, encoding="utf-8")):
             s = o.get("sha256") or ""
             loc = o.get("locator") or ""
@@ -221,7 +221,7 @@ def build():
         elif strength == "MD5_SIZE":
             gaps.append("archive match on md5 and size only (no sha1 or sha256 retrieval record)")
         elif strength == "IDENTIFIER_SHA":
-            gaps.append("download record gives a repository identifier, not a retrieval URL; no retrieval date")
+            gaps.append("download record gives a repository identifier, not a retrieval URL")
         if not (I or t_ok):
             gaps.append("identity not verified on a page image" + ("" if court else " (scanned/official publication: text layer not accepted)"))
         if not dates:
@@ -261,7 +261,7 @@ def build():
         else:
             unresolved.append({"copy_id": c["copy_id"], "source_id": c["source_id"], "sha256": s, "proposed_outcome": outcome,
                                "what_is_missing": row["remaining_gaps"], "evidence_found": row["evidence_items"] or "none",
-                               "next_step": next_step(outcome, m)})
+                               "next_step": next_step(outcome, m, gaps)})
     return rec, props, unresolved, copies
 
 
@@ -294,14 +294,17 @@ def proposed_class(m, outcome, copy=None):
         return "NON_PRIMARY_PARLIAMENTARY_RECORD"
     if m["publication_type"] == "GAZETTE_NOTIFICATION" and m["carrier_provenance"].startswith("THIRD_PARTY_ARCHIVAL_FACSIMILE"):
         return "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE"
-    if m["publication_type"] == "STATUTE" and "Gazette" in m["title"]:
-        return "PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN"
     return "NON_PRIMARY_OFFICIAL_PUBLICATION_COPY"  # conservative: extracts, incomplete or unclassified official copies
 
 
-def next_step(outcome, m):
+def next_step(outcome, m, gaps=()):
     if outcome == "PROVENANCE_PARTIALLY_DOCUMENTED":
-        return "page-image identity check of the identity page (render hash) or a byte-level locator record; no download needed"
+        steps = []
+        if any("identity not verified" in g for g in gaps):
+            steps.append("page-image identity check of the identity page with a render hash (file is held; no download needed)")
+        if any(("identifier" in g) or ("md5" in g) or ("no locator" in g) for g in gaps):
+            steps.append("a retrieval record with URL and sha256, i.e. an approved re-acquisition from the official host")
+        return "; ".join(steps) or "see remaining gaps"
     if outcome == "IDENTITY_VERIFIED_PROVENANCE_UNDOCUMENTED":
         return "locate a retrieval or corroboration record; otherwise an approved re-acquisition from the official host with sha256 recorded"
     if outcome == "AUTHENTICATION_PENDING":
@@ -338,7 +341,7 @@ def outputs():
     rec_cols = list(rec[0])
     texts = {
         "provenance_recovery_register.csv": csv_text(rec_cols, rec),
-        "source_authentication_proposals.csv": csv_text(["proposal_id"] + AUTH_COLS, [dict(p, proposal_id=f"C6-01-AP-{i:02d}") for i, p in enumerate(props, 1)]),
+        "source_authentication_proposals.csv": csv_text(["proposal_id"] + AUTH_COLS, [dict(p, proposal_id=f"C6-01-AP-{p['sha256'][:8]}") for p in props]),
         "unresolved_provenance_register.csv": csv_text(["copy_id", "source_id", "sha256", "proposed_outcome", "what_is_missing", "evidence_found", "next_step"], unresolved),
     }
     impact = coverage_impact(props)

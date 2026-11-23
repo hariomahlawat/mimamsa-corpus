@@ -40,3 +40,17 @@
 - The KB figures are unchanged.
 
 The re-verification of the corrected material is recorded in `review/reverification_report.md`.
+
+## Re-verification (9b4ad44d..d58894c4): VERDICT ACCEPT WITH CONDITIONS, no P1 or P2
+Verbatim: `review/reverification_report.md`. The verifier confirmed all six correction points: AP-22 downgraded; the six Gazettes FULL on the S-REVD retrieval records; FULL-only promotion; the non-primary rendition and the caveats; reproducible counts; Cycle 5 unaffected.
+
+Its four P3 conditions were corrected:
+
+| ID | Item | Disposition |
+| --- | --- | --- |
+| N-1 | Proposal IDs were sequential, so dropping Act 13 renumbered them | Proposal IDs are now stable: `C6-01-AP-<first 8 hex of sha256>`. **The AP-nn numbers in the first verification files refer to the 9b4ad44d numbering.** |
+| N-2 | Act 13's next step asked for an identity check that had already been done | The next step is now derived from the actual gaps |
+| N-3 | The sources glob would pick up future packages | Evidence folders are listed explicitly (PILOT-01, R23-VERIFY-01) |
+| N-4 | Title-keyword statute-class rule; Act 13 masthead number | The rule is removed (statutes fall to the conservative non-primary default). The masthead number is recorded in `C6-PREP/C5_CARRYOVER_CORRECTIONS.md` (C5-CO-03). |
+
+These are documentation and ID-stability changes only: the outcomes (33 documented, 3 partial) and the coverage figures are unchanged.
