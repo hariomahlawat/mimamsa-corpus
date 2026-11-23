@@ -107,9 +107,12 @@ def url_suggests_document(url):
 
 
 def signature(first_bytes):
+    """File signature at offset 0, or a PDF header anywhere in the first 1 KiB (PDF readers accept leading junk)."""
     for m, kind in MAGIC.items():
         if first_bytes and first_bytes.startswith(m):
             return kind
+    if first_bytes and b"%PDF-" in first_bytes[:1024]:
+        return "pdf"
     return ""
 
 
@@ -142,8 +145,10 @@ def validate_log_v2(rows):
             continue  # decision record: no request was made
         if r.get("purpose") == "robots":
             decided.add(h)
-        elif h not in decided:
-            err.append(f"row {i}: request to {h} before a robots decision for that host")
+        else:
+            for x in [h] + [y for y in (r.get("redirect_hosts") or "").split(";") if y]:
+                if x not in decided:
+                    err.append(f"row {i}: request involving {x} before a robots decision for that host")
         if host_blocked(h) or any(host_blocked(x) for x in (r.get("redirect_hosts") or "").split(";") if x):
             err.append(f"row {i}: blocked host")
         if r.get("robots_state") == "UNAVAILABLE":

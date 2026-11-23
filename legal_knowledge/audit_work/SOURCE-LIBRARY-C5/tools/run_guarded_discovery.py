@@ -8,6 +8,11 @@ discovery_guard for every decision. Designed not to download documents, with a b
   classified METADATA_OR_LISTING is followed by the full GET (capped at 3 MB);
 - residual risk: a server that ignores Range and serves a document under a listing content type could deliver up
   to 4 KiB before curl aborts; such bytes are deleted and logged as DOCUMENT_PAYLOAD (a violation);
+- further residual risk (independent re-review RR-01): after a listing-type probe, the full GET (<= 3 MB) could
+  still carry a document if the server changes content between requests; the full body is classified again
+  (content type, disposition, signature within the first 1 KiB) and deleted if it is a document, but a document
+  disguised beyond those checks would not be detected. Use the runner for listing/metadata URLs only;
+- the 4 KiB abort relies on curl --max-filesize being enforced for streamed bodies (curl >= 8.4; checked 8.5.0);
 - redirects are followed hop by hop, each hop host needing its own robots decision.
 Usage: python run_guarded_discovery.py targets.tsv out_log.tsv out_dir
 targets.tsv columns: target_id<TAB>kind(listing|head)<TAB>url"""
@@ -107,11 +112,11 @@ def main(targets, log_path, out_dir):
             if t["kind"] == "listing" and st == "200" and pc == "HEADERS_ONLY" and G.head_allows_get(hd.get("content-type", "")):
                 bp = os.path.join(out_dir, f"{t['target_id']}.html")
                 st2, hd2, err2 = curl("GET", url, bp, 4096, "0-2047")  # range probe
-                first = open(bp, "rb").read(8) if os.path.exists(bp) else b""
+                first = open(bp, "rb").read(1024) if os.path.exists(bp) else b""
                 pc2, sig = G.classify_response("GET", st2, hd2.get("content-type", ""), hd2.get("content-disposition", ""), None, first)
                 if pc2 == "METADATA_OR_LISTING":
                     st2, hd2, err2 = curl("GET", url, bp)
-                    first = open(bp, "rb").read(8) if os.path.exists(bp) else b""
+                    first = open(bp, "rb").read(1024) if os.path.exists(bp) else b""
                     pc2, sig = G.classify_response("GET", st2, hd2.get("content-type", ""), hd2.get("content-disposition", ""), None, first)
                 if pc2 != "METADATA_OR_LISTING" and os.path.exists(bp):
                     os.unlink(bp)  # discarded unread

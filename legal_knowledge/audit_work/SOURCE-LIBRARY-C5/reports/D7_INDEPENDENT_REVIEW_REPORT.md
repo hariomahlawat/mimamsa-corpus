@@ -65,4 +65,12 @@
 | FD-06 | P3 | Proxy content type recorded on a 000 row | **Fixed.** Runner drops headers on status 000. Log row corrected with original value retained (`log_amendments.csv` LA-04). |
 | FD-07 | P3 | HELD_PRIMARY subtype not checked against the documented copy's class | **Fixed** in `check_holding_vs_copies`; test added |
 
-The re-review of the changed material is recorded in `review/final_diff_rereview.md`.
+**Re-review of the changed material (7bdde558..5bc2d12a): VERDICT ACCEPT** (`review/final_diff_rereview.md`). Its non-blocking items were handled as follows:
+
+| ID | Item | Disposition |
+| --- | --- | --- |
+| RR-01 | Full-GET residual risk | Signature check widened to a PDF header anywhere in the first 1 KiB; residual risk stated in the runner docstring |
+| RR-02 | TA Act keeps NOT_FOUND from C5C-029 | Kept deliberately: it is the archive.org search for the as-enacted Gazette, a different carrier from the India Code text |
+| RR-03 | Robots decision for redirect hosts | Now required by `validate_log_v2` |
+| RR-04 | Re-review file not committed | Now committed |
+| RR-05 | curl version requirement | Recorded in the docstring |
