@@ -8,6 +8,8 @@ sys.path.insert(0, str(PKG / "tools"))
 import build_registers as B  # noqa: E402
 import check_c5 as C  # noqa: E402
 import discovery_guard as G  # noqa: E402
+import run_guarded_discovery as RG  # noqa: E402
+import os, tempfile  # noqa: E402
 
 
 def read(name):
@@ -214,6 +216,93 @@ class C5PreservedCorrections(unittest.TestCase):
             self.assertEqual(r["evidence_stage"], B.evidence_stage(r))
 
 
+class C5FinalDiffConditions(unittest.TestCase):
+    def test_fd01_structured_blocked_access_and_superseded_not_found(self):
+        m = master()
+        for sid, sup in (("C5-SRC-P1-TA-RULES-1948", "C5B-022"), ("C5-SRC-P1-TA-REGULATIONS", "C5B-023"), ("C5-SRC-P1-TA-ACT-1948", "C5B-021")):
+            r = m[sid]
+            self.assertEqual(r["direct_verification_state"], "BLOCKED_ACCESS")
+            self.assertIn(sup, r["superseded_candidate_ids"])
+        self.assertNotIn("NOT_FOUND", m["C5-SRC-P1-TA-RULES-1948"]["discovery_state"])
+        self.assertNotIn("NOT_FOUND", m["C5-SRC-P1-TA-REGULATIONS"]["discovery_state"])
+        for r in m.values():
+            self.assertIn(r["direct_verification_state"], B.DIRECT_VERIFICATION)
+            if r["holding_state"].startswith("HELD"):
+                self.assertEqual(r["direct_verification_state"], "NOT_APPLICABLE_HELD")
+
+    def test_fd05_robots_decision_required_first(self):
+        base = {c: "" for c in G.LOG_V2_COLUMNS}
+        e = G.validate_log_v2([dict(base, method="HEAD", url="https://x.gov.in/a", robots_state="NO_ROBOTS_FILE", purpose="t")])
+        self.assertTrue(any("before a robots decision" in x for x in e))
+
+    def test_fd07_primary_subtype_must_match_documented_copy(self):
+        m = read("source_master_register.csv")
+        copies = read("source_copy_register.csv")
+        bad = [dict(r, holding_state="HELD_PRIMARY_GAZETTE_FACSIMILE") if r["source_id"] == "C5-SRC-J-SC-2020-VIRENDRA" else r for r in m]
+        with self.assertRaises(SystemExit):
+            B.check_holding_vs_copies(bad, copies)
+
+
+class C5GuardedRunnerMocked(unittest.TestCase):
+    """FD-02: the runner never issues a full GET unless HEAD and a 2 KiB probe both show listing content."""
+
+    def run_with(self, responses):
+        calls = []
+
+        def fake(method, url, body_path=None, max_bytes=3_000_000, byte_range=None):
+            calls.append((method, url, byte_range))
+            st, heads, body = responses(method, url, byte_range)
+            if body_path and body is not None:
+                with open(body_path, "wb") as f:
+                    f.write(body)
+            return st, heads, ""
+        old, old_delay = RG.curl, RG.DELAY
+        RG.curl, RG.DELAY = fake, 0
+        try:
+            with tempfile.TemporaryDirectory() as d:
+                t = os.path.join(d, "t.tsv")
+                with open(t, "w") as f:
+                    f.write("target_id\tkind\turl\nT1\tlisting\thttps://a.gov.in/page\n")
+                rc = RG.main(t, os.path.join(d, "log.tsv"), os.path.join(d, "out"))
+                with open(os.path.join(d, "log.tsv"), encoding="utf-8") as f:
+                    rows = list(csv.DictReader(f, delimiter="\t"))
+                left = os.listdir(os.path.join(d, "out"))
+        finally:
+            RG.curl, RG.DELAY = old, old_delay
+        return calls, rows, rc, left
+
+    def test_no_get_when_head_has_no_content_type(self):
+        def resp(m, u, r):
+            if u.endswith("robots.txt"):
+                return "200", {"content-type": "text/plain"}, b"User-agent: *\nAllow: /\n"
+            return "200", {}, None
+        calls, rows, rc, _ = self.run_with(resp)
+        self.assertFalse(any(c[0] == "GET" and not c[1].endswith("robots.txt") for c in calls))
+        self.assertTrue(any("GET refused" in r["note"] for r in rows))
+
+    def test_probe_detects_document_and_stops(self):
+        def resp(m, u, r):
+            if u.endswith("robots.txt"):
+                return "200", {"content-type": "text/plain"}, b"User-agent: *\nAllow: /\n"
+            if m == "HEAD":
+                return "200", {"content-type": "text/html"}, None
+            return "206", {"content-type": "text/html"}, b"%PDF-1.7 fake"  # server lies in its content type
+        calls, rows, rc, left = self.run_with(resp)
+        gets = [c for c in calls if c[0] == "GET" and not c[1].endswith("robots.txt")]
+        self.assertEqual(len(gets), 1)
+        self.assertEqual(gets[0][2], "0-2047")  # only the range probe
+        self.assertNotIn("robots_a.gov.in.txt", [x for x in left if x.endswith(".pdf")])
+        self.assertFalse([x for x in left if x.startswith("T1")])  # probe bytes deleted
+        self.assertTrue(any(r["payload_class"] == "DOCUMENT_PAYLOAD" for r in rows))
+        self.assertEqual(rc, 1)  # logged as a violation
+
+    def test_unreadable_robots_means_no_request(self):
+        def resp(m, u, r):
+            return "000", {}, None
+        calls, rows, rc, _ = self.run_with(resp)
+        self.assertEqual([c[1] for c in calls], ["https://a.gov.in/robots.txt"])
+
+
 class C5AdviserIndex(unittest.TestCase):
     def test_index_makes_no_determination_and_counts_escalations(self):
         rows = read("legal_adviser_evidence_index.csv")
@@ -276,12 +365,13 @@ class C5DiscoveryGuard(unittest.TestCase):
         rows = [dict(base, method="GET", url="https://a.gov.in/robots.txt", http_status="000", robots_state="UNAVAILABLE", purpose="robots"),
                 dict(base, method="NONE", url="https://a.gov.in/f", robots_state="UNAVAILABLE", purpose="t1"),
                 dict(base, method="HEAD", url="https://a.gov.in/f", robots_state="UNAVAILABLE", purpose="t1"),
+                dict(base, method="GET", url="https://b.gov.in/robots.txt", http_status="404", robots_state="NO_ROBOTS_FILE", purpose="robots"),
                 dict(base, method="GET", url="https://b.gov.in/showfile?f=x.pdf", payload_class="DOCUMENT_PAYLOAD", robots_state="NO_ROBOTS_FILE", purpose="t2")]
         e = G.validate_log_v2(rows)
         self.assertEqual(len(e), 2)
         self.assertTrue(any("robots policy is UNAVAILABLE" in x for x in e))
         self.assertTrue(any("without an acquisition approval reference" in x for x in e))
-        rows[3]["acquisition_approval_ref"] = "A-C5-1"
+        rows[4]["acquisition_approval_ref"] = "A-C5-1"
         self.assertEqual(len(G.validate_log_v2(rows[:2] + rows[3:])), 0)
 
     def test_committed_v2_log_clean_and_legacy_logs_bounded(self):

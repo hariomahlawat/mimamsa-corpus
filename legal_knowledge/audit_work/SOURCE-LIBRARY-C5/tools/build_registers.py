@@ -42,8 +42,8 @@ COLS = {
         "source_id", "priority", "title", "authority", "publication_type", "edition", "volume_or_part", "publication_date",
         "effective_date", "effective_date_status", "source_url", "provenance", "document_authority", "carrier_provenance", "authentication_status",
         "rights_status", "access_marking", "sha256", "held_paths", "pages", "text_layer_class", "completeness_status",
-        "amendment_chain_status", "currency_status", "holding_state", "evidence_stage", "verification_limitations",
-        "discovery_state", "discovery_candidate_ids",
+        "amendment_chain_status", "currency_status", "holding_state", "evidence_stage", "direct_verification_state",
+        "verification_limitations", "discovery_state", "discovery_candidate_ids", "superseded_candidate_ids",
         "acquisition_state", "existing_register_refs", "identity_notes", "evidence"],
     "acquisition_register.csv": [
         "rank", "acq_c5_id", "source_id", "title", "exact_location", "location_check", "justification", "dependencies",
@@ -270,6 +270,24 @@ def evidence_stage(row):
     return STAGE_BY_HOLDING[hs]
 
 
+DIRECT_VERIFICATION = {"NOT_APPLICABLE_HELD", "BLOCKED_ACCESS", "PERFORMED_SEE_CANDIDATES", "NOT_ATTEMPTED"}
+
+
+def direct_verification(t, cands):
+    """Structured state of direct (non-search-engine) verification of a not-held source's location.
+    An explicit input value (e.g. BLOCKED_ACCESS) wins; otherwise derived from the candidates' check methods."""
+    if t["holding_state"].startswith("HELD"):
+        return "NOT_APPLICABLE_HELD"
+    v = (t.get("direct_verification_state") or "").strip()
+    if v:
+        if v not in DIRECT_VERIFICATION:
+            raise SystemExit(f"{t['source_id']}: direct_verification_state {v} not in vocabulary")
+        return v
+    if any(c["check_method"] in ("HEAD_ONLY", "METADATA_API", "LISTING_PAGE_FETCHED") for c in cands):
+        return "PERFORMED_SEE_CANDIDATES"
+    return "NOT_ATTEMPTED"
+
+
 def copy_class(st):
     return {EC.EFFECTIVE_PRIMARY: "DOCUMENTED_PRIMARY_COPY", EC.PENDING: "AUTHENTICATION_PENDING_COPY",
             EC.UNKNOWN: "PROVENANCE_UNDOCUMENTED_COPY", EC.DERIVED: "DERIVED_TEXT_ONLY", EC.MIRROR: "MIRROR_OR_SECONDARY_COPY"}.get(st, "NOT_CLASSIFIED")
@@ -311,8 +329,14 @@ def check_holding_vs_copies(master, copies):
     documented provenance; HELD_AUTHENTICATION_PENDING iff a pending copy and no documented copy. No prefix shortcut."""
     docs = {c["source_id"] for c in copies if c["copy_effective_status"] == EC.EFFECTIVE_PRIMARY}
     pend = {c["source_id"] for c in copies if c["copy_effective_status"] == EC.PENDING}
+    subtype = {"HELD_PRIMARY_GAZETTE_FACSIMILE": "PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+               "HELD_PRIMARY_GAZETTE_GOVERNMENT_SCAN": "PRIMARY_GAZETTE_GOVERNMENT_HOSTED_SCAN",
+               "HELD_PRIMARY_OFFICIAL_COURT_COPY": "PRIMARY_OFFICIAL_COURT_COPY"}
     for r in master:
         hs = r["holding_state"]
+        if hs in subtype and not any(c["source_id"] == r["source_id"] and c["copy_effective_status"] == EC.EFFECTIVE_PRIMARY
+                                     and c["c4_effective_source_class"] == subtype[hs] for c in copies):
+            raise SystemExit(f"{r['source_id']}: {hs} does not match the class of its documented copy")
         if hs.startswith("HELD_PRIMARY") != (r["source_id"] in docs):
             raise SystemExit(f"{r['source_id']}: holding_state {hs} disagrees with copy-level evidence")
         if (hs == "HELD_AUTHENTICATION_PENDING") != (r["source_id"] in pend and r["source_id"] not in docs):
@@ -334,7 +358,11 @@ def master_rows(held, cands, auth, targets=None):
         for c in cids:
             if c not in cands:
                 raise SystemExit(f"{t['source_id']}: discovery candidate {c} not found")
-        states = sorted({cands[c]["discovery_state"] for c in cids})
+        sup = [c for c in t.get("superseded_candidate_ids", "").split(";") if c]
+        for c in sup:
+            if c not in cids:
+                raise SystemExit(f"{t['source_id']}: superseded candidate {c} is not among its discovery candidates")
+        states = sorted({cands[c]["discovery_state"] for c in cids if c not in sup})
         a = [auth[s] for s in shas if s in auth]
         r = dict(t)
         r.update({
@@ -342,6 +370,7 @@ def master_rows(held, cands, auth, targets=None):
             "text_layer_class": ";".join(sorted(tl)),
             "holding_state": t["holding_state"],
             "evidence_stage": evidence_stage(t),
+            "direct_verification_state": direct_verification(t, [cands[c] for c in cids if c not in sup]),
             "discovery_state": ";".join(states) if states else t.get("discovery_state", "") or "NOT_CHECKED",
             "authentication_status": t["authentication_status"] + (f" | C4 register: {a[0]['authentication_state']}/{a[0]['effective_source_class']}" if a else ""),
         })

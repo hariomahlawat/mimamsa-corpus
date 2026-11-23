@@ -1,8 +1,13 @@
 """Guarded read-only discovery runner (Cycle 5 corrections). Uses curl (system proxy and CA; TLS verification on) and
-discovery_guard for every decision. Never downloads a document:
+discovery_guard for every decision. Designed not to download documents, with a bounded residual risk:
 - robots.txt is fetched first for each host and must be ESTABLISHED (fail closed);
-- every target is probed with HEAD; GET is used only when HEAD shows a listing/metadata content type and the
-  target is marked kind=listing; a GET body that turns out to be a document is discarded unread and logged;
+- every target is probed with HEAD; GET is used only when the target is kind=listing AND HEAD reported an explicit
+  listing/metadata content type (no content type -> no GET);
+- the GET is first a 2 KiB range probe (curl -r 0-2047, --max-filesize 4096): if its content type, disposition or
+  file signature indicates a document, the probe bytes are deleted unread and the event is logged; only a probe
+  classified METADATA_OR_LISTING is followed by the full GET (capped at 3 MB);
+- residual risk: a server that ignores Range and serves a document under a listing content type could deliver up
+  to 4 KiB before curl aborts; such bytes are deleted and logged as DOCUMENT_PAYLOAD (a violation);
 - redirects are followed hop by hop, each hop host needing its own robots decision.
 Usage: python run_guarded_discovery.py targets.tsv out_log.tsv out_dir
 targets.tsv columns: target_id<TAB>kind(listing|head)<TAB>url"""
@@ -21,7 +26,7 @@ def now():
     return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def curl(method, url, body_path=None, max_bytes=3_000_000):
+def curl(method, url, body_path=None, max_bytes=3_000_000, byte_range=None):
     h = G.host_of(url)
     wait = DELAY - (time.time() - _last.get(h, 0))
     if wait > 0:
@@ -31,9 +36,11 @@ def curl(method, url, body_path=None, max_bytes=3_000_000):
     cmd = ["curl", "-sS", "--max-time", "40", "-A", UA, "-D", hdr, "-o", body_path or os.devnull,
            "--max-filesize", str(max_bytes), "-w", "%{http_code}"]
     cmd += ["-I"] if method == "HEAD" else []
+    cmd += ["-r", byte_range] if byte_range else []
     cmd.append(url)
     p = subprocess.run(cmd, capture_output=True, text=True)
     status = (p.stdout or "").strip()[-3:] or "000"
+    proxy_only = status == "000"
     heads = {}
     try:
         for line in open(hdr, encoding="latin-1"):
@@ -44,6 +51,8 @@ def curl(method, url, body_path=None, max_bytes=3_000_000):
                 heads = {}  # keep only the last response block (proxy CONNECT block discarded)
     finally:
         os.unlink(hdr)
+    if proxy_only:
+        heads = {}  # FD-06: headers seen with status 000 belong to the proxy, not the target
     return status, heads, (p.stderr or "").strip()[:200]
 
 
@@ -95,17 +104,24 @@ def main(targets, log_path, out_dir):
             if st.startswith("3") and loc:
                 url = urljoin(url, loc)
                 continue
-            if t["kind"] == "listing" and st == "200" and pc == "HEADERS_ONLY":
+            if t["kind"] == "listing" and st == "200" and pc == "HEADERS_ONLY" and G.head_allows_get(hd.get("content-type", "")):
                 bp = os.path.join(out_dir, f"{t['target_id']}.html")
-                st2, hd2, err2 = curl("GET", url, bp)
+                st2, hd2, err2 = curl("GET", url, bp, 4096, "0-2047")  # range probe
                 first = open(bp, "rb").read(8) if os.path.exists(bp) else b""
                 pc2, sig = G.classify_response("GET", st2, hd2.get("content-type", ""), hd2.get("content-disposition", ""), None, first)
+                if pc2 == "METADATA_OR_LISTING":
+                    st2, hd2, err2 = curl("GET", url, bp)
+                    first = open(bp, "rb").read(8) if os.path.exists(bp) else b""
+                    pc2, sig = G.classify_response("GET", st2, hd2.get("content-type", ""), hd2.get("content-disposition", ""), None, first)
                 if pc2 != "METADATA_OR_LISTING" and os.path.exists(bp):
                     os.unlink(bp)  # discarded unread
                 log(method="GET", url=url, final_url=url, http_status=st2, content_type=hd2.get("content-type", ""),
                     content_disposition=hd2.get("content-disposition", ""), content_length=hd2.get("content-length", ""),
                     payload_class=pc2, file_signature=sig, robots_state=robots[h][0], purpose=t["target_id"],
                     note=err2 + ("" if pc2 == "METADATA_OR_LISTING" else " body discarded unread"))
+            elif t["kind"] == "listing":
+                log(method="NONE", url=url, robots_state=robots[h][0], purpose=t["target_id"],
+                    note="GET refused: HEAD gave no explicit listing content type (FD-02)")
             break
     with open(log_path, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=G.LOG_V2_COLUMNS, delimiter="\t", lineterminator="\n")

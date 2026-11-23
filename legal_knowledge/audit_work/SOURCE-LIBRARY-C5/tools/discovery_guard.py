@@ -113,6 +113,12 @@ def signature(first_bytes):
     return ""
 
 
+def head_allows_get(content_type):
+    """GET is permitted only when HEAD reported an explicit listing/metadata content type (FD-02)."""
+    ct = (content_type or "").split(";")[0].strip().lower()
+    return bool(ct) and ct.startswith(LISTING_TYPES)
+
+
 def classify_response(method, status, content_type="", content_disposition="", content_length=None, first_bytes=b""):
     ct = (content_type or "").split(";")[0].strip().lower()
     cd = (content_disposition or "").lower()
@@ -129,11 +135,15 @@ def classify_response(method, status, content_type="", content_disposition="", c
 
 def validate_log_v2(rows):
     """Errors for a v2 request log (list of dicts with LOG_V2_COLUMNS)."""
-    err, unavailable = [], set()
+    err, unavailable, decided = [], set(), set()
     for i, r in enumerate(rows, 2):
         h = host_of(r["url"])
         if r["method"].upper() == "NONE":
             continue  # decision record: no request was made
+        if r.get("purpose") == "robots":
+            decided.add(h)
+        elif h not in decided:
+            err.append(f"row {i}: request to {h} before a robots decision for that host")
         if host_blocked(h) or any(host_blocked(x) for x in (r.get("redirect_hosts") or "").split(";") if x):
             err.append(f"row {i}: blocked host")
         if r.get("robots_state") == "UNAVAILABLE":

@@ -44,3 +44,25 @@
 ## Not independently reviewed this cycle
 - Discovery claims of NOT_FOUND were not re-run by the reviewer: there was no network budget for it. They rest on the discovery agents' logged searches.
 - The legal content of any provision.
+
+## Independent review of the final correction diff (151f9358..7bdde558)
+- **Reviewer:** separate, read-only. Brief, findings and verdict are verbatim in `review/final_diff_review.md` and `review/final_diff_findings.csv`.
+- **Verdict: ACCEPT WITH CONDITIONS** (2 P2, 5 P3).
+- **Confirmed:**
+  - P1 corrections (TA, 12+1 authentication counts, Act 37/1992 copy-level provenance);
+  - no promotion path for undocumented or pending copies;
+  - headline figures reproducible;
+  - originals unchanged;
+  - only authorised files changed.
+
+| ID | Sev | Finding | Disposition |
+| --- | --- | --- | --- |
+| FD-01 | P2 | BLOCKED_ACCESS appeared only in free text; superseded NOT_FOUND kept in the TA rows' `discovery_state`; TA Act moved on index evidence | **Fixed.** New structured `direct_verification_state` (BLOCKED_ACCESS for the TA Act, Rules, Regulations and RA 1987). New `superseded_candidate_ids`, excluded from `discovery_state` but kept for audit. The TA Act move is kept on the same official-host index evidence as the Rules, with BLOCKED_ACCESS structured. Tests added. |
+| FD-02 | P2 | Runner could GET up to 3 MB of a document | **Fixed.** GET only if HEAD gave an explicit listing content type. A 2 KiB range probe is classified before any full GET. Residual risk of 4 KiB from a Range-ignoring server is documented and logged as a violation. Docstring corrected. Mocked runner tests added. |
+| FD-03 | P3 | D8 cited a review file not in the commit | **Fixed.** Review files committed in `review/` |
+| FD-04 | P3 | TA Rules amendment years inconsistent | **Fixed.** C5D-001 notes aligned (1964, 2017, 2023; all unverified) |
+| FD-05 | P3 | Log validator did not require a robots decision first | **Fixed** in `validate_log_v2`; test added |
+| FD-06 | P3 | Proxy content type recorded on a 000 row | **Fixed.** Runner drops headers on status 000. Log row corrected with original value retained (`log_amendments.csv` LA-04). |
+| FD-07 | P3 | HELD_PRIMARY subtype not checked against the documented copy's class | **Fixed** in `check_holding_vs_copies`; test added |
+
+The re-review of the changed material is recorded in `review/final_diff_rereview.md`.

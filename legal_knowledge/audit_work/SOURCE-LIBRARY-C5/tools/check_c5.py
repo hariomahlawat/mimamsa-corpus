@@ -90,6 +90,10 @@ def main():
         if sid in ids:
             err.append(f"duplicate source_id {sid}")
         ids.add(sid)
+        if r["direct_verification_state"] not in B.DIRECT_VERIFICATION:
+            err.append(f"{sid}: direct_verification_state not in vocabulary")
+        if r["evidence_stage"] == "OFFICIAL_CANDIDATE_LOCATED" and r["direct_verification_state"] == "BLOCKED_ACCESS" and "BLOCKED_ACCESS" not in r["verification_limitations"]:
+            err.append(f"{sid}: BLOCKED_ACCESS direct verification not explained in verification_limitations")
         if r["evidence_stage"] == "DOCUMENT_AUTHENTICATED":
             err.append(f"{sid}: DOCUMENT_AUTHENTICATED is not supported by any custodian authentication in this package")
         if r["evidence_stage"] != B.evidence_stage(r):

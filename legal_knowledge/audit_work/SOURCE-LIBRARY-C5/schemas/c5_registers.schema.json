@@ -32,9 +32,11 @@
     "currency_status",
     "holding_state",
     "evidence_stage",
+    "direct_verification_state",
     "verification_limitations",
     "discovery_state",
     "discovery_candidate_ids",
+    "superseded_candidate_ids",
     "acquisition_state",
     "existing_register_refs",
     "identity_notes",
@@ -104,6 +106,12 @@
      "NOT_CHECKED",
      "NOT_FOUND",
      "RESTRICTED_MARKING_SUSPECTED"
+    ],
+    "direct_verification_state": [
+     "BLOCKED_ACCESS",
+     "NOT_APPLICABLE_HELD",
+     "NOT_ATTEMPTED",
+     "PERFORMED_SEE_CANDIDATES"
     ]
    },
    "reuse": "Brief fields A (source_id..completeness_status) plus SOURCE_AUTHORITY_POLICY v1 fields (document_authority, carrier_provenance) from docs/legal-audit/schemas/source.schema.json; authentication_status carries CALIBRATION-02 source_authentication_register state when a row exists."
@@ -289,7 +297,7 @@
   }
  },
  "migration_c5_1_to_c5_2": {
-  "source_master_register.csv": "added evidence_stage (derived) and verification_limitations after holding_state; holding_state NOT_HELD_NOT_FOUND -> NOT_HELD_NOT_FOUND_IN_SEARCHED_SOURCES, NOT_HELD_LOCATED -> NOT_HELD_CANDIDATE_LOCATED, HELD_PRIMARY_AUTHENTICATION_PENDING -> HELD_AUTHENTICATION_PENDING (applied in 33c2e1b4); new values NOT_HELD_LEAD_ONLY, NOT_HELD_BLOCKED_ACCESS; source_id values unchanged except the BNSS/BSA split (-INDIACODE rows added in 33c2e1b4)",
+  "source_master_register.csv": "added evidence_stage (derived) and verification_limitations after holding_state; holding_state NOT_HELD_NOT_FOUND -> NOT_HELD_NOT_FOUND_IN_SEARCHED_SOURCES, NOT_HELD_LOCATED -> NOT_HELD_CANDIDATE_LOCATED, HELD_PRIMARY_AUTHENTICATION_PENDING -> HELD_AUTHENTICATION_PENDING (applied in 33c2e1b4); new values NOT_HELD_LEAD_ONLY, NOT_HELD_BLOCKED_ACCESS; source_id values unchanged except the BNSS/BSA split (-INDIACODE rows added in 33c2e1b4); added direct_verification_state (structured; explicit input or derived from candidate check methods) and superseded_candidate_ids (candidates excluded from discovery_state, kept for audit) - final-diff review FD-01",
   "corpus_crosswalk.csv": "added anchor_copy_id (non-empty only on EXACT_ANCHOR rows); EXACT_ANCHOR eligibility now requires a copy with its own documented provenance instead of a source-level HELD_PRIMARY prefix",
   "source_copy_register.csv": "new register",
   "acquisition_register.csv": "acq_c5_id values are stable identifiers; rank is a separate ordering column (C5-ACQ-23..26 added, ranks renumbered)",

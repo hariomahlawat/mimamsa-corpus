@@ -30,7 +30,7 @@ utc_time	method	url	final_url	redirect_hosts	http_status	content_type	content_di
 2026-11-23T05:15:56Z	GET	https://cdaguwahati.gov.in/robots.txt	https://cdaguwahati.gov.in/robots.txt		404	text/html		1245			NO_ROBOTS_FILE	robots		
 2026-11-23T05:15:58Z	HEAD	https://cdaguwahati.gov.in/docs/dsr1.pdf	https://cdaguwahati.gov.in/docs/dsr1.pdf	cdaguwahati.gov.in	404	text/html		1245	HEADERS_ONLY		NO_ROBOTS_FILE	RA-CDAG-V1		
 2026-11-23T05:16:01Z	HEAD	https://cdaguwahati.gov.in/docs/dsr2.pdf	https://cdaguwahati.gov.in/docs/dsr2.pdf	cdaguwahati.gov.in	404	text/html		1245	HEADERS_ONLY		NO_ROBOTS_FILE	RA-CDAG-V2		
-2026-11-23T05:16:01Z	GET	https://cdasecbad.ap.nic.in/robots.txt	https://cdasecbad.ap.nic.in/robots.txt		000	text/plain; charset=utf-8		0			UNAVAILABLE	robots		curl: (56) CONNECT tunnel failed, response 502
+2026-11-23T05:16:01Z	GET	https://cdasecbad.ap.nic.in/robots.txt	https://cdasecbad.ap.nic.in/robots.txt		000			0			UNAVAILABLE	robots		curl: (56) CONNECT tunnel failed, response 502; content_type blanked (proxy header, not target): see log_amendments LA-04
 2026-11-23T05:16:01Z	NONE	https://cdasecbad.ap.nic.in/sankalan/ARMY/DSR%20for%20Army%20V-1.pdf									UNAVAILABLE	RA-CDAS-V1		not requested: ROBOTS_UNAVAILABLE
 2026-11-23T05:16:01Z	NONE	https://cdasecbad.ap.nic.in/sankalan/ARMY/DSR%20for%20Army%20Vol%202.pdf									UNAVAILABLE	RA-CDAS-V2		not requested: ROBOTS_UNAVAILABLE
 2026-11-23T05:16:12Z	GET	https://upload.indiacode.nic.in/robots.txt	https://upload.indiacode.nic.in/robots.txt		000			0			UNAVAILABLE	robots		curl: (35) Recv failure: Connection reset by peer
