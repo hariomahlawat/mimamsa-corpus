@@ -1,0 +1,224 @@
+"""Build c8out/C/page_checks_sc_c8.csv and sc_copy_evidence_register.csv from the agent's recorded page readings
+(the READINGS/COPIES tables below) plus render facts produced by render_pages.py (render_run*.jsonl).
+
+usage: python build_c8_registers.py <out_dir_C> <render_jsonl> [<render_jsonl> ...]
+Offline. The readings are transcriptions made by an AI agent from the 150-dpi renders; they are not human-confirmed."""
+import csv, json, sys
+from pathlib import Path
+
+READER = "AI agent (Claude Opus 5.5 subagent), not human-confirmed"
+DATE = "2026-11-23"
+SHA = {
+    "RANJIT": "ed7cf31fd8fbe50822e0a60f80b96ed1187dcd465dc4ae2649424c58001ff399",
+    "SNM": "eb4420801e978469e9c7407f8c079273f9cd483ad45a4427daa53e3d229969cc",
+    "NAVJOT": "3b75354869ffb928f73532f475f5f920e2f2a1f8817163caba2f7fb5e1eb215d",
+    "DHARAMVIR": "3056712cc7614399f72ee19f529f91990e70dba8a317dd3bd07e76e4ac546b75",
+    "RAJBIR_C1": "970b96807bcbf8a1255fe16c574b575f64fe2edee1cbb271485fa7661a62c666",
+    "NSY": "3c50cdb7f30d1a84b488a72052bdf1868cea18ec4e02aee292cf1e97ebf5bbe6",
+    "GIRISH": "4f7ea3a451c6f9a11d7e4dd96822e68cd9cd7a01d8dc74cf46ad34e79029b86c",
+    "MULLIKOTE": "10e1954f2e39916ea0f0e8e759c3823581becf752dd6ad2e9058569a1fd97444",
+    "RAJBIR_C2": "c6ec489dff7a107b630a8646190a8cda303a54e4e9f5463eaed748ae0a42a1dd",
+    "RAJBIR_C3": "6b495f1483657581965b808b18aa23c09b424989e41d43226c90d35845855cde",
+}
+
+# (key, pdf_page, what_was_read, reading_verbatim, identity_result, discrepancies)
+READINGS = [
+    ("RANJIT", 1, "page 1: database header, parties, date, bench, citation and citator blocks, ACT and HEADNOTE labels",
+     "http://JUDIS.NIC.IN | SUPREME COURT OF INDIA | Page 1 of 9 / PETITIONER: RANJIT THAKUR / Vs. / RESPONDENT: UNION OF INDIA AND ORS. / "
+     "DATE OF JUDGMENT15/10/1987 / BENCH: VENKATACHALLIAH, M.N. (J) / BENCH: VENKATACHALLIAH, M.N. (J) SEN, A.P. (J) / CITATION: 1987 AIR 2386 "
+     "1988 SCR (1) 512 1987 SCC (4) 611 JT 1987 (4) 93 1987 SCALE (2)773 / CITATOR INFO : R 1988 SC1099 (6) D 1991 SC1617 (10,26,33,34) "
+     "R 1992 SC 188 (5) R 1992 SC 417 (5) / ACT: Army Act, 1950/Army Rules, 1954: Sections 41 and 130/Rules 106-133-Court Martial-... / HEADNOTE: % "
+     "The appellant, a Signal Man in a Signal Regiment ... [diagonal outline watermark 'JUDIS' across page]",
+     "CONFIRMED",
+     "No case number on p.1 (case number appears only on p.3); CITATION, CITATOR INFO, ACT and HEADNOTE blocks are database/reporter material, not the "
+     "judgment; C6-01 limitation mentions CITATION/CITATOR INFO but not the HEADNOTE; bench line printed twice"),
+    ("RANJIT", 3, "page 3: end of headnote, editorial note, start of JUDGMENT block with case number",
+     "... Appellant entitled to be reinstated with all monetary and service benefits. [523H, 524A] / (Note: on point 1.3 the finding is to be read "
+     "with and subject to the subsequent order dated 10.8.88). / JUDGMENT: / CIVIL APPELLATE JURISDICTION: Civil Appeal No. 2630 of 1987. / 516 / "
+     "From the Judgment and order dated 3.?.1986 of the Patna",
+     "CONFIRMED",
+     "Headnote contains an editorial note pointing to a subsequent order dated 10.8.88 (the corpus records a review order of 10-08-1988, "
+     "DCLR-SC-1988-R02, not held); '3.?.1986' is a character-recognition/transcription defect in the rendition (p.4 gives 'July 3, 1986'); "
+     "inline '515','516' are report page numbers"),
+    ("RANJIT", 4, "page 4: counsel, author line, opening of judgment",
+     "High Court in C.W.J.C. No. 2823 of 1986. ... The Judgment of the Court was delivered by / VENKATACHALIAH, J. This appeal, by special leave, "
+     "preferred against the order dated July 3, 1986, of the Division Bench of the Patna High Court in C.W.J.C. No. 2823 of 1986 ... / 517",
+     "CONFIRMED", "none for identity; inline '517' report page number"),
+    ("RANJIT", 9, "final page: operative order and end of text",
+     "http://JUDIS.NIC.IN | SUPREME COURT OF INDIA | Page 9 of 9 / ... 10. In the result, for the foregoing reasons, the appeal is allowed, the order "
+     "of the High Court set aside, the writ petition preferred in the High Court allowed and the impugned proceedings of the / 524 / Summary "
+     "Court-Martial dated March 30, 1985, and the consequent order and sentence are quashed. ... There will, however, be no order as to costs. / "
+     "N.P.V. Appeal allowed. / 525",
+     "CONFIRMED",
+     "No signature block, no judges' names and no date at the end (text ends with reporter-style 'N.P.V. Appeal allowed.' and page '525'); "
+     "completeness measured against 'Page 9 of 9' only"),
+    ("SNM", 1, "page 1: database header, parties, date, bench, citation and citator blocks, ACT and HEADNOTE",
+     "http://JUDIS.NIC.IN | SUPREME COURT OF INDIA | Page 1 of 23 / PETITIONER: S.N. MUKHERJEE / Vs. / RESPONDENT: UNION OF INDIA / "
+     "DATE OF JUDGMENT28/08/1990 / BENCH: AGRAWAL, S.C. (J) / BENCH: AGRAWAL, S.C. (J) MUKHARJI, SABYASACHI (CJ) KANIA, M.H. SHETTY, K.J. (J) "
+     "SAIKIA, K.N. (J) / CITATION: 1990 AIR 1984 1990 SCR Supl. (1) 44 1990 SCC (4) 594 JT 1990 (3) 630 1990 SCALE (2)383 / CITATOR INFO : "
+     "RF 1991 SC 564 (6) R 1992 SC1256 (7,9,11,14) / ACT: Army Act 1950: Section 164--Court-Martial--Post confirmation petition--Central "
+     "Government--Whether bound to give reasons. / HEADNOTE: The Appellant was officiating as a Major ... [diagonal outline watermark 'JUDIS']",
+     "CONFIRMED",
+     "No case number on p.1 (Civil Appeal No. 417 of 1984 appears on p.3; cases_53 DCLR-SC-1990-N02 case_number is empty); 'KANIA, M.H.' printed "
+     "without '(J)'; CITATION/CITATOR/ACT/HEADNOTE blocks are database/reporter material"),
+    ("SNM", 3, "page 3: end of headnote case list, JUDGMENT block with case number",
+     "... Mahon v. Air New Zealand Ltd., [1984] A.C. 648, referred to. / JUDGMENT: / CIVIL APPELLATE JURISDICTION: Civil Appeal No. 417 of 1984. / "
+     "From the Judgment and Order dated 12.8.1981 of the Delhi High Court in C.W.P. No. 1835 of 1981. / A.K. Ganguli, A. Sharan for the Appellant. "
+     "/ Kapil Sibal, Additional Solicitor General, ... for the Respondents.",
+     "CONFIRMED", "Headnote occupies pp.1-3 (C6-01 says p.1 only shows citation/citator material); inline '47' report page number"),
+    ("SNM", 23, "final page: operative order and end of text",
+     "http://JUDIS.NIC.IN | SUPREME COURT OF INDIA | Page 23 of 23 / ... In the result we find no merit in this appeal and the same is accordingly "
+     "dismissed. But in the circumstances there will be no order as to costs. / R.N.J. Appeal dismissed. / 76",
+     "CONFIRMED", "No signature block, judges' names or date at the end; reporter-style ending 'R.N.J. Appeal dismissed.' and page '76'"),
+    ("NAVJOT", 1, "page 1: database header, case number, parties, date, bench, connected appeals, author line",
+     "http://JUDIS.NIC.IN | SUPREME COURT OF INDIA | Page 1 of 107 / CASE NO.: Appeal (crl.) 373-375 of 2004 / PETITIONER: STATE (N.C.T. OF DELHI) "
+     "/ RESPONDENT: NAVJOT SANDHU@ AFSAN GURU / DATE OF JUDGMENT: 04/08/2005 / BENCH: P. VENKATARAMA REDDI & P.P. NAOLEKAR / JUDGMENT: JUDGMENT "
+     "WITH / CRIMINAL APPEAL Nos. 376-378 OF 2004 STATE (N.C.T. OF DELHI) \\005 APPELLANT VERSUS SYED ABDUL REHMAN GILANI \\005 RESPONDENT / "
+     "CRIMINAL APPEAL Nos. 379-380 OF 2004 SHAUKAT HUSSAIN GURU ... / CRIMINAL APPEAL NO. 381 OF 2004 MOHD. AFZAL ... / P. VENKATARAMA REDDI, J. / "
+     "1. The genesis of this case lies in a macabre incident ... 13th December, 2001 ... [diagonal outline watermark 'JUDIS']",
+     "CONFIRMED",
+     "Judgment date 04/08/2005 is printed but is not in the C6-01 identity ('SC 2005') nor in cases_53 DCLR-SC-2005-L01 (decision_date and "
+     "case_number empty); it is recorded in PILOT-01 independent-reviewer-B.json#S-REVB-012 (2005-08-04). No citation/citator/headnote blocks on p.1. "
+     "'\\005' is a literal unrendered-character artefact (90 occurrences in the text layer)"),
+    ("NAVJOT", 107, "final page: operative order and end of text",
+     "http://JUDIS.NIC.IN | SUPREME COURT OF INDIA | Page 107 of 107 / Receiver: Alright I will call up tomorrow (while weeping) Caller: O.K. ... "
+     "22. IN THE RESULT, we dismiss the appeal filed by Mohd. Afzal and the death sentence imposed upon him is hereby confirmed. The appeal of "
+     "Shaukat is allowed partly. He stands convicted under Section 123 IPC and sentenced to undergo RI for 10 years ... The appeals filed by the "
+     "State against the acquittal of S.A.R. Gilani and Afsan Guru are hereby dismissed.",
+     "CONFIRMED",
+     "No signature block, judges' names or date at the end; completeness measured only against 'Page 107 of 107'; JUDIS text has no stable "
+     "paragraph numbering (WS-B OI-11)"),
+    ("DHARAMVIR", 1, "page 1: cover of court judgment",
+     "1 / REPORTABLE / IN THE SUPREME COURT OF INDIA CIVIL APPELLATE JURISDICTION / CIVIL APPEAL NO. 4949 OF 2013 / (arising out of SLP(C)No. 6940 of "
+     "2010) / DHARAMVIR SINGH .... APPELLANT / VERSUS / UNION OF INDIA & ORS. ....RESPONDENTS / J U D G M E N T / SUDHANSU JYOTI MUKHOPADHAYA, J. / "
+     "Leave granted. ... / Page 1 [background watermark: 'SUPREME COURT OF INDIA' arc, Ashoka wheel and emblem, 'JUDGMENT']",
+     "CONFIRMED",
+     "No neutral or reported citation printed; '(2013) 7 SCC 316' (cases_53) is not on the document; dual page numbering (document '1' top right, "
+     "'Page 1' bottom right); text spelling 'Himachanl' in para 2"),
+    ("DHARAMVIR", 36, "final page: operative order, signature lines, place and date",
+     "36 / ... Single Judge. No costs. / ..........J. (A.K. PATNAIK) / ..........J. (SUDHANSU JYOTI MUKHOPADHAYA) / NEW DELHI, JULY 2, 2013. / "
+     "Page 36 [same watermark]",
+     "CONFIRMED", "Signature lines are dotted placeholders (no handwritten or digital signature visible); none for identity"),
+    ("RAJBIR_C1", 1, "page 1: cover of court judgment (copy C1)",
+     "REPORTABLE / IN THE SUPREME COURT OF INDIA / CIVIL APPELLATE JURISDICTION / CIVIL APPEAL NO.2904 OF 2011 / Union of India & Anr. ...Appellants / "
+     "Versus / Rajbir Singh ...Respondent / With / CIVIL APPEAL NO.2905 OF 2011 ... CIVIL APPEAL NO. 5260 OF 2012 / CIVILL APPEAL D.16394 OF 2013 / "
+     "1 / Page 1 [watermark: 'SUPREME COURT OF INDIA', wheel, emblem, 'JUDGMENT']",
+     "CONFIRMED",
+     "No neutral/reported citation printed; the C6-01 identity for C1 adds 'rop_275403; bosir copy', which are the other copies C2 and C3, not C1; "
+     "'CIVILL' typographical error as printed"),
+    ("RAJBIR_C1", 2, "page 2: remaining case numbers and author line",
+     "CIVIL APPEAL NO.1856 OF 2015 (Arising out of SLP (C) No.15768 of 2011) / CIVIL APPEAL NO.1854 OF 2015 ... / CIVIL APPEAL NO.1855 OF 2015 ... / "
+     "CIVILL APPEAL NO.1858 OF 2015 ... / CIVILL APPEAL NO.1859 OF 2015 (Arising out of SLP(C) No.27220 of 2012) / J U D G M E N T / T.S. THAKUR, J. / "
+     "1. Leave granted. / 2. These appeals arise out of separate but similar orders passed by the Armed Forces Tribunal ... / 2 / Page 2",
+     "CONFIRMED", "none"),
+    ("RAJBIR_C1", 20, "final page: operative order, signature lines, place and date",
+     "... 17. In the result these appeals fail and are hereby dismissed without any order as to costs. / ..........J. (T.S. THAKUR) / ..........J. "
+     "(R. BANUMATHI) / New Delhi February 13, 2015 / 20 / Page 20",
+     "CONFIRMED", "Signature lines are dotted placeholders; no signature stamp on this copy"),
+    ("NSY", 1, "page 1: cover of court judgment",
+     "REPORTABLE / IN THE SUPREME COURT OF INDIA / CIVIL APPELLATE JURISDICTION / CIVIL APPEAL NO. 7672 OF 2019 / (DIARY NO. 27850 OF 2017) / "
+     "NO. 14666828M EX CFN NARSINGH YADAV .....APPELLANT(S) / VERSUS / UNION OF INDIA & ORS. .....RESPONDENT(S) / J U D G M E N T / HEMANT GUPTA, J. / "
+     "1) The challenge in the present appeal is to an order passed by the Armed Forces Tribunal, Lucknow1 on September 23, 2011 ... / 1",
+     "CONFIRMED",
+     "Appellant's printed name is 'NARSINGH YADAV'; corpus labels use 'N S Yadav' / 'Ex Cfn N S Yadav' (C6-01 identity, source id NS-YADAV); "
+     "whether 'N S' is a correct abbreviation is not shown on the document; judgment date not in the C6-01 identity; no neutral citation printed"),
+    ("NSY", 15, "final page: operative order, signature lines, place and date",
+     "... 22) Thus, we do not find any merit in the present appeal, accordingly, the same is dismissed. / ..........J. (L. NAGESWARA RAO) / "
+     "..........J. (HEMANT GUPTA) / NEW DELHI; OCTOBER 03, 2019. / 15",
+     "CONFIRMED", "Signature lines are dotted placeholders"),
+    ("GIRISH", 1, "page 1: cover, neutral citation, QR code, signature appearance",
+     "[QR code] / REPORTABLE / 2026 INSC 149 / IN THE SUPREME COURT OF INDIA CIVIL APPELLATE JURISDICTION / CIVIL APPEAL NOS.6820-6824 OF 2018 / "
+     "UNION OF INDIA THROUGH ITS SECRETARY & ORS. ... APPELLANTS / VERSUS / SGT GIRISH KUMAR AND ORS. ETC. ... RESPONDENTS / WITH / CIVIL APPEAL NOS. "
+     "8286-8287 OF 2018 / CIVIL APPEAL NO.1555 OF 2024 / CIVIL APPEAL NO.2515 OF 2019 / CIVIL APPEAL NO(S). OF 2026 (@ DIARY NO(S). 34570 OF 2019) ... "
+     "/ [signature appearance:] Signature Not Verified / Digitally signed by KAPIL TANDON / Date: 2026.02.12 17:59:50 IST / Reason: / 1",
+     "CONFIRMED",
+     "cases_53 DCLR-SC-2026-007 reporter_citation is empty although '2026 INSC 149' is printed; several connected civil appeal numbers are blank "
+     "('NO(S). OF 2026'); 'Signature Not Verified' is the viewer's appearance text, not a validation result"),
+    ("GIRISH", 17, "final page: operative order, signature lines, place and date",
+     "... Accordingly, the aforesaid appeals are allowed. Pending applications, if any, are disposed of. / 24. There shall be no order as to costs. / "
+     "..........J. [PAMIDIGHANTAM SRI NARASIMHA] / ..........J. [ALOK ARADHE] / NEW DELHI; FEBRUARY 12, 2026. / 17",
+     "CONFIRMED", "none"),
+    ("MULLIKOTE", 1, "page 1: cover, CORRECTED marking, neutral citation, signature appearance, running footer",
+     "[QR code] / CORRECTED / 2026 INSC 286 / REPORTABLE / IN THE SUPREME COURT OF INDIA CIVIL APPELLATE JURISDICTION / CIVIL APPEAL NO ____ OF 2026 / "
+     "(Arising out of Diary No(s). 27246/2023) / UNION OF INDIA & ORS. ..... APPELLANTS / VERSUS / BALAKRISHNAN MULLIKOTE (EX HAV 2568912 M) "
+     "....RESPONDENTS / WITH / CIVIL APPEAL NO. ____ OF 2026 (Arising out of Diary No(s). 10617/2018) ... CIVIL APPEAL NO.5199 OF 2023 ... / "
+     "[signature appearance:] Signature Not Verified / Digitally signed by KAVITA PAHUJA / Date: 2026.04.04 10:11:55 IST / Reason: / "
+     "footer: Civil Appeal No.____of 2026 arising out of Diary No.27246/2023 & connected matters Page 1 of 62",
+     "CONFIRMED",
+     "Lead civil appeal number blank; signing date 2026-04-04 is later than the judgment date 2026-03-24 (no correction date is printed); "
+     "signer name partly obscured in the render, read in full from the text layer"),
+    ("MULLIKOTE", 31, "page 31: conclusion, signature lines, place and date of first (CORRECTED) version",
+     "CONCLUSION / 51. For the reasons aforesaid, this Court holds that the present Appeals are devoid of merit. The Appeals are accordingly dismissed, "
+     "with no order as to costs. Pending applications, if any, shall stand disposed of. / .........J. [MANOJ MISRA,J] / .........J. [MANMOHAN,J] / "
+     "New Delhi; March 24, 2026 / footer ... Page 31 of 62",
+     "CONFIRMED", "The judgment ends on p.31 of a 62-page file"),
+    ("MULLIKOTE", 32, "page 32: second cover inside the same file",
+     "REPORTABLE / IN THE SUPREME COURT OF INDIA CIVIL APPELLATE JURISDICTION / CIVIL APPEAL NO____ OF 2026 / (Arising out of Diary No(s). 27246/2023) "
+     "/ UNION OF INDIA & ORS. ..... APPELLANTS / VERSUS / BALAKRISHNAN MULLIKOTE (EX HAV 256812 M) ....RESPONDENTS / WITH / ... / footer ... Page 32 of 62",
+     "PARTIAL",
+     "Second version of the judgment begins here: no 'CORRECTED' marking, no neutral citation, no QR code or signature appearance; respondent "
+     "service number '256812 M' differs from '2568912 M' on p.1; text-layer comparison (tools/mullikote_half_diff.txt) shows pp.32-62 repeat "
+     "pp.1-31 with paragraph numbers continued (52-99), list letters C/D for A/B, footnote 2 for 1, and 'Balakrishanan' for 'Balakrishnan' once"),
+    ("MULLIKOTE", 62, "final page: conclusion of second version, signature lines, place and date",
+     "CONCLUSION / 99. For the reasons aforesaid, this Court holds that the present Appeals are devoid of merit. The Appeals are accordingly dismissed, "
+     "with no order as to costs. ... / .........J. [MANOJ MISRA,J] / .........J. [MANMOHAN,J] / New Delhi; March 24, 2026 / footer ... Page 62 of 62",
+     "PARTIAL", "Same conclusion as p.31 numbered 99 instead of 51; 'Page 1 of N' count (62) covers two versions of a 31-page judgment"),
+    ("RAJBIR_C2", 1, "context only (non-candidate copy C2): cover and signature appearance",
+     "REPORTABLE / IN THE SUPREME COURT OF INDIA / CIVIL APPELLATE JURISDICTION / CIVIL APPEAL NO.2904 OF 2011 / Union of India & Anr. ...Appellants "
+     "/ Versus / Rajbir Singh ...Respondent / With / CIVIL APPEAL NO.2905 OF 2011 ... CIVILL APPEAL D.16394 OF 2013 / [signature appearance:] Signature "
+     "Not Verified / Digitally signed by Sarita Purohit / Date: 2015.04.29 16:27:19 IST / Reason: / 1",
+     "CONFIRMED", "Context copy; no watermark and no 'Page N' footer (unlike C1); signature appearance present; not in AUTH-LEDGER copy_structure.csv"),
+    ("RAJBIR_C2", 18, "context only (C2): end of judgment",
+     "... 17. In the result these appeals fail and are hereby dismissed without any order as to costs. / ..........J. (T.S. THAKUR) / ..........J. "
+     "(R. BANUMATHI) / New Delhi February 13, 2015 / 18",
+     "CONFIRMED", "Judgment ends on p.18 in C2 versus p.20 in C1: page pinpoints differ between copies"),
+    ("RAJBIR_C2", 19, "context only (C2): record of proceedings",
+     "ITEM NO.1A COURT NO.2 SECTION XVII (For Judgment) / S U P R E M E C O U R T O F I N D I A / RECORD OF PROCEEDINGS / Civil Appeal No.2904/2011 "
+     "/ UNION OF INDIA & ANR. Appellant(s) / VERSUS / RAJBIR SINGH Respondent(s) / WITH / C.A.No...../2015 @SLP(C)No.26401/2010, ... C.A.No.4409/2011, "
+     "... SLP(C)No.22765/2011, ... C.A. D 16394/2013 / Date : 13/02/2015 These appeals were called on for pronouncement of judgment today. / 19",
+     "CONFIRMED", "Record of proceedings lists C.A. 4409/2011 and SLP(C) 22765/2011, which the p.21 order delinks from the batch"),
+    ("RAJBIR_C2", 21, "context only (C2): ROP order and court masters' names",
+     "... Hon'ble Mr. Justice T.S. Thakur pronounced the reportable judgment of the Bench comprising His Lordship and Hon'ble Mrs. Justice R. Banumathi. "
+     "/ Delay in C.A.No..../2015 D.No.16394/2013 is condoned. / Leave granted. / The appeals are dismissed in terms of the signed reportable judgment. / "
+     "C.A.No.4409/2011 and SLP(C)No.22765/2011 : Delink from the batch and list the matters separately. / (Sarita Purohit) Court Master (Veena Khera) "
+     "Court Master / (Signed reportable judgment is placed on the file) / 21",
+     "CONFIRMED", "none"),
+    ("RAJBIR_C3", 1, "context only (non-primary rendition C3): first page",
+     "Ô! REPORTABLE / IN THE SUPREME COURT OF INDIA / CIVIL APPELLATE JURISDICTION / CIVIL APPEAL NO.2904 OF 2011 / Union of India & Anr. "
+     "...Appellants / Versus / Rajbir Singh ...Respondent / With / ... CIVILL APPEAL D.16394 OF 2013 / Signature Not Verified / Digitally signed by "
+     "Sarita Purohit / Date: 2015.04.29 16:27:19 IST / Reason: / 1 / CIVIL APPEAL NO.1856 OF 2015 ... / JUDGMENT",
+     "CONFIRMED",
+     "Monospaced plain-text rendition ('Enscript Output', GNU enscript 1.6.5, created 2017-07-12) of the C2 content, including the signature "
+     "appearance as plain text; C2 pages 1 and 2 run together on one page; original page numbers survive only as inline numbers"),
+    ("RAJBIR_C3", 15, "context only (C3): final page",
+     "5840/2011, C.A.No.7368/2011, ... Hon'ble Mr. Justice T.S. Thakur pronounced the reportable judgment ... The appeals are dismissed in terms of the "
+     "signed reportable judgment. ... (Sarita Purohit) Court Master (Veena Khera) Court Master / (Signed reportable judgment is placed on the file) / 21",
+     "CONFIRMED", "15 rendition pages carry C2's 21 page numbers inline; no page equivalence with C1 or C2"),
+]
+
+
+def main():
+    out = Path(sys.argv[1])
+    renders = {}
+    for f in sys.argv[2:]:
+        for line in open(f, encoding="utf-8"):
+            d = json.loads(line)
+            if "png_sha256" in d:
+                renders[(d["sha256"], d["pdf_page"])] = d
+    rows = []
+    for n, (k, pg, what, verb, res, disc) in enumerate(READINGS, 1):
+        r = renders[(SHA[k], pg)]
+        rows.append({"check_id": f"C8-SCPIC-{n:02d}", "copy_key": k, "sha256": SHA[k], "held_path": r["held_path"], "pdf_page": pg,
+                     "page_count": r["page_count"], "what_was_read": what, "reading_verbatim": verb, "identity_result": res,
+                     "discrepancies": disc, "render_png": f"renders/{r['png']}", "render_png_sha256": r["png_sha256"],
+                     "render_settings": f"{r['render_settings']}; {r['width']}x{r['height']} px", "reader": READER, "checked_on": DATE})
+    cols = list(rows[0])
+    with open(out / "page_checks_sc_c8.csv", "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=cols, lineterminator="\n")
+        w.writeheader()
+        w.writerows(rows)
+    print(f"wrote {len(rows)} page checks")
+
+
+if __name__ == "__main__":
+    main()
