@@ -1,4 +1,9 @@
 matched distinct fragments: 88
+fragments attributed to more than one source copy: 1
+by source copy (a fragment shared by two copies counts once for each): {'girish_feb2026.pdf': 2, 'mullikote_2026.pdf': 25, 'navjot_sandhu_2005.pdf': 14, 'nsyadav_2019.pdf': 7, 'rajbir_42379.pdf': 4, 'rajbir_bosir_2213461.pdf': 12, 'ranjit_judis8566.pdf': 10, 'rop_275403.pdf': 10, 'snmukherjee_judis7439.pdf': 5}
 matched fragments containing a run of >=5 digits: 9
-by source copy: {'ranjit_judis8566.pdf': 10, 'mullikote_2026.pdf': 25, 'rajbir_bosir_2213461.pdf': 12, 'snmukherjee_judis7439.pdf': 5, 'navjot_sandhu_2005.pdf': 14, 'rajbir_42379.pdf': 4, 'nsyadav_2019.pdf': 7, 'girish_feb2026.pdf': 2, 'rop_275403.pdf': 10}
-matched fragments originating from the N S Yadav copy: 7
+  of which contain a case-number form NNN/YYYY: 7
+  of which contain a service-number-shaped token: 0
+matched fragments containing a service-number-shaped token (any): 0
+matched fragments from the N S Yadav copy: 7
+  files containing them: {'SC-T2/page_checks_sc_c8.csv': 7, 'SC-T2/tools/build_c8_registers.py': 7}
