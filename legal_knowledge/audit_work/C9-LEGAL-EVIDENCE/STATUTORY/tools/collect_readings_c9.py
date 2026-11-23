@@ -41,7 +41,7 @@ NEEDLES = [
     ("C9R-AA-06", AA, "all", r"Delegated Legislation Provisions \(Amendment\) Act, 1983 \(20 of 1983\)", "title of Act 20/1983 as printed in the compilation list"),
     ("C9R-AA-07", AA, "all", r"Act 20 of 1983, s\. 2 and the Schedule \(w\.e\.f\. 15-3-1984\)", "s.193A footnote (compilation)"),
     ("C9R-AA-08", AA, "all", r"S\.O\. 3912 \(E\), dated 30th October, 2019", "S.O. 3912(E)/2019 footnote (compilation)"),
-    ("C9R-AA-09", AA, "all", r"Act 13 of 1975, s\. 3 \(w\.e\.f\. 25-1-\s?1975\)", "Act 13/1975 footnotes with w.e.f. 25-1-1975 (compilation)"),
+    ("C9R-AA-09", AA, "all", r"Act 13 of 1975, s\.\s*3[^()]{0,40}\(w\.e\.f\.\s*25-1-\s*1975\)", "Act 13/1975 footnotes with w.e.f. 25-1-1975 (compilation)"),
     ("C9R-AA-10", AA, "all", r"Act 19 of 1955", "Act 19/1955 footnotes (compilation)"),
     ("C9R-AA-11", AA, "all", r"Adaptation of [Ll]aws \(No\. 3\) [Oo]rder, 1956", "ALO (No.3) 1956 footnotes (compilation)"),
     ("C9R-AA-12", AA, "all", r"Repealing and Amending Act, 1957 \(36 of 1957\)", "RAA 1957 footnote (compilation)"),

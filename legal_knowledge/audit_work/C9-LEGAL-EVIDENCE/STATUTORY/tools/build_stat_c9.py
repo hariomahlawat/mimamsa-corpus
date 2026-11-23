@@ -789,7 +789,9 @@ def build_graph(ctx):
             partial = "s.156: different dates may be appointed for different provisions of Part XIV"
             readings_pres = f"(a) Act: Part XIV by notification [{rd('C9R-RD-FIN17-02')}] || (b) compilation: 'w.e.f. 26-5-2017' [{rd('C9R-AFT-05')}]"
             related = "Part XIV commencement notification (not held)"
+        prov_override = ""
         if rid == "D-AMC-AFT-02":
+            prov_override = "s.9A (words substituted by TRA 2021 s.26; the held AFT compilation shows no TRA 2021 footnote) (review LG-10)"
             status, ev_date = "EVIDENCED", "2021-04-04 (deemed)"
             detail = f"C9: TRA 2021 held in corpus raw store; s.26 substitutes words in AFT s.9A [{rd('C9R-RD-TRA21-02')}]; s.1(2) deemed commencement 04-04-2021 [{rd('C9R-RD-TRA21-IMG')}]"
             evidence += f"; {rd('C9R-RD-TRA21-IMG')}"
@@ -833,7 +835,7 @@ def build_graph(ctx):
         if rid == "D-AMC-AR-029":
             c9 = f"C9: item 31 (r.168(2) field-punishment words omitted) re-read [{rd('C9R-AR-02')}]; India Code compilation still prints them [{rd('C9R-AR-01')}] - see C9-AG-AR168"
         repeal = "YES" if re.search(r"(?i)omit|repeal", r["provision_affected"] + " " + r["amendment_type"]) else ""
-        rows.append(dict(edge_id=f"C9-AG-{rid[6:]}", origin=rid, target_instrument_id=target, provision=r["provision_affected"][:200], amending_instrument_id=amending,
+        rows.append(dict(edge_id=f"C9-AG-{rid[6:]}", origin=rid, target_instrument_id=target, provision=prov_override or r["provision_affected"][:200], amending_instrument_id=amending,
                          amending_instrument=r["amending_instrument"][:160], edge_kind=r["amendment_type"][:60], publication_date=r["publication_date"],
                          commencement_as_printed=r["commencement_as_printed"][:200], commencement_date_evidenced=ev_date if status == "EVIDENCED" else "",
                          partial_or_staged_commencement=partial, repeal_or_omission=repeal, saving_or_transitional=saving, supersession="", related_notification=related,
