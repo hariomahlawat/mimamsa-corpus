@@ -7,8 +7,12 @@ What goes up (everything under data/ that is part of the corpus):
   data/raw/<source>/<year>/   raw files as served (rejected judgments are already deleted locally)
   data/meta, data/sections, data/text, data/correspondence, data/relations.jsonl, manifests,
   data/excluded_judgments.jsonl
-Uploads are made folder by folder so that each commit stays a manageable size, and a file removed
-locally (a judgment later rejected) is removed from the repository too.
+Uploads are made folder by folder so that each commit stays a manageable size. Uploads are ADDITIVE ONLY
+(standing owner instruction, ADR-0004): a file removed locally is NOT removed from the HF repository, and a
+protected original is never overwritten with different bytes (scripts/hf_protect.py). Files kept on HF but
+absent locally (HF-only copies, preserved sources) stay in data/raw, while data/SHA256SUMS and the manifests
+written here describe the local tree only; additions made directly on HF are recorded in
+data/manifest_additions/ (C12 convention). Deleting a source needs separate owner approval.
 
     HF_TOKEN=... python scripts/push_hf.py "checkpoint message" [--repo owner/name] [--dry-run]
 """
@@ -123,13 +127,14 @@ def main(argv: list[str] | None = None) -> int:
     uploaded = 0
     from hf_protect import assert_additive, NEVER_SYNC_PATTERNS
     for folder, dest in steps:
+        base = api.dataset_info(repo).sha                     # pin guard listing and commit together (R50-03)
         # Additive only (standing owner instruction, ADR-0004): no delete_patterns. Files present on HF but not
         # in this local tree (HF-only copies, preserved sources) must survive. Never overwrite protected originals.
         local = [(f, f"{dest}/{f.relative_to(folder).as_posix()}") for f in folder.rglob("*")
                  if f.is_file() and f.name != ".gitkeep" and not f.name.endswith(".part")]
-        assert_additive(api, repo, local)
+        assert_additive(api, repo, local, revision=base)
         api.upload_folder(repo_id=repo, repo_type="dataset", folder_path=str(folder), path_in_repo=dest,
-                          ignore_patterns=[".gitkeep", "*.part"],
+                          ignore_patterns=[".gitkeep", "*.part"], parent_commit=base,
                           commit_message=f"{dest} — {args.message}")
         uploaded += 1
     api.upload_folder(repo_id=repo, repo_type="dataset", folder_path=str(DATA), path_in_repo="data",
@@ -140,9 +145,10 @@ def main(argv: list[str] | None = None) -> int:
     if legal_dir.is_dir():
         lk_local = [(f, f"legal_knowledge/{f.relative_to(legal_dir).as_posix()}") for f in legal_dir.rglob("*")
                     if f.is_file() and "preservation" not in f.relative_to(legal_dir).parts]
-        assert_additive(api, repo, lk_local)
+        base = api.dataset_info(repo).sha
+        assert_additive(api, repo, lk_local, revision=base)
         api.upload_folder(repo_id=repo, repo_type="dataset", folder_path=str(legal_dir),
-                          path_in_repo="legal_knowledge", ignore_patterns=NEVER_SYNC_PATTERNS,
+                          path_in_repo="legal_knowledge", ignore_patterns=NEVER_SYNC_PATTERNS, parent_commit=base,
                           commit_message=f"legal knowledge review batches — {args.message}")
     api.upload_folder(repo_id=repo, repo_type="dataset", folder_path=str(ROOT / "schema"), path_in_repo="schema",
                       commit_message=f"schema — {args.message}")

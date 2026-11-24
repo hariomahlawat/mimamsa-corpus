@@ -59,7 +59,7 @@ How the 25 were chosen (first-tier titles only). A title qualified only if it me
 - **Retries.** Exponential backoff (4 s base, at most 5 tries) applied only to timeouts, 5xx and 429. Proxy policy refusals are not retried. No retries happened in this run.
 - **Audit trail.** Every request, robots.txt included, is in `REQUEST_LOG.csv` (57 from `acquire.py` plus 1 manual curl probe).
 - **No overwrites.** Files are content-addressed by SHA-256 and written atomically, and existing files are never replaced. Truncated corpus copies were not touched. Re-fetched copies were registered only by relation: all 18 are IDENTICAL_TO_STORED_TRUNCATED_COPY, and no replacement was registered.
-- **Approval.** CLAUDE.md asks for approval before a real download run. This run was executed on the Cycle 12 Workstream H instruction and limited to the targets listed. Nothing acquired here is ingested, registered in `data/`, or committed. Registration is left to the owner.
+- **Approval.** CLAUDE.md asks for approval before a real download run. This run was executed on the Cycle 12 Workstream H instruction and limited to the targets listed. ~~Nothing acquired here is ingested, registered in `data/`, or committed. Registration is left to the owner.~~ *(Updated at closeout: 18 of the 25 were ingested to HF commit `15bd03cc` and 7 were excluded as not relevant. See `../judicial_recovery_c12/`.)*
 
 ## What would unblock the remaining targets (owner decisions, not done here)
 

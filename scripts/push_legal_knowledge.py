@@ -40,7 +40,8 @@ def main():
     import sys
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from hf_protect import assert_additive
-    assert_additive(api, DATASET, [(f, f.relative_to(ROOT).as_posix()) for f in payload])
+    base = info.sha                                       # pin guard listing and commit together (R50-03)
+    assert_additive(api, DATASET, [(f, f.relative_to(ROOT).as_posix()) for f in payload], revision=base)
     from huggingface_hub import CommitOperationAdd
     operations = [
         CommitOperationAdd(
@@ -50,7 +51,7 @@ def main():
     ]
     result = api.create_commit(
         repo_id=DATASET, repo_type="dataset", operations=operations,
-        commit_message="Stage curated military-law legal review data (not JAG approved)",
+        commit_message="Stage curated military-law legal review data (not JAG approved)", parent_commit=base,
     )
     # huggingface_hub.CommitInfo exposes the committed revision as `oid`.
     revision = getattr(result, "oid", None)

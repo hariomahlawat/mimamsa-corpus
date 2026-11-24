@@ -21,8 +21,8 @@
 | Ground truth not scorable ('other') | 1 |
 | **Precision, strict** | **37 / 44 = 84.1% (one-sided 95% lower bound 73.1%)** |
 | Precision, lenient (remanded = set aside and remanded) | 37 / 44 (no change) |
-| Baseline: crawler outcome, same rules (exact label; family scoring under Qualifications) | 28 / 44 = 63.6% (lower bound 51.2%) |
-| Baseline: Cycle 10 extractor, same rules (exact label; family scoring under Qualifications) | 25 / 48 = 52.1% (lower bound 40.4%) |
+| Baseline: crawler outcome, same rules (exact label; family scoring under Qualifications; *note added in Cycle 12*) | 28 / 44 = 63.6% (lower bound 51.2%) |
+| Baseline: Cycle 10 extractor, same rules (exact label; family scoring under Qualifications; *note added in Cycle 12*) | 25 / 48 = 52.1% (lower bound 40.4%) |
 
 **By court (strict):**
 
@@ -67,4 +67,4 @@ The reviewer re-scored all 56 judgments independently: 37 correct, 7 incorrect, 
   | crawler | 33/44 | 75.0% (Wilson 95% 60.6–85.4%) |
   | Cycle 10 extractor | 31/48 | 64.6% (Wilson 95% 50.4–76.6%) |
 
-  **The intervals overlap**, so v2's advantage is real but not large on this sample.
+  **The intervals overlap**, so ~~v2's advantage is real but not large on this sample~~ v2 has the higher point estimate, but its advantage is not established on this sample *(corrected in Cycle 12, review R50-07)*.

@@ -6,3 +6,6 @@ The coordinator re-downloaded 30 files at revision `5524c3d9`: 15 LFS and 15 non
 ## Owner attention (no action taken)
 - The FOUO-marked RAF 2000 copy `4284820e…` is already in the **private** HF dataset. This is not publication. Removing or quarantining it would be a deletion or visibility decision, which needs owner approval under `docs/governance/CORPUS_REPOSITORY_GOVERNANCE.md` §3.
 - The 4 HF-only SC files open and end with `%%EOF`. They were retrieved to the session working store as candidates. Their HF copies remain the preserved originals.
+
+## Reproducibility dependency (review R50-09)
+`report --check` compares against git commit `ad77758d` in the full-history object store `/home/user/c7`, a full clone of this repository. Running the check elsewhere needs a full clone that contains `ad77758d`.

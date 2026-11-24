@@ -46,7 +46,7 @@ Every routine HF write must:
 Also unchanged, and still requiring their own approvals or rules:
 - merges into `main`;
 - the GitHub Actions corpus-upload gate (`I-APPROVE-CORPUS-UPLOAD`, `docs/HF_SYNC_SAFEGUARD.md`);
-- external source acquisition beyond the allow-list rules;
+- external source acquisition (downloads from external sites), which still follows the `CLAUDE.md` working rules: each real download run needs approval unless an owner directive authorises that run, even on allow-listed hosts. This standing instruction covers Hugging Face corpus operations only;
 - the never-contact list;
 - any action the session's own permission controls block. Those are never circumvented.
 

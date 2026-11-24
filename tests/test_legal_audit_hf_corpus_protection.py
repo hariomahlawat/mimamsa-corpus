@@ -80,5 +80,68 @@ class AdditiveCheck(unittest.TestCase):
             HP.assert_additive(BrokenApi(), "o/r", [(self.f, "data/raw/sci/2009/a.pdf")])
 
 
+class StrengthenedChecks(unittest.TestCase):
+    """Review R50-01/02/04: coverage of every protected prefix, non-LFS identity, 404 handling, call sites."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.f = Path(self.tmp.name) / "a.pdf"
+        self.f.write_bytes(b"%PDF-1.4 original")
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_every_protected_prefix_blocks_a_different_lfs_file(self):
+        for pre in HP.PROTECTED_PREFIXES:
+            rp = pre + "x/a.pdf"
+            with self.subTest(prefix=pre):
+                self.assertEqual(HP.check_additive([(self.f, rp)], {rp: ("0" * 64, None)}), [rp])
+
+    def test_expected_prefixes_are_protected(self):
+        for pre in ("data/raw/", "legal_knowledge/preservation/", "legal_knowledge/manual_sources/",
+                    "legal_knowledge/judgment_originals/", "legal_knowledge/curated_originals/",
+                    "legal_knowledge/judgment_sources/"):
+            self.assertIn(pre, HP.PROTECTED_PREFIXES)
+
+    def test_non_lfs_mismatch_is_blocked_and_known_oid_matches(self):
+        rp = "data/raw/x/1/a.pdf"
+        self.assertEqual(HP.check_additive([(self.f, rp)], {rp: (None, "1" * 40)}), [rp])
+        empty = Path(self.tmp.name) / "empty"
+        empty.write_bytes(b"")
+        self.assertEqual(HP.git_blob_sha1(empty), "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391")  # git's empty blob
+
+    def test_every_copy_manifest_path_is_protected(self):
+        man = (ROOT / "legal_knowledge/audit_work/C12-CONSOLIDATION/copy_verification_c12/COPY_VERIFICATION_MANIFEST.csv")
+        import csv as _csv
+        paths = [r["hosted_path"] for r in _csv.DictReader(open(man, encoding="utf-8")) if r["hosted_path"]]
+        self.assertGreater(len(paths), 4000)
+        self.assertEqual([p for p in paths if not HP.is_protected(p)], [])
+
+    def test_only_missing_folder_is_treated_as_empty(self):
+        def api_raising(name):
+            exc = type(name, (Exception,), {})("404 Client Error")
+            class A:
+                def list_repo_tree(self, *a, **kw):
+                    raise exc
+            return A()
+        self.assertEqual(HP.remote_sha256_index(api_raising("EntryNotFoundError"), "o/r", "data/raw/x/"), {})
+        for name in ("RepositoryNotFoundError", "RevisionNotFoundError", "HfHubHTTPError"):
+            with self.subTest(name=name), self.assertRaises(Exception):
+                HP.remote_sha256_index(api_raising(name), "o/r", "data/raw/x/")
+
+    def test_each_upload_call_site_is_guarded_and_pinned(self):
+        src = (ROOT / "scripts" / "push_hf.py").read_text(encoding="utf-8")
+        body = src[src.index("def main("):]
+        for m in re.finditer(r"api\.upload_folder\(", body):
+            call = body[m.start():body.index(")\n", m.start())]
+            before = body[max(0, m.start() - 600):m.start()]
+            if "folder_path=str(folder)" in call or "legal_dir" in call:
+                self.assertIn("parent_commit=base", call)
+                self.assertIn("assert_additive(", before)
+        lk = (ROOT / "scripts" / "push_legal_knowledge.py").read_text(encoding="utf-8")
+        self.assertIn("parent_commit=base", lk)
+        self.assertIn("revision=base", lk)
+
+
 if __name__ == "__main__":
     unittest.main()

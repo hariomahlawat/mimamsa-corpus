@@ -149,14 +149,14 @@ C11 F02 (single-coded holdout) is closed and confirmed by the V3 holdout review.
 
 - **Outcome extraction** is not reliable enough for unreviewed use. Supreme Court multi-proceeding judgments have 42% coverage. Party-specific dispositions are not mapped. Some labels are convention-dependent.
 - **Holdings and propositions:** about 6 in 10 predicted "holdings" are not holdings. This cannot support legal reasoning without human review.
-- **Statutory anchors:** r.22 and r.23 stay PARTIAL (S.R.O. 258/2002 not held; C-01 wording conflict). r.15 is blocked by an unlocated "[or Military Secretary]" amendment. The WS-F promotions depend on unpreserved copies.
+- **Statutory anchors:** r.22 and r.23 stay PARTIAL (S.R.O. 258/2002 not held; C-01 wording conflict). r.15 is blocked by an unlocated "[or Military Secretary]" amendment. ~~The WS-F promotions depend on unpreserved copies.~~ *(At closeout, the copies are preserved and byte-verified on HF, and the availability risk is closed for the 274 dependent items.)*
 - **Forms:** 32 families exist only in undated MML copies. Field lists are not yet transcribed from the official Gazette copies.
 - **Acquisition:** the following remain unavailable: the Girish clarification, Ram Avtar, the egazette instruments and the DESW items. 4 SC files are HF-only.
 - **Ground truth and reference sets** are single-pass AI work: two coders plus adjudication for outcomes, and one annotator for holdings.
 
 ## 10. Owner decisions required
 
-1. **Preservation destination** for the 48 copies: permit the private orphan-branch push, run `stage_and_verify.sh` to HF, or name another store. *Highest priority.*
+1. ~~**Preservation destination** for the 48 copies: permit the private orphan-branch push, run `stage_and_verify.sh` to HF, or name another store. *Highest priority.*~~ *Done at closeout: preserved to HF `5524c3d9` and byte-verified.*
 2. ~~**HF read credential**~~: done. A fine-grained network secret with read/write is in place, and the owner has directed that it be retained.
 3. Confirm the **Legal Reviewer designation** in the blueprint.
 4. **Allow-list** additions (archive.org storage nodes, `sci.gov.in`, `desw.gov.in`) or manual acquisition. Also a trust-store fix for `egazette.gov.in`.
@@ -191,7 +191,7 @@ Outcome precision is short of target and coverage is far short. Holdings are far
 
 | Track | Scope | Gate |
 | --- | --- | --- |
-| P0 Preservation | Execute the owner-chosen destination; verify restore; then release temporary copies | Owner decision 1 |
+| P0 Preservation | ~~Execute the owner-chosen destination; verify restore;~~ (done at closeout) Establish and verify a **second** persistent backup; then release the temporary copies | Owner choice of a second store |
 | App foundation | Offline ingestion, store, search, provenance/version model, access model, candidate banners | Blueprint ADRs; no legal logic |
 | Outcome V4 | SC multi-proceeding mapping; party-specific dispositions; coverage. Fresh holdout (the V3 holdout is now spent for tuning) | ≥95% / ≥85% on a new holdout |
 | Holdings V2 | Opinion segmentation; court-voice vs quotation; holding vs reasoning. Second independent reference annotator | Measured P/R with inter-annotator agreement |

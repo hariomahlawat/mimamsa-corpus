@@ -20,6 +20,7 @@ PROTECTED_PREFIXES = (
     "legal_knowledge/manual_sources/",
     "legal_knowledge/judgment_originals/",
     "legal_knowledge/curated_originals/",
+    "legal_knowledge/judgment_sources/",
 )
 
 # Folders that a sync must never upload from a local tree, even additively. The canonical copy lives only on HF.
@@ -42,11 +43,11 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
-def remote_sha256_index(api, repo_id: str, prefix: str, revision: str | None = None) -> dict[str, str | None]:
-    """path -> sha256 for remote files under prefix.
+def remote_sha256_index(api, repo_id: str, prefix: str, revision: str | None = None) -> dict:
+    """path -> (lfs_sha256 | None, git_oid | None) for remote files under prefix.
 
-    Uses the LFS sha256 when present; otherwise None. A non-LFS file is checked by its git oid in
-    check_additive().
+    Only a missing folder (EntryNotFound) is treated as empty. A missing repository or revision, or any other
+    failure, propagates, so the sync stops (fail closed; review R50-02).
     """
     out = {}
     try:
@@ -57,8 +58,8 @@ def remote_sha256_index(api, repo_id: str, prefix: str, revision: str | None = N
                 continue
             lfs = getattr(e, "lfs", None)
             out[e.path] = (getattr(lfs, "sha256", None) if lfs else None, getattr(e, "blob_id", None))
-    except Exception as exc:  # missing folder is fine; any other failure must stop the sync (fail closed)
-        if "404" in str(exc) or "not found" in str(exc).lower():
+    except Exception as exc:
+        if type(exc).__name__ == "EntryNotFoundError":
             return {}
         raise
     return out

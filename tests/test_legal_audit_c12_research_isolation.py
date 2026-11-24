@@ -6,6 +6,7 @@ from pathlib import Path
 
 C = Path(__file__).resolve().parents[1] / "legal_knowledge" / "audit_work" / "C12-CONSOLIDATION"
 DEFERRED_P2 = {"C11-extraction F05", "C11-extraction F06", "C11-extraction F07", "C11-extraction F08", "WSG-R04"}
+SOURCE_ALIAS = {"fable_review_extraction_c11_findings.csv": "C11-extraction ", "review_wsg_forms_findings.csv": ""}
 
 
 class ResearchIsolation(unittest.TestCase):
@@ -16,6 +17,17 @@ class ResearchIsolation(unittest.TestCase):
         self.assertEqual(mapped, DEFERRED_P2)
         for r in rows:
             self.assertTrue((C / r["artefact"]).is_file(), r["artefact"])
+
+    def test_deferred_set_matches_findings_register(self):
+        reg = csv.DictReader(open(C / "findings_consolidation/FINDINGS_CONSOLIDATED.csv", encoding="utf-8"))
+        open_p2 = {SOURCE_ALIAS.get(r["source_file"].rsplit("/", 1)[-1], r["source_file"] + ":") + r["id"]
+                   for r in reg if r["severity"] in ("P1", "P2") and r["current_status"] != "CLOSED_VERIFIED"}
+        self.assertEqual(open_p2, DEFERRED_P2)
+
+    def test_form_fields_not_legally_approved(self):
+        rows = list(csv.DictReader(open(C / "forms_registry/outputs/FORM_FIELDS.csv", encoding="utf-8")))
+        self.assertTrue(rows)
+        self.assertEqual({r["verification_status"] for r in rows}, {"DISCOVERED_FROM_SOURCE_NOT_LEGALLY_APPROVED"})
 
     def test_outcome_rows_remain_candidates(self):
         with open(C / "extractor_v3/outputs/OUTCOMES_V3.csv", encoding="utf-8") as f:
