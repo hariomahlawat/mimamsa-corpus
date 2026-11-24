@@ -194,3 +194,33 @@ Outcome precision is short of target and coverage is far short. Holdings are far
 | Forms | Transcribe field lists from official copies (R04); Air Force and Navy instruments | Reviewer confirmation |
 | Metadata | Owner decision on the overlay; reconfirm the 266 unreviewed in reviewed batches | Owner decision 5 |
 | Backlog | 47 P3 deferred + 12 P3 open + 27 P3 closed by author only, in the register | — |
+
+## Closeout addendum (2026-11-24, after owner instructions)
+
+**Preservation (WS-B): done and verified.**
+- The 48 working-store PDFs were uploaded to the private HF dataset at `legal_knowledge/preservation/c5_working_store/`, in HF commit `5524c3d99b6a069249012fecea75093b875a22c7`.
+- A revision-pinned re-download verified them: 106/106 package checksums pass, and all 48 PDFs equal the manifest held in git.
+- The owner also received the ZIP (SHA-256 `214f11e8…`).
+- Temporary copies are retained. Releasing them is an owner decision.
+
+**Complete HF corpus verification: done** (`hf_verification_c12/`).
+- Every file at revision `5524c3d9` was downloaded and hashed: 15,971 files, 1.99 GB, 0 failures.
+- 15,971 match the server hashes, and 15,689 are byte-identical to git `ad77758d`.
+- `SHA256SUMS`, the raw filenames and `raw_manifest` show 0 mismatches.
+- 5 files are newer on HF than in git: README, 3 schemas, and raw_manifest, which lacks 2 columns but has 0 differing cells. There are 277 HF-only and 42 git-only paths.
+- The coordinator independently spot-checked 30 files; 30 of 30 match.
+- Of the 23 incomplete files: the 4 HF-only Supreme Court files are complete on HF (they open and end with `%%EOF`), and 19 are truncated on HF too.
+
+**Markings.** The FOUO RAF 2000 copy `4284820e…` is already in the private dataset. It has not been published. Removing or quarantining it is a decision for the owner. No new restricted material was found.
+
+**Governance.** The owner's standing instruction is recorded in `CLAUDE.md`, `docs/governance/CORPUS_REPOSITORY_GOVERNANCE.md` and ADR-0004:
+- HF is the central corpus repository, and routine HF operations are authorised.
+- Deletion, publication of restricted material, visibility changes and legal authentication still need separate approval.
+
+**Owner decisions: updated list.**
+1. ~~Preservation destination~~ (done).
+2. ~~HF credential~~ (done; a fine-grained network secret).
+3. Release of the temporary working copies, now that verification has passed.
+4. Handling of the FOUO RAF 2000 copy in the HF dataset.
+
+The remaining items from §10 are unchanged: Legal Reviewer designation, allow-list, SC overlay, adviser review, contact-email header, and the PR #50 merge.
