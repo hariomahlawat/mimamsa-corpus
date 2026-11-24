@@ -1,0 +1,14 @@
+{
+ "bytes_listed": 1990747622,
+ "capture_finished_utc": "2026-11-24T13:26:24Z",
+ "capture_runtime_seconds_this_invocation": 837.5,
+ "capture_started_utc": "2026-11-24T13:12:27Z",
+ "files_listed": 15971,
+ "max_concurrency": 4,
+ "post_capture_normalisation": "pdf_opens error strings: temp-file paths replaced by '<tmpfile>' (2 rows); same sanitize_err() that capture now applies",
+ "pymupdf": "2.1",
+ "repo": "hariomahlawat/mimamsa-corpus",
+ "repo_type": "dataset",
+ "revision": "5524c3d99b6a069249012fecea75093b875a22c7",
+ "revision_last_modified": "2026-11-24 12:08:44+00:00"
+}

@@ -18,3 +18,6 @@
 3. **OIDC / Trusted Publisher.** A job with an environment receives an OIDC subject claim `repo:<owner>/<repo>:environment:hf-corpus-upload`.
    - If the Hugging Face Trusted Publisher for the private dataset is bound to a branch- or ref-based subject, add the environment-based subject there before the first approved upload; otherwise credential exchange fails closed.
    - The abbreviation job has no environment, so its claim is unchanged.
+
+## Relationship to the standing corpus instruction (2026-11-24)
+The gates above govern only the **GitHub Actions** sync workflow, and they are unchanged. Routine corpus operations performed directly against the HF dataset, with securely injected credentials, are authorised by the standing owner instruction in `docs/governance/CORPUS_REPOSITORY_GOVERNANCE.md`. Those operations must be versioned, verified and recorded there. Never put `[abbreviations-hf]` in a commit message unless that upload is intended.

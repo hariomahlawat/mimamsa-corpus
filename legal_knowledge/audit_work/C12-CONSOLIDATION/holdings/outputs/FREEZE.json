@@ -1,0 +1,37 @@
+{
+  "blind_eval_command": "python3.11 -I -B tools/holdings_c12.py ids --ids-file <ids.txt> --out-dir <dir>",
+  "evaluation_tool_sha256": {
+    "eval_dev_holdings.py": "b55088892eb5a7d1bde1222727483be05140d1c18a11b909960a9935e2ed44dd"
+  },
+  "extractor": "c12-holdings/1.0.0",
+  "input_sha256": {
+    "copy_register": "4828c5cd2628c843ef5006e39455474e442c340fa0a02a8e864956e1bb3951f4",
+    "curated_status": "101b103d55db50c53f9e2ff2e6f05aa9e994b14f4108ab98b5e69d8b9269ea43",
+    "metadata_audit": "147fccfb02522697c094635ae70f12b62ea1f2f12d24e8802a0ddc0222197916",
+    "reconciliation": "5366e9cbeae77580eeb6051263725a8d745a191621819c364b246167fbc03d12",
+    "relevance": "2eef51aa539377489eaf146e60580ff772f90480e12b5ddebd4e6dd9be1138a1",
+    "statute_links": "d56be6cae32990c02f4176c323355d60ee2d7b19667fb0ee4bfd575f01c41eb1",
+    "treatment_candidates": "28331abf17d4d296a4baf5e88444a61d1d105319156cb5ed5d042389057fce27"
+  },
+  "output_sha256": {
+    "CURATED_SCOPE_C12.csv": "29e318a5a029b4bd0aa90d0bbf1ef89797ad99c7aa64850dd8d11940976c47ed",
+    "HOLDINGS_C12.jsonl": "a0c6714fc333dabc56114e9246e4fe91a7e50a2feab283bd19e494c40454168f",
+    "HOLDINGS_C12_JUDGMENTS.csv": "3e10ae3fb8cabe510dae8bcbd36f3fb48782121bcd2fa6521831823f09643e9d",
+    "SCOPE_C12.csv": "d404ecf67f6f35623cc16843913e0dbbd8f2d32a7a47adb265bc0cdfc6b2d3ae"
+  },
+  "status_of_every_item": "AUTOMATED_CANDIDATE_NOT_VERIFIED",
+  "text_source": {
+    "commit": "ad77758d",
+    "path": "data/text/<doc_id>.txt",
+    "repo": "/home/user/c7"
+  },
+  "thresholds": {
+    "T_HOLDING": 4,
+    "T_NONCOURT_EMIT": 2,
+    "T_REASONING": 1
+  },
+  "tool_sha256": {
+    "holdings_c12.py": "a1b0163824e4062b38efe1423985559935130f7e581f3c3ba61e29a50fc7bb89",
+    "holdings_core.py": "6d5b05e447e082cb8d9be4a1784148a18221091bd836b5fceb4cecbf6178fe8e"
+  }
+}

@@ -9,6 +9,9 @@ on:
       - "legal_knowledge/audit_work/**"
       - "tests/test_legal_audit_*.py"
       - ".github/workflows/legal-audit-kit-ci.yml"
+      - "scripts/hf_protect.py"
+      - "scripts/push_hf.py"
+      - "scripts/push_legal_knowledge.py"
   workflow_dispatch:
 
 permissions:

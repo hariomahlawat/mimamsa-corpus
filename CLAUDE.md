@@ -156,9 +156,23 @@ Build in phases and stop for review after each. Start small: one source end to e
 
 ## Working rules
 
-Ask before installing system packages, before any real download run, and whenever a source needs login or blocks us. Keep a short PROGRESS.md log of what was done and what is next.
+Ask before installing system packages, before any real download run from external sources (routine Hugging Face corpus operations are covered by the standing instruction below), and whenever a source needs login or blocks us. Keep a short PROGRESS.md log of what was done and what is next.
 
 Open questions to settle early: which machine runs the crawl and how much disk it has; whether the Prism OCR pipeline can be reused as a module; and who on the legal side reviews proposed supersession and overruling edges.
+
+## Corpus repository and Hugging Face access (standing owner instruction, 2026-11-24)
+
+Full text: `docs/governance/CORPUS_REPOSITORY_GOVERNANCE.md` (ADR-0004). In short:
+- **Hugging Face** dataset `hariomahlawat/mimamsa-corpus` (private) is the **central corpus repository**. **GitHub** holds application code, schemas, tools, tests, documentation and review records.
+- **Authorised without repeated approval:** routine HF uploads, dataset updates, metadata corrections, source preservation and integrity verification, within established project policies.
+- **Every such write must:**
+  - be versioned and non-destructive, never deleting or overwriting originals;
+  - keep provenance complete;
+  - be SHA-256 verified by re-downloading at the pinned HF commit and comparing with a manifest held in git;
+  - be recorded in GitHub with the HF commit id;
+  - be reproducible from committed tools.
+- **Still needs separate owner approval:** deleting source documents, publishing restricted material, changing repository visibility, and legal authentication transactions (any real AUTH-LEDGER BIND or approval). Merges to `main` and the GitHub Actions upload gate (`docs/HF_SYNC_SAFEGUARD.md`) are unchanged.
+- **Credentials** are injected securely into the environment (a network secret for `huggingface.co`). Never expose, log or commit token values, and never ask for them in chat.
 
 ## Product direction and future design (recorded 2026-11-24)
 

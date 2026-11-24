@@ -1,0 +1,13 @@
+id,verdict,severity,evidence,requested_action
+F-01,CLOSED_VERIFIED,,"All 6 r.15 items are PARTIAL with blocker 'GAP-15; OQ-A-10 (cross-refs WS-C OQ-C-10; XC-03)'. The general open-alleged-amendment sweep is in place, and the F-01 tests pass. X010 now states the r.15 issue.",
+F-02,CLOSED_VERIFIED,,"C10Q-CW-0087 is PARTIAL with an annotation-locator blocker, and test_F02 passes.",
+F-03,CLOSED_VERIFIED,,"There are 10 new C12_IMAGE_CHECK_REMEDIATION rows. All 28 render hashes equal the full sha256 of the reviewer's own renders. The observed text of PE-1954-296, -301, -331, -340 and -342 and PE-1961-141 agrees with the reviewer's image reads. The p.343 continuation probe ('Such fine will be assessed as a percentage') was confirmed on a new reviewer render.",
+F-04,CLOSED_VERIFIED,,"The matrix now has record_level_state and exact_scope columns. 39 of the 57 promotions are CITATION_LOCATOR_ONLY; the list includes the review's seven, COI-021 (now PARTIAL after F-02), KB-025 and KB-028. test_F04 passes.",
+F-05,CLOSED_VERIFIED,,"Ranges are now recorded: r.179 340-341, r.14 296-297, 1961 141-142, and the further ranges listed in the remediation. The continuation probes are checked by the build.",
+F-06,CLOSED_VERIFIED,,"18 verification rows carry the r.15B applicability_note, and an APPLICABILITY_NOTE proposal is generated. No state change.",
+F-07,CLOSED_VERIFIED,,X002 lists 7 records and excludes HCE-027 with a stated reason.,
+F-08,CLOSED_VERIFIED,,"The render script is included and --verify reproduces 28/28 in the reviewer's copy. The PIC-13 reference is corrected to ACQ-02, and PE-1993-17 is complete.",
+F-09,CLOSED_VERIFIED,,The r.135 'or abstract' VERSION_NOTE proposal is present.,
+F-10,CLOSED_VERIFIED,,"The tested interpreter is pinned. Under python3.11, require_env() stops with a clear message. In the venv, --check is OK and 27 tests pass.",
+C-01,INFO,P3,"The build now reads reviews/review_wsf_statutory_promotions.csv as an input (INPUTS['review_promotions'], line 440). It is used only for the reconciliation count at line 1139 and does not set any state. Even so, the outputs now depend on a review artefact.",Keep it reconciliation-only. A test asserting that no state depends on it would make this explicit.
+C-02,INFO,P3,The 16 baseline EXACT items that rest partly on text-layer-only 1954 pages remain outside F-03's scope. This is disclosed in SUMMARY.json.,Image-check them in a later cycle.
