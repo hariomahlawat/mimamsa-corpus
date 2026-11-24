@@ -1,0 +1,54 @@
+case_id,title,held_status_c10,linked_groups,judgment_ids_in_corpus,disposition
+DCLR-SC-1982-001,Lt Col Prithi Pal Singh Bedi v Union of India,HELD,JG-211dbaf4e203,J-ebb86d4b3308eb89,IN_SCOPE
+DCLR-SC-2020-002,Union of India v Ex Sep Virendra Kumar,HELD,JG-0ff9d2fc8ef3,J-0ff9d2fc8ef36dfe,HELD_JUDGMENT_ID_WITHOUT_TEXT_LAYER_AT_COMMIT
+DCLR-SC-2019-003,Union of India v Lt Col Kuldeep Yadav,HELD,JG-b35f7f9e73f8,J-b35f7f9e73f85035,IN_SCOPE
+DCLR-SC-2022-004,State of Sikkim v Jasbir Singh,HELD,JG-c23ce0e33425,,HELD_BUT_NO_JUDGMENT_ID_IN_CORPUS_REGISTER
+DCLR-SC-2021-005,Lt Col Nitisha v Union of India,HELD,JG-937ee9880434,J-937ee98804344d1e,IN_SCOPE
+DCLR-SC-2019-006,Randhir Singh v Union of India,HELD,JG-14e2d11aa4b8,J-14e2d11aa4b88fe0,IN_SCOPE
+DCLR-SC-2026-007,Union of India v Sgt Girish Kumar (main judgment),HELD,JG-4f7ea3a451c6,J-da0304734666c366,IN_SCOPE
+DCLR-SC-2026-008,Union of India v Sgt Girish Kumar (clarification order),NOT_HELD,,,NOT_IN_SCOPE_NOT_HELD (NOT_HELD)
+DCLR-SC-2023-009,Union of India v Parashotam Dass,HELD,JG-483b70cbbe27,J-483b70cbbe272ccb,IN_SCOPE
+DCLR-SC-2016-010,Union of India v Vishav Priya Singh,HELD,JG-3a4ed1aba90b,J-3a4ed1aba90b8e35,IN_SCOPE
+DCLR-SC-2020-011,"Secretary, Ministry of Defence v Babita Puniya",HELD,JG-1de6c12b4749,J-1de6c12b474985bf,IN_SCOPE
+DCLR-SC-1983-N01,R Viswan and Others v Union of India and Others,HELD,JG-20a78326fc77,J-20a78326fc77d61b,IN_SCOPE
+DCLR-SC-1990-N02,S N Mukherjee v Union of India,HELD,JG-239c4e386f0e,J-239c4e386f0e201b,IN_SCOPE
+DCLR-SC-1997-N03,Major General Inder Jit Kumar v Union of India,NOT_HELD,,,NOT_IN_SCOPE_NOT_HELD (NOT_HELD)
+DCLR-SC-1997-N04,Union of India and Others v IC-14827 Major A Hussain,CANDIDATE_HELD_DATE+PARTY_ONLY (curated record has no other deterministic key matching),,,NOT_IN_SCOPE_NOT_HELD (CANDIDATE_HELD_DATE+PARTY_ONLY)
+DCLR-SC-2013-N05,Union of India and Others v Sanjay Jethi and Another,HELD,JG-1ae0783e5976,J-1ae0783e59765e93,IN_SCOPE
+DCLR-SC-2015-N06,Union of India and Others v Major General Shri Kant Sharma,HELD,JG-86de3643e66e,J-86de3643e66ec27b,IN_SCOPE
+DCLR-SC-1997-N07,L Chandra Kumar v Union of India,NOT_HELD_EXCLUDED_FROM_CRAWLER_STORE,,,NOT_IN_SCOPE_NOT_HELD (NOT_HELD_EXCLUDED_FROM_CRAWLER_STORE)
+DCLR-SC-2013-N08,Dharamvir Singh v Union of India and Others,HELD,JG-3056712cc761,J-a9ccc45cd8c45d4d,IN_SCOPE
+DCLR-SC-2015-N09,Union of India and Another v Rajbir Singh,HELD,JG-6b495f148365,J-c1ecdaeebf16bd67,IN_SCOPE
+DCLR-SC-2008-N10,Union of India and Others v Tarsem Singh,HELD,JG-f8a14181e47c,J-f8a14181e47c69e6,IN_SCOPE
+DCLR-SC-2020-N11,Union of India and Others v Lt Cdr Annie Nagaraja and Others,HELD,JG-9a2c4360e23b,J-9a2c4360e23bcd66,IN_SCOPE
+DCLR-SC-2014-N12,Anvar P V v P K Basheer and Others,HELD,JG-06f77a701073,,HELD_BUT_NO_JUDGMENT_ID_IN_CORPUS_REGISTER
+DCLR-SC-2020-N13,Arjun Panditrao Khotkar v Kailash Kushanrao Gorantyal and Others,HELD,JG-9c3d7880471f,,HELD_BUT_NO_JUDGMENT_ID_IN_CORPUS_REGISTER
+DCLR-SC-2000-N14,Union of India and Another v Charanjit S Gill and Others,CANDIDATE_HELD_DATE+PARTY_ONLY (curated record has no other deterministic key matching),,,NOT_IN_SCOPE_NOT_HELD (CANDIDATE_HELD_DATE+PARTY_ONLY)
+DCLR-SC-1999-N15,Union of India and Others v Himmat Singh Chahar,HELD,JG-76ec35cd7ab2,J-76ec35cd7ab232b5,IN_SCOPE
+DCLR-SC-2026-N16,Union of India and Others v Balakrishnan Mullikote (Ex Hav) and connected cases,HELD,JG-10e1954f2e39,,HELD_BUT_NO_JUDGMENT_ID_IN_CORPUS_REGISTER
+DCLR-SC-1990-A01,Major G S Sodhi v Union of India,NOT_HELD,,,NOT_IN_SCOPE_NOT_HELD (NOT_HELD)
+DCLR-SC-1991-A02,Ex Havildar Ratan Singh v Union of India,HELD,JG-2d33465ae5d2,J-2d33465ae5d25d91,IN_SCOPE
+DCLR-SC-2019-A03,Union of India v Wing Commander S P Rathore,HELD,JG-2f89730f3d0a,J-2f89730f3d0ae1c8,IN_SCOPE
+DCLR-SC-2019-A04,Rojer Mathew v South Indian Bank Ltd,NOT_HELD,,,NOT_IN_SCOPE_NOT_HELD (NOT_HELD)
+DCLR-SC-2012-A05,Union of India v Ravinder Kumar,NOT_HELD,,,NOT_IN_SCOPE_NOT_HELD (NOT_HELD)
+DCLR-SC-2003-A06,State of Maharashtra v Dr Praful B Desai,NOT_HELD,,,NOT_IN_SCOPE_NOT_HELD (NOT_HELD)
+DCLR-SC-1975-A07,Ous Kutilingal Achudan Nair v Union of India,HELD,JG-89fb3c415632,J-89fb3c41563267d9,IN_SCOPE
+DCLR-SC-2014-A08,Union of India v Ram Avtar,NOT_HELD,,,NOT_IN_SCOPE_NOT_HELD (NOT_HELD)
+DCLR-SC-2011-A09,Union of India v Jujhar Singh,HELD,JG-fbd764fee714,J-fbd764fee7148c15,IN_SCOPE
+DCLR-SC-2018-A10,Shafhi Mohammad v State of Himachal Pradesh,NOT_HELD,,,NOT_IN_SCOPE_NOT_HELD (NOT_HELD)
+DCLR-SC-1964-A11,Ram Swarup v Union of India,HELD,JG-88f84411abdb,J-88f84411abdb3028,HELD_JUDGMENT_ID_WITHOUT_TEXT_LAYER_AT_COMMIT
+DCLR-SC-2016-A12,Extra Judicial Execution Victim Families Association v Union of India,HELD,JG-15e63a38f9ee,J-15e63a38f9ee48f6,IN_SCOPE
+DCLR-SC-2005-L01,State (NCT of Delhi) v Navjot Sandhu,HELD,JG-3b75354869ff,J-3b75354869ffb928,HELD_JUDGMENT_ID_WITHOUT_TEXT_LAYER_AT_COMMIT
+DCLR-SC-2015-L02,Union of India v Manjeet Singh,"CANDIDATE_HELD_WSB_DECLARED_LINK_ONLY (curated record carries no date, case number or citation)",,,NOT_IN_SCOPE_NOT_HELD (CANDIDATE_HELD_WSB_DECLARED_LINK_ONLY)
+DCLR-SC-2015-L03,Union of India v Angad Singh Titaria,"CANDIDATE_HELD_WSB_DECLARED_LINK_ONLY (curated record carries no date, case number or citation)",,,NOT_IN_SCOPE_NOT_HELD (CANDIDATE_HELD_WSB_DECLARED_LINK_ONLY)
+DCLR-SC-2016-L04,Ex Hav Mani Ram Bhaira v Union of India,HELD,JG-cce64004ab57,J-cce64004ab57b974,HELD_JUDGMENT_ID_WITHOUT_TEXT_LAYER_AT_COMMIT
+DCLR-SC-2008-L05,Union of India v S R Dhingra,NOT_HELD_EXCLUDED_FROM_CRAWLER_STORE,,,NOT_IN_SCOPE_NOT_HELD (NOT_HELD_EXCLUDED_FROM_CRAWLER_STORE)
+DCLR-SC-2011-L06,K J S Buttar v Union of India,HELD,JG-16dcc0754399,J-16dcc07543999d26,IN_SCOPE
+DCLR-SC-1996-L07,Union of India v Baljit Singh,"CANDIDATE_HELD_WSB_DECLARED_LINK_ONLY (curated record carries no date, case number or citation)",,,NOT_IN_SCOPE_NOT_HELD (CANDIDATE_HELD_WSB_DECLARED_LINK_ONLY)
+DCLR-SC-2005-L08,Controller of Defence Accounts (Pension) v S Balachandran Nair,"CANDIDATE_HELD_WSB_DECLARED_LINK_ONLY (curated record carries no date, case number or citation)",,,NOT_IN_SCOPE_NOT_HELD (CANDIDATE_HELD_WSB_DECLARED_LINK_ONLY)
+DCLR-SC-2008-L09,Union of India v Surinder Singh Rathore,"CANDIDATE_HELD_WSB_DECLARED_LINK_ONLY (curated record carries no date, case number or citation)",,,NOT_IN_SCOPE_NOT_HELD (CANDIDATE_HELD_WSB_DECLARED_LINK_ONLY)
+DCLR-SC-2007-L10,Union of India v Keshar Singh,"CANDIDATE_HELD_WSB_DECLARED_LINK_ONLY (curated record carries no date, case number or citation)",,,NOT_IN_SCOPE_NOT_HELD (CANDIDATE_HELD_WSB_DECLARED_LINK_ONLY)
+DCLR-SC-1997-L11,Naga People’s Movement of Human Rights v Union of India,CANDIDATE_HELD_DATE+PARTY_ONLY (curated record has no other deterministic key matching),,,NOT_IN_SCOPE_NOT_HELD (CANDIDATE_HELD_DATE+PARTY_ONLY)
+DCLR-SC-1987-R01,Ranjit Thakur v Union of India and Others,HELD,JG-35b9c948fe62,J-35b9c948fe6254c6,IN_SCOPE
+DCLR-SC-1988-R02,Union of India v Ranjit Thakur (Review Order),NOT_HELD,,,NOT_IN_SCOPE_NOT_HELD (NOT_HELD)
+DCLR-SC-2003-R03,Union of India and Others v Shivendra Bikaram Singh,HELD,JG-676f2df94196,J-676f2df941964780,IN_SCOPE
