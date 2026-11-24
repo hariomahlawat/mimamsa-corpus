@@ -1,0 +1,117 @@
+{
+ "by_presence": {
+  "C5_WORKING_STORE_ONLY_NOT_IN_HF_OR_GITHUB|UNAVAILABLE": 48,
+  "HF_AND_GITHUB_RAW_DATA|DECLARED_HASH_ONLY": 4039,
+  "HF_ONLY|DECLARED_HASH_ONLY": 8,
+  "HF_ONLY|PATH_SIZE_MATCH_ONLY": 8
+ },
+ "capture": "SAMPLED_TEXT_MATCH: equal size and identical content at three offsets including the end; not a full byte comparison",
+ "distinct_copies": 4103,
+ "github_status": {
+  "BYTE_VERIFIED": 4039,
+  "UNAVAILABLE": 64
+ },
+ "hf_only": [
+  {
+   "hf_status": "DECLARED_HASH_ONLY",
+   "local": "BYTE_VERIFIED_LOCAL_IDENTICAL_COPY",
+   "sha256": "0ff9d2fc8ef3",
+   "title": "Union of India v Ex Sep Virendra Kumar"
+  },
+  {
+   "hf_status": "DECLARED_HASH_ONLY",
+   "local": "",
+   "sha256": "187bfd9e00f2",
+   "title": "Chandrabhan Sudam Sanap v State of Maharashtra"
+  },
+  {
+   "hf_status": "PATH_SIZE_MATCH_ONLY",
+   "local": "",
+   "sha256": "3a2e3a4f7066",
+   "title": "MML 1.doc"
+  },
+  {
+   "hf_status": "DECLARED_HASH_ONLY",
+   "local": "BYTE_VERIFIED_LOCAL_IDENTICAL_COPY",
+   "sha256": "3b75354869ff",
+   "title": "State (NCT of Delhi) v Navjot Sandhu @ Afsan Guru"
+  },
+  {
+   "hf_status": "DECLARED_HASH_ONLY",
+   "local": "BYTE_VERIFIED_LOCAL_IDENTICAL_COPY",
+   "sha256": "3f49a31464fe",
+   "title": "Union of India & Ors v Col NC Isaac (Retd.)"
+  },
+  {
+   "hf_status": "PATH_SIZE_MATCH_ONLY",
+   "local": "",
+   "sha256": "67d788b31e8e",
+   "title": "MML vol 3.doc.doc"
+  },
+  {
+   "hf_status": "PATH_SIZE_MATCH_ONLY",
+   "local": "",
+   "sha256": "73fd304227ca",
+   "title": "MML vol 2(AA).doc.doc"
+  },
+  {
+   "hf_status": "DECLARED_HASH_ONLY",
+   "local": "BYTE_VERIFIED_LOCAL_IDENTICAL_COPY",
+   "sha256": "7c32b8e87984",
+   "title": "Union of India v P S Gill"
+  },
+  {
+   "hf_status": "DECLARED_HASH_ONLY",
+   "local": "",
+   "sha256": "88f84411abdb",
+   "title": "Ram Sarup v Union of India"
+  },
+  {
+   "hf_status": "PATH_SIZE_MATCH_ONLY",
+   "local": "",
+   "sha256": "8bb17d8255ea",
+   "title": "MML vol 2(AR).doc-1.doc"
+  },
+  {
+   "hf_status": "DECLARED_HASH_ONLY",
+   "local": "",
+   "sha256": "adae1b11687f",
+   "title": "Ravishankar Tandon v State of Chhattisgarh"
+  },
+  {
+   "hf_status": "PATH_SIZE_MATCH_ONLY",
+   "local": "",
+   "sha256": "c8a791a1e3a4",
+   "title": "MML vol 2(AA).pdf"
+  },
+  {
+   "hf_status": "DECLARED_HASH_ONLY",
+   "local": "",
+   "sha256": "cce64004ab57",
+   "title": "Ex Hav Mani Ram Bhaira v Union of India and Ors"
+  },
+  {
+   "hf_status": "PATH_SIZE_MATCH_ONLY",
+   "local": "",
+   "sha256": "db2119182ed2",
+   "title": "MML 2.pdf"
+  },
+  {
+   "hf_status": "PATH_SIZE_MATCH_ONLY",
+   "local": "",
+   "sha256": "dfce01c1267d",
+   "title": "MML vol 3.pdf.pdf"
+  },
+  {
+   "hf_status": "PATH_SIZE_MATCH_ONLY",
+   "local": "",
+   "sha256": "ed1d8a7fc1f4",
+   "title": "MML vol 2(AR).doc.doc"
+  }
+ ],
+ "hf_status": {
+  "DECLARED_HASH_ONLY": 4047,
+  "PATH_SIZE_MATCH_ONLY": 8,
+  "UNAVAILABLE": 48
+ }
+}
