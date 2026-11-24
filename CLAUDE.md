@@ -159,3 +159,17 @@ Build in phases and stop for review after each. Start small: one source end to e
 Ask before installing system packages, before any real download run, and whenever a source needs login or blocks us. Keep a short PROGRESS.md log of what was done and what is next.
 
 Open questions to settle early: which machine runs the crawl and how much disk it has; whether the Prism OCR pipeline can be reused as a module; and who on the legal side reviews proposed supersession and overruling edges.
+
+## Product direction and future design (recorded 2026-11-24)
+
+Before planning future legal-knowledge, retrieval or application work, read:
+- `docs/README.md`
+- `docs/product/PRODUCT_VISION.md`
+- `docs/product/COMMANDER_USE_CASES.md`
+- `docs/architecture/LEGAL_KNOWLEDGE_ARCHITECTURE.md`
+- `docs/architecture/SCENARIO_ADVISORY_ENGINE.md`
+- `docs/architecture/decisions/ADR-0001-SCENARIO_DRIVEN_EVIDENCE_GROUNDED_PRODUCT.md`
+
+These record the owner's direction: the full legally accessible judgment corpus should remain searchable; Acts/Rules should link to judgments and propositions; and commanders should be able to ask ordinary-English, situation-based questions and receive evidenced, conditional guidance and checklists. The proposed technical designs are **not** implementation or legal-review approvals.
+
+The existing `docs/legal-audit/EVIDENCE_STANDARD.md` and `docs/legal-audit/SOURCE_AUTHORITY_POLICY.md` remain controlling for authenticity, temporal applicability, source conflicts and review. Preserve the original corpus, access restrictions, offline deployment requirement, and AUTH-LEDGER approval boundaries. Do not turn scenario examples into asserted current law without independently verified evidence.
