@@ -45,8 +45,9 @@ C10S = os.path.join(AUDIT, "C10-RECONCILIATION", "workstreams", "statutory")
 STATUS_AUTO = "AUTOMATED_DETECTED"
 STATUS_DOC = "DOCUMENTARY_CHECK_REQUIRED"
 STATUS_ADV = "LEGAL_INTERPRETATION_ADVISER_REVIEW"
-# "LEGALLY_VALIDATED" exists in the vocabulary but is never assigned by this tool.
-STATUS_LEVELS = [STATUS_AUTO, STATUS_DOC, STATUS_ADV, "LEGALLY_VALIDATED"]
+# Legal validation by an authorised legal adviser / JAG is outside this tool and is never written as a status value
+# (provenance control APR-1 forbids approval states in outputs).
+STATUS_LEVELS = [STATUS_AUTO, STATUS_DOC, STATUS_ADV]
 STRONG_RELATIONS = ("OVERRULES", "REVERSES", "QUESTIONS")
 BNS_SWITCH = "2024-07-01"
 # Instruments for which the amendment graph is shown to hold the complete amendment history. None is, on the C9/C10
@@ -2302,7 +2303,7 @@ class Builder:
                 "with_amendment_graph_edge_match": sum(1 for r in l if r["amendment_graph_edges"]),
                 "c10_crosscheck": dict(sorted(Counter(r["c10_crosscheck"] for r in l).items())),
             },
-            "status_vocabulary": STATUS_LEVELS, "legally_validated_assigned": 0,
+            "status_vocabulary": STATUS_LEVELS, "legal_validation": "outside this tool; never assigned",
         }
 
     def _sc_rate(self):

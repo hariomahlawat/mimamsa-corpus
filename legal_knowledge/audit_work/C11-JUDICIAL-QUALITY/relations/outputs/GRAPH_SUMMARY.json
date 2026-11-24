@@ -323,7 +323,7 @@
    "J-f14d5ae83261688f"
   ]
  },
- "legally_validated_assigned": 0,
+ "legal_validation": "outside this tool; never assigned",
  "pinned_inputs": {
   "amendment_graph_commit": "cfc52d57",
   "curated_commit": "21e73b83",
@@ -332,8 +332,7 @@
  "status_vocabulary": [
   "AUTOMATED_DETECTED",
   "DOCUMENTARY_CHECK_REQUIRED",
-  "LEGAL_INTERPRETATION_ADVISER_REVIEW",
-  "LEGALLY_VALIDATED"
+  "LEGAL_INTERPRETATION_ADVISER_REVIEW"
  ],
  "statute_links": {
   "by_instrument": {
