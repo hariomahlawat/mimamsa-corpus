@@ -35,7 +35,12 @@ def main():
     info = api.repo_info(repo_id=DATASET, repo_type="dataset")
     if not info.private:
         raise RuntimeError("Destination dataset is not private; refusing upload")
-    # Additive operations only. No wildcard deletion or replacement of crawler folders.
+    # Additive operations only. No wildcard deletion or replacement of crawler folders, and no overwrite of
+    # protected originals with different bytes (standing owner instruction, ADR-0004).
+    import sys
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from hf_protect import assert_additive
+    assert_additive(api, DATASET, [(f, f.relative_to(ROOT).as_posix()) for f in payload])
     from huggingface_hub import CommitOperationAdd
     operations = [
         CommitOperationAdd(

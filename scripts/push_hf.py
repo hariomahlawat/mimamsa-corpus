@@ -121,9 +121,15 @@ def main(argv: list[str] | None = None) -> int:
     api.create_repo(repo, repo_type="dataset", private=True, exist_ok=True)
     (DATA / "README.md").write_text(CARD, encoding="utf-8")
     uploaded = 0
+    from hf_protect import assert_additive, NEVER_SYNC_PATTERNS
     for folder, dest in steps:
+        # Additive only (standing owner instruction, ADR-0004): no delete_patterns. Files present on HF but not
+        # in this local tree (HF-only copies, preserved sources) must survive. Never overwrite protected originals.
+        local = [(f, f"{dest}/{f.relative_to(folder).as_posix()}") for f in folder.rglob("*")
+                 if f.is_file() and f.name != ".gitkeep" and not f.name.endswith(".part")]
+        assert_additive(api, repo, local)
         api.upload_folder(repo_id=repo, repo_type="dataset", folder_path=str(folder), path_in_repo=dest,
-                          ignore_patterns=[".gitkeep", "*.part"], delete_patterns=["*"],
+                          ignore_patterns=[".gitkeep", "*.part"],
                           commit_message=f"{dest} — {args.message}")
         uploaded += 1
     api.upload_folder(repo_id=repo, repo_type="dataset", folder_path=str(DATA), path_in_repo="data",
@@ -132,8 +138,11 @@ def main(argv: list[str] | None = None) -> int:
     # No raw manual uploads or JAG-approval claims are introduced by this sync.
     legal_dir = ROOT / "legal_knowledge"
     if legal_dir.is_dir():
+        lk_local = [(f, f"legal_knowledge/{f.relative_to(legal_dir).as_posix()}") for f in legal_dir.rglob("*")
+                    if f.is_file() and "preservation" not in f.relative_to(legal_dir).parts]
+        assert_additive(api, repo, lk_local)
         api.upload_folder(repo_id=repo, repo_type="dataset", folder_path=str(legal_dir),
-                          path_in_repo="legal_knowledge",
+                          path_in_repo="legal_knowledge", ignore_patterns=NEVER_SYNC_PATTERNS,
                           commit_message=f"legal knowledge review batches — {args.message}")
     api.upload_folder(repo_id=repo, repo_type="dataset", folder_path=str(ROOT / "schema"), path_in_repo="schema",
                       commit_message=f"schema — {args.message}")
