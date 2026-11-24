@@ -120,7 +120,7 @@ def main():
             for r in verify(root):
                 print(r)
             print(f"HEAD {L.head_value(root)}; frozen pins ok; ledger verified")
-    except (LedgerError, reader.R.RuleError, KeyError, TypeError, ValueError, SystemExit) as e:  # fail closed, uniformly (F-13)
+    except (LedgerError, reader.R.RuleError, KeyError, TypeError, ValueError, OSError, SystemExit) as e:  # fail closed, uniformly (F-13)
         print(f"LEDGER ERROR: {type(e).__name__}: {e}", file=sys.stderr)
         return 2
     return 0

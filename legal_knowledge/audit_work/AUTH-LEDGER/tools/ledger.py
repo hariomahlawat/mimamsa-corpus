@@ -71,10 +71,50 @@ def entry_digest(e):
     return sha256_text(json.dumps({k: e[k] for k in COLS if k not in DIGEST_EXCLUDE}, sort_keys=True, ensure_ascii=True))
 
 
+def read_regular_bytes(path):
+    """Read a ledger file only if it is a regular file reached without following a symbolic link (C11, review CA-01).
+
+    O_NOFOLLOW refuses a symlink at the final component, O_NONBLOCK keeps a FIFO from blocking the open, and fstat on
+    the opened descriptor refuses anything that is not a regular file (FIFO, socket, device, directory). Every OSError
+    becomes a LedgerError, so verify fails closed instead of hanging or raising a traceback."""
+    p = str(path)
+    try:
+        fd = os.open(p, os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0))
+    except OSError as e:
+        raise LedgerError(f"{p}: cannot open as a regular file ({e.__class__.__name__}: {e.strerror})")
+    try:
+        st = os.fstat(fd)
+        if not stat.S_ISREG(st.st_mode):
+            raise LedgerError(f"{p}: not a regular file (mode {stat.filemode(st.st_mode)})")
+        chunks = []
+        while True:
+            b = os.read(fd, 1 << 20)
+            if not b:
+                break
+            chunks.append(b)
+        return b"".join(chunks)
+    except OSError as e:
+        raise LedgerError(f"{p}: read failed ({e.__class__.__name__}: {e.strerror})")
+    finally:
+        os.close(fd)
+
+
+def read_regular_text(path):
+    try:
+        return read_regular_bytes(path).decode("utf-8")
+    except UnicodeDecodeError as e:
+        raise LedgerError(f"{path}: not UTF-8 text ({e})")
+
+
+def sha256_regular(path):
+    import hashlib
+    return hashlib.sha256(read_regular_bytes(path)).hexdigest()
+
+
 def read_manifest(root):
     """Verify the hash chain and HEAD; return the list of manifest dicts (index = version)."""
     p = Path(root) / "ledger/manifest.jsonl"
-    raw = p.read_text(encoding="utf-8").split("\n")
+    raw = read_regular_text(p).split("\n")
     if raw[-1] != "":
         raise LedgerError("manifest.jsonl must end with a newline")
     lines, prev = [], "GENESIS"
@@ -108,14 +148,14 @@ def read_manifest(root):
         lines.append(d)
     if not lines:
         raise LedgerError("manifest has no genesis line")
-    head = (Path(root) / "ledger/HEAD").read_text(encoding="utf-8").strip()
+    head = read_regular_text(Path(root) / "ledger/HEAD").strip()
     if head != f"{len(lines) - 1} {prev}":
         raise LedgerError(f"ledger/HEAD {head!r} does not match the manifest chain ({len(lines) - 1} {prev})")
     return lines
 
 
 def head_value(root):
-    return (Path(root) / "ledger/HEAD").read_text(encoding="utf-8").strip()
+    return read_regular_text(Path(root) / "ledger/HEAD").strip()
 
 
 def unexpected_files(root, lines):
@@ -126,8 +166,28 @@ def unexpected_files(root, lines):
         if d["file"]:
             known.add(d["file"])
         known |= set(d["decisions"]) | set(d["reviews"])
-    found = {str(p.relative_to(root)) for sub in ("ledger", "decisions") if (root / sub).is_dir() for p in (root / sub).rglob("*") if p.is_file()}
-    return sorted(found - known)
+    # C11, review CA-02: strict walk, never following links. A symlink (to a file or a directory), a non-regular file
+    # (FIFO, socket, device) or a directory that holds no accounted file is reported, as is any unaccounted file.
+    bad = set()
+    known_dirs = {str(Path(k).parent) for k in known}
+    for sub in ("ledger", "decisions"):
+        base = root / sub
+        if base.is_symlink() or not base.exists():
+            continue  # a symlinked base is refused by check_ledger_dirs; an absent decisions/ is allowed at version 0
+        for dirpath, dirnames, filenames in os.walk(base, followlinks=False):
+            for name in list(dirnames):
+                p = Path(dirpath) / name
+                r = str(p.relative_to(root))
+                if p.is_symlink() or not any(k == r or k.startswith(r + "/") for k in known_dirs):
+                    bad.add(r)
+            dirnames[:] = [n for n in dirnames if str((Path(dirpath) / n).relative_to(root)) not in bad]
+            for name in filenames:
+                p = Path(dirpath) / name
+                r = str(p.relative_to(root))
+                st = os.lstat(p)
+                if not stat.S_ISREG(st.st_mode) or r not in known:
+                    bad.add(r)
+    return sorted(bad)
 
 
 def check_ledger_dirs(root):
@@ -175,7 +235,7 @@ def unexpected_effective(root, expected):
 def _parse_record(path):
     """key: value lines; duplicate keys are an error (an ambiguous record is never read in the approving sense)."""
     out = {}
-    for n, line in enumerate(Path(path).read_text(encoding="utf-8").splitlines(), 1):
+    for n, line in enumerate(read_regular_text(path).splitlines(), 1):
         m = re.match(r"^\s*([A-Za-z_]+)\s*:\s*(.*)$", line)  # keys are case- and indentation-insensitive (re-review N-04)
         if not m:
             continue
@@ -209,7 +269,7 @@ def _check_record(root, line, kind, ref, sha_declared, entry):
     f = Path(root) / ref
     if not f.is_file():
         raise LedgerError(f"{entry['entry_id']}: {kind} record {ref} is not a committed file")
-    h = sha256_file(f)
+    h = sha256_regular(f)
     pins = line["decisions"] if kind == "decision" else line["reviews"]
     if h != sha_declared or pins.get(ref) != h:
         raise LedgerError(f"{entry['entry_id']}: {kind} record {ref} hash does not match the entry and the manifest pin")
@@ -398,13 +458,12 @@ def _apply_version(root, ctx, line, st):
     if set(line["decisions"]) & set(line["reviews"]):
         raise LedgerError(f"version {line['version']}: a file cannot be both a decision record and a review record")
     f = Path(root) / line["file"]
-    if not f.is_file() or sha256_file(f) != line["file_sha256"]:
+    if not f.is_file() or sha256_regular(f) != line["file_sha256"]:
         raise LedgerError(f"version {line['version']}: entry file missing or modified after it was recorded")
     for k, h in list(line["decisions"].items()) + list(line["reviews"].items()):
-        if not (Path(root) / k).is_file() or sha256_file(Path(root) / k) != h:
+        if not (Path(root) / k).is_file() or sha256_regular(Path(root) / k) != h:
             raise LedgerError(f"version {line['version']}: pinned record {k} missing or modified")
-    with open(f, newline="", encoding="utf-8") as fh:
-        header = fh.readline().rstrip("\r\n").split(",")
+    header = read_regular_text(f).split("\n", 1)[0].rstrip("\r").split(",")
     if header != COLS:
         raise LedgerError(f"version {line['version']}: version file header must equal the schema columns exactly (got {header})")
     entries = read_csv(f)
@@ -509,7 +568,7 @@ def apply_ledger(root, ctx, as_of=None, require_binding=True):
     as_of = len(lines) - 1 if as_of is None else as_of
     if not 0 <= as_of < len(lines):
         raise LedgerError(f"--as-of {as_of} outside 0..{len(lines) - 1}")
-    frozen_sha = sha256_file(Path(root) / "frozen_inputs.json")
+    frozen_sha = sha256_regular(Path(root) / "frozen_inputs.json")
     st = {"eff": {s: dict(r, origin="CALIBRATION-02 baseline") for s, r in ctx.baseline.items()},
           "live": {"BASELINE:" + s: {"sha256": s, "entry_type": "BASELINE"} for s in ctx.baseline},
           "by_sha": {s: "BASELINE:" + s for s in ctx.baseline}, "seen_ids": set(), "transitions": [], "withdrawn": []}
