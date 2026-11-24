@@ -261,6 +261,6 @@ The remaining items from §10 are unchanged: Legal Reviewer designation, allow-l
 
 **Administrative**
 - PR #36 closed as superseded: all 106 files are byte-identical in staging. Its branch is kept.
-- Findings: 622 rows; P1 11/11 closed and confirmed; 5 P2 deferred with recorded reasons and restricted to research use.
+- Findings: 648 rows (final; includes the PR #50 review); P1 11/11 closed and confirmed; 5 P2 deferred with recorded reasons and restricted to research use.
 
 **Cycle 13 planning:** `docs/planning/CYCLE13_EXECUTION_PLAN.md` and `docs/planning/OFFLINE_APP_TECHNOLOGY_ASSESSMENT.md`.

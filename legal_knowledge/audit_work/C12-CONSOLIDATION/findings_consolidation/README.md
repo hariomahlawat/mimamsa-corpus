@@ -25,17 +25,17 @@ The tool needs the staging commit `e0b3e7d2` locally (`git fetch origin legal-kn
 
 The status value `CLOSED_VERIFIED` is not read as an approval claim, because `approval_claims("CLOSED_VERIFIED")` returns no hit, so it was kept. It means only "closure confirmed by a later independent technical review". It is not a legal verification.
 
-## Counts: severity by status (622 rows; updated after the V3 holdout evaluation review)
+## Counts: severity by status (648 rows; final at Cycle 12 closeout, after the PR #50 review and confirmations)
 
 | Severity | CLOSED_VERIFIED | CLOSED_BY_AUTHOR_UNCONFIRMED | DEFERRED_WITH_REASON | OPEN_NO_RECORD | SUPERSEDED | NOT_A_DEFECT | Total |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | P1 | 11 | 0 | 0 | 0 | 0 | 0 | 11 |
-| P2 | 112 | 0 | 5 | 0 | 0 | 0 | 117 |
-| P3 | 186 | 27 | 47 | 12 | 5 | 0 | 277 |
-| INFO | 25 | 2 | 18 | 8 | 18 | 146 | 217 |
-| **Total** | 334 | 29 | 70 | 20 | 23 | 146 | 622 |
+| P2 | 116 | 0 | 5 | 0 | 0 | 0 | 121 |
+| P3 | 205 | 27 | 47 | 12 | 5 | 0 | 296 |
+| INFO | 25 | 2 | 18 | 8 | 18 | 149 | 220 |
+| **Total** | 357 | 29 | 70 | 20 | 23 | 149 | 648 |
 
-Update (coordinator, after `reviews/review_v3_holdout_eval.md` and `confirmation_v3eval_92f06e34.md`): C11 extraction F02 is now CLOSED_VERIFIED by the V3 holdout. C11 F05–F08 remain DEFERRED_WITH_REASON, with reasons updated. The eight V3-evaluation findings were added: F01 and F02 CLOSED_VERIFIED; the P3/INFO items are deferred or not a defect.
+Change since 622 rows: added the PR #50 review (R50-01..13) and its confirmation (R50C-01..03 plus restatements). All P1 and P2 findings in them are closed and confirmed.
 
 The rows are rows, not distinct issues. Re-reviews often restate earlier findings as status rows, and those status rows are counted here as rows in their own right. Examples:
 - AUTH-LEDGER `fable_rereview_findings_2e2df5ce.csv` F-01 to F-17;
