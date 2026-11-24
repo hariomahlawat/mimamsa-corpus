@@ -363,7 +363,9 @@ def build(repo):
                            c5_source_ids=s, review="RENDITION_LANGUAGE_OR_EDITION_REVIEW: a shared C5 source id does not prove the same legal text (see copy_role; review RC-06)"))
     by_doc = defaultdict(set)
     for p, r in raw_manifest.items():
-        key = r.get("doc_id") or r.get("parent_doc_id")
+        # review RR-01: a judgment row has no doc_id and its parent_doc_id is the court bucket (sci, hc-delhi ...), which is
+        # not a document identity; judgments are grouped by their own doc_id only (none carries more than one file)
+        key = r.get("doc_id") or (r.get("parent_doc_id") if r.get("category") != "judgment" else "")
         if key:
             by_doc[key].add(r["sha256"])
     for d, hs in sorted(by_doc.items()):

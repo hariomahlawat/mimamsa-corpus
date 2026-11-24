@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """C10 dataset-integrity checks on the crawler data/ tree at the pinned GitHub raw-data commit.
 
-The Hugging Face data/ tree has the same file counts (meta 4327, text 4318, sections 2998, raw 4039) and the same
-manifest sizes, but its bytes were not downloaded; every result here is therefore a statement about the GitHub copy.
+The Hugging Face data/ tree has the same file counts (meta 4327, text 4318, sections 2998, raw 4039); its
+raw_manifest.csv differs in size because the GitHub copy adds two columns (review RC-02, RR-05). Its bytes were not downloaded; every result here is therefore a statement about the GitHub copy.
 The Hugging Face copy is marked NOT_CHECKED at byte level in every output row.
 
 Checks: schema validation of every metadata, section and relation record (schemas at the same commit); manifest <->

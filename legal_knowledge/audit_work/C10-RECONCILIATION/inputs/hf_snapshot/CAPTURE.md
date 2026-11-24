@@ -17,7 +17,7 @@
 - **`upload_run_remote_verified.tsv`:** sha256 values that GitHub upload jobs logged after reading the file back from Hugging Face, with the Hugging Face revision where the log gives one.
 - **`hf_manifest_samples.json`:** the sampled comparison of the Hugging Face `data/` manifests with the GitHub copies.
 
-## Limits stated in every output (review RC-04: the HF revision is not pinned, and every CSV row that refers to HF carries `hf_snapshot = UNPINNED_LISTING_2026-11-24`)
+## Limits stated in every output (review RC-04: the HF revision is not pinned, and the per-copy CSVs, `UNIFIED_CORPUS_INVENTORY.csv` and `REPOSITORY_RECONCILIATION.csv`, carry `hf_snapshot = UNPINNED_LISTING_2026-11-24` on every row that refers to HF; the other outputs inherit the same unpinned snapshot through `RECONCILIATION_MANIFEST.json`, review RR-02)
 - Hugging Face byte integrity is `NOT_CHECKED`.
 - Path and size agreement plus a declared hash is not a byte check.
 - A full byte-level reconciliation needs a read-only Hugging Face token in the environment, a connector that can download, or the owner running `sha256sum -c data/SHA256SUMS` on a full download. The tool is written so that this evidence can be added as a further input.

@@ -1,0 +1,11 @@
+id,severity,statement,evidence,requested_action
+CA-01,P3,"FIFO at ledger/HEAD or ledger/manifest.jsonl still blocks verify; a directory at ledger/HEAD gives an uncaught IsADirectoryError (rc 1). OSError was not added to the fail-closed except (part of the AL-04 recommendation; not disclosed). Pre-existing","Clone probes: rc 124, rc 124, rc 1","lstat the two ledger files before reading; add OSError to the except tuple"
+CA-02,P3,"ledger/ and decisions/ contents are not walked strictly: symlinked HEAD, manifest.jsonl or README.md, and a stray FIFO, directory symlink, broken symlink or empty directory all verify rc 0. Chain content is still hash-checked. Pre-existing","Seven clone probes, all rc 0; unexpected_files uses rglob + is_file","Apply the no-follow, regular-files-only rule there, or document the limit"
+CA-03,P3,"AL-01 fix partly unpinned: mutants survive for decisions/ omitted from check_ledger_dirs, the non-directory branch removed, and the base.is_symlink guard removed from unexpected_effective","rev_heads/scripts/mut_al.py over the 29 C10Effective tests","Add three tests"
+CA-04,P3,"decisions/ may be absent and verify passes at version 0; not stated in the document","rm -rf decisions -> rc 0","State it or require the directory"
+CA-05,INFO,"AL-01 confirmed: symlinked or non-directory effective/, ledger/, decisions/ rejected rc 2 before the manifest is read","Seven clone probes",None
+CA-06,INFO,"AL-04 ordering confirmed; FIFO or directory at an expected name rejected rc 2 without hanging; 14 further stray kinds rejected; hard link accepted as documented","Clone probes",None
+CA-07,INFO,"AL-03 confirmed: all 8 earlier surviving mutants killed; 7 of 11 further mutants killed, 1 survivor equivalent","mut_al.py",None
+CA-08,INFO,"AL-02 confirmed: basis counts 99 / 12 / 1 over 112 rows; frozen equals effective on all rows","source_states.csv",None
+CA-09,INFO,"Ledger at version 0, HEAD 0 443c4bdf...6b6b, no entries; ledger/ and effective/ unchanged from 21e73b83","git diff; CLI verify rc 0",None
+CA-10,INFO,"218 tests pass on the venv (pytest) and python3.11 (unittest); no skips; committed review files byte-identical; delta limited to seven files","Clone runs",None

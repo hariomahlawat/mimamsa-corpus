@@ -82,6 +82,13 @@ class Reconciliation(unittest.TestCase):
             else:
                 self.assertIn(";", r["sha256s"])
 
+    def test_doc_id_groups_are_not_court_buckets(self):
+        # review RR-01: a judgment's parent_doc_id is the court bucket, not a document identity
+        rd = [r for r in rows(self.out["COPY_EQUIVALENCE_REGISTER.csv"]) if r["group_id"].startswith("RD-")]
+        self.assertTrue(rd)
+        self.assertFalse({r["identity"] for r in rd} & {"sci", "hc-delhi", "hc-ph", "hc-jkl", "hc-allahabad"})
+        self.assertTrue(all(int(r["copies"]) < 100 for r in rd))
+
     def test_manifest_pins_inputs_and_outputs(self):
         self.assertEqual(self.man["github"]["raw_data_commit"], br.RAW_DATA_COMMIT)
         for k, v in self.out.items():
