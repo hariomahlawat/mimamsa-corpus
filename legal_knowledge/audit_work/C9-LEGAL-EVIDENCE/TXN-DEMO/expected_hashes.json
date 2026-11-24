@@ -1,0 +1,532 @@
+{
+ "asof.0": {
+  "effective_sha256": "c02eb9b291da759460d104c8c491dd159df40f1ad1b964d669206973b89cb4b7",
+  "files": {
+   "corpus_crosswalk.csv": "5fae890a493eea2050488a05e54547c1f537f346e348b8e55d7c5fc12f95efa8",
+   "coverage_summary.json": "bfbd848cf8923add75fa9dcb59c74dc26c10b63e932d6986a145bede5edb0bda",
+   "newly_withdrawn.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+   "source_copy_register.csv": "415c85f4a2434dfbdd9e0ea0c35a3c0abbb9d64b9481c8b043c8256d145ff73b",
+   "source_master_register.csv": "d4c4b9b21bcf18c607856873bb2beb9aa7db5bc5141ee2b8848c5f7be4104261",
+   "source_states.csv": "8b720c87d30af5f26bf9c6a81c69a70efe897ff9c0f16e56aff2310c9ff92494",
+   "transitions.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "newly_withdrawn": [],
+  "transitions": []
+ },
+ "asof.1": {
+  "effective_sha256": "1e37eeb5fedc6681e0eb9099828275bafa9bca340329ed0f5328c0961b49ede7",
+  "files": {
+   "corpus_crosswalk.csv": "5fae890a493eea2050488a05e54547c1f537f346e348b8e55d7c5fc12f95efa8",
+   "coverage_summary.json": "bfbd848cf8923add75fa9dcb59c74dc26c10b63e932d6986a145bede5edb0bda",
+   "newly_withdrawn.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+   "source_copy_register.csv": "415c85f4a2434dfbdd9e0ea0c35a3c0abbb9d64b9481c8b043c8256d145ff73b",
+   "source_master_register.csv": "d4c4b9b21bcf18c607856873bb2beb9aa7db5bc5141ee2b8848c5f7be4104261",
+   "source_states.csv": "8b720c87d30af5f26bf9c6a81c69a70efe897ff9c0f16e56aff2310c9ff92494",
+   "transitions.json": "f4ff98b529eca1d56349698707e9cc8d517604c89b4d8fe5610dccf0dc1411d6"
+  },
+  "newly_withdrawn": [],
+  "transitions": [
+   {
+    "after": "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY",
+    "before": "NO_ROW",
+    "bound_by": "",
+    "effect": "PENDING_REPOSITORY_BINDING",
+    "entry_id": "AL-v0001-001",
+    "entry_type": "ADD",
+    "version": 1
+   },
+   {
+    "after": "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "before": "NO_ROW",
+    "bound_by": "",
+    "effect": "PENDING_REPOSITORY_BINDING",
+    "entry_id": "AL-v0001-002",
+    "entry_type": "ADD",
+    "version": 1
+   }
+  ]
+ },
+ "asof.2": {
+  "effective_sha256": "e4c3582567bd5cb788c194f4d929d85c2f7912d9dd6bf1cff3f6cfeb139177a9",
+  "files": {
+   "corpus_crosswalk.csv": "c0dc08fe79e4e88f6f6bcc1efcd194aabbb68dfef9405f94d85125f15f010d2c",
+   "coverage_summary.json": "e98b2b7e8e0bed7aee7e311ccb3db3ae01a13467d4a2a140ab24e9589848d901",
+   "newly_withdrawn.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+   "source_copy_register.csv": "f64b9ac7d7449bf2d3d0d5a710635f986cf387aa2cf461c13bc1df228a40e5ca",
+   "source_master_register.csv": "6b6482e525774e3e13105d0b914e81757c982e1d6cf334de158b9ba57394b5c7",
+   "source_states.csv": "4663f7b1e650daeb7c12cc0900391b7b9217d7b334763017cb2098411d0bf010",
+   "transitions.json": "d8a335b71c087e6e9406dac00196b05634c084afd1d43e71bb29936c65d79800"
+  },
+  "newly_withdrawn": [],
+  "transitions": [
+   {
+    "after": "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY",
+    "before": "NO_ROW",
+    "bound_by": 2,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0001-001",
+    "entry_type": "ADD",
+    "version": 1
+   },
+   {
+    "after": "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "before": "NO_ROW",
+    "bound_by": 2,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0001-002",
+    "entry_type": "ADD",
+    "version": 1
+   }
+  ]
+ },
+ "asof.3": {
+  "effective_sha256": "9584d9e4eca1c21fa70ddb80b7feffcb5b69d32a1f4fb72bc1cccddbe712e1e2",
+  "files": {
+   "corpus_crosswalk.csv": "c0dc08fe79e4e88f6f6bcc1efcd194aabbb68dfef9405f94d85125f15f010d2c",
+   "coverage_summary.json": "e98b2b7e8e0bed7aee7e311ccb3db3ae01a13467d4a2a140ab24e9589848d901",
+   "newly_withdrawn.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+   "source_copy_register.csv": "f64b9ac7d7449bf2d3d0d5a710635f986cf387aa2cf461c13bc1df228a40e5ca",
+   "source_master_register.csv": "6b6482e525774e3e13105d0b914e81757c982e1d6cf334de158b9ba57394b5c7",
+   "source_states.csv": "4663f7b1e650daeb7c12cc0900391b7b9217d7b334763017cb2098411d0bf010",
+   "transitions.json": "a999f8b8e63e3bfb44d868ae696d3a819a7befd04f42d267a45095424ef6e713"
+  },
+  "newly_withdrawn": [],
+  "transitions": [
+   {
+    "after": "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY",
+    "before": "NO_ROW",
+    "bound_by": 2,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0001-001",
+    "entry_type": "ADD",
+    "version": 1
+   },
+   {
+    "after": "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "before": "NO_ROW",
+    "bound_by": 2,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0001-002",
+    "entry_type": "ADD",
+    "version": 1
+   },
+   {
+    "after": "PROVENANCE_DOCUMENTED/NON_PRIMARY_OFFICIAL_PUBLICATION_COPY",
+    "before": "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "bound_by": "",
+    "effect": "PENDING_REPOSITORY_BINDING",
+    "entry_id": "AL-v0003-001",
+    "entry_type": "CORRECTION",
+    "version": 3
+   }
+  ]
+ },
+ "asof.4": {
+  "effective_sha256": "7a7d0260bd99a612fd35cc2db3ec27861dd1f0ebefef134d1f7a4a7e39d5a94e",
+  "files": {
+   "corpus_crosswalk.csv": "c0dc08fe79e4e88f6f6bcc1efcd194aabbb68dfef9405f94d85125f15f010d2c",
+   "coverage_summary.json": "53d765a8e98a019eb991d492eaf9dee353a73cefc8d9a38629534d782d899b96",
+   "newly_withdrawn.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+   "source_copy_register.csv": "bf0e4a7436374d03813b1526506e34ae883ed9643732d28e773afd2b2de2d96f",
+   "source_master_register.csv": "ef0af1f2006eae7bf8313136b6f05222c870cf1a5daba4aab1ea42e984c2a566",
+   "source_states.csv": "2a6458757abbccb437b1457eee3bc31ead5c312f8e754bd8ea11a46997a58cc2",
+   "transitions.json": "ac1f9716062c8dd1311b5613ede97485ff71de7bdb6b2e6ee58b33a53937c00e"
+  },
+  "newly_withdrawn": [],
+  "transitions": [
+   {
+    "after": "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY",
+    "before": "NO_ROW",
+    "bound_by": 2,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0001-001",
+    "entry_type": "ADD",
+    "version": 1
+   },
+   {
+    "after": "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "before": "NO_ROW",
+    "bound_by": 2,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0001-002",
+    "entry_type": "ADD",
+    "version": 1
+   },
+   {
+    "after": "PROVENANCE_DOCUMENTED/NON_PRIMARY_OFFICIAL_PUBLICATION_COPY",
+    "before": "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "bound_by": 4,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0003-001",
+    "entry_type": "CORRECTION",
+    "version": 3
+   }
+  ]
+ },
+ "asof.5": {
+  "effective_sha256": "f71302df39d731515307b9b678c4d8132fa965bd72d1e87c965f476d3d2e2d98",
+  "files": {
+   "corpus_crosswalk.csv": "c0dc08fe79e4e88f6f6bcc1efcd194aabbb68dfef9405f94d85125f15f010d2c",
+   "coverage_summary.json": "53d765a8e98a019eb991d492eaf9dee353a73cefc8d9a38629534d782d899b96",
+   "newly_withdrawn.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+   "source_copy_register.csv": "bf0e4a7436374d03813b1526506e34ae883ed9643732d28e773afd2b2de2d96f",
+   "source_master_register.csv": "ef0af1f2006eae7bf8313136b6f05222c870cf1a5daba4aab1ea42e984c2a566",
+   "source_states.csv": "2a6458757abbccb437b1457eee3bc31ead5c312f8e754bd8ea11a46997a58cc2",
+   "transitions.json": "1b0d76d4e41774e7564be2254743ca6ab27e29b5b377352b51fcb8dd038f2809"
+  },
+  "newly_withdrawn": [],
+  "transitions": [
+   {
+    "after": "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY",
+    "before": "NO_ROW",
+    "bound_by": 2,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0001-001",
+    "entry_type": "ADD",
+    "version": 1
+   },
+   {
+    "after": "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "before": "NO_ROW",
+    "bound_by": 2,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0001-002",
+    "entry_type": "ADD",
+    "version": 1
+   },
+   {
+    "after": "PROVENANCE_DOCUMENTED/NON_PRIMARY_OFFICIAL_PUBLICATION_COPY",
+    "before": "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "bound_by": 4,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0003-001",
+    "entry_type": "CORRECTION",
+    "version": 3
+   },
+   {
+    "after": "NO_ROW",
+    "before": "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY",
+    "bound_by": "",
+    "effect": "PENDING_REPOSITORY_BINDING",
+    "entry_id": "AL-v0005-001",
+    "entry_type": "WITHDRAW",
+    "version": 5
+   }
+  ]
+ },
+ "asof.6": {
+  "effective_sha256": "2a2c009b9e9e2ee0d43f9fcc91ede860dc85a6a26b31e87374562508c9384f80",
+  "files": {
+   "corpus_crosswalk.csv": "5fae890a493eea2050488a05e54547c1f537f346e348b8e55d7c5fc12f95efa8",
+   "coverage_summary.json": "7d3b392a4c1ad71971c1a0476e187d29416484f82bd4e993e49ba286c28bd38e",
+   "newly_withdrawn.json": "24280d18e119657f6781d5c4d937e6a14dfa81ed761c5d0d2d0d6d11a18f5580",
+   "source_copy_register.csv": "432691980ca4b3c8680fc765664aacd7a7e2b7fdebb46cdd9dfd26f0223cc69d",
+   "source_master_register.csv": "e0d24d832af084ea8858680c175fc1471d98ae95a4b59660bf9a7d8681303879",
+   "source_states.csv": "592983883f852e79fbb8c58f2ae8285b0cc6ef18b1a60a9fb6190fb444f86220",
+   "transitions.json": "3393603e47d39f7bd2586e0613f84bd6660965d82362f041096f619f6b49545b"
+  },
+  "newly_withdrawn": [
+   "AL-v0005-001"
+  ],
+  "transitions": [
+   {
+    "after": "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY",
+    "before": "NO_ROW",
+    "bound_by": 2,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0001-001",
+    "entry_type": "ADD",
+    "version": 1
+   },
+   {
+    "after": "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "before": "NO_ROW",
+    "bound_by": 2,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0001-002",
+    "entry_type": "ADD",
+    "version": 1
+   },
+   {
+    "after": "PROVENANCE_DOCUMENTED/NON_PRIMARY_OFFICIAL_PUBLICATION_COPY",
+    "before": "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "bound_by": 4,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0003-001",
+    "entry_type": "CORRECTION",
+    "version": 3
+   },
+   {
+    "after": "NO_ROW",
+    "before": "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY",
+    "bound_by": 6,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0005-001",
+    "entry_type": "WITHDRAW",
+    "version": 5
+   }
+  ]
+ },
+ "asof.7": {
+  "effective_sha256": "a56c9793749afa1db956721a13b3f99d04b87cbecba372bc28989a63ce36eeed",
+  "files": {
+   "corpus_crosswalk.csv": "5fae890a493eea2050488a05e54547c1f537f346e348b8e55d7c5fc12f95efa8",
+   "coverage_summary.json": "7d3b392a4c1ad71971c1a0476e187d29416484f82bd4e993e49ba286c28bd38e",
+   "newly_withdrawn.json": "24280d18e119657f6781d5c4d937e6a14dfa81ed761c5d0d2d0d6d11a18f5580",
+   "source_copy_register.csv": "432691980ca4b3c8680fc765664aacd7a7e2b7fdebb46cdd9dfd26f0223cc69d",
+   "source_master_register.csv": "e0d24d832af084ea8858680c175fc1471d98ae95a4b59660bf9a7d8681303879",
+   "source_states.csv": "592983883f852e79fbb8c58f2ae8285b0cc6ef18b1a60a9fb6190fb444f86220",
+   "transitions.json": "fb823fdc6d0aad20e31ba224a7d91c1b27f02004894342abc9f4f06992677614"
+  },
+  "newly_withdrawn": [
+   "AL-v0005-001"
+  ],
+  "transitions": [
+   {
+    "after": "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY",
+    "before": "NO_ROW",
+    "bound_by": 2,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0001-001",
+    "entry_type": "ADD",
+    "version": 1
+   },
+   {
+    "after": "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "before": "NO_ROW",
+    "bound_by": 2,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0001-002",
+    "entry_type": "ADD",
+    "version": 1
+   },
+   {
+    "after": "PROVENANCE_DOCUMENTED/NON_PRIMARY_OFFICIAL_PUBLICATION_COPY",
+    "before": "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "bound_by": 4,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0003-001",
+    "entry_type": "CORRECTION",
+    "version": 3
+   },
+   {
+    "after": "NO_ROW",
+    "before": "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY",
+    "bound_by": 6,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0005-001",
+    "entry_type": "WITHDRAW",
+    "version": 5
+   },
+   {
+    "after": "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY",
+    "before": "NO_ROW",
+    "bound_by": "",
+    "effect": "PENDING_REPOSITORY_BINDING",
+    "entry_id": "AL-v0007-001",
+    "entry_type": "ADD",
+    "version": 7
+   }
+  ]
+ },
+ "asof.8": {
+  "effective_sha256": "4375cf61319a5609a4fc477c3546377cd172f3796c4cda3639249db247f519d7",
+  "files": {
+   "corpus_crosswalk.csv": "c0dc08fe79e4e88f6f6bcc1efcd194aabbb68dfef9405f94d85125f15f010d2c",
+   "coverage_summary.json": "53d765a8e98a019eb991d492eaf9dee353a73cefc8d9a38629534d782d899b96",
+   "newly_withdrawn.json": "24280d18e119657f6781d5c4d937e6a14dfa81ed761c5d0d2d0d6d11a18f5580",
+   "source_copy_register.csv": "bf0e4a7436374d03813b1526506e34ae883ed9643732d28e773afd2b2de2d96f",
+   "source_master_register.csv": "ef0af1f2006eae7bf8313136b6f05222c870cf1a5daba4aab1ea42e984c2a566",
+   "source_states.csv": "dd51cef8e55fd0c2ee8cff6debb1711634b540bea52e615e6ca68cd79ea6a8c0",
+   "transitions.json": "24954cfb86b337215e1ed072fd5c6934e5d907038c035e50397b466a71f8dc79"
+  },
+  "newly_withdrawn": [
+   "AL-v0005-001"
+  ],
+  "transitions": [
+   {
+    "after": "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY",
+    "before": "NO_ROW",
+    "bound_by": 2,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0001-001",
+    "entry_type": "ADD",
+    "version": 1
+   },
+   {
+    "after": "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "before": "NO_ROW",
+    "bound_by": 2,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0001-002",
+    "entry_type": "ADD",
+    "version": 1
+   },
+   {
+    "after": "PROVENANCE_DOCUMENTED/NON_PRIMARY_OFFICIAL_PUBLICATION_COPY",
+    "before": "PROVENANCE_DOCUMENTED/PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE",
+    "bound_by": 4,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0003-001",
+    "entry_type": "CORRECTION",
+    "version": 3
+   },
+   {
+    "after": "NO_ROW",
+    "before": "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY",
+    "bound_by": 6,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0005-001",
+    "entry_type": "WITHDRAW",
+    "version": 5
+   },
+   {
+    "after": "PROVENANCE_DOCUMENTED/PRIMARY_OFFICIAL_COURT_COPY",
+    "before": "NO_ROW",
+    "bound_by": 8,
+    "effect": "APPLIED",
+    "entry_id": "AL-v0007-001",
+    "entry_type": "ADD",
+    "version": 7
+   }
+  ]
+ },
+ "cli.build.asof1": {
+  "rc": 0,
+  "stderr": "",
+  "stdout": "built as of version 1 -> $WORK/cli_asof_1"
+ },
+ "cli.build.asof2": {
+  "rc": 0,
+  "stderr": "",
+  "stdout": "built as of version 2 -> $WORK/cli_asof_2"
+ },
+ "cli.verify.final": {
+  "rc": 0,
+  "stderr": "",
+  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nv0004 ok\nv0005 ok\nv0006 ok\nv0007 ok\nv0008 ok\nHEAD 8 65fd290920c93ff6da9f0e7ea2da28a93367a00a513bb460ef7828048f25c1b6; frozen pins ok; ledger verified"
+ },
+ "cli.verify.v0": {
+  "rc": 0,
+  "stderr": "",
+  "stdout": "v0000 ok\nHEAD 0 443c4bdf348b2a1bcd603d2701f097aa90a8155efd43c10760f5fd86c76c6b6b; frozen pins ok; ledger verified"
+ },
+ "cli.verify.v1": {
+  "rc": 0,
+  "stderr": "",
+  "stdout": "v0000 ok\nv0001 ok\nHEAD 1 7c3753280adfae890805b797cd04bab3f75a7955a2c5849fe071073c9d450fa6; frozen pins ok; ledger verified"
+ },
+ "cli.verify.v2": {
+  "rc": 0,
+  "stderr": "",
+  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nHEAD 2 01f9809f7651535da85d2bdb0a0a34a2a2e7fd1b981913cc7526b4329d227635; frozen pins ok; ledger verified"
+ },
+ "cli.verify.v3": {
+  "rc": 0,
+  "stderr": "",
+  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nHEAD 3 0b347a640f94194ebea455f88d84acf1c99249fac5822181d9dfd779554965db; frozen pins ok; ledger verified"
+ },
+ "cli.verify.v4": {
+  "rc": 0,
+  "stderr": "",
+  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nv0004 ok\nHEAD 4 77b7f5629bd6deb026452b7d29a97f5eb2b4d3ba5f40137f97051c86c2ea7780; frozen pins ok; ledger verified"
+ },
+ "cli.verify.v5": {
+  "rc": 0,
+  "stderr": "",
+  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nv0004 ok\nv0005 ok\nHEAD 5 6be163accc2e533dc772520ddd9198c2115ab5008ead3c10d9cd395e780595cc; frozen pins ok; ledger verified"
+ },
+ "cli.verify.v6": {
+  "rc": 0,
+  "stderr": "",
+  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nv0004 ok\nv0005 ok\nv0006 ok\nHEAD 6 7c189d50a9c0a62058639d9330090fb21e87c50ff66f2fc454477f7b9222e14a; frozen pins ok; ledger verified"
+ },
+ "cli.verify.v7": {
+  "rc": 0,
+  "stderr": "",
+  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nv0004 ok\nv0005 ok\nv0006 ok\nv0007 ok\nHEAD 7 bff9cbe014fef432c76d39e8d31db38e14d074ca90dc71f757bbabec74b86963; frozen pins ok; ledger verified"
+ },
+ "cli.verify.v8": {
+  "rc": 0,
+  "stderr": "",
+  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nv0004 ok\nv0005 ok\nv0006 ok\nv0007 ok\nv0008 ok\nHEAD 8 65fd290920c93ff6da9f0e7ea2da28a93367a00a513bb460ef7828048f25c1b6; frozen pins ok; ledger verified"
+ },
+ "commit.genesis": "d0d12640f4a05e5887f0eff819ba9e4ede369549",
+ "commit.v0001.merge": "0cd04ee8eaa74710ca5333b837d4acec1e510c2e",
+ "commit.v0001.reviewed_head": "c7c078da8f4e0a2d4641c9bedf1691760f0a8332",
+ "commit.v0002.head": "7f7015ab69e1b893332cdf684f81e7948a3d8b66",
+ "commit.v0002.merge": "3cfacffd55d984282b7a6fe83627af6e52fe017a",
+ "commit.v0003": [
+  "cb7a40157194f36482547ca3ce4434e31b525a71",
+  "3b88a8280e1cad05b2fc5169ee38b67f8f17a762"
+ ],
+ "commit.v0004": [
+  "9e4e353de7c8d20cb70348da826e2c79a72b45fb",
+  "1154f97d9247fac6cf194e92a53f684dceff5adb"
+ ],
+ "commit.v0005": [
+  "42a1e6acffbf7af8c7c3c5774a457c3690857f5e",
+  "947adfe916e876323dcb2efbe7d405c95434714e"
+ ],
+ "commit.v0006": [
+  "e5faeb2054cb87ba28fec516be874d94955a5b6d",
+  "06d9033bc29d90ef9c0479b8dea721d75befbacb"
+ ],
+ "commit.v0007": [
+  "8a941a39317deed5a5175909e05dd52184eaba4c",
+  "ec28dcd2e52c9827cda73963e017d6ff1d7859f6"
+ ],
+ "commit.v0008": [
+  "992854a79af222fe77c25374cf0444d5549a37eb",
+  "66a966612c3a3d7e5d2dc12ffc9816cbe8ea1a16"
+ ],
+ "ledger.HEAD.final": "8 65fd290920c93ff6da9f0e7ea2da28a93367a00a513bb460ef7828048f25c1b6",
+ "ledger.manifest_sha256.final": "0e8c9d3ef529f18e7bd019fc98a52c7ed52d838a53d30bf0b4057d2197e013f4",
+ "neg.agent_owner": {
+  "rc": 2,
+  "stderr": "LEDGER ERROR: LedgerError: AL-v0001-001: decided_by names an AI model or agent; an agent's statement is never owner approval",
+  "stdout": ""
+ },
+ "neg.bind_fast_forward": {
+  "rc": 2,
+  "stderr": "LEDGER ERROR: LedgerError: binding: merge_commit equals reviewed_head (a fast-forward is not a reviewed merge)",
+  "stdout": ""
+ },
+ "neg.bind_non_merge": {
+  "rc": 2,
+  "stderr": "LEDGER ERROR: LedgerError: version 2: merge_commit has 0 parent(s); an ordinary two-parent merge is required",
+  "stdout": ""
+ },
+ "neg.decision_before_review": {
+  "rc": 2,
+  "stderr": "LEDGER ERROR: LedgerError: AL-v0001-001: the owner decision (2026-11-22) predates the independent review (2026-11-23)",
+  "stdout": ""
+ },
+ "neg.tampered_record": {
+  "rc": 2,
+  "stderr": "LEDGER ERROR: LedgerError: version 1: pinned record decisions/D-v0001.md missing or modified",
+  "stdout": ""
+ },
+ "neg.unbound_then_entry": {
+  "rc": 2,
+  "stderr": "LEDGER ERROR: LedgerError: version 2: entry version appended before version 1 was bound",
+  "stdout": ""
+ },
+ "neg.withdraw_of_correction": {
+  "rc": 2,
+  "stderr": "LEDGER ERROR: LedgerError: AL-v0005-001: a WITHDRAW may target only an ADD or a BASELINE row; revert a CORRECTION with a new CORRECTION (F-09)",
+  "stdout": ""
+ },
+ "real_ledger.HEAD": "0 443c4bdf348b2a1bcd603d2701f097aa90a8155efd43c10760f5fd86c76c6b6b",
+ "source_package_tools_sha256": {
+  "auth_ledger.py": "ec76fc6d0077d7bab9a0a2bf26f6e441e59466336515e079ac2f0714791ab095",
+  "binding.py": "1698371b796dcd446af83fbda18527af5fdf6d2f901f55fbd333373470d56a27",
+  "common.py": "30142aee2b6d954d5b9bc46ec7a69a1a86897ab050cdc0478ce4fe2072fe47f2",
+  "ledger.py": "3cb02b6c7f936d4999b8b850efb27dd89ea5f72d10fa60627c2dd4b302789064",
+  "pins.py": "5a69805d0ca13954387d265bb887909f3ffdc92d5edb7c39c957e36ee043ee5e",
+  "reader.py": "44d9903bc7a25dda3ef1216e1ccc8bb4882204fbd208f1e3304474e28c27fff2",
+  "rules_v1.py": "2cf67f8b0a265ea93708879425168a4433ec62656395d06216268adc84d11eef",
+  "strength.py": "b9eeedbced34048b87ae46d7a47f2ca1d7190b462182649af9bfcb3e3566b95d",
+  "urlcheck.py": "81ddc23f8fc17ab53bbd53e7ac3089de51e809f8c9b303f2ec6e2812d0041c79"
+ }
+}
