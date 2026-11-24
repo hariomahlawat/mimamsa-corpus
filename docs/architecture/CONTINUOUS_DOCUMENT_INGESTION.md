@@ -13,6 +13,8 @@ There are exactly **two functional app roles**:
 
 There is no rank-based or JAG-only research access, private user-library model or per-document viewer restriction within the published corpus. **Only published material is shared.** Pending, rejected, quarantined, failed and withdrawn source materials are Admin-managed and not exposed to ordinary users.
 
+**Exception explicitly not considered a source upload:** every admitted User and Admin may submit an existing charge-sheet, draft form or procedural file to a *temporary Document Studio review session*. Such working files do not enter the source vault, common search index, embedding store, shared graph or template registry. The Admin-only policy applies to **persistent shared-source publication and management**, not ordinary temporary working-file processing. See [Document Studio](DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md).
+
 Only sources suitable for the entire deployment audience may be published. Source markings must be retained for provenance and assessed before publication. This is not a request to acquire restricted sources.
 
 ## 2. Admin ingestion and publication lifecycle
@@ -78,6 +80,7 @@ Once baseline controls are in place, prioritise **working upload → automated e
 ## 7. Acceptance tests
 
 - An ordinary User can open every published judgment, SOP and summary, use all research/advisory features and inspect published candidate graph links.
+- A User can submit a temporary draft for Document Studio audit, but cannot turn that draft into an Admin source-ingestion job, even by API manipulation.
 - A User cannot upload, create jobs, review staged files, publish, withdraw, replace or reprocess through UI or direct API; attempted writes have no effect.
 - Admin uploads a valid SOP; the original and candidate graph relationships are processed and reviewable in staging but not publicly searchable.
 - Admin publishes after reviewing quality/eligibility; the source and labelled candidate links appear consistently to all users.

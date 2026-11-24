@@ -22,13 +22,15 @@ The owner therefore retains **unrestricted shared research access** while limiti
 7. **Deployment-wide eligibility.** If a document's marking or restrictions make it unsuitable for the whole admitted audience, do not publish it; preserve applicable provenance. Such material cannot leak via ordinary-user snippets, embeddings, graphs or generated answers.
 8. **Capability first, minimum cyber hygiene from day one.** Implement usable Admin ingestion, automation, publication and full-corpus search ahead of elaborate hardening. Retain simple user admission/authentication, server-side mutation checks, safe file handling and parser isolation, integrity, audit history, backups and offline network boundary.
 9. **Session-versus-source distinction.** Normal legal questions and user incident facts do not silently enter the common knowledge base. Only Admin can intentionally submit a document for publication.
+10. **Document Studio working files are not shared-source uploads.** Both Admin and User may provide a prepared charge-sheet or other draft for temporary audit or generate a working form. These files are session inputs/outputs, not source records; they cannot enter the global search/graph/template registry unless separately ingested and published through the Admin pathway. See [ADR-0003](ADR-0003-DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md).
 
 ## Functional access matrix
 
 | Operation | Admin | User |
 | --- | --- | --- |
 | Search/open all published judgments, policies, SOPs and legal sources | Yes | Yes |
-| Ask legal questions, examine graphs, summaries, lessons and checklists | Yes | Yes |
+| Ask legal questions, examine graphs, summaries, lessons and checklists | Yes | Yes | 
+| Create working documents, upload an existing draft for temporary audit and download a reviewed version | Yes | Yes |
 | Upload a new source for ingestion | Yes | No |
 | Inspect staged, rejected or failed source-ingestion jobs | Yes | No |
 | Retry or manually reprocess a source | Yes | No |
@@ -42,6 +44,7 @@ A withdrawn source should remain available in the Admin audit trail and preserve
 ## Alternatives rejected
 
 - General-user uploads into the shared legal corpus.
+- Treating temporary working-document review as equivalent to publishing legal source material.
 - Granular rank/JAG-based permissions or per-document user viewing rules.
 - Treating publication as automatic legal authentication or validity.
 - Hand-authoring all graph relationships and search indexes for each upload.

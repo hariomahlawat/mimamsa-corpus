@@ -18,6 +18,8 @@ A commander asks “My sepoy was found drunk on duty; what should I do?” rathe
 
 **Query separation:** ordinary unit-incident questions remain in a session, not the shared corpus. Only an Admin may intentionally submit documents; staged documents are Admin-only, and only explicitly Admin-published documents become readable by all app users. No per-document viewing restrictions or role-specific legal-research tiers.
 
+**Document Studio separation:** every admitted user may supply an existing draft for a temporary *working-document audit* or provide facts for generated documents. This is not shared-source ingestion and must never trigger publication, global search indexing or legal graph promotion. Admin alone manages the shared legal library.
+
 ## 3. Processing flow
 
 1. **Interpret language:** normalise common misspellings, military abbreviations and Indian-English/Hinglish variants. Generate multiple possible intents where ambiguity exists.
@@ -27,7 +29,7 @@ A commander asks “My sepoy was found drunk on duty; what should I do?” rathe
 5. **Retrieve law for relevant time:** original statute/Rule/Regulation and commencement/amendment chain, with source authority and historical validity evidence. Search **Admin-published** policies and SOPs as clearly labelled supplemental sources, never as automatically binding law. Staged or withdrawn documents are excluded.
 6. **Evaluate applicability:** only predicates supported by the relevant sources and the required legal-review status may determine mandatory steps or bar an option. AI or an uploaded SOP may propose candidates but cannot independently certify a legal route.
 7. **Retrieve precedent:** search all legally accessible original judgments, passage-level matches, reviewed propositions, later treatment and adverse authorities. Keep candidate relationships labelled.
-8. **Build response:** short commander-first steps, facts/limitations, conditional options, checklist and expandable JAG source view.
+8. **Build response:** short commander-first steps, facts/limitations, conditional options, checklist and expandable JAG source view. If the user asks to create or review a legal document, the assistant may offer an explicit Document Studio action using a verified template identity, versioned requirements and known procedural stage; no auto-issuance or signature.
 9. **Validate response:** fail closed on unsupported mandatory requirements, invented citations, missing date/version, unresolved decisive facts or conflicts; escalate to JAG where warranted.
 10. **Record trace:** snapshot IDs, source/edge IDs, upload version where applicable, rule version, review status and response version. Keep incident query text separate from the shared index; retain only the session/audit information needed for operation and diagnostics.
 
@@ -116,7 +118,8 @@ Create positive, negative and metamorphic tests:
 - test unknown facts and “cannot establish from verified corpus” as a correct outcome;
 - verify all mandatory checklist items have actual source and approval records;
 - test entirely disconnected operation, no per-user document/feature tiers and session separation for ordinary incident facts;
-- test that **User cannot upload, publish, replace, withdraw or reprocess** through any API or UI path, while Admin can stage, review and publish; after publication both roles can inspect the same SOP and candidate links;
+- test that **User cannot upload, publish, replace, withdraw or reprocess** through any API or UI path, while Admin can stage, review and publish; after publication both roles can inspect the same SOP and candidate links; 
+- test that both Admin and User can create and audit **temporary working documents** while no non-Admin file reaches source ingestion, shared search or graph updates; audit reports explicitly distinguish verified defects from unknown prerequisites;
 - test unverified-upload prompt injection, forged supersession and mandatory-checklist claims are not promoted into authoritative guidance.
 
 Score separately: intent understanding, fact-question recall, law/version precision, procedural-route correctness, false mandatory-step rate, source-pinpoint accuracy, adverse authority recall, safety-escalation accuracy and **abstention accuracy**.
@@ -131,12 +134,13 @@ Independent legal advisers must validate the benchmark's high-consequence answer
 - A language model may draft explanation and propose candidate links. Only predicates with the necessary legal-source evidence and explicit validation level can authorise the display of definitive procedural obligations.
 - If a critical part of the law or its amendment history is unverified, explicitly surface the blocker and give a research/escalation route.
 - Every derived checklist and lesson supports reverse tracing back to the original source passage and review decision.
+- A checklist attached to a generated/reviewed document must use the same reviewed, versioned requirements as the applicable registered form. Unverified source candidates may be highlighted as research leads but never enforce mandatory form constraints.
 - The system does not autonomously change authenticated registers or the effective date of a provision.
 
 ## 10. Pilot milestones (future implementation)
 
 **P0:** paper scenario contracts and legal review, no product code.  
-**P1:** Admin-only upload/staging, automated provisional indexing and candidate graph linking, Admin publication, and an evidence-linked prototype for 10–15 high-value scenarios.  
+**P1:** Admin-only upload/staging, automated provisional indexing and candidate graph linking, Admin publication, and an evidence-linked prototype for 10–15 high-value scenarios. Concurrently research a small, verified form/template pilot (charge-sheet and related procedure) for Document Studio; this does not authorise drafting a legally operative instrument without human review.  
 **P2:** independent legal-data tests against actual sources and controlled incident simulations.  
 **P3:** broaden scenario catalogue, add full-corpus retrieval and relation graph.  
 **P4:** controlled offline release after approvals, with source and response replayability.

@@ -20,6 +20,7 @@ Mimamsa is intended to become a **fully offline Indian military-law research and
 | JAG/legal practitioner | “Which precedents govern this disputed interpretation as of a date?” | Full source passages, contrary treatment, amendment history and unresolved questions |
 | Researcher/content reviewer | “Which assertion needs more proof?” | Reproducible evidence chain, status history, correction and review queue |
 | Admin | “Upload a new SOP, verify its processing and publish it for everyone.” | Upload and stage, review source eligibility and extraction, publish or withdraw, reprocess and inspect candidate graph links |
+| Any admitted user (Document Studio) | “Prepare a charge-sheet or review an already prepared document.” | Use source-backed form guidance, guided drafting, a checklist and a non-certifying audit without altering the shared corpus |
 
 ## 3. Approved direction: capability requirements
 
@@ -45,6 +46,14 @@ Identifiers are stable requirement references, **not** statements that a feature
 - **PR-18 Source-trust separation.** A newly **Admin-published** source becomes visible and searchable to all as an unverified research source, distinct from source authenticity and legal validation. Admin publication cannot automatically change operative law, verified propositions, statutory history or mandatory checklist obligations.
 - **PR-19 Minimal two-role model.** The only initial roles are **Admin** (document-management authority plus all research features) and **User** (all published research and advisory features, no corpus writes). No per-user document viewing restrictions. If a source cannot lawfully be shown to all users, do not publish it into the shared index.
 - **PR-20 Capability-first, basic cyber hygiene.** Prioritise search, Admin upload/publication, parsing, graph and commander capability. At launch enforce a basic Admin/User authentication boundary on all corpus mutation paths, offline perimeter controls, safe file handling, backups, integrity and isolated parsing. Advanced hardening may follow demonstrated capability.
+- **PR-21 Source-backed Document Studio.** Both Admin and User may create editable military-law working documents, including charge-sheets where applicable, using only format templates with identifiable source, version, applicability and review status. Do not reconstruct a prescribed form from model memory.
+- **PR-22 Form and Template Registry.** Inventory prescribed forms, statutory specimens, official service templates and administrative formats in applicable Army Rules appendices, authenticated MML editions, Defence Service Regulations, Army Orders/Instructions and later Admin-published sources. Capture exact page/appendix/paragraph, form image and status, and preserve conflicting/historical versions.
+- **PR-23 Guided drafting and document sets.** Ask for only material facts, procedural stage and competent authority; guide required fields and supporting documents; create an editable DOCX or other approved export, leaving legal selection, final verification and signature to the competent person.
+- **PR-24 Existing-document audit.** Both roles may submit an existing PDF/DOCX or scanned document to a temporary working session. Check format, internal and cross-document consistency, date/version, source-supported requirements, omissions and procedural preconditions. Provide cited findings and possible corrections without claiming a complete legal certification.
+- **PR-25 Procedural checklists and file completeness.** Provide stage-appropriate lists distinguishing legally mandatory, conditional, locally prescribed and recommended checks; identify prerequisite records and where the submitted file is insufficient to determine compliance.
+- **PR-26 Working-document separation.** A User's draft or review upload is **not** a knowledge-base contribution and is not visible in public/shared search, embeddings, graphs, template registry or model training. Implement session isolation, reasonable working-file lifecycle, safe processing and export. Admin-only publication remains the sole way to modify shared source/template records.
+- **PR-27 Synchronized generator and auditor.** Generation, validation, reviews and checklists must use the same versioned source-backed field/constraint definitions, with separate detection of hard rule failures, review warnings and unverified questions. Do not mark a draft “legally valid” from automated tests alone.
+- **PR-28 Impact and reproducibility.** On new law/policy evidence, identify impacted templates, checklists, validation rules and existing research propositions for re-examination. Preserve exact template/policy versions and source anchors used for each generated/audited document.
 
 ## 4. Intended user journey
 
@@ -80,6 +89,7 @@ The C10 audit reported approximately 3,959 judgment files, 4,259 judgment metada
 - **Learning/lessons:** Browse evidenced procedural issues, observed failure modes and related cases.
 - **Legal review workspace:** Escalation queues, correction proposals, provenance and review decisions.
 - **Admin document management:** Only Admin uploads, reviews processing, publishes, withdraws, replaces or reprocesses sources. All published documents and candidate relationships remain searchable and inspectable by every user.
+- **Document Studio:** Every user can select a prescribed/approved format, prepare or review a working document, view cited checks and download an editable draft or audit report. This is a temporary workspace, never a new shared source without Admin action.
 
 The conversational assistant is an interface to this evidence system; it is not the system of record.
 
@@ -87,7 +97,7 @@ The conversational assistant is an interface to this evidence system; it is not 
 
 No autonomous allegation assessment, legal adjudication, sanction recommendation, punishment selection, fabrication of forms, automatic case filing or substitution for statutory competence. Never silently convert uncertain source text or an uploaded policy into current law, or use an old manual alone as current authority. No data leakage to external inference or telemetry.
 
-Access is simple, not fully flat: **Admin** alone controls source ingestion and publication; **Admin and User** share unrestricted access to all published documents and research/advisory functions. Do not design deeper role hierarchies, rank/JAG feature tiers or private user document folders. Pending uploads remain outside shared search until publication. Apply deployment-wide eligibility; a document incompatible with universal app-user access must not appear in published results, snippets, embeddings or generated answers. Standard cyber hygiene and untrusted-upload isolation remain essential.
+Access is simple, not fully flat: **Admin** alone controls shared source/template ingestion and publication; **Admin and User** share access to every published document, research/advisory function and temporary working-document drafting/review. Do not design deeper role hierarchies, rank/JAG feature tiers or private user document folders. Pending uploads remain outside shared search until publication. Apply deployment-wide eligibility; a document incompatible with universal app-user access must not appear in published results, snippets, embeddings or generated answers. Standard cyber hygiene and untrusted-upload isolation remain essential.
 
 Lawfully published judicial originals are preserved faithfully, without masking personal, service or medical details merely because they appear in a judgment. Specific binding publication restrictions and appropriate access controls remain applicable.
 
@@ -107,6 +117,9 @@ Measure separately:
 - Admin-upload processing success, eligibility review and publication turnaround, deterministic provenance, OCR/extraction quality and time to inclusion in shared search;
 - measured relevance and false-positive rates for automatically suggested upload-to-law/judgment graph links;
 - proof that non-Admin users cannot upload, publish, withdraw, replace or reprocess source documents;
+- proof that both roles can submit temporary working documents for generation/audit but those bytes, content and embeddings never enter shared corpus without a separate Admin-controlled ingestion action;
+- reviewed format fidelity, field validity and cross-document consistency of generated drafts against the exact applicable source-form version;
+- independent detection and false-positive rates for draft audit findings with referenced source anchors;
 - demonstrated non-promotion of Admin-published but legally unverified documents into mandatory guidance;
 - baseline security checks for file safety, integrity, backups and isolated parsing.
 
@@ -118,6 +131,7 @@ Measure separately:
 **Research breadth:** full accessible judgment search; correct judgment identities and copies.  
 **Knowledge depth:** provision/version graph, proposition passports, case treatment and legal lessons; automated user-upload ingestion and candidate graph linking in early product capability work.  
 **Scenario pilot:** reuse the existing 50-question golden test set referenced in `CLAUDE.md` where applicable; extend it with an independently reviewed commander-scenario benchmark and blinded variations. Pilot 10–15 high-value scenarios, then expand.  
+**Document Studio pilot:** inventory and verify source-backed form templates, then pilot a charge-sheet and closely related documents with generator/auditor parity, original-preserving review and cross-document consistency tests. This is a proposal, not approval to issue any form.  
 **Controlled offline release:** evidence-complete, explicitly scoped, reviewable and versioned; never claim blanket legal approval.
 
 ## 10. Policy and traceability
@@ -127,6 +141,8 @@ The legal requirements in this document are product requirements, not legal find
 - `docs/legal-audit/SOURCE_AUTHORITY_POLICY.md`
 - `legal_knowledge/audit_work/AUTH-LEDGER/README.md`
 - `docs/architecture/CONTINUOUS_DOCUMENT_INGESTION.md`
+- `docs/architecture/DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md`
 - `docs/architecture/decisions/ADR-0002-SHARED_ACCESS_AND_CONTINUOUS_INGESTION.md`
+- `docs/architecture/decisions/ADR-0003-DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md`
 
 Track design changes through a reviewable ADR; all code, schemas and ledger alterations require a separate authorised change.

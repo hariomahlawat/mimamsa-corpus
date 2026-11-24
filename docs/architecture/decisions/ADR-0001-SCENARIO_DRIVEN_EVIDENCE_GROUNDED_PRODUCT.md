@@ -17,6 +17,7 @@ The product must run on an air-gapped LAN. Source integrity, applicable legal ve
 2. **Build a connected statute–judgment–proposition knowledge graph** with versioned statutory provisions, judgment/proceeding identities, source-anchored relationships and subsequent treatment.
 3. **Support plain-English, situation-first commander queries** with material-fact questions and stage-aware, evidence-linked ways forward, checklists, lessons and source access.
 3a. **Allow only Admin to upload, replace, withdraw, reprocess and publish new policies, SOPs and reference material**, with automatic offline extraction, staged provisional indexing and suggested graph connections. All **published** documents and research/advisory features are accessible to every app user.
+3b. **Provide Document Studio to every app user** for source-backed legal document generation, checking prepared drafts and procedural-file completeness. Working files remain separate from shared-source uploads, while only Admin manages published templates or new source authorities.
 4. **Separate source search, candidate research enrichment and approved legal propositions/procedures**; never silently promote one level to another.
 5. **Preserve complete lawfully published judicial originals** without masking names, ranks, service or medical details solely due to their presence in court documents, subject to binding restrictions and access controls.
 6. **Keep ordinary real-incident query text separate** from the shared legal corpus; intentionally uploaded source material is explicitly shared with every app user.
@@ -51,6 +52,8 @@ A content-addressed evidence vault, canonical entity/relationship tables (Postgr
 ## Not decided
 
 **Clarifying decision:** [ADR-0002](ADR-0002-SHARED_ACCESS_AND_CONTINUOUS_INGESTION.md) fixes the minimal Admin/User access model and Admin-controlled ingestion/publication requirements, without authorising application code or source promotions.
+
+**Additional owner direction:** [ADR-0003](ADR-0003-DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md) records all-user temporary document drafting/review and a source-backed form registry; it does not waive Admin-only shared source/template publication.
 
 No PR merge, data migration, PostgreSQL schema, graph engine, model selection, HF upload, real ledger entry, source acquisition, operational advice template or legal conclusion is authorised by this ADR. Future changes need explicit scope, evidence and review. Formal legal/JAG validation remains required where applicable.
 

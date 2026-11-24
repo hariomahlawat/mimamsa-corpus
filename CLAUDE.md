@@ -169,12 +169,16 @@ Before planning future legal-knowledge, retrieval or application work, read:
 - `docs/architecture/LEGAL_KNOWLEDGE_ARCHITECTURE.md`
 - `docs/architecture/SCENARIO_ADVISORY_ENGINE.md`
 - `docs/architecture/CONTINUOUS_DOCUMENT_INGESTION.md`
+- `docs/architecture/DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md`
 - `docs/architecture/decisions/ADR-0001-SCENARIO_DRIVEN_EVIDENCE_GROUNDED_PRODUCT.md`
 - `docs/architecture/decisions/ADR-0002-SHARED_ACCESS_AND_CONTINUOUS_INGESTION.md`
+- `docs/architecture/decisions/ADR-0003-DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md`
 
 These record the owner's direction: the full legally accessible judgment corpus should remain searchable; Acts/Rules should link to judgments and propositions; and commanders should be able to ask ordinary-English, situation-based questions and receive evidenced, conditional guidance and checklists. The proposed technical designs are **not** implementation or legal-review approvals.
 
 **Updated owner decisions (24 Nov 2026; refined):** The initial app has **exactly two functional roles, Admin and User**. Both can search and use **all published** legal documents, graphs and advisory/research capabilities, with no rank/JAG feature tiers or per-document viewing restrictions. **Only Admin can upload, stage, replace, withdraw, reprocess and publish source documents.** Admin submissions trigger automatic offline preservation, text/OCR extraction, analysis and *candidate* law/judgment/graph linking; submissions remain invisible to ordinary users until Admin checks eligibility and processing and explicitly publishes them. All published sources must be suitable for every app user. **Admin publication is not source authentication or legal validation** and must not silently create authoritative law, mandatory checklist requirements or AUTH-LEDGER promotions. Prioritise search, ingestion, graph and commander capability, retaining minimum Admin/User access checks, safe parsing, network isolation, backup and prompt-injection isolation; advanced hardening can follow.
+
+**Document Studio direction (24 Nov 2026):** Both Admin and User must be able to prepare legal/procedural documents from source-backed, versioned forms, and submit already prepared Word/PDF/scanned files for temporary legal/format/procedural review. Provide guided fields, supporting-document checklists, cross-file checks and editable exports. Build a Form/Template Registry by examining the exact published appendices/specimens and authorised MML (once edition/authenticity verified), Defence Service Regulations, Army Rules and applicable official orders; do **not** invent forms from generic model knowledge. **Temporary drafting/review uploads do not become persistent/shared source uploads, search data, graph evidence or template registry entries.** Admin-only rules still govern publication of common law/policy/template sources. Generated forms and audit reports are assistance, not legal validity certification or completed proceedings, and require competent human verification.
 
 The earlier crawler-only exclusion of internal policy documents remains the **scope of that acquisition phase**, not a restriction on the new in-app user-upload capability. No present authorisation is given to acquire restricted documents externally.
 

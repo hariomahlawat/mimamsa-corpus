@@ -11,6 +11,7 @@
 - Connect statutory provisions to individual judgments, proceedings, legal propositions and procedural lessons.
 - Preserve source and review histories, contrary evidence and source-access markings while sharing **all published documents and research features** across Admin and User.
 - Let **Admin alone** continuously upload, review, publish, withdraw, replace or reprocess eligible policies, SOPs and references. The offline pipeline automatically extracts and proposes graph connections, and publishes to shared search only after Admin approval.
+- Allow **all admitted users** to generate/review **temporary working documents** against Admin-published, source-backed form templates; no working draft can mutate shared corpus or its knowledge graph.
 - Operate entirely offline at runtime on an air-gapped LAN.
 
 ## 2. Current source-system boundaries
@@ -25,6 +26,8 @@
 | `AUTH-LEDGER` | Hash-chained source authentication overlay | Keep real version zero until owner approvals; source authentication only |
 | 658 KB records and 53 cases | Curated research baseline | Preserve originals, propose reviewed overlays and corrections |
 | Admin uploads at offline deployment | Future local policies, SOPs, instructions and reference material | Staged and automatically enriched; explicitly Admin-published, shared, versioned research sources; no automatic legal authority |
+| Document Studio sessions | User-provided drafts, scanned forms and multi-document packs | Temporary user working data outside shared source vault, index, graph and legal authority registers |
+| Template Registry | Source-linked forms, specimens, administrative templates and checks | Versioned derived reference layer based on reviewed source evidence; shared templates published only via Admin |
 
 C10 (2026-11-24) reported 4,103 distinct source-copy hashes across stores, including 48 working-store-only copies, and 3,959 judicial source files. These are **snapshot facts**, not immutable design constants. The HF hosted bytes were not directly all verified at that time.
 
@@ -79,6 +82,9 @@ Distinct entities:
 - `TreatmentEdge`: proposition-specific later court treatment, not simply a mention;
 - `Scenario` / `MaterialFact` / `ApplicabilityPredicate` / `ChecklistItem` / `LegalLesson`;
 - `ReviewDecision` / `Approval`: who decided what, at which source and rules revision.
+- `FormTemplate` / `TemplateVersion`: identity, prescribed/specimen/admin category, source anchors, governing dates and documented fields;
+- `DocumentConstraint` / `ChecklistRequirement`: verified requirements, conditions and severity, shared by generator and auditor;
+- `WorkingDocumentSession` / `DocumentAuditFinding`: temporary private-by-session inputs, generated drafts, source-referenced findings and export artefacts, none automatically admitted to the shared corpus.
 
 A PDF may contain multiple proceedings or judgments; multiple copies may represent one judgment. Never equate file hash, judgment and proceeding ID.
 
@@ -100,6 +106,9 @@ A PDF may contain multiple proceedings or judgments; multiple copies may represe
 | `UPLOAD_REFERENCES_PROVISION` | Provisional link from user-supplied policy to a section or Rule |
 | `UPLOAD_REFERENCES_CASE` | Provisional link from a policy to a judgment |
 | `POSSIBLY_SUPERSEDES_DOCUMENT` | Candidate version/supersession relation; does not change authority without supporting evidence |
+| `PRESCRIBES_OR_EXEMPLIFIES_FORM` | Evidence-backed source to form/template version link, distinguishing required versus specimen status |
+| `TEMPLATE_REQUIREMENT_FROM_SOURCE` | Source-anchored validation/checklist requirement with scope and review status |
+| `AFFECTS_FORM_OR_CHECKLIST` | Candidate impact of amendment/judgment/new policy; requires re-evaluation before updates |
 
 All substantive edges require `source_anchor`, source rendition, claimed time/jurisdiction, extraction/review status and contrary-evidence links. An absent treatment edge never establishes that no adverse authority exists.
 
@@ -153,7 +162,7 @@ Original sources, historical records and prior review decisions are immutable. C
 
 A release contains a reproducible manifest, source-checksums, schema/rule versions, authentication state, evidence and review records, search indexes and model dependencies needed offline. Locally Admin-submitted sources, including pending and withdrawn items, are separately manifested and recoverable, without mutating signed baseline releases. Test network-denied execution, deterministic rebuild, rollback and recovery before declaring a release ready.
 
-**Admin-only in-app document ingestion and publication control are first-phase capability requirements**, not post-hardening enhancements. See [Continuous document ingestion](CONTINUOUS_DOCUMENT_INGESTION.md).
+**Admin-only in-app document ingestion and publication control are first-phase capability requirements**, not post-hardening enhancements. See [Continuous document ingestion](CONTINUOUS_DOCUMENT_INGESTION.md). [Document Studio](DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md) is a separate working-file processing path, not an exception allowing users to publish source documents.
 
 ## 10. Search and user presentation
 
@@ -171,7 +180,9 @@ Preserve complete, lawfully published judicial records, including printed names,
 
 The initial app has exactly **two functional roles: Admin and User**. Both can access every **published** document and all search/graph/advisory functionality. Only Admin can upload, review staged documents, publish, replace, withdraw or reprocess source documents; these mutation endpoints require Admin checks. No rank/JAG tiers, per-document user restrictions or advanced role matrix. Pending sources are in Admin-only staging and invisible to shared search; publication is allowed only if the source can be shared with everyone in this deployment. Preserve access markings as provenance and check eligibility before publishing any text, snippets, embeddings or graph-derived output.
 
-Ordinary incident questions are session data, not automatic corpus contributions. Only deliberate **Admin publication** makes source documents shared; staged/failed/rejected/withdrawn material does not appear in ordinary shared research. Admin publication is not a legal-validity approval. Use ordinary session isolation, local storage protection and reasonable deletion/retention defaults; do not build elaborate role-based case workspaces into the initial release.
+Ordinary incident questions are session data, not automatic corpus contributions. Only deliberate **Admin publication** makes source documents shared; staged/failed/rejected/withdrawn material does not appear in ordinary shared research. Admin publication is not a legal-validity approval.
+
+Both Admin and User may upload a file **only to a temporary Document Studio working session** for creation or audit. These working files must be isolated from common corpus, shared search and embeddings; not exposed as source uploads or ingest jobs; not retained indefinitely by default. A source/template intended for shared library use still requires separate Admin ingestion and publication. Protect session boundaries without introducing additional research-user roles. Use ordinary session isolation, local storage protection and reasonable deletion/retention defaults; do not build elaborate role-based case workspaces into the initial release.
 
 **Minimum security at launch:** offline network boundary, basic Admin/User authentication and server-side Admin-only checks for corpus writes, file size/type limits, malware and malformed-file screening appropriate to the environment, isolated/least-privilege PDF/OCR/parser workers, untrusted-document prompt-injection isolation, file integrity hashes, backups and audit logging. Advanced hardening, granular data segregation and specialised controls may follow after the core capabilities are demonstrated.
 
@@ -181,9 +192,11 @@ Ordinary incident questions are session data, not automatic corpus contributions
 2. Canonicalise document/judgment/proceeding identities and version relationships.
 3. Provide full-corpus offline search against original copies, clearly labelled where unreviewed, plus **Admin-only upload, staged enrichment and publication** of eligible policies/SOPs.
 4. Build provision-to-judgment and Admin-published-document-to-law **candidate** links and independent evaluation datasets.
-5. Develop proposition-level passports, actual outcome extraction and treatment edges with measured precision.
-6. Add material-fact scenario knowledge and verified procedural checks.
-7. Pilot date-aware, evidence-grounded commander guidance with adversarial test cases.
-8. Release scoped, approved offline bundles with source and legal-status audits.
+5. Establish a source-backed Form/Template Registry by inspecting applicable statutory appendices, authenticated manual editions and authorised regulations; propose form versions, conditions and field validations.
+6. Pilot a Document Studio generator and auditor that use identical reviewed constraints and cannot certify legal validity or publish drafts to the corpus.
+7. Develop proposition-level passports, actual outcome extraction and treatment edges with measured precision.
+8. Add material-fact scenario knowledge and verified procedural checks.
+9. Pilot date-aware, evidence-grounded commander guidance and Document Studio review with adversarial test cases.
+10. Release scoped, approved offline bundles with source and legal-status audits.
 
 Every phase has separate technical evidence and legal-adviser acceptance where warranted. No current code change or schema migration is authorised by this document.
