@@ -6,7 +6,7 @@ import argparse, glob, json, sys, os
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # not resolved: keeps a symlinked path detectable (C8)
-from common import AW, PKG, REPO, LedgerError, sha256_file  # noqa: E402
+from common import AW, PKG, REPO, LedgerError, read_regular_text, sha256_file  # noqa: E402
 
 # Files read by the frozen Cycle 5 builder (traced with an open() hook on 2026-11-23 at staging 939a128a), plus the two
 # frozen code modules it executes. Rule version 1 runs this frozen code for master rows, crosswalk and counts.
@@ -62,7 +62,7 @@ def current():
 
 def verify(root=PKG):
     """Fail closed if any pinned file is missing or differs from its pin (pins read from <root>/frozen_inputs.json)."""
-    pins = json.loads((Path(root) / "frozen_inputs.json").read_text(encoding="utf-8"))["files"]
+    pins = json.loads(read_regular_text(Path(root) / "frozen_inputs.json"))["files"]
     bad = []
     for rel, sha in pins.items():
         p = REPO / rel

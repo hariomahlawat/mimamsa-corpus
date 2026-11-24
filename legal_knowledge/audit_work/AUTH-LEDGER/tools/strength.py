@@ -12,7 +12,7 @@ import json, re, sys, os
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # not resolved: keeps a symlinked path detectable (C8)
-from common import AW, PKG, LedgerError, read_csv  # noqa: E402
+from common import AW, PKG, LedgerError, read_csv, read_regular_text  # noqa: E402
 import urlcheck  # noqa: E402
 
 URL = re.compile(r"https?://[^ ;),|]+")
@@ -102,8 +102,7 @@ def _rows(rel):
         if not p.is_file():
             raise LedgerError(f"evidence file not found: {rel}")
         if rel.endswith(".json"):
-            with open(p, encoding="utf-8") as f:
-                _cache[rel] = json.load(f)
+            _cache[rel] = json.loads(read_regular_text(p))  # C11 review C11-02: no-follow regular-file read
         else:
             _cache[rel] = read_csv(p)
     return _cache[rel]

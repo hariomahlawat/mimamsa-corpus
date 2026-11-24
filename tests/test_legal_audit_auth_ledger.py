@@ -2456,3 +2456,199 @@ class C10EffectiveIntegrityReview(C10EffectiveIntegrity):
         self.assertEqual(L.unexpected_effective(self.t.dir, {"v0000": names, "v0001": names}), [])
         (self.eff / "v0001/extra.csv").write_text("x")
         self.assertEqual(L.unexpected_effective(self.t.dir, {"v0000": names, "v0001": names}), ["effective/v0001/extra.csv"])
+
+
+class C11LedgerFileTypes(C10EffectiveIntegrity):
+    """C11 (review CA-01..CA-04 of 2ba7b0a4): ledger and decisions files must be regular files reached without following
+    links; FIFOs must never block verify. Every mutation is inside the temporary Synthetic copy; an alarm guards hangs."""
+    def setUp(self):
+        super().setUp()
+        import signal
+        self._old = signal.signal(signal.SIGALRM, self._timeout)
+        signal.alarm(20)
+
+    def tearDown(self):
+        import signal
+        signal.alarm(0)
+        signal.signal(signal.SIGALRM, self._old)
+        super().tearDown()
+
+    @staticmethod
+    def _timeout(*_):
+        raise AssertionError("verify blocked (timeout): a FIFO or special file was opened for reading")
+
+    def _replace_with_fifo(self, rel):
+        import os
+        p = self.t.dir / rel
+        p.unlink()
+        os.mkfifo(p)
+
+    def test_fifo_at_head_rejected_without_hanging(self):
+        self._replace_with_fifo("ledger/HEAD")
+        self.bad("ledger/HEAD")
+
+    def test_fifo_at_manifest_rejected_without_hanging(self):
+        self._replace_with_fifo("ledger/manifest.jsonl")
+        self.bad("manifest.jsonl")
+
+    def test_directory_at_head_rejected_not_traceback(self):
+        p = self.t.dir / "ledger/HEAD"
+        p.unlink()
+        p.mkdir()
+        self.bad("ledger/HEAD")
+
+    def test_symlinked_head_rejected_even_with_identical_content(self):
+        p = self.t.dir / "ledger/HEAD"
+        copy = self.t.dir / "head_copy"
+        shutil.copy(p, copy)
+        p.unlink()
+        p.symlink_to(copy)
+        self.bad("ledger/HEAD")
+
+    def test_symlinked_manifest_rejected(self):
+        p = self.t.dir / "ledger/manifest.jsonl"
+        copy = self.t.dir / "manifest_copy"
+        shutil.copy(p, copy)
+        p.unlink()
+        p.symlink_to(copy)
+        self.bad("manifest.jsonl")
+
+    def test_stray_fifo_in_decisions_reported(self):
+        import os
+        os.mkfifo(self.t.dir / "decisions/pipe")
+        self.bad("decisions/pipe")
+
+    def test_stray_symlink_in_decisions_reported(self):
+        (self.t.dir / "target.md").write_text("x")
+        (self.t.dir / "decisions/README.md").symlink_to(self.t.dir / "target.md")
+        self.bad("decisions/README.md")
+
+    def test_broken_symlink_in_ledger_reported(self):
+        (self.t.dir / "ledger/dangling").symlink_to(self.t.dir / "nowhere")
+        self.bad("ledger/dangling")
+
+    def test_directory_symlink_in_ledger_reported(self):
+        (self.t.dir / "elsewhere").mkdir()
+        (self.t.dir / "ledger/linkdir").symlink_to(self.t.dir / "elsewhere")
+        self.bad("ledger/linkdir")
+
+    def test_empty_directory_in_decisions_reported(self):
+        (self.t.dir / "decisions/empty").mkdir()
+        self.bad("decisions/empty")
+
+    def test_symlinked_decisions_dir_rejected(self):  # CA-03: decisions/ branch of check_ledger_dirs
+        real = self.t.dir / "decisions_real"
+        (self.t.dir / "decisions").rename(real)
+        (self.t.dir / "decisions").symlink_to(real)
+        self.bad("decisions/ is a symbolic link")
+
+    def test_decisions_as_file_rejected(self):  # CA-03: non-directory branch
+        (self.t.dir / "decisions").rmdir()
+        (self.t.dir / "decisions").write_text("x")
+        self.bad("decisions is not a directory")
+
+    def test_unexpected_effective_guard_on_symlinked_base(self):  # CA-03: guard inside unexpected_effective itself
+        real = self.t.dir / "effective_real"
+        self.eff.rename(real)
+        self.eff.symlink_to(real)
+        self.assertEqual(L.unexpected_effective(self.t.dir, {}), ["effective"])
+
+    def test_absent_decisions_dir_passes_at_version_zero(self):  # CA-04: documented behaviour
+        (self.t.dir / "decisions").rmdir()
+        self.assertEqual(CLI.verify(self.t.dir), ["v0000 ok"])
+
+    def test_read_regular_bytes_refuses_special_files(self):
+        import os
+        fifo = self.t.dir / "p"
+        os.mkfifo(fifo)
+        with self.assertRaisesRegex(common.LedgerError, "not a regular file|cannot open"):
+            L.read_regular_bytes(fifo)
+        with self.assertRaisesRegex(common.LedgerError, "cannot open|not a regular file"):
+            L.read_regular_bytes(self.t.dir)
+        with self.assertRaisesRegex(common.LedgerError, "cannot open"):
+            L.read_regular_bytes(self.t.dir / "missing")
+
+
+class C11LedgerFileTypesReview(C11LedgerFileTypes):
+    """C11 review of 9f1d7560 (C11-01 P2, C11-02, C11-03, C11-05): the frozen-pin file, every pinned input read, version-1
+    reads, the O_NOFOLLOW guard itself and the CLI OSError handler. All mutations inside the temporary Synthetic copy."""
+    def test_fifo_at_frozen_inputs_rejected_without_hanging(self):  # C11-01
+        self._replace_with_fifo("frozen_inputs.json")
+        self.bad("frozen_inputs.json")
+
+    def test_symlinked_frozen_inputs_rejected(self):
+        p = self.t.dir / "frozen_inputs.json"
+        copy = self.t.dir / "frozen_copy.json"
+        shutil.copy(p, copy)
+        p.unlink()
+        p.symlink_to(copy)
+        self.bad("frozen_inputs.json")
+
+    def test_shared_readers_refuse_fifo(self):  # C11-02: sha256_file, read_csv, load_json are all safe now
+        import os
+        fifo = self.t.dir / "pipe.csv"
+        os.mkfifo(fifo)
+        for fn in (common.sha256_file, common.read_csv, common.load_json, common.read_regular_text):
+            with self.assertRaisesRegex(common.LedgerError, "not a regular file|cannot open"):
+                fn(fifo)
+
+    def test_o_nofollow_refuses_symlink_to_regular_file(self):  # C11-03: pins the O_NOFOLLOW flag itself
+        target = self.t.dir / "real.txt"
+        target.write_text("x")
+        link = self.t.dir / "link.txt"
+        link.symlink_to(target)
+        with self.assertRaisesRegex(common.LedgerError, "cannot open"):
+            common.read_regular_bytes(link)
+        self.assertEqual(common.read_regular_bytes(target), b"x")
+
+    def test_missing_o_nofollow_fails_closed(self):  # C11-05
+        import os
+        saved = os.O_NOFOLLOW
+        del os.O_NOFOLLOW
+        try:
+            with self.assertRaisesRegex(common.LedgerError, "O_NOFOLLOW"):
+                common.read_regular_bytes(self.t.dir / "frozen_inputs.json")
+        finally:
+            os.O_NOFOLLOW = saved
+
+    def test_cli_handler_catches_oserror(self):  # C11-03: OSError in the fail-closed tuple
+        from unittest import mock
+        import io as _io, contextlib
+        err = _io.StringIO()
+        with mock.patch.object(CLI, "verify", side_effect=OSError(5, "simulated I/O error")), \
+                mock.patch.object(sys, "argv", ["auth_ledger.py", "verify"]), contextlib.redirect_stderr(err):
+            self.assertEqual(CLI.main(), 2)
+        self.assertIn("OSError", err.getvalue())
+
+
+class C11VersionOneFileTypes(unittest.TestCase):
+    """C11-03: reads of a version-1 entry file and its pinned records reject special files (temporary Synthetic copy)."""
+    def setUp(self):
+        import signal
+        self._old = signal.signal(signal.SIGALRM, C11LedgerFileTypes._timeout)
+        signal.alarm(20)
+        self.t = Synthetic()
+        self.t.add_version([entry_from_draft(DHARAMVIR, 1)])
+
+    def tearDown(self):
+        import signal
+        signal.alarm(0)
+        signal.signal(signal.SIGALRM, self._old)
+        self.t.close()
+
+    def _fifo(self, rel):
+        import os
+        p = self.t.dir / rel
+        p.unlink()
+        os.mkfifo(p)
+
+    def test_fifo_entry_file_rejected(self):
+        self._fifo("ledger/v0001.csv")
+        with self.assertRaisesRegex(common.LedgerError, "version 1: entry file"):
+            reader.effective_state(self.t.dir, 1, False)
+
+    def test_fifo_decision_record_rejected(self):
+        rec = sorted((self.t.dir / "decisions").glob("D-v0001*.md"))[0]
+        self._fifo(f"decisions/{rec.name}")
+        with self.assertRaisesRegex(common.LedgerError, rec.name):
+            reader.effective_state(self.t.dir, 1, False)
