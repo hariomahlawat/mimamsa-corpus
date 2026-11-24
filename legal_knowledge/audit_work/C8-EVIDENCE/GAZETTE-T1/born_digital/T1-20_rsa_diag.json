@@ -1,0 +1,25 @@
+{
+ "signedAttrs_at": [
+  2252,
+  2,
+  92
+ ],
+ "signature_at": [
+  2361,
+  4,
+  256
+ ],
+ "sha256_signedAttrs_SET": "6819c28ce6254dd304270e5812aeeadb2977072be0f07f3a67f4904ea7f54d9d",
+ "sha256_signed_content": "739566ad9d5ff3ae8b8f6cf380fb1541c29a64fd3b7c134bf8e1a012e21c49a2",
+ "per_certificate": [
+  {
+   "cert_subject_CN": "CN=MANOJ KUMAR VERMA,ST=Delhi,2.5.4.17=110064,OU=DTE OF PRINTING\\,CID - 6576633,2.5.4.20=f5f6a451a6519f986c550df1c6ba4a7324eb1a21cd185c4cd8e8bfde4fd3b97e,O=GOVT",
+   "modulus_bits": 2048,
+   "pkcs1_type1_wellformed": false,
+   "digestinfo_hex": null,
+   "digest_equals_sha256_signedAttrs": false,
+   "digest_equals_sha256_content": false,
+   "em_prefix_hex": "23523d3f46c6258062e48416ec3e9d4f"
+  }
+ ]
+}

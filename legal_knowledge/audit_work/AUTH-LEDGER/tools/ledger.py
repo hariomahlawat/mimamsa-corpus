@@ -14,16 +14,16 @@ stop a repository writer from re-deriving the whole chain. Detection of that res
 HEAD is pinned in the test suite as well as in ledger/HEAD (a two-place change visible in review), and every version is
 added by a reviewed PR. There are no cryptographic signatures; authority is the reviewed merge, and since AUTH-LEDGER-02 an
 approved version is effective only after a BIND line whose git facts tools/binding.py verifies offline (APPROVAL_CONTROLS.md)."""
-import json, posixpath, re, sys, os
+import json, posixpath, re, stat, sys, os
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # not resolved: keeps a symlinked path detectable (C8)
-from common import LOGICAL_PKG, PKG, LedgerError, read_csv, sha256_file, sha256_text  # noqa: E402
+from common import LOGICAL_PKG, PKG, LedgerError, read_csv, read_regular_bytes, read_regular_text, sha256_file, sha256_text  # noqa: E402
 import rules_v1  # noqa: E402
 import strength  # noqa: E402
 import binding  # noqa: E402
 
-SCHEMA = json.loads((PKG / "schema/ledger_entry.schema.json").read_text(encoding="utf-8"))
+SCHEMA = json.loads(read_regular_text(PKG / "schema/ledger_entry.schema.json"))
 COLS = SCHEMA["required"]
 LINE_KEYS = ["version", "prev", "date", "rule_version", "frozen_inputs_sha256", "file", "file_sha256", "decisions", "reviews", "effective_sha256", "note"]
 SUBTYPE = {"PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE": "HELD_PRIMARY_GAZETTE_FACSIMILE",
@@ -71,10 +71,18 @@ def entry_digest(e):
     return sha256_text(json.dumps({k: e[k] for k in COLS if k not in DIGEST_EXCLUDE}, sort_keys=True, ensure_ascii=True))
 
 
+# C11: the safe reader lives in common.py so that pins.py, reader.py and every other module share it (review C11-01)
+
+
+def sha256_regular(path):
+    import hashlib
+    return hashlib.sha256(read_regular_bytes(path)).hexdigest()
+
+
 def read_manifest(root):
     """Verify the hash chain and HEAD; return the list of manifest dicts (index = version)."""
     p = Path(root) / "ledger/manifest.jsonl"
-    raw = p.read_text(encoding="utf-8").split("\n")
+    raw = read_regular_text(p).split("\n")
     if raw[-1] != "":
         raise LedgerError("manifest.jsonl must end with a newline")
     lines, prev = [], "GENESIS"
@@ -108,14 +116,14 @@ def read_manifest(root):
         lines.append(d)
     if not lines:
         raise LedgerError("manifest has no genesis line")
-    head = (Path(root) / "ledger/HEAD").read_text(encoding="utf-8").strip()
+    head = read_regular_text(Path(root) / "ledger/HEAD").strip()
     if head != f"{len(lines) - 1} {prev}":
         raise LedgerError(f"ledger/HEAD {head!r} does not match the manifest chain ({len(lines) - 1} {prev})")
     return lines
 
 
 def head_value(root):
-    return (Path(root) / "ledger/HEAD").read_text(encoding="utf-8").strip()
+    return read_regular_text(Path(root) / "ledger/HEAD").strip()
 
 
 def unexpected_files(root, lines):
@@ -126,14 +134,76 @@ def unexpected_files(root, lines):
         if d["file"]:
             known.add(d["file"])
         known |= set(d["decisions"]) | set(d["reviews"])
-    found = {str(p.relative_to(root)) for sub in ("ledger", "decisions") if (root / sub).is_dir() for p in (root / sub).rglob("*") if p.is_file()}
-    return sorted(found - known)
+    # C11, review CA-02: strict walk, never following links. A symlink (to a file or a directory), a non-regular file
+    # (FIFO, socket, device) or a directory that holds no accounted file is reported, as is any unaccounted file.
+    bad = set()
+    known_dirs = {str(Path(k).parent) for k in known}
+    for sub in ("ledger", "decisions"):
+        base = root / sub
+        if base.is_symlink() or not base.exists():
+            continue  # a symlinked base is refused by check_ledger_dirs; an absent decisions/ is allowed at version 0
+        for dirpath, dirnames, filenames in os.walk(base, followlinks=False):
+            for name in list(dirnames):
+                p = Path(dirpath) / name
+                r = str(p.relative_to(root))
+                if p.is_symlink() or not any(k == r or k.startswith(r + "/") for k in known_dirs):
+                    bad.add(r)
+            dirnames[:] = [n for n in dirnames if str((Path(dirpath) / n).relative_to(root)) not in bad]
+            for name in filenames:
+                p = Path(dirpath) / name
+                r = str(p.relative_to(root))
+                st = os.lstat(p)
+                if not stat.S_ISREG(st.st_mode) or r not in known:
+                    bad.add(r)
+    return sorted(bad)
+
+
+def check_ledger_dirs(root):
+    """ledger/, decisions/ and effective/ must be real directories (not symlinks, not files) when present (C10 review AL-01)."""
+    root = Path(root)
+    for sub in ("ledger", "decisions", "effective"):
+        p = root / sub
+        if p.is_symlink():
+            raise LedgerError(f"{sub}/ is a symbolic link; the ledger layout requires a real directory")
+        if p.exists() and not p.is_dir():
+            raise LedgerError(f"{sub} is not a directory")
+
+
+def unexpected_effective(root, expected):
+    """Entries under effective/ that the manifest does not account for (C9 synthetic transaction finding TXN-1).
+
+    `expected` maps each committed version directory name (vNNNN) to the set of file names its rebuild produces.
+    The walk never follows symbolic links; a symlink, a non-regular file, an unknown directory or an unknown file
+    is reported. Returns a sorted list of relative paths."""
+    root = Path(root)
+    base = root / "effective"
+    if base.is_symlink():
+        return ["effective"]
+    if not base.exists():
+        return []
+    bad = []
+    for dirpath, dirnames, filenames in os.walk(base, followlinks=False):
+        rel = Path(dirpath).relative_to(base)
+        depth = len(rel.parts)
+        for name in sorted(dirnames):
+            p = Path(dirpath) / name
+            r = str(p.relative_to(root))
+            if p.is_symlink() or depth != 0 or name not in expected:
+                bad.append(r)
+        dirnames[:] = [n for n in dirnames if depth == 0 and n in expected and not (Path(dirpath) / n).is_symlink()]
+        for name in sorted(filenames):
+            p = Path(dirpath) / name
+            r = str(p.relative_to(root))
+            st = os.lstat(p)
+            if depth != 1 or not stat.S_ISREG(st.st_mode) or name not in expected.get(rel.parts[0], set()):
+                bad.append(r)
+    return sorted(bad)
 
 
 def _parse_record(path):
     """key: value lines; duplicate keys are an error (an ambiguous record is never read in the approving sense)."""
     out = {}
-    for n, line in enumerate(Path(path).read_text(encoding="utf-8").splitlines(), 1):
+    for n, line in enumerate(read_regular_text(path).splitlines(), 1):
         m = re.match(r"^\s*([A-Za-z_]+)\s*:\s*(.*)$", line)  # keys are case- and indentation-insensitive (re-review N-04)
         if not m:
             continue
@@ -167,7 +237,7 @@ def _check_record(root, line, kind, ref, sha_declared, entry):
     f = Path(root) / ref
     if not f.is_file():
         raise LedgerError(f"{entry['entry_id']}: {kind} record {ref} is not a committed file")
-    h = sha256_file(f)
+    h = sha256_regular(f)
     pins = line["decisions"] if kind == "decision" else line["reviews"]
     if h != sha_declared or pins.get(ref) != h:
         raise LedgerError(f"{entry['entry_id']}: {kind} record {ref} hash does not match the entry and the manifest pin")
@@ -356,13 +426,12 @@ def _apply_version(root, ctx, line, st):
     if set(line["decisions"]) & set(line["reviews"]):
         raise LedgerError(f"version {line['version']}: a file cannot be both a decision record and a review record")
     f = Path(root) / line["file"]
-    if not f.is_file() or sha256_file(f) != line["file_sha256"]:
+    if not f.is_file() or sha256_regular(f) != line["file_sha256"]:
         raise LedgerError(f"version {line['version']}: entry file missing or modified after it was recorded")
     for k, h in list(line["decisions"].items()) + list(line["reviews"].items()):
-        if not (Path(root) / k).is_file() or sha256_file(Path(root) / k) != h:
+        if not (Path(root) / k).is_file() or sha256_regular(Path(root) / k) != h:
             raise LedgerError(f"version {line['version']}: pinned record {k} missing or modified")
-    with open(f, newline="", encoding="utf-8") as fh:
-        header = fh.readline().rstrip("\r\n").split(",")
+    header = read_regular_text(f).split("\n", 1)[0].rstrip("\r").split(",")
     if header != COLS:
         raise LedgerError(f"version {line['version']}: version file header must equal the schema columns exactly (got {header})")
     entries = read_csv(f)
@@ -467,7 +536,7 @@ def apply_ledger(root, ctx, as_of=None, require_binding=True):
     as_of = len(lines) - 1 if as_of is None else as_of
     if not 0 <= as_of < len(lines):
         raise LedgerError(f"--as-of {as_of} outside 0..{len(lines) - 1}")
-    frozen_sha = sha256_file(Path(root) / "frozen_inputs.json")
+    frozen_sha = sha256_regular(Path(root) / "frozen_inputs.json")
     st = {"eff": {s: dict(r, origin="CALIBRATION-02 baseline") for s, r in ctx.baseline.items()},
           "live": {"BASELINE:" + s: {"sha256": s, "entry_type": "BASELINE"} for s in ctx.baseline},
           "by_sha": {s: "BASELINE:" + s for s in ctx.baseline}, "seen_ids": set(), "transitions": [], "withdrawn": []}

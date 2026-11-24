@@ -16,7 +16,7 @@ A mutation run on the 8 controls of the first round killed all 8. Later rounds h
 **Residual risks:**
 - Owner identity is not proven by git (O-1, O-4).
 - Branch protection is unverified and was not changed (O-2).
-- CI still checks out depth 1 until the separate full-history PR is approved (O-3).
+- CI still checks out depth 1 until the separate full-history PR is approved (O-3). **Update (Cycle 9):** that PR (#37) was merged into staging at `ff425a9a`; the audit workflow now checks out full history (`fetch-depth: 0`), pins the corpus ref and runs `auth_ledger.py verify` as an explicit step.
 - Verification trusts the local object store beyond the mechanisms checked; audit from a fresh clone or bundle.
 - Legal or JAG approval is outside the ledger.
 
