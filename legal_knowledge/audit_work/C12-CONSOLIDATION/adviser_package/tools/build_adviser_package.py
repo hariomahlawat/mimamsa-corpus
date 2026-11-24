@@ -1104,6 +1104,8 @@ def main():
         gen = ['ADVISER_PACKAGE_C12.md', 'ADVISER_QUESTIONS.csv', 'EXCERPT_VERIFICATION.csv', 'PROVENANCE_C12.md', 'SHA256SUMS']
         diffs = [o for o in gen if (OUT / o).read_bytes() != (PKG / o).read_bytes()]
         print('CHECK FAILED: ' + ', '.join(diffs) if diffs else 'adviser package reproduces (no tracked file written)')
+        import shutil
+        shutil.rmtree(OUT, ignore_errors=True)  # confirmation review P3: do not leave temp dirs behind
         sys.exit(1 if diffs else 0)
     print('questions:', len(Q), dict(Counter(qq['topic'] for qq in Q)))
     print('excerpts:', dict(Counter(e['status'] for e in VER)))

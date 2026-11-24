@@ -21,8 +21,8 @@
 | Ground truth not scorable ('other') | 1 |
 | **Precision, strict** | **37 / 44 = 84.1% (one-sided 95% lower bound 73.1%)** |
 | Precision, lenient (remanded = set aside and remanded) | 37 / 44 (no change) |
-| Baseline: crawler outcome, same rules | 28 / 44 = 63.6% (lower bound 51.2%) |
-| Baseline: Cycle 10 extractor, same rules | 25 / 48 = 52.1% (lower bound 40.4%) |
+| Baseline: crawler outcome, same rules (exact label; family scoring under Qualifications) | 28 / 44 = 63.6% (lower bound 51.2%) |
+| Baseline: Cycle 10 extractor, same rules (exact label; family scoring under Qualifications) | 25 / 48 = 52.1% (lower bound 40.4%) |
 
 **By court (strict):**
 
@@ -46,7 +46,7 @@
 ## What this means
 - **The automated outcome is not reliable enough** for unreviewed use. That is especially true for multi-proceeding Supreme Court and batch judgments.
 - **Even on the extractor's own labelling convention** (the literal operative phrase), precision would be 40/44 = 90.9%, still below the bar.
-- **v2 is substantially better than both baselines** on identical ground truth. The 627 corpus-wide abstentions and every multi-proceeding judgment should go to human review first.
+- ~~v2 is substantially better than both baselines~~ *(corrected in Cycle 12 after confirmation review of C11 F04)*: by outcome family on identical ground truth, v2 scored 38/44 (86.4%) against 33/44 (75.0%) for the crawler and 31/48 (64.6%) for the Cycle 10 extractor; the 95% intervals overlap, so the margin is not established as large on this sample. The 627 corpus-wide abstentions and every multi-proceeding judgment should go to human review first.
 - **A proposed v3 needs two things:**
   - splitting batch judgments into per-proceeding sections (H042 pattern) and mapping multi-appeal operative paragraphs (H010, H012);
   - an explicit two-field outcome: `printed_disposal` (literal) and `substantive_result` (requires reading).
@@ -63,8 +63,8 @@ The reviewer re-scored all 56 judgments independently: 37 correct, 7 incorrect, 
 
   | Method | Correct | Precision |
   | --- | --- | --- |
-  | v2 | 38/44 | 86.4% |
-  | crawler | 33/44 | 75.0% |
-  | Cycle 10 extractor | 31/48 | 64.6% |
+  | v2 | 38/44 | 86.4% (Wilson 95% 73.3–93.6%) |
+  | crawler | 33/44 | 75.0% (Wilson 95% 60.6–85.4%) |
+  | Cycle 10 extractor | 31/48 | 64.6% (Wilson 95% 50.4–76.6%) |
 
   **The intervals overlap**, so v2's advantage is real but not large on this sample.
