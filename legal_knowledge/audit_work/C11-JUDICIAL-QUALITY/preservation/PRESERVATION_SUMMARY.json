@@ -1,0 +1,20 @@
+{
+ "copies": 48,
+ "exact_anchor_copies": [
+  "C5-SRC-J-SC-1982-PPS-BEDI~C1",
+  "C5-SRC-J-SC-2014-ANVAR~C1",
+  "C5-SRC-J-SC-2020-ARJUN~C1",
+  "C5-SRC-J-SC-2022-JASBIR~C1",
+  "C5-SRC-J-SC-2023-PARASHOTAM~C1",
+  "C5-SRC-P0-ARMY-RULES-1954~C1"
+ ],
+ "in_git_objects": 0,
+ "in_hf_listing": 0,
+ "possible_markings": [],
+ "register_commit": "21e73b8348767d5f1524167fcec538e1aad6e732",
+ "restricted": [],
+ "status": {
+  "PRESENT_HASH_MATCH": 48
+ },
+ "total_bytes": 37312132
+}
