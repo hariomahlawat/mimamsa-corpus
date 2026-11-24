@@ -28,8 +28,9 @@ Only sources suitable for the entire deployment audience may be published. Sourc
 7. **Admin staging review.** Present original copy, extracted text, safety/eligibility result, metadata candidates, OCR completeness and suggested graph links. Admin may correct descriptive metadata, reject, retry or accept for publication.
 8. **Admin explicitly publishes.** Only now do the source, extracted passages, snippets, embeddings and candidate graph links enter the **common published index** for all Users and Admin. Show source label `ADMIN_PUBLISHED_UNVERIFIED` (or a separately evidenced stronger status) and processing/quality flags.
 9. **Ongoing changes.** Admin may upload a changed version, request reprocessing or withdraw a publication. Preserve historical original bytes, revision and audit history; remove withdrawn content from ordinary-user search, graph presentations and caches, including source-derived text. Avoid partial publication states.
-10. **Independent legal review as required.** Admin publishing a document is not proof of authenticity, legal force, operative date or binding interpretation. Promote legal claims, mandatory checklist items or supersession relations only under the separate evidence and legal-review rules.
-11. **Assess dependencies.** Source changes/withdrawals create versioned review events; apply the scoped stale-guidance gate in [Document Studio, section 8.1](DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md#81-dependency-impact-and-stale-guidance-controls) across affected templates, checklists and advisories. Mere upload of an unverified claim does not invalidate law. A credible material conflict blocks affected operational use pending review.
+10. **Independent legal review as required.** Admin publishing a document is not proof of authenticity, legal force, operative date or binding interpretation. Promote legal claims, mandatory checklist items or supersession relations only under the separate evidence and legal-review rules, recorded through the Legal Reviewer approval path in [Document Studio 3.3](DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md#33-legal-approval-path-on-an-air-gapped-site-proposed-blocking-open-decision). Admin publication never records a legal approval. An uploaded amending Act, Rule, notification or judgment becomes candidate instrument, provision-version or judgment nodes as described in [Architecture 9.1](LEGAL_KNOWLEDGE_ARCHITECTURE.md#91-release-updates-and-local-sources).
+11. **Assess dependencies.** Source changes/withdrawals create versioned review events; apply the scoped stale-guidance gate in [Document Studio, section 8.1](DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md#81-dependency-impact-and-stale-guidance-controls) across affected templates, checklists and advisories. Mere upload of an unverified claim does not invalidate law. A credible material conflict, judged by the criteria in Document Studio 3.3, blocks affected operational use pending Legal Reviewer decision.
+12. **Reconcile with release imports.** Verified external release bundles and local uploads share SHA-256 identity, de-duplication, collision handling and precedence rules; imported change lists are impact triggers ([Architecture 9.1](LEGAL_KNOWLEDGE_ARCHITECTURE.md#91-release-updates-and-local-sources)).
 
 The entire workflow, including OCR, graph processing and search-index update, must work **offline on the LAN**, without cloud OCR, remote embeddings or online APIs.
 
@@ -40,11 +41,11 @@ The entire workflow, including OCR, graph processing and search-index update, mu
 | `AdminSubmission` | Submitter, submission time, SHA-256, staging and publication decisions |
 | `IngestionJob` | Job state, parser/model version, retry history, errors |
 | `SourceCopy` | Immutable exact bytes, hash, completeness and provenance |
-| `SourceDocument` | Identity and version candidates, issuer, kind, date, access marking |
+| `SourceDocument` | Identity and version candidates, issuer, kind, date, access marking; SOURCE_AUTHORITY_POLICY v1 fields `document_authority`, `carrier_provenance`, `copy_fidelity`, `amendment_chain_status` and `authority_rationale` (initial values in [Architecture 6](LEGAL_KNOWLEDGE_ARCHITECTURE.md#6-independent-verification-dimensions)) |
 | `ExtractedPassage` | Page/paragraph span, OCR confidence/quality, source hash |
 | `CandidateRelationship` | Source and target IDs, relation type, exact quoted evidence, verification status |
 | `PublicationRecord` | Admin identifier, publication/withdrawal time, version and eligible audience decision |
-| `ReviewRecord` | Separate evidence/technical/legal reviewer findings and authority, if present |
+| `ReviewRecord` | Separate evidence/technical findings; legal decisions only as `Approval` records under a recorded Legal Reviewer appointment (Document Studio 3.3) |
 
 A changed SOP is a new source copy and **version candidate**. A replacement must not destroy or rewrite the older original. Similarly, withdrawal changes what users can search; it does not erase the audit trail.
 
@@ -52,11 +53,11 @@ A changed SOP is a new source copy and **version candidate**. A replacement must
 
 **Ingestion/publication:** `STAGED`, `PROCESSING`, `REVIEW_REQUIRED`, `REJECTED`, `FAILED`, `PUBLISHED`, `WITHDRAWN`.
 
-**Source authority:** `USER_SUPPLIED_UNVERIFIED`, documentary authentication state, actual issuer/authority status, and temporal applicability as separately supported.
+**Source authority:** display label `ADMIN_PUBLISHED_UNVERIFIED` for published local uploads, backed by the policy v1 fields (initially `carrier_provenance=USER_SUPPLIED`, `document_authority=UNKNOWN`, `copy_fidelity=HASH_ONLY`, `amendment_chain_status=NOT_CHECKED`), then documentary authentication state, actual issuer/authority status and temporal applicability as separately supported.
 
 **Extracted graph relationships:** `CANDIDATE`, `DOCUMENTARY_CHECKED`, `LEGAL_REVIEWED`, etc., according to established governance.
 
-These are design-level candidate vocabularies, **not** changes to the existing AUTH-LEDGER. Publication approval and legal authentication must never share a boolean field.
+These are design-level candidate vocabularies, **not** changes to the existing AUTH-LEDGER. Publication approval and legal authentication must never share a boolean field. Recurring values such as `REVIEW_REQUIRED` are always qualified by axis; see the reconciliation table in [Architecture 6](LEGAL_KNOWLEDGE_ARCHITECTURE.md#6-independent-verification-dimensions).
 
 ## 5. Graph enrichment and source trust
 
@@ -74,7 +75,7 @@ Every edge records source copy, passage, parsing method, version and review stat
 
 Keep the product simple. **Do not build a large RBAC matrix.** Implement two roles and restrict *all* source-mutation and staging endpoints to Admin.
 
-Minimum controls necessary before supporting uploads: offline deployment boundary, safe file-type/size checks, isolated low-privilege document processing, untrusted-PDF/OCR text isolation from model instructions, original-file hashes, backups, basic event audit and user admission/authentication.
+Minimum controls necessary before supporting uploads: offline deployment boundary, safe file-type/size checks, isolated low-privilege document processing, untrusted-PDF/OCR text isolation from model instructions, original-file hashes, backups, basic event audit (metadata only; Document Studio working content is never logged and is excluded from backups unless kept under the same session ownership and retention) and user admission/authentication.
 
 Once baseline controls are in place, prioritise **working upload → automated extraction → graph linking → Admin publication → shared search**. More advanced cyber-hardening can be planned after useful capability is established.
 
@@ -92,6 +93,8 @@ Once baseline controls are in place, prioritise **working upload → automated e
 - An access-marked source unsuitable for all app users is not published or exposed indirectly.
 - Admin publication does not change authenticated law, authoritative procedural obligations or AUTH-LEDGER state.
 - Restart an interrupted job; recover safely and preserve the original bytes.
+- Import a verified release bundle that contains bytes already uploaded locally: one `SourceCopy` with both provenances, no duplicate search hit; a same-identity, different-hash copy is kept as an alternate, not merged; the bundle change list triggers scoped impact assessment.
+- Admin publishes an amending Act: candidate provision-version nodes and edges appear as research, but definitive outputs do not change until they are verified.
 - Run all stages offline without internet connectivity or external service dependencies.
 
 ## 8. Scope and sequencing

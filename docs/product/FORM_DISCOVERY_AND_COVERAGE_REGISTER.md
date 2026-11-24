@@ -18,7 +18,7 @@ Establish an auditable inventory of every identified prescribed form, specimen, 
 | FDQ-04 | Eligible authorised service orders, instructions, circulars and SOPs | NOT_ASSESSED_IN_THIS_REGISTER | Existing source-register entries or separately authorised Admin intake; verify issuer/date and whole-deployment eligibility |
 | FDQ-05 | Relevant judgments and procedural-form defects | NOT_ASSESSED_IN_THIS_REGISTER | Source-anchored search and candidate treatment; distinguish holdings from pleadings and obiter |
 
-Queue items are not source records, claims of availability or acquisition instructions. Reconcile with current source manifests before assigning actual source-copy IDs. All eight MML originals are mandatory first-pass practical references under the evidence standard, not automatically authenticated official manuals. No new acquisition, HF write or legal approval is authorised.
+The queue is **Army-first** for the pilot. Air Force Act/Rules, Navy Act/Regulations, AFT procedure and BNSS-derived forms are in the target scope (Product vision 1) but not yet queued; add them as further FDQ rows before claiming tri-service coverage. Queue items are not source records, claims of availability or acquisition instructions. Reconcile with current source manifests before assigning actual source-copy IDs. All eight MML originals are mandatory first-pass practical references under the evidence standard, not automatically authenticated official manuals. No new acquisition, HF write or legal approval is authorised.
 
 ## 3. Required coverage records
 

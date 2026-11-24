@@ -118,7 +118,6 @@ All cases are **research seeds**, not answers. Expand from corpus-derived recurr
 
 Only **Admin** can upload, replace, withdraw, reprocess or publish a policy, SOP, instruction, circular, judgment, scanned note or other eligible reference. After submission, the application preserves the original, checks basic file safety and deployment-wide eligibility, extracts text/OCR, proposes dates/issuer/version and suggests connections to Acts, Rules, policies and judgments. **The content and candidate graph links remain in an Admin-only staging area until explicit Admin publication.** Published content is then searchable and readable by all app users, labelled `ADMIN_PUBLISHED_UNVERIFIED` unless evidence supports stronger status. Admin approval to publish is *not* source authentication or legal validation. Claimed `supersedes`, `mandatory procedure`, `legal exception` or `operative rule` edges remain research candidates until separately substantiated. Incompatible access-marked sources must not enter shared search. A User may search the published result but cannot trigger any mutation.
 
-## 4. Required scenario record contract (design proposal)
 ### UC-24 to UC-28: Document Studio use cases
 
 These questions invoke **working-document tools**, not knowledge-base ingestion. Every admitted User or Admin may select a published template, upload a draft for review, or assemble a temporary multi-document pack. The source-form identity must be established from the applicable Army Rules/appendices, MML (once edition authenticated), Defence Service Regulations or separately validated instructions; **no specimen is presumed currently mandatory merely because it appears in a manual**. The user selects/establishes rank, time and procedural stage before applying a versioned format.
@@ -131,6 +130,7 @@ For full-file review: compare the related records' people, dates, allegations, s
 
 See [Document Studio and Template Registry](../architecture/DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md) and [ADR-0003](../architecture/decisions/ADR-0003-DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md). The controlling-date basis, competent legal approval and dependency freshness must be established for authoritative use. Provide a Document Readiness Report with the actual checks, blockers, untested items and next human verification; research-only sources cannot activate mandatory checks.
 
+## 4. Required scenario record contract (design proposal)
 
 Each reusable scenario should store:
 - `scenario_id`, title, user utterances/aliases, version and review state;
@@ -141,8 +141,8 @@ Each reusable scenario should store:
 - action/checklist candidates, competent authority, safeguards, escalation and evidence status;
 - conditions that must **block** a definitive answer;
 - test variants where changing one fact changes the result;
-- reviewer, revision and approval artefact (if any).
-- optional linked uploaded-policy sources, origin, version, status and graph candidates, all explicitly distinguished from verified binding law;
+- reviewer, revision, approval tier and approval artefact (if any), per Document Studio 3.3;
+- optional linked Admin-published policy sources, origin, version, status and graph candidates, all explicitly distinguished from verified binding law.
 
 Do not embed a fixed statutory section number in a scenario without a verified, date-aware binding to the source graph.
 

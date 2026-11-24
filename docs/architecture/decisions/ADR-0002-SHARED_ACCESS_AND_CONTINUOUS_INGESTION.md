@@ -52,6 +52,8 @@ A withdrawn source should remain available in the Admin audit trail and preserve
 
 ## Not decided
 
-Exact authentication mechanism, backup retention, storage limits, approval workflow for legal validation, whether publication itself requires dual control, future advanced security, and additional specialised deployments. They require separate design decisions.
+Exact authentication mechanism, backup retention, storage limits, whether publication itself requires dual control, future advanced security, and additional specialised deployments. They require separate design decisions.
+
+The legal-validation approval workflow is now a **blocking open decision in ADR-0003**. Its proposed path (a recorded Legal Reviewer designation, approval tiers, artefact channels and fail-closed behaviour) is in [Document Studio 3.3](../DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md#33-legal-approval-path-on-an-air-gapped-site-proposed-blocking-open-decision). That designation would not be a third access role and would not change decisions 1 to 6: Admin publication remains distinct from legal approval. Reconciliation of release bundles with local uploads is specified in [Architecture 9.1](../LEGAL_KNOWLEDGE_ARCHITECTURE.md#91-release-updates-and-local-sources).
 
 No application implementation, outside-source acquisition, Hugging Face write, original corpus alteration, real ledger activation or PR merge is authorised by this ADR.
