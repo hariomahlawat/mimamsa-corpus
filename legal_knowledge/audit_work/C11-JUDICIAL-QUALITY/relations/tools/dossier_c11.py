@@ -626,6 +626,11 @@ def method_notes(b):
         "Only own-voice strong proposals go to LEGAL_INTERPRETATION_ADVISER_REVIEW. Reports of another decision's "
         "treatment, where the cited authority is the patient, are DOCUMENTARY_CHECK_REQUIRED with no proposal.",
         "",
+        "**Unbound adviser leads (rev. 1.2).** First-person overruling sentences ('... must be and is accordingly "
+        "overruled', 'we specifically overrule the same', 'We also overrule ...') also reach adviser review when the "
+        "target binding fails or is distant. Each such row is marked COURT_OWN_VOICE_UNBOUND_LEAD and records the raw "
+        "target text, the best candidate citation and a binding status that says binding is NOT established.",
+        "",
         "**Coverage limits.**",
         "- Coverage is limited to the crawler judgment corpus (ad77758d).",
         "- The official copies of Girish, Parashotam, Mullikote, Isaac and others held in the C5 working store or HF "

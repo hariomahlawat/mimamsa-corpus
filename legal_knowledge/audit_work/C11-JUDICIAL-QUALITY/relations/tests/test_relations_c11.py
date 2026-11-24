@@ -129,8 +129,10 @@ class TestNoOverrulesWithoutCue(unittest.TestCase):
                 self.assertEqual(row["status"], R.STATUS_ADV, row["candidate_id"])
             if row["proposed_relation"] == "OVERRULES":
                 self.assertTrue(any(p.search(row["cue_text"]) for p in rx), row["candidate_id"])
-                self.assertEqual(row["attribution"], "COURT_OWN_VOICE")
+                self.assertIn(row["attribution"], ("COURT_OWN_VOICE", "COURT_OWN_VOICE_UNBOUND_LEAD"))
                 self.assertEqual(row["negated"], "NO")
+                if row["attribution"] == "COURT_OWN_VOICE_UNBOUND_LEAD":
+                    self.assertTrue(row["binding_status"].startswith("LEAD"), row["candidate_id"])
             self.assertNotEqual(row["status"], "LEGALLY_VALIDATED")
         for row in read_csv("CASE_CITATION_GRAPH.csv"):
             self.assertEqual(row["relation"], "CITES")
@@ -191,7 +193,7 @@ class TestAttribution(unittest.TestCase):
     @unittest.skipUnless(os.path.exists(os.path.join(OUT, "TREATMENT_CANDIDATES.csv")), "outputs not built")
     def test_outputs_non_court_attribution_never_proposed(self):
         for row in read_csv("TREATMENT_CANDIDATES.csv"):
-            if row["attribution"] != "COURT_OWN_VOICE":
+            if row["attribution"] not in ("COURT_OWN_VOICE", "COURT_OWN_VOICE_UNBOUND_LEAD"):
                 self.assertEqual(row["proposed_relation"], "", row["candidate_id"])
 
 
@@ -259,6 +261,24 @@ class TestReviewFindingsC11(unittest.TestCase):
         self.assertIn("SCR|2016|4|909", keys)
         self.assertEqual(len(m), len(t))
 
+    def test_rel05_first_person_overruling_distant_is_lead(self):
+        t = ("105. We are, therefore, not in agreement with the opinion expressed by this Court in Y v. Z - (2001) 3 SCC 100 that "
+             "the deprival of remission power by awarding sentences of 20 or 25 years is not in consonance with the law and "
+             "we specifically overrule the same.\n")
+        cands = run_treatment(t, "Supreme Court of India", "Supreme Court of India")
+        ov = [c for c in cands if c["cue_relation"] == "OVERRULES"]
+        self.assertTrue(any(c["status"] == R.STATUS_ADV and c["attribution"] == "COURT_OWN_VOICE_UNBOUND_LEAD"
+                            and c["binding"].startswith("LEAD") for c in ov))
+
+    def test_rel05_lead_not_from_submission_or_quote(self):
+        t = "9. Learned counsel submitted that we should overrule Y v. Z (2001) 3 SCC 100.\n"
+        cands = run_treatment(t, "Supreme Court of India", "Supreme Court of India")
+        self.assertFalse(any(c["status"] == R.STATUS_ADV for c in cands))
+
+    def test_rel10_subject_binding(self):
+        self.assertTrue(R.subject_bound(" is clearly "))
+        self.assertFalse(R.subject_bound(", that an officer of the rank of the petitioner was "))
+
     def test_rel12_unit_normalised(self):
         self.assertEqual(R.normalise_unit("AR-1954", "s"), "r")
         self.assertEqual(R.normalise_unit("AA-1950", "r"), "s")
@@ -282,7 +302,7 @@ class TestReviewFindingsC11(unittest.TestCase):
         for row in read_csv("TREATMENT_CANDIDATES.csv"):
             if row["status"] == R.STATUS_ADV:
                 self.assertIn(row["proposed_relation"], ("OVERRULES", "REVERSES", "QUESTIONS"), row["candidate_id"])
-                self.assertEqual(row["attribution"], "COURT_OWN_VOICE")
+                self.assertIn(row["attribution"], ("COURT_OWN_VOICE", "COURT_OWN_VOICE_UNBOUND_LEAD"))
 
 
 class TestVersionNotAssignedWithoutEvidence(unittest.TestCase):

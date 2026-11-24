@@ -6,7 +6,8 @@ reviewer's verdict, then recomputes precision per category on the rows that are 
 The reviewer verdicts are taken as ground truth for the before state; rows whose after-state is a renamed label are
 listed for reading, not scored as correct.
 
-    python3.11 -B -I tools/remeasure_review_c11.py [--review <rows.csv>]
+    python3.11 -B -I tools/remeasure_review_c11.py
+Inputs: review_inputs/round1_*.csv and round2_*.csv (sha256 checked against ROUNDS).
 Writes outputs/REVIEW_REMEASURE_C11.csv and outputs/REVIEW_REMEASURE_C11.json (deterministic).
 """
 import argparse
@@ -22,9 +23,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import relations_c11 as R  # noqa: E402
 
-DEFAULT_REVIEW = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(R.AUDIT))), "c10out", "rev_c11",
-                              "fable_review_relations_c11_rows.csv")
-GOOD = {"SUPPORTED", "TARGET_CORRECT", "FAIR", "FAIR_OVER_CONSERVATIVE", "FAIR_BUT_SPURIOUS_EDGE", "VERBATIM_ON_STATED_PAGE"}
+REVIEW_DIR = os.path.join(R.WS, "review_inputs")
+ROUNDS = [("round1", "round1_fable_review_relations_c11_rows.csv",
+           "f6747de1f903563f90bf0d2f4629e196f7a4fa8791563720dfaa1559baf1ff82"),
+          ("round2", "round2_fable_review_relations_c11_v11_rows.csv",
+           "16774fb221a58f6d7280ab048ffd3a5d7f648742323ca7adf8357a4f07687c5b")]
+GOOD = {"MISSED_OWN_VOICE", "SUPPORTED", "TARGET_CORRECT", "FAIR", "FAIR_OVER_CONSERVATIVE", "FAIR_BUT_SPURIOUS_EDGE", "VERBATIM_ON_STATED_PAGE"}
 
 
 def rows(p):
@@ -44,10 +48,19 @@ def norm_pid(pid):
 
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--review", default=DEFAULT_REVIEW)
-    a = ap.parse_args()
-    rev = rows(a.review)
+    import hashlib
+    rev = []
+    hashes = {}
+    for rnd, fname, expect in ROUNDS:
+        pth = os.path.join(REVIEW_DIR, fname)
+        with open(pth, "rb") as f:
+            h = hashlib.sha256(f.read()).hexdigest()
+        if h != expect:
+            raise SystemExit("review input %s: sha256 %s, expected %s" % (fname, h, expect))
+        hashes[fname] = h
+        for x in rows(pth):
+            x["round"] = rnd
+            rev.append(x)
     cands = {r["candidate_id"]: r for r in rows(os.path.join(R.OUT, "TREATMENT_CANDIDATES.csv"))}
     edges_by_src = defaultdict(list)
     for r in rows(os.path.join(R.OUT, "CASE_CITATION_GRAPH.csv")):
@@ -67,14 +80,20 @@ def main():
                 alt = [k for k in cands.values() if k["source_doc_id"] == x["source_doc_id"] and k["cue_text"] == x["cue"]
                        and (x["stated_target"] in (k["target_doc_ids"].split(";") + [k["cited_string"]]))
                        and (k["proposed_relation"] or k["status"] != R.STATUS_AUTO)]
+                if not alt and cat == "RECALL_PROBE_OVERRULES":
+                    alt = [k for k in cands.values() if k["source_doc_id"] == x["source_doc_id"] and k["cue_page"] == x["page"]
+                           and k["status"] == R.STATUS_ADV and (x["stated_target"] in (k["target_doc_ids"].split(";")
+                                                                                        + [k["cited_string"]]))]
                 if alt:
                     c = sorted(alt, key=lambda k: k["candidate_id"])[0]
             if c is None:
                 after, still = "NO_CANDIDATE_GENERATED (cue outside the anchor sentence or anchor removed)", False
             else:
                 after = "%s/%s/%s" % (c["proposed_relation"] or "-", c["attribution"], c["status"])
-                if cat == "ADVISER_REPORTED_TREATMENT":
+                if cat in ("ADVISER_REPORTED_TREATMENT", "REPORTED_TREATMENT_DOC_CHECK"):
                     still = c["status"] != R.STATUS_AUTO
+                elif cat == "RECALL_PROBE_OVERRULES":
+                    still = c["status"] == R.STATUS_ADV
                 else:
                     still = bool(c["proposed_relation"])
         elif rid.startswith("E-"):
@@ -97,15 +116,15 @@ def main():
             else:
                 l = hits[0]
                 after = "%s %s" % (l["provision_id"] or l["instrument_id"], l["relationship"])
-                still = l["relationship"] == cat
+                still = l["relationship"] == cat or (cat.startswith("CRPC") and l["instrument_id"] == cat)
         elif rid.startswith("RD-"):
             after, still = "dossier reading unchanged (re-verified at build)", True
-        out.append({"category": cat, "row_id": rid, "source_doc_id": x["source_doc_id"], "reviewer_verdict": verdict,
+        out.append({"round": x["round"], "category": cat, "row_id": rid, "source_doc_id": x["source_doc_id"], "reviewer_verdict": verdict,
                     "before": x["tool_value"], "after": after, "still_proposed_or_labelled": "YES" if still else "NO"})
     summ = {}
     by = defaultdict(list)
     for r in out:
-        by[r["category"]].append(r)
+        by[r["round"] + ":" + r["category"]].append(r)
     for cat in sorted(by):
         rs = by[cat]
         kept = [r for r in rs if r["still_proposed_or_labelled"] == "YES"]
@@ -120,6 +139,7 @@ def main():
         w.writerow(r)
     with open(os.path.join(R.OUT, "REVIEW_REMEASURE_C11.csv"), "w", encoding="utf-8", newline="") as f:
         f.write(buf.getvalue())
+    summ["_review_inputs_sha256"] = hashes
     with open(os.path.join(R.OUT, "REVIEW_REMEASURE_C11.json"), "w", encoding="utf-8") as f:
         f.write(json.dumps(summ, indent=1, sort_keys=True) + "\n")
     print(json.dumps(summ, indent=1, sort_keys=True))

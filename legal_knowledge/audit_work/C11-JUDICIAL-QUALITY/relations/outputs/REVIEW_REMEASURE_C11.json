@@ -1,5 +1,9 @@
 {
- "ADVISER_PROPOSED_OVERRULES_QUESTIONS": {
+ "_review_inputs_sha256": {
+  "round1_fable_review_relations_c11_rows.csv": "f6747de1f903563f90bf0d2f4629e196f7a4fa8791563720dfaa1559baf1ff82",
+  "round2_fable_review_relations_c11_v11_rows.csv": "16774fb221a58f6d7280ab048ffd3a5d7f648742323ca7adf8357a4f07687c5b"
+ },
+ "round1:ADVISER_PROPOSED_OVERRULES_QUESTIONS": {
   "sample": 10,
   "still_proposed_after": 1,
   "supported_among_kept": 1,
@@ -7,7 +11,7 @@
   "supported_lost": 0,
   "unsupported_withdrawn": 9
  },
- "ADVISER_REPORTED_TREATMENT": {
+ "round1:ADVISER_REPORTED_TREATMENT": {
   "sample": 47,
   "still_proposed_after": 3,
   "supported_among_kept": 3,
@@ -15,7 +19,7 @@
   "supported_lost": 10,
   "unsupported_withdrawn": 34
  },
- "BENCH": {
+ "round1:BENCH": {
   "sample": 3,
   "still_proposed_after": 3,
   "supported_among_kept": 3,
@@ -23,7 +27,7 @@
   "supported_lost": 0,
   "unsupported_withdrawn": 0
  },
- "CASE_NUMBER_PLUS_PARTY": {
+ "round1:CASE_NUMBER_PLUS_PARTY": {
   "sample": 8,
   "still_proposed_after": 8,
   "supported_among_kept": 8,
@@ -31,7 +35,7 @@
   "supported_lost": 0,
   "unsupported_withdrawn": 0
  },
- "CURATED_CROSSWALK_C10_HELD": {
+ "round1:CURATED_CROSSWALK_C10_HELD": {
   "sample": 8,
   "still_proposed_after": 8,
   "supported_among_kept": 8,
@@ -39,7 +43,7 @@
   "supported_lost": 0,
   "unsupported_withdrawn": 0
  },
- "HOLDING": {
+ "round1:HOLDING": {
   "sample": 10,
   "still_proposed_after": 10,
   "supported_among_kept": 10,
@@ -47,7 +51,7 @@
   "supported_lost": 0,
   "unsupported_withdrawn": 0
  },
- "LATER_RELIANCE": {
+ "round1:LATER_RELIANCE": {
   "sample": 4,
   "still_proposed_after": 4,
   "supported_among_kept": 4,
@@ -55,7 +59,7 @@
   "supported_lost": 0,
   "unsupported_withdrawn": 0
  },
- "NEUTRAL_CITATION_METADATA": {
+ "round1:NEUTRAL_CITATION_METADATA": {
   "sample": 2,
   "still_proposed_after": 2,
   "supported_among_kept": 2,
@@ -63,7 +67,7 @@
   "supported_lost": 0,
   "unsupported_withdrawn": 0
  },
- "PARALLEL_CITATION_LEARNED": {
+ "round1:PARALLEL_CITATION_LEARNED": {
   "sample": 10,
   "still_proposed_after": 10,
   "supported_among_kept": 10,
@@ -71,7 +75,7 @@
   "supported_lost": 0,
   "unsupported_withdrawn": 0
  },
- "PARTY_YEAR_COURT": {
+ "round1:PARTY_YEAR_COURT": {
   "sample": 10,
   "still_proposed_after": 9,
   "supported_among_kept": 9,
@@ -79,7 +83,7 @@
   "supported_lost": 0,
   "unsupported_withdrawn": 1
  },
- "PROVISION_APPLIED": {
+ "round1:PROVISION_APPLIED": {
   "sample": 6,
   "still_proposed_after": 0,
   "supported_among_kept": 0,
@@ -87,7 +91,7 @@
   "supported_lost": 0,
   "unsupported_withdrawn": 6
  },
- "PROVISION_CHALLENGED": {
+ "round1:PROVISION_CHALLENGED": {
   "sample": 6,
   "still_proposed_after": 0,
   "supported_among_kept": 0,
@@ -95,15 +99,15 @@
   "supported_lost": 1,
   "unsupported_withdrawn": 5
  },
- "PROVISION_HELD_INAPPLICABLE": {
+ "round1:PROVISION_HELD_INAPPLICABLE": {
   "sample": 6,
-  "still_proposed_after": 2,
-  "supported_among_kept": 2,
+  "still_proposed_after": 1,
+  "supported_among_kept": 1,
   "supported_before": 2,
-  "supported_lost": 0,
+  "supported_lost": 1,
   "unsupported_withdrawn": 4
  },
- "PROVISION_INTERPRETED": {
+ "round1:PROVISION_INTERPRETED": {
   "sample": 6,
   "still_proposed_after": 0,
   "supported_among_kept": 0,
@@ -111,7 +115,7 @@
   "supported_lost": 1,
   "unsupported_withdrawn": 5
  },
- "PROVISION_QUOTED": {
+ "round1:PROVISION_QUOTED": {
   "sample": 6,
   "still_proposed_after": 5,
   "supported_among_kept": 5,
@@ -119,7 +123,7 @@
   "supported_lost": 0,
   "unsupported_withdrawn": 1
  },
- "REPORTER_CITATION_METADATA": {
+ "round1:REPORTER_CITATION_METADATA": {
   "sample": 2,
   "still_proposed_after": 2,
   "supported_among_kept": 2,
@@ -127,7 +131,7 @@
   "supported_lost": 0,
   "unsupported_withdrawn": 0
  },
- "REPORTER_EDITORIAL": {
+ "round1:REPORTER_EDITORIAL": {
   "sample": 2,
   "still_proposed_after": 2,
   "supported_among_kept": 2,
@@ -135,15 +139,15 @@
   "supported_lost": 0,
   "unsupported_withdrawn": 0
  },
- "SAMPLE_APPLIES_FOLLOWS": {
+ "round1:SAMPLE_APPLIES_FOLLOWS": {
   "sample": 25,
-  "still_proposed_after": 14,
-  "supported_among_kept": 13,
+  "still_proposed_after": 12,
+  "supported_among_kept": 12,
   "supported_before": 18,
-  "supported_lost": 5,
-  "unsupported_withdrawn": 6
+  "supported_lost": 6,
+  "unsupported_withdrawn": 7
  },
- "SAMPLE_DISTINGUISHES": {
+ "round1:SAMPLE_DISTINGUISHES": {
   "sample": 15,
   "still_proposed_after": 3,
   "supported_among_kept": 3,
@@ -151,7 +155,7 @@
   "supported_lost": 2,
   "unsupported_withdrawn": 10
  },
- "STATUTE_MENTIONED": {
+ "round1:STATUTE_MENTIONED": {
   "sample": 10,
   "still_proposed_after": 10,
   "supported_among_kept": 10,
@@ -159,7 +163,7 @@
   "supported_lost": 0,
   "unsupported_withdrawn": 0
  },
- "TREATMENT": {
+ "round1:TREATMENT": {
   "sample": 7,
   "still_proposed_after": 7,
   "supported_among_kept": 7,
@@ -167,19 +171,203 @@
   "supported_lost": 0,
   "unsupported_withdrawn": 0
  },
- "UNRESOLVED_AMBIGUOUS": {
+ "round1:UNRESOLVED_AMBIGUOUS": {
   "sample": 10,
-  "still_proposed_after": 2,
-  "supported_among_kept": 2,
+  "still_proposed_after": 1,
+  "supported_among_kept": 1,
   "supported_before": 10,
-  "supported_lost": 8,
+  "supported_lost": 9,
   "unsupported_withdrawn": 0
  },
- "UNRESOLVED_CITATION_MISMATCH": {
+ "round1:UNRESOLVED_CITATION_MISMATCH": {
   "sample": 10,
   "still_proposed_after": 10,
   "supported_among_kept": 10,
   "supported_before": 10,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 0
+ },
+ "round2:ADVISER_OVERRULES": {
+  "sample": 1,
+  "still_proposed_after": 1,
+  "supported_among_kept": 1,
+  "supported_before": 1,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 0
+ },
+ "round2:APPLIES_FOLLOWS": {
+  "sample": 30,
+  "still_proposed_after": 29,
+  "supported_among_kept": 29,
+  "supported_before": 29,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 1
+ },
+ "round2:CASE_NUMBER_PLUS_PARTY": {
+  "sample": 3,
+  "still_proposed_after": 2,
+  "supported_among_kept": 2,
+  "supported_before": 3,
+  "supported_lost": 1,
+  "unsupported_withdrawn": 0
+ },
+ "round2:CHALLENGE_GROUND_CITED": {
+  "sample": 12,
+  "still_proposed_after": 8,
+  "supported_among_kept": 8,
+  "supported_before": 8,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 4
+ },
+ "round2:CHARGED_OR_CONVICTED_UNDER": {
+  "sample": 4,
+  "still_proposed_after": 4,
+  "supported_among_kept": 4,
+  "supported_before": 4,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 0
+ },
+ "round2:CRPC-1898": {
+  "sample": 5,
+  "still_proposed_after": 5,
+  "supported_among_kept": 5,
+  "supported_before": 5,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 0
+ },
+ "round2:CRPC-UNSPECIFIED": {
+  "sample": 5,
+  "still_proposed_after": 5,
+  "supported_among_kept": 5,
+  "supported_before": 5,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 0
+ },
+ "round2:CURATED_CROSSWALK_C10_HELD": {
+  "sample": 2,
+  "still_proposed_after": 2,
+  "supported_among_kept": 2,
+  "supported_before": 2,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 0
+ },
+ "round2:DISTINGUISHES": {
+  "sample": 6,
+  "still_proposed_after": 6,
+  "supported_among_kept": 6,
+  "supported_before": 6,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 0
+ },
+ "round2:NEUTRAL_CITATION_METADATA": {
+  "sample": 1,
+  "still_proposed_after": 1,
+  "supported_among_kept": 1,
+  "supported_before": 1,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 0
+ },
+ "round2:PARALLEL_CITATION_LEARNED": {
+  "sample": 4,
+  "still_proposed_after": 4,
+  "supported_among_kept": 4,
+  "supported_before": 4,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 0
+ },
+ "round2:PARALLEL_CITATION_LEARNED;REPORTER_CITATION_METADATA": {
+  "sample": 1,
+  "still_proposed_after": 1,
+  "supported_among_kept": 1,
+  "supported_before": 1,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 0
+ },
+ "round2:PARTY_INVOKED": {
+  "sample": 4,
+  "still_proposed_after": 4,
+  "supported_among_kept": 4,
+  "supported_before": 4,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 0
+ },
+ "round2:PARTY_YEAR_COURT": {
+  "sample": 13,
+  "still_proposed_after": 13,
+  "supported_among_kept": 13,
+  "supported_before": 13,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 0
+ },
+ "round2:PARTY_YEAR_COURT_KEY_CONSISTENCY": {
+  "sample": 5,
+  "still_proposed_after": 5,
+  "supported_among_kept": 5,
+  "supported_before": 5,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 0
+ },
+ "round2:POWER_EXERCISED_UNDER": {
+  "sample": 4,
+  "still_proposed_after": 4,
+  "supported_among_kept": 4,
+  "supported_before": 4,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 0
+ },
+ "round2:PROVISION_CHALLENGED": {
+  "sample": 4,
+  "still_proposed_after": 2,
+  "supported_among_kept": 2,
+  "supported_before": 3,
+  "supported_lost": 1,
+  "unsupported_withdrawn": 1
+ },
+ "round2:PROVISION_HELD_INAPPLICABLE": {
+  "sample": 12,
+  "still_proposed_after": 1,
+  "supported_among_kept": 1,
+  "supported_before": 4,
+  "supported_lost": 3,
+  "unsupported_withdrawn": 8
+ },
+ "round2:PROVISION_INTERPRETED": {
+  "sample": 8,
+  "still_proposed_after": 3,
+  "supported_among_kept": 2,
+  "supported_before": 4,
+  "supported_lost": 2,
+  "unsupported_withdrawn": 3
+ },
+ "round2:PROVISION_QUOTED": {
+  "sample": 2,
+  "still_proposed_after": 2,
+  "supported_among_kept": 2,
+  "supported_before": 2,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 0
+ },
+ "round2:RECALL_PROBE_OVERRULES": {
+  "sample": 2,
+  "still_proposed_after": 2,
+  "supported_among_kept": 2,
+  "supported_before": 2,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 0
+ },
+ "round2:REPORTED_TREATMENT_DOC_CHECK": {
+  "sample": 3,
+  "still_proposed_after": 3,
+  "supported_among_kept": 3,
+  "supported_before": 3,
+  "supported_lost": 0,
+  "unsupported_withdrawn": 0
+ },
+ "round2:REPORTER_CITATION_METADATA": {
+  "sample": 1,
+  "still_proposed_after": 1,
+  "supported_among_kept": 1,
+  "supported_before": 1,
   "supported_lost": 0,
   "unsupported_withdrawn": 0
  }

@@ -26,7 +26,7 @@ import subprocess
 import sys
 from collections import Counter, defaultdict
 
-TOOL_VERSION = "relations_c11 1.1.0 (review REL-01..REL-14 fixes)"
+TOOL_VERSION = "relations_c11 1.2.0 (review rounds 1-2 fixes)"
 TEXT_COMMIT = "ad77758d"
 AG_COMMIT = "cfc52d57"
 CURATED_COMMIT = "21e73b83"
@@ -427,7 +427,7 @@ commandant commander-in-chief inspector senior junior welfare association societ
 vice deputy chairman member president sons son father mother wife daughter mahto sharma verma gupta yadav
 public interest litigation centre common cause welfare supreme court high record advocates advocate association bench
 tribunal armed judgment apex case cases legal matter matters writ petition appeal civil criminal rules section military
-service services medical disability through behalf people peoples""".split())
+service services medical disability through behalf people peoples martial""".split())
 # "sharma", "yadav" etc. are kept out of the distinctive set because they are too common to identify a case alone.
 
 
@@ -615,11 +615,17 @@ def treatment_direction(t, cue, cpos, cend, o):
 
 def in_quotation(text, pos, lo):
     """True when `pos` most likely falls inside a quoted passage of another judgment/document."""
-    look = text[max(lo, pos - 2500):pos]
+    look = text[max(lo, pos - 4000):pos]
     lo_q = look.rfind("“")
     lc_q = look.rfind("”")
     if lo_q > lc_q:
         return True, "unclosed opening quotation mark before the wording"
+    if look.count("“") > look.count("”"):
+        return True, "more opening than closing curly quotation marks before the wording (nested quotation)"
+    fwd = text[pos:pos + 900]
+    em = re.search(r"\(\s*emphasis\s+(?:supplied|added|ours|mine)", fwd, re.I)
+    if em and not re.search(r"\n\s*\d{1,3}\s*\.\s+[A-Z]", fwd[:em.start()]):
+        return True, "an '(emphasis supplied)' marker closes the passage after the wording"
     if look[-1500:].count('"') % 2 == 1:
         return True, "odd number of straight quotation marks before the wording"
     tail = look[-1800:]
@@ -638,11 +644,18 @@ OWN_VOICE_STRONG = re.compile(
     r"\b(?:is|are)\s+(?:hereby\s+|accordingly\s+|therefore\s+|thus\s+)?over-?\s?ruled\b|\bwe\s+(?:[a-z]+\s+){0,2}overrule\b|"
     r"does\s+not\s+lay\s+down\s+(?:the\s+|a\s+)?(?:correct|good)\s+law|\b(?:is|are)\s+(?:no\s+longer|not)\s+(?:a\s+)?good\s+law|"
     r"\b(?:is|are)\s+(?:thus\s+|therefore\s+|clearly\s+)?per\s+incuriam|\bwe\s+(?:[a-z]+\s+){0,2}doubt\s+the\s+correctness", re.I)
+OWN_FIRST_PERSON = re.compile(r"\b(?:must\s+be\s+and\s+)?is\s+(?:hereby\s+|accordingly\s+|therefore\s+|thus\s+)over-?\s?ruled\b|"
+                              r"\bwe\s+(?:[a-z]+\s+){0,2}overrule\b|\b(?:is|are)\s+(?:hereby\s+)?overruled\s+by\s+us\b", re.I)
+LEAD_BLOCKABLE = {"CUE_NOT_BOUND_TO_TARGET", "MULTIPLE_AUTHORITIES_IN_SENTENCE", "REPORTED_TREATMENT_OF_TARGET", "TARGET_IS_AGENT",
+                  "COURT_OWN_VOICE", "NEXT_SENTENCE_NO_BACK_REFERENCE"}
 HEADNOTE_REFS = re.compile(r"\[\s*(?:Para\s*\d+\]\s*\[)?\d{2,4}\s*[-–]?\s*[A-H](?:\s*[-–,]\s*[A-H])*\s*"
                            r"(?:[;,]\s*\d{0,4}\s*[-–]?\s*[A-H](?:\s*[-–,]\s*[A-H])*\s*)*\]")
 SUBMISSION2 = re.compile(SUBMISSION.pattern + r"|\bstand\s+of\b|\baccording\s+to\s+(?:him|her|them|the\s+learned|learned|mr|ms|the\s+petitioner|"
                          r"the\s+respondent|the\s+appellant)|\bin\s+the\s+view\s+of\b|\bwould\s+submit|\bit\s+was\s+(?:argued|submitted|"
-                         r"contended|urged|pleaded)|\bcontentions?\b|\bthe\s+plea\b|\bsought\s+to\s+(?:argue|contend)", re.I)
+                         r"contended|urged|pleaded)|\bcontentions?\b|\bthe\s+plea\b|\bsought\s+to\s+(?:argue|contend)|\bgrievance\s+raised\b|"
+                         r"\bgrievance\s+(?:of\s+the\s+\w+\s+)?(?:before\s+the\s+\w+\s+)?was\s+that\b|"
+                         r"\bcase\s+of\s+the\s+(?:claimant|applicant|petitioner|respondent|appellant)s?\s+(?:is|was)\s+that\b|"
+                         r"\bit\s+is\s+pointed\s+out\b|\bwas\s+assailed\b", re.I)
 COURT_VOICE2 = re.compile(COURT_VOICE.pattern + r"|\bwe\b|\bin\s+our\b|\bthis\s+Court\s+(?:is|finds|holds|has\s+considered)|"
                           r"\bI\s+(?:am|find|hold|have)\b", re.I)
 OTHER_COURT_REPORT = re.compile(OTHER_COURT_REPORT.pattern + r"|\b(?:Bench|Court|Lordships?)\b[^.;]{0,60}?\b(?:felt|overruled|referred|reversed|doubted|"
@@ -916,12 +929,12 @@ REL_BEFORE = [
     ("PARTY_INVOKED", re.compile(r"(?:invok(?:ed|ing|es)|filed|preferred|instituted)\s+(?:[a-z]+\s+){0,4}under\s+(?:the\s+)?$", re.I)),
 ]
 REL_AFTER = [
-    ("PROVISION_CHALLENGED", re.compile(r"^[^.;]{0,60}?\b(?:is|are|was|were|being)\s+(?:ultra\s+vires|unconstitutional|void|"
+    ("PROVISION_CHALLENGED", re.compile(r"^(?P<gap>[^.;]{0,60}?)\b(?:is|are|was|were|being)\s+(?:ultra\s+vires|unconstitutional|void|"
                                         r"struck\s+down|declared\s+(?:ultra\s+vires|unconstitutional|void))", re.I)),
-    ("PROVISION_HELD_INAPPLICABLE", re.compile(r"^[^.;]{0,60}?\b(?:(?:is|are|was|were|would|will|does|do|did|could)\s+not\s+"
-                                               r"(?:be\s+)?(?:[a-z]+ly\s+)?(?:applicable|attracted|apply|available)|has\s+no\s+"
+    ("PROVISION_HELD_INAPPLICABLE", re.compile(r"^(?P<gap>[^.;]{0,60}?)\b(?:(?:is|are|was|were|would|will|does|do|did|could)\s+not\s+"
+                                               r"(?:be\s+)?(?:[a-z]+ly\s+)?(?:applicable|attracted|apply)|has\s+no\s+"
                                                r"application|(?:is|are)\s+(?:[a-z]+ly\s+)?inapplicable)", re.I)),
-    ("PROVISION_INTERPRETED", re.compile(r"^[^.;]{0,40}?\b(?:has|have|had|is|are|must|should|would|needs?)\s+(?:to\s+)?(?:be\s+)?"
+    ("PROVISION_INTERPRETED", re.compile(r"^(?P<gap>[^.;]{0,40}?)\b(?:has|have|had|is|are|must|should|would|needs?)\s+(?:to\s+)?(?:be\s+)?"
                                          r"(?:interpreted|construed|read\s+down)", re.I)),
     ("HISTORICAL_VERSION_RELEVANT", re.compile(r"^[^.;]{0,60}?(?:as\s+it\s+(?:then\s+)?stood|since\s+(?:repealed|omitted)|"
                                                r"(?:omitted|substituted|inserted|repealed)\s+by|stands?\s+(?:repealed|omitted)|"
@@ -932,7 +945,25 @@ REL_AFTER = [
 ]
 REL_PRIORITY = ["PROVISION_CHALLENGED", "CHALLENGE_GROUND_CITED", "PROVISION_HELD_INAPPLICABLE", "PROVISION_INTERPRETED",
                 "HISTORICAL_VERSION_RELEVANT", "PROVISION_QUOTED", "POWER_EXERCISED_UNDER", "CHARGED_OR_CONVICTED_UNDER",
-                "PARTY_INVOKED"]
+                "PARTY_INVOKED", "JURISDICTION_INVOKED"]
+JURISDICTION_ARTICLES = {"32", "136", "226", "227"}
+SUBJ_ALLOWED = set("""is are was were would will does do did could not be been being therefore thus clearly also itself in the present
+case facts of this so far as concerned plainly squarely wholly totally entirely hence obviously""".split())
+REPORTED_STAT = re.compile(r"\bJustice\b|\bLordships?\b|,\s*J\.|\bwas\s+in\s+issue\b|\bwith\s+reference\s+to\b|\bthe\s+question\s+"
+                           r"(?:before|was)\b|\bit\s+was\s+held\b|\bheld\s+that\b|\bobserved\s+that\b", re.I)
+
+
+def subject_bound(gap):
+    """The provision must be the grammatical subject of the cue: only auxiliaries/adverbs between mention and cue."""
+    g = PAGE_FURNITURE.sub(" ", gap or "")
+    if len(g.strip()) > 45:
+        return False
+    for w in re.findall(r"[A-Za-z]+", g):
+        lw = w.lower()
+        if lw in SUBJ_ALLOWED or len(w) == 1 or (lw.endswith("ly") and len(lw) > 4) or re.fullmatch(r"[ivx]+", lw):
+            continue
+        return False
+    return True
 CHALLENGE_SENTENCE = re.compile(r"\bvires\b|constitutional\s+validity|\bunconstitutional\b|validity\s+of|\bstruck\s+down\b|"
                                 r"strike\s+down|violative\s+of|in\s+violation\s+of|offends?\b", re.I)
 # Cues that need the court's own voice (ignored inside quotations / submissions).
@@ -940,6 +971,7 @@ REL_NEEDS_OWN_VOICE = {"PROVISION_HELD_INAPPLICABLE", "PROVISION_INTERPRETED", "
 REL_STATUS = {"PROVISION_CHALLENGED": STATUS_DOC, "CHALLENGE_GROUND_CITED": STATUS_DOC, "PROVISION_HELD_INAPPLICABLE": STATUS_DOC,
               "HISTORICAL_VERSION_RELEVANT": STATUS_DOC, "PROVISION_INTERPRETED": STATUS_DOC, "PROVISION_QUOTED": STATUS_AUTO,
               "POWER_EXERCISED_UNDER": STATUS_AUTO, "CHARGED_OR_CONVICTED_UNDER": STATUS_AUTO, "PARTY_INVOKED": STATUS_AUTO,
+              "JURISDICTION_INVOKED": STATUS_AUTO,
               "RELATIONSHIP_UNRESOLVED": STATUS_AUTO, "STATUTE_MENTIONED": STATUS_AUTO}
 RULE_INSTRUMENTS = ("AR-1954", "AFT-PR-2008", "ENT-")
 ACT_INSTRUMENTS = ("AA-1950", "AFT-2007", "NA-1957", "AFA-1950", "IAA-1911", "IPC-1860", "BNS-2023", "BNSS-2023", "IEA-1872",
@@ -1341,20 +1373,21 @@ class Builder:
     def key_consistency(self):
         """One citation string, one answer: a key resolved by the party fallback to a single target is applied to
         ambiguous occurrences of the same key that list that target; conflicting fallback answers become ambiguous."""
-        party_methods = ("PARTY_YEAR_COURT", "PARTY_YEAR_COURT_TIEBREAK")
+        self.consistency_changes = 0
+        self.name_tiebreak()
+        party_methods = ("PARTY_YEAR_COURT", "PARTY_YEAR_COURT_TIEBREAK", "PARTY_NAME_TIEBREAK")
         by_key = defaultdict(set)
         for o in self.occ:
             r = o["res"]
             if r["state"] == "RESOLVED" and set(r["methods"]) & set(party_methods):
                 by_key[o["clus"][0]["key"]].add(r["group"])
-        self.consistency_changes = 0
         for o in self.occ:
             r = o["res"]
             k = o["clus"][0]["key"]
             gs = by_key.get(k)
             if not gs:
                 continue
-            if len(gs) > 1 and r["state"] == "RESOLVED" and set(r["methods"]) & set(party_methods):
+            if len(gs) > 1 and r["state"] == "RESOLVED" and set(r["methods"]) & {"PARTY_YEAR_COURT", "PARTY_YEAR_COURT_TIEBREAK"}:
                 o["res"] = {"state": "UNRESOLVED_AMBIGUOUS", "group": "", "methods": [], "cands": sorted(gs),
                             "notes": r["notes"] + ["the same citation string resolves to different targets elsewhere"]}
                 self.consistency_changes += 1
@@ -1362,6 +1395,29 @@ class Builder:
                 o["res"] = {"state": "RESOLVED", "group": next(iter(gs)), "methods": ["PARTY_YEAR_COURT_KEY_CONSISTENCY"],
                             "cands": [], "notes": r["notes"] + ["same string resolved by named party elsewhere"]}
                 self.consistency_changes += 1
+        self.name_tiebreak()
+
+    def name_tiebreak(self):
+        # per case: an ambiguous occurrence whose case-name segment (last 90 chars) names exactly one candidate's distinctive party word
+        for o in self.occ:
+            r = o["res"]
+            if r["state"] != "UNRESOLVED_AMBIGUOUS" or not r["cands"]:
+                continue
+            ww = set(w.lower() for w in re.findall(r"[A-Za-z]{5,}", (o.get("window") or "")[-90:]))
+            hit = []
+            for g in r["cands"]:
+                dist = set(w for w in self.group_name_words(g) if len(w) >= 5 and w not in PARTY_STOP and w not in RANK_WORDS)
+                others = set()
+                for g2 in r["cands"]:
+                    if g2 != g:
+                        others |= self.group_name_words(g2)
+                if (dist - others) & ww:
+                    hit.append(g)
+            if len(hit) == 1:
+                o["res"] = {"state": "RESOLVED", "group": hit[0], "methods": ["PARTY_NAME_TIEBREAK"], "cands": [],
+                            "notes": r["notes"] + ["named-party tie-break among %d candidates" % len(r["cands"])]}
+                self.consistency_changes += 1
+
 
     def own_case_keys(self, jid):
         keys = set()
@@ -1457,11 +1513,29 @@ class Builder:
                         pass
                 self.occ.append({"jid": jid, "ci": ci, "start": s, "end": e, "clus": clus, "res": res,
                                  "page": doc.page_at(s), "para": doc.para_at(s), "footnote": fn, "marker": marker,
+                                 "window": window,
                                  "zone": "REPORTER_EDITORIAL" if s < doc.editorial_end else "BODY"})
         self.key_consistency()
 
     # ---------------- treatment
     def classify_treatment(self):
+        self._classify_anchored()
+        self.own_voice_leads()
+        self.note_leads()
+
+    def note_leads(self):
+        """Point other cue rows in the same passage to the adviser lead, so their own (correct) reason is not misread."""
+        leads = [c for c in self.cands if c["attribution"] == "COURT_OWN_VOICE_UNBOUND_LEAD"]
+        for c in self.cands:
+            if c["attribution"] == "COURT_OWN_VOICE_UNBOUND_LEAD" or c["cue_relation"] not in STRONG_RELATIONS:
+                continue
+            for l in leads:
+                if l["jid"] == c["jid"] and abs(l["cpos"] - c["cpos"]) < 1500 and l["cpos"] != c["cpos"]:
+                    c["reasons"].append("first-person overruling in the same passage (p.%s) is recorded as an adviser lead; "
+                                        "this row's own cue is a different statement" % l["cue_page"])
+                    break
+
+    def _classify_anchored(self):
         """Cue wording is considered only inside the sentence that carries the anchor (a body citation string or a
         party-name reference). A proposal needs: own voice, tight binding of cue to anchor, no other authority in the
         sentence, no negation in scope, and (for strong relations) a present/first-person form."""
@@ -1531,6 +1605,82 @@ class Builder:
                                 cand["occ"] = o.get("marker_of") or o
                                 cand["reasons"].append("bound through a back-reference in the next sentence")
                             self.cands.append(cand)
+
+    def own_voice_leads(self):
+        """First-person overruling sentences ('... must be and is accordingly overruled', 'we also overrule ...') that no
+        anchored candidate carries. Each becomes an adviser lead with the raw target text, the best candidate anchor
+        and an explicit binding status."""
+        have = set((c["jid"], c["cpos"]) for c in self.cands if c["cue_relation"] == "OVERRULES")
+        occ_by_doc = defaultdict(list)
+        for o in self.occ:
+            occ_by_doc[o["jid"]].append(o)
+        for jid in sorted(self.docs):
+            doc = self.docs[jid]
+            t = doc.text
+            src_court = self.judg[jid]["meta"].get("court") or ""
+            if not src_court.startswith("Supreme"):
+                continue
+            for m in OWN_FIRST_PERSON.finditer(t, doc.editorial_end):
+                om = re.search(r"over-?\s?rul(?:ed|e)", m.group(0), re.I)
+                cpos, cend = m.start() + om.start(), m.start() + om.end()
+                if (jid, cpos) in have:
+                    continue
+                plo, phi = doc.para_span(cpos)
+                s0, s1 = sentence_bounds(t, cpos, cend, plo, phi)
+                sent = t[s0:s1]
+                if HEADNOTE_REFS.search(t[max(plo, cpos - 1500):cend + 300]):
+                    continue
+                if in_quotation(t, cpos, max(doc.editorial_end, cpos - 4000))[0]:
+                    continue
+                if submission_context(t, plo, cpos, sent, t[s0:cpos]):
+                    continue
+                if re.search(r"\b(?:not|never)\s+(?:[a-z]+\s+)?$", t[max(0, cpos - 25):cpos], re.I):
+                    continue
+                if m.group(0).lower().startswith("we"):
+                    raw = re.match(r"\s*(?:the\s+(?:decision|judgment|view)\s+(?:in|of)\s+)?([^,.;(]{3,100})", t[cend:cend + 140])
+                    raw = ws(raw.group(1)) if raw else ""
+                else:
+                    raw = ws(t[s0:m.start()])[-100:]
+                toks = [w.lower() for w in re.findall(r"[A-Za-z]{5,}", raw) if w.lower() not in PARTY_STOP and w.lower() not in RANK_WORDS]
+                best, bstat = None, "NO_CITATION_ANCHOR"
+                ins = [o for o in occ_by_doc[jid] if s0 <= o["start"] < s1 and not o.get("footnote")]
+                if ins:
+                    best = min(ins, key=lambda o: abs(o["start"] - cpos))
+                    bstat = "CITATION_IN_SENTENCE_NOT_BOUND (%d chars)" % abs(best["start"] - cpos)
+                else:
+                    named = []
+                    for o in occ_by_doc[jid]:
+                        w = t[max(0, o["start"] - 150):o["start"]].lower()
+                        sc = sum(1 for tk in set(toks) if tk in w)
+                        if sc:
+                            gap = min(len(w) - w.rfind(tk) for tk in set(toks) if tk in w)
+                            named.append((sc, gap, o))
+                    top = max([sc for sc, _g, _o in named] or [0])
+                    named = [(g, o) for sc, g, o in named if sc == top and (sc >= 2 or len(set(toks)) == 1)]
+                    if named:
+                        best = min(named, key=lambda go: (go[0], abs(go[1]["start"] - cpos)))[1]
+                        bstat = "RAW_NAME_MATCHES_CITATION_ELSEWHERE_IN_JUDGMENT (p.%s)" % best["page"]
+                    else:
+                        near = [o for o in occ_by_doc[jid] if plo <= o["start"] < phi and abs(o["start"] - cpos) < 1500
+                                and not o.get("footnote")]
+                        if near:
+                            best = min(near, key=lambda o: abs(o["start"] - cpos))
+                            bstat = "NEAREST_CITATION_IN_PARAGRAPH (%d chars; may be another authority)" % abs(best["start"] - cpos)
+                if best is None:
+                    best = {"jid": jid, "ci": -1, "start": cpos, "end": cend, "page": doc.page_at(cpos), "para": doc.para_at(cpos),
+                            "zone": "BODY", "footnote": False,
+                            "clus": [{"start": cpos, "end": cend, "kind": "RAW_TEXT", "key": "RAW:" + (raw[:60] or "unknown"),
+                                      "raw": raw or "(no target text)"}],
+                            "res": {"state": "UNRESOLVED", "group": "", "methods": [], "cands": [], "notes": []}}
+                excerpt = clip(t[max(0, cpos - 125):cend + 125])
+                self.cands.append({"jid": jid, "occ": best, "cue_relation": "OVERRULES", "cue": ws(m.group(0)),
+                                   "cue_page": doc.page_at(cpos), "cue_para": doc.para_at(cpos),
+                                   "attribution": "COURT_OWN_VOICE_UNBOUND_LEAD", "negated": False, "between_other": False,
+                                   "proposed": "OVERRULES", "status": STATUS_ADV, "cpos": cpos, "excerpt": excerpt,
+                                   "binding": "LEAD (%s)" % bstat, "lead_target_raw": raw,
+                                   "reasons": ["first-person overruling sentence with no anchored candidate: adviser lead; "
+                                               "target text '%s'; best candidate %s" % (raw[:80], bstat),
+                                               "overruling/reversal/questioning proposals always go to legal adviser review"]})
 
     def group_name_words(self, g):
         if not hasattr(self, "_gw"):
@@ -1627,11 +1777,15 @@ class Builder:
         if not attribution and (between_other or others_in_sentence) and rel not in STRONG_RELATIONS:
             attribution = "MULTIPLE_AUTHORITIES_IN_SENTENCE"
             reasons.append("another authority is cited in the same sentence: the cue cannot be bound to this one")
+        binding = ""
         if not attribution:
             ok, why = cue_bound(t, o, cpos, cend, words)
             if not ok:
                 attribution = "CUE_NOT_BOUND_TO_TARGET"
+                binding = "NOT_BOUND: " + why
                 reasons.append(why)
+            else:
+                binding = "BOUND"
         negated = negation_in_scope(t, s0, cpos, cend, cue)
         if negated:
             reasons.append("negation in scope of the cue (governing clause)")
@@ -1647,9 +1801,23 @@ class Builder:
                 reasons.append(why)
         if not attribution:
             attribution = "COURT_OWN_VOICE"
+        lead = None
+        first_person = rel == "OVERRULES" and bool(OWN_FIRST_PERSON.search(t[max(s0, cpos - 45):min(len(t), cend + 15)]))
+        if first_person and attribution in LEAD_BLOCKABLE and not (attribution == "COURT_OWN_VOICE" and binding == "BOUND"
+                                                                   and not negated) \
+                and not re.search(r"\b(?:not|never)\s+(?:[a-z]+\s+)?$", t[max(0, cpos - 25):cpos], re.I) \
+                and (src_court.startswith("Supreme") or (tgt_court and tgt_court == src_court)):
+            lead = "%s%s" % (attribution if attribution != "COURT_OWN_VOICE" else "", "; NEGATION_WORD_IN_CLAUSE" if negated else "")
+            attribution = "COURT_OWN_VOICE_UNBOUND_LEAD"
+            negated = False
+            binding = "LEAD (binding not established: %s)" % (lead.strip("; ") or "unbound")
+            reasons.append("first-person overruling wording ('%s'): sent to adviser review as a lead; the target is the "
+                           "nearest anchor and binding is NOT established" % ws(t[max(s0, cpos - 30):cend])[-60:])
         proposed = ""
         status = STATUS_AUTO
-        if attribution == "COURT_OWN_VOICE" and not negated:
+        if attribution == "COURT_OWN_VOICE_UNBOUND_LEAD":
+            proposed = rel
+        elif attribution == "COURT_OWN_VOICE" and not negated:
             if rel == "OVERRULES":
                 hier_ok = (src_court.startswith("Supreme") and (not tgt_court or tgt_court.startswith("Supreme"))) or \
                           (src_court and src_court == tgt_court)
@@ -1688,7 +1856,7 @@ class Builder:
         return {"jid": jid, "occ": o, "cue_relation": rel, "cue": ws(cue), "cue_page": doc.page_at(cpos),
                 "cue_para": doc.para_at(cpos), "attribution": attribution, "negated": negated,
                 "between_other": between_other or others_in_sentence, "proposed": proposed, "status": status,
-                "reasons": reasons, "excerpt": clip(excerpt), "cpos": cpos}
+                "reasons": reasons, "excerpt": clip(excerpt), "cpos": cpos, "binding": binding}
 
     # ---------------- statute links
     def scan_statutes(self):
@@ -1789,19 +1957,26 @@ class Builder:
         for rel, rx in REL_AFTER:
             mm = rx.search(after)
             if mm and not re.search(r"\b(?:Sections?|Articles?|Rules?|Regulations?)\s+\d", mm.group(0)):
+                if "gap" in rx.groupindex and not subject_bound(mm.group("gap")):
+                    a["excluded_cues"][rel + ":NOT_SUBJECT_BOUND"] += 1
+                    continue
                 found.append((rel, mm.group(0)))
         if inst == "COI":
             found = [("CHALLENGE_GROUND_CITED" if r == "PROVISION_CHALLENGED" else r, c) for r, c in found]
             if not found and CHALLENGE_SENTENCE.search(sent):
                 found.append(("CHALLENGE_GROUND_CITED", CHALLENGE_SENTENCE.search(sent).group(0)))
+            if prov[1] in JURISDICTION_ARTICLES:
+                found = [("JURISDICTION_INVOKED" if r == "CHALLENGE_GROUND_CITED"
+                          and not re.search(r"violat", c, re.I) else r, c) for r, c in found]
         if not found:
             return
         inq, _ = in_quotation(t, s, max(doc.editorial_end, s - 4000))
-        sub = bool(SUBMISSION2.search(sent))
-        reported = bool(OTHER_COURT_REPORT.search(sent) or re.search(r"\bJustice\b|\bLordships?\b|,\s*J\.", sent))
+        plo, _phi = doc.para_span(s)
+        sub = bool(SUBMISSION2.search(sent)) or submission_context(t, plo, s, sent, t[s0:s])
+        reported = bool(OTHER_COURT_REPORT.search(sent) or REPORTED_STAT.search(sent))
         contrast = bool(re.search(r"\bwhereas\b|\bbut\s+(?:it\s+)?(?:is\s+)?applicable|while\s+it\s+is\s+applicable", t[e:e + 160], re.I))
         for rel, cue in found:
-            if rel == "PROVISION_INTERPRETED" and reported:
+            if rel in ("PROVISION_INTERPRETED", "PROVISION_HELD_INAPPLICABLE") and reported:
                 a["excluded_cues"][rel + ":REPORTED"] += 1
                 continue
             if rel == "PROVISION_HELD_INAPPLICABLE" and contrast:
@@ -1954,7 +2129,7 @@ class Builder:
             for o in occs:
                 for c in self._cands_for(o):
                     if c["proposed"]:
-                        props.append(c["proposed"])
+                        props.append(c["proposed"] + ("_LEAD_UNBOUND" if c["attribution"] == "COURT_OWN_VOICE_UNBOUND_LEAD" else ""))
             if res["state"] == "RESOLVED":
                 lab = self.g_label(res["group"])
                 strong_meta = all(m in ("NEUTRAL_CITATION_METADATA", "REPORTER_CITATION_METADATA", "SELF_PRINTED_HC_NEUTRAL_CITATION")
@@ -2022,7 +2197,8 @@ class Builder:
                 "cue_relation": c["cue_relation"], "cue_text": c["cue"], "cue_page": c["cue_page"], "cue_paragraph": c["cue_para"],
                 "attribution": c["attribution"], "negated": "YES" if c["negated"] else "NO",
                 "other_citation_between": "YES" if c["between_other"] else "NO",
-                "proposed_relation": c["proposed"], "status": c["status"], "reasons": "; ".join(c["reasons"]),
+                "proposed_relation": c["proposed"], "status": c["status"], "binding_status": c.get("binding", ""),
+                "lead_target_raw": c.get("lead_target_raw", ""), "reasons": "; ".join(c["reasons"]),
                 "excerpt": c["excerpt"],
             })
         self.cand_rows = rows

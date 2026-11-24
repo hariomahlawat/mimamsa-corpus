@@ -21,35 +21,35 @@
    "SLR": 58
   },
   "cited_authority_occurrences_excluding_self": 34776,
-  "distinct_resolved_targets": 271,
+  "distinct_resolved_targets": 277,
   "edges_by_relation": {
-   "CITES": 23240
+   "CITES": 23222
   },
   "edges_by_status": {
-   "AUTOMATED_DETECTED": 20388,
-   "DOCUMENTARY_CHECK_REQUIRED": 2852
+   "AUTOMATED_DETECTED": 20316,
+   "DOCUMENTARY_CHECK_REQUIRED": 2906
   },
   "edges_by_target_state": {
-   "RESOLVED": 2954,
-   "UNRESOLVED": 16766,
-   "UNRESOLVED_AMBIGUOUS": 119,
+   "RESOLVED": 3008,
+   "UNRESOLVED": 16767,
+   "UNRESOLVED_AMBIGUOUS": 46,
    "UNRESOLVED_CASE_NUMBER_ONLY": 3292,
    "UNRESOLVED_CITATION_MISMATCH": 82,
    "UNRESOLVED_CONFLICT": 2,
    "UNRESOLVED_TEMPORAL_CONFLICT": 25
   },
-  "edges_total": 23240,
-  "edges_with_body_occurrence": 21182,
-  "key_consistency_changes": 78,
+  "edges_total": 23222,
+  "edges_with_body_occurrence": 21164,
+  "key_consistency_changes": 148,
   "learned_alias_conflicts_discarded": 0,
   "learned_parallel_aliases": 107,
   "own_scr_running_headers_masked": 6335,
-  "resolution_rate_edges": 0.1271,
+  "resolution_rate_edges": 0.1295,
   "resolution_rate_note": "share of distinct (citing judgment, cited authority) edges whose target is a held corpus judgment; most cited authorities are simply not in the 4,259-judgment corpus, so a low rate is expected and is not an error rate",
   "resolution_rate_sc_reporter_edges": {
    "edges": 10074,
-   "rate": 0.1427,
-   "resolved": 1438
+   "rate": 0.1435,
+   "resolved": 1446
   },
   "resolved_edges_by_method": {
    "CASE_NUMBER_PLUS_PARTY": 387,
@@ -60,8 +60,9 @@
    "NEUTRAL_CITATION_METADATA;REPORTER_CITATION_METADATA": 1,
    "PARALLEL_CITATION_LEARNED": 923,
    "PARALLEL_CITATION_LEARNED;REPORTER_CITATION_METADATA": 163,
-   "PARTY_YEAR_COURT": 836,
-   "PARTY_YEAR_COURT_KEY_CONSISTENCY": 45,
+   "PARTY_NAME_TIEBREAK": 40,
+   "PARTY_YEAR_COURT": 847,
+   "PARTY_YEAR_COURT_KEY_CONSISTENCY": 48,
    "REPORTER_CITATION_METADATA": 85
   },
   "same_case_number_references_dropped": 38444,
@@ -360,21 +361,22 @@
    "RA-1987": 157
   },
   "by_relationship": {
-   "CHALLENGE_GROUND_CITED": 754,
-   "CHARGED_OR_CONVICTED_UNDER": 221,
-   "HISTORICAL_VERSION_RELEVANT": 7,
-   "PARTY_INVOKED": 539,
-   "POWER_EXERCISED_UNDER": 77,
-   "PROVISION_CHALLENGED": 28,
-   "PROVISION_HELD_INAPPLICABLE": 14,
-   "PROVISION_INTERPRETED": 8,
-   "PROVISION_QUOTED": 138,
-   "RELATIONSHIP_UNRESOLVED": 4717,
+   "CHALLENGE_GROUND_CITED": 695,
+   "CHARGED_OR_CONVICTED_UNDER": 223,
+   "HISTORICAL_VERSION_RELEVANT": 6,
+   "JURISDICTION_INVOKED": 44,
+   "PARTY_INVOKED": 550,
+   "POWER_EXERCISED_UNDER": 80,
+   "PROVISION_CHALLENGED": 22,
+   "PROVISION_HELD_INAPPLICABLE": 2,
+   "PROVISION_INTERPRETED": 5,
+   "PROVISION_QUOTED": 140,
+   "RELATIONSHIP_UNRESOLVED": 4736,
    "STATUTE_MENTIONED": 4573
   },
   "by_status": {
-   "AUTOMATED_DETECTED": 10265,
-   "DOCUMENTARY_CHECK_REQUIRED": 811
+   "AUTOMATED_DETECTED": 10346,
+   "DOCUMENTARY_CHECK_REQUIRED": 730
   },
   "by_version_status": {
    "VERSION_NOT_ESTABLISHED": 11076
@@ -390,44 +392,45 @@
   "links_total": 11076,
   "with_amendment_graph_edge_match": 515
  },
- "tool": "relations_c11 1.1.0 (review REL-01..REL-14 fixes)",
+ "tool": "relations_c11 1.2.0 (review rounds 1-2 fixes)",
  "treatment": {
   "by_attribution": {
-   "COURT_OWN_VOICE": 218,
-   "CUE_NOT_BOUND_TO_TARGET": 146,
-   "DIRECTION_UNCLEAR": 18,
+   "COURT_OWN_VOICE": 211,
+   "COURT_OWN_VOICE_UNBOUND_LEAD": 4,
+   "CUE_NOT_BOUND_TO_TARGET": 131,
+   "DIRECTION_UNCLEAR": 17,
    "FOOTNOTE_CITATION_NOT_BOUND": 9,
    "LOWER_FORUM_REPORTED": 402,
-   "MULTIPLE_AUTHORITIES_IN_SENTENCE": 101,
-   "PARTY_SUBMISSION_OR_MIXED": 446,
-   "QUOTED_PASSAGE": 167,
-   "REPORTED_TREATMENT_OF_TARGET": 11,
+   "MULTIPLE_AUTHORITIES_IN_SENTENCE": 97,
+   "PARTY_SUBMISSION_OR_MIXED": 437,
+   "QUOTED_PASSAGE": 203,
+   "REPORTED_TREATMENT_OF_TARGET": 10,
    "REPORTER_EDITORIAL": 1038,
-   "TARGET_IS_AGENT": 11
+   "TARGET_IS_AGENT": 10
   },
   "by_cue_relation": {
    "APPLIES": 1067,
    "CLARIFIES": 6,
    "DISTINGUISHES": 612,
    "EXPLAINS": 5,
-   "FOLLOWS": 603,
+   "FOLLOWS": 602,
    "LEAVES_OPEN": 3,
-   "OVERRULES": 205,
+   "OVERRULES": 208,
    "QUESTIONS": 46,
    "REVERSES": 20
   },
   "by_status": {
-   "AUTOMATED_DETECTED": 2348,
-   "DOCUMENTARY_CHECK_REQUIRED": 218,
-   "LEGAL_INTERPRETATION_ADVISER_REVIEW": 1
+   "AUTOMATED_DETECTED": 2353,
+   "DOCUMENTARY_CHECK_REQUIRED": 211,
+   "LEGAL_INTERPRETATION_ADVISER_REVIEW": 5
   },
-  "cue_hits": 2567,
+  "cue_hits": 2569,
   "legally_validated": 0,
   "proposed_by_relation": {
-   "APPLIES": 201,
+   "APPLIES": 195,
    "DISTINGUISHES": 9,
-   "FOLLOWS": 5,
-   "OVERRULES": 1
+   "FOLLOWS": 4,
+   "OVERRULES": 5
   }
  }
 }
