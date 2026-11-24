@@ -25,15 +25,17 @@ The tool needs the staging commit `e0b3e7d2` locally (`git fetch origin legal-kn
 
 The status value `CLOSED_VERIFIED` is not read as an approval claim, because `approval_claims("CLOSED_VERIFIED")` returns no hit, so it was kept. It means only "closure confirmed by a later independent technical review". It is not a legal verification.
 
-## Counts: severity by status (614 rows)
+## Counts: severity by status (622 rows; updated after the V3 holdout evaluation review)
 
 | Severity | CLOSED_VERIFIED | CLOSED_BY_AUTHOR_UNCONFIRMED | DEFERRED_WITH_REASON | OPEN_NO_RECORD | SUPERSEDED | NOT_A_DEFECT | Total |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | P1 | 11 | 0 | 0 | 0 | 0 | 0 | 11 |
-| P2 | 109 | 0 | 6 | 0 | 0 | 0 | 115 |
-| P3 | 186 | 27 | 43 | 12 | 5 | 0 | 273 |
-| INFO | 25 | 2 | 17 | 8 | 18 | 145 | 215 |
-| **Total** | 331 | 29 | 66 | 20 | 23 | 145 | 614 |
+| P2 | 112 | 0 | 5 | 0 | 0 | 0 | 117 |
+| P3 | 186 | 27 | 47 | 12 | 5 | 0 | 277 |
+| INFO | 25 | 2 | 18 | 8 | 18 | 146 | 217 |
+| **Total** | 334 | 29 | 70 | 20 | 23 | 146 | 622 |
+
+Update (coordinator, after `reviews/review_v3_holdout_eval.md` and `confirmation_v3eval_92f06e34.md`): C11 extraction F02 is now CLOSED_VERIFIED by the V3 holdout. C11 F05–F08 remain DEFERRED_WITH_REASON, with reasons updated. The eight V3-evaluation findings were added: F01 and F02 CLOSED_VERIFIED; the P3/INFO items are deferred or not a defect.
 
 The rows are rows, not distinct issues. Re-reviews often restate earlier findings as status rows, and those status rows are counted here as rows in their own right. Examples:
 - AUTH-LEDGER `fable_rereview_findings_2e2df5ce.csv` F-01 to F-17;
@@ -42,7 +44,7 @@ The rows are rows, not distinct issues. Re-reviews often restate earlier finding
 
 Each status row gets the same status as the finding it restates.
 
-## P1/P2: every P1 is closed and confirmed. Six P2s are deferred with a recorded reason; none is open without a record.
+## P1/P2: every P1 is closed and confirmed. Five P2s are deferred with a recorded reason (C11 extraction F05–F08, WS-G R04); none is open without a record.
 
 The confirmations recorded at `4e3571ee` closed 21 rows that the first version of this register listed as not confirmed:
 - C10: RR-01, RR-02 and RC-04;
@@ -59,7 +61,7 @@ These are the records:
 
 | File | ID | Sev | Status | Reason |
 | --- | --- | --- | --- | --- |
-| `C11-JUDICIAL-QUALITY/review/fable_review_extraction_c11_findings.csv` | F02, F05, F06, F07, F08 | P2 | DEFERRED_WITH_REASON | `confirmation_c12_43190971.md` recorded these as DEFERRED_V3_RECORDED. They wait for the V3 holdout evaluation, and the confirmation lists what that evaluation must report. |
+| `C11-JUDICIAL-QUALITY/review/fable_review_extraction_c11_findings.csv` | F05, F06, F07, F08 (F02 closed after the V3 holdout review) | P2 | DEFERRED_WITH_REASON | `confirmation_c12_43190971.md` recorded these as DEFERRED_V3_RECORDED. They wait for the V3 holdout evaluation, and the confirmation lists what that evaluation must report. |
 | `C12-CONSOLIDATION/reviews/review_wsg_forms_findings.csv` | WSG-R04 | P2 | DEFERRED_WITH_REASON | The confirmation marked it PARTIAL, as an acceptable documented deferral. The MML-version field lists are labelled, but re-transcription from the official copies has not been done. It must be done before any template is used. |
 
 **P2 closed only at wording level, with the work still open:**

@@ -277,7 +277,8 @@ def build():
             seen.add(r["judgment_id"]); corpus[r["court"]] += 1
     tot = sum(corpus.values())
     wres = {"note": "Precision weighted by each court's share of the V3 corpus (judgments), using per-court holdout precision; "
-                    "coverage weighted likewise (review F02 / C11 F03 carry-over). Post hoc; small cells, indicative only.",
+                    "coverage weighted likewise (review F02 / C11 F03 carry-over). Post hoc; small cells, indicative only. "
+                    "Does not correct within-court stratum over-sampling (confirmation of F02); not an unbiased corpus estimate.",
             "corpus_judgments_by_court": dict(sorted(corpus.items()))}
     for f in FIELDS:
         bc = res["fields"][f]["by_court"]
@@ -348,7 +349,9 @@ def render_md(res):
           + ". V3's strict lead over V2 in the table above comes from labels V2 cannot express.", "",
           "**Population-weighted (review F02).** Weighted by court share of the V3 corpus: "
           + "; ".join(f"{f}: precision {pct(pw[f]['weighted_precision'])}, coverage {pct(pw[f]['weighted_coverage'])}" for f in FIELDS)
-          + ". Small per-court cells; indicative only.", "",
+          + ". Small per-court cells; indicative only. **Limit (confirmation of review F02):** the holdout also over-sampled strata "
+          "(batch/multi, disagreement, pension/disciplinary) within each court; weighting by court alone does not correct that, so "
+          "these are not unbiased corpus estimates. Court × stratum weighting needs corpus stratum counts and is deferred to Cycle 13.", "",
           "**Matcher sensitivity (review).** Re-matching the two pairs the reviewer classed as matcher artefacts (V3H005, V3H036) gives "
           "printed 127/139 = 91.4% (coverage 65.3%) and substantive 109/115 = 94.8% (coverage 55.6%) (reviewer's computation, "
           "`reviews/review_v3_holdout_eval.md`). Not applied to the headline."]

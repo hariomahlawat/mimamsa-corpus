@@ -67,7 +67,7 @@ Of 140 answered rows: excerpt found at the cited offset 138, anywhere in the cit
 
 **Common vocabulary (review F01).** On judgments whose ground-truth printed label V2 can output: v3 105/115 = 91.3% (84.7–95.2%); v2 105/115 = 91.3% (84.7–95.2%). V3's strict lead over V2 in the table above comes from labels V2 cannot express.
 
-**Population-weighted (review F02).** Weighted by court share of the V3 corpus: printed_disposal: precision 89.3%, coverage 84.8%; substantive_result: precision 94.8%, coverage 65.9%. Small per-court cells; indicative only.
+**Population-weighted (review F02).** Weighted by court share of the V3 corpus: printed_disposal: precision 89.3%, coverage 84.8%; substantive_result: precision 94.8%, coverage 65.9%. Small per-court cells; indicative only. **Limit (confirmation of review F02):** the holdout also over-sampled strata (batch/multi, disagreement, pension/disciplinary) within each court; weighting by court alone does not correct that, so these are not unbiased corpus estimates. Court × stratum weighting needs corpus stratum counts and is deferred to Cycle 13.
 
 **Matcher sensitivity (review).** Re-matching the two pairs the reviewer classed as matcher artefacts (V3H005, V3H036) gives printed 127/139 = 91.4% (coverage 65.3%) and substantive 109/115 = 94.8% (coverage 55.6%) (reviewer's computation, `reviews/review_v3_holdout_eval.md`). Not applied to the headline.
 
