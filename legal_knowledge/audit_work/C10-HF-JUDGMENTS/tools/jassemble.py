@@ -155,8 +155,10 @@ def build(repo):
                                  reason="not processed: " + ((r or {}).get("extraction") or (r or {}).get("pdf_error") or "bytes unavailable"),
                                  direct_terms="", admin_terms="", general_terms="", method="AUTOMATED_RULES"))
             continue
-        cls, why = J.classify_relevance(r.get("relevance_scores") or {}, r.get("text_extraction"), title)
-        sc = r.get("relevance_scores") or {}
+        sc = dict(r.get("relevance_scores") or {})
+        # the topic tagger also counts the Tribunal's abbreviation (AFT), which the service-term count misses
+        sc["admin"] = sc.get("admin", 0) + (r.get("topics") or {}).get("aft_jurisdiction", 0)
+        cls, why = J.classify_relevance(sc, r.get("text_extraction"), title)
         rel_rows.append(dict(judgment_id=jid(sha), sha256=sha, court=ms[0].get("court") if ms else "", title=title,
                              relevance_class=cls, reason=why, direct_terms=sc.get("direct"), admin_terms=sc.get("admin"),
                              general_terms=sc.get("general"), method="AUTOMATED_RULES"))

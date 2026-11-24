@@ -312,9 +312,26 @@ def extract(pdf_bytes, fitz):
     return r
 
 
+TITLE_MILITARY = re.compile(
+    r"\b(?:army|air\s*force|indian\s+navy|naval|armed\s+forces(?:\s+tribunal)?|ministry\s+of\s+defen[cs]e|defen[cs]e|ex[-\s.]*servicem[ae]n|"
+    r"sepoy|sep\.?|havildar|hav\.?|naik|nk\.?|l/nk|subedar|sub\.?\s*maj|nb\s*sub|jco|cfn|sigmn|gnr|rfn|sgt|cpl|jwo|mwo|"
+    r"lt\.?\s*col|col\.?|maj\.?|capt\.?|brig\.?|gen\.?|gp\s*capt|wg\s*cdr|sqn\s*ldr|flt\s*lt|fg\s*offr|cdr|cmde|"
+    r"assam\s+rifles|military|cantonment|sainik)\b", re.I)
+
+
 def classify_relevance(scores, text_status, title=""):
-    """Rule-based relevance class (automated)."""
+    """Rule-based relevance class (automated). A military party, rank or forum in the title prevents NOT_RELEVANT."""
     d, a, g = scores.get("direct", 0), scores.get("admin", 0), scores.get("general", 0)
+    t = bool(TITLE_MILITARY.search(title or ""))
+    cls, why = _classify_text(d, a, g, text_status)
+    if t and cls == "NOT_RELEVANT_CURRENT_SCOPE":
+        return "RELEVANCE_UNCERTAIN_REVIEW", why + "; but the title names a military party, rank or forum"
+    if t and cls == "RELEVANCE_UNCERTAIN_REVIEW" and a >= 1 and text_status != "NO_TEXT_LAYER":
+        return "MILITARY_ADMIN_SERVICE_PENSION", why + "; title names a military party, rank or forum"
+    return cls, why
+
+
+def _classify_text(d, a, g, text_status):
     if text_status == "NO_TEXT_LAYER":
         return "RELEVANCE_UNCERTAIN_REVIEW", "no text layer (OCR needed)"
     if d >= 3:
@@ -325,4 +342,6 @@ def classify_relevance(scores, text_status, title=""):
         return "GENERAL_LAW_POTENTIALLY_APPLICABLE", f"general-law doctrine terms x{g} with a service/defence context x{a}"
     if a >= 1 or g >= 2:
         return "RELEVANCE_UNCERTAIN_REVIEW", f"weak signals: admin x{a}, general x{g}"
+    if text_status == "PARTIAL_TEXT_LAYER":
+        return "RELEVANCE_UNCERTAIN_REVIEW", "no signal in a partial text layer (scanned pages need OCR before any exclusion)"
     return "NOT_RELEVANT_CURRENT_SCOPE", "no military, service or general-law doctrine signal in the text layer"

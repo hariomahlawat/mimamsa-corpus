@@ -100,5 +100,16 @@ class Assembly(unittest.TestCase):
         self.assertEqual({r["hf_bytes"] for r in copies}, {"NOT_CHECKED"})
 
 
+
+class TitleSignal(unittest.TestCase):
+    def test_title_prevents_not_relevant(self):
+        c = J.classify_relevance({}, "TEXT_LAYER_OK", "UNION OF INDIA Vs ARMED FORCES TRIBUNAL AND ANR")[0]
+        self.assertEqual(c, "RELEVANCE_UNCERTAIN_REVIEW")
+        c = J.classify_relevance({"admin": 1}, "TEXT_LAYER_OK", "UNION OF INDIA Vs GP CAPT X (RETD)")[0]
+        self.assertEqual(c, "MILITARY_ADMIN_SERVICE_PENSION")
+        self.assertEqual(J.classify_relevance({}, "TEXT_LAYER_OK", "BHATNAGARS AND CO. LTD. versus THE UNION OF INDIA")[0],
+                         "NOT_RELEVANT_CURRENT_SCOPE")
+
+
 if __name__ == "__main__":
     unittest.main()
