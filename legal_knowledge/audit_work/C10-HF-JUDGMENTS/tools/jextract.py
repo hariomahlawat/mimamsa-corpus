@@ -7,7 +7,7 @@ results for identical bytes.
 import hashlib, re
 from collections import Counter
 
-EXTRACTOR_VERSION = "c10-jextract/5"
+EXTRACTOR_VERSION = "c10-jextract/6"
 MIN_CHARS_PAGE = 200          # a page with fewer text-layer characters is treated as image-only / unreadable
 
 MONTHS = {m: i for i, m in enumerate(["january", "february", "march", "april", "may", "june", "july", "august",
@@ -89,7 +89,7 @@ DIRECT = re.compile(r"\bArmy\s+Act\b|\bAir\s+Force\s+Act\b|\bNavy\s+Act\b|Armed\
                     r"\bArmy\s+Rules?\b|\bAir\s+Force\s+Rules?\b|summary\s+of\s+evidence|statutory\s+complaint|Regulations\s+for\s+the\s+Army", re.I)
 ADMIN = re.compile(r"disability\s+pension|Entitlement\s+Rules|Pension\s+Regulations|\binvalided\b|release\s+medical\s+board|"
                    r"ex[\s-]?servicem[ae]n|armed\s+forces|defence\s+personnel|Ministry\s+of\s+Defence|Army\s+Headquarters|"
-                   r"Record\s+Office|Commanding\s+Officer|\bsepoy\b|\bnaik\b|\bhavildar\b|\bsubedar\b|\bjawan\b|\bAir\s+Force\b|\bIndian\s+Navy\b|"
+                   r"Record\s+Office|Commanding\s+Officer|\bIndian\s+Army\b|\bArmy\b|\bsepoy\b|\bnaik\b|\bhavildar\b|\bsubedar\b|\bjawan\b|\bAir\s+Force\b|\bIndian\s+Navy\b|"
                    r"Armed\s+Forces\s+Tribunal|Principal\s+Controller\s+of\s+Defence\s+Accounts|\bPCDA\b", re.I)
 GENERAL = re.compile(r"natural\s+justice|audi\s+alteram|Article\s+(?:14|16|21|226|311)\b|arbitrar|legitimate\s+expectation|"
                      r"proportionality|Wednesbury|statutory\s+interpretation|doctrine\s+of\s+precedent|per\s+incuriam|res\s+judicata", re.I)

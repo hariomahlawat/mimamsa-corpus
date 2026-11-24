@@ -38,3 +38,10 @@
    - add companion case numbers;
    - record the Metri to Sandeep Kumar relation.
 4. A better outcome extractor, for example a cue for "disposal in respect of each appeal", would need its own reviewed change. No such change was made in this cycle.
+
+## Addendum: ordinary-judgment sample (workstream review of 3257ebb9, finding WS-04)
+The 30-judgment sample above is risk-ranked: 28 of the 30 are Supreme Court judgments. The workstream reviewer separately drew 20 judgments at random from those not sampled, mostly High Court orders, and read each against its PDF. Per-row results are in `WS_REVIEW_SAMPLE20_3257ebb9.csv`.
+- **Outcome candidate:** right 12, wrong 3, missed 4, not applicable 1. All three wrong ones took "pending applications stand disposed of" as the result of a petition that was in fact dismissed or allowed.
+- **Crawler metadata (case number, date, outcome) was more reliable than the extractor on every field measured.** Where the two outcomes disagreed, the crawler was right 3 times out of 4.
+- Corpus-wide, crawler outcome and text candidate disagree in 549 of the 1,775 records that have both; 349 of these are dismissed against disposed. Each now carries a contradiction note and raises the record in the verification queue.
+- **How to use the outputs:** prefer the crawler metadata, and treat the text candidates as review signals only. This is now stated in the summary.

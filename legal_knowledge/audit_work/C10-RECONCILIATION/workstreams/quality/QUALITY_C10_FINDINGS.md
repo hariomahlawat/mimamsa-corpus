@@ -91,7 +91,7 @@ Notes on particular items:
 ## 5. Versioned proposals (`proposals_c10.csv`, 12 rows, all PROPOSAL_NOT_APPLIED)
 Each proposal targets a register only. Current text is quoted verbatim and nothing is overwritten. Any change must go through an AUTH-LEDGER transition, or an overlay for WS-B.
 - **C10-QP-01, `C5-SRC-P1-AFT-PROC-RULES`** (now `NOT_HELD_NOT_CHECKED`; cited by 46 items). Record the C9-identified copies 590cf7cd (S.R.O. 26(E) 2008), fc27032f (S.R.O. 05(E) 2011) and c57b113a (S.R.O. 6(E) 2009) as candidate copies. The holding state does not change.
-- **C10-QP-02, `C5-SRC-P1-BNS-2023`** (12 items). Leave the Gazette source NOT_HELD. Register a separate India Code compilation source with d4449e99, following the BNSS/BSA pattern. d163e785 is unidentified and is not proposed.
+- **C10-QP-02, `C5-SRC-P1-BNS-2023`** (12 items). Leave the Gazette source NOT_HELD. Register a separate India Code compilation source with d4449e99, following the BNSS/BSA pattern. d163e785 (same title, 40.9 MB) is a Hindi text in Gazette pagination and is not proposed (C10 review WS-03).
 - **C10-QP-03 to QP-10, eight judgment sources whose copies are all in the working store.** Append an SCR rendition candidate copy row with `eligible_for_exact_anchor NO` and no page equivalence. This preserves the text only; the registered bytes still need to be placed in HF.
 - **C10-QP-11 and QP-12, WS-B PQ-C3-39 (Ram Sarup) and PQ-C3-40 (Mani Ram Bhaira).** Replace "reportedly archived on the HF dataset" with a note that the C10 HF listing shows the file and that its hash is declared only by the sidecar (bytes NOT_CHECKED). The acquisition stays open.
 

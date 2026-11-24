@@ -118,5 +118,41 @@ class TitleSignal(unittest.TestCase):
                          "NOT_RELEVANT_CURRENT_SCOPE")
 
 
+class ReviewFixes(unittest.TestCase):
+    """Regression tests for the workstream review of 3257ebb9 (WS-01, WS-02, WS-07)."""
+    def test_batch_key_depends_on_extractor_source(self):
+        k = AJ.batch_key(["a" * 64])
+        orig = AJ.extractor_fingerprint
+        try:
+            AJ.extractor_fingerprint = lambda: "0" * 64
+            self.assertNotEqual(AJ.batch_key(["a" * 64]), k)
+        finally:
+            AJ.extractor_fingerprint = orig
+        self.assertEqual(AJ.batch_key(["a" * 64]), k)
+
+    def test_bare_army_is_a_service_term(self):
+        c = J.classify_relevance({}, "TEXT_LAYER_OK", "SUMIT ARORA Vs UNION OF INDIA")[0]
+        self.assertEqual(c, "NOT_RELEVANT_CURRENT_SCOPE")  # title alone has no signal
+        self.assertTrue(J.ADMIN.search("as per the existing policies of the Indian Army the petitioner was posted"))
+        self.assertTrue(J.ADMIN.search("a medical officer of the Army posted at Base Hospital"))
+
+
+@unittest.skipUnless(have_commits(), "pinned raw-data / staging commits are not in this clone")
+class TruncationAccounting(unittest.TestCase):
+    def test_truncated_copies_are_unresolved_and_listed(self):
+        copies = list(csv.DictReader(io.StringIO((AJ.OUT / "HF_JUDGMENT_COPY_REGISTER.csv").read_text(encoding="utf-8"))))
+        cont = {r["sha256"] for r in csv.DictReader(io.StringIO((AJ.OUT / "CONTINUATION_MANIFEST.csv").read_text(encoding="utf-8")))}
+        trunc = [r for r in copies if "TRUNCATED" in r["disposition"]]
+        self.assertTrue(trunc)
+        self.assertTrue(all(r["sha256"] in cont for r in trunc))
+        self.assertFalse(any(r["sha256"] in cont for r in copies if r["disposition"] == "PROCESSED"))
+
+    def test_batches_match_current_extractor(self):
+        for bp in sorted((AJ.HERE.parent / "work" / "batches").glob("batch_*.jsonl")):
+            with bp.open(encoding="utf-8") as fh:
+                head = json.loads(fh.readline())
+            self.assertEqual(head["input_key"], AJ.batch_key(head["shas"]), bp.name)
+
+
 if __name__ == "__main__":
     unittest.main()

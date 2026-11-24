@@ -22,7 +22,8 @@ MIMAMSA_WORKING_STORE=<dir holding downloads/> python -I -B tools/audit_judgment
 python -I -B tools/audit_judgments.py assemble --repo <full clone> [--check]
 ```
 - `extract` processes distinct files in deterministic batches of 200, sorted by SHA-256.
-- Each batch is written to `work/batches/batch_NNNN.jsonl` together with its input key and extractor version. A complete matching batch is skipped, so an interrupted run resumes where it stopped.
+- Each batch is written to `work/batches/batch_NNNN.jsonl` together with its input key and extractor version. The input key covers the batch's SHA-256 list and a fingerprint of the extractor source, so a batch made by different code is never reused. A complete matching batch is skipped, so an interrupted run resumes where it stopped.
+- **Truncated copies.** A copy with no `%%EOF` marker anywhere is truncated. If it still opens it is `PROCESSED_TRUNCATED_COPY`: partial extraction, counted as unresolved, and listed for a complete copy. If it does not open it is `INCOMPLETE_COPY_TRUNCATED`.
 - `assemble` builds every output from the batches and the pinned inputs, asserts the accounting identities, and writes the continuation manifest.
 
 **Byte source.**
@@ -50,4 +51,4 @@ python -I -B tools/audit_judgments.py assemble --repo <full clone> [--check]
 - **Decision date.** Only explicit decision labels (pronounced, decided, date of decision or judgment, order date) and the signature-block date count as decision evidence. Plain "dated …" references to earlier orders are excluded. A record is reported `DIFFERS` only when such evidence exists and disagrees with the metadata.
 - **Case number.** A metadata number missing from the case numbers read from the opening text is `NOT_CONFIRMED_IN_TEXT`, not a contradiction, because long cause lists and unusual formats limit extraction.
 - **Relevance.** Fixed term rules. The crawler removed 120,185 judgments for lacking military keywords and did not keep their files. Their titles were re-screened, and re-screening their text for general-law relevance needs re-acquisition, which is not authorised here.
-- **Outcome and propositions.** These are phrase-based candidates. Conflicting outcome phrases are flagged for review.
+- **Outcome and propositions.** These are phrase-based candidates. Conflicting outcome phrases, and any disagreement with the crawler outcome, are flagged for review. Measured reliability is low (see the summary); prefer the crawler metadata.

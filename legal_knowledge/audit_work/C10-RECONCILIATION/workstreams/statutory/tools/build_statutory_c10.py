@@ -492,7 +492,7 @@ for _p, _t in [('14c19950', 'AFT (Financial and Administrative Powers) Rules 200
     REG[_p] = (f'{_t} (text-layer reading of p.1)', 'Ministry of Defence', 'as held', GZ, '(none)', 'DEFER (low legal consequence); register on owner request as Gazette copy with retrieval record', REMV)
 
 REG_FIELDS = ['sha256', 'bytes', 'category_crawl', 'identity', 'issuing_authority', 'source_url', 'retrieved_at', 'presence',
-              'hf_byte_verification', 'completeness', 'fidelity_class', 'existing_register_relationship', 'target_c5_source',
+              'hf_bytes', 'hf_listing_check', 'completeness', 'fidelity_class', 'existing_register_relationship', 'target_c5_source',
               'crosswalk_rows_for_target', 'equivalence_groups', 'proposed_authentication_classification', 'remaining_verification',
               'ap_c9_02_membership', 'ap_c9_02_c10_change']
 
@@ -545,7 +545,7 @@ def build_registration(inv, master, crosswalk, equiv):
                 chg = 'ADD'
         rows.append({'sha256': h, 'bytes': r['bytes'], 'category_crawl': r['category'], 'identity': ident, 'issuing_authority': auth,
                      'source_url': r['source_url'], 'retrieved_at': r['retrieved_at'], 'presence': r['presence'],
-                     'hf_byte_verification': r['hf_byte_verification'], 'completeness': compl, 'fidelity_class': fid,
+                     'hf_bytes': 'NOT_CHECKED', 'hf_listing_check': r['hf_byte_verification'], 'completeness': compl, 'fidelity_class': fid,
                      'existing_register_relationship': '; '.join(rel) or 'none', 'target_c5_source': tgt,
                      'crosswalk_rows_for_target': '; '.join(cwc) or '0', 'equivalence_groups': ';'.join(eq.get(h, [])),
                      'proposed_authentication_classification': prop, 'remaining_verification': remv,
@@ -555,7 +555,7 @@ def build_registration(inv, master, crosswalk, equiv):
         r = inv[h]
         rows.append({'sha256': h, 'bytes': r['bytes'], 'category_crawl': r['category'], 'identity': r['title'] + ' (already registered)',
                      'issuing_authority': '', 'source_url': r['source_url'], 'retrieved_at': r['retrieved_at'], 'presence': r['presence'],
-                     'hf_byte_verification': r['hf_byte_verification'], 'completeness': '', 'fidelity_class': CP if r['category'] != 'act_amendment' else GZ,
+                     'hf_bytes': 'NOT_CHECKED', 'hf_listing_check': r['hf_byte_verification'], 'completeness': '', 'fidelity_class': CP if r['category'] != 'act_amendment' else GZ,
                      'existing_register_relationship': f"REGISTERED {r['c5_copy_ids']} ({r['c5_copy_evidence_class']})", 'target_c5_source': r['c5_source_ids'],
                      'crosswalk_rows_for_target': '; '.join(f'{s}: ' + ', '.join(f'{k}={v}' for k, v in sorted(cw.get(s, {}).items())) for s in r['c5_source_ids'].split(';') if s),
                      'equivalence_groups': ';'.join(eq.get(h, [])),
@@ -567,7 +567,7 @@ def build_registration(inv, master, crosswalk, equiv):
     for h in lr:
         r = inv[h]
         rows.append({'sha256': h, 'bytes': r['bytes'], 'category_crawl': 'linked_records', 'identity': r['title'], 'issuing_authority': 'India Code (search API JSON)',
-                     'source_url': r['source_url'], 'retrieved_at': r['retrieved_at'], 'presence': r['presence'], 'hf_byte_verification': r['hf_byte_verification'],
+                     'source_url': r['source_url'], 'retrieved_at': r['retrieved_at'], 'presence': r['presence'], 'hf_bytes': 'NOT_CHECKED', 'hf_listing_check': r['hf_byte_verification'],
                      'completeness': '', 'fidelity_class': 'DISCOVERY_METADATA (JSON listing)', 'existing_register_relationship': 'none', 'target_c5_source': '(none)',
                      'crosswalk_rows_for_target': '0', 'equivalence_groups': '', 'proposed_authentication_classification': 'DO NOT REGISTER as a source copy; keep as discovery metadata',
                      'remaining_verification': '', 'ap_c9_02_membership': 'NOT_IN_AP-C9-02', 'ap_c9_02_c10_change': 'EXCLUDE (metadata)'})

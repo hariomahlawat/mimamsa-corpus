@@ -11,7 +11,8 @@ import audit_judgments as AJ
 import jextract as J
 
 TITLE_SCREEN = re.compile(
-    r"\b(?:army|air\s*force|indian\s+navy|naval|ministry\s+of\s+defen[cs]e|defen[cs]e\s+(?:services|personnel|accounts|estates)|"
+    r"\b(?:army|air\s*force|indian\s+navy|naval|ministry\s+of\s+defen[cs]e|defen[cs]e|m\.?o\.?d\.?|"
+    r"(?:ex[-\s.]*)?(?:sep|hav|nk|l/nk|sub|nb\s*sub|capt|maj|col|lt|brig|gen|sgt|cpl|jwo|mwo|cdr|cmde|wg\s*cdr|sqn\s*ldr|flt\s*lt|gp\s*capt)\.?\s|"
     r"ex[-\s.]*servicem[ae]n|ex[-\s.]*(?:sep|hav|nk|naik|subedar|sub|capt|maj|col|lt|sgt|cpl)\b|sepoy|havildar|naik|subedar|"
     r"brigadier|colonel|lt\.?\s*col|wing\s+commander|squadron\s+leader|flight\s+lieutenant|commodore|jawan|soldier|military|"
     r"cantonment|assam\s+rifles|border\s+security\s+force|\bbsf\b|\bcrpf\b|\bitbp\b|coast\s+guard|sainik|canteen\s+stores|"
@@ -44,7 +45,7 @@ def load_batches(files):
     res, status = {}, []
     for i, shas in enumerate(plan):
         bp = AJ.WORK / f"batch_{i:04d}.jsonl"
-        key = hashlib.sha256("\n".join(shas).encode()).hexdigest()
+        key = AJ.batch_key(shas)
         ok = False
         if bp.is_file():
             lines = bp.read_text(encoding="utf-8").splitlines()
@@ -74,6 +75,7 @@ def build(repo):
     for sha in sorted(files):
         f, r = files[sha], res.get(sha)
         disp = ("PROCESSED" if r and r.get("extraction") == "PROCESSED" else
+                "PROCESSED_TRUNCATED_COPY" if r and r.get("extraction") == "PROCESSED_TRUNCATED_COPY" else
                 "PROCESSED_UNREADABLE_PDF" if r and r.get("extraction") == "PROCESSED_UNREADABLE_PDF" else
                 "INCOMPLETE_COPY_TRUNCATED" if r and r.get("extraction") == "INCOMPLETE_COPY_TRUNCATED" else
                 "NOT_PROCESSED_BYTES_UNAVAILABLE" if (r and r.get("integrity") == "NOT_AVAILABLE") or f["byte_source"] == "NOT_AVAILABLE" else
@@ -126,6 +128,9 @@ def build(repo):
             contra.append("issue_date not among dates printed in the text")
         if cstat == "NOT_CONFIRMED_IN_TEXT":
             contra.append("metadata case number not confirmed among case numbers read from the opening text (not a contradiction)")
+        om, ot = (m.get("outcome") or ""), (r.get("outcome_candidate") or "")
+        if om and ot and ot != "NOT_FOUND" and om != ot:
+            contra.append(f"crawler outcome '{om}' differs from text outcome candidate '{ot}' (the text candidate is the less reliable; review)")
         if len(by_sha_meta.get(sha, [])) > 1:
             contra.append(f"source file shared with {len(by_sha_meta[sha]) - 1} other record(s) (common judgment or duplicate)")
         meta_rows.append(dict(doc_id=m["doc_id"], judgment_id=jid(sha) if sha else "", sha256=sha, court=m.get("court"),
@@ -138,6 +143,7 @@ def build(repo):
                               outcome_text_candidate=r.get("outcome_candidate", ""), missing_metadata=";".join(missing),
                               contradictions=" | ".join(contra), source_url=m.get("source_url"),
                               audit_disposition="AUDITED_AUTOMATED" if r.get("extraction") == "PROCESSED" else
+                              "AUDITED_AUTOMATED_SOURCE_TRUNCATED" if r.get("extraction") == "PROCESSED_TRUNCATED_COPY" else
                               "AUDITED_METADATA_ONLY_PDF_UNREADABLE" if r.get("extraction") == "PROCESSED_UNREADABLE_PDF" else
                               "AUDITED_METADATA_ONLY_SOURCE_TRUNCATED" if r.get("extraction") == "INCOMPLETE_COPY_TRUNCATED" else "NOT_PROCESSED",
                               verification="AUTOMATED_NOT_LEGALLY_VERIFIED"))
@@ -149,7 +155,7 @@ def build(repo):
         r = res.get(sha)
         ms = by_sha_meta.get(sha, [])
         title = ms[0].get("title") if ms else ""
-        if not r or r.get("extraction") != "PROCESSED":
+        if not r or r.get("extraction") not in ("PROCESSED", "PROCESSED_TRUNCATED_COPY"):
             rel_rows.append(dict(judgment_id=jid(sha), sha256=sha, court=ms[0].get("court") if ms else "", title=title,
                                  relevance_class="RELEVANCE_UNCERTAIN_REVIEW",
                                  reason="not processed: " + ((r or {}).get("extraction") or (r or {}).get("pdf_error") or "bytes unavailable"),
@@ -279,7 +285,11 @@ def build(repo):
             score += 2; reasons.append("metadata date differs from text")
         if any(x["case_number_status"] == "NOT_CONFIRMED_IN_TEXT" for x in metamap[j]):
             score += 1; reasons.append("case number not confirmed in text")
-        if r.get("extraction") != "PROCESSED":
+        if any("crawler outcome" in x["contradictions"] for x in metamap[j]):
+            score += 1; reasons.append("crawler outcome differs from text candidate")
+        if r.get("extraction") == "PROCESSED_TRUNCATED_COPY":
+            score += 3; reasons.append("stored copy truncated (later pages missing)")
+        elif r.get("extraction") != "PROCESSED":
             score += 3; reasons.append("not processed / unreadable")
         if r.get("text_extraction") in ("NO_TEXT_LAYER", "PARTIAL_TEXT_LAYER"):
             score += 1; reasons.append(str(r.get("text_extraction")))
@@ -364,7 +374,8 @@ def build(repo):
     stats = dict(
         metadata_records=len(metas), source_files=len(files), distinct_judgments=len(files),
         files_by_location=dict(Counter(f["location"] for f in files.values())),
-        file_dispositions=dict(sorted(acct.items())), record_dispositions=dict(sorted(acct_meta.items())),
+        file_dispositions=dict(sorted(acct.items())),
+        files_rehashed_equal_to_hf_declared=sum(1 for x in copy_rows if "REHASHED_EQUALS" in x["source_document_verification"]), record_dispositions=dict(sorted(acct_meta.items())),
         excluded_records=len(exc_rows), excluded_dispositions=dict(Counter(x["disposition"] for x in exc_rows)),
         excluded_csv_sha256=hashlib.sha256(exc_csv).hexdigest(),
         relevance=dict(sorted(Counter(x["relevance_class"] for x in rel_rows).items())),
@@ -382,5 +393,7 @@ def build(repo):
         years=dict(sorted(Counter((x["issue_date_meta"] or "unknown")[:4] for x in meta_rows).items())),
         excluded_by_court=dict(sorted(Counter(e["court"] for e in exc_rows).items())),
         batches_complete=sum(1 for b in bstatus if b["complete"]), batches=len(bstatus),
-        independently_reviewed=len(reviewed), sc_records_without_case_number=sum(1 for x in meta_rows if "Supreme" in str(x["court"]) and not x["case_numbers_meta"]))
+        independently_reviewed=len(reviewed),
+        outcome_both_present=sum(1 for x in meta_rows if x["outcome_meta"] and x["outcome_text_candidate"] not in ("", None, "NOT_FOUND")),
+        outcome_crawler_vs_text_differs=sum(1 for x in meta_rows if "crawler outcome" in x["contradictions"]), sc_records_without_case_number=sum(1 for x in meta_rows if "Supreme" in str(x["court"]) and not x["case_numbers_meta"]))
     return out, binary, stats

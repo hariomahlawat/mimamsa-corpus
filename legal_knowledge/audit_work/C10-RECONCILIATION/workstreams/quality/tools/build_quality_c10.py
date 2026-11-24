@@ -74,6 +74,12 @@ C9_RELATED_NOTE = {
     "I-CCCM-SO4010-1986": "C9: NOT_HELD; only the Rajya Sabha 'papers laid' record (C5-SRC-P2-RS-PAPERS-LAID-1987) is held",
     "I-BNS-2023": "India Code compilation (as on 06-10-2025), not the Gazette text named by the C5 source",
 }
+# Copies C9 lists under an instrument that are not that instrument (review WS-03). They are reported, never proposed.
+C9_COPY_NOT_INSTRUMENT = {
+    "d163e785bfb3783287a641fc81621a6f16583f3435227110e066eb9d12c9d4da":
+        "Hindi text in Gazette pagination (40.9 MB, page image read by the C10 workstream reviewer); listed by C9 under "
+        "I-BNS-2023 but not the India Code compilation; not proposed",
+}
 # Related registered C5 sources (separate source rows) that hold part of an unheld cited source.
 RELATED_REGISTERED = {
     "C5-SRC-P0-RA-1987": ("C5-SRC-P0-RA-1987-CH5-INDIACODE", "India Code extract of Chapter V (paras 201-220) only"),
@@ -339,6 +345,8 @@ def candidates_for_source(d, sid):
         for s in shas:
             kind = "C9_INSTRUMENT_COPY_UNREGISTERED" if held else "C9_RELATED_MATERIAL_ONLY"
             note = C9_RELATED_NOTE.get(iid, "")
+            if s in C9_COPY_NOT_INSTRUMENT:
+                kind, note = "C9_LISTED_COPY_NOT_THE_INSTRUMENT", C9_COPY_NOT_INSTRUMENT[s]
             out.append((s, kind, "C9 instrument_records.csv#%s held_copies; verification_status '%s'%s" % (
                 iid, ir["verification_status"][:90], ("; " + note) if note else "")))
     if sid in RELATED_REGISTERED:
@@ -760,7 +768,7 @@ def task3_proposals(d):
             change = ("Do not change this Gazette-text source (the Gazette is still not held). Register a separate compilation source "
                       "(pattern of C5-SRC-P0-BNSS-2023-INDIACODE / C5-SRC-P0-BSA-2023-INDIACODE) with candidate copy %s "
                       "(presence %s), and only after copy-identity, provenance and fidelity review consider re-pointing the %d crosswalk "
-                      "items. The second India Code file d163e785 (same title, 40.9 MB) is not identified and is not proposed." % (
+                      "items. The second India Code file d163e785 (same title, 40.9 MB) is a Hindi text in Gazette pagination and is not proposed." % (
                           cands[0][0], d.presence(cands[0][0]), items))
         else:
             change = ("Record the following unregistered copies as candidate copies of this source (copy_role per instrument; "

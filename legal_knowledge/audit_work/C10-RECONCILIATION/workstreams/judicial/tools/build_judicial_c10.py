@@ -707,6 +707,7 @@ def build(args):
     for p in D.PROPOSALS:
         tgt = p["target"]
         chk = "NOT_A_CORPUS_RECORD_FIELD (register or crawler metadata)"
+        cur_txt = p["current_text"] if p["current_text"] is not None else "(empty/null)"
         if tgt.startswith("cases_53 "):
             cs = next(c for c in cases if c["id"] == tgt.split()[1])
             val = cs.get(p["field"])
@@ -723,13 +724,16 @@ def build(args):
         elif tgt.startswith("raw-data data/meta "):
             did = tgt.split()[2]
             val = metas[did].get(p["field"])
-            chk = f"CURRENT_VALUE {json.dumps(val, ensure_ascii=False)}"
+            cur_txt = json.dumps(val, ensure_ascii=False) if val not in (None, "", []) else "(empty/null)"  # review WS-05: verbatim current value
+            chk = "VERBATIM_FROM_PINNED_RAW_DATA_META"
         if chk.startswith("MISMATCH"):
             raise SystemExit(f"{p['pid']}: current text check failed: {chk}")
-        props.append(dict(proposal_id=p["pid"], target=tgt, field=p["field"], current_text=p["current_text"] if p["current_text"] is not None else "(empty/null)",
+        props.append(dict(proposal_id=p["pid"], target=tgt, field=p["field"], current_text=cur_txt,
                           current_text_check=chk, proposed_change=p["proposed"], priority=p["priority"], evidence=p["evidence"],
                           condition=p["condition"], status="PROPOSAL_NOT_APPLIED"))
     props_header = list(props[0].keys())
+    if len(cur) != len(cases) or len(cases) != 53:  # fail closed: every curated case must have a status row
+        raise SystemExit(f"curated status rows {len(cur)} != curated cases {len(cases)} (expected 53)")
 
     # ------------------------------------------------- C9 finding status
     c9rows = []
