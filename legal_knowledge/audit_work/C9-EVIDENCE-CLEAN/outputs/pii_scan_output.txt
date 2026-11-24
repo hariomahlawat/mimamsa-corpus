@@ -1,0 +1,25 @@
+service-number-shaped tokens in tree at b78b11de0b5e: 72 in 23 files
+  inside C8-EVIDENCE: 36 in 12 files
+     2 legal_knowledge/audit_work/AUTH-LEDGER/evidence/copy_facts.csv
+     2 legal_knowledge/audit_work/C6-01-PROVENANCE/inputs/held_copy_facts.csv
+     2 legal_knowledge/audit_work/C8-EVIDENCE/SC-T2/SC_C8_FINDINGS.md
+     2 legal_knowledge/audit_work/C8-EVIDENCE/SC-T2/approval_package/C5-SRC-J-SC-2026-MULLIKOTE_C1_proposed_decision_TEMPLATE.md
+     4 legal_knowledge/audit_work/C8-EVIDENCE/SC-T2/evidence/mullikote.md
+     4 legal_knowledge/audit_work/C8-EVIDENCE/SC-T2/page_checks_sc_c8.csv
+     5 legal_knowledge/audit_work/C8-EVIDENCE/SC-T2/sc_copy_evidence_register.csv
+     2 legal_knowledge/audit_work/C8-EVIDENCE/SC-T2/subsequent_treatment_leads.csv
+     4 legal_knowledge/audit_work/C8-EVIDENCE/SC-T2/tools/build_c8_registers.py
+     5 legal_knowledge/audit_work/C8-EVIDENCE/SC-T2/tools/build_copy_register.py
+     2 legal_knowledge/audit_work/C8-EVIDENCE/SC-T2/tools/build_treatment_leads.py
+     2 legal_knowledge/audit_work/C8-EVIDENCE/SC-T2/tools/mullikote_half_diff.txt
+     2 legal_knowledge/audit_work/C8-EVIDENCE/review/DISPOSITIONS_5212a95b.md
+     2 legal_knowledge/audit_work/C8-EVIDENCE/review/fable_review_c8_evidence_5212a95b.md
+     2 legal_knowledge/audit_work/COORDINATION/CYCLE3-PLANNING/consistency_findings.csv
+     1 legal_knowledge/audit_work/PILOT-01/sources/independent-reviewer-blind.json
+     2 legal_knowledge/audit_work/SOURCE-LIBRARY-C5/registers/legal_adviser_evidence_index.csv
+     2 legal_knowledge/audit_work/SOURCE-LIBRARY-C5/registers/source_conflict_register.csv
+     2 legal_knowledge/audit_work/WS-B-JUDGMENTS/corrections_cycle3.csv
+     1 legal_knowledge/audit_work/WS-B-JUDGMENTS/identity_resolution.csv
+    16 legal_knowledge/audit_work/WS-B-JUDGMENTS/intake_manifest.csv
+     2 legal_knowledge/audit_work/WS-B-JUDGMENTS/open_inconsistencies_cycle3.csv
+     4 legal_knowledge/audit_work/WS-B-JUDGMENTS/tools/cycle3_registers.py
