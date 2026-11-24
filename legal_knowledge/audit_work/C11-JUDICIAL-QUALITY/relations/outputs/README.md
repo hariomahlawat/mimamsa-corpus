@@ -1,4 +1,4 @@
-# C11 judicial relationships and statute links (rev. 1.2, after two independent reviews)
+# C11 judicial relationships and statute links (rev. 1.3, after three independent reviews)
 
 **Status.** Evidence findings only.
 - Every typed relation is a proposal. The status levels are AUTOMATED_DETECTED, DOCUMENTARY_CHECK_REQUIRED and LEGAL_INTERPRETATION_ADVISER_REVIEW. LEGALLY_VALIDATED is never assigned.
@@ -9,6 +9,7 @@
 **Revision history.**
 - **Rev. 1.1** answered review round 1 (`fable_review_relations_c11.md`, REL-01 to REL-19). The design goal was fewer proposals, each correctly bound.
 - **Rev. 1.2** answers round 2 (`fable_review_relations_c11_v11.md`). It closes REL-05 (unbound own-voice overruling leads) and REL-10 (own-voice filter and jurisdiction articles for statute labels). It also handles REL-14 per case, V11-01 and V11-02.
+- **Rev. 1.3** answers round 3 (`fable_review_relations_c11_v12.md`). It extends REL-05 leads to declaratory wording, records the opinion on every row, adds a corpus probe of own-voice overruling wording (`OVERRULING_PROBE_C11.csv`), renames JURISDICTION_INVOKED to JURISDICTION_REFERENCED (V12-01) and handles "as it stood then" for the CrPC (V12-03).
 
 ## Reproduce
 
@@ -47,7 +48,8 @@ The SHA-256 of each input is in `GRAPH_SUMMARY.json` under `input_sha256`.
 | `TREATMENT_CANDIDATES.csv` | One row per cue word in the sentence carrying an anchor (CITATION_STRING, FOOTNOTE_MARKER or NAME_REFERENCE), plus first-person overruling leads. Columns include attribution, `binding_status`, `lead_target_raw`, proposed relation, status and reasons |
 | `STATUTE_JUDGMENT_LINKS.csv` | One row per (judgment, instrument[, provision]). Each row has the normalised provision id and `printed_unit`, the relationship, the bound cue, the amendment-graph edges, the version status, the IPC-to-BNS note and the C10 cross-check |
 | `PRIORITY_TREATMENT_DOSSIER.md` | Priority cases. The verified quotations are re-checked on every build. The candidate tables are regenerated |
-| `GRAPH_SUMMARY.json` | Counts, resolution rates, input hashes |
+| `OVERRULING_PROBE_C11.csv` | New in rev. 1.3. Every own-voice overruling hit in the corpus: page, wording, disposition (new lead, covered by an existing adviser row, or excluded with the reason), the adviser rows on that page, and an excerpt |
+| `GRAPH_SUMMARY.json` | Counts, resolution rates, input hashes. `treatment.adviser_rows` lists every adviser row; `treatment.overruling_probe` gives the probe dispositions |
 | `REVIEW_REMEASURE_C11.csv` / `.json` | Before/after for every row sampled in review rounds 1 (223) and 2 (132). The JSON records the hashes of the input files |
 | `OUTPUT_SHA256SUMS` | Hashes of every output, including this README and the re-measure files |
 
@@ -87,8 +89,20 @@ A cue counts only in the sentence carrying the anchor, or in the next sentence t
 - It records the best candidate citation: one in the sentence, or a citation elsewhere in the judgment whose name segment best matches the raw text, or the nearest citation in the paragraph.
 - `binding_status` says that binding is NOT established.
 
+**Declaratory leads (rev. 1.3).** The lead rule also covers declaratory wording: "stand(s) overruled", "hereby stand overruled", "is/are (hereby/accordingly) overruled (herewith)", "do(es) not lay down the correct law/position", "must be held to have been wrongly decided", "have also been wrongly decided" and "is no longer good law / is not good law".
+- **Filters.** The same own-voice filters apply: not reporter matter (including per-opinion headnote blocks inside long SCR reports), not a quotation (stricter test for leads), not a submission, and not a report ("overruled by/in <another decision>", or another court's view). The citing court must be the Supreme Court.
+- **Targets.** Each lead is tied to the authority named in the same sentence or, through a back-reference ("these two decisions"), in the preceding sentence. Failing that, the name is matched elsewhere in the judgment (full name phrase with initials, then single words, split per named authority). One row is written per authority, up to 4.
+- **Opinion.** Every row records the opinion it comes from, using the SCR page headers ("[ASHOK BHUSHAN, J.]"), "ORDER OF THE COURT" headings and "(Dissenting)" markers:
+  - SOLE_OPINION;
+  - LEAD_OPINION (the first opinion in the report);
+  - ORDER_OF_THE_COURT;
+  - SEPARATE_OPINION;
+  - DISSENT;
+  - OPINION_NOT_IDENTIFIED.
+- **Separate and dissenting opinions.** Overruling wording in a separate or dissenting opinion goes to adviser review as SEPARATE_OPINION_LEAD or DISSENT_OPINION_LEAD with **no proposal**, because such an opinion does not itself overrule. Other proposals that fall in a dissent are withdrawn.
+
 **Status rules.**
-- LEGAL_INTERPRETATION_ADVISER_REVIEW: own-voice strong proposals and unbound leads.
+- LEGAL_INTERPRETATION_ADVISER_REVIEW: own-voice strong proposals, unbound leads, and separate/dissent leads (no proposal).
 - DOCUMENTARY_CHECK_REQUIRED: reported treatment of a patient-bound target, with no proposal.
 - AUTOMATED_DETECTED: everything else.
 
@@ -103,7 +117,7 @@ A cue counts only in the sentence carrying the anchor, or in the next sentence t
 | PARTY_INVOKED | AUTOMATED_DETECTED | "invoking / filed ... under" |
 | CHARGED_OR_CONVICTED_UNDER | AUTOMATED_DETECTED | Charge or conviction under the provision |
 | POWER_EXERCISED_UNDER | AUTOMATED_DETECTED | "in exercise of powers under" |
-| JURISDICTION_INVOKED | AUTOMATED_DETECTED | New in rev. 1.2: Articles 32, 136, 226 and 227 in a challenge context, unless the cue is "violative of / in violation of" |
+| JURISDICTION_REFERENCED | AUTOMATED_DETECTED | Articles 32, 136, 226 and 227 in a challenge context, unless the cue is "violative of / in violation of". The jurisdiction may be invoked, excluded or preserved; renamed from JURISDICTION_INVOKED in rev. 1.3 |
 | PROVISION_CHALLENGED | DOCUMENTARY_CHECK_REQUIRED | "vires/validity of <provision>", or "<provision> is ultra vires" with the provision as subject |
 | CHALLENGE_GROUND_CITED | DOCUMENTARY_CHECK_REQUIRED | Other Constitution articles in a challenge context |
 | PROVISION_HELD_INAPPLICABLE | DOCUMENTARY_CHECK_REQUIRED | See the own-voice rule below |
@@ -120,38 +134,81 @@ A cue counts only in the sentence carrying the anchor, or in the next sentence t
 
 Where precision could not be made reliable, rows were demoted to RELATIONSHIP_UNRESOLVED: HELD_INAPPLICABLE fell from 14 to 2 and INTERPRETED from 8 to 5.
 
-**Instruments and units.** CRPC-1898 and CRPC-UNSPECIFIED are used before 1974-04-01. Units are normalised by instrument (rules `r.`, Acts `s.`).
+**Instruments and units.** CRPC-1898 and CRPC-UNSPECIFIED are used before 1974-04-01. From rev. 1.3, CRPC-UNSPECIFIED is also used when the mention says "as it stood (then)" (V12-03; for example SL-7eb3f7c04030, Budhan Choudhry 1955). Units are normalised by instrument (rules `r.`, Acts `s.`).
 
 **Versions.** All rows are VERSION_NOT_ESTABLISHED, and `COMPLETE_HISTORY_INSTRUMENTS` is deliberately empty. The IPC-to-BNS switch of 1 July 2024 is noted and not assumed.
 
 ## Build-wide counts across revisions
 
-| | rev. 1.0 | rev. 1.1 | rev. 1.2 |
-| --- | --- | --- | --- |
-| Edges | 24,000 | 23,240 | 23,222 |
-| Resolved (rate) | 2,586 (10.8%) | 2,954 (12.7%) | 3,008 (13.0%) |
-| UNRESOLVED_AMBIGUOUS | 55 | 119 | 46 |
-| APPLIES proposals | 198 | 201 | 195 |
-| DISTINGUISHES proposals | 41 | 9 | 9 |
-| FOLLOWS proposals | 30 | 5 | 4 |
-| QUESTIONS proposals | 7 | 0 | 0 |
-| OVERRULES proposals | 3 | 1 | 5 (1 bound + 4 unbound leads) |
-| LEGAL_INTERPRETATION_ADVISER_REVIEW rows | 57 | 1 | 5 |
-| DOCUMENTARY_CHECK_REQUIRED treatment rows | 269 | 218 | 211 |
-| PROVISION_APPLIED | 303 | withdrawn | withdrawn |
-| PROVISION_CHALLENGED | 284 | 28 | 22 |
-| CHALLENGE_GROUND_CITED / JURISDICTION_INVOKED | n/a | 754 / n/a | 695 / 44 |
-| PROVISION_HELD_INAPPLICABLE | 20 | 14 | 2 |
-| PROVISION_INTERPRETED | 172 | 8 | 5 |
-| PROVISION_QUOTED | 146 | 138 | 140 |
-| PARTY_INVOKED / CHARGED_OR_CONVICTED_UNDER / POWER_EXERCISED_UNDER | n/a | 539 / 221 / 77 | 550 / 223 / 80 |
+| | rev. 1.0 | rev. 1.1 | rev. 1.2 | rev. 1.3 |
+| --- | --- | --- | --- | --- |
+| Edges | 24,000 | 23,240 | 23,222 | 23,222 |
+| Resolved (rate) | 2,586 (10.8%) | 2,954 (12.7%) | 3,008 (13.0%) | 3,008 (13.0%) |
+| UNRESOLVED_AMBIGUOUS | 55 | 119 | 46 | 46 |
+| APPLIES proposals | 198 | 201 | 195 | 195 |
+| DISTINGUISHES proposals | 41 | 9 | 9 | 9 |
+| FOLLOWS proposals | 30 | 5 | 4 | 4 |
+| QUESTIONS proposals | 7 | 0 | 0 | 0 |
+| OVERRULES proposals | 3 | 1 | 5 | 16 (1 bound + 15 unbound leads) |
+| Separate/dissent overruling leads (no proposal) | – | – | – | 14 (12 separate, 2 dissent) |
+| LEGAL_INTERPRETATION_ADVISER_REVIEW rows | 57 | 1 | 5 | 30 |
+| DOCUMENTARY_CHECK_REQUIRED treatment rows | 269 | 218 | 211 | 211 |
+| PROVISION_APPLIED | 303 | withdrawn | withdrawn | withdrawn |
+| PROVISION_CHALLENGED | 284 | 28 | 22 | 22 |
+| CHALLENGE_GROUND_CITED / JURISDICTION_REFERENCED | n/a | 754 / n/a | 695 / 44 | 695 / 44 |
+| PROVISION_HELD_INAPPLICABLE | 20 | 14 | 2 | 2 |
+| PROVISION_INTERPRETED | 172 | 8 | 5 | 5 |
+| PROVISION_QUOTED | 146 | 138 | 140 | 140 |
+| PARTY_INVOKED / CHARGED_OR_CONVICTED_UNDER / POWER_EXERCISED_UNDER | n/a | 539 / 221 / 77 | 550 / 223 / 80 | 550 / 223 / 80 |
+| CRPC-1898 / CRPC-UNSPECIFIED | n/a | 37 / 5 | 37 / 5 | 37 / 7 |
 
-**The five adviser rows (rev. 1.2):**
-1. Parashotam para 32 on Shri Kant Sharma ("does not lay down the correct law"; bound).
-2. Lead: Puttaswamy (2017), p.167, "ADM J1;1balpur must be and is accordingly overruled". Best candidate (1976) 2 SCC 521.
-3. Lead: Puttaswamy (2017), "We also overrule ... Bhanudas Krishna Gawde". Best candidate (1977) 1 SCC 834.
-4. Lead: V. Sriharan (2015), p.99 para 105, "we specifically overrule the same". Best candidate 2013 (2) SCC 452 (Sangeet).
-5. Lead: Joseph Shine (2018), "we overrule" Sowmithri Vishnu. Best candidate (1985) Supp SCC 137.
+### Adviser queue (rev. 1.3): 30 rows
+
+The full list is in `GRAPH_SUMMARY.json` under `treatment.adviser_rows`. A lead's target is a best candidate: binding is not established unless the row says BOUND.
+
+**Court's own voice: 16 rows, OVERRULES proposed.**
+- **Parashotam (2023), p.17, para 32.** "does not lay down the correct law" → Shri Kant Sharma. BOUND; sole opinion.
+- **Ajmer Singh (1987), p.9.** "We hold that these two decisions do not lay down the correct law" → Kerala HC (Subramanian) and Calcutta HC (Anand Singh Bisht). Raw text only: neither HC report citation is detected. Sole opinion.
+- **Mafatlal (1996):**
+  - p.105, two rows: "must be held to have been decided wrongly and are accordingly overruled herewith". Raw text only.
+  - p.133, two rows: Kanhaiyalal, [1959] S.C.R. 1350 ("must be held to have been wrongly decided"; "have also been wrongly decided").
+  - All four are in the opinion labelled LEAD_OPINION (AHMADI) from the page headers.
+- **Puttaswamy (2017), lead opinion (Chandrachud J.):**
+  - p.167, ADM Jabalpur, (1976) 2 SCC 521;
+  - p.167, Bhanudas Gawde, (1977) 1 SCC 834;
+  - p.275, M.P. Sharma, AIR 1954 SC 300;
+  - p.276, Kharak Singh, (1964) 1 SCR 332.
+- **Puttaswamy (2017), ORDER_OF_THE_COURT, p.432.** M.P. Sharma, 1954 SCR 1077.
+- **Joseph Shine (2018), p.74, lead opinion (Dipak Misra CJI), two rows.** Sowmithri Vishnu (1985 Supp SCC 137) and V. Revathi ((1988) 2 SCC 72).
+- **V. Sriharan (2015), p.99.** Sangeet, 2013 (2) SCC 452.
+- **Union of India (2000), p.19.** "is overruled". Raw text only; this is a plea/objection being overruled, so the adviser should expect to reject it.
+- **Shatrughan Chauhan (2014), p.54.** Vatheeswaran, (1983) 2 SCC 68. The wording may report Triveniben; adviser to check.
+
+**Separate opinion, no proposal: 12 rows.**
+- Joseph Shine: Nariman J. p.100; Chandrachud J. pp.109 and 154 (×2); Indu Malhotra J. p.186 (×2).
+- Puttaswamy (2018): Ashok Bhushan J. pp.705 and 1065, each ×2 (Mohd Saeed Siddiqui, Yogendra Kumar).
+- Supreme Court AoR (2015): Lokur J. pp.783 and 802.
+
+**Dissent, no proposal: 2 rows.** Puttaswamy (2018), Chandrachud J., p.820, ×2.
+
+### Corpus probe of own-voice overruling wording (`OVERRULING_PROBE_C11.csv`)
+
+The probe found 74 hits for the lead wording across the corpus:
+
+| Disposition | Hits |
+| --- | --- |
+| New adviser lead | 21 |
+| Covered by an existing adviser row or a lead in the same sentence | 4 |
+| Excluded, reporter headnote | 14 |
+| Excluded, quoted passage | 12 |
+| Excluded, submission | 7 |
+| Excluded, High Court judgment | 16 |
+
+Every excluded Supreme Court hit was checked on its probe excerpt, and Balkrishna Ram was read in full. They are correctly excluded except the known misses listed under Limits. Examples of correct exclusions:
+- Balkrishna Ram p.7 quotes the Allahabad Full Bench.
+- Shatrughan p.68 quotes Triveniben.
+- Raghunathrao p.30 reports Kesavananda.
+- Counsel's arguments in Ex-Navy Artificers p.23, Tamil Nadu Medical Officers p.39 and Union of India (2001) p.29.
 
 **Rev. 1.1 statement corrected.** Rev. 1.1 said the Puttaswamy (2017) target "cannot be anchored". That was wrong: the passage is anchored on (1976) 2 SCC 521. The real cause was that the anchored cue row TC-3b178e403337 carries IR Coelho's statement ("this Court took the view that ADM Jabalpur has been impliedly overruled"). That statement is correctly classed as reported. Meanwhile the court's own first-person sentence just before it had no anchored candidate. Rev. 1.2 records that sentence as lead TC-8ff2b7904d7c, and the reason on TC-3b178e403337 now points to the lead.
 
@@ -187,7 +244,7 @@ Of the 10 ambiguous edges in the round-1 sample:
 | Reported treatment at documentary check | 3 / 3 | 3 / 3 | 0 | 0 |
 | Resolved edges | 30 / 30 | 29 / 29 | 0 | 1 (case-number edge, now case-number-only) |
 | PARTY_INVOKED / CHARGED / POWER / QUOTED | 14 / 14 | 14 / 14 | 0 | 0 |
-| CHALLENGE_GROUND_CITED | 8 / 12 | 8 / 8 | 4 (now JURISDICTION_INVOKED) | 0 |
+| CHALLENGE_GROUND_CITED | 8 / 12 | 8 / 8 | 4 (now JURISDICTION_REFERENCED) | 0 |
 | PROVISION_CHALLENGED | 3 / 4 | 2 / 2 | 1 | 1 |
 | PROVISION_HELD_INAPPLICABLE | 4 / 12 | 1 / 1 | 8 | 3 |
 | PROVISION_INTERPRETED | 4 / 8 | 2 / 3 | 3 | 2 |
@@ -199,7 +256,12 @@ TC-22a1de5f2e85, the quoted Nagaraj passage, is no longer proposed: it is now cl
 
 - **Paragraph numbers** are heuristic.
 - **Recall.** The rules trade recall for precision. Supported treatment is lost in reported, multi-authority, list and footnote-only contexts.
-- **Unbound leads** carry a best-candidate target that an adviser must confirm.
-- **PROVISION_INTERPRETED** still keeps one quoted row (SL-0a37ec5cac0c). The label now has only 5 rows build-wide.
+- **Unbound leads** carry a best-candidate target that an adviser must confirm. Opinion labels come from SCR page headers, so the first pages of a new opinion can still carry the previous judge's label. "LEAD_OPINION" means the first opinion in the report, not necessarily the majority.
+- **Known misses in the own-voice overruling probe (REL-05 residual):**
+  - Puttaswamy (2017) ORDER OF THE COURT (ii) on Kharak Singh: "stands ... over-ruled" is split by page-break debris across pp.432-433. Kharak Singh is still covered by the p.276 lead.
+  - Puttaswamy (2017) separate opinions at p.399 (Bobde J.) and pp.354/373: excluded as quoted or headnote because of OCR quote marks and in-report headnote blocks.
+  - High Court judgments (16 hits) are excluded wholesale. A High Court Full Bench overruling the same court's earlier Division Bench is not separated out and is not routed.
+  - Implied overruling, and wording outside the lead patterns, is not detected. The probe is a floor, not a full recall measure.
+- **PROVISION_INTERPRETED** still keeps one quoted row (SL-0a37ec5cac0c). The label has 5 rows build-wide.
 - **Copies outside this input** were not read: the official copies of Girish, Parashotam, Mullikote and Isaac held in the C5 working store or HF.
 - **SCR renditions** are AWS e-SCR mirror copies, not signed originals.

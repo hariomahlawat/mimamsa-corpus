@@ -131,6 +131,7 @@ class TestNoOverrulesWithoutCue(unittest.TestCase):
                 self.assertTrue(any(p.search(row["cue_text"]) for p in rx), row["candidate_id"])
                 self.assertIn(row["attribution"], ("COURT_OWN_VOICE", "COURT_OWN_VOICE_UNBOUND_LEAD"))
                 self.assertEqual(row["negated"], "NO")
+                self.assertFalse(row["opinion"].startswith(("DISSENT", "SEPARATE")), row["candidate_id"])
                 if row["attribution"] == "COURT_OWN_VOICE_UNBOUND_LEAD":
                     self.assertTrue(row["binding_status"].startswith("LEAD"), row["candidate_id"])
             self.assertNotEqual(row["status"], "LEGALLY_VALIDATED")
@@ -275,6 +276,25 @@ class TestReviewFindingsC11(unittest.TestCase):
         cands = run_treatment(t, "Supreme Court of India", "Supreme Court of India")
         self.assertFalse(any(c["status"] == R.STATUS_ADV for c in cands))
 
+    def test_rel05_declaratory_overruling_lead(self):
+        t = ("56. The submissions are noted.\n57. In view of the foregoing analysis, the decisions in Yashpal Zorawar (supra) "
+             "and Y v. Z (2001) 3 SCC 100 stand overruled.\n")
+        cands = run_treatment(t, "Supreme Court of India", "Supreme Court of India")
+        self.assertTrue(any(c["status"] == R.STATUS_ADV for c in cands))
+
+    def test_rel05_declaratory_report_excluded(self):
+        t = "21. Y v. Z (2001) 3 SCC 100 stands overruled by the Constitution Bench in A v. B (2005) 2 SCC 1.\n"
+        cands = run_treatment(t, "Supreme Court of India", "Supreme Court of India")
+        self.assertFalse(any(c["status"] == R.STATUS_ADV for c in cands))
+
+    def test_rel05_opinion_labels(self):
+        b = stub_builder("Supreme Court of India")
+        t = ("[[page 1]]\nX v. Y\n[[page 2]]\n[A. B. FIRSTJUDGE, J.]\n1. Text.\n[[page 3]]\n[C. SECONDJUDGE, J.]\n"
+             "In the judgment of C. Secondjudge, J. (Dissenting)\n5. More.\n")
+        b.docs = {"J-src": R.Doc("src", t, "Supreme Court of India")}
+        self.assertTrue(b.opinion_at("J-src", t.find("1. Text"))[0].startswith("LEAD_OPINION"))
+        self.assertTrue(b.opinion_at("J-src", t.find("5. More"))[0].startswith("DISSENT"))
+
     def test_rel10_subject_binding(self):
         self.assertTrue(R.subject_bound(" is clearly "))
         self.assertFalse(R.subject_bound(", that an officer of the rank of the petitioner was "))
@@ -301,6 +321,9 @@ class TestReviewFindingsC11(unittest.TestCase):
     def test_rel01_adviser_queue_only_own_voice(self):
         for row in read_csv("TREATMENT_CANDIDATES.csv"):
             if row["status"] == R.STATUS_ADV:
+                if row["attribution"] in ("DISSENT_OPINION_LEAD", "SEPARATE_OPINION_LEAD"):
+                    self.assertEqual(row["proposed_relation"], "", row["candidate_id"])
+                    continue
                 self.assertIn(row["proposed_relation"], ("OVERRULES", "REVERSES", "QUESTIONS"), row["candidate_id"])
                 self.assertIn(row["attribution"], ("COURT_OWN_VOICE", "COURT_OWN_VOICE_UNBOUND_LEAD"))
 

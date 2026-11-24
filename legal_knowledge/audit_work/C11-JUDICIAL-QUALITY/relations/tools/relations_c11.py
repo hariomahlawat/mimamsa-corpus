@@ -492,7 +492,8 @@ def party_match(tokens, window):
 # ----------------------------------------------------------------------------- treatment cues
 CUES = [
     ("OVERRULES", r"\bover-?\s?rul(?:ed|e|ing)\b"),
-    ("OVERRULES", r"does\s+not\s+lay\s+down\s+(?:the\s+|a\s+)?(?:correct|good)\s+(?:law|position)"),
+    ("OVERRULES", r"do(?:es)?\s+not\s+lay\s+down\s+(?:the\s+|a\s+)?(?:correct|good)\s+(?:law|position)"),
+    ("OVERRULES", r"wrongly\s+decided|decided\s+wrongly"),
     ("OVERRULES", r"(?:is|was)\s+not\s+(?:a\s+)?good\s+law"),
     ("OVERRULES", r"no\s+longer\s+(?:holds?\s+)?(?:a\s+)?good\s+law"),
     ("OVERRULES", r"not\s+correctly\s+decided"),
@@ -531,7 +532,7 @@ CUES = [
     ("LEAVES_OPEN", r"need\s+not\s+(?:decide|go\s+into|examine)"),
 ]
 ANY_CUE = re.compile("|".join("(?:%s)" % p for _, p in CUES), re.I)
-CUE_WORDS = ("overrul", "over-rul", "over rul", "correct law", "correct position", "good law", "correctly decided", "revers",
+CUE_WORDS = ("wrongly", "decided wrongly", "overrul", "over-rul", "over rul", "correct law", "correct position", "good law", "correctly decided", "revers",
              "incuriam", "doubt", "consideration", "larger bench", "distinguish", "no assistance", "no help", "application",
              "applicable", "not apply", "do not", "does not", "would not", "misconceived", "misplaced", "in view the", "follow", "bound by", "applying", "squarely",
              "covered", "light of", "view of the", "settled", "all fours", "explained", "clarif", "open", "express no",
@@ -614,6 +615,36 @@ def treatment_direction(t, cue, cpos, cend, o):
     return True, "", ""
 
 
+OWN_CONCLUSION_LEADIN = re.compile(r"it\s+is\s+(?:hereby\s+)?declared|disposed\s+of\s+in\s+the\s+following\s+terms|in\s+the\s+following\s+terms|"
+                                   r"answer(?:ed)?\s+the\s+reference|\bwe\s+(?:hold|conclude|declare|summari[sz]e|answer)|"
+                                   r"\bI\s+(?:hold|conclude|answer|would\s+hold)|in\s+the\s+result|in\s+view\s+of\s+the\s+(?:foregoing|aforesaid)", re.I)
+INNER_HEADNOTE = re.compile(r"\(\s*(?:Dr\.?\s*)?[A-Z][A-Za-z.\s]{2,40},\s*(?:C\.?\s*)?J\.?\s*\)|[-\u2013]\s*(?:referred\s+to|relied\s+on|followed|"
+                            r"held\s+inapplicable|overruled|distinguished)\s*[.;]|(?:Constitution\s+of\s+India|Act,?\s*\d{4})\s*[-\u2013]\s*"
+                            r"(?:Art|A11|ss?)\.?\s*\d+\s*[-\u2013]")
+
+
+def lead_in_quotation(text, pos, lo):
+    """Stricter quotation test for overruling leads (long reports lose quote marks to OCR, so the balance rule is not
+    used): an unclosed opening curly quote within 1,500 characters, an odd number of straight quotes, a closing
+    '(emphasis supplied)', or a quotation lead-in that is not an order's 'disposed of in the following terms'."""
+    look = text[max(lo, pos - 1500):pos]
+    if look.rfind("\u201c") > look.rfind("\u201d"):
+        return True, "unclosed opening quotation mark"
+    if look.count('"') % 2 == 1:
+        return True, "odd number of straight quotation marks"
+    fwd = text[pos:pos + 900]
+    em = re.search(r"\(\s*emphasis\s+(?:supplied|added|ours|mine)", fwd, re.I)
+    if em and not re.search(r"\n\s*\d{1,3}\s*\.\s+[A-Z]", fwd[:em.start()]):
+        return True, "closing '(emphasis supplied)'"
+    lead = None
+    for m in QUOTE_LEADIN.finditer(look):
+        lead = m
+    if lead is not None and not OWN_CONCLUSION_LEADIN.search(look[max(0, lead.start() - 200):lead.end()]) \
+            and not QUOTE_CLOSE.search(look[lead.end():]):
+        return True, "quotation lead-in with no closing marker"
+    return False, ""
+
+
 def in_quotation(text, pos, lo):
     """True when `pos` most likely falls inside a quoted passage of another judgment/document."""
     look = text[max(lo, pos - 4000):pos]
@@ -645,8 +676,36 @@ OWN_VOICE_STRONG = re.compile(
     r"\b(?:is|are)\s+(?:hereby\s+|accordingly\s+|therefore\s+|thus\s+)?over-?\s?ruled\b|\bwe\s+(?:[a-z]+\s+){0,2}overrule\b|"
     r"does\s+not\s+lay\s+down\s+(?:the\s+|a\s+)?(?:correct|good)\s+law|\b(?:is|are)\s+(?:no\s+longer|not)\s+(?:a\s+)?good\s+law|"
     r"\b(?:is|are)\s+(?:thus\s+|therefore\s+|clearly\s+)?per\s+incuriam|\bwe\s+(?:[a-z]+\s+){0,2}doubt\s+the\s+correctness", re.I)
+LEAD_NAME_STOP = set("""the this that these those court supreme high bench constitution article articles section union india
+state decision decisions judgment judgments case cases learned justice hon ble majority minority view opinion right privacy
+government order reference para paragraph which where while further also however thus therefore accordingly hereby
+held holds protected doctrine principle principles law laws rule rules parliament legislature""".split())
 OWN_FIRST_PERSON = re.compile(r"\b(?:must\s+be\s+and\s+)?is\s+(?:hereby\s+|accordingly\s+|therefore\s+|thus\s+)over-?\s?ruled\b|"
                               r"\bwe\s+(?:[a-z]+\s+){0,2}overrule\b|\b(?:is|are)\s+(?:hereby\s+)?overruled\s+by\s+us\b", re.I)
+LEAD_RX = re.compile(OWN_FIRST_PERSON.pattern + r"|\bstands?\s+over-?\s?ruled\b|\bhereby\s+stand\s+over-?\s?ruled\b|"
+                     r"\b(?:is|are)\s+(?:hereby\s+|accordingly\s+|therefore\s+|thus\s+)?over-?\s?ruled(?:\s+herewith)?\b|"
+                     r"\bdo(?:es)?\s+not\s+lay\s+down\s+(?:the\s+|a\s+)?correct\s+(?:law|position)|"
+                     r"\bmust\s+be\s+held\s+to\s+have\s+been\s+(?:wrongly\s+decided|decided\s+wrongly)|"
+                     r"\b(?:have|has)\s+also\s+been\s+wrongly\s+decided|\b(?:is|are)\s+(?:no\s+longer|not)\s+(?:a\s+)?good\s+law", re.I)
+LEAD_REPORT_AFTER = re.compile(r"^\s*,?\s*(?:by|in)\s+(?:the\s+)?(?:(?:case|judgment|decision)s?\s+(?:of|in)\s+)?[A-Z(\[]")
+COURT_VOICE_LEAD = re.compile(r"\bwe\b|\bthis\s+Court\s+(?:is|holds|finds)|\bmust\s+(?:[a-z]+\s+)?be\s+held\b|\bfor\s+(?:all\s+)?these\s+reasons\b|\bin\s+view\s+of\s+the\s+foregoing\b|"
+                              r"\bfollowing\s+terms\b|\bwe\s+hold\b|\bI\s+(?:am|hold|would)\b", re.I)
+JUDGE_HDR = re.compile(r"\[\s*((?:DR\.?\s*)?[A-Z][A-Z~;1 .,']{2,40}?)[,.]?\s*(?:C\.?\s*J\.?\s*I?|CJI|J)\s*\.?\s*\]")
+DISSENT_RX = re.compile(r"([A-Z][A-Za-z.' ]{2,40}?),?\s*(?:C\.?\s*J\.?\s*I?|CJI|J)\.?\s*\(\s*(?:dissenting|minority)", re.I)
+ORDER_HDR = re.compile(r"(?m)^\s*(?:ORDER\s+OF\s+THE\s+COURT|O\s?R\s?D\s?E\s?R\s+O\s?F\s+T\s?H\s?E\s+C\s?O\s?U\s?R\s?T)\s*$")
+
+
+def norm_initials(x):
+    x = re.sub(r"[^a-z]+", " ", (x or "").lower()).strip()
+    return re.sub(r"\b([a-z])\s+(?=[a-z]\b)", r"\1", x)
+
+
+def judge_key(name):
+    n = re.sub(r"\bDR\b\.?", "", (name or "").upper())
+    letters = re.sub(r"[^A-Z ]", " ", n).split()
+    return letters[-1] if letters else ""
+
+
 LEAD_BLOCKABLE = {"CUE_NOT_BOUND_TO_TARGET", "MULTIPLE_AUTHORITIES_IN_SENTENCE", "REPORTED_TREATMENT_OF_TARGET", "TARGET_IS_AGENT",
                   "COURT_OWN_VOICE", "NEXT_SENTENCE_NO_BACK_REFERENCE"}
 HEADNOTE_REFS = re.compile(r"\[\s*(?:Para\s*\d+\]\s*\[)?\d{2,4}\s*[-–]?\s*[A-H](?:\s*[-–,]\s*[A-H])*\s*"
@@ -657,7 +716,7 @@ SUBMISSION2 = re.compile(SUBMISSION.pattern + r"|\bstand\s+of\b|\baccording\s+to
                          r"\bgrievance\s+(?:of\s+the\s+\w+\s+)?(?:before\s+the\s+\w+\s+)?was\s+that\b|"
                          r"\bcase\s+of\s+the\s+(?:claimant|applicant|petitioner|respondent|appellant)s?\s+(?:is|was)\s+that\b|"
                          r"\bit\s+is\s+pointed\s+out\b|\bwas\s+assailed\b", re.I)
-COURT_VOICE2 = re.compile(COURT_VOICE.pattern + r"|\bwe\b|\bin\s+our\b|\bthis\s+Court\s+(?:is|finds|holds|has\s+considered)|"
+COURT_VOICE2 = re.compile(COURT_VOICE.pattern + r"|\bfor\s+(?:all\s+)?these\s+reasons\b|\bin\s+view\s+of\s+the\s+(?:foregoing|aforesaid|above)\b|\bwe\b|\bin\s+our\b|\bthis\s+Court\s+(?:is|finds|holds|has\s+considered)|"
                           r"\bI\s+(?:am|find|hold|have)\b", re.I)
 OTHER_COURT_REPORT = re.compile(OTHER_COURT_REPORT.pattern + r"|\b(?:Bench|Court|Lordships?)\b[^.;]{0,60}?\b(?:felt|overruled|referred|reversed|doubted|"
                                 r"considered\s+whether|disposed|observing)\b|\bin\s+the\s+view\s+of\b",
@@ -946,7 +1005,7 @@ REL_AFTER = [
 ]
 REL_PRIORITY = ["PROVISION_CHALLENGED", "CHALLENGE_GROUND_CITED", "PROVISION_HELD_INAPPLICABLE", "PROVISION_INTERPRETED",
                 "HISTORICAL_VERSION_RELEVANT", "PROVISION_QUOTED", "POWER_EXERCISED_UNDER", "CHARGED_OR_CONVICTED_UNDER",
-                "PARTY_INVOKED", "JURISDICTION_INVOKED"]
+                "PARTY_INVOKED", "JURISDICTION_REFERENCED"]
 JURISDICTION_ARTICLES = {"32", "136", "226", "227"}
 SUBJ_ALLOWED = set("""is are was were would will does do did could not be been being therefore thus clearly also itself in the present
 case facts of this so far as concerned plainly squarely wholly totally entirely hence obviously""".split())
@@ -972,7 +1031,7 @@ REL_NEEDS_OWN_VOICE = {"PROVISION_HELD_INAPPLICABLE", "PROVISION_INTERPRETED", "
 REL_STATUS = {"PROVISION_CHALLENGED": STATUS_DOC, "CHALLENGE_GROUND_CITED": STATUS_DOC, "PROVISION_HELD_INAPPLICABLE": STATUS_DOC,
               "HISTORICAL_VERSION_RELEVANT": STATUS_DOC, "PROVISION_INTERPRETED": STATUS_DOC, "PROVISION_QUOTED": STATUS_AUTO,
               "POWER_EXERCISED_UNDER": STATUS_AUTO, "CHARGED_OR_CONVICTED_UNDER": STATUS_AUTO, "PARTY_INVOKED": STATUS_AUTO,
-              "JURISDICTION_INVOKED": STATUS_AUTO,
+              "JURISDICTION_REFERENCED": STATUS_AUTO,
               "RELATIONSHIP_UNRESOLVED": STATUS_AUTO, "STATUTE_MENTIONED": STATUS_AUTO}
 RULE_INSTRUMENTS = ("AR-1954", "AFT-PR-2008", "ENT-")
 ACT_INSTRUMENTS = ("AA-1950", "AFT-2007", "NA-1957", "AFA-1950", "IAA-1911", "IPC-1860", "BNS-2023", "BNSS-2023", "IEA-1872",
@@ -1523,6 +1582,7 @@ class Builder:
         self._classify_anchored()
         self.own_voice_leads()
         self.note_leads()
+        self.apply_opinions()
 
     def note_leads(self):
         """Point other cue rows in the same passage to the adviser lead, so their own (correct) reason is not misread."""
@@ -1607,81 +1667,188 @@ class Builder:
                                 cand["reasons"].append("bound through a back-reference in the next sentence")
                             self.cands.append(cand)
 
+    def opinion_at(self, jid, pos):
+        """Which opinion a position belongs to, from the SCR page headers ('[ASHOK BHUSHAN, J.]'), an 'ORDER OF THE COURT'
+        heading and '(Dissenting)' markers. Returns (label, judge)."""
+        if not hasattr(self, "_op"):
+            self._op = {}
+        if jid not in self._op:
+            doc = self.docs[jid]
+            t = doc.text
+            hdrs = [(m.start(), judge_key(m.group(1)), ws(m.group(1))) for m in JUDGE_HDR.finditer(t, doc.editorial_end)]
+            hdrs = [h for h in hdrs if h[1]]
+            dissent = set(judge_key(m.group(1)) for m in DISSENT_RX.finditer(t))
+            orders = [m.start() for m in ORDER_HDR.finditer(t, doc.editorial_end)]
+            self._op[jid] = (hdrs, dissent, orders)
+        hdrs, dissent, orders = self._op[jid]
+        if not hdrs:
+            return "OPINION_NOT_IDENTIFIED (no judge page headers; single-opinion text assumed)", ""
+        first = hdrs[0][1]
+        prev = [h for h in hdrs if h[0] <= pos]
+        cur = prev[-1] if prev else hdrs[0]
+        last_order = max([o for o in orders if o <= pos] or [-1])
+        if last_order >= 0 and (not prev or prev[-1][0] < last_order):
+            return "ORDER_OF_THE_COURT", ""
+        if len(set(h[1] for h in hdrs)) == 1:
+            return "SOLE_OPINION (%s)" % cur[2], cur[2]
+        if cur[1] in dissent:
+            return "DISSENT (%s)" % cur[2], cur[2]
+        if cur[1] == first:
+            return "LEAD_OPINION (%s; first opinion in the report)" % cur[2], cur[2]
+        return "SEPARATE_OPINION (%s; concurring or separate, page-header based)" % cur[2], cur[2]
+
+    def apply_opinions(self):
+        for c in self.cands:
+            jid = c["jid"]
+            if not (self.judg[jid]["meta"].get("court") or "").startswith("Supreme"):
+                c["opinion"] = "HIGH_COURT_JUDGMENT"
+                continue
+            label, judge = self.opinion_at(jid, c["cpos"])
+            c["opinion"] = label
+            if label.startswith(("DISSENT", "SEPARATE_OPINION")):
+                if c["proposed"] in STRONG_RELATIONS or c["attribution"] == "COURT_OWN_VOICE_UNBOUND_LEAD":
+                    kind = "DISSENT_OPINION_LEAD" if label.startswith("DISSENT") else "SEPARATE_OPINION_LEAD"
+                    c["attribution"] = kind
+                    c["proposed"] = ""
+                    c["status"] = STATUS_ADV
+                    c["reasons"].append("wording is in a %s: it does not itself overrule; sent to the adviser as a lead "
+                                        "with no proposal" % label.split(" (")[0].lower().replace("_", " "))
+                elif c["proposed"] and label.startswith("DISSENT"):
+                    c["attribution"] = "DISSENT_OPINION"
+                    c["proposed"] = ""
+                    c["status"] = STATUS_AUTO
+                    c["reasons"].append("wording is in a dissent: no treatment proposal")
+
     def own_voice_leads(self):
-        """First-person overruling sentences ('... must be and is accordingly overruled', 'we also overrule ...') that no
-        anchored candidate carries. Each becomes an adviser lead with the raw target text, the best candidate anchor
-        and an explicit binding status."""
-        have = set((c["jid"], c["cpos"]) for c in self.cands if c["cue_relation"] == "OVERRULES")
+        """Own-voice overruling sentences, first-person or declaratory ('we overrule', 'is accordingly overruled',
+        'stand(s) overruled', 'do(es) not lay down the correct law', 'must be held to have been wrongly decided',
+        'is no longer good law'), that no adviser row carries. Each becomes an adviser lead per bound authority, with the
+        raw target text, the best candidate citation and an explicit binding status. Reports, quotations, submissions
+        and reporter matter are excluded."""
         occ_by_doc = defaultdict(list)
         for o in self.occ:
             occ_by_doc[o["jid"]].append(o)
+        adv = defaultdict(list)
+        for c in self.cands:
+            if c["status"] == STATUS_ADV:
+                adv[c["jid"]].append(c["cpos"])
+        self.probe = []
+        made = defaultdict(list)
+        made_keys = set()
         for jid in sorted(self.docs):
             doc = self.docs[jid]
             t = doc.text
             src_court = self.judg[jid]["meta"].get("court") or ""
-            if not src_court.startswith("Supreme"):
-                continue
-            for m in OWN_FIRST_PERSON.finditer(t, doc.editorial_end):
-                om = re.search(r"over-?\s?rul(?:ed|e)", m.group(0), re.I)
-                cpos, cend = m.start() + om.start(), m.start() + om.end()
-                if (jid, cpos) in have:
-                    continue
+            for m in LEAD_RX.finditer(t):
+                cpos, cend = m.start(), m.end()
                 plo, phi = doc.para_span(cpos)
                 s0, s1 = sentence_bounds(t, cpos, cend, plo, phi)
                 sent = t[s0:s1]
-                if HEADNOTE_REFS.search(t[max(plo, cpos - 1500):cend + 300]):
+                pr = {"jid": jid, "page": doc.page_at(cpos), "wording": ws(m.group(0)), "excerpt": clip(t[max(0, cpos - 140):cend + 100])}
+                self.probe.append(pr)
+                if cpos < doc.editorial_end or HEADNOTE_REFS.search(t[max(plo, cpos - 1500):cend + 300]) \
+                        or INNER_HEADNOTE.search(t[max(0, cpos - 700):cend + 200]):
+                    pr["disposition"] = "EXCLUDED_REPORTER_EDITORIAL"
                     continue
-                if in_quotation(t, cpos, max(doc.editorial_end, cpos - 4000))[0]:
+                if any(abs(p - cpos) < 120 for p in adv[jid]) or any(abs(p - cpos) < 5 for p in made[jid]):
+                    pr["disposition"] = "COVERED_BY_EXISTING_ADVISER_ROW"
+                    continue
+                if not src_court.startswith("Supreme"):
+                    pr["disposition"] = "EXCLUDED_HIGH_COURT (cannot overrule a Supreme Court decision; own-court overruling not separated)"
+                    continue
+                if lead_in_quotation(t, cpos, max(doc.editorial_end, cpos - 4000))[0]:
+                    pr["disposition"] = "EXCLUDED_QUOTED_PASSAGE"
                     continue
                 if submission_context(t, plo, cpos, sent, t[s0:cpos]):
+                    pr["disposition"] = "EXCLUDED_SUBMISSION"
                     continue
-                if re.search(r"\b(?:not|never)\s+(?:[a-z]+\s+)?$", t[max(0, cpos - 25):cpos], re.I):
+                if LEAD_REPORT_AFTER.match(t[cend:cend + 80]):
+                    pr["disposition"] = "EXCLUDED_REPORT ('overruled by/in <another decision>')"
                     continue
-                if m.group(0).lower().startswith("we"):
-                    raw = re.match(r"\s*(?:the\s+(?:decision|judgment|view)\s+(?:in|of)\s+)?([^,.;(]{3,100})", t[cend:cend + 140])
-                    raw = ws(raw.group(1)) if raw else ""
+                rep_m = [x for x in OTHER_COURT_REPORT.finditer(t[s0:cpos]) if not re.search(r"\bbe(?:en)?\s+held$", x.group(0), re.I)]
+                if rep_m and not COURT_VOICE_LEAD.search(sent):
+                    pr["disposition"] = "EXCLUDED_REPORT_OF_ANOTHER_COURT"
+                    continue
+                if re.search(r"\b(?:not|never)\s+(?:[a-z]+\s+)?$", t[max(0, cpos - 25):cpos], re.I) and "lay" not in m.group(0).lower():
+                    pr["disposition"] = "EXCLUDED_NEGATED"
+                    continue
+                low = m.group(0).lower()
+                if low.startswith("we"):
+                    rawm = re.match(r"\s*(?:the\s+(?:decision|judgment|view)s?\s+(?:in|of)\s+)?([^,.;(]{3,100})", t[cend:cend + 140])
+                    raw = ws(rawm.group(1)) if rawm else ""
                 else:
-                    raw = ws(t[s0:m.start()])[-100:]
-                toks = [w.lower() for w in re.findall(r"[A-Za-z]{5,}", raw) if w.lower() not in PARTY_STOP and w.lower() not in RANK_WORDS]
-                best, bstat = None, "NO_CITATION_ANCHOR"
-                ins = [o for o in occ_by_doc[jid] if s0 <= o["start"] < s1 and not o.get("footnote")]
+                    raw = ws(t[s0:cpos])[-140:]
+                backref = bool(re.search(r"\b(?:these|those|the\s+said|the\s+above|aforesaid|both|the\s+same|such)\b", raw, re.I)) or not raw
+                # anchors: same sentence, then preceding sentence
+                ps0 = sentence_bounds(t, max(plo, s0 - 2), max(plo, s0 - 1), plo, phi)[0] if s0 - 2 > plo else s0
+                ins = [o for o in occ_by_doc[jid] if s0 <= o["start"] < s1 and o["zone"] == "BODY"]
+                prev = [o for o in occ_by_doc[jid] if ps0 <= o["start"] < s0 and o["zone"] == "BODY"]
+                anchors, bstat = [], ""
                 if ins:
-                    best = min(ins, key=lambda o: abs(o["start"] - cpos))
-                    bstat = "CITATION_IN_SENTENCE_NOT_BOUND (%d chars)" % abs(best["start"] - cpos)
+                    anchors, bstat = ins[:4], "CITATION_IN_SAME_SENTENCE"
+                elif prev and backref:
+                    anchors, bstat = prev[:4], "CITATION_IN_PRECEDING_SENTENCE (back-reference '%s')" % raw[:40]
                 else:
-                    named = []
-                    for o in occ_by_doc[jid]:
-                        w = t[max(0, o["start"] - 150):o["start"]].lower()
-                        sc = sum(1 for tk in set(toks) if tk in w)
-                        if sc:
-                            gap = min(len(w) - w.rfind(tk) for tk in set(toks) if tk in w)
-                            named.append((sc, gap, o))
-                    top = max([sc for sc, _g, _o in named] or [0])
-                    named = [(g, o) for sc, g, o in named if sc == top and (sc >= 2 or len(set(toks)) == 1)]
-                    if named:
-                        best = min(named, key=lambda go: (go[0], abs(go[1]["start"] - cpos)))[1]
-                        bstat = "RAW_NAME_MATCHES_CITATION_ELSEWHERE_IN_JUDGMENT (p.%s)" % best["page"]
+                    for chunk in re.split(r",|;|\band\b|\bas\s+well\s+as\b", raw):
+                        toks = [w.lower() for w in re.findall(r"\b[A-Z][a-zA-Z]{3,}", chunk) if w.lower() not in LEAD_NAME_STOP]
+                        if not toks:
+                            continue
+                        phrases = [norm_initials(ph) for ph in
+                                   re.findall(r"(?:\b[A-Z]\.?\s*){1,3}[A-Z][a-z]{2,}|\b[A-Z]{2,3}\s+[A-Z][a-z]{2,}|"
+                                              r"\b[A-Z][a-z]{2,}\s+[A-Z][a-z]{2,}", chunk)]
+                        phrases = [ph for ph in phrases if len(ph.split()) >= 2]
+                        named = []
+                        for o in occ_by_doc[jid]:
+                            w = t[max(0, o["start"] - 150):o["start"]].lower()
+                            wn = " " + norm_initials(w) + " "
+                            sc = sum(1 for tk in set(toks) if re.search(r"\b%s\b" % re.escape(tk), w))
+                            sc += sum(10 for ph in phrases if " %s " % ph in wn)
+                            if sc:
+                                gap = min([len(w) - w.rfind(tk) for tk in set(toks) if tk in w] or [len(w)])
+                                named.append((sc, gap, o))
+                        top = max([x[0] for x in named] or [0])
+                        named = [(g, o) for sc, g, o in named if sc == top and (sc >= 2 or len(set(toks)) == 1)]
+                        if named:
+                            best = min(named, key=lambda go: (go[0], abs(go[1]["start"] - cpos)))[1]
+                            if all(best is not a for a in anchors):
+                                anchors.append(best)
+                    anchors = anchors[:4]
+                    if anchors:
+                        bstat = "RAW_NAME_MATCHES_CITATION_ELSEWHERE_IN_JUDGMENT (p.%s)" % ",".join(str(a["page"]) for a in anchors)
+                    elif prev:
+                        anchors, bstat = prev[:1], "NEAREST_CITATION_IN_PRECEDING_SENTENCE (may be another authority)"
                     else:
                         near = [o for o in occ_by_doc[jid] if plo <= o["start"] < phi and abs(o["start"] - cpos) < 1500
-                                and not o.get("footnote")]
+                                and o["zone"] == "BODY" and not o.get("footnote")]
                         if near:
-                            best = min(near, key=lambda o: abs(o["start"] - cpos))
-                            bstat = "NEAREST_CITATION_IN_PARAGRAPH (%d chars; may be another authority)" % abs(best["start"] - cpos)
-                if best is None:
-                    best = {"jid": jid, "ci": -1, "start": cpos, "end": cend, "page": doc.page_at(cpos), "para": doc.para_at(cpos),
-                            "zone": "BODY", "footnote": False,
-                            "clus": [{"start": cpos, "end": cend, "kind": "RAW_TEXT", "key": "RAW:" + (raw[:60] or "unknown"),
-                                      "raw": raw or "(no target text)"}],
-                            "res": {"state": "UNRESOLVED", "group": "", "methods": [], "cands": [], "notes": []}}
-                excerpt = clip(t[max(0, cpos - 125):cend + 125])
-                self.cands.append({"jid": jid, "occ": best, "cue_relation": "OVERRULES", "cue": ws(m.group(0)),
-                                   "cue_page": doc.page_at(cpos), "cue_para": doc.para_at(cpos),
-                                   "attribution": "COURT_OWN_VOICE_UNBOUND_LEAD", "negated": False, "between_other": False,
-                                   "proposed": "OVERRULES", "status": STATUS_ADV, "cpos": cpos, "excerpt": excerpt,
-                                   "binding": "LEAD (%s)" % bstat, "lead_target_raw": raw,
-                                   "reasons": ["first-person overruling sentence with no anchored candidate: adviser lead; "
-                                               "target text '%s'; best candidate %s" % (raw[:80], bstat),
-                                               "overruling/reversal/questioning proposals always go to legal adviser review"]})
+                            anchors = [min(near, key=lambda o: abs(o["start"] - cpos))]
+                            bstat = "NEAREST_CITATION_IN_PARAGRAPH (%d chars; may be another authority)" % abs(anchors[0]["start"] - cpos)
+                if backref and prev and not ins:
+                    raw = ws(t[ps0:s0])[-160:] + " / " + raw
+                if not anchors:
+                    anchors = [{"jid": jid, "ci": -1, "start": cpos, "end": cend, "page": doc.page_at(cpos),
+                                "para": doc.para_at(cpos), "zone": "BODY", "footnote": False,
+                                "clus": [{"start": cpos, "end": cend, "kind": "RAW_TEXT", "key": "RAW:" + (raw[:60] or "unknown"),
+                                          "raw": raw or "(no target text)"}],
+                                "res": {"state": "UNRESOLVED", "group": "", "methods": [], "cands": [], "notes": []}}]
+                    bstat = "NO_CITATION_ANCHOR (target given as raw text only)"
+                anchors = [a for a in anchors if (jid, s0, a["start"]) not in made_keys]
+                if not anchors:
+                    pr["disposition"] = "COVERED_BY_LEAD_IN_SAME_SENTENCE"
+                    continue
+                pr["disposition"] = "NEW_ADVISER_LEAD x%d" % len(anchors)
+                for best in anchors:
+                    made_keys.add((jid, s0, best["start"]))
+                    self.cands.append({"jid": jid, "occ": best, "cue_relation": "OVERRULES", "cue": ws(m.group(0)),
+                                       "cue_page": doc.page_at(cpos), "cue_para": doc.para_at(cpos),
+                                       "attribution": "COURT_OWN_VOICE_UNBOUND_LEAD", "negated": False, "between_other": False,
+                                       "proposed": "OVERRULES", "status": STATUS_ADV, "cpos": cpos,
+                                       "excerpt": clip(t[max(0, cpos - 125):cend + 125]),
+                                       "binding": "LEAD (%s)" % bstat, "lead_target_raw": raw,
+                                       "reasons": ["own-voice overruling wording ('%s') with no bound adviser row: adviser lead; "
+                                                   "best candidate %s" % (ws(m.group(0)), bstat),
+                                                   "overruling/reversal/questioning proposals always go to legal adviser review"]})
+                made[jid].append(cpos)
 
     def group_name_words(self, g):
         if not hasattr(self, "_gw"):
@@ -1803,7 +1970,8 @@ class Builder:
         if not attribution:
             attribution = "COURT_OWN_VOICE"
         lead = None
-        first_person = rel == "OVERRULES" and bool(OWN_FIRST_PERSON.search(t[max(s0, cpos - 45):min(len(t), cend + 15)]))
+        lm = LEAD_RX.search(t[max(s0, cpos - 45):min(len(t), cend + 45)]) if rel == "OVERRULES" else None
+        first_person = bool(lm) and not LEAD_REPORT_AFTER.match(t[max(s0, cpos - 45) + lm.end():max(s0, cpos - 45) + lm.end() + 80])
         if first_person and attribution in LEAD_BLOCKABLE and not (attribution == "COURT_OWN_VOICE" and binding == "BOUND"
                                                                    and not negated) \
                 and not re.search(r"\b(?:not|never)\s+(?:[a-z]+\s+)?$", t[max(0, cpos - 25):cpos], re.I) \
@@ -1877,10 +2045,12 @@ class Builder:
                         inst = "%s-%s" % (sid, yr) if yr else "%s-UNSPECIFIED" % sid
                     if sid == "CRPC-1973":
                         yr = m.groupdict().get("yr") or m.groupdict().get("yr2")
-                        if yr == "1898" or (not yr and date and date < CRPC_NEW_CODE_FROM):
+                        stood = bool(re.search(r"as\s+it\s+(?:then\s+)?stood(?:\s+then)?", t[m.end():m.end() + 80] + t[max(0, m.start() - 60):m.start()], re.I))
+                        if yr == "1898" or (not yr and date and date < CRPC_NEW_CODE_FROM) or (not yr and stood):
                             inst = "CRPC-1898" if yr == "1898" else "CRPC-UNSPECIFIED"
-                            lab2 = "Code of Criminal Procedure, 1898" if yr == "1898" else \
-                                "Code of Criminal Procedure (year not printed; judgment before 1974-04-01)"
+                            lab2 = "Code of Criminal Procedure, 1898" if yr == "1898" else (
+                                "Code of Criminal Procedure (year not printed; 'as it stood then')" if stood else
+                                "Code of Criminal Procedure (year not printed; judgment before 1974-04-01)")
                             ag2 = None
                     pre = t[max(0, m.start() - 140):m.start()]
                     post = t[m.end():m.end() + 60]
@@ -1967,7 +2137,7 @@ class Builder:
             if not found and CHALLENGE_SENTENCE.search(sent):
                 found.append(("CHALLENGE_GROUND_CITED", CHALLENGE_SENTENCE.search(sent).group(0)))
             if prov[1] in JURISDICTION_ARTICLES:
-                found = [("JURISDICTION_INVOKED" if r == "CHALLENGE_GROUND_CITED"
+                found = [("JURISDICTION_REFERENCED" if r == "CHALLENGE_GROUND_CITED"
                           and not re.search(r"violat", c, re.I) else r, c) for r, c in found]
         if not found:
             return
@@ -2199,10 +2369,26 @@ class Builder:
                 "attribution": c["attribution"], "negated": "YES" if c["negated"] else "NO",
                 "other_citation_between": "YES" if c["between_other"] else "NO",
                 "proposed_relation": c["proposed"], "status": c["status"], "binding_status": c.get("binding", ""),
+                "opinion": c.get("opinion", ""),
                 "lead_target_raw": c.get("lead_target_raw", ""), "reasons": "; ".join(c["reasons"]),
                 "excerpt": c["excerpt"],
             })
         self.cand_rows = rows
+        return rows
+
+    def probe_table(self):
+        rows = []
+        cid = defaultdict(list)
+        for r in self.cand_rows:
+            if r["status"] == STATUS_ADV:
+                cid[r["source_doc_id"]].append(r)
+        for p in self.probe:
+            j = self.judg[p["jid"]]
+            hits = [r["candidate_id"] for r in cid[j["doc_id"]] if str(r["cue_page"]) == str(p["page"]) and r["cue_text"] and
+                    (r["cue_text"].lower() in p["wording"].lower() or p["wording"].lower() in r["excerpt"].lower())]
+            rows.append({"doc_id": j["doc_id"], "court": j["meta"].get("court") or "", "page": p["page"], "wording": p["wording"],
+                         "disposition": p.get("disposition", ""), "adviser_rows_on_page": ";".join(sorted(set(hits))),
+                         "excerpt": p["excerpt"]})
         return rows
 
     def link_table(self):
@@ -2235,6 +2421,7 @@ class Builder:
         files["CASE_CITATION_GRAPH.csv"] = to_csv(self.edges_table())
         files["TREATMENT_CANDIDATES.csv"] = to_csv(self.cand_table())
         files["STATUTE_JUDGMENT_LINKS.csv"] = to_csv(self.link_table())
+        files["OVERRULING_PROBE_C11.csv"] = to_csv(self.probe_table())
         import dossier_c11
         files["PRIORITY_TREATMENT_DOSSIER.md"] = dossier_c11.build(self).encode("utf-8")
         files["GRAPH_SUMMARY.json"] = (json.dumps(self.summary(), indent=1, sort_keys=True, ensure_ascii=False) + "\n").encode("utf-8")
@@ -2292,7 +2479,10 @@ class Builder:
                 "by_attribution": dict(sorted(Counter(r["attribution"] for r in c).items())),
                 "proposed_by_relation": dict(sorted(Counter(r["proposed_relation"] for r in c if r["proposed_relation"]).items())),
                 "by_status": dict(sorted(Counter(r["status"] for r in c).items())),
-                "legally_validated": 0,
+                "adviser_rows": sorted("%s|%s|p.%s|%s|%s" % (r["candidate_id"], r["source_doc_id"], r["cue_page"], r["attribution"],
+                                                               r["opinion"]) for r in c if r["status"] == STATUS_ADV),
+                "overruling_probe": dict(sorted(Counter(p.get("disposition", "").split(" (")[0].split(" x")[0]
+                                                         for p in self.probe).items())),
             },
             "statute_links": {
                 "links_total": len(l), "judgments_with_links": len(set(r["judgment_id"] for r in l)),

@@ -631,6 +631,14 @@ def method_notes(b):
         "target binding fails or is distant. Each such row is marked COURT_OWN_VOICE_UNBOUND_LEAD and records the raw "
         "target text, the best candidate citation and a binding status that says binding is NOT established.",
         "",
+        "**Declaratory wording and opinions (rev. 1.3).** Leads also cover declaratory wording: 'stand(s) overruled', "
+        "'is/are (hereby/accordingly) overruled', 'do(es) not lay down the correct law', 'must be held to have been "
+        "wrongly decided', 'is no longer good law'. Every row records its opinion from the SCR page headers: "
+        "SOLE_OPINION, LEAD_OPINION, ORDER_OF_THE_COURT, SEPARATE_OPINION or DISSENT. Wording in a separate or dissenting "
+        "opinion is sent to the adviser as a SEPARATE_OPINION_LEAD or DISSENT_OPINION_LEAD with no proposal, because such "
+        "an opinion does not itself overrule. OVERRULING_PROBE_C11.csv lists every own-voice overruling hit in the corpus "
+        "and what happened to it.",
+        "",
         "**Coverage limits.**",
         "- Coverage is limited to the crawler judgment corpus (ad77758d).",
         "- The official copies of Girish, Parashotam, Mullikote, Isaac and others held in the C5 working store or HF "
