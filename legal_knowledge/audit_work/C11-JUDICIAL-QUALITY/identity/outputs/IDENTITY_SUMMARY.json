@@ -1,0 +1,140 @@
+{
+  "accounting": {
+    "bytes_in_pinned_commit": 3951,
+    "every_file_exactly_once": true,
+    "files_in_batches": 3959,
+    "files_in_copy_register": 3959,
+    "pdf_opens": 3944,
+    "register_rows": 3959,
+    "register_unique_sha256": 3959,
+    "rehash_matches": 3951,
+    "rehash_mismatches": [],
+    "text_sha256_differs": [],
+    "text_sha256_reproduced": 3944
+  },
+  "c10_duplicate_register_kinds": {
+    "CORRECTION_MARKER_ON_FIRST_PAGES": 87,
+    "ONE_FILE_MANY_RECORDS": 41,
+    "SAME_CASE_NUMBER_DIFFERENT_FILES": 3,
+    "SAME_NEUTRAL_CITATION_DIFFERENT_FILES": 1
+  },
+  "candidates": {
+    "ANCILLARY_RECORD_OF_PROCEEDINGS|INFO": 1,
+    "COMPOSITE_CANDIDATE|STRONG": 1,
+    "COMPOSITE_CONFIRMED_BY_REVIEW|REVIEWED": 1,
+    "DOCUMENT_BOUNDARY_UNCLEAR|WEAK": 51,
+    "MULTI_DOCUMENT_FILE_CANDIDATE|STRONG": 4,
+    "NOT_ASSESSED_TRUNCATED_FILE_PAGE_ORDER_UNRELIABLE|INFO": 4,
+    "REPEATED_COPY_INSIDE_FILE (start page matches page 1)|STRONG": 2,
+    "SEPARATE_OPINION_OR_VERSION_CANDIDATE (same case, different text)|WEAK": 6,
+    "TWO_VERSIONS_IN_ONE_FILE_CONFIRMED_BY_REVIEW|REVIEWED": 1
+  },
+  "distinct_judgments": {
+    "basis": "a judgment entity is a connected set of files linked by evidence: exact same text with byte-level or render-level confirmation; identical letter sequence with same court, date and page count; or an incomplete copy whose first page matches a copy of the same court and date. Text alone never merges files.",
+    "c10_count_by_file": 3959,
+    "change_exact_text_groups": -230,
+    "change_incomplete_copy_first_page_match": -5,
+    "change_normalized_text_extension": -61,
+    "change_review_confirmed_composite": 1,
+    "composite_detail": [
+      {
+        "change": 1,
+        "note": "second report (Adarsh Cooperative Housing Society v. Union of India, W.P.(C) 129/2018) not present elsewhere in the corpus",
+        "sha256": "0f65307432d16f74f78ea8a4f37ad5d1d4b0e56188273575ac956eab22478d72"
+      }
+    ],
+    "judgment_entities_from_files": 3663,
+    "not_counted": {
+      "automated_composite_candidates_strong": 4,
+      "note": "two versions of one judgment stay one judgment; automated composite candidates change nothing until reviewed",
+      "two_versions_in_one_file_reviewed": 1
+    },
+    "revised_distinct_judgments": 3664,
+    "revised_exact_text_only": 3730,
+    "sum_check": true
+  },
+  "exact_group_classification": {
+    "COMPOSITE_FILE": 1,
+    "CONFIRMED_DUPLICATE_SAME_JUDGMENT": 59,
+    "SAME_JUDGMENT_DIFFERENT_RENDITION": 2
+  },
+  "extension_groups": {
+    "INCOMPLETE_COPY_FIRST_PAGE_MATCH": 5,
+    "NORMALIZED_TEXT_EXTENSION": 13,
+    "SAME_WORDS_NUMBERS_DIFFER_NOT_MERGED": 2
+  },
+  "group_classification_all_scopes": {
+    "EXACT_TEXT_SHA256|COMPOSITE_FILE": 1,
+    "EXACT_TEXT_SHA256|CONFIRMED_DUPLICATE_SAME_JUDGMENT": 59,
+    "EXACT_TEXT_SHA256|SAME_JUDGMENT_DIFFERENT_RENDITION": 2,
+    "INCOMPLETE_COPY_FIRST_PAGE_MATCH|CONFIRMED_DUPLICATE_SAME_JUDGMENT": 5,
+    "NORMALIZED_TEXT_EXTENSION|SAME_JUDGMENT_DIFFERENT_RENDITION": 12,
+    "NORMALIZED_TEXT_EXTENSION|UNRESOLVED": 1,
+    "SAME_WORDS_NUMBERS_DIFFER_NOT_MERGED|UNRESOLVED": 2
+  },
+  "incomplete_23": {
+    "complete_copy_status": {
+      "COMPLETE_CONTENT_COPY_IN_CORPUS": 1,
+      "NO_OTHER_COPY_FOUND": 18,
+      "OTHER_COPIES_IN_CORPUS_ALL_INCOMPLETE": 4
+    },
+    "downloads_made": 0,
+    "earlier_complete_revision_found": 0,
+    "files": 23,
+    "identity_reliability": {
+      "NOT_CONFIRMED_FROM_DOCUMENT": 11,
+      "PARTIAL_COMMON_JUDGMENT_HEADED_BY_OTHER_CASE": 2,
+      "RELIABLE_FROM_PAGE_1": 8,
+      "WEAK": 2
+    },
+    "recovery_action": {
+      "RETRIEVE_HELD_BYTES": 4,
+      "RE_ACQUIRE_COMPLETE_COPY": 18,
+      "USE_EXISTING_COPY_AS_CONTENT_SOURCE; KEEP_TRUNCATED_FILE_AS_RECORDED_COPY": 1
+    }
+  },
+  "inputs_sha256": {
+    "C10-HF-JUDGMENTS/outputs/CONTINUATION_MANIFEST.csv": "1b2874da071c5a67caae141f944dade80c641e702f106e3c5b211d30f93661d7",
+    "C10-HF-JUDGMENTS/outputs/HF_JUDGMENT_COPY_REGISTER.csv": "4828c5cd2628c843ef5006e39455474e442c340fa0a02a8e864956e1bb3951f4",
+    "C10-HF-JUDGMENTS/outputs/HF_JUDGMENT_DUPLICATES.csv": "6768682a9cb815a67862c4d4441d4142cb138a5a9755df76a99e895affa2a97c",
+    "C10-HF-JUDGMENTS/outputs/HF_JUDGMENT_METADATA_AUDIT.csv": "147fccfb02522697c094635ae70f12b62ea1f2f12d24e8802a0ddc0222197916",
+    "C10-HF-JUDGMENTS/review/REVIEW_FINDINGS.md": "f8b0833102a3094bc2efcb049461ac8a678e243d2e2547e43653ef7748b2a92d",
+    "C10-HF-JUDGMENTS/tools/jextract.py": "44c6fe063f496915d7820d882ca92435c2b385b09edd9a314daef0fc531abeea",
+    "C10-HF-JUDGMENTS/work/batches/batch_0000.jsonl": "7a31ef8f7d33738770d4157f38c44ce6a8ffd7ba57caf6bbbed6253803d2ffe6",
+    "C10-HF-JUDGMENTS/work/batches/batch_0001.jsonl": "f3193a401071a4dc1e0c787a5b10901aef13fcb37f348744b9f96c641ac3fd41",
+    "C10-HF-JUDGMENTS/work/batches/batch_0002.jsonl": "ed4f07cc33fde29c6f4461d49ef909b726ac779369f8ea5b79fff3753bfd87e1",
+    "C10-HF-JUDGMENTS/work/batches/batch_0003.jsonl": "478ac5341799ddd3b9ff818275a7c911e13624b5a7acaea3a6383a3e2cbe44e4",
+    "C10-HF-JUDGMENTS/work/batches/batch_0004.jsonl": "25a5b7513a1b13fb7dffcb67c7dd7a8d7a5cbe6511b4ba9b767104ab6ecbdb27",
+    "C10-HF-JUDGMENTS/work/batches/batch_0005.jsonl": "489f19835e3f7a629c9c6ed55633fe7e40ec3ac1a9f7db84848b90a8e5a70233",
+    "C10-HF-JUDGMENTS/work/batches/batch_0006.jsonl": "b57edd8d7ad8db3e33621ffa94c5e066deb722977b2e008bcf3bd0afd271f6c8",
+    "C10-HF-JUDGMENTS/work/batches/batch_0007.jsonl": "91cb43123d84898204a24e0b6582c46d6c64c8e96c9c146c49dd7bcc1c0b6693",
+    "C10-HF-JUDGMENTS/work/batches/batch_0008.jsonl": "4dc0d4a0e22121da0f9fdbd2281dc25f8b73219d8c82b3f8f0b451160d9b3bd5",
+    "C10-HF-JUDGMENTS/work/batches/batch_0009.jsonl": "d77aefbc648c61f54fc167bd95606f1861ad70986e957566fc808baf8f9617f1",
+    "C10-HF-JUDGMENTS/work/batches/batch_0010.jsonl": "8a7b7e09592a3cc5c024796ca3317635bbc46bea4282f02735a7c0ce1f042b8d",
+    "C10-HF-JUDGMENTS/work/batches/batch_0011.jsonl": "b9e542441135aaccc8693cb7441609122031edb6d19798e236acd3da7de9aa74",
+    "C10-HF-JUDGMENTS/work/batches/batch_0012.jsonl": "958a0dd0bb4305a64b626bfa9da4396a9b3095c8aece4a80d00c2d8e1afde1cb",
+    "C10-HF-JUDGMENTS/work/batches/batch_0013.jsonl": "a848d0a891b49ccd1e5c55f007c88d48e70841dc259ef3f2c42942e4c8d4febf",
+    "C10-HF-JUDGMENTS/work/batches/batch_0014.jsonl": "62541f4f9802abdbe8da20a6dc4c29e588aaa08f327c27a0f68cc2dbd7f04113",
+    "C10-HF-JUDGMENTS/work/batches/batch_0015.jsonl": "aa155c48ff5ccbd8e8dc2fe41ebca7c409e35e03d8a4cf5fda677274c4acb84b",
+    "C10-HF-JUDGMENTS/work/batches/batch_0016.jsonl": "211686c1e602bdbf85e8eb023a351567206d3cd47c9ab1e044f0a6c95317a585",
+    "C10-HF-JUDGMENTS/work/batches/batch_0017.jsonl": "1d99c5346d6d2de5a25292da390f2bd1e2504b34f4c6719e29839b97d604d568",
+    "C10-HF-JUDGMENTS/work/batches/batch_0018.jsonl": "826dd9b9a384840b2a4eabc517fd4e7e5fc9080e865215e3f6848dbd04d43c56",
+    "C10-HF-JUDGMENTS/work/batches/batch_0019.jsonl": "54e7424b776c1076dabb4a8f7993963bdfd4aa10bdd2bb64a1699b191aee3c16"
+  },
+  "pinned_commit": "ad77758d",
+  "same_text_reproduction": {
+    "groups_with_empty_text": 0,
+    "matches_prior": true,
+    "min_text_chars_in_groups": 1222,
+    "prior_finding": {
+      "files": 292,
+      "groups": 62
+    },
+    "reproduced": {
+      "files": 292,
+      "groups": 62
+    }
+  },
+  "tool": "c11-identity/1",
+  "verification": "AUTOMATED_NOT_LEGALLY_VERIFIED"
+}
