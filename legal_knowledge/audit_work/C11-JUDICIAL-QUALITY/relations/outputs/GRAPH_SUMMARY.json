@@ -1,0 +1,423 @@
+{
+ "citations": {
+  "c10_170_cites_reproduced": {
+   "c10_edges": 168,
+   "not_reproduced_examples": [],
+   "reproduced": 168
+  },
+  "citation_strings_detected_by_kind": {
+   "AIR": 2482,
+   "CASE_NUMBER": 15847,
+   "HC_NEUTRAL": 355,
+   "INSC": 166,
+   "JT": 28,
+   "SCALE": 100,
+   "SCC": 10619,
+   "SCC_ONLINE": 2892,
+   "SCR": 6876,
+   "SLR": 58
+  },
+  "cited_authority_occurrences_excluding_self": 35498,
+  "distinct_resolved_targets": 262,
+  "edges_by_relation": {
+   "CITES": 24000
+  },
+  "edges_by_status": {
+   "AUTOMATED_DETECTED": 21518,
+   "DOCUMENTARY_CHECK_REQUIRED": 2482
+  },
+  "edges_by_target_state": {
+   "RESOLVED": 2586,
+   "UNRESOLVED": 17970,
+   "UNRESOLVED_AMBIGUOUS": 55,
+   "UNRESOLVED_CASE_NUMBER_ONLY": 3297,
+   "UNRESOLVED_CITATION_MISMATCH": 63,
+   "UNRESOLVED_CONFLICT": 2,
+   "UNRESOLVED_TEMPORAL_CONFLICT": 27
+  },
+  "edges_total": 24000,
+  "edges_with_body_occurrence": 21861,
+  "learned_alias_conflicts_discarded": 0,
+  "learned_parallel_aliases": 107,
+  "resolution_rate_edges": 0.1077,
+  "resolution_rate_note": "share of distinct (citing judgment, cited authority) edges whose target is a held corpus judgment; most cited authorities are simply not in the 4,259-judgment corpus, so a low rate is expected and is not an error rate",
+  "resolution_rate_sc_reporter_edges": {
+   "edges": 10794,
+   "rate": 0.138,
+   "resolved": 1490
+  },
+  "resolved_edges_by_method": {
+   "CASE_NUMBER_PLUS_PARTY": 383,
+   "CURATED_CROSSWALK_C10_HELD": 480,
+   "CURATED_CROSSWALK_C10_HELD;PARALLEL_CITATION_LEARNED;REPORTER_CITATION_METADATA": 1,
+   "CURATED_CROSSWALK_C10_HELD;REPORTER_CITATION_METADATA": 17,
+   "NEUTRAL_CITATION_METADATA": 16,
+   "NEUTRAL_CITATION_METADATA;REPORTER_CITATION_METADATA": 1,
+   "PARALLEL_CITATION_LEARNED": 921,
+   "PARALLEL_CITATION_LEARNED;REPORTER_CITATION_METADATA": 163,
+   "PARTY_YEAR_COURT": 517,
+   "REPORTER_CITATION_METADATA": 87
+  },
+  "same_case_number_references_dropped": 38444,
+  "same_day_connected_matter_references_dropped": 5124,
+  "self_citations_dropped": 688,
+  "top_in_degree": [
+   {
+    "date": "2025-04-23",
+    "doc_ids": [
+     "sc-2025-bijender-singh-2025insc549"
+    ],
+    "group": "JG-0831eb715ae6",
+    "in_degree_citing_judgments": 452,
+    "title": "BIJENDER SINGH versus UNION OF INDIA & ORS."
+   },
+   {
+    "date": "2013-07-02",
+    "doc_ids": [
+     "sc-2013-dharamvir-singh-2013insc408"
+    ],
+    "group": "JG-3056712cc761",
+    "in_degree_citing_judgments": 352,
+    "title": "DHARAMVIR SINGH versus UNION OF INDIA & ORS."
+   },
+   {
+    "date": "2025-03-27",
+    "doc_ids": [
+     "hc-delhi-2025-w-p-c-3545-2025-dlhc010148412025-1-2025-03-27"
+    ],
+    "group": "JG-e8bbbabce215",
+    "in_degree_citing_judgments": 127,
+    "title": "W.P.(C)/3545/2025 of UNION OF INDIA & ORS. Vs EX SUB GAWAS ANIL MADSO"
+   },
+   {
+    "date": "2014-06-25",
+    "doc_ids": [
+     "sc-2014-sukhvinder-singh-2014insc421"
+    ],
+    "group": "JG-57712c12e64c",
+    "in_degree_citing_judgments": 85,
+    "title": "SUKHVINDER SINGH versus UNION OF INDIA & ORS."
+   },
+   {
+    "date": "2015-02-13",
+    "doc_ids": [
+     "sc-2015-union-of-india-anr-2015insc114"
+    ],
+    "group": "JG-6b495f148365",
+    "in_degree_citing_judgments": 75,
+    "title": "UNION OF INDIA & ANR. versus RAJBIR SINGH"
+   },
+   {
+    "date": "2019-10-03",
+    "doc_ids": [
+     "sc-2019-no-1466828m-ex-cfn-narsingh-ya-2019insc1121"
+    ],
+    "group": "JG-3c50cdb7f30d",
+    "in_degree_citing_judgments": 73,
+    "title": "NO. 1466828M EX CFN NARSINGH YADAV versus UNION OF INDIA & ORS."
+   },
+   {
+    "date": "2025-05-07",
+    "doc_ids": [
+     "sc-2025-rajumon-t-m-2025insc644"
+    ],
+    "group": "JG-8fa8197f58fa",
+    "in_degree_citing_judgments": 61,
+    "title": "RAJUMON T.M. versus UNION OF INDIA & ORS."
+   },
+   {
+    "date": "2026-01-06",
+    "doc_ids": [
+     "hc-delhi-2026-w-p-c-88-2026-dlhc011079442025-1-2026-01-06"
+    ],
+    "group": "JG-c8ee32c1273b",
+    "in_degree_citing_judgments": 60,
+    "title": "W.P.(C)/88/2026 of UNION OF INDIA & ORS. Vs 781466 EX SGT KRISHNA KUMAR DIWEDI"
+   },
+   {
+    "date": "1978-01-25",
+    "doc_ids": [
+     "sc-1978-maneka-gandhi-1978insc16"
+    ],
+    "group": "JG-050c76ffc942",
+    "in_degree_citing_judgments": 59,
+    "title": "MANEKA GANDHI versus UNION OF INDIA"
+   },
+   {
+    "date": "2011-03-31",
+    "doc_ids": [
+     "sc-2011-k-j-s-buttar-2011insc249"
+    ],
+    "group": "JG-16dcc0754399",
+    "in_degree_citing_judgments": 48,
+    "title": "K.J.S. BUTTAR versus UNION OF INDIA AND ANR."
+   },
+   {
+    "date": "2008-08-13",
+    "doc_ids": [
+     "sc-2008-union-of-india-ors-2008insc930"
+    ],
+    "group": "JG-f8a14181e47c",
+    "in_degree_citing_judgments": 45,
+    "title": "UNION OF INDIA & ORS. versus TARSEM SINGH"
+   },
+   {
+    "date": "2025-08-19",
+    "doc_ids": [
+     "hc-jkl-2025-wp-c-1633-2024-jkhc020007942024-1-2025-08-19"
+    ],
+    "group": "JG-afac61093f27",
+    "in_degree_citing_judgments": 44,
+    "title": "WP(C)/1633/2024 of UNION OF INDIA TH SECRETARY GOI MINISTRY OF DEFENCE NEW DELHI AND OTHERS Vs SHUKAR SINGH"
+   },
+   {
+    "date": "1987-10-15",
+    "doc_ids": [
+     "sc-1987-ranjit-thakur-1987insc285"
+    ],
+    "group": "JG-35b9c948fe62",
+    "in_degree_citing_judgments": 41,
+    "title": "RANJIT THAKUR versus UNION OF INDIA AND ORS."
+   },
+   {
+    "date": "2007-01-18",
+    "doc_ids": [
+     "sc-2007-shiv-dass-2007insc64"
+    ],
+    "group": "JG-a49f7c6df668",
+    "in_degree_citing_judgments": 34,
+    "title": "SHIV DASS versus UNION OF INDIA AND ORS ."
+   },
+   {
+    "date": "2015-01-05",
+    "doc_ids": [
+     "sc-2015-union-of-india-anr-2015insc2"
+    ],
+    "group": "JG-47dffe7ecd2f",
+    "in_degree_citing_judgments": 27,
+    "title": "UNION OF INDIA & ANR. versus PURUSHOTTAM"
+   },
+   {
+    "date": "1990-08-28",
+    "doc_ids": [
+     "sc-1990-s-n-mukherjee-1990insc257"
+    ],
+    "group": "JG-239c4e386f0e",
+    "in_degree_citing_judgments": 25,
+    "title": "S.N. MUKHERJEE versus UNION OF INDIA"
+   },
+   {
+    "date": "1982-08-25",
+    "doc_ids": [
+     "sc-1982-lt-col-prithi-pal-singh-bedi-e-1982insc65"
+    ],
+    "group": "JG-211dbaf4e203",
+    "in_degree_citing_judgments": 25,
+    "title": "LT. COL. PRITHI PAL SINGH BEDI ETC. versus UNION OF INDIA & OTHERS"
+   },
+   {
+    "date": "2026-02-12",
+    "doc_ids": [
+     "sc-2026-union-of-india-through-its-sec-2026insc149"
+    ],
+    "group": "JG-4f7ea3a451c6",
+    "in_degree_citing_judgments": 22,
+    "title": "UNION OF INDIA THROUGH ITS SECRETARY & ORS. versus SGT GIRISH KUMAR AND ORS. ETC."
+   },
+   {
+    "date": "2009-08-20",
+    "doc_ids": [
+     "sc-2009-secretary-ministry-of-defence-2009insc1059"
+    ],
+    "group": "JG-28f88d53cdca",
+    "in_degree_citing_judgments": 22,
+    "title": "SECRETARY, MINISTRY OF DEFENCE & OTHERS versus DAMODARAN A.V. (DEAD) THROUGH LRS. & OTHERS"
+   },
+   {
+    "date": "1996-10-11",
+    "doc_ids": [
+     "sc-1996-union-of-india-and-anr-1996insc1198"
+    ],
+    "group": "JG-05e948459327",
+    "in_degree_citing_judgments": 20,
+    "title": "UNION OF INDIA AND ANR. versus SH. BALJIT SINGH"
+   },
+   {
+    "date": "2007-04-20",
+    "doc_ids": [
+     "sc-2007-union-of-india-and-ors-2007insc446"
+    ],
+    "group": "JG-89eb15de4987",
+    "in_degree_citing_judgments": 18,
+    "title": "UNION OF INDIA AND ORS. versus KESHAR SINGH"
+   },
+   {
+    "date": "1998-09-15",
+    "doc_ids": [
+     "sc-1998-union-of-india-and-ors-1998insc361"
+    ],
+    "group": "JG-5c8aecc8bec9",
+    "in_degree_citing_judgments": 18,
+    "title": "UNION OF INDIA AND ORS. versus SUBEDAR RAM NARAIN ETC."
+   },
+   {
+    "date": "2015-03-11",
+    "doc_ids": [
+     "sc-2015-union-of-india-ors-2015insc206"
+    ],
+    "group": "JG-86de3643e66e",
+    "in_degree_citing_judgments": 17,
+    "title": "UNION OF INDIA & ORS. versus MAJOR GENERAL SHRI KANT SHARMA & ANR."
+   },
+   {
+    "date": "2005-10-21",
+    "doc_ids": [
+     "sc-2005-controller-of-defence-accounts-2005insc515"
+    ],
+    "group": "JG-f696a5541cd4",
+    "in_degree_citing_judgments": 16,
+    "title": "CONTROLLER OF DEFENCE ACCOUNTS (PENSION) AND ORS. versus S. BALACHANDRAN NAIR"
+   },
+   {
+    "date": "2017-08-24",
+    "doc_ids": [
+     "sc-2017-justice-k-s-puttaswamy-retd-an-2017insc801"
+    ],
+    "group": "JG-447d33506394",
+    "in_degree_citing_judgments": 16,
+    "title": "JUSTICE K S PUTTASWAMY (RETD.), AND ANR. versus UNION OF INDIA AND ORS."
+   }
+  ]
+ },
+ "input_sha256": {
+  "C10-HF-JUDGMENTS/outputs/HF_JUDGMENT_LEGAL_ISSUES.jsonl": "c4e53c0516236663378b863ffe87c243b96b7a23d1300613bb0b5cdcd3d20b65",
+  "C10-HF-JUDGMENTS/outputs/HF_JUDGMENT_RELATIONSHIPS.csv": "ba8bbc4d1c4522d3f775da8cec1a2f5e755950161c2afe1d06bf360e1abc228a",
+  "C10-RECONCILIATION/workstreams/judicial/CURATED_CASE_COPY_STATUS.csv": "101b103d55db50c53f9e2ff2e6f05aa9e994b14f4108ab98b5e69d8b9269ea43",
+  "C10-RECONCILIATION/workstreams/judicial/JUDGMENT_RECONCILIATION.csv": "5366e9cbeae77580eeb6051263725a8d745a191621819c364b246167fbc03d12",
+  "C10-RECONCILIATION/workstreams/judicial/JUDICIAL_TREATMENT_C10.csv": "4acc9303731c32f57a1969eefd95f62a65aa9bf7199f8ee320e1dd850d29477e",
+  "C10-RECONCILIATION/workstreams/judicial/TREATMENT_CITATION_HITS.csv": "7acfa32177b4ad6caae1b8e4cc7a70c25cbcbb0f091508c00617180f726fd692",
+  "C10-RECONCILIATION/workstreams/statutory/amendment_graph_c10.csv": "c4e03860cedeec7c3f5aad2fa52f79e525869c32d116aaa31be89455fa5948db",
+  "git:21e73b83:legal_knowledge/curated_originals/case_law/v0.9/cases_53.jsonl": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a",
+  "git:ad77758d:data/meta (judgment/order records)": "48a297818ef526fab531d47cce2dbbdf01e955bdcacec4b7f8dbc0549925383c",
+  "git:ad77758d:data/text (judgment texts)": "13a9bc191aab1f3c7d7f046eafa39b1bef31080cdfe328681b0978722bfa83ec",
+  "git:cfc52d57:legal_knowledge/audit_work/C9-LEGAL-EVIDENCE/STATUTORY/amendment_graph.csv": "57cb5b80574d63b571c17971200fafd46e22b478138e8f44a5adbadb1a094ebd"
+ },
+ "judgments": {
+  "distinct_copies_by_sha": 3951,
+  "metadata_records_judgment_order": 4259,
+  "with_text": 3944,
+  "without_text": [
+   "J-028ce643f09f1cec",
+   "J-02e3320fa26f4fff",
+   "J-2c098828c7bac3e5",
+   "J-8a4689b542d4ff57",
+   "J-cda4a72604478d29",
+   "J-e81cf875c745b334",
+   "J-f14d5ae83261688f"
+  ]
+ },
+ "legally_validated_assigned": 0,
+ "pinned_inputs": {
+  "amendment_graph_commit": "cfc52d57",
+  "curated_commit": "21e73b83",
+  "text_layer_commit": "ad77758d"
+ },
+ "status_vocabulary": [
+  "AUTOMATED_DETECTED",
+  "DOCUMENTARY_CHECK_REQUIRED",
+  "LEGAL_INTERPRETATION_ADVISER_REVIEW",
+  "LEGALLY_VALIDATED"
+ ],
+ "statute_links": {
+  "by_instrument": {
+   "AA-1950": 1251,
+   "AFA-1950": 340,
+   "AFT-2007": 872,
+   "AFT-PR-2008": 70,
+   "AR-1954": 898,
+   "BNS-2023": 3,
+   "BNSS-2023": 15,
+   "COI": 4511,
+   "CRPC-1973": 424,
+   "ENT-1982": 400,
+   "ENT-2008": 149,
+   "ENT-UNSPECIFIED": 449,
+   "IAA-1911": 15,
+   "IEA-1872": 210,
+   "IPC-1860": 552,
+   "NA-1957": 175,
+   "PRA-1961": 343,
+   "PRA-2008": 129,
+   "PRA-UNSPECIFIED": 104,
+   "RA-1987": 157
+  },
+  "by_relationship": {
+   "HISTORICAL_VERSION_RELEVANT": 15,
+   "PROVISION_APPLIED": 303,
+   "PROVISION_CHALLENGED": 284,
+   "PROVISION_HELD_INAPPLICABLE": 20,
+   "PROVISION_INTERPRETED": 172,
+   "PROVISION_QUOTED": 146,
+   "RELATIONSHIP_UNRESOLVED": 5568,
+   "STATUTE_MENTIONED": 4559
+  },
+  "by_status": {
+   "AUTOMATED_DETECTED": 10273,
+   "DOCUMENTARY_CHECK_REQUIRED": 794
+  },
+  "by_version_status": {
+   "VERSION_NOT_ESTABLISHED": 11067
+  },
+  "c10_crosscheck": {
+   "C10_DID_NOT_DETECT_STATUTE": 105,
+   "C10_PROVISION_AGREES": 4683,
+   "C10_STATUTE_AGREES": 4495,
+   "C10_STATUTE_ONLY": 1769,
+   "STATUTE_NOT_IN_C10_VOCABULARY": 15
+  },
+  "judgments_with_links": 2430,
+  "links_total": 11067,
+  "with_amendment_graph_edge_match": 515
+ },
+ "tool": "relations_c11 1.0.0",
+ "treatment": {
+  "by_attribution": {
+   "COURT_LIKELY": 327,
+   "CUE_TOO_FAR": 146,
+   "DIRECTION_UNCLEAR": 159,
+   "LOWER_FORUM_REPORTED": 422,
+   "NEXT_SENTENCE_NO_BACK_REFERENCE": 47,
+   "PARTY_SUBMISSION_OR_MIXED": 620,
+   "QUOTED_PASSAGE": 247,
+   "REPORTED_TREATMENT_OF_TARGET": 54,
+   "REPORTER_EDITORIAL": 1524,
+   "TARGET_CONTENT": 2,
+   "TARGET_IS_AGENT": 2
+  },
+  "by_cue_relation": {
+   "APPLIES": 1024,
+   "CLARIFIES": 32,
+   "DISTINGUISHES": 1080,
+   "EXPLAINS": 5,
+   "FOLLOWS": 923,
+   "LEAVES_OPEN": 7,
+   "OVERRULES": 345,
+   "QUESTIONS": 106,
+   "REVERSES": 28
+  },
+  "by_status": {
+   "AUTOMATED_DETECTED": 3224,
+   "DOCUMENTARY_CHECK_REQUIRED": 269,
+   "LEGAL_INTERPRETATION_ADVISER_REVIEW": 57
+  },
+  "cue_hits": 3550,
+  "legally_validated": 0,
+  "proposed_by_relation": {
+   "APPLIES": 198,
+   "DISTINGUISHES": 41,
+   "FOLLOWS": 30,
+   "OVERRULES": 3,
+   "QUESTIONS": 7
+  }
+ }
+}
