@@ -10,7 +10,7 @@
 ## Step 0: Temporary repository with the real package layout; genesis; verify
 
 - copied 99 files from the source repository (package tools/schema/genesis/effective v0000 + 76 pinned input files)
-- source AUTH-LEDGER tools tree 22b4e6d765242e4224853cf7f2d422f370634c30
+- source AUTH-LEDGER tools tree 84c94fe39878db720739a7f4fa7dd2b1dcd9ee33
 
 ```
 $ python legal_knowledge/audit_work/AUTH-LEDGER/tools/auth_ledger.py verify
@@ -28,7 +28,7 @@ Result: **PASS**
 - AL-v0001-001 ADD Dharamvir Singh (SC 2013) copy, class PRIMARY_OFFICIAL_COURT_COPY, from draft C6-ADD-v1-3056712c
 - AL-v0001-002 ADD Army Rules amendment Gazette S.R.O. 1 (1962) copy, class PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE, from draft C6-ADD-v1-b76bf4aa
 - records: decisions/D-v0001.md (decided_by: SYNTHETIC OWNER (test)), decisions/R-v0001.md (reviewer: SYNTHETIC REVIEWER (test)); scope and legal_approval: NOT_GIVEN lines present
-- reviewed_head c7c078da8f4e0a2d4641c9bedf1691760f0a8332; merge_commit 0cd04ee8eaa74710ca5333b837d4acec1e510c2e (parents: d0d12640f4a05e5887f0eff819ba9e4ede369549 c7c078da8f4e0a2d4641c9bedf1691760f0a8332)
+- reviewed_head 5476ed499c81b75ef5e1be97ffb848efb3214db3; merge_commit 746756c4bd5cb18cadf42c644a0dea80b79a35a9 (parents: f3d0aa86d7105f206616d29a6d364de5e0d549e9 5476ed499c81b75ef5e1be97ffb848efb3214db3)
 
 ```
 $ python legal_knowledge/audit_work/AUTH-LEDGER/tools/auth_ledger.py verify
@@ -45,7 +45,7 @@ Result: **PASS**
 
 ## Step b: Version 2: BIND line in a later PR; verify; APPLIED
 
-- BIND PR head 7f7015ab69e1b893332cdf684f81e7948a3d8b66; merge 3cfacffd55d984282b7a6fe83627af6e52fe017a; the BIND line names reviewed_head c7c078da8f4e and merge_commit 0cd04ee8eaa7
+- BIND PR head 52ec8f360b5cc441842f4d15440c96fae700d0d2; merge 47b6aac9eeea9a4d53d2936cbd40ed0e118b8f09; the BIND line names reviewed_head 5476ed499c81 and merge_commit 746756c4bd5c
 
 ```
 $ python legal_knowledge/audit_work/AUTH-LEDGER/tools/auth_ledger.py verify
@@ -53,7 +53,7 @@ $ python legal_knowledge/audit_work/AUTH-LEDGER/tools/auth_ledger.py verify
 v0000 ok
 v0001 ok
 v0002 ok
-HEAD 2 01f9809f7651535da85d2bdb0a0a34a2a2e7fd1b981913cc7526b4329d227635; frozen pins ok; ledger verified
+HEAD 2 8141ba31123901d15d02cb7e50d82fc2dcbcafd11dd4cd27bbb8876952666ed2; frozen pins ok; ledger verified
 ```
 Result: **PASS**
 
@@ -73,7 +73,7 @@ v0000 ok
 v0001 ok
 v0002 ok
 v0003 ok
-HEAD 3 0b347a640f94194ebea455f88d84acf1c99249fac5822181d9dfd779554965db; frozen pins ok; ledger verified
+HEAD 3 867aab273f0e4a9c7c0af862cea15e6f33979cf7d55a1e9cf0027314f75cd9a7; frozen pins ok; ledger verified
 ```
 Result: **PASS**
 
@@ -88,7 +88,7 @@ v0001 ok
 v0002 ok
 v0003 ok
 v0004 ok
-HEAD 4 77b7f5629bd6deb026452b7d29a97f5eb2b4d3ba5f40137f97051c86c2ea7780; frozen pins ok; ledger verified
+HEAD 4 cfb3f0b9529cd6e01cf7369d587605ee792ab29ec382af102472bdbddd1f3625; frozen pins ok; ledger verified
 ```
 Result: **PASS**
 
@@ -107,7 +107,7 @@ v0002 ok
 v0003 ok
 v0004 ok
 v0005 ok
-HEAD 5 6be163accc2e533dc772520ddd9198c2115ab5008ead3c10d9cd395e780595cc; frozen pins ok; ledger verified
+HEAD 5 f7c8973a4f380a7d2c2c5aecc96c4482537eb79c9736834e554d8727ee6703fd; frozen pins ok; ledger verified
 ```
 Result: **PASS**
 
@@ -123,7 +123,7 @@ v0003 ok
 v0004 ok
 v0005 ok
 v0006 ok
-HEAD 6 7c189d50a9c0a62058639d9330090fb21e87c50ff66f2fc454477f7b9222e14a; frozen pins ok; ledger verified
+HEAD 6 4f0c4a1226fb54b6363b7c0e3aacc000f2e176d875e6ce241675908481ec9686; frozen pins ok; ledger verified
 ```
 Result: **PASS**
 
@@ -145,7 +145,7 @@ v0004 ok
 v0005 ok
 v0006 ok
 v0007 ok
-HEAD 7 bff9cbe014fef432c76d39e8d31db38e14d074ca90dc71f757bbabec74b86963; frozen pins ok; ledger verified
+HEAD 7 53fc77365c63cd133eed75e440370a1eeafa2633187c90d6de58faaa09a32470; frozen pins ok; ledger verified
 ```
 Result: **PASS**
 
@@ -162,7 +162,7 @@ v0005 ok
 v0006 ok
 v0007 ok
 v0008 ok
-HEAD 8 65fd290920c93ff6da9f0e7ea2da28a93367a00a513bb460ef7828048f25c1b6; frozen pins ok; ledger verified
+HEAD 8 a31f69efd56015e0e2fa0c1220bd878ae3a4583d5e74725dde02e1a2590bc3f6; frozen pins ok; ledger verified
 ```
 Result: **PASS**
 
@@ -221,11 +221,11 @@ v0005 ok
 v0006 ok
 v0007 ok
 v0008 ok
-HEAD 8 65fd290920c93ff6da9f0e7ea2da28a93367a00a513bb460ef7828048f25c1b6; frozen pins ok; ledger verified
+HEAD 8 a31f69efd56015e0e2fa0c1220bd878ae3a4583d5e74725dde02e1a2590bc3f6; frozen pins ok; ledger verified
 ```
 Result: **PASS**
 
-- git log --first-parent main: d0d1264 SYNTHETIC genesis: copy of the AUTH-LEDGER package at version 0 and its pinned inputs | 0cd04ee Merge pull request #9001 from pr/9001-v0001-add (SYNTHETIC) | 3cfacff Merge pull request #9002 from pr/9002-v0002-bind (SYNTHETIC) | 3b88a82 Merge pull request #9003 from pr/9003-v0003-correction (SYNTHETIC) | 1154f97 Merge pull request #9004 from pr/9004-v0004-bind (SYNTHETIC) | 947adfe Merge pull request #9005 from pr/9005-v0005-withdraw (SYNTHETIC) | 06d9033 Merge pull request #9006 from pr/9006-v0006-bind (SYNTHETIC) | ec28dcd Merge pull request #9007 from pr/9007-v0007-readd (SYNTHETIC) | 66a9666 Merge pull request #9008 from pr/9008-v0008-bind (SYNTHETIC)
+- git log --first-parent main: f3d0aa8 SYNTHETIC genesis: copy of the AUTH-LEDGER package at version 0 and its pinned inputs | 746756c Merge pull request #9001 from pr/9001-v0001-add (SYNTHETIC) | 47b6aac Merge pull request #9002 from pr/9002-v0002-bind (SYNTHETIC) | 5acbaa3 Merge pull request #9003 from pr/9003-v0003-correction (SYNTHETIC) | 7b226fc Merge pull request #9004 from pr/9004-v0004-bind (SYNTHETIC) | ced7864 Merge pull request #9005 from pr/9005-v0005-withdraw (SYNTHETIC) | 642b0a8 Merge pull request #9006 from pr/9006-v0006-bind (SYNTHETIC) | 243ff74 Merge pull request #9007 from pr/9007-v0007-readd (SYNTHETIC) | 5301611 Merge pull request #9008 from pr/9008-v0008-bind (SYNTHETIC)
 
 ## Step g1: Negative: owner decision record naming an AI agent
 
@@ -273,7 +273,7 @@ Result: **PASS**
 
 ## Step g5: Negative: BIND line naming a fast-forward (PR branch merged with --ff-only)
 
-- after --ff-only merge HEAD fe9a755a8ad6 == PR head fe9a755a8ad6: True
+- after --ff-only merge HEAD 144a52fcbec1 == PR head 144a52fcbec1: True
 
 ```
 $ python legal_knowledge/audit_work/AUTH-LEDGER/tools/auth_ledger.py verify

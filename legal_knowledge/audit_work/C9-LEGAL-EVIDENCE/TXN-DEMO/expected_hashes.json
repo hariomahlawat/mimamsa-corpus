@@ -404,7 +404,7 @@
  "cli.verify.final": {
   "rc": 0,
   "stderr": "",
-  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nv0004 ok\nv0005 ok\nv0006 ok\nv0007 ok\nv0008 ok\nHEAD 8 65fd290920c93ff6da9f0e7ea2da28a93367a00a513bb460ef7828048f25c1b6; frozen pins ok; ledger verified"
+  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nv0004 ok\nv0005 ok\nv0006 ok\nv0007 ok\nv0008 ok\nHEAD 8 a31f69efd56015e0e2fa0c1220bd878ae3a4583d5e74725dde02e1a2590bc3f6; frozen pins ok; ledger verified"
  },
  "cli.verify.v0": {
   "rc": 0,
@@ -419,69 +419,69 @@
  "cli.verify.v2": {
   "rc": 0,
   "stderr": "",
-  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nHEAD 2 01f9809f7651535da85d2bdb0a0a34a2a2e7fd1b981913cc7526b4329d227635; frozen pins ok; ledger verified"
+  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nHEAD 2 8141ba31123901d15d02cb7e50d82fc2dcbcafd11dd4cd27bbb8876952666ed2; frozen pins ok; ledger verified"
  },
  "cli.verify.v3": {
   "rc": 0,
   "stderr": "",
-  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nHEAD 3 0b347a640f94194ebea455f88d84acf1c99249fac5822181d9dfd779554965db; frozen pins ok; ledger verified"
+  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nHEAD 3 867aab273f0e4a9c7c0af862cea15e6f33979cf7d55a1e9cf0027314f75cd9a7; frozen pins ok; ledger verified"
  },
  "cli.verify.v4": {
   "rc": 0,
   "stderr": "",
-  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nv0004 ok\nHEAD 4 77b7f5629bd6deb026452b7d29a97f5eb2b4d3ba5f40137f97051c86c2ea7780; frozen pins ok; ledger verified"
+  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nv0004 ok\nHEAD 4 cfb3f0b9529cd6e01cf7369d587605ee792ab29ec382af102472bdbddd1f3625; frozen pins ok; ledger verified"
  },
  "cli.verify.v5": {
   "rc": 0,
   "stderr": "",
-  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nv0004 ok\nv0005 ok\nHEAD 5 6be163accc2e533dc772520ddd9198c2115ab5008ead3c10d9cd395e780595cc; frozen pins ok; ledger verified"
+  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nv0004 ok\nv0005 ok\nHEAD 5 f7c8973a4f380a7d2c2c5aecc96c4482537eb79c9736834e554d8727ee6703fd; frozen pins ok; ledger verified"
  },
  "cli.verify.v6": {
   "rc": 0,
   "stderr": "",
-  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nv0004 ok\nv0005 ok\nv0006 ok\nHEAD 6 7c189d50a9c0a62058639d9330090fb21e87c50ff66f2fc454477f7b9222e14a; frozen pins ok; ledger verified"
+  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nv0004 ok\nv0005 ok\nv0006 ok\nHEAD 6 4f0c4a1226fb54b6363b7c0e3aacc000f2e176d875e6ce241675908481ec9686; frozen pins ok; ledger verified"
  },
  "cli.verify.v7": {
   "rc": 0,
   "stderr": "",
-  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nv0004 ok\nv0005 ok\nv0006 ok\nv0007 ok\nHEAD 7 bff9cbe014fef432c76d39e8d31db38e14d074ca90dc71f757bbabec74b86963; frozen pins ok; ledger verified"
+  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nv0004 ok\nv0005 ok\nv0006 ok\nv0007 ok\nHEAD 7 53fc77365c63cd133eed75e440370a1eeafa2633187c90d6de58faaa09a32470; frozen pins ok; ledger verified"
  },
  "cli.verify.v8": {
   "rc": 0,
   "stderr": "",
-  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nv0004 ok\nv0005 ok\nv0006 ok\nv0007 ok\nv0008 ok\nHEAD 8 65fd290920c93ff6da9f0e7ea2da28a93367a00a513bb460ef7828048f25c1b6; frozen pins ok; ledger verified"
+  "stdout": "v0000 ok\nv0001 ok\nv0002 ok\nv0003 ok\nv0004 ok\nv0005 ok\nv0006 ok\nv0007 ok\nv0008 ok\nHEAD 8 a31f69efd56015e0e2fa0c1220bd878ae3a4583d5e74725dde02e1a2590bc3f6; frozen pins ok; ledger verified"
  },
- "commit.genesis": "d0d12640f4a05e5887f0eff819ba9e4ede369549",
- "commit.v0001.merge": "0cd04ee8eaa74710ca5333b837d4acec1e510c2e",
- "commit.v0001.reviewed_head": "c7c078da8f4e0a2d4641c9bedf1691760f0a8332",
- "commit.v0002.head": "7f7015ab69e1b893332cdf684f81e7948a3d8b66",
- "commit.v0002.merge": "3cfacffd55d984282b7a6fe83627af6e52fe017a",
+ "commit.genesis": "f3d0aa86d7105f206616d29a6d364de5e0d549e9",
+ "commit.v0001.merge": "746756c4bd5cb18cadf42c644a0dea80b79a35a9",
+ "commit.v0001.reviewed_head": "5476ed499c81b75ef5e1be97ffb848efb3214db3",
+ "commit.v0002.head": "52ec8f360b5cc441842f4d15440c96fae700d0d2",
+ "commit.v0002.merge": "47b6aac9eeea9a4d53d2936cbd40ed0e118b8f09",
  "commit.v0003": [
-  "cb7a40157194f36482547ca3ce4434e31b525a71",
-  "3b88a8280e1cad05b2fc5169ee38b67f8f17a762"
+  "9034c7e798fef3de328e6d284e73c458d2a297f7",
+  "5acbaa3253379edb4a9666c9e0bd79d5c23fc7b5"
  ],
  "commit.v0004": [
-  "9e4e353de7c8d20cb70348da826e2c79a72b45fb",
-  "1154f97d9247fac6cf194e92a53f684dceff5adb"
+  "8f663cf2a32d80667123cb4735d1ed8a27b604f7",
+  "7b226fc472ff81b6eba1fa795cb195efb5a697ee"
  ],
  "commit.v0005": [
-  "42a1e6acffbf7af8c7c3c5774a457c3690857f5e",
-  "947adfe916e876323dcb2efbe7d405c95434714e"
+  "acce628ec343f49a04a99c7537d02144dd65860c",
+  "ced786401010f521aa319c47c47103c01d340bf8"
  ],
  "commit.v0006": [
-  "e5faeb2054cb87ba28fec516be874d94955a5b6d",
-  "06d9033bc29d90ef9c0479b8dea721d75befbacb"
+  "e654286fbd1cd979ae9d5d914cf8b6d020b95b4e",
+  "642b0a84389bec8c35d4a30134469dcac36f2a46"
  ],
  "commit.v0007": [
-  "8a941a39317deed5a5175909e05dd52184eaba4c",
-  "ec28dcd2e52c9827cda73963e017d6ff1d7859f6"
+  "e14ef4eb03ea13c3278f5dd56c7accf81012703d",
+  "243ff749839041cbd34ddbc6602c23ab46901bad"
  ],
  "commit.v0008": [
-  "992854a79af222fe77c25374cf0444d5549a37eb",
-  "66a966612c3a3d7e5d2dc12ffc9816cbe8ea1a16"
+  "24fb30e31f0f1e2ee7a3a062333a8292e14300ec",
+  "5301611631ec735e7c0c9fb7b31b4c265eb3477a"
  ],
- "ledger.HEAD.final": "8 65fd290920c93ff6da9f0e7ea2da28a93367a00a513bb460ef7828048f25c1b6",
- "ledger.manifest_sha256.final": "0e8c9d3ef529f18e7bd019fc98a52c7ed52d838a53d30bf0b4057d2197e013f4",
+ "ledger.HEAD.final": "8 a31f69efd56015e0e2fa0c1220bd878ae3a4583d5e74725dde02e1a2590bc3f6",
+ "ledger.manifest_sha256.final": "d1d36dd21cbda9eee751cd71da1f3f94547ee0afaeaeea64820405a951751bc8",
  "neg.agent_owner": {
   "rc": 2,
   "stderr": "LEDGER ERROR: LedgerError: AL-v0001-001: decided_by names an AI model or agent; an agent's statement is never owner approval",
@@ -519,14 +519,14 @@
  },
  "real_ledger.HEAD": "0 443c4bdf348b2a1bcd603d2701f097aa90a8155efd43c10760f5fd86c76c6b6b",
  "source_package_tools_sha256": {
-  "auth_ledger.py": "ec76fc6d0077d7bab9a0a2bf26f6e441e59466336515e079ac2f0714791ab095",
+  "auth_ledger.py": "c77fc085892f3f26ed02394d6bae8c3b7611980dc469555a2b92e47dd609a4f2",
   "binding.py": "1698371b796dcd446af83fbda18527af5fdf6d2f901f55fbd333373470d56a27",
-  "common.py": "30142aee2b6d954d5b9bc46ec7a69a1a86897ab050cdc0478ce4fe2072fe47f2",
-  "ledger.py": "3cb02b6c7f936d4999b8b850efb27dd89ea5f72d10fa60627c2dd4b302789064",
-  "pins.py": "5a69805d0ca13954387d265bb887909f3ffdc92d5edb7c39c957e36ee043ee5e",
-  "reader.py": "44d9903bc7a25dda3ef1216e1ccc8bb4882204fbd208f1e3304474e28c27fff2",
+  "common.py": "3c412312e21e0ce1660eb254ac8dd470d8da32a0022f7ab6122c852d3796b933",
+  "ledger.py": "4d872a840a9d24a6d2d82b5de2d4ac96a80730d6967a0cedd56108eff1d7522b",
+  "pins.py": "82339b72e30d24e4dc408e56ec862772305637cd66e6f8ee2db7fbc7db0cf90a",
+  "reader.py": "83fa15c742dde0aef32cfd19dee428c0f578f3bb5b4e85464d79a2bda3300133",
   "rules_v1.py": "2cf67f8b0a265ea93708879425168a4433ec62656395d06216268adc84d11eef",
-  "strength.py": "b9eeedbced34048b87ae46d7a47f2ca1d7190b462182649af9bfcb3e3566b95d",
+  "strength.py": "33b3012df9d59480b8391b3138bd255d73887b7761feb00a9bf2accbb40cbdab",
   "urlcheck.py": "81ddc23f8fc17ab53bbd53e7ac3089de51e809f8c9b303f2ec6e2812d0041c79"
  }
 }

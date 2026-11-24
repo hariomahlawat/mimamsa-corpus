@@ -1,5 +1,8 @@
 # SYNTHETIC AUTH-LEDGER first-transaction demonstration
 
+> **Regenerated in Cycle 12 on the integrated staging tree.** See `REGENERATION_C12.md`; it supersedes the source-tree description below. `--check` runs in CI.
+
+
 **Everything here is synthetic.** The demo writes no real approval record, no owner decision and no signature. **The real ledger stays at version 0.** Its HEAD is `0 443c4bdf…6c6b6b` before and after every run, and the demo checks this.
 
 ## What the demo does
