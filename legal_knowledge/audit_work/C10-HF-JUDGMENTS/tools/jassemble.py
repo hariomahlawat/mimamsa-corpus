@@ -26,7 +26,7 @@ def source_completeness(r):
 
 TITLE_SCREEN = re.compile(
     r"\b(?:army|air\s*force|indian\s+navy|naval|ministry\s+of\s+defen[cs]e|defen[cs]e|m\.?o\.?d\.?|"
-    r"(?:ex[-\s.]*)?(?:sep|hav|nk|l/nk|sub|nb\s*sub|capt|maj|col|lt|brig|gen|sgt|cpl|jwo|mwo|cdr|cmde|wg\s*cdr|sqn\s*ldr|flt\s*lt|gp\s*capt)(?:\.|\s)(?!\s*(?:inspector|manager|divisional|division|registrar|secy|secretary|post\s+office))|"
+    r"(?:ex[-\s.]*)?(?:sep|hav|nk|l/nk|sub|nb\s*sub|capt|maj|col|lt|brig|gen|sgt|cpl|jwo|mwo|cdr|cmde|wg\s*cdr|sqn\s*ldr|flt\s*lt|gp\s*capt)(?:\.\s*|\s)(?!\s*(?:inspector|manager|divisional|division|registrar|secy|secretary|post\s+office))|"
     r"ex[-\s.]*servicem[ae]n|ex[-\s.]*(?:sep|hav|nk|naik|subedar|sub|capt|maj|col|lt|sgt|cpl)\b|sepoy|havildar|naik|subedar|"
     r"brigadier|colonel|lt\.?\s*col|wing\s+commander|squadron\s+leader|flight\s+lieutenant|commodore|jawan|soldier|military|"
     r"cantonment|assam\s+rifles|border\s+security\s+force|\bbsf\b|\bcrpf\b|\bitbp\b|coast\s+guard|sainik|canteen\s+stores|"

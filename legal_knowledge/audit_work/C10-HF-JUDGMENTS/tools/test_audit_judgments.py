@@ -157,10 +157,8 @@ class ReviewFixes(unittest.TestCase):
                     os.environ.pop("MIMAMSA_WORKING_STORE", None)
                 else:
                     os.environ["MIMAMSA_WORKING_STORE"] = old
-        if rec.get("pdf_status") == "OPENED":
-            self.assertEqual(rec["extraction"], "PROCESSED_TRUNCATED_COPY")
-        else:
-            self.assertEqual(rec["extraction"], "INCOMPLETE_COPY_TRUNCATED")
+        self.assertEqual(rec.get("pdf_status"), "OPENED")  # review E3-02: the readable branch must be reached
+        self.assertEqual(rec["extraction"], "PROCESSED_TRUNCATED_COPY")
         import jassemble
         self.assertEqual(jassemble.source_completeness(rec), jassemble.TRUNC)
 
@@ -180,9 +178,9 @@ class ReviewFixes(unittest.TestCase):
 
     def test_title_rescreen_rank_forms(self):
         import jassemble as JA
-        for t in ("COL.T.PRASAD Vs UOI", "MAJ.GEN. X v UOI", "CAPT X v UOI"):
+        for t in ("COL.T.PRASAD Vs UOI", "MAJ.GEN. X v UOI", "CAPT X v UOI", "CAPT. X v UOI", "MAJ. GEN. X v UOI", "HAV. X v UOI"):
             self.assertTrue(JA.TITLE_SCREEN.search(t), t)
-        for t in ("SUB INSPECTOR RAM v STATE", "GEN MANAGER v X", "SUB DIVISIONAL OFFICER v Y"):
+        for t in ("SUB INSPECTOR RAM v STATE", "GEN MANAGER v X", "SUB DIVISIONAL OFFICER v Y", "SUB. INSPECTOR RAM v STATE"):
             self.assertFalse(JA.TITLE_SCREEN.search(t), t)
 
 
