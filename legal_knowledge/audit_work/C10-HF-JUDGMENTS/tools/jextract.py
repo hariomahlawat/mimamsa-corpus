@@ -179,7 +179,8 @@ def _norm_case(t, n, y):
              "specialleavepetition": "SLP", "lpa": "LPA", "cwp": "CWP", "oa": "OA", "originalapplication": "OA", "ta": "TA",
              "transferapplication": "TA", "transferredapplication": "TA", "rsa": "RSA", "crmm": "CRMM", "crp": "CRP", "wria": "WRIA", "writa": "WRITA",
              "specialappeal": "SPLA", "spla": "SPLA", "wpa": "WPA", "wa": "WA", "reviewpetition": "RP"}
-    return f"{alias.get(t, t.upper())}-{re.sub(r'\s', '', n)}-{y}"
+    num = re.sub(r"\s", "", n)  # outside the f-string: Python 3.11 rejects backslashes in f-string expressions
+    return f"{alias.get(t, t.upper())}-{num}-{y}"
 
 
 def norm_case_string(s):

@@ -124,7 +124,16 @@ class SnapshotGuards(unittest.TestCase):
 
 
 
+def have_jsonschema():
+    try:
+        import jsonschema, referencing  # noqa: F401
+        return True
+    except ImportError:
+        return False
+
+
 @unittest.skipUnless(have_commits(), "pinned raw-data / staging commits are not in this clone")
+@unittest.skipUnless(have_jsonschema(), "jsonschema/referencing (requirements.txt jsonschema==4.26.0) not installed in this environment")
 class DatasetIntegrity(unittest.TestCase):
     def test_integrity_outputs_reproduce_and_raw_hashes_match(self):
         import check_dataset_integrity as ci

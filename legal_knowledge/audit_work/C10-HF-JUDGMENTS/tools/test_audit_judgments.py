@@ -9,6 +9,11 @@ import jextract as J  # noqa: E402
 import audit_judgments as AJ  # noqa: E402
 
 REPO = str(HERE.parents[3])
+try:
+    import pymupdf  # noqa: F401
+    HAVE_PYMUPDF = True
+except ImportError:
+    HAVE_PYMUPDF = False
 
 
 def have_commits():
@@ -35,6 +40,7 @@ class Rules(unittest.TestCase):
         self.assertEqual(J.classify_relevance({}, "NO_TEXT_LAYER")[0], "RELEVANCE_UNCERTAIN_REVIEW")
         self.assertEqual(J.classify_relevance({}, "TEXT_LAYER_OK")[0], "NOT_RELEVANT_CURRENT_SCOPE")
 
+    @unittest.skipUnless(HAVE_PYMUPDF, "PyMuPDF (requirements.txt pymupdf==2.1) is not installed in this environment")
     def test_outcome_and_decision_date_on_synthetic_pdf(self):
         import pymupdf
         doc = pymupdf.open()
@@ -52,6 +58,7 @@ class Rules(unittest.TestCase):
         self.assertTrue(all(x["status"] == "AUTOMATED_CANDIDATE_NOT_VERIFIED" for x in r["propositions"]))
         self.assertIn("Army Act, 1950", r["statutes"])
 
+    @unittest.skipUnless(HAVE_PYMUPDF, "PyMuPDF (requirements.txt pymupdf==2.1) is not installed in this environment")
     def test_unreadable_bytes_are_a_result(self):
         import pymupdf
         self.assertEqual(J.extract(b"not a pdf", pymupdf)["pdf_status"], "UNREADABLE")
