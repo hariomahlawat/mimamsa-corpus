@@ -63,4 +63,12 @@ Of 140 answered rows: excerpt found at the cited offset 138, anywhere in the cit
 | v2 | 121/144 = 84.0% | 86.8% (79.6–91.7%) | 91.7% (85.5–95.5%) |
 | crawler | 104/144 = 72.2% | n/a (vocabulary) | 80.8% (72.2–87.2%) |
 
+## Added after independent review (post hoc; the pre-registered figures above are unchanged)
+
+**Common vocabulary (review F01).** On judgments whose ground-truth printed label V2 can output: v3 105/115 = 91.3% (84.7–95.2%); v2 105/115 = 91.3% (84.7–95.2%). V3's strict lead over V2 in the table above comes from labels V2 cannot express.
+
+**Population-weighted (review F02).** Weighted by court share of the V3 corpus: printed_disposal: precision 89.3%, coverage 84.8%; substantive_result: precision 94.8%, coverage 65.9%. Small per-court cells; indicative only.
+
+**Matcher sensitivity (review).** Re-matching the two pairs the reviewer classed as matcher artefacts (V3H005, V3H036) gives printed 127/139 = 91.4% (coverage 65.3%) and substantive 109/115 = 94.8% (coverage 55.6%) (reviewer's computation, `reviews/review_v3_holdout_eval.md`). Not applied to the headline.
+
 All V3 outputs remain AUTOMATED_CANDIDATE_NOT_VERIFIED; these are technical measurements, not legal validation.

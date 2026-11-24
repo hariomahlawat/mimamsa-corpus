@@ -252,6 +252,43 @@ def build():
                      strict_precision_wilson95=wilson(st["strict_correct"], st["answered"]))
         res["judgment_level_printed"][name] = d
 
+    # ---- added after independent review (review_v3_holdout_eval F01/F02); post hoc, headline unchanged ----
+    V2_VOCAB = {r.get("outcome", "") for r in csv.DictReader(open(V2, encoding="utf-8"))} - ABSTAIN
+    common = defaultdict(Counter)
+    for c in comp:
+        g = c["gt"]
+        if g in UNSCORABLE or g == "MIXED" or g not in V2_VOCAB:
+            continue
+        for name in ("v3", "v2"):
+            v = c[name]; st = common[name]; st["scorable"] += 1
+            if v in ABSTAIN or v == "MIXED":
+                continue
+            st["answered"] += 1; st["correct"] += v == g
+    res["posthoc_judgment_level_common_vocabulary"] = {
+        "note": "Judgment-level printed field restricted to ground-truth labels V2 can output (review F01). Post hoc.",
+        "v2_vocabulary": sorted(V2_VOCAB),
+        **{n: dict(scorable=s["scorable"], answered=s["answered"], correct=s["correct"],
+                   strict_precision=rd(s["correct"] / s["answered"]) if s["answered"] else None,
+                   strict_precision_wilson95=wilson(s["correct"], s["answered"])) for n, s in common.items()}}
+    corpus = Counter()
+    seen = set()
+    for r in csv.DictReader(open(V3, encoding="utf-8")):
+        if r["judgment_id"] not in seen:
+            seen.add(r["judgment_id"]); corpus[r["court"]] += 1
+    tot = sum(corpus.values())
+    wres = {"note": "Precision weighted by each court's share of the V3 corpus (judgments), using per-court holdout precision; "
+                    "coverage weighted likewise (review F02 / C11 F03 carry-over). Post hoc; small cells, indicative only.",
+            "corpus_judgments_by_court": dict(sorted(corpus.items()))}
+    for f in FIELDS:
+        bc = res["fields"][f]["by_court"]
+        ws = {c: corpus[c] / tot for c in bc if corpus.get(c)}
+        pw = [(ws[c], bc[c]["precision"]) for c in ws if bc[c]["precision"] is not None]
+        cw = [(ws[c], bc[c]["coverage"]) for c in ws if bc[c]["coverage"] is not None]
+        wres[f] = dict(weighted_precision=rd(sum(w * x for w, x in pw) / sum(w for w, _ in pw)) if pw else None,
+                       weighted_coverage=rd(sum(w * x for w, x in cw) / sum(w for w, _ in cw)) if cw else None,
+                       courts_in_holdout_weight=rd(sum(ws.values())))
+    res["posthoc_population_weighted"] = wres
+
     def tocsv(rs):
         if not rs:
             return ""
@@ -303,6 +340,18 @@ def render_md(res):
         L.append(f"| {n} | {d['answered']}/{d['scorable']} = {pct(d['coverage'])} | "
                  f"{pct(d.get('strict_precision')) + ' (' + ci(d.get('strict_precision_wilson95')) + ')' if 'strict_precision' in d else 'n/a (vocabulary)'} | "
                  f"{pct(d['family_precision'])} ({ci(d['family_precision_wilson95'])}) |")
+    cv = res["posthoc_judgment_level_common_vocabulary"]; pw = res["posthoc_population_weighted"]
+    L += ["", "## Added after independent review (post hoc; the pre-registered figures above are unchanged)", "",
+          "**Common vocabulary (review F01).** On judgments whose ground-truth printed label V2 can output: "
+          + "; ".join(f"{n} {cv[n]['correct']}/{cv[n]['answered']} = {pct(cv[n]['strict_precision'])} ({ci(cv[n]['strict_precision_wilson95'])})"
+                      for n in ("v3", "v2") if n in cv)
+          + ". V3's strict lead over V2 in the table above comes from labels V2 cannot express.", "",
+          "**Population-weighted (review F02).** Weighted by court share of the V3 corpus: "
+          + "; ".join(f"{f}: precision {pct(pw[f]['weighted_precision'])}, coverage {pct(pw[f]['weighted_coverage'])}" for f in FIELDS)
+          + ". Small per-court cells; indicative only.", "",
+          "**Matcher sensitivity (review).** Re-matching the two pairs the reviewer classed as matcher artefacts (V3H005, V3H036) gives "
+          "printed 127/139 = 91.4% (coverage 65.3%) and substantive 109/115 = 94.8% (coverage 55.6%) (reviewer's computation, "
+          "`reviews/review_v3_holdout_eval.md`). Not applied to the headline."]
     L += ["", "All V3 outputs remain AUTOMATED_CANDIDATE_NOT_VERIFIED; these are technical measurements, not legal validation.", ""]
     return "\n".join(L)
 

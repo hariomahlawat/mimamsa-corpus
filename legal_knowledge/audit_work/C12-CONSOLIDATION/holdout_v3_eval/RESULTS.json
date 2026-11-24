@@ -486,6 +486,62 @@
  },
  "n_gt_rows": 215,
  "n_judgments": 150,
+ "posthoc_judgment_level_common_vocabulary": {
+  "note": "Judgment-level printed field restricted to ground-truth labels V2 can output (review F01). Post hoc.",
+  "v2": {
+   "answered": 115,
+   "correct": 105,
+   "scorable": 136,
+   "strict_precision": 0.913,
+   "strict_precision_wilson95": [
+    0.8473,
+    0.9521
+   ]
+  },
+  "v2_vocabulary": [
+   "allowed",
+   "dismissed",
+   "dismissed_as_infructuous",
+   "dismissed_as_withdrawn",
+   "disposed_of_with_directions",
+   "not_final",
+   "partly_allowed",
+   "remanded",
+   "set_aside_and_remanded",
+   "transferred"
+  ],
+  "v3": {
+   "answered": 115,
+   "correct": 105,
+   "scorable": 136,
+   "strict_precision": 0.913,
+   "strict_precision_wilson95": [
+    0.8473,
+    0.9521
+   ]
+  }
+ },
+ "posthoc_population_weighted": {
+  "corpus_judgments_by_court": {
+   "": 4,
+   "Allahabad High Court": 309,
+   "High Court of Delhi": 1659,
+   "High Court of Jammu and Kashmir": 410,
+   "High Court of Punjab and Haryana": 1208,
+   "Supreme Court of India": 346
+  },
+  "note": "Precision weighted by each court's share of the V3 corpus (judgments), using per-court holdout precision; coverage weighted likewise (review F02 / C11 F03 carry-over). Post hoc; small cells, indicative only.",
+  "printed_disposal": {
+   "courts_in_holdout_weight": 0.999,
+   "weighted_coverage": 0.8482,
+   "weighted_precision": 0.8929
+  },
+  "substantive_result": {
+   "courts_in_holdout_weight": 0.999,
+   "weighted_coverage": 0.6587,
+   "weighted_precision": 0.9476
+  }
+ },
  "protocol": "PROTOCOL.md",
  "targets": {
   "coverage": 0.85,
