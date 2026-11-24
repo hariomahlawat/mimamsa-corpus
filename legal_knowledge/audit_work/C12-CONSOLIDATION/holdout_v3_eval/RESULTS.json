@@ -1,0 +1,502 @@
+{
+ "both_fields_strict": {
+  "answered": 111,
+  "correct": 105,
+  "coverage": 0.5415,
+  "precision": 0.9459,
+  "precision_wilson95": [
+   0.8871,
+   0.975
+  ],
+  "scorable": 205
+ },
+ "extra_v3_rows": 11,
+ "fields": {
+  "printed_disposal": {
+   "by_court": {
+    "Allahabad High Court": {
+     "answered": 22,
+     "correct": 19,
+     "coverage": 0.9167,
+     "coverage_wilson95": [
+      0.7415,
+      0.9768
+     ],
+     "precision": 0.8636,
+     "precision_wilson95": [
+      0.6666,
+      0.9525
+     ],
+     "scorable": 24
+    },
+    "High Court of Delhi": {
+     "answered": 29,
+     "correct": 25,
+     "coverage": 0.9667,
+     "coverage_wilson95": [
+      0.8333,
+      0.9941
+     ],
+     "precision": 0.8621,
+     "precision_wilson95": [
+      0.6944,
+      0.945
+     ],
+     "scorable": 30
+    },
+    "High Court of Jammu and Kashmir": {
+     "answered": 18,
+     "correct": 16,
+     "coverage": 0.72,
+     "coverage_wilson95": [
+      0.5242,
+      0.8572
+     ],
+     "precision": 0.8889,
+     "precision_wilson95": [
+      0.672,
+      0.969
+     ],
+     "scorable": 25
+    },
+    "High Court of Punjab and Haryana": {
+     "answered": 25,
+     "correct": 23,
+     "coverage": 0.8333,
+     "coverage_wilson95": [
+      0.6644,
+      0.9266
+     ],
+     "precision": 0.92,
+     "precision_wilson95": [
+      0.7503,
+      0.9778
+     ],
+     "scorable": 30
+    },
+    "Supreme Court of India": {
+     "answered": 44,
+     "correct": 43,
+     "coverage": 0.4231,
+     "coverage_wilson95": [
+      0.3325,
+      0.5191
+     ],
+     "precision": 0.9773,
+     "precision_wilson95": [
+      0.8819,
+      0.996
+     ],
+     "scorable": 104
+    }
+   },
+   "by_gt_source": {
+    "ADJUDICATED": {
+     "answered": 11,
+     "correct": 10,
+     "coverage": 0.2391,
+     "coverage_wilson95": [
+      0.1391,
+      0.3794
+     ],
+     "precision": 0.9091,
+     "precision_wilson95": [
+      0.6226,
+      0.9838
+     ],
+     "scorable": 46
+    },
+    "BOTH_CODERS_AGREE": {
+     "answered": 127,
+     "correct": 116,
+     "coverage": 0.7605,
+     "coverage_wilson95": [
+      0.6904,
+      0.8189
+     ],
+     "precision": 0.9134,
+     "precision_wilson95": [
+      0.8515,
+      0.9509
+     ],
+     "scorable": 167
+    }
+   },
+   "by_stratum": {
+    "batch_or_multi": {
+     "answered": 42,
+     "correct": 41,
+     "coverage": 0.8936,
+     "coverage_wilson95": [
+      0.7741,
+      0.9537
+     ],
+     "precision": 0.9762,
+     "precision_wilson95": [
+      0.8768,
+      0.9958
+     ],
+     "scorable": 47
+    },
+    "disagreement": {
+     "answered": 22,
+     "correct": 18,
+     "coverage": 0.5789,
+     "coverage_wilson95": [
+      0.4219,
+      0.7215
+     ],
+     "precision": 0.8182,
+     "precision_wilson95": [
+      0.6148,
+      0.9269
+     ],
+     "scorable": 38
+    },
+    "other": {
+     "answered": 41,
+     "correct": 38,
+     "coverage": 0.4659,
+     "coverage_wilson95": [
+      0.3653,
+      0.5694
+     ],
+     "precision": 0.9268,
+     "precision_wilson95": [
+      0.8057,
+      0.9748
+     ],
+     "scorable": 88
+    },
+    "pension_or_disciplinary": {
+     "answered": 33,
+     "correct": 29,
+     "coverage": 0.825,
+     "coverage_wilson95": [
+      0.6805,
+      0.9125
+     ],
+     "precision": 0.8788,
+     "precision_wilson95": [
+      0.7267,
+      0.9518
+     ],
+     "scorable": 40
+    }
+   },
+   "categories": {
+    "ABSTAINED": 41,
+    "PROCEEDING_UNMATCHED": 34,
+    "WRONG_FAMILY": 9,
+    "WRONG_LABEL_SAME_FAMILY": 3
+   },
+   "family": {
+    "answered": 138,
+    "correct": 129,
+    "precision": 0.9348,
+    "precision_wilson95": [
+     0.8807,
+     0.9653
+    ]
+   },
+   "strict": {
+    "answered": 138,
+    "correct": 126,
+    "coverage": 0.6479,
+    "coverage_cluster95": [
+     0.4925,
+     0.8171
+    ],
+    "coverage_wilson95": [
+     0.5816,
+     0.7089
+    ],
+    "meets_targets": false,
+    "precision": 0.913,
+    "precision_cluster95": [
+     0.8615,
+     0.9586
+    ],
+    "precision_wilson95": [
+     0.8542,
+     0.9496
+    ],
+    "scorable": 213
+   }
+  },
+  "substantive_result": {
+   "by_court": {
+    "Allahabad High Court": {
+     "answered": 20,
+     "correct": 18,
+     "coverage": 0.8,
+     "coverage_wilson95": [
+      0.6087,
+      0.9114
+     ],
+     "precision": 0.9,
+     "precision_wilson95": [
+      0.699,
+      0.9721
+     ],
+     "scorable": 25
+    },
+    "High Court of Delhi": {
+     "answered": 20,
+     "correct": 18,
+     "coverage": 0.6897,
+     "coverage_wilson95": [
+      0.5077,
+      0.8272
+     ],
+     "precision": 0.9,
+     "precision_wilson95": [
+      0.699,
+      0.9721
+     ],
+     "scorable": 29
+    },
+    "High Court of Jammu and Kashmir": {
+     "answered": 16,
+     "correct": 16,
+     "coverage": 0.64,
+     "coverage_wilson95": [
+      0.4452,
+      0.7975
+     ],
+     "precision": 1.0,
+     "precision_wilson95": [
+      0.8064,
+      1.0
+     ],
+     "scorable": 25
+    },
+    "High Court of Punjab and Haryana": {
+     "answered": 20,
+     "correct": 20,
+     "coverage": 0.6667,
+     "coverage_wilson95": [
+      0.4878,
+      0.8077
+     ],
+     "precision": 1.0,
+     "precision_wilson95": [
+      0.8389,
+      1.0
+     ],
+     "scorable": 30
+    },
+    "Supreme Court of India": {
+     "answered": 37,
+     "correct": 36,
+     "coverage": 0.3776,
+     "coverage_wilson95": [
+      0.2879,
+      0.4764
+     ],
+     "precision": 0.973,
+     "precision_wilson95": [
+      0.8618,
+      0.9952
+     ],
+     "scorable": 98
+    }
+   },
+   "by_gt_source": {
+    "ADJUDICATED": {
+     "answered": 4,
+     "correct": 3,
+     "coverage": 0.1,
+     "coverage_wilson95": [
+      0.0396,
+      0.2305
+     ],
+     "precision": 0.75,
+     "precision_wilson95": [
+      0.3006,
+      0.9544
+     ],
+     "scorable": 40
+    },
+    "BOTH_CODERS_AGREE": {
+     "answered": 109,
+     "correct": 105,
+     "coverage": 0.6527,
+     "coverage_wilson95": [
+      0.5778,
+      0.7207
+     ],
+     "precision": 0.9633,
+     "precision_wilson95": [
+      0.9094,
+      0.9856
+     ],
+     "scorable": 167
+    }
+   },
+   "by_stratum": {
+    "batch_or_multi": {
+     "answered": 40,
+     "correct": 40,
+     "coverage": 0.8511,
+     "coverage_wilson95": [
+      0.7231,
+      0.9259
+     ],
+     "precision": 1.0,
+     "precision_wilson95": [
+      0.9124,
+      1.0
+     ],
+     "scorable": 47
+    },
+    "disagreement": {
+     "answered": 20,
+     "correct": 18,
+     "coverage": 0.5882,
+     "coverage_wilson95": [
+      0.4222,
+      0.7363
+     ],
+     "precision": 0.9,
+     "precision_wilson95": [
+      0.699,
+      0.9721
+     ],
+     "scorable": 34
+    },
+    "other": {
+     "answered": 33,
+     "correct": 32,
+     "coverage": 0.3708,
+     "coverage_wilson95": [
+      0.2777,
+      0.4745
+     ],
+     "precision": 0.9697,
+     "precision_wilson95": [
+      0.8468,
+      0.9946
+     ],
+     "scorable": 89
+    },
+    "pension_or_disciplinary": {
+     "answered": 20,
+     "correct": 18,
+     "coverage": 0.5405,
+     "coverage_wilson95": [
+      0.3838,
+      0.6896
+     ],
+     "precision": 0.9,
+     "precision_wilson95": [
+      0.699,
+      0.9721
+     ],
+     "scorable": 37
+    }
+   },
+   "categories": {
+    "ABSTAINED": 64,
+    "PROCEEDING_UNMATCHED": 30,
+    "WRONG_FAMILY": 5
+   },
+   "family": {
+    "answered": 113,
+    "correct": 108,
+    "precision": 0.9558,
+    "precision_wilson95": [
+     0.9006,
+     0.981
+    ]
+   },
+   "strict": {
+    "answered": 113,
+    "correct": 108,
+    "coverage": 0.5459,
+    "coverage_cluster95": [
+     0.4036,
+     0.6995
+    ],
+    "coverage_wilson95": [
+     0.4778,
+     0.6123
+    ],
+    "meets_targets": false,
+    "precision": 0.9558,
+    "precision_cluster95": [
+     0.9138,
+     0.9912
+    ],
+    "precision_wilson95": [
+     0.9006,
+     0.981
+    ],
+    "scorable": 207
+   }
+  }
+ },
+ "inputs": {
+  "ground_truth_sha256": "8e09f63cf5f072c9ee62eba640fb81677b14ed05290096bd1c9efffe9e3eb0cb",
+  "sample_sha256": "fcb5e691aa148725cca65c8c4b4f6d65133bbdd092935552b9f4642f8c948c41",
+  "v2_outputs_sha256": "1e1f7eeeb4f056fceac2dfe94e6cdba6151d72f245276e1a922a2fab733581bb",
+  "v3_outputs_sha256": "2ff4bce6421a822197dfce56efeaa8929ba9ece35db36005ca272f213b04e01d"
+ },
+ "judgment_level_printed": {
+  "crawler": {
+   "answered": 104,
+   "coverage": 0.7222,
+   "family_precision": 0.8077,
+   "family_precision_wilson95": [
+    0.7215,
+    0.8719
+   ],
+   "scorable": 144
+  },
+  "v2": {
+   "answered": 121,
+   "coverage": 0.8403,
+   "family_precision": 0.9174,
+   "family_precision_wilson95": [
+    0.8545,
+    0.9545
+   ],
+   "scorable": 144,
+   "strict_precision": 0.8678,
+   "strict_precision_wilson95": [
+    0.796,
+    0.9169
+   ]
+  },
+  "v3": {
+   "answered": 121,
+   "coverage": 0.8403,
+   "family_precision": 0.9256,
+   "family_precision_wilson95": [
+    0.8647,
+    0.9604
+   ],
+   "scorable": 144,
+   "strict_precision": 0.9008,
+   "strict_precision_wilson95": [
+    0.8346,
+    0.9424
+   ]
+  }
+ },
+ "n_gt_rows": 215,
+ "n_judgments": 150,
+ "protocol": "PROTOCOL.md",
+ "targets": {
+  "coverage": 0.85,
+  "strict_precision": 0.95
+ },
+ "traceability": {
+  "answered": 140,
+  "excerpt_at_offset": 138,
+  "excerpt_in_text": 138,
+  "page_consistent": 139,
+  "paragraph_given": 110
+ },
+ "unmatched_gt_rows": 35
+}
