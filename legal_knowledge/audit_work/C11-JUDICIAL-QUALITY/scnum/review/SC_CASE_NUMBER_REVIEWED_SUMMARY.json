@@ -1,0 +1,16 @@
+{
+ "application_status": {
+  "APPLY_CANDIDATE_REVIEWED_CORRECT": 73,
+  "APPLY_CANDIDATE_UNREVIEWED_CONFIRMED": 266,
+  "APPLY_CANDIDATE_USE_REVIEWER_READING": 24,
+  "DO_NOT_APPLY_UNRESOLVED": 1,
+  "RECHECK_LOWER_COURT_TYPE_IN_HOST": 4
+ },
+ "records": 368,
+ "review_precision": {
+  "CONFIRMED_FROM_SOURCE": "14/14 (one-sided 95% lower bound 80.7%)",
+  "CONFIRMED_MULTIPLE_CONNECTED": "35/36 (one-sided 95% lower bound 87.5%)",
+  "uncertain_48": "24 correct, 23 partly correct, 0 wrong, 1 unverifiable"
+ },
+ "reviewed": 98
+}

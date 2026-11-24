@@ -1,0 +1,184 @@
+{
+  "accounting": {
+    "bytes_in_pinned_commit": 3951,
+    "every_file_exactly_once": true,
+    "files_in_batches": 3959,
+    "files_in_copy_register": 3959,
+    "pdf_opens": 3944,
+    "register_rows": 3959,
+    "register_unique_sha256": 3959,
+    "rehash_matches": 3951,
+    "rehash_mismatches": [],
+    "text_sha256_differs": [],
+    "text_sha256_reproduced": 3944
+  },
+  "c10_duplicate_register_kinds": {
+    "CORRECTION_MARKER_ON_FIRST_PAGES": 87,
+    "ONE_FILE_MANY_RECORDS": 41,
+    "SAME_CASE_NUMBER_DIFFERENT_FILES": 3,
+    "SAME_NEUTRAL_CITATION_DIFFERENT_FILES": 1
+  },
+  "candidates": {
+    "ADDITIONAL_ORDER_IN_FILE|STRONG": 1,
+    "ANCILLARY_RECORD_OF_PROCEEDINGS|INFO": 1,
+    "COMPOSITE_CANDIDATE|STRONG": 1,
+    "COMPOSITE_CONFIRMED_BY_REVIEW|REVIEWED": 2,
+    "DOCUMENT_BOUNDARY_UNCLEAR|WEAK": 51,
+    "MULTI_DOCUMENT_FILE_CANDIDATE|STRONG": 4,
+    "NOT_ASSESSED_TRUNCATED_FILE_PAGE_ORDER_UNRELIABLE|INFO": 4,
+    "REPEATED_COPY_INSIDE_FILE (start page matches page 1)|STRONG": 2,
+    "SAME_LEAD_CASE_CONTENT_MATCH_DATE_DIFFERS|INFO": 8,
+    "SEPARATE_OPINION_OR_VERSION_CANDIDATE (same case, different text)|WEAK": 6,
+    "TWO_OPINIONS_SPLIT_VERDICT_CONFIRMED_BY_REVIEW|REVIEWED": 1,
+    "TWO_VERSIONS_IN_ONE_FILE_CONFIRMED_BY_REVIEW|REVIEWED": 1
+  },
+  "distinct_judgments": {
+    "additional_judgment_keys": [
+      "JK-081a8b22679359ab#p9-10",
+      "JK-0f65307432d16f74#p16-25"
+    ],
+    "basis": "a judgment entity is a connected set of files linked by evidence: exact same text with byte-level or render-level confirmation; identical letters and numbers (time stamps and quote/dash glyphs normalised) with the same court, date and page count; an incomplete copy matching on every readable page; a scanned copy sharing the lead case (footer, pointer or cause title), court and date, confirmed on page text or page images; or a one-page pointer order linked to its lead judgment. Similarity alone never merges files. A judgment held inside another file (composite) gets its own key (file sha + page range).",
+    "c10_count_by_file": 3959,
+    "change_exact_text_groups": -230,
+    "change_incomplete_copy_all_page_match": -3,
+    "change_judgments_inside_composite_files": 2,
+    "change_normalized_text_extension": -68,
+    "change_pointer_orders_linked_to_lead": -6,
+    "change_scanned_copy_lead_case_match": -29,
+    "composite_detail": [
+      {
+        "change": 1,
+        "judgment_key": "JK-081a8b22679359ab#p9-10",
+        "note": "not present elsewhere in the corpus",
+        "pages": "9-10",
+        "proceeding_key": "DLHC:CM-11902-2009 in WPC-2881-2008",
+        "sha256": "081a8b22679359abc84e8a827510905b4dac8ce09f9cf0579f5f923949d2efa0",
+        "source": "C11 independent identity review (finding F1), confirmed by the automated additional-order detector",
+        "title": "Delhi HC order of 13.11.2009 (Sanjay Kishan Kaul J.) dismissing an application to modify the judgment of 20.11.2008"
+      },
+      {
+        "change": 1,
+        "judgment_key": "JK-0f65307432d16f74#p16-25",
+        "note": "not present elsewhere in the corpus",
+        "pages": "16-25",
+        "proceeding_key": "SCI:WPC-129-2018",
+        "sha256": "0f65307432d16f74f78ea8a4f37ad5d1d4b0e56188273575ac956eab22478d72",
+        "source": "C10 REVIEW_FINDINGS.md (composite); court corrected to Supreme Court by the C11 identity reading and the C11 review",
+        "title": "Adarsh Cooperative Housing Society Ltd. v. Union of India, W.P.(C) 129/2018, SC, 16-02-2018, [2018] 4 SCR 575"
+      }
+    ],
+    "judgment_entities_from_files": 3623,
+    "not_counted": {
+      "automated_composite_candidates_strong": 4,
+      "note": "two versions or two opinions of one judgment stay one judgment; automated composite candidates change nothing until reviewed",
+      "pointer_orders_lead_not_linked": 0,
+      "same_lead_case_content_match_date_differs": 8,
+      "two_versions_in_one_file_reviewed": 1
+    },
+    "revised_distinct_judgments": 3625,
+    "revised_exact_text_only": 3731,
+    "revised_without_pointer_rule": 3631,
+    "sum_check": true
+  },
+  "exact_group_classification": {
+    "COMPOSITE_FILE": 1,
+    "CONFIRMED_DUPLICATE_SAME_JUDGMENT": 59,
+    "SAME_JUDGMENT_DIFFERENT_RENDITION": 2
+  },
+  "extension_groups": {
+    "INCOMPLETE_COPY_ALL_PAGE_MATCH": 5,
+    "NORMALIZED_TEXT_EXTENSION": 14,
+    "POINTER_ORDER_TO_LEAD_JUDGMENT": 6,
+    "SAME_WORDS_NUMBERS_DIFFER_NOT_MERGED": 1,
+    "SCANNED_COPY_LEAD_CASE_MATCH": 5
+  },
+  "group_classification_all_scopes": {
+    "EXACT_TEXT_SHA256|COMPOSITE_FILE": 1,
+    "EXACT_TEXT_SHA256|CONFIRMED_DUPLICATE_SAME_JUDGMENT": 59,
+    "EXACT_TEXT_SHA256|SAME_JUDGMENT_DIFFERENT_RENDITION": 2,
+    "INCOMPLETE_COPY_ALL_PAGE_MATCH|CONFIRMED_DUPLICATE_SAME_JUDGMENT": 5,
+    "NORMALIZED_TEXT_EXTENSION|SAME_JUDGMENT_DIFFERENT_RENDITION": 14,
+    "POINTER_ORDER_TO_LEAD_JUDGMENT|POINTER_ORDER_NOT_A_SEPARATE_JUDGMENT": 6,
+    "SAME_WORDS_NUMBERS_DIFFER_NOT_MERGED|UNRESOLVED": 1,
+    "SCANNED_COPY_LEAD_CASE_MATCH|CONFIRMED_DUPLICATE_SAME_JUDGMENT": 5
+  },
+  "incomplete_23": {
+    "complete_copy_status": {
+      "COMPLETE_CONTENT_COPY_IN_CORPUS": 1,
+      "NO_OTHER_COPY_FOUND": 18,
+      "OTHER_COPIES_IN_CORPUS_ALL_INCOMPLETE": 4
+    },
+    "downloads_made": 0,
+    "earlier_complete_revision_found": 0,
+    "files": 23,
+    "identity_reliability": {
+      "NOT_CONFIRMED_FROM_DOCUMENT": 11,
+      "PARTIAL_COMMON_JUDGMENT_HEADED_BY_OTHER_CASE": 2,
+      "RELIABLE_FROM_PAGE_1": 8,
+      "WEAK": 2
+    },
+    "recovery_action": {
+      "RETRIEVE_HELD_BYTES": 4,
+      "RE_ACQUIRE_COMPLETE_COPY": 18,
+      "USE_EXISTING_COPY_AS_CONTENT_SOURCE; KEEP_TRUNCATED_FILE_AS_RECORDED_COPY": 1
+    }
+  },
+  "inputs_sha256": {
+    "C10-HF-JUDGMENTS/outputs/CONTINUATION_MANIFEST.csv": "1b2874da071c5a67caae141f944dade80c641e702f106e3c5b211d30f93661d7",
+    "C10-HF-JUDGMENTS/outputs/HF_JUDGMENT_COPY_REGISTER.csv": "4828c5cd2628c843ef5006e39455474e442c340fa0a02a8e864956e1bb3951f4",
+    "C10-HF-JUDGMENTS/outputs/HF_JUDGMENT_DUPLICATES.csv": "6768682a9cb815a67862c4d4441d4142cb138a5a9755df76a99e895affa2a97c",
+    "C10-HF-JUDGMENTS/outputs/HF_JUDGMENT_METADATA_AUDIT.csv": "147fccfb02522697c094635ae70f12b62ea1f2f12d24e8802a0ddc0222197916",
+    "C10-HF-JUDGMENTS/review/REVIEW_FINDINGS.md": "f8b0833102a3094bc2efcb049461ac8a678e243d2e2547e43653ef7748b2a92d",
+    "C10-HF-JUDGMENTS/tools/jextract.py": "44c6fe063f496915d7820d882ca92435c2b385b09edd9a314daef0fc531abeea",
+    "C10-HF-JUDGMENTS/work/batches/batch_0000.jsonl": "7a31ef8f7d33738770d4157f38c44ce6a8ffd7ba57caf6bbbed6253803d2ffe6",
+    "C10-HF-JUDGMENTS/work/batches/batch_0001.jsonl": "f3193a401071a4dc1e0c787a5b10901aef13fcb37f348744b9f96c641ac3fd41",
+    "C10-HF-JUDGMENTS/work/batches/batch_0002.jsonl": "ed4f07cc33fde29c6f4461d49ef909b726ac779369f8ea5b79fff3753bfd87e1",
+    "C10-HF-JUDGMENTS/work/batches/batch_0003.jsonl": "478ac5341799ddd3b9ff818275a7c911e13624b5a7acaea3a6383a3e2cbe44e4",
+    "C10-HF-JUDGMENTS/work/batches/batch_0004.jsonl": "25a5b7513a1b13fb7dffcb67c7dd7a8d7a5cbe6511b4ba9b767104ab6ecbdb27",
+    "C10-HF-JUDGMENTS/work/batches/batch_0005.jsonl": "489f19835e3f7a629c9c6ed55633fe7e40ec3ac1a9f7db84848b90a8e5a70233",
+    "C10-HF-JUDGMENTS/work/batches/batch_0006.jsonl": "b57edd8d7ad8db3e33621ffa94c5e066deb722977b2e008bcf3bd0afd271f6c8",
+    "C10-HF-JUDGMENTS/work/batches/batch_0007.jsonl": "91cb43123d84898204a24e0b6582c46d6c64c8e96c9c146c49dd7bcc1c0b6693",
+    "C10-HF-JUDGMENTS/work/batches/batch_0008.jsonl": "4dc0d4a0e22121da0f9fdbd2281dc25f8b73219d8c82b3f8f0b451160d9b3bd5",
+    "C10-HF-JUDGMENTS/work/batches/batch_0009.jsonl": "d77aefbc648c61f54fc167bd95606f1861ad70986e957566fc808baf8f9617f1",
+    "C10-HF-JUDGMENTS/work/batches/batch_0010.jsonl": "8a7b7e09592a3cc5c024796ca3317635bbc46bea4282f02735a7c0ce1f042b8d",
+    "C10-HF-JUDGMENTS/work/batches/batch_0011.jsonl": "b9e542441135aaccc8693cb7441609122031edb6d19798e236acd3da7de9aa74",
+    "C10-HF-JUDGMENTS/work/batches/batch_0012.jsonl": "958a0dd0bb4305a64b626bfa9da4396a9b3095c8aece4a80d00c2d8e1afde1cb",
+    "C10-HF-JUDGMENTS/work/batches/batch_0013.jsonl": "a848d0a891b49ccd1e5c55f007c88d48e70841dc259ef3f2c42942e4c8d4febf",
+    "C10-HF-JUDGMENTS/work/batches/batch_0014.jsonl": "62541f4f9802abdbe8da20a6dc4c29e588aaa08f327c27a0f68cc2dbd7f04113",
+    "C10-HF-JUDGMENTS/work/batches/batch_0015.jsonl": "aa155c48ff5ccbd8e8dc2fe41ebca7c409e35e03d8a4cf5fda677274c4acb84b",
+    "C10-HF-JUDGMENTS/work/batches/batch_0016.jsonl": "211686c1e602bdbf85e8eb023a351567206d3cd47c9ab1e044f0a6c95317a585",
+    "C10-HF-JUDGMENTS/work/batches/batch_0017.jsonl": "1d99c5346d6d2de5a25292da390f2bd1e2504b34f4c6719e29839b97d604d568",
+    "C10-HF-JUDGMENTS/work/batches/batch_0018.jsonl": "826dd9b9a384840b2a4eabc517fd4e7e5fc9080e865215e3f6848dbd04d43c56",
+    "C10-HF-JUDGMENTS/work/batches/batch_0019.jsonl": "54e7424b776c1076dabb4a8f7993963bdfd4aa10bdd2bb64a1699b191aee3c16"
+  },
+  "pinned_commit": "ad77758d",
+  "routed_to_metadata_workstream": [
+    {
+      "files": "09517344deb889582387f1d097ea8f93e0e886ccb5d7440afaa25b547e3caad0;10e835f53901dbf6852e44322506b9c572eb9da82229e11e8f83e09fd414b345;3e1bea3ed01f76be48a4ceee42fa6d6065a7d0db4bc7731e6b8319b744948a24;3f757dcf20026c4bf20fd382120b02c94d6b8400e308db1bc6cf36888b3b77e2;4c2304d38810e1eac8d2bc6898e5e818df6d53986969ecfcddb33728379a3239;665984e399a594b5e6590e8ff0481c2c9d74bd432c1482e7acf0e30d1198f455;ebac117757c439f07c20826b5d6fea8a62fe3514bd84f016a12286d302ec4255",
+      "issue": "issue_date_meta differs between copies of one document; every source_url carries the date 2026-04-20: metadata dates 2025-07-08;2025-07-17;2025-07-21;2025-08-27;2025-09-01;2025-09-15 are not the date of the stored document"
+    },
+    {
+      "files": "48e3c2db90f438ba51016ddc7b9abf6027d468a73b94ca44f069602e01ced4f3;8a0be890282d401f4dbf33093e093ac3b7dbe62a8ae4e31e2e3349dfcc25cefd",
+      "issue": "neutral citation 2018 INSC 185 attached to two different Kudrat Sandhu orders (22.02.2018 and 21.08.2018) (review F11)"
+    },
+    {
+      "files": "c1a83ee07b70 (full sha in register)",
+      "issue": "issue_date_meta 2024-12-02 but the order prints 18.05.2015 (review F11)"
+    }
+  ],
+  "same_text_reproduction": {
+    "groups_with_empty_text": 0,
+    "matches_prior": true,
+    "min_text_chars_in_groups": 1222,
+    "prior_finding": {
+      "files": 292,
+      "groups": 62
+    },
+    "reproduced": {
+      "files": 292,
+      "groups": 62
+    }
+  },
+  "tool": "c11-identity/2",
+  "verification": "AUTOMATED_NOT_LEGALLY_VERIFIED"
+}

@@ -1,0 +1,40 @@
+{
+ "excluded_total": 120185,
+ "flagged": 8077,
+ "note": "Ranking by fixed title rules; nothing acquired. Crawler excluded each on its own text scan for ten phrases.",
+ "tier_by_court": {
+  "T1|Allahabad High Court": 250,
+  "T1|High Court of Delhi": 779,
+  "T1|High Court of Jammu and Kashmir": 152,
+  "T1|High Court of Punjab and Haryana": 562,
+  "T1|Supreme Court of India": 47,
+  "T2|Allahabad High Court": 294,
+  "T2|High Court of Delhi": 151,
+  "T2|High Court of Jammu and Kashmir": 1015,
+  "T2|High Court of Punjab and Haryana": 98,
+  "T2|Supreme Court of India": 12,
+  "T3|Allahabad High Court": 230,
+  "T3|High Court of Delhi": 172,
+  "T3|High Court of Jammu and Kashmir": 70,
+  "T3|High Court of Punjab and Haryana": 210,
+  "T3|Supreme Court of India": 24,
+  "T4|Allahabad High Court": 22,
+  "T4|High Court of Delhi": 117,
+  "T4|High Court of Jammu and Kashmir": 77,
+  "T4|High Court of Punjab and Haryana": 97,
+  "T4|Supreme Court of India": 4,
+  "T5|Allahabad High Court": 1141,
+  "T5|High Court of Delhi": 944,
+  "T5|High Court of Jammu and Kashmir": 611,
+  "T5|High Court of Punjab and Haryana": 912,
+  "T5|Supreme Court of India": 86
+ },
+ "tiers": {
+  "NOT_FLAGGED": 112108,
+  "T1": 1790,
+  "T2": 1570,
+  "T3": 706,
+  "T4": 317,
+  "T5": 3694
+ }
+}
