@@ -10,9 +10,23 @@ from pathlib import Path
 import audit_judgments as AJ
 import jextract as J
 
+TRUNC = "STORED_COPY_TRUNCATED_CONTENT_MAY_BE_MISSING"
+
+
+def source_completeness(r):
+    """Completeness of the stored copy the extraction read (reviews WS-01, E2-02, E2-03, E2-05)."""
+    if not r or r.get("extraction") in (None, "NOT_PROCESSED_BYTES_UNAVAILABLE"):
+        return "NOT_AVAILABLE"
+    if not r.get("pdf_eof_anywhere", True):
+        return TRUNC
+    if not r.get("pdf_eof_marker", True):
+        return "STORED_COPY_TAIL_CUT_AFTER_EARLIER_EOF_BASE_REVISION_PRESENT"
+    return "COMPLETE_FILE_STRUCTURE"
+
+
 TITLE_SCREEN = re.compile(
     r"\b(?:army|air\s*force|indian\s+navy|naval|ministry\s+of\s+defen[cs]e|defen[cs]e|m\.?o\.?d\.?|"
-    r"(?:ex[-\s.]*)?(?:sep|hav|nk|l/nk|sub|nb\s*sub|capt|maj|col|lt|brig|gen|sgt|cpl|jwo|mwo|cdr|cmde|wg\s*cdr|sqn\s*ldr|flt\s*lt|gp\s*capt)\.?\s|"
+    r"(?:ex[-\s.]*)?(?:sep|hav|nk|l/nk|sub|nb\s*sub|capt|maj|col|lt|brig|gen|sgt|cpl|jwo|mwo|cdr|cmde|wg\s*cdr|sqn\s*ldr|flt\s*lt|gp\s*capt)(?:\.|\s)(?!\s*(?:inspector|manager|divisional|division|registrar|secy|secretary|post\s+office))|"
     r"ex[-\s.]*servicem[ae]n|ex[-\s.]*(?:sep|hav|nk|naik|subedar|sub|capt|maj|col|lt|sgt|cpl)\b|sepoy|havildar|naik|subedar|"
     r"brigadier|colonel|lt\.?\s*col|wing\s+commander|squadron\s+leader|flight\s+lieutenant|commodore|jawan|soldier|military|"
     r"cantonment|assam\s+rifles|border\s+security\s+force|\bbsf\b|\bcrpf\b|\bitbp\b|coast\s+guard|sainik|canteen\s+stores|"
@@ -87,7 +101,7 @@ def build(repo):
                               byte_source=f["byte_source"], source_document_verification=bver, hf_bytes="NOT_CHECKED",
                               metadata_records=len(by_sha_meta.get(sha, [])), c5_copy_register=copyreg.get(sha, {}).get("copy_id", ""),
                               pages=(r or {}).get("pages", ""), text_extraction=(r or {}).get("text_extraction", ""),
-                              pdf_status=(r or {}).get("pdf_status", ""), disposition=disp))
+                              pdf_status=(r or {}).get("pdf_status", ""), source_completeness=source_completeness(r), disposition=disp))
     rows["copy"] = copy_rows
 
     # ---------------- per-record metadata audit
@@ -155,8 +169,9 @@ def build(repo):
         r = res.get(sha)
         ms = by_sha_meta.get(sha, [])
         title = ms[0].get("title") if ms else ""
+        comp = source_completeness(r)
         if not r or r.get("extraction") not in ("PROCESSED", "PROCESSED_TRUNCATED_COPY"):
-            rel_rows.append(dict(judgment_id=jid(sha), sha256=sha, court=ms[0].get("court") if ms else "", title=title,
+            rel_rows.append(dict(judgment_id=jid(sha), sha256=sha, source_completeness=comp, court=ms[0].get("court") if ms else "", title=title,
                                  relevance_class="RELEVANCE_UNCERTAIN_REVIEW",
                                  reason="not processed: " + ((r or {}).get("extraction") or (r or {}).get("pdf_error") or "bytes unavailable"),
                                  direct_terms="", admin_terms="", general_terms="", method="AUTOMATED_RULES"))
@@ -165,13 +180,16 @@ def build(repo):
         # the topic tagger also counts the Tribunal's abbreviation (AFT), which the service-term count misses
         sc["admin"] = sc.get("admin", 0) + (r.get("topics") or {}).get("aft_jurisdiction", 0)
         cls, why = J.classify_relevance(sc, r.get("text_extraction"), title)
-        rel_rows.append(dict(judgment_id=jid(sha), sha256=sha, court=ms[0].get("court") if ms else "", title=title,
+        if comp == TRUNC:  # review E2-02: OCR cannot restore pages missing from a truncated copy
+            why = why.replace("(scanned pages need OCR before any exclusion)", "(stored copy truncated: a complete copy is needed before any exclusion)")
+            why = why.replace("(OCR needed)", "(stored copy truncated: a complete copy is needed)") + "; classified on a truncated copy"
+        rel_rows.append(dict(judgment_id=jid(sha), sha256=sha, source_completeness=comp, court=ms[0].get("court") if ms else "", title=title,
                              relevance_class=cls, reason=why, direct_terms=sc.get("direct"), admin_terms=sc.get("admin"),
                              general_terms=sc.get("general"), method="AUTOMATED_RULES"))
-        issues.append(dict(judgment_id=jid(sha), sha256=sha, doc_ids=sorted(m["doc_id"] for m in ms),
+        issues.append(dict(judgment_id=jid(sha), sha256=sha, source_completeness=comp, doc_ids=sorted(m["doc_id"] for m in ms),
                            statutes=r.get("statutes"), topics=r.get("topics"), citations=r.get("citations"),
                            status="AUTOMATED_CANDIDATE_NOT_VERIFIED"))
-        holds.append(dict(judgment_id=jid(sha), sha256=sha, doc_ids=sorted(m["doc_id"] for m in ms),
+        holds.append(dict(judgment_id=jid(sha), sha256=sha, source_completeness=comp, doc_ids=sorted(m["doc_id"] for m in ms),
                           outcome_candidate=r.get("outcome_candidate"), outcome_conflict=r.get("outcome_conflict"),
                           outcome_page=r.get("outcome_page"), outcome_evidence=r.get("outcome_evidence"),
                           propositions=r.get("propositions"), status="AUTOMATED_CANDIDATE_NOT_VERIFIED"))
@@ -288,7 +306,7 @@ def build(repo):
         if any("crawler outcome" in x["contradictions"] for x in metamap[j]):
             score += 1; reasons.append("crawler outcome differs from text candidate")
         if r.get("extraction") == "PROCESSED_TRUNCATED_COPY":
-            score += 3; reasons.append("stored copy truncated (later pages missing)")
+            score += 3; reasons.append("stored copy truncated (content may be missing)")
         elif r.get("extraction") != "PROCESSED":
             score += 3; reasons.append("not processed / unreadable")
         if r.get("text_extraction") in ("NO_TEXT_LAYER", "PARTIAL_TEXT_LAYER"):
@@ -375,6 +393,7 @@ def build(repo):
         metadata_records=len(metas), source_files=len(files), distinct_judgments=len(files),
         files_by_location=dict(Counter(f["location"] for f in files.values())),
         file_dispositions=dict(sorted(acct.items())),
+        source_completeness=dict(sorted(Counter(x["source_completeness"] for x in copy_rows).items())),
         files_rehashed_equal_to_hf_declared=sum(1 for x in copy_rows if "REHASHED_EQUALS" in x["source_document_verification"]), record_dispositions=dict(sorted(acct_meta.items())),
         excluded_records=len(exc_rows), excluded_dispositions=dict(Counter(x["disposition"] for x in exc_rows)),
         excluded_csv_sha256=hashlib.sha256(exc_csv).hexdigest(),

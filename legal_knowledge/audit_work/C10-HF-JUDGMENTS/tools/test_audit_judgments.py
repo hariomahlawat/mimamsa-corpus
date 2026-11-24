@@ -137,8 +137,77 @@ class ReviewFixes(unittest.TestCase):
         self.assertTrue(J.ADMIN.search("a medical officer of the Army posted at Base Hospital"))
 
 
+    @unittest.skipUnless(HAVE_PYMUPDF, "PyMuPDF (requirements.txt pymupdf==2.1) is not installed in this environment")
+    def test_readable_pdf_without_eof_is_truncated_copy(self):
+        import hashlib, os, tempfile, pymupdf
+        doc = pymupdf.open()
+        for _ in range(2):
+            p = doc.new_page(); p.insert_text((72, 72), "Army Act court martial petition dismissed")
+        data = doc.tobytes().replace(b"%%EOF", b"")
+        with tempfile.TemporaryDirectory() as td:
+            with open(os.path.join(td, "t.pdf"), "wb") as fh:
+                fh.write(data)
+            old = os.environ.get("MIMAMSA_WORKING_STORE")
+            os.environ["MIMAMSA_WORKING_STORE"] = td
+            try:
+                item = dict(sha256=hashlib.sha256(data).hexdigest(), path="t.pdf", location="X", byte_source="working_store:t.pdf")
+                rec = AJ._work((REPO, item))
+            finally:
+                if old is None:
+                    os.environ.pop("MIMAMSA_WORKING_STORE", None)
+                else:
+                    os.environ["MIMAMSA_WORKING_STORE"] = old
+        if rec.get("pdf_status") == "OPENED":
+            self.assertEqual(rec["extraction"], "PROCESSED_TRUNCATED_COPY")
+        else:
+            self.assertEqual(rec["extraction"], "INCOMPLETE_COPY_TRUNCATED")
+        import jassemble
+        self.assertEqual(jassemble.source_completeness(rec), jassemble.TRUNC)
+
+    def test_source_completeness_rules(self):
+        import jassemble as JA
+        self.assertEqual(JA.source_completeness({"extraction": "PROCESSED", "pdf_eof_anywhere": True, "pdf_eof_marker": True}), "COMPLETE_FILE_STRUCTURE")
+        self.assertEqual(JA.source_completeness({"extraction": "PROCESSED", "pdf_eof_anywhere": True, "pdf_eof_marker": False}),
+                         "STORED_COPY_TAIL_CUT_AFTER_EARLIER_EOF_BASE_REVISION_PRESENT")
+        self.assertEqual(JA.source_completeness({"extraction": "PROCESSED_TRUNCATED_COPY", "pdf_eof_anywhere": False}), JA.TRUNC)
+        self.assertEqual(JA.source_completeness(None), "NOT_AVAILABLE")
+
+    def test_bare_army_moves_classification_out_of_not_relevant(self):
+        n = len(J.ADMIN.findall("posted as per the policies of the Indian Army at the Army hospital"))
+        self.assertGreater(n, 0)
+        self.assertNotEqual(J.classify_relevance({"admin": n}, "TEXT_LAYER_OK", "SUMIT ARORA Vs UNION OF INDIA")[0],
+                            "NOT_RELEVANT_CURRENT_SCOPE")
+
+    def test_title_rescreen_rank_forms(self):
+        import jassemble as JA
+        for t in ("COL.T.PRASAD Vs UOI", "MAJ.GEN. X v UOI", "CAPT X v UOI"):
+            self.assertTrue(JA.TITLE_SCREEN.search(t), t)
+        for t in ("SUB INSPECTOR RAM v STATE", "GEN MANAGER v X", "SUB DIVISIONAL OFFICER v Y"):
+            self.assertFalse(JA.TITLE_SCREEN.search(t), t)
+
+
 @unittest.skipUnless(have_commits(), "pinned raw-data / staging commits are not in this clone")
 class TruncationAccounting(unittest.TestCase):
+    def test_truncated_marked_in_research_outputs(self):
+        import jassemble as JA
+        copies = list(csv.DictReader(io.StringIO((AJ.OUT / "HF_JUDGMENT_COPY_REGISTER.csv").read_text(encoding="utf-8"))))
+        trunc = {r["sha256"] for r in copies if r["disposition"] == "PROCESSED_TRUNCATED_COPY"}
+        self.assertTrue(trunc)
+        for name in ("HF_JUDGMENT_HOLDINGS.jsonl", "HF_JUDGMENT_LEGAL_ISSUES.jsonl"):
+            for l in (AJ.OUT / name).read_text(encoding="utf-8").splitlines():
+                o = json.loads(l)
+                self.assertEqual(o["sha256"] in trunc, o["source_completeness"] == JA.TRUNC, name)
+        for r in csv.DictReader(io.StringIO((AJ.OUT / "HF_JUDGMENT_RELEVANCE.csv").read_text(encoding="utf-8"))):
+            if r["source_completeness"] == JA.TRUNC:
+                self.assertNotIn("OCR", r["reason"])
+
+    def test_outcome_contradiction_only_when_both_sides_present(self):
+        for r in csv.DictReader(io.StringIO((AJ.OUT / "HF_JUDGMENT_METADATA_AUDIT.csv").read_text(encoding="utf-8"))):
+            if "crawler outcome" in r["contradictions"]:
+                self.assertTrue(r["outcome_meta"])
+                self.assertNotIn(r["outcome_text_candidate"], ("", "NOT_FOUND"))
+                self.assertNotEqual(r["outcome_meta"], r["outcome_text_candidate"])
+
     def test_truncated_copies_are_unresolved_and_listed(self):
         copies = list(csv.DictReader(io.StringIO((AJ.OUT / "HF_JUDGMENT_COPY_REGISTER.csv").read_text(encoding="utf-8"))))
         cont = {r["sha256"] for r in csv.DictReader(io.StringIO((AJ.OUT / "CONTINUATION_MANIFEST.csv").read_text(encoding="utf-8")))}

@@ -146,5 +146,22 @@ class DatasetIntegrity(unittest.TestCase):
         self.assertNotIn("issue:SHA256SUMS_MISMATCH", summ)
 
 
+class WorkstreamChecksums(unittest.TestCase):
+    """Every workstream OUTPUT_SHA256SUMS must verify against the committed files (review E2-01)."""
+    def test_workstream_checksum_files_verify(self):
+        import hashlib
+        for ws in ("judicial", "quality", "statutory"):
+            d = HERE.parent / "workstreams" / ws
+            sums = d / "OUTPUT_SHA256SUMS"
+            if not sums.is_file():
+                sums = d / "outputs" / "OUTPUT_SHA256SUMS"
+            self.assertTrue(sums.is_file(), ws)
+            lines = [l for l in sums.read_text(encoding="utf-8").splitlines() if l.strip()]
+            self.assertTrue(lines, ws)
+            for l in lines:
+                h, name = l.split("  ", 1)
+                self.assertEqual(hashlib.sha256((sums.parent / name).read_bytes()).hexdigest(), h, f"{ws}: {name}")
+
+
 if __name__ == "__main__":
     unittest.main()

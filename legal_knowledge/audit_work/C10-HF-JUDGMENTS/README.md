@@ -2,7 +2,7 @@
 
 **Status:** an automated document-level audit of every judgment in the canonical Hugging Face dataset, with explicit completion accounting.
 - **Nothing is legally verified.** Every extracted value (dates, case numbers, citations, statutes, issues, outcome, propositions, relevance) is an automated candidate read from the PDF text layer.
-- Independent legal review covers only the sample recorded in `review/`.
+- Independent AI document review (not legal review) covers only the sample recorded in `review/`.
 - Original judgment documents are not modified.
 - Published judgment text is not masked (owner's judicial publication policy).
 
@@ -23,7 +23,7 @@ python -I -B tools/audit_judgments.py assemble --repo <full clone> [--check]
 ```
 - `extract` processes distinct files in deterministic batches of 200, sorted by SHA-256.
 - Each batch is written to `work/batches/batch_NNNN.jsonl` together with its input key and extractor version. The input key covers the batch's SHA-256 list and a fingerprint of the extractor source, so a batch made by different code is never reused. A complete matching batch is skipped, so an interrupted run resumes where it stopped.
-- **Truncated copies.** A copy with no `%%EOF` marker anywhere is truncated. If it still opens it is `PROCESSED_TRUNCATED_COPY`: partial extraction, counted as unresolved, and listed for a complete copy. If it does not open it is `INCOMPLETE_COPY_TRUNCATED`.
+- **Truncated copies.** A copy with no `%%EOF` marker anywhere is truncated. If it still opens it is `PROCESSED_TRUNCATED_COPY` (content may be missing): possibly partial extraction, marked in every research output, counted as unresolved, and listed for a complete copy. If it does not open it is `INCOMPLETE_COPY_TRUNCATED`.
 - `assemble` builds every output from the batches and the pinned inputs, asserts the accounting identities, and writes the continuation manifest.
 
 **Byte source.**

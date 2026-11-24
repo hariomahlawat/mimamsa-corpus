@@ -789,6 +789,12 @@ def build(args):
                             "Treatment search is deterministic over held crawler texts only (to 2026-11-03); absence of a hit is not proof of no treatment",
                             "SCR-format copies are third-party mirror renditions; used as comparators only"])
     outputs["JUDICIAL_C10_MANIFEST.json"] = (json.dumps(manifest, indent=1, sort_keys=True, ensure_ascii=False) + "\n").encode()
+    # review E2-01: the checksum file is emitted (and so --check-ed) by the builder; it also covers the findings, input and tool sources
+    sums = [(sha256(outputs[k]), k) for k in sorted(k for k in outputs if k != "JUDICIAL_C10_MANIFEST.json")]
+    sums.append((sha256(outputs["JUDICIAL_C10_MANIFEST.json"]), "JUDICIAL_C10_MANIFEST.json"))
+    for rel in ("JUDICIAL_C10_FINDINGS.md", "inputs/hf_lk_text_readings.json", "tools/build_judicial_c10.py", "tools/judicial_c10_data.py"):
+        sums.append((sha256(open(os.path.join(W, rel), "rb").read()), rel))
+    outputs["OUTPUT_SHA256SUMS"] = "".join(f"{h}  {k}\n" for h, k in sums).encode()
     return outputs
 
 
