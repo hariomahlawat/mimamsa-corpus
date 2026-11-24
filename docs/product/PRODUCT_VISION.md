@@ -16,15 +16,16 @@ Mimamsa is intended to become a **fully offline Indian military-law research and
 | --- | --- | --- |
 | Unit commander | “A sepoy is drunk on duty; what now?” | Immediate safety considerations, material fact questions, lawful procedural routes, safeguards and source links |
 | Adjutant/staff officer | “The accused refuses a signature; does the case stop?” | Identify the document and stage; clarify requirements and evidence, avoid invented procedure |
-| JCO/NCO in an authorised role | “Which rules are relevant to this situation?” | Plain-language explanation and source access, respecting role permissions |
+| JCO/NCO | “Which rules are relevant to this situation?” | Same documents and features as every other admitted app user, with plain-language presentation |
 | JAG/legal practitioner | “Which precedents govern this disputed interpretation as of a date?” | Full source passages, contrary treatment, amendment history and unresolved questions |
 | Researcher/content reviewer | “Which assertion needs more proof?” | Reproducible evidence chain, status history, correction and review queue |
+| Any app user | “Upload a new SOP or policy and connect it to our legal material.” | Upload, extract, analyse, search and inspect candidate links in the common corpus |
 
 ## 3. Approved direction: capability requirements
 
 Identifiers are stable requirement references, **not** statements that a feature exists.
 
-- **PR-01 Full corpus access.** Make all legally accessible retained judgments searchable, including documents not yet curated. The research index and source copy must remain available without implying that an automated holding is verified. Preserve access markings and permissions.
+- **PR-01 Full shared corpus access.** Every user admitted to the deployment may access the entire admitted corpus and every app feature, including unreviewed original judgments. No RBAC or per-document user permissions. Source access markings must be retained and material inappropriate for the whole deployment audience excluded or kept outside the shared corpus.
 - **PR-02 Statute-first exploration.** A user opening an Act, Rule or regulation can discover historical versions, related judgments, legal propositions, open conflicts and associated procedure/checklist research.
 - **PR-03 Plain-English scenarios.** Understand informal language, misspellings and commonly used military vocabulary. Do not require an Act or section number in the prompt.
 - **PR-04 Material-fact dialogue.** Identify questions that can change the applicable provision, legal route, urgency or competent authority. Ask a small number in priority order; handle unknown answers.
@@ -35,10 +36,15 @@ Identifiers are stable requirement references, **not** statements that a feature
 - **PR-09 Lessons and checklists.** Create reusable procedural checklists and lessons from verified legal requirements and evidenced judicial findings. Candidate lessons must not be represented as approved doctrine.
 - **PR-10 Temporal applicability.** Resolve the law applicable to the incident date where evidence permits, not merely the newest consolidated text. Explicitly expose incomplete commencement or amendment evidence.
 - **PR-11 Explain uncertainty.** Return “not established from verified sources” when required; highlight contrary precedent, unresolved fact, source conflict or stale legal evidence rather than producing a confident answer.
-- **PR-12 Entirely offline deployment.** All runtime retrieval, rule evaluation, model inference and source opening operate on an air-gapped LAN. Internet-connected acquisition, if separately approved, occurs outside deployment; only vetted offline bundles are imported.
-- **PR-13 Separation of data.** User-entered incidents and identities are access-controlled case/session data, not silently added to the common searchable corpus or model training material.
+- **PR-12 Entirely offline deployment.** All runtime retrieval, upload ingestion, graph processing, rule evaluation, model inference and source opening operate on an air-gapped LAN. Approved external acquisitions arrive only through controlled offline transfer; uploading local user documents requires no internet.
+- **PR-13 Separate queries from intentional uploads.** Ordinary question/incident text stays in the session and is not silently published into the shared corpus or model training material. A deliberate document upload is clearly disclosed as **shared with all app users** after ingestion; do not provide a misleading private-upload option in the single-access design.
 - **PR-14 Provenance and reversibility.** Preserve originals and all correction/review events. Never silently overwrite or backdate a legal assertion.
-- **PR-15 Different depths, one evidence base.** Commander-friendly concise guidance and detailed JAG research views must point to the same sources and statuses.
+- **PR-15 Different views, equal access.** Commander-friendly concise guidance and detailed legal-research views use the same source collection. Any admitted user can open either view.
+- **PR-16 In-app continuous upload.** Any app user can add eligible policies, SOPs, instructions, circulars, manuals and supporting reference files over time; no developer or separate crawler invocation is required.
+- **PR-17 Automatic ingestion and integration.** Preserve the uploaded file, extract/OCR its contents, identify document type and version, detect relevant provisions and cross-references, and construct searchable candidate knowledge-graph edges and related-document suggestions.
+- **PR-18 Source-trust separation.** A new user upload is visible and searchable as a user-provided, unverified research source once accepted and processed, but cannot automatically change the operative law, verified propositions, statutory history or mandatory checklist obligations.
+- **PR-19 One common access domain.** No user roles, feature tiers or per-user document permissions in the initial product. Import eligibility is deployment-wide: if a source cannot lawfully be shown to all users with app access, do not ingest it into the shared index.
+- **PR-20 Capability-first, basic cyber hygiene.** Prioritise dependable search, upload, parsing, legal connections and scenario usefulness; retain basic authentication/perimeter controls, safe file handling, local backups, integrity checks and network isolation from the first release. Advanced hardening may follow demonstrated capability.
 
 ## 4. Intended user journey
 
@@ -58,8 +64,8 @@ The first release need not wait for formal review of every judgment. **Full-text
 
 | Layer | Exposure rule |
 | --- | --- |
-| Original accessible judgments and law | Searchable with source identity, completeness/access warnings |
-| Automated extraction and candidate links | Searchable/discoverable, explicitly labelled unverified and not automatically relied upon |
+| Admitted original judgments, legal sources and uploaded documents | Searchable by all app users with source identity, completeness and verification warnings |
+| Automated extraction and candidate links (including upload-derived edges) | Searchable/discoverable, explicitly labelled unverified and not automatically relied upon |
 | Independently checked documentary facts | Display review provenance and remaining legal questions |
 | Substantive legally approved propositions/procedures | Identifiable approval record, precise applicability and evidence |
 
@@ -73,12 +79,15 @@ The C10 audit reported approximately 3,959 judgment files, 4,259 judgment metada
 - **Commander guidance:** Situation-first guided research with conditional, stage-aware checklists.
 - **Learning/lessons:** Browse evidenced procedural issues, observed failure modes and related cases.
 - **Legal review workspace:** Escalation queues, correction proposals, provenance and review decisions.
+- **Add documents:** Any app user uploads a policy/SOP/other eligible file, sees processing status, and opens its extracted text, candidate relationships and linked graph.
 
 The conversational assistant is an interface to this evidence system; it is not the system of record.
 
 ## 7. Non-goals and boundaries
 
-No autonomous allegation assessment, legal adjudication, sanction recommendation, punishment selection, fabrication of forms, automatic case filing or substitution for statutory competence. Never silently convert uncertain source text into current law, or use an old manual alone as current authority. No data leakage to external inference or telemetry.
+No autonomous allegation assessment, legal adjudication, sanction recommendation, punishment selection, fabrication of forms, automatic case filing or substitution for statutory competence. Never silently convert uncertain source text or an uploaded policy into current law, or use an old manual alone as current authority. No data leakage to external inference or telemetry.
+
+Access is flat: all admitted users share all features and admitted documents. Do not design role hierarchies or private document folders. Apply a single deployment-level source-eligibility boundary; a document whose restrictions are incompatible with universal app-user access must not be exposed through shared search, snippets or generated answers. Standard cyber hygiene and untrusted-upload isolation remain essential.
 
 Lawfully published judicial originals are preserved faithfully, without masking personal, service or medical details merely because they appear in a judgment. Specific binding publication restrictions and appropriate access controls remain applicable.
 
@@ -95,6 +104,10 @@ Measure separately:
 - scenario route correctness, required fact-question recall and safe escalation;
 - percent of displayed mandatory checklist items supported by validated sources;
 - completeness/integrity of offline release and lack of network dependency.
+- user-upload processing success, deterministic provenance, OCR/extraction quality and time to inclusion in shared search;
+- measured relevance and false-positive rates for automatically suggested upload-to-law/judgment graph links;
+- demonstrated non-promotion of unreviewed uploads into mandatory legal guidance;
+- baseline security checks for file safety, integrity, backups and isolated parsing.
 
 **Do not use a single synthetic “legally accurate” percentage.**
 
@@ -102,7 +115,7 @@ Measure separately:
 
 **Foundation first:** preserve vulnerable sources, reconcile HF/GitHub, maintain frozen originals.  
 **Research breadth:** full accessible judgment search; correct judgment identities and copies.  
-**Knowledge depth:** validated provision/version graph, proposition passports, case treatment and legal lessons.  
+**Knowledge depth:** provision/version graph, proposition passports, case treatment and legal lessons; automated user-upload ingestion and candidate graph linking in early product capability work.  
 **Scenario pilot:** reuse the existing 50-question golden test set referenced in `CLAUDE.md` where applicable; extend it with an independently reviewed commander-scenario benchmark and blinded variations. Pilot 10–15 high-value scenarios, then expand.  
 **Controlled offline release:** evidence-complete, explicitly scoped, reviewable and versioned; never claim blanket legal approval.
 
@@ -112,5 +125,7 @@ The legal requirements in this document are product requirements, not legal find
 - `docs/legal-audit/EVIDENCE_STANDARD.md`
 - `docs/legal-audit/SOURCE_AUTHORITY_POLICY.md`
 - `legal_knowledge/audit_work/AUTH-LEDGER/README.md`
+- `docs/architecture/CONTINUOUS_DOCUMENT_INGESTION.md`
+- `docs/architecture/decisions/ADR-0002-SHARED_ACCESS_AND_CONTINUOUS_INGESTION.md`
 
 Track design changes through a reviewable ADR; all code, schemas and ledger alterations require a separate authorised change.

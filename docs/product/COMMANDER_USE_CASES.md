@@ -103,8 +103,15 @@ A unit commander describes a **situation**, not a section number. This catalogue
 | UC-18 | “Can an accused obtain copies of documents?” | Stage, documents, applicable right and restrictions |
 | UC-19 | “A soldier wants to withdraw a complaint.” | Complaint type, stage, applicable law |
 | UC-20 | “A former soldier has challenged his discharge.” | Dates, remedy, forum, applicable regulations |
+| UC-21 | “I have uploaded a new policy letter. Show the Rules and judgments it relates to.” | Publication date, issuer, source type, citations, source trust |
+| UC-22 | “Does this new SOP replace an older SOP or contradict a Rule?” | Version authority, supersession evidence, temporal validity, competing interpretations |
+| UC-23 | “We have scanned standing instructions. Add them to the searchable library.” | OCR quality, file safety, common access eligibility, provisional linking |
 
 All cases are **research seeds**, not answers. Expand from corpus-derived recurring issues only after provenance and relevance checks.
+
+### UC-21 to UC-23: User-uploaded policy/SOP material
+
+An admitted app user may intentionally upload a policy, SOP, instruction, circular, scanned note or other eligible reference file. The app must explicitly explain that accepted uploads become visible to **every** app user. It automatically preserves the original, checks basic file safety and deployment-wide eligibility, extracts text/OCR, identifies document dates/issuer/version, and suggests connections to Acts, Rules, other policies and judgments. Search and graph discovery should become available after processing with `USER_UPLOADED_UNVERIFIED` status. An asserted `supersedes`, `mandatory procedure`, `legal exception` or `operative rule` is only a **candidate**, not an authoritative fact, until substantiated by source and applicable legal review. A restricted document not suitable for sharing with all admitted app users is not imported into the common corpus.
 
 ## 4. Required scenario record contract (design proposal)
 
@@ -118,6 +125,7 @@ Each reusable scenario should store:
 - conditions that must **block** a definitive answer;
 - test variants where changing one fact changes the result;
 - reviewer, revision and approval artefact (if any).
+- optional linked uploaded-policy sources, origin, version, status and graph candidates, all explicitly distinguished from verified binding law;
 
 Do not embed a fixed statutory section number in a scenario without a verified, date-aware binding to the source graph.
 
@@ -147,7 +155,8 @@ Tests must cover:
 - facts with several valid routes, mixed proceedings or contradictory evidence;
 - false-positive offence mapping, wrong competent authority and invented signatures;
 - lack of authenticated source and conflicting historical wording;
-- questions about a real person, with session-level access controls;
+- questions about a real person, kept in the active session rather than inadvertently entering shared search; intentional uploads are clearly shared;
+- uploaded SOPs with incorrect effective dates, malicious instruction text, supersession claims or incompatible access markings;
 - metamorphic cases: alter one fact and verify only legally justified changes;
 - “not determinable from available evidence” as an expected correct answer.
 

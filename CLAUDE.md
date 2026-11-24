@@ -168,8 +168,14 @@ Before planning future legal-knowledge, retrieval or application work, read:
 - `docs/product/COMMANDER_USE_CASES.md`
 - `docs/architecture/LEGAL_KNOWLEDGE_ARCHITECTURE.md`
 - `docs/architecture/SCENARIO_ADVISORY_ENGINE.md`
+- `docs/architecture/CONTINUOUS_DOCUMENT_INGESTION.md`
 - `docs/architecture/decisions/ADR-0001-SCENARIO_DRIVEN_EVIDENCE_GROUNDED_PRODUCT.md`
+- `docs/architecture/decisions/ADR-0002-SHARED_ACCESS_AND_CONTINUOUS_INGESTION.md`
 
 These record the owner's direction: the full legally accessible judgment corpus should remain searchable; Acts/Rules should link to judgments and propositions; and commanders should be able to ask ordinary-English, situation-based questions and receive evidenced, conditional guidance and checklists. The proposed technical designs are **not** implementation or legal-review approvals.
+
+**Updated owner decisions (24 Nov 2026):** The initial app has **no RBAC, per-user document restrictions or feature tiers**. Every person allowed into the deployment can view all admitted documents and use every feature. All accepted content must therefore be eligible for the entire installation; source restrictions are assessed before shared ingestion, not by hiding results by user role. Users must be able to upload eligible policies, SOPs, circulars and reference documents at any time; the offline application automatically preserves, extracts/OCRs, analyses, indexes and proposes law/judgment/graph links. Such uploads are immediately distinguishable as unverified source material and cannot silently change authenticated law or mandatory guidance. Prioritise search, ingestion, graph and scenario capability, while retaining routine file safety, LAN access control, backup and prompt-injection isolation; more advanced hardening is a later phase.
+
+The earlier crawler-only exclusion of internal policy documents remains the **scope of that acquisition phase**, not a restriction on the new in-app user-upload capability. No present authorisation is given to acquire restricted documents externally.
 
 The existing `docs/legal-audit/EVIDENCE_STANDARD.md` and `docs/legal-audit/SOURCE_AUTHORITY_POLICY.md` remain controlling for authenticity, temporal applicability, source conflicts and review. Preserve the original corpus, access restrictions, offline deployment requirement, and AUTH-LEDGER approval boundaries. Do not turn scenario examples into asserted current law without independently verified evidence.
