@@ -639,7 +639,7 @@ def build_graph(c9graph, inv, texts, hf_paths):
         out = dict(r)
         out['c10_status'] = new or st
         out['c10_change'] = chg
-        out['evidence'] = ev
+        out['c10_evidence'] = ev  # C9 'evidence' is kept; C10 search evidence is separate (gate CSV check)
         rows.append(out)
     if seen != set(CHANGES):
         die(f'CHANGES reference unknown edges {set(CHANGES) - seen}')
@@ -832,7 +832,7 @@ def build(repo):
     files = {
         'primary_source_status_c10.csv': csv_text(STATUS_FIELDS, status),
         'registration_proposals_c10.csv': csv_text(REG_FIELDS, reg),
-        'amendment_graph_c10.csv': csv_text(list(c9graph[0].keys()) + ['c10_status', 'c10_change', 'evidence'], graph),
+        'amendment_graph_c10.csv': csv_text(list(c9graph[0].keys()) + ['c10_status', 'c10_change', 'c10_evidence'], graph),
         'escalation_matters_c10.csv': csv_text(ESC_FIELDS, esc),
         'acquisition_priority_c10.csv': csv_text(ACQ_FIELDS, acq),
         'preservation_owner_actions_c10.csv': csv_text(PRES_FIELDS, pres),

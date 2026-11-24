@@ -210,3 +210,5 @@ For each copy, the owner should:
 - **NOT_FOUND rows:** these describe what was searched and are not proof that a document does not exist. For ST-AA-NOTIFS and ST-ISO-2023 no external discovery has ever been done; the row says so.
 - **Builder dependencies:** the render hashes depend on the PyMuPDF version. The builder pins the C10 outputs by SHA-256, and other workstreams are adding files to that folder; if a pinned file changes, `--check` fails rather than silently rebasing.
 - **Repository state:** C9's PR #41 files were read at `cfc52d57` from the local repository. They are identical to the C9 worktree copies.
+
+**Correction (gate, Cycle 10 assembly).** `amendment_graph_c10.csv` first carried two columns named `evidence`, and the C10 search text overwrote the C9 evidence text in each row. The C10 text is now the separate column `c10_evidence`, and the C9 `evidence` column is restored unchanged. No status or count changes.
