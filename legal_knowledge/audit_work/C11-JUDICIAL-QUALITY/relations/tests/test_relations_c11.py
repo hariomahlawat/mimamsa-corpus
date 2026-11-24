@@ -63,7 +63,7 @@ def run_treatment(text, src_court="High Court of Delhi", tgt_court=None):
     res = {"state": "RESOLVED", "group": "G-tgt", "methods": ["TEST"], "cands": [], "notes": []} if tgt_court else \
         {"state": "UNRESOLVED", "group": "", "methods": [], "cands": [], "notes": []}
     b.occ = [{"jid": "J-src", "ci": 0, "start": c["start"], "end": c["end"], "clus": [c], "res": res,
-              "page": doc.page_at(c["start"]), "para": doc.para_at(c["start"]),
+              "page": doc.page_at(c["start"]), "para": doc.para_at(c["start"]), "footnote": R.footnote_line(text, c["start"]),
               "zone": "REPORTER_EDITORIAL" if c["start"] < doc.editorial_end else "BODY"}]
     b.classify_treatment()
     return b.cands
@@ -114,7 +114,7 @@ class TestNoOverrulesWithoutCue(unittest.TestCase):
         t = "9. The judgment in Y v. Z (2001) 3 SCC 100 does not lay down the correct law.\n"
         cands = run_treatment(t, "High Court of Delhi", "Supreme Court of India")
         self.assertFalse(any(c["proposed"] == "OVERRULES" for c in cands))
-        self.assertTrue(all(c["attribution"] != "COURT_LIKELY" for c in cands if c["cue_relation"] == "OVERRULES"))
+        self.assertTrue(all(c["attribution"] != "COURT_OWN_VOICE" for c in cands if c["cue_relation"] == "OVERRULES"))
 
     def test_past_history_is_reported_not_proposed(self):
         t = "21. Y v. Z (2001) 3 SCC 100 was overruled by a larger Bench in A v. B (2005) 2 SCC 1.\n"
@@ -129,7 +129,7 @@ class TestNoOverrulesWithoutCue(unittest.TestCase):
                 self.assertEqual(row["status"], R.STATUS_ADV, row["candidate_id"])
             if row["proposed_relation"] == "OVERRULES":
                 self.assertTrue(any(p.search(row["cue_text"]) for p in rx), row["candidate_id"])
-                self.assertEqual(row["attribution"], "COURT_LIKELY")
+                self.assertEqual(row["attribution"], "COURT_OWN_VOICE")
                 self.assertEqual(row["negated"], "NO")
             self.assertNotEqual(row["status"], "LEGALLY_VALIDATED")
         for row in read_csv("CASE_CITATION_GRAPH.csv"):
@@ -191,8 +191,98 @@ class TestAttribution(unittest.TestCase):
     @unittest.skipUnless(os.path.exists(os.path.join(OUT, "TREATMENT_CANDIDATES.csv")), "outputs not built")
     def test_outputs_non_court_attribution_never_proposed(self):
         for row in read_csv("TREATMENT_CANDIDATES.csv"):
-            if row["attribution"] != "COURT_LIKELY":
+            if row["attribution"] != "COURT_OWN_VOICE":
                 self.assertEqual(row["proposed_relation"], "", row["candidate_id"])
+
+
+class TestReviewFindingsC11(unittest.TestCase):
+    """Regression tests for the independent review findings REL-01 .. REL-12."""
+
+    def test_rel02_negated_governing_clause(self):
+        t = ("7. Such onus has not been discharged by the employer to show that the respondent's case is covered by "
+             "Y v. Z (2001) 3 SCC 100.\n")
+        self.assertFalse(any(c["proposed"] for c in run_treatment(t)))
+
+    def test_rel01_submission_leadin(self):
+        t = ("9. Mr. X, learned counsel, has contended that the judgment in Y v. Z (2001) 3 SCC 100 is per incuriam.\n")
+        cands = run_treatment(t, "Supreme Court of India", "Supreme Court of India")
+        self.assertFalse(any(c["proposed"] for c in cands))
+
+    def test_rel01_reported_bench(self):
+        t = "12. In the view of Justice A, Y v. Z (2001) 3 SCC 100 is no longer good law.\n"
+        cands = run_treatment(t, "Supreme Court of India", "Supreme Court of India")
+        self.assertFalse(any(c["proposed"] for c in cands))
+
+    def test_rel04_agent_is_not_target(self):
+        t = "15. Y v. Z (2001) 3 SCC 100, while overruling an earlier view, held that the Tribunal had jurisdiction.\n"
+        cands = run_treatment(t, "Supreme Court of India", "Supreme Court of India")
+        self.assertFalse(any(c["proposed"] for c in cands))
+        self.assertFalse(any(c["status"] != R.STATUS_AUTO for c in cands if c["cue_relation"] == "OVERRULES"))
+
+    def test_rel04_patient_report_is_documentary_not_adviser(self):
+        t = "15. Y v. Z (2001) 3 SCC 100 was overruled by a larger Bench in a later decision.\n"
+        cands = run_treatment(t, "Supreme Court of India", "Supreme Court of India")
+        ov = [c for c in cands if c["cue_relation"] == "OVERRULES"]
+        self.assertTrue(ov)
+        self.assertTrue(all(c["proposed"] == "" and c["status"] == R.STATUS_DOC for c in ov))
+
+    def test_rel05_own_voice_overruling(self):
+        t = "121. Y v. Z (2001) 3 SCC 100 must be and is accordingly overruled.\n"
+        cands = run_treatment(t, "Supreme Court of India", "Supreme Court of India")
+        self.assertTrue(any(c["proposed"] == "OVERRULES" and c["status"] == R.STATUS_ADV for c in cands))
+
+    def test_rel03_footnote_citation_not_bound(self):
+        t = ("2. The issue is covered by a recent decision rendered by us.\n3\n(2001) 3 SCC 100\n")
+        self.assertFalse(any(c["proposed"] for c in run_treatment(t)))
+
+    def test_rel06_distinguishing_data_is_not_treatment(self):
+        t = "4. We reproduce the distinguishing data for Y v. Z (2001) 3 SCC 100 in a table.\n"
+        self.assertFalse(any(c["proposed"] for c in run_treatment(t)))
+
+    def test_rel07_name_reference_contradicted(self):
+        words = {"navtej", "singh", "union", "india"}
+        t = "the Court in Navtej Singh Johar (supra) held"
+        i = t.find("Navtej")
+        self.assertFalse(R.name_ref_ok(t, i, i + len("Navtej Singh"), words))
+        t2 = "the Court in Navtej Singh (supra) held"
+        self.assertTrue(R.name_ref_ok(t2, t2.find("Navtej"), t2.find("Navtej") + len("Navtej Singh"), words))
+        t3 = "text\nMADRAS BAR ASSOCIATION v. UNION OF INDIA\nmore"
+        self.assertFalse(R.name_ref_ok(t3, t3.find("MADRAS"), t3.find("MADRAS") + 10, {"madras", "bar"}))
+        self.assertFalse(R.strong_bigram(("mills", "ltd")))
+
+    def test_rel08_own_running_header_masked(self):
+        t = "text\n[2018] 11 S.C.R.\n28. The petitioner relies on [2018] 11 S.C.R. 1 and [2016] 4 SCR 909."
+        m = R.mask_own_headers(t, {("2018", "11")})
+        keys = [c["key"] for c in R.find_citations(m)]
+        self.assertNotIn("SCR|2018|11|28", keys)
+        self.assertIn("SCR|2018|11|1", keys)
+        self.assertIn("SCR|2016|4|909", keys)
+        self.assertEqual(len(m), len(t))
+
+    def test_rel12_unit_normalised(self):
+        self.assertEqual(R.normalise_unit("AR-1954", "s"), "r")
+        self.assertEqual(R.normalise_unit("AA-1950", "r"), "s")
+        self.assertEqual(R.normalise_unit("COI", "art"), "art")
+
+    @unittest.skipUnless(os.path.exists(os.path.join(OUT, "STATUTE_JUDGMENT_LINKS.csv")), "outputs not built")
+    def test_rel10_rel11_rel12_outputs(self):
+        for row in read_csv("STATUTE_JUDGMENT_LINKS.csv"):
+            self.assertNotEqual(row["relationship"], "PROVISION_APPLIED")
+            if row["instrument_id"] == "COI":
+                self.assertNotEqual(row["relationship"], "PROVISION_CHALLENGED")
+            if row["instrument_id"] == "CRPC-1973":
+                self.assertGreaterEqual(row["judgment_date"], R.CRPC_NEW_CODE_FROM, row["link_id"])
+            if row["instrument_id"] == "AR-1954" and row["provision_id"]:
+                self.assertNotIn(":s.", row["provision_id"])
+            if row["instrument_id"] == "AA-1950" and row["provision_id"]:
+                self.assertNotIn(":r.", row["provision_id"])
+
+    @unittest.skipUnless(os.path.exists(os.path.join(OUT, "TREATMENT_CANDIDATES.csv")), "outputs not built")
+    def test_rel01_adviser_queue_only_own_voice(self):
+        for row in read_csv("TREATMENT_CANDIDATES.csv"):
+            if row["status"] == R.STATUS_ADV:
+                self.assertIn(row["proposed_relation"], ("OVERRULES", "REVERSES", "QUESTIONS"), row["candidate_id"])
+                self.assertEqual(row["attribution"], "COURT_OWN_VOICE")
 
 
 class TestVersionNotAssignedWithoutEvidence(unittest.TestCase):
@@ -248,7 +338,7 @@ class TestReproducibility(unittest.TestCase):
     @unittest.skipUnless(repo_ok(), "pinned repo/commits not available")
     @unittest.skipUnless(os.path.exists(os.path.join(OUT, "OUTPUT_SHA256SUMS")), "outputs not built")
     def test_check_mode_byte_identical(self):
-        r = subprocess.run([sys.executable, "-I", os.path.join(TOOLS, "relations_c11.py"), "--repo", REPO, "--check"],
+        r = subprocess.run([sys.executable, "-B", "-I", os.path.join(TOOLS, "relations_c11.py"), "--repo", REPO, "--check"],
                            capture_output=True, text=True, timeout=1800)
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
         self.assertIn("CHECK OK", r.stdout)

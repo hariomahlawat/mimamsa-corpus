@@ -594,23 +594,42 @@ def method_notes(b):
     return [
         "## Method notes and limits",
         "",
-        "- **Citation detection.** Patterns cover SCC, SCC OnLine, SCR (all common layouts), AIR, INSC, JT, SLT, SCALE, SLR, "
-        "HC neutral citations, and case numbers (Civil/Criminal Appeal, SLP, W.P.(C), CWP, SWP, OWP, WRIA, LPA).",
-        "- **Resolution order.**",
-        "  - First, deterministic keys from the target's own metadata (neutral citation, reported citation, or a "
-        "self-printed HC neutral citation).",
-        "  - Then the C10-held curated crosswalk.",
-        "  - Then parallel citations learned from metadata-resolved clusters.",
-        "  - Last, a conservative fallback: case number plus a party-name bigram, or party bigram plus year plus court.",
-        "  - Ambiguous matches stay UNRESOLVED_AMBIGUOUS with their candidates.",
-        "- **Dropped references.** These are not citations and are dropped: self-citations, the citing judgment's own "
-        "case numbers, and same-day connected matters.",
-        "- **Treatment attribution.** Cue words in reporter headnotes or case-law lists, in quoted passages, in party "
-        "submissions, or in reports of what a lower forum or another bench did never produce a proposal. Neither do "
-        "past-tense participles without present or first-person voice, or cues more than 150-250 characters from the "
-        "citation. OVERRULES, REVERSES and QUESTIONS proposals always go to adviser review.",
-        "- **Coverage limits.** Coverage is limited to the crawler judgment corpus (ad77758d). The official copies of "
-        "Girish, Parashotam, Mullikote, Isaac and others in the C5 working store or HF legal_knowledge were not part "
-        "of this input. The absence of a hit is not proof that no treatment exists.",
+        "**Citation detection.**",
+        "- Patterns cover SCC, SCC OnLine, SCR (all common layouts), AIR, INSC, JT, SLT, SCALE, SLR, HC neutral citations, "
+        "and case numbers (Civil/Criminal Appeal, SLP, W.P.(C), CWP, SWP, OWP, WRIA, LPA).",
+        "- The citing judgment's own SCR running headers (for example '[2018] 11 S.C.R.') are blanked before detection.",
+        "- A footnote citation is tied to its body footnote marker (for example 'Gawas Anil Madso4').",
+        "",
+        "**Resolution order.**",
+        "1. Deterministic keys from the target's own metadata.",
+        "2. The C10-held curated crosswalk.",
+        "3. Parallel citations learned from metadata-resolved clusters.",
+        "4. A conservative fallback: case number plus party bigram, or party bigram plus year plus court.",
+        "",
+        "The fallback has three guards:",
+        "- a neighbour-contradiction check ('Indian Express Newspapers' is not 'Express Newspapers');",
+        "- a mismatch guard on every reporter key in the cluster;",
+        "- one answer per citation string.",
+        "",
+        "Ambiguous matches stay unresolved, with their candidates listed.",
+        "",
+        "**Treatment.** Cue words count only in the sentence carrying the anchor, or in the next sentence through an "
+        "explicit back-reference ('the said judgment'). A proposal needs all five of these:",
+        "1. Own voice: not reporter matter, not a quotation (across pages), and not a submission (sentence or "
+        "paragraph lead-in). It must also not be a report of another bench or lower forum.",
+        "2. Tight binding: only connecting words about the cited authority lie between cue and anchor.",
+        "3. No other authority in the same sentence. Strong relations are exempt, but their binding must still hold.",
+        "4. No negation in the governing clause.",
+        "5. For OVERRULES, REVERSES and QUESTIONS, a present or first-person form ('is accordingly overruled', 'we "
+        "overrule', 'does not lay down the correct law').",
+        "",
+        "Only own-voice strong proposals go to LEGAL_INTERPRETATION_ADVISER_REVIEW. Reports of another decision's "
+        "treatment, where the cited authority is the patient, are DOCUMENTARY_CHECK_REQUIRED with no proposal.",
+        "",
+        "**Coverage limits.**",
+        "- Coverage is limited to the crawler judgment corpus (ad77758d).",
+        "- The official copies of Girish, Parashotam, Mullikote, Isaac and others held in the C5 working store or HF "
+        "legal_knowledge were not part of this input.",
+        "- The absence of a hit is not proof that no treatment exists.",
         "",
     ]

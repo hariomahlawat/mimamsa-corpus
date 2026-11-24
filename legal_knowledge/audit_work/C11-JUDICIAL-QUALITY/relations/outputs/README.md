@@ -1,4 +1,4 @@
-# C11 judicial relationships and statute links
+# C11 judicial relationships and statute links (rev. 1.1, after independent review)
 
 **Status.** Evidence findings only.
 - Every typed relation is a proposal. The status levels are AUTOMATED_DETECTED, DOCUMENTARY_CHECK_REQUIRED and LEGAL_INTERPRETATION_ADVISER_REVIEW. LEGALLY_VALIDATED is never assigned.
@@ -6,122 +6,152 @@
 - No provision version is assigned.
 - Readings are text-layer readings by an AI agent (Claude Opus 5.5 subagent). They are not human-confirmed.
 
+**Revision 1.1.** This revision answers the independent review `c10out/rev_c11/fable_review_relations_c11.md` (findings REL-01 to REL-19). Its design goal is fewer proposals, each correctly bound. Anything that is not clearly the court's own words, bound to the right authority, stays CITES at AUTOMATED_DETECTED or DOCUMENTARY_CHECK_REQUIRED.
+
 ## Reproduce
 
 ```
-python3.11 -I tools/relations_c11.py --repo /home/user/c7          # build outputs/
-python3.11 -I tools/relations_c11.py --repo /home/user/c7 --check  # rebuild in memory, byte-compare
-python3.11 -I -m unittest discover -s tests -v                     # C11_SKIP_SLOW=1 skips the --check test
+python3.11 -B -I tools/relations_c11.py --repo /home/user/c7          # build outputs/
+python3.11 -B -I tools/remeasure_review_c11.py                         # re-score on the reviewer's sampled rows
+python3.11 -B -I tools/relations_c11.py --repo /home/user/c7          # rebuild so OUTPUT_SHA256SUMS covers the re-measure files
+python3.11 -B -I tools/relations_c11.py --repo /home/user/c7 --check  # byte-compare
+python3.11 -B -I -m unittest discover -s tests -v                     # C11_SKIP_SLOW=1 skips the --check test
 ```
 
-- **Dependencies.** Standard library only: no PyMuPDF, no jsonschema. Runs on Python 3.11+ in about 90 seconds.
-- **Deterministic.** Every row id is a SHA-256 of its key.
+- **Dependencies.** Standard library only. Runs on Python 3.11+ (also tested with the venv, which is 3.13).
+- **`-B`** prevents `tools/__pycache__` from being written (REL-19).
 
 ## Pinned inputs (read-only)
 
 The SHA-256 of each input is in `GRAPH_SUMMARY.json` under `input_sha256`.
 
-- **Text layer and metadata:** `data/text`, `data/meta` at raw-data commit `ad77758d`. These are read as git objects, with no checkout. There are 4,259 judgment/order records, which is 3,951 distinct copies by sha; 3,944 of them have text.
-- **Amendment graph:** `cfc52d57:legal_knowledge/audit_work/C9-LEGAL-EVIDENCE/STATUTORY/amendment_graph.csv`, plus the C10 statuses in `C10-RECONCILIATION/workstreams/statutory/amendment_graph_c10.csv`.
-- **Curated cases:** `21e73b83:legal_knowledge/curated_originals/case_law/v0.9/cases_53.jsonl`, plus the C10 `CURATED_CASE_COPY_STATUS.csv`.
-- **C10 judicial outputs:**
-  - `JUDGMENT_RECONCILIATION.csv`, which supplies the copy groups, so renditions of one judgment form one target;
-  - `JUDICIAL_TREATMENT_C10.csv`;
-  - `TREATMENT_CITATION_HITS.csv`;
-  - `HF_JUDGMENT_RELATIONSHIPS.csv`, used as a cross-check: all 168 J-to-J CITES edges are reproduced;
-  - `HF_JUDGMENT_LEGAL_ISSUES.jsonl`, used as the statute cross-check.
-- **Holdout.** `holdout/` was not opened.
+- `data/text` and `data/meta` at `ad77758d`, read as git objects;
+- the amendment graph at `cfc52d57`, plus the C10 graph statuses;
+- `cases_53.jsonl` at `21e73b83`, plus the C10 `CURATED_CASE_COPY_STATUS.csv`;
+- C10 `JUDGMENT_RECONCILIATION.csv` (copy groups);
+- the C10 HF relationships and legal issues (cross-checks);
+- the review's sampled rows, used only by `remeasure_review_c11.py`.
+
+`holdout/` was not opened.
 
 ## Outputs
 
 | File | Content |
 | --- | --- |
-| `CASE_CITATION_GRAPH.csv` | One row per (citing judgment, cited authority). `relation` is always CITES. The row gives the target, or the raw string with candidates; the resolution method; the first page and paragraph; a 250-character excerpt; occurrences; the zone (BODY or REPORTER_EDITORIAL); and treatment proposals |
-| `TREATMENT_CANDIDATES.csv` | One row per treatment cue word near a citation, or near a later party-name reference to a resolved target. Each row has the attribution class, a negation flag, the proposed relation (only for COURT_LIKELY), the status and the reasons |
-| `STATUTE_JUDGMENT_LINKS.csv` | One row per (judgment, instrument[, provision]). Each row has a normalised provision id (for example `AA-1950:s.69`, `AR-1954:r.180`, `COI:art.226`, `PRA-1961:reg.173`, `ENT-1982:r.5`), the relationship, the cue, pages, the matched amendment-graph edges, the version status, the IPC-to-BNS note and the C10 cross-check |
-| `PRIORITY_TREATMENT_DOSSIER.md` | Priority cases, with verified pinpoints and excerpts (quotations are re-checked on every build), graph counts, treatment candidates, contrary authority and open questions |
-| `GRAPH_SUMMARY.json` | Counts by relation, status, method and attribution; resolution rates; top in-degree; input hashes |
-| `OUTPUT_SHA256SUMS` | Hashes of every output, including this README |
+| `CASE_CITATION_GRAPH.csv` | One row per (citing judgment, cited authority). `relation` is always CITES. The row gives the target or raw string with candidates, the resolution method, page/paragraph, an excerpt, occurrences, the zone and treatment proposals |
+| `TREATMENT_CANDIDATES.csv` | One row per cue word in the sentence carrying an anchor. `anchor` is CITATION_STRING, FOOTNOTE_MARKER or NAME_REFERENCE. Each row has the attribution class, a negation flag, the proposed relation (only for COURT_OWN_VOICE), the status and the reasons |
+| `STATUTE_JUDGMENT_LINKS.csv` | One row per (judgment, instrument[, provision]). Each row has the normalised provision id (`printed_unit` keeps the wording as printed), the relationship, the bound cue, the amendment-graph edges, the version status, the IPC-to-BNS note and the C10 cross-check |
+| `PRIORITY_TREATMENT_DOSSIER.md` | Priority cases. The verified quotations are re-checked on every build. The candidate tables are regenerated from the revised rules |
+| `GRAPH_SUMMARY.json` | Counts by relation, status, method and attribution; resolution rates; input hashes |
+| `REVIEW_REMEASURE_C11.csv` / `.json` | Before/after for each of the 223 rows sampled by the review, with precision per category |
+| `OUTPUT_SHA256SUMS` | Hashes of every output, including this README and the re-measure files |
 
-## Method
+## Method (rev. 1.1)
 
-**1. Citation detection.**
-- Reporter citations: SCC (bracketed, parenthesised, plain and Supp), SCC OnLine, SCR (all layouts and Supp), AIR, INSC, JT, SLT, SCALE and SLR.
-- HC neutral citations.
-- Case numbers: Civil and Criminal Appeal, SLP(C), W.P.(C), CWP, SWP, OWP, WRIA and LPA.
-- Parallel citations joined by `:` / `=` / `,` form one cluster.
+### Citations
+- **Running headers (REL-08).** The citing judgment's own SCR running headers (its own year and volume, for example `[2018] 11 S.C.R.` at a page top) are blanked, at the same length, before detection.
+- **Footnotes (REL-03).** A footnote citation is tied to the body word carrying its marker (`Gawas Anil Madso4`). That marker is used both as the party-name window for resolution and as the treatment anchor. A footnote with no marker gets no party fallback and no treatment.
+- **Resolution order:**
+  1. target-metadata keys (neutral or reported citation, or a self-printed HC neutral citation);
+  2. the C10-held curated crosswalk;
+  3. learned parallel citations;
+  4. case number plus party bigram;
+  5. party bigram plus year plus court.
+- **Fallback guards:**
+  - a neighbour-contradiction check (`Indian Express Newspapers` is not `Express Newspapers`; REL-09);
+  - the citation-mismatch guard applied to every reporter key in a cluster (REL-09);
+  - one answer per citation string (REL-14: `Major A. Hussain, AIR 1998 SC 577` now resolves the same way everywhere).
 
-**2. Resolution.** Conservative, with the first match winning:
-1. Neutral citation or reported citation in the target's own metadata, or a self-printed HC neutral citation. Status AUTOMATED_DETECTED.
-2. The C10-HELD curated crosswalk.
-3. Parallel citations learned from clusters resolved at step 1. Any alias that maps to more than one target is discarded.
-4. Case number plus a party-name bigram.
-5. Party-name bigram plus year plus court.
+### Treatment
+A cue counts only in the sentence carrying the anchor, or in the next sentence when that sentence opens with a back-reference ("The facts of the aforesaid case ..."). A proposal needs all of these:
+1. **Own voice.** Not reporter headnote matter: the editorial zone, plus bracketed report-page references such as `[594 E-H]` (REL-06). Not inside a quotation: unclosed quote marks or a lead-in, looking back up to 4,000 characters across pages. Not a submission: the sentence or the paragraph lead before the cue, including "contended", "stand of", "According to him", "in the view of" (REL-01). Not a report of another bench or lower forum.
+2. **Tight binding.** Only connecting words about the cited authority lie between cue and anchor. Page furniture (signatures, headers, page numbers) is ignored.
+3. **No other authority in the same sentence.** OVERRULES, REVERSES and QUESTIONS are exempt, but their binding must hold.
+4. **No negation in the governing clause** (REL-02: "has not been discharged ... to show that ... is covered by").
+5. **Direction.** The cited authority must be the patient, never the agent (REL-04). OVERRULES, REVERSES and QUESTIONS need a present or first-person form: "is accordingly overruled", "we (also) overrule", "does not lay down the correct law", "is per incuriam" (REL-05).
+6. **Name references (REL-07).** A name reference needs a case marker ("(supra)", "case", "v.", "in ...") and a strong bigram (no corporate or generic words). It must not be running-header text, and its neighbouring words must not contradict the target ("Navtej Singh **Johar**").
 
-Steps 2-5 give DOCUMENTARY_CHECK_REQUIRED. A match is left unresolved, and its candidates recorded, when it is:
-- ambiguous (UNRESOLVED_AMBIGUOUS);
-- a conflict (UNRESOLVED_CONFLICT);
-- later than the citing judgment (UNRESOLVED_TEMPORAL_CONFLICT);
-- a party/year match whose cited page differs from the target's known citation (UNRESOLVED_CITATION_MISMATCH);
-- a case number only (UNRESOLVED_CASE_NUMBER_ONLY).
+**Status rules.**
+- Only own-voice strong proposals go to LEGAL_INTERPRETATION_ADVISER_REVIEW.
+- Reported treatment of a patient-bound target is DOCUMENTARY_CHECK_REQUIRED with no proposal.
+- Everything else is AUTOMATED_DETECTED.
 
-These references are dropped, because they are not citations:
-- self-citations (688);
-- the citing judgment's own case numbers (38,444);
-- same-day connected matters (5,124).
+### Statute links
+**Labels (REL-10).** A label says what the bound cue shows:
 
-**3. Treatment.** A stronger relation is proposed only when all of these hold:
-- the cue is explicit (for example "does not lay down the correct law", "distinguishable", "is of no assistance", "squarely covered by", "we follow");
-- the attribution is COURT_LIKELY.
+| Label | Status | When used |
+| --- | --- | --- |
+| STATUTE_MENTIONED | AUTOMATED_DETECTED | Statute-level rows |
+| RELATIONSHIP_UNRESOLVED | AUTOMATED_DETECTED | Provision with no bound cue |
+| PROVISION_QUOTED | AUTOMATED_DETECTED | Bound quotation cue |
+| PARTY_INVOKED | AUTOMATED_DETECTED | "invoking / filed ... under" |
+| CHARGED_OR_CONVICTED_UNDER | AUTOMATED_DETECTED | Charge or conviction under the provision |
+| POWER_EXERCISED_UNDER | AUTOMATED_DETECTED | "in exercise of powers under" |
+| PROVISION_CHALLENGED | DOCUMENTARY_CHECK_REQUIRED | "vires/validity of <provision>", or "<provision> is ultra vires" |
+| CHALLENGE_GROUND_CITED | DOCUMENTARY_CHECK_REQUIRED | Constitution articles cited in a challenge |
+| PROVISION_HELD_INAPPLICABLE | DOCUMENTARY_CHECK_REQUIRED | Bound inapplicability wording, excluding statutory "shall not apply" and contrasts |
+| PROVISION_INTERPRETED | DOCUMENTARY_CHECK_REQUIRED | Bound interpretation wording, not when reporting another judge |
+| HISTORICAL_VERSION_RELEVANT | DOCUMENTARY_CHECK_REQUIRED | Bound historical-version wording |
 
-No proposal is made when the wording is in any of these:
-- reporter headnote or case-law matter (REPORTER_EDITORIAL);
-- a quoted passage (QUOTED_PASSAGE), detected from unclosed quotation marks or a quotation lead-in with no closing marker;
-- a party submission (PARTY_SUBMISSION_OR_MIXED);
-- a report of what a lower forum did (LOWER_FORUM_REPORTED);
-- a report of another court's act (REPORTED_TREATMENT_OF_TARGET);
-- wording where the cited decision is the agent (TARGET_IS_AGENT);
-- a past participle with no present or first-person voice (DIRECTION_UNCLEAR);
-- the following sentence, with no back-reference (NEXT_SENTENCE_NO_BACK_REFERENCE);
-- a cue too far from the citation (CUE_TOO_FAR);
-- a negated cue.
+PROVISION_APPLIED has been withdrawn.
 
-Further rules:
-- OVERRULES needs a citing court of equal or higher rank.
-- OVERRULES, REVERSES and QUESTIONS always go to LEGAL_INTERPRETATION_ADVISER_REVIEW.
-- Other proposals get DOCUMENTARY_CHECK_REQUIRED.
+**Instruments (REL-11).** CRPC-1898 is used when the text prints 1898. CRPC-UNSPECIFIED is used when no year is printed and the judgment is dated before 1974-04-01. CRPC-1973 is never assigned before that date.
 
-**4. Statute links.**
-- The relationship defaults to STATUTE_MENTIONED (no provision) or RELATIONSHIP_UNRESOLVED (provision, no cue).
-- PROVISION_QUOTED, APPLIED, INTERPRETED, CHALLENGED and HELD_INAPPLICABLE, and HISTORICAL_VERSION_RELEVANT, need a cue within 120/150 characters in the same sentence. Cues inside quotations or submissions are ignored, except for CHALLENGED and QUOTED.
-- Provisions are linked to the amendment-graph instrument and the matching edge ids.
-- **Version.** `version_status` is VERSION_NOT_ESTABLISHED for every row. No instrument is shown to have a complete amendment history in the graph: each carries NOT_LOCATED or unknown-scope rows, and IPC, CrPC and IEA carry only repeal rows. The set `COMPLETE_HISTORY_INSTRUMENTS` is empty and auditable.
-- **IPC to BNS.** For IPC/CrPC/IEA/BNS/BNSS/BSA rows, the 1 July 2024 switch is noted and not assumed. The BNS commencement edge is NOT_LOCATED in the graph.
+**Units (REL-12).** Units are normalised by instrument: rules use `r.`, Acts use `s.`.
+
+**Versions.** All rows are VERSION_NOT_ESTABLISHED. No instrument has a complete amendment history in the graph, and `COMPLETE_HISTORY_INSTRUMENTS` is deliberately empty. The IPC-to-BNS switch of 1 July 2024 is noted and not assumed.
 
 ## Counts (this build)
 
-**Citation graph.**
-- 24,000 edges, all CITES.
-- RESOLVED: 2,586, which is a **10.8%** edge resolution rate. For edges carrying an SCC, SCR or INSC string the rate is 13.8% (1,490 of 10,794). The rate is low mainly because most cited authorities are not in the corpus.
-- UNRESOLVED: 17,970.
-- Other target states: CASE_NUMBER_ONLY 3,297, CITATION_MISMATCH 63, AMBIGUOUS 55, TEMPORAL_CONFLICT 27, CONFLICT 2.
-- 262 distinct resolved targets.
-- Top in-degree: Bijender Singh (2025 INSC 549) 452, Dharamvir 352, Delhi HC Gawas Anil Madso 127.
+**Citation graph**
+- 23,240 edges, all CITES.
+- **RESOLVED: 2,954**, a **12.7%** edge resolution rate. For SCC/SCR/INSC edges the rate is 14.3% (1,438 of 10,074).
+- Rev. 1.0 had 24,000 edges and a 10.8% rate. The difference comes from blanking 6,335 of the citing judgments' own running headers before detection, and from footnote-marker binding.
+- Unresolved edges, by reason:
 
-**Treatment.**
-- 3,550 cue hits.
-- Proposals: APPLIES 198, DISTINGUISHES 41, FOLLOWS 30, QUESTIONS 7, OVERRULES 3. The OVERRULES proposals are Parashotam to Shri Kant Sharma, and two from Puttaswamy (2018) concerning McDowell and Binoy Viswam.
-- 57 rows are at adviser review.
+| State | Edges |
+| --- | --- |
+| Not in corpus / no match | 16,766 |
+| Case number only | 3,292 |
+| Ambiguous | 119 |
+| Cited page contradicts the target's citation | 82 |
+| Candidate decided after the citing judgment | 25 |
+| Conflicting matches | 2 |
 
-**Statute links.**
-- 11,067 links in 2,430 judgments.
-- 515 match an amendment-graph edge.
-- All are VERSION_NOT_ESTABLISHED.
+- 8 remaining edges carry a key with the citing judgment's own SCR year and volume. These are genuine page citations with a page number on the same line.
+
+**Treatment**
+- 2,567 cue hits.
+- Proposals: APPLIES 201, DISTINGUISHES 9, FOLLOWS 5, OVERRULES 1. The single OVERRULES proposal is Parashotam para 32 on Shri Kant Sharma.
+- **Adviser queue: 1 row.** 218 rows are DOCUMENTARY_CHECK_REQUIRED.
+- The two Puttaswamy (2018) rows that rev. 1.0 proposed as OVERRULES (McDowell, Binoy Viswam) are withdrawn: they are Shayara Bano's words, inside a quotation or introduced by "in the view of Justice Nariman".
+
+**Statute links**
+- 11,076 links in 2,430 judgments; all are VERSION_NOT_ESTABLISHED.
+- By label: PARTY_INVOKED 539, CHARGED_OR_CONVICTED_UNDER 221, POWER_EXERCISED_UNDER 77, CHALLENGE_GROUND_CITED 754, PROVISION_CHALLENGED 28, PROVISION_QUOTED 138, PROVISION_HELD_INAPPLICABLE 14, PROVISION_INTERPRETED 8, HISTORICAL_VERSION_RELEVANT 7.
+- CRPC-1898: 37 rows. CRPC-UNSPECIFIED: 5 rows.
+
+## Re-measure on the reviewer's sampled rows
+
+The reviewer's verdicts are taken as the truth for each row. Full detail is in `REVIEW_REMEASURE_C11.json`.
+
+| Category | Before (supported / proposed) | After (supported / still proposed) | Unsupported withdrawn | Supported lost |
+| --- | --- | --- | --- | --- |
+| OVERRULES / QUESTIONS | 1 / 10 | 1 / 1 | 9 | 0 |
+| Reported treatment at adviser review | 13 / 47 | 3 / 3, now DOCUMENTARY_CHECK_REQUIRED | 34 | 10 |
+| APPLIES / FOLLOWS | 18 / 25 | 13 / 14 | 6 | 5 |
+| DISTINGUISHES | 5 / 15 | 3 / 3 | 10 | 2 |
+| Resolved edges (40) | 39 / 40 | 39 / 39 | 1 | 0 |
+| Statute cue labels (30) | 9 / 30 | 7 / 7 | 21 | 2 |
+
+**Notes on the edge rows:**
+- Among the 20 unresolved edges, 8 are now resolved. All 7 are correct footnote-marker or key-consistency links, each checked against its body marker: Rajveender Singh Mallhi ×3, Sudesh Kumar Sharma ×2, Manoj K L, and Major A. Hussain. The eighth row was a spurious own-header edge, now removed.
+- The Express Newspapers mislink is gone: 0 edges.
 
 ## Limits
 
-- **Paragraph numbers** in the graph are heuristic.
-- **Cue lexicons** miss implicit treatment, and absence of a hit is not proof of absence.
-- **Party-bigram fallback** can mislink cases with generic party names. Those rows are DOCUMENTARY_CHECK_REQUIRED.
+- **Paragraph numbers** are heuristic.
+- **Recall.** The cue lexicons and the binding rules trade recall for precision. Supported treatment is lost when it sits in reported, multi-authority, list or footnote-only contexts.
+- **Unanchored targets.** A target not held in the corpus, and named without a citation string in the same sentence, cannot be anchored. One example: the Puttaswamy (2017) own-voice overruling of "ADM J1;1balpur" (OCR) and Bhanudas Gawde, whose footnote 213 citation is not in the text layer.
 - **Copies outside this input** were not read: the official copies of Girish, Parashotam, Mullikote and Isaac held in the C5 working store or HF.
 - **SCR renditions** are AWS e-SCR mirror copies, not signed originals.
