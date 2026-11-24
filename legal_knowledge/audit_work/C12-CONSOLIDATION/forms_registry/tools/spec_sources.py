@@ -27,7 +27,7 @@ SOURCES = {
         title="Gazette of India No. 47, Pt II-Sec 4, 27 Nov 1954: S.R.O. 484 (Army Rules, 1954) with Appendices",
         edition_evidence="as notified 27-11-1954 (Gazette masthead, p.1); printed pp.291-378",
         evidence_class="HELD_PRIMARY_GAZETTE_FACSIMILE (C5); scanned image with OCR text layer",
-        text_quality="OCR", match_mode="fuzzy", access_marking="NONE OBSERVED on pp.59-61 images; other pages not visually checked",
+        text_quality="OCR", match_mode="fuzzy", access_marking="NONE OBSERVED on page images of pp.2 (upper part), 59-61, 72; other pages not visually checked",
     ),
     "AR54-IC": dict(
         kind="pdf", root="scratch",
@@ -55,7 +55,7 @@ SOURCES = {
         c5_copy_id="C5-SRC-P0-AR-AMD-AR-029~C1", c5_source_id="C5-SRC-P0-AR-AMD-AR-029",
         title="Gazette Extraordinary Pt II-Sec 4, 06-12-1993: S.R.O. 17(E) (Army Rules amendment incl. Appendices III-V)",
         edition_evidence="as published 06-12-1993", evidence_class="Gazette scan with OCR text layer (C5 LOCATED)",
-        text_quality="OCR", match_mode="fuzzy", access_marking="NOT_CHECKED",
+        text_quality="OCR", match_mode="fuzzy", access_marking="NONE OBSERVED on p.19 image; other pages not visually checked",
     ),
     # ---------------------------------------------------------------- MML (owner-supplied; UNVERIFIED_MANUAL)
     "MML2": dict(
@@ -172,7 +172,17 @@ SOURCES = {
         title="Armed Forces Tribunal (Procedure) Rules, 2008: India Code file 'AFT-Procedure-Rules-2008' (Gazette Extraordinary scan)",
         edition_evidence="Gazette of India Extraordinary Pt II-Sec 4 scan via India Code (c7 data/meta rules-aft-procedure-rules-2008)",
         evidence_class="Government site copy (India Code bitstream); scanned with OCR text layer; not in C5 copy register",
-        text_quality="OCR", match_mode="fuzzy", access_marking="NOT_CHECKED",
+        text_quality="OCR", match_mode="fuzzy", access_marking="NONE OBSERVED on page images checked (pp.26, 27, 29 band, 37, 38, 42 upper part, 46, 47; 'IndiaCode' watermark only); other pages not visually checked",
+    ),
+    "AFTPRA11-C7": dict(
+        kind="pdf", root="c7git",
+        path="data/raw/indiacode/0000/fc27032fadfe44fdd20f899612d45b690f469bcdc96463ac8ea4ae9f82e29904.pdf",
+        sha256="fc27032fadfe44fdd20f899612d45b690f469bcdc96463ac8ea4ae9f82e29904",
+        c5_copy_id="", c5_source_id="(not in C5 registers; c7 data/meta rules-aft-amendment-procedure-rules-2011)",
+        title="AFT (Procedure) Amendment Rules, 2011: S.R.O. 05(E) of 29-07-2011, Gazette of India Extraordinary Pt II-Sec 4 No. 4 (India Code file, 2 pp.: Hindi p.1, English p.2)",
+        edition_evidence="as published 29-07-2011 (masthead p.1; page image checked)",
+        evidence_class="Government site copy (India Code bitstream); bilingual scan with text layer; added C12 remediation (WSG-R06)",
+        text_quality="OCR", match_mode="fuzzy", access_marking="NONE OBSERVED on pp.1-2 images",
     ),
     "AFTPRAC09-C7": dict(
         kind="pdf", root="c7git",
@@ -224,6 +234,5 @@ GITTEXT_SCANS = [
     ("data/text/act-crpc-1973-consolidated.txt", "CrPC 1973 consolidated incl. Second Schedule (c7 derived text; repealed w.e.f. 01-07-2024 subject to savings)"),
     ("data/text/act-air-force-1950.txt", "Air Force Act 1950 (c7 derived text)"),
     ("data/text/act-navy-1957.txt", "Navy Act 1957 (c7 derived text)"),
-    ("data/text/rules-aft-amendment-procedure-rules-2011.txt", "AFT (Procedure) Amendment Rules 2011 (c7 derived text)"),
     ("data/text/rules-aft-procedure-investigation-rules-2008.txt", "AFT (Procedure for Investigation...) Rules 2008 (c7 derived text)"),
 ]

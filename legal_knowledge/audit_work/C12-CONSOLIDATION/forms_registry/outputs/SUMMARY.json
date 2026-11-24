@@ -1,8 +1,10 @@
 {
  "workstream": "C12-CONSOLIDATION / Workstream G - forms registry",
- "tool_version": "c12-wsg-forms-registry/1.0.0",
+ "tool_version": "c12-wsg-forms-registry/1.1.0",
  "recorded_on": "2026-11-24",
  "pymupdf_version": "2.1",
+ "python_version": "3.13.18",
+ "scope_statement": "Army-first scope: this cycle registers forms from held Army Rules 1954 copies and from the AFT (Procedure) Rules 2008, DPP Rules 1953, Indian Soldiers (Litigation) Rules 1938, TA Rules 1948, Indian Tolls Rules 1942 and Assam Rifles Act 1941 copies held. Air Force and Navy rule-level instruments were NOT assessed (held derived texts heading-scanned only; official copies NOT_HELD); the 67 families are not the military-law form universe.",
  "register_definition": "docs/product/FORM_DISCOVERY_AND_COVERAGE_REGISTER.md and ADR-0003 @ origin/docs/mimamsa-product-blueprint-2026-11-24",
  "verification_status_all_rows": "DISCOVERED_FROM_SOURCE_NOT_LEGALLY_APPROVED",
  "legal_status_statement": "No form, field or classification here is legally approved, verified as current, or fit for issue. Classifications are candidates only.",
@@ -22,16 +24,17 @@
    "Territorial Army Rules, 1948": 10
   },
   "families_by_authority_type_candidate": {
-   "OTHER_OR_UNDETERMINED": 25,
-   "STATUTORY_PRESCRIBED": 42
+   "OTHER_OR_UNDETERMINED": 28,
+   "STATUTORY_PRESCRIBED": 39
   },
   "families_by_status_category": {
    "MANDATORY_DOCUMENT_LIST": 1,
-   "MANDATORY_FORM_WORDING": 29,
+   "MANDATORY_FORM_WORDING": 28,
    "MANDATORY_FORM_WORDING_WITH_VARIATION": 1,
    "MANDATORY_WITH_ALTERNATIVE_PERMITTED": 8,
    "PERMISSIVE_ATTACHMENT_FORM_PRESCRIBED": 1,
-   "PERMISSIVE_USE_AR4": 11,
+   "PERMISSIVE_USE_AR4": 10,
+   "PERMISSIVE_USE_SPECIFIC_RULE": 2,
    "QUALIFIED_AS_FAR_AS_PRACTICABLE": 2,
    "REQUIREMENT_LANGUAGE_NOT_EXTRACTED": 11,
    "SPECIMEN_OR_ILLUSTRATION": 2,
@@ -70,21 +73,133 @@
    "DISCOVERED": 153,
    "TRANSCRIBED": 62
   },
-  "coverage_rows": 83,
+  "coverage_rows": 90,
   "coverage_state": {
-   "INACCESSIBLE": 21,
+   "INACCESSIBLE": 28,
    "INSPECTED_FORMS_FOUND": 2,
-   "INSPECTED_NO_FORMS_FOUND": 40,
+   "INSPECTED_NO_FORMS_FOUND": 1,
    "INSPECTED_WITH_GAPS": 8,
    "NOT_STARTED": 1,
-   "PARTIAL": 11
+   "PARTIAL": 50
   },
-  "coverage_not_held_rows": 20
+  "coverage_not_held_rows": 27,
+  "families_by_source_basis": {
+   "BOTH": 30,
+   "MML_ONLY": 32,
+   "OFFICIAL_COPY": 5
+  },
+  "families_by_official_copy_extent": {
+   "AMENDING_TEXT_ONLY": 1,
+   "FULL_FORM_TEXT": 34,
+   "NONE": 32
+  },
+  "families_by_statutory_confirmation_status": {
+   "NOT_APPLICABLE (authority candidate is not STATUTORY_PRESCRIBED)": 28,
+   "NOT_CONFIRMED_FROM_OFFICIAL_COPY: RULE_AND_FORM_TEXT_MML_ONLY": 5,
+   "NOT_CONFIRMED_FROM_OFFICIAL_COPY: RULE_TEXT_OFFICIAL_FORM_TEXT_MML_ONLY": 3,
+   "RULE_AND_FORM_TEXT_IN_OFFICIAL_COPY": 12,
+   "RULE_AND_FORM_TEXT_IN_OFFICIAL_COPY (field list MML version)": 19
+  },
+  "statutory_prescribed_mml_only_not_confirmed": [
+   "FF-DPPR53-S1-F1",
+   "FF-DPPR53-S1-F2",
+   "FF-DPPR53-S1-F3",
+   "FF-ISLR38-FA",
+   "FF-ISLR38-FB",
+   "FF-ISLR38-FC",
+   "FF-ISLR38-FD",
+   "FF-ITR42-PASS"
+  ],
+  "families_field_list_mml_version_with_official_copy_held": [
+   "FF-AR54-APPIII-P1D-CHAR",
+   "FF-AR54-APPIII-P2",
+   "FF-AR54-APPIII-P3A",
+   "FF-AR54-APPIII-P3B",
+   "FF-AR54-APPIII-P3C",
+   "FF-AR54-APPIII-P4-DELAY",
+   "FF-AR54-APPIV-P1-F1",
+   "FF-AR54-APPIV-P1-F2",
+   "FF-AR54-APPIV-P2-FA",
+   "FF-AR54-APPIV-P2-FB",
+   "FF-AR54-APPIV-P2-FC",
+   "FF-AR54-APPIV-P2-FD",
+   "FF-AR54-APPIV-P2-FE",
+   "FF-AR54-APPIV-P2-FF",
+   "FF-AR54-APPIV-P2-FG",
+   "FF-AR54-APPV-F1A",
+   "FF-AR54-APPV-F1B",
+   "FF-AR54-APPV-FH",
+   "FF-AR54-APPV-FI",
+   "FF-AR54-APPV-FJ",
+   "FF-AR54-APPV-FK",
+   "FF-AR54-APPV-FL"
+  ],
+  "fields_generic_label": 210,
+  "fields_official_copy_presence": {
+   "ABSENT_IN_OFFICIAL_COPY_PAGE_IMAGE": 1,
+   "NO_OFFICIAL_COPY_HELD": 213,
+   "OFFICIAL_COPY_HOLDS_AMENDING_TEXT_ONLY": 16,
+   "PRESENT_IN_OFFICIAL_AMENDING_TEXT_LAYER": 4,
+   "PRESENT_IN_OFFICIAL_COPY_TEXT_LAYER": 205,
+   "PRIMARY_IS_OFFICIAL_COPY": 101,
+   "WORDING_DIFFERS_IN_OFFICIAL_COPY_PAGE_IMAGE": 1
+  },
+  "coverage_method_limitation": {
+   "": 50,
+   "HEADING_SCAN_NO_FORMS_FOUND_NOT_VISUALLY_CONFIRMED": 11,
+   "TEXT_LAYER_SCAN_NO_FORMS_FOUND_NOT_VISUALLY_CONFIRMED": 28,
+   "VISUALLY_CONFIRMED_NO_FORMS (pages 1-2)": 1
+  },
+  "coverage_scope_this_cycle": {
+   "IN_SCOPE (Army-first cycle)": 73,
+   "OUT_OF_SCOPE_THIS_CYCLE (Air Force)": 4,
+   "OUT_OF_SCOPE_THIS_CYCLE (Air Force/Navy)": 1,
+   "OUT_OF_SCOPE_THIS_CYCLE (Navy)": 10,
+   "OUT_OF_SCOPE_THIS_CYCLE (general criminal procedure forms)": 1,
+   "OUT_OF_SCOPE_THIS_CYCLE (general criminal procedure forms; historical)": 1
+  },
+  "doc_locator_end_basis": {
+   "CAPPED_AT_400_LINES (form end not established)": 17,
+   "END_OF_FILE": 2,
+   "NEXT_REGISTERED_OCCURRENCE_START_MINUS_1": 76
+  },
+  "visual_checks_recorded": 13
  },
+ "reclassified_in_remediation": [
+  {
+   "family": "FF-AR54-APPV-FH",
+   "from": "STATUTORY_PRESCRIBED / MANDATORY_FORM_WORDING",
+   "to": "OTHER_OR_UNDETERMINED / PERMISSIVE_USE_SPECIFIC_RULE",
+   "basis": "AR 169 'may, if he thinks fit, by a warrant in one of the forms in Appendix V' (no 'shall')",
+   "finding": "WSG-R02"
+  },
+  {
+   "family": "FF-AFTPR08-F2",
+   "from": "STATUTORY_PRESCRIBED / PERMISSIVE_ATTACHMENT_FORM_PRESCRIBED",
+   "to": "OTHER_OR_UNDETERMINED / PERMISSIVE_ATTACHMENT_FORM_PRESCRIBED",
+   "basis": "r.4(4) 'may attach ... a receipt slip in Form II which shall be signed' ('shall' governs signature, not use of the form)",
+   "finding": "WSG-R02"
+  },
+  {
+   "family": "FF-DPPR53-S2",
+   "from": "STATUTORY_PRESCRIBED / MANDATORY_DOCUMENT_LIST",
+   "to": "OTHER_OR_UNDETERMINED / MANDATORY_DOCUMENT_LIST",
+   "basis": "r.33(3) prescribes accompanying documents, not form wording",
+   "finding": "WSG-R12"
+  },
+  {
+   "family": "FF-AR54-APPIII-SGCM",
+   "from": "OTHER_OR_UNDETERMINED / PERMISSIVE_USE_AR4",
+   "to": "OTHER_OR_UNDETERMINED / PERMISSIVE_USE_SPECIFIC_RULE",
+   "basis": "AR 151(1) 'may be convened ... in accordance with the form in Appendix III'",
+   "finding": "WSG-R09"
+  }
+ ],
  "unregistered_heading_hits_by_source": {
   "AA50-IC": 0,
   "AFT07-IC": 0,
   "AFTPR08-C7": 0,
+  "AFTPRA11-C7": 0,
   "AFTPRAC09-C7": 1,
   "AR-AMD-1965": 0,
   "AR-AMD-1993": 0,
@@ -151,11 +266,15 @@
   }
  ],
  "conflict_queue": [
-  "FF-AR54-APPIII-P2: Column difference based on text layers (1954 page not visually checked).",
+  "FF-AR54-APPIII-P2: Field list is the MML 2 version (UNVERIFIED_MANUAL); the 'Findings' column is absent from the 1954 Gazette page image (AR54-GAZ p.72).",
   "FF-AR54-APPIII-P3C: Form number conflict: 1993 Gazette text 'IAFD-919C'; MML 2 p.303 shows 'IAFD 919 C' at the heading and 'IAFD-919A' after the signature block (CONFLICT_QUEUE).",
   "FF-AR54-APPIV-P1-F1: Heading section range differs between 1954 OCR text ('83-84') and MML 2 ('83 to 85'); amending instrument not identified (CONFLICT_QUEUE).",
   "FF-AR54-APPIV-P1-F2: Heading section range differs between 1954 OCR text ('83-84') and MML 2 ('83 to 85') (CONFLICT_QUEUE).",
   "FF-AR54-APPIV-P2-FE: Both MML vol 2(AR) DOC transcriptions print after Form E: 'NOTE. —In view of IPC s. 53A(4)(b). this Form is redundant.' (editorial; not in MML 2 PDF text; IPC since replaced by BNS w.e.f. 01-07-2024) (CONFLICT_QUEUE)."
+ ],
+ "field_divergence_queue": [
+  "FF-AR54-APPIII-P2#F13 'Findings': ABSENT_IN_OFFICIAL_COPY_PAGE_IMAGE (AR54-GAZ p.72, VC-GAZ-P72); DIVERGENCE_QUEUE",
+  "FF-AR54-APPIII-P3C#F03 'for investigation into': WORDING_DIFFERS_IN_OFFICIAL_COPY_PAGE_IMAGE (AR-AMD-1993 p.19, VC-AMD93-P19: 'for' + a word with defective print read as 'nives'igating' + 'into'; not 'investigation'); DIVERGENCE_QUEUE"
  ],
  "inputs": {
   "AA50-IC": {
@@ -174,6 +293,12 @@
    "sha256": "590cf7cd393564eacab37566d605357662429f900ea58a96f0ce0e5bb0e0e317",
    "bytes": 46786968,
    "location": "data/raw/indiacode/0000/590cf7cd393564eacab37566d605357662429f900ea58a96f0ce0e5bb0e0e317.pdf",
+   "root": "c7git"
+  },
+  "AFTPRA11-C7": {
+   "sha256": "fc27032fadfe44fdd20f899612d45b690f469bcdc96463ac8ea4ae9f82e29904",
+   "bytes": 164715,
+   "location": "data/raw/indiacode/0000/fc27032fadfe44fdd20f899612d45b690f469bcdc96463ac8ea4ae9f82e29904.pdf",
    "root": "c7git"
   },
   "AFTPRAC09-C7": {

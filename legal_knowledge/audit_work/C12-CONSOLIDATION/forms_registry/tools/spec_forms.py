@@ -15,12 +15,16 @@ for line sources; `anchor` is the printed heading used to locate/verify it;
 `role` is PRIMARY (field transcription source) or ALTERNATE.
 """
 
-AR4 = ("AR 4(1) [AR54-GAZ p.2; AR54-IC p.1-2]: 'The forms set forth in the appendices to these rules, "
-       "with such variations as the circumstances of each case may require, may be used for the respective "
-       "purposes therein mentioned, and if used, shall be sufficient, but a deviation from such forms shall not, "
-       "by reason only of such deviation, render invalid any charge, warrant, order, proceedings or any other "
-       "document'; AR 4(2) omission not invalidating; AR 4(3) notes/instructions 'shall be duly complied with' "
-       "but omission does not by itself invalidate")
+# AR 4(1) verbatim from the 1954 Gazette page image (AR54-GAZ p.2, visually checked; see VISUAL_CHECKS VC-GAZ-P2).
+# AR54-IC p.2 prints the same sentence with 'any change' in place of 'any charge' (as printed in that compilation).
+AR4_1_VERBATIM = ("AR 4(1) [AR54-GAZ p.2, page image checked; AR54-IC p.2]: 'The forms set forth in the appendices to these rules, "
+                  "with such variations as the circumstances of each case may require, may be used for the respective "
+                  "purposes therein mentioned, and if used, shall be sufficient, but a deviation from such forms shall not, "
+                  "by reason only of such deviation, render invalid any charge, warrant, order, proceedings or any other "
+                  "document relevant to these rules.' (AR54-IC p.2 prints 'any change' for 'any charge'.)")
+AR4 = (AR4_1_VERBATIM + " AR 4(2) [AR54-GAZ p.2; AR54-IC p.3]: 'Any omission of any such form shall not, by reason only of such "
+       "omission, render any act or thing invalid.' AR 4(3) [AR54-IC p.3]: notes/instructions 'shall be duly complied with' "
+       "but omission 'shall not, merely by reason of such omission, render any act or thing invalid'")
 
 H_1993 = ("S.R.O. 17(E) of 06-12-1993 (AR-AMD-1993, held)")
 NOT_HELD_1960_404 = "S.R.O. 404 of 1960 (C5-AMD-AR-005: affects App. IV Pt II Forms A,E,F and App. V Form J) NOT HELD - text of change not examined"
@@ -43,7 +47,8 @@ DOC_RULES = 600  # DOC-1: search start line for rule-text oath forms (after the 
 DOC0_APP = 2290  # MML-AR-DOC (no arrangement list): appendices start
 DOC0_RULES = 1
 
-COMMON_AR_UNC = ("Form status under AR 4 is permissive unless a specific rule uses 'shall'; competent legal review "
+# Neutral statement (WSG-R03): no hierarchy between AR 4(1) and any specific rule is asserted.
+COMMON_AR_UNC = ("Interaction between any specific rule quoted here and AR 4(1) not determined (legal review). Competent legal review "
                  "required before any template or checklist use. MML copies are UNVERIFIED_MANUAL (edition/authenticity unknown).")
 
 FAMILIES = [
@@ -110,11 +115,20 @@ FAMILIES = [
 ]
 
 # ======================================================== Oath / affirmation forms printed in rule text
+OATH_QUOTES = {  # verbatim per rule from AR54-IC (WSG-R08); checked by the build's quote verifier
+    "9": "AR 9(1) [AR54-IC p.4]: 'Every person required to be attested under section 16 shall make and subscribe an oath or affirmation in one of the following forms or in such other form to the same purport as the attesting officer ascertains to be in accordance with the religion of the person to be attested, or otherwise binding on his conscience.'",
+    "45": "AR 45 [AR54-IC p.76]: '... an oath or affirmation shall be administrated to every member in one of the following forms or in such other form to the same purport as the court ascertains to be according to his religion or otherwise binding on his conscience.'",
+    "46": "AR 46 [AR54-IC p.78]: '... an oath or affirmation shall be administered to the following persons or such of them as are present at the court-martial, in such of the following forms as shall be appropriate, or in such other form to the same purport as the court ascertains to be according to the religion or otherwise binding on the conscience of the person to be sworn or affirmed'",
+    "109": "AR 109(1) [AR54-IC p.148]: 'The court shall make oath or affirmation in one of the following forms or in such other form to the same purport as may be according to its religion or otherwise binding on its conscience.' AR 109(2) [AR54-IC p.149]: '... shall administer to the interpreter (if any), an oath or affirmation in one of the following forms, or in such other form to the same purport as the court ascertains to be according to his religion or otherwise binding on his conscience.'",
+    "140": "AR 140 [AR54-IC p.167-168]: 'An oath or affirmation shall, if so required by the Act, be administered to every witness before he gives his evidence by the judge-advocate (if any), a member of the court, or some other person empowered by the court in one of the following forms or in such other form to the same purport as the court ascertains to be according to the religion or otherwise binding on the conscience of the witness.'",
+}
+
+
 def _oath(fid, rule, title, gaz, ic, mml, doc_anchor, fields, signatory, applic, extra_unc="", ic_anchor=None, doc_from=(None, None)):
     return F(fid, instrument="Army Rules, 1954", part="Rule %s (form printed in rule text)" % rule, number="(none printed)",
              title=title,
              prescribing_provision="AR %s" % rule,
-             requirement_quote="AR %s: oath or affirmation 'in one of the following forms or in such other form to the same purport' as the court/attesting officer ascertains to be binding (wording per AR54-IC)" % rule,
+             requirement_quote=OATH_QUOTES[rule],
              authority="STATUTORY_PRESCRIBED", status="MANDATORY_WITH_ALTERNATIVE_PERMITTED",
              applicability=applic, signatory=signatory,
              competent_authority="As stated in the rule (administering court / attesting officer)",
@@ -174,7 +188,7 @@ FAMILIES += [
           (42, 42), (167, 169), (207, 207), "that what I shall state shall be the truth, the whole truth, and nothing but the truth",
           [("Form of Oath", "variant_heading"), ("Form of Affirmation", "variant_heading"),
            ("the truth, the whole truth, and nothing but the truth", "prescribed_wording")],
-          "Witness", "Witnesses before a court-martial (AR 140, as cited in MML 2 p.207)",
+          "Witness", "Witnesses before a court-martial; conditional: 'if so required by the Act' (AR 140 [AR54-IC p.167])",
           "Rule number taken from the MML 2 rule heading context; AR54-IC page range located by anchor search. "),
 ]
 
@@ -376,7 +390,7 @@ FAMILIES += [
       title="FORM FOR ASSEMBLY AND PROCEEDINGS OF A SUMMARY GENERAL COURT MARTIAL (A-Order convening court; B-Certificate of Presiding Officer; C-Confirmation; D-Promulgation; Schedule)",
       prescribing_provision="AR 151(1) [AR54-IC p.182]; AA s.112 clauses (a)-(c) (form variants); AR 160 and AA s.157 cited",
       requirement_quote="AR 151(1) [AR54-IC p.182]: 'The court may be convened and the proceedings of the court recorded in accordance with the form in Appendix III, with such variations as the circumstances of each case may require.'",
-      authority="OTHER_OR_UNDETERMINED", status="PERMISSIVE_USE_AR4",
+      authority="OTHER_OR_UNDETERMINED", status="PERMISSIVE_USE_SPECIFIC_RULE",
       applicability="Summary general court-martial; one of three opening variants by AA s.112 clause (a), (b) or (c), others struck out",
       signatory="Convening officer; Presiding Officer (certificate); Confirming Officer; officer in charge of documents (promulgation)",
       competent_authority="Officer empowered under AA s.112", dependencies="Annexed schedule of persons/offences; confirmation; promulgation",
@@ -432,17 +446,17 @@ FAMILIES += [
                    O("MML-AR-DOC", anchor="SCHEDULE OF CONVICTIONS", from_line=DOC0_APP)]),
     F("FF-AR54-APPIII-P2", instrument="Army Rules, 1954", part="Appendix III Part II", number="IAFD-901",
       title="FORM FOR USE AT SUMMARY TRIALS OF NCOS AND OTHER RANKS UNDER SECS 80-82 OF THE ARMY ACT 1950 (OFFENCE REPORT)",
-      prescribing_provision="AR 22 [AR54-IC p.38]",
-      requirement_quote="AR 22 [AR54-IC p.38]: commanding officer shall '(a) dispose of the case under section 80 in accordance with the manner and form in Appendix III'",
+      prescribing_provision="AR 22(3)(a) [AR54-IC p.38] (one limb of the alternatives (a)-(d) in AR 22(3))",
+      requirement_quote="AR 22(3) [AR54-IC p.38]: 'After compliance of sub-rule (1), if the commanding officer is of opinion that the charge ought to be proceeded with, he shall within a reasonable time-' '(a) dispose of the case under section 80 in accordance with the manner and form in Appendix III ; or' '(b) refer the case to the proper superior military authority; or' (limbs (c)-(d) follow)",
       authority="STATUTORY_PRESCRIBED", status="MANDATORY_FORM_WORDING",
-      applicability="Summary disposal under AA ss.80-82 of NCOs and other ranks; note: 'A Lance Naik is an NCO for the purpose of Army Act Section 80' (MML 2 p.302)",
+      applicability="Where the commanding officer disposes of the case under limb (a) of AR 22(3) (AA s.80); summary disposal under AA ss.80-82 of NCOs and other ranks; note: 'A Lance Naik is an NCO for the purpose of Army Act Section 80' (MML 2 p.302)",
       signatory="Officer by whom punishment awarded (signature, rank, designation, date); Signature of OC unit",
       competent_authority="Commanding officer / officer dealing summarily",
       dependencies="Col.4 instruction: 'An officer cannot deal summarily with a case in which he is the sole prosecution witness'; Col.7 forfeiture entries",
       companions="Conduct sheet (column 'Date of entry in conduct sheet')",
-      version_history="1954 Gazette text (AR54-GAZ pp.72-73: 8 numbered columns; heading 'Sec. 8082' as OCR). MML 2 p.302 shows 9 numbered columns including 'Findings' (not seen in the 1954 OCR text). AR 22 substituted by S.R.O. 17(E) 1993 (C5 amendment register).",
-      supersession="1954 column layout differs from MML 2 layout - amending instrument for the column change not identified (CONFLICT_QUEUE)",
-      uncertainties="Column difference based on text layers (1954 page not visually checked). " + COMMON_AR_UNC, field_scope="FULL_AS_PRINTED_MML2",
+      version_history="1954 Gazette text (AR54-GAZ p.72, page image checked: heading 'Form for use at Summary trials of N. C. Os. and other ranks under Sec. 80-82 of the Army Act, 1950'; 8 numbered columns 'Place and date of offence' / 'Offence' / 'Plea' / 'Names of Witnesses' / 'Punishment awarded' / 'Signature, Rank and Designation of Officer by whom awarded and date of award' / 'Date of entry in Conduct sheet' / 'Remarks'; no 'Findings' column). MML 2 p.302 shows 9 numbered columns including 'Findings'. AR 22 substituted by S.R.O. 17(E) 1993 (C5 amendment register).",
+      supersession="1954 column layout (page image) differs from MML 2 layout - amending instrument for the column change not identified (CONFLICT_QUEUE)",
+      uncertainties="Field list is the MML 2 version (UNVERIFIED_MANUAL); the 'Findings' column is absent from the 1954 Gazette page image (AR54-GAZ p.72). " + COMMON_AR_UNC, field_scope="FULL_AS_PRINTED_MML2",
       fields=[("Serial No", "blank"), ("For week ending", "blank"), ("OFFENCE REPORT", "heading"), ("Charges against no", "blank"),
               ("Battery, Squadron, Company, etc", "blank"), ("Last report submitted on", "blank"), ("Rank", "blank"), ("Name", "blank"),
               ("Place and date", "column"), ("Offence", "column"), ("Plea", "column"), ("Name of witnesses", "column"), ("Findings", "column"),
@@ -451,7 +465,7 @@ FAMILIES += [
               ("In cases of absence without leave/desertion, the date of offence will be the first day of absence.", "instruction_note"),
               ("An officer cannot deal summarily with a case in which he is the sole prosecution witness.", "instruction_note")],
       occurrences=[O("MML2", "PRIMARY", pages=(302, 302), anchor="FORM FOR USE AT SUMMARY TRIALS OF NCOS AND OTHER RANKS"),
-                   O("AR54-GAZ", pages=(72, 73), anchor="OFFENCE REPORT"),
+                   O("AR54-GAZ", pages=(72, 73), anchor="OFFENCE REPORT", visual="72"),
                    O("MML-AR-DOC1", anchor="FORM FOR USE AT SUMMARY TRIALS OF NCOs AND OTHER RANKS", from_line=DOC_APP),
                    O("MML-AR-DOC", anchor="FORM FOR USE AT SUMMARY TRIALS OF NCOs AND OTHER RANKS", from_line=DOC0_APP)]),
     F("FF-AR54-APPIII-P3A", instrument="Army Rules, 1954", part="Appendix III Part III (a)", number="IAFD-919B (as printed in MML 2)",
@@ -591,7 +605,9 @@ def _warrant(fid, part, number, title, prov, quote, applic, signatory, mml_pages
 R166 = "AR 166 [AR54-IC p.188]: 'A warrant for the committal of a person sentenced by a court-martial to a prison under the provision of section 168 and sub-section (2) of section 169 shall be in one of the forms given in Appendix IV.'"
 R167 = "AR 167 [AR54-IC p.189]: 'Any warrant issued under the provisions of section 173 shall be in one of the forms given in Appendix IV, and shall be signed by the officer making the order ...'"
 R169 = "AR 169 [AR54-IC p.191]: the commanding officer 'may, if he thinks fit, by a warrant in one of the forms in Appendix V, commit the said person for safe custody in a civil prison'"
-R170A = "AR 170A(1) [AR54-IC p.192]: the officer 'shall issue to such officer the death warrant in the relevant form contained in Appendix V'; AR 170A(4)/170B(1)(b): warrant 'in one of the forms in Appendix V'"
+R170A = "AR 170A(1) [AR54-IC p.192]: '... and shall issue to such officer the death warrant in the relevant form contained in Appendix V.'"
+R170A4 = "AR 170A(4) [AR54-IC p.192]: 'If the authority specified in sub-rule (1) is of the opinion that the sentence of death be carried out in a civil prison, he shall forward a warrant in one of the forms in Appendix V together with an order of the confirming authority certifying the confirmation of the sentence, to the civil prison for the execution of the sentence.'"
+R170B1B = "AR 170B(1) [AR54-IC p.192]: 'On receipt of the death warrant, the provost marshal or other officer, nominated under sub-rule (1) of rule 170A shall :-' '(b) if the person sentenced has been committed to a civil prison under rule 169, obtain the custody of his person by issuing a warrant in one of the forms in Appendix V, and'"
 R171 = "AR 171 [AR54-IC p.193-194]: 'a further warrant in one of the forms given in Appendix V shall be issued by the commanding officer of such person'"
 W_BASE = [("To", "addressee"), ("Given under my hand at", "blank")]
 
@@ -674,12 +690,12 @@ FAMILIES += [
              W_BASE + [("The Superintendent of the (a)", "addressee"), ("court-martial held at", "blank"), ("was convicted of (offence to be briefly stated)", "blank"),
                        ("passed sentence of death on the said", "blank"), ("until such time as a further warrant in respect of the said", "fixed_text"), ("Signature (c)", "signature")],
              "1954 text AR54-GAZ p.84; Appendix V heading figure '170' substituted by '170A' by " + H_1993 + " item 41(a).",
-             authority="STATUTORY_PRESCRIBED", status="MANDATORY_FORM_WORDING",
-             unc="AR 169 is permissive ('may, if he thinks fit') as to committal; the form wording applies if a warrant is issued. ",
+             authority="OTHER_OR_UNDETERMINED", status="PERMISSIVE_USE_SPECIFIC_RULE",
+             unc="AR 169 says 'may, if he thinks fit, by a warrant in one of the forms in Appendix V' and does not say the warrant 'shall' be in the form; reclassified under the README 'shall' rule (WSG-R02). ",
              mml_anchor="Warrant committing to civil prison custody of a person sentenced to death", gaz_anchor="Warrant committing to civil prison"),
     _warrant("FF-AR54-APPV-FI", "Appendix V", "FORM I",
              "Warrant to obtain person sentenced to death from civil prison custody in order to carry out such sentence [Army Rule 170A]",
-             "AR 170A/170B(1)(b)", R170A, "Obtaining custody from civil prison to carry out a confirmed death sentence",
+             "AR 170B(1)(b) [AR54-IC p.192] (Form heading cites Army Rule 170A)", R170B1B, "Obtaining custody from civil prison to carry out a confirmed death sentence",
              "The officer by whom the order is issued (note (f))", (323, 323), (84, 85), "FORM I",
              W_BASE + [("The Superintendent of the (a)", "addressee"), ("having been sentenced to suffer death on the", "blank"),
                        ("is held in the said prison under a warrant issued by", "blank"), ("having been duly confirmed by (d)", "blank"),
@@ -705,7 +721,7 @@ FAMILIES += [
              unc="1993 Gazette heading reads 'EXECUTION ON SENTENCE' (OCR) vs MML 2 'Execution of Sentence'. Part III medical certificate wording in MML 2 adds blanks not in 1993 text (text-layer comparison only). "),
     _warrant("FF-AR54-APPV-F1B", "Appendix V", "FORM-1B",
              "WARRANT OF EXECUTION OF SENTENCE OF DEATH IN CIVIL PRISON (Army Rules 170A and 170B) - Part I warrant; Part II Return of Warrant",
-             "AR 170A(4), 170B", R170A, "Execution of a confirmed death sentence in a civil prison",
+             "AR 170A(4), 170B", R170A4, "Execution of a confirmed death sentence in a civil prison",
              "Officer by whom the order is issued (note (h)); Superintendent of Prison (return)", (325, 325), None, "FORM I-B",
              [("To", "addressee"), ("The superindent of the (a)", "addressee"), ("having been sentenced to suffer death on the", "blank"),
                        ("TO BE HANGED BY THE NECK UNTIL HE BE DEAD", "fixed_text"), ("Signature (h)", "signature"), ("Return of Warrant", "part_heading"),
@@ -740,16 +756,21 @@ FAMILIES += [
 ]
 
 # ======================================================== AFT (Procedure) Rules 2008
-_AFT = dict(instrument="Armed Forces Tribunal (Procedure) Rules, 2008", authority="STATUTORY_PRESCRIBED",
-            competent_authority="Registrar, Armed Forces Tribunal (receipt/registration)", supersession="NOT_DETERMINED (amendments incl. AFT (Procedure) Amendment Rules 2011 not compared)",
-            uncertainties="OCR text layer of a scanned Gazette; transcription via fuzzy matching only; no visual inspection this cycle. Applicability of later amendments and Tribunals Reforms legislation not examined.")
+AFT2011 = ("AFT (Procedure) Amendment Rules 2011, S.R.O. 05(E) of 29-07-2011 (AFTPRA11-C7 p.2, page image checked): item 2 renumbers r.7 as r.7(1) and "
+           "inserts r.7(2) (application fee 'payable only in respect of' OA, RA, CA, MA and AT); item 3 inserts '12A.-Every application under rule 8 and the reply under "
+           "rule 12 shall be supported by an affidavit of the person verifying the application or reply, as the case may be.' Principal r.8 is headed 'Contents of application' "
+           "and opens 'Every application filed under section 14 or section 15' (AFTPR08-C7 p.29, page image checked). Effect on Form I and its companion documents NOT DETERMINED (unexamined dependency; legal review).")
+_AFT = dict(instrument="Armed Forces Tribunal (Procedure) Rules, 2008",
+            competent_authority="Registrar, Armed Forces Tribunal (receipt/registration)", supersession="NOT_DETERMINED (effect of AFT (Procedure) Amendment Rules 2011 on the forms not determined; later amendments not searched)",
+            uncertainties="OCR text layer of a scanned Gazette; field labels matched by fuzzy matching only. Rule numbers, titles and the prescribing-rule wording were checked against page images (see visual_check_refs); field labels were not individually checked against the images. Applicability of later amendments and Tribunals Reforms legislation not examined.")
 FAMILIES += [
     F("FF-AFTPR08-F1", part="Appendix 'A'", number="FORM I", title="APPLICATION UNDER SECTION 14 and 15 OF THE ARMED FORCES TRIBUNAL ACT, 2007 [see rule 4]",
+      authority="STATUTORY_PRESCRIBED",
       prescribing_provision="AFT (Procedure) Rules 2008 r.4(1) [AFTPR08-C7 p.26]",
       requirement_quote="r.4(1) [AFTPR08-C7 p.26]: 'An application to the Tribunal shall be presented in Form I by the applicant in person or by an agent or by a duly authorised legal practitioner to the Registrar ...'",
       status="MANDATORY_FORM_WORDING", applicability="Original application under ss.14-15 AFT Act 2007",
       signatory="Signature of the applicant (index and verification); For Registrar (office use)",
-      dependencies="Limitation under s.22 AFT Act (declaration para 3); remedies exhausted (para 6); not previously filed (para 7)",
+      dependencies="Limitation under s.22 AFT Act (declaration para 3); remedies exhausted (para 6); not previously filed (para 7). UNEXAMINED DEPENDENCY (WSG-R06): " + AFT2011,
       companions="True copy of impugned order; annexures; list of enclosures; bank draft/postal order particulars; self-addressed post-card if oral hearing desired",
       version_history="As printed in AFTPR08-C7 pp.42-45.", field_scope="SECTION_LABELS_OCR",
       fields=[("Title of the Case", "blank"), ("INDEX", "heading"), ("Description of documents relied upon", "column"), ("Signature of the applicant", "signature"),
@@ -758,26 +779,28 @@ FAMILIES += [
               ("Jurisdiction of the Tribunal", "item"), ("Limitation", "item"), ("Facts of the Case", "item"), ("Grounds for relief with legal provisions", "item"),
               ("Details of the remedies exhausted", "item"), ("Matter not previously filed or pending with any other Court/Bench of Tribunal", "item"),
               ("Relief (s) sought", "item"), ("Interim order, if any prayed for", "item"), ("List of enclosures", "item"), ("VERIFICATION", "declaration")],
-      occurrences=[O("AFTPR08-C7", "PRIMARY", pages=(42, 45), anchor="APPLICATION UNDER SECTION 14 and 15 OF THE ARMED FORCES TRIBUNAL ACT, 2007")], **_AFT),
+      occurrences=[O("AFTPR08-C7", "PRIMARY", pages=(42, 45), anchor="APPLICATION UNDER SECTION 14 and 15 OF THE ARMED FORCES TRIBUNAL ACT, 2007", visual="42 (upper part only: Appendix 'A', FORM I, [see rule 4], title, INDEX)")], **_AFT),
     F("FF-AFTPR08-F2", part="Appendix 'A'", number="FORM II", title="RECEIPT SLIP [see rule 4 (4)]",
+      authority="OTHER_OR_UNDETERMINED",
       prescribing_provision="r.4(4) [AFTPR08-C7 p.27]",
       requirement_quote="r.4(4) [AFTPR08-C7 p.27]: 'The applicant may attach to and present with his application a receipt slip in Form II which shall be signed by the Registrar or the Officer receiving the application on behalf of the Registrar ...'",
-      status="PERMISSIVE_ATTACHMENT_FORM_PRESCRIBED", applicability="Optional receipt slip attached by applicant (r.4(4) 'may attach')",
+      status="PERMISSIVE_ATTACHMENT_FORM_PRESCRIBED", applicability="Optional receipt slip attached by applicant (r.4(4) 'may attach'); r.4(4) does not say the slip 'shall' be in Form II (the 'shall' governs signature) - reclassified OTHER_OR_UNDETERMINED under the README 'shall' rule (WSG-R02)",
       signatory="For Registrar, Armed Forces Tribunal", dependencies="Presentation of application under r.4", companions="Application (Form I)",
       version_history="As printed in AFTPR08-C7 p.46.", field_scope="LABELS_OCR",
       fields=[("RECEIPT SLIP", "heading"), ("Receipt of the application filed in the Armed Forces Tribunal", "fixed_text"), ("For Registrar", "signature"), ("Dated", "blank"), ("Seal", "seal")],
-      occurrences=[O("AFTPR08-C7", "PRIMARY", pages=(46, 46), anchor="RECEIPT SLIP")], **_AFT),
-    F("FF-AFTPR08-F3", part="Appendix 'A'", number="FORM III", title="APPLICATION FOR THE REGISTRATION OF A CLERK (see rule 17)",
-      prescribing_provision="r.17 (Form III heading '(see rule 17)'); sub-rule (3) text at [AFTPR08-C7 p.38] (rule number of that paragraph read from OCR context only)",
-      requirement_quote="r.17(3) [AFTPR08-C7 p.38]: 'A legal practitioner desirous of registering his clerk shall make an application to the Registrar in Form III and pay a sum of one hundred rupees as one time Tribunal Fee.'",
+      occurrences=[O("AFTPR08-C7", "PRIMARY", pages=(46, 46), anchor="RECEIPT SLIP", visual="46")], **_AFT),
+    F("FF-AFTPR08-F3", part="Appendix 'A'", number="FORM III", title="APPLICATION FOR THE REGISTRATION OF A CLERK (see rule 27)",
+      authority="STATUTORY_PRESCRIBED",
+      prescribing_provision="r.27(3) (rule heading '27. Registration of legal practitioner's clerk.' [AFTPR08-C7 p.37]; sub-rule (3) [AFTPR08-C7 p.38]; Form III heading '(see rule 27)' [AFTPR08-C7 p.46]; all three page images checked)",
+      requirement_quote="r.27(3) [AFTPR08-C7 p.38]: 'A legal practitioner desirous of registering his clerk shall make an application to the Registrar in Form III and pay a sum of one hundred rupees as one time Tribunal Fee.'",
       status="MANDATORY_FORM_WORDING", applicability="Registration of a legal practitioner's clerk",
       signatory="Clerk (affirmation); legal practitioner (certificate)", dependencies="Fee; attested photographs", companions="Postal order (identity card cost); passport-size photographs; graduation certificate copy",
-      version_history="As printed in AFTPR08-C7 pp.46-47 (Form shows Rs. 10 identity card cost; r.17(3) fee Rs. 100).", field_scope="LABELS_OCR",
+      version_history="As printed in AFTPR08-C7 pp.46-47 (Form shows Rs. 10 identity card cost; r.27(3) fee one hundred rupees). Correction C12 remediation (WSG-R01): earlier register text read the rule as '17' from the OCR string 'rule :l 7'; page images of pp.37, 38 and 46 print rule 27.", field_scope="LABELS_OCR",
       fields=[("APPLICATION FOR THE REGISTRATION OF A CLERK", "heading"), ("Name of legal practitioner on whose behalf the clerk is to be registered", "item"),
               ("Full name (in capital)", "item"), ("Father’s name", "item"), ("Mother’s name", "item"), ("Age and date of birth", "item"), ("Place of birth", "item"),
               ("Nationality", "item"), ("Postal address", "item"), ("Telephone / Mobile Number", "item"), ("Payment details", "item"), ("[Signature of Clerk]", "signature"),
               ("The Registrar", "addressee")],
-      occurrences=[O("AFTPR08-C7", "PRIMARY", pages=(46, 47), anchor="APPLICATION FOR THE REGISTRATION OF A CLERK")], **_AFT),
+      occurrences=[O("AFTPR08-C7", "PRIMARY", pages=(46, 47), anchor="APPLICATION FOR THE REGISTRATION OF A CLERK", visual="46-47")], **_AFT),
 ]
 
 # ======================================================== MML vol 3 instruments (only copies held are UNVERIFIED_MANUAL)
@@ -798,7 +821,7 @@ FAMILIES += [
     F("FF-DPPR53-S1-F2", instrument="Army and Air Force (Disposal of Private Property) Rules, 1953", part="Schedule I", number="Form II",
       title="FORM OF BOND TO BE EXECUTED BY THE REPRESENTATIVE OF A DECEASED PERSON (other than an OFFICER)",
       prescribing_provision="DPP Act 1950 s.3(4); DPP Rules 1953 r.9 [DPPR53-C7 p.2]",
-      requirement_quote="r.9 [DPPR53-C7 p.2] (as for Form I)", authority="STATUTORY_PRESCRIBED", status="MANDATORY_FORM_WORDING",
+      requirement_quote="r.9 [DPPR53-C7 p.2]: 'The security required to be given under sub-section (4) of section 3 shall be a bond in the form given in Forms I and II Schedule I to these rules accompanied by a surety if considered necessary by the commanding officer.'", authority="STATUTORY_PRESCRIBED", status="MANDATORY_FORM_WORDING",
       applicability="Deceased person other than an officer; application to the Commanding Officer of the Corps/Department/Detachment/Unit",
       signatory="Representative; surety/sureties; witnesses", competent_authority="Addressed to The President of India; Commanding Officer",
       dependencies="As Form I", companions="(none printed)", version_history="MML vol 3 pp.13-14 only.", supersession="NOT_DETERMINED", uncertainties=_V3UNC,
@@ -822,7 +845,7 @@ FAMILIES += [
       title="List of documents which should accompany (in duplicate) the report (A. F.A.2) of disposal referred to in rule 33",
       prescribing_provision="DPP Rules 1953 r.33(3) [DPPR53-C7 p.6]",
       requirement_quote="r.33(3) [DPPR53-C7 p.6]: 'The reports referred to in sub-rule (1) shall be accompanied by all the necessary documents and papers including those given in Schedule II to these rules.'",
-      authority="STATUTORY_PRESCRIBED", status="MANDATORY_DOCUMENT_LIST", applicability="Reports of disposal of estates (r.33)",
+      authority="OTHER_OR_UNDETERMINED", status="MANDATORY_DOCUMENT_LIST", applicability="Reports of disposal of estates (r.33); r.33(3) requires accompanying documents 'including those given in Schedule II' - a document list, not form wording (retyped WSG-R12)",
       signatory="(n/a)", competent_authority="(n/a)", dependencies="Report A.F.A.2", companions="IAFE-925 statement of particulars; IAFE-923 stamped receipt; IAFE-924 inventory; Schedule I bonds (as listed)",
       version_history="MML vol 3 pp.14-15 only.", supersession="NOT_DETERMINED", uncertainties=_V3UNC + "Procedural document list, not a form layout. ",
       field_scope="LIST_ITEMS_PARTIAL",
@@ -836,14 +859,14 @@ _LIT = dict(instrument="Indian Soldiers (Litigation) Rules, 1938", authority="ST
             uncertainties=_V3UNC + "Requirement wording taken from the rules text printed in the same MML copy (rules 4-7). ", field_scope="LABELS")
 FAMILIES += [
     F("FF-ISLR38-FA", part="Schedule", number="FORM A", title="Collector's certificate under section 5 of the Indian Soldiers (Litigation) Act, 1925 (See rule 4)",
-      prescribing_provision="ISL Act 1925 s.5; ISL Rules 1938 r.4 [MML3 p.207]", requirement_quote="r.4 [MML3 p.207]: 'The certificate given by a Collector under section 5 of the Act shall be in Form A of the Schedule.'",
+      prescribing_provision="ISL Act 1925 s.5; ISL Rules 1938 r.4 [MML3 p.207] (rule text per unverified MML vol 3 only)", requirement_quote="r.4 [MML3 p.207]: 'The certificate given by a Collector under section 5 of the Act shall be in Form A of the Schedule.'",
       status="MANDATORY_FORM_WORDING", applicability="Indian soldier party to pending proceedings unable to appear", signatory="Collector", competent_authority="Collector",
       dependencies="Proceedings pending", companions="(notes on registered post/acknowledgement)", version_history="MML vol 3 p.207 only.",
       fields=[("From The Collector", "sender"), ("In re", "blank"), ("versus", "blank"), ("I have the honour to certify under section 5", "fixed_text"), ("Collector", "signature")],
       occurrences=[O("MML3", "PRIMARY", pages=(207, 207), anchor="Collector's certificate under section 5 of the Indian Soldiers (Litigation) Act, 1925"),
                    O("MML3-DOC", anchor="Collector's certificate under section 5", from_line=1)], **_LIT),
     F("FF-ISLR38-FB", part="Schedule", number="FORM B", title="Notice under section 6 of the Indian Soldiers (Litigation) Act, 1925 (See rule 5)",
-      prescribing_provision="ISL Act s.6; ISL Rules r.5 [MML3 p.207]", requirement_quote="r.5 [MML3 p.207]: 'The notice given by the Court under section 6 of the Act shall be in Form B of the Schedule ...'",
+      prescribing_provision="ISL Act s.6; ISL Rules r.5 [MML3 p.207] (rule text per unverified MML vol 3 only)", requirement_quote="r.5 [MML3 p.207]: 'The notice given by the Court under section 6 of the Act shall be in Form B of the Schedule ...'",
       status="MANDATORY_FORM_WORDING", applicability="Court suspends proceeding under s.6", signatory="Presiding officer of the Court; Registrar", competent_authority="Court",
       dependencies="Collector's certificate or court's own belief", companions="(none)", version_history="MML vol 3 pp.207-208 only.",
       fields=[("The Officer Commanding", "addressee"), ("Please take notice that", "fixed_text"), ("Given under my hand and the seal of the Court", "blank"),
@@ -851,14 +874,14 @@ FAMILIES += [
       occurrences=[O("MML3", "PRIMARY", pages=(207, 208), anchor="Notice under section 6 of the Indian Soldiers (Litigation) Act, 1925"),
                    O("MML3-DOC", anchor="Notice under section 6 of the Indian Soldiers", from_line=1)], **_LIT),
     F("FF-ISLR38-FC", part="Schedule", number="FORM C", title="Certificate under section 7 of the Indian Soldiers (Litigation) Act, 1925 (See rule 5)",
-      prescribing_provision="ISL Act s.7; ISL Rules r.5 [MML3 p.207]", requirement_quote="r.5 [MML3 p.207]: '... the certificate of the prescribed authority under section 7 of the Act, shall be in Form C of the Schedule.'",
+      prescribing_provision="ISL Act s.7; ISL Rules r.5 [MML3 p.207] (rule text per unverified MML vol 3 only)", requirement_quote="r.5 [MML3 p.207]: '... the certificate of the prescribed authority under section 7 of the Act, shall be in Form C of the Schedule.'",
       status="MANDATORY_FORM_WORDING", applicability="Soldier serving under special conditions; postponement necessary", signatory="Officer Commanding", competent_authority="Prescribed authority",
       dependencies="Receipt of Form B notice", companions="(none)", version_history="MML vol 3 p.208 only.",
       fields=[("From The Officer Commanding", "sender"), ("I have the honour to acknowledge receipt of your notice", "fixed_text"), ("Officer Commanding", "signature")],
       occurrences=[O("MML3", "PRIMARY", pages=(208, 208), anchor="Certificate under section 7 of the Indian Soldiers (Litigation) Act, 1925"),
                    O("MML3-DOC", anchor="Certificate under section 7 of the Indian Soldiers", from_line=1)], **_LIT),
     F("FF-ISLR38-FD", part="Schedule", number="FORM D", title="Certificate under rule 6 of the Indian Soldiers (Litigation) Rules, 1938 (See rule 6)",
-      prescribing_provision="ISL Rules r.6 [MML3 p.207]", requirement_quote="r.6 [MML3 p.207]: '... he shall forthwith certify to the Court to that effect in Form D of the Schedule.'",
+      prescribing_provision="ISL Rules r.6 [MML3 p.207] (rule text per unverified MML vol 3 only)", requirement_quote="r.6 [MML3 p.207]: '... he shall forthwith certify to the Court to that effect in Form D of the Schedule.'",
       status="MANDATORY_FORM_WORDING", applicability="Circumstances for postponement no longer exist", signatory="Officer Commanding", competent_authority="Prescribed authority",
       dependencies="Earlier Form C certificate", companions="(none)", version_history="MML vol 3 pp.208-209 only.",
       fields=[("I have the honour to invite a reference to my letter No", "blank"), ("circumstances no longer exist for the postponement", "fixed_text"), ("Officer Commanding.", "signature")],
@@ -931,7 +954,7 @@ FAMILIES += [
       uncertainties=_TA["uncertainties"] + "Whether the oath/affirmation printed at p.234 belongs to Schedule II-I is not established. "),
     F("FF-ITR42-PASS", instrument="Indian Tolls (Army and Air Force) Rules, 1942", part="Annexed form", number="(none printed)",
       title="Form Of Pass [Issued under the Indian Tolls (Army and Air Force) act, 1901 (II of 1901)]",
-      prescribing_provision="Indian Tolls (Army and Air Force) Act 1901 s.7(2); Rules 1942 r.2, r.4 [MML3 p.237]",
+      prescribing_provision="Indian Tolls (Army and Air Force) Act 1901 s.7(2); Rules 1942 r.2, r.4 [MML3 p.237] (rule text per unverified MML vol 3 only)",
       requirement_quote="r.2 [MML3 p.237]: '... a pass, in the Form annexed, shall be presented on the demand of the person authorized to demand the tolls.' r.4: 'Every pass shall be signed by the Commanding Officer of the regiment, corps, unit, or detachment concerned, or by a station staff officer.'",
       authority="STATUTORY_PRESCRIBED", status="MANDATORY_FORM_WORDING", applicability="Exemption from tolls where a pass is required (r.3 exceptions)",
       signatory="Commanding officer or Station Staff Officer", competent_authority="Commanding Officer / station staff officer (r.4)", dependencies="Annexed schedule of persons and property",
@@ -970,3 +993,47 @@ REFERENCED_NOT_HELD = [
     ("IAFE-923 / IAFE-924 / IAFE-925 / A.F.A.2", "Estate receipt / inventory / statement of particulars / report of disposal (DPP Rules Schedule II)", "MML3 p.14-15"),
     ("AFT Practice Rules 2009 Form No. 1-9", "Index; scrutiny reports; order sheet; classification of papers; defects notice; memo for notice fee; notices (Forms 8-9)", "AFTPRAC09-C7 pp.4-9 (referenced; not printed in held 12-page copy)"),
 ]
+
+
+# ---------------------------------------------------------------- recorded page-image checks (WSG-R01 guard)
+# Every rule number written by hand into a title / prescribing_provision / requirement_quote of a family whose
+# wording comes from an OCR-mode source must be confirmed here against a rendered page image (the build fails
+# otherwise; see build_forms_registry.rule_number_guard). Images were rendered with pymupdf from the hash-verified
+# source bytes and read by the remediating author (AI visual reading; not legal validation). Images themselves
+# are not stored in the registry; they can be re-rendered from the cited source copy and page.
+VC_BY = "C12 WS-G remediation author (AI visual reading of rendered page image; not legal validation)"
+VISUAL_CHECKS = [
+    dict(id="VC-AFT-P26", src="AFTPR08-C7", page=26, region="whole page", dpi=130, date="2026-11-24", by=VC_BY, rule_numbers=["4"],
+         reads="'4. Procedure for filing applications. - (1) An application to the Tribunal shall be presented in Form I by the applicant in person or by an agent or by a duly authorised legal practitioner to the Registrar ...'"),
+    dict(id="VC-AFT-P27", src="AFTPR08-C7", page=27, region="whole page", dpi=130, date="2026-11-24", by=VC_BY, rule_numbers=["4"],
+         reads="'(4) The applicant may attach to and present with his application a receipt slip in Form II which shall be signed by the Registrar or the Officer receiving the application on behalf of the Registrar in acknowledgement of the receipt of the application.' (continuation of rule 4)"),
+    dict(id="VC-AFT-P29", src="AFTPR08-C7", page=29, region="band 25%-45% of page height", dpi=130, date="2026-11-24", by=VC_BY, rule_numbers=["8"],
+         reads="'8. Contents of application. - (1) Every application filed under section 14 or section 15 shall be fairly and legibly typed or printed ...'"),
+    dict(id="VC-AFT-P37", src="AFTPR08-C7", page=37, region="whole page", dpi=130, date="2026-11-24", by=VC_BY, rule_numbers=["27"],
+         reads="rule heading '27. Registration of legal practitioner's clerk. - (1) No clerk employed by a legal practitioner shall act as such ...' (printed page 36)"),
+    dict(id="VC-AFT-P38", src="AFTPR08-C7", page=38, region="whole page", dpi=130, date="2026-11-24", by=VC_BY, rule_numbers=["27"],
+         reads="'(3) A legal practitioner desirous of registering his clerk shall make an application to the Registrar in Form III and pay a sum of one hundred rupees as one time Tribunal Fee.' and '(4) ... any disqualification specified in rule 27 ...' (printed page 37)"),
+    dict(id="VC-AFT-P42", src="AFTPR08-C7", page=42, region="upper 40% of page", dpi=130, date="2026-11-24", by=VC_BY, rule_numbers=["4"],
+         reads="'Appendix 'A'' / 'FORM I' / '[see rule 4]' / 'APPLICATION UNDER SECTION 14 and 15OF THE ARMED FORCES TRIBUNAL ACT, 2007' / 'Title of the Case:' / 'INDEX'"),
+    dict(id="VC-AFT-P46", src="AFTPR08-C7", page=46, region="whole page (two halves)", dpi=130, date="2026-11-24", by=VC_BY, rule_numbers=["4", "27"],
+         reads="'FORM II' / '[see rule 4 (4)]' / 'RECEIPT SLIP' ... 'For Registrar, Armed Forces Tribunal' / 'Dated' / 'Seal'; then 'FORM III' / '(see rule 27)' / 'APPLICATION FOR THE REGISTRATION OF A CLERK' items 1-2(x)"),
+    dict(id="VC-AFT-P47", src="AFTPR08-C7", page=47, region="whole page", dpi=130, date="2026-11-24", by=VC_BY, rule_numbers=[],
+         reads="Form III continued: '(xi) Telephone / Mobile Number', '(xii) Payment details:', '[Signature of Clerk]', items 3-4, legal practitioner certificate ('Postal Order for Rs. 10'), 'Signature of the legal practitioner', 'To The Registrar'"),
+    dict(id="VC-GAZ-P2", src="AR54-GAZ", page=2, region="upper 20% of page", dpi=220, date="2026-11-24", by=VC_BY, rule_numbers=["4"],
+         reads="'4. Forms in Appendices.-(1) The forms set forth in the appendices to these rules, ... render invalid any charge, warrant, order, proceedings or any other document relevant to these rules. (2) Any omission of any such form shall not, by reason only of such omission, render any act or thing invalid.'"),
+    dict(id="VC-GAZ-P59-61", src="AR54-GAZ", page=59, last_page=61, region="whole pages", dpi=110, date="2026-11-24", by="C12 WS-G original build (recorded in v1.0.0)", rule_numbers=[],
+         reads="Appendix I Form No. I (first build; detail as recorded in that cycle)"),
+    dict(id="VC-GAZ-P72", src="AR54-GAZ", page=72, region="whole page (two halves)", dpi=170, date="2026-11-24", by=VC_BY, rule_numbers=[],
+         reads="'APPENDIX III PART II Form for use at Summary trials of N. C. Os. and other ranks under Sec. 80-82 of the Army Act, 1950.' 'OFFENCE REPORT'; 8 numbered columns: Place and date of offence | Offence | Plea | Names of Witnesses | Punishment awarded | Signature, Rank and Designation of Officer by whom awarded and date of award | Date of entry in Conduct sheet | Remarks; 'Signature of O. C. Unit.'; no 'Findings' column"),
+    dict(id="VC-AMD93-P19", src="AR-AMD-1993", page=19, region="whole page (two halves)", dpi=150, date="2026-11-24", by=VC_BY, rule_numbers=["186", "193", "169", "170", "170A", "171"],
+         reads="items 37-41: item 39(a) Part I IAFD-905 para 9 substituted; 39(b) Part III Form '(c) In the case of a Court of Inquiry IAFD-919C' added (number printed 'IAFD-' / '919C' across a line break; signature 'Officer Assembling the Court of Inquiry'); item 40(a)-(b) Forms B and C custody set-off paragraphs and notes (ff)/(dd); item 41(a) Appendix V heading 'WARRANTS UNDER ARMY RULES 169, 170 AND 171' figure '170' to '170A'; 41(b) Form I '170' to '170A'"),
+    dict(id="VC-AFT2011-P1-2", src="AFTPRA11-C7", page=1, last_page=2, region="whole pages", dpi=110, date="2026-11-24", by=VC_BY, rule_numbers=["7", "8", "12", "12A"],
+         reads="p.1 Gazette masthead and Hindi text (not read for content; no form layout visible); p.2 English: 'S.R.O. 05(E)' dated 29th July 2011; item 2 r.7 renumbered as sub-rule (1) and sub-rule (2) inserted; item 3 '12A.-Every application under rule 8 and the reply under rule 12 shall be supported by an affidavit of the person verifying the application or reply, as the case may be.' No form printed"),
+]
+
+# Field-level page-image observations (official copy) used in FORM_FIELDS.official_copy_presence.
+FIELD_VISUAL_NOTES = {
+    ("FF-AR54-APPIII-P2", "Findings"): "ABSENT_IN_OFFICIAL_COPY_PAGE_IMAGE (AR54-GAZ p.72, VC-GAZ-P72)",
+    ("FF-AR54-APPIII-P3C", "for investigation into"): ("WORDING_DIFFERS_IN_OFFICIAL_COPY_PAGE_IMAGE (AR-AMD-1993 p.19, VC-AMD93-P19: 'for' + a word with "
+                                                        "defective print read as 'nives'igating' + 'into'; not 'investigation')"),
+}

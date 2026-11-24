@@ -185,3 +185,136 @@ def test_summary_counts_match(summary, reg, fields, cov):
     assert c["coverage_rows"] == len(cov)
     assert summary["verification_status_all_rows"] == "DISCOVERED_FROM_SOURCE_NOT_LEGALLY_APPROVED"
     assert "percent" not in json.dumps(summary["counts"]).lower()
+
+
+# ---------------------------------------------------------------- C12 remediation of review WSG-R01..R15
+import copy  # noqa: E402
+
+
+def prim_rows(reg):
+    return {r["form_family_id"]: r for r in reg if r["occurrence_role"] == "PRIMARY"}
+
+
+def test_wsg_r01_aft_form3_pinned_to_rule_27(reg):
+    rows3 = [r for r in reg if r["form_family_id"] == "FF-AFTPR08-F3"]
+    assert rows3
+    for r in rows3:
+        assert "(see rule 27)" in r["printed_title"]
+        assert r["prescribing_provision"].startswith("r.27(3)")
+        assert r["requirement_language_as_printed"].startswith("r.27(3) [AFTPR08-C7 p.38]")
+        for col in ("printed_title", "prescribing_provision", "requirement_language_as_printed"):
+            assert not re.search(r"(rule|r\.)\s*17\b", r[col]), col
+        assert "VC-AFT-P46" in r["visual_check_refs"]
+    vc = {v["id"]: v for v in spec_forms.VISUAL_CHECKS}
+    assert "27" in vc["VC-AFT-P46"]["rule_numbers"] and "27" in vc["VC-AFT-P37"]["rule_numbers"] and "27" in vc["VC-AFT-P38"]["rule_numbers"]
+
+
+def test_wsg_r01_guard_rejects_unconfirmed_ocr_rule_numbers():
+    assert b.rule_number_guard(spec_forms.FAMILIES, spec_forms.VISUAL_CHECKS, spec_sources.SOURCES) == []
+    fams = copy.deepcopy(spec_forms.FAMILIES)
+    f3 = [f for f in fams if f["family_id"] == "FF-AFTPR08-F3"][0]
+    f3["title"] = f3["title"].replace("rule 27", "rule 17")   # the original OCR misreading
+    errs = b.rule_number_guard(fams, spec_forms.VISUAL_CHECKS, spec_sources.SOURCES)
+    assert any("rule number 17 in FF-AFTPR08-F3" in e for e in errs)
+    # removing the recorded image checks makes every hand-entered AFT rule number fail
+    no_aft = [v for v in spec_forms.VISUAL_CHECKS if v["src"] != "AFTPR08-C7"]
+    errs = b.rule_number_guard(spec_forms.FAMILIES, no_aft, spec_sources.SOURCES)
+    assert {"FF-AFTPR08-F1", "FF-AFTPR08-F2", "FF-AFTPR08-F3"} <= {e.split(" in ")[1].split(" ")[0] for e in errs}
+
+
+def test_wsg_r08_quote_verifier_rejects_non_verbatim_quotes():
+    st = b.Store(b.DEFAULT_SCRATCH, b.DEFAULT_C7)
+    fam = copy.deepcopy([f for f in spec_forms.FAMILIES if f["family_id"] == "FF-AR54-R46A-JA"][0])
+    assert b.verify_quotes(fam, st) == []
+    fam["requirement_quote"] = fam["requirement_quote"].replace("in such of the following forms as shall be appropriate", "in one of the following forms")
+    assert b.verify_quotes(fam, st)
+
+
+def test_wsg_r08_oath_quotes_per_rule(reg):
+    p = prim_rows(reg)
+    assert "as shall be appropriate" in p["FF-AR54-R46A-JA"]["requirement_language_as_printed"]
+    assert "if so required by the Act" in p["FF-AR54-R140-WITNESS"]["requirement_language_as_printed"]
+    assert p["FF-AR54-R9-ATTEST"]["requirement_language_as_printed"].startswith("AR 9(1) [AR54-IC p.4]")
+
+
+def test_wsg_r02_r12_shall_rule_applied_mechanically(reg, summary):
+    for fid, r in prim_rows(reg).items():
+        if r["form_authority_type_candidate"] == "STATUTORY_PRESCRIBED":
+            assert "shall" in r["requirement_language_as_printed"], fid
+    p = prim_rows(reg)
+    for fid in ("FF-AR54-APPV-FH", "FF-AFTPR08-F2", "FF-DPPR53-S2"):
+        assert p[fid]["form_authority_type_candidate"] == "OTHER_OR_UNDETERMINED", fid
+    assert p["FF-AR54-APPV-FH"]["status_category"] == "PERMISSIVE_USE_SPECIFIC_RULE"
+    assert p["FF-DPPR53-S2"]["status_category"] == "MANDATORY_DOCUMENT_LIST"
+    assert {x["family"] for x in summary["reclassified_in_remediation"]} >= {"FF-AR54-APPV-FH", "FF-AFTPR08-F2", "FF-DPPR53-S2"}
+
+
+def test_wsg_r03_no_hierarchy_wording_and_ar4_caveat(reg):
+    for name in ("FORM_DISCOVERY_REGISTER.csv", "FORM_FIELDS.csv", "SOURCE_COVERAGE.csv", "SUMMARY.json"):
+        assert "permissive unless a specific rule" not in open(os.path.join(OUT, name), encoding="utf-8").read()
+    for r in reg:
+        if r["instrument"] == "Army Rules, 1954" and r["appendix_part_or_schedule"].startswith("Appendix"):
+            assert "a deviation from such forms shall not, by reason only of such deviation, render invalid any charge" in r["cross_cutting_caveat_as_printed"]
+        else:
+            assert r["cross_cutting_caveat_as_printed"] == ""
+
+
+def test_wsg_r04_r05_source_basis_and_mml_labels(reg, fields, summary):
+    p = prim_rows(reg)
+    for fid, r in p.items():
+        assert r["source_basis"] in b.SOURCE_BASIS
+        if r["source_basis"] == "MML_ONLY":
+            assert r["field_set_version"] == "MML_ONLY_UNVERIFIED"
+            if r["form_authority_type_candidate"] == "STATUTORY_PRESCRIBED":
+                assert r["statutory_confirmation_status"].startswith("NOT_CONFIRMED_FROM_OFFICIAL_COPY"), fid
+        if b.is_mml(r["source_key"]) and r["source_basis"] == "BOTH":
+            assert r["field_set_version"].startswith("MML_VERSION_UNVERIFIED"), fid
+    c = summary["counts"]
+    assert sum(c["families_by_source_basis"].values()) == c["unique_form_families"]
+    assert c["families_by_source_basis"]["MML_ONLY"] == sum(1 for r in p.values() if r["source_basis"] == "MML_ONLY")
+    assert set(c["statutory_prescribed_mml_only_not_confirmed"]) == {fid for fid, r in p.items() if r["statutory_confirmation_status"].startswith("NOT_CONFIRMED")}
+    f13 = [f for f in fields if f["field_id"] == "FF-AR54-APPIII-P2#F13"][0]
+    assert f13["field_label_as_printed"] == "Findings" and "ABSENT_IN_OFFICIAL_COPY_PAGE_IMAGE" in f13["official_copy_presence"]
+    assert any(q.startswith("FF-AR54-APPIII-P2#F13") for q in summary["field_divergence_queue"])
+
+
+def test_wsg_r06_no_unconfirmed_negative_and_aft_2011_recorded(cov, reg):
+    for r in cov:
+        if r["coverage_state"] == "INSPECTED_NO_FORMS_FOUND":
+            assert r["pages_visually_inspected"] and not r["pages_visually_inspected"].startswith("NONE"), r["coverage_id"]
+        if r["coverage_method_limitation"].endswith("NOT_VISUALLY_CONFIRMED"):
+            assert r["coverage_state"] == "PARTIAL"
+    assert any(r["source_key"] == "AFTPRA11-C7" for r in cov)
+    dep = prim_rows(reg)["FF-AFTPR08-F1"]["procedural_dependencies"]
+    assert "12A" in dep and "NOT DETERMINED" in dep
+
+
+def test_wsg_r07_scope_stated_and_air_force_navy_listed(cov, summary):
+    assert "Army-first" in summary["scope_statement"]
+    oos = [r for r in cov if r["scope_this_cycle"].startswith("OUT_OF_SCOPE")]
+    assert any("Air Force Rules, 1969" in r["segment_label"] and r["holding"] == "NOT_HELD" for r in oos)
+    assert any("Navy" in r["scope_this_cycle"] and r["holding"] == "NOT_HELD" for r in oos)
+    readme = open(os.path.join(WS, "README.md"), encoding="utf-8").read()
+    assert "Army-first" in readme
+
+
+def test_wsg_r09_pinpoints(reg):
+    p = prim_rows(reg)
+    assert p["FF-AR54-APPIII-P2"]["prescribing_provision"].startswith("AR 22(3)(a)")
+    assert p["FF-AR54-APPV-FI"]["requirement_language_as_printed"].startswith("AR 170B(1) [AR54-IC p.192]")
+    assert p["FF-AR54-APPIII-SGCM"]["status_category"] == "PERMISSIVE_USE_SPECIFIC_RULE"
+
+
+def test_wsg_r10_doc_ranges_bounded(reg):
+    st = b.Store(b.DEFAULT_SCRATCH, b.DEFAULT_C7)
+    for r in reg:
+        if r["locator_type"] == "DOC_DERIVED_LINE" and r["locator_end"]:
+            assert int(r["locator_end"]) <= st.load(r["source_key"])["line_count"], r["candidate_id"]
+            assert r["locator_end_basis"] in ("END_OF_FILE", "NEXT_REGISTERED_OCCURRENCE_START_MINUS_1") or r["locator_end_basis"].startswith("CAPPED_AT_")
+
+
+def test_wsg_r11_generic_labels_marked(fields):
+    by_label = {f["field_label_as_printed"]: f for f in fields}
+    assert by_label["Name"]["generic_label"] == "YES"
+    assert by_label["Date offence was discovered"]["generic_label"] == "NO"
+    assert all(f["match_method"].startswith("normalised whole-word match") for f in fields)

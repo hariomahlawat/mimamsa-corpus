@@ -32,7 +32,7 @@ sys.path.insert(0, HERE)
 import spec_forms  # noqa: E402
 import spec_sources  # noqa: E402
 
-TOOL_VERSION = "c12-wsg-forms-registry/1.0.0"
+TOOL_VERSION = "c12-wsg-forms-registry/1.1.0"  # 1.1.0 = C12 remediation of review WSG-R01..R15
 RECORDED_ON = "2026-11-24"
 VERIFICATION_STATUS = "DISCOVERED_FROM_SOURCE_NOT_LEGALLY_APPROVED"
 WS_ROOT = os.path.dirname(HERE)
@@ -47,8 +47,17 @@ FIDELITY = {"DISCOVERED", "TRANSCRIBED", "FIDELITY_VERIFIED"}
 STATUS_CATEGORIES = {
     "MANDATORY_FORM_WORDING", "MANDATORY_FORM_WORDING_WITH_VARIATION", "MANDATORY_WITH_ALTERNATIVE_PERMITTED",
     "MANDATORY_DOCUMENT_LIST", "QUALIFIED_AS_FAR_AS_PRACTICABLE", "PERMISSIVE_USE_AR4", "PERMISSIVE_ATTACHMENT_FORM_PRESCRIBED",
+    "PERMISSIVE_USE_SPECIFIC_RULE",
     "SPECIMEN_OR_ILLUSTRATION", "REQUIREMENT_LANGUAGE_NOT_EXTRACTED", "UNDETERMINED",
 }
+SOURCE_BASIS = {"OFFICIAL_COPY", "MML_ONLY", "BOTH"}
+DOC_RANGE_CAP = 400
+# Labels this short/common occur in almost every form; a cross-copy hit on them is weak evidence (WSG-R10/R11).
+GENERIC_LABELS_EXTRA = {"form of oath", "form of affirmation", "given under my hand at", "the president of india"}
+SCOPE_STATEMENT = ("Army-first scope: this cycle registers forms from held Army Rules 1954 copies and from the AFT (Procedure) Rules 2008, "
+                   "DPP Rules 1953, Indian Soldiers (Litigation) Rules 1938, TA Rules 1948, Indian Tolls Rules 1942 and Assam Rifles Act 1941 copies held. "
+                   "Air Force and Navy rule-level instruments were NOT assessed (held derived texts heading-scanned only; official copies NOT_HELD); "
+                   "the 67 families are not the military-law form universe.")
 FUZZY_ACCEPT = 0.80
 FUZZY_WEAK = 0.65
 HEADING_RE = re.compile(
@@ -110,6 +119,113 @@ def match(label: str, text_n: str, mode: str):
 def fmt_match(m):
     kind, r = m
     return kind if kind in ("EXACT", "NOT_FOUND") else "%s:%.3f" % (kind, r)
+
+
+def is_mml(key):
+    spec = spec_sources.SOURCES.get(key)
+    return bool(spec) and spec["evidence_class"].startswith("UNVERIFIED_MANUAL")
+
+
+CITE_RE = re.compile(r"\[([A-Z0-9][A-Z0-9-]+) p\.(\d+)(?:-(\d+))?[^\]]*\]")
+RULE_NUM_RE = re.compile(r"(?i)(?:\brules?\s+|\br\.\s*|\bAR\s+)(\d{1,3}[A-Z]?)(?!\d)")
+
+
+def citations(text):
+    """[(src_key, first_page, last_page)] for every '[KEY p.N(-M)...]' citation in text."""
+    return [(m.group(1), int(m.group(2)), int(m.group(3) or m.group(2))) for m in CITE_RE.finditer(text)]
+
+
+def quoted_segments(text):
+    """Single-quoted segments following each citation: {(key,a,b): [segment pieces split on '...']}."""
+    out = []
+    for m in CITE_RE.finditer(text):
+        tail = text[m.end():]
+        nxt = CITE_RE.search(tail)
+        chunk = tail[:nxt.start()] if nxt else tail
+        mm = re.search(r"\bMML\b", chunk)  # a later quotation attributed to an MML copy is not part of this citation
+        if mm:
+            chunk = chunk[:mm.start()]
+        for q in re.findall(r"'((?:[^']|'(?=[a-z]))+)'", chunk):
+            for piece in re.split(r"\.\.\.|…", q):
+                if len(norm(piece).split()) >= 3:
+                    out.append(((m.group(1), int(m.group(2)), int(m.group(3) or m.group(2))), piece))
+    return out
+
+
+def verify_quotes(fam, st):
+    """WSG-R08: every quoted piece cited to a native-text (exact-mode) source page must occur there
+    (normalised whole-word match; the cited page plus the next page, to allow page breaks)."""
+    errs = []
+    for field in ("requirement_quote", "prescribing_provision"):
+        for (key, a, b), piece in quoted_segments(fam[field]):
+            spec = spec_sources.SOURCES.get(key)
+            if not spec or spec["kind"] != "pdf" or spec["match_mode"] != "exact":
+                continue
+            rec = st.load(key)
+            hay = re.sub(r"\bindiacode\b", " ", page_text_n(rec, a, min(b + 1, rec["page_count"])))  # drop page watermark
+            hay = re.sub(r"\s+", " ", hay)
+            if not contains(norm(piece), hay):
+                errs.append("quote not found on cited page: %s %s [%s p.%d-%d] %r" % (fam["family_id"], field, key, a, b, piece[:80]))
+    return errs
+
+
+def visual_pages(vc):
+    return range(vc["page"], vc.get("last_page", vc["page"]) + 1)
+
+
+def rule_number_guard(families, visual_checks, sources):
+    """WSG-R01: a rule number written by hand into title / prescribing_provision / requirement_quote is attributed
+    to the first citation '[KEY p.N]' that follows it in the same text (within 160 characters), or else to the
+    family's PRIMARY source. Numbers attributed to a native-text source are checked against that page's text by
+    text_cited_rule_numbers_ok. Numbers attributed to an OCR-mode source are accepted ONLY if a recorded page-image
+    check (spec_forms.VISUAL_CHECKS) of that source confirms the number - OCR digit confusion ('rule :l 7' for 27)
+    therefore cannot pass silently."""
+    errs = []
+    confirmed = {}
+    for vc in visual_checks:
+        for n in vc["rule_numbers"]:
+            confirmed.setdefault((vc["src"], n.upper()), set()).update(visual_pages(vc))
+    for fam in families:
+        prim = [o["src"] for o in fam["occurrences"] if o["role"] == "PRIMARY"][0]
+        for text in (fam["title"], fam["prescribing_provision"], fam["requirement_quote"]):
+            for m in RULE_NUM_RE.finditer(text):
+                n = m.group(1).upper()
+                nxt = CITE_RE.search(text, m.end())
+                src = nxt.group(1) if (nxt and nxt.start() - m.end() <= 160) else prim
+                if src not in sources or sources[src]["match_mode"] != "fuzzy":
+                    continue
+                if (src, n) not in confirmed:
+                    errs.append("rule number %s in %s (attributed to OCR source %s) is not confirmed by a recorded page-image check"
+                                % (n, fam["family_id"], src))
+    return errs
+
+
+def text_cited_rule_numbers_ok(fam, st):
+    """Companion to rule_number_guard: a rule number attributed (same rule) to a native-text citation must occur
+    as a token on one of the cited pages (or the page before, where the rule may begin)."""
+    errs = []
+    for field in ("title", "prescribing_provision", "requirement_quote"):
+        text = fam[field]
+        for m in RULE_NUM_RE.finditer(text):
+            nxt = CITE_RE.search(text, m.end())
+            if not nxt or nxt.start() - m.end() > 160:
+                continue
+            key = nxt.group(1)
+            spec = spec_sources.SOURCES.get(key)
+            if not spec or spec["match_mode"] != "exact" or spec["kind"] != "pdf":
+                continue
+            rec = st.load(key)
+            pages = set()
+            for pa, pb in re.findall(r"p\.(\d+)(?:-(\d+))?", nxt.group(0)):
+                pages.update(range(max(1, int(pa) - 1), int(pb or pa) + 1))
+            if not any(contains(norm(m.group(1)), rec["pages_n"][pg - 1]) for pg in pages if pg <= rec["page_count"]):
+                errs.append("rule number %s not found on cited native-text page(s) %s (%s %s)" % (m.group(1), nxt.group(0), fam["family_id"], field))
+    return errs
+
+
+def is_generic_label(label):
+    n = norm(label)
+    return len(n.split()) <= 2 or n in GENERIC_LABELS_EXTRA
 
 
 # ------------------------------------------------------------------ source loading
@@ -189,31 +305,101 @@ def find_line_anchor(rec, anchor, from_line):
 REG_COLS = [
     "candidate_id", "form_family_id", "occurrence_role", "instrument", "appendix_part_or_schedule", "printed_form_number", "printed_title",
     "source_key", "source_logical_id", "c5_copy_id", "source_copy_sha256", "source_file", "source_original_doc_sha256", "edition_or_version_evidence",
-    "source_evidence_class", "locator_type", "locator_start", "locator_end", "anchor_text_as_printed", "anchor_match",
+    "source_evidence_class", "locator_type", "locator_start", "locator_end", "locator_end_basis", "page_image_locator", "page_region_bbox",
+    "anchor_text_as_printed", "anchor_match",
     "prescribing_provision", "requirement_language_as_printed", "form_authority_type_candidate", "status_category",
+    "source_basis", "official_copy_extent", "field_set_version", "statutory_confirmation_status", "cross_cutting_caveat_as_printed",
     "applicability_conditions_as_printed", "signatory_as_printed", "competent_authority_as_printed", "procedural_dependencies",
     "companion_documents_as_printed", "version_amendment_history", "supersession_status", "alternate_occurrences",
-    "field_transcription_scope", "fields_recorded", "fields_matched_in_this_copy", "fidelity_state", "pages_visually_inspected",
+    "field_transcription_scope", "fields_recorded", "fields_matched_in_this_copy", "fields_matched_non_generic", "fidelity_state",
+    "pages_visually_inspected", "visual_check_refs",
     "applicability_state", "legal_approval_state", "publication_state", "dependency_freshness_state", "verification_status",
-    "occurrence_note", "outstanding_uncertainties",
+    "occurrence_note", "outstanding_uncertainties", "review_finding_refs",
 ]
 FIELD_COLS = [
     "field_id", "form_family_id", "transcription_candidate_id", "seq", "field_label_as_printed", "field_kind",
-    "mandatory_indication_as_printed", "primary_match", "cross_copy_presence", "verification_status",
+    "mandatory_indication_as_printed", "primary_match", "match_method", "generic_label", "cross_copy_presence",
+    "field_set_version", "official_copy_presence", "verification_status",
 ]
 COV_COLS = [
     "coverage_id", "source_key", "source_logical_id", "c5_copy_id", "source_copy_sha256", "holding", "source_location", "evidence_class",
     "edition_evidence", "access_marking", "page_or_line_count", "segment_label", "expected_inspection_range", "text_extracted_range",
     "pages_visually_inspected", "pages_missing_unreadable_or_unexamined", "inspection_method", "inspection_date", "coverage_state",
-    "candidate_occurrences_found", "candidate_ids", "unregistered_heading_hits", "excluded_ranges_and_reason", "notes", "verification_status",
+    "candidate_occurrences_found", "candidate_ids", "unregistered_heading_hits", "excluded_ranges_and_reason", "notes",
+    "scope_this_cycle", "coverage_method_limitation", "reviewer_evidence", "review_remediation_state", "legal_review_ref", "verification_status",
 ]
+MATCH_METHOD = "normalised whole-word match (case and punctuation stripped) within the primary page/line range; fuzzy ratio for OCR sources"
+FINDING_FAMILIES = {
+    "WSG-R01": {"FF-AFTPR08-F3"},
+    "WSG-R02": {"FF-AR54-APPV-FH", "FF-AFTPR08-F2"},
+    "WSG-R06": {"FF-AFTPR08-F1"},
+    "WSG-R09": {"FF-AR54-APPIII-P2", "FF-AR54-APPV-FI", "FF-AR54-APPIII-SGCM"},
+    "WSG-R12": {"FF-DPPR53-S2"},
+}
+
+
+def occ_extent(o):
+    note = o.get("note", "")
+    if "NOT REPRODUCED" in note:
+        return "PLACEHOLDER"
+    if re.search(r"Amending text\b.*\bonly", note):
+        return "AMENDING_TEXT_ONLY"
+    return "FULL"
+
+
+def family_basis(fam):
+    """WSG-R04/R05: structured source basis. 'Official copy' = a held non-MML government copy (Gazette facsimile,
+    India Code compilation or India Code bitstream); it does not mean authenticated or current."""
+    occs = [o for o in fam["occurrences"] if occ_extent(o) != "PLACEHOLDER"]
+    off = [o for o in occs if not is_mml(o["src"])]
+    mml = [o for o in occs if is_mml(o["src"])]
+    basis = "BOTH" if off and mml else ("OFFICIAL_COPY" if off else "MML_ONLY")
+    extent = "NONE"
+    if off:
+        extent = "FULL_FORM_TEXT" if any(occ_extent(o) == "FULL" for o in off) else "AMENDING_TEXT_ONLY"
+    prim = [o for o in fam["occurrences"] if o["role"] == "PRIMARY"][0]
+    off_keys = ",".join(sorted({o["src"] for o in off}))
+    if not is_mml(prim["src"]):
+        fsv = "OFFICIAL_COPY_VERSION (%s)" % prim["src"]
+    elif extent == "FULL_FORM_TEXT":
+        fsv = ("MML_VERSION_UNVERIFIED (official copy held: %s; not used as primary because its OCR text layer is not reliable "
+               "for transcription and its pages were not visually checked field by field)" % off_keys)
+    elif extent == "AMENDING_TEXT_ONLY":
+        fsv = "MML_VERSION_UNVERIFIED (official copy held for amending text only: %s)" % off_keys
+    else:
+        fsv = "MML_ONLY_UNVERIFIED"
+    if fam["authority"] != "STATUTORY_PRESCRIBED":
+        scs = "NOT_APPLICABLE (authority candidate is not STATUTORY_PRESCRIBED)"
+    else:
+        rule_off = any(not is_mml(k) for k, _a, _b in citations(fam["requirement_quote"]))
+        if not rule_off:
+            scs = "NOT_CONFIRMED_FROM_OFFICIAL_COPY: RULE_AND_FORM_TEXT_MML_ONLY"
+        elif extent != "FULL_FORM_TEXT":
+            scs = "NOT_CONFIRMED_FROM_OFFICIAL_COPY: RULE_TEXT_OFFICIAL_FORM_TEXT_MML_ONLY"
+        elif is_mml(prim["src"]):
+            scs = "RULE_AND_FORM_TEXT_IN_OFFICIAL_COPY (field list MML version)"
+        else:
+            scs = "RULE_AND_FORM_TEXT_IN_OFFICIAL_COPY"
+    assert basis in SOURCE_BASIS
+    return dict(source_basis=basis, official_copy_extent=extent, field_set_version=fsv, statutory_confirmation_status=scs)
 
 
 def build(scratch, c7):
     st = Store(scratch, c7)
     errors = []
     reg_rows, field_rows = [], []
+    fam_basis = {}
     occ_index = []  # (family, cand_id, src, start, end, ltype)
+
+    # ---- guards (WSG-R01, WSG-R08)
+    errors.extend(rule_number_guard(spec_forms.FAMILIES, spec_forms.VISUAL_CHECKS, spec_sources.SOURCES))
+    vc_by_src = {}
+    for vc in spec_forms.VISUAL_CHECKS:
+        assert vc["src"] in spec_sources.SOURCES, vc["id"]
+        vc_by_src.setdefault(vc["src"], []).append(vc)
+    for fam in spec_forms.FAMILIES:
+        errors.extend(verify_quotes(fam, st))
+        errors.extend(text_cited_rule_numbers_ok(fam, st))
 
     # ---- resolve occurrences
     resolved = {}
@@ -235,6 +421,12 @@ def build(scratch, c7):
                 tn = page_text_n(rec, a, b)
                 am = match(o["anchor"], tn, mode)
                 ltype, start, end = "PDF_PAGE", a, b
+                if mode == "fuzzy":  # WSG-R01: digits in an OCR anchor must be exact tokens or visually confirmed
+                    toks = set(tn.split())
+                    seen = {pg for vc in vc_by_src.get(o["src"], []) for pg in visual_pages(vc)}
+                    for d in re.findall(r"\d+", norm(o["anchor"])):
+                        if d not in toks and not (set(range(a, b + 1)) & seen):
+                            errors.append("OCR anchor digit %s not an exact token and page not visually checked: %s" % (d, cid))
             else:
                 ln = find_line_anchor(rec, o["anchor"], o["from_line"])
                 if ln is None:
@@ -264,8 +456,11 @@ def build(scratch, c7):
         for oc in occs:
             if oc["ltype"] == "DOC_DERIVED_LINE" and oc["start"] is not None:
                 later = sorted(x for x in by_src[oc["o"]["src"]] if x > oc["start"])
-                cap = oc["start"] + 400
-                oc["end"] = min([cap] + ([later[0] - 1] if later else []))
+                cands = [(oc["start"] + DOC_RANGE_CAP, "CAPPED_AT_%d_LINES (form end not established)" % DOC_RANGE_CAP),
+                         (oc["rec"]["line_count"], "END_OF_FILE")]
+                if later:
+                    cands.append((later[0] - 1, "NEXT_REGISTERED_OCCURRENCE_START_MINUS_1"))
+                oc["end"], oc["end_basis"] = min(cands, key=lambda x: (x[0], x[1]))
                 lines = oc["rec"]["lines"]
                 oc["tn"] = norm(" ".join(lines[k] for k in sorted(lines) if oc["start"] <= k <= oc["end"]))
 
@@ -277,8 +472,14 @@ def build(scratch, c7):
         if len(prim) != 1:
             raise SystemExit("family %s must have exactly one PRIMARY occurrence" % fid)
         prim = prim[0]
+        basis = family_basis(fam)
+        fam_basis[fid] = basis
+        official_full = [oc for oc in occs if oc is not prim and not is_mml(oc["o"]["src"]) and occ_extent(oc["o"]) == "FULL"]
+        official_amd = [oc for oc in occs if oc is not prim and not is_mml(oc["o"]["src"]) and occ_extent(oc["o"]) == "AMENDING_TEXT_ONLY"]
         per_occ_hits = {oc["cid"]: 0 for oc in occs}
+        per_occ_ng = {oc["cid"]: 0 for oc in occs}
         for i, (label, kind) in enumerate(fam["fields"], 1):
+            generic = is_generic_label(label)
             pm = match(label, prim["tn"], prim["mode"])
             if prim["mode"] == "exact" and pm[0] != "EXACT":
                 errors.append("field not found exactly in primary: %s #%d %r (%s)" % (fid, i, label, fmt_match(pm)))
@@ -286,7 +487,8 @@ def build(scratch, c7):
                 errors.append("field not matched (fuzzy) in primary: %s #%d %r (%s)" % (fid, i, label, fmt_match(pm)))
             if pm[0] in ("EXACT", "FUZZY"):
                 per_occ_hits[prim["cid"]] += 1
-            cross = []
+                per_occ_ng[prim["cid"]] += 0 if generic else 1
+            cross, off, amd = [], [], []
             for oc in occs:
                 if oc is prim:
                     continue
@@ -296,21 +498,63 @@ def build(scratch, c7):
                 m = match(label, oc["tn"], "fuzzy")
                 if m[0] in ("EXACT", "FUZZY"):
                     per_occ_hits[oc["cid"]] += 1
-                cross.append("%s=%s" % (oc["cid"], fmt_match(m)))
+                    per_occ_ng[oc["cid"]] += 0 if generic else 1
+                cross.append("%s=%s%s" % (oc["cid"], fmt_match(m), " (generic label; weak evidence)" if generic else ""))
+                if oc in official_full:
+                    off.append((oc, m))
+                if oc in official_amd:
+                    amd.append((oc, m))
+            if not is_mml(prim["o"]["src"]):
+                ocp = "PRIMARY_IS_OFFICIAL_COPY"
+            elif off:
+                good = [o for o, m in off if m[0] in ("EXACT", "FUZZY")]
+                amd_good = [o for o, m in amd if m[0] in ("EXACT", "FUZZY")]
+                miss = ";".join("%s=%s" % (o["o"]["src"], fmt_match(m)) for o, m in off)
+                if good:
+                    ocp = "PRESENT_IN_OFFICIAL_COPY_TEXT_LAYER (%s)" % ";".join(o["o"]["src"] for o in good)
+                elif amd_good:
+                    ocp = ("PRESENT_IN_OFFICIAL_AMENDING_TEXT_LAYER (%s); not in pre-amendment official copy text layer (%s)"
+                           % (";".join(o["o"]["src"] for o in amd_good), miss))
+                else:
+                    ocp = "NOT_FOUND_OR_WEAK_IN_OFFICIAL_COPY_TEXT_LAYER (%s; OCR - visual check needed; DIVERGENCE_QUEUE)" % miss
+            elif basis["official_copy_extent"] == "AMENDING_TEXT_ONLY":
+                ocp = "OFFICIAL_COPY_HOLDS_AMENDING_TEXT_ONLY"
+            else:
+                ocp = "NO_OFFICIAL_COPY_HELD"
+            vn = spec_forms.FIELD_VISUAL_NOTES.get((fid, label))
+            if vn:
+                ocp = vn + "; DIVERGENCE_QUEUE"
             field_rows.append({
                 "field_id": "%s#F%02d" % (fid, i), "form_family_id": fid, "transcription_candidate_id": prim["cid"], "seq": i,
                 "field_label_as_printed": label, "field_kind": kind,
                 "mandatory_indication_as_printed": "NONE_PRINTED_FOR_FIELD (form-level requirement only; see register requirement_language_as_printed)",
-                "primary_match": fmt_match(pm), "cross_copy_presence": " | ".join(sorted(cross)), "verification_status": VERIFICATION_STATUS,
+                "primary_match": fmt_match(pm), "match_method": MATCH_METHOD, "generic_label": "YES" if generic else "NO",
+                "cross_copy_presence": " | ".join(sorted(cross)), "field_set_version": basis["field_set_version"],
+                "official_copy_presence": ocp, "verification_status": VERIFICATION_STATUS,
             })
 
         all_ids = [oc["cid"] for oc in occs]
+        caveat = spec_forms.AR4_1_VERBATIM if (fam["instrument"] == "Army Rules, 1954" and fam["part"].startswith("Appendix")) else ""
         for oc in occs:
             o, rec, spec = oc["o"], oc["rec"], oc["rec"]["spec"]
             is_prim = o["role"] == "PRIMARY"
             fidelity = "DISCOVERED"
             if is_prim and spec["text_quality"] == "TEXT" and oc["am"][0] == "EXACT":
-                fidelity = "TRANSCRIBED"  # labels transcribed from a native text layer and verified to occur verbatim
+                fidelity = "TRANSCRIBED"  # labels taken from a native text layer; each label matched (normalised whole-word) in that copy
+            vcs = []
+            if oc["ltype"] == "PDF_PAGE":
+                vcs = [vc for vc in vc_by_src.get(o["src"], []) if set(visual_pages(vc)) & set(range(oc["start"], oc["end"] + 1))]
+            refs = sorted(f for f, ids in FINDING_FAMILIES.items() if fid in ids)
+            if caveat:
+                refs.append("WSG-R03")
+            if basis["source_basis"] == "BOTH" and is_mml(prim["o"]["src"]):
+                refs.append("WSG-R04")
+            if basis["source_basis"] == "MML_ONLY":
+                refs.append("WSG-R05")
+            if fam["status"] == "MANDATORY_WITH_ALTERNATIVE_PERMITTED":
+                refs.append("WSG-R08")
+            if oc["ltype"] == "DOC_DERIVED_LINE":
+                refs.append("WSG-R10")
             reg_rows.append({
                 "candidate_id": oc["cid"], "form_family_id": fid, "occurrence_role": o["role"], "instrument": fam["instrument"],
                 "appendix_part_or_schedule": fam["part"], "printed_form_number": fam["number"], "printed_title": fam["title"],
@@ -319,22 +563,29 @@ def build(scratch, c7):
                 "source_original_doc_sha256": spec.get("original_sha256", ""), "edition_or_version_evidence": spec["edition_evidence"],
                 "source_evidence_class": spec["evidence_class"], "locator_type": oc["ltype"],
                 "locator_start": "" if oc["start"] is None else oc["start"], "locator_end": "" if oc["end"] is None else oc["end"],
+                "locator_end_basis": "PAGE_RANGE_AS_CITED" if oc["ltype"] == "PDF_PAGE" else oc.get("end_basis", "ANCHOR_NOT_FOUND"),
+                "page_image_locator": "; ".join("%s: %s p.%s %s, %d dpi, %s" % (vc["id"], vc["src"], "-".join(str(x) for x in sorted({vc["page"], vc.get("last_page", vc["page"])})), vc["region"], vc["dpi"], vc["date"]) for vc in vcs),
+                "page_region_bbox": "",
                 "anchor_text_as_printed": o["anchor"], "anchor_match": fmt_match(oc["am"]),
                 "prescribing_provision": fam["prescribing_provision"], "requirement_language_as_printed": fam["requirement_quote"],
                 "form_authority_type_candidate": fam["authority"], "status_category": fam["status"],
+                "source_basis": basis["source_basis"], "official_copy_extent": basis["official_copy_extent"],
+                "field_set_version": basis["field_set_version"], "statutory_confirmation_status": basis["statutory_confirmation_status"],
+                "cross_cutting_caveat_as_printed": caveat,
                 "applicability_conditions_as_printed": fam["applicability"], "signatory_as_printed": fam["signatory"],
                 "competent_authority_as_printed": fam["competent_authority"], "procedural_dependencies": fam["dependencies"],
                 "companion_documents_as_printed": fam["companions"], "version_amendment_history": fam["version_history"],
                 "supersession_status": fam["supersession"], "alternate_occurrences": ";".join(x for x in all_ids if x != oc["cid"]),
                 "field_transcription_scope": fam["field_scope"] if is_prim else "CROSS_CHECK_ONLY (labels from primary)",
                 "fields_recorded": len(fam["fields"]), "fields_matched_in_this_copy": per_occ_hits[oc["cid"]],
+                "fields_matched_non_generic": per_occ_ng[oc["cid"]],
                 "fidelity_state": fidelity, "pages_visually_inspected": o.get("visual", "NONE_THIS_CYCLE"),
+                "visual_check_refs": ";".join(vc["id"] for vc in vcs),
                 "applicability_state": "NOT_ESTABLISHED", "legal_approval_state": "RESEARCH_ONLY",
                 "publication_state": "NOT_STAGED (no registry publication)", "dependency_freshness_state": "NOT_ASSESSED",
                 "verification_status": VERIFICATION_STATUS, "occurrence_note": o.get("note", ""), "outstanding_uncertainties": fam["uncertainties"],
+                "review_finding_refs": ";".join(sorted(set(refs))),
             })
-            for x in (oc["start"], oc["end"]):
-                pass
             if oc["start"] is not None:
                 occ_index.append((fid, oc["cid"], o["src"], oc["start"], oc["end"], oc["ltype"]))
 
@@ -357,16 +608,16 @@ def build(scratch, c7):
         unreg[key] = hits
 
     cov_rows = coverage(st, occ_index, unreg)
-    return dict(reg=reg_rows, fields=field_rows, cov=cov_rows, errors=errors, store=st, unreg=unreg, occ_index=occ_index)
+    return dict(reg=reg_rows, fields=field_rows, cov=cov_rows, errors=errors, store=st, unreg=unreg, occ_index=occ_index, basis=fam_basis)
 
 
 # ------------------------------------------------------------------ coverage
 SEGMENTS = [
     # key, label, (a,b) or None=whole, method, visual, state, gaps/excluded, notes
-    ("AR54-GAZ", "Rules text (S.R.O. 484 rr.1-205)", (1, 58), "pymupdf text layer (OCR of scan) + anchor/heading search", "NONE", "INSPECTED_WITH_GAPS",
-     "Pages not visually inspected; OCR quality varies (headers garbled).", "Oath/affirmation forms printed in rr.9, 45, 46, 109, 140 located."),
-    ("AR54-GAZ", "Appendices I-V (arrangement p.58; forms pp.59-86)", (58, 86), "pymupdf text layer (OCR) + visual inspection of pp.59-61 (rendered 110 dpi)", "59-61", "INSPECTED_WITH_GAPS",
-     "Appendix II (Form of Charges) and Appendix III Part I (Forms as to courts-martial) are listed in the arrangement (p.58) but their text was not located on pp.59-86 of this copy; pp.62-86 not visually inspected.",
+    ("AR54-GAZ", "Rules text (S.R.O. 484 rr.1-205)", (1, 58), "pymupdf text layer (OCR of scan) + anchor/heading search; page image of p.2 upper part (AR 4) checked", "2 (upper 20% only)", "INSPECTED_WITH_GAPS",
+     "Pages other than p.2 (upper part) not visually inspected; OCR quality varies (headers garbled).", "Oath/affirmation forms printed in rr.9, 45, 46, 109, 140 located."),
+    ("AR54-GAZ", "Appendices I-V (arrangement p.58; forms pp.59-86)", (58, 86), "pymupdf text layer (OCR) + visual inspection of pp.59-61 (rendered 110 dpi) and p.72 (170 dpi)", "59-61; 72", "INSPECTED_WITH_GAPS",
+     "Appendix II (Form of Charges) and Appendix III Part I (Forms as to courts-martial) are listed in the arrangement (p.58) but their text was not located on pp.59-86 of this copy; pp.62-71 and 73-86 not visually inspected. Field lists of forms also printed here are the MML 2 version (field_set_version).",
      "App. I Forms I-II, App. III Pts II-IV, App. IV Pts I-II (Forms 1, 2, A-G) and App. V (Forms H-L) located."),
     ("AR54-GAZ", "Other S.R.O.s in the same Gazette issue", (87, 88), "heading scan", "NONE", "INSPECTED_NO_FORMS_FOUND",
      "Excluded: not Army Rules (S.R.O. 486, 489 cantonment bye-laws etc.).", ""),
@@ -393,22 +644,24 @@ SEGMENTS = [
     ("MML1-DOC", "Part I commentary (DOC)", None, "line heading scan", "NONE", "INSPECTED_NO_FORMS_FOUND", "Heading scan only.", ""),
     ("AR-AMD-1965", "S.R.O. 116 of 1965", None, "text layer (OCR)", "NONE", "INSPECTED_NO_FORMS_FOUND",
      "Amending text only (App. I Form No. I wording substitutions at p.3) - recorded as version history, not as a form.", ""),
-    ("AR-AMD-1993", "S.R.O. 17(E) of 1993", None, "text layer (OCR)", "NONE", "INSPECTED_WITH_GAPS",
-     "Not visually inspected; OCR noisy.", "Inserted/amended forms: App. III Pt I IAFD-905 para 9; App. III Pt III (c); App. IV Forms B, C; App. V heading, Form I, Forms 1-A and I-B."),
+    ("AR-AMD-1993", "S.R.O. 17(E) of 1993", None, "text layer (OCR); page image of p.19 checked (150 dpi)", "19", "INSPECTED_WITH_GAPS",
+     "Pages other than p.19 not visually inspected (incl. pp.20-21 Forms 1-A and I-B); OCR noisy.", "Inserted/amended forms: App. III Pt I IAFD-905 para 9; App. III Pt III (c); App. IV Forms B, C; App. V heading, Form I, Forms 1-A and I-B."),
     ("AA50-IC", "Army Act 1950 (whole)", None, "text layer heading scan", "NONE", "INSPECTED_NO_FORMS_FOUND",
      "Act prescribes forms by reference (ss.13, 17, 166, 168, 169, 191(2)(j)) but prints none.", ""),
     ("RA87-CH5", "Regulations for the Army 1987 Ch. V extract", None, "text layer", "NONE", "INSPECTED_NO_FORMS_FOUND",
      "5-page extract only; references IAFF-958, IAFF-3013, AFMSF-2A by number.", ""),
     ("AFT07-IC", "AFT Act 2007 (whole)", None, "text layer heading scan", "NONE", "INSPECTED_NO_FORMS_FOUND", "", ""),
-    ("AFTPR08-C7", "AFT (Procedure) Rules 2008 incl. Appendix 'A'", None, "text layer (OCR) + anchor search", "NONE", "INSPECTED_WITH_GAPS",
-     "Not visually inspected; OCR noisy; amendments (2011) not compared.", "Forms I-III located pp.42-47."),
+    ("AFTPR08-C7", "AFT (Procedure) Rules 2008 incl. Appendix 'A'", None, "text layer (OCR) + anchor search; page images of pp.26, 27, 29 (part), 37, 38, 42 (part), 46, 47 checked", "26; 27; 29 (band); 37; 38; 42 (upper part); 46; 47", "INSPECTED_WITH_GAPS",
+     "Pages other than those listed not visually inspected; OCR noisy (e.g. 'rule :l 7' for 'rule 27' on p.46); pp.43-45 (Form I body) not visually inspected.", "Forms I-III located pp.42-47. 2011 amendment examined separately (AFTPRA11-C7)."),
+    ("AFTPRA11-C7", "AFT (Procedure) Amendment Rules 2011 (S.R.O. 05(E), 2 pp.)", None, "page images of pp.1-2 (110 dpi); English text p.2 read", "1-2", "INSPECTED_NO_FORMS_FOUND",
+     "p.1 Hindi text not read for content (no form layout visible on the image).", "No form printed. Inserts r.7(2) and r.12A (affidavit supporting applications under r.8 and replies under r.12); recorded as an unexamined dependency of AFT Form I."),
     ("AFTPRAC09-C7", "AFT Practice Rules 2009 (12 pp.)", None, "text layer (OCR)", "NONE", "INSPECTED_WITH_GAPS",
      "Forms No. 1-9 are referenced (pp.4-9) but not printed; held copy appears to end at r.41 (forms annex absent).", ""),
     ("DPPR53-C7", "DPP Rules 1953 (6 pp.)", None, "text layer", "NONE", "INSPECTED_WITH_GAPS",
      "Schedules I-II referenced (rr.9, 29, 33) but not printed in this copy.", ""),
     ("DPPA50-C7", "DPP Act 1950", None, "text layer heading scan", "NONE", "INSPECTED_NO_FORMS_FOUND", "", ""),
     ("RAF2000-C7", "Regulations for the Air Force (reprint 2000)", None, "text layer heading scan only", "NONE", "PARTIAL",
-     "Not itemised: Air Force forms outside the Army-first scope of this cycle; access marking reported by C5 must be checked before any reuse.", ""),
+     "NOT_ASSESSED for forms: Air Force forms outside the Army-first scope of this cycle; access marking reported by C5 must be checked before any reuse.", ""),
 ]
 
 NOT_HELD = [
@@ -432,7 +685,27 @@ NOT_HELD = [
     ("C5-SRC-P1-ER-GMO-2023", "Entitlement Rules / GMO 2023 official text (medical board formats)", "NOT_HELD_CANDIDATE_LOCATED (C5); an image-only 35-page copy (29f6fa2c) is held but not examined"),
     ("REFERENCED-IAF-FORMS", "Army forms referenced by number in held texts: " + "; ".join(r[0] for r in spec_forms.REFERENCED_NOT_HELD), "Layouts not printed in any held copy"),
     ("MML-AUTHENTICATED-EDITIONS", "Authenticated official printings of the Manual of Military Law (any edition)", "Not held; all 8 MML files UNVERIFIED_MANUAL (WS-C)"),
+    # WSG-R07: Air Force and Navy rule-level instruments (Army-first cycle; nothing is asserted about their contents)
+    ("AIR-FORCE-RULES-1969", "Air Force Rules, 1969 (rule-level instrument under the Air Force Act 1950; name as given in review WSG-R07)", "NOT_HELD; not located in C5 registers or c7 git; not searched for this cycle", "OUT_OF_SCOPE_THIS_CYCLE (Air Force)"),
+    ("AIR-FORCE-ACT-1950-OTHER-INSTRUMENTS", "Other rule-level instruments under the Air Force Act 1950", "NOT_IDENTIFIED / NOT_HELD; not assessed", "OUT_OF_SCOPE_THIS_CYCLE (Air Force)"),
+    ("C5-SRC-P2-PEN-REGS-AF-NAVY", "Pension Regulations for the Air Force Parts I and II (1960) and Navy (Pension) Regulations 1964 - official copies", "NOT_HELD_CANDIDATE_LOCATED (C5); c7 holds a derived text of the Navy Pension Regulations 1964 only (heading-scan row)", "OUT_OF_SCOPE_THIS_CYCLE (Air Force/Navy)"),
+    ("C5-SRC-P2-RNAVY-PT1/PT2/PT3", "Regulations for the Navy Part I, Part II (Discipline and Miscellaneous) and Part III - official copies", "NOT_HELD_CANDIDATE_LOCATED (C5); c7 holds derived texts only (heading-scan rows); raw files not examined here", "OUT_OF_SCOPE_THIS_CYCLE (Navy)"),
+    ("C5-SRC-P2-INAS-1973", "Indian Naval Auxiliary Service Regulations 1973", "NOT_HELD_CANDIDATE_LOCATED (C5)", "OUT_OF_SCOPE_THIS_CYCLE (Navy)"),
+    ("C5-SRC-P2-RNAVY-AMDT-2022-2024", "Naval Ceremonial, Conditions of Service and Miscellaneous (Amendment) Regulations 2022 and 2024", "NOT_HELD_CANDIDATE_LOCATED (C5)", "OUT_OF_SCOPE_THIS_CYCLE (Navy)"),
+    ("NAVY-ACT-1957-OTHER-INSTRUMENTS", "Other rule-level instruments under the Navy Act 1957", "NOT_IDENTIFIED / NOT_HELD; not assessed", "OUT_OF_SCOPE_THIS_CYCLE (Navy)"),
 ]
+OUT_OF_SCOPE_KEYS = {
+    "RAF2000-C7": "OUT_OF_SCOPE_THIS_CYCLE (Air Force)",
+    "C7TEXT:act-air-force-1950.txt": "OUT_OF_SCOPE_THIS_CYCLE (Air Force)",
+    "C7TEXT:act-navy-1957.txt": "OUT_OF_SCOPE_THIS_CYCLE (Navy)",
+    "C7TEXT:regs-regulations-for-the-navy-part-i.txt": "OUT_OF_SCOPE_THIS_CYCLE (Navy)",
+    "C7TEXT:regs-regulations-for-the-navy-part-ii.txt": "OUT_OF_SCOPE_THIS_CYCLE (Navy)",
+    "C7TEXT:regs-regulations-for-the-navy-part-iii.txt": "OUT_OF_SCOPE_THIS_CYCLE (Navy)",
+    "C7TEXT:regs-regulations-for-the-navy-part-iv.txt": "OUT_OF_SCOPE_THIS_CYCLE (Navy)",
+    "C7TEXT:regs-the-navy-pension-regulations-1964.txt": "OUT_OF_SCOPE_THIS_CYCLE (Navy)",
+    "C7TEXT:act-bnss-2023-sched-the-second-schedule.txt": "OUT_OF_SCOPE_THIS_CYCLE (general criminal procedure forms)",
+    "C7TEXT:act-crpc-1973-consolidated.txt": "OUT_OF_SCOPE_THIS_CYCLE (general criminal procedure forms; historical)",
+}
 
 
 def coverage(st, occ_index, unreg):
@@ -521,7 +794,8 @@ def coverage(st, occ_index, unreg):
             "notes": ("Form-like headings present; NOT itemised (outside Army-first scope of this cycle)" if hits else "No form-like headings found by scan"),
             "verification_status": VERIFICATION_STATUS,
         })
-    for (sid, title, why) in NOT_HELD:
+    for nh in NOT_HELD:
+        sid, title, why = nh[:3]
         n += 1
         rows.append({
             "coverage_id": "COV-%02d" % n, "source_key": "NOT_HELD:" + sid, "source_logical_id": sid, "c5_copy_id": "", "source_copy_sha256": "",
@@ -530,8 +804,31 @@ def coverage(st, occ_index, unreg):
             "pages_visually_inspected": "", "pages_missing_unreadable_or_unexamined": "entire source (not held)", "inspection_method": "",
             "inspection_date": RECORDED_ON, "coverage_state": "INACCESSIBLE", "candidate_occurrences_found": 0, "candidate_ids": "",
             "unregistered_heading_hits": "", "excluded_ranges_and_reason": "", "notes": "Known-needed source not held; no acquisition performed or authorised by this workstream.",
+            "scope_this_cycle": nh[3] if len(nh) > 3 else "IN_SCOPE (Army-first cycle)",
             "verification_status": VERIFICATION_STATUS,
         })
+    # ---- WSG-R06: a negative resting only on a heading/text-layer scan is not a visually confirmed negative
+    for r in rows:
+        r.setdefault("scope_this_cycle", OUT_OF_SCOPE_KEYS.get(r["source_key"], "IN_SCOPE (Army-first cycle)"))
+        refs = []
+        vis = r["pages_visually_inspected"]
+        if r["coverage_state"] == "INSPECTED_NO_FORMS_FOUND" and (not vis or vis.startswith("NONE")):
+            r["coverage_state"] = "PARTIAL"
+            r["coverage_method_limitation"] = ("HEADING_SCAN_NO_FORMS_FOUND_NOT_VISUALLY_CONFIRMED" if "heading" in r["inspection_method"].lower()
+                                               else "TEXT_LAYER_SCAN_NO_FORMS_FOUND_NOT_VISUALLY_CONFIRMED")
+            refs.append("WSG-R06")
+        elif r["coverage_state"] == "INSPECTED_NO_FORMS_FOUND":
+            r["coverage_method_limitation"] = "VISUALLY_CONFIRMED_NO_FORMS (pages %s)" % vis
+            refs.append("WSG-R06")
+        else:
+            r["coverage_method_limitation"] = ""
+        if r["scope_this_cycle"].startswith("OUT_OF_SCOPE"):
+            refs.append("WSG-R07")
+        if r["source_key"] in ("AFTPR08-C7", "AR54-GAZ") and r["pages_visually_inspected"] not in ("NONE", ""):
+            refs.append("WSG-R01" if r["source_key"] == "AFTPR08-C7" else "WSG-R04")
+        r["reviewer_evidence"] = ("review_wsg_forms.md / review_wsg_forms_findings.csv (2026-11-24): " + ";".join(sorted(set(refs)))) if refs else ""
+        r["review_remediation_state"] = "REMEDIATED_C12_PENDING_RE_REVIEW" if refs else ""
+        r["legal_review_ref"] = ""
     return rows
 
 
@@ -543,6 +840,14 @@ def to_csv(rows, cols):
     for r in rows:
         w.writerow({c: r.get(c, "") for c in cols})
     return buf.getvalue()
+
+
+RECLASSIFIED = [  # WSG-R02 / R09 / R12: README 'shall' rule applied mechanically to every STATUTORY_PRESCRIBED candidate
+    {"family": "FF-AR54-APPV-FH", "from": "STATUTORY_PRESCRIBED / MANDATORY_FORM_WORDING", "to": "OTHER_OR_UNDETERMINED / PERMISSIVE_USE_SPECIFIC_RULE", "basis": "AR 169 'may, if he thinks fit, by a warrant in one of the forms in Appendix V' (no 'shall')", "finding": "WSG-R02"},
+    {"family": "FF-AFTPR08-F2", "from": "STATUTORY_PRESCRIBED / PERMISSIVE_ATTACHMENT_FORM_PRESCRIBED", "to": "OTHER_OR_UNDETERMINED / PERMISSIVE_ATTACHMENT_FORM_PRESCRIBED", "basis": "r.4(4) 'may attach ... a receipt slip in Form II which shall be signed' ('shall' governs signature, not use of the form)", "finding": "WSG-R02"},
+    {"family": "FF-DPPR53-S2", "from": "STATUTORY_PRESCRIBED / MANDATORY_DOCUMENT_LIST", "to": "OTHER_OR_UNDETERMINED / MANDATORY_DOCUMENT_LIST", "basis": "r.33(3) prescribes accompanying documents, not form wording", "finding": "WSG-R12"},
+    {"family": "FF-AR54-APPIII-SGCM", "from": "OTHER_OR_UNDETERMINED / PERMISSIVE_USE_AR4", "to": "OTHER_OR_UNDETERMINED / PERMISSIVE_USE_SPECIFIC_RULE", "basis": "AR 151(1) 'may be convened ... in accordance with the form in Appendix III'", "finding": "WSG-R09"},
+]
 
 
 def summary(res):
@@ -562,6 +867,8 @@ def summary(res):
     s = {
         "workstream": "C12-CONSOLIDATION / Workstream G - forms registry",
         "tool_version": TOOL_VERSION, "recorded_on": RECORDED_ON, "pymupdf_version": st.pymupdf_version,
+        "python_version": "%d.%d.%d" % sys.version_info[:3],
+        "scope_statement": SCOPE_STATEMENT,
         "register_definition": "docs/product/FORM_DISCOVERY_AND_COVERAGE_REGISTER.md and ADR-0003 @ origin/docs/mimamsa-product-blueprint-2026-11-24",
         "verification_status_all_rows": VERIFICATION_STATUS,
         "legal_status_statement": "No form, field or classification here is legally approved, verified as current, or fit for issue. Classifications are candidates only.",
@@ -575,11 +882,25 @@ def summary(res):
             "fidelity_state_by_occurrence": count(reg, "fidelity_state"),
             "coverage_rows": len(cov), "coverage_state": count(cov, "coverage_state"),
             "coverage_not_held_rows": sum(1 for r in cov if r["holding"] == "NOT_HELD"),
+            "families_by_source_basis": count(prim, "source_basis"),
+            "families_by_official_copy_extent": count(prim, "official_copy_extent"),
+            "families_by_statutory_confirmation_status": count(prim, "statutory_confirmation_status"),
+            "statutory_prescribed_mml_only_not_confirmed": sorted(r["form_family_id"] for r in prim if r["statutory_confirmation_status"].startswith("NOT_CONFIRMED")),
+            "families_field_list_mml_version_with_official_copy_held": sorted(r["form_family_id"] for r in prim if r["field_set_version"].startswith("MML_VERSION")),
+            "fields_generic_label": sum(1 for f in fields if f["generic_label"] == "YES"),
+            "fields_official_copy_presence": count([{"k": f["official_copy_presence"].split(" (")[0].split(";")[0]} for f in fields], "k"),
+            "coverage_method_limitation": count(cov, "coverage_method_limitation"),
+            "coverage_scope_this_cycle": count(cov, "scope_this_cycle"),
+            "doc_locator_end_basis": count([r for r in reg if r["locator_type"] == "DOC_DERIVED_LINE"], "locator_end_basis"),
+            "visual_checks_recorded": len(spec_forms.VISUAL_CHECKS),
         },
+        "reclassified_in_remediation": RECLASSIFIED,
         "unregistered_heading_hits_by_source": {k: len(v) for k, v in sorted(res["unreg"].items())},
         "referenced_forms_not_printed_in_any_held_copy": [{"form": a, "description": b, "where_referenced": c} for a, b, c in spec_forms.REFERENCED_NOT_HELD],
-        "conflict_queue": sorted(r["form_family_id"] + ": " + r["outstanding_uncertainties"].split(" Form status under AR 4")[0]
+        "conflict_queue": sorted(r["form_family_id"] + ": " + r["outstanding_uncertainties"].split(" Interaction between any specific rule")[0]
                                  for r in prim if "CONFLICT_QUEUE" in r["outstanding_uncertainties"] or "CONFLICT_QUEUE" in r["supersession_status"]),
+        "field_divergence_queue": [f["field_id"] + " '" + f["field_label_as_printed"] + "': " + f["official_copy_presence"]
+                                   for f in fields if "DIVERGENCE_QUEUE" in f["official_copy_presence"]],
         "inputs": inputs,
         "denominator_note": "No aggregate coverage percentage is computed: denominators of unknown/not-held sources are unknown (register s.3).",
     }
