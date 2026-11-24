@@ -177,6 +177,12 @@ def summary_md(st, review):
          f"2. **Source-document verification coverage:** {proc} of {st['source_files']} files were re-hashed equal to the HF-declared SHA-256. The bytes came from the GitHub "
          "`raw-data` mirror, or for curated binaries from an identical working copy. **HF-hosted bytes themselves: NOT_CHECKED** (no download access; HF revision not pinned).",
          f"3. **Independent legal-review coverage:** {review}", "",
+         "## Measured reliability (independent review of a 30-judgment high-risk sample; details in `review/REVIEW_FINDINGS.md`)", "",
+         "- **Outcome candidates were wrong in 15 of 30 and ambiguous in 2.** They are unusable without review for multi-appeal or mixed disposals.",
+         "- **Decision-date candidates are unreliable for the Supreme Court layout:** they pick up dates of cited cases or impugned orders. `DIFFERS` on SC records is an extractor signal, not a metadata error.",
+         "- **Candidate propositions** are about half the court's own reasoning; the rest are quotations, headnotes or recitals, two of them misleading. They are leads only.",
+         f"- **Metadata gap:** {st.get('sc_records_without_case_number', 0)} Supreme Court records have no case number in the crawler metadata, although the documents print one.",
+         "- Crawler metadata dates were right in 29 of 30, and file identity in 30 of 30.", "",
          "## Results (automated)", "",
          f"- Relevance classes: {json.dumps(st['relevance'], sort_keys=True)}.",
          f"- Text layer: {json.dumps(st['text_extraction'], sort_keys=True)}.",

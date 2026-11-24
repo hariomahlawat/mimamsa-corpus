@@ -288,6 +288,13 @@ def build(repo):
         queue.append(dict(judgment_id=j, sha256=sha, court=court, title=(by_sha_meta.get(sha) or [{}])[0].get("title", ""),
                           priority_score=score, reasons="; ".join(reasons), relevance_class=relmap[j]["relevance_class"],
                           independent_review="NOT_REVIEWED"))
+    reviewed = {}
+    for f in sorted((AJ.PKG / "review").glob("review_*.csv")):
+        for rv in csv.DictReader(io.StringIO(f.read_text(encoding="utf-8"))):
+            reviewed[rv["judgment_id"]] = (f"REVIEWED ({f.stem}): identity {rv['identity_result']}, outcome {rv['outcome_result']}, "
+                                           f"relevance {rv['relevance_result']}")
+    for q in queue:
+        q["independent_review"] = reviewed.get(q["judgment_id"], "NOT_REVIEWED")
     queue.sort(key=lambda x: (-x["priority_score"], x["judgment_id"]))
     for i, q in enumerate(queue, 1):
         q["rank"] = i
@@ -374,5 +381,6 @@ def build(repo):
         courts=dict(sorted(Counter(str(x["court"]) for x in meta_rows).items())),
         years=dict(sorted(Counter((x["issue_date_meta"] or "unknown")[:4] for x in meta_rows).items())),
         excluded_by_court=dict(sorted(Counter(e["court"] for e in exc_rows).items())),
-        batches_complete=sum(1 for b in bstatus if b["complete"]), batches=len(bstatus))
+        batches_complete=sum(1 for b in bstatus if b["complete"]), batches=len(bstatus),
+        independently_reviewed=len(reviewed), sc_records_without_case_number=sum(1 for x in meta_rows if "Supreme" in str(x["court"]) and not x["case_numbers_meta"]))
     return out, binary, stats
