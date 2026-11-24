@@ -871,7 +871,7 @@ def summary(res):
         "scope_statement": SCOPE_STATEMENT,
         "register_definition": "docs/product/FORM_DISCOVERY_AND_COVERAGE_REGISTER.md and ADR-0003 @ origin/docs/mimamsa-product-blueprint-2026-11-24",
         "verification_status_all_rows": VERIFICATION_STATUS,
-        "legal_status_statement": "No form, field or classification here is legally approved, verified as current, or fit for issue. Classifications are candidates only.",
+        "legal_disclaimer": "No form, field or classification here is legally approved, verified as current, or fit for issue. Classifications are candidates only.",
         "counts": {
             "unique_form_families": len(fams), "occurrences_total": len(reg), "occurrences_primary": len(prim),
             "occurrences_alternate": len(reg) - len(prim), "fields_recorded": len(fields),

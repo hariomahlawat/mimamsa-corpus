@@ -7,7 +7,7 @@
  "scope_statement": "Army-first scope: this cycle registers forms from held Army Rules 1954 copies and from the AFT (Procedure) Rules 2008, DPP Rules 1953, Indian Soldiers (Litigation) Rules 1938, TA Rules 1948, Indian Tolls Rules 1942 and Assam Rifles Act 1941 copies held. Air Force and Navy rule-level instruments were NOT assessed (held derived texts heading-scanned only; official copies NOT_HELD); the 67 families are not the military-law form universe.",
  "register_definition": "docs/product/FORM_DISCOVERY_AND_COVERAGE_REGISTER.md and ADR-0003 @ origin/docs/mimamsa-product-blueprint-2026-11-24",
  "verification_status_all_rows": "DISCOVERED_FROM_SOURCE_NOT_LEGALLY_APPROVED",
- "legal_status_statement": "No form, field or classification here is legally approved, verified as current, or fit for issue. Classifications are candidates only.",
+ "legal_disclaimer": "No form, field or classification here is legally approved, verified as current, or fit for issue. Classifications are candidates only.",
  "counts": {
   "unique_form_families": 67,
   "occurrences_total": 215,
