@@ -1,0 +1,24 @@
+{
+ "blind_command": "python3.11 -I -B tools/extract_v3.py ids --ids-file <IDS.csv> --out <OUTDIR>",
+ "comparator": {
+  "c11-extract-v2/1.0.0": {
+   "C11-JUDICIAL-QUALITY/extraction/tools/extract_v2.py": "7311513fcfc5695d410a082598e849028d73e354e48dc5227e7d17f4f1cb5d48",
+   "C11-JUDICIAL-QUALITY/extraction/tools/v2core.py": "3b48c7684df226d040cc21b75157191cf3e81557ac51235afb0afeecc40c95d8"
+  }
+ },
+ "extractor": "c12-extract-v3/1.0.0",
+ "frozen_at": "2026-11-24",
+ "note": "v3core.py was last changed after developer spot check B (see DEV_EVALUATION_V3.md); extract_v3.py was last changed only to add files to OUTPUT_SHA256SUMS. Spot check C was taken on the frozen v3core.py.",
+ "status": "FROZEN before any blind (holdout_v3) prediction; holdout_v3 never opened",
+ "support_sha256": {
+  "tests/test_extract_v3.py": "8ea114baa003c236de1177910b783422996cf3495a6721f6c9858aae61fbc437",
+  "tools/build_dev_gold_v3.py": "d242d8f2a5fc1a1ec8af5c72096213230fd614393bd3a6ca013f22f882e31ec0",
+  "tools/dev_gold_v3.json": "3a4ba4276c506411443f246895a4ef0281a972237803bdb17feb198ca672db2d",
+  "tools/eval_dev_v3.py": "d4f7565a1c079723a8e30cebc55cb4dfcb1d52d6aa9e0c7a4efa11a1e6876d62"
+ },
+ "text_layer": "/home/user/c7 @ ad77758d (data/text/<doc_id>.txt)",
+ "tool_sha256": {
+  "tools/extract_v3.py": "b399a0928ada0ddb83adf921d31496b10377d2873802042010feaa6e01900ae7",
+  "tools/v3core.py": "9b457624851ebe0cc91a964bba25392212777d536cee013a83074314c0e73067"
+ }
+}
