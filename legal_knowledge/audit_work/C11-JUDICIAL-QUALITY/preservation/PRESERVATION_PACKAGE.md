@@ -9,14 +9,14 @@
 | Files present at their registered working-store path | 48 |
 | Re-hashed SHA-256 equal to the register | **48 of 48**; size equal to the register in every row (`size_matches_register`) |
 | Total bytes | 37,312,132 |
-| Identical bytes in any git object of the repository (all fetched branches, any commit) | **0** |
+| Identical bytes in any git object of the local repository object store (the fetched branches; the clone is shallow at `ad77758d`, so older history was not checked) | **0** |
 | Identical bytes in the Hugging Face listing captured by C10 | **0** |
-| Access marking in the C5 master register | none recorded for any of the 48 |
-| Printed-marking scan of every page (`MARKING_SCAN.csv`) | 34 hits, all ordinary word use (e.g. "confidential reports", "restricted to") or blank-form text (Army Rules Appendix III "Form of Delay Report"). **No document-level restriction marking found.** The scan reads the text layer only; scanned pages without text were not read. |
+| Access marking in the C5 master register | none recorded as a marking; the register value is empty or `NOT_OBSERVED_OR_NOT_CHECKED` |
+| Printed-marking scan of every text page (`MARKING_SCAN.csv`) | 34 hits, all ordinary word use (e.g. "confidential reports", "restricted to") or blank-form text (Army Rules Appendix III "Form of Delay Report"). No document-level restriction marking was found **on pages with a text layer**. **73 pages in 17 copies have no text layer and were not scanned; 3 copies are image-only** (per-copy `printed_marking_scan` and `pages_without_text_layer`). Those pages need a visual check before any publication. |
 
-Composition: 31 P0 statutory items (16 Army Act / Army Rules amendment Gazettes, the Army Act 37 of 1992 copies, the 1954 Army Rules Gazette), 1 P1, 2 P2, and 14 Supreme Court judgments.
+Composition: 31 P0 statutory items (Army Act and Army Rules amendment Gazettes, the Army Act 37 of 1992 copies, the 1954 Army Rules Gazette; per-item titles in `PRESERVATION_INVENTORY.csv`), 1 P1, 2 P2, and 14 Supreme Court judgments.
 
-**Six copies carry KB exact-anchor rows.** These are:
+**Six copies carry KB exact-anchor rows, 47 rows in total.** These are:
 - `C5-SRC-P0-ARMY-RULES-1954~C1` (`c5ef95a9`), with **42** anchor rows;
 - one anchor row each for Prithi Pal Singh Bedi, Anvar, Arjun, Jasbir and Parashotam.
 

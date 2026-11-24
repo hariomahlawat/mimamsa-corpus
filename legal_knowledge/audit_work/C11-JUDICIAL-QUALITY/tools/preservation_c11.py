@@ -68,12 +68,13 @@ def build(repo, store):
                          title=m["title"], working_store_paths=";".join(paths), present_paths=";".join(found),
                          rehash_sha256=rehash, bytes=size, status=status,
                          size_matches_register="YES" if size != "" and str(size) == str(cp.get("bytes", "")) else ("NO" if size != "" else ""),
-                         access_marking=marking or "NONE_RECORDED",
-                         access_class="SEGREGATE_RESTRICTED_MARKING" if "official use" in marking.lower() else "PUBLIC_DOCUMENT_NO_MARKING_RECORDED",
+                         access_marking=marking or "(empty in register)",
+                         access_class=("SEGREGATE_RESTRICTED_MARKING" if "official use" in marking.lower() else
+                                       "NO_MARKING_RECORDED_IN_REGISTER_NOT_CHECKED" if (not marking or "NOT_CHECKED" in marking.upper()) else "REGISTER_MARKING_" + marking[:40]),
                          source_url=ms.get("source_url", ""), provenance=(ms.get("provenance") or "")[:300],
                          acquisition_provenance=(cp.get("acquisition_provenance") or "")[:300],
                          kb_exact_anchor_rows=inv.get(m["sha256"], {}).get("kb_exact_anchor_rows", ""),
-                         git_blob_oid=oids.get(m["sha256"], ""), git_object_present="", hf_listing_present="", printed_marking_scan="NOT_SCANNED"))
+                         git_blob_oid=oids.get(m["sha256"], ""), git_object_present="", hf_listing_present="", printed_marking_scan="NOT_SCANNED", pages="", pages_without_text_layer=""))
     # duplicate in another persistent store: the git object store (any ref) and the HF listing captured by C10
     if oids:
         res = git(repo, "cat-file", "--batch-check", inp=("\n".join(oids.values()) + "\n").encode()).decode().splitlines()
@@ -96,15 +97,22 @@ def build(repo, store):
         if r["status"] != "PRESENT_HASH_MATCH" or pymupdf is None:
             continue
         d = pymupdf.open(str(Path(store) / r["present_paths"].split(";")[0]))
+        textless = 0
         for i in range(d.page_count):
             t = " ".join(d[i].get_text().split())
+            if len(t) < 20:
+                textless += 1
             for mm in pat.finditer(t):
                 ctx = t[max(0, mm.start() - 60):mm.end() + 40]
                 marking_like = bool(re.search(r"for official use|not to be (published|communicated)", mm.group(0), re.I))
                 scan.append(dict(copy_id=r["copy_id"], page=i + 1, term=mm.group(0), context=ctx,
                                  classification="POSSIBLE_DOCUMENT_MARKING_REVIEW" if marking_like else "ORDINARY_WORD_USE_OR_FORM_TEXT"))
+        r["pages"], r["pages_without_text_layer"] = d.page_count, textless
+        # review C-04: a page without a text layer was NOT scanned; never report it as 'no marking found'
         r["printed_marking_scan"] = ("POSSIBLE_MARKING" if any(x["copy_id"] == r["copy_id"] and x["classification"].startswith("POSSIBLE") for x in scan)
-                                     else "NO_MARKING_FOUND_TEXT_LAYER")
+                                     else "NOT_SCANNED_IMAGE_ONLY" if textless == d.page_count
+                                     else f"NO_MARKING_FOUND_ON_TEXT_PAGES_{textless}_PAGES_NOT_SCANNED" if textless
+                                     else "NO_MARKING_FOUND_ALL_PAGES_TEXT")
     fields = list(rows[0].keys())
     acct = {}
     for r in rows:
@@ -115,6 +123,8 @@ def build(repo, store):
                    exact_anchor_copies=[r["copy_id"] for r in rows if r["kb_exact_anchor_rows"] not in ("", "0")],
                    in_git_objects=sum(1 for r in rows if r["git_object_present"] == "YES"),
                    in_hf_listing=sum(1 for r in rows if r["hf_listing_present"] == "YES"),
+                   marking_scan=dict(sorted(__import__("collections").Counter(r["printed_marking_scan"].split("_ON_TEXT_PAGES")[0] for r in rows).items())),
+                   pages_without_text_layer=sum(int(r["pages_without_text_layer"] or 0) for r in rows),
                    possible_markings=sorted({x["copy_id"] for x in scan if x["classification"].startswith("POSSIBLE")}),
                    total_bytes=sum(int(r["bytes"]) for r in rows if r["bytes"] != ""),
                    register_commit=REGISTER_COMMIT)

@@ -13,16 +13,20 @@ PKG = HERE.parent
 OUT = PKG / "curated"
 STG = "21e73b8348767d5f1524167fcec538e1aad6e732"
 C10J = PKG.parent / "C10-RECONCILIATION" / "workstreams" / "judicial" / "CURATED_CASE_COPY_STATUS.csv"
+C5X = "legal_knowledge/audit_work/SOURCE-LIBRARY-C5/registers/corpus_crosswalk.csv"
+C8GAP = "legal_knowledge/audit_work/C8-SOURCES/PRIMARY-SOURCES/source_to_record_gap_matrix.csv"
+SRC_ID = {"Parashotam": "PARASHOTAM", "Shri Kant Sharma": "SHRI-?KANT", "Tarsem": "TARSEM", "Girish": "GIRISH",
+          "Ram Avtar": "RAM-?AVTAR", "Dharamvir": "DHARAMVIR"}
 PROTECTED = {"legal_knowledge/curated_originals/case_law/v0.9/cases_53.jsonl": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a",
              "legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.jsonl": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1"}
 # Verified documentary findings (relations dossier; independent review: quotations verbatim on the stated page).
 FINDINGS = {
-    "Parashotam": ("Parashotam|Parshotam", "Parashotam Dass (3 Judges) para 32 (SCR p.17): Shri Kant Sharma 'does not lay down the correct law and is in conflict with judgments of the Constitution Benches'; the word 'overruled' is not used; para ends with a reservation for 'matters of self-discipline'.", "ADVISER_REVIEW: confirm the record states the High Court writ position after Parashotam, and the self-discipline reservation"),
-    "Shri Kant Sharma": (r"Shri\s*Kant\s*Sharma", "See Parashotam para 32. Contrary practice preserved: J&K HC WP(C) 2370/2025 (06-10-2025) still relies on Shri Kant Sharma (pp.2-3) without citing Parashotam.", "ADVISER_REVIEW: any reliance on Shri Kant Sharma must be checked against Parashotam para 32"),
-    "Tarsem": ("Tarsem", "Girish Kumar (2026 INSC 149) para 22 (p.11) distinguishes Tarsem ('is of no assistance', 'has no application to the case in hand'); not overruled. Delhi HC W.P.(C) 16771/2025 (11-03-2026) still restricts arrears by Tarsem (p.9 para 27) without citing Girish.", "ADVISER_REVIEW: conflicting treatment; record should not state the 3-year arrears limit as settled without Girish"),
+    "Parashotam": ("Parashotam|Parshotam", "Parashotam Dass (3 Judges) para 32 (SCR p.17): Shri Kant Sharma 'does not lay down the correct law and is in conflict with judgments of the Constitution Benches'; the word 'overruled' is not used; para ends with a reservation for 'matters of self-discipline'.", "ADVISER_QUESTION: does the record state the High Court writ position correctly in the light of Parashotam para 32, including its self-discipline reservation?"),
+    "Shri Kant Sharma": (r"Shri\s*Kant\s*Sharma", "See Parashotam para 32. Contrary practice preserved: J&K HC WP(C) 2370/2025 (06-10-2025) still relies on Shri Kant Sharma (pp.2-3) without citing Parashotam.", "ADVISER_QUESTION: does the record rely on Shri Kant Sharma, and if so how does Parashotam para 32 affect that reliance?"),
+    "Tarsem": ("Tarsem", "Girish Kumar (2026 INSC 149) para 22 (p.11) distinguishes Tarsem ('is of no assistance', 'has no application to the case in hand'); not overruled. Delhi HC W.P.(C) 16771/2025 (11-03-2026) still restricts arrears by Tarsem (p.9 para 27) without citing Girish.", "ADVISER_QUESTION: given Girish para 22 and the later Delhi HC reliance on Tarsem, how should the record describe the arrears limit?"),
     "Girish": ("Girish", "Girish Kumar (2026 INSC 149, two Judges) held; the reported clarification order of 12-10-2026 is NOT HELD and NOT CITED in the corpus (zero hits for 2026 INSC 1113).", "ACQUIRE_THEN_REVIEW: the clarification order must be obtained (approval required) before relying on Girish's scope"),
-    "Ram Avtar": (r"Ram\s*Avtar", "Ram Avtar is NOT HELD; 381 citing judgments by unresolved citation string; content known only through Girish paras 13, 14, 22.", "ACQUIRE_THEN_REVIEW: source not held; record cannot be anchored to the judgment itself"),
-    "Dharamvir": (r"Dharam\s*vir", "Dharamvir para 28(ii) (p.27) construes the Entitlement Rules 1982; 352 citing judgments in the corpus.", "CHECK: record should state the Rules version construed (1982) and not apply it to the 2008 Rules without the later authority"),
+    "Ram Avtar": (r"Ram\s*Avtar", "Ram Avtar is NOT HELD; cited in several hundred held judgments by unresolved citation string (current count: relations PRIORITY_TREATMENT_DOSSIER.md); content known only through Girish paras 13, 14, 22.", "ACQUIRE_THEN_REVIEW: source not held; record cannot be anchored to the judgment itself"),
+    "Dharamvir": (r"Dharam\s*vir", "Dharamvir para 28 (p.27; 28(ii) read with 28(i)) construes the Entitlement Rules 1982; widely cited in the corpus (count: relations dossier).", "ADVISER_QUESTION: does the record make clear which Entitlement Rules version Dharamvir construed (1982), and how later authority on the 2008 Rules bears on it?"),
 }
 
 
@@ -58,15 +62,28 @@ def build(repo):
                          c11_identity_judgment_keys=";".join(sorted({ident[s].get("judgment_key", "") for s in shas if s in ident}))[:200],
                          proposal="NONE" if not sc else "SUPPLY_CASE_NUMBER_FROM_REVIEWED_PROPOSAL_IF_CURATED_EMPTY" if not c.get("case_number") else "COMPARE_ONLY",
                          status="PROPOSAL_NOT_APPLIED"))
+    # review C-03: records also depend on these cases through source references, not only by name:
+    # (a) the C5 corpus crosswalk source_id, (b) the C8 source-to-record gap matrix rows for cases that are not held.
+    dep = {}
+    for r in csv.DictReader(io.StringIO(git(repo, "show", f"{STG}:{C5X}").decode("utf-8"))):
+        for name, (pat, _, _) in FINDINGS.items():
+            if re.search(SRC_ID.get(name, "^$"), r["source_id"], re.I):
+                dep.setdefault((r["knowledge_base_record_id"], name), f"C5 crosswalk source_id {r['source_id']}")
+    for r in csv.DictReader(io.StringIO(git(repo, "show", f"{STG}:{C8GAP}").decode("utf-8"))):
+        for name, (pat, _, _) in FINDINGS.items():
+            if re.search(pat, r["missing_or_incomplete_source"], re.I):
+                for rid in [x for x in r["kb_record_ids"].split(";") if x]:
+                    dep.setdefault((rid, name), f"C8 gap {r['gap_id']} ({r['dependency_basis'][:60]})")
     aff = []
     for k in kb:
         t = json.dumps(k, ensure_ascii=False)
         for name, (pat, finding, action) in FINDINGS.items():
-            if re.search(pat, t, re.I):
-                m = re.search(pat, t, re.I)
-                aff.append(dict(record_id=k["id"], module=k.get("module", ""), title=k.get("title", "")[:120], case=name,
-                                context=t[max(0, m.start() - 120):m.end() + 160].replace("\\n", " "), verified_finding=finding,
-                                proposed_action=action, status="PROPOSAL_NOT_APPLIED_ADVISER_REVIEW"))
+            m = re.search(pat, t, re.I)
+            basis = "case named in the record" if m else dep.get((k["id"], name))
+            if basis:
+                ctx = t[max(0, m.start() - 120):m.end() + 160].replace("\\n", " ") if m else "(case not named; dependency via source reference)"
+                aff.append(dict(record_id=k["id"], module=k.get("module", ""), title=k.get("title", "")[:120], case=name, match_basis=basis,
+                                context=ctx, verified_finding=finding, proposed_action=action, status="PROPOSAL_NOT_APPLIED_ADVISER_REVIEW"))
     def text(rs):
         s = io.StringIO(); w = csv.DictWriter(s, fieldnames=list(rs[0].keys()), lineterminator="\n"); w.writeheader(); w.writerows(rs); return s.getvalue()
     summ = dict(curated_cases=len(rows), c10_held_status=dict(sorted(Counter(r["c10_held_status"] for r in rows).items())),

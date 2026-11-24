@@ -23,6 +23,11 @@ def numbers(s):
     return {n for n in re.findall(r"\b(\d{2,6})\b", s or "") if not re.fullmatch(r"(?:19|20)\d\d", n)}
 
 
+def case_pairs(s):
+    """Distinct (number, year) case references named in a proceeding label; repeats of one case in different formats count once."""
+    return {(int(a), b) for a, b in re.findall(r"(\d{1,6})\s*(?:/|-|\s+of\s+|\s+OF\s+)\s*((?:19|20)\d\d)\b", s or "")}
+
+
 def build():
     by_text = defaultdict(set)
     for bp in sorted(glob.glob(str(BATCHES / "batch_*.jsonl"))):
@@ -33,6 +38,11 @@ def build():
                 if r.get("text_sha256"):
                     by_text[r["text_sha256"]].add(r["sha256"])
     shared = {jid(s) for g in by_text.values() if len(g) > 1 for s in g}
+    # review C-01: also every file in a multi-copy judgment of the identity register (revision 2), not only exact-text copies
+    keyed = defaultdict(set)
+    for r in csv.DictReader(open(PKG / "identity" / "outputs" / "JUDGMENT_IDENTITY_REGISTER.csv", encoding="utf-8")):
+        keyed[r["judgment_key"]].add(r["sha256"])
+    multi = {jid(s) for g in keyed.values() if len(g) > 1 for s in g}
     rows = list(csv.DictReader(open(PKG / "extraction" / "outputs" / "OUTCOMES_V2.csv", encoding="utf-8")))
     out, why = [], Counter()
     for r in rows:
@@ -42,7 +52,9 @@ def build():
         if r["outcome"] != "OUTCOME_UNVERIFIED":
             if r["judgment_id"] in shared:
                 reason = "SHARED_BATCH_TEXT_PER_PROCEEDING_SPLIT_REQUIRED"
-            elif len(numbers(r["proceeding"])) > 1 and r["proceeding"].count(";") == 0 and "," in r["proceeding"]:
+            elif r["judgment_id"] in multi:
+                reason = "MULTI_COPY_JUDGMENT_PER_PROCEEDING_SPLIT_REQUIRED"
+            elif len(case_pairs(r["proceeding"])) > 1 or (len(numbers(r["proceeding"])) > 1 and "," in r["proceeding"] and ";" not in r["proceeding"]):
                 reason = "MULTI_NUMBER_PROCEEDING_LABEL"
         if reason:
             r["outcome"] = "OUTCOME_UNVERIFIED"
@@ -51,7 +63,7 @@ def build():
         r["release_status"] = "AUTOMATED_CANDIDATE_NOT_VERIFIED"
         out.append(r)
     s = io.StringIO(); w = csv.DictWriter(s, fieldnames=list(out[0].keys()), lineterminator="\n"); w.writeheader(); w.writerows(out)
-    summ = dict(rows=len(out), shared_text_judgment_ids=len(shared), downgraded=dict(why),
+    summ = dict(rows=len(out), shared_text_judgment_ids=len(shared), multi_copy_judgment_ids=len(multi), downgraded=dict(why),
                 released_outcomes=dict(sorted(Counter(x["outcome"] for x in out).items())),
                 note="v2 outcomes remain AUTOMATED_CANDIDATE_NOT_VERIFIED; blinded holdout precision 84.1% (below the 95% bar)")
     return {"OUTCOMES_V2_RELEASE.csv": s.getvalue(), "RELEASE_FILTER_SUMMARY.json": json.dumps(summ, indent=1, sort_keys=True) + "\n"}

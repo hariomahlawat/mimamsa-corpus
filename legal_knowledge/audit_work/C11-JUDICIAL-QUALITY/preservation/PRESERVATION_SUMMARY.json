@@ -10,6 +10,12 @@
  ],
  "in_git_objects": 0,
  "in_hf_listing": 0,
+ "marking_scan": {
+  "NOT_SCANNED_IMAGE_ONLY": 3,
+  "NO_MARKING_FOUND": 14,
+  "NO_MARKING_FOUND_ALL_PAGES_TEXT": 31
+ },
+ "pages_without_text_layer": 73,
  "possible_markings": [],
  "register_commit": "21e73b8348767d5f1524167fcec538e1aad6e732",
  "restricted": [],

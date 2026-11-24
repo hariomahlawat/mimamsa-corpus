@@ -50,8 +50,14 @@ def main():
                                 stratum=kind, doc_ids=";".join(sorted(m["doc_id"] for m in ms)),
                                 raw_path=copies[ms[0]["sha256"]]["path"], relevance_class=rel.get(j, {}).get("relevance_class", "")))
     s = io.StringIO(); w = csv.DictWriter(s, fieldnames=list(out[0].keys()), lineterminator="\n"); w.writeheader(); w.writerows(out)
-    (PKG / "holdout" / "HOLDOUT_SAMPLE.csv").write_text(s.getvalue(), encoding="utf-8")
+    target = PKG / "holdout" / "HOLDOUT_SAMPLE.csv"
+    if "--check" in sys.argv[1:]:  # review P3: --check compares and never writes
+        ok = target.is_file() and target.read_text(encoding="utf-8") == s.getvalue()
+        print("holdout sample reproduces" if ok else "CHECK FAILED: HOLDOUT_SAMPLE.csv")
+        sys.exit(0 if ok else 1)
+    target.write_text(s.getvalue(), encoding="utf-8")
     print(len(out), {k: sum(1 for x in out if x["stratum"] == k) for k in ("disagreement", "multi_case", "other")})
+    # Delhi quota shortfall (8 of 12): its crawler metadata carries no outcome, so the disagreement stratum is empty for Delhi.
 
 if __name__ == "__main__":
     main()

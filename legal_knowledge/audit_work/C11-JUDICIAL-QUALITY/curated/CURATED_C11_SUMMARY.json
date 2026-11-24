@@ -1,14 +1,14 @@
 {
  "affected_by_case": {
   "Dharamvir": 3,
-  "Girish": 6,
-  "Parashotam": 10,
+  "Girish": 9,
+  "Parashotam": 13,
   "Ram Avtar": 4,
   "Shri Kant Sharma": 2,
-  "Tarsem": 3
+  "Tarsem": 6
  },
- "affected_record_case_pairs": 28,
- "affected_records": 25,
+ "affected_record_case_pairs": 37,
+ "affected_records": 32,
  "c10_any_court_hosted_copy": 9,
  "c10_held_status": {
   "CANDIDATE_HELD_DATE+PARTY_ONLY (curated record has no other deterministic key matching)": 3,

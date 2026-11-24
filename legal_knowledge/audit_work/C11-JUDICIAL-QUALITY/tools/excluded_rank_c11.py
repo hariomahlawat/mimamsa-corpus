@@ -25,19 +25,19 @@ PKG = HERE.parent
 OUT = PKG / "excluded"
 J10 = PKG.parent / "C10-HF-JUDGMENTS" / "outputs" / "HF_JUDGMENT_EXCLUDED_DISPOSITIONS.csv.gz"
 RAW = "ad77758d"
-U = r"(?:union\s+of\s+india|u\.?\s?o\.?\s?i\b|ministry\s+of\s+defen[cs]e|ministery\s+of\s+defen[cs]e|m\.?o\.?d\b|govt?\.?\s+of\s+india)"
+U = r"(?:union\s+of\s+india|u\.?\s?o\.?\s?i\b|ministry\s+of\s+defen[cs]e|ministery\s+of\s+defen[cs]e|min\.?\s*of\s+defen[cs]e|m\.?o\.?d\b|govt?\.?\s+of\s+india)"
 R = [
     ("T1", 60, "AFT", re.compile(r"armed\s+forces\s+tribunal|\ba\.?\s?f\.?\s?t\b", re.I)),
     ("T1", 60, "court_martial", re.compile(r"court[\s-]*martial", re.I)),
     ("T1", 50, "ex_servicemen", re.compile(r"ex[\s.-]*servicem[ae]n|sainik", re.I)),
     ("T1", 45, "service_body", re.compile(r"chief\s+of\s+(?:the\s+)?(?:army|naval|air)\s+staff|army\s+(?:head\s*quarters|hq)|integrated\s+h(?:ead)?q|"
-                                         r"\b(?:indian\s+)?army\b|\bair\s*force\b|\bindian\s+navy\b|\bnaval\b|\bmilitary\b|\bsoldier|\bjawan|record\s+office|"
+                                         r"\b(?:indian\s+)?army\b|\bair\s*force\b|\bindian\s+navy\b|\bnaval\s+(?:head\s*quarters|hq|dockyard|base|command|officer|staff|ship|academy)\b|\bins\s+[a-z]+|\bmilitary\b|\bsoldier|\bjawan|record\s+office|"
                                          r"\b(?:regiment|battalion|corps)\b|\bwing\s+commander|squadron\s+leader|flight\s+lieutenant|brigadier|colonel|commodore", re.I)),
-    ("T1", 35, "rank_vs_union", re.compile(r"^(?:.*?\bof\s+)?(?:ex[\s.-]*)?(?:sep|hav|nk|l/nk|sub|nb\s*sub|capt|maj|col|lt|brig|gen|sgt|cpl|jwo|mwo|cdr|cmde|wg\s*cdr|sqn\s*ldr|flt\s*lt|gp\s*capt)(?:\.\s*|\s)(?!\s*(?:inspector|manager|divisional|division|registrar|secy|secretary|post\s+office|zone|governor|insurance)).*\bvs?\b.*" + U, re.I)),
+    ("T1", 35, "rank_vs_union", re.compile(r"(?:^|\bof\s+|\bv(?:s|ersus)\.?\s+)(?:ex[\s.-]*)?(?:sep|hav|nk|l/nk|sub|nb\s*sub|capt|maj|col|lt|brig|gen|sgt|cpl|jwo|mwo|cdr|cmde|wg\s*cdr|sqn\s*ldr|flt\s*lt|gp\s*capt)(?:\.\s*|\s)(?!\s*(?:inspector|manager|divisional|division|registrar|secy|secretary|post\s+office|zone|governor|insurance)).*" + U + r"|" + U + r".*\bv(?:s|ersus)\.?\s+(?:ex[\s.-]*)?(?:sep|hav|nk|naik|l/nk|sub|nb\s*sub|subedar|capt|maj|col|lt|brig|gen|sgt|cpl|jwo|mwo|cdr|cmde|wg\s*cdr|sqn\s*ldr|flt\s*lt|gp\s*capt)(?:\.\s*|\s)(?!\s*(?:inspector|manager|divisional|division|registrar|secy|secretary|post\s+office|zone|governor|insurance))", re.I)),
     ("T3", 30, "defence_land", re.compile(r"defen[cs]e\s+estates?|cantonment|cantt\b|military\s+(?:farm|land|engineer)|\bm\.?e\.?s\.?\b|garrison\s+engineer|\bdgde\b", re.I)),
-    ("T2", 25, "defence_ministry", re.compile(r"minist?e?r?y?\.?\s*of\s+defen[cs]e|minst\.?\s*of\s+defen[cs]e|defen[cs]e\s+(?:secretary|ministry|accounts|production|research|r\s*&\s*d|personnel)|\bm\.?o\.?d\b|\bdrdo\b|ordnance|\bc\.?d\.?a\b|controller\s+of\s+defen[cs]e", re.I)),
+    ("T2", 25, "defence_ministry", re.compile(r"minist?e?r?y?\.?\s*of\s+defen[cs]e|minst\.?\s*of\s+defen[cs]e|min\.?\s*of\s+defen[cs]e|coast\s+guard|defen[cs]e\s+(?:secretary|ministry|accounts|production|research|r\s*&\s*d|personnel|services?)|\bm\.?o\.?d\b|\bdrdo\b|ordnance|\bc\.?d\.?a\b|controller\s+of\s+defen[cs]e", re.I)),
     ("T4", 10, "capf", re.compile(r"\bb\.?s\.?f\b|border\s+security\s+force|\bc\.?r\.?p\.?f\b|central\s+reserve\s+police|\bi\.?t\.?b\.?p\b|indo[\s-]+tibet|\bc\.?i\.?s\.?f\b|"
-                                    r"\bs\.?s\.?b\b|sashastra\s+seema|assam\s+rifles|\bn\.?s\.?g\b|coast\s+guard", re.I)),
+                                    r"\bs\.?s\.?b\b|sashastra\s+seema|assam\s+rifles|\bn\.?s\.?g\b", re.I)),
 ]
 TIER_ORDER = {"T1": 1, "T2": 2, "T3": 3, "T4": 4, "T5": 5}
 
