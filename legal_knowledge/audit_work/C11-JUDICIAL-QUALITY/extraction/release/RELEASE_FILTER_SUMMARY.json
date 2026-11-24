@@ -1,0 +1,22 @@
+{
+ "downgraded": {
+  "MULTI_NUMBER_PROCEEDING_LABEL": 1,
+  "SHARED_BATCH_TEXT_PER_PROCEEDING_SPLIT_REQUIRED": 226
+ },
+ "note": "v2 outcomes remain AUTOMATED_CANDIDATE_NOT_VERIFIED; blinded holdout precision 84.1% (below the 95% bar)",
+ "released_outcomes": {
+  "OUTCOME_UNVERIFIED": 854,
+  "allowed": 396,
+  "dismissed": 1674,
+  "dismissed_as_infructuous": 4,
+  "dismissed_as_withdrawn": 152,
+  "disposed_of_with_directions": 650,
+  "not_final": 15,
+  "partly_allowed": 31,
+  "remanded": 9,
+  "set_aside_and_remanded": 10,
+  "transferred": 153
+ },
+ "rows": 3948,
+ "shared_text_judgment_ids": 292
+}

@@ -52,3 +52,19 @@
   - an explicit two-field outcome: `printed_disposal` (literal) and `substantive_result` (requires reading).
 
   It must then be measured on a **new** holdout. This holdout is now spent for tuning purposes.
+
+## Independent review of this evaluation (Fable 5.2, `review/fable_review_extraction_c11.md`)
+The reviewer re-scored all 56 judgments independently: 37 correct, 7 incorrect, 11 abstained, 1 not scorable. **84.1% is arithmetically correct** (two-sided 95% interval 70.6% to 92.1%). All 7 errors and a sample of 10 correct rows were confirmed against the source, and all 11 abstentions are genuine.
+
+**Qualifications to the headline:**
+- **Single-coded ground truth (F02).** Reviewer A coded H001–H028 and reviewer B coded H029–H056, with no overlap. A coded the substance of the outcome; B coded the printed words. Inter-rater agreement is therefore unknown. **A future holdout must be double-coded under one written convention.**
+- **Unweighted headline (F03).** The Supreme Court is 36% of the sample but 8% of the corpus, and Delhi is 14% of the sample but 42%. Population-weighted precision is about **79%**; the cells are small, so this is indicative only.
+- **Baselines (F04).** The exact-label rule disadvantages the crawler, whose vocabulary has no `disposed_of_with_directions` or `transferred`. Scored by outcome family instead:
+
+  | Method | Correct | Precision |
+  | --- | --- | --- |
+  | v2 | 38/44 | 86.4% |
+  | crawler | 33/44 | 75.0% |
+  | Cycle 10 extractor | 31/48 | 64.6% |
+
+  **The intervals overlap**, so v2's advantage is real but not large on this sample.
