@@ -19,3 +19,20 @@
 | F-10 | P3 | Moved the UC-24 to UC-28 subsection above the section 4 heading and fixed the trailing bullet punctuation. | Use cases 3 and 4 |
 | F-11 | INFO | Marked the C10 figures and the outcome-error statement as reported in C10 records that are not on this branch's base. | Architecture 2; Vision 5 |
 | F-13 | INFO | Not addressable in these docs: the cold-review record should be committed by the coordinator alongside the review records. | None |
+
+## Delta confirmation (Fable 5.2, `claude-fable-5-2`) of c69eee41..ebeab659: **ACCEPT**
+No open P1 or P2. F-01, F-02 and F-03 are closed; F-04 to F-12 hold. The record is in `reviews/fable_review_pr46_delta.md`.
+
+**Deferred P3s** (wording only; no behaviour depends on them):
+
+| ID | Disposition |
+| --- | --- |
+| D-01 | Follow-up. In TA-04 and TA-05, use the brief's wording, or cite the corpus source as an unreviewed candidate. |
+| D-02 | Follow-up. Make the signed decision mandatory for T2 in channel 2. |
+| D-03 | Follow-up. Map the older approval-value vocabularies (Studio 3, Architecture 6) onto T0–T2. |
+| D-04 | Follow-up, under blocking decision 3. The proposed T1 default must exclude the P0-critical subjects: punishment, custody and court-martial. |
+| D-05 | Follow-up. Define visibility while a withdrawn source is "flagged until decided". |
+
+**Still open:**
+- **F-13.** The original cold-review record is still not in the branch; its author should add it.
+- **Owner decision.** Whether to confirm the Legal Reviewer designation (ADR-0003, blocking open decision 1).
