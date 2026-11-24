@@ -1,0 +1,23 @@
+{
+  "court": "Supreme Court of India",
+  "case_name": "Chandrabhan Sudam Sanap v State of Maharashtra",
+  "neutral_citation": "2025 INSC 116",
+  "decision_date": "2025-01-28",
+  "criminal_appeal_number": "879 of 2019",
+  "original_url": "https://api.sci.gov.in/supremecourt/2019/13316/13316_2019_1_1501_58853_Judgement_28-Jan-2025.pdf",
+  "response_url": "https://api.sci.gov.in/supremecourt/2019/13316/13316_2019_1_1501_58853_Judgement_28-Jan-2025.pdf",
+  "retrieved_at_utc": "2026-11-22T08:18:44.118309+00:00",
+  "sha256": "187bfd9e00f239529f1bfa088fd5415331f46893713b7af5794e049bebaa2855",
+  "bytes": 725513,
+  "pages": 113,
+  "hf_original_pdf_path": "legal_knowledge/judgment_originals/sci/2025/chandrabhan_sudam_sanap_2025.pdf",
+  "legal_propositions_referenced": [
+    "Navjot Sandhu (2005): restricted electronic secondary evidence proposition",
+    "Anvar P.V. (2014)",
+    "Arjun Panditrao Khotkar (2020)"
+  ],
+  "primary_source_appearance_checked": true,
+  "post_2025_treatment_checked": false,
+  "full_judicial_holding_verified": false,
+  "jag_approved": false
+}

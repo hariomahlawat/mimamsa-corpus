@@ -1,0 +1,26 @@
+indicator,scope,before,after,change,basis
+judgment_metadata_records,all,4259,4277,18,data/meta records with doc_type judgment/order
+judgment_metadata_records,Allahabad High Court,309,309,0,per court
+judgment_metadata_records,High Court of Delhi,1957,1957,0,per court
+judgment_metadata_records,High Court of Jammu and Kashmir,410,410,0,per court
+judgment_metadata_records,High Court of Punjab and Haryana,1215,1227,12,per court
+judgment_metadata_records,Supreme Court of India,368,374,6,per court
+distinct_judgment_files,data/ corpus,3951,3969,18,distinct sha256 among judgment records
+distinct_judgment_files,Allahabad High Court,309,309,0,per court
+distinct_judgment_files,High Court of Delhi,1678,1678,0,per court
+distinct_judgment_files,High Court of Jammu and Kashmir,410,410,0,per court
+distinct_judgment_files,High Court of Punjab and Haryana,1208,1220,12,per court
+distinct_judgment_files,Supreme Court of India,346,352,6,per court
+distinct_judgments_c11_identity,all,3625,3643,18,"C11 identity register (3,625) + ingested files; no ingested file matched a held judgment (sha256, case number, neutral citation, party+date); automated, not a reviewed identity statement"
+incomplete_files,C11 INCOMPLETE_23 list,23,19,-4,"the 4 HF-held SC originals were retrieved, open with %%EOF, every page has text: resolved; 19 remain (18 truncated HC copies identical on the mirror + d992ac2b with a complete-content copy)"
+incomplete_files,data/ corpus judgment files,19,19,0,unchanged: no complete replacement exists on any allow-listed host
+complete_judgment_files,data/ corpus,3932,3950,18,distinct judgment files not in the incomplete list
+judgment_records_needing_ocr_or_suspect_text,data/ corpus,75,87,12,needs_ocr true or text_quality suspect
+t1_titles_held,all courts,0,18,18,of 1790 first-tier excluded titles (C11 ranking)
+t1_titles_held,Allahabad High Court,0,0,0,of 250 T1 titles
+t1_titles_held,High Court of Delhi,0,0,0,of 779 T1 titles
+t1_titles_held,High Court of Jammu and Kashmir,0,0,0,of 152 T1 titles
+t1_titles_held,High Court of Punjab and Haryana,0,12,12,of 562 T1 titles
+t1_titles_held,Supreme Court of India,0,6,6,of 47 T1 titles
+t1_titles_acquired_and_reviewed,all courts,0,25,25,25 acquired in C12; 7 excluded on relevance review
+t1_party_and_court_test_titles_held,C12 T1_PRIORITISATION (71),0,18,18,titles meeting both C12 tests

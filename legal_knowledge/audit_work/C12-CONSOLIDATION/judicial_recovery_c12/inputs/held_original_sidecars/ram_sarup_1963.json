@@ -1,0 +1,18 @@
+{
+  "case_id": "DCLR-SC-1964-A11",
+  "case_name": "Ram Sarup v Union of India",
+  "date": "1963-12-12",
+  "court": "Supreme Court of India",
+  "source_url": "https://api.sci.gov.in/jonew/judis/3387.pdf",
+  "final_url": "https://api.sci.gov.in/jonew/judis/3387.pdf",
+  "source_tier": "official_sci_judis_pdf_case_title_verified",
+  "archived_at_utc": "2026-11-22T08:41:01.915844+00:00",
+  "sha256": "88f84411abdb3028e974792fef51a224770c987a9aa5ff7bc5a58654304738fd",
+  "bytes": 40039,
+  "pages": 10,
+  "path": "legal_knowledge/judgment_originals/sci/historical/v3.3/ram_sarup_1963.pdf",
+  "document_identity_evidence": "case-name tokens and decision year in full official PDF text",
+  "later_treatment_reviewed_exhaustively": false,
+  "legal_holding_verified": false,
+  "jag_approved": false
+}
