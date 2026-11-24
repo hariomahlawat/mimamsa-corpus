@@ -125,9 +125,29 @@ class StrengthenedChecks(unittest.TestCase):
                     raise exc
             return A()
         self.assertEqual(HP.remote_sha256_index(api_raising("EntryNotFoundError"), "o/r", "data/raw/x/"), {})
+        self.assertEqual(HP.remote_sha256_index(api_raising("RemoteEntryNotFoundError"), "o/r", "data/raw/x/"), {})
         for name in ("RepositoryNotFoundError", "RevisionNotFoundError", "HfHubHTTPError"):
             with self.subTest(name=name), self.assertRaises(Exception):
                 HP.remote_sha256_index(api_raising(name), "o/r", "data/raw/x/")
+
+    def test_real_library_missing_folder_class_is_recognised(self):
+        try:
+            import huggingface_hub.errors as E
+        except Exception:
+            self.skipTest("huggingface_hub not installed")
+        for name in ("EntryNotFoundError", "RemoteEntryNotFoundError"):
+            cls = getattr(E, name, None)
+            if cls is None:
+                continue
+            try:
+                exc = cls("404 entry not found")
+            except TypeError:
+                exc = cls.__new__(cls)
+            self.assertTrue(HP._is_missing_folder(exc), name)
+        for name in ("RepositoryNotFoundError", "RevisionNotFoundError"):
+            cls = getattr(E, name, None)
+            if cls is not None and not issubclass(cls, getattr(E, "EntryNotFoundError", ())):
+                self.assertFalse(HP._is_missing_folder(cls.__new__(cls)), name)
 
     def test_each_upload_call_site_is_guarded_and_pinned(self):
         src = (ROOT / "scripts" / "push_hf.py").read_text(encoding="utf-8")
@@ -138,6 +158,11 @@ class StrengthenedChecks(unittest.TestCase):
             if "folder_path=str(folder)" in call or "legal_dir" in call:
                 self.assertIn("parent_commit=base", call)
                 self.assertIn("assert_additive(", before)
+        self.assertIn("assert_additive(api, repo, lk_local, revision=base)", body)
+        self.assertIn("assert_additive(api, repo, local, revision=base)", body)
+        self.assertIn('path_in_repo="legal_knowledge", ignore_patterns=NEVER_SYNC_PATTERNS', body)
+        self.assertIn('"preservation" not in f.relative_to(legal_dir).parts', body)
+        self.assertIn("preservation/**", HP.NEVER_SYNC_PATTERNS)
         lk = (ROOT / "scripts" / "push_legal_knowledge.py").read_text(encoding="utf-8")
         self.assertIn("parent_commit=base", lk)
         self.assertIn("revision=base", lk)

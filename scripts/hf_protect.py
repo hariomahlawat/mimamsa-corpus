@@ -43,6 +43,15 @@ def sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
+# huggingface_hub 0.x raises EntryNotFoundError for a missing folder; 1.x and later raise RemoteEntryNotFoundError.
+# Repository and revision errors are different classes and must fail closed (review R50-02, R50C-02).
+_MISSING_FOLDER_ERRORS = ("EntryNotFoundError", "RemoteEntryNotFoundError")
+
+
+def _is_missing_folder(exc: BaseException) -> bool:
+    return any(c.__name__ in _MISSING_FOLDER_ERRORS for c in type(exc).__mro__)
+
+
 def remote_sha256_index(api, repo_id: str, prefix: str, revision: str | None = None) -> dict:
     """path -> (lfs_sha256 | None, git_oid | None) for remote files under prefix.
 
@@ -59,7 +68,7 @@ def remote_sha256_index(api, repo_id: str, prefix: str, revision: str | None = N
             lfs = getattr(e, "lfs", None)
             out[e.path] = (getattr(lfs, "sha256", None) if lfs else None, getattr(e, "blob_id", None))
     except Exception as exc:
-        if type(exc).__name__ == "EntryNotFoundError":
+        if _is_missing_folder(exc):
             return {}
         raise
     return out
