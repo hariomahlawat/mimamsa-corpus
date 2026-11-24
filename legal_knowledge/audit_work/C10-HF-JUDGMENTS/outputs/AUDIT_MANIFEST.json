@@ -1,0 +1,192 @@
+{
+ "binary_outputs": {
+  "HF_JUDGMENT_EXCLUDED_DISPOSITIONS.csv.gz": "2ab751b5bc2c84dd13f5b15b13e7ca98ad2737a937a5099e68097df2ecf44eaa"
+ },
+ "extractor": "c10-jextract/6",
+ "hf_bytes": "NOT_CHECKED",
+ "hf_revision": "UNPINNED",
+ "outputs": {
+  "BATCH_STATUS.csv": "5f9abfe540c07b3479f3e7449cbd86c357ba0324e3ccbd510576a83fa5586538",
+  "CONTINUATION_MANIFEST.csv": "1b2874da071c5a67caae141f944dade80c641e702f106e3c5b211d30f93661d7",
+  "HF_JUDGMENT_AUDIT_SUMMARY.md": "701a495c75bb08410946b46e9a99b663d3e988aaeeb599b4dc19576d445460f5",
+  "HF_JUDGMENT_COPY_REGISTER.csv": "4828c5cd2628c843ef5006e39455474e442c340fa0a02a8e864956e1bb3951f4",
+  "HF_JUDGMENT_DUPLICATES.csv": "6768682a9cb815a67862c4d4441d4142cb138a5a9755df76a99e895affa2a97c",
+  "HF_JUDGMENT_HOLDINGS.jsonl": "a03bf0b06ac8226c52cdb76ae0c7aa4be7be7023a16457562aa5efe17cfd06d4",
+  "HF_JUDGMENT_LEGAL_ISSUES.jsonl": "c4e53c0516236663378b863ffe87c243b96b7a23d1300613bb0b5cdcd3d20b65",
+  "HF_JUDGMENT_MASTER_INVENTORY.csv": "5bf0659c1b053e4bf28d4a13827c2539242cf1f6a10241c6655a9062ded1604b",
+  "HF_JUDGMENT_METADATA_AUDIT.csv": "147fccfb02522697c094635ae70f12b62ea1f2f12d24e8802a0ddc0222197916",
+  "HF_JUDGMENT_RELATIONSHIPS.csv": "ba8bbc4d1c4522d3f775da8cec1a2f5e755950161c2afe1d06bf360e1abc228a",
+  "HF_JUDGMENT_RELEVANCE.csv": "2eef51aa539377489eaf146e60580ff772f90480e12b5ddebd4e6dd9be1138a1",
+  "HF_JUDGMENT_VERIFICATION_QUEUE.csv": "804405485d68f240316724d71e0ddaa7b6dad9e092f582f8150437434e2043b4"
+ },
+ "raw_data_commit": "ad77758d4569ba6aafa955cc7843d874489e10f7",
+ "schema": "c10-hf-judgment-audit/1",
+ "staging_commit": "21e73b8348767d5f1524167fcec538e1aad6e732",
+ "stats": {
+  "batches": 20,
+  "batches_complete": 20,
+  "case_number_status": {
+   "MATCH": 3242,
+   "NOT_AVAILABLE_IN_METADATA": 436,
+   "NOT_CONFIRMED_IN_TEXT": 256,
+   "NOT_FOUND_IN_TEXT": 325
+  },
+  "courts": {
+   "Allahabad High Court": 309,
+   "High Court of Delhi": 1957,
+   "High Court of Jammu and Kashmir": 410,
+   "High Court of Punjab and Haryana": 1215,
+   "Supreme Court of India": 368
+  },
+  "curated_cases_matched": 11,
+  "date_status": {
+   "DIFFERS": 122,
+   "MATCH": 3694,
+   "NOT_FOUND_IN_TEXT": 432,
+   "NOT_VERIFIED": 11
+  },
+  "distinct_judgments": 3959,
+  "duplicates": {
+   "CORRECTION_MARKER_ON_FIRST_PAGES": 87,
+   "ONE_FILE_MANY_RECORDS": 41,
+   "SAME_CASE_NUMBER_DIFFERENT_FILES": 3,
+   "SAME_NEUTRAL_CITATION_DIFFERENT_FILES": 1
+  },
+  "excluded_by_court": {
+   "Allahabad High Court": 30321,
+   "High Court of Delhi": 36779,
+   "High Court of Jammu and Kashmir": 4974,
+   "High Court of Punjab and Haryana": 44561,
+   "Supreme Court of India": 3550
+  },
+  "excluded_csv_sha256": "447718eb7850dc436ac675ff9609bcb7b4d0204634c401e24d4af1766bd36b5f",
+  "excluded_dispositions": {
+   "EXCLUDED_FILE_NOT_RETAINED": 112108,
+   "EXCLUDED_FILE_NOT_RETAINED_RESCREEN_CANDIDATE": 8077
+  },
+  "excluded_records": 120185,
+  "file_dispositions": {
+   "INCOMPLETE_COPY_TRUNCATED": 7,
+   "NOT_PROCESSED_BYTES_UNAVAILABLE": 4,
+   "PROCESSED": 3936,
+   "PROCESSED_TRUNCATED_COPY": 12
+  },
+  "files_by_location": {
+   "HF_DATA_RAW+GITHUB_RAW_DATA": 3951,
+   "HF_LEGAL_KNOWLEDGE_ONLY": 8
+  },
+  "files_rehashed_equal_to_hf_declared": 3955,
+  "independently_reviewed": 30,
+  "metadata_records": 4259,
+  "neutral_citation_status": {
+   "MATCH": 31,
+   "NOT_AVAILABLE_IN_METADATA": 3891,
+   "NOT_FOUND_IN_TEXT": 337
+  },
+  "outcome": {
+   "NOT_FOUND": 589,
+   "allowed": 303,
+   "dismissed": 1582,
+   "disposed": 1393,
+   "partly_allowed": 30,
+   "remanded": 29,
+   "set_aside_quashed": 10,
+   "transferred": 12
+  },
+  "outcome_both_present": 1775,
+  "outcome_conflicts": 134,
+  "outcome_crawler_vs_text_differs": 549,
+  "propositions": 3110,
+  "record_dispositions": {
+   "AUDITED_AUTOMATED": 4238,
+   "AUDITED_AUTOMATED_SOURCE_TRUNCATED": 12,
+   "AUDITED_METADATA_ONLY_SOURCE_TRUNCATED": 9
+  },
+  "relationships": {
+   "CITES": 170,
+   "MATCHES_CURATED_CASE": 14
+  },
+  "relevance": {
+   "DIRECT_MILITARY_LAW": 679,
+   "GENERAL_LAW_POTENTIALLY_APPLICABLE": 33,
+   "MILITARY_ADMIN_SERVICE_PENSION": 2693,
+   "NOT_RELEVANT_CURRENT_SCOPE": 71,
+   "RELEVANCE_UNCERTAIN_REVIEW": 483
+  },
+  "sc_records_without_case_number": 368,
+  "source_completeness": {
+   "COMPLETE_FILE_STRUCTURE": 3914,
+   "NOT_AVAILABLE": 4,
+   "STORED_COPY_TAIL_CUT_AFTER_EARLIER_EOF_BASE_REVISION_PRESENT": 22,
+   "STORED_COPY_TRUNCATED_CONTENT_MAY_BE_MISSING": 19
+  },
+  "source_files": 3959,
+  "text_extraction": {
+   "": 11,
+   "NO_TEXT_LAYER": 12,
+   "PARTIAL_TEXT_LAYER": 42,
+   "TEXT_LAYER_OK": 3894
+  },
+  "years": {
+   "1952": 1,
+   "1954": 2,
+   "1957": 5,
+   "1959": 2,
+   "1961": 4,
+   "1968": 2,
+   "1971": 2,
+   "1972": 4,
+   "1975": 2,
+   "1977": 2,
+   "1978": 1,
+   "1979": 2,
+   "1980": 5,
+   "1981": 4,
+   "1982": 4,
+   "1983": 1,
+   "1984": 1,
+   "1985": 3,
+   "1986": 3,
+   "1987": 6,
+   "1988": 3,
+   "1989": 3,
+   "1990": 3,
+   "1991": 6,
+   "1992": 2,
+   "1993": 2,
+   "1994": 6,
+   "1995": 3,
+   "1996": 8,
+   "1997": 4,
+   "1998": 3,
+   "1999": 4,
+   "2000": 3,
+   "2001": 5,
+   "2002": 2,
+   "2003": 7,
+   "2004": 4,
+   "2005": 4,
+   "2006": 18,
+   "2007": 19,
+   "2008": 80,
+   "2009": 142,
+   "2010": 156,
+   "2011": 107,
+   "2012": 129,
+   "2013": 86,
+   "2014": 47,
+   "2015": 82,
+   "2016": 81,
+   "2017": 87,
+   "2018": 106,
+   "2019": 208,
+   "2020": 116,
+   "2021": 121,
+   "2022": 110,
+   "2023": 134,
+   "2024": 316,
+   "2025": 1382,
+   "2026": 604
+  }
+ }
+}

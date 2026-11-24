@@ -1,0 +1,16 @@
+{
+ "capture": "2026-11-24, read-only listing through the Hugging Face MCP connector (find/ls/stat/cat of small text files); per-directory listings transcribed into listing_*.tsv by helper agents and cross-checked against GitHub path and size (any transcription error would surface as a mismatch); counts for data/meta and data/text from the connector's 'showing N of M' totals",
+ "data_authority_doc": "legal_knowledge/DATA_AUTHORITY.md (HF is the primary canonical store; GitHub raw-data is a size-limited backup)",
+ "dataset_card": {
+  "license": "other",
+  "updated": "2026-11-22",
+  "visibility": "private"
+ },
+ "last_recorded_commit": {
+  "note": "latest of 119 distinct HF commits found in 64 successful sync-run logs (hf_commits_from_logs.tsv); the dataset card reports 'Updated 22 Nov 2026'. Not proven to be the current head.",
+  "sha": "e1a7fa472ba68b64ac0a79478a02916ff59ce202",
+  "source": "GitHub Actions job 137246139406 (run 45034830558) log line 'HF commit e1a7fa47...'",
+  "time": "2026-11-22T14:49:25Z"
+ },
+ "revision_pinned": "NO (the connector available to this audit exposes paths and sizes but no revision id; anonymous API returns 401 for this private dataset)"
+}
