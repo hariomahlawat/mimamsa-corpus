@@ -8,7 +8,10 @@ report named by --out, and it refuses (exit 2) an --out that:
     the same device+inode, i.e. a hard link), even with --overwrite;
   - lies inside a 'curated_originals' directory;
   - already exists, unless --overwrite is given;
-  - is a directory, or whose parent directory does not exist.
+  - exists and is not a regular file (directory, FIFO, socket, device, symlink),
+    even with --overwrite (checked with lstat, so a symlink is never followed);
+  - is an existing file inside the --repo snapshot, even with --overwrite;
+  - has a parent directory that does not exist.
 The report is written atomically: a temporary file is created in the target
 directory and then linked (no-clobber) or, with --overwrite, renamed into place.
 
@@ -46,8 +49,13 @@ Validation fails closed: if ANY item is malformed the tool prints every problem 
 stderr, writes no report, and exits with status 2. Malformed includes: missing or
 empty required fields, bad sha256, invalid or implausible dates (before 1800 or
 after today), duplicate JSON keys, duplicate item_id, NUL or other control
-characters, non-string list members, duplicate CSV header columns, ragged CSV rows,
-and a batch that is not valid UTF-8.
+characters, non-string list members, non-string scalar fields (a JSON number,
+boolean, object or list where a string is required; parties may be a string or an
+object whose values are strings or null; case_numbers / citations may be a string
+or a list of strings), duplicate CSV header columns, ragged CSV rows, and a batch
+that is not valid UTF-8. A single leading UTF-8 byte-order mark (BOM) is accepted
+and removed, for CSV and JSONL batches and for corpus CSV / JSONL files; a BOM
+anywhere else is data and is treated like any other character.
 
 Report cells that begin with '=', '+', '-', '@', TAB or CR are prefixed with a single
 quote so that a spreadsheet does not evaluate them as formulas.
@@ -82,6 +90,9 @@ import tempfile
 CLASSES = ("EXACT_DUPLICATE", "VERSION_RELATIONSHIP", "SAME_JUDGMENT_NEW_COPY",
            "POSSIBLE_MATCH_REVIEW", "NEW")
 REQUIRED = ("court", "case_numbers", "judgment_date", "parties", "sha256")
+STRING_FIELDS = ("court", "judgment_date", "sha256", "source_url", "provenance", "item_id",
+                 "version_label", "copy_note", "title", "notes", "citation")
+STRING_OR_LIST_FIELDS = ("case_numbers", "citations")
 SHA_RE = re.compile(r"^[0-9a-f]{64}$")
 VERSION_RE = re.compile(r"\b(corrected|corrigendum|uncorrected|revised|modified|amended|"
                         r"rectified|errata|re-?issued|signed copy|non-?reportable|reportable version)\b", re.I)
@@ -261,7 +272,7 @@ def load_batch(path):
     ext = os.path.splitext(path)[1].lower()
     rows = []
     try:
-        with open(path, encoding="utf-8", newline="") as f:
+        with open(path, encoding="utf-8-sig", newline="") as f:
             if ext == ".jsonl":
                 for i, line in enumerate(f, start=1):
                     if not line.strip():
@@ -309,11 +320,34 @@ def _walk_strings(v):
             yield from _walk_strings(x)
 
 
+def type_errors(obj):
+    """Field-type checks (C8 RR-03 / C9 N-05). CSV cells are always strings, so these bite on JSONL."""
+    e = []
+    for k in STRING_FIELDS:
+        v = obj.get(k)
+        if v is not None and not isinstance(v, str):
+            e.append(f"'{k}' must be a string (got {type(v).__name__})")
+    for k in STRING_OR_LIST_FIELDS:
+        v = obj.get(k)
+        if v is not None and not isinstance(v, (str, list)):
+            e.append(f"'{k}' must be a string or a list of strings (got {type(v).__name__})")
+    v = obj.get("parties")
+    if isinstance(v, dict):
+        if any(not isinstance(x, (str, type(None))) for x in v.values()):
+            e.append("'parties' object values must be strings or null")
+    elif v is not None and not isinstance(v, str):
+        e.append(f"'parties' must be a string or an object (got {type(v).__name__})")
+    return e
+
+
 def validate(rows, today=None):
     errors, items = [], []
     seen_ids = {}
     for line, obj in rows:
-        e = []
+        e = type_errors(obj)
+        if e:
+            errors.append(f"input line {line}: " + "; ".join(e))
+            continue
         if any(CONTROL_RE.search(x) for k, v in obj.items() for x in _walk_strings({k: v})):
             e.append("NUL or other control character in a field (not allowed)")
         for k in ("case_numbers", "citations"):
@@ -365,7 +399,7 @@ def validate(rows, today=None):
 
 # ----------------------------------------------------------------- corpus loading
 def rcsv(path):
-    with open(path, encoding="utf-8", newline="") as f:
+    with open(path, encoding="utf-8-sig", newline="") as f:
         return list(csv.DictReader(f))
 
 
@@ -386,7 +420,7 @@ def load_corpus(cases=None, identity=None, holdings=(), copies=None, case_source
 
     spec_to_case = {}
     if cases:
-        with open(cases, encoding="utf-8") as f:
+        with open(cases, encoding="utf-8-sig") as f:
             for line in f:
                 if not line.strip():
                     continue

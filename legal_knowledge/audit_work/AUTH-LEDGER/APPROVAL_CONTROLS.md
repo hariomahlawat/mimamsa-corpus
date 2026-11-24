@@ -53,7 +53,7 @@ Further rules:
 - **Withdrawals and corrections are staged too** (Fable F-14). They take effect only after their BIND line.
 - **Snapshots.** An exported snapshot without `.git` cannot verify a bound ledger. Snapshots must ship a git bundle (`git bundle create`) with full history.
 
-**Before the first BIND line,** the audit CI workflow must check out full history (`fetch-depth: 0`); otherwise verification fails closed. That is a `.github` change, so it needs its own reviewed PR and was not made here.
+**Before the first BIND line,** the audit CI workflow must check out full history (`fetch-depth: 0`); otherwise verification fails closed. That is a `.github` change, so it needs its own reviewed PR and was not made here. **Update (Cycle 9):** made in PR #37, merged into staging at `ff425a9a`.
 
 `require_binding=False` keeps the AUTH-LEDGER-01 semantics. It is used only for the synthetic evidence-rule tests and for the tranche simulation, both in temporary directories. The command-line tool never selects it, and a test checks that.
 
@@ -82,6 +82,6 @@ An auditor should still:
   - no bypass.
 
   These are GitHub settings, outside the repository files. The BIND line records the review, and an auditor can confirm it online.
-- **O-3 CI full history.** Approve the `fetch-depth: 0` workflow change before the first BIND line. It is prepared as its own draft PR (Cycle 8); see `REPOSITORY_BINDING_READINESS.md`.
+- **O-3 CI full history.** Approve the `fetch-depth: 0` workflow change before the first BIND line. It is prepared as its own draft PR (Cycle 8); see `REPOSITORY_BINDING_READINESS.md`. **Update (Cycle 9):** PR #37 was reviewed and merged at `ff425a9a`; O-3 is discharged.
 - **O-5 Demotions.** Should a WITHDRAW or demoting CORRECTION take effect before its BIND line? Today every version is staged (Fable F-14). Analysis and recommended procedure: `DEMOTION_SEMANTICS_O5.md`. No semantic change is implemented.
 - **O-4 Who may be named.** Optionally keep a committed list of authorised owner and reviewer identities. It would be authoritative only together with O-1.

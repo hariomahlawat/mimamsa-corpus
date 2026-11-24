@@ -2315,6 +2315,14 @@ class C8SecurityRound3(C8Base):
         self.assertEqual(p.returncode, 0, p.stderr)  # relative script, stale $PWD: falls back to the real cwd and verifies
         self.assertIn("v0000 ok", p.stdout)
 
+    def test_n05_existing_unrelated_pwd_is_ignored(self):  # C9, narrow review F-01: $PWD names a real but different directory
+        import os
+        with tempfile.TemporaryDirectory() as other:
+            p = subprocess.run([sys.executable, self.CLI_PATH, "verify"], capture_output=True, text=True, cwd=REPO,
+                               env=dict(os.environ, PWD=other, PYTHONDONTWRITEBYTECODE="1"))
+        self.assertEqual(p.returncode, 0, p.stderr)  # $PWD exists but is not the cwd: ignored, the real cwd is used
+        self.assertIn("v0000 ok", p.stdout)
+
     def test_r04_missing_git_and_refused_repository_fail_closed(self):
         with mock.patch.object(binding.subprocess, "run", side_effect=FileNotFoundError("git")):
             with self.assertRaisesRegex(common.LedgerError, "git is not installed"):

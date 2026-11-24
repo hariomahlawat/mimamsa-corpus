@@ -1,0 +1,155 @@
+{
+  "version": "C9-STAT-1",
+  "snapshot": "repo given on the command line (expected commit 2d7c02cf)",
+  "inputs_sha256": {
+    "records_658.jsonl": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1",
+    "cases_53.jsonl": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a",
+    "corpus_crosswalk.csv": "5fae890a493eea2050488a05e54547c1f537f346e348b8e55d7c5fc12f95efa8",
+    "source_copy_register.csv": "415c85f4a2434dfbdd9e0ea0c35a3c0abbb9d64b9481c8b043c8256d145ff73b"
+  },
+  "metrics": [
+    {
+      "metric": "kb_records",
+      "reported": 658,
+      "recomputed": 658,
+      "result": "MATCH",
+      "method": "distinct 'id' in curated_originals/knowledge_base/v0.9/records_658.jsonl"
+    },
+    {
+      "metric": "case_records",
+      "reported": 53,
+      "recomputed": 53,
+      "result": "MATCH",
+      "method": "distinct 'id' in curated_originals/case_law/v0.9/cases_53.jsonl"
+    },
+    {
+      "metric": "kb_crosswalk_rows",
+      "reported": 1060,
+      "recomputed": 1060,
+      "result": "MATCH",
+      "method": "SOURCE-LIBRARY-C5/registers/corpus_crosswalk.csv rows with knowledge_base_record_id"
+    },
+    {
+      "metric": "kb_citation_items",
+      "reported": 983,
+      "recomputed": 983,
+      "result": "MATCH",
+      "method": "same, relationship_type=CITES"
+    },
+    {
+      "metric": "kb_no_citation_placeholders",
+      "reported": 77,
+      "recomputed": 77,
+      "result": "MATCH",
+      "method": "same, relationship_type=NO_CITATION"
+    },
+    {
+      "metric": "kb_items_exact_anchor",
+      "reported": 42,
+      "recomputed": 42,
+      "result": "MATCH",
+      "method": "CITES rows, evidence_status=EXACT_ANCHOR"
+    },
+    {
+      "metric": "kb_items_partial_match",
+      "reported": 652,
+      "recomputed": 652,
+      "result": "MATCH",
+      "method": "CITES rows, evidence_status=PARTIAL_MATCH"
+    },
+    {
+      "metric": "kb_items_missing_evidence_genuine",
+      "reported": 289,
+      "recomputed": 289,
+      "result": "MATCH",
+      "method": "CITES rows, evidence_status=MISSING_EVIDENCE (placeholders excluded)"
+    },
+    {
+      "metric": "kb_records_no_exact_anchor",
+      "reported": 618,
+      "recomputed": 618,
+      "result": "MATCH",
+      "method": "records grouped by knowledge_base_record_id with no EXACT_ANCHOR row"
+    },
+    {
+      "metric": "kb_records_no_exact_anchor_with_citations",
+      "reported": 541,
+      "recomputed": 541,
+      "result": "MATCH",
+      "method": "618 minus records whose only row is NO_CITATION"
+    },
+    {
+      "metric": "kb_records_citing_nothing",
+      "reported": 77,
+      "recomputed": 77,
+      "result": "MATCH",
+      "method": "records whose only crosswalk row is NO_CITATION"
+    },
+    {
+      "metric": "kb_records_all_items_exact",
+      "reported": 10,
+      "recomputed": 10,
+      "result": "MATCH",
+      "method": "every row EXACT_ANCHOR"
+    },
+    {
+      "metric": "kb_records_some_items_exact",
+      "reported": 30,
+      "recomputed": 30,
+      "result": "MATCH",
+      "method": "at least one but not all rows EXACT_ANCHOR"
+    },
+    {
+      "metric": "case_records_exact_partial_missing",
+      "reported": "6/7/40",
+      "recomputed": "6/7/40",
+      "result": "MATCH",
+      "method": "crosswalk rows with case_id by evidence_status"
+    },
+    {
+      "metric": "exact_anchor_distinct_copies",
+      "reported": 1,
+      "recomputed": 1,
+      "result": "MATCH",
+      "method": "distinct anchor_copy_id over the 42 EXACT_ANCHOR KB rows"
+    },
+    {
+      "metric": "crosswalk_kb_records_equal_corpus_records",
+      "reported": true,
+      "recomputed": true,
+      "result": "MATCH",
+      "method": "set of crosswalk KB ids equals set of records_658 ids"
+    },
+    {
+      "metric": "records_658_sha256_equals_frozen",
+      "reported": true,
+      "recomputed": true,
+      "result": "MATCH",
+      "method": "sha256 of records_658.jsonl vs frozen_baseline_manifest.json#original_corpus_sha256.records_658"
+    },
+    {
+      "metric": "cases_53_sha256_equals_frozen",
+      "reported": true,
+      "recomputed": true,
+      "result": "MATCH",
+      "method": "sha256 of cases_53.jsonl vs frozen manifest"
+    },
+    {
+      "metric": "auth_ledger_v0000_crosswalk_identical_to_c5",
+      "reported": true,
+      "recomputed": true,
+      "result": "MATCH",
+      "method": "sha256 AUTH-LEDGER/effective/v0000/corpus_crosswalk.csv == SOURCE-LIBRARY-C5/registers/corpus_crosswalk.csv"
+    }
+  ],
+  "all_42_exact_anchors_on_one_copy": {
+    "anchor_copy_id": "C5-SRC-P0-ARMY-RULES-1954~C1",
+    "anchor_copy_sha256": "c5ef95a9d553685aa655f041b71d8360d6272e2775a19a3d6e7273c6cbd0aca6",
+    "count": 42,
+    "held_path": "downloads/discovery/ia_in.gazette.central.w.1954-11-27.103686.pdf",
+    "rehash": "MATCH",
+    "consequence": "every exact anchor depends on the 1954 Army Rules facsimile (as notified); none establishes current text"
+  },
+  "all_match": true,
+  "reader": "computed by script; no page reading involved"
+}
