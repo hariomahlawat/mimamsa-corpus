@@ -4,9 +4,9 @@
 
 | File | Role |
 | --- | --- |
-| `DISPOSITIONS.csv` | Hand-assigned table: `source_file,id,current_status,status_evidence_file,reason_or_note,cycle13_action` (511 rows) |
+| `DISPOSITIONS.csv` | Hand-assigned table: `source_file,id,current_status,status_evidence_file,reason_or_note,cycle13_action` (614 rows) |
 | `SUPPLEMENTARY_FINDINGS.csv` | Hand-maintained inventory of the 7 findings recorded only in confirmation markdown, with no CSV row: `source_file,id,severity,finding_text` |
-| `FINDINGS_CONSOLIDATED.csv` | Tool output: the inventory joined to the dispositions (511 rows). The finding text column is `finding_text`; it is not called "statement", so the APR-1 state-column rule does not pick it up |
+| `FINDINGS_CONSOLIDATED.csv` | Tool output: the inventory joined to the dispositions (614 rows). The finding text column is `finding_text`; it is not called "statement", so the APR-1 state-column rule does not pick it up |
 | `tools/consolidate_findings_c12.py` | Deterministic builder. `--check` regenerates the output and byte-compares it with the committed file |
 
 ```
@@ -17,23 +17,23 @@ The tool needs the staging commit `e0b3e7d2` locally (`git fetch origin legal-kn
 - a status is outside the vocabulary;
 - an evidence file does not exist.
 
-**State consolidated:** branch `claude/c12-consolidation` at `4e3571ee` (the first version was at `3a118cff`), plus the staging commit `e0b3e7d2`. The date is 2026-11-24.
+**State consolidated:** branch `claude/c12-consolidation` at `a9bb5404`, which includes the staging merge of the PR #40–#47 audit trees (earlier versions were at `3a118cff` and `4e3571ee`), plus the staging commit `e0b3e7d2`. The date is 2026-11-24.
 
 **Gate checks on this output:** both of these pass:
-- `tools/legal_audit/check_provenance.py`: new=0;
+- `tools/legal_audit/check_provenance.py`: new=0 (425 files);
 - `tests/test_legal_audit_register_semantics.py`: 10 passed.
 
 The status value `CLOSED_VERIFIED` is not read as an approval claim, because `approval_claims("CLOSED_VERIFIED")` returns no hit, so it was kept. It means only "closure confirmed by a later independent technical review". It is not a legal verification.
 
-## Counts: severity by status (511 rows)
+## Counts: severity by status (614 rows)
 
 | Severity | CLOSED_VERIFIED | CLOSED_BY_AUTHOR_UNCONFIRMED | DEFERRED_WITH_REASON | OPEN_NO_RECORD | SUPERSEDED | NOT_A_DEFECT | Total |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | P1 | 11 | 0 | 0 | 0 | 0 | 0 | 11 |
-| P2 | 95 | 0 | 6 | 0 | 0 | 0 | 101 |
-| P3 | 146 | 17 | 41 | 14 | 3 | 0 | 221 |
-| INFO | 22 | 1 | 16 | 7 | 18 | 114 | 178 |
-| **Total** | 274 | 18 | 63 | 21 | 21 | 114 | 511 |
+| P2 | 109 | 0 | 6 | 0 | 0 | 0 | 115 |
+| P3 | 186 | 27 | 43 | 12 | 5 | 0 | 273 |
+| INFO | 25 | 2 | 17 | 8 | 18 | 145 | 215 |
+| **Total** | 331 | 29 | 66 | 20 | 23 | 145 | 614 |
 
 The rows are rows, not distinct issues. Re-reviews often restate earlier findings as status rows, and those status rows are counted here as rows in their own right. Examples:
 - AUTH-LEDGER `fable_rereview_findings_2e2df5ce.csv` F-01 to F-17;
@@ -133,7 +133,8 @@ The C6-01 master-title corrections C5-CO-03 and C5-CO-04 are recorded, and are t
 
 ## Method
 1. **Inventory.**
-   - The tool collects every tracked file matching `findings*.csv` under `legal_knowledge/audit_work/{AUTH-LEDGER, C6-01-PROVENANCE, C8-SOURCES/review, C10-RECONCILIATION, C11-JUDICIAL-QUALITY, C12-CONSOLIDATION/reviews}`.
+   - The tool collects every tracked file matching `findings*.csv` under `legal_knowledge/audit_work/{AUTH-LEDGER, C6-01-PROVENANCE, C8-SOURCES/review, C8-EVIDENCE/review, C9-EVIDENCE-CLEAN/review, C9-LEGAL-EVIDENCE/review, C10-RECONCILIATION, C11-JUDICIAL-QUALITY, C12-CONSOLIDATION/reviews}`.
+   - The C8-EVIDENCE, C9-EVIDENCE-CLEAN and C9-LEGAL-EVIDENCE review chains came in with the staging merge `a9bb5404`, together with four AUTH-LEDGER and C8-SOURCES review CSVs (PR #38, #39, #44 and C10-effective). They are now in scope, and so is their disposition evidence: the Cycle 9 addenda and the final-head confirmations.
    - **Confirmation CSVs** are files with a `verdict` column, or with no severity column. They are treated as status evidence, not as new findings. Only rows whose verdict is not CLOSED, PARTIAL, DEFERRED or OPEN, and that carry a `severity` or `original_severity`, are inventoried. At `4e3571ee` those rows are WS-F C-01 and C-02 and WS-G NEW-01. `confirmation_c12_43190971_findings.csv` contributes none.
    - P3 items raised only in confirmation markdown come from `SUPPLEMENTARY_FINDINGS.csv`.
    - It adds the two PR #46 CSVs read from staging `e0b3e7d2`.
@@ -161,19 +162,14 @@ The C6-01 master-title corrections C5-CO-03 and C5-CO-04 are recorded, and are t
 
 ## Limitations
 - **Live branch.** C12 reviews and confirmations keep arriving. Any new findings CSV, or any new non-closure confirmation row, makes the tool fail (rc 2) until `DISPOSITIONS.csv` is extended. That is intended.
-- **Not inventoried.** These findings CSVs exist on staging but not on this branch, and they are outside the requested input set:
-  - `AUTH-LEDGER/review/fable_narrow_pr38_562a55ef`;
-  - `AUTH-LEDGER/review/fable_review_c10_effective_4770c165`;
-  - `AUTH-LEDGER/review/fable_review_pr44_9f1d7560`;
-  - `C8-EVIDENCE/review/` (2 files);
-  - `C8-SOURCES/review/fable_narrow_pr39_2d7c02cf`;
-  - `C9-EVIDENCE-CLEAN/review/` (2);
-  - `C9-LEGAL-EVIDENCE/review/` (2).
-
-  Some of these were read as status evidence.
+- **Staging copies.** The two PR #46 CSVs are now also in the branch tree, under `docs/product/reviews/`. The tool still reads them from staging `e0b3e7d2` and labels them `staging:`, so the source names stay stable.
 - **Out of the requested scope.** These were not inventoried:
   - findings in review markdown that has no CSV, such as C6-01 `fable_review_a165b0f3`, its re-reviews, and AUTH-LEDGER `fable_confirm_96e0d251`;
-  - `CALIBRATION-02`, `SOURCE-LIBRARY-C5`, `COORDINATION`, `C8-SOURCES/CORPUS-QUALITY` and `verification_batches` findings CSVs.
+  - `CALIBRATION-02/reviews/{A,B,C,D}/findings.csv`: calibration reviewer outputs from an earlier cycle, outside the requested review chains;
+  - `SOURCE-LIBRARY-C5/review/*findings*.csv`: Cycle 5, outside the requested chains;
+  - `COORDINATION/CYCLE3-PLANNING/consistency_findings.csv`: a planning consistency check, not a review;
+  - `C8-SOURCES/CORPUS-QUALITY/cross_reference_findings.csv` and `verification_batches/v3.5/04_Seven_Pension_Source_Treatment_Findings.csv`: data findings registers whose rows are corpus findings, not review findings;
+  - `C12-CONSOLIDATION/findings_consolidation/*.csv`: this register's own files.
 - **ID mismatch.** `DISPOSITIONS_160adfd1.md` numbers its INFO rows differently from the findings CSV:
   - CSV RC-13 corresponds to disposition RC-13 together with RC-14;
   - CSV RC-14 corresponds to disposition RC-15;

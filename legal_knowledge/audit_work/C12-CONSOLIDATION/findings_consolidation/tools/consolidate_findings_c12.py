@@ -5,7 +5,8 @@ What it does
 ------------
 1. Inventories every row of every review findings CSV in scope:
    - tracked files matching ``findings*.csv`` under
-     ``legal_knowledge/audit_work/{AUTH-LEDGER, C6-01-PROVENANCE, C8-SOURCES/review,
+     ``legal_knowledge/audit_work/{AUTH-LEDGER, C6-01-PROVENANCE, C8-SOURCES/review, C8-EVIDENCE/review,
+     C9-EVIDENCE-CLEAN/review, C9-LEGAL-EVIDENCE/review,
      C10-RECONCILIATION, C11-JUDICIAL-QUALITY, C12-CONSOLIDATION/reviews}``;
    - the two PR #46 blueprint findings CSVs, read from git at a pinned staging commit
      (they are not in this branch's tree).
@@ -43,7 +44,7 @@ import sys
 
 STAGING_COMMIT_DEFAULT = "e0b3e7d2b8c3a1aa78f13ff99b67962534cf7e73"  # staging tip used for C12 consolidation
 SCOPE_RE = re.compile(
-    r"^legal_knowledge/audit_work/(AUTH-LEDGER|C6-01-PROVENANCE|C8-SOURCES/review|C10-RECONCILIATION|"
+    r"^legal_knowledge/audit_work/(AUTH-LEDGER|C6-01-PROVENANCE|C8-SOURCES/review|C8-EVIDENCE/review|C9-EVIDENCE-CLEAN/review|C9-LEGAL-EVIDENCE/review|C10-RECONCILIATION|"
     r"C11-JUDICIAL-QUALITY|C12-CONSOLIDATION/reviews)/")
 FINDINGS_RE = re.compile(r"findings.*\.csv$", re.IGNORECASE)
 STAGING_FILES = (
