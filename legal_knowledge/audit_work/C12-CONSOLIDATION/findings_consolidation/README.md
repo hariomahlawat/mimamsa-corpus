@@ -4,8 +4,9 @@
 
 | File | Role |
 | --- | --- |
-| `DISPOSITIONS.csv` | Hand-assigned table: `source_file,id,current_status,status_evidence_file,reason_or_note,cycle13_action` (501 rows) |
-| `FINDINGS_CONSOLIDATED.csv` | Tool output: the inventory joined to the dispositions (501 rows) |
+| `DISPOSITIONS.csv` | Hand-assigned table: `source_file,id,current_status,status_evidence_file,reason_or_note,cycle13_action` (511 rows) |
+| `SUPPLEMENTARY_FINDINGS.csv` | Hand-maintained inventory of the 7 findings recorded only in confirmation markdown, with no CSV row: `source_file,id,severity,finding_text` |
+| `FINDINGS_CONSOLIDATED.csv` | Tool output: the inventory joined to the dispositions (511 rows). The finding text column is `finding_text`; it is not called "statement", so the APR-1 state-column rule does not pick it up |
 | `tools/consolidate_findings_c12.py` | Deterministic builder. `--check` regenerates the output and byte-compares it with the committed file |
 
 ```
@@ -16,17 +17,23 @@ The tool needs the staging commit `e0b3e7d2` locally (`git fetch origin legal-kn
 - a status is outside the vocabulary;
 - an evidence file does not exist.
 
-**State consolidated:** branch `claude/c12-consolidation` at `3a118cff`, plus the staging commit `e0b3e7d2`. The date is 2026-11-24.
+**State consolidated:** branch `claude/c12-consolidation` at `4e3571ee` (the first version was at `3a118cff`), plus the staging commit `e0b3e7d2`. The date is 2026-11-24.
 
-## Counts: severity by status (501 rows)
+**Gate checks on this output:** both of these pass:
+- `tools/legal_audit/check_provenance.py`: new=0;
+- `tests/test_legal_audit_register_semantics.py`: 10 passed.
+
+The status value `CLOSED_VERIFIED` is not read as an approval claim, because `approval_claims("CLOSED_VERIFIED")` returns no hit, so it was kept. It means only "closure confirmed by a later independent technical review". It is not a legal verification.
+
+## Counts: severity by status (511 rows)
 
 | Severity | CLOSED_VERIFIED | CLOSED_BY_AUTHOR_UNCONFIRMED | DEFERRED_WITH_REASON | OPEN_NO_RECORD | SUPERSEDED | NOT_A_DEFECT | Total |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| P1 | 9 | 0 | 0 | 2 | 0 | 0 | 11 |
-| P2 | 76 | 9 | 5 | 11 | 0 | 0 | 101 |
-| P3 | 136 | 16 | 38 | 19 | 3 | 0 | 212 |
-| INFO | 20 | 1 | 15 | 6 | 18 | 117 | 177 |
-| **Total** | 241 | 26 | 58 | 38 | 21 | 117 | 501 |
+| P1 | 11 | 0 | 0 | 0 | 0 | 0 | 11 |
+| P2 | 95 | 0 | 6 | 0 | 0 | 0 | 101 |
+| P3 | 146 | 17 | 41 | 14 | 3 | 0 | 221 |
+| INFO | 22 | 1 | 16 | 7 | 18 | 114 | 178 |
+| **Total** | 274 | 18 | 63 | 21 | 21 | 114 | 511 |
 
 The rows are rows, not distinct issues. Re-reviews often restate earlier findings as status rows, and those status rows are counted here as rows in their own right. Examples:
 - AUTH-LEDGER `fable_rereview_findings_2e2df5ce.csv` F-01 to F-17;
@@ -35,35 +42,31 @@ The rows are rows, not distinct issues. Re-reviews often restate earlier finding
 
 Each status row gets the same status as the finding it restates.
 
-## WARNING: 27 P1/P2 rows are not CLOSED_VERIFIED (expected zero)
+## P1/P2: every P1 is closed and confirmed. Six P2s are deferred with a recorded reason; none is open without a record.
 
-### A. Earlier cycles (10 rows)
+The confirmations recorded at `4e3571ee` closed 21 rows that the first version of this register listed as not confirmed:
+- C10: RR-01, RR-02 and RC-04;
+- C11: F03 and F04;
+- C12-tools: F01 to F04;
+- WS-F: F-01 (P1) and F-02 to F-06;
+- WS-G: R01 (P1), R02, R03, R05, R06 and R07.
 
-| File | ID | Sev | Status | Why |
+These are the records:
+- `reviews/confirmation_c12_43190971.md`;
+- `reviews/confirmation_followup_cec4e92c.md`;
+- `reviews/review_wsf_statutory_confirmation.md`;
+- `reviews/review_wsg_forms_confirmation.md`.
+
+| File | ID | Sev | Status | Reason |
 | --- | --- | --- | --- | --- |
-| `C10-RECONCILIATION/review/final_head_confirmations/fable_review_7ccb9c2e_findings.csv` | RR-01 | P2 | CLOSED_BY_AUTHOR_UNCONFIRMED | The author fixed the court-bucket groups in `554c46cc`, but no independent re-review covers that commit. A consolidator spot-check, which is not independent, found 0 `RD-*` rows and 8 groups. |
-| same | RR-02 | P2 | CLOSED_BY_AUTHOR_UNCONFIRMED | The `hf_snapshot` wording was fixed in `554c46cc` and has not been re-reviewed. |
-| `C10-RECONCILIATION/review/fable_review_recon_160adfd1_findings.csv` | RC-04 | P2 | CLOSED_BY_AUTHOR_UNCONFIRMED | The remainder of this finding is RR-02. |
-| `C11-JUDICIAL-QUALITY/review/fable_review_extraction_c11_findings.csv` | F02 | P2 | DEFERRED_WITH_REASON | The single-coded holdout is recorded. The next holdout is to be double-coded: C12 WS-D `holdout_v3` is in progress. |
-| same | F03, F04 | P2 | CLOSED_BY_AUTHOR_UNCONFIRMED | The weighted precision and the family baselines were added to `HOLDOUT_EVALUATION.md`. No review confirms them. |
-| same | F05, F06, F08 | P2 | DEFERRED_WITH_REASON | These are carried as requirements for extractor v3. |
-| same | F07 | P2 | DEFERRED_WITH_REASON | The origin-label precision is published. The labels are not to be used as unreviewed filters. |
-
-### B. C12 reviews recorded on this branch while the consolidation was running (17 rows; in progress)
-
-| File | IDs | Status |
-| --- | --- | --- |
-| `C12-CONSOLIDATION/reviews/review_wsf_statutory_findings.csv` | **F-01 (P1)**, F-02 to F-06 (P2) | OPEN_NO_RECORD. The review was recorded in `8f764ea2` and has no disposition yet. |
-| `C12-CONSOLIDATION/reviews/review_wsg_forms_findings.csv` | **WSG-R01 (P1)**, WSG-R02 to WSG-R07 (P2) | OPEN_NO_RECORD. The review was recorded in `a3613e73` and has no disposition yet. |
-| `C12-CONSOLIDATION/reviews/review_c12_coordinator_tools_25723740_findings.csv` | F01 to F04 (P2) | CLOSED_BY_AUTHOR_UNCONFIRMED. The author fixed these in `499b89ac` and `6a86882d`; no confirmation review has been run. |
+| `C11-JUDICIAL-QUALITY/review/fable_review_extraction_c11_findings.csv` | F02, F05, F06, F07, F08 | P2 | DEFERRED_WITH_REASON | `confirmation_c12_43190971.md` recorded these as DEFERRED_V3_RECORDED. They wait for the V3 holdout evaluation, and the confirmation lists what that evaluation must report. |
+| `C12-CONSOLIDATION/reviews/review_wsg_forms_findings.csv` | WSG-R04 | P2 | DEFERRED_WITH_REASON | The confirmation marked it PARTIAL, as an acceptable documented deferral. The MML-version field lists are labelled, but re-transcription from the official copies has not been done. It must be done before any template is used. |
 
 **P2 closed only at wording level, with the work still open:**
 - **What:** C10 `160adfd1` RC-05, the HF per-file listing and the full read of `SHA256SUMS`.
 - **What the confirmation covers:** the wording fix (7ccb9c2e RR-09).
 - **What is still open:** the verification itself. C11 `HF_VERIFICATION_REPORT.md` sampled `SHA256SUMS` but did not read it in full.
 - **Owner action:** a download at a pinned revision, followed by `sha256sum -c`.
-
-**Every other P1/P2 is CLOSED_VERIFIED.** That covers AUTH-LEDGER, C6-01, C8-SOURCES, the C10 workstreams, C11 coordinator, identity and relations, and the PR #46 blueprint.
 
 ## Open and deferred P3 (and the INFO items needing action), grouped by recommended Cycle 13 owner
 
@@ -92,9 +95,17 @@ Each row's `cycle13_action` column gives the specific action.
   - V12-02: OPEN_NO_RECORD. It is not in the round-4 closures.
   - F09 to F11: v3 requirements.
 - **C12:**
-  - R48-05, R48-06 and R48-07 (deferred).
-  - Coordinator-tools F05 to F11 (no disposition yet).
-  - WS-F F-07 to F-10 and WS-G R08 to R11 (no disposition yet).
+  - R48-05, R48-06 and R48-07: deferred, as `TASK_REGISTER.md` (WS-A) records.
+  - Coordinator-tools F05 to F11: no disposition. The confirmations covered F01 to F04 only.
+  - WS-G R10 (17 capped ranges, optional) and R13 (one Python 3.11 run): deferred.
+  - WS-F C-01: the build reads the review promotions CSV, and no test shows that no state depends on it. No disposition yet.
+  - WS-F C-02: image-check the 16 text-layer-only items. Deferred.
+  - Confirmation P3s:
+    - CONF43-P3-2: absolute paths in the adviser provenance. Deferred, together with F11.
+    - FU-P3-1: wrap the adviser `--check` cleanup in try/finally.
+    - CONF43-P3-4: `key()` range handling.
+    - CONF43-RR02-RES: the CAPTURE.md heading and the per-row as-of date.
+  - WS-G NEW-01 (INFO): the AR 140 wording is stale.
   - Optional: R48-09 and R48-11.
 - **PR #46 (staging):** D-01 and D-03, both wording.
 
@@ -102,7 +113,7 @@ Each row's `cycle13_action` column gives the specific action.
 - **C10 RR-04:** the authority-matrix order of open-data bulk copies against SCR renditions. This was escalated, and no status depends on it.
 - **C11 C-11:** read the two comparison labels, Prithi Pal Singh Bedi and Ratan Singh.
 - **C11 F12:** adjudicate six holdout ground-truth rows, jointly with the owner.
-- **WS-G:** WSG-R12, which concerns the form typing of DPP Sch. II. WSG-R02 and WSG-R03 are P2 and listed above.
+- **WS-G R04:** the template-use gate. The re-transcribed field lists should be reviewed before any form template is relied on.
 - **C8 RR-INFO-01 (optional):** whether to cite the Gazette recital of the pre-1992 wording.
 
 ### Owner decision
@@ -122,11 +133,13 @@ The C6-01 master-title corrections C5-CO-03 and C5-CO-04 are recorded, and are t
 
 ## Method
 1. **Inventory.**
-   - The tool collects every tracked file matching `findings*.csv` under `legal_knowledge/audit_work/{AUTH-LEDGER, C6-01-PROVENANCE, C8-SOURCES/review, C10-RECONCILIATION, C11-JUDICIAL-QUALITY, C12-CONSOLIDATION/reviews}`, giving 38 files.
+   - The tool collects every tracked file matching `findings*.csv` under `legal_knowledge/audit_work/{AUTH-LEDGER, C6-01-PROVENANCE, C8-SOURCES/review, C10-RECONCILIATION, C11-JUDICIAL-QUALITY, C12-CONSOLIDATION/reviews}`.
+   - **Confirmation CSVs** are files with a `verdict` column, or with no severity column. They are treated as status evidence, not as new findings. Only rows whose verdict is not CLOSED, PARTIAL, DEFERRED or OPEN, and that carry a `severity` or `original_severity`, are inventoried. At `4e3571ee` those rows are WS-F C-01 and C-02 and WS-G NEW-01. `confirmation_c12_43190971_findings.csv` contributes none.
+   - P3 items raised only in confirmation markdown come from `SUPPLEMENTARY_FINDINGS.csv`.
    - It adds the two PR #46 CSVs read from staging `e0b3e7d2`.
    - The first column is taken as the id.
    - Severity is normalised by the first `P1`/`P2`/`P3`/`INFO` token. For example, "P2 in round 1" becomes P2, and "was P3" becomes P3.
-   - The statement is the first non-empty column among `title`, `statement`, `summary`, `finding`, `observation` and `evidence_or_counterexample`. The `2e2df5ce` re-review uses its status plus evidence instead. Whitespace is collapsed and the text is cut at 220 characters.
+   - The finding text (column `finding_text`) is the first non-empty column among `title`, `statement`, `summary`, `finding`, `observation` and `evidence_or_counterexample`. The `2e2df5ce` re-review uses its status plus evidence instead. Whitespace is collapsed and the text is cut at 220 characters.
 2. **Status.** Each status was assigned by reading, for each review chain:
    - the review;
    - every later re-review or confirmation;
@@ -147,8 +160,7 @@ The C6-01 master-title corrections C5-CO-03 and C5-CO-04 are recorded, and are t
    - **NOT_A_DEFECT:** a confirmation or PASS row, a by-design note, a reviewer scope statement, or an optional suggestion declined with a reason that the reviewer accepted.
 
 ## Limitations
-- **Live branch.** Three C12 reviews (WS-F, WS-G, coordinator tools) were committed while this ran, and their dispositions are in progress. Any new findings CSV makes the tool fail (rc 2) until `DISPOSITIONS.csv` is extended. That is intended.
-- **Uncommitted evidence.** For R48-05 to R48-07 and R48-12, the evidence is the working-tree edit of `TASK_REGISTER.md` made by another agent. It was not committed when this register was consolidated.
+- **Live branch.** C12 reviews and confirmations keep arriving. Any new findings CSV, or any new non-closure confirmation row, makes the tool fail (rc 2) until `DISPOSITIONS.csv` is extended. That is intended.
 - **Not inventoried.** These findings CSVs exist on staging but not on this branch, and they are outside the requested input set:
   - `AUTH-LEDGER/review/fable_narrow_pr38_562a55ef`;
   - `AUTH-LEDGER/review/fable_review_c10_effective_4770c165`;

@@ -11,6 +11,9 @@ What it does
      (they are not in this branch's tree).
    For each row it records the source file, the id (first column), the raw severity, the
    severity normalised to P1/P2/P3/INFO/OTHER and a one-line statement.
+   Confirmation CSVs (a ``verdict`` column, or no severity column) are status evidence; only their
+   non-closure rows that carry a severity are inventoried. Findings recorded only in review markdown
+   come from the hand-maintained ``SUPPLEMENTARY_FINDINGS.csv``.
 2. Joins the hand-maintained disposition table ``DISPOSITIONS.csv`` on (source_file, id).
 3. Validates: every finding has exactly one disposition and vice versa; statuses are in the
    fixed vocabulary; every evidence file exists (worktree path, or ``staging:<path>`` at the
@@ -56,8 +59,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 PKG = os.path.dirname(HERE)
 DISPOSITIONS = os.path.join(PKG, "DISPOSITIONS.csv")
 OUTPUT = os.path.join(PKG, "FINDINGS_CONSOLIDATED.csv")
+SUPPLEMENTARY = os.path.join(PKG, "SUPPLEMENTARY_FINDINGS.csv")
+SUPP_HEADER = ["source_file", "id", "severity", "finding_text"]
+CLOSURE_VERDICT_RE = re.compile(r"^(CLOSED|PARTIAL|DEFERRED|OPEN)", re.IGNORECASE)
 DISP_HEADER = ["source_file", "id", "current_status", "status_evidence_file", "reason_or_note", "cycle13_action"]
-OUT_HEADER = ["source_file", "id", "severity", "severity_raw", "statement", "current_status",
+OUT_HEADER = ["source_file", "id", "severity", "severity_raw", "finding_text", "current_status",
               "status_evidence_file", "reason_or_note", "cycle13_action"]
 
 
@@ -102,13 +108,21 @@ def statement_of(row, header):
 
 
 def parse_findings(source, text):
+    """Rows of one findings CSV.
+
+    A file with a ``verdict`` column, or without any severity column, is a confirmation file: its
+    rows are status evidence for earlier findings, not new findings. Only confirmation rows whose
+    verdict is not a closure verdict (CLOSED*/PARTIAL*/DEFERRED*/OPEN*) and that carry a severity
+    (``severity`` or ``original_severity``) are inventoried as new findings.
+    """
     reader = csv.reader(io.StringIO(text, newline=""))
     rows = list(reader)
     if not rows:
         raise ConsolidationError("%s: empty file" % source)
     header = [h.strip() for h in rows[0]]
-    if "severity" not in header:
-        raise ConsolidationError("%s: no severity column" % source)
+    confirmation = "verdict" in header or "severity" not in header
+    if confirmation and "severity" not in header and "original_severity" not in header:
+        return []  # pure status evidence (e.g. source_file,id,verdict,evidence,remaining_action)
     out = []
     for raw in rows[1:]:
         if not any(cell.strip() for cell in raw):
@@ -117,9 +131,12 @@ def parse_findings(source, text):
             raise ConsolidationError("%s: row %r has %d cells, header has %d" % (source, raw[:1], len(raw), len(header)))
         rec = dict(zip(header, raw))
         fid = raw[0].strip()
-        sev_raw = rec["severity"].strip()
+        sev_raw = (rec.get("severity") or "").strip() or (rec.get("original_severity") or "").strip()
+        if confirmation:
+            if CLOSURE_VERDICT_RE.match((rec.get("verdict") or "").strip()) or not sev_raw:
+                continue
         out.append({"source_file": source, "id": fid, "severity_raw": sev_raw,
-                    "severity": normalise_severity(sev_raw), "statement": statement_of(rec, header)})
+                    "severity": normalise_severity(sev_raw), "finding_text": statement_of(rec, header)})
     return out
 
 
@@ -133,11 +150,31 @@ def inventory(root, staging_ref):
     for f in STAGING_FILES:
         text = git(root, "show", "%s:%s" % (staging_ref, f)).decode("utf-8")
         findings.extend(parse_findings("staging:" + f, text))
+    findings.extend(load_supplementary(root))
     seen = collections.Counter((r["source_file"], r["id"]) for r in findings)
     dup = [k for k, v in seen.items() if v > 1]
     if dup:
         raise ConsolidationError("duplicate (source_file, id): %r" % dup)
     return findings
+
+
+def load_supplementary(root):
+    """Hand-maintained findings recorded only in review markdown (no CSV row)."""
+    with open(SUPPLEMENTARY, encoding="utf-8", newline="") as fh:
+        rows = list(csv.reader(fh))
+    if not rows or rows[0] != SUPP_HEADER:
+        raise ConsolidationError("SUPPLEMENTARY_FINDINGS.csv header must be %r" % SUPP_HEADER)
+    out = []
+    for n, raw in enumerate(rows[1:], start=2):
+        if len(raw) != len(SUPP_HEADER):
+            raise ConsolidationError("SUPPLEMENTARY_FINDINGS.csv line %d: %d cells" % (n, len(raw)))
+        rec = dict(zip(SUPP_HEADER, raw))
+        if not os.path.isfile(os.path.join(root, rec["source_file"])):
+            raise ConsolidationError("SUPPLEMENTARY_FINDINGS.csv line %d: source missing: %s" % (n, rec["source_file"]))
+        sev = normalise_severity(rec["severity"])
+        out.append({"source_file": rec["source_file"], "id": rec["id"], "severity_raw": rec["severity"],
+                    "severity": sev, "finding_text": one_line(rec["finding_text"])})
+    return out
 
 
 def load_dispositions(root, staging_ref):
@@ -188,7 +225,7 @@ def build(root, staging_ref):
     w.writerow(OUT_HEADER)
     for r in findings:
         d = table[(r["source_file"], r["id"])]
-        w.writerow([r["source_file"], r["id"], r["severity"], r["severity_raw"], r["statement"],
+        w.writerow([r["source_file"], r["id"], r["severity"], r["severity_raw"], r["finding_text"],
                     d["current_status"], d["status_evidence_file"], d["reason_or_note"], d["cycle13_action"]])
     return findings, table, buf.getvalue().encode("utf-8")
 

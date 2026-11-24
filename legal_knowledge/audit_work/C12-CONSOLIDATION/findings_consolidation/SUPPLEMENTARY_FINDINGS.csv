@@ -1,0 +1,8 @@
+source_file,id,severity,finding_text
+legal_knowledge/audit_work/C12-CONSOLIDATION/reviews/confirmation_c12_43190971.md,CONF43-P3-1,P3,Adviser package --check leaves a temporary directory in /tmp on every run.
+legal_knowledge/audit_work/C12-CONSOLIDATION/reviews/confirmation_c12_43190971.md,CONF43-P3-2,P3,Absolute worktree paths in PROVENANCE_C12.md make the adviser package --check non-portable (passes only from c12w).
+legal_knowledge/audit_work/C12-CONSOLIDATION/reviews/confirmation_c12_43190971.md,CONF43-P3-3,P3,TASK_REGISTER.md at HEAD still says 136/150 strict agreement; the figure is now 134/150.
+legal_knowledge/audit_work/C12-CONSOLIDATION/reviews/confirmation_c12_43190971.md,CONF43-P3-4,P3,"key() in holdout_v3_agreement_c12.py turns '8452-53 of 2026' into 53-2026; no effect on current verdicts."
+legal_knowledge/audit_work/C12-CONSOLIDATION/reviews/confirmation_c12_43190971.md,CONF43-RR02-RES,P3,CAPTURE.md heading still begins 'Limits stated in every output' and DATASET_INTEGRITY_SUMMARY.csv rows carry no per-row as-of date (residual of C10 RR-02/RC-04).
+legal_knowledge/audit_work/C12-CONSOLIDATION/reviews/confirmation_followup_cec4e92c.md,FU-P3-1,P3,An exception raised before rmtree would still leave the adviser --check temp directory; cleanup is not in try/finally.
+legal_knowledge/audit_work/C12-CONSOLIDATION/reviews/confirmation_followup_cec4e92c.md,FU-P3-2,P3,"CODING_CONVENTION.md line 3 and the holdout_v3_truth_c12.py docstring say 'blind ... to each other' without a pointer to PROCESS_NOTE.md (optional)."
