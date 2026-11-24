@@ -21,7 +21,7 @@ rebuild is impossible; --check then verifies OUTPUT_SHA256SUMS and the accountin
 import argparse, collections, csv, difflib, hashlib, importlib.util, io, json, os, re, subprocess, sys, tempfile
 from pathlib import Path
 
-TOOL_VERSION = "c11-identity/1"
+TOOL_VERSION = "c11-identity/2"
 HERE = Path(__file__).resolve().parent
 PKG = HERE.parent
 OUT = PKG / "outputs"
@@ -71,6 +71,23 @@ CONFIRMING_TIERS = set(TIER_ORDER[:4])
 # known findings of the C10 independent review (review/REVIEW_FINDINGS.md); matched on stored metadata, never assumed
 REVIEW_COMPOSITE = {"title_substring": "VIJAYNATH JHA", "court": "Supreme Court of India"}
 REVIEW_VERSIONS_PATH = "legal_knowledge/judgment_originals/sci/2020/virendra_kumar_2020.pdf"
+# a second judgment held inside a stored file, confirmed by a review reading; each gets its own key (file sha + page range)
+REVIEW_EXTRA_JUDGMENTS = {
+    "0f65307432d16f74f78ea8a4f37ad5d1d4b0e56188273575ac956eab22478d72": {
+        "pages": "16-25", "court": "Supreme Court of India", "case_ny": (129, 2018), "date": "2018-02-16", "proceeding": "SCI:WPC-129-2018",
+        "title": "Adarsh Cooperative Housing Society Ltd. v. Union of India, W.P.(C) 129/2018, SC, 16-02-2018, [2018] 4 SCR 575",
+        "source": "C10 REVIEW_FINDINGS.md (composite); court corrected to Supreme Court by the C11 identity reading and the C11 review"},
+    "081a8b22679359abc84e8a827510905b4dac8ce09f9cf0579f5f923949d2efa0": {
+        "pages": "9-10", "court": "High Court of Delhi", "case_ny": (2881, 2008), "date": "2009-11-13",
+        "proceeding": "DLHC:CM-11902-2009 in WPC-2881-2008",
+        "title": "Delhi HC order of 13.11.2009 (Sanjay Kishan Kaul J.) dismissing an application to modify the judgment of 20.11.2008",
+        "source": "C11 independent identity review (finding F1), confirmed by the automated additional-order detector"},
+}
+# one judgment delivered as separate opinions with no majority (review-confirmed)
+REVIEW_SPLIT = {
+    "b64df349c9f5158baca80734718844d35b7b98bc8d3741ee9b98b0808ce1c984":
+        "TWO_OPINIONS_SPLIT_VERDICT pp.1-193 Rajiv Shakdher J. | pp.194-393 C. Hari Shankar J. (same cases, date, 2022/DHC/001825)",
+}
 
 
 # ------------------------------------------------------------------------------------------------ helpers
@@ -224,6 +241,144 @@ def render_hash(fitz, data):
     return h.hexdigest()
 
 
+# ------------------------------------------------------------------------------------------------ scan-aware identity (C11 review F1/F3/F6/F7)
+# quote and dash glyphs that one PDF generator extracts as digits/symbols ('’' read as 9, '“' as <, '”' as =, '‘' as 8, dashes as 3/4)
+GLYPH_MAP = str.maketrans({"’": "9", "“": "<", "”": "=", "‘": "8", "–": "3", "—": "4"})
+OCR_DIGITS = str.maketrans("OoQlIiSB", "00011158")
+# running footer/header of a common judgment: '<lead case number>/<year> & connected ... Page k of N' (no digits in between)
+FOOTER = re.compile(r"\b([0-9OQlIS]{1,6})\s*(?:/|of)\s*([12][0-9OQlIB]{3})(?![0-9])[^0-9\n]{0,45}?P[ao]ge\s*([0-9OQlI]{1,3})\s*of\s*([0-9OQlI]{1,3})", re.I)
+POINTER = re.compile(r"For\s+(?:detailed\s+|further\s+)?orders?\s*,?\s*(?:please\s+)?(?:see|refer\s+to)\s+(?:the\s+)?(?:common\s+)?(?:detailed\s+)?(?:order|judgment)?\s*(?:passed\s+)?(?:today\s+)?(?:in\s+)?(.{0,70})", re.I)
+NUM_YEAR = re.compile(r"\b([0-9OQlI]{1,6})\s*(?:/|of)\s*([12][0-9OQlI]{3})\b")
+LIST_CONT = re.compile(r"\s*(?:,|&|and|\.)\s*(?:No\.?\s*)?(\d{1,6})\s*/\s*((?:19|20)\d{2})\b")
+TITLE_END = re.compile(r"\bCORAM\b|\bJ\s?U\s?D\s?G\s?M\s?E\s?N\s?T\b|\bO\s?R\s?D\s?E\s?R\b|\bHON'?BLE\b", re.I)
+
+
+def glyph_digits_key(t):
+    """digits_key after mapping quote/dash glyphs to the digits a faulty generator emits for them (applied to every text)."""
+    return digits_key((t or "").translate(GLYPH_MAP))
+
+
+def _ny(num, yr):
+    try:
+        n, y = int(num.translate(OCR_DIGITS)), int(yr.translate(OCR_DIGITS))
+    except ValueError:
+        return None
+    return (n, y) if 1900 <= y <= 2030 and n > 0 else None
+
+
+def footer_keys(texts):
+    """(lead number, lead year, N) seen in running footers, with the page numbers k found for each page index."""
+    out = []
+    for i, t in enumerate(texts):
+        for m in FOOTER.finditer(collapse(t)):
+            ny = _ny(m.group(1), m.group(2))
+            try:
+                k, n = int(m.group(3).translate(OCR_DIGITS)), int(m.group(4).translate(OCR_DIGITS))
+            except ValueError:
+                continue
+            if ny and 1 <= k <= n <= 999:
+                out.append((i + 1, k, n, ny[0], ny[1]))
+    return out
+
+
+def pointer_keys(texts):
+    out = []
+    for t in texts[:2]:
+        for m in POINTER.finditer(collapse(t)):
+            mm = NUM_YEAR.search(m.group(1))
+            if mm and _ny(mm.group(1), mm.group(2)):
+                out.append(_ny(mm.group(1), mm.group(2)))
+    return sorted(set(out))
+
+
+def cause_title_cases(J, texts):
+    """Every case number in the cause title (up to CORAM/JUDGMENT/ORDER, at most 3 pages), including bare continuations
+    such as 'WP(C) Nos. 5946/2007, 9382/2007'. Automated and possibly partial."""
+    flat = FOOTER.sub(" ", collapse(" ".join(texts[:3])))   # a running header/footer is not part of the cause title
+    m = TITLE_END.search(flat, 200)
+    head = flat[:m.start()] if m else flat[:6000]
+    out = []
+    for cm in J.CASE_RE.finditer(head):
+        typ = cm.group("type")
+        k = J._norm_case(typ, cm.group("num"), cm.group("year"))
+        if k not in out:
+            out.append(k)
+        pos = cm.end()
+        while True:
+            c2 = LIST_CONT.match(head, pos)
+            if not c2:
+                break
+            k2 = J._norm_case(typ, c2.group(1), c2.group(2))
+            if k2 not in out:
+                out.append(k2)
+            pos = c2.end()
+    return out
+
+
+def head_keys(J, texts):
+    """(number, year) of the case numbers opening page 1 and page 2 (a scanned copy often has its own cover sheet first)."""
+    out = set()
+    for t in texts[:2]:
+        for k in cases_in(J, FOOTER.sub(" ", collapse(t))[:600]):
+            mm = re.match(r".*-(\d+)-(\d{4})$", k)
+            if mm:
+                out.add((int(mm.group(1)), int(mm.group(2))))
+    return out
+
+
+def shingles(t):
+    w = re.findall(r"[a-z]{2,}", (t or "").lower())
+    return {" ".join(w[i:i + 3]) for i in range(len(w) - 2)}
+
+
+def text_page_match(px, py, thr=0.3, min_sh=40):
+    """Share of x's text-bearing pages whose 3-word shingles are contained (>= thr) in some page of y."""
+    pages = [s for s in px if len(s) >= min_sh]
+    if not pages:
+        return 0.0, 0
+    hit = 0
+    for s in pages:
+        best = max((len(s & q) / len(s) for q in py if q), default=0.0)
+        if best >= thr:
+            hit += 1
+    return round(hit / len(pages), 3), len(pages)
+
+
+def thumb(fitz, page, w=40):
+    try:
+        r = page.rect
+        z = w / max(r.width, 1)
+        pm = page.get_pixmap(matrix=fitz.Matrix(z, z), colorspace=fitz.csGRAY)
+    except Exception:  # noqa: BLE001
+        return None
+    v = list(pm.samples[: pm.width * min(pm.height, int(w * 1.4))])
+    if len(v) < w * 50:
+        return None
+    m = sum(v) / len(v)
+    sd = (sum((x - m) ** 2 for x in v) / len(v)) ** 0.5
+    if sd < 4:
+        return None
+    return [(x - m) / sd for x in v]
+
+
+def image_match(tx, ty):
+    """Best mean correlation of page thumbnails over page offsets -2..2; returns (mean, pairs, offset)."""
+    best = (0.0, 0, 0)
+    for off in range(-2, 3):
+        cs = []
+        for j, a in enumerate(tx):
+            k = j + off
+            if 0 <= k < len(ty) and a is not None and ty[k] is not None:
+                b = ty[k]
+                n = min(len(a), len(b))
+                cs.append(sum(a[i] * b[i] for i in range(n)) / n)
+        if len(cs) >= 3:
+            mean = sum(cs) / len(cs)
+            if mean > best[0]:
+                best = (round(mean, 3), len(cs), off)
+    return best
+
+
 # ------------------------------------------------------------------------------------------------ per-file analysis
 def cases_in(J, text):
     out = []
@@ -293,6 +448,7 @@ def analyse_file(J, fitz, rec, data):
     a["text_chars"] = sum(len(t.strip()) for t in texts)
     a["alnum_key"] = alnum_key(full)
     a["digits_key"] = digits_key(full)
+    a["glyph_digits_key"] = glyph_digits_key(full)
     a["alnum_len"] = len(re.sub(r"[^a-z]", "", full.lower()))
     a["readable_ratio"] = readable_ratio(full)
     a["content_sha"] = content_hash(d, n)
@@ -335,6 +491,10 @@ def analyse_file(J, fitz, rec, data):
         cs = sorted(set(cases_in(J, s["snippet"])))
         sc_out.append({"page": s["page"], "snippet": s["snippet"], "cases": cs})
     a["scr_starts"] = sc_out
+    a["footer"] = footer_keys(texts)
+    a["pointer"] = pointer_keys(texts)
+    a["head_keys"] = sorted(head_keys(J, texts))
+    a["cause_title_cases"] = cause_title_cases(J, texts)
     return a
 
 
@@ -423,6 +583,49 @@ def build(repo):
     def date_of(s):
         return ";".join(sorted({m["issue_date_meta"] for m in meta.get(s, []) if m["issue_date_meta"]}))
 
+    def url_date(s):
+        for m in meta.get(s, []):
+            mm = re.search(r"_(\d{4}-\d{2}-\d{2})\.pdf$", m.get("source_url") or "")
+            if mm:
+                return mm.group(1)
+        return ""
+
+    def date_set(s, printed=False):
+        out = {m["issue_date_meta"] for m in meta.get(s, []) if m["issue_date_meta"]}
+        if url_date(s):
+            out.add(url_date(s))
+        if printed:
+            out.update(recs[s].get("decision_date_candidates") or [])
+            out.update(recs[s].get("dates_text") or [])
+        return out
+
+    page_cache = {}
+
+    def get_pages(s):
+        """Page texts and thumbnails (lazily) of one file, re-read from the pinned blob and re-hashed."""
+        if s not in page_cache:
+            data = blobs.get(reg[s]["path"])
+            if data is None or sha(data) != s:
+                page_cache[s] = None
+            else:
+                d, n = open_pdf(fitz, data)
+                page_cache[s] = None if d is None else {"doc": d, "texts": page_texts(d, n), "thumbs": None, "sh": None}
+        return page_cache[s]
+
+    def sh_of(s):
+        g = get_pages(s)
+        if g["sh"] is None:
+            g["sh"] = [shingles(t) for t in g["texts"]]
+        return g["sh"]
+
+    def th_of(s):
+        g = get_pages(s)
+        if g["thumbs"] is None:
+            g["thumbs"] = [thumb(fitz, g["doc"][i]) for i in range(len(g["texts"]))]
+        return g["thumbs"]
+
+    meta_issues = []
+
     def meta_cases(s):
         return [m["case_numbers_meta"] for m in meta.get(s, []) if m["case_numbers_meta"]]
 
@@ -457,6 +660,7 @@ def build(repo):
     review_composite = sorted(s for s in shas for m in meta.get(s, [])
                               if REVIEW_COMPOSITE["title_substring"] in m["title"].upper() and m["court"] == REVIEW_COMPOSITE["court"])
     review_versions = sorted(s for s in shas if reg[s]["path"] == REVIEW_VERSIONS_PATH)
+    review_composite = sorted(set(review_composite) | {s for s in REVIEW_EXTRA_JUDGMENTS if s in recs})
 
     def strong_composite(s):
         a = A[s]
@@ -574,7 +778,7 @@ def build(repo):
         a = A[s]
         if a.get("alnum_key") and text_quality(s) == "READABLE" and a.get("alnum_len", 0) >= 500 and \
                 reg[s]["source_completeness"] == "COMPLETE_FILE_STRUCTURE":
-            by_alnum[a["alnum_key"] + a["digits_key"]].append(s)
+            by_alnum[a["alnum_key"] + a["glyph_digits_key"]].append(s)
     for key in sorted(by_alnum, key=lambda k: (-len(by_alnum[k]), k)):
         v = sorted(by_alnum[key])
         roots = sorted({find(s) for s in v})
@@ -583,8 +787,13 @@ def build(repo):
             continue
         courts = sorted({court_of(s) for s in v})
         dates = sorted({date_of(s) for s in v})
+        udates = sorted({url_date(s) for s in v})
         pages = sorted({str(recs[s].get("pages")) for s in v})
-        ok = len(courts) == 1 and len(dates) == 1 and len(pages) == 1
+        date_ok = len(dates) == 1 or (len(udates) == 1 and udates[0])
+        ok = len(courts) == 1 and bool(date_ok) and len(pages) == 1
+        if ok and len(dates) > 1:
+            meta_issues.append({"files": ";".join(v), "issue": "issue_date_meta differs between copies of one document; every source_url "
+                                f"carries the date {udates[0]}: metadata dates {';'.join(dates)} are not the date of the stored document"})
         before = len(roots)
         if ok:
             for s in v[1:]:
@@ -601,13 +810,15 @@ def build(repo):
             "first_page_excerpt": collapse(recs[v[0]].get("first_page_excerpt", ""))[:180],
             "producers": ";".join(sorted({A[s].get("producer", "") for s in v})), "eof_markers_per_file": "",
             "byte_comparison": f"exact_text_variants={len(exact)}",
-            "byte_diff_nature": "letters identical and multi-digit numbers identical in order once clock times are removed; the exact text differs "
-                                "only in per-download signing/print time stamps or in quote/punctuation glyph mapping (a closing quote extracted "
-                                "as 9 or <) between PDF generator versions",
+            "byte_diff_nature": "letters identical and multi-digit numbers identical in order once clock times are removed and quote/dash glyphs are "
+                                "mapped to the digits a faulty generator emits for them (' as 9, left/right double quote as < and =, left quote as 8, "
+                                "dashes as 3/4); the exact text differs only in per-download signing/print time stamps or that glyph mapping",
             "incomplete_members": "", "composite_members": "",
             "classification": "SAME_JUDGMENT_DIFFERENT_RENDITION" if ok else "UNRESOLVED",
-            "classification_basis": ("same court, decision date and page count; same words and same numbers (case numbers, dates) apart from time stamps" if ok else
-                                     "letter sequence identical but court, date or page count differ"),
+            "classification_basis": (("same court, decision date and page count; same words and same numbers (case numbers, dates) apart from "
+                                      "time stamps and quote/dash glyphs extracted as digits" +
+                                      (f"; crawler dates differ but every source_url carries {udates[0]} (metadata error, routed)" if len(dates) > 1 else ""))
+                                     if ok else "letter sequence identical but court, date or page count differ"),
             "judgment_count_change": -(before - 1) if ok else 0, "verification": VERIFY})
 
     # ---- same words but different numbers: reported, never merged (template orders in different cases, or glyph noise)
@@ -620,7 +831,7 @@ def build(repo):
     for key in sorted(by_letters, key=lambda k: (-len(by_letters[k]), k)):
         v = sorted(by_letters[key])
         roots = sorted({find(s) for s in v})
-        if len(roots) < 2 or len({A[s]["digits_key"] for s in v}) < 2:
+        if len(roots) < 2 or len({A[s]["glyph_digits_key"] for s in v}) < 2:
             continue
         gid = "STGN-" + key[:12]
         for s in v:
@@ -655,12 +866,28 @@ def build(repo):
             ratio = difflib.SequenceMatcher(None, A[s]["p1_norm"], A[o]["p1_norm"], autojunk=False).ratio()
             ps, po = recs[s].get("pages"), recs[o].get("pages")
             if ratio >= 0.95 and (ps is None or po is None or ps == po):
-                x, y = sorted((s, o))
-                inc_rows.append((x, y, round(ratio, 3)))
+                # first-page similarity alone is unsafe (word-identical orders in different cases reach 0.96-0.99): every page
+                # readable in both copies must match too
+                gs_, go_ = get_pages(s), get_pages(o)
+                if not gs_ or not go_:
+                    continue
+                both = [i for i in range(min(len(gs_["texts"]), len(go_["texts"])))
+                        if len(gs_["texts"][i].strip()) >= 50 and len(go_["texts"][i].strip()) >= 50]
+                sims = []
+                for i in both:
+                    la, lb = letters(gs_["texts"][i], 4000), letters(go_["texts"][i], 4000)
+                    if i == both[-1]:   # the last readable page of a truncated copy may stop mid-page: compare the common prefix
+                        n_ = min(len(la), len(lb))
+                        la, lb = la[:n_], lb[:n_]
+                    sims.append(difflib.SequenceMatcher(None, la, lb, autojunk=False).ratio())
+                same_p1_cases = bool(A[s].get("p1_cases")) and A[s].get("p1_cases") == A[o].get("p1_cases")
+                if sims and all(x >= 0.95 for x in sims) and (len(both) >= 2 or same_p1_cases):
+                    x, y = sorted((s, o))
+                    inc_rows.append((x, y, round(ratio, 3), len(both), round(min(sims), 3)))
     inc_rows = sorted(set(inc_rows))
     inc_links = collections.defaultdict(list)
     seen_pairs = set()
-    for s, o, ratio in inc_rows:
+    for s, o, ratio, _nb, _ms in inc_rows:
         pair = tuple(sorted((s, o)))
         if pair in seen_pairs:
             continue
@@ -690,7 +917,7 @@ def build(repo):
         for s in v:
             group_of.setdefault(s, gid)
         group_rows.append({
-            "group_id": gid, "scope": "INCOMPLETE_COPY_FIRST_PAGE_MATCH", "n_files": len(v), "representative_sha256": v[0],
+            "group_id": gid, "scope": "INCOMPLETE_COPY_ALL_PAGE_MATCH", "n_files": len(v), "representative_sha256": v[0],
             "file_sha256s": ";".join(v), "text_sha256": ";".join(sorted({recs[s].get("text_sha256") or "" for s in v})),
             "text_chars": "", "text_quality": ";".join(sorted({text_quality(s) for s in v})), "readable_ratio": "",
             "pages": ";".join(sorted({str(recs[s].get("pages")) for s in v})), "courts": ";".join(sorted({court_of(s) for s in v})),
@@ -698,13 +925,159 @@ def build(repo):
             "meta_case_numbers": ";".join(c for s in v for c in meta_cases(s)), "meta_case_numbers_found_in_text_p1_3": "",
             "first_page_excerpt": collapse(recs[v[0]].get("first_page_excerpt", ""))[:180],
             "producers": ";".join(sorted({A[s].get("producer", "") for s in v})), "eof_markers_per_file": "",
-            "byte_comparison": "first-page letter/digit similarity " + ";".join(f"{x[:12]}~{y[:12]}={r}" for x, y, r in inc_rows if x in v),
+            "byte_comparison": "all readable pages match: " + ";".join(f"{x[:12]}~{y[:12]} p1={r}, {nb} common text pages, min page similarity {ms}"
+                                                                 for x, y, r, nb, ms in inc_rows if x in v),
             "byte_diff_nature": "at least one member is a truncated or tail-cut copy, so whole-text hashes cannot match; the readable first "
-                                "pages match (>=0.95) with the same court and decision date",
+                                "page and every page readable in both copies match (letter similarity >= 0.95) with the same court, decision "
+                                "date and page count",
             "incomplete_members": ";".join(s for s in v if reg[s]["source_completeness"] != "COMPLETE_FILE_STRUCTURE"),
             "composite_members": "", "classification": "CONFIRMED_DUPLICATE_SAME_JUDGMENT",
-            "classification_basis": "same judgment by first-page identity, court and date; the copies differ in completeness",
+            "classification_basis": "same judgment by all-page identity, court, date and page count; the copies differ in completeness",
             "judgment_count_change": -(before - 1), "verification": VERIFY})
+
+    # ---- scanned copies of a common judgment: a lead case seen in running footers, pointer lines ('For orders, see ...') or
+    #      the opening cause title, the same court and decision date, and a page-content match (text shingles or page images)
+    lead_index = collections.defaultdict(set)
+    file_keys = {}
+    for s in shas:
+        a = A[s]
+        if not a.get("opens"):
+            continue
+        ks = collections.defaultdict(set)
+        for (_pg, _k, _n, num, yr) in a.get("footer", []):
+            ks[(num, yr)].add("FOOTER")
+        for ny in a.get("pointer", []):
+            ks[tuple(ny)].add("POINTER")
+        for ny in a.get("head_keys", []):
+            ks[tuple(ny)].add("CAUSE_TITLE")
+        file_keys[s] = ks
+        for ny in ks:
+            lead_index[(court_of(s),) + tuple(ny)].add(s)
+
+    def confirm(x, y, key):
+        """Page-content confirmation. When either file shows the lead case only in a running footer (not in its own cause title
+        or a pointer line) the text match must be strong (>= 0.8 both ways): word-identical orders in different cases on the same
+        day share most of their pages, and a clerk can copy the wrong case number into a footer."""
+        shx, shy = sh_of(x), sh_of(y)
+        tx, ty = text_page_match(shx, shy), text_page_match(shy, shx)
+        titled = all(file_keys[f][key] & {"POINTER", "CAUSE_TITLE"} or key in {
+            tuple(int(z) for z in re.match(r".*-(\d+)-(\d{4})$", c).groups()) for c in A[f].get("cause_title_cases", [])
+            if re.match(r".*-(\d+)-(\d{4})$", c)} for f in (x, y))
+        need = 0.6 if titled else 0.8
+        if tx[1] >= 2 and ty[1] >= 2 and tx[0] >= need and ty[0] >= need:
+            return "TEXT_PAGES", f"text pages matched {tx[0]} of {tx[1]} / {ty[0]} of {ty[1]}" + ("" if titled else " (footer-only lead: >=0.8 required)")
+        if not titled:
+            return "", f"text {tx[0]} of {tx[1]} / {ty[0]} of {ty[1]}; lead case only in a footer, images not accepted"
+        im = image_match(th_of(x), th_of(y))
+        shorter = min(len(get_pages(x)["texts"]), len(get_pages(y)["texts"]))
+        if im[0] >= 0.6 and im[1] >= 3 and im[1] >= 0.6 * shorter:
+            return "PAGE_IMAGES", f"page thumbnails mean correlation {im[0]} over {im[1]} pages (offset {im[2]}); text {tx[0]}/{ty[0]}"
+        return "", f"text {tx[0]} of {tx[1]} / {ty[0]} of {ty[1]}; images {im[0]} over {im[1]} pages"
+
+    scan_rows, contained, extra_orders = [], [], []
+    for key in sorted(lead_index):
+        files = sorted(lead_index[key])
+        if len(files) < 2 or len({find(f) for f in files}) < 2:
+            continue
+        if not any(file_keys[f][key[1:]] & {"FOOTER", "POINTER"} for f in files):
+            continue   # a shared opening case number alone is no lead-case evidence
+        if any(not get_pages(f) for f in files):
+            files = [f for f in files if get_pages(f)]
+        before = len({find(f) for f in files})
+        links = []
+        for i, x in enumerate(files):
+            for y in files[i + 1:]:
+                if find(x) == find(y):
+                    continue
+                same_date = bool(date_set(x) & date_set(y))
+                method, ev = confirm(x, y, key[1:])
+                if method and same_date:
+                    union(x, y)
+                    links.append((x, y, method, ev))
+                elif method and not same_date:
+                    contained.append((x, y, method, ev, key))
+        if not links:
+            continue
+        merged = sorted({f for x, y, _m, _e in links for f in (x, y)})
+        after = len({find(f) for f in files})
+        gid = "STGS-" + merged[0][:12]
+        for f in merged:
+            group_of.setdefault(f, gid)
+        # pages of a merged copy that match no page of its partner and carry their own operative order
+        for x, y, _m, _e in links:
+            for a_, b_ in ((x, y), (y, x)):
+                ta, shb = get_pages(a_)["texts"], sh_of(b_)
+                fts = [(pg - k, n) for (pg, k, n, num, yr) in A[a_].get("footer", []) if (num, yr) == key[1:]]
+                if not fts:
+                    continue
+                off, ntot = collections.Counter(fts).most_common(1)[0][0]
+                odd = [i + 1 for i, t in enumerate(ta) if i + 1 > off + ntot and len(t.strip()) >= 500
+                       and max((len(shingles(t) & q) / max(1, len(shingles(t))) for q in shb if q), default=0) < 0.3]
+                if odd and OPERATIVE.search(collapse(" ".join(ta[odd[0] - 1:]))[-1500:]):
+                    extra_orders.append((a_, odd))
+        scan_rows.append({
+            "group_id": gid, "scope": "SCANNED_COPY_LEAD_CASE_MATCH", "n_files": len(merged), "representative_sha256": merged[0],
+            "file_sha256s": ";".join(merged), "text_sha256": "", "text_chars": "",
+            "text_quality": ";".join(sorted({text_quality(f) for f in merged})), "readable_ratio": "",
+            "pages": ";".join(sorted({str(recs[f].get("pages")) for f in merged})), "courts": key[0],
+            "issue_dates_meta": ";".join(sorted({date_of(f) for f in merged})), "meta_records": sum(len(meta.get(f, [])) for f in merged),
+            "meta_case_numbers": ";".join(c for f in merged for c in meta_cases(f)), "meta_case_numbers_found_in_text_p1_3": "",
+            "first_page_excerpt": collapse(recs[merged[0]].get("first_page_excerpt", ""))[:180],
+            "producers": ";".join(sorted({A[f].get("producer", "") for f in merged})), "eof_markers_per_file": "",
+            "byte_comparison": " | ".join(f"{x[:12]}~{y[:12]}: {m} ({e})" for x, y, m, e in links)[:3000],
+            "byte_diff_nature": (f"lead case {key[1]}/{key[2]} found as " +
+                                 ", ".join(f"{k}={sum(1 for f in merged if k in file_keys[f][key[1:]])}" for k in ("FOOTER", "POINTER", "CAUSE_TITLE")) +
+                                 "; scanned copies (OCR text layers differ), usually a one-page sheet for the file's own case followed by the "
+                                 "common judgment"),
+            "incomplete_members": "", "composite_members": "", "classification": "CONFIRMED_DUPLICATE_SAME_JUDGMENT",
+            "classification_basis": "same court, same lead case (footer/pointer/cause title) and same decision date, confirmed on page content "
+                                    "(text shingles or page images); similarity alone never merges",
+            "judgment_count_change": -(before - after), "verification": VERIFY})
+    group_rows.extend(scan_rows)
+    contained_rows = []
+    for x, y, m, ev, key in sorted(set(contained)):
+        if find(x) == find(y):
+            continue
+        contained_rows.append({"files": f"{x};{y}", "key": f"{key[0]} {key[1]}/{key[2]}", "method": m, "evidence": ev,
+                               "dates": f"{';'.join(sorted(date_set(x)))} | {';'.join(sorted(date_set(y)))}"})
+
+    # ---- one-page pointer orders ('For orders, see <lead case>'): the decision is the lead judgment; linked to it, not counted
+    pointer_rows = []
+    for s in shas:
+        a = A[s]
+        if not a.get("opens") or (a.get("pages") or 0) > 2 or (a.get("text_chars") or 0) >= 3000 or not a.get("pointer"):
+            continue
+        leads = []
+        for ny in a["pointer"]:
+            for o in sorted(lead_index.get((court_of(s),) + tuple(ny), set())):
+                if o == s or (A[o].get("pages") or 0) <= 2:
+                    continue
+                mc = any(re.search(rf"/{ny[0]}/{ny[1]}$", c) for c in meta_cases(o)) or "FOOTER" in file_keys[o].get(tuple(ny), set())
+                if mc and date_set(s, printed=True) & date_set(o):
+                    leads.append(o)
+        if not leads:
+            pointer_rows.append({"sha256": s, "lead": "", "status": "LEAD_NOT_IN_CORPUS_OR_DATE_UNCONFIRMED", "pointer": a["pointer"]})
+            continue
+        lead = sorted(leads, key=lambda o: (-(A[o].get("pages") or 0), o))[0]
+        before = len({find(s), find(lead)})
+        union(s, lead)
+        pointer_rows.append({"sha256": s, "lead": lead, "status": "LINKED_TO_LEAD_JUDGMENT", "pointer": a["pointer"], "change": -(before - 1)})
+    for pr in [r for r in pointer_rows if r["status"] == "LINKED_TO_LEAD_JUDGMENT"]:
+        s, lead = pr["sha256"], pr["lead"]
+        group_of.setdefault(s, "STGP-" + lead[:12])
+        group_rows.append({
+            "group_id": "STGP-" + s[:12], "scope": "POINTER_ORDER_TO_LEAD_JUDGMENT", "n_files": 2, "representative_sha256": lead,
+            "file_sha256s": f"{s};{lead}", "text_sha256": "", "text_chars": A[s].get("text_chars"), "text_quality": text_quality(s),
+            "readable_ratio": "", "pages": f"{A[s].get('pages')};{A[lead].get('pages')}", "courts": court_of(s),
+            "issue_dates_meta": f"{date_of(s)};{date_of(lead)}", "meta_records": len(meta.get(s, [])) + len(meta.get(lead, [])),
+            "meta_case_numbers": ";".join(meta_cases(s) + meta_cases(lead)), "meta_case_numbers_found_in_text_p1_3": "",
+            "first_page_excerpt": collapse(recs[s].get("first_page_excerpt", ""))[:180], "producers": "", "eof_markers_per_file": "",
+            "byte_comparison": "pointer to " + ";".join(f"{n}/{y}" for n, y in pr["pointer"]),
+            "byte_diff_nature": "one-page order for its own case that says 'For orders, see' the lead case; the lead judgment (same court, its "
+                                "case number, same printed or recorded date) is in the corpus",
+            "incomplete_members": "", "composite_members": "", "classification": "POINTER_ORDER_NOT_A_SEPARATE_JUDGMENT",
+            "classification_basis": "the decision is the lead judgment; the pointer order is kept as a copy for its own proceeding",
+            "judgment_count_change": pr["change"], "verification": VERIFY})
 
     # ---- composite and version candidates
     cand_rows = []
@@ -771,14 +1144,53 @@ def build(repo):
                               "review_finding": "", "counted_in_revised_total": False, "verification": VERIFY})
     # review findings (independent C10 reading) are recorded explicitly
     for s in review_composite:
+        x = REVIEW_EXTRA_JUDGMENTS.get(s, {})
         cand_rows.append({"sha256": s, "court": court_of(s), "title_meta": meta[s][0]["title"][:120], "pages": A[s].get("pages"),
-                          "candidate_kind": "COMPOSITE_CONFIRMED_BY_REVIEW", "strength": "REVIEWED", "detector": "C10 REVIEW_FINDINGS.md",
-                          "evidence_page": 16, "evidence_signals": "pp.1-15 Vijaynath Jha (C.A. 2020/2013); pp.16-25 a second report",
-                          "segment_end_page": 25, "page_1_case_numbers": ";".join(A[s].get("p1_cases", [])), "segment_case_numbers": "",
-                          "operative_phrase_before": "", "operative_phrase_in_segment": "",
-                          "evidence_text": "automated reading of p.16: the second report is a Supreme Court writ petition (W.P.(C) 129/2018, "
-                                           "16-02-2018) printed in the same SCR volume, not a Delhi High Court case as the review note says",
-                          "review_finding": "Composite file (REVIEW_FINDINGS.md)", "counted_in_revised_total": True, "verification": VERIFY})
+                          "candidate_kind": "COMPOSITE_CONFIRMED_BY_REVIEW", "strength": "REVIEWED", "detector": x.get("source", ""),
+                          "evidence_page": int(x["pages"].split("-")[0]) if x else "", "evidence_signals": "second judgment on pp." + x.get("pages", ""),
+                          "segment_end_page": int(x["pages"].split("-")[-1]) if x else "", "page_1_case_numbers": ";".join(A[s].get("p1_cases", [])),
+                          "segment_case_numbers": x.get("proceeding", ""), "operative_phrase_before": "", "operative_phrase_in_segment": "",
+                          "evidence_text": x.get("title", ""), "review_finding": x.get("source", ""), "counted_in_revised_total": True,
+                          "verification": VERIFY})
+    for s, note in sorted(REVIEW_SPLIT.items()):
+        if s in recs:
+            cand_rows.append({"sha256": s, "court": court_of(s), "title_meta": meta[s][0]["title"][:120], "pages": A[s].get("pages"),
+                              "candidate_kind": "TWO_OPINIONS_SPLIT_VERDICT_CONFIRMED_BY_REVIEW", "strength": "REVIEWED",
+                              "detector": "C11 identity reading + C11 review (F9)", "evidence_page": 194, "evidence_signals": note,
+                              "segment_end_page": A[s].get("pages"), "page_1_case_numbers": ";".join(A[s].get("p1_cases", [])),
+                              "segment_case_numbers": "", "operative_phrase_before": "", "operative_phrase_in_segment": "",
+                              "evidence_text": "one judgment in two opinions, each with its own 'Page 1 of N'", "review_finding": "F9",
+                              "counted_in_revised_total": False, "verification": VERIFY})
+    for a_, odd in sorted(set((a_, tuple(o)) for a_, o in extra_orders)):
+        cand_rows.append({"sha256": a_, "court": court_of(a_), "title_meta": (meta.get(a_) or [{}])[0].get("title", "")[:120],
+                          "pages": A[a_].get("pages"), "candidate_kind": "ADDITIONAL_ORDER_IN_FILE", "strength": "STRONG",
+                          "detector": "SCANNED_COPY step: pages after the common judgment matching no page of the other copy, with an operative phrase",
+                          "evidence_page": odd[0], "evidence_signals": "pages " + ranges(list(odd)), "segment_end_page": odd[-1],
+                          "page_1_case_numbers": ";".join(A[a_].get("p1_cases", [])), "segment_case_numbers": "",
+                          "operative_phrase_before": "", "operative_phrase_in_segment": True,
+                          "evidence_text": collapse(get_pages(a_)["texts"][odd[0] - 1])[:200], "review_finding": "",
+                          "counted_in_revised_total": a_ in REVIEW_EXTRA_JUDGMENTS, "verification": VERIFY})
+    for c_ in contained_rows:
+        x_, y_ = c_["files"].split(";")
+        cand_rows.append({"sha256": x_, "court": court_of(x_), "title_meta": (meta.get(x_) or [{}])[0].get("title", "")[:120],
+                          "pages": A[x_].get("pages"), "candidate_kind": "SAME_LEAD_CASE_CONTENT_MATCH_DATE_DIFFERS", "strength": "INFO",
+                          "detector": "SCANNED_COPY step (beyond metadata date)", "evidence_page": "", "evidence_signals": c_["method"],
+                          "segment_end_page": "", "page_1_case_numbers": ";".join(A[x_].get("p1_cases", [])),
+                          "segment_case_numbers": "", "operative_phrase_before": "", "operative_phrase_in_segment": "",
+                          "evidence_text": f"shares lead case {c_['key']} and page content with {y_[:16]} but dates differ ({c_['dates']}): "
+                                           f"a later order carrying a copy of the judgment, or a metadata date error; not merged. {c_['evidence']}"[:400],
+                          "review_finding": "", "counted_in_revised_total": False, "verification": VERIFY})
+    for pr in pointer_rows:
+        if pr["status"] != "LINKED_TO_LEAD_JUDGMENT":
+            s = pr["sha256"]
+            cand_rows.append({"sha256": s, "court": court_of(s), "title_meta": (meta.get(s) or [{}])[0].get("title", "")[:120],
+                              "pages": A[s].get("pages"), "candidate_kind": "POINTER_ORDER_LEAD_NOT_LINKED", "strength": "INFO",
+                              "detector": "POINTER step", "evidence_page": 1,
+                              "evidence_signals": "pointer to " + ";".join(f"{n}/{y}" for n, y in pr["pointer"]), "segment_end_page": "",
+                              "page_1_case_numbers": ";".join(A[s].get("p1_cases", [])), "segment_case_numbers": "",
+                              "operative_phrase_before": "", "operative_phrase_in_segment": "",
+                              "evidence_text": "lead judgment not found in the corpus with the same court, case number and date; counted as its own entity",
+                              "review_finding": "", "counted_in_revised_total": False, "verification": VERIFY})
     for s in review_versions:
         cand_rows.append({"sha256": s, "court": court_of(s), "title_meta": "Virendra Kumar (SC, C.A. 9267/2019, 07-01-2020)",
                           "pages": recs[s].get("pages"), "candidate_kind": "TWO_VERSIONS_IN_ONE_FILE_CONFIRMED_BY_REVIEW", "strength": "REVIEWED",
@@ -859,7 +1271,7 @@ def build(repo):
         # complete copy elsewhere
         others = []
         for o, ratio in sorted(inc_links.get(s, [])):
-            others.append(f"{o[:16]} (first page {ratio}; {reg[o]['source_completeness']}; pages {recs[o].get('pages')})")
+            others.append(f"{o[:16]} (all readable pages match, first page {ratio}; {reg[o]['source_completeness']}; pages {recs[o].get('pages')})")
         ts = r.get("text_sha256")
         if ts:
             for o in by_text.get(ts, []):
@@ -903,12 +1315,18 @@ def build(repo):
 
     # ---- composite bump (+1 only where the review confirmed and the second judgment is not already in the corpus)
     composite_bump = []
-    for s in review_composite:
-        titles = " ".join(m["title"].upper() for ss in shas for m in meta.get(ss, []) if m["court"] == "Supreme Court of India")
-        second_present = "ADARSH" in titles
-        composite_bump.append({"sha256": s, "change": 0 if second_present else 1,
-                               "note": "second report (Adarsh Cooperative Housing Society v. Union of India, W.P.(C) 129/2018) "
-                                       + ("already present as its own record" if second_present else "not present elsewhere in the corpus")})
+    for s in sorted(REVIEW_EXTRA_JUDGMENTS):
+        if s not in recs:
+            continue
+        x = REVIEW_EXTRA_JUDGMENTS[s]
+        present = sorted(o for o in shas if o != s for m in meta.get(o, []) if m["court"] == x["court"] and m["issue_date_meta"] == x["date"]
+                         and re.search(rf"/{x['case_ny'][0]}/{x['case_ny'][1]}$", m["case_numbers_meta"] or ""))
+        if s == "0f65307432d16f74f78ea8a4f37ad5d1d4b0e56188273575ac956eab22478d72":
+            present += sorted(o for o in shas for m in meta.get(o, []) if "ADARSH" in m["title"].upper() and m["court"] == x["court"])
+        composite_bump.append({"sha256": s, "judgment_key": f"JK-{s[:16]}#p{x['pages']}", "pages": x["pages"], "proceeding_key": x["proceeding"],
+                               "title": x["title"], "source": x["source"], "change": 0 if present else 1,
+                               "note": ("already present as " + ";".join(p[:16] for p in present)) if present else "not present elsewhere in the corpus"})
+    extra_by_file = {b["sha256"]: b for b in composite_bump if b["change"] == 1}
 
     # ---- register
     comp_size = collections.Counter(find(s) for s in shas)
@@ -920,7 +1338,7 @@ def build(repo):
         court = court_of(s)
         code = COURT_CODE.get(court, "SCI" if court.startswith("Supreme") else "UNK")
         pk_meta = [f"{code}:{m['case_numbers_meta']}" for m in ms if m["case_numbers_meta"]]
-        pk_text = [f"{code}:{x}" for x in (r.get("case_numbers_text_p1_3") or [])[:6]]
+        pk_text = [f"{code}:{x}" for x in (a.get("cause_title_cases") or r.get("case_numbers_text_p1_3") or [])]
         # rendition class
         p = g["path"]
         if "third_party" in p:
@@ -952,6 +1370,9 @@ def build(repo):
         else:
             ident = "ADDITIONAL_COPY_OF_JUDGMENT"
         comp_flag = "COMPOSITE_REVIEWED" if s in review_composite else ("COMPOSITE_CANDIDATE" if strong_composite(s) else "")
+        if s in REVIEW_SPLIT:
+            comp_flag = REVIEW_SPLIT[s]
+        xb = extra_by_file.get(s)
         ev = [f"rehash={'OK' if a.get('rehash') == s else ('MISMATCH' if a.get('bytes_in_repo') else 'NO_BYTES')}"]
         if a.get("text_sha256_recomputed"):
             ev.append("text_sha256=" + ("REPRODUCED" if a["text_sha256_recomputed"] == r.get("text_sha256") else "DIFFERS"))
@@ -966,7 +1387,8 @@ def build(repo):
             "issue_date_meta": date_of(s), "pages": r.get("pages") if r.get("pages") is not None else "",
             "text_quality": text_quality(s), "text_sha256": r.get("text_sha256") or "", "same_text_group": group_of.get(s, ""),
             "judgment_key": "JK-" + root[:16], "copies_of_judgment": comp_size[root], "copy_identity_role": ident,
-            "proceeding_keys_meta": ";".join(pk_meta), "proceeding_keys_text_candidates": ";".join(pk_text),
+            "proceeding_keys_meta": ";".join(pk_meta), "proceeding_keys_cause_title_partial": ";".join(pk_text),
+            "additional_judgments_in_file": (f"{xb['judgment_key']} | {xb['proceeding_key']} | {xb['title']}" if xb else ""),
             "version_role": vrole, "rendition_class": rend, "source_completeness": g["source_completeness"],
             "composite_flag": comp_flag, "evidence": "; ".join(ev), "verification": VERIFY})
 
@@ -997,28 +1419,39 @@ def build(repo):
                                    "min_text_chars_in_groups": min((recs[v[0]].get("text_chars_total") or 0) for v in groups) if groups else None},
         "exact_group_classification": dict(sorted(cls_counts.items())),
         "extension_groups": {"NORMALIZED_TEXT_EXTENSION": sum(1 for g in group_rows if g["scope"] == "NORMALIZED_TEXT_EXTENSION"),
-                             "INCOMPLETE_COPY_FIRST_PAGE_MATCH": sum(1 for g in group_rows if g["scope"] == "INCOMPLETE_COPY_FIRST_PAGE_MATCH"),
-                             "SAME_WORDS_NUMBERS_DIFFER_NOT_MERGED": sum(1 for g in group_rows if g["scope"] == "SAME_WORDS_NUMBERS_DIFFER_NOT_MERGED")},
+                             "INCOMPLETE_COPY_ALL_PAGE_MATCH": sum(1 for g in group_rows if g["scope"] == "INCOMPLETE_COPY_ALL_PAGE_MATCH"),
+                             "SAME_WORDS_NUMBERS_DIFFER_NOT_MERGED": sum(1 for g in group_rows if g["scope"] == "SAME_WORDS_NUMBERS_DIFFER_NOT_MERGED"),
+                             "SCANNED_COPY_LEAD_CASE_MATCH": sum(1 for g in group_rows if g["scope"] == "SCANNED_COPY_LEAD_CASE_MATCH"),
+                             "POINTER_ORDER_TO_LEAD_JUDGMENT": sum(1 for g in group_rows if g["scope"] == "POINTER_ORDER_TO_LEAD_JUDGMENT")},
         "group_classification_all_scopes": dict(sorted(collections.Counter(f"{g['scope']}|{g['classification']}" for g in group_rows).items())),
         "distinct_judgments": {
             "c10_count_by_file": n_files,
             "change_exact_text_groups": chg["EXACT_TEXT_SHA256"],
             "change_normalized_text_extension": chg["NORMALIZED_TEXT_EXTENSION"],
-            "change_incomplete_copy_first_page_match": chg["INCOMPLETE_COPY_FIRST_PAGE_MATCH"],
-            "change_review_confirmed_composite": bump,
+            "change_incomplete_copy_all_page_match": chg["INCOMPLETE_COPY_ALL_PAGE_MATCH"],
+            "change_scanned_copy_lead_case_match": chg["SCANNED_COPY_LEAD_CASE_MATCH"],
+            "change_pointer_orders_linked_to_lead": chg["POINTER_ORDER_TO_LEAD_JUDGMENT"],
+            "change_judgments_inside_composite_files": bump,
             "judgment_entities_from_files": n_components,
+            "additional_judgment_keys": [b["judgment_key"] for b in composite_bump if b["change"] == 1],
             "revised_distinct_judgments": n_components + bump,
+            "revised_without_pointer_rule": n_components + bump - chg["POINTER_ORDER_TO_LEAD_JUDGMENT"],
             "revised_exact_text_only": n_files + chg["EXACT_TEXT_SHA256"] + bump,
-            "sum_check": n_files + chg["EXACT_TEXT_SHA256"] + chg["NORMALIZED_TEXT_EXTENSION"] + chg["INCOMPLETE_COPY_FIRST_PAGE_MATCH"] == n_components,
+            "sum_check": n_files + sum(chg.values()) == n_components,
             "not_counted": {
                 "automated_composite_candidates_strong": len({r["sha256"] for r in cand_rows if r["candidate_kind"] in ("COMPOSITE_CANDIDATE", "MULTI_DOCUMENT_FILE_CANDIDATE") and r["strength"] == "STRONG" and r["sha256"] not in review_composite}),
                 "two_versions_in_one_file_reviewed": len(review_versions),
-                "note": "two versions of one judgment stay one judgment; automated composite candidates change nothing until reviewed",
+                "pointer_orders_lead_not_linked": sum(1 for r in pointer_rows if r["status"] != "LINKED_TO_LEAD_JUDGMENT"),
+                "same_lead_case_content_match_date_differs": len(contained_rows),
+                "note": "two versions or two opinions of one judgment stay one judgment; automated composite candidates change nothing until reviewed",
             },
             "composite_detail": composite_bump,
             "basis": "a judgment entity is a connected set of files linked by evidence: exact same text with byte-level or render-level "
-                     "confirmation; identical letter sequence with same court, date and page count; or an incomplete copy whose "
-                     "first page matches a copy of the same court and date. Text alone never merges files.",
+                     "confirmation; identical letters and numbers (time stamps and quote/dash glyphs normalised) with the same court, date "
+                     "and page count; an incomplete copy matching on every readable page; a scanned copy sharing the lead case "
+                     "(footer, pointer or cause title), court and date, confirmed on page text or page images; or a one-page pointer "
+                     "order linked to its lead judgment. Similarity alone never merges files. A judgment held inside another file "
+                     "(composite) gets its own key (file sha + page range).",
         },
         "candidates": dict(sorted(collections.Counter(f"{r['candidate_kind']}|{r['strength']}" for r in cand_rows).items())),
         "incomplete_23": {"files": len(plan_rows),
@@ -1027,6 +1460,10 @@ def build(repo):
                           "identity_reliability": dict(sorted(collections.Counter(r["identity_reliability"] for r in plan_rows).items())),
                           "earlier_complete_revision_found": sum(1 for r in plan_rows if "opens" in r["earlier_revision_check"]),
                           "downloads_made": 0},
+        "routed_to_metadata_workstream": meta_issues + [
+            {"files": "48e3c2db90f438ba51016ddc7b9abf6027d468a73b94ca44f069602e01ced4f3;8a0be890282d401f4dbf33093e093ac3b7dbe62a8ae4e31e2e3349dfcc25cefd",
+             "issue": "neutral citation 2018 INSC 185 attached to two different Kudrat Sandhu orders (22.02.2018 and 21.08.2018) (review F11)"},
+            {"files": "c1a83ee07b70 (full sha in register)", "issue": "issue_date_meta 2024-12-02 but the order prints 18.05.2015 (review F11)"}],
         "inputs_sha256": input_digests,
         "c10_duplicate_register_kinds": dict(sorted(collections.Counter(d["kind"] for d in dups).items())),
     }
@@ -1034,7 +1471,7 @@ def build(repo):
 
     reg_fields = ["sha256", "judgment_id_c10", "path", "court", "doc_ids", "issue_date_meta", "pages", "text_quality", "text_sha256",
                   "same_text_group", "judgment_key", "copies_of_judgment", "copy_identity_role", "proceeding_keys_meta",
-                  "proceeding_keys_text_candidates", "version_role", "rendition_class", "source_completeness", "composite_flag",
+                  "proceeding_keys_cause_title_partial", "additional_judgments_in_file", "version_role", "rendition_class", "source_completeness", "composite_flag",
                   "evidence", "verification"]
     grp_fields = ["group_id", "scope", "n_files", "representative_sha256", "file_sha256s", "text_sha256", "text_chars", "text_quality",
                   "readable_ratio", "pages", "courts", "issue_dates_meta", "meta_records", "meta_case_numbers",
