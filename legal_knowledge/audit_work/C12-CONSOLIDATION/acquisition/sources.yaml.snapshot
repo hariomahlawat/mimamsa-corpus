@@ -1,0 +1,302 @@
+# Mimamsa crawl configuration.
+# The crawler fetches ONLY hosts listed under a source's `allowed_hosts`.
+# Anything marked `verify: true` has not been checked against the live site yet
+# (seed hosts were unreachable from the build container) and must be confirmed
+# in the dry run before any real download.
+
+schema_version: "0.1.0"
+
+defaults:
+  # The crawler names itself in User-Agent and gives its contact address in the HTTP `From` header
+  # (RFC 9110, section 10.1.2: the address of the person responsible for an automated client).
+  # The email used to sit inside user_agent; mod.gov.in and indiacode.nic.in answered 403 to that
+  # string (2026-11-21), so it was moved. Live runs refuse to start while contact_email is the placeholder.
+  user_agent: "Mimamsa-Corpus/0.1 (research collection of public military-law texts)"
+  contact_email: "hariomahlawat@gmail.com"
+  min_delay_seconds: 2.0          # per host, at most 1 request every 2 s
+  timeout_seconds: 60
+  max_retries: 5                  # exponential backoff on timeouts and 5xx, then give up and log
+  backoff_base_seconds: 4
+  obey_robots_txt: true
+  follow_offsite_links: false
+  # Heavy sources only run in this window (IST = UTC+05:30): 20:00-08:00 IST.
+  quiet_hours_ist: { start: "20:00", end: "08:00" }
+  max_file_mb: 200
+
+sources:
+
+  # ---------------------------------------------------------------- Phase 2
+  indiacode:
+    phase: 2
+    enabled: true
+    priority: 1
+    heavy: false
+    # MOVED: www.indiacode.nic.in now only serves a "Site Migration" notice pointing to
+    # https://indiacode.gov.in (seen 2026-11-21). The old hosts stay on the allow-list so old links
+    # can be recognised, but nothing is collected from them.
+    # backend.indiacode.gov.in is NOT listed on purpose: its API is empty for anonymous visitors and
+    # answers 401 on item lists. The public API is on indiacode.gov.in itself.
+    allowed_hosts: [indiacode.gov.in, www.indiacode.gov.in, www.indiacode.nic.in, indiacode.nic.in]
+    base_url: https://indiacode.gov.in
+    # EXCEPTION (approved 2026-11-21): if robots.txt cannot be fetched at all, crawl as if the site had
+    # none. Everywhere else an unreachable robots.txt means "disallow". A robots.txt that is actually
+    # served is still obeyed, and a 5xx answer still means "disallow".
+    # robots_5xx (added the same day under the owner's "be autonomous" instruction): the same
+    # exception when robots.txt answers a server error, which is what the new site does.
+    robots_unreachable: allow
+    robots_5xx: allow
+    robots_unreachable_reason: >
+      No robots.txt can be obtained for India Code (checked 2026-11-21). Old site
+      www.indiacode.nic.in/robots.txt: timed out from the cloud container, from the crawler on a PC
+      in India and in a desktop browser there. New site indiacode.gov.in/robots.txt and
+      backend.indiacode.gov.in/robots.txt: HTTP 500 "Internal Server Error" (a generic error page),
+      while the site and its API answer normally. Re-check from time to time; the moment a
+      robots.txt is served, it is obeyed.
+    discovery: >
+      Through the site's REST API (base_url + /server/api, DSpace 9; verified live 2026-11-21):
+      search the ACT collection for the exact title, read the Act record and its files, then
+      page through every record linked to the Act's act_id (sections with text and footnotes,
+      rules, schedules, notifications) and queue their files.
+    collect_subordinate: true
+    # If the title search does not give exactly one match, set `item_uuid: <uuid>` on the target
+    # (the id in the Act's page address on the site, https://indiacode.gov.in/act/<uuid>).
+    targets:
+      # doc_id                                 short title as printed                                          year  status_hint
+      # expect_subordinate: titles that should appear in the Act page's subordinate-legislation listing.
+      # Discovery warns when one is missing, so a gap is noticed instead of silently accepted.
+      - { doc_id: act-army-1950,                title: "The Army Act, 1950",                                     year: 1950,
+          expect_subordinate: ["Army Rules, 1954"] }
+      - { doc_id: act-air-force-1950,           title: "The Air Force Act, 1950",                                year: 1950,
+          expect_subordinate: ["Air Force Rules, 1969"] }
+      - { doc_id: act-navy-1957,                title: "The Navy Act, 1957",                                     year: 1957 }
+      - { doc_id: act-armed-forces-tribunal-2007, title: "The Armed Forces Tribunal Act, 2007",                  year: 2007,
+          expect_subordinate: ["AFT-Procedure-Rules-2008"] }   # as the record is titled on India Code
+      - { doc_id: act-army-af-disposal-private-property-1950, title: "The Army and Air Force (Disposal of Private Property) Act, 1950", year: 1950 }
+      - { doc_id: act-bns-2023,                 title: "The Bharatiya Nyaya Sanhita, 2023",                      year: 2023 }
+      - { doc_id: act-bnss-2023,                title: "The Bharatiya Nagarik Suraksha Sanhita, 2023",           year: 2023 }
+      - { doc_id: act-bsa-2023,                 title: "The Bharatiya Sakshya Adhiniyam, 2023",                  year: 2023 }
+      # The three repealed codes: India Code no longer lists a central copy among current Acts (only state
+      # copies). The central text is kept in its "Repeal Acts" collection as a bare record with one PDF and
+      # no section records. item_uuid points at that record (found by title search on 2026-11-21).
+      - { doc_id: act-ipc-1860,                 title: "The Indian Penal Code, 1860",                            year: 1860,
+          status_hint: repealed, repealed_record: true, item_uuid: 972afbe0-a2de-415d-9df5-8d70038056ad }
+      - { doc_id: act-crpc-1973,                title: "The Code of Criminal Procedure, 1973",                   year: 1973,
+          status_hint: repealed, repealed_record: true, item_uuid: 973d60aa-105c-4a2f-94f1-7640f0b5d6a7 }
+      - { doc_id: act-evidence-1872,            title: "The Indian Evidence Act, 1872",                          year: 1872,
+          status_hint: repealed, repealed_record: true, item_uuid: b62073e0-4d33-4348-8eda-d92af40af24b }
+    # Regulations for the Army 1987 is listed under India Code in the brief, but it
+    # is an executive publication, not an Act. Search India Code first; if absent,
+    # fall back to the MoD source below.
+    also_search:
+      - { doc_id: regs-army-1987,               title: "Regulations for the Army", year: 1987, verify: true }
+
+  mod:
+    phase: 2
+    # DISABLED 2026-11-21: the site's front end answers 403 to the crawler's User-Agent (see PROGRESS.md).
+    # Decision: skip MoD for now; take the Army Rules etc. from India Code's subordinate-legislation
+    # listings (see expect_subordinate on the indiacode targets). Revisit only for documents that
+    # exist nowhere else.
+    enabled: false
+    disabled_reason: "HTTP 403 to the crawler's User-Agent; skipped by decision on 2026-11-21"
+    priority: 1
+    heavy: false
+    allowed_hosts: [www.mod.gov.in, mod.gov.in]
+    base_url: https://www.mod.gov.in
+    verify: true
+    discovery: >
+      Start from the site's Acts & Rules / documents listing pages (exact paths
+      to be confirmed in dry run). Collect PDFs only; record any 'For Official
+      Use Only' / 'Restricted' marking into access_marking and STOP for review
+      if a document is marked restricted.
+    seeds:
+      - { url: "https://www.mod.gov.in/", verify: true }
+    targets:
+      - { doc_id: rules-army-1954,              title: "The Army Rules, 1954",       year: 1954 }
+      - { doc_id: regs-army-1987,               title: "Regulations for the Army",   year: 1987, verify: true }
+      - { doc_id: rules-air-force-1969,         title: "The Air Force Rules, 1969",  year: 1969, verify: true }
+      - { doc_id: rules-aft-procedure-2008,     title: "The Armed Forces Tribunal (Procedure) Rules, 2008", year: 2008, verify: true }
+
+  # Legislative Department, Ministry of Law and Justice: consolidated texts of Central Acts.
+  legislative:
+    phase: 2
+    enabled: true
+    priority: 1
+    heavy: false
+    allowed_hosts: [lddashboard.legislative.gov.in, legislative.gov.in, www.legislative.gov.in]
+    base_url: https://lddashboard.legislative.gov.in
+
+  # Bureau of Police Research and Development (Ministry of Home Affairs): official comparison
+  # summaries / correspondence tables between the 2023 codes and the codes they replaced.
+  bprd:
+    phase: 2
+    enabled: true
+    priority: 2
+    heavy: false
+    allowed_hosts: [bprd.nic.in, www.bprd.nic.in]
+    base_url: https://bprd.nic.in
+
+  # Official copies on other government hosts, used when the publishing site cannot be reached.
+  # Only the explicit `documents` below are fetched; nothing is discovered by following links.
+  official_copies:
+    phase: 2
+    enabled: true
+    priority: 2
+    heavy: false
+    allowed_hosts: [crpf.mha.gov.in, cytrain.ncrb.gov.in, keralaprisons.gov.in, www.keralaprisons.gov.in]
+    # Descriptive fields here are curated (written into the config, not read from the files) and are
+    # recorded with provenance "llm" until a person confirms them.
+    documents:
+      - doc_id: act-crpc-1973-consolidated
+        url: "https://crpf.mha.gov.in/writereaddata/images/pdf/crpc1973.pdf"
+        title: "The Code of Criminal Procedure, 1973"
+        doc_type: act
+        year: 1974
+        parent_doc_id: act-crpc-1973
+        provides_sections_for: act-crpc-1973
+        note: "Consolidated text hosted by the CRPF (Ministry of Home Affairs). India Code's own copy is a scan of the 1974 print."
+      - doc_id: ref-bprd-comparison-bnss-crpc
+        correspondence: { key: bnss-crpc, new: act-bnss-2023, old: act-crpc-1973, columns: [new, subject, old, summary] }
+        issuing_authority: "Bureau of Police Research and Development, Ministry of Home Affairs"
+        url: "https://keralaprisons.gov.in/userfiles/act-and-rules/comparison_summary_BNSS_to_CrPC.pdf"
+        title: "Correspondence Table and Comparison Summary of the BNSS, 2023 and the CrPC, 1973"
+        doc_type: reference
+        year: 2024
+        note: "BPR&D comparison summary; copy hosted by Kerala Prisons because bprd.nic.in's certificate has expired."
+      - doc_id: ref-bprd-comparison-bns-ipc
+        correspondence: { key: bns-ipc, new: act-bns-2023, old: act-ipc-1860, columns: [new, subject, old, summary] }
+        issuing_authority: "Bureau of Police Research and Development, Ministry of Home Affairs"
+        url: "https://www.keralaprisons.gov.in/userfiles/act-and-rules/comparison_summary_BNS_to_IPC.pdf"
+        title: "Correspondence Table and Comparison Summary of the BNS, 2023 and the IPC, 1860"
+        doc_type: reference
+        year: 2024
+        note: "BPR&D comparison summary; copy hosted by Kerala Prisons."
+      - doc_id: ref-bprd-comparison-bsa-iea
+        correspondence: { key: bsa-iea, new: act-bsa-2023, old: act-evidence-1872, columns: [new, old, subject, summary] }
+        issuing_authority: "Bureau of Police Research and Development, Ministry of Home Affairs"
+        url: "https://keralaprisons.gov.in/userfiles/act-and-rules/comparison_summary_BSA_to_IEA.pdf"
+        title: "Correspondence Table and Comparison Summary of the BSA, 2023 and the Indian Evidence Act, 1872"
+        doc_type: reference
+        year: 2024
+        note: "BPR&D comparison summary; copy hosted by Kerala Prisons."
+
+  # ---------------------------------------------------------------- Phase 3
+  aft:
+    phase: 3
+    # Not enabled: the AFT sites reset connections from the cloud container, so this has not run live.
+    # Listing addresses and page layouts below are from pages saved from the live sites in 2023
+    # (github.com/L-Bellingcat/army-tribunals). Run `discover --source aft --only <bench> --record <dir>`
+    # from a machine in India, one bench at a time, and read the result before any download.
+    enabled: false
+    priority: 1
+    heavy: true
+    verify: true
+    allowed_hosts: [www.aftdelhi.nic.in, aftdelhi.nic.in, aftlko.up.nic.in, aftkolkata.nic.in, aftjabalpur.in]
+    base_url: https://www.aftdelhi.nic.in
+    discovery: "Per bench: read its judgment listing page(s) and queue every PDF link with what the row says about it."
+    benches:
+      # style joodb = the listing component on aftdelhi.nic.in (rows with labelled fields + ViewPDF link);
+      # style table = an HTML table of PDF links.
+      - { key: principal-delhi, name: "Principal Bench, New Delhi", style: joodb, max_pages: 60,
+          listing_urls: ["https://www.aftdelhi.nic.in/index.php/site-links/judgement-by-case"] }
+      - { key: chandigarh,  name: "Regional Bench, Chandigarh", style: joodb, max_pages: 60,
+          listing_urls: ["https://www.aftdelhi.nic.in/index.php/rbs/chandigarh/chandigarh-judgement"] }
+      - { key: kolkata,     name: "Regional Bench, Kolkata", style: table, max_pages: 60,
+          listing_urls: ["https://aftkolkata.nic.in/judgements/index/page:1"],
+          page_link_pattern: "/judgements/index/page:\\d+$" }
+      # Layout known (table of PDF links) but the listing page addresses were not recorded in 2023:
+      - { key: lucknow,     name: "Regional Bench, Lucknow",  style: table, listing_urls: [] }
+      - { key: jabalpur,    name: "Regional Bench, Jabalpur", style: table, listing_urls: [] }
+      # Nothing known yet:
+      - { key: guwahati,    name: "Regional Bench, Guwahati" }
+      - { key: chennai,     name: "Regional Bench, Chennai" }
+      - { key: kochi,       name: "Regional Bench, Kochi" }
+      - { key: mumbai,      name: "Regional Bench, Mumbai" }
+      - { key: jaipur,      name: "Regional Bench, Jaipur" }
+      - { key: srinagar,    name: "Regional Bench, Srinagar/Jammu" }
+
+  # ---------------------------------------------------------------- Phase 4
+  # Supreme Court and High Court judgments come from the AWS Open Data buckets (decision of 2026-11-21):
+  # a third party's CC-BY-4.0 copy of the courts' own records, used because the courts' judgment searches
+  # are behind a CAPTCHA (www.sci.gov.in checked 2026-11-21). Each record names the bucket as its source.
+  # The indexes have no judgment text, so entries are pre-selected by party names (party_terms, matched
+  # against the case title / parties, case-insensitive); the pipeline's relevance stage then applies the
+  # brief's keywords to the text. Widening party_terms and re-running discovery adds what was left out.
+  sci:
+    phase: 4
+    enabled: true
+    priority: 2
+    heavy: false
+    open_data_bucket: true          # a bulk-access bucket, not a court's web server: a shorter delay is allowed
+    min_delay_seconds: 0.3
+    dataset: indian-supreme-court-judgments
+    allowed_hosts: [indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com]
+    base_url: https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com
+    years: [1950, 2026]
+    party_terms: &party_terms
+      - "union of india"
+      - "\\b(army|air force|navy|naval|armed forces|military|defen[cs]e|coast guard|assam rifles|border security)\\b"
+      - "\\bchief of (the )?(army|air|naval) staff\\b"
+      - "\\b(commanding officer|commandant|general officer|court[- ]martial|cantonment)\\b"
+      - "\\b(ex[- .]?(sepoy|sep|naik|nk|havildar|hav|subedar|sub|rfn|gnr|sgt|servicem[ae]n)|sepoy|havildar|naik|subedar|rifleman|sowar|jawan)\\b"
+      - "\\b(lt\\.? ?col|lt\\.? ?gen|maj\\.? ?gen|brig(adier)?|colonel|col\\.|major|maj\\.|capt(ain)?\\.?|wing commander|wg\\.? ?cdr|sqn\\.? ?ldr|squadron leader|group captain|gp\\.? ?capt|air (vice )?marshal|commodore|cdr\\.|lt\\.? ?cdr|flying officer|flt\\.? ?lt|corporal|leading aircraftman|lac)\\b"
+      - "\\b(pcda|cda|record office|records? officer)\\b"
+
+  hc:
+    phase: 4
+    enabled: true
+    priority: 2
+    heavy: false
+    open_data_bucket: true
+    min_delay_seconds: 0.3
+    dataset: indian-high-court-judgments
+    allowed_hosts: [indian-high-court-judgments.s3.ap-south-1.amazonaws.com]
+    base_url: https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com
+    party_terms: *party_terms
+    # `code` is the dataset's court code. `years` is what discovery covers when no --only slice is given;
+    # courts without `years` are only read when named, e.g. --only ph:2015-2020.
+    courts:
+      - { key: delhi,     code: "7_26", name: "High Court of Delhi", years: [2023, 2023] }
+      - { key: ph,        code: "3_22", name: "High Court of Punjab and Haryana" }
+      - { key: allahabad, code: "9_13", name: "Allahabad High Court" }
+      - { key: jkl,       code: "1_12", name: "High Court of Jammu and Kashmir" }
+
+  # ---------------------------------------------------------------- Phase 6
+  egazette:
+    phase: 6
+    enabled: false
+    priority: 3
+    heavy: false
+    allowed_hosts: [egazette.gov.in]
+    verify: true
+    discovery: "Notifications under the Army Act (active service declarations, s.12, etc.)."
+
+  archive:
+    phase: 6
+    enabled: false
+    priority: 3
+    heavy: false
+    allowed_hosts: [archive.org]
+    verify: true
+    discovery: "Digital Library of India items; record the archive.org item identifier in metadata."
+    targets:
+      - { doc_id: act-indian-army-1911, title: "Indian Army Act, 1911", status_hint: superseded }
+      - { doc_id: book-manual-military-law, title: "Manual of Military Law (editions)", status_hint: superseded }
+    # Found by title search on 2026-11-21 (archive.org advancedsearch, live). Titles and years are as
+    # archive.org lists them; nobody has opened the items yet, so each needs a human look before use.
+    search_api: "https://archive.org/advancedsearch.php"
+    candidates:
+      - { identifier: in.ernet.dli.2015.108755, title: "The Indian Army Act,1911 Act No,viii", year: 1911 }
+      - { identifier: dli.ministry.16806,       title: "Manual of Indian military law, 1911", year: 1912 }
+      - { identifier: in.ernet.dli.2015.238493, title: "Manual Of Indian Military Law (1937)", year: 1937 }
+      - { identifier: in.ernet.dli.2015.110569, title: "Manual Of Military Law. War Office. 1907.", year: 1907, note: "British manual" }
+      - { identifier: in.ernet.dli.2015.279009, title: "Manual Of Military Law War Office 1907", year: null, note: "British manual; possibly a duplicate scan" }
+      - { identifier: dli.ernet.237370,         title: "Manual Of Military Law (1929)", year: 1929, note: "British manual" }
+
+# Explicitly forbidden: never fetch, even if linked.
+blocked_hosts:
+  - indiankanoon.org
+  - www.indiankanoon.org
+  - www.casemine.com
+  - www.scconline.com
+  - www.manupatrafast.com
+  - www.manupatra.com
