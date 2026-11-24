@@ -134,7 +134,7 @@ Store at least:
 - **knowledge/review time**: when Mimamsa acquired and checked evidence or recorded a decision;
 - **incident/decision time**: the user's legally relevant facts and decision date.
 
-Historical questions query the appropriate provision version. Do not silently substitute the current consolidated law. Where the commencement chain is incomplete, expose a blocker rather than guessing.
+Historical questions query the appropriate provision version. Do not silently substitute the current consolidated law. Where the commencement chain is incomplete, expose a blocker rather than guessing. For scenarios and forms, keep conduct date/interval, proceeding-initiation date, relevant procedural-action date, and preparation/review date distinct; each constraint records its controlling event/date basis, applicable interval and transitional/saving authority. Substantive law and procedure may have different controlling dates. Do not choose a universal event date. Unknown or disputed material time facts block affected determinations.
 
 ## 8. Data platform proposal, not a committed choice
 
@@ -143,6 +143,10 @@ Historical questions query the appropriate provision version. Do not silently su
 A separate graph/search/vector engine is **not presumed necessary**. Introduce one only after measured requirements cannot be met sufficiently with the simpler implementation.
 
 AI can rank and discover candidate links; deterministic, reviewed rules govern time, jurisdiction, authority and procedural preconditions. Neither keyword matches nor embedding similarity confer legal authority.
+
+**Operational-use gate:** enforce the separate source-fidelity, authority, temporal applicability, legal approval, publication and dependency state axes in [Document Studio section 3.2](DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md#32-research-versus-operational-drafting-gate) across both advisory and document engines. Legal approval must be attributable and scoped to the exact evidence/rule revision; no formal JAG validation without its actual approval artefact. Preserve all existing evidence gates and the authorship-neutral standard. Research-only material remains searchable.
+
+**Common change-impact control:** reverse-index exact source/version/proposition dependencies to all downstream templates, constraints, checklists and advisories. On credible material amendment, controlling judgment, source withdrawal/correction or unresolved conflict, block affected definitive outputs and mandatory check passes for the implicated scope, including cached/in-flight results, until the necessary revalidation and approval. Unverified uploads alone create candidates, not automatic legal invalidation. Preserve unaffected/historically valid scope and prior approval history. See [Document Studio section 8.1](DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md#81-dependency-impact-and-stale-guidance-controls).
 
 ## 9. Ingestion and release pipeline
 
@@ -182,7 +186,7 @@ The initial app has exactly **two functional roles: Admin and User**. Both can a
 
 Ordinary incident questions are session data, not automatic corpus contributions. Only deliberate **Admin publication** makes source documents shared; staged/failed/rejected/withdrawn material does not appear in ordinary shared research. Admin publication is not a legal-validity approval.
 
-Both Admin and User may upload a file **only to a temporary Document Studio working session** for creation or audit. These working files must be isolated from common corpus, shared search and embeddings; not exposed as source uploads or ingest jobs; not retained indefinitely by default. A source/template intended for shared library use still requires separate Admin ingestion and publication. Protect session boundaries without introducing additional research-user roles. Use ordinary session isolation, local storage protection and reasonable deletion/retention defaults; do not build elaborate role-based case workspaces into the initial release.
+Both Admin and User may submit working files via WORKING_DOCUMENT_PROCESSING for creation or audit, separate from Admin-only CORPUS_INGESTION for shared-source publication. These working files must be isolated from common corpus, shared search and embeddings; not exposed as source uploads or ingest jobs; not retained indefinitely by default. A source/template intended for shared library use still requires separate Admin ingestion and publication. Protect session boundaries without introducing additional research-user roles. Enforce authenticated session ownership for files, jobs, direct links, output downloads, AI contexts and derived caches. No cross-session access through identifiers, even for Admin using ordinary Document Studio; avoid sensitive working content in shared logs and clean up temporary derivatives. Use ordinary session isolation, local storage protection and reasonable deletion/retention defaults; do not build elaborate role-based case workspaces into the initial release.
 
 **Minimum security at launch:** offline network boundary, basic Admin/User authentication and server-side Admin-only checks for corpus writes, file size/type limits, malware and malformed-file screening appropriate to the environment, isolated/least-privilege PDF/OCR/parser workers, untrusted-document prompt-injection isolation, file integrity hashes, backups and audit logging. Advanced hardening, granular data segregation and specialised controls may follow after the core capabilities are demonstrated.
 
@@ -192,8 +196,8 @@ Both Admin and User may upload a file **only to a temporary Document Studio work
 2. Canonicalise document/judgment/proceeding identities and version relationships.
 3. Provide full-corpus offline search against original copies, clearly labelled where unreviewed, plus **Admin-only upload, staged enrichment and publication** of eligible policies/SOPs.
 4. Build provision-to-judgment and Admin-published-document-to-law **candidate** links and independent evaluation datasets.
-5. Establish a source-backed Form/Template Registry by inspecting applicable statutory appendices, authenticated manual editions and authorised regulations; propose form versions, conditions and field validations.
-6. Pilot a Document Studio generator and auditor that use identical reviewed constraints and cannot certify legal validity or publish drafts to the corpus.
+5. Establish the [Form Discovery and Coverage Register](../product/FORM_DISCOVERY_AND_COVERAGE_REGISTER.md) and source-backed Form/Template Registry; inspect statutory appendices, all eight foundational MML copies and authorised regulations; log page coverage/gaps and classify authority, fidelity, applicability and legal approval independently.
+6. Pilot Document Studio with identical reviewed constraints, independent source-derived test oracles, readiness reports, controlled date and dependency gates, session-isolated working inputs and no automated legal certification or draft publication.
 7. Develop proposition-level passports, actual outcome extraction and treatment edges with measured precision.
 8. Add material-fact scenario knowledge and verified procedural checks.
 9. Pilot date-aware, evidence-grounded commander guidance and Document Studio review with adversarial test cases.

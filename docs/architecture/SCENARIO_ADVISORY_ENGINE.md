@@ -27,7 +27,7 @@ A commander asks “My sepoy was found drunk on duty; what should I do?” rathe
 3. **Recognise scenario family and stage:** candidate offences, family/service issue, complaint, trial document, grievance etc. Distinguish user reporting an allegation from a court-established fact.
 4. **Identify material facts:** select the few questions that could actually change the applicable authority, jurisdiction, legal version, competent person or procedural safeguard. Use `UNKNOWN` explicitly.
 5. **Retrieve law for relevant time:** original statute/Rule/Regulation and commencement/amendment chain, with source authority and historical validity evidence. Search **Admin-published** policies and SOPs as clearly labelled supplemental sources, never as automatically binding law. Staged or withdrawn documents are excluded.
-6. **Evaluate applicability:** only predicates supported by the relevant sources and the required legal-review status may determine mandatory steps or bar an option. AI or an uploaded SOP may propose candidates but cannot independently certify a legal route.
+6. **Evaluate applicability:** enforce the operational-use gate in [Document Studio, section 3.2](DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md#32-research-versus-operational-drafting-gate) for definitive mandatory steps or authoritative exclusions: verified sources, relevant controlling dates and scope, attributable competent legal approval, and no unresolved material dependency conflict. Candidates may be explained as research but cannot certify a legal route. Formal JAG validation requires an attributable formal approval artefact under the existing evidence standard.
 7. **Retrieve precedent:** search all legally accessible original judgments, passage-level matches, reviewed propositions, later treatment and adverse authorities. Keep candidate relationships labelled.
 8. **Build response:** short commander-first steps, facts/limitations, conditional options, checklist and expandable JAG source view. If the user asks to create or review a legal document, the assistant may offer an explicit Document Studio action using a verified template identity, versioned requirements and known procedural stage; no auto-issuance or signature.
 9. **Validate response:** fail closed on unsupported mandatory requirements, invented citations, missing date/version, unresolved decisive facts or conflicts; escalate to JAG where warranted.
@@ -39,12 +39,14 @@ Each proposed advisory item must have:
 - `guidance_id` and issue/scene;
 - exact supporting `EvidenceAnchor` and `ProvisionVersion` or reviewed legal proposition;
 - effective period, jurisdiction, rank/status and procedure-stage predicates;
+- controlling legal event date(s) per predicate (conduct, commencement of proceedings, procedural act, preparation/review where relevant), authority for selecting the date, saving/transitional provisions and unresolved date blockers;
 - competent authority, if evidenced;
 - prerequisites, exceptions and conflicting evidence;
 - `binding_or_nonbinding` classification and whether authority is statute/court, service-policy assertion or unverified upload;
 - independent documentary and legal-review status;
 - blocking conditions and escalation route;
 - audit/version identity.
+- exact dependency IDs, approval scope and revalidation state; if a credible material change/conflict affects a predicate, stop its definitive use in the affected scope until revalidated; keep candidate evidence and supported historical use visible.
 
 Do not promote a candidate summary or inferred legal lesson into a mandatory rule without applicable authority. Absence of adverse authority in the indexed corpus is not proof that none exists.
 
@@ -113,13 +115,15 @@ Create positive, negative and metamorphic tests:
 - supply an unsupported compulsory signature and expect refusal to assert it;
 - provide an older law date and verify temporal differences;
 - hide/withdraw a source or inject contradictory source and expect a downgrade;
+- distinguish unsupported uploads from credible material authority changes; verify scoped invalidation of affected mandatory advice, cached responses and open sessions until revalidation;
+- independently check substantive/procedural date selection, including conduct before amendment and procedural action after it, with explicit transitional/saving law or unknown-date blockers;
 - change procedure stage or competence and expect a different route;
 - include false quotations, editorial headnotes and cases with mixed orders;
 - test unknown facts and “cannot establish from verified corpus” as a correct outcome;
 - verify all mandatory checklist items have actual source and approval records;
 - test entirely disconnected operation, no per-user document/feature tiers and session separation for ordinary incident facts;
-- test that **User cannot upload, publish, replace, withdraw or reprocess** through any API or UI path, while Admin can stage, review and publish; after publication both roles can inspect the same SOP and candidate links; 
-- test that both Admin and User can create and audit **temporary working documents** while no non-Admin file reaches source ingestion, shared search or graph updates; audit reports explicitly distinguish verified defects from unknown prerequisites;
+- test that User cannot perform CORPUS_INGESTION or mutate shared source/template records through any API or UI path, while Admin can stage, review and publish; after publication both roles can inspect the same SOP and candidate links;
+- test that both Admin and User can run WORKING_DOCUMENT_PROCESSING in their own sessions, while **neither role's working-file path** creates shared ingestion, search or graph updates; audit reports distinguish verified defects from unknown prerequisites; test cross-session direct URL/job/cache/export access denial;
 - test unverified-upload prompt injection, forged supersession and mandatory-checklist claims are not promoted into authoritative guidance.
 
 Score separately: intent understanding, fact-question recall, law/version precision, procedural-route correctness, false mandatory-step rate, source-pinpoint accuracy, adverse authority recall, safety-escalation accuracy and **abstention accuracy**.
@@ -131,7 +135,7 @@ Independent legal advisers must validate the benchmark's high-consequence answer
 - Ordinary user questions cannot mutate legal claims, graph publication or authenticated statuses. Only Admin-initiated uploads, approvals, withdrawals or reprocessing may modify the shared source inventory; their published contents and candidate edges remain labelled unverified unless independently established.
 - Admin and User have equal access to **published** documents and legal research/advisory features; only Admin can manage source uploads and the publication lifecycle. Eligibility applies to the whole installation before publication, not per rank or per document viewer.
 - The offline inference model is replaceable; stored legal identities, rules and evidence do not depend on a single model.
-- A language model may draft explanation and propose candidate links. Only predicates with the necessary legal-source evidence and explicit validation level can authorise the display of definitive procedural obligations.
+- A language model may draft explanation and propose candidate links. Definitive procedural obligations and operational guidance require the documented operational-use gate (source fidelity, applicable authority, relevant scope/date, attributable competent legal approval and current dependency state). Neither an Admin publication, technical review nor model output establishes legal approval.
 - If a critical part of the law or its amendment history is unverified, explicitly surface the blocker and give a research/escalation route.
 - Every derived checklist and lesson supports reverse tracing back to the original source passage and review decision.
 - A checklist attached to a generated/reviewed document must use the same reviewed, versioned requirements as the applicable registered form. Unverified source candidates may be highlighted as research leads but never enforce mandatory form constraints.

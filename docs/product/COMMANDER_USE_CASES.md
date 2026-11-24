@@ -129,7 +129,7 @@ For review: ingest temporary PDF/DOCX/scans without adding them to the common co
 
 For full-file review: compare the related records' people, dates, allegations, stages and prerequisites. Report which files are missing or unreadable, without presuming that every checklist entry is universally compulsory. The original and its metadata are preserved within the working session; suggested changes are separately accepted/rejected.
 
-See [Document Studio and Template Registry](../architecture/DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md) and [ADR-0003](../architecture/decisions/ADR-0003-DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md).
+See [Document Studio and Template Registry](../architecture/DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md) and [ADR-0003](../architecture/decisions/ADR-0003-DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md). The controlling-date basis, competent legal approval and dependency freshness must be established for authoritative use. Provide a Document Readiness Report with the actual checks, blockers, untested items and next human verification; research-only sources cannot activate mandatory checks.
 
 
 Each reusable scenario should store:
@@ -173,13 +173,17 @@ Tests must cover:
 - false-positive offence mapping, wrong competent authority and invented signatures;
 - lack of authenticated source and conflicting historical wording;
 - questions about a real person, kept in the active session rather than inadvertently entering shared search; only explicit Admin publication makes source documents shared;
-- non-Admin upload, publication, withdrawal and reprocessing attempts are denied and do not create ingestion jobs;
+- non-Admin CORPUS_INGESTION and shared-source publication, withdrawal and reprocessing attempts are denied; both roles may create their own WORKING_DOCUMENT_PROCESSING jobs;
 - uploaded SOPs with incorrect effective dates, malicious instruction text, supersession claims or incompatible access markings;
 - draft and audited documents that must not appear in shared search, evidence graphs, publication queues, embedding indexes or model training;
 - incorrect source template selection, expired versions, speculative charge wording, missing particulars and wrong competent-signature assumptions;
 - mismatched service numbers, dates and facts across a multi-document pack;
 - incomplete scans, unreadable printed tables or unknown surrounding proceedings, which must not be treated as automatically compliant;
-- generator/auditor parity: the generated document must pass the same rule set as a separately reviewed draft, apart from explicitly outstanding human checks;
+- different controlling event dates for substantive and procedural law, including saving provisions and unknown legal dates;
+- published research-only forms, missing approval artefacts and credible source conflicts blocking operational use within affected scope, with unverified upload only a research lead;
+- cross-session working file/job/export/context access denied, with no private draft content in shared logs;
+- readiness reports with explicit untested/unknown/not-applicable status and outstanding human verification, not a compliance percentage;
+- generator/auditor parity plus independently prepared correct, borderline and defective holdouts with answer keys derived directly from governing sources rather than shared validation code or generated drafts;
 - metamorphic cases: alter one fact and verify only legally justified changes;
 - “not determinable from available evidence” as an expected correct answer.
 

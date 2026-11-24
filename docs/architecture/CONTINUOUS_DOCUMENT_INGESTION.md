@@ -19,7 +19,7 @@ Only sources suitable for the entire deployment audience may be published. Sourc
 
 ## 2. Admin ingestion and publication lifecycle
 
-1. **Admin opens Add Document.** The app checks Admin privilege server-side for all upload and management endpoints. An ordinary User cannot submit even through direct API calls.
+1. **Admin opens Add Source.** CORPUS_INGESTION (Admin only) is a separate operation from WORKING_DOCUMENT_PROCESSING (both roles). Enforce Admin privilege server-side on all source/staging mutation endpoints and jobs; a User cannot submit a source even through direct API calls. Temporary review has separate session endpoints and storage.
 2. **Submit files into staging.** Initial supported formats may include PDF (including scans), DOCX, plain text and images for OCR where safe. Record file name, size, format, submitting Admin, upload time and optional declared issuer/title; do not trust claimed metadata as fact.
 3. **Validate and quarantine.** Apply type/size controls, content-based format checks, malware/malformed-content screening suited to an offline installation, and deployment-wide source eligibility checks. Reject ineligible or dangerous files without exposing their data through shared search.
 4. **Preserve exact bytes.** Compute SHA-256, store immutable original copy and provenance, detect exact duplicates and possible alternate versions.
@@ -29,6 +29,7 @@ Only sources suitable for the entire deployment audience may be published. Sourc
 8. **Admin explicitly publishes.** Only now do the source, extracted passages, snippets, embeddings and candidate graph links enter the **common published index** for all Users and Admin. Show source label `ADMIN_PUBLISHED_UNVERIFIED` (or a separately evidenced stronger status) and processing/quality flags.
 9. **Ongoing changes.** Admin may upload a changed version, request reprocessing or withdraw a publication. Preserve historical original bytes, revision and audit history; remove withdrawn content from ordinary-user search, graph presentations and caches, including source-derived text. Avoid partial publication states.
 10. **Independent legal review as required.** Admin publishing a document is not proof of authenticity, legal force, operative date or binding interpretation. Promote legal claims, mandatory checklist items or supersession relations only under the separate evidence and legal-review rules.
+11. **Assess dependencies.** Source changes/withdrawals create versioned review events; apply the scoped stale-guidance gate in [Document Studio, section 8.1](DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md#81-dependency-impact-and-stale-guidance-controls) across affected templates, checklists and advisories. Mere upload of an unverified claim does not invalidate law. A credible material conflict blocks affected operational use pending review.
 
 The entire workflow, including OCR, graph processing and search-index update, must work **offline on the LAN**, without cloud OCR, remote embeddings or online APIs.
 
@@ -81,7 +82,7 @@ Once baseline controls are in place, prioritise **working upload → automated e
 
 - An ordinary User can open every published judgment, SOP and summary, use all research/advisory features and inspect published candidate graph links.
 - A User can submit a temporary draft for Document Studio audit, but cannot turn that draft into an Admin source-ingestion job, even by API manipulation.
-- A User cannot upload, create jobs, review staged files, publish, withdraw, replace or reprocess through UI or direct API; attempted writes have no effect.
+- A User cannot upload a **shared source**, create a CORPUS_INGESTION job, review Admin staging, publish, withdraw, replace or reprocess shared source/template records through UI or API; attempted corpus writes have no effect. Both roles can independently create WORKING_DOCUMENT_PROCESSING jobs for their own isolated sessions.
 - Admin uploads a valid SOP; the original and candidate graph relationships are processed and reviewable in staging but not publicly searchable.
 - Admin publishes after reviewing quality/eligibility; the source and labelled candidate links appear consistently to all users.
 - An Admin-uploaded revised SOP preserves both versions; a claimed supersession does not automatically invalidate an older source.

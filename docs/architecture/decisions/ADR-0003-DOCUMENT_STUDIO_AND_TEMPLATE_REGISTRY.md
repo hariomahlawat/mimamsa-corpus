@@ -23,6 +23,10 @@ A separate issue is access: the owner has restricted **source-library ingestion 
 8. **Safe, practical drafts.** Exports remain editable and unsigned; do not forge a signature, imply service/receipt occurred, invent a hearing or issue an order on behalf of a competent authority. Human review and the actual legal procedure remain necessary.
 9. **Capability-first offline design.** Basic safe parsing, session separation, cleanup, authenticity/provenance and secure local export from day one. Do not let complex document-management roles or elaborate security architecture delay the pilot.
 10. **Impact analysis.** New or amended source law/policy should flag affected template versions, validation rules and checklists for examination, without automatically rewriting them.
+11. **Independent status axes and operational-use gate.** Record form type, fidelity, temporal applicability, legal approval, publication and dependency state independently. Require an attributable competent legal approval artefact for operational scope; no formal JAG status without its formal evidence. Credible material contrary authority blocks affected authoritative templates, checks and guidance until revalidated, not unrelated/historically supported use. An unverified upload alone is not legal invalidation.
+12. **Controlling dates and readiness.** Track conduct, proceeding commencement, procedural-action and preparation/review dates distinctly with source-supported governing-date and transitional rules per constraint. Report actual check outcomes and outstanding human verification without a compliance score.
+13. **Distinct operation classes and session ownership.** CORPUS_INGESTION (Admin only) is separate from WORKING_DOCUMENT_PROCESSING (both roles). Enforce authenticated ownership for temporary files, job outputs, URLs, context and caches, avoid sensitive log contents and clean up derivatives.
+14. **Coverage and independent validation.** Maintain a source/page discovery coverage register; use source-derived independently prepared answer keys and blinded defective/correct test documents, not generator/auditor agreement alone.
 
 ## Relationship to ADR-0002
 
@@ -47,6 +51,6 @@ There are still only two roles. Distinguish **temporary working-file submission*
 
 ## Outstanding design and legal decisions
 
-Precisely which forms are current and prescribed; authenticated source editions; field/rendering rules; format standards; record retention period; scanner/OCR quality thresholds; storage and export formats; template promotion/legal reviewer workflow; how local administrative templates are versioned; and whether future case-file persistence is needed.
+Precisely which forms are current and prescribed; authenticated source editions; field/rendering rules; format standards; record retention period; scanner/OCR quality thresholds; storage and export formats; administrative mechanics of the competent legal approval workflow (the evidentiary and operational-use gate is already required); versioning of local administrative templates; and whether future case-file persistence is needed.
 
 No approved source forms, operational templates, signed legal documents or software implementations are created by this ADR.

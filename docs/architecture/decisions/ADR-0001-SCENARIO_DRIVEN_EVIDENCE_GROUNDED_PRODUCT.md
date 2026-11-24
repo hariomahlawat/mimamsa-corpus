@@ -20,7 +20,7 @@ The product must run on an air-gapped LAN. Source integrity, applicable legal ve
 3b. **Provide Document Studio to every app user** for source-backed legal document generation, checking prepared drafts and procedural-file completeness. Working files remain separate from shared-source uploads, while only Admin manages published templates or new source authorities.
 4. **Separate source search, candidate research enrichment and approved legal propositions/procedures**; never silently promote one level to another.
 5. **Preserve complete lawfully published judicial originals** without masking names, ranks, service or medical details solely due to their presence in court documents, subject to binding restrictions and access controls.
-6. **Keep ordinary real-incident query text separate** from the shared legal corpus; intentionally uploaded source material is explicitly shared with every app user.
+6. **Keep ordinary real-incident queries and temporary working files separate** from the shared legal corpus; only deliberately Admin-published eligible source material is shared with every app user.
 7. **Operate fully offline at runtime** with auditable import and release controls.
 8. **Preserve existing evidence governance:** frozen 658 research records and 53 cases, AUTH-LEDGER genesis/version zero and established source-authority policy remain unchanged without separate approval.
 
@@ -42,7 +42,7 @@ A content-addressed evidence vault, canonical entity/relationship tables (Postgr
 
 - More complex canonical identity and review schemas are necessary; this must be designed incrementally.
 - Existing candidate outcomes and legal-proposition extraction cannot be treated as authoritative.
-- Every mandatory checklist element and treatment claim needs a reviewable source trail.
+- Every mandatory checklist element and treatment claim needs a reviewable source trail. Definitive operational requirements additionally require scoped legal approval evidence, correct event-date applicability and no blocking dependency issue. Formal JAG approval must be attributable, never inferred from technical verification. See [ADR-0003](ADR-0003-DOCUMENT_STUDIO_AND_TEMPLATE_REGISTRY.md).
 - Scenario outputs must be conditional, minimise decisive follow-up questions and abstain/escalate on unresolved law.
 - Evaluation must include independent, adversarial legal-data tests and temporal variants, not merely passing software tests.
 - Source preservation takes precedence over enriching endangered or unavailable files.

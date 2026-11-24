@@ -22,7 +22,9 @@ The Document Studio must **not** invent a format, charge wording, prescribed sig
 | Upload/edit/publish a source manual, SOP or template for shared use | Yes | No | Admin staging, then shared corpus after explicit publication |
 | Withdraw, replace or reprocess shared source/template | Yes | No | Admin-managed, audited |
 
-Normal working files are not permanently added to source-corpus records, Hugging Face, common search, embeddings, graph edges or training data. A working document cannot be promoted to the shared library by a User or through ordinary generation/review APIs. Apply simple temporary-session isolation, cleanup/retention controls, file-size and safe-parser checks. A deliberate Admin knowledge-base submission is a **separate action and workflow** requiring publication approval.
+**Operation classes:** CORPUS_INGESTION is Admin-only and writes to shared-source staging; WORKING_DOCUMENT_PROCESSING is available to both roles and writes only to that user's temporary session. Distinct endpoints, storage namespaces, job types, output retrieval, and publication paths must enforce these semantics server-side. Working-file processing never triggers a corpus ingestion job, even when initiated by Admin.
+
+Working files, prompts, extracted text, findings, generated drafts, local embeddings and AI context must never enter shared-source records, Hugging Face, common search, global graph, shared caches or training data. Only a separate, deliberate eligible Admin source submission can become a shared source. Use simple authenticated session ownership checks for all working inputs, job IDs, file URLs, reports, exports and model-context retrieval; an opaque identifier alone is insufficient. User A (including an Admin acting as another user) has no general Document Studio access to User B's session. Keep sensitive input/output out of ordinary diagnostics, shared logs and reusable caches; use minimal operational metadata instead. Apply safe parsing, cleanup of derived artefacts and configurable, documented retention. No extra research roles or elaborate case-workspace system are required.
 
 ## 3. Inventory and classification: locate the actual forms
 
@@ -36,21 +38,36 @@ Before creating working templates, systematically inspect original, legally acce
 
 The discovery process must find **forms and tables in scanned pages**, not rely on text search alone. Capture form title, number, exact page/paragraph/appendix, provenance, printed wording, images, tables, field layout, mandatory-versus-example language, amendment/commencement state and whether it is currently applicable. Compare source editions, identify collisions and send unverified copies or conflicting versions to a research queue.
 
-**Form classification is compulsory:**
-1. **Statutory prescribed form:** explicitly mandated by an operative Act/Rule or instrument; verify identity and applicability.
-2. **Official specimen / illustrative form:** useful for faithful drafting but not automatically prescribed in every case.
-3. **Official service/administrative template:** based on an applicable authenticated order/instruction/regulation; rank/period/stage constraints still apply.
-4. **Research candidate / historical template:** unverified or superseded; discoverable with warnings but never silently offered as an authoritative current form.
+**Independent classification axes are compulsory.** These are proposed registry concepts, not changes to existing AUTH-LEDGER or evidence-policy vocabulary.
 
-The exact legal-source status must not be inferred merely from the word “form”, “Appendix”, “Manual” or a document's hosting domain.
+| Axis | Values / required distinction |
+| --- | --- |
+| Form authority/type | STATUTORY_PRESCRIBED (explicit requirement); OFFICIAL_SPECIMEN (illustrative); OFFICIAL_SERVICE_ADMINISTRATIVE (order/instruction with established scope); OTHER_OR_UNDETERMINED |
+| Discovery / reproduction fidelity | DISCOVERED; TRANSCRIBED; FIDELITY_VERIFIED, with page-image comparison and recorded evidence |
+| Applicability | NOT_ESTABLISHED; APPLICABILITY_VERIFIED for a stated scope and date basis; CONFLICTING; HISTORICAL/SUPERSEDED for a particular interval, never a blanket assertion that all earlier uses were invalid |
+| Legal approval | RESEARCH_ONLY; LEGAL_REVIEWED; LEGAL_VALIDATED for specified requirements/scope, with attributable competent approval artefact; REVIEW_REQUIRED / BLOCKED |
+| Publication | STAGED; PUBLISHED; WITHDRAWN, with Admin action and audience eligibility |
+| Dependency/release freshness | CURRENT_FOR_CHECKED_SCOPE; REVALIDATION_REQUIRED; BLOCKED, with reason and version history |
+
+A statutory prescribed form can be historical, faithfully transcribed, published and not currently applicable at the same time. An authenticated official specimen is not necessarily mandatory. A label on one axis cannot promote another. Where the source is unverified or historical, retain its candidate form type and status independently. Never infer authority from the words "form", "Appendix", "Manual", from a hosting domain, or from a file hash.
+
+### 3.1 Discovery and coverage
+
+Maintain the [Form Discovery and Coverage Register](../product/FORM_DISCOVERY_AND_COVERAGE_REGISTER.md). Before claiming coverage, record source identity, exact copy/hash, edition and page ranges, which pages were visually inspected, gaps and inaccessible pages, all forms found (including duplicates and conflicts), and the review disposition. All eight MML originals must receive the mandatory first-pass practical-reference assessment under the controlling evidence standard. No form count or source coverage is established by this design document.
+
+### 3.2 Research versus operational drafting gate
+
+A published candidate can be read and compared even when research-only. Fidelity review establishes reproduction, not legal applicability. Documentary checks establish source evidence, not legal authorisation. Applicability review must establish the relevant date basis, jurisdiction, procedure, conditions, authority, and governing amendment/saving chain. Substantive disputed interpretations are escalated to the designated legal adviser; formal JAG validation is recorded only with an attributable formal approval artefact, as required by EVIDENCE_STANDARD and SOURCE_AUTHORITY_POLICY. Technical checks, source verification, Admin publication and any independent review without that artefact cannot substitute for the required legal approval. The same evidentiary and technical tests apply regardless of authorship.
+
+**Operational-use gate:** release an authoritative template, mandatory constraint, procedural checklist or definitive advisory only for the explicitly approved scope, with source identity/fidelity, applicability and requisite legal approval independently established, published eligibility and no blocking dependency conflict. Record the approval artefact identifier, reviewer/competence, scope, exact source/template/rule revision, date, limitations and subsequent revocation or supersession. High-consequence unresolved authority blocks candidate operational use. A form is not operationally approved merely because a source passage or template was independently verified. A research-only form may be inspected and, if useful, reproduced as an unmistakably labelled research specimen (not a filled instrument represented as fit for issue); do not activate unsupported mandatory rules. No machine-generated output certifies the validity of an actual proceeding.
 
 ## 4. Canonical registry and rule model (proposed)
 
 A `FormTemplate` records:
 - stable template ID, name, purpose, category and document family;
-- prescribed/specimen/service/historical classification and authority basis;
+- independent form-type, fidelity, applicability, legal approval, publication and dependency-freshness axes, with supporting evidence;
 - source document identity, exact copy SHA-256, page, printed form number, paragraph/appendix and passage/image locator;
-- date(s): issue, commencement, applicable interval and version/supersession evidence;
+- issue/commencement and applicable intervals, version/supersession evidence; controlling date basis per field/constraint, and saved/transitional scope;
 - applicability by service status/rank, forum, case type, authority and **procedural stage**, with UNKNOWN supported;
 - document layout: fields, tables, repeated sections, labels, instruction text, signature blocks and formatting tolerances;
 - `FieldRequirement` records for mandatory/conditional/optional fields with conditions and source evidence;
@@ -59,15 +76,17 @@ A `FormTemplate` records:
 - `TemplateReview`: documentary fidelity review, legal applicability review, explicit decisions, reviewer, date and version;
 - version ID, schema/check engine version, publishing history and known adverse conflicts.
 
-**Single rule source:** The generator, pre-export checks, independent document auditor and procedural checklists must use the **same approved versioned constraint definitions**. Do not create two drifting interpretations of a form.
+**Single rule source:** The generator, pre-export checks, independent document auditor and procedural checklists must use the **same approved versioned constraint definitions**. Do not create two drifting interpretations of a form. Shared-rule agreement is not an independent proof of correctness; see the external-to-the-engine test oracle in section 11.
 
-A case's applicable date and stage may affect template selection; only an identified and source-supported version may be described as prescribed. Preserve historical and conflicting versions for research.
+### 4.1 Legally relevant dates
+
+Store incident/conduct date or interval, commencement/initiation of proceedings, relevant procedural-action date, document preparation/review date, and the effective dates of applicable provisions/forms, distinctly from acquisition/review time. Each legal constraint records which event date(s) control, legal basis for that selection, applicable intervals, and transitional/saving/retrospective qualifications. Substantive offence law and procedural requirements can use different controlling events. Never assume that today, the incident date, or the date typed on a document governs all requirements. If dates, controlling-date basis or saving provisions are unresolved, the affected determination remains UNKNOWN/BLOCKED; ask targeted questions or give qualified research only. Preserve historically valid versions for the intervals and conditions actually supported.
 
 ## 5. Creating a document
 
 1. User chooses a document or asks a situation question, e.g. “Prepare a charge-sheet for a reported offence.”
-2. Resolve **which legal procedure and document type** actually applies, and the relevant case/incident date, service status, forum and stage. If essential facts or current source authority cannot be established, show candidates and ask targeted questions; do not claim a prescribed format.
-3. Display the source form, citation and its review/applicability status. If unverified, allow at most an explicitly labelled research draft, not a “legally compliant” template.
+2. Resolve **which legal procedure and document type** actually applies, relevant event dates under section 4.1, service status, forum and stage. If essential facts, governing date or authority are unknown, show candidates and ask targeted questions; do not claim a prescribed format.
+3. Display the source form, citation, independent status axes and applicable scope. Enforce the operational-use gate in section 3.2; if not met, offer source inspection or a clearly labelled research specimen only, with blocked requirements visible. Do not offer a fill-ready authoritative instrument or imply it is fit for issue.
 4. Gather only necessary facts through a structured form. Distinguish alleged facts, verified facts and assertions provided by the user; never fabricate an incident record or a completed procedural act.
 5. Render the source layout faithfully through deterministic document assembly. LLM may propose explanatory language or candidate factual narrative, but not invent charges, mandatory text, rank/date/number or signatory details.
 6. Run template constraints, date/competence checks and any required accompanying-document checklist.
@@ -113,11 +132,22 @@ Checklist items should be classified as:
 - **PRACTICAL_RECOMMENDATION:** helpful but not legally required, with rationale and any supporting case;
 - **RESEARCH_UNVERIFIED:** a lead or unresolved issue, not enforceable by the document checker.
 
-A checklist item may cite a source statute, published policy, judgment, verified proposition or formal template. If the source is amended, withdrawn, superseded or contradicted by later authority, flag dependent forms/checks for **review**, rather than rewriting them automatically.
+A checklist item may cite a source statute, published policy, judgment, verified proposition or formal template. Apply the operational-use gate in section 3.2 to mandatory/conditional/admin requirements.
+
+### 8.1 Dependency impact and stale-guidance controls
+
+Maintain reverse dependencies from each requirement, form version, proposition and advisory to the exact underlying evidence and legal date/scope. An amendment, controlling judgment, withdrawal, corrected source or credible unresolved material contradiction triggers scoped impact assessment. Record trigger, affected dates/conditions, dependent IDs, reason, decision and reviewer. Unverified new uploads produce research leads and a review queue, not automatic supersession of established law. Where a credible material issue makes a current obligation unresolved, immediately mark that affected scope REVALIDATION_REQUIRED/BLOCKED and prevent definitive advice, authoritative generation, or a passing mandatory-check result based on the affected requirement; unaffected scopes and evidenced historical use remain available. No silent replacement of source bytes, approval or history. Re-enable only after evidence and required competent legal approval of a new or reaffirmed scoped revision. Invalidate affected active caches and compiled rule sets; re-check before export or response, including already-open sessions. Previously exported reports remain dated records, not perpetually valid assurances; do not claim to recall external downloads. If later reopened, show the changed status and offer re-review.
 
 Avoid treating a court's statement about a particular case as a universal document requirement without examining the ratio, scope and subsequent treatment.
 
 ## 9. Audit outputs and reproducibility
+
+### 9.1 Document Readiness Report
+
+Every generation/audit result offers a source-linked readiness report, with **no aggregate legal-compliance score**. List each check's applicability, tested input location, governing source and date basis, status, finding, outstanding human decision and next verification step. Distinguish PASS_FOR_TESTED_REQUIREMENT, FAIL_SOURCE_SUPPORTED, REVIEW_REQUIRED, NOT_VERIFIABLE_FROM_DOCUMENT, NOT_PROVIDED, NOT_APPLICABLE (with rationale), and NOT_CHECKED. Distinguish a mechanically detected inconsistency from a legal conclusion. Display tested versus untested coverage and material blockers; never label a pack or draft "legally valid", "ready for issue", or "proceedings compliant" from the report alone. Required human verification and signature remain pending. Allow export of an editable unsigned draft and its separate dated findings/checklist report (with clear research-only restrictions under section 3.2), preserving the original.
+
+### 9.2 Replay and trace
+
 
 Store in the **temporary session** the source template version and rules revision, input hashes, parser/OCR versions, applicable legal date, tested fields, checks performed/not performed, warnings, source citations, and proposed changes. Allow local download of the report and editable draft; do not transmit it online or import its incident facts into the shared legal source corpus.
 
@@ -147,12 +177,17 @@ Legal source/template publication remains Admin-controlled. A user-facing Docume
 - Inventory a selected source appendix with known printed forms: every field, footer, table and appendix reference can be traced to the **actual page**, not an LLM paraphrase.
 - Prepare a draft using a verified template: rendered fields/layout match the source and the auditor applies exactly the same versioned constraints.
 - A changed incident date or stage selects a different form version when justified, or blocks definitive choice when the amendment chain is unresolved.
+- Cross an amendment between conduct and procedural action; independently test different substantive/procedural controlling dates, applicable saving provisions and unknown dates. A document-preparation date must not silently replace the controlling date.
+- Exercise the operational-use gate: publish a faithfully transcribed historical/unvalidated specimen; it is searchable but cannot activate an authoritative template or mandatory constraint. Legal validation requires the exact attributable approval and scope; unresolved authority blocks operational use.
 - Generate an incomplete draft: mandatory-field errors are identified, while signatures/procedural acts remain unfilled; the export clearly states that human verification is needed.
-- Audit a correct draft and an independently corrupted draft: track both false positives and missed material defects, including incorrect legal provision, missing particulars and mismatched dates.
+- Audit independently prepared correct, borderline and deliberately defective drafts from an answer key constructed directly against the original forms, governing dated provisions and approval evidence, **without deriving the oracle from generator output, shared validation logic or the same rule-authoring process**. Keep blinded holdouts and record the source pinpoints and reviewer decisions. Obtain competent legal review of high-consequence answer keys. Measure false positives, missed material defects, wrong date/version, incorrect legal provision, missing particulars and mistaken pass/abstain outcomes separately. Test render-to-document fidelity against original source images; shared generator/auditor agreement alone is insufficient.
 - Upload a scanned form with illegible text: the checker returns uncertainty and page-image references rather than making up the missing content.
 - Submit a multi-document pack with conflicting service number or dates: report exact source spans and distinguish detected contradiction from a legal conclusion.
 - Confirm that an ordinary User can upload a **working document** for review but cannot upload or publish it into shared law/search/template records, even through a direct API.
 - Withdraw a published template: new generation cannot silently keep using it as current; historic source remains preserved for research and previously issued audit reports remain traceable.
+- Add an unverified supersession claim (candidate only), then introduce credible material contrary authority: affected scopes must stop definitive output, including cached/open-session results, until revalidated; unaffected scopes and supported historical versions continue working. Reopen an old audit and show current status without editing the dated original report.
+- User A cannot retrieve User B's file, OCR job, AI context, finding, cached result or export by a direct URL, guessed/known ID, or switching sessions; Admin's corpus role does not grant general access to other users' working sessions. Verify cleanup of temporary derivatives and no sensitive text in ordinary logs.
+- Readiness report distinguishes passed, failed, not supplied, not applicable, unknown, untested and review-required items with citations; missing prerequisites never turn into a global readiness/legal-validity score.
 - Inject fake instructions into a draft: parser/model does not execute those instructions or alter the legal-rule engine.
 - Test disconnected operation, local output export, working-file cleanup and absence of shared-index leakage.
 
