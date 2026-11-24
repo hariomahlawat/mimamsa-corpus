@@ -1,5 +1,7 @@
 # Cycle 12 preservation status: the 48 working-store-only copies
 
+> **Current status (closeout): PRESERVED.** The copies are in the private HF dataset at commit `5524c3d9`, byte-verified by a revision-pinned re-download. The owner accepted this on 2026-11-24. The "BLOCKED" and "Still at risk" statements below are kept as the history of earlier steps and are superseded by the updates at the end. The temporary copies are retained until a second persistent backup is verified.
+
 | Step | Result |
 | --- | --- |
 | Availability and SHA-256 reconfirmed (2026-11-24T10:17Z, `C11 preservation_c11.py --check`) | 48 of 48 present and equal to the register |

@@ -15,7 +15,7 @@ Branch `claude/c12-consolidation`. Staging is `e0b3e7d2`; main `21de3531` was no
 - **Forms registry (WS-G).** Covers 67 form families, source-backed.
 - **SC case numbers (WS-I).** The overlay stages 99 corrections. The originals are unchanged.
 - **Review findings.** The register holds 622 rows: no P1 open, and 5 P2 deferred with recorded reasons.
-- **Preservation (WS-B)** of the 48 working-store copies is still **blocked** on an owner decision. The copies are intact (48/48 at 11:34Z) and were not deleted.
+- **Preservation (WS-B): done.** The 48 working-store copies are preserved in the private HF dataset at commit `5524c3d9` and byte-verified by a revision-pinned re-download. The full HF corpus is byte-verified (see the closeout addendum). The temporary copies are kept until a second persistent backup is verified. *(Corrected at closeout; this line previously said preservation was blocked.)*
 
 ## 2. Workstream status
 See `TASK_REGISTER.md`.
@@ -23,13 +23,13 @@ See `TASK_REGISTER.md`.
 | WS | Status | Key result |
 | --- | --- | --- |
 | A Integration | Done | PR #48 merged; 32/32 gate; ledger version 0; HF sync run 108 skipped |
-| B Preservation | **Blocked (owner)** | 48/48 intact; 73 pages visually inspected, no markings; destination and HF credential needed |
+| B Preservation | **Done** | Preserved to HF `5524c3d9` and byte-verified; 73 pages visually inspected, no markings; temporary copies retained |
 | C Blueprint | Done | Fable confirmation and delta ACCEPT; PR #49 merged (docs only, no workflow triggered) |
 | D Outcome V3 | Done, targets not met | See §5; independent review ACCEPT WITH CONDITIONS, conditions fixed |
 | E Holdings | Done, far below usable | See §5 |
 | F Statutory | Done | F-01..F-10 closed-verified |
 | G Forms | Done | R01..R15 closed or documented deferral |
-| H Acquisition | Done (partial by policy) | 25 first-tier judgments acquired (not ingested); other targets blocked |
+| H Acquisition | Done (partial by policy) | 25 first-tier judgments acquired. At closeout, 18 were ingested to HF (`15bd03cc`) and 7 excluded as not relevant. Other targets blocked by allow-list or TLS |
 | I Metadata / backlog | Done | Overlay staged; adviser package; findings register |
 
 ## 3. Integration and repository status
@@ -37,7 +37,12 @@ See `TASK_REGISTER.md`.
 **Staging**
 - `0dd3640b` (PR #48): the six merges plus TXN-DEMO.
 - `e0b3e7d2` (PR #49): the blueprint.
-- No HF upload ran. The general upload is `workflow_dispatch`-only with an approval phrase. PR #49 matched no workflow path.
+- The GitHub Actions HF sync workflow never ran an upload: run 108 was skipped, and PR #49 matched no workflow path. *(Corrected at closeout.)* Under the owner's approval and standing instruction, direct HF commits were later made from the session and byte-verified:
+  - `5524c3d9`: preservation of the 48 copies;
+  - `af7f9d06`: derived text and metadata for the 4 SC originals;
+  - `15bd03cc`: ingestion of 18 judgments.
+
+  All three are additive. The only automatic change was `.gitattributes`.
 
 **Closed superseded PRs:** #44, #45 and #47 (branches kept). #46 was merged by the owner.
 
@@ -61,11 +66,11 @@ See `TASK_REGISTER.md`.
 - Hashes match the register.
 - Visual inspection of the 73 text-less pages found no restriction marking. Limit: markings that are very faint or cut off by the scan cannot be ruled out.
 - The staging package is tested.
-- **No persistent destination.** The push to a private orphan branch was refused by the session's permission control and was not attempted another way.
+- **Persistent destination:** the private HF dataset (`legal_knowledge/preservation/c5_working_store/`, commit `5524c3d9`), byte-verified. *(Corrected at closeout.)* The earlier private-branch push was refused by the session's permission control and was not retried. **No second persistent backup is verified yet.** The owner holds the delivered ZIP (SHA-256 `214f11e8…`), so the temporary copies are kept.
 
-**HF byte verification:** not possible. There is no injected credential, and the connector cannot read binaries.
+**HF byte verification: done at closeout.** Every file at `5524c3d9` was downloaded and hashed: 15,971 files, 0 failures. The baseline of 4,103 copies is fully byte-verified (`copy_verification_c12/`). *(Corrected; this line previously said verification was not possible.)*
 
-**WS-F promotions** depend on these unpreserved copies. That dependency is recorded.
+**WS-F promotions** depended on these copies. The availability and integrity risk is closed for all 274 dependent items (`copy_verification_c12/PRESERVATION_RISK_CLOSURE_C12.csv`). Evidence states are unchanged.
 
 **Acquisition**
 - The 18 truncated HC files are byte-identical at the source mirror.
@@ -152,7 +157,7 @@ C11 F02 (single-coded holdout) is closed and confirmed by the V3 holdout review.
 ## 10. Owner decisions required
 
 1. **Preservation destination** for the 48 copies: permit the private orphan-branch push, run `stage_and_verify.sh` to HF, or name another store. *Highest priority.*
-2. **HF read credential** injected into the environment (not in chat), for revision-pinned byte verification.
+2. ~~**HF read credential**~~: done. A fine-grained network secret with read/write is in place, and the owner has directed that it be retained.
 3. Confirm the **Legal Reviewer designation** in the blueprint.
 4. **Allow-list** additions (archive.org storage nodes, `sci.gov.in`, `desw.gov.in`) or manual acquisition. Also a trust-store fix for `egazette.gov.in`.
 5. Whether to **apply the SC case-number overlay** (99 staged).
@@ -224,3 +229,38 @@ Outcome precision is short of target and coverage is far short. Holdings are far
 4. Handling of the FOUO RAF 2000 copy in the HF dataset.
 
 The remaining items from §10 are unchanged: Legal Reviewer designation, allow-list, SC overlay, adviser review, contact-email header, and the PR #50 merge.
+
+## Closeout addendum 2 (2026-11-24, owner closeout direction)
+
+**Per-copy verification** (`copy_verification_c12/`)
+- **Baseline:** exactly **4,103** copies: 4,039 held on both GitHub and HF, 16 HF-only, and 48 preserved. Every status rests on hashes computed from downloaded bytes:
+
+  | Status | Copies |
+  | --- | --- |
+  | BYTE_VERIFIED | 4,062 |
+  | BYTE_VERIFIED_INCOMPLETE_DOCUMENT | 19 |
+  | BYTE_VERIFIED_TRUNCATED_TAIL_BASE_REVISION_PRESENT | 22 |
+  | Missing, hash mismatch or not hosted | 0 |
+
+- **Duplicate identities:** 128 copies, recorded separately.
+- **Additions after the baseline:** the 18 ingested judgments, making **4,121** distinct source copies (the 7 excluded acquisitions are logged, not ingested).
+- **Source-register overlay** for the 48 copies: hosted path, revision and SHA-256. The original registers are unchanged.
+- **Preservation risk closed** for all **274** dependent items: 204 from the 1954 Army Rules and 70 from 12 SC judgments. Evidence states are unchanged.
+
+**Judicial recovery** (`judicial_recovery_c12/`)
+- The 4 HF-held SC originals were processed into derived text and metadata (`af7f9d06`).
+- 18 of the 25 first-tier judgments were ingested (`15bd03cc`); 7 were excluded as not relevant, and there were 0 duplicates.
+- All 55 added files are byte-verified.
+- Coverage after ingestion: judgment records 4,259 → 4,277; unresolved incomplete files 23 → 19; first-tier titles held 0 → 18 of 1,790.
+- Re-attempted acquisition: still blocked, because egazette's TLS certificate fails verification.
+
+**Safety and controls**
+- HF sync is now additive-only, with a guard and tests (R-04).
+- Research-use isolation for the five deferred P2s is enforced by a test.
+- Risk register: `RISK_REGISTER_C12.md`.
+
+**Administrative**
+- PR #36 closed as superseded: all 106 files are byte-identical in staging. Its branch is kept.
+- Findings: 622 rows; P1 11/11 closed and confirmed; 5 P2 deferred with recorded reasons and restricted to research use.
+
+**Cycle 13 planning:** `docs/planning/CYCLE13_EXECUTION_PLAN.md` and `docs/planning/OFFLINE_APP_TECHNOLOGY_ASSESSMENT.md`.
