@@ -16,7 +16,7 @@ A commander asks “My sepoy was found drunk on duty; what should I do?” rathe
 
 **Outputs:** structured incident interpretation; immediate safety/welfare considerations where necessary; facts established versus alleged; governing candidate provision versions and why they might apply; material follow-ups; lawful procedural paths with prerequisites and competent authority; evidence/safeguard checklist; relevant judgments and proposition-level treatment; limitations and escalation; source links and review quality for each assertion.
 
-**Query separation:** ordinary unit-incident questions remain in a session, not the shared corpus. Only an Admin may intentionally submit documents; staged documents are Admin-only, and only explicitly Admin-published documents become readable by all app users. No per-document viewing restrictions or role-specific legal-research tiers.
+**Query separation:** ordinary unit-incident questions remain in a session, not the shared corpus. Only Admin may submit documents for CORPUS_INGESTION; both roles may submit their own temporary working documents through WORKING_DOCUMENT_PROCESSING. Shared-source staging is Admin-only; only explicitly Admin-published eligible sources become readable by all app users. No per-document viewing restrictions or role-specific legal-research tiers.
 
 **Document Studio separation:** every admitted user may supply an existing draft for a temporary *working-document audit* or provide facts for generated documents. This is not shared-source ingestion and must never trigger publication, global search indexing or legal graph promotion. Admin alone manages the shared legal library.
 
