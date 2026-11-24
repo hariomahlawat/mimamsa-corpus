@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""C12: final V3 holdout ground truth = coder A's rows for judgments where the two independently blind coders agree on
+"""C12: final V3 holdout ground truth = coder A's rows for judgments where the two coders (instructed to work blind to each other; see holdout_v3/PROCESS_NOTE.md) agree on
 labels, row count AND proceeding-level (case number, printed, substantive) multisets (strict agreement, review F02/F03),
 and adjudicated rows for every DISAGREE judgment. The adjudicator was a third coder independent of both coders and of
 the extractor, but NOT blind to the competing codings: the original 14 adjudications saw them labelled A/B; the two added

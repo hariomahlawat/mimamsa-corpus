@@ -2,6 +2,8 @@
 
 Each judgment is coded **independently by two coders**, who are blind to every extractor output and to each other.
 
+> **Note added after coding (Cycle 12 review C12-tools F04):** the sentence above is the instruction coders were given. Separation was enforced only by instructions, not by technical isolation. The adjudicator saw the competing codings. See `PROCESS_NOTE.md`.
+
 **One row per proceeding** disposed of by the deciding court: each appeal, petition or application with its own number. Use `ALL` only when one common order disposes of every proceeding alike **and** the numbers are not individually listed.
 
 ## Fields (per proceeding)
