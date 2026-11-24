@@ -18,12 +18,12 @@ import json, posixpath, re, stat, sys, os
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # not resolved: keeps a symlinked path detectable (C8)
-from common import LOGICAL_PKG, PKG, LedgerError, read_csv, sha256_file, sha256_text  # noqa: E402
+from common import LOGICAL_PKG, PKG, LedgerError, read_csv, read_regular_bytes, read_regular_text, sha256_file, sha256_text  # noqa: E402
 import rules_v1  # noqa: E402
 import strength  # noqa: E402
 import binding  # noqa: E402
 
-SCHEMA = json.loads((PKG / "schema/ledger_entry.schema.json").read_text(encoding="utf-8"))
+SCHEMA = json.loads(read_regular_text(PKG / "schema/ledger_entry.schema.json"))
 COLS = SCHEMA["required"]
 LINE_KEYS = ["version", "prev", "date", "rule_version", "frozen_inputs_sha256", "file", "file_sha256", "decisions", "reviews", "effective_sha256", "note"]
 SUBTYPE = {"PRIMARY_GAZETTE_ARCHIVAL_FACSIMILE": "HELD_PRIMARY_GAZETTE_FACSIMILE",
@@ -71,39 +71,7 @@ def entry_digest(e):
     return sha256_text(json.dumps({k: e[k] for k in COLS if k not in DIGEST_EXCLUDE}, sort_keys=True, ensure_ascii=True))
 
 
-def read_regular_bytes(path):
-    """Read a ledger file only if it is a regular file reached without following a symbolic link (C11, review CA-01).
-
-    O_NOFOLLOW refuses a symlink at the final component, O_NONBLOCK keeps a FIFO from blocking the open, and fstat on
-    the opened descriptor refuses anything that is not a regular file (FIFO, socket, device, directory). Every OSError
-    becomes a LedgerError, so verify fails closed instead of hanging or raising a traceback."""
-    p = str(path)
-    try:
-        fd = os.open(p, os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_NONBLOCK", 0))
-    except OSError as e:
-        raise LedgerError(f"{p}: cannot open as a regular file ({e.__class__.__name__}: {e.strerror})")
-    try:
-        st = os.fstat(fd)
-        if not stat.S_ISREG(st.st_mode):
-            raise LedgerError(f"{p}: not a regular file (mode {stat.filemode(st.st_mode)})")
-        chunks = []
-        while True:
-            b = os.read(fd, 1 << 20)
-            if not b:
-                break
-            chunks.append(b)
-        return b"".join(chunks)
-    except OSError as e:
-        raise LedgerError(f"{p}: read failed ({e.__class__.__name__}: {e.strerror})")
-    finally:
-        os.close(fd)
-
-
-def read_regular_text(path):
-    try:
-        return read_regular_bytes(path).decode("utf-8")
-    except UnicodeDecodeError as e:
-        raise LedgerError(f"{path}: not UTF-8 text ({e})")
+# C11: the safe reader lives in common.py so that pins.py, reader.py and every other module share it (review C11-01)
 
 
 def sha256_regular(path):

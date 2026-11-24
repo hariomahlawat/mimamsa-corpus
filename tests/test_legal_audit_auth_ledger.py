@@ -2559,3 +2559,88 @@ class C11LedgerFileTypes(C10EffectiveIntegrity):
             L.read_regular_bytes(self.t.dir)
         with self.assertRaisesRegex(common.LedgerError, "cannot open"):
             L.read_regular_bytes(self.t.dir / "missing")
+
+
+class C11LedgerFileTypesReview(C11LedgerFileTypes):
+    """C11 review of 9f1d7560 (C11-01 P2, C11-02, C11-03, C11-05): the frozen-pin file, every pinned input read, version-1
+    reads, the O_NOFOLLOW guard itself and the CLI OSError handler. All mutations inside the temporary Synthetic copy."""
+    def test_fifo_at_frozen_inputs_rejected_without_hanging(self):  # C11-01
+        self._replace_with_fifo("frozen_inputs.json")
+        self.bad("frozen_inputs.json")
+
+    def test_symlinked_frozen_inputs_rejected(self):
+        p = self.t.dir / "frozen_inputs.json"
+        copy = self.t.dir / "frozen_copy.json"
+        shutil.copy(p, copy)
+        p.unlink()
+        p.symlink_to(copy)
+        self.bad("frozen_inputs.json")
+
+    def test_shared_readers_refuse_fifo(self):  # C11-02: sha256_file, read_csv, load_json are all safe now
+        import os
+        fifo = self.t.dir / "pipe.csv"
+        os.mkfifo(fifo)
+        for fn in (common.sha256_file, common.read_csv, common.load_json, common.read_regular_text):
+            with self.assertRaisesRegex(common.LedgerError, "not a regular file|cannot open"):
+                fn(fifo)
+
+    def test_o_nofollow_refuses_symlink_to_regular_file(self):  # C11-03: pins the O_NOFOLLOW flag itself
+        target = self.t.dir / "real.txt"
+        target.write_text("x")
+        link = self.t.dir / "link.txt"
+        link.symlink_to(target)
+        with self.assertRaisesRegex(common.LedgerError, "cannot open"):
+            common.read_regular_bytes(link)
+        self.assertEqual(common.read_regular_bytes(target), b"x")
+
+    def test_missing_o_nofollow_fails_closed(self):  # C11-05
+        import os
+        saved = os.O_NOFOLLOW
+        del os.O_NOFOLLOW
+        try:
+            with self.assertRaisesRegex(common.LedgerError, "O_NOFOLLOW"):
+                common.read_regular_bytes(self.t.dir / "frozen_inputs.json")
+        finally:
+            os.O_NOFOLLOW = saved
+
+    def test_cli_handler_catches_oserror(self):  # C11-03: OSError in the fail-closed tuple
+        from unittest import mock
+        import io as _io, contextlib
+        err = _io.StringIO()
+        with mock.patch.object(CLI, "verify", side_effect=OSError(5, "simulated I/O error")), \
+                mock.patch.object(sys, "argv", ["auth_ledger.py", "verify"]), contextlib.redirect_stderr(err):
+            self.assertEqual(CLI.main(), 2)
+        self.assertIn("OSError", err.getvalue())
+
+
+class C11VersionOneFileTypes(unittest.TestCase):
+    """C11-03: reads of a version-1 entry file and its pinned records reject special files (temporary Synthetic copy)."""
+    def setUp(self):
+        import signal
+        self._old = signal.signal(signal.SIGALRM, C11LedgerFileTypes._timeout)
+        signal.alarm(20)
+        self.t = Synthetic()
+        self.t.add_version([entry_from_draft(DHARAMVIR, 1)])
+
+    def tearDown(self):
+        import signal
+        signal.alarm(0)
+        signal.signal(signal.SIGALRM, self._old)
+        self.t.close()
+
+    def _fifo(self, rel):
+        import os
+        p = self.t.dir / rel
+        p.unlink()
+        os.mkfifo(p)
+
+    def test_fifo_entry_file_rejected(self):
+        self._fifo("ledger/v0001.csv")
+        with self.assertRaisesRegex(common.LedgerError, "version 1: entry file"):
+            reader.effective_state(self.t.dir, 1, False)
+
+    def test_fifo_decision_record_rejected(self):
+        rec = sorted((self.t.dir / "decisions").glob("D-v0001*.md"))[0]
+        self._fifo(f"decisions/{rec.name}")
+        with self.assertRaisesRegex(common.LedgerError, rec.name):
+            reader.effective_state(self.t.dir, 1, False)
