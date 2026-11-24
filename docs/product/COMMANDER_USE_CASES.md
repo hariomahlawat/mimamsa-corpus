@@ -103,15 +103,15 @@ A unit commander describes a **situation**, not a section number. This catalogue
 | UC-18 | “Can an accused obtain copies of documents?” | Stage, documents, applicable right and restrictions |
 | UC-19 | “A soldier wants to withdraw a complaint.” | Complaint type, stage, applicable law |
 | UC-20 | “A former soldier has challenged his discharge.” | Dates, remedy, forum, applicable regulations |
-| UC-21 | “I have uploaded a new policy letter. Show the Rules and judgments it relates to.” | Publication date, issuer, source type, citations, source trust |
+| UC-21 | “I am the Admin. I uploaded a new policy letter. Show its links before I publish it.” | Source eligibility, issuer/date, extraction quality, citation candidates, publication gate |
 | UC-22 | “Does this new SOP replace an older SOP or contradict a Rule?” | Version authority, supersession evidence, temporal validity, competing interpretations |
-| UC-23 | “We have scanned standing instructions. Add them to the searchable library.” | OCR quality, file safety, common access eligibility, provisional linking |
+| UC-23 | “I am the Admin. Add these scanned standing instructions to the searchable library.” | Admin authority, OCR quality, file safety, shared eligibility, review and publication |
 
 All cases are **research seeds**, not answers. Expand from corpus-derived recurring issues only after provenance and relevance checks.
 
-### UC-21 to UC-23: User-uploaded policy/SOP material
+### UC-21 to UC-23: Admin-controlled policy/SOP ingestion
 
-An admitted app user may intentionally upload a policy, SOP, instruction, circular, scanned note or other eligible reference file. The app must explicitly explain that accepted uploads become visible to **every** app user. It automatically preserves the original, checks basic file safety and deployment-wide eligibility, extracts text/OCR, identifies document dates/issuer/version, and suggests connections to Acts, Rules, other policies and judgments. Search and graph discovery should become available after processing with `USER_UPLOADED_UNVERIFIED` status. An asserted `supersedes`, `mandatory procedure`, `legal exception` or `operative rule` is only a **candidate**, not an authoritative fact, until substantiated by source and applicable legal review. A restricted document not suitable for sharing with all admitted app users is not imported into the common corpus.
+Only **Admin** can upload, replace, withdraw, reprocess or publish a policy, SOP, instruction, circular, judgment, scanned note or other eligible reference. After submission, the application preserves the original, checks basic file safety and deployment-wide eligibility, extracts text/OCR, proposes dates/issuer/version and suggests connections to Acts, Rules, policies and judgments. **The content and candidate graph links remain in an Admin-only staging area until explicit Admin publication.** Published content is then searchable and readable by all app users, labelled `ADMIN_PUBLISHED_UNVERIFIED` unless evidence supports stronger status. Admin approval to publish is *not* source authentication or legal validation. Claimed `supersedes`, `mandatory procedure`, `legal exception` or `operative rule` edges remain research candidates until separately substantiated. Incompatible access-marked sources must not enter shared search. A User may search the published result but cannot trigger any mutation.
 
 ## 4. Required scenario record contract (design proposal)
 
@@ -155,7 +155,8 @@ Tests must cover:
 - facts with several valid routes, mixed proceedings or contradictory evidence;
 - false-positive offence mapping, wrong competent authority and invented signatures;
 - lack of authenticated source and conflicting historical wording;
-- questions about a real person, kept in the active session rather than inadvertently entering shared search; intentional uploads are clearly shared;
+- questions about a real person, kept in the active session rather than inadvertently entering shared search; only explicit Admin publication makes source documents shared;
+- non-Admin upload, publication, withdrawal and reprocessing attempts are denied and do not create ingestion jobs;
 - uploaded SOPs with incorrect effective dates, malicious instruction text, supersession claims or incompatible access markings;
 - metamorphic cases: alter one fact and verify only legally justified changes;
 - “not determinable from available evidence” as an expected correct answer.

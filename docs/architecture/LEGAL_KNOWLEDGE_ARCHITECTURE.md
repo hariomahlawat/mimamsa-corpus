@@ -9,8 +9,8 @@
 - Answer natural-language military-law situations through explicit facts, date, service status, stage and competent-authority conditions.
 - Represent the law as **immutable evidence plus versioned, reviewable interpretation**, not a collection of unconstrained generated answers.
 - Connect statutory provisions to individual judgments, proceedings, legal propositions and procedural lessons.
-- Preserve source and review histories, contrary evidence and source-access markings while using **one common document/feature access level** for all admitted application users.
-- Let any app user continuously upload eligible policies, SOPs and references for offline extraction, search and candidate graph integration; do not require developer-led ingestion.
+- Preserve source and review histories, contrary evidence and source-access markings while sharing **all published documents and research features** across Admin and User.
+- Let **Admin alone** continuously upload, review, publish, withdraw, replace or reprocess eligible policies, SOPs and references. The offline pipeline automatically extracts and proposes graph connections, and publishes to shared search only after Admin approval.
 - Operate entirely offline at runtime on an air-gapped LAN.
 
 ## 2. Current source-system boundaries
@@ -24,17 +24,17 @@
 | `SOURCE-LIBRARY-C5` | Frozen source/copy registers | Immutable historical baseline |
 | `AUTH-LEDGER` | Hash-chained source authentication overlay | Keep real version zero until owner approvals; source authentication only |
 | 658 KB records and 53 cases | Curated research baseline | Preserve originals, propose reviewed overlays and corrections |
-| User uploads at offline deployment | Future local policies, SOPs, instructions and reference material | New shared, versioned research sources with automatically derived candidate graph links; no automatic legal authority |
+| Admin uploads at offline deployment | Future local policies, SOPs, instructions and reference material | Staged and automatically enriched; explicitly Admin-published, shared, versioned research sources; no automatic legal authority |
 
 C10 (2026-11-24) reported 4,103 distinct source-copy hashes across stores, including 48 working-store-only copies, and 3,959 judicial source files. These are **snapshot facts**, not immutable design constants. The HF hosted bytes were not directly all verified at that time.
 
 ## 3. Logical architecture
 
 ```
-EXTERNAL APPROVED ACQUISITION          LOCAL IN-APP USER UPLOAD
+EXTERNAL APPROVED ACQUISITION          LOCAL IN-APP ADMIN UPLOAD
    [separate online process]              [fully offline]
                 |                              |
-        verified import            eligibility + safe parsing
+        verified import          Admin staging + safe parsing
                 |                              |
                 +-------------+----------------+
                               v
@@ -68,7 +68,7 @@ Use content-addressed source-copy objects keyed by SHA-256, accompanied by logic
 
 Distinct entities:
 - `SourceCopy`: a single byte-level file, exact hash and storage locations;
-- `UserUpload` / `IngestionJob`: submission provenance, deployment eligibility decision, parsing state, extracted anchors and processing history;
+- `AdminSubmission` / `IngestionJob`: submitting Admin, staging/eligibility decision, parsing state, publication approval, extracted anchors and processing history;
 - `LegalInstrument`: one Act, Rule set, regulation, order or notification as issued;
 - `InstrumentVersion` / `ProvisionVersion`: historical operative text with evidenced effective interval and chain;
 - `Judgment`: one judicial decision, regardless of the number of available PDFs;
@@ -138,21 +138,22 @@ AI can rank and discover candidate links; deterministic, reviewed rules govern t
 ## 9. Ingestion and release pipeline
 
 ```
-External acquisition (approval) or local in-app upload
--> application-wide source eligibility + safe file handling
+External approved acquisition or **Admin-only** in-app upload
+-> authenticate Admin for mutations, stage privately, check common-corpus eligibility + file safety
 -> preserve exact bytes + provenance + hash
 -> extract text/OCR with page anchors; quality and document identity
--> index as provisional research material, searchable by every admitted user
--> classify, analyse references, generate candidate graph relationships
--> source/proposition/legal review where authority is asserted
--> controlled offline release for vetted external updates, or local versioned update for user uploads
+-> classify, analyse references, generate provisional graph relationships in staging
+-> **Admin reviews processing and explicitly publishes or rejects**
+-> published source, metadata, passages and candidate edges become searchable by all
+-> separate source/proposition/legal review if authority is asserted
+-> controlled offline release for vetted external updates, or versioned local update for Admin-published sources
 ```
 
 Original sources, historical records and prior review decisions are immutable. Corrections are append-only overlays or explicitly versioned replacements under the established authorisation rules.
 
-A release contains a reproducible manifest, source-checksums, schema/rule versions, authentication state, evidence and review records, search indexes and model dependencies needed offline. Locally uploaded sources are separately manifested and recoverable, without mutating signed baseline releases. Test network-denied execution, deterministic rebuild, rollback and recovery before declaring a release ready.
+A release contains a reproducible manifest, source-checksums, schema/rule versions, authentication state, evidence and review records, search indexes and model dependencies needed offline. Locally Admin-submitted sources, including pending and withdrawn items, are separately manifested and recoverable, without mutating signed baseline releases. Test network-denied execution, deterministic rebuild, rollback and recovery before declaring a release ready.
 
-**In-app document ingestion is a first-phase capability requirement**, not a post-hardening enhancement. See [Continuous document ingestion](CONTINUOUS_DOCUMENT_INGESTION.md).
+**Admin-only in-app document ingestion and publication control are first-phase capability requirements**, not post-hardening enhancements. See [Continuous document ingestion](CONTINUOUS_DOCUMENT_INGESTION.md).
 
 ## 10. Search and user presentation
 
@@ -168,18 +169,18 @@ For each judgment recommendation display **why relevant** (matched provision, ex
 
 Preserve complete, lawfully published judicial records, including printed names, ranks, service or medical details, subject to specific binding publication restrictions and access controls.
 
-The app has **no role-based tiers or per-user document permissions**: all admitted users see the entire accepted corpus and have the same features. Source eligibility must therefore be checked **before** shared indexing; do not import material unsuitable for universal access by this installation, including source-derived snippets/embeddings. Preserve access markings as provenance, not as per-user filters.
+The initial app has exactly **two functional roles: Admin and User**. Both can access every **published** document and all search/graph/advisory functionality. Only Admin can upload, review staged documents, publish, replace, withdraw or reprocess source documents; these mutation endpoints require Admin checks. No rank/JAG tiers, per-document user restrictions or advanced role matrix. Pending sources are in Admin-only staging and invisible to shared search; publication is allowed only if the source can be shared with everyone in this deployment. Preserve access markings as provenance and check eligibility before publishing any text, snippets, embeddings or graph-derived output.
 
-Ordinary incident questions are session data, not automatic corpus contributions. Deliberately uploaded documents become shared content, with an upfront user notice. Use ordinary session isolation, local storage protection and reasonable deletion/retention defaults; do not build elaborate role-based case workspaces into the initial release.
+Ordinary incident questions are session data, not automatic corpus contributions. Only deliberate **Admin publication** makes source documents shared; staged/failed/rejected/withdrawn material does not appear in ordinary shared research. Admin publication is not a legal-validity approval. Use ordinary session isolation, local storage protection and reasonable deletion/retention defaults; do not build elaborate role-based case workspaces into the initial release.
 
-**Minimum security at launch:** offline network boundary, basic authentication or equivalent LAN access control, file size/type limits, malware and malformed-file screening appropriate to the environment, isolated/least-privilege PDF/OCR/parser workers, untrusted-document prompt-injection isolation, file integrity hashes, backups and audit logging. Advanced hardening, granular data segregation and specialised controls may follow after the core capabilities are demonstrated.
+**Minimum security at launch:** offline network boundary, basic Admin/User authentication and server-side Admin-only checks for corpus writes, file size/type limits, malware and malformed-file screening appropriate to the environment, isolated/least-privilege PDF/OCR/parser workers, untrusted-document prompt-injection isolation, file integrity hashes, backups and audit logging. Advanced hardening, granular data segregation and specialised controls may follow after the core capabilities are demonstrated.
 
 ## 12. Implementation sequence and quality gates
 
 1. Preserve the 48 vulnerable copies, reconcile HF byte integrity, close source gaps.
 2. Canonicalise document/judgment/proceeding identities and version relationships.
-3. Provide full-corpus offline search against original copies, clearly labelled where unreviewed, plus user-facing upload and automatic provisional indexing of eligible policies/SOPs.
-4. Build provision-to-judgment and uploaded-document-to-law **candidate** links and independent evaluation datasets.
+3. Provide full-corpus offline search against original copies, clearly labelled where unreviewed, plus **Admin-only upload, staged enrichment and publication** of eligible policies/SOPs.
+4. Build provision-to-judgment and Admin-published-document-to-law **candidate** links and independent evaluation datasets.
 5. Develop proposition-level passports, actual outcome extraction and treatment edges with measured precision.
 6. Add material-fact scenario knowledge and verified procedural checks.
 7. Pilot date-aware, evidence-grounded commander guidance with adversarial test cases.

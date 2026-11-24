@@ -12,11 +12,11 @@ A commander asks “My sepoy was found drunk on duty; what should I do?” rathe
 
 ## 2. Inputs and outputs
 
-**Inputs:** natural-language question, optional incident context, date, location/jurisdiction, service category, rank, document/stage, explicit facts and unknowns. All admitted app users share the same features and legal corpus; there is no user-role decision input.
+**Inputs:** natural-language question, optional incident context, date, location/jurisdiction, service category, rank, document/stage, explicit facts and unknowns. All admitted app users share the same **published** legal corpus and research/advisory capabilities. Document management is separately restricted to Admin; the incident-response engine does not use rank or user role to hide research.
 
 **Outputs:** structured incident interpretation; immediate safety/welfare considerations where necessary; facts established versus alleged; governing candidate provision versions and why they might apply; material follow-ups; lawful procedural paths with prerequisites and competent authority; evidence/safeguard checklist; relevant judgments and proposition-level treatment; limitations and escalation; source links and review quality for each assertion.
 
-**Query separation:** ordinary unit-incident question text remains in a session, never in the shared corpus by default. Intentional document uploads are explicitly shared with all app users. No per-user document permissions or role-specific workspaces are part of the initial product.
+**Query separation:** ordinary unit-incident questions remain in a session, not the shared corpus. Only an Admin may intentionally submit documents; staged documents are Admin-only, and only explicitly Admin-published documents become readable by all app users. No per-document viewing restrictions or role-specific legal-research tiers.
 
 ## 3. Processing flow
 
@@ -24,7 +24,7 @@ A commander asks “My sepoy was found drunk on duty; what should I do?” rathe
 2. **Safety and welfare triage:** if ongoing armed-duty, custody, medical or immediate-harm concern exists, prioritise appropriate provisional risk reduction without declaring an offence proven.
 3. **Recognise scenario family and stage:** candidate offences, family/service issue, complaint, trial document, grievance etc. Distinguish user reporting an allegation from a court-established fact.
 4. **Identify material facts:** select the few questions that could actually change the applicable authority, jurisdiction, legal version, competent person or procedural safeguard. Use `UNKNOWN` explicitly.
-5. **Retrieve law for relevant time:** original statute/Rule/Regulation and commencement/amendment chain, with source authority and historical validity evidence. Search user-uploaded policies and SOPs as clearly labelled supplemental sources, never as automatically binding law.
+5. **Retrieve law for relevant time:** original statute/Rule/Regulation and commencement/amendment chain, with source authority and historical validity evidence. Search **Admin-published** policies and SOPs as clearly labelled supplemental sources, never as automatically binding law. Staged or withdrawn documents are excluded.
 6. **Evaluate applicability:** only predicates supported by the relevant sources and the required legal-review status may determine mandatory steps or bar an option. AI or an uploaded SOP may propose candidates but cannot independently certify a legal route.
 7. **Retrieve precedent:** search all legally accessible original judgments, passage-level matches, reviewed propositions, later treatment and adverse authorities. Keep candidate relationships labelled.
 8. **Build response:** short commander-first steps, facts/limitations, conditional options, checklist and expandable JAG source view.
@@ -116,7 +116,7 @@ Create positive, negative and metamorphic tests:
 - test unknown facts and “cannot establish from verified corpus” as a correct outcome;
 - verify all mandatory checklist items have actual source and approval records;
 - test entirely disconnected operation, no per-user document/feature tiers and session separation for ordinary incident facts;
-- test that any admitted user can upload and inspect the same policy/SOP and candidate graph links;
+- test that **User cannot upload, publish, replace, withdraw or reprocess** through any API or UI path, while Admin can stage, review and publish; after publication both roles can inspect the same SOP and candidate links;
 - test unverified-upload prompt injection, forged supersession and mandatory-checklist claims are not promoted into authoritative guidance.
 
 Score separately: intent understanding, fact-question recall, law/version precision, procedural-route correctness, false mandatory-step rate, source-pinpoint accuracy, adverse authority recall, safety-escalation accuracy and **abstention accuracy**.
@@ -125,8 +125,8 @@ Independent legal advisers must validate the benchmark's high-consequence answer
 
 ## 9. Implementation constraints
 
-- Ordinary user questions cannot directly mutate legal claims or authenticated statuses; **intentional in-app uploads** may add shared, unverified source documents, indexes and candidate graph edges.
-- All users of the admitted deployment have equal document and feature access. Source eligibility is determined for the whole installation before upload content is shared, not by per-user or role filters.
+- Ordinary user questions cannot mutate legal claims, graph publication or authenticated statuses. Only Admin-initiated uploads, approvals, withdrawals or reprocessing may modify the shared source inventory; their published contents and candidate edges remain labelled unverified unless independently established.
+- Admin and User have equal access to **published** documents and legal research/advisory features; only Admin can manage source uploads and the publication lifecycle. Eligibility applies to the whole installation before publication, not per rank or per document viewer.
 - The offline inference model is replaceable; stored legal identities, rules and evidence do not depend on a single model.
 - A language model may draft explanation and propose candidate links. Only predicates with the necessary legal-source evidence and explicit validation level can authorise the display of definitive procedural obligations.
 - If a critical part of the law or its amendment history is unverified, explicitly surface the blocker and give a research/escalation route.
@@ -136,7 +136,7 @@ Independent legal advisers must validate the benchmark's high-consequence answer
 ## 10. Pilot milestones (future implementation)
 
 **P0:** paper scenario contracts and legal review, no product code.  
-**P1:** full user-facing upload and provisional source indexing, candidate graph linking and an evidence-linked prototype for 10–15 high-value scenarios.  
+**P1:** Admin-only upload/staging, automated provisional indexing and candidate graph linking, Admin publication, and an evidence-linked prototype for 10–15 high-value scenarios.  
 **P2:** independent legal-data tests against actual sources and controlled incident simulations.  
 **P3:** broaden scenario catalogue, add full-corpus retrieval and relation graph.  
 **P4:** controlled offline release after approvals, with source and response replayability.

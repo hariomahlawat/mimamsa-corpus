@@ -16,7 +16,7 @@ The product must run on an air-gapped LAN. Source integrity, applicable legal ve
 1. **Make all legally accessible retained judgment sources searchable**, even when their metadata, summary or legal conclusions are unreviewed. Clearly label status and restrictions.
 2. **Build a connected statute–judgment–proposition knowledge graph** with versioned statutory provisions, judgment/proceeding identities, source-anchored relationships and subsequent treatment.
 3. **Support plain-English, situation-first commander queries** with material-fact questions and stage-aware, evidence-linked ways forward, checklists, lessons and source access.
-3a. **Allow every admitted app user to upload eligible new policies, SOPs and reference material**, with automatic offline extraction, provisional indexing and suggested graph connections; all accepted documents and features are shared with all app users.
+3a. **Allow only Admin to upload, replace, withdraw, reprocess and publish new policies, SOPs and reference material**, with automatic offline extraction, staged provisional indexing and suggested graph connections. All **published** documents and research/advisory features are accessible to every app user.
 4. **Separate source search, candidate research enrichment and approved legal propositions/procedures**; never silently promote one level to another.
 5. **Preserve complete lawfully published judicial originals** without masking names, ranks, service or medical details solely due to their presence in court documents, subject to binding restrictions and access controls.
 6. **Keep ordinary real-incident query text separate** from the shared legal corpus; intentionally uploaded source material is explicitly shared with every app user.
@@ -25,7 +25,7 @@ The product must run on an air-gapped LAN. Source integrity, applicable legal ve
 
 ## Proposed implementation, not yet adopted
 
-A content-addressed evidence vault, canonical entity/relationship tables (PostgreSQL initially proposed), optional local semantic retrieval, deterministic dated applicability engine, model-assisted language understanding and answer explanation, and controlled source/review overlays. Engine selection, schemas, deployment admission controls and specific pilot routes require separate design review. No role-based user access tiers are proposed.
+A content-addressed evidence vault, canonical entity/relationship tables (PostgreSQL initially proposed), optional local semantic retrieval, deterministic dated applicability engine, model-assisted language understanding and answer explanation, and controlled source/review overlays. Engine selection, schemas, deployment admission controls and specific pilot routes require separate design review. Only a minimal Admin/User split for source mutation is proposed; no rank/JAG research tiers.
 
 ## Alternatives considered
 
@@ -46,11 +46,11 @@ A content-addressed evidence vault, canonical entity/relationship tables (Postgr
 - Evaluation must include independent, adversarial legal-data tests and temporal variants, not merely passing software tests.
 - Source preservation takes precedence over enriching endangered or unavailable files.
 - In-app uploads must retain original bytes and provenance; automatic links, supersession and legal claims remain candidates until evidenced and reviewed.
-- All accepted documents are shared equally with all app users; eligibility checks happen before shared ingestion. Standard offline cyber security is baseline, with more advanced hardening deferred.
+- All **Admin-published** documents are shared equally with all app users; eligibility checks precede publication. Pending uploads remain staged for Admin; Admin publication does not itself establish legal validity. Standard offline cybersecurity is baseline, with more advanced hardening deferred.
 
 ## Not decided
 
-**Clarifying decision:** [ADR-0002](ADR-0002-SHARED_ACCESS_AND_CONTINUOUS_INGESTION.md) fixes the shared-access and continuous-upload requirements, without authorising application code or source promotions.
+**Clarifying decision:** [ADR-0002](ADR-0002-SHARED_ACCESS_AND_CONTINUOUS_INGESTION.md) fixes the minimal Admin/User access model and Admin-controlled ingestion/publication requirements, without authorising application code or source promotions.
 
 No PR merge, data migration, PostgreSQL schema, graph engine, model selection, HF upload, real ledger entry, source acquisition, operational advice template or legal conclusion is authorised by this ADR. Future changes need explicit scope, evidence and review. Formal legal/JAG validation remains required where applicable.
 

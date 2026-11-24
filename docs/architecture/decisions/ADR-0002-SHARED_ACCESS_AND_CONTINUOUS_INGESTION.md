@@ -1,45 +1,54 @@
-# ADR-0002: Shared application access and continuous in-app document ingestion
+# ADR-0002: Shared legal research access and Admin-controlled ingestion
 
 - **Date:** 2026-11-24
-- **Decision state:** **Owner-confirmed product policy.** Implementation specifics remain proposed.
-- **Scope:** Access model, capability sequencing and source-ingestion architecture. Not a legal validation decision, application-build authorisation or corpus transfer approval.
+- **Decision state:** **Owner-confirmed, refined after review.** Implementation details remain proposed.
+- **Scope:** Minimal functional roles, knowledge-base mutation authority, continuous Admin ingestion and publication. Not a legal validation, application-build or data-transfer authorisation.
 - **Related:** [Product vision](../../product/PRODUCT_VISION.md), [Ingestion specification](../CONTINUOUS_DOCUMENT_INGESTION.md), [ADR-0001](ADR-0001-SCENARIO_DRIVEN_EVIDENCE_GROUNDED_PRODUCT.md).
 
 ## Context
 
-Mimamsa must prioritise actual useful capabilities: search of the retained judgment collection, connected legal references, plain-English commander questions and continuous addition of new policies/SOPs. A role-based access matrix and elaborate hardening before capabilities exist would introduce complexity without directly improving legal usefulness.
+Mimamsa's primary value is search of the retained judgment collection, provision/judgment links, plain-English commander guidance and a continuously improving local repository of policies and SOPs. The initial product should avoid complex user-role matrices. However, allowing every user to alter a common legal source library risks accidental publication of incorrect, obsolete, duplicated or ineligible material.
 
-However, a shared knowledge graph can be contaminated by unverified uploads, and a document may have access markings incompatible with all possible users. Essential upload safety and provenance therefore remain necessary.
+The owner therefore retains **unrestricted shared research access** while limiting **changes to the common legal library** to the Admin. This supersedes ADR-0002's earlier draft proposal allowing any user to upload; the PR is not merged and historical source/corpus states are unchanged.
 
 ## Decisions
 
-1. **No RBAC.** Once a person has access to the offline Mimamsa installation, they can use **every feature** and access **every admitted document**. There are no privileged feature tiers, per-user document lists, private libraries or JAG-only research screens. Views may differ by user preference, not permissions.
-2. **Deployment-wide source eligibility.** Only documents that may be shared with the installation's entire admitted audience can enter the common vault, search index, embeddings and graph. Source markings are recorded and checked at import; if incompatible, reject from the shared corpus instead of hiding from selected users.
-3. **Continuous upload by any user.** Users can add eligible policies, SOPs, orders, instructions, manuals and reference material in the application, without requiring a developer, crawler operator or internet connection.
-4. **Automatic enrichment.** Preserve exact bytes, extract/OCR, classify, identify issuers/versions/dates, generate searchable passages, analyse references, suggest conflicts, and build candidate edges to statutes, Rules, cases, policies and scenarios. Make accepted content discoverable with unverified status.
-5. **No automatic legal promotion.** A user upload does not become binding law, supersede existing documents, alter the AUTH-LEDGER or create mandatory checklist items simply by being uploaded. Legal reliability is a separate evidence/review matter, not a user permission.
-6. **Capability-first development.** Prioritise usable upload, search, graph and advisory functions. Preserve basic local cyber hygiene, admission controls, safe file parsing, integrity, backup, untrusted-text isolation and audit records from the first release; deeper hardening may follow.
-7. **Query-versus-upload separation.** Conversational incident facts remain outside the shared corpus unless explicitly submitted as a document. The user is informed that an intentional accepted upload is shared with everyone on the installation.
+1. **Exactly two functional roles: Admin and User.** Both can search, read, compare and analyse every **published** source and use every published graph, checklist and advisory/research feature. There are no JAG-only or rank-based research features, and no per-user/per-document viewing restrictions.
+2. **Only Admin may change the source collection.** Upload, replace (as a version), withdraw/unpublish, publish, and manually initiate ingestion or reprocessing are Admin-only actions. Restrict them server-side, not merely by hiding controls in the interface.
+3. **Automatic enrichment following Admin upload.** Preserve the source bytes and hash; validate format and common-audience eligibility; OCR/extract and classify; suggest statute, Rule, judgment and policy connections; and stage candidate graph edges.
+4. **Explicit Admin publication gate.** Submitted files and derived search snippets, embeddings and candidate edges remain out of the ordinary user-facing corpus until the Admin reviews source eligibility, identity/metadata and extraction warnings and explicitly publishes. Admin can inspect staging and reject or retry processing.
+5. **Published documents shared to all.** After Admin publication, the source and its clearly labelled research outputs appear in the same index and graph for Admin and User. The absence of rank-based restrictions is retained.
+6. **Publication is not legal approval.** Admin's publication action only approves distribution within the app. It does **not** authenticate a purported order, establish legal force, prove commencement or supersession, approve legal propositions, change existing binding provisions, or activate AUTH-LEDGER entries.
+7. **Deployment-wide eligibility.** If a document's marking or restrictions make it unsuitable for the whole admitted audience, do not publish it; preserve applicable provenance. Such material cannot leak via ordinary-user snippets, embeddings, graphs or generated answers.
+8. **Capability first, minimum cyber hygiene from day one.** Implement usable Admin ingestion, automation, publication and full-corpus search ahead of elaborate hardening. Retain simple user admission/authentication, server-side mutation checks, safe file handling and parser isolation, integrity, audit history, backups and offline network boundary.
+9. **Session-versus-source distinction.** Normal legal questions and user incident facts do not silently enter the common knowledge base. Only Admin can intentionally submit a document for publication.
 
-## Consequences
+## Functional access matrix
 
-- Simpler UX and operations with one shared legal corpus.
-- No RBAC or feature-permission matrix in initial schemas.
-- No promise of private user document stores; eligible uploaded data is shared across the deployment.
-- Source-eligibility decisions must occur **before** indexing or derived-content publication.
-- Research ingestion can be rapid and automated; authoritative legal recommendations remain evidence-dependent.
-- Maintain stable IDs, version relationships and source hashes so later reviews cannot silently rewrite original materials.
-- The offline deployment's perimeter controls and file-processing isolation are necessary even without fine-grained permissions.
+| Operation | Admin | User |
+| --- | --- | --- |
+| Search/open all published judgments, policies, SOPs and legal sources | Yes | Yes |
+| Ask legal questions, examine graphs, summaries, lessons and checklists | Yes | Yes |
+| Upload a new source for ingestion | Yes | No |
+| Inspect staged, rejected or failed source-ingestion jobs | Yes | No |
+| Retry or manually reprocess a source | Yes | No |
+| Publish a staged source to the shared collection | Yes | No |
+| Replace by uploading a new version | Yes | No |
+| Withdraw/unpublish source material | Yes | No |
+| Grant legal authentication/validation by publication alone | No | No |
 
-## Alternatives declined
+A withdrawn source should remain available in the Admin audit trail and preserved source vault as required; it must not remain visible to ordinary users via shared indexes or cached answer material. Publishing a changed copy does not overwrite old source bytes or their hashes.
 
-- Per-document role restrictions or JAG-only features.
-- Mandatory human approval **before research indexing** of each eligible upload.
-- Treat all uploaded material as equally authoritative.
-- Delay in-app upload and graph enrichment until an extensive hardening project is complete.
+## Alternatives rejected
+
+- General-user uploads into the shared legal corpus.
+- Granular rank/JAG-based permissions or per-document user viewing rules.
+- Treating publication as automatic legal authentication or validity.
+- Hand-authoring all graph relationships and search indexes for each upload.
+- Delaying basic capabilities until an elaborate security hardening programme completes.
 
 ## Not decided
 
-File-format support beyond an initial safe subset, user admission/authentication implementation, document-size/storage limits, advanced security controls, technical stack, review/signature authority, and whether other isolated deployments with different source eligibility will be supported.
+Exact authentication mechanism, backup retention, storage limits, approval workflow for legal validation, whether publication itself requires dual control, future advanced security, and additional specialised deployments. They require separate design decisions.
 
-No application code, external restricted-source acquisition, Hugging Face upload, protected record change or real authentication-ledger promotion is authorised by this ADR.
+No application implementation, outside-source acquisition, Hugging Face write, original corpus alteration, real ledger activation or PR merge is authorised by this ADR.

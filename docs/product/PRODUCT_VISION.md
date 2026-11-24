@@ -16,16 +16,16 @@ Mimamsa is intended to become a **fully offline Indian military-law research and
 | --- | --- | --- |
 | Unit commander | “A sepoy is drunk on duty; what now?” | Immediate safety considerations, material fact questions, lawful procedural routes, safeguards and source links |
 | Adjutant/staff officer | “The accused refuses a signature; does the case stop?” | Identify the document and stage; clarify requirements and evidence, avoid invented procedure |
-| JCO/NCO | “Which rules are relevant to this situation?” | Same documents and features as every other admitted app user, with plain-language presentation |
+| JCO/NCO | “Which rules are relevant to this situation?” | Same published documents and research features as every other admitted app user, with plain-language presentation |
 | JAG/legal practitioner | “Which precedents govern this disputed interpretation as of a date?” | Full source passages, contrary treatment, amendment history and unresolved questions |
 | Researcher/content reviewer | “Which assertion needs more proof?” | Reproducible evidence chain, status history, correction and review queue |
-| Any app user | “Upload a new SOP or policy and connect it to our legal material.” | Upload, extract, analyse, search and inspect candidate links in the common corpus |
+| Admin | “Upload a new SOP, verify its processing and publish it for everyone.” | Upload and stage, review source eligibility and extraction, publish or withdraw, reprocess and inspect candidate graph links |
 
 ## 3. Approved direction: capability requirements
 
 Identifiers are stable requirement references, **not** statements that a feature exists.
 
-- **PR-01 Full shared corpus access.** Every user admitted to the deployment may access the entire admitted corpus and every app feature, including unreviewed original judgments. No RBAC or per-document user permissions. Source access markings must be retained and material inappropriate for the whole deployment audience excluded or kept outside the shared corpus.
+- **PR-01 Full published research access.** Admin and User can equally search and access every **published** document and research/advisory feature, including unreviewed original judgments labelled as such. Admin alone can modify the corpus through upload, publication, withdrawal, replacement and reprocessing. No per-document viewing restrictions or further rank/JAG role tiers. Source access markings and deployment-wide eligibility remain mandatory.
 - **PR-02 Statute-first exploration.** A user opening an Act, Rule or regulation can discover historical versions, related judgments, legal propositions, open conflicts and associated procedure/checklist research.
 - **PR-03 Plain-English scenarios.** Understand informal language, misspellings and commonly used military vocabulary. Do not require an Act or section number in the prompt.
 - **PR-04 Material-fact dialogue.** Identify questions that can change the applicable provision, legal route, urgency or competent authority. Ask a small number in priority order; handle unknown answers.
@@ -37,14 +37,14 @@ Identifiers are stable requirement references, **not** statements that a feature
 - **PR-10 Temporal applicability.** Resolve the law applicable to the incident date where evidence permits, not merely the newest consolidated text. Explicitly expose incomplete commencement or amendment evidence.
 - **PR-11 Explain uncertainty.** Return “not established from verified sources” when required; highlight contrary precedent, unresolved fact, source conflict or stale legal evidence rather than producing a confident answer.
 - **PR-12 Entirely offline deployment.** All runtime retrieval, upload ingestion, graph processing, rule evaluation, model inference and source opening operate on an air-gapped LAN. Approved external acquisitions arrive only through controlled offline transfer; uploading local user documents requires no internet.
-- **PR-13 Separate queries from intentional uploads.** Ordinary question/incident text stays in the session and is not silently published into the shared corpus or model training material. A deliberate document upload is clearly disclosed as **shared with all app users** after ingestion; do not provide a misleading private-upload option in the single-access design.
+- **PR-13 Separate queries from Admin document ingestion.** Ordinary question/incident text stays in the session and is not silently published to shared search or model training. Only Admin can submit a source for ingestion. A document becomes available to all app users only after Admin publication; this is not a private-document workspace.
 - **PR-14 Provenance and reversibility.** Preserve originals and all correction/review events. Never silently overwrite or backdate a legal assertion.
-- **PR-15 Different views, equal access.** Commander-friendly concise guidance and detailed legal-research views use the same source collection. Any admitted user can open either view.
-- **PR-16 In-app continuous upload.** Any app user can add eligible policies, SOPs, instructions, circulars, manuals and supporting reference files over time; no developer or separate crawler invocation is required.
-- **PR-17 Automatic ingestion and integration.** Preserve the uploaded file, extract/OCR its contents, identify document type and version, detect relevant provisions and cross-references, and construct searchable candidate knowledge-graph edges and related-document suggestions.
-- **PR-18 Source-trust separation.** A new user upload is visible and searchable as a user-provided, unverified research source once accepted and processed, but cannot automatically change the operative law, verified propositions, statutory history or mandatory checklist obligations.
-- **PR-19 One common access domain.** No user roles, feature tiers or per-user document permissions in the initial product. Import eligibility is deployment-wide: if a source cannot lawfully be shown to all users with app access, do not ingest it into the shared index.
-- **PR-20 Capability-first, basic cyber hygiene.** Prioritise dependable search, upload, parsing, legal connections and scenario usefulness; retain basic authentication/perimeter controls, safe file handling, local backups, integrity checks and network isolation from the first release. Advanced hardening may follow demonstrated capability.
+- **PR-15 Different research views, equal access.** Commander-friendly and detailed legal-research views use the same published sources. Either role can open both views; only document-management operations differ.
+- **PR-16 Admin-only continuous upload.** Only Admin may submit, replace, withdraw or publish eligible policies, SOPs, instructions, judgments, circulars, manuals and other reference files over time. No developer or separate crawler invocation is required.
+- **PR-17 Automated ingestion with publication gate.** On Admin upload, preserve the source, perform safety and eligibility checks, extract/OCR, identify document type/version and generate candidate provision, case and policy links. Keep the submission staged until the Admin reviews and publishes it. Shared search and graph results are updated after publication.
+- **PR-18 Source-trust separation.** A newly **Admin-published** source becomes visible and searchable to all as an unverified research source, distinct from source authenticity and legal validation. Admin publication cannot automatically change operative law, verified propositions, statutory history or mandatory checklist obligations.
+- **PR-19 Minimal two-role model.** The only initial roles are **Admin** (document-management authority plus all research features) and **User** (all published research and advisory features, no corpus writes). No per-user document viewing restrictions. If a source cannot lawfully be shown to all users, do not publish it into the shared index.
+- **PR-20 Capability-first, basic cyber hygiene.** Prioritise search, Admin upload/publication, parsing, graph and commander capability. At launch enforce a basic Admin/User authentication boundary on all corpus mutation paths, offline perimeter controls, safe file handling, backups, integrity and isolated parsing. Advanced hardening may follow demonstrated capability.
 
 ## 4. Intended user journey
 
@@ -79,7 +79,7 @@ The C10 audit reported approximately 3,959 judgment files, 4,259 judgment metada
 - **Commander guidance:** Situation-first guided research with conditional, stage-aware checklists.
 - **Learning/lessons:** Browse evidenced procedural issues, observed failure modes and related cases.
 - **Legal review workspace:** Escalation queues, correction proposals, provenance and review decisions.
-- **Add documents:** Any app user uploads a policy/SOP/other eligible file, sees processing status, and opens its extracted text, candidate relationships and linked graph.
+- **Admin document management:** Only Admin uploads, reviews processing, publishes, withdraws, replaces or reprocesses sources. All published documents and candidate relationships remain searchable and inspectable by every user.
 
 The conversational assistant is an interface to this evidence system; it is not the system of record.
 
@@ -87,7 +87,7 @@ The conversational assistant is an interface to this evidence system; it is not 
 
 No autonomous allegation assessment, legal adjudication, sanction recommendation, punishment selection, fabrication of forms, automatic case filing or substitution for statutory competence. Never silently convert uncertain source text or an uploaded policy into current law, or use an old manual alone as current authority. No data leakage to external inference or telemetry.
 
-Access is flat: all admitted users share all features and admitted documents. Do not design role hierarchies or private document folders. Apply a single deployment-level source-eligibility boundary; a document whose restrictions are incompatible with universal app-user access must not be exposed through shared search, snippets or generated answers. Standard cyber hygiene and untrusted-upload isolation remain essential.
+Access is simple, not fully flat: **Admin** alone controls source ingestion and publication; **Admin and User** share unrestricted access to all published documents and research/advisory functions. Do not design deeper role hierarchies, rank/JAG feature tiers or private user document folders. Pending uploads remain outside shared search until publication. Apply deployment-wide eligibility; a document incompatible with universal app-user access must not appear in published results, snippets, embeddings or generated answers. Standard cyber hygiene and untrusted-upload isolation remain essential.
 
 Lawfully published judicial originals are preserved faithfully, without masking personal, service or medical details merely because they appear in a judgment. Specific binding publication restrictions and appropriate access controls remain applicable.
 
@@ -104,9 +104,10 @@ Measure separately:
 - scenario route correctness, required fact-question recall and safe escalation;
 - percent of displayed mandatory checklist items supported by validated sources;
 - completeness/integrity of offline release and lack of network dependency.
-- user-upload processing success, deterministic provenance, OCR/extraction quality and time to inclusion in shared search;
+- Admin-upload processing success, eligibility review and publication turnaround, deterministic provenance, OCR/extraction quality and time to inclusion in shared search;
 - measured relevance and false-positive rates for automatically suggested upload-to-law/judgment graph links;
-- demonstrated non-promotion of unreviewed uploads into mandatory legal guidance;
+- proof that non-Admin users cannot upload, publish, withdraw, replace or reprocess source documents;
+- demonstrated non-promotion of Admin-published but legally unverified documents into mandatory guidance;
 - baseline security checks for file safety, integrity, backups and isolated parsing.
 
 **Do not use a single synthetic “legally accurate” percentage.**
