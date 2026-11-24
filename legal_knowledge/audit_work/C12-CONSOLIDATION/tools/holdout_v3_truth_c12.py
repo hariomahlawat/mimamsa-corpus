@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
-"""C12: final V3 holdout ground truth = coder rows where both blind coders fully agree (coder A's rows, identical labels),
-adjudicated rows (blind third coder) for the 14 DISAGREE judgments.  python -I -B holdout_v3_truth_c12.py [--check]"""
+"""C12: final V3 holdout ground truth = coder A's rows for judgments where the two independently blind coders agree on
+labels, row count AND proceeding-level (case number, printed, substantive) multisets (strict agreement, review F02/F03),
+and adjudicated rows for every DISAGREE judgment. The adjudicator was a third coder independent of both coders and of
+the extractor, but NOT blind to the competing codings: the original 14 adjudications saw them labelled A/B; the two added
+after review F02 (V3H015, V3H017) saw them anonymised as X/Y (review F04).  python -I -B holdout_v3_truth_c12.py [--check]"""
 import csv, io, sys
 from collections import defaultdict
 from pathlib import Path

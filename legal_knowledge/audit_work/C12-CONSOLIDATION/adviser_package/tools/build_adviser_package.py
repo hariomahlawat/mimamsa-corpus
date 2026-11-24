@@ -18,6 +18,8 @@ from collections import Counter, OrderedDict
 from pathlib import Path
 
 PKG = Path(__file__).resolve().parent.parent
+OUT = PKG  # output directory; --check builds into a temporary directory instead (review C12-tools F01)
+INPUT_REV = 'b4948b0f'  # pinned worktree revision whose input files the package was built from
 AW = PKG.parent.parent                      # .../legal_knowledge/audit_work
 C12W = AW.parent.parent                     # scratchpad/c12w (git worktree)
 SCRATCH = C12W.parent
@@ -821,7 +823,7 @@ def vtag(e):
 
 
 def write_csv():
-    p = PKG / 'ADVISER_QUESTIONS.csv'
+    p = OUT / 'ADVISER_QUESTIONS.csv'
     with open(p, 'w', newline='', encoding='utf-8') as f:
         w = csv.writer(f)
         w.writerow(['id', 'topic', 'question', 'sources', 'pinpoints', 'competing_readings', 'affected_records', 'missing_evidence', 'priority'])
@@ -840,7 +842,7 @@ def write_csv():
 
 
 def write_verification():
-    p = PKG / 'EXCERPT_VERIFICATION.csv'
+    p = OUT / 'EXCERPT_VERIFICATION.csv'
     with open(p, 'w', newline='', encoding='utf-8') as f:
         w = csv.writer(f)
         w.writerow(['excerpt_ref', 'doc_id_or_copy', 'stated_page', 'paragraph', 'kind', 'quote', 'verification', 'found_at', 'origin', 'note', 'used_by'])
@@ -1000,7 +1002,7 @@ def write_md():
     a('')
     a(BANNER)
     a('')
-    p = PKG / 'ADVISER_PACKAGE_C12.md'
+    p = OUT / 'ADVISER_PACKAGE_C12.md'
     p.write_text('\n'.join(L), encoding='utf-8')
     return p, cov
 
@@ -1012,11 +1014,11 @@ def write_provenance(cov_missing):
     a('')
     a(BANNER)
     a('')
-    head = git('rev-parse', 'HEAD', repo=C12W).strip()
+    head = git('rev-parse', INPUT_REV, repo=C12W).strip()
     a(f'- Built by: `tools/build_adviser_package.py` (automated agent, Claude Opus 5.5 subagent), {Path(IN["BRIEF"]).name} rules followed: no download, no commit, no source modified.')
-    a(f'- Worktree holding the C9-C11 audit inputs: `{C12W}` at HEAD `{head}`. Git state per file is given below (`committed-clean` = tracked and identical to HEAD).')
+    a(f'- Worktree holding the C9-C11 audit inputs: `{C12W}` pinned at revision `{head}`. Git state per file is given below (`committed-clean` = byte-identical to the file at that revision; the note no longer depends on the live HEAD, review C12-tools F01).')
     rels = [str(pth.relative_to(C12W)) for pth in IN.values() if str(pth).startswith(str(C12W))]
-    same = subprocess.run(['git', '-C', str(C12W), 'diff', '--quiet', '35ffaed2', 'HEAD', '--', *rels]).returncode == 0
+    same = subprocess.run(['git', '-C', str(C12W), 'diff', '--quiet', '35ffaed2', INPUT_REV, '--', *rels]).returncode == 0
     a(f'- The worktree HEAD was `35ffaed2` when this task started; worktree inputs unchanged between `35ffaed2` and `{head[:8]}`: {"yes" if same else "NO"}.')
     a(f'- Raw-data / text-layer repository: `{C7}`; text layer read at commit `{git("rev-parse", TEXT_COMMIT).strip()}` (`data/text/<doc_id>.txt`).')
     for c in C9_COMMITS:
@@ -1029,9 +1031,11 @@ def write_provenance(cov_missing):
     for k, pth in IN.items():
         try:
             rel = pth.relative_to(C12W)
-            st = git('status', '--porcelain', '--', str(rel), repo=C12W).strip()
-            tracked = git('ls-files', '--', str(rel), repo=C12W).strip()
-            state = 'untracked' if not tracked else ('modified' if st else 'committed-clean')
+            r3 = subprocess.run(['git', '-C', str(C12W), 'show', f'{INPUT_REV}:{rel}'], capture_output=True)
+            if r3.returncode != 0:
+                state = f'not in {INPUT_REV}'
+            else:
+                state = 'committed-clean' if hashlib.sha256(r3.stdout).hexdigest() == sha256(pth) else f'differs from {INPUT_REV}'
         except ValueError:
             state = 'outside worktree'
             try:
@@ -1071,12 +1075,17 @@ def write_provenance(cov_missing):
     a('- Competing readings are taken from the artefacts; where none is recorded, the package says so rather than supplying one.')
     a(f'- Statutory edges not covered by a question: {", ".join(cov_missing) if cov_missing else "none"}.')
     a('')
-    p = PKG / 'PROVENANCE_C12.md'
+    p = OUT / 'PROVENANCE_C12.md'
     p.write_text('\n'.join(L), encoding='utf-8')
     return p
 
 
 def main():
+    global OUT
+    check = '--check' in sys.argv[1:]
+    if check:
+        import tempfile
+        OUT = Path(tempfile.mkdtemp(prefix='adviser_check_'))
     if bad:
         for e in bad:
             print('EXCERPT CHECK FAILED:', e['ref'], e['doc'], e['page'], e['status'], e['where'], file=sys.stderr)
@@ -1089,7 +1098,13 @@ def main():
     write_provenance(missing)
     outs = ['ADVISER_PACKAGE_C12.md', 'ADVISER_QUESTIONS.csv', 'EXCERPT_VERIFICATION.csv', 'PROVENANCE_C12.md',
             'tools/build_adviser_package.py', 'tools/pgrep.py']
-    (PKG / 'SHA256SUMS').write_text(''.join(f'{sha256(PKG / o)}  {o}\n' for o in outs), encoding='utf-8')
+    src = lambda o: (PKG if o.startswith('tools/') else OUT) / o
+    (OUT / 'SHA256SUMS').write_text(''.join(f'{sha256(src(o))}  {o}\n' for o in outs), encoding='utf-8')
+    if check:
+        gen = ['ADVISER_PACKAGE_C12.md', 'ADVISER_QUESTIONS.csv', 'EXCERPT_VERIFICATION.csv', 'PROVENANCE_C12.md', 'SHA256SUMS']
+        diffs = [o for o in gen if (OUT / o).read_bytes() != (PKG / o).read_bytes()]
+        print('CHECK FAILED: ' + ', '.join(diffs) if diffs else 'adviser package reproduces (no tracked file written)')
+        sys.exit(1 if diffs else 0)
     print('questions:', len(Q), dict(Counter(qq['topic'] for qq in Q)))
     print('excerpts:', dict(Counter(e['status'] for e in VER)))
     print('uncovered statutory edges:', missing)

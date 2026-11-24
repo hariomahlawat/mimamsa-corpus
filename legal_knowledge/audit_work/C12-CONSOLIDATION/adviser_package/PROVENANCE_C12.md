@@ -3,7 +3,7 @@
 **PREPARED BY AUTOMATED AGENTS. TECHNICAL AND DOCUMENTARY REVIEW ONLY. NO LEGAL VALIDATION.** Nothing in this package is a legal conclusion, a status change or an approval. Every reading of a source page was made by an AI agent from a text layer and is not human-confirmed. Questions are for a qualified legal adviser (or JAG, where the controlling policy requires it).
 
 - Built by: `tools/build_adviser_package.py` (automated agent, Claude Opus 5.5 subagent), CLAUDE.md rules followed: no download, no commit, no source modified.
-- Worktree holding the C9-C11 audit inputs: `/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12w` at HEAD `b4948b0f952ceda17cf9789f521854bc6a3d9bf2`. Git state per file is given below (`committed-clean` = tracked and identical to HEAD).
+- Worktree holding the C9-C11 audit inputs: `/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c12w` pinned at revision `b4948b0f952ceda17cf9789f521854bc6a3d9bf2`. Git state per file is given below (`committed-clean` = byte-identical to the file at that revision; the note no longer depends on the live HEAD, review C12-tools F01).
 - The worktree HEAD was `35ffaed2` when this task started; worktree inputs unchanged between `35ffaed2` and `b4948b0f`: yes.
 - Raw-data / text-layer repository: `/home/user/c7`; text layer read at commit `ad77758d4569ba6aafa955cc7843d874489e10f7` (`data/text/<doc_id>.txt`).
 - C9 commit `cfc52d5792796050dcae351afda5609f7db41a5f`: C9: apply legal-deliverables review conditions (LG-05, LG-06 P2; LG-01..LG-03, LG-07..LG-09, LG-11 P3); commit narrow reviews and dispositions
