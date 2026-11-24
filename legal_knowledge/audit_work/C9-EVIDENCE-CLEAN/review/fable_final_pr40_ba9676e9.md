@@ -1,0 +1,39 @@
+# Final-head review: PR #40 `claude/c9-evidence-clean` at ba9676e93ce3a0f8622ba68397bbbc42d328be6e
+
+Reviewer model: Fable 5.2 (claude-fable-5-2)
+Date: 2026-11-23 (UTC). Review only. Nothing was committed or pushed. No sensitive token is reproduced here; tokens are named by role and reported as counts.
+
+## Verdict: ACCEPT
+
+No P1 or P2. The three unreviewed changes (`37fe6a0f`, `9a6f9366`, `ba9676e9`) are documentary, leave the reviewed evidence byte-identical, and every builder reproduces. Four P3 wording corrections are recommended; none changes the #36 / #40 recommendation and none touches a generated file. FR-01 corrects a statement that came from the earlier Fable review of `2cc82792`, so that review's CR-01 is partly wrong and is corrected here.
+
+## Findings
+
+| ID | Sev | Statement | Evidence |
+| --- | --- | --- | --- |
+| FR-01 | P3 | `TRANSFER_RECORD.md` section 4 (added in `37fe6a0f` from review CR-01) says "The PRIV-01 scan does not catch the N S Yadav number, which is not in the officer `M` form". That is false. The number is eight digits followed by `M`, and `pii_scan.py`'s pattern `\b\d{6,8} ?M\b` matches it. Three of the "36 tokens in 11 pre-existing files" are this number, so the addendum's label "PRIV-01: Mullikote officer service numbers (... 36 in 11 earlier files)" is not exact either. Under the owner's policy no action follows; the counts are unchanged. | Token isolated in memory from the removed dump at `5212a95b` (N S Yadav p.1). At `ba9676e9` it occurs once each in `AUTH-LEDGER/evidence/copy_facts.csv`, `C6-01-PROVENANCE/inputs/held_copy_facts.csv`, `PILOT-01/sources/independent-reviewer-blind.json`; the `pii_scan.py` pattern matches each occurrence, and `outputs/pii_scan_output.txt` lists those files (2, 2, 1). |
+| FR-02 | P3 | `SC-C9/ADDENDUM_LG12.md` says the three raw-store copies' "provenance is undocumented" and that they would be registered under AP-C9-02. (a) The raw manifest does record a fetch URL, retrieval time and original filename for each; the host is a third-party S3 mirror, not a court site. The accurate statement is "unofficial mirror; origin not traced to the Court; not in the C5 / AUTH-LEDGER registers". (b) AP-C9-02 as drafted in PR #41 covers "15 raw-store documents + 7 held compilations", all statutory; no judgment copy is in its scope. | `ad77758d:data/raw_manifest.csv` rows `ebb86d4b…` (`1983_1_393_444_EN.pdf`), `35b9c948…` (`1988_1_512_524_EN.pdf`), `239c4e38…` (`S_1990_1_44_75_EN.pdf`), each with `source_url` on `indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com` and `retrieved_at` 2026-11-21. PR #41 `acquisition_reconciliation.csv`: 14 AP-C9-02 rows, none under `data/raw/sci`. |
+| FR-03 | P3 | The addendum states that no court-ordered restriction, sealing or confidentiality order "has been identified" for the judgments, but records no search. The statement is supported for the held copies by my own check, and should say what it rests on. | Text-layer scan of all 11 held copies of the eight judgments (the hashes in `render_c9.py` PAGES, each located through the held manifest) for in-camera, anonymity, non-publication, non-reportable and sealed-cover wording: one hit, Navjot Sandhu p.61 "sealed cover", which describes how an exhibit was produced to a magistrate. Orders outside the judgments were not searched. |
+| FR-04 | P3 | `SC-C9/SC_C9_FINDINGS.md` section 7 still reads "Files (all in `c9out/SC/`)" and `build_c9_pack.py`'s usage names `<c9out_SC_dir>`. Review LG-11 named this path; PR #41's disposition marks LG-11 fixed, but this instance is on this branch and is neither fixed nor noted in `ADDENDUM_LG12.md`. | `SC_C9_FINDINGS.md` line 122; `tools/build_c9_pack.py` lines 3-8. |
+| FR-05 | INFO | The addendum's comparison column is for `9a6f9366` (6 commits, 136 files). With the addendum itself the head is 7 commits and 137 files. The policy is dated 24 November 2026; the commit is stamped 23 November 23:26 UTC, which is 24 November in IST. | `git rev-list --count 21e73b83..ba9676e9` = 7; `git diff --name-only` = 137. |
+| FR-06 | INFO | The PRIV-01 / PRIV-02 "Accept; no masking" entries are the coordinator's application of the owner's policy to items the record had left for an owner decision. The addendum is headed "analysis only", so the owner's merge decision is what adopts them. `TRANSFER_RECORD.md` sections 4 and 7 keep their superseded wording by design. | Addendum sections 1, 2 and 4. |
+| FR-07 | INFO | The #36 / #40 assessment is objective and not privacy-driven. It says in terms that privacy is no longer a reason to prefer #40, withdraws the purge and branch-deletion actions, keeps the #36 branch, and rests the recommendation on content (superset), base (current) and history (trail kept on the #36 branch). It gives #36 its one advantage. The B-03 dumps are called unsuitable as evidence for a non-privacy reason (bulk page text with no evidentiary function). | Addendum section 3; facts verified below. |
+
+## What I checked (own commands)
+
+1. **Evidence tree.** `C8-EVIDENCE` is tree `d82436febd49067348d88acadd31c21185cef73e` at `152045bd`, `9a6f9366` and `ba9676e9`. `git diff 2cc82792 ba9676e9` touches nothing outside `C9-EVIDENCE-CLEAN/`; `6fe5be5f..ba9676e9` adds only the two addenda. Against staging `21e73b83`: 106 files under `C8-EVIDENCE/`, 31 under `C9-EVIDENCE-CLEAN/`.
+2. **Test merges** (`git merge-tree --write-tree` in a throwaway `--shared` clone under the scratchpad, so nothing was written to the shared store): `152045bd`, `9a6f9366` and `ba9676e9` each merge cleanly into `21e73b8348767d5f1524167fcec538e1aad6e732`; the merged `C8-EVIDENCE` tree is `d82436fe` in all three.
+3. **Counts.** PR #36: merge base `1a21a2e8`, three first-parent merges behind (#37, #38, #39), 3 commits, 106 files. PR #40 at `9a6f9366`: 6 commits, 136 files. Local refs containing `5212a95b`: the #36 branch and its remote-tracking ref.
+4. **Review states.** `review/fable_review_clean_2cc82792.md` and its CSV are byte-identical to the review as delivered (ACCEPT WITH CONDITIONS). SC-C9 verdict ACCEPT is as recorded in PR #41's committed review. `37fe6a0f` and the two addenda had no review before this one, as the addendum says.
+5. **`37fe6a0f` against CR-01 to CR-04.** Object counts 4,465 at `b78b11de` and 4,492 at `2cc82792` reproduce (4,537 at the head). N S Yadav service number: 0 in `C8-EVIDENCE`, 0 in `C9-EVIDENCE-CLEAN`, 1 each in the three named files. CR-02 wording corrected. See FR-01 for the one wrong sentence. I did not re-derive the diagnosis-term counts or the 25-character window result.
+6. **LG-12.** All three copies exist at `ad77758d` under `data/raw/sci/1982`, `/1987`, `/1990`, re-hash to their file names, and page 1 reads as an SCR-format report: PPS Bedi (report p.393, 25 August 1982, three Judges, 52 pp), Ranjit Thakur (15 October 1987, 13 pp), S N Mukherjee (28 August 1990, five Judges, 32 pp). Page counts equal the page ranges in the file names. None is an official court copy.
+7. **Builders.** `C8-EVIDENCE/tools/build_packages.py --check`: "C8 packages reproduce (30 files)". SC-C9: `build_c9_pack.py`, `judis_scan.py`, `scr_pinpoint_check.py`, `render_c9.py` each "CHECK OK"; `sim_anchor_c9.py` "CHECK OK: output reproduces". All run with `-I -B`, temporary output under the scratchpad.
+8. **Privacy of the new commits.** Added lines of `37fe6a0f`, `9a6f9366`, `ba9676e9`: 0 occurrences of the N S Yadav number, the officer form, or a wider digits-plus-letter form.
+9. **Worktree.** `git status --short --ignored` empty before and after; no `__pycache__`.
+
+## Not checked
+
+- Remote state on GitHub (no network): PR states, `refs/pull/36/head`.
+- The owner's policy text itself; I relied on the statement in the assignment, which matches addendum section 1.
+- Diagnosis-term counts (taken from the earlier review); the earlier acceptance of the `C8-EVIDENCE` content (tree identity only).
+- Court orders outside the held judgment copies.

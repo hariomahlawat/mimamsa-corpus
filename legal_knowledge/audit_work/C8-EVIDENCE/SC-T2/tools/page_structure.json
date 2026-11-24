@@ -1,0 +1,5370 @@
+{
+ "ed7cf31fd8fbe50822e0a60f80b96ed1187dcd465dc4ae2649424c58001ff399": {
+  "held_path": "downloads/citation-codes/ranjit_judis8566.pdf",
+  "page_count": 9,
+  "metadata": {
+   "format": "PDF 1.2",
+   "title": "",
+   "author": "",
+   "subject": "",
+   "keywords": "",
+   "creator": "",
+   "producer": "GNU Ghostscript 7.05",
+   "creationDate": "",
+   "modDate": "",
+   "trapped": "",
+   "encryption": null
+  },
+  "pages": [
+   {
+    "pdf_page": 1,
+    "chars": 2263,
+    "page_x_of_n": [
+     [
+      "1",
+      "9"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "cd42c9dcd1233e84dd62d0c83d6ee416b7ccf8ab2934d002afc11d7c8920072e",
+    "labels": {
+     "PETITIONER:": 1,
+     "RESPONDENT:": 1,
+     "DATE OF JUDGMENT": 1,
+     "BENCH:": 2,
+     "CITATION:": 1,
+     "CITATOR INFO": 1,
+     "ACT:": 1,
+     "HEADNOTE:": 1,
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1,
+     "AIR": 1,
+     "SCR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 2,
+    "chars": 3587,
+    "page_x_of_n": [
+     [
+      "2",
+      "9"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "4fe6e7ad708ce84d390abcfa91fcb6895c1f1a932855119610cec258a9101f0c",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 2
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 3,
+    "chars": 3336,
+    "page_x_of_n": [
+     [
+      "3",
+      "9"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "f4599496b8170fbee8197f484edaac14de58721b62365467e64ebb1df0825d3f",
+    "labels": {
+     "JUDGMENT:": 1,
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 4,
+    "chars": 3486,
+    "page_x_of_n": [
+     [
+      "4",
+      "9"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "e6fc0af8948e54aa586ac2b94725c0ebdfeafac594ca74347f7180043be1fe56",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 5,
+    "chars": 3573,
+    "page_x_of_n": [
+     [
+      "5",
+      "9"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "80d4d2c481e7c7f49c5ba4351c6c51e3617313d1e9b3986b83256ded53c4432e",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 6,
+    "chars": 3763,
+    "page_x_of_n": [
+     [
+      "6",
+      "9"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "e453b7d668ec07d986815716f38a8b9737c1bcf400003e669b7ad04f21550d95",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 7,
+    "chars": 3705,
+    "page_x_of_n": [
+     [
+      "7",
+      "9"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "a9346b0068335c634304afa5de1d51232a80966775613d8c1c5a0f6d231c8b1a",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 8,
+    "chars": 3823,
+    "page_x_of_n": [
+     [
+      "8",
+      "9"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "1fe38eefb87f0232c4290066db4a5b199f34f1e504781f2f417376f952be1a1b",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 9,
+    "chars": 2002,
+    "page_x_of_n": [
+     [
+      "9",
+      "9"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "c32ffef1ae0cabc0576614cb4d2064cea5bd9c0fa13c7b8bb9fb9b4e8ba950a9",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   }
+  ]
+ },
+ "eb4420801e978469e9c7407f8c079273f9cd483ad45a4427daa53e3d229969cc": {
+  "held_path": "downloads/citation-codes/snmukherjee_judis7439.pdf",
+  "page_count": 23,
+  "metadata": {
+   "format": "PDF 1.2",
+   "title": "",
+   "author": "",
+   "subject": "",
+   "keywords": "",
+   "creator": "",
+   "producer": "GNU Ghostscript 7.05",
+   "creationDate": "",
+   "modDate": "",
+   "trapped": "",
+   "encryption": null
+  },
+  "pages": [
+   {
+    "pdf_page": 1,
+    "chars": 2359,
+    "page_x_of_n": [
+     [
+      "1",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "083ef608fe3521214561f5d48e910a245f561b84cb6ef48b63510820527ba08e",
+    "labels": {
+     "PETITIONER:": 1,
+     "RESPONDENT:": 1,
+     "DATE OF JUDGMENT": 1,
+     "BENCH:": 2,
+     "CITATION:": 1,
+     "CITATOR INFO": 1,
+     "ACT:": 1,
+     "HEADNOTE:": 1,
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1,
+     "AIR": 1,
+     "SCR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 2,
+    "chars": 3654,
+    "page_x_of_n": [
+     [
+      "2",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "42869616b64aac3ee65106e96eb92263bcebd1e2a997679e16cc0e004bf7deff",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 3,
+    "chars": 3469,
+    "page_x_of_n": [
+     [
+      "3",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "06d6121c3145dc5998575d767b9cf3f8bb758ead18f370125a347fd80669cc44",
+    "labels": {
+     "JUDGMENT:": 1,
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 4,
+    "chars": 3779,
+    "page_x_of_n": [
+     [
+      "4",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "defd4cb599811d8286e02a1fa4fed3f9e79331f2a73c9fddf7ff102d574b3bf3",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 5,
+    "chars": 3871,
+    "page_x_of_n": [
+     [
+      "5",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "7ebde57e6571b60759f500d32a881ad9a9e39e7e24a19c02942ac5ca33f8e200",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 6,
+    "chars": 3704,
+    "page_x_of_n": [
+     [
+      "6",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "3f80eeee049119534e668a4442e43f5c1ce38703002acb622ccf48e6306636b4",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCR": 2
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 7,
+    "chars": 3596,
+    "page_x_of_n": [
+     [
+      "7",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "69772b0bb34d0648b95b8005b313bbced846de4215ff33ea0bfdc2ce88c15439",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 8,
+    "chars": 3882,
+    "page_x_of_n": [
+     [
+      "8",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "885b8e1b744603a5220bfc41cb27f7550342c22937a4a3981978795a06e7aeb6",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 9,
+    "chars": 3609,
+    "page_x_of_n": [
+     [
+      "9",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "cd03b53fb82dc0d9406320b8597d2443bfbec70df1ab06eddb361f245be5f9ab",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 10,
+    "chars": 3881,
+    "page_x_of_n": [
+     [
+      "10",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "17f81f80f85b02ce98128e8a84884cc5960fb2b6367101ec58254bf6ee9ed3ef",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 11,
+    "chars": 3810,
+    "page_x_of_n": [
+     [
+      "11",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "6bb8dbcbc6eb5a3f8ebbced2742994fce08a3ef0945aca844fd06af071b0cdf7",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 12,
+    "chars": 3595,
+    "page_x_of_n": [
+     [
+      "12",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "c4716209427d9329717042bd57f5db74290295b8da1cd342f26884c4fff632de",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 13,
+    "chars": 3751,
+    "page_x_of_n": [
+     [
+      "13",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "2ac0d443c3b189ed361d185d061174fd5489114699a1917c6540491de554d74b",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 14,
+    "chars": 3801,
+    "page_x_of_n": [
+     [
+      "14",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "dc452b332fe6f75fb3df7f0cd30ad8d3f2c68900c34bbfa534ced7c14d2169bf",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 15,
+    "chars": 3890,
+    "page_x_of_n": [
+     [
+      "15",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "9e8335a58f154779ca9146c5805baa40f37cb6e1b7ec63b4ae08654444603210",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 16,
+    "chars": 3836,
+    "page_x_of_n": [
+     [
+      "16",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "216e5054d757f740bcaee95a18b093b4144341e74c2ce1e7cdb983f3f20d7fcf",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 17,
+    "chars": 3922,
+    "page_x_of_n": [
+     [
+      "17",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "cbb502c186834db269db52dcfb6b66743283c066b823656d457f248a14a2e9d1",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 18,
+    "chars": 3931,
+    "page_x_of_n": [
+     [
+      "18",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "941de7ef72638213020e93fb530f9f49b1c331e2b8e22f1e0bd185d357c5fe41",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 19,
+    "chars": 3852,
+    "page_x_of_n": [
+     [
+      "19",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "08a9480d8443f89e9adca6e615f7e854acf8ef58daddd580b0ae61cea5d9ac93",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 20,
+    "chars": 3795,
+    "page_x_of_n": [
+     [
+      "20",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "35d420bbc2fd25638f7f31966a1483bc3c9bef5fd148023ca7c7b6e835170e15",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 21,
+    "chars": 3824,
+    "page_x_of_n": [
+     [
+      "21",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "dab9d121516454b9b34db89ec7afef0a590084a753fce07a49cf2ed4f9cbf7fb",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 22,
+    "chars": 3711,
+    "page_x_of_n": [
+     [
+      "22",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "eb624dbe56eb6620ae62080c10a273cab73ae8eca98ab17b731446a31c79393a",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 23,
+    "chars": 3329,
+    "page_x_of_n": [
+     [
+      "23",
+      "23"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "f74efabef12ea619e30b79bddef89cffa9dda494761681ca862cff2871a85980",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   }
+  ]
+ },
+ "3b75354869ffb928f73532f475f5f920e2f2a1f8817163caba2f7fb5e1eb215d": {
+  "held_path": "downloads/independent-reviewer-B/navjot_sandhu_2005.pdf",
+  "page_count": 107,
+  "metadata": {
+   "format": "PDF 1.2",
+   "title": "",
+   "author": "",
+   "subject": "",
+   "keywords": "",
+   "creator": "",
+   "producer": "GNU Ghostscript 7.05",
+   "creationDate": "",
+   "modDate": "",
+   "trapped": "",
+   "encryption": null
+  },
+  "pages": [
+   {
+    "pdf_page": 1,
+    "chars": 2597,
+    "page_x_of_n": [
+     [
+      "1",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "9ffea39f7325b457209b53d3300bb38307af6a8da2d0496a0d0149d8349aa857",
+    "labels": {
+     "PETITIONER:": 1,
+     "RESPONDENT:": 1,
+     "DATE OF JUDGMENT": 1,
+     "BENCH:": 1,
+     "JUDGMENT:": 2,
+     "CASE NO.:": 1,
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 2,
+    "chars": 4882,
+    "page_x_of_n": [
+     [
+      "2",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "224129520eb886f31ee76d533326d70f6704aa228da108d105c05c9e9631fbd2",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 3,
+    "chars": 4650,
+    "page_x_of_n": [
+     [
+      "3",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "007dbd4737beb9cab7c412b7c5673af30b3dcaacc5c22ecc450fb72a23fec4fe",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 4,
+    "chars": 4864,
+    "page_x_of_n": [
+     [
+      "4",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "b134c630dd01b774acfa7ebbf9407615ecf721c798a0dddccf79219b98712a88",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 5,
+    "chars": 4991,
+    "page_x_of_n": [
+     [
+      "5",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "9a838f7758beae42531b97982fc84cd5ebc2467f97b075b008fd9409a2dd6ca5",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 6,
+    "chars": 4814,
+    "page_x_of_n": [
+     [
+      "6",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "58a41632c7cc5f7b32f46854a684277dbcac75aae38497519bc34f7b07e0bd26",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 7,
+    "chars": 4709,
+    "page_x_of_n": [
+     [
+      "7",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "75494c835835c29c37119f4bfe04488a749002a2febc7a22a4a19aea2a674b83",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 8,
+    "chars": 4672,
+    "page_x_of_n": [
+     [
+      "8",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "41baf60c2209c31980d389549da299f685a9b14e99b00fed632d2b1b6e22707b",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 9,
+    "chars": 4907,
+    "page_x_of_n": [
+     [
+      "9",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "6e32a4b75536e69b61e2ce1a7795b12f156d88bf0ee00be8cb53b2fafa071a12",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 10,
+    "chars": 4817,
+    "page_x_of_n": [
+     [
+      "10",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "f5fed0712dc8d50fc54df31dfa37d7ac99d62ae7e11c1f775fe2d195da4874de",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 3,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 11,
+    "chars": 4537,
+    "page_x_of_n": [
+     [
+      "11",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "15801fec4191e33785797b8825e0b8e5f3d7c746c6ec476ad925c20d50b54917",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 12,
+    "chars": 4751,
+    "page_x_of_n": [
+     [
+      "12",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "eaf78f4711dbbb359d8154d24b8c8a8880176a692ea082d211327e8c06a2537c",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 2,
+     "AIR": 4
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 13,
+    "chars": 4658,
+    "page_x_of_n": [
+     [
+      "13",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "3d32c0fc5ec8849e5daa29da9987bd4f01b4eeccabbe1424e4e52289e88c5419",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 2,
+     "AIR": 2,
+     "SCR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 14,
+    "chars": 4755,
+    "page_x_of_n": [
+     [
+      "14",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "7d4076f47d03ec730e66fbdffc3553b34801ec858dcc35cfdc78506bf6c3cb76",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 15,
+    "chars": 4398,
+    "page_x_of_n": [
+     [
+      "15",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "678e6e38f2a411ea877a7433edb1c2f60364c8b6f61cb0e309965bcce733d94f",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1,
+     "SCR": 2
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 16,
+    "chars": 3962,
+    "page_x_of_n": [
+     [
+      "16",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "aa5fd93b23e050e29394f731849443391c80a14fc665381ec17787b17d038c76",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 2,
+     "AIR": 1,
+     "SCR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 17,
+    "chars": 3967,
+    "page_x_of_n": [
+     [
+      "17",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "bf38e44ae3b1fb4cab972ba4738b7fce3ba19b80474a9b2972d1db6629030e49",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 2,
+     "SCR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 18,
+    "chars": 4600,
+    "page_x_of_n": [
+     [
+      "18",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "72c3083d00c24c2dbc1f6b85a84433ab85cb4a60a147a34411c462342f1c08e5",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 19,
+    "chars": 4349,
+    "page_x_of_n": [
+     [
+      "19",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "dfc66a4fbd7ccab9d0733d995185797b508715c357a292439a72ed4873ee541d",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 20,
+    "chars": 4589,
+    "page_x_of_n": [
+     [
+      "20",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "81fdeaa88d6ca6d3361ffb853822c0a4b720409342abe7f48748a2d5b23d0e78",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 21,
+    "chars": 5014,
+    "page_x_of_n": [
+     [
+      "21",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "09bf3543bf4a4f54e4ccdb5cd26c3c98a8f8c99b565f376d4bfacae4cf698b92",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 22,
+    "chars": 4976,
+    "page_x_of_n": [
+     [
+      "22",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "58a5b9e238077e044353cb1533ed087e9b8be347e3121dd8f808e5bfef66e586",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 23,
+    "chars": 5104,
+    "page_x_of_n": [
+     [
+      "23",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "36d7b3c75f432cf66a974d55a40e117006c9237fa886dfaadf8f16f91b06fd54",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 24,
+    "chars": 4604,
+    "page_x_of_n": [
+     [
+      "24",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "e35a061c25592496392d6ec661b9213196595413ec9813f0d972a771aa8b7b24",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 25,
+    "chars": 4376,
+    "page_x_of_n": [
+     [
+      "25",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "7a8f8660bfb4802921b09857f030255eccd585d7fc14910f4a4154915ee3b8ee",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 26,
+    "chars": 4303,
+    "page_x_of_n": [
+     [
+      "26",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "268dfb9d1f9d5466fae98ce07602e39726104ad18e5c4a35df2dc3b875c52833",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1,
+     "AIR": 2
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 27,
+    "chars": 4230,
+    "page_x_of_n": [
+     [
+      "27",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "ee70496e74641dc38656595fac06d4a7d7045ff140af96061cff6a4cb6fe3e0e",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 2,
+     "AIR": 1,
+     "SCR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 28,
+    "chars": 4100,
+    "page_x_of_n": [
+     [
+      "28",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "fe1b85612c0caa4ec31b8f8b911a99c49648a20cfef3a94713ba4bdc0b8c9264",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 2,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 29,
+    "chars": 4305,
+    "page_x_of_n": [
+     [
+      "29",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "21cbfdba83347dae1041acf86d796c050c8f7fd076e553a6a0f5c339b72a3eb8",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 3,
+     "AIR": 2
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 30,
+    "chars": 4142,
+    "page_x_of_n": [
+     [
+      "30",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "0411bbe7f07438e490cebab7e94c57b73e7b944938ef66666db3ac99ae246c96",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 2
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 31,
+    "chars": 4345,
+    "page_x_of_n": [
+     [
+      "31",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "542a43d18459febf4e40ecb715ac38568abf9bdc2157971a184d4b26b4499f08",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 2
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 32,
+    "chars": 4211,
+    "page_x_of_n": [
+     [
+      "32",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "e027d1ef8d0291bcd3c8ff2be8d7a1728834d6c3ff68cbd8b451dc7f7bd98eae",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 6
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 33,
+    "chars": 4675,
+    "page_x_of_n": [
+     [
+      "33",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "83fa6724de313e278ea71b1c11987ca9d61d627bc42c9d324b730704390634d0",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 3,
+     "AIR": 2
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 34,
+    "chars": 4645,
+    "page_x_of_n": [
+     [
+      "34",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "6d6153fe4098cdce5da351230e3093d06c5858b051eedbb34afdff47181c76b8",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 35,
+    "chars": 4594,
+    "page_x_of_n": [
+     [
+      "35",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "fb339dbe5961b1878b8d855f2d6180ffeb1195241ac50d3ae44c084ad2c9e463",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 36,
+    "chars": 4273,
+    "page_x_of_n": [
+     [
+      "36",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "1f9220acae50161dc2f712e652c6fb9fb800063eb199cf1b0b87f37ab12142be",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 37,
+    "chars": 4372,
+    "page_x_of_n": [
+     [
+      "37",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "d1f7faeacffd6ac042a04629415e80c1accaf921edea93090d2f73c14719ac2c",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 38,
+    "chars": 4699,
+    "page_x_of_n": [
+     [
+      "38",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "9e95eb909e04abb56284e366a8f9563246514389df0655f1ced8bb87b7f4da2d",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 2,
+     "AIR": 3
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 39,
+    "chars": 4982,
+    "page_x_of_n": [
+     [
+      "39",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "5230291ea19bfe3dd74fb18681e3cf820bab710e9f15869fcbea4f8bfd7a6281",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 40,
+    "chars": 4563,
+    "page_x_of_n": [
+     [
+      "40",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "3a2cd78a9fd0df64a8fc6f045e643d43e727250c4c05489586cd8a0bb7f85436",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 41,
+    "chars": 4513,
+    "page_x_of_n": [
+     [
+      "41",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "3890d20c12277cc377c999687ab6df116b1afee51737d5d4620100116d3c1d92",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1,
+     "AIR": 4
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 42,
+    "chars": 4403,
+    "page_x_of_n": [
+     [
+      "42",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "1f7f3406166c38432dd6bd1798a5742834467ff6c5ec6778ccfc2d27e75816d6",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 43,
+    "chars": 3845,
+    "page_x_of_n": [
+     [
+      "43",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "07e7bf0112d6de4a913eb5f0397d6671a784fdae00b28902399dc4f0f4a60d39",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1,
+     "AIR": 2
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 44,
+    "chars": 3828,
+    "page_x_of_n": [
+     [
+      "44",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "14d9c78fe577f45d1d3cb6b52f640cdde2f9c55cdf5a2653f2aee6bbfa208f15",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 45,
+    "chars": 4641,
+    "page_x_of_n": [
+     [
+      "45",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "327fae217e5396a8bb8bd7a53c8f8cebcc74004ca4362821e3496c4cf3095537",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 46,
+    "chars": 4581,
+    "page_x_of_n": [
+     [
+      "46",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "ab043d4ebba2f95c34db50a627737325ce21f101c1cb8a35399800441b28f94b",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 47,
+    "chars": 4707,
+    "page_x_of_n": [
+     [
+      "47",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "2f27adb96d2d54ed385803fa4c0d0bfe54969b885bfeeb5c7746e422ea5e8dab",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 48,
+    "chars": 4444,
+    "page_x_of_n": [
+     [
+      "48",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "f7da92a8157a1de188587b7037ce791a9d7682b7e604f8c0271d6f61e941e19f",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 2,
+     "SCR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 49,
+    "chars": 4923,
+    "page_x_of_n": [
+     [
+      "49",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "f4ae5a6375303428dc1028e93621c3d1669ebe2cf6c5262d2002f7180dc6fb86",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 50,
+    "chars": 4896,
+    "page_x_of_n": [
+     [
+      "50",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "7187c38e082ccaf3651be1d674be6fd7dddd67693fae818e64910a4a314c4908",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 51,
+    "chars": 4673,
+    "page_x_of_n": [
+     [
+      "51",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "6961750205b98f7f444dd85c61017cd8b0051d8f55b65f30928f7ad24162e241",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1,
+     "SCR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 52,
+    "chars": 4590,
+    "page_x_of_n": [
+     [
+      "52",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "3fa5f2f79908ba80cb6a612059636612c026e6d63bb4af30462f45e50d4c0129",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 3
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 53,
+    "chars": 4233,
+    "page_x_of_n": [
+     [
+      "53",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "70316cc7dad37b927a31cf4606159645d9f8083a2da7630ed323985c3f7282ec",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 54,
+    "chars": 4814,
+    "page_x_of_n": [
+     [
+      "54",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "c375178e446b7d6d3c0292ea42e939f5a5d36b36b1ed6713f3aece07954fd79b",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 55,
+    "chars": 4112,
+    "page_x_of_n": [
+     [
+      "55",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "20199e4589af8af71d527fa84b94b2d8e5a5d66566c2066057d65dc13e9b1ab5",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 56,
+    "chars": 4806,
+    "page_x_of_n": [
+     [
+      "56",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "337e952630cfb53f35286b736c9db6f43b4548d80d56c04dfcbcbab6dd605ee0",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 57,
+    "chars": 4844,
+    "page_x_of_n": [
+     [
+      "57",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "2e6769410c7b49ca42eed9fb4a12c00978c16393588a905718b34c0e2f23a03b",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 58,
+    "chars": 4681,
+    "page_x_of_n": [
+     [
+      "58",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "6ad2f0bf1b3f1f83cb0fe3dcd12a0fa80749f8dc7947f6e3e8e511daef815382",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 59,
+    "chars": 4930,
+    "page_x_of_n": [
+     [
+      "59",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "dcd08c8d588195ce812586d75d67d000a55a849903acbd5d4a04a8fe830bf123",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 60,
+    "chars": 4939,
+    "page_x_of_n": [
+     [
+      "60",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "21e94a2e57af718ab8fb2cee11f784b63629ff06cc6e7a4d80de2194d32be1e2",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 61,
+    "chars": 4927,
+    "page_x_of_n": [
+     [
+      "61",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "aa1306119ea4a3ee2818ab6da88bcc3ab3d39ce008dbe36654c58ac41ccd7f26",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 62,
+    "chars": 4850,
+    "page_x_of_n": [
+     [
+      "62",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "47ccfa85e67080b63268ce5360b6800e7b18ae51ddb697c586a7ab036544e62c",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 63,
+    "chars": 4978,
+    "page_x_of_n": [
+     [
+      "63",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "45133d0a9efa146d8cfcb1bd8394a5fc6dc71f26b03a45fc245f933a4267eed6",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 64,
+    "chars": 4812,
+    "page_x_of_n": [
+     [
+      "64",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "29a06fa3a857be40e4aafc0c4b36d7bfa177049f3e9d550654f2c1961a96b079",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 65,
+    "chars": 4534,
+    "page_x_of_n": [
+     [
+      "65",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "f6ad268aa0acd7ca0adc34ede093a0ba98ed8fc9cc922a26ae11da1b3a1687b4",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 66,
+    "chars": 4776,
+    "page_x_of_n": [
+     [
+      "66",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "051a4a5bc7a9ee2d6569939f4803aa1fd8167e77aec1dd94e1476577ad7c47d5",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 67,
+    "chars": 4747,
+    "page_x_of_n": [
+     [
+      "67",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "f12585dd90af3fbef9fd9fbfba7111daf7d22f435a00265fa7367cd82f1bc087",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 68,
+    "chars": 4074,
+    "page_x_of_n": [
+     [
+      "68",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "26ed02c627e03744910f7edff589cdccc731e5d96c94dee8095a53f152a6c4a4",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 69,
+    "chars": 3451,
+    "page_x_of_n": [
+     [
+      "69",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "17ddcb2bee31ccff5621b8d3b08ce5110edce49ca07d677fbdae28cf36829647",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 70,
+    "chars": 4869,
+    "page_x_of_n": [
+     [
+      "70",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "fb3ed427eff204466c07802625f9b7d787619883ad0045a3c6254e3572027e7b",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 71,
+    "chars": 4821,
+    "page_x_of_n": [
+     [
+      "71",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "469f730232d089605567f6c2ebd35ce40a53646add1c691dfcd4adba00f391c7",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 72,
+    "chars": 4967,
+    "page_x_of_n": [
+     [
+      "72",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "62cfa62c30db1203d65eeabda3d277ac864a79f5daf563564cc6f0abefe5e487",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 73,
+    "chars": 4870,
+    "page_x_of_n": [
+     [
+      "73",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "f20a4bb41d00bb0a03d260cc272fa1792b069bc013d85cfef00b04a549876d79",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1,
+     "SCR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 74,
+    "chars": 4242,
+    "page_x_of_n": [
+     [
+      "74",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "270187dde8a9f96f34f84d2b169aecc9169a3f865d7b0652ba0c03bd2bff556c",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 75,
+    "chars": 4991,
+    "page_x_of_n": [
+     [
+      "75",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "36e656be3a4e1c5081b2ea6986d2557b2bba5790e2dfc604b36e749114d1268d",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 76,
+    "chars": 4947,
+    "page_x_of_n": [
+     [
+      "76",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "a3cfc1aaa6f039dfeabdff2977be3acc1f1b57ba1ed82695e6a4fa16ce2d7b3c",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 77,
+    "chars": 4751,
+    "page_x_of_n": [
+     [
+      "77",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "27df411f97e54cab80459fdad0abe4e43a0a8911aa3e5a101d32471188cf96c9",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 78,
+    "chars": 4582,
+    "page_x_of_n": [
+     [
+      "78",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "6a353d991c3f3314e57e07d8121f6910d4b41e7620956a7891cb851fc8229be9",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 79,
+    "chars": 4954,
+    "page_x_of_n": [
+     [
+      "79",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "cb013d51d9b1f81367f4afdf0807e39c314415539e23bdedf9b195c6ea1785af",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 80,
+    "chars": 4752,
+    "page_x_of_n": [
+     [
+      "80",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "af6ce673f320635c4492399b330a43c796c839cb0fd9d0845c0d4ebd23ad48aa",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 81,
+    "chars": 4367,
+    "page_x_of_n": [
+     [
+      "81",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "04493567a8f73a4ee6ec1d9b7391efc34df3c1c61cfd78c1bec6ca25ffe1e09b",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 82,
+    "chars": 4248,
+    "page_x_of_n": [
+     [
+      "82",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "3153578e3669af4d3ba1db0d2deb0e597f71895d6c0cca6d45d72d513d4e9edb",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 1,
+     "SCR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 83,
+    "chars": 4135,
+    "page_x_of_n": [
+     [
+      "83",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "8c14152ea55c17bdbc93c022c37b0d18dcd5a4d614403976172c3b824ca044e0",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 84,
+    "chars": 4320,
+    "page_x_of_n": [
+     [
+      "84",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "6c78769dde5860485c1d9265dcdcacd7e0a40ede44dedc7bfb5f95b40eeb249c",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1,
+     "AIR": 2
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 85,
+    "chars": 3726,
+    "page_x_of_n": [
+     [
+      "85",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "6c448f2f143b5ccac592fae75ff091346714a3f056a148810f22e93a9d6434ef",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 3
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 86,
+    "chars": 4647,
+    "page_x_of_n": [
+     [
+      "86",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "57b1085e55569a417503356d75b551a0627c76b12c90fca31d58089c39a01b44",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 87,
+    "chars": 4420,
+    "page_x_of_n": [
+     [
+      "87",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "06e865e119aee21987e1cbaa6e25e37654785d6ad3bf3c64a4f399199428fc82",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 88,
+    "chars": 4999,
+    "page_x_of_n": [
+     [
+      "88",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "f3c939211b3996e5f5e7a75eb7285e76159554fed3d284b8b9a31f4c60fc2b02",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 89,
+    "chars": 5055,
+    "page_x_of_n": [
+     [
+      "89",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "b0a07b641ef1198b881897090f09f31d1ccd0fff2775648a386c71070c5e6ce4",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 90,
+    "chars": 5005,
+    "page_x_of_n": [
+     [
+      "90",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "2544e926f68faa8660f52759471b0056e0e75e628980e816658e16e7fb538e76",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 91,
+    "chars": 4539,
+    "page_x_of_n": [
+     [
+      "91",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "f84e081a1838a533ce010eb2ae989be8f31a263a2ae8402076a155b43abb1abc",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 92,
+    "chars": 3646,
+    "page_x_of_n": [
+     [
+      "92",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "b92aa5507383bcacc1427b25a446fd494114e9037f7f66b7c0cc6b1b7fac0c9d",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 93,
+    "chars": 4699,
+    "page_x_of_n": [
+     [
+      "93",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "dae4c0b612c24510a9dcbd3ff4371a129089ea6694af8b86995eedf07c3cd132",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 94,
+    "chars": 4602,
+    "page_x_of_n": [
+     [
+      "94",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "b7cef406b37e6c33e3a52ce0f683ec8d3383608354b8bf6a580e62e9a52be54b",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 95,
+    "chars": 3494,
+    "page_x_of_n": [
+     [
+      "95",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "f82b65e1de3361a3acaaa8bb934e739106b0fbf7122402676766f5fb4c2c3ed7",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 96,
+    "chars": 4725,
+    "page_x_of_n": [
+     [
+      "96",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "9d8a10a1a0dcd547b84dfe93edfda717eb64e66c809e510dcfe3fd6c94583e7d",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "SCC": 3
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 97,
+    "chars": 4887,
+    "page_x_of_n": [
+     [
+      "97",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "74fafc547b7655a7884a6dcd76fa69336e66ac7b603618f465ec937bb9ea0055",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 98,
+    "chars": 4867,
+    "page_x_of_n": [
+     [
+      "98",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "90a49d8e4df0e54fad473bcae023d02416a695bc2a81cd704052b30b6513fb4b",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 99,
+    "chars": 4948,
+    "page_x_of_n": [
+     [
+      "99",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "670e5e583d15d22a2e3ff4da6bb4d30c47d8590ffde2f704de1e4fa4dc873cb7",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 100,
+    "chars": 3925,
+    "page_x_of_n": [
+     [
+      "100",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "f74a7652fa5031725e9faba9014d186e6ab664b6a2e13fdf6ee8090011c2a11d",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 101,
+    "chars": 4397,
+    "page_x_of_n": [
+     [
+      "101",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "a0f352d5ab99de258b4ba1bd6cdcd9083c617f05a2ffb408996d76f2a0ed555c",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 102,
+    "chars": 4833,
+    "page_x_of_n": [
+     [
+      "102",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "0e1fb79f9686d931efe2ca0756e2daaabc533a24d560163321f4a6cf18b5e4bb",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 103,
+    "chars": 5018,
+    "page_x_of_n": [
+     [
+      "103",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "e89d9b7cfca708c2962d407534f506644c3749469fec49c799d9c1dd455bc572",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 104,
+    "chars": 4819,
+    "page_x_of_n": [
+     [
+      "104",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "0767af99f96826edcf1156dad8ba298d6b7bb26bff95dd4abb1e546b4831eb57",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 105,
+    "chars": 4471,
+    "page_x_of_n": [
+     [
+      "105",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "0e68b4980721dd0bc2963827810a1a7e5f87085a1d5094959a93303c35af1a75",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 106,
+    "chars": 3840,
+    "page_x_of_n": [
+     [
+      "106",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "dcc0b59ab4083c184d16a30340d5d5cbec0a06029d9f3791bca3412da5ba04d3",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 107,
+    "chars": 1417,
+    "page_x_of_n": [
+     [
+      "107",
+      "107"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "9e38f92d0ae1330105e58cc8b3051b2bdc52a4451ab9bbc26522142bf99e6c0a",
+    "last_line_sha256": "99f0512b4cc36a616ae6eeedae8bbe9bf7f4a1d8ffa9affae393aedde3090979",
+    "labels": {
+     "http://JUDIS.NIC.IN": 1
+    },
+    "widgets": [],
+    "annots": []
+   }
+  ]
+ },
+ "3056712cc7614399f72ee19f529f91990e70dba8a317dd3bd07e76e4ac546b75": {
+  "held_path": "downloads/independent-reviewer-B/dharamvir_40493.pdf",
+  "page_count": 36,
+  "metadata": {
+   "format": "PDF 1.4",
+   "title": "",
+   "author": "MRT",
+   "subject": "",
+   "keywords": "",
+   "creator": "Writer",
+   "producer": "\u4c69\u6272\u654f\u6666\u6963\u6520\u332e\u363b\u206d\u6f64\u6966\u6965\u6420\u7573\u696e\u6720\u6954\u6578\u7420\u322e\u312e\u3720\u6279\u2031\u5433\u5854",
+   "creationDate": "D:20130702165534+05'30'",
+   "modDate": "D:20130702165642+05'30'",
+   "trapped": "",
+   "encryption": null
+  },
+  "pages": [
+   {
+    "pdf_page": 1,
+    "chars": 793,
+    "page_x_of_n": [],
+    "page_x": [
+     "1"
+    ],
+    "first_line_sha256": "483edf37280d8bcb4925e926f1418601c008d0dd8f67f9bcdf8574c80f6204bc",
+    "last_line_sha256": "bbd6b9b68b2dbcaf7ffc4049862ad9937d79e9d4f9d8eee13f475db40f57c8f6",
+    "labels": {
+     "REPORTABLE": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 2,
+    "chars": 1176,
+    "page_x_of_n": [],
+    "page_x": [
+     "2"
+    ],
+    "first_line_sha256": "64f1c5034e2efbb55e5859d3dfde99e342f2442ff71c1afb92591910bc111a0a",
+    "last_line_sha256": "f4bee007ac2e1cca156585d0d05690a6e308ba6ec26f65074e8c1c889fe92630",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 3,
+    "chars": 1315,
+    "page_x_of_n": [],
+    "page_x": [
+     "3"
+    ],
+    "first_line_sha256": "b4929bb476be9d07dec14d46d33200d2e469eb64f70afff5611c22364a6d740e",
+    "last_line_sha256": "f6c6fbecb9113019498911d1c0029fdfbfa364f070f1a7ec6746ff6807495448",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 4,
+    "chars": 1596,
+    "page_x_of_n": [],
+    "page_x": [
+     "4"
+    ],
+    "first_line_sha256": "8567659924414d2c2b6bd48c8b394bff21ab5ee6b7d855c6fd644443fc1a9ba2",
+    "last_line_sha256": "7f1830e2396574464b5386564ae11220871080c64e37cddb6784bf039556b5ad",
+    "labels": {
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 5,
+    "chars": 1627,
+    "page_x_of_n": [],
+    "page_x": [
+     "5"
+    ],
+    "first_line_sha256": "c1cd8f9fa766ea5d4e8dde0e5640c08a93f2117ea40f68f014a71d3ded817365",
+    "last_line_sha256": "09bfd141c1a23863be58ca9ee11b41f3cb0af4e4c98e049c482c73823d5000ae",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 6,
+    "chars": 1914,
+    "page_x_of_n": [],
+    "page_x": [
+     "6"
+    ],
+    "first_line_sha256": "de8aa1903dac1f44484a912ff06fe097683be5251ca562f032cb7fc4419cd6bd",
+    "last_line_sha256": "838a1c59e18be63a5b4906774e16732c0633a196c6d04173919e2d1676a41749",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 7,
+    "chars": 1460,
+    "page_x_of_n": [],
+    "page_x": [
+     "7"
+    ],
+    "first_line_sha256": "b3efe1e15ab35364bec3641d1de9f9ac3e41f80d340406e066170953f65730e1",
+    "last_line_sha256": "7bd9fee0996e6903ab5c619ce54cc46422f296a941eec842ffebc2112b5aeeaa",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 8,
+    "chars": 1115,
+    "page_x_of_n": [],
+    "page_x": [
+     "8"
+    ],
+    "first_line_sha256": "4a6994bf3c9efe0e6157a85031453ca073b4b238547229d2d2eae625feb33258",
+    "last_line_sha256": "00c475cd788d1f1205ee4520f3633c8c16c1de0b63c46da55453ae3c56caf530",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 9,
+    "chars": 1314,
+    "page_x_of_n": [],
+    "page_x": [
+     "9"
+    ],
+    "first_line_sha256": "30b7545f7f0138f07e668228eacb7b0b0a2e842f18ce7777acb3c49f61e28cd9",
+    "last_line_sha256": "00f79bca5224d448d6e0a3443080bd61ce7c268d9d00fb626a1c229b4e0f2ba8",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 10,
+    "chars": 1223,
+    "page_x_of_n": [],
+    "page_x": [
+     "10"
+    ],
+    "first_line_sha256": "18090beb96037d09e0bd336530da3dbb9da1dbbb9c22a8171c66085e89914ad1",
+    "last_line_sha256": "329fd36fd2e6685690409cd1c5c66b4cce1a9d8d8756264439276a3543cdd855",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 11,
+    "chars": 2201,
+    "page_x_of_n": [],
+    "page_x": [
+     "11"
+    ],
+    "first_line_sha256": "996d13b51b2f8b84507cb8dca8e34196d6d7fecbbef1f3389cbba345b808c083",
+    "last_line_sha256": "55958b9766538415d361f6f7340017d158b76bbe86a629dac1990896bb96eb89",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 12,
+    "chars": 1345,
+    "page_x_of_n": [],
+    "page_x": [
+     "12"
+    ],
+    "first_line_sha256": "978f91fb291aec393452e2a64485a62cc7322641b204818fb7cb84bc6c6be3a8",
+    "last_line_sha256": "fa96ba347d8865db51ca916fa40e981c21f733faf52c59377aeb9e9bca7db953",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 13,
+    "chars": 1300,
+    "page_x_of_n": [],
+    "page_x": [
+     "13"
+    ],
+    "first_line_sha256": "d2c69686546f7014f02ca04dc4bea72fb621b9877cbf7685ae4222298f2b93bf",
+    "last_line_sha256": "f15d3d561071d3f68b90c0ec7a8c72032e4b1d7317760e8619746aa17f3912b3",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 14,
+    "chars": 1362,
+    "page_x_of_n": [],
+    "page_x": [
+     "14"
+    ],
+    "first_line_sha256": "969907b28c508680bb6b202c5bcc0d5d4755f863bbe1c92fac8a41c3d0b76301",
+    "last_line_sha256": "d7ea93018f01c473ecded42e6fcc0ae4901bd6a505fb4f12fa9cb67f118a0697",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 15,
+    "chars": 1248,
+    "page_x_of_n": [],
+    "page_x": [
+     "15"
+    ],
+    "first_line_sha256": "dc216e414b63b16307046608d13aa4f5e7d45e0619303dedc631f93433d7922b",
+    "last_line_sha256": "d1d2426bc42bb9bf3d237e477594c7bd304e014117db192e29c817a0967f8d55",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 16,
+    "chars": 1255,
+    "page_x_of_n": [],
+    "page_x": [
+     "16"
+    ],
+    "first_line_sha256": "6e295ed339a66020502aa5d3c55ff9081bc488d6d977833249cf56e7eec018d2",
+    "last_line_sha256": "c6f0f8b5cf6662a4b118093806e30dea747a88a375e26af1f27759cc0af8cf9c",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 17,
+    "chars": 1350,
+    "page_x_of_n": [],
+    "page_x": [
+     "17"
+    ],
+    "first_line_sha256": "d97f273012f34fadeceaab0606da7170fdde8195128404dfbd1b3cfa9877ecab",
+    "last_line_sha256": "e9f40ecdf3c6f1031d6e29f4e3971aac8e9db9efcb6bb52894ce0cc470c72042",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 18,
+    "chars": 1243,
+    "page_x_of_n": [],
+    "page_x": [
+     "18"
+    ],
+    "first_line_sha256": "dc94e43ea0846950f2c8329e6f8c8d4859f86e58c0a32d3cd8bd4d6836d687fd",
+    "last_line_sha256": "267ac7228f9e388ff66f682b90593625725f8dc93079893485ac49e51d53b89a",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 19,
+    "chars": 1426,
+    "page_x_of_n": [],
+    "page_x": [
+     "19"
+    ],
+    "first_line_sha256": "449f105b9353d1f40e7cf126367e419c42ea4687801bbd45cd0fc12617360c23",
+    "last_line_sha256": "4addea493f5a5a54c58d98f1909df6a912ba9f7fb616e51af0a165c200ef7cd8",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 20,
+    "chars": 1389,
+    "page_x_of_n": [],
+    "page_x": [
+     "20"
+    ],
+    "first_line_sha256": "782d84bdea73df0e7ac4cd72e65d7e41986db044cf6335127f02144fc35cd8a3",
+    "last_line_sha256": "8ecceb49b65ab8fb0e113a76e84b9f8d99f1eeefad28d2095094006180940081",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 21,
+    "chars": 1412,
+    "page_x_of_n": [],
+    "page_x": [
+     "21"
+    ],
+    "first_line_sha256": "0f010451ee1e29307ba9ab7d9b226e185b357b8cbde913559ab7e06caad8f574",
+    "last_line_sha256": "b627753fba36c0cc074832eb4036f0d46b2432533b47b8703ce6bb547282b1d0",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 22,
+    "chars": 2214,
+    "page_x_of_n": [],
+    "page_x": [
+     "22"
+    ],
+    "first_line_sha256": "bb6a0f78e3e0f9cd215b9d560c4c4caabaee70c9bd1edc53e6d7eec7d0ad3636",
+    "last_line_sha256": "30b5e0e2a0908bf6f549a64a086c1501a902713a43b4c6b0bf61d2dd214df2d4",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 23,
+    "chars": 1534,
+    "page_x_of_n": [],
+    "page_x": [
+     "23"
+    ],
+    "first_line_sha256": "f4896d1e76f1438aa8888aa4d91d7577030e8318438c686cf7b924abc72e059a",
+    "last_line_sha256": "e02dabb464af6885ad7a625427a6cf8425079145c9c1d8bb6c98eccfca684b96",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 24,
+    "chars": 1324,
+    "page_x_of_n": [],
+    "page_x": [
+     "24"
+    ],
+    "first_line_sha256": "d5546ad567db11ba84f3ecacf1e92d326d22c451704d150018079dbfe6f822df",
+    "last_line_sha256": "622acf4f84a16a3ed1d919634a5e86b41ac66b0e717544d83c45a7a3c2f42e9a",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 25,
+    "chars": 1741,
+    "page_x_of_n": [],
+    "page_x": [
+     "25"
+    ],
+    "first_line_sha256": "c76fb4788bcb79b4081385c58bfd3a01bbc002b03ebf81ef2113625a6e840966",
+    "last_line_sha256": "88d489251d948cf6f080034401705a0afc2b0cdf2b1165d6b148425498ec5961",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 26,
+    "chars": 1923,
+    "page_x_of_n": [],
+    "page_x": [
+     "26"
+    ],
+    "first_line_sha256": "6abb771ddbb3bb425dc3551b8d332305fb273c22db9410d1944f561d8e228412",
+    "last_line_sha256": "159638d7977ca8813401a5215463a3623787e74eeda14d7da57ab925764f48d9",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 27,
+    "chars": 1777,
+    "page_x_of_n": [],
+    "page_x": [
+     "27"
+    ],
+    "first_line_sha256": "9f0b81eda1244c003800ea104cad4755fbf60417154c83a62dd7c1a877ae275d",
+    "last_line_sha256": "e2033575912e3cfc5ebe07e70707e64e51e9bde6674e2032f4b3167b51e54b9a",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 28,
+    "chars": 1774,
+    "page_x_of_n": [],
+    "page_x": [
+     "28"
+    ],
+    "first_line_sha256": "2121fbd5a6a985f2d0375f94502932903b4ce250872559856d8fa910795e16c2",
+    "last_line_sha256": "106c105559e0d78c18ba750a11dc48a2d16a8e934d755fab20d195ec7782d65f",
+    "labels": {
+     "SCC": 3
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 29,
+    "chars": 1197,
+    "page_x_of_n": [],
+    "page_x": [
+     "29"
+    ],
+    "first_line_sha256": "2610ae87396681a32f529f04c34b9be1236e870f0d278f46aab8ed1498fe8f9c",
+    "last_line_sha256": "7a0a19b07df485cbb9949e0da9d948ae95f5224a8af357c1b6447404a3a031af",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 30,
+    "chars": 1135,
+    "page_x_of_n": [],
+    "page_x": [
+     "30"
+    ],
+    "first_line_sha256": "161f3b56c8fe16fe76c15ad152d310b91c72d3c0b70ecf7eec7eca20a03be19b",
+    "last_line_sha256": "89786701e1e20e612a7ce42986223a5a8c89043b65bb4eff4d30439b6d6b8517",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 31,
+    "chars": 1076,
+    "page_x_of_n": [],
+    "page_x": [
+     "31"
+    ],
+    "first_line_sha256": "22e2f5dc8c9d675c0e61c37d94c7918b3dddfb668515570553d6f77c1769acfd",
+    "last_line_sha256": "48c6f97dfe588c576accb34ba4b13f0abbe849b75174a1a308c42709f6a213ec",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 32,
+    "chars": 1223,
+    "page_x_of_n": [],
+    "page_x": [
+     "32"
+    ],
+    "first_line_sha256": "ab040af4f7a8b56146783f5a6897e589989c49dd7e353b8b16fd3ce3339d3504",
+    "last_line_sha256": "5b69b88e6d373f8ff3023111c4a71b25a4c5d93c2e480029b428aa75388efced",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 33,
+    "chars": 1255,
+    "page_x_of_n": [],
+    "page_x": [
+     "33"
+    ],
+    "first_line_sha256": "af32b80d93bcf447c22a96468de24fae9e59ee183d6405ee998cac38bc113bcf",
+    "last_line_sha256": "c95842bcc8bdc73e74a3a960558da12a20b3b0a70f69d69ec0da7af20594c3df",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 34,
+    "chars": 1266,
+    "page_x_of_n": [],
+    "page_x": [
+     "34"
+    ],
+    "first_line_sha256": "e3463a8209dc0ff7fced1289eba5c6fdb7d3ab04dd25cab023511fef2d412ab3",
+    "last_line_sha256": "f301ee99c59da5660c9eb06c270542c70647e94f2b1e02bdcb572b38f9929ec7",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 35,
+    "chars": 1273,
+    "page_x_of_n": [],
+    "page_x": [
+     "35"
+    ],
+    "first_line_sha256": "e576984cf6db1e5d2ff0a592cec1bc3a57a573cff510d75424a8f44a79ea8f88",
+    "last_line_sha256": "cfb7560de94f71b525baf45323511c86214b53714bff380d3230807cfa9a6137",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 36,
+    "chars": 381,
+    "page_x_of_n": [],
+    "page_x": [
+     "36"
+    ],
+    "first_line_sha256": "abe7cdc038d1674b764f95b4e41eb9c6ad31c02a2447718ab14ae8d80b0b375c",
+    "last_line_sha256": "9cd3ac9d75c7e919b3ff914ddd6be862d3d21317919a3d99aa0f95e607f471f9",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   }
+  ]
+ },
+ "970b96807bcbf8a1255fe16c574b575f64fe2edee1cbb271485fa7661a62c666": {
+  "held_path": "downloads/independent-reviewer-B/rajbir_42379.pdf",
+  "page_count": 20,
+  "metadata": {
+   "format": "PDF 1.4",
+   "title": "",
+   "author": "HP1",
+   "subject": "",
+   "keywords": "",
+   "creator": "Writer",
+   "producer": "LibreOffice 3.5",
+   "creationDate": "D:20150214140252+05'30'",
+   "modDate": "",
+   "trapped": "",
+   "encryption": null
+  },
+  "pages": [
+   {
+    "pdf_page": 1,
+    "chars": 812,
+    "page_x_of_n": [],
+    "page_x": [
+     "1"
+    ],
+    "first_line_sha256": "483edf37280d8bcb4925e926f1418601c008d0dd8f67f9bcdf8574c80f6204bc",
+    "last_line_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "labels": {
+     "REPORTABLE": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 2,
+    "chars": 948,
+    "page_x_of_n": [],
+    "page_x": [
+     "2"
+    ],
+    "first_line_sha256": "64f1c5034e2efbb55e5859d3dfde99e342f2442ff71c1afb92591910bc111a0a",
+    "last_line_sha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 3,
+    "chars": 1141,
+    "page_x_of_n": [],
+    "page_x": [
+     "3"
+    ],
+    "first_line_sha256": "b4929bb476be9d07dec14d46d33200d2e469eb64f70afff5611c22364a6d740e",
+    "last_line_sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+    "labels": {
+     "SCC": 4
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 4,
+    "chars": 1167,
+    "page_x_of_n": [],
+    "page_x": [
+     "4"
+    ],
+    "first_line_sha256": "8567659924414d2c2b6bd48c8b394bff21ab5ee6b7d855c6fd644443fc1a9ba2",
+    "last_line_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+    "labels": {
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 5,
+    "chars": 1424,
+    "page_x_of_n": [],
+    "page_x": [
+     "5"
+    ],
+    "first_line_sha256": "c1cd8f9fa766ea5d4e8dde0e5640c08a93f2117ea40f68f014a71d3ded817365",
+    "last_line_sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 6,
+    "chars": 1575,
+    "page_x_of_n": [],
+    "page_x": [
+     "6"
+    ],
+    "first_line_sha256": "de8aa1903dac1f44484a912ff06fe097683be5251ca562f032cb7fc4419cd6bd",
+    "last_line_sha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 7,
+    "chars": 1164,
+    "page_x_of_n": [],
+    "page_x": [
+     "7"
+    ],
+    "first_line_sha256": "b3efe1e15ab35364bec3641d1de9f9ac3e41f80d340406e066170953f65730e1",
+    "last_line_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 8,
+    "chars": 1339,
+    "page_x_of_n": [],
+    "page_x": [
+     "8"
+    ],
+    "first_line_sha256": "4a6994bf3c9efe0e6157a85031453ca073b4b238547229d2d2eae625feb33258",
+    "last_line_sha256": "2c624232cdd221771294dfbb310aca000a0df6ac8b66b696d90ef06fdefb64a3",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 9,
+    "chars": 1325,
+    "page_x_of_n": [],
+    "page_x": [
+     "9"
+    ],
+    "first_line_sha256": "30b7545f7f0138f07e668228eacb7b0b0a2e842f18ce7777acb3c49f61e28cd9",
+    "last_line_sha256": "19581e27de7ced00ff1ce50b2047e7a567c76b1cbaebabe5ef03f7c3017bb5b7",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 10,
+    "chars": 1373,
+    "page_x_of_n": [],
+    "page_x": [
+     "10"
+    ],
+    "first_line_sha256": "18090beb96037d09e0bd336530da3dbb9da1dbbb9c22a8171c66085e89914ad1",
+    "last_line_sha256": "4a44dc15364204a80fe80e9039455cc1608281820fe2b24f1e5233ade6af1dd5",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 11,
+    "chars": 932,
+    "page_x_of_n": [],
+    "page_x": [
+     "11"
+    ],
+    "first_line_sha256": "996d13b51b2f8b84507cb8dca8e34196d6d7fecbbef1f3389cbba345b808c083",
+    "last_line_sha256": "4fc82b26aecb47d2868c4efbe3581732a3e7cbcc6c2efb32062c08170a05eeb8",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 12,
+    "chars": 1657,
+    "page_x_of_n": [],
+    "page_x": [
+     "12"
+    ],
+    "first_line_sha256": "978f91fb291aec393452e2a64485a62cc7322641b204818fb7cb84bc6c6be3a8",
+    "last_line_sha256": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 13,
+    "chars": 1733,
+    "page_x_of_n": [],
+    "page_x": [
+     "13"
+    ],
+    "first_line_sha256": "d2c69686546f7014f02ca04dc4bea72fb621b9877cbf7685ae4222298f2b93bf",
+    "last_line_sha256": "3fdba35f04dc8c462986c992bcf875546257113072a909c162f7e470e581e278",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 14,
+    "chars": 1851,
+    "page_x_of_n": [],
+    "page_x": [
+     "14"
+    ],
+    "first_line_sha256": "969907b28c508680bb6b202c5bcc0d5d4755f863bbe1c92fac8a41c3d0b76301",
+    "last_line_sha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 15,
+    "chars": 1937,
+    "page_x_of_n": [],
+    "page_x": [
+     "15"
+    ],
+    "first_line_sha256": "dc216e414b63b16307046608d13aa4f5e7d45e0619303dedc631f93433d7922b",
+    "last_line_sha256": "e629fa6598d732768f7c726b4b621285f9c3b85303900aa912017db7617d8bdb",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 16,
+    "chars": 1577,
+    "page_x_of_n": [],
+    "page_x": [
+     "16"
+    ],
+    "first_line_sha256": "6e295ed339a66020502aa5d3c55ff9081bc488d6d977833249cf56e7eec018d2",
+    "last_line_sha256": "b17ef6d19c7a5b1ee83b907c595526dcb1eb06db8227d650d5dda0a9f4ce8cd9",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 17,
+    "chars": 1213,
+    "page_x_of_n": [],
+    "page_x": [
+     "17"
+    ],
+    "first_line_sha256": "d97f273012f34fadeceaab0606da7170fdde8195128404dfbd1b3cfa9877ecab",
+    "last_line_sha256": "4523540f1504cd17100c4835e85b7eefd49911580f8efff0599a8f283be6b9e3",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 18,
+    "chars": 1264,
+    "page_x_of_n": [],
+    "page_x": [
+     "18"
+    ],
+    "first_line_sha256": "dc94e43ea0846950f2c8329e6f8c8d4859f86e58c0a32d3cd8bd4d6836d687fd",
+    "last_line_sha256": "4ec9599fc203d176a301536c2e091a19bc852759b255bd6818810a42c5fed14a",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 19,
+    "chars": 1193,
+    "page_x_of_n": [],
+    "page_x": [
+     "19"
+    ],
+    "first_line_sha256": "449f105b9353d1f40e7cf126367e419c42ea4687801bbd45cd0fc12617360c23",
+    "last_line_sha256": "9400f1b21cb527d7fa3d3eabba93557a18ebe7a2ca4e471cfe5e4c5b4ca7f767",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 20,
+    "chars": 698,
+    "page_x_of_n": [],
+    "page_x": [
+     "20"
+    ],
+    "first_line_sha256": "782d84bdea73df0e7ac4cd72e65d7e41986db044cf6335127f02144fc35cd8a3",
+    "last_line_sha256": "f5ca38f748a1d6eaf726b8a42fb575c3c71f1864a8143301782de13da2d9202b",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   }
+  ]
+ },
+ "3c50cdb7f30d1a84b488a72052bdf1868cea18ec4e02aee292cf1e97ebf5bbe6": {
+  "held_path": "downloads/citation-codes/nsyadav_2019.pdf",
+  "page_count": 15,
+  "metadata": {
+   "format": "PDF 1.4",
+   "title": "",
+   "author": "ubuntu",
+   "subject": "",
+   "keywords": "",
+   "creator": "Writer",
+   "producer": "LibreOffice 5.1",
+   "creationDate": "D:20191003165157+05'30'",
+   "modDate": "",
+   "trapped": "",
+   "encryption": null
+  },
+  "pages": [
+   {
+    "pdf_page": 1,
+    "chars": 954,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "462b9547b87739b5dbbe7cfe5ad708962495ccdec42a53653e75ea53105b1b22",
+    "last_line_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "labels": {
+     "REPORTABLE": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 2,
+    "chars": 1468,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "0d9fa52827c73d7637831d718cea7a42db596bc60c8830712cc2a48397021bbc",
+    "last_line_sha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 3,
+    "chars": 1711,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "dc6e230670662cac89e61fb827a553d2d88f3a0b712513558dc0bb1bddae11b9",
+    "last_line_sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 4,
+    "chars": 1321,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "ebd808bfb5b78c4fcd2fedab9306769c4e80476cc335cbdc25d07da2cef758d0",
+    "last_line_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+    "labels": {
+     "SCC": 2
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 5,
+    "chars": 1518,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "c34fcdd75b982553a61b309cadb6029711539b2f28e80d2ffc39b6ec50989db1",
+    "last_line_sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d",
+    "labels": {
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 6,
+    "chars": 1402,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "56d9ef077d1f829a2d44eb607ec700eab3a60219c39b5a26328743ccdc6fc262",
+    "last_line_sha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 7,
+    "chars": 1622,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "5dde896887f6754c9b15bfe3a441ae4806df2fde94001311e08bf110622e0bbe",
+    "last_line_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 8,
+    "chars": 1876,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "6295eae067719d08e66b3ba883e68600d6f12339c84a8a4606cf80472ba8a3d0",
+    "last_line_sha256": "2c624232cdd221771294dfbb310aca000a0df6ac8b66b696d90ef06fdefb64a3",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 9,
+    "chars": 2080,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "51ac6407aa76b2dc99dbf4a4021746eb73dffcee10c4df43d0da3a6393c48539",
+    "last_line_sha256": "19581e27de7ced00ff1ce50b2047e7a567c76b1cbaebabe5ef03f7c3017bb5b7",
+    "labels": {
+     "SCC": 2
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 10,
+    "chars": 1672,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "6e52a12ede342bdfea5a6326cf1d52855733cbb4a27e29ecb2ca0e7550aaed08",
+    "last_line_sha256": "4a44dc15364204a80fe80e9039455cc1608281820fe2b24f1e5233ade6af1dd5",
+    "labels": {
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 11,
+    "chars": 1912,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "b1da6ca742f4f60a76dcbac8d9d214a6922de2c6bc62475170c141f5c9a904ec",
+    "last_line_sha256": "4fc82b26aecb47d2868c4efbe3581732a3e7cbcc6c2efb32062c08170a05eeb8",
+    "labels": {
+     "SCC": 4
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 12,
+    "chars": 1545,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "be33e707222cd7ce72a56f718dd8f525902d1128170eae1f6bbee3917d26340c",
+    "last_line_sha256": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 13,
+    "chars": 1359,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "8c9988440f3491eac1977e948b2d24dd1a68b703a3bd32bac5fcd3964c4aacd5",
+    "last_line_sha256": "3fdba35f04dc8c462986c992bcf875546257113072a909c162f7e470e581e278",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 14,
+    "chars": 1402,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "d19602fcc7b7582edea2f7bb803ebba14d0855f5eadd4f04222cdaad5d25dc5f",
+    "last_line_sha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 15,
+    "chars": 700,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "e7ceff5f3335eec83a5070b77130b2d6ca417db750b7649c83e91a6a3b65f435",
+    "last_line_sha256": "e629fa6598d732768f7c726b4b621285f9c3b85303900aa912017db7617d8bdb",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   }
+  ]
+ },
+ "4f7ea3a451c6f9a11d7e4dd96822e68cd9cd7a01d8dc74cf46ad34e79029b86c": {
+  "held_path": "downloads/citation-codes/girish_feb2026.pdf",
+  "page_count": 17,
+  "metadata": {
+   "format": "PDF 1.7",
+   "title": "",
+   "author": "",
+   "subject": "",
+   "keywords": "",
+   "creator": "pdftk 2.02 - www.pdftk.com",
+   "producer": "itext-paulo-155 (itextpdf.sf.net-lowagie.com); modified using iText\u00ae 5.2.1 \u00a92000-2012 1T3XT BVBA",
+   "creationDate": "D:20260212175828+05'30'",
+   "modDate": "D:20260212175950+05'30'",
+   "trapped": "",
+   "encryption": null
+  },
+  "pages": [
+   {
+    "pdf_page": 1,
+    "chars": 1163,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "59a631ea5b6ded29f5f81c1a943d8720af37b452585943144af95b4c47b4a022",
+    "last_line_sha256": "e1b953102c94c9eb6942efcb540fd554b9fa9207808628091765a4d8811a7f88",
+    "labels": {
+     "REPORTABLE": 1,
+     "INSC": 1,
+     "Signature Not Verified": 1,
+     "Digitally signed by": 1
+    },
+    "widgets": [
+     "Signature"
+    ],
+    "annots": []
+   },
+   {
+    "pdf_page": 2,
+    "chars": 1368,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+    "last_line_sha256": "27d25cda247a79e3d8f5f1cd8a10805dda42e2da11c2236720436d75a1e03050",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 3,
+    "chars": 1153,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+    "last_line_sha256": "2582b9c7fe142253f88b46aebae952c9b0a70cc78207f1f4040698cc58f8d5ac",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 4,
+    "chars": 1303,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+    "last_line_sha256": "18fb419258350a85ac8e9ff05846f7700d4ec51192abc7c9b33f5a4f1f13419e",
+    "labels": {
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 5,
+    "chars": 1274,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d",
+    "last_line_sha256": "8a64750b820f575ec122f17df19332ea8fe885a1ee59eb5f5af79af5e3a86ccb",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 6,
+    "chars": 1833,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+    "last_line_sha256": "754ba8e2943817d2792144c9e2a08dd6d6add56939e108b0f80c9c15853298d3",
+    "labels": {
+     "SCC": 10,
+     "AIR": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 7,
+    "chars": 1684,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+    "last_line_sha256": "c6414050a0d268c452bfaa47ab13153f429383bae8f9d582070a27f96892b372",
+    "labels": {
+     "SCC": 2
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 8,
+    "chars": 1245,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "2c624232cdd221771294dfbb310aca000a0df6ac8b66b696d90ef06fdefb64a3",
+    "last_line_sha256": "ad57366865126e55649ecb23ae1d48887544976efea46a48eb5d85a6eeb4d306",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 9,
+    "chars": 1204,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "19581e27de7ced00ff1ce50b2047e7a567c76b1cbaebabe5ef03f7c3017bb5b7",
+    "last_line_sha256": "c32e749524278bc490fe6cbe95a10c1c91f7171a1d457ba9f845e0d00a832941",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 10,
+    "chars": 1293,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "4a44dc15364204a80fe80e9039455cc1608281820fe2b24f1e5233ade6af1dd5",
+    "last_line_sha256": "ffce22a9d08c7c27c500f4c8d32fea640a2e4268d02e39c78f45e8e18eb7266c",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 11,
+    "chars": 1170,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "4fc82b26aecb47d2868c4efbe3581732a3e7cbcc6c2efb32062c08170a05eeb8",
+    "last_line_sha256": "40eecf200715205182234b86751f3bbc3181b627dd10ae0e104a7700c79c5618",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 12,
+    "chars": 1394,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918",
+    "last_line_sha256": "403ff9629aaca2f1efaf436c915c4749149e21d2117af88e0026d6cab1264dec",
+    "labels": {
+     "INSC": 1,
+     "AIR": 2
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 13,
+    "chars": 1241,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "3fdba35f04dc8c462986c992bcf875546257113072a909c162f7e470e581e278",
+    "last_line_sha256": "ab88deee65875df9c73ac772d6db4de53539421bf570d464c20b2979e20b3016",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 14,
+    "chars": 1520,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61",
+    "last_line_sha256": "92eac4364f23ac4fed7354661558463843963a63649e9bb83839be82c3f83c31",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 15,
+    "chars": 1282,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "e629fa6598d732768f7c726b4b621285f9c3b85303900aa912017db7617d8bdb",
+    "last_line_sha256": "44a11743aeccb4a50e6f32ac8b62eeb80d17f1df9ddd4c81ad35f9404cc166a4",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 16,
+    "chars": 1355,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "b17ef6d19c7a5b1ee83b907c595526dcb1eb06db8227d650d5dda0a9f4ce8cd9",
+    "last_line_sha256": "39138655ae12acf84b8c17e5429efda0e616c9cb9237940bd78772ce7453189e",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 17,
+    "chars": 826,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "4523540f1504cd17100c4835e85b7eefd49911580f8efff0599a8f283be6b9e3",
+    "last_line_sha256": "d386813057a559255de25818f8554409f9fd5613d557a68a4118e07757367f1a",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   }
+  ]
+ },
+ "10e1954f2e39916ea0f0e8e759c3823581becf752dd6ad2e9058569a1fd97444": {
+  "held_path": "downloads/citation-codes/mullikote_2026.pdf",
+  "page_count": 62,
+  "metadata": {
+   "format": "PDF 1.7",
+   "title": "",
+   "author": "",
+   "subject": "",
+   "keywords": "",
+   "creator": "pdftk 2.02 - www.pdftk.com",
+   "producer": "itext-paulo-155 (itextpdf.sf.net-lowagie.com); modified using iText\u00ae 5.2.1 \u00a92000-2012 1T3XT BVBA",
+   "creationDate": "D:20260404100920+05'30'",
+   "modDate": "D:20260404101155+05'30'",
+   "trapped": "",
+   "encryption": null
+  },
+  "pages": [
+   {
+    "pdf_page": 1,
+    "chars": 1443,
+    "page_x_of_n": [
+     [
+      "1",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "52efebc48e1c595fd3aab8ef5f71845a4c0a3f49332f9fe64b01299116bad819",
+    "last_line_sha256": "e1b953102c94c9eb6942efcb540fd554b9fa9207808628091765a4d8811a7f88",
+    "labels": {
+     "REPORTABLE": 1,
+     "CORRECTED": 1,
+     "INSC": 1,
+     "Signature Not Verified": 1,
+     "Digitally signed by": 1
+    },
+    "widgets": [
+     "Signature"
+    ],
+    "annots": []
+   },
+   {
+    "pdf_page": 2,
+    "chars": 1596,
+    "page_x_of_n": [
+     [
+      "2",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "a84982d1a2fcf9cd2d95a005a689eb218fa617c84e8a2017779754c2d0a94575",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 3,
+    "chars": 1602,
+    "page_x_of_n": [
+     [
+      "3",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "780feabc9b60e79f982af18ead8e61c0aa8432f7dba4970eea3c33cc79c60ae3",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 4,
+    "chars": 1663,
+    "page_x_of_n": [
+     [
+      "4",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "1bcd5304d0d7ece19a545daa56443d7c85ab44df2effa47484b3bf9756c8a54e",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 5,
+    "chars": 2120,
+    "page_x_of_n": [
+     [
+      "5",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "a11837f088ad10c68748e0deb89923cb3c461ce254a2948675a16c72a10ef10e",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 6,
+    "chars": 2173,
+    "page_x_of_n": [
+     [
+      "6",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "356f5aa6a442b20f5cace9140b2ed738185b600a2a0ae5770b5b586d35488e69",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 7,
+    "chars": 2031,
+    "page_x_of_n": [
+     [
+      "7",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "a93dd7a3aaf235458ebdeec1cadea9a4878e6bc3d4b138f13ff0d711ba796e89",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 8,
+    "chars": 1849,
+    "page_x_of_n": [
+     [
+      "8",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "cff0f9d35f49b731cfb41ccdd73abe4e7ec5f5a079d9c9898b68964f76ccc918",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 9,
+    "chars": 2037,
+    "page_x_of_n": [
+     [
+      "9",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "c95842071894224529cb3850fdb9591337e692168ffe2b18700fe51ed49ceadc",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 10,
+    "chars": 2427,
+    "page_x_of_n": [
+     [
+      "10",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "8d6baf989e05ef15ec7990022ac3bf673d6a2694315612ffcea60c5d6b824f9a",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 11,
+    "chars": 3146,
+    "page_x_of_n": [
+     [
+      "11",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "5e770d22459cb3eb6bd1362341de11d4433a951747bc4ce9f7c7a5b1caf5fb42",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 12,
+    "chars": 2185,
+    "page_x_of_n": [
+     [
+      "12",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "92dbe4cfa749bf678d6047718338e0f56cfb12805c8aa9c0ccd70a84de821ee2",
+    "labels": {
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 13,
+    "chars": 1771,
+    "page_x_of_n": [
+     [
+      "13",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "ea2d18a061dcfbbf0f4171ad8283111e8cd3820046dc95e566cefbb1c0b3b886",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 14,
+    "chars": 1895,
+    "page_x_of_n": [
+     [
+      "14",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "ab9c8fc21e0066ac6b836bbddfc90ea16e94fef89165b8c64c2384aa46dd032b",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 15,
+    "chars": 1880,
+    "page_x_of_n": [
+     [
+      "15",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "750c16c459c9d643583d3f75791aeae68514b5544096bc1085de2329ed7746dc",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 16,
+    "chars": 2637,
+    "page_x_of_n": [
+     [
+      "16",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "986b681e5642d1e44eefb3bd802ea8eabd20408d2908519cce6e39951d3c6e59",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 17,
+    "chars": 1576,
+    "page_x_of_n": [
+     [
+      "17",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "e2ab26b40e22bab576bdf551c9af9e31a435f7c01b4b38aaed30fe6429d8cf0a",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 18,
+    "chars": 2319,
+    "page_x_of_n": [
+     [
+      "18",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "3b61aad8509be2b60e619c56a6e4438667b8b55ef8b8319a16ce84fe3edeb1a3",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 19,
+    "chars": 2094,
+    "page_x_of_n": [
+     [
+      "19",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "9ca8fe13652f1f641ea8bf27bb251ca547d9d85048b439ca4f55a62dd33cb9d5",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 20,
+    "chars": 1821,
+    "page_x_of_n": [
+     [
+      "20",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "6deb2a7b918cc2333715955a7c9440f7211eac3397b1aed332f8b5413792acb3",
+    "labels": {
+     "SCC": 5
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 21,
+    "chars": 1931,
+    "page_x_of_n": [
+     [
+      "21",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "a6bfa22215dda67e9e5f5ab6c091eff5b02a092ead0b8612567a42d8c20769b1",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 22,
+    "chars": 2051,
+    "page_x_of_n": [
+     [
+      "22",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "b24a8e16476ef8678f4ea207b23662e5d6b0e4b5923eea22282f11af6c9266a6",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 23,
+    "chars": 2002,
+    "page_x_of_n": [
+     [
+      "23",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "11ce2e54db81c854692f6663ef4585b5810aa3f58ea42b1f179a48c7e8d480ea",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 24,
+    "chars": 2079,
+    "page_x_of_n": [
+     [
+      "24",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "5cb9741a3b8b0852ca7286f676814405cb2d75438a5d938c9080d9123fc9172a",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 25,
+    "chars": 2229,
+    "page_x_of_n": [
+     [
+      "25",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "79c2d589fc6fc21655792ede6103946bb5b199dd96e922cbb98e43b7f5d54d55",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 26,
+    "chars": 1790,
+    "page_x_of_n": [
+     [
+      "26",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "eeae216e2fff977061b3bba8bbb0446db36ebd109aa8b9e4cdb9f32e7cd928a3",
+    "labels": {
+     "SCC": 2
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 27,
+    "chars": 2125,
+    "page_x_of_n": [
+     [
+      "27",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "714ba8b7781040afdc8c6ef1e9e9778e255f18addfdea07c17f19eacfa28e1e9",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 28,
+    "chars": 2505,
+    "page_x_of_n": [
+     [
+      "28",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "5e040a406831ed8717a5c87b111b39ea3f3cd3996cad7c81be7778f86735122c",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 29,
+    "chars": 3454,
+    "page_x_of_n": [
+     [
+      "29",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "90fb4a72c7d4c3e39ef1ac57715cb77aac21a876cce80825cce2eb99fb148560",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 30,
+    "chars": 1907,
+    "page_x_of_n": [
+     [
+      "30",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "f06c5d54b740aa2c0b8a793dca31abf4e27d62492ddb4956031560d7726eeb69",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 31,
+    "chars": 484,
+    "page_x_of_n": [
+     [
+      "31",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "ba59ab0661fb92cd9c00f972191c542154c7a7e55834b4528fa49840758cf2be",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 32,
+    "chars": 1404,
+    "page_x_of_n": [
+     [
+      "32",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "ecb173c290474b0f7650c00432a1f2956d6bd5667d5b64cc6ce3b4b09f50c389",
+    "labels": {
+     "REPORTABLE": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 33,
+    "chars": 1595,
+    "page_x_of_n": [
+     [
+      "33",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "c0180288ce3d39ddeef19710da0d1cd9bd20df9253c79e35070a06bf576c9bd1",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 34,
+    "chars": 1607,
+    "page_x_of_n": [
+     [
+      "34",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "e478ecd915b93752e0391f4391a91e55215c6b08b72b9bf609708108535fe89c",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 35,
+    "chars": 1583,
+    "page_x_of_n": [
+     [
+      "35",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "1bcd5304d0d7ece19a545daa56443d7c85ab44df2effa47484b3bf9756c8a54e",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 36,
+    "chars": 2122,
+    "page_x_of_n": [
+     [
+      "36",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "a11837f088ad10c68748e0deb89923cb3c461ce254a2948675a16c72a10ef10e",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 37,
+    "chars": 2174,
+    "page_x_of_n": [
+     [
+      "37",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "356f5aa6a442b20f5cace9140b2ed738185b600a2a0ae5770b5b586d35488e69",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 38,
+    "chars": 2034,
+    "page_x_of_n": [
+     [
+      "38",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "a93dd7a3aaf235458ebdeec1cadea9a4878e6bc3d4b138f13ff0d711ba796e89",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 39,
+    "chars": 1852,
+    "page_x_of_n": [
+     [
+      "39",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "cff0f9d35f49b731cfb41ccdd73abe4e7ec5f5a079d9c9898b68964f76ccc918",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 40,
+    "chars": 2038,
+    "page_x_of_n": [
+     [
+      "40",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "c95842071894224529cb3850fdb9591337e692168ffe2b18700fe51ed49ceadc",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 41,
+    "chars": 2427,
+    "page_x_of_n": [
+     [
+      "41",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "8d6baf989e05ef15ec7990022ac3bf673d6a2694315612ffcea60c5d6b824f9a",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 42,
+    "chars": 3146,
+    "page_x_of_n": [
+     [
+      "42",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "5e770d22459cb3eb6bd1362341de11d4433a951747bc4ce9f7c7a5b1caf5fb42",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 43,
+    "chars": 2185,
+    "page_x_of_n": [
+     [
+      "43",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "92dbe4cfa749bf678d6047718338e0f56cfb12805c8aa9c0ccd70a84de821ee2",
+    "labels": {
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 44,
+    "chars": 1771,
+    "page_x_of_n": [
+     [
+      "44",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "ea2d18a061dcfbbf0f4171ad8283111e8cd3820046dc95e566cefbb1c0b3b886",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 45,
+    "chars": 1895,
+    "page_x_of_n": [
+     [
+      "45",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "ab9c8fc21e0066ac6b836bbddfc90ea16e94fef89165b8c64c2384aa46dd032b",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 46,
+    "chars": 1880,
+    "page_x_of_n": [
+     [
+      "46",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "750c16c459c9d643583d3f75791aeae68514b5544096bc1085de2329ed7746dc",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 47,
+    "chars": 2637,
+    "page_x_of_n": [
+     [
+      "47",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "110c4f7d548ef39dc7f7d00f027a237bdf0e9d590f210a5e0d5295fc6d515503",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 48,
+    "chars": 1576,
+    "page_x_of_n": [
+     [
+      "48",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "e2ab26b40e22bab576bdf551c9af9e31a435f7c01b4b38aaed30fe6429d8cf0a",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 49,
+    "chars": 2319,
+    "page_x_of_n": [
+     [
+      "49",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "3b61aad8509be2b60e619c56a6e4438667b8b55ef8b8319a16ce84fe3edeb1a3",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 50,
+    "chars": 2094,
+    "page_x_of_n": [
+     [
+      "50",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "9ca8fe13652f1f641ea8bf27bb251ca547d9d85048b439ca4f55a62dd33cb9d5",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 51,
+    "chars": 1821,
+    "page_x_of_n": [
+     [
+      "51",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "6deb2a7b918cc2333715955a7c9440f7211eac3397b1aed332f8b5413792acb3",
+    "labels": {
+     "SCC": 5
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 52,
+    "chars": 1931,
+    "page_x_of_n": [
+     [
+      "52",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "a6bfa22215dda67e9e5f5ab6c091eff5b02a092ead0b8612567a42d8c20769b1",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 53,
+    "chars": 2051,
+    "page_x_of_n": [
+     [
+      "53",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "b24a8e16476ef8678f4ea207b23662e5d6b0e4b5923eea22282f11af6c9266a6",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 54,
+    "chars": 2002,
+    "page_x_of_n": [
+     [
+      "54",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "11ce2e54db81c854692f6663ef4585b5810aa3f58ea42b1f179a48c7e8d480ea",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 55,
+    "chars": 2079,
+    "page_x_of_n": [
+     [
+      "55",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "5cb9741a3b8b0852ca7286f676814405cb2d75438a5d938c9080d9123fc9172a",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 56,
+    "chars": 2229,
+    "page_x_of_n": [
+     [
+      "56",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "79c2d589fc6fc21655792ede6103946bb5b199dd96e922cbb98e43b7f5d54d55",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 57,
+    "chars": 1790,
+    "page_x_of_n": [
+     [
+      "57",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "eeae216e2fff977061b3bba8bbb0446db36ebd109aa8b9e4cdb9f32e7cd928a3",
+    "labels": {
+     "SCC": 2
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 58,
+    "chars": 2125,
+    "page_x_of_n": [
+     [
+      "58",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "714ba8b7781040afdc8c6ef1e9e9778e255f18addfdea07c17f19eacfa28e1e9",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 59,
+    "chars": 2505,
+    "page_x_of_n": [
+     [
+      "59",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "5e040a406831ed8717a5c87b111b39ea3f3cd3996cad7c81be7778f86735122c",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 60,
+    "chars": 3454,
+    "page_x_of_n": [
+     [
+      "60",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "90fb4a72c7d4c3e39ef1ac57715cb77aac21a876cce80825cce2eb99fb148560",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 61,
+    "chars": 1907,
+    "page_x_of_n": [
+     [
+      "61",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "f06c5d54b740aa2c0b8a793dca31abf4e27d62492ddb4956031560d7726eeb69",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 62,
+    "chars": 480,
+    "page_x_of_n": [
+     [
+      "62",
+      "62"
+     ]
+    ],
+    "page_x": [],
+    "first_line_sha256": "dc84ff1123a8b30eded6abc10eac48af2cc023d61f48e5c226e94fd196b54669",
+    "last_line_sha256": "ba59ab0661fb92cd9c00f972191c542154c7a7e55834b4528fa49840758cf2be",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   }
+  ]
+ },
+ "c6ec489dff7a107b630a8646190a8cda303a54e4e9f5463eaed748ae0a42a1dd": {
+  "held_path": "downloads/independent-reviewer/rop_275403.pdf",
+  "page_count": 21,
+  "metadata": {
+   "format": "PDF 1.4",
+   "title": "Record Of Proceedings_SUPREME COURT",
+   "author": "",
+   "subject": "",
+   "keywords": "",
+   "creator": "Writer",
+   "producer": "LibreOffice 4.1; modified using iText\u00ae 5.2.1 \u00a92000-2012 1T3XT BVBA",
+   "creationDate": "D:20150429162644+05'30'",
+   "modDate": "D:20150429162720+05'30'",
+   "trapped": "",
+   "encryption": null
+  },
+  "pages": [
+   {
+    "pdf_page": 1,
+    "chars": 892,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "462b9547b87739b5dbbe7cfe5ad708962495ccdec42a53653e75ea53105b1b22",
+    "last_line_sha256": "e1b953102c94c9eb6942efcb540fd554b9fa9207808628091765a4d8811a7f88",
+    "labels": {
+     "REPORTABLE": 1,
+     "Signature Not Verified": 1,
+     "Digitally signed by": 1
+    },
+    "widgets": [
+     "Signature"
+    ],
+    "annots": []
+   },
+   {
+    "pdf_page": 2,
+    "chars": 1034,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "dd532c2383f3518a52c5da16937551a9da0b56f6fe9dc2e4c8dd95af9cd489c0",
+    "last_line_sha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 3,
+    "chars": 1263,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "3462741ed641b41ba7425c32398032a983410ecb99b69fdbb501161118888220",
+    "last_line_sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+    "labels": {
+     "SCC": 4
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 4,
+    "chars": 1256,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "23f663630e2f28250c09d7a0c370f55eebf635772f9ce27e46797ab8ef297f4b",
+    "last_line_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+    "labels": {
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 5,
+    "chars": 1638,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "3c9cf704bc1af8f82b4c1b66136ea4194424f494a54e0746587d36b259c31037",
+    "last_line_sha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 6,
+    "chars": 1582,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "78e09afacfd25ff9afb783011e676114d8c352f9fd9d8d72442ab3d906d44334",
+    "last_line_sha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 7,
+    "chars": 1456,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "5a67079c023b2300148afb576e4b2926d8cb939ce90c54f42a441df53d49581d",
+    "last_line_sha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 8,
+    "chars": 1373,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "fdbad23ad76124c0fa1a0de7430730a225116de2db94c22398add9e6f087c3a2",
+    "last_line_sha256": "2c624232cdd221771294dfbb310aca000a0df6ac8b66b696d90ef06fdefb64a3",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 9,
+    "chars": 1507,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "2b42e99a057ec3dc62745a0529668862106ba630e58a7756d7e68c58754029f2",
+    "last_line_sha256": "19581e27de7ced00ff1ce50b2047e7a567c76b1cbaebabe5ef03f7c3017bb5b7",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 10,
+    "chars": 963,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "5bc524c305ccad938fddf68f69a6c86dcb48f4725e4fbc5c1adc6948dcd8a368",
+    "last_line_sha256": "4a44dc15364204a80fe80e9039455cc1608281820fe2b24f1e5233ade6af1dd5",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 11,
+    "chars": 2033,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "25602777cecc667d222cfeb509c62be1591a64d751c3142c1381dee13677a294",
+    "last_line_sha256": "4fc82b26aecb47d2868c4efbe3581732a3e7cbcc6c2efb32062c08170a05eeb8",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 12,
+    "chars": 2153,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "5afc7aeaff3b77fe42b24903a91cd0692980d3fc3b0fd636fd5d8d692b45a892",
+    "last_line_sha256": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 13,
+    "chars": 1971,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "d635076a0adf7441a64cc533501d70eda24ce4d0ec43d873805742f08f71939a",
+    "last_line_sha256": "3fdba35f04dc8c462986c992bcf875546257113072a909c162f7e470e581e278",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 14,
+    "chars": 1606,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "865895477b4adf5d988c6974b0930cfe293da94d50787780b0777c96e7d14bf2",
+    "last_line_sha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 15,
+    "chars": 1701,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "f9c8defca66b125e307363b170ec4e0bedfc1a3adf8c1dec91b4d70e07972e18",
+    "last_line_sha256": "e629fa6598d732768f7c726b4b621285f9c3b85303900aa912017db7617d8bdb",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 16,
+    "chars": 1321,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "f7c04d31c9239e22f737bb8c620c695e99cb6b5a7e10d11574e51ec5c3c092b1",
+    "last_line_sha256": "b17ef6d19c7a5b1ee83b907c595526dcb1eb06db8227d650d5dda0a9f4ce8cd9",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 17,
+    "chars": 1262,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "5b5b11605dd2f2ea296b5daa07e9fb545aa3a48481a3f227c3470743c40edaa7",
+    "last_line_sha256": "4523540f1504cd17100c4835e85b7eefd49911580f8efff0599a8f283be6b9e3",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 18,
+    "chars": 639,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "133e81e4b572ae550ac43a88032f1664f32e12e659f321ebe1f8c4e37f5d91b4",
+    "last_line_sha256": "4ec9599fc203d176a301536c2e091a19bc852759b255bd6818810a42c5fed14a",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 19,
+    "chars": 1139,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "4a2d46407d8adff99dfae4084bd3f04839a64a2a01429eeaaacbf27174b2d1da",
+    "last_line_sha256": "9400f1b21cb527d7fa3d3eabba93557a18ebe7a2ca4e471cfe5e4c5b4ca7f767",
+    "labels": {
+     "RECORD OF PROCEEDINGS": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 20,
+    "chars": 850,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "6150766e756c399808546e579e65b95ac58b397306435a3057ba00cdf2334d25",
+    "last_line_sha256": "f5ca38f748a1d6eaf726b8a42fb575c3c71f1864a8143301782de13da2d9202b",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 21,
+    "chars": 1394,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "20a9f6628ae815cd7fbbd0cdda212fa87150bb2b19fe349d1977dcce6efa5b6a",
+    "last_line_sha256": "6f4b6612125fb3a0daecd2799dfd6c9c299424fd920f9b308110a2c1fbd8f443",
+    "labels": {
+     "Court Master": 2
+    },
+    "widgets": [],
+    "annots": []
+   }
+  ]
+ },
+ "6b495f1483657581965b808b18aa23c09b424989e41d43226c90d35845855cde": {
+  "held_path": "downloads/judgment-auditor/rajbir_bosir_2213461.pdf",
+  "page_count": 15,
+  "metadata": {
+   "format": "PDF 1.4",
+   "title": "Enscript Output",
+   "author": "",
+   "subject": "",
+   "keywords": "",
+   "creator": "GNU enscript 1.6.5",
+   "producer": "GPL Ghostscript 8.71",
+   "creationDate": "D:20170712052241+05'30'",
+   "modDate": "D:20170712052241+05'30'",
+   "trapped": "",
+   "encryption": null
+  },
+  "pages": [
+   {
+    "pdf_page": 1,
+    "chars": 2245,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "50834cbe1e8c224554cd8f1afa99c36ae2a0bc8fbb4769aa61a82dec72035a31",
+    "last_line_sha256": "98cfe42af93a7f38c8954b96ab0a8242a20965d71ae02d5f6b86536abae993ba",
+    "labels": {
+     "REPORTABLE": 1,
+     "Signature Not Verified": 1,
+     "Digitally signed by": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 2,
+    "chars": 2020,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "889532bcfde41c06e9514c8e33f240bfcf39b276dd2cdd3ac73751eb89284788",
+    "last_line_sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+    "labels": {
+     "SCC": 4
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 3,
+    "chars": 2831,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "c4d158ba395556bb1a67e4fe16850509d312d44623ea6da9135300679f1e416e",
+    "last_line_sha256": "84f429ee18f99e21afb9e6c0b0374bf6d02547fb95c3f97f43fb015dc9c97e22",
+    "labels": {
+     "SCC": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 4,
+    "chars": 3888,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "2cf2a908dd9107192ee7e3632df8c480c5a8a2f8d98ffdf4e5efcd5d86a0dcc4",
+    "last_line_sha256": "78b77c640e60c8eae6766c3197b767ca7b592d66fac1df77754b22514ee75cc6",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 5,
+    "chars": 2343,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "21d8e47d89a4cbba5cf3d12ec208541e076f5ca761cb127ffb56237a1e11cca6",
+    "last_line_sha256": "817fb32cb4772c7928c0e6e07ebe9bb591461e2675ba5f0d6ccf01c0fe9d024d",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 6,
+    "chars": 2474,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "fb7d8dd77f70fde3b90524e11bbae27739230d63753972798a367577b5919421",
+    "last_line_sha256": "84940755c84e14b7b047eca18324a28ec85fe1df3dc9e7770cdbcf445846eaed",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 7,
+    "chars": 2448,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "f27c93b1277cfc12a426224af90a6d3d411371372a32d57784554f1d20a212ed",
+    "last_line_sha256": "4b0faede4d90b43f6a65af1690fad3eac81b567f14a3c7841a192a622113d40d",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 8,
+    "chars": 3150,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "21fbcbec9314a5f7769e4a0bc1ce9ca3dd8157a694494962e17af871cccfae5d",
+    "last_line_sha256": "1e7ff65e160db29c323e84eb035b29bdd79937996ac518724c7123d50a75208f",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 9,
+    "chars": 3325,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "7f648f055153da38ac77c24a4967ab305f8569dab9e72ea03746b1b108df8053",
+    "last_line_sha256": "70768b2f20679ac5999e3e09c633f538a867e4532835722b8d772d89ad9d681e",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 10,
+    "chars": 3068,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "47e329d791627dab0325b8cc8f9c54fac9e018c235e7ff265d752ea9999a74e9",
+    "last_line_sha256": "0fb0a0750a0d248376f80d0aee3ac02cb048cb3b2c184e25c42e4eb5d403f52c",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 11,
+    "chars": 2154,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "5284eeb822e35be830905787a71b4ac4ffa7fc5b8fd154838a33a3b69b78d0eb",
+    "last_line_sha256": "9a4efab0da7002568a38b4dab88e5e9a35e41af14774ba2908a56a152d2567c5",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 12,
+    "chars": 1971,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "e5a5349e4c02c97818e508c2b5f1488b174de03ed094d15a8917ea2125e8efb7",
+    "last_line_sha256": "13fd7ad03c7c4fd70d6da0a40a32db9805b52e6ce6d3c3f36482622774c804da",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 13,
+    "chars": 1486,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "40d32c8c2beb75675372409eae136434a92d08b6247070cd7cf73fb60dd40ede",
+    "last_line_sha256": "f06a0a55795cbdf6c33921c7e5286663c4dc5fb7be2515123c1bf9381d446482",
+    "labels": {
+     "RECORD OF PROCEEDINGS": 1
+    },
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 14,
+    "chars": 2128,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "be8614124c66c5a15bcabb60e4f1ca9ee96a7b65dd6c02983e2f8d2042c731d9",
+    "last_line_sha256": "1dc2b3437192414095019f05fd68e73e14906c367df967ea93b2d6910e459efd",
+    "labels": {},
+    "widgets": [],
+    "annots": []
+   },
+   {
+    "pdf_page": 15,
+    "chars": 1190,
+    "page_x_of_n": [],
+    "page_x": [],
+    "first_line_sha256": "3f8bae3e486135531bf20c5e6fb21e720b22ebd4e3f9365e6265566d1d22e02e",
+    "last_line_sha256": "6f4b6612125fb3a0daecd2799dfd6c9c299424fd920f9b308110a2c1fbd8f443",
+    "labels": {
+     "Court Master": 2
+    },
+    "widgets": [],
+    "annots": []
+   }
+  ]
+ }
+}

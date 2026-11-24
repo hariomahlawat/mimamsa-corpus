@@ -1,0 +1,88 @@
+{
+ "label": "T1-20",
+ "file": "<scratchpad>/downloads/independent-reviewer-D/amend/in.gazette.central.e.2019-12-28.214956/214956.pdf",
+ "bytes": 339524,
+ "sha256": "138c1da0d3d9ffafe50603fb810a6d0857c942f845d52e36f355ec8b5add2f8c",
+ "hash_check": "MATCH",
+ "pdf_header_offset": 0,
+ "pdf_header": "%PDF-1.6",
+ "eof_offsets": [
+  917,
+  339517
+ ],
+ "eof_count": 2,
+ "startxref_values": [
+  0,
+  116
+ ],
+ "bytes_after_last_eof_marker": 2,
+ "trailing_bytes_after_last_eof_hex": "0d0a",
+ "signature_dictionaries": [
+  {
+   "dict_object": "22 0 obj",
+   "dict_offset": 324906,
+   "byte_range": [
+    0,
+    324995,
+    332029,
+    7495
+   ],
+   "signed_bytes": 332490,
+   "hole": [
+    324995,
+    332029
+   ],
+   "hole_matches_contents_string": true,
+   "covers_whole_file_except_contents_hole": true,
+   "bytes_after_last_signed_range": 0,
+   "Filter": "/Adobe.PPKLite",
+   "SubFilter": "/adbe.pkcs7.detached",
+   "Name": "MANOJ KUMAR VERMA",
+   "Reason": null,
+   "Location": null,
+   "M": "D:20191228200143+05'30'",
+   "ContactInfo": null,
+   "contents_hex_len": 7032
+  }
+ ],
+ "signature_dictionary_count": 1,
+ "sig_field_types": 0,
+ "type_sig_count": 1,
+ "pages": 6,
+ "metadata": {
+  "producer": "GPL Ghostscript 8.15",
+  "creator": "PScript5.dll Version 5.2.2",
+  "creationDate": "D:20191228195452Z",
+  "modDate": "D:20191228200143+05'30'",
+  "format": "PDF 1.6",
+  "encryption": null
+ },
+ "xmp_present": true,
+ "xmp_Producer": "GPL Ghostscript 8.15",
+ "xmp_CreatorTool": "PScript5.dll Version 5.2.2",
+ "xmp_CreateDate": "2019-12-28T19:54:52",
+ "xmp_ModifyDate": "2019-12-28T20:01:43+05:30",
+ "ia_or_rerender_markers_in_bytes": [],
+ "cms_checks": [
+  {
+   "sig_index": 0,
+   "der_sha256": "363ed20259d89e68e08be8dc2b1aa25d767108f2a89f5a2af4637831d7bc16e2",
+   "der_bytes": 2621,
+   "signed_content_sha256": "739566ad9d5ff3ae8b8f6cf380fb1541c29a64fd3b7c134bf8e1a012e21c49a2",
+   "openssl_cms_verify_noverify_rc": 4,
+   "openssl_cms_verify_stderr": "CMS Verification failure\n4087429F997F0000:error:0200008A:rsa routines:RSA_padding_check_PKCS1_type_1:invalid padding:../crypto/rsa/rsa_pk1.c:79:\n4087429F997F0000:error:02000072:rsa routines:rsa_ossl_public_decrypt:padding check failed:../crypto/rsa/rsa_ossl.c:697:\n4087429F997F0000:error:1C880004:Provider routines:rsa_verify:RSA lib:../providers/implementations/signature/rsa_sig.c:774:\n4087429F997F",
+   "embedded_certs": "subject=C = IN, O = GOVT. OF INDIA PRESS, telephoneNumber = f5f6a451a6519f986c550df1c6ba4a7324eb1a21cd185c4cd8e8bfde4fd3b97e, OU = \"DTE OF PRINTING,CID - 6576633\", postalCode = 110064, ST = Delhi, CN = MANOJ KUMAR VERMA\nissuer=C = IN, O = Gujarat Narmada Valley Fertilizers and Chemicals Limited, OU = Certifying Authority, postalCode = 380054, ST = Gujarat, street = \"Bodakdev, S G Road, Ahmedabad\", houseIdentifier = \"301, GNFC Infotower\", CN = (n)Code Solutions CA 2014",
+   "certs_rc": 0,
+   "cms_eContentType": "pkcs7-data (1.2.840.113549.1.7.1)",
+   "cms_eContent_absent(detached)": true,
+   "cms_digestAlgorithms": [
+    "sha256 (2.16.840.1.101.3.4.2.1)"
+   ],
+   "cms_signatureAlgorithms": [
+    "sha256WithRSAEncryption (1.2.840.113549.1.1.11)"
+   ],
+   "cms_signingTime": null,
+   "cms_messageDigest_raw": "0000 - 73 95 66 ad 9d 5f f3 ae-8b 8f 6c f3 80 s.f.._....l.."
+  }
+ ]
+}
