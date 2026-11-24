@@ -1,0 +1,24 @@
+finding_id,matter,c9_priority,c9_status,c10_effect,c10_basis,c9_status_after_c10
+C9-F-A01,A,P1,PROPOSAL_NOT_APPLIED,UNCHANGED_EVIDENCE_ADDED,"Post-Girish Delhi HC application of Tarsem (R-TARSEM-T4) and J&K HC reproduction of para 22 (R-TARSEM-T6) support 'distinguished, not overruled'. Proposals C9-CP-A01/A02 stand.",PROPOSAL_NOT_APPLIED
+C9-F-A02,A,P1,PROPOSAL_NOT_APPLIED,UNCHANGED_EVIDENCE_ADDED,Same as A01; optional wording C10J-CP-08.,PROPOSAL_NOT_APPLIED
+C9-F-A03,A,P2,PROPOSAL_NOT_APPLIED,UNCHANGED_CONFIRMED,"The SCR rendition f8a14181 (already noted after LG-05) prints [2008] 12 S.C.R. 104, C.A. 5151-52/2008, AUGUST 13, 2008, two Judges; source_url AWS e-SCR mirror, retrieved 2026-11-21. Still no official court copy.",PROPOSAL_NOT_APPLIED
+C9-F-A04,A,P1,PROPOSAL_NOT_APPLIED,UNCHANGED_STRENGTHENED,Deterministic negative search across all held stores: 2026 INSC 1113 / the 12-10-2026 clarification is not held and is not cited in any held judgment.,PROPOSAL_NOT_APPLIED
+C9-F-A05,A,P2,PROPOSAL_NOT_APPLIED,UNCHANGED_EVIDENCE_ADDED,"Several held High Court judgments apply Girish to non-party claimants (R-GIRISH-T1..T3). This is evidence of how it is being read, not of its legal reach; ESC-02 stays.",PROPOSAL_NOT_APPLIED
+C9-F-A06,A,P3,PROPOSAL_NOT_APPLIED,UNCHANGED,SCR rendition prints both phrases too (SCR-C10).,PROPOSAL_NOT_APPLIED
+C9-F-A07,A,P3,PROPOSAL_NOT_APPLIED,UNCHANGED_EVIDENCE_ADDED,"SCR report citation [2026] 2 SCR 615 identified (C10J-CP-09, conditional).",PROPOSAL_NOT_APPLIED
+C9-F-B01,B,P0,PROPOSAL_NOT_APPLIED,NOT_AFFECTED,Statutory matter; no judicial evidence in scope.,PROPOSAL_NOT_APPLIED
+C9-F-B02,B,P2,PROPOSAL_NOT_APPLIED,NOT_AFFECTED,Statutory matter.,PROPOSAL_NOT_APPLIED
+C9-F-B03,B,P3,PROPOSAL_NOT_APPLIED,NOT_AFFECTED,Statutory matter.,PROPOSAL_NOT_APPLIED
+C9-F-C01,C,P2,PROPOSAL_NOT_APPLIED,NOT_AFFECTED,Statutory matter.,PROPOSAL_NOT_APPLIED
+C9-F-D01,D,P2 (disputed: first pass P1),PROPOSAL_NOT_APPLIED,NOT_AFFECTED,Statutory matter.,PROPOSAL_NOT_APPLIED
+C9-F-D02,D,P1,PROPOSAL_NOT_APPLIED,NOT_AFFECTED,Statutory matter.,PROPOSAL_NOT_APPLIED
+C9-F-D03,D,P2,PROPOSAL_NOT_APPLIED,NOT_AFFECTED,Statutory matter.,PROPOSAL_NOT_APPLIED
+C9-F-D04,D,P2,PROPOSAL_NOT_APPLIED,NOT_AFFECTED,Statutory matter.,PROPOSAL_NOT_APPLIED
+C9-F-D05,D,P3,RECORDED_ELSEWHERE,NOT_AFFECTED,Recorded elsewhere.,RECORDED_ELSEWHERE
+C9-F-E01,E,P1,PROPOSAL_NOT_APPLIED,UNCHANGED_EVIDENCE_ADDED,SCR rendition 483b70cb agrees on para 32; later application by SC 2023 INSC 1074 (R-PARASH-T1).,PROPOSAL_NOT_APPLIED
+C9-F-E02,E,P1,PROPOSAL_NOT_APPLIED,UNCHANGED_EVIDENCE_ADDED,"Bench sizes now evidenced from held copies (Shri Kant two Judges, SCR p.1; Parashotam three Judges). A 2025 J&K HC judgment still relies on Shri Kant Sharma (R-SHRIKANT-T2). Relation type remains for the adviser (ESC-06).",PROPOSAL_NOT_APPLIED
+C9-F-E03,E,P3,PROPOSAL_NOT_APPLIED,UNCHANGED,No new evidence.,PROPOSAL_NOT_APPLIED
+C9-F-E04,E,P1,PROPOSAL_NOT_APPLIED,UNCHANGED_CONFIRMED,No copy of the Ram Avtar order (C.A. 418/2012) in any held store; S P Rathore SCR para 7 independently gives the order date 10.12.2014 and case number.,PROPOSAL_NOT_APPLIED
+C9-F-E05,E,P2,PROPOSAL_NOT_APPLIED,UNCHANGED,No new evidence.,PROPOSAL_NOT_APPLIED
+C9-F-E06,E,P2,PROPOSAL_NOT_APPLIED,UNCHANGED_CLARIFIED,"The 'intern mirror' 2f89730f is the raw-store SCR-format rendition from the AWS e-SCR mirror ([2019] 18 S.C.R. 990), not an official copy; para 8 (pp.4-5) shows Rathore confining Ram Avtar (R-RAMAVTAR-T1). Conditional proposal C9-CP-E10 stays conditional.",PROPOSAL_NOT_APPLIED
+C9-F-E07,E,P1,PROPOSAL_NOT_APPLIED,NOT_AFFECTED,Statutory interaction matter.,PROPOSAL_NOT_APPLIED

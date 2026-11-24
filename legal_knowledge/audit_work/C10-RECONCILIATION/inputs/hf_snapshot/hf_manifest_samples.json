@@ -1,0 +1,59 @@
+{
+ "files": [
+  {
+   "gh_range_sha256": [
+    "e707b2fc954f2bf70d04a3e50a13d12039765637e0701d17dd5717ee32bd1918",
+    "8c42c350279ee5145e3384ed11549c808f750211cd996e94cac2f628f6697db4",
+    "32791aed75d8a72197d53ef86ad102d897bbe5896ca0354ef68b24e3119abd07"
+   ],
+   "gh_size": 614935,
+   "hf_size": 614935,
+   "path": "data/SHA256SUMS",
+   "ranges_compared": [
+    [
+     0,
+     400
+    ],
+    [
+     307000,
+     307400
+    ],
+    [
+     614500,
+     614935
+    ]
+   ],
+   "ranges_identical": true
+  },
+  {
+   "gh_projected_size_without_source_aliases_and_on_this_branch": 1863896,
+   "gh_size": 1926766,
+   "hf_header": "sha256,raw_path,bytes,content_type,retrieved_at,source_url,doc_id,parent_doc_id,category,title,original_filename",
+   "hf_size": 1863896,
+   "path": "data/raw_manifest.csv",
+   "ranges_compared": [
+    [
+     0,
+     1200
+    ]
+   ],
+   "ranges_identical_to_projection": true
+  },
+  {
+   "gh_size": 1312382,
+   "hf_size": 1312382,
+   "path": "data/manifest.csv"
+  },
+  {
+   "gh_size": 1374454,
+   "hf_size": 1374454,
+   "path": "data/relations.jsonl"
+  },
+  {
+   "gh_size": 90624457,
+   "hf_size": 90624457,
+   "path": "data/excluded_judgments.jsonl"
+  }
+ ],
+ "summary": "data/SHA256SUMS: same size as GitHub (614935 bytes) and three sampled byte ranges identical; data/raw_manifest.csv: HF size 1863896 equals the GitHub copy re-serialised without its two GitHub-only columns (source_aliases, on_this_branch), header identical; data/manifest.csv, data/relations.jsonl and data/excluded_judgments.jsonl: sizes identical. Sampled comparison only; not a full-byte check."
+}
