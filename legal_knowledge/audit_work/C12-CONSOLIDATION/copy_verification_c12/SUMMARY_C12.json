@@ -1,11 +1,14 @@
 {
  "additions": {
-  "C12_ACQUISITION_25|NEW_COPY_ACQUIRED_C12": 25,
+  "C12_ACQUISITION_25|NEW_COPY_ACQUIRED_EXCLUDED_NOT_RELEVANT": 7,
+  "C12_ACQUISITION_25|NEW_COPY_INGESTED_C12": 18,
   "HF_ONLY_PATH_277|BASELINE_HF_ONLY_SOURCE_COPY": 16,
   "HF_ONLY_PATH_277|NON_SOURCE_FILE": 154,
   "HF_ONLY_PATH_277|PRESERVATION_PACKAGE_METADATA": 59,
   "HF_ONLY_PATH_277|PRESERVED_COPY_OF_BASELINE_WS_ONLY_COPY": 48,
-  "HF_RETRIEVED_4|LOCAL_WORKING_COPY_OF_BASELINE_HF_ONLY_COPY": 4
+  "HF_RETRIEVED_4|LOCAL_WORKING_COPY_OF_BASELINE_HF_ONLY_COPY": 4,
+  "JUDICIAL_RECOVERY_DERIVED_A|DERIVED_OR_MANIFEST_FILE_NOT_SOURCE_COPY": 8,
+  "JUDICIAL_RECOVERY_DERIVED_B|DERIVED_OR_MANIFEST_FILE_NOT_SOURCE_COPY": 29
  },
  "baseline": {
   "c10_manifest_distinct_copies": 4103,
@@ -28,8 +31,21 @@
  "byte_evidence": "legal_knowledge/audit_work/C12-CONSOLIDATION/hf_verification_c12/HASH_LEDGER.csv.gz",
  "canonical_additions": {
   "C11_C12_PRESERVED_48|IN_CANONICAL_INVENTORY; PRESERVED_HF_BYTE_VERIFIED": 48,
-  "C12_ACQUISITION_25|ACQUIRED_NOT_YET_INGESTED": 25,
+  "C12_ACQUISITION_25|EXCLUDED_NOT_RELEVANT_NOT_INGESTED": 7,
+  "C12_ACQUISITION_25|INGESTED_HF_BYTE_VERIFIED": 18,
   "HF_RETRIEVED_4|IN_CANONICAL_INVENTORY; BYTE_VERIFIED; LOCAL_WORKING_COPY_RETRIEVED": 4
+ },
+ "distinct_source_copies_on_hf": {
+  "baseline": 4103,
+  "equals_4121": true,
+  "excluded_held_locally_not_hosted": 7,
+  "ingested_post_baseline": 18,
+  "revisions": {
+   "baseline": "5524c3d99b6a069249012fecea75093b875a22c7",
+   "derived_4_sc": "af7f9d069e71314879c1756f914943d9d2ab777a",
+   "ingested_18": "15bd03ccce7241b1294176fa7c19ab1c5dc109cb"
+  },
+  "total": 4121
  },
  "frozen_registers_unchanged_check": {
   "c10_inventory_equals_quality_snapshot": true,
@@ -114,6 +130,10 @@
    "path": "legal_knowledge/audit_work/C12-CONSOLIDATION/hf_verification_c12/INCOMPLETE_FILES_HF.csv",
    "sha256": "77765e2c205773d8656c7c773cda16430f8a5c7e6d61db7c505e9030f1f9ac6d"
   },
+  "hf_ingested_redownload": {
+   "path": "legal_knowledge/audit_work/C12-CONSOLIDATION/copy_verification_c12/HF_INGESTED_REDOWNLOAD_C12.csv",
+   "sha256": "35f9b677007d569156b89ab341b4a69e1530ecf6f991352ca732149a43d94929"
+  },
   "hf_ledger": {
    "path": "legal_knowledge/audit_work/C12-CONSOLIDATION/hf_verification_c12/HASH_LEDGER.csv.gz",
    "sha256": "dd5267c04ad2f68aec59f74dac361924aacbf3f9695c9e9c87f865641bebcc25"
@@ -146,6 +166,22 @@
    "path": "legal_knowledge/audit_work/C12-CONSOLIDATION/hf_verification_c12/SUMMARY.json",
    "sha256": "9efa05b1a4bc8b0f086d04e19a075c069eb63cf2a6b93b45f59ab43397e2cfb0"
   },
+  "jr_hf_commits": {
+   "path": "legal_knowledge/audit_work/C12-CONSOLIDATION/judicial_recovery_c12/HF_COMMITS.csv",
+   "sha256": "497230747b44ef1da0d419eef9cbaf750045e50d985bc101f458129f664ac1da"
+  },
+  "jr_ingestion_log": {
+   "path": "legal_knowledge/audit_work/C12-CONSOLIDATION/judicial_recovery_c12/INGESTION_LOG.csv",
+   "sha256": "bdc473e8dd63b9d0517e0b137e79c62217617313d119ee7a5f4781f1407cff91"
+  },
+  "jr_staged_manifest": {
+   "path": "legal_knowledge/audit_work/C12-CONSOLIDATION/judicial_recovery_c12/STAGED_MANIFEST.csv",
+   "sha256": "50d04937046a8aa4b8d22f8c729f6a5320ac1147968f32aae2dace48adb4ca6b"
+  },
+  "jr_verification": {
+   "path": "legal_knowledge/audit_work/C12-CONSOLIDATION/judicial_recovery_c12/VERIFICATION.csv",
+   "sha256": "beeb62356ccc8e6c16cf820253b681ae7b6550d79641755c333bd4600068189c"
+  },
   "ledger_v0000_copy_register": {
    "path": "legal_knowledge/audit_work/AUTH-LEDGER/effective/v0000/source_copy_register.csv",
    "sha256": "415c85f4a2434dfbdd9e0ea0c35a3c0abbb9d64b9481c8b043c8256d145ff73b"
@@ -157,7 +193,7 @@
  },
  "investigations": 41,
  "local_rehash_rows": 29,
- "new_distinct_copies_after_baseline": 25,
+ "new_distinct_copies_after_baseline": 18,
  "preservation_overlay": {
   "PRESERVED_HF_BYTE_VERIFIED": 48
  },
@@ -200,5 +236,5 @@
   "HF_AND_GITHUB_RAW_DATA|BYTE_VERIFIED_TRUNCATED_TAIL_BASE_REVISION_PRESENT": 22,
   "HF_ONLY|BYTE_VERIFIED": 16
  },
- "version": "C12-v1"
+ "version": "C12-v2"
 }

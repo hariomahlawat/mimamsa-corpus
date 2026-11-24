@@ -13,6 +13,11 @@ as byte verification.
   python -I -B tools/build_copy_verification_c12.py --check       # rebuild in memory and byte-compare
   python -I -B tools/build_copy_verification_c12.py rehash-local  # re-hash local working copies (4 retrieved + 25
                                                                   # acquired) into LOCAL_REHASH_C12.csv (evidence)
+  python -I -B tools/build_copy_verification_c12.py rehash-hf-ingested  # network: re-download the 18 ingested raw
+                                                                  # copies at HF 15bd03cc, hash them (evidence)
+
+Refresh C12-v2 (after judicial_recovery_c12, git fe9f4332): 18 of the 25 acquisitions ingested at HF 15bd03cc,
+7 excluded as not relevant; HF af7f9d06 added derived text/meta for the 4 SC originals (not source copies).
 """
 import csv, gzip, hashlib, io, json, os, re, sys
 from collections import Counter, defaultdict
@@ -23,7 +28,7 @@ PKG = OUT.parent                                       # C12-CONSOLIDATION/
 AW = PKG.parent                                        # audit_work/
 REV = "5524c3d99b6a069249012fecea75093b875a22c7"
 REPO = "hariomahlawat/mimamsa-corpus"
-VERSION = "C12-v1"
+VERSION = "C12-v2"
 LEDGER_REL = "legal_knowledge/audit_work/C12-CONSOLIDATION/hf_verification_c12/HASH_LEDGER.csv.gz"
 PRES_PREFIX = "legal_knowledge/preservation/c5_working_store/"
 
@@ -56,7 +61,14 @@ IN = {
     "c12_priority_verification": PKG / "statutory_citations/outputs/PRIORITY_VERIFICATION.csv",
     "c12_improvement_matrix": PKG / "statutory_citations/outputs/IMPROVEMENT_MATRIX.csv",
     "local_rehash": OUT / "LOCAL_REHASH_C12.csv",
+    "jr_ingestion_log": PKG / "judicial_recovery_c12/INGESTION_LOG.csv",
+    "jr_hf_commits": PKG / "judicial_recovery_c12/HF_COMMITS.csv",
+    "jr_verification": PKG / "judicial_recovery_c12/VERIFICATION.csv",
+    "jr_staged_manifest": PKG / "judicial_recovery_c12/STAGED_MANIFEST.csv",
+    "hf_ingested_redownload": OUT / "HF_INGESTED_REDOWNLOAD_C12.csv",
 }
+REV_B = "15bd03ccce7241b1294176fa7c19ab1c5dc109cb"   # 18 judgments ingested (raw, text, meta)
+REV_A = "af7f9d069e71314879c1756f914943d9d2ab777a"   # derived text/meta for the 4 SC originals
 
 
 def rel(p):
@@ -109,6 +121,22 @@ def rehash_local():
     return 0
 
 
+def rehash_hf_ingested():
+    import tempfile
+    from huggingface_hub import hf_hub_download
+    rows = []
+    with tempfile.TemporaryDirectory(prefix="cv12_hfdl_") as td:
+        for r in rcsv(IN["jr_verification"]):
+            if r["hf_commit"] != REV_B or not r["hf_path"].startswith("data/raw/"):
+                continue
+            f = hf_hub_download(REPO, r["hf_path"], repo_type="dataset", revision=REV_B, local_dir=td)
+            rows.append(dict(hf_path=r["hf_path"], revision=REV_B, size=str(os.path.getsize(f)), computed_sha256=sha_file(f)))
+    rows.sort(key=lambda r: r["hf_path"])
+    IN["hf_ingested_redownload"].write_text(wcsv(rows, ["hf_path", "revision", "size", "computed_sha256"]), encoding="utf-8")
+    print(f"HF_INGESTED_REDOWNLOAD_C12.csv: {len(rows)} files downloaded at {REV_B[:8]} and hashed")
+    return 0
+
+
 # --------------------------------------------------------------------------------------------------------------------
 def build():
     inp_sha = {k: sha_file(v) for k, v in sorted(IN.items())}
@@ -151,6 +179,14 @@ def build():
         man_ids[r["sha256"]].add(r["doc_id"])
         id_shas[r["doc_id"]].add(r["sha256"])
     rawman = {r["sha256"]: r for r in rcsv(IN["hf_raw_manifest"])}
+    # judicial recovery (post-baseline ingestion)
+    jlog = {r["target"]: r for r in rcsv(IN["jr_ingestion_log"]) if r["target"].startswith("T5-")}
+    jcommits = {r["label"]: r for r in rcsv(IN["jr_hf_commits"])}
+    assert jcommits["B"]["hf_commit"] == REV_B and jcommits["A"]["hf_commit"] == REV_A
+    assert jcommits["A"]["parent_commit"] == REV and jcommits["B"]["parent_commit"] == REV_A
+    jver = rcsv(IN["jr_verification"])
+    jver_by_sha = {r["expected_sha256"]: r for r in jver if r["hf_path"].startswith("data/raw/")}
+    redl = {r["hf_path"]: r for r in rcsv(IN["hf_ingested_redownload"])}
     # C10 identity groups
     eq = rcsv(IN["c10_equivalence"])
     id_groups = defaultdict(list)  # sha -> [(group_id, classification)]
@@ -381,10 +417,24 @@ def build():
     for r in sorted(a25, key=lambda x: x["target_id"]):
         s = r["sha256"]
         lo = local.get(("C12_ACQUISITION_25", r["target_id"]), {})
+        ing = ingest_status(r, jlog, jver_by_sha, redl, lo)
+        new = s not in inv_sha and s not in by_sha
         adds.append(dict(addition_group="C12_ACQUISITION_25", key=r["target_id"], sha256=s, size=r["bytes"],
-                         classification="NEW_COPY_ACQUIRED_C12", new_distinct_source_copy="YES" if s not in inv_sha and s not in by_sha else "NO",
-                         byte_status=("LOCAL_REHASH_MATCH" if lo.get("sha256") == s else f"LOCAL_REHASH {'MISMATCH' if lo.get('sha256') else 'NOT_AVAILABLE'}") + "; NOT_HOSTED_ON_HF",
-                         hf_revision="", status="ACQUIRED_NOT_YET_INGESTED", note=f"{r['description']}; {r['completeness']}"))
+                         classification="NEW_COPY_INGESTED_C12" if ing["status"] == "INGESTED_HF_BYTE_VERIFIED" else
+                                        "NEW_COPY_ACQUIRED_EXCLUDED_NOT_RELEVANT" if ing["status"].startswith("EXCLUDED") else "NEW_COPY_ACQUIRED_C12",
+                         new_distinct_source_copy=("YES" if new and ing["status"] == "INGESTED_HF_BYTE_VERIFIED" else
+                                                   "NO (excluded; held locally only)" if new and ing["status"].startswith("EXCLUDED") else
+                                                   "UNDETERMINED" if new else "NO"),
+                         byte_status=ing["byte_status"], hf_revision=ing["hf_revision"], status=ing["status"],
+                         note=f"{r['description']}; {r['completeness']}; {ing['note']}"))
+    for v in sorted(jver, key=lambda x: (x["label"], x["hf_path"])):
+        if v["hf_path"].startswith("data/raw/") or v["result"] != "MATCH":
+            continue  # raw copies are rows above; tree-diff rows are not files
+        adds.append(dict(addition_group=f"JUDICIAL_RECOVERY_DERIVED_{v['label']}", key=v["hf_path"], sha256=v["downloaded_sha256"],
+                         size=v["bytes"], classification="DERIVED_OR_MANIFEST_FILE_NOT_SOURCE_COPY", new_distinct_source_copy="NO",
+                         byte_status="BYTE_VERIFIED (judicial_recovery_c12 VERIFICATION.csv: re-downloaded hash " + v["result"] + ")",
+                         hf_revision=v["hf_commit"], status="ON_HF_DERIVED",
+                         note="derived text/meta for the 4 SC originals" if v["label"] == "A" else "text/meta/additive manifest for the 18 ingested judgments"))
     ACOLS = ["addition_group", "key", "sha256", "size", "classification", "new_distinct_source_copy", "byte_status",
              "hf_revision", "legal_knowledge_vs_staging", "status", "note"]
 
@@ -409,14 +459,15 @@ def build():
         s = r["sha256"]
         lo = local.get(("C12_ACQUISITION_25", r["target_id"]), {})
         did = (re.search(r"doc_id (\S+)", r["provenance"]) or [None, ""])[1]
+        ing = ingest_status(r, jlog, jver_by_sha, redl, lo)
         canon.append(dict(addition_group="C12_ACQUISITION_25", sha256=s, id=f"{r['target_id']} / {did}", title=r["description"],
-                          in_canonical_inventory="YES" if s in inv_sha else "NO",
-                          canonical_inventory_segment=inv_sha.get(s, {}).get("presence", "") or ("crawler doc_id present in data/manifest.csv" if did in id_shas else "doc_id not in data/manifest.csv (crawler-excluded title)"),
-                          hosted_path="NOT_HOSTED_ON_HF (" + ("present on HF under another path" if s in by_sha else "sha256 absent from the HF ledger") + ")",
-                          hf_revision="", computed_sha256="",
+                          in_canonical_inventory=("YES (C10)" if s in inv_sha else
+                                                  "ADDED_POST_BASELINE (HF data/manifest_additions/c12_2026-11-24_*; C10 inventory frozen)" if ing["status"] == "INGESTED_HF_BYTE_VERIFIED" else
+                                                  "NO (excluded; listed here and in judicial_recovery_c12/INGESTION_LOG.csv)"),
+                          canonical_inventory_segment=inv_sha.get(s, {}).get("presence", "") or ("crawler doc_id present in data/manifest.csv@5524c3d9" if did in id_shas else "doc_id not in data/manifest.csv@5524c3d9 (crawler-excluded title)"),
+                          hosted_path=ing["hosted_path"], hf_revision=ing["hf_revision"], computed_sha256=ing["computed_sha256"],
                           local_rehash=("MATCH " if lo.get("sha256") == s else "NO_MATCH ") + r["stored_path"],
-                          status="ACQUIRED_NOT_YET_INGESTED",
-                          next_action="Owner-approved ingestion into the canonical dataset (HF) with a new inventory version; then byte-verify at the new revision"))
+                          status=ing["status"], next_action=ing["next_action"]))
     KCOLS = list(canon[0].keys())
 
     # ---------------------------------------------------------------- 6. investigations
@@ -489,9 +540,11 @@ def build():
         "baseline copy (RAF 2000 India Code PDF) prints 'For Official Use Only'; byte-verified on the private HF dataset",
         "hf_verification_c12 MARKING_HITS.csv; COORDINATOR_NOTES.md", "Already hosted privately; not among the 48",
         "Owner decision on quarantine/visibility under repository governance; nothing changed here")
-    add("NOT_HOSTED_ON_HF", "C12 acquisitions", len(a25), "25 Cycle 12 acquisitions are held only in the session working store",
-        "acquisition/ACQUISITION_MANIFEST.csv; LOCAL_REHASH_C12.csv", "Downloaded and sha256-verified against crawler-logged values; not uploaded",
-        "Owner-approved ingestion to HF before the working store is cleared; then byte-verify")
+    ist = Counter(ingest_status(r, jlog, jver_by_sha, redl, local.get(("C12_ACQUISITION_25", r["target_id"]), {}))["status"] for r in a25)
+    add("C12_ACQUISITIONS_INGESTION", "C12 acquisitions", len(a25), "; ".join(f"{k} {v}" for k, v in sorted(ist.items())),
+        "judicial_recovery_c12 INGESTION_LOG.csv, HF_COMMITS.csv, VERIFICATION.csv; HF_INGESTED_REDOWNLOAD_C12.csv; LOCAL_REHASH_C12.csv",
+        f"18 ingested additively at HF {REV_B[:8]} and byte-verified here by re-download; 7 excluded as not relevant (LLM relevance review, not legal review) and held only in the session working store",
+        "Excluded 7: owner to confirm exclusion and decide whether to keep the local bytes; nothing deleted. Ingested 18: record in the next canonical inventory version")
     if outside:
         add("PRESERVATION_DEPENDENCY_OUTSIDE_274", ";".join(outside), len(outside), "items outside the 274 that cite one of the 48 via C12",
             "C12 PRIORITY_VERIFICATION", "", "Review")
@@ -520,6 +573,11 @@ def build():
         additions=dict(Counter(f"{a['addition_group']}|{a['classification']}" for a in adds)),
         canonical_additions=dict(Counter(f"{k['addition_group']}|{k['status']}" for k in canon)),
         new_distinct_copies_after_baseline=sum(1 for a in adds if a["new_distinct_source_copy"] == "YES"),
+        distinct_source_copies_on_hf=dict(baseline=len(inv_sha), ingested_post_baseline=sum(1 for a in adds if a["new_distinct_source_copy"] == "YES"),
+                                          total=len(inv_sha) + sum(1 for a in adds if a["new_distinct_source_copy"] == "YES"),
+                                          equals_4121=len(inv_sha) + sum(1 for a in adds if a["new_distinct_source_copy"] == "YES") == 4121,
+                                          excluded_held_locally_not_hosted=sum(1 for a in adds if a["new_distinct_source_copy"].startswith("NO (excluded")),
+                                          revisions=dict(baseline=REV, derived_4_sc=REV_A, ingested_18=REV_B)),
         local_rehash_rows=len(local), investigations=len(inv_rows),
         inputs={k: dict(path=rel(v), sha256=inp_sha[k]) for k, v in sorted(IN.items())},
         frozen_registers_unchanged_check=dict(c5_copy_register_equals_auth_ledger_v0000=inp_sha["c5_copy_register"] == inp_sha["ledger_v0000_copy_register"],
@@ -534,7 +592,7 @@ def build():
         "SUMMARY_C12.json": json.dumps(summary, indent=1, sort_keys=True) + "\n",
     }
     files["README.md"] = readme(summary, inv_rows, st, seg, reg_by_seg, clos, clos_src, adds, canon, ident_c, vs_seg)
-    names = sorted(list(files) + ["LOCAL_REHASH_C12.csv", "tools/build_copy_verification_c12.py"])
+    names = sorted(list(files) + ["LOCAL_REHASH_C12.csv", "HF_INGESTED_REDOWNLOAD_C12.csv", "tools/build_copy_verification_c12.py"])
     sums = ""
     for n in names:
         b = files[n].encode() if n in files else (OUT / n).read_bytes()
@@ -589,7 +647,8 @@ The 50 C10 `SOURCE_NOT_HELD_IN_C5_REGISTER` rows are sources with no bytes anywh
 `BYTE_VERIFIED_INCOMPLETE_DOCUMENT`: the hash matches the recorded copy but the PDF is truncated (C11 `STORED_COPY_TRUNCATED_CONTENT_MAY_BE_MISSING`).
 `BYTE_VERIFIED_TRUNCATED_TAIL_BASE_REVISION_PRESENT`: the hash matches; the file tail was cut inside a later signature update, and the judgment's
 base revision is complete (C11 `BASE_REVISION_ONLY_SIGNATURE_UPDATE_CUT`). `NOT_HOSTED_ON_HF` does not occur in the baseline: every one of the 4,103
-copies is on HF at `{REV[:8]}`. It applies only to the 25 C12 acquisitions, recorded as `ACQUIRED_NOT_YET_INGESTED`.
+copies is on HF at `{REV[:8]}`. Post-baseline: 18 of the 25 C12 acquisitions are `INGESTED_HF_BYTE_VERIFIED` at `{REV_B[:8]}`; 7 are
+`EXCLUDED_NOT_RELEVANT_NOT_INGESTED` (still listed; local bytes kept).
 
 Identity is a separate column, so that it does not mask the byte result: {', '.join(f'{k} {v:,}' for k, v in sorted(ident_c.items()))}.
 `DUPLICATE_IDENTITY` covers one sha256 under several crawler doc_ids and one doc_id or C5 source id with several sha256 values.
@@ -604,8 +663,14 @@ No baseline sha256 appears at more than one HF path.
 - **277 HF-only paths** (relative to git `ad77758d`) contain no new source copy: 16 are the baseline HF-only copies and 48 are the preserved copies (already in the 4,103).
   The rest are preservation package files and non-source files (documentation and derived data).
 - **4 HF-only SC binaries retrieved**: these are local working copies of 4 of the 16 baseline HF-only copies. They are not new copies.
-- **25 C12 acquisitions**: new distinct copies, not on HF and not in the C10 inventory. Status `ACQUIRED_NOT_YET_INGESTED`.
-- Distinct known copies after C12: 4,103 on HF + {S['new_distinct_copies_after_baseline']} acquired, not hosted = {4103 + S['new_distinct_copies_after_baseline']:,}. The 18 C12 re-fetches of truncated HC files produced no new sha256.
+  HF `{REV_A[:8]}` added 8 derived text/meta files for them under `legal_knowledge/judgment_originals_derived/c12/`. These are derived files, not source copies.
+- **25 C12 acquisitions** (judicial_recovery_c12, git `fe9f4332`):
+  - **18 ingested** additively at HF `{REV_B[:8]}` under `data/raw/{{hc,sci}}/`, with `data/manifest_additions/c12_2026-11-24_*`. They are byte-verified here: re-downloaded at `{REV_B[:8]}` and hashed (`HF_INGESTED_REDOWNLOAD_C12.csv`), and cross-checked with `judicial_recovery_c12/VERIFICATION.csv` (downloaded_sha256).
+  - **7 excluded as not relevant** (`EXCLUDED_NOT_RELEVANT_NOT_INGESTED`). They are kept in the lists, and their bytes remain only in the session working store.
+  - The other 29 files of `{REV_B[:8]}` (text, meta, manifests) are derived or manifest files.
+- **Distinct source copies on HF: {S['distinct_source_copies_on_hf']['baseline']:,} + {S['distinct_source_copies_on_hf']['ingested_post_baseline']} = {S['distinct_source_copies_on_hf']['total']:,}** (computed, not forced; equals 4,121: {S['distinct_source_copies_on_hf']['equals_4121']}).
+  The 18 sha256 values are absent from the baseline inventory and from the `{REV[:8]}` ledger, and distinct from each other.
+  Another {S['distinct_source_copies_on_hf']['excluded_held_locally_not_hosted']} distinct copies are held locally but not hosted. The 18 C12 re-fetches of truncated HC files produced no new sha256.
 
 ## 4. Preservation overlay (`SOURCE_REGISTER_PRESERVATION_OVERLAY_C12.csv`)
 
@@ -651,18 +716,46 @@ By source: {', '.join(f'{k} {v}' for k, v in sorted(clos_src.items()))}.
 3. Completeness for judgments comes from C11 `JUDGMENT_IDENTITY_REGISTER.source_completeness`. Other PDFs use the ledger's PyMuPDF open and trailing `%%EOF` checks.
    `.doc`/JSON completeness is not assessed.
 4. Identity comes from HF `data/manifest.csv` (byte-identical to git) doc_ids per sha256, together with the C10 `COPY_EQUIVALENCE_REGISTER` one-id/several-bytes groups.
-5. `rehash-local` re-hashes the 4 retrieved and 25 acquired working copies into `LOCAL_REHASH_C12.csv`. This is the only step that reads the working store.
+5. `rehash-local` re-hashes the 4 retrieved and 25 acquired working copies into `LOCAL_REHASH_C12.csv`.
+   `rehash-hf-ingested` (network, read-only) re-downloads the 18 ingested raw files at `{REV_B[:8]}` and hashes them into `HF_INGESTED_REDOWNLOAD_C12.csv`.
    The build itself is offline and deterministic. Input sha256 values are in `SUMMARY_C12.json`.
-6. Limits:
+6. Commits `{REV_A[:8]}` and `{REV_B[:8]}` are additive children of `{REV[:8]}`: judicial_recovery_c12 checked the tree diff, and found only staged paths added and nothing removed.
+   Baseline copy rows therefore keep `dataset_revision` `{REV[:8]}`.
+7. Limits:
    - A matching hash proves byte identity with the recorded copy. It does not prove authenticity, completeness of text or legal currency.
-   - The 25 acquisitions and 4 retrieved copies exist locally only in the session working store.
+   - The 7 excluded acquisitions exist only in the session working store. The exclusion is an LLM relevance review, not a legal review.
 """
+
+
+def ingest_status(r, jlog, jver_by_sha, redl, lo):
+    s = r["sha256"]
+    j = jlog.get(r["target_id"], {})
+    act = j.get("action", "")
+    if act == "INGESTED":
+        v = jver_by_sha.get(s, {})
+        d = redl.get(v.get("hf_path", ""), {})
+        ok = bool(v) and d.get("computed_sha256") == s == v.get("downloaded_sha256") and v.get("hf_commit") == REV_B and d.get("size") == r["bytes"]
+        return dict(status="INGESTED_HF_BYTE_VERIFIED" if ok else "INGESTED_NOT_BYTE_VERIFIED", hosted_path=v.get("hf_path", ""),
+                    hf_revision=REV_B if v else "", computed_sha256=d.get("computed_sha256", ""),
+                    byte_status=("BYTE_VERIFIED (re-downloaded at " + REV_B[:8] + " and hashed; = judicial_recovery VERIFICATION downloaded_sha256)") if ok else "NOT_VERIFIED",
+                    note=f"doc_id {j.get('doc_id', '')}; ingested commit label B",
+                    next_action="None for availability. Record in the next canonical inventory version (C10 inventory frozen)" if ok else "Re-verify")
+    if act == "EXCLUDED_NOT_RELEVANT":
+        return dict(status="EXCLUDED_NOT_RELEVANT_NOT_INGESTED", hosted_path="NOT_HOSTED_ON_HF (excluded as not relevant)", hf_revision="",
+                    computed_sha256="", byte_status=("LOCAL_REHASH_MATCH" if lo.get("sha256") == s else "LOCAL_REHASH NOT_MATCHED") + "; NOT_HOSTED_ON_HF",
+                    note="excluded: " + j.get("reason", "")[:200],
+                    next_action="Owner to confirm the exclusion (LLM relevance review, not legal review); keep listed; local bytes not deleted")
+    return dict(status="ACQUIRED_NOT_YET_INGESTED", hosted_path="NOT_HOSTED_ON_HF", hf_revision="", computed_sha256="",
+                byte_status=("LOCAL_REHASH_MATCH" if lo.get("sha256") == s else "LOCAL_REHASH NOT_MATCHED") + "; NOT_HOSTED_ON_HF",
+                note="no ingestion record", next_action="Owner-approved ingestion")
 
 
 def main():
     a = sys.argv[1:]
     if a and a[0] == "rehash-local":
         return rehash_local()
+    if a and a[0] == "rehash-hf-ingested":
+        return rehash_hf_ingested()
     files = build()
     if "--check" in a:
         bad = [k for k, v in files.items() if not (OUT / k).exists() or (OUT / k).read_text(encoding="utf-8") != v]
@@ -672,7 +765,7 @@ def main():
         (OUT / k).write_text(v, encoding="utf-8")
     s = json.loads(files["SUMMARY_C12.json"])
     print(json.dumps({k: s[k] for k in ("baseline", "verification_status", "identity_status", "preservation_overlay", "risk_closure",
-                                        "canonical_additions", "new_distinct_copies_after_baseline")}, indent=1))
+                                        "canonical_additions", "new_distinct_copies_after_baseline", "distinct_source_copies_on_hf")}, indent=1))
     return 0
 
 

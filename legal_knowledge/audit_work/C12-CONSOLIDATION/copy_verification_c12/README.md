@@ -43,7 +43,8 @@ The 50 C10 `SOURCE_NOT_HELD_IN_C5_REGISTER` rows are sources with no bytes anywh
 `BYTE_VERIFIED_INCOMPLETE_DOCUMENT`: the hash matches the recorded copy but the PDF is truncated (C11 `STORED_COPY_TRUNCATED_CONTENT_MAY_BE_MISSING`).
 `BYTE_VERIFIED_TRUNCATED_TAIL_BASE_REVISION_PRESENT`: the hash matches; the file tail was cut inside a later signature update, and the judgment's
 base revision is complete (C11 `BASE_REVISION_ONLY_SIGNATURE_UPDATE_CUT`). `NOT_HOSTED_ON_HF` does not occur in the baseline: every one of the 4,103
-copies is on HF at `5524c3d9`. It applies only to the 25 C12 acquisitions, recorded as `ACQUIRED_NOT_YET_INGESTED`.
+copies is on HF at `5524c3d9`. Post-baseline: 18 of the 25 C12 acquisitions are `INGESTED_HF_BYTE_VERIFIED` at `15bd03cc`; 7 are
+`EXCLUDED_NOT_RELEVANT_NOT_INGESTED` (still listed; local bytes kept).
 
 Identity is a separate column, so that it does not mask the byte result: DUPLICATE_IDENTITY 128, UNIQUE 3,975.
 `DUPLICATE_IDENTITY` covers one sha256 under several crawler doc_ids and one doc_id or C5 source id with several sha256 values.
@@ -53,22 +54,31 @@ No baseline sha256 appears at more than one HF path.
 
 | Group / classification | Rows |
 |---|---|
-| C12_ACQUISITION_25 | NEW_COPY_ACQUIRED_C12 | 25 |
+| C12_ACQUISITION_25 | NEW_COPY_ACQUIRED_EXCLUDED_NOT_RELEVANT | 7 |
+| C12_ACQUISITION_25 | NEW_COPY_INGESTED_C12 | 18 |
 | HF_ONLY_PATH_277 | BASELINE_HF_ONLY_SOURCE_COPY | 16 |
 | HF_ONLY_PATH_277 | NON_SOURCE_FILE | 154 |
 | HF_ONLY_PATH_277 | PRESERVATION_PACKAGE_METADATA | 59 |
 | HF_ONLY_PATH_277 | PRESERVED_COPY_OF_BASELINE_WS_ONLY_COPY | 48 |
 | HF_RETRIEVED_4 | LOCAL_WORKING_COPY_OF_BASELINE_HF_ONLY_COPY | 4 |
+| JUDICIAL_RECOVERY_DERIVED_A | DERIVED_OR_MANIFEST_FILE_NOT_SOURCE_COPY | 8 |
+| JUDICIAL_RECOVERY_DERIVED_B | DERIVED_OR_MANIFEST_FILE_NOT_SOURCE_COPY | 29 |
 
 - **277 HF-only paths** (relative to git `ad77758d`) contain no new source copy: 16 are the baseline HF-only copies and 48 are the preserved copies (already in the 4,103).
   The rest are preservation package files and non-source files (documentation and derived data).
 - **4 HF-only SC binaries retrieved**: these are local working copies of 4 of the 16 baseline HF-only copies. They are not new copies.
-- **25 C12 acquisitions**: new distinct copies, not on HF and not in the C10 inventory. Status `ACQUIRED_NOT_YET_INGESTED`.
-- Distinct known copies after C12: 4,103 on HF + 25 acquired, not hosted = 4,128. The 18 C12 re-fetches of truncated HC files produced no new sha256.
+  HF `af7f9d06` added 8 derived text/meta files for them under `legal_knowledge/judgment_originals_derived/c12/`. These are derived files, not source copies.
+- **25 C12 acquisitions** (judicial_recovery_c12, git `fe9f4332`):
+  - **18 ingested** additively at HF `15bd03cc` under `data/raw/{hc,sci}/`, with `data/manifest_additions/c12_2026-11-24_*`. They are byte-verified here: re-downloaded at `15bd03cc` and hashed (`HF_INGESTED_REDOWNLOAD_C12.csv`), and cross-checked with `judicial_recovery_c12/VERIFICATION.csv` (downloaded_sha256).
+  - **7 excluded as not relevant** (`EXCLUDED_NOT_RELEVANT_NOT_INGESTED`). They are kept in the lists, and their bytes remain only in the session working store.
+  - The other 29 files of `15bd03cc` (text, meta, manifests) are derived or manifest files.
+- **Distinct source copies on HF: 4,103 + 18 = 4,121** (computed, not forced; equals 4,121: True).
+  The 18 sha256 values are absent from the baseline inventory and from the `5524c3d9` ledger, and distinct from each other.
+  Another 7 distinct copies are held locally but not hosted. The 18 C12 re-fetches of truncated HC files produced no new sha256.
 
 ## 4. Preservation overlay (`SOURCE_REGISTER_PRESERVATION_OVERLAY_C12.csv`)
 
-48 rows, one per preserved copy, versioned `C12-v1`, status `PRESERVATION_RECORDED_DERIVATIVE_OVERLAY_ORIGINAL_UNCHANGED`. This follows the
+48 rows, one per preserved copy, versioned `C12-v2`, status `PRESERVATION_RECORDED_DERIVATIVE_OVERLAY_ORIGINAL_UNCHANGED`. This follows the
 C12 overlay convention (`..._DERIVATIVE_OVERLAY_ORIGINAL_UNCHANGED`). Outcome: PRESERVED_HF_BYTE_VERIFIED 48.
 `PRESERVED_HF_BYTE_VERIFIED` requires all of the following:
 - the ledger `computed_sha256` equals the register sha256;
@@ -96,7 +106,8 @@ By source: C5-SRC-J-SC-1982-PPS-BEDI 6, C5-SRC-J-SC-1987-RANJIT-THAKUR 2, C5-SRC
 | Group / status | Rows |
 |---|---|
 | C11_C12_PRESERVED_48 | IN_CANONICAL_INVENTORY; PRESERVED_HF_BYTE_VERIFIED | 48 |
-| C12_ACQUISITION_25 | ACQUIRED_NOT_YET_INGESTED | 25 |
+| C12_ACQUISITION_25 | EXCLUDED_NOT_RELEVANT_NOT_INGESTED | 7 |
+| C12_ACQUISITION_25 | INGESTED_HF_BYTE_VERIFIED | 18 |
 | HF_RETRIEVED_4 | IN_CANONICAL_INVENTORY; BYTE_VERIFIED; LOCAL_WORKING_COPY_RETRIEVED | 4 |
 
 ## 7. Exceptions and dispositions (`INVESTIGATIONS_C12.csv`; nothing changed)
@@ -143,7 +154,7 @@ By source: C5-SRC-J-SC-1982-PPS-BEDI 6, C5-SRC-J-SC-1987-RANJIT-THAKUR 2, C5-SRC
 | CV12-038 | UNEXPECTED_FILES_HF_ONLY_PATHS | 277 | No unexpected source binary. The 277 paths are the 16 baseline HF-only copies, the 48 preserved copies, the preservation package files and non-source documentat | None for copy verification; staging/HF divergence of legal_knowledge/ is a separate governance item |
 | CV12-039 | HF_VS_GIT_DISCREPANCIES | 26 | None is a source copy mismatch: 5 non-source files differ by design (HF README, column-reduced raw_manifest, newer schemas); 21 raw India Code JSON listings are | No copy action; consider listing the 21 JSON copies in the manifest in a later crawler release |
 | CV12-040 | ACCESS_MARKING_OWNER_ATTENTION | 1 | Already hosted privately; not among the 48 | Owner decision on quarantine/visibility under repository governance; nothing changed here |
-| CV12-041 | NOT_HOSTED_ON_HF | 25 | Downloaded and sha256-verified against crawler-logged values; not uploaded | Owner-approved ingestion to HF before the working store is cleared; then byte-verify |
+| CV12-041 | C12_ACQUISITIONS_INGESTION | 25 | 18 ingested additively at HF 15bd03cc and byte-verified here by re-download; 7 excluded as not relevant (LLM relevance review, not legal review) and held only i | Excluded 7: owner to confirm exclusion and decide whether to keep the local bytes; nothing deleted. Ingested 18: record in the next canonica |
 
 ## Method
 
@@ -152,8 +163,11 @@ By source: C5-SRC-J-SC-1982-PPS-BEDI 6, C5-SRC-J-SC-1987-RANJIT-THAKUR 2, C5-SRC
 3. Completeness for judgments comes from C11 `JUDGMENT_IDENTITY_REGISTER.source_completeness`. Other PDFs use the ledger's PyMuPDF open and trailing `%%EOF` checks.
    `.doc`/JSON completeness is not assessed.
 4. Identity comes from HF `data/manifest.csv` (byte-identical to git) doc_ids per sha256, together with the C10 `COPY_EQUIVALENCE_REGISTER` one-id/several-bytes groups.
-5. `rehash-local` re-hashes the 4 retrieved and 25 acquired working copies into `LOCAL_REHASH_C12.csv`. This is the only step that reads the working store.
+5. `rehash-local` re-hashes the 4 retrieved and 25 acquired working copies into `LOCAL_REHASH_C12.csv`.
+   `rehash-hf-ingested` (network, read-only) re-downloads the 18 ingested raw files at `15bd03cc` and hashes them into `HF_INGESTED_REDOWNLOAD_C12.csv`.
    The build itself is offline and deterministic. Input sha256 values are in `SUMMARY_C12.json`.
-6. Limits:
+6. Commits `af7f9d06` and `15bd03cc` are additive children of `5524c3d9`: judicial_recovery_c12 checked the tree diff, and found only staged paths added and nothing removed.
+   Baseline copy rows therefore keep `dataset_revision` `5524c3d9`.
+7. Limits:
    - A matching hash proves byte identity with the recorded copy. It does not prove authenticity, completeness of text or legal currency.
-   - The 25 acquisitions and 4 retrieved copies exist locally only in the session working store.
+   - The 7 excluded acquisitions exist only in the session working store. The exclusion is an LLM relevance review, not a legal review.
