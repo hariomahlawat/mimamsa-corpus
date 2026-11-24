@@ -28,7 +28,7 @@ C10 (2026-11-24) reported 4,103 distinct source-copy hashes across stores, inclu
 
 ## 3. Logical architecture
 
-`
+```
 EXTERNAL RESEARCH / APPROVED ACQUISITION  [internet-connected, separate]
                 |
           verified import package
@@ -53,7 +53,7 @@ DOCUMENT PARAGRAPHS / PROVISIONS -> SOURCE AUTHENTICATION + REVIEWS
                  +---- EVIDENCE RESPONSE -+
                              |
                OFFLINE AUTHORISED USER
-`
+```
 
 The diagram is a proposed logical dependency model. It does not prescribe individual microservices.
 
@@ -128,12 +128,12 @@ AI can rank and discover candidate links; deterministic, reviewed rules govern t
 
 ## 9. Ingestion and release pipeline
 
-`
+```
 Acquire (approval) -> preserve bytes -> verify identity/hash -> extract text
 -> quality/relevance -> candidate relationships -> source review
 -> proposition and temporal review -> approval where required
 -> signed/checksummed offline release -> controlled LAN import
-`
+```
 
 Original sources, historical records and prior review decisions are immutable. Corrections are append-only overlays or explicitly versioned replacements under the established authorisation rules.
 
