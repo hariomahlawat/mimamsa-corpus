@@ -47,3 +47,16 @@ After any of these, run `sha256sum -c` on a fresh download of the stored copies 
    A session with a read credential can also verify the upload, revision-pinned.
 
 Release of the temporary copies waits for that verification.
+
+## Update 2026-11-24 (later): upload completed and verified
+
+| Step | Result |
+| --- | --- |
+| Credential | The owner added a fine-grained HF token as a network secret limited to `huggingface.co`. The session never saw its value. The first attempt returned 404 because the dataset entry in the token had no permissions. After the owner granted read and write on `hariomahlawat/mimamsa-corpus`, access worked. The dataset is private. |
+| Pre-upload | The destination `legal_knowledge/preservation/` was empty at dataset head `e1a7fa47`. The staged folder was re-verified: 0 failures in `PACKAGE_SHA256SUMS`. |
+| 4. Upload | One commit, `5524c3d99b6a069249012fecea75093b875a22c7` ("Preserve 48 C5 working-store source PDFs"), with parent pinned to `e1a7fa47`. It adds 107 files under `legal_knowledge/preservation/c5_working_store/` and touches nothing else. |
+| 5. Independent verification | The upload was downloaded at revision `5524c3d9` into a fresh directory. `sha256sum -c PACKAGE_SHA256SUMS`: 0 failures out of 106. The SHA-256 set of the 48 downloaded PDFs equals `SOURCE_MANIFEST.sha256` read from git, not from the upload: 0 missing, 0 unexpected. |
+| Status | **Preserved and byte-verified** in the approved private store. |
+| 8. Temporary copies | **Still retained.** Releasing them is the owner's decision now that verification has passed. |
+
+This was a technical integrity check. It does not authenticate the documents' legal content.
