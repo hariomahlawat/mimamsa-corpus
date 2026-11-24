@@ -1,0 +1,6 @@
+id,severity,statement,evidence,requested_action
+CC-01,P3,"FR-04 half fixed: SC_C9_FINDINGS.md section 7 corrected, but build_c9_pack.py usage text still names c9out_SC; disposition says Fixed","build_c9_pack.py lines 3-8","Fix at next regeneration or say so"
+CC-02,INFO,"Delta is one line of SC_C9_FINDINGS.md plus three new review files; review files byte-identical to those delivered","git diff --name-status; cmp",None
+CC-03,INFO,"sha256sum -c passes 6/6 and 15/15; build_c9_pack, judis_scan and scr_pinpoint_check pass --check; the edited file is in no checksum file","Clone runs",None
+CC-04,INFO,"599 tests OK, 6 skipped with reasons, on venv and python3.11; no service-number-shaped token added","rev_heads/logs",None
+CC-05,INFO,"FR-01..03 recorded in the new file only; substance not re-verified","DISPOSITIONS_ba9676e9.md",None

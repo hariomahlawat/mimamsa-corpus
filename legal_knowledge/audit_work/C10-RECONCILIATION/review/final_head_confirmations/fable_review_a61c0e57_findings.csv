@@ -1,0 +1,8 @@
+id,severity,statement,evidence,requested_action
+CL-01,P3,"FL-03 label 'register summary of the competing sources (not verbatim readings)' is also applied to C9-AG-RES-SC4-01, whose cell holds two quoted readings with hash and page; correct for C-02 and C-03. Reading (a) ends mid-word, as in the C5 register","amendment_graph.csv; source_conflict_register.csv C5-CF-SC4-01; build_stat_c9.py lines 739-742","Label by content and note the register's cut"
+CL-02,P3,"FL-06 marker added to evidence only; provision (200; 2 edges), amending_instrument (160; 2 edges), edge_kind (60; 21 edges) and commencement_as_printed in status_detail (120) are still cut without a marker","build_stat_c9.py lines 755, 841-843; length counts","Mark each cut or carry in full"
+CL-03,INFO,"FL-01 confirmed: build_corr.py --check rc 0 on both interpreters; sha256sum -c 6/6 (CORRECTIONS) and 122/122 (STATUTORY)","Clone runs",None
+CL-04,INFO,"FL-02 confirmed in the document; --check --verify-held OK (33 anchors) and writes nothing. Tool behaviour without --check is unchanged","CORRECTIONS_C9_FINDINGS.md lines 162-164",Optional: make --verify-held read-only
+CL-05,INFO,"build_stat_c9, collect_readings_c9, extract_branch_pins and the TXN demo all pass --check","Clone runs",None
+CL-06,INFO,"Delta confined to C9-LEGAL-EVIDENCE; 3 preserved_readings cells, 10 evidence cells, one finding cell, one proposal cell; counts unchanged; FL-04 wording as claimed","Cell-level diff",None
+CL-07,INFO,"TXN-DEMO 2 tests OK; full legal-audit suite 610 OK, 6 skipped with reasons, on venv and python3.11; review files byte-identical; no service-number-shaped token added","rev_heads/logs",None

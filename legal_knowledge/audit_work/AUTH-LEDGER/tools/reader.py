@@ -30,7 +30,7 @@ def _exec_pinned(name, rel, pinmap):
     """Execute exactly the pinned bytes of a frozen module (no import system, no bytecode cache, no sys.path lookup)."""
     import hashlib, types
     path = AW / rel
-    data = path.read_bytes()
+    data = L.read_regular_bytes(path)
     if hashlib.sha256(data).hexdigest() != pinmap["legal_knowledge/audit_work/" + rel]:
         raise LedgerError(f"frozen code {rel} does not match its pin")
     mod = types.ModuleType(name)
@@ -50,7 +50,7 @@ def frozen_builder(root=PKG):
         if line["frozen_inputs_sha256"] != fsha:
             raise LedgerError(f"version {line['version']}: frozen_inputs.json changed since this version was recorded")
     pins.verify(root)
-    pinmap = json.loads((Path(root) / "frozen_inputs.json").read_text(encoding="utf-8"))["files"]
+    pinmap = json.loads(L.read_regular_text(Path(root) / "frozen_inputs.json"))["files"]
     saved = list(sys.path)
     try:
         for n in FROZEN_CODE:

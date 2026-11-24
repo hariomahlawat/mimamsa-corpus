@@ -48,22 +48,32 @@ def genesis(root=PKG):
 def verify(root=PKG):
     root = Path(root)
     L.check_committed_layout(root)  # before any file is read (C8, Fable C-02)
+    L.check_ledger_dirs(root)  # C10 review AL-01: ledger/, decisions/, effective/ must be real directories, not symlinks
     lines = L.read_manifest(root)
     report = []
-    for line in lines:
+    expected, rebuilt = {}, []
+    for line in lines:  # phase 1: rebuild every version from the manifest and inputs (effective/ is not read)
         v = line["version"]
         texts, _ = reader.effective_state(root, v)
-        d = root / f"effective/v{v:04d}"
+        expected[f"v{v:04d}"] = set(texts) | {"OUTPUT_MANIFEST.json"}
         if sha256_text(output_manifest(texts)) != line["effective_sha256"]:
             raise LedgerError(f"version {v}: rebuilt outputs do not match effective_sha256 in the manifest")
+        rebuilt.append((v, texts))
+    # phase 2 (C10 review AL-04): reject unaccounted or non-regular entries BEFORE reading any committed output, so a FIFO
+    # or a directory at an expected name cannot hang or crash verify
+    stray = L.unexpected_effective(root, expected)  # C9 synthetic transaction TXN-1
+    if stray:
+        raise LedgerError(f"entries in effective/ not accounted for by the manifest: {stray}")
+    for v, texts in rebuilt:  # phase 3: compare committed outputs with the rebuild
+        d = root / f"effective/v{v:04d}"
         for k, t in texts.items():
-            if not (d / k).is_file() or (d / k).read_text(encoding="utf-8") != t:
+            if not (d / k).is_file() or L.read_regular_text(d / k) != t:
                 raise LedgerError(f"version {v}: committed effective/v{v:04d}/{k} differs from the rebuild")
-        if (d / "OUTPUT_MANIFEST.json").read_text(encoding="utf-8") != output_manifest(texts):
+        if L.read_regular_text(d / "OUTPUT_MANIFEST.json") != output_manifest(texts):
             raise LedgerError(f"version {v}: OUTPUT_MANIFEST.json differs")
         if v == 0:
             for k in reader.FROZEN_EQUAL:
-                if texts[k] != (AW / "SOURCE-LIBRARY-C5/registers" / k).read_text(encoding="utf-8"):
+                if texts[k] != L.read_regular_text(AW / "SOURCE-LIBRARY-C5/registers" / k):
                     raise LedgerError(f"v0000 {k} is not byte-identical to the frozen Cycle 5 register")
         report.append(f"v{v:04d} ok")
     extra = L.unexpected_files(root, lines)
@@ -110,7 +120,7 @@ def main():
             for r in verify(root):
                 print(r)
             print(f"HEAD {L.head_value(root)}; frozen pins ok; ledger verified")
-    except (LedgerError, reader.R.RuleError, KeyError, TypeError, ValueError, SystemExit) as e:  # fail closed, uniformly (F-13)
+    except (LedgerError, reader.R.RuleError, KeyError, TypeError, ValueError, OSError, SystemExit) as e:  # fail closed, uniformly (F-13)
         print(f"LEDGER ERROR: {type(e).__name__}: {e}", file=sys.stderr)
         return 2
     return 0

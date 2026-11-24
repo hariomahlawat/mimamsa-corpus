@@ -43,6 +43,8 @@ jobs:
         run: python tools/legal_audit/validate.py --schema-check
       - name: AUTH-LEDGER verification (offline; pins, hash chain, version-zero reproduction, BIND lines)
         run: python legal_knowledge/audit_work/AUTH-LEDGER/tools/auth_ledger.py verify
+      - name: TXN-DEMO synthetic transaction reproduces (fails on stale expected values after any AUTH-LEDGER tool change)
+        run: python -I -B legal_knowledge/audit_work/C9-LEGAL-EVIDENCE/TXN-DEMO/tools/synthetic_transaction_demo.py --check
       - name: Test fail-closed review checks
         run: python -m unittest discover -s tests -p "test_legal_audit_*.py" -v
       - name: Validate PILOT-01 audit batch (strict, frozen manifest, reviewer identities)

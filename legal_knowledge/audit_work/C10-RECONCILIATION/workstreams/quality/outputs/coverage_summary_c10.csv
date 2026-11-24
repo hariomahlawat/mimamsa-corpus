@@ -1,0 +1,65 @@
+dimension,metric,baseline,c10,change,derivation
+BASELINE,KB crosswalk rows,1060,1060,NONE,AUTH-LEDGER/effective/v0000/corpus_crosswalk.csv@21e73b83 (byte-identical to SOURCE-LIBRARY-C5/registers/corpus_crosswalk.csv): rows with knowledge_base_record_id
+BASELINE,citation items (relationship_type=CITES),983,983,NONE,AUTH-LEDGER/effective/v0000/corpus_crosswalk.csv@21e73b83 (byte-identical to SOURCE-LIBRARY-C5/registers/corpus_crosswalk.csv)
+BASELINE,NO_CITATION placeholder rows,77,77,NONE,AUTH-LEDGER/effective/v0000/corpus_crosswalk.csv@21e73b83 (byte-identical to SOURCE-LIBRARY-C5/registers/corpus_crosswalk.csv) (all MISSING_EVIDENCE)
+BASELINE,KB records,658,658,NONE,AUTH-LEDGER/effective/v0000/corpus_crosswalk.csv@21e73b83 (byte-identical to SOURCE-LIBRARY-C5/registers/corpus_crosswalk.csv); records_658.jsonl has 658 ids
+BASELINE,case records,53,53,NONE,cases_53.jsonl@21e73b83
+C_CITATION_RESOLUTION,citation items EXACT_ANCHOR,42,42,NONE,C10 value = baseline value per item; no anchor upgraded
+C_CITATION_RESOLUTION,citation items PARTIAL_MATCH,652,652,NONE,C10 value = baseline value per item; no anchor upgraded
+C_CITATION_RESOLUTION,citation items MISSING_EVIDENCE,289,289,NONE,C10 value = baseline value per item; no anchor upgraded
+C_CITATION_RESOLUTION,exact anchors on C5-SRC-P0-ARMY-RULES-1954~C1 (sha c5ef95a9),42,42,NONE,anchor_copy_id
+A_SOURCE_AVAILABILITY,baseline class HELD_C5_REGISTER_STORE_NOT_DISTINGUISHED,694,n/a,n/a,ledger v0000 effective_holding_state (store not distinguished)
+A_SOURCE_AVAILABILITY,baseline class NOT_HELD_C5_REGISTER,140,n/a,n/a,ledger v0000 effective_holding_state (store not distinguished)
+A_SOURCE_AVAILABILITY,baseline class SOURCE_NOT_IDENTIFIED,149,n/a,n/a,ledger v0000 effective_holding_state (store not distinguished)
+A_SOURCE_AVAILABILITY,C10 class HELD_HF_AND_GITHUB,n/a,393,n/a,copy SHA-256 -> UNIFIED_CORPUS_INVENTORY.csv#presence
+A_SOURCE_AVAILABILITY,C10 class HELD_HF_ONLY_HF_BYTES_NOT_CHECKED,n/a,27,n/a,copy SHA-256 -> UNIFIED_CORPUS_INVENTORY.csv#presence
+A_SOURCE_AVAILABILITY,C10 class HELD_WORKING_STORE_ONLY_EPHEMERAL,n/a,274,n/a,copy SHA-256 -> UNIFIED_CORPUS_INVENTORY.csv#presence
+A_SOURCE_AVAILABILITY,C10 class NOT_HELD_NO_COPY_IN_ANY_STORE,n/a,67,n/a,copy SHA-256 -> UNIFIED_CORPUS_INVENTORY.csv#presence
+A_SOURCE_AVAILABILITY,C10 class NOT_HELD_RELATED_MATERIAL_ONLY_WORKING_STORE,n/a,15,n/a,copy SHA-256 -> UNIFIED_CORPUS_INVENTORY.csv#presence
+A_SOURCE_AVAILABILITY,C10 class NOT_REGISTERED_UNREGISTERED_COPY_IN_CANONICAL_STORE,n/a,58,n/a,copy SHA-256 -> UNIFIED_CORPUS_INVENTORY.csv#presence
+A_SOURCE_AVAILABILITY,C10 class SOURCE_NOT_IDENTIFIED,n/a,149,n/a,copy SHA-256 -> UNIFIED_CORPUS_INVENTORY.csv#presence
+A_SOURCE_AVAILABILITY,baseline HELD_C5_REGISTER_STORE_NOT_DISTINGUISHED -> C10 HELD_HF_AND_GITHUB,393,393,NONE,same items re-classified by store; no item moved between held and not-held registers
+A_SOURCE_AVAILABILITY,baseline HELD_C5_REGISTER_STORE_NOT_DISTINGUISHED -> C10 HELD_HF_ONLY_HF_BYTES_NOT_CHECKED,27,27,NONE,same items re-classified by store; no item moved between held and not-held registers
+A_SOURCE_AVAILABILITY,baseline HELD_C5_REGISTER_STORE_NOT_DISTINGUISHED -> C10 HELD_WORKING_STORE_ONLY_EPHEMERAL,274,274,NONE,same items re-classified by store; no item moved between held and not-held registers
+A_SOURCE_AVAILABILITY,baseline NOT_HELD_C5_REGISTER -> C10 NOT_HELD_NO_COPY_IN_ANY_STORE,67,67,NONE,same items re-classified by store; no item moved between held and not-held registers
+A_SOURCE_AVAILABILITY,baseline NOT_HELD_C5_REGISTER -> C10 NOT_HELD_RELATED_MATERIAL_ONLY_WORKING_STORE,15,15,NONE,same items re-classified by store; no item moved between held and not-held registers
+A_SOURCE_AVAILABILITY,baseline NOT_HELD_C5_REGISTER -> C10 NOT_REGISTERED_UNREGISTERED_COPY_IN_CANONICAL_STORE,58,58,NONE,same items re-classified by store; no item moved between held and not-held registers
+A_SOURCE_AVAILABILITY,baseline SOURCE_NOT_IDENTIFIED -> C10 SOURCE_NOT_IDENTIFIED,149,149,NONE,same items re-classified by store; no item moved between held and not-held registers
+A_x_C,EXACT_ANCHOR items with C10 availability HELD_WORKING_STORE_ONLY_EPHEMERAL,n/a,42,n/a,cross-tabulation
+A_x_C,PARTIAL_MATCH items with C10 availability HELD_HF_AND_GITHUB,n/a,393,n/a,cross-tabulation
+A_x_C,PARTIAL_MATCH items with C10 availability HELD_HF_ONLY_HF_BYTES_NOT_CHECKED,n/a,27,n/a,cross-tabulation
+A_x_C,PARTIAL_MATCH items with C10 availability HELD_WORKING_STORE_ONLY_EPHEMERAL,n/a,232,n/a,cross-tabulation
+A_x_C,MISSING_EVIDENCE items with C10 availability NOT_HELD_NO_COPY_IN_ANY_STORE,n/a,67,n/a,cross-tabulation
+A_x_C,MISSING_EVIDENCE items with C10 availability NOT_HELD_RELATED_MATERIAL_ONLY_WORKING_STORE,n/a,15,n/a,cross-tabulation
+A_x_C,MISSING_EVIDENCE items with C10 availability NOT_REGISTERED_UNREGISTERED_COPY_IN_CANONICAL_STORE,n/a,58,n/a,cross-tabulation
+A_x_C,MISSING_EVIDENCE items with C10 availability SOURCE_NOT_IDENTIFIED,n/a,149,n/a,cross-tabulation
+A_SOURCE_AVAILABILITY,EXACT_ANCHOR items whose anchor copy is WS_ONLY,n/a,42,n/a,anchor copy sha -> inventory presence
+B_SOURCE_AUTHENTICATION,ledger v0000 holding state (no source: UNMAPPED),149,149,NONE,AUTH-LEDGER effective v0000 source_states.csv; C10 changes none
+B_SOURCE_AUTHENTICATION,ledger v0000 holding state HELD_GOVERNMENT_COMPILATION,393,393,NONE,AUTH-LEDGER effective v0000 source_states.csv; C10 changes none
+B_SOURCE_AUTHENTICATION,ledger v0000 holding state HELD_OFFICIAL_COURT_COPY_PROVENANCE_UNDOCUMENTED,23,23,NONE,AUTH-LEDGER effective v0000 source_states.csv; C10 changes none
+B_SOURCE_AUTHENTICATION,ledger v0000 holding state HELD_PRIMARY_GAZETTE_FACSIMILE,204,204,NONE,AUTH-LEDGER effective v0000 source_states.csv; C10 changes none
+B_SOURCE_AUTHENTICATION,ledger v0000 holding state HELD_PRIMARY_OFFICIAL_COURT_COPY,74,74,NONE,AUTH-LEDGER effective v0000 source_states.csv; C10 changes none
+B_SOURCE_AUTHENTICATION,ledger v0000 holding state NOT_HELD_CANDIDATE_LOCATED,50,50,NONE,AUTH-LEDGER effective v0000 source_states.csv; C10 changes none
+B_SOURCE_AUTHENTICATION,ledger v0000 holding state NOT_HELD_LEAD_ONLY,4,4,NONE,AUTH-LEDGER effective v0000 source_states.csv; C10 changes none
+B_SOURCE_AUTHENTICATION,ledger v0000 holding state NOT_HELD_NOT_CHECKED,76,76,NONE,AUTH-LEDGER effective v0000 source_states.csv; C10 changes none
+B_SOURCE_AUTHENTICATION,ledger v0000 holding state NOT_HELD_NOT_FOUND_IN_SEARCHED_SOURCES,10,10,NONE,AUTH-LEDGER effective v0000 source_states.csv; C10 changes none
+B_SOURCE_AUTHENTICATION,anchor copy effective status EFFECTIVE_PRIMARY_VERIFIED,42,42,NONE,ledger copy register
+B_SOURCE_AUTHENTICATION,inventory rows newly authenticated by C10,0,0,NONE,UNIFIED_CORPUS_INVENTORY.csv#authentication_state
+D_LEGAL_APPLICABILITY,citation items NOT_DETERMINED,983,983,NONE,not assessed in C10
+D_LEGAL_APPLICABILITY,citation items where record has C9 record_impact entry,66,66,NONE,existing flag copied
+D_LEGAL_APPLICABILITY,citation items where record has open PILOT-01 P0-P2 finding,26,26,NONE,existing flag copied
+D_LEGAL_APPLICABILITY,citation items where record has open WS-B adverse/conflict item,45,45,NONE,existing flag copied
+D_LEGAL_APPLICABILITY,citation items where record named in C8 cross_reference_findings,64,64,NONE,existing flag copied
+D_LEGAL_APPLICABILITY,citation items with KB status JAG_APPROVAL_PENDING,52,52,NONE,records_658.jsonl#status (unchanged)
+D_LEGAL_APPLICABILITY,citation items with KB status JAG_REVIEW_PENDING,556,556,NONE,records_658.jsonl#status (unchanged)
+D_LEGAL_APPLICABILITY,citation items with KB status REVIEW_PENDING,295,295,NONE,records_658.jsonl#status (unchanged)
+D_LEGAL_APPLICABILITY,citation items with KB status SOURCE_REVIEWED_JAG_APPROVAL_PENDING,80,80,NONE,records_658.jsonl#status (unchanged)
+CASES,case rows EXACT_ANCHOR,6,6,NONE,AUTH-LEDGER/effective/v0000/corpus_crosswalk.csv@21e73b83 (byte-identical to SOURCE-LIBRARY-C5/registers/corpus_crosswalk.csv) case rows
+CASES,case rows MISSING_EVIDENCE,40,40,NONE,AUTH-LEDGER/effective/v0000/corpus_crosswalk.csv@21e73b83 (byte-identical to SOURCE-LIBRARY-C5/registers/corpus_crosswalk.csv) case rows
+CASES,case rows PARTIAL_MATCH,7,7,NONE,AUTH-LEDGER/effective/v0000/corpus_crosswalk.csv@21e73b83 (byte-identical to SOURCE-LIBRARY-C5/registers/corpus_crosswalk.csv) case rows
+CASES,case rows C10 availability HELD_HF_ONLY_HF_BYTES_NOT_CHECKED,n/a,2,n/a,
+CASES,case rows C10 availability HELD_WORKING_STORE_ONLY_EPHEMERAL,n/a,11,n/a,
+CASES,case rows C10 availability SOURCE_NOT_IDENTIFIED,n/a,40,n/a,
+CASES,case EXACT_ANCHOR rows with anchor copy WS_ONLY,n/a,5,n/a,
+CASES,case EXACT_ANCHOR rows with anchor copy HF_ONLY (HF bytes NOT_CHECKED),n/a,1,n/a,
+CASES,MISSING_EVIDENCE case rows with a canonical-store SCR or HF candidate rendition,n/a,29,n/a,"CASE_CANDIDATES (curated, first-page caption)"

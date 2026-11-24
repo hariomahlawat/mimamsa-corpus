@@ -1,0 +1,88 @@
+{
+ "label": "T1-19",
+ "file": "<scratchpad>/downloads/amendment-search/in.gazette.central.e.2018-02-20.183010/183010.pdf",
+ "bytes": 1707387,
+ "sha256": "7c12a7ecc849c8f6df96830b093fda3c16bf9e943a5cb5d331ae3352b9455551",
+ "hash_check": "MATCH",
+ "pdf_header_offset": 0,
+ "pdf_header": "%PDF-1.6",
+ "eof_offsets": [
+  853,
+  1707380
+ ],
+ "eof_count": 2,
+ "startxref_values": [
+  0,
+  116
+ ],
+ "bytes_after_last_eof_marker": 2,
+ "trailing_bytes_after_last_eof_hex": "0d0a",
+ "signature_dictionaries": [
+  {
+   "dict_object": "10 0 obj",
+   "dict_offset": 260384,
+   "byte_range": [
+    0,
+    260473,
+    1699735,
+    7652
+   ],
+   "signed_bytes": 268125,
+   "hole": [
+    260473,
+    1699735
+   ],
+   "hole_matches_contents_string": true,
+   "covers_whole_file_except_contents_hole": true,
+   "bytes_after_last_signed_range": 0,
+   "Filter": "/Adobe.PPKLite",
+   "SubFilter": "/adbe.pkcs7.detached",
+   "Name": "RAKESH SUKUL",
+   "Reason": null,
+   "Location": null,
+   "M": "D:20180220192255+05'30'",
+   "ContactInfo": null,
+   "contents_hex_len": 1439260
+  }
+ ],
+ "signature_dictionary_count": 1,
+ "sig_field_types": 0,
+ "type_sig_count": 1,
+ "pages": 2,
+ "metadata": {
+  "producer": "GPL Ghostscript 8.15",
+  "creator": "PScript5.dll Version 5.2.2",
+  "creationDate": "D:20180220185951Z",
+  "modDate": "D:20180220192255+05'30'",
+  "format": "PDF 1.6",
+  "encryption": null
+ },
+ "xmp_present": true,
+ "xmp_Producer": "GPL Ghostscript 8.15",
+ "xmp_CreatorTool": "PScript5.dll Version 5.2.2",
+ "xmp_CreateDate": "2018-02-20T18:59:51",
+ "xmp_ModifyDate": "2018-02-20T19:22:55+05:30",
+ "ia_or_rerender_markers_in_bytes": [],
+ "cms_checks": [
+  {
+   "sig_index": 0,
+   "der_sha256": "356cc68bc0efe6e16cb7d86be7560226f742a76e043e4e63df1d7ea6ed9b0218",
+   "der_bytes": 718762,
+   "signed_content_sha256": "7785d388e7bc88729d7389754d54fe811fb8ee1c9d21f14c032260f6e86ad38d",
+   "openssl_cms_verify_noverify_rc": 0,
+   "openssl_cms_verify_stderr": "CMS Verification successful",
+   "embedded_certs": "subject=C = IN, O = India PKI, CN = CCA India 2014\nissuer=C = IN, O = India PKI, CN = CCA India 2014\n\nsubject=C = IN, O = Gujarat Narmada Valley Fertilizers and Chemicals Limited, OU = Certifying Authority, postalCode = 380054, ST = Gujarat, street = \"Bodakdev, S G Road, Ahmedabad\", houseIdentifier = \"301, GNFC Infotower\", CN = (n)Code Solutions CA 2014\nissuer=C = IN, O = India PKI, CN = CCA India 2014\n\nsubject=C = IN, O = GOVT OF INDIA PRESS, telephoneNumber = 1a71dc159f5c2ee8a2a2e1f054aa1d5d7b5a7c4bbce19e68c65872d2007d0ddb, OU = \"DTR OF PRINTING,CID - 4751192\", postalCode = 110064, ST = Delhi, serialNumber = f93818dc8b9693c3cd58a46ae03f0acc194a35d11e8dab38458a0c6e692ec71a, CN = RAKESH SUKUL\nissuer=C = IN, O = Gujarat Narmada Valley Fertilizers and Chemicals Limited, OU = Certifying Authority, postalCode = 380054, ST = Gujarat, street = \"Bodakdev, S G Road, Ahmedabad\", houseIdentifier = \"301, GNFC Infotower\", CN = (n)Code Solutions CA 2014",
+   "certs_rc": 0,
+   "cms_eContentType": "pkcs7-data (1.2.840.113549.1.7.1)",
+   "cms_eContent_absent(detached)": true,
+   "cms_digestAlgorithms": [
+    "sha256 (2.16.840.1.101.3.4.2.1)"
+   ],
+   "cms_signatureAlgorithms": [
+    "sha256WithRSAEncryption (1.2.840.113549.1.1.11)"
+   ],
+   "cms_signingTime": null,
+   "cms_messageDigest_raw": "0000 - 77 85 d3 88 e7 bc 88 72-9d 73 89 75 4d w......r.s.uM"
+  }
+ ]
+}

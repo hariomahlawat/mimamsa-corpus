@@ -1,0 +1,29 @@
+{
+ "affected_by_case": {
+  "Dharamvir": 3,
+  "Girish": 9,
+  "Parashotam": 13,
+  "Ram Avtar": 4,
+  "Shri Kant Sharma": 2,
+  "Tarsem": 6
+ },
+ "affected_record_case_pairs": 37,
+ "affected_records": 32,
+ "c10_any_court_hosted_copy": 9,
+ "c10_held_status": {
+  "CANDIDATE_HELD_DATE+PARTY_ONLY (curated record has no other deterministic key matching)": 3,
+  "CANDIDATE_HELD_WSB_DECLARED_LINK_ONLY (curated record carries no date, case number or citation)": 6,
+  "HELD": 33,
+  "NOT_HELD": 9,
+  "NOT_HELD_EXCLUDED_FROM_CRAWLER_STORE": 2
+ },
+ "c10_official_court_pdf": 6,
+ "citation_coverage_baseline": "983 items: 42 EXACT_ANCHOR / 652 PARTIAL_MATCH / 289 MISSING_EVIDENCE (unchanged: no registration, preservation or authentication occurred in C11)",
+ "curated_cases": 53,
+ "protected_originals": {
+  "cases_53.jsonl": "8b8d53cd",
+  "records_658.jsonl": "9a8f0d19"
+ },
+ "research_records": 658,
+ "with_c11_sc_case_number_proposal": 25
+}

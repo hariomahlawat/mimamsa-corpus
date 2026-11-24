@@ -1,0 +1,317 @@
+{
+ "_source": "Reviewer readings from C10-HF-JUDGMENTS/review/review_A.csv, review_B.csv (outcome_as_printed) and WS_REVIEW_SAMPLE20_3257ebb9.csv (outcome_read_by_reviewer), mapped by the C11 extraction workstream to the v2 outcome vocabulary. 'accept' lists every label counted correct; 'mixed' gives per-proceeding expectations [regex on proceeding label/excerpt, outcome]. This is the DEV set: it was used to tune extract_v2.",
+ "J-1de6c12b474985bf": {
+  "accept": [
+   "disposed_of_with_directions"
+  ]
+ },
+ "J-239c4e386f0e201b": {
+  "accept": [
+   "dismissed"
+  ]
+ },
+ "J-0f65307432d16f74": {
+  "accept": [
+   "dismissed"
+  ],
+  "note": "composite file: SC judgment pp1-15, unrelated Delhi HC judgment pp16-25"
+ },
+ "J-0a0079f7b27bc3d4": {
+  "accept": [
+   "allowed"
+  ]
+ },
+ "J-35b9c948fe6254c6": {
+  "accept": [
+   "allowed"
+  ]
+ },
+ "J-ed2a29d15d1b3e7f": {
+  "accept": [
+   "allowed"
+  ]
+ },
+ "J-3a4ed1aba90b8e35": {
+  "accept": [],
+  "mixed": [
+   [
+    "8360|8830|8835|8838",
+    "allowed"
+   ],
+   [
+    "2547|2550|6679|13803|18038",
+    "dismissed"
+   ]
+  ],
+  "note": "mixed: Delhi HC appeals allowed and remitted; Rajasthan appeals dismissed"
+ },
+ "J-86de3643e66ec27b": {
+  "accept": [],
+  "mixed": [
+   [
+    "7400|7375|7376|7399|9388|9389",
+    "allowed"
+   ],
+   [
+    "7338|96 of 2014",
+    "dismissed"
+   ]
+  ]
+ },
+ "J-0ff9d2fc8ef36dfe": {
+  "accept": [
+   "allowed"
+  ],
+  "note": "no text file at the commit for this sha"
+ },
+ "J-08d44db5c31158e4": {
+  "accept": [
+   "allowed"
+  ]
+ },
+ "J-3f49a31464fec174": {
+  "accept": [
+   "dismissed"
+  ]
+ },
+ "J-b159ba1791fd48a2": {
+  "accept": [
+   "partly_allowed"
+  ]
+ },
+ "J-8a2bafba8b96ed52": {
+  "accept": [
+   "dismissed"
+  ]
+ },
+ "J-db5d2083c8dcb88f": {
+  "accept": [
+   "allowed"
+  ]
+ },
+ "J-6b5c494c16f7c776": {
+  "accept": [
+   "dismissed"
+  ]
+ },
+ "J-57712c12e64c3cdf": {
+  "accept": [
+   "allowed"
+  ]
+ },
+ "J-0831eb715ae615d4": {
+  "accept": [
+   "allowed"
+  ]
+ },
+ "J-ec2066de997ea77b": {
+  "accept": [
+   "dismissed"
+  ]
+ },
+ "J-9cabb52e6823d86a": {
+  "accept": [
+   "allowed"
+  ]
+ },
+ "J-1cfeeb3fff4df8e3": {
+  "accept": [
+   "allowed"
+  ]
+ },
+ "J-a8793e00d1d04d56": {
+  "accept": [],
+  "mixed": [
+   [
+    "union|9218",
+    "allowed"
+   ],
+   [
+    "neeraj|sandeep|accused|7204|7205",
+    "dismissed"
+   ]
+  ]
+ },
+ "J-937ee98804344d1e": {
+  "accept": [
+   "allowed",
+   "disposed_of_with_directions"
+  ],
+  "note": "reviewer: AMBIGUOUS (allowed with directions / disposed of)"
+ },
+ "J-676f2df941964780": {
+  "accept": [
+   "dismissed"
+  ]
+ },
+ "J-ebb86d4b3308eb89": {
+  "accept": [
+   "dismissed"
+  ]
+ },
+ "J-ddf835f63effb126": {
+  "accept": [
+   "dismissed"
+  ]
+ },
+ "J-8d3522e4e9afeaac": {
+  "accept": [
+   "allowed"
+  ]
+ },
+ "J-2e72a6e9c7b445c8": {
+  "accept": [],
+  "mixed": [
+   [
+    "2169",
+    "dismissed"
+   ],
+   [
+    "transferred|1 of 2017",
+    "allowed"
+   ]
+  ]
+ },
+ "J-ef262f34b39e2ea7": {
+  "accept": [
+   "allowed"
+  ]
+ },
+ "J-815c0ba783296549": {
+  "accept": [
+   "allowed"
+  ]
+ },
+ "J-9a20470d28dbd5d6": {
+  "accept": [],
+  "mixed": [
+   [
+    "2196",
+    "dismissed"
+   ],
+   [
+    "537|538",
+    "allowed"
+   ]
+  ],
+  "note": "reviewer: AMBIGUOUS reporter's note; court's order para 54 is per appeal"
+ },
+ "J-dc60fe0001b07e43": {
+  "accept": [
+   "allowed",
+   "disposed_of_with_directions"
+  ],
+  "note": "impugned AFT order quashed; the lower OA dismissed as infructuous; liberty. 'dismissed_as_infructuous' of the OA is NOT the writ petition's outcome"
+ },
+ "J-2e7f5344bfceef97": {
+  "accept": [
+   "dismissed_as_withdrawn"
+  ]
+ },
+ "J-b4fd0cb4c3c6d2d5": {
+  "accept": [
+   "disposed_of_with_directions"
+  ]
+ },
+ "J-fefa4ebc7b1bf62a": {
+  "accept": [
+   "dismissed"
+  ]
+ },
+ "J-00befd2de6cacc9f": {
+  "accept": [
+   "dismissed"
+  ]
+ },
+ "J-0b97fbf0f2969f37": {
+  "accept": [
+   "disposed_of_with_directions"
+  ]
+ },
+ "J-b43240e40da56352": {
+  "accept": [],
+  "expect_abstain": true,
+  "note": "'For orders see LA.APP. 784/2005' - no own disposition"
+ },
+ "J-d5828c28fa89c62c": {
+  "accept": [
+   "dismissed"
+  ]
+ },
+ "J-b8c0cce9b8c696af": {
+  "accept": [
+   "dismissed"
+  ]
+ },
+ "J-256fcb675dc11dfb": {
+  "accept": [
+   "disposed_of_with_directions"
+  ]
+ },
+ "J-eb24633d832c0536": {
+  "accept": [
+   "dismissed"
+  ],
+  "note": "no explicit disposal phrase ('no ground for interference')"
+ },
+ "J-a3df6d0d70879879": {
+  "accept": [
+   "allowed"
+  ]
+ },
+ "J-7d526d8a8204f049": {
+  "accept": [
+   "dismissed_as_withdrawn"
+  ]
+ },
+ "J-8442ef8d7c682118": {
+  "accept": [
+   "dismissed"
+  ]
+ },
+ "J-fc9a590352a30fce": {
+  "accept": [
+   "dismissed"
+  ]
+ },
+ "J-2b1633bc85950375": {
+  "accept": [
+   "dismissed"
+  ]
+ },
+ "J-cc2c318a88107e3b": {
+  "accept": [],
+  "mixed": [
+   [
+    "998",
+    "transferred"
+   ],
+   [
+    "1933",
+    "dismissed"
+   ]
+  ],
+  "accept_single_if_host_only": [
+   "transferred",
+   "disposed_of_with_directions"
+  ],
+  "note": "common order for OWP 1933/2014 and OWP 998/2004 (host per metadata: 998/2004). Reviewer: transferred to AFT; disposed of (host). 1933/2014 'dismissed' read by the C11 workstream from the text layer (para 3)."
+ },
+ "J-76a1a41c4624e842": {
+  "accept": [
+   "disposed_of_with_directions"
+  ]
+ },
+ "J-72a623bb18bbef79": {
+  "accept": [
+   "allowed",
+   "set_aside_and_remanded"
+  ],
+  "note": "allowed in above terms (penalty remitted)"
+ },
+ "J-d04286bd4db2cd21": {
+  "accept": [
+   "allowed"
+  ]
+ }
+}

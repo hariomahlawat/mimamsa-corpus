@@ -1,0 +1,21 @@
+sample,judgment_id,court,pages,meta_case_number,meta_case_number_correct,auto_case_number_result,meta_date,meta_date_correct,auto_date_result,outcome_read_by_reviewer,meta_outcome,meta_outcome_correct,auto_outcome,auto_outcome_result,note
+S01,J-dc60fe0001b07e43,J&K HC,2,WP(C)/673/2026,YES,CONFIRMED,2026-03-12,YES,MATCH_CORRECT,impugned order quashed; OA dismissed as infructuous; liberty,disposed,ACCEPTABLE,NOT_FOUND,MISSED,operative words 'is quashed and OA ... dismissed' not caught
+S02,J-2e7f5344bfceef97,Delhi HC,1,W.P.(C)/17695/2025,YES,CONFIRMED,2025-11-21,YES,MATCH_CORRECT,dismissed as withdrawn,(blank),N/A,dismissed,CORRECT,second candidate date 2025-11-26 is the signing date
+S03,J-b4fd0cb4c3c6d2d5,Delhi HC,12,CONT.CAS(C)/80/2025,YES,NOT_CONFIRMED (type not in pattern; picked cited WPC-4606-2013),2026-04-28,YES,MATCH_CORRECT,disposed of in above terms,(blank),N/A,disposed,CORRECT,ordnance-factory civilian staff contempt matter
+S04,J-fefa4ebc7b1bf62a,P&H HC,2,CWP/7485/2025,YES,CONFIRMED,2025-04-24,YES,MATCH_CORRECT,dismissed,dismissed,YES,disposed,WRONG,picked 'pending misc. applications also stand disposed of'
+S05,J-00befd2de6cacc9f,P&H HC,5,CWP/26686/2025,YES,NOT_FOUND (printed 'CWP-26686-2025'; stale batch 0),2025-09-08,YES,MATCH_CORRECT,dismissed,dismissed,YES,disposed,WRONG,same pending-application failure
+S06,J-0b97fbf0f2969f37,J&K HC,2,SWP/2017/2017,YES,NOT_FOUND (SWP not in pattern),2017-08-28,YES,MATCH_CORRECT,disposed of with liberty,(blank),N/A,disposed,CORRECT,
+S07,J-b43240e40da56352,Delhi HC,20,LA.APP./78/2010,YES,NOT_FOUND,2011-07-08,YES,NOT_FOUND,'For orders see LA.APP. 784/2005' (attached scanned common judgment),(blank),N/A,NOT_FOUND,N/A,land-acquisition appeal; scanned; relevance left UNCERTAIN (reasonable)
+S08,J-d5828c28fa89c62c,J&K HC,6,WP(C)/2123/2024,YES,CONFIRMED,2025-08-29,YES,MATCH_CORRECT,dismissed,dismissed,YES,dismissed,CORRECT,
+S09,J-b8c0cce9b8c696af,J&K HC,14,LPASW/106/2008,YES,NOT_FOUND (LPASW not in pattern),2020-05-06,YES,MATCH_CORRECT,appeal dismissed,disposed,NO,dismissed,CORRECT,crawler metadata outcome wrong; disagreement not flagged in contradictions
+S10,J-256fcb675dc11dfb,Supreme Court,56,(blank),N/A (known SC gap),FOUND WP(C) 356/1994 CORRECT,2010-05-11,YES,NOT_FOUND,writ petitions disposed of,disposed,YES,disposed,CORRECT,panchayat reservation case; not military; class UNCERTAIN
+S11,J-eb24633d832c0536,P&H HC,5,CWP/22838/2025,YES,CONFIRMED,2025-08-07,YES,MATCH_CORRECT,no ground for interference (petition fails),dismissed,YES,NOT_FOUND,MISSED,no explicit disposal phrase
+S12,J-a3df6d0d70879879,P&H HC,5,CWP/38732/2025,YES,CONFIRMED,2026-03-17,YES,MATCH_CORRECT,allowed in above terms,allowed,YES,disposed,WRONG,pending-application failure; page 1 text layer is garbled
+S13,J-7d526d8a8204f049,J&K HC,1,WP(C)/270/2021,YES,CONFIRMED,2021-02-17,YES,MATCH_CORRECT,dismissed (withdrawn with liberty),dismissed,YES,NOT_FOUND,MISSED,phrase lies outside the last 30% of text
+S14,J-8442ef8d7c682118,Delhi HC,8,W.P.(C)/5394/2025,YES,CONFIRMED,2025-04-28,YES,MATCH_CORRECT,dismissed in limine,(blank),N/A,dismissed,CORRECT,
+S15,J-fc9a590352a30fce,Delhi HC,6,W.P.(C)/15180/2022,YES,CONFIRMED,2022-11-03,YES,MATCH_CORRECT,dismissed as not maintainable,(blank),N/A,dismissed,CORRECT,
+S16,J-2b1633bc85950375,Delhi HC,6,W.P.(C)/12253/2023,YES,CONFIRMED,2023-09-18,YES,MATCH_CORRECT,dismissed,(blank),N/A,NOT_FOUND,MISSED,'The petition is consequently dismissed' not matched
+S17,J-cc2c318a88107e3b,J&K HC,3,OWP/998/2004,YES,NOT_FOUND (OWP not in pattern),2021-09-23,YES,MATCH_CORRECT,transferred to AFT; disposed of,(blank),N/A,disposed,CORRECT,
+S18,J-76a1a41c4624e842,Supreme Court,130,(blank),N/A (known SC gap),NOT_FOUND,1991-10-03,YES,DIFFERS 1989-12-22 (extractor wrong),petitions disposed of,disposed,YES,disposed,CORRECT,Union Carbide; not military; class UNCERTAIN
+S19,J-72a623bb18bbef79,Delhi HC,11,W.P.(C)/5574/2013,YES,CONFIRMED,2015-07-09,YES,MATCH_CORRECT,allowed in above terms (penalty remitted),(blank),N/A,allowed (conflict flag allowed/remanded),CORRECT,CISF removal case classed MILITARY_ADMIN_SERVICE_PENSION (over-inclusive)
+S20,J-d04286bd4db2cd21,P&H HC,2,CWP/15993/2011,YES,CONFIRMED,2015-07-09,YES,MATCH_CORRECT,allowed,allowed,YES,allowed,CORRECT,BSF disability case classed MILITARY_ADMIN_SERVICE_PENSION

@@ -1,0 +1,120 @@
+{
+ "bar": "precision >= 0.95 with an independently reviewed representative sample",
+ "baseline_c10_extractor": {
+  "attempted_scorable": 48,
+  "correct": 25,
+  "precision": 0.5208,
+  "precision_lower95": 0.4043
+ },
+ "baseline_crawler_outcome": {
+  "attempted_scorable": 44,
+  "correct": 28,
+  "precision": 0.6364,
+  "precision_lower95": 0.5124
+ },
+ "by_court_strict": {
+  "Allahabad High Court": {
+   "abstained": 2,
+   "attempted_scorable": 7,
+   "correct": 7,
+   "coverage": 0.7778,
+   "gt_not_scorable": 0,
+   "judgments": 9,
+   "precision": 1.0,
+   "precision_lower95": 0.7212
+  },
+  "High Court of Delhi": {
+   "abstained": 1,
+   "attempted_scorable": 7,
+   "correct": 4,
+   "coverage": 0.875,
+   "gt_not_scorable": 0,
+   "judgments": 8,
+   "precision": 0.5714,
+   "precision_lower95": 0.2895
+  },
+  "High Court of Jammu and Kashmir": {
+   "abstained": 1,
+   "attempted_scorable": 8,
+   "correct": 7,
+   "coverage": 0.8889,
+   "gt_not_scorable": 0,
+   "judgments": 9,
+   "precision": 0.875,
+   "precision_lower95": 0.5888
+  },
+  "High Court of Punjab and Haryana": {
+   "abstained": 2,
+   "attempted_scorable": 8,
+   "correct": 8,
+   "coverage": 0.8,
+   "gt_not_scorable": 0,
+   "judgments": 10,
+   "precision": 1.0,
+   "precision_lower95": 0.7473
+  },
+  "Supreme Court of India": {
+   "abstained": 5,
+   "attempted_scorable": 14,
+   "correct": 11,
+   "coverage": 0.75,
+   "gt_not_scorable": 1,
+   "judgments": 20,
+   "precision": 0.7857,
+   "precision_lower95": 0.5679
+  }
+ },
+ "by_stratum_strict": {
+  "disagreement": {
+   "abstained": 5,
+   "attempted_scorable": 13,
+   "correct": 13,
+   "coverage": 0.7222,
+   "gt_not_scorable": 0,
+   "judgments": 18,
+   "precision": 1.0,
+   "precision_lower95": 0.8277
+  },
+  "multi_case": {
+   "abstained": 2,
+   "attempted_scorable": 14,
+   "correct": 9,
+   "coverage": 0.875,
+   "gt_not_scorable": 0,
+   "judgments": 16,
+   "precision": 0.6429,
+   "precision_lower95": 0.4255
+  },
+  "other": {
+   "abstained": 4,
+   "attempted_scorable": 17,
+   "correct": 15,
+   "coverage": 0.8182,
+   "gt_not_scorable": 1,
+   "judgments": 22,
+   "precision": 0.8824,
+   "precision_lower95": 0.6994
+  }
+ },
+ "extractor": "c11-extract-v2/1.0.0",
+ "lenient": {
+  "abstained": 11,
+  "attempted_scorable": 44,
+  "correct": 37,
+  "coverage": 0.8036,
+  "gt_not_scorable": 1,
+  "judgments": 56,
+  "precision": 0.8409,
+  "precision_lower95": 0.7309
+ },
+ "strict": {
+  "abstained": 11,
+  "attempted_scorable": 44,
+  "correct": 37,
+  "coverage": 0.8036,
+  "gt_not_scorable": 1,
+  "judgments": 56,
+  "precision": 0.8409,
+  "precision_lower95": 0.7309
+ }
+}

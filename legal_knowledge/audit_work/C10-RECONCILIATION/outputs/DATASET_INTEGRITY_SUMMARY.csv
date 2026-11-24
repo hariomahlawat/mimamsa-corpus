@@ -1,0 +1,17 @@
+item,value,scope,hf_copy
+schemas_validated_against,staging 21e73b83,schema/,HF schema/ sizes equal staging
+meta_records,4327,GitHub raw-data ad77758d,NOT_CHECKED (same counts; bytes not downloaded)
+judgment_meta_records,4259,GitHub raw-data ad77758d,NOT_CHECKED (same counts; bytes not downloaded)
+section_records,2998,GitHub raw-data ad77758d,NOT_CHECKED (same counts; bytes not downloaded)
+text_files,4318,GitHub raw-data ad77758d,NOT_CHECKED (same counts; bytes not downloaded)
+raw_files,4039,GitHub raw-data ad77758d,NOT_CHECKED (same counts; bytes not downloaded)
+manifest_rows,4327,GitHub raw-data ad77758d,NOT_CHECKED (same counts; bytes not downloaded)
+relations_lines,2755,GitHub raw-data ad77758d,NOT_CHECKED (same counts; bytes not downloaded)
+relations_unresolved_target_refs_raw_only,1017,GitHub raw-data ad77758d,NOT_CHECKED (same counts; bytes not downloaded)
+raw_files_rehashed_equal_to_SHA256SUMS,4039,GitHub raw-data ad77758d,NOT_CHECKED (same counts; bytes not downloaded)
+issue:JUDGMENT_DATE_DIFFERS_FROM_FILENAME,77,GitHub raw-data ad77758d,NOT_CHECKED
+issue:JUDGMENT_NO_CASE_NUMBER,433,GitHub raw-data ad77758d,NOT_CHECKED
+issue:META_RETRIEVED_AT_DIFFERS,266,GitHub raw-data ad77758d,NOT_CHECKED
+issue:META_URL_DIFFERS_FROM_RAW_MANIFEST,309,GitHub raw-data ad77758d,NOT_CHECKED
+issue:RAW_DATA_SCHEMA_DIFFERS_FROM_CURRENT,4,GitHub raw-data ad77758d,NOT_CHECKED
+issue:RAW_FILE_SHARED_BY_MULTIPLE_META,42,GitHub raw-data ad77758d,NOT_CHECKED
