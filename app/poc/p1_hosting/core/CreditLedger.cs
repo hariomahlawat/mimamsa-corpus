@@ -62,8 +62,13 @@ public sealed class CreditLedger
     public static string ConnPoolId(string instanceId, string connectionId) => $"conn:{instanceId}:{connectionId}";
 
     /// Atomically reserve `amount` on both the connection pool and the site pool, or nothing.
+    /// `admit` (optional) runs inside the same transaction after the caps check and before COMMIT; returning
+    /// false rolls the reservation back. The delivery adapter uses it to take serving_policy FOR SHARE and to
+    /// recheck policy authority (epoch, pending withdrawal, eligibility) so no reservation can commit under a
+    /// stale policy or between withdrawal admission and the durable fence.
     public async Task<Reservation?> TryReserveAsync(string connPool, long amount, string sessionId, string docId,
-                                                    string sha, long start, long len)
+                                                    string sha, long start, long len,
+                                                    Func<NpgsqlConnection, NpgsqlTransaction, Guid, Task<bool>>? admit = null)
     {
         await using var c = await _db.OpenConnectionAsync();
         await using var tx = await c.BeginTransactionAsync();
@@ -83,6 +88,7 @@ public sealed class CreditLedger
         }
         if (!ok) { await tx.RollbackAsync(); return null; }
         var id = Guid.NewGuid();
+        if (admit is not null && !await admit(c, tx, id)) { await tx.RollbackAsync(); return null; }
         await using (var up = new NpgsqlCommand("UPDATE credit_pools SET reserved = reserved + $1 WHERE pool_id = ANY($2)", c, tx))
         { up.Parameters.AddWithValue(amount); up.Parameters.AddWithValue(pools); await up.ExecuteNonQueryAsync(); }
         await using (var ins = new NpgsqlCommand(
@@ -137,7 +143,7 @@ public sealed class CreditLedger
     /// Release charges of a connection pool ONLY after transport termination has been observed (the caller passes
     /// the evidence). Unsettled RESERVED rows on a terminated connection are treated as uncertain: charged in full,
     /// then drained with the same evidence (never refunded as if unused).
-    public async Task<int> DrainConnectionAsync(string connPool, string evidence)
+    public async Task<List<(Guid id, string priorState)>> DrainConnectionAsync(string connPool, string evidence)
     {
         await using var c = await _db.OpenConnectionAsync();
         await using var tx = await c.BeginTransactionAsync();
@@ -145,6 +151,7 @@ public sealed class CreditLedger
         await LockSiteAsync(c, tx);
         await LockPoolAsync(c, tx, connPool);
         long reservedGone = 0, chargedGone = 0; int n = 0;
+        var drained = new List<(Guid, string)>();
         await using (var q = new NpgsqlCommand(
             """
             UPDATE credit_reservations SET
@@ -153,7 +160,7 @@ public sealed class CreditLedger
                        || ' | drained: ' || $2,
               state='DRAINED', drained_at=clock_timestamp()
             WHERE conn_pool=$1 AND state IN ('RESERVED','ACCEPTED','UNCERTAIN')
-            RETURNING amount, charged, (settled_at IS NULL)
+            RETURNING amount, charged, (settled_at IS NULL), res_id
             """, c, tx))
         {
             q.Parameters.AddWithValue(connPool); q.Parameters.AddWithValue(evidence);
@@ -162,6 +169,7 @@ public sealed class CreditLedger
             {
                 n++;
                 if (r.GetBoolean(2)) reservedGone += r.GetInt64(0); else chargedGone += r.GetInt64(1);
+                drained.Add((r.GetGuid(3), r.GetBoolean(2) ? "RESERVED" : "SETTLED"));
             }
         }
         if (n > 0)
@@ -173,13 +181,13 @@ public sealed class CreditLedger
         await using (var d = new NpgsqlCommand("DELETE FROM credit_pools WHERE pool_id=$1 AND reserved=0 AND charged=0", c, tx))
         { d.Parameters.AddWithValue(connPool); await d.ExecuteNonQueryAsync(); }
         await tx.CommitAsync();
-        return n;
+        return drained;
     }
 
     /// Outstanding charges of OTHER (previous) process instances survive restart. They are released only by an
     /// explicit reconciliation call (operator/admin) once the caller asserts that the old process is gone and the
     /// configured residual-delivery grace has elapsed; the evidence string is stored with every drained row.
-    public async Task<int> ReconcilePriorInstancesAsync(string evidence, TimeSpan minAgeSinceHeartbeat)
+    public async Task<List<(Guid id, string priorState)>> ReconcilePriorInstancesAsync(string evidence, TimeSpan minAgeSinceHeartbeat)
     {
         await using var c = await _db.OpenConnectionAsync();
         await using var q = new NpgsqlCommand(
@@ -191,9 +199,9 @@ public sealed class CreditLedger
         q.Parameters.AddWithValue(InstanceId); q.Parameters.AddWithValue(minAgeSinceHeartbeat);
         var pools = new List<string>();
         await using (var r = await q.ExecuteReaderAsync()) while (await r.ReadAsync()) pools.Add(r.GetString(0));
-        int n = 0;
-        foreach (var p in pools) n += await DrainConnectionAsync(p, "prior instance reconciled: " + evidence);
-        return n;
+        var all = new List<(Guid, string)>();
+        foreach (var p in pools) all.AddRange(await DrainConnectionAsync(p, "prior instance reconciled: " + evidence));
+        return all;
     }
 
     static async Task LockSiteAsync(NpgsqlConnection c, NpgsqlTransaction tx) => await LockPoolAsync(c, tx, SitePool);

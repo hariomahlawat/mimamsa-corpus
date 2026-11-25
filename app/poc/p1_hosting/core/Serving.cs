@@ -57,6 +57,8 @@ public sealed class AuthStore
         CREATE TABLE IF NOT EXISTS vault_copies(doc_id text, copy_sha256 text, length bigint NOT NULL,
           state text NOT NULL DEFAULT 'eligible' CHECK (state IN ('eligible','withdrawn')), fence_seq bigint NOT NULL DEFAULT 0,
           PRIMARY KEY (doc_id, copy_sha256));
+        CREATE TABLE IF NOT EXISTS serving_policy(id int PRIMARY KEY CHECK (id = 1), epoch bigint NOT NULL, digest text NOT NULL);
+        INSERT INTO serving_policy VALUES (1, 1, 'state-1') ON CONFLICT DO NOTHING;
         """;
 
     public static string Hash(string token) => Convert.ToHexString(SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(token))).ToLowerInvariant();
@@ -88,42 +90,50 @@ public sealed class AuthStore
     }
 }
 
-/// In-memory mirror of copy eligibility plus the writer-priority guard. Readers (byte handoff) hold the read
-/// lock only for the synchronous, non-blocking acceptance of an already staged slice. A withdrawal takes the
-/// write lock: ReaderWriterLockSlim blocks new readers once a writer waits, so revocation cannot starve.
+/// In-memory mirror of copy eligibility and of the durable policy witness (epoch, digest), plus the
+/// writer-priority guard. Readers (byte handoff) hold the read lock only for the synchronous, non-blocking
+/// acceptance of an already staged slice. ReaderWriterLockSlim blocks new readers once a writer waits, so a
+/// withdrawal cannot starve behind handoffs.
+/// Withdrawal protocol (Serving §6/§10, oracle model):
+///   1. write lock: Pending = true, copy marked closed, emit ADMIT  -> no new reservation/enter from here on
+///   2. durable CAS on serving_policy (epoch+1, new digest) together with vault_copies.state='withdrawn'
+///   3. write lock: Epoch/Digest = committed values, Pending = false, emit FENCE (after the durable commit)
+/// If step 2 fails the route stays closed and Pending stays true (fail closed: no protected handoff at all).
 public sealed class ServingState
 {
     private readonly ReaderWriterLockSlim _guard = new(LockRecursionPolicy.NoRecursion);
     private readonly HashSet<string> _withdrawn = new();
-    private long _fenceSeq;
-    public long FenceSeq => Interlocked.Read(ref _fenceSeq);
+    public long Epoch { get; private set; }
+    public string Digest { get; private set; } = "";
+    public bool Pending { get; private set; }
 
-    public void LoadWithdrawn(IEnumerable<string> keys) { _guard.EnterWriteLock(); try { foreach (var k in keys) _withdrawn.Add(k); } finally { _guard.ExitWriteLock(); } }
+    public void Load(IEnumerable<string> withdrawnKeys, long epoch, string digest)
+    {
+        _guard.EnterWriteLock();
+        try { foreach (var k in withdrawnKeys) _withdrawn.Add(k); Epoch = epoch; Digest = digest; }
+        finally { _guard.ExitWriteLock(); }
+    }
     public static string Key(string docId, string sha) => docId + "|" + sha;
 
-    /// Run `accept` under the read guard iff the copy is still eligible. Returns false if withdrawn (nothing accepted).
-    public bool TryAcceptUnderGuard(string docId, string sha, Action accept)
+    /// Evaluate `body` under the read guard with a consistent view of (pending, epoch, eligibility).
+    public T UnderReadGuard<T>(Func<bool /*eligible*/, T> body, string docId, string sha)
     {
         _guard.EnterReadLock();
-        try
-        {
-            if (_withdrawn.Contains(Key(docId, sha))) return false;
-            accept();   // must be synchronous and non-blocking (copy into the bounded send buffer)
-            return true;
-        }
+        try { return body(!Pending && !_withdrawn.Contains(Key(docId, sha))); }
         finally { _guard.ExitReadLock(); }
     }
 
-    /// Fence: close the route in memory FIRST under the exclusive guard (waits for in-flight acceptances, blocks
-    /// new ones), THEN make the withdrawal durable. If the durable write fails the route stays closed (fail closed).
-    /// So no acceptance can happen after the durable fence. Returns the fence sequence number.
-    public async Task<long> WithdrawAsync(string docId, string sha, Func<Task> durableUpdate)
+    public async Task<(long epoch, string digest)> WithdrawAsync(string docId, string sha,
+        Func<Task<(long epoch, string digest)>> durableCas, Action emitAdmit, Action<long, string> emitFence)
     {
         _guard.EnterWriteLock();
-        try { _withdrawn.Add(Key(docId, sha)); }
+        try { Pending = true; _withdrawn.Add(Key(docId, sha)); emitAdmit(); }
         finally { _guard.ExitWriteLock(); }
-        await durableUpdate();
-        return Interlocked.Increment(ref _fenceSeq);
+        var (e, d) = await durableCas();      // throws -> Pending stays true: fail closed
+        _guard.EnterWriteLock();
+        try { Epoch = e; Digest = d; Pending = false; emitFence(e, d); }
+        finally { _guard.ExitWriteLock(); }
+        return (e, d);
     }
 }
 

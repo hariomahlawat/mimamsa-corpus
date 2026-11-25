@@ -28,7 +28,7 @@ var pdfRoot = Path.GetFullPath(conf["Mimamsa:PdfRoot"] ?? "pdfstore");
 var token = conf["Mimamsa:DevToken"] ?? "dev-token";
 var credit = new CreditConfig(conf.GetValue<long>("Mimamsa:Credit:SiteCap", 8L << 20), conf.GetValue<long>("Mimamsa:Credit:ConnCap", 256L << 10),
                               conf.GetValue<long>("Mimamsa:Credit:HeaderAllowance", 1024));
-var delivery = new DeliveryConfig(conf.GetValue("Mimamsa:Delivery:MaxRange", 128 * 1024), conf.GetValue("Mimamsa:Delivery:Slice", 64 * 1024),
+var delivery = new DeliveryConfig(conf.GetValue("Mimamsa:Delivery:MaxRange", 128 * 1024), conf.GetValue("Mimamsa:Delivery:Slice", 64 * 1024 - 1024),
                                   (int)credit.HeaderAllowance, conf.GetValue("Mimamsa:Delivery:DrainGraceMs", 250));
 int listenSndBuf = conf.GetValue("Mimamsa:Transport:ListenSendBufferBytes", 0);
 var dataSource = new NpgsqlDataSourceBuilder(cs).Build();
@@ -37,9 +37,16 @@ var auth = new AuthStore(dataSource);
 var state = new ServingState();
 var vault = new Vault(conf["Mimamsa:VaultRoot"] ?? Path.Combine(AppContext.BaseDirectory, "vault"));
 var pendingDrains = new ConcurrentDictionary<string, DateTime>();
+// Liveness guard for per-slice reservation: admit at most N concurrent protected responses, where N responses of
+// maximum accounted size fit inside the site cap. A slot is returned only after the connection's charges drained,
+// so a started response can never stall on site credit held by other started responses.
+long maxResponseWire = delivery.MaxRange + (long)Math.Ceiling(delivery.MaxRange / (double)delivery.Slice) * credit.HeaderAllowance;
+var slots = new ResponseSlots(conf.GetValue("Mimamsa:Delivery:SlotGate", true)
+    ? (int)Math.Max(1, credit.SiteCap / maxResponseWire)
+    : 100_000);   // gate disabled (tests that race single-slice responses directly at the ledger)
 
 builder.Services.AddSingleton(dataSource).AddSingleton(ledger).AddSingleton(auth).AddSingleton(state)
-       .AddSingleton(vault).AddSingleton(delivery).AddSingleton(credit);
+       .AddSingleton(vault).AddSingleton(delivery).AddSingleton(credit).AddSingleton(slots);
 
 // OS adapter: optional SO_SNDBUF on the listen socket (accepted sockets inherit it on Linux and Windows).
 // Used to make slow-client / uncertain-transfer tests deterministic; 0 = OS default.
@@ -51,7 +58,7 @@ builder.WebHost.UseSockets(o =>
 builder.WebHost.ConfigureKestrel(k =>
 {
     k.AddServerHeader = false;
-    k.Limits.MaxResponseBufferSize = delivery.Slice;   // bounded app-side send buffer
+    k.Limits.MaxResponseBufferSize = 64 * 1024;   // bounded app-side send buffer (one slice incl. header allowance)
     // Transport-termination observation: when a connection ends, its accepted charges drain after a grace.
     k.ConfigureEndpointDefaults(lo => lo.Use(next => async conn =>
     {
@@ -64,8 +71,12 @@ builder.WebHost.ConfigureKestrel(k =>
             _ = Task.Run(async () =>
             {
                 await Task.Delay(delivery.DrainGraceMs);
-                try { await ledger.DrainConnectionAsync(pool, $"kestrel connection {conn.ConnectionId} terminated {ended:O}; grace {delivery.DrainGraceMs} ms"); }
-                finally { pendingDrains.TryRemove(pool, out _); }
+                try
+                {
+                    foreach (var (id, _) in await ledger.DrainConnectionAsync(pool, $"kestrel connection {conn.ConnectionId} terminated {ended:O}; grace {delivery.DrainGraceMs} ms"))
+                        DeliveryTrace.Emit("prove_release", "drain_probe", new { attempt = id.ToString(), proof = "termination", connection_id = conn.ConnectionId });
+                }
+                finally { pendingDrains.TryRemove(pool, out _); slots.ReleaseFor(conn.ConnectionId); }
             });
         }
     }));
@@ -79,12 +90,19 @@ await using (var cmd = new NpgsqlCommand(AuthStore.Schema, c)) await cmd.Execute
 await ledger.InitAsync(resetForTest: conf.GetValue("Mimamsa:Test:ResetLedger", false));
 var seed = conf["Mimamsa:SeedFile"];
 if (!string.IsNullOrEmpty(seed)) await Seed.ApplyAsync(dataSource, vault, seed);
+DeliveryTrace.Start(conf["Mimamsa:Trace:Path"]);
 await using (var c = await dataSource.OpenConnectionAsync())
-await using (var q = new NpgsqlCommand("SELECT doc_id, copy_sha256 FROM vault_copies WHERE state='withdrawn'", c))
-await using (var r = await q.ExecuteReaderAsync())
 {
-    var w = new List<string>(); while (await r.ReadAsync()) w.Add(ServingState.Key(r.GetString(0), r.GetString(1)));
-    state.LoadWithdrawn(w);
+    var w = new List<string>();
+    await using (var q = new NpgsqlCommand("SELECT doc_id, copy_sha256 FROM vault_copies WHERE state='withdrawn'", c))
+    await using (var r = await q.ExecuteReaderAsync())
+        while (await r.ReadAsync()) w.Add(ServingState.Key(r.GetString(0), r.GetString(1)));
+    await using var pq = new NpgsqlCommand("SELECT epoch, digest FROM serving_policy WHERE id = 1", c);
+    await using var pr = await pq.ExecuteReaderAsync();
+    await pr.ReadAsync();
+    state.Load(w, pr.GetInt64(0), pr.GetString(1));
+    // durable witness read at boot: the exporter turns this into 'recover' after a restart, or initial_witness
+    DeliveryTrace.Emit("boot", "witness", new { epoch = state.Epoch, digest = state.Digest, instance = ledger.InstanceId });
 }
 _ = Task.Run(async () => { while (true) { try { await ledger.HeartbeatAsync(); } catch { } await Task.Delay(2000); } });
 
@@ -147,24 +165,52 @@ async Task<Principal?> Admin(HttpContext ctx)
 app.MapPost("/admin/withdraw", async (HttpContext ctx, string doc, string sha) =>
 {
     if (await Admin(ctx) is null) return Results.StatusCode(401);
-    var seq = await state.WithdrawAsync(doc, sha, async () =>
-    {
-        await using var c = await dataSource.OpenConnectionAsync();
-        await using var u = new NpgsqlCommand("UPDATE vault_copies SET state='withdrawn', fence_seq=fence_seq+1 WHERE doc_id=$1 AND copy_sha256=$2", c);
-        u.Parameters.AddWithValue(doc); u.Parameters.AddWithValue(sha); await u.ExecuteNonQueryAsync();
-    });
-    return Results.Json(new { fence_seq = seq, at = DateTime.UtcNow });
+    var op = "withdraw-" + Guid.NewGuid().ToString("N")[..8];
+    long admittedMs = 0;
+    var (epoch, digest) = await state.WithdrawAsync(doc, sha,
+        durableCas: async () =>
+        {
+            await using var c = await dataSource.OpenConnectionAsync();
+            await using var tx = await c.BeginTransactionAsync();
+            long e0; string d0;
+            await using (var q = new NpgsqlCommand("SELECT epoch, digest FROM serving_policy WHERE id = 1 FOR UPDATE", c, tx))
+            await using (var r = await q.ExecuteReaderAsync()) { await r.ReadAsync(); e0 = r.GetInt64(0); d0 = r.GetString(1); }
+            await using (var u = new NpgsqlCommand("UPDATE vault_copies SET state='withdrawn', fence_seq=fence_seq+1 WHERE doc_id=$1 AND copy_sha256=$2", c, tx))
+            { u.Parameters.AddWithValue(doc); u.Parameters.AddWithValue(sha); await u.ExecuteNonQueryAsync(); }
+            var d1 = "state-" + Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(
+                         System.Text.Encoding.UTF8.GetBytes($"{d0}|{op}|{doc}|{sha}|{e0 + 1}")))[..16].ToLowerInvariant();
+            await using (var cas = new NpgsqlCommand("UPDATE serving_policy SET epoch = $1, digest = $2 WHERE id = 1 AND epoch = $3", c, tx))
+            {
+                cas.Parameters.AddWithValue(e0 + 1); cas.Parameters.AddWithValue(d1); cas.Parameters.AddWithValue(e0);
+                if (await cas.ExecuteNonQueryAsync() != 1) throw new InvalidOperationException("witness CAS failed");
+            }
+            await tx.CommitAsync();
+            // independent read-back of the committed witness (new connection)
+            await using var c2 = await dataSource.OpenConnectionAsync();
+            await using var rb = new NpgsqlCommand("SELECT epoch, digest FROM serving_policy WHERE id = 1", c2);
+            await using var rr = await rb.ExecuteReaderAsync(); await rr.ReadAsync();
+            return (rr.GetInt64(0), rr.GetString(1));
+        },
+        emitAdmit: () => { admittedMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                           DeliveryTrace.Emit("admit", "policy_probe", new { operation = op, copy = sha, monotonic_ms = admittedMs }); },
+        emitFence: (e, d) => DeliveryTrace.Emit("fence", "witness", new { operation = op, copy = sha, epoch = e, digest = d }));
+    DeliveryTrace.Flush();
+    return Results.Json(new { operation = op, epoch, digest, admitted_ms = admittedMs });
 });
 app.MapPost("/admin/reconcile-prior", async (HttpContext ctx, string evidence, int minAgeSec) =>
 {
     if (await Admin(ctx) is null) return Results.StatusCode(401);
-    return Results.Json(new { drained = await ledger.ReconcilePriorInstancesAsync(evidence, TimeSpan.FromSeconds(minAgeSec)) });
+    var drained = await ledger.ReconcilePriorInstancesAsync(evidence, TimeSpan.FromSeconds(minAgeSec));
+    foreach (var (id, _) in drained) DeliveryTrace.Emit("prove_release", "drain_probe", new { attempt = id.ToString(), proof = "reconciliation" });
+    DeliveryTrace.Flush();
+    return Results.Json(new { drained = drained.Count });
 });
 app.MapGet("/admin/ledger", async (HttpContext ctx) =>
 {
     if (await Admin(ctx) is null) return Results.StatusCode(401);
     var site = await ledger.PoolAsync(CreditLedger.SitePool);
-    return Results.Json(new { instance = ledger.InstanceId, site = new { site.cap, site.reserved, site.charged }, pending_drains = pendingDrains.Count, fence_seq = state.FenceSeq });
+    _ = slots;
+    return Results.Json(new { instance = ledger.InstanceId, site = new { site.cap, site.reserved, site.charged }, response_slots = slots.Capacity, slots_free = slots.Free, pending_drains = pendingDrains.Count, epoch = state.Epoch, digest = state.Digest });
 });
 
 app.Run();

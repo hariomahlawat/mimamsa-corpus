@@ -6,12 +6,24 @@
 //   - each <= Slice bytes is copied into Kestrel's PipeWriter under the writer-priority guard (ServingState);
 //     FlushAsync (which may block on a slow client) runs OUTSIDE the guard
 //   - settlement: ACCEPTED(k) / RELEASED(0) / UNCERTAIN(full) ; charges drain only on observed transport termination
+using System.Collections.Concurrent;
 using System.IO.Pipelines;
 using MimamsaPoc.Core;
+using Npgsql;
 
 namespace MimamsaPocApi;
 
 public sealed record DeliveryConfig(int MaxRange, int Slice, int HeaderAllowance, int DrainGraceMs);
+
+public sealed class ResponseSlots
+{
+    readonly SemaphoreSlim _s; readonly ConcurrentDictionary<string, bool> _held = new();
+    public int Capacity { get; }
+    public int Free => _s.CurrentCount;
+    public ResponseSlots(int n) { Capacity = n; _s = new SemaphoreSlim(n, n); }
+    public bool TryAcquire(string connectionId) { if (!_s.Wait(0)) return false; _held[connectionId] = true; return true; }
+    public void ReleaseFor(string connectionId) { if (_held.TryRemove(connectionId, out _)) _s.Release(); }
+}
 
 public static class ProtectedDelivery
 {
@@ -48,7 +60,7 @@ public static class ProtectedDelivery
     }
 
     static async Task ServeRangeAsync(HttpContext ctx, string docId, string sha, AuthStore auth, CreditLedger ledger,
-                                      ServingState state, Vault vault, DeliveryConfig cfg, ILoggerFactory lf)
+                                      ServingState state, Vault vault, DeliveryConfig cfg, ResponseSlots slots, ILoggerFactory lf)
     {
         var res = ctx.Response;
         NoStore(res);
@@ -68,62 +80,105 @@ public static class ProtectedDelivery
         int len = checked((int)(end - start + 1));
         // PREPARED: stage the immutable bytes outside any guard
         var bytes = await vault.ReadSliceAsync(copy.Sha256, start, len);
+        if (!slots.TryAcquire(ctx.Connection.Id)) { res.StatusCode = 503; res.Headers.RetryAfter = "1"; return; }   // returned after drain
         var connPool = CreditLedger.ConnPoolId(ledger.InstanceId, ctx.Connection.Id);
-        var reservation = await ledger.TryReserveAsync(connPool, len + cfg.HeaderAllowance, p.SessionId, docId, copy.Sha256, start, len);
-        if (reservation is null) { res.StatusCode = 503; res.Headers.RetryAfter = "1"; return; }   // no credit: no bytes
-
+        string connLabel = $"c{ctx.Connection.RemotePort}", stream = ctx.TraceIdentifier;
         var writer = res.BodyWriter;
-        long accepted = 0;
+        long wireOffset = 0;          // accounted wire offset within this response stream
         bool headersSet = false;
-        try
+        int off = 0;
+        var log = lf.CreateLogger("delivery");
+
+        while (off < len)
         {
-            for (int off = 0; off < len; off += cfg.Slice)
+            int n = Math.Min(cfg.Slice, len - off);
+            long amount = n + cfg.HeaderAllowance;      // worst-case charged wire bytes for this attempt
+            // ---- reservation (atomic connection + site credit) with in-transaction policy recheck
+            Reservation? r = null; long resEpoch = 0; bool policyDenied = false;
+            var deadline = DateTime.UtcNow.AddMilliseconds(2000);
+            while (true)
             {
-                int n = Math.Min(cfg.Slice, len - off);
-                bool ok = state.TryAcceptUnderGuard(docId, copy.Sha256, () =>
+                policyDenied = false;
+                long wo = wireOffset;
+                r = await ledger.TryReserveAsync(connPool, amount, p.SessionId, docId, copy.Sha256, start + off, n, async (c, tx, id) =>
                 {
-                    if (!headersSet)
+                    await using var q = new Npgsql.NpgsqlCommand("SELECT epoch FROM serving_policy WHERE id = 1 FOR SHARE", c, tx);
+                    long dbEpoch = (long)(await q.ExecuteScalarAsync())!;
+                    return state.UnderReadGuard(eligible =>
                     {
-                        res.StatusCode = 206;
-                        res.ContentType = "application/pdf";
-                        res.ContentLength = len;
-                        res.Headers.ContentRange = $"bytes {start}-{end}/{copy.Length}";
-                        res.Headers.AcceptRanges = "bytes";
-                        headersSet = true;
-                    }
-                    var src = bytes.AsSpan(off, n);
-                    while (!src.IsEmpty)
-                    {
-                        var dst = writer.GetSpan(Math.Min(src.Length, 16 * 1024));
-                        int c = Math.Min(dst.Length, src.Length);
-                        src[..c].CopyTo(dst); writer.Advance(c); src = src[c..];
-                    }
-                    accepted += n;   // ownership of these exact bytes now belongs to the Kestrel pipe
+                        if (!eligible || state.Epoch != dbEpoch) { policyDenied = true; return false; }
+                        resEpoch = dbEpoch;
+                        DeliveryTrace.Emit("reserve", "ledger", new { attempt = id.ToString(), connection = connLabel, stream, copy = copy.Sha256,
+                                                                    offset = wo, size = amount, epoch = dbEpoch });
+                        return true;
+                    }, docId, copy.Sha256);
                 });
-                if (!ok)
-                {
-                    if (accepted == 0)
-                    {
-                        await ledger.SettleAsync(reservation, Settlement.ReleasedZeroTransfer, 0, "withdrawn before first byte");
-                        res.StatusCode = 404; return;
-                    }
-                    await ledger.SettleAsync(reservation, Settlement.Accepted, accepted, "withdrawn mid-response: aborted after accepted prefix");
-                    ctx.Abort();
-                    return;
-                }
-                FlushResult fr = await writer.FlushAsync(ctx.RequestAborted);   // outside the guard; may block on slow clients
-                if (fr.IsCanceled || fr.IsCompleted && off + n < len) throw new OperationCanceledException("client gone");
+                if (r is not null) break;
+                bool withdrawn = policyDenied && state.UnderReadGuard(e => !e && !state.Pending, docId, copy.Sha256);
+                if (withdrawn) { if (!headersSet) { res.StatusCode = 404; return; } ctx.Abort(); return; }
+                if (!headersSet && !policyDenied) { res.StatusCode = 503; res.Headers.RetryAfter = "1"; return; }  // no credit: no bytes
+                if (DateTime.UtcNow > deadline) { log.LogWarning("credit/policy wait expired mid-response; aborting"); ctx.Abort(); return; }
+                await Task.Delay(20);    // pending withdrawal or credit exhausted mid-response: bounded wait, never a short 206
             }
-            await ledger.SettleAsync(reservation, Settlement.Accepted, accepted, "complete response handed to transport");
-        }
-        catch (Exception ex) when (ex is OperationCanceledException or IOException or InvalidOperationException
-                                   or Microsoft.AspNetCore.Connections.ConnectionResetException)
-        {
-            // Outcome unknown (client vanished / reset during flush): keep the FULL reservation charged until the
-            // transport connection is observed terminated. Never refund here and never retry this range.
-            await ledger.SettleAsync(reservation, Settlement.Uncertain, accepted, $"uncertain: {ex.GetType().Name} after {accepted} bytes accepted");
-            lf.CreateLogger("delivery").LogWarning("uncertain transfer {Res} {Type}", reservation.Id, ex.GetType().Name);
-            ctx.Abort();
+
+            // ---- handoff under the guard: fresh recheck (enter), then exact slice into the bounded Kestrel pipe (accept)
+            long acceptedWire = 0;
+            bool ok = state.UnderReadGuard(eligible =>
+            {
+                if (!eligible || state.Epoch != resEpoch) return false;
+                DeliveryTrace.Emit("enter", "policy_probe", new { attempt = r.Id.ToString() });
+                if (!headersSet)
+                {
+                    res.StatusCode = 206;
+                    res.ContentType = "application/pdf";
+                    res.ContentLength = len;
+                    res.Headers.ContentRange = $"bytes {start}-{end}/{copy.Length}";
+                    res.Headers.AcceptRanges = "bytes";
+                    headersSet = true;
+                }
+                var src = bytes.AsSpan(off, n);
+                while (!src.IsEmpty)
+                {
+                    var dst = writer.GetSpan(Math.Min(src.Length, 16 * 1024));
+                    int c = Math.Min(dst.Length, src.Length);
+                    src[..c].CopyTo(dst); writer.Advance(c); src = src[c..];
+                }
+                acceptedWire = amount;
+                DeliveryTrace.Emit("accept", "terminal", new { attempt = r.Id.ToString(), offset = wireOffset, size = amount });
+                return true;
+            }, docId, copy.Sha256);
+
+            if (!ok)
+            {
+                // zero transfer is established (nothing was handed to the pipe for this attempt)
+                if (await ledger.SettleAsync(r, Settlement.ReleasedZeroTransfer, 0, "policy changed before handoff"))
+                    DeliveryTrace.Emit("settle", "ledger", new { attempt = r.Id.ToString(), outcome = "zero" });
+                bool withdrawn = state.UnderReadGuard(e => !e, docId, copy.Sha256);
+                if (withdrawn)
+                {
+                    if (!headersSet) { res.StatusCode = 404; return; }
+                    ctx.Abort(); return;                       // mid-response withdrawal: stop, no fresh bytes
+                }
+                continue;                                      // epoch moved (other copy withdrawn): re-reserve under new epoch
+            }
+            wireOffset += acceptedWire; off += n;
+            try
+            {
+                FlushResult fr = await writer.FlushAsync(ctx.RequestAborted);   // outside the guard; may block on slow clients
+                if (fr.IsCanceled || (fr.IsCompleted && off < len)) throw new OperationCanceledException("client gone");
+            }
+            catch (Exception ex) when (ex is OperationCanceledException or IOException or InvalidOperationException
+                                       or Microsoft.AspNetCore.Connections.ConnectionResetException)
+            {
+                // completion lost / client vanished: retain the FULL reservation until termination evidence; never retry
+                if (await ledger.SettleAsync(r, Settlement.Uncertain, acceptedWire, $"uncertain: {ex.GetType().Name}"))
+                    DeliveryTrace.Emit("settle", "ledger", new { attempt = r.Id.ToString(), outcome = "uncertain" });
+                log.LogWarning("uncertain transfer {Res} {Type}", r.Id, ex.GetType().Name);
+                ctx.Abort();
+                return;
+            }
+            if (await ledger.SettleAsync(r, Settlement.Accepted, acceptedWire, "slice handed to transport and flushed"))
+                DeliveryTrace.Emit("settle", "ledger", new { attempt = r.Id.ToString(), outcome = "accepted", size = acceptedWire });
         }
     }
 }

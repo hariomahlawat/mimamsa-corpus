@@ -191,8 +191,11 @@ def sampler(stop_ev, out):
     out.update(max_site_outstanding=mx, samples=n, violations=viol)
 
 
-for label, site_cap, nreq, threads in [("B1_site_cap_one_range", MAXR + KiB, 40, 40), ("B2_site_cap_1MiB", 1024 * KiB, 400, 32)]:
-    p = start(label, **{"Credit.SiteCap": site_cap, "Delivery.DrainGraceMs": 50})
+# B1 = Serving §10 synthetic oracle over HTTP: site credit for exactly one 64 KiB attempt, 40 simultaneous contenders
+for label, site_cap, nreq, threads, maxr in [("B1_site_cap_one_64KiB_attempt", 64 * KiB, 40, 40, 63 * KiB),
+                                             ("B2_site_cap_1MiB", 1024 * KiB, 400, 32, MAXR)]:
+    p = start(label, **{"Credit.SiteCap": site_cap, "Delivery.DrainGraceMs": 50, "Delivery.MaxRange": maxr,
+                        "Delivery.SlotGate": "false" if label.startswith("B1") else "true"})
     try:
         stop_ev, samp = threading.Event(), {}
         th = threading.Thread(target=sampler, args=(stop_ev, samp)); th.start()
@@ -200,7 +203,7 @@ for label, site_cap, nreq, threads in [("B1_site_cap_one_range", MAXR + KiB, 40,
         rnd = random.Random(7)
         specs = []
         for i in range(nreq):
-            ln = MAXR if label.startswith("B1") else rnd.randint(1, MAXR)
+            ln = maxr if label.startswith("B1") else rnd.randint(1, maxr)
             a0 = rnd.randint(0, len(BIG) - ln); specs.append((a0, a0 + ln - 1))
         def one(sp):
             st, h, b = req(RANGE("doc-big", BIG_SHA), "tok-alice", f"bytes={sp[0]}-{sp[1]}")
@@ -278,14 +281,21 @@ try:
         pass
     s.close()
     time.sleep(0.5)
-    r = rows(f"range_start = {a0}")
+    with psycopg.connect(A.db) as c:
+        stream_rows = c.execute("""SELECT state, accepted_bytes, extract(epoch from created_at)*1000, range_len FROM credit_reservations
+                                   WHERE range_start >= %s AND range_start < %s ORDER BY created_at""", (a0, a0 + MAXR)).fetchall()
+    admitted_ms = json.loads(b or b"{}").get("admitted_ms", 0)
     hdr_len = first.find(b"\r\n\r\n") + 4 if b"\r\n\r\n" in first else 0
     body_received = total - hdr_len
     after = req(RANGE("doc-big", BIG_SHA), "tok-alice", "bytes=0-99")
-    RESULTS["scenarios"]["C_withdraw_mid_response"] = dict(withdraw_status=st, body_received=body_received, content_length=MAXR, reservation=r[0] if r else None,
-                                                          post_fence_request_status=after[0])
-    check("withdrawal_between_slices_stops_handoff", st == 200 and r and r[0]["accepted"] <= 64 * KiB and body_received <= 64 * KiB and after[0] == 404,
-          body_received=body_received, accepted=r[0]["accepted"] if r else None, state=r[0]["state"] if r else None)
+    handed = [r for r in stream_rows if r[0] in ("ACCEPTED", "UNCERTAIN", "DRAINED") and r[1] > 0]
+    post_fence_handoffs = [r for r in handed if r[2] >= admitted_ms]
+    payload_handed = sum(r[3] for r in handed)
+    RESULTS["scenarios"]["C_withdraw_mid_response"] = dict(withdraw_status=st, admitted_ms=admitted_ms, body_received=body_received, content_length=MAXR,
+                                                          slices=[list(map(lambda x: float(x) if not isinstance(x, str) else x, r)) for r in stream_rows],
+                                                          post_fence_handoffs=len(post_fence_handoffs), post_fence_request_status=after[0])
+    check("withdrawal_between_slices_stops_handoff", st == 200 and not post_fence_handoffs and body_received <= payload_handed < MAXR and after[0] == 404,
+          body_received=body_received, payload_handed=payload_handed, post_fence=len(post_fence_handoffs))
 finally:
     stop(p)
 

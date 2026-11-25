@@ -45,7 +45,7 @@ public static class LedgerOracle
             var after = await L.PoolAsync("site");
             Check("duplicate_settlement_is_noop", !second && before == after, new { before, after });
             // drain after termination evidence returns the 16 KiB
-            int drained = await L.DrainConnectionAsync("conn:o:p1", "oracle: connection terminated");
+            int drained = (await L.DrainConnectionAsync("conn:o:p1", "oracle: connection terminated")).Count;
             var s2 = await L.PoolAsync("site");
             Check("drain_after_termination_releases_charge", drained == 1 && s2.charged == 0 && s2.reserved == 48 * KiB, new { drained, s2.charged, s2.reserved });
         }
@@ -60,7 +60,7 @@ public static class LedgerOracle
             var L2 = new CreditLedger(db, new CreditConfig(64 * KiB, 1024 * KiB, 0));   // simulated restart (new instance)
             await L2.InitAsync(false);
             var afterRestart = await L2.PoolAsync("site");
-            int early = await L2.ReconcilePriorInstancesAsync("oracle early attempt", TimeSpan.FromHours(1));
+            int early = (await L2.ReconcilePriorInstancesAsync("oracle early attempt", TimeSpan.FromHours(1))).Count;
             Check("uncertain_retains_full_reservation_across_restart", site.charged == 64 * KiB && r2 is null && afterRestart.charged == 64 * KiB && early == 0,
                   new { chargedBefore = site.charged, oneByteReserved = r2 is not null, chargedAfterRestart = afterRestart.charged, reconciledTooEarly = early });
         }

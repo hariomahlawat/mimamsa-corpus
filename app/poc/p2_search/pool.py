@@ -12,7 +12,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("work", type=Path); ap.add_argument("runs", type=Path); ap.add_argument("qrels", type=Path)
 ap.add_argument("sheets", type=Path); ap.add_argument("--depth", type=int, default=10)
 ap.add_argument("--extra-runs", type=Path); ap.add_argument("--extra-depth", type=int, default=5)
-ap.add_argument("--headline", default="", help="comma list of systems pooled at --depth; others at --other-depth")
+ap.add_argument("--headline", default="", help="semicolon list of systems pooled at --depth; others at --other-depth")
 ap.add_argument("--other-depth", type=int, default=10)
 ap.add_argument("--queries", type=Path, default=Path(__file__).resolve().parent / "queries.json")
 a = ap.parse_args()
@@ -23,7 +23,7 @@ for line in open(a.work / "corpus/corpus.jsonl"):
     d = json.loads(line); docs[d["doc_id"]] = d
 
 pool = {qid: set() for qid in queries}
-HEAD = set(filter(None, a.headline.split(",")))
+HEAD = set(filter(None, a.headline.split(";")))   # ";" because system names contain commas
 def add_runs(folder, depth, other=None):
     for f in sorted(folder.glob("*.json")):
         j = json.loads(f.read_text())
