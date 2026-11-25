@@ -241,6 +241,15 @@ def resolve_proceedings(d, res, hosts):
     if party:
         vals = set(r[2] for r in party)
         uncovered = [h for h in main_hosts if h["label_norm"] not in covered]
+        if len(vals) > 1 and len(main_hosts) <= 1 and not generic and not out and \
+                vals <= {"allowed", "partly_allowed", "dismissed"} and "dismissed" in vals:
+            # V4: one proceeding, relief granted to some parties and refused to others -> partly allowed, with the
+            # party-specific outcomes stated ('appeal of the Union allowed; appeal of respondent 2 dismissed')
+            ev = party[-1][3]
+            pnote = "; ".join("%s for %s" % (r[2], r[0][2:]) for r in party)
+            h = main_hosts[0] if main_hosts else None
+            return [(h, h["label_norm"] if h else "UNIDENTIFIED", "partly_allowed", ev, "party_specific_mixed_outcome",
+                     squash(pnote, 200))], ""
         if len(vals) > 1:
             return [], "PARTY_SPECIFIC_DISPOSITIONS_NOT_MAPPED_TO_CASE_NUMBERS"
         if generic and set(r[2] for r in generic) != vals:

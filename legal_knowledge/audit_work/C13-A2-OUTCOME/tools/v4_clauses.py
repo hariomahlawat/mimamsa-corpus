@@ -166,7 +166,7 @@ def _aux_chain(text, vstart, cstart):
 
 _COORD_SUBJ_RE = re.compile(r"\b(?:the\s+)?(?:(?:writ|civil|criminal|special\s+leave|transferred|contempt|review)\s+)?"
                             r"(?:petitions?|appeals?|cases?)\s+and\s+the\s*$", re.I)
-_ELLIPTICAL_SENT_RE = re.compile(r"^[\s\d.()ivx]*(?:accordingly,?\s+|consequently,?\s+|hence,?\s+)?(?:all\s+|both\s+)?(?:the\s+)?"
+_ELLIPTICAL_SENT_RE = re.compile(r"^[\s\d.()ivx]*(?:(?:in\s+the\s+result|accordingly|consequently|hence|therefore|thus|resultantly)\s*,?\s+)?(?:all\s+|both\s+)?(?:the\s+)?"
                                  r"(?:(?:writ|civil|criminal|special|letters\s+patent|transferred)\s+)?(?:leave\s+)?"
                                  r"(?:petitions?|appeals?|cases?|matters?)\s*$", re.I)
 

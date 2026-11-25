@@ -145,12 +145,13 @@ _AUTHOR_LINE_RE = re.compile(r"(?m)^[ \t]*(?:[A-Z]\.\s?){0,3}[A-Z][A-Za-z.'\- ]{
 
 def opinion_cuts(mt):
     """Start positions of opinions after the first: an author line followed within 300 characters by a paragraph
-    numbered 1 (paragraph numbering restarts in every opinion). The first author line is the main opinion."""
+    numbered 1 (paragraph numbering restarts in every opinion), once a numbered body has already begun."""
     out = []
     for m in _AUTHOR_LINE_RE.finditer(mt):
-        if re.match(r"\s*(?:\[[^\]\n]{0,40}\]\s*)?1\s*\.\s", mt[m.end():m.end() + 300]):
-            out.append(m.start())
-    return out[1:]
+        if re.match(r"\s*(?:\[[^\]\n]{0,40}\]\s*)?1\s*\.\s", mt[m.end():m.end() + 300]) and \
+                re.search(r"(?m)^[ \t]*2[ \t]*\.\s", mt[:m.start()]):
+            out.append(m.start())   # a body (paragraph 2 at least) precedes it: not the main opinion's author line
+    return out
 
 
 _DISSENT_RE = re.compile(r"\bI\s+(?:would\s+)?(?:respectfully\s+|regret(?:fully)?\s+(?:that\s+)?(?:I\s+)?)?(?:disagree|dissent|differ)\b|"
