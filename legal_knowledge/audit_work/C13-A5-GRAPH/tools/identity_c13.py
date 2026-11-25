@@ -152,7 +152,7 @@ def main():
         kinds[x] += 1
     summary = dict(tool=VERSION, copies_in_scope=128, copies_withheld_restricted=withheld,
                    copies_in_overlay=len({x["copy_sha256"] for x in out}), membership_rows=len(out),
-                   files_with_several_doc_ids=n_multi + (0 if withheld == 0 else 0),
+                   files_with_several_doc_ids=n_multi,
                    one_id_several_sha256_groups=len(groups),
                    group_sizes={g: len(v) for g, v in sorted(groups.items())},
                    resolution_rows=dict(sorted(tally.items())), logical_identities_by_kind=dict(sorted(kinds.items())),

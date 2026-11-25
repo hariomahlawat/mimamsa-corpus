@@ -13,16 +13,16 @@
  },
  "a0_passages_read": false,
  "dev_eval_in_sample": {
-  "correct_rejections": 72,
+  "correct_rejections": 69,
   "excluded_rows_in_a0_holdout": 0,
   "excluded_rows_not_in_rev13": 24,
   "fp": 3,
-  "labelled_rows": 166,
+  "labelled_rows": 162,
   "missed_supported": 10,
   "note": "IN-SAMPLE: the rules were developed on these C11 reviewed rows; this is not an independent measure. Independent precision/recall awaits A0's H-REL-C13 evaluation (only its identifiers are read, to exclude it).",
-  "precision": 0.95,
-  "recall_on_supported": 0.8507,
-  "tp": 57
+  "precision": 0.9492,
+  "recall_on_supported": 0.8485,
+  "tp": 56
  },
  "frozen": false,
  "inputs": {
@@ -33,13 +33,13 @@
  "passages_on_a0_holdout_pages": 333,
  "relation_counts": {
   "APPLIES": 12,
-  "CITES": 23825,
-  "CONSIDERS": 366,
+  "CITES": 23822,
+  "CONSIDERS": 368,
   "DISAPPROVES": 4,
   "DISTINGUISHES": 34,
   "DOUBTS": 1,
   "EXPLAINS": 4,
-  "FOLLOWS": 277,
+  "FOLLOWS": 278,
   "OVERRULES": 9
  },
  "restricted_register": {
@@ -52,12 +52,12 @@
   "edge_excerpt_not_found": 1
  },
  "voice_counts": {
-  "COURT_OWN_VOICE": 707,
-  "CUES_REJECTED": 333,
+  "COURT_OWN_VOICE": 710,
+  "CUES_REJECTED": 330,
   "HIGH_COURT_OVERRULING_WORDS_NOT_ROUTED": 3,
-  "NO_TREATMENT_CUE": 14540,
-  "PARTY_SUBMISSION": 3310,
-  "QUOTED_PASSAGE": 3124,
+  "NO_TREATMENT_CUE": 14554,
+  "PARTY_SUBMISSION": 3283,
+  "QUOTED_PASSAGE": 3137,
   "REPORTER_EDITORIAL": 2502,
   "SEPARATE_OR_DISSENT_OPINION": 13
  }

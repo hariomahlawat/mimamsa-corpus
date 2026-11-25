@@ -473,6 +473,8 @@ class Builder:
                                  tp=sum(1 for v in self.rev_edge.values() for x in v if x["verdict"] == "TARGET_CORRECT"),
                                  fp=sum(1 for v in self.rev_edge.values() for x in v if x["verdict"] == "WRONG_TARGET"),
                                  note="target resolution correctness on C11 reviewers' sampled resolved edges (C11 rev 1.0/1.1 outputs)")
+        c = per_type["CITES"]
+        c["precision"] = round(c["tp"] / (c["tp"] + c["fp"]), 4) if c["tp"] + c["fp"] else None
         per_type["CITES_PROVISION"] = dict(measured=False, note="C11 reviews checked labels, not a random sample of mentions")
         evaluation = dict(tool=VERSION, treatment_dev_eval=dev, per_edge_type=per_type,
                           rule="Absence of an edge never means absence of adverse authority.")

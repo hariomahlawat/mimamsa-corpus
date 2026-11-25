@@ -157,7 +157,7 @@ def classify(t, court, anchor_s, anchor_e, opinion, zone, target_court):
         para_lo = m.start()
     q, why = R11.in_quotation(t, s0 + 1, para_lo)
     if not q:
-        look = t[max(0, s0 - 1500):s0]
+        look = t[max(para_lo, s0 - 1500):anchor_s]
         lead = None
         for m in STRAIGHT_LEADIN.finditer(look):
             lead = m
@@ -185,7 +185,7 @@ def classify(t, court, anchor_s, anchor_e, opinion, zone, target_court):
     for _, off, typ, m in found:
         cpos, cend = s0 + m.start(), s0 + m.end()
         local = t[max(s0, cpos - 120):cpos]
-        if INTERROG.search(t[s0:s1].rstrip()) or t[s0:s1].rstrip().endswith("?"):
+        if t[s0:s1].rstrip().endswith("?") or re.match(r"[^.;!?]*\?", t[cend:s1]):
             reasons.append("interrogative sentence (V13-01)")
             continue
         if NO_ONE_SAID.search(t[s0:cend]):
@@ -482,6 +482,7 @@ def dev_labels():
             fam = fam_of_cat.get(cat, "NONE")
             if fam != "NONE" and v != "SUPPORTED":
                 fam = "NONE"     # NOT_COURTS_OWN_WORDS, WRONG_TARGET, WEAKER_RELATION -> no typed treatment of this target
+            labs = [l for l in labs if l["row_id"] != r["row_id"]]   # one label per row: the later review round wins
             labs.append(dict(row_id=r["row_id"], source=src, category=cat, verdict=v, truth_family=fam,
                              basis="reviewer verdict on the stated target; reported treatment carries no own-voice proposal"))
     tcs = {r["candidate_id"]: r for r in C.read_csv(REL / "TREATMENT_CANDIDATES.csv")}

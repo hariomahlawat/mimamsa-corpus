@@ -3,21 +3,21 @@
  "contract_version": "1.0.0",
  "files": {
   "EDGE_TYPE_EVALUATION_C13.json": {
-   "bytes": 2497,
+   "bytes": 2523,
    "records": null,
-   "sha256": "fc4c94127e3f1ec904a376b67b8fa290756f6a9636bc651322cc3aa93e522035",
+   "sha256": "cf90d4ccade88e634a723bcad2e6255534fa1678e084156ba353c56e1bbb6b54",
    "sha256_note": null
   },
   "GRAPH_SUMMARY_C13.json": {
    "bytes": 6228,
    "records": null,
-   "sha256": "783e18963d41782f9e330e59401c3a7501db8d38fac4c0ade5f4cab3f8d097e3",
+   "sha256": "9859fbea9063f00628eb59d925836ea60a5c0a583ca93a5fa32788dca2c27107",
    "sha256_note": null
   },
   "edges_candidate.jsonl.gz": {
-   "bytes": 72138285,
-   "records": 44958,
-   "sha256": "fcdad417bfd759df5159eb8ee45bde651aedfe274f04472a754121068e417a11",
+   "bytes": 72143421,
+   "records": 44961,
+   "sha256": "7a73325d37ded8afb75976b8dab0e0678413f39d6e2998fc7c04ff792e9de193",
    "sha256_note": "sha256 of the uncompressed content"
   },
   "edges_reviewed.jsonl": {
