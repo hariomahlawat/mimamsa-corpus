@@ -1,0 +1,87 @@
+{
+ "workstream": "C13 A4 statutory evidence",
+ "version": "C13A4-EV-v1",
+ "engine": "C12F-v1.1 build_c12f.py (unchanged, imported)",
+ "frozen_originals_verified": {
+  "legal_knowledge/curated_originals/knowledge_base/v0.9/records_658.jsonl": "9a8f0d193065762ffa987116dc761bcb734008d2a87a946f5591741f5befcfc1",
+  "legal_knowledge/curated_originals/case_law/v0.9/cases_53.jsonl": "8b8d53cd1434f7c1c6eaebe77f1fe295fb8b81b755e93276999b4b40b3c8f89a"
+ },
+ "citation_items": 983,
+ "before_after": {
+  "baseline": {
+   "EXACT_ANCHOR": 42,
+   "PARTIAL_MATCH": 652,
+   "MISSING_EVIDENCE": 289
+  },
+  "c12f_v1_1": {
+   "EXACT_ANCHOR": 99,
+   "PARTIAL_MATCH": 595,
+   "MISSING_EVIDENCE": 289
+  },
+  "c13_a4": {
+   "EXACT_ANCHOR": 109,
+   "PARTIAL_MATCH": 585,
+   "MISSING_EVIDENCE": 289
+  }
+ },
+ "c13_changes": {
+  "NONE": 954,
+  "PAGE_EVIDENCE_ADDED_C13": 19,
+  "PROMOTE_PARTIAL_TO_EXACT_PROPOSED_C13": 10
+ },
+ "c13_gate_blocked": [],
+ "c13_promotions": [
+  "C10Q-CW-0232 CM-005 rules-army-rules-1954#r106,r107,r108,r109",
+  "C10Q-CW-0259 CM-018 rules-army-rules-1954#r96,r97,r98,r99,r100,r101",
+  "C10Q-CW-0268 CM-023 rules-army-rules-1954#r51,r52,r53,r54,r55,r52,r54",
+  "C10Q-CW-0269 CM-024 rules-army-rules-1954#r56,r57,r58,r59,r60,r61,r62,r63,r64",
+  "C10Q-CW-0279 CM-029 rules-army-rules-1954#r110,r111,r112,r113,r114,r115,r116,r117,r118,r119,r120,r121,r122,r123,r124,r125,r126,r127",
+  "C10Q-CW-0280 CM-029 rules-army-rules-1954#r115,r116,r117,r118",
+  "C10Q-CW-0317 CM-SC-08 rules-army-rules-1954#r52,r54,r115,r116",
+  "C10Q-CW-0337 CM-CL-04 rules-army-rules-1954#r106,r107,r108,r109,r110,r111,r112,r113,r114,r115,r116,r117,r118,r119,r120,r121,r122,r123,r124,r125,r126,r127,r128,r129,r130,r131,r132,r133",
+  "C10Q-CW-0340 CM-CL-06 rules-army-rules-1954#r41,r42,r43,r44,r45,r46,r47,r48,r49,r50,r51,r52,r53,r54,r55",
+  "C10Q-CW-0341 CM-CL-07 rules-army-rules-1954#r52,r54,r115,r116"
+ ],
+ "c13_page_evidence_rows": 21,
+ "page_evidence_validation_c13": {
+  "C13PE-1954-307-R42-R44": "VERIFIED",
+  "C13PE-1954-308-R45-R46": "VERIFIED",
+  "C13PE-1954-309-R47": "VERIFIED",
+  "C13PE-1954-310-R48-R52": "VERIFIED",
+  "C13PE-1954-311-R53": "VERIFIED",
+  "C13PE-1954-312-R54-R56": "VERIFIED",
+  "C13PE-1954-313-R57-R58": "VERIFIED",
+  "C13PE-1954-314-R59-R62": "VERIFIED",
+  "C13PE-1954-315-R63": "VERIFIED",
+  "C13PE-1954-316-R64": "VERIFIED",
+  "C13PE-1954-323-R96-R97": "VERIFIED",
+  "C13PE-1954-324-R98-R104": "VERIFIED",
+  "C13PE-1954-325-R105-R107": "VERIFIED",
+  "C13PE-1954-326-R108-R110": "VERIFIED",
+  "C13PE-1954-327-R111-R115": "VERIFIED",
+  "C13PE-1954-328-R116-R117": "VERIFIED",
+  "C13PE-1954-329-R118-R123": "VERIFIED",
+  "C13PE-1954-330-R124-R133": "VERIFIED",
+  "C13PE-1993-15-R52-R58": "VERIFIED",
+  "C13PE-1993-16-R59-R106": "VERIFIED",
+  "C13PE-1993-17-R115-R118": "VERIFIED"
+ },
+ "c12_promotions_all_retained": true,
+ "anchoring_copy_provenance": {
+  "C5-SRC-P0-AR-AMD-AR-029~C1": "HF_PRESERVATION legal_knowledge/preservation/c5_working_store/e9/e9bf2114ab633716ea954db6e100be858e45949384f9fc0667364308bff46912/16490.pdf @ 5524c3d9",
+  "C5-SRC-P0-ARMY-RULES-1954~C1": "HF_PRESERVATION legal_knowledge/preservation/c5_working_store/c5/c5ef95a9d553685aa655f041b71d8360d6272e2775a19a3d6e7273c6cbd0aca6/ia_in.gazette.central.w.1954-11-27.103686.pdf @ 5524c3d9"
+ },
+ "pymupdf_version": "2.1",
+ "input_sha256": {
+  "page_evidence_c13": "9fee7d21edfb77ba1590fcf815a88f4de8132725ca69ded86f8299cce2a77219",
+  "page_evidence_c12": "013a14948f3585c472daa5b1599ec9fad035b676228ba46c917cb8ee88e66233",
+  "c12f_matrix": "cbd734784e4930e65de23ef59a19e7bb4553f34043684e267e740d55b4f2ff19",
+  "engine": "b8228fb9db5205423b34cb5a8bb057b746f2e28f6ad433de74a8c9e1a8c8359c"
+ },
+ "honesty_notes": [
+  "All C13 states are PROPOSALS. corpus_crosswalk.csv, C10/C12 outputs and the KB are unchanged.",
+  "Promotions come only from new page-image checks of held registered eligible copies; no blocker rule was relaxed; MISSING items are never promoted.",
+  "The C13 gate is stricter than C12F: no new promotion rests on a text-layer-only 1954 page.",
+  "Image readings are by an AI agent and are not human-confirmed; an independent reviewer must re-read the 21 new page rows."
+ ]
+}
