@@ -1,0 +1,21 @@
+{
+ "snapshot": "ad77758d",
+ "seed": 13,
+ "restricted_list_commit": "dfce914081491e64492194c473aa1f9e46bad584",
+ "excluded_by_restricted_list": [
+  [
+   "regs-regulations-for-the-air-force-reprinted-edition-2000",
+   "doc_id:regs-regulations-for-the-air-force-reprinted-edition-2000"
+  ]
+ ],
+ "skipped": {
+  "non_english": 8,
+  "short_text": 2,
+  "no_text": 7
+ },
+ "docs": 2455,
+ "judgments": 2400,
+ "statutes": 55,
+ "chunks": 21701,
+ "words": 16543347
+}

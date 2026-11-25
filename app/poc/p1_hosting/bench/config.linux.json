@@ -1,0 +1,17 @@
+{"autocannon": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/tools/loadgen/node_modules/.bin/autocannon", "duration": 15, "warmup": 4, "concurrency": [1, 10, 50],
+ "endpoints": {"search": "/api/search?q=disability%20pension%20attributable%20to%20military%20service&limit=10",
+               "metadata": "/api/documents/act-army-1950",
+               "pdf_87KB": "/api/documents/notif-aft-jabalpur/pdf"},
+ "servers": [
+  {"name": "aspnet-kestrel", "port": 5081, "cwd": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/bpoc_work/aspnet_pub", "cmd": ["/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/tools/dotnet/dotnet", "MimamsaPocApi.dll"],
+   "env": {"ASPNETCORE_URLS": "http://127.0.0.1:5081", "Mimamsa__PdfRoot": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/bpoc_work/pdfstore"}},
+  {"name": "django-uvicorn-4w", "port": 5082, "cwd": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p1_hosting/django",
+   "cmd": ["/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/venvs/bpoc/bin/uvicorn", "mimamsa_poc.asgi:application", "--host", "127.0.0.1", "--port", "5082", "--workers", "4", "--no-access-log", "--log-level", "warning"],
+   "env": {"MIMAMSA_PDF_ROOT": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/bpoc_work/pdfstore"}},
+  {"name": "django-hypercorn-4w", "port": 5083, "cwd": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p1_hosting/django",
+   "cmd": ["/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/venvs/bpoc/bin/hypercorn", "mimamsa_poc.asgi:application", "--bind", "127.0.0.1:5083", "--workers", "4", "--log-level", "warning"],
+   "env": {"MIMAMSA_PDF_ROOT": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/bpoc_work/pdfstore"}},
+  {"name": "django-uvicorn-1w", "port": 5084, "cwd": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p1_hosting/django",
+   "cmd": ["/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/venvs/bpoc/bin/uvicorn", "mimamsa_poc.asgi:application", "--host", "127.0.0.1", "--port", "5084", "--workers", "1", "--no-access-log", "--log-level", "warning"],
+   "env": {"MIMAMSA_PDF_ROOT": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/bpoc_work/pdfstore"}}
+ ]}
