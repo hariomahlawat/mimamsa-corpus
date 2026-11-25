@@ -30,10 +30,11 @@ CREATE TABLE IF NOT EXISTS jobs(
   priority int NOT NULL DEFAULT 100,
   attempts int NOT NULL DEFAULT 0,
   run_after timestamptz NOT NULL DEFAULT now(),
-  locked_by text, lease_expires_at timestamptz,
+  locked_by text, lease_expires_at timestamptz, lease_token uuid,
   checkpoint jsonb, progress real NOT NULL DEFAULT 0,
   last_error text, result jsonb,
   created_at timestamptz NOT NULL DEFAULT now(), updated_at timestamptz NOT NULL DEFAULT now());
+ALTER TABLE jobs ADD COLUMN IF NOT EXISTS lease_token uuid;
 CREATE INDEX IF NOT EXISTS jobs_ready ON jobs(priority, id) WHERE state = 'queued';
 CREATE TABLE IF NOT EXISTS job_events(id bigserial PRIMARY KEY, job_id bigint, at timestamptz DEFAULT clock_timestamp(),
                                       worker text, event text, detail jsonb);
@@ -44,9 +45,10 @@ WITH cand AS (
   SELECT id FROM jobs WHERE state = 'queued' AND kind = %(kind)s AND run_after <= now()
   ORDER BY priority, id FOR UPDATE SKIP LOCKED LIMIT 1)
 UPDATE jobs j SET state = 'running', locked_by = %(w)s, attempts = j.attempts + 1, updated_at = now(),
+       lease_token = gen_random_uuid(),
        lease_expires_at = now() + make_interval(secs => (SELECT lease_seconds FROM job_kinds k WHERE k.kind = j.kind))
 FROM cand WHERE j.id = cand.id
-RETURNING j.id, j.kind, j.payload, j.attempts, j.checkpoint
+RETURNING j.id, j.kind, j.payload, j.attempts, j.checkpoint, j.lease_token
 """
 # Per-kind concurrency: a worker must hold one of N session-level advisory locks ("slots") for the kind while it
 # runs a job of that kind. Session locks vanish when the worker's connection dies, so a crashed worker never
@@ -65,6 +67,7 @@ class Queue:
     def __init__(self, dsn: str = DSN, worker: str | None = None):
         self.conn = psycopg.connect(dsn, autocommit=True)
         self.worker = worker or f"{socket.gethostname()}:{os.getpid()}"
+        self.tokens = {}   # job_id -> lease token of the attempt this worker currently owns
 
     def init(self, kinds: dict[str, dict]):
         self.conn.execute(SCHEMA)
@@ -96,6 +99,8 @@ class Queue:
                 row = self.conn.execute(CLAIM, {"w": self.worker, "kind": kind}).fetchone()
                 if row:
                     self.slot = (kind, slot)
+                    self.tokens[row[0]] = row[5]          # attempt-specific lease token
+                    row = row[:5]
                     self.event(row[0], "claimed", attempt=row[3], checkpoint=row[4], slot=slot)
                     return row
                 self.conn.execute("SELECT pg_advisory_unlock(hashtext(%s), %s)", (kind, slot))
@@ -107,40 +112,65 @@ class Queue:
             self.conn.execute("SELECT pg_advisory_unlock(hashtext(%s), %s)", self.slot)
             self.slot = None
 
+    # Every owner-side transition is conditional on the attempt-specific lease token: a stale worker whose lease was
+    # reaped (and possibly re-claimed, even by a worker with the same name) cannot extend, complete, requeue or fail
+    # the new attempt. Events are emitted only when the conditional update actually changed the row.
     def heartbeat(self, job_id, progress=None, checkpoint=None):
         """Extend the lease; persist progress and a resumable checkpoint. Returns False if the lease was lost."""
         r = self.conn.execute("""UPDATE jobs SET lease_expires_at = now() + make_interval(secs => (SELECT lease_seconds FROM job_kinds k WHERE k.kind = jobs.kind)),
                                  progress = coalesce(%s, progress), checkpoint = coalesce(%s, checkpoint), updated_at = now()
-                                 WHERE id = %s AND state = 'running' AND locked_by = %s""",
-                              (progress, Jsonb(checkpoint) if checkpoint is not None else None, job_id, self.worker))
+                                 WHERE id = %s AND state = 'running' AND lease_token = %s""",
+                              (progress, Jsonb(checkpoint) if checkpoint is not None else None, job_id, self.tokens.get(job_id)))
         return r.rowcount == 1
 
-    def complete(self, job_id, result):
-        self.conn.execute("""UPDATE jobs SET state='succeeded', result=%s, progress=1, locked_by=NULL, lease_expires_at=NULL,
-                             updated_at=now() WHERE id=%s AND locked_by=%s""", (Jsonb(result), job_id, self.worker))
-        self.event(job_id, "succeeded")
+    def complete(self, job_id, result) -> bool:
+        r = self.conn.execute("""UPDATE jobs SET state='succeeded', result=%s, progress=1, locked_by=NULL, lease_expires_at=NULL,
+                                 lease_token=NULL, updated_at=now() WHERE id=%s AND state='running' AND lease_token=%s""",
+                              (Jsonb(result), job_id, self.tokens.pop(job_id, None)))
+        if r.rowcount == 1:
+            self.event(job_id, "succeeded")
+            return True
+        self.event(job_id, "stale_completion_ignored")
+        return False
 
-    def fail(self, job_id, err: str, retryable: bool, base_s=1.0, cap_s=60.0):
-        row = self.conn.execute("SELECT j.attempts, k.max_attempts FROM jobs j JOIN job_kinds k USING(kind) WHERE id=%s", (job_id,)).fetchone()
+    def fail(self, job_id, err: str, retryable: bool, base_s=1.0, cap_s=60.0) -> bool:
+        token = self.tokens.pop(job_id, None)
+        row = self.conn.execute("""SELECT j.attempts, k.max_attempts FROM jobs j JOIN job_kinds k USING(kind)
+                                   WHERE id=%s AND state='running' AND lease_token=%s""", (job_id, token)).fetchone()
+        if row is None:
+            self.event(job_id, "stale_failure_ignored", error=err)
+            return False
         attempts, max_attempts = row
         if retryable and attempts < max_attempts:
             delay = min(cap_s, base_s * 2 ** (attempts - 1)) * (0.8 + 0.4 * random.random())  # full backoff with jitter
-            self.conn.execute("""UPDATE jobs SET state='queued', run_after=now() + make_interval(secs => %s), last_error=%s,
-                                 locked_by=NULL, lease_expires_at=NULL, updated_at=now() WHERE id=%s""", (delay, err, job_id))
-            self.event(job_id, "retry_scheduled", attempt=attempts, delay_s=round(delay, 2), error=err)
+            r = self.conn.execute("""UPDATE jobs SET state='queued', run_after=now() + make_interval(secs => %s), last_error=%s,
+                                     locked_by=NULL, lease_expires_at=NULL, lease_token=NULL, updated_at=now()
+                                     WHERE id=%s AND state='running' AND lease_token=%s""", (delay, err, job_id, token))
+            if r.rowcount == 1:
+                self.event(job_id, "retry_scheduled", attempt=attempts, delay_s=round(delay, 2), error=err)
+                return True
         else:
             state = "dead" if retryable else "failed"
-            self.conn.execute("""UPDATE jobs SET state=%s, last_error=%s, locked_by=NULL, lease_expires_at=NULL, updated_at=now()
-                                 WHERE id=%s""", (state, err, job_id))
-            self.event(job_id, state, attempt=attempts, error=err)
+            r = self.conn.execute("""UPDATE jobs SET state=%s, last_error=%s, locked_by=NULL, lease_expires_at=NULL, lease_token=NULL,
+                                     updated_at=now() WHERE id=%s AND state='running' AND lease_token=%s""", (state, err, job_id, token))
+            if r.rowcount == 1:
+                self.event(job_id, state, attempt=attempts, error=err)
+                return True
+        self.event(job_id, "stale_failure_ignored", error=err)
+        return False
 
     def reap(self) -> int:
-        """Crash recovery: running jobs whose lease expired go back to the queue (attempt already counted)."""
-        rows = self.conn.execute("""UPDATE jobs SET state='queued', locked_by=NULL, lease_expires_at=NULL,
-                                    last_error='lease expired (worker lost)', updated_at=now()
-                                    WHERE state='running' AND lease_expires_at < now() RETURNING id, locked_by""").fetchall()
-        for jid, _ in rows:
-            self.event(jid, "lease_expired_requeued")
+        """Crash recovery: running jobs whose lease expired lose their lease token. The attempt was already counted at
+        claim time, so a job whose attempts reached max_attempts goes to 'dead' instead of being requeued forever."""
+        rows = self.conn.execute("""UPDATE jobs j SET
+                                      state = CASE WHEN j.attempts >= k.max_attempts THEN 'dead' ELSE 'queued' END,
+                                      locked_by=NULL, lease_expires_at=NULL, lease_token=NULL,
+                                      last_error='lease expired (worker lost)', updated_at=now()
+                                    FROM job_kinds k
+                                    WHERE k.kind = j.kind AND j.state='running' AND j.lease_expires_at < now()
+                                    RETURNING j.id, j.state""").fetchall()
+        for jid, st in rows:
+            self.event(jid, "lease_expired_dead" if st == "dead" else "lease_expired_requeued")
         return len(rows)
 
     def stats(self):
