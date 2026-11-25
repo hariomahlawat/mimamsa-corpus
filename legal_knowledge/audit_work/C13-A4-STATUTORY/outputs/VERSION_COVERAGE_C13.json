@@ -1,6 +1,6 @@
 {
  "version_model": "C13A4-VM-v1",
- "records": 491,
+ "records": 488,
  "by_family": {
   "AA1950": {
    "provisions": 127,
@@ -15,8 +15,8 @@
    "versions": 2
   },
   "AR1954": {
-   "provisions": 137,
-   "versions": 212
+   "provisions": 136,
+   "versions": 209
   },
   "BNS2023": {
    "provisions": 3,
@@ -84,9 +84,9 @@
   }
  },
  "by_version_kind": {
-  "amendment_words": 84,
+  "amendment_words": 82,
   "as_enacted": 213,
-  "as_notified": 130,
+  "as_notified": 129,
   "commencement": 3,
   "edition": 9,
   "insertion": 13,
@@ -101,31 +101,31 @@
   "IMAGE_CHECKED": 137,
   "NOT_HELD": 23,
   "OMITTED_NO_TEXT": 13,
-  "TEXT_LAYER_ONLY": 66
+  "TEXT_LAYER_ONLY": 63
  },
  "by_effective_from_status": {
   "DISPUTED_PRESERVE_BOTH": 1,
   "INSTRUMENT_NOT_HELD": 19,
   "NOT_DETERMINED": 20,
-  "NOT_STATED_PENDING_ADVICE": 166,
+  "NOT_STATED_PENDING_ADVICE": 165,
   "REPORTED_IN_COMPILATION_ONLY": 215,
   "STATED_DEEMED_IN_INSTRUMENT": 3,
-  "STATED_IN_INSTRUMENT": 65,
-  "UNKNOWN": 2
+  "STATED_IN_INSTRUMENT": 64,
+  "UNKNOWN": 1
  },
  "by_effective_to_status": {
   "CEASED_OMITTED_OR_REPEALED": 17,
-  "ENDS_ON_NEXT_VERSION": 62,
-  "ENDS_ON_NEXT_VERSION_DATE_NOT_DETERMINED": 62,
-  "OPEN_ON_LOCATED_INSTRUMENTS": 350
+  "ENDS_ON_NEXT_VERSION": 61,
+  "ENDS_ON_NEXT_VERSION_DATE_NOT_DETERMINED": 61,
+  "OPEN_ON_LOCATED_INSTRUMENTS": 349
  },
  "records_with_conflicts": 14,
  "records_with_open_items": 285,
  "records_with_applicability_exceptions": 8,
  "records_with_savings_transitional": 8,
  "records_with_retrospective_deemed_effect": 2,
- "records_legal_review_required": 438,
- "effective_from_date_established": 68,
+ "records_legal_review_required": 436,
+ "effective_from_date_established": 67,
  "priority_tag_counts": {
   "ADMINISTRATIVE_ACTION": 5,
   "ADMINISTRATIVE_ACTION_DISCIPLINARY_POWERS": 31,

@@ -333,7 +333,8 @@ class Builder:
                 events[rr][iid] = keep
         for r in chron:
             iid = r["instrument_id"]
-            if not iid or "NO AMENDMENT" in r["event"].upper() or iid == "AR-000":
+            if not iid or "NO AMENDMENT" in r["event"].upper() or iid == "AR-000" or ib.get(iid, {}).get("status") == "LOCATED_NOT_AMENDMENT" \
+               or "declaration" in r["event"].lower():
                 continue
             for rr in E.parse_rules(r["provision"]):
                 if iid in events[rr]:
@@ -431,6 +432,12 @@ class Builder:
                 else:
                     method = "NOT_HELD"
                 ids = [x["evidence_id"] for x in pes] + [x for x in re.split(r"[;,]\s*", e["pics"] or "") if x]
+                if method == "IMAGE_CHECKED" and not ids:
+                    loc = (ir.get("evidence_locator") or "").strip()
+                    if loc:
+                        ids = [f"ARMY-RULES-CHAIN-01 {iid} evidence_locator: {loc}"]
+                    else:
+                        method = "TEXT_LAYER_ONLY"
                 if pes:
                     pdfp = ";".join(sorted({x["pdf_page"] + (f"-{x['continues_to_pdf_page']}" if x.get("continues_rule") == rule else "") for x in pes}))
                     prp = ";".join(sorted({x["printed_page"] for x in pes}))
@@ -868,12 +875,12 @@ class Builder:
     def axes_rows(self):
         q = [("A4-LQ-AXIS-AR", "Army Rules 1954 (all versions)", "Which date selects the governing version of a rule: the date of the alleged conduct, the date proceedings commenced, the date of the specific procedural act (e.g. hearing of charge, recording of SoE, CoI sitting), or the date a document was prepared/reviewed?",
               "Unstated commencement of S.R.O. 484 and of most amending S.R.O.s (AQ-05); retrospective deemed effect (AQ-06)"),
-             ("A4-LQ-AXIS-AA", "Army Act 1950", "Same question for Army Act sections (e.g. s.122 limitation as substituted by Act 37/1992; ss.75-76 and 127 omitted by Act 37/1992)", "Act 37/1992 prints no commencement clause (AQ-05)"),
+             ("A4-LQ-AXIS-AA", "Army Act 1950", "Which date (conduct, proceedings, procedural act or document preparation/review) selects the governing version of an Army Act section, e.g. s.122 limitation as substituted by Act 37/1992, or ss.75-76 and 127 omitted by Act 37/1992?", "Act 37/1992 prints no commencement clause (AQ-05)"),
              ("A4-LQ-AXIS-AFT", "AFT Act 2007 / AFT Procedure Rules", "Which date governs AFT jurisdiction and limitation questions across S.O. 14(E)/2008, the 2008 RDO, TRA 2021 (deemed 04-04-2021) and TRA 2026?", "S.O. 14(E)/2008 and TRA 2026 commencement not held"),
              ("A4-LQ-AXIS-BNS", "IPC 1860 -> BNS 2023", "For an offence alleged before the BNS commencement but tried or charged after it, which date governs the applicable substantive law, given BNS s.358(2)-(3) as printed in the compilation?", "S.O. 850(E) not held; compilation only"),
              ("A4-LQ-AXIS-BNSS", "CrPC 1973 -> BNSS 2023", "For proceedings pending on, or steps taken after, the BNSS commencement, which date governs the applicable procedure, given BNSS s.531(2) as printed in the compilation?", "S.O. 848(E) not held; compilation only"),
              ("A4-LQ-AXIS-BSA", "IEA 1872 -> BSA 2023", "For evidence produced/recorded after the BSA commencement in proceedings begun earlier, which date governs admissibility, given BSA s.170(2) as printed in the compilation?", "S.O. 849(E) not held; compilation only"),
-             ("A4-LQ-AXIS-GENERAL", "Regulations, pension instruments, CCCM, ISO Act", "Which date governs (event, claim, decision, review)? Not modelled beyond instrument level because the instruments are not held.", "instruments not held")]
+             ("A4-LQ-AXIS-GENERAL", "Regulations, pension instruments, CCCM, ISO Act", "These instruments are not held and are modelled only at instrument level: which date (event, claim, decision or review) governs the applicable edition?", "instruments not held")]
         return [{"question_id": a, "scope": b, "axes": "conduct_date | proceedings_date | procedural_action_date | document_preparation_review_date",
                  "question": c, "evidence_constraint": d, "determination": "NOT_DETERMINED (legal adviser)", "status": "OPEN"} for a, b, c, d in q]
 
