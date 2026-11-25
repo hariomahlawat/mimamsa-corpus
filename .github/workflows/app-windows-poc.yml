@@ -103,7 +103,7 @@ jobs:
       - name: Install ASP.NET Core service (virtual account, recovery actions)
         run: |
           app/poc/p1_hosting/windows/install-aspnet-service.ps1 -PublishDir "$env:POC_ROOT\aspnet" -PdfRoot "$env:POC_ROOT\pdfstore" `
-            -Db "Host=127.0.0.1;Port=5432;Username=poc;Password=poc;Database=poc;Maximum Pool Size=32"
+            -DbConnection "Host=127.0.0.1;Port=5432;Username=poc;Password=poc;Database=poc;Maximum Pool Size=32"
 
       - name: ASP.NET Core smoke, restart and crash-recovery test
         run: app/poc/p1_hosting/windows/smoke-and-recovery.ps1 -Name MimamsaPocApi -Base http://127.0.0.1:5081 -Out out\aspnet_service.json
@@ -124,7 +124,7 @@ jobs:
         run: |
           $py = (Get-Command python).Source
           app/poc/p1_hosting/windows/install-django-service.ps1 -AppDir "$env:POC_ROOT\django" -Python $py -PdfRoot "$env:POC_ROOT\pdfstore" `
-            -Db "host=127.0.0.1 port=5432 user=poc password=poc dbname=poc"
+            -DbConnection "host=127.0.0.1 port=5432 user=poc password=poc dbname=poc"
 
       - name: Django smoke, restart and crash-recovery test
         run: app/poc/p1_hosting/windows/smoke-and-recovery.ps1 -Name MimamsaPocDjango -Base http://127.0.0.1:5082 -Out out\django_service.json

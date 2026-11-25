@@ -6,7 +6,7 @@ param(
   [Parameter(Mandatory)] [string] $PdfRoot,
   [string] $Name = "MimamsaPocDjango",
   [string] $Bind = "127.0.0.1:5082",
-  [string] $Db = "host=127.0.0.1 port=5432 user=poc password=poc dbname=poc"
+  [string] $DbConnection = "host=127.0.0.1 port=5432 user=poc password=poc dbname=poc"
 )
 $ErrorActionPreference = "Stop"
 Push-Location $AppDir
@@ -18,7 +18,7 @@ sc.exe failure $Name reset= 60 actions= restart/2000/restart/2000/restart/2000 |
 sc.exe failureflag $Name 1 | Out-Host
 $logDir = Join-Path $AppDir "logs"; New-Item -ItemType Directory -Force $logDir | Out-Null
 # per-service environment block (REG_MULTI_SZ), read by the SCM when it starts the process
-$envBlock = @("MIMAMSA_DB=$Db", "MIMAMSA_PDF_ROOT=$PdfRoot", "MIMAMSA_BIND=$Bind", "MIMAMSA_LOG_DIR=$logDir",
+$envBlock = @("MIMAMSA_DB=$DbConnection", "MIMAMSA_PDF_ROOT=$PdfRoot", "MIMAMSA_BIND=$Bind", "MIMAMSA_LOG_DIR=$logDir",
               "MIMAMSA_SECRET_KEY=$([guid]::NewGuid().ToString('N'))")
 New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\$Name" -Name Environment -PropertyType MultiString -Value $envBlock -Force | Out-Null
 $pyDir = Split-Path $Python

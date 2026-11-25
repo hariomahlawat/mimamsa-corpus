@@ -5,12 +5,12 @@ param(
   [Parameter(Mandatory)] [string] $PdfRoot,
   [string] $Name = "MimamsaPocApi",
   [string] $Url = "http://127.0.0.1:5081",
-  [string] $Db = "Host=127.0.0.1;Port=5432;Username=poc;Password=poc;Database=poc;Maximum Pool Size=32"
+  [string] $DbConnection = "Host=127.0.0.1;Port=5432;Username=poc;Password=poc;Database=poc;Maximum Pool Size=32"
 )
 $ErrorActionPreference = "Stop"
 $exe = Join-Path $PublishDir "MimamsaPocApi.exe"
 if (-not (Test-Path $exe)) { throw "missing $exe" }
-@{ Urls = $Url; Mimamsa = @{ Db = $Db; PdfRoot = $PdfRoot; DevToken = "dev-token" } } |
+@{ Urls = $Url; Mimamsa = @{ Db = $DbConnection; PdfRoot = $PdfRoot; DevToken = "dev-token" } } |
   ConvertTo-Json -Depth 4 | Set-Content -Encoding UTF8 (Join-Path $PublishDir "appsettings.Production.json")
 $account = "NT SERVICE\$Name"
 sc.exe create $Name binPath= "`"$exe`"" start= auto obj= $account DisplayName= "Mimamsa PoC API (ASP.NET Core)" | Out-Host
