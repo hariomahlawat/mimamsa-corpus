@@ -253,7 +253,7 @@ def main():
                 status="METADATA_OVERLAY_ORIGINAL_UNCHANGED",
                 verification="AI_DOCUMENTARY_RECONFIRMATION_NOT_LEGAL_VALIDATION",
                 tool=VERSION))
-    summary = dict(tool=VERSION, pymupdf=getattr(fitz, "__version__", None) or fitz.VersionBind,
+    summary = dict(tool=VERSION, pymupdf=" / ".join(str(x) for x in fitz.version if x),
                    basis_counts=dict(text_layer_only=sum(1 for x in rows if x["verdict"] == "RECONFIRMED" and not x["page_image_check"] and x["basis"].startswith("PDF")), page_image_assisted=sum(1 for x in rows if x["verdict"] == "RECONFIRMED" and x["basis"].startswith("page image"))), staged_records=len(staged),
                    staged_numbers=sum(len(r["proposed_value"]) for r in staged), tally=dict(sorted(tally.items())),
                    overlay_records=len(overlay), overlay_numbers=sum(len(o["overlay_value"]) for o in overlay),

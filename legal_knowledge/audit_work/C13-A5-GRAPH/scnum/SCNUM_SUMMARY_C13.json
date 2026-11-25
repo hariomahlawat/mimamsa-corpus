@@ -14,7 +14,7 @@
  "overlay_numbers": 1747,
  "overlay_records": 99,
  "policy": "metadata overlay only; data/meta never rewritten; 266 unreviewed candidates not read or applied",
- "pymupdf": "2.1",
+ "pymupdf": "2.1 / 1.28.6",
  "restricted_register": {
   "sha256": "6732065cd24da9cd073e9f8dcc88121792ff0662cd6d8c5e90d7e2097dc73e57",
   "source": "git:ea282cbd:config/restricted_material.json"
