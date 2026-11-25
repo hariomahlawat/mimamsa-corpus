@@ -227,7 +227,7 @@ _NOT_HOST_BEFORE_RE = re.compile(
     r"\bin\s+(?:the\s+)?(?:O\.?\s?A|T\.?\s?A|R\.?\s?A|M\.?\s?A|Original\s+Application|Transferred\s+Application|"
     r"Writ\s+Petition|W\.?\s?P|C\.?\s?W\.?\s?P|Civil\s+Writ|LPA|S\.?\s?W\.?\s?P|O\.?\s?W\.?\s?P|Crl|Criminal|Civil|case\s+of)|"
     r"High\s+Court\s+(?:of\s+[A-Za-z&\s]{3,40}\s+)?in|Tribunal\s+(?:[A-Za-z,\s]{0,40}\s+)?in|\bin\s+(?:CWP|SWP|OWP|WP|LPA)\b|"
-    r"\bwith\s+reference\s+to|\bcited\b|\breported\s+in|(?:passed|rendered|delivered)\s+by\b|"
+    r"\bheaded\s+by|\bbunch\s+of|\bleading\s+(?:case|matter)|\bwith\s+reference\s+to|\bcited\b|\breported\s+in|(?:passed|rendered|delivered)\s+by\b|"
     r"(?-i:\bin)\s+(?:the\s+)?(?:Writ|Special\s+Appeal|Spl|First\s+Appeal|Second\s+Appeal|Review|Contempt|Transfer|Misc|"
     r"Matters|Application|Petition|Case|SLP|S\.?\s?L\.?\s?P|C\.?\s?A\b|Civil\s+Appeal|Criminal\s+Appeal))(?:(?!\bWITH\b|\bWith\b|\n[ \t]*with[ \t]*\n|\n[ \t]*\n)[^;]){0,70}$", re.I)
 _FROM_MARK_RE = re.compile(r"\bFrom\s+the\b|\bArising\s+(?:out\s+)?(?:of|from)\b|\bAgainst\s+the\b|\b(?:Judgment|Order)\s+(?:and|&)\s+"
@@ -293,7 +293,9 @@ def _host_numbers(mt, js, case_numbers_meta, scr, page2=None):
             prev = (c, c["pos"] + _case_span_len(zt, c["pos"]))
             if pt in ("misc", "lower", "", "other"):
                 continue
-            if _NOT_HOST_BEFORE_RE.search(pre) or _after_from_marker(zt, c["pos"]):
+            if _NOT_HOST_BEFORE_RE.search(pre) or _after_from_marker(zt, c["pos"]) or \
+                    re.search(r"\b(?:headed|led)\s+by\s*(?:the\s+)?(?:[A-Z][A-Za-z.()]*\s*){0,3}(?:Nos?\.?\s*)?$|\bbunch\s+of\b[^.]{0,90}$", pre, re.I):
+                # V4: the lead case of a bunch decided in another order is a reference, not a host
                 continue
             c["src"] = "cause_title"
             hosts.append(c)

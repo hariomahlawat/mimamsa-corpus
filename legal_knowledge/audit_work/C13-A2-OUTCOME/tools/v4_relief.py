@@ -43,13 +43,25 @@ _QUASH_RE = re.compile(r"\b(?:is|are|stands?|be|being)\s+(?:hereby\s+|accordingl
                        r"\bwe\s+(?:hereby\s+|accordingly\s+)*(?:quash|set\s+aside)\b", re.I)
 
 
+_SENT_BREAK_RE = re.compile(r"[.;:?!][\u201d\u2019\"']?\s+(?=[\"\u201c(]?[A-Z0-9(])")
+
+
+def sentence_start(mt, a, pos):
+    """Start of the sentence holding pos (not earlier than a). Dots inside dates and numbers ('31.03.2021',
+    'No.123') do not end a sentence."""
+    last = a
+    for m in _SENT_BREAK_RE.finditer(mt, max(a, pos - 1500), pos):
+        last = m.end()
+    return last
+
+
 def court_voice(d, a, b, rx):
     """Matches of rx in mt[a:b] outside quotations and outside sentences that report a party's statement."""
     out = []
     for m in rx.finditer(d.mt, a, b):
         if in_spans(d.qspans, d.qstarts, m.start()):
             continue
-        ls = max(d.mt.rfind(".", a, m.start()), a)
+        ls = sentence_start(d.mt, a, m.start())
         if _PARTY_STMT_RE.search(d.mt[ls:m.start()]):
             continue
         out.append(m)
@@ -80,7 +92,7 @@ def extent_resolution(d, ev, zone):
         return "partly_allowed", "relief_partly_granted", "note:EXTENT_PHRASE_WITH_LIMITATION_IN_OPERATIVE_PART:" + \
             " ".join(lim[0].group(0).split())[:60]
     quash = [m for m in court_voice(d, a, ze, _QUASH_RE)
-             if _IMPUGNED_RE.search(d.mt[max(a, d.mt.rfind(".", a, m.start())):m.end()])]
+             if _IMPUGNED_RE.search(d.mt[sentence_start(d.mt, a, m.start()):m.end()])]
     if quash:
         return "allowed", "relief_granted", "note:EXTENT_PHRASE_REFERS_TO_DIRECTIONS_QUASHING_IMPUGNED_DECISIONS_NONE_REFUSED"
     return None, None, "EXTENT_QUALIFIED_ALLOWANCE_NO_LIMITATION_OR_QUASHING_FOUND"
@@ -109,7 +121,7 @@ def transfer_direction(d, zone):
         return None
     zs, ze = zone
     for m in court_voice(d, zs, ze, _TRANSFER_PRAYER_RE) + court_voice(d, zs, ze, _TRANSFER_DIR_RE):
-        ls = max(d.mt.rfind(".", zs, m.start()), zs)
+        ls = sentence_start(d.mt, zs, m.start())
         if _NOT_THIS_CASE_RE.search(d.mt[ls:m.end()]):
             continue
         return m

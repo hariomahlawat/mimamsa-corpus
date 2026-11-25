@@ -164,6 +164,8 @@ def _aux_chain(text, vstart, cstart):
     return [c for c in chain if c != ","], cstart + (k if chain else len(seg))
 
 
+_COORD_SUBJ_RE = re.compile(r"\b(?:the\s+)?(?:(?:writ|civil|criminal|special\s+leave|transferred|contempt|review)\s+)?"
+                            r"(?:petitions?|appeals?|cases?)\s+and\s+the\s*$", re.I)
 _ELLIPTICAL_SENT_RE = re.compile(r"^[\s\d.()ivx]*(?:accordingly,?\s+|consequently,?\s+|hence,?\s+)?(?:all\s+|both\s+)?(?:the\s+)?"
                                  r"(?:(?:writ|civil|criminal|special|letters\s+patent|transferred)\s+)?(?:leave\s+)?"
                                  r"(?:petitions?|appeals?|cases?|matters?)\s*$", re.I)
@@ -199,6 +201,9 @@ def parse_dispositions(text, s, e):
                                r"(?:misc\w*\s+)?applications?|\s*(?:all\s+)?(?:the\s+)?applications?\b", sent[cs:m.start()], re.I) and \
                 re.search(r"\band\s*$", sent[:cs]):
             cs = clause_start(max(0, cs - 5))
+        mco = _COORD_SUBJ_RE.search(sent[:cs]) if cs > 0 else None
+        if mco:
+            cs = mco.start()   # V4: 'the writ petition and the civil appeal are dismissed' is one coordinated subject
         chain, subj_end = _aux_chain(sent, m.start(), cs)
         subj = sent[cs:subj_end - 0] if chain else sent[cs:m.start()]
         after = sent[m.end():m.end() + 60]
@@ -276,8 +281,12 @@ def parse_dispositions(text, s, e):
             if not mw:
                 continue
             between = back[mw[-1].start() + 2:]
-        if re.search(r"[;:]|\bthat\b|\bwhich\b|\bwho\b", between):
-            continue
+        if re.search(r"[;:]|\bthat\b|\bwhich\b|\bwho\b", between) and not re.match(
+                r"[\s,]*(?:are|is)?[\s,]*(?:therefore|accordingly|thus|hence)?[\s,]*(?:of\s+the\s+(?:opinion|view)|satisfied)\s+that\s+"
+                r"there\s+(?:are|is)\s+no\s+(?:merits?|substance|force)\s+in\s+(?:th(?:is|e)\s+(?:present\s+)?(?:petition|appeal|writ\s+petition))\s*$",
+                between, re.I):
+            continue   # V4: 'We are, therefore, of the opinion that there are no merits in this petition and dismiss it'
+
         v = m.group(1)
         obj_end = clause_end(m.end())
         obj = sent[m.end():min(obj_end, m.end() + 160)]

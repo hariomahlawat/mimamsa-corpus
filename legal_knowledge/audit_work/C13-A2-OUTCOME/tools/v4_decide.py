@@ -265,7 +265,9 @@ def resolve_proceedings(d, res, hosts):
         rest = [h for h in main_hosts if h["label_norm"] not in covered]
         subj = ev.get("subject", "") if ev is not None else ""
         fams = _subject_ptypes(subj)
-        if fams and len(set(_host_family(h) for h in main_hosts)) > 1:
+        all_generic = bool(re.search(r"^\W*(?:all|both)\s+(?:the\s+|these\s+)?(?:petitions|matters|cases)\b", subj.strip(), re.I)) and not out
+        if fams and len(set(_host_family(h) for h in main_hosts)) > 1 and not all_generic:
+            # V4: 'All the petitions dismissed' covers every proceeding of the group (transferred cases included)
             # 'the present appeals are allowed' in a judgment hosting appeals and a special leave petition
             same = [h for h in rest if _host_family(h) in fams or _host_family(h) == "other"]
             if same and any(_host_family(h) in fams for h in main_hosts):

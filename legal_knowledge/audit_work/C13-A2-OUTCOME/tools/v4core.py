@@ -302,6 +302,11 @@ def analyze_segment(d, seg, hosts, scr, is_first, section=False):
                 elif c["ptype"] == "lower":
                     res["excluded"]["lower"] += 1
                     continue
+                elif c["ptype"] == "wp" and host_types and not (host_types & {"wp", "petition", "other", "rp", "cont", "tc"}):
+                    # V4: in an appeal, a numbered writ petition that is not a host is the proceeding below
+                    # ('this appeal is allowed ... and the Writ Petition being C.W.P. No. 245 of 1986 dismissed')
+                    res["excluded"]["lower"] += 1
+                    continue
                 else:
                     key, label = "N:%s:%d" % (min(c["nums"]) if c["nums"] else 0, c["year"]), c["label"]
                     dd["case"] = c
