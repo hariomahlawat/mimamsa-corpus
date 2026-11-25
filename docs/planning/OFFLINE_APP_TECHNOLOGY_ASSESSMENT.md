@@ -1,399 +1,288 @@
-# Mimamsa offline application: technology assessment
+# Mimamsa offline application: technology assessment (Windows-native revision)
 
-- **Recorded:** 2026-11-24
-- **Status:** Assessment and recommendation for owner review. It is input to ADR-0005, which Cycle 13 Track B workstream B0 drafts after the proofs of concept in §16. It is not an implementation authorisation.
-- **Scope:** the runtime application that serves the corpus on an air-gapped LAN, and the update path from Hugging Face to that LAN. The crawler and audit tooling are out of scope; they stay as they are.
-- **Companion:** [CYCLE13_EXECUTION_PLAN.md](CYCLE13_EXECUTION_PLAN.md).
+- **Recorded:** 2026-11-24. **Revised:** 2026-11-25 (Cycle 13 workstream B0) to apply the owner's Cycle 13 directive.
+- **Status:** Assessment for owner review and input to [ADR-0005](../architecture/decisions/ADR-0005-APPLICATION-STACK.md) (status PROPOSED). It is not an implementation authorisation. Claims marked **[PoC Pn]** need proof-of-concept evidence from workstream B-PoC (branch `claude/c13-b-poc`) before anyone relies on them.
+- **Scope:** the runtime application on an air-gapped Windows LAN, and the update path from Hugging Face to that LAN. The crawler and audit tooling stay as they are.
+- **Companions:** [CYCLE13_EXECUTION_PLAN.md](CYCLE13_EXECUTION_PLAN.md), [Security and deployment architecture](../architecture/SECURITY_AND_DEPLOYMENT_ARCHITECTURE.md), [Capability traceability matrix](../architecture/CAPABILITY_TRACEABILITY_MATRIX.md), [data contract v1](../../app/contract/README.md), [UI/UX specification](../../app/design/README.md).
 
-**How to read maturity claims.**
-- Versions are given only as **"current stable at selection time"**. The exact versions are pinned in ADR-0005 and the lockfiles.
-- Licence statements reflect the assessor's knowledge and must be **re-verified against each project's licence file at selection** (PoC P7). Several projects in this space have changed licence in recent years.
-- Items marked **[PoC]** are claims this assessment is not sure of. They need measurement before they are relied on.
+## 0. What this revision changes
+
+| Earlier position (2026-11-24) | Status | Replacement |
+| --- | --- | --- |
+| Packaging: Docker Compose on a Linux host; on Windows estates a Hyper-V Linux VM | **SUPERSEDED** by the directive | Native Windows: IIS or Windows Services; offline Windows installer; no Docker, WSL, Hyper-V or Linux VM in production (§12) |
+| Backend recommendation: Django, decided on Linux-centric grounds | **REOPENED** | ASP.NET Core LTS compared with Django on Windows-specific criteria; decision after P1, P6, P7 and P9 (§4) |
+| Worker isolation via containers (no network, read-only mounts, cgroups limits) | **SUPERSEDED** | Separate Windows Services with low-privilege virtual accounts, NTFS ACLs, Windows Firewall rules, Job Objects for CPU/memory/time limits (§5, Security architecture §3–4) |
+| Reverse proxy Caddy or nginx | **SUPERSEDED** | IIS (with ASP.NET Core Module or URL Rewrite/ARR) or the app's own TLS endpoint as a Windows Service (§4.2) |
+| Real-time: not specified | **ADDED** | SignalR (if ASP.NET Core) or Server-Sent Events (if Django), for job progress only |
+| Auth: Django auth + django-auth-ldap | **GENERALISED** | Local accounts plus optional AD, under either framework (§11) |
+| PoCs P1–P7 | **REPLACED** by the directive's P1–P9 (§16) | |
+| Hardware baseline as planning assumption under D-01 | **CONFIRMED PROVISIONALLY** by the directive | 16 cores, 64 GB, 1 TB SSD; GPU optional, never mandatory |
+| Windows-only framing | **REFINED 2026-11-25** (owner) | *Windows-first, not Windows-only*: platform-independent core, replaceable OS adapters (ADR-0005 §4a); no Linux production support claimed in C13 |
+| SignalR for job progress | **NARROWED 2026-11-25** (PR #53 reconciliation) | Bounded polling by default; SignalR/SSE only for content-free status until the protected delivery adapter is proven |
+
+Everything not listed (one-database principle, transactional withdrawal, content-addressed vault, signed bundles, FOUO exclusion, no LLM in Cycle 13) is retained.
 
 ## 1. Requirements the stack must meet
 
 | ID | Requirement | Source |
 | --- | --- | --- |
-| T-01 | **Fully air-gapped runtime**: no internet calls for search, OCR, embeddings, models, fonts, telemetry or updates. Updates arrive only as checksummed (and signed) snapshot bundles | PR-12; Architecture §9 |
-| T-02 | Corpus of about 2 GB and 16k files today, growing to about **20 GB**. About 3,936 judgments plus Acts and Rules. Mostly English with some Devanagari. Many scanned PDFs | Corpus facts; HF verification C12 |
-| T-03 | **PDF rendering of the original bytes** with page anchors and hit highlighting, for native PDFs and scans | PR-06; Architecture §10 |
-| T-04 | **Hybrid search**: BM25-class lexical search plus local vector search, with filters and exact handling of section and rule numbers | PR-01; Architecture §8 |
-| T-05 | A **graph** of instruments, provisions, judgments and proceedings with typed, evidence-anchored edges and per-edge verification state | PR-08; Architecture §5 |
-| T-06 | **Exactly two roles**, Admin and User. Admin-only corpus mutation is enforced server-side. Working sessions are isolated per user | ADR-0002; ADR-0003 |
-| T-07 | **Withdrawal must not leak**. A withdrawn or unpublished source disappears from every index, embedding store, graph view and cache | ADR-0002 decision 7; Ingestion §7 |
-| T-08 | A **small ops team**: few services, boring components, simple backup and restore | Owner direction (capability first) |
-| T-09 | **Windows or Linux LAN servers**. Clients use a browser | Brief |
+| T-01 | **Zero runtime internet dependency**: no calls for search, OCR, embeddings, models, fonts, telemetry, licence checks, certificate revocation fetches or updates. Updates arrive only as signed, checksummed snapshot bundles | PR-12; Architecture §9; directive |
+| T-02 | Corpus ~2 GB / ~16k files today (HF head `3864faf3`; 4,121 distinct source copies; 4,277 judicial records), growing to ~20 GB. Mostly English, some Devanagari. Many scans | C12 report; HF verification |
+| T-03 | PDF rendering of the **original bytes** with page anchors and hit highlighting, native and scanned | PR-06; Architecture §10 |
+| T-04 | Hybrid search: BM25-class lexical plus local vectors, filters, exact handling of section and rule numbers | PR-01; Architecture §8 |
+| T-05 | Graph of instruments, provisions, judgments and proceedings with typed, anchored edges and per-edge verification state | PR-08; Architecture §5 |
+| T-06 | Exactly two roles (Admin, User); Legal Reviewer a designation, inactive until appointed; server-side authorisation and ownership checks | ADR-0002; ADR-0003; directive |
+| T-07 | Withdrawal never leaks: removed from every index, embedding store, graph view and cache | ADR-0002 d.7; Ingestion §7 |
+| T-08 | Small operations team: few services, Windows-standard administration, simple backup and restore | Directive |
+| T-09 | **Windows-native production** (Windows Server; IIS or Windows Services); browser clients on the LAN | Directive (replaces "Windows or Linux") |
 | T-10 | Security baseline: parser isolation, integrity hashes, metadata-only audit, backups, prompt-injection isolation (for later LLM use) | Architecture §11 |
-| T-11 | Maintainable and licence-clean for an internal government deployment. No dependence on a single vendor or model | Scenario engine §9 |
-| T-12 | Offline OCR and embedding at ingestion time on CPU, with a modest GPU optional | PR-12; Ingestion §2 |
+| T-11 | Licence-clean for an internal government deployment; permissive preferred; no single vendor or model lock-in | Directive; Scenario engine §9 |
+| T-12 | Offline OCR and embeddings on CPU; GPU optional, never mandatory | Directive; PR-12 |
+| T-13 | Modular monolith with isolated workers; keep the existing Python corpus pipeline | Directive |
+| T-14 | Restricted material (register `config/restricted_material.json`, RM-001 = FOUO RAF 2000 copy and derivatives) never enters any bundle, index, embedding or external call | Directive; ADR-0002 d.7 |
 
-## 2. Sizing (estimates; to be confirmed in PoC P1/P2)
+## 2. Sizing (estimates; to be confirmed in P2/P3)
 
-| Quantity | Today (about 2 GB) | At 20 GB | Basis |
+| Quantity | Today (~2 GB) | At 20 GB | Basis |
 | --- | --- | --- | --- |
-| Extracted text | a few hundred MB | a few GB | Text is typically a small fraction of PDF bytes, and scans contribute only OCR text |
-| Passages (paragraph or about 300-token chunks) | ~0.2–0.5 M | ~2–5 M | ~4k judgments × tens of pages × a few passages per page, plus statutes |
-| Vectors at 768 dims, float32 / half precision | ~0.6–1.5 GB / half that | ~6–15 GB / half that | 3 KB per vector at float32 |
-| Graph edges | ~10^4–10^5 (C11 alone: 11,076 statute links and 2,595 treatment candidates) | ~10^5–10^6 | Grows with citation extraction |
-| Concurrent users | tens on a LAN | tens to low hundreds | Assumption; D-01 |
+| Extracted text | a few hundred MB | a few GB | Text is a small fraction of PDF bytes |
+| Passages (~300 tokens) | ~0.2–0.5 M | ~2–5 M | ~4k judgments × tens of pages × a few passages per page, plus statutes |
+| Vectors at 768 dims (float32 / half) | ~0.6–1.5 GB / half | ~6–15 GB / half | 3 KB per float32 vector |
+| Graph edges | 10^4–10^5 (C11: 11,076 statute links, 2,595 treatment candidates) | 10^5–10^6 | Citation extraction growth |
+| Concurrent users | tens | tens to low hundreds | Assumption; confirm with owner. Search target: p95 < 1 s at 10 concurrent queries on reference hardware, accuracy not sacrificed (directive) |
+| Disk (1 TB) | vault ~2 GB ×(1 + derivatives ~2–3×) + DB with indexes + two release generations + local backups | ~20 GB vault → ~150–250 GB total with two generations and backups | Estimate; fits 1 TB with headroom |
 
-**Conclusion.** This is a **small-to-medium** search workload. A single well-provisioned server handles it. Distributed search clusters are not justified by size.
+**Conclusion:** a single well-provisioned Windows server handles this workload. A distributed search cluster is not justified.
 
-## 3. Recommendation at a glance
+## 3. Candidates at a glance
 
-| Layer | Recommendation | Main alternative / exit path |
+Every row is a **candidate**. The decision is ADR-0005 after the PoCs.
+
+| Layer | Primary candidate | Compared against / exit path | Evidence |
+| --- | --- | --- | --- |
+| Web/API | **ASP.NET Core LTS** or **Django LTS** (head-to-head) | FastAPI (exit only) | P1, P6, P7, P9 |
+| Hosting | IIS front end, or app as a Windows Service with its own TLS | — | P1, P6 |
+| Workers | Python processes as **Windows Services**, PostgreSQL-backed job table (`SKIP LOCKED`) | A Python queue library, if P5 shows one is mature on Windows | P5 |
+| Database | **PostgreSQL** (Windows build) | SQL Server (licence/edition limits) | P1, P2, P6 |
+| Lexical search | PostgreSQL FTS at passage level with legal-aware configuration | BM25 index (e.g. Tantivy) as a derived, rebuildable index if P2 shows ≥5 pts recall@20 gain | P2 |
+| Vectors | **pgvector** (HNSW, half precision) | Qdrant (Windows binary) | P2, P6 |
+| Graph | Relational edge tables + recursive CTEs | Apache AGE (Windows build availability uncertain) | P2 |
+| Embeddings | Local **ONNX Runtime** on CPU; BGE / E5 / Arctic-embed class model | Multilingual variant if Devanagari recall matters | P3 |
+| OCR | **Tesseract** (Windows build) | PaddleOCR or docTR as second pass | P4 (OCR boxes, scanned pages; OCR quality from Track A1); P6 (packaging OCR models) |
+| PDF text (app path) | **pypdfium2** / pdfminer.six / pdfplumber (permissive) | PyMuPDF (AGPL) only if D-02 accepts | P7 |
+| PDF viewer | **PDF.js** | — | P4, P9 |
+| Frontend | **React + TypeScript**, built online, static files | — | P7 |
+| Real-time | **SignalR** (ASP.NET) or **SSE** (Django) | Polling | P1 |
+| Auth | Local accounts + optional AD (Negotiate or LDAPS) | — | P1 (framework), P7 (security review) |
+| Installer | Offline **MSI** (WiX Toolset, MS-RL; verify) or equivalent bootstrapper | Scripted PowerShell installer (fallback) | P6 |
+| Updates | Ed25519-signed snapshot bundles, contract v1 | — | P8; `app/contract` tests |
+| Storage | Content-addressed NTFS vault `vault\sha256\ab\<hash>` | — | P6, P8 |
+
+## 4. Web/API layer: ASP.NET Core vs Django on Windows
+
+### 4.1 Comparison
+
+| Criterion | ASP.NET Core (LTS) | Django (LTS) |
 | --- | --- | --- |
-| Backend | **Python, Django** (LTS line) with a typed JSON API layer (Django Ninja or DRF; pick in B0). Domain logic lives in framework-independent packages | FastAPI + SQLAlchemy/Alembic |
-| Job execution | **PostgreSQL-backed job queue** (candidates: Procrastinate, the django-tasks database backend, or a minimal `SKIP LOCKED` table) [PoC] | Celery with Valkey |
-| Database | **PostgreSQL** (current stable major) | SQLite (+FTS5, +sqlite-vec) for a single-user desktop edition only |
-| Lexical search | **PostgreSQL full-text search** for the first deliverable. **[PoC]** against true BM25 (embedded Tantivy) before GB1 | Tantivy sidecar index. OpenSearch if requirements outgrow one server |
-| Vector | **pgvector** (HNSW, half-precision vectors) | Qdrant (single binary) |
-| Graph | **Relational edge tables + recursive CTEs** in PostgreSQL; NetworkX for offline analytics | Apache AGE (Cypher in Postgres). Neo4j Community only if graph analytics demand it (licence caveats) |
-| Embeddings | **BGE / E5 / Arctic-embed class English models via ONNX Runtime on CPU**; choose by PoC P2 | Multilingual variant (e.g. bge-m3 / multilingual-e5) if Devanagari recall matters |
-| Reranker | **Cross-encoder reranker** (BGE reranker class) on the top 50–100, optional per query [PoC] | None (hybrid only) |
-| Local LLM | **None in Cycle 13.** Later, gated: llama.cpp-served open-weight model with a permissive licence, drafting assistance only | vLLM on a GPU server |
-| OCR | **Tesseract** (already used for 944 scanned judgments), per-page confidence; PaddleOCR evaluated on low-confidence pages [PoC]; Prism if D-10 confirms it | PaddleOCR as primary if P4 shows a clear gain |
-| PDF viewer | **PDF.js** (pdfjs-dist), script evaluation disabled | — |
-| Frontend | **React + TypeScript + Vite**; Cytoscape.js for graphs | Server-rendered Django templates + HTMX |
-| Packaging | **Docker Compose on a Linux host** (Docker Engine or Podman), images transferred as signed tarballs. On Windows hosts, a **Linux VM under Hyper-V** | Native installers (high maintenance; last resort) |
-| Auth | **Local accounts** (Django auth, Argon2 hashing); optional **LDAP/AD** mapping an AD group to Admin | Kerberos SSO later |
-| Updates | **Signed release bundle** from a pinned HF revision → offline verify (signature + `SHA256SUMS`) → new release generation → atomic switch → rollback | — |
-| Storage | **Content-addressed filesystem vault** for originals; derivatives keyed by (sha256, pipeline version) | Object store only if multi-node (avoid MinIO licence and edition churn) |
-| Reverse proxy | Caddy or nginx with an internal-CA certificate | — |
+| Windows production hosting | **Native**: ASP.NET Core Module for IIS (in-process or out-of-process); `UseWindowsService()` hosting; Event Log logging; Data Protection keys can be protected with DPAPI | Works, but no first-party Windows server. Options: Waitress (pure Python WSGI) or Uvicorn/Hypercorn (ASGI) wrapped as a Windows Service (pywin32 service or a service wrapper), behind IIS URL Rewrite + ARR or HttpPlatformHandler **[PoC P1]** |
+| AD integration | Negotiate/Kerberos and NTLM built in; LDAP via `System.DirectoryServices.Protocols` | django-auth-ldap (needs python-ldap; Windows wheels availability to verify) or ldap3 (pure Python) **[PoC P1, P7]** |
+| Auth, sessions, CSRF, password hashing | ASP.NET Core Identity: PBKDF2 by default (iterations configurable), lockout, antiforgery tokens, cookie auth | Built in and long audited; Argon2 via `argon2-cffi`; CSRF middleware; lockout via a maintained package |
+| Server-side authorisation | Policy-based authorisation (`[Authorize(Policy=…)]`), resource-based handlers for ownership | Permission checks and decorators; object-level checks hand-written or via a package |
+| Real-time job progress | **SignalR** built in | Django Channels (adds a channel layer) or SSE (simplest) |
+| Reuse of Python pipeline | Through workers and the data contract only (no in-process reuse) | In-process reuse possible, but workers are isolated anyway, so the benefit is smaller than it looks |
+| Typed API | Strong; OpenAPI generation; TypeScript client generation | Django Ninja (Pydantic) or DRF |
+| Migrations / admin back office | EF Core migrations (or SQL migrations); no generic admin | Built-in migrations and admin |
+| Support window | .NET LTS: three years per release (verify current) | Django LTS: about three years (verify current) |
+| Staffing | Unknown in the owner's team (Q-3) | Python already used by the project |
 
-The design principle is **one database, few services.** For a small ops team, PostgreSQL carrying relational data, full-text search, vectors, the graph and the job queue means:
-- one backup;
-- one restore;
-- one transaction boundary, which is what makes T-07 withdrawal leak-proof by construction.
+### 4.2 IIS vs native Windows Service
 
-A separate engine is added only when a PoC shows that PostgreSQL misses a measured requirement. This matches Architecture §8.
-
-## 4. Backend
-
-| Criterion | Django (+ Ninja/DRF) | FastAPI (+ SQLAlchemy, Alembic) | Others (Node/NestJS, Go, .NET) |
-| --- | --- | --- | --- |
-| Fit with existing code | Python: reuses pipeline, PyMuPDF/pdfplumber, ONNX Runtime and the HF tools | Python: same | Re-implements or bridges the Python pipeline; two languages |
-| Auth, sessions, CSRF, password hashing | **Built in and long-audited**; Argon2 supported; django-auth-ldap exists | Assemble from libraries; more security-sensitive glue to write and review | Varies |
-| Migrations / admin back office | Built in (migrations; Django admin useful for ops screens) | Alembic; no admin | Varies |
-| Typed API / OpenAPI | Ninja: Pydantic-style typing; DRF: mature serialisers | **Excellent** (native Pydantic, OpenAPI) | Good |
-| Async / streaming (later LLM) | ASGI and async views supported; adequate | **Native async** | Good |
-| Long-term maintenance | LTS releases with a published security process | Fast-moving; fewer guarantees on long support windows | — |
-| Small-team risk | Low: conventions limit design drift | Medium: more architectural choices to own | High (language split) |
-
-**Recommendation: Django.** The decisive factors are T-06, T-08 and T-10. Two roles, server-side mutation checks, sessions, CSRF and LDAP are exactly what Django already does well, and every line of hand-written auth glue is review and attack surface. FastAPI's advantages (typing, async) matter less here: search is database-bound and OCR/embedding run in workers.
-
-- **Risk:** coupling domain logic to the ORM.
-- **Mitigation and exit path:** keep ingestion, search, provenance, release import and graph logic in plain Python packages (`mimamsa_core`) with explicit SQL or a thin repository layer. Django is then the HTTP/auth shell, and moving to FastAPI later means replacing the shell, not the core.
-
-**Workers.** Use the same codebase, run as separate processes or containers with a different security profile (no network, read-only vault, resource limits). A PostgreSQL-backed queue avoids adding Redis or RabbitMQ. **[PoC P6]**: confirm the chosen queue library's maturity, licence and behaviour under a bulk import of about 16k files. If none is satisfactory, a 200-line `SELECT … FOR UPDATE SKIP LOCKED` job table is an acceptable fallback. Exit path: Celery with Valkey (BSD-licensed Redis fork; Redis itself changed licence in 2024, so verify).
-
-## 5. Database
-
-| Criterion | PostgreSQL (+FTS, +pgvector) | SQLite (+FTS5, +sqlite-vec) | Others (MySQL/MariaDB, DuckDB) |
-| --- | --- | --- | --- |
-| Multi-user LAN server, concurrent ingestion writes | **Strong** (MVCC) | Single writer. Fine for one user, a constraint for a server with background ingestion | MySQL is fine but weaker in FTS, vectors and recursive queries; DuckDB is analytical and single-process |
-| Full-text search | Built-in tsvector/GIN; ranking is *not* BM25 (ts_rank/ts_rank_cd) | FTS5 has **BM25 built in** | — |
-| Vectors | pgvector: mature, widely deployed, HNSW and IVFFlat, half-precision | sqlite-vec: pre-1.0, mainly brute force; **maturity risk** | — |
-| Graph | Recursive CTEs; Apache AGE optional | Recursive CTEs | — |
-| Transactions across data, FTS and vectors | **Yes** (T-07) | Yes | — |
-| Backup / PITR | pg_dump; pgBackRest or WAL archiving | File copy (when quiesced) | — |
-| Windows / Linux | Both | Both (embedded) | — |
-| Licence | PostgreSQL licence (permissive); pgvector also PostgreSQL licence | Public domain; sqlite-vec MIT/Apache (verify) | GPL (MySQL server) |
-
-**Recommendation: PostgreSQL.**
-- SQLite's FTS5 BM25 is attractive, but a shared LAN server with background ingestion, many readers and an Admin publication workflow is PostgreSQL's home ground.
-- **Exit path and secondary use:** SQLite (FTS5 + sqlite-vec) remains a credible engine for a future *single-user, laptop-only* edition built from the same release bundle. Keep the release-bundle format engine-neutral (JSONL/Parquet + PDFs) so that remains possible.
-
-## 6. Lexical search
-
-| Criterion | PostgreSQL FTS | Tantivy (embedded, via tantivy-py) | Meilisearch | OpenSearch |
-| --- | --- | --- | --- | --- |
-| Ranking | ts_rank_cd (no IDF saturation; not BM25). True BM25 needs an extension: ParadeDB pg_search, VectorChord-bm25 or pg_textsearch (verify licences; several are AGPL or source-available) | **BM25**, phrase and proximity queries, custom tokenisers | Custom relevance (typo-tolerant, bucket sort), not classic BM25 | **BM25**, mature analyzers, highlighting |
-| Hybrid built in | No (fuse in app with pgvector) | No (fuse in app) | Yes (hybrid search) | Yes (k-NN + hybrid pipelines) |
-| Consistency with publication state (T-07) | **Transactional** | Separate index; deletes and rebuilds must be orchestrated | Separate service; asynchronous indexing | Separate service; near-real-time refresh |
-| Ops weight | None extra | Library; index files on disk | One extra service (light) | JVM cluster or single node; heap tuning; security plugin. **Heaviest** |
-| Highlighting/snippets | ts_headline (adequate, can be slow on long docs; store passages) | Snippet generator | Good | Excellent |
-| Licence | PostgreSQL | MIT (core and Python binding; verify) | Community edition MIT; some enterprise features under a source-available licence (verify) | Apache 2.0 |
-| Maturity | Very high | Core high; **Python binding less mature [PoC]** | Medium–high | High |
-
-**Recommendation.**
-1. Start with **PostgreSQL FTS at passage level**, with a legal-aware configuration:
-   - a `simple` dictionary variant so that "69", "22(3)(a)" and "s.69" survive tokenisation;
-   - an English stemmed column for prose;
-   - synonym normalisation for "AA" → "Army Act" and "court-martial" vs "court martial", following CLAUDE.md pipeline step 6.
-2. **[PoC P1]**: compare ts_rank_cd, true BM25 (Tantivy embedded) and the hybrid of each with pgvector on the retrieval benchmark.
-3. If true BM25 adds a material gain (proposed threshold: ≥5 points recall@20 on the held-out queries), adopt **Tantivy as a derived, rebuildable index** written by the worker after each publication or withdrawal. Add a consistency check that blocks search if index and DB generations differ.
-4. Prefer that over a BM25 Postgres extension only if the extension's licence passes D-02.
-
-**OpenSearch** is the exit path if the corpus or features outgrow this. Examples: hundreds of GB, many concurrent users, advanced analyzers or learning-to-rank. It is not recommended now: its ops weight is out of proportion to a 2–20 GB corpus and a small team. Elasticsearch is not preferred over OpenSearch for licence-simplicity reasons (verify current terms). Meilisearch is pleasant but its ranking model and asynchronous indexing fit legal exact-match and withdrawal semantics less well. Vespa is powerful but heavy.
-
-## 7. Vector store
-
-| Criterion | pgvector | Qdrant | Others (FAISS, LanceDB, Chroma, sqlite-vec, Milvus) |
-| --- | --- | --- | --- |
-| Scale fit (≤ ~5 M vectors) | Good with HNSW; half precision halves memory | Excellent | FAISS (library): fast, but persistence and filtering are hand-built. LanceDB: embedded, promising. Chroma: dev-oriented. Milvus: heavy |
-| Filtered search (published only, court, year) | Works. HNSW + selective filters needs care (iterative scans or exact search on filtered subsets) **[PoC]** | Strong payload filtering | Varies |
-| Transactions with publication state | **Yes** | No (separate service) | No |
-| Ops | None extra | One service (single binary or container) | Varies |
-| Licence | PostgreSQL licence | Apache 2.0 | MIT / Apache mostly |
-
-**Recommendation: pgvector.**
-- Store one embedding per passage, with the model ID and model-file hash, so that a model change triggers a re-embed generation and query/document embeddings never mix models.
-- **Exit path:** Qdrant if PoC P1 shows filtered-HNSW latency or recall problems at projected scale. The embedding table is the source of truth, so migration is a re-index, not a re-embed.
-
-## 8. Graph
-
-| Criterion | PostgreSQL edge tables + recursive CTE | Apache AGE | Neo4j | Others (Memgraph, Kuzu) |
-| --- | --- | --- | --- | --- |
-| Fit to need (typed edges with evidence, verification state, temporal validity; neighbourhood and path queries; 10^5–10^6 edges) | **Good**: schema constraints, foreign keys to anchors, same transaction as publication | Cypher inside Postgres | Excellent query language and algorithms | — |
-| Integrity with evidence and state axes | **Native** (FKs, CHECK constraints) | Partly (graph stored outside the relational schema) | Separate store; sync required | Separate |
-| Ops | None extra | Extension; **support lags new Postgres majors [verify]** | One JVM service; separate backup | Varies |
-| Licence | PostgreSQL | Apache 2.0 | Community: GPLv3 with feature limits (clustering, hot backup and fine-grained security are Enterprise, commercial). Enterprise: commercial | Memgraph: source-available licence (verify). Kuzu: upstream status changed in 2025 (verify maintenance) |
-
-**Recommendation: relational edge tables with recursive CTEs.** The graph is an **evidence register with typed links**, not an analytics workload. Its legal value lies in the constraints: every edge has an anchor, a confidence class and a verification axis. Relational integrity enforces that best. Use NetworkX (already pinned) in offline tooling for analytics such as centrality and components. Visualise with **Cytoscape.js** (MIT) in the browser.
-
-**Exit path:** Apache AGE if Cypher ergonomics become important. A Neo4j read replica built from the edge tables, if heavy graph algorithms are ever needed online, subject to D-02 on licence.
-
-## 9. Local embedding and reranker models
-
-**Constraints:**
-- Fully local files, bundled with checksums.
-- CPU inference; a modest GPU optional.
-- Legal English with Indian military vocabulary (court martial, summary of evidence, Entitlement Rules, AFT, s.69).
-- Some Devanagari.
-
-No openly available sentence-embedding model is trained specifically on Indian military law. Indian legal-domain encoders exist (for example InLegalBERT, an MLM model), but they are **not retrieval-tuned sentence embedders** and would need fine-tuning on labelled pairs.
-
-| Family (examples) | Size class | Licence (verify on model card) | Notes |
-| --- | --- | --- | --- |
-| BGE English (small / base / large) | 33M–335M | MIT | Strong general retrieval; base is a good CPU trade-off |
-| E5 (base / large; multilingual-e5) | 110M–560M | MIT | Needs "query:/passage:" prefixes; the multilingual variant covers Devanagari |
-| Snowflake Arctic-embed (S/M/L) | 33M–335M | Apache 2.0 | Retrieval-focused; good small models |
-| nomic-embed-text | ~137M | Apache 2.0 | Long context; task prefixes |
-| bge-m3 | ~568M | MIT | Multilingual, long input, dense+sparse; heavier on CPU |
-| **Rerankers:** BGE reranker (base/large; v2-m3), mxbai-rerank, MS MARCO MiniLM cross-encoders | 22M–568M | MIT / Apache 2.0 | Rerank top 50–100; CPU latency is the constraint **[PoC]** |
-
-**Runtime.**
-- **ONNX Runtime** (already pinned in `requirements.txt`; MIT) with exported or quantised models avoids shipping PyTorch to the server.
-- sentence-transformers is the fallback for evaluation.
-- Set `HF_HUB_OFFLINE=1` and load only from the bundled model directory, whose hash is checked at startup.
-
-**Recommendation.**
-- Shortlist **one small and one base model each from BGE, E5 and Arctic-embed**, plus one multilingual model and two rerankers. Choose in **PoC P2** on the retrieval benchmark (recall@20, nDCG@10), CPU throughput (passages/sec for bulk embedding, ms/query) and memory.
-- **Bulk document embeddings may be computed on the internet-connected build side** and shipped in the release bundle with the model hash. The offline server then needs only query-time embedding and embedding of Admin uploads.
-- Fine-tuning on Mimamsa pairs is a later option. It needs a labelled training set kept separate from evaluation sets.
-
-**Expected CPU throughput [PoC]:** a base-size model on a 16-core server is plausibly in the tens to low hundreds of passages per second. That would make a full re-embed of today's corpus an hours-scale job, not days. This must be measured.
-
-## 10. Local LLM for drafting assistance (later phase, gated)
-
-**Not in Cycle 13.** Introducing any generative model requires all of the following:
-1. Legal Reviewer designation path confirmed (Document Studio §3.3).
-2. Prompt-injection isolation tested: document text never acts as instructions; the model has no tools that mutate state.
-3. Use limited to **drafting assistance and explanation over retrieved, cited passages**. No legal conclusions, no mandatory steps, no compliance verdicts.
-4. Evaluation on a held-out drafting benchmark, reviewed independently.
-5. The candidate banner and "not legal advice" labelling on every output.
-
-| Option | Licence | Fit |
+| Aspect | IIS front end | App as Windows Service (no IIS) |
 | --- | --- | --- |
-| llama.cpp (GGUF, CPU or GPU) | MIT | **Recommended runtime when the time comes**: single binary, OpenAI-compatible server, works on CPU with small models and scales up with a GPU |
-| vLLM | Apache 2.0 | Best throughput, needs a capable GPU |
-| Ollama | MIT | Convenient packaging; less control. Avoid any auto-pull behaviour offline |
-| Model families | Varies: some Qwen and Mistral sizes Apache 2.0; Phi MIT; Llama under a community licence with use restrictions; Gemma under its own terms | Prefer permissive licences (D-02). Quality on Indian legal English needs evaluation **[PoC, later]** |
+| TLS | Certificate bound in IIS from the Windows certificate store | App loads the certificate from the store (Kestrel supports this) or from a protected file |
+| Static files, request limits, filtering | IIS request filtering, `maxAllowedContentLength`, static-file caching | Configured in the app |
+| Windows authentication | IIS handles Negotiate, passes identity | Kestrel Negotiate (ASP.NET); for Django, an LDAP bind form instead |
+| Process recycling and recovery | Application pool recycling, rapid-fail protection | Service Control Manager recovery actions |
+| Admin familiarity | High in Windows estates | Moderate |
+| Footprint | IIS role + modules (URL Rewrite, ARR for Django) | Minimal |
 
-**Hardware implication.** Useful drafting quality typically needs a GPU with substantial VRAM (order of 16–24 GB or more for mid-size models at reasonable speed) **[PoC]**. On CPU, only small models are practical. The owner should decide whether to provision a GPU at D-01, even though the LLM comes later.
+**Assessment.** For ASP.NET Core, either mode is first-class; IIS is the default if the site's administrators expect it. For Django, IIS acts only as a reverse proxy and adds two modules; a Windows Service with its own TLS may be simpler. **[PoC P1]** must run both modes for both frameworks and record install steps, recovery behaviour and latency.
 
-## 11. OCR
+### 4.3 Provisional view
 
-| Criterion | Tesseract | PaddleOCR | Others |
+Neither framework is presumed. B0's provisional reading of the documentary evidence: **ASP.NET Core is the lower-risk Windows production host** (K1, K2), and **Django is the lower-friction development path** (K5). The weighted scoring sheet in ADR-0005 §6 settles it with P1, P6, P7 and P9 evidence.
+
+## 5. Python workers on Windows
+
+- **Process model:** each worker class (`ingest-parse`, `ingest-ocr`, `embed`, `index`, `release-import`) runs as its own Windows Service with a **virtual service account** (`NT SERVICE\MimamsaOcr` style) or a dedicated low-privilege local account. No inbound ports.
+- **Runtime:** an embedded, pinned CPython (python.org Windows embeddable package or a full installer laid down by the MSI) with a hash-locked wheel set installed offline. The app path standardises **one Python version** (C12 noted a 3.11/3.13 split; the plan's A9 closes it).
+- **Service wrapper:** pywin32 `win32serviceutil` (PSF licence) or a small, auditable service wrapper. Verify licence of any third-party wrapper. **[PoC P5]**
+- **Queue:** a PostgreSQL job table with `SELECT … FOR UPDATE SKIP LOCKED`, leases and heartbeats; retries with backoff; idempotent steps keyed by (sha256, pipeline version). **[PoC P5]**: 16k-file import, injected failures, service kill and restart, no lost or duplicated jobs.
+- **Limits:** Windows Job Objects per task for CPU rate, memory and wall-clock limits; parser runs in a child process so a crash or hang kills only that job. **[PoC P5]**
+- **Network:** Windows Firewall outbound block rules scoped to each worker service SID (only loopback to PostgreSQL allowed). **[PoC P5, P6]**
+
+## 6. Database on Windows
+
+| Item | Assessment |
+| --- | --- |
+| PostgreSQL on Windows | Supported platform; official Windows binaries exist (EDB-built installers and zip archives). Runs as a Windows Service under `NT AUTHORITY\NetworkService` by default; the installer should create a dedicated account instead **[PoC P1, P6]** |
+| pgvector on Windows | No official Windows binary from the project. Options: build with Visual Studio Build Tools against the exact PostgreSQL major (documented upstream), or obtain a vetted binary. The build must be reproducible and signed into the installer **[PoC P2, P6]** |
+| FTS | Built in; custom text search configuration (simple dictionary for identifiers, English stemmer for prose, synonym dictionary for "AA" → "Army Act", "court-martial" ↔ "court martial") **[PoC P2]** |
+| Backup | `pg_dump` / `pg_basebackup` scheduled by Task Scheduler; WAL archiving optional. pgBackRest is not supported on Windows; do not plan on it |
+| Upgrades | Major upgrades via `pg_upgrade` or dump/restore, inside the installer's upgrade path, with pgvector rebuilt for the new major **[PoC P6, P8]** |
+| Alternative | SQL Server: Windows-native, but Express caps database size and vector features depend on version; licence cost for Standard. Not preferred |
+
+## 7. Lexical, vector and graph search
+
+The one-database principle stands: relational data, FTS, vectors, the graph and the job queue in PostgreSQL give one backup, one restore and **one transaction boundary**, which makes withdrawal leak-proof by construction (T-07).
+
+- **Lexical:** passage-level `tsvector` columns (identifier-preserving and stemmed). `ts_rank_cd` is not BM25. **[PoC P2]** compares it with a true BM25 index. Adopt a BM25 derived index only if the recall gain is material (≥5 points recall@20 on held-out queries), with a generation check that blocks search when the index and the database disagree.
+- **Vector:** pgvector HNSW on half-precision vectors; one embedding per passage with model id and model-file hash. **[PoC P2]**: filtered HNSW recall and latency (published-only, court, year).
+- **Graph:** relational edge tables (typed, anchored, with axis states) and recursive CTEs; Cytoscape.js in the browser. Apache AGE on Windows is uncertain; not planned.
+- **Ranking rule (all options):** no "binding" or "current" ranking signal; results show why they matched (passage, page, statute).
+- **Retrieval benchmark hygiene:** dev queries written fresh by an agent who has not seen the golden set; the 50-question golden set is held out for evaluation only; relevance double-coded.
+
+## 8. Local embeddings and reranker
+
+Unchanged in substance from the earlier assessment, now with Windows notes.
+
+- **Runtime:** ONNX Runtime (MIT) CPU execution provider; Windows wheels exist. DirectML or CUDA providers are optional and never required (T-12).
+- **Shortlist:** one small and one base model each from BGE, E5 and Arctic-embed, plus one multilingual model and two cross-encoder rerankers; licences per model card (MIT/Apache-2.0) recorded in the model bundle.
+- **Bulk embedding** may run on the internet-connected build side and ship in the bundle with the model hash; the server embeds only queries and Admin uploads.
+- **Offline loading:** `HF_HUB_OFFLINE=1`; load only from the bundled model directory whose hash is checked at service start.
+- **Targets [PoC P3]:** query embedding < 100 ms; bulk embedding of today's corpus within one overnight run on the reference CPU.
+
+## 9. Local LLM (later, gated; not in Cycle 13)
+
+No generative model is installed in Cycle 13. The gate (Legal Reviewer designation confirmed, prompt-injection isolation tested, drafting-only use, held-out evaluation, banner on every output) is unchanged. If later approved, llama.cpp (MIT) has native Windows builds and runs on CPU; a GPU remains optional.
+
+## 10. OCR on Windows
+
+| Engine | Windows status | Licence | Notes |
 | --- | --- | --- | --- |
-| Status in project | **In use**: 944 scanned judgments (4,705 pages), English, 300 dpi, threshold 70 mean word confidence; `pipeline/ocr.py`; per-page cache | Not used | docTR (Apache 2.0, PyTorch). Surya (GPL code; model-weight terms restrict commercial use; verify). OCRmyPDF (MPL 2.0; wraps Tesseract to produce text-layer PDFs; uses Ghostscript (AGPL) for PDF/A output) |
-| Quality on degraded scans and tables | Good on clean prints, weaker on noisy scans | Often stronger detection on difficult layouts **[PoC]** | — |
-| Offline install, Windows/Linux | Easy (distro packages; Windows builds exist) | Heavier: PaddlePaddle framework; CPU works; Windows support exists but more fragile | — |
-| Per-word boxes and confidence | Yes (TSV/hOCR) | Yes | — |
-| Licence | Apache 2.0 | Apache 2.0 | — |
+| **Tesseract** | Windows builds are available (for example the UB Mannheim builds); bundle the executable and `eng` traineddata in the installer; invoke from the worker via subprocess (no network) | Apache-2.0 | Already used for 944 scanned judgments (4,705 pages) at 300 dpi with threshold 70. Produces TSV/hOCR word boxes and confidence |
+| PaddleOCR | Python package on PaddlePaddle; Windows CPU wheels exist but version pinning is fragile **[PoC P4, P6]** | Apache-2.0 | Often stronger on difficult layouts; heavier |
+| docTR | PyTorch or ONNX backends | Apache-2.0 | Alternative second pass |
+| OCRmyPDF | Runs on Windows with Tesseract and Ghostscript | MPL-2.0 (Ghostscript AGPL) | Avoid Ghostscript-dependent output unless D-02 accepts AGPL; not needed for search |
+| Windows built-in OCR (Windows.Media.Ocr) | Available on Windows 10/11 and Server with Desktop Experience **[verify]** | OS component | No per-word confidence comparable to Tesseract; not recommended as primary |
+| Prism | Unknown availability (D-10) | Unknown | Treated as unavailable until shown otherwise |
 
-**Recommendation.**
-- Keep **Tesseract** as the primary engine. It is proven in this corpus, light and portable.
-- Store **per-word boxes and per-page confidence**. B5 needs the boxes to highlight hits on scanned pages without altering the original PDF.
-- **[PoC P4]**: run PaddleOCR (and Prism, if D-10 confirms it is available offline under a known licence) on the pages below threshold and on a random sample of scanned pages. Compare word accuracy against a small hand-transcribed sample. Adopt it as a *second-pass engine for low-confidence pages* only if the gain is material.
-- If text-layer PDFs are generated for viewing, they are **labelled derivatives**. The original bytes remain the cited source. Avoid Ghostscript-dependent PDF/A output unless D-02 accepts AGPL.
-- **Prism OCR** has been an open question since the original brief. Treat it as unavailable until shown otherwise.
+**Assessment:** Tesseract primary; per-page confidence and per-word boxes stored for B5 highlighting; pages below threshold flagged for review and labelled after publication; OCR text is for search, not quotation (contract rule `OCR_QUOTING`). OCR engine quality is measured by Track A workstream A1 (OCR benchmark); **[PoC P4]** covers OCR bounding boxes and highlighting on scanned pages, and **[PoC P6]** packaging of OCR models offline. A second engine is adopted only on a measured gain.
 
-## 12. PDF viewer, frontend, packaging, auth and updates
+## 11. PDF viewer, frontend, real-time and authentication
 
-### 12.1 PDF viewer: PDF.js
+- **PDF.js:** `pdfjs-dist` with the worker bundled locally; `isEvalSupported:false` (CVE-2024-4367 class), scripting disabled, current patched release; PDFs served from the app origin under a strict CSP. Native highlighting by text-layer matching; scans by overlay boxes from OCR word coordinates; large-document rendering. **[PoC P4, P9]**
+- **Frontend:** React + TypeScript built online from a hash-locked lockfile; output is static files; no runtime CDN, web fonts or analytics; CI fails if the bundle references an external URL. Component library: permissive (verify), or a small in-house set following `app/design`.
+- **Real-time:** job and import progress only, via SignalR or SSE; never used to push legal content.
+- **Authentication:** local accounts (framework-default strong hashing, lockout, session expiry, CSRF); optional AD maps one AD group to Admin and admits a second group as User; there are no further roles. The **Legal Reviewer designation** is a separate registry row on an existing account, inert until an appointment record exists; the app has no code path that records a legal approval in Cycle 13. **[PoC P1 framework support; P7 security review]**
 
-PDF.js is the only serious open-source, browser-native choice (Apache 2.0, Mozilla). Use `pdfjs-dist` with the worker bundled locally, no CDN.
+## 12. Packaging, installer and updates (Windows)
 
-- **Page anchors:** open at page N.
-- **Highlighting:**
-  - Native PDFs: find the passage text in the page's text layer (normalised fuzzy match).
-  - Scans: draw overlay boxes from stored OCR word coordinates. **[PoC P3]**
-- **Security:**
-  - Set `isEvalSupported: false`. A 2024 PDF.js vulnerability (CVE-2024-4367) allowed script execution through crafted fonts when evaluation was enabled.
-  - Keep PDF.js on the current patched release.
-  - Disable PDF scripting.
-  - Serve PDFs from the app origin with a strict Content-Security-Policy.
-- **Wrapper:** React wrappers exist (for example react-pdf, MIT). Use one only if it does not hide the needed text-layer and annotation hooks.
+### 12.1 Offline installer
 
-### 12.2 Frontend: React + TypeScript (+ Vite)
+One signed installer set, built online, transferred on removable media:
 
-| Option | For | Against |
-| --- | --- | --- |
-| **React + TypeScript** | Largest ecosystem for PDF viewers, graph views (Cytoscape.js, Sigma.js) and data tables (TanStack); easy to staff | npm supply-chain surface. A build step |
-| Vue / Svelte + TS | Smaller bundles; pleasant | Smaller ecosystem for the specialised components |
-| Django templates + HTMX | Fewest moving parts; one language | PDF viewer, graph explorer and Document Studio are rich client components; they would end up as JavaScript islands anyway |
+| Component | Packaging |
+| --- | --- |
+| App (ASP.NET Core self-contained publish, or Python app + embedded CPython) | MSI feature; files under `C:\Program Files\Mimamsa\` (read-only to service accounts) |
+| PostgreSQL + pgvector (exact major, reproducible build) | MSI feature or chained installer; data directory on a dedicated volume (e.g. `D:\Mimamsa\pgdata`) |
+| Workers + Python wheels (hash-locked) | MSI feature |
+| Tesseract + traineddata; ONNX models (hashed) | MSI features; models under `D:\Mimamsa\models\` |
+| Windows Services, firewall rules, NTFS ACLs, certificate binding | Installer custom actions (PowerShell, logged) |
+| SBOM and licence inventory | Shipped alongside |
 
-**Recommendation: React + TypeScript + Vite**, a permissively licensed component library (for example Mantine or MUI core, both MIT; verify), TanStack Query and Table, and Cytoscape.js.
+Authoring candidates: WiX Toolset (verify licence; MS-RL historically), or a scripted PowerShell installer as fallback. **Authenticode signing of the installer and every payload it lays down is mandatory** (organisation PKI or owner-designated signer; the installer refuses unsigned payloads and ships the owner's trust list); the data bundles are signed independently with the owner's Ed25519 keys (§12.2). **[PoC P6]**: clean Windows machine with no internet; packages runtimes, PostgreSQL + pgvector, Python libraries, frontend assets, OCR and embedding models; reproducible build; install, uninstall, reinstall, upgrade.
 
-- **Air-gap rules:**
-  - the build happens online from a hash-locked lockfile;
-  - the output is static files served by the backend or proxy;
-  - no runtime CDN, web fonts or analytics;
-  - a CI check fails if the built bundle references external URLs.
-- **Exit path:** HTMX for the simpler admin screens if the team prefers less JavaScript.
+### 12.2 Snapshot update flow
 
-### 12.3 Packaging and deployment
+Data contract v1 (`app/contract`) defines the bundle. The importer (a worker service):
 
-| Option | For | Against |
-| --- | --- | --- |
-| **Docker Compose on a Linux host** (Docker Engine or Podman) | Reproducible images; process isolation for workers (no network, read-only mounts, resource limits); simple upgrade by image swap; Docker Engine on Linux and Podman are free and open source | Needs a Linux host. Images must be transferred offline |
-| Linux VM under Hyper-V on a **Windows** server, running the same Compose stack | Windows estates keep Windows hosts; identical artefacts | VM administration; resource overhead |
-| Docker Desktop on Windows | Familiar | **Subscription terms apply to larger organisations (verify for this deployment)**; not intended for Windows Server production; Linux containers depend on WSL2 |
-| Native installers (MSI/DEB: Python runtime, PostgreSQL installer, Tesseract, services) | No container runtime | Highest maintenance: per-OS builds, dependency drift, weaker isolation; upgrades and rollbacks hand-built |
+1. verifies the Ed25519 signature over `SHA256SUMS` against the public key pinned at install;
+2. verifies every checksum; rejects unlisted files, symlinks/reparse points and unsafe paths;
+3. checks contract compatibility and minimum app version; runs declared migrations only if signed and listed;
+4. re-applies the restricted-material register (`config/restricted_material.json`) and rejects any hit;
+5. loads into a **new release generation**, builds indexes, runs smoke queries;
+6. switches atomically; keeps N-1 (configurable) for rollback;
+7. reconciles local Admin uploads (Architecture §9.1) and turns `CHANGES.json` into impact triggers.
 
-**Recommendation.** Ship **one Compose stack**: proxy, web/API, worker, PostgreSQL and an optional search sidecar.
+Any failure rejects the whole bundle with nothing changed. **[PoC P8]** (also database and document updates, backup and full restore)
 
-- **Linux host preferred.** On Windows estates, run it in a **Hyper-V Linux VM** **[PoC P5]**.
-- **Air-gapped transfer:** images are built online, scanned (SBOM and vulnerability scan), exported with `docker save`, checksummed and signed, then loaded offline. Optionally run a local registry (CNCF Distribution, Apache 2.0) on the LAN.
-- **Native installers are a last-resort exit path**, not a plan.
+### 12.3 Storage and backup
 
-### 12.4 Authentication
+- **Data layers:** the nine layers (vault, derivatives, provenance, candidates, reviewed records, legally authenticated records, publication and access states, indexes and embeddings, working documents) are defined in `app/contract/README.md` §3.1 and placed in the security architecture §2.1.
+- **At rest:** BitLocker on the data volume and encrypted backup media (security architecture §8.3).
+- **Vault:** content-addressed on NTFS, `D:\Mimamsa\vault\sha256\ab\<hash>`; files set read-only and ACL'd so worker accounts can read, only the import service can create, nobody can modify. Re-hash on read for cited originals.
+- **Derivatives:** `D:\Mimamsa\derived\<sha256>\<pipeline_version>\`; disposable.
+- **Backups:** scheduled `pg_dump`/`pg_basebackup` plus robocopy or restic (BSD) of vault and local uploads to rotated offline media; Windows Server Backup or VSS snapshots optional. Restore drill is part of acceptance.
 
-- **Local accounts:** Django auth with Argon2 password hashing, lockout, session expiry, and optional TOTP second factor (works offline; for example django-otp, verify licence).
-- **LDAP/AD (optional, D-05):** django-auth-ldap (BSD) binds against the LAN directory. One AD group maps to Admin; every other admitted user is User. There are no further roles.
-- **Enforcement:**
-  - Every corpus-mutation and staging endpoint carries a server-side Admin check. Tests call the API directly as User.
-  - Working-session objects carry an owner ID checked on every access, including downloads and job results.
-- **Not built:** a Legal Reviewer function. It is a blocking open decision and fail-closed.
-
-### 12.5 Snapshot update mechanism (HF → offline)
-
-```
-ONLINE BUILD SIDE                                  AIR-GAPPED LAN
-HF dataset @ pinned revision ─┐
-Track A IC-01 artefacts @ git ─┼─ build_release --check ─► release-YYYYMMDD-<hfrev>/
-model bundle (hash) ──────────┤                             data/ (PDFs, text, meta, sections,
-container images (hash) ──────┘                                    passages, embeddings, edges)
-                                                            manifest.csv, schema_version
-                                                            CHANGES.json, RELEASE.json
-                                                            SHA256SUMS, SHA256SUMS.sig
-                                     removable media ─────► importer:
-                                                              1 verify signature (pinned public key)
-                                                              2 sha256sum -c (every file)
-                                                              3 schema compatibility check
-                                                              4 load into NEW release generation
-                                                              5 build/refresh indexes; smoke queries
-                                                              6 atomic switch; keep N-1 for rollback
-                                                              7 reconcile local Admin uploads (§9.1)
-                                                              8 CHANGES.json → impact triggers
-```
-
-- **Signing.** Use a small, auditable tool such as minisign (ISC) or OpenSSL/GPG detached signatures, verified against a public key pinned at install. Key custody is owner decision D-05. A checksum alone proves integrity against corruption, not origin; the signature adds origin.
-- **Eligibility filter at build.** The FOUO RAF 2000 copy and any access-marked or unsuitable item are excluded from app bundles by rule, whatever the HF dataset holds (ADR-0002 decision 7).
-- **Incremental updates.** CHANGES.json lists the delta. The importer still verifies the *whole* bundle manifest. Deltas can ship only changed files plus a full manifest **[PoC P5]**.
-
-### 12.6 Document storage and backup
-
-- **Originals:** an immutable, content-addressed filesystem vault (`vault/sha256/ab/<hash>`). Workers mount it read-only, and every read can be re-verified.
-- **Derivatives:** page images, OCR JSON and text-layer PDFs, under `derived/<sha256>/<pipeline_version>/`. They are disposable and rebuildable.
-- **Backups:** PostgreSQL via pgBackRest or scheduled `pg_dump`; vault and local uploads via restic or rsync to rotated offline media. A restore drill is part of the B10 acceptance.
-- **Object stores:** avoid them unless multi-node. MinIO's licence (AGPL) and community-edition changes make it a poor default; verify alternatives if ever needed.
-
-## 13. Licensing summary (verify at selection, PoC P7)
+## 13. Licensing summary (verify at selection, P7)
 
 | Component | Licence (as understood) | Concern |
 | --- | --- | --- |
+| .NET / ASP.NET Core runtime and libraries | MIT | None |
+| Django, django-auth-ldap, ldap3 | BSD / BSD / LGPL-3.0 (ldap3, verify) | LGPL needs a note if ldap3 used |
 | PostgreSQL, pgvector | PostgreSQL licence | None |
-| Django, django-auth-ldap | BSD | None |
-| PDF.js, React, Cytoscape.js, Vite | Apache 2.0 / MIT | None |
-| Tesseract, PaddleOCR, ONNX Runtime | Apache 2.0 / MIT | None |
-| **PyMuPDF** (used across the existing pipeline) | **AGPL-3.0 or commercial (Artifex)** | Server-side use over a network raises AGPL obligations for the combined work. For an internal deployment this may be acceptable, but **owner decision D-02**. Permissive fallbacks: pypdfium2 (Apache/BSD), pdfminer.six and pdfplumber (MIT), both already pinned |
-| Ghostscript (if pulled in by OCRmyPDF PDF/A) | AGPL or commercial | Avoid, or decide under D-02 |
-| Neo4j Community | GPLv3 (Enterprise commercial) | Only if ever adopted |
-| Meilisearch, Memgraph, some Postgres BM25 extensions | Mixed; some source-available or AGPL | Check before any adoption |
-| Redis | Licence changed in 2024 (verify current) | Use Valkey if a cache is ever needed |
-| Docker Desktop | Subscription terms for larger organisations | Use Docker Engine or Podman on Linux |
-| Embedding, reranker and LLM weights | Per model card (MIT, Apache 2.0, community licences) | Record each model's licence in the model bundle |
+| PDF.js, React, Cytoscape.js, Vite | Apache-2.0 / MIT | None |
+| Tesseract, PaddleOCR, docTR, ONNX Runtime | Apache-2.0 / MIT | None |
+| pypdfium2, pdfminer.six, pdfplumber | Apache-2.0 or BSD / MIT / MIT | None |
+| **PyMuPDF** | **AGPL-3.0 or commercial** | Keep out of the app path; keep in offline audit tooling only if D-02 accepts |
+| Ghostscript | AGPL or commercial | Avoid |
+| pywin32 | PSF | None |
+| WiX Toolset | MS-RL (verify current) | Build-time only; check obligations |
+| cryptography (Python), libsodium/minisign | Apache-2.0/BSD; ISC | None |
+| SQL Server Express/Standard | Proprietary | Only if chosen |
+| Model weights | Per model card | Record per model in the bundle |
 
-## 14. Security posture (baseline for the first deliverable)
+## 14. Security posture
 
-- **Network:**
-  - no egress from any container;
-  - inter-service network internal only;
-  - the proxy is the only LAN-exposed port;
-  - TLS with an internal CA.
-- **Parsing:** PDF, DOCX and image parsing and OCR run in the worker container as a non-root user, with no network, a read-only vault, CPU, memory and time limits, and a temporary scratch directory wiped per job. Upload checks: size, magic-byte type and page-count limits.
-- **Integrity:** sha256 on write and on read for cited originals; signed release bundles.
-- **Audit:** metadata-only, append-only event log of logins and Admin actions. Working-document content is never logged.
-- **Supply chain:**
-  - hash-locked Python and npm dependencies;
-  - SBOM per image;
-  - vulnerability scan online before transfer;
-  - a pinned base image updated each release.
-- **Later (with an LLM):** retrieved text passed as quoted data, never as instructions; no tool access that mutates state; output filters for the banner and labelling.
+Moved to [SECURITY_AND_DEPLOYMENT_ARCHITECTURE.md](../architecture/SECURITY_AND_DEPLOYMENT_ARCHITECTURE.md): service identities, NTFS ACLs, firewall, parser isolation, local TLS, sessions/CSRF, server-side authorisation, signing-key custody, safe parsing, threat tests, logging without sensitive content, zero runtime internet dependency, signed update and restore.
 
 ## 15. Risks and exit paths
 
 | Risk | Signal | Exit path |
 | --- | --- | --- |
-| PostgreSQL FTS ranking is too weak | P1: BM25 gain ≥5 points recall@20 | Tantivy derived index with a generation check; or an approved BM25 extension |
-| pgvector filtered-search latency or recall at 20 GB | P1 at projected scale | Qdrant; re-index from the embedding table |
-| Embedding quality on legal vocabulary | P2: low recall on section and term queries | Hybrid weighting toward lexical; reranker; later fine-tune on separate labelled pairs |
-| OCR quality on degraded scans | P4 | PaddleOCR second pass; human review list |
-| Windows-only estate | D-01 | Hyper-V Linux VM (P5); native installers last |
-| AGPL concerns | P7 / D-02 | Replace PyMuPDF in the app path with pypdfium2/pdfminer; keep PyMuPDF only in offline audit tooling if accepted there |
-| Django coupling | Domain code leaking into views and models | `mimamsa_core` boundary enforced by import-linter rules in CI |
-| Queue library immaturity | P6 | `SKIP LOCKED` table; Celery + Valkey |
-| Small team cannot run many services | Service count creeping above about 5 | One-database principle; any new service needs an ADR with a measured need |
+| Python web serving on Windows is fragile (if Django) | P1 recovery or latency failures | ASP.NET Core host with Python workers |
+| C# capacity absent in the team (if ASP.NET Core) | Owner answer to Q-3 | Django on Windows if P1 passes |
+| pgvector cannot be built reproducibly for the Windows PostgreSQL major | P2/P6 | Qdrant Windows binary with a generation check; or vectors in a worker-owned index |
+| PostgreSQL FTS ranking too weak | P2: BM25 gain ≥5 points recall@20 | BM25 derived index with generation check |
+| OCR second engine fragile on Windows | P4/P6 | Tesseract only, with review list |
+| Installer complexity | P6 failures | Scripted PowerShell installer with signed payloads |
+| AGPL in the app path | P7 | pypdfium2/pdfminer in the app path |
+| Service count creeping above ~6 | Design review | One-database principle; any new service needs an ADR with a measured need |
 
-## 16. Proofs of concept (Cycle 13, B0)
+## 16. Proofs of concept (B-PoC owns the evidence)
 
-| PoC | Question | Method | Go criterion (proposed) |
-| --- | --- | --- | --- |
-| P1 Retrieval | Is PostgreSQL FTS + pgvector hybrid good enough? | Benchmark: fresh dev queries plus the held-out 50 golden questions; double-coded relevance; compare ts_rank_cd, Tantivy BM25, vector, and hybrids (RRF) | Hybrid recall@20 on held-out ≥ best single method. FTS within 5 points of BM25, or adopt Tantivy. p95 < 1 s at 10 concurrent queries on reference hardware |
-| P2 Models | Which embedding and reranker models? | Shortlist in §9; ONNX on CPU | Best recall/latency trade-off; bulk embedding of the full corpus ≤ one overnight run; query embedding < 100 ms |
-| P3 PDF anchors | Can we open at page and highlight reliably? | 100 hits, native and scanned | Page correct ≥98%; native highlight ≥90%; scanned-overlay feasibility shown |
-| P4 OCR | Is a second engine worth it? | Low-confidence pages plus a random scanned sample; small hand transcription | Material word-accuracy gain at acceptable CPU cost |
-| P5 Air-gapped install/update | Can a clean, network-disabled VM install, update and roll back from bundles? | Linux VM; Hyper-V Linux VM if D-01 says Windows | All B10 acceptance steps pass with networking off |
-| P6 Job queue | Does a Postgres-backed queue handle bulk import and retries? | Import 16k files with injected failures and a kill/restart | No lost or duplicated jobs; resumable |
-| P7 Licences | Is the dependency tree acceptable? | SBOM + licence scan + manual review of flagged items | No unresolved copyleft item without an owner decision |
+Placeholders keyed to the directive's **P1–P9** (exact definitions). B0 has measured nothing here.
 
-## 17. Phased build order
+| PoC | Question (directive) | Go criterion (proposed by B0) | Evidence | Status |
+| --- | --- | --- | --- | --- |
+| P1 Windows hosting | ASP.NET Core vs Django under native Windows hosting: install, service lifecycle, concurrency, database integration, process recovery | Both hosting modes install and recover unattended; metadata p95 < 300 ms at 25 users | `app/poc/p1_hosting/` | PENDING |
+| P2 Search and retrieval | PostgreSQL FTS, BM25-class engines, vector and hybrid: Recall@K, Precision@K, MRR, nDCG, exact citation retrieval, abbreviation handling, latency, concurrency | Search p95 < 1 s at 10 concurrent queries on reference hardware **without sacrificing accuracy**; hybrid Recall@20 ≥ best single method; FTS within 5 pts of BM25 or adopt BM25; sized for ~20 GB | `app/poc/p2_search/` | PENDING |
+| P3 Local embeddings | BGE, E5, Arctic and others: quality, CPU latency, memory, throughput, licence | Query < 100 ms; full corpus overnight; permissive licence | `app/poc/p3_embeddings/` | PENDING |
+| P4 Document processing and PDF navigation | Native, scanned, garbled and bilingual PDFs; page coordinates; highlighting; OCR bounding boxes; large documents; permissive alternatives to PyMuPDF (pypdfium2, pdfminer.six, pdfplumber) | Page ≥ 98%; native highlight ≥ 90%; scanned overlay shown; a permissive extractor meets the text-quality bar | `app/poc/p4_pdf/` | PENDING |
+| P5 Background processing | Durable queues, idempotency, retries, failure recovery, termination and restart, resumability, progress, resource limits, isolation of untrusted parsing | No lost or duplicated jobs over a 16k import with kills; limits enforced; parser crash contained | `app/poc/p5_jobs/` | PENDING |
+| P6 Offline Windows installation | Clean Windows machine, no internet; packages runtimes, pgvector, Python libraries, frontend assets, OCR and embedding models; reproducible | Install succeeds offline; rebuild reproduces identical hashes | `app/poc/p6_installer/` | PENDING |
+| P7 Security and licence review | Dependency inventory, SBOM, licences from actual versions and model artefacts, parser isolation, vulnerabilities | No unresolved copyleft without D-02; no open high/critical vulnerability without mitigation; threat tests (security architecture §9) pass | `app/poc/p7_sbom/` | PENDING |
+| P8 Offline update and restoration | Signed snapshot, checksums, DB and document updates, atomic activation, rollback, backup, full restore | Tampered bundle rejected unchanged; N→N+1, rollback and full restore pass offline | `app/poc/p8_update/` | PENDING |
+| P9 UI/UX functional prototype | Real research workflows on actual data: rendering, efficiency, hierarchy, responsiveness, readability, failure states | `app/design` walkthrough (10 tasks) passes at 1366×768, 1920×1080, 2560×1440 and tablet | `app/poc/p9_ui/` | PENDING |
 
-1. **Foundation (GB1 → M-B1, the minimal first deliverable):**
-   - Compose stack, PostgreSQL schema with separate status axes, content-addressed vault;
-   - release importer with signature and checksum verification from a **pinned HF revision**;
-   - passage extraction and OCR flags;
-   - hybrid search;
-   - PDF.js at page with highlight;
-   - provenance panel;
-   - candidate banner;
-   - local Admin/User auth;
-   - **one Admin upload → stage → publish → search → withdraw round trip**;
-   - backup and restore;
-   - network-denied test suite.
-2. **Research depth (M-B2):** judgment page with per-field status chips and labelled outcome candidates; Act and section viewer; graph exploration of IC-01 candidate edges; Document Studio working-session foundation (isolation, view, export; no rules); release N→N+1 update and rollback.
-3. **Hardening and operations:** LDAP/AD option, TOTP, audit review screens, restore drills, performance at simulated 20 GB, incremental bundles.
-4. **Later, each behind its own gate:** reranker tuning or fine-tuned embeddings; Legal Reviewer workspace (after the designation is confirmed); template-based drafting (after T2 approvals exist); local LLM drafting assistance (after the §10 gate).
+The B-PoC host is Linux (4 cores, 15 GB, no .NET, no Tesseract). P1, P5, P6 and P8 therefore need **a Windows host** for final evidence; Linux-host measurements may stand in for algorithmic questions (P2, P3, P4, P9) only, and must be labelled with the hardware actually used.
 
-**The minimal first deliverable** is exactly item 1. A Linux VM with no network installs from signed bundles. It imports the full corpus at a pinned HF revision, verifying every checksum. Any User can then search judgments and Acts and open the original PDF at the right page with the hit highlighted. Every page carries the candidate-data banner and a provenance trail back to the HF revision. Only an Admin can upload, publish and withdraw a document, and withdrawal removes it from search immediately.
+## 17. Milestones (after GB1)
 
-## 18. Open questions for the owner (cross-referenced to the plan's §11)
+Milestones as defined by the owner's directive. B0 is architecture plus the PoCs.
 
-- D-01: server OS and hardware, GPU or not. Planning baseline: 16 cores, 64 GB RAM, 1 TB SSD (vault, derivatives, database, two release generations, local backups); optional GPU sized later for the LLM.
-- D-02: licence posture, especially PyMuPDF (AGPL) in the server path.
-- D-05: local accounts vs LDAP/AD; custody of the release-signing key.
-- D-06: application code in this repository or a separate one.
-- D-10: whether the Prism OCR pipeline exists as an offline, licensable module.
+1. **B1 Minimum functional research prototype:** offline Windows install, local PostgreSQL, immutable vault, a **real corpus subset** imported through a signed contract-v1 bundle, FTS plus hybrid search where benchmarked (P2), excerpts, PDF.js viewer with page navigation and highlights, provenance panel, candidate banner, basic local Admin/User auth with server-side checks, and the professional research workspace (`app/design`).
+2. **B2 Full eligible corpus:** all eligible documents (restricted register applied), incremental ingestion, Admin staging, publication and withdrawal (withdrawal leak-proof across indexes and caches), release N→N+1, rollback, backup and full restore, sized for ~20 GB.
+3. **B3 Research depth:** judgment intelligence with per-field axes and labelled outcome candidates, statutory explorer, knowledge-graph exploration, research workspace depth (notes, sets, related items), Document Studio working sessions (no rules), commander presentation view, AD option, audit review, hardening.
+4. **Later, each behind its own gate:** commander assistant, legal-rule features, Legal Reviewer workspace, template drafting, local LLM.
+
+## 18. Open questions for the owner
+
+- **Q-1 / D-01:** confirm Windows Server edition and version, the volume layout, and the expected number of concurrent users.
+- **Q-2 / D-02:** licence posture for PyMuPDF (AGPL) and any LGPL/MS-RL build-time items.
+- **Q-3:** in-house skills for C# vs Python maintenance (affects K9 and the ASP.NET/Django choice).
+- **Q-4 / D-05:** local accounts vs AD; AD group names; custody of the release-signing key (owner) and a backup custodian.
+- **Q-5:** is IIS mandated by local policy, or is a Windows Service acceptable?
+- **Q-6:** Windows host for P1/P5/P6/P8 evidence (none is available to the agents).
+- **Q-7 / D-10:** Prism OCR availability.

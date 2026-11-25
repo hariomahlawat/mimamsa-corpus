@@ -1,0 +1,3 @@
+# Importer: contract requirements plus a permissive PDF page counter (PyMuPDF is AGPL and is not used).
+-r ../contract/requirements.txt
+pypdfium2==5.15.2           # Apache-2.0 OR BSD-3-Clause (PDFium: BSD-3-Clause)

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/v1/publication_record.schema.json",
+  "title": "Publication record (data layer 7: publication and access states)",
+  "description": "Append-only history of distribution decisions. In a release bundle these record upstream events (UPSTREAM_RELEASE, UPSTREAM_WITHDRAWAL, RESTRICTION). On site, activation of a release by the Admin creates RELEASE_ACTIVATION records and Admin actions create SITE_ADMIN records; that act, not the bundle, publishes (ADR-0002). Publication is never legal approval.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "record_kind", "publication_record_id", "subject", "action", "channel", "actor_role", "at", "reason"],
+  "properties": {
+    "contract_version": {"$ref": "common.schema.json#/$defs/contract_version"},
+    "record_kind": {"const": "publication_record"},
+    "publication_record_id": {"type": "string", "pattern": "^PB-[A-Za-z0-9._-]{3,80}$"},
+    "subject": {
+      "type": "object", "additionalProperties": false, "required": ["doc_id", "source_copy_sha256"],
+      "properties": {"doc_id": {"$ref": "common.schema.json#/$defs/doc_id"}, "source_copy_sha256": {"$ref": "common.schema.json#/$defs/sha256"}}
+    },
+    "action": {"enum": ["RELEASED_FOR_PUBLICATION", "PUBLISHED", "WITHDRAWN", "REPLACED", "EXCLUDED_RESTRICTED"]},
+    "channel": {"enum": ["UPSTREAM_RELEASE", "UPSTREAM_WITHDRAWAL", "RESTRICTION", "RELEASE_ACTIVATION", "SITE_ADMIN"]},
+    "actor_role": {"enum": ["RELEASE_BUILDER", "OWNER", "ADMIN"]},
+    "at": {"type": "string", "format": "date-time"},
+    "reason": {"type": "string", "minLength": 3, "maxLength": 1000},
+    "eligibility_basis": {"type": ["string", "null"], "maxLength": 1000}
+  }
+}

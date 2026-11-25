@@ -1,0 +1,111 @@
+{
+ "contract_version": "1.0.0",
+ "record_kind": "document",
+ "doc_id": "example-synthetic-judgment-0001",
+ "doc_type": "judgment",
+ "source_copy": {
+  "sha256": "cb666b27d8c5aedf0f6afb9cec2ec985adf21204d47b8845afe0f8215b59898d",
+  "bytes": 1234,
+  "mime_type": "application/pdf",
+  "vault_path": "vault/sha256/cb/cb666b27d8c5aedf0f6afb9cec2ec985adf21204d47b8845afe0f8215b59898d",
+  "page_count": 2,
+  "completeness": "COMPLETE"
+ },
+ "alternate_copy_sha256": [],
+ "parent_doc_id": null,
+ "title": "SYNTHETIC EXAMPLE - not a real source",
+ "number": "EXAMPLE-0001",
+ "issuing_authority": null,
+ "issue_date": null,
+ "effective_date": null,
+ "language": "en",
+ "corpus_status": "unknown",
+ "corpus_status_note": null,
+ "corpus_status_as_of": null,
+ "text_method": "pdf_text",
+ "ocr_confidence": null,
+ "judicial": {
+  "court": null,
+  "bench": null,
+  "case_numbers": [
+   "EXAMPLE-0001"
+  ],
+  "neutral_citation": null,
+  "reported_citations": [],
+  "parties": {
+   "petitioner": null,
+   "respondent": null
+  },
+  "judges": [],
+  "judgment_identity_id": null
+ },
+ "provenance": {
+  "acquisition_channel": "CRAWLER",
+  "source_url": "https://example.invalid/synthetic.pdf",
+  "retrieved_at": "2026-11-21T00:00:00Z",
+  "source_system": "example",
+  "source_record_id": null,
+  "original_filename": null,
+  "aliases": [],
+  "hf": {
+   "repo": "example-owner/example-dataset",
+   "revision": "d1e75aca758154ee2147853c02ec6716f4a7ea04",
+   "path": "data/raw/example/0000/cb666b27d8c5aedf0f6afb9cec2ec985adf21204d47b8845afe0f8215b59898d.pdf"
+  },
+  "git": null,
+  "acquisition_record_ref": null,
+  "admin_submission_id": null
+ },
+ "status_axes": {
+  "source_integrity": {
+   "value": "BYTE_VERIFIED",
+   "basis": "synthetic example: re-hash at pinned revision",
+   "recorded_at": "2026-11-25T00:00:00Z",
+   "evidence_ref": "legal_knowledge/audit_work/EXAMPLE/hf_verification.csv"
+  },
+  "source_authenticity": {
+   "value": "UNKNOWN",
+   "basis": "synthetic example: no documentary check",
+   "policy_v1": {
+    "document_authority": "UNKNOWN",
+    "carrier_provenance": "GOVERNMENT_HOSTED_COPY",
+    "copy_fidelity": "HASH_ONLY",
+    "amendment_chain_status": "NOT_CHECKED",
+    "instrument_identity": null,
+    "authority_rationale": null
+   }
+  },
+  "evidence_fidelity": {
+   "value": "AUTOMATED_CANDIDATE_NOT_VERIFIED",
+   "basis": "automated extraction, not checked"
+  },
+  "legal_applicability": {
+   "value": "NOT_ESTABLISHED",
+   "basis": "no temporal review in Cycle 13"
+  },
+  "legal_approval": {
+   "value": "T0_RESEARCH_ONLY",
+   "basis": "AUTH-LEDGER version 0; no Legal Reviewer appointed"
+  },
+  "publication": {
+   "value": "PUBLISHED",
+   "basis": "synthetic example"
+  },
+  "dependency_freshness": {
+   "value": "NOT_EVALUATED",
+   "basis": "no dependants"
+  }
+ },
+ "restriction": {
+  "access_marking": null,
+  "marking_page": null,
+  "eligibility": "ELIGIBLE_ALL_USERS",
+  "restriction_id": null,
+  "decided_by": null,
+  "basis": null
+ },
+ "field_origin": {
+  "title": "rule",
+  "number": "rule"
+ }
+}
