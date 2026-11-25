@@ -8,7 +8,7 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-import pytest
+import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 PKG = ROOT / "legal_knowledge" / "audit_work" / "C13-A4-STATUTORY"
@@ -21,12 +21,12 @@ def rows(name):
     return list(csv.DictReader(open(OUT / name, encoding="utf-8")))
 
 
-def test_frozen_originals_unchanged():
+def _case_frozen_originals_unchanged():
     for rel, pin in C.FROZEN.items():
         assert hashlib.sha256((ROOT / rel).read_bytes()).hexdigest() == pin
 
 
-def test_before_after_matrix():
+def _case_before_after_matrix():
     m = rows("EVIDENCE_MATRIX_C13.csv")
     assert len(m) == 983
     assert Counter(r["baseline_state"] for r in m) == Counter({"PARTIAL_MATCH": 652, "MISSING_EVIDENCE": 289, "EXACT_ANCHOR": 42})
@@ -34,7 +34,7 @@ def test_before_after_matrix():
     assert Counter(r["c13_state_proposed"] for r in m) == Counter({"PARTIAL_MATCH": 585, "MISSING_EVIDENCE": 289, "EXACT_ANCHOR": 109})
 
 
-def test_only_partial_to_exact_moves_and_every_move_rests_on_image_checked_pages():
+def _case_only_partial_to_exact_moves_and_every_move_rests_on_image_checked_pages():
     m = rows("EVIDENCE_MATRIX_C13.csv")
     pe = {e["evidence_id"]: e for e in csv.DictReader(open(PKG / "inputs/page_evidence_c13.csv", encoding="utf-8"))}
     moved = [r for r in m if r["c13_state_proposed"] != r["c12f_state_proposed"]]
@@ -55,7 +55,7 @@ def test_only_partial_to_exact_moves_and_every_move_rests_on_image_checked_pages
                 assert r["c13_state_proposed"] == r["c12f_state_proposed"]
 
 
-def test_proposals_are_traceable_and_not_applied():
+def _case_proposals_are_traceable_and_not_applied():
     p = rows("EVIDENCE_PROPOSALS_C13.csv")
     assert len(p) == 10
     for r in p:
@@ -65,7 +65,7 @@ def test_proposals_are_traceable_and_not_applied():
         assert r["page_evidence_ids"] and r["render_png_sha256"]
 
 
-def test_page_evidence_rows_well_formed():
+def _case_page_evidence_rows_well_formed():
     pe = list(csv.DictReader(open(PKG / "inputs/page_evidence_c13.csv", encoding="utf-8")))
     assert len(pe) == 21
     for e in pe:
@@ -74,7 +74,7 @@ def test_page_evidence_rows_well_formed():
             assert int(e["printed_page"]) == int(e["pdf_page"]) + 290
 
 
-def test_adviser_packet_states_questions_not_conclusions():
+def _case_adviser_packet_states_questions_not_conclusions():
     a = rows("ADVISER_REVIEW_PACKET_A4.csv")
     cats = Counter(r["category"] for r in a)
     assert cats["PROMOTION_C12F"] == 57 and cats["PROMOTION_C13"] == 10
@@ -87,7 +87,7 @@ def test_adviser_packet_states_questions_not_conclusions():
         assert s in subjects or s in " ".join(r["exact_question"] + r["cross_refs"] for r in a), s
 
 
-def test_acquisition_requests_cover_named_gaps_and_are_not_executed():
+def _case_acquisition_requests_cover_named_gaps_and_are_not_executed():
     q = rows("ACQUISITION_REQUESTS_A4.csv")
     text = " ".join(r["target_instrument"] for r in q)
     for s in ("S.R.O. 258", "Military Secretary", "S.O. 14(E)", "S.O. 848(E)", "S.R.O. 120", "Tribunals Reforms Act 2026"):
@@ -96,24 +96,82 @@ def test_acquisition_requests_cover_named_gaps_and_are_not_executed():
     assert "aftjabalpur" not in json.dumps(q).replace("never aftjabalpur.in", "")
 
 
-def test_no_restricted_material_in_any_package_file():
+def _case_no_restricted_material_in_any_package_file():
     for p in PKG.rglob("*"):
         if p.is_file() and p.suffix in (".csv", ".json", ".jsonl", ".md") and "reviews" not in p.parts:  # review records quote the denylist
             C.assert_no_restricted(p.name, p.read_bytes())
 
 
 def _held():
-    return (C.HF_ANCHOR / "legal_knowledge/preservation/c5_working_store").exists()
+    import importlib.util
+    return (C.HF_ANCHOR / "legal_knowledge/preservation/c5_working_store").exists() and importlib.util.find_spec("pymupdf") is not None
 
 
-@pytest.mark.skipif(not _held(), reason="HF preservation copies not downloaded locally (see README)")
-@pytest.mark.parametrize("tool", ["build_evidence_c13.py", "build_versions_c13.py", "build_packets_c13.py", "validate_versions_c13.py", "sha256sums_c13.py"])
-def test_tools_check(tool):
+def _case_tools_check(tool):
     r = subprocess.run([sys.executable, str(PKG / "tools" / tool), "--check"], capture_output=True, text=True, cwd=str(PKG / "tools"), env=dict(os.environ))
     assert r.returncode == 0, r.stdout + r.stderr
 
 
-@pytest.mark.skipif(not _held(), reason="HF preservation copies not downloaded locally (see README)")
-def test_page_renders_reproduce():
+def _case_page_renders_reproduce():
     r = subprocess.run([sys.executable, str(PKG / "tools/render_pages_c13.py"), "--verify"], capture_output=True, text=True, cwd=str(PKG / "tools"))
     assert r.returncode == 0, r.stdout + r.stderr
+
+
+class StatutoryEvidenceC13(unittest.TestCase):
+    """unittest form (CI runs `python -m unittest discover`); one test method per case so the count is unchanged."""
+    def test_frozen_originals_unchanged(self):
+        _case_frozen_originals_unchanged()
+
+    def test_before_after_matrix(self):
+        _case_before_after_matrix()
+
+    def test_only_partial_to_exact_moves_and_every_move_rests_on_image_checked_pages(self):
+        _case_only_partial_to_exact_moves_and_every_move_rests_on_image_checked_pages()
+
+    def test_proposals_are_traceable_and_not_applied(self):
+        _case_proposals_are_traceable_and_not_applied()
+
+    def test_page_evidence_rows_well_formed(self):
+        _case_page_evidence_rows_well_formed()
+
+    def test_adviser_packet_states_questions_not_conclusions(self):
+        _case_adviser_packet_states_questions_not_conclusions()
+
+    def test_acquisition_requests_cover_named_gaps_and_are_not_executed(self):
+        _case_acquisition_requests_cover_named_gaps_and_are_not_executed()
+
+    def test_no_restricted_material_in_any_package_file(self):
+        _case_no_restricted_material_in_any_package_file()
+
+    @unittest.skipIf(not _held(), 'HF preservation copies not downloaded locally (see README)')
+    def test_tools_check_00_build_evidence_c13_py(self):
+        with self.subTest(case=('build_evidence_c13.py',)):
+            _case_tools_check('build_evidence_c13.py')
+
+    @unittest.skipIf(not _held(), 'HF preservation copies not downloaded locally (see README)')
+    def test_tools_check_01_build_versions_c13_py(self):
+        with self.subTest(case=('build_versions_c13.py',)):
+            _case_tools_check('build_versions_c13.py')
+
+    @unittest.skipIf(not _held(), 'HF preservation copies not downloaded locally (see README)')
+    def test_tools_check_02_build_packets_c13_py(self):
+        with self.subTest(case=('build_packets_c13.py',)):
+            _case_tools_check('build_packets_c13.py')
+
+    @unittest.skipIf(not _held(), 'HF preservation copies not downloaded locally (see README)')
+    def test_tools_check_03_validate_versions_c13_py(self):
+        with self.subTest(case=('validate_versions_c13.py',)):
+            _case_tools_check('validate_versions_c13.py')
+
+    @unittest.skipIf(not _held(), 'HF preservation copies not downloaded locally (see README)')
+    def test_tools_check_04_sha256sums_c13_py(self):
+        with self.subTest(case=('sha256sums_c13.py',)):
+            _case_tools_check('sha256sums_c13.py')
+
+    @unittest.skipIf(not _held(), 'HF preservation copies not downloaded locally (see README)')
+    def test_page_renders_reproduce(self):
+        _case_page_renders_reproduce()
+
+
+if __name__ == "__main__":
+    unittest.main()

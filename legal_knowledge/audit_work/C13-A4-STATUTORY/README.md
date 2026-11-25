@@ -141,7 +141,7 @@ $VENV build_packets_c13.py  [--check]     # acquisition requests + adviser packe
 $VENV validate_versions_c13.py [--at AR1954 r.22 2000-01-01]
 $VENV render_pages_c13.py --verify        # re-render the 21 page rows
 $VENV sha256sums_c13.py --check
-$VENV -m pytest -q ../../../../tests/test_legal_audit_c13_statutory_*.py
+cd ../../../.. && $VENV -I -B -m unittest discover -v -s tests -p "test_legal_audit_c13_statutory_*.py"   # 54 tests (unittest; pytest not required)
 ```
 
 Held copies: the 48 HF preservation copies are expected under `$C13A4_HF_ANCHOR` (default
