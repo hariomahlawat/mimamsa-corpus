@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "purpose": "Single source of truth for access-restricted material. Every pipeline, index, embedding job, graph build, release bundle and external call MUST exclude these items. Owner directive, Cycle 13 section 31.",
+  "items": [
+    {
+      "restriction_id": "RM-001",
+      "marking": "For Official Use Only (printed on page 1)",
+      "title": "Regulations for the Air Force, Reprinted Edition 2000",
+      "doc_id": "regs-regulations-for-the-air-force-reprinted-edition-2000",
+      "source_sha256": "4284820e5bc2fb7f52ae9fbe8a61650f1579e9b6389ba206a916a69fed016b14",
+      "hosted_paths": [
+        "data/raw/indiacode/0000/4284820e5bc2fb7f52ae9fbe8a61650f1579e9b6389ba206a916a69fed016b14.pdf",
+        "data/meta/regs-regulations-for-the-air-force-reprinted-edition-2000.json",
+        "data/text/regs-regulations-for-the-air-force-reprinted-edition-2000.txt"
+      ],
+      "derived_sha256": [
+        "212ac873869bf3298b8194f6ad8a1a994b990242a3dab5d0f927e3e4c4ce2cea",
+        "f26d3de7dfda70143b10b02dc664f13de342a74f0bee767387492363ac1421c5"
+      ],
+      "status": "ACCESS_RESTRICTED_PENDING_OWNER_DECISION",
+      "exclude_from": ["application_release_bundles", "research_publication", "search_indexes", "embeddings", "knowledge_graph_publication", "external_inference_services", "general_processing_packages", "forms_registry"],
+      "routine_operations_forbidden": ["copy", "redistribute", "delete"],
+      "decision_note": "legal_knowledge/audit_work/C13-GOV/DECISION_NOTE_RM-001_FOUO_RAF2000.md"
+    }
+  ]
+}

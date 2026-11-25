@@ -1,0 +1,4 @@
+label,hf_commit,parent_commit,files_added,bytes_added,message
+C13-A1-OCR,23acf21b8ebc64693b0162eb979646b4e3a58a2d,9e3cf9868a5d553cd6218ed5ac51c383560bbf0b,27,180990,C13 A1: OCR text and overlay metadata for 12 Punjab and Haryana writs with unusable text layers
+C13-A1-CANDIDATES,fafd4749628c04a71f6750160c7748c725a1b57d,23acf21b8ebc64693b0162eb979646b4e3a58a2d,42,228354,C13 A1: ingestion candidates for 12 deleted-then-preserved P&H judgments classified RELEVANT; revision r1 of the 12 OCR overlay records
+C13-A1-OVERLAYS-R2,f4e6ba443ec9c0b89b2c5d21d0b5cda38f55d2dc,fafd4749628c04a71f6750160c7748c725a1b57d,15,59340,C13 A1: revision r2 of the 12 OCR overlay records (title and OCR quality passed; review A1-11)
