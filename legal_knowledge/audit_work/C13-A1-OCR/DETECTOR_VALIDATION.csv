@@ -8,23 +8,23 @@ L006,4b665b5a31e5db818bfd9a54afa3d4392e2cfbd03ea2b80a259bfe2756edeea8,4,other_te
 L007,bbffe803baeefe9f0abcd6e55de3091371bbb3ed6d05695c2b2bbbfd8efb3e7f,13,image_only,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,image_only,YES
 L008,ab2f0f267f52f915c87445e39daeb66deb0590852516270fb27480891c4e6f5f,13,image_only,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,image_only,YES
 L009,628b5147da5c1be244f0ce180f07f96af954fe824c2a872ac8b9a41b2f53d61d,256,unflagged,USABLE,USABLE,,,NO
-L010,f841d3fb6761bd279293822254d0c66000262379a1c9f381a2a507e554b7321c,16,blank,NO_CONTENT,UNUSABLE_NEEDS_OCR,relabelled after individual re-render: the page renders blank (dark-pixel share 0.0) and the earlier Tesseract OCR text of this page is empty; the first label came from a faulty contact sheet. Page sits in a damaged PDF ('non-page object in page tree').,blank,NO
+L010,f841d3fb6761bd279293822254d0c66000262379a1c9f381a2a507e554b7321c,16,blank,MISSING_SOURCE_PAGE,UNUSABLE_NEEDS_OCR,"relabelled from UNUSABLE_NEEDS_OCR: the page is past the cut of a truncated download (file lacks %%EOF; MuPDF rebuilds phantom pages, Poppler cannot read the file). Renders blank, earlier OCR text empty. The source page had content but its bytes are missing, so there is nothing to OCR (review A1-05).",missing_page,NO
 L011,091e1678f03df8447ffba7259087060dd58ca3022c6db4362076a32281247657,3,few_chars,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,image_only,YES
 L012,82e3bf618465cd6a3a9b735fbd7374aa626bd212a713ab096c515986676b1b13,5,unflagged,USABLE,USABLE,,,NO
 L013,1b1fb716461ea7a7093c551f9f86b0b86b6cb3a671262ba24b3def06528e59e4,11,image_only,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,image_only,YES
 L014,bbffe803baeefe9f0abcd6e55de3091371bbb3ed6d05695c2b2bbbfd8efb3e7f,3,image_only,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,image_only,YES
 L015,90cb9635a41396dd910308ccdec586256ac43045c9c96dae9af3cb05b26456a2,3,unflagged,USABLE,USABLE,,,NO
-L016,38bd54ea27ee36969e80a3ca0661a68cbeb1e7fdec46eb6cdef31e27519cb74e,131,blank,NO_CONTENT,UNUSABLE_NEEDS_OCR,relabelled after individual re-render: the page renders blank (dark-pixel share 0.0) and the earlier Tesseract OCR text of this page is empty; the first label came from a faulty contact sheet. Page sits in a damaged PDF ('non-page object in page tree').,blank,NO
+L016,38bd54ea27ee36969e80a3ca0661a68cbeb1e7fdec46eb6cdef31e27519cb74e,131,blank,MISSING_SOURCE_PAGE,UNUSABLE_NEEDS_OCR,"relabelled from UNUSABLE_NEEDS_OCR: the page is past the cut of a truncated download (file lacks %%EOF; MuPDF rebuilds phantom pages, Poppler cannot read the file). Renders blank, earlier OCR text empty. The source page had content but its bytes are missing, so there is nothing to OCR (review A1-05).",missing_page,NO
 L017,928d53398c7716f84ff7c1ee867f469152bcdf79847511bab62a5e6e8f9f6698,84,few_chars,NO_CONTENT,NO_CONTENT,,image_only,YES
 L018,d6eb9f322f39afb3edf6f6234c21170452b81aeda9d2ff46f0faba5006c74478,8,few_chars,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,image_only,YES
-L019,928d53398c7716f84ff7c1ee867f469152bcdf79847511bab62a5e6e8f9f6698,151,blank,NO_CONTENT,UNUSABLE_NEEDS_OCR,relabelled after individual re-render: the page renders blank (dark-pixel share 0.0) and the earlier Tesseract OCR text of this page is empty; the first label came from a faulty contact sheet. Page sits in a damaged PDF ('non-page object in page tree').,blank,NO
+L019,928d53398c7716f84ff7c1ee867f469152bcdf79847511bab62a5e6e8f9f6698,151,blank,MISSING_SOURCE_PAGE,UNUSABLE_NEEDS_OCR,"relabelled from UNUSABLE_NEEDS_OCR: the page is past the cut of a truncated download (file lacks %%EOF; MuPDF rebuilds phantom pages, Poppler cannot read the file). Renders blank, earlier OCR text empty. The source page had content but its bytes are missing, so there is nothing to OCR (review A1-05).",missing_page,NO
 L020,d930161cd81bb4fb7bc525113a50258ea3bec0ed69b92e6f9afc7af0a4360440,3,other_text_flags,USABLE,USABLE,,low_letter_share;low_dictionary,YES
 L021,9c6901bd6c5792a46e19e4986ee7e0d0547b9d9791050171368d90d6491666be,36,unflagged,USABLE,USABLE,,,NO
 L022,9f299cc2467f2a6ab49d508813fae3da2a79e0bfe39c457cfae27b00a75f55fd,34,other_text_flags,USABLE,USABLE,,low_dictionary,YES
 L023,38bd54ea27ee36969e80a3ca0661a68cbeb1e7fdec46eb6cdef31e27519cb74e,53,unflagged,USABLE,USABLE,,,NO
 L024,bbffe803baeefe9f0abcd6e55de3091371bbb3ed6d05695c2b2bbbfd8efb3e7f,10,other_text_flags,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,vertical_order,YES
-L025,2137dd14d58a2c7269e2a36e6d0f00683150e2441d8903c833ca27d7c2cfc9ab,8,blank,NO_CONTENT,NO_CONTENT,,blank,NO
-L026,b1aa2d028bf8282d81fd8262c0b73e6a356f12932f36970641016be42ebf4c6e,24,blank,NO_CONTENT,UNUSABLE_NEEDS_OCR,relabelled after individual re-render: the page renders blank (dark-pixel share 0.0) and the earlier Tesseract OCR text of this page is empty; the first label came from a faulty contact sheet. Page sits in a damaged PDF ('non-page object in page tree').,blank,NO
+L025,2137dd14d58a2c7269e2a36e6d0f00683150e2441d8903c833ca27d7c2cfc9ab,8,blank,NO_CONTENT,NO_CONTENT,,missing_page,NO
+L026,b1aa2d028bf8282d81fd8262c0b73e6a356f12932f36970641016be42ebf4c6e,24,blank,MISSING_SOURCE_PAGE,UNUSABLE_NEEDS_OCR,"relabelled from UNUSABLE_NEEDS_OCR: the page is past the cut of a truncated download (file lacks %%EOF; MuPDF rebuilds phantom pages, Poppler cannot read the file). Renders blank, earlier OCR text empty. The source page had content but its bytes are missing, so there is nothing to OCR (review A1-05).",missing_page,NO
 L027,1ad88e33efa40b86c1ea41856c8b23176ee365d46b2a0e8b52de772711e10426,2,other_text_flags,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,vertical_order,YES
 L028,f384b3b1a24166f462592ef4057fd8b59c2abd4e0f8efac781ebaff387f288db,4,unflagged,USABLE,USABLE,,,NO
 L029,cb1785cf0db679cf4d64a0bce2a3f64dc18748b1f1b0a0631d26c2c355d59fcd,11,control,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,control_chars;low_letter_share,YES
@@ -38,11 +38,11 @@ L036,bb8cff90e72e977e819a1ee9e508c2d4af96b8dc318f70e0ace9d615d1ac3351,5,unflagge
 L037,1ad88e33efa40b86c1ea41856c8b23176ee365d46b2a0e8b52de772711e10426,17,image_only,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,image_only,YES
 L038,807aa0a251b105c5f2a3b04a657645e5934896947704dc43ef4853204da4e906,17,image_only,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,image_only,YES
 L039,628b5147da5c1be244f0ce180f07f96af954fe824c2a872ac8b9a41b2f53d61d,149,unflagged,USABLE,USABLE,,,NO
-L040,ed1344e0d571e662cf43379a3ef3297832c388fbfe685360c7b9993ef59d368c,26,blank,NO_CONTENT,NO_CONTENT,,blank,NO
+L040,ed1344e0d571e662cf43379a3ef3297832c388fbfe685360c7b9993ef59d368c,26,blank,NO_CONTENT,NO_CONTENT,,missing_page,NO
 L041,628b5147da5c1be244f0ce180f07f96af954fe824c2a872ac8b9a41b2f53d61d,88,unflagged,USABLE,USABLE,,,NO
 L042,dcdfac610ef1ed181b871645370ca84690aec91d9cc42d79905bac32994dbd02,5,control,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,control_chars;low_letter_share,YES
 L043,1ad88e33efa40b86c1ea41856c8b23176ee365d46b2a0e8b52de772711e10426,3,other_text_flags,USABLE,USABLE,,low_letter_share;low_dictionary,YES
-L044,928d53398c7716f84ff7c1ee867f469152bcdf79847511bab62a5e6e8f9f6698,104,blank,NO_CONTENT,NO_CONTENT,,blank,NO
+L044,928d53398c7716f84ff7c1ee867f469152bcdf79847511bab62a5e6e8f9f6698,104,blank,NO_CONTENT,NO_CONTENT,,missing_page,NO
 L045,dcdfac610ef1ed181b871645370ca84690aec91d9cc42d79905bac32994dbd02,1,control,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,control_chars;low_letter_share,YES
 L046,828ce65f1566375c15523dbe5dbc0f41a2811163870f8d0f21d8438d37252d6f,20,image_only,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,image_only,YES
 L047,ffd58f9db266168b390ce0da9435123cf33c58e8303f33cab1b834a2f97315b8,12,image_only,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,image_only,YES
@@ -68,7 +68,7 @@ L066,9c6901bd6c5792a46e19e4986ee7e0d0547b9d9791050171368d90d6491666be,60,unflagg
 L067,dcdfac610ef1ed181b871645370ca84690aec91d9cc42d79905bac32994dbd02,6,control,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,control_chars;low_letter_share,YES
 L068,38bd54ea27ee36969e80a3ca0661a68cbeb1e7fdec46eb6cdef31e27519cb74e,8,unflagged,USABLE,USABLE,,,NO
 L069,699863507b87648ca22de979bcc85efd094c9f650020847d8e82689c8a928007,22,image_only,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,image_only,YES
-L070,ed1344e0d571e662cf43379a3ef3297832c388fbfe685360c7b9993ef59d368c,10,blank,NO_CONTENT,UNUSABLE_NEEDS_OCR,relabelled after individual re-render: the page renders blank (dark-pixel share 0.0) and the earlier Tesseract OCR text of this page is empty; the first label came from a faulty contact sheet. Page sits in a damaged PDF ('non-page object in page tree').,blank,NO
+L070,ed1344e0d571e662cf43379a3ef3297832c388fbfe685360c7b9993ef59d368c,10,blank,MISSING_SOURCE_PAGE,UNUSABLE_NEEDS_OCR,"relabelled from UNUSABLE_NEEDS_OCR: the page is past the cut of a truncated download (file lacks %%EOF; MuPDF rebuilds phantom pages, Poppler cannot read the file). Renders blank, earlier OCR text empty. The source page had content but its bytes are missing, so there is nothing to OCR (review A1-05).",missing_page,NO
 L071,9960904c701ce9ef8a1b7b46b0e895a6a345f1ca2f59df1be10e3a142b14d7a9,5,control,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,control_chars;low_letter_share,YES
 L072,38bd54ea27ee36969e80a3ca0661a68cbeb1e7fdec46eb6cdef31e27519cb74e,19,unflagged,USABLE,USABLE,,,NO
 L073,38bd54ea27ee36969e80a3ca0661a68cbeb1e7fdec46eb6cdef31e27519cb74e,36,unflagged,USABLE,USABLE,,,NO
@@ -100,7 +100,7 @@ L098,412d63608f77c693f8742af720ba015bc4df361e8b2733246a373169c54b746d,1,image_on
 L099,e738d6e86b710c5204c87aac0557e37eb085bfd599fc38dce7a2890f572dea9d,10,unflagged,USABLE,USABLE,,,NO
 L100,dcdfac610ef1ed181b871645370ca84690aec91d9cc42d79905bac32994dbd02,10,control,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,control_chars;low_letter_share,YES
 L101,cb39739c7c2c55e5676c0fb2981a70a27f19e855654f61c40ec9dbd3d6d09789,1,control,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,control_chars;low_letter_share;vertical_order,YES
-L102,38bd54ea27ee36969e80a3ca0661a68cbeb1e7fdec46eb6cdef31e27519cb74e,158,blank,NO_CONTENT,UNUSABLE_NEEDS_OCR,relabelled after individual re-render: the page renders blank (dark-pixel share 0.0) and the earlier Tesseract OCR text of this page is empty; the first label came from a faulty contact sheet. Page sits in a damaged PDF ('non-page object in page tree').,blank,NO
+L102,38bd54ea27ee36969e80a3ca0661a68cbeb1e7fdec46eb6cdef31e27519cb74e,158,blank,MISSING_SOURCE_PAGE,UNUSABLE_NEEDS_OCR,"relabelled from UNUSABLE_NEEDS_OCR: the page is past the cut of a truncated download (file lacks %%EOF; MuPDF rebuilds phantom pages, Poppler cannot read the file). Renders blank, earlier OCR text empty. The source page had content but its bytes are missing, so there is nothing to OCR (review A1-05).",missing_page,NO
 L103,9c6901bd6c5792a46e19e4986ee7e0d0547b9d9791050171368d90d6491666be,79,unflagged,USABLE,USABLE,,,NO
 L104,b43240e40da563520c5d50841017bea57deadec04b3b6508459f922b1ae00965,8,image_only,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,image_only,YES
 L105,9edf9d95a342e8d7c66aab0a7209f5a52ed2843d69ef2a9b7e202e5eaad7db58,19,unflagged,USABLE,USABLE,,,NO
@@ -117,7 +117,7 @@ L115,928d53398c7716f84ff7c1ee867f469152bcdf79847511bab62a5e6e8f9f6698,49,unflagg
 L116,f6bc4002bf253dffc7eb71a4ca250927f4e772e691c069fa84e8d81e03a1d976,10,few_chars,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,image_only,YES
 L117,cb1785cf0db679cf4d64a0bce2a3f64dc18748b1f1b0a0631d26c2c355d59fcd,10,control,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,control_chars;low_letter_share,YES
 L118,027897262ef96cd87340f7607486fe7f50152477fd048f37379e8f32b0c560a1,8,unflagged,USABLE,USABLE,,,NO
-L119,928d53398c7716f84ff7c1ee867f469152bcdf79847511bab62a5e6e8f9f6698,117,blank,NO_CONTENT,UNUSABLE_NEEDS_OCR,relabelled after individual re-render: the page renders blank (dark-pixel share 0.0) and the earlier Tesseract OCR text of this page is empty; the first label came from a faulty contact sheet. Page sits in a damaged PDF ('non-page object in page tree').,blank,NO
+L119,928d53398c7716f84ff7c1ee867f469152bcdf79847511bab62a5e6e8f9f6698,117,blank,MISSING_SOURCE_PAGE,UNUSABLE_NEEDS_OCR,"relabelled from UNUSABLE_NEEDS_OCR: the page is past the cut of a truncated download (file lacks %%EOF; MuPDF rebuilds phantom pages, Poppler cannot read the file). Renders blank, earlier OCR text empty. The source page had content but its bytes are missing, so there is nothing to OCR (review A1-05).",missing_page,NO
 L120,483b70cbbe272ccbd27ef9fa216289ce87daac77fd8f262085db743acada3976,5,unflagged,USABLE,USABLE,,,NO
 L121,9960904c701ce9ef8a1b7b46b0e895a6a345f1ca2f59df1be10e3a142b14d7a9,11,control,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,control_chars;low_letter_share,YES
 L122,df316862fa58b73052f2412bb1038cf2b630c52b1d3d70337603830b4e9fd918,8,control,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,control_chars;low_letter_share,YES
@@ -125,10 +125,10 @@ L123,ffd58f9db266168b390ce0da9435123cf33c58e8303f33cab1b834a2f97315b8,3,other_te
 L124,6dc58e8721c502c67874102e09ef59a2d75f79b77004c577625e8afec2e73fc2,5,control,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,control_chars;low_letter_share,YES
 L125,d6eb9f322f39afb3edf6f6234c21170452b81aeda9d2ff46f0faba5006c74478,5,few_chars,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,image_only,YES
 L126,091e1678f03df8447ffba7259087060dd58ca3022c6db4362076a32281247657,7,few_chars,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,image_only,YES
-L127,b1aa2d028bf8282d81fd8262c0b73e6a356f12932f36970641016be42ebf4c6e,8,blank,NO_CONTENT,UNUSABLE_NEEDS_OCR,relabelled after individual re-render: the page renders blank (dark-pixel share 0.0) and the earlier Tesseract OCR text of this page is empty; the first label came from a faulty contact sheet. Page sits in a damaged PDF ('non-page object in page tree').,blank,NO
+L127,b1aa2d028bf8282d81fd8262c0b73e6a356f12932f36970641016be42ebf4c6e,8,blank,MISSING_SOURCE_PAGE,UNUSABLE_NEEDS_OCR,"relabelled from UNUSABLE_NEEDS_OCR: the page is past the cut of a truncated download (file lacks %%EOF; MuPDF rebuilds phantom pages, Poppler cannot read the file). Renders blank, earlier OCR text empty. The source page had content but its bytes are missing, so there is nothing to OCR (review A1-05).",missing_page,NO
 L128,bbffe803baeefe9f0abcd6e55de3091371bbb3ed6d05695c2b2bbbfd8efb3e7f,4,other_text_flags,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,low_letter_share;low_dictionary,YES
 L129,2890b7b47a443252c089c05ad45b4dab11a163040745e75209cc4c5d65806361,1,unflagged,USABLE,USABLE,,,NO
-L130,268ee3d706eadcd48f7db0029c28259c248a6114325ab8533156b06f8bdd92a0,29,blank,NO_CONTENT,UNUSABLE_NEEDS_OCR,relabelled after individual re-render: the page renders blank (dark-pixel share 0.0) and the earlier Tesseract OCR text of this page is empty; the first label came from a faulty contact sheet. Page sits in a damaged PDF ('non-page object in page tree').,blank,NO
+L130,268ee3d706eadcd48f7db0029c28259c248a6114325ab8533156b06f8bdd92a0,29,blank,MISSING_SOURCE_PAGE,UNUSABLE_NEEDS_OCR,"relabelled from UNUSABLE_NEEDS_OCR: the page is past the cut of a truncated download (file lacks %%EOF; MuPDF rebuilds phantom pages, Poppler cannot read the file). Renders blank, earlier OCR text empty. The source page had content but its bytes are missing, so there is nothing to OCR (review A1-05).",missing_page,NO
 L131,ab2f0f267f52f915c87445e39daeb66deb0590852516270fb27480891c4e6f5f,2,other_text_flags,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,vertical_order,YES
 L132,eb2408e8c692040c37a8b01b82de3646c322abf33db59717b73cef2372c6b504,4,control,UNUSABLE_NEEDS_OCR,UNUSABLE_NEEDS_OCR,,control_chars;low_letter_share;vertical_order,YES
 L133,807aa0a251b105c5f2a3b04a657645e5934896947704dc43ef4853204da4e906,20,other_text_flags,MARGINAL,MARGINAL,,vertical_order,YES

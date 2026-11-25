@@ -1,7 +1,8 @@
 {
  "by_stratum": {
   "blank": {
-   "NO_CONTENT|pred_unusable=NO": 12
+   "MISSING_SOURCE_PAGE|pred_unusable=NO": 9,
+   "NO_CONTENT|pred_unusable=NO": 3
   },
   "control": {
    "UNUSABLE_NEEDS_OCR|pred_unusable=YES": 30
@@ -92,7 +93,8 @@
  "label_corrections": 9,
  "labels": {
   "MARGINAL": 2,
-  "NO_CONTENT": 13,
+  "MISSING_SOURCE_PAGE": 9,
+  "NO_CONTENT": 4,
   "UNUSABLE_NEEDS_OCR": 73,
   "USABLE": 62
  },

@@ -21,6 +21,7 @@ import csv
 import hashlib
 import io
 import json
+import os
 import re
 import sys
 import urllib.parse
@@ -40,7 +41,7 @@ C11_MANIFEST = AUDIT / "C11-JUDICIAL-QUALITY" / "excluded" / "RE_ACQUISITION_MAN
 C12_INGEST = AUDIT / "C12-CONSOLIDATION" / "judicial_recovery_c12" / "INGESTION_LOG.csv"
 SOURCES = REPO / "config" / "sources.yaml"
 INP = OUT / "inputs"
-SCRATCH = Path("/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/a1_work")
+SCRATCH = Path(os.environ.get("C13_A1_WORK", str(REPO.parent / "a1_work")))   # byte store; only byte-dependent steps use it
 HF_REPO = "hariomahlawat/mimamsa-corpus"
 HF_PARENT = "3864faf3bb24edef4bfb18fa0916cc788eb68d79"
 NEVER_CONTACT = {"aftjabalpur.in"}
@@ -185,7 +186,7 @@ def build_detector_eval():
     for lab in labels:
         v = verdict[(lab["sha256"], int(lab["page"]))]
         # a page flagged only `blank` is "no OCR needed", as in text_quality.document_summary
-        pred = v["usable"] == "NO" and v["flags"] != "blank"
+        pred = v["usable"] == "NO" and v["flags"] not in ("blank", "missing_page")
         rows.append({**lab, "detector_flags": v["flags"], "detector_unusable": "YES" if pred else "NO"})
     def score(marginal_as, key="label"):
         tp = fp = fn = tn = 0
@@ -195,7 +196,7 @@ def build_detector_eval():
                 if marginal_as is None:
                     continue
                 truth = marginal_as
-            elif lab == "NO_CONTENT":
+            elif lab in ("NO_CONTENT", "MISSING_SOURCE_PAGE"):
                 truth = False
             else:
                 truth = lab == "UNUSABLE_NEEDS_OCR"
@@ -370,6 +371,9 @@ def text_layer_pages(path):
     return out
 
 
+BEST_TEXT: dict[str, str] = {}      # doc_id -> best available text with page markers (filled by build_relevance)
+
+
 def build_relevance(use_bytes: bool):
     """States for every held population document. Text = text layer for usable pages + OCR text for OCR'd pages."""
     quality = read_csv(INP / "HELD_DOC_TEXT_QUALITY.csv")
@@ -426,6 +430,7 @@ def build_relevance(use_bytes: bool):
                              for m in ocr_v)
         engines = sorted({ocr_engine.get((sha, p), "") for p in ocr_pages})
         text = "\n".join(f"[[page {i + 1}]]\n{t}" for i, t in enumerate(texts))
+        BEST_TEXT[q["doc_id"]] = text
         if q["verdict"] == "EXTRACTION_FAILED" and n == 0:
             d = rs.decide(text=None, quality=None, extraction_error="file does not open (truncated download)")
             if q["truncated"] == "YES":
@@ -497,8 +502,23 @@ def build_risk():
     rd = {r["key"]: r for r in read_csv(AUDIT / "C12-CONSOLIDATION" / "judicial_recovery_c12" / "inputs" / "REVIEW_DECISIONS.csv")}
     held = read_csv(INP / "HELD_COPIES.csv")
     tl = {r["sha256"]: r for r in read_csv(INP / "HELD_DOC_TEXT_QUALITY.csv")}
+    c11 = {r["sha256"]: r for r in read_csv(C11_MANIFEST)}
+    a7 = []
+    for h in held:
+        if h["held_as"] != "PRESERVED_C13_A7":
+            continue
+        r = rel.get(h["doc_id"], {})
+        a7.append({"doc_id": h["doc_id"], "court": c11[h["sha256"]]["court"], "tier": c11[h["sha256"]]["tier"],
+                   "text_layer": tl.get(h["sha256"], {}).get("verdict", ""), "c13_state": r.get("state", "")})
+    a7_by = defaultdict(Counter)
+    for x in a7:
+        a7_by[x["court"]]["titles"] += 1
+        a7_by[x["court"]]["text_layer_unusable"] += x["text_layer"] != "TEXT_OK"
+        a7_by[x["court"]][f"c13_state={x['c13_state']}"] += 1
     sample = []
     for h in held:
+        if h["held_as"] == "PRESERVED_C13_A7":
+            continue
         g = ing.get(h["doc_id"], {})
         key = g.get("target", "")
         llm = rd.get(key, {}).get("relevance_decision", "")
@@ -535,10 +555,33 @@ def build_risk():
     dv = json.loads((OUT / "DETECTOR_VALIDATION.json").read_text(encoding="utf-8"))
     rr = json.loads((OUT / "RELEVANCE_RERUN.json").read_text(encoding="utf-8"))
     pop = json.loads((OUT / "POPULATION_SUMMARY.json").read_text(encoding="utf-8"))
-    out = {"measured": {
+    bands = json.loads((INP / "EXCLUDED_PH_BANDS.json").read_text(encoding="utf-8"))["counts"]
+    band_rate = {}
+    for band in bands:
+        k, n = corpus["P&H_cmap_by_year_band"][f"{band}|cmap_garbled_any_page"], corpus["P&H_cmap_by_year_band"][f"{band}|documents"]
+        band_rate[band] = (k, n, k / n, *wilson(k, n))
+    est = {"point": 0.0, "low": 0.0, "high": 0.0, "by_band": {}}
+    for band, cnt in bands.items():
+        tot = sum(cnt.values())
+        k, n, r, lo, hi = band_rate[band]
+        est["by_band"][band] = {"excluded_files": tot, "kept_cmap_rate": f"{k}/{n}", "rate_ci95": [lo, hi],
+                                "point": round(tot * r), "low": round(tot * lo), "high": round(tot * hi)}
+        est["point"] += tot * r
+        est["low"] += tot * lo
+        est["high"] += tot * hi
+    est = {**{k: round(v) for k, v in est.items() if k != "by_band"}, "by_band": est["by_band"],
+           "assumption": ("Excluded P&H files carry the broken-CMap defect at the rate seen in kept P&H files of the same "
+                          "decision-year band. Unverified: the 12/12 garbled AFT writs suggest the defect is not independent "
+                          "of case type, and garbled files are preferentially excluded. Range = per-band Wilson 95% CIs "
+                          "added (not a joint interval). Not a floor.")}
+    out = {"estimated": {"ph_excluded_without_readable_text": est}, "measured": {
         "held_t1_sample_c12_25": {"note": "The 25 C11 first-tier titles acquired in C12 (selected by rank: 13 SC + 12 P&H AFT writs; "
                                           "not a random sample). Relevance reference = C12 LLM review (page images for P&H), not human.",
                                   "by_court": fn, "rows": sample},
+        "held_t1_a7_46": {"note": "46 C11 T1 titles acquired and preserved by C13 A7 (9e3cf986); states from the C13 "
+                                  "rule only (no human or LLM review). RELEVANT here = deleted by the old rule but "
+                                  "relevant by keyword pass on readable/OCR text, i.e. an automated false-negative finding.",
+                          "by_court": {c: dict(v) for c, v in sorted(a7_by.items())}, "rows": a7},
         "kept_corpus_text_layers": {k: dict(v) for k, v in sorted(corpus.items())},
         "detector": {k: dv[k] for k in ("marginal_excluded", "with_original_uncorrected_labels")},
         "relevance_rerun_states": rr["by_group_state"],
@@ -610,8 +653,9 @@ def check() -> int:
             ok = p.exists() and p.read_text(encoding="utf-8") == text
             print(("OK  " if ok else "DIFF"), fname)
             bad += not ok
-    from hf_ocr_c13 import check_records  # noqa: E402
+    from hf_ocr_c13 import check_candidates, check_records  # noqa: E402
     bad += check_records()
+    bad += check_candidates()
     sums = (OUT / "SHA256SUMS")
     ok = sums.exists() and sums.read_text(encoding="utf-8") == build_sums()
     print(("OK  " if ok else "DIFF"), "SHA256SUMS")

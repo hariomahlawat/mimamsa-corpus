@@ -8,21 +8,24 @@
  },
  "by_tier_court_acquisition": {
   "T1|Allahabad High Court": {
-   "REACQUIRE_FROM_SOURCE_URL_PENDING_OWNER_APPROVAL_FOR_DOWNLOAD_RUN": 250
+   "HELD_ON_HF": 2,
+   "REACQUIRE_FROM_SOURCE_URL_PENDING_OWNER_APPROVAL_FOR_DOWNLOAD_RUN": 248
   },
   "T1|High Court of Delhi": {
-   "REACQUIRE_FROM_SOURCE_URL_PENDING_OWNER_APPROVAL_FOR_DOWNLOAD_RUN": 779
+   "HELD_ON_HF": 12,
+   "REACQUIRE_FROM_SOURCE_URL_PENDING_OWNER_APPROVAL_FOR_DOWNLOAD_RUN": 767
   },
   "T1|High Court of Jammu and Kashmir": {
-   "REACQUIRE_FROM_SOURCE_URL_PENDING_OWNER_APPROVAL_FOR_DOWNLOAD_RUN": 152
+   "HELD_ON_HF": 4,
+   "REACQUIRE_FROM_SOURCE_URL_PENDING_OWNER_APPROVAL_FOR_DOWNLOAD_RUN": 148
   },
   "T1|High Court of Punjab and Haryana": {
-   "HELD_ON_HF": 12,
-   "REACQUIRE_FROM_SOURCE_URL_PENDING_OWNER_APPROVAL_FOR_DOWNLOAD_RUN": 550
+   "HELD_ON_HF": 28,
+   "REACQUIRE_FROM_SOURCE_URL_PENDING_OWNER_APPROVAL_FOR_DOWNLOAD_RUN": 534
   },
   "T1|Supreme Court of India": {
-   "HELD_ON_HF": 13,
-   "REACQUIRE_FROM_SOURCE_URL_PENDING_OWNER_APPROVAL_FOR_DOWNLOAD_RUN": 34
+   "HELD_ON_HF": 25,
+   "REACQUIRE_FROM_SOURCE_URL_PENDING_OWNER_APPROVAL_FOR_DOWNLOAD_RUN": 22
   },
   "T2|Allahabad High Court": {
    "REACQUIRE_FROM_SOURCE_URL_PENDING_OWNER_APPROVAL_FOR_DOWNLOAD_RUN": 294
@@ -85,12 +88,12 @@
    "REACQUIRE_FROM_SOURCE_URL_PENDING_OWNER_APPROVAL_FOR_DOWNLOAD_RUN": 86
   }
  },
- "c11_flagged_held": 25,
+ "c11_flagged_held": 71,
  "c11_flagged_hosts_not_allow_listed": 0,
- "c11_flagged_need_reacquisition": 8052,
+ "c11_flagged_need_reacquisition": 8006,
  "c11_flagged_titles": 8077,
  "download_policy": "No download run was made in C13 A1: CLAUDE.md and the governance file require owner approval for each real download run, and no owner directive authorising this run was found. Re-acquisition rows are a dry-run plan only.",
- "excluded_log_held": 25,
+ "excluded_log_held": 71,
  "excluded_log_not_flagged_by_c11": 112108,
  "excluded_log_not_flagged_by_court": {
   "Allahabad High Court": 28384,
@@ -125,6 +128,6 @@
   "2025": 77,
   "2026": 98
  },
- "ph_t1_held": 12,
+ "ph_t1_held": 28,
  "ph_t1_titles": 562
 }

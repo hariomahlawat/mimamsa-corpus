@@ -1,0 +1,8 @@
+{
+ "source": "HF data/excluded_judgments.jsonl at 3864faf3 (sha256 46c7bd73f99b7474dd5609f94599c9275505e17c303e2952cce8527ea3efdc23); P&H entries by decision-year band and C11 tier",
+ "counts": {
+  "2014-2015": {"T1": 32, "T2-T5": 85, "NOT_FLAGGED": 4134},
+  "2023-2026": {"T1": 291, "T2-T5": 513, "NOT_FLAGGED": 14167},
+  "other_years": {"T1": 239, "T2-T5": 719, "NOT_FLAGGED": 24381}
+ }
+}

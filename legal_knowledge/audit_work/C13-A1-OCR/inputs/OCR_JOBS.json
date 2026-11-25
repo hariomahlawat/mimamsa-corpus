@@ -196,8 +196,8 @@
 "pages": [
 1
 ],
-"tranche": "C_unusable_pages_early_stop",
-"engine": "rapidocr"
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
 },
 {
 "doc_id": "hc-delhi-2025-o-m-p-comm-151-2024-dlhc010180002024-1-2025-07-31",
@@ -214,8 +214,8 @@
 "pages": [
 1
 ],
-"tranche": "C_unusable_pages_early_stop",
-"engine": "rapidocr"
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
 },
 {
 "doc_id": "hc-ph-2026-cr-6298-2026-phhc011374212026-1-2026-08-21",
@@ -223,8 +223,8 @@
 "pages": [
 1
 ],
-"tranche": "C_unusable_pages_early_stop",
-"engine": "rapidocr"
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
 },
 {
 "doc_id": "hc-ph-2026-cocp-6333-2025-phhc012092472025-1-2026-01-14",
@@ -232,8 +232,8 @@
 "pages": [
 1
 ],
-"tranche": "C_unusable_pages_early_stop",
-"engine": "rapidocr"
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
 },
 {
 "doc_id": "hc-ph-2026-fao-2717-2022-phhc010370252022-1-2026-03-12",
@@ -241,8 +241,8 @@
 "pages": [
 1
 ],
-"tranche": "C_unusable_pages_early_stop",
-"engine": "rapidocr"
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
 },
 {
 "doc_id": "hc-ph-2025-untitled-phhc011033312024-1-2025-07-16",
@@ -250,8 +250,8 @@
 "pages": [
 1
 ],
-"tranche": "C_unusable_pages_early_stop",
-"engine": "rapidocr"
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
 },
 {
 "doc_id": "hc-ph-2025-untitled-phhc011715472025-1-2025-10-27",
@@ -259,8 +259,8 @@
 "pages": [
 1
 ],
-"tranche": "C_unusable_pages_early_stop",
-"engine": "rapidocr"
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
 },
 {
 "doc_id": "hc-ph-2025-cr-5444-2024-phhc011260632024-1-2025-10-27",
@@ -269,8 +269,8 @@
 1,
 2
 ],
-"tranche": "C_unusable_pages_early_stop",
-"engine": "rapidocr"
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
 },
 {
 "doc_id": "hc-ph-2024-crwp-6842-2024-phhc010880982024-1-2024-07-22",
@@ -279,8 +279,8 @@
 1,
 2
 ],
-"tranche": "C_unusable_pages_early_stop",
-"engine": "rapidocr"
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
 },
 {
 "doc_id": "hc-ph-2025-rsa-3901-2023-phhc010863342019-1-2025-11-20",
@@ -289,8 +289,8 @@
 1,
 2
 ],
-"tranche": "C_unusable_pages_early_stop",
-"engine": "rapidocr"
+"tranche": "C_reocr_paddle_review_A1-03",
+"engine": "paddle_v5_mobile"
 },
 {
 "doc_id": "hc-delhi-2025-la-app-316-2010-dlhc010467072010-1-2025-09-26",
@@ -1236,6 +1236,15 @@
 11
 ],
 "tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2025-cwp-17353-2025-phhc010948072025-1-2025-07-01",
+"sha256": "236b7b66b489e84571e20c79896595e860180066e278c860216d9b8d975f11f3",
+"pages": [
+1
+],
+"tranche": "candidate_clipped_text_layer_full_ocr",
 "engine": "paddle_v5_mobile"
 }
 ]
