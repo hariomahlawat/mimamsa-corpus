@@ -187,8 +187,10 @@ jobs:
           npm install --no-save --silent playwright@1.63.0
           npx playwright install chromium
           npx vite build
-          $vite = Start-Process -FilePath "npx.cmd" -ArgumentList "vite","preview","--port","5199" -PassThru
-          Start-Sleep -Seconds 6
+          $vite = Start-Process -FilePath "npx.cmd" -ArgumentList "vite","preview","--host","127.0.0.1","--port","5199" -WorkingDirectory (Get-Location) -PassThru
+          $ok = $false
+          for ($i = 0; $i -lt 60; $i++) { try { if ((Invoke-WebRequest "http://127.0.0.1:5199/" -UseBasicParsing -TimeoutSec 2).StatusCode -eq 200) { $ok = $true; break } } catch {}; Start-Sleep -Milliseconds 500 }
+          if (-not $ok) { throw "vite preview did not start on 127.0.0.1:5199" }
           node run_protected.cjs http://127.0.0.1:5199 http://127.0.0.1:5081 "$env:GITHUB_WORKSPACE\out\r2n01_pdfjs_protected_windows.json"
           Pop-Location
           Stop-Process -Id $vite.Id -Force -ErrorAction SilentlyContinue; Stop-Process -Id $srv.Id -Force -ErrorAction SilentlyContinue
