@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>PDF.js highlight PoC</title>
+<style>
+  body { margin: 0; font-family: sans-serif; background: #ddd; }
+  #wrap { position: relative; display: inline-block; margin: 8px; }
+  canvas { display: block; background: #fff; }
+  .hl { position: absolute; background: rgba(255, 200, 0, .45); outline: 1px solid #c80; pointer-events: none; }
+</style></head>
+<body><div id="wrap"><canvas id="c"></canvas><div id="overlay"></div></div>
+<script type="module" src="/src/main.js"></script></body></html>

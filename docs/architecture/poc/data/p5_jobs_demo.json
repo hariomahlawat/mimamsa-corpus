@@ -1,0 +1,629 @@
+{
+ "idempotent_enqueue": {
+  "attempted": 24,
+  "created": 12
+ },
+ "crash": {
+  "killed_worker": "w2",
+  "signal": "SIGKILL",
+  "progress_at_kill": 0.4,
+  "checkpoint_at_kill": {
+   "next_step": 4
+  }
+ },
+ "jobs": [
+  {
+   "key": "parse:e2820842440943643c6a426dffa90d208cee066a02e0679a2dc84c6b4eb5de13",
+   "kind": "parse_pdf",
+   "state": "succeeded",
+   "attempts": 1,
+   "last_error": "",
+   "result": {
+    "pages": 1,
+    "sandbox": {
+     "uid": 65534,
+     "network": "blocked (OSError)",
+     "read_etc_shadow": "denied"
+    }
+   }
+  },
+  {
+   "key": "parse:fc06221c9162639b766ec7f0b25872263c8335bc3b080f25064cc5b8734c01af",
+   "kind": "parse_pdf",
+   "state": "succeeded",
+   "attempts": 1,
+   "last_error": "",
+   "result": {
+    "pages": 1,
+    "sandbox": {
+     "uid": 65534,
+     "network": "blocked (OSError)",
+     "read_etc_shadow": "denied"
+    }
+   }
+  },
+  {
+   "key": "parse:9917d06593cfeec6abd3811c46468bd354451ab88b948de17cb4b249ee6c1ac4",
+   "kind": "parse_pdf",
+   "state": "succeeded",
+   "attempts": 1,
+   "last_error": "",
+   "result": {
+    "pages": 1,
+    "sandbox": {
+     "uid": 65534,
+     "network": "blocked (OSError)",
+     "read_etc_shadow": "denied"
+    }
+   }
+  },
+  {
+   "key": "parse:bb1eca543282e2527cb3a8a47aff94a70e421ea2a96f8c8d7cf28c1ebc30ccac",
+   "kind": "parse_pdf",
+   "state": "succeeded",
+   "attempts": 1,
+   "last_error": "",
+   "result": {
+    "pages": 1,
+    "sandbox": {
+     "uid": 65534,
+     "network": "blocked (OSError)",
+     "read_etc_shadow": "denied"
+    }
+   }
+  },
+  {
+   "key": "parse:1a469f5043aa2a171bd9a974a2217567da85522eb68ef4e1a1bca6a3875509eb",
+   "kind": "parse_pdf",
+   "state": "succeeded",
+   "attempts": 1,
+   "last_error": "",
+   "result": {
+    "pages": 1,
+    "sandbox": {
+     "uid": 65534,
+     "network": "blocked (OSError)",
+     "read_etc_shadow": "denied"
+    }
+   }
+  },
+  {
+   "key": "parse:6fae8f27e378fcc7fa7ed323209d61407220e56fdec57dd149c3f5e8f84a5d62",
+   "kind": "parse_pdf",
+   "state": "succeeded",
+   "attempts": 1,
+   "last_error": "",
+   "result": {
+    "pages": 1,
+    "sandbox": {
+     "uid": 65534,
+     "network": "blocked (OSError)",
+     "read_etc_shadow": "denied"
+    }
+   }
+  },
+  {
+   "key": "parse:c13b4b2c2a2ebd895156f2c005988368f0e0103bb79a60d589c2d92fa5e27fd6",
+   "kind": "parse_pdf",
+   "state": "succeeded",
+   "attempts": 1,
+   "last_error": "",
+   "result": {
+    "pages": 1,
+    "sandbox": {
+     "uid": 65534,
+     "network": "blocked (OSError)",
+     "read_etc_shadow": "denied"
+    }
+   }
+  },
+  {
+   "key": "parse:2dca10565aca07650fd02bac888cea807ba089cc21f2dbfc735ff799266fa7fb",
+   "kind": "parse_pdf",
+   "state": "succeeded",
+   "attempts": 1,
+   "last_error": "",
+   "result": {
+    "pages": 1,
+    "sandbox": {
+     "uid": 65534,
+     "network": "blocked (OSError)",
+     "read_etc_shadow": "denied"
+    }
+   }
+  },
+  {
+   "key": "parse:45da9f9236e31d263e4b3dbf4980c36632427471412648353d30bae311216f36",
+   "kind": "parse_pdf",
+   "state": "succeeded",
+   "attempts": 1,
+   "last_error": "",
+   "result": {
+    "pages": 1,
+    "sandbox": {
+     "uid": 65534,
+     "network": "blocked (OSError)",
+     "read_etc_shadow": "denied"
+    }
+   }
+  },
+  {
+   "key": "parse:2207e617e74592186079757fb2ddd434319ec4013b35d014b226ba4a25715aa8",
+   "kind": "parse_pdf",
+   "state": "succeeded",
+   "attempts": 1,
+   "last_error": "",
+   "result": {
+    "pages": 1,
+    "sandbox": {
+     "uid": 65534,
+     "network": "blocked (OSError)",
+     "read_etc_shadow": "denied"
+    }
+   }
+  },
+  {
+   "key": "parse:567c31b9d437a358db8981eba137d84a8c54084d5f409f19072850c79d1e305d",
+   "kind": "parse_pdf",
+   "state": "succeeded",
+   "attempts": 1,
+   "last_error": "",
+   "result": {
+    "pages": 1,
+    "sandbox": {
+     "uid": 65534,
+     "network": "blocked (OSError)",
+     "read_etc_shadow": "denied"
+    }
+   }
+  },
+  {
+   "key": "parse:51d64e6e346642c6b25d1adebd7772e2a68a376e1784e619ff4dcd642e881a6b",
+   "kind": "parse_pdf",
+   "state": "succeeded",
+   "attempts": 1,
+   "last_error": "",
+   "result": {
+    "pages": 1,
+    "sandbox": {
+     "uid": 65534,
+     "network": "blocked (OSError)",
+     "read_etc_shadow": "denied"
+    }
+   }
+  },
+  {
+   "key": "parse:bomb",
+   "kind": "parse_pdf",
+   "state": "failed",
+   "attempts": 1,
+   "last_error": "sandbox failed rc=1 'pend(bytearray(64 * 2**20))\\n                  ^^^^^^^^^^^^^^^^^^^^^\\nMemoryError\\n'",
+   "result": null
+  },
+  {
+   "key": "parse:hang",
+   "kind": "parse_pdf",
+   "state": "failed",
+   "attempts": 1,
+   "last_error": "sandbox timeout",
+   "result": null
+  },
+  {
+   "key": "flaky:2",
+   "kind": "flaky",
+   "state": "succeeded",
+   "attempts": 3,
+   "last_error": "transient failure on attempt 2",
+   "result": {
+    "ok_on_attempt": 3
+   }
+  },
+  {
+   "key": "flaky:poison",
+   "kind": "flaky",
+   "state": "dead",
+   "attempts": 4,
+   "last_error": "transient failure on attempt 4",
+   "result": null
+  },
+  {
+   "key": "long:1",
+   "kind": "long_index",
+   "state": "succeeded",
+   "attempts": 2,
+   "last_error": "lease expired (worker lost)",
+   "result": {
+    "steps": 10,
+    "started_at_step": 4
+   }
+  },
+  {
+   "key": "ocr:0",
+   "kind": "ocr",
+   "state": "succeeded",
+   "attempts": 1,
+   "last_error": "",
+   "result": {}
+  },
+  {
+   "key": "ocr:1",
+   "kind": "ocr",
+   "state": "succeeded",
+   "attempts": 1,
+   "last_error": "",
+   "result": {}
+  },
+  {
+   "key": "ocr:2",
+   "kind": "ocr",
+   "state": "succeeded",
+   "attempts": 1,
+   "last_error": "",
+   "result": {}
+  },
+  {
+   "key": "ocr:3",
+   "kind": "ocr",
+   "state": "succeeded",
+   "attempts": 1,
+   "last_error": "",
+   "result": {}
+  }
+ ],
+ "events_long_and_flaky": [
+  {
+   "key": "flaky:2",
+   "worker": "w2",
+   "event": "claimed",
+   "detail": {
+    "slot": 0,
+    "attempt": 1,
+    "checkpoint": null
+   },
+   "at": "2026-11-25 10:32:24.573423+00:00"
+  },
+  {
+   "key": "flaky:poison",
+   "worker": "w1",
+   "event": "claimed",
+   "detail": {
+    "slot": 1,
+    "attempt": 1,
+    "checkpoint": null
+   },
+   "at": "2026-11-25 10:32:24.576283+00:00"
+  },
+  {
+   "key": "flaky:2",
+   "worker": "w2",
+   "event": "retry_scheduled",
+   "detail": {
+    "error": "transient failure on attempt 1",
+    "attempt": 1,
+    "delay_s": 0.92
+   },
+   "at": "2026-11-25 10:32:24.589193+00:00"
+  },
+  {
+   "key": "flaky:poison",
+   "worker": "w1",
+   "event": "retry_scheduled",
+   "detail": {
+    "error": "transient failure on attempt 1",
+    "attempt": 1,
+    "delay_s": 0.98
+   },
+   "at": "2026-11-25 10:32:24.589247+00:00"
+  },
+  {
+   "key": "long:1",
+   "worker": "w2",
+   "event": "claimed",
+   "detail": {
+    "slot": 0,
+    "attempt": 1,
+    "checkpoint": null
+   },
+   "at": "2026-11-25 10:32:24.609242+00:00"
+  },
+  {
+   "key": "long:1",
+   "worker": "w2",
+   "event": "resume_from",
+   "detail": {
+    "step": 0,
+    "attempt": 1
+   },
+   "at": "2026-11-25 10:32:24.613161+00:00"
+  },
+  {
+   "key": "long:1",
+   "worker": "w2",
+   "event": "step_done",
+   "detail": {
+    "step": 0
+   },
+   "at": "2026-11-25 10:32:25.216699+00:00"
+  },
+  {
+   "key": "long:1",
+   "worker": "w2",
+   "event": "step_done",
+   "detail": {
+    "step": 1
+   },
+   "at": "2026-11-25 10:32:25.833412+00:00"
+  },
+  {
+   "key": "flaky:2",
+   "worker": "w1",
+   "event": "claimed",
+   "detail": {
+    "slot": 0,
+    "attempt": 2,
+    "checkpoint": null
+   },
+   "at": "2026-11-25 10:32:26.336942+00:00"
+  },
+  {
+   "key": "flaky:2",
+   "worker": "w1",
+   "event": "retry_scheduled",
+   "detail": {
+    "error": "transient failure on attempt 2",
+    "attempt": 2,
+    "delay_s": 1.93
+   },
+   "at": "2026-11-25 10:32:26.347535+00:00"
+  },
+  {
+   "key": "flaky:poison",
+   "worker": "w1",
+   "event": "claimed",
+   "detail": {
+    "slot": 0,
+    "attempt": 2,
+    "checkpoint": null
+   },
+   "at": "2026-11-25 10:32:26.366860+00:00"
+  },
+  {
+   "key": "flaky:poison",
+   "worker": "w1",
+   "event": "retry_scheduled",
+   "detail": {
+    "error": "transient failure on attempt 2",
+    "attempt": 2,
+    "delay_s": 1.76
+   },
+   "at": "2026-11-25 10:32:26.380903+00:00"
+  },
+  {
+   "key": "long:1",
+   "worker": "w2",
+   "event": "step_done",
+   "detail": {
+    "step": 2
+   },
+   "at": "2026-11-25 10:32:26.453272+00:00"
+  },
+  {
+   "key": "long:1",
+   "worker": "w2",
+   "event": "step_done",
+   "detail": {
+    "step": 3
+   },
+   "at": "2026-11-25 10:32:27.065213+00:00"
+  },
+  {
+   "key": "flaky:poison",
+   "worker": "w1",
+   "event": "claimed",
+   "detail": {
+    "slot": 0,
+    "attempt": 3,
+    "checkpoint": null
+   },
+   "at": "2026-11-25 10:32:28.185222+00:00"
+  },
+  {
+   "key": "flaky:poison",
+   "worker": "w1",
+   "event": "retry_scheduled",
+   "detail": {
+    "error": "transient failure on attempt 3",
+    "attempt": 3,
+    "delay_s": 4.07
+   },
+   "at": "2026-11-25 10:32:28.189151+00:00"
+  },
+  {
+   "key": "flaky:2",
+   "worker": "w3",
+   "event": "claimed",
+   "detail": {
+    "slot": 0,
+    "attempt": 3,
+    "checkpoint": null
+   },
+   "at": "2026-11-25 10:32:28.400983+00:00"
+  },
+  {
+   "key": "flaky:2",
+   "worker": "w3",
+   "event": "succeeded",
+   "detail": {},
+   "at": "2026-11-25 10:32:28.412956+00:00"
+  },
+  {
+   "key": "long:1",
+   "worker": "w1",
+   "event": "lease_expired_requeued",
+   "detail": {},
+   "at": "2026-11-25 10:32:31.074274+00:00"
+  },
+  {
+   "key": "long:1",
+   "worker": "w1",
+   "event": "claimed",
+   "detail": {
+    "slot": 0,
+    "attempt": 2,
+    "checkpoint": {
+     "next_step": 4
+    }
+   },
+   "at": "2026-11-25 10:32:31.093134+00:00"
+  },
+  {
+   "key": "long:1",
+   "worker": "w1",
+   "event": "resume_from",
+   "detail": {
+    "step": 4,
+    "attempt": 2
+   },
+   "at": "2026-11-25 10:32:31.097013+00:00"
+  },
+  {
+   "key": "long:1",
+   "worker": "w1",
+   "event": "step_done",
+   "detail": {
+    "step": 4
+   },
+   "at": "2026-11-25 10:32:31.713240+00:00"
+  },
+  {
+   "key": "long:1",
+   "worker": "w1",
+   "event": "step_done",
+   "detail": {
+    "step": 5
+   },
+   "at": "2026-11-25 10:32:32.321721+00:00"
+  },
+  {
+   "key": "long:1",
+   "worker": "w1",
+   "event": "step_done",
+   "detail": {
+    "step": 6
+   },
+   "at": "2026-11-25 10:32:32.933369+00:00"
+  },
+  {
+   "key": "flaky:poison",
+   "worker": "w3",
+   "event": "claimed",
+   "detail": {
+    "slot": 0,
+    "attempt": 4,
+    "checkpoint": null
+   },
+   "at": "2026-11-25 10:32:33.057611+00:00"
+  },
+  {
+   "key": "flaky:poison",
+   "worker": "w3",
+   "event": "dead",
+   "detail": {
+    "error": "transient failure on attempt 4",
+    "attempt": 4
+   },
+   "at": "2026-11-25 10:32:33.069741+00:00"
+  },
+  {
+   "key": "long:1",
+   "worker": "w1",
+   "event": "step_done",
+   "detail": {
+    "step": 7
+   },
+   "at": "2026-11-25 10:32:33.551445+00:00"
+  },
+  {
+   "key": "long:1",
+   "worker": "w1",
+   "event": "step_done",
+   "detail": {
+    "step": 8
+   },
+   "at": "2026-11-25 10:32:34.163302+00:00"
+  },
+  {
+   "key": "long:1",
+   "worker": "w1",
+   "event": "step_done",
+   "detail": {
+    "step": 9
+   },
+   "at": "2026-11-25 10:32:34.776537+00:00"
+  },
+  {
+   "key": "long:1",
+   "worker": "w1",
+   "event": "succeeded",
+   "detail": {},
+   "at": "2026-11-25 10:32:34.789440+00:00"
+  }
+ ],
+ "max_running_ocr": 1,
+ "max_running_parse_pdf": 2,
+ "max_running_long_index": 1,
+ "parse_results_rows": [
+  12,
+  1
+ ],
+ "final_states": {
+  "dead": 1,
+  "failed": 2,
+  "succeeded": 18
+ },
+ "progress_samples_long": [
+  0.0,
+  0.0,
+  0.0,
+  0.1,
+  0.1,
+  0.2,
+  0.3,
+  0.4,
+  0.4,
+  0.4,
+  0.4,
+  0.4,
+  0.4,
+  0.4,
+  0.4,
+  0.4,
+  0.5,
+  0.6,
+  0.7,
+  0.7,
+  0.8,
+  0.9,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0
+ ]
+}
