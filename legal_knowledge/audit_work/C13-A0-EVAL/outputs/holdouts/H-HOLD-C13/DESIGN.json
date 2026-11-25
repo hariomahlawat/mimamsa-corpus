@@ -1,0 +1,117 @@
+{
+ "eligible_judgments": 2812,
+ "exclusions_sha256": "599d073bda05443a229ebf1e1acb33952bbd0c56c46829852afbaa7679b41d96",
+ "frame_sha256": "7b9e57ffa5d95a601cec5547d43df4d995b2a98d4a925e1ca996f21093024341",
+ "holdout": "H-HOLD-C13",
+ "population": "eligible judgments (overlap with H-OUT-C13 allowed); all SC, and HC judgments with >= 5 text pages",
+ "seed": "mimamsa-c13-h-hold",
+ "selection": "lowest SHA-256(seed|judgment_key) within each stratum; reserve = next ranks in the same order",
+ "size_justification": {
+  "c12_icc_recall_hits": 0.1213,
+  "c12_mean_holdings_per_sc_judgment": 4.1,
+  "c12_reference_judgments": 30,
+  "design_effect": 1.2597,
+  "gold_holdings_needed": 234,
+  "hc_judgments": 45,
+  "hc_mean_holdings_assumed": 2.5,
+  "judgments": 75,
+  "mean_holdings_per_judgment": 3.14,
+  "precision_items_needed_with_deff": 157,
+  "precision_neff_for_halfwidth": 124,
+  "recall_neff_for_halfwidth": 185,
+  "reserve_rule": "A reserve tranche of 50% more judgments, ranked by the same seed, is drawn now. At GA2 (after both annotators finish and before any extractor output is scored) the reserve is opened in rank order, stratum by stratum, only if adjudicated gold holdings fall below gold_holdings_needed; inclusion probabilities are then recomputed from the opened n_h.",
+  "sc_judgments": 30,
+  "sc_share": 0.4
+ },
+ "strata": [
+  {
+   "N_h": 12,
+   "design_weight": 6.0,
+   "inclusion_probability": 0.166667,
+   "n_h": 2,
+   "reserve_n": 0,
+   "stratum": "HC_ALL|LONG_15P_PLUS"
+  },
+  {
+   "N_h": 29,
+   "design_weight": 14.5,
+   "inclusion_probability": 0.068966,
+   "n_h": 2,
+   "reserve_n": 0,
+   "stratum": "HC_ALL|MEDIUM_5_14P"
+  },
+  {
+   "N_h": 123,
+   "design_weight": 30.75,
+   "inclusion_probability": 0.03252,
+   "n_h": 4,
+   "reserve_n": 3,
+   "stratum": "HC_DEL|LONG_15P_PLUS"
+  },
+  {
+   "N_h": 544,
+   "design_weight": 25.904762,
+   "inclusion_probability": 0.038603,
+   "n_h": 21,
+   "reserve_n": 12,
+   "stratum": "HC_DEL|MEDIUM_5_14P"
+  },
+  {
+   "N_h": 13,
+   "design_weight": 6.5,
+   "inclusion_probability": 0.153846,
+   "n_h": 2,
+   "reserve_n": 0,
+   "stratum": "HC_JK|LONG_15P_PLUS"
+  },
+  {
+   "N_h": 64,
+   "design_weight": 32.0,
+   "inclusion_probability": 0.03125,
+   "n_h": 2,
+   "reserve_n": 1,
+   "stratum": "HC_JK|MEDIUM_5_14P"
+  },
+  {
+   "N_h": 16,
+   "design_weight": 8.0,
+   "inclusion_probability": 0.125,
+   "n_h": 2,
+   "reserve_n": 0,
+   "stratum": "HC_PH|LONG_15P_PLUS"
+  },
+  {
+   "N_h": 283,
+   "design_weight": 28.3,
+   "inclusion_probability": 0.035336,
+   "n_h": 10,
+   "reserve_n": 6,
+   "stratum": "HC_PH|MEDIUM_5_14P"
+  },
+  {
+   "N_h": 54,
+   "design_weight": 5.4,
+   "inclusion_probability": 0.185185,
+   "n_h": 10,
+   "reserve_n": 7,
+   "stratum": "SC|LONG_15P_PLUS"
+  },
+  {
+   "N_h": 7,
+   "design_weight": 1.0,
+   "inclusion_probability": 1.0,
+   "n_h": 7,
+   "reserve_n": 0,
+   "stratum": "SC|MULTI_OPINION_CUE"
+  },
+  {
+   "N_h": 70,
+   "design_weight": 5.384615,
+   "inclusion_probability": 0.185714,
+   "n_h": 13,
+   "reserve_n": 9,
+   "stratum": "SC|SHORT_UNDER_15P"
+  }
+ ],
+ "unit": "judgment"
+}
