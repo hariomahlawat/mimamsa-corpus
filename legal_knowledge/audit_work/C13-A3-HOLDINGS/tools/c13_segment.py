@@ -366,6 +366,10 @@ _ANALYSIS_START_RE = re.compile(
     r"(?:Analysis|Discussion|Consideration)\b)", re.I)
 
 
+_SUBM_LEAD_RE = re.compile(r"^\W*(?:\d+\s*[.)]?\s*)?(?:It\s+(?:was|is|has\s+been|had\s+been)\s+(?:also\s+|further\s+)?(?:submitted|contended|urged|argued|canvassed|pleaded)"
+                           r"|(?:The\s+)?(?:learned|ld\.?)\s+(?:senior\s+|additional\s+)?(?:counsel|advocate|solicitor|attorney)|(?:Mr|Ms|Mrs|Shri|Sh)\.?\s+[A-Z]|Counsel\s+for\s+the)", re.I)
+
+
 def classify_voice(sent, quote, prev_voice_in_para, para_has_case_ref, section):
     """Deterministic voice. Returns (voice, basis)."""
     if quote is not None:
@@ -377,7 +381,8 @@ def classify_voice(sent, quote, prev_voice_in_para, para_has_case_ref, section):
         return "precedent_report", "PRECEDENT_REPORT_PATTERN"
     if _PRECEDENT_PAST_RE.search(sent) and (_CASE_REF_RE.search(sent) or para_has_case_ref) and not own and not rej:
         return "precedent_report", "PAST_TENSE_REPORT_AFTER_CASE_CITATION"
-    subm = bool(c12._SUBMISSION_RE.search(sent)) and not rej and not strong and not re.match(r"^\W*(?:\d+\s*[.)]?\s*)?(?:We|In\s+our|I)\b", sent)
+    subm_lead = bool(_SUBM_LEAD_RE.match(sent))
+    subm = bool(c12._SUBMISSION_RE.search(sent)) and not rej and (subm_lead or not strong) and not re.match(r"^\W*(?:\d+\s*[.)]?\s*)?(?:We|In\s+our|I)\b", sent)
     if subm:
         return "submission", "SUBMISSION_PATTERN"
     if c12._LOWER_RE.search(sent) and not c12._COURT_ASSESS_RE.search(sent):
