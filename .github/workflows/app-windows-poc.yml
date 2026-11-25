@@ -129,6 +129,48 @@ jobs:
       - name: Django smoke, restart and crash-recovery test
         run: app/poc/p1_hosting/windows/smoke-and-recovery.ps1 -Name MimamsaPocDjango -Base http://127.0.0.1:5082 -Out out\django_service.json
 
+      # ---------------- R2-N01 (PR #53 Serving §10): credit ledger, uncertain transfers, bounded range delivery ----------------
+      - name: R2-N01 synthetic credit-ledger oracle (Windows)
+        run: |
+          $psql = Join-Path $env:PGBIN "psql.exe"; $env:PGPASSWORD = "root"
+          & $psql -U postgres -h 127.0.0.1 -c "CREATE DATABASE poc_oracle OWNER poc;" -c "CREATE DATABASE poc_r2n01 OWNER poc;"
+          & "$env:POC_ROOT\aspnet\MimamsaPocApi.exe" --ledger-oracle "Host=127.0.0.1;Port=5432;Username=poc;Password=poc;Database=poc_oracle;Maximum Pool Size=80" |
+            Out-File -Encoding utf8 out\r2n01_ledger_oracle_windows.json
+          $o = Get-Content out\r2n01_ledger_oracle_windows.json -Raw | ConvertFrom-Json
+          if (-not $o.allPass) { throw "ledger oracle failed on Windows" }
+
+      - name: R2-N01 transport tests (auth, bounds, concurrency, killed connections, crash/restart) on Windows
+        run: |
+          python app/poc/p1_hosting/fixtures/make_fixture_pdf.py "$env:RUNNER_TEMP\fx_big.pdf" --pages 300 --pad 20000
+          python app/poc/p1_hosting/fixtures/make_fixture_pdf.py "$env:RUNNER_TEMP\fx_small.pdf"
+          python app/poc/p1_hosting/r2n01/test_r2n01.py --server-cmd "$env:POC_ROOT\aspnet\MimamsaPocApi.exe" --server-cwd "$env:POC_ROOT\aspnet" `
+            --db "host=127.0.0.1 port=5432 user=poc password=poc dbname=poc_r2n01" `
+            --npgsql "Host=127.0.0.1;Port=5432;Username=poc;Password=poc;Database=poc_r2n01;Maximum Pool Size=40" `
+            --big "$env:RUNNER_TEMP\fx_big.pdf" --small "$env:RUNNER_TEMP\fx_small.pdf" --out out\r2n01_transport_windows.json --work "$env:RUNNER_TEMP\r2n01"
+
+      - name: R2-N01 PDF.js protected progressive bootstrap (Chromium via Playwright) on Windows
+        run: |
+          python app/poc/p1_hosting/fixtures/make_fixture_pdf.py "$env:RUNNER_TEMP\fx_big2.pdf" --pages 300 --pad 20000
+          $w = "$env:RUNNER_TEMP\r2n01_pdfjs"; New-Item -ItemType Directory -Force $w | Out-Null
+          python -c "import hashlib,json,sys; h=lambda p: hashlib.sha256(open(p,'rb').read()).hexdigest(); a,b=sys.argv[1],sys.argv[2]; json.dump({'sessions':[{'token':'tok-alice','user':'alice','session':'s-alice'},{'token':'tok-bob','user':'bob','session':'s-bob'},{'token':'tok-admin','user':'admin','session':'s-admin','admin':True}],'copies':[{'doc_id':'doc-big','source':a,'sha256':h(a)},{'doc_id':'doc-bnss','source':b,'sha256':h(b)}],'grants':[{'user':'alice','doc_id':'doc-big'},{'user':'alice','doc_id':'doc-bnss'}]}, open(sys.argv[3],'w'))" "$env:RUNNER_TEMP\fx_big.pdf" "$env:RUNNER_TEMP\fx_big2.pdf" "$w\seed.json"
+          Stop-Service MimamsaPocApi
+          $env:Urls = "http://127.0.0.1:5081"; $env:ASPNETCORE_URLS = $env:Urls
+          $env:Mimamsa__Db = "Host=127.0.0.1;Port=5432;Username=poc;Password=poc;Database=poc_r2n01"
+          $env:Mimamsa__SeedFile = "$w\seed.json"; $env:Mimamsa__VaultRoot = "$w\vault"; $env:Mimamsa__Test__ResetLedger = "true"
+          $srv = Start-Process -FilePath "$env:POC_ROOT\aspnet\MimamsaPocApi.exe" -WorkingDirectory "$env:POC_ROOT\aspnet" -PassThru -RedirectStandardOutput "$w\server.out" -RedirectStandardError "$w\server.err"
+          Push-Location app/poc/p4_pdf/pdfjs
+          npm ci --silent
+          npm install --no-save --silent playwright@1.63.0
+          npx playwright install chromium
+          npx vite build
+          $vite = Start-Process -FilePath "npx.cmd" -ArgumentList "vite","preview","--port","5199" -PassThru
+          Start-Sleep -Seconds 6
+          node run_protected.cjs http://127.0.0.1:5199 http://127.0.0.1:5081 "$env:GITHUB_WORKSPACE\out\r2n01_pdfjs_protected_windows.json"
+          Pop-Location
+          Stop-Process -Id $vite.Id -Force -ErrorAction SilentlyContinue; Stop-Process -Id $srv.Id -Force -ErrorAction SilentlyContinue
+          python app/poc/p1_hosting/r2n01/check_pdfjs_protected.py out\r2n01_pdfjs_protected_windows.json out\r2n01_pdfjs_protected_windows_checks.json
+          Start-Service MimamsaPocApi
+
       - name: Light load comparison on Windows (60 s total, informational)
         continue-on-error: true
         run: |

@@ -1,0 +1,534 @@
+{
+ "platform": "linux",
+ "checks": [
+  {
+   "name": "meta_authorized_ok",
+   "pass": true,
+   "status": 200
+  },
+  {
+   "name": "meta_unauthenticated_401",
+   "pass": true,
+   "status": 401
+  },
+  {
+   "name": "meta_bad_token_401",
+   "pass": true,
+   "status": 401
+  },
+  {
+   "name": "meta_other_users_doc_404_no_size",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "range_first_chunk_exact_206",
+   "pass": true,
+   "status": 206,
+   "headers": {
+    "content-length": "65536",
+    "connection": "close",
+    "content-type": "application/pdf",
+    "date": "Wed, 25 Nov 2026 15:01:23 GMT",
+    "accept-ranges": "bytes",
+    "cache-control": "no-store, private",
+    "content-range": "bytes 0-65535/46786968",
+    "pragma": "no-cache",
+    "x-content-type-options": "nosniff"
+   }
+  },
+  {
+   "name": "range_near_end_exact_206",
+   "pass": true,
+   "status": 206
+  },
+  {
+   "name": "range_max_size_exact_206",
+   "pass": true,
+   "status": 206,
+   "got": 131072
+  },
+  {
+   "name": "range_missing_400",
+   "pass": true,
+   "status": 400,
+   "body_len": 0
+  },
+  {
+   "name": "range_multi_400",
+   "pass": true,
+   "status": 400,
+   "body_len": 0
+  },
+  {
+   "name": "range_open_ended_400",
+   "pass": true,
+   "status": 400,
+   "body_len": 0
+  },
+  {
+   "name": "range_suffix_400",
+   "pass": true,
+   "status": 400,
+   "body_len": 0
+  },
+  {
+   "name": "range_oversized_400",
+   "pass": true,
+   "status": 400,
+   "body_len": 0
+  },
+  {
+   "name": "range_malformed_400",
+   "pass": true,
+   "status": 400,
+   "body_len": 0
+  },
+  {
+   "name": "range_reversed_400",
+   "pass": true,
+   "status": 400,
+   "body_len": 0
+  },
+  {
+   "name": "range_start_out_of_bounds_416",
+   "pass": true,
+   "status": 416,
+   "body_len": 0
+  },
+  {
+   "name": "range_end_out_of_bounds_416",
+   "pass": true,
+   "status": 416,
+   "body_len": 0
+  },
+  {
+   "name": "range_unauthenticated_401",
+   "pass": true,
+   "status": 401
+  },
+  {
+   "name": "range_bad_token_401",
+   "pass": true,
+   "status": 401
+  },
+  {
+   "name": "range_other_users_session_404",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "range_wrong_copy_for_doc_404",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "range_non_hex_address_404",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "conditional_if_none_match_no_304",
+   "pass": true,
+   "status": 206
+  },
+  {
+   "name": "conditional_if_modified_since_no_304",
+   "pass": true,
+   "status": 206
+  },
+  {
+   "name": "conditional_if_range_ignored",
+   "pass": true,
+   "status": 206
+  },
+  {
+   "name": "v1_static_route_not_a_vault_bypass",
+   "pass": true,
+   "status": 401
+  },
+  {
+   "name": "small_doc_before_withdrawal_206",
+   "pass": true,
+   "status": 206
+  },
+  {
+   "name": "withdraw_requires_admin",
+   "pass": true,
+   "status": 401
+  },
+  {
+   "name": "withdraw_admin_ok",
+   "pass": true,
+   "status": 200
+  },
+  {
+   "name": "after_withdrawal_range_404_no_bytes",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "after_withdrawal_meta_404",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "unrelated_eligible_doc_still_206",
+   "pass": true,
+   "status": 206
+  },
+  {
+   "name": "ledger_balances_after_functional_suite",
+   "pass": true,
+   "ledger": {
+    "cap": 8388608,
+    "reserved": 0,
+    "charged": 0,
+    "states": {
+     "DRAINED": 8
+    }
+   }
+  },
+  {
+   "name": "B1_site_cap_one_range_never_overcommits",
+   "pass": true,
+   "requests": 40,
+   "threads": 40,
+   "site_cap": 132096,
+   "ok_206": 1,
+   "denied_503": 39,
+   "other": 0,
+   "all_206_bodies_exact": true,
+   "wall_s": 0.62,
+   "ledger_end": {
+    "cap": 132096,
+    "reserved": 0,
+    "charged": 0,
+    "states": {
+     "DRAINED": 1
+    }
+   },
+   "max_site_outstanding": 132096,
+   "samples": 17063,
+   "violations": 0
+  },
+  {
+   "name": "B2_site_cap_1MiB_never_overcommits",
+   "pass": true,
+   "requests": 400,
+   "threads": 32,
+   "site_cap": 1048576,
+   "ok_206": 190,
+   "denied_503": 210,
+   "other": 0,
+   "all_206_bodies_exact": true,
+   "wall_s": 6.63,
+   "ledger_end": {
+    "cap": 1048576,
+    "reserved": 0,
+    "charged": 0,
+    "states": {
+     "DRAINED": 190
+    }
+   },
+   "max_site_outstanding": 1048454,
+   "samples": 76419,
+   "violations": 0
+  },
+  {
+   "name": "killed_connection_charge_retained_until_termination_then_drained",
+   "pass": true,
+   "uncertain": 4,
+   "n": 8
+  },
+  {
+   "name": "killed_connection_never_refunded_as_zero_transfer",
+   "pass": true,
+   "released": 0
+  },
+  {
+   "name": "withdrawal_between_slices_stops_handoff",
+   "pass": true,
+   "body_received": 65536,
+   "accepted": 65536,
+   "state": "ACCEPTED"
+  },
+  {
+   "name": "crash_charge_survives_restart",
+   "pass": true,
+   "ledger": {
+    "cap": 8388608,
+    "reserved": 132096,
+    "charged": 0,
+    "states": {
+     "RESERVED": 1
+    }
+   }
+  },
+  {
+   "name": "no_release_before_reconciliation_grace",
+   "pass": true,
+   "ledger": {
+    "cap": 8388608,
+    "reserved": 132096,
+    "charged": 0,
+    "states": {
+     "RESERVED": 1
+    }
+   }
+  },
+  {
+   "name": "explicit_reconciliation_releases_with_evidence",
+   "pass": true,
+   "ledger": {
+    "cap": 8388608,
+    "reserved": 0,
+    "charged": 0,
+    "states": {
+     "DRAINED": 1
+    }
+   }
+  }
+ ],
+ "scenarios": {
+  "A_functional": {
+   "ledger_end": {
+    "cap": 8388608,
+    "reserved": 0,
+    "charged": 0,
+    "states": {
+     "DRAINED": 8
+    }
+   }
+  },
+  "B1_site_cap_one_range": {
+   "requests": 40,
+   "threads": 40,
+   "site_cap": 132096,
+   "ok_206": 1,
+   "denied_503": 39,
+   "other": 0,
+   "all_206_bodies_exact": true,
+   "wall_s": 0.62,
+   "ledger_end": {
+    "cap": 132096,
+    "reserved": 0,
+    "charged": 0,
+    "states": {
+     "DRAINED": 1
+    }
+   },
+   "max_site_outstanding": 132096,
+   "samples": 17063,
+   "violations": 0
+  },
+  "B2_site_cap_1MiB": {
+   "requests": 400,
+   "threads": 32,
+   "site_cap": 1048576,
+   "ok_206": 190,
+   "denied_503": 210,
+   "other": 0,
+   "all_206_bodies_exact": true,
+   "wall_s": 6.63,
+   "ledger_end": {
+    "cap": 1048576,
+    "reserved": 0,
+    "charged": 0,
+    "states": {
+     "DRAINED": 190
+    }
+   },
+   "max_site_outstanding": 1048454,
+   "samples": 76419,
+   "violations": 0
+  },
+  "C_killed_connections": {
+   "trials": [
+    {
+     "received": 2048,
+     "mid_state": "UNCERTAIN",
+     "mid_charged": 132096,
+     "amount": 132096,
+     "mid_site_charged": 132096,
+     "mid_site_reserved": 0,
+     "end_state": "DRAINED",
+     "end_reason": "ertain: OperationCanceledException after 65536 bytes accepted | drained: kestrel connection 0HNQB0K0I3KOK terminated 2026-11-25T15:01:38.9581338Z; grace 3000 ms",
+     "end_site": {
+      "reserved": 0,
+      "charged": 0
+     }
+    },
+    {
+     "received": 2048,
+     "mid_state": "ACCEPTED",
+     "mid_charged": 132096,
+     "amount": 132096,
+     "mid_site_charged": 132096,
+     "mid_site_reserved": 0,
+     "end_state": "DRAINED",
+     "end_reason": "complete response handed to transport | drained: kestrel connection 0HNQB0K0I3KOL terminated 2026-11-25T15:01:44.0030510Z; grace 3000 ms",
+     "end_site": {
+      "reserved": 0,
+      "charged": 0
+     }
+    },
+    {
+     "received": 2048,
+     "mid_state": "ACCEPTED",
+     "mid_charged": 132096,
+     "amount": 132096,
+     "mid_site_charged": 132096,
+     "mid_site_reserved": 0,
+     "end_state": "DRAINED",
+     "end_reason": "complete response handed to transport | drained: kestrel connection 0HNQB0K0I3KOM terminated 2026-11-25T15:01:49.0488914Z; grace 3000 ms",
+     "end_site": {
+      "reserved": 0,
+      "charged": 0
+     }
+    },
+    {
+     "received": 2048,
+     "mid_state": "ACCEPTED",
+     "mid_charged": 132096,
+     "amount": 132096,
+     "mid_site_charged": 132096,
+     "mid_site_reserved": 0,
+     "end_state": "DRAINED",
+     "end_reason": "complete response handed to transport | drained: kestrel connection 0HNQB0K0I3KON terminated 2026-11-25T15:01:54.0949765Z; grace 3000 ms",
+     "end_site": {
+      "reserved": 0,
+      "charged": 0
+     }
+    },
+    {
+     "received": 2048,
+     "mid_state": "ACCEPTED",
+     "mid_charged": 132096,
+     "amount": 132096,
+     "mid_site_charged": 132096,
+     "mid_site_reserved": 0,
+     "end_state": "DRAINED",
+     "end_reason": "complete response handed to transport | drained: kestrel connection 0HNQB0K0I3KOO terminated 2026-11-25T15:01:59.8941634Z; grace 3000 ms",
+     "end_site": {
+      "reserved": 0,
+      "charged": 0
+     }
+    },
+    {
+     "received": 2048,
+     "mid_state": "UNCERTAIN",
+     "mid_charged": 132096,
+     "amount": 132096,
+     "mid_site_charged": 132096,
+     "mid_site_reserved": 0,
+     "end_state": "DRAINED",
+     "end_reason": "ertain: OperationCanceledException after 65536 bytes accepted | drained: kestrel connection 0HNQB0K0I3KOP terminated 2026-11-25T15:02:04.7848346Z; grace 3000 ms",
+     "end_site": {
+      "reserved": 0,
+      "charged": 0
+     }
+    },
+    {
+     "received": 2048,
+     "mid_state": "UNCERTAIN",
+     "mid_charged": 132096,
+     "amount": 132096,
+     "mid_site_charged": 132096,
+     "mid_site_reserved": 0,
+     "end_state": "DRAINED",
+     "end_reason": "ertain: OperationCanceledException after 65536 bytes accepted | drained: kestrel connection 0HNQB0K0I3KOQ terminated 2026-11-25T15:02:09.6899166Z; grace 3000 ms",
+     "end_site": {
+      "reserved": 0,
+      "charged": 0
+     }
+    },
+    {
+     "received": 2048,
+     "mid_state": "UNCERTAIN",
+     "mid_charged": 132096,
+     "amount": 132096,
+     "mid_site_charged": 132096,
+     "mid_site_reserved": 0,
+     "end_state": "DRAINED",
+     "end_reason": "ertain: OperationCanceledException after 65536 bytes accepted | drained: kestrel connection 0HNQB0K0I3KOR terminated 2026-11-25T15:02:14.7512387Z; grace 3000 ms",
+     "end_site": {
+      "reserved": 0,
+      "charged": 0
+     }
+    }
+   ],
+   "uncertain_count": 4
+  },
+  "C_withdraw_mid_response": {
+   "withdraw_status": 200,
+   "body_received": 65536,
+   "content_length": 131072,
+   "reservation": {
+    "res_id": "6dcd6ddd-b011-4b72-9d10-b87472b6bc8f",
+    "state": "ACCEPTED",
+    "amount": 132096,
+    "charged": 66560,
+    "accepted": 65536,
+    "reason": "withdrawn mid-response: aborted after accepted prefix",
+    "start": 300000,
+    "instance": "vm:10923:991ae002e8d149c1926143a880d8d809"
+   },
+   "post_fence_request_status": 404
+  },
+  "D_crash_restart": {
+   "before": [
+    {
+     "res_id": "6e1d7c1b-d18a-4449-a519-df65be5bfdd8",
+     "state": "RESERVED",
+     "amount": 132096,
+     "charged": 0,
+     "accepted": 0,
+     "reason": null,
+     "start": 500000,
+     "instance": "vm:11076:93f746991e4d430e9738d624308a4261"
+    }
+   ],
+   "ledger_after_restart": {
+    "cap": 8388608,
+    "reserved": 132096,
+    "charged": 0,
+    "states": {
+     "RESERVED": 1
+    }
+   },
+   "early": "{\"drained\":0}",
+   "ledger_after_early": {
+    "cap": 8388608,
+    "reserved": 132096,
+    "charged": 0,
+    "states": {
+     "RESERVED": 1
+    }
+   },
+   "late": "{\"drained\":1}",
+   "ledger_after_reconcile": {
+    "cap": 8388608,
+    "reserved": 0,
+    "charged": 0,
+    "states": {
+     "DRAINED": 1
+    }
+   },
+   "after": [
+    {
+     "res_id": "6e1d7c1b-d18a-4449-a519-df65be5bfdd8",
+     "state": "DRAINED",
+     "amount": 132096,
+     "charged": 132096,
+     "accepted": 0,
+     "reason": " | unsettled at termination: treated as uncertain | drained: prior instance reconciled: old-process-killed-by-test-harness;grace-3s",
+     "start": 500000,
+     "instance": "vm:11076:93f746991e4d430e9738d624308a4261"
+    }
+   ]
+  }
+ },
+ "all_pass": true,
+ "n_checks": 40
+}

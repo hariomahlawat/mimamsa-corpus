@@ -2,6 +2,7 @@
 // highlight rectangles for a search term using the text-item transforms. Metrics go to window.__metrics.
 import * as pdfjsLib from "pdfjs-dist";
 import workerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+import { openProtected } from "./protected.js";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl;
 const params = new URLSearchParams(location.search);
@@ -12,9 +13,24 @@ const m = { file, pageNo, term };
 const t0 = performance.now();
 
 async function run() {
-  const httpHeaders = params.get("auth") ? { Authorization: `Bearer ${params.get("auth")}` } : undefined;
-  const task = pdfjsLib.getDocument({ url: file, httpHeaders, disableAutoFetch: true, disableStream: true, rangeChunkSize: 65536 });
+  let task;
+  if (params.get("mode") === "protected") {
+    task = await openProtected(params.get("doc"), params.get("token"), m);
+  } else {
+    const httpHeaders = params.get("auth") ? { Authorization: `Bearer ${params.get("auth")}` } : undefined;
+    task = pdfjsLib.getDocument({ url: file, httpHeaders, disableAutoFetch: true, disableStream: true, rangeChunkSize: 65536 });
+  }
   const doc = await task.promise;
+  window.__goto = async (n) => {   // navigation after bootstrap (near-end jump / post-withdrawal attempt)
+    const t = performance.now();
+    try {
+      const pg = await doc.getPage(n);
+      const vp = pg.getViewport({ scale: 1.0 });
+      const cv = document.createElement("canvas"); cv.width = vp.width; cv.height = vp.height;
+      await pg.render({ canvasContext: cv.getContext("2d"), viewport: vp, canvas: cv }).promise;
+      return { page: n, ok: true, ms: performance.now() - t };
+    } catch (e) { return { page: n, ok: false, error: String(e), withdrawn: !!m.withdrawn, ms: performance.now() - t }; }
+  };
   m.numPages = doc.numPages;
   m.open_ms = performance.now() - t0;
   const page = await doc.getPage(Math.min(pageNo, doc.numPages));

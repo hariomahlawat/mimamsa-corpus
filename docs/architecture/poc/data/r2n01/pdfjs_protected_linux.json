@@ -1,0 +1,1098 @@
+{
+ "pdfjs_dist": "6.5.438",
+ "playwright": "1.63.0",
+ "results": [
+  {
+   "label": "46MB rules: first page then near-end jump (p47/47)",
+   "first_page": {
+    "total_ms": 1149.3000000000466,
+    "render_ms": 510.19999999995343,
+    "numPages": 47,
+    "error": null,
+    "highlights": 0
+   },
+   "bytes_after_first_page": 1174098,
+   "length": 46786968,
+   "goto": {
+    "page": 47,
+    "ok": true,
+    "ms": 266.89999999990687
+   },
+   "metrics_ranges": [
+    {
+     "a": 0,
+     "b": 65535,
+     "status": 206,
+     "ms": 130
+    },
+    {
+     "a": 46727168,
+     "b": 46786967,
+     "status": 206,
+     "ms": 79
+    },
+    {
+     "a": 983040,
+     "b": 1048575,
+     "status": 206,
+     "ms": 24
+    },
+    {
+     "a": 46661632,
+     "b": 46727167,
+     "status": 206,
+     "ms": 33
+    },
+    {
+     "a": 65536,
+     "b": 196607,
+     "status": 206,
+     "ms": 36
+    },
+    {
+     "a": 196608,
+     "b": 327679,
+     "status": 206,
+     "ms": 9
+    },
+    {
+     "a": 327680,
+     "b": 458751,
+     "status": 206,
+     "ms": 33
+    },
+    {
+     "a": 458752,
+     "b": 589823,
+     "status": 206,
+     "ms": 17
+    },
+    {
+     "a": 589824,
+     "b": 720895,
+     "status": 206,
+     "ms": 12
+    },
+    {
+     "a": 720896,
+     "b": 851967,
+     "status": 206,
+     "ms": 17
+    },
+    {
+     "a": 851968,
+     "b": 983039,
+     "status": 206,
+     "ms": 12
+    },
+    {
+     "a": 45875200,
+     "b": 45940735,
+     "status": 206,
+     "ms": 20
+    },
+    {
+     "a": 45940736,
+     "b": 46071807,
+     "status": 206,
+     "ms": 18
+    },
+    {
+     "a": 46071808,
+     "b": 46202879,
+     "status": 206,
+     "ms": 14
+    },
+    {
+     "a": 46202880,
+     "b": 46333951,
+     "status": 206,
+     "ms": 13
+    },
+    {
+     "a": 46333952,
+     "b": 46465023,
+     "status": 206,
+     "ms": 10
+    },
+    {
+     "a": 46465024,
+     "b": 46596095,
+     "status": 206,
+     "ms": 10
+    },
+    {
+     "a": 46596096,
+     "b": 46661631,
+     "status": 206,
+     "ms": 14
+    }
+   ],
+   "transport_error": null,
+   "network": [
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/pdf-meta",
+     "status": 200,
+     "range": null,
+     "auth": true,
+     "bytes": 186,
+     "t": 1795619065939
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=0-65535",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619066191
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=46727168-46786967",
+     "auth": true,
+     "bytes": 59800,
+     "t": 1795619066272
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=983040-1048575",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619066329
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=46661632-46727167",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619066372
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=65536-196607",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619066372
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=196608-327679",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619066387
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=327680-458751",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619066411
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=458752-589823",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619066432
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=589824-720895",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619066448
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=720896-851967",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619066467
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=851968-983039",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619066520
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=45875200-45940735",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619066875
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=45940736-46071807",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619066898
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=46071808-46202879",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619066912
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=46202880-46333951",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619066927
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=46333952-46465023",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619066939
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=46465024-46596095",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619066953
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=46596096-46661631",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619066966
+    }
+   ],
+   "total_bytes": 1960530,
+   "summary": {
+    "requests": 19,
+    "range_requests": 18,
+    "all_range_requests_authenticated": true,
+    "all_range_requests_have_range_header": true,
+    "max_range_bytes": 131072,
+    "any_request_without_range_to_pdf": false,
+    "statuses": {
+     "206": 18
+    },
+    "post_fence_206": null,
+    "fraction_of_file_fetched": 0.0419,
+    "wall_ms": 1889
+   }
+  },
+  {
+   "label": "BNSS 282 pages: first page then near-end jump (p280)",
+   "first_page": {
+    "total_ms": 511.19999999995343,
+    "render_ms": 118.10000000009313,
+    "numPages": 282,
+    "error": null,
+    "highlights": 0
+   },
+   "bytes_after_first_page": 578896,
+   "length": 2872470,
+   "goto": {
+    "page": 280,
+    "ok": true,
+    "ms": 64.80000000004657
+   },
+   "metrics_ranges": [
+    {
+     "a": 0,
+     "b": 65535,
+     "status": 206,
+     "ms": 39
+    },
+    {
+     "a": 2818048,
+     "b": 2872469,
+     "status": 206,
+     "ms": 33
+    },
+    {
+     "a": 2621440,
+     "b": 2686975,
+     "status": 206,
+     "ms": 19
+    },
+    {
+     "a": 2686976,
+     "b": 2752511,
+     "status": 206,
+     "ms": 10
+    },
+    {
+     "a": 2752512,
+     "b": 2818047,
+     "status": 206,
+     "ms": 14
+    },
+    {
+     "a": 65536,
+     "b": 131071,
+     "status": 206,
+     "ms": 58
+    },
+    {
+     "a": 262144,
+     "b": 327679,
+     "status": 206,
+     "ms": 14
+    },
+    {
+     "a": 2359296,
+     "b": 2424831,
+     "status": 206,
+     "ms": 11
+    },
+    {
+     "a": 2424832,
+     "b": 2490367,
+     "status": 206,
+     "ms": 15
+    },
+    {
+     "a": 2490368,
+     "b": 2555903,
+     "status": 206,
+     "ms": 9
+    },
+    {
+     "a": 1638400,
+     "b": 1703935,
+     "status": 206,
+     "ms": 15
+    }
+   ],
+   "transport_error": null,
+   "network": [
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/pdf-meta",
+     "status": 200,
+     "range": null,
+     "auth": true,
+     "bytes": 186,
+     "t": 1795619067621
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=0-65535",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619067780
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=2818048-2872469",
+     "auth": true,
+     "bytes": 54422,
+     "t": 1795619067818
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=2621440-2686975",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619067839
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=2686976-2752511",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619067858
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=2752512-2818047",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619067896
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=65536-131071",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619067960
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=262144-327679",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619067989
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=2359296-2424831",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619068004
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=2424832-2490367",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619068027
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=2490368-2555903",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619068134
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=1638400-1703935",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619068138
+    }
+   ],
+   "total_bytes": 709968,
+   "summary": {
+    "requests": 12,
+    "range_requests": 11,
+    "all_range_requests_authenticated": true,
+    "all_range_requests_have_range_header": true,
+    "max_range_bytes": 65536,
+    "any_request_without_range_to_pdf": false,
+    "statuses": {
+     "206": 11
+    },
+    "post_fence_206": null,
+    "fraction_of_file_fetched": 0.2472,
+    "wall_ms": 961
+   }
+  },
+  {
+   "label": "unauthenticated viewer (forged token)",
+   "first_page": {
+    "error": "Error: meta 401"
+   },
+   "bytes_after_first_page": 0,
+   "metrics_ranges": [],
+   "transport_error": null,
+   "network": [
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/pdf-meta",
+     "status": 401,
+     "range": null,
+     "auth": true,
+     "bytes": 0,
+     "t": 1795619068637
+    }
+   ],
+   "total_bytes": 0,
+   "summary": {
+    "requests": 1,
+    "range_requests": 0,
+    "all_range_requests_authenticated": true,
+    "all_range_requests_have_range_header": true,
+    "max_range_bytes": 0,
+    "any_request_without_range_to_pdf": false,
+    "statuses": {},
+    "post_fence_206": null,
+    "fraction_of_file_fetched": null,
+    "wall_ms": 102
+   }
+  },
+  {
+   "label": "another user's session (bob, not granted)",
+   "first_page": {
+    "error": "Error: meta 404"
+   },
+   "bytes_after_first_page": 0,
+   "metrics_ranges": [],
+   "transport_error": null,
+   "network": [
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/pdf-meta",
+     "status": 404,
+     "range": null,
+     "auth": true,
+     "bytes": 0,
+     "t": 1795619068807
+    }
+   ],
+   "total_bytes": 0,
+   "summary": {
+    "requests": 1,
+    "range_requests": 0,
+    "all_range_requests_authenticated": true,
+    "all_range_requests_have_range_header": true,
+    "max_range_bytes": 0,
+    "any_request_without_range_to_pdf": false,
+    "statuses": {},
+    "post_fence_206": null,
+    "fraction_of_file_fetched": null,
+    "wall_ms": 136
+   }
+  },
+  {
+   "label": "BNSS: withdraw between chunks, then jump to p270",
+   "first_page": {
+    "total_ms": 378.9000000001397,
+    "render_ms": 116,
+    "numPages": 282,
+    "error": null,
+    "highlights": 0
+   },
+   "bytes_after_first_page": 578896,
+   "length": 2872470,
+   "withdraw": {
+    "status": 200,
+    "body": "{\"fence_seq\":1,\"at\":\"2026-11-25T15:04:29.3988416Z\"}"
+   },
+   "fence_at": 1795619069416,
+   "goto": {
+    "page": 270,
+    "ok": false,
+    "error": "RenderingCancelledException: Rendering cancelled, page 270",
+    "withdrawn": true,
+    "ms": 12.100000000093132
+   },
+   "metrics_ranges": [
+    {
+     "a": 0,
+     "b": 65535,
+     "status": 206,
+     "ms": 11
+    },
+    {
+     "a": 2818048,
+     "b": 2872469,
+     "status": 206,
+     "ms": 12
+    },
+    {
+     "a": 2621440,
+     "b": 2686975,
+     "status": 206,
+     "ms": 18
+    },
+    {
+     "a": 2686976,
+     "b": 2752511,
+     "status": 206,
+     "ms": 9
+    },
+    {
+     "a": 2752512,
+     "b": 2818047,
+     "status": 206,
+     "ms": 14
+    },
+    {
+     "a": 65536,
+     "b": 131071,
+     "status": 206,
+     "ms": 24
+    },
+    {
+     "a": 262144,
+     "b": 327679,
+     "status": 206,
+     "ms": 12
+    },
+    {
+     "a": 2359296,
+     "b": 2424831,
+     "status": 206,
+     "ms": 15
+    },
+    {
+     "a": 2424832,
+     "b": 2490367,
+     "status": 206,
+     "ms": 10
+    },
+    {
+     "a": 1572864,
+     "b": 1638399,
+     "status": 404,
+     "ms": 10
+    },
+    {
+     "a": 2490368,
+     "b": 2555903,
+     "status": 404,
+     "ms": 19
+    }
+   ],
+   "transport_error": "Error: range 404",
+   "network": [
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/pdf-meta",
+     "status": 200,
+     "range": null,
+     "auth": true,
+     "bytes": 186,
+     "t": 1795619068992
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=0-65535",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619069090
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=2818048-2872469",
+     "auth": true,
+     "bytes": 54422,
+     "t": 1795619069107
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=2621440-2686975",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619069127
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=2686976-2752511",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619069145
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=2752512-2818047",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619069168
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=65536-131071",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619069211
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=262144-327679",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619069238
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=2359296-2424831",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619069252
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=2424832-2490367",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619069267
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 404,
+     "range": "bytes=1572864-1638399",
+     "auth": true,
+     "bytes": 0,
+     "t": 1795619069439
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-bnss/copies/<sha>/range",
+     "status": 404,
+     "range": "bytes=2490368-2555903",
+     "auth": true,
+     "bytes": 0,
+     "t": 1795619069451
+    }
+   ],
+   "total_bytes": 578896,
+   "summary": {
+    "requests": 12,
+    "range_requests": 11,
+    "all_range_requests_authenticated": true,
+    "all_range_requests_have_range_header": true,
+    "max_range_bytes": 65536,
+    "any_request_without_range_to_pdf": false,
+    "statuses": {
+     "206": 9,
+     "404": 2
+    },
+    "post_fence_206": 0,
+    "fraction_of_file_fetched": 0.2015,
+    "wall_ms": 840
+   }
+  },
+  {
+   "label": "unrelated eligible document after the withdrawal (positive control)",
+   "first_page": {
+    "total_ms": 663.3000000000466,
+    "render_ms": 481.0999999998603,
+    "numPages": 47,
+    "error": null,
+    "highlights": 0
+   },
+   "bytes_after_first_page": 1174098,
+   "length": 46786968,
+   "goto": {
+    "page": 30,
+    "ok": true,
+    "ms": 329.0999999998603
+   },
+   "metrics_ranges": [
+    {
+     "a": 0,
+     "b": 65535,
+     "status": 206,
+     "ms": 17
+    },
+    {
+     "a": 46727168,
+     "b": 46786967,
+     "status": 206,
+     "ms": 6
+    },
+    {
+     "a": 983040,
+     "b": 1048575,
+     "status": 206,
+     "ms": 12
+    },
+    {
+     "a": 65536,
+     "b": 196607,
+     "status": 206,
+     "ms": 19
+    },
+    {
+     "a": 46661632,
+     "b": 46727167,
+     "status": 206,
+     "ms": 23
+    },
+    {
+     "a": 196608,
+     "b": 327679,
+     "status": 206,
+     "ms": 11
+    },
+    {
+     "a": 327680,
+     "b": 458751,
+     "status": 206,
+     "ms": 8
+    },
+    {
+     "a": 458752,
+     "b": 589823,
+     "status": 206,
+     "ms": 10
+    },
+    {
+     "a": 589824,
+     "b": 720895,
+     "status": 206,
+     "ms": 12
+    },
+    {
+     "a": 720896,
+     "b": 851967,
+     "status": 206,
+     "ms": 13
+    },
+    {
+     "a": 851968,
+     "b": 983039,
+     "status": 206,
+     "ms": 14
+    },
+    {
+     "a": 28704768,
+     "b": 28770303,
+     "status": 206,
+     "ms": 11
+    },
+    {
+     "a": 29687808,
+     "b": 29753343,
+     "status": 206,
+     "ms": 17
+    },
+    {
+     "a": 28770304,
+     "b": 28901375,
+     "status": 206,
+     "ms": 13
+    },
+    {
+     "a": 28901376,
+     "b": 29032447,
+     "status": 206,
+     "ms": 6
+    },
+    {
+     "a": 29032448,
+     "b": 29163519,
+     "status": 206,
+     "ms": 15
+    },
+    {
+     "a": 29163520,
+     "b": 29294591,
+     "status": 206,
+     "ms": 11
+    },
+    {
+     "a": 29294592,
+     "b": 29425663,
+     "status": 206,
+     "ms": 18
+    },
+    {
+     "a": 29425664,
+     "b": 29556735,
+     "status": 206,
+     "ms": 11
+    },
+    {
+     "a": 29556736,
+     "b": 29687807,
+     "status": 206,
+     "ms": 14
+    }
+   ],
+   "transport_error": null,
+   "network": [
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/pdf-meta",
+     "status": 200,
+     "range": null,
+     "auth": true,
+     "bytes": 186,
+     "t": 1795619069872
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=0-65535",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619069991
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=46727168-46786967",
+     "auth": true,
+     "bytes": 59800,
+     "t": 1795619070003
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=983040-1048575",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619070028
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=65536-196607",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619070048
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=46661632-46727167",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619070052
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=196608-327679",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619070063
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=327680-458751",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619070072
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=458752-589823",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619070084
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=589824-720895",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619070100
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=720896-851967",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619070115
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=851968-983039",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619070132
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=28704768-28770303",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619070556
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=29687808-29753343",
+     "auth": true,
+     "bytes": 65536,
+     "t": 1795619070559
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=28770304-28901375",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619070575
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=28901376-29032447",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619070582
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=29032448-29163519",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619070602
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=29163520-29294591",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619070615
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=29294592-29425663",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619070635
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=29425664-29556735",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619070648
+    },
+    {
+     "url": "http://127.0.0.1:5199/api/v2/documents/doc-big/copies/<sha>/range",
+     "status": 206,
+     "range": "bytes=29556736-29687807",
+     "auth": true,
+     "bytes": 131072,
+     "t": 1795619070663
+    }
+   ],
+   "total_bytes": 2222674,
+   "summary": {
+    "requests": 21,
+    "range_requests": 20,
+    "all_range_requests_authenticated": true,
+    "all_range_requests_have_range_header": true,
+    "max_range_bytes": 131072,
+    "any_request_without_range_to_pdf": false,
+    "statuses": {
+     "206": 20
+    },
+    "post_fence_206": null,
+    "fraction_of_file_fetched": 0.0475,
+    "wall_ms": 1380
+   }
+  }
+ ]
+}

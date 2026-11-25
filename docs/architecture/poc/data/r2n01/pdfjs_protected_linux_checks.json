@@ -1,0 +1,53 @@
+{
+ "all_pass": true,
+ "checks": [
+  {
+   "name": "[46MB rules: first page then near-end jump (p47/47)] every range request authenticated and bounded",
+   "pass": true
+  },
+  {
+   "name": "[BNSS 282 pages: first page then near-end jump (p280)] every range request authenticated and bounded",
+   "pass": true
+  },
+  {
+   "name": "[unauthenticated viewer (forged token)] every range request authenticated and bounded",
+   "pass": true
+  },
+  {
+   "name": "[another user's session (bob, not granted)] every range request authenticated and bounded",
+   "pass": true
+  },
+  {
+   "name": "[BNSS: withdraw between chunks, then jump to p270] every range request authenticated and bounded",
+   "pass": true
+  },
+  {
+   "name": "[unrelated eligible document after the withdrawal (positive control)] every range request authenticated and bounded",
+   "pass": true
+  },
+  {
+   "name": "[46MB rules: first page then near-end jump (p47/47)] first page rendered and target page rendered, partial fetch",
+   "pass": true
+  },
+  {
+   "name": "[BNSS 282 pages: first page then near-end jump (p280)] first page rendered and target page rendered, partial fetch",
+   "pass": true
+  },
+  {
+   "name": "[unrelated eligible document after the withdrawal (positive control)] first page rendered and target page rendered, partial fetch",
+   "pass": true
+  },
+  {
+   "name": "forged token: no range request, viewer error",
+   "pass": true
+  },
+  {
+   "name": "other user's session: no range request, 404",
+   "pass": true
+  },
+  {
+   "name": "withdrawal between chunks: zero post-fence 206, viewer invalidated",
+   "pass": true
+  }
+ ]
+}
