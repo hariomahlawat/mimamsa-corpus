@@ -2,17 +2,21 @@
 
 **Status.** Candidate data and AI documentary checks only. Nothing here is legally validated. No evidence class, authentication state or AUTH-LEDGER entry was changed (the ledger stays at version 0). The treatment extractor is **not frozen**: it waits for the coordinator to confirm that A0 has been accepted.
 
+**Review.** An independent review of `f915ac11` returned ACCEPT WITH CONDITIONS (`reviews/`, copied unchanged). This revision addresses its P2 findings F01-F04 and its P3 findings F05, F06, F08 and F09. F07 is addressed in wording (`scnum/ERRATA_C13.md`).
+
 Branch `claude/c13-a5-graph`. Inputs are pinned: text and metadata at raw-data commit `ad77758d` (read as git objects from `/home/user/c7`), C10/C11/C12 audit files at staging `a4c0c382`, and HF corpus revision `3864faf3`.
 
 ## Deliverables
 
 | # | Deliverable | Where | Tool (`--check`) |
 | --- | --- | --- | --- |
-| 1 | Graph schema and data contract (IC-01) | `schema/graph_node.schema.json`, `schema/graph_edge.schema.json`, this README, `graph/IC01_EXPORT_MANIFEST.json` | n/a |
+| 1 | Graph schema and native data format (the earlier "IC-01" outline is superseded for import by Track B contract v1; see 1a) | `schema/graph_node.schema.json`, `schema/graph_edge.schema.json`, this README, `graph/IC01_EXPORT_MANIFEST.json` | n/a |
 | 2 | Passage-level treatment extraction | `treatment/` | `tools/treatment_c13.py` |
 | 3 | Identity-resolution overlay for duplicate legal identities | `identity/` | `tools/identity_c13.py` |
 | 4 | Reconfirmation of the 99 staged SC case-number corrections, the overlay, and the HF application | `scnum/`, `hf/` | `tools/scnum_reconfirm_c13.py`, `tools/hf_overlay_c13.py` |
-| 5 | Candidate graph and IC-01 export | `graph/` | `tools/graph_c13.py` |
+| 5 | Candidate graph (native) | `graph/` | `tools/graph_c13.py` |
+| 5a | Track B contract v1 export (review F04) | `contract_v1/` | `tools/contract_v1_export_c13.py` |
+| 5b | Re-check of the reviewer's 54-edge sample (F01-F03) | `treatment/REVIEW_SAMPLE_RECHECK_C13.*` | `tools/review_recheck_c13.py` |
 | 6 | Packaging | `SHA256SUMS`, tests `tests/test_legal_audit_c13_graph_*.py` | `tools/package_c13.py` |
 
 ## Reproduce
@@ -24,21 +28,23 @@ $PY -I -B tools/identity_c13.py --check
 $PY -I -B tools/treatment_c13.py --check            # about 4 minutes
 $PY -I -B tools/treatment_c13.py --dev-only         # in-sample score only; writes nothing
 $PY -I -B tools/graph_c13.py --check                # validates every node and edge against the schemas
+$PY -I -B tools/review_recheck_c13.py --check
+$PY -I -B tools/contract_v1_export_c13.py --check   # pins Track B contract commit 5f4b8071
 $PY -I -B tools/hf_overlay_c13.py --check [--online]
 $PY -I -B tools/package_c13.py --check
 $PY -B -m pytest -q tests/test_legal_audit_c13_graph_*.py   # C13_SKIP_SLOW=1 skips the --check subprocess test
 ```
 
-Order of a full rebuild: scnum, identity, treatment, graph, package. The `.gz` outputs are gzip with mtime 0. `--check` compares their decompressed content. Standard library only, except PyMuPDF (scnum) and jsonschema (validation, optional in the build, used by the tests).
+Order of a full rebuild: scnum, identity, treatment, graph, review_recheck, then commit the tools (the contract export records each extractor's artefact commit), then contract_v1_export and package. The `.gz` outputs are gzip with mtime 0. `--check` compares their decompressed content. Standard library only, except PyMuPDF (scnum) and jsonschema (validation, optional in the build, used by the tests).
 
 ## Restricted material
 
-`config/restricted_material.json` (RM-001) is read from the worktree when present. Otherwise it is read from governance commit `ea282cbd` (`claude/c13-gov`) as a git object; its sha256 is recorded in every summary.
+`config/restricted_material.json` (RM-001) is read from the worktree when present. Otherwise it is read from governance commit `72fe7a75` (`claude/c13-gov` head; re-pinned from `ea282cbd` after review F05, sha256 `fc7ea07e…`; RM-001 identifiers unchanged) as a git object. Its sha256 is recorded in every summary.
 - The FOUO Regulations for the Air Force 2000 copy (`4284820e…`) and its derived text and metadata (`regs-regulations-for-the-air-force-reprinted-edition-2000`) are excluded from every node, edge and export.
 - `graph_c13.py` fails the build if any restricted sha256 or doc_id appears in its serialised output. The identity overlay withholds that one copy and counts it.
 - A test scans every output file in this package.
 
-## 1. Data contract (IC-01)
+## 1. Native graph format (schemas; superseded for Track B import by contract v1, section 1a)
 
 ### Nodes
 
@@ -116,7 +122,7 @@ Order of a full rebuild: scnum, identity, treatment, graph, package. The `.gz` o
 | `nodes.jsonl.gz` | Nodes |
 | `edges_candidate.jsonl.gz` | Candidate and proposed edges |
 | `edges_reviewed.jsonl` | Reviewed edges |
-| `EDGE_TYPE_EVALUATION_C13.json` | Per-type measured precision, or NOT_MEASURED. Each edge's `evaluation_ref` points into it |
+| `EDGE_TYPE_EVALUATION_C13.json` | Per type: `displayable_measured_precision` (null for every type, because no figure is human-checked and independent of the current extractor), the development/in-sample counts (`displayable: false`), and the independent AI review figures for the f915ac11 version. Each edge's `evaluation_ref` points into it |
 | `GRAPH_SUMMARY_C13.json` | Counts and input hashes |
 | `IC01_EXPORT_MANIFEST.json` | Schema hashes, file sha256 (uncompressed content), pins (text commit, HF revision, HF overlay commit) and semantics |
 
@@ -139,76 +145,116 @@ A Track B release pins the git commit containing the manifest.
 | ADMINISTRATIVE_REQUIREMENT | 36 |
 | PROCEDURE | 34 |
 
-45,134 edges: 44,961 candidate or proposed, and 173 reviewed.
+44,997 edges: 44,826 candidate or proposed, and 171 reviewed (AI documentary).
 
-| Edge type | Total | Reviewed (AI documentary) |
-| --- | --- | --- |
-| CITES | 23,222 | 69 (target-correct review rows: 69 of 70) |
-| CITES_PROVISION | 11,076 | 61 |
-| DECIDES_PROCEEDING | 5,555 | 0 |
-| STATES_PROPOSITION / RAISES_QUESTION | 2,325 / 258 | 0 |
-| HAS_PROVISION | 1,008 | 0 |
-| CONSIDERS | 368 | 0 |
-| FOLLOWS | 278 | 32 |
-| DISTINGUISHES | 34 | 10 |
-| APPLIES | 12 | 1 |
-| OVERRULES | 9 | 0 (always candidate) |
-| DISAPPROVES | 4 | 0 (always candidate) |
-| EXPLAINS | 4 | 0 |
-| DOUBTS | 1 | 0 (always candidate) |
-| APPLIES_PROVISION | 0 | – |
-| Amendment (C10 graph, 99 entries) | 99 | 0 (82 PROPOSED_NOT_APPLIED) |
-| Forms (4 types) | 881 | 0 |
+| Edge type | Total | Reviewed (AI documentary) | Reliability |
+| --- | --- | --- | --- |
+| CITES | 23,222 | 69 | |
+| CITES_PROVISION | 11,076 | 61 | |
+| DECIDES_PROCEEDING | 5,555 | 0 | |
+| STATES_PROPOSITION / RAISES_QUESTION | 2,325 / 258 | 0 | research-restricted |
+| HAS_PROVISION | 1,008 | 0 | |
+| CONSIDERS | 272 | 0 | candidate |
+| FOLLOWS | 257 | 31 | candidate; 159 of 257 come from one Delhi HC 2025 template ("covered by ... Gawas Anil Madso", F09) |
+| DISTINGUISHES | 25 | 9 | **LOW_RELIABILITY_CANDIDATE** |
+| APPLIES | 7 | 1 | **LOW_RELIABILITY_CANDIDATE** |
+| OVERRULES | 8 | 0 (always candidate) | candidate |
+| DISAPPROVES | 4 | 0 (always candidate) | candidate |
+| EXPLAINS | 0 | – | **LOW_RELIABILITY_CANDIDATE** |
+| DOUBTS | 0 | – | **LOW_RELIABILITY_CANDIDATE** |
+| APPLIES_PROVISION | 0 | – | |
+| Amendment (C10 graph, 99 entries) | 99 | 0 (82 PROPOSED_NOT_APPLIED) | |
+| Forms (4 types) | 881 | 0 | research-restricted |
 
-The full breakdown by type and state is in `graph/GRAPH_SUMMARY_C13.json`.
+`LOW_RELIABILITY_CANDIDATE` appears in both `restrictions` and `attributes.reliability`, so consumers can filter these edges out. They are not exported under contract v1. The full breakdown by type and state is in `graph/GRAPH_SUMMARY_C13.json`.
 
-**The 9 OVERRULES candidates:**
+**The 8 OVERRULES candidates.** The two Mafatlal p.105 lead rows were merged (F08).
 - Puttaswamy (2017) pp.167, 275, 276 and 432;
-- Joseph Shine p.74 (×2);
-- Mafatlal p.105 (×2: "decisions of this Court saying to the contrary"; raw target only);
+- Joseph Shine p.74 (×2: Sowmithri Vishnu and V. Revathi, each with its anchor citation appended to the raw target);
+- Mafatlal p.105 ("decisions of this Court saying to the contrary"; raw target only);
 - V. Sriharan p.99 ("we specifically overrule", Sangeet).
 
-Most have raw-text targets with `binding = RAW_TARGET_ONLY_BINDING_NOT_ESTABLISHED`. An adviser must confirm every one.
+None has a resolved target node. Raw targets carry `binding = RAW_TARGET_ONLY_BINDING_NOT_ESTABLISHED`, and leading word fragments are cleaned. An adviser must confirm every one.
 
 **DISAPPROVES (declaratory):**
 - Parashotam (2023) p.17 → Shri Kant Sharma, resolved;
 - Ajmer Singh p.9;
-- Mafatlal p.133 (×2).
+- Mafatlal p.133 ×2. One of these is now targeted at "the subsequent decisions ... following Kanhaiyalal" as raw text, not at Kanhaiyalal (F08 / T51).
+
+**Evidence anchors (F06).**
+- `evidence.passage` is the exported text (≤600 characters), and `passage_sha256` hashes exactly that text.
+- Treatment edges also carry `char_start`/`char_end`. These are page-relative offsets into `data/text/<doc_id>.txt` at `ad77758d`, counted from the character after the `[[page N]]` marker. They come with `passage_full_sha256` (the whitespace-collapsed full passage) and `passage_truncated`.
+
+### 1a. Track B contract v1 export (`contract_v1/`, review F04)
+
+`candidates_graph_edges.jsonl.gz` holds 34,567 v1 `candidate` records (`candidate_type = graph_edge`), conforming to `app/contract/` at `claude/c13-b-app` head `5f4b8071`. That is revision R2, with optional span binding on `page_anchor`; the candidate schema is unchanged since R2. B's own validator (`python -m mimamsa_contract record candidate`) accepts every record with **0 errors and 0 warnings**. `tests/test_legal_audit_c13_graph_contract_v1.py` re-runs it from a `git archive` of the pinned commit.
+
+| A5 type | v1 relation | Records | capability_restriction |
+| --- | --- | --- | --- |
+| CITES | CITES_JUDGMENT | 23,222 | NONE_RECORDED |
+| CITES_PROVISION | CITES_PROVISION | 10,936 | NONE_RECORDED |
+| CITES_PROVISION (label PROVISION_QUOTED) | QUOTES_PROVISION | 140 | NONE_RECORDED |
+| FOLLOWS | FOLLOWS_PROPOSITION | 257 | NON_OPERATIONAL_RESEARCH_ONLY |
+| OVERRULES | OVERRULES_OR_LIMITS_PROPOSITION | 8 | NON_OPERATIONAL_RESEARCH_ONLY |
+| DISAPPROVES | OVERRULES_OR_LIMITS_PROPOSITION | 4 | NON_OPERATIONAL_RESEARCH_ONLY. The id prefix `a5.disapproves.` marks declaratory wording, not explicit overruling |
+| CONSIDERS | none in v1 | not exported (272) | – |
+| DISTINGUISHES, APPLIES, EXPLAINS, DOUBTS | LOW_RELIABILITY_CANDIDATE | not exported (32) | – |
+| Amendment, forms, structural, holdings | no page anchor in a source copy, or another workstream's record kind | not exported | – |
+
+**Fixed fields on every record.**
+- `status = AUTOMATED_CANDIDATE_NOT_VERIFIED` and `review_ref = null`: there are no RV- reviewed_records, and AI documentary reviews of C11 rows are not reviews of this extractor's commit.
+- `confidence = extracted`.
+- `evaluation_ref = null`, so the UI shows "not evaluated" (F01).
+- `extractor.artefact_commit` is the last commit of the extractor tool.
+
+**Anchors.**
+- Treatment rows bind their span with `pipeline_name = corpus-data-text`, `pipeline_version = ad77758d` and `derivative_text_sha256` = sha256 of `data/text/<doc_id>.txt`, using the offsets above. B's derived_text import must use the same page-relative convention, or the span falls back to page-only, as the contract specifies.
+- Citation and statute rows are page-only anchors, with the C11 excerpt as the quote.
+- Targets are A5 node ids (`JUD:…`) or a raw reference.
+- The native `graph/IC01_EXPORT_MANIFEST.json` name is historical. Track B should import `contract_v1/`.
 
 ## 2. Treatment extraction (`treatment/`)
 
 **Method.**
-- **Passages.** One per C11 citation-graph anchor in the judgment body (23,222 edges), plus every C11 treatment-candidate passage (2,595), located in the full text. 24,532 passages after merging cues that share a sentence (V13-04).
-- **Voice gate.** Quotation is tested on curly-quote balance bounded to the paragraph, odd straight quotes, "(emphasis supplied)" and "held thus:" lead-ins (V13-01). The gate also tests for submissions (sentence, or a submission lead earlier in the paragraph; a court rejecting a party's reliance counts as court voice), reports of another forum, reporter matter, interrogatives and "no one has said" negations (V13-01).
-- **Binding.** No other authority between the anchor and the cue, and FOLLOWS/APPLIES only with one authority in the sentence. For "has no application" or "does not apply", the authority must be the subject. A demonstrative target ("these two decisions") carries the preceding sentences in `target_raw_context` (V13-04).
-- **Targets.** Unbound leads keep a raw-text target and never adopt a page-header candidate (V13-03 class).
-- **Opinion.** Separate and dissenting opinions give no strong proposal. V13-02 (footer-based author) is not fixed: labels still come from C11.
+- **Passages.** One per C11 citation-graph anchor in the judgment body (23,222 edges), plus every C11 treatment-candidate passage (2,595), located in the full text. Cues that share a sentence are merged (V13-04).
+- **Voice gate, revised for F02.**
+  - Quotation is tracked **across paragraphs and pages**:
+    - an unclosed curly quote within 6,000 characters;
+    - reproduction lead-ins ("reproduced hereinbelow:", "reads as under:", "observed as under:" …) and elision markers ("xx xx xx"), each with no unbalanced closing quote since;
+    - a closing quote right after the sentence.
+  - The paragraph-bounded checks remain: curly balance, straight quotes, "(emphasis supplied)", "held thus:".
+  - Party contentions count as submissions: "the petitioner (primarily) contended/contented that ... wherein it was held"; counsel "would submit that the reliance ... is misplaced".
+  - In a High Court judgment, "this Court held/considered" next to a Supreme Court report is treated as the Supreme Court's quoted voice.
+  - Reports of another forum, reporter matter, interrogatives and "no one has said" negations are excluded as before.
+- **Binding and subject, revised for F03.**
+  - A cue whose authority carries a glued footnote marker ("Madso4", "UOI11") binds only to footnote N's own citation. An anchor that is a footnote entry with no binding body marker is rejected.
+  - C11's parallel citation strings (`||`) are split correctly when locating the anchor. This was a bug: the anchor previously fell back to the middle of the excerpt.
+  - Past passive treatment ("was distinguished/followed") is treated as reported, as in lists of earlier decisions.
+  - "Does not apply" / "not applicable" is rejected when a statute, rule, amendment or circular is the subject.
+  - "X has been explained/clarified in <case>" is CONSIDERS, not EXPLAINS.
+  - "is followed by" is not FOLLOWS.
+  - Two named "… case" authorities in one sentence count as several authorities.
+- **Targets.**
+  - Unbound leads keep a raw-text target with leading fragments cleaned. A demonstrative carries the preceding sentences.
+  - "the subsequent decisions ... following X" becomes the raw target, not X (F08).
+  - Duplicate leads on one span merge.
+- **Opinion.** Separate and dissenting opinions give no strong proposal. V13-02 (footer-based author) is not fixed.
 
-**Development and measurement.** All figures are **in-sample**: the rules were developed on these rows.
-- Labels: C11 review rounds 1 and 2 (treatment rows) and the v13 adviser-row verdicts (`DEV_LABELS_C13.csv`); 162 labels, one per row (the later review round wins).
-- 24 labels are excluded because their rows were withdrawn before C11 rev. 1.3.
+**Quality figures (F01).** These are not measured performance, and none may be displayed as precision.
 
-| Measure | Result |
-| --- | --- |
-| Typed-treatment precision | 56 / 59 = **94.9%** |
-| Recall on reviewer-supported rows | 56 / 66 = 84.8% |
-| Correct rejections | 69 |
+| Figure | Basis | Result |
+| --- | --- | --- |
+| **Independent AI review of the f915ac11 version** (`reviews/`, seeded stratified sample of 54, not human-checked) | fully correct: type, direction, own voice and target | FOLLOWS 12/14, CONSIDERS 9/12, DISTINGUISHES 2/6, APPLIES 1/4, EXPLAINS 0/4, DOUBTS 0/1, OVERRULES 9/9, DISAPPROVES 3/4. All: 36/54 |
+| Development / in-sample, current version (C11 reviewed rows; rules were tuned on them) | typed-treatment agreement | 54/55 (98.2%); recall on supported rows 54/66 (81.8%); 71 correct rejections; 162 labels, 24 excluded as withdrawn before C11 rev. 1.3 |
+| Re-check of the reviewer's 54 edges against the current version (`treatment/REVIEW_SAMPLE_RECHECK_C13.csv`); **not independent**, because the fixes were written after reading these verdicts | per edge | 34 kept and correct; 14 reviewer-found errors withdrawn; 1 target corrected (T51); 3 EXPLAINS retyped to CONSIDERS (the reviewer's suggested type); 2 correct edges lost (T16, T31) |
 
-Per type: FOLLOWS 32/33, DISTINGUISHES 10/11, OVERRULES 9/9, DISAPPROVES 4/4, APPLIES 1/1, DOUBTS 0/1.
-
-C11 rev. 1.3 had no typed proposal on many of these rows, and its adviser tier carried the 4 V13-01 noise rows. All 4 are now rejected.
-
-**This is not an independent estimate.** Independent precision and recall per type need A0's H-REL-C13 evaluation.
-- Only the identifier columns of `SAMPLE.csv` (rep_doc_id, rep_sha256, page) at `5e07e010` are read, to flag passages on those 160 pages (`in_a0_holdout_page`, 333 passages) and to keep them out of development scoring.
-- No H-REL-C13 passage was read.
-- None of the development labels fall on a holdout page.
-
-**Known residual noise.** A reading of a non-holdout sample of the full build found:
-- reported holdings that contain "does not apply";
-- "applying the ratio" said of the Tribunal;
-- boilerplate "covered by" sentences with inline footnotes.
-
-These stay candidates. CONSIDERS (368) is unmeasured.
+**What remains.**
+- DISTINGUISHES, APPLIES, EXPLAINS and DOUBTS are marked `LOW_RELIABILITY_CANDIDATE`. After the revision, EXPLAINS and DOUBTS have no edges.
+- Independent precision and recall per type need A0's H-REL-C13 evaluation.
+  - Only the identifier columns of `SAMPLE.csv` (rep_doc_id, rep_sha256, page) at `5e07e010` are read, to flag passages on those 160 pages (`in_a0_holdout_page`) and to keep them out of development scoring.
+  - No H-REL-C13 passage was read.
+  - No development label falls on a holdout page.
+- Known residual noise is listed in the review and in `REVIEW_SAMPLE_RECHECK_C13.csv`.
 
 ## 3. Identity overlay (`identity/`)
 
@@ -233,7 +279,7 @@ Every copy and doc_id is kept, and nothing is deleted, merged or renamed. Status
 ## 4. SC case numbers (`scnum/`, `hf/`)
 
 All 99 staged records (1,747 case numbers) were reconfirmed against the PDF bytes. Each PDF was read at `ad77758d` and its sha256 re-hashed against the staged value.
-- **81 by the text layer alone**, extracted independently with PyMuPDF from cover pages 1-3 and every jurisdiction-heading block. Every staged number, year and type label had to be printed. This includes the 745-number 2024 list once a stray control character and the digital-SCR running header were handled.
+- **81 by the text layer alone**, extracted independently with PyMuPDF from cover pages 1-3 and every jurisdiction-heading block. Every staged number and year, and a type label of each staged type, had to be present. OCR digit repair is applied. The type label is not bound to the number. This is a **presence** check, not a completeness check (F07, `scnum/ERRATA_C13.md`). This includes the 745-number 2024 list once a stray control character and the digital-SCR running header were handled.
 - **18 by a page-image reading** where OCR garbled the text layer (`PAGE_IMAGE_CHECKS_C13.csv`, page cited). One note to flag: CA-2450-1992 is printed as "Civil Appeal Nos. 2449 and 50 of 1992". It was read as 2450, as the C11 reviewer did, and the elision is recorded.
 
 **Overlay.** `SC_CASE_NUMBER_OVERLAY_C13.jsonl` (C13-v1): 99 records, values identical to the C12 staged values. Metadata only; no evidence or authentication status is promoted.
@@ -251,9 +297,13 @@ All 99 staged records (1,747 case numbers) were reconfirmed against the PDF byte
 
 Records: `hf/HF_COMMIT.csv`, `hf/VERIFICATION.csv`, `hf/STAGED_MANIFEST.csv`.
 
+**Erratum E1 (F09).** The overlay's `evidence.anchor_page` for `sc-2016-union-of-india-and-anr-2016insc173` reads 11; the Diary numbers are on PDF page 12. The value itself is correct. The published HF file is not rewritten; see `scnum/ERRATA_C13.md`.
+
+**Independent confirmation.** The reviewer re-read all 18 page-image records and a seeded sample of 22 of the 81 text-layer records: all RECONFIRMED (`reviews/`).
+
 ## Limits and what needs independent review
 
-- **Treatment precision and recall are in-sample.** The extractor is not frozen; it waits for A0 acceptance and the GA4 evaluation.
+- **No treatment figure is independent of the current extractor.** The figures above are development/in-sample figures or describe the earlier version. The extractor is not frozen; it waits for A0 acceptance and the GA4 evaluation.
 - **Overruling.** Every OVERRULES, DISAPPROVES and DOUBTS candidate needs a human legal adviser. Raw-text targets need binding.
 - **Instrument identity.** Instruments are not yet tied to source copies. ProvisionVersion is an interface only, pending A4.
 - **Judgment identity** relies on C10 rendition groups and is PROVISIONAL.

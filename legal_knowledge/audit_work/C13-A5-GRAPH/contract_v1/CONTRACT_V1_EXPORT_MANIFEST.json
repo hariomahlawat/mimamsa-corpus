@@ -2,7 +2,7 @@
  "candidate_type": "graph_edge",
  "contract": "Track B data interchange contract v1",
  "contract_branch": "claude/c13-b-app",
- "contract_commit": "bb22ebd3",
+ "contract_commit": "5f4b8071",
  "contract_version": "1.0.0",
  "extractor_artefacts": {
   "relations-c11/rev1.3": {
@@ -11,26 +11,26 @@
    "sha": "6c6023c484c41f2181648b66de963a987379e350835075099ff9cbe40223a681"
   },
   "treatment": {
-   "commit": "b772206bc82f",
+   "commit": "fb8aac7f1354",
    "path": "legal_knowledge/audit_work/C13-A5-GRAPH/tools/treatment_c13.py",
-   "sha": "fd82d441841d184a666b830ddef73909c05c95e9ca3fcef06542ee45f1ac3f12"
+   "sha": "f8be7a01b02911d17e31c620d04758de261898b0115ce2d4852fa0b04fee73f2"
   }
  },
  "file": "candidates_graph_edges.jsonl.gz",
- "native_graph_manifest_sha256": "5ca558c2de3ec6e9073d2806022fdcbbf936441eb34bce3a82edb08e5ff1ef39",
+ "native_graph_manifest_sha256": "dc1ea5e3e816f02ffbde845d0c06dec4b37293488d1166c6cb7d8d545ecba82b",
  "not_exported": {
   "LOW_RELIABILITY_CANDIDATE": 32,
   "NOT_A_V1_GRAPH_EDGE:AMENDMENT": 99,
   "NOT_A_V1_GRAPH_EDGE:FORMS": 881,
   "NOT_A_V1_GRAPH_EDGE:STRUCTURAL": 9146,
-  "NO_V1_RELATION": 269
+  "NO_V1_RELATION": 272
  },
  "record_kind": "candidate",
- "records": 34557,
+ "records": 34567,
  "relations": {
   "CITES_JUDGMENT": 23222,
   "CITES_PROVISION": 10936,
-  "FOLLOWS_PROPOSITION": 247,
+  "FOLLOWS_PROPOSITION": 257,
   "OVERRULES_OR_LIMITS_PROPOSITION": 12,
   "QUOTES_PROVISION": 140
  },
@@ -44,6 +44,6 @@
   "DISAPPROVES (declaratory 'does not lay down the correct law') maps to OVERRULES_OR_LIMITS_PROPOSITION with candidate_id prefix 'a5.disapproves.'; it is not an explicit overruling.",
   "Absence of an edge never means absence of adverse authority."
  ],
- "sha256_uncompressed": "a41ed5e600c5b54298a958b4e5a2a0f4b0573794d9d9bcc51a0e8cf08628ecec",
+ "sha256_uncompressed": "1dc77a44114bad86eba8e968842ee333d953f8a4d3f510eaff66a47e0a005b08",
  "validation": "python -m mimamsa_contract record candidate <decompressed file> --register config/restricted_material.json (tests/test_legal_audit_c13_graph_contract_v1.py)"
 }

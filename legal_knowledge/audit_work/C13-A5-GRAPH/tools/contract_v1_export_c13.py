@@ -39,7 +39,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common_c13 as C  # noqa: E402
 
 CONTRACT_BRANCH = "claude/c13-b-app"
-CONTRACT_COMMIT = "bb22ebd3"   # latest head (R2: optional span binding on page_anchor)
+CONTRACT_COMMIT = "5f4b8071"   # claude/c13-b-app head at export time (R2 + confirmation; candidate schema as R2)
 CONTRACT_VERSION = "1.0.0"
 PIPELINE_NAME = "corpus-data-text"
 OUT = C.PKG / "contract_v1"
