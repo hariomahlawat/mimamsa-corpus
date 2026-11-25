@@ -1,0 +1,27 @@
+{
+ "model": "nomic-embed-text-v1.5-int8",
+ "int8": true,
+ "loadavg_start": [
+  9.6748046875,
+  10.13330078125,
+  11.7490234375
+ ],
+ "loadavg_end": [
+  10.11474609375,
+  10.17529296875,
+  11.6767578125
+ ],
+ "threads": 4,
+ "max_len": 256,
+ "n_chunks": 128,
+ "dim": 768,
+ "load_s": 5.89,
+ "index_s": 48.5,
+ "chunks_per_s": 2.6,
+ "query_ms_p50": 58.89,
+ "query_ms_p95": 124.28,
+ "rss_mb_before": 46.7,
+ "rss_mb_after_load": 931.7,
+ "peak_rss_mb": 2438.1,
+ "index_bytes_float32": 393216
+}

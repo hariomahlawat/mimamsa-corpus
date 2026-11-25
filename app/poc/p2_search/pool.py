@@ -12,6 +12,8 @@ ap = argparse.ArgumentParser()
 ap.add_argument("work", type=Path); ap.add_argument("runs", type=Path); ap.add_argument("qrels", type=Path)
 ap.add_argument("sheets", type=Path); ap.add_argument("--depth", type=int, default=10)
 ap.add_argument("--extra-runs", type=Path); ap.add_argument("--extra-depth", type=int, default=5)
+ap.add_argument("--headline", default="", help="comma list of systems pooled at --depth; others at --other-depth")
+ap.add_argument("--other-depth", type=int, default=10)
 ap.add_argument("--queries", type=Path, default=Path(__file__).resolve().parent / "queries.json")
 a = ap.parse_args()
 
@@ -21,12 +23,14 @@ for line in open(a.work / "corpus/corpus.jsonl"):
     d = json.loads(line); docs[d["doc_id"]] = d
 
 pool = {qid: set() for qid in queries}
-def add_runs(folder, depth):
+HEAD = set(filter(None, a.headline.split(",")))
+def add_runs(folder, depth, other=None):
     for f in sorted(folder.glob("*.json")):
-        run = json.loads(f.read_text())["run"]
-        for qid, lst in run.items():
-            pool[qid].update(d for d, _s in lst[:depth])
-add_runs(a.runs, a.depth)
+        j = json.loads(f.read_text())
+        dd = depth if (not HEAD or j["system"] in HEAD or other is None) else other
+        for qid, lst in j["run"].items():
+            pool[qid].update(d for d, _s in lst[:dd])
+add_runs(a.runs, a.depth, a.other_depth)
 if a.extra_runs:
     add_runs(a.extra_runs, a.extra_depth)
 for q in queries.values():
@@ -97,23 +101,25 @@ for qid, q in queries.items():
 a.qrels.parent.mkdir(parents=True, exist_ok=True)
 a.qrels.write_text(json.dumps(qrels, indent=0, sort_keys=True))
 
-# blind sheets
+# blind sheets (compact, numbered; mapping kept separately so labels are entered by number)
 STOP = set("a an the of to in for by on at is be can and or with from what when which does do has have his her their under after before not".split())
 a.sheets.mkdir(parents=True, exist_ok=True)
 n = 0
+mapping = {}
 for qid, lst in to_sheet.items():
     q = queries[qid]["query"]
     terms = [t for t in re.findall(r"[a-z0-9]+", q.lower()) if t not in STOP and len(t) > 1]
     lines = [f"### {qid}: {q}"]
-    for d in sorted(lst, key=lambda d: hashlib.sha1(f"{qid}|{d}".encode()).hexdigest()):
-        doc = docs[d]; t = flat(doc["text"])
-        words = t.split(); best, bi = -1, 0
-        for i in range(0, max(1, len(words) - 60), 30):
-            win = " ".join(words[i:i + 60]).lower()
-            s = sum(win.count(x) for x in terms)
-            if s > best: best, bi = s, i
-        snippet = " ".join(words[bi:bi + 60])[:420]
-        lines.append(f"- {d} | {(doc['title'] or '')[:90]} | {snippet}")
+    order = sorted(lst, key=lambda d: hashlib.sha1(f"{qid}|{d}".encode()).hexdigest())
+    mapping[qid] = order
+    for i, d in enumerate(order):
+        doc = docs[d]; words = flat(doc["text"]).split(); best, bi = -1, 0
+        for k in range(0, max(1, len(words) - 30), 10):
+            win = " ".join(words[k:k + 30]).lower()
+            sc = sum(win.count(x) for x in terms)
+            if sc > best: best, bi = sc, k
+        lines.append(f"{i}|{(doc['title'] or '')[:55]}|{' '.join(words[bi:bi + 30])[:170]}")
         n += 1
     (a.sheets / f"{qid}.txt").write_text("\n".join(lines) + "\n")
+(a.sheets / "_mapping.json").write_text(json.dumps(mapping))
 print("auto-labelled + pooled; manual items to judge:", n, "queries:", len(to_sheet))

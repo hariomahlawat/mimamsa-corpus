@@ -1,0 +1,27 @@
+{
+ "model": "bge-small-en-v1.5-int8",
+ "int8": true,
+ "loadavg_start": [
+  8.39697265625,
+  8.6376953125,
+  10.06591796875
+ ],
+ "loadavg_end": [
+  8.64697265625,
+  8.56494140625,
+  9.71044921875
+ ],
+ "threads": 4,
+ "max_len": 256,
+ "n_chunks": 3367,
+ "dim": 384,
+ "load_s": 0.44,
+ "index_s": 230.8,
+ "chunks_per_s": 14.6,
+ "query_ms_p50": 7.72,
+ "query_ms_p95": 16.62,
+ "rss_mb_before": 46.7,
+ "rss_mb_after_load": 144.2,
+ "peak_rss_mb": 617.6,
+ "index_bytes_float32": 5171712
+}
