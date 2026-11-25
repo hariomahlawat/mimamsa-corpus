@@ -8,7 +8,8 @@
  },
  "distinct_sha256": 120185,
  "entries": 120185,
- "held_anywhere_by_sha256": 25,
+ "held_anywhere_by_sha256": 71,
+ "held_check": "SHA-256 of every PDF under legal_knowledge/preservation/ and data/raw/ at HF 23acf21b8ebc64693b0162eb979646b4e3a58a2d compared with this log: 18 ingested in C12 (15bd03cc), 7 preserved in C12 (3864faf3), 46 preserved by C13 A7 (9e3cf986). The first A1 count (25) was computed at 3864faf3, before A7's commit, and was wrong at A1's own parent (review A1-01).",
  "hosts": {
   "indian-high-court-judgments.s3.ap-south-1.amazonaws.com": 116635,
   "indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com": 3550

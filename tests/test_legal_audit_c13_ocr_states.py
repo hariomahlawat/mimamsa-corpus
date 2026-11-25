@@ -129,7 +129,7 @@ def test_short_text_is_insufficient():
 
 
 def test_partial_usable_text_not_irrelevant():
-    q = {"verdict": "OCR_REQUIRED", "usable_share": 0.5, "unusable_pages": [3, 4], "flags": ["image_only"]}
+    q = _q(0.5, [3, 4])
     assert rs.decide(text=CIVIL, quality=q, ocr_done=False)["state"] == "OCR_REQUIRED"
 
 
@@ -150,3 +150,72 @@ def test_ink_without_placed_images_is_a_scan_not_blank():
     # v1 defect: scans drawn as inline images / XObjects reported no image cover and were called blank
     assert tq.page_verdict("", image_cover=0.0, ink=0.08)["flags"] == ["image_only"]
     assert tq.page_verdict("", image_cover=0.0, ink=0.0005)["flags"] == ["blank"]
+
+
+# ---- review A1-02: IRRELEVANT only when every content page has usable text
+def _q(share, unusable, verdict="OCR_REQUIRED"):
+    return {"verdict": verdict, "usable_share": share, "unusable_pages": unusable, "flags": ["image_only"]}
+
+
+def test_eighty_percent_share_without_ocr_is_not_irrelevant():
+    d = rs.decide(text=CIVIL, quality=_q(0.8, [1]), ocr_done=False)
+    assert d["state"] == "OCR_REQUIRED" and not rs.may_remove(d)
+
+
+def test_ninety_nine_percent_share_without_ocr_is_not_irrelevant():
+    d = rs.decide(text=CIVIL, quality=_q(0.99, [57]), ocr_done=False)
+    assert d["state"] == "OCR_REQUIRED" and not rs.may_remove(d)
+
+
+def test_single_unread_cover_page_blocks_irrelevant():
+    q = _q(0.8, [1])
+    assert rs.decide(text=CIVIL, quality=q, ocr_done=False)["state"] == "OCR_REQUIRED"
+    # still unusable after OCR: insufficient, not irrelevant
+    assert rs.decide(text=CIVIL, quality=q, ocr_done=True)["state"] == "INSUFFICIENT_TEXT"
+
+
+def test_reviewer_repro_five_pages_cover_image_only():
+    pages = [{"page": 1, **tq.page_verdict("", image_cover=0.95)}] + \
+            [{"page": i, **tq.page_verdict(CIVIL)} for i in range(2, 6)]
+    s = tq.document_summary({"pages": pages, "truncated": False, "open_error": None})
+    assert s["usable_share"] == 0.8
+    d = rs.decide(text=CIVIL * 4, quality=s, ocr_done=False)
+    assert not rs.may_remove(d)
+
+
+def test_low_quality_ocr_cannot_support_irrelevant():
+    d = rs.decide(text=CIVIL, quality=ok_quality(CIVIL), ocr_done=True, ocr_quality_ok=False)
+    assert d["state"] == "INSUFFICIENT_TEXT"
+
+
+# ---- review A1-04: bare service vocabulary is a removal guard
+def test_bare_army_mentions_block_irrelevant():
+    t = CIVIL + " Army officers commissioned in the Army." * 15
+    d = rs.decide(text=t, quality=ok_quality(t))
+    assert d["state"] == "CLASSIFICATION_UNCERTAIN" and not rs.may_remove(d)
+
+
+def test_fuzzy_ocr_misreading_blocks_irrelevant():
+    t = CIVIL + " the Arny officer and the Tribnal " * 2
+    assert rs.decide(text=t, quality=ok_quality(t))["state"] == "CLASSIFICATION_UNCERTAIN"
+
+
+# ---- review A1-08: cover metadata
+def test_aft_party_in_title_is_relevant():
+    t = "Writ petition. Notice. Learned counsel heard. " * 40
+    d = rs.decide(text=t, quality=ok_quality(t), title="CWP/1/2024 of X Vs ARMED FORCES TRIBUNAL AND ORS.")
+    assert d["state"] == "RELEVANT"
+
+
+def test_short_order_by_reference_is_uncertain():
+    t = ("The appeal is disposed of in terms of the order passed in RSA No. 1582 of 2021. " +
+         "The plaintiff and the defendant shall bear their own costs of the suit and of the appeal. " * 8)
+    d = rs.decide(text=t, quality=ok_quality(t))
+    assert d["state"] == "CLASSIFICATION_UNCERTAIN"
+
+
+# ---- review A1-05: truncated files
+def test_truncated_file_never_text_ok_and_empty_pages_are_missing():
+    pages = [{"page": 1, **tq.page_verdict(CIVIL)}, {"page": 2, "usable": False, "flags": ["missing_page"]}]
+    s = tq.document_summary({"pages": pages, "truncated": True, "open_error": None})
+    assert s["verdict"] == "SOURCE_INCOMPLETE" and s["unusable_pages"] == [2]

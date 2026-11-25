@@ -383,6 +383,10 @@ def build_relevance(use_bytes: bool):
         for line in layer_cache.read_text(encoding="utf-8").splitlines():
             e = json.loads(line)
             layer[e["sha256"]] = {int(k): v for k, v in e["pages"].items()}
+    titles = {r["doc_id"]: r["title"] for r in read_csv(INP / "TITLES.csv")}
+    ocr_engine = {}
+    if (OUT / "OCR_PAGES.csv").exists():
+        ocr_engine = {(r["sha256"], int(r["page"])): r["engine"] for r in read_csv(OUT / "OCR_PAGES.csv")}
     rsha, rids = restricted()
     rows, seen = [], set()
     for q in quality:
@@ -413,12 +417,14 @@ def build_relevance(use_bytes: bool):
                 pq.append({"page": p, "usable": bool(v) and v["usable"] == "YES", "flags": flags})
         summary = tq.document_summary({"pages": pq, "truncated": q["truncated"] == "YES",
                                        "open_error": "open error" if q["verdict"] == "EXTRACTION_FAILED" and n == 0 else None})
-        ocr_done = bool(ocr_pages)
-        es = None
-        if sha in jobs:
-            missing = [p for p in jobs[sha]["pages"] if p not in ocr_pages]
-            if missing and ocr_done:
-                es = f"{len(missing)} unusable pages not OCR'd"
+        layer_bad = [p for p in range(1, n + 1) if not (pv[sha].get(p) and pv[sha][p]["usable"] == "YES")
+                     and (pv[sha].get(p) or {}).get("flags") not in ("blank",)]
+        ocr_done = all(p in ocr_pages for p in layer_bad)
+        es = None if ocr_done or not ocr_pages else f"{sum(p not in ocr_pages for p in layer_bad)} unusable pages not OCR'd"
+        ocr_v = [tq.page_verdict(t)["metrics"] for t in ocr_pages.values()]
+        ocr_quality_ok = all(m["dict_ratio"] >= rs.MIN_OCR_DICT_RATIO or m["devanagari_share"] >= 0.5 or m["chars"] == 0
+                             for m in ocr_v)
+        engines = sorted({ocr_engine.get((sha, p), "") for p in ocr_pages})
         text = "\n".join(f"[[page {i + 1}]]\n{t}" for i, t in enumerate(texts))
         if q["verdict"] == "EXTRACTION_FAILED" and n == 0:
             d = rs.decide(text=None, quality=None, extraction_error="file does not open (truncated download)")
@@ -426,11 +432,14 @@ def build_relevance(use_bytes: bool):
                 d["state"] = "SOURCE_INCOMPLETE"
                 d["reasons"] = ["file does not open and has no %%EOF: incomplete at source (C11/C12: remote copy also truncated)"]
         else:
-            d = rs.decide(text=text, quality=summary, truncated=q["truncated"] == "YES", ocr_done=ocr_done and not es)
-        prior_text = layer and sha in layer
+            d = rs.decide(text=text, quality=summary, truncated=q["truncated"] == "YES", ocr_done=ocr_done,
+                          ocr_quality_ok=ocr_quality_ok, title=titles.get(q["doc_id"]))
         rows.append({"group": q["group"], "doc_id": q["doc_id"], "court": q["court"], "sha256": sha,
                      "prior_relevance": q["prior_relevance"], "text_layer_verdict": q["verdict"],
                      "pages": n, "ocr_pages": len(ocr_pages), "ocr_incomplete": es or "",
+                     "ocr_engines": ";".join(e for e in engines if e),
+                     "ocr_min_dict_ratio": min((m["dict_ratio"] for m in ocr_v if m["chars"]), default=""),
+                     "provisional": "YES (RapidOCR text)" if "rapidocr" in engines and d["state"] in ("IRRELEVANT", "INSUFFICIENT_TEXT") else "",
                      "text_source": ("ocr+layer" if ocr_pages and lp else "ocr" if ocr_pages else "layer" if lp else "none"),
                      "usable_share_after": summary["usable_share"], "state": d["state"],
                      "keyword_status": d["keyword_status"] or "", "keywords": ";".join(f"{k}={v}" for k, v in sorted((d["keywords"] or {}).items())),
@@ -438,7 +447,7 @@ def build_relevance(use_bytes: bool):
                      "reasons": " | ".join(d["reasons"])})
     rows.sort(key=lambda r: (r["group"], r["doc_id"]))
     fields = ["group", "doc_id", "court", "sha256", "prior_relevance", "text_layer_verdict", "pages", "ocr_pages",
-              "ocr_incomplete", "text_source", "usable_share_after", "state", "keyword_status", "keywords",
+              "ocr_incomplete", "ocr_engines", "ocr_min_dict_ratio", "provisional", "text_source", "usable_share_after", "state", "keyword_status", "keywords",
               "second_check_families", "reasons"]
     summ = {"documents": len(rows), "by_state": dict(sorted(Counter(r["state"] for r in rows).items())),
             "by_group_state": {g: dict(sorted(Counter(r["state"] for r in rows if r["group"] == g).items()))
@@ -448,8 +457,8 @@ def build_relevance(use_bytes: bool):
     # anything not RELEVANT goes to the review queue instead of being ingested.
     dec = []
     for r in rows:
-        if r["group"] == "C12_PRESERVED_NOT_INGESTED":
-            action = "INGEST" if r["state"] == "RELEVANT" else (
+        if r["group"] in ("C12_PRESERVED_NOT_INGESTED", "C13_A7_PRESERVED_EXCLUDED"):
+            action = "INGEST_AS_CANDIDATE" if r["state"] == "RELEVANT" else (
                 "NOT_INGESTED_IRRELEVANT" if r["state"] == "IRRELEVANT" else "NOT_INGESTED_MANUAL_REVIEW_REQUIRED")
         elif r["group"] == "C12_INGESTED_T1":
             action = "ALREADY_INGESTED_C12" + ("" if r["state"] == "RELEVANT" else "_MANUAL_REVIEW_REQUIRED")
@@ -458,7 +467,7 @@ def build_relevance(use_bytes: bool):
         dec.append({"doc_id": r["doc_id"], "group": r["group"], "state": r["state"], "action": action,
                     "review_queue": "YES" if r["state"] not in ("RELEVANT", "IRRELEVANT") or r["group"] != "IN_CORPUS_TEXT_RISK" and r["state"] == "IRRELEVANT" else "NO"})
     summ["ingestion_actions"] = dict(sorted(Counter(d["action"] for d in dec).items()))
-    summ["newly_ingested"] = sum(d["action"] == "INGEST" for d in dec)
+    summ["newly_ingested_as_candidates"] = sum(d["action"] == "INGEST_AS_CANDIDATE" for d in dec)
     return {"RELEVANCE_RERUN.csv": csv_text(rows, fields), "RELEVANCE_RERUN.json": js(summ),
             "INGESTION_DECISIONS.csv": csv_text(dec, ["doc_id", "group", "state", "action", "review_queue"])}
 

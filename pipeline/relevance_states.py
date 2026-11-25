@@ -17,8 +17,10 @@ This module replaces that single test with explicit states:
   MANUAL_REVIEW_REQUIRED    no keyword, but strong armed-forces context: a possible false negative
 
 The rule this module enforces: a judgment is never IRRELEVANT because its text could not be
-extracted. IRRELEVANT needs a usable text layer (or usable OCR text) over at least
-MIN_USABLE_SHARE of its content pages and at least MIN_WORDS words.
+extracted. IRRELEVANT needs usable text (layer or OCR) on EVERY content page, OCR text of adequate
+quality, at least MIN_WORDS words, and no armed-forces signal of any kind (keyword, context family,
+bare service vocabulary, near-miss OCR token, AFT party in the title). Revised after review A1-02..A1-04
+and A1-08 (C13); the earlier 80% usable-page share rule is withdrawn.
 
 Only IRRELEVANT may lead to removal from the corpus, and even then the new module removes nothing
 itself: callers record the state. Uncertain and review states are never ingested automatically.
@@ -35,7 +37,6 @@ from .judgments import classify, keyword_counts
 
 STATES = ("RELEVANT", "IRRELEVANT", "INSUFFICIENT_TEXT", "OCR_REQUIRED", "EXTRACTION_FAILED",
           "CLASSIFICATION_UNCERTAIN", "SOURCE_INCOMPLETE", "MANUAL_REVIEW_REQUIRED")
-MIN_USABLE_SHARE = 0.8
 MIN_WORDS = 150
 STRONG_FAMILIES = 2
 
@@ -70,12 +71,58 @@ def second_check(text: str) -> dict:
             "score": len(strong) + 0.5 * (len(found) - len(strong))}
 
 
+# --- safety floor for the removal path (review A1-04): bare service vocabulary blocks IRRELEVANT. This is not a
+# positive signal (it never makes a document RELEVANT); it only stops a removal.
+GUARD = re.compile(r"\b(?:army|navy|naval|air\s+force|military|armed\s+forces|defence\s+services?|commissioned"
+                   r"|sainik|jawans?|cantonment|ex[\s-]+servicem[ae]n)\b", re.I)
+GUARD_MIN = 3
+# OCR misreadings of decisive words (edit distance 1), counted on OCR text only (review A1-03)
+FUZZY_TARGETS = ("army", "navy", "military", "martial", "tribunal", "sepoy", "havildar", "subedar", "jawan")
+FUZZY_MIN = 2
+MIN_OCR_DICT_RATIO = 0.35       # OCR pages a removal relies on must read at least this well (review A1-03)
+# a short order that disposes of a case "in terms of" another cannot be judged from its own text (review A1-08)
+BY_REFERENCE = re.compile(r"\bin\s+terms\s+of\b|\bcovered\s+by\b|\bsame\s+terms\b|\bsimilar(?:ly)?\s+placed\b", re.I)
+BY_REFERENCE_MAX_WORDS = 400
+TITLE_AFT = re.compile(r"(?i:\barmed\s+forces\s+tribunal\b)|\bAFT\b")
+
+
+def _within_one(a: str, b: str) -> bool:
+    if a == b or abs(len(a) - len(b)) > 1:
+        return False
+    if len(a) == len(b):
+        return sum(x != y for x, y in zip(a, b)) == 1
+    if len(a) > len(b):
+        a, b = b, a
+    i = 0
+    while i < len(a) and a[i] == b[i]:
+        i += 1
+    return a[i:] == b[i + 1:]
+
+
+def fuzzy_hits(text: str) -> list[str]:
+    """Tokens that are one edit away from a decisive service word (not exact matches)."""
+    out = []
+    for w in re.findall(r"[A-Za-z]{4,}", text):
+        lw = w.lower()
+        if any(_within_one(lw, t) for t in FUZZY_TARGETS):
+            out.append(w)
+    return out
+
+
 def decide(*, text: str | None, quality: dict | None, extraction_error: str | None = None,
-           truncated: bool = False, ocr_done: bool = False) -> dict:
+           truncated: bool = False, ocr_done: bool = False, ocr_quality_ok: bool = True,
+           title: str | None = None) -> dict:
     """One state for one judgment.
 
-    text        the best text available (OCR text when OCR ran, else the text layer), page markers allowed
-    quality     pipeline.text_quality.document_summary() of THAT text (layer or OCR)
+    text            the best text available (OCR text for OCR'd pages, else the text layer), page markers allowed
+    quality         pipeline.text_quality.document_summary() of THAT text; `unusable_pages` = content pages whose
+                    best text is still unusable
+    ocr_done        OCR was run on every page whose text layer was unusable
+    ocr_quality_ok  every OCR'd page reads at or above MIN_OCR_DICT_RATIO (or is Devanagari)
+    title           the case title from the index (cover metadata), optional
+
+    IRRELEVANT requires usable text on EVERY content page (layer or OCR), adequate OCR quality, enough words, no
+    keyword, no context family, no service-vocabulary guard hit, no fuzzy OCR hit and no by-reference disposal.
     """
     out = {"state": None, "keyword_status": None, "keywords": {}, "second_check": None, "reasons": []}
     if extraction_error:
@@ -88,11 +135,15 @@ def decide(*, text: str | None, quality: dict | None, extraction_error: str | No
     sc = second_check(text) if text else {"families": [], "strong_families": [], "detail": {}, "score": 0}
     out.update(keyword_status=kw, keywords=counts, second_check=sc)
     words = len(re.findall(r"[A-Za-z\u0900-\u097f]{2,}", text))
-    usable_share = q.get("usable_share", 0.0)
-    text_ok = q.get("verdict") == "TEXT_OK" or (usable_share >= MIN_USABLE_SHARE)
+    unusable = list(q.get("unusable_pages") or [])
+    title_aft = bool(title and TITLE_AFT.search(title))
 
     if kw == "relevant":                       # positive evidence is trusted even from imperfect text
         out.update(state="RELEVANT", reasons=["keyword pass relevant"])
+        return out
+    if title_aft and text:
+        out.update(state="RELEVANT", reasons=["Armed Forces Tribunal is a party on the cover/title (CLAUDE.md scope: "
+                                              "writs against AFT orders); keyword status " + kw])
         return out
     if kw == "borderline":
         if len(sc["strong_families"]) >= STRONG_FAMILIES:
@@ -101,28 +152,40 @@ def decide(*, text: str | None, quality: dict | None, extraction_error: str | No
             out.update(state="CLASSIFICATION_UNCERTAIN", reasons=["keyword borderline; second check weak"])
         return out
     # no keyword at all (or no text): only now does text quality decide
-    if truncated:
+    if truncated or q.get("verdict") == "SOURCE_INCOMPLETE":
         out.update(state="SOURCE_INCOMPLETE", reasons=["file truncated (no %%EOF) and no keyword in the readable part"])
         return out
-    if not text_ok:
+    if unusable or not text:
         if not ocr_done:
-            out.update(state="OCR_REQUIRED",
-                       reasons=[f"text layer unusable on pages {q.get('unusable_pages', [])[:10]} "
-                                f"(flags {q.get('flags', [])})"])
+            out.update(state="OCR_REQUIRED", reasons=[f"{len(unusable)} page(s) without usable text and not OCR'd: "
+                                                      f"{unusable[:10]} (flags {q.get('flags', [])})"])
         else:
-            out.update(state="INSUFFICIENT_TEXT",
-                       reasons=[f"OCR text usable share {usable_share} < {MIN_USABLE_SHARE}"])
+            out.update(state="INSUFFICIENT_TEXT", reasons=[f"{len(unusable)} page(s) still unusable after OCR: {unusable[:10]}"])
+        return out
+    if not ocr_quality_ok:
+        out.update(state="INSUFFICIENT_TEXT", reasons=[f"OCR text below dictionary ratio {MIN_OCR_DICT_RATIO} on pages the "
+                                                       "decision would rely on"])
         return out
     if words < MIN_WORDS:
         out.update(state="INSUFFICIENT_TEXT", reasons=[f"only {words} words of usable text"])
         return out
+    guard = GUARD.findall(text)
+    fz = fuzzy_hits(text)
     if len(sc["strong_families"]) >= STRONG_FAMILIES:
         out.update(state="MANUAL_REVIEW_REQUIRED",
                    reasons=[f"no keyword but armed-forces context {sc['strong_families']}: possible false negative"])
     elif sc["families"]:
         out.update(state="CLASSIFICATION_UNCERTAIN", reasons=[f"no keyword; weak context {sc['families']}"])
+    elif len(guard) >= GUARD_MIN:
+        out.update(state="CLASSIFICATION_UNCERTAIN",
+                   reasons=[f"no keyword; service vocabulary x{len(guard)} (e.g. {sorted(set(g.lower() for g in guard))[:4]}) blocks IRRELEVANT"])
+    elif len(fz) >= FUZZY_MIN:
+        out.update(state="CLASSIFICATION_UNCERTAIN", reasons=[f"no keyword; near-miss OCR tokens {sorted(set(fz))[:5]}"])
+    elif words < BY_REFERENCE_MAX_WORDS and BY_REFERENCE.search(text):
+        out.update(state="CLASSIFICATION_UNCERTAIN", reasons=["short order disposed of by reference to another case"])
     else:
-        out.update(state="IRRELEVANT", reasons=["usable text, no keyword, no armed-forces context"])
+        out.update(state="IRRELEVANT", reasons=["usable text on every page, no keyword, no armed-forces context or vocabulary"])
+    out["guard_hits"] = len(guard)
     return out
 
 

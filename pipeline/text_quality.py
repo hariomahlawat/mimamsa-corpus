@@ -19,6 +19,7 @@ Flags (each a short code, several can apply to one page):
   low_dictionary    under DICT_RATIO of the Latin word tokens are common English words
   reversed_order    more word tokens read as English reversed than forwards (right-to-left extraction)
   vertical_order    most lines are one or two characters long (text extracted column-wise)
+  missing_page      an empty page in a truncated file (no %%EOF): its bytes are missing (set by assess_pdf)
 
 A page is `usable` when it has no flag. Devanagari text is judged on its script share instead of the
 English dictionary (flag `non_latin_ok` is informational, not a defect).
@@ -207,6 +208,13 @@ def assess_pdf(path) -> dict:
                 v = {"usable": False, "flags": ["page_error"], "metrics": {}, "error": str(e)[:120]}
             v["page"] = i + 1
             out["pages"].append(v)
+    if out["truncated"]:
+        # In a file without its %%EOF trailer, an empty page is a page whose bytes are missing (MuPDF rebuilds a
+        # page tree with phantom pages past the cut), not a blank page: it is a defect, never "no content".
+        for v in out["pages"]:
+            if v["flags"] == ["blank"]:
+                v["flags"] = ["missing_page"]
+                v["usable"] = False
     return out
 
 
@@ -224,6 +232,8 @@ def document_summary(assessment: dict) -> dict:
         verdict = "EXTRACTION_FAILED"
     elif assessment.get("page_errors"):
         verdict = "EXTRACTION_FAILED"
+    elif assessment.get("truncated"):
+        verdict = "SOURCE_INCOMPLETE"          # a truncated file is never TEXT_OK, whatever its readable pages say
     elif not bad:
         verdict = "TEXT_OK"
     else:

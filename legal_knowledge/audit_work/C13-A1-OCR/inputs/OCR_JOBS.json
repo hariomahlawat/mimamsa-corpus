@@ -1026,5 +1026,216 @@
 ],
 "tranche": "C_unusable_pages_early_stop",
 "engine": "rapidocr"
+},
+{
+"doc_id": "hc-ph-2026-cwp-17401-2025-phhc010957672025-1-2026-04-02",
+"sha256": "566e2296bf6be6ed8f260cd88460009ece2e426d4e5bb45f166916b678dc5c9e",
+"pages": [
+1,
+2
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2026-cwp-33066-2024-phhc011707512024-1-2026-04-27",
+"sha256": "bafb3538d15ad52fe1da8dff167b77e164217bd9ef037ef1b54b349add4edb24",
+"pages": [
+1,
+2,
+3
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "sc-2022-wg-cdr-a-u-tayyaba-retd-and-ot-2022insc1206",
+"sha256": "a6cea1d6a5a9d2ef5ffe725f8d2900cd54e0d6493b77c34f5ed6612e983fcc21",
+"pages": [
+15
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2026-untitled-phhc011391252026-1-2026-09-11",
+"sha256": "6877c5b7be0d490849ed93e2297497c6659415e1289078f1fb816cb330deed38",
+"pages": [
+1,
+2
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2026-cwp-8911-2026-phhc010439542026-1-2026-03-24",
+"sha256": "d3caba502c44dbd77884f47c8e118d1f749e957a06b7a10151afc68452805bcc",
+"pages": [
+1,
+2,
+3,
+4
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2024-cwp-16685-2024-phhc010922262024-1-2024-11-29",
+"sha256": "2b47d52e0087c214aa97a6489798866d4f2b1a40cda94d6fb34931679b027677",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11,
+12,
+13,
+14,
+15,
+16
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2017-lpa-305-2017-phhc011195222017-1-2017-02-27",
+"sha256": "8596e763d8cfc33e6339d9f69341798be3518275b4a50d5af6f940b44eb539fe",
+"pages": [
+1
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2026-untitled-phhc011084722026-1-2026-08-14",
+"sha256": "2f568cb5c7bbdb24520c89a61cf32963d8ccfb0e6b762523c6ad2382d514ae2f",
+"pages": [
+1
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2026-cwp-32188-2024-phhc011534052024-1-2026-05-07",
+"sha256": "a7bc0c03d30bc8a6d248c74083f7a31fa13efd3cfb8e5f8476821ebc01239807",
+"pages": [
+1,
+2,
+3,
+4
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2026-lpa-599-2026-phhc010352012026-1-2026-03-05",
+"sha256": "f2f74f4af8a131377a77108103d98a13a881c8c295547cfac9a7449e1673f940",
+"pages": [
+1,
+2,
+3,
+4
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "sc-2002-ex-capt-harish-uppal-2002insc523",
+"sha256": "7ebbed32083077a5404a28eb5e53c05470e1a5bcb50945889298ea700158863e",
+"pages": [
+7
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2026-cwp-1960-2025-phhc010061642025-1-2026-04-08",
+"sha256": "fc5513b5284169ed27809cc47efb8e41604cece0580415c7a37f8f0614059cd4",
+"pages": [
+1,
+2,
+3,
+4,
+5
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2024-cwp-16679-2024-phhc010922762024-1-2024-11-29",
+"sha256": "152202c8193b927ac93338a04a226aeb41341d9045d1906b7904ca34cbe8894d",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2016-lpa-326-2016-phhc011124862016-1-2016-12-19",
+"sha256": "455d61f6d964eccfeb50eb337608f444e6fe131eda81e0d8fb8213a6267530c8",
+"pages": [
+1
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2024-cwp-16171-2024-phhc010900112024-1-2024-11-29",
+"sha256": "a5bf15855022ccea642d41cfd4d0ea7608bdd59f10629444fe55f98839642aef",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11,
+12,
+13,
+14,
+15,
+16
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
+},
+{
+"doc_id": "hc-ph-2024-cwp-16165-2024-phhc010896452024-1-2024-12-13",
+"sha256": "ab3091b8e61455d63dc5b5813a611f8f521b46450d6a88cc5c28fa7b71a7f2de",
+"pages": [
+1,
+2,
+3,
+4,
+5,
+6,
+7,
+8,
+9,
+10,
+11
+],
+"tranche": "A7_held_unusable_pages",
+"engine": "paddle_v5_mobile"
 }
 ]
