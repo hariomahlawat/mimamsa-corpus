@@ -165,3 +165,12 @@ These are in `docs/architecture/b1/screenshots/`.
 - **Real sample:** `b1-01` (identifier search), `b1-02` (evidence), `b1-04` (statute s.75), `b1-05` (compact 1366), `b1-08` (narrow 800), `b1-10` (dark Text view).
 - **SYN:** `syn-02` (parser error), `syn-12` (cited earlier copy), `syn-15` (original failed).
 - The journeys take further screenshots only as CI artifacts.
+
+## 7. CI results at `ae7d7da0` (measured on GitHub-hosted runners)
+
+| Workflow / job | Run | Result |
+| --- | --- | --- |
+| `app-windows-poc.yml` / `b1-windows` (windows-latest) | 45716813226 | **Success.** The job builds the code and runs the C# tests. It runs the PR #54 retrieval oracle, which matches the baseline: 10/14, with the 4 hybrid cases failing as recorded. The Playwright journeys pass. The job then publishes the win-x64 build, installs it as a Windows Service under `NT SERVICE\MimamsaB1`, and creates an account through the CLI. Smoke checks covered health, login, an identifier search and the 401 path. After `Stop-Process -Force`, the SCM restarted the service. |
+| `app-ci.yml` / `b1` (ubuntu-latest) and the contract, importer and design jobs | 45716813309 | **Success** |
+
+These are hosted runners, not the selected host. Selected-host acceptance stays **BLOCKED**.
