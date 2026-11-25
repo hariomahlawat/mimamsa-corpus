@@ -874,7 +874,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Frontend workspace | Citation button in document pane |
 | Security | Authenticated User or Admin; published items only; server-side visibility filter |
 | Performance | None recorded |
-| Evidence / approval gates | Permalink opens the cited copy at the cited physical page when eligible; current edition only as a separate action (compare where linked); never substitutes the current copy; withdrawn/restricted/not-held cited copy shows a plain notice and no content (policy citation_resolution.json; ASR-E06) |
+| Evidence / approval gates | Permalink opens the cited copy at the cited physical page when eligible; current edition only as a separate action (compare where linked); never substitutes the current copy; a copy replaced in a later release stays openable while held and not excluded; withdrawn, restricted and not-held cited copies give one identical notice with no content (non-disclosure; policy citation_resolution.json; ASR-E06, review E7/E8) |
 | Acceptance tests | UX-12 (PR #54): cited copy/page honoured across N to N+1 with repaginated replacement; withdrawn cited copy shows notice only; deep link survives N→N+1 import |
 | Phase | B1 (citation); B2 (deep links across releases) |
 | Gated off | no |

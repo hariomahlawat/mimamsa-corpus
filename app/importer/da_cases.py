@@ -32,9 +32,11 @@ RAW_REFERENCE = "Unknown fictional authority ZZ-9"
 A5 = "f915ac11494208a8ebad09f7910ea6cab6f21266"
 NOW = "2090-01-01T00:00:00Z"
 DOC_ID = "toy-blue-form-review"
-REGISTER = register_from_bytes(json.dumps({"items": [{
+REGISTER_TEXT = json.dumps({"items": [{
     "restriction_id": "RM-999", "source_sha256": sha256(b"fictional restricted marker only").hexdigest(),
-    "doc_id": "toy-excluded-id", "hosted_paths": ["toy/excluded.txt"]}]}).encode())
+    "doc_id": "toy-excluded-id", "hosted_paths": ["toy/excluded.txt"]}]})
+REGISTER = register_from_bytes(REGISTER_TEXT.encode())
+REPLACEMENT = b"Fictional green form. Supersession is only a claim."  # verbatim from data-fixtures.json
 
 
 def h(b: bytes) -> str:
@@ -120,8 +122,9 @@ class Harness:
             p.write_bytes(SOURCE + b".")
         return path
 
-    def run(self, bundle_path, site, register=REGISTER):
-        return import_release(bundle_path, site, trusted_public_key=self.pub, mode="development", register=register)
+    def run(self, bundle_path, site, register=REGISTER, rollback=False):
+        return import_release(bundle_path, site, trusted_public_key=self.pub, mode="development", register=register,
+                              rollback=rollback)
 
 
 def observations(root: Path) -> dict:
@@ -144,9 +147,10 @@ def observations(root: Path) -> dict:
     far = derived()
     far["passages"][0]["char_end"] = len(SOURCE) + 1
     r = hn.run(hn.bundle(derived_recs=[far]), root / "site-da04")
-    obs["DA-04"] = {"ocr_quote_enabled": False if far["quoting_permitted"] is False else True,
-                    "out_of_range_anchor_rejected": any(u["kind"] == "derived_text" for u in r.unresolved)
-                    and not servable(root / "site-da04", "derived_text", f"{DOC_ID}@synthetic-extract/0.0.1")}
+    # ocr_quote_enabled is not observed: no quotation surface exists yet (Not implemented).
+    obs["DA-04"] = {"out_of_range_anchor_rejected": any(u["kind"] == "derived_text" for u in r.unresolved)
+                    and not servable(root / "site-da04", "derived_text", f"{DOC_ID}@synthetic-extract/0.0.1",
+                                     exclusions=None)}
     alt_doc = document(ALT, "toy-blue-form-alternate")
     cross = candidate(bound=False)
     cross["anchors"][0].update(page=99, source_copy_sha256=h(ALT))
@@ -155,7 +159,9 @@ def observations(root: Path) -> dict:
     obs["DA-35"] = {"source_copy_hash_verified": good.activated and "toy:edge:001" in good.verified["candidates"],
                     "page_anchor_verified": bool(ev) and ev["anchors"][0]["page"] == 1,
                     "producing_commit_retained": ev.get("artefact_commit") == A5,
-                    "passage_hash_retained": bool(ev) and ev["anchors"][0]["text_sha256"] == h(SOURCE),
+                    # recomputed by the importer from the verified derivative page text (not copied from input)
+                    "passage_hash_retained": bool(ev) and ev["anchors"][0]["text_sha256"] == h(SOURCE)
+                    and ev["anchors"][0]["page_only"] is False,
                     "broken_binding_rejected": r35.activated and "toy:edge:001" not in r35.verified["candidates"]}
     return obs
 

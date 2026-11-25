@@ -103,10 +103,10 @@ Gated workspaces (Commander assistant; as-of statute view; template drafting; do
 
 ### 2.6 Withdrawn and superseded
 
-- A link to a withdrawn document (Users) resolves to a notice "This document has been withdrawn from the library on {date}." with no content or snippets.
-- **Citation links (CAP-RW-04, UX-12; ASR-E06 resolved).** A citation permalink names a release, document, source-copy hash prefix and physical page. Resolution follows `policies/citation_resolution.json`:
-  - **Cited copy eligible** (including when superseded by a newer edition): open the exact cited copy at the cited physical page, with a notice "A newer edition exists" and a separate **Open current edition** action; **Compare** opens both side by side when the copies are linked as alternates or versions. The cited page number is never applied to a different copy.
-  - **Cited copy withdrawn:** notice "The cited copy was withdrawn from the library on {date}. It cannot be shown." No content, snippets or page images. If an eligible current edition exists, **Open current edition** is offered as a separate, clearly labelled different copy; the user is never taken there automatically.
-  - **Cited copy restricted:** notice "The cited copy is not available in this library." The restriction id is not shown to Users; the same separate action rule applies.
-  - **Cited copy not held** (unknown hash, or a release this site never imported): notice "This library does not hold the cited copy." No guessing by title or number.
+- A link to a withdrawn, restricted or unknown document (Users) resolves to one identical notice, "This document is not available in this installation.", with no content or snippets (non-disclosure, security architecture §7.3).
+- **Citation links (CAP-RW-04, UX-12; ASR-E06 resolved; review E7–E9).** A citation permalink names a release, document, source-copy hash prefix and physical page. Resolution follows `policies/citation_resolution.json` (reference implementation `cite()` in `app/importer`):
+  - **Cited copy eligible and current:** opens the exact cited copy at the cited physical page.
+  - **Cited copy eligible but not current** (verified in an earlier release, still held, not withdrawn or restricted, for example replaced by a repaginated edition): opens the **exact cited copy** at the cited page, with the notice "This copy is not the current edition in the library." **Open current edition** is a separate action; **Compare** is offered where the copies are linked. The cited page number is never applied to a different copy.
+  - **Cited copy unavailable** (withdrawn, restricted or not held): one identical notice for all three, "The cited copy is not available in this installation." No content, date, reason or current-edition offer. This states the limitation without disclosing which case applies (security architecture §7.3 non-disclosure). Admins see the reason only in the Admin withdrawal/audit view.
+  - **Cited page not in the copy**, **ambiguous reference** (the hash prefix matches more than one held copy; a single full-hash match is required) and **document/copy mismatch**: a specific notice and no content. No clamping, no fallback to page 1 and no guessing by title or number.
   - In every case the copied citation and internal reference keep the original copy hash and page.

@@ -1,29 +1,31 @@
 """Release import with source-fidelity verification (ASR-E05; contract README §8 assigns this to the importer).
 
 Sequence:
-  1 Contract validation of the whole bundle (signature first, checksums, schema, rules, restricted register).
-    Any error refuses the import; nothing is written to the vault or generations; the active generation is untouched.
-  2 Source verification for every document, against the bundled bytes (not the declared metadata):
-    an `original` file must exist in the bundle whose SHA-256 equals source_copy.sha256, whose size equals
-    source_copy.bytes, whose canonical vault key equals source_copy.vault_path, and whose measured physical page
-    count equals source_copy.page_count (PDF via pypdfium2; text/plain = form-feed separated pages). Any document
-    failure refuses activation of the whole generation (a release never activates with a missing or mismatched
-    claimed copy).
-  3 Derivative verification for every derived_text record: its source copy must be a verified document copy of the
-    same doc_id; its text file must be bundled with SHA-256 equal to text_sha256; every declared page must be a
-    physical page of the original and its char_count must equal the measured page text length; every passage must
-    lie inside its page ([char_start, char_end] within the page text) and hash to its text_sha256.
-  4 Anchor verification for every candidate: each anchor's copy must be the source document's own copy (or a
-    declared alternate) and verified; its page must be a physical page of that copy; a span bound to a derivative
-    (pipeline name, version, derivative_text_sha256) must resolve to a verified derivative and passage with offsets
-    inside it. Unbound spans are kept page-only.
-  Items failing 3 or 4 get disposition UNRESOLVED (quarantined with reasons) and are never servable.
-  5 Only then: write verified originals to the content-addressed vault (write-once, verify-if-present), write the
-    generation (servable + quarantine lists) and switch the ACTIVE pointer atomically. The previous generation is
-    retained.
+  0 Replay/no-op: the active generation's release_sequence is read from the site (never trusted from the caller).
+    Re-importing the exact active bundle (same release_id and SHA256SUMS digest) is a no-op. Any other bundle whose
+    release_id already has a generation is refused (generations are never rewritten).
+  1 Contract validation of the whole bundle (signature first, checksums, schema, rules, restricted register), with
+    current_release_sequence = the site's active sequence (older or equal refused unless the explicit rollback path).
+    Any error refuses the import; nothing is written.
+  2 Source verification for every document against the bundled bytes: an `original` exists whose SHA-256 equals
+    source_copy.sha256; size equals `bytes`; vault key matches; the content type is detected from the bytes
+    (`%PDF-` magic -> application/pdf; strict UTF-8 without PDF magic -> text/plain) and must equal the declared
+    mime_type; the physical page count is measured from the bytes (pypdfium2 for PDF; form-feed pages for text)
+    and must equal page_count. Any failure refuses activation of the whole generation.
+  3 Derivatives: declared source is the verified copy of the doc_id; text file bundled with matching SHA-256;
+    declared pages are physical pages of the original with matching char_count; passages lie inside their page and
+    hash to text_sha256. Failures -> UNRESOLVED (quarantined, never servable).
+  4 Candidate anchors: copy is the source document's own copy (or declared alternate) and verified; page is a
+    physical page. A span bound to a derivative (pipeline name, version, derivative_text_sha256) must resolve to a
+    verified derivative page; offsets (either or both) are range-checked against the page (and the passage when a
+    passage_id is given); a declared text_sha256 is recomputed from the verified page text. Unbound spans are served
+    page-only: their unverified passage_id/offsets/hash are stripped from the served evidence and flagged.
+  5 Write verified originals to the content-addressed vault (write-once, retained across generations), update the
+    append-only held-copies index, build the generation in a temporary directory (fsync), rename it into place,
+    then switch ACTIVE (temp file, fsync, rename, directory fsync where the OS supports it).
 
-Derived text page format: the text file uses `[[page N]]` marker lines; page N's text is everything after its marker
-line up to the next marker line, with the single newline that precedes the next marker (or ends the file) removed.
+Derived text page format: `[[page N]]` marker lines; page N's text runs to the next marker line, with the single
+newline before the next marker (or the end of file) removed.
 """
 from __future__ import annotations
 
@@ -43,6 +45,7 @@ _MARKER = re.compile(r"^\[\[page (\d+)\]\]\n", re.M)
 class ImportResult:
     release_id: str | None
     activated: bool
+    noop: bool = False
     refused_reasons: list = field(default_factory=list)
     verified: dict = field(default_factory=lambda: {"documents": [], "derived_text": [], "candidates": []})
     unresolved: list = field(default_factory=list)   # [{kind, id, reasons}]
@@ -53,8 +56,18 @@ def _sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def _page_count(data: bytes, mime: str) -> int | None:
-    if mime == "application/pdf":
+def _detect_type(data: bytes) -> str | None:
+    if data.startswith(b"%PDF-"):
+        return "application/pdf"
+    try:
+        data.decode("utf-8", errors="strict")
+        return "text/plain"
+    except UnicodeDecodeError:
+        return None
+
+
+def _page_count(data: bytes, detected: str) -> int | None:
+    if detected == "application/pdf":
         try:
             import pypdfium2 as pdfium
             pdf = pdfium.PdfDocument(data)
@@ -64,9 +77,9 @@ def _page_count(data: bytes, mime: str) -> int | None:
                 pdf.close()
         except Exception:  # unopenable PDF
             return None
-    if mime == "text/plain":
+    if detected == "text/plain":
         return data.count(b"\f") + 1
-    return None  # no verified page counter for this type: cannot serve
+    return None
 
 
 def _split_pages(text: str) -> dict[int, str] | None:
@@ -100,6 +113,29 @@ def _records(root: Path, manifest: dict, kind: str):
     return out
 
 
+def _fsync_dir(path: Path):
+    try:  # POSIX; Windows does not allow opening a directory this way (NTFS durability proven in P8)
+        fd = os.open(path, os.O_RDONLY)
+    except OSError:
+        return
+    try:
+        os.fsync(fd)
+    except OSError:
+        pass
+    finally:
+        os.close(fd)
+
+
+def _write_atomic(path: Path, data: bytes):
+    tmp = path.with_name(path.name + ".tmp")
+    with open(tmp, "wb") as fh:
+        fh.write(data)
+        fh.flush()
+        os.fsync(fh.fileno())
+    os.replace(tmp, path)
+    _fsync_dir(path.parent)
+
+
 def active_generation(site: Path) -> dict | None:
     p = Path(site) / "ACTIVE"
     if not p.exists():
@@ -108,41 +144,70 @@ def active_generation(site: Path) -> dict | None:
     return json.loads((Path(site) / "generations" / gen / "generation.json").read_text(encoding="utf-8"))
 
 
-def servable(site: Path, kind: str, item_id: str) -> bool:
-    """True only for items verified in the ACTIVE generation. Quarantined or unknown items are never servable."""
+def held_copies(site: Path) -> dict:
+    p = Path(site) / "held_copies.json"
+    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+
+
+def _excluded(exclusions, doc_id: str | None, sha: str | None) -> bool:
+    if exclusions is None:
+        return False
+    return bool(exclusions.register.is_restricted(sha256=sha, doc_id=doc_id)
+                or doc_id in exclusions.withdrawn_doc_ids or sha in exclusions.withdrawn_shas
+                or doc_id in exclusions.tombstone_doc_ids or sha in exclusions.tombstone_shas
+                or doc_id in exclusions.restricted_tombstone_doc_ids or sha in exclusions.restricted_tombstone_shas)
+
+
+def servable(site: Path, kind: str, item_id: str, *, exclusions) -> bool:
+    """Serving decision: the item is verified in the ACTIVE generation AND not withdrawn or restricted under the
+    current exclusion state (`ExclusionStore.effective_state`). Passing exclusions=None is allowed only when the site
+    has no exclusion store; if a store exists, None fails closed."""
+    site = Path(site)
+    if exclusions is None and (site / "exclusions" / "ACCEPTED.json").exists():
+        return False
     gen = active_generation(site)
-    return bool(gen) and item_id in gen["servable"].get(kind, [])
+    if not gen or item_id not in gen["servable"].get(kind, []):
+        return False
+    owner = gen["item_document"].get(kind, {}).get(item_id)  # [doc_id, copy sha]
+    return bool(owner) and not _excluded(exclusions, owner[0], owner[1])
 
 
 def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_key=None, mode="production",
-                   register=None, current_release_sequence=None, rollback=False, today=None) -> ImportResult:
+                   register=None, rollback=False, today=None) -> ImportResult:
     bundle, site = Path(bundle), Path(site)
-    rep = validate_bundle(bundle, trust_list=trust_list, trusted_public_key=trusted_public_key, mode=mode,
-                          register=register, current_release_sequence=current_release_sequence, rollback=rollback,
-                          today=today)
-    manifest = {}
     try:
         manifest = json.loads((bundle / "RELEASE.json").read_text(encoding="utf-8"))
+        sums_digest = _sha((bundle / "SHA256SUMS").read_bytes())
     except (OSError, ValueError):
-        pass
+        manifest, sums_digest = {}, None
     res = ImportResult(release_id=manifest.get("release_id"), activated=False)
+
+    # 0 replay / no-op
+    active = active_generation(site)
+    gdir = site / "generations" / str(res.release_id)
+    if active and active["release_id"] == res.release_id and active.get("sums_sha256") == sums_digest:
+        res.noop = True
+        return res
+    if res.release_id and gdir.exists():
+        res.refused_reasons.append("a generation with this release_id already exists; generations are never rewritten")
+        return res
+    current = active["release_sequence"] if active else 0
+
+    # 1 contract
+    rep = validate_bundle(bundle, trust_list=trust_list, trusted_public_key=trusted_public_key, mode=mode,
+                          register=register, current_release_sequence=current, rollback=rollback, today=today)
     if not rep.ok:
         res.contract_errors = sorted({i.code for i in rep.errors})
         res.refused_reasons.append("contract validation failed: " + ", ".join(res.contract_errors))
         return res
 
-    # Bundled originals by actual content hash (recomputed, not taken from the manifest).
-    originals = {}
+    originals, texts = {}, {}
     for f in manifest.get("files", []):
         if f.get("kind") == "original":
             data = (bundle / f["path"]).read_bytes()
             originals.setdefault(_sha(data), data)
-    texts = {}
-    for f in manifest.get("files", []):
-        if f.get("kind") == "text":
-            data = (bundle / f["path"]).read_bytes()
-            texts[f["path"]] = data
-
+        elif f.get("kind") == "text":
+            texts[f["path"]] = (bundle / f["path"]).read_bytes()
     docs = _records(bundle, manifest, "documents_jsonl")
     derived = _records(bundle, manifest, "derived_text_jsonl")
     cands = _records(bundle, manifest, "candidates_jsonl")
@@ -161,10 +226,13 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
                 reasons.append(f"size mismatch: declared {sc['bytes']}, bundled {len(data)}")
             if sc["vault_path"] != f"vault/sha256/{h[:2]}/{h}":
                 reasons.append("vault key does not match the content hash")
-            pages = _page_count(data, sc["mime_type"])
-            if pages is None:
-                reasons.append(f"physical page count cannot be verified for {sc['mime_type']} (unopenable or unsupported)")
-            elif sc.get("page_count") is not None and pages != sc["page_count"]:
+            detected = _detect_type(data)
+            if detected != sc["mime_type"]:
+                reasons.append(f"content type mismatch: declared {sc['mime_type']}, detected {detected or 'unverifiable'}")
+            pages = _page_count(data, detected) if detected == sc["mime_type"] else None
+            if detected == sc["mime_type"] and pages is None:
+                reasons.append(f"physical page count cannot be verified for {detected} (unopenable)")
+            elif pages is not None and sc.get("page_count") is not None and pages != sc["page_count"]:
                 reasons.append(f"page count mismatch: declared {sc['page_count']}, measured {pages}")
             if pages is not None and not reasons:
                 copy_pages[h] = pages
@@ -175,10 +243,12 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
             res.verified["documents"].append(d["doc_id"])
             doc_by_id[d["doc_id"]] = d
     if res.refused_reasons:
-        return res  # a release never activates with a missing or mismatched claimed copy
+        return res
 
     # 3 derivatives
-    verified_derivs = {}  # (sha, name, version, text_sha) -> pages dict + passages
+    verified_derivs = {}
+    item_document = {"documents": {d: [d, doc_by_id[d]["source_copy"]["sha256"]] for d in doc_by_id},
+                     "derived_text": {}, "candidates": {}}
     for t in derived:
         key = (t["source_copy_sha256"], t["pipeline"]["name"], t["pipeline"]["version"], t["text_sha256"])
         reasons = []
@@ -217,12 +287,13 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
             res.unresolved.append({"kind": "derived_text", "id": did, "reasons": reasons})
         else:
             res.verified["derived_text"].append(did)
-            verified_derivs[key] = {p["passage_id"]: p for p in t["passages"]}
+            item_document["derived_text"][did] = [t["doc_id"], t["source_copy_sha256"]]
+            verified_derivs[key] = {"passages": {p["passage_id"]: p for p in t["passages"]}, "pages": pages_txt}
 
     # 4 candidate anchors
     evidence = {}
     for c in cands:
-        reasons = []
+        reasons, served_anchors = [], []
         doc = doc_by_id.get(c["source_doc_id"])
         own = {doc["source_copy"]["sha256"], *doc.get("alternate_copy_sha256", [])} if doc else set()
         for a in c["anchors"]:
@@ -233,28 +304,45 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
                 reasons.append("anchor copy not verified")
             elif not (1 <= a["page"] <= copy_pages[h]):
                 reasons.append(f"anchor page {a['page']} is not a physical page of the copy")
+            has_span = any(a.get(k) is not None for k in ("passage_id", "char_start", "char_end"))
             bound = all(a.get(k) for k in ("pipeline_name", "pipeline_version", "derivative_text_sha256"))
+            served = {"source_copy_sha256": h, "page": a["page"], "page_only": True, "text_sha256": None}
             if bound:
-                passages = verified_derivs.get((h, a["pipeline_name"], a["pipeline_version"], a["derivative_text_sha256"]))
-                if passages is None:
+                dv = verified_derivs.get((h, a["pipeline_name"], a["pipeline_version"], a["derivative_text_sha256"]))
+                body = (dv or {}).get("pages", {}).get(a["page"]) if dv else None
+                if dv is None:
                     reasons.append("span bound to an unverified or absent derivative")
+                elif body is None:
+                    reasons.append("span page has no verified derivative text")
                 else:
-                    p = passages.get(a.get("passage_id")) if a.get("passage_id") else None
-                    if a.get("passage_id") and p is None:
-                        reasons.append("span passage not in the derivative")
-                    if p is not None and a.get("char_start") is not None and not (
-                            p["char_start"] <= a["char_start"] <= (a.get("char_end") or a["char_start"]) <= p["char_end"]):
-                        reasons.append("span offsets outside the passage")
+                    lo, hi = 0, len(body)
+                    if a.get("passage_id") is not None:
+                        p = dv["passages"].get(a["passage_id"])
+                        if p is None or p["page"] != a["page"]:
+                            reasons.append("span passage not on this page of the derivative")
+                        else:
+                            lo, hi = p["char_start"], p["char_end"]
+                    cs = a["char_start"] if a.get("char_start") is not None else lo
+                    ce = a["char_end"] if a.get("char_end") is not None else hi
+                    if not (lo <= cs <= ce <= hi):
+                        reasons.append("span offsets outside the verified page/passage")
+                    elif a.get("text_sha256") and _sha(body[cs:ce].encode("utf-8")) != a["text_sha256"]:
+                        reasons.append("anchor text hash does not match the verified derivative text")
+                    else:
+                        served.update(page_only=False, passage_id=a.get("passage_id"), char_start=cs, char_end=ce,
+                                      text_sha256=_sha(body[cs:ce].encode("utf-8")),
+                                      derivative_text_sha256=a["derivative_text_sha256"])
+            elif has_span:
+                served["span_stripped"] = "unbound span: passage id, offsets and hash not verified, not served"
+            served_anchors.append(served)
         if reasons:
             res.unresolved.append({"kind": "candidate", "id": c["candidate_id"], "reasons": sorted(set(reasons))})
         else:
             res.verified["candidates"].append(c["candidate_id"])
-            evidence[c["candidate_id"]] = {
-                "artefact_commit": c["extractor"]["artefact_commit"],
-                "anchors": [{"source_copy_sha256": a["source_copy_sha256"], "page": a["page"],
-                             "text_sha256": a.get("text_sha256")} for a in c["anchors"]]}
+            item_document["candidates"][c["candidate_id"]] = [c["source_doc_id"], doc["source_copy"]["sha256"]]
+            evidence[c["candidate_id"]] = {"artefact_commit": c["extractor"]["artefact_commit"], "anchors": served_anchors}
 
-    # 5 vault, generation, atomic activation
+    # 5 vault (retained across generations), held-copies index, generation, atomic activation
     vault = site / "vault" / "sha256"
     for h in copy_pages:
         target = vault / h[:2] / h
@@ -264,21 +352,57 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
                 return res
             continue
         target.parent.mkdir(parents=True, exist_ok=True)
-        tmp = target.with_suffix(".tmp")
-        with open(tmp, "wb") as fh:
-            fh.write(originals[h])
-            fh.flush()
-            os.fsync(fh.fileno())
-        os.replace(tmp, target)
+        _write_atomic(target, originals[h])
         os.chmod(target, 0o444)
-    gen_id = res.release_id
-    gdir = site / "generations" / gen_id
-    gdir.mkdir(parents=True, exist_ok=True)
-    generation = {"release_id": gen_id, "release_sequence": manifest.get("release_sequence"),
-                  "servable": res.verified, "quarantine": res.unresolved, "candidate_evidence": evidence}
-    (gdir / "generation.json").write_text(json.dumps(generation, indent=1, sort_keys=True), encoding="utf-8")
-    tmp = site / "ACTIVE.tmp"
-    tmp.write_text(gen_id, encoding="utf-8")
-    os.replace(tmp, site / "ACTIVE")
+    held = held_copies(site)
+    for d in doc_by_id.values():
+        h = d["source_copy"]["sha256"]
+        held.setdefault(h, {"doc_id": d["doc_id"], "page_count": copy_pages[h], "first_release": res.release_id})
+    site.mkdir(parents=True, exist_ok=True)
+    _write_atomic(site / "held_copies.json", json.dumps(held, indent=1, sort_keys=True).encode())
+
+    generation = {"release_id": res.release_id, "release_sequence": manifest.get("release_sequence"),
+                  "sums_sha256": sums_digest, "servable": res.verified, "quarantine": res.unresolved,
+                  "item_document": item_document, "candidate_evidence": evidence}
+    gens = site / "generations"
+    gens.mkdir(parents=True, exist_ok=True)
+    tmpdir = gens / f".tmp-{res.release_id}"
+    tmpdir.mkdir()
+    with open(tmpdir / "generation.json", "wb") as fh:
+        fh.write(json.dumps(generation, indent=1, sort_keys=True).encode())
+        fh.flush()
+        os.fsync(fh.fileno())
+    _fsync_dir(tmpdir)
+    os.replace(tmpdir, gdir)
+    _fsync_dir(gens)
+    _write_atomic(site / "ACTIVE", str(res.release_id).encode())
     res.activated = True
     return res
+
+
+def cite(site: Path, sha12: str, doc_id: str, page: int, *, exclusions) -> dict:
+    """Resolve a citation permalink per app/design/policies/citation_resolution.json (ASR-E06).
+
+    Returns {"state": ..., "copy": full sha or None, "page": page or None}. Opens only the exact cited copy; the
+    current edition is never substituted. Withdrawn, restricted and not-held copies return one indistinguishable
+    state (non-disclosure, security architecture §7.3)."""
+    held = held_copies(site)
+    matches = [h for h in held if h.startswith(sha12.lower())]
+    if len(matches) > 1:
+        return {"state": "AMBIGUOUS_REFERENCE", "copy": None, "page": None}
+    if not matches or _excluded(exclusions, held[matches[0]]["doc_id"], matches[0]):
+        return {"state": "CITED_COPY_UNAVAILABLE", "copy": None, "page": None}
+    h = matches[0]
+    if held[h]["doc_id"] != doc_id:
+        return {"state": "REFERENCE_MISMATCH", "copy": None, "page": None}
+    if not (1 <= page <= held[h]["page_count"]):
+        return {"state": "CITED_PAGE_NOT_IN_COPY", "copy": None, "page": None}
+    gen = active_generation(site) or {}
+    docs_now = gen.get("item_document", {}).get("documents", {})
+    current = docs_now.get(doc_id, [None, None])[1]
+    if current == h:
+        return {"state": "CITED_COPY_ELIGIBLE", "copy": h, "page": page, "current_copy": h}
+    # Held and verified in an earlier generation, not withdrawn or restricted: still opened exactly as cited.
+    current_ok = current is not None and not _excluded(exclusions, doc_id, current)
+    return {"state": "CITED_COPY_ELIGIBLE_NOT_CURRENT", "copy": h, "page": page,
+            "current_copy": current if current_ok else None}

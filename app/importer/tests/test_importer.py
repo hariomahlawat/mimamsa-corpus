@@ -12,7 +12,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from da_cases import (ALT, DOC_ID, SOURCE, Harness, candidate, derived, document, h, observations,  # noqa: E402
                       text_file)
-from mimamsa_importer import active_generation, servable  # noqa: E402
+from mimamsa_importer import active_generation, cite, held_copies, servable  # noqa: E402
+
+
+def sv(*a):
+    return servable(*a, exclusions=None)
 
 DERIV = f"{DOC_ID}@synthetic-extract/0.0.1"
 
@@ -34,7 +38,7 @@ def test_da01_control_activates_and_stores_exact_bytes(hn, tmp_path):
     assert r.activated, r.refused_reasons
     stored = site / "vault/sha256" / h(SOURCE)[:2] / h(SOURCE)
     assert stored.read_bytes() == SOURCE
-    assert servable(site, "documents", DOC_ID) and servable(site, "derived_text", DERIV) and servable(site, "candidates", "toy:edge:001")
+    assert sv(site, "documents", DOC_ID) and sv(site, "derived_text", DERIV) and sv(site, "candidates", "toy:edge:001")
 
 
 @pytest.mark.parametrize("case", ["unbound-original", "missing-original", "size-mismatch", "page-count-mismatch"])
@@ -63,7 +67,7 @@ def test_da01_first_import_refused_leaves_nothing_servable(hn, tmp_path):
     site = tmp_path / "site"
     r = hn.run(hn.bundle(copies=[ALT]), site)
     assert not r.activated and active_generation(site) is None and vault_files(site) == []
-    assert not servable(site, "documents", DOC_ID)
+    assert not sv(site, "documents", DOC_ID)
 
 
 def _pdf(pages: int) -> bytes:
@@ -93,7 +97,7 @@ def test_da03_corrupt_bundle_refused_previous_generation_serves(hn, tmp_path):
     before = (site / "ACTIVE").read_text()
     r = hn.run(hn.bundle(flip=True), site)
     assert not r.activated and "CHECKSUM_MISMATCH" in r.contract_errors
-    assert (site / "ACTIVE").read_text() == before and servable(site, "documents", DOC_ID)
+    assert (site / "ACTIVE").read_text() == before and sv(site, "documents", DOC_ID)
 
 
 def test_da03_unopenable_pdf_refused(hn, tmp_path):
@@ -119,7 +123,7 @@ def test_da04_derivative_mismatch_quarantined_not_served(hn, tmp_path, mutate, r
     assert r.activated  # sources verified; only the derivative is quarantined
     q = [u for u in r.unresolved if u["kind"] == "derived_text"]
     assert q and any(reason in x for x in q[0]["reasons"])
-    assert not servable(site, "derived_text", DERIV)
+    assert not sv(site, "derived_text", DERIV)
     assert active_generation(site)["quarantine"]
 
 
@@ -140,7 +144,7 @@ def test_bound_span_to_quarantined_derivative_is_quarantined(hn, tmp_path):
     d["passages"][0]["char_end"] = len(SOURCE) + 1
     site = tmp_path / "site"
     r = hn.run(hn.bundle(derived_recs=[d], cands=[candidate()]), site)
-    assert "toy:edge:001" not in r.verified["candidates"] and not servable(site, "candidates", "toy:edge:001")
+    assert "toy:edge:001" not in r.verified["candidates"] and not sv(site, "candidates", "toy:edge:001")
 
 
 # ---- DA-35 anchor binding
@@ -153,7 +157,7 @@ def test_da35_cross_bound_anchor_quarantined(hn, tmp_path):
     reasons = [x for u in r.unresolved if u["id"] == "toy:edge:001" for x in u["reasons"]]
     assert "anchor copy is not the source document's copy" in reasons
     assert any("not a physical page" in x for x in reasons)
-    assert not servable(site, "candidates", "toy:edge:001")
+    assert not sv(site, "candidates", "toy:edge:001")
 
 
 def test_da35_page_beyond_copy_rejected_even_on_own_copy(hn, tmp_path):
@@ -178,7 +182,7 @@ def test_restricted_material_refused_before_any_write(hn, tmp_path):
 
 
 def test_unknown_items_never_servable(tmp_path):
-    assert not servable(tmp_path / "nosite", "documents", DOC_ID)
+    assert not sv(tmp_path / "nosite", "documents", DOC_ID)
 
 
 def test_observation_record_matches_pr54_expected_fields(tmp_path):
@@ -187,7 +191,7 @@ def test_observation_record_matches_pr54_expected_fields(tmp_path):
         "DA-01": {"original_bytes_equal": True, "sha256_equal": True, "vault_key_matches": True},
         "DA-03": {"corrupt_rejected": True, "active_generation_unchanged": True, "prior_original_unchanged": True,
                   "unopenable_source_rejected": True},
-        "DA-04": {"ocr_quote_enabled": False, "out_of_range_anchor_rejected": True},
+        "DA-04": {"out_of_range_anchor_rejected": True},
         "DA-35": {"source_copy_hash_verified": True, "page_anchor_verified": True, "producing_commit_retained": True,
                   "passage_hash_retained": True, "broken_binding_rejected": True},
     }
@@ -225,3 +229,176 @@ def test_rm001_document_never_imported(hn, tmp_path):
     r = hn.run(hn.bundle(docs=[document(doc_id=rm["doc_id"])]), site, register=reg)
     assert not r.activated and "RESTRICTED_MATERIAL" in r.contract_errors
     assert vault_files(site) == [] and active_generation(site) is None
+
+
+# ================= review E1-E10 =================
+from da_cases import REGISTER_TEXT, REPLACEMENT  # noqa: E402
+
+
+def _bound(**kw):
+    c = candidate()
+    c["anchors"][0].update(kw)
+    return c
+
+
+@pytest.mark.parametrize("kw", [
+    {"passage_id": None, "char_start": 10000, "char_end": 20000},   # E1 reviewer probe
+    {"passage_id": None, "char_start": None, "char_end": 9999},     # end only
+    {"passage_id": None, "char_start": 60, "char_end": None},       # start only, beyond page
+    {"char_start": 5, "char_end": len(SOURCE) + 3},                 # with passage, beyond passage
+])
+def test_e1_bound_offsets_range_checked_with_or_without_passage(hn, tmp_path, kw):
+    site = tmp_path / "site"
+    r = hn.run(hn.bundle(cands=[_bound(**kw)]), site)
+    assert "toy:edge:001" not in r.verified["candidates"] and not sv(site, "candidates", "toy:edge:001")
+
+
+def test_e1_valid_offsets_without_passage_accepted_and_hash_recomputed(hn, tmp_path):
+    site = tmp_path / "site"
+    r = hn.run(hn.bundle(cands=[_bound(passage_id=None, char_start=0, char_end=10, text_sha256=h(SOURCE[:10]))]), site)
+    assert "toy:edge:001" in r.verified["candidates"]
+    a = active_generation(site)["candidate_evidence"]["toy:edge:001"]["anchors"][0]
+    assert a["text_sha256"] == h(SOURCE[:10]) and a["page_only"] is False
+
+
+def test_e2_anchor_text_hash_must_match_derivative(hn, tmp_path):
+    site = tmp_path / "site"
+    r = hn.run(hn.bundle(cands=[_bound(text_sha256="e" * 64)]), site)
+    assert any("anchor text hash" in x for u in r.unresolved for x in u["reasons"])
+    assert not sv(site, "candidates", "toy:edge:001")
+
+
+def test_e3_pdf_declared_as_text_refused(hn, tmp_path):
+    from test_importer import _pdf
+    pdf = _pdf(1) + b"\f\f\f\f"
+    r = hn.run(hn.bundle(docs=[document(pdf, mime="text/plain", page_count=5)], copies=[pdf], derived_recs=[], texts={}),
+               tmp_path / "site")
+    assert not r.activated and "content type mismatch" in r.refused_reasons[0]
+
+
+def test_e3_text_declared_as_pdf_refused(hn, tmp_path):
+    r = hn.run(hn.bundle(docs=[document(mime="application/pdf")]), tmp_path / "site")
+    assert not r.activated and "content type mismatch" in r.refused_reasons[0]
+
+
+def test_e4_older_release_replay_refused_using_site_sequence(hn, tmp_path):
+    site = tmp_path / "site"
+    old = hn.bundle()          # sequence 1
+    new = hn.bundle()          # sequence 2
+    assert hn.run(new, site).activated
+    r = hn.run(old, site)      # caller supplies no sequence: the importer reads the site's
+    assert not r.activated and "DOWNGRADE_OR_REPLAY" in r.contract_errors
+    assert active_generation(site)["release_sequence"] == 2
+
+
+def test_e4_identical_reimport_is_noop_and_never_rewrites(hn, tmp_path):
+    site = tmp_path / "site"
+    b = hn.bundle()
+    assert hn.run(b, site).activated
+    gen_file = site / "generations" / active_generation(site)["release_id"] / "generation.json"
+    before = (gen_file.read_bytes(), gen_file.stat().st_mtime_ns)
+    r = hn.run(b, site)
+    assert r.noop and not r.activated and (gen_file.read_bytes(), gen_file.stat().st_mtime_ns) == before
+
+
+def test_e4_same_release_id_different_content_refused(hn, tmp_path):
+    site = tmp_path / "site"
+    assert hn.run(hn.bundle(release="R13-asr-toy-20900101-0000ffff"), site).activated
+    r = hn.run(hn.bundle(release="R13-asr-toy-20900101-0000ffff", cands=[candidate()]), site)
+    assert not r.activated and "never rewritten" in r.refused_reasons[0]
+
+
+def test_e4_no_temporary_generation_left_behind(hn, tmp_path):
+    site = tmp_path / "site"
+    hn.run(hn.bundle(), site)
+    assert not list((site / "generations").glob(".tmp-*")) and not (site / "ACTIVE.tmp").exists()
+
+
+def _store_with(tmp_path, site, *, withdrawals=(), register_text=REGISTER_TEXT):
+    import hashlib as _hl
+    from mimamsa_contract.devbundle import new_dev_keypair, trust_list_for
+    from mimamsa_contract.exclusions import ExclusionStore
+    from mimamsa_contract.trust import parse_trust_list
+    sk, pk = new_dev_keypair()
+    trust = parse_trust_list(trust_list_for([(pk, "OWNER", ["register"])]))
+    u = {"contract_version": "1.0.0", "record_kind": "exclusion_update", "sequence": 1, "issued_at": "2090-01-01T00:00:00Z",
+         "register_sha256": _hl.sha256(register_text.encode()).hexdigest(), "register_json": register_text,
+         "withdrawals": list(withdrawals)}
+    b = json.dumps(u).encode()
+    store = ExclusionStore(site / "exclusions")
+    store.append(b, sk.sign(b), trust)
+    return store.effective_state(trust)
+
+
+def test_e5_servable_honours_withdrawal(hn, tmp_path):
+    site = tmp_path / "site"
+    hn.run(hn.bundle(cands=[candidate()]), site)
+    state = _store_with(tmp_path, site, withdrawals=[{"doc_id": DOC_ID, "reason": "withdrawn upstream"}])
+    for kind, item in (("documents", DOC_ID), ("derived_text", DERIV), ("candidates", "toy:edge:001")):
+        assert not servable(site, kind, item, exclusions=state)
+    assert not servable(site, "documents", DOC_ID, exclusions=None)  # store exists: None fails closed
+
+
+def test_e5_servable_honours_restriction(hn, tmp_path):
+    site = tmp_path / "site"
+    hn.run(hn.bundle(), site)
+    reg = json.dumps({"items": [{"restriction_id": "RM-998", "source_sha256": h(SOURCE), "doc_id": "toy-other",
+                                 "hosted_paths": []}]})
+    state = _store_with(tmp_path, site, register_text=reg)
+    assert not servable(site, "documents", DOC_ID, exclusions=state)
+
+
+def test_e6_da04_quote_flag_not_reported_as_observed(tmp_path):
+    assert "ocr_quote_enabled" not in observations(tmp_path)["DA-04"]
+
+
+# ---- E7/E8/E9 citation resolution through the importer's held copies
+def _two_releases(hn, site):
+    r1 = hn.run(hn.bundle(), site)
+    repl = document(REPLACEMENT)  # same doc_id, new copy (different bytes/pagination)
+    r2 = hn.run(hn.bundle(docs=[repl], copies=[REPLACEMENT], derived_recs=[], texts={}), site)
+    assert r1.activated and r2.activated
+    return h(SOURCE), h(REPLACEMENT)
+
+
+def test_e8_cited_copy_superseded_in_later_release_still_opens_exactly(hn, tmp_path):
+    site = tmp_path / "site"
+    old, new = _two_releases(hn, site)
+    res = cite(site, old[:12], DOC_ID, 1, exclusions=None)
+    assert res == {"state": "CITED_COPY_ELIGIBLE_NOT_CURRENT", "copy": old, "page": 1, "current_copy": new}
+    assert (site / "vault/sha256" / old[:2] / old).read_bytes() == SOURCE  # retained across generations
+    assert cite(site, new[:12], DOC_ID, 1, exclusions=None)["state"] == "CITED_COPY_ELIGIBLE"
+
+
+def test_e7_withdrawn_restricted_and_not_held_are_indistinguishable(hn, tmp_path):
+    site = tmp_path / "site"
+    old, _ = _two_releases(hn, site)
+    withdrawn = cite(site, old[:12], DOC_ID, 1, exclusions=_store_with(tmp_path, site, withdrawals=[{"doc_id": DOC_ID, "reason": "withdrawn"}]))
+    site2 = tmp_path / "site2"
+    old2, _ = _two_releases(Harness(tmp_path / "h2"), site2)
+    reg = json.dumps({"items": [{"restriction_id": "RM-998", "source_sha256": old2, "doc_id": "toy-other", "hosted_paths": []}]})
+    restricted = cite(site2, old2[:12], DOC_ID, 1, exclusions=_store_with(tmp_path, site2, register_text=reg))
+    not_held = cite(site, "f" * 12, DOC_ID, 1, exclusions=None)
+    assert withdrawn == restricted == not_held == {"state": "CITED_COPY_UNAVAILABLE", "copy": None, "page": None}
+
+
+def test_e9_page_beyond_copy_mismatch_and_ambiguity(hn, tmp_path):
+    site = tmp_path / "site"
+    old, new = _two_releases(hn, site)
+    assert cite(site, old[:12], DOC_ID, 7, exclusions=None)["state"] == "CITED_PAGE_NOT_IN_COPY"
+    assert cite(site, old[:12], "toy-some-other-doc", 1, exclusions=None)["state"] == "REFERENCE_MISMATCH"
+    held = held_copies(site)
+    held["0" * 3 + old[3:]] = dict(held[old])       # synthetic colliding prefix
+    held[old[:12] + "0" * 52] = dict(held[old])
+    (site / "held_copies.json").write_text(json.dumps(held))
+    assert cite(site, old[:12], DOC_ID, 1, exclusions=None)["state"] == "AMBIGUOUS_REFERENCE"
+
+
+def test_e10_unbound_span_fields_not_served(hn, tmp_path):
+    site = tmp_path / "site"
+    c = candidate(bound=False)
+    c["anchors"][0].update(passage_id="p9-9", char_start=5000, char_end=6000)
+    hn.run(hn.bundle(cands=[c]), site)
+    a = active_generation(site)["candidate_evidence"]["toy:edge:001"]["anchors"][0]
+    assert a["page_only"] is True and "passage_id" not in a and "char_start" not in a and a["text_sha256"] is None
+    assert "span_stripped" in a

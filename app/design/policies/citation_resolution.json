@@ -1,11 +1,13 @@
 {
-  "version": "0.1.0",
-  "$description": "Citation permalink resolution (CAP-RW-04, UX-12; ASR-E06 from PR #54). Tested by tests/test_citation_resolution.py.",
+  "version": "0.2.0",
+  "$description": "Citation permalink resolution (CAP-RW-04, UX-12; ASR-E06 from PR #54; review E7-E9). Reference implementation: app/importer/mimamsa_importer/importer.py cite(). Tested by app/design/tests/test_citation_resolution.py and app/importer/tests.",
   "invariants": {
     "auto_substitute_current_copy": false,
     "page_number_applied_to_other_copy": false,
     "content_from_unavailable_copy": false,
-    "citation_keeps_original_copy_hash_and_page": true
+    "citation_keeps_original_copy_hash_and_page": true,
+    "prefix_must_resolve_to_exactly_one_full_hash": true,
+    "unavailable_reasons_indistinguishable_to_users": true
   },
   "states": {
     "CITED_COPY_ELIGIBLE": {
@@ -13,31 +15,39 @@
       "notice": null,
       "actions": []
     },
-    "CITED_COPY_ELIGIBLE_SUPERSEDED": {
+    "CITED_COPY_ELIGIBLE_NOT_CURRENT": {
       "opens": "cited_copy_at_cited_page",
-      "notice": "A newer edition exists.",
+      "notice": "This copy is not the current edition in the library.",
       "actions": [
-        "open_current_edition",
+        "open_current_edition_if_eligible",
         "compare_if_linked"
-      ]
+      ],
+      "note": "Held and verified in an earlier generation, not withdrawn or restricted (vault retains prior copies)."
     },
-    "CITED_COPY_WITHDRAWN": {
+    "CITED_COPY_UNAVAILABLE": {
       "opens": null,
-      "notice": "The cited copy was withdrawn from the library on {date}. It cannot be shown.",
-      "actions": [
-        "open_current_edition_if_eligible"
-      ]
+      "notice": "The cited copy is not available in this installation.",
+      "actions": [],
+      "covers": [
+        "withdrawn",
+        "restricted",
+        "not held"
+      ],
+      "note": "One indistinguishable response (security \u00a77.3 non-disclosure). No date, reason, restriction id or current-edition offer, because offering one would reveal that the copy existed. Admins see the reason in the Admin audit/withdrawal view only."
     },
-    "CITED_COPY_RESTRICTED": {
+    "CITED_PAGE_NOT_IN_COPY": {
       "opens": null,
-      "notice": "The cited copy is not available in this library.",
-      "actions": [
-        "open_current_edition_if_eligible"
-      ]
+      "notice": "The cited page does not exist in the cited copy.",
+      "actions": []
     },
-    "CITED_COPY_NOT_HELD": {
+    "AMBIGUOUS_REFERENCE": {
       "opens": null,
-      "notice": "This library does not hold the cited copy.",
+      "notice": "The citation does not identify a single copy. Use the full reference.",
+      "actions": []
+    },
+    "REFERENCE_MISMATCH": {
+      "opens": null,
+      "notice": "The citation's document and copy do not match.",
       "actions": []
     }
   }

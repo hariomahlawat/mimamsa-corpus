@@ -140,7 +140,7 @@ Office desktops are shared, so nothing sensitive may persist in the browser (pol
 | Legal Reviewer designation | A row in `designations` tied to an account and an `Appointment`. **No endpoint records an approval in Cycle 13.** The designation flag is inert; any approval endpoint returns 403 `GATE_CLOSED` | Feature gate + data check (`auth_ledger_version == 0` ⇒ closed) |
 | Gated features | Commander assistant, legal-rule checks, readiness reports, template filling → disabled by configuration that cannot be enabled while the reasoning-feature gate is closed | Startup config validation + per-request gate check |
 | Opaque ids | Ids are random (UUIDv4/ULID); knowing an id grants nothing | All of the above |
-| Non-disclosure | For an unauthorised caller, hidden, not-found, restricted, withdrawn and staged items return one indistinguishable response; counts, facets and timing do not reveal them (PR #53 Tools §7) | Query layer filters before counting; uniform error mapping |
+| Non-disclosure | For an unauthorised caller, hidden, not-found, restricted, withdrawn and staged items return one indistinguishable response; counts, facets and timing do not reveal them (PR #53 Tools §7). **Citations:** withdrawn, restricted and not-held cited copies all give "The cited copy is not available in this installation." with no date, reason or current-edition offer; no exception is granted (`app/design/policies/citation_resolution.json`) | Query layer filters before counting; uniform error mapping; `cite()` returns one state for all three |
 
 ### 7.4 Single delivery gateway and serving fence (PR #53 Serving contract)
 
