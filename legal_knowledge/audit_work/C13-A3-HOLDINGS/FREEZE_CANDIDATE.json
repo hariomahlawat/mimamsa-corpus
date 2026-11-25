@@ -1,0 +1,32 @@
+{
+ "blind_evaluation_command": "python3.11 -I -B tools/holdings_c13.py ids --ids-file <H-HOLD-C13 judgment_ids> --out-dir <dir>   (no --exclude-ids)",
+ "exclude_ids_file": "exclusions/EXCLUDE_H_HOLD_C13.txt",
+ "exclude_ids_sha256": "b258ebb726d4664bb1525a13f39844037299677a3122f25007c764f8c6e83f62",
+ "extractor": "c13-holdings/0.9.0-candidate",
+ "note": "Do not treat as frozen. On confirmation: set version to c13-holdings/1.0.0 in tools/c13_extract.py, re-run `holdings_c13.py run` and `check`, record the hashes below anew in FREEZE.json, then hand the `ids` command to the independent evaluator.",
+ "outputs_sha256": {
+  "HOLDINGS_C13.jsonl": "7c38cc69bf9f04020d2686c42dfee6fa36dc4802b78bd31cb8bacc2aa0914f1c",
+  "HOLDINGS_C13_JUDGMENTS.csv": "48f0962909e7b17e856eda14c5f1a3899abbb9185d78c2d29f00cc7d048a80a8",
+  "PASSAGES_C13.tsv.gz": "104465f167a447999236e6993fbed6589a4df5a997b7a277b0660a46962abef1"
+ },
+ "source_repo_commit": "/home/user/c7 @ ad77758d",
+ "status": "PREPARED_NOT_FROZEN_AWAITING_COORDINATOR_CONFIRMATION_OF_A0_ACCEPTANCE",
+ "thresholds": {
+  "floor_min_court_sentences": 15,
+  "holding": 0.6,
+  "holding_floor": 0.3,
+  "holding_over_operative": 0.95,
+  "issue": 0.6
+ },
+ "tool_and_model_sha256": {
+  "C12:holdings_c12.py": "a1b0163824e4062b38efe1423985559935130f7e581f3c3ba61e29a50fc7bb89",
+  "C12:holdings_core.py": "6d5b05e447e082cb8d9be4a1784148a18221091bd836b5fceb4cecbf6178fe8e",
+  "c13_corpus.py": "8f3dc72767f9f21797d4f24c958ba74f5ec0a340b69990eb2f46c7ad342fc583",
+  "c13_extract.py": "1214c1545a73b4218dc16e87fd0ba72fea94286b7ad43376b1e89e78729f871c",
+  "c13_features.py": "edf3648e238a757a593b5d7590e38327edf210b23f0ee9f68ad1b9d9eb5fbff9",
+  "c13_segment.py": "6e3b80afcffdc78eb4bdda0d90c75803e3b9bcc29509d97ae956be9abc0fbcc5",
+  "holdings_c13.py": "98e51cbb9eed450e96183ac6eadf0edb4ecb99bbede9b0a4545487807f6f6abc",
+  "model:c13_holdings_model.json": "fb28209c39a3a215d019ade5ff1356713306005606dd5223a182bd2db631e30a"
+ },
+ "training_report_sha256": "b373e44007cc17a89927e492cc02d74c59ea3c04d5f5e795d488b46e2ea79582"
+}

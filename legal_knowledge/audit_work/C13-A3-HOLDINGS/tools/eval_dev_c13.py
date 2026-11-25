@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """C13-A3 IN-SAMPLE development evaluation against the spent references, compared with c12-holdings/1.0.0.
 
-  python -I -B eval_dev_c13.py --pred-ref D1 --pred-gt D2 --oof ../model/OOF_PREDICTIONS.jsonl --out ../dev_eval/DEV_EVALUATION_C13.md
+  python -I -B eval_dev_c13.py --pred-ref D1 --pred-gt D2 --oof ../model/OOF_PREDICTIONS.jsonl.gz --texts ../model/OOF_PREDICTIONS_TEXTS.jsonl.gz --out ../dev_eval/DEV_EVALUATION_C13.md
 
 D1: `holdings_c13.py ids` output on the 30 C12 reference judgments; D2: on the C11 GT judgments.
 Every figure is IN-SAMPLE: these references trained the classifier and were read while rules were written.
@@ -12,6 +12,7 @@ excerpt's content tokens, >=3 shared) for the C12 reference; for the C11 GT also
 common normalised characters).
 """
 import argparse
+import gzip
 import collections
 import json
 import os
@@ -29,6 +30,10 @@ C12_PRED_REF = os.path.join(cl.C12, "holdings_eval", "predictions", "HOLDINGS_C1
 C12_PRED_DEV = os.path.join(C12H, "outputs", "dev_predictions", "HOLDINGS_C12.jsonl")
 HOLDING_TYPES_C13 = {"holding"}
 ALL_HOLDING_C13 = {"holding", "dissent_holding_candidate", "split_opinion_holding_candidate"}
+
+
+def _open(p):
+    return gzip.open(p, "rt", encoding="utf-8") if p.endswith(".gz") else open(p, encoding="utf-8")
 
 
 def fmt(k, n):
@@ -240,7 +245,7 @@ def main(argv=None):
     L.append("| Predicted `holding` items | %d | %d |" % (n12h, n13h))
     L.append("")
     # OOF
-    rows = [json.loads(l) for l in open(a.oof, encoding="utf-8")]
+    rows = [json.loads(l) for l in _open(a.oof)]
     L.append("## 4. Out-of-fold classifier estimate (grouped 5-fold by judgment; holding head only)\n")
     L.append("Sentence-level: court-voice sentences whose out-of-fold probability is at or above T and that pass the deterministic holding vetoes (`c13_extract.holding_veto`; the opinion floor and operative/QoL precedence of the full extractor are not emulated). 'Labelled positive' = the sentence "
              "matches a positive holding label (C12 reference, C11 GT, adjudicated or hand-checked correct). 'Explicitly labelled' = it "
@@ -252,7 +257,7 @@ def main(argv=None):
     labels = [r for r in labels if r["judgment_id"] in ids]
     sents = {}
     if a.texts:
-        for ln in open(a.texts, encoding="utf-8"):
+        for ln in _open(a.texts):
             t = json.loads(ln)
             sents[(t["judgment_id"], t["s"])] = cl.content(t["sent"])
     by_j = collections.defaultdict(list)
@@ -261,7 +266,7 @@ def main(argv=None):
     L.append("| T | selected | per judgment | labelled positive | explicitly labelled | proxy precision | label recall (C12 ref + C11 GT) |\n| --- | --- | --- | --- | --- | --- | --- |")
     stext = {}
     if a.texts:
-        for ln in open(a.texts, encoding="utf-8"):
+        for ln in _open(a.texts):
             t = json.loads(ln)
             stext[(t["judgment_id"], t["s"])] = t["sent"]
     for r in rows:

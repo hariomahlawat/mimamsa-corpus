@@ -38,11 +38,16 @@ _VETO_OPERATIVE_RE = re.compile(
     r"\b(?:deserves?\s+to\s+be|is|are|stands?|shall\s+stand)\s+(?:accordingly\s+|hereby\s+)?(?:partly\s+|partially\s+)?(?:allowed|dismissed|disposed\s+of|set\s+aside|quashed|remitted|remanded)\b"
     r"|\bRule\s+(?:is\s+)?(?:made\s+absolute|discharged)|\b(?:is|are)\s+(?:hereby\s+)?(?:altered|modified|converted)\s+(?:to|into)\b"
     r"|\b(?:we|it\s+is)\s+(?:further\s+|accordingly\s+|hereby\s+)?(?:provide|direct|order|clarify)(?:ed)?\s+that\b"
-    r"|\bshall\s+be\s+(?:entitled\s+to\s+(?:salary|arrears|pay|interest|costs)|paid|released|reinstated|disbursed)\b|\bNo\s+(?:order\s+as\s+to\s+)?costs\b|\bPending\s+(?:interlocutory\s+)?applications?", re.I)
+    r"|\bshall\s+be\s+(?:entitled\s+to\s+(?:salary|arrears|pay|interest|costs)|paid|released|reinstated|disbursed)\b|\bNo\s+(?:order\s+as\s+to\s+)?costs\b|\bPending\s+(?:interlocutory\s+)?applications?"
+    r"|\bno\s+order\s+a\S?\s+to\s+costs|\b(?:do|did)\s+not\s+find\s+any\s+merit\s+in\s+(?:the|these|this)\s+(?:appeals?|petitions?|writ)|\bends\s+of\s+justice\s+would\s+be\s+met"
+    r"|\bshall\s+(?:not\s+)?be\s+permitted\s+to\s+be\s+amended|\bshall\s+take\s+place\b|\bshall\s+be\s+entitled\s+to\s+exercise\s+(?:their|his|her)\s+options?", re.I)
 _VETO_FACT_RE = re.compile(
     r"^\W*(?:\d+\s*[.)]?\s*)?We\s+(?:have\s+been|were)\s+(?:informed|told|apprised)|\bwe\s+perused\s+the\s+(?:file|record)s?\s+and\s+(?:we\s+)?find\s+that\s+in\b"
     r"|^\W*\(?(?:[ivx]{1,5}|[a-h])\)\s.*(?:19|20)\d{2}", re.I)
 _VETO_PRECEDENT_RE = re.compile(r"\b(?:the|this)\s+Court\s+had\s+(?:specifically\s+|clearly\s+|categorically\s+)?(?:held|observed|ruled)|\bit\s+had\s+been\s+held\b"
+                                r"|^\W*(?:\d+\s*[.)]?\s*)?In\s+[A-Z][\w.&'\-]*(?:\s+[A-Z][\w.&'\-]*){0,5}\s*(?:\(\s*supra\s*\))?,\s+(?:this|the)\s+(?:Court|Bench)\s+(?:has\s+|had\s+)?(?:held|observed|ruled|opined)"
+                                r"|^\W*(?:\d+\s*[.)]?\s*)?The\s+Court\s+(?:apart\s+from\s+)?(?:taking\s+note|took\s+note|noted|observed|held)\b"
+                                r"|\bthe\s+learned\s+(?:judge|Single\s+Judge|Judges?)\s+(?:observed|held|found|opined)|,\s+the\s+learned\s+judge\s+observed"
                                 r"|^\W*(?:\d+\s*[.)]?\s*)?\(?[ivx]{1,5}\)\s+(?:Firstly|Secondly)?.*\(\s*Paragraph\s+\d+", re.I)
 _VETO_ISSUE_RE = re.compile(r"\b(?:need|have|has)\s+to\s+(?:first\s+)?consider\s+(?:as\s+to\s+)?whether|\bfirst\s+need\s+to\s+consider|\bthe\s+(?:question|issue|point)\s+(?:is|would\s+be|that\s+arises\s+is)\s+whether", re.I)
 _BARE_REJECT_RE = re.compile(r"^\W*(?:\d+\s*[.)]?\s*)?(?:We\s+(?:are\s+unable\s+to\s+agree|find\s+no\s+(?:merit|force|substance)|do\s+not\s+find\s+any\s+(?:merit|force|substance)|are\s+not\s+impressed)|"

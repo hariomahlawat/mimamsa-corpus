@@ -2,26 +2,26 @@
  "cv": {
   "holding": {
    "C_grid": {
-    "0.01": 0.2099,
-    "0.03": 0.2143,
-    "0.1": 0.2098
+    "0.01": 0.2095,
+    "0.03": 0.2144,
+    "0.1": 0.2097
    },
    "chosen_C": 0.03,
    "metric": "out-of-fold average precision (grouped 5-fold by judgment)",
    "n": 52261,
-   "n_features": 76219,
+   "n_features": 76380,
    "n_pos": 380
   },
   "issue": {
    "C_grid": {
-    "0.01": 0.0518,
-    "0.03": 0.0417,
-    "0.1": 0.0357
+    "0.01": 0.0508,
+    "0.03": 0.0406,
+    "0.1": 0.0349
    },
    "chosen_C": 0.01,
    "metric": "out-of-fold average precision (grouped 5-fold by judgment)",
    "n": 52261,
-   "n_features": 77572,
+   "n_features": 77516,
    "n_pos": 91
   }
  },
@@ -151,7 +151,7 @@
   "c12_selection": "756ec87a62bb742b7b8a3b2a18deefbaeda2bd3037d44d67e0973b0a726c1446"
  },
  "model_family": "L2 logistic regression (liblinear), class_weight=balanced, binary sparse features",
- "model_sha256": "d1f8f655ead2c79195dc002113c41a658b6d7406d60c0d7811fe92124f5906b9",
+ "model_sha256": "fb28209c39a3a215d019ade5ff1356713306005606dd5223a182bd2db631e30a",
  "n_training_judgments": 137,
  "skipped_no_text": [],
  "software": {

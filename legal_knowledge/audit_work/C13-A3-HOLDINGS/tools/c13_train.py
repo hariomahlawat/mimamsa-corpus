@@ -15,6 +15,7 @@ Steps
 4. Grouped 5-fold cross-validation by judgment chooses the regularisation C and records out-of-fold
    probabilities (written to the training report for the dev evaluation).
 5. Fit on all data, export weights to JSON (no pickle), record hashes, versions and licences.
+   The OOF files are committed gzip-compressed (`gzip -n -9`).
 
 scikit-learn (BSD-3-Clause), numpy and scipy (BSD-3-Clause) are used for training only; the extractor runs on the
 standard library with the exported JSON. Nothing is sent to any external service.
