@@ -148,6 +148,30 @@ jobs:
             --npgsql "Host=127.0.0.1;Port=5432;Username=poc;Password=poc;Database=poc_r2n01;Maximum Pool Size=40" `
             --big "$env:RUNNER_TEMP\fx_big.pdf" --small "$env:RUNNER_TEMP\fx_small.pdf" --out out\r2n01_transport_windows.json --work "$env:RUNNER_TEMP\r2n01"
 
+      - name: R2-N01 evidence trace + independent PR #54 transport oracle (unmodified, hash-pinned) on Windows
+        run: |
+          $psql = Join-Path $env:PGBIN "psql.exe"; $env:PGPASSWORD = "root"
+          & $psql -U postgres -h 127.0.0.1 -c "CREATE DATABASE poc_trace OWNER poc;"
+          git fetch --no-tags --depth 50 origin pull/54/head:pr54-oracle
+          $o = "$env:RUNNER_TEMP\oracle"; New-Item -ItemType Directory -Force $o | Out-Null
+          foreach ($f in @("transport_oracle.py", "transport-fixtures.json")) {
+            cmd /c "git show pr54-oracle:docs/architecture/reviews/c13-assurance/$f > `"$o\$f`""
+          }
+          $pins = @{ "transport_oracle.py" = "fcb4806d07ce5c1e60904ee8510cee1c32c5eb7645b2a32a19a56c892a5741a0";
+                     "transport-fixtures.json" = "b8377355551d76bbb42dbd16f1ff21a7416733eb14bd7adeb20712a85d2fc85d" }
+          foreach ($k in $pins.Keys) {
+            $h = (Get-FileHash "$o\$k" -Algorithm SHA256).Hash.ToLower()
+            if ($h -ne $pins[$k]) { throw "oracle file $k changed in PR #54 (sha256 $h); re-pin deliberately" }
+          }
+          python app/poc/p1_hosting/r2n01/trace_n01.py --server-cmd "$env:POC_ROOT\aspnet\MimamsaPocApi.exe" --server-cwd "$env:POC_ROOT\aspnet" `
+            --db "host=127.0.0.1 port=5432 user=poc password=poc dbname=poc_trace" `
+            --npgsql "Host=127.0.0.1;Port=5432;Username=poc;Password=poc;Database=poc_trace;Maximum Pool Size=40" `
+            --out-dir "$env:GITHUB_WORKSPACE\out\r2n01_trace_windows"
+          python -B "$o\transport_oracle.py" --self-test
+          python -B "$o\transport_oracle.py" --trace out\r2n01_trace_windows\normalized_trace.json `
+            --http-cases app/poc/p1_hosting/r2n01/n01_http_cases.json | Tee-Object out\r2n01_transport_oracle_windows.json
+          if ($LASTEXITCODE -ne 0) { throw "PR #54 transport oracle REJECTED the Windows trace" }
+
       - name: R2-N01 PDF.js protected progressive bootstrap (Chromium via Playwright) on Windows
         run: |
           python app/poc/p1_hosting/fixtures/make_fixture_pdf.py "$env:RUNNER_TEMP\fx_big2.pdf" --pages 300 --pad 20000

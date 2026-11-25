@@ -68,13 +68,14 @@ builder.WebHost.ConfigureKestrel(k =>
             var pool = CreditLedger.ConnPoolId(ledger.InstanceId, conn.ConnectionId);
             var ended = DateTime.UtcNow;
             pendingDrains[pool] = ended;
+            var lep = conn.LocalEndPoint; var rep = conn.RemoteEndPoint;
             _ = Task.Run(async () =>
             {
-                await Task.Delay(delivery.DrainGraceMs);
                 try
                 {
-                    foreach (var (id, _) in await ledger.DrainConnectionAsync(pool, $"kestrel connection {conn.ConnectionId} terminated {ended:O}; grace {delivery.DrainGraceMs} ms"))
-                        DeliveryTrace.Emit("prove_release", "drain_probe", new { attempt = id.ToString(), proof = "termination", connection_id = conn.ConnectionId });
+                    var (proof, evidence) = await DrainProbe.AwaitDrainAsync(lep, rep, delivery.DrainGraceMs);
+                    foreach (var (id, _) in await ledger.DrainConnectionAsync(pool, $"kestrel connection {conn.ConnectionId} ended {ended:O}; {evidence}"))
+                        DeliveryTrace.Emit("prove_release", "drain_probe", new { attempt = id.ToString(), proof, evidence });
                 }
                 finally { pendingDrains.TryRemove(pool, out _); slots.ReleaseFor(conn.ConnectionId); }
             });

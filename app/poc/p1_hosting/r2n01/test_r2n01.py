@@ -257,7 +257,7 @@ try:
                            end_state=r2[0]["state"] if r2 else None, end_reason=(r2[0]["reason"] or "")[-160:] if r2 else None,
                            end_site=dict(reserved=L_end["reserved"], charged=L_end["charged"])))
     ok = all(t["mid_state"] in ("UNCERTAIN", "RESERVED", "ACCEPTED") and t["mid_site_charged"] + t["mid_site_reserved"] >= t["amount"]
-             and t["end_state"] == "DRAINED" and "terminated" in (t["end_reason"] or "") and t["end_site"] == {"reserved": 0, "charged": 0}
+             and t["end_state"] == "DRAINED" and "drained:" in (t["end_reason"] or "") and t["end_site"] == {"reserved": 0, "charged": 0}
              for t in trials)
     RESULTS["scenarios"]["C_killed_connections"] = {"trials": trials, "uncertain_count": sum(t["mid_state"] == "UNCERTAIN" for t in trials)}
     check("killed_connection_charge_retained_until_termination_then_drained", ok, uncertain=sum(t["mid_state"] == "UNCERTAIN" for t in trials), n=len(trials))
