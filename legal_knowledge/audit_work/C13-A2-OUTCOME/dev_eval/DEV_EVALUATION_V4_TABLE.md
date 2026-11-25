@@ -1,0 +1,36 @@
+IN-SAMPLE development evaluation (spent sets only). Not a blind estimate.
+
+| Set | Field | V4 precision | V4 coverage | V3 precision | V3 coverage | V2 precision | V2 coverage |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| C12H all | printed_disposal | 165/169 = 97.6% | 169/213 = 79.3% | 126/138 = 91.3% | 138/213 = 64.8% | 101/116 = 87.1% | 116/213 = 54.5% |
+| C12H all | substantive_result | 139/141 = 98.6% | 141/207 = 68.1% | 108/113 = 95.6% | 113/207 = 54.6% | 84/90 = 93.3% | 90/207 = 43.5% |
+| C12H TUNE | printed_disposal | 125/128 = 97.7% | 128/152 = 84.2% | 91/98 = 92.9% | 98/152 = 64.5% | 69/78 = 88.5% | 78/152 = 51.3% |
+| C12H TUNE | substantive_result | 103/105 = 98.1% | 105/146 = 71.9% | 77/82 = 93.9% | 82/146 = 56.2% | 56/61 = 91.8% | 61/146 = 41.8% |
+| C12H LATE | printed_disposal | 40/41 = 97.6% | 41/61 = 67.2% | 35/40 = 87.5% | 40/61 = 65.6% | 32/38 = 84.2% | 38/61 = 62.3% |
+| C12H LATE | substantive_result | 36/36 = 100.0% | 36/61 = 59.0% | 31/31 = 100.0% | 31/61 = 50.8% | 28/29 = 96.5% | 29/61 = 47.5% |
+| DEVG all | printed_disposal | 183/183 = 100.0% | 183/203 = 90.1% | 181/181 = 100.0% | 181/203 = 89.2% | 112/113 = 99.1% | 113/203 = 55.7% |
+| DEVG all | substantive_result | 175/175 = 100.0% | 175/198 = 88.4% | 173/173 = 100.0% | 173/198 = 87.4% | 100/102 = 98.0% | 102/198 = 51.5% |
+| DEVG C10 | printed_disposal | 44/44 = 100.0% | 44/55 = 80.0% | 44/44 = 100.0% | 44/55 = 80.0% | 46/46 = 100.0% | 46/55 = 83.6% |
+| DEVG C10 | substantive_result | 41/41 = 100.0% | 41/50 = 82.0% | 41/41 = 100.0% | 41/50 = 82.0% | 42/42 = 100.0% | 42/50 = 84.0% |
+| DEVG C11H | printed_disposal | 109/109 = 100.0% | 109/118 = 92.4% | 107/107 = 100.0% | 107/118 = 90.7% | 36/37 = 97.3% | 37/118 = 31.4% |
+| DEVG C11H | substantive_result | 104/104 = 100.0% | 104/118 = 88.1% | 102/102 = 100.0% | 102/118 = 86.4% | 28/30 = 93.3% | 30/118 = 25.4% |
+| DEVG C11R | printed_disposal | 30/30 = 100.0% | 30/30 = 100.0% | 30/30 = 100.0% | 30/30 = 100.0% | 30/30 = 100.0% | 30/30 = 100.0% |
+| DEVG C11R | substantive_result | 30/30 = 100.0% | 30/30 = 100.0% | 30/30 = 100.0% | 30/30 = 100.0% | 30/30 = 100.0% | 30/30 = 100.0% |
+| ALL spent sets | printed_disposal | 348/352 = 98.9% | 352/416 = 84.6% | 307/319 = 96.2% | 319/416 = 76.7% | 213/229 = 93.0% | 229/416 = 55.0% |
+| ALL spent sets | substantive_result | 314/316 = 99.4% | 316/405 = 78.0% | 281/286 = 98.2% | 286/405 = 70.6% | 184/192 = 95.8% | 192/405 = 47.4% |
+
+Failure categories (ALL spent sets; abstentions and errors):
+
+| System | Field | Categories |
+| --- | --- | --- |
+| V4 | printed_disposal | ABSTAINED 28, PROCEEDING_UNMATCHED 36, WRONG_FAMILY 2, WRONG_LABEL_SAME_FAMILY 2 |
+| V4 | substantive_result | ABSTAINED 53, PROCEEDING_UNMATCHED 36, WRONG_FAMILY 2 |
+| V3 | printed_disposal | ABSTAINED 56, PROCEEDING_UNMATCHED 41, WRONG_FAMILY 9, WRONG_LABEL_SAME_FAMILY 3 |
+| V3 | substantive_result | ABSTAINED 82, PROCEEDING_UNMATCHED 37, WRONG_FAMILY 5 |
+| V2 | printed_disposal | ABSTAINED 36, PROCEEDING_UNMATCHED 151, WRONG_FAMILY 10, WRONG_LABEL_SAME_FAMILY 6 |
+| V2 | substantive_result | ABSTAINED 66, PROCEEDING_UNMATCHED 147, WRONG_FAMILY 8 |
+
+V4 in-sample precision by confidence tier (ALL spent sets): {"printed_disposal": {"high": {"answered": 195, "correct": 191, "precision": 0.9795}, "medium": {"answered": 106, "correct": 106, "precision": 1.0}, "low": {"answered": 51, "correct": 51, "precision": 1.0}}, "substantive_result": {"high": {"answered": 173, "correct": 171, "precision": 0.9884}, "medium": {"answered": 92, "correct": 92, "precision": 1.0}, "low": {"answered": 51, "correct": 51, "precision": 1.0}}}
+
+Protocol reproduces frozen V3 C12 holdout result (126/138, 108/113): True
+V4 anchors: {"answered_rows": 408, "excerpt_at_offset": 408, "page_consistent": 405}

@@ -1,0 +1,14 @@
+{
+ "extractor": "c13-extract-v4/1.0.0",
+ "holdout": "H-OUT-C13",
+ "inputs": "item_id and rep_sha256 pointer columns of outputs/packets/H-OUT-C13/coder_1/CODER_SHEET.csv (blank packet) at A0 f1d61f71; text layer c7 ad77758d",
+ "items": 300,
+ "items_without_a_C10_judgment_id": 5,
+ "note": "5 items whose rep_sha256 is not in the C10 register (not in the c7 text layer used by V4) get one UNIDENTIFIED abstention row each (NO_JUDGMENT_ID_FOR_ITEM_SHA). No coding, truth, ITEM_MAP or DESIGN was read.",
+ "prediction_rows": 480,
+ "predictions_file": "PREDICTIONS_OUTCOME_V4_H-OUT-C13.csv",
+ "predictions_sha256": "45c5a3321d22e2948e2783c2ba6a6857d51f1c705e7b90993ddc3a68ad239b69",
+ "status": "AUTOMATED_CANDIDATE_NOT_VERIFIED; scored later by an independent evaluator with c13_score.py",
+ "tool_fingerprint": "37642e7bd64582f34a791bd199dee8648b274fa09e74d6253c3b8d19f124e1f4",
+ "tool_sha256_match_freeze": true
+}
