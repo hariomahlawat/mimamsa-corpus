@@ -329,7 +329,7 @@ def build():
     rbuf = io.StringIO()
     w = csv.DictWriter(rbuf, fieldnames=R_COLS, lineterminator="\n")
     w.writeheader()
-    cap = {r["capability"]: r for r in csv.DictReader(open(REPO / CONF["CAP"], encoding="utf-8"))}
+    cap = {r["capability"]: r for r in csv.DictReader(io.StringIO((REPO / CONF["CAP"]).read_text(encoding="utf-8")))}
     for c_, dfs, ev, why in RESTRICTIONS:
         w.writerow({"capability": c_, "c12_restriction": cap[c_]["restriction"], "deferred_findings": dfs,
                     "c13_evidence": ev, "c13_decision": "NOT_LIFTED_STILL_RESTRICTED", "reason": why})

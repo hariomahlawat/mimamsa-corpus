@@ -423,10 +423,11 @@ def build_c12_and_a4(b: Builder):
     # A6 F07 (human spot-check before the legal gate) duplicates AQ-ROL-03 (who confirms AI page readings).
     a6rev = {r["id"]: r for r in rows(A6REV)}
     a5edges = {}
-    for line in gzip.open(A5EDGES, "rt", encoding="utf-8"):
-        e = json.loads(line)
-        if e["edge_id"] in A5_EDGE_TO_C12:
-            a5edges[e["edge_id"]] = e
+    with gzip.open(A5EDGES, "rt", encoding="utf-8") as fh:
+        for line in fh:
+            e = json.loads(line)
+            if e["edge_id"] in A5_EDGE_TO_C12:
+                a5edges[e["edge_id"]] = e
     if set(a5edges) != set(A5_EDGE_TO_C12):
         raise SystemExit("A5 edge ids changed")
 

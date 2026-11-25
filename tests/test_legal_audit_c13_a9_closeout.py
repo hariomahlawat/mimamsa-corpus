@@ -10,6 +10,11 @@ PKG = REPO / "legal_knowledge" / "audit_work" / "C13-A9-CLOSEOUT"
 STATUSES = {"CLOSED", "OPEN", "DEFERRED", "ACCEPTED_DEVIATION"}
 
 
+def read_csv(p):
+    with open(p, encoding="utf-8", newline="") as f:
+        return list(csv.DictReader(f))
+
+
 def git_available():
     return subprocess.run(["git", "-C", str(REPO), "rev-parse", "HEAD"], capture_output=True).returncode == 0
 
@@ -22,7 +27,7 @@ class A9Closeout(unittest.TestCase):
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
 
     def test_statuses_and_carry_overs(self):
-        rows = list(csv.DictReader(open(PKG / "FINDINGS_REGISTER_C13.csv", encoding="utf-8")))
+        rows = read_csv(PKG / "FINDINGS_REGISTER_C13.csv")
         self.assertTrue(rows)
         self.assertTrue({r["status"] for r in rows} <= STATUSES)
         carry = {r["review_finding_id"]: r["status"] for r in rows if r["workstream"] == "C12 carry-over"}
@@ -32,9 +37,8 @@ class A9Closeout(unittest.TestCase):
         self.assertFalse([r for r in rows if r["severity"] == "P1" and r["status"] == "OPEN"])
 
     def test_no_restriction_lifted(self):
-        rows = list(csv.DictReader(open(PKG / "RESEARCH_RESTRICTIONS_C13.csv", encoding="utf-8")))
-        cap = list(csv.DictReader(open(REPO / "legal_knowledge/audit_work/C12-CONSOLIDATION/CAPABILITY_RESTRICTIONS.csv",
-                                       encoding="utf-8")))
+        rows = read_csv(PKG / "RESEARCH_RESTRICTIONS_C13.csv")
+        cap = read_csv(REPO / "legal_knowledge/audit_work/C12-CONSOLIDATION/CAPABILITY_RESTRICTIONS.csv")
         self.assertEqual({r["capability"] for r in rows}, {r["capability"] for r in cap})
         self.assertEqual({r["c13_decision"] for r in rows}, {"NOT_LIFTED_STILL_RESTRICTED"})
 
