@@ -130,6 +130,7 @@ output. RM-001 is not a judgment and was never in any population here.
 ```
 python -I -B tools/c13_a1_ocr.py --check     # rebuild population, detector eval, benchmark, relevance, risk,
                                              # HF staged bytes; check verification, SHA256SUMS, restricted absence
+python -B -m unittest discover -s tests -p "test_legal_audit_c13_ocr_*.py"   # 44 tests (unittest.TestCase; CI form)
 python -m pytest -q tests/test_legal_audit_c13_ocr_states.py tests/test_legal_audit_c13_ocr_records.py \
     tests/test_legal_audit_c12_research_isolation.py   # 50 passed at this commit (the earlier "80" also counted tests/test_pipeline.py)
 ```
