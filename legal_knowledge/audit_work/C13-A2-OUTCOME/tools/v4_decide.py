@@ -52,8 +52,10 @@ _DIRECTIONS_RE = re.compile(
     r"said)?\s*(?:directions?|observations?|liberty)|with\s+liberty|in\s+terms\s+of|as\s+under|in\s+the\s+light\s+of|with\s+a\s+direction|"
     r"with\s+directions?|subject\s+to)\b", re.I)
 _DIRECTIVE_RE = re.compile(r"\b(?:is|are|stand|be)\s+(?:hereby\s+)?directed\b|\bwe\s+(?:hereby\s+|have\s+)?direct(?:ed)?\b|\bby\s+directing\b|"
-                           r"\bit\s+is\s+(?:hereby\s+)?directed\b|\bshall\s+(?!stand\b|also\s+stand\b|not\s+stand\b)[a-z]+|\bliberty\b|"
-                           r"\bopen\s+to\s+the\s+(?:petitioner|appellant|respondent)|\b(?:is|stands?)\s+modified\b", re.I)
+                           r"\bit\s+is\s+(?:hereby\s+)?directed\b|\bshall\s+(?!stand\b|also\s+stand\b|not\s+stand\b|be\s+at\s+liberty\b|be\s+open\b)[a-z]+|"
+                           r"\blet\s+(?:the|a|his|her|their)\s+[^.;]{0,80}?\bbe\s+(?:decided|considered|re-?considered|examined|passed|paid|"
+                           r"released|granted|processed|disposed\s+of)\b|\b(?:is|stands?)\s+modified\b", re.I)
+# V4: liberty to seek another remedy is not a direction ('they are at liberty to agitate this aspect')
 _REMAND_RE = re.compile(
     r"\b(?:remand\w*|remit(?:s|ted|ting)?|sen[dt]\s+back|restored?\s+to\s+(?:the\s+)?(?:file|board)|relegat\w*)\b[^.;]{0,120}?"
     r"\b(?:to\s+the\s+|before\s+the\s+)(?:learned\s+)?(?:AFT|Armed\s+Forces|Tribunal|High\s+Court|Single\s+Judge|authorit|competent|"

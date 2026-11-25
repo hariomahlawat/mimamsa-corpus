@@ -42,6 +42,7 @@ from v4_clauses import (  # noqa: F401
     parse_dispositions,
     _WITHDRAW_CTX_RE,
     _REF_BEFORE_NUM_RE)
+from v4_segment import opinion_role  # noqa: F401
 from v4_segment import (  # noqa: F401
     _NOT_FINAL_RE,
     _OPERATIVE_CUE_RE,
@@ -77,6 +78,20 @@ def _has_main_disposition(mt, a, b, qs, qst):
             if c in ("main", "pronoun", "elided"):
                 return True
     return False
+
+
+def _final_sentences_zone(d, js, body_end, span=1600):
+    """Start of the closing passage (about the last `span` non-blank characters, from a line start) when it holds a
+    court-voice main disposition; else None."""
+    mt = d.mt
+    k, n = body_end, 0
+    while k > js and n < span:
+        k -= 1
+        if not mt[k].isspace():
+            n += 1
+    ls = mt.rfind("\n", js, k) + 1
+    a = max(js, ls)
+    return a if _has_main_disposition(mt, a, body_end, d.qspans, d.qstarts) else None
 
 
 def analyze_segment(d, seg, hosts, scr, is_first, section=False):
@@ -148,6 +163,10 @@ def analyze_segment(d, seg, hosts, scr, is_first, section=False):
         method_zone = "operative_cue" if not order_heads else "order_heading"
     elif last_para is not None and body_end - last_para < 1200:
         zs, method_zone = last_para, "final_paragraph_no_cue"
+    elif _final_sentences_zone(d, js, body_end) is not None:
+        # V4: no cue and no numbered final paragraph (old S.C.R. renditions, short unnumbered orders): the closing
+        # sentences are the operative part when they hold a present-tense, court-voice disposition of a main proceeding
+        zs, method_zone = _final_sentences_zone(d, js, body_end), "final_sentences_no_cue"
     else:
         res["status"] = "abstain"
         res["reason"] = "NO_OPERATIVE_CUE_IN_FINAL_PART"
@@ -508,6 +527,19 @@ def analyze(text, meta):
         # headed sections that do not each carry their own disposition (facts per petition, then one common order)
         flags.append("BATCH_SECTIONS_REJECTED_%d_OF_%d_DECIDED%s" % (n_ok, len(best[1]), "_COMMON_ORDER" if last_plural else ""))
     # ---- single decision for the judgment
+    # V4: opinion roles. A dissenting separate opinion never supplies the disposition when another opinion or order
+    # disposes of the case; if only dissenting opinions carry a disposition, abstain.
+    for i, r_ in enumerate(results):
+        r_["role"] = opinion_role(mt[r_["seg"][0]:r_["seg"][1]], i == 0)
+    if any(r_["role"] == "dissent" for r_ in results) and len(results) > 1:
+        keep = [r_ for r_ in results if r_["role"] != "dissent"]
+        if any(r_["status"] == "final" for r_ in keep):
+            flags.append("DISSENTING_OPINION_EXCLUDED")
+            results = keep
+        elif any(r_["status"] == "final" for r_ in results):
+            labels = [h["label_norm"] for h in main_hosts] or ["UNIDENTIFIED"]
+            rows = [row(l, UNVERIFIED, UNVERIFIED, "ONLY_A_DISSENTING_OPINION_STATES_A_DISPOSITION", flags) for l in labels]
+            return _finish(rows, own, meta), {"flags": flags, "hosts": labels}
     chosen, reason = _choose(results, mt, flags)
     labels = [h["label_norm"] for h in main_hosts] or ["UNIDENTIFIED"]
     if chosen is None:

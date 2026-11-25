@@ -164,6 +164,11 @@ def _aux_chain(text, vstart, cstart):
     return [c for c in chain if c != ","], cstart + (k if chain else len(seg))
 
 
+_ELLIPTICAL_SENT_RE = re.compile(r"^[\s\d.()ivx]*(?:accordingly,?\s+|consequently,?\s+|hence,?\s+)?(?:all\s+|both\s+)?(?:the\s+)?"
+                                 r"(?:(?:writ|civil|criminal|special|letters\s+patent|transferred)\s+)?(?:leave\s+)?"
+                                 r"(?:petitions?|appeals?|cases?|matters?)\s*$", re.I)
+
+
 def parse_dispositions(text, s, e):
     """Disposition clauses in sentence text[s:e]. Returns list of dicts."""
     sent = text[s:e]
@@ -203,6 +208,8 @@ def parse_dispositions(text, s, e):
         stripped_sent = re.sub(r"^[\s\d.()ivx]*", "", sent).strip()
         standalone = stripped_sent.lower().startswith(re.sub(r"\s+", " ", v.lower())[:6]) and \
             not re.search(r"[A-Za-z]{2,}", re.sub(r"^[\s\d.()ivx]*", "", sent[:m.start()]))
+        if not chain and not standalone and _ELLIPTICAL_SENT_RE.match(sent[:m.start()]) and len(sent.strip()) <= 90:
+            chain = ["(elliptical)"]   # V4: 'All the petitions dismissed.' / 'Appeal dismissed.' (no auxiliary)
         if not chain and not standalone:
             # elliptical coordination 'X is quashed and OA No. 1/2020 dismissed' -> only with a case number
             if not find_case_numbers(subj):

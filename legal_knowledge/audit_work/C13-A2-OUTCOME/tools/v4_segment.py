@@ -108,6 +108,11 @@ def _segment_doc(d):
     for ps in starts[1:]:
         if is_doc_header(mt, ps, 700) and not any(abs(ps - c[0]) < 1500 or abs(ps - c[1]) < 1500 for c in clusters):
             cuts.append(ps)
+    # V4: a separate opinion starts at an author line ('K. M. JOSEPH, J.') followed by a paragraph numbered 1
+    for oc in opinion_cuts(mt):
+        if not any(abs(oc - c[0]) < 1500 or abs(oc - c[1]) < 1500 for c in clusters) and oc not in cuts:
+            cuts.append(oc)
+    cuts.sort()
     if cuts:
         bounds = sorted([(s, e) for s, e, k in clusters] + [(c, c) for c in cuts])
         segs, cur = [], 0
@@ -130,3 +135,35 @@ def _segment_doc(d):
         else:
             merged.append(sg)
     return merged
+
+
+
+# ------------------------------------------------------------------ V4: opinions and their roles
+_AUTHOR_LINE_RE = re.compile(r"(?m)^[ \t]*(?:[A-Z]\.\s?){0,3}[A-Z][A-Za-z.'\- ]{1,40}?,\s*(?:C\.?\s?J\.?I?|J)\.?[ \t]*"
+                             r"(?:\(\s*(?:Partly\s+)?(?:Dissenting|Concurring|dissenting|concurring)\s*\))?[ \t:.]*$")
+
+
+def opinion_cuts(mt):
+    """Start positions of opinions after the first: an author line followed within 300 characters by a paragraph
+    numbered 1 (paragraph numbering restarts in every opinion). The first author line is the main opinion."""
+    out = []
+    for m in _AUTHOR_LINE_RE.finditer(mt):
+        if re.match(r"\s*(?:\[[^\]\n]{0,40}\]\s*)?1\s*\.\s", mt[m.end():m.end() + 300]):
+            out.append(m.start())
+    return out[1:]
+
+
+_DISSENT_RE = re.compile(r"\bI\s+(?:would\s+)?(?:respectfully\s+|regret(?:fully)?\s+(?:that\s+)?(?:I\s+)?)?(?:disagree|dissent|differ)\b|"
+                         r"\bI\s+(?:am|find\s+myself)\s+(?:\w+\s+){0,2}unable\s+to\s+(?:agree|concur|persuade\s+myself)|"
+                         r"\(\s*(?:Partly\s+)?[Dd]issenting\s*\)|\bmy\s+dissent\b|\bpartly\s+dissenting\b", re.I)
+_CONCUR_RE = re.compile(r"\bI\s+(?:fully\s+|entirely\s+|respectfully\s+)?(?:agree|concur)\b|\(\s*[Cc]oncurring\s*\)")
+
+
+def opinion_role(seg_text, first):
+    """'dissent' (a separate opinion that differs from the majority), 'concurring', or 'main'."""
+    head = seg_text[:6000]
+    if not first and _DISSENT_RE.search(seg_text):
+        return "dissent"
+    if not first and _CONCUR_RE.search(head):
+        return "concurring"
+    return "main"
