@@ -32,6 +32,38 @@ ITEM_CLASSES = ("question_of_law", "holding", "obiter", "operative_direction")
 HOLDING_ROLES = ("sole", "lead_majority", "lead", "concurring", "separate", "court_order")
 
 
+# Post-model vetoes: deterministic patterns that are never a holding even when the holding head scores high
+# (operative disposals and directions, factual recitals, reports of a precedent, issue framing, bare rejections).
+_VETO_OPERATIVE_RE = re.compile(
+    r"\b(?:deserves?\s+to\s+be|is|are|stands?|shall\s+stand)\s+(?:accordingly\s+|hereby\s+)?(?:partly\s+|partially\s+)?(?:allowed|dismissed|disposed\s+of|set\s+aside|quashed|remitted|remanded)\b"
+    r"|\bRule\s+(?:is\s+)?(?:made\s+absolute|discharged)|\b(?:is|are)\s+(?:hereby\s+)?(?:altered|modified|converted)\s+(?:to|into)\b"
+    r"|\b(?:we|it\s+is)\s+(?:further\s+|accordingly\s+|hereby\s+)?(?:provide|direct|order|clarify)(?:ed)?\s+that\b"
+    r"|\bshall\s+be\s+(?:entitled\s+to\s+(?:salary|arrears|pay|interest|costs)|paid|released|reinstated|disbursed)\b|\bNo\s+(?:order\s+as\s+to\s+)?costs\b|\bPending\s+(?:interlocutory\s+)?applications?", re.I)
+_VETO_FACT_RE = re.compile(
+    r"^\W*(?:\d+\s*[.)]?\s*)?We\s+(?:have\s+been|were)\s+(?:informed|told|apprised)|\bwe\s+perused\s+the\s+(?:file|record)s?\s+and\s+(?:we\s+)?find\s+that\s+in\b"
+    r"|^\W*\(?(?:[ivx]{1,5}|[a-h])\)\s.*(?:19|20)\d{2}", re.I)
+_VETO_PRECEDENT_RE = re.compile(r"\b(?:the|this)\s+Court\s+had\s+(?:specifically\s+|clearly\s+|categorically\s+)?(?:held|observed|ruled)|\bit\s+had\s+been\s+held\b"
+                                r"|^\W*(?:\d+\s*[.)]?\s*)?\(?[ivx]{1,5}\)\s+(?:Firstly|Secondly)?.*\(\s*Paragraph\s+\d+", re.I)
+_VETO_ISSUE_RE = re.compile(r"\b(?:need|have|has)\s+to\s+(?:first\s+)?consider\s+(?:as\s+to\s+)?whether|\bfirst\s+need\s+to\s+consider|\bthe\s+(?:question|issue|point)\s+(?:is|would\s+be|that\s+arises\s+is)\s+whether", re.I)
+_BARE_REJECT_RE = re.compile(r"^\W*(?:\d+\s*[.)]?\s*)?(?:We\s+(?:are\s+unable\s+to\s+agree|find\s+no\s+(?:merit|force|substance)|do\s+not\s+find\s+any\s+(?:merit|force|substance)|are\s+not\s+impressed)|"
+                             r"(?:This|The|That)\s+(?:submission|contention|argument|plea)\s+(?:is|has)\s+\w+(?:\s+\w+)?)[^.]{0,40}\.?$", re.I)
+
+
+def holding_veto(sent):
+    """Return a reason string if a court-voice sentence must not be a holding, else None."""
+    if _VETO_OPERATIVE_RE.search(sent):
+        return "operative_direction"
+    if _VETO_ISSUE_RE.search(sent):
+        return "question_framing"
+    if _VETO_PRECEDENT_RE.search(sent):
+        return "precedent_report"
+    if _VETO_FACT_RE.search(sent):
+        return "material_fact"
+    if len(sent) < 90 and _BARE_REJECT_RE.search(sent):
+        return "bare_rejection"
+    return None
+
+
 def item_id(jid, s, e, t):
     return "HC13-" + hashlib.sha256(("%s|%d|%d|%s" % (jid, s, e, t)).encode()).hexdigest()[:14]
 
@@ -72,8 +104,13 @@ def classify(seg, model):
                 res["cls"] = "question_of_law"
             elif ("DISPOSAL" in sig or ("OPERATIVE" in sig and "COURT_CONCLUSION_MARKER" not in sig)) and late and ph < th["holding_over_operative"]:
                 res["cls"] = "operative_direction"
-            elif ph >= th["holding"]:
+            elif ph >= th["holding"] and holding_veto(r["sent"]) is None:
                 res["cls"] = "holding"
+            elif ph >= th["holding"]:
+                veto = holding_veto(r["sent"])
+                res["basis"] += "+HOLDING_VETO:" + veto
+                res["cls"] = {"operative_direction": "operative_direction", "question_framing": "question_of_law" if pi >= th["holding_floor"] else "supporting_reasoning",
+                              "precedent_report": "quoted_judgment", "material_fact": "material_fact"}.get(veto, "supporting_reasoning")
             elif "OBITER" in sig:
                 res["cls"] = "obiter"
             elif ("FACTY" in sig or "NARRATIVE_FACT" in sig or ("DATE" in sig and "NORMATIVE_LEGAL_PREDICATE" not in sig)
@@ -90,7 +127,7 @@ def classify(seg, model):
             continue
         if role_of(r["oi"]) not in HOLDING_ROLES + ("dissent", "split_opinion"):
             continue
-        if res["cls"] in ("question_of_law", "operative_direction"):
+        if res["cls"] in ("question_of_law", "operative_direction") or holding_veto(r["sent"]):
             continue
         b = best.get(r["oi"])
         if b is None or res["p_holding"] > out[b]["p_holding"]:

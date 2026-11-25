@@ -60,9 +60,10 @@ _DISSENT_ANY_RE = re.compile(
     r"|\b(?:respectful\s+)?inability\s+to\s+(?:concur|agree)|\bI\s+am\s+differing\b|\bdiffering\s+with\s+the\s+views?|\bI\s+(?:respectfully\s+)?(?:disagree|differ)\b|\b(?:With\s+(?:great|due|the\s+greatest)\s+respect,?\s+)?I\s+(?:cannot|am\s+unable\s+to)\s+agree\s+that"
     r"|\b(?:my|this)\s+dissent(?:ing)?\b|\bI\s+dissent\b|\bdissenting\s+(?:opinion|judgment|note|view)|\bcannot\s+(?:agree|concur)\s+with\s+(?:my|the\s+majority|the\s+view|the\s+conclusion)"
     r"|\bI\s+(?:do\s+not|cannot)\s+(?:agree|concur|subscribe)\s+(?:with|to)\s+(?:the\s+)?(?:view|opinion|conclusion|reasoning|judgment)"
-    r"|\bunable\s+to\s+(?:agree|concur|persuade\s+myself\s+to\s+agree)\s+with\s+(?:my|the)\s+(?:learned|esteemed|noble|majority|view)", re.I)
+    r"|\bunable\s+to\s+(?:agree|concur|persuade\s+myself\s+to\s+agree)\s+with\s+(?:my|the)\s+(?:learned|esteemed|noble|majority|view)"
+    r"|\b(?:in\s+view\s+of|having\s+regard\s+to|given)\s+the\s+majority\s+(?:decision|view|opinion|judgment)", re.I)
 _CONCUR_ANY_RE = re.compile(
-    r"\bI\s+(?:entirely\s+|fully\s+|respectfully\s+|wholly\s+)?(?:agree|concur)\b|\bI\s+have\s+had\s+the\s+(?:advantage|benefit|privilege|opportunity)(?:\s+and\s+\w+)?\s+of\s+(?:reading|going\s+through|perusing)"
+    r"\bI\s+(?:entirely\s+|fully\s+|respectfully\s+|wholly\s+)?(?:agree|concur)\b"
     r"|\bwhile\s+(?:I\s+)?(?:agreeing|concurring)|\bconcurring\s+(?:opinion|judgment)|\bI\s+(?:would|wish\s+to)\s+(?:add|supplement|say\s+a\s+few\s+words)"
     r"|\bin\s+agreement\s+with\s+(?:my|the)\s+(?:learned|esteemed|noble)", re.I)
 _SPLIT_RE = re.compile(

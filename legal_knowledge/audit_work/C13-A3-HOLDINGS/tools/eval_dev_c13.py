@@ -21,6 +21,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import c13_labels as cl  # noqa: E402
+import c13_extract as cx  # noqa: E402
 
 ev = cl.ev
 C12H = os.path.join(cl.C12, "holdings")
@@ -174,50 +175,6 @@ def score_gt(preds, gt, htypes, rule):
     return (k, len(gt)), macro({a: tuple(b) for a, b in perj.items()})
 
 
-def oof_curves(path):
-    rows = [json.loads(l) for l in open(path, encoding="utf-8")]
-    labels = [r for r in cl.load_labels() if r["kind"] == "holding" and r["polarity"] > 0 and r["src"] in ("c12_reference", "c11_gt")]
-    ids = set(r["judgment_id"] for r in rows)
-    labels = [r for r in labels if r["judgment_id"] in ids]
-    # map each label to the oof rows (sentences) it matches: precomputed in srcs is not label-specific, recompute
-    by_j = collections.defaultdict(list)
-    for r in rows:
-        by_j[r["judgment_id"]].append(r)
-    out = []
-    for T in (0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.95):
-        sel = [r for r in rows if r["oof_holding"] >= T]
-        pos_lab = [r for r in sel if r["y_holding"] == 1]
-        expl = [r for r in sel if any(s.endswith("-1") or ":reasoning:" in s or ":question_of_law:" in s or ":operative:" in s for s in r["srcs"]) or r["y_holding"] == 1]
-        rec = 0
-        for lab in labels:
-            hit = False
-            for r in by_j[lab["judgment_id"]]:
-                if r["oof_holding"] < T:
-                    continue
-                if lab["page"] is not None and not (r["page"] - 1 <= lab["page"] <= r["page_end"] + 1):
-                    continue
-                if lab["_sentence_keys"] if False else (r["s"], r["e"]) in lab.setdefault("_m", set()):
-                    hit = True
-                    break
-            rec += hit
-        out.append((T, len(sel), len(pos_lab), len(expl), rec, len(labels)))
-    return out
-
-
-def oof_label_recall(path):
-    """Out-of-fold recall of reference holdings at thresholds: a label is recovered if a sentence it matches
-    (C12 primary matcher, computed in training and stored per sentence in `srcs`) has oof_holding >= T."""
-    rows = [json.loads(l) for l in open(path, encoding="utf-8")]
-    labels = [r for r in cl.load_labels() if r["kind"] == "holding" and r["polarity"] > 0 and r["src"] in ("c12_reference", "c11_gt")]
-    ids = set(r["judgment_id"] for r in rows)
-    labels = [r for r in labels if r["judgment_id"] in ids]
-    by_j = collections.defaultdict(list)
-    for r in rows:
-        r["_c"] = None
-        by_j[r["judgment_id"]].append(r)
-    return rows, labels, by_j
-
-
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--pred-ref", required=True)
@@ -285,7 +242,7 @@ def main(argv=None):
     # OOF
     rows = [json.loads(l) for l in open(a.oof, encoding="utf-8")]
     L.append("## 4. Out-of-fold classifier estimate (grouped 5-fold by judgment; holding head only)\n")
-    L.append("Sentence-level: court-voice sentences whose out-of-fold probability is at or above T. 'Labelled positive' = the sentence "
+    L.append("Sentence-level: court-voice sentences whose out-of-fold probability is at or above T and that pass the deterministic holding vetoes (`c13_extract.holding_veto`; the opinion floor and operative/QoL precedence of the full extractor are not emulated). 'Labelled positive' = the sentence "
              "matches a positive holding label (C12 reference, C11 GT, adjudicated or hand-checked correct). 'Explicitly labelled' = it "
              "matches any labelled row (positive or negative). The share among explicitly labelled sentences is a precision proxy restricted "
              "to labelled material; unlabelled selected sentences are not scored. Recall: positive holding labels from the C12 reference and "
@@ -302,15 +259,22 @@ def main(argv=None):
     for r in rows:
         by_j[r["judgment_id"]].append(r)
     L.append("| T | selected | per judgment | labelled positive | explicitly labelled | proxy precision | label recall (C12 ref + C11 GT) |\n| --- | --- | --- | --- | --- | --- | --- |")
+    stext = {}
+    if a.texts:
+        for ln in open(a.texts, encoding="utf-8"):
+            t = json.loads(ln)
+            stext[(t["judgment_id"], t["s"])] = t["sent"]
+    for r in rows:
+        r["_veto"] = bool(cx.holding_veto(stext.get((r["judgment_id"], r["s"]), "")))
     for T in (0.5, 0.6, 0.7, 0.8, 0.85, 0.9, 0.95):
-        sel = [r for r in rows if r["oof_holding"] >= T]
+        sel = [r for r in rows if r["oof_holding"] >= T and not r["_veto"]]
         pos = sum(1 for r in sel if r["y_holding"] == 1)
         expl = sum(1 for r in sel if r["srcs"])
         rec = 0
         if sents:
             for lab in labels:
                 for r in by_j[lab["judgment_id"]]:
-                    if r["oof_holding"] < T:
+                    if r["oof_holding"] < T or r["_veto"]:
                         continue
                     c = sents.get((r["judgment_id"], r["s"]))
                     if c is not None and cl.sentence_matches(c, r["page"], r["page_end"], lab):
