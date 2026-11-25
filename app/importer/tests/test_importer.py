@@ -387,11 +387,16 @@ def test_e9_page_beyond_copy_mismatch_and_ambiguity(hn, tmp_path):
     old, new = _two_releases(hn, site)
     assert cite(site, old[:12], DOC_ID, 7, exclusions=None)["state"] == "CITED_PAGE_NOT_IN_COPY"
     assert cite(site, old[:12], "toy-some-other-doc", 1, exclusions=None)["state"] == "REFERENCE_MISMATCH"
+    import mimamsa_importer.importer as imp
     held = held_copies(site)
-    held["0" * 3 + old[3:]] = dict(held[old])       # synthetic colliding prefix
-    held[old[:12] + "0" * 52] = dict(held[old])
-    (site / "held_copies.json").write_text(json.dumps(held))
-    assert cite(site, old[:12], DOC_ID, 1, exclusions=None)["state"] == "AMBIGUOUS_REFERENCE"
+    fake = dict(held)
+    fake[old[:12] + "0" * 52] = dict(held[old])   # synthetic second copy sharing the 12-character prefix
+    imp_held = imp.held_copies
+    try:
+        imp.held_copies = lambda s: fake
+        assert cite(site, old[:12], DOC_ID, 1, exclusions=None)["state"] == "AMBIGUOUS_REFERENCE"
+    finally:
+        imp.held_copies = imp_held
 
 
 def test_e10_unbound_span_fields_not_served(hn, tmp_path):
@@ -402,3 +407,134 @@ def test_e10_unbound_span_fields_not_served(hn, tmp_path):
     a = active_generation(site)["candidate_evidence"]["toy:edge:001"]["anchors"][0]
     assert a["page_only"] is True and "passage_id" not in a and "char_start" not in a and a["text_sha256"] is None
     assert "span_stripped" in a
+
+
+# ================= confirmation N1-N3 =================
+import mimamsa_importer.importer as imp  # noqa: E402
+from mimamsa_importer import ImporterError  # noqa: E402
+
+
+def _active_site(hn, tmp_path, channel):
+    site = tmp_path / f"site-{channel}"
+    assert hn.run(hn.bundle(), site, channel=channel).activated
+    return site
+
+
+def test_n1_signed_channel_none_state_denies(hn, tmp_path):
+    site = _active_site(hn, tmp_path, "signed")
+    assert not servable(site, "documents", DOC_ID, exclusions=None)
+    assert cite(site, h(SOURCE)[:12], DOC_ID, 1, exclusions=None)["state"] == "CITED_COPY_UNAVAILABLE"
+
+
+def test_n1_unconfigured_site_denies(hn, tmp_path):
+    site = tmp_path / "site"
+    assert hn.run(hn.bundle(), site, channel=None).activated   # no SITE_CONFIG: default is "signed"
+    assert not servable(site, "documents", DOC_ID, exclusions=None)
+    assert cite(site, h(SOURCE)[:12], DOC_ID, 1, exclusions=None)["state"] == "CITED_COPY_UNAVAILABLE"
+
+
+@pytest.mark.parametrize("store_state", ["empty_dir", "pending_only", "accepted_lost"])
+def test_n1_store_without_accepted_state_denies_even_in_none_mode(hn, tmp_path, store_state):
+    site = _active_site(hn, tmp_path, "none")
+    assert servable(site, "documents", DOC_ID, exclusions=None)  # positive control: explicit none mode, no store
+    (site / "exclusions").mkdir()
+    if store_state == "pending_only":
+        (site / "exclusions" / "pairs").mkdir()
+        (site / "exclusions" / "pairs" / "00000001.json").write_text("{}")
+    if store_state == "accepted_lost":
+        (site / "exclusions" / "LOCK").write_text("stale")
+    assert not servable(site, "documents", DOC_ID, exclusions=None)
+    assert cite(site, h(SOURCE)[:12], DOC_ID, 1, exclusions=None)["state"] == "CITED_COPY_UNAVAILABLE"
+
+
+def test_n1_generation_must_record_none_mode(hn, tmp_path):
+    site = tmp_path / "site"
+    assert hn.run(hn.bundle(), site, channel="signed").activated
+    imp.configure_site(site, exclusion_channel="none")       # flipped after the generation was written
+    assert not servable(site, "documents", DOC_ID, exclusions=None)
+
+
+def test_n1_non_state_object_denies(hn, tmp_path):
+    site = _active_site(hn, tmp_path, "none")
+    assert not servable(site, "documents", DOC_ID, exclusions={"withdrawn": []})
+    assert cite(site, h(SOURCE)[:12], DOC_ID, 1, exclusions="nothing")["state"] == "CITED_COPY_UNAVAILABLE"
+
+
+def test_n1_cite_honours_withdrawal_with_store(hn, tmp_path):
+    site = _active_site(hn, tmp_path, "signed")
+    state = _store_with(tmp_path, site, withdrawals=[{"doc_id": DOC_ID, "reason": "withdrawn"}])
+    assert cite(site, h(SOURCE)[:12], DOC_ID, 1, exclusions=state)["state"] == "CITED_COPY_UNAVAILABLE"
+    assert cite(site, h(SOURCE)[:12], DOC_ID, 1, exclusions=None)["state"] == "CITED_COPY_UNAVAILABLE"
+
+
+class _Crash(Exception):
+    pass
+
+
+def _crash_at(monkeypatch, point):
+    def hook(name):
+        if name == point:
+            raise _Crash(name)
+    monkeypatch.setattr(imp, "_crashpoint", hook)
+
+
+@pytest.mark.parametrize("point", ["after_vault_object", "before_rename", "before_active"])
+def test_n2_crash_then_retry_succeeds_and_nothing_held_early(hn, tmp_path, monkeypatch, point):
+    site = tmp_path / "site"
+    assert hn.run(hn.bundle(), site).activated                     # generation 1 (SOURCE)
+    b2 = hn.bundle(docs=[document(REPLACEMENT)], copies=[REPLACEMENT], derived_recs=[], texts={})
+    _crash_at(monkeypatch, point)
+    with pytest.raises(_Crash):
+        hn.run(b2, site)
+    # never-activated copy is not held, not citable, and generation 1 still serves
+    assert active_generation(site)["release_sequence"] == 1
+    assert h(REPLACEMENT) not in held_copies(site)
+    assert cite(site, h(REPLACEMENT)[:12], DOC_ID, 1, exclusions=None)["state"] == "CITED_COPY_UNAVAILABLE"
+    assert sv(site, "documents", DOC_ID)
+    monkeypatch.setattr(imp, "_crashpoint", lambda name: None)
+    r = hn.run(b2, site)                                            # retry of the identical bundle
+    assert r.activated and active_generation(site)["release_sequence"] == 2
+    assert r.resumed == (point == "before_active")
+    assert h(REPLACEMENT) in held_copies(site)
+    assert not list((site / "generations").glob(".tmp-*"))
+    if point == "before_rename":
+        assert any((site / "quarantine" / "generations").iterdir())  # stale temp dir quarantined, not deleted
+
+
+def test_n2_different_bundle_after_crash_quarantines_pending_generation(hn, tmp_path, monkeypatch):
+    site = tmp_path / "site"
+    assert hn.run(hn.bundle(), site).activated
+    b2 = hn.bundle(docs=[document(REPLACEMENT)], copies=[REPLACEMENT], derived_recs=[], texts={})
+    _crash_at(monkeypatch, "before_active")
+    with pytest.raises(_Crash):
+        hn.run(b2, site)
+    monkeypatch.setattr(imp, "_crashpoint", lambda name: None)
+    b3 = hn.bundle(docs=[document(REPLACEMENT)], copies=[REPLACEMENT], derived_recs=[], texts={})
+    r = hn.run(b3, site)
+    assert r.activated and not r.resumed and any((site / "quarantine" / "generations").iterdir())
+
+
+def test_n2_storage_failure_is_typed(hn, tmp_path, monkeypatch):
+    site = tmp_path / "site"
+    assert hn.run(hn.bundle(), site).activated
+    b2 = hn.bundle(docs=[document(REPLACEMENT)], copies=[REPLACEMENT], derived_recs=[], texts={})
+    real = imp.os.replace
+
+    def failing(src, dst):
+        if str(dst).endswith("ACTIVE"):
+            raise PermissionError("denied")
+        return real(src, dst)
+    monkeypatch.setattr(imp.os, "replace", failing)
+    with pytest.raises(ImporterError):
+        hn.run(b2, site)
+
+
+def test_n3_ambiguity_ignores_excluded_copies(hn, tmp_path, monkeypatch):
+    site = _active_site(hn, tmp_path, "signed")
+    old = h(SOURCE)
+    other = old[:12] + "0" * 52
+    held = dict(held_copies(site))
+    held[other] = {"doc_id": "toy-excluded-other", "page_count": 1, "first_release": "x"}
+    monkeypatch.setattr(imp, "held_copies", lambda s: held)
+    state = _store_with(tmp_path, site, withdrawals=[{"source_copy_sha256": other, "reason": "withdrawn"}])
+    assert cite(site, old[:12], DOC_ID, 1, exclusions=state)["state"] == "CITED_COPY_ELIGIBLE"

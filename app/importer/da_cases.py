@@ -23,7 +23,7 @@ sys.path[:0] = [str(HERE), str(HERE.parent / "contract")]
 
 from mimamsa_contract.devbundle import new_dev_keypair, write_bundle  # noqa: E402
 from mimamsa_contract.restricted import register_from_bytes  # noqa: E402
-from mimamsa_importer import active_generation, import_release, servable  # noqa: E402
+from mimamsa_importer import active_generation, configure_site, import_release, servable  # noqa: E402
 
 # Verbatim from data-fixtures.json at pr54 703d98cb.
 SOURCE = b"Fictional blue form. Two independent toy proceedings."
@@ -122,7 +122,10 @@ class Harness:
             p.write_bytes(SOURCE + b".")
         return path
 
-    def run(self, bundle_path, site, register=REGISTER, rollback=False):
+    def run(self, bundle_path, site, register=REGISTER, rollback=False, channel="none"):
+        # Synthetic sites are installed with an explicit exclusion-channel mode (fail-closed default is "signed").
+        if channel and not (Path(site) / "SITE_CONFIG.json").exists():
+            configure_site(site, exclusion_channel=channel)
         return import_release(bundle_path, site, trusted_public_key=self.pub, mode="development", register=register,
                               rollback=rollback)
 

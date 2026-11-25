@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "$description": "Citation permalink resolution (CAP-RW-04, UX-12; ASR-E06 from PR #54; review E7-E9). Reference implementation: app/importer/mimamsa_importer/importer.py cite(). Tested by app/design/tests/test_citation_resolution.py and app/importer/tests.",
   "invariants": {
     "auto_substitute_current_copy": false,
@@ -7,7 +7,8 @@
     "content_from_unavailable_copy": false,
     "citation_keeps_original_copy_hash_and_page": true,
     "prefix_must_resolve_to_exactly_one_full_hash": true,
-    "unavailable_reasons_indistinguishable_to_users": true
+    "unavailable_reasons_indistinguishable_to_users": true,
+    "excluded_copies_removed_before_disambiguation": true
   },
   "states": {
     "CITED_COPY_ELIGIBLE": {
@@ -50,5 +51,7 @@
       "notice": "The citation's document and copy do not match.",
       "actions": []
     }
-  }
+  },
+  "permalink_release_id": "Informational: records where the citation was made. Resolution uses the full copy hash only (prefix must match exactly one held, non-excluded copy).",
+  "held_copies": "Copies of activated generations only (at or below the ACTIVE release sequence); a never-activated generation's copies are not citable."
 }

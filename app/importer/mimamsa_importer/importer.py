@@ -33,6 +33,7 @@ import hashlib
 import json
 import os
 import re
+import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -41,11 +42,40 @@ from mimamsa_contract.bundle import validate_bundle
 _MARKER = re.compile(r"^\[\[page (\d+)\]\]\n", re.M)
 
 
+class ImporterError(RuntimeError):
+    """Typed failure of the importer's site storage (never a raw OSError/FileExistsError)."""
+
+
+def _crashpoint(name: str):
+    """Test hook for crash injection; no-op in normal operation."""
+
+
+SITE_CONFIG = "SITE_CONFIG.json"
+
+
+def configure_site(site: Path, *, exclusion_channel: str):
+    """Install-time site configuration. exclusion_channel is "signed" (an ExclusionStore accepted state must be
+    supplied to every serving decision) or "none" (explicitly no exclusion channel; only then may serving decisions
+    run with exclusions=None). The value is recorded in every generation the importer writes."""
+    if exclusion_channel not in ("signed", "none"):
+        raise ImporterError("exclusion_channel must be 'signed' or 'none'")
+    Path(site).mkdir(parents=True, exist_ok=True)
+    _write_atomic(Path(site) / SITE_CONFIG, json.dumps({"exclusion_channel": exclusion_channel}).encode())
+
+
+def _site_channel(site: Path) -> str:
+    try:
+        return json.loads((Path(site) / SITE_CONFIG).read_text(encoding="utf-8"))["exclusion_channel"]
+    except (OSError, ValueError, KeyError):
+        return "signed"
+
+
 @dataclass
 class ImportResult:
     release_id: str | None
     activated: bool
     noop: bool = False
+    resumed: bool = False
     refused_reasons: list = field(default_factory=list)
     verified: dict = field(default_factory=lambda: {"documents": [], "derived_text": [], "candidates": []})
     unresolved: list = field(default_factory=list)   # [{kind, id, reasons}]
@@ -144,9 +174,32 @@ def active_generation(site: Path) -> dict | None:
     return json.loads((Path(site) / "generations" / gen / "generation.json").read_text(encoding="utf-8"))
 
 
+def _generations(site: Path):
+    gens = Path(site) / "generations"
+    if not gens.exists():
+        return []
+    out = []
+    for g in sorted(gens.iterdir()):
+        if g.name.startswith(".") or not (g / "generation.json").is_file():
+            continue
+        out.append(json.loads((g / "generation.json").read_text(encoding="utf-8")))
+    return out
+
+
 def held_copies(site: Path) -> dict:
-    p = Path(site) / "held_copies.json"
-    return json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+    """Copies held by activated generations only: generations whose release_sequence is at or below the ACTIVE one
+    (a generation renamed into place but never activated has a higher sequence and is excluded). Derived on demand,
+    so no separate index can get ahead of activation after a crash."""
+    active = active_generation(site)
+    if not active:
+        return {}
+    held = {}
+    for g in sorted(_generations(site), key=lambda x: x.get("release_sequence") or 0):
+        if (g.get("release_sequence") or 0) > (active.get("release_sequence") or 0):
+            continue
+        for did, h in g.get("item_document", {}).get("documents", {}).values():
+            held.setdefault(h, {"doc_id": did, "page_count": g.get("page_counts", {}).get(h), "first_release": g["release_id"]})
+    return held
 
 
 def _excluded(exclusions, doc_id: str | None, sha: str | None) -> bool:
@@ -158,14 +211,25 @@ def _excluded(exclusions, doc_id: str | None, sha: str | None) -> bool:
                 or doc_id in exclusions.restricted_tombstone_doc_ids or sha in exclusions.restricted_tombstone_shas)
 
 
+def _exclusions_usable(site: Path, exclusions, gen: dict | None) -> bool:
+    """One fail-closed guard for every serving decision. A supplied state must be a real ExclusionState. None is
+    allowed only when the site was configured at install with exclusion_channel "none", the active generation recorded
+    that mode, and no exclusion store directory exists. Anything else (missing, empty, unreadable or pending-only
+    store, unknown mode) denies."""
+    from mimamsa_contract.exclusions import ExclusionState
+    if exclusions is not None:
+        return isinstance(exclusions, ExclusionState)
+    return (_site_channel(site) == "none" and bool(gen) and gen.get("exclusion_channel") == "none"
+            and not (Path(site) / "exclusions").exists())
+
+
 def servable(site: Path, kind: str, item_id: str, *, exclusions) -> bool:
     """Serving decision: the item is verified in the ACTIVE generation AND not withdrawn or restricted under the
-    current exclusion state (`ExclusionStore.effective_state`). Passing exclusions=None is allowed only when the site
-    has no exclusion store; if a store exists, None fails closed."""
+    current exclusion state (`ExclusionStore.effective_state`). Fails closed (see _exclusions_usable)."""
     site = Path(site)
-    if exclusions is None and (site / "exclusions" / "ACCEPTED.json").exists():
-        return False
     gen = active_generation(site)
+    if not _exclusions_usable(site, exclusions, gen):
+        return False
     if not gen or item_id not in gen["servable"].get(kind, []):
         return False
     owner = gen["item_document"].get(kind, {}).get(item_id)  # [doc_id, copy sha]
@@ -182,8 +246,28 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
         manifest, sums_digest = {}, None
     res = ImportResult(release_id=manifest.get("release_id"), activated=False)
 
-    # 0 replay / no-op
-    active = active_generation(site)
+    # 0 recovery, replay / no-op
+    try:
+        active = active_generation(site)
+        gens = site / "generations"
+        if gens.exists():
+            for g in list(gens.iterdir()):
+                pending = g.name.startswith(".tmp-")
+                if not pending and (g / "generation.json").is_file():
+                    meta = json.loads((g / "generation.json").read_text(encoding="utf-8"))
+                    if (meta.get("release_sequence") or 0) > ((active or {}).get("release_sequence") or 0):
+                        if meta["release_id"] == res.release_id and meta.get("sums_sha256") == sums_digest:
+                            # crash after the rename, before ACTIVE: resume activation of the identical bundle
+                            _write_atomic(site / "ACTIVE", meta["release_id"].encode())
+                            res.activated = res.resumed = True
+                            return res
+                        pending = True
+                if pending:  # never-activated residue: quarantined, not deleted
+                    q = site / "quarantine" / "generations"
+                    q.mkdir(parents=True, exist_ok=True)
+                    os.replace(g, q / f"{g.name.lstrip('.')}-{time.time_ns()}")
+    except OSError as exc:
+        raise ImporterError(f"site generation recovery failed: {type(exc).__name__}") from exc
     gdir = site / "generations" / str(res.release_id)
     if active and active["release_id"] == res.release_id and active.get("sums_sha256") == sums_digest:
         res.noop = True
@@ -351,31 +435,34 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
                 res.refused_reasons.append(f"vault object {h[:12]} exists with different bytes; halt")
                 return res
             continue
-        target.parent.mkdir(parents=True, exist_ok=True)
-        _write_atomic(target, originals[h])
-        os.chmod(target, 0o444)
-    held = held_copies(site)
-    for d in doc_by_id.values():
-        h = d["source_copy"]["sha256"]
-        held.setdefault(h, {"doc_id": d["doc_id"], "page_count": copy_pages[h], "first_release": res.release_id})
-    site.mkdir(parents=True, exist_ok=True)
-    _write_atomic(site / "held_copies.json", json.dumps(held, indent=1, sort_keys=True).encode())
-
+        try:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            _write_atomic(target, originals[h])
+            os.chmod(target, 0o444)
+        except OSError as exc:
+            raise ImporterError(f"vault write failed: {type(exc).__name__}") from exc
+        _crashpoint("after_vault_object")
     generation = {"release_id": res.release_id, "release_sequence": manifest.get("release_sequence"),
                   "sums_sha256": sums_digest, "servable": res.verified, "quarantine": res.unresolved,
-                  "item_document": item_document, "candidate_evidence": evidence}
-    gens = site / "generations"
-    gens.mkdir(parents=True, exist_ok=True)
-    tmpdir = gens / f".tmp-{res.release_id}"
-    tmpdir.mkdir()
-    with open(tmpdir / "generation.json", "wb") as fh:
-        fh.write(json.dumps(generation, indent=1, sort_keys=True).encode())
-        fh.flush()
-        os.fsync(fh.fileno())
-    _fsync_dir(tmpdir)
-    os.replace(tmpdir, gdir)
-    _fsync_dir(gens)
-    _write_atomic(site / "ACTIVE", str(res.release_id).encode())
+                  "item_document": item_document, "candidate_evidence": evidence,
+                  "page_counts": copy_pages, "exclusion_channel": _site_channel(site)}
+    try:
+        gens = site / "generations"
+        gens.mkdir(parents=True, exist_ok=True)
+        tmpdir = gens / f".tmp-{res.release_id}"
+        tmpdir.mkdir()
+        with open(tmpdir / "generation.json", "wb") as fh:
+            fh.write(json.dumps(generation, indent=1, sort_keys=True).encode())
+            fh.flush()
+            os.fsync(fh.fileno())
+        _fsync_dir(tmpdir)
+        _crashpoint("before_rename")
+        os.replace(tmpdir, gdir)
+        _fsync_dir(gens)
+        _crashpoint("before_active")
+        _write_atomic(site / "ACTIVE", str(res.release_id).encode())
+    except OSError as exc:
+        raise ImporterError(f"generation activation failed: {type(exc).__name__}") from exc
     res.activated = True
     return res
 
@@ -386,20 +473,25 @@ def cite(site: Path, sha12: str, doc_id: str, page: int, *, exclusions) -> dict:
     Returns {"state": ..., "copy": full sha or None, "page": page or None}. Opens only the exact cited copy; the
     current edition is never substituted. Withdrawn, restricted and not-held copies return one indistinguishable
     state (non-disclosure, security architecture §7.3)."""
+    unavailable = {"state": "CITED_COPY_UNAVAILABLE", "copy": None, "page": None}
+    if not _exclusions_usable(Path(site), exclusions, active_generation(site)):
+        return unavailable
     held = held_copies(site)
-    matches = [h for h in held if h.startswith(sha12.lower())]
+    # Excluded copies are removed before disambiguation, so an ambiguity never reveals an excluded copy (N3).
+    matches = [h for h in held if h.startswith(sha12.lower()) and not _excluded(exclusions, held[h]["doc_id"], h)]
     if len(matches) > 1:
         return {"state": "AMBIGUOUS_REFERENCE", "copy": None, "page": None}
-    if not matches or _excluded(exclusions, held[matches[0]]["doc_id"], matches[0]):
-        return {"state": "CITED_COPY_UNAVAILABLE", "copy": None, "page": None}
+    if not matches:
+        return unavailable
     h = matches[0]
     if held[h]["doc_id"] != doc_id:
         return {"state": "REFERENCE_MISMATCH", "copy": None, "page": None}
-    if not (1 <= page <= held[h]["page_count"]):
+    if not held[h]["page_count"] or not (1 <= page <= held[h]["page_count"]):
         return {"state": "CITED_PAGE_NOT_IN_COPY", "copy": None, "page": None}
     gen = active_generation(site) or {}
     docs_now = gen.get("item_document", {}).get("documents", {})
     current = docs_now.get(doc_id, [None, None])[1]
+    # The permalink's release_id records where the citation was made; resolution uses the full copy hash only.
     if current == h:
         return {"state": "CITED_COPY_ELIGIBLE", "copy": h, "page": page, "current_copy": h}
     # Held and verified in an earlier generation, not withdrawn or restricted: still opened exactly as cited.

@@ -13,7 +13,23 @@ The first piece of application code, written in response to ASR-E05 from PR #54.
 
 **Page text format.** Page N is the text after its `[[page N]]` marker line, up to the next marker line. The single newline before the next marker, or at the end of the file, is removed.
 
-**Serving decision:** `servable(site, kind, id, exclusions=store.effective_state(trust))` returns true only when the item is verified in the ACTIVE generation and is not withdrawn or restricted. If an exclusion store exists, `exclusions=None` fails closed. **Citations:** `cite()` implements `app/design/policies/citation_resolution.json`.
+**Serving decision (fail closed).** `servable(site, kind, id, exclusions=store.effective_state(trust))` returns true only if two conditions hold: the item is verified in the ACTIVE generation, and it is not withdrawn or restricted. `cite()` uses the same guard.
+
+`exclusions=None` is accepted only when all three hold:
+- the site was installed with `configure_site(site, exclusion_channel="none")`;
+- the active generation recorded that mode;
+- no exclusion store directory exists.
+
+Every other `None` path denies: unconfigured site (default `"signed"`), empty store, pending-only store, lost acceptance record, or a mode flipped after the generation was written. A supplied state must be a real `ExclusionState`.
+
+**Crash recovery.** Held copies are derived from activated generations: those at or below the ACTIVE sequence. A copy is therefore never citable before its generation activates.
+
+On the next import:
+- a generation renamed into place but never activated is resumed (`resumed=True`) if it is the identical bundle (same release id and SHA256SUMS digest), and quarantined otherwise;
+- stale `.tmp-*` directories are quarantined under `quarantine/generations/`, never deleted;
+- storage failures raise `ImporterError`.
+
+Crash points tested: after a vault write, before the generation rename, and before the ACTIVE switch. **Citations:** `cite()` implements `app/design/policies/citation_resolution.json`.
 
 **Not covered yet:** page-image comparison for OCR (see DA-04), database and index loading, the UI and the Windows service wrapper (P5/P6).
 

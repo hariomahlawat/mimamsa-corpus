@@ -52,4 +52,10 @@
 - A cited copy replaced in a later release remains openable exactly: `CITED_COPY_ELIGIBLE_NOT_CURRENT`. The prior copy is retained in the vault and the append-only held-copies index (test `test_e8_*`).
 - Withdrawn, restricted and not-held copies give one indistinguishable state (`test_e7_*`).
 
+**Fail-closed and crash recovery (confirmation N1–N3).**
+- The exclusion guard denies on every `None` path except the explicitly installed and recorded `none` mode.
+- Copies become held only after activation.
+- Crash-and-retry is tested at three points.
+- Excluded copies are filtered out before prefix disambiguation.
+
 These are observations on a Linux test host, not Windows site acceptance.

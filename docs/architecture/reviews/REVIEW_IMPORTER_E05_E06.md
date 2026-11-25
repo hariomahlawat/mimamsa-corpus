@@ -53,3 +53,62 @@ The importer verifies real bytes for the original's identity and refuses before 
 - `servable()` is not yet a serving decision (E5).
 
 RESULTS_DA must be recounted (E6). The E06 policy needs the non-disclosure and cross-generation fixes (E7, E8) before B1 builds against it.
+
+---
+
+## 4. Confirmation review of the fixes (`a56e1e5f..4476892c`)
+
+- **Reviewed:** head `4476892c`, a single commit. The worktree is clean and the branch was not modified.
+- **Probes:** `reviews/b-app/imp2/importer/tests/test_probe4.py`, run in a scratch copy and not committed.
+
+### 4.1 Re-run (measured)
+
+| Check | Result |
+| --- | --- |
+| Contract suite | **225 passed, 1 skipped** |
+| Design suite | **117 passed** |
+| Importer suite | **43 passed** |
+| `data_oracle.py --repo` | exit 0, "matched the recorded expectations" |
+| `da_cases.py` observations, then the comparator | **64 lines, all `(missing)`; no contradicted value.** DA-04 `ocr_quote_enabled` is now missing rather than self-reported. DA-01 and DA-35 have no lines. This matches the revised RESULTS_DA. |
+
+### 4.2 Original probes on the new head
+
+| Probe | Result |
+| --- | --- |
+| Offsets 10000–20000, no passage id (E1) | Quarantined: "span offsets outside the verified page/passage". Not servable |
+| One-page PDF declared `text/plain` with `\f` padding (E3) | Refused: "content type mismatch: declared text/plain, detected application/pdf" |
+| Older signed release after a newer one (E4a) | Refused `DOWNGRADE_OR_REPLAY`; ACTIVE unchanged. The sequence is read from the site |
+| Same bundle re-imported (E4b) | No-op. A different bundle with the same `release_id` is refused, and the generation is not rewritten |
+| Withdrawn item through `servable()` (E5) | False with the state. False with `None` when ACCEPTED exists |
+| Notice disclosure (E7) | Withdrawn, restricted and not-held all return the identical `CITED_COPY_UNAVAILABLE` (author test, confirmed by reading the code) |
+| Cited copy across releases (E8) | The old copy opens exactly as `CITED_COPY_ELIGIBLE_NOT_CURRENT`; the vault keeps the bytes |
+| Superseded copy later withdrawn (by sha) | `CITED_COPY_UNAVAILABLE`; the current copy stays eligible. **Holds** |
+
+### 4.3 Status of E1–E10
+
+| ID | Status |
+| --- | --- |
+| E1 | **CLOSED** |
+| E2 | **CLOSED.** The hash is recomputed from verified page text; a wrong `text_sha256` is quarantined (author test; code `importer.py` step 4) |
+| E3 | **CLOSED** |
+| E4 | **CLOSED** for replay and in-place rewrite. The crash residue is new finding N2 |
+| E5 | **CLOSED** for `servable()` with a state, or with `None` when ACCEPTED exists. The gaps are new finding N1 |
+| E6 | **CLOSED** |
+| E7 | **CLOSED** |
+| E8 | **CLOSED** |
+| E9 | **CLOSED** |
+| E10 | **CLOSED** |
+
+### 4.4 New findings
+
+| ID | Sev | Finding | Evidence | Required fix |
+| --- | --- | --- | --- | --- |
+| **N1** | P2 | **The exclusion check fails open in two new paths.**<br>(a) `cite()` has no fail-closed guard: with `exclusions=None` and an exclusion store present, a withdrawn copy resolves `CITED_COPY_ELIGIBLE`.<br>(b) `servable()` fails closed only when `exclusions/ACCEPTED.json` exists. If the store directory exists with no ACCEPTED record (pending pairs only, or ACCEPTED lost), `servable(..., exclusions=None)` returns True. Under PR #53 Serving §4, an accepted state that cannot be established must halt delivery. | `importer.py` `cite()` (no store check) and `servable()` (`ACCEPTED.json` test only); probe `test_Q4_withdrawn_and_absent_state`: `empty store dir, None -> True`; `cite with None while store exists -> CITED_COPY_ELIGIBLE` | Use one guard for both functions. If `exclusions` is None, return False/UNAVAILABLE unless the site is explicitly configured with no exclusion channel (an explicit flag, not file absence). A store directory without a readable ACCEPTED record must fail closed. Add tests. |
+| **N2** | P2 | **A crash during activation leaves a published-looking but never-activated copy, and the release can never be re-imported.**<br>• `held_copies.json` is updated *before* the generation rename and the ACTIVE switch. After a crash just before ACTIVE (probe Q6), the never-activated copy is in `held_copies`, and `cite()` opens it as `CITED_COPY_ELIGIBLE_NOT_CURRENT`.<br>• A retry is then refused ("a generation with this release_id already exists").<br>• A crash before the temporary-directory rename (probe Q7) leaves `.tmp-<id>`, and every retry raises a raw `FileExistsError`. | `importer.py` step 5 (held write, then `tmpdir.mkdir()`, rename, then `_write_atomic(ACTIVE)`); probes `test_Q6_crash_after_gen_rename_before_active` and `test_Q7_crash_before_tmp_rename` | Record a copy as held only once its generation has activated: write held after ACTIVE, or derive it from activated generations. On startup or retry, treat a generation directory that ACTIVE never pointed to as pending: complete the activation if it matches the same SUMS digest, otherwise quarantine it. Clear or quarantine stale `.tmp-*` directories and raise typed errors. Add crash tests at each step. |
+| N3 | P3 | `AMBIGUOUS_REFERENCE` is decided before the exclusion check, so a 12-character prefix shared with a restricted or withdrawn copy reveals that another copy exists. `held_copies` and the cite route also ignore the release named in the permalink. | `importer.py` `cite()` | Filter excluded copies out before the ambiguity test. Document how the permalink's `release_id` is used. |
+
+### 4.5 Verdict
+
+**ACCEPT WITH CONDITIONS.** P1: 0. Open P2: 2 (N1, N2). P3: 1 (N3). E1–E10 are all closed.
+
+N1 and N2 are fail-open and crash-recovery gaps in code paths added by this fix. They must be fixed, with tests, before B1 builds on `cite()` or `servable()`.
