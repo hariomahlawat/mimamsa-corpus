@@ -201,7 +201,7 @@ def _party_note(ev, d):
 
 
 
-_PLURAL_RE = re.compile(r"\b(?:petitions|appeals|matters|cases|applications|references|all|both|these|those|they|them|each|every|"
+_PLURAL_RE = re.compile(r"\b(?:petition|appeal|case)\s+and\s+the\b|\b(?:petitions|appeals|matters|cases|applications|references|all|both|these|those|they|them|each|every|"
                         r"connected|batch)\b", re.I)
 _SINGULAR_RE = re.compile(r"\b(?:this|the|present|instant|said|same|it)\b", re.I)
 

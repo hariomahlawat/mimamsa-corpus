@@ -157,7 +157,11 @@ def analyze_segment(d, seg, hosts, scr, is_first, section=False):
         zs, method_zone = js, "short_order_whole_body"
     elif cue is not None:
         ls = mt.rfind("\n", js, cue.start()) + 1
-        zs = max(js, ls)
+        zs = max(js, min(ls, v4_relief.sentence_start(mt, js, cue.start())))   # V4: a cue in mid-sentence
+        if chain and not order_heads:
+            pstarts = [p for p, _ in chain if js <= p <= cue.start()]
+            if pstarts and cue.start() - pstarts[-1] < 1500:
+                zs = min(zs, pstarts[-1])   # V4: the operative paragraph holding the cue
         if last_para is not None and not order_heads:
             zs = min(zs, last_para)
         method_zone = "operative_cue" if not order_heads else "order_heading"
@@ -226,14 +230,16 @@ def analyze_segment(d, seg, hosts, scr, is_first, section=False):
                 res["excluded"]["conditional"] += 1
                 continue
             subj = _PAREN_LONG_RE.sub(" ", dd["subject"])
-            if re.search(r"\b(?:except|save\s+(?:for|to)|other\s+than|barring)\b", mt[dd["sentence"][0]:dd["pos"]], re.I):
-                res["status"] = "abstain"
-                res["reason"] = "DISPOSITION_WITH_EXCEPTION_OR_CARVE_OUT"
-                return res
             if dd["standalone"]:
                 scls = "elided"
             else:
                 scls, _ = classify_subject(subj)
+            if scls in ("main", "pronoun", "elided") and \
+                    re.search(r"\b(?:except|save\s+(?:for|to)|other\s+than|barring)\b", mt[dd["sentence"][0]:dd["pos"]], re.I):
+                # V4: checked only for a disposition of a main proceeding (not 'a person ... except X will be discharged')
+                res["status"] = "abstain"
+                res["reason"] = "DISPOSITION_WITH_EXCEPTION_OR_CARVE_OUT"
+                return res
             if scls == "elided":
                 h = _heading_scope(mt, s0, dd["pos"])
                 if h is not None and h["ptype"] == "misc":

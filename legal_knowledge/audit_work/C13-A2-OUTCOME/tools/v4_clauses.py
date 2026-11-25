@@ -352,4 +352,4 @@ _WITHDRAW_CTX_RE = re.compile(r"\b(?:seeks?|sought|prays?|prayed|requests?|reque
 
 
 _REF_BEFORE_NUM_RE = re.compile(r"(?:\b(?:order|judgment|judgement|decision|view)\b[^,;]{0,60}\b(?:in|of)\s+(?:the\s+)?"
-                                r"(?:[.]?[A-Z][A-Za-z.()]*\s*){0,4}(?:Nos?\.?\s*)?$)|\b(?:as\s+in|similar\s+to|like|following)\s+[^,;]{0,40}$", re.I)
+                                r"(?:[.]?[A-Z][A-Za-z.()]*\s*){0,4}(?:Nos?\.?\s*)?$)|\b(?:as\s+in|similar\s+to|like|following)\s+[^,;]{0,40}$|\b(?:headed|led)\s+by\s+[^,;]{0,30}$|\bbunch\s+of\b[^;]{0,90}$", re.I)
