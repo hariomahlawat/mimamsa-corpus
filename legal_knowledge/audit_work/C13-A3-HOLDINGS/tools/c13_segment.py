@@ -31,17 +31,38 @@ norm_alnum = c12.norm_alnum
 _ESCR_AUTHOR_RE = re.compile(
     r"(?m)^[ \t]*(?:Judgment|JUDGMENT|J\s?U\s?D\s?G\s?M\s?E\s?N\s?T|Order|ORDER)[ \t]*\n(?:[ \t]*\n){0,3}[ \t]*"
     r"((?:Dr\.?\s*|DR\.?\s*)?[A-Z][A-Za-z.'\-]*(?:[ \t]+[A-Z][A-Za-z.'\-]*){0,5}?)[ \t]*,?[ \t]*(C\.?[ \t]*J\.?(?:I\.?)?|J\.?)[ \t]*$")
+# old SCR inline author with dash, mixed case allowed ("BosE J.-With great respect ...")
+_AUTHOR_DASH_RE = re.compile(r"(?m)^[ \t]*((?:[A-Z][A-Za-z.'\-]+[ \t]+){0,3}[A-Z][A-Za-z'\-]+),?[ \t]*(C\.[ \t]*J\.|J\.)[ \t]*[\-–—:][ \t]*(?=[A-Z\"“(])")
+# older SCR running headers with the author in parentheses: "MANEKA GANDHI v. UNION (Kailasam, J.)"
+_PAREN_HDR_RE = re.compile(r"^[^\n]{3,90}?\bv[\.,]?\s*[^\n]{0,70}?\(\s*((?:DR\.?\s*)?[A-Z][A-Za-z.\s'\-]{2,40}?)\s*[,)]\s*(?:C\.\s*)?J\s*[.,]?\s*\)\s*$")
+
+
+def header_judges_c13(text, mt, header_judges):
+    """C12 square-bracket header judges plus parenthesised SCR headers (positions in the unmasked text)."""
+    extra = []
+    pos = 0
+    for ln in text.split("\n"):
+        if len(ln) < 200 and "(" in ln and "J" in ln and ")" in ln:
+            m = _PAREN_HDR_RE.match(ln)
+            if m:
+                extra.append((pos, squash(m.group(1)).upper()))
+        pos += len(ln) + 1
+    if not extra:
+        return header_judges
+    return sorted(set(header_judges) | set(extra))
+
+
 _DELIVERED_RE = re.compile(r"(?:Judgment|Order)s?\s+of\s+the\s+Court\s+(?:was|were)\s+delivered\s+by\s*[:\-]?\s*"
                            r"((?:DR\.?\s*)?[A-Z][A-Za-z.'\-]*(?:\s+[A-Z][A-Za-z.'\-]*){0,5}?)\s*,?\s*(?:C\.?\s*J\.?|J\.?)", re.I)
 _DELIVERED_SEVERAL_RE = re.compile(r"The\s+following\s+Judgments?\s+(?:of\s+the\s+Court\s+)?were\s+delivered", re.I)
 _DISSENT_ANY_RE = re.compile(
     r"\bI\s+(?:regret|am\s+unable|find\s+myself\s+unable|have\s+not\s+been\s+able|am\s+not\s+able)\s+to\s+(?:agree|concur|share|subscribe|persuade\s+myself|accept)"
-    r"|\b(?:respectful\s+)?inability\s+to\s+(?:concur|agree)|\bI\s+am\s+differing\b|\bdiffering\s+with\s+the\s+views?|\bI\s+(?:respectfully\s+)?(?:disagree|differ)\b"
+    r"|\b(?:respectful\s+)?inability\s+to\s+(?:concur|agree)|\bI\s+am\s+differing\b|\bdiffering\s+with\s+the\s+views?|\bI\s+(?:respectfully\s+)?(?:disagree|differ)\b|\b(?:With\s+(?:great|due|the\s+greatest)\s+respect,?\s+)?I\s+(?:cannot|am\s+unable\s+to)\s+agree\s+that"
     r"|\b(?:my|this)\s+dissent(?:ing)?\b|\bI\s+dissent\b|\bdissenting\s+(?:opinion|judgment|note|view)|\bcannot\s+(?:agree|concur)\s+with\s+(?:my|the\s+majority|the\s+view|the\s+conclusion)"
     r"|\bI\s+(?:do\s+not|cannot)\s+(?:agree|concur|subscribe)\s+(?:with|to)\s+(?:the\s+)?(?:view|opinion|conclusion|reasoning|judgment)"
     r"|\bunable\s+to\s+(?:agree|concur|persuade\s+myself\s+to\s+agree)\s+with\s+(?:my|the)\s+(?:learned|esteemed|noble|majority|view)", re.I)
 _CONCUR_ANY_RE = re.compile(
-    r"\bI\s+(?:entirely\s+|fully\s+|respectfully\s+|wholly\s+)?(?:agree|concur)\b|\bI\s+have\s+had\s+the\s+(?:advantage|benefit|privilege|opportunity)\s+of\s+(?:reading|going\s+through|perusing)"
+    r"\bI\s+(?:entirely\s+|fully\s+|respectfully\s+|wholly\s+)?(?:agree|concur)\b|\bI\s+have\s+had\s+the\s+(?:advantage|benefit|privilege|opportunity)(?:\s+and\s+\w+)?\s+of\s+(?:reading|going\s+through|perusing)"
     r"|\bwhile\s+(?:I\s+)?(?:agreeing|concurring)|\bconcurring\s+(?:opinion|judgment)|\bI\s+(?:would|wish\s+to)\s+(?:add|supplement|say\s+a\s+few\s+words)"
     r"|\bin\s+agreement\s+with\s+(?:my|the)\s+(?:learned|esteemed|noble)", re.I)
 _SPLIT_RE = re.compile(
@@ -64,58 +85,153 @@ def _disposal_direction(seg):
     return "allow" if (a and (not d or a[-1] > d[-1])) else "dismiss"
 
 
+def same_judge(a, b):
+    """C12 fuzzy judge-name equality plus a surname check robust to OCR splits ('S.R. P ANDIAN' / 'S. RATNAVEL PANDIAN')."""
+    if c12._same_judge(a, b):
+        return True
+    la = re.sub(r"[^A-Z]", "", (a or "").upper())
+    lb = re.sub(r"[^A-Z]", "", (b or "").upper())
+    if len(la) < 5 or len(lb) < 5:
+        return False
+    return la[-6:] == lb[-6:]
+
+
+def _header_runs(header_judges, start, end):
+    """Merged runs of SCR running-header judge names: [first_pos, last_pos, name, count]."""
+    runs = []
+    for pos, name in header_judges:
+        if pos >= end or pos < start:
+            continue
+        if runs and same_judge(runs[-1][2], name):
+            runs[-1][1] = pos
+            runs[-1][3] += 1
+        else:
+            runs.append([pos, pos, name, 1])
+    # absorb one-off OCR variants sandwiched inside a run of the same judge
+    merged = []
+    for r in runs:
+        if merged and same_judge(merged[-1][2], r[2]):
+            merged[-1][1] = r[1]
+            merged[-1][3] += r[3]
+        else:
+            merged.append(list(r))
+    return merged
+
+
+def _window_cue(rx, seg, w=4000):
+    """A cue in the opening or closing window of an opinion (not in the middle, where judges discuss other views)."""
+    return rx.search(seg[:w]) or rx.search(seg[-w:])
+
+
 def find_opinions(text, mt, start, end, header_judges, page_starts):
-    """Opinion segmentation. Returns a list of dicts:
+    """Opinion segmentation. Returns (opinions, body_start). Each opinion:
     {start, body, end, author, method, role, role_basis, opinion_id}. Roles:
       sole | lead_majority | lead | concurring | dissent | split_opinion | court_order | separate
     """
+    def page_start_before(pos, back=1):
+        prev = [p for p in page_starts if p <= pos]
+        if not prev:
+            return pos
+        return prev[-1 - back] if len(prev) > back else prev[0]
+
+    # body end correction: C12 cuts the body at the first disposal line in the last 40%; in multi-opinion reports a
+    # later opinion (often the dissent) follows it. A sustained header run of another judge after `end` extends it.
+    late = [r for r in _header_runs(header_judges, end, len(mt)) if r[0] >= end and r[3] >= 3]
+    if late:
+        new_end = len(mt)
+        for rx in c12._END_RES[:2]:
+            m = rx.search(mt, late[-1][1])
+            if m:
+                new_end = min(new_end, m.start())
+        end = new_end
+    # same correction without running headers (older SCR): an author line with a concurrence/dissent cue after `end`
+    for rx in (c12._AUTHOR_LINE_RE, c12._AUTHOR_INLINE_RE, _AUTHOR_DASH_RE):
+        for m in rx.finditer(mt, end, len(mt)):
+            name = m.group(1).strip()
+            if c12._NOT_NAME.match(name) or len(norm_alnum(name)) < 3 or len(mt[m.start():m.end()].strip()) > 60:
+                continue
+            after = mt[m.end():m.end() + 1500]
+            if _DISSENT_ANY_RE.search(after) or _CONCUR_ANY_RE.search(after) or re.search(r"\bI\s+cannot\s+agree\b", after):
+                new_end = len(mt)
+                for rx2 in c12._END_RES:
+                    m2 = rx2.search(mt, m.end() + 3000)
+                    if m2:
+                        new_end = min(new_end, m2.start())
+                end = max(end, new_end)
+                break
+    runs = [r for r in _header_runs(header_judges, 0, end) if r[3] >= 2 and r[0] >= start]
+    # body start correction: a sustained header-judge run before the detected body start means the body began earlier
+    early = [r for r in _header_runs(header_judges, 0, start) if r[3] >= 3]
+    if early:
+        start = max(0, page_start_before(early[0][0], 1))
+        runs = [r for r in _header_runs(header_judges, start, end) if r[3] >= 2]
     cands = []
     for m in _ESCR_AUTHOR_RE.finditer(mt, start, end):
         name = m.group(1).strip()
         if c12._NOT_NAME.match(name) or len(norm_alnum(name)) < 3:
             continue
         cands.append({"start": m.start(), "body": m.end(), "author": c12._clean_name(name), "method": "ESCR_JUDGMENT_AUTHOR", "strong": True, "note": ""})
-    base = c12.find_opinions(mt, start, end, header_judges, page_starts)
-    for o in base:
-        if o["method"] in ("OPINION_NOT_IDENTIFIED",):
-            continue
-        cands.append({"start": o["start"] if o["method"] != "HEADER_JUDGE" else start, "body": o["body"], "author": o["author"],
-                      "method": "C12_" + o["method"], "strong": o["method"].startswith("AUTHOR"), "note": o.get("note", "")})
-    # extra C13 rule: a line-format author ("NAME, J.") followed within 600 chars by a first-person / concurrence /
-    # dissent cue starts an opinion even when C12 required a signature before it.
     for m in c12._AUTHOR_LINE_RE.finditer(mt, start, end):
         name = m.group(1).strip()
         linetxt = mt[m.start():m.end()]
-        if c12._NOT_NAME.match(name) or len(norm_alnum(name)) < 3 or len(linetxt.strip()) > 60 or "[" in linetxt or ".." in linetxt:
+        if c12._NOT_NAME.match(name) or len(norm_alnum(name)) < 3 or len(linetxt.strip()) > 60 or "[" in linetxt or ".." in linetxt or "…" in linetxt:
             continue
-        after = mt[m.end():m.end() + 1500]
-        if _CONCUR_ANY_RE.search(after) or _DISSENT_ANY_RE.search(after) or re.search(r"\bI\s+(?:have|am|would|wish|think|propose)\b", after[:600]):
-            cands.append({"start": m.start(), "body": m.end(), "author": c12._clean_name(name), "method": "C13_AUTHOR_LINE_FIRST_PERSON", "strong": True, "note": (m.group(3) or "")})
-    # inline SCR author with first-person continuation ("RUMA PAL, J. I have read the draft judgment ...")
-    for m in c12._AUTHOR_INLINE_RE.finditer(mt, start, end):
+        after = mt[m.end():m.end() + 3000]
+        before = mt[max(start, m.start() - 3000):m.start()]
+        first = m.start() - start < 6000
+        cue = _CONCUR_ANY_RE.search(after) or _DISSENT_ANY_RE.search(after) or re.search(r"\bI\s+(?:have|am|would|wish|think|propose|hold|find)\b", after[:1500])
+        sig = bool(c12._SIGNATURE_RE.search(before))
+        if first or cue or sig or m.group(3):
+            cands.append({"start": m.start(), "body": m.end(), "author": c12._clean_name(name), "method": "AUTHOR_LINE", "strong": bool(cue or first), "note": (m.group(3) or "")})
+    for m in list(c12._AUTHOR_INLINE_RE.finditer(mt, start, end)) + list(_AUTHOR_DASH_RE.finditer(mt, start, end)):
         name = m.group(1).strip()
         if c12._NOT_NAME.match(name) or len(norm_alnum(name)) < 3:
             continue
-        after = mt[m.end():m.end() + 1500]
-        if _CONCUR_ANY_RE.search(after) or _DISSENT_ANY_RE.search(after) or re.match(r"\s*I\s", after):
-            cands.append({"start": m.start(), "body": m.end(), "author": c12._clean_name(name), "method": "C13_AUTHOR_INLINE_FIRST_PERSON", "strong": True, "note": ""})
-    cands.sort(key=lambda c: (c["start"], not c["strong"]))
+        after = mt[m.end():m.end() + 3000]
+        scr_dash = bool(re.search(r"J\.[ \t]*[\-–—:]", mt[m.start():m.end()]))
+        first = m.start() - start < 6000
+        cue = _CONCUR_ANY_RE.search(after) or _DISSENT_ANY_RE.search(after) or re.match(r"\s*(?:\(?On\s+behalf|I\s)", after)
+        if first or cue or scr_dash:
+            cands.append({"start": m.start(), "body": m.end(), "author": c12._clean_name(name), "method": "AUTHOR_INLINE", "strong": True, "note": ""})
+    cands.sort(key=lambda c: c["start"])
     ops = []
     for c in cands:
-        if ops and (abs(c["start"] - ops[-1]["start"]) < 1500 or c12._same_judge(ops[-1]["author"], c["author"])):
-            # same opinion found by two methods: keep the stronger / earlier
-            if ops and c["strong"] and not ops[-1]["strong"] and abs(c["start"] - ops[-1]["start"]) < 9000 and c12._same_judge(ops[-1]["author"], c["author"]):
-                ops[-1].update(c)
+        if ops and (c["start"] - ops[-1]["body"] < 1500 or same_judge(ops[-1]["author"], c["author"])):
             continue
-        if any(c12._same_judge(o["author"], c["author"]) for o in ops) and not c["strong"]:
+        if ops and not c["strong"]:
+            continue
+        if not ops and c["start"] - start > max(6000, 0.25 * (end - start)) and not runs:
             continue
         ops.append(dict(c))
+    # header runs: every sustained run whose judge has no opinion starting near it starts one (approximate start)
+    for r in runs:
+        if any(same_judge(o["author"], r[2]) and o["start"] <= r[0] + 2000 and r[0] - o["start"] < max(60000, r[1] - r[0] + 60000) for o in ops):
+            continue
+        near = [c for c in cands if same_judge(c["author"], r[2]) and r[0] - 25000 <= c["start"] <= r[0]]
+        if near:
+            c = dict(near[0])
+            c["method"] += "+HEADER_RUN"
+        else:
+            ap = max(start, page_start_before(r[0], 1))
+            c = {"start": ap, "body": ap, "author": c12._clean_name(r[2]), "method": "HEADER_JUDGE_RUN_APPROX_START", "strong": False, "note": ""}
+        ops.append(c)
+    ops.sort(key=lambda o: o["start"])
+    ded = []
+    for o in ops:
+        if ded and (o["start"] - ded[-1]["start"] < 1500 or same_judge(ded[-1]["author"], o["author"])):
+            continue
+        ded.append(o)
+    ops = ded
     if not ops:
         author = header_judges[0][1] if header_judges else ""
-        ops = [{"start": start, "body": start, "author": author, "method": "HEADER_JUDGE" if author else "OPINION_NOT_IDENTIFIED", "strong": False, "note": ""}]
-    ops[0]["start"] = min(ops[0]["start"], start) if ops[0]["start"] - start < 6000 else ops[0]["start"]
-    if ops[0]["start"] > start:
-        ops[0]["start"] = start
+        ops = [{"start": start, "body": start, "author": c12._clean_name(author) if author else "",
+                "method": "HEADER_JUDGE" if author else "OPINION_NOT_IDENTIFIED", "strong": False, "note": ""}]
+    if ops[0]["start"] - start > 20000:
+        # long unattributed text before the first detected opinion: its own opinion (author from headers if any)
+        hn = [n for p, n in header_judges if start <= p < ops[0]["start"]]
+        ops.insert(0, {"start": start, "body": start, "author": c12._clean_name(hn[0]) if hn else "",
+                       "method": "TEXT_BEFORE_FIRST_AUTHOR_CUE", "strong": False, "note": ""})
+    ops[0]["start"] = start
     # closing order of the court after several opinions
     court_order = None
     if len(ops) >= 2:
@@ -138,10 +254,8 @@ def find_opinions(text, mt, start, end, header_judges, page_starts):
     if len(ops) == 1:
         ops[0]["role"], ops[0]["role_basis"] = "sole", "SINGLE_OPINION_DETECTED"
     else:
-        judicial = [o for o in ops if o["method"] not in ("CLOSING_ORDER_HEADING", "CLOSING_ORDER_MAJORITY_OR_SPLIT_CUE")]
-        dirs = {}
-        for o in judicial:
-            dirs[id(o)] = _disposal_direction(mt[o["body"]:o["end"]])
+        judicial = [o for o in ops if not o["method"].startswith("CLOSING_ORDER")]
+        dirs = {id(o): _disposal_direction(mt[o["body"]:o["end"]]) for o in judicial}
         lead_dir = dirs.get(id(judicial[0]), "")
         tail_text = mt[max(start, end - 12000):end]
         split = bool(_SPLIT_RE.search(tail_text)) and not _MAJORITY_ORDER_RE.search(tail_text)
@@ -151,33 +265,32 @@ def find_opinions(text, mt, start, end, header_judges, page_starts):
                 o["role"] = "court_order"
                 o["role_basis"] = "SPLIT_CUE_IN_ORDER" if split else "CLOSING_ORDER_AFTER_OPINIONS"
                 continue
-            dis = _DISSENT_ANY_RE.search(seg) or "dissent" in (o.get("note") or "").lower()
-            con = _CONCUR_ANY_RE.search(seg[:6000])
+            if len(judicial) == 1:
+                o["role"], o["role_basis"] = "sole", "SINGLE_OPINION_PLUS_CLOSING_ORDER"
+                continue
+            dis = _window_cue(_DISSENT_ANY_RE, seg)
+            con = _window_cue(_CONCUR_ANY_RE, seg)
             if split and len(judicial) == 2:
                 o["role"], o["role_basis"] = "split_opinion", "TWO_OPINIONS_WITH_SPLIT_OR_REFERENCE_CUE"
             elif k == 0:
-                o["role"] = "lead"
-                o["role_basis"] = "FIRST_OPINION"
-            elif dis:
-                o["role"], o["role_basis"] = "dissent", "DISSENT_CUE:" + squash(dis.group(0), 60) if hasattr(dis, "group") else "DISSENT_NOTE"
+                o["role"], o["role_basis"] = "lead", "FIRST_OPINION"
+            elif dis or "dissent" in (o.get("note") or "").lower():
+                o["role"], o["role_basis"] = "dissent", ("DISSENT_CUE:" + squash(dis.group(0), 60)) if dis else "DISSENT_NOTE"
             elif lead_dir and dirs.get(id(o)) and dirs[id(o)] != lead_dir:
                 o["role"], o["role_basis"] = "dissent", "DISPOSAL_OPPOSES_FIRST_OPINION(%s vs %s)" % (dirs[id(o)], lead_dir)
             elif con:
                 o["role"], o["role_basis"] = "concurring", "CONCUR_CUE:" + squash(con.group(0), 60)
             else:
                 o["role"], o["role_basis"] = "separate", "LATER_OPINION_NO_CUE"
-        # the first opinion is the majority when no later opinion dissents or every later one concurs
         if ops[0]["role"] == "lead":
-            later = [o for o in ops[1:] if o["role"] != "court_order"]
+            later = [o for o in judicial[1:]]
             if later and all(o["role"] == "concurring" for o in later):
                 ops[0]["role"], ops[0]["role_basis"] = "lead_majority", "ALL_LATER_OPINIONS_CONCUR"
-            elif len(later) == 1 and later[0]["role"] == "dissent" and len(judicial) >= 2:
-                # 3+ judge bench with one dissent: the first opinion speaks for the majority if it names more than one judge
-                ops[0]["role_basis"] = "FIRST_OPINION_ONE_LATER_DISSENT"
-                ops[0]["role"] = "lead_majority"
+            elif len(judicial) == 2 and later[0]["role"] == "dissent":
+                ops[0]["role"], ops[0]["role_basis"] = "lead_majority", "TWO_OPINIONS_SECOND_DISSENTS"
     for i, o in enumerate(ops):
         o["opinion_id"] = "OP%d" % (i + 1)
-    return ops
+    return ops, start, end
 
 
 COURT_ROLES = ("sole", "lead_majority", "lead", "court_order", "concurring")
@@ -285,8 +398,9 @@ def segment(text, meta):
     pidx = c12.page_index(text)
     page_starts = [p for p, _ in pidx]
     mt, header_judges = c12.noise_mask(text)
+    header_judges = header_judges_c13(text, mt, header_judges)
     start, end, start_method, headnote = c12.find_body(text, mt, court)
-    opinions = find_opinions(text, mt, start, end, header_judges, page_starts)
+    opinions, start, end = find_opinions(text, mt, start, end, header_judges, page_starts)
     c12ops = [{"start": o["start"], "end": o["end"]} for o in opinions]
     paras = c12.find_paragraphs(mt, c12ops)
     para_starts = [p[0] for p in paras]
