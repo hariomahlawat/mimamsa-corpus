@@ -1,0 +1,11 @@
+time_utc,tool,purpose,url_or_target,host,result,note
+2026-11-25T10:05Z (approx.),openssl s_client,TLS handshake (chain inspection) x2,egazette.gov.in:443,egazette.gov.in,leaf only; verify 21,no HTTP request
+2026-11-25T10:06Z (approx.),curl,AIA fetch of issuer certificate,http://yr1.i.lencr.org/,yr1.i.lencr.org,200 application/pkix-cert 1247 bytes,public CA certificate; authenticity via signature chain
+2026-11-25T10:06Z (approx.),curl,AIA fetch over HTTPS (attempt),https://yr1.i.lencr.org/,yr1.i.lencr.org,TLS alert internal error,no data
+2026-11-25T10:06Z (approx.),curl,AIA fetch of issuer certificate,http://yr.i.lencr.org/,yr.i.lencr.org,200 application/pkix-cert 1528 bytes,public CA certificate; authenticity via signature chain
+2026-11-25T10:07Z (approx.),curl --cacert proxy bundle + intermediates,robots.txt,https://egazette.gov.in/robots.txt,egazette.gov.in,404 (1245 bytes),fix test; no From header
+2026-11-25T10:07:51Z,python httpx (partial chain on),robots.txt,https://egazette.gov.in/robots.txt,egazette.gov.in,404,fix test
+2026-11-25T10:07:52Z,python httpx (default bundle),robots.txt,https://egazette.gov.in/robots.txt,egazette.gov.in,CERTIFICATE_VERIFY_FAILED,reproduces C12 failure
+2026-11-25T10:08:00Z,python httpx (strict; both intermediates),robots.txt,https://egazette.gov.in/robots.txt,egazette.gov.in,404,fix test
+2026-11-25T10:08:02Z,python httpx (strict; YR1 only),robots.txt,https://egazette.gov.in/robots.txt,egazette.gov.in,CERTIFICATE_VERIFY_FAILED (unable to get issuer certificate),shows both certificates are needed
+2026-11-25T10:09Z-10:40Z,openssl s_client (allowlist_probe.py tls_chain),TLS handshakes only,79 hosts in PROBE_RESULTS.csv,various,see PROBE_RESULTS.csv tls_openssl_strict,run twice (second run with -verify_return_error removed); no HTTP request
