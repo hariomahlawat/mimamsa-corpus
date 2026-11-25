@@ -1,0 +1,25 @@
+You can invoke the tool using the following command: dotnet-CycloneDX
+Tool 'cyclonedx' (version '5.5.0') was successfully installed.
+You must install .NET to run this application.
+
+App: /tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/docs/architecture/poc/data/p7/.tools/dotnet-CycloneDX
+Architecture: x64
+App host version: 10.0.15
+.NET location: Not found
+
+The following locations were searched:
+  Application directory:
+    /tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/docs/architecture/poc/data/p7/.tools/.store/cyclonedx/5.5.0/cyclonedx/5.5.0/tools/net9.0/any/
+  Environment variable:
+    DOTNET_ROOT_X64 = <not set>
+    DOTNET_ROOT = <not set>
+  Registered location:
+    /etc/dotnet/install_location_x64 = <not set>
+  Default location:
+    /usr/share/dotnet
+
+Learn more:
+https://aka.ms/dotnet/app-launch-failed
+
+Download the .NET runtime:
+https://aka.ms/dotnet-core-applaunch?missing_runtime=true&arch=x64&rid=linux-x64&os=ubuntu.24.04&apphost_version=10.0.15

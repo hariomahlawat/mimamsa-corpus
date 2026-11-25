@@ -1,0 +1,127 @@
+{
+ "autocannon": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/tools/loadgen/node_modules/.bin/autocannon",
+ "duration": 10,
+ "warmup": 3,
+ "concurrency": [
+  1,
+  16
+ ],
+ "endpoints": {
+  "search": "/api/search?q=disability%20pension%20attributable%20to%20military%20service&limit=10",
+  "metadata": "/api/documents/act-army-1950",
+  "pdf_87KB": "/api/documents/notif-aft-jabalpur/pdf"
+ },
+ "servers": [
+  {
+   "name": "aspnet-kestrel",
+   "port": 5081,
+   "cwd": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/bpoc_work/aspnet_pub",
+   "cmd": [
+    "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/tools/dotnet/dotnet",
+    "MimamsaPocApi.dll"
+   ],
+   "env": {
+    "ASPNETCORE_URLS": "http://127.0.0.1:5081",
+    "Mimamsa__PdfRoot": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/bpoc_work/pdfstore",
+    "Mimamsa__SeedFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/bpoc_work/bench_seed.json",
+    "Mimamsa__VaultRoot": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/bpoc_work/bench_vault",
+    "Mimamsa__Test__Enabled": "true",
+    "Mimamsa__Test__ResetLedger": "true"
+   },
+   "extra_endpoints": {
+    "protected_range_64KiB": {
+     "path": "/api/v2/documents/doc-bench/copies/a8f0b33fa4ac15cf2d014aab3289766a6f73f362b7c1acaa525293357a925b6d/range",
+     "headers": [
+      "Authorization=Bearer tok-alice",
+      "Range=bytes=0-64511"
+     ]
+    }
+   }
+  },
+  {
+   "name": "django-uvicorn-4w",
+   "port": 5082,
+   "cwd": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p1_hosting/django",
+   "cmd": [
+    "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/venvs/bpoc/bin/uvicorn",
+    "mimamsa_poc.asgi:application",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "5082",
+    "--workers",
+    "4",
+    "--no-access-log",
+    "--log-level",
+    "warning",
+    "--loop",
+    "uvloop",
+    "--http",
+    "httptools"
+   ],
+   "env": {
+    "MIMAMSA_PDF_ROOT": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/bpoc_work/pdfstore"
+   }
+  },
+  {
+   "name": "django-hypercorn-4w",
+   "port": 5083,
+   "cwd": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p1_hosting/django",
+   "cmd": [
+    "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/venvs/bpoc/bin/hypercorn",
+    "mimamsa_poc.asgi:application",
+    "--bind",
+    "127.0.0.1:5083",
+    "--workers",
+    "4",
+    "--log-level",
+    "warning"
+   ],
+   "env": {
+    "MIMAMSA_PDF_ROOT": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/bpoc_work/pdfstore"
+   }
+  },
+  {
+   "name": "django-uvicorn-1w",
+   "port": 5084,
+   "cwd": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p1_hosting/django",
+   "cmd": [
+    "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/venvs/bpoc/bin/uvicorn",
+    "mimamsa_poc.asgi:application",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "5084",
+    "--workers",
+    "1",
+    "--no-access-log",
+    "--log-level",
+    "warning",
+    "--loop",
+    "uvloop",
+    "--http",
+    "httptools"
+   ],
+   "env": {
+    "MIMAMSA_PDF_ROOT": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/bpoc_work/pdfstore"
+   }
+  },
+  {
+   "name": "django-waitress-wsgi-16t",
+   "port": 5085,
+   "cwd": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p1_hosting/django",
+   "cmd": [
+    "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/venvs/bpoc/bin/waitress-serve",
+    "--listen=127.0.0.1:5085",
+    "--threads=16",
+    "mimamsa_poc.wsgi:application"
+   ],
+   "env": {
+    "MIMAMSA_PDF_ROOT": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/bpoc_work/pdfstore"
+   }
+  }
+ ],
+ "runs": 3,
+ "server_cpus": "0-2",
+ "loadgen_cpus": "3"
+}

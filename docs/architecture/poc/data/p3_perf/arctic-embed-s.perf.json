@@ -1,0 +1,27 @@
+{
+ "model": "arctic-embed-s",
+ "int8": false,
+ "loadavg_start": [
+  11.4853515625,
+  13.640625,
+  14.18896484375
+ ],
+ "loadavg_end": [
+  11.04736328125,
+  13.185546875,
+  14.00341796875
+ ],
+ "threads": 4,
+ "max_len": 256,
+ "n_chunks": 128,
+ "dim": 384,
+ "load_s": 0.84,
+ "index_s": 52.3,
+ "chunks_per_s": 2.4,
+ "query_ms_p50": 98.22,
+ "query_ms_p95": 181.09,
+ "rss_mb_before": 46.7,
+ "rss_mb_after_load": 235.8,
+ "peak_rss_mb": 674.8,
+ "index_bytes_float32": 196608
+}

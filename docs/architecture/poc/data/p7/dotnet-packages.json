@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "parameters": "--include-transitive",
+  "projects": [
+    {
+      "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p1_hosting/aspnet/MimamsaPocApi.csproj",
+      "frameworks": [
+        {
+          "framework": "net10.0",
+          "topLevelPackages": [
+            {
+              "id": "Microsoft.Extensions.Hosting.WindowsServices",
+              "requestedVersion": "10.0.15",
+              "resolvedVersion": "10.0.15"
+            },
+            {
+              "id": "Npgsql",
+              "requestedVersion": "10.0.4",
+              "resolvedVersion": "10.0.4"
+            }
+          ],
+          "transitivePackages": [
+            {
+              "id": "System.ServiceProcess.ServiceController",
+              "resolvedVersion": "10.0.15"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
