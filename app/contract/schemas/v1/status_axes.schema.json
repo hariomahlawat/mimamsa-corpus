@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/v1/status_axes.schema.json",
+  "title": "Separate status axes",
+  "description": "Seven independent axes. A value on one axis never sets another (Architecture section 6, Document Studio 3, Ingestion 4). There is deliberately no single 'verified' field. Every axis value carries its basis.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_integrity",
+    "source_authenticity",
+    "evidence_fidelity",
+    "legal_applicability",
+    "legal_approval",
+    "publication",
+    "dependency_freshness"
+  ],
+  "properties": {
+    "source_integrity": {
+      "description": "Are these the exact bytes we claim? BYTE_VERIFIED = re-hashed against an independently held manifest at a pinned revision.",
+      "$ref": "#/$defs/axis_value",
+      "properties": {"value": {"enum": ["BYTE_VERIFIED", "DECLARED_HASH_ONLY", "NOT_CHECKED", "MISMATCH", "TRUNCATED_AT_SOURCE"]}}
+    },
+    "source_authenticity": {
+      "description": "Is the copy what it purports to be (issuer, identity, fidelity)? Mirrors SOURCE_AUTHORITY_POLICY v1; never raised by Admin publication.",
+      "$ref": "#/$defs/axis_value",
+      "properties": {
+        "value": {"enum": ["UNKNOWN", "PROVISIONAL", "IDENTITY_CONFIRMED", "DISPUTED"]},
+        "policy_v1": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["document_authority", "carrier_provenance", "copy_fidelity", "amendment_chain_status"],
+          "properties": {
+            "document_authority": {"enum": ["ENACTED_OR_NOTIFIED_PRIMARY", "OFFICIAL_JUDICIAL_DECISION", "GOVERNMENT_COMPILATION", "GOVERNMENT_ISSUED_MANUAL", "UNVERIFIED_MANUAL", "THIRD_PARTY_COMMENTARY", "UNKNOWN"]},
+            "carrier_provenance": {"enum": ["ISSUING_AUTHORITY", "GOVERNMENT_HOSTED_COPY", "THIRD_PARTY_ARCHIVAL_FACSIMILE", "USER_SUPPLIED", "THIRD_PARTY_TRANSCRIPTION", "UNKNOWN"]},
+            "copy_fidelity": {"enum": ["NOT_CHECKED", "HASH_ONLY", "PAGE_IMAGE_CHECKED", "CUSTODIAN_AUTHENTICATED"]},
+            "amendment_chain_status": {"enum": ["NOT_CHECKED", "PARTIAL", "CHECKED_FOR_RELEVANT_PERIOD", "NOT_APPLICABLE"]},
+            "instrument_identity": {"type": ["string", "null"], "maxLength": 500},
+            "authority_rationale": {"type": ["string", "null"], "maxLength": 2000}
+          }
+        }
+      }
+    },
+    "evidence_fidelity": {
+      "description": "Has the extracted text, field or candidate been checked against the source page?",
+      "$ref": "#/$defs/axis_value",
+      "properties": {"value": {"enum": ["AUTOMATED_CANDIDATE_NOT_VERIFIED", "DOCUMENTARY_CHECKED", "FIDELITY_VERIFIED", "INCORRECT"]}}
+    },
+    "legal_applicability": {
+      "description": "Temporal and scope applicability. NOT_ESTABLISHED is the default; nothing in Cycle 13 raises it without a recorded decision.",
+      "$ref": "#/$defs/axis_value",
+      "properties": {"value": {"enum": ["NOT_ESTABLISHED", "UNRESOLVED", "PARTIAL_CHAIN", "EVIDENCED", "CONFLICTING", "NOT_APPLICABLE"]}}
+    },
+    "legal_approval": {
+      "description": "Document Studio 3.3 tiers. While AUTH-LEDGER is at version 0 and no Legal Reviewer is appointed, every release record must be T0_RESEARCH_ONLY (enforced by the validator, rule LEDGER_V0_NO_APPROVAL).",
+      "$ref": "#/$defs/axis_value",
+      "properties": {"value": {"enum": ["T0_RESEARCH_ONLY", "APPROVAL_RECORDED_UNCONFIRMED", "T1_LEGAL_ADVISER_REVIEWED", "T2_FORMAL_JAG_VALIDATED", "REVOKED"]}}
+    },
+    "publication": {
+      "description": "Distribution inside the app. Publication is never legal approval. EXCLUDED_RESTRICTED marks an item barred by the restricted-material register; such items must not appear in a release bundle at all.",
+      "$ref": "#/$defs/axis_value",
+      "properties": {"value": {"enum": ["STAGED", "PROCESSING", "REVIEW_REQUIRED", "REJECTED", "FAILED", "PUBLISHED", "WITHDRAWN", "EXCLUDED_RESTRICTED"]}}
+    },
+    "dependency_freshness": {
+      "description": "Whether downstream items built on this record are current for their checked scope.",
+      "$ref": "#/$defs/axis_value",
+      "properties": {"value": {"enum": ["NOT_EVALUATED", "CURRENT_FOR_CHECKED_SCOPE", "REVALIDATION_REQUIRED", "BLOCKED"]}}
+    }
+  },
+  "$defs": {
+    "axis_value": {
+      "type": "object",
+      "required": ["value", "basis"],
+      "properties": {
+        "value": {"type": "string"},
+        "basis": {"description": "Why this value: tool, rule or review record. Never empty.", "type": "string", "minLength": 3, "maxLength": 2000},
+        "recorded_at": {"type": ["string", "null"], "format": "date-time"},
+        "evidence_ref": {"description": "Repository path, review id or approval id supporting the value.", "type": ["string", "null"], "maxLength": 500},
+        "approval_ref": {"description": "Approval record id. Required by rule for any legal_approval above T0.", "type": ["string", "null"], "maxLength": 200},
+        "policy_v1": {}
+      },
+      "additionalProperties": false
+    }
+  }
+}

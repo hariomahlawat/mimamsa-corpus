@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/v1/common.schema.json",
+  "title": "Mimamsa data interchange contract v1: shared definitions",
+  "description": "Reusable definitions. The .invalid host is reserved and never resolvable: every schema is loaded from local files and the validator performs no network retrieval.",
+  "$defs": {
+    "contract_version": {
+      "description": "Contract version this record was written against (semver). Major version 1 for this schema set.",
+      "type": "string",
+      "pattern": "^1\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$"
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(-[0-9A-Za-z.-]+)?$"
+    },
+    "sha256": {
+      "description": "Lower-case hex SHA-256 of exact bytes.",
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "git_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{7,40}$"
+    },
+    "hf_revision": {
+      "description": "Full 40-character Hugging Face commit id. Short ids are not accepted for pinning.",
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "doc_id": {
+      "description": "Stable readable identifier as used in the corpus data/meta records (lower case, digits, dot, underscore, hyphen). Section-level records append #s<section>.",
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{0,159}(#[a-z0-9._()-]{1,64})?$"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "datetime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "relative_path": {
+      "description": "POSIX relative path inside a bundle or repository. No absolute paths, no parent traversal, no backslashes, no drive letters.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "^(?![/\\\\])(?![A-Za-z]:)(?!.*(^|/)\\.\\.(/|$))[^\\\\\\x00-\\x1f]+$"
+    },
+    "vault_path": {
+      "description": "Content-addressed vault location: vault/sha256/<first two hex>/<sha256>.",
+      "type": "string",
+      "pattern": "^vault/sha256/[0-9a-f]{2}/[0-9a-f]{64}$"
+    },
+    "page_anchor": {
+      "description": "Pinpoint into a source copy. Page is 1-based and always required; character offsets refer to the derived text of that page in the named pipeline version; paragraph labels only where the source prints numbered paragraphs.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_copy_sha256", "page"],
+      "properties": {
+        "source_copy_sha256": {"$ref": "#/$defs/sha256"},
+        "page": {"type": "integer", "minimum": 1},
+        "passage_id": {"type": ["string", "null"], "pattern": "^p[0-9]{1,5}-[0-9]{1,5}$"},
+        "char_start": {"type": ["integer", "null"], "minimum": 0},
+        "char_end": {"type": ["integer", "null"], "minimum": 0},
+        "paragraph_label": {"type": ["string", "null"], "maxLength": 32},
+        "text_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "pipeline_version": {"type": ["string", "null"], "maxLength": 64},
+        "quote": {"type": ["string", "null"], "maxLength": 2000}
+      }
+    },
+    "field_origin": {
+      "description": "How a metadata field value was obtained. llm values must be shown as LLM-derived.",
+      "type": "string",
+      "enum": ["crawler", "rule", "llm", "human", "release_import", "admin_entered", "unknown"]
+    },
+    "candidate_status": {
+      "description": "Verification state of any automated output. Cycle 13 releases may carry only AUTOMATED_CANDIDATE_NOT_VERIFIED or DOCUMENTARY_CHECKED (the latter only with a review reference).",
+      "type": "string",
+      "enum": ["AUTOMATED_CANDIDATE_NOT_VERIFIED", "DOCUMENTARY_CHECKED", "REJECTED_ON_REVIEW"]
+    }
+  }
+}

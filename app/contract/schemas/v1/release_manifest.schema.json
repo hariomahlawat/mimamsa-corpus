@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/v1/release_manifest.schema.json",
+  "title": "Release bundle manifest (RELEASE.json)",
+  "description": "Describes one signed, checksummed release bundle that the offline application imports into a new release generation. SHA256SUMS lists every file in the bundle except SHA256SUMS and its signature; the detached signature covers the exact bytes of SHA256SUMS, so RELEASE.json is covered transitively.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version", "record_kind", "release_id", "created_at", "pinned", "schema_versions",
+    "compatibility", "auth_ledger_version", "restricted_material", "checksums", "signature",
+    "files", "migrations", "rollback", "changes_file", "candidate_banner"
+  ],
+  "properties": {
+    "contract_version": {"$ref": "common.schema.json#/$defs/contract_version"},
+    "record_kind": {"const": "release_manifest"},
+    "release_id": {"type": "string", "pattern": "^R[0-9]{2,3}-[a-z0-9-]{1,40}-[0-9]{8}-[0-9a-f]{8}$"},
+    "created_at": {"type": "string", "format": "date-time"},
+    "pinned": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hf_repo", "hf_revision", "tools_commit", "artefact_commits"],
+      "properties": {
+        "hf_repo": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"},
+        "hf_revision": {"$ref": "common.schema.json#/$defs/hf_revision"},
+        "tools_commit": {"$ref": "common.schema.json#/$defs/git_commit"},
+        "artefact_commits": {"description": "Exact git commit of each Track A artefact included (IC-01).", "type": "object", "additionalProperties": {"$ref": "common.schema.json#/$defs/git_commit"}},
+        "model_bundles": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["model_id", "sha256", "licence"], "properties": {"model_id": {"type": "string", "maxLength": 200}, "sha256": {"$ref": "common.schema.json#/$defs/sha256"}, "licence": {"type": "string", "maxLength": 100}}}}
+      }
+    },
+    "schema_versions": {"type": "object", "required": ["contract"], "properties": {"contract": {"$ref": "common.schema.json#/$defs/semver"}}, "additionalProperties": {"$ref": "common.schema.json#/$defs/semver"}},
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_major", "min_app_version", "requires_migrations"],
+      "properties": {
+        "contract_major": {"const": 1},
+        "min_app_version": {"$ref": "common.schema.json#/$defs/semver"},
+        "max_app_version": {"anyOf": [{"$ref": "common.schema.json#/$defs/semver"}, {"type": "null"}]},
+        "requires_migrations": {"type": "boolean"},
+        "previous_release_id": {"type": ["string", "null"], "maxLength": 80},
+        "delta": {"description": "True when only changed files ship; the full manifest is still verified.", "type": "boolean"}
+      }
+    },
+    "auth_ledger_version": {"description": "AUTH-LEDGER version at build. 0 means no BIND and no legal approval exists, so every record must be T0_RESEARCH_ONLY.", "type": "integer", "minimum": 0},
+    "restricted_material": {
+      "description": "Which restricted-material register the build applied. The validator recomputes and compares.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["config_path", "config_sha256", "restriction_ids_applied"],
+      "properties": {
+        "config_path": {"const": "config/restricted_material.json"},
+        "config_sha256": {"$ref": "common.schema.json#/$defs/sha256"},
+        "restriction_ids_applied": {"type": "array", "items": {"type": "string", "pattern": "^RM-[0-9]{3}$"}, "uniqueItems": true}
+      }
+    },
+    "checksums": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "algorithm"],
+      "properties": {"file": {"const": "SHA256SUMS"}, "algorithm": {"const": "sha256"}}
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "signed_file", "signature_file", "key_id"],
+      "properties": {
+        "algorithm": {"enum": ["ed25519"]},
+        "signed_file": {"const": "SHA256SUMS"},
+        "signature_file": {"const": "SHA256SUMS.sig"},
+        "key_id": {"description": "Fingerprint (sha256 of the raw public key, hex) of the signing key. Production keys are owner-held; development keys are disposable and must be marked dev.", "type": "string", "pattern": "^(dev-)?[0-9a-f]{64}$"}
+      }
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256", "bytes", "kind"],
+        "properties": {
+          "path": {"$ref": "common.schema.json#/$defs/relative_path"},
+          "sha256": {"$ref": "common.schema.json#/$defs/sha256"},
+          "bytes": {"type": "integer", "minimum": 0},
+          "kind": {"enum": ["documents_jsonl", "derived_text_jsonl", "candidates_jsonl", "text", "original", "changes", "migration", "sbom", "report", "other"]}
+        }
+      }
+    },
+    "migrations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["migration_id", "from_contract", "to_contract", "path", "sha256", "reversible"],
+        "properties": {
+          "migration_id": {"type": "string", "pattern": "^M[0-9]{4}-[a-z0-9-]{1,60}$"},
+          "from_contract": {"$ref": "common.schema.json#/$defs/semver"},
+          "to_contract": {"$ref": "common.schema.json#/$defs/semver"},
+          "path": {"$ref": "common.schema.json#/$defs/relative_path"},
+          "sha256": {"$ref": "common.schema.json#/$defs/sha256"},
+          "reversible": {"type": "boolean"}
+        }
+      }
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["supported", "retain_generations"],
+      "properties": {
+        "supported": {"type": "boolean"},
+        "retain_generations": {"type": "integer", "minimum": 1},
+        "rollback_to_release_id": {"type": ["string", "null"], "maxLength": 80},
+        "notes": {"type": ["string", "null"], "maxLength": 2000}
+      }
+    },
+    "changes_file": {"description": "CHANGES.json: added, updated, newly superseded, withdrawn, status changed.", "const": "CHANGES.json"},
+    "candidate_banner": {
+      "description": "Drives the non-dismissable banner (B11). Must be true while auth_ledger_version is 0.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "text"],
+      "properties": {"required": {"type": "boolean"}, "text": {"type": "string", "minLength": 20, "maxLength": 500}}
+    }
+  }
+}

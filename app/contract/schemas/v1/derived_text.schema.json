@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/v1/derived_text.schema.json",
+  "title": "Derived text with page and passage anchors",
+  "description": "Text derived from one source copy by one pipeline version. Keyed by (source_copy_sha256, pipeline.version); disposable and rebuildable. The text file keeps [[page N]] markers. OCR text is for search, not for quotation: quoting_permitted is false wherever any page is OCR-derived.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "record_kind", "source_copy_sha256", "doc_id", "pipeline", "text_path", "text_sha256", "page_marker", "quoting_permitted", "pages", "passages", "evidence_fidelity"],
+  "properties": {
+    "contract_version": {"$ref": "common.schema.json#/$defs/contract_version"},
+    "record_kind": {"const": "derived_text"},
+    "source_copy_sha256": {"$ref": "common.schema.json#/$defs/sha256"},
+    "doc_id": {"$ref": "common.schema.json#/$defs/doc_id"},
+    "pipeline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": {"type": "string", "maxLength": 64},
+        "version": {"type": "string", "maxLength": 64},
+        "tools": {"type": "object", "additionalProperties": {"type": "string", "maxLength": 64}}
+      }
+    },
+    "text_path": {"$ref": "common.schema.json#/$defs/relative_path"},
+    "text_sha256": {"$ref": "common.schema.json#/$defs/sha256"},
+    "page_marker": {"const": "[[page N]]"},
+    "quoting_permitted": {"type": "boolean"},
+    "evidence_fidelity": {"enum": ["AUTOMATED_CANDIDATE_NOT_VERIFIED", "DOCUMENTARY_CHECKED"]},
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["page", "method", "char_count"],
+        "properties": {
+          "page": {"type": "integer", "minimum": 1},
+          "method": {"enum": ["pdf_text", "ocr", "html", "none"]},
+          "char_count": {"type": "integer", "minimum": 0},
+          "ocr_engine": {"type": ["string", "null"], "maxLength": 64},
+          "ocr_mean_confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+          "low_confidence": {"description": "Below the pipeline threshold: listed for human review, carries a warning in the UI.", "type": "boolean"},
+          "has_word_boxes": {"type": "boolean"},
+          "text_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "passages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["passage_id", "page", "char_start", "char_end", "text_sha256"],
+        "properties": {
+          "passage_id": {"type": "string", "pattern": "^p[0-9]{1,5}-[0-9]{1,5}$"},
+          "page": {"type": "integer", "minimum": 1},
+          "char_start": {"type": "integer", "minimum": 0},
+          "char_end": {"type": "integer", "minimum": 0},
+          "paragraph_label": {"type": ["string", "null"], "maxLength": 32},
+          "kind": {"enum": ["body", "heading", "footnote", "table", "cover", "other"]},
+          "text_sha256": {"$ref": "common.schema.json#/$defs/sha256"}
+        }
+      }
+    }
+  }
+}

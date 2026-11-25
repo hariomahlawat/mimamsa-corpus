@@ -1,0 +1,45 @@
+{
+ "contract_version": "1.0.0",
+ "record_kind": "candidate",
+ "candidate_id": "example:edge:0001",
+ "candidate_type": "graph_edge",
+ "source_doc_id": "example-synthetic-judgment-0001",
+ "anchors": [
+  {
+   "source_copy_sha256": "cb666b27d8c5aedf0f6afb9cec2ec985adf21204d47b8845afe0f8215b59898d",
+   "page": 2,
+   "passage_id": "p2-1",
+   "char_start": 10,
+   "char_end": 90,
+   "paragraph_label": "1",
+   "text_sha256": null,
+   "pipeline_version": "0.0.1",
+   "quote": null
+  }
+ ],
+ "extractor": {
+  "name": "example-extractor",
+  "version": "0.0.1",
+  "artefact_commit": "0000000",
+  "artefact_path": null,
+  "artefact_sha256": null
+ },
+ "status": "AUTOMATED_CANDIDATE_NOT_VERIFIED",
+ "review_ref": null,
+ "capability_restriction": "NONE_RECORDED",
+ "deferred_findings": [],
+ "evaluation_ref": null,
+ "payload": {
+  "relation": "CITES_JUDGMENT",
+  "source_node": "example-synthetic-judgment-0001",
+  "target": {
+   "resolved": false,
+   "node_id": null,
+   "raw_reference": "SYNTHETIC CITATION STRING"
+  },
+  "confidence": "extracted",
+  "has_legal_effect": false,
+  "effective_date": null,
+  "evidence_text": null
+ }
+}

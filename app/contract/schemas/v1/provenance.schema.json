@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/v1/provenance.schema.json",
+  "title": "Provenance",
+  "description": "Where the bytes came from and where they are preserved. Enough to re-download from Hugging Face at a pinned revision and re-verify the hash.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["acquisition_channel", "source_url", "retrieved_at", "hf"],
+  "properties": {
+    "acquisition_channel": {"enum": ["CRAWLER", "MANUAL_OWNER", "RELEASE_IMPORT", "ADMIN_UPLOAD"]},
+    "source_url": {"description": "Exact URL downloaded, or null for ADMIN_UPLOAD / owner-supplied copies.", "type": ["string", "null"], "maxLength": 2048},
+    "retrieved_at": {"type": ["string", "null"], "format": "date-time"},
+    "source_system": {"type": ["string", "null"], "maxLength": 64},
+    "source_record_id": {"type": ["string", "null"], "maxLength": 256},
+    "original_filename": {"type": ["string", "null"], "maxLength": 512},
+    "aliases": {
+      "description": "Further URLs that served identical bytes (deduplicated by sha256).",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_url"],
+        "properties": {
+          "source_url": {"type": "string", "maxLength": 2048},
+          "retrieved_at": {"type": ["string", "null"], "format": "date-time"}
+        }
+      }
+    },
+    "hf": {
+      "description": "Preservation location on the Hugging Face corpus master. Null only for local ADMIN_UPLOAD items not yet preserved upstream.",
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["repo", "revision", "path"],
+      "properties": {
+        "repo": {"type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"},
+        "revision": {"$ref": "common.schema.json#/$defs/hf_revision"},
+        "path": {"$ref": "common.schema.json#/$defs/relative_path"}
+      }
+    },
+    "git": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["commit", "path"],
+      "properties": {
+        "commit": {"$ref": "common.schema.json#/$defs/git_commit"},
+        "path": {"$ref": "common.schema.json#/$defs/relative_path"}
+      }
+    },
+    "acquisition_record_ref": {"description": "Repository path of the acquisition log row or audit record.", "type": ["string", "null"], "maxLength": 500},
+    "admin_submission_id": {"type": ["string", "null"], "maxLength": 64}
+  }
+}
