@@ -1,6 +1,6 @@
 # C13 Workstream A6: forms and procedural knowledge
 
-**Recorded:** 2026-11-25. **Tool:** `c13-a6-forms/1.0.0`. **Branch:** `claude/c13-a6-forms`.
+**Recorded:** 2026-11-25. **Tool:** `c13-a6-forms/1.1.0` (1.0.0 at 1b05490f; 1.1.0 remediates independent review `reviews/review_c13_a6_1b05490f.md`). **Branch:** `claude/c13-a6-forms`.
 **Status:** research only. Every row is `DISCOVERED_FROM_SOURCE_NOT_LEGALLY_APPROVED`; `legal_approval_state` is `NOT_APPROVED` for every form; `applicability_state` is `NOT_ESTABLISHED`. Nothing here is a legal determination, an approved template or a currency finding. The transcriptions are AI visual readings of page images and are **pending independent review**. WS-G R04 stays deferred, and the restriction on its capability stays in place, until that review confirms them (see "What R04 closure still needs").
 
 ## What was done
@@ -57,8 +57,8 @@
 
 | Item | Count |
 | --- | --- |
-| Page-image readings / distinct pages read | 63 / 46 |
-| Official transcription rows | 955 (9 with an illegible span, 31 incipit-only condition paragraphs; 17 illegible notes in all) |
+| Page-image readings (transcription + rule/coverage) / distinct pages | 74 (66 + 8) / 54 (46 transcribed) |
+| Official transcription rows | 956 (9 with an illegible span, 31 incipit-only condition paragraphs; 17 illegible notes in all) |
 | **R04 families (22)** | 21 transcribed in full from official page images; 1 amending text only (IAFD-905 para 9, `FF-AR54-APPIII-P1D-CHAR`); 0 not held |
 | R04 C12 field rows confirmed in the official transcription | 198 of 227 |
 | R04 differences | 29 C12/MML rows not found in the official transcription (14 of them from the amending-only CHAR family); 91 official rows not found in MML 2; 47 official rows that are variants of MML 2 wording |
@@ -73,6 +73,29 @@ Examples of differences the comparison found (these are for legal review, not co
 - The offence report prints "Names of Witnesses", "Punishment awarded" and 8 columns; MML 2 has "Name of witnesses", "Punishments" and a ninth column, "Findings".
 - Form B in the 1954 printing has no custody set-off paragraph; S.R.O. 17(E)/1993 inserts it.
 - The 1993 printing of summons (c) reads "IAFD-919C".
+
+## Independent review 1b05490f and remediation (1.1.0)
+
+The verdict was **accept with findings**. Text-only row accuracy was 99.42% (95% CI 98.53-99.78) over 693 of 955 rows, checked as a census plus a seeded sample. The review files are in `reviews/`. The reviewer's scripts are in `reviews/reviewer_scripts/`.
+
+The reviewer recommends a partial R04 closure: 21 families closed-verified, and IAFD-905 still deferred. `R04_FAMILY_STATUS.csv` column `r04_disposition` records this as a recommendation. The closure decision belongs to the coordinator. `CAPABILITY_RESTRICTIONS.csv` is unchanged.
+
+- **F01 (P2), fixed.** Supersession is now explicit:
+  - An official row supersedes only the C12 rows it contains (`supersedes_c12_field_ids`).
+  - A form whose official copy is complete supersedes the rest of its C12 rows through `SUPERSEDED_BY_FULL_OFFICIAL_TRANSCRIPTION`. Each such row is a recorded R04 difference.
+  - A form whose official copy is partial keeps its other C12 rows as `CARRIED_FROM_C12: MML_ONLY_UNVERIFIED`.
+  - IAFD-905: official para 9 supersedes C12 rows F13 and F14 only. The other 14 rows are carried as MML_ONLY_UNVERIFIED. IAFD-905 stays **R04_STILL_DEFERRED**, because only para 9 (S.R.O. 17(E)/1993 item 39(a)) is held in an official copy.
+  - The 8 statutory forms with no official copy are recorded as **OUTSIDE_R04**, with MML_ONLY_UNVERIFIED field lists.
+  - `C12_FIELD_DISPOSITION.csv` gives a disposition for each of the 541 C12 rows: 227 carried, 294 superseded by an official row, 20 superseded by a full official transcription.
+  - A test fails if any C12 row disappears without an explicit supersession.
+- **F02.** The blank in summons (b), 'Whereas a ____ court-martial', is now split out.
+- **F03.** The misprints on p.68 ('whcih', 'Reseve', 'Service or years') are restored as printed.
+- **F04.** The r.46 preamble rows of (B), (C) and (D) are now pinned to p.18.
+- **F05.** The transcription conventions are documented in SUMMARY `transcription_conventions`. The degraded-glyph normalisations the reviewer found are listed in `degraded_glyph_normalisations`. Embedded blanks were not itemised retrospectively.
+- **F06.** The 8 non-transcription page readings are added to `PAGE_IMAGE_LOG.csv` (`reading_kind`). The Navy Part II list now says that p.105 was read as an image (Forms 1-25) and p.106 from the text layer only (Forms 25-34).
+- **F08.** SUMMARY now refers to RM-001 by its restriction id only.
+- **F09.** Oracle case S1-05 now notes the orphan ANSWER line.
+- **F07.** Before the Document Studio 3.3 gate, a human must spot-check the transcriptions. This is still open.
 
 ## Limits (read before relying on anything here)
 

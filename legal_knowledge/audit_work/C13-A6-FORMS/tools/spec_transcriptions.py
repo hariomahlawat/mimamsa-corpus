@@ -88,7 +88,8 @@ add("FF-AR54-APPIII-P3B", "AR54-GAZ", 73, (0.07, 0.59, 0.95, 0.94),
     fields=[
         ("(b) In the case of a court-martial:", "heading"),
         ("To", "address"),
-        ("Whereas a court-martial has been ordered to assemble at", "blank"),
+        ("Whereas a", "blank"),
+        ("court-martial has been ordered to assemble at", "blank"),
         ("on the day of 19 , for the trial of", "blank"),
         ("of the regmient, I do hereby summon and require you A. B.", "blank"),
         ("to attend, as a witness the sitting of the said court at", "blank"),
@@ -885,7 +886,15 @@ APPI_F2_PAGES.append(("AR54-GAZ", 68, (0.07, 0.05, 0.95, 0.92), [
     ("I agree to extend my Army Service for the whole period of my enrolment instead of being transferred to the Reserve.", "statement"),
     ("Signature.", "signature"), ("Signed in my presence at this day of 19 .", "blank"), ("Signature of Commanding Officer.", "signature"),
     ("(2) For use when a person extends his Army Service for a limited period with liability to serve in the Reserve for the remainder of his period of enrolment.", "heading"),
-] + _ext * 5 + [
+] + _ext + [
+    ("I agree to extend my Army Service for years with liability to transfer to the Reserve until I have completed the total period of service for whcih I am liable under this enrolment.", "blank"),
+    ("Signature.", "signature"), ("Signed in my presence at this day of 19 .", "blank"), ("Signature of Commanding Officer.", "signature"),
+    ("I agree to extend my Army Service for years with liability to transfer to the Reseve until I have completed the total period of service for which I am liable under this enrolment.", "blank"),
+    ("Signature.", "signature"), ("Signed in my presence at this day of 19 .", "blank"), ("Signature of Commanding Officer.", "signature"),
+] + _ext + [
+    ("I agree to extend my Army Service or years with liability to transfer to the Reserve until I have completed the total period of service for which I am liable under this enrolment.", "blank"),
+    ("Signature.", "signature"), ("Signed in my presence at this day of 19 .", "blank"), ("Signature of Commanding Officer.", "signature"),
+] + [
     ("NOTE.—A person may extend his Army Service on this form as often as may be permitted until he is no longer liable to serve in the Reserve.", "note"),
 ]))
 APPI_F2_PAGES.append(("AR54-GAZ", 69, (0.07, 0.05, 0.95, 0.93), [
@@ -1274,3 +1283,26 @@ add("FF-NR65P4-S2-OATH", "NR65-P4-C7", 81, (0.12, 0.10, 0.90, 0.56), dpi=110,
         ("(Commanding Officer)", "signature"),
     ],
     notes="Retyped India Code copy (not a facsimile); 'IndiaCode' watermark not transcribed.")
+
+# ---------------------------------------------------------------- review 1b05490f F04: pinpoint of shared r.46 preamble
+# The r.46 preamble is printed on p.18 (above (A)); (B)-(D) are printed on p.19.
+# Re-pin the preamble row of (B), (C), (D) to p.18 as a first segment.
+for _e in T:
+    if _e["family"] in ("FF-AR54-R46B-INSTR", "FF-AR54-R46C-SHW", "FF-AR54-R46D-INTERP"):
+        assert _e["fields"][0] is _r46
+        _rest = _e["fields"][1:]
+        _e["continues"] = [("AR54-GAZ", 19, _e["bbox"], _rest)] + _e["continues"]
+        _e["page"], _e["bbox"], _e["fields"] = 18, (0.07, 0.59, 0.95, 0.69), [_r46]
+        _e["notes"] = ((_e["notes"] + " ") if _e["notes"] else "") + "r.46 preamble row pinned to p.18 (shared with (A)); form rows on p.19 (review F04)."
+
+# ---------------------------------------------------------------- review 1b05490f F05: transcription conventions
+CONVENTIONS = [
+    "Blanks: every dotted or open blank that stands alone or ends a line is a separate 'blank' row; blanks embedded inside a printed sentence (e.g. 'I ...... do solemnly declare', 'The Superintendent ..... of') are NOT itemised and the sentence is recorded as one row (applied as found by review F05; not retro-itemised).",
+    "Misprints: kept as printed (e.g. 'regmient', 'Prision', 'togethe', 'PRAT III', 'whcih', 'Reseve', 'Service or years').",
+    "Degraded glyphs: where the letter shapes are broken but the word is unambiguous from the remaining glyphs on the same image, the word is typed normally and listed in DEGRADED_GLYPH_NORMALISATIONS; where it is not unambiguous, it is written [illegible].",
+]
+DEGRADED_GLYPH_NORMALISATIONS = [
+    ("AR54-GAZ", 65, "FF-AR54-APPI-F1", "Instruction 3 'attacl cd to tl e sl cct roll' typed as 'attached to the sheet roll'"),
+    ("AR54-GAZ", 81, "FF-AR54-APPIV-P2-FE", "'warrant ol' typed 'warrant of'; 'transportat'on' typed 'transportation'"),
+    ("AR54-GAZ", 82, "FF-AR54-APPIV-P2-FF", "'r?quire an.l' typed 'require and'; 'y?u' typed 'you'"),
+]

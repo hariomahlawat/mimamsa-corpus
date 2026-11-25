@@ -99,3 +99,15 @@ ACQUISITION_REQUESTS = [
     ("A6-ACQ-15", "NAVY", "Amendments to Regulations for the Navy Part II after 1965 affecting Appendix I", "not searched; amendment state of the 34 forms unknown", "FF-NR65P2-F01..F34", "NOT_SEARCHED", "indiacode.nic.in / Naval HQ publications"),
     ("A6-ACQ-16", "ARMY", "Regulations for the Army 1987 / DSR forms and Army Orders and Instructions forms", "not held (C12)", "(none registered)", "NOT_HELD", "MoD publications (authorised channel only)"),
 ]
+
+# Page images read for purposes other than field transcription (review 1b05490f F06).
+OTHER_READINGS = [
+    ("AR54-GAZ", 58, 150, "arrangement of Appendices; end of rules (K. C. JAIN, Dy. Secy.)"),
+    ("AR-AMD-1965", 1, 150, "masthead No. 15, 10-04-1965"),
+    ("AR-AMD-1965", 2, 150, "S.R.O. 116 opening (27-03-1965)"),
+    ("AR-AMD-1965", 3, 150, "S.R.O. 116 r.2(b): Appendix I Form No. I amendments (VERSION_EVIDENCE)"),
+    ("AR-AMD-1993", 18, 150, "rules 170A, 170B, 179(5A) (RULE_READINGS)"),
+    ("DPPR53-C7", 6, 80, "confirms the copy ends at r.34; Schedules I-II not printed"),
+    ("NR65-P2-C7", 1, 80, "contents page; no access marking seen"),
+    ("NR65-P2-C7", 105, 100, "Appendix I list of prescribed forms, Forms 1-25 (Forms 25-34 on p.106 read from text layer only)"),
+]

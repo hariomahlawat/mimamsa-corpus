@@ -61,7 +61,7 @@ class Outputs(unittest.TestCase):
             self.assertTrue(r["copy_sha256"] and r["pdf_page"] and r["dpi"] and r["renderer"].startswith("pymupdf"))
             self.assertIn("render_pages.py", r["reproduce_with"])
             self.assertEqual(r["review_state"], "PENDING_INDEPENDENT_REVIEW")
-        fams = {r["form_family_id"] for r in log}
+        fams = {r["form_family_id"] for r in log if r["reading_kind"] == "FIELD_TRANSCRIPTION"}
         trans = {r["form_family_id"] for r in rows("OFFICIAL_TRANSCRIPTIONS.csv")}
         self.assertEqual(fams, trans)
 
@@ -105,6 +105,45 @@ class Outputs(unittest.TestCase):
         self.assertTrue(any(r["field_set_version"].startswith("CARRIED_FROM_C12") for r in ff))
         c12 = list(csv.DictReader(open(C12FR / "FORM_FIELDS.csv", encoding="utf-8")))
         self.assertEqual({r["verification_status"] for r in c12}, {VS})
+
+    def test_no_c12_field_row_disappears_without_explicit_supersession(self):
+        c12 = list(csv.DictReader(open(C12FR / "FORM_FIELDS.csv", encoding="utf-8")))
+        v2 = {r["field_id"]: r for r in rows("FORM_FIELDS_C13_v2.csv")}
+        disp = {r["c12_field_id"]: r for r in rows("C12_FIELD_DISPOSITION.csv")}
+        status = {r["form_family_id"]: r["official_status"] for r in rows("R04_FAMILY_STATUS.csv")}
+        for r in c12:
+            fid = r["field_id"]
+            if fid in v2:
+                self.assertTrue(v2[fid]["field_set_version"].startswith("CARRIED_FROM_C12"), fid)
+                continue
+            self.assertIn(fid, disp, f"{fid} dropped without a disposition")
+            d = disp[fid]
+            self.assertIn(d["disposition"], ("SUPERSEDED_BY_OFFICIAL_ROW", "SUPERSEDED_BY_FULL_OFFICIAL_TRANSCRIPTION"), fid)
+            if status.get(r["form_family_id"]) == "OFFICIAL_AMENDING_TEXT_ONLY":
+                # partial official copy: only row-level supersession is allowed
+                self.assertEqual(d["disposition"], "SUPERSEDED_BY_OFFICIAL_ROW", fid)
+            if d["disposition"] == "SUPERSEDED_BY_OFFICIAL_ROW":
+                for oid in d["official_field_ids"].split(";"):
+                    self.assertIn(oid, v2, fid)
+                    self.assertIn(fid, v2[oid]["supersedes_c12_field_ids"].split(";"), fid)
+                    self.assertTrue(v2[oid]["field_set_version"].startswith("OFFICIAL_PAGE_IMAGE_TRANSCRIPTION_C13"))
+            else:
+                first, last = d["official_field_ids"].split("..")
+                self.assertIn(first, v2)
+                self.assertIn(last, v2)
+        self.assertEqual(len(disp), len(c12))
+
+    def test_iafd905_partial_and_outside_r04_recorded(self):
+        st = {r["form_family_id"]: r for r in rows("R04_FAMILY_STATUS.csv")}
+        self.assertTrue(st["FF-AR54-APPIII-P1D-CHAR"]["r04_disposition"].startswith("R04_STILL_DEFERRED: only para 9"))
+        v2 = [r for r in rows("FORM_FIELDS_C13_v2.csv") if r["form_family_id"] == "FF-AR54-APPIII-P1D-CHAR"]
+        self.assertEqual(sum(1 for r in v2 if r["field_set_version"].startswith("CARRIED_FROM_C12: MML_ONLY_UNVERIFIED")), 14)
+        not_held = [r for r in st.values() if r["official_status"] == "OFFICIAL_COPY_NOT_HELD"]
+        self.assertEqual(len(not_held), 8)
+        for r in not_held:
+            self.assertTrue(r["r04_disposition"].startswith("OUTSIDE_R04: no official copy held"), r["form_family_id"])
+        closed = [r for r in st.values() if r["r04_disposition"].startswith("R04_CLOSURE_RECOMMENDED")]
+        self.assertEqual(len(closed), 21)
 
     def test_acquisition_requests_cover_restricted_air_force(self):
         acq = rows("ACQUISITION_REQUESTS_A6.csv")

@@ -1,13 +1,45 @@
 {
  "acquisition_requests": 16,
+ "c12_field_dispositions": {
+  "CARRIED_IN_V2": 227,
+  "SUPERSEDED_BY_FULL_OFFICIAL_TRANSCRIPTION": 20,
+  "SUPERSEDED_BY_OFFICIAL_ROW": 294
+ },
  "c12_inputs": {
   "FORM_DISCOVERY_REGISTER.csv": "581a7c7f363ef9c9fcc34f13a59575c1332b36002086174871f5de2ab48cf2f5",
   "FORM_FIELDS.csv": "2ce17181d629528e63af37f2ea175e26f805adb6260406a34325104b046ac03d",
   "SOURCE_COVERAGE.csv": "fa50c5fc256c366cfa3b238be2527123d3cf5f3acacb5d756ed16dde1c39df28",
   "SUMMARY.json": "30d0f018a9cbfcfd2559ec28f83811708fe57ad724d088266279dc36a0911920"
  },
- "distinct_pages_read": 46,
+ "degraded_glyph_normalisations": [
+  {
+   "family": "FF-AR54-APPI-F1",
+   "note": "Instruction 3 'attacl cd to tl e sl cct roll' typed as 'attached to the sheet roll'",
+   "page": 65,
+   "source": "AR54-GAZ"
+  },
+  {
+   "family": "FF-AR54-APPIV-P2-FE",
+   "note": "'warrant ol' typed 'warrant of'; 'transportat'on' typed 'transportation'",
+   "page": 81,
+   "source": "AR54-GAZ"
+  },
+  {
+   "family": "FF-AR54-APPIV-P2-FF",
+   "note": "'r?quire an.l' typed 'require and'; 'y?u' typed 'you'",
+   "page": 82,
+   "source": "AR54-GAZ"
+  }
+ ],
+ "distinct_pages_read": 54,
+ "distinct_pages_transcribed": 46,
  "illegible_notes": 17,
+ "independent_review": {
+  "findings_addressed": "F01 (P2), F02, F03, F04, F05 (documented), F06, F08, F09 (noted)",
+  "ref": "reviews/review_c13_a6_1b05490f.md",
+  "row_accuracy_text_only": "99.42% (95% CI 98.53-99.78) over 693/955 rows",
+  "verdict": "ACCEPT_WITH_FINDINGS"
+ },
  "method_limits": [
   "Transcriptions are AI visual readings of page images; an independent reviewer must confirm them before any status promotion.",
   "Long printed condition paragraphs of Appendix I forms are recorded as incipits (INCIPIT_ONLY) with every blank itemised; full wording remains on the page image.",
@@ -29,7 +61,7 @@
  },
  "official_rows_incipit_only": 31,
  "official_rows_with_illegible_span": 9,
- "official_transcription_rows": 955,
+ "official_transcription_rows": 956,
  "oracle": {
   "by_category": {
    "abstain": 6,
@@ -48,7 +80,8 @@
   "cases": 86,
   "families": 40
  },
- "page_image_readings": 63,
+ "page_image_readings": 74,
+ "page_image_readings_for_transcription": 66,
  "python": "3.13.18",
  "r04": {
   "c12_mml_field_rows": 227,
@@ -57,7 +90,7 @@
   "mml_field_rows_not_in_official": 29,
   "official_amending_text_only": 1,
   "official_not_held": 0,
-  "official_rows": 443,
+  "official_rows": 444,
   "official_rows_not_in_mml": 91,
   "official_rows_variant_vs_mml": 47,
   "official_rows_with_illegible_span": 9,
@@ -83,13 +116,8 @@
   "new_in_c13": 39,
   "statutory_prescribed_candidates": 42
  },
- "restricted_doc_ids": [
-  "regs-regulations-for-the-air-force-reprinted-edition-2000"
- ],
  "restricted_material_excluded": [
-  "212ac873869bf3298b8194f6ad8a1a994b990242a3dab5d0f927e3e4c4ce2cea",
-  "4284820e5bc2fb7f52ae9fbe8a61650f1579e9b6389ba206a916a69fed016b14",
-  "f26d3de7dfda70143b10b02dc664f13de342a74f0bee767387492363ac1421c5"
+  "RM-001 (config/restricted_material.json on claude/c13-gov; guard in tools/a6_common.py)"
  ],
  "status": "RESEARCH_ONLY; every row DISCOVERED_FROM_SOURCE_NOT_LEGALLY_APPROVED; legal_approval_state NOT_APPROVED",
  "statutory": {
@@ -103,7 +131,12 @@
   "official_rows_with_illegible_span": 9,
   "official_transcribed": 31
  },
- "tool": "c13-a6-forms/1.0.0",
+ "tool": "c13-a6-forms/1.1.0",
+ "transcription_conventions": [
+  "Blanks: every dotted or open blank that stands alone or ends a line is a separate 'blank' row; blanks embedded inside a printed sentence (e.g. 'I ...... do solemnly declare', 'The Superintendent ..... of') are NOT itemised and the sentence is recorded as one row (applied as found by review F05; not retro-itemised).",
+  "Misprints: kept as printed (e.g. 'regmient', 'Prision', 'togethe', 'PRAT III', 'whcih', 'Reseve', 'Service or years').",
+  "Degraded glyphs: where the letter shapes are broken but the word is unambiguous from the remaining glyphs on the same image, the word is typed normally and listed in DEGRADED_GLYPH_NORMALISATIONS; where it is not unambiguous, it is written [illegible]."
+ ],
  "version_evidence": [
   {
    "effect_on_fields": "wording of two INCIPIT_ONLY condition paragraphs of Form No. I; no field added or removed",

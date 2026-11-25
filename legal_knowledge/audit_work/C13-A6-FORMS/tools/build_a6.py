@@ -25,7 +25,7 @@ import spec_register as SR  # noqa: E402
 import spec_transcriptions as ST  # noqa: E402
 import spec_oracle as SO  # noqa: E402
 
-TOOL = "c13-a6-forms/1.0.0"
+TOOL = "c13-a6-forms/1.1.0"
 OUT = os.path.join(C.A6_DIR, "outputs")
 VS = "DISCOVERED_FROM_SOURCE_NOT_LEGALLY_APPROVED"
 ILL = "[illegible]"
@@ -131,6 +131,16 @@ def build():
                        reading_method="AI visual reading of rendered page image (not legal validation)",
                        reproduce_with=f"python -I tools/render_pages.py {p['source']} {p['page']} --dpi {p['dpi']}",
                        review_state="PENDING_INDEPENDENT_REVIEW"))
+    for r in pl:
+        r["reading_kind"] = "FIELD_TRANSCRIPTION"
+    for j, (src, pg, dpi, purpose) in enumerate(SR.OTHER_READINGS, len(pl) + 1):
+        s_ = C.SOURCES[src]
+        pl.append(dict(reading_id=f"A6-PIR-{j:03d}", form_family_id="", source_key=src, copy_sha256=s_["sha256"],
+                       hf_preserved_path=s_["hf_path"], pdf_page=pg, region=purpose, region_bbox_fractions="0.00,0.00,1.00,1.00",
+                       renderer=ST.RENDERER, dpi=dpi, colorspace="GRAY", fields_transcribed=0, illegible_notes="",
+                       transcriber_notes="", reading_method="AI visual reading of rendered page image (not legal validation)",
+                       reproduce_with=f"python -I tools/render_pages.py {src} {pg} --dpi {dpi}",
+                       review_state="PENDING_INDEPENDENT_REVIEW", reading_kind="RULE_OR_COVERAGE_READING"))
     out["PAGE_IMAGE_LOG.csv"] = csv_text(list(pl[0].keys()), pl)
 
     # ---------------------------------------------------------------- official transcriptions
@@ -155,6 +165,7 @@ def build():
     stat_fams = sorted(f for f, p in primary.items() if p["form_authority_type_candidate"] == "STATUTORY_PRESCRIBED")
     scope = sorted(set(r04_fams) | set(stat_fams))
     comp, famstat = [], []
+    conf_map = {}  # C12 field_id -> index (within fam_official[fam]) of the official row that contains it
     tot = dict(confirmed=0, mml_only=0, official_only=0, official_variant=0, illegible=0)
     for fam in scope:
         p = primary[fam]
@@ -182,6 +193,7 @@ def build():
             lab = norm(f["field_label_as_printed"])
             hit = bool(lab) and (" " + lab + " ") in otext
             if hit:
+                conf_map[f["field_id"]] = span_of(lab, off)
                 n_conf += 1
                 st = "OFFICIAL_CONFIRMED"
             else:
@@ -225,39 +237,57 @@ def build():
                             mml_fields_not_in_official=n_mo, official_fields_not_in_mml=n_oo,
                             official_fields_variant=n_var, official_fields_illegible=n_ill,
                             note=_fam_note(fam)))
+    for f in famstat:
+        f["r04_disposition"] = r04_disposition(f)
     out["R04_COMPARISON.csv"] = csv_text(["form_family_id", "side", "field_ref", "label", "c12_primary_source", "result", "detail"], comp)
     out["R04_FAMILY_STATUS.csv"] = csv_text(list(famstat[0].keys()), famstat)
 
     # ---------------------------------------------------------------- versioned field file (new; C12 file untouched)
-    ff = []
-    for fam in sorted(primary):
-        if fam in fam_official:
-            for r in fam_official[fam]:
-                ff.append(dict(field_id=f"{fam}#V2-{len([x for x in ff if x['form_family_id'] == fam]) + 1:03d}",
-                               form_family_id=fam, field_label_as_printed=r["label"], field_kind=r["kind"],
-                               source_key=r["source"], copy_sha256=C.SOURCES[r["source"]]["sha256"], pdf_page=r["page"],
-                               field_set_version=f"OFFICIAL_PAGE_IMAGE_TRANSCRIPTION_C13 ({r['source']})",
-                               legibility=legibility(r["label"]), mandatory_indication_as_printed="NONE_PRINTED_FOR_FIELD",
-                               supersedes_c12_rows="C12 FORM_FIELDS rows of this family (field_set_version " + primary[fam]["field_set_version"][:40] + ")",
-                               verification_status=VS, reviewer_confirmation="PENDING_INDEPENDENT_REVIEW"))
-        else:
-            for f in [x for x in c12_fields if x["form_family_id"] == fam]:
-                ff.append(dict(field_id=f["field_id"], form_family_id=fam, field_label_as_printed=f["field_label_as_printed"],
-                               field_kind=f["field_kind"], source_key=primary[fam]["source_key"],
-                               copy_sha256=primary[fam]["source_copy_sha256"], pdf_page="",
-                               field_set_version="CARRIED_FROM_C12: " + f["field_set_version"],
-                               legibility="NOT_ASSESSED_C13", mandatory_indication_as_printed="NONE_PRINTED_FOR_FIELD",
-                               supersedes_c12_rows="", verification_status=VS,
-                               reviewer_confirmation="NOT_APPLICABLE (no official copy held)"))
-    for fam in sorted(f for f in fam_official if f not in primary):
-        for i, r in enumerate(fam_official[fam], 1):
-            ff.append(dict(field_id=f"{fam}#V2-{i:03d}", form_family_id=fam, field_label_as_printed=r["label"],
-                           field_kind=r["kind"], source_key=r["source"], copy_sha256=C.SOURCES[r["source"]]["sha256"],
-                           pdf_page=r["page"], field_set_version=f"OFFICIAL_PAGE_IMAGE_TRANSCRIPTION_C13 ({r['source']})",
+    # Supersession is explicit (review 1b05490f F01): an official row supersedes only
+    # the C12 rows it contains. For a family whose official copy is complete, the
+    # remaining C12 rows are superseded by the full official transcription (each such
+    # row is a recorded R04 difference). For a family whose official copy is partial
+    # (amending text only), the remaining C12 rows are CARRIED as MML_ONLY_UNVERIFIED.
+    status_of = {f["form_family_id"]: f["official_status"] for f in famstat}
+    ff, disp = [], []
+    for fam in sorted(set(primary) | set(fam_official)):
+        c12rows = [x for x in c12_fields if x["form_family_id"] == fam]
+        offs = fam_official.get(fam, [])
+        partial = status_of.get(fam) == "OFFICIAL_AMENDING_TEXT_ONLY"
+        vid = {}
+        for i, r in enumerate(offs):
+            vid[i] = f"{fam}#V2-{i + 1:03d}"
+            covered = [x["field_id"] for x in c12rows if conf_map.get(x["field_id"]) and conf_map[x["field_id"]][0] <= i <= conf_map[x["field_id"]][1]]
+            ff.append(dict(field_id=vid[i], form_family_id=fam, field_label_as_printed=r["label"], field_kind=r["kind"],
+                           source_key=r["source"], copy_sha256=C.SOURCES[r["source"]]["sha256"], pdf_page=r["page"],
+                           field_set_version=f"OFFICIAL_PAGE_IMAGE_TRANSCRIPTION_C13 ({r['source']})" + (" [amending text only]" if partial else ""),
                            legibility=legibility(r["label"]), mandatory_indication_as_printed="NONE_PRINTED_FOR_FIELD",
-                           supersedes_c12_rows="(new family in C13)", verification_status=VS,
-                           reviewer_confirmation="PENDING_INDEPENDENT_REVIEW"))
+                           supersedes_c12_field_ids=";".join(covered) if fam in primary else "(new family in C13)",
+                           verification_status=VS,
+                           reviewer_confirmation="SET_ACCEPTED_WITH_FINDINGS_BY_INDEPENDENT_REVIEW_1b05490f (census+seeded sample, 693/955 rows checked, 99.42% text-only row accuracy, 95% CI 98.53-99.78; this row not necessarily individually checked)"))
+        for x in c12rows:
+            if x["field_id"] in conf_map and offs:
+                disp.append(dict(c12_field_id=x["field_id"], form_family_id=fam, disposition="SUPERSEDED_BY_OFFICIAL_ROW",
+                                 official_field_ids=";".join(vid[k] for k in range(conf_map[x["field_id"]][0], conf_map[x["field_id"]][1] + 1)), basis="C12 label contained in the official row (normalised)"))
+            elif offs and not partial:
+                disp.append(dict(c12_field_id=x["field_id"], form_family_id=fam, disposition="SUPERSEDED_BY_FULL_OFFICIAL_TRANSCRIPTION",
+                                 official_field_ids=f"{vid[0]}..{vid[len(offs) - 1]}",
+                                 basis="official copy of the whole form transcribed; label not found in it (recorded R04 difference in R04_COMPARISON.csv)"))
+            else:
+                why = ("official copy covers para 9 only (S.R.O. 17(E)/1993 item 39(a)); rest of form held only in MML"
+                       if partial else "no official copy held")
+                label = ("CARRIED_FROM_C12: MML_ONLY_UNVERIFIED (" + why + ")") if (partial or primary[fam]["source_basis"] == "MML_ONLY") \
+                    else "CARRIED_FROM_C12: " + x["field_set_version"]
+                ff.append(dict(field_id=x["field_id"], form_family_id=fam, field_label_as_printed=x["field_label_as_printed"],
+                               field_kind=x["field_kind"], source_key=primary[fam]["source_key"],
+                               copy_sha256=primary[fam]["source_copy_sha256"], pdf_page="", field_set_version=label,
+                               legibility="NOT_ASSESSED_C13", mandatory_indication_as_printed="NONE_PRINTED_FOR_FIELD",
+                               supersedes_c12_field_ids="", verification_status=VS,
+                               reviewer_confirmation="NOT_APPLICABLE (" + why + ")"))
+                disp.append(dict(c12_field_id=x["field_id"], form_family_id=fam, disposition="CARRIED_IN_V2",
+                                 official_field_ids="", basis=label))
     out["FORM_FIELDS_C13_v2.csv"] = csv_text(list(ff[0].keys()), ff)
+    out["C12_FIELD_DISPOSITION.csv"] = csv_text(["c12_field_id", "form_family_id", "disposition", "official_field_ids", "basis"], disp)
 
     # ---------------------------------------------------------------- expanded register
     regrows = build_register(primary, occ_by_fam, fam_official, famstat)
@@ -281,8 +311,16 @@ def build():
         status="RESEARCH_ONLY; every row DISCOVERED_FROM_SOURCE_NOT_LEGALLY_APPROVED; legal_approval_state NOT_APPROVED",
         c12_inputs=SR.C12_INPUTS,
         official_copies={k: v["sha256"] for k, v in C.SOURCES.items()},
-        restricted_material_excluded=sorted(C.EXCLUDED_SHA256), restricted_doc_ids=sorted(C.EXCLUDED_DOC_IDS),
-        page_image_readings=len(pl), distinct_pages_read=len({(p["source"], p["page"]) for p in tpages}),
+        restricted_material_excluded=["RM-001 (config/restricted_material.json on claude/c13-gov; guard in tools/a6_common.py)"],
+        transcription_conventions=ST.CONVENTIONS,
+        degraded_glyph_normalisations=[dict(source=a, page=b, family=c, note=d) for a, b, c, d in ST.DEGRADED_GLYPH_NORMALISATIONS],
+        independent_review=dict(ref="reviews/review_c13_a6_1b05490f.md", verdict="ACCEPT_WITH_FINDINGS",
+                                row_accuracy_text_only="99.42% (95% CI 98.53-99.78) over 693/955 rows",
+                                findings_addressed="F01 (P2), F02, F03, F04, F05 (documented), F06, F08, F09 (noted)"),
+        c12_field_dispositions={k: sum(1 for d in disp if d["disposition"] == k) for k in sorted({d["disposition"] for d in disp})},
+        page_image_readings=len(pl), page_image_readings_for_transcription=len(tpages),
+        distinct_pages_read=len({(p["source_key"], p["pdf_page"]) for p in pl}),
+        distinct_pages_transcribed=len({(p["source"], p["page"]) for p in tpages}),
         official_transcription_rows=len(ot),
         official_rows_with_illegible_span=sum(1 for r in ot if r["legibility"] == "CONTAINS_ILLEGIBLE_SPAN"),
         official_rows_incipit_only=sum(1 for r in ot if r["legibility"] == "INCIPIT_ONLY"),
@@ -329,6 +367,33 @@ def build():
     )
     out["SUMMARY.json"] = json.dumps(summ, indent=1, sort_keys=True, ensure_ascii=False) + "\n"
     return out
+
+
+def span_of(lab, off):
+    """Smallest consecutive run (i, j) of official rows whose joined text contains lab."""
+    best = None
+    for i in range(len(off)):
+        acc = ""
+        for j in range(i, len(off)):
+            acc = (acc + " " + norm(off[j]["label"])).strip()
+            if (" " + lab + " ") in (" " + acc + " "):
+                if best is None or (j - i) < (best[1] - best[0]):
+                    best = (i, j)
+                break
+    return best
+
+
+def r04_disposition(f):
+    st = f["official_status"]
+    if f["in_r04_22"] and st == "OFFICIAL_TRANSCRIBED_FROM_PAGE_IMAGE":
+        return "R04_CLOSURE_RECOMMENDED_CLOSED_VERIFIED (independent review 1b05490f; transcription fidelity only; capability restriction unchanged)"
+    if f["in_r04_22"] and st == "OFFICIAL_AMENDING_TEXT_ONLY":
+        return ("R04_STILL_DEFERRED: only para 9 is held in an official copy (S.R.O. 17(E)/1993 item 39(a), AR-AMD-1993 p.19); "
+                "Appendix III Part I base text of IAFD-905 not held (1954 Gazette p.72 passes from Appendix I to Appendix III Part II); "
+                "other field rows remain MML_ONLY_UNVERIFIED (A6-ACQ-02)")
+    if not f["in_r04_22"] and st == "OFFICIAL_COPY_NOT_HELD":
+        return "OUTSIDE_R04: no official copy held; field list MML_ONLY_UNVERIFIED (see ACQUISITION_REQUESTS_A6.csv)"
+    return "OUTSIDE_R04: statutory candidate transcribed from official page image (not one of the 22)"
 
 
 def _count(rows, k):
@@ -390,6 +455,7 @@ def build_register(primary, occ_by_fam, fam_official, famstat):
     for fam in sorted(primary):
         p = primary[fam]
         off = fam_official.get(fam)
+        r04d = fs.get(fam, {}).get("r04_disposition", "")
         stt = fs.get(fam, {}).get("official_status") or ("OFFICIAL_TRANSCRIBED_FROM_PAGE_IMAGE" if off else "NOT_IN_R04_OR_STATUTORY_SCOPE")
         pages = sorted({(r["source"], r["page"]) for r in off}) if off else []
         if off and stt == "OFFICIAL_TRANSCRIBED_FROM_PAGE_IMAGE":
@@ -419,14 +485,15 @@ def build_register(primary, occ_by_fam, fam_official, famstat):
             form_authority_type_candidate=p["form_authority_type_candidate"], mandatory_or_specimen_status=p["status_category"],
             statutory_confirmation_status=("CONFIRMED_FROM_OFFICIAL_COPY_PAGE_IMAGE (form text); rule quote per C12" if (off and stt == "OFFICIAL_TRANSCRIBED_FROM_PAGE_IMAGE" and p["form_authority_type_candidate"] == "STATUTORY_PRESCRIBED") else p["statutory_confirmation_status"]),
             applicability_conditions_as_printed=p["applicability_conditions_as_printed"], applicability_state="NOT_ESTABLISHED",
-            required_fields=(f"{len(off)} printed elements in FORM_FIELDS_C13_v2.csv (official); no field-level mandatoriness printed" if off else "see FORM_FIELDS_C13_v2.csv (carried from C12); no field-level mandatoriness printed"),
+            required_fields=(f"{len(off)} official rows (para 9 only) + C12 rows carried as MML_ONLY_UNVERIFIED in FORM_FIELDS_C13_v2.csv; official coverage of the form is partial; no field-level mandatoriness printed" if (off and stt == "OFFICIAL_AMENDING_TEXT_ONLY") else
+                             f"{len(off)} printed elements in FORM_FIELDS_C13_v2.csv (official); no field-level mandatoriness printed" if off else "see FORM_FIELDS_C13_v2.csv (carried from C12); no field-level mandatoriness printed"),
             field_set_version_c13=(f"OFFICIAL_PAGE_IMAGE_TRANSCRIPTION_C13" + (" (amending text only)" if stt == "OFFICIAL_AMENDING_TEXT_ONLY" else "")) if off else "CARRIED_FROM_C12: " + p["field_set_version"],
             competent_authority_as_printed=p["competent_authority_as_printed"],
             signatory_requirements_as_printed=sigs.get(fam) or p["signatory_as_printed"],
             supporting_documents_as_printed=p["companion_documents_as_printed"],
             procedural_dependencies=p["procedural_dependencies"] + (" || rule readings: " + ",".join(rr) if rr else ""),
             version_history=vh, supersession=p["supersession_status"],
-            source_fidelity_c13=fid, r04_status=stt,
+            source_fidelity_c13=fid, r04_status=stt + (" | " + r04d if r04d else ""),
             cross_cutting_caveat_as_printed=p["cross_cutting_caveat_as_printed"],
             mml_alternates=";".join(sorted({o["source_key"] for o in occ_by_fam[fam] if o["source_key"].startswith("MML")})),
             legal_approval_state="NOT_APPROVED", publication_state="NOT_STAGED", freshness_state="NOT_ASSESSED",
@@ -452,9 +519,9 @@ def build_register(primary, occ_by_fam, fam_official, famstat):
     for (n, title, prov, pg) in SR.NAVY_P2_FORMS:
         rows.append(_new_row(f"FF-NR65P2-F{n:02d}", "NAVY", "Regulations for the Navy Part II (Statutory)", "Appendix I",
                              f"FORM No. {n}", title, None, prov + " (as listed in Appendix I)",
-                             "Appendix I list p.105 (page image read); reg. definition (f): '\"Prescribed form,\" means an appropriate form in Appendix I applicable to the relevant section or regulation.' (text layer). Per-form requirement wording not quoted.",
+                             "Appendix I list: p.105 page image read (Forms 1-25); p.106 text layer only (Forms 25-34); reg. definition (f): '\"Prescribed form,\" means an appropriate form in Appendix I applicable to the relevant section or regulation.' (text layer). Per-form requirement wording not quoted.",
                              "OTHER_OR_UNDETERMINED", "REQUIREMENT_LANGUAGE_NOT_EXTRACTED", "not established", "not extracted", "",
-                             pages=f"NR65-P2-C7 p.{pg} (form heading, text layer); list p.105-106",
+                             pages=f"NR65-P2-C7 p.{pg} (form heading, text layer); list p.105 (image, Forms 1-25) / p.106 (text layer, Forms 25-34)",
                              fid="DISCOVERED_FROM_LIST_PAGE_IMAGE; FIELDS_NOT_TRANSCRIBED_THIS_CYCLE"))
     return rows
 
