@@ -1,0 +1,83 @@
+{
+ "a1": {
+  "manual_review": 6,
+  "uncertain_and_other_manual_review_state": 46
+ },
+ "a5_unreviewed_case_numbers": 266,
+ "a7_scan": {
+  "file": "legal_knowledge/audit_work/C13-A7-ACQUISITION/DISPOSITIONS_C13.md",
+  "legal_questions_found": 0,
+  "lines_mentioning_legal_or_adviser": [],
+  "note": "F01-F16 and the PR #7/#8/#9/#17/#23 dispositions concern crawler configuration, TLS, CI and acquisition scope; they are owner/technical decisions (see C13-A9 OWNER_DECISIONS_C13.md), not legal-adviser questions. F09 (two pins resolve to Navy Act S.R.O.s) is documentary identity, already recorded by A7.",
+  "sha256": "8ecd49e23a2283b1455b209249351add45ca406e7ec60192ab6a9373dbc017d8"
+ },
+ "anchors": 1103,
+ "by_kind": {
+  "COMMENCEMENT_TEMPORAL": 15,
+  "CROSS_REFERENCE": 3,
+  "DOCUMENTARY_VERIFICATION": 9,
+  "EVIDENCE_PROMOTION": 67,
+  "FORM_TEXT": 5,
+  "LEGAL_INTERPRETATION": 6,
+  "RELEVANCE_SCOPE": 52,
+  "ROLE_PROCESS": 3,
+  "SOURCE_AUTHORITY": 6,
+  "STATUS_RELATION": 30,
+  "TEXT_CONFLICT": 8
+ },
+ "by_priority": {
+  "P0": 1,
+  "P1": 34,
+  "P2": 169
+ },
+ "inputs_sha256": {
+  "legal_knowledge/audit_work/C11-JUDICIAL-QUALITY/scnum/review/SC_CASE_NUMBER_REVIEWED_STATUS.csv": "d3bae26c22964cbc280cbb635f6f0d16232eaf3054c4220f203cf9bc3a9f2912",
+  "legal_knowledge/audit_work/C12-CONSOLIDATION/adviser_package/ADVISER_QUESTIONS.csv": "2baae5c0d978ee1ef8998ec634b260ee5adc07cb6e4f84f316a752a25f17d9c4",
+  "legal_knowledge/audit_work/C12-CONSOLIDATION/adviser_package/EXCERPT_VERIFICATION.csv": "a4ad7af52da59b4c1eb67fed1f44593569fcfef32149643db93389d63de41f93",
+  "legal_knowledge/audit_work/C12-CONSOLIDATION/adviser_package/SHA256SUMS": "4bc9db8ddfa5c98d9b83142b14cd385a994cafece30b713613ada9a13bc7a1db",
+  "legal_knowledge/audit_work/C12-CONSOLIDATION/statutory_citations/outputs/PRIORITY_VERIFICATION.csv": "340e4fb7f91792d9d0243e3638fc188f79a849efefefb0e22668fb1dd8176027",
+  "legal_knowledge/audit_work/C12-CONSOLIDATION/statutory_citations/tools/page_evidence_c12.csv": "013a14948f3585c472daa5b1599ec9fad035b676228ba46c917cb8ee88e66233",
+  "legal_knowledge/audit_work/C13-A1-OCR/INGESTION_DECISIONS.csv": "6a4be781ed318f554f8a1fd1faf8de89c3c60d1e3eafa3ce3e224c9b8940560e",
+  "legal_knowledge/audit_work/C13-A1-OCR/RELEVANCE_RERUN.csv": "9d24632a640e43437460bfad2f918e58a1045ad55bb28699d43e9425ab03a190",
+  "legal_knowledge/audit_work/C13-A1-OCR/SHA256SUMS": "ad36f224a1b6468c3c103ac4ba45313015465a02abf9f4c97fb1916a1a2eebb0",
+  "legal_knowledge/audit_work/C13-A4-STATUTORY/SHA256SUMS": "18014cf53ce99a36f4ba3a9037f4115aaf286fe719daa52d3441e0ea45a283a3",
+  "legal_knowledge/audit_work/C13-A4-STATUTORY/inputs/page_evidence_c13.csv": "83888d50ecce28d8a401bcdc5c5daa30dd646ecb9b4b7506cb48686c575637fb",
+  "legal_knowledge/audit_work/C13-A4-STATUTORY/outputs/ADVISER_REVIEW_PACKET_A4.csv": "9a55ac199482ccd4674fceb9b18a27050ef43bc7437b9ce2b0d90d88df7a654c",
+  "legal_knowledge/audit_work/C13-A4-STATUTORY/outputs/EVIDENCE_PROPOSALS_C13.csv": "c6d67237d8de64668f4630b3f7e555b3e29f3669133d828faaf77edaf5c865db",
+  "legal_knowledge/audit_work/C13-A5-GRAPH/SHA256SUMS": "4efcf002f58135ea2f07134e2eda72a2e6c4984b72687ac954c3669b8edf1097",
+  "legal_knowledge/audit_work/C13-A5-GRAPH/graph/edges_candidate.jsonl.gz": "b570e21e64212a4a4af46c4db32700611ed0e8be2246bf0cfb7169f8128e1853",
+  "legal_knowledge/audit_work/C13-A5-GRAPH/scnum/PAGE_IMAGE_CHECKS_C13.csv": "2ceaa45b431861de4b33b754fc799f073d1d236da07f51e04dc8e960335f90e9",
+  "legal_knowledge/audit_work/C13-A5-GRAPH/scnum/SCNUM_RECONFIRMATION_C13.csv": "fceb5e0b4a3c7af1ab9a01df647a55cbb10383021de82be92d186dc85969df48",
+  "legal_knowledge/audit_work/C13-A6-FORMS/SHA256SUMS": "6af71851969364cf812c626ac61d570f07a80b16ed35e5c3143816ed1d76077b",
+  "legal_knowledge/audit_work/C13-A6-FORMS/outputs/FORM_REGISTER_C13.csv": "76d9248b89d890acbd586ddfef0ccb3db4acb7474bf00fe6702291657a6675e1",
+  "legal_knowledge/audit_work/C13-A6-FORMS/outputs/R04_FAMILY_STATUS.csv": "81a0bd1598a67925706946921211a602cde0c2c22e7660cb572ab341e1cc9504",
+  "legal_knowledge/audit_work/C13-A6-FORMS/reviews/review_c13_a6_1b05490f_findings.csv": "90bb9ab2439059b0616822c1a44bbbacd17eb5ef67922d262af89e5583cc6e39",
+  "legal_knowledge/audit_work/C13-A7-ACQUISITION/DISPOSITIONS_C13.md": "8ecd49e23a2283b1455b209249351add45ca406e7ec60192ab6a9373dbc017d8"
+ },
+ "merged_duplicates": 29,
+ "origin_counts": {
+  "A1 MANUAL_REVIEW (6) and UNCERTAIN queue": 52,
+  "A4 adviser packet (96)": 96,
+  "A5 treatment candidates and case numbers": 14,
+  "A6 forms (register, README, review F07)": 12,
+  "C12 adviser package (59)": 59
+ },
+ "questions": 204,
+ "record_anchors": 272,
+ "registers_sha256": {
+  "AUTH_LEDGER_V0_COPY_REGISTER": "415c85f4a2434dfbdd9e0ea0c35a3c0abbb9d64b9481c8b043c8256d145ff73b",
+  "C11_RE_ACQUISITION_MANIFEST": "2cb797dec023bb9cba300061ba6f83c21bf93c8c8c990528e4c8ed4fa8c1afc0",
+  "C12_ACQUISITION_MANIFEST": "dd2bf720681900189317cf538dd18e32607d782c636abb0c49ef3bdeda75ad79",
+  "C12_JUDICIAL_INGESTION_LOG": "bdc473e8dd63b9d0517e0b137e79c62217617313d119ee7a5f4781f1407cff91",
+  "C13_A1_RELEVANCE_RERUN": "9d24632a640e43437460bfad2f918e58a1045ad55bb28699d43e9425ab03a190",
+  "C13_A7_ACQUISITION_MANIFEST": "5614422df54b35a58e60c0566fce44e8ec5dca9927692fca1fe4363defd044f6",
+  "C13_A7_HF_VERIFY": "e31a568fd80fcce082289b967fe195a11915ee6373432c9e1b903135ed31d938",
+  "COPY_VERIFICATION_C12": "a3a3ab564468576913bb4e6f2fa3d40f253ab0a053b2515b3b6bdbbe984434c7",
+  "CRAWLER_MANIFEST_HF5524": "58673120f9c5a50a94c5f9e97c099ddd695f614b58b52ade337b53f15291360d",
+  "HF_HASH_LEDGER_C12": "dd5267c04ad2f68aec59f74dac361924aacbf3f9695c9e9c87f865641bebcc25"
+ },
+ "rm001_excluded": "RM-001 (config/restricted_material.json): no anchor, question or output references it",
+ "source_page_anchors": 831,
+ "status": "NOT LEGALLY REVIEWED",
+ "version": "C13-A8-v1"
+}
