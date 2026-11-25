@@ -24,15 +24,31 @@ def _load():
     return frozenset(shas), frozenset(ids), frozenset(paths)
 
 
+def _norm_sha(s: str) -> str:
+    s = s.strip().lower()
+    return s[7:] if s.startswith("sha256:") else s
+
+
+def _norm_id(s: str) -> str:
+    s = s.strip().lower()
+    return s.split("#", 1)[0]          # section ids <doc_id>#<section> share the document's restriction
+
+
 def is_restricted(*, sha256: str | None = None, doc_id: str | None = None, path: str | None = None) -> bool:
     shas, ids, paths = _load()
-    if sha256 and sha256.lower() in shas:
+    lids = {i.lower() for i in ids}
+    lpaths = {p.lower() for p in paths}
+    if sha256 and _norm_sha(sha256) in shas:
         return True
-    if doc_id and doc_id in ids:
+    if doc_id and _norm_id(doc_id) in lids:
         return True
     if path:
-        p = path.replace("\\", "/").lstrip("./")
-        if p in paths or any(s in p for s in shas) or any(i in p for i in ids):
+        from urllib.parse import unquote
+        p = unquote(path).strip().replace("\\", "/").lower()
+        while p.startswith("./"):
+            p = p[2:]
+        p = p.lstrip("/")
+        if p in lpaths or any(s in p for s in shas) or any(i in p for i in lids):
             return True
     return False
 

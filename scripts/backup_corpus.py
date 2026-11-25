@@ -104,10 +104,17 @@ def create(revision: str, dest: Path, only_prefix: str | None = None) -> int:
 def verify(dest: Path) -> int:
     m = json.loads((dest / "BACKUP_MANIFEST.json").read_text(encoding="utf-8"))
     bad = []
+    if m.get("mismatches"):                # create already found bytes that did not match HF: never a valid backup
+        bad.extend(m["mismatches"])
     for r in m["items"]:
         p = dest / "data" / r["path"]
-        if not p.is_file() or p.stat().st_size != r["size"] or sha256_file(p) != r["computed_sha256"]:
+        if r.get("status") != "BYTE_VERIFIED" or not p.is_file() or p.stat().st_size != r["size"]:
+            bad.append(r["path"]); continue
+        h = sha256_file(p)
+        expected_ok = (h == r["lfs_sha256"]) if r.get("lfs_sha256") else (git_blob_sha1(p) == r.get("git_oid"))
+        if h != r["computed_sha256"] or not expected_ok:   # recheck against the HF-declared identity too (review F03)
             bad.append(r["path"])
+    bad = sorted(set(bad))
     extra = {str(p.relative_to(dest / "data")).replace(os.sep, "/") for p in (dest / "data").rglob("*") if p.is_file()} - {
         r["path"] for r in m["items"]}
     print(json.dumps({"revision": m["revision"], "files": len(m["items"]), "failed": len(bad), "unexpected_files": len(extra)}))
