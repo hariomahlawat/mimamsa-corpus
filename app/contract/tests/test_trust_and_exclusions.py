@@ -180,7 +180,47 @@ def test_tampered_stored_update_rejected_on_load(owner, trust, register_path, tm
     store = ExclusionStore(tmp_path / "exclusions")
     b, s = _signed(owner[0], _update(register_path, sequence=2))
     store.append(b, s, trust)
-    p = tmp_path / "exclusions" / "00000002.json"
+    p = tmp_path / "exclusions" / "pairs" / "00000002.json"
     p.write_bytes(p.read_bytes().replace(b'"sequence": 2', b'"sequence": 2 '))
     with pytest.raises(ExclusionError):
         store.load_latest(trust)
+
+
+# ---- PR #53 reconciliation: acceptance record, pending pairs, null withdrawal rows
+def test_unaccepted_pair_is_pending_not_accepted(owner, trust, register_path, tmp_path):
+    store = ExclusionStore(tmp_path / "exclusions")
+    b2, s2 = _signed(owner[0], _update(register_path, sequence=2))
+    store.append(b2, s2, trust)
+    # simulate a crash after the pair was written but before acceptance of sequence 3
+    b3, s3 = _signed(owner[0], _update(register_path, sequence=3))
+    (store.pairs / "00000003.json").write_bytes(b3)
+    (store.pairs / "00000003.sig").write_bytes(s3)
+    assert store.load_latest(trust).sequence == 2
+    assert store.pending() == [3]
+
+
+def test_accepted_record_pointing_to_missing_pair_halts(owner, trust, register_path, tmp_path):
+    store = ExclusionStore(tmp_path / "exclusions")
+    b, s = _signed(owner[0], _update(register_path, sequence=2))
+    store.append(b, s, trust)
+    (store.pairs / "00000002.sig").unlink()
+    with pytest.raises(ExclusionError):
+        store.load_latest(trust)
+
+
+def test_compare_and_set_rejects_stale_writer(owner, trust, register_path, tmp_path):
+    store = ExclusionStore(tmp_path / "exclusions")
+    b2, s2 = _signed(owner[0], _update(register_path, sequence=2))
+    store.append(b2, s2, trust, expected_sequence=0)
+    b3, s3 = _signed(owner[0], _update(register_path, sequence=3))
+    with pytest.raises(ExclusionError):
+        store.append(b3, s3, trust, expected_sequence=0)   # prepared against an old accepted state
+
+
+@pytest.mark.parametrize("row", [{"doc_id": None, "reason": "x y z"}, {"source_copy_sha256": None, "reason": "x y z"},
+                                 {"doc_id": None, "source_copy_sha256": None, "reason": "x y z"}])
+def test_null_only_withdrawal_row_rejected(owner, trust, register_path, row):
+    """PR #53 Crosswalk §7: a withdrawal row with no actionable identity cannot be enforced; reject the update."""
+    b, sig = _signed(owner[0], _update(register_path, withdrawals=[row]))
+    with pytest.raises(ExclusionError):
+        accept_exclusion_update(b, sig, trust, current_sequence=1)

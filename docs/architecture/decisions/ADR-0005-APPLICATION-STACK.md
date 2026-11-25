@@ -3,6 +3,7 @@
 - **Status: PROPOSED.** Options and decision criteria only. The decision row in §6 is completed after the proof-of-concept evidence P1–P9 (workstream B-PoC, branch `claude/c13-b-poc`) has been independently reviewed, and the owner accepts it at gate **GB1**.
 - **Date:** 2026-11-25 (Cycle 13, workstream B0)
 - **Supersedes:** the planned "ADR-0005-OFFLINE_APP_STACK" named in the Cycle 13 plan §5 B0. That draft assumed Docker Compose on Linux or a Hyper-V Linux VM; the owner's Cycle 13 directive replaces that assumption.
+- **Revised 2026-11-25 (R2):** owner direction *Windows-first, not Windows-only* (portable core, replaceable OS adapters) and reconciliation with the future intelligence architecture in PR #53 (branch `docs/mimamsa-intelligence-architecture-2026-11-25` @ `6a0ae735`); see [reconciliation](../INTELLIGENCE_ARCHITECTURE_RECONCILIATION_C13.md). Still PROPOSED.
 - **Related:** [Technology assessment (revised)](../../planning/OFFLINE_APP_TECHNOLOGY_ASSESSMENT.md), [Security and deployment architecture](../SECURITY_AND_DEPLOYMENT_ARCHITECTURE.md), [Capability traceability matrix](../CAPABILITY_TRACEABILITY_MATRIX.md), [Data contract v1](../../../app/contract/README.md), ADR-0001 to ADR-0004.
 
 ## 1. Context
@@ -18,6 +19,8 @@ The owner's Cycle 13 directive fixes these constraints:
 | C-5 | No legal reasoning or compliance logic in Cycle 13 |
 | C-6 | Zero runtime internet dependency; signed offline snapshot updates; offline Windows installer |
 | C-7 | Keep the existing Python corpus pipeline; prefer permissively licensed dependencies (PyMuPDF is AGPL) |
+| C-8 | **Windows-first, not Windows-only** (owner, 2026-11-25): native Windows is the primary development, deployment and acceptance target; the application core stays platform-independent behind replaceable OS-specific infrastructure adapters. No Linux production support is claimed in Cycle 13. Do not trade functionality, accuracy or UX for speculative portability |
+| C-9 | The foundation must accept the future intelligence capabilities (hybrid RAG, legal GraphRAG, deterministic legal engine, bounded agents; PR #53) later **without fundamental redevelopment**. None of them is implemented now |
 
 The directive names preferred candidates, **to be evaluated, not presumed**: ASP.NET Core LTS compared with Django; React + TypeScript; PostgreSQL with FTS (or a benchmarked better alternative), pgvector and a relational graph; PDF.js; Python workers; Windows Services; Tesseract, PaddleOCR or alternatives; local ONNX embeddings; SignalR; local accounts with optional AD; an offline Windows installer; signed snapshot updates.
 
@@ -36,6 +39,9 @@ Weights are proposed by B0 for owner confirmation. Each option is scored 1–5 p
 | K7 | Licence posture (permissive preferred; any copyleft item needs owner decision D-02) | 10 | P7 |
 | K8 | Operability by a small team: number of services, backup and restore, monitoring with Windows tools | 10 | P1, P6, P8 |
 | K9 | Long-term support window and staffing availability | 5 | vendor lifecycle pages |
+| K10 | **Protected delivery and portability fit**: one process can own protected egress (single delivery gateway, bounded range responses, no static/sendfile/proxy buffering of protected bytes; PR #53 Serving §6 T0), and the framework runs on Windows now and on Linux later without changing the core | 10 | P1, P4 (R2-N01), P6 |
+
+Weights sum to 110 after adding K10; the scoring sheet normalises to 100. K10 can disqualify a hosting mode: a topology that cannot keep protected routes inside a proven delivery adapter (for example IIS + ARR reverse proxy in front of Django, unless its buffering is proven) is acceptable only with those routes disabled, which fails functionality.
 
 ## 3. Options
 
@@ -86,6 +92,34 @@ Weights are proposed by B0 for owner confirmation. Each option is scored 1–5 p
 - **Signed everything.** Installer and payloads Authenticode-signed (mandatory); data bundles and exclusion updates Ed25519-signed by owner-held keys under an owner-controlled trust list.
 - **Gates off by configuration and by data.** The commander assistant and any legal-rule feature are architected (routes, module boundaries, data model hooks) but **disabled**; enabling requires the reasoning-feature gate (Cycle 13 plan §7), which cannot open while AUTH-LEDGER is at version 0 and no Legal Reviewer is appointed.
 
+## 4a. Windows-first portable core and adapter boundaries
+
+**Principle.** One platform-independent application core (domain modules, search/graph/catalogue services, contract validation, evidence semantics, UI and API, PostgreSQL schema, corpus formats). Host-specific behaviour sits behind a small number of narrow infrastructure interfaces with a Windows adapter now. A Linux adapter is a later, separately accepted delivery. Dependencies point inward: the core never imports an OS-specific module. Portable libraries are the default; an OS-specific dependency needs a recorded benefit and its seam. No abstraction is added to ordinary portable code without need (owner directive 3).
+
+| # | Adapter boundary (interface) | Windows adapter (primary, C13) | What the core sees | Linux later (not claimed) |
+| --- | --- | --- | --- | --- |
+| AD-1 | **Service host and lifecycle** | Windows Service (SCM recovery) or IIS-hosted app per P1 | start/stop/health hooks, configuration object | systemd unit |
+| AD-2 | **Filesystem layout and path policy** | `D:\Mimamsa\…` roots from configuration; NTFS case-insensitive rules | logical store roots; contract-relative POSIX paths validated by `app/contract/mimamsa_contract/paths.py` (already rejects Windows and POSIX hazards on every OS) | configured roots; same validator |
+| AD-3 | **Access control on stores** | NTFS ACLs set by installer (`icacls`), virtual service accounts | "store X is read-only for this process" assertions checked at start | POSIX ownership/ACLs |
+| AD-4 | **Process isolation for untrusted parsing** | child process in a Job Object (memory, CPU, time, kill-on-close); restricted token/AppContainer later | `run_isolated(job, limits) -> result | failure` | cgroups/namespaces |
+| AD-5 | **Network egress policy** | Windows Firewall outbound block per service SID | assertion only (core makes no outbound calls) | nftables/systemd sandboxing |
+| AD-6 | **Protected delivery transport** (PR #53 Serving §6) | in-process gateway adapter on the selected host (T0: app service, no proxy on protected routes), bounded byte slices, credit ledger | `try_accept(artifact, offset, n, state)` and polling progress | equivalent adapter with its own proof |
+| AD-7 | **Durable policy state / witness store** | protected folder outside DB and release generations; flush semantics proven on NTFS in P8 | `ExclusionStore`-style acceptance record (`app/contract/mimamsa_contract/exclusions.py`) | same contract, separate proof |
+| AD-8 | **Secrets and key store** | DPAPI/LocalMachine certificate store; trust list from signed installer | key handles, trust list object | file/keyring with OS protection |
+| AD-9 | **OCR, embedding and (later) inference runtimes** | pinned Windows builds (Tesseract, ONNX Runtime; llama.cpp later) | typed capability interfaces (ocr, embed, rerank) with model/file hashes | pinned Linux builds |
+| AD-10 | **Installer, update and backup tooling** | Authenticode-signed MSI, Task Scheduler, robocopy/VSS, BitLocker | none (outside the core) | separate signed packages |
+
+Rules: release bundles and the contract never contain drive letters, absolute paths or OS separators; database migration between hosts is by logical backup and signed bundles, not copying data directories or witness state; Windows measurements are never reused as evidence for another OS. The existing Linux CI already runs the portable contract and design tests; a Windows runner is added when the B1 code exists (P6), not in B0.
+
+## 4b. Hooks reserved now for the later intelligence layer (no implementation)
+
+- **Typed read services callable without an LLM:** search, catalogue, viewer, graph and evidence resolution are ordinary B1/B3 services; a later broker calls them, never SQL or the filesystem directly.
+- **Stable evidence keys:** PageKey/SpanKey with exact derivative binding (`app/contract/mimamsa_contract/evidence.py`, contract `page_anchor.pipeline_name` / `derivative_text_sha256`).
+- **Candidate vs verified separation:** already structural in contract v1 (candidate status, capability restriction, resolvable review and approval records, legal axes closed at AUTH-LEDGER v0). A future engine or GraphRAG consumes these without reinterpretation.
+- **Reserved site-only namespaces:** bundle paths `agent/`, `private/`, `workflows/`, `claims/`, `policy/` and record kinds for workflows, private drafts, final claims, output authorisations, serving epochs, policy witnesses and rule packs are rejected in exchange, so private agent writes can never enter the shared corpus by bundle.
+- **Single delivery gateway and serving fence:** every protected response goes through one gateway that checks current publication/exclusion state at hand-off (security architecture §7.4).
+- **Execution domains:** PUBLISHED_RESEARCH, STAGED_ADMIN_PROCESSING and PRIVATE_WORKING_SESSION map to the existing layers 7, staging and 9; they are not roles.
+
 ## 5. Consequences (to be confirmed with the decision)
 
 - Option A means a C# web layer and Python workers; a contract-first API (OpenAPI) and the data contract keep them aligned.
@@ -123,6 +157,7 @@ PoC keys and scopes are the directive's (confirmed by the coordinator 2026-11-25
 | K7 (10) | _ | _ | P7 |
 | K8 (10) | _ | _ | P1, P6, P8 |
 | K9 (5) | _ | _ | lifecycle pages |
+| K10 (10) | _ | _ | P1, P4 (R2-N01), P6 |
 | **Weighted total** | _ | _ | |
 
 ## 7. Decision

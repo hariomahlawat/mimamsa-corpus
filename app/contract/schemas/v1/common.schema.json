@@ -54,31 +54,108 @@
       "pattern": "^vault/sha256/[0-9a-f]{2}/[0-9a-f]{64}$"
     },
     "page_anchor": {
-      "description": "Pinpoint into a source copy. Page is 1-based and always required; character offsets refer to the derived text of that page in the named pipeline version; paragraph labels only where the source prints numbered paragraphs.",
+      "description": "Pinpoint into a source copy. Page is 1-based and always required; character offsets refer to the derived text of that page in the named pipeline version; paragraph labels only where the source prints numbered paragraphs. Page-only anchors (source_copy_sha256 + page) are always valid. A precise span (passage_id or character offsets) is bound to one derivative only when pipeline_name, pipeline_version and derivative_text_sha256 are all present; otherwise consumers treat the anchor as page-only (warning SPAN_UNBOUND) and never resolve it against a newer derivative.",
       "type": "object",
       "additionalProperties": false,
-      "required": ["source_copy_sha256", "page"],
+      "required": [
+        "source_copy_sha256",
+        "page"
+      ],
       "properties": {
-        "source_copy_sha256": {"$ref": "#/$defs/sha256"},
-        "page": {"type": "integer", "minimum": 1},
-        "passage_id": {"type": ["string", "null"], "pattern": "^p[0-9]{1,5}-[0-9]{1,5}$"},
-        "char_start": {"type": ["integer", "null"], "minimum": 0},
-        "char_end": {"type": ["integer", "null"], "minimum": 0},
-        "paragraph_label": {"type": ["string", "null"], "maxLength": 32},
-        "text_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
-        "pipeline_version": {"type": ["string", "null"], "maxLength": 64},
-        "quote": {"type": ["string", "null"], "maxLength": 2000}
+        "source_copy_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "passage_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^p[0-9]{1,5}-[0-9]{1,5}$"
+        },
+        "char_start": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "char_end": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "paragraph_label": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 32
+        },
+        "text_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "pipeline_version": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 64
+        },
+        "quote": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 2000
+        },
+        "pipeline_name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 64
+        },
+        "derivative_text_sha256": {
+          "description": "text_sha256 of the derived_text record the span offsets refer to.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        }
       }
     },
     "field_origin": {
       "description": "How a metadata field value was obtained. llm values must be shown as LLM-derived.",
       "type": "string",
-      "enum": ["crawler", "rule", "llm", "human", "release_import", "admin_entered", "unknown"]
+      "enum": [
+        "crawler",
+        "rule",
+        "llm",
+        "human",
+        "release_import",
+        "admin_entered",
+        "unknown"
+      ]
     },
     "candidate_status": {
       "description": "Verification state of any automated output. Cycle 13 releases may carry only AUTOMATED_CANDIDATE_NOT_VERIFIED or DOCUMENTARY_CHECKED (the latter only with a review reference).",
       "type": "string",
-      "enum": ["AUTOMATED_CANDIDATE_NOT_VERIFIED", "DOCUMENTARY_CHECKED", "REJECTED_ON_REVIEW"]
+      "enum": [
+        "AUTOMATED_CANDIDATE_NOT_VERIFIED",
+        "DOCUMENTARY_CHECKED",
+        "REJECTED_ON_REVIEW"
+      ]
     }
   }
 }

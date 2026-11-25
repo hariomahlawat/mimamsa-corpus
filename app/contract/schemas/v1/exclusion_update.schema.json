@@ -71,14 +71,25 @@
           {
             "required": [
               "doc_id"
-            ]
+            ],
+            "properties": {
+              "doc_id": {
+                "type": "string"
+              }
+            }
           },
           {
             "required": [
               "source_copy_sha256"
-            ]
+            ],
+            "properties": {
+              "source_copy_sha256": {
+                "type": "string"
+              }
+            }
           }
-        ]
+        ],
+        "description": "Each row must name at least one non-null doc_id or source_copy_sha256 (a row with only nulls is rejected: it cannot be enforced)."
       }
     },
     "register_json": {

@@ -22,7 +22,7 @@ from . import CONTRACT_MAJOR
 from .issues import Issue, ValidationReport
 from .paths import case_collisions, is_link_or_reparse, path_hazard
 from .restricted import RestrictedConfigError, RestrictedRegister, load_register
-from .rules import BundleContext, record_issues, schema_issues
+from .rules import RESERVED_PATH_PREFIXES, BundleContext, record_issues, schema_issues
 from .trust import TrustList, TrustedKey, fingerprint, verify_detached
 
 SUMS = "SHA256SUMS"
@@ -183,6 +183,8 @@ def validate_bundle(root: Path | str, *, trust_list: TrustList | None = None, tr
             report.add(Issue("PATH_HAZARD", f"unsafe path ({reason})", rel))
         if rel.casefold().startswith("sessions/"):
             report.add(Issue("WORKING_DOCUMENT_IN_BUNDLE", "working-session files (layer 9) are never exchanged", rel))
+        if rel.casefold().startswith(RESERVED_PATH_PREFIXES):
+            report.add(Issue("RESERVED_NAMESPACE", "path is in a reserved site-only namespace (agent/private/workflow/claim/policy state)", rel))
     for a, b in case_collisions(sorted(set(entries) | on_disk)):
         report.add(Issue("CASE_COLLISION", "paths differ only by case (alias on NTFS)", f"{a} | {b}"))
     for rel in sorted(on_disk - set(entries)):
@@ -300,6 +302,9 @@ def validate_bundle(root: Path | str, *, trust_list: TrustList | None = None, tr
     for _, r in by_kind["document"]:
         ctx.doc_ids.add(r.get("doc_id"))
         ctx.copy_shas.add((r.get("source_copy") or {}).get("sha256"))
+    for _, r in by_kind["derived_text"]:
+        ctx.derivatives.add((r.get("source_copy_sha256"), (r.get("pipeline") or {}).get("name"),
+                             (r.get("pipeline") or {}).get("version"), r.get("text_sha256")))
     for _, r in by_kind["candidate"]:
         cid = r.get("candidate_id")
         ctx.candidate_ids.add(cid)

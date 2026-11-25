@@ -39,3 +39,17 @@ def test_no_offline_cached_view():
 
 def test_pdfjs_safe_flags():
     assert P["pdfjs"]["isEvalSupported"] is False and P["pdfjs"]["enableScripting"] is False
+
+
+def test_pdfjs_uses_bounded_authenticated_ranges():
+    """PR #53 Serving §6/§10: no unbounded initial GET; bounded single ranges from the first byte."""
+    pj = P["pdfjs"]
+    assert pj["disableStream"] is True and pj["disableAutoFetch"] is True
+    assert 0 < pj["max_range_bytes"] <= 65536 and "custom range transport" in pj["transport"]
+
+
+def test_protected_responses_not_conditional_compressed_or_static():
+    pr = P["protected_responses"]
+    assert "no ETag" in pr["conditional_requests"] and "304" in pr["conditional_requests"]
+    assert pr["compression"].startswith("disabled") and pr["static_or_sendfile"].startswith("forbidden")
+    assert "polling" in pr["progress_events"]

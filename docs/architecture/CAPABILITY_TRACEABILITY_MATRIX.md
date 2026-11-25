@@ -175,7 +175,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Acceptance tests | Hybrid recall@20 ≥ best single method on held-out set, else ADR records why |
 | Phase | B1 |
 | Gated off | no |
-| Dependencies / limitations | Model chosen in P3; bulk embeddings may be built online and shipped in the bundle |
+| Dependencies / limitations | Model chosen in P3; bulk embeddings may be built online and shipped in the bundle; Later: hybrid RAG evidence packs reuse this service (PR #53 Retrieval §2-3) |
 
 #### CAP-US-04: Facets and filters
 
@@ -213,7 +213,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Acceptance tests | Snippet page equals opened page in ≥98% [P4] |
 | Phase | B1 |
 | Gated off | no |
-| Dependencies / limitations | None recorded |
+| Dependencies / limitations | Later: claim/source presentation per PR #53 Final Claim §7; excerpts stay labelled derived |
 
 #### CAP-US-06: Open original PDF at page with hit highlighted
 
@@ -232,7 +232,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Acceptance tests | Page correct ≥98%; native highlight ≥90%; scanned overlay per P4 |
 | Phase | B1 |
 | Gated off | no |
-| Dependencies / limitations | Scanned highlight accuracy target set after P4 |
+| Dependencies / limitations | Scanned highlight accuracy target set after P4; R2-N01 (PR #53 Serving §10) bounded authenticated range transport proof in P4 before enabling |
 
 #### CAP-US-07: Withdrawal- and restriction-consistent search
 
@@ -251,7 +251,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Acceptance tests | T-VIS-02, T-RM-01..03; contract tests test_restricted_material.py |
 | Phase | B1 (restricted register); B2 (withdrawal with Admin staging) |
 | Gated off | no |
-| Dependencies / limitations | If a BM25 index is adopted (P2), generation check must block stale results |
+| Dependencies / limitations | If a BM25 index is adopted (P2), generation check must block stale results; Serving fence via single delivery gateway (PR #53 Serving §1-3) |
 
 #### CAP-JI-01: Judgment page with cover metadata and per-field status chips
 
@@ -327,7 +327,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Acceptance tests | Every listed edge opens its evidence passage |
 | Phase | B3 |
 | Gated off | no |
-| Dependencies / limitations | Resolution ambiguity kept unresolved, never guessed |
+| Dependencies / limitations | Resolution ambiguity kept unresolved, never guessed; Later GraphRAG consumes these edges only through the A4/A5 crosswalk adapter (PR #53 Crosswalk §6) |
 
 #### CAP-JI-05: Holdings and propositions
 
@@ -517,7 +517,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Acceptance tests | Label test: every non-cites edge renders unverified marker |
 | Phase | B3 |
 | Gated off | no |
-| Dependencies / limitations | None recorded |
+| Dependencies / limitations | Later legal GraphRAG traversal (PR #53 Retrieval §4, §7); candidate edges remain leads |
 
 #### CAP-KG-02: Path between two nodes
 
@@ -631,7 +631,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Acceptance tests | T-GATE-01: enabling refused |
 | Phase | later |
 | Gated off | yes |
-| Dependencies / limitations | No legal reasoning in Cycle 13 |
+| Dependencies / limitations | No legal reasoning in Cycle 13; Future agentic orchestrator and policy gate (PR #53 Agentic §1-8); not implemented |
 
 #### CAP-CA-02: Material-fact dialogue
 
@@ -669,7 +669,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Acceptance tests | Not applicable: gated, architected only |
 | Phase | later |
 | Gated off | yes |
-| Dependencies / limitations | Not applicable: gated, architected only |
+| Dependencies / limitations | Not applicable: gated, architected only; Future final-claim verification and output authorisation (PR #53 Final Claim) |
 
 #### CAP-CA-04: Commander presentation of research results (plain-language view, no advice)
 
@@ -707,7 +707,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Acceptance tests | Not applicable: gated, architected only |
 | Phase | later |
 | Gated off | yes |
-| Dependencies / limitations | Not applicable: gated, architected only |
+| Dependencies / limitations | Not applicable: gated, architected only; Future deterministic legal engine (PR #53 Engine) |
 
 #### CAP-DS-01: Session-isolated working area (upload, view, OCR, annotate, export)
 
@@ -764,7 +764,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Acceptance tests | T-GATE-01 |
 | Phase | later |
 | Gated off | yes |
-| Dependencies / limitations | Not applicable: gated, architected only |
+| Dependencies / limitations | Not applicable: gated, architected only; Future deterministic engine shared with Document Studio (PR #53 Engine §1, Agentic §4) |
 
 #### CAP-DS-04: Document audit and readiness report
 
@@ -783,7 +783,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Acceptance tests | T-GATE-01 |
 | Phase | later |
 | Gated off | yes |
-| Dependencies / limitations | No compliance logic in Cycle 13 |
+| Dependencies / limitations | No compliance logic in Cycle 13; Future deterministic engine readiness checks (PR #53 Engine §3) |
 
 #### CAP-DS-05: Retention and cleanup of working sessions
 
@@ -878,7 +878,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Acceptance tests | Deep link survives N→N+1 import |
 | Phase | B1 (citation); B2 (deep links across releases) |
 | Gated off | no |
-| Dependencies / limitations | None recorded |
+| Dependencies / limitations | Evidence keys PageKey/SpanKey (contract evidence.py; PR #53 Crosswalk §2) |
 
 #### CAP-RW-05: Provenance and evidence-status panels
 
@@ -973,7 +973,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Acceptance tests | app/contract tests; T-UPD-01..03 |
 | Phase | B1 |
 | Gated off | no |
-| Dependencies / limitations | None recorded |
+| Dependencies / limitations | Exclusion acceptance record and restore authority (PR #53 Serving §4, §8) |
 
 #### CAP-KA-03: Restricted-material enforcement
 

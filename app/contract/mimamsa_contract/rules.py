@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+from .evidence import evidence_keys
 from .issues import Issue
 from .paths import path_hazard
 from .restricted import RestrictedRegister
@@ -22,6 +23,12 @@ APPROVED_TIERS = {"T1_LEGAL_ADVISER_REVIEWED", "T2_FORMAL_JAG_VALIDATED"}
 OFFICIAL_AUTHORITIES = {"ENACTED_OR_NOTIFIED_PRIMARY", "OFFICIAL_JUDICIAL_DECISION", "GOVERNMENT_COMPILATION", "GOVERNMENT_ISSUED_MANUAL"}
 OFFICIAL_CARRIERS = {"ISSUING_AUTHORITY", "GOVERNMENT_HOSTED_COPY"}
 SITE_ONLY_CHANNELS = {"RELEASE_ACTIVATION", "SITE_ADMIN"}
+# Reserved for future site-only state (agentic workflows, private drafts, final claims, serving policy). These are
+# never exchanged in release bundles; reserving them now keeps later intelligence features from colliding with the
+# interchange contract (PR #53 reconciliation).
+RESERVED_RECORD_KINDS = {"working_document", "agent_workflow", "agent_task", "agent_private_draft", "final_claim",
+                         "claim_verification", "output_authorization", "serving_epoch", "policy_witness", "rule_pack"}
+RESERVED_PATH_PREFIXES = ("agent/", "private/", "workflows/", "claims/", "policy/")
 
 
 @dataclass
@@ -34,6 +41,7 @@ class BundleContext:
     doc_ids: set = field(default_factory=set)
     copy_shas: set = field(default_factory=set)
     candidate_ids: set = field(default_factory=set)
+    derivatives: set = field(default_factory=set)       # (copy sha, pipeline name, pipeline version, text sha)
     subject_commits: dict = field(default_factory=dict)  # subject id -> set of commits that produced it
     subject_authors: dict = field(default_factory=dict)  # subject id -> author_id (when recorded)
     release_commits: set = field(default_factory=set)   # manifest tools_commit and artefact commits
@@ -262,6 +270,13 @@ def candidate_rules(rec: dict, reg: RestrictedRegister, where: str, ctx: BundleC
         cs, ce = a.get("char_start"), a.get("char_end")
         if cs is not None and ce is not None and ce < cs:
             out.append(Issue("ANCHOR_RANGE", "char_end < char_start", where))
+        if a.get("source_copy_sha256") and isinstance(a.get("page"), int):
+            _, span, reason = evidence_keys(a)
+            if reason:
+                out.append(Issue("SPAN_UNBOUND", reason, where, "warning"))
+            elif span is not None and ctx is not None and (span.page.source_copy_sha256, span.pipeline_name,
+                                                            span.pipeline_version, span.derivative_text_sha256) not in ctx.derivatives:
+                out.append(Issue("DANGLING_SPAN_BINDING", "span names a derivative that is not in this bundle", where))
     ev = rec.get("evaluation_ref")
     out += _path_issues(where, (rec.get("extractor") or {}).get("artefact_path"), (ev or {}).get("report_path"))
     status = rec.get("status")
@@ -357,6 +372,8 @@ def record_issues(kind: str, rec: dict, reg: RestrictedRegister, where: str, led
                   ctx: BundleContext | None = None) -> list[Issue]:
     if isinstance(rec, dict) and rec.get("record_kind") == "working_document":
         return [Issue("WORKING_DOCUMENT_IN_BUNDLE", "working documents (layer 9) are never exchanged", where)]
+    if isinstance(rec, dict) and rec.get("record_kind") in RESERVED_RECORD_KINDS:
+        return [Issue("RESERVED_RECORD_KIND", f"{rec.get('record_kind')} is reserved site-only state and never exchanged", where)]
     issues = schema_issues(kind, rec, where)
     if kind == "document":
         issues += document_rules(rec, reg, where, ledger_version, ctx)

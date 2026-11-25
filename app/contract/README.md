@@ -1,6 +1,7 @@
 # Mimamsa data interchange contract v1
 
 - **Version:** 1.0.0 (contract major 1), **pre-adoption revision R1** (2026-11-25) after independent review of `dc811848` (`docs/architecture/reviews/review_c13_b0_dc811848.md`). No bundle has been produced under the earlier draft, so the version number is unchanged; the revision tightens validation.
+- **Pre-adoption revision R2** (2026-11-25), reconciliation with the future intelligence architecture (PR #53 @ `6a0ae735`, which pinned R1 at `9eeb04a4`): optional span-binding fields on `page_anchor` (`pipeline_name`, `derivative_text_sha256`) and the `evidence` key projection; reserved site-only namespaces and record kinds; exclusion withdrawal rows must name a non-null identity; `ExclusionStore` acceptance record (compare-and-set, pending vs accepted). All additions are optional fields or stricter validation; no record kind or enum used by producers changed. PR #53's crosswalk should be re-pinned to this revision. See `docs/architecture/INTELLIGENCE_ARCHITECTURE_RECONCILIATION_C13.md`.
 - **Status:** proposed for Cycle 13, shared by Track A (producers) and Track B (the offline application). It supersedes the outline "IC-01" table in `docs/planning/CYCLE13_EXECUTION_PLAN.md` §6.
 - **Change control:** a breaking change after adoption needs a new major version, an updated validator and tests, and review by someone who is neither producer nor consumer author.
 
@@ -33,7 +34,7 @@
 | `schemas/v1/release_manifest.schema.json` | `RELEASE.json` |
 | `schemas/v1/trust_list.schema.json` | pinned signing keys by purpose (release, register, trust_list) |
 | `schemas/v1/exclusion_update.schema.json` | signed register + withdrawal update channel |
-| `mimamsa_contract/` | validator: `schemas`, `rules`, `restricted`, `paths`, `bundle`, `trust`, `exclusions`, `citation`, CLI |
+| `mimamsa_contract/` | validator: `schemas`, `rules`, `restricted`, `paths`, `bundle`, `trust`, `exclusions`, `citation`, `evidence` (PageKey/SpanKey projection), CLI |
 | `mimamsa_contract/devbundle.py` | development-only bundle writer and test trust lists (disposable keys) |
 | `examples/` | synthetic records (no real source, citation or provision) |
 | `tests/` | contract tests run by `.github/workflows/app-ci.yml` |
@@ -55,6 +56,10 @@
 | 9 | Temporary working documents | none, by design | `sessions\<user>\`, owner-only | Deleted at TTL | **Never** (`WORKING_DOCUMENT_IN_BUNDLE`) |
 
 **Publication semantics (ADR-0002).** In a bundle, `publication=PUBLISHED` means "released upstream for publication". The site Admin's activation of the release is the publication act; the importer then writes `publication_record`s with channel `RELEASE_ACTIVATION`. Local Admin publication writes `SITE_ADMIN` records. Neither is legal approval.
+
+**Evidence keys (retrieval provenance).** `PageKey = (source_copy_sha256, page)` always resolves to the original page. `SpanKey` adds `pipeline_name`, `pipeline_version` and `derivative_text_sha256` and is formed only when all three are present (else page-only, warning `SPAN_UNBOUND`); a span never resolves against another derivative (`evidence.resolve_span`), and in a bundle the named derivative must be present (`DANGLING_SPAN_BINDING`). These keys are what search hits, citations, graph evidence and later evidence packs carry.
+
+**Reserved site-only namespaces.** Bundle paths under `sessions/`, `agent/`, `private/`, `workflows/`, `claims/`, `policy/` and record kinds `working_document`, `agent_workflow`, `agent_task`, `agent_private_draft`, `final_claim`, `claim_verification`, `output_authorization`, `serving_epoch`, `policy_witness`, `rule_pack` are rejected (`WORKING_DOCUMENT_IN_BUNDLE`, `RESERVED_NAMESPACE`, `RESERVED_RECORD_KIND`). Future agent private writes and policy state therefore cannot enter the shared corpus by exchange.
 
 **candidate_id stability.** Stable for the same (source copy, extractor name, anchor). A new extractor version that yields the same item keeps the id; a materially different item gets a new id and lists the old one in `supersedes_candidate_ids`. Pins, notes and impact triggers follow `supersedes_candidate_ids`.
 
@@ -78,7 +83,7 @@ Order (validator = reference for the importer; the importer first copies the bun
 
 ### 3.3 Exclusion channel and post-activation re-application
 
-`exclusion_update` carries the full register text (`register_json`, whose sha256 equals what bundles pin) and the current withdrawal list, signed by a `register` key, with an increasing sequence. After **every** activation, rollback or restore, the site re-applies the latest accepted exclusion state (`exclusions.items_to_suppress`) before the generation serves a request, and purges matching index rows, embeddings, derivatives and caches. A rollback, an older retained generation or a restored backup therefore cannot resurrect a withdrawn or restricted item. Accepted updates are kept in an **append-only `ExclusionStore` outside the database and the release generations** (site path `D:\Mimamsa\exclusions\`, never overwritten by a restore); restore requires it and always applies the store's latest state (`state_for_restore`), refusing if the store is missing or older than the restored database.
+`exclusion_update` carries the full register text (`register_json`, whose sha256 equals what bundles pin) and the current withdrawal list, signed by a `register` key, with an increasing sequence. After **every** activation, rollback or restore, the site re-applies the latest accepted exclusion state (`exclusions.items_to_suppress`) before the generation serves a request, and purges matching index rows, embeddings, derivatives and caches. A rollback, an older retained generation or a restored backup therefore cannot resurrect a withdrawn or restricted item. Accepted updates are kept in an **append-only `ExclusionStore` outside the database and the release generations** (site path `D:\Mimamsa\exclusions\`, never overwritten by a restore); restore requires it and always applies the store's latest state (`state_for_restore`), refusing if the store is missing or older than the restored database. Acceptance is a compare-and-set of one `ACCEPTED` record after the signed pair is stored write-once; a pair without acceptance is *pending* (`ExclusionStore.pending`), and an `ACCEPTED` record pointing to a missing or altered pair halts. Withdrawal rows must name a non-null `doc_id` or `source_copy_sha256`.
 
 ## 4. Restricted-material exclusion rule
 
@@ -96,6 +101,7 @@ Order (validator = reference for the importer; the importer first copies the bun
 | `RESTRICTED_MATERIAL`, `RESTRICTED_CONFIG_MISSING`, `RESTRICTED_CONFIG_DRIFT`, `RESTRICTED_IDS_NOT_APPLIED` | restricted-material rule |
 | `RAISED_VALUE_NEEDS_REVIEW`, `REVIEW_UNRESOLVED`, `REVIEW_MISMATCH`, `REVIEW_UNRESOLVED_OUTSIDE_BUNDLE`, `REVIEW_NOT_INDEPENDENT`, `REVIEW_AUTHOR_MISMATCH`, `REVIEW_COMMIT_MISMATCH`, `AI_REVIEW_CANNOT_CONFIRM_IDENTITY`, `AUTHENTICITY_EVIDENCE_REQUIRED`, `AUTHENTICITY_EVIDENCE_INVALID`, `LEGAL_AXIS_NEEDS_APPROVAL`, `LEDGER_V0_NO_APPLICABILITY`, `AXIS_CONTRADICTION`, `PUBLISHED_TRUNCATED` (warning) | evidence for raised values; legal axes; contradictions |
 | `LEDGER_V0_NO_APPROVAL`, `APPROVAL_UNRESOLVED`, `APPOINTMENT_MISSING`, `APPOINTMENT_REVOKED`, `APPOINTMENT_NOT_VALID_AT_DECISION`, `APPROVAL_CAPACITY_MISMATCH`, `APPROVAL_SUBJECT_MISMATCH`, `APPROVAL_TIER_MISMATCH`, `LEDGER_HEAD_UNVERIFIED`, `BANNER_REQUIRED` | approval gate |
+| `SPAN_UNBOUND` (warning), `DANGLING_SPAN_BINDING`, `RESERVED_NAMESPACE`, `RESERVED_RECORD_KIND` | evidence keys; reserved namespaces |
 | `PUBLISH_WITHOUT_ELIGIBILITY`, `MARKING_WITHOUT_DECISION`, `PUBLICATION_CHANNEL_SITE_ONLY`, `DANGLING_PUBLICATION_RECORD` | publication |
 | `VAULT_PATH_MISMATCH`, `ALTERNATE_IS_SELF`, `DUPLICATE_DOC_ID` | identity |
 | `OCR_QUOTING`, `PASSAGE_PAGE_UNKNOWN`, `DUPLICATE_PAGE`, `DUPLICATE_PASSAGE`, `ANCHOR_RANGE` | derived text and anchors |

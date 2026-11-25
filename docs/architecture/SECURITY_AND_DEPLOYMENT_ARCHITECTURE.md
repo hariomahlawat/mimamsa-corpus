@@ -57,6 +57,8 @@ The nine data layers are kept physically and logically separate (definitions: `a
 | 8 | Indexes and embeddings | PostgreSQL FTS, pgvector, per generation | index/embed workers | search | No (rebuilt) |
 | 9 | Temporary working documents | `sessions\<user>\` + session tables (owner-only) | studio module, OCR worker (session jobs) | owner only | No (default) |
 
+**Execution domains** (PR #53 Agent Tool Contracts §7): PUBLISHED_RESEARCH (layers 1–8, published view), STAGED_ADMIN_PROCESSING (staging, Admin only) and PRIVATE_WORKING_SESSION (layer 9, owner only). A result that combines private and published inputs is private. They are processing scopes, not roles. Folders `D:\Mimamsa\private\<owner>\` (future agent drafts) and `D:\Mimamsa\policy\` (serving/witness state) are reserved now; neither is indexed, embedded, bundled or included in ordinary backups, and the contract rejects bundle paths in these namespaces.
+
 ## 3. Windows service identities
 
 | Service | Identity (proposed) | Notes |
@@ -127,6 +129,15 @@ Office desktops are shared, so nothing sensitive may persist in the browser (pol
 - PDF.js loads originals with no persistent range cache; working documents are served `no-store` and never written to the browser's download folder unless the user explicitly exports.
 - No offline cached view: when the server is unreachable the client shows a reconnecting notice only.
 
+### 7.4 Single delivery gateway and serving fence (PR #53 Serving contract)
+
+- Every protected response (search results, counts, snippets, metadata, graph paths, PDF ranges, exports, progress events with content) is handed to the client by **one delivery gateway** in the web process. Workers, static-file handlers, IIS static/`X-Sendfile`-style mechanisms and reverse-proxy caches never serve vault or derived bytes.
+- At hand-off the gateway checks the current publication/exclusion state (serving epoch) for the exact item; a withdrawal or exclusion is complete only after its durable acceptance (the fence), after which no affected bytes are handed off. Bytes already delivered cannot be recalled; Admin withdrawal UX says so.
+- PDF originals are served as bounded, authenticated single ranges (≤ 64 KiB proposed), after a bounded metadata request; no unbounded first GET, no protected compression, no ETag/304 (policy file `app/design/policies/client_state_and_cache.json`).
+- Initial topology candidate T0: the application service owns protected egress with no proxy on protected routes. An IIS/ARR front end (T1) is acceptable for protected routes only if its buffering is proven inside the gateway's bounds; otherwise those routes stay disabled (ADR-0005 K10).
+- Progress uses bounded authenticated polling; SignalR/SSE only for content-free status until proven.
+- **Proof belongs to the PoC agent:** R2-N01 (atomic byte-credit reservation, large-PDF range bootstrap, near-end jump, withdrawal between chunks) under P4/P5 on the selected Windows host. Not claimed here.
+
 ### 7.3 Server-side authorisation model
 
 | Check | Rule | Enforced where |
@@ -138,6 +149,7 @@ Office desktops are shared, so nothing sensitive may persist in the browser (pol
 | Legal Reviewer designation | A row in `designations` tied to an account and an `Appointment`. **No endpoint records an approval in Cycle 13.** The designation flag is inert; any approval endpoint returns 403 `GATE_CLOSED` | Feature gate + data check (`auth_ledger_version == 0` ⇒ closed) |
 | Gated features | Commander assistant, legal-rule checks, readiness reports, template filling → disabled by configuration that cannot be enabled while the reasoning-feature gate is closed | Startup config validation + per-request gate check |
 | Opaque ids | Ids are random (UUIDv4/ULID); knowing an id grants nothing | All of the above |
+| Non-disclosure | For an unauthorised caller, hidden, not-found, restricted, withdrawn and staged items return one indistinguishable response; counts, facets and timing do not reveal them (PR #53 Tools §7) | Query layer filters before counting; uniform error mapping |
 
 ## 8. Signing-key custody, trust list and signed offline updates
 
@@ -206,6 +218,7 @@ Any failure in 1–6 rejects the whole bundle and changes nothing. The validator
 
 ### 8.4 Exclusion channel (withdrawals and restricted register), independent of releases
 
+- **Acceptance protocol (reference: `ExclusionStore`):** stage the signed pair, move it write-once into the store, then accept by compare-and-set of a single `ACCEPTED` record (flushed, atomically replaced). The `ACCEPTED` record is the sole acceptance point and the serving fence for exclusions; a pair without it is *pending*, never accepted; an `ACCEPTED` record that points to a missing or altered pair halts protected delivery. Durability on the actual Windows storage (power-loss behaviour) is proven in P8/B2; an independent custody copy of the `ACCEPTED` record (witness) is an owner decision (PR #53 Serving §8).
 - **Channel:** a signed `exclusion_update` (contract schema) carrying the full register text and the current withdrawal list, signed by the owner's `register` key, strictly increasing sequence (`exclusions.accept_exclusion_update`). It is applied from the import drop folder like a bundle, without waiting for a release.
 - **Re-application rule:** after every activation, rollback and restore, and immediately on accepting an exclusion update, the site computes `items_to_suppress` for the active generation and every retained generation, and in one transaction: marks them `WITHDRAWN` or `EXCLUDED_RESTRICTED`, deletes their FTS rows, embeddings, graph edges and derivatives, invalidates caches, and records publication records. A rollback, an older generation or a restored backup therefore cannot resurrect an excluded item.
 - **Restricted bytes uploaded by an Admin:** the upload service hashes the stream in the staging area **before** anything is persisted to the vault; a register hit aborts the upload, deletes the staging file, and records only the hash prefix, restriction id, actor and time. Nothing is quarantined or backed up (consistent with the register's `routine_operations_forbidden: copy`).

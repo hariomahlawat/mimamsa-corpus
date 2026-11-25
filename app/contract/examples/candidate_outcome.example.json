@@ -14,7 +14,9 @@
    "paragraph_label": "1",
    "text_sha256": null,
    "pipeline_version": "0.0.1",
-   "quote": null
+   "quote": null,
+   "pipeline_name": "example-extract",
+   "derivative_text_sha256": "982d9e3eb996f559e633f4d194def3761d909f5a3b647d1a851fead67c32c9d1"
   }
  ],
  "extractor": {

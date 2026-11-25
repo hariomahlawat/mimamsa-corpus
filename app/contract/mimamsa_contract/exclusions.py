@@ -46,6 +46,9 @@ def accept_exclusion_update(update_bytes: bytes, signature: bytes, trust: TrustL
         raise ExclusionError(f"exclusion update invalid: {errs[0].message[:200]}")
     if data["sequence"] <= current_sequence:
         raise ExclusionError("exclusion update sequence must increase (replay/downgrade refused)")
+    for w in data["withdrawals"]:
+        if not (w.get("doc_id") or w.get("source_copy_sha256")):
+            raise ExclusionError("withdrawal row names neither a doc_id nor a source copy hash; update rejected")
     reg_bytes = data["register_json"].encode("utf-8")
     if hashlib.sha256(reg_bytes).hexdigest() != data["register_sha256"]:
         raise ExclusionError("register_sha256 does not match register_json")
@@ -73,39 +76,87 @@ def items_to_suppress(items, state: ExclusionState) -> list[tuple[str, str]]:
 
 
 class ExclusionStore:
-    """Append-only on-disk store of accepted, signed exclusion updates, kept OUTSIDE the database and the release
-    generations (site path D:\\Mimamsa\\exclusions\\, excluded from restore). A database or release restore cannot
-    remove or roll it back; restore requires it (load_latest) and re-applies its latest state.
-    Files: <seq:08d>.json + <seq:08d>.sig, written once; lower or equal sequences and overwrites are refused."""
+    """Append-only store of accepted, signed exclusion updates, kept OUTSIDE the database and the release generations
+    (site path D:\\Mimamsa\\exclusions\\, excluded from restore). Restore cannot remove or roll it back.
+
+    Acceptance protocol (reference for PR #53 Serving §4/§8, single writer):
+      1 stage the payload and signature together under staging/<seq>/ and flush;
+      2 move the complete pair into pairs/<seq:08d>.{json,sig} (write-once);
+      3 accept by compare-and-set of the ACCEPTED record (expected prior sequence + digest -> new sequence + digest),
+        written to a temporary file, flushed and atomically replaced. The ACCEPTED record is the sole acceptance point.
+    A pair without a matching ACCEPTED record is pending, never accepted; load_latest uses only the ACCEPTED record and
+    halts if it references a missing or altered pair. Durability on the actual Windows storage is proven in P8/B2;
+    custody of an independent copy of the ACCEPTED record (the "witness") is an owner decision.
+    """
 
     def __init__(self, directory):
         from pathlib import Path
         self.dir = Path(directory)
+        self.pairs = self.dir / "pairs"
+        self.accepted = self.dir / "ACCEPTED.json"
 
-    def _seqs(self):
-        return sorted(int(p.stem) for p in self.dir.glob("*.json") if p.stem.isdigit())
+    def _read_accepted(self):
+        if not self.accepted.exists():
+            return None
+        return json.loads(self.accepted.read_text(encoding="utf-8"), object_pairs_hook=_no_dupes)
 
-    def append(self, update_bytes: bytes, signature: bytes, trust: TrustList, mode: str = "production") -> ExclusionState:
-        self.dir.mkdir(parents=True, exist_ok=True)
-        seqs = self._seqs()
-        state = accept_exclusion_update(update_bytes, signature, trust, seqs[-1] if seqs else 0, mode)
-        j, s = self.dir / f"{state.sequence:08d}.json", self.dir / f"{state.sequence:08d}.sig"
-        if j.exists() or s.exists():
+    @staticmethod
+    def _fsync_write(path, data: bytes, exclusive: bool = False):
+        import os
+        with open(path, "xb" if exclusive else "wb") as fh:
+            fh.write(data)
+            fh.flush()
+            os.fsync(fh.fileno())
+
+    def append(self, update_bytes: bytes, signature: bytes, trust: TrustList, mode: str = "production",
+               expected_sequence: int | None = None) -> ExclusionState:
+        import os
+        acc = self._read_accepted()
+        current = acc["sequence"] if acc else 0
+        if expected_sequence is not None and expected_sequence != current:
+            raise ExclusionError("compare-and-set failed: accepted sequence changed (concurrent update)")
+        state = accept_exclusion_update(update_bytes, signature, trust, current, mode)
+        self.pairs.mkdir(parents=True, exist_ok=True)
+        stem = self.pairs / f"{state.sequence:08d}"
+        jp, sp = stem.with_suffix(".json"), stem.with_suffix(".sig")
+        if jp.exists() or sp.exists():
             raise ExclusionError("exclusion update already stored; the store is append-only")
-        with open(j, "xb") as fh:
-            fh.write(update_bytes)
-        with open(s, "xb") as fh:
-            fh.write(signature)
+        staging = self.dir / "staging" / f"{state.sequence:08d}"
+        staging.mkdir(parents=True, exist_ok=False)
+        self._fsync_write(staging / "u.json", update_bytes, True)
+        self._fsync_write(staging / "u.sig", signature, True)
+        os.replace(staging / "u.json", jp)
+        os.replace(staging / "u.sig", sp)
+        staging.rmdir()
+        record = {"sequence": state.sequence, "digest": hashlib.sha256(update_bytes).hexdigest(),
+                  "previous_sequence": current, "previous_digest": acc["digest"] if acc else None}
+        tmp = self.dir / "ACCEPTED.json.tmp"
+        self._fsync_write(tmp, json.dumps(record, sort_keys=True).encode())
+        if (self._read_accepted() or {}).get("sequence", 0) != current:
+            raise ExclusionError("compare-and-set failed at acceptance")
+        os.replace(tmp, self.accepted)
         return state
 
     def load_latest(self, trust: TrustList, mode: str = "production") -> ExclusionState:
-        """Re-verify the newest stored update. Missing store => ExclusionError (restore must not proceed)."""
-        seqs = self._seqs()
-        if not seqs:
-            raise ExclusionError("exclusion store empty or missing: restore/activation refused until it is present")
-        n = seqs[-1]
-        return accept_exclusion_update((self.dir / f"{n:08d}.json").read_bytes(), (self.dir / f"{n:08d}.sig").read_bytes(),
-                                       trust, n - 1, mode)
+        """Re-verify the accepted update. Missing ACCEPTED record => ExclusionError (restore must not proceed)."""
+        acc = self._read_accepted()
+        if not acc:
+            raise ExclusionError("exclusion store has no accepted state: restore/activation refused until it is present")
+        stem = self.pairs / f"{acc['sequence']:08d}"
+        try:
+            data, sig = stem.with_suffix(".json").read_bytes(), stem.with_suffix(".sig").read_bytes()
+        except OSError as exc:
+            raise ExclusionError("accepted exclusion pair missing: halt protected delivery and recover") from exc
+        if hashlib.sha256(data).hexdigest() != acc["digest"]:
+            raise ExclusionError("accepted exclusion pair altered: halt and recover")
+        return accept_exclusion_update(data, sig, trust, acc["sequence"] - 1, mode)
+
+    def pending(self) -> list[int]:
+        """Sequences present as pairs or staging but not accepted (reported as pending/failed, never as accepted)."""
+        acc = (self._read_accepted() or {}).get("sequence", 0)
+        seqs = [int(p.stem) for p in self.pairs.glob("*.json") if p.stem.isdigit()] if self.pairs.exists() else []
+        st = [int(p.name) for p in (self.dir / "staging").glob("*") if p.name.isdigit()] if (self.dir / "staging").exists() else []
+        return sorted({s for s in seqs + st if s > acc})
 
 
 def state_for_restore(store: ExclusionStore, trust: TrustList, restored_db_sequence: int, mode: str = "production") -> ExclusionState:

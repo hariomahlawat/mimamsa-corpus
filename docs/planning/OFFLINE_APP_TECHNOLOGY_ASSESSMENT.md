@@ -17,6 +17,8 @@
 | Auth: Django auth + django-auth-ldap | **GENERALISED** | Local accounts plus optional AD, under either framework (§11) |
 | PoCs P1–P7 | **REPLACED** by the directive's P1–P9 (§16) | |
 | Hardware baseline as planning assumption under D-01 | **CONFIRMED PROVISIONALLY** by the directive | 16 cores, 64 GB, 1 TB SSD; GPU optional, never mandatory |
+| Windows-only framing | **REFINED 2026-11-25** (owner) | *Windows-first, not Windows-only*: platform-independent core, replaceable OS adapters (ADR-0005 §4a); no Linux production support claimed in C13 |
+| SignalR for job progress | **NARROWED 2026-11-25** (PR #53 reconciliation) | Bounded polling by default; SignalR/SSE only for content-free status until the protected delivery adapter is proven |
 
 Everything not listed (one-database principle, transactional withdrawal, content-addressed vault, signed bundles, FOUO exclusion, no LLM in Cycle 13) is retained.
 
