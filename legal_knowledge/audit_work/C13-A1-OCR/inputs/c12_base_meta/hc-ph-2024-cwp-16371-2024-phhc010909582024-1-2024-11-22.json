@@ -1,0 +1,97 @@
+{
+  "schema_version": "0.2.0",
+  "doc_id": "hc-ph-2024-cwp-16371-2024-phhc010909582024-1-2024-11-22",
+  "doc_type": "judgment",
+  "title": "CWP/16371/2024 of UNION OF INDIA AND ORS Vs ARMED FORCES TRIBUNAL AND ANR",
+  "number": "2024:PHHC:154585-DB",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2024-11-22",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-24",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2024/court=3_22/bench=phhc/PHHC010909582024_1_2024-11-22.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-24T10:16:00Z",
+  "sha256": "9960904c701ce9ef8a1b7b46b0e895a6a345f1ca2f59df1be10e3a142b14d7a9",
+  "raw_path": "data/raw/hc/2024/9960904c701ce9ef8a1b7b46b0e895a6a345f1ca2f59df1be10e3a142b14d7a9.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 11,
+  "access_marking": null,
+  "text_method": null,
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "relations": [],
+  "field_provenance": {
+    "page_count": "rule",
+    "title": "crawler",
+    "issue_date": "crawler",
+    "neutral_citation": "llm",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "judges": "llm",
+    "bench": "llm",
+    "topics": "llm",
+    "relevance": "llm"
+  },
+  "text_path": null,
+  "text_quality": "suspect",
+  "needs_ocr": true,
+  "pages_without_text": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "statutes_cited": [],
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010909582024_1_2024-11-22.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010909582024",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Excluded by the crawler's keyword pass ('no military keyword in the text'), ranked first tier in C11, re-acquired in C12 (T5-EXC-0212) with SHA-256 equal to the crawler-logged value, and ingested in C12 after review (judicial_recovery_c12).",
+  "court": "High Court of Punjab and Haryana",
+  "bench": "Division Bench",
+  "case_numbers": [
+    "CWP/16371/2024"
+  ],
+  "neutral_citation": "2024:PHHC:154585-DB",
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA AND ORS"
+    ],
+    "respondent": [
+      "ARMED FORCES TRIBUNAL AND ANR"
+    ]
+  },
+  "judges": [
+    "Sureshwar Thakur",
+    "Sudeepti Sharma"
+  ],
+  "outcome": null,
+  "cases_cited": [],
+  "topics": [
+    "disability_pension"
+  ],
+  "relevance": {
+    "status": "not_checked",
+    "hits": 0,
+    "keywords": {},
+    "note": "Text layer unusable (font without a Unicode map; does not read as English): keyword pass not possible until OCR. C12 review of the page images: Writ petition (Division Bench) by the Union against an AFT disability-pension order: within scope 'writs against AFT orders'."
+  }
+}

@@ -38,6 +38,7 @@ LETTER_SHARE = 0.5
 DICT_RATIO = 0.15
 CONTROL_SHARE = 0.01
 IMAGE_COVER = 0.5
+INK_SHARE = 0.01                 # share of dark pixels on a low-resolution render: above this, the page is not blank
 
 # Frequent English function words plus words that occur in nearly every Indian judgment. A page of real
 # English prose has 35-60% of its word tokens in this list; garbled or mis-mapped text has almost none.
@@ -108,13 +109,16 @@ def text_metrics(text: str) -> dict:
     }
 
 
-def page_verdict(text: str, image_cover: float = 0.0) -> dict:
-    """Verdict for one page. `image_cover` = share of the page area covered by images (0..1)."""
+def page_verdict(text: str, image_cover: float = 0.0, ink: float | None = None) -> dict:
+    """Verdict for one page. `image_cover` = share of the page area covered by placed images (0..1);
+    `ink` = share of dark pixels in a low-resolution render (None when not measured). A page with
+    almost no text but visible ink is a scan even when its images are not reported as placed images
+    (inline images, form XObjects, vector-drawn scans): v1 of this detector called such pages blank."""
     m = text_metrics(text)
     flags: list[str] = []
     n = m["chars"]
     if n < MIN_CHARS:
-        if image_cover >= IMAGE_COVER:
+        if image_cover >= IMAGE_COVER or (ink is not None and ink >= INK_SHARE):
             flags.append("image_only")
         elif n == 0:
             flags.append("blank")
@@ -160,6 +164,14 @@ def image_cover_of(page) -> float:
     return min(1.0, covered / area)
 
 
+def ink_share(page, dpi: int = 30) -> float:
+    """Share of dark (< 160 of 255) pixels in a grey render of a PyMuPDF page."""
+    import pymupdf
+    pix = page.get_pixmap(dpi=dpi, colorspace=pymupdf.csGRAY, alpha=False)
+    data = pix.samples
+    return sum(1 for b in data if b < 160) / max(1, len(data))
+
+
 def has_eof(raw: bytes) -> bool:
     return b"%%EOF" in raw[-2048:]
 
@@ -187,7 +199,9 @@ def assess_pdf(path) -> dict:
             try:
                 page = doc[i]
                 text, _ = page_text(page)
-                v = page_verdict(text, image_cover_of(page))
+                cover = image_cover_of(page)
+                few = len(re.sub(r"\s", "", text)) < MIN_CHARS
+                v = page_verdict(text, cover, ink_share(page) if few and cover < IMAGE_COVER else None)
             except Exception as e:
                 out["page_errors"].append(i + 1)
                 v = {"usable": False, "flags": ["page_error"], "metrics": {}, "error": str(e)[:120]}

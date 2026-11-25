@@ -1,0 +1,22 @@
+{
+ "paddle_v5_mobile": {
+  "mean_char_accuracy_all": 0.8803,
+  "mean_char_accuracy_english_pages": 0.977,
+  "mean_content_word_recall": 0.8362,
+  "mean_seconds_per_page": 42.9183,
+  "mean_word_accuracy_all": 0.8124,
+  "mean_word_accuracy_english_pages": 0.9052,
+  "pages": 6,
+  "pages_covered": 5
+ },
+ "rapidocr": {
+  "mean_char_accuracy_all": 0.8139,
+  "mean_char_accuracy_english_pages": 0.9003,
+  "mean_content_word_recall": 0.7298,
+  "mean_seconds_per_page": 21.6233,
+  "mean_word_accuracy_all": 0.6485,
+  "mean_word_accuracy_english_pages": 0.7121,
+  "pages": 6,
+  "pages_covered": 5
+ }
+}

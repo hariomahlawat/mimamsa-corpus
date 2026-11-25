@@ -144,3 +144,9 @@ def test_legacy_mapping_never_rejects_non_final_states():
 def test_aft_abbreviation_case_sensitive():
     assert "aft_proceeding" not in rs.second_check("we left after lunch; aft deck")["families"]
     assert "aft_proceeding" in rs.second_check("order of the AFT dated")["families"]
+
+
+def test_ink_without_placed_images_is_a_scan_not_blank():
+    # v1 defect: scans drawn as inline images / XObjects reported no image cover and were called blank
+    assert tq.page_verdict("", image_cover=0.0, ink=0.08)["flags"] == ["image_only"]
+    assert tq.page_verdict("", image_cover=0.0, ink=0.0005)["flags"] == ["blank"]
