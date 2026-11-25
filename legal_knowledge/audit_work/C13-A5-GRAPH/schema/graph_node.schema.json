@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mimamsa:c13-a5:graph_node:1.0.0",
+  "title": "Mimamsa candidate legal knowledge graph: node (IC-01 entity)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["node_id", "node_type", "label", "source_copy_sha256", "anchor", "extractor_version", "verification_axes", "restrictions", "attributes"],
+  "properties": {
+    "node_id": {"type": "string", "pattern": "^(INS|PROV|PV|JUD|PROC|QL|PROP|PROCEDURE|AUTH|FORM|REQ|REF):.+$"},
+    "node_type": {"enum": ["INSTRUMENT", "PROVISION", "PROVISION_VERSION", "JUDGMENT", "PROCEEDING", "QUESTION_OF_LAW",
+                           "PROPOSITION", "PROCEDURE", "COMPETENT_AUTHORITY", "FORM", "ADMINISTRATIVE_REQUIREMENT", "UNRESOLVED_REFERENCE"]},
+    "label": {"type": "string"},
+    "source_copy_sha256": {"type": ["array"], "items": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+                           "description": "Every byte-level copy behind the node. Empty only for UNRESOLVED_REFERENCE and for instrument/provision nodes known only from judgment text."},
+    "anchor": {"type": ["object", "null"], "additionalProperties": false,
+               "properties": {"doc_id": {"type": ["string", "null"]}, "page": {"type": ["integer", "null"]},
+                              "paragraph": {"type": ["string", "null"]}, "text": {"type": ["string", "null"]}}},
+    "extractor_version": {"type": "string"},
+    "verification_axes": {"$ref": "#/$defs/axes"},
+    "evaluation_ref": {"type": ["string", "null"]},
+    "restrictions": {"type": "array", "items": {"enum": ["NON_OPERATIONAL_RESEARCH_ONLY", "HIDDEN_FROM_USERS_THIS_CYCLE", "CANDIDATE_DATA"]}},
+    "attributes": {"type": "object"}
+  },
+  "$defs": {
+    "axes": {
+      "type": "object", "additionalProperties": false,
+      "required": ["byte_integrity", "identity_fidelity", "attribution_extraction", "legal_proposition", "temporal_applicability", "authority_approval"],
+      "properties": {
+        "byte_integrity": {"enum": ["byte.BYTE_VERIFIED", "byte.DECLARED_HASH_ONLY", "byte.NOT_CHECKED", "byte.NOT_APPLICABLE"]},
+        "identity_fidelity": {"enum": ["identity.IDENTITY_CONFIRMED", "identity.PROVISIONAL", "identity.DISPUTED", "identity.NOT_APPLICABLE"]},
+        "attribution_extraction": {"enum": ["extraction.AUTOMATED_CANDIDATE", "extraction.DOCUMENTARY_CHECKED", "extraction.INCORRECT"]},
+        "legal_proposition": {"enum": ["proposition.RESEARCH_CANDIDATE", "proposition.SOURCE_SUPPORTED", "proposition.NOT_APPLICABLE"]},
+        "temporal_applicability": {"enum": ["temporal.EVIDENCED", "temporal.PARTIAL_CHAIN", "temporal.UNRESOLVED", "temporal.NOT_APPLICABLE"]},
+        "authority_approval": {"enum": ["approval.NONE"]}
+      }
+    }
+  }
+}

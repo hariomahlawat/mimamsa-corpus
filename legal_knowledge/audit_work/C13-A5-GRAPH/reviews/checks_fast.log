@@ -1,0 +1,17 @@
+== scnum_reconfirm_c13
+/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/venv/lib/python3.13/site-packages/fitz/__init__.py:17: FutureWarning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+  warnings.warn(
+CHECK OK: 3 outputs reproduce byte-identically
+rc=0
+== identity_c13
+CHECK OK: 2 outputs reproduce byte-identically
+rc=0
+== graph_c13
+CHECK OK: 6 outputs reproduce byte-identically
+rc=0
+== hf_overlay_c13
+CHECK OK: staged overlay, manifest and recorded verification agree
+rc=0
+== package_c13
+CHECK OK: 1 outputs reproduce byte-identically
+rc=0
