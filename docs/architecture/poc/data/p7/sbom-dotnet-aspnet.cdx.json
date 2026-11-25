@@ -1,0 +1,161 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:ef59df87-bfa5-4492-8c89-3a68a8abbbb0",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-11-25T10:47:25Z",
+    "tools": [
+      {
+        "vendor": "CycloneDX",
+        "name": "CycloneDX module for .NET",
+        "version": "5.5.0.0"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "bom-ref": "MimamsaPocApi@0.0.0",
+      "name": "MimamsaPocApi",
+      "version": "0.0.0"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Microsoft.Extensions.Hosting.WindowsServices@10.0.15",
+      "authors": [
+        {
+          "name": "Microsoft"
+        }
+      ],
+      "name": "Microsoft.Extensions.Hosting.WindowsServices",
+      "version": "10.0.15",
+      "description": ".NET hosting infrastructure for Windows Services.",
+      "scope": "required",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "F17FE9811B7B19464CC0CB1029DC357385517DCFB64773793EA7865A44B2A215D702331714D0C4921554ED4662910B777926CCF236778EE8B7A1EF1E397B24D8"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "copyright": "\u00A9 Microsoft Corporation. All rights reserved.",
+      "purl": "pkg:nuget/Microsoft.Extensions.Hosting.WindowsServices@10.0.15",
+      "externalReferences": [
+        {
+          "url": "https://dot.net/",
+          "type": "website"
+        },
+        {
+          "url": "https://github.com/dotnet/dotnet",
+          "type": "vcs"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Npgsql@10.0.4",
+      "authors": [
+        {
+          "name": "Shay Rojansky,Nikita Kazmin,Brar Piening,Nino Floris,Yoh Deadfall,Austin Drenski,Emil Lenngren,Francisco Figueiredo Jr.,Kenji Uno"
+        }
+      ],
+      "name": "Npgsql",
+      "version": "10.0.4",
+      "description": "Npgsql is the open source .NET data provider for PostgreSQL.",
+      "scope": "required",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "5E714CF788AE758CD1F42FAA864D846FE7DBED287367998255F6660DC7E859EC607B409D34E5FF28013B299C097EF4616C237AE8531E1C125B4A0AF3077D6817"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "PostgreSQL"
+          }
+        }
+      ],
+      "copyright": "Copyright 2025 \u00A9 The Npgsql Development Team",
+      "purl": "pkg:nuget/Npgsql@10.0.4",
+      "externalReferences": [
+        {
+          "url": "https://github.com/npgsql/npgsql",
+          "type": "website"
+        },
+        {
+          "url": "https://github.com/npgsql/npgsql",
+          "type": "vcs"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/System.ServiceProcess.ServiceController@10.0.15",
+      "authors": [
+        {
+          "name": "Microsoft"
+        }
+      ],
+      "name": "System.ServiceProcess.ServiceController",
+      "version": "10.0.15",
+      "description": "Provides the System.ServiceProcess.ServiceController class, which allows you to connect to a Windows service, manipulate it, or get information about it.\n\nCommonly Used Types:\nSystem.ServiceProcess.ServiceController\nSystem.ServiceProcess.ServiceControllerStatus\nSystem.ServiceProcess.ServiceType",
+      "scope": "required",
+      "hashes": [
+        {
+          "alg": "SHA-512",
+          "content": "B507CAB45F53598F2E84F3028146C8F7D18F05D905A963C324EBF668942A400E8CE5447B597E89E1E32C522D31FD38C6F1A40FA255FA48F61C1A44146C7C9232"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "copyright": "\u00A9 Microsoft Corporation. All rights reserved.",
+      "purl": "pkg:nuget/System.ServiceProcess.ServiceController@10.0.15",
+      "externalReferences": [
+        {
+          "url": "https://dot.net/",
+          "type": "website"
+        },
+        {
+          "url": "https://github.com/dotnet/dotnet",
+          "type": "vcs"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "MimamsaPocApi@0.0.0",
+      "dependsOn": [
+        "pkg:nuget/Microsoft.Extensions.Hosting.WindowsServices@10.0.15",
+        "pkg:nuget/Npgsql@10.0.4"
+      ]
+    },
+    {
+      "ref": "pkg:nuget/Microsoft.Extensions.Hosting.WindowsServices@10.0.15",
+      "dependsOn": [
+        "pkg:nuget/System.ServiceProcess.ServiceController@10.0.15"
+      ]
+    },
+    {
+      "ref": "pkg:nuget/Npgsql@10.0.4",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:nuget/System.ServiceProcess.ServiceController@10.0.15",
+      "dependsOn": []
+    }
+  ]
+}

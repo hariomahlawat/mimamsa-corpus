@@ -20,12 +20,12 @@ queries = {q["qid"]: q for q in json.load(open(Path(__file__).resolve().parent /
 runs = {}
 for d in sys.argv[3:]:
     for f in sorted(Path(d).glob("*.json")):
-        j = json.loads(f.read_text()); runs[j["system"]] = j["run"]
+        j = json.loads(f.read_text()); runs[j["system"]] = {q: [x[0] if isinstance(x, list) else x for x in v] for q, v in j["run"].items()}
 
 
 def per_query(run, qid):
     lab = {d: v["grade"] for d, v in qrels.get(qid, {}).items()}
-    top = [d for d, _s in run.get(qid, [])[:10]]
+    top = run.get(qid, [])[:10]
     rel = {d for d, g in lab.items() if g >= 1}
     hits = [d for d in top if lab.get(d, 0) >= 1]
     rr = 0.0

@@ -10,17 +10,23 @@ const fs = require("fs");
     const ctx = await browser.newContext();
     const page = await ctx.newPage();
     let bytes = 0, requests = 0, ranged = 0;
-    page.on("response", async (r) => {
-      if (r.url().includes("/pdf/")) {
-        requests++; if (r.status() === 206) ranged++;
-        const len = parseInt((await r.allHeaders())["content-length"] || "0", 10); bytes += len;
+    const pending = [];
+    page.on("requestfinished", (req) => {
+      if (req.url().includes("/pdf")) {
+        pending.push((async () => {
+          const resp = await req.response(); const sz = await req.sizes();
+          requests++; if (resp && resp.status() === 206) ranged++;
+          bytes += sz.responseBodySize;               // bytes actually received, not Content-Length
+        })());
       }
     });
-    const url = `${base}/?file=/pdf/${encodeURIComponent(c.file)}&page=${c.page}&q=${encodeURIComponent(c.q)}`;
+    const fileUrl = c.url || `/pdf/${encodeURIComponent(c.file)}`;
+    const url = `${base}/?file=${encodeURIComponent(fileUrl)}&page=${c.page}&q=${encodeURIComponent(c.q)}${c.auth ? `&auth=${c.auth}` : ""}`;
     const t = Date.now();
     await page.goto(url);
     await page.waitForFunction(() => window.__metrics && window.__metrics.done, null, { timeout: 120000 });
     const m = await page.evaluate(() => window.__metrics);
+    await page.waitForTimeout(300); await Promise.all(pending);
     m.wall_ms = Date.now() - t; m.pdf_requests = requests; m.pdf_206 = ranged; m.pdf_bytes_fetched = bytes;
     m.file_bytes = c.bytes; m.label = c.label;
     if (c.screenshot) await page.screenshot({ path: c.screenshot });

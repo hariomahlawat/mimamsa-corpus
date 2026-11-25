@@ -8,7 +8,7 @@ VENV=$1; DOTNET=$2; OUT=$3
 HERE=$(cd "$(dirname "$0")" && pwd)
 POC=$(cd "$HERE/.." && pwd)
 mkdir -p "$OUT"
-export DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_NOLOGO=1 PATH="$DOTNET:$PATH"
+export DOTNET_CLI_TELEMETRY_OPTOUT=1 DOTNET_NOLOGO=1 PATH="$DOTNET:$PATH" DOTNET_ROOT="$DOTNET" DOTNET_ROLL_FORWARD=Major  # CycloneDX 5.5.0 targets net9.0
 
 # ---- Python: full PoC venv + per-candidate requirement sets
 "$VENV/bin/cyclonedx-py" environment "$VENV" --of JSON -o "$OUT/sbom-python-bpoc-venv.cdx.json" 2>"$OUT/cyclonedx-py.log"

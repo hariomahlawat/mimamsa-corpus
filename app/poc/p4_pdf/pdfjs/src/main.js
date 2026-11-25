@@ -12,7 +12,8 @@ const m = { file, pageNo, term };
 const t0 = performance.now();
 
 async function run() {
-  const task = pdfjsLib.getDocument({ url: file, disableAutoFetch: true, disableStream: true, rangeChunkSize: 65536 });
+  const httpHeaders = params.get("auth") ? { Authorization: `Bearer ${params.get("auth")}` } : undefined;
+  const task = pdfjsLib.getDocument({ url: file, httpHeaders, disableAutoFetch: true, disableStream: true, rangeChunkSize: 65536 });
   const doc = await task.promise;
   m.numPages = doc.numPages;
   m.open_ms = performance.now() - t0;

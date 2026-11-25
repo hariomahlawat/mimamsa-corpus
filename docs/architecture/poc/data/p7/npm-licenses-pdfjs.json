@@ -1,0 +1,130 @@
+{
+    "@napi-rs/canvas-linux-x64-gnu@1.2.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/Brooooooklyn/canvas",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/@napi-rs/canvas-linux-x64-gnu",
+        "licenseFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/@napi-rs/canvas-linux-x64-gnu/README.md"
+    },
+    "@napi-rs/canvas@1.2.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/Brooooooklyn/canvas",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/@napi-rs/canvas",
+        "licenseFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/@napi-rs/canvas/LICENSE"
+    },
+    "@oxc-project/types@0.156.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/oxc-project/oxc",
+        "publisher": "Boshen and oxc contributors",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/@oxc-project/types",
+        "licenseFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/@oxc-project/types/LICENSE"
+    },
+    "@rolldown/binding-linux-x64-gnu@1.2.19": {
+        "licenses": "MIT",
+        "repository": "https://github.com/rolldown/rolldown",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/@rolldown/binding-linux-x64-gnu",
+        "licenseFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/@rolldown/binding-linux-x64-gnu/README.md"
+    },
+    "@rolldown/pluginutils@1.1.1": {
+        "licenses": "MIT",
+        "repository": "https://github.com/rolldown/plugins",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/@rolldown/pluginutils",
+        "licenseFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/@rolldown/pluginutils/LICENSE"
+    },
+    "detect-libc@2.1.2": {
+        "licenses": "Apache-2.0",
+        "repository": "https://github.com/lovell/detect-libc",
+        "publisher": "Lovell Fuller",
+        "email": "npm@lovell.info",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/detect-libc",
+        "licenseFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/detect-libc/LICENSE"
+    },
+    "fdir@6.5.0": {
+        "licenses": "MIT",
+        "repository": "https://github.com/thecodrr/fdir",
+        "publisher": "thecodrr",
+        "email": "thecodrr@protonmail.com",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/fdir",
+        "licenseFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/fdir/LICENSE"
+    },
+    "lightningcss-linux-x64-gnu@1.33.0": {
+        "licenses": "MPL-2.0",
+        "repository": "https://github.com/parcel-bundler/lightningcss",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/lightningcss-linux-x64-gnu",
+        "licenseFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/lightningcss-linux-x64-gnu/LICENSE"
+    },
+    "lightningcss@1.33.0": {
+        "licenses": "MPL-2.0",
+        "repository": "https://github.com/parcel-bundler/lightningcss",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/lightningcss",
+        "licenseFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/lightningcss/LICENSE"
+    },
+    "nanoid@3.3.20": {
+        "licenses": "MIT",
+        "repository": "https://github.com/ai/nanoid",
+        "publisher": "Andrey Sitnik",
+        "email": "andrey@sitnik.ru",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/nanoid",
+        "licenseFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/nanoid/LICENSE"
+    },
+    "pdfjs-dist@6.5.438": {
+        "licenses": "Apache-2.0",
+        "repository": "https://github.com/mozilla/pdf.js",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/pdfjs-dist",
+        "licenseFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/pdfjs-dist/LICENSE"
+    },
+    "pdfjs@1.0.0": {
+        "licenses": "ISC",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs"
+    },
+    "picocolors@1.1.1": {
+        "licenses": "ISC",
+        "repository": "https://github.com/alexeyraspopov/picocolors",
+        "publisher": "Alexey Raspopov",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/picocolors",
+        "licenseFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/picocolors/LICENSE"
+    },
+    "picomatch@4.0.7": {
+        "licenses": "MIT",
+        "repository": "https://github.com/micromatch/picomatch",
+        "publisher": "Jon Schlinkert",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/picomatch",
+        "licenseFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/picomatch/LICENSE"
+    },
+    "postcss@8.5.33": {
+        "licenses": "MIT",
+        "repository": "https://github.com/postcss/postcss",
+        "publisher": "Andrey Sitnik",
+        "email": "andrey@sitnik.es",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/postcss",
+        "licenseFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/postcss/LICENSE"
+    },
+    "rolldown@1.2.19": {
+        "licenses": "MIT",
+        "repository": "https://github.com/rolldown/rolldown",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/rolldown",
+        "licenseFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/rolldown/LICENSE"
+    },
+    "source-map-js@1.2.4": {
+        "licenses": "BSD-3-Clause",
+        "repository": "https://github.com/7rulnik/source-map-js",
+        "publisher": "Valentin 7rulnik Semirulnik",
+        "email": "v7rulnik@gmail.com",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/source-map-js",
+        "licenseFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/source-map-js/LICENSE"
+    },
+    "tinyglobby@0.2.17": {
+        "licenses": "MIT",
+        "repository": "https://github.com/SuperchupuDev/tinyglobby",
+        "publisher": "Superchupu",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/tinyglobby",
+        "licenseFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/tinyglobby/LICENSE"
+    },
+    "vite@8.3.8": {
+        "licenses": "MIT",
+        "repository": "https://github.com/vitejs/vite",
+        "publisher": "Evan You",
+        "path": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/vite",
+        "licenseFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b-poc/app/poc/p4_pdf/pdfjs/node_modules/vite/LICENSE.md"
+    }
+}
+

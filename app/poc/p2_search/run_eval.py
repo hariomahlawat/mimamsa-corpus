@@ -41,7 +41,8 @@ def main():
         "pg_fts_tiered+abbr": PgTiered(ab).search,
         "bm25": TantivyBm25(a.work / "tantivy_full", None).search,
         "bm25+abbr": TantivyBm25(a.work / "tantivy_full", ab).search,
-        "bm25_head+abbr": TantivyBm25(a.work / "tantivy_head", ab).search,
+        # same units as the dense index (1 head chunk per judgment + 6 military statutes): like-for-like row
+        "bm25_denseunits+abbr": TantivyBm25(a.work / "tantivy_p3", ab).search,
     }
     runs = {s: {} for s in systems}
     for q in queries:
