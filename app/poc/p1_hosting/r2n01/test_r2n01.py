@@ -240,7 +240,7 @@ def slow_then_kill(rng, read_bytes, pause):
     return len(got)
 
 
-p = start("C", **{"Transport.ListenSendBufferBytes": 4096, "Delivery.DrainGraceMs": 3000})
+p = start("C", **{"Transport.ListenSendBufferBytes": 4096, "Delivery.DrainGraceMs": 3000, "Test.PauseAfterFirstSliceMs": 1500})
 try:
     trials = []
     for i in range(8):

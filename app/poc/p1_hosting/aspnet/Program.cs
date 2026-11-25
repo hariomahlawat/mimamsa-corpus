@@ -29,7 +29,8 @@ var token = conf["Mimamsa:DevToken"] ?? "dev-token";
 var credit = new CreditConfig(conf.GetValue<long>("Mimamsa:Credit:SiteCap", 8L << 20), conf.GetValue<long>("Mimamsa:Credit:ConnCap", 256L << 10),
                               conf.GetValue<long>("Mimamsa:Credit:HeaderAllowance", 1024));
 var delivery = new DeliveryConfig(conf.GetValue("Mimamsa:Delivery:MaxRange", 128 * 1024), conf.GetValue("Mimamsa:Delivery:Slice", 64 * 1024 - 1024),
-                                  (int)credit.HeaderAllowance, conf.GetValue("Mimamsa:Delivery:DrainGraceMs", 250));
+                                  (int)credit.HeaderAllowance, conf.GetValue("Mimamsa:Delivery:DrainGraceMs", 250),
+                                  conf.GetValue("Mimamsa:Test:PauseAfterFirstSliceMs", 0));
 int listenSndBuf = conf.GetValue("Mimamsa:Transport:ListenSendBufferBytes", 0);
 var dataSource = new NpgsqlDataSourceBuilder(cs).Build();
 var ledger = new CreditLedger(dataSource, credit);

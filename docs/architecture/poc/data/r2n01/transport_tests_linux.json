@@ -29,7 +29,7 @@
     "content-length": "65536",
     "connection": "close",
     "content-type": "application/pdf",
-    "date": "Wed, 25 Nov 2026 15:25:59 GMT",
+    "date": "Wed, 25 Nov 2026 15:37:51 GMT",
     "accept-ranges": "bytes",
     "cache-control": "no-store, private",
     "content-range": "bytes 0-65535/46786968",
@@ -199,7 +199,7 @@
    "denied_503": 39,
    "other": 0,
    "all_206_bodies_exact": true,
-   "wall_s": 0.32,
+   "wall_s": 0.33,
    "ledger_end": {
     "cap": 65536,
     "reserved": 0,
@@ -209,7 +209,7 @@
     }
    },
    "max_site_outstanding": 65536,
-   "samples": 16292,
+   "samples": 17735,
    "violations": 0
   },
   {
@@ -218,21 +218,21 @@
    "requests": 400,
    "threads": 32,
    "site_cap": 1048576,
-   "ok_206": 15,
-   "denied_503": 385,
+   "ok_206": 14,
+   "denied_503": 386,
    "other": 0,
    "all_206_bodies_exact": true,
-   "wall_s": 3.38,
+   "wall_s": 2.93,
    "ledger_end": {
     "cap": 1048576,
     "reserved": 0,
     "charged": 0,
     "states": {
-     "DRAINED": 20
+     "DRAINED": 19
     }
    },
-   "max_site_outstanding": 414218,
-   "samples": 63140,
+   "max_site_outstanding": 464048,
+   "samples": 53254,
    "violations": 0
   },
   {
@@ -249,8 +249,8 @@
   {
    "name": "withdrawal_between_slices_stops_handoff",
    "pass": true,
-   "body_received": 129024,
-   "payload_handed": 129024,
+   "body_received": 64512,
+   "payload_handed": 64512,
    "post_fence": 0
   },
   {
@@ -311,7 +311,7 @@
    "denied_503": 39,
    "other": 0,
    "all_206_bodies_exact": true,
-   "wall_s": 0.32,
+   "wall_s": 0.33,
    "ledger_end": {
     "cap": 65536,
     "reserved": 0,
@@ -321,28 +321,28 @@
     }
    },
    "max_site_outstanding": 65536,
-   "samples": 16292,
+   "samples": 17735,
    "violations": 0
   },
   "B2_site_cap_1MiB": {
    "requests": 400,
    "threads": 32,
    "site_cap": 1048576,
-   "ok_206": 15,
-   "denied_503": 385,
+   "ok_206": 14,
+   "denied_503": 386,
    "other": 0,
    "all_206_bodies_exact": true,
-   "wall_s": 3.38,
+   "wall_s": 2.93,
    "ledger_end": {
     "cap": 1048576,
     "reserved": 0,
     "charged": 0,
     "states": {
-     "DRAINED": 20
+     "DRAINED": 19
     }
    },
-   "max_site_outstanding": 414218,
-   "samples": 63140,
+   "max_site_outstanding": 464048,
+   "samples": 53254,
    "violations": 0
   },
   "C_killed_connections": {
@@ -352,10 +352,10 @@
      "mid_state": "ACCEPTED",
      "mid_charged": 65536,
      "amount": 65536,
-     "mid_site_charged": 131072,
+     "mid_site_charged": 65536,
      "mid_site_reserved": 0,
      "end_state": "DRAINED",
-     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB11N5K118 ended 2026-11-25T15:26:10.5715002Z; linux /proc/net/tcp: socket 5181->42290 gone",
+     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB18B4UITL ended 2026-11-25T15:38:02.3719414Z; linux /proc/net/tcp: socket 5181->47272 gone",
      "end_site": {
       "reserved": 0,
       "charged": 0
@@ -366,10 +366,10 @@
      "mid_state": "ACCEPTED",
      "mid_charged": 65536,
      "amount": 65536,
-     "mid_site_charged": 134144,
-     "mid_site_reserved": 0,
+     "mid_site_charged": 65536,
+     "mid_site_reserved": 65536,
      "end_state": "DRAINED",
-     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB11N5K119 ended 2026-11-25T15:26:15.6124718Z; linux /proc/net/tcp: socket 5181->55446 gone",
+     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB18B4UITM ended 2026-11-25T15:38:07.3819261Z; linux /proc/net/tcp: socket 5181->52998 gone",
      "end_site": {
       "reserved": 0,
       "charged": 0
@@ -380,24 +380,10 @@
      "mid_state": "ACCEPTED",
      "mid_charged": 65536,
      "amount": 65536,
-     "mid_site_charged": 134144,
-     "mid_site_reserved": 0,
+     "mid_site_charged": 65536,
+     "mid_site_reserved": 65536,
      "end_state": "DRAINED",
-     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB11N5K11A ended 2026-11-25T15:26:20.6609988Z; linux /proc/net/tcp: socket 5181->55458 gone",
-     "end_site": {
-      "reserved": 0,
-      "charged": 0
-     }
-    },
-    {
-     "received": 2048,
-     "mid_state": "ACCEPTED",
-     "mid_charged": 65536,
-     "amount": 65536,
-     "mid_site_charged": 131072,
-     "mid_site_reserved": 0,
-     "end_state": "DRAINED",
-     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB11N5K11B ended 2026-11-25T15:26:25.6780315Z; linux /proc/net/tcp: socket 5181->50576 gone",
+     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB18B4UITN ended 2026-11-25T15:38:12.4234612Z; linux /proc/net/tcp: socket 5181->53010 gone",
      "end_site": {
       "reserved": 0,
       "charged": 0
@@ -411,7 +397,7 @@
      "mid_site_charged": 131072,
      "mid_site_reserved": 0,
      "end_state": "DRAINED",
-     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB11N5K11C ended 2026-11-25T15:26:30.7232731Z; linux /proc/net/tcp: socket 5181->50592 gone",
+     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB18B4UITO ended 2026-11-25T15:38:17.4578546Z; linux /proc/net/tcp: socket 5181->54770 gone",
      "end_site": {
       "reserved": 0,
       "charged": 0
@@ -425,7 +411,21 @@
      "mid_site_charged": 131072,
      "mid_site_reserved": 0,
      "end_state": "DRAINED",
-     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB11N5K11D ended 2026-11-25T15:26:35.7634551Z; linux /proc/net/tcp: socket 5181->43126 gone",
+     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB18B4UITP ended 2026-11-25T15:38:22.4959272Z; linux /proc/net/tcp: socket 5181->54784 gone",
+     "end_site": {
+      "reserved": 0,
+      "charged": 0
+     }
+    },
+    {
+     "received": 2048,
+     "mid_state": "ACCEPTED",
+     "mid_charged": 65536,
+     "amount": 65536,
+     "mid_site_charged": 65536,
+     "mid_site_reserved": 0,
+     "end_state": "DRAINED",
+     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB18B4UITQ ended 2026-11-25T15:38:27.5497122Z; linux /proc/net/tcp: socket 5181->48784 gone",
      "end_site": {
       "reserved": 0,
       "charged": 0
@@ -439,7 +439,7 @@
      "mid_site_charged": 131072,
      "mid_site_reserved": 0,
      "end_state": "DRAINED",
-     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB11N5K11E ended 2026-11-25T15:26:40.8037138Z; linux /proc/net/tcp: socket 5181->43134 gone",
+     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB18B4UITR ended 2026-11-25T15:38:32.5735298Z; linux /proc/net/tcp: socket 5181->48794 gone",
      "end_site": {
       "reserved": 0,
       "charged": 0
@@ -450,10 +450,10 @@
      "mid_state": "ACCEPTED",
      "mid_charged": 65536,
      "amount": 65536,
-     "mid_site_charged": 131072,
-     "mid_site_reserved": 0,
+     "mid_site_charged": 65536,
+     "mid_site_reserved": 65536,
      "end_state": "DRAINED",
-     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB11N5K11F ended 2026-11-25T15:26:45.8426086Z; linux /proc/net/tcp: socket 5181->40876 gone",
+     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB18B4UITS ended 2026-11-25T15:38:37.6110901Z; linux /proc/net/tcp: socket 5181->33848 gone",
      "end_site": {
       "reserved": 0,
       "charged": 0
@@ -464,20 +464,14 @@
   },
   "C_withdraw_mid_response": {
    "withdraw_status": 200,
-   "admitted_ms": 1795620410386,
-   "body_received": 129024,
+   "admitted_ms": 1795621121656,
+   "body_received": 64512,
    "content_length": 131072,
    "slices": [
     [
      "ACCEPTED",
      65536.0,
-     1795620409875.558,
-     64512.0
-    ],
-    [
-     "ACCEPTED",
-     65536.0,
-     1795620409880.154,
+     1795621121143.629,
      64512.0
     ]
    ],
@@ -487,14 +481,14 @@
   "D_crash_restart": {
    "before": [
     {
-     "res_id": "08d9cb69-1867-454b-8023-a60644f77084",
+     "res_id": "f8cea2ab-2273-4c92-8a93-b8c53ed375ce",
      "state": "ACCEPTED",
      "amount": 65536,
      "charged": 65536,
      "accepted": 65536,
      "reason": "slice handed to transport and flushed",
      "start": 500000,
-     "instance": "vm:22852:daa7b436b9074dca9299748da9aa98de"
+     "instance": "vm:30024:7d676bbfe3b74346a6b7d7daa7506f5d"
     }
    ],
    "ledger_after_restart": {
@@ -527,14 +521,14 @@
    },
    "after": [
     {
-     "res_id": "08d9cb69-1867-454b-8023-a60644f77084",
+     "res_id": "f8cea2ab-2273-4c92-8a93-b8c53ed375ce",
      "state": "DRAINED",
      "amount": 65536,
      "charged": 65536,
      "accepted": 65536,
      "reason": "slice handed to transport and flushed | drained: prior instance reconciled: old-process-killed-by-test-harness;grace-3s",
      "start": 500000,
-     "instance": "vm:22852:daa7b436b9074dca9299748da9aa98de"
+     "instance": "vm:30024:7d676bbfe3b74346a6b7d7daa7506f5d"
     }
    ]
   }

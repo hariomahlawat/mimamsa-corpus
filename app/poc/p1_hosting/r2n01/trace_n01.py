@@ -26,7 +26,8 @@ OUT = Path(A.out_dir); OUT.mkdir(parents=True, exist_ok=True)
 BASE = f"http://127.0.0.1:{A.port}"
 KiB = 1024
 CFG = {"Credit.SiteCap": 196608, "Credit.ConnCap": 196608, "Delivery.MaxRange": 131072, "Delivery.DrainGraceMs": 300,
-       "Transport.ListenSendBufferBytes": 4096, "Delivery.SlotGate": "false"}
+       "Transport.ListenSendBufferBytes": 4096, "Delivery.SlotGate": "false",
+       "Test.PauseAfterFirstSliceMs": 1500}
 
 TARGET = codex_fixture.make_pdf()
 assert hashlib.sha256(TARGET).hexdigest() == codex_fixture.EXPECTED_SHA256

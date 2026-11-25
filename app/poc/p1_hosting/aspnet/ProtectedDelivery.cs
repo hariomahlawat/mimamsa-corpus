@@ -13,7 +13,7 @@ using Npgsql;
 
 namespace MimamsaPocApi;
 
-public sealed record DeliveryConfig(int MaxRange, int Slice, int HeaderAllowance, int DrainGraceMs);
+public sealed record DeliveryConfig(int MaxRange, int Slice, int HeaderAllowance, int DrainGraceMs, int TestPauseAfterFirstSliceMs = 0);
 
 public sealed class ResponseSlots
 {
@@ -179,6 +179,8 @@ public static class ProtectedDelivery
             }
             if (await ledger.SettleAsync(r, Settlement.Accepted, acceptedWire, "slice handed to transport and flushed"))
                 DeliveryTrace.Emit("settle", "ledger", new { attempt = r.Id.ToString(), outcome = "accepted", size = acceptedWire });
+            // TEST-ONLY deterministic barrier (like the Codex reference pause hook): lets a test withdraw between slices
+            if (cfg.TestPauseAfterFirstSliceMs > 0 && off == n && off < len) await Task.Delay(cfg.TestPauseAfterFirstSliceMs);
         }
     }
 }
