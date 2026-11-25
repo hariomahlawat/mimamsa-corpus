@@ -261,13 +261,14 @@ def build_bench_score():
     gts = read_csv(OUT / "ground_truth" / "GT_MANIFEST.csv")
     bench = OUT / "benchmark"
     engines = sorted(p.name for p in bench.iterdir() if p.is_dir()) if bench.exists() else []
-    rows = []
+    rows, timings_meta = [], {}
     for e in engines:
         timing = {}
         tf = bench / e / "timing.json"
         if tf.exists():
             t = json.loads(tf.read_text(encoding="utf-8"))
             timing = {p["gt_id"]: p for p in t["pages"]}
+            timings_meta[e] = {"dpi": t["dpi"], "threads": t["threads"], "model_load_seconds": t["model_load_seconds"]}
         for g in gts:
             hp = bench / e / f"{g['gt_id']}.txt"
             if not hp.exists():
@@ -300,6 +301,14 @@ def build_bench_score():
                   "mean_content_word_recall": mean("content_word_recall", rr),
                   "pages_covered": sum(r["page_covered"] == "YES" for r in rr),
                   "mean_seconds_per_page": mean("seconds", rr)}
+    agg["tesseract"] = {"status": "BLOCKED_PENDING_OWNER_APPROVAL_FOR_SYSTEM_PACKAGE",
+                        "note": "Tesseract is not installed and apt is not allowed; not installed, not benchmarked."}
+    agg["paddle_hi (PP-OCRv5_server_det + devanagari rec)"] = {
+        "status": "FAILED", "note": "MemoryError: tried to allocate 20,150,747,136 bytes on this 15 GB host "
+                                    "(benchmark/paddle_hi_server_det_FAILED.txt); replaced by paddle_hi_mobile."}
+    for e, t in timings_meta.items():
+        if e in agg:
+            agg[e].update(t)
     fields = ["engine", "gt_id", "category", "gt_chars", "cer", "cer_caseless", "wer", "char_accuracy", "word_accuracy",
               "content_word_recall", "seconds", "page_covered"]
     return {"OCR_BENCHMARK.csv": csv_text(rows, fields), "OCR_BENCHMARK.json": js(agg)}
