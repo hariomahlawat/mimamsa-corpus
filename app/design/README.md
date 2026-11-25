@@ -2,6 +2,7 @@
 
 - **Status:** PROPOSED, for independent UX and accessibility review. Framework-neutral: it applies whether ADR-0005 selects ASP.NET Core or Django; the frontend candidate is React + TypeScript.
 - **Scope:** the offline research application for an air-gapped LAN, used in a browser on Windows desktops (and tablets where provided).
+- **Validation:** PoC **P9 (UI/UX functional prototype)** tests this specification on real research workflows and actual data (rendering, efficiency, hierarchy, responsiveness, readability, failure states). Milestone **B1** delivers the professional research workspace; Admin staging/publication screens arrive with **B2**; judgment, statute, graph and Studio depth with **B3**.
 - **Traceability:** each workspace and component maps to capabilities in [`docs/architecture/CAPABILITY_TRACEABILITY_MATRIX.md`](../../docs/architecture/CAPABILITY_TRACEABILITY_MATRIX.md) (CAP-…).
 
 | Document | Covers |

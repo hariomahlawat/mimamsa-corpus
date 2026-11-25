@@ -31,8 +31,10 @@ The figures in §2 that predate this table (HF `5524c3d9` as head, 622 register 
 
 ### 0.2 Directive constraints applied to this plan
 
-- **Effort split 70/30** between Track A (legal knowledge) and Track B (application foundation), as the directive sets it. *B0 records the split as Track A 70 / Track B 30; the coordinator should confirm the direction against the directive text, which is not in the repository.*
-- **Windows-native production** (IIS or Windows Service; offline LAN browsers); no Docker, WSL, Hyper-V or Linux VM. Provisional reference hardware 16 cores / 64 GB / 1 TB SSD; GPU optional.
+- **Effort split:** Track A (legal knowledge) about **70%**, Track B (application) about **30%** (directive).
+- **Windows-native production** (IIS or Windows Service; offline LAN browsers); no Docker, WSL, Hyper-V or Linux VM. Provisional reference hardware 16 cores / 64 GB / 1 TB SSD; GPU optional. Plan for about 20 GB of source data.
+- **Performance target:** search p95 under 1 s at 10 concurrent queries on the reference hardware; accuracy is not sacrificed to meet it.
+- **Signing key:** the production release-signing key stays in the owner's custody; agents use disposable test keys only.
 - Preferred candidates are **evaluated, not presumed** (ADR-0005 evidence table, PoCs P1–P9).
 - **Modular monolith with isolated workers.** Two roles (Admin, User); Legal Reviewer is a designation, inactive until appointed; ownership checks in the backend.
 - **No legal reasoning or compliance logic in Cycle 13.** The commander assistant and legal-rule features are architected but gated off.
@@ -51,20 +53,20 @@ The figures in §2 that predate this table (HF `5524c3d9` as head, 622 register 
 | A5 | Treatment and knowledge graph (candidate) | `claude/c13-a5-graph` → `C13-A5-GRAPH/` | §4 "A5 (was A4)" |
 | A6 | Forms: official transcription (closes WSG-R04), AF/Navy | `claude/c13-a6-forms` → `C13-A6-FORMS/` | §4 "A6 (was A5)" |
 | A7 | Targeted acquisition (owner-gated) | `claude/c13-a7-acquisition` → `C13-A7-ACQUISITION/` | §4 "A7 (was A6)" |
-| A8 | Legal-adviser packages *(provisional mapping)* | coordinator to assign | §4 "A8 (was A7)" |
-| A9 | Deferred-P2 closure tracking and P3 backlog *(provisional mapping)* | coordinator to assign | §4 "A9 (was A8 + A9)" |
+| A8 | Legal-adviser review packages | coordinator to assign | §4 "A8 (was A7)" |
+| A9 | Deferred findings (C11 F05–F08, WS-G R04), P3 closeout and findings-register regeneration | coordinator to assign | §4 "A9 (was A8 + A9)" |
 | GOV | Governance: restricted-material register RM-001, decision notes | `claude/c13-gov` → `C13-GOV/` | — |
 
-**Track B (application foundation, ~30%).** The twelve 2026-11-24 workstreams B1–B12 are regrouped into the directive's B0–B3.
+**Track B (application, ~30%).** The twelve 2026-11-24 workstreams B1–B12 are regrouped into the directive's milestones B0–B3.
 
-| New id | Content | Old items folded in | Gate |
+| New id | Content (directive) | Old items folded in | Gate |
 | --- | --- | --- | --- |
-| B0 | Architecture, UX and data contract (this revision; ADR-0005 PROPOSED; traceability matrix; security architecture; `app/contract` v1; `app/design`), plus **B0-PoC** evidence P1–P9 (`claude/c13-b-poc`) | old B0 | GB1 (ADR-0005 accepted after P1–P9) |
-| B1 | Foundation: installer and services, DB schema with separate axes, vault, contract-v1 import, ingestion + OCR flags, hybrid search, PDF.js at page, provenance panel, banner, local Admin/User auth, upload→publish→search→withdraw round trip, backup/restore, network-denied tests | old B1, B2, B3, B5, B6, B7, B10, B11, B12 | GB2 (M-B1 on a clean, network-disabled **Windows** host) |
-| B2 | Research depth: research workspace, judgment intelligence (per-field axes, labelled outcome candidates), statutory explorer, graph exploration, release N→N+1 and rollback | old B4, B8 | independent review |
-| B3 | Document Studio working sessions (no rules), knowledge administration screens, AD option, audit review, hardening, performance at simulated 20 GB | old B9, hardening items | GB3 security review |
+| B0 | **Architecture plus PoCs**: this revision; ADR-0005 PROPOSED; traceability matrix; security architecture; `app/contract` v1; `app/design`; and PoC evidence P1–P9 from B-PoC (`claude/c13-b-poc`): P1 Windows hosting, P2 search and retrieval, P3 local embeddings, P4 document processing and PDF navigation, P5 background processing, P6 offline Windows installation, P7 security and licence review, P8 offline update and restoration, P9 UI/UX functional prototype | old B0 | GB1 (ADR-0005 accepted after P1–P9) |
+| B1 | **Minimum functional research prototype**: offline install, local DB, immutable vault, a real corpus subset, FTS plus hybrid search where benchmarked, excerpts, PDF viewer, page navigation, provenance, basic auth, professional workspace (banner and separate axes included) | old B1, B3, B5, B6, B7 (basic), B10 (install and import), B11, B12 (baseline) | GB2 (B1 on a clean, network-disabled Windows host) |
+| B2 | **Full eligible corpus**, incremental ingestion, Admin staging, publication and withdrawal (withdrawal leak-proof), release update, rollback, full restore | old B2, B10 (update and rollback) | independent + security review |
+| B3 | **Research depth**: judgment intelligence, statutory explorer, knowledge graph, research workspace depth, Document Studio working sessions (no rules), AD option, audit review, hardening | old B4, B8, B9, B12 (hardening) | GB3 security review |
 
-Capabilities per phase are listed in the [traceability matrix](../architecture/CAPABILITY_TRACEABILITY_MATRIX.md) (52 capabilities: 15 B1, 19 B2, 8 B3, 10 later/gated).
+Capabilities per phase are listed in the [traceability matrix](../architecture/CAPABILITY_TRACEABILITY_MATRIX.md) (52 capabilities by first phase: 17 B1, 2 B2, 23 B3, 10 later/gated; several B1 capabilities complete in B2).
 
 ### 0.4 A1 OCR (new workstream, summary)
 
@@ -82,9 +84,9 @@ Objective: measure and improve OCR on the scanned subset (944 judgments / 4,705 
 **Track B**
 1. ADR-0005 decided from reviewed P1–P9 evidence and accepted by the owner (GB1).
 2. Data contract v1 adopted by Track A exports; `app/contract` tests green in `app-ci.yml`; restricted-material rule keyed on `config/restricted_material.json`.
-3. M-B1 installs offline on a clean Windows host with networking disabled; signed bundle import, tamper rejection, N→N+1 and rollback, backup and restore all pass (GB2).
+3. B1 installs offline on a clean Windows host with networking disabled and serves a real corpus subset (GB2); by B2, signed bundle import of the full eligible corpus, tamper rejection, N→N+1, rollback, backup and full restore pass (P6, P8). Search p95 < 1 s at 10 concurrent queries on reference hardware without loss of accuracy (P2).
 4. Banner on every route; separate status axes in API and UI; no single "verified" flag anywhere.
-5. Security review with no P1/P2 open; threat tests in the security architecture §9 pass (GB3).
+5. Security review with no P1/P2 open; the directive's threat tests (malicious PDF/Word, path traversal, file-type spoofing, oversized and decompression attacks, cross-session access, privilege escalation, SQL injection, XSS, unauthorised source access, withdrawn-source leakage via indexes and caches, document-borne prompt injection) pass (security architecture §9; GB3).
 6. No legal-rule logic, compliance check or advisory output anywhere in the app; gated features refuse to enable.
 
 ### 0.6 Superseded content in this document
@@ -95,13 +97,13 @@ Objective: measure and improve OCR on the scanned subset (944 judgments / 4,705 
 | §2 Findings register row | 622 rows | 648 rows (§0.1) |
 | §3 diagram, §5 B0–B12 headings | Twelve Track B workstreams | B0–B3 (§0.3) |
 | §4 headings A1–A9 | 2026-11-24 numbering | Directive numbering (§0.3); internal cross-references in §4 still use the old numbers where not marked |
-| §5 B0 | PoCs P1–P7; P5 on Linux VM/Hyper-V; ADR file name `ADR-0005-OFFLINE_APP_STACK.md` | P1–P9 (assessment §16); Windows host; `ADR-0005-APPLICATION-STACK.md` |
+| §5 B0 | PoCs P1–P7; P5 on Linux VM/Hyper-V; ADR file name `ADR-0005-OFFLINE_APP_STACK.md` | Directive P1–P9 (§0.3; assessment §16); Windows host; `ADR-0005-APPLICATION-STACK.md` |
 | §5 B2 "network-less container" | Container isolation | Windows Services, Job Objects, NTFS ACLs, firewall (security architecture §3–6) |
 | §5 B10 "Container images" | Image bundles | Offline Windows installer + signed data bundles |
 | §6 IC-01 table | Outline contract | `app/contract` v1 (schemas, validator, tests) |
 | §11 D-01 recommendation | Linux host or Hyper-V Linux VM | Windows-native (directive); hardware baseline confirmed provisionally |
 | §10 R6 | Mitigation via Linux VM | Windows-native PoCs P1/P8 on a Windows host |
-| §12 Track B exit | "M-B1 on an air-gapped VM" | M-B1 on a clean, network-disabled Windows host |
+| §5 "Minimal first deliverable (M-B1)" and §12 Track B exit | M-B1 MVP including Admin upload round trip, on an air-gapped VM | B1 prototype on a real corpus subset on a clean, network-disabled Windows host; Admin staging/publication/withdrawal move to B2 |
 
 ## 1. Purpose and hard boundaries
 
@@ -291,7 +293,7 @@ Default staffing:
 | Author / reviewer | Opus / independent Opus |
 | Risks | The SC portal CAPTCHA blocks automation (manual acquisition by the owner is the fallback) |
 
-### A8 (was A7, provisional). Legal-adviser packages
+### A8 (was A7). Legal-adviser review packages
 
 | Item | Content |
 | --- | --- |
@@ -303,7 +305,7 @@ Default staffing:
 | Author / reviewer | Opus builder / independent Opus reviewer (technical); a human legal adviser answers |
 | Risks | **No human reviewer becomes available.** Then nothing legal moves, and Cycle 13 still delivers measurements and the app foundation |
 
-### A9 (was A8, provisional). Deferred P2 closure (cross-reference)
+### A9 (was A8). Deferred findings closure (C11 F05–F08, WS-G R04), P3 closeout and findings-register regeneration
 
 | Finding | Workstream | Closure evidence required |
 | --- | --- | --- |
@@ -621,7 +623,7 @@ The outline below is retained for history. The binding definition is the version
 
 | ID | Decision | Needed by | Recommendation |
 | --- | --- | --- | --- |
-| **D-01** | **Deployment target** **[SUPERSEDED 2026-11-25 by the directive: Windows-native; 16 cores / 64 GB / 1 TB SSD provisional; GPU optional]**. Remaining: Windows Server edition, volume layout, number of LAN users, IIS vs Windows Service policy | B0 P1/P8, GB1 | Confirm edition and user count; provide a Windows host for P1/P5/P6/P8/P9 evidence |
+| **D-01** | **Deployment target** **[SUPERSEDED 2026-11-25 by the directive: Windows-native; 16 cores / 64 GB / 1 TB SSD provisional; GPU optional]**. Remaining: Windows Server edition, volume layout, number of LAN users, IIS vs Windows Service policy | B0 P1/P6, GB1 | Confirm edition and user count; provide a Windows host for P1/P5/P6/P8 evidence |
 | **D-02** | **Accept the stack and licence posture** (ADR-0005), including whether AGPL components (PyMuPDF) are acceptable server-side for an internal deployment or must be replaced | GB1 | Accept PostgreSQL-centred stack. Decide AGPL after P7; a permissive fallback exists |
 | **D-03** | **Human legal capacity**: name a legal adviser for A7, and confirm the Legal Reviewer designation path (Document Studio §3.3) | A3, A5, A7 decisions | Name an adviser now, even part-time. The designation can follow |
 | **D-04** | **Acquisition access**: allow-list `sci.gov.in`, `desw.gov.in` and archive.org storage nodes; fix the egazette trust store; or the owner acquires manually. Confirm the contact-email header policy | A3, A5, A6 | Allow-list plus manual fallback for CAPTCHA-protected items |

@@ -10,12 +10,12 @@
 | Earlier position (2026-11-24) | Status | Replacement |
 | --- | --- | --- |
 | Packaging: Docker Compose on a Linux host; on Windows estates a Hyper-V Linux VM | **SUPERSEDED** by the directive | Native Windows: IIS or Windows Services; offline Windows installer; no Docker, WSL, Hyper-V or Linux VM in production (§12) |
-| Backend recommendation: Django, decided on Linux-centric grounds | **REOPENED** | ASP.NET Core LTS compared with Django on Windows-specific criteria; decision after P1/P8/P9 (§4) |
+| Backend recommendation: Django, decided on Linux-centric grounds | **REOPENED** | ASP.NET Core LTS compared with Django on Windows-specific criteria; decision after P1, P6, P7 and P9 (§4) |
 | Worker isolation via containers (no network, read-only mounts, cgroups limits) | **SUPERSEDED** | Separate Windows Services with low-privilege virtual accounts, NTFS ACLs, Windows Firewall rules, Job Objects for CPU/memory/time limits (§5, Security architecture §3–4) |
 | Reverse proxy Caddy or nginx | **SUPERSEDED** | IIS (with ASP.NET Core Module or URL Rewrite/ARR) or the app's own TLS endpoint as a Windows Service (§4.2) |
 | Real-time: not specified | **ADDED** | SignalR (if ASP.NET Core) or Server-Sent Events (if Django), for job progress only |
 | Auth: Django auth + django-auth-ldap | **GENERALISED** | Local accounts plus optional AD, under either framework (§11) |
-| PoCs P1–P7 | **RENUMBERED** to P1–P9 aligned with B-PoC (§16) | |
+| PoCs P1–P7 | **REPLACED** by the directive's P1–P9 (§16) | |
 | Hardware baseline as planning assumption under D-01 | **CONFIRMED PROVISIONALLY** by the directive | 16 cores, 64 GB, 1 TB SSD; GPU optional, never mandatory |
 
 Everything not listed (one-database principle, transactional withdrawal, content-addressed vault, signed bundles, FOUO exclusion, no LLM in Cycle 13) is retained.
@@ -47,7 +47,7 @@ Everything not listed (one-database principle, transactional withdrawal, content
 | Passages (~300 tokens) | ~0.2–0.5 M | ~2–5 M | ~4k judgments × tens of pages × a few passages per page, plus statutes |
 | Vectors at 768 dims (float32 / half) | ~0.6–1.5 GB / half | ~6–15 GB / half | 3 KB per float32 vector |
 | Graph edges | 10^4–10^5 (C11: 11,076 statute links, 2,595 treatment candidates) | 10^5–10^6 | Citation extraction growth |
-| Concurrent users | tens | tens to low hundreds | Assumption; confirm with owner |
+| Concurrent users | tens | tens to low hundreds | Assumption; confirm with owner. Search target: p95 < 1 s at 10 concurrent queries on reference hardware, accuracy not sacrificed (directive) |
 | Disk (1 TB) | vault ~2 GB ×(1 + derivatives ~2–3×) + DB with indexes + two release generations + local backups | ~20 GB vault → ~150–250 GB total with two generations and backups | Estimate; fits 1 TB with headroom |
 
 **Conclusion:** a single well-provisioned Windows server handles this workload. A distributed search cluster is not justified.
@@ -58,23 +58,23 @@ Every row is a **candidate**. The decision is ADR-0005 after the PoCs.
 
 | Layer | Primary candidate | Compared against / exit path | Evidence |
 | --- | --- | --- | --- |
-| Web/API | **ASP.NET Core LTS** or **Django LTS** (head-to-head) | FastAPI (exit only) | P1, P8, P9 |
-| Hosting | IIS front end, or app as a Windows Service with its own TLS | — | P1, P8 |
+| Web/API | **ASP.NET Core LTS** or **Django LTS** (head-to-head) | FastAPI (exit only) | P1, P6, P7, P9 |
+| Hosting | IIS front end, or app as a Windows Service with its own TLS | — | P1, P6 |
 | Workers | Python processes as **Windows Services**, PostgreSQL-backed job table (`SKIP LOCKED`) | A Python queue library, if P5 shows one is mature on Windows | P5 |
-| Database | **PostgreSQL** (Windows build) | SQL Server (licence/edition limits) | P2, P8 |
+| Database | **PostgreSQL** (Windows build) | SQL Server (licence/edition limits) | P1, P2, P6 |
 | Lexical search | PostgreSQL FTS at passage level with legal-aware configuration | BM25 index (e.g. Tantivy) as a derived, rebuildable index if P2 shows ≥5 pts recall@20 gain | P2 |
-| Vectors | **pgvector** (HNSW, half precision) | Qdrant (Windows binary) | P2, P8 |
+| Vectors | **pgvector** (HNSW, half precision) | Qdrant (Windows binary) | P2, P6 |
 | Graph | Relational edge tables + recursive CTEs | Apache AGE (Windows build availability uncertain) | P2 |
 | Embeddings | Local **ONNX Runtime** on CPU; BGE / E5 / Arctic-embed class model | Multilingual variant if Devanagari recall matters | P3 |
-| OCR | **Tesseract** (Windows build) | PaddleOCR or docTR as second pass | P6 |
+| OCR | **Tesseract** (Windows build) | PaddleOCR or docTR as second pass | P4 (OCR boxes, scanned pages; OCR quality from Track A1); P6 (packaging OCR models) |
 | PDF text (app path) | **pypdfium2** / pdfminer.six / pdfplumber (permissive) | PyMuPDF (AGPL) only if D-02 accepts | P7 |
-| PDF viewer | **PDF.js** | — | P4 |
+| PDF viewer | **PDF.js** | — | P4, P9 |
 | Frontend | **React + TypeScript**, built online, static files | — | P7 |
 | Real-time | **SignalR** (ASP.NET) or **SSE** (Django) | Polling | P1 |
-| Auth | Local accounts + optional AD (Negotiate or LDAPS) | — | P9 |
-| Installer | Offline **MSI** (WiX Toolset, MS-RL; verify) or equivalent bootstrapper | Scripted PowerShell installer (fallback) | P8 |
+| Auth | Local accounts + optional AD (Negotiate or LDAPS) | — | P1 (framework), P7 (security review) |
+| Installer | Offline **MSI** (WiX Toolset, MS-RL; verify) or equivalent bootstrapper | Scripted PowerShell installer (fallback) | P6 |
 | Updates | Ed25519-signed snapshot bundles, contract v1 | — | P8; `app/contract` tests |
-| Storage | Content-addressed NTFS vault `vault\sha256\ab\<hash>` | — | P8 |
+| Storage | Content-addressed NTFS vault `vault\sha256\ab\<hash>` | — | P6, P8 |
 
 ## 4. Web/API layer: ASP.NET Core vs Django on Windows
 
@@ -83,7 +83,7 @@ Every row is a **candidate**. The decision is ADR-0005 after the PoCs.
 | Criterion | ASP.NET Core (LTS) | Django (LTS) |
 | --- | --- | --- |
 | Windows production hosting | **Native**: ASP.NET Core Module for IIS (in-process or out-of-process); `UseWindowsService()` hosting; Event Log logging; Data Protection keys can be protected with DPAPI | Works, but no first-party Windows server. Options: Waitress (pure Python WSGI) or Uvicorn/Hypercorn (ASGI) wrapped as a Windows Service (pywin32 service or a service wrapper), behind IIS URL Rewrite + ARR or HttpPlatformHandler **[PoC P1]** |
-| AD integration | Negotiate/Kerberos and NTLM built in; LDAP via `System.DirectoryServices.Protocols` | django-auth-ldap (needs python-ldap; Windows wheels availability to verify) or ldap3 (pure Python) **[PoC P9]** |
+| AD integration | Negotiate/Kerberos and NTLM built in; LDAP via `System.DirectoryServices.Protocols` | django-auth-ldap (needs python-ldap; Windows wheels availability to verify) or ldap3 (pure Python) **[PoC P1, P7]** |
 | Auth, sessions, CSRF, password hashing | ASP.NET Core Identity: PBKDF2 by default (iterations configurable), lockout, antiforgery tokens, cookie auth | Built in and long audited; Argon2 via `argon2-cffi`; CSRF middleware; lockout via a maintained package |
 | Server-side authorisation | Policy-based authorisation (`[Authorize(Policy=…)]`), resource-based handlers for ownership | Permission checks and decorators; object-level checks hand-written or via a package |
 | Real-time job progress | **SignalR** built in | Django Channels (adds a channel layer) or SSE (simplest) |
@@ -108,7 +108,7 @@ Every row is a **candidate**. The decision is ADR-0005 after the PoCs.
 
 ### 4.3 Provisional view
 
-Neither framework is presumed. B0's provisional reading of the documentary evidence: **ASP.NET Core is the lower-risk Windows production host** (K1, K2), and **Django is the lower-friction development path** (K5). The weighted scoring sheet in ADR-0005 §6 settles it with P1/P8/P9 evidence.
+Neither framework is presumed. B0's provisional reading of the documentary evidence: **ASP.NET Core is the lower-risk Windows production host** (K1, K2), and **Django is the lower-friction development path** (K5). The weighted scoring sheet in ADR-0005 §6 settles it with P1, P6, P7 and P9 evidence.
 
 ## 5. Python workers on Windows
 
@@ -117,17 +117,17 @@ Neither framework is presumed. B0's provisional reading of the documentary evide
 - **Service wrapper:** pywin32 `win32serviceutil` (PSF licence) or a small, auditable service wrapper. Verify licence of any third-party wrapper. **[PoC P5]**
 - **Queue:** a PostgreSQL job table with `SELECT … FOR UPDATE SKIP LOCKED`, leases and heartbeats; retries with backoff; idempotent steps keyed by (sha256, pipeline version). **[PoC P5]**: 16k-file import, injected failures, service kill and restart, no lost or duplicated jobs.
 - **Limits:** Windows Job Objects per task for CPU rate, memory and wall-clock limits; parser runs in a child process so a crash or hang kills only that job. **[PoC P5]**
-- **Network:** Windows Firewall outbound block rules scoped to each worker service SID (only loopback to PostgreSQL allowed). **[PoC P8]**
+- **Network:** Windows Firewall outbound block rules scoped to each worker service SID (only loopback to PostgreSQL allowed). **[PoC P5, P6]**
 
 ## 6. Database on Windows
 
 | Item | Assessment |
 | --- | --- |
-| PostgreSQL on Windows | Supported platform; official Windows binaries exist (EDB-built installers and zip archives). Runs as a Windows Service under `NT AUTHORITY\NetworkService` by default; the installer should create a dedicated account instead **[PoC P8]** |
-| pgvector on Windows | No official Windows binary from the project. Options: build with Visual Studio Build Tools against the exact PostgreSQL major (documented upstream), or obtain a vetted binary. The build must be reproducible and signed into the installer **[PoC P2, P8]** |
+| PostgreSQL on Windows | Supported platform; official Windows binaries exist (EDB-built installers and zip archives). Runs as a Windows Service under `NT AUTHORITY\NetworkService` by default; the installer should create a dedicated account instead **[PoC P1, P6]** |
+| pgvector on Windows | No official Windows binary from the project. Options: build with Visual Studio Build Tools against the exact PostgreSQL major (documented upstream), or obtain a vetted binary. The build must be reproducible and signed into the installer **[PoC P2, P6]** |
 | FTS | Built in; custom text search configuration (simple dictionary for identifiers, English stemmer for prose, synonym dictionary for "AA" → "Army Act", "court-martial" ↔ "court martial") **[PoC P2]** |
 | Backup | `pg_dump` / `pg_basebackup` scheduled by Task Scheduler; WAL archiving optional. pgBackRest is not supported on Windows; do not plan on it |
-| Upgrades | Major upgrades via `pg_upgrade` or dump/restore, inside the installer's upgrade path, with pgvector rebuilt for the new major **[PoC P8]** |
+| Upgrades | Major upgrades via `pg_upgrade` or dump/restore, inside the installer's upgrade path, with pgvector rebuilt for the new major **[PoC P6, P8]** |
 | Alternative | SQL Server: Windows-native, but Express caps database size and vector features depend on version; licence cost for Standard. Not preferred |
 
 ## 7. Lexical, vector and graph search
@@ -159,20 +159,20 @@ No generative model is installed in Cycle 13. The gate (Legal Reviewer designati
 | Engine | Windows status | Licence | Notes |
 | --- | --- | --- | --- |
 | **Tesseract** | Windows builds are available (for example the UB Mannheim builds); bundle the executable and `eng` traineddata in the installer; invoke from the worker via subprocess (no network) | Apache-2.0 | Already used for 944 scanned judgments (4,705 pages) at 300 dpi with threshold 70. Produces TSV/hOCR word boxes and confidence |
-| PaddleOCR | Python package on PaddlePaddle; Windows CPU wheels exist but version pinning is fragile **[PoC P6]** | Apache-2.0 | Often stronger on difficult layouts; heavier |
+| PaddleOCR | Python package on PaddlePaddle; Windows CPU wheels exist but version pinning is fragile **[PoC P4, P6]** | Apache-2.0 | Often stronger on difficult layouts; heavier |
 | docTR | PyTorch or ONNX backends | Apache-2.0 | Alternative second pass |
 | OCRmyPDF | Runs on Windows with Tesseract and Ghostscript | MPL-2.0 (Ghostscript AGPL) | Avoid Ghostscript-dependent output unless D-02 accepts AGPL; not needed for search |
 | Windows built-in OCR (Windows.Media.Ocr) | Available on Windows 10/11 and Server with Desktop Experience **[verify]** | OS component | No per-word confidence comparable to Tesseract; not recommended as primary |
 | Prism | Unknown availability (D-10) | Unknown | Treated as unavailable until shown otherwise |
 
-**Assessment:** Tesseract primary; per-page confidence and per-word boxes stored for B5 highlighting; pages below threshold flagged for review and labelled after publication; OCR text is for search, not quotation (contract rule `OCR_QUOTING`). **[PoC P6]** decides whether a second engine is worth its weight.
+**Assessment:** Tesseract primary; per-page confidence and per-word boxes stored for B5 highlighting; pages below threshold flagged for review and labelled after publication; OCR text is for search, not quotation (contract rule `OCR_QUOTING`). OCR engine quality is measured by Track A workstream A1 (OCR benchmark); **[PoC P4]** covers OCR bounding boxes and highlighting on scanned pages, and **[PoC P6]** packaging of OCR models offline. A second engine is adopted only on a measured gain.
 
 ## 11. PDF viewer, frontend, real-time and authentication
 
-- **PDF.js:** `pdfjs-dist` with the worker bundled locally; `isEvalSupported:false` (CVE-2024-4367 class), scripting disabled, current patched release; PDFs served from the app origin under a strict CSP. Native highlighting by text-layer matching; scans by overlay boxes from OCR word coordinates. **[PoC P4]**
+- **PDF.js:** `pdfjs-dist` with the worker bundled locally; `isEvalSupported:false` (CVE-2024-4367 class), scripting disabled, current patched release; PDFs served from the app origin under a strict CSP. Native highlighting by text-layer matching; scans by overlay boxes from OCR word coordinates; large-document rendering. **[PoC P4, P9]**
 - **Frontend:** React + TypeScript built online from a hash-locked lockfile; output is static files; no runtime CDN, web fonts or analytics; CI fails if the bundle references an external URL. Component library: permissive (verify), or a small in-house set following `app/design`.
 - **Real-time:** job and import progress only, via SignalR or SSE; never used to push legal content.
-- **Authentication:** local accounts (framework-default strong hashing, lockout, session expiry, CSRF); optional AD maps one AD group to Admin and admits a second group as User; there are no further roles. The **Legal Reviewer designation** is a separate registry row on an existing account, inert until an appointment record exists; the app has no code path that records a legal approval in Cycle 13. **[PoC P9]**
+- **Authentication:** local accounts (framework-default strong hashing, lockout, session expiry, CSRF); optional AD maps one AD group to Admin and admits a second group as User; there are no further roles. The **Legal Reviewer designation** is a separate registry row on an existing account, inert until an appointment record exists; the app has no code path that records a legal approval in Cycle 13. **[PoC P1 framework support; P7 security review]**
 
 ## 12. Packaging, installer and updates (Windows)
 
@@ -189,7 +189,7 @@ One signed installer set, built online, transferred on removable media:
 | Windows Services, firewall rules, NTFS ACLs, certificate binding | Installer custom actions (PowerShell, logged) |
 | SBOM and licence inventory | Shipped alongside |
 
-Authoring candidates: WiX Toolset (verify licence; MS-RL historically), or a scripted PowerShell installer as fallback. Code-signing of the MSI with an organisation certificate is recommended; the update bundles are signed independently (§12.2). **[PoC P8]**: clean Windows Server, networking disabled, install, uninstall, reinstall, upgrade.
+Authoring candidates: WiX Toolset (verify licence; MS-RL historically), or a scripted PowerShell installer as fallback. Code-signing of the MSI with an organisation certificate is recommended; the update bundles are signed independently (§12.2). **[PoC P6]**: clean Windows machine with no internet; packages runtimes, PostgreSQL + pgvector, Python libraries, frontend assets, OCR and embedding models; reproducible build; install, uninstall, reinstall, upgrade.
 
 ### 12.2 Snapshot update flow
 
@@ -203,7 +203,7 @@ Data contract v1 (`app/contract`) defines the bundle. The importer (a worker ser
 6. switches atomically; keeps N-1 (configurable) for rollback;
 7. reconciles local Admin uploads (Architecture §9.1) and turns `CHANGES.json` into impact triggers.
 
-Any failure rejects the whole bundle with nothing changed. **[PoC P8]**
+Any failure rejects the whole bundle with nothing changed. **[PoC P8]** (also database and document updates, backup and full restore)
 
 ### 12.3 Storage and backup
 
@@ -239,36 +239,38 @@ Moved to [SECURITY_AND_DEPLOYMENT_ARCHITECTURE.md](../architecture/SECURITY_AND_
 | --- | --- | --- |
 | Python web serving on Windows is fragile (if Django) | P1 recovery or latency failures | ASP.NET Core host with Python workers |
 | C# capacity absent in the team (if ASP.NET Core) | Owner answer to Q-3 | Django on Windows if P1 passes |
-| pgvector cannot be built reproducibly for the Windows PostgreSQL major | P2/P8 | Qdrant Windows binary with a generation check; or vectors in a worker-owned index |
+| pgvector cannot be built reproducibly for the Windows PostgreSQL major | P2/P6 | Qdrant Windows binary with a generation check; or vectors in a worker-owned index |
 | PostgreSQL FTS ranking too weak | P2: BM25 gain ≥5 points recall@20 | BM25 derived index with generation check |
-| OCR second engine fragile on Windows | P6 | Tesseract only, with review list |
-| Installer complexity | P8 failures | Scripted PowerShell installer with signed payloads |
+| OCR second engine fragile on Windows | P4/P6 | Tesseract only, with review list |
+| Installer complexity | P6 failures | Scripted PowerShell installer with signed payloads |
 | AGPL in the app path | P7 | pypdfium2/pdfminer in the app path |
 | Service count creeping above ~6 | Design review | One-database principle; any new service needs an ADR with a measured need |
 
 ## 16. Proofs of concept (B-PoC owns the evidence)
 
-Placeholders keyed to **P1–P9**. B0 has measured nothing here. Folder names for P1–P5 and P7 match the B-PoC branch; **P6, P8 and P9 keys are B0's proposal for coordinator confirmation**.
+Placeholders keyed to the directive's **P1–P9** (exact definitions). B0 has measured nothing here.
 
-| PoC | Question | Go criterion (proposed) | Evidence | Status |
+| PoC | Question (directive) | Go criterion (proposed by B0) | Evidence | Status |
 | --- | --- | --- | --- | --- |
-| P1 Hosting | ASP.NET Core vs Django; IIS vs Windows Service; recovery; SignalR/SSE | Both modes install and recover unattended; metadata p95 < 300 ms at 25 users | `app/poc/p1_hosting/` | PENDING |
-| P2 Search | FTS vs BM25 vs vector vs hybrid; identifiers; withdrawal consistency | Hybrid recall@20 ≥ best single; FTS within 5 pts of BM25 or adopt BM25; p95 < 1 s at 10 concurrent | `app/poc/p2_search/` | PENDING |
-| P3 Embeddings | Model choice; CPU throughput | Query < 100 ms; full corpus overnight | `app/poc/p3_embeddings/` | PENDING |
-| P4 PDF | Page anchoring and highlight | Page ≥ 98%; native highlight ≥ 90%; scanned overlay shown | `app/poc/p4_pdf/` | PENDING |
-| P5 Jobs | PG job table + Windows Service workers | No lost/duplicated jobs over 16k import with kills | `app/poc/p5_jobs/` | PENDING |
-| P6 OCR | Tesseract vs PaddleOCR/alternative on Windows | Material accuracy gain at acceptable cost | `app/poc/p6_ocr/` | PENDING |
-| P7 Licences | SBOM + licence scan, both options | No unresolved copyleft without D-02 | `app/poc/p7_sbom/` | PENDING |
-| P8 Installer/update | Offline MSI; signed import; N→N+1; rollback; networking off | All pass; tampered bundle rejected unchanged | `app/poc/p8_installer/` | PENDING |
-| P9 Identity/security | Local + AD; CSRF; authorisation; ownership; threat subset | Security architecture §9 subset passes | `app/poc/p9_security/` | PENDING |
+| P1 Windows hosting | ASP.NET Core vs Django under native Windows hosting: install, service lifecycle, concurrency, database integration, process recovery | Both hosting modes install and recover unattended; metadata p95 < 300 ms at 25 users | `app/poc/p1_hosting/` | PENDING |
+| P2 Search and retrieval | PostgreSQL FTS, BM25-class engines, vector and hybrid: Recall@K, Precision@K, MRR, nDCG, exact citation retrieval, abbreviation handling, latency, concurrency | Search p95 < 1 s at 10 concurrent queries on reference hardware **without sacrificing accuracy**; hybrid Recall@20 ≥ best single method; FTS within 5 pts of BM25 or adopt BM25; sized for ~20 GB | `app/poc/p2_search/` | PENDING |
+| P3 Local embeddings | BGE, E5, Arctic and others: quality, CPU latency, memory, throughput, licence | Query < 100 ms; full corpus overnight; permissive licence | `app/poc/p3_embeddings/` | PENDING |
+| P4 Document processing and PDF navigation | Native, scanned, garbled and bilingual PDFs; page coordinates; highlighting; OCR bounding boxes; large documents; permissive alternatives to PyMuPDF (pypdfium2, pdfminer.six, pdfplumber) | Page ≥ 98%; native highlight ≥ 90%; scanned overlay shown; a permissive extractor meets the text-quality bar | `app/poc/p4_pdf/` | PENDING |
+| P5 Background processing | Durable queues, idempotency, retries, failure recovery, termination and restart, resumability, progress, resource limits, isolation of untrusted parsing | No lost or duplicated jobs over a 16k import with kills; limits enforced; parser crash contained | `app/poc/p5_jobs/` | PENDING |
+| P6 Offline Windows installation | Clean Windows machine, no internet; packages runtimes, pgvector, Python libraries, frontend assets, OCR and embedding models; reproducible | Install succeeds offline; rebuild reproduces identical hashes | `app/poc/p6_installer/` | PENDING |
+| P7 Security and licence review | Dependency inventory, SBOM, licences from actual versions and model artefacts, parser isolation, vulnerabilities | No unresolved copyleft without D-02; no open high/critical vulnerability without mitigation; threat tests (security architecture §9) pass | `app/poc/p7_sbom/` | PENDING |
+| P8 Offline update and restoration | Signed snapshot, checksums, DB and document updates, atomic activation, rollback, backup, full restore | Tampered bundle rejected unchanged; N→N+1, rollback and full restore pass offline | `app/poc/p8_update/` | PENDING |
+| P9 UI/UX functional prototype | Real research workflows on actual data: rendering, efficiency, hierarchy, responsiveness, readability, failure states | `app/design` walkthrough (10 tasks) passes at 1366×768, 1920×1080, 2560×1440 and tablet | `app/poc/p9_ui/` | PENDING |
 
-The B-PoC host is Linux (4 cores, 15 GB, no .NET, no Tesseract). P1, P5, P6, P8 and P9 therefore need **a Windows host** for final evidence; Linux-host measurements may stand in for algorithmic questions (P2, P3, P4) only, and must be labelled with the hardware actually used.
+The B-PoC host is Linux (4 cores, 15 GB, no .NET, no Tesseract). P1, P5, P6 and P8 therefore need **a Windows host** for final evidence; Linux-host measurements may stand in for algorithmic questions (P2, P3, P4, P9) only, and must be labelled with the hardware actually used.
 
-## 17. Phased build (after GB1)
+## 17. Milestones (after GB1)
 
-1. **B1 Foundation:** installer skeleton, services, PostgreSQL schema with separate axes, vault, contract-v1 import with signature and checksum verification, passage extraction and OCR flags, hybrid search, PDF.js at page with highlight, provenance panel, candidate banner, local Admin/User auth, one Admin upload → stage → publish → search → withdraw round trip, backup and restore, network-denied tests.
-2. **B2 Research depth:** research workspace (tabs, panes, notes), judgment intelligence view with per-field axes and labelled outcome candidates, statutory explorer, graph exploration of candidate edges, Document Studio working sessions (no rules), release N→N+1 and rollback.
-3. **B3 Hardening and administration:** AD option, knowledge administration screens, audit review, restore drills, performance at simulated 20 GB, incremental bundles, Windows-specific hardening.
+Milestones as defined by the owner's directive. B0 is architecture plus the PoCs.
+
+1. **B1 Minimum functional research prototype:** offline Windows install, local PostgreSQL, immutable vault, a **real corpus subset** imported through a signed contract-v1 bundle, FTS plus hybrid search where benchmarked (P2), excerpts, PDF.js viewer with page navigation and highlights, provenance panel, candidate banner, basic local Admin/User auth with server-side checks, and the professional research workspace (`app/design`).
+2. **B2 Full eligible corpus:** all eligible documents (restricted register applied), incremental ingestion, Admin staging, publication and withdrawal (withdrawal leak-proof across indexes and caches), release N→N+1, rollback, backup and full restore, sized for ~20 GB.
+3. **B3 Research depth:** judgment intelligence with per-field axes and labelled outcome candidates, statutory explorer, knowledge-graph exploration, research workspace depth (notes, sets, related items), Document Studio working sessions (no rules), commander presentation view, AD option, audit review, hardening.
 4. **Later, each behind its own gate:** commander assistant, legal-rule features, Legal Reviewer workspace, template drafting, local LLM.
 
 ## 18. Open questions for the owner
@@ -278,5 +280,5 @@ The B-PoC host is Linux (4 cores, 15 GB, no .NET, no Tesseract). P1, P5, P6, P8 
 - **Q-3:** in-house skills for C# vs Python maintenance (affects K9 and the ASP.NET/Django choice).
 - **Q-4 / D-05:** local accounts vs AD; AD group names; custody of the release-signing key (owner) and a backup custodian.
 - **Q-5:** is IIS mandated by local policy, or is a Windows Service acceptable?
-- **Q-6:** Windows host for P1/P5/P6/P8/P9 evidence (none is available to the agents).
+- **Q-6:** Windows host for P1/P5/P6/P8 evidence (none is available to the agents).
 - **Q-7 / D-10:** Prism OCR availability.

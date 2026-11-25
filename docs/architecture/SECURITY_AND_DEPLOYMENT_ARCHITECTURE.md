@@ -84,7 +84,7 @@ Vault files are written once, set read-only, and their SHA-256 is verified on wr
 - Parsing (PDF, DOCX, images) and OCR run **only** in worker services, never in the web process.
 - Each document job runs in a **child process inside a Windows Job Object** with: memory limit (e.g. 2 GB), CPU rate cap, wall-clock timeout, no child-process breakaway, kill-on-close. A crash, hang or memory blow-up kills that job only; the job is marked `FAILED` with a reason.
 - The child gets a per-job scratch folder, wiped at job end, and the input as a read-only file handle; no access to `sessions\` of other users or to the vault beyond the job's input.
-- Optional hardening for B3: run parser children under a restricted token or an AppContainer profile **[PoC P9]**.
+- Optional hardening for B3: run parser children under a restricted token or an AppContainer profile **[PoC P5, P7]**.
 - Text extracted from documents is **data**. No component interprets document text as instructions (there is no model in the loop in Cycle 13; the parser path is still tested with prompt-injection text, T-INJ-01).
 
 ## 7. Local TLS, sessions, CSRF and server-side authorisation
@@ -158,7 +158,29 @@ Any failure in 1–6 rejects the whole bundle and changes nothing. The validator
 
 ## 9. Threat-test list
 
-Tests run against the API directly (not only the UI) and in a network-denied environment. This list consolidates Ingestion §7, Document Studio §11, the Cycle 13 plan (B2, B7, B9, B10, B12) and the owner directive's emphasis on server-side authorisation, ownership, parsers and offline updates. **The coordinator should reconcile it line by line with the directive's own threat list**, which is not reproduced in the repository.
+Tests run against the API directly (not only the UI) and in a network-denied environment. They are part of PoC P7 (security review) and the B1/B2 acceptance.
+
+### 9.1 Directive threat list → tests
+
+The owner's directive names eleven threat classes. Each maps to at least one test below.
+
+| Directive threat | Tests |
+| --- | --- |
+| Malicious PDF and Word files | T-PARSE-01, T-PARSE-05, T-PDFJS-01 |
+| Path traversal | T-PARSE-04, T-UPD-01 (bundle paths) |
+| File-type spoofing | T-PARSE-02 |
+| Oversized files and decompression attacks | T-PARSE-03, T-PARSE-01 (decompression bombs) |
+| Cross-session access | T-OWN-01, T-OWN-02, T-OWN-03 |
+| Privilege escalation | T-PRIV-01, T-AUTH-01, T-AUTH-02, T-AUTH-04 |
+| SQL injection | T-SQL-01 |
+| XSS | T-XSS-01, T-PDFJS-01 |
+| Unauthorised source access | T-VIS-01, T-RM-01, T-RM-02, T-RM-03, T-AUTH-01 |
+| Leakage of withdrawn sources through indexes and caches | T-VIS-02 |
+| Future document-borne prompt injection | T-INJ-01 (parser path now; model path when a model is ever gated in) |
+
+Additional tests (sessions, CSRF, updates, network, logging, ledger, gates, restore) come from Ingestion §7, Document Studio §11 and the Cycle 13 plan.
+
+### 9.2 Test catalogue
 
 | ID | Threat | Test | Expected |
 | --- | --- | --- | --- |
@@ -184,6 +206,8 @@ Tests run against the API directly (not only the UI) and in a network-denied env
 | T-PARSE-05 | DOCX external references | DOCX with remote template/image links, macros | No fetch; macros never executed |
 | T-INJ-01 | Prompt-injection text | Document containing instruction-like text | No effect on any behaviour or state |
 | T-PDFJS-01 | Malicious PDF in viewer | Crafted font/JS PDFs (CVE-2024-4367 class) | No script execution (`isEvalSupported:false`, scripting off, CSP) |
+| T-SQL-01 | SQL injection | Injection payloads in search text, facet values, sort keys, ids, metadata fields, bundle record fields; all queries parameterised; FTS input passed through `websearch_to_tsquery`/`plainto_tsquery` | No error leak, no extra rows, no schema change |
+| T-PRIV-01 | Privilege escalation | User modifies own role via account/profile endpoints, mass-assignment of `role`/`is_admin`, replays Admin request ids, calls designation/approval endpoints; worker identity attempts writes outside its folders | Denied; role unchanged; audit event |
 | T-XSS-01 | Stored XSS via metadata/notes | Titles, notes, filenames containing markup | Escaped everywhere |
 | T-UPD-01 | Tampered bundle | Flip one byte; edit SHA256SUMS; swap signature; wrong key; `dev-` key in production | Rejected, nothing changed |
 | T-UPD-02 | Downgrade / incompatible | Older release id, other contract major, app too old | Rejected or requires explicit Admin rollback path |
@@ -224,8 +248,8 @@ Tests run against the API directly (not only the UI) and in a network-denied env
 
 ## 13. Open items for security review
 
-1. AppContainer/restricted-token sandboxing for parser children (B3) **[PoC P9]**.
+1. AppContainer/restricted-token sandboxing for parser children (B3) **[PoC P5, P7]**.
 2. Whether IIS is mandated by site policy (affects §3, §7.1).
 3. Antivirus availability and update channel on the air-gapped site.
 4. The site's internal CA and certificate lifecycle.
-5. Reconciliation of §9 with the directive's threat list.
+5. Coverage of §9 against future directive revisions.

@@ -2,9 +2,9 @@
 
 - **Recorded:** 2026-11-25 (workstream B0). **Status:** PROPOSED for independent review.
 - **Canonical form:** [`CAPABILITY_TRACEABILITY_MATRIX.csv`](CAPABILITY_TRACEABILITY_MATRIX.csv) (one row per capability, 16 columns). This page renders the same rows.
-- **Scope:** the eight capability areas of the owner directive §18: universal search, judgment intelligence, statutory explorer, graph, commander assistant, Document Studio, research workspace and knowledge administration. The directive text itself is not in the repository; the decomposition of each area into capabilities is B0's and should be checked against §18 by the coordinator.
+- **Scope:** the eight capability areas of the owner directive §18: 18.1 Universal Legal Search, 18.2 Judgment Intelligence, 18.3 Statutory Explorer, 18.4 Legal Knowledge Graph, 18.5 Commander Assistant (architected but not activated), 18.6 Document Studio, 18.7 Research Workspace, 18.8 Knowledge Administration. The decomposition into 52 capabilities is B0's; every area is covered (coordinator confirmed 2026-11-25).
 - **Product references** use the stable IDs in [`docs/product/PRODUCT_VISION.md`](../product/PRODUCT_VISION.md) (PR-01..PR-30) and [`docs/product/COMMANDER_USE_CASES.md`](../product/COMMANDER_USE_CASES.md) (UC-01..UC-28). A reference means "this capability serves that requirement", not that the requirement is met.
-- **Phases:** B1 foundation, B2 research depth, B3 hardening and administration, *later* = behind a gate that cannot open in Cycle 13 (see the [revised execution plan](../planning/CYCLE13_EXECUTION_PLAN.md) §5). **Gated off = yes** means architected (module boundary, route returning `GATE_CLOSED`, data-model hook) but disabled. The commander assistant and every legal-rule feature are gated off.
+- **Phases (directive milestones):** B0 architecture plus PoCs; **B1** minimum functional research prototype (offline install, local DB, immutable vault, real corpus subset, FTS plus hybrid where benchmarked, excerpts, PDF viewer, page navigation, provenance, basic auth, professional workspace); **B2** full eligible corpus with incremental ingestion and Admin staging, publication and withdrawal; **B3** research depth; *later* = behind a gate that cannot open in Cycle 13 (see the [revised execution plan](../planning/CYCLE13_EXECUTION_PLAN.md) §0.3). **Gated off = yes** means architected (module boundary, route returning `GATE_CLOSED`, data-model hook) but disabled. The commander assistant and every legal-rule feature are gated off.
 - **Security and performance** columns reference [SECURITY_AND_DEPLOYMENT_ARCHITECTURE.md](SECURITY_AND_DEPLOYMENT_ARCHITECTURE.md) test ids (T-…) and PoC keys (P1–P9). Performance figures are **targets or estimates**, not measurements.
 - **Data** columns reference the [data contract v1](../../app/contract/README.md) record kinds.
 
@@ -12,67 +12,67 @@
 
 | Area | Capabilities | B1 | B2 | B3 | later | Gated off |
 | --- | --- | --- | --- | --- | --- | --- |
-| Universal search | 7 | 7 | 0 | 0 | 0 | 0 |
-| Judgment intelligence | 7 | 0 | 5 | 0 | 2 | 1 |
-| Statutory explorer | 6 | 0 | 4 | 0 | 2 | 2 |
-| Graph | 6 | 0 | 5 | 1 | 0 | 0 |
-| Commander assistant | 5 | 0 | 0 | 1 | 4 | 4 |
-| Document Studio | 5 | 0 | 0 | 3 | 2 | 2 |
-| Research workspace | 7 | 2 | 4 | 1 | 0 | 0 |
-| Knowledge administration | 9 | 6 | 1 | 2 | 0 | 1 |
-| **Total** | **52** | **15** | **19** | **8** | **10** | **10** |
+| Universal legal search (18.1) | 7 | 7 | 0 | 0 | 0 | 0 |
+| Judgment intelligence (18.2) | 7 | 0 | 0 | 5 | 2 | 1 |
+| Statutory explorer (18.3) | 6 | 0 | 0 | 4 | 2 | 2 |
+| Legal knowledge graph (18.4) | 6 | 0 | 1 | 5 | 0 | 0 |
+| Commander assistant (18.5, architected, not activated) | 5 | 0 | 0 | 1 | 4 | 4 |
+| Document Studio (18.6) | 5 | 0 | 0 | 3 | 2 | 2 |
+| Research workspace (18.7) | 7 | 4 | 0 | 3 | 0 | 0 |
+| Knowledge administration (18.8) | 9 | 6 | 1 | 2 | 0 | 1 |
+| **Total** | **52** | **17** | **2** | **23** | **10** | **10** |
 
 Phase counts use the first phase named for a capability (some start in B1 and complete in B2).
 
 ## 2. Overview by area
 
-### 2.1 Universal search
+### 2.1 Universal legal search (18.1)
 
 | ID | Capability | Product refs | Backend service | Frontend workspace | Phase | Gated off |
 | --- | --- | --- | --- | --- | --- | --- |
 | CAP-US-01 | Passage-level full-text search over the published corpus | PR-01; PR-12; PR-15; UC-01..UC-20 (research seeds) | search module (web) + index worker | Research workspace: search bar, results pane | B1 | no |
 | CAP-US-02 | Identifier-aware queries (sections, rules, case numbers, neutral citations) | PR-01; PR-02; PR-06 | search module; query parser | Search bar with query chips (parsed identifiers shown) | B1 | no |
 | CAP-US-03 | Semantic and hybrid retrieval with local embeddings | PR-01; PR-03 (later); PR-12 | embed worker (bulk, uploads); search module (query embedding) | Search results pane (match reason chips: lexical / semantic) | B1 | no |
-| CAP-US-04 | Facets and filters | PR-01; PR-07 | search module | Facet rail (collapsible) | B1 (core facets); B2 (candidate-outcome and statute facets) | no |
+| CAP-US-04 | Facets and filters | PR-01; PR-07 | search module | Facet rail (collapsible) | B1 (core facets); B3 (candidate-outcome and statute facets) | no |
 | CAP-US-05 | Result excerpts with 'why relevant' and page anchor | PR-06; Architecture §10 | search module (snippet builder) | Result row component | B1 | no |
 | CAP-US-06 | Open original PDF at page with hit highlighted | PR-06; T-03 | viewer endpoint (streams vault bytes after hash check) | Document pane (PDF viewer) | B1 | no |
-| CAP-US-07 | Withdrawal- and restriction-consistent search | PR-13; PR-18; ADR-0002 d.7; T-07; T-14 | search + admin modules; index worker | All result surfaces | B1 | no |
+| CAP-US-07 | Withdrawal- and restriction-consistent search | PR-13; PR-18; ADR-0002 d.7; T-07; T-14 | search + admin modules; index worker | All result surfaces | B1 (restricted register); B2 (withdrawal with Admin staging) | no |
 
-### 2.2 Judgment intelligence
+### 2.2 Judgment intelligence (18.2)
 
 | ID | Capability | Product refs | Backend service | Frontend workspace | Phase | Gated off |
 | --- | --- | --- | --- | --- | --- | --- |
-| CAP-JI-01 | Judgment page with cover metadata and per-field status chips | PR-07; PR-14; PR-18 | catalogue module | Document pane: metadata header; evidence-status panel | B2 | no |
-| CAP-JI-02 | Proceedings and identity (file ≠ judgment ≠ proceeding) | PR-07; Architecture §4 | catalogue module | Document pane: proceedings list; copies switcher | B2 | no |
-| CAP-JI-03 | Candidate outcomes labelled with measured precision and coverage | PR-07; R13; CAPABILITY_RESTRICTIONS judicial_outcome_extraction | catalogue module | Document pane: outcome chip; evaluation popover | B2 | no |
-| CAP-JI-04 | Statutes cited, cases cited, citing cases | PR-07; PR-08 | graph module | Context pane: 'Cited / Citing' tab | B2 | no |
+| CAP-JI-01 | Judgment page with cover metadata and per-field status chips | PR-07; PR-14; PR-18 | catalogue module | Document pane: metadata header; evidence-status panel | B3 | no |
+| CAP-JI-02 | Proceedings and identity (file ≠ judgment ≠ proceeding) | PR-07; Architecture §4 | catalogue module | Document pane: proceedings list; copies switcher | B3 | no |
+| CAP-JI-03 | Candidate outcomes labelled with measured precision and coverage | PR-07; R13; CAPABILITY_RESTRICTIONS judicial_outcome_extraction | catalogue module | Document pane: outcome chip; evaluation popover | B3 | no |
+| CAP-JI-04 | Statutes cited, cases cited, citing cases | PR-07; PR-08 | graph module | Context pane: 'Cited / Citing' tab | B3 | no |
 | CAP-JI-05 | Holdings and propositions | PR-07; PR-08; CAPABILITY_RESTRICTIONS holdings_and_propositions, origin_labels_court_voice | catalogue module (Admin diagnostic route) | Admin diagnostics workspace | later (Admin diagnostic in B2) | no |
-| CAP-JI-06 | Copy comparison and completeness flags | PR-14; Architecture §4 | catalogue + viewer | Document pane: copy switcher; split view | B2 | no |
+| CAP-JI-06 | Copy comparison and completeness flags | PR-14; Architecture §4 | catalogue + viewer | Document pane: copy switcher; split view | B3 | no |
 | CAP-JI-07 | Structured research card (facts, issues, reasoning, later treatment, lessons) | PR-07 (full); PR-09 | — | — | later | yes |
 
-### 2.3 Statutory explorer
+### 2.3 Statutory explorer (18.3)
 
 | ID | Capability | Product refs | Backend service | Frontend workspace | Phase | Gated off |
 | --- | --- | --- | --- | --- | --- | --- |
-| CAP-SE-01 | Act and Rules browser with section-level records | PR-02 | catalogue module | Statute workspace: TOC tree + section pane | B2 | no |
-| CAP-SE-02 | Amendment footnotes as candidates; 'temporal chain not established' | PR-10; PR-11; TA-01..TA-05 (representational) | graph + catalogue | Section pane: amendment strip | B2 | no |
+| CAP-SE-01 | Act and Rules browser with section-level records | PR-02 | catalogue module | Statute workspace: TOC tree + section pane | B3 | no |
+| CAP-SE-02 | Amendment footnotes as candidates; 'temporal chain not established' | PR-10; PR-11; TA-01..TA-05 (representational) | graph + catalogue | Section pane: amendment strip | B3 | no |
 | CAP-SE-03 | As-of-date provision version view | PR-10 | — | Section pane: date control (disabled) | later | yes |
-| CAP-SE-04 | Related judgments per section | PR-02; PR-08 | graph module | Section pane: related judgments tab | B2 | no |
-| CAP-SE-05 | Subordinate legislation and notifications | PR-02 | graph + catalogue | Statute workspace: related instruments | B2 | no |
+| CAP-SE-04 | Related judgments per section | PR-02; PR-08 | graph module | Section pane: related judgments tab | B3 | no |
+| CAP-SE-05 | Subordinate legislation and notifications | PR-02 | graph + catalogue | Statute workspace: related instruments | B3 | no |
 | CAP-SE-06 | IPC→BNS / CrPC→BNSS / IEA→BSA correspondence | PR-10; TA-03 | — | — | later | yes |
 
-### 2.4 Graph
+### 2.4 Legal knowledge graph (18.4)
 
 | ID | Capability | Product refs | Backend service | Frontend workspace | Phase | Gated off |
 | --- | --- | --- | --- | --- | --- | --- |
-| CAP-KG-01 | Neighbourhood exploration with typed edges | PR-08; T-05 | graph module (recursive CTE queries) | Graph workspace (Cytoscape.js canvas + list view) | B2 | no |
-| CAP-KG-02 | Path between two nodes | PR-08 | graph module | Graph workspace | B2 | no |
-| CAP-KG-03 | Edge evidence and anchors | PR-06; PR-08 | graph + viewer | Edge inspector panel | B2 | no |
-| CAP-KG-04 | Edge-type legend with measured precision | PR-08; plan B8 | graph module | Graph legend | B2 | no |
-| CAP-KG-05 | No-edge is not no-adverse-authority | Architecture §5; plan B8 | — | Graph workspace empty state | B2 | no |
-| CAP-KG-06 | Upload-derived candidate edges in staging | PR-17; UC-21; Ingestion §5 | ingest-parse worker; admin module | Admin staging workspace | B3 | no |
+| CAP-KG-01 | Neighbourhood exploration with typed edges | PR-08; T-05 | graph module (recursive CTE queries) | Graph workspace (Cytoscape.js canvas + list view) | B3 | no |
+| CAP-KG-02 | Path between two nodes | PR-08 | graph module | Graph workspace | B3 | no |
+| CAP-KG-03 | Edge evidence and anchors | PR-06; PR-08 | graph + viewer | Edge inspector panel | B3 | no |
+| CAP-KG-04 | Edge-type legend with measured precision | PR-08; plan B8 | graph module | Graph legend | B3 | no |
+| CAP-KG-05 | No-edge is not no-adverse-authority | Architecture §5; plan B8 | — | Graph workspace empty state | B3 | no |
+| CAP-KG-06 | Upload-derived candidate edges in staging | PR-17; UC-21; Ingestion §5 | ingest-parse worker; admin module | Admin staging workspace | B2 | no |
 
-### 2.5 Commander assistant
+### 2.5 Commander assistant (18.5, architected, not activated)
 
 | ID | Capability | Product refs | Backend service | Frontend workspace | Phase | Gated off |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -82,7 +82,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | CAP-CA-04 | Commander presentation of research results (plain-language view, no advice) | PR-15 | search module | Commander view toggle in research workspace | B3 | no |
 | CAP-CA-05 | Procedural checklists and lessons | PR-09; PR-25 | — | — | later | yes |
 
-### 2.6 Document Studio
+### 2.6 Document Studio (18.6)
 
 | ID | Capability | Product refs | Backend service | Frontend workspace | Phase | Gated off |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -92,19 +92,19 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | CAP-DS-04 | Document audit and readiness report | PR-24 (checks); PR-25; PR-27..PR-30; UC-25; UC-26; UC-28 | studio module (disabled) | — | later | yes |
 | CAP-DS-05 | Retention and cleanup of working sessions | PR-26; Document Studio §2 | studio module; cleanup task | Document Studio: session list | B3 | no |
 
-### 2.7 Research workspace
+### 2.7 Research workspace (18.7)
 
 | ID | Capability | Product refs | Backend service | Frontend workspace | Phase | Gated off |
 | --- | --- | --- | --- | --- | --- | --- |
-| CAP-RW-01 | Persistent search and document tabs | PR-15; app/design | research module | Research workspace shell | B2 | no |
-| CAP-RW-02 | Resizable panes (results / document / context) | app/design | research module | Research workspace shell | B2 | no |
-| CAP-RW-03 | Notes and pinned passages | PR-13; PR-26 | research module | Context pane: notes tab | B2 | no |
+| CAP-RW-01 | Persistent search and document tabs | PR-15; app/design | research module | Research workspace shell | B1 | no |
+| CAP-RW-02 | Resizable panes (results / document / context) | app/design | research module | Research workspace shell | B1 | no |
+| CAP-RW-03 | Notes and pinned passages | PR-13; PR-26 | research module | Context pane: notes tab | B3 | no |
 | CAP-RW-04 | Copy citation and stable deep links | PR-06; plan B5 | viewer + catalogue | Citation button in document pane | B1 (citation); B2 (deep links across releases) | no |
 | CAP-RW-05 | Provenance and evidence-status panels | PR-14; PR-18; plan B6 | catalogue module | Context pane: provenance tab; evidence tab | B1 | no |
-| CAP-RW-06 | Related items | PR-08 | graph + catalogue | Context pane: related tab | B2 | no |
+| CAP-RW-06 | Related items | PR-08 | graph + catalogue | Context pane: related tab | B3 | no |
 | CAP-RW-07 | Saved searches and research sets | PR-15 | research module | Left rail: saved items | B3 | no |
 
-### 2.8 Knowledge administration
+### 2.8 Knowledge administration (18.8)
 
 | ID | Capability | Product refs | Backend service | Frontend workspace | Phase | Gated off |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -116,13 +116,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | CAP-KA-06 | Legal Reviewer designation registry (inert) | PR-19; Document Studio 3.3; ADR-0003 | identity module | Admin workspace: designations (read-only notice) | B3 (model); activation later | yes |
 | CAP-KA-07 | Review queues (non-cites edges, impact triggers, OCR low confidence) | PR-28; Document Studio 3.3; plan B2 | admin module | Admin workspace: queues | B2 (OCR list); B3 (edge/impact queues, view only) | no |
 | CAP-KA-08 | Candidate-data banner driven by release metadata | PR-18; plan B11 | web shell | Global shell | B1 | no |
-| CAP-KA-09 | Backup and restore | PR-14; T-08 | backup task | Admin workspace: backup status | B1 | no |
+| CAP-KA-09 | Backup and restore | PR-14; T-08 | backup task | Admin workspace: backup status | B1 (backup); B2 (full restore drill) | no |
 
 ## 3. Full traceability (all columns)
 
 #### CAP-US-01: Passage-level full-text search over the published corpus
 
-*Universal search* · PR-01; PR-12; PR-15; UC-01..UC-20 (research seeds)
+*Universal legal search (18.1)* · PR-01; PR-12; PR-15; UC-01..UC-20 (research seeds)
 
 | Aspect | Detail |
 | --- | --- |
@@ -132,7 +132,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Storage / index model | PostgreSQL tsvector per passage (identifier-preserving + stemmed); GIN index; published view |
 | Frontend workspace | Research workspace: search bar, results pane |
 | Security | Authenticated User or Admin; published items only; server-side visibility filter; no query text in logs |
-| Performance | p95 < 1 s at 10 concurrent queries on reference hardware [P2] |
+| Performance | Search p95 < 1 s at 10 concurrent queries on reference hardware (16 cores, 64 GB, 1 TB SSD), accuracy not sacrificed; sized for ~20 GB [P2] |
 | Evidence / approval gates | Results labelled candidate where derived; no 'binding'/'current' ranking signal |
 | Acceptance tests | Retrieval metrics recall@10/20, nDCG@10 on dev and held-out golden queries; withdrawal test; banner test |
 | Phase | B1 |
@@ -141,7 +141,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-US-02: Identifier-aware queries (sections, rules, case numbers, neutral citations)
 
-*Universal search* · PR-01; PR-02; PR-06
+*Universal legal search (18.1)* · PR-01; PR-02; PR-06
 
 | Aspect | Detail |
 | --- | --- |
@@ -160,7 +160,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-US-03: Semantic and hybrid retrieval with local embeddings
 
-*Universal search* · PR-01; PR-03 (later); PR-12
+*Universal legal search (18.1)* · PR-01; PR-03 (later); PR-12
 
 | Aspect | Detail |
 | --- | --- |
@@ -179,7 +179,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-US-04: Facets and filters
 
-*Universal search* · PR-01; PR-07
+*Universal legal search (18.1)* · PR-01; PR-07
 
 | Aspect | Detail |
 | --- | --- |
@@ -192,13 +192,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | Facet counts < 300 ms |
 | Evidence / approval gates | Outcome facet labelled 'candidate (measured P/coverage)'; hidden if owner decides (D-08) |
 | Acceptance tests | Facet counts equal filtered result counts; outcome facet shows label and figures |
-| Phase | B1 (core facets); B2 (candidate-outcome and statute facets) |
+| Phase | B1 (core facets); B3 (candidate-outcome and statute facets) |
 | Gated off | no |
 | Dependencies / limitations | Statute facet depends on A-track citation normalisation |
 
 #### CAP-US-05: Result excerpts with 'why relevant' and page anchor
 
-*Universal search* · PR-06; Architecture §10
+*Universal legal search (18.1)* · PR-06; Architecture §10
 
 | Aspect | Detail |
 | --- | --- |
@@ -217,7 +217,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-US-06: Open original PDF at page with hit highlighted
 
-*Universal search* · PR-06; T-03
+*Universal legal search (18.1)* · PR-06; T-03
 
 | Aspect | Detail |
 | --- | --- |
@@ -236,7 +236,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-US-07: Withdrawal- and restriction-consistent search
 
-*Universal search* · PR-13; PR-18; ADR-0002 d.7; T-07; T-14
+*Universal legal search (18.1)* · PR-13; PR-18; ADR-0002 d.7; T-07; T-14
 
 | Aspect | Detail |
 | --- | --- |
@@ -249,13 +249,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | Withdrawal effective within the same transaction/job |
 | Evidence / approval gates | Register `config/restricted_material.json` applied at import and publication |
 | Acceptance tests | T-VIS-02, T-RM-01..03; contract tests test_restricted_material.py |
-| Phase | B1 |
+| Phase | B1 (restricted register); B2 (withdrawal with Admin staging) |
 | Gated off | no |
 | Dependencies / limitations | If a BM25 index is adopted (P2), generation check must block stale results |
 
 #### CAP-JI-01: Judgment page with cover metadata and per-field status chips
 
-*Judgment intelligence* · PR-07; PR-14; PR-18
+*Judgment intelligence (18.2)* · PR-07; PR-14; PR-18
 
 | Aspect | Detail |
 | --- | --- |
@@ -268,13 +268,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | Page load < 1 s |
 | Evidence / approval gates | Every field shows its origin (crawler/rule/llm/human) and evidence fidelity |
 | Acceptance tests | B4-style walkthrough: 10 research tasks; every field shows axis |
-| Phase | B2 |
+| Phase | B3 |
 | Gated off | no |
 | Dependencies / limitations | Values are candidates unless DOCUMENTARY_CHECKED with review ref |
 
 #### CAP-JI-02: Proceedings and identity (file ≠ judgment ≠ proceeding)
 
-*Judgment intelligence* · PR-07; Architecture §4
+*Judgment intelligence (18.2)* · PR-07; Architecture §4
 
 | Aspect | Detail |
 | --- | --- |
@@ -287,13 +287,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | — |
 | Evidence / approval gates | Identity canonicalisation is a Track A candidate (A-track graph workstream) |
 | Acceptance tests | Same-identity different-hash copies kept as alternates (Ingestion §7) |
-| Phase | B2 |
+| Phase | B3 |
 | Gated off | no |
 | Dependencies / limitations | Depends on Track A identity output via contract minor version |
 
 #### CAP-JI-03: Candidate outcomes labelled with measured precision and coverage
 
-*Judgment intelligence* · PR-07; R13; CAPABILITY_RESTRICTIONS judicial_outcome_extraction
+*Judgment intelligence (18.2)* · PR-07; R13; CAPABILITY_RESTRICTIONS judicial_outcome_extraction
 
 | Aspect | Detail |
 | --- | --- |
@@ -306,13 +306,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | — |
 | Evidence / approval gates | NON_OPERATIONAL_RESEARCH_ONLY (C11 F05, F08 deferred); never in summaries; owner may hide (D-08) |
 | Acceptance tests | Label test: every outcome shows candidate marker and figures or 'not evaluated' |
-| Phase | B2 |
+| Phase | B3 |
 | Gated off | no |
 | Dependencies / limitations | V3 targets not met; A-track outcome V4 may change figures |
 
 #### CAP-JI-04: Statutes cited, cases cited, citing cases
 
-*Judgment intelligence* · PR-07; PR-08
+*Judgment intelligence (18.2)* · PR-07; PR-08
 
 | Aspect | Detail |
 | --- | --- |
@@ -325,13 +325,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | < 500 ms |
 | Evidence / approval gates | Citation edges are extraction candidates; no treatment inferred |
 | Acceptance tests | Every listed edge opens its evidence passage |
-| Phase | B2 |
+| Phase | B3 |
 | Gated off | no |
 | Dependencies / limitations | Resolution ambiguity kept unresolved, never guessed |
 
 #### CAP-JI-05: Holdings and propositions
 
-*Judgment intelligence* · PR-07; PR-08; CAPABILITY_RESTRICTIONS holdings_and_propositions, origin_labels_court_voice
+*Judgment intelligence (18.2)* · PR-07; PR-08; CAPABILITY_RESTRICTIONS holdings_and_propositions, origin_labels_court_voice
 
 | Aspect | Detail |
 | --- | --- |
@@ -350,7 +350,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-JI-06: Copy comparison and completeness flags
 
-*Judgment intelligence* · PR-14; Architecture §4
+*Judgment intelligence (18.2)* · PR-14; Architecture §4
 
 | Aspect | Detail |
 | --- | --- |
@@ -363,13 +363,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | — |
 | Evidence / approval gates | Completeness is technical, not legal |
 | Acceptance tests | 19 truncated-at-source files show a warning |
-| Phase | B2 |
+| Phase | B3 |
 | Gated off | no |
 | Dependencies / limitations | — |
 
 #### CAP-JI-07: Structured research card (facts, issues, reasoning, later treatment, lessons)
 
-*Judgment intelligence* · PR-07 (full); PR-09
+*Judgment intelligence (18.2)* · PR-07 (full); PR-09
 
 | Aspect | Detail |
 | --- | --- |
@@ -388,7 +388,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-SE-01: Act and Rules browser with section-level records
 
-*Statutory explorer* · PR-02
+*Statutory explorer (18.3)* · PR-02
 
 | Aspect | Detail |
 | --- | --- |
@@ -401,13 +401,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | Section open < 500 ms |
 | Evidence / approval gates | Section text from India Code compilations is a GOVERNMENT_COMPILATION, provenance shown |
 | Acceptance tests | Open each Act listed in CLAUDE.md scope; TOC complete vs source |
-| Phase | B2 |
+| Phase | B3 |
 | Gated off | no |
 | Dependencies / limitations | Section records need a contract v1 minor version (provision/section schema) |
 
 #### CAP-SE-02: Amendment footnotes as candidates; 'temporal chain not established'
 
-*Statutory explorer* · PR-10; PR-11; TA-01..TA-05 (representational)
+*Statutory explorer (18.3)* · PR-10; PR-11; TA-01..TA-05 (representational)
 
 | Aspect | Detail |
 | --- | --- |
@@ -420,13 +420,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | — |
 | Evidence / approval gates | Legal applicability stays NOT_ESTABLISHED/UNRESOLVED; no as-of answer asserted |
 | Acceptance tests | Representational fixtures TA-01..05 render 'blocked/unresolved' where evidence is missing |
-| Phase | B2 |
+| Phase | B3 |
 | Gated off | no |
 | Dependencies / limitations | A-track statutory workstream provides provision versions |
 
 #### CAP-SE-03: As-of-date provision version view
 
-*Statutory explorer* · PR-10
+*Statutory explorer (18.3)* · PR-10
 
 | Aspect | Detail |
 | --- | --- |
@@ -445,7 +445,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-SE-04: Related judgments per section
 
-*Statutory explorer* · PR-02; PR-08
+*Statutory explorer (18.3)* · PR-02; PR-08
 
 | Aspect | Detail |
 | --- | --- |
@@ -458,13 +458,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | < 1 s |
 | Evidence / approval gates | Per-type measured precision shown or 'not evaluated' |
 | Acceptance tests | Each link opens evidence passage |
-| Phase | B2 |
+| Phase | B3 |
 | Gated off | no |
 | Dependencies / limitations | C11 links unevaluated; V13-01 noise known |
 
 #### CAP-SE-05: Subordinate legislation and notifications
 
-*Statutory explorer* · PR-02
+*Statutory explorer (18.3)* · PR-02
 
 | Aspect | Detail |
 | --- | --- |
@@ -477,13 +477,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | — |
 | Evidence / approval gates | Candidate relation; enabling-power citation shown where present |
 | Acceptance tests | — |
-| Phase | B2 |
+| Phase | B3 |
 | Gated off | no |
 | Dependencies / limitations | — |
 
 #### CAP-SE-06: IPC→BNS / CrPC→BNSS / IEA→BSA correspondence
 
-*Statutory explorer* · PR-10; TA-03
+*Statutory explorer (18.3)* · PR-10; TA-03
 
 | Aspect | Detail |
 | --- | --- |
@@ -502,7 +502,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-KG-01: Neighbourhood exploration with typed edges
 
-*Graph* · PR-08; T-05
+*Legal knowledge graph (18.4)* · PR-08; T-05
 
 | Aspect | Detail |
 | --- | --- |
@@ -515,13 +515,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | Neighbourhood query < 1 s on full candidate data |
 | Evidence / approval gates | Every non-CITES edge shows 'proposed, not verified' |
 | Acceptance tests | Label test: every non-cites edge renders unverified marker |
-| Phase | B2 |
+| Phase | B3 |
 | Gated off | no |
 | Dependencies / limitations | — |
 
 #### CAP-KG-02: Path between two nodes
 
-*Graph* · PR-08
+*Legal knowledge graph (18.4)* · PR-08
 
 | Aspect | Detail |
 | --- | --- |
@@ -534,13 +534,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | < 2 s up to depth 4 |
 | Evidence / approval gates | Path is navigation, not legal reasoning |
 | Acceptance tests | Path query returns within target |
-| Phase | B2 |
+| Phase | B3 |
 | Gated off | no |
 | Dependencies / limitations | — |
 
 #### CAP-KG-03: Edge evidence and anchors
 
-*Graph* · PR-06; PR-08
+*Legal knowledge graph (18.4)* · PR-06; PR-08
 
 | Aspect | Detail |
 | --- | --- |
@@ -553,13 +553,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | — |
 | Evidence / approval gates | Evidence shown verbatim; OCR evidence marked |
 | Acceptance tests | Every edge opens its evidence passage |
-| Phase | B2 |
+| Phase | B3 |
 | Gated off | no |
 | Dependencies / limitations | — |
 
 #### CAP-KG-04: Edge-type legend with measured precision
 
-*Graph* · PR-08; plan B8
+*Legal knowledge graph (18.4)* · PR-08; plan B8
 
 | Aspect | Detail |
 | --- | --- |
@@ -572,13 +572,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | — |
 | Evidence / approval gates | Figures carry 'no human has checked this figure' until a human does |
 | Acceptance tests | Legend test |
-| Phase | B2 |
+| Phase | B3 |
 | Gated off | no |
 | Dependencies / limitations | Depends on A-track graph evaluation |
 
 #### CAP-KG-05: No-edge is not no-adverse-authority
 
-*Graph* · Architecture §5; plan B8
+*Legal knowledge graph (18.4)* · Architecture §5; plan B8
 
 | Aspect | Detail |
 | --- | --- |
@@ -591,13 +591,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | — |
 | Evidence / approval gates | Mandatory notice |
 | Acceptance tests | UI test: notice present on empty results |
-| Phase | B2 |
+| Phase | B3 |
 | Gated off | no |
 | Dependencies / limitations | — |
 
 #### CAP-KG-06: Upload-derived candidate edges in staging
 
-*Graph* · PR-17; UC-21; Ingestion §5
+*Legal knowledge graph (18.4)* · PR-17; UC-21; Ingestion §5
 
 | Aspect | Detail |
 | --- | --- |
@@ -610,13 +610,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | — |
 | Evidence / approval gates | Publication is not legal approval; claimed supersession stays POSSIBLY_SUPERSEDES_DOCUMENT |
 | Acceptance tests | Staged edges invisible to Users (T-VIS-01) |
-| Phase | B3 |
+| Phase | B2 |
 | Gated off | no |
 | Dependencies / limitations | Link suggestion uses deterministic citation extraction only (no LLM) |
 
 #### CAP-CA-01: Plain-English situation intake
 
-*Commander assistant* · PR-03; UC-01..UC-20
+*Commander assistant (18.5, architected, not activated)* · PR-03; UC-01..UC-20
 
 | Aspect | Detail |
 | --- | --- |
@@ -635,7 +635,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-CA-02: Material-fact dialogue
 
-*Commander assistant* · PR-04
+*Commander assistant (18.5, architected, not activated)* · PR-04
 
 | Aspect | Detail |
 | --- | --- |
@@ -654,7 +654,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-CA-03: Bounded, source-grounded response with uncertainty
 
-*Commander assistant* · PR-05; PR-06; PR-11
+*Commander assistant (18.5, architected, not activated)* · PR-05; PR-06; PR-11
 
 | Aspect | Detail |
 | --- | --- |
@@ -673,7 +673,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-CA-04: Commander presentation of research results (plain-language view, no advice)
 
-*Commander assistant* · PR-15
+*Commander assistant (18.5, architected, not activated)* · PR-15
 
 | Aspect | Detail |
 | --- | --- |
@@ -692,7 +692,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-CA-05: Procedural checklists and lessons
 
-*Commander assistant* · PR-09; PR-25
+*Commander assistant (18.5, architected, not activated)* · PR-09; PR-25
 
 | Aspect | Detail |
 | --- | --- |
@@ -711,7 +711,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-DS-01: Session-isolated working area (upload, view, OCR, annotate, export)
 
-*Document Studio* · PR-24 (view only); PR-26; UC-25 (view only)
+*Document Studio (18.6)* · PR-24 (view only); PR-26; UC-25 (view only)
 
 | Aspect | Detail |
 | --- | --- |
@@ -726,11 +726,11 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Acceptance tests | T-OWN-01..03; T-INJ-01; temp derivatives cleaned |
 | Phase | B3 |
 | Gated off | no |
-| Dependencies / limitations | Plan B9 placed this at M-B2; directive phase mapping to confirm |
+| Dependencies / limitations | B3 research depth (directive milestones) |
 
 #### CAP-DS-02: Read-only forms registry view
 
-*Document Studio* · PR-22; CAPABILITY_RESTRICTIONS form_field_lists
+*Document Studio (18.6)* · PR-22; CAPABILITY_RESTRICTIONS form_field_lists
 
 | Aspect | Detail |
 | --- | --- |
@@ -749,7 +749,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-DS-03: Template-based draft generation
 
-*Document Studio* · PR-21; PR-23; UC-24; UC-27
+*Document Studio (18.6)* · PR-21; PR-23; UC-24; UC-27
 
 | Aspect | Detail |
 | --- | --- |
@@ -768,7 +768,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-DS-04: Document audit and readiness report
 
-*Document Studio* · PR-24 (checks); PR-25; PR-27..PR-30; UC-25; UC-26; UC-28
+*Document Studio (18.6)* · PR-24 (checks); PR-25; PR-27..PR-30; UC-25; UC-26; UC-28
 
 | Aspect | Detail |
 | --- | --- |
@@ -787,7 +787,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-DS-05: Retention and cleanup of working sessions
 
-*Document Studio* · PR-26; Document Studio §2
+*Document Studio (18.6)* · PR-26; Document Studio §2
 
 | Aspect | Detail |
 | --- | --- |
@@ -806,7 +806,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-RW-01: Persistent search and document tabs
 
-*Research workspace* · PR-15; app/design
+*Research workspace (18.7)* · PR-15; app/design
 
 | Aspect | Detail |
 | --- | --- |
@@ -819,13 +819,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | Tab switch < 100 ms (client) |
 | Evidence / approval gates | — |
 | Acceptance tests | Keyboard: Ctrl+K focus search; Ctrl+W close tab |
-| Phase | B2 |
+| Phase | B1 |
 | Gated off | no |
 | Dependencies / limitations | — |
 
 #### CAP-RW-02: Resizable panes (results / document / context)
 
-*Research workspace* · app/design
+*Research workspace (18.7)* · app/design
 
 | Aspect | Detail |
 | --- | --- |
@@ -838,13 +838,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | 60 fps drag on reference client (target) |
 | Evidence / approval gates | — |
 | Acceptance tests | Layout works at 1366×768, 1920×1080, 2560×1440 |
-| Phase | B2 |
+| Phase | B1 |
 | Gated off | no |
 | Dependencies / limitations | — |
 
 #### CAP-RW-03: Notes and pinned passages
 
-*Research workspace* · PR-13; PR-26
+*Research workspace (18.7)* · PR-13; PR-26
 
 | Aspect | Detail |
 | --- | --- |
@@ -857,13 +857,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | — |
 | Evidence / approval gates | Notes are personal research, never corpus |
 | Acceptance tests | T-OWN-01 for notes; notes absent from shared search |
-| Phase | B2 |
+| Phase | B3 |
 | Gated off | no |
 | Dependencies / limitations | — |
 
 #### CAP-RW-04: Copy citation and stable deep links
 
-*Research workspace* · PR-06; plan B5
+*Research workspace (18.7)* · PR-06; plan B5
 
 | Aspect | Detail |
 | --- | --- |
@@ -882,7 +882,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-RW-05: Provenance and evidence-status panels
 
-*Research workspace* · PR-14; PR-18; plan B6
+*Research workspace (18.7)* · PR-14; PR-18; plan B6
 
 | Aspect | Detail |
 | --- | --- |
@@ -901,7 +901,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-RW-06: Related items
 
-*Research workspace* · PR-08
+*Research workspace (18.7)* · PR-08
 
 | Aspect | Detail |
 | --- | --- |
@@ -914,13 +914,13 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | < 500 ms |
 | Evidence / approval gates | Relations labelled by type and confidence |
 | Acceptance tests | — |
-| Phase | B2 |
+| Phase | B3 |
 | Gated off | no |
 | Dependencies / limitations | — |
 
 #### CAP-RW-07: Saved searches and research sets
 
-*Research workspace* · PR-15
+*Research workspace (18.7)* · PR-15
 
 | Aspect | Detail |
 | --- | --- |
@@ -939,7 +939,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-KA-01: Admin upload → staging → review → publish / withdraw / replace / reprocess
 
-*Knowledge administration* · PR-16; PR-17; PR-18; UC-21; UC-23; ADR-0002
+*Knowledge administration (18.8)* · PR-16; PR-17; PR-18; UC-21; UC-23; ADR-0002
 
 | Aspect | Detail |
 | --- | --- |
@@ -958,7 +958,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-KA-02: Release bundle import, verification, generation switch, rollback
 
-*Knowledge administration* · PR-12; PR-14; contract v1
+*Knowledge administration (18.8)* · PR-12; PR-14; contract v1
 
 | Aspect | Detail |
 | --- | --- |
@@ -968,7 +968,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Storage / index model | releases folder; release_generation tables |
 | Frontend workspace | Admin workspace: releases |
 | Security | Admin only, enforced at endpoint and service layer; audited (metadata only); pinned Ed25519 key; dev keys refused |
-| Performance | Full-corpus import within one working day on reference hardware (estimate) [P8] |
+| Performance | Subset import (B1) and full-corpus import within one working day on reference hardware (estimate) [P6, P8] |
 | Evidence / approval gates | AUTH-LEDGER v0 ⇒ only T0 records; banner required |
 | Acceptance tests | app/contract tests; T-UPD-01..03 |
 | Phase | B1 |
@@ -977,7 +977,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-KA-03: Restricted-material enforcement
 
-*Knowledge administration* · T-14; ADR-0002 d.7; governance §3
+*Knowledge administration (18.8)* · T-14; ADR-0002 d.7; governance §3
 
 | Aspect | Detail |
 | --- | --- |
@@ -996,7 +996,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-KA-04: Accounts: local users, optional AD
 
-*Knowledge administration* · PR-19; ADR-0002; D-05
+*Knowledge administration (18.8)* · PR-19; ADR-0002; D-05
 
 | Aspect | Detail |
 | --- | --- |
@@ -1015,7 +1015,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-KA-05: Audit log review (metadata only)
 
-*Knowledge administration* · PR-14; Architecture §11
+*Knowledge administration (18.8)* · PR-14; Architecture §11
 
 | Aspect | Detail |
 | --- | --- |
@@ -1034,7 +1034,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-KA-06: Legal Reviewer designation registry (inert)
 
-*Knowledge administration* · PR-19; Document Studio 3.3; ADR-0003
+*Knowledge administration (18.8)* · PR-19; Document Studio 3.3; ADR-0003
 
 | Aspect | Detail |
 | --- | --- |
@@ -1053,7 +1053,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-KA-07: Review queues (non-cites edges, impact triggers, OCR low confidence)
 
-*Knowledge administration* · PR-28; Document Studio 3.3; plan B2
+*Knowledge administration (18.8)* · PR-28; Document Studio 3.3; plan B2
 
 | Aspect | Detail |
 | --- | --- |
@@ -1072,7 +1072,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-KA-08: Candidate-data banner driven by release metadata
 
-*Knowledge administration* · PR-18; plan B11
+*Knowledge administration (18.8)* · PR-18; plan B11
 
 | Aspect | Detail |
 | --- | --- |
@@ -1091,7 +1091,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 #### CAP-KA-09: Backup and restore
 
-*Knowledge administration* · PR-14; T-08
+*Knowledge administration (18.8)* · PR-14; T-08
 
 | Aspect | Detail |
 | --- | --- |
@@ -1104,7 +1104,7 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 | Performance | Nightly backup within maintenance window |
 | Evidence / approval gates | — |
 | Acceptance tests | T-BKP-01 restore drill |
-| Phase | B1 |
+| Phase | B1 (backup); B2 (full restore drill) |
 | Gated off | no |
 | Dependencies / limitations | — |
 
