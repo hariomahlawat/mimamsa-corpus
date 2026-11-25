@@ -1,0 +1,359 @@
+{
+ "measured": {
+  "detector": {
+   "marginal_excluded": {
+    "fn": 0,
+    "fp": 13,
+    "precision": 0.849,
+    "precision_ci95": [
+     0.758,
+     0.909
+    ],
+    "recall": 1.0,
+    "recall_ci95": [
+     0.95,
+     1.0
+    ],
+    "tn": 62,
+    "tp": 73
+   },
+   "with_original_uncorrected_labels": {
+    "fn": 9,
+    "fp": 13,
+    "precision": 0.849,
+    "precision_ci95": [
+     0.758,
+     0.909
+    ],
+    "recall": 0.89,
+    "recall_ci95": [
+     0.804,
+     0.941
+    ],
+    "tn": 53,
+    "tp": 73
+   }
+  },
+  "held_t1_sample_c12_25": {
+   "by_court": {
+    "High Court of Punjab and Haryana": {
+     "c13_state=CLASSIFICATION_UNCERTAIN|c12=REL": 2,
+     "c13_state=RELEVANT|c12=REL": 10,
+     "fn_rate": 1.0,
+     "fn_rate_ci95": [
+      0.757,
+      1.0
+     ],
+     "relevant_by_c12_review_i.e._false_negative_of_old_rule": 12,
+     "text_layer_unusable": 12,
+     "titles": 12
+    },
+    "Supreme Court of India": {
+     "c13_state=CLASSIFICATION_UNCERTAIN|c12=NOT": 6,
+     "c13_state=CLASSIFICATION_UNCERTAIN|c12=REL": 4,
+     "c13_state=IRRELEVANT|c12=NOT": 1,
+     "c13_state=IRRELEVANT|c12=REL": 1,
+     "c13_state=MANUAL_REVIEW_REQUIRED|c12=REL": 1,
+     "fn_rate": 0.462,
+     "fn_rate_ci95": [
+      0.232,
+      0.709
+     ],
+     "relevant_by_c12_review_i.e._false_negative_of_old_rule": 6,
+     "text_layer_unusable": 1,
+     "titles": 13
+    }
+   },
+   "note": "The 25 C11 first-tier titles acquired in C12 (selected by rank: 13 SC + 12 P&H AFT writs; not a random sample). Relevance reference = C12 LLM review (page images for P&H), not human.",
+   "rows": [
+    {
+     "c12_llm_relevance": "NOT_RELEVANT",
+     "c13_state": "CLASSIFICATION_UNCERTAIN",
+     "court": "Supreme Court of India",
+     "doc_id": "sc-1981-commodore-commanding-southern-1981insc58",
+     "text_layer": "TEXT_OK"
+    },
+    {
+     "c12_llm_relevance": "RELEVANT",
+     "c13_state": "MANUAL_REVIEW_REQUIRED",
+     "court": "Supreme Court of India",
+     "doc_id": "sc-2012-ex-hav-satbir-singh-2012insc514",
+     "text_layer": "TEXT_OK"
+    },
+    {
+     "c12_llm_relevance": "RELEVANT",
+     "c13_state": "IRRELEVANT",
+     "court": "Supreme Court of India",
+     "doc_id": "sc-1983-col-d-d-joshi-and-others-1983insc17",
+     "text_layer": "TEXT_OK"
+    },
+    {
+     "c12_llm_relevance": "RELEVANT_SCOPE",
+     "c13_state": "CLASSIFICATION_UNCERTAIN",
+     "court": "High Court of Punjab and Haryana",
+     "doc_id": "hc-ph-2023-cwp-17142-2023-phhc010993062023-1-2023-08-07",
+     "text_layer": "OCR_REQUIRED"
+    },
+    {
+     "c12_llm_relevance": "RELEVANT_SCOPE",
+     "c13_state": "RELEVANT",
+     "court": "High Court of Punjab and Haryana",
+     "doc_id": "hc-ph-2014-cwp-20380-2012-phhc010774422012-1-2014-05-21",
+     "text_layer": "OCR_REQUIRED"
+    },
+    {
+     "c12_llm_relevance": "RELEVANT_SCOPE",
+     "c13_state": "RELEVANT",
+     "court": "High Court of Punjab and Haryana",
+     "doc_id": "hc-ph-2013-cwp-8140-2013-phhc010960252013-1-2013-08-12",
+     "text_layer": "OCR_REQUIRED"
+    },
+    {
+     "c12_llm_relevance": "RELEVANT_SCOPE",
+     "c13_state": "RELEVANT",
+     "court": "High Court of Punjab and Haryana",
+     "doc_id": "hc-ph-2023-cwp-14249-2023-phhc010845612023-1-2023-07-07",
+     "text_layer": "OCR_REQUIRED"
+    },
+    {
+     "c12_llm_relevance": "RELEVANT_SCOPE",
+     "c13_state": "RELEVANT",
+     "court": "High Court of Punjab and Haryana",
+     "doc_id": "hc-ph-2024-cwp-16371-2024-phhc010909582024-1-2024-11-22",
+     "text_layer": "OCR_REQUIRED"
+    },
+    {
+     "c12_llm_relevance": "RELEVANT",
+     "c13_state": "CLASSIFICATION_UNCERTAIN",
+     "court": "Supreme Court of India",
+     "doc_id": "sc-1981-col-avtar-singh-sekhon-1980insc143",
+     "text_layer": "TEXT_OK"
+    },
+    {
+     "c12_llm_relevance": "RELEVANT",
+     "c13_state": "CLASSIFICATION_UNCERTAIN",
+     "court": "Supreme Court of India",
+     "doc_id": "sc-2000-union-of-india-and-anr-2000insc517",
+     "text_layer": "TEXT_OK"
+    },
+    {
+     "c12_llm_relevance": "RELEVANT_SCOPE",
+     "c13_state": "RELEVANT",
+     "court": "High Court of Punjab and Haryana",
+     "doc_id": "hc-ph-2024-cwp-24556-2021-phhc011119162021-1-2024-09-30",
+     "text_layer": "OCR_REQUIRED"
+    },
+    {
+     "c12_llm_relevance": "RELEVANT_SCOPE",
+     "c13_state": "RELEVANT",
+     "court": "High Court of Punjab and Haryana",
+     "doc_id": "hc-ph-2019-cwp-21429-2019-phhc010949672019-1-2019-08-09",
+     "text_layer": "OCR_REQUIRED"
+    },
+    {
+     "c12_llm_relevance": "NOT_RELEVANT",
+     "c13_state": "CLASSIFICATION_UNCERTAIN",
+     "court": "Supreme Court of India",
+     "doc_id": "sc-1973-union-of-india-1973insc62",
+     "text_layer": "TEXT_OK"
+    },
+    {
+     "c12_llm_relevance": "NOT_RELEVANT",
+     "c13_state": "CLASSIFICATION_UNCERTAIN",
+     "court": "Supreme Court of India",
+     "doc_id": "sc-2008-brigadier-man-mohan-sharma-frg-2008insc1353",
+     "text_layer": "OCR_REQUIRED"
+    },
+    {
+     "c12_llm_relevance": "RELEVANT_SCOPE",
+     "c13_state": "RELEVANT",
+     "court": "High Court of Punjab and Haryana",
+     "doc_id": "hc-ph-2014-cwp-14191-2013-phhc010740772013-1-2014-07-25",
+     "text_layer": "OCR_REQUIRED"
+    },
+    {
+     "c12_llm_relevance": "NOT_RELEVANT",
+     "c13_state": "IRRELEVANT",
+     "court": "Supreme Court of India",
+     "doc_id": "sc-1971-union-of-india-1970insc156",
+     "text_layer": "TEXT_OK"
+    },
+    {
+     "c12_llm_relevance": "NOT_RELEVANT",
+     "c13_state": "CLASSIFICATION_UNCERTAIN",
+     "court": "Supreme Court of India",
+     "doc_id": "sc-1982-ex-capt-ashok-kumar-sawhney-1982insc3",
+     "text_layer": "TEXT_OK"
+    },
+    {
+     "c12_llm_relevance": "NOT_RELEVANT",
+     "c13_state": "CLASSIFICATION_UNCERTAIN",
+     "court": "Supreme Court of India",
+     "doc_id": "sc-1987-union-of-india-anr-1987insc29",
+     "text_layer": "TEXT_OK"
+    },
+    {
+     "c12_llm_relevance": "RELEVANT_SCOPE",
+     "c13_state": "RELEVANT",
+     "court": "High Court of Punjab and Haryana",
+     "doc_id": "hc-ph-2024-cwp-16643-2024-phhc010919992024-1-2024-11-22",
+     "text_layer": "OCR_REQUIRED"
+    },
+    {
+     "c12_llm_relevance": "RELEVANT_SCOPE",
+     "c13_state": "CLASSIFICATION_UNCERTAIN",
+     "court": "High Court of Punjab and Haryana",
+     "doc_id": "hc-ph-2024-cwp-14834-2024-phhc010776672024-1-2024-07-10",
+     "text_layer": "OCR_REQUIRED"
+    },
+    {
+     "c12_llm_relevance": "RELEVANT",
+     "c13_state": "CLASSIFICATION_UNCERTAIN",
+     "court": "Supreme Court of India",
+     "doc_id": "sc-1961-lt-col-khajoor-singh-1960insc234",
+     "text_layer": "TEXT_OK"
+    },
+    {
+     "c12_llm_relevance": "RELEVANT_SCOPE",
+     "c13_state": "RELEVANT",
+     "court": "High Court of Punjab and Haryana",
+     "doc_id": "hc-ph-2024-cwp-16812-2024-phhc010928662024-1-2024-11-21",
+     "text_layer": "OCR_REQUIRED"
+    },
+    {
+     "c12_llm_relevance": "RELEVANT_SCOPE",
+     "c13_state": "RELEVANT",
+     "court": "High Court of Punjab and Haryana",
+     "doc_id": "hc-ph-2024-cwp-28668-2024-phhc011389462024-1-2024-11-27",
+     "text_layer": "OCR_REQUIRED"
+    },
+    {
+     "c12_llm_relevance": "NOT_RELEVANT",
+     "c13_state": "CLASSIFICATION_UNCERTAIN",
+     "court": "Supreme Court of India",
+     "doc_id": "sc-1995-chief-of-naval-staff-and-anr-1995insc866",
+     "text_layer": "TEXT_OK"
+    },
+    {
+     "c12_llm_relevance": "RELEVANT",
+     "c13_state": "CLASSIFICATION_UNCERTAIN",
+     "court": "Supreme Court of India",
+     "doc_id": "sc-1982-wing-commander-j-kumar-1982insc33",
+     "text_layer": "TEXT_OK"
+    }
+   ]
+  },
+  "kept_corpus_text_layers": {
+   "Allahabad High Court": {
+    "any_unusable_page": 0,
+    "cmap_garbled_any_page": 0,
+    "cmap_garbled_majority_pages": 0,
+    "documents": 309,
+    "does_not_open": 0,
+    "image_only_any_page": 0,
+    "no_eof_trailer": 0
+   },
+   "High Court of Delhi": {
+    "any_unusable_page": 108,
+    "cmap_garbled_any_page": 0,
+    "cmap_garbled_majority_pages": 0,
+    "documents": 1678,
+    "does_not_open": 7,
+    "image_only_any_page": 31,
+    "no_eof_trailer": 41
+   },
+   "High Court of Jammu and Kashmir": {
+    "any_unusable_page": 7,
+    "cmap_garbled_any_page": 1,
+    "cmap_garbled_majority_pages": 1,
+    "documents": 410,
+    "does_not_open": 0,
+    "image_only_any_page": 1,
+    "no_eof_trailer": 0
+   },
+   "High Court of Punjab and Haryana": {
+    "any_unusable_page": 139,
+    "cmap_garbled_any_page": 99,
+    "cmap_garbled_majority_pages": 78,
+    "documents": 1208,
+    "does_not_open": 0,
+    "image_only_any_page": 36,
+    "no_eof_trailer": 0
+   },
+   "P&H_cmap_by_year_band": {
+    "2014-2015|cmap_garbled_any_page": 12,
+    "2014-2015|documents": 30,
+    "2023-2026|cmap_garbled_any_page": 83,
+    "2023-2026|documents": 666,
+    "other_years|cmap_garbled_any_page": 4,
+    "other_years|documents": 512
+   },
+   "Supreme Court of India": {
+    "any_unusable_page": 30,
+    "cmap_garbled_any_page": 0,
+    "cmap_garbled_majority_pages": 0,
+    "documents": 346,
+    "does_not_open": 0,
+    "image_only_any_page": 10,
+    "no_eof_trailer": 0
+   }
+  },
+  "population": {
+   "c11_flagged_held": 25,
+   "c11_flagged_titles": 8077,
+   "excluded_log_not_flagged_by_court": {
+    "Allahabad High Court": 28384,
+    "High Court of Delhi": 34616,
+    "High Court of Jammu and Kashmir": 3049,
+    "High Court of Punjab and Haryana": 42682,
+    "Supreme Court of India": 3377
+   },
+   "excluded_log_total": 120185,
+   "ph_t1_by_year": {
+    "2006": 1,
+    "2007": 3,
+    "2008": 3,
+    "2009": 9,
+    "2010": 16,
+    "2011": 14,
+    "2012": 18,
+    "2013": 36,
+    "2014": 17,
+    "2015": 15,
+    "2016": 29,
+    "2017": 34,
+    "2018": 21,
+    "2019": 22,
+    "2020": 11,
+    "2021": 8,
+    "2022": 14,
+    "2023": 34,
+    "2024": 82,
+    "2025": 77,
+    "2026": 98
+   },
+   "ph_t1_held": 12,
+   "ph_t1_titles": 562
+  },
+  "relevance_rerun_states": {
+   "C12_INGESTED_T1": {
+    "CLASSIFICATION_UNCERTAIN": 6,
+    "IRRELEVANT": 1,
+    "MANUAL_REVIEW_REQUIRED": 1,
+    "RELEVANT": 10
+   },
+   "C12_PRESERVED_NOT_INGESTED": {
+    "CLASSIFICATION_UNCERTAIN": 6,
+    "IRRELEVANT": 1
+   },
+   "INCORPUS_TEXT_RISK": {
+    "CLASSIFICATION_UNCERTAIN": 4,
+    "INSUFFICIENT_TEXT": 6,
+    "IRRELEVANT": 14,
+    "OCR_REQUIRED": 24,
+    "RELEVANT": 3,
+    "SOURCE_INCOMPLETE": 14
+   }
+  }
+ }
+}

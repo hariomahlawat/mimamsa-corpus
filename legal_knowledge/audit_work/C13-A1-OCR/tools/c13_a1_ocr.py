@@ -455,6 +455,65 @@ def dump_text_layers():
     (INP / "TEXT_LAYER_USABLE_PAGES.jsonl").write_text("\n".join(sorted(set(lines))) + "\n", encoding="utf-8")
 
 
+# ------------------------------------------------------------------ task 7: risk figures
+def build_risk():
+    """Measured figures only; estimates are derived in MISSED_JUDGMENT_RISK.md from these, with stated assumptions."""
+    ing = {r["doc_id"]: r for r in read_csv(C12_INGEST)}
+    rel = {r["doc_id"]: r for r in read_csv(OUT / "RELEVANCE_RERUN.csv")}
+    rd = {r["key"]: r for r in read_csv(AUDIT / "C12-CONSOLIDATION" / "judicial_recovery_c12" / "inputs" / "REVIEW_DECISIONS.csv")}
+    held = read_csv(INP / "HELD_COPIES.csv")
+    tl = {r["sha256"]: r for r in read_csv(INP / "HELD_DOC_TEXT_QUALITY.csv")}
+    sample = []
+    for h in held:
+        g = ing.get(h["doc_id"], {})
+        key = g.get("target", "")
+        llm = rd.get(key, {}).get("relevance_decision", "")
+        r = rel.get(h["doc_id"], {})
+        sample.append({"doc_id": h["doc_id"], "court": g.get("court", ""), "text_layer": tl.get(h["sha256"], {}).get("verdict", ""),
+                       "c12_llm_relevance": llm, "c13_state": r.get("state", "")})
+    by = defaultdict(Counter)
+    for x in sample:
+        c = x["court"]
+        by[c]["titles"] += 1
+        by[c]["text_layer_unusable"] += x["text_layer"] != "TEXT_OK"
+        rel_llm = x["c12_llm_relevance"].startswith("RELEVANT")
+        by[c]["relevant_by_c12_review_i.e._false_negative_of_old_rule"] += rel_llm
+        by[c][f"c13_state={x['c13_state']}|c12={'REL' if rel_llm else 'NOT'}"] += 1
+    fn = {c: {**dict(v), "fn_rate": round(v["relevant_by_c12_review_i.e._false_negative_of_old_rule"] / v["titles"], 3),
+              "fn_rate_ci95": wilson(v["relevant_by_c12_review_i.e._false_negative_of_old_rule"], v["titles"])}
+          for c, v in sorted(by.items())}
+    corpus = defaultdict(Counter)
+    cm = {"control_chars", "private_use", "cid_glyphs"}
+    for r in read_csv(INP / "CORPUS_TEXT_LAYER_SCAN.csv"):
+        f = set(r["flags"].split(";"))
+        k = corpus[r["court"]]
+        k["documents"] += 1
+        k["cmap_garbled_any_page"] += bool(f & cm)
+        k["cmap_garbled_majority_pages"] += bool(f & cm) and float(r["usable_share"]) < 0.5
+        k["any_unusable_page"] += r["verdict"] == "OCR_REQUIRED"
+        k["image_only_any_page"] += "image_only" in f
+        k["does_not_open"] += r["verdict"] == "EXTRACTION_FAILED"
+        k["no_eof_trailer"] += r["truncated"] == "YES"
+        if r["court"] == "High Court of Punjab and Haryana":
+            band = "2023-2026" if r["year"] >= "2023" else "2014-2015" if r["year"] in ("2014", "2015") else "other_years"
+            corpus["P&H_cmap_by_year_band"][f"{band}|documents"] += 1
+            corpus["P&H_cmap_by_year_band"][f"{band}|cmap_garbled_any_page"] += bool(f & cm)
+    dv = json.loads((OUT / "DETECTOR_VALIDATION.json").read_text(encoding="utf-8"))
+    rr = json.loads((OUT / "RELEVANCE_RERUN.json").read_text(encoding="utf-8"))
+    pop = json.loads((OUT / "POPULATION_SUMMARY.json").read_text(encoding="utf-8"))
+    out = {"measured": {
+        "held_t1_sample_c12_25": {"note": "The 25 C11 first-tier titles acquired in C12 (selected by rank: 13 SC + 12 P&H AFT writs; "
+                                          "not a random sample). Relevance reference = C12 LLM review (page images for P&H), not human.",
+                                  "by_court": fn, "rows": sample},
+        "kept_corpus_text_layers": {k: dict(v) for k, v in sorted(corpus.items())},
+        "detector": {k: dv[k] for k in ("marginal_excluded", "with_original_uncorrected_labels")},
+        "relevance_rerun_states": rr["by_group_state"],
+        "population": {k: pop[k] for k in ("c11_flagged_titles", "c11_flagged_held", "ph_t1_titles", "ph_t1_held",
+                                           "ph_t1_by_year", "excluded_log_total", "excluded_log_not_flagged_by_court")},
+    }}
+    return {"RISK_FIGURES.json": js(out)}
+
+
 # ------------------------------------------------------------------ SHA256SUMS
 SUM_EXCLUDE = {"SHA256SUMS"}
 
@@ -469,6 +528,7 @@ def build_sums():
 
 # ------------------------------------------------------------------ main
 BUILDERS = {"population": build_population, "detector-eval": build_detector_eval, "bench-score": build_bench_score}
+LATE_BUILDERS = {"risk": build_risk}
 
 
 def write(outputs):
@@ -479,7 +539,7 @@ def write(outputs):
 
 def check() -> int:
     bad = 0
-    for name, fn in [*BUILDERS.items(), ("relevance", lambda: build_relevance(False))]:
+    for name, fn in [*BUILDERS.items(), ("relevance", lambda: build_relevance(False)), *LATE_BUILDERS.items()]:
         for fname, text in fn().items():
             p = OUT / fname
             ok = p.exists() and p.read_text(encoding="utf-8") == text
@@ -509,8 +569,8 @@ def main():
     a = ap.parse_args()
     if a.check:
         sys.exit(check())
-    if a.cmd in BUILDERS:
-        write(BUILDERS[a.cmd]())
+    if a.cmd in BUILDERS or a.cmd in LATE_BUILDERS:
+        write({**BUILDERS, **LATE_BUILDERS}[a.cmd]())
     elif a.cmd == "assemble":
         print(assemble(Path(a.cache)), "OCR pages assembled")
     elif a.cmd == "text-layers":
