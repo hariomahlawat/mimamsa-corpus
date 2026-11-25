@@ -8,20 +8,21 @@ Use a modular application and isolated local workers, rather than one network se
 
 ```mermaid
 flowchart TD
-  U[Research workspace / Document Studio] --> O[Bounded orchestrator]
-  O --> H[Hybrid search and rerank]
-  O --> G[Legal graph traversal]
-  O --> F[Material facts and rule evaluation]
-  O --> D[Private document tools]
-  H --> S[Published eligible evidence services]
+  U[Research workspace / Document Studio] --> A[Server output class and operation admission]
+  A --> O[Bounded orchestrator]
+  O --> H[Authorized hybrid search and rerank]
+  O --> G[Authorized legal graph traversal]
+  O --> D[Authorized private document tools]
+  O --> F[Rule evaluation admission - post v0 only]
+  F --> T[Typed evaluator and uncertainty result]
+  H --> S[Eligible evidence services]
   G --> S
-  F --> V[Pre-authorized output policy and rule gate]
-  D --> V
-  S --> P[Evidence pack]
-  V --> P
-  P --> Y[Proposed synthesis / typed results]
-  Y --> E[Final claim verification and authorization]
-  E --> B[Immutable approved content / source-only fallback]
+  D --> P[Scoped evidence pack]
+  S --> P
+  T --> P
+  P --> Y[Proposed synthesis / unchanged typed results]
+  Y --> E[Final claim and presentation verification]
+  E --> B[Trusted issuer and immutable authorized output]
   B --> R[Serving and revocation barrier]
   R --> U
 ```
@@ -94,3 +95,11 @@ Synthetic recovery trace: attempt A1 obtains fence 7 for node N at fact revision
 Workspace state is server-owned and owner-scoped: workspace ID, current tabs and comparison references, fact prompts, pinned copy/page (optional derivative span), selected result and immutable result version, coverage and conflict flags. A typed progress event contains workflow ID, sequence (monotone per workflow), task ID, stage, status, redacted counts, permitted evidence/result IDs, and invalidation references. It never carries unverified substantive model prose. Reconnect via an authenticated fresh snapshot and monotone sequence; do not replay stale frames without the serving fence. Client removes invalidated application-controlled fragments, focus and links, and explains why. Preserve permitted partial results; mark completeness/coverage and cancellation. Commander/research view toggle shares workspace state, not privileges.
 
 Compare fixed DAG, bounded dynamic DAG and hybrid phase-gated planning on identical blind tasks: completion, material-question precision, adverse discovery, unsupported claims, tool calls, tail latency and resources. Add dynamic replan or external framework only when it demonstrably improves capability with equal policy behavior. Test kill/restart before and after CAS, duplicate submission, fact edits, revocation, cancellation during parallel work and keyboard-only search-to-comparison-to-source journeys. No live agent requirement in C13.
+
+## 8. Atomic activation and budget reservations (R2-N08)
+
+Use the authoritative job service as sole writer of **visible** private draft/result records. Workers can write owner-scoped non-visible staging files only. A worker never publishes a draft or attaches a result itself. The first visible activation and idempotency receipt are a single transaction, serialized with session revocation/fact/plan revision and current serving-policy changes (coordinator ordering; no direct worker DB bypass). At commit recheck trusted actor/session/retention epoch, operation class, active uncancelled workflow, exact node and input digest, current plan/fact revision, matching attempt fence **and unexpired lease** from server-owned clock, dependency/approval state, staging digest, and reservation. If any check fails, do not activate or write a success receipt; dispose staging under session policy. Store immutable file first in protected staging; the transactional pointer grants visibility only after this check. Crash before commit leaves orphan non-visible staging; crash after commit returns same receipt on authorized retry; no double activation. Idempotency key covers owner, session/retention epoch, operation, workflow/node, full input/revision digest. A stale retry cannot reveal old result after revocation; check current delivery authorization.
+
+Reserve resource allowance atomically before scheduling any task or invoking an external worker. Per-workflow ledger tracks configured maximum, committed consumption, outstanding reservations and released remainder (units separately: calls, tokens, time/deadline, bytes; host concurrency separate). Under CAS/transaction require consumed + all outstanding + proposed worst-case reserve ≤ limit; issue attempt-specific reservation token and lease. Charge actual metered usage against reserve, stop at limit, release unused only after execution is confirmed stopped and usage settled. Crash/unknown usage conservatively charges outstanding maximum until independently reconciled; no budget reset or double-credit. Cancellation closes attachment immediately but does not free resource reservation until worker stops. Replan shares same ledger and deadline.
+
+Synthetic trace: budget 10 calls, consumed 6, outstanding 0; tasks P and Q each request 3. P reserves 3 atomically; Q sees available 1 and waits/denies. P uses 2 and returns 1 unused after termination: consumed 8, available 2, Q still cannot reserve 3. Attempt A stages draft H at lease expiry t=20; at t=21 even with no replacement, activation fails; cancel/fact edit just before commit also fails. Valid A2 commits pointer+receipt once; lost ack then retry returns same result only if current owner and eligibility pass. Tests INT-16 include each boundary and parallel reservation race.

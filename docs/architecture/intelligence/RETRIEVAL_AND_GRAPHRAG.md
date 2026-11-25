@@ -50,7 +50,8 @@ Reuse relation types and canonical identities from Legal Knowledge Architecture 
 ```
 ProvisionVersion <- AMENDS_PROVISION_VERSION - InstrumentVersion
 Judgment -> CITES_PROVISION -> ProvisionVersion (version may be unresolved)
-Judgment -> DISTINGUISHES/FOLLOWS -> Judgment
+Scoped proposition B1 -> FOLLOWS_PROPOSITION -> Scoped proposition A1
+Scoped proposition B2 -> DISTINGUISHES_PROPOSITION -> Scoped proposition A2
 FormTemplateVersion -> source-backed requirement -> EvidenceAnchor
 ApprovedRuleRevision -> dependency -> ProvisionVersion / LegalProposition
 ```
@@ -85,3 +86,7 @@ Before synthesis, build a coverage record per material question and later per pr
 Treat valid time (legal effect, with evidenced date basis), transaction/review time (when recorded) and incident/procedural dates independently. Resolve each path edge's scoped proposition/proceeding and applicable version; an interval intersection alone cannot establish a saving or legal interpretation. Keep conflicting resolutions as separate versioned assertions rather than choosing highest confidence. Generic citation may have unresolved target/version; expose lead only. Typed relation and inverse navigation policy is in the crosswalk. Example: synthetic case B follows proposition A1 but distinguishes A2; the graph must not summarize B as following all of case A. A linked wrong-version path is excluded from a definitive claim even if eligible; an adverse text-only case is retrieved independently and shown with unknown treatment until resolved.
 
 Index structured exact identifier fields (forum, case number/year, neutral citation, instrument/section/subsection); preserve punctuation and original script, separate normalized variants, ordered phrases and versioned time-scoped aliases. Evaluate English and relevant Indian scripts, transliteration and character/trigram recovery for OCR errors, ambiguous abbreviations and historic terminology. Use subissue coverage quotas and parent-context expansion to avoid duplicate top hits starving rare legal issues. Never silently disambiguate. For selectively filtered vector search, measure exact eligible subset search vs ANN with iterative scans/partitions; final eligibility remains mandatory. Evaluate lexical, semantic, fused, reranked and graph-enhanced variants against the same frozen families and report adverse recall, exact resolution, source/qualifier recall and tail latency. Use PostgreSQL first, alternatives only after measured gain and consistency/restore tests.
+
+## 8. Producer reconciliation and final-scope search (R2-N05)
+
+A4 and A5 are separate research producer contracts; A5's historical IC-01 label is not R1 compliance. Use Crosswalk §§6–8, not the illustrative graph syntax above, for adapter admission. A5 case-level treatment labels remain raw discovery leads unless scoped proposition/proceeding and evidence independently established; never promote DOUBTS/DISAPPROVES to overruling or legal limit. Keep A4 version identity independent of dates and retain retrospective, reported and disputed values separately. If synthesis narrows, widens or changes a material issue/date/scope, rerun claim-specific contrary and coverage search for the changed scope before verification; a prior broader/narrower search is not sufficient proof. No new corpus mutation or graph enum.
