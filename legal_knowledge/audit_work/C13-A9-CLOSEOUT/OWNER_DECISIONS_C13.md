@@ -4,8 +4,8 @@ One consolidated list. Each entry gives the source record, the options and a rec
 the coordinator's technical recommendation only. Where a decision has a legal dimension (RM-001, licensing), it is
 flagged for the owner's legal advice; no legal conclusion is drawn here. Nothing listed has been acted on.
 
-**Count: 20 decisions** (13 named in the A9 brief, OD-01 to OD-13, and 7 more found in the Cycle 13 records,
-OD-14 to OD-20).
+**Count: 22 decisions** (13 named in the A9 brief, OD-01 to OD-13; 7 more found in the Cycle 13 records, OD-14 to
+OD-20; and 2 from the B1 review confirmation, OD-21 and OD-22).
 
 | ID | Decision | Source records | Options | Recommendation |
 | --- | --- | --- | --- | --- |
@@ -28,4 +28,6 @@ OD-14 to OD-20).
 | OD-17 | X7: local Admin withdrawal durability fix for B2 | `docs/architecture/INTELLIGENCE_ARCHITECTURE_RECONCILIATION_C13.md` X7; PR #53 reconciliation F02 | Adopt the proposed minimal fix; another design; accept the risk | Adopt the proposed fix: local Admin withdrawals append to the same `ExclusionStore` as a local channel so a restore cannot lower them |
 | OD-18 | Release of the temporary working copies kept since Cycle 12 | C12 RISK_REGISTER R-01; plan D-11; `BACKUP_AND_RESTORE_INSTRUCTIONS.md` | Release now; release after the second backup is verified | Release only after OD-02 produces a verified backup line |
 | OD-19 | Removal candidates among in-corpus records the A1 rule marks IRRELEVANT | `C13-A1-OCR/MISSED_JUDGMENT_RISK.md`; `RELEVANCE_RERUN.csv` (2 IRRELEVANT) | Remove; keep; keep pending human review | Keep pending the human review in OD-12; nothing is deleted automatically |
+| OD-21 | B1 twin-withdrawal policy: when one of two documents sharing the same bytes is withdrawn, the live twin's bytes stay served (206) and its permalink resolves `CITED_COPY_ELIGIBLE` | `docs/architecture/b1/reviews/REVIEW_B1.md` F10 ('Code CLOSED; policy OPEN (owner decision)') | Keep serving the live twin (current code); withdraw both twins; require an explicit per-twin decision at withdrawal time | Keep serving the live twin, as the code now does, but have the withdrawal screen require the operator to confirm the twin decision explicitly; record the policy in the security architecture |
+| OD-22 | B1 manual unlock procedure (how an operator recovers a locked service or account) | `REVIEW_B1.md` F11 ('Open: no manual unlock procedure') | Document an Admin-run unlock procedure; time-based automatic unlock only; no unlock (reinstall) | Document an Admin-run, logged unlock procedure before practitioner walkthroughs; no automatic unlock |
 | OD-20 | D-06: application code location (`app/` in this repository or a separate private repository) | Plan D-06 (no decision recorded in the C13 records); `app/` tree exists in staging | Keep `app/` here; move to a separate repository | Record a decision before B1 integrates; the plan recommends a separate repository to keep corpus CI and app CI independent |

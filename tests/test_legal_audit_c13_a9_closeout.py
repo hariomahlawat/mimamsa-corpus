@@ -7,7 +7,8 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 PKG = REPO / "legal_knowledge" / "audit_work" / "C13-A9-CLOSEOUT"
-STATUSES = {"CLOSED", "OPEN", "DEFERRED", "ACCEPTED_DEVIATION"}
+STATUSES = {"CLOSED", "CLOSED_UNCONFIRMED", "OPEN", "DEFERRED", "ACCEPTED_DEVIATION"}
+VERIFICATIONS = {"INDEPENDENT_CONFIRMED", "COORDINATOR_SPOTCHECK", "AUTHOR_ONLY"}
 
 
 def read_csv(p):
@@ -35,6 +36,10 @@ class A9Closeout(unittest.TestCase):
                                       "C11-extraction F08", "WSG-R04"})
         self.assertEqual(set(carry.values()), {"DEFERRED"})
         self.assertFalse([r for r in rows if r["severity"] == "P1" and r["status"] == "OPEN"])
+        self.assertTrue({r["verification"] for r in rows} <= VERIFICATIONS)
+        self.assertFalse([r for r in rows if r["status"] == "CLOSED" and r["verification"] == "AUTHOR_ONLY"])
+        self.assertFalse([r for r in rows if r["status"] == "CLOSED_UNCONFIRMED" and r["verification"] != "AUTHOR_ONLY"])
+        self.assertTrue([r for r in rows if r["workstream"] == "B1"], "B1 review must be in the register")
 
     def test_no_restriction_lifted(self):
         rows = read_csv(PKG / "RESEARCH_RESTRICTIONS_C13.csv")

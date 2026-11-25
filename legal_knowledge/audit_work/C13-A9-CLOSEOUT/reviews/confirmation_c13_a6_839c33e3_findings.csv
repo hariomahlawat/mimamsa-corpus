@@ -1,0 +1,11 @@
+id,severity,status_at_839c33e3,evidence,requested_action
+F01,P2,FIXED,"C12_FIELD_DISPOSITION.csv has 541 rows covering all 541 C12 field_ids. IAFD-905: F13 and F14 are superseded (by V2-003 and V2-004); the other 14 are carried as MML_ONLY_UNVERIFIED; v2 holds 19 rows for the family.",None
+F02,P3,FIXED,P3B seq 3 is 'Whereas a' and seq 4 is 'court-martial has been ordered...',None
+F03,P3,FIXED,"p.68 seqs 70, 74 and 82 restore 'whcih', 'Reseve' and 'or' as printed (the reviewer's original note said seq 78; it is seq 74)",None
+F04,P3,FIXED,r.46 preamble rows of R46B/C/D are now on pdf_page 18,None
+F05,P3,NOTED_ACCEPTED,SUMMARY transcription_conventions and degraded_glyph_normalisations; embedded blanks not itemised retrospectively,Optional: itemise the embedded blanks in a later cycle
+F06,P3,FIXED,PAGE_IMAGE_LOG has 74 readings including the 8 non-transcription page reads; the register says p.106 is text layer only,None
+F07,INFO,OPEN,Human spot-check still outstanding,Complete before the Document Studio 3.3 legal gate
+F08,INFO,FIXED,SUMMARY cites RM-001 by restriction id only; no output file contains 4284820e,None
+F09,INFO,FIXED,S1-05 carries a note about the orphan ANSWER line,None
+R04,DISPOSITION,PARTIAL,"21 families CLOSED_VERIFIED (transcription fidelity). IAFD-905 (APPIII-P1D-CHAR) remains deferred, with only para 9 held officially. The 8 not-held forms are outside R04. The form_field_lists capability restriction is unchanged.",Coordinator to record the partial closure

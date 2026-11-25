@@ -168,6 +168,8 @@ def check_anchors(R: Registers | None = None):
             claimed = set(x["binding_registers"].split(";"))
             if not claimed or not claimed <= set(regs):
                 e.append(f"{k}: binding_registers {claimed} not all confirmed ({regs})")
+            if x["stored_path"].startswith("/"):
+                e.append(f"{k}: stored path is an absolute (ephemeral) path")
             if (x["stored_path_register"], x["stored_path"]) not in R.path.get(x["sha256"], []):
                 e.append(f"{k}: stored path not in register {x['stored_path_register']}")
         else:

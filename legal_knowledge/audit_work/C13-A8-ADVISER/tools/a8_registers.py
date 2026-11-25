@@ -29,6 +29,8 @@ REGISTERS = {
     "HF_HASH_LEDGER_C12": "legal_knowledge/audit_work/C12-CONSOLIDATION/hf_verification_c12/HASH_LEDGER.csv.gz",
     "COPY_VERIFICATION_C12": "legal_knowledge/audit_work/C12-CONSOLIDATION/copy_verification_c12/COPY_VERIFICATION_MANIFEST.csv",
     "AUTH_LEDGER_V0_COPY_REGISTER": "legal_knowledge/audit_work/AUTH-LEDGER/effective/v0000/source_copy_register.csv",
+    "HF_INGESTED_REDOWNLOAD_C12": "legal_knowledge/audit_work/C12-CONSOLIDATION/copy_verification_c12/HF_INGESTED_REDOWNLOAD_C12.csv",
+    "C13_A1_RECOVERY_POPULATION": "legal_knowledge/audit_work/C13-A1-OCR/RECOVERY_POPULATION.csv",
     "C12_ACQUISITION_MANIFEST": "legal_knowledge/audit_work/C12-CONSOLIDATION/acquisition/ACQUISITION_MANIFEST.csv",
     "C13_A7_ACQUISITION_MANIFEST": "legal_knowledge/audit_work/C13-A7-ACQUISITION/acquisition/ACQUISITION_MANIFEST_C13.csv",
     "C13_A7_HF_VERIFY": "legal_knowledge/audit_work/C13-A7-ACQUISITION/acquisition/HF_VERIFY_C13.csv",
@@ -97,6 +99,13 @@ class Registers:
             self._b(r["copy_id"], r["sha256"], "AUTH_LEDGER_V0_COPY_REGISTER")
             for hp in (r.get("held_paths") or "").split(";"):
                 self._p(r["sha256"], hp, "AUTH_LEDGER_V0_COPY_REGISTER")
+        for r in _rows(R["HF_INGESTED_REDOWNLOAD_C12"]):
+            self._p(r["computed_sha256"], r["hf_path"], "HF_INGESTED_REDOWNLOAD_C12")
+        # A1 recovery population: HF path and commit of every held flagged title (e.g. C12 preserved at 3864faf3).
+        for r in _rows(R["C13_A1_RECOVERY_POPULATION"]):
+            if r.get("held") == "YES" and r.get("held_hf_path"):
+                self._b(r["doc_id"], r["sha256"], "C13_A1_RECOVERY_POPULATION")
+                self._p(r["sha256"], r["held_hf_path"], "C13_A1_RECOVERY_POPULATION")
         for r in _rows(R["C12_ACQUISITION_MANIFEST"]):
             self._b(r["target_id"], r["sha256"], "C12_ACQUISITION_MANIFEST")
             self._p(r["sha256"], r.get("stored_path"), "C12_ACQUISITION_MANIFEST")
@@ -121,7 +130,9 @@ class Registers:
         paths = self.path.get(sha)
         if not paths:
             raise ValueError(f"sha256 {sha[:12]}... has no stored path in any register")
-        return sorted(regs), paths[0]
+        # Prefer a durable repository/HF path over an absolute scratch path (A8/A9 review F05).
+        durable = [x for x in paths if not x[1].startswith("/")]
+        return sorted(regs), (durable or paths)[0]
 
     def by_prefix(self, prefix: str):
         prefix = prefix.lower()

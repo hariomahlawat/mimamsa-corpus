@@ -8,39 +8,59 @@ reviewed. Restricted material RM-001 is referred to by its restriction id only. 
 
 | File | Content |
 | --- | --- |
-| `FINDINGS_REGISTER_C13.csv` | 226 rows: every finding of every Cycle 13 review (221) plus the 5 Cycle 12 deferred P2s, each with source review, severity, status and evidence (commit or file) |
-| `FINDINGS_SUMMARY_C13.json` | Counts by status and severity, open P1/P2 lists, the review files read |
+| `FINDINGS_REGISTER_C13.csv` | 257 rows: every finding of every Cycle 13 review (252, including the B1 review and the independent review of this closeout) plus the 5 Cycle 12 deferred P2s, each with source review, severity, status, **verification** and evidence (commit or file) |
+| `FINDINGS_SUMMARY_C13.json` | Counts by status, severity and verification; staging-integrated, B1 and A8/A9 sub-counts; open P1/P2 and CLOSED_UNCONFIRMED P1 lists |
 | `RESEARCH_RESTRICTIONS_C13.csv` | The five C12 research-use restrictions, Cycle 13 evidence and decision: **none lifted** |
 | `TASK_REGISTER_C13_FINAL.md` | Final status of A0-A9, GOV, B0, B-PoC and B1 (IN_PROGRESS), with evidence |
-| `RISK_REGISTER_C13.md` | 20 risks (open C12 risks carried, Cycle 13 risks added) |
-| `OWNER_DECISIONS_C13.md` | 20 decisions waiting on the owner, with options and a recommendation |
-| `tools/build_findings_c13.py` | Builds the register, summary and restriction files (`--check` reproduces byte for byte; verifies every finding id against its review file, CSV severities, cited commits and cited files) |
+| `RISK_REGISTER_C13.md` | 22 risks (open C12 risks carried, Cycle 13 risks added) |
+| `OWNER_DECISIONS_C13.md` | 22 decisions waiting on the owner, with options and a recommendation |
+| `reviews/` | Evidence copies of independent confirmations that were only in the coordinator scratchpad (A0 confirmation 2, A5 confirmation of `d09b7d91`, A6 confirmation `839c33e3`, A7 security confirmation `4aa8edf4`) and the independent review of this closeout (`REVIEW_A8_A9.md`) |
+| `tools/build_findings_c13.py` | Builds the register, summary and restriction files (`--check` reproduces byte for byte; verifies every finding id against its review file, CSV severities, cited commits and cited files, and the status/verification rule) |
 | `../../../tests/test_legal_audit_c13_a9_closeout.py` | unittest suite (4 tests) |
+
+Also added outside this folder: `docs/architecture/b1/reviews/REVIEW_B1.md` (the B1 review with its confirmation; the
+coordinator places the same file there when B1 merges) and
+`docs/architecture/reviews/REVIEW_IMPORTER_E05_E06_confirmation3.md` (the importer review's third confirmation).
 
 ## Findings register (measured)
 
 Review files read: every file under each `C13-*/reviews/` folder, `docs/architecture/reviews/` (including
-`c13-assurance/`), `docs/architecture/poc/reviews/`, `C13-EVAL/reviews/`, and `C13-EVAL/REVIEW_GA4.md` (the GA4
-evaluation review, which sits at the C13-EVAL root). A2 and A3 have no `reviews/` folder; their findings are in the
-C13-EVAL reviews. Confirmation round 2 of B0 records R1 as "informational, not a finding"; it is not listed.
+`c13-assurance/`), `docs/architecture/poc/reviews/`, `C13-EVAL/reviews/`, `C13-EVAL/REVIEW_GA4.md`, the B1 review
+(`docs/architecture/b1/reviews/REVIEW_B1.md`, review at `fa72af91`, confirmation at `4fbe7c79`; B1 is not yet in
+staging), the confirmations copied into `reviews/`, and the review of this closeout. A2 and A3 have no `reviews/`
+folder; their findings are in the C13-EVAL reviews. B0 confirmation 2 records R1 as "informational, not a finding"; it
+is not listed.
 
 | Status | Cycle 13 review findings | C12 carry-overs | All |
 | --- | ---: | ---: | ---: |
-| CLOSED | 182 | 0 | 182 |
-| DEFERRED | 24 | 5 | 29 |
-| OPEN | 8 | 0 | 8 |
-| ACCEPTED_DEVIATION | 7 | 0 | 7 |
-| **Total** | **221** | **5** | **226** |
+| CLOSED | 183 | 0 | 183 |
+| CLOSED_UNCONFIRMED | 19 | 0 | 19 |
+| DEFERRED | 30 | 5 | 35 |
+| OPEN | 12 | 0 | 12 |
+| ACCEPTED_DEVIATION | 8 | 0 | 8 |
+| **Total** | **252** | **5** | **257** |
 
-- **Open P1:** none.
-- **Open P2 (3):** A7 F06 (20 unprobed redirect hosts), assurance R2-N01 and B-PoC F07 (both the selected Windows host).
-- **Other open (5):** A6 F07 (INFO; human spot-check before the legal gate), GOV F12 (P3; restricted scratch
-  derivative outside the repository), B0 F21 (P3; owner decision D-08), assurance ASR-E03 and ASR-E04 (unrated
-  evidence gaps: restore under custody; blind performance).
-- **Status rule.** CLOSED = fixed and confirmed by an independent review or a recorded merge, or informational with no
-  action. A few CLOSED rows rest on an author fix without a separate re-confirmation; the `note` column says so
-  (A4 N-01/N-02, importer N4/N5). DEFERRED = carried to a later cycle or gate with the reason. ACCEPTED_DEVIATION = a
-  recorded disposition accepts it as is.
+Of the 252: reviews of work integrated into staging 227 (CLOSED 171, CLOSED_UNCONFIRMED 11, DEFERRED 29, OPEN 8,
+ACCEPTED_DEVIATION 8); B1 16 (CLOSED 11, OPEN 4, DEFERRED 1); the A8/A9 review 9 (CLOSED_UNCONFIRMED 8, CLOSED 1).
+
+| Verification | Rows |
+| --- | ---: |
+| INDEPENDENT_CONFIRMED (an independent reviewer's record states the status) | 220 |
+| COORDINATOR_SPOTCHECK (coordinator disposition or spot-check) | 13 |
+| AUTHOR_ONLY (author's or A9's own record) | 24 |
+
+- **Open P1:** none, in any review including B1 (B1 F01 is closed in its confirmation).
+- **P1 CLOSED_UNCONFIRMED (2):** GA4 F1 (applied by the evaluator, recorded in `REVIEW_FIXES.json`; no reviewer
+  re-confirmation) and A8/A9 review F01 (fixed here; awaiting re-confirmation).
+- **Open P2 (4):** A7 F06 (20 unprobed redirect hosts), assurance R2-N01 and B-PoC F07 (both the selected Windows host),
+  B1 F14 (instrument-scope fallback; being fixed in B1).
+- **Other open (8):** A6 F07 (INFO; human spot-check before the legal gate), GOV F12 (P3; restricted scratch derivative
+  outside the repository), B0 F21 (P3; owner decision D-08), assurance ASR-E03 and ASR-E04 (unrated evidence gaps), B1
+  F10 (twin-withdrawal policy, owner decision OD-21), B1 F15 and F16 (P3).
+- **Status rule.** CLOSED needs an independent confirmation or a coordinator spot-check on record; an author fix
+  without one is CLOSED_UNCONFIRMED (GA4 F1-F9, A4 N-01/N-02, and the A8/A9 review fixes). DEFERRED = carried to a
+  later cycle or gate with the reason. ACCEPTED_DEVIATION = accepted as is by a recorded disposition; X-02 is an
+  A9-recorded deviation awaiting coordinator sign-off (AUTHOR_ONLY). The build enforces the rule.
 
 ### Cycle 12 deferred P2s in Cycle 13
 
@@ -71,11 +91,25 @@ AI-coded, and no legal adviser has signed anything off. `C12-CONSOLIDATION/CAPAB
 | --- | --- |
 | `C12-CONSOLIDATION/findings_consolidation/tools/consolidate_findings_c12.py --check` | CHECK OK: 648 rows reproduce byte-identically |
 | `C12-CONSOLIDATION/tools/scnum_overlay_c12.py --check` | overlay reproduces |
-| `C12-CONSOLIDATION/adviser_package/tools/build_adviser_package.py --check` | CHECK FAILED: PROVENANCE_C12.md, SHA256SUMS. **Pre-existing**: it fails identically at C12 closeout `a4c0c382` and at this branch's base `daba057b` (run in a scratchpad-level worktree, the layout the tool expects). Not caused by A9; the frozen C12 package was not edited (RISK_REGISTER_C13 R13-18) |
+| `C12-CONSOLIDATION/adviser_package/tools/build_adviser_package.py --check` | CHECK FAILED: PROVENANCE_C12.md, SHA256SUMS. **Pre-existing, DEFERRED**: it fails identically at C12 closeout `a4c0c382` and at this branch's base `daba057b`. **Root cause** (independent review F07): `write_provenance()` embeds the absolute path of the worktree it runs from (`C12W = AW.parent.parent`) in 17 lines of PROVENANCE_C12.md, and the committed file names `scratchpad/c12w`. After replacing `scratchpad/<worktree>` with `scratchpad/c12w`, the regenerated file is byte-identical, and SHA256SUMS differs only on the PROVENANCE line. Re-run recipe: run from a worktree at `scratchpad/c12w`, or compare after `sed 's#scratchpad/<wt>#scratchpad/c12w#'`. The frozen C12 tool and package were not edited (R13-18) |
 
 The C13 tools added here (`C13-A8-ADVISER/tools/build_adviser_c13.py --check`, `tools/build_findings_c13.py --check`)
 pass. The register depends on the commit ids cited as evidence; if the branch is rebased or squashed, the cited
 commits must be updated before `--check` passes again.
+
+## Review response (`reviews/REVIEW_A8_A9.md`, ACCEPT WITH CONDITIONS)
+
+| Finding | Response |
+| --- | --- |
+| F01 (P1) B1 review omitted | B1 F01-F16 added from the confirmation (F01-F09, F12-F13 CLOSED; F05 for the reported cases; F06 display mitigation with the upstream gap DEFERRED to Track A; F10 OPEN, owner; F11 DEFERRED; F14 P2 OPEN; F15, F16 OPEN). ASR-E06 row now notes B1 F01 and its closure. "No P1 open" is restated from the recomputed counts. Risks R13-21/22 and owner decisions OD-21/22 added |
+| F02 (P2) unconfirmed closures | `verification` column added; CLOSED_UNCONFIRMED status for author-only fixes. A0 C01 now cites the reviewer's confirmation 2; importer N1/N4 cite the committed third confirmation; GA4 F1-F9 are CLOSED_UNCONFIRMED; X-02 marked AUTHOR_ONLY; X-03/X-04 cite this review's verification |
+| F03 (P3) | A6 confirmation committed in `reviews/`; A6 F05 is ACCEPTED_DEVIATION. A5 confirmation also committed (A5 F07 now CLOSED, errata E2; new P3 notes N1-N3 added) and A0 confirmation 2 (new P3s L01-L03 added) |
+| F04 (P3) | A7 F15 recorded; F09, F10, F11 actions recorded as DEFERRED with an owner (coordinator) in the register notes; `DISPOSITIONS_C13.md` (coordinator record) not edited |
+| F05 (P3) | A8 stored paths now durable (HF re-download record, A1 recovery population); validator rejects absolute paths |
+| F06 (P3) | A8-Q143 now says "reads, as OCR" |
+| F07 (P3) | Root cause recorded below and in R13-18 (DEFERRED) |
+| F08 (P3) | No file change; quote counts as "252 + 5 = 257; DEFERRED 30 + 5 = 35" |
+| F09 (P3) | Layout dependency noted in `GATE_C13_CLOSEOUT.md` |
 
 ## Integration gate
 

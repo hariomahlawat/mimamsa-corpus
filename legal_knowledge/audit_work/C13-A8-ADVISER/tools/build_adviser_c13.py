@@ -549,8 +549,9 @@ def build_a6(b: Builder):
                 ra("FF-AR54-APPIII-P3C")],
              aff="FF-AR54-APPIII-P3C"),
         dict(o="A6:FF-AR54-APPIV-P1-F1+F2", p="P2", basis="heading section range conflict (CONFLICT_QUEUE)",
-             t="Forms | Appendix IV Part I Forms 1 and 2: heading 'sections 83-84' vs '83 to 85'", k="FORM_TEXT",
-             q="The 1954 Gazette heading of Appendix IV Part I Forms 1 and 2 prints 'sections 83-84 Army Act'; MML 2 prints "
+             t="Forms | Appendix IV Part I Forms 1 and 2: heading 'sections 83-84' (as OCR) vs '83 to 85'", k="FORM_TEXT",
+             q="The 1954 Gazette heading of Appendix IV Part I Forms 1 and 2 reads, as OCR, 'sections 83-84 Army Act' "
+               "(A6 records the reading as NOT_DETERMINED); MML 2 prints "
                "'83 to 85'. No amending instrument has been identified. Which section range is the operative heading?",
              a=[pg("c5ef95a9", 75, "Appendix IV Part I Form 1"), pg("c5ef95a9", 76, "Appendix IV Part I Form 2"),
                 ra("FF-AR54-APPIV-P1-F1"), ra("FF-AR54-APPIV-P1-F2")],

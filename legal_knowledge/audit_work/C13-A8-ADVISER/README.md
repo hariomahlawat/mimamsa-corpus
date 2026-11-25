@@ -78,8 +78,10 @@ AQ-STA-10, -11, -12, -15, -16 (P2 to P1) and AQ-STA-13, -14 (P3 to P1). No item 
 **Anchors.** Each source anchor gives `doc_id`, `sha256` and `page` with a `page_kind`. A source anchor passes only if a
 committed register binds that doc_id to that sha256 and a committed register records a stored path for the sha256
 (`tools/a8_registers.py`: the HF-5524c3d9 crawler manifest and hash ledger, the C12 copy-verification manifest, the
-AUTH-LEDGER v0 copy register, the C12 and C13-A7 acquisition manifests and HF verification, the C11 re-acquisition
-manifest, the C12 judicial ingestion log). A record anchor passes only if the file exists and its hash equals the one
+AUTH-LEDGER v0 copy register, the C12 HF-ingested re-download record, the A1 recovery population (HF paths of held
+titles), the C12 and C13-A7 acquisition manifests and HF verification, the C11 re-acquisition manifest, the C12
+judicial ingestion log). Durable repository/HF paths are preferred over scratch paths, and the validator rejects any
+absolute (ephemeral) stored path. A record anchor passes only if the file exists and its hash equals the one
 listed in that workstream's SHA256SUMS. Page numbers are carried as the originating artefact states them; A8 did not
 open any source copy.
 
@@ -96,6 +98,15 @@ $PY -I -B legal_knowledge/audit_work/C13-A8-ADVISER/tools/validate_adviser_c13.p
 $PY -B -m unittest tests.test_legal_audit_c13_a8_adviser
 cd legal_knowledge/audit_work/C13-A8-ADVISER && sha256sum -c SHA256SUMS
 ```
+
+## Review response (independent review `C13-A9-CLOSEOUT/reviews/REVIEW_A8_A9.md`)
+
+- **F05 (P3):** 13 anchors carried ephemeral scratchpad paths. The stored path now comes from the C12 HF-ingested
+  re-download record (revision `15bd03cc`) or the A1 recovery population (HF `3864faf3`), and the validator fails on any
+  absolute stored path.
+- **F06 (P3):** A8-Q143 now says the 1954 heading "reads, as OCR, 'sections 83-84'" and that A6 records it as
+  NOT_DETERMINED.
+- Question counts, priorities and anchors are unchanged (204; P0 1, P1 34, P2 169; 1,103 anchors).
 
 ## Limits
 
