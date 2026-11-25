@@ -67,13 +67,15 @@ _TYPE_BEFORE_RE = re.compile(r"([A-Za-z][A-Za-z.()&\s\-]{0,45}?)\s*(?:Nos?\s*\.?
 
 def _expand(group):
     nums = set()
-    for part in re.split(r"\s*(?:,|and|&)\s*", group):
+    for part in re.split(r"\s*(?:,|and|&)\s*", group, flags=re.I):   # V4: 'Nos. 281 And 282 Of 2020'
         part = part.strip()
         if not part:
             continue
         m = re.match(r"(\d+)\s*[-–]\s*(\d+)$", part)
         if m:
             a, b = int(m.group(1)), int(m.group(2))
+            if b < a and len(m.group(2)) < len(m.group(1)):
+                b = int(m.group(1)[:len(m.group(1)) - len(m.group(2))] + m.group(2))   # V4: '8452-53' = 8452 to 8453
             if 0 <= b - a <= 60:
                 nums.update(range(a, b + 1))
             else:
@@ -164,8 +166,8 @@ _CANON = [
     (r"^(?:specialleavepetitions?|slps?)\((c|civil)\)$", "SLP(C)"),
     (r"^(?:specialleavepetitions?|slps?)\((crl|criminal)\)$", "SLP(CRL)"),
     (r"^(?:specialleavepetitions?|slps?)$", "SLP"),
-    (r"^(?:transferredcases?|tcs?)\((c|civil)\)$", "TC(C)"),
-    (r"^(?:transferredcases?|tcs?)$", "TC"),
+    (r"^(?:transfer(?:red)?cases?|tcs?)\((c|civil)\)$", "TC(C)"),
+    (r"^(?:transfer(?:red)?cases?|tcs?)$", "TC"),
     (r"^(?:specialappeals?|splas?)$", "SPLA"),
     (r"^(?:specialappeal)\((d|defective)\)$", "SPLA(D)"),
     (r"^(?:regularsecondappeals?|rsas?)$", "RSA"),
@@ -186,7 +188,7 @@ _CANON = [
 _TYPE_KEY_RE = re.compile(
     r"(?<![A-Za-z])(civil\s+appeal|criminal\s+appeal|crl\.?\s*a(?:ppeal)?\.?(?:\s*\((?:s|db|sj)\))?|writ\s+petitions?(?:\s*\((?:civil|c|criminal|crl)\))?|"
     r"special\s+leave\s+petitions?(?:\s*\((?:civil|c|criminal|crl)\))?|s\.?\s*l\.?\s*p\.?(?:\s*\((?:civil|c|criminal|crl)\))?|"
-    r"transferred\s+cases?(?:\s*\((?:civil|c)\))?|t\.?\s*c\.?\s*\((?:civil|c)\)|special\s+appeal(?:\s*\((?:d|defective)\))?|"
+    r"transfer(?:red)?\s+cases?(?:\s*\((?:civil|c)\))?|t\.?\s*c\.?\s*\((?:civil|c)\)|special\s+appeal(?:\s*\((?:d|defective)\))?|"
     r"regular\s+second\s+appeal|letters?\s+patent\s+appeal|l\.?\s*p\.?\s*a\.?|review\s+(?:petition|application)|r\.?\s*p\.?|"
     r"civil\s+writ\s+petition|c\.?\s*w\.?\s*p\.?|cr\.?\s*w\.?\s*p\.?|criminal\s+writ\s+petition|s\.?\s*w\.?\s*p\.?|o\.?\s*w\.?\s*p\.?|"
     r"writ\s*-\s*[ac]\b|writ\s+[ac]\b|matters\s+under\s+article\s+227|contempt\s+(?:petition|case)s?(?:\s*\((?:civil|c)\))?|"

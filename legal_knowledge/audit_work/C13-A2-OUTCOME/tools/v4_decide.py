@@ -52,7 +52,9 @@ _DIRECTIONS_RE = re.compile(
     r"said)?\s*(?:directions?|observations?|liberty)|with\s+liberty|in\s+terms\s+of|as\s+under|in\s+the\s+light\s+of|with\s+a\s+direction|"
     r"with\s+directions?|subject\s+to)\b", re.I)
 _DIRECTIVE_RE = re.compile(r"\b(?:is|are|stand|be)\s+(?:hereby\s+)?directed\b|\bwe\s+(?:hereby\s+|have\s+)?direct(?:ed)?\b|\bby\s+directing\b|"
-                           r"\bit\s+is\s+(?:hereby\s+)?directed\b|\bshall\s+(?!stand\b|also\s+stand\b|not\s+stand\b|be\s+at\s+liberty\b|be\s+open\b)[a-z]+|"
+                           r"\bit\s+is\s+(?:hereby\s+)?directed\b|\b(?:respondents?|petitioners?|appellants?|applicants?|authorit(?:y|ies)|Tribunal|Government|Union|State|Board|Bench|"
+                           r"competent\s+\w+|they|he|she|officers?|Department|Registry|Commission|Controller|PCDA|CDA|employer)\b"
+                           r"(?:\s+[\w.,()/-]+){0,6}?\s+shall\s+(?!stand\b|also\s+stand\b|not\s+stand\b|be\s+at\s+liberty\b|be\s+open\b)[a-z]+|"
                            r"\blet\s+(?:the|a|his|her|their)\s+[^.;]{0,80}?\bbe\s+(?:decided|considered|re-?considered|examined|passed|paid|"
                            r"released|granted|processed|disposed\s+of)\b|\b(?:is|stands?)\s+modified\b", re.I)
 # V4: liberty to seek another remedy is not a direction ('they are at liberty to agitate this aspect')
