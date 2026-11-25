@@ -1,9 +1,26 @@
 # C13 workstream A2: judicial outcome extractor V4 (`c13-extract-v4/1.0.0`)
 
-**Status: FREEZE CANDIDATE, NOT FROZEN. AUTOMATED_CANDIDATE_NOT_VERIFIED.** Every value is read by a deterministic
-program from the PDF text layer. Nothing is legally verified. The capability stays NON_OPERATIONAL_RESEARCH_ONLY
-(C12 `CAPABILITY_RESTRICTIONS.csv`) until an independent evaluation on the fresh holdout H-OUT-C13 meets strict
-precision of at least 95% and coverage of at least 85% per field, plus legal-adviser sign-off.
+**Status: FROZEN at commit `9cdd5008` (`outputs/FREEZE_V4.json`). Blind evaluation: NOT_MET on all four targets.
+AUTOMATED_CANDIDATE_NOT_VERIFIED.** Every value is read by a deterministic program from the PDF text layer. Nothing is
+legally verified. The capability remains **NON_OPERATIONAL_RESEARCH_ONLY** (C12 `CAPABILITY_RESTRICTIONS.csv`).
+
+## Blind evaluation (GA4) on H-OUT-C13
+
+Source: `claude/c13-eval` `20a4e55d`, `legal_knowledge/audit_work/C13-EVAL/eval/RESULTS_C13.md` section 1.2 and 4.1
+(sha256 `b8d0b252…`). Independent evaluator, AI-coded reference set (two coders and an adjudicator, no human annotator);
+scored file `predictions_H-OUT-C13/PREDICTIONS_OUTCOME_V4_H-OUT-C13.csv` (sha256 `45c5a332…`).
+
+| Field | Strict precision, weighted [CP95] | unweighted | Coverage, weighted [CP95] | unweighted | Status |
+| --- | --- | --- | --- | --- | --- |
+| printed_disposal | 0.898 [0.838, 0.941] | 0.825 (254/308) | 0.833 [0.743, 0.902] | 0.623 (283/454) | NOT_MET |
+| substantive_result | 0.882 [0.815, 0.932] | 0.831 (221/266) | 0.760 [0.671, 0.835] | 0.577 (252/437) | NOT_MET |
+
+Targets: strict precision at least 0.95 and coverage at least 0.85 per field. None is met.
+- Supreme Court is the weakest court: printed_disposal precision 0.576 [0.389, 0.749], coverage 0.391 [0.226, 0.577].
+- Most missed units fall in three large batch judgments (101 of 129 missed printed units).
+- Party-specific outcomes: **not demonstrated** (no gold unit on H-OUT-C13 carries a party-specific outcome).
+- Family precision for printed_disposal: weighted 0.941, unweighted 0.870.
+- Evidence anchors: 403 rows ANCHOR_OK, 2 ANCHOR_NOT_FOUND, 75 without an anchor (mostly abstentions).
 
 V2 (`C11-JUDICIAL-QUALITY/extraction`) and V3 (`C12-CONSOLIDATION/extractor_v3`) are frozen comparators. V4 does not
 import, modify or re-run them; their committed outputs are read only (a test checks the V3 tool hashes against
@@ -18,8 +35,9 @@ import, modify or re-run them; their committed outputs are read only (a test che
 | `python3.11 -I -B tools/extract_v4.py --exclude-ids EXCLUDE_IDS_H-OUT-C13.txt --check` | Deterministic self-check: batch input keys (tool fingerprint, commit, inputs, exclusion list), assembled CSV, checksums, byte-identical re-extraction of batches 0 and 19, vocabularies, abstention rules, and an anchor on every answered row. |
 | `python3.11 -I -B tools/eval_dev_v4.py [--write] [--errors tune\|late\|all] --exclude-ids EXCLUDE_IDS_H-OUT-C13.txt` | In-sample evaluation on the spent sets with V3/V2 comparison (`dev_eval/`). |
 | `python3.11 -I -B tools/corpus_stats_v4.py` | Output-count comparison V4 vs V3 on the full corpus (`outputs/CORPUS_COMPARISON_V4_V3.*`). |
-| `python3.11 -I -B tools/freeze_v4.py --confirmation <ref> --exclude-ids <list>` | Writes `outputs/FREEZE_V4.json`. **Not run.** Run only after the coordinator confirms A0's protocol. |
-| `python -m pytest tests/test_legal_audit_c13_outcome_v4.py` | 22 fast tests (about 0.2 s), synthetic texts only. |
+| `python3.11 -I -B tools/freeze_v4.py --confirmation <ref> --exclude-ids <list> --statement <file>` | Wrote `outputs/FREEZE_V4.json` at the freeze (run once; refuses to re-freeze). |
+| `python3.11 -I -B tools/predict_holdout_v4.py --check` | Post-freeze addition (finding A2-03): rebuilds the scored H-OUT-C13 file from `raw/` and `ITEM_POINTERS.csv`; reproduces sha256 `45c5a332…`. Performs no extraction. |
+| `python3.11 -B -m unittest tests.test_legal_audit_c13_outcome_v4` (from the repository root) | 22 fast unittest tests (about 0.2 s), synthetic texts only. |
 
 `EXCLUDE_IDS_H-OUT-C13.txt`: 331 judgment ids (325 PROCESSED) built only from the `judgment_key` and `rep_sha256`
 identifier columns of A0's `SAMPLE.csv` (branch `claude/c13-a0-eval`, `5e07e010`), expanded to every stored copy with the
@@ -37,7 +55,7 @@ development material: none** (0 of 286 development judgments).
 | Clause parsing | `v4_clauses.py` | V3 parser plus coordinated subjects ("the writ petition and the civil appeal are dismissed"), elliptical dispositions ("All the petitions dismissed."), bunch/lead-case references not taken as subjects. |
 | Proceeding map | `v4_proceedings.py`, `v4_decide.py` | Abbreviated ranges ("8452-53" = 8452, 8453), "And" in number lists, Transfer Case type, lead case of a bunch decided elsewhere is not a host, a numbered writ petition in an appeal is the proceeding below, "all the petitions" covers a mixed group. Per-proceeding dispositions, batch sections and generic-to-host expansion as in V3. |
 | Relief analysis (C11 F05) | `v4_relief.py` | **Extent phrases are resolved from the operative directions**: limiting words, or a refused/limited relief in the operative part, give `partly_allowed`; a referential phrase ("to the extent and in terms herein above") whose directions quash the impugned decisions with nothing refused gives `allowed`; otherwise abstain. **Transfer** to the Tribunal (record or paper book transmitted, transfer prayer "ordered accordingly") gives `transferred`/`no_adjudication`, also when the order then says "disposed of". An allowance "in the aforesaid terms" whose terms are a fresh decision gives `remanded_for_fresh_decision`. |
-| Party-specific outcomes | `v4_decide.py` | One proceeding with relief granted to some parties and refused to others gives `partly_allowed` with the per-party outcomes in `party_specific`; across several proceedings without a case-number mapping V4 still abstains. |
+| Party-specific outcomes | `v4_decide.py` | One proceeding with relief granted to some parties and refused to others gives `partly_allowed` with the per-party outcomes in `party_specific`; across several proceedings without a case-number mapping V4 still abstains. **Not demonstrated on H-OUT-C13 (0 gold units).** |
 | Interim vs final, remand, procedural | V3 rules kept (listing/adjournment cues, `not_final`, remand/set-aside signals, withdrawal, infructuous, default). |
 | Multiple operative directions | `v4_relief.direction_kinds` | Each answered row lists the court-voice directions in its operative part (`operative_directions`: set_aside, remand, transfer, direction, relief, modification, withdrawal, liberty, listing, interim_relief, costs). "Liberty" alone no longer makes a disposal `disposed_of_with_directions`; a direction needs a party or authority subject. |
 | Calibrated abstention | all | Explicit abstention reasons per field; `confidence` tier (high/medium/low) per answered row. **The tiers are not calibrated**: in-sample, all 6 remaining errors are in the high tier (see dev_eval). No local classifier was trained: with 6 in-sample errors there is nothing to fit, and none was used. No external service was used. |
@@ -47,6 +65,10 @@ in `text_source`) and `excerpt`; `--check` fails if any answered row lacks them.
 were found at their offsets and 405 had the page of the preceding page marker.
 
 ## Development results (IN-SAMPLE; see `dev_eval/DEV_EVALUATION_V4.md`)
+
+> **SUPERSEDED BY BLIND EVALUATION — development evidence only.** These in-sample figures (including 97.6% at 79.3%
+> and 98.9% at 84.6%) are not estimates of performance. The blind GA4 result above (RESULTS_C13.md section 1.2) is
+> NOT_MET on all four targets.
 
 | Set | Field | V4 precision | V4 coverage | V3 precision | V3 coverage |
 | --- | --- | --- | --- | --- | --- |
@@ -59,8 +81,7 @@ were found at their offsets and 405 had the page of the preceding page marker.
 
 The LATE third is the most honest of these figures: its coverage gain over V3 is small (+1.6 points printed,
 +8.2 substantive), while the TUNE gain (+19.7 points printed) partly comes from fixes that unlock whole multi-proceeding
-judgments (one judgment has 17 rows). **Expect blind coverage well below 85%**, and blind precision below the in-sample
-figures.
+judgments (one judgment has 17 rows). The blind figures are in the GA4 table above.
 
 ## Known limits
 
@@ -72,4 +93,5 @@ figures.
 - F08: corpus `ONLY_QUOTED_DISPOSITION_LANGUAGE_FOUND` abstentions fell from 51 to 45 (excluded judgments dropped from
   both). The C11 request to review those rows by hand was not done: the rows were not restricted to the spent sets, and
   reading them could have exposed H-OUT-C13 texts (the holdout was drawn later).
+- The restricted-material guard (RM-001 sha) is hardcoded in `extract_v4.py`; the next version should read `config/restricted_material.json` (review A2-06). Not changed in the frozen tool.
 - Inputs are the same 3,936 judgments as V3 (c7 `ad77758d`); judgments recovered later in C12 are not in that text layer.
