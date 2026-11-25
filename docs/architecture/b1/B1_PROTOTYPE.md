@@ -39,7 +39,13 @@ python app/b1/tests/b1server.py --site <syn>/site --db "..." -- python app/b1/te
 B1_SYN_SITE=... B1_SYN_DB=... [B1_SAMPLE_SITE=... B1_SAMPLE_DB=...] node <playwright>/cli.js test --config app/b1/e2e/playwright.config.cjs --trace off
 ```
 
-CI: `app-ci.yml` job `b1` (Linux, PostgreSQL service container) and `app-windows-poc.yml` job `b1-windows` (windows-latest). The Windows job also publishes win-x64, installs the service under `NT SERVICE\MimamsaB1` with SCM restart, creates an account through the CLI, and smoke-tests health, login, an identifier search, the 401 path and crash restart. **Both jobs are committed but Not executed:** pushing was not authorised.
+CI: `app-ci.yml` job `b1` (Linux, PostgreSQL service container) and `app-windows-poc.yml` job `b1-windows` (windows-latest). The Windows job also publishes win-x64, installs the service under `NT SERVICE\MimamsaB1` with SCM restart, creates an account through the CLI, and smoke-tests health, login, an identifier search, the 401 path and crash restart.
+
+**Correction (review F03).** An earlier version of this document said these jobs were "Not executed". In fact, CI run 45713405941 at `fa72af91` ran both:
+- `b1` (Linux): **success**.
+- `b1-windows`: **Failed at the oracle step**. The failure was a `UnicodeDecodeError`: the fixture was read with the Windows default codec. Build and 70/70 tests had passed. The journeys and the Windows Service smoke were **not reached**.
+
+All file I/O now uses UTF-8. The result of the re-run is recorded in §7.
 
 ## 3. Evidence (measured)
 
@@ -47,14 +53,14 @@ CI: `app-ci.yml` job `b1` (Linux, PostgreSQL service container) and `app-windows
 | --- | --- | --- |
 | Importer tests (including 4 B1 materialization tests) | **66/66 passed** | `app/importer/tests` |
 | PR #54 DA comparator after the importer change | Unchanged: 64 lines, all "missing surface", **no contradicted value** (same as `RESULTS_DA.md`) | `da_cases.py` + `data_oracle.py --adapter-observations` |
-| C# unit, site and integration tests (real Kestrel process + PostgreSQL) | **70/70 passed** | `app/b1/tests/Mimamsa.Tests` |
-| Playwright journeys, SYN site (UX ids) | **16/16 passed** | `app/b1/e2e/journeys.spec.cjs`, `evidence/e2e_results.json` |
-| Playwright journeys, real sample | **7/7 passed** | `app/b1/e2e/sample.spec.cjs` |
-| PR #54 `retrieval_oracle.py` (unmodified; blob checked against HEAD before running) | **10/14 Passed, 4 Failed.** RET-06, 07, 09 and 10 expect mode `hybrid` and B1 is lexical only. RET-07 and RET-10 also miss J1-MAJ or J2-MAJ at rank 10. | `evidence/retrieval_oracle_*.json` |
+| C# unit, site and integration tests (real Kestrel process + PostgreSQL) | **78/78 passed** (incl. F01 eligibility on every path, F02 redaction, F05 representative passage) | `app/b1/tests/Mimamsa.Tests` |
+| Playwright journeys, SYN site (UX ids + F01/F04/F05 regressions) | **19/19 passed** | `app/b1/e2e/journeys.spec.cjs`, `evidence/e2e_results.json` |
+| Playwright journeys, real sample (incl. F04 pixel check, F05 instrument scoping) | **8/8 passed** | `app/b1/e2e/sample.spec.cjs` |
+| PR #54 `retrieval_oracle.py` on the **development** fixture (unmodified; content checked against HEAD with `git hash-object`) | **9/14 on the first run; 10/14 after a post-hoc general identifier-ordering change. RET-02 and RET-12 are therefore not independent evidence. The 4 hybrid cases (RET-06, 07, 09, 10) fail by design** (B1 is lexical only; RET-07 and RET-10 also miss J1-MAJ or J2-MAJ at rank 10). Not a retrieval-quality figure: the blind holdout has not been run. After the F05 change (one representative passage per identified document) RET-03/RET-04 still pass their hard assertions, with lower recall metrics. The CI runner now fails on any failure outside the recorded 4. | `evidence/retrieval_oracle_*.json` |
 | Design token, keymap and policy tests (`app/design/tests`) | Unchanged and still passing; `gen_tokens.py --check` shows no drift | |
 | Search latency, sample, loopback, same host | Sequential: p50 20 ms, p95 92 ms. 10 concurrent: p50 80 ms, p95 308 ms (n = 200). **Informational only:** shared VM, client on the same host. | `evidence/search_latency_linux_vm.json` |
 
-**Disclosure on RET-02.** RET-02 (`exact:"Rule 8(3)(a)"`) failed in the first run: the notice mentioning the rule ranked above the rule itself. I then added a general rule: when a phrase is itself a provision identifier, the provision's own text in an Act or Rules document ranks before mentions. RET-02 passed afterwards. The fixture is a public development set, so **this pass is not independent evidence**. RET-12's ranking also changed under the same rule. Nothing was tuned for the four hybrid cases.
+**Disclosure on RET-02 (review F07).** RET-02 (`exact:"Rule 8(3)(a)"`) failed in the first run: the notice mentioning the rule ranked above the rule itself. I then added a general rule: when a phrase is itself a provision identifier, the provision's own text in an Act or Rules document ranks before mentions. RET-02 passed afterwards. The fixture is a public development set, so **this pass is not independent evidence**. RET-12's ranking also changed under the same rule. Nothing was tuned for the four hybrid cases.
 
 ### UX journeys (retrieval-ux.md), expected vs observed
 
@@ -83,6 +89,27 @@ CI: `app-ci.yml` job `b1` (Linux, PostgreSQL service container) and `app-windows
 
 The PR #54 `transport_oracle.py` was **not re-run** on B1. The B1 delivery adapter emits the same trace events, but the PoC trace harness drives bearer tokens and a seed file, and B1 uses cookie sessions; adapting the harness was not done. Its last acceptance is for the PoC host (`POC_RESULTS_C13.md`).
 
+## 3a. Eligibility model after review F01
+
+There is one decision, `Mimamsa.Core/Delivery/Eligibility.cs`, and every surface uses it: search, document, text, citation, `/cite`, `pdf-meta`, range, A4 evidence and A5 targets.
+
+**Current copy.** All of these must hold:
+- it is verified in the ACTIVE generation;
+- it is PUBLISHED and `ELIGIBLE_ALL_USERS`;
+- the original re-hashed at start-up;
+- the document is not withdrawn;
+- it is not restricted under the optional `Mimamsa:RestrictedRegister` file. An unreadable register stops start-up.
+
+**Earlier edition (ASR-E06).** All of these must hold:
+- the copy was published in the generation that held it;
+- the document is still visible in the active release. A document absent from the active release is never served;
+- the copy itself is not withdrawn or restricted;
+- the vault object re-hashes.
+
+**Withdrawal is per document.** It fences every copy of the `doc_id`, current and earlier, in one transaction. Byte-identical copies under another `doc_id` are separate documents and are not affected; the Admin dialog and the API response say so.
+
+Held copies are keyed by `(sha, doc_id)` (F10). Ineligible copies get the one generic notice, and A4 evidence pointing at them reads `COPY_NOT_AVAILABLE_IN_THIS_INSTALLATION` with no id, hash or page. Users never receive A5 node ids (F02).
+
 ## 4. Measured vs not measured
 
 - **Measured:** the counts in §3; import verification; start-up re-hash; latency on the VM.
@@ -103,7 +130,7 @@ The PR #54 `transport_oracle.py` was **not re-run** on B1. The B1 delivery adapt
 1. **Selected host: BLOCKED** (owner hardware). **TLS is not configured.** The service is HTTP on loopback; LAN serving needs a certificate (AD-8) and `Mimamsa:SecureCookies=true`. **Signing:** dev-signed bundles only. No production trust list, Authenticode or MSI.
 2. **No semantic or hybrid search**, so RET hybrid cases fail by design. The "Semantic search unavailable" degraded banner is replaced by a permanent run-line statement.
 3. **Generations:** the service serves one generation per process lifetime and needs a restart after an import. **Withdrawals** are local Admin (PostgreSQL fence). They are not yet in the signed exclusion channel (contract README §3.3, X7/B2). The exclusion channel is configured as `none`.
-4. **Shared copies:** 7 sample doc_ids share bytes with another doc_id. Citation resolution is keyed by copy hash, as in the importer reference, so a permalink naming the second doc_id gives REFERENCE_MISMATCH.
+4. **Shared copies:** 7 sample doc_ids share bytes with another doc_id. Held copies are now keyed by (sha, doc_id), so each twin resolves its own permalinks. Whether a withdrawal for content reasons should also cover byte-identical twins is an **owner decision**; B1 does not cover them.
 5. **A5 treatment spans** were bound to the c7 derivative with file-level offsets. They are carried as page-only anchors with the extractor quote, labelled as such.
 6. **Notes, pins, saved searches, server-side tabs and history:** Not implemented (B3). The Notes tab says so.
 7. **Highlights in the original** are word marks in the PDF.js text layer (approximate on justified text, per P4). There are no OCR word boxes.
@@ -114,18 +141,27 @@ The PR #54 `transport_oracle.py` was **not re-run** on B1. The B1 delivery adapt
    - N4 and N5: open for the selected host.
 10. The PDF.js lockfile was assembled from the PoC's verified lock entries, because npm install was not allowed offline. CI uses `npm ci --omit=optional`.
 
-## 6. Screenshots (deviceScaleFactor 2)
+## 6a. Review B1 dispositions (REVIEW_B1.md at fa72af91)
+
+| Finding | Disposition |
+| --- | --- |
+| F01 (P1) | **Fixed.** The single eligibility check is described in §3a. Tests cover: withdrawal of a document with an earlier edition; a STAGED earlier copy; a copy dropped from a later release; a register hit on an earlier copy. They exercise `pdf-meta`, range, `/cite` and the UI journey. |
+| F02 | **Fixed.** A4 evidence is redacted through eligibility. A5 `node_id` and `source_node` are stripped from User payloads and never displayed. HTTP tests added. |
+| F03 | **Fixed.** UTF-8 everywhere; the oracle content check is CRLF-safe; the document is corrected. The Windows result is in §7. |
+| F04 | **Fixed.** The highlight is a translucent fill plus underline; a pixel test in the SYN and sample journeys confirms dark glyph pixels remain under the mark. |
+| F05 | **Fixed.** An identified document pins one representative passage. It is labelled "Identifier" only when the passage contains the identifier, otherwise "Document match". Instrument scoping keeps only the closest title (fewest extra title words) and shows a disambiguation chip on a tie. A plain short-title match ranks the instrument first. |
+| F06 | **Mitigated in display.** The field reads "Judges (crawler; may be incomplete)". When metadata has no case numbers, the numbers printed on page 1 are shown as unverified candidates. The upstream SC judges, case numbers and neutral-citation gaps (for example Allahabad `2025:AHC-LKO:…`) need the A-track owner and are not fixed here. |
+| F07 | **Fixed** (§3 wording). |
+| F08 | **Fixed.** Canvas waits before viewer screenshots; regression tests for F01, F02, F04 and F05; the CI oracle fails on any failure outside the recorded baseline. |
+| F09 | **Fixed.** A client-side queue keeps at most 3 ranges in flight, below the per-session cap. |
+| F10 | **Fixed** (keying). The twin-withdrawal policy is open (§5 item 4). |
+| F11 | **Fixed** in part: missing DSN fails start-up; Origin check on authenticated POSTs; session cap checked before the slot. The lockout is already timed (5 failed attempts give a 5-minute lock); an Admin can also wait it out, and no manual unlock exists in B1. |
+| F12 | **Fixed.** 9 JPEG screenshots (quality 72, DSF 2), 4.5 MB; the PNGs are removed from git. |
+| F13 | **Fixed.** A cited earlier edition shows only copy-level facts (hash, pages, first release held) plus the notice. |
+
+## 6. Screenshots (deviceScaleFactor 2, JPEG)
 
 These are in `docs/architecture/b1/screenshots/`.
-- **Real sample:**
-  - `b1-01` identifier search with the document;
-  - `b1-02` evidence;
-  - `b1-03` provenance;
-  - `b1-04` statute s.75;
-  - `b1-05` and `b1-06` at 1366 (compact, evidence drawer);
-  - `b1-07` and `b1-08` narrow at 1024 and 800;
-  - `b1-09` Commander view and abbreviation chip;
-  - `b1-10` dark Text view;
-  - `b1-11` admin;
-  - `b1-12` gated assistant.
-- **SYN:** `syn-01` to `syn-19`, named by UX id.
+- **Real sample:** `b1-01` (identifier search), `b1-02` (evidence), `b1-04` (statute s.75), `b1-05` (compact 1366), `b1-08` (narrow 800), `b1-10` (dark Text view).
+- **SYN:** `syn-02` (parser error), `syn-12` (cited earlier copy), `syn-15` (original failed).
+- The journeys take further screenshots only as CI artifacts.

@@ -185,9 +185,22 @@ def candidates(docs: dict, recs: dict, maps: dict):
     return out
 
 
+# Eligibility controls for review F01 (not part of the PR #54 fixture; unique words so no RET query matches them):
+#   X-DROPPED      published in R1, absent from R2 (a later release dropped it, e.g. for a restriction)
+#   X-STAGEDEARLY  STAGED (never published) copy in R1; a different, PUBLISHED copy in R2
+def extras(n: int):
+    mk = lambda i, text, pub: {"id": i, "title": f"Eligibility control {i} (synthetic)", "type": "manual", "date": "2022-01-01",
+                               "pages": [{"page": 1, "id": f"{i}-P1", "text": text}], "publication": pub, "copy": f"C-{i}-{n}",
+                               "completeness": "complete"}
+    out = [mk("X-STAGEDEARLY", f"zinnia quartz control edition {n}", "staged" if n == 1 else "published")]
+    if n == 1:
+        out.append(mk("X-DROPPED", "zinnia quartz dropped control", "published"))
+    return out
+
+
 def release(hn_key, pub, register, fixture, n: int, cover_ids=(), out: Path = None):
     recs, ders, files, maps = {}, [], {}, {}
-    for doc in fixture["documents"]:
+    for doc in fixture["documents"] + extras(n):
         rec, der, orig, tb, mp = build_doc(doc, cover=doc["id"] in cover_ids)
         recs[doc["id"]] = rec
         ders.append(der)
@@ -195,7 +208,15 @@ def release(hn_key, pub, register, fixture, n: int, cover_ids=(), out: Path = No
         files[der["text_path"]] = (tb, "text")
         maps.update(mp)
     cands = candidates({d["id"]: d for d in fixture["documents"]}, recs, maps)
-    man = json.loads((REPO / "app/contract/examples/release_manifest.example.json").read_text())
+    # one synthetic A4-shaped research record whose evidence names two copies (review F02 redaction test)
+    a4 = {"version_id": "SYN/s.17/v01", "family": "SYN", "provision": "s.17", "version_kind": "as_enacted",
+          "change_summary": "Synthetic version record (not a real provision)", "determination_state": "AUTOMATED_CANDIDATE_NOT_VERIFIED",
+          "effective_from": {"status": "NOT_STATED_PENDING_ADVICE", "date": None, "reported_date": None},
+          "effective_to": {"status": "OPEN_ON_LOCATED_INSTRUMENTS"}, "currency": {"status": "NOT_ESTABLISHED"},
+          "text_evidence": [{"role": "synthetic_primary", "sha256": recs["S-ACT"]["source_copy"]["sha256"], "pdf_page": "2", "edition": "synthetic act"},
+                            {"role": "synthetic_secondary", "sha256": recs["V-OTHER"]["source_copy"]["sha256"], "pdf_page": "1", "edition": "unrelated synthetic book"}]}
+    files["research/a4_provision_versions.jsonl"] = ((json.dumps(a4, sort_keys=True) + "\n").encode(), "report")
+    man = json.loads((REPO / "app/contract/examples/release_manifest.example.json").read_text(encoding="utf-8"))
     man.update(release_id=f"R13-syn-fixture-20261125-{n:08x}", release_sequence=n, created_at="2026-11-25T00:00:00Z")
     man["restricted_material"].update(config_sha256=register.config_sha256, restriction_ids_applied=["RM-001"])
     path = out / f"bundle-r{n}"
@@ -229,9 +250,13 @@ def main():
            "active_release": f"R13-syn-fixture-20261125-{2:08x}", "map": maps2,
            "doc_ids": {k: v["doc_id"] for k, v in recs2.items()},
            "j_allow_r1_copy": recs1["J-ALLOW"]["source_copy"]["sha256"], "j_allow_r2_copy": recs2["J-ALLOW"]["source_copy"]["sha256"],
+           "x_dropped_r1_copy": recs1["X-DROPPED"]["source_copy"]["sha256"],
+           "x_stagedearly_r1_copy": recs1["X-STAGEDEARLY"]["source_copy"]["sha256"],
+           "x_stagedearly_r2_copy": recs2["X-STAGEDEARLY"]["source_copy"]["sha256"],
            "j_allow_r1_pages": {fid: int(pid.split("-")[0][1:]) for fid, (_, pid) in maps1.items() if fid.startswith("J2-")},
            "deviations": ["L-HI original rendered as a Latin placeholder page (no Devanagari font; apt not allowed)"]}
-    (out / "fixture_map.json").write_text(json.dumps(res, indent=1, sort_keys=True))
+    res["map"] = {k: v for k, v in res["map"].items() if not k.startswith("X-")}   # oracle mapping: fixture passages only
+    (out / "fixture_map.json").write_text(json.dumps(res, indent=1, sort_keys=True), encoding="utf-8")
     print(json.dumps({k: res[k] for k in ("r1", "r2")}, indent=1)[:2000])
     return 0 if r1.activated and r2.activated else 1
 

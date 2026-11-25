@@ -46,21 +46,26 @@ class Client:
 
 
 def git_blob(path: Path) -> str:
-    return subprocess.run(["git", "-C", str(REPO), "rev-parse", f"HEAD:{path.relative_to(REPO).as_posix()}"], capture_output=True, text=True).stdout.strip()
+    return subprocess.run(["git", "-C", str(REPO), "rev-parse", f"HEAD:{path.relative_to(REPO).as_posix()}"], capture_output=True, text=True, encoding="utf-8").stdout.strip()
 
 
 def main():
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser()
     ap.add_argument("--map", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--expected-failures", default="RET-06,RET-07,RET-09,RET-10",
+                    help="recorded baseline: cases known to fail (hybrid mode, B1 is lexical). Any OTHER failing case fails the run.")
     a = ap.parse_args()
     base = os.environ["B1_URL"]
-    m = json.loads(a.map.read_text())
+    m = json.loads(a.map.read_text(encoding="utf-8"))
     rev = {tuple(v): k for k, v in m["map"].items()}
-    fixture = json.loads(FIXTURE.read_text())
+    fixture = json.loads(FIXTURE.read_text(encoding="utf-8"))
     # oracle and fixture must be byte-identical to the committed (frozen) versions
     for f in (ORACLE, FIXTURE):
-        blob = hashlib.sha1(b"blob %d\0" % f.stat().st_size + f.read_bytes()).hexdigest()
+        # git hash-object applies the checkout's clean filters (CRLF on Windows), so this compares content with HEAD
+        blob = subprocess.run(["git", "-C", str(REPO), "hash-object", str(f)], capture_output=True, text=True, encoding="utf-8").stdout.strip()
         if blob != git_blob(f):
             sys.exit(f"{f.name} differs from the committed version: refusing to run")
     admin = Client(base); admin.login("admin")
@@ -79,9 +84,10 @@ def main():
                      "observed_mode": r.get("mode"), "observed_state": r.get("state"), "observed_top5": ranking[:5],
                      "chips": [c["text"] for c in r.get("chips") or []]})
     a.out.mkdir(parents=True, exist_ok=True)
-    (a.out / "observations.json").write_text(json.dumps(obs, indent=1, ensure_ascii=False))
-    proc = subprocess.run([sys.executable, "-B", str(ORACLE), "--observations", str(a.out / "observations.json")], capture_output=True, text=True)
-    (a.out / "oracle_output.json").write_text(proc.stdout or proc.stderr)
+    (a.out / "observations.json").write_text(json.dumps(obs, indent=1, ensure_ascii=False), encoding="utf-8")
+    proc = subprocess.run([sys.executable, "-B", str(ORACLE), "--observations", str(a.out / "observations.json")], capture_output=True,
+                          text=True, encoding="utf-8", env=dict(os.environ, PYTHONIOENCODING="utf-8"))
+    (a.out / "oracle_output.json").write_text(proc.stdout or proc.stderr, encoding="utf-8")
     try:
         res = json.loads(proc.stdout)
     except ValueError:
@@ -94,10 +100,15 @@ def main():
         row["metrics"] = res["cases"][row["id"]]["metrics"]
     summary = {"oracle_exit": proc.returncode, "passed": res["passed"], "total": res["total"], "aggregate": res["aggregate"],
                "oracle_blob": git_blob(ORACLE), "fixture_blob": git_blob(FIXTURE), "withdrawal": w, "cases": rows}
-    (a.out / "RESULTS.json").write_text(json.dumps(summary, indent=1, ensure_ascii=False))
+    (a.out / "RESULTS.json").write_text(json.dumps(summary, indent=1, ensure_ascii=False), encoding="utf-8")
     for row in rows:
         print(f"{row['id']}: {row['status']:7} mode {row['observed_mode']} (exp {row['expected_mode']}) state {row['observed_state']} top {row['observed_top5'][:3]} {'; '.join(row['oracle_errors'])}")
     print(f"oracle: {res['passed']}/{res['total']} cases without hard-assertion errors (exit {proc.returncode})")
+    expected = {x for x in a.expected_failures.split(",") if x}
+    regressions = [r["id"] for r in rows if r["oracle_errors"] and r["id"] not in expected]
+    if regressions:
+        print(f"REGRESSION against the recorded baseline: {regressions}")
+        return 1
     return 0
 
 

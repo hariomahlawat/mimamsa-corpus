@@ -13,7 +13,7 @@ using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 var conf = builder.Configuration;
-var cs = conf["Mimamsa:Db"] ?? "Host=127.0.0.1;Port=55434;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1;Maximum Pool Size=40";
+var cs = conf["Mimamsa:Db"] is { Length: > 0 } dsn ? dsn : throw new InvalidOperationException("Mimamsa:Db (PostgreSQL connection string) is required");
 
 // ---- CLI: create a local account (password from MIMAMSA_NEW_PASSWORD or stdin; never from the command line)
 if (args.Length >= 3 && args[0] == "--add-user")
@@ -51,13 +51,17 @@ var state = new ServingState();
 var policy = new PolicyStore(dataSource);
 var identity = new IdentityStore(dataSource);
 var ledger = new CreditLedger(dataSource, credit);
+// Optional restricted-material register file (same shape as config/restricted_material.json). The importer already
+// refuses restricted items; this re-check covers copies held by earlier generations. Unreadable = refuse to start.
+var register = conf["Mimamsa:RestrictedRegister"] is { Length: > 0 } rp ? RestrictedRegister.Load(rp) : RestrictedRegister.Empty;
+var eligibility = new Eligibility(generation, state, register, vault);
 var index = SearchIndex.Build(generation);
 AppServices? appRef = null;
 var search = new SearchService(index, docId => appRef!.VisibleDocument(docId) is null);
 var app0 = new AppServices
 {
     Generation = generation, Search = search, State = state, Policy = policy, Identity = identity, Ledger = ledger, Vault = vault,
-    TestMode = testMode, SecureCookies = conf.GetValue("Mimamsa:SecureCookies", false),
+    Eligible = eligibility, TestMode = testMode, SecureCookies = conf.GetValue("Mimamsa:SecureCookies", false),
 };
 appRef = app0;
 var active = new ActiveStreams();

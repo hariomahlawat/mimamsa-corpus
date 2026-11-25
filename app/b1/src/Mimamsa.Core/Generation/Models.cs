@@ -63,7 +63,12 @@ public sealed class DocumentRecord
 }
 
 /// A copy held by an activated generation (current or earlier): what citation resolution may open (ASR-E06).
-public sealed record HeldCopy(string Sha, string DocId, int PageCount, string FirstRelease, string GenerationId, long Bytes);
+/// Keyed by (sha, doc_id): byte-identical twins are separate held copies. `Published` is the copy's publication value
+/// in the generation that held it (from that generation's materialized records; false when unknown: fail closed).
+public sealed record HeldCopy(string Sha, string DocId, int PageCount, string FirstRelease, string GenerationId, long Bytes, bool Published)
+{
+    public string Key => Sha + "|" + DocId;
+}
 
 /// Release identity shown in the banner, footer and provenance (from the importer-written release/RELEASE.json).
 public sealed record ReleaseInfo(string ReleaseId, long Sequence, string CreatedAt, string? HfRepo, string? HfRevision,

@@ -173,9 +173,39 @@ public class HttpTests(ServiceFixture f)
         Assert.Equal(HttpStatusCode.NotFound, (await user.SendAsync(rm)).StatusCode);
         var s = await user.GetStringAsync("/api/search?q=ceramic%20glaze");
         Assert.DoesNotContain("syn-v-other", s);
+        // F02: A4 evidence naming the withdrawn copy is redacted (no doc id, no hash, no page) on other documents
+        var act = await user.GetStringAsync("/api/documents/syn-s-act");
+        Assert.DoesNotContain(sha, act);
+        Assert.DoesNotContain("syn-v-other", act);
+        Assert.Contains("COPY_NOT_AVAILABLE_IN_THIS_INSTALLATION", act);
         var cite = JsonNode.Parse(await user.GetStringAsync($"/api/cite?doc=syn-v-other&sha={sha[..12]}&page=1"))!;
         var unknown = JsonNode.Parse(await user.GetStringAsync($"/api/cite?doc=syn-v-other&sha={new string('a', 12)}&page=1"))!;
         Assert.Equal(unknown.ToJsonString(), cite.ToJsonString());
+    }
+
+    [Theory]                                                                   // review F01: earlier copies that are not eligible
+    [InlineData("syn-x-stagedearly", "x_stagedearly_r1_copy")]
+    [InlineData("syn-x-dropped", "x_dropped_r1_copy")]
+    public async Task IneligibleEarlierCopiesGetTheGenericAnswerOnEveryPath(string doc, string key)
+    {
+        var (c, _) = await f.Login("reader");
+        var sha = Syn.Map[key]!.GetValue<string>();
+        Assert.Equal(HttpStatusCode.NotFound, (await c.GetAsync($"/api/v2/documents/{doc}/pdf-meta?copy={sha}")).StatusCode);
+        var m = new HttpRequestMessage(HttpMethod.Get, $"/api/v2/documents/{doc}/copies/{sha}/range");
+        m.Headers.TryAddWithoutValidation("Range", "bytes=0-99");
+        Assert.Equal(HttpStatusCode.NotFound, (await c.SendAsync(m)).StatusCode);
+        var cite = JsonNode.Parse(await c.GetStringAsync($"/api/cite?doc={doc}&sha={sha[..12]}&page=1"))!;
+        Assert.Equal("CITED_COPY_UNAVAILABLE", cite["state"]!.GetValue<string>());
+        Assert.Null(cite["copy"]);
+    }
+
+    [Fact] public async Task UserPayloadsNeverCarryInternalNodeIds()            // review F02
+    {
+        var (c, _) = await f.Login("reader");
+        var d = await c.GetStringAsync("/api/documents/syn-j-allow");
+        Assert.DoesNotContain("node_id", d);
+        Assert.DoesNotContain("source_node", d);
+        Assert.DoesNotContain("JUD:JG-", d);
     }
 
     [Fact] public async Task CitationOfAnEarlierEditionOpensThatCopyAndOffersCurrentSeparately()

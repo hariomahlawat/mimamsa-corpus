@@ -19,8 +19,6 @@
   "state": "results",
   "ranking": [
    "J1-SUB",
-   "J1-MAJ",
-   "J1-DISS",
    "J1-SHORT",
    "J2-QUOTE"
   ]
@@ -29,8 +27,7 @@
   "mode": "identifier",
   "state": "results",
   "ranking": [
-   "J2-MAJ",
-   "J2-QUOTE"
+   "J2-MAJ"
   ]
  },
  "RET-05": {
@@ -105,9 +102,9 @@
   "mode": "lexical",
   "state": "results",
   "ranking": [
-   "N-20",
    "R-3A",
-   "R-3B"
+   "R-3B",
+   "N-20"
   ]
  },
  "RET-13": {

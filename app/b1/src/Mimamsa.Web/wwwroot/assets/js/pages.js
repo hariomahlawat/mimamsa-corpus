@@ -121,7 +121,7 @@ export async function citePage(main, nav, parts) {
   if (r.state === "CITED_COPY_ELIGIBLE" || r.state === "CITED_COPY_ELIGIBLE_NOT_CURRENT") {
     mountResearch(main, nav);
     await openDocument({ docId, page: r.page, copy: r.state === "CITED_COPY_ELIGIBLE" ? null : r.copy, notice: r.notice || `Cited copy ${short(r.copy)} at physical page ${r.page} (citation made in release ${releaseId}).`,
-      citeState: r.state, currentCopy: r.current_copy }, { push: false });
+      citeState: r.state, currentCopy: r.current_copy, copyPages: r.copy_pages, firstRelease: r.first_release }, { push: false });
     return;
   }
   add(main, h("div.page", h("div.page-inner", { style: "max-width:72ch" }, h("h1", "Citation"),
@@ -165,7 +165,8 @@ export async function adminPage(main, nav) {
     const doc = $("#wd-doc").value.trim(), reason = $("#wd-reason").value.trim();
     if (reason.length < 3) { toast("A reason is required"); return; }
     const d = openDialog("Withdraw this document?", h("div", h("p", h("strong.mono", doc)),
-      h("p", "It disappears from search, document views, citation links and original delivery for every user, effective immediately. Open viewers are cut off."),
+      h("p", "Every copy of this document, including earlier editions, disappears from search, document views, citation links and original delivery for every user, effective immediately. Open viewers are cut off."),
+      h("p", "Byte-identical copies held under another document id are separate documents and are not withdrawn by this action."),
       h("p", "Withdrawal is recorded with your account and the reason. It is not legal approval or disapproval.")),
       [h("button.btn", { onclick: () => d.close() }, "Cancel"), h("button.btn.btn-primary", { onclick: async () => {
         try { const r = await api("/api/admin/withdraw", { method: "POST", body: { doc_id: doc, reason } }); d.close(); toast(r.status === "withdrawn" ? `Withdrawn (policy epoch ${r.epoch})` : "Already withdrawn"); adminPage(main, nav); }

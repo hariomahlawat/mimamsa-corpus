@@ -61,6 +61,13 @@ public sealed class SearchService
             foreach (var h in mentions) if (seen.Add(h.PassageIndex)) ordered.Add(h);
             if (rest.Count > 0)
             {
+                // Short-title match: plain words that are exactly an instrument's title (ignoring years/stopwords) put
+                // that instrument's first passage first, labelled as a title match.
+                var words = rest.SelectMany(w => Text.Tokenize(w)).Select(t => t.Term).Where(t => !Text.Stopwords.Contains(t) && !t.All(char.IsDigit)).ToHashSet();
+                if (words.Count >= 2)
+                    for (int d = 0; d < _ix.Docs.Count; d++)
+                        if (_ix.Docs[d].IsStatute && NormTitle(_ix.Docs[d].Title).Split(' ').ToHashSet().SetEquals(words) && seen.Add(_ix.DocPassages[d][0]))
+                            ordered.Add(new Hit(_ix.DocPassages[d][0], "title", 5e8, new[] { $"title match: {_ix.Docs[d].Title}" }));
                 var scores = PlainScores(rest, ctx);
                 foreach (var (p, s) in scores.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key))
                     if (seen.Add(p)) ordered.Add(new Hit(p, "lexical", s, Reasons(p, ctx)));
@@ -106,12 +113,19 @@ public sealed class SearchService
             ctx.Chips.Add(new Chip("identifier", $"{label} · {id.Raw.Trim()}", docs.Count + cover.Count > 0 ? $"{docs.Count + cover.Count} matching document(s)" : "no document carries this identifier"));
             ctx.Phrases.Add(idToks);
             var mentionHits = PhraseOccurrences(idToks);
+            // A document-level identifier pins ONE representative passage per matching document: a passage that
+            // contains the identifier (labelled as such), else the document's first passage (labelled as a document
+            // match, not an identifier hit). Other passages are not inflated into identifier hits (review F05).
             foreach (var (set, why) in new[] { (docs, $"{label} {id.Raw.Trim()} in document metadata"), (cover, $"{label} {id.Raw.Trim()} printed at the top of p.1 (extracted, not verified)") })
                 foreach (var d in set)
                 {
                     var ps = _ix.DocPassages[d];
-                    foreach (var p in ps.OrderByDescending(p => mentionHits.ContainsKey(p) ? 1 : 0).ThenBy(p => p))
-                        pinned.Add(new Hit(p, "identifier", 1e9, new[] { why }.Concat(mentionHits.ContainsKey(p) ? new[] { "identifier appears in this passage" } : Array.Empty<string>()).ToList()));
+                    var withId = ps.Where(mentionHits.ContainsKey).ToList();
+                    if (withId.Count > 0)
+                        foreach (var p in withId.Take(3))
+                            pinned.Add(new Hit(p, "identifier", 1e9, new[] { why, "the identifier appears in this passage" }));
+                    else
+                        pinned.Add(new Hit(ps[0], "document", 1e9, new[] { why + "; this passage is the document's first passage and does not itself contain the identifier" }));
                 }
             foreach (var (p, n) in mentionHits.OrderByDescending(kv => kv.Value).ThenBy(kv => kv.Key))
                 if (!docs.Contains(_ix.DocOf(p)) && !cover.Contains(_ix.DocOf(p)))
@@ -122,12 +136,33 @@ public sealed class SearchService
         {
             var actWords = restWords.Select(w => Text.Tokenize(w)).SelectMany(t => t).Select(t => t.Term)
                                     .Where(t => !Text.Stopwords.Contains(t)).ToList();
+            // Instrument scoping (review F05): among Acts/Rules whose title contains every query word, keep only the
+            // closest titles (fewest extra title words, ignoring years and stopwords). Distinct closest titles are
+            // ambiguous: nothing is pinned and a disambiguation chip lists them.
             var scoped = new List<int>();
+            string? ambiguous = null;
             if (actWords.Count > 0)
+            {
+                var cands = new List<(int d, int extra)>();
                 for (int d = 0; d < _ix.Docs.Count; d++)
-                    if (_ix.Docs[d].IsStatute && actWords.All(w => _ix.TitleTerms[d].Contains(w))) scoped.Add(d);
+                    if (_ix.Docs[d].IsStatute && actWords.All(w => _ix.TitleTerms[d].Contains(w)))
+                        cands.Add((d, _ix.TitleTerms[d].Count(t => !actWords.Contains(t) && !Text.Stopwords.Contains(t) && !t.All(char.IsDigit))));
+                if (cands.Count > 0)
+                {
+                    int best = cands.Min(c => c.extra);
+                    var top = cands.Where(c => c.extra == best).Select(c => c.d).ToList();
+                    var titles = top.Select(d => NormTitle(_ix.Docs[d].Title)).Distinct().ToList();
+                    if (titles.Count == 1) scoped = top;
+                    else ambiguous = string.Join("; ", top.Select(d => _ix.Docs[d].Title).Distinct().Take(4));
+                }
+            }
             string scopeText;
-            if (scoped.Count > 0) { scopeText = string.Join(" ", restWords); restWords.Clear(); }
+            if (ambiguous is not null)
+            {
+                ctx.Chips.Add(new Chip("ambiguous", $"{id.ProvisionWord} {id.Base}{id.Sub}: which instrument?", "several instruments match equally: " + ambiguous + ". Add the year or the full title."));
+                continue;
+            }
+            if (scoped.Count > 0) { scopeText = _ix.Docs[scoped[0]].Title ?? string.Join(" ", restWords); restWords.Clear(); }
             else
             {
                 scopeText = "any Act, Rules or Regulations in the library";
@@ -161,6 +196,8 @@ public sealed class SearchService
         }
         return (pinned, mentions, restWords);
     }
+
+    static string NormTitle(string? t) => string.Join(" ", Text.Tokenize(t ?? "").Select(x => x.Term).Where(x => !x.All(char.IsDigit) && !Text.Stopwords.Contains(x)));
 
     Dictionary<int, int> PhraseOccurrences(IReadOnlyList<string> terms)
     {

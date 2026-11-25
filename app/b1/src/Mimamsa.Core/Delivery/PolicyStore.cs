@@ -61,6 +61,17 @@ public sealed class PolicyStore
         return (w, pr.GetInt64(0), pr.GetString(1));
     }
 
+    public async Task<List<string>> CopiesOfAsync(string docId)
+    {
+        await using var c = await _db.OpenConnectionAsync();
+        await using var q = new NpgsqlCommand("SELECT copy_sha256 FROM vault_copies WHERE doc_id=$1", c);
+        q.Parameters.AddWithValue(docId);
+        var l = new List<string>();
+        await using var r = await q.ExecuteReaderAsync();
+        while (await r.ReadAsync()) l.Add(r.GetString(0));
+        return l;
+    }
+
     public async Task<string?> CopyStateAsync(string docId, string sha)
     {
         await using var c = await _db.OpenConnectionAsync();
@@ -72,6 +83,10 @@ public sealed class PolicyStore
     /// Durable CAS: copy -> withdrawn and witness epoch+1 in one transaction; returns changed=false when the copy was
     /// already withdrawn (idempotent, no epoch bump). Throws on witness CAS failure (caller stays fenced: fail closed).
     public async Task<(long epoch, string digest, bool changed)> WithdrawCasAsync(string docId, string sha, string op, string reason, string actor)
+        => await WithdrawDocCasAsync(docId, sha, op, reason, actor);
+
+    /// Document-level withdrawal: every eligible copy row of the doc_id becomes withdrawn in one transaction.
+    public async Task<(long epoch, string digest, bool changed)> WithdrawDocCasAsync(string docId, string currentSha, string op, string reason, string actor)
     {
         await using var c = await _db.OpenConnectionAsync();
         await using var tx = await c.BeginTransactionAsync();
@@ -79,9 +94,10 @@ public sealed class PolicyStore
         await using (var q = new NpgsqlCommand("SELECT epoch, digest FROM serving_policy WHERE id = 1 FOR UPDATE", c, tx))
         await using (var r = await q.ExecuteReaderAsync()) { await r.ReadAsync(); e0 = r.GetInt64(0); d0 = r.GetString(1); }
         int rows;
-        await using (var u = new NpgsqlCommand("UPDATE vault_copies SET state='withdrawn', fence_seq=fence_seq+1 WHERE doc_id=$1 AND copy_sha256=$2 AND state='eligible'", c, tx))
-        { u.Parameters.AddWithValue(docId); u.Parameters.AddWithValue(sha); rows = await u.ExecuteNonQueryAsync(); }
-        if (rows != 1) { await tx.RollbackAsync(); return (e0, d0, false); }
+        await using (var u = new NpgsqlCommand("UPDATE vault_copies SET state='withdrawn', fence_seq=fence_seq+1 WHERE doc_id=$1 AND state='eligible'", c, tx))
+        { u.Parameters.AddWithValue(docId); rows = await u.ExecuteNonQueryAsync(); }
+        if (rows == 0) { await tx.RollbackAsync(); return (e0, d0, false); }
+        var sha = currentSha;
         var d1 = "state-" + Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes($"{d0}|{op}|{docId}|{sha}|{e0 + 1}")))[..16].ToLowerInvariant();
         await using (var cas = new NpgsqlCommand("UPDATE serving_policy SET epoch = $1, digest = $2 WHERE id = 1 AND epoch = $3", c, tx))
         {

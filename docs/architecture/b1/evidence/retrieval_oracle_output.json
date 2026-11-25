@@ -25,24 +25,24 @@
     "RET-03": {
       "errors": [],
       "metrics": {
-        "recall@10": 1.0,
-        "recall@20": 1.0,
-        "precision@5": 1.0,
+        "recall@10": 0.6,
+        "recall@20": 0.6,
+        "precision@5": 0.6,
         "MRR@20": 1.0,
-        "nDCG@10": 0.8777069972374096,
-        "exact_precision@5": 0.8,
+        "nDCG@10": 0.44673093966564165,
+        "exact_precision@5": 0.4,
         "exact_MRR@20": 1.0
       }
     },
     "RET-04": {
       "errors": [],
       "metrics": {
-        "recall@10": 1.0,
-        "recall@20": 1.0,
-        "precision@5": 0.4,
+        "recall@10": 0.5,
+        "recall@20": 0.5,
+        "precision@5": 0.2,
         "MRR@20": 1.0,
-        "nDCG@10": 1.0,
-        "exact_precision@5": 0.4,
+        "nDCG@10": 0.7871546029909718,
+        "exact_precision@5": 0.2,
         "exact_MRR@20": 1.0
       }
     },
@@ -126,8 +126,8 @@
         "recall@10": 1.0,
         "recall@20": 1.0,
         "precision@5": 0.4,
-        "MRR@20": 0.5,
-        "nDCG@10": 0.6653152460429406
+        "MRR@20": 1.0,
+        "nDCG@10": 1.0
       }
     },
     "RET-13": {
@@ -147,7 +147,7 @@
   },
   "aggregate": {
     "MRR@20": {
-      "macro": 0.9583333333333334,
+      "macro": 1.0,
       "n": 12
     },
     "exact_MRR@20": {
@@ -155,23 +155,23 @@
       "n": 3
     },
     "exact_precision@5": {
-      "macro": 0.4666666666666667,
+      "macro": 0.26666666666666666,
       "n": 3
     },
     "nDCG@10": {
-      "macro": 0.8607360688301364,
+      "macro": 0.8349746771114916,
       "n": 12
     },
     "precision@5": {
-      "macro": 0.3666666666666667,
+      "macro": 0.31666666666666665,
       "n": 12
     },
     "recall@10": {
-      "macro": 0.8666666666666667,
+      "macro": 0.7916666666666666,
       "n": 12
     },
     "recall@20": {
-      "macro": 0.8666666666666667,
+      "macro": 0.7916666666666666,
       "n": 12
     }
   },

@@ -4,7 +4,7 @@
  "total": 14,
  "aggregate": {
   "MRR@20": {
-   "macro": 0.9583333333333334,
+   "macro": 1.0,
    "n": 12
   },
   "exact_MRR@20": {
@@ -12,23 +12,23 @@
    "n": 3
   },
   "exact_precision@5": {
-   "macro": 0.4666666666666667,
+   "macro": 0.26666666666666666,
    "n": 3
   },
   "nDCG@10": {
-   "macro": 0.8607360688301364,
+   "macro": 0.8349746771114916,
    "n": 12
   },
   "precision@5": {
-   "macro": 0.3666666666666667,
+   "macro": 0.31666666666666665,
    "n": 12
   },
   "recall@10": {
-   "macro": 0.8666666666666667,
+   "macro": 0.7916666666666666,
    "n": 12
   },
   "recall@20": {
-   "macro": 0.8666666666666667,
+   "macro": 0.7916666666666666,
    "n": 12
   }
  },
@@ -39,7 +39,8 @@
   "changed": true,
   "epoch": 2,
   "reset_streams": 0,
-  "effect": "Removed from search, documents, citations and original delivery for every user, effective now."
+  "copies_withdrawn": 1,
+  "effect": "Every copy of this document (current and earlier editions) is removed from search, documents, citations and original delivery for every user, effective now. Byte-identical copies held under another document id are separate documents and are not affected."
  },
  "cases": [
   {
@@ -53,7 +54,7 @@
     "A-17"
    ],
    "chips": [
-    "Section 17 · Bracken Service Act"
+    "Section 17 · Bracken Service Act (synthetic)"
    ],
    "oracle_errors": [],
    "status": "Passed",
@@ -101,8 +102,6 @@
    "observed_state": "results",
    "observed_top5": [
     "J1-SUB",
-    "J1-MAJ",
-    "J1-DISS",
     "J1-SHORT",
     "J2-QUOTE"
    ],
@@ -112,12 +111,12 @@
    "oracle_errors": [],
    "status": "Passed",
    "metrics": {
-    "recall@10": 1.0,
-    "recall@20": 1.0,
-    "precision@5": 1.0,
+    "recall@10": 0.6,
+    "recall@20": 0.6,
+    "precision@5": 0.6,
     "MRR@20": 1.0,
-    "nDCG@10": 0.8777069972374096,
-    "exact_precision@5": 0.8,
+    "nDCG@10": 0.44673093966564165,
+    "exact_precision@5": 0.4,
     "exact_MRR@20": 1.0
    }
   },
@@ -129,8 +128,7 @@
    "observed_mode": "identifier",
    "observed_state": "results",
    "observed_top5": [
-    "J2-MAJ",
-    "J2-QUOTE"
+    "J2-MAJ"
    ],
    "chips": [
     "Case number · OA 411/2021"
@@ -138,12 +136,12 @@
    "oracle_errors": [],
    "status": "Passed",
    "metrics": {
-    "recall@10": 1.0,
-    "recall@20": 1.0,
-    "precision@5": 0.4,
+    "recall@10": 0.5,
+    "recall@20": 0.5,
+    "precision@5": 0.2,
     "MRR@20": 1.0,
-    "nDCG@10": 1.0,
-    "exact_precision@5": 0.4,
+    "nDCG@10": 0.7871546029909718,
+    "exact_precision@5": 0.2,
     "exact_MRR@20": 1.0
    }
   },
@@ -326,9 +324,9 @@
    "observed_mode": "lexical",
    "observed_state": "results",
    "observed_top5": [
-    "N-20",
     "R-3A",
-    "R-3B"
+    "R-3B",
+    "N-20"
    ],
    "chips": [
     "Section = 8",
@@ -340,8 +338,8 @@
     "recall@10": 1.0,
     "recall@20": 1.0,
     "precision@5": 0.4,
-    "MRR@20": 0.5,
-    "nDCG@10": 0.6653152460429406
+    "MRR@20": 1.0,
+    "nDCG@10": 1.0
    }
   },
   {

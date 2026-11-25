@@ -246,7 +246,8 @@ public sealed partial class GenerationStore
             ev, v);
     }
 
-    /// Copies held by activated generations (release_sequence at or below the ACTIVE one), as importer.held_copies().
+    /// Copies held by activated generations (release_sequence at or below the ACTIVE one), as importer.held_copies(),
+    /// keyed by (sha, doc_id), with the publication value each copy had in the generation that held it.
     static Dictionary<string, HeldCopy> LoadHeldCopies(string siteRoot, JsonObject active, Vault vault)
     {
         var held = new Dictionary<string, HeldCopy>();
@@ -263,14 +264,21 @@ public sealed partial class GenerationStore
             if (seq <= activeSeq) gens.Add((seq, name, g));
         }
         foreach (var (_, id, g) in gens.OrderBy(x => x.seq))
+        {
+            var published = new HashSet<string>();
+            foreach (var d in Jsonl(Path.Combine(siteRoot, "generations", id, "records", "documents.jsonl")))
+                if (S(d["status_axes"]?["publication"]?["value"]) == "PUBLISHED" && S(d["restriction"]?["eligibility"]) == "ELIGIBLE_ALL_USERS")
+                    published.Add(S(d["source_copy"]?["sha256"]) + "|" + S(d["doc_id"]));
             foreach (var (_, v) in g["item_document"]?["documents"]?.AsObject() ?? new JsonObject())
             {
                 var docId = S(v![0])!; var sha = S(v[1])!;
-                if (held.ContainsKey(sha)) continue;
+                var key = sha + "|" + docId;
+                if (held.ContainsKey(key)) continue;
                 int pc = g["page_counts"]?[sha]?.GetValue<int>() ?? 0;
                 long len = File.Exists(vault.PathFor(sha)) ? new FileInfo(vault.PathFor(sha)).Length : 0;
-                held[sha] = new HeldCopy(sha, docId, pc, S(g["release_id"]) ?? id, id, len);
+                held[key] = new HeldCopy(sha, docId, pc, S(g["release_id"]) ?? id, id, len, published.Contains(key));
             }
+        }
         return held;
     }
 }

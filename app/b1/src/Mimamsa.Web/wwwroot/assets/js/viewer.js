@@ -23,7 +23,12 @@ export class ProtectedViewer {
     const meta = await r.json();
     this.metrics.meta = meta;
     const transport = new pdfjs.PDFDataRangeTransport(meta.length, null);
-    const fetchRange = async (a, b) => {
+    // client-side queue below the server's per-session stream cap (review F09): at most 3 ranges in flight
+    let inflight = 0; const waiters = [];
+    const acquire = () => inflight < 3 ? (inflight++, Promise.resolve()) : new Promise((r) => waiters.push(r));
+    const release = () => { const w = waiters.shift(); if (w) w(); else inflight--; };
+    const fetchRange = async (a, b) => { await acquire(); try { return await fetchRangeNow(a, b); } finally { release(); } };
+    const fetchRangeNow = async (a, b) => {
       for (let attempt = 0; attempt < 30; attempt++) {
         if (this.destroyed) throw new Error("destroyed");
         const t = performance.now();

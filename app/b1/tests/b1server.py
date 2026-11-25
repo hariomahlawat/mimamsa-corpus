@@ -33,7 +33,7 @@ def start(site: str, db: str, port: int, dll: Path, log: Path, trace: str | None
     dotnet = os.environ.get("DOTNET", "dotnet")
     cwd = dll.parent if (dll.parent / "wwwroot").exists() else dll.parent.parent.parent.parent
     proc = subprocess.Popen([dotnet, str(dll)], cwd=str(cwd), env=env,
-                            stdout=open(log, "w"), stderr=subprocess.STDOUT)
+                            stdout=open(log, "w", encoding="utf-8"), stderr=subprocess.STDOUT)
     for _ in range(240):
         try:
             if urllib.request.urlopen(f"http://127.0.0.1:{port}/health", timeout=1).status == 200:

@@ -203,7 +203,10 @@ function renderResults() {
       const states = [];
       if (p.ocr) states.push(chip("warning", "OCR", "OCR text: for search only. Quote from the original page."));
       if (p.low_confidence) states.push(chip("warning", "Low OCR confidence"));
-      const reason = p.tier === "identifier" ? chip("checked", "Identifier", p.reasons.join("; ")) : p.tier === "mention" ? chip("reason", "Mention", p.reasons.join("; ")) : chip("reason", "Lexical", p.reasons.join("; "));
+      const reason = p.tier === "identifier" ? chip("checked", "Identifier", p.reasons.join("; "))
+        : p.tier === "document" ? chip("reason", "Document match", p.reasons.join("; "))
+        : p.tier === "title" ? chip("reason", "Title match", p.reasons.join("; "))
+        : p.tier === "mention" ? chip("reason", "Mention", p.reasons.join("; ")) : chip("reason", "Lexical", p.reasons.join("; "));
       const row = h("div.hit", { role: "option", id: `hit-${i}`, "aria-selected": "false", "data-i": i, tabindex: "-1",
           onclick: () => { select(i); openFromHit(p, false); }, title: "Enter opens; O opens in a new tab; Space previews" },
         h("span.pg", p.page ? `p.${p.page}` : "", p.paragraph_label ? h("div", `¶${p.paragraph_label}`) : null),
@@ -295,10 +298,10 @@ export function openFromHit(p, newTab, preview) {
   openDocument({ docId: p.doc_id, page: p.page, passage: p.passage_id, copy: null }, { newTab, preview });
 }
 
-export async function openDocument({ docId, page, passage, copy, notice, citeState, currentCopy }, { newTab = false, preview = false, push = true } = {}) {
+export async function openDocument({ docId, page, passage, copy, notice, citeState, currentCopy, copyPages, firstRelease }, { newTab = false, preview = false, push = true } = {}) {
   let t = R.tabs.findIndex((x) => x.docId === docId && (x.copy || null) === (copy || null));
   if (t < 0) {
-    const tab = { docId, copy: copy || null, page: page || 1, passage: passage || null, view: "original", doc: null, viewer: null, hits: hitsFor(docId), hitIndex: -1, notice, citeState, currentCopy, preview };
+    const tab = { docId, copy: copy || null, page: page || 1, passage: passage || null, view: "original", doc: null, viewer: null, hits: hitsFor(docId), hitIndex: -1, notice, citeState, currentCopy, preview, copyPages, firstRelease };
     if (!newTab && R.active >= 0 && (R.tabs[R.active].preview || R.tabs.length >= 12)) { disposeTab(R.tabs[R.active]); R.tabs[R.active] = tab; t = R.active; }
     else if (!newTab && R.active >= 0 && !preview) { disposeTab(R.tabs[R.active]); R.tabs[R.active] = tab; t = R.active; }
     else { if (R.tabs.length >= 12) { disposeTab(R.tabs.shift()); } R.tabs.push(tab); t = R.tabs.length - 1; }
@@ -377,6 +380,17 @@ function origin(d, field) {
 }
 
 function docHeader(d, tab) {
+  if (tab.copy && tab.copy !== d.copy.sha256) {
+    const head = h("header.dochead", h("h1", { lang: d.language === "hi" ? "hi" : null }, d.title || "Title not printed"),
+      h("div.meta", h("span.field", h("span.label", "Cited copy"), h("span.mono", short(tab.copy))),
+        h("span.field", h("span.label", "Pages"), h("span", String(tab.pageCount || tab.copyPages || "…"))),
+        tab.firstRelease ? h("span.field", h("span.label", "First held in release"), h("span.mono", tab.firstRelease)) : null,
+        h("span.field", candidateChip("Earlier edition: only copy-level facts are shown"))),
+      h("p.muted", "Only copy-level facts are shown for an earlier edition. Dates, court and other metadata of the current record may not describe this copy."));
+    if (tab.notice) add(head, h("div.notice", { role: "status" }, h("span", tab.notice),
+      tab.currentCopy ? h("button.btn.btn-small", { type: "button", onclick: () => openDocument({ docId: d.doc_id, page: 1, copy: null }, { newTab: true }) }, "Open current edition") : null));
+    return head;
+  }
   const j = d.judicial;
   const f = (label, value, field, mono) => value ? h("span.field", h("span.label", label), mono ? h("span.mono", value) : h("span", value), origin(d, field)) : null;
   const head = h("header.dochead",
@@ -388,7 +402,9 @@ function docHeader(d, tab) {
       f("Number", d.number, "number", true), j?.neutral_citation ? f("Neutral citation", j.neutral_citation, "neutral_citation", true) : null,
       (j?.case_numbers || []).length ? f("Case numbers", j.case_numbers.join(", "), "case_numbers", true) : null,
       (j?.reported_citations || []).length ? f("Reported", j.reported_citations.join("; "), "reported_citations", true) : null,
-      j?.judges?.length ? f("Judges", j.judges.join(", "), "judges") : null),
+      j?.judges?.length ? h("span.field", { title: j.judges_note || "" }, h("span.label", "Judges (crawler; may be incomplete)"), h("span", j.judges.join(", ")), origin(d, "judges")) : null,
+      j && !(j.case_numbers || []).length && (j.cover_case_numbers || []).length
+        ? h("span.field", { title: j.cover_case_numbers_note }, h("span.label", "Case numbers on p.1"), h("span.mono", j.cover_case_numbers.join(", ")), candidateChip(j.cover_case_numbers_note)) : null),
     h("div.meta",
       tab.copy && tab.copy !== d.copy.sha256
         ? h("span.field", h("span.label", "Cited copy"), h("span.mono", short(tab.copy)), h("span.muted", "(earlier edition held in this installation; the metadata above is the current edition's record)"))
@@ -699,7 +715,7 @@ function edgeCard(e, d) {
   const proposed = !["CITES_JUDGMENT", "CITES_PROVISION", "QUOTES_PROVISION"].includes(p.relation);
   return h("div.cand", h("div.cand-head", candidateChip(), h("span", rel), proposed ? h("span.chip.chip-warning", "Proposed, not verified") : null),
     h("div.cand-body", e.target_in_library ? h("a", { href: "#", onclick: (ev) => { ev.preventDefault(); openDocument({ docId: e.target_in_library.doc_id, page: 1 }, { newTab: true }); } }, e.target_in_library.title)
-      : h("span.mono", p.target?.raw_reference || p.target?.node_id || "unresolved"),
+      : h("span.mono", p.target?.raw_reference || "Unresolved reference"),
       e.anchors[0] ? h("div", h("a", { href: "#", onclick: (ev) => { ev.preventDefault(); goPage(e.anchors[0].page); } }, `Evidence on p.${e.anchors[0].page}`)) : null));
 }
 

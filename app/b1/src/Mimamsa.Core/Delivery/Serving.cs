@@ -100,14 +100,16 @@ public sealed class ServingState
         try { return _withdrawnDocs.Contains(docId); } finally { _guard.ExitReadLock(); }
     }
 
+    /// Withdrawal is per DOCUMENT: every copy of the doc_id (current and earlier editions) is fenced at once.
+    /// Byte-identical copies held under another doc_id are separate documents and are not affected.
     /// `durableCas` returns changed=false when the row was already withdrawn (idempotent, no epoch bump).
     /// `onFenced` runs after FENCE and before the caller acknowledges (used to cut in-flight egress).
-    public async Task<(long epoch, string digest, bool changed)> WithdrawAsync(string docId, string sha,
+    public async Task<(long epoch, string digest, bool changed)> WithdrawAsync(string docId, IReadOnlyCollection<string> shas,
         Func<Task<(long epoch, string digest, bool changed)>> durableCas, Action emitAdmit, Action<long, string> emitFence,
         Action? onFenced = null)
     {
         _guard.EnterWriteLock();
-        try { Pending = true; _withdrawn.Add(Key(docId, sha)); _withdrawnDocs.Add(docId); emitAdmit(); }
+        try { Pending = true; foreach (var sha in shas) _withdrawn.Add(Key(docId, sha)); _withdrawnDocs.Add(docId); emitAdmit(); }
         finally { _guard.ExitWriteLock(); }
         var (e, d, changed) = await durableCas();      // throws -> Pending stays true: fail closed
         _guard.EnterWriteLock();

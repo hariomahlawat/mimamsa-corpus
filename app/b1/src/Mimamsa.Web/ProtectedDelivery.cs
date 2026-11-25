@@ -124,8 +124,8 @@ public static class ProtectedDelivery
             default:
                 res.StatusCode = 400; return;  // missing, malformed, multi-range or oversized: no full-body fallback
         }
-        if (!slots.TryAcquire(ctx.Connection.Id)) { res.StatusCode = 503; res.Headers.RetryAfter = "1"; return; }
         if (!active.TryEnterSession(p.SessionId, cfg.MaxStreamsPerSession)) { res.StatusCode = 503; res.Headers.RetryAfter = "1"; return; }
+        if (!slots.TryAcquire(ctx.Connection.Id)) { active.LeaveSession(p.SessionId); res.StatusCode = 503; res.Headers.RetryAfter = "1"; return; }
         var copyKey = ServingState.Key(docId, copy.Value.sha);
         active.Add(copyKey, ctx.TraceIdentifier, ctx);
         active.Served(copyKey, ctx.Connection.Id);

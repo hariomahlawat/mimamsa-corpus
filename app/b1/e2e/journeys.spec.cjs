@@ -3,7 +3,7 @@
 // not implement, the test asserts what B1 does implement and the unimplemented part is recorded in
 // docs/architecture/b1/B1_PROTOTYPE.md with status "Not implemented" (never counted as passed).
 const { test, expect } = require("playwright/test");
-const { login, search, shot, a11yBasics } = require("./helpers.cjs");
+const { login, search, shot, a11yBasics, darkPixelsUnderFirstMark } = require("./helpers.cjs");
 
 // Tests run in file order on one worker (UX-09 withdraws the canary and therefore runs last).
 
@@ -65,8 +65,8 @@ test("UX-02 W-02 identifiers first, parsed chips, restorable deep link, malforme
 
 test("UX-03 W-03 open passage, hit navigation, legal citation and internal reference are separate", async ({ page }) => {
   await login(page);
-  await search(page, "OA 411/2021");
-  await page.locator(".hit").first().click();
+  await search(page, "furnish OR distinguish");
+  await page.locator(".hit", { hasText: "written charge beforehand" }).first().click();
   await expect(page.locator(".hitcount")).toContainText("hit 2 of 2");      // hits are in page order: p.6 quotation, p.7 operative
   await page.locator("#viewer").click();
   await page.keyboard.press("Shift+N");
@@ -310,4 +310,45 @@ test("UX-09 W-10 Admin withdraws the canary; deep link, search and citation all 
   }
   const reader = await user.request.get("/api/admin/overview");
   expect(reader.status()).toBe(403);
+});
+
+test("F05 a document identifier pins one representative passage; only passages containing it are labelled Identifier", async ({ page }) => {
+  await login(page);
+  await search(page, "2021 BRSYN 12");
+  await expect(page.locator(".hit .chip", { hasText: "Document match" }).first()).toBeVisible();
+  const idHits = page.locator(".hit", { has: page.locator(".chip", { hasText: /^Identifier$/ }) });
+  for (const t of await idHits.allTextContents()) expect(t).toContain("2021 BRSYN 12");
+  expect(await page.locator(".hit").count()).toBeLessThanOrEqual(4);
+});
+
+test("F04 search highlights on the original keep the glyphs legible", async ({ page }) => {
+  await login(page);
+  await search(page, "decision-maker records");
+  await page.locator(".hit").first().click();
+  await expect(page.locator(".pagewrap canvas")).toBeVisible();
+  await expect(page.locator(".textLayer mark").first()).toBeVisible();
+  expect(await darkPixelsUnderFirstMark(page)).toBeGreaterThan(10);
+});
+
+test("F01 withdrawal covers the earlier edition: cited copy and its byte ranges become unavailable", async ({ page, browser }) => {
+  const map = require(process.env.B1_SYN_MAP || require("path").join(process.env.B1_SYN_SITE, "..", "fixture_map.json"));
+  const old = map.j_allow_r1_copy;
+  const user = await browser.newPage();
+  await login(user);
+  const before = await user.request.get(`/api/v2/documents/syn-j-allow/copies/${old}/range`, { headers: { Range: "bytes=0-99" } });
+  expect(before.status()).toBe(206);
+  await login(page, "admin");
+  await page.getByRole("link", { name: "Administration" }).click();
+  await page.fill("#wd-doc", "syn-j-allow");
+  await page.fill("#wd-reason", "F01 regression: earlier edition must go too");
+  await page.getByRole("button", { name: "Withdraw…" }).click();
+  await expect(page.locator("dialog")).toContainText("including earlier editions");
+  await page.locator("dialog").getByRole("button", { name: "Withdraw" }).click();
+  await expect(page.locator("table.data")).toContainText("F01 regression");
+  await user.goto(`/cite/R13-syn-fixture-20261125-00000001/syn-j-allow/${old.slice(0, 12)}/6`);
+  await expect(user.locator("[data-cite-state]")).toHaveText("The cited copy is not available in this installation.");
+  const after = await user.request.get(`/api/v2/documents/syn-j-allow/copies/${old}/range`, { headers: { Range: "bytes=0-99" } });
+  expect(after.status()).toBe(404);
+  const meta = await user.request.get(`/api/v2/documents/syn-j-allow/pdf-meta?copy=${old}`);
+  expect(meta.status()).toBe(404);
 });

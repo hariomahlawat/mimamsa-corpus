@@ -223,8 +223,9 @@ mark { background: var(--highlight-search); color: var(--fg-primary); padding: 0
 .textLayer > :not(.markedContent), .textLayer .markedContent span:not(.markedContent) { z-index: 1; --font-height: 0; font-size: calc(var(--text-scale-factor) * var(--font-height)); --scale-x: 1; --rotate: 0deg; transform: rotate(var(--rotate)) scaleX(var(--scale-x)) scale(var(--min-font-size-inv)); }
 .textLayer .markedContent { display: contents; }
 .textLayer ::selection { background: rgba(0, 0, 255, .25); }
-.textLayer mark { color: transparent; background: var(--pdf-highlight-search); mix-blend-mode: multiply; padding: 0; border-radius: 0; }
-.textLayer.ocr mark { background: var(--pdf-highlight-ocr); outline: 1px dashed var(--pdf-highlight-ocr-outline); }
+/* Highlights never hide the original glyphs (review F04): translucent fill plus an underline, no blending tricks. */
+.textLayer mark { color: transparent; background: rgba(255, 214, 0, 0.30); box-shadow: inset 0 -2px 0 rgba(176, 120, 0, 0.9); padding: 0; border-radius: 0; }
+.textLayer.ocr mark { background: rgba(26, 95, 180, 0.16); box-shadow: none; outline: 1px dashed var(--pdf-highlight-ocr-outline); }
 .textview { max-width: 80ch; margin: 0 auto; padding: var(--space-6) var(--space-7) var(--space-8); font-family: var(--font-reading); font-size: var(--size-reading); line-height: var(--lh-reading); background: var(--bg-surface); min-height: 100%; }
 .textview .pg-divider { display: flex; align-items: center; gap: var(--space-4); font-family: var(--font-ui); font-size: var(--size-xs); color: var(--fg-secondary); margin: var(--space-7) 0 var(--space-4); text-transform: uppercase; letter-spacing: .04em; }
 .textview .pg-divider::after { content: ""; flex: 1; border-top: 1px solid var(--border-subtle); }

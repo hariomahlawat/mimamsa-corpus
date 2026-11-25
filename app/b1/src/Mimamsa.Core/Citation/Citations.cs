@@ -63,22 +63,24 @@ public static class CitationResolver
     static CiteResolution R(string state, string? copy = null, int? page = null, string? current = null) =>
         new(state, copy, page, current, Notices[state]);
 
-    /// Opens only the exact cited copy; never substitutes the current edition; withdrawn, restricted and not-held
-    /// copies give one indistinguishable state. `excluded(docId, sha)` is the current exclusion/withdrawal state.
-    public static CiteResolution Resolve(GenerationStore g, string sha12, string docId, int page, Func<string, string, bool> excluded)
+    /// Opens only the exact cited copy; never substitutes the current edition. `eligible(held)` is the ONE delivery
+    /// eligibility check of the serving process (published where held, document still in the active release and
+    /// visible, not withdrawn at document level, not restricted). Ineligible copies are removed BEFORE disambiguation
+    /// and give the one indistinguishable "not available" state. `currentVisible(docId)` names the current copy only
+    /// when it is visible.
+    public static CiteResolution Resolve(GenerationStore g, string sha12, string docId, int page, Func<HeldCopy, bool> eligible,
+                                         Func<string, string?> currentVisible)
     {
         var prefix = (sha12 ?? "").Trim().ToLowerInvariant();
         if (prefix.Length < 12 || prefix.Length > 64 || !prefix.All(Uri.IsHexDigit)) return R("CITED_COPY_UNAVAILABLE");
-        // excluded copies are removed before disambiguation, so an ambiguity never reveals an excluded copy
-        var matches = g.HeldCopies.Values.Where(h => h.Sha.StartsWith(prefix, StringComparison.Ordinal) && !excluded(h.DocId, h.Sha)).ToList();
-        if (matches.Count > 1) return R("AMBIGUOUS_REFERENCE");
+        var matches = g.HeldCopies.Values.Where(h => h.Sha.StartsWith(prefix, StringComparison.Ordinal) && eligible(h)).ToList();
+        if (matches.Select(m => m.Sha).Distinct().Count() > 1) return R("AMBIGUOUS_REFERENCE");
         if (matches.Count == 0) return R("CITED_COPY_UNAVAILABLE");
-        var h = matches[0];
-        if (h.DocId != docId) return R("REFERENCE_MISMATCH");
+        var h = matches.FirstOrDefault(m => m.DocId == docId);
+        if (h is null) return R("REFERENCE_MISMATCH");
         if (h.PageCount < 1 || page < 1 || page > h.PageCount) return R("CITED_PAGE_NOT_IN_COPY");
-        var current = g.Documents.TryGetValue(docId, out var d) ? d.CopySha : null;
+        var current = currentVisible(docId);
         if (current == h.Sha) return R("CITED_COPY_ELIGIBLE", h.Sha, page, h.Sha);
-        var currentOk = current is not null && !excluded(docId, current);
-        return R("CITED_COPY_ELIGIBLE_NOT_CURRENT", h.Sha, page, currentOk ? current : null);
+        return R("CITED_COPY_ELIGIBLE_NOT_CURRENT", h.Sha, page, current);
     }
 }

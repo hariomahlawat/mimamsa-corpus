@@ -415,7 +415,7 @@ def main():
     reg_sha = sha((REPO / "config/restricted_material.json").read_bytes())
     content = sha(json.dumps(sorted((s["doc_id"], s["sha256"]) for s in sample)).encode())[:8]
     release_id = f"R13-b1-sample-{stamp:%Y%m%d}-{content}"
-    manifest = json.loads((REPO / "app/contract/examples/release_manifest.example.json").read_text())
+    manifest = json.loads((REPO / "app/contract/examples/release_manifest.example.json").read_text(encoding="utf-8"))
     manifest.update(release_id=release_id, created_at=stamp.strftime("%Y-%m-%dT%H:%M:%SZ"), release_sequence=1)
     manifest["pinned"] = {"hf_repo": HF_REPO, "hf_revision": a.revision, "tools_commit": head[:12],
                           "artefact_commits": {"a2_outcome_v4": "9cdd5008", "a5_graph": "e15af208", "a4_statutory": head[:12]},
@@ -435,7 +435,7 @@ def main():
     clean = [{k: v for k, v in d.items()} for d in derived]
     write_bundle(bundle, manifest, documents=docs, derived=clean, candidates=cands, extra_files=extra,
                  signing_key=key, public_key_raw=pub)
-    (work / "bundle" / f"{release_id}.dev-public-key.hex").write_text(pub.hex())
+    (work / "bundle" / f"{release_id}.dev-public-key.hex").write_text(pub.hex(), encoding="utf-8")
     del key  # disposable development key: never persisted
 
     site = work / "site"
@@ -470,7 +470,7 @@ def main():
         "documents": sorted(sample, key=lambda s: s["doc_id"]),
     }
     a.manifest_out.parent.mkdir(parents=True, exist_ok=True)
-    a.manifest_out.write_text(json.dumps(out, indent=1, sort_keys=True) + "\n")
+    a.manifest_out.write_text(json.dumps(out, indent=1, sort_keys=True) + "\n", encoding="utf-8")
     return 0 if res.activated or res.noop else 1
 
 

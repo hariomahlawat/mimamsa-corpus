@@ -99,6 +99,22 @@ public static partial class Identifiers
         foreach (Match m in NeutralRx().Matches(head)) yield return NormCitation(m.Value);
     }
 
+    /// Raw case-number strings printed near the top of page 1 (for display as unverified candidates).
+    public static IEnumerable<string> CoverCaseNumberStrings(string page1)
+    {
+        var head = page1.Length > 1500 ? page1[..1500] : page1;
+        foreach (Match m in CaseRx().Matches(head))
+        {
+            var t = NormCaseType(m.Groups["t"].Value);
+            if (t.Length is > 0 and <= 24 && !Regex.IsMatch(t, "^(s|sec|section|r|rule|rules|act|acts|order|and|or|not)$"))
+            {
+                var v = Regex.Replace(m.Value.Trim(), @"\s+", " ");
+                var lf = Regex.Match(v, @"\b(?:Civil|Criminal|Writ|Original|Special|Transfer|Miscellaneous|Letters)\b.*", RegexOptions.IgnoreCase);
+                yield return lf.Success ? lf.Value : v;
+            }
+        }
+    }
+
     /// Does a passage state or refer to provision `base(sub)`? Returns 0 (no), 1 (a reference such as "section 69"),
     /// 2 (a heading line "69. Civil offences." in a statute) or 3 (a heading followed by the provision text "69. ...—").
     /// Headings count only in statute documents; "Section 117" never matches 17; a sub-clause, when given, must match.

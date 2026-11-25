@@ -47,7 +47,7 @@ public static partial class Api
         app.MapPost("/api/logout", async (HttpContext ctx, AppServices s) =>
         {
             var p = await User(ctx, s);
-            if (p is not null && !CsrfOk(ctx, p)) return Json(new { error = "csrf" }, 403);
+            if (p is not null && (!CsrfOk(ctx, p) || !SameOrigin(ctx))) return Json(new { error = "csrf" }, 403);
             await s.Identity.LogoutAsync(ctx.Request.Cookies[AppServices.SessionCookie]);
             ctx.Response.Cookies.Delete(AppServices.SessionCookie, new CookieOptions { Path = "/", SameSite = SameSiteMode.Strict, Secure = s.SecureCookies });
             ctx.Response.Headers["Clear-Site-Data"] = "\"cache\", \"storage\"";
@@ -136,10 +136,11 @@ public static partial class Api
         {
             var p = await User(ctx, s);
             if (p is null) return Json(new { error = "auth" }, 401);
-            var r = CitationResolver.Resolve(s.Generation, sha, doc, page, (d, h) => s.State.IsWithdrawn(d, h) || s.Generation.Documents.TryGetValue(d, out var dd) && dd.CopySha == h && s.VisibleDocument(d) is null);
-            var current = r.CurrentCopy is not null && r.CurrentCopy != r.Copy && s.VisibleDocument(doc) is not null ? r.CurrentCopy : null;
+            var r = CitationResolver.Resolve(s.Generation, sha, doc, page, s.Eligible.HeldEligible, s.Eligible.CurrentVisibleCopy);
+            var held = r.Copy is null ? null : s.Generation.HeldCopies.GetValueOrDefault(r.Copy + "|" + doc);
             return Json(new { state = r.State, notice = r.Notice, copy = r.Copy, page = r.Page, doc_id = r.Copy is null ? null : doc,
-                              current_copy = r.State == "CITED_COPY_ELIGIBLE_NOT_CURRENT" ? current : null,
+                              current_copy = r.State == "CITED_COPY_ELIGIBLE_NOT_CURRENT" ? r.CurrentCopy : null,
+                              copy_pages = held?.PageCount, first_release = held?.FirstRelease,
                               text_available = r.State == "CITED_COPY_ELIGIBLE" });
         });
 
@@ -168,26 +169,25 @@ public static partial class Api
             var p = await User(ctx, s);
             if (p is null) return Json(new { error = "auth" }, 401);
             if (!p.IsAdmin) return Json(new { error = "This action is for Admins." }, 403);
-            if (!CsrfOk(ctx, p)) return Json(new { error = "csrf" }, 403);
+            if (!CsrfOk(ctx, p) || !SameOrigin(ctx)) return Json(new { error = "csrf" }, 403);
             JsonObject? body;
             try { body = (await JsonNode.ParseAsync(ctx.Request.Body))?.AsObject(); } catch { body = null; }
             var docId = body?["doc_id"]?.GetValue<string>() ?? ""; var reason = (body?["reason"]?.GetValue<string>() ?? "").Trim();
             if (reason.Length < 3 || reason.Length > 500) return Json(new { error = "A reason of 3 to 500 characters is required." }, 400);
             if (!s.Generation.Documents.TryGetValue(docId, out var d)) return Json(new { error = "unknown_document" }, 404);
-            var state = await s.Policy.CopyStateAsync(docId, d.CopySha);
-            if (state is null) return Json(new { error = "unknown_copy" }, 404);
-            if (state == "withdrawn") return Json(new { status = "already_withdrawn", changed = false });
+            var copies = (await s.Policy.CopiesOfAsync(docId)).Append(d.CopySha).Distinct().ToList();
+            if (s.State.IsDocWithdrawn(docId)) return Json(new { status = "already_withdrawn", changed = false });
             var op = "withdraw-" + Guid.NewGuid().ToString("N")[..8];
             int reset = 0;
-            var (epoch, digest, changed) = await s.State.WithdrawAsync(docId, d.CopySha,
-                () => s.Policy.WithdrawCasAsync(docId, d.CopySha, op, reason, p.UserId),
+            var (epoch, digest, changed) = await s.State.WithdrawAsync(docId, copies,
+                () => s.Policy.WithdrawDocCasAsync(docId, d.CopySha, op, reason, p.UserId),
                 () => DeliveryTrace.Emit("admit", "policy_probe", new { operation = op, copy = d.CopySha, monotonic_ms = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() }),
                 (e, dg) => DeliveryTrace.Emit("fence", "witness", new { operation = op, copy = d.CopySha, epoch = e, digest = dg }),
-                () => { reset = active.ResetAll(Mimamsa.Core.Delivery.ServingState.Key(docId, d.CopySha)); });
+                () => { foreach (var c in copies) reset += active.ResetAll(Mimamsa.Core.Delivery.ServingState.Key(docId, c)); });
             DeliveryTrace.Flush();
             await s.Identity.AuditAsync(p.UserId, "withdraw", docId, $"epoch {epoch}");
-            return Json(new { status = "withdrawn", changed, epoch, reset_streams = reset,
-                              effect = "Removed from search, documents, citations and original delivery for every user, effective now." });
+            return Json(new { status = "withdrawn", changed, epoch, reset_streams = reset, copies_withdrawn = copies.Count,
+                              effect = "Every copy of this document (current and earlier editions) is removed from search, documents, citations and original delivery for every user, effective now. Byte-identical copies held under another document id are separate documents and are not affected." });
         });
     }
 
@@ -304,6 +304,15 @@ public static partial class Api
         return d is null || s.VisibleDocument(d.DocId) is null ? null : new { doc_id = d.DocId, title = d.Title };
     }
 
+    /// Users never see internal node ids (they can name copies by hash, including withdrawn ones): review F02.
+    static JsonObject UserPayload(JsonObject p)
+    {
+        var o = p.DeepClone().AsObject();
+        o.Remove("source_node");
+        if (o["target"] is JsonObject t) { t.Remove("node_id"); }
+        return o;
+    }
+
     static object CandidateDto(Candidate c, AppServices s) => new
     {
         candidate_id = c.CandidateId, type = c.Type, status = c.Status, label = "Candidate (automated, not verified)",
@@ -316,7 +325,7 @@ public static partial class Api
         },
         evaluated = c.EvaluationRef is not null,
         extractor = new { name = c.Extractor["name"]?.GetValue<string>(), version = c.Extractor["version"]?.GetValue<string>(), commit = c.Extractor["artefact_commit"]?.GetValue<string>() },
-        payload = c.Payload,
+        payload = UserPayload(c.Payload),
         anchors = c.Anchors.Select(a => new { copy = a.CopySha, page = a.Page, page_only = a.PageOnly, passage_id = a.PassageId,
                                              extractor_quote = a.Quote, quote_note = a.Quote is null ? null : "Text quoted by the extractor; open the original page to read the source." }),
         target_in_library = c.Type == "graph_edge" ? TargetLink(c, s) : null,
@@ -329,6 +338,7 @@ public static partial class Api
         // A4 families are linked to this document only through evidence that resolves to this verified copy; every
         // version of a linked family is then listed (so a later omission version without a held copy still shows).
         var families = s.Generation.ProvisionVersions.Where(v => v.Evidence.Any(e => e.DocId == d.DocId)).Select(v => v.Family).ToHashSet();
+        // A4 'edition' text and HF-free evidence never name a withdrawn copy: redaction below uses the same eligibility.
         var versions = s.Generation.ProvisionVersions.Where(v => families.Contains(v.Family)).ToList();
         var incoming = Incoming(s).GetValueOrDefault(d.DocId) ?? new();
         return new
@@ -344,6 +354,9 @@ public static partial class Api
             {
                 court = d.Judicial.Court, bench = d.Judicial.Bench, case_numbers = d.Judicial.CaseNumbers, neutral_citation = d.Judicial.NeutralCitation,
                 reported_citations = d.Judicial.ReportedCitations, petitioner = d.Judicial.Petitioner, respondent = d.Judicial.Respondent, judges = d.Judicial.Judges,
+                judges_note = "Judges as recorded by the crawler; the list may be incomplete (review F06: SC records often hold only the first judge). Read the bench from the original.",
+                cover_case_numbers = d.Judicial.CaseNumbers.Count == 0 && d.Pages.TryGetValue(1, out var p1) ? Mimamsa.Core.Search.Identifiers.CoverCaseNumberStrings(p1.Text).Distinct().Take(6).ToArray() : Array.Empty<string>(),
+                cover_case_numbers_note = "Printed near the top of page 1; extracted automatically, not verified (candidate).",
             },
             field_origin = d.FieldOrigin,
             status_axes = Axes.Select(a => new
@@ -372,7 +385,9 @@ public static partial class Api
                 version_id = v.VersionId, family = v.Family, provision = v.Provision, version_kind = v.VersionKind, change_summary = v.ChangeSummary,
                 effective_from = new { status = v.EffectiveFromStatus, date = v.EffectiveFromDate, reported_date = v.ReportedDate },
                 effective_to_status = v.EffectiveToStatus, currency = v.CurrencyStatus, determination_state = v.DeterminationState,
-                evidence = v.Evidence.Select(e => new { role = e.Role, copy = e.Sha, doc_id = e.DocId, page = e.Page, edition = e.Edition, resolution = e.Resolution }),
+                evidence = v.Evidence.Select(e => e.DocId is not null && s.VisibleDocument(e.DocId) is null
+                    ? new { role = e.Role, copy = (string?)null, doc_id = (string?)null, page = (int?)null, edition = (string?)null, resolution = "COPY_NOT_AVAILABLE_IN_THIS_INSTALLATION" }
+                    : new { role = e.Role, copy = e.DocId is null ? null : e.Sha, doc_id = e.DocId, page = e.Page, edition = e.Edition, resolution = e.Resolution }),
                 label = "Temporal version candidate (A4): AUTOMATED_CANDIDATE_NOT_VERIFIED. Temporal chain not established.",
                 linked_by = v.Evidence.Any(e => e.DocId == d.DocId) ? "evidence in this copy" : "same provision family as evidence in this copy",
             }),
