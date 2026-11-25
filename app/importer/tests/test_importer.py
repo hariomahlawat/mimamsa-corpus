@@ -584,3 +584,24 @@ def test_n4_unreadable_store_on_latched_site_refuses_import(hn, tmp_path):
     (site / "exclusions" / "ACCEPTED.json").write_text("{not json")
     with pytest.raises(ImporterError):
         hn.run(hn.bundle(), site)
+
+
+def test_n5_crash_between_latch_and_acceptance_leaves_site_latched(hn, tmp_path, monkeypatch):
+    """N5: the latch is fsynced before ACCEPTED; a crash in between, then deleting the store, cannot re-admit."""
+    site = _active_site(hn, tmp_path, "none")
+    import os as _os
+    orig = _os.replace
+
+    def crash_on_accept(src, dst):
+        if str(dst).endswith("ACCEPTED.json"):
+            raise _Crash("before acceptance")
+        return orig(src, dst)
+    monkeypatch.setattr(_os, "replace", crash_on_accept)
+    with pytest.raises(Exception):
+        _store_with(tmp_path, site, withdrawals=[{"doc_id": DOC_ID, "reason": "withdrawn"}])
+    monkeypatch.setattr(_os, "replace", orig)
+    assert (site / "EXCLUSION_LATCH").exists() and not (site / "exclusions" / "ACCEPTED.json").exists()
+    shutil.rmtree(site / "exclusions")
+    assert not servable(site, "documents", DOC_ID, exclusions=None)
+    with pytest.raises(ImporterError):
+        hn.run(hn.bundle(), site)

@@ -166,8 +166,8 @@ class ExclusionStore:
         self._fsync_write(tmp, json.dumps(record, sort_keys=True).encode())
         if (self._read_accepted() or {}).get("sequence", 0) != (acc or {}).get("sequence", 0):
             raise ExclusionError("compare-and-set failed at acceptance")
+        self._write_latch(record["sequence"])  # latch first (fsynced): no crash window can leave acceptance unlatched
         os.replace(tmp, self.accepted)
-        self._write_latch(record["sequence"])
         return self._ack(record)
 
     def _write_latch(self, sequence: int):
@@ -176,6 +176,15 @@ class ExclusionStore:
         latch = self.dir.parent / "EXCLUSION_LATCH"
         if not latch.exists():
             self._fsync_write(latch, json.dumps({"latched": True, "first_sequence": sequence}).encode())
+            import os
+            try:  # make the new directory entry durable before the acceptance record is published
+                fd = os.open(self.dir.parent, os.O_RDONLY)
+                try:
+                    os.fsync(fd)
+                finally:
+                    os.close(fd)
+            except OSError:
+                pass
 
     @staticmethod
     def _ack(record):
