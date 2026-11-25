@@ -59,7 +59,7 @@ def acq_rows(matrix, recs):
         rows.append({"request_id": f"A4-ACQ-{len(rows) + 1:03d}", "priority": pri, "request_type": typ, "target_instrument": target, "why_needed": why,
                      "closes": closes, "dependent_citation_items": it, "dependent_version_records": ve, "candidate_source": src, "url": url,
                      "expected_md5": md5, "expected_bytes": by, "prior_request_refs": ";".join(x for x in [aid, refs] if x),
-                     "access_constraints": access, "post_fetch_checks": checks, "status": "REQUESTED_FOR_A7_NOT_EXECUTED"})
+                     "access_constraints": access, "post_fetch_checks": checks, "status": "QUEUED_FOR_A7"})
 
     add("P1", "DISCOVERY_THEN_ACQUIRE", "S.R.O. 258 dated 27-11-2002 (alleged Army Rules amendment; possibly an Explanation to r.22)",
         "Hard blocker for every r.22 item (29 Army Rules items incl. tier A hearing-of-charge records); r.22 version chain cannot be closed",
@@ -269,7 +269,7 @@ def md(rows, acq):
     for r in rows:
         if not r["category"].startswith("PROMOTION"):
             out.append(f"* **{r['packet_id']} {r['category']}: {r['subject']}.** {r['exact_question']} Readings: {r['competing_readings']}. Decision: {r['decision_required']}. Refs: {r['cross_refs']}.")
-    out += ["", f"Acquisition requests for A7: {len(acq)} rows in `ACQUISITION_REQUESTS_A4.csv` (none executed).", ""]
+    out += ["", f"Acquisition requests for A7: {len(acq)} rows in `ACQUISITION_REQUESTS_A4.csv` (queued only; nothing fetched).", ""]
     return "\n".join(out).encode()
 
 

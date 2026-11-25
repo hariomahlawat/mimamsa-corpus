@@ -111,7 +111,7 @@ only government compilations are held.
 
 ## 3. Gaps and acquisition requests for A7
 
-`outputs/ACQUISITION_REQUESTS_A4.csv`: 45 requests, none executed (status `REQUESTED_FOR_A7_NOT_EXECUTED`). Types: public
+`outputs/ACQUISITION_REQUESTS_A4.csv`: 45 requests queued for A7; nothing fetched (status `QUEUED_FOR_A7`). Types: public
 acquisition of pinned archive.org candidates (MD5 and size from the WS-A ACQ-03 register), discovery, registration of
 copies already held, and custodian requests. Highest priority: S.R.O. 258/2002 (29 items); the source of r.15
 "[or Military Secretary]" (6 items); E-7/1960; post-06-06-2022 instruments; the Army Act 1950 as enacted (190 items) and
@@ -176,6 +176,7 @@ any output.
 | C13A4-v1.1 | C13PE-1993-16 check_note records the pasted-fragment scan artefact | R-10 |
 | C13A4-v1.2 | NOT_YET_IN_FORCE uses the earliest possible start of any version (stated retrospective dates included): r.16A 04-06-1979 to 27-07-1979 returns v03 | N-01 |
 | C13A4-v1.2 | Resolver reason keeps the inferred-masthead qualifier | N-02 |
+| C13A4-v1.3 | Repository provenance gate: acquisition status `QUEUED_FOR_A7`; transition-link rows carry the WS-A check id and render hash (WSA-PIC-27) behind IMAGE_CHECKED | gate ACQ-1, IMG-2 |
 
 Review records: `reviews/review_c13_a4_5db80dfc.md`, `_findings.csv` and `reviews/confirmation_c13_a4_fa8715fa*` (verdict ACCEPT WITH CONDITIONS; all 21 page
 readings confirmed and all 10 promotions upheld; R-09, R-11 to R-13 informational).

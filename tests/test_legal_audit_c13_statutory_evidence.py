@@ -92,7 +92,7 @@ def test_acquisition_requests_cover_named_gaps_and_are_not_executed():
     text = " ".join(r["target_instrument"] for r in q)
     for s in ("S.R.O. 258", "Military Secretary", "S.O. 14(E)", "S.O. 848(E)", "S.R.O. 120", "Tribunals Reforms Act 2026"):
         assert s in text, s
-    assert {r["status"] for r in q} == {"REQUESTED_FOR_A7_NOT_EXECUTED"}
+    assert {r["status"] for r in q} == {"QUEUED_FOR_A7"}
     assert "aftjabalpur" not in json.dumps(q).replace("never aftjabalpur.in", "")
 
 
