@@ -285,6 +285,15 @@ try:
     RESULTS["scenarios"]["C_killed_connections"] = {"trials": trials, "uncertain_count": sum(t["mid_state"] == "UNCERTAIN" for t in trials)}
     check("killed_connection_charge_retained_until_termination_then_drained", ok, uncertain=sum(t["mid_state"] == "UNCERTAIN" for t in trials), n=len(trials))
     check("killed_connection_never_refunded_as_zero_transfer", not rows("state = 'RELEASED'"), released=len(rows("state = 'RELEASED'")))
+    # deterministic trial: test-only hook holds slice 1 accepted-but-unflushed while the client resets
+    sd = socket.socket(); sd.connect(("127.0.0.1", A.port))
+    sd.sendall((f"GET {RANGE('doc-big', BIG_SHA)} HTTP/1.1\r\nHost: x\r\nAuthorization: Bearer tok-alice\r\nX-Mimamsa-Test-Pause: before-flush\r\nRange: bytes=900000-1031071\r\n\r\n").encode())
+    time.sleep(0.4)
+    sd.setsockopt(socket.SOL_SOCKET, socket.SO_LINGER, struct.pack("HH" if os.name == "nt" else "ii", 1, 0)); sd.close()
+    time.sleep(2.5)
+    with psycopg.connect(A.db) as c_:
+        det_unc = c_.execute("SELECT count(*) FROM credit_reservations WHERE range_start = 900000 AND reason LIKE 'uncertain:%%'").fetchone()[0]
+    check("F05_deterministic_uncertain_before_flush_hook", det_unc == 1, uncertain=det_unc)
     with psycopg.connect(A.db) as c_:
         unc_rows = c_.execute("SELECT count(*) FROM credit_reservations WHERE reason LIKE 'uncertain:%%'").fetchone()[0]
     RESULTS["scenarios"]["C_killed_connections"]["uncertain_rows_total"] = unc_rows
