@@ -1,0 +1,87 @@
+{
+  "oracle": "Serving \u00A710 synthetic credit oracle",
+  "allPass": true,
+  "results": [
+    {
+      "name": "two_simultaneous_64KiB_contenders_only_one_reserves",
+      "pass": true,
+      "detail": {
+        "trials": 200,
+        "oneWon": 200,
+        "bothWon": 0,
+        "noneWon": 0
+      }
+    },
+    {
+      "name": "partial_accept_16KiB_charges_16_releases_48",
+      "pass": true,
+      "detail": {
+        "charged": 16384,
+        "reserved": 0,
+        "second64Reserved": false,
+        "then48Reserved": true
+      }
+    },
+    {
+      "name": "duplicate_settlement_is_noop",
+      "pass": true,
+      "detail": {
+        "before": {
+          "Item1": 65536,
+          "Item2": 49152,
+          "Item3": 16384
+        },
+        "after": {
+          "Item1": 65536,
+          "Item2": 49152,
+          "Item3": 16384
+        }
+      }
+    },
+    {
+      "name": "drain_after_termination_releases_charge",
+      "pass": true,
+      "detail": {
+        "drained": 1,
+        "charged": 0,
+        "reserved": 49152
+      }
+    },
+    {
+      "name": "uncertain_retains_full_reservation_across_restart",
+      "pass": true,
+      "detail": {
+        "chargedBefore": 65536,
+        "oneByteReserved": false,
+        "chargedAfterRestart": 65536,
+        "reconciledTooEarly": 0
+      }
+    },
+    {
+      "name": "connection_cap_two_contenders_only_one_reserves",
+      "pass": true,
+      "detail": {
+        "trials": 100,
+        "one": 100,
+        "both": 0
+      }
+    },
+    {
+      "name": "stress_no_overcommit_no_negative_and_balances_to_zero",
+      "pass": true,
+      "detail": {
+        "reserved": 2371,
+        "denied": 7229,
+        "dbErrors": 0,
+        "samples": 101941,
+        "maxSiteOutstanding": 524279,
+        "siteCap": 524288,
+        "violations": 0,
+        "finalReserved": 0,
+        "finalCharged": 0,
+        "openReservations": 0,
+        "errCodes": {}
+      }
+    }
+  ]
+}
