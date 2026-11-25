@@ -1,18 +1,42 @@
 # C13-A3: holdings and legal-proposition extraction, redesign (`c13-holdings`)
 
+> ## POST-FREEZE ADDENDUM (2026-11-25): blind GA4 result and exposure disclosure
+>
+> - **Frozen at `a520aa3a`** as `c13-holdings/1.0.0` (`FREEZE.json`, immutable; post-freeze notes in `FREEZE_ADDENDUM.md`). Extractor, model and predictions are unchanged since the freeze.
+> - **H-HOLD-C13 is NOT SCORABLE under protocol v1.1, and A3 has no protocol verdict in C13.** Inter-coder span F1 is 0.566, below the 0.6 threshold (s.4 item 6). Annotation also began without a substantive guideline (PD-01). Source: C13-EVAL `RESULTS_C13.md` s.1.3, s.4.2, s.9 and D-7.
+> - **Descriptive only, under a protocol deviation:**
+>   - holding precision (blind adjudication of 100 sampled predictions) 0.365 [0.241, 0.503];
+>   - holding recall 0.517 [0.424, 0.608];
+>   - reference-match precision lower bound 0.156.
+>   - Most gold holdings (113 of 183) are a single AI adjudicator's coding under a definition written after the freeze.
+>   - Most common false positives, out of 63 incorrect:
+>     - fact-findings 26;
+>     - quoted precedent 11;
+>     - operative lines 9;
+>     - other 7;
+>     - procedural or narrative 5.
+> - **The milestone (≥80% precision, ≥60% recall) is not shown to be met**, and the descriptive precision is well below it. C11 F06/F07 closure stays open.
+> - **Re-annotation of H-HOLD under an independent, versioned holdings guideline is required** before any next A3 evaluation (RESULTS D-12). The coordinator has since recorded H-HOLD-C13 as spent, so a fresh draw is required (decision D-HHOLD on the eval branch).
+> - **Superseded, development evidence only:** every development estimate below, including the "about 50%" precision, the 51-60% recall, the in-sample dev figures and the 6.4% opinion misattribution. They are pre-freeze developer estimates and are superseded by the blind descriptive results above. The 6.4% figure comes from in-sample, developer-built gold; GA4 did not measure attribution.
+> - **Holdout exposure (review finding A3-02).** The developer self-check (`selfcheck/SELFCHECK_SAMPLE.csv`) and the opinion gold (`gold/OPINION_GOLD_C13.csv`) used text from **15 judgments that belong to the H-OUT and/or H-REL holdouts**: 9 H-OUT, 10 H-REL, 4 in both. The list is in `exclusions/DEV_EXPOSURE_HOUT_HREL.csv`. The developer read and labelled those excerpts, and vetoes were written from the self-check errors. "Unseen" in the text below means only "outside A3 training and outside H-HOLD".
+>   - No H-HOLD judgment appears in any A3 development or training artifact.
+>   - The A3 author is a separate instance from the A2 and A5 authors, so no contamination of their predictions follows.
+>   - The exposure still needs registration in the A0 exposure register, which belongs to the coordinator or A0.
+> - **Next version (review A2-06):** read restricted material from `config/restricted_material.json` rather than the hardcoded RM-001 sha in `c13_corpus.py`. There is no current leak, and the frozen tools are not changed.
+
 **Status: FROZEN as `c13-holdings/1.0.0`** after A0 acceptance (`FREEZE.json`: hashes, ancestry check, author statement). Frozen H-HOLD-C13 predictions: `frozen_predictions/PRED_H-HOLD-C13.csv` (113 items, 837 rows), to be scored by an independent evaluator.
 Every item is `AUTOMATED_CANDIDATE_NOT_VERIFIED` / `NOT_VERIFIED_RATIO_NOT_DETERMINED`. No item is a verified ratio. No overruling or other treatment is inferred. This is not legal validation.
 
-## Headline (read this first)
+## Pre-freeze development headline (SUPERSEDED, development evidence only; see the addendum above)
 
 | | c12-holdings/1.0.0 | c13 (this work) | Basis |
 | --- | --- | --- | --- |
-| Holding precision | 41.7% (blind, adjudicated) | **about 50% (20/40, Wilson 35-65%)** | Developer hand-check of a seeded sample of 40 holdings from 158 SC-scope judgments **not** used in training and not in the fresh set. Taken before the last veto fixes. Not independent |
+| Holding precision | 41.7% (blind, adjudicated) | **about 50% (20/40, Wilson 35-65%)** | Developer hand-check of a seeded sample of 40 holdings from 158 SC-scope judgments outside training and outside H-HOLD. 15 of them are H-OUT/H-REL holdout judgments (see the addendum). Superseded by GA4 descriptive precision 0.365. Taken before the last veto fixes. Not independent |
 | Holding recall | 29.3% (blind) | **about 51-60%** | Out-of-fold (grouped 5-fold by judgment) recall of C12-reference and C11-GT holdings at T = 0.6 / 0.5 (`dev_eval/`) |
 | Holding recall, in-sample full fit | n/a | 79.7% (C12 ref), 91.0% (C11 GT) | Inflated: the model was trained on these rows |
-| Opinion misattribution (items presented as the Court's holding that are from a dissent, minority or split opinion) | 32.6% (159/488) | **6.4% (6/94)** | Developer-built gold for 15 multi-opinion judgments (in-sample) |
+| Opinion misattribution (items presented as the Court's holding that are from a dissent, minority or split opinion) | 32.6% (159/488) | 6.4% (6/94), in-sample and developer gold; not measured by GA4 | Developer-built gold for 15 multi-opinion judgments (in-sample) |
 
-**The interim milestone (≥80% precision and ≥60% recall on the fresh set) is not expected to be met.** The best honest estimates are about 50% precision and 50-60% recall. The independent evaluation on H-HOLD-C13 is the only valid test.
+**The interim milestone (≥80% precision and ≥60% recall on the fresh set) was not expected to be met.** The pre-freeze developer estimates were about 50% precision and 50-60% recall. They are superseded: the blind GA4 evaluation found descriptive precision 0.365 and recall 0.517, with H-HOLD not scorable under the protocol.
 
 ## Architecture
 
@@ -86,9 +110,9 @@ Out-of-fold sentence-level estimate (vetoes applied; opinion floor not emulated)
 
 The proxy precision scores only selected sentences that match a labelled row (about 24%). The developer hand-check below is the better precision estimate.
 
-### Developer hand-check on unseen judgments (`selfcheck/SELFCHECK_SAMPLE.csv`)
+### Developer hand-check on judgments outside training and H-HOLD (`selfcheck/SELFCHECK_SAMPLE.csv`; superseded)
 
-- 40 holdings, seed `C13-A3-SELFCHECK-UNSEEN`, drawn from 1,397 holdings in 158 SC-scope judgments that are outside training and the fresh set. Labelled under the C12 adjudication rule (court's own determination; operative lines, recitals, restatements and reasoning steps are not holdings).
+- 40 holdings, seed `C13-A3-SELFCHECK-UNSEEN`, drawn from 1,397 holdings in 158 SC-scope judgments that are outside training and H-HOLD. 15 of those judgments belong to H-OUT/H-REL (`exclusions/DEV_EXPOSURE_HOUT_HREL.csv`). Labelled under the C12 adjudication rule (court's own determination; operative lines, recitals, restatements and reasoning steps are not holdings).
 - **20/40 correct (50%)**. Errors:
   - operative directions or disposals: 6;
   - non-court material (precedent or lower-forum report, undetected statute quotation): 5;
@@ -104,7 +128,7 @@ Gold covers 15 multi-opinion SC judgments, built by the developer (`gold/OPINION
 
 - Opinions located: 47/48.
 - Binding class (court-side vs dissent/minority/split) correct: 39/47.
-- Item level: author correct 86.2% (C12 83.2%); presented as the Court's holding although the gold opinion is dissent, minority or split: **6.4% (6/94)**, against C12 32.6% (159/488).
+- Item level: author correct 86.2% (C12 83.2%); presented as the Court's holding although the gold opinion is dissent, minority or split: 6.4% (6/94; in-sample, developer gold, superseded development evidence; not measured by GA4), against C12 32.6% (159/488).
 
 Remaining errors:
 - minority opinions with no textual dissent cue (Supriyo CJI/Kaul; Bommai Verma/Ahmadi; demonetisation Nagarathna J; Sriharan Lalit J);
@@ -150,8 +174,8 @@ Suggested scoring for the evaluator: use `item_type == "holding"` for holdings. 
 
 ## Known limitations
 
-- Precision is the main shortfall, at about 50% estimated. Operative directions phrased as entitlements ("shall be entitled ..."), statute text that is not marked as a quotation, and recitals remain the largest error sources.
+- Precision is the main shortfall: blind descriptive 0.365 (pre-freeze developer estimate about 50%, superseded). Operative directions phrased as entitlements ("shall be entitled ..."), statute text that is not marked as a quotation, and recitals remain the largest error sources.
 - The holding labels are positive-unlabelled and come from single annotators. The QoL head is weak (out-of-fold AP 0.05) because reference QoL excerpts are often anchor sentences rather than questions.
 - Majority determination in large benches is heuristic, and minority opinions without a textual cue are missed.
 - The rules and vetoes were written while reading the spent sets and the self-check sample. All dev figures are in-sample.
-- C11 F06 (proposition recall) and F07 (origin labels) are addressed in design. Closure needs the independent fresh-set measurement.
+- C11 F06 (proposition recall) and F07 (origin labels) are addressed in design but stay **open**. H-HOLD was not scorable in C13, and the descriptive precision of 0.365 does not support closure.
