@@ -1,0 +1,482 @@
+From 899c030ecc544a76278d3b52bffe5d24bb3a3c2a Mon Sep 17 00:00:00 2001
+From: a7 <a7@local>
+Date: Wed, 25 Nov 2026 10:24:59 +0000
+Subject: [PATCH 3/3] C13 A7 proposed revision: exact-host allow-list (no
+ wildcards), item-scoped redirect_scopes, pinned extra CA for chain building
+ (partial chain cleared), From header opt-in, fetch-time integrity from PR #17
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01U1on2TzucdKCNmpKvBZK7J
+---
+ config/ca/egazette_intermediates.pem | 62 +++++++++++++++++++++++
+ crawler/config.py                    | 45 +++++++++++++++--
+ crawler/fetch.py                     | 40 +++++++++++++++
+ crawler/http.py                      | 39 ++++++++++++++-
+ tests/test_crawler_c13_hardening.py  | 75 ++++++++++++++++++++++++++++
+ tests/test_fetch_integrity.py        | 72 ++++++++++++++++++++++++++
+ tests/test_indiacode.py              |  6 ++-
+ 7 files changed, 331 insertions(+), 8 deletions(-)
+ create mode 100644 config/ca/egazette_intermediates.pem
+ create mode 100644 tests/test_crawler_c13_hardening.py
+ create mode 100644 tests/test_fetch_integrity.py
+
+diff --git a/config/ca/egazette_intermediates.pem b/config/ca/egazette_intermediates.pem
+new file mode 100644
+index 00000000..32aceeb9
+--- /dev/null
++++ b/config/ca/egazette_intermediates.pem
+@@ -0,0 +1,62 @@
++-----BEGIN CERTIFICATE-----
++MIIE2zCCAsOgAwIBAgIRAKICU/FfJpHAXcHOE7m8yk4wDQYJKoZIhvcNAQELBQAw
++LjELMAkGA1UEBhMCVVMxDTALBgNVBAoTBElTUkcxEDAOBgNVBAMTB1Jvb3QgWVIw
++HhcNMjUwOTAzMDAwMDAwWhcNMjgwOTAyMjM1OTU5WjAzMQswCQYDVQQGEwJVUzEW
++MBQGA1UEChMNTGV0J3MgRW5jcnlwdDEMMAoGA1UEAxMDWVIxMIIBIjANBgkqhkiG
++9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoVi8X2xCYgMXvJxNPKp/oF13UMgmPABB07VC
++LNDtoXmt9luEZNJSBV10VyT1Pz6LD8Zq1d2gc43WNl1AdRrj4sEnazbOiz0nPpmG
++Bp2hui49oZtDIY6wdKeZAi5BbNU20CH6RSBBMLSQ9cXrH8dxdv4PAJ45ssGML68U
++SE3BsjC2a6cAN9L5CgXVIQi5tfNiTPoFZZ3S0OlXqLmmtdV95udWAb5b6e/F49Di
++CsH0Y00Ag72BVIb1hzynmKe+X0mERBTtsb3BwmpV9ipeBjMLoR/D9cHxHQCWoi5l
++TmXwY015J5rGelz1nZjJuxc2kioaX29XJBnhMkP531rSdG5uMwIDAQABo4HuMIHr
++MA4GA1UdDwEB/wQEAwIBhjATBgNVHSUEDDAKBggrBgEFBQcDATASBgNVHRMBAf8E
++CDAGAQH/AgEAMB0GA1UdDgQWBBQfLzW+RhSCzUCxrnksVXj699Ro+zAfBgNVHSME
++GDAWgBTe51tg0CJtQCh9Pw0B/qS1UrRRlDAyBggrBgEFBQcBAQQmMCQwIgYIKwYB
++BQUHMAKGFmh0dHA6Ly95ci5pLmxlbmNyLm9yZy8wEwYDVR0gBAwwCjAIBgZngQwB
++AgEwJwYDVR0fBCAwHjAcoBqgGIYWaHR0cDovL3lyLmMubGVuY3Iub3JnLzANBgkq
++hkiG9w0BAQsFAAOCAgEA0+zvMq3kHig1ddTmmm+RibTr9/RpX7k4buanMMRqbV/y
++IvP82zAHN3mvaw+cASuVsdpd0ikjhr4hnhJQLQOzOp2ccKrsdGOAgo0vddeISFAq
++EWEV4lmUM3vFF796up+bSgmJ1u6RupDCMxDgF8M3eLvGuj6L0lu3zkQ0KuQLnKxL
++tB0oQqn1Idg5CuuGpMvQzk29Pa3D/qHurc0EIM9SxukQuJqq63lxsYyRQFU8yMBO
++hq1w5LbfaWNRrz1uklOfI/pYkAb2E2MTZrAMQkBIE2S8Jt1F8gRc96o/xOsrgvSk
++a84AisX6xq1lz1Z7jGvrnXc4TMcjxZTjiTaihcYI1JIXZiLtEMSCa5l3cu8YWd6z
++dLRQlqRdclVjuQfNHawRJ6GWlkK0QJosivTKwdBw3KxEtzGo8yMHERbsy57gP1UX
++HOMcmZYQC0gtyR3SxfenIM/MxC3Ia2Ypab/kQ/CTnlIn2KQ5JUC6NYrGCbhFN9bp
++5lKJStEwCUnLpntcrXk5XVDCNv/5RyWpRThkGOV7GetKkQ0qAY8hCzWK6oqnAhDZ
++cjlYVdWfqOw3DIOX6EDNBgAqHarRVxyF9QZdOaXSyPJ0ueD2BYJEBgaCGQ8rAaU/
++Qc123V5LTXDZW4CcsPBDyhy4v+c8hClAyw/IkJlfBqxB9D+/wvIMHgECZ4ptP6o=
++-----END CERTIFICATE-----
++-----BEGIN CERTIFICATE-----
++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
++-----END CERTIFICATE-----
+diff --git a/crawler/config.py b/crawler/config.py
+index 3154c6cf..36fdcbc3 100644
+--- a/crawler/config.py
++++ b/crawler/config.py
+@@ -90,6 +90,23 @@ class Config:
+             hosts.update(court.get("allowed_hosts", []))
+         return {normalise_host(h) for h in hosts}
+ 
++    def host_allowed(self, name: str, host: str) -> bool:
++        """Exact host match only. Wildcard entries ('*.<domain>') are NOT honoured (C13 A7 revision of PR #8:
++        no broad trust of redirect destinations); check_config reports them as errors."""
++        host = normalise_host(host)
++        return any(h == host for h in self.allowed_hosts(name) if not h.startswith("*."))
++
++    def redirect_scopes(self, name: str) -> list[dict[str, str]]:
++        """Per-source `redirect_scopes`: individually reviewed (host, path_prefix) pairs, e.g. one archive.org
++        storage node restricted to one item directory. Used only for URLs that are not on allowed_hosts."""
++        return [{"host": normalise_host(s.get("host", "")), "path_prefix": str(s.get("path_prefix", ""))}
++                for s in self.source(name).get("redirect_scopes", []) or []]
++
++    def in_redirect_scope(self, name: str, host: str, path: str) -> bool:
++        host = normalise_host(host)
++        return any(host == s["host"] and s["path_prefix"].endswith("/") and path.startswith(s["path_prefix"])
++                   and ".." not in path for s in self.redirect_scopes(name))
++
+     def setting(self, name: str, key: str) -> Any:
+         """Per-source override, else global default."""
+         s = self.source(name)
+@@ -105,9 +122,13 @@ class Config:
+             return False, "no host"
+         if self.is_blocked_host(host):
+             return False, f"host {host} is on blocked_hosts"
+-        if host not in self.allowed_hosts(name):
+-            return False, f"host {host} not in allowed_hosts for {name}"
+-        return True, "ok"
++        if parts.scheme != "https" and self.source(name).get("require_https"):
++            return False, f"{name} requires HTTPS (require_https: true)"
++        if self.host_allowed(name, host):
++            return True, "ok"
++        if parts.scheme == "https" and self.in_redirect_scope(name, host, parts.path):
++            return True, "ok (reviewed redirect scope)"
++        return False, f"host {host} not in allowed_hosts for {name}"
+ 
+     def user_agent_is_placeholder(self) -> bool:
+         email = self.defaults["contact_email"].strip().lower()
+@@ -204,8 +225,24 @@ def check_config(cfg: Config) -> ConfigReport:
+         if src.get("enabled") and not hosts:
+             r.errors.append(f"{where} is enabled but has no allowed_hosts")
+         for h in sorted(hosts):
+-            if cfg.is_blocked_host(h):
++            if "*" in h:
++                r.errors.append(f"{where}: wildcard host {h} is not accepted; list exact hosts, or add a reviewed "
++                                f"redirect_scopes entry (host + item path prefix)")
++            if cfg.is_blocked_host(h.replace("*.", "", 1)):
+                 r.errors.append(f"{where}: allowed host {h} is also on blocked_hosts")
++        for i, sc in enumerate(cfg.redirect_scopes(name)):
++            if not sc["host"] or "*" in sc["host"] or cfg.is_blocked_host(sc["host"]):
++                r.errors.append(f"{where}.redirect_scopes[{i}]: host must be an exact, non-blocked host")
++            elif not any(sc["host"].endswith("." + h) for h in hosts if "*" not in h):
++                r.errors.append(f"{where}.redirect_scopes[{i}]: host {sc['host']} is not a subdomain of an allowed host")
++            if not re.fullmatch(r"/\d+/items/[A-Za-z0-9._-]+/", sc["path_prefix"]):
++                r.errors.append(f"{where}.redirect_scopes[{i}]: path_prefix must be one item directory '/<n>/items/<identifier>/'")
++        if src.get("ca_extra_pem"):
++            from .http import load_pinned_pem
++            try:
++                load_pinned_pem(src)
++            except Exception as e:  # noqa: BLE001
++                r.errors.append(f"{where}.ca_extra_pem: {e}")
+         for path, url in _config_urls(src, where):
+             host = url_host(url)
+             if host and cfg.is_blocked_host(host):
+diff --git a/crawler/fetch.py b/crawler/fetch.py
+index e48e8fd7..8420daf5 100644
+--- a/crawler/fetch.py
++++ b/crawler/fetch.py
+@@ -2,6 +2,7 @@
+ from __future__ import annotations
+ 
+ import hashlib
++import re
+ import json
+ import logging
+ import os
+@@ -32,6 +33,43 @@ def _is_json(content: bytes) -> bool:
+         return False
+ 
+ 
++
++_NOTE_MD5_SIZE = re.compile(r"expected md5 ([0-9a-f]{32}),\s*([0-9]+) bytes")
++
++
++def integrity_problem(content: bytes, direct: dict | None) -> str | None:
++    """Pinned-document integrity check, applied BEFORE a file is stored or marked fetched.
++
++    Enforced: expected_sha256, expected_md5, expected_bytes (ACQ-02/ACQ-03 archive.org), the ACQ-01 `note` form
++    "expected md5 <hex>, <n> bytes", and expected_served_sha256 (a reviewed pin of a host-watermarked file).
++    Not enforced: listing_md5 / listing_bytes (India Code listing values describe the stored bitstream, not the
++    served, watermarked bytes; served_bytes_policy HOST_WATERMARKS_PDF)."""
++    if not direct:
++        return None
++    exp = {}
++    if direct.get("expected_sha256"):
++        exp["sha256"] = str(direct["expected_sha256"]).lower()
++    if direct.get("expected_md5"):
++        exp["md5"] = str(direct["expected_md5"]).lower()
++    if direct.get("expected_bytes"):
++        exp["bytes"] = int(direct["expected_bytes"])
++    m = _NOTE_MD5_SIZE.search(str(direct.get("note") or ""))
++    if m:
++        exp.setdefault("md5", m.group(1))
++        exp.setdefault("bytes", int(m.group(2)))
++    if direct.get("expected_served_sha256"):
++        exp["served_sha256"] = str(direct["expected_served_sha256"]).lower()
++    bad = []
++    if "sha256" in exp and hashlib.sha256(content).hexdigest() != exp["sha256"]:
++        bad.append("sha256")
++    if "served_sha256" in exp and hashlib.sha256(content).hexdigest() != exp["served_sha256"]:
++        bad.append("served sha256")
++    if "md5" in exp and hashlib.md5(content).hexdigest() != exp["md5"]:
++        bad.append("md5")
++    if "bytes" in exp and len(content) != exp["bytes"]:
++        bad.append(f"size ({len(content)} != {exp['bytes']})")
++    return ("integrity check failed: " + ", ".join(bad) + " differ from the pinned values") if bad else None
++
+ def fetch_documents(cfg: Config, db: StateDB, client: PoliteClient, source: str, root: Path, *,
+                     limit: int = 50, workers: int = 1) -> dict[str, int]:
+     """`workers` > 1 downloads in parallel and is honoured only for `open_data_bucket` sources."""
+@@ -94,6 +132,8 @@ def fetch_documents(cfg: Config, db: StateDB, client: PoliteClient, source: str,
+             problem = f"expected a PDF, got {r.content_type or 'unknown type'} (possible block or error page)"
+         elif q.meta.get("category") == "linked_records" and not _is_json(r.content):
+             problem = f"expected JSON records, got {r.content_type or 'unknown type'}"
++        if not problem:
++            problem = integrity_problem(r.content, q.meta.get("direct"))
+         if problem:
+             db.mark_attempt_failed(q.url, error=problem, status_code=r.status, retryable=False, **retry)
+             stats["failed"] += 1
+diff --git a/crawler/http.py b/crawler/http.py
+index 39775a74..9b6277a2 100644
+--- a/crawler/http.py
++++ b/crawler/http.py
+@@ -10,10 +10,13 @@ so source modules can be built and tested without touching the live site.
+ """
+ from __future__ import annotations
+ 
++import base64
+ import hashlib
+ import json
+ import logging
++import os
+ import re
++import ssl
+ import time
+ from dataclasses import dataclass
+ from pathlib import Path
+@@ -100,6 +103,35 @@ def replay_transport(directory: Path | str) -> httpx.MockTransport:
+     return httpx.MockTransport(handler)
+ 
+ 
++CA_BUNDLE_ENV = ("SSL_CERT_FILE", "REQUESTS_CA_BUNDLE")
++REPO_ROOT = Path(__file__).resolve().parents[1]
++
++
++def load_pinned_pem(src: dict) -> Path:
++    """Validate a source's `ca_extra_pem` (extra intermediate certificates the server omits) against
++    `ca_extra_sha256` (SHA-256 of each certificate's DER form). Returns the PEM path. Raises on any mismatch."""
++    p = REPO_ROOT / src["ca_extra_pem"]
++    pins = {str(x).lower() for x in src.get("ca_extra_sha256") or []}
++    blocks = re.findall(r"-----BEGIN CERTIFICATE-----(.+?)-----END CERTIFICATE-----", p.read_text(), re.S)
++    found = {hashlib.sha256(base64.b64decode("".join(b.split()))).hexdigest() for b in blocks}
++    if not pins or found != pins:
++        raise ValueError(f"{p.name}: certificates {sorted(found)} do not equal ca_extra_sha256 {sorted(pins)}")
++    return p
++
++
++def tls_verify_for(src: dict):
++    """httpx `verify` value for a source. Verification is never disabled. With `ca_extra_pem`, the pinned
++    intermediates are added for chain building and VERIFY_X509_PARTIAL_CHAIN is cleared, so the chain must still
++    end at a self-signed root in the normal trust store."""
++    if not src.get("ca_extra_pem"):
++        return True
++    bundle = next((os.environ[e] for e in CA_BUNDLE_ENV if os.environ.get(e)), None)
++    ctx = ssl.create_default_context(cafile=bundle) if bundle else ssl.create_default_context()
++    ctx.load_verify_locations(str(load_pinned_pem(src)))
++    ctx.verify_flags &= ~ssl.VERIFY_X509_PARTIAL_CHAIN
++    return ctx
++
++
+ def is_pdf_url(url: str) -> bool:
+     """True if the path, or any query value (…?file=x.pdf), names a PDF."""
+     parts = urlsplit(url)
+@@ -127,10 +159,13 @@ class PoliteClient:
+         self.min_delay = float(cfg.setting(source, "min_delay_seconds"))
+         self.max_bytes = int(float(cfg.setting(source, "max_file_mb")) * 1_000_000)
+         self.record_dir = record_dir
++        # The contact address goes into the HTTP From header only when the owner sets MIMAMSA_CONTACT_EMAIL
++        # (C12 section 10 item 7 / C13 brief); the config value is no longer sent by default.
++        frm = os.environ.get("MIMAMSA_CONTACT_EMAIL", "").strip()
+         self.client = httpx.Client(transport=transport, follow_redirects=False,
+                                    timeout=float(cfg.setting(source, "timeout_seconds")),
+-                                   headers={"User-Agent": cfg.defaults["user_agent"],
+-                                            "From": cfg.defaults["contact_email"]})
++                                   verify=True if transport is not None else tls_verify_for(cfg.source(source)),
++                                   headers={"User-Agent": cfg.defaults["user_agent"], **({"From": frm} if frm else {})})
+         self._last: dict[str, float] = {}
+         self._delay: dict[str, float] = {}
+         self._robots: dict[str, robotparser.RobotFileParser | bool] = {}
+diff --git a/tests/test_crawler_c13_hardening.py b/tests/test_crawler_c13_hardening.py
+new file mode 100644
+index 00000000..3ea8e84d
+--- /dev/null
++++ b/tests/test_crawler_c13_hardening.py
+@@ -0,0 +1,75 @@
++"""C13 A7 revision guards (offline): no wildcard trust, item-scoped redirects, pinned extra CA, From header opt-in."""
++import copy
++import ssl
++
++import pytest
++
++from crawler.config import Config, check_config, load_config
++from crawler import http as chttp
++
++EGZ_PINS = ["13949634d99cd6fd6aa80bc034fefacceb1969feef986586713ecdbb05758d3f",
++            "072639d0b140d5bffae16ad9c3f6cc6086040621f51ee61a6d46a8915c07cf76"]
++
++
++def _cfg(mutate):
++    raw = copy.deepcopy(load_config().raw)
++    mutate(raw)
++    base = load_config()
++    return Config(raw, base.path)
++
++
++def test_wildcard_host_is_not_honoured_and_is_a_config_error():
++    def m(raw):
++        raw["sources"]["archive"]["allowed_hosts"] = ["archive.org", "*.archive.org"]
++    cfg = _cfg(m)
++    assert not cfg.is_url_allowed("archive", "https://ia800408.us.archive.org/9/items/x/x.pdf")[0]
++    assert any("wildcard host" in e for e in check_config(cfg).errors)
++
++
++def test_redirect_scope_allows_only_the_item_directory_on_that_node():
++    def m(raw):
++        raw["sources"]["archive"]["redirect_scopes"] = [
++            {"host": "ia800408.us.archive.org", "path_prefix": "/9/items/in.gazette.central.w.1960-10-08.88375/"}]
++    cfg = _cfg(m)
++    ok = "https://ia800408.us.archive.org/9/items/in.gazette.central.w.1960-10-08.88375/88375.pdf"
++    assert cfg.is_url_allowed("archive", ok)[0]
++    assert not cfg.is_url_allowed("archive", ok.replace("https://", "http://"))[0]
++    assert not cfg.is_url_allowed("archive", "https://ia800408.us.archive.org/9/items/other-item/a.pdf")[0]
++    assert not cfg.is_url_allowed("archive", ok.replace("ia800408", "ia800409"))[0]
++    assert not cfg.is_url_allowed("archive", ok.replace("88375/88375.pdf", "88375/../other/a.pdf"))[0]
++    assert not check_config(cfg).errors
++
++
++def test_redirect_scope_must_be_one_item_directory_under_an_allowed_host():
++    def m(raw):
++        raw["sources"]["archive"]["redirect_scopes"] = [{"host": "ia800408.us.archive.org", "path_prefix": "/"},
++                                                       {"host": "evil.example", "path_prefix": "/1/items/a/"}]
++    errs = check_config(_cfg(m)).errors
++    assert any("path_prefix must be one item directory" in e for e in errs)
++    assert any("not a subdomain of an allowed host" in e for e in errs)
++
++
++def test_pinned_extra_ca_is_checked_and_partial_chain_is_cleared():
++    src = {"ca_extra_pem": "config/ca/egazette_intermediates.pem", "ca_extra_sha256": EGZ_PINS}
++    ctx = chttp.tls_verify_for(src)
++    assert isinstance(ctx, ssl.SSLContext)
++    assert ctx.verify_mode == ssl.CERT_REQUIRED and ctx.check_hostname
++    assert not (ctx.verify_flags & ssl.VERIFY_X509_PARTIAL_CHAIN)
++    with pytest.raises(ValueError):
++        chttp.load_pinned_pem({"ca_extra_pem": src["ca_extra_pem"], "ca_extra_sha256": EGZ_PINS[:1]})
++    assert chttp.tls_verify_for({}) is True
++
++
++def test_from_header_only_with_env(monkeypatch, tmp_path):
++    from crawler.audit import AuditLog
++    from crawler.state import StateDB
++    db = StateDB(tmp_path / "s.sqlite").__enter__()
++    cfg = load_config()
++    monkeypatch.delenv("MIMAMSA_CONTACT_EMAIL", raising=False)
++    c = chttp.PoliteClient(cfg, AuditLog(tmp_path / "la", db, "t"), "indiacode", replay=True,
++                           transport=chttp.httpx.MockTransport(lambda r: chttp.httpx.Response(404)))
++    assert "from" not in {k.lower() for k in c.client.headers}
++    monkeypatch.setenv("MIMAMSA_CONTACT_EMAIL", "owner@example.org")
++    c2 = chttp.PoliteClient(cfg, AuditLog(tmp_path / "lb", db, "t"), "indiacode", replay=True,
++                            transport=chttp.httpx.MockTransport(lambda r: chttp.httpx.Response(404)))
++    assert c2.client.headers.get("from") == "owner@example.org"
+diff --git a/tests/test_fetch_integrity.py b/tests/test_fetch_integrity.py
+new file mode 100644
+index 00000000..adc45af0
+--- /dev/null
++++ b/tests/test_fetch_integrity.py
+@@ -0,0 +1,72 @@
++"""Fetch-time integrity enforcement (PR #17 review): pinned expected values must reject a changed or wrong file
++BEFORE it is stored or marked fetched; India Code watermarked files (listing values only) must still be accepted.
++Offline (httpx mock transport via the test_indiacode helpers)."""
++import hashlib
++
++import httpx
++
++from crawler.fetch import fetch_documents
++from tests.test_indiacode import API, cfg, db, make_client, no_network, site  # noqa: F401  (fixtures)
++
++GOOD = b"%PDF-1.4 genuine gazette scan"
++BAD = b"%PDF-1.4 substituted or truncated file"
++
++
++def _md5(b):
++    return hashlib.md5(b).hexdigest()
++
++
++def _sha(b):
++    return hashlib.sha256(b).hexdigest()
++
++
++def _run(cfg, db, tmp_path, served, direct):
++    url = f"{API}/core/bitstreams/t/content"
++    db.enqueue(url, "indiacode", "indiacode.gov.in", "document",
++               meta={"filename": "t.pdf", "year": "1965", "category": "notification", "direct": direct})
++    c = make_client(cfg, db, tmp_path, site({url: httpx.Response(200, content=served, headers={"content-type": "application/pdf"})},
++                                            robots="User-agent: *\nDisallow:\n"))
++    stats = fetch_documents(cfg, db, c, "indiacode", tmp_path)
++    return url, stats
++
++
++def _stored(tmp_path):
++    return sorted(p.name for p in (tmp_path / "data" / "raw").rglob("*") if p.is_file()) if (tmp_path / "data" / "raw").exists() else []
++
++
++def test_expected_sha256_mismatch_is_rejected_and_not_stored(cfg, db, tmp_path):
++    url, stats = _run(cfg, db, tmp_path, BAD, {"doc_id": "x", "expected_sha256": _sha(GOOD)})
++    assert stats["downloaded"] == 0 and stats["failed"] == 1, stats
++    assert db.get(url)["status"] == "failed" and "integrity" in db.get(url)["last_error"]
++    assert _stored(tmp_path) == []
++
++
++def test_expected_md5_and_bytes_mismatch_is_rejected(cfg, db, tmp_path):
++    url, stats = _run(cfg, db, tmp_path, BAD, {"doc_id": "x", "expected_md5": _md5(GOOD), "expected_bytes": len(GOOD)})
++    assert stats["downloaded"] == 0 and stats["failed"] == 1, stats
++    assert _stored(tmp_path) == []
++
++
++def test_acq01_note_md5_size_mismatch_is_rejected(cfg, db, tmp_path):
++    note = f"Gazette ...; expected md5 {_md5(GOOD)}, {len(GOOD)} bytes"
++    url, stats = _run(cfg, db, tmp_path, BAD, {"doc_id": "x", "note": note})
++    assert stats["downloaded"] == 0 and stats["failed"] == 1, stats
++
++
++def test_matching_expected_values_are_accepted(cfg, db, tmp_path):
++    url, stats = _run(cfg, db, tmp_path, GOOD, {"doc_id": "x", "expected_sha256": _sha(GOOD),
++                                                "expected_md5": _md5(GOOD), "expected_bytes": len(GOOD)})
++    assert stats["downloaded"] == 1 and stats["failed"] == 0, stats
++    assert db.get(url)["status"] == "fetched"
++
++
++def test_india_code_watermarked_file_with_listing_values_is_accepted(cfg, db, tmp_path):
++    url, stats = _run(cfg, db, tmp_path, BAD, {"doc_id": "x", "listing_md5": _md5(GOOD), "listing_bytes": len(GOOD),
++                                               "served_bytes_policy": "HOST_WATERMARKS_PDF"})
++    assert stats["downloaded"] == 1 and stats["failed"] == 0, stats
++
++
++def test_pinned_served_sha256_mismatch_is_rejected(cfg, db, tmp_path):
++    url, stats = _run(cfg, db, tmp_path, BAD, {"doc_id": "x", "served_bytes_policy": "HOST_WATERMARKS_PDF",
++                                               "expected_served_sha256": _sha(GOOD)})
++    assert stats["downloaded"] == 0 and stats["failed"] == 1, stats
+diff --git a/tests/test_indiacode.py b/tests/test_indiacode.py
+index 6e612c94..9a0306ca 100644
+--- a/tests/test_indiacode.py
++++ b/tests/test_indiacode.py
+@@ -85,7 +85,9 @@ def test_live_client_refuses_placeholder_user_agent(db, tmp_path):
+         PoliteClient(load_config(placeholder_config(tmp_path)), AuditLog(tmp_path / "logs", db, None), "indiacode")
+ 
+ 
+-def test_identifies_itself_with_from_header_not_email_in_user_agent(cfg, db, tmp_path):
++def test_identifies_itself_with_from_header_not_email_in_user_agent(cfg, db, tmp_path, monkeypatch):
++    # C13 A7 revision: the From header is sent only when the owner sets MIMAMSA_CONTACT_EMAIL.
++    monkeypatch.setenv("MIMAMSA_CONTACT_EMAIL", "owner@example.org")
+     seen = []
+ 
+     def handler(req):
+@@ -95,7 +97,7 @@ def test_identifies_itself_with_from_header_not_email_in_user_agent(cfg, db, tmp
+     assert len(seen) == 2
+     for ua, sender in seen:
+         assert ua == cfg.defaults["user_agent"] and "@" not in ua and "Mozilla" not in ua
+-        assert sender == cfg.defaults["contact_email"] and "@" in sender
++        assert sender == "owner@example.org"
+ 
+ 
+ def test_rate_limit_per_host(cfg, db, tmp_path):
+-- 
+2.43.0
+

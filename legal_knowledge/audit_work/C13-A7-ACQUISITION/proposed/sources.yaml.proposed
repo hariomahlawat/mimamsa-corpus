@@ -1,0 +1,457 @@
+# Mimamsa crawl configuration.
+# The crawler fetches ONLY hosts listed under a source's `allowed_hosts`.
+# Anything marked `verify: true` has not been checked against the live site yet
+# (seed hosts were unreachable from the build container) and must be confirmed
+# in the dry run before any real download.
+
+schema_version: "0.1.0"
+
+defaults:
+  # The crawler names itself in User-Agent and gives its contact address in the HTTP `From` header
+  # (RFC 9110, section 10.1.2: the address of the person responsible for an automated client).
+  # The email used to sit inside user_agent; mod.gov.in and indiacode.nic.in answered 403 to that
+  # string (2026-11-21), so it was moved. Live runs refuse to start while contact_email is the placeholder.
+  user_agent: "Mimamsa-Corpus/0.1 (research collection of public military-law texts)"
+  contact_email: "hariomahlawat@gmail.com"
+  min_delay_seconds: 2.0          # per host, at most 1 request every 2 s
+  timeout_seconds: 60
+  max_retries: 5                  # exponential backoff on timeouts and 5xx, then give up and log
+  backoff_base_seconds: 4
+  obey_robots_txt: true
+  follow_offsite_links: false
+  # Heavy sources only run in this window (IST = UTC+05:30): 20:00-08:00 IST.
+  quiet_hours_ist: { start: "20:00", end: "08:00" }
+  max_file_mb: 200
+
+sources:
+
+  # ---------------------------------------------------------------- Phase 2
+  indiacode:
+    phase: 2
+    enabled: true
+    priority: 1
+    heavy: false
+    # MOVED: www.indiacode.nic.in now only serves a "Site Migration" notice pointing to
+    # https://indiacode.gov.in (seen 2026-11-21). The old hosts stay on the allow-list so old links
+    # can be recognised, but nothing is collected from them.
+    # backend.indiacode.gov.in is NOT listed on purpose: its API is empty for anonymous visitors and
+    # answers 401 on item lists. The public API is on indiacode.gov.in itself.
+    allowed_hosts: [indiacode.gov.in, www.indiacode.gov.in, www.indiacode.nic.in, indiacode.nic.in]
+    base_url: https://indiacode.gov.in
+    # EXCEPTION (approved 2026-11-21): if robots.txt cannot be fetched at all, crawl as if the site had
+    # none. Everywhere else an unreachable robots.txt means "disallow". A robots.txt that is actually
+    # served is still obeyed, and a 5xx answer still means "disallow".
+    # robots_5xx (added the same day under the owner's "be autonomous" instruction): the same
+    # exception when robots.txt answers a server error, which is what the new site does.
+    robots_unreachable: allow
+    robots_5xx: allow
+    robots_unreachable_reason: >
+      No robots.txt can be obtained for India Code (checked 2026-11-21). Old site
+      www.indiacode.nic.in/robots.txt: timed out from the cloud container, from the crawler on a PC
+      in India and in a desktop browser there. New site indiacode.gov.in/robots.txt and
+      backend.indiacode.gov.in/robots.txt: HTTP 500 "Internal Server Error" (a generic error page),
+      while the site and its API answer normally. Re-check from time to time; the moment a
+      robots.txt is served, it is obeyed.
+    discovery: >
+      Through the site's REST API (base_url + /server/api, DSpace 9; verified live 2026-11-21):
+      search the ACT collection for the exact title, read the Act record and its files, then
+      page through every record linked to the Act's act_id (sections with text and footnotes,
+      rules, schedules, notifications) and queue their files.
+    collect_subordinate: true
+    # If the title search does not give exactly one match, set `item_uuid: <uuid>` on the target
+    # (the id in the Act's page address on the site, https://indiacode.gov.in/act/<uuid>).
+    targets:
+      # doc_id                                 short title as printed                                          year  status_hint
+      # expect_subordinate: titles that should appear in the Act page's subordinate-legislation listing.
+      # Discovery warns when one is missing, so a gap is noticed instead of silently accepted.
+      - { doc_id: act-army-1950,                title: "The Army Act, 1950",                                     year: 1950,
+          expect_subordinate: ["Army Rules, 1954"] }
+      - { doc_id: act-air-force-1950,           title: "The Air Force Act, 1950",                                year: 1950,
+          expect_subordinate: ["Air Force Rules, 1969"] }
+      - { doc_id: act-navy-1957,                title: "The Navy Act, 1957",                                     year: 1957 }
+      - { doc_id: act-armed-forces-tribunal-2007, title: "The Armed Forces Tribunal Act, 2007",                  year: 2007,
+          expect_subordinate: ["AFT-Procedure-Rules-2008"] }   # as the record is titled on India Code
+      - { doc_id: act-army-af-disposal-private-property-1950, title: "The Army and Air Force (Disposal of Private Property) Act, 1950", year: 1950 }
+      - { doc_id: act-bns-2023,                 title: "The Bharatiya Nyaya Sanhita, 2023",                      year: 2023 }
+      - { doc_id: act-bnss-2023,                title: "The Bharatiya Nagarik Suraksha Sanhita, 2023",           year: 2023 }
+      - { doc_id: act-bsa-2023,                 title: "The Bharatiya Sakshya Adhiniyam, 2023",                  year: 2023 }
+      # The three repealed codes: India Code no longer lists a central copy among current Acts (only state
+      # copies). The central text is kept in its "Repeal Acts" collection as a bare record with one PDF and
+      # no section records. item_uuid points at that record (found by title search on 2026-11-21).
+      - { doc_id: act-ipc-1860,                 title: "The Indian Penal Code, 1860",                            year: 1860,
+          status_hint: repealed, repealed_record: true, item_uuid: 972afbe0-a2de-415d-9df5-8d70038056ad }
+      - { doc_id: act-crpc-1973,                title: "The Code of Criminal Procedure, 1973",                   year: 1973,
+          status_hint: repealed, repealed_record: true, item_uuid: 973d60aa-105c-4a2f-94f1-7640f0b5d6a7 }
+      - { doc_id: act-evidence-1872,            title: "The Indian Evidence Act, 1872",                          year: 1872,
+          status_hint: repealed, repealed_record: true, item_uuid: b62073e0-4d33-4348-8eda-d92af40af24b }
+    # Regulations for the Army 1987 is listed under India Code in the brief, but it
+    # is an executive publication, not an Act. Search India Code first; if absent,
+    # fall back to the MoD source below.
+    also_search:
+      - { doc_id: regs-army-1987,               title: "Regulations for the Army", year: 1987, verify: true }
+
+  mod:
+    phase: 2
+    # DISABLED 2026-11-21: the site's front end answers 403 to the crawler's User-Agent (see PROGRESS.md).
+    # Decision: skip MoD for now; take the Army Rules etc. from India Code's subordinate-legislation
+    # listings (see expect_subordinate on the indiacode targets). Revisit only for documents that
+    # exist nowhere else.
+    enabled: false
+    disabled_reason: "HTTP 403 to the crawler's User-Agent; skipped by decision on 2026-11-21"
+    priority: 1
+    heavy: false
+    allowed_hosts: [www.mod.gov.in, mod.gov.in]
+    base_url: https://www.mod.gov.in
+    verify: true
+    discovery: >
+      Start from the site's Acts & Rules / documents listing pages (exact paths
+      to be confirmed in dry run). Collect PDFs only; record any 'For Official
+      Use Only' / 'Restricted' marking into access_marking and STOP for review
+      if a document is marked restricted.
+    seeds:
+      - { url: "https://www.mod.gov.in/", verify: true }
+    targets:
+      - { doc_id: rules-army-1954,              title: "The Army Rules, 1954",       year: 1954 }
+      - { doc_id: regs-army-1987,               title: "Regulations for the Army",   year: 1987, verify: true }
+      - { doc_id: rules-air-force-1969,         title: "The Air Force Rules, 1969",  year: 1969, verify: true }
+      - { doc_id: rules-aft-procedure-2008,     title: "The Armed Forces Tribunal (Procedure) Rules, 2008", year: 2008, verify: true }
+
+  # Legislative Department, Ministry of Law and Justice: consolidated texts of Central Acts.
+  legislative:
+    phase: 2
+    enabled: true
+    priority: 1
+    heavy: false
+    allowed_hosts: [lddashboard.legislative.gov.in, legislative.gov.in, www.legislative.gov.in]
+    base_url: https://lddashboard.legislative.gov.in
+
+  # Bureau of Police Research and Development (Ministry of Home Affairs): official comparison
+  # summaries / correspondence tables between the 2023 codes and the codes they replaced.
+  bprd:
+    phase: 2
+    enabled: true
+    priority: 2
+    heavy: false
+    allowed_hosts: [bprd.nic.in, www.bprd.nic.in]
+    base_url: https://bprd.nic.in
+
+  # Official copies on other government hosts, used when the publishing site cannot be reached.
+  # Only the explicit `documents` below are fetched; nothing is discovered by following links.
+  official_copies:
+    phase: 2
+    enabled: true
+    priority: 2
+    heavy: false
+    allowed_hosts: [crpf.mha.gov.in, cytrain.ncrb.gov.in, keralaprisons.gov.in, www.keralaprisons.gov.in]
+    # Descriptive fields here are curated (written into the config, not read from the files) and are
+    # recorded with provenance "llm" until a person confirms them.
+    documents:
+      - doc_id: act-crpc-1973-consolidated
+        url: "https://crpf.mha.gov.in/writereaddata/images/pdf/crpc1973.pdf"
+        title: "The Code of Criminal Procedure, 1973"
+        doc_type: act
+        year: 1974
+        parent_doc_id: act-crpc-1973
+        provides_sections_for: act-crpc-1973
+        note: "Consolidated text hosted by the CRPF (Ministry of Home Affairs). India Code's own copy is a scan of the 1974 print."
+      - doc_id: ref-bprd-comparison-bnss-crpc
+        correspondence: { key: bnss-crpc, new: act-bnss-2023, old: act-crpc-1973, columns: [new, subject, old, summary] }
+        issuing_authority: "Bureau of Police Research and Development, Ministry of Home Affairs"
+        url: "https://keralaprisons.gov.in/userfiles/act-and-rules/comparison_summary_BNSS_to_CrPC.pdf"
+        title: "Correspondence Table and Comparison Summary of the BNSS, 2023 and the CrPC, 1973"
+        doc_type: reference
+        year: 2024
+        note: "BPR&D comparison summary; copy hosted by Kerala Prisons because bprd.nic.in's certificate has expired."
+      - doc_id: ref-bprd-comparison-bns-ipc
+        correspondence: { key: bns-ipc, new: act-bns-2023, old: act-ipc-1860, columns: [new, subject, old, summary] }
+        issuing_authority: "Bureau of Police Research and Development, Ministry of Home Affairs"
+        url: "https://www.keralaprisons.gov.in/userfiles/act-and-rules/comparison_summary_BNS_to_IPC.pdf"
+        title: "Correspondence Table and Comparison Summary of the BNS, 2023 and the IPC, 1860"
+        doc_type: reference
+        year: 2024
+        note: "BPR&D comparison summary; copy hosted by Kerala Prisons."
+      - doc_id: ref-bprd-comparison-bsa-iea
+        correspondence: { key: bsa-iea, new: act-bsa-2023, old: act-evidence-1872, columns: [new, old, subject, summary] }
+        issuing_authority: "Bureau of Police Research and Development, Ministry of Home Affairs"
+        url: "https://keralaprisons.gov.in/userfiles/act-and-rules/comparison_summary_BSA_to_IEA.pdf"
+        title: "Correspondence Table and Comparison Summary of the BSA, 2023 and the Indian Evidence Act, 1872"
+        doc_type: reference
+        year: 2024
+        note: "BPR&D comparison summary; copy hosted by Kerala Prisons."
+
+  # ---------------------------------------------------------------- Phase 3
+  aft:
+    phase: 3
+    # Not enabled: the AFT sites reset connections from the cloud container, so this has not run live.
+    # Listing addresses and page layouts below are from pages saved from the live sites in 2023
+    # (github.com/L-Bellingcat/army-tribunals). Run `discover --source aft --only <bench> --record <dir>`
+    # from a machine in India, one bench at a time, and read the result before any download.
+    enabled: false
+    priority: 1
+    heavy: true
+    verify: true
+    allowed_hosts: [www.aftdelhi.nic.in, aftdelhi.nic.in, aftlko.up.nic.in, aftkolkata.nic.in]
+    base_url: https://www.aftdelhi.nic.in
+    discovery: "Per bench: read its judgment listing page(s) and queue every PDF link with what the row says about it."
+    benches:
+      # style joodb = the listing component on aftdelhi.nic.in (rows with labelled fields + ViewPDF link);
+      # style table = an HTML table of PDF links.
+      - { key: principal-delhi, name: "Principal Bench, New Delhi", style: joodb, max_pages: 60,
+          listing_urls: ["https://www.aftdelhi.nic.in/index.php/site-links/judgement-by-case"] }
+      - { key: chandigarh,  name: "Regional Bench, Chandigarh", style: joodb, max_pages: 60,
+          listing_urls: ["https://www.aftdelhi.nic.in/index.php/rbs/chandigarh/chandigarh-judgement"] }
+      - { key: kolkata,     name: "Regional Bench, Kolkata", style: table, max_pages: 60,
+          listing_urls: ["https://aftkolkata.nic.in/judgements/index/page:1"],
+          page_link_pattern: "/judgements/index/page:\\d+$" }
+      # Layout known (table of PDF links) but the listing page addresses were not recorded in 2023:
+      - { key: lucknow,     name: "Regional Bench, Lucknow",  style: table, listing_urls: [] }
+      - { key: jabalpur,    name: "Regional Bench, Jabalpur", style: table, listing_urls: [] }
+      # Nothing known yet:
+      - { key: guwahati,    name: "Regional Bench, Guwahati" }
+      - { key: chennai,     name: "Regional Bench, Chennai" }
+      - { key: kochi,       name: "Regional Bench, Kochi" }
+      - { key: mumbai,      name: "Regional Bench, Mumbai" }
+      - { key: jaipur,      name: "Regional Bench, Jaipur" }
+      - { key: srinagar,    name: "Regional Bench, Srinagar/Jammu" }
+
+  # ---------------------------------------------------------------- Phase 4
+  # Supreme Court and High Court judgments come from the AWS Open Data buckets (decision of 2026-11-21):
+  # a third party's CC-BY-4.0 copy of the courts' own records, used because the courts' judgment searches
+  # are behind a CAPTCHA (www.sci.gov.in checked 2026-11-21). Each record names the bucket as its source.
+  # The indexes have no judgment text, so entries are pre-selected by party names (party_terms, matched
+  # against the case title / parties, case-insensitive); the pipeline's relevance stage then applies the
+  # brief's keywords to the text. Widening party_terms and re-running discovery adds what was left out.
+  sci:
+    phase: 4
+    enabled: true
+    priority: 2
+    heavy: false
+    open_data_bucket: true          # a bulk-access bucket, not a court's web server: a shorter delay is allowed
+    min_delay_seconds: 0.3
+    dataset: indian-supreme-court-judgments
+    allowed_hosts: [indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com]
+    base_url: https://indian-supreme-court-judgments.s3.ap-south-1.amazonaws.com
+    years: [1950, 2026]
+    party_terms: &party_terms
+      - "union of india"
+      - "\\b(army|air force|navy|naval|armed forces|military|defen[cs]e|coast guard|assam rifles|border security)\\b"
+      - "\\bchief of (the )?(army|air|naval) staff\\b"
+      - "\\b(commanding officer|commandant|general officer|court[- ]martial|cantonment)\\b"
+      - "\\b(ex[- .]?(sepoy|sep|naik|nk|havildar|hav|subedar|sub|rfn|gnr|sgt|servicem[ae]n)|sepoy|havildar|naik|subedar|rifleman|sowar|jawan)\\b"
+      - "\\b(lt\\.? ?col|lt\\.? ?gen|maj\\.? ?gen|brig(adier)?|colonel|col\\.|major|maj\\.|capt(ain)?\\.?|wing commander|wg\\.? ?cdr|sqn\\.? ?ldr|squadron leader|group captain|gp\\.? ?capt|air (vice )?marshal|commodore|cdr\\.|lt\\.? ?cdr|flying officer|flt\\.? ?lt|corporal|leading aircraftman|lac)\\b"
+      - "\\b(pcda|cda|record office|records? officer)\\b"
+
+  hc:
+    phase: 4
+    enabled: true
+    priority: 2
+    heavy: false
+    open_data_bucket: true
+    min_delay_seconds: 0.3
+    dataset: indian-high-court-judgments
+    allowed_hosts: [indian-high-court-judgments.s3.ap-south-1.amazonaws.com]
+    base_url: https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com
+    party_terms: *party_terms
+    # `code` is the dataset's court code. `years` is what discovery covers when no --only slice is given;
+    # courts without `years` are only read when named, e.g. --only ph:2015-2020.
+    courts:
+      - { key: delhi,     code: "7_26", name: "High Court of Delhi", years: [2023, 2023] }
+      - { key: ph,        code: "3_22", name: "High Court of Punjab and Haryana" }
+      - { key: allahabad, code: "9_13", name: "Allahabad High Court" }
+      - { key: jkl,       code: "1_12", name: "High Court of Jammu and Kashmir" }
+
+  # ---------------------------------------------------------------- Phase 6
+  egazette:
+    phase: 6
+    enabled: false
+    priority: 3
+    heavy: false
+    allowed_hosts: [egazette.gov.in]
+    require_https: true
+    # The server sends only its leaf certificate (issuer Let's Encrypt YR1). The two public intermediates below were
+    # fetched from the leaf's AIA chain (yr1.i.lencr.org, yr.i.lencr.org) and verified to chain to ISRG Root X1 in
+    # the trust store; partial-chain trust is disabled (crawler/http.py::tls_verify_for). If the site changes its
+    # issuing intermediate, the pins stop matching the served chain and requests fail closed. Re-verify then.
+    # Evidence: legal_knowledge/audit_work/C13-A7-ACQUISITION/allowlist/EGAZETTE_TLS_C13.md
+    ca_extra_pem: config/ca/egazette_intermediates.pem
+    ca_extra_sha256:
+      - 13949634d99cd6fd6aa80bc034fefacceb1969feef986586713ecdbb05758d3f   # C=US, O=Let's Encrypt, CN=YR1 (to 2028-09-02)
+      - 072639d0b140d5bffae16ad9c3f6cc6086040621f51ee61a6d46a8915c07cf76   # C=US, O=ISRG, CN=Root YR, cross-signed by ISRG Root X1 (to 2032-09-02)
+    verify: true
+    discovery: "Notifications under the Army Act (active service declarations, s.12, etc.). Exact WriteReadData file URLs only; the interactive search pages are not used (their CAPTCHA status was not checked)."
+
+  archive:
+    phase: 6
+    enabled: false
+    priority: 3
+    heavy: false
+    allowed_hosts: [archive.org]
+    # Item-scoped redirect destinations (C13 A7 proposal, replacing the "*.archive.org" wildcard of PRs #8/#17/#23).
+    # Each entry allows ONE storage-node host for ONE item directory. Every hop must still be HTTPS and pass robots.
+    # Redirects for one item were seen to go to nodes not named in its metadata, so the set can go stale; a
+    # redirect elsewhere fails closed and needs a new reviewed entry. Source: allowlist/ARCHIVE_REDIRECT_SCOPES.csv
+    require_https: true
+    redirect_scopes:
+      - { host: ia803104.us.archive.org, path_prefix: "/29/items/in.gazette.central.w.1978-02-25.48290/" }   # rules-adjustment-jurisdiction-1978-so-488
+      - { host: ia903104.us.archive.org, path_prefix: "/29/items/in.gazette.central.w.1978-02-25.48290/" }   # rules-adjustment-jurisdiction-1978-so-488
+      - { host: dn790002.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1986-12-06.32435/" }   # notif-adjustment-jurisdiction-amdt-so-4010-1986
+      - { host: ia802803.us.archive.org, path_prefix: "/22/items/in.gazette.central.w.1986-12-06.32435/" }   # notif-adjustment-jurisdiction-amdt-so-4010-1986
+      - { host: ia902803.us.archive.org, path_prefix: "/22/items/in.gazette.central.w.1986-12-06.32435/" }   # notif-adjustment-jurisdiction-amdt-so-4010-1986
+      - { host: dn790003.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1966-08-27.76274/" }   # acq03-001-b1
+      - { host: ia803102.us.archive.org, path_prefix: "/5/items/in.gazette.central.w.1966-08-27.76274/" }   # acq03-001-b1
+      - { host: ia903102.us.archive.org, path_prefix: "/5/items/in.gazette.central.w.1966-08-27.76274/" }   # acq03-001-b1
+      - { host: ia802807.us.archive.org, path_prefix: "/1/items/in.gazette.central.w.1967-01-07.73211/" }   # acq03-002-b1
+      - { host: ia902807.us.archive.org, path_prefix: "/1/items/in.gazette.central.w.1967-01-07.73211/" }   # acq03-002-b1
+      - { host: ia600503.us.archive.org, path_prefix: "/23/items/in.gazette.central.w.1967-12-16.75707/" }   # acq03-003-b1
+      - { host: ia800503.us.archive.org, path_prefix: "/23/items/in.gazette.central.w.1967-12-16.75707/" }   # acq03-003-b1
+      - { host: ia802807.us.archive.org, path_prefix: "/2/items/in.gazette.central.w.1968-11-16.72289/" }   # acq03-004-b1
+      - { host: ia902807.us.archive.org, path_prefix: "/2/items/in.gazette.central.w.1968-11-16.72289/" }   # acq03-004-b1
+      - { host: dn790009.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1969-03-01.68684/" }   # acq03-005-b1
+      - { host: ia803107.us.archive.org, path_prefix: "/5/items/in.gazette.central.w.1969-03-01.68684/" }   # acq03-005-b1
+      - { host: ia903107.us.archive.org, path_prefix: "/5/items/in.gazette.central.w.1969-03-01.68684/" }   # acq03-005-b1
+      - { host: ia803106.us.archive.org, path_prefix: "/27/items/in.gazette.central.w.1970-01-17.63332/" }   # acq03-006-b1
+      - { host: ia903106.us.archive.org, path_prefix: "/27/items/in.gazette.central.w.1970-01-17.63332/" }   # acq03-006-b1
+      - { host: dn790003.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1972-02-19.59085/" }   # acq03-007-b1
+      - { host: ia803104.us.archive.org, path_prefix: "/34/items/in.gazette.central.w.1972-02-19.59085/" }   # acq03-007-b1
+      - { host: ia903104.us.archive.org, path_prefix: "/34/items/in.gazette.central.w.1972-02-19.59085/" }   # acq03-007-b1
+      - { host: ia803107.us.archive.org, path_prefix: "/0/items/in.gazette.central.w.1974-08-17.55730/" }   # acq03-008-b1
+      - { host: ia903107.us.archive.org, path_prefix: "/0/items/in.gazette.central.w.1974-08-17.55730/" }   # acq03-008-b1
+      - { host: ia802801.us.archive.org, path_prefix: "/1/items/in.gazette.central.w.1974-11-16.55738/" }   # acq03-009-b1
+      - { host: ia902801.us.archive.org, path_prefix: "/1/items/in.gazette.central.w.1974-11-16.55738/" }   # acq03-009-b1
+      - { host: ia803102.us.archive.org, path_prefix: "/0/items/in.gazette.central.w.1960-10-08.88375/" }   # acq03-010-b2
+      - { host: ia903102.us.archive.org, path_prefix: "/0/items/in.gazette.central.w.1960-10-08.88375/" }   # acq03-010-b2
+      - { host: dn710807.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1960-10-15.88376/" }   # acq03-011-b2
+      - { host: ia803106.us.archive.org, path_prefix: "/14/items/in.gazette.central.w.1960-10-15.88376/" }   # acq03-011-b2
+      - { host: ia903106.us.archive.org, path_prefix: "/14/items/in.gazette.central.w.1960-10-15.88376/" }   # acq03-011-b2
+      - { host: dn710606.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1960-10-22.88377/" }   # acq03-012-b2
+      - { host: ia802806.us.archive.org, path_prefix: "/27/items/in.gazette.central.w.1960-10-22.88377/" }   # acq03-012-b2
+      - { host: ia902806.us.archive.org, path_prefix: "/27/items/in.gazette.central.w.1960-10-22.88377/" }   # acq03-012-b2
+      - { host: dn760103.eu.archive.org, path_prefix: "/0/items/in.gazette.central.w.1960-12-03.88383/" }   # acq03-013-b2
+      - { host: ia803105.us.archive.org, path_prefix: "/10/items/in.gazette.central.w.1960-12-03.88383/" }   # acq03-013-b2
+      - { host: ia903105.us.archive.org, path_prefix: "/10/items/in.gazette.central.w.1960-12-03.88383/" }   # acq03-013-b2
+      - { host: dn710102.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.2010-05-29.162/" }   # acq03-014-b2
+      - { host: ia802804.us.archive.org, path_prefix: "/29/items/in.gazette.central.w.2010-05-29.162/" }   # acq03-014-b2
+      - { host: ia902804.us.archive.org, path_prefix: "/29/items/in.gazette.central.w.2010-05-29.162/" }   # acq03-014-b2
+      - { host: dn790008.ca.archive.org, path_prefix: "/0/items/in.gazette.central.e.2001-09-03.113421/" }   # acq03-017-b3
+      - { host: ia802801.us.archive.org, path_prefix: "/32/items/in.gazette.central.e.2001-09-03.113421/" }   # acq03-017-b3
+      - { host: ia902801.us.archive.org, path_prefix: "/32/items/in.gazette.central.e.2001-09-03.113421/" }   # acq03-017-b3
+      - { host: dn710302.ca.archive.org, path_prefix: "/0/items/in.gazette.1950.318/" }   # acq03-019-b4
+      - { host: ia803105.us.archive.org, path_prefix: "/19/items/in.gazette.1950.318/" }   # acq03-019-b4
+      - { host: ia903105.us.archive.org, path_prefix: "/19/items/in.gazette.1950.318/" }   # acq03-019-b4
+      - { host: dn790002.ca.archive.org, path_prefix: "/0/items/in.gazette.csl_extraordinary.1975-01-25.E-1236-1975-0004-54581/" }   # acq03-022-b4
+      - { host: ia601903.us.archive.org, path_prefix: "/29/items/in.gazette.csl_extraordinary.1975-01-25.E-1236-1975-0004-54581/" }   # acq03-022-b4
+      - { host: ia801903.us.archive.org, path_prefix: "/29/items/in.gazette.csl_extraordinary.1975-01-25.E-1236-1975-0004-54581/" }   # acq03-022-b4
+      - { host: dn711001.ca.archive.org, path_prefix: "/0/items/in.gazette.central.e.2008-09-17.2326/" }   # acq03-030-b5
+      - { host: ia600809.us.archive.org, path_prefix: "/4/items/in.gazette.central.e.2008-09-17.2326/" }   # acq03-030-b5
+      - { host: ia800809.us.archive.org, path_prefix: "/4/items/in.gazette.central.e.2008-09-17.2326/" }   # acq03-030-b5
+      - { host: dn710706.ca.archive.org, path_prefix: "/0/items/in.gazette.central.e.2011-07-29.188/" }   # acq03-031-b5
+      - { host: ia802802.us.archive.org, path_prefix: "/8/items/in.gazette.central.e.2011-07-29.188/" }   # acq03-031-b5
+      - { host: ia902802.us.archive.org, path_prefix: "/8/items/in.gazette.central.e.2011-07-29.188/" }   # acq03-031-b5
+      - { host: dn711000.ca.archive.org, path_prefix: "/0/items/in.gazette.central.e.2009-05-13.5014/" }   # acq03-032-b5
+      - { host: ia803205.us.archive.org, path_prefix: "/21/items/in.gazette.central.e.2009-05-13.5014/" }   # acq03-032-b5
+      - { host: ia903205.us.archive.org, path_prefix: "/21/items/in.gazette.central.e.2009-05-13.5014/" }   # acq03-032-b5
+      - { host: dn710601.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1956-04-21.100216/" }   # acq03-036-c2
+      - { host: ia600804.us.archive.org, path_prefix: "/35/items/in.gazette.central.w.1956-04-21.100216/" }   # acq03-036-c2
+      - { host: ia800804.us.archive.org, path_prefix: "/35/items/in.gazette.central.w.1956-04-21.100216/" }   # acq03-036-c2
+      - { host: dn790006.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1958-12-13.95784/" }   # acq03-037-c2
+      - { host: ia803109.us.archive.org, path_prefix: "/19/items/in.gazette.central.w.1958-12-13.95784/" }   # acq03-037-c2
+      - { host: ia903109.us.archive.org, path_prefix: "/19/items/in.gazette.central.w.1958-12-13.95784/" }   # acq03-037-c2
+      - { host: dn720006.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1958-12-27.95984/" }   # acq03-038-c2
+      - { host: ia600401.us.archive.org, path_prefix: "/20/items/in.gazette.central.w.1958-12-27.95984/" }   # acq03-038-c2
+      - { host: ia800401.us.archive.org, path_prefix: "/20/items/in.gazette.central.w.1958-12-27.95984/" }   # acq03-038-c2
+      - { host: dn760109.eu.archive.org, path_prefix: "/0/items/in.gazette.central.w.1959-12-12.90633/" }   # acq03-039-c2
+      - { host: ia600904.us.archive.org, path_prefix: "/31/items/in.gazette.central.w.1959-12-12.90633/" }   # acq03-039-c2
+      - { host: ia800904.us.archive.org, path_prefix: "/31/items/in.gazette.central.w.1959-12-12.90633/" }   # acq03-039-c2
+      - { host: dn760100.eu.archive.org, path_prefix: "/0/items/in.gazette.central.w.1964-03-07.83271/" }   # acq03-040-c2
+      - { host: ia802803.us.archive.org, path_prefix: "/19/items/in.gazette.central.w.1964-03-07.83271/" }   # acq03-040-c2
+      - { host: ia902803.us.archive.org, path_prefix: "/19/items/in.gazette.central.w.1964-03-07.83271/" }   # acq03-040-c2
+      - { host: dn710805.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1964-03-14.83272/" }   # acq03-041-c2
+      - { host: ia803105.us.archive.org, path_prefix: "/35/items/in.gazette.central.w.1964-03-14.83272/" }   # acq03-041-c2
+      - { host: ia903105.us.archive.org, path_prefix: "/35/items/in.gazette.central.w.1964-03-14.83272/" }   # acq03-041-c2
+      - { host: dn721500.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1964-03-21.83273/" }   # acq03-042-c2
+      - { host: ia600704.us.archive.org, path_prefix: "/35/items/in.gazette.central.w.1964-03-21.83273/" }   # acq03-042-c2
+      - { host: ia800704.us.archive.org, path_prefix: "/35/items/in.gazette.central.w.1964-03-21.83273/" }   # acq03-042-c2
+      - { host: dn790002.ca.archive.org, path_prefix: "/0/items/in.gazette.central.w.1964-03-30.83284/" }   # acq03-043-c2
+      - { host: ia803106.us.archive.org, path_prefix: "/12/items/in.gazette.central.w.1964-03-30.83284/" }   # acq03-043-c2
+      - { host: ia903106.us.archive.org, path_prefix: "/12/items/in.gazette.central.w.1964-03-30.83284/" }   # acq03-043-c2
+      - { host: dn760108.eu.archive.org, path_prefix: "/0/items/in.gazette.central.w.1964-04-04.83285/" }   # acq03-044-c2
+      - { host: ia803103.us.archive.org, path_prefix: "/4/items/in.gazette.central.w.1964-04-04.83285/" }   # acq03-044-c2
+      - { host: ia903103.us.archive.org, path_prefix: "/4/items/in.gazette.central.w.1964-04-04.83285/" }   # acq03-044-c2
+    verify: true
+    discovery: "Digital Library of India items; record the archive.org item identifier in metadata."
+    targets:
+      - { doc_id: act-indian-army-1911, title: "Indian Army Act, 1911", status_hint: superseded }
+      - { doc_id: book-manual-military-law, title: "Manual of Military Law (editions)", status_hint: superseded }
+    # Found by title search on 2026-11-21 (archive.org advancedsearch, live). Titles and years are as
+    # archive.org lists them; nobody has opened the items yet, so each needs a human look before use.
+    search_api: "https://archive.org/advancedsearch.php"
+    candidates:
+      - { identifier: in.ernet.dli.2015.108755, title: "The Indian Army Act,1911 Act No,viii", year: 1911 }
+      - { identifier: dli.ministry.16806,       title: "Manual of Indian military law, 1911", year: 1912 }
+      - { identifier: in.ernet.dli.2015.238493, title: "Manual Of Indian Military Law (1937)", year: 1937 }
+      - { identifier: in.ernet.dli.2015.110569, title: "Manual Of Military Law. War Office. 1907.", year: 1907, note: "British manual" }
+      - { identifier: in.ernet.dli.2015.279009, title: "Manual Of Military Law War Office 1907", year: null, note: "British manual; possibly a duplicate scan" }
+      - { identifier: dli.ernet.237370,         title: "Manual Of Military Law (1929)", year: 1929, note: "British manual" }
+
+  # ---------------------------------------------------------------- C13 A7 PROPOSAL (not applied; owner decision D-04)
+  # DESW (Department of Ex-Servicemen Welfare, MoD). Validated 2026-11-25: TLS chain OK (Sectigo DV R36), robots.txt
+  # answers 403 (= no robots file, RFC 9309), no CAPTCHA marker or password field on the landing page.
+  # Exact document URLs only; nothing is discovered by following links.
+  desw:
+    phase: 2
+    enabled: false
+    priority: 3
+    heavy: false
+    allowed_hosts: [desw.gov.in]
+    require_https: true
+    documents:
+      - doc_id: rules-entitlement-casualty-pensionary-awards-2023
+        url: "https://desw.gov.in/sites/default/files/Entitlement%20Rules%202023.pdf"
+        title: "Entitlement Rules for Casualty Pensionary Awards to the Armed Forces Personnel, 2023"
+        doc_type: rules
+        year: 2023
+        issuing_authority: "Ministry of Defence (Department of Ex-Servicemen Welfare)"
+        note: "PR #9; 49,925,674 bytes per HEAD of 2026-11-22; no hash pin yet (first fetch records it for review)"
+      - doc_id: rules-entitlement-casualty-pensionary-awards-2023-alt
+        url: "https://desw.gov.in/sites/default/files/2026-10/Entitlement%20Rules%202023.pdf"
+        title: "Entitlement Rules 2023 with MoD letter of 21-09-2023 (second official DESW copy)"
+        doc_type: rules
+        year: 2023
+        issuing_authority: "Ministry of Defence (Department of Ex-Servicemen Welfare)"
+        parent_doc_id: rules-entitlement-casualty-pensionary-awards-2023
+        expected_sha256: "29f6fa2cfcd961aadce490679a686b5a3b7b2e683a0eaceb42bc2cd2ebb70dad"
+        note: "PR #9; already preserved as C5-SRC-P1-ER-2023-HELD-13MB (HF 5524c3d9); a re-fetch must be byte-identical"
+      - doc_id: manual-guide-medical-officers-military-pensions-2023
+        url: "https://desw.gov.in/sites/default/files/2026-10/GMO%202023.pdf"
+        title: "Guide to Medical Officers (Military Pensions), 2023"
+        doc_type: manual
+        year: 2023
+        issuing_authority: "Ministry of Defence (Department of Ex-Servicemen Welfare)"
+        note: "PR #9; 36,908,350 bytes per HEAD of 2026-11-22; no hash pin yet"
+
+  # Supreme Court official document host. CONDITIONAL. sci.gov.in and www.sci.gov.in are EXCLUDED: the judgment search
+  # (www.sci.gov.in/judgements-judgement-date/) carries a CAPTCHA (probe 2026-11-25). api.sci.gov.in validated
+  # 2026-11-25: TLS chain OK (GlobalSign GCC R46 DV), robots.txt 200 with no rules, landing page 200 and empty.
+  # Use only for exact PDF URLs that a person has recorded after a manual search. The crawler never searches and
+  # never handles a CAPTCHA. Whether a file URL itself is CAPTCHA-free is not yet verified (no URL known).
+  sci_official:
+    phase: 4
+    enabled: false
+    priority: 2
+    heavy: false
+    allowed_hosts: [api.sci.gov.in]
+    require_https: true
+    documents: []
+
+# Explicitly forbidden: never fetch, even if linked. Subdomains of a blocked host are blocked too.
+blocked_hosts:
+  # Formerly configured for AFT Regional Bench Jabalpur; serves unrelated (betting) content (2026-11-22).
+  # Not an official Tribunal host. Never visit (PR #7; C13 A7 re-targeted to staging).
+  - aftjabalpur.in
+  - www.aftjabalpur.in
+  - indiankanoon.org
+  - www.indiankanoon.org
+  - www.casemine.com
+  - www.scconline.com
+  - www.manupatrafast.com
+  - www.manupatra.com
