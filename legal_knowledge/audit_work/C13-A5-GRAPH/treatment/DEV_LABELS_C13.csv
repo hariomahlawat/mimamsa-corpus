@@ -1,0 +1,167 @@
+row_id,source,category,verdict,truth_family,basis
+TC-01bc59e63560,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-05bda1173a69,C11_REVIEW_R1,SAMPLE_DISTINGUISHES,WEAKER_RELATION,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-061988610c67,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-09679a2ecb19,C11_REVIEW_R1,ADVISER_PROPOSED_OVERRULES_QUESTIONS,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-0a3a0ff02678,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-128e107ecf9e,C11_REVIEW_R1,ADVISER_PROPOSED_OVERRULES_QUESTIONS,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-17a1908fe5b0,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-1ae4124ee64f,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-1d80435d02db,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,SUPPORTED,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-1e82e85867bf,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-1f180392f404,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-206496479449,C11_REVIEW_R1,SAMPLE_DISTINGUISHES,SUPPORTED,DISTINGUISHES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-20b4a6030212,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-21d0a94b3a95,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-222df5c885ad,C11_REVIEW_R1,ADVISER_PROPOSED_OVERRULES_QUESTIONS,SUPPORTED,OVERRULES_OR_DECLARATORY,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-22a1de5f2e85,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-23134ce50bfb,C11_REVIEW_R1,ADVISER_PROPOSED_OVERRULES_QUESTIONS,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-24a0138a4b9d,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-24ff52b0997c,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-2519aca12fd7,C11_REVIEW_R1,ADVISER_PROPOSED_OVERRULES_QUESTIONS,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-254eb55ecca0,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-27d1ab644ee3,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,SUPPORTED,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-2a186ce072e6,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-2e28c1f03791,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,WEAKER_RELATION,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-2ef6864c7945,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,SUPPORTED,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-2f1045ea3f8f,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-301d94e187db,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WEAKER_RELATION,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-354fc6be39a8,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WEAKER_RELATION,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-3907aa79b8a5,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-3b178e403337,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,SUPPORTED,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-3d30cdc267cc,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,WEAKER_RELATION,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-3e95aa6d4f3b,C11_REVIEW_R1,ADVISER_PROPOSED_OVERRULES_QUESTIONS,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-40a6aabe1cfe,C11_REVIEW_R1,SAMPLE_DISTINGUISHES,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-41934d310cb3,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-48e167967d64,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,SUPPORTED,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-49ab07eb791d,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,WEAKER_RELATION,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-4b06bb776648,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-4d88248364e6,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,SUPPORTED,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-5004f163aed9,C11_REVIEW_R1,SAMPLE_DISTINGUISHES,WEAKER_RELATION,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-569921f3258b,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,SUPPORTED,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-586d4f61a9db,C11_REVIEW_R1,SAMPLE_DISTINGUISHES,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-5954eedd798c,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-5a542c52e713,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-5c53a739c039,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-601cb1529dc8,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-62dee0bd93fe,C11_REVIEW_R1,SAMPLE_DISTINGUISHES,WEAKER_RELATION,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-668c01de0004,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-6ab317eb7f84,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,SUPPORTED,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-6f734c469079,C11_REVIEW_R1,SAMPLE_DISTINGUISHES,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-71b72f719ecd,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-71d95f475fc0,C11_REVIEW_R1,ADVISER_PROPOSED_OVERRULES_QUESTIONS,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-7536f47abba7,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,SUPPORTED,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-776ee591c8c5,C11_REVIEW_R1,SAMPLE_DISTINGUISHES,SUPPORTED,DISTINGUISHES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-77fbdce26d4f,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-7bac8b425491,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-7c35f9c73702,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-85848dde9b00,C11_REVIEW_R1,SAMPLE_DISTINGUISHES,SUPPORTED,DISTINGUISHES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-8a3dec3d72a2,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-90c9e02ff612,C11_REVIEW_R1,ADVISER_PROPOSED_OVERRULES_QUESTIONS,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-947c262f812e,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,SUPPORTED,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-94f742ca201c,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-96fdca32ce21,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-9c574b894a39,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,SUPPORTED,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-9dbbb3103f31,C11_REVIEW_R1,ADVISER_PROPOSED_OVERRULES_QUESTIONS,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-9f9c27ef710d,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-a29676a7a5c4,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WEAKER_RELATION,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-a377d32508bb,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-a777899da526,C11_REVIEW_R1,SAMPLE_DISTINGUISHES,SUPPORTED,DISTINGUISHES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-aa3c085f11b3,C11_REVIEW_R1,SAMPLE_DISTINGUISHES,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-aa8a360af643,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-ac61ab8c65ff,C11_REVIEW_R1,SAMPLE_DISTINGUISHES,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-b158872b55f2,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,WEAKER_RELATION,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-b2f9836c2018,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-b33713be4109,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-b3612034e8d7,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-b72a50984a76,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-b851f0a0dd35,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-bc25a8b55c4f,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-beb7ba01bd25,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WEAKER_RELATION,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-c384ec7817d6,C11_REVIEW_R1,ADVISER_PROPOSED_OVERRULES_QUESTIONS,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-c8629c2b21aa,C11_REVIEW_R1,SAMPLE_DISTINGUISHES,SUPPORTED,DISTINGUISHES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-c9ac1b36a50e,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-cf76841ef075,C11_REVIEW_R1,SAMPLE_DISTINGUISHES,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-d10abc9bad8f,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-d5348a518013,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-e236f6ae71a5,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-e2b7ed92b281,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-e2f22c47da13,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-ec8ed8b6c9f6,C11_REVIEW_R1,SAMPLE_DISTINGUISHES,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-f1a6b9110d0e,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-f43ad21d7d99,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-f5d213d989e8,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,SUPPORTED,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-fa48e52289cd,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-fa616c618b9a,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,SUPPORTED,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-fb28664670ff,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,WRONG_TARGET,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-fb9b62dc421d,C11_REVIEW_R1,SAMPLE_APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-fda3dca65005,C11_REVIEW_R1,ADVISER_REPORTED_TREATMENT,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-05962d795e7c,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-072bd6659e57,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-0befe2825ad3,C11_REVIEW_R2,DISTINGUISHES,SUPPORTED,DISTINGUISHES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-0ccfd88ec3a1,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-0f8307269faa,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-11ea360c38b4,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-14a805c34bf9,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-1b9a252dafb9,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-1d26399723bd,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-222df5c885ad,C11_REVIEW_R2,ADVISER_OVERRULES,SUPPORTED,OVERRULES_OR_DECLARATORY,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-3d3ac8bc5594,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-4851592ca232,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-569921f3258b,C11_REVIEW_R2,REPORTED_TREATMENT_DOC_CHECK,SUPPORTED,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-5a34e86d6d51,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-69dd910ad862,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-6a7a6c6bfb7e,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-6ccc46f545f8,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-6eb7496415df,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-6f6012c4e740,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-715eb9003ade,C11_REVIEW_R2,APPLIES_FOLLOWS,NOT_COURTS_OWN_WORDS,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-7321a93a9674,C11_REVIEW_R2,DISTINGUISHES,SUPPORTED,DISTINGUISHES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-7536f47abba7,C11_REVIEW_R2,REPORTED_TREATMENT_DOC_CHECK,SUPPORTED,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-8d7dbf74be08,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-910ca4002d71,C11_REVIEW_R2,DISTINGUISHES,SUPPORTED,DISTINGUISHES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-9da48805e02a,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-9eef1dd8d914,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-ab66a14af6a9,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-ba37607deb14,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-c641b309556c,C11_REVIEW_R2,DISTINGUISHES,SUPPORTED,DISTINGUISHES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-cd09c943e946,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-d0505a59f572,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-df3ab521d43b,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-e0ff21c457e7,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-e1e384bee109,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-e8fec031093d,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-ef034d7f0c42,C11_REVIEW_R2,DISTINGUISHES,SUPPORTED,DISTINGUISHES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-f0f9eb22eb44,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-f25a0cd1703c,C11_REVIEW_R2,DISTINGUISHES,SUPPORTED,DISTINGUISHES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-f9d4bace9003,C11_REVIEW_R2,APPLIES_FOLLOWS,SUPPORTED,FOLLOWS_APPLIES,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-fa616c618b9a,C11_REVIEW_R2,REPORTED_TREATMENT_DOC_CHECK,SUPPORTED,NONE,reviewer verdict on the stated target; reported treatment carries no own-voice proposal
+TC-09b5d373b025,C11_REVIEW_R3_V13,ADVISER_SEPARATE_OPINION_LEAD,SEPARATE_OR_DISSENT_NO_PROPOSAL,NONE,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-0b27a3830ff7,C11_REVIEW_R3_V13,ADVISER_SEPARATE_OPINION_LEAD,SEPARATE_OR_DISSENT_NO_PROPOSAL,NONE,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-19f0e5a3af63,C11_REVIEW_R3_V13,ADVISER_SEPARATE_OPINION_LEAD,SEPARATE_OR_DISSENT_NO_PROPOSAL,NONE,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-204093fae39f,C11_REVIEW_R3_V13,ADVISER_COURT_OWN_VOICE_UNBOUND_LEAD,REAL_OWN_VOICE_OVERRULING,OVERRULES_OR_DECLARATORY,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-235c7582ce78,C11_REVIEW_R3_V13,ADVISER_SEPARATE_OPINION_LEAD,SEPARATE_OR_DISSENT_NO_PROPOSAL,NONE,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-29a337ba9c11,C11_REVIEW_R3_V13,ADVISER_SEPARATE_OPINION_LEAD,SEPARATE_OR_DISSENT_NO_PROPOSAL,NONE,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-387c984f74dc,C11_REVIEW_R3_V13,ADVISER_SEPARATE_OPINION_LEAD,SEPARATE_OR_DISSENT_NO_PROPOSAL,NONE,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-3c0fb3f2e38a,C11_REVIEW_R3_V13,ADVISER_COURT_OWN_VOICE_UNBOUND_LEAD,REAL_OWN_VOICE_OVERRULING,OVERRULES_OR_DECLARATORY,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-4289a1bc33bc,C11_REVIEW_R3_V13,ADVISER_COURT_OWN_VOICE_UNBOUND_LEAD,REAL_OWN_VOICE_OVERRULING,OVERRULES_OR_DECLARATORY,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-44e4cead92b0,C11_REVIEW_R3_V13,ADVISER_COURT_OWN_VOICE_UNBOUND_LEAD,REAL_OWN_VOICE_OVERRULING,OVERRULES_OR_DECLARATORY,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-48e2ff70f085,C11_REVIEW_R3_V13,ADVISER_SEPARATE_OPINION_LEAD,SEPARATE_OR_DISSENT_NO_PROPOSAL,NONE,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-50aa07ffde85,C11_REVIEW_R3_V13,ADVISER_DISSENT_OPINION_LEAD,SEPARATE_OR_DISSENT_NO_PROPOSAL,NONE,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-60023f729c47,C11_REVIEW_R3_V13,ADVISER_DISSENT_OPINION_LEAD,SEPARATE_OR_DISSENT_NO_PROPOSAL,NONE,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-7321756415bb,C11_REVIEW_R3_V13,ADVISER_COURT_OWN_VOICE_UNBOUND_LEAD,REAL_OWN_VOICE_OVERRULING,OVERRULES_OR_DECLARATORY,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-741f5ae7f6ab,C11_REVIEW_R3_V13,ADVISER_SEPARATE_OPINION_LEAD,NOT_AN_OVERRULING,NONE,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-8111df7aac52,C11_REVIEW_R3_V13,ADVISER_COURT_OWN_VOICE_UNBOUND_LEAD,REAL_OWN_VOICE_OVERRULING,OVERRULES_OR_DECLARATORY,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-8682d402357c,C11_REVIEW_R3_V13,ADVISER_COURT_OWN_VOICE_UNBOUND_LEAD,REAL_OWN_VOICE_OVERRULING,OVERRULES_OR_DECLARATORY,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-8eee72cd601c,C11_REVIEW_R3_V13,ADVISER_SEPARATE_OPINION_LEAD,NOT_AN_OVERRULING,NONE,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-900ee3f8d5c6,C11_REVIEW_R3_V13,ADVISER_COURT_OWN_VOICE_UNBOUND_LEAD,REAL_OWN_VOICE_OVERRULING,OVERRULES_OR_DECLARATORY,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-9b500dbe0d15,C11_REVIEW_R3_V13,ADVISER_COURT_OWN_VOICE_UNBOUND_LEAD,NOT_AN_OVERRULING,NONE,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-a073b2e4fab8,C11_REVIEW_R3_V13,ADVISER_COURT_OWN_VOICE_UNBOUND_LEAD,REAL_OWN_VOICE_OVERRULING,OVERRULES_OR_DECLARATORY,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-a272984ee636,C11_REVIEW_R3_V13,ADVISER_SEPARATE_OPINION_LEAD,SEPARATE_OR_DISSENT_NO_PROPOSAL,NONE,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-b2a42bfe7a34,C11_REVIEW_R3_V13,ADVISER_SEPARATE_OPINION_LEAD,SEPARATE_OR_DISSENT_NO_PROPOSAL,NONE,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-bd05dc37276a,C11_REVIEW_R3_V13,ADVISER_COURT_OWN_VOICE_UNBOUND_LEAD,REAL_OWN_VOICE_OVERRULING,OVERRULES_OR_DECLARATORY,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-bd7606d4e30b,C11_REVIEW_R3_V13,ADVISER_SEPARATE_OPINION_LEAD,SEPARATE_OR_DISSENT_NO_PROPOSAL,NONE,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-bf39eab314cf,C11_REVIEW_R3_V13,ADVISER_COURT_OWN_VOICE_UNBOUND_LEAD,REAL_OWN_VOICE_OVERRULING,OVERRULES_OR_DECLARATORY,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-c0a555a4670d,C11_REVIEW_R3_V13,ADVISER_COURT_OWN_VOICE_UNBOUND_LEAD,REAL_OWN_VOICE_OVERRULING,OVERRULES_OR_DECLARATORY,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-cd1cb49fedd0,C11_REVIEW_R3_V13,ADVISER_COURT_OWN_VOICE_UNBOUND_LEAD,REAL_OWN_VOICE_OVERRULING,OVERRULES_OR_DECLARATORY,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)
+TC-e8e740a5df2f,C11_REVIEW_R3_V13,ADVISER_COURT_OWN_VOICE_UNBOUND_LEAD,NOT_AN_OVERRULING,NONE,v13 review section 2 (26 of 30 real; separate/dissent rows carry no proposal)

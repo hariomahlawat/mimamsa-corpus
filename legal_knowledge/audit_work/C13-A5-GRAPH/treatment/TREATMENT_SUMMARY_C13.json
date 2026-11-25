@@ -1,0 +1,64 @@
+{
+ "a0_holdout": {
+  "available": true,
+  "commit": "5e07e010",
+  "id_columns_read": [
+   "rep_doc_id",
+   "rep_sha256",
+   "page"
+  ],
+  "pages": 160,
+  "path": "legal_knowledge/audit_work/C13-A0-EVAL/outputs/holdouts/H-REL-C13/SAMPLE.csv",
+  "sha256": "000d057c11b8de524c39ac1499f0ba9cb6a71374208f913d4d6fdf85302382be"
+ },
+ "a0_passages_read": false,
+ "dev_eval_in_sample": {
+  "correct_rejections": 72,
+  "excluded_rows_in_a0_holdout": 0,
+  "excluded_rows_not_in_rev13": 24,
+  "fp": 3,
+  "labelled_rows": 166,
+  "missed_supported": 10,
+  "note": "IN-SAMPLE: the rules were developed on these C11 reviewed rows; this is not an independent measure. Independent precision/recall awaits A0's H-REL-C13 evaluation (only its identifiers are read, to exclude it).",
+  "precision": 0.95,
+  "recall_on_supported": 0.8507,
+  "tp": 57
+ },
+ "frozen": false,
+ "inputs": {
+  "legal_knowledge/audit_work/C11-JUDICIAL-QUALITY/relations/outputs/CASE_CITATION_GRAPH.csv": "3d97599dbfbd41c9bcd5117a544e0e7df89b9eea74c40aa487109442f60a2e64",
+  "legal_knowledge/audit_work/C11-JUDICIAL-QUALITY/relations/outputs/TREATMENT_CANDIDATES.csv": "28331abf17d4d296a4baf5e88444a61d1d105319156cb5ed5d042389057fce27"
+ },
+ "passages": 24532,
+ "passages_on_a0_holdout_pages": 333,
+ "relation_counts": {
+  "APPLIES": 12,
+  "CITES": 23825,
+  "CONSIDERS": 366,
+  "DISAPPROVES": 4,
+  "DISTINGUISHES": 34,
+  "DOUBTS": 1,
+  "EXPLAINS": 4,
+  "FOLLOWS": 277,
+  "OVERRULES": 9
+ },
+ "restricted_register": {
+  "sha256": "6732065cd24da9cd073e9f8dcc88121792ff0662cd6d8c5e90d7e2097dc73e57",
+  "source": "git:ea282cbd:config/restricted_material.json"
+ },
+ "text_commit": "ad77758d",
+ "tool": "treatment-c13/0.9.0-dev",
+ "unlocated": {
+  "edge_excerpt_not_found": 1
+ },
+ "voice_counts": {
+  "COURT_OWN_VOICE": 707,
+  "CUES_REJECTED": 333,
+  "HIGH_COURT_OVERRULING_WORDS_NOT_ROUTED": 3,
+  "NO_TREATMENT_CUE": 14540,
+  "PARTY_SUBMISSION": 3310,
+  "QUOTED_PASSAGE": 3124,
+  "REPORTER_EDITORIAL": 2502,
+  "SEPARATE_OR_DISSENT_OPINION": 13
+ }
+}

@@ -68,6 +68,8 @@ def sha256_file(p) -> str:
 
 
 def read_csv(p):
+    if str(p).endswith(".gz"):
+        return list(csv.DictReader(io.StringIO(read_text_any(p))))
     with open(p, encoding="utf-8", newline="") as f:
         return list(csv.DictReader(f))
 
@@ -127,22 +129,38 @@ class Restricted:
 
 
 def write_or_check(files: dict, base: Path, check: bool) -> int:
-    """files: {relative path: text}. In check mode compare byte-for-byte; else write."""
+    """files: {relative path: text}. A path ending in .gz is stored gzip-compressed (mtime 0, deterministic); --check
+    compares the decompressed content. In check mode compare; else write."""
+    import gzip
     bad = []
     for rel, text in sorted(files.items()):
         p = base / rel
         if check:
-            if not p.exists() or p.read_text(encoding="utf-8") != text:
+            if not p.exists():
+                bad.append(rel)
+            elif rel.endswith(".gz"):
+                if gzip.decompress(p.read_bytes()).decode("utf-8") != text:
+                    bad.append(rel)
+            elif p.read_text(encoding="utf-8") != text:
                 bad.append(rel)
         else:
             p.parent.mkdir(parents=True, exist_ok=True)
-            p.write_text(text, encoding="utf-8")
+            if rel.endswith(".gz"):
+                p.write_bytes(gzip.compress(text.encode("utf-8"), compresslevel=9, mtime=0))
+            else:
+                p.write_text(text, encoding="utf-8")
     if check:
         if bad:
             print("CHECK FAILED: %d file(s) differ: %s" % (len(bad), ", ".join(bad[:8])))
             return 1
         print("CHECK OK: %d outputs reproduce byte-identically" % len(files))
     return 0
+
+
+def read_text_any(p) -> str:
+    import gzip
+    p = Path(p)
+    return gzip.decompress(p.read_bytes()).decode("utf-8") if p.suffix == ".gz" else p.read_text(encoding="utf-8")
 
 
 def sums_text(files: dict) -> str:
