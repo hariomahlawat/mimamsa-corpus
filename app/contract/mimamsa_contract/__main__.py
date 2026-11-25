@@ -41,8 +41,13 @@ def main(argv=None) -> int:
     r.add_argument("--ledger-version", type=int, default=0)
     b = sub.add_parser("bundle", help="validate a release bundle directory")
     b.add_argument("path")
-    b.add_argument("--trusted-key", help="file holding the pinned Ed25519 public key as 64 hex characters")
-    b.add_argument("--allow-unsigned-dev", action="store_true", help="development only: accept a missing signature")
+    b.add_argument("--trust-list", help="pinned trust list JSON (required in production mode)")
+    b.add_argument("--mode", choices=["production", "development"], default="production")
+    b.add_argument("--trusted-key", help="development mode only: file holding an Ed25519 public key as 64 hex characters")
+    b.add_argument("--allow-unsigned-dev", action="store_true", help="development mode only: accept a missing signature")
+    b.add_argument("--current-sequence", type=int)
+    b.add_argument("--rollback", action="store_true")
+    b.add_argument("--trusted-ledger-head")
     b.add_argument("--app-version")
     c = sub.add_parser("restricted-check", help="ask the register whether an item is restricted")
     c.add_argument("--sha256")
@@ -62,9 +67,19 @@ def main(argv=None) -> int:
         print("RESTRICTED: " + hit if hit else "not restricted")
         return 1 if hit else 0
     if a.cmd == "bundle":
+        from .trust import TrustError, parse_trust_list
         key = bytes.fromhex(Path(a.trusted_key).read_text().strip()) if a.trusted_key else None
-        return _print(validate_bundle(a.path, trusted_public_key=key, allow_unsigned_dev=a.allow_unsigned_dev,
-                                      register=reg, app_version=a.app_version), a.json)
+        trust = None
+        if a.trust_list:
+            try:
+                trust = parse_trust_list(json.loads(Path(a.trust_list).read_text(encoding="utf-8")))
+            except (TrustError, json.JSONDecodeError) as exc:
+                report.add(Issue("TRUST_LIST_INVALID", str(exc)[:200]))
+                return _print(report, a.json)
+        return _print(validate_bundle(a.path, trust_list=trust, trusted_public_key=key, mode=a.mode,
+                                      allow_unsigned_dev=a.allow_unsigned_dev, register=reg, app_version=a.app_version,
+                                      current_release_sequence=a.current_sequence, rollback=a.rollback,
+                                      trusted_ledger_head=a.trusted_ledger_head), a.json)
     p = Path(a.path)
     text = p.read_text(encoding="utf-8")
     recs = [json.loads(text)] if p.suffix == ".json" else [json.loads(x) for x in text.splitlines() if x.strip()]

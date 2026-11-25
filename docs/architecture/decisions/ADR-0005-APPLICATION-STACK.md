@@ -82,7 +82,8 @@ Weights are proposed by B0 for owner confirmation. Each option is scored 1–5 p
 
 - **Modular monolith** with internal modules: `catalogue` (documents, copies, provenance), `search`, `viewer`, `graph`, `research` (workspaces, notes), `studio` (working sessions, no rules), `admin` (ingestion, publication, releases), `identity` (accounts, roles, designation registry), `audit`.
 - **Isolated workers** as separate Windows Services: `ingest-parse` (file sniffing, text extraction), `ingest-ocr`, `embed`, `index`, `release-import`. Workers have no inbound ports, no outbound network, read-only access to the vault, write access only to their scratch and derivative folders.
-- **Shared contract.** All corpus data enters through `app/contract` v1 bundles; the app never writes to authoritative records.
+- **Shared contract.** All corpus data enters through `app/contract` v1 bundles; the app never writes to authoritative records. The nine data layers (contract README §3.1) map to separate stores whatever stack is chosen.
+- **Signed everything.** Installer and payloads Authenticode-signed (mandatory); data bundles and exclusion updates Ed25519-signed by owner-held keys under an owner-controlled trust list.
 - **Gates off by configuration and by data.** The commander assistant and any legal-rule feature are architected (routes, module boundaries, data model hooks) but **disabled**; enabling requires the reasoning-feature gate (Cycle 13 plan §7), which cannot open while AUTH-LEDGER is at version 0 and no Legal Reviewer is appointed.
 
 ## 5. Consequences (to be confirmed with the decision)

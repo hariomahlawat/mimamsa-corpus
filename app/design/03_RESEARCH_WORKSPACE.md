@@ -29,10 +29,22 @@ The research workspace is the default screen and the core of the product (CAP-US
 
 ## 2. Persistent search
 
-- Always in the top bar; Ctrl+K or `/` focuses it from anywhere.
+- Always in the top bar; `/` focuses it from anywhere outside a text field (keymap in `keymap.json`, conflict-free with Edge/Chrome reserved keys).
 - **Parsed query chips:** recognised identifiers (section, rule, case number, neutral citation, year, court) become removable chips showing how they were read ("Section 69 · Army Act 1950"). Unrecognised text stays free text. The user can turn a chip back into text.
 - **Modes:** default hybrid; explicit `"phrase"`; `exact:` prefix forces lexical only. A small "how this search ran" line under the result count states mode, filters and release.
-- **Suggestions:** recent queries (local to the user) and identifier completions from the published corpus; never from staged or withdrawn items.
+- **Suggestions:** recent queries and search history are stored **server-side per user** (never in browser storage; client policy `policies/client_state_and_cache.json`), plus identifier completions from the published corpus; never from staged or withdrawn items.
+- **Query syntax (professional search):**
+
+  | Feature | Syntax | Example |
+  | --- | --- | --- |
+  | Boolean | `AND`, `OR`, `NOT` (upper case), parentheses; default operator AND | `(desertion OR "absent without leave") AND NOT pension` |
+  | Phrase | `"…"` | `"summary of evidence"` |
+  | Proximity | `NEAR/n` between terms or phrases (within n words, any order); `"a b"~n` as alternative | `"court martial" NEAR/10 delay` |
+  | Prefix | `term*` (minimum 3 characters) | `invalid*` |
+  | Field search | `field:value`; fields `title:`, `party:`, `judge:`, `court:`, `bench:`, `case:`, `citation:`, `section:`, `act:`, `type:`, `date:` with ranges `date:2019-01-01..2021-12-31` or `year:2015..2020` | `judge:"Example" section:69 act:"Army Act 1950"` |
+  | Exact lexical | `exact:` prefix disables semantic expansion | `exact:"Rule 22(3)(a)"` |
+
+  The parser shows its reading as chips ("Judge = Example", "Section 69 · Army Act 1950", "NEAR/10"); a malformed query is shown with the error position and run as plain words only after the user confirms. Field and Boolean queries run lexically (FTS); semantic expansion applies only to free-text clauses. Performance target for all query types: p95 < 1 s at 10 concurrent queries on reference hardware without reducing accuracy (P2).
 - Search text is never logged server-side (security architecture §10).
 
 ## 3. Results pane
@@ -41,7 +53,8 @@ The research workspace is the default screen and the core of the product (CAP-US
 - **Excerpt row:** page number first ("p.12"), excerpt with highlighted matched terms (`highlight.search`), match-reason chips (Lexical, Semantic, Identifier), and status chips: `OCR` (if the passage is OCR-derived), `Low OCR confidence`, `Candidate` (for derived fields shown).
 - **Why relevant:** a one-line explanation from data only, e.g. "Matched: 'court martial' (3), Section 69 Army Act cited on p.12". No relevance score number, no "binding" or "leading case" badge.
 - **Sort:** relevance, date (new/old), court. No sort by citation count in Cycle 13.
-- **Selection:** ↑/↓ moves, Enter opens in the current tab, Ctrl+Enter in a new tab, Space previews in the document pane without adding a tab.
+- **Selection:** ↑/↓ or J/K moves, Enter opens in the current tab, O in a new app tab, Space previews in the document pane without adding a tab.
+- **Chip budget (F22):** at most two chips per excerpt row (one match reason, one state); further states collapse into a single "+n" state cell that expands on focus. Glyph shapes are distinct (see 04 §3.1).
 
 ## 4. Facets
 
@@ -49,12 +62,14 @@ Left rail, below saved items. Each facet: title, counts, "show more", search-wit
 
 ## 5. Document pane and tabs
 
-- **Tabs:** up to 12 open documents; overflow menu; tab shows type glyph + short title; middle-click or Ctrl+W closes; tabs and scroll positions persist per user.
+- **Tabs:** up to 12 open documents; overflow menu; tab shows type glyph + short title; middle-click or X closes; tabs and scroll positions persist per user **on the server** (not in browser storage).
 - **Header:** title as printed; court/bench or issuer; date(s); case numbers; neutral citation; each field followed by a small origin chip (`crawler`, `rule`, `LLM-derived`, `human`) and, on hover, its evidence fidelity.
 - **Proceedings strip (judgments):** list of proceedings with candidate outcome chips: "Dismissed · candidate · P 95.6% / cov 54.6% · V3 · not human-checked" (figures only from the record's `evaluation_ref`; "not evaluated" otherwise).
-- **Viewer (PDF.js):** original bytes; page thumbnails optional; hit navigation (◀ ▶, F3/Shift+F3) across all hits in the document; native PDFs highlight from the text layer; scans overlay OCR word boxes in `highlight.ocr-box` with a legend "Highlight from OCR boxes".
+- **Viewer (PDF.js):** original bytes; page thumbnails optional; hit navigation (◀ ▶, N / Shift+N; the browser's own F3 find is left alone) across all hits in the document; native PDFs highlight from the text layer with `pdf.highlight.search`; scans overlay OCR word boxes in `pdf.highlight.ocr` **with a dashed `pdf.highlight.ocr-outline`**, so OCR-derived positions differ by shape as well as hue; legend "Highlight from OCR boxes". PDF highlight tokens are theme-independent because pages render on white in both themes.
 - **Original / Text toggle:** the Text view shows the extracted text with `[[page N]]` markers rendered as page dividers; OCR pages carry the "for search only" label.
-- **Copy citation** (Ctrl+Shift+C): copies `doc_id · copy sha256[:12] · p.N[, para M] · release id`, plus the permalink. Never copies OCR text as a quotation without the label.
+- **Copy citation** (C): copies a **legal citation** in the conventional order, built only from printed or rule/crawler metadata (LLM-derived fields are never used; absent parts are omitted, never guessed): *Case name (petitioner v. respondent) or title, neutral citation (else reported citation, else case number), (Court, date), para N* where the judgment prints numbered paragraphs, otherwise *p. N*. Example shape: `A v. Union of India, 20XX INSC NNN (Supreme Court of India, 1 January 20XX), para 12`. Reference implementation and tests: `app/contract/mimamsa_contract/citation.py`.
+- **Copy internal reference** (Shift+C): `[doc_id · copy sha256[:12] · p.N · release id]` plus the permalink, for provenance; never mixed into the legal citation. Never copies OCR text as a quotation without the label.
+- **Export (research sets and selections):** citation list as plain text and CSV (legal citation, internal reference, permalink), with the banner text as header.
 - **Copies switcher:** when alternate copies exist; side-by-side compare (two viewers, synchronised pages when page counts match).
 
 ## 6. Context pane

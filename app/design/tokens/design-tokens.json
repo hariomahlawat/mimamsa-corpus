@@ -1,6 +1,6 @@
 {
-  "$description": "Mimamsa design tokens v0.1.0 (Cycle 13 B0, proposed). Original identity 'Ledger and Margin'. System fonts only (no web fonts, no network). Every text/background pair used by components is listed in contrast_pairs and checked by app/design/tests/test_tokens.py against WCAG 2.2 AA.",
-  "version": "0.1.0",
+  "$description": "Mimamsa design tokens v0.1.0 (Cycle 13 B0, proposed). Original identity 'Ledger and Margin'. System fonts only (no web fonts, no network). Every text/background pair used by components is listed in contrast_pairs and checked by app/design/tests/test_tokens.py against WCAG 2.2 AA. v0.2: all fg.* text tokens are tested against all bg.* tokens; PDF-page highlight tokens are theme-independent because PDF.js renders pages on white in both themes; OCR-box hits carry a dashed outline so they differ from search hits by shape, not only hue; breakpoints are effective CSS pixels and the touch layout is chosen by pointer type, never by width (Windows display scaling).",
+  "version": "0.2.0",
   "color": {
     "light": {
       "bg.canvas": "#F6F5F1",
@@ -11,7 +11,7 @@
       "fg.secondary": "#4A5361",
       "fg.muted": "#5C6571",
       "fg.on-accent": "#FFFFFF",
-      "fg.withdrawn": "#6B6B6B",
+      "fg.withdrawn": "#636363",
       "border.subtle": "#D8D5CC",
       "border.control": "#7D786D",
       "accent.interactive": "#2B5A8C",
@@ -34,7 +34,12 @@
       "banner.fg": "#5A3D00",
       "banner.border": "#B88A1E",
       "edge.cites": "#4A5361",
-      "edge.proposed": "#8A5A00"
+      "edge.proposed": "#8A5A00",
+      "pdf.page": "#FFFFFF",
+      "pdf.text": "#000000",
+      "pdf.highlight.search": "#FFE58A",
+      "pdf.highlight.ocr": "#CFE0FF",
+      "pdf.highlight.ocr-outline": "#1A5FB4"
     },
     "dark": {
       "bg.canvas": "#14181E",
@@ -68,61 +73,325 @@
       "banner.fg": "#F4D58A",
       "banner.border": "#B88A1E",
       "edge.cites": "#B4BAC3",
-      "edge.proposed": "#E0B25A"
+      "edge.proposed": "#E0B25A",
+      "pdf.page": "#FFFFFF",
+      "pdf.text": "#000000",
+      "pdf.highlight.search": "#FFE58A",
+      "pdf.highlight.ocr": "#CFE0FF",
+      "pdf.highlight.ocr-outline": "#1A5FB4"
     }
   },
   "contrast_pairs": [
-    {"fg": "fg.primary", "bg": "bg.canvas", "min": 4.5, "use": "body text on canvas"},
-    {"fg": "fg.primary", "bg": "bg.surface", "min": 4.5, "use": "body text on panes"},
-    {"fg": "fg.primary", "bg": "bg.sunken", "min": 4.5, "use": "text in rails and table headers"},
-    {"fg": "fg.primary", "bg": "bg.selected", "min": 4.5, "use": "selected row text"},
-    {"fg": "fg.secondary", "bg": "bg.surface", "min": 4.5, "use": "metadata labels"},
-    {"fg": "fg.secondary", "bg": "bg.canvas", "min": 4.5, "use": "metadata labels on canvas"},
-    {"fg": "fg.muted", "bg": "bg.surface", "min": 4.5, "use": "hints, counts"},
-    {"fg": "fg.muted", "bg": "bg.canvas", "min": 4.5, "use": "hints on canvas"},
-    {"fg": "fg.muted", "bg": "bg.sunken", "min": 4.5, "use": "hints in rails"},
-    {"fg": "fg.withdrawn", "bg": "bg.surface", "min": 4.5, "use": "withdrawn item text (with strike + label)"},
-    {"fg": "accent.interactive", "bg": "bg.surface", "min": 4.5, "use": "links, text buttons"},
-    {"fg": "accent.interactive", "bg": "bg.canvas", "min": 4.5, "use": "links on canvas"},
-    {"fg": "accent.interactive", "bg": "bg.selected", "min": 4.5, "use": "links in selected rows"},
-    {"fg": "fg.on-accent", "bg": "accent.interactive", "min": 4.5, "use": "primary button label"},
-    {"fg": "fg.primary", "bg": "highlight.search", "min": 4.5, "use": "search hit highlight"},
-    {"fg": "fg.primary", "bg": "highlight.ocr-box", "min": 4.5, "use": "OCR-derived passage highlight"},
-    {"fg": "status.candidate.fg", "bg": "status.candidate.bg", "min": 4.5, "use": "candidate chip"},
-    {"fg": "status.checked.fg", "bg": "status.checked.bg", "min": 4.5, "use": "documentary-checked chip"},
-    {"fg": "status.warning.fg", "bg": "status.warning.bg", "min": 4.5, "use": "warning chip (OCR low confidence, truncated)"},
-    {"fg": "status.error.fg", "bg": "status.error.bg", "min": 4.5, "use": "error message"},
-    {"fg": "status.gated.fg", "bg": "status.gated.bg", "min": 4.5, "use": "gate-closed notice"},
-    {"fg": "banner.fg", "bg": "banner.bg", "min": 4.5, "use": "candidate-data banner"},
-    {"fg": "border.control", "bg": "bg.surface", "min": 3.0, "use": "input and checkbox borders (non-text UI)"},
-    {"fg": "border.control", "bg": "bg.canvas", "min": 3.0, "use": "control borders on canvas"},
-    {"fg": "focus.ring", "bg": "bg.surface", "min": 3.0, "use": "focus indicator"},
-    {"fg": "focus.ring", "bg": "bg.canvas", "min": 3.0, "use": "focus indicator on canvas"},
-    {"fg": "edge.cites", "bg": "bg.surface", "min": 3.0, "use": "graph edge line: citation"},
-    {"fg": "edge.proposed", "bg": "bg.surface", "min": 3.0, "use": "graph edge line: proposed (dashed)"}
+    {
+      "fg": "fg.primary",
+      "bg": "bg.canvas",
+      "min": 4.5,
+      "use": "body text on canvas"
+    },
+    {
+      "fg": "fg.primary",
+      "bg": "bg.surface",
+      "min": 4.5,
+      "use": "body text on panes"
+    },
+    {
+      "fg": "fg.primary",
+      "bg": "bg.sunken",
+      "min": 4.5,
+      "use": "text in rails and table headers"
+    },
+    {
+      "fg": "fg.primary",
+      "bg": "bg.selected",
+      "min": 4.5,
+      "use": "selected row text"
+    },
+    {
+      "fg": "fg.secondary",
+      "bg": "bg.surface",
+      "min": 4.5,
+      "use": "metadata labels"
+    },
+    {
+      "fg": "fg.secondary",
+      "bg": "bg.canvas",
+      "min": 4.5,
+      "use": "metadata labels on canvas"
+    },
+    {
+      "fg": "fg.muted",
+      "bg": "bg.surface",
+      "min": 4.5,
+      "use": "hints, counts"
+    },
+    {
+      "fg": "fg.muted",
+      "bg": "bg.canvas",
+      "min": 4.5,
+      "use": "hints on canvas"
+    },
+    {
+      "fg": "fg.muted",
+      "bg": "bg.sunken",
+      "min": 4.5,
+      "use": "hints in rails"
+    },
+    {
+      "fg": "fg.withdrawn",
+      "bg": "bg.surface",
+      "min": 4.5,
+      "use": "withdrawn item text (with strike + label)"
+    },
+    {
+      "fg": "accent.interactive",
+      "bg": "bg.surface",
+      "min": 4.5,
+      "use": "links, text buttons"
+    },
+    {
+      "fg": "accent.interactive",
+      "bg": "bg.canvas",
+      "min": 4.5,
+      "use": "links on canvas"
+    },
+    {
+      "fg": "accent.interactive",
+      "bg": "bg.selected",
+      "min": 4.5,
+      "use": "links in selected rows"
+    },
+    {
+      "fg": "fg.on-accent",
+      "bg": "accent.interactive",
+      "min": 4.5,
+      "use": "primary button label"
+    },
+    {
+      "fg": "fg.primary",
+      "bg": "highlight.search",
+      "min": 4.5,
+      "use": "search hit highlight"
+    },
+    {
+      "fg": "fg.primary",
+      "bg": "highlight.ocr-box",
+      "min": 4.5,
+      "use": "OCR-derived passage highlight"
+    },
+    {
+      "fg": "status.candidate.fg",
+      "bg": "status.candidate.bg",
+      "min": 4.5,
+      "use": "candidate chip"
+    },
+    {
+      "fg": "status.checked.fg",
+      "bg": "status.checked.bg",
+      "min": 4.5,
+      "use": "documentary-checked chip"
+    },
+    {
+      "fg": "status.warning.fg",
+      "bg": "status.warning.bg",
+      "min": 4.5,
+      "use": "warning chip (OCR low confidence, truncated)"
+    },
+    {
+      "fg": "status.error.fg",
+      "bg": "status.error.bg",
+      "min": 4.5,
+      "use": "error message"
+    },
+    {
+      "fg": "status.gated.fg",
+      "bg": "status.gated.bg",
+      "min": 4.5,
+      "use": "gate-closed notice"
+    },
+    {
+      "fg": "banner.fg",
+      "bg": "banner.bg",
+      "min": 4.5,
+      "use": "candidate-data banner"
+    },
+    {
+      "fg": "border.control",
+      "bg": "bg.surface",
+      "min": 3.0,
+      "use": "input and checkbox borders (non-text UI)"
+    },
+    {
+      "fg": "border.control",
+      "bg": "bg.canvas",
+      "min": 3.0,
+      "use": "control borders on canvas"
+    },
+    {
+      "fg": "focus.ring",
+      "bg": "bg.surface",
+      "min": 3.0,
+      "use": "focus indicator"
+    },
+    {
+      "fg": "focus.ring",
+      "bg": "bg.canvas",
+      "min": 3.0,
+      "use": "focus indicator on canvas"
+    },
+    {
+      "fg": "edge.cites",
+      "bg": "bg.surface",
+      "min": 3.0,
+      "use": "graph edge line: citation"
+    },
+    {
+      "fg": "edge.proposed",
+      "bg": "bg.surface",
+      "min": 3.0,
+      "use": "graph edge line: proposed (dashed)"
+    },
+    {
+      "fg": "pdf.text",
+      "bg": "pdf.highlight.search",
+      "min": 4.5,
+      "use": "PDF page text under search highlight (both themes)"
+    },
+    {
+      "fg": "pdf.text",
+      "bg": "pdf.highlight.ocr",
+      "min": 4.5,
+      "use": "PDF page text under OCR-box highlight (both themes)"
+    },
+    {
+      "fg": "pdf.highlight.ocr-outline",
+      "bg": "pdf.page",
+      "min": 3.0,
+      "use": "dashed outline marking OCR-derived hit boxes"
+    },
+    {
+      "fg": "pdf.highlight.ocr-outline",
+      "bg": "pdf.highlight.ocr",
+      "min": 3.0,
+      "use": "OCR outline against its fill"
+    }
   ],
   "typography": {
     "font.ui": "\"Segoe UI\", system-ui, -apple-system, \"Noto Sans\", Arial, sans-serif",
     "font.reading": "Cambria, \"Noto Serif\", Georgia, \"Times New Roman\", serif",
     "font.mono": "\"Cascadia Mono\", Consolas, \"Noto Sans Mono\", monospace",
     "font.devanagari": "\"Nirmala UI\", \"Noto Sans Devanagari\", Mangal, sans-serif",
-    "size": {"xs": 12, "sm": 13, "md": 14, "reading": 16, "lg": 18, "xl": 21, "xxl": 25},
-    "line_height": {"ui": 1.35, "reading": 1.55, "dense": 1.25},
-    "weight": {"regular": 400, "semibold": 600},
-    "measure_reading_ch": {"min": 60, "max": 80}
+    "size": {
+      "xs": 12,
+      "sm": 13,
+      "md": 14,
+      "reading": 16,
+      "lg": 18,
+      "xl": 21,
+      "xxl": 25
+    },
+    "line_height": {
+      "ui": 1.35,
+      "reading": 1.55,
+      "dense": 1.25
+    },
+    "weight": {
+      "regular": 400,
+      "semibold": 600
+    },
+    "measure_reading_ch": {
+      "min": 60,
+      "max": 80
+    }
   },
-  "space": {"0": 0, "1": 2, "2": 4, "3": 6, "4": 8, "5": 12, "6": 16, "7": 24, "8": 32},
-  "radius": {"none": 0, "control": 2, "chip": 2, "overlay": 4},
-  "border_width": {"hairline": 1, "focus": 2, "banner": 2},
-  "elevation": {"none": "none", "overlay": "0 2px 8px rgba(0,0,0,0.18)"},
-  "motion": {"state_change_ms": 120, "decorative": "none", "respect_reduced_motion": true},
+  "space": {
+    "0": 0,
+    "1": 2,
+    "2": 4,
+    "3": 6,
+    "4": 8,
+    "5": 12,
+    "6": 16,
+    "7": 24,
+    "8": 32
+  },
+  "radius": {
+    "none": 0,
+    "control": 2,
+    "chip": 2,
+    "overlay": 4
+  },
+  "border_width": {
+    "hairline": 1,
+    "focus": 2,
+    "banner": 2
+  },
+  "elevation": {
+    "none": "none",
+    "overlay": "0 2px 8px rgba(0,0,0,0.18)"
+  },
+  "motion": {
+    "state_change_ms": 120,
+    "decorative": "none",
+    "respect_reduced_motion": true
+  },
   "layout": {
-    "breakpoints": {"tablet": 768, "compact": 1280, "standard": 1600, "wide": 2200},
-    "targets": ["1366x768", "1920x1080", "2560x1440", "tablet 1024x768 / 1180x820"],
-    "pane_min_px": {"rail": 200, "results": 320, "document": 480, "context": 280},
-    "row_height_px": {"dense": 28, "default": 32, "touch": 44},
+    "breakpoints": {
+      "$unit": "effective CSS px (physical px / Windows display scale)",
+      "narrow": 1024,
+      "compact": 1280,
+      "standard": 1600,
+      "wide": 2200
+    },
+    "targets": [
+      "1366x768",
+      "1920x1080",
+      "2560x1440",
+      "tablet 1024x768 / 1180x820"
+    ],
+    "pane_min_px": {
+      "rail": 200,
+      "results": 320,
+      "document": 480,
+      "context": 280
+    },
+    "row_height_px": {
+      "dense": 28,
+      "default": 32,
+      "touch": 44
+    },
     "banner_height_px": 28,
-    "topbar_height_px": 40
+    "topbar_height_px": 40,
+    "input_mode": {
+      "touch_layout_when": "(pointer: coarse) and (hover: none)",
+      "never_by_width": true
+    },
+    "scaling_matrix": {
+      "scales": [
+        1.0,
+        1.25,
+        1.5,
+        1.75
+      ],
+      "physical": [
+        "1366x768",
+        "1920x1080",
+        "2560x1440"
+      ]
+    },
+    "chrome_px": {
+      "banner": 28,
+      "banner_condensed": 20,
+      "topbar": 40,
+      "footer": 24,
+      "browser_ui_estimate": 120,
+      "taskbar_estimate": 48
+    }
   },
-  "z": {"base": 0, "pane_divider": 10, "popover": 100, "dialog": 200, "banner": 300}
+  "z": {
+    "base": 0,
+    "pane_divider": 10,
+    "popover": 100,
+    "dialog": 200,
+    "banner": 300
+  }
 }

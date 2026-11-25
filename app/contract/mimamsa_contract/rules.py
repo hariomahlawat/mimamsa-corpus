@@ -1,13 +1,38 @@
-"""Semantic rules that JSON Schema cannot express. Each rule has a stable code (see README, 'Rule codes')."""
+"""Semantic rules that JSON Schema cannot express. Each rule has a stable code (README, 'Rule codes')."""
 from __future__ import annotations
 
+from dataclasses import dataclass, field
+
 from .issues import Issue
+from .paths import path_hazard
 from .restricted import RestrictedRegister
 from .schemas import validator
 
 NO_LEGAL_EFFECT_RELATIONS = frozenset({
     "CITES_PROVISION", "QUOTES_PROVISION", "CITES_JUDGMENT", "UPLOAD_REFERENCES_PROVISION", "UPLOAD_REFERENCES_CASE",
 })
+
+# Values above each axis's default that must cite an independent review record.
+RAISED_NEEDS_REVIEW = {
+    "source_authenticity": {"IDENTITY_CONFIRMED", "DISPUTED"},
+    "evidence_fidelity": {"DOCUMENTARY_CHECKED", "FIDELITY_VERIFIED", "INCORRECT"},
+    "legal_applicability": {"UNRESOLVED", "PARTIAL_CHAIN", "EVIDENCED", "CONFLICTING", "NOT_APPLICABLE"},
+    "dependency_freshness": {"CURRENT_FOR_CHECKED_SCOPE"},
+}
+APPROVED_TIERS = {"T1_LEGAL_ADVISER_REVIEWED", "T2_FORMAL_JAG_VALIDATED"}
+SITE_ONLY_CHANNELS = {"RELEASE_ACTIVATION", "SITE_ADMIN"}
+
+
+@dataclass
+class BundleContext:
+    """Cross-record context available when validating a whole bundle."""
+    ledger_version: int | None = None
+    reviews: dict = field(default_factory=dict)        # review_record_id -> record
+    approvals: dict = field(default_factory=dict)      # approval_record_id -> record
+    appointments: dict = field(default_factory=dict)   # appointment_id -> record
+    doc_ids: set = field(default_factory=set)
+    copy_shas: set = field(default_factory=set)
+    candidate_ids: set = field(default_factory=set)
 
 
 def schema_issues(kind: str, record: dict, where: str) -> list[Issue]:
@@ -18,35 +43,118 @@ def schema_issues(kind: str, record: dict, where: str) -> list[Issue]:
     return out
 
 
-def _restricted(reg: RestrictedRegister, where: str, **kw) -> list[Issue]:
-    reason = reg.match(**kw)
-    if reason:
-        # The message deliberately does not echo the matched value.
-        return [Issue("RESTRICTED_MATERIAL", f"item must be excluded from every derivative and bundle ({reason})", where)]
+def restricted_scan(reg: RestrictedRegister, rec, where: str) -> list[Issue]:
+    """Every string anywhere in the record (ids, parents, edge targets, raw citations, paths, evidence)."""
+    hit = reg.deep_match(rec)
+    if hit:
+        # Message names the field, never the matched value.
+        return [Issue("RESTRICTED_MATERIAL", f"field {hit[0]} refers to restricted material ({hit[1]}); item must be excluded", where)]
     return []
 
 
-def _approval_issues(axes: dict, where: str, ledger_version: int | None) -> list[Issue]:
+def _path_issues(where: str, *paths) -> list[Issue]:
     out = []
-    la = axes.get("legal_approval", {})
-    val = la.get("value")
-    if val and val != "T0_RESEARCH_ONLY" and not la.get("approval_ref"):
-        out.append(Issue("APPROVAL_REF_REQUIRED", f"legal_approval {val} requires approval_ref", where))
-    if ledger_version == 0 and val and val != "T0_RESEARCH_ONLY":
-        out.append(Issue("LEDGER_V0_NO_APPROVAL", "AUTH-LEDGER is at version 0: legal_approval must be T0_RESEARCH_ONLY", where))
+    for p in paths:
+        if p:
+            reason = path_hazard(p)
+            if reason:
+                out.append(Issue("PATH_HAZARD", f"unsafe path ({reason})", where))
     return out
 
 
-def document_rules(rec: dict, reg: RestrictedRegister, where: str, ledger_version: int | None = None) -> list[Issue]:
-    out: list[Issue] = []
+def _review_issues(axis: str, val: dict, subject_ids: set, where: str, ctx: BundleContext | None) -> list[Issue]:
+    v = val.get("value")
+    if v not in RAISED_NEEDS_REVIEW.get(axis, ()):
+        return []
+    rid = val.get("review_record_id")
+    if not rid:
+        return [Issue("RAISED_VALUE_NEEDS_REVIEW", f"{axis}={v} requires review_record_id of an independent review", where)]
+    if ctx is None:
+        return [Issue("REVIEW_UNRESOLVED_OUTSIDE_BUNDLE", f"{axis}: {rid} can only be resolved inside a bundle", where, "warning")]
+    rv = ctx.reviews.get(rid)
+    if rv is None:
+        return [Issue("REVIEW_UNRESOLVED", f"{axis}: review record not in bundle", where)]
+    if rv.get("axis") != axis or rv.get("to_value") != v or (rv.get("subject") or {}).get("id") not in subject_ids:
+        return [Issue("REVIEW_MISMATCH", f"{axis}: review record does not cover this subject, axis and value", where)]
+    return []
+
+
+def _approval_issues(axes: dict, subject_ids: set, where: str, ctx: BundleContext | None, ledger_version: int | None) -> list[Issue]:
+    out = []
+    la = axes.get("legal_approval") or {}
+    val = la.get("value")
+    if not val or val == "T0_RESEARCH_ONLY":
+        return out
+    if ledger_version == 0:
+        out.append(Issue("LEDGER_V0_NO_APPROVAL", "AUTH-LEDGER is at version 0: legal_approval must be T0_RESEARCH_ONLY", where))
+    if ctx is None:
+        out.append(Issue("APPROVAL_UNRESOLVED", "approval needs an approval record, appointment and artefact present in the same bundle", where))
+        return out
+    ap = ctx.approvals.get(la.get("approval_record_id"))
+    if ap is None:
+        out.append(Issue("APPROVAL_UNRESOLVED", "approval record not in bundle", where))
+        return out
+    appt = ctx.appointments.get(ap.get("appointment_id"))
+    if appt is None:
+        out.append(Issue("APPOINTMENT_MISSING", "approval cites an appointment that is not recorded", where))
+    else:
+        if appt.get("revoked"):
+            out.append(Issue("APPOINTMENT_REVOKED", "appointment revoked", where))
+        if appt.get("capacity") != ap.get("capacity"):
+            out.append(Issue("APPROVAL_CAPACITY_MISMATCH", "approval capacity differs from appointment capacity", where))
+        decided = (ap.get("decided_at") or "")[:10]
+        if decided and (decided < appt.get("valid_from", "") or (appt.get("valid_until") and decided > appt["valid_until"])):
+            out.append(Issue("APPOINTMENT_NOT_VALID_AT_DECISION", "approval decided outside the appointment's validity", where))
+    if (ap.get("subject") or {}).get("id") not in subject_ids:
+        out.append(Issue("APPROVAL_SUBJECT_MISMATCH", "approval record is for a different subject", where))
+    if val in APPROVED_TIERS and (ap.get("tier") != val or ap.get("status") != "ACTIVE"):
+        out.append(Issue("APPROVAL_TIER_MISMATCH", "approval record tier/status does not support this value", where))
+    if val == "APPROVAL_RECORDED_UNCONFIRMED" and ap.get("tier") != "APPROVAL_RECORDED_UNCONFIRMED":
+        out.append(Issue("APPROVAL_TIER_MISMATCH", "unconfirmed approval must cite an unconfirmed record", where))
+    return out
+
+
+def _contradictions(axes: dict, where: str) -> list[Issue]:
+    out = []
+    g = lambda a: (axes.get(a) or {}).get("value")  # noqa: E731
+    sa = axes.get("source_authenticity") or {}
+    pol = sa.get("policy_v1") or {}
+    if g("source_authenticity") == "IDENTITY_CONFIRMED" and (
+            pol.get("copy_fidelity") in ("NOT_CHECKED", "HASH_ONLY") or pol.get("document_authority") == "UNKNOWN"):
+        out.append(Issue("AXIS_CONTRADICTION", "IDENTITY_CONFIRMED needs copy_fidelity above HASH_ONLY and a known document_authority", where))
+    if g("publication") == "PUBLISHED" and g("source_integrity") in ("MISMATCH", "NOT_CHECKED"):
+        out.append(Issue("AXIS_CONTRADICTION", f"PUBLISHED with source_integrity {g('source_integrity')}", where))
+    if g("publication") == "PUBLISHED" and g("source_integrity") == "TRUNCATED_AT_SOURCE":
+        out.append(Issue("PUBLISHED_TRUNCATED", "published copy is truncated at source; UI must warn", where, "warning"))
+    if g("source_integrity") == "BYTE_VERIFIED" and not (axes.get("source_integrity") or {}).get("evidence_ref"):
+        out.append(Issue("RAISED_VALUE_NEEDS_REVIEW", "BYTE_VERIFIED requires evidence_ref (verification record)", where))
+    if g("legal_approval") in APPROVED_TIERS:
+        if g("evidence_fidelity") in ("AUTOMATED_CANDIDATE_NOT_VERIFIED", "INCORRECT"):
+            out.append(Issue("AXIS_CONTRADICTION", "legal approval on unverified or incorrect evidence", where))
+        if g("legal_applicability") in ("NOT_ESTABLISHED", "UNRESOLVED", "CONFLICTING"):
+            out.append(Issue("AXIS_CONTRADICTION", "legal approval while applicability is not established", where))
+        if g("source_authenticity") != "IDENTITY_CONFIRMED":
+            out.append(Issue("AXIS_CONTRADICTION", "legal approval without confirmed source identity", where))
+    if g("dependency_freshness") == "CURRENT_FOR_CHECKED_SCOPE" and g("legal_applicability") in ("NOT_ESTABLISHED", "CONFLICTING"):
+        out.append(Issue("AXIS_CONTRADICTION", "freshness current while applicability not established", where))
+    return out
+
+
+def _axes_issues(axes: dict, subject_ids: set, where: str, ctx, ledger_version) -> list[Issue]:
+    out = []
+    for axis in RAISED_NEEDS_REVIEW:
+        if axis in axes:
+            out += _review_issues(axis, axes[axis], subject_ids, where, ctx)
+    out += _contradictions(axes, where)
+    out += _approval_issues(axes, subject_ids, where, ctx, ledger_version)
+    return out
+
+
+def document_rules(rec: dict, reg: RestrictedRegister, where: str, ledger_version: int | None = None,
+                   ctx: BundleContext | None = None) -> list[Issue]:
+    out: list[Issue] = restricted_scan(reg, rec, where)
     sc = rec.get("source_copy", {})
     sha = sc.get("sha256", "")
-    out += _restricted(reg, where, sha256=sha, doc_id=rec.get("doc_id"))
-    for alt in rec.get("alternate_copy_sha256", []):
-        out += _restricted(reg, where, sha256=alt)
-    hf = (rec.get("provenance") or {}).get("hf") or {}
-    if hf.get("path"):
-        out += _restricted(reg, where, path=hf["path"])
     restriction = rec.get("restriction", {})
     if restriction.get("eligibility") == "RESTRICTED":
         out.append(Issue("RESTRICTED_MATERIAL", "record self-declares eligibility RESTRICTED; it must not be exchanged", where))
@@ -54,30 +162,28 @@ def document_rules(rec: dict, reg: RestrictedRegister, where: str, ledger_versio
         out.append(Issue("VAULT_PATH_MISMATCH", "vault_path must be vault/sha256/<sha[:2]>/<sha>", where))
     if sha and sha in rec.get("alternate_copy_sha256", []):
         out.append(Issue("ALTERNATE_IS_SELF", "alternate_copy_sha256 must not contain the record's own copy", where))
+    prov = rec.get("provenance") or {}
+    out += _path_issues(where, (prov.get("hf") or {}).get("path"), (prov.get("git") or {}).get("path"))
     axes = rec.get("status_axes", {})
-    pub = axes.get("publication", {}).get("value")
+    pub = (axes.get("publication") or {}).get("value")
     if pub == "PUBLISHED" and restriction.get("eligibility") != "ELIGIBLE_ALL_USERS":
         out.append(Issue("PUBLISH_WITHOUT_ELIGIBILITY", "PUBLISHED requires eligibility ELIGIBLE_ALL_USERS", where))
     if restriction.get("access_marking") and restriction.get("eligibility") == "ELIGIBLE_ALL_USERS" and not restriction.get("basis"):
         out.append(Issue("MARKING_WITHOUT_DECISION", "a printed access marking with ELIGIBLE_ALL_USERS needs a recorded basis", where))
     if pub == "EXCLUDED_RESTRICTED":
         out.append(Issue("RESTRICTED_MATERIAL", "EXCLUDED_RESTRICTED items are never exchanged", where))
-    out += _approval_issues(axes, where, ledger_version)
+    out += _axes_issues(axes, {rec.get("doc_id"), sha}, where, ctx, ledger_version)
     if rec.get("text_method") == "ocr" and rec.get("ocr_confidence") is None:
         out.append(Issue("OCR_CONFIDENCE_MISSING", "text_method ocr should carry ocr_confidence", where, "warning"))
-    for fld, origin in (rec.get("field_origin") or {}).items():
+    for fld in (rec.get("field_origin") or {}):
         if fld not in rec and fld not in (rec.get("judicial") or {}):
             out.append(Issue("FIELD_ORIGIN_UNKNOWN_FIELD", f"field_origin names absent field {fld}", where, "warning"))
     return out
 
 
-def derived_text_rules(rec: dict, reg: RestrictedRegister, where: str) -> list[Issue]:
-    out: list[Issue] = []
-    out += _restricted(reg, where, sha256=rec.get("source_copy_sha256"), doc_id=rec.get("doc_id"))
-    if rec.get("text_path"):
-        out += _restricted(reg, where, path=rec["text_path"])
-    if rec.get("text_sha256"):
-        out += _restricted(reg, where, sha256=rec["text_sha256"])
+def derived_text_rules(rec: dict, reg: RestrictedRegister, where: str, ctx: BundleContext | None = None) -> list[Issue]:
+    out: list[Issue] = restricted_scan(reg, rec, where)
+    out += _path_issues(where, rec.get("text_path"))
     pages = rec.get("pages", [])
     if any(p.get("method") == "ocr" for p in pages) and rec.get("quoting_permitted"):
         out.append(Issue("OCR_QUOTING", "OCR-derived text is for search only: quoting_permitted must be false", where))
@@ -95,20 +201,27 @@ def derived_text_rules(rec: dict, reg: RestrictedRegister, where: str) -> list[I
             out.append(Issue("PASSAGE_PAGE_UNKNOWN", f"{pid} points to a page not listed in pages", where))
         if psg.get("char_end", 0) < psg.get("char_start", 0):
             out.append(Issue("ANCHOR_RANGE", f"{pid}: char_end < char_start", where))
+    if rec.get("evidence_fidelity") == "DOCUMENTARY_CHECKED" and ctx is None:
+        out.append(Issue("REVIEW_UNRESOLVED_OUTSIDE_BUNDLE", "documentary check can only be resolved inside a bundle", where, "warning"))
     return out
 
 
-def candidate_rules(rec: dict, reg: RestrictedRegister, where: str) -> list[Issue]:
-    out: list[Issue] = []
-    out += _restricted(reg, where, doc_id=rec.get("source_doc_id"))
+def candidate_rules(rec: dict, reg: RestrictedRegister, where: str, ctx: BundleContext | None = None) -> list[Issue]:
+    out: list[Issue] = restricted_scan(reg, rec, where)
     for a in rec.get("anchors", []):
-        out += _restricted(reg, where, sha256=a.get("source_copy_sha256"))
         cs, ce = a.get("char_start"), a.get("char_end")
         if cs is not None and ce is not None and ce < cs:
             out.append(Issue("ANCHOR_RANGE", "char_end < char_start", where))
+    ev = rec.get("evaluation_ref")
+    out += _path_issues(where, (rec.get("extractor") or {}).get("artefact_path"), (ev or {}).get("report_path"))
     status = rec.get("status")
-    if status in ("DOCUMENTARY_CHECKED", "REJECTED_ON_REVIEW") and not rec.get("review_ref"):
+    rref = rec.get("review_ref")
+    if status in ("DOCUMENTARY_CHECKED", "REJECTED_ON_REVIEW") and not rref:
         out.append(Issue("REVIEW_REF_REQUIRED", f"status {status} requires review_ref", where))
+    if rref and ctx is not None:
+        rv = ctx.reviews.get(rref)
+        if rv is None or (rv.get("subject") or {}).get("id") != rec.get("candidate_id"):
+            out.append(Issue("REVIEW_UNRESOLVED", "review_ref does not resolve to a review of this candidate in the bundle", where))
     ctype = rec.get("candidate_type")
     restriction = rec.get("capability_restriction")
     if ctype in ("outcome", "holding", "form") and restriction == "NONE_RECORDED":
@@ -121,25 +234,72 @@ def candidate_rules(rec: dict, reg: RestrictedRegister, where: str) -> list[Issu
         expected = rel not in NO_LEGAL_EFFECT_RELATIONS
         if rel and payload.get("has_legal_effect") is not expected:
             out.append(Issue("EDGE_LEGAL_EFFECT_FLAG", f"{rel}: has_legal_effect must be {expected}", where))
-        if expected and payload.get("confidence") == "human_verified" and not rec.get("review_ref"):
+        if expected and payload.get("confidence") == "human_verified" and not rref:
             out.append(Issue("LEGAL_EFFECT_EDGE_UNREVIEWED", "a legal-effect edge marked human_verified needs a review_ref", where))
         tgt = payload.get("target") or {}
         if tgt.get("resolved") and not tgt.get("node_id"):
             out.append(Issue("EDGE_TARGET", "resolved target needs node_id", where))
         if tgt.get("resolved") is False and not tgt.get("raw_reference"):
             out.append(Issue("EDGE_TARGET", "unresolved target keeps its raw_reference", where))
-    ev = rec.get("evaluation_ref")
     if ev is not None and ev.get("human_checked") is None:
         out.append(Issue("EVALUATION_HUMAN_FLAG", "evaluation_ref should state human_checked", where, "warning"))
     return out
 
 
-def record_issues(kind: str, rec: dict, reg: RestrictedRegister, where: str, ledger_version: int | None = None) -> list[Issue]:
+def reviewed_record_rules(rec, reg, where, ctx=None):
+    out = restricted_scan(reg, rec, where)
+    out += _path_issues(where, (rec.get("record_location") or {}).get("path"))
+    if ctx is not None:
+        sid = (rec.get("subject") or {}).get("id")
+        if sid not in ctx.doc_ids | ctx.copy_shas | ctx.candidate_ids:
+            out.append(Issue("DANGLING_REVIEW", "review subject not in bundle", where))
+    return out
+
+
+def approval_rules(rec, reg, where, ledger_version=None, ctx=None):
+    out = restricted_scan(reg, rec, where)
+    if ledger_version == 0:
+        out.append(Issue("LEDGER_V0_NO_APPROVAL", "no approval record may be exchanged while AUTH-LEDGER is at version 0", where))
+    if ctx is not None and rec.get("appointment_id") not in ctx.appointments:
+        out.append(Issue("APPOINTMENT_MISSING", "approval cites an appointment that is not recorded", where))
+    return out
+
+
+def appointment_rules(rec, reg, where, ledger_version=None, ctx=None):
+    out = restricted_scan(reg, rec, where)
+    if ledger_version == 0:
+        out.append(Issue("LEDGER_V0_NO_APPROVAL", "no appointment record may be exchanged while AUTH-LEDGER is at version 0", where))
+    return out
+
+
+def publication_rules(rec, reg, where, ctx=None):
+    out = restricted_scan(reg, rec, where)
+    if rec.get("channel") in SITE_ONLY_CHANNELS:
+        out.append(Issue("PUBLICATION_CHANNEL_SITE_ONLY", "site publication acts (activation, Admin) cannot be carried in a bundle", where))
+    if ctx is not None and rec.get("action") != "WITHDRAWN" and (rec.get("subject") or {}).get("doc_id") not in ctx.doc_ids:
+        out.append(Issue("DANGLING_PUBLICATION_RECORD", "publication record subject not in bundle", where))
+    return out
+
+
+def record_issues(kind: str, rec: dict, reg: RestrictedRegister, where: str, ledger_version: int | None = None,
+                  ctx: BundleContext | None = None) -> list[Issue]:
+    if isinstance(rec, dict) and rec.get("record_kind") == "working_document":
+        return [Issue("WORKING_DOCUMENT_IN_BUNDLE", "working documents (layer 9) are never exchanged", where)]
     issues = schema_issues(kind, rec, where)
     if kind == "document":
-        issues += document_rules(rec, reg, where, ledger_version)
+        issues += document_rules(rec, reg, where, ledger_version, ctx)
     elif kind == "derived_text":
-        issues += derived_text_rules(rec, reg, where)
+        issues += derived_text_rules(rec, reg, where, ctx)
     elif kind == "candidate":
-        issues += candidate_rules(rec, reg, where)
+        issues += candidate_rules(rec, reg, where, ctx)
+    elif kind == "reviewed_record":
+        issues += reviewed_record_rules(rec, reg, where, ctx)
+    elif kind == "approval_record":
+        issues += approval_rules(rec, reg, where, ledger_version, ctx)
+    elif kind == "appointment_record":
+        issues += appointment_rules(rec, reg, where, ledger_version, ctx)
+    elif kind == "publication_record":
+        issues += publication_rules(rec, reg, where, ctx)
+    elif reg is not None:
+        issues += restricted_scan(reg, rec, where)
     return issues

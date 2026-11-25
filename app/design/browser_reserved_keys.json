@@ -1,0 +1,23 @@
+{
+  "$description": "Shortcuts that Microsoft Edge and Google Chrome on Windows reserve, or do not reliably pass to web pages, plus Windows system combinations. Compiled by B0 from the browsers' published shortcut lists as known at 2026-11; P9 must re-confirm on the exact browser versions deployed. Normalised form: modifiers in the order Ctrl+Alt+Shift, then the key; letters upper-case.",
+  "edge_and_chrome": [
+    "Ctrl+N", "Ctrl+Shift+N", "Ctrl+T", "Ctrl+Shift+T", "Ctrl+W", "Ctrl+Shift+W", "Ctrl+F4", "Ctrl+Tab", "Ctrl+Shift+Tab",
+    "Ctrl+PageUp", "Ctrl+PageDown", "Ctrl+Shift+PageUp", "Ctrl+Shift+PageDown",
+    "Ctrl+1", "Ctrl+2", "Ctrl+3", "Ctrl+4", "Ctrl+5", "Ctrl+6", "Ctrl+7", "Ctrl+8", "Ctrl+9",
+    "Alt+Home", "Alt+ArrowLeft", "Alt+ArrowRight", "Alt+F", "Alt+E", "Alt+D", "Alt+F4", "Alt+Space",
+    "Ctrl+D", "Ctrl+Shift+D", "Ctrl+Shift+B", "Ctrl+Shift+O", "Ctrl+H", "Ctrl+J", "Ctrl+Shift+Delete",
+    "Ctrl+F", "Ctrl+G", "Ctrl+Shift+G", "F3", "Shift+F3", "Ctrl+P", "Ctrl+Shift+P", "Ctrl+S", "Ctrl+O", "Ctrl+U",
+    "Ctrl+Shift+I", "Ctrl+Shift+J", "Ctrl+Shift+C", "Ctrl+Shift+K", "Ctrl+Shift+M", "Ctrl+Shift+A", "Ctrl+Shift+E",
+    "Ctrl+Shift+Y", "Ctrl+Shift+U", "Ctrl+Shift+L", "Ctrl+Shift+V", "Ctrl+Shift+S", "Ctrl+Shift+X", "Ctrl+Shift+Comma",
+    "Ctrl+Shift+R", "Ctrl+R", "F5", "Shift+F5", "Ctrl+F5", "Ctrl+L", "Ctrl+E", "Ctrl+K", "Ctrl+M", "Ctrl+Shift+Q",
+    "F1", "F6", "Shift+F6", "F7", "F10", "Shift+F10", "F11", "F12",
+    "Ctrl+Plus", "Ctrl+Minus", "Ctrl+0", "Ctrl+Equal",
+    "Alt+Shift+I", "Alt+Shift+T", "Alt+Shift+B", "Alt+Shift+A",
+    "Ctrl+Shift+Period", "Ctrl+Period"
+  ],
+  "windows_system": [
+    "Ctrl+Alt+Delete", "Ctrl+Shift+Escape", "Alt+Tab", "Alt+Shift+Tab", "Ctrl+Escape", "Ctrl+Alt+ArrowUp",
+    "Ctrl+Alt+ArrowDown", "Ctrl+Alt+ArrowLeft", "Ctrl+Alt+ArrowRight", "Alt+Shift+PrintScreen", "PrintScreen"
+  ],
+  "editing_conventions_kept_native": ["Ctrl+A", "Ctrl+C", "Ctrl+V", "Ctrl+X", "Ctrl+Z", "Ctrl+Y", "Ctrl+Backspace", "Ctrl+Delete", "Tab", "Shift+Tab"]
+}

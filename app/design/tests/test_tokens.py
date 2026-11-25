@@ -48,7 +48,7 @@ def test_wcag_aa_contrast(theme, pair):
 
 def test_text_pairs_use_aa_text_threshold():
     for p in TOKENS["contrast_pairs"]:
-        if not p["fg"].startswith(("border.", "focus.", "edge.")):
+        if not p["fg"].startswith(("border.", "focus.", "edge.", "pdf.highlight.")):
             assert p["min"] >= 4.5, p
 
 
@@ -77,3 +77,80 @@ def test_minimum_target_width_fits_three_panes():
     pm = TOKENS["layout"]["pane_min_px"]
     # at 1366 px: results + document + context minimums plus two 6 px dividers must fit
     assert pm["results"] + pm["document"] + pm["context"] + 12 <= 1366
+
+
+# ---- review fixes (F11, F17)
+TEXT_FG = [k for k in TOKENS["color"]["light"] if k.startswith("fg.") and k != "fg.on-accent"] + ["accent.interactive"]
+ALL_BG = [k for k in TOKENS["color"]["light"] if k.startswith("bg.")]
+
+
+@pytest.mark.parametrize("theme", THEMES)
+def test_every_text_token_on_every_background(theme):
+    """F17: undeclared pairs are also tested (a text token may appear on any background)."""
+    pal = TOKENS["color"][theme]
+    bad = [(f, b, round(contrast(pal[f], pal[b]), 2)) for f in TEXT_FG for b in ALL_BG if contrast(pal[f], pal[b]) < 4.5]
+    assert bad == []
+
+
+def test_pdf_highlight_tokens_theme_independent():
+    for k in ("pdf.page", "pdf.text", "pdf.highlight.search", "pdf.highlight.ocr", "pdf.highlight.ocr-outline"):
+        assert TOKENS["color"]["light"][k] == TOKENS["color"]["dark"][k]
+
+
+def test_search_and_ocr_highlights_differ_by_more_than_hue():
+    """F17: OCR-box hits must be distinguishable without colour perception: an outline token with >=3:1 exists."""
+    pal = TOKENS["color"]["light"]
+    assert contrast(pal["pdf.highlight.ocr-outline"], pal["pdf.page"]) >= 3.0
+
+
+def _layout(css_w: int, coarse_pointer: bool) -> str:
+    bp = TOKENS["layout"]["breakpoints"]
+    if coarse_pointer:
+        return "tablet"
+    if css_w >= bp["wide"]:
+        return "wide"
+    if css_w >= bp["standard"]:
+        return "standard"
+    if css_w >= bp["compact"]:
+        return "compact"
+    return "narrow"
+
+
+def _panes(css_w: int) -> dict:
+    pm = TOKENS["layout"]["pane_min_px"]
+    divider = 6
+    # context collapses to a drawer first, then results; the rail is icon-only (48 px) below 'standard'
+    rail = 48 if css_w < TOKENS["layout"]["breakpoints"]["standard"] else pm["rail"]
+    avail = css_w - rail
+    panes = {"results": True, "context": True}
+    if avail < pm["results"] + pm["document"] + pm["context"] + 2 * divider:
+        panes["context"] = False
+    if avail < pm["results"] + pm["document"] + divider:
+        panes["results"] = False
+    doc = avail - (pm["results"] + divider if panes["results"] else 0) - (pm["context"] + divider if panes["context"] else 0)
+    return {"document": doc, **panes}
+
+
+@pytest.mark.parametrize("phys", TOKENS["layout"]["scaling_matrix"]["physical"])
+@pytest.mark.parametrize("scale", TOKENS["layout"]["scaling_matrix"]["scales"])
+def test_windows_display_scaling_never_selects_touch_layout(phys, scale):
+    """F11: 1366x768 at 125% is ~1093 CSS px and 1920x1080 at 175% ~1097 CSS px: still a desktop layout with a usable
+    document pane, because touch layout is chosen by pointer type, not width."""
+    w = int(phys.split("x")[0])
+    css = round(w / scale)
+    assert _layout(css, coarse_pointer=False) != "tablet"
+    assert _panes(css)["document"] >= TOKENS["layout"]["pane_min_px"]["document"]
+
+
+def test_effective_widths_for_common_settings():
+    assert round(1920 / 1.25) == 1536 and _layout(1536, False) == "compact"
+    assert round(1366 / 1.25) == 1093 and _layout(1093, False) == "narrow"
+    assert _layout(1093, True) == "tablet"
+
+
+def test_vertical_budget_at_1366x768_125pct_leaves_reading_space():
+    """F18: realistic budget with browser UI and taskbar, condensed banner."""
+    c = TOKENS["layout"]["chrome_px"]
+    css_h = round(768 / 1.25)
+    content = css_h - c["browser_ui_estimate"] / 1.25 - c["taskbar_estimate"] / 1.25 - c["banner_condensed"] - c["topbar"] - c["footer"]
+    assert content >= 380, content

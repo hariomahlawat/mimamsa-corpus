@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/v1/appointment_record.schema.json",
+  "title": "Legal Reviewer appointment (data layer 6)",
+  "description": "Recorded appointment of a Legal Reviewer by a competent authority (Document Studio 3.3). None exists in Cycle 13; the schema exists so the gate can fail closed on its absence.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "record_kind", "appointment_id", "appointing_authority", "appointee", "capacity", "scope", "valid_from", "valid_until", "artefact_sha256", "revoked"],
+  "properties": {
+    "contract_version": {"$ref": "common.schema.json#/$defs/contract_version"},
+    "record_kind": {"const": "appointment_record"},
+    "appointment_id": {"type": "string", "pattern": "^APPT-[A-Za-z0-9._-]{3,80}$"},
+    "appointing_authority": {"type": "string", "minLength": 2, "maxLength": 300},
+    "appointee": {"type": "string", "minLength": 2, "maxLength": 300},
+    "capacity": {"enum": ["DESIGNATED_LEGAL_ADVISER", "FORMAL_JAG_APPROVER"]},
+    "scope": {"type": "string", "minLength": 3, "maxLength": 2000},
+    "valid_from": {"$ref": "common.schema.json#/$defs/date"},
+    "valid_until": {"anyOf": [{"$ref": "common.schema.json#/$defs/date"}, {"type": "null"}]},
+    "artefact_sha256": {"$ref": "common.schema.json#/$defs/sha256"},
+    "revoked": {"type": "boolean"}
+  }
+}

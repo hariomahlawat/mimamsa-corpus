@@ -34,7 +34,7 @@ Personas are design tools, not access tiers. There are exactly two roles, **Admi
 | --- | --- | --- | --- | --- |
 | W-01 | CDR, LEG | Find by situation words | Type plain words in search → hybrid results with excerpts → filter by document type → open Act section or judgment at page | CAP-US-01, -03, -04, -05, -06 |
 | W-02 | LEG | Find by identifier | Type "s.69 Army Act" or "OA 123/2019" → parsed chips show interpretation → exact matches first | CAP-US-02 |
-| W-03 | LEG | Read and cite a passage | Open judgment → jump between hits (F3 / Shift+F3) → select passage → Copy citation (doc id, copy sha256 prefix, page, para if printed, release id) | CAP-US-06, CAP-RW-04 |
+| W-03 | LEG | Read and cite a passage | Open judgment → jump between hits (N / Shift+N) → select passage → Copy citation (C): legal citation "Case name, neutral or reported citation (Court, date), para N / p. N"; internal reference (Shift+C) is separate | CAP-US-06, CAP-RW-04 |
 | W-04 | LEG, RES | Check what is known about a judgment | Metadata header with per-field origin chips → evidence panel (seven axes) → provenance panel → proceedings and copies | CAP-JI-01, -02, -06, CAP-RW-05 |
 | W-05 | LEG | Look at candidate outcome | Outcome chip "candidate · P 91.3% · cov 64.8% (V3, not human-checked)" → popover with report link and restriction | CAP-JI-03 |
 | W-06 | LEG | Explore a section | Statute workspace → TOC → section → amendment strip (candidates; "temporal chain not established") → related judgments | CAP-SE-01, -02, -04, -05 |
@@ -42,7 +42,7 @@ Personas are design tools, not access tiers. There are exactly two roles, **Admi
 | W-08 | RES | Keep research | Pin passages, add private notes, save a search, build a research set | CAP-RW-03, -07 |
 | W-09 | ADM | Add a source | Upload → automatic checks → staging review (original, text, OCR flags, metadata candidates, suggested links, eligibility) → publish or reject | CAP-KA-01, CAP-KG-06 |
 | W-10 | ADM | Withdraw a source | Find → Withdraw (reason required) → confirmation shows it disappears from search for everyone | CAP-KA-01, CAP-US-07 |
-| W-11 | ADM | Import a release | Choose bundle folder → verification report (signature, checksums, compatibility, restricted register, records) → import to new generation → smoke queries → switch; rollback available | CAP-KA-02, -03 |
+| W-11 | ADM | Import a release | Select a bundle already copied into the fixed, ACL'd import drop folder on the server (the browser never uploads multi-GB bundles and never names arbitrary server paths) → verification report (signature, checksums, compatibility, restricted register, records) → import to new generation → smoke queries → switch; rollback available | CAP-KA-02, -03 |
 | W-12 | Any | Work on a private file (B3) | Document Studio → new session → upload → view/OCR/annotate → export; session expires | CAP-DS-01, -05 |
 | W-13 | Any | Meet a closed gate | Opens Commander assistant or a legal-rule feature → gate notice explains what must happen (appointment, approvals) and links to research search | CAP-CA-01, CAP-DS-03 |
 

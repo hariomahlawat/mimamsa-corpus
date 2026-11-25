@@ -189,7 +189,7 @@ One signed installer set, built online, transferred on removable media:
 | Windows Services, firewall rules, NTFS ACLs, certificate binding | Installer custom actions (PowerShell, logged) |
 | SBOM and licence inventory | Shipped alongside |
 
-Authoring candidates: WiX Toolset (verify licence; MS-RL historically), or a scripted PowerShell installer as fallback. Code-signing of the MSI with an organisation certificate is recommended; the update bundles are signed independently (§12.2). **[PoC P6]**: clean Windows machine with no internet; packages runtimes, PostgreSQL + pgvector, Python libraries, frontend assets, OCR and embedding models; reproducible build; install, uninstall, reinstall, upgrade.
+Authoring candidates: WiX Toolset (verify licence; MS-RL historically), or a scripted PowerShell installer as fallback. **Authenticode signing of the installer and every payload it lays down is mandatory** (organisation PKI or owner-designated signer; the installer refuses unsigned payloads and ships the owner's trust list); the data bundles are signed independently with the owner's Ed25519 keys (§12.2). **[PoC P6]**: clean Windows machine with no internet; packages runtimes, PostgreSQL + pgvector, Python libraries, frontend assets, OCR and embedding models; reproducible build; install, uninstall, reinstall, upgrade.
 
 ### 12.2 Snapshot update flow
 
@@ -207,6 +207,8 @@ Any failure rejects the whole bundle with nothing changed. **[PoC P8]** (also da
 
 ### 12.3 Storage and backup
 
+- **Data layers:** the nine layers (vault, derivatives, provenance, candidates, reviewed records, legally authenticated records, publication and access states, indexes and embeddings, working documents) are defined in `app/contract/README.md` §3.1 and placed in the security architecture §2.1.
+- **At rest:** BitLocker on the data volume and encrypted backup media (security architecture §8.3).
 - **Vault:** content-addressed on NTFS, `D:\Mimamsa\vault\sha256\ab\<hash>`; files set read-only and ACL'd so worker accounts can read, only the import service can create, nobody can modify. Re-hash on read for cited originals.
 - **Derivatives:** `D:\Mimamsa\derived\<sha256>\<pipeline_version>\`; disposable.
 - **Backups:** scheduled `pg_dump`/`pg_basebackup` plus robocopy or restic (BSD) of vault and local uploads to rotated offline media; Windows Server Backup or VSS snapshots optional. Restore drill is part of acceptance.

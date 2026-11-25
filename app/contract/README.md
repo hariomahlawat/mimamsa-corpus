@@ -1,74 +1,108 @@
 # Mimamsa data interchange contract v1
 
-- **Version:** 1.0.0 (contract major 1). Status: **proposed for Cycle 13**, shared by Track A (producers) and Track B (the offline application). It supersedes the outline "IC-01" table in `docs/planning/CYCLE13_EXECUTION_PLAN.md` §6, which now points here.
-- **Owner of changes:** a breaking change needs a new major version, an updated validator and tests, and review by someone who is neither the producer nor the consumer author.
+- **Version:** 1.0.0 (contract major 1), **pre-adoption revision R1** (2026-11-25) after independent review of `dc811848` (`docs/architecture/reviews/review_c13_b0_dc811848.md`). No bundle has been produced under the earlier draft, so the version number is unchanged; the revision tightens validation.
+- **Status:** proposed for Cycle 13, shared by Track A (producers) and Track B (the offline application). It supersedes the outline "IC-01" table in `docs/planning/CYCLE13_EXECUTION_PLAN.md` §6.
+- **Change control:** a breaking change after adoption needs a new major version, an updated validator and tests, and review by someone who is neither producer nor consumer author.
 
 ## 1. What the contract guarantees
 
-1. **The app imports; it never edits.** Authoritative and frozen records (the HF corpus, `records_658`, `cases_53`, CALIBRATION-02, AUTH-LEDGER, Track A registers) are read through release bundles. Nothing in the application writes back to them. Corrections are new records or overlays in a later bundle.
+1. **The app imports; it never edits.** Authoritative and frozen records (HF corpus, `records_658`, `cases_53`, CALIBRATION-02, AUTH-LEDGER, Track A registers) are read through release bundles. Corrections are new records or overlays in a later bundle.
 2. **Content addressing.** A source copy is identified by the SHA-256 of its exact bytes and stored at `vault/sha256/<first two hex>/<sha256>`. File hash, judgment and proceeding are different identities; alternate copies are linked, never merged.
-3. **Separate status axes.** Seven axes, each with a value and a basis: source integrity, source authenticity, evidence fidelity, legal applicability, legal approval, publication, dependency freshness. There is no single "verified" field (the schema rejects one). A value on one axis never sets another.
-4. **Candidates stay candidates.** Every automated output (outcome, holding, graph edge, form) is anchored to a page of a source copy, names its extractor version and artefact commit, carries its capability restriction from `C12-CONSOLIDATION/CAPABILITY_RESTRICTIONS.csv` and its evaluation report (or `null`, shown as "not evaluated").
-5. **No legal approval while AUTH-LEDGER is at version 0.** A bundle with `auth_ledger_version: 0` may only carry `legal_approval = T0_RESEARCH_ONLY` and must require the candidate banner.
-6. **Restricted material is excluded everywhere.** See §4.
-7. **Release bundles are signed, checksummed and pinned** (HF revision, tools commit, Track A artefact commits, model bundle hashes), with compatibility, migrations and rollback declared.
+3. **Seven separate, closed status axes**: source integrity, source authenticity, evidence fidelity, legal applicability, legal approval, publication, dependency freshness. Each axis is its own closed object (no extra keys, no free-form sub-objects; `policy_v1` exists only on source authenticity). There is no single "verified" field.
+4. **Raised values carry evidence.** Any value above an axis default must cite an independent `reviewed_record` in the same bundle (matching subject, axis and value). Contradictory combinations are rejected (for example legal approval on unverified evidence; `PUBLISHED` with integrity `MISMATCH`; `IDENTITY_CONFIRMED` with `copy_fidelity HASH_ONLY`).
+5. **Legal approval needs an approval record, an appointment and an artefact.** Any `legal_approval` above `T0_RESEARCH_ONLY` must cite an `approval_record` that names a recorded `appointment_record` (not revoked, valid at the decision date, same capacity) and an artefact hash, all in the same bundle. While AUTH-LEDGER is at version 0 no approval or appointment record may appear at all, and `auth_ledger_version > 0` is accepted only with `auth_ledger_head` matching the site's trusted ledger state.
+6. **Candidates stay candidates**, anchored to a page, versioned, with capability restriction and evaluation (or "not evaluated").
+7. **Restricted material is excluded everywhere**, wherever a reference appears (§4).
+8. **Release bundles are signed, checksummed and pinned**; signature first, nothing parsed before it verifies; production uses an owner-controlled trust list and refuses development keys (§3.2).
+9. **Rollback and restore cannot resurrect excluded items**: a signed exclusion channel, independent of releases, is re-applied after every activation (§3.3).
 
 ## 2. Files
 
 | Path | Purpose |
 | --- | --- |
-| `schemas/v1/common.schema.json` | sha256, doc_id, safe relative paths, vault path, page anchor, field origin, candidate status |
-| `schemas/v1/status_axes.schema.json` | the seven axes (with SOURCE_AUTHORITY_POLICY v1 fields under source authenticity) |
+| `schemas/v1/common.schema.json` | sha256, doc_id, relative paths, vault path, page anchor, field origin, candidate status |
+| `schemas/v1/status_axes.schema.json` | the seven closed axes |
 | `schemas/v1/provenance.schema.json` | acquisition channel, URL, retrieval time, aliases, HF repo/revision/path, git location |
 | `schemas/v1/restriction.schema.json` | printed access marking and eligibility decision |
-| `schemas/v1/document.schema.json` | document record bound to one source copy; judicial cover-page fields |
-| `schemas/v1/derived_text.schema.json` | derived text keyed by (sha256, pipeline version) with page and passage anchors |
+| `schemas/v1/document.schema.json` | document record bound to one source copy |
+| `schemas/v1/derived_text.schema.json` | derived text keyed by (sha256, pipeline version), page and passage anchors |
 | `schemas/v1/candidate.schema.json` | outcome, holding, graph edge and form candidates |
-| `schemas/v1/release_manifest.schema.json` | `RELEASE.json` of a release bundle |
-| `mimamsa_contract/` | validator: schema registry (offline), semantic rules, restricted-material register loader, bundle validator, CLI |
-| `mimamsa_contract/devbundle.py` | development-only bundle writer with disposable keys (tests and dry runs) |
-| `examples/` | synthetic, obviously fake records (no real source, citation or provision) |
+| `schemas/v1/reviewed_record.schema.json` | independent documentary/technical review (layer 5) |
+| `schemas/v1/appointment_record.schema.json`, `approval_record.schema.json` | Legal Reviewer appointment and legal approval (layer 6) |
+| `schemas/v1/publication_record.schema.json` | append-only publication history (layer 7) |
+| `schemas/v1/release_manifest.schema.json` | `RELEASE.json` |
+| `schemas/v1/trust_list.schema.json` | pinned signing keys by purpose (release, register, trust_list) |
+| `schemas/v1/exclusion_update.schema.json` | signed register + withdrawal update channel |
+| `mimamsa_contract/` | validator: `schemas`, `rules`, `restricted`, `paths`, `bundle`, `trust`, `exclusions`, `citation`, CLI |
+| `mimamsa_contract/devbundle.py` | development-only bundle writer and test trust lists (disposable keys) |
+| `examples/` | synthetic records (no real source, citation or provision) |
 | `tests/` | contract tests run by `.github/workflows/app-ci.yml` |
 
-## 3. Bundle layout
+## 3. Data layers, bundles, trust and exclusions
+
+### 3.1 The nine data layers
+
+| # | Layer | Contract representation | Where it lives on site | Mutability | Exchanged in bundles |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Immutable vault (original bytes) | `document.source_copy` (sha256, vault path); `original` files | NTFS vault, content-addressed | Write-once; never modified | Yes (originals), hash-checked |
+| 2 | Rebuildable derivatives | `derived_text` (pipeline version, pages, passages) | `derived\<sha256>\<pipeline_version>\` | Disposable, rebuildable | Yes |
+| 3 | Provenance and versions | `provenance`, `alternate_copy_sha256`, release `pinned`, `CHANGES.json` | DB provenance tables, release generations | Append-only | Yes |
+| 4 | Candidates (automated) | `candidate` | DB candidates | Replaced by new versions; never promoted in place | Yes, always labelled |
+| 5 | Independently reviewed records | `reviewed_record`; axes cite `review_record_id` | DB review records | Append-only | Yes |
+| 6 | Legally authenticated records | `appointment_record`, `approval_record`; `legal_approval.approval_record_id` | DB approvals | Append-only; revocation is a new state | **No, while AUTH-LEDGER is v0** (rejected) |
+| 7 | Publication and access states | `status_axes.publication` (upstream release state), `publication_record`, `restriction` | DB publication history | Append-only; site acts recorded on site | Upstream records only; site acts (`RELEASE_ACTIVATION`, `SITE_ADMIN`) are rejected in bundles |
+| 8 | Indexes and embeddings | manifest `embeddings` / `index_manifest` files with model id and hash; `pinned.model_bundles` | PostgreSQL FTS, pgvector, generation tables | Rebuilt per generation; purged on withdrawal/restriction | Optional (pre-computed embeddings) |
+| 9 | Temporary working documents | none, by design | `sessions\<user>\`, owner-only | Deleted at TTL | **Never** (`WORKING_DOCUMENT_IN_BUNDLE`) |
+
+**Publication semantics (ADR-0002).** In a bundle, `publication=PUBLISHED` means "released upstream for publication". The site Admin's activation of the release is the publication act; the importer then writes `publication_record`s with channel `RELEASE_ACTIVATION`. Local Admin publication writes `SITE_ADMIN` records. Neither is legal approval.
+
+**candidate_id stability.** Stable for the same (source copy, extractor name, anchor). A new extractor version that yields the same item keeps the id; a materially different item gets a new id and lists the old one in `supersedes_candidate_ids`. Pins, notes and impact triggers follow `supersedes_candidate_ids`.
+
+### 3.2 Bundle layout, order of checks, trust
 
 ```
 release-<id>/
-  RELEASE.json            manifest (release_manifest.schema.json)
-  CHANGES.json            added, updated, newly_superseded, withdrawn, status_changed
-  data/documents.jsonl    one document record per line
-  data/derived_text.jsonl
-  data/candidates.jsonl
-  originals/…, text/…     optional payload files (every one listed in SHA256SUMS)
-  migrations/…            optional, each listed in RELEASE.json and SHA256SUMS
-  SHA256SUMS              every file except itself and the signature
-  SHA256SUMS.sig          Ed25519 detached signature over the exact bytes of SHA256SUMS
+  RELEASE.json  CHANGES.json
+  data/documents.jsonl  data/derived_text.jsonl  data/candidates.jsonl
+  data/reviewed_records.jsonl  data/appointments.jsonl  data/approvals.jsonl  data/publication_records.jsonl
+  originals/…  text/…  embeddings/…  migrations/…
+  SHA256SUMS        every file except itself and the signature
+  SHA256SUMS.sig    Ed25519 detached signature over the exact bytes of SHA256SUMS
 ```
 
-The importer and this validator apply the same order: signature against a pinned public key, every checksum, manifest schema and compatibility, restricted-material register, every record, cross-record consistency. **Any error rejects the whole bundle.** Production signing keys are owner-held; this repository only ever creates disposable development keys (`key_id` prefixed `dev-`).
+Order (validator = reference for the importer): **1** signature against the trust list (purpose `release`); nothing else in the bundle is read before it verifies. **2** every checksum and path; stop on any failure. **3** manifest (duplicate JSON keys rejected), schema, signer identity (`key_id` must be the verifying key), compatibility, downgrade/replay (`release_sequence`), ledger pin. **4** restricted register. **5** records with bundle-wide cross-references. **6** consistency. Any error rejects the whole bundle. Caps: SHA256SUMS ≤ 16 MiB, JSONL line ≤ 1 MiB, ≤ 5 M records; duplicate keys rejected (the importer in any language must apply the same rule).
+
+**Paths** are checked for Windows and POSIX hazards: absolute/UNC/drive paths, `..`, `:` (NTFS alternate data streams), reserved device names in any segment (CON, PRN, AUX, NUL, COM0–9, LPT0–9, CONIN$, CONOUT$, any extension), trailing dot or space, invalid characters, segments > 255, paths > 200 characters, case-only duplicates, and symlinks/junctions/reparse points.
+
+**Trust list and change authority.** Production validation requires the pinned trust list installed by the signed installer. Keys have purposes (`release`, `register`, `trust_list`) and holders (`OWNER`, `OWNER_BACKUP_CUSTODIAN`, `DEVELOPMENT`). The list changes only through a trust-list update signed by a currently trusted `trust_list` key held by the owner (or backup custodian), with a higher sequence number. A site Admin cannot add, replace or re-purpose keys. Development keys (`dev-` ids, holder `DEVELOPMENT`) are refused in production; this repository only creates disposable development or test keys.
+
+### 3.3 Exclusion channel and post-activation re-application
+
+`exclusion_update` carries the full register text (`register_json`, whose sha256 equals what bundles pin) and the current withdrawal list, signed by a `register` key, with an increasing sequence. After **every** activation, rollback or restore, the site re-applies the latest accepted exclusion state (`exclusions.items_to_suppress`) before the generation serves a request, and purges matching index rows, embeddings, derivatives and caches. A rollback, an older retained generation or a restored backup therefore cannot resurrect a withdrawn or restricted item.
 
 ## 4. Restricted-material exclusion rule
 
-- **Source of truth:** `config/restricted_material.json` at the repository root (register entries `RM-nnn`, introduced by the governance workstream). Each entry lists the source sha256, derived sha256s, doc_id and hosted paths. The register currently holds RM-001.
-- **No second list.** Nothing under `app/` contains a register hash or doc_id; `tests/test_restricted_material.py::test_no_register_value_is_hard_coded_in_app` enforces this.
-- **Matching** follows `scripts/restricted_material.py::is_restricted`: exact sha256 (case-insensitive), doc_id (section-level `#s…` ids inherit), hosted path, or any path containing a register hash or doc_id. After integration a parity test asserts both guards agree.
-- **Where it applies:** document records (own copy, alternate copies, HF path), derived text (copy, text hash, text path), candidates (source doc, every anchor), every file and path in a bundle, and the manifest (it must name the register's sha256 and apply every register id).
-- **Fail closed.** A missing or malformed register rejects everything (`RESTRICTED_CONFIG_MISSING`). A record's own `restriction.eligibility` cannot override the register. Issue messages never echo the matched value.
-- **Path resolution:** `$MIMAMSA_RESTRICTED_MATERIAL_CONFIG`, otherwise `<repo>/config/restricted_material.json`. Before the governance branch is integrated, the test fixture reads the same file with `git show claude/c13-gov:config/restricted_material.json`; with neither available the tests fail instead of skipping.
+- **Source of truth:** `config/restricted_material.json` (RM register, governance workstream). On site, the register arrives and is updated only through signed exclusion updates.
+- **No second list** under `app/` (test `test_no_register_value_is_hard_coded_in_app`).
+- **Matching** is case-insensitive (NTFS) and applies to **every string anywhere in a record** (ids, parent ids, judgment identity, edge source/targets, raw citations, evidence text, alias URLs, paths), to every bundle file path and hash, and to the manifest. Section-level ids inherit the restriction.
+- **Fail closed:** a missing or malformed register rejects everything. A record's own `restriction.eligibility` cannot override the register. Messages name the field, never the matched value.
+- **Path resolution:** `$MIMAMSA_RESTRICTED_MATERIAL_CONFIG`, else `<repo>/config/restricted_material.json`; before governance integration the test fixture reads it from `claude/c13-gov` (or `origin/claude/c13-gov`). Tests fail rather than skip without it.
 
 ## 5. Rule codes
 
 | Code | Meaning |
 | --- | --- |
-| `SCHEMA` | JSON Schema violation |
-| `RESTRICTED_MATERIAL`, `RESTRICTED_CONFIG_MISSING`, `RESTRICTED_CONFIG_DRIFT`, `RESTRICTED_IDS_NOT_APPLIED` | restricted-material rule (§4) |
-| `LEDGER_V0_NO_APPROVAL`, `APPROVAL_REF_REQUIRED`, `BANNER_REQUIRED` | approval gate fails closed |
-| `PUBLISH_WITHOUT_ELIGIBILITY`, `MARKING_WITHOUT_DECISION` | publication needs a recorded audience-eligibility decision |
+| `SCHEMA` | JSON Schema violation (includes closed axes, approval id required above T0, independent review required) |
+| `RESTRICTED_MATERIAL`, `RESTRICTED_CONFIG_MISSING`, `RESTRICTED_CONFIG_DRIFT`, `RESTRICTED_IDS_NOT_APPLIED` | restricted-material rule |
+| `RAISED_VALUE_NEEDS_REVIEW`, `REVIEW_UNRESOLVED`, `REVIEW_MISMATCH`, `REVIEW_UNRESOLVED_OUTSIDE_BUNDLE` (warning), `AXIS_CONTRADICTION`, `PUBLISHED_TRUNCATED` (warning) | evidence for raised values; contradictions |
+| `LEDGER_V0_NO_APPROVAL`, `APPROVAL_UNRESOLVED`, `APPOINTMENT_MISSING`, `APPOINTMENT_REVOKED`, `APPOINTMENT_NOT_VALID_AT_DECISION`, `APPROVAL_CAPACITY_MISMATCH`, `APPROVAL_SUBJECT_MISMATCH`, `APPROVAL_TIER_MISMATCH`, `LEDGER_HEAD_UNVERIFIED`, `BANNER_REQUIRED` | approval gate |
+| `PUBLISH_WITHOUT_ELIGIBILITY`, `MARKING_WITHOUT_DECISION`, `PUBLICATION_CHANNEL_SITE_ONLY`, `DANGLING_PUBLICATION_RECORD` | publication |
 | `VAULT_PATH_MISMATCH`, `ALTERNATE_IS_SELF`, `DUPLICATE_DOC_ID` | identity |
 | `OCR_QUOTING`, `PASSAGE_PAGE_UNKNOWN`, `DUPLICATE_PAGE`, `DUPLICATE_PASSAGE`, `ANCHOR_RANGE` | derived text and anchors |
-| `REVIEW_REF_REQUIRED`, `RESTRICTION_REQUIRED`, `HOLDINGS_HIDDEN`, `EDGE_LEGAL_EFFECT_FLAG`, `LEGAL_EFFECT_EDGE_UNREVIEWED`, `EDGE_TARGET`, `DANGLING_CANDIDATE`, `DANGLING_ANCHOR` | candidates |
-| `SIGNATURE_*`, `CHECKSUM_MISMATCH`, `UNLISTED_FILE`, `MISSING_FILE`, `SYMLINK_IN_BUNDLE`, `UNSAFE_PATH`, `MANIFEST_*`, `SUMS_MALFORMED`, `CHANGES_MISSING` | bundle integrity |
-| `INCOMPATIBLE_CONTRACT`, `APP_TOO_OLD`, `MIGRATIONS_DECLARED_MISSING`, `MIGRATION_NOT_IN_SUMS` | compatibility |
+| `REVIEW_REF_REQUIRED`, `RESTRICTION_REQUIRED`, `HOLDINGS_HIDDEN`, `EDGE_LEGAL_EFFECT_FLAG`, `LEGAL_EFFECT_EDGE_UNREVIEWED`, `EDGE_TARGET`, `DANGLING_CANDIDATE`, `DANGLING_ANCHOR`, `DANGLING_REVIEW` | candidates and reviews |
+| `TRUST_LIST_REQUIRED`, `SIGNATURE_MISSING`, `SIGNATURE_INVALID`, `SIGNATURE_DEV_KEY_IN_PRODUCTION`, `SIGNATURE_KEY_MISMATCH`, `SIGNATURE_NOT_VERIFIED`, `MODE_INVALID` | signature and trust |
+| `CHECKSUM_MISMATCH`, `UNLISTED_FILE`, `MISSING_FILE`, `SYMLINK_IN_BUNDLE`, `PATH_HAZARD`, `CASE_COLLISION`, `WORKING_DOCUMENT_IN_BUNDLE`, `MANIFEST_*`, `SUMS_MALFORMED`, `SUMS_TOO_LARGE`, `CHANGES_MISSING`, `JSONL_MALFORMED`, `RECORD_TOO_LARGE`, `TOO_MANY_RECORDS` | bundle integrity |
+| `INCOMPATIBLE_CONTRACT`, `APP_TOO_OLD`, `MIGRATIONS_DECLARED_MISSING`, `MIGRATION_NOT_IN_SUMS`, `DOWNGRADE_OR_REPLAY` | compatibility |
 | warnings: `OCR_CONFIDENCE_MISSING`, `FIELD_ORIGIN_UNKNOWN_FIELD`, `EVALUATION_HUMAN_FLAG`, `ROLLBACK_UNSUPPORTED` | reported, not rejecting |
 
 ## 6. Use
@@ -78,7 +112,8 @@ pip install -r app/contract/requirements.txt
 cd app/contract
 python -m pytest -q tests
 python -m mimamsa_contract record document examples/document.example.json
-python -m mimamsa_contract bundle /path/to/release --trusted-key owner-release-key.pub.hex
+python -m mimamsa_contract bundle /path/to/release --trust-list site-trust-list.json [--current-sequence N] [--trusted-ledger-head H]
+python -m mimamsa_contract bundle /path/to/release --mode development --trusted-key dev.pub.hex   # development only
 python -m mimamsa_contract restricted-check --sha256 <hash>
 ```
 
@@ -86,17 +121,19 @@ python -m mimamsa_contract restricted-check --sha256 <hash>
 
 | Corpus (`data/meta/<doc_id>.json`, schema 0.2.0) | Contract v1 |
 | --- | --- |
-| `sha256`, `raw_path`, `mime_type`, `page_count` | `source_copy` (vault path recomputed from sha256; HF path kept in `provenance.hf.path`) |
+| `sha256`, `raw_path`, `mime_type`, `page_count` | `source_copy` (vault path from sha256; HF path in `provenance.hf.path`) |
 | `source_url`, `retrieved_at`, `source_aliases`, `source_record` | `provenance` |
 | `status`, `status_note`, `status_as_of` | `corpus_status*`: display-only summary, never `legal_applicability` |
-| `access_marking` | `restriction.access_marking`; eligibility starts `NOT_ASSESSED` unless decided |
+| `access_marking` | `restriction.access_marking`; eligibility `NOT_ASSESSED` unless decided |
 | `text_method`, `ocr_confidence`, `ocr_low_confidence_pages` | document fields plus `derived_text.pages[].low_confidence` |
-| `relations[]` | graph-edge candidates; `extracted`/`llm_proposed` → `AUTOMATED_CANDIDATE_NOT_VERIFIED`, `human_verified` → `DOCUMENTARY_CHECKED` with a review ref (Architecture §5) |
+| `relations[]` | graph-edge candidates; `extracted`/`llm_proposed` → `AUTOMATED_CANDIDATE_NOT_VERIFIED`; `human_verified` → `DOCUMENTARY_CHECKED` only with a `reviewed_record` |
 | `field_provenance` | `field_origin` |
-| `[[page N]]` markers in `data/text` | `derived_text.page_marker`; passages carry page and character offsets |
+| `[[page N]]` markers | `derived_text.page_marker`; passages carry page and offsets |
 
-## 8. Known limits (v1)
+## 8. Known limits
 
-- `date-time` and `date` formats are asserted only when the optional `rfc3339-validator` package is installed; patterns cover dates regardless.
-- The validator does not open PDFs; page counts and anchors are checked for consistency, not against the bytes. Track B's importer re-verifies anchors after loading (B1/B2 acceptance).
-- Section-level `ProvisionVersion` records are not yet in v1; they arrive as a minor version when A-track statutory output (provision versions with valid-time intervals) is ready.
+- `date-time`/`date` formats are asserted only with the optional `rfc3339-validator`; patterns cover dates regardless.
+- The validator does not open PDFs; anchors are checked for consistency, not against bytes (importer re-verifies, B1/B2).
+- Section-level `ProvisionVersion` records arrive as a minor version when A-track statutory output is ready.
+- Junction/reparse detection is exercised on the Linux CI host through its hook only; P6 must confirm it on Windows.
+- A legal citation is formatted from metadata only (`citation.py`); reported citations depend on what is printed on the judgment.

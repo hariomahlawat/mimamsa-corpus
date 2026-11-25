@@ -50,23 +50,57 @@ class RestrictedRegister:
         return p.lstrip("/")
 
     def match(self, *, sha256: str | None = None, doc_id: str | None = None, path: str | None = None) -> str | None:
-        """Return a short reason if the item is restricted, else None."""
+        """Return a short reason if the item is restricted, else None. Case-insensitive (NTFS is case-insensitive)."""
         if sha256 and sha256.lower() in self.sha256s:
             return "sha256 listed in restricted-material register"
         if doc_id:
-            base = doc_id.split("#", 1)[0]
-            if doc_id in self.doc_ids or base in self.doc_ids:
+            d = doc_id.casefold()
+            base = d.split("#", 1)[0]
+            if d in self._doc_ids_cf or base in self._doc_ids_cf:
                 return "doc_id listed in restricted-material register"
         if path:
-            p = self._norm_path(path)
-            if p in self.paths:
+            p = self._norm_path(path).casefold()
+            if p in self._paths_cf:
                 return "path listed in restricted-material register"
-            low = p.lower()
-            if any(s in low for s in self.sha256s):
+            if any(s in p for s in self.sha256s):
                 return "path contains a restricted sha256"
-            if any(i in p for i in self.doc_ids):
+            if any(i in p for i in self._doc_ids_cf):
                 return "path contains a restricted doc_id"
         return None
+
+    def match_text(self, text: str) -> str | None:
+        """Any free string (citation, raw reference, evidence, node id) that embeds a register hash or doc_id."""
+        t = text.casefold()
+        if any(s in t for s in self.sha256s):
+            return "value contains a restricted sha256"
+        if any(i in t for i in self._doc_ids_cf):
+            return "value contains a restricted doc_id"
+        return None
+
+    def deep_match(self, obj, _path: str = "") -> tuple[str, str] | None:
+        """Walk every string (keys and values) in a JSON value; return (json_path, reason) for the first hit."""
+        if isinstance(obj, str):
+            r = self.match_text(obj)
+            return (_path or "<root>", r) if r else None
+        if isinstance(obj, dict):
+            for k, v in obj.items():
+                hit = self.deep_match(k, f"{_path}/{k}") or self.deep_match(v, f"{_path}/{k}")
+                if hit:
+                    return hit
+        elif isinstance(obj, list):
+            for i, v in enumerate(obj):
+                hit = self.deep_match(v, f"{_path}/{i}")
+                if hit:
+                    return hit
+        return None
+
+    @property
+    def _doc_ids_cf(self) -> frozenset[str]:
+        return frozenset(d.casefold() for d in self.doc_ids)
+
+    @property
+    def _paths_cf(self) -> frozenset[str]:
+        return frozenset(p.casefold() for p in self.paths)
 
     def is_restricted(self, **kw) -> bool:
         return self.match(**kw) is not None
@@ -80,6 +114,10 @@ def load_register(config_path: Path | str | None = None) -> RestrictedRegister:
         raise RestrictedConfigError(
             f"restricted-material register not readable at {path}: {exc}. Validation fails closed."
         ) from exc
+    return register_from_bytes(raw, path)
+
+
+def register_from_bytes(raw: bytes, path: Path | str = "<bytes>") -> RestrictedRegister:
     try:
         data = json.loads(raw.decode("utf-8"))
         items = data["items"]
@@ -97,10 +135,10 @@ def load_register(config_path: Path | str | None = None) -> RestrictedRegister:
             if it.get("doc_id"):
                 docs.add(it["doc_id"])
             paths.update(RestrictedRegister._norm_path(p) for p in it.get("hosted_paths", []))
-    except (KeyError, TypeError, ValueError, UnicodeDecodeError) as exc:
+    except (KeyError, TypeError, ValueError, UnicodeDecodeError, AttributeError) as exc:
         raise RestrictedConfigError(f"restricted-material register at {path} is malformed: {exc}") from exc
     return RestrictedRegister(
-        config_path=path,
+        config_path=Path(path),
         config_sha256=hashlib.sha256(raw).hexdigest(),
         restriction_ids=frozenset(ids),
         sha256s=frozenset(shas),

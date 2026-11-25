@@ -2,38 +2,56 @@
 
 ## 1. Responsive rules
 
-Breakpoints (viewport width, tokens `layout.breakpoints`): tablet < 1280 (touch layout below 768 is out of scope), compact 1280–1599, standard 1600–2199, wide ≥ 2200. Fixed vertical chrome: banner 28 + top bar 40 + footer 24 = 92 px.
+### 1.0 Effective CSS pixels and Windows display scaling
 
-### 1.1 1366×768 (compact; usable height ~ 676 px in the browser minus chrome ~ 580 px)
+All breakpoints are **effective CSS pixels** = physical pixels ÷ Windows display scale (browser zoom divides further). Windows commonly defaults to 125% or 150% on laptops and 1080p office monitors, so layouts are chosen from the effective width, and the **touch layout is chosen by input type** (`(pointer: coarse) and (hover: none)`), **never by width**. A narrow desktop window stays a desktop layout.
 
-- Default panes: **results + document**; rail collapsed to icons (48 px); context pane as an overlay drawer from the right (opens over the document, 320 px, pinned open on request, which then narrows the document).
-- Results 340 px; document takes the rest (≥ 900 px).
-- Facets open from the rail as a popover panel.
-- PDF default zoom: fit width. Doc header compresses to one line with an expander.
-- Row height dense (28 px). Tabs show icon + 12-character titles.
+Breakpoints (tokens `layout.breakpoints`): narrow < 1280, compact 1280–1599, standard 1600–2199, wide ≥ 2200.
 
-### 1.2 1920×1080 (standard reference)
+| Physical | 100% | 125% | 150% | 175% |
+| --- | --- | --- | --- | --- |
+| 1366×768 | 1366 compact | 1093 narrow | 911 narrow | 781 narrow |
+| 1920×1080 | 1920 standard | 1536 compact | 1280 compact | 1097 narrow |
+| 2560×1440 | 2560 wide | 2048 standard | 1707 standard | 1463 compact |
 
-- Four regions: rail 220, results 380, document flexible (~ 880), context 320. All dividers active.
-- PDF default zoom: fit width in the document pane.
+(Effective width in CSS px and resulting layout, fine pointer. `tests/test_tokens.py` checks every cell keeps a desktop layout with a document pane ≥ 480 px.)
 
-### 1.3 2560×1440 (wide)
+Pane collapse order as width falls: rail → icons (48 px) below *standard*; context → right drawer when results + document + context minimums do not fit; results → left drawer when results + document do not fit. The document pane never goes below 480 px; below that (e.g. 781 CSS px) the results pane is a drawer and the document fills the width.
 
-- Rail 260, results 440, context 380; document gets the remainder but the **Text view keeps a 60–80 ch measure**, centred with margins used for pinned notes (the "margin" of the identity).
-- Optional second document pane (split view) for compare or for keeping a statute open beside a judgment.
-- Do not upscale type; increase content, not size.
+**Vertical budget.** Chrome: banner 28 (condensed 20) + top bar 40 + footer 24 CSS px, plus browser UI (~120 physical px) and taskbar (~48 physical px). At 1366×768 and 125% that leaves ≈ 410 CSS px for content (tested ≥ 380). Therefore at *narrow* and whenever available height < 600 CSS px:
+- the banner condenses to one 20 px line (full text in a tooltip and on every print page); it stays on every view and is never hidden;
+- the top bar merges the workspace switcher into a menu;
+- the footer hides and its content moves to the user menu;
+- at browser zoom ≥ 200% the banner scrolls with the content instead of being sticky, and reappears at the top of every view and in print (WCAG 1.4.10 reflow; the "persistent" requirement is per view, not per scroll position).
 
-### 1.4 Tablet (landscape 1024×768 to 1180×820; portrait read-only)
+### 1.1 Narrow (< 1280 CSS px: e.g. 1366×768 at 125%, 1920×1080 at 175%)
 
-- Touch targets 44 px (`row_height_px.touch`); single main pane with a segmented control: Results · Document · Context.
-- Swipe is never the only way to do anything; every gesture has a visible control.
-- Administration upload and release import are hidden on tablets (desktop tasks); a notice says so.
+- Panes: **results drawer + document**, or results + document if ≥ 1093 CSS px allows results 320 + document 480 + rail 48; context as an overlay drawer from the right (320 px), pinnable.
+- Facets open from the rail as a popover panel. Doc header compresses to one line with an expander.
+- PDF default zoom: fit width. Row height dense (28 px). Tabs show icon + 12-character titles.
+
+### 1.2 Compact (1280–1599: 1366×768 at 100%, 1920×1080 at 125–150%)
+
+- Rail icons (48), results 340, document ≥ 600; context as drawer unless pinned (then results narrows to 320 and document shrinks to its minimum).
+
+### 1.3 Standard (1600–2199: 1920×1080 at 100%, 2560×1440 at 125–150%)
+
+- Four regions: rail 220, results 380, document flexible (~ 880 at 1920), context 320. All dividers active.
+
+### 1.4 Wide (≥ 2200: 2560×1440 at 100%)
+
+- Rail 260, results 440, context 380; document gets the remainder but the **Text view keeps a 60–80 ch measure**, centred with margins used for pinned notes.
+- Optional second document pane (split view). Do not upscale type; increase content, not size.
+
+### 1.5 Tablet (coarse pointer, any width; landscape 1024×768 to 1180×820; portrait read-only)
+
+- Touch targets 44 px; single main pane with a segmented control: Results · Document · Context.
+- Swipe is never the only way to do anything. Administration upload and release import are hidden (desktop tasks); a notice says so.
 - Portrait: Document reading only, with Results and Context as full-screen sheets.
 
-### 1.5 General
+### 1.6 General
 
-- Zoom to 200% must work without loss of content (WCAG 1.4.4); at 400% the layout falls back to the tablet single-pane pattern (WCAG 1.4.10 reflow).
-- Pane minimums (rail 200, results 320, document 480, context 280) define when a pane converts to a drawer.
+- Zoom to 200% without loss of content (WCAG 1.4.4); at 400% the narrow single-pane pattern applies (WCAG 1.4.10), not the touch layout.
 - Print: document text or PDF page with banner header and footer citation on every page; no chrome.
 
 ## 2. States
@@ -75,7 +93,7 @@ A `DegradedBanner` appears under the candidate banner (never replacing it) when:
 | Semantic search unavailable (embedding service down or model hash mismatch) | "Semantic search is unavailable. Showing word matches only." | Search runs lexical only; match chips show Lexical |
 | Index generation behind the database (if a separate BM25 index is adopted) | "Search index is updating. Results may be incomplete." | Blocks stale results per the generation check |
 | OCR worker unavailable (Admin) | "OCR is paused. Uploads will wait in staging." | Uploads accepted, not processed |
-| Server unreachable | "Connection to the server lost. Retrying." | Read-only cached view of open tabs; no writes |
+| Server unreachable | "Connection to the server lost. Retrying." | No cached content is shown (shared-desktop policy, `policies/client_state_and_cache.json`); open views are blanked to a reconnecting notice; no writes |
 | Release older than a site-set threshold | "The library was last updated on {date}." | Informational |
 | Non-production certificate | "Not a production installation." | Persistent |
 

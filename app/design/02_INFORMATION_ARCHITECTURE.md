@@ -45,7 +45,7 @@ Global shell (banner · top bar · workspace switcher · status footer)
 | Element | Position | Content | Rules |
 | --- | --- | --- | --- |
 | **Candidate-data banner** | Very top, full width, 28 px, non-dismissable | Text from `RELEASE.json` `candidate_banner.text` + "AUTH-LEDGER v0" + release id | Present on every route, print and export (CAP-KA-08). Never hidden by scrolling |
-| **Top bar** | Below banner, 40 px | Product mark (left) · workspace switcher (Research, Statutes, Graph, Studio, Assistant (locked), Administration (Admin only)) · persistent search field (centre, grows) · view toggle (Practitioner / Commander) · user menu | Search field available in every workspace (Ctrl+K). Administration is absent for Users, not merely disabled |
+| **Top bar** | Below banner, 40 px | Product mark (left) · workspace switcher (Research, Statutes, Graph, Studio, Assistant (locked), Administration (Admin only)) · persistent search field (centre, grows) · view toggle (Practitioner / Commander) · user menu | Search field available in every workspace (`/`, see `keymap.json`). Administration is absent for Users, not merely disabled |
 | **Left rail** | Collapsible, 200–280 px | Context of the workspace: saved searches and sets (Research), TOC (Statutes), node filters (Graph), sessions (Studio), sections (Administration) | Collapses to icons at compact widths |
 | **Status footer** | Bottom, 24 px | Release id and date · HF revision (short) · connection to server · background job count (Admin) | Text only, no metrics |
 

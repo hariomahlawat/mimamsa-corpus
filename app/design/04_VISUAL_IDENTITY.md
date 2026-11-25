@@ -40,8 +40,8 @@ Two themes (light, dark) with the same token names. Every text/background pair u
 | `focus.ring` | Keyboard focus | 2 px outline, 2 px offset, ≥ 3:1 against adjacent colours |
 | `highlight.search` | Search hit in text and native PDF | Text over it stays `fg.primary` (≥ 4.5:1) |
 | `highlight.ocr-box` | Hit drawn from OCR boxes on scans | Different hue from search highlight so users can tell derived positions apart |
-| `status.candidate` | Automated, not verified (the default state of derived data) | Amber; glyph ◇; label "Candidate" |
-| `status.checked` | Documentary checked (with review ref) | Teal; glyph ◆; label "Checked against source" (never "verified") |
+| `status.candidate` | Automated, not verified (the default state of derived data) | Amber; glyph ○ (hollow circle, dashed outline in print); label "Candidate" |
+| `status.checked` | Documentary checked (with review ref) | Teal; glyph ■ (filled square); label "Checked against source" (never "verified"). Shapes chosen to stay distinct at 12 px and in greyscale |
 | `status.warning` | Low OCR confidence, truncated at source, not evaluated | Orange-brown; glyph △ |
 | `status.error` | Failure, rejection | Red; glyph ✕; Admin rejections show restriction id only |
 | `status.gated` | Feature closed by the legal gate | Slate; glyph 🔒 rendered as a local SVG lock |

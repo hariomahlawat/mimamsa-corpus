@@ -60,7 +60,8 @@
   "source_integrity": {
    "value": "BYTE_VERIFIED",
    "basis": "synthetic example: re-hash at pinned revision",
-   "recorded_at": "2026-11-25T00:00:00Z"
+   "recorded_at": "2026-11-25T00:00:00Z",
+   "evidence_ref": "legal_knowledge/audit_work/EXAMPLE/hf_verification.csv"
   },
   "source_authenticity": {
    "value": "UNKNOWN",

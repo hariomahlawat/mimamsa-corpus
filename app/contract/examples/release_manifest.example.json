@@ -56,5 +56,7 @@
  "candidate_banner": {
   "required": true,
   "text": "Research and candidate data. Not legally verified. AUTH-LEDGER version 0: no legal approval exists."
- }
+ },
+ "release_sequence": 1,
+ "auth_ledger_head": null
 }

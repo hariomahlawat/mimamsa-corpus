@@ -123,7 +123,7 @@ The following boundaries hold for the whole cycle.
    - LLM-generated legal answers.
 
    The Legal Reviewer designation does not exist, and AUTH-LEDGER is at version 0. The operational-use gate therefore stays **closed** (fail-closed: Document Studio §3.3).
-2. **Everything automated stays `AUTOMATED_CANDIDATE_NOT_VERIFIED`.** Track B displays this state on every surface (workstream B11). Track A never raises an evidence or legal state without the review that the evidence policy requires.
+2. **Everything automated stays `AUTOMATED_CANDIDATE_NOT_VERIFIED`.** Track B displays this state on every surface (old workstream B11, now part of B1). Track A never raises an evidence or legal state without the review that the evidence policy requires.
 3. **Author ≠ reviewer** for every deliverable. A reviewing AI agent is a separate instance that works only from repository artefacts. Where Opus reviews Opus, the record says so. Every figure produced in Cycle 13 by AI coders and annotators carries the limitation "no human has checked this figure" until a human does.
 4. **Holdout hygiene.** The following sets are spent for tuning:
    - the V3 outcome holdout (150 judgments);
@@ -177,7 +177,7 @@ The following boundaries hold for the whole cycle.
  A6 Targeted acquisition (owner-gated)       B3 Search   B5 PDF citation  B6 Provenance
  A7 Adviser packages (needs a human)         B4 Research UI   B7 Access   B8 Graph UI
  A9 P3 backlog (capacity)                    B9 Document Studio foundation (no rules)
-     |                                       B10 Deployment + snapshot update
+     |                                       B10 Deployment + snapshot update   [old numbering; see §0.3]
      |                                       B11 Candidate banner (cross-cutting)
      |                                       B12 Security baseline + network-denied tests
      |                                            |
@@ -326,7 +326,7 @@ The register lists 47 P3 deferred, 12 P3 open and 27 P3 closed by the author onl
 Every Track B workstream builds **capability without legal rules**. The app is a research library over candidate data. Default staffing:
 - **Author:** an Opus execution agent per workstream.
 - **Code review:** a separate Opus instance.
-- **Security review:** a separate Opus instance, distinct from the code reviewer, for B2, B7, B9, B10 and B12.
+- **Security review:** a separate Opus instance, distinct from the code reviewer, for old B2, B7, B9, B10 and B12 (now within B1–B3; §0.3).
 - **Fable:** ★ optional for ADR-0005.
 
 The stack below is the recommendation of the technology assessment and is confirmed or changed by B0.
@@ -341,7 +341,7 @@ The stack below is the recommendation of the technology assessment and is confir
 | Deliverables | `docs/architecture/decisions/ADR-0005-OFFLINE_APP_STACK.md`; `app/poc/` reports with raw measurements; a licence inventory |
 | Acceptance | Each PoC reports measurements on stated hardware, with go or no-go against the assessment's criteria. ADR-0005 lists the choice, reasons, risks and exit paths. Licence inventory has no unresolved copyleft question (owner decision D-02 where needed) |
 | Author / reviewer | Opus / independent Opus; ★ Fable optional |
-| Gate | **GB1: ADR-0005 accepted by the owner** before B1 to B10 build beyond throwaway prototypes |
+| Gate | **GB1: ADR-0005 accepted by the owner** before B1–B3 build beyond throwaway prototypes **[revised 2026-11-25]** |
 
 ### Old B1 → B1 Foundation. Data model, database and document storage
 
@@ -359,7 +359,7 @@ The stack below is the recommendation of the technology assessment and is confir
 ### Old B2 → B1 Foundation. Offline ingestion and indexing (OCR included)
 
 - **Two entry paths sharing one pipeline:**
-  - **(a) Release import:** the corpus at a pinned HF revision (B10).
+  - **(a) Release import:** the corpus at a pinned HF revision (old B10; B1 imports a subset, B2 the full eligible corpus).
   - **(b) Admin upload (CORPUS_INGESTION):** stage → validate and quarantine (type, size, content sniffing, malformed-file checks) → preserve bytes and hash → extract text (PDF text layer if sane, else OCR) → passages with page markers → metadata candidates → candidate links → Admin review → publish.
 - **OCR:**
   - The engine chosen in B0 P4, with per-page confidence.
@@ -494,7 +494,7 @@ The stack below is the recommendation of the technology assessment and is confir
   4. The previous generation is retained for rollback.
   5. Local Admin uploads are reconciled under Architecture §9.1 (sha256 identity, aliases, no auto-merge, precedence, change list as impact trigger).
 - **Acceptance:**
-  - Install from bundles on a clean air-gapped VM with networking disabled.
+  - Install from bundles on a clean, network-disabled **Windows host** with the signed installer **[revised 2026-11-25; was "air-gapped VM"]**.
   - A tampered byte or signature rejects the import with nothing changed.
   - Update N→N+1 and rollback both work.
   - A bundle containing an already-uploaded local file produces one SourceCopy with two provenances.
@@ -573,7 +573,7 @@ The outline below is retained for history. The binding definition is the version
 | GA4 | Evaluation independently reviewed; no P1/P2 open | Independent reviewer |
 | GA5 | Legal decision recorded before any legal state is applied | Human legal adviser + owner approval to apply |
 | GB1 | ADR-0005 stack accepted | Owner (after independent review) |
-| GB2 | M-B1 MVP passes acceptance on an air-gapped VM | Independent reviewer + security reviewer |
+| GB2 | B1 prototype passes acceptance on a clean, network-disabled Windows host **[revised 2026-11-25; was "M-B1 MVP on an air-gapped VM"]** | Independent reviewer + security reviewer |
 | GB3 | Security baseline: no P1/P2 open | Security reviewer |
 | GX | Release bundle R13-candidate imported offline; banner and state tests pass | Independent reviewer |
 | GC | Cycle report, task register, findings register regenerated (`--check`), owner review | Owner |
@@ -584,7 +584,7 @@ The outline below is retained for history. The binding definition is the version
 | Phase | Track A | Track B |
 | --- | --- | --- |
 | 1 | A0. A6 (ingest the 25 T1; prepare targets). A7 packages 1–2 assembled | B0 PoCs and ADR-0005 draft. B12 CI skeleton |
-| 2 | A1 and A2 protocols pre-registered; holdout and reference sampling; coding. A3 provision-version build. A4 identity work | GB1 → B1, B2, B10 (import path), B11 |
+| 2 | A1 and A2 protocols pre-registered; holdout and reference sampling; coding. A3 provision-version build. A4 identity work | GB1 → B1 (old B1, B3, B5, B6, B7, B10 import path, B11) **[revised 2026-11-25]** |
 | 3 | A1 and A2 development on dev data; A5 transcription; A4 edges and evaluation | B3, B5, B6, B7; M-B1 MVP |
 | 4 | Freezes and scoring (GA3, GA4); A8 closures; adviser decisions applied if any (GA5) | B4, B8, B9; IC-01 import; GX release bundle |
 | 5 | Cycle report | Cycle report; M-B2 |
@@ -627,13 +627,13 @@ The outline below is retained for history. The binding definition is the version
 | **D-02** | **Accept the stack and licence posture** (ADR-0005), including whether AGPL components (PyMuPDF) are acceptable server-side for an internal deployment or must be replaced | GB1 | Accept PostgreSQL-centred stack. Decide AGPL after P7; a permissive fallback exists |
 | **D-03** | **Human legal capacity**: name a legal adviser for A7, and confirm the Legal Reviewer designation path (Document Studio §3.3) | A3, A5, A7 decisions | Name an adviser now, even part-time. The designation can follow |
 | **D-04** | **Acquisition access**: allow-list `sci.gov.in`, `desw.gov.in` and archive.org storage nodes; fix the egazette trust store; or the owner acquires manually. Confirm the contact-email header policy | A3, A5, A6 | Allow-list plus manual fallback for CAPTCHA-protected items |
-| **D-05** | **Authentication mode** (local accounts vs LDAP/AD) and **release-signing key custody** (who holds the offline signing key) | B7, B10 | Local accounts first with an optional LDAP adaptor. Owner-held offline signing key with a backup custodian |
+| **D-05** | **Authentication mode** (local accounts vs LDAP/AD) and **release-signing key custody** (who holds the offline signing key) | B1, B3 | Local accounts first with an optional AD adaptor. Owner-held offline signing keys (release, register, trust-list root) with a backup custodian; trust list changeable only by owner-signed update; Authenticode installer signing mandatory **[revised 2026-11-25]** |
 | D-06 | App code location: `app/` in this repository or a separate private GitHub repository | B1 | Separate repository, to keep corpus-tool CI and app CI independent |
 | D-07 | Human annotator for the A1 20% subsample and as one of the two A2 annotators | GA2 | Yes. It is the only way to measure AI–human agreement |
-| D-08 | Display bar for candidate holdings and outcomes in the User UI | B4 | Holdings hidden until ≥80% P / ≥60% R; outcomes shown labelled with measured figures |
+| D-08 | Display bar for candidate holdings and outcomes in the User UI, **and approval of the Admin-only holdings diagnostic as a time-limited exception to equal research access (PR-01, ADR-0002 d.1)** until the bar is met (review F21) | B3 | Holdings hidden from Users until ≥80% P / ≥60% R; Admin diagnostic view as recorded exception expiring when the bar is met or at Cycle 14 review; outcomes shown labelled with measured figures |
 | D-09 | Apply the SC case-number overlay (99 staged) | A4 | Apply as an overlay after independent reconfirmation |
 | D-10 | Prism OCR: is it available as an offline module with known licence? | B0 P4 | If not confirmed early in Phase 1, proceed with Tesseract |
-| D-11 | Carried from C12: release of temporary working copies; handling of the FOUO RAF 2000 copy in the HF dataset; merge of the C12 PR into staging | — | FOUO copy must be excluded from every app release bundle (B10 eligibility filter) whatever is decided |
+| D-11 | Carried from C12: release of temporary working copies; handling of the FOUO RAF 2000 copy in the HF dataset; merge of the C12 PR into staging | — | FOUO copy must be excluded from every app release bundle (release build eligibility filter and the signed exclusion channel) whatever is decided |
 
 ## 12. Cycle 13 exit criteria
 

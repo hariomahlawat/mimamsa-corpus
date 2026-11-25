@@ -1,12 +1,16 @@
 name: App contract and design checks
 
-# Track B only. Path-filtered to app/** and this file. It does not call, modify or depend on the HF sync
+# Track B only. Path-filtered to app/**, the capability matrix CSV, the security test catalogue and this file.
+# Precondition until the governance branch is integrated: origin/claude/c13-gov must exist on GitHub, because the
+# contract tests read config/restricted_material.json from it and fail (never skip) without the register. It does not call, modify or depend on the HF sync
 # workflows (sync-legal-knowledge-hf.yml, hf-sync-guard-ci.yml) and holds no secrets.
 on:
   pull_request:
     paths:
       - "app/**"
       - "config/restricted_material.json"
+      - "docs/architecture/CAPABILITY_TRACEABILITY_MATRIX.csv"
+      - "docs/architecture/SECURITY_AND_DEPLOYMENT_ARCHITECTURE.md"
       - ".github/workflows/app-ci.yml"
   push:
     branches-ignore:
@@ -14,6 +18,8 @@ on:
     paths:
       - "app/**"
       - "config/restricted_material.json"
+      - "docs/architecture/CAPABILITY_TRACEABILITY_MATRIX.csv"
+      - "docs/architecture/SECURITY_AND_DEPLOYMENT_ARCHITECTURE.md"
       - ".github/workflows/app-ci.yml"
   workflow_dispatch:
 
@@ -68,11 +74,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          sparse-checkout: |
+            app/design
+            docs/architecture
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Install test runner
         run: python -m pip install --disable-pip-version-check pytest==9.2.0
-      - name: Design token checks (WCAG AA contrast, token integrity)
+      - name: Design checks (WCAG AA contrast, display scaling, keymap vs browser-reserved keys, client cache policy, capability matrix CSV)
         working-directory: app/design
         run: python -m pytest -q -p no:cacheprovider tests

@@ -78,15 +78,86 @@ def test_publication_axis_cannot_carry_approval_value(example, register):
 
 def test_ledger_v0_blocks_any_legal_approval(example, register):
     doc = example("document")
-    doc["status_axes"]["legal_approval"] = {"value": "T1_LEGAL_ADVISER_REVIEWED", "basis": "claimed", "approval_ref": "APP-1"}
+    doc["status_axes"]["legal_approval"] = {"value": "T1_LEGAL_ADVISER_REVIEWED", "basis": "claimed", "approval_record_id": "AP-0001"}
     assert "LEDGER_V0_NO_APPROVAL" in codes(record_issues("document", doc, register, "x", ledger_version=0))
-    assert "LEDGER_V0_NO_APPROVAL" not in codes(record_issues("document", doc, register, "x", ledger_version=1))
 
 
-def test_approval_needs_ref(example, register):
+def test_approval_outside_bundle_never_accepted(example, register):
+    """F01: an approval can only be accepted with its approval record, appointment and artefact in the same bundle."""
+    doc = example("document")
+    doc["status_axes"]["legal_approval"] = {"value": "T2_FORMAL_JAG_VALIDATED", "basis": "claimed", "approval_record_id": "AP-0001"}
+    assert "APPROVAL_UNRESOLVED" in codes(record_issues("document", doc, register, "x", ledger_version=5))
+
+
+def test_approval_needs_record_id(example, register):
     doc = example("document")
     doc["status_axes"]["legal_approval"] = {"value": "T2_FORMAL_JAG_VALIDATED", "basis": "claimed"}
-    assert "APPROVAL_REF_REQUIRED" in codes(record_issues("document", doc, register, "x", ledger_version=5))
+    assert "SCHEMA" in codes(record_issues("document", doc, register, "x", ledger_version=5))
+    doc["status_axes"]["legal_approval"] = {"value": "T0_RESEARCH_ONLY", "basis": "ok", "approval_record_id": "AP-0001"}
+    assert "SCHEMA" in codes(record_issues("document", doc, register, "x"))
+
+
+@pytest.mark.parametrize("axis", ["publication", "source_integrity", "evidence_fidelity", "legal_applicability",
+                                  "legal_approval", "dependency_freshness"])
+def test_policy_object_cannot_be_smuggled_into_other_axes(example, register, axis):
+    """F01 negative control (reviewer probe P13)."""
+    doc = example("document")
+    doc["status_axes"][axis]["policy_v1"] = {"legal_approval": "T2_FORMAL_JAG_VALIDATED", "verified": True}
+    assert "SCHEMA" in codes(record_issues("document", doc, register, "x"))
+
+
+@pytest.mark.parametrize("axis", ["publication", "source_integrity", "evidence_fidelity"])
+def test_unknown_keys_rejected_on_every_axis(example, register, axis):
+    doc = example("document")
+    doc["status_axes"][axis]["legal_approval"] = "T1_LEGAL_ADVISER_REVIEWED"
+    assert "SCHEMA" in codes(record_issues("document", doc, register, "x"))
+
+
+def test_approval_ref_free_string_not_accepted(example, register):
+    doc = example("document")
+    doc["status_axes"]["legal_approval"] = {"value": "T1_LEGAL_ADVISER_REVIEWED", "basis": "x x", "approval_ref": "anything"}
+    assert "SCHEMA" in codes(record_issues("document", doc, register, "x", ledger_version=3))
+
+
+@pytest.mark.parametrize("axis,value", [("evidence_fidelity", "FIDELITY_VERIFIED"), ("legal_applicability", "EVIDENCED"),
+                                        ("source_authenticity", "IDENTITY_CONFIRMED"), ("dependency_freshness", "CURRENT_FOR_CHECKED_SCOPE")])
+def test_raised_values_need_review_record(example, register, axis, value):
+    """F02 negative controls (reviewer probes P01-P03)."""
+    doc = example("document")
+    doc["status_axes"][axis]["value"] = value
+    doc["status_axes"][axis]["basis"] = "trust me"
+    assert "RAISED_VALUE_NEEDS_REVIEW" in codes(record_issues("document", doc, register, "x"))
+
+
+def test_identity_confirmed_contradicts_hash_only(example, register):
+    doc = example("document")
+    doc["status_axes"]["source_authenticity"].update(value="IDENTITY_CONFIRMED", review_record_id="RV-0001")
+    assert "AXIS_CONTRADICTION" in codes(record_issues("document", doc, register, "x"))
+
+
+@pytest.mark.parametrize("integrity", ["MISMATCH", "NOT_CHECKED"])
+def test_published_with_bad_integrity_rejected(example, register, integrity):
+    """F02 (reviewer probe P15)."""
+    doc = example("document")
+    doc["status_axes"]["source_integrity"] = {"value": integrity, "basis": "see report"}
+    assert "AXIS_CONTRADICTION" in codes(record_issues("document", doc, register, "x"))
+
+
+def test_byte_verified_needs_evidence_ref(example, register):
+    doc = example("document")
+    doc["status_axes"]["source_integrity"]["evidence_ref"] = None
+    assert "RAISED_VALUE_NEEDS_REVIEW" in codes(record_issues("document", doc, register, "x"))
+
+
+def test_working_document_record_rejected(register):
+    assert "WORKING_DOCUMENT_IN_BUNDLE" in codes(record_issues("document", {"record_kind": "working_document"}, register, "x"))
+
+
+def test_candidate_review_ref_must_be_review_id(example, register):
+    c = example("candidate_graph_edge")
+    c["status"] = "DOCUMENTARY_CHECKED"
+    c["review_ref"] = "free text"
+    assert "SCHEMA" in codes(record_issues("candidate", c, register, "x"))
 
 
 def test_vault_path_must_match_hash(example, register):

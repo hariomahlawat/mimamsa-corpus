@@ -20,6 +20,12 @@ KIND_TO_SCHEMA = {
     "status_axes": "status_axes.schema.json",
     "provenance": "provenance.schema.json",
     "restriction": "restriction.schema.json",
+    "reviewed_record": "reviewed_record.schema.json",
+    "appointment_record": "appointment_record.schema.json",
+    "approval_record": "approval_record.schema.json",
+    "publication_record": "publication_record.schema.json",
+    "trust_list": "trust_list.schema.json",
+    "exclusion_update": "exclusion_update.schema.json",
 }
 
 

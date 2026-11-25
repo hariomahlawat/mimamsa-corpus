@@ -165,3 +165,36 @@ def test_parity_with_repository_guard_when_integrated(register, register_path):
                  [dict(path=hp) for hp in it.get("hosted_paths", [])] + [dict(sha256="0" * 64), dict(doc_id="act-x")]
         for kw in probes:
             assert mod.is_restricted(**kw) == register.is_restricted(**kw), kw
+
+
+# ---- F03: restricted references anywhere in a record
+@pytest.mark.parametrize("mutate", [
+    lambda d, it: d.__setitem__("parent_doc_id", it["doc_id"]),
+    lambda d, it: d["judicial"].__setitem__("judgment_identity_id", it["doc_id"]),
+    lambda d, it: d["judicial"]["reported_citations"].append("see " + it["doc_id"].upper()),
+    lambda d, it: d["provenance"]["aliases"].append({"source_url": "https://example.invalid/" + it["source_sha256"], "retrieved_at": None}),
+], ids=["parent_doc_id", "judgment_identity_id", "citation_text_case_insensitive", "alias_url_with_hash"])
+def test_restricted_reference_anywhere_in_document_rejected(example, register, register_path, mutate):
+    for it in _items(register_path):
+        doc = example("document")
+        mutate(doc, it)
+        assert "RESTRICTED_MATERIAL" in codes(record_issues("document", doc, register, "x"))
+
+
+@pytest.mark.parametrize("field", ["node_id", "raw_reference", "source_node", "evidence_text"])
+def test_restricted_reference_anywhere_in_edge_rejected(example, register, register_path, field):
+    for it in _items(register_path):
+        c = example("candidate_graph_edge")
+        if field in ("node_id", "raw_reference"):
+            c["payload"]["target"] = {"resolved": field == "node_id", "node_id": it["doc_id"] if field == "node_id" else None,
+                                      "raw_reference": it["doc_id"] if field == "raw_reference" else None}
+        else:
+            c["payload"][field] = it["doc_id"]
+        assert "RESTRICTED_MATERIAL" in codes(record_issues("candidate", c, register, "x"))
+
+
+def test_case_insensitive_path_match(register, register_path):
+    """F13."""
+    for it in _items(register_path):
+        assert register.is_restricted(path="DATA/TEXT/" + it["doc_id"].upper() + ".TXT")
+        assert register.is_restricted(doc_id=it["doc_id"].upper())

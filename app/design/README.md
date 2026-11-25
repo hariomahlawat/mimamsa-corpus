@@ -13,7 +13,9 @@
 | [04_VISUAL_IDENTITY.md](04_VISUAL_IDENTITY.md) | Original visual identity, typography, colour and contrast (WCAG AA), spacing, iconography |
 | [05_COMPONENTS_AND_KEYBOARD.md](05_COMPONENTS_AND_KEYBOARD.md) | Component inventory and keyboard interaction standards |
 | [06_RESPONSIVE_AND_STATES.md](06_RESPONSIVE_AND_STATES.md) | Responsive rules (1366×768, 1920×1080, 2560×1440, tablet) and loading, empty, error and degraded states |
-| [tokens/design-tokens.json](tokens/design-tokens.json) | Design tokens (light and dark), checked by `tests/test_tokens.py` |
+| [tokens/design-tokens.json](tokens/design-tokens.json) | Design tokens (light and dark), checked by `tests/test_tokens.py` (contrast, scaling matrix, vertical budget) |
+| [keymap.json](keymap.json), [browser_reserved_keys.json](browser_reserved_keys.json) | Conflict-free keymap and the Edge/Chrome/Windows reserved list it is tested against (`tests/test_keymap.py`) |
+| [policies/client_state_and_cache.json](policies/client_state_and_cache.json) | Shared-desktop client state and HTTP cache policy (`tests/test_client_policy.py`) |
 
 ## Design principles
 

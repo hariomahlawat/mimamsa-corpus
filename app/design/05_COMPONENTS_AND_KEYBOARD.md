@@ -12,10 +12,10 @@ Each component lists its states. "All states" means default, hover, focus-visibl
 | `TopBar` | Mark, workspace switcher, search, view toggle, user menu | Administration item rendered only for Admin |
 | `WorkspaceSwitcher` | Research · Statutes · Graph · Studio · Assistant (locked) · Administration | Locked item opens the gate notice, not an error |
 | `StatusFooter` | Release id, HF revision, connection, job count (Admin) | Text only |
-| `LeftRail` | Contextual navigation and facets | Collapsible (Ctrl+B); icon mode at compact widths |
+| `LeftRail` | Contextual navigation and facets | Collapsible (B); icon mode at compact widths |
 | `PaneLayout` + `PaneDivider` | Resizable panes | Keyboard resizable (§2.4); double-click divider resets; layout persisted per user |
 | `TabStrip` | Document tabs | Overflow menu; drag to reorder; close button on hover/focus |
-| `CommandPalette` | All actions by name (Ctrl+Shift+P) | Lists shortcuts; respects role (Admin actions absent for Users) |
+| `CommandPalette` | All actions by name (`:`) | Lists shortcuts; respects role (Admin actions absent for Users) |
 
 ### 1.2 Search and results
 
@@ -35,10 +35,10 @@ Each component lists its states. "All states" means default, hover, focus-visibl
 | `DocHeader` | Printed title, court/issuer, dates, numbers | Each field with `OriginChip` |
 | `ProceedingsStrip` | Proceedings and candidate outcomes | `CandidateValue` with `EvaluationPopover` |
 | `PdfViewer` | PDF.js viewer | Hit nav, page input, zoom (fit width / page / %), rotate, Original/Text toggle; script and eval disabled |
-| `HitNavigator` | Previous/next hit with count | F3 / Shift+F3 |
+| `HitNavigator` | Previous/next hit with count | N / Shift+N |
 | `TextView` | Extracted text with page dividers | OCR label per page |
 | `CopySwitcher` / `CompareView` | Alternate copies | Sync pages when possible |
-| `CitationButton` | Copy citation and permalink | Toast confirms text copied (no animation) |
+| `CitationButton` | Copy legal citation (C) or internal reference (Shift+C) | Toast confirms text copied (no animation) |
 
 ### 1.4 Evidence and context
 
@@ -74,7 +74,7 @@ Each component lists its states. "All states" means default, hover, focus-visibl
 | `StagingReview` | Original vs extracted text, OCR per page, metadata candidates, suggested links, eligibility decision | Publish disabled until eligibility recorded |
 | `PublishDialog` | Confirm publication | Fixed text: "Visible to all users. Not legal approval." |
 | `WithdrawDialog` | Confirm withdrawal with reason | States effect on search |
-| `ReleaseImportWizard` | Verify → import → smoke → switch | Shows every check with pass/fail; any fail stops |
+| `ReleaseImportWizard` | Pick a bundle from the fixed import drop folder → verify → import → smoke → switch | The browser never uploads bundles or names server paths; shows every check with pass/fail; any fail stops |
 | `VerificationReport` | Signature, checksums, compatibility, register, records | Restricted hits by id only |
 | `AccountTable`, `DesignationRegistry` | Accounts; inert designations | Designation page shows "inactive until appointed" |
 | `AuditTable` | Metadata-only events | Filters; export CSV (metadata only) |
@@ -88,35 +88,42 @@ Each component lists its states. "All states" means default, hover, focus-visibl
 ### 2.1 General rules
 
 - Every action reachable by mouse is reachable by keyboard; visible focus always (`focus.ring`, 2 px).
-- Tab order follows visual order: banner → top bar → rail → results → document → context → footer. F6 / Shift+F6 cycles panes.
+- Tab order follows visual order: banner → top bar → rail → results → document → context → footer. `.` / `,` cycle panes (F6 is left to the browser).
 - ARIA patterns: tabs (`tablist`), tree (TOC), grid (results tables), listbox (suggestions), dialog (modal, focus-trapped, Esc closes, focus returns).
-- Shortcuts avoid browser-reserved combinations where possible and are listed in the command palette and in a `?` help sheet. Single-key shortcuts (`/`, `j`, `k`) work only when focus is not in a text field and can be turned off in user settings (WCAG 2.1.4).
+- Shortcuts never use browser-reserved combinations (tested) and are listed in the command palette and in a `?` help sheet. Single-key shortcuts (`/`, `j`, `k`) work only when focus is not in a text field and can be turned off in user settings (WCAG 2.1.4).
 
-### 2.2 Global
+### 2.2 Keymap (normative: `keymap.json`)
 
-| Keys | Action |
-| --- | --- |
-| Ctrl+K or `/` | Focus search |
-| Ctrl+Shift+P | Command palette |
-| F6 / Shift+F6 | Next / previous pane |
-| Ctrl+B | Toggle left rail |
-| Ctrl+Alt+→ / ← | Toggle context pane / results pane |
-| Ctrl+1…5 | Switch workspace (Research, Statutes, Graph, Studio, Administration) |
-| ? | Shortcut help |
+The keymap avoids every combination that Edge or Chrome on Windows reserves or may not pass to the page (`browser_reserved_keys.json`), including Ctrl+Shift+P/N/C/O/K, Ctrl+W/T/Tab/1–9, Ctrl+K/L/E/G, Alt+←/→, F3, F6, F12. `tests/test_keymap.py` fails the build on any collision. The reserved list must be re-confirmed in P9 on the deployed browser versions.
+
+| Keys | Action | Scope |
+| --- | --- | --- |
+| `/` | Focus search | outside text fields |
+| `?` | Shortcut help | outside text fields |
+| `:` | Command palette | outside text fields |
+| G then R / S / G / D / A | Research / Statutes / Graph / Studio / Administration | outside text fields |
+| `.` / `,` | Next / previous pane | outside text fields |
+| B / Shift+B | Toggle left rail / context pane | outside text fields |
+| `]` / `[` | Next / previous app tab | outside text fields |
+| Esc | Leave field, close popover | anywhere |
 
 ### 2.3 Results and documents
 
 | Keys | Action |
 | --- | --- |
-| ↑ / ↓ or `k` / `j` | Previous / next result |
-| Enter / Ctrl+Enter / Space | Open in tab / open in new tab / preview |
-| F3 / Shift+F3 | Next / previous hit in document |
-| Ctrl+G | Go to page |
-| Ctrl+Shift+C | Copy citation |
-| Ctrl+Shift+O | Toggle Original / Text |
-| Ctrl+W / Ctrl+Tab / Ctrl+Shift+Tab | Close / next / previous tab (when focus is in the app; browser may reserve these, so Alt+W / Alt+→ / Alt+← are provided as alternates) |
-| Ctrl+Shift+N | New note pinned to the current passage |
-| Ctrl+Shift+E | Open Evidence tab |
+| J / K or ↓ / ↑ | Next / previous result |
+| Enter / O / Space | Open in current tab / new app tab / preview |
+| N / Shift+N | Next / previous hit in document (browser F3 left native) |
+| P | Go to page |
+| C / Shift+C | Copy legal citation / copy internal reference and permalink |
+| T | Toggle Original / Text |
+| M | New note pinned to the current passage |
+| E | Open Evidence panel |
+| X | Close app tab |
+| Alt+↓ (in search field) | Open suggestions |
+| Ctrl+Enter (in search field) | Run search in a new app tab |
+
+Single-key shortcuts are active only when focus is outside editable fields and can be turned off in user settings (WCAG 2.1.4). Pane cycling with `.`/`,` lands on dividers too.
 
 ### 2.4 Pane resizing
 
