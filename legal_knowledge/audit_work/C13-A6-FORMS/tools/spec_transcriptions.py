@@ -1227,3 +1227,50 @@ add("FF-AFTPR08-F3", "AFTPR08-C7", 46, (0.18, 0.49, 0.96, 0.95),
         ("To The Registrar, Bench Armed Forces Tribunal", "address"),
     ])],
     notes="Item numbering prints '(x)' twice (Name of concerned legal practitioner; Postal address), recorded as printed. Items (viii)-(x) are in faint type but legible.")
+
+# ---------------------------------------------------------------- Navy Act 1957 (NA57-C7), India Code compilation
+# Native text layer; page images read at 110 dpi to confirm layout (the
+# 'swear in the name of God / solemnly affirm' alternatives are printed stacked).
+_na_alt = ("do swear in the name of God / Solemnly affirm", "statement")
+add("FF-NA57-S13-ALLEGIANCE", "NA57-C7", 15, (0.12, 0.35, 0.92, 0.49), dpi=110,
+    region="s.13 Oath of allegiance",
+    fields=[
+        ("13. Oath of allegiance.—Every officer and every sailor shall, as soon as may be, after appointment or enrolment make and subscribe before the commanding officer of the ship to which he belongs, or the prescribed officer an oath or affirmation in the following form, that is to say:—", "instruction"),
+        ("\"I", "blank"),
+        _na_alt,
+        ("that I will bear true faith and allegiance to the Constitution of India as by law established and that I will, as in duty bound, honestly and faithfully serve in the naval service and go wherever ordered by sea, land or air, and that I will observe and obey all commands of the President and the commands of any superior officer set over me, even to the peril of my life.\".", "statement"),
+    ],
+    notes="'sailor' carries footnote 2: 'Subs. by Act 53 of 1974, s. 2, for \"seaman\" (w.e.f. 16-12-1974)'. The alternatives are printed one above the other: 'swear in the name of God' over 'Solemnly affirm'.")
+add("FF-NA57-S104-1-MEMBER", "NA57-C7", 40, (0.12, 0.30, 0.92, 0.42), dpi=110,
+    region="s.104(1) oath/affirmation of president and members",
+    fields=[
+        ("104. Administering oath or affirmation.—(1) Before the court shall proceed to try the person charged, an oath or affirmation in the following form and manner shall be administered to the president and every member of the court-martial in the order of their seniority by the trial judge advocate:—", "instruction"),
+        ("\"I", "blank"),
+        ("do swear in the name of God / solemnly affirm", "statement"),
+        ("that I will duly and faithfully and to the best of my ability, knowledge and judgment administer justice according to law, without fear or favour, affection or ill-will, and that I will not on any account at any time whatsoever disclose or discover the vote or opinion of any particular member of this court-martial unless thereunto required in due course of law.\"", "statement"),
+    ])
+add("FF-NA57-S104-2-TJA", "NA57-C7", 40, (0.12, 0.42, 0.92, 0.52), dpi=110,
+    region="s.104(2) oath/affirmation of trial judge advocate",
+    fields=[
+        ("(2) The trial judge advocate shall then be sworn or affirmed by the president in the following form:—", "instruction"),
+        ("\"I", "blank"),
+        ("do swear in the name of God / solemnly affirm", "statement"),
+        ("that I will duly and faithfully and to the best of my ability, knowledge and judgment perform the duties of my office according to law, without fear or favour, affection or ill-will, and that I will not upon any account at any time whatsoever disclose or discover the vote or opinion of any particular member of this court-martial unless thereunto required in due course of law.\"", "statement"),
+    ])
+
+# ---------------------------------------------------------------- Regulations for the Navy Part IV (NR65-P4-C7)
+add("FF-NR65P4-S2-OATH", "NR65-P4-C7", 81, (0.12, 0.10, 0.90, 0.56), dpi=110,
+    region="Schedule II (Regulation 15) Form of Oath/Affirmation (whole form)",
+    fields=[
+        ("SCHEDULE II", "heading"),
+        ("(Regulation 15)", "heading"),
+        ("FORM OF OATH/AFFIRMATION", "heading"),
+        ("\"I", "blank"),
+        ("do swear in the name of God / solemnly affirm", "statement"),
+        ("that I will bear true faith and allegiance to the Constitution of India as by law established and that I will, as in duty bound, honestly and faithfully serve in the naval service and go wherever ordered by sea, land or air, and that I will observe and obey all commands of the President and the commands of any superior officer set over me, even to the peril of my life\".", "statement"),
+        ("Signature", "signature"),
+        ("Sworn/duly affirmed before me at this day of 19", "blank"),
+        ("Signature of officer", "signature"),
+        ("(Commanding Officer)", "signature"),
+    ],
+    notes="Retyped India Code copy (not a facsimile); 'IndiaCode' watermark not transcribed.")

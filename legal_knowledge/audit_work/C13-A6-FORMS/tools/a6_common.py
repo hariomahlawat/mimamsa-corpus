@@ -122,6 +122,18 @@ SOURCES = {
         hf_path="data/raw/indiacode/1950/ef50375ea0550ddc1e6414c45bd9403d3842aa395a297e71e2e627403632ebd0.pdf",
         title="The Air Force Act, 1950: India Code compilation",
         authority="Parliament (India Code compilation)", edition="India Code compilation; as-on date per copy"),
+    "NR65-P2-C7": dict(
+        root="c7git", path="data/raw/indiacode/0000/884a893c725d4025dc95009dcd5aedf158d6726bf499e5a0690d0cdbc7b4064d.pdf",
+        sha256="884a893c725d4025dc95009dcd5aedf158d6726bf499e5a0690d0cdbc7b4064d",
+        hf_path="data/raw/indiacode/0000/884a893c725d4025dc95009dcd5aedf158d6726bf499e5a0690d0cdbc7b4064d.pdf",
+        title="Regulations for the Navy Part II (Statutory): India Code file",
+        authority="Central Government / Naval Headquarters (via India Code)", edition="imprint 'GMGIPND - JOB II - 224 Naval (JC 5833) - 21-4-65' (last page, text layer)"),
+    "NR65-P4-C7": dict(
+        root="c7git", path="data/raw/indiacode/0000/e4148ee0757de0adfdeb5acf68e7bd8c752f0d21d11c329f7484e108026c9f58.pdf",
+        sha256="e4148ee0757de0adfdeb5acf68e7bd8c752f0d21d11c329f7484e108026c9f58",
+        hf_path="data/raw/indiacode/0000/e4148ee0757de0adfdeb5acf68e7bd8c752f0d21d11c329f7484e108026c9f58.pdf",
+        title="Regulations for the Navy Part IV (Indian Naval Auxiliary Service Regulations, 1973): India Code file",
+        authority="Naval Headquarters (Amendment No. 82, 01-10-1977, via India Code)", edition="as inserted by Amendment No. 82 (Batch No. 26), 01-10-1977"),
 }
 
 
