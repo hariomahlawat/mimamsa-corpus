@@ -1,0 +1,52 @@
+{
+ "findings_total": 226,
+ "cycle13_review_findings": 221,
+ "c12_carry_over": 5,
+ "by_status_all": {
+  "ACCEPTED_DEVIATION": 7,
+  "CLOSED": 182,
+  "DEFERRED": 29,
+  "OPEN": 8
+ },
+ "by_status_cycle13_reviews": {
+  "ACCEPTED_DEVIATION": 7,
+  "CLOSED": 182,
+  "DEFERRED": 24,
+  "OPEN": 8
+ },
+ "by_severity_cycle13_reviews": {
+  "INFO": 19,
+  "P1": 10,
+  "P2": 69,
+  "P3": 117,
+  "UNRATED": 6
+ },
+ "open_p1": [],
+ "open_p2": [
+  "C13-FR-100 (A7 F06)",
+  "C13-FR-196 (B0/B-PoC (PR #54) R2-N01)",
+  "C13-FR-210 (B-PoC F07)"
+ ],
+ "restrictions_lifted": 0,
+ "restrictions_still_restricted": 5,
+ "sources": {
+  "A0R": "legal_knowledge/audit_work/C13-A0-EVAL/reviews/review_c13_a0_5e07e010_findings.csv",
+  "A0C": "legal_knowledge/audit_work/C13-A0-EVAL/reviews/confirmation_c13_a0_06340486.md",
+  "A4R": "legal_knowledge/audit_work/C13-A4-STATUTORY/reviews/review_c13_a4_5db80dfc_findings.csv",
+  "A4C": "legal_knowledge/audit_work/C13-A4-STATUTORY/reviews/confirmation_c13_a4_fa8715fa_findings.csv",
+  "A5R": "legal_knowledge/audit_work/C13-A5-GRAPH/reviews/findings_c13_a5_f915ac11.csv",
+  "A6R": "legal_knowledge/audit_work/C13-A6-FORMS/reviews/review_c13_a6_1b05490f_findings.csv",
+  "A7R": "legal_knowledge/audit_work/C13-A7-ACQUISITION/reviews/review_c13_a7_84e10767_findings.csv",
+  "GOVR": "legal_knowledge/audit_work/C13-GOV/reviews/review_c13_gov_dfce9140_findings.csv",
+  "EVA1": "legal_knowledge/audit_work/C13-EVAL/reviews/REVIEW_A1.md",
+  "EVINT": "legal_knowledge/audit_work/C13-EVAL/reviews/REVIEW_A2_A3_A5_INTEGRATION.md",
+  "GA4": "legal_knowledge/audit_work/C13-EVAL/REVIEW_GA4.md",
+  "B0R": "docs/architecture/reviews/review_c13_b0_dc811848_findings.csv",
+  "B0C1": "docs/architecture/reviews/confirmation_c13_b0_10ae5c04_findings.csv",
+  "IMP": "docs/architecture/reviews/REVIEW_IMPORTER_E05_E06.md",
+  "PR53": "docs/architecture/reviews/REVIEW_PR53_RECONCILIATION.md",
+  "ASR": "docs/architecture/reviews/c13-assurance/README.md",
+  "POC": "docs/architecture/poc/reviews/REVIEW_R2N01_POC.md",
+  "C12F": "legal_knowledge/audit_work/C12-CONSOLIDATION/findings_consolidation/FINDINGS_CONSOLIDATED.csv"
+ }
+}
