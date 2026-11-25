@@ -444,7 +444,23 @@ def build_relevance(use_bytes: bool):
             "by_group_state": {g: dict(sorted(Counter(r["state"] for r in rows if r["group"] == g).items()))
                                for g in sorted({r["group"] for r in rows})},
             "transitions": dict(sorted(Counter(f"{r['prior_relevance']} -> {r['state']}" for r in rows).items()))}
-    return {"RELEVANCE_RERUN.csv": csv_text(rows, fields), "RELEVANCE_RERUN.json": js(summ)}
+    # task 6: ingestion decisions. Only held files outside data/ can be newly ingested (C12_PRESERVED_NOT_INGESTED);
+    # anything not RELEVANT goes to the review queue instead of being ingested.
+    dec = []
+    for r in rows:
+        if r["group"] == "C12_PRESERVED_NOT_INGESTED":
+            action = "INGEST" if r["state"] == "RELEVANT" else (
+                "NOT_INGESTED_IRRELEVANT" if r["state"] == "IRRELEVANT" else "NOT_INGESTED_MANUAL_REVIEW_REQUIRED")
+        elif r["group"] == "C12_INGESTED_T1":
+            action = "ALREADY_INGESTED_C12" + ("" if r["state"] == "RELEVANT" else "_MANUAL_REVIEW_REQUIRED")
+        else:
+            action = "IN_CORPUS_NO_INGESTION" + ("" if r["state"] == "RELEVANT" else f"_{r['state']}")
+        dec.append({"doc_id": r["doc_id"], "group": r["group"], "state": r["state"], "action": action,
+                    "review_queue": "YES" if r["state"] not in ("RELEVANT", "IRRELEVANT") or r["group"] != "IN_CORPUS_TEXT_RISK" and r["state"] == "IRRELEVANT" else "NO"})
+    summ["ingestion_actions"] = dict(sorted(Counter(d["action"] for d in dec).items()))
+    summ["newly_ingested"] = sum(d["action"] == "INGEST" for d in dec)
+    return {"RELEVANCE_RERUN.csv": csv_text(rows, fields), "RELEVANCE_RERUN.json": js(summ),
+            "INGESTION_DECISIONS.csv": csv_text(dec, ["doc_id", "group", "state", "action", "review_queue"])}
 
 
 def dump_text_layers():
