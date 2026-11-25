@@ -1,0 +1,82 @@
+{
+ "eligible_judgments": 2812,
+ "exclusions_sha256": "599d073bda05443a229ebf1e1acb33952bbd0c56c46829852afbaa7679b41d96",
+ "frame_sha256": "7b9e57ffa5d95a601cec5547d43df4d995b2a98d4a925e1ca996f21093024341",
+ "holdout": "H-REL-C13",
+ "judgments": 123,
+ "page_class_rule": "TREATMENT_CUE > RESOLVED_CITATION > UNRESOLVED_CITATION_ONLY; else NO_DETECTED_CITATION",
+ "pages": 160,
+ "population": "pages of eligible judgments (overlap with H-OUT/H-HOLD allowed), classed from the C11 citation graph and treatment candidates (BODY zone, first-occurrence page), plus pages with no detected citation (to measure misses)",
+ "seed": "mimamsa-c13-h-rel",
+ "selection": "lowest SHA-256(seed|judgment_key#pN) within each court-group x page class",
+ "size_justification": {
+  "note": "Coders record every case citation and treatment on each sampled page, so precision and recall are measured on the same units. With about 3 citations per citing page, 140 citing pages give about 400 citation instances; the 50 treatment-cue pages give a per-type precision interval of about +/-7pp at p=0.8 for the common types (APPLIES, CITES); rare types (OVERRULES, DISTINGUISHES) get descriptive counts only."
+ },
+ "strata": [
+  {
+   "N_h": 11994,
+   "design_weight": 1199.4,
+   "inclusion_probability": 0.000834,
+   "n_h": 10,
+   "seed": "mimamsa-c13-h-rel",
+   "stratum": "HC|NO_DETECTED_CITATION"
+  },
+  {
+   "N_h": 1154,
+   "design_weight": 46.16,
+   "inclusion_probability": 0.021664,
+   "n_h": 25,
+   "seed": "mimamsa-c13-h-rel",
+   "stratum": "HC|RESOLVED_CITATION"
+  },
+  {
+   "N_h": 307,
+   "design_weight": 12.28,
+   "inclusion_probability": 0.081433,
+   "n_h": 25,
+   "seed": "mimamsa-c13-h-rel",
+   "stratum": "HC|TREATMENT_CUE"
+  },
+  {
+   "N_h": 1940,
+   "design_weight": 97.0,
+   "inclusion_probability": 0.010309,
+   "n_h": 20,
+   "seed": "mimamsa-c13-h-rel",
+   "stratum": "HC|UNRESOLVED_CITATION_ONLY"
+  },
+  {
+   "N_h": 2217,
+   "design_weight": 221.7,
+   "inclusion_probability": 0.004511,
+   "n_h": 10,
+   "seed": "mimamsa-c13-h-rel",
+   "stratum": "SC|NO_DETECTED_CITATION"
+  },
+  {
+   "N_h": 53,
+   "design_weight": 2.12,
+   "inclusion_probability": 0.471698,
+   "n_h": 25,
+   "seed": "mimamsa-c13-h-rel",
+   "stratum": "SC|RESOLVED_CITATION"
+  },
+  {
+   "N_h": 32,
+   "design_weight": 1.28,
+   "inclusion_probability": 0.78125,
+   "n_h": 25,
+   "seed": "mimamsa-c13-h-rel",
+   "stratum": "SC|TREATMENT_CUE"
+  },
+  {
+   "N_h": 284,
+   "design_weight": 14.2,
+   "inclusion_probability": 0.070423,
+   "n_h": 20,
+   "seed": "mimamsa-c13-h-rel",
+   "stratum": "SC|UNRESOLVED_CITATION_ONLY"
+  }
+ ],
+ "unit": "citing page (representative copy x page); clustered by judgment"
+}

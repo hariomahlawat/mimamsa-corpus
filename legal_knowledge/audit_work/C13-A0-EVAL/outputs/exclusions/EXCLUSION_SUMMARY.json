@@ -1,0 +1,178 @@
+{
+ "rule": "A judgment_key named in any spent set is excluded from every C13 fresh holdout (H-OUT-C13, H-HOLD-C13, H-REL-C13). Spent sets may be used as development data only.",
+ "sets": {
+  "C10_REVIEW": {
+   "description": "C10 independent review samples (review A/B, WS sample 20, REVIEW_SAMPLE)",
+   "judgments": 50,
+   "sources": [
+    {
+     "file": "C10-HF-JUDGMENTS/review/review_A.csv",
+     "judgments_matched": 15,
+     "sha256": "4f1e1d0e09f417bc0c33e49d155ad251a51968a4af960f7cb89e8d8ab854bce4"
+    },
+    {
+     "file": "C10-HF-JUDGMENTS/review/review_B.csv",
+     "judgments_matched": 15,
+     "sha256": "fd43e89d5dbd8120789947741e55c4642c08299b6f7a3befa8ce281a29bc10fb"
+    },
+    {
+     "file": "C10-HF-JUDGMENTS/review/WS_REVIEW_SAMPLE20_3257ebb9.csv",
+     "judgments_matched": 20,
+     "sha256": "8aa371c6d09a608c1f7f1ba39020ae6c98937d0bf2dc47f3e0b1a3454298af02"
+    },
+    {
+     "file": "C10-HF-JUDGMENTS/review/REVIEW_SAMPLE.csv",
+     "judgments_matched": 30,
+     "sha256": "4c9469d7fbfe0fad2b7ce1b66280744bef7e95b57a2b361ea15cebd6750db5de"
+    }
+   ]
+  },
+  "C11_DEV_AND_REVIEW": {
+   "description": "C11 extraction dev rows and C11 review item sets (extraction, recall, relations)",
+   "judgments": 457,
+   "sources": [
+    {
+     "file": "C11-JUDICIAL-QUALITY/extraction/outputs/DEV_EVALUATION_ROWS.csv",
+     "judgments_matched": 50,
+     "sha256": "39b84b364e523f293111f1e19133d215caaca0e69d5f9b6a9fdb43fa460e24ef"
+    },
+    {
+     "file": "C11-JUDICIAL-QUALITY/review/fable_review_extraction_c11_items.csv",
+     "judgments_matched": 179,
+     "sha256": "b1ee48a0aaf971dc632866408e90bd2b8135ae68b499bba4d4bbb610208ca31d"
+    },
+    {
+     "file": "C11-JUDICIAL-QUALITY/review/fable_review_extraction_c11_recall_rows.csv",
+     "judgments_matched": 52,
+     "sha256": "6e836aadc98108692edb0decc017398329d0a2aedcc082ce05188a97f1703813"
+    },
+    {
+     "file": "C11-JUDICIAL-QUALITY/review/fable_review_relations_c11_rows.csv",
+     "judgments_matched": 183,
+     "sha256": "f6747de1f903563f90bf0d2f4629e196f7a4fa8791563720dfaa1559baf1ff82"
+    },
+    {
+     "file": "C11-JUDICIAL-QUALITY/review/fable_review_relations_c11_v11_rows.csv",
+     "judgments_matched": 125,
+     "sha256": "16774fb221a58f6d7280ab048ffd3a5d7f648742323ca7adf8357a4f07687c5b"
+    },
+    {
+     "file": "C11-JUDICIAL-QUALITY/relations/outputs/REVIEW_REMEASURE_C11.csv",
+     "judgments_matched": 247,
+     "sha256": "4b0f26fe5f46927f124dc5cccb513c7ed8e21341a32a18e2528355a336678405"
+    }
+   ]
+  },
+  "C11_HOLDOUT_56": {
+   "description": "C11 outcome holdout (56) with its ground truth and evaluation rows",
+   "judgments": 56,
+   "sources": [
+    {
+     "file": "C11-JUDICIAL-QUALITY/holdout/HOLDOUT_SAMPLE.csv",
+     "judgments_matched": 56,
+     "sha256": "264462d533ab9417c0dfe5b405949d2ecb04e97cfc268cd3050fd9106d50cdd4"
+    },
+    {
+     "file": "C11-JUDICIAL-QUALITY/holdout/ground_truth_A.csv",
+     "judgments_matched": 28,
+     "sha256": "c061f086af102b3c49c82d364af7a9d752aec5193d3bb74b1085ca545461ee45"
+    },
+    {
+     "file": "C11-JUDICIAL-QUALITY/holdout/ground_truth_B.csv",
+     "judgments_matched": 28,
+     "sha256": "b4c904e433b571616e0ef3656b8eb5d706b98b245c3ab24401873a67055d52e4"
+    },
+    {
+     "file": "C11-JUDICIAL-QUALITY/evaluation/HOLDOUT_EVALUATION_ROWS.csv",
+     "judgments_matched": 56,
+     "sha256": "896005f6b75a427ecbd6e92278d756a329188f911249113b1aa5823b2e0e61fe"
+    }
+   ]
+  },
+  "C12_EXTRACTOR_DEV": {
+   "description": "C12 extractor V3 dev gold and dev evaluation / spot-check / batch copies",
+   "judgments": 195,
+   "sources": [
+    {
+     "file": "C12-CONSOLIDATION/extractor_v3/tools/dev_gold_v3.json",
+     "judgments_matched": 136,
+     "sha256": "3a4ba4276c506411443f246895a4ef0281a972237803bdb17feb198ca672db2d"
+    },
+    {
+     "file": "C12-CONSOLIDATION/extractor_v3/outputs/DEV_EVALUATION_V3_ROWS.csv",
+     "judgments_matched": 136,
+     "sha256": "69149699f740b7cf080b6e0614e77f3e915f5bca3589a7f5e1d00b9d3366f243"
+    },
+    {
+     "file": "C12-CONSOLIDATION/extractor_v3/outputs/DEV_SPOTCHECK_V3.csv",
+     "judgments_matched": 60,
+     "sha256": "0fb9b762b42aee6e6aade87ffc559728d5bcc228976d515912696d341bbdd15f"
+    },
+    {
+     "file": "C12-CONSOLIDATION/extractor_v3/outputs/DEV_BATCH_COPIES_V3.csv",
+     "judgments_matched": 2,
+     "sha256": "d3fc1724432072457aff465153c8bcd67b4cbd70259a23487280d942a30f2914"
+    }
+   ]
+  },
+  "C12_HOLDINGS_DEV": {
+   "description": "C12 holdings dev predictions ids, dev evaluation, precision hand-check, eval adjudication",
+   "judgments": 158,
+   "sources": [
+    {
+     "file": "C12-CONSOLIDATION/holdings/outputs/dev_predictions/DEV_IDS.txt",
+     "judgments_matched": 82,
+     "sha256": "8c6d2fa069c6dba8ecb2ec3e853ac44b5481ab1905b7431ee66c1460918114c5"
+    },
+    {
+     "file": "C12-CONSOLIDATION/holdings/outputs/DEV_EVALUATION_ROWS.csv",
+     "judgments_matched": 52,
+     "sha256": "2858c896654429bb29be3d95dc648246ec4e595a8b1195903e0c9276f9e2cef0"
+    },
+    {
+     "file": "C12-CONSOLIDATION/holdings/outputs/PRECISION_HANDCHECK_C12.csv",
+     "judgments_matched": 78,
+     "sha256": "0e1b45923df181ff40cfd8169e92dbe220bef4bd767f90a9b671f84cbbc6619e"
+    },
+    {
+     "file": "C12-CONSOLIDATION/holdings_eval/ADJUDICATION_SAMPLE.csv",
+     "judgments_matched": 27,
+     "sha256": "60c612c598dc80dbbdd7347a8b69ba6fe7178f7c7754295d635bbfbb98ce9413"
+    },
+    {
+     "file": "C12-CONSOLIDATION/holdings_eval/predictions/ids.txt",
+     "judgments_matched": 30,
+     "sha256": "14fbd168fcbc2c975c067ca853f0942bf2aa631761267888743211c03d0c6425"
+    }
+   ]
+  },
+  "C12_HOLDINGS_REFERENCE_30": {
+   "description": "C12 holdings reference (30 SC judgments)",
+   "judgments": 30,
+   "sources": [
+    {
+     "file": "C12-CONSOLIDATION/holdings_reference/SELECTION.csv",
+     "judgments_matched": 30,
+     "sha256": "756ec87a62bb742b7b8a3b2a18deefbaeda2bd3037d44d67e0973b0a726c1446"
+    },
+    {
+     "file": "C12-CONSOLIDATION/holdings_reference/REFERENCE_HOLDINGS.csv",
+     "judgments_matched": 30,
+     "sha256": "1bc44a3c2c6dc6ffb98fef73884199d6c036879df27bb98e9f6ad3afe0230f6a"
+    }
+   ]
+  },
+  "C12_V3_HOLDOUT_150": {
+   "description": "C12 outcome V3 holdout (150)",
+   "judgments": 150,
+   "sources": [
+    {
+     "file": "C12-CONSOLIDATION/holdout_v3/HOLDOUT_V3_SAMPLE.csv",
+     "judgments_matched": 150,
+     "sha256": "fcb5e691aa148725cca65c8c4b4f6d65133bbdd092935552b9f4642f8c948c41"
+    }
+   ]
+  }
+ },
+ "union_judgments_excluded": 682
+}

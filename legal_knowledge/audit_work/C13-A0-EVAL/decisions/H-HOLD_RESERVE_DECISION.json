@@ -1,0 +1,27 @@
+{
+ "decision": "FULL_OPEN",
+ "holdout": "H-HOLD-C13",
+ "effect": "H-HOLD-C13 = 75 registered sample judgments + all 38 registered reserve judgments = 113; per-cell n_h, inclusion probabilities and weights recomputed (load_design(..., reserve_open='all'))",
+ "decided_by": "coordinator (C13 lead instance)",
+ "date": "2026-11-25",
+ "rationale": "Pre-registered precision target: the weighted recall/precision half-width of about +/-6.7pp stated in PROTOCOL_C13 v1.1 section 3.1 (75 judgments give about +/-8.5pp). The decision used only the design figures; no coded result, agreement, adjudication or extractor output on H-HOLD-C13 existed.",
+ "made_before_any_coding": true,
+ "statement": "This decision was made and recorded before any H-HOLD-C13 packet was issued, before any H-HOLD-C13 item was coded, and before any extractor output on H-HOLD-C13 existed. The GOLD_COUNT_RULE no longer applies; no further items can be added.",
+ "protocol": "PROTOCOL_C13.md v1.1 section 3.1",
+ "registered_files": [
+  "outputs/holdouts/H-HOLD-C13/SAMPLE.csv",
+  "outputs/holdouts/H-HOLD-C13/RESERVE.csv"
+ ],
+ "exposure_disclosure": "Correction (wording only; the decision is unchanged): v1 of this file said 'Nothing has been coded or viewed'. Nothing had been coded, but three H-HOLD-C13 sample judgments (JK-1aa3838f30b79141, JK-c72781c1391284ec, JK-f3a273f09da43b54) had been read in part by the GA0 reviewer during the frame and party-cue checks, and the reviewer's excerpts of them (including disposal text) were committed to the branch at a4865e76, before this decision (06340486). No reserve judgment was read directly, but one reserve judgment (JK-8edc4af5fdd3d9cf, also in H-OUT-C13) is a near-identical sibling of a non-holdout judgment whose excerpt was committed at a4865e76, so its text was effectively exposed. The decision did not use any of that text: it opens all 38 reserve judgments regardless of content. These four judgments are in PRE_EXPOSED_SUBSET.csv (REVIEW_TEXT_EXPOSED) and every H-HOLD headline must also hold without them.",
+ "wording_history": [
+  {
+   "version": 1,
+   "sha256": "d6d9a96a6695dfd12ed650ae64092d1adf1d239e64bec4845efdbafeb878bc15",
+   "commit": "06340486"
+  },
+  {
+   "version": 2,
+   "change": "rationale/statement wording corrected and exposure disclosed (confirmation finding C01 step 4); decision unchanged"
+  }
+ ]
+}
