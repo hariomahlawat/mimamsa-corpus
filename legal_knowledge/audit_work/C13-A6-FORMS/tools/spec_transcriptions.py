@@ -981,3 +981,119 @@ VERSION_EVIDENCE = [
          text="S.R.O. 17(E), Gazette Extraordinary 06-12-1993, items 39-41: IAFD-905 para 9 substituted; summons (c) IAFD-919C added; Forms B and C custody set-off para and explanations (ff)/(dd) inserted; Appendix V heading and Form I figure '170' -> '170A'; Forms 1-A and I-B added. p.21 Note: principal rules S.R.O. 484 of 27-11-1954, amended by 20 listed S.R.O.s (E.7 of 17-6-1960 ... 235 of 01-10-1991). Authenticated G. S. N. MURTHY, Dy. Secy. (AG), File No. 4(2)|93-D(AG).",
          effect_on_fields="see the AR-AMD-1993 transcription entries"),
 ]
+
+# ---------------------------------------------------------------- oath / affirmation forms in rule text (AR54-GAZ)
+add("FF-AR54-R9-ATTEST", "AR54-GAZ", 2, (0.07, 0.70, 0.95, 0.97),
+    region="r.9(1) and Form of Oath (p.2 lower part); Form of affirmation and r.9(2) on p.3",
+    fields=[
+        ("9. Oath or affirmation to be taken on attestation.—(1) Every person required to be attested under section 16 shall make and subscribe an oath or affirmation in one of the following forms or in such other form to the same purport as the attesting officer ascertains to be in accordance with the religion of the person to be attested, or otherwise binding on his conscience.", "instruction"),
+        ("Form of Oath", "heading"),
+        ("I,", "blank"),
+        ("do swear in the name of God that I will bear true faith and allegiance to the Constitution of India as by law established and that I will, as in duty bound, honestly and faithfully serve in the regular Army of the Union of India and go wherever ordered by land, sea or air, and that I will observe and obey all commands of the President of the Union of India and the commands of any officer set over me even to the peril of my life.", "statement"),
+    ],
+    cont=[("AR54-GAZ", 3, (0.07, 0.05, 0.95, 0.32), [
+        ("Form of affirmation", "heading"),
+        ("I,", "blank"),
+        ("do solemnly affirm that I will bear true faith and allegiance to the Constitution of India as by law established and that I will, as in duty bound, honestly and faithfully serve in the regular Army of the Union of India and go wherever ordered by land, sea or air, and that I will observe and obey all commands of the President of the Union of India and the commands of any officer set over me even to the peril of my life.", "statement"),
+        ("(2) The aforesaid oath or affirmation shall, whenever practicable, be administered by the commanding officer of the person to be attested (or in the presence of such commanding officer by a person empowered by him in this behalf) in the manner provided in section 17. If it is not so administered, it may be administered by a magistrate or a recruiting officer or an assistant recruiting officer or the officer commanding the station.", "instruction"),
+    ])],
+    notes="p.2 also prints AR 4 (Forms in Appendices) (1)-(3) above r.5. pp.2-3 are set in a different typeface from the appendix pages; recorded, not interpreted.")
+
+add("FF-AR54-R45-MEMBER", "AR54-GAZ", 18, (0.07, 0.10, 0.95, 0.59),
+    region="r.45 and its Form of Oath / Form of Affirmation",
+    fields=[
+        ("45. Swearing or affirming of members.—As soon as the court is constituted with the proper number of officers who are not objected to, or objections in respect of whom have been overruled, an oath or affirmation shall be administered to every member in one of the following forms or in such other form to the same purport as the court ascertains to be according to his religion or otherwise binding on his conscience.", "instruction"),
+        ("Form of Oath", "heading"),
+        ("\"I", "blank"),
+        ("swear by Almighty God that I will well and truly try the accused (or accused persons) before the Court according to the evidence, and that I will duly administer justice according to the Army Act without partiality, favour or affection; and if any doubt shall arise, then, according to my conscience, the best of my understanding, and the custom of war in the like cases; and I do further swear that I will not, on any account at any time, whatsoever, disclose, or discover the vote or opinion of any particular member of this court-martial, unless required to give evidence thereof by a court of justice or a court-martial in due course of law.\"", "statement"),
+        ("Form of Affirmation", "heading"),
+        ("\"I", "blank"),
+        ("do solemnly, sincerely and truly declare and affirm that I will well and truly try the accused (or accused persons) before the Court according to the evidence, and that I will duly administer justice according to the Army Act without partiality, favour or affection; and if any doubt shall arise, then, according to my conscience, the best of my understanding, and the custom of war in the like cases; and I do further solemnly, sincerely and truly declare and affirm that I will not, on any account at any time, whatsoever, disclose, or discover the vote or opinion of any particular member of this court-martial, unless required to give evidence thereof by a court of justice or a court-martial in due course of law.\"", "statement"),
+    ])
+
+_r46 = ("46. Swearing or affirming of judge-advocate and other officers.—After the members of the court are all sworn or have made affirmation, an oath or affirmation shall be administered to the following persons or such of them as are present at the court-martial, in such of the following forms as shall be appropriate, or in such other form to the same purport as the court ascertains to be according to the religion or otherwise binding on the conscience of the person to be sworn or affirmed:—", "instruction")
+
+add("FF-AR54-R46A-JA", "AR54-GAZ", 18, (0.07, 0.59, 0.95, 0.97),
+    region="r.46 opening and (A) Judge-Advocate oath; affirmation continues on p.19",
+    fields=[_r46,
+        ("(A) JUDGE-ADVOCATE", "heading"),
+        ("Form of Oath", "heading"),
+        ("\"I", "blank"),
+        ("swear by Almighty God that I will to the best of my ability carry out the duties of Judge Advocate in accordance with the Army Act and the rules made thereunder and without partiality, favour or affection, and I do further swear that I will not on any account at any time whatsoever, disclose or discover the vote or opinion on any matter of any particular member of this court-martial, unless required to give evidence thereof by a court of justice or a court-martial, in due course of law.\"", "statement"),
+        ("Form of Affirmation", "heading"),
+        ("\"I", "blank"),
+    ],
+    cont=[("AR54-GAZ", 19, (0.07, 0.05, 0.95, 0.17), [
+        ("do solemnly, sincerely and truly declare and affirm that I will to the best of my ability carry out the duties of Judge Advocate in accordance with the Army Act and the rules made thereunder and without partiality, favour or affection, and I do further solemnly, sincerely and truly declare and affirm that I will not, on any account at any time, whatsoever, disclose or discover the vote or opinion on any matter of any particular member of this court-martial, unless required to give evidence thereof by a court of justice or a court-martial, in due course of law.\"", "statement"),
+    ])],
+    notes="r.46 opening text is printed on p.18 above (A).")
+
+add("FF-AR54-R46B-INSTR", "AR54-GAZ", 19, (0.07, 0.17, 0.95, 0.42),
+    region="r.46 (B)",
+    fields=[_r46,
+        ("(B) OFFICER ATTENDING FOR THE PURPOSE OF INSTRUCTION", "heading"),
+        ("Form of Oath", "heading"),
+        ("\"I", "blank"),
+        ("swear by Almighty God that I will not on any account, at any time whatsoever, disclose or discover the vote or opinion of any particular member of this court-martial unless required to give evidence thereof by a court of justice or a court-martial, in due course of law.\"", "statement"),
+        ("Form of Affirmation", "heading"),
+        ("\"I", "blank"),
+        ("do solemnly, sincerely and truly declare and affirm that I will not on any account, at any time whatsoever, disclose or discover the vote or opinion of any particular member of this court-martial, unless required to give evidence thereof by a court of justice or a court-martial, in due course of law.\"", "statement"),
+    ],
+    notes="r.46 opening text is on p.18; repeated here as the governing instruction. The heading prints 'PURPOSE' (singular).")
+
+add("FF-AR54-R46C-SHW", "AR54-GAZ", 19, (0.07, 0.42, 0.95, 0.65),
+    region="r.46 (C)",
+    fields=[_r46,
+        ("(C) SHORTHAND WRITER", "heading"),
+        ("Form of Oath", "heading"),
+        ("\"I", "blank"),
+        ("swear by Almighty God that I will truly take down to the best of my power the evidence to be given before this court-martial and such other matters as I may be required and will, when required, deliver to the court a true transcript of the same.\"", "statement"),
+        ("Form of Affirmation", "heading"),
+        ("\"I", "blank"),
+        ("do solemnly, sincerely and truly declare and affirm that I will truly take down to the best of my power the evidence to be given before this court-martial and such other matters as I may be required, and will, when required deliver to the court a true transcript of the same.\"", "statement"),
+    ])
+
+add("FF-AR54-R46D-INTERP", "AR54-GAZ", 19, (0.07, 0.65, 0.95, 0.86),
+    region="r.46 (D)",
+    fields=[_r46,
+        ("(D) INTERPRETER", "heading"),
+        ("Form of Oath", "heading"),
+        ("\"I", "blank"),
+        ("swear by Almighty God that I will faithfully interpret and translate, as I shall be required to do, touching the matter before this court-martial.\"", "statement"),
+        ("Form of Affirmation", "heading"),
+        ("\"I", "blank"),
+        ("do solemnly, sincerely and truly declare and affirm that I will faithfully interpret and translate, as I shall be required to do, touching the matter before this court-martial.\"", "statement"),
+    ])
+
+add("FF-AR54-R109-SCM", "AR54-GAZ", 36, (0.07, 0.20, 0.95, 0.80),
+    region="r.109(1)-(3) with two pairs of oath/affirmation forms",
+    fields=[
+        ("109. Swearing or affirming of court and interpreter.—(1) The court shall make oath or affirmation in one of the following forms or in such other form to the same purport as may be according to its religion or otherwise binding on its conscience.", "instruction"),
+        ("Form of Oath", "heading"),
+        ("\"I", "blank"),
+        ("swear by Almighty God that I will well and truly try the accused (or accused persons) before the court according to the evidence, and that I will duly administer justice according to the Army Act without partiality, favour or affection; and if any doubt shall arise, then, according to my conscience, the best of my understanding, and the custom of war in the like cases.\"", "statement"),
+        ("Form of Affirmation", "heading"),
+        ("\"I", "blank"),
+        ("do solemnly, sincerely and truly declare and affirm that I will well and truly try the accused (or accused persons) before the court according to the evidence, and that I will duly administer justice according to the Army Act without partiality, favour or affection; and if any doubt shall arise, then, according to my conscience, the best of my understanding, and the custom of war in the like cases.\"", "statement"),
+        ("(2) After which the court, or some person empowered by it, shall administer to the interpreter (if any), an oath or affirmation in one of the following forms, or in such other form to the same purport as the court ascertains to be according to his religion or otherwise binding on his conscience.", "instruction"),
+        ("Form of Oath", "heading"),
+        ("\"I", "blank"),
+        ("swear by Almighty God that I will faithfully interpret and translate, as I shall be required to do, touching the matter before this court-martial.\"", "statement"),
+        ("Form of Affirmation", "heading"),
+        ("\"I", "blank"),
+        ("solemnly, sincerely and truly declare and affirm that I will faithfully interpret and translate, as I shall be required to do, touching the matter before this court-martial.\"", "statement"),
+        ("(3) After the oaths and affirmations have been administered, all witnesses shall withdraw from the court.", "instruction"),
+    ],
+    notes="The interpreter's Form of Affirmation under r.109(2) prints 'I.....solemnly, sincerely and truly declare' with no 'do' (recorded as printed).")
+
+add("FF-AR54-R140-WITNESS", "AR54-GAZ", 42, (0.07, 0.22, 0.95, 0.50),
+    region="r.140 with Form of Oath / Form of Affirmation",
+    fields=[
+        ("140. Oath or affirmation to be administered to witnesses.—An oath or affirmation shall, if so required by the Act, be administered to every witness before he gives his evidence by the judge-advocate (if any), a member of the court, or some other person empowered by the court in one of the following forms or in such other form to the same purport as the court ascertains to be according to the religion or otherwise binding on the conscience of the witness.", "instruction"),
+        ("Form of Oath", "heading"),
+        ("\"I", "blank"),
+        ("swear by Almighty God that what I shall state shall be the truth, the whole truth, and nothing but the truth.\"", "statement"),
+        ("Form of Affirmation", "heading"),
+        ("\"I", "blank"),
+        ("do solemnly, sincerely and truly declare and affirm that what I shall state shall be the truth, the whole truth, and nothing but the truth.\"", "statement"),
+    ])
