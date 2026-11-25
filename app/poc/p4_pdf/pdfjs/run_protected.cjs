@@ -15,7 +15,12 @@ async function run(browser, c) {
     net.push({ url: req.url().replace(/copies\/[0-9a-f]{64}/, "copies/<sha>"), status: resp && resp.status(), range: h["range"] || null,
                auth: !!h["authorization"], bytes: sz.responseBodySize, t: Date.now() });
   });
-  page.on("requestfailed", (req) => { if (req.url().includes("/api/")) net.push({ url: req.url(), failed: req.failure() && req.failure().errorText, t: Date.now() }); });
+  page.on("requestfailed", (req) => {
+    if (!req.url().includes("/api/")) return;
+    const h = req.headers();   // a cancelled/aborted request still records what was sent
+    net.push({ url: req.url().replace(/copies\/[0-9a-f]{64}/, "copies/<sha>"), failed: req.failure() && req.failure().errorText,
+               range: h["range"] || null, auth: !!h["authorization"], bytes: 0, t: Date.now() });
+  });
   const t0 = Date.now();
   await page.goto(`${base}/?mode=protected&doc=${c.doc}&token=${c.token}&page=1&q=court`);
   await page.waitForFunction(() => window.__metrics && window.__metrics.done, null, { timeout: 120000 });
