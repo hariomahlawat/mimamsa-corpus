@@ -133,6 +133,17 @@ def main():
         for d in out_docs: f.write(json.dumps(d) + "\n")
     with open(a.work / "chunks.jsonl", "w") as f:
         for c in out_chunks: f.write(json.dumps(c) + "\n")
+    # derived unit files used by the dense indexes and by the like-for-like lexical index (tantivy_p3)
+    types = {d["doc_id"]: d["doc_type"] for d in out_docs}
+    P3_STATUTES = {"act-army-1950", "act-air-force-1950", "act-navy-1957", "act-armed-forces-tribunal-2007",
+                   "rules-army-rules-1954", "rules-aft-procedure-rules-2008"}
+    with open(a.work / "vchunks.jsonl", "w") as fv, open(a.work / "p3chunks.jsonl", "w") as fp:
+        for c in out_chunks:
+            i = int(c["chunk_id"].rsplit("::", 1)[1]); judgment = types[c["doc_id"]] == "judgment"
+            if not judgment or i < 2:
+                fv.write(json.dumps(c) + "\n")       # 2 head chunks per judgment + all statute chunks
+            if (judgment and i == 0) or c["doc_id"] in P3_STATUTES:
+                fp.write(json.dumps(c) + "\n")       # P3/dense units: 1 head chunk per judgment + 6 military statutes
     a.manifest_out.parent.mkdir(parents=True, exist_ok=True)
     with open(a.manifest_out, "w", newline="") as f:
         w = csv.writer(f); w.writerow(["doc_id", "doc_type", "text_sha256", "words"])

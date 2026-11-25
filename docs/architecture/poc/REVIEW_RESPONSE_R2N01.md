@@ -49,3 +49,11 @@ measurement against the 25-browser target.
 
 Run **45699091315** on `windows-latest` (head 52aa5219): **all steps green**. Evidence: `data/r2n01/windows_ci_run_45699091315/`. Steps: services install, smoke, restart and crash; ledger oracle;
 console transport tests; console trace with the PR #54 oracle; console PDF.js; **service-mode R2-N01 checks**.
+
+## Codex review of PR #56 (tranche 3): three P2s, all real, all fixed
+
+| Finding | Verified | Fix | Test |
+|---|---|---|---|
+| `run_eval.py` opens `tantivy_p3`, which `engines.py build` never created | Real. `p3chunks.jsonl`, `vchunks.jsonl` and `tantivy_p3` had been made by ad-hoc commands. | `build_corpus.py` now writes `vchunks.jsonl` and `p3chunks.jsonl` (same rules as before). `engines.py build` builds `tantivy_p3`. The PostgreSQL DSN can be overridden with `POC_DSN`. | Fresh work directory and fresh database: build_corpus, then `engines.py build`, then `run_eval.py`, all succeed. The rebuilt `p3chunks.jsonl` is byte-identical to the one used for the results. On the like-for-like index, 59/71 queries have identical top-10 order and 68/71 identical top-10 sets. All 12 order differences are permutations of exactly equal BM25 scores (ties). |
+| A stale worker's `fail()` filtered by job id only | Real | Each claim gets an attempt-specific `lease_token` (`gen_random_uuid`). `heartbeat`, `complete` and both `fail` updates require `state='running' AND lease_token = <own token>`. Events are emitted only when the conditional update changed a row; otherwise a `stale_*_ignored` event is emitted. | `test_jobqueue.py`: stale retryable failure cannot requeue the new owner's job; stale terminal failure cannot overwrite a later success; a worker with the same name is still fenced by the token. |
+| The reaper always requeued, so poison jobs looped forever | Real | The reaper moves a job to `dead` when `attempts >= max_attempts`. Attempts are counted at claim. | `test_reaper_enforces_max_attempts` (max 2, then `dead`, never claimed again). 4/4 pass. The P5 demo was re-run and its outputs are unchanged in shape. |

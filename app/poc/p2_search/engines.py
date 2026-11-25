@@ -6,6 +6,7 @@ Index build:  python -I engines.py build <work_dir> <lexicon.json>
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 import time
@@ -15,7 +16,7 @@ from pathlib import Path
 import numpy as np
 import psycopg
 
-DSN = "host=127.0.0.1 port=55432 user=poc dbname=poc"
+DSN = os.environ.get("POC_DSN", "host=127.0.0.1 port=55432 user=poc dbname=poc")
 HERE = Path(__file__).resolve().parent
 
 # ---------------------------------------------------------------- abbreviations
@@ -260,6 +261,14 @@ if __name__ == "__main__":
                 yield dict(doc_id=c["doc_id"], title=titles[c["doc_id"]], body=c["text"])
         t = time.perf_counter(); build_tantivy(work / "tantivy_head", vunits())
         stats["tantivy_head_build_s"] = round(time.perf_counter() - t, 1)
+        # like-for-like lexical index over exactly the dense units (read by run_eval as bm25_denseunits+abbr)
+        def p3units():
+            titles = {json.loads(l)["doc_id"]: json.loads(l)["title"] for l in open(corpus)}
+            for l in open(work / "corpus/p3chunks.jsonl"):
+                c = json.loads(l)
+                yield dict(doc_id=c["doc_id"], title=titles[c["doc_id"]], body=c["text"])
+        t = time.perf_counter(); build_tantivy(work / "tantivy_p3", p3units())
+        stats["tantivy_p3_build_s"] = round(time.perf_counter() - t, 1)
         with psycopg.connect(DSN) as c:
             stats["pg_units_rows"] = c.execute("select count(*) from units").fetchone()[0]
             stats["pg_table_bytes"] = c.execute("select pg_total_relation_size('units')").fetchone()[0]
