@@ -45,7 +45,7 @@ pass or AFT party on readable or OCR text: an automated false-negative finding.
 | P&H | 16 | 14 (broken CMap) | **12** | 0 | 2 | 2 | 0 |
 | Delhi | 12 | 0 | 0 | 0 | 12 | 0 | 0 |
 | SC | 12 | 2 | 0 | 1 | 10 | 1 | 0 |
-| J&K | 4 | 0 | 0 | 0 | 1 | 1 | 2 |
+| J&K | 4 | 0 | 0 | 0 | 3 | 1 | 0 |
 | Allahabad | 2 | 0 | 0 | 0 | 1 | 1 | 0 |
 
 So among the 28 held P&H T1 titles, 24 are RELEVANT under the C13 rule and 26 had unusable text layers. The 12 new

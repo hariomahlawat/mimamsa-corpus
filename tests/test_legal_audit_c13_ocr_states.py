@@ -19,6 +19,11 @@ def ok_quality(text):
     return {"verdict": "TEXT_OK", "usable_share": 1.0, "unusable_pages": [], "flags": []}
 
 
+def decide_ok(text, **kw):
+    """decide() with complete quality data and OCR quality established (the only route to IRRELEVANT)."""
+    return rs.decide(text=text, quality=ok_quality(text), ocr_quality_ok=True, **kw)
+
+
 def bad_quality():
     return {"verdict": "OCR_REQUIRED", "usable_share": 0.0, "unusable_pages": [1, 2], "flags": ["control_chars"]}
 
@@ -113,13 +118,13 @@ def test_extraction_failure_and_truncation():
 
 
 def test_no_keyword_but_military_context_goes_to_review():
-    d = rs.decide(text=NO_KW_MILITARY, quality=ok_quality(NO_KW_MILITARY))
+    d = decide_ok(NO_KW_MILITARY)
     assert d["state"] == "MANUAL_REVIEW_REQUIRED" and not rs.may_remove(d)
     assert len(d["second_check"]["strong_families"]) >= 2
 
 
 def test_civil_case_with_usable_text_is_irrelevant():
-    d = rs.decide(text=CIVIL, quality=ok_quality(CIVIL))
+    d = decide_ok(CIVIL)
     assert d["state"] == "IRRELEVANT" and rs.may_remove(d)
 
 
@@ -191,13 +196,13 @@ def test_low_quality_ocr_cannot_support_irrelevant():
 # ---- review A1-04: bare service vocabulary is a removal guard
 def test_bare_army_mentions_block_irrelevant():
     t = CIVIL + " Army officers commissioned in the Army." * 15
-    d = rs.decide(text=t, quality=ok_quality(t))
+    d = decide_ok(t)
     assert d["state"] == "CLASSIFICATION_UNCERTAIN" and not rs.may_remove(d)
 
 
 def test_fuzzy_ocr_misreading_blocks_irrelevant():
     t = CIVIL + " the Arny officer and the Tribnal " * 2
-    assert rs.decide(text=t, quality=ok_quality(t))["state"] == "CLASSIFICATION_UNCERTAIN"
+    assert decide_ok(t)["state"] == "CLASSIFICATION_UNCERTAIN"
 
 
 # ---- review A1-08: cover metadata
@@ -210,7 +215,7 @@ def test_aft_party_in_title_is_relevant():
 def test_short_order_by_reference_is_uncertain():
     t = ("The appeal is disposed of in terms of the order passed in RSA No. 1582 of 2021. " +
          "The plaintiff and the defendant shall bear their own costs of the suit and of the appeal. " * 8)
-    d = rs.decide(text=t, quality=ok_quality(t))
+    d = decide_ok(t)
     assert d["state"] == "CLASSIFICATION_UNCERTAIN"
 
 
@@ -219,3 +224,29 @@ def test_truncated_file_never_text_ok_and_empty_pages_are_missing():
     pages = [{"page": 1, **tq.page_verdict(CIVIL)}, {"page": 2, "usable": False, "flags": ["missing_page"]}]
     s = tq.document_summary({"pages": pages, "truncated": True, "open_error": None})
     assert s["verdict"] == "SOURCE_INCOMPLETE" and s["unusable_pages"] == [2]
+
+
+# ---- review A1-10: fail closed on missing or incomplete inputs
+def test_missing_quality_never_irrelevant():
+    for q in (None, {}, {"verdict": "OCR_REQUIRED", "usable_share": 0.5}, {"verdict": "EXTRACTION_FAILED"},
+              {"verdict": "TEXT_OK"}, {"verdict": "TEXT_OK", "usable_share": 1.0}):
+        d = rs.decide(text=CIVIL, quality=q, ocr_quality_ok=True, ocr_done=True)
+        assert d["state"] in ("INSUFFICIENT_TEXT", "CLASSIFICATION_UNCERTAIN", "OCR_REQUIRED"), (q, d["state"])
+        assert not rs.may_remove(d)
+
+
+def test_ocr_quality_not_established_never_irrelevant():
+    d = rs.decide(text=CIVIL, quality=ok_quality(CIVIL))          # ocr_quality_ok left at its default
+    assert d["state"] == "INSUFFICIENT_TEXT" and not rs.may_remove(d)
+
+
+# ---- review A1-12
+def test_capf_and_colonel_typos_block_irrelevant():
+    t = CIVIL + " The appellant, Lt. Co. retired, and the Border Security Force Sector HQ; Ltd. Col. X. "
+    assert decide_ok(t)["state"] == "CLASSIFICATION_UNCERTAIN"
+
+
+def test_short_procedural_order_against_union_is_uncertain():
+    t = ("Delay of 8000 days in filing the appeal is not satisfactorily explained. The application is dismissed and "
+         "the appeal also stands dismissed. Union of India is the respondent. " * 6)
+    assert decide_ok(t)["state"] == "CLASSIFICATION_UNCERTAIN"

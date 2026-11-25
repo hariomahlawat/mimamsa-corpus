@@ -74,7 +74,10 @@ def second_check(text: str) -> dict:
 # --- safety floor for the removal path (review A1-04): bare service vocabulary blocks IRRELEVANT. This is not a
 # positive signal (it never makes a document RELEVANT); it only stops a removal.
 GUARD = re.compile(r"\b(?:army|navy|naval|air\s+force|military|armed\s+forces|defence\s+services?|commissioned"
-                   r"|sainik|jawans?|cantonment|ex[\s-]+servicem[ae]n)\b", re.I)
+                   r"|sainik|jawans?|cantonment|ex[\s-]+servicem[ae]n"
+                   r"|border\s+security\s+force|central\s+reserve\s+police|indo[\s-]+tibetan\s+border\s+police"
+                   r"|sashastra\s+seema\s+bal|central\s+industrial\s+security|assam\s+rifles|bsf|crpf|itbp|cisf)\b"
+                   r"|\b(?:lt|ltd)\.?\s*col?\.|\bcol\.", re.I)
 GUARD_MIN = 3
 # OCR misreadings of decisive words (edit distance 1), counted on OCR text only (review A1-03)
 FUZZY_TARGETS = ("army", "navy", "military", "martial", "tribunal", "sepoy", "havildar", "subedar", "jawan")
@@ -83,6 +86,7 @@ MIN_OCR_DICT_RATIO = 0.35       # OCR pages a removal relies on must read at lea
 # a short order that disposes of a case "in terms of" another cannot be judged from its own text (review A1-08)
 BY_REFERENCE = re.compile(r"\bin\s+terms\s+of\b|\bcovered\s+by\b|\bsame\s+terms\b|\bsimilar(?:ly)?\s+placed\b", re.I)
 BY_REFERENCE_MAX_WORDS = 400
+UNION_PARTY = re.compile(r"\bunion\s+of\s+india\b|\bU\.?\s?O\.?\s?I\b", re.I)
 TITLE_AFT = re.compile(r"(?i:\barmed\s+forces\s+tribunal\b)|\bAFT\b")
 
 
@@ -110,7 +114,7 @@ def fuzzy_hits(text: str) -> list[str]:
 
 
 def decide(*, text: str | None, quality: dict | None, extraction_error: str | None = None,
-           truncated: bool = False, ocr_done: bool = False, ocr_quality_ok: bool = True,
+           truncated: bool = False, ocr_done: bool = False, ocr_quality_ok: bool = False,
            title: str | None = None) -> dict:
     """One state for one judgment.
 
@@ -118,7 +122,9 @@ def decide(*, text: str | None, quality: dict | None, extraction_error: str | No
     quality         pipeline.text_quality.document_summary() of THAT text; `unusable_pages` = content pages whose
                     best text is still unusable
     ocr_done        OCR was run on every page whose text layer was unusable
-    ocr_quality_ok  every OCR'd page reads at or above MIN_OCR_DICT_RATIO (or is Devanagari)
+    ocr_quality_ok  every OCR'd page reads at or above MIN_OCR_DICT_RATIO (or is Devanagari); pass True also when
+                    no page was OCR'd. Defaults to False: a caller that does not establish it cannot get IRRELEVANT
+    Fails closed (review A1-10): missing or incomplete quality data never yields IRRELEVANT.
     title           the case title from the index (cover metadata), optional
 
     IRRELEVANT requires usable text on EVERY content page (layer or OCR), adequate OCR quality, enough words, no
@@ -162,6 +168,12 @@ def decide(*, text: str | None, quality: dict | None, extraction_error: str | No
         else:
             out.update(state="INSUFFICIENT_TEXT", reasons=[f"{len(unusable)} page(s) still unusable after OCR: {unusable[:10]}"])
         return out
+    complete = (q.get("verdict") == "TEXT_OK" and isinstance(q.get("unusable_pages"), list)
+                and not q.get("unusable_pages") and q.get("usable_share") == 1.0)
+    if not complete:
+        out.update(state="INSUFFICIENT_TEXT", reasons=[f"quality data missing or incomplete (verdict={q.get('verdict')!r}, "
+                                                       f"unusable_pages={q.get('unusable_pages')!r}): cannot rule out unread pages"])
+        return out
     if not ocr_quality_ok:
         out.update(state="INSUFFICIENT_TEXT", reasons=[f"OCR text below dictionary ratio {MIN_OCR_DICT_RATIO} on pages the "
                                                        "decision would rely on"])
@@ -183,6 +195,9 @@ def decide(*, text: str | None, quality: dict | None, extraction_error: str | No
         out.update(state="CLASSIFICATION_UNCERTAIN", reasons=[f"no keyword; near-miss OCR tokens {sorted(set(fz))[:5]}"])
     elif words < BY_REFERENCE_MAX_WORDS and BY_REFERENCE.search(text):
         out.update(state="CLASSIFICATION_UNCERTAIN", reasons=["short order disposed of by reference to another case"])
+    elif words < BY_REFERENCE_MAX_WORDS and (UNION_PARTY.search(text) or (title and UNION_PARTY.search(title))):
+        out.update(state="CLASSIFICATION_UNCERTAIN",
+                   reasons=["short order with the Union of India as a party: subject matter cannot be judged from its text"])
     else:
         out.update(state="IRRELEVANT", reasons=["usable text on every page, no keyword, no armed-forces context or vocabulary"])
     out["guard_hits"] = len(guard)

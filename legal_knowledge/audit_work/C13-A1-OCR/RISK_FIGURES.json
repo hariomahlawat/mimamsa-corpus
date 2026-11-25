@@ -91,9 +91,8 @@
      "titles": 12
     },
     "High Court of Jammu and Kashmir": {
-     "c13_state=CLASSIFICATION_UNCERTAIN": 1,
+     "c13_state=CLASSIFICATION_UNCERTAIN": 3,
      "c13_state=INSUFFICIENT_TEXT": 1,
-     "c13_state=IRRELEVANT": 2,
      "text_layer_unusable": 0,
      "titles": 4
     },
@@ -304,7 +303,7 @@
      "tier": "T1"
     },
     {
-     "c13_state": "IRRELEVANT",
+     "c13_state": "CLASSIFICATION_UNCERTAIN",
      "court": "High Court of Jammu and Kashmir",
      "doc_id": "hc-jkl-2026-lpa-131-2026-jkhc020023952026-1-2026-10-31",
      "text_layer": "TEXT_OK",
@@ -430,7 +429,7 @@
      "tier": "T1"
     },
     {
-     "c13_state": "IRRELEVANT",
+     "c13_state": "CLASSIFICATION_UNCERTAIN",
      "court": "High Court of Jammu and Kashmir",
      "doc_id": "hc-jkl-2022-lpa-39-2022-jkhc020021322022-1-2022-05-09",
      "text_layer": "TEXT_OK",
@@ -746,9 +745,8 @@
     "CLASSIFICATION_UNCERTAIN": 7
    },
    "C13_A7_PRESERVED_EXCLUDED": {
-    "CLASSIFICATION_UNCERTAIN": 26,
+    "CLASSIFICATION_UNCERTAIN": 28,
     "INSUFFICIENT_TEXT": 5,
-    "IRRELEVANT": 2,
     "MANUAL_REVIEW_REQUIRED": 1,
     "RELEVANT": 12
    },

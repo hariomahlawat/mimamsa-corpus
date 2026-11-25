@@ -56,7 +56,7 @@ def ocr_pages_meta():
     return by
 
 
-def build_files(meta_dir: str = "c13", stem: str = STEM, readme: str | None = None):
+def build_files(meta_dir: str = "c13", stem: str = STEM, readme: str | None = None, with_title: bool = True):
     """{hf_path: bytes} for the overlay set, deterministic."""
     rsha, rids = restricted()
     pages_meta = ocr_pages_meta()
@@ -76,7 +76,11 @@ def build_files(meta_dir: str = "c13", stem: str = STEM, readme: str | None = No
         pq = [{"page": int(r["page"]), **tq.page_verdict(seg)} for r, seg in
               zip(pm, re.split(r"\[\[page \d+\]\]\n", text)[1:])]
         summary = tq.document_summary({"pages": pq, "truncated": False, "open_error": None})
-        d = rs.decide(text=text, quality=summary, ocr_done=True)
+        ocr_ok = all(m["metrics"]["dict_ratio"] >= rs.MIN_OCR_DICT_RATIO or m["metrics"]["devanagari_share"] >= 0.5
+                     or m["metrics"]["chars"] == 0 for m in pq)
+        # review A1-11: the r1 overlays were built without title= and ocr_quality_ok=; r2 passes both
+        d = (rs.decide(text=text, quality=summary, ocr_done=True, ocr_quality_ok=ocr_ok, title=base["title"]) if with_title
+             else rs.decide(text=text, quality=summary, ocr_done=True))
         cited, _ = statute_refs(text, lambda *_: False)
         meta = dict(base)
         meta.update({
@@ -158,8 +162,27 @@ RELEVANT (2 changed from CLASSIFICATION_UNCERTAIN). Corpus view: for these doc_i
 """
 
 
+R2_STEM = "c13_2026-11-25r2"
+README_R2 = f"""# data/manifest_additions/{R2_STEM}_* (C13 A1, revision 2 of the OCR overlays)
+
+Supersedes `data/meta_ocr/c13/` and `data/meta_ocr/c13_r1/` (both stay unchanged on HF). r1 was built by an upload
+tool that did not pass the case title or the OCR-quality result to the state machine, so 2 records
+(CWP-17142-2023, CWP-14834-2024) kept CLASSIFICATION_UNCERTAIN although the Armed Forces Tribunal is a party in
+their titles (independent review finding A1-11). r2 is re-derived on the same OCR text (`data/text_ocr/c13/`,
+unchanged) with title and OCR quality passed: all 12 writs are RELEVANT. Corpus view: for these doc_ids read
+`data/meta_ocr/c13_r2/<doc_id>.json`. Status AUTOMATED_CANDIDATE_NOT_VERIFIED. Records: GitHub
+`legal_knowledge/audit_work/C13-A1-OCR/`.
+"""
+
+
 def build_r1_files():
-    files, validation = build_files("c13_r1", R1_STEM, README_R1)
+    """r1 as published at fafd4749 (title not passed). Kept to document what r1 contains; superseded by r2."""
+    files, validation = build_files("c13_r1", R1_STEM, README_R1, with_title=False)
+    return {p: b for p, b in files.items() if not p.startswith("data/text_ocr/")}, validation
+
+
+def build_r2_files():
+    files, validation = build_files("c13_r2", R2_STEM, README_R2, with_title=True)
     return {p: b for p, b in files.items() if not p.startswith("data/text_ocr/")}, validation
 
 
@@ -258,7 +281,11 @@ def check_records() -> int:
 
 def main(cmd):
     {"hf-stage": stage, "hf-upload": upload, "hf-verify": verify, "hf-cand-stage": lambda: stage_candidates(),
-     "hf-cand-upload": lambda: upload_candidates(), "hf-cand-verify": lambda: verify_candidates()}[cmd]()
+     "hf-cand-upload": lambda: upload_candidates(), "hf-cand-verify": lambda: verify_candidates(),
+     "hf-r2-stage": lambda: stage_r2(),
+     "hf-r2-upload": lambda: _upload("C13-A1-OVERLAYS-R2", "HF_R2_STAGED_MANIFEST.csv", R2_STAGE,
+                                     "C13 A1: revision r2 of the 12 OCR overlay records (title and OCR quality passed; review A1-11)"),
+     "hf-r2-verify": lambda: _verify("C13-A1-OVERLAYS-R2", "HF_R2_STAGED_MANIFEST.csv", "HF_R2_VERIFICATION.csv")}[cmd]()
 
 
 # ====================================================================== candidates (review A1-01)
@@ -349,10 +376,6 @@ def build_candidates():
         "`legal_knowledge/audit_work/C13-A1-OCR/`.\n").encode("utf-8")
     sums = "".join(f"{hashlib.sha256(b).hexdigest()}  {p}\n" for p, b in sorted(files.items()))
     files[f"{CAND_PREFIX}/SHA256SUMS"] = sums.encode("utf-8")
-    r1, r1_val = build_r1_files()
-    files.update(r1)
-    validation += [{"doc_id": v["doc_id"] + " (overlay r1)", "valid_except_raw_path": v["valid"], "errors": v["errors"]}
-                   for v in r1_val]
     return files, validation
 
 
@@ -428,14 +451,116 @@ def check_candidates() -> int:
     if not (OUT / "HF_CANDIDATES_STAGED_MANIFEST.csv").exists():
         return 0
     files, validation = build_candidates()
-    staged = {r["hf_path"]: r["sha256"] for r in read_csv(OUT / "HF_CANDIDATES_STAGED_MANIFEST.csv")}
+    staged_all = {r["hf_path"]: r["sha256"] for r in read_csv(OUT / "HF_CANDIDATES_STAGED_MANIFEST.csv")}
+    staged = {p: h for p, h in staged_all.items() if p.startswith(CAND_PREFIX)}
     ok = staged == {p: hashlib.sha256(b).hexdigest() for p, b in files.items()}
-    print(("OK  " if ok else "DIFF"), "HF_CANDIDATES_STAGED_MANIFEST.csv (rebuilt bytes)")
+    print(("OK  " if ok else "DIFF"), "HF_CANDIDATES_STAGED_MANIFEST.csv: candidate records rebuild byte for byte "
+          "(r1 overlays in the same commit: superseded by r2, verified against the download record only)")
+    rel = {r["doc_id"]: r["state"] for r in read_csv(OUT / "RELEVANCE_RERUN.csv")}
+    st_ok = all(json.loads(b)["relevance"]["note"].startswith("C13 state RELEVANT") and rel[json.loads(b)["doc_id"]] == "RELEVANT"
+                for p, b in files.items() if "/meta/" in p)
+    print(("OK  " if st_ok else "FAIL"), "candidate meta states equal RELEVANCE_RERUN.csv")
+    bad_extra = int(not st_ok)
     bad = not ok
     if (OUT / "HF_CANDIDATES_VERIFICATION.csv").exists():
         ver = {r["hf_path"]: r for r in read_csv(OUT / "HF_CANDIDATES_VERIFICATION.csv")}
         v = all(ver.get(p, {}).get("downloaded_sha256") == h for p, h in staged.items()) and \
             ver["<tree-diff vs parent>"]["result"] == "ONLY_STAGED_PATHS_ADDED_NONE_REMOVED"
+        v = v and all(ver.get(p, {}).get("downloaded_sha256") == h for p, h in staged_all.items())
         print(("OK  " if v else "FAIL"), "HF_CANDIDATES_VERIFICATION.csv")
+        bad += not v
+    return int(bad) + bad_extra + check_r2()
+
+
+# ====================================================================== r2 overlays (review A1-11)
+R2_STAGE = STAGE.parent / "hf_stage_r2"
+
+
+def stage_r2():
+    files, validation = build_r2_files()
+    if R2_STAGE.exists():
+        shutil.rmtree(R2_STAGE)
+    rows = []
+    for p, b in sorted(files.items()):
+        f = R2_STAGE / p
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.write_bytes(b)
+        rows.append({"hf_path": p, "bytes": len(b), "sha256": hashlib.sha256(b).hexdigest()})
+    (OUT / "HF_R2_STAGED_MANIFEST.csv").write_text(csv_text(rows, ["hf_path", "bytes", "sha256"]), encoding="utf-8")
+    (OUT / "HF_R2_VALIDATION.csv").write_text(csv_text(validation, ["doc_id", "valid", "errors"]), encoding="utf-8")
+    print("staged", len(rows), "valid", sum(v["valid"] == "YES" for v in validation), "/", len(validation))
+
+
+def _upload(label, manifest, stage_dir, msg):
+    from huggingface_hub import CommitOperationAdd, HfApi
+    commits = read_csv(OUT / "HF_COMMITS.csv")
+    if any(c["label"] == label for c in commits):
+        sys.exit(f"{label} already recorded")
+    rows = read_csv(OUT / manifest)
+    a = HfApi()
+    head = a.dataset_info(HF_REPO).sha
+    existing = set(a.list_repo_files(HF_REPO, repo_type="dataset", revision=head))
+    if any(r["hf_path"] in existing for r in rows):
+        sys.exit("refusing: target paths exist")
+    ops = []
+    for r in rows:
+        lp = stage_dir / r["hf_path"]
+        assert sha(lp) == r["sha256"], lp
+        ops.append(CommitOperationAdd(path_in_repo=r["hf_path"], path_or_fileobj=str(lp)))
+    info = a.create_commit(HF_REPO, operations=ops, commit_message=msg, repo_type="dataset", parent_commit=head,
+                           commit_description=f"Additive only. Records: GitHub legal_knowledge/audit_work/C13-A1-OCR/ ({manifest}).")
+    commits.append({"label": label, "hf_commit": info.oid, "parent_commit": head, "files_added": len(ops),
+                    "bytes_added": sum(int(r["bytes"]) for r in rows), "message": msg})
+    (OUT / "HF_COMMITS.csv").write_text(csv_text(commits, list(commits[0].keys())), encoding="utf-8")
+    print(info.oid, "parent", head)
+
+
+def _verify(label, manifest, out_name):
+    from huggingface_hub import HfApi, hf_hub_download
+    c = [x for x in read_csv(OUT / "HF_COMMITS.csv") if x["label"] == label][0]
+    rows = read_csv(OUT / manifest)
+    a = HfApi()
+    tmp = Path(tempfile.mkdtemp(prefix=f"verify_{label}_", dir=str(STAGE.parent)))
+    res = []
+    for r in rows:
+        f = Path(hf_hub_download(HF_REPO, r["hf_path"], repo_type="dataset", revision=c["hf_commit"], local_dir=str(tmp)))
+        got = sha(f)
+        res.append({"hf_commit": c["hf_commit"], "hf_path": r["hf_path"], "expected_sha256": r["sha256"],
+                    "downloaded_sha256": got, "bytes": f.stat().st_size,
+                    "result": "MATCH" if got == r["sha256"] and f.stat().st_size == int(r["bytes"]) else "MISMATCH"})
+    now = set(a.list_repo_files(HF_REPO, repo_type="dataset", revision=c["hf_commit"]))
+    before = set(a.list_repo_files(HF_REPO, repo_type="dataset", revision=c["parent_commit"]))
+    added, removed = now - before, before - now
+    res.append({"hf_commit": c["hf_commit"], "hf_path": "<tree-diff vs parent>", "expected_sha256": "", "downloaded_sha256": "",
+                "bytes": len(added), "result": "ONLY_STAGED_PATHS_ADDED_NONE_REMOVED"
+                if added == {r["hf_path"] for r in rows} and not removed else f"UNEXPECTED added={len(added)} removed={len(removed)}"})
+    (OUT / out_name).write_text(csv_text(res, list(res[0].keys())), encoding="utf-8")
+    print("verified", len(res), "problems", sum(r["result"] not in ("MATCH", "ONLY_STAGED_PATHS_ADDED_NONE_REMOVED") for r in res))
+
+
+def check_r2() -> int:
+    if not (OUT / "HF_R2_STAGED_MANIFEST.csv").exists():
+        print("SKIP r2 (not staged)")
+        return 0
+    files, validation = build_r2_files()
+    staged = {r["hf_path"]: r["sha256"] for r in read_csv(OUT / "HF_R2_STAGED_MANIFEST.csv")}
+    ok = staged == {p: hashlib.sha256(b).hexdigest() for p, b in files.items()}
+    print(("OK  " if ok else "DIFF"), "HF_R2_STAGED_MANIFEST.csv (rebuilt bytes)")
+    rel = {r["doc_id"]: r for r in read_csv(OUT / "RELEVANCE_RERUN.csv")}
+    import c13_a1_ocr  # noqa: F401
+    from pipeline import relevance_states as rs2
+    st_ok = True
+    for p, b in files.items():
+        if p.startswith("data/meta_ocr/"):
+            m = json.loads(b)
+            r = rel[m["doc_id"]]
+            st_ok &= m["relevance"]["note"].split("C13 state ")[1].split(":")[0] == r["state"]
+    print(("OK  " if st_ok else "FAIL"), "every r2 overlay state equals RELEVANCE_RERUN.csv")
+    bad = (not ok) + (not st_ok)
+    if (OUT / "HF_R2_VERIFICATION.csv").exists():
+        ver = {r["hf_path"]: r for r in read_csv(OUT / "HF_R2_VERIFICATION.csv")}
+        v = all(ver.get(p, {}).get("downloaded_sha256") == h for p, h in staged.items()) and \
+            ver["<tree-diff vs parent>"]["result"] == "ONLY_STAGED_PATHS_ADDED_NONE_REMOVED"
+        print(("OK  " if v else "FAIL"), "HF_R2_VERIFICATION.csv")
         bad += not v
     return int(bad)
