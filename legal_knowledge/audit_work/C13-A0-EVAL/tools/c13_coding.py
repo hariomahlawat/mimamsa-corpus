@@ -73,8 +73,16 @@ def build_packets():
             text = render_csv([dict(i, **{f: "" for f in task.coding_fields}) for i in order], cols)
             check_blank_sheet_text(text, task_name)
             outputs[f"packets/{h}/{slot}/CODER_SHEET.csv"] = text
-        adj_cols = ["item_id"] + task.coding_fields + ["agrees_with", "reason"]
-        outputs[f"packets/{h}/adjudicator/ADJUDICATION_RESULT_TEMPLATE.csv"] = render_csv([], adj_cols)
+        outputs[f"packets/{h}/adjudicator/ADJUDICATOR_INSTRUCTIONS.json"] = render_json(dict(
+            holdout=h, task=task_name,
+            input="ADJUDICATION_SHEET.csv produced by `c13_coding.py adjsheet` after both coders return: only the "
+                  "items whose codings differ, each shown as coding X and coding Y (which coder is X is decided per "
+                  "item by a seeded hash; the key is sealed in ADJUDICATION_KEY.csv and is not given to you)",
+            result_columns=["item_id"] + task.coding_fields + ["agrees_with", "reason"],
+            agrees_with=["X", "Y", "NEITHER"],
+            rules=["Read the source PDF yourself (verify sha256) before deciding; do not choose by majority or "
+                   "by which coding looks more careful.", "Return one row per unit for every item on the sheet "
+                   "and no other item.", "Use the same vocabulary as the coding guide; 'unclear' is allowed."]))
     return outputs
 
 

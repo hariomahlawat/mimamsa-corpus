@@ -1,0 +1,29 @@
+{
+ "agrees_with": [
+  "X",
+  "Y",
+  "NEITHER"
+ ],
+ "holdout": "H-REL-C13",
+ "input": "ADJUDICATION_SHEET.csv produced by `c13_coding.py adjsheet` after both coders return: only the items whose codings differ, each shown as coding X and coding Y (which coder is X is decided per item by a seeded hash; the key is sealed in ADJUDICATION_KEY.csv and is not given to you)",
+ "result_columns": [
+  "item_id",
+  "page",
+  "cited_string",
+  "cited_case_name",
+  "target",
+  "relation_type",
+  "voice",
+  "excerpt",
+  "confidence",
+  "notes",
+  "agrees_with",
+  "reason"
+ ],
+ "rules": [
+  "Read the source PDF yourself (verify sha256) before deciding; do not choose by majority or by which coding looks more careful.",
+  "Return one row per unit for every item on the sheet and no other item.",
+  "Use the same vocabulary as the coding guide; 'unclear' is allowed."
+ ],
+ "task": "relations"
+}
