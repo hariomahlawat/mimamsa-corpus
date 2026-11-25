@@ -1,0 +1,44 @@
+{
+  "version": "0.1.0",
+  "$description": "Citation permalink resolution (CAP-RW-04, UX-12; ASR-E06 from PR #54). Tested by tests/test_citation_resolution.py.",
+  "invariants": {
+    "auto_substitute_current_copy": false,
+    "page_number_applied_to_other_copy": false,
+    "content_from_unavailable_copy": false,
+    "citation_keeps_original_copy_hash_and_page": true
+  },
+  "states": {
+    "CITED_COPY_ELIGIBLE": {
+      "opens": "cited_copy_at_cited_page",
+      "notice": null,
+      "actions": []
+    },
+    "CITED_COPY_ELIGIBLE_SUPERSEDED": {
+      "opens": "cited_copy_at_cited_page",
+      "notice": "A newer edition exists.",
+      "actions": [
+        "open_current_edition",
+        "compare_if_linked"
+      ]
+    },
+    "CITED_COPY_WITHDRAWN": {
+      "opens": null,
+      "notice": "The cited copy was withdrawn from the library on {date}. It cannot be shown.",
+      "actions": [
+        "open_current_edition_if_eligible"
+      ]
+    },
+    "CITED_COPY_RESTRICTED": {
+      "opens": null,
+      "notice": "The cited copy is not available in this library.",
+      "actions": [
+        "open_current_edition_if_eligible"
+      ]
+    },
+    "CITED_COPY_NOT_HELD": {
+      "opens": null,
+      "notice": "This library does not hold the cited copy.",
+      "actions": []
+    }
+  }
+}

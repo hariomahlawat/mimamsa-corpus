@@ -104,4 +104,9 @@ Gated workspaces (Commander assistant; as-of statute view; template drafting; do
 ### 2.6 Withdrawn and superseded
 
 - A link to a withdrawn document (Users) resolves to a notice "This document has been withdrawn from the library on {date}." with no content or snippets.
-- A citation link to a superseded copy opens that copy with a notice and a link to the current copy (CAP-RW-04).
+- **Citation links (CAP-RW-04, UX-12; ASR-E06 resolved).** A citation permalink names a release, document, source-copy hash prefix and physical page. Resolution follows `policies/citation_resolution.json`:
+  - **Cited copy eligible** (including when superseded by a newer edition): open the exact cited copy at the cited physical page, with a notice "A newer edition exists" and a separate **Open current edition** action; **Compare** opens both side by side when the copies are linked as alternates or versions. The cited page number is never applied to a different copy.
+  - **Cited copy withdrawn:** notice "The cited copy was withdrawn from the library on {date}. It cannot be shown." No content, snippets or page images. If an eligible current edition exists, **Open current edition** is offered as a separate, clearly labelled different copy; the user is never taken there automatically.
+  - **Cited copy restricted:** notice "The cited copy is not available in this library." The restriction id is not shown to Users; the same separate action rule applies.
+  - **Cited copy not held** (unknown hash, or a release this site never imported): notice "This library does not hold the cited copy." No guessing by title or number.
+  - In every case the copied citation and internal reference keep the original copy hash and page.

@@ -67,6 +67,23 @@ jobs:
           python -m mimamsa_contract $REG_ARGS record candidate examples/candidate_graph_edge.example.json
           python -m mimamsa_contract $REG_ARGS record candidate examples/candidate_outcome.example.json
 
+  importer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned importer dependencies
+        run: python -m pip install --disable-pip-version-check -r app/importer/requirements.txt
+      - name: Importer source-fidelity tests (PR #54 DA-01/03/04/35 conditions)
+        working-directory: app/importer
+        run: python -m pytest -q -p no:cacheprovider tests
+
   design-tokens:
     runs-on: ubuntu-latest
     timeout-minutes: 5

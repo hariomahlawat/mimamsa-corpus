@@ -15,6 +15,7 @@
 | [06_RESPONSIVE_AND_STATES.md](06_RESPONSIVE_AND_STATES.md) | Responsive rules (1366×768, 1920×1080, 2560×1440, tablet) and loading, empty, error and degraded states |
 | [tokens/design-tokens.json](tokens/design-tokens.json) | Design tokens (light and dark), checked by `tests/test_tokens.py` (contrast, scaling matrix, vertical budget) |
 | [keymap.json](keymap.json), [browser_reserved_keys.json](browser_reserved_keys.json) | Conflict-free keymap and the Edge/Chrome/Windows reserved list it is tested against (`tests/test_keymap.py`) |
+| [policies/citation_resolution.json](policies/citation_resolution.json) | Citation permalink resolution: the cited copy and page are opened, the current edition is a separate action, and an unavailable copy gives a notice (ASR-E06, UX-12; `tests/test_citation_resolution.py`). PR #54's `retrieval-ux.md` UX-12 is unchanged; this spec adopts its provisional fidelity-preserving interpretation |
 | [policies/client_state_and_cache.json](policies/client_state_and_cache.json) | Shared-desktop client state and HTTP cache policy (`tests/test_client_policy.py`) |
 
 ## Design principles

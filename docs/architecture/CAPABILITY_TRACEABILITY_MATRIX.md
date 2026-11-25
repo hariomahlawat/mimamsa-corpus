@@ -867,15 +867,15 @@ Phase counts use the first phase named for a capability (some start in B1 and co
 
 | Aspect | Detail |
 | --- | --- |
-| User workflow | Copy citation: doc id, copy sha256 prefix, page, paragraph (if printed), release id; deep link resolves after updates |
-| Required data | Anchors; release generations |
+| User workflow | Copy legal citation (case name, citation, court, date, para/page) plus internal reference (doc id, copy sha256 prefix, page, release id); permalink opens the exact cited copy and physical page |
+| Required data | Anchors; release generations; importer-verified copies and pages |
 | Backend service | viewer + catalogue |
 | Storage / index model | release_generation; alias table |
 | Frontend workspace | Citation button in document pane |
 | Security | Authenticated User or Admin; published items only; server-side visibility filter |
 | Performance | None recorded |
-| Evidence / approval gates | Link to a superseded copy resolves with notice |
-| Acceptance tests | Deep link survives N→N+1 import |
+| Evidence / approval gates | Permalink opens the cited copy at the cited physical page when eligible; current edition only as a separate action (compare where linked); never substitutes the current copy; withdrawn/restricted/not-held cited copy shows a plain notice and no content (policy citation_resolution.json; ASR-E06) |
+| Acceptance tests | UX-12 (PR #54): cited copy/page honoured across N to N+1 with repaginated replacement; withdrawn cited copy shows notice only; deep link survives N→N+1 import |
 | Phase | B1 (citation); B2 (deep links across releases) |
 | Gated off | no |
 | Dependencies / limitations | Evidence keys PageKey/SpanKey (contract evidence.py; PR #53 Crosswalk §2) |

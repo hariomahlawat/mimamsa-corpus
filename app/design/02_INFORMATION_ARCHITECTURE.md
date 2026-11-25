@@ -63,7 +63,7 @@ URLs are stable across release updates and carry no secrets. Ids are opaque wher
 | `/g?focus={node}&types=…` | Graph neighbourhood |
 | `/studio/{session_id}` | Private working session (owner check) |
 | `/admin/…` | Administration (Admin role check server-side) |
-| `/cite/{release_id}/{doc_id}/{sha12}/{page}[/{para}]` | Citation permalink; resolves to the current copy with a notice if superseded |
+| `/cite/{release_id}/{doc_id}/{sha12}/{page}[/{para}]` | Citation permalink. Opens the **exact cited source copy and physical page** when that copy is eligible. A newer edition or replacement is offered only as a separate "Open current edition" action (with side-by-side comparison where the copies are linked as alternates/versions). The current copy is **never substituted** for the cited one. If the cited copy is withdrawn, restricted or not held, the route shows a plain notice stating which and why, with no content from it (policy: `policies/citation_resolution.json`; ASR-E06) |
 
 ## 5. Labels and vocabulary
 
