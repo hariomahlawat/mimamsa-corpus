@@ -1,0 +1,3742 @@
+{
+ "breakdown_rule": "The headline target status is the overall one. Per-court, per-stratum and proceeding-specific statuses are reported for the owner; whether 'met' must also hold per breakdown is an owner decision (PROTOCOL v1.1 s.6.4). Party-specific is descriptive.",
+ "by_court": {
+  "ALL": {
+   "estimates": {
+    "printed_disposal": {
+     "abstained": 4,
+     "categories": {
+      "ABSTAINED": 4,
+      "CORRECT": 33,
+      "WRONG_FAMILY": 1,
+      "WRONG_LABEL_SAME_FAMILY": 6
+     },
+     "coverage": {
+      "clusters": 43,
+      "k": 40.0,
+      "n": 44.0,
+      "unweighted": 0.9091,
+      "unweighted_cluster_bootstrap95": [
+       0.8182,
+       0.9778
+      ],
+      "unweighted_wilson95": [
+       0.7884,
+       0.9641
+      ],
+      "weighted": 0.8972,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.794,
+       0.9747
+      ],
+      "weighted_design_cp95": [
+       0.7592,
+       0.9707
+      ],
+      "weighted_design_cp_n_eff": 39.8,
+      "weighted_kish_wilson95_secondary": [
+       0.7654,
+       0.9589
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 45,
+      "k": 40.0,
+      "n": 46.0,
+      "unweighted": 0.8696,
+      "unweighted_cluster_bootstrap95": [
+       0.766,
+       0.9565
+      ],
+      "unweighted_wilson95": [
+       0.7433,
+       0.9388
+      ],
+      "weighted": 0.8899,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7869,
+       0.9705
+      ],
+      "weighted_design_cp95": [
+       0.7514,
+       0.9664
+      ],
+      "weighted_design_cp_n_eff": 40.3,
+      "weighted_kish_wilson95_secondary": [
+       0.7577,
+       0.9543
+      ]
+     },
+     "family_precision": {
+      "clusters": 39,
+      "k": 39.0,
+      "n": 40.0,
+      "unweighted": 0.975,
+      "unweighted_cluster_bootstrap95": [
+       0.9231,
+       1.0
+      ],
+      "unweighted_wilson95": [
+       0.8712,
+       0.9956
+      ],
+      "weighted": 0.9718,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.915,
+       1.0
+      ],
+      "weighted_design_cp95": [
+       0.8534,
+       0.9993
+      ],
+      "weighted_design_cp_n_eff": 35.8,
+      "weighted_kish_wilson95_secondary": [
+       0.8571,
+       0.995
+      ]
+     },
+     "gold_units_undeterminable": 0,
+     "items_uncodable": 2,
+     "strict_precision": {
+      "clusters": 39,
+      "k": 33.0,
+      "n": 40.0,
+      "unweighted": 0.825,
+      "unweighted_cluster_bootstrap95": [
+       0.7,
+       0.9268
+      ],
+      "unweighted_wilson95": [
+       0.6805,
+       0.9125
+      ],
+      "weighted": 0.8475,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7214,
+       0.9578
+      ],
+      "weighted_design_cp95": [
+       0.688,
+       0.9454
+      ],
+      "weighted_design_cp_n_eff": 35.8,
+      "weighted_kish_wilson95_secondary": [
+       0.6969,
+       0.9307
+      ]
+     }
+    },
+    "substantive_result": {
+     "abstained": 14,
+     "categories": {
+      "ABSTAINED": 14,
+      "CORRECT": 20,
+      "GOLD_UNDETERMINABLE_NO_PRED": 1,
+      "WRONG_FAMILY": 9
+     },
+     "coverage": {
+      "clusters": 42,
+      "k": 29.0,
+      "n": 43.0,
+      "unweighted": 0.6744,
+      "unweighted_cluster_bootstrap95": [
+       0.5349,
+       0.8095
+      ],
+      "unweighted_wilson95": [
+       0.5252,
+       0.7951
+      ],
+      "weighted": 0.681,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.5455,
+       0.8107
+      ],
+      "weighted_design_cp95": [
+       0.5136,
+       0.82
+      ],
+      "weighted_design_cp_n_eff": 39.5,
+      "weighted_kish_wilson95_secondary": [
+       0.5252,
+       0.8047
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 44,
+      "k": 29.0,
+      "n": 45.0,
+      "unweighted": 0.6444,
+      "unweighted_cluster_bootstrap95": [
+       0.5106,
+       0.7778
+      ],
+      "unweighted_wilson95": [
+       0.4984,
+       0.7678
+      ],
+      "weighted": 0.6755,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.5352,
+       0.8077
+      ],
+      "weighted_design_cp95": [
+       0.5093,
+       0.8146
+      ],
+      "weighted_design_cp_n_eff": 40.1,
+      "weighted_kish_wilson95_secondary": [
+       0.5208,
+       0.7995
+      ]
+     },
+     "family_precision": {
+      "clusters": 29,
+      "k": 20.0,
+      "n": 29.0,
+      "unweighted": 0.6897,
+      "unweighted_cluster_bootstrap95": [
+       0.5172,
+       0.8621
+      ],
+      "unweighted_wilson95": [
+       0.5077,
+       0.8272
+      ],
+      "weighted": 0.7237,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.5399,
+       0.8805
+      ],
+      "weighted_design_cp95": [
+       0.5185,
+       0.8772
+      ],
+      "weighted_design_cp_n_eff": 26.9,
+      "weighted_kish_wilson95_secondary": [
+       0.5351,
+       0.8563
+      ]
+     },
+     "gold_units_undeterminable": 1,
+     "items_uncodable": 2,
+     "strict_precision": {
+      "clusters": 29,
+      "k": 20.0,
+      "n": 29.0,
+      "unweighted": 0.6897,
+      "unweighted_cluster_bootstrap95": [
+       0.5172,
+       0.8621
+      ],
+      "unweighted_wilson95": [
+       0.5077,
+       0.8272
+      ],
+      "weighted": 0.7237,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.5407,
+       0.8753
+      ],
+      "weighted_design_cp95": [
+       0.5185,
+       0.8772
+      ],
+      "weighted_design_cp_n_eff": 26.9,
+      "weighted_kish_wilson95_secondary": [
+       0.5351,
+       0.8563
+      ]
+     }
+    }
+   },
+   "targets_status": {
+    "printed_disposal": {
+     "coverage": "MET_POINT_ONLY",
+     "strict_precision": "NOT_MET"
+    },
+    "substantive_result": {
+     "coverage": "NOT_MET",
+     "strict_precision": "NOT_MET"
+    }
+   }
+  },
+  "DEL": {
+   "estimates": {
+    "printed_disposal": {
+     "abstained": 12,
+     "categories": {
+      "ABSTAINED": 12,
+      "CORRECT": 60,
+      "EXTRA_UNIT_ABSTAINED": 2,
+      "GOLD_UNDETERMINABLE_NO_PRED": 1,
+      "MISSED": 19,
+      "WRONG_FAMILY": 1,
+      "WRONG_LABEL_SAME_FAMILY": 4
+     },
+     "coverage": {
+      "clusters": 61,
+      "k": 65.0,
+      "n": 96.0,
+      "unweighted": 0.6771,
+      "unweighted_cluster_bootstrap95": [
+       0.4918,
+       0.8961
+      ],
+      "unweighted_wilson95": [
+       0.5783,
+       0.7622
+      ],
+      "weighted": 0.9055,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8233,
+       0.9741
+      ],
+      "weighted_design_cp95": [
+       0.7898,
+       0.9696
+      ],
+      "weighted_design_cp_n_eff": 50.6,
+      "weighted_kish_wilson95_secondary": [
+       0.7941,
+       0.9597
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 69,
+      "k": 65.0,
+      "n": 104.0,
+      "unweighted": 0.625,
+      "unweighted_cluster_bootstrap95": [
+       0.4394,
+       0.8172
+      ],
+      "unweighted_wilson95": [
+       0.5291,
+       0.712
+      ],
+      "weighted": 0.8383,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7354,
+       0.9295
+      ],
+      "weighted_design_cp95": [
+       0.7136,
+       0.924
+      ],
+      "weighted_design_cp_n_eff": 54.6,
+      "weighted_kish_wilson95_secondary": [
+       0.719,
+       0.9131
+      ]
+     },
+     "family_precision": {
+      "clusters": 55,
+      "k": 64.0,
+      "n": 65.0,
+      "unweighted": 0.9846,
+      "unweighted_cluster_bootstrap95": [
+       0.9516,
+       1.0
+      ],
+      "unweighted_wilson95": [
+       0.9179,
+       0.9973
+      ],
+      "weighted": 0.9737,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.9205,
+       1.0
+      ],
+      "weighted_design_cp95": [
+       0.8626,
+       0.9993
+      ],
+      "weighted_design_cp_n_eff": 38.3,
+      "weighted_kish_wilson95_secondary": [
+       0.8732,
+       0.995
+      ]
+     },
+     "gold_units_undeterminable": 1,
+     "items_uncodable": 8,
+     "strict_precision": {
+      "clusters": 55,
+      "k": 60.0,
+      "n": 65.0,
+      "unweighted": 0.9231,
+      "unweighted_cluster_bootstrap95": [
+       0.8525,
+       0.9825
+      ],
+      "unweighted_wilson95": [
+       0.8322,
+       0.9667
+      ],
+      "weighted": 0.9204,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8399,
+       0.9981
+      ],
+      "weighted_design_cp95": [
+       0.7899,
+       0.9822
+      ],
+      "weighted_design_cp_n_eff": 40.0,
+      "weighted_kish_wilson95_secondary": [
+       0.7994,
+       0.971
+      ]
+     }
+    },
+    "substantive_result": {
+     "abstained": 19,
+     "categories": {
+      "ABSTAINED": 19,
+      "CORRECT": 52,
+      "EXTRA_UNIT_ABSTAINED": 2,
+      "GOLD_UNDETERMINABLE_NO_PRED": 15,
+      "MISSED": 6,
+      "WRONG_FAMILY": 5
+     },
+     "coverage": {
+      "clusters": 60,
+      "k": 57.0,
+      "n": 82.0,
+      "unweighted": 0.6951,
+      "unweighted_cluster_bootstrap95": [
+       0.5435,
+       0.8356
+      ],
+      "unweighted_wilson95": [
+       0.5886,
+       0.7842
+      ],
+      "weighted": 0.8402,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7393,
+       0.9279
+      ],
+      "weighted_design_cp95": [
+       0.7019,
+       0.9316
+      ],
+      "weighted_design_cp_n_eff": 45.8,
+      "weighted_kish_wilson95_secondary": [
+       0.7086,
+       0.9191
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 68,
+      "k": 57.0,
+      "n": 90.0,
+      "unweighted": 0.6333,
+      "unweighted_cluster_bootstrap95": [
+       0.5053,
+       0.7674
+      ],
+      "unweighted_wilson95": [
+       0.5302,
+       0.7255
+      ],
+      "weighted": 0.7739,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.656,
+       0.8813
+      ],
+      "weighted_design_cp95": [
+       0.6332,
+       0.8803
+      ],
+      "weighted_design_cp_n_eff": 49.7,
+      "weighted_kish_wilson95_secondary": [
+       0.6405,
+       0.868
+      ]
+     },
+     "family_precision": {
+      "clusters": 47,
+      "k": 52.0,
+      "n": 57.0,
+      "unweighted": 0.9123,
+      "unweighted_cluster_bootstrap95": [
+       0.8246,
+       0.9821
+      ],
+      "unweighted_wilson95": [
+       0.8106,
+       0.9619
+      ],
+      "weighted": 0.9597,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8972,
+       0.9979
+      ],
+      "weighted_design_cp95": [
+       0.8379,
+       0.9971
+      ],
+      "weighted_design_cp_n_eff": 36.9,
+      "weighted_kish_wilson95_secondary": [
+       0.8421,
+       0.9907
+      ]
+     },
+     "gold_units_undeterminable": 15,
+     "items_uncodable": 8,
+     "strict_precision": {
+      "clusters": 47,
+      "k": 52.0,
+      "n": 57.0,
+      "unweighted": 0.9123,
+      "unweighted_cluster_bootstrap95": [
+       0.8182,
+       0.9821
+      ],
+      "unweighted_wilson95": [
+       0.8106,
+       0.9619
+      ],
+      "weighted": 0.9597,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8972,
+       0.9989
+      ],
+      "weighted_design_cp95": [
+       0.8379,
+       0.9971
+      ],
+      "weighted_design_cp_n_eff": 36.9,
+      "weighted_kish_wilson95_secondary": [
+       0.8421,
+       0.9907
+      ]
+     }
+    }
+   },
+   "targets_status": {
+    "printed_disposal": {
+     "coverage": "NOT_MET",
+     "strict_precision": "NOT_MET"
+    },
+    "substantive_result": {
+     "coverage": "NOT_MET",
+     "strict_precision": "NOT_MET"
+    }
+   }
+  },
+  "JK": {
+   "estimates": {
+    "printed_disposal": {
+     "abstained": 7,
+     "categories": {
+      "ABSTAINED": 7,
+      "CORRECT": 37,
+      "EXTRA_UNIT_ABSTAINED": 3,
+      "WRONG_FAMILY": 4,
+      "WRONG_LABEL_SAME_FAMILY": 3
+     },
+     "coverage": {
+      "clusters": 43,
+      "k": 44.0,
+      "n": 51.0,
+      "unweighted": 0.8627,
+      "unweighted_cluster_bootstrap95": [
+       0.7455,
+       0.96
+      ],
+      "unweighted_wilson95": [
+       0.7428,
+       0.9319
+      ],
+      "weighted": 0.9231,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8277,
+       0.99
+      ],
+      "weighted_design_cp95": [
+       0.782,
+       0.9856
+      ],
+      "weighted_design_cp_n_eff": 35.3,
+      "weighted_kish_wilson95_secondary": [
+       0.7883,
+       0.9748
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 45,
+      "k": 44.0,
+      "n": 53.0,
+      "unweighted": 0.8302,
+      "unweighted_cluster_bootstrap95": [
+       0.7255,
+       0.9273
+      ],
+      "unweighted_wilson95": [
+       0.7077,
+       0.908
+      ],
+      "weighted": 0.9169,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8251,
+       0.9864
+      ],
+      "weighted_design_cp95": [
+       0.775,
+       0.9827
+      ],
+      "weighted_design_cp_n_eff": 35.7,
+      "weighted_kish_wilson95_secondary": [
+       0.7815,
+       0.9715
+      ]
+     },
+     "family_precision": {
+      "clusters": 38,
+      "k": 40.0,
+      "n": 44.0,
+      "unweighted": 0.9091,
+      "unweighted_cluster_bootstrap95": [
+       0.8205,
+       0.9767
+      ],
+      "unweighted_wilson95": [
+       0.7884,
+       0.9641
+      ],
+      "weighted": 0.8981,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7968,
+       0.9964
+      ],
+      "weighted_design_cp95": [
+       0.7399,
+       0.9763
+      ],
+      "weighted_design_cp_n_eff": 32.2,
+      "weighted_kish_wilson95_secondary": [
+       0.7482,
+       0.9631
+      ]
+     },
+     "gold_units_undeterminable": 0,
+     "items_uncodable": 2,
+     "strict_precision": {
+      "clusters": 38,
+      "k": 37.0,
+      "n": 44.0,
+      "unweighted": 0.8409,
+      "unweighted_cluster_bootstrap95": [
+       0.7381,
+       0.9318
+      ],
+      "unweighted_wilson95": [
+       0.7063,
+       0.9207
+      ],
+      "weighted": 0.7997,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.6635,
+       0.9313
+      ],
+      "weighted_design_cp95": [
+       0.6217,
+       0.9193
+      ],
+      "weighted_design_cp_n_eff": 32.2,
+      "weighted_kish_wilson95_secondary": [
+       0.6333,
+       0.9023
+      ]
+     }
+    },
+    "substantive_result": {
+     "abstained": 13,
+     "categories": {
+      "ABSTAINED": 13,
+      "CORRECT": 37,
+      "EXTRA_UNIT_ABSTAINED": 3,
+      "WRONG_FAMILY": 1
+     },
+     "coverage": {
+      "clusters": 43,
+      "k": 38.0,
+      "n": 51.0,
+      "unweighted": 0.7451,
+      "unweighted_cluster_bootstrap95": [
+       0.6087,
+       0.8654
+      ],
+      "unweighted_wilson95": [
+       0.6113,
+       0.8445
+      ],
+      "weighted": 0.7687,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.6262,
+       0.8972
+      ],
+      "weighted_design_cp95": [
+       0.5965,
+       0.8934
+      ],
+      "weighted_design_cp_n_eff": 35.3,
+      "weighted_kish_wilson95_secondary": [
+       0.6076,
+       0.877
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 45,
+      "k": 38.0,
+      "n": 53.0,
+      "unweighted": 0.717,
+      "unweighted_cluster_bootstrap95": [
+       0.5833,
+       0.8431
+      ],
+      "unweighted_wilson95": [
+       0.5843,
+       0.8203
+      ],
+      "weighted": 0.7636,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.6168,
+       0.8947
+      ],
+      "weighted_design_cp95": [
+       0.5921,
+       0.8891
+      ],
+      "weighted_design_cp_n_eff": 35.7,
+      "weighted_kish_wilson95_secondary": [
+       0.6032,
+       0.8728
+      ]
+     },
+     "family_precision": {
+      "clusters": 32,
+      "k": 37.0,
+      "n": 38.0,
+      "unweighted": 0.9737,
+      "unweighted_cluster_bootstrap95": [
+       0.9118,
+       1.0
+      ],
+      "unweighted_wilson95": [
+       0.8651,
+       0.9953
+      ],
+      "weighted": 0.9612,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8821,
+       1.0
+      ],
+      "weighted_design_cp95": [
+       0.8077,
+       0.9989
+      ],
+      "weighted_design_cp_n_eff": 27.0,
+      "weighted_kish_wilson95_secondary": [
+       0.8147,
+       0.9929
+      ]
+     },
+     "gold_units_undeterminable": 0,
+     "items_uncodable": 2,
+     "strict_precision": {
+      "clusters": 32,
+      "k": 37.0,
+      "n": 38.0,
+      "unweighted": 0.9737,
+      "unweighted_cluster_bootstrap95": [
+       0.9143,
+       1.0
+      ],
+      "unweighted_wilson95": [
+       0.8651,
+       0.9953
+      ],
+      "weighted": 0.9612,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8816,
+       1.0
+      ],
+      "weighted_design_cp95": [
+       0.8077,
+       0.9989
+      ],
+      "weighted_design_cp_n_eff": 27.0,
+      "weighted_kish_wilson95_secondary": [
+       0.8147,
+       0.9929
+      ]
+     }
+    }
+   },
+   "targets_status": {
+    "printed_disposal": {
+     "coverage": "MET_POINT_ONLY",
+     "strict_precision": "NOT_MET"
+    },
+    "substantive_result": {
+     "coverage": "NOT_MET",
+     "strict_precision": "MET_POINT_ONLY"
+    }
+   }
+  },
+  "PH": {
+   "estimates": {
+    "printed_disposal": {
+     "abstained": 7,
+     "categories": {
+      "ABSTAINED": 7,
+      "CORRECT": 84,
+      "MISSED": 30,
+      "WRONG_FAMILY": 2,
+      "WRONG_LABEL_SAME_FAMILY": 1
+     },
+     "coverage": {
+      "clusters": 70,
+      "k": 87.0,
+      "n": 124.0,
+      "unweighted": 0.7016,
+      "unweighted_cluster_bootstrap95": [
+       0.4821,
+       0.9459
+      ],
+      "unweighted_wilson95": [
+       0.616,
+       0.7751
+      ],
+      "weighted": 0.8127,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.6494,
+       0.959
+      ],
+      "weighted_design_cp95": [
+       0.5906,
+       0.9452
+      ],
+      "weighted_design_cp_n_eff": 22.0,
+      "weighted_kish_wilson95_secondary": [
+       0.7117,
+       0.884
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 70,
+      "k": 87.0,
+      "n": 124.0,
+      "unweighted": 0.7016,
+      "unweighted_cluster_bootstrap95": [
+       0.4648,
+       0.9505
+      ],
+      "unweighted_wilson95": [
+       0.616,
+       0.7751
+      ],
+      "weighted": 0.8127,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.6472,
+       0.9601
+      ],
+      "weighted_design_cp95": [
+       0.5906,
+       0.9452
+      ],
+      "weighted_design_cp_n_eff": 22.0,
+      "weighted_kish_wilson95_secondary": [
+       0.7117,
+       0.884
+      ]
+     },
+     "family_precision": {
+      "clusters": 65,
+      "k": 85.0,
+      "n": 87.0,
+      "unweighted": 0.977,
+      "unweighted_cluster_bootstrap95": [
+       0.9425,
+       1.0
+      ],
+      "unweighted_wilson95": [
+       0.92,
+       0.9937
+      ],
+      "weighted": 0.9583,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8974,
+       1.0
+      ],
+      "weighted_design_cp95": [
+       0.8631,
+       0.9943
+      ],
+      "weighted_design_cp_n_eff": 51.9,
+      "weighted_kish_wilson95_secondary": [
+       0.872,
+       0.9873
+      ]
+     },
+     "gold_units_undeterminable": 0,
+     "items_uncodable": 0,
+     "strict_precision": {
+      "clusters": 65,
+      "k": 84.0,
+      "n": 87.0,
+      "unweighted": 0.9655,
+      "unweighted_cluster_bootstrap95": [
+       0.9186,
+       1.0
+      ],
+      "unweighted_wilson95": [
+       0.9035,
+       0.9882
+      ],
+      "weighted": 0.9534,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8909,
+       1.0
+      ],
+      "weighted_design_cp95": [
+       0.8612,
+       0.9917
+      ],
+      "weighted_design_cp_n_eff": 56.1,
+      "weighted_kish_wilson95_secondary": [
+       0.865,
+       0.9849
+      ]
+     }
+    },
+    "substantive_result": {
+     "abstained": 11,
+     "categories": {
+      "ABSTAINED": 11,
+      "CORRECT": 72,
+      "GOLD_UNDETERMINABLE_NO_PRED": 1,
+      "MISSED": 30,
+      "WRONG_FAMILY": 10
+     },
+     "coverage": {
+      "clusters": 69,
+      "k": 82.0,
+      "n": 123.0,
+      "unweighted": 0.6667,
+      "unweighted_cluster_bootstrap95": [
+       0.4525,
+       0.913
+      ],
+      "unweighted_wilson95": [
+       0.5794,
+       0.7438
+      ],
+      "weighted": 0.7709,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.6101,
+       0.9299
+      ],
+      "weighted_design_cp95": [
+       0.5651,
+       0.9115
+      ],
+      "weighted_design_cp_n_eff": 25.9,
+      "weighted_kish_wilson95_secondary": [
+       0.6654,
+       0.8506
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 69,
+      "k": 82.0,
+      "n": 123.0,
+      "unweighted": 0.6667,
+      "unweighted_cluster_bootstrap95": [
+       0.4545,
+       0.9146
+      ],
+      "unweighted_wilson95": [
+       0.5794,
+       0.7438
+      ],
+      "weighted": 0.7709,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.6197,
+       0.9299
+      ],
+      "weighted_design_cp95": [
+       0.5651,
+       0.9115
+      ],
+      "weighted_design_cp_n_eff": 25.9,
+      "weighted_kish_wilson95_secondary": [
+       0.6654,
+       0.8506
+      ]
+     },
+     "family_precision": {
+      "clusters": 60,
+      "k": 72.0,
+      "n": 82.0,
+      "unweighted": 0.878,
+      "unweighted_cluster_bootstrap95": [
+       0.75,
+       0.9639
+      ],
+      "unweighted_wilson95": [
+       0.7899,
+       0.9324
+      ],
+      "weighted": 0.8437,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7319,
+       0.9368
+      ],
+      "weighted_design_cp95": [
+       0.7063,
+       0.9338
+      ],
+      "weighted_design_cp_n_eff": 45.9,
+      "weighted_kish_wilson95_secondary": [
+       0.7249,
+       0.9171
+      ]
+     },
+     "gold_units_undeterminable": 1,
+     "items_uncodable": 0,
+     "strict_precision": {
+      "clusters": 60,
+      "k": 72.0,
+      "n": 82.0,
+      "unweighted": 0.878,
+      "unweighted_cluster_bootstrap95": [
+       0.7561,
+       0.9651
+      ],
+      "unweighted_wilson95": [
+       0.7899,
+       0.9324
+      ],
+      "weighted": 0.8437,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7315,
+       0.9382
+      ],
+      "weighted_design_cp95": [
+       0.7063,
+       0.9338
+      ],
+      "weighted_design_cp_n_eff": 45.9,
+      "weighted_kish_wilson95_secondary": [
+       0.7249,
+       0.9171
+      ]
+     }
+    }
+   },
+   "targets_status": {
+    "printed_disposal": {
+     "coverage": "NOT_MET",
+     "strict_precision": "MET_POINT_ONLY"
+    },
+    "substantive_result": {
+     "coverage": "NOT_MET",
+     "strict_precision": "NOT_MET"
+    }
+   }
+  },
+  "SC": {
+   "estimates": {
+    "printed_disposal": {
+     "abstained": 12,
+     "categories": {
+      "ABSTAINED": 12,
+      "CORRECT": 40,
+      "EXTRA_UNIT_ABSTAINED": 9,
+      "EXTRA_UNIT_NO_GOLD": 25,
+      "MISSED": 80,
+      "WRONG_FAMILY": 7
+     },
+     "coverage": {
+      "clusters": 48,
+      "k": 47.0,
+      "n": 139.0,
+      "unweighted": 0.3381,
+      "unweighted_cluster_bootstrap95": [
+       0.1692,
+       0.697
+      ],
+      "unweighted_wilson95": [
+       0.2648,
+       0.4202
+      ],
+      "weighted": 0.3911,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.2084,
+       0.7411
+      ],
+      "weighted_design_cp95": [
+       0.2256,
+       0.5772
+      ],
+      "weighted_design_cp_n_eff": 32.5,
+      "weighted_kish_wilson95_secondary": [
+       0.3123,
+       0.4759
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 70,
+      "k": 47.0,
+      "n": 161.0,
+      "unweighted": 0.2919,
+      "unweighted_cluster_bootstrap95": [
+       0.1525,
+       0.5385
+      ],
+      "unweighted_wilson95": [
+       0.2272,
+       0.3663
+      ],
+      "weighted": 0.3328,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.1833,
+       0.5729
+      ],
+      "weighted_design_cp95": [
+       0.2122,
+       0.4719
+      ],
+      "weighted_design_cp_n_eff": 55.7,
+      "weighted_kish_wilson95_secondary": [
+       0.2633,
+       0.4104
+      ]
+     },
+     "family_precision": {
+      "clusters": 41,
+      "k": 40.0,
+      "n": 72.0,
+      "unweighted": 0.5556,
+      "unweighted_cluster_bootstrap95": [
+       0.3868,
+       0.8667
+      ],
+      "unweighted_wilson95": [
+       0.4409,
+       0.6646
+      ],
+      "weighted": 0.5764,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.398,
+       0.8875
+      ],
+      "weighted_design_cp95": [
+       0.3889,
+       0.749
+      ],
+      "weighted_design_cp_n_eff": 31.7,
+      "weighted_kish_wilson95_secondary": [
+       0.4596,
+       0.6851
+      ]
+     },
+     "gold_units_undeterminable": 0,
+     "items_uncodable": 22,
+     "strict_precision": {
+      "clusters": 41,
+      "k": 40.0,
+      "n": 72.0,
+      "unweighted": 0.5556,
+      "unweighted_cluster_bootstrap95": [
+       0.3889,
+       0.8696
+      ],
+      "unweighted_wilson95": [
+       0.4409,
+       0.6646
+      ],
+      "weighted": 0.5764,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.3994,
+       0.8732
+      ],
+      "weighted_design_cp95": [
+       0.3889,
+       0.749
+      ],
+      "weighted_design_cp_n_eff": 31.7,
+      "weighted_kish_wilson95_secondary": [
+       0.4596,
+       0.6851
+      ]
+     }
+    },
+    "substantive_result": {
+     "abstained": 13,
+     "categories": {
+      "ABSTAINED": 13,
+      "CORRECT": 40,
+      "EXTRA_UNIT_ABSTAINED": 20,
+      "EXTRA_UNIT_NO_GOLD": 14,
+      "GOLD_UNDETERMINABLE_NO_PRED": 1,
+      "MISSED": 79,
+      "WRONG_FAMILY": 6
+     },
+     "coverage": {
+      "clusters": 48,
+      "k": 46.0,
+      "n": 138.0,
+      "unweighted": 0.3333,
+      "unweighted_cluster_bootstrap95": [
+       0.166,
+       0.6957
+      ],
+      "unweighted_wilson95": [
+       0.2601,
+       0.4156
+      ],
+      "weighted": 0.3872,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.2062,
+       0.7356
+      ],
+      "weighted_design_cp95": [
+       0.2229,
+       0.5728
+      ],
+      "weighted_design_cp_n_eff": 32.8,
+      "weighted_kish_wilson95_secondary": [
+       0.3085,
+       0.4724
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 70,
+      "k": 46.0,
+      "n": 160.0,
+      "unweighted": 0.2875,
+      "unweighted_cluster_bootstrap95": [
+       0.1475,
+       0.5385
+      ],
+      "unweighted_wilson95": [
+       0.223,
+       0.362
+      ],
+      "weighted": 0.3292,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.1808,
+       0.5709
+      ],
+      "weighted_design_cp95": [
+       0.2095,
+       0.4677
+      ],
+      "weighted_design_cp_n_eff": 56.0,
+      "weighted_kish_wilson95_secondary": [
+       0.2598,
+       0.407
+      ]
+     },
+     "family_precision": {
+      "clusters": 39,
+      "k": 40.0,
+      "n": 60.0,
+      "unweighted": 0.6667,
+      "unweighted_cluster_bootstrap95": [
+       0.4778,
+       0.9512
+      ],
+      "unweighted_wilson95": [
+       0.5406,
+       0.7727
+      ],
+      "weighted": 0.667,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.4649,
+       0.9482
+      ],
+      "weighted_design_cp95": [
+       0.4107,
+       0.8666
+      ],
+      "weighted_design_cp_n_eff": 18.1,
+      "weighted_kish_wilson95_secondary": [
+       0.5397,
+       0.7739
+      ]
+     },
+     "gold_units_undeterminable": 1,
+     "items_uncodable": 22,
+     "strict_precision": {
+      "clusters": 39,
+      "k": 40.0,
+      "n": 60.0,
+      "unweighted": 0.6667,
+      "unweighted_cluster_bootstrap95": [
+       0.4632,
+       0.9535
+      ],
+      "unweighted_wilson95": [
+       0.5406,
+       0.7727
+      ],
+      "weighted": 0.667,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.4595,
+       0.9473
+      ],
+      "weighted_design_cp95": [
+       0.4107,
+       0.8666
+      ],
+      "weighted_design_cp_n_eff": 18.1,
+      "weighted_kish_wilson95_secondary": [
+       0.5397,
+       0.7739
+      ]
+     }
+    }
+   },
+   "targets_status": {
+    "printed_disposal": {
+     "coverage": "NOT_MET",
+     "strict_precision": "NOT_MET"
+    },
+    "substantive_result": {
+     "coverage": "NOT_MET",
+     "strict_precision": "NOT_MET"
+    }
+   }
+  }
+ },
+ "by_stratum": {
+  "BATCH_OR_MULTI": {
+   "estimates": {
+    "printed_disposal": {
+     "abstained": 25,
+     "categories": {
+      "ABSTAINED": 25,
+      "CORRECT": 91,
+      "EXTRA_UNIT_ABSTAINED": 5,
+      "EXTRA_UNIT_NO_GOLD": 11,
+      "MISSED": 112,
+      "WRONG_FAMILY": 4,
+      "WRONG_LABEL_SAME_FAMILY": 3
+     },
+     "coverage": {
+      "clusters": 67,
+      "k": 98.0,
+      "n": 235.0,
+      "unweighted": 0.417,
+      "unweighted_cluster_bootstrap95": [
+       0.2429,
+       0.7351
+      ],
+      "unweighted_wilson95": [
+       0.3558,
+       0.4809
+      ],
+      "weighted": 0.4665,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.3004,
+       0.745
+      ],
+      "weighted_design_cp95": [
+       0.278,
+       0.6623
+      ],
+      "weighted_design_cp_n_eff": 28.3,
+      "weighted_kish_wilson95_secondary": [
+       0.3952,
+       0.5393
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 83,
+      "k": 98.0,
+      "n": 251.0,
+      "unweighted": 0.3904,
+      "unweighted_cluster_bootstrap95": [
+       0.2358,
+       0.6619
+      ],
+      "unweighted_wilson95": [
+       0.3322,
+       0.452
+      ],
+      "weighted": 0.4493,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.2907,
+       0.7134
+      ],
+      "weighted_design_cp95": [
+       0.2747,
+       0.6335
+      ],
+      "weighted_design_cp_n_eff": 32.3,
+      "weighted_kish_wilson95_secondary": [
+       0.3803,
+       0.5202
+      ]
+     },
+     "family_precision": {
+      "clusters": 57,
+      "k": 94.0,
+      "n": 109.0,
+      "unweighted": 0.8624,
+      "unweighted_cluster_bootstrap95": [
+       0.7132,
+       0.9783
+      ],
+      "unweighted_wilson95": [
+       0.7853,
+       0.9148
+      ],
+      "weighted": 0.9388,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8488,
+       0.9912
+      ],
+      "weighted_design_cp95": [
+       0.8643,
+       0.9795
+      ],
+      "weighted_design_cp_n_eff": 83.9,
+      "weighted_kish_wilson95_secondary": [
+       0.8659,
+       0.9733
+      ]
+     },
+     "gold_units_undeterminable": 0,
+     "items_uncodable": 16,
+     "strict_precision": {
+      "clusters": 57,
+      "k": 91.0,
+      "n": 109.0,
+      "unweighted": 0.8349,
+      "unweighted_cluster_bootstrap95": [
+       0.69,
+       0.9528
+      ],
+      "unweighted_wilson95": [
+       0.754,
+       0.8929
+      ],
+      "weighted": 0.9184,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8278,
+       0.9813
+      ],
+      "weighted_design_cp95": [
+       0.838,
+       0.967
+      ],
+      "weighted_design_cp_n_eff": 83.9,
+      "weighted_kish_wilson95_secondary": [
+       0.84,
+       0.9602
+      ]
+     }
+    },
+    "substantive_result": {
+     "abstained": 28,
+     "categories": {
+      "ABSTAINED": 28,
+      "CORRECT": 80,
+      "EXTRA_UNIT_ABSTAINED": 16,
+      "GOLD_UNDETERMINABLE_NO_PRED": 17,
+      "MISSED": 98,
+      "WRONG_FAMILY": 12
+     },
+     "coverage": {
+      "clusters": 64,
+      "k": 92.0,
+      "n": 218.0,
+      "unweighted": 0.422,
+      "unweighted_cluster_bootstrap95": [
+       0.2453,
+       0.76
+      ],
+      "unweighted_wilson95": [
+       0.3584,
+       0.4884
+      ],
+      "weighted": 0.4849,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.3077,
+       0.7859
+      ],
+      "weighted_design_cp95": [
+       0.2814,
+       0.6922
+      ],
+      "weighted_design_cp_n_eff": 24.8,
+      "weighted_kish_wilson95_secondary": [
+       0.4098,
+       0.5608
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 80,
+      "k": 92.0,
+      "n": 234.0,
+      "unweighted": 0.3932,
+      "unweighted_cluster_bootstrap95": [
+       0.235,
+       0.6713
+      ],
+      "unweighted_wilson95": [
+       0.3328,
+       0.457
+      ],
+      "weighted": 0.4655,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.2899,
+       0.7411
+      ],
+      "weighted_design_cp95": [
+       0.2783,
+       0.6601
+      ],
+      "weighted_design_cp_n_eff": 28.7,
+      "weighted_kish_wilson95_secondary": [
+       0.393,
+       0.5394
+      ]
+     },
+     "family_precision": {
+      "clusters": 51,
+      "k": 80.0,
+      "n": 92.0,
+      "unweighted": 0.8696,
+      "unweighted_cluster_bootstrap95": [
+       0.7564,
+       0.9574
+      ],
+      "unweighted_wilson95": [
+       0.7857,
+       0.9238
+      ],
+      "weighted": 0.8892,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7388,
+       0.9839
+      ],
+      "weighted_design_cp95": [
+       0.7114,
+       0.9761
+      ],
+      "weighted_design_cp_n_eff": 27.6,
+      "weighted_kish_wilson95_secondary": [
+       0.7977,
+       0.9423
+      ]
+     },
+     "gold_units_undeterminable": 17,
+     "items_uncodable": 16,
+     "strict_precision": {
+      "clusters": 51,
+      "k": 80.0,
+      "n": 92.0,
+      "unweighted": 0.8696,
+      "unweighted_cluster_bootstrap95": [
+       0.7561,
+       0.9545
+      ],
+      "unweighted_wilson95": [
+       0.7857,
+       0.9238
+      ],
+      "weighted": 0.8892,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7338,
+       0.9841
+      ],
+      "weighted_design_cp95": [
+       0.7114,
+       0.9761
+      ],
+      "weighted_design_cp_n_eff": 27.6,
+      "weighted_kish_wilson95_secondary": [
+       0.7977,
+       0.9423
+      ]
+     }
+    }
+   },
+   "targets_status": {
+    "printed_disposal": {
+     "coverage": "NOT_MET",
+     "strict_precision": "NOT_MET"
+    },
+    "substantive_result": {
+     "coverage": "NOT_MET",
+     "strict_precision": "NOT_MET"
+    }
+   }
+  },
+  "OTHER": {
+   "estimates": {
+    "printed_disposal": {
+     "abstained": 9,
+     "categories": {
+      "ABSTAINED": 9,
+      "CORRECT": 63,
+      "EXTRA_UNIT_NO_GOLD": 14,
+      "MISSED": 2,
+      "WRONG_FAMILY": 4,
+      "WRONG_LABEL_SAME_FAMILY": 6
+     },
+     "coverage": {
+      "clusters": 80,
+      "k": 73.0,
+      "n": 84.0,
+      "unweighted": 0.869,
+      "unweighted_cluster_bootstrap95": [
+       0.8023,
+       0.9333
+      ],
+      "unweighted_wilson95": [
+       0.7805,
+       0.9253
+      ],
+      "weighted": 0.9399,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8864,
+       0.9798
+      ],
+      "weighted_design_cp95": [
+       0.8402,
+       0.9863
+      ],
+      "weighted_design_cp_n_eff": 54.3,
+      "weighted_kish_wilson95_secondary": [
+       0.8431,
+       0.9785
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 89,
+      "k": 73.0,
+      "n": 93.0,
+      "unweighted": 0.7849,
+      "unweighted_cluster_bootstrap95": [
+       0.7191,
+       0.8495
+      ],
+      "unweighted_wilson95": [
+       0.691,
+       0.8562
+      ],
+      "weighted": 0.9011,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8252,
+       0.9594
+      ],
+      "weighted_design_cp95": [
+       0.7924,
+       0.9644
+      ],
+      "weighted_design_cp_n_eff": 56.7,
+      "weighted_kish_wilson95_secondary": [
+       0.7963,
+       0.955
+      ]
+     },
+     "family_precision": {
+      "clusters": 71,
+      "k": 69.0,
+      "n": 87.0,
+      "unweighted": 0.7931,
+      "unweighted_cluster_bootstrap95": [
+       0.605,
+       0.9718
+      ],
+      "unweighted_wilson95": [
+       0.6965,
+       0.8649
+      ],
+      "weighted": 0.891,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7946,
+       0.9711
+      ],
+      "weighted_design_cp95": [
+       0.7693,
+       0.9618
+      ],
+      "weighted_design_cp_n_eff": 49.3,
+      "weighted_kish_wilson95_secondary": [
+       0.7787,
+       0.9499
+      ]
+     },
+     "gold_units_undeterminable": 0,
+     "items_uncodable": 9,
+     "strict_precision": {
+      "clusters": 71,
+      "k": 63.0,
+      "n": 87.0,
+      "unweighted": 0.7241,
+      "unweighted_cluster_bootstrap95": [
+       0.5534,
+       0.9155
+      ],
+      "unweighted_wilson95": [
+       0.6223,
+       0.8071
+      ],
+      "weighted": 0.8285,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7159,
+       0.9277
+      ],
+      "weighted_design_cp95": [
+       0.6987,
+       0.9187
+      ],
+      "weighted_design_cp_n_eff": 52.1,
+      "weighted_kish_wilson95_secondary": [
+       0.7052,
+       0.907
+      ]
+     }
+    },
+    "substantive_result": {
+     "abstained": 23,
+     "categories": {
+      "ABSTAINED": 23,
+      "CORRECT": 51,
+      "EXTRA_UNIT_NO_GOLD": 14,
+      "MISSED": 2,
+      "WRONG_FAMILY": 8
+     },
+     "coverage": {
+      "clusters": 80,
+      "k": 59.0,
+      "n": 84.0,
+      "unweighted": 0.7024,
+      "unweighted_cluster_bootstrap95": [
+       0.6,
+       0.7976
+      ],
+      "unweighted_wilson95": [
+       0.5975,
+       0.7896
+      ],
+      "weighted": 0.7709,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.6625,
+       0.8725
+      ],
+      "weighted_design_cp95": [
+       0.6368,
+       0.874
+      ],
+      "weighted_design_cp_n_eff": 54.3,
+      "weighted_kish_wilson95_secondary": [
+       0.6435,
+       0.8625
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 89,
+      "k": 59.0,
+      "n": 93.0,
+      "unweighted": 0.6344,
+      "unweighted_cluster_bootstrap95": [
+       0.5474,
+       0.7253
+      ],
+      "unweighted_wilson95": [
+       0.533,
+       0.7251
+      ],
+      "weighted": 0.7391,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.631,
+       0.8441
+      ],
+      "weighted_design_cp95": [
+       0.6054,
+       0.8467
+      ],
+      "weighted_design_cp_n_eff": 56.7,
+      "weighted_kish_wilson95_secondary": [
+       0.6123,
+       0.8356
+      ]
+     },
+     "family_precision": {
+      "clusters": 57,
+      "k": 51.0,
+      "n": 73.0,
+      "unweighted": 0.6986,
+      "unweighted_cluster_bootstrap95": [
+       0.5048,
+       0.9123
+      ],
+      "unweighted_wilson95": [
+       0.5856,
+       0.7918
+      ],
+      "weighted": 0.8369,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7168,
+       0.9404
+      ],
+      "weighted_design_cp95": [
+       0.6933,
+       0.9315
+      ],
+      "weighted_design_cp_n_eff": 43.3,
+      "weighted_kish_wilson95_secondary": [
+       0.7005,
+       0.9184
+      ]
+     },
+     "gold_units_undeterminable": 0,
+     "items_uncodable": 9,
+     "strict_precision": {
+      "clusters": 57,
+      "k": 51.0,
+      "n": 73.0,
+      "unweighted": 0.6986,
+      "unweighted_cluster_bootstrap95": [
+       0.5238,
+       0.9298
+      ],
+      "unweighted_wilson95": [
+       0.5856,
+       0.7918
+      ],
+      "weighted": 0.8369,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7198,
+       0.9387
+      ],
+      "weighted_design_cp95": [
+       0.6933,
+       0.9315
+      ],
+      "weighted_design_cp_n_eff": 43.3,
+      "weighted_kish_wilson95_secondary": [
+       0.7005,
+       0.9184
+      ]
+     }
+    }
+   },
+   "targets_status": {
+    "printed_disposal": {
+     "coverage": "MET_POINT_ONLY",
+     "strict_precision": "NOT_MET"
+    },
+    "substantive_result": {
+     "coverage": "NOT_MET",
+     "strict_precision": "NOT_MET"
+    }
+   }
+  },
+  "PARTY_SPECIFIC": {
+   "estimates": {
+    "printed_disposal": {
+     "abstained": 1,
+     "categories": {
+      "ABSTAINED": 1,
+      "CORRECT": 14,
+      "EXTRA_UNIT_ABSTAINED": 1,
+      "GOLD_UNDETERMINABLE_NO_PRED": 1,
+      "MISSED": 8,
+      "WRONG_FAMILY": 1,
+      "WRONG_LABEL_SAME_FAMILY": 2
+     },
+     "coverage": {
+      "clusters": 19,
+      "k": 17.0,
+      "n": 26.0,
+      "unweighted": 0.6538,
+      "unweighted_cluster_bootstrap95": [
+       0.5769,
+       0.6923
+      ],
+      "unweighted_wilson95": [
+       0.4622,
+       0.8059
+      ],
+      "weighted": 0.7609,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.6304,
+       0.8261
+      ],
+      "weighted_design_cp95": [
+       0.5203,
+       0.9202
+      ],
+      "weighted_design_cp_n_eff": 20.0,
+      "weighted_kish_wilson95_secondary": [
+       0.5423,
+       0.8952
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 21,
+      "k": 17.0,
+      "n": 28.0,
+      "unweighted": 0.6071,
+      "unweighted_cluster_bootstrap95": [
+       0.5,
+       0.7143
+      ],
+      "unweighted_wilson95": [
+       0.4241,
+       0.7643
+      ],
+      "weighted": 0.7292,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.5833,
+       0.8333
+      ],
+      "weighted_design_cp95": [
+       0.4957,
+       0.896
+      ],
+      "weighted_design_cp_n_eff": 21.3,
+      "weighted_kish_wilson95_secondary": [
+       0.5171,
+       0.8713
+      ]
+     },
+     "family_precision": {
+      "clusters": 17,
+      "k": 16.0,
+      "n": 17.0,
+      "unweighted": 0.9412,
+      "unweighted_cluster_bootstrap95": [
+       0.9412,
+       0.9412
+      ],
+      "unweighted_wilson95": [
+       0.7302,
+       0.9895
+      ],
+      "weighted": 0.9714,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.9714,
+       0.9714
+      ],
+      "weighted_design_cp95": [
+       0.719,
+       1.0
+      ],
+      "weighted_design_cp_n_eff": 13.8,
+      "weighted_kish_wilson95_secondary": [
+       0.7396,
+       0.9975
+      ]
+     },
+     "gold_units_undeterminable": 1,
+     "items_uncodable": 2,
+     "strict_precision": {
+      "clusters": 17,
+      "k": 14.0,
+      "n": 17.0,
+      "unweighted": 0.8235,
+      "unweighted_cluster_bootstrap95": [
+       0.7059,
+       0.9412
+      ],
+      "unweighted_wilson95": [
+       0.5897,
+       0.9381
+      ],
+      "weighted": 0.9143,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8286,
+       0.9714
+      ],
+      "weighted_design_cp95": [
+       0.6392,
+       0.9965
+      ],
+      "weighted_design_cp_n_eff": 13.8,
+      "weighted_kish_wilson95_secondary": [
+       0.6649,
+       0.9829
+      ]
+     }
+    },
+    "substantive_result": {
+     "abstained": 7,
+     "categories": {
+      "ABSTAINED": 7,
+      "CORRECT": 10,
+      "EXTRA_UNIT_ABSTAINED": 1,
+      "MISSED": 8,
+      "WRONG_FAMILY": 2
+     },
+     "coverage": {
+      "clusters": 20,
+      "k": 12.0,
+      "n": 27.0,
+      "unweighted": 0.4444,
+      "unweighted_cluster_bootstrap95": [
+       0.2963,
+       0.5926
+      ],
+      "unweighted_wilson95": [
+       0.2759,
+       0.6269
+      ],
+      "weighted": 0.5957,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.4043,
+       0.7447
+      ],
+      "weighted_design_cp95": [
+       0.3605,
+       0.8026
+      ],
+      "weighted_design_cp_n_eff": 20.6,
+      "weighted_kish_wilson95_secondary": [
+       0.3858,
+       0.7757
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 22,
+      "k": 12.0,
+      "n": 29.0,
+      "unweighted": 0.4138,
+      "unweighted_cluster_bootstrap95": [
+       0.2759,
+       0.5517
+      ],
+      "unweighted_wilson95": [
+       0.2551,
+       0.5926
+      ],
+      "weighted": 0.5714,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.4082,
+       0.7143
+      ],
+      "weighted_design_cp95": [
+       0.3457,
+       0.7772
+      ],
+      "weighted_design_cp_n_eff": 22.0,
+      "weighted_kish_wilson95_secondary": [
+       0.3698,
+       0.7518
+      ]
+     },
+     "family_precision": {
+      "clusters": 12,
+      "k": 10.0,
+      "n": 12.0,
+      "unweighted": 0.8333,
+      "unweighted_cluster_bootstrap95": [
+       0.6667,
+       1.0
+      ],
+      "unweighted_wilson95": [
+       0.552,
+       0.953
+      ],
+      "weighted": 0.9286,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8571,
+       1.0
+      ],
+      "weighted_design_cp95": [
+       0.5977,
+       0.9994
+      ],
+      "weighted_design_cp_n_eff": 10.3,
+      "weighted_kish_wilson95_secondary": [
+       0.6347,
+       0.9898
+      ]
+     },
+     "gold_units_undeterminable": 0,
+     "items_uncodable": 2,
+     "strict_precision": {
+      "clusters": 12,
+      "k": 10.0,
+      "n": 12.0,
+      "unweighted": 0.8333,
+      "unweighted_cluster_bootstrap95": [
+       0.6667,
+       1.0
+      ],
+      "unweighted_wilson95": [
+       0.552,
+       0.953
+      ],
+      "weighted": 0.9286,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8571,
+       1.0
+      ],
+      "weighted_design_cp95": [
+       0.5977,
+       0.9994
+      ],
+      "weighted_design_cp_n_eff": 10.3,
+      "weighted_kish_wilson95_secondary": [
+       0.6347,
+       0.9898
+      ]
+     }
+    }
+   },
+   "targets_status": {
+    "printed_disposal": {
+     "coverage": "NOT_MET",
+     "strict_precision": "NOT_MET"
+    },
+    "substantive_result": {
+     "coverage": "NOT_MET",
+     "strict_precision": "NOT_MET"
+    }
+   }
+  },
+  "PENSION_OR_DISCIPLINARY": {
+   "estimates": {
+    "printed_disposal": {
+     "abstained": 7,
+     "categories": {
+      "ABSTAINED": 7,
+      "CORRECT": 86,
+      "EXTRA_UNIT_ABSTAINED": 8,
+      "MISSED": 7,
+      "WRONG_FAMILY": 6,
+      "WRONG_LABEL_SAME_FAMILY": 3
+     },
+     "coverage": {
+      "clusters": 99,
+      "k": 95.0,
+      "n": 109.0,
+      "unweighted": 0.8716,
+      "unweighted_cluster_bootstrap95": [
+       0.775,
+       0.9604
+      ],
+      "unweighted_wilson95": [
+       0.7959,
+       0.9219
+      ],
+      "weighted": 0.9432,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8897,
+       0.9853
+      ],
+      "weighted_design_cp95": [
+       0.8587,
+       0.9848
+      ],
+      "weighted_design_cp_n_eff": 67.7,
+      "weighted_kish_wilson95_secondary": [
+       0.8607,
+       0.9781
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 106,
+      "k": 95.0,
+      "n": 116.0,
+      "unweighted": 0.819,
+      "unweighted_cluster_bootstrap95": [
+       0.7273,
+       0.9065
+      ],
+      "unweighted_wilson95": [
+       0.739,
+       0.8784
+      ],
+      "weighted": 0.9029,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8294,
+       0.9608
+      ],
+      "weighted_design_cp95": [
+       0.8088,
+       0.9605
+      ],
+      "weighted_design_cp_n_eff": 70.5,
+      "weighted_kish_wilson95_secondary": [
+       0.8116,
+       0.9525
+      ]
+     },
+     "family_precision": {
+      "clusters": 93,
+      "k": 89.0,
+      "n": 95.0,
+      "unweighted": 0.9368,
+      "unweighted_cluster_bootstrap95": [
+       0.8854,
+       0.9789
+      ],
+      "unweighted_wilson95": [
+       0.869,
+       0.9707
+      ],
+      "weighted": 0.9771,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.956,
+       0.9953
+      ],
+      "weighted_design_cp95": [
+       0.9031,
+       0.9985
+      ],
+      "weighted_design_cp_n_eff": 62.7,
+      "weighted_kish_wilson95_secondary": [
+       0.9042,
+       0.9948
+      ]
+     },
+     "gold_units_undeterminable": 0,
+     "items_uncodable": 7,
+     "strict_precision": {
+      "clusters": 93,
+      "k": 86.0,
+      "n": 95.0,
+      "unweighted": 0.9053,
+      "unweighted_cluster_bootstrap95": [
+       0.8495,
+       0.9579
+      ],
+      "unweighted_wilson95": [
+       0.8297,
+       0.9494
+      ],
+      "weighted": 0.9437,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8933,
+       0.9808
+      ],
+      "weighted_design_cp95": [
+       0.8548,
+       0.9861
+      ],
+      "weighted_design_cp_n_eff": 62.7,
+      "weighted_kish_wilson95_secondary": [
+       0.8571,
+       0.9791
+      ]
+     }
+    },
+    "substantive_result": {
+     "abstained": 12,
+     "categories": {
+      "ABSTAINED": 12,
+      "CORRECT": 80,
+      "EXTRA_UNIT_ABSTAINED": 8,
+      "GOLD_UNDETERMINABLE_NO_PRED": 1,
+      "MISSED": 7,
+      "WRONG_FAMILY": 9
+     },
+     "coverage": {
+      "clusters": 98,
+      "k": 89.0,
+      "n": 108.0,
+      "unweighted": 0.8241,
+      "unweighted_cluster_bootstrap95": [
+       0.7265,
+       0.92
+      ],
+      "unweighted_wilson95": [
+       0.7415,
+       0.8844
+      ],
+      "weighted": 0.8876,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8126,
+       0.9475
+      ],
+      "weighted_design_cp95": [
+       0.7865,
+       0.9518
+      ],
+      "weighted_design_cp_n_eff": 66.8,
+      "weighted_kish_wilson95_secondary": [
+       0.7898,
+       0.9431
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 105,
+      "k": 89.0,
+      "n": 115.0,
+      "unweighted": 0.7739,
+      "unweighted_cluster_bootstrap95": [
+       0.68,
+       0.8649
+      ],
+      "unweighted_wilson95": [
+       0.6893,
+       0.8408
+      ],
+      "weighted": 0.8489,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7656,
+       0.9204
+      ],
+      "weighted_design_cp95": [
+       0.7429,
+       0.9235
+      ],
+      "weighted_design_cp_n_eff": 69.6,
+      "weighted_kish_wilson95_secondary": [
+       0.7468,
+       0.9146
+      ]
+     },
+     "family_precision": {
+      "clusters": 87,
+      "k": 80.0,
+      "n": 89.0,
+      "unweighted": 0.8989,
+      "unweighted_cluster_bootstrap95": [
+       0.8409,
+       0.9556
+      ],
+      "unweighted_wilson95": [
+       0.8189,
+       0.9459
+      ],
+      "weighted": 0.9096,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8374,
+       0.9685
+      ],
+      "weighted_design_cp95": [
+       0.8046,
+       0.9691
+      ],
+      "weighted_design_cp_n_eff": 57.8,
+      "weighted_kish_wilson95_secondary": [
+       0.8081,
+       0.9601
+      ]
+     },
+     "gold_units_undeterminable": 1,
+     "items_uncodable": 7,
+     "strict_precision": {
+      "clusters": 87,
+      "k": 80.0,
+      "n": 89.0,
+      "unweighted": 0.8989,
+      "unweighted_cluster_bootstrap95": [
+       0.8315,
+       0.9551
+      ],
+      "unweighted_wilson95": [
+       0.8189,
+       0.9459
+      ],
+      "weighted": 0.9096,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8427,
+       0.9686
+      ],
+      "weighted_design_cp95": [
+       0.8046,
+       0.9691
+      ],
+      "weighted_design_cp_n_eff": 57.8,
+      "weighted_kish_wilson95_secondary": [
+       0.8081,
+       0.9601
+      ]
+     }
+    }
+   },
+   "targets_status": {
+    "printed_disposal": {
+     "coverage": "MET_LOWER_BOUND",
+     "strict_precision": "NOT_MET"
+    },
+    "substantive_result": {
+     "coverage": "NOT_MET",
+     "strict_precision": "NOT_MET"
+    }
+   }
+  }
+ },
+ "evidence_anchor": {
+  "counts": {
+   "ANCHOR_NOT_FOUND": 2,
+   "ANCHOR_OK": 403,
+   "NO_ANCHOR": 75
+  },
+  "ok_rate": 0.8396,
+  "ok_wilson95": [
+   0.8041,
+   0.8697
+  ]
+ },
+ "headline_rule": "headline status = worse of the full-sample status and the status without the PRIMARY pre-exposed subset (PROTOCOL_C13 v1.1 s.6)",
+ "headline_status": {
+  "printed_disposal": {
+   "coverage": "NOT_MET",
+   "strict_precision": "NOT_MET"
+  },
+  "substantive_result": {
+   "coverage": "NOT_MET",
+   "strict_precision": "NOT_MET"
+  }
+ },
+ "holdout": "H-OUT-C13",
+ "inputs": {
+  "harness_sha256": "3144aafcb4dc8fae32e2bb319b1dcb0898ba3432784b47dc9a45157615e7add3",
+  "pred_sha256": "45c5a3321d22e2948e2783c2ba6a6857d51f1c705e7b90993ddc3a68ad239b69",
+  "truth_sha256": "59847e945f928ab3aafa60369ecd53bcfbec66ae5f9d2add5ce6fd4c3ec257ee"
+ },
+ "items": 300,
+ "overall": {
+  "printed_disposal": {
+   "abstained": 42,
+   "categories": {
+    "ABSTAINED": 42,
+    "CORRECT": 254,
+    "EXTRA_UNIT_ABSTAINED": 14,
+    "EXTRA_UNIT_NO_GOLD": 25,
+    "GOLD_UNDETERMINABLE_NO_PRED": 1,
+    "MISSED": 129,
+    "WRONG_FAMILY": 15,
+    "WRONG_LABEL_SAME_FAMILY": 14
+   },
+   "coverage": {
+    "clusters": 265,
+    "k": 283.0,
+    "n": 454.0,
+    "unweighted": 0.6233,
+    "unweighted_cluster_bootstrap95": [
+     0.4771,
+     0.8058
+    ],
+    "unweighted_wilson95": [
+     0.5779,
+     0.6667
+    ],
+    "weighted": 0.8334,
+    "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+     0.7481,
+     0.9146
+    ],
+    "weighted_design_cp95": [
+     0.7429,
+     0.9021
+    ],
+    "weighted_design_cp_n_eff": 94.7,
+    "weighted_kish_wilson95_secondary": [
+     0.7751,
+     0.8789
+    ]
+   },
+   "coverage_counting_uncodable_items_as_not_covered": {
+    "clusters": 299,
+    "k": 283.0,
+    "n": 488.0,
+    "unweighted": 0.5799,
+    "unweighted_cluster_bootstrap95": [
+     0.4441,
+     0.7379
+    ],
+    "unweighted_wilson95": [
+     0.5357,
+     0.6229
+    ],
+    "weighted": 0.7993,
+    "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+     0.7171,
+     0.8829
+    ],
+    "weighted_design_cp95": [
+     0.7131,
+     0.869
+    ],
+    "weighted_design_cp_n_eff": 112.1,
+    "weighted_kish_wilson95_secondary": [
+     0.7392,
+     0.8483
+    ]
+   },
+   "family_precision": {
+    "clusters": 238,
+    "k": 268.0,
+    "n": 308.0,
+    "unweighted": 0.8701,
+    "unweighted_cluster_bootstrap95": [
+     0.7823,
+     0.9538
+    ],
+    "unweighted_wilson95": [
+     0.828,
+     0.9032
+    ],
+    "weighted": 0.9406,
+    "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+     0.9009,
+     0.9731
+    ],
+    "weighted_design_cp95": [
+     0.8901,
+     0.9725
+    ],
+    "weighted_design_cp_n_eff": 150.8,
+    "weighted_kish_wilson95_secondary": [
+     0.8908,
+     0.9685
+    ]
+   },
+   "gold_units_undeterminable": 1,
+   "items_uncodable": 34,
+   "strict_precision": {
+    "clusters": 238,
+    "k": 254.0,
+    "n": 308.0,
+    "unweighted": 0.8247,
+    "unweighted_cluster_bootstrap95": [
+     0.7383,
+     0.9053
+    ],
+    "unweighted_wilson95": [
+     0.7783,
+     0.8631
+    ],
+    "weighted": 0.8979,
+    "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+     0.8511,
+     0.941
+    ],
+    "weighted_design_cp95": [
+     0.8382,
+     0.9412
+    ],
+    "weighted_design_cp_n_eff": 150.8,
+    "weighted_kish_wilson95_secondary": [
+     0.8393,
+     0.9368
+    ]
+   }
+  },
+  "substantive_result": {
+   "abstained": 70,
+   "categories": {
+    "ABSTAINED": 70,
+    "CORRECT": 221,
+    "EXTRA_UNIT_ABSTAINED": 25,
+    "EXTRA_UNIT_NO_GOLD": 14,
+    "GOLD_UNDETERMINABLE_NO_PRED": 18,
+    "MISSED": 115,
+    "WRONG_FAMILY": 31
+   },
+   "coverage": {
+    "clusters": 262,
+    "k": 252.0,
+    "n": 437.0,
+    "unweighted": 0.5767,
+    "unweighted_cluster_bootstrap95": [
+     0.4335,
+     0.7469
+    ],
+    "unweighted_wilson95": [
+     0.5299,
+     0.6221
+    ],
+    "weighted": 0.7602,
+    "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+     0.6684,
+     0.8474
+    ],
+    "weighted_design_cp95": [
+     0.6714,
+     0.8351
+    ],
+    "weighted_design_cp_n_eff": 114.4,
+    "weighted_kish_wilson95_secondary": [
+     0.6948,
+     0.8153
+    ]
+   },
+   "coverage_counting_uncodable_items_as_not_covered": {
+    "clusters": 296,
+    "k": 252.0,
+    "n": 471.0,
+    "unweighted": 0.535,
+    "unweighted_cluster_bootstrap95": [
+     0.4043,
+     0.6784
+    ],
+    "unweighted_wilson95": [
+     0.4899,
+     0.5796
+    ],
+    "weighted": 0.7283,
+    "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+     0.6397,
+     0.8085
+    ],
+    "weighted_design_cp95": [
+     0.643,
+     0.8027
+    ],
+    "weighted_design_cp_n_eff": 129.3,
+    "weighted_kish_wilson95_secondary": [
+     0.6625,
+     0.7854
+    ]
+   },
+   "family_precision": {
+    "clusters": 207,
+    "k": 221.0,
+    "n": 266.0,
+    "unweighted": 0.8308,
+    "unweighted_cluster_bootstrap95": [
+     0.7437,
+     0.9094
+    ],
+    "unweighted_wilson95": [
+     0.7811,
+     0.8711
+    ],
+    "weighted": 0.8823,
+    "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+     0.8228,
+     0.9339
+    ],
+    "weighted_design_cp95": [
+     0.815,
+     0.9317
+    ],
+    "weighted_design_cp_n_eff": 132.9,
+    "weighted_kish_wilson95_secondary": [
+     0.8165,
+     0.9266
+    ]
+   },
+   "gold_units_undeterminable": 18,
+   "items_uncodable": 34,
+   "strict_precision": {
+    "clusters": 207,
+    "k": 221.0,
+    "n": 266.0,
+    "unweighted": 0.8308,
+    "unweighted_cluster_bootstrap95": [
+     0.7419,
+     0.9091
+    ],
+    "unweighted_wilson95": [
+     0.7811,
+     0.8711
+    ],
+    "weighted": 0.8823,
+    "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+     0.8242,
+     0.9327
+    ],
+    "weighted_design_cp95": [
+     0.815,
+     0.9317
+    ],
+    "weighted_design_cp_n_eff": 132.9,
+    "weighted_kish_wilson95_secondary": [
+     0.8165,
+     0.9266
+    ]
+   }
+  }
+ },
+ "protocol_version": "1.1",
+ "sensitivity": {
+  "without_case_number_reviewed": {
+   "estimates": {
+    "printed_disposal": {
+     "abstained": 36,
+     "categories": {
+      "ABSTAINED": 36,
+      "CORRECT": 245,
+      "EXTRA_UNIT_ABSTAINED": 14,
+      "EXTRA_UNIT_NO_GOLD": 24,
+      "GOLD_UNDETERMINABLE_NO_PRED": 1,
+      "MISSED": 63,
+      "WRONG_FAMILY": 13,
+      "WRONG_LABEL_SAME_FAMILY": 14
+     },
+     "coverage": {
+      "clusters": 255,
+      "k": 272.0,
+      "n": 371.0,
+      "unweighted": 0.7332,
+      "unweighted_cluster_bootstrap95": [
+       0.6174,
+       0.8447
+      ],
+      "unweighted_wilson95": [
+       0.6859,
+       0.7756
+      ],
+      "weighted": 0.8607,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7777,
+       0.9325
+      ],
+      "weighted_design_cp95": [
+       0.7647,
+       0.9282
+      ],
+      "weighted_design_cp_n_eff": 79.4,
+      "weighted_kish_wilson95_secondary": [
+       0.803,
+       0.9035
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 281,
+      "k": 272.0,
+      "n": 397.0,
+      "unweighted": 0.6851,
+      "unweighted_cluster_bootstrap95": [
+       0.5795,
+       0.7902
+      ],
+      "unweighted_wilson95": [
+       0.6379,
+       0.7289
+      ],
+      "weighted": 0.8276,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.744,
+       0.9023
+      ],
+      "weighted_design_cp95": [
+       0.7366,
+       0.8974
+      ],
+      "weighted_design_cp_n_eff": 95.2,
+      "weighted_kish_wilson95_secondary": [
+       0.7675,
+       0.8748
+      ]
+     },
+     "family_precision": {
+      "clusters": 228,
+      "k": 259.0,
+      "n": 296.0,
+      "unweighted": 0.875,
+      "unweighted_cluster_bootstrap95": [
+       0.7883,
+       0.9586
+      ],
+      "unweighted_wilson95": [
+       0.8325,
+       0.9079
+      ],
+      "weighted": 0.9419,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.904,
+       0.9756
+      ],
+      "weighted_design_cp95": [
+       0.8913,
+       0.9737
+      ],
+      "weighted_design_cp_n_eff": 148.5,
+      "weighted_kish_wilson95_secondary": [
+       0.892,
+       0.9696
+      ]
+     },
+     "gold_units_undeterminable": 1,
+     "items_uncodable": 26,
+     "strict_precision": {
+      "clusters": 228,
+      "k": 245.0,
+      "n": 296.0,
+      "unweighted": 0.8277,
+      "unweighted_cluster_bootstrap95": [
+       0.7385,
+       0.9124
+      ],
+      "unweighted_wilson95": [
+       0.7806,
+       0.8665
+      ],
+      "weighted": 0.8989,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8494,
+       0.9412
+      ],
+      "weighted_design_cp95": [
+       0.8388,
+       0.9423
+      ],
+      "weighted_design_cp_n_eff": 148.5,
+      "weighted_kish_wilson95_secondary": [
+       0.84,
+       0.9378
+      ]
+     }
+    },
+    "substantive_result": {
+     "abstained": 64,
+     "categories": {
+      "ABSTAINED": 64,
+      "CORRECT": 211,
+      "EXTRA_UNIT_ABSTAINED": 24,
+      "EXTRA_UNIT_NO_GOLD": 14,
+      "GOLD_UNDETERMINABLE_NO_PRED": 17,
+      "MISSED": 50,
+      "WRONG_FAMILY": 30
+     },
+     "coverage": {
+      "clusters": 252,
+      "k": 241.0,
+      "n": 355.0,
+      "unweighted": 0.6789,
+      "unweighted_cluster_bootstrap95": [
+       0.5721,
+       0.7752
+      ],
+      "unweighted_wilson95": [
+       0.6286,
+       0.7253
+      ],
+      "weighted": 0.7848,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7001,
+       0.8644
+      ],
+      "weighted_design_cp95": [
+       0.6926,
+       0.8599
+      ],
+      "weighted_design_cp_n_eff": 102.4,
+      "weighted_kish_wilson95_secondary": [
+       0.7184,
+       0.8391
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 278,
+      "k": 241.0,
+      "n": 381.0,
+      "unweighted": 0.6325,
+      "unweighted_cluster_bootstrap95": [
+       0.5399,
+       0.7169
+      ],
+      "unweighted_wilson95": [
+       0.583,
+       0.6794
+      ],
+      "weighted": 0.7539,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.6702,
+       0.8304
+      ],
+      "weighted_design_cp95": [
+       0.665,
+       0.8293
+      ],
+      "weighted_design_cp_n_eff": 115.3,
+      "weighted_kish_wilson95_secondary": [
+       0.6867,
+       0.8107
+      ]
+     },
+     "family_precision": {
+      "clusters": 198,
+      "k": 211.0,
+      "n": 255.0,
+      "unweighted": 0.8275,
+      "unweighted_cluster_bootstrap95": [
+       0.7374,
+       0.9116
+      ],
+      "unweighted_wilson95": [
+       0.7763,
+       0.8689
+      ],
+      "weighted": 0.8819,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8221,
+       0.9328
+      ],
+      "weighted_design_cp95": [
+       0.8139,
+       0.9317
+      ],
+      "weighted_design_cp_n_eff": 130.8,
+      "weighted_kish_wilson95_secondary": [
+       0.8154,
+       0.9266
+      ]
+     },
+     "gold_units_undeterminable": 17,
+     "items_uncodable": 26,
+     "strict_precision": {
+      "clusters": 198,
+      "k": 211.0,
+      "n": 255.0,
+      "unweighted": 0.8275,
+      "unweighted_cluster_bootstrap95": [
+       0.7368,
+       0.9099
+      ],
+      "unweighted_wilson95": [
+       0.7763,
+       0.8689
+      ],
+      "weighted": 0.8819,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8238,
+       0.932
+      ],
+      "weighted_design_cp95": [
+       0.8139,
+       0.9317
+      ],
+      "weighted_design_cp_n_eff": 130.8,
+      "weighted_kish_wilson95_secondary": [
+       0.8154,
+       0.9266
+      ]
+     }
+    }
+   },
+   "items_excluded": 18,
+   "targets_status": {
+    "printed_disposal": {
+     "coverage": "NOT_MET",
+     "strict_precision": "NOT_MET"
+    },
+    "substantive_result": {
+     "coverage": "NOT_MET",
+     "strict_precision": "NOT_MET"
+    }
+   }
+  },
+  "without_primary_pre_exposed": {
+   "estimates": {
+    "printed_disposal": {
+     "abstained": 38,
+     "categories": {
+      "ABSTAINED": 38,
+      "CORRECT": 232,
+      "EXTRA_UNIT_ABSTAINED": 11,
+      "EXTRA_UNIT_NO_GOLD": 25,
+      "MISSED": 118,
+      "WRONG_FAMILY": 13,
+      "WRONG_LABEL_SAME_FAMILY": 12
+     },
+     "coverage": {
+      "clusters": 234,
+      "k": 257.0,
+      "n": 413.0,
+      "unweighted": 0.6223,
+      "unweighted_cluster_bootstrap95": [
+       0.4563,
+       0.8311
+      ],
+      "unweighted_wilson95": [
+       0.5746,
+       0.6677
+      ],
+      "weighted": 0.8259,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7298,
+       0.9147
+      ],
+      "weighted_design_cp95": [
+       0.7267,
+       0.9006
+      ],
+      "weighted_design_cp_n_eff": 82.4,
+      "weighted_kish_wilson95_secondary": [
+       0.7645,
+       0.874
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 265,
+      "k": 257.0,
+      "n": 444.0,
+      "unweighted": 0.5788,
+      "unweighted_cluster_bootstrap95": [
+       0.4286,
+       0.7514
+      ],
+      "unweighted_wilson95": [
+       0.5324,
+       0.6239
+      ],
+      "weighted": 0.7902,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.6912,
+       0.8785
+      ],
+      "weighted_design_cp95": [
+       0.6963,
+       0.866
+      ],
+      "weighted_design_cp_n_eff": 98.0,
+      "weighted_kish_wilson95_secondary": [
+       0.727,
+       0.842
+      ]
+     },
+     "family_precision": {
+      "clusters": 212,
+      "k": 244.0,
+      "n": 282.0,
+      "unweighted": 0.8652,
+      "unweighted_cluster_bootstrap95": [
+       0.7672,
+       0.9537
+      ],
+      "unweighted_wilson95": [
+       0.8205,
+       0.9002
+      ],
+      "weighted": 0.9353,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8953,
+       0.9715
+      ],
+      "weighted_design_cp95": [
+       0.8807,
+       0.97
+      ],
+      "weighted_design_cp_n_eff": 138.7,
+      "weighted_kish_wilson95_secondary": [
+       0.8815,
+       0.9656
+      ]
+     },
+     "gold_units_undeterminable": 0,
+     "items_uncodable": 31,
+     "strict_precision": {
+      "clusters": 212,
+      "k": 232.0,
+      "n": 282.0,
+      "unweighted": 0.8227,
+      "unweighted_cluster_bootstrap95": [
+       0.7321,
+       0.9105
+      ],
+      "unweighted_wilson95": [
+       0.7739,
+       0.8628
+      ],
+      "weighted": 0.8888,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8368,
+       0.9367
+      ],
+      "weighted_design_cp95": [
+       0.8243,
+       0.9358
+      ],
+      "weighted_design_cp_n_eff": 138.7,
+      "weighted_kish_wilson95_secondary": [
+       0.8256,
+       0.931
+      ]
+     }
+    },
+    "substantive_result": {
+     "abstained": 59,
+     "categories": {
+      "ABSTAINED": 59,
+      "CORRECT": 204,
+      "EXTRA_UNIT_ABSTAINED": 22,
+      "EXTRA_UNIT_NO_GOLD": 14,
+      "GOLD_UNDETERMINABLE_NO_PRED": 18,
+      "MISSED": 104,
+      "WRONG_FAMILY": 28
+     },
+     "coverage": {
+      "clusters": 230,
+      "k": 232.0,
+      "n": 395.0,
+      "unweighted": 0.5873,
+      "unweighted_cluster_bootstrap95": [
+       0.432,
+       0.7881
+      ],
+      "unweighted_wilson95": [
+       0.5382,
+       0.6348
+      ],
+      "weighted": 0.7507,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.6551,
+       0.847
+      ],
+      "weighted_design_cp95": [
+       0.6534,
+       0.8324
+      ],
+      "weighted_design_cp_n_eff": 98.4,
+      "weighted_kish_wilson95_secondary": [
+       0.6819,
+       0.8088
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 261,
+      "k": 232.0,
+      "n": 426.0,
+      "unweighted": 0.5446,
+      "unweighted_cluster_bootstrap95": [
+       0.4066,
+       0.7072
+      ],
+      "unweighted_wilson95": [
+       0.4971,
+       0.5913
+      ],
+      "weighted": 0.7174,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.6251,
+       0.8031
+      ],
+      "weighted_design_cp95": [
+       0.6245,
+       0.7984
+      ],
+      "weighted_design_cp_n_eff": 112.1,
+      "weighted_kish_wilson95_secondary": [
+       0.6483,
+       0.7775
+      ]
+     },
+     "family_precision": {
+      "clusters": 187,
+      "k": 204.0,
+      "n": 246.0,
+      "unweighted": 0.8293,
+      "unweighted_cluster_bootstrap95": [
+       0.7367,
+       0.913
+      ],
+      "unweighted_wilson95": [
+       0.7773,
+       0.8711
+      ],
+      "weighted": 0.8797,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.819,
+       0.9351
+      ],
+      "weighted_design_cp95": [
+       0.8086,
+       0.9315
+      ],
+      "weighted_design_cp_n_eff": 122.4,
+      "weighted_kish_wilson95_secondary": [
+       0.8103,
+       0.9261
+      ]
+     },
+     "gold_units_undeterminable": 18,
+     "items_uncodable": 31,
+     "strict_precision": {
+      "clusters": 187,
+      "k": 204.0,
+      "n": 246.0,
+      "unweighted": 0.8293,
+      "unweighted_cluster_bootstrap95": [
+       0.7378,
+       0.914
+      ],
+      "unweighted_wilson95": [
+       0.7773,
+       0.8711
+      ],
+      "weighted": 0.8797,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.8245,
+       0.9336
+      ],
+      "weighted_design_cp95": [
+       0.8086,
+       0.9315
+      ],
+      "weighted_design_cp_n_eff": 122.4,
+      "weighted_kish_wilson95_secondary": [
+       0.8103,
+       0.9261
+      ]
+     }
+    }
+   },
+   "items_excluded": 35,
+   "targets_status": {
+    "printed_disposal": {
+     "coverage": "NOT_MET",
+     "strict_precision": "NOT_MET"
+    },
+    "substantive_result": {
+     "coverage": "NOT_MET",
+     "strict_precision": "NOT_MET"
+    }
+   }
+  }
+ },
+ "status_note": "AUTOMATED_CANDIDATE_NOT_VERIFIED outputs scored against AI-coded reference annotations unless the store manifest says otherwise",
+ "subsets": {
+  "gold_multi_proceeding": {
+   "estimates": {
+    "printed_disposal": {
+     "abstained": 24,
+     "categories": {
+      "ABSTAINED": 24,
+      "CORRECT": 73,
+      "EXTRA_UNIT_ABSTAINED": 8,
+      "EXTRA_UNIT_NO_GOLD": 15,
+      "MISSED": 128,
+      "WRONG_FAMILY": 4
+     },
+     "coverage": {
+      "clusters": 40,
+      "k": 77.0,
+      "n": 229.0,
+      "unweighted": 0.3362,
+      "unweighted_cluster_bootstrap95": [
+       0.1969,
+       0.5963
+      ],
+      "unweighted_wilson95": [
+       0.2782,
+       0.3997
+      ],
+      "weighted": 0.3877,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.2423,
+       0.6577
+      ],
+      "weighted_design_cp95": [
+       0.2172,
+       0.581
+      ],
+      "weighted_design_cp_n_eff": 30.3,
+      "weighted_kish_wilson95_secondary": [
+       0.3187,
+       0.4615
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 74,
+      "k": 77.0,
+      "n": 263.0,
+      "unweighted": 0.2928,
+      "unweighted_cluster_bootstrap95": [
+       0.1718,
+       0.4888
+      ],
+      "unweighted_wilson95": [
+       0.2411,
+       0.3504
+      ],
+      "weighted": 0.3212,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.1996,
+       0.4998
+      ],
+      "weighted_design_cp95": [
+       0.1911,
+       0.4752
+      ],
+      "weighted_design_cp_n_eff": 45.9,
+      "weighted_kish_wilson95_secondary": [
+       0.2478,
+       0.4045
+      ]
+     },
+     "family_precision": {
+      "clusters": 32,
+      "k": 73.0,
+      "n": 92.0,
+      "unweighted": 0.7935,
+      "unweighted_cluster_bootstrap95": [
+       0.6505,
+       0.9688
+      ],
+      "unweighted_wilson95": [
+       0.6998,
+       0.8636
+      ],
+      "weighted": 0.8728,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7592,
+       0.9858
+      ],
+      "weighted_design_cp95": [
+       0.6816,
+       0.9705
+      ],
+      "weighted_design_cp_n_eff": 25.6,
+      "weighted_kish_wilson95_secondary": [
+       0.7776,
+       0.9308
+      ]
+     },
+     "gold_units_undeterminable": 0,
+     "items_uncodable": 34,
+     "strict_precision": {
+      "clusters": 32,
+      "k": 73.0,
+      "n": 92.0,
+      "unweighted": 0.7935,
+      "unweighted_cluster_bootstrap95": [
+       0.6566,
+       0.9659
+      ],
+      "unweighted_wilson95": [
+       0.6998,
+       0.8636
+      ],
+      "weighted": 0.8728,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.7631,
+       0.9855
+      ],
+      "weighted_design_cp95": [
+       0.6816,
+       0.9705
+      ],
+      "weighted_design_cp_n_eff": 25.6,
+      "weighted_kish_wilson95_secondary": [
+       0.7776,
+       0.9308
+      ]
+     }
+    },
+    "substantive_result": {
+     "abstained": 25,
+     "categories": {
+      "ABSTAINED": 25,
+      "CORRECT": 66,
+      "EXTRA_UNIT_ABSTAINED": 9,
+      "EXTRA_UNIT_NO_GOLD": 14,
+      "GOLD_UNDETERMINABLE_NO_PRED": 15,
+      "MISSED": 114,
+      "WRONG_FAMILY": 9
+     },
+     "coverage": {
+      "clusters": 39,
+      "k": 75.0,
+      "n": 214.0,
+      "unweighted": 0.3505,
+      "unweighted_cluster_bootstrap95": [
+       0.203,
+       0.64
+      ],
+      "unweighted_wilson95": [
+       0.2897,
+       0.4165
+      ],
+      "weighted": 0.4169,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.2524,
+       0.7235
+      ],
+      "weighted_design_cp95": [
+       0.2297,
+       0.6235
+      ],
+      "weighted_design_cp_n_eff": 26.4,
+      "weighted_kish_wilson95_secondary": [
+       0.3435,
+       0.4942
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 73,
+      "k": 75.0,
+      "n": 248.0,
+      "unweighted": 0.3024,
+      "unweighted_cluster_bootstrap95": [
+       0.1781,
+       0.5
+      ],
+      "unweighted_wilson95": [
+       0.2486,
+       0.3622
+      ],
+      "weighted": 0.3405,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.2159,
+       0.5256
+      ],
+      "weighted_design_cp95": [
+       0.2018,
+       0.5025
+      ],
+      "weighted_design_cp_n_eff": 42.1,
+      "weighted_kish_wilson95_secondary": [
+       0.2622,
+       0.4286
+      ]
+     },
+     "family_precision": {
+      "clusters": 30,
+      "k": 66.0,
+      "n": 89.0,
+      "unweighted": 0.7416,
+      "unweighted_cluster_bootstrap95": [
+       0.5676,
+       0.9512
+      ],
+      "unweighted_wilson95": [
+       0.642,
+       0.8212
+      ],
+      "weighted": 0.7862,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.5973,
+       0.9715
+      ],
+      "weighted_design_cp95": [
+       0.5552,
+       0.9322
+      ],
+      "weighted_design_cp_n_eff": 21.1,
+      "weighted_kish_wilson95_secondary": [
+       0.6782,
+       0.8652
+      ]
+     },
+     "gold_units_undeterminable": 15,
+     "items_uncodable": 34,
+     "strict_precision": {
+      "clusters": 30,
+      "k": 66.0,
+      "n": 89.0,
+      "unweighted": 0.7416,
+      "unweighted_cluster_bootstrap95": [
+       0.5833,
+       0.9487
+      ],
+      "unweighted_wilson95": [
+       0.642,
+       0.8212
+      ],
+      "weighted": 0.7862,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.5811,
+       0.9666
+      ],
+      "weighted_design_cp95": [
+       0.5552,
+       0.9322
+      ],
+      "weighted_design_cp_n_eff": 21.1,
+      "weighted_kish_wilson95_secondary": [
+       0.6782,
+       0.8652
+      ]
+     }
+    }
+   },
+   "targets_status": {
+    "printed_disposal": {
+     "coverage": "NOT_MET",
+     "strict_precision": "NOT_MET"
+    },
+    "substantive_result": {
+     "coverage": "NOT_MET",
+     "strict_precision": "NOT_MET"
+    }
+   }
+  },
+  "gold_party_specific": {
+   "estimates": {
+    "printed_disposal": {
+     "abstained": 0,
+     "categories": {},
+     "coverage": {
+      "clusters": 0,
+      "k": 0,
+      "n": 0,
+      "unweighted": null,
+      "unweighted_cluster_bootstrap95": [
+       null,
+       null
+      ],
+      "unweighted_wilson95": [
+       null,
+       null
+      ],
+      "weighted": null,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       null,
+       null
+      ],
+      "weighted_design_cp95": [
+       null,
+       null
+      ],
+      "weighted_design_cp_n_eff": 0,
+      "weighted_kish_wilson95_secondary": [
+       null,
+       null
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 34,
+      "k": 0.0,
+      "n": 34.0,
+      "unweighted": 0.0,
+      "unweighted_cluster_bootstrap95": [
+       0.0,
+       0.0
+      ],
+      "unweighted_wilson95": [
+       0.0,
+       0.1015
+      ],
+      "weighted": 0.0,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.0,
+       0.0
+      ],
+      "weighted_design_cp95": [
+       0.0,
+       0.3626
+      ],
+      "weighted_design_cp_n_eff": 8.2,
+      "weighted_kish_wilson95_secondary": [
+       0.0,
+       0.3193
+      ]
+     },
+     "family_precision": {
+      "clusters": 0,
+      "k": 0,
+      "n": 0,
+      "unweighted": null,
+      "unweighted_cluster_bootstrap95": [
+       null,
+       null
+      ],
+      "unweighted_wilson95": [
+       null,
+       null
+      ],
+      "weighted": null,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       null,
+       null
+      ],
+      "weighted_design_cp95": [
+       null,
+       null
+      ],
+      "weighted_design_cp_n_eff": 0,
+      "weighted_kish_wilson95_secondary": [
+       null,
+       null
+      ]
+     },
+     "gold_units_undeterminable": 0,
+     "items_uncodable": 34,
+     "strict_precision": {
+      "clusters": 0,
+      "k": 0,
+      "n": 0,
+      "unweighted": null,
+      "unweighted_cluster_bootstrap95": [
+       null,
+       null
+      ],
+      "unweighted_wilson95": [
+       null,
+       null
+      ],
+      "weighted": null,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       null,
+       null
+      ],
+      "weighted_design_cp95": [
+       null,
+       null
+      ],
+      "weighted_design_cp_n_eff": 0,
+      "weighted_kish_wilson95_secondary": [
+       null,
+       null
+      ]
+     }
+    },
+    "substantive_result": {
+     "abstained": 0,
+     "categories": {},
+     "coverage": {
+      "clusters": 0,
+      "k": 0,
+      "n": 0,
+      "unweighted": null,
+      "unweighted_cluster_bootstrap95": [
+       null,
+       null
+      ],
+      "unweighted_wilson95": [
+       null,
+       null
+      ],
+      "weighted": null,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       null,
+       null
+      ],
+      "weighted_design_cp95": [
+       null,
+       null
+      ],
+      "weighted_design_cp_n_eff": 0,
+      "weighted_kish_wilson95_secondary": [
+       null,
+       null
+      ]
+     },
+     "coverage_counting_uncodable_items_as_not_covered": {
+      "clusters": 34,
+      "k": 0.0,
+      "n": 34.0,
+      "unweighted": 0.0,
+      "unweighted_cluster_bootstrap95": [
+       0.0,
+       0.0
+      ],
+      "unweighted_wilson95": [
+       0.0,
+       0.1015
+      ],
+      "weighted": 0.0,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       0.0,
+       0.0
+      ],
+      "weighted_design_cp95": [
+       0.0,
+       0.3626
+      ],
+      "weighted_design_cp_n_eff": 8.2,
+      "weighted_kish_wilson95_secondary": [
+       0.0,
+       0.3193
+      ]
+     },
+     "family_precision": {
+      "clusters": 0,
+      "k": 0,
+      "n": 0,
+      "unweighted": null,
+      "unweighted_cluster_bootstrap95": [
+       null,
+       null
+      ],
+      "unweighted_wilson95": [
+       null,
+       null
+      ],
+      "weighted": null,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       null,
+       null
+      ],
+      "weighted_design_cp95": [
+       null,
+       null
+      ],
+      "weighted_design_cp_n_eff": 0,
+      "weighted_kish_wilson95_secondary": [
+       null,
+       null
+      ]
+     },
+     "gold_units_undeterminable": 0,
+     "items_uncodable": 34,
+     "strict_precision": {
+      "clusters": 0,
+      "k": 0,
+      "n": 0,
+      "unweighted": null,
+      "unweighted_cluster_bootstrap95": [
+       null,
+       null
+      ],
+      "unweighted_wilson95": [
+       null,
+       null
+      ],
+      "weighted": null,
+      "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+       null,
+       null
+      ],
+      "weighted_design_cp95": [
+       null,
+       null
+      ],
+      "weighted_design_cp_n_eff": 0,
+      "weighted_kish_wilson95_secondary": [
+       null,
+       null
+      ]
+     }
+    }
+   },
+   "note": "DESCRIPTIVE ONLY (PROTOCOL v1.1 s.6.3): too few expected gold units; no pass or fail is claimed",
+   "targets_status": {
+    "printed_disposal": {
+     "coverage": "DESCRIPTIVE_ONLY",
+     "strict_precision": "DESCRIPTIVE_ONLY"
+    },
+    "substantive_result": {
+     "coverage": "DESCRIPTIVE_ONLY",
+     "strict_precision": "DESCRIPTIVE_ONLY"
+    }
+   }
+  }
+ },
+ "targets": {
+  "coverage": 0.85,
+  "precision": 0.95
+ },
+ "targets_status": {
+  "printed_disposal": {
+   "coverage": "NOT_MET",
+   "strict_precision": "NOT_MET"
+  },
+  "substantive_result": {
+   "coverage": "NOT_MET",
+   "strict_precision": "NOT_MET"
+  }
+ },
+ "task": "outcome",
+ "uncodable": {
+  "codes": {
+   "OUT_OF_SCOPE": 34
+  },
+  "items": 34,
+  "predictions_on_uncodable_items": 115,
+  "rule": "kept in the sample, outside scored denominators, reported here and as coverage_counting_uncodable_items_as_not_covered; never replaced",
+  "share": 0.1133
+ }
+}

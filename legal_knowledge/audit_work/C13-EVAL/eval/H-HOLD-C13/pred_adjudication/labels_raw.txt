@@ -1,0 +1,100 @@
+1|CORRECT||court's conclusion applying the law (para 4 struck down) to uphold AFT invalid-pension order
+2|INCORRECT|FACT_FINDING|appraisal that GCM sentence was lenient; the ruling is the next sentence
+3|INCORRECT|QUOTED_PRECEDENT|description of the distinguished precedent's reasoning
+4|CORRECT||court's statement of the limits of judicial review of punishment, the rule it then applies (proportionality)
+5|CORRECT||rejection of contention applying sponsorship guidelines to facts
+6|INCORRECT|FACT_FINDING|observation that respondents accepted illegality
+7|CORRECT|RESTATEMENT|due-process conclusion restated more clearly in the next sentence ("constrained to hold")
+8|CORRECT||legal character of discharge certificate under s.17(4) Navy Act, relied on for qualifying service
+9|INCORRECT|QUOTED_PRECEDENT|span is inside a quotation from an earlier judgment
+10|INCORRECT|FACT_FINDING|appraisal of documents
+11|INCORRECT|PROCEDURAL_OR_NARRATIVE|introduces the text of Rule 13
+12|INCORRECT|FACT_FINDING|characterisation of what happened to the petitioner; the proposition is in the preceding sentences
+13|CORRECT||natural-justice issue decided on the facts
+14|INCORRECT|OTHER|reproduced text of a pension instruction
+15|CORRECT||law applied: date of enrolment is the material date for qualifying service
+16|CORRECT||court's ruling on the respondents' remaining power under Rule 22
+17|INCORRECT|OPERATIVE|bare conclusion not to interfere / affirm
+18|INCORRECT|FACT_FINDING|date observation
+19|CORRECT||earlier SC order lays down no ratio the applicants can rely on
+20|CORRECT||Dharamvir Singh presumption adopted and applied: onus not discharged
+21|INCORRECT|FACT_FINDING|medical history narrative
+22|INCORRECT|PROCEDURAL_OR_NARRATIVE|description of an earlier judgment
+23|CORRECT||balance of convenience against interim stay (law applied)
+24|INCORRECT|FACT_FINDING|answer in personal statement
+25|CORRECT||proportionality conclusion: lesser punishment should have been imposed
+26|INCORRECT|OPERATIVE|bare dismissal
+27|CORRECT||first half of the court's holding applying Ram Avtar / Dharamvir Singh
+28|INCORRECT|FACT_FINDING|medical board opinion recited
+29|INCORRECT|FACT_FINDING|enrolment date narrative
+30|CORRECT||Ram Avtar rounding-off principle stated as settled law and applied
+31|INCORRECT|FACT_FINDING|admitted fact (attributability conceded)
+32|CORRECT||"we hold" Category B / entitled to disability pension
+33|INCORRECT|FACT_FINDING|sentence fragment about GCM record
+34|INCORRECT|FACT_FINDING|fact narrative
+35|INCORRECT|SCOPE|recital of the High Court's holding by the SC
+36|CORRECT||additional evidence on revision permitted by s.160 / r.68
+37|INCORRECT|OTHER|court's remark on the nature of its jurisdiction; no issue decided in this sentence
+38|INCORRECT|FACT_FINDING|appraisal of evidence
+39|INCORRECT|COUNSEL_VOICE|respondents' claim
+40|CORRECT||legal status of para 4 (struck down) as basis of the decision
+41|INCORRECT|FACT_FINDING|finding of non-compliance (facts)
+42|INCORRECT|QUOTED_PRECEDENT|end of a quotation from an earlier judgment
+43|CORRECT||delay/laches: HC entitled to decline in its discretion
+44|INCORRECT|OTHER|sentence fragment (rule range) without the proposition
+45|INCORRECT|FACT_FINDING|fact
+46|INCORRECT|FACT_FINDING|documents prove second marriage
+47|INCORRECT|FACT_FINDING|undisputed non-payment
+48|INCORRECT|OTHER|bare statement of agreement with a precedent; the proposition is the next sentence (evaluator had incidentally seen one truth row of this item in a CSV header print before adjudicating; disclosed)
+49|CORRECT||applicants not entitled under the 21.11.1997 order
+50|INCORRECT|QUOTED_PRECEDENT|description of what an earlier SC decision held
+51|CORRECT||Union's submissions rejected in view of D.S. Nakara
+52|INCORRECT|OPERATIVE|no-recovery direction
+53|INCORRECT|QUOTED_PRECEDENT|description of an earlier decision
+54|CORRECT||war injury pension falls under category E(i) (law applied)
+55|CORRECT||Bijender Singh onus principle stated as the governing law and applied (same treatment as #30)
+56|CORRECT||no reasonable person could have dismissed: proportionality holding
+57|INCORRECT|QUOTED_PRECEDENT|inside a quotation from Bijender Singh
+58|INCORRECT|OTHER|supporting observation; the proportionality holding is stated in the surrounding sentences
+59|INCORRECT|QUOTED_PRECEDENT|narrative of an earlier bench's result
+60|CORRECT||Rule 6 bar does not apply to Rule 9(4) compensation
+61|INCORRECT|FACT_FINDING|plea rejected for lack of evidence
+62|INCORRECT|SCOPE|recital of the Tribunal's conclusion
+63|INCORRECT|OPERATIVE|bare "no merit"
+64|INCORRECT|OPERATIVE|bare no-interference conclusion
+65|CORRECT||back-wages issue decided (50% salary) on stated grounds
+66|INCORRECT|OTHER|remark on nature of jurisdiction (same as #37)
+67|INCORRECT|FACT_FINDING|fact
+68|CORRECT||attributability presumption applied; MB report cannot defeat rounding-off claim
+69|INCORRECT|FACT_FINDING|appraisal of witness evidence
+70|INCORRECT|QUOTED_PRECEDENT|fragment inside a quotation from an earlier judgment
+71|CORRECT||request for extension valid and within jurisdiction (law applied; supports arbitrary-rejection holding)
+72|INCORRECT|PROCEDURAL_OR_NARRATIVE|premise that termination was quashed
+73|INCORRECT|QUOTED_PRECEDENT|inside a quotation of a Supreme Court paragraph
+74|INCORRECT|FACT_FINDING|length of service
+75|CORRECT||petitioner cannot challenge invalidation for procedural non-compliance (issue decided)
+76|INCORRECT|FACT_FINDING|record fact
+77|INCORRECT|OTHER|remark on nature of jurisdiction (same as #37)
+78|INCORRECT|QUOTED_PRECEDENT|inside a quotation of a Supreme Court paragraph
+79|INCORRECT|QUOTED_PRECEDENT|end of a quotation from an earlier judgment
+80|CORRECT||DV ban must not be imposed without sufficient cause
+81|INCORRECT|OPERATIVE|bare no-interference conclusion
+82|UNCLEAR||general statement about courts martial; necessity to the decision cannot be determined from the text
+83|INCORRECT|OPERATIVE|bare dismissal
+84|INCORRECT|PROCEDURAL_OR_NARRATIVE|introduces the text of s.10 Army Act
+85|CORRECT|RESTATEMENT|answer to framed question 5, restating the rejection in the preceding sentence
+86|CORRECT||extension request validly made during currency of offer (law applied)
+87|CORRECT||guilt need not be examined because no proceedings under the Act were initiated (reasoning step of the holding)
+88|CORRECT||later letter only clarified the subsisting policy position (law applied)
+89|INCORRECT|FACT_FINDING|fact
+90|INCORRECT|OBITER|normal remand course stated and then not followed
+91|CORRECT||attributability presumption applied; MB report cannot defeat claim
+92|CORRECT||Article 19 challenge rejected
+93|INCORRECT|OPERATIVE|direction pending Tribunal decision
+94|INCORRECT|FACT_FINDING|fact
+95|INCORRECT|COUNSEL_VOICE|respondents' submission
+96|INCORRECT|FACT_FINDING|fact
+97|INCORRECT|PROCEDURAL_OR_NARRATIVE|introduces the text of s.21 Army Act
+98|INCORRECT|OPERATIVE|bare dismissal
+99|INCORRECT|FACT_FINDING|length of service (distinguishing facts)
+100|CORRECT||entitlement to disability pension held by applying Ex Sub Gawas Anil Madso

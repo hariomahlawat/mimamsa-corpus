@@ -1,0 +1,419 @@
+{
+ "S0_official_reproduced": {
+  "precision_reference_match_LOWER_BOUND": {
+   "clusters": 85,
+   "k": 90.0,
+   "n": 574.0,
+   "unweighted": 0.1568,
+   "unweighted_cluster_bootstrap95": [
+    0.1359,
+    0.1783
+   ],
+   "unweighted_wilson95": [
+    0.1293,
+    0.1888
+   ],
+   "weighted": 0.1556,
+   "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+    0.1312,
+    0.1808
+   ],
+   "weighted_design_cp95": [
+    0.1236,
+    0.1923
+   ],
+   "weighted_design_cp_n_eff": 455.6,
+   "weighted_kish_wilson95_secondary": [
+    0.1253,
+    0.1918
+   ]
+  },
+  "recall": {
+   "clusters": 86,
+   "k": 90.0,
+   "n": 183.0,
+   "unweighted": 0.4918,
+   "unweighted_cluster_bootstrap95": [
+    0.4219,
+    0.5628
+   ],
+   "unweighted_wilson95": [
+    0.4203,
+    0.5637
+   ],
+   "weighted": 0.5165,
+   "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+    0.4282,
+    0.6008
+   ],
+   "weighted_design_cp95": [
+    0.4241,
+    0.6081
+   ],
+   "weighted_design_cp_n_eff": 121.4,
+   "weighted_kish_wilson95_secondary": [
+    0.4336,
+    0.5986
+   ]
+  }
+ },
+ "S1_exclude_items_with_any_borderline_tag": {
+  "precision_reference_match_LOWER_BOUND": {
+   "clusters": 33,
+   "k": 45.0,
+   "n": 194.0,
+   "unweighted": 0.232,
+   "unweighted_cluster_bootstrap95": [
+    0.2056,
+    0.2577
+   ],
+   "unweighted_wilson95": [
+    0.1781,
+    0.2962
+   ],
+   "weighted": 0.2381,
+   "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+    0.2103,
+    0.2655
+   ],
+   "weighted_design_cp95": [
+    0.1734,
+    0.3131
+   ],
+   "weighted_design_cp_n_eff": 154.9,
+   "weighted_kish_wilson95_secondary": [
+    0.1779,
+    0.311
+   ]
+  },
+  "recall": {
+   "clusters": 30,
+   "k": 45.0,
+   "n": 67.0,
+   "unweighted": 0.6716,
+   "unweighted_cluster_bootstrap95": [
+    0.5821,
+    0.7571
+   ],
+   "unweighted_wilson95": [
+    0.5526,
+    0.7721
+   ],
+   "weighted": 0.6939,
+   "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+    0.5849,
+    0.7918
+   ],
+   "weighted_design_cp95": [
+    0.5509,
+    0.814
+   ],
+   "weighted_design_cp_n_eff": 52.2,
+   "weighted_kish_wilson95_secondary": [
+    0.5592,
+    0.8021
+   ]
+  }
+ },
+ "S2_exclude_items_tagged_GRANULARITY_SPLIT": {
+  "precision_reference_match_LOWER_BOUND": {
+   "clusters": 42,
+   "k": 57.0,
+   "n": 282.0,
+   "unweighted": 0.2021,
+   "unweighted_cluster_bootstrap95": [
+    0.1719,
+    0.2335
+   ],
+   "unweighted_wilson95": [
+    0.1594,
+    0.2529
+   ],
+   "weighted": 0.2013,
+   "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+    0.1633,
+    0.2358
+   ],
+   "weighted_design_cp95": [
+    0.1519,
+    0.2584
+   ],
+   "weighted_design_cp_n_eff": 234.6,
+   "weighted_kish_wilson95_secondary": [
+    0.155,
+    0.2572
+   ]
+  },
+  "recall": {
+   "clusters": 40,
+   "k": 57.0,
+   "n": 86.0,
+   "unweighted": 0.6628,
+   "unweighted_cluster_bootstrap95": [
+    0.5667,
+    0.7528
+   ],
+   "unweighted_wilson95": [
+    0.5578,
+    0.7538
+   ],
+   "weighted": 0.6703,
+   "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+    0.5593,
+    0.7754
+   ],
+   "weighted_design_cp95": [
+    0.5356,
+    0.7872
+   ],
+   "weighted_design_cp_n_eff": 59.0,
+   "weighted_kish_wilson95_secondary": [
+    0.5533,
+    0.7693
+   ]
+  }
+ },
+ "S3_many_to_one_vs_adjudicated_gold": {
+  "precision_reference_match_LOWER_BOUND": {
+   "clusters": 85,
+   "k": 109.0,
+   "n": 574.0,
+   "unweighted": 0.1899,
+   "unweighted_cluster_bootstrap95": [
+    0.1631,
+    0.2165
+   ],
+   "unweighted_wilson95": [
+    0.1599,
+    0.224
+   ],
+   "weighted": 0.1899,
+   "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+    0.1593,
+    0.22
+   ],
+   "weighted_design_cp95": [
+    0.1549,
+    0.229
+   ],
+   "weighted_design_cp_n_eff": 455.6,
+   "weighted_kish_wilson95_secondary": [
+    0.1565,
+    0.2284
+   ]
+  },
+  "recall": {
+   "clusters": 86,
+   "k": 90.0,
+   "n": 183.0,
+   "unweighted": 0.4918,
+   "unweighted_cluster_bootstrap95": [
+    0.4261,
+    0.5596
+   ],
+   "unweighted_wilson95": [
+    0.4203,
+    0.5637
+   ],
+   "weighted": 0.5165,
+   "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+    0.4342,
+    0.6056
+   ],
+   "weighted_design_cp95": [
+    0.4241,
+    0.6081
+   ],
+   "weighted_design_cp_n_eff": 121.4,
+   "weighted_kish_wilson95_secondary": [
+    0.4336,
+    0.5986
+   ]
+  }
+ },
+ "S4_lenient_gold_union_adjudicated_and_both_coders": {
+  "precision_reference_match_LOWER_BOUND": {
+   "clusters": 85,
+   "k": 178.0,
+   "n": 574.0,
+   "unweighted": 0.3101,
+   "unweighted_cluster_bootstrap95": [
+    0.2793,
+    0.343
+   ],
+   "unweighted_wilson95": [
+    0.2736,
+    0.3491
+   ],
+   "weighted": 0.3309,
+   "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+    0.2943,
+    0.3711
+   ],
+   "weighted_design_cp95": [
+    0.2878,
+    0.3762
+   ],
+   "weighted_design_cp_n_eff": 455.6,
+   "weighted_kish_wilson95_secondary": [
+    0.2892,
+    0.3753
+   ]
+  },
+  "recall": {
+   "clusters": 86,
+   "k": 90.0,
+   "n": 183.0,
+   "unweighted": 0.4918,
+   "unweighted_cluster_bootstrap95": [
+    0.4249,
+    0.5602
+   ],
+   "unweighted_wilson95": [
+    0.4203,
+    0.5637
+   ],
+   "weighted": 0.5165,
+   "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+    0.4285,
+    0.6036
+   ],
+   "weighted_design_cp95": [
+    0.4241,
+    0.6081
+   ],
+   "weighted_design_cp_n_eff": 121.4,
+   "weighted_kish_wilson95_secondary": [
+    0.4336,
+    0.5986
+   ]
+  }
+ },
+ "S4_without_primary_pre_exposed": {
+  "precision_reference_match_LOWER_BOUND": {
+   "clusters": 79,
+   "k": 169.0,
+   "n": 543.0,
+   "unweighted": 0.3112,
+   "unweighted_cluster_bootstrap95": [
+    0.2777,
+    0.3465
+   ],
+   "unweighted_wilson95": [
+    0.2737,
+    0.3514
+   ],
+   "weighted": 0.3327,
+   "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+    0.2954,
+    0.3699
+   ],
+   "weighted_design_cp95": [
+    0.2884,
+    0.3792
+   ],
+   "weighted_design_cp_n_eff": 433.6,
+   "weighted_kish_wilson95_secondary": [
+    0.2899,
+    0.3783
+   ]
+  },
+  "recall": {
+   "clusters": 79,
+   "k": 88.0,
+   "n": 172.0,
+   "unweighted": 0.5116,
+   "unweighted_cluster_bootstrap95": [
+    0.4412,
+    0.5838
+   ],
+   "unweighted_wilson95": [
+    0.4375,
+    0.5853
+   ],
+   "weighted": 0.5352,
+   "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+    0.446,
+    0.6224
+   ],
+   "weighted_design_cp95": [
+    0.439,
+    0.6296
+   ],
+   "weighted_design_cp_n_eff": 113.0,
+   "weighted_kish_wilson95_secondary": [
+    0.4499,
+    0.6185
+   ]
+  }
+ },
+ "S5_lenient_union_and_tagged_gold_counted_recalled": {
+  "precision_reference_match_LOWER_BOUND": {
+   "clusters": 85,
+   "k": 178.0,
+   "n": 574.0,
+   "unweighted": 0.3101,
+   "unweighted_cluster_bootstrap95": [
+    0.2782,
+    0.3416
+   ],
+   "unweighted_wilson95": [
+    0.2736,
+    0.3491
+   ],
+   "weighted": 0.3309,
+   "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+    0.2931,
+    0.3675
+   ],
+   "weighted_design_cp95": [
+    0.2878,
+    0.3762
+   ],
+   "weighted_design_cp_n_eff": 455.6,
+   "weighted_kish_wilson95_secondary": [
+    0.2892,
+    0.3753
+   ]
+  },
+  "recall": {
+   "clusters": 86,
+   "k": 161.0,
+   "n": 183.0,
+   "unweighted": 0.8798,
+   "unweighted_cluster_bootstrap95": [
+    0.8221,
+    0.9293
+   ],
+   "unweighted_wilson95": [
+    0.8247,
+    0.9193
+   ],
+   "weighted": 0.8814,
+   "weighted_cluster_bootstrap95_secondary_not_for_pass_rule": [
+    0.8207,
+    0.9374
+   ],
+   "weighted_design_cp95": [
+    0.8059,
+    0.9353
+   ],
+   "weighted_design_cp_n_eff": 110.0,
+   "weighted_kish_wilson95_secondary": [
+    0.8167,
+    0.9254
+   ]
+  }
+ },
+ "items_with_any_tag": 56,
+ "note": "POST-HOC definitional sensitivity (specified after the headline was computed). Not a headline figure. Recall vs adjudicated gold unless stated; true (adjudicated) precision does not depend on the gold.",
+ "scored_items": 89,
+ "tag_items": {
+  "COUNSEL_VOICE": 1,
+  "FACT_FINDING": 11,
+  "GRANULARITY_SPLIT": 46,
+  "OBITER": 11,
+  "QUOTED_PRECEDENT": 3,
+  "SCOPE": 10
+ }
+}
