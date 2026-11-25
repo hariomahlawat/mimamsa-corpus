@@ -187,10 +187,10 @@ def build_detector_eval():
         # a page flagged only `blank` is "no OCR needed", as in text_quality.document_summary
         pred = v["usable"] == "NO" and v["flags"] != "blank"
         rows.append({**lab, "detector_flags": v["flags"], "detector_unusable": "YES" if pred else "NO"})
-    def score(marginal_as):
+    def score(marginal_as, key="label"):
         tp = fp = fn = tn = 0
         for r in rows:
-            lab = r["label"]
+            lab = r[key]
             if lab == "MARGINAL":
                 if marginal_as is None:
                     continue
@@ -210,6 +210,8 @@ def build_detector_eval():
     res["marginal_excluded"] = score(None)
     res["marginal_as_unusable"] = score(True)
     res["marginal_as_usable"] = score(False)
+    res["with_original_uncorrected_labels"] = score(None, "original_label")
+    res["label_corrections"] = sum(1 for r in rows if r.get("correction"))
     res["labels"] = dict(Counter(r["label"] for r in labels))
     res["by_stratum"] = {s: dict(Counter((r["label"], r["detector_unusable"]) for r in rows if r["sample_stratum"] == s).most_common())
                          for s in sorted({r["sample_stratum"] for r in rows})}
@@ -221,7 +223,8 @@ def build_detector_eval():
                    "and, for pages with under 100 characters, a contact sheet of page images. Sample stratified by detector "
                    "stratum (so it over-represents flagged pages); precision/recall are for this stratified sample, not "
                    "corpus prevalence. Not a human review.")
-    fields = ["label_id", "sha256", "page", "sample_stratum", "label", "detector_flags", "detector_unusable"]
+    fields = ["label_id", "sha256", "page", "sample_stratum", "label", "original_label", "correction", "detector_flags",
+              "detector_unusable"]
     return {"DETECTOR_VALIDATION.csv": csv_text(rows, fields), "DETECTOR_VALIDATION.json": js(res)}
 
 
@@ -308,6 +311,9 @@ def jobs_index():
     return json.loads(p.read_text(encoding="utf-8")) if p.exists() else []
 
 
+CACHE_BY_ENGINE = {"rapidocr": "ocr_cache", "paddle_v5_mobile": "ocr_cache_paddle"}
+
+
 def assemble(cache: Path):
     """Copy OCR page cache into ocr_text/<doc_id>.txt (page markers) and OCR_PAGES.csv. Writes files."""
     jobs = jobs_index()
@@ -315,7 +321,7 @@ def assemble(cache: Path):
     tdir.mkdir(exist_ok=True)
     rows = []
     for j in jobs:
-        d = cache / j["sha256"]
+        d = (cache.parent / CACHE_BY_ENGINE[j["engine"]]) / j["sha256"]
         pages = []
         for p in j["pages"]:
             f = d / f"page-{p:04d}.json"
@@ -333,9 +339,9 @@ def assemble(cache: Path):
                          "load1": p.get("load1", ""), "chars": v["metrics"]["chars"],
                          "ocr_text_usable": "YES" if v["usable"] else "NO", "ocr_text_flags": ";".join(v["flags"]),
                          "dict_ratio": v["metrics"]["dict_ratio"], "engine_conf_mean": p.get("engine_conf_mean", ""),
-                         "early_stop_skipped_pages": len(skipped) if p is pages[-1] else ""})
+                         "early_stop_skipped_pages": len(skipped) if p is pages[-1] else "", "engine": j["engine"]})
     fields = ["doc_id", "sha256", "page", "seconds", "load1", "chars", "ocr_text_usable", "ocr_text_flags", "dict_ratio",
-              "engine_conf_mean", "early_stop_skipped_pages"]
+              "engine_conf_mean", "early_stop_skipped_pages", "engine"]
     (OUT / "OCR_PAGES.csv").write_text(csv_text(rows, fields), encoding="utf-8")
     return len(rows)
 

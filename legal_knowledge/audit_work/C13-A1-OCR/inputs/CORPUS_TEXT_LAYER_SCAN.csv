@@ -139,7 +139,7 @@ sha256,doc_id,court,year,relevance,text_method,verdict,pages,usable_pages,unusab
 08fa2d910aed199da668af37ae25857955c3c67ee1b8e2b17c88b3f32ffa48e3,hc-ph-2025-cwp-7987-2025-phhc010410422025-1-2025-03-21,High Court of Punjab and Haryana,2025,relevant,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 09054dad355f7d588cef35ecbda515efc18289c50d9e3ef8e9360966ee63938c,sc-2017-sgt-chaman-lal-2017insc662,Supreme Court of India,2017,relevant,pdf_text,TEXT_OK,22,22,0,1.0,NO,
 091e0702b2635bc416e66b0779a1e2c001a95e4e0469ee6ef868719bec323ce2,hc-allahabad-2022-capl-5746-2022-uphc011793232022-1-2022-09-29,Allahabad High Court,2022,borderline,pdf_text,TEXT_OK,1,1,0,1.0,NO,
-091e1678f03df8447ffba7259087060dd58ca3022c6db4362076a32281247657,hc-ph-2026-cwp-5122-2020-phhc010251122020-1-2026-03-18,High Court of Punjab and Haryana,2026,borderline,ocr,OCR_REQUIRED,9,0,9,0.0,NO,few_chars
+091e1678f03df8447ffba7259087060dd58ca3022c6db4362076a32281247657,hc-ph-2026-cwp-5122-2020-phhc010251122020-1-2026-03-18,High Court of Punjab and Haryana,2026,borderline,ocr,OCR_REQUIRED,9,0,9,0.0,NO,image_only
 093bda1ec26982e33eca3430cc419fb891a6715b80e602d03b43f2c128565d7e,hc-ph-2010-cwp-3022-2008-phhc010666002008-1-2010-04-05,High Court of Punjab and Haryana,2010,relevant,pdf_text,TEXT_OK,2,1,0,1.0,NO,blank
 094ea2fb4cdc96e2a0352d3a9894baed08d6e72ed40a5d2069e6a69947ad8e2b,hc-delhi-2019-w-p-c-4306-2017-dlhc012496842017-1-2019-02-28,High Court of Delhi,2019,borderline,pdf_text,TEXT_OK,18,18,0,1.0,NO,
 09517344deb889582387f1d097ea8f93e0e886ccb5d7440afaa25b547e3caad0,hc-delhi-2025-w-p-c-6452-2025-dlhc010300622025-1-2026-04-20,High Court of Delhi,2025,borderline,pdf_text,TEXT_OK,6,6,0,1.0,NO,
@@ -343,7 +343,7 @@ sha256,doc_id,court,year,relevance,text_method,verdict,pages,usable_pages,unusab
 160b3a1d490caf08b2a7b1c0424f2703eac4b7baa8e5449755eeb37bf0c8d551,hc-delhi-2025-w-p-c-4659-2025-dlhc010201992025-1-2025-04-15,High Court of Delhi,2025,relevant,pdf_text,TEXT_OK,5,5,0,1.0,NO,
 163622030094768daedf107b30f80349ff46d7b0dc8705b8453588723ed2e405,sc-2000-union-of-india-and-ors-2000insc1,Supreme Court of India,2000,borderline,pdf_text,TEXT_OK,15,15,0,1.0,NO,
 1679fda14c8bb867bf866c24e3a894b053f067ce42c04b829293317fb10452b7,hc-delhi-2021-w-p-c-5463-2021-dlhc010179372021-1-2021-06-02,High Court of Delhi,2021,relevant,pdf_text,TEXT_OK,9,9,0,1.0,NO,
-167ca729c26726fa30bd71924392f3fc4ee9c368c792d7bcc4d9294396101a25,hc-ph-2024-cwp-29798-2024-phhc011511432024-1-2024-11-05,High Court of Punjab and Haryana,2024,relevant,ocr,OCR_REQUIRED,2,0,2,0.0,NO,few_chars
+167ca729c26726fa30bd71924392f3fc4ee9c368c792d7bcc4d9294396101a25,hc-ph-2024-cwp-29798-2024-phhc011511432024-1-2024-11-05,High Court of Punjab and Haryana,2024,relevant,ocr,OCR_REQUIRED,2,0,2,0.0,NO,image_only
 16808614bbfa23cdbee40ed064c1bf25741f52dc07661f13e329d1941e3f60d5,hc-delhi-2024-w-p-c-16033-2022-dlhc010435552022-1-2024-04-08,High Court of Delhi,2024,borderline,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 16815ad7dae3d1a263300289b81682aaf1fe8088c087bb645c48ca84a5fa6a65,hc-allahabad-2022-wria-18124-2022-uphc012017222022-1-2022-12-22,Allahabad High Court,2022,borderline,pdf_text,TEXT_OK,1,1,0,1.0,NO,
 169f2cdda2e216185e33b9cb3364d1212c87a31486b5dea32fef191000434a6e,hc-delhi-2026-w-p-c-16752-2025-dlhc010859122025-1-2026-05-18,High Court of Delhi,2026,borderline,pdf_text,TEXT_OK,15,15,0,1.0,NO,
@@ -629,7 +629,7 @@ sha256,doc_id,court,year,relevance,text_method,verdict,pages,usable_pages,unusab
 28a5df19733c47e5a9546d81251df9d2020f1a6ca3af4736e5b9b6bcedbcb07c,hc-ph-2026-cwp-8935-2025-phhc010499722025-1-2026-05-18,High Court of Punjab and Haryana,2026,relevant,pdf_text,TEXT_OK,3,3,0,1.0,NO,
 28bf4669017e78033c07bca88047c30feffe10f295fda500d589771f75ad956d,hc-delhi-2018-w-p-c-12-2018-dlhc010000342018-1-2018-01-03,High Court of Delhi,2018,relevant,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 28c5c0721fcd6b54444b63917b081a1adf0598b05cddf7595eed4593ebf3478e,hc-delhi-2026-w-p-c-7353-2026-dlhc010238342026-1-2026-08-11,High Court of Delhi,2026,relevant,pdf_text,TEXT_OK,3,3,0,1.0,NO,
-28d18254dab103f66b3a9fdd716e9632294ac9054e7eca029e86c28c93636889,hc-ph-2011-lpa-1129-2010-phhc010940462010-1-2011-02-17,High Court of Punjab and Haryana,2011,borderline,pdf_text,OCR_REQUIRED,3,2,1,0.667,NO,few_chars
+28d18254dab103f66b3a9fdd716e9632294ac9054e7eca029e86c28c93636889,hc-ph-2011-lpa-1129-2010-phhc010940462010-1-2011-02-17,High Court of Punjab and Haryana,2011,borderline,pdf_text,OCR_REQUIRED,3,2,1,0.667,NO,image_only
 28d55e1a911df1045e073132924826a0c7444e71617c5d90ae188814d6cb65d6,hc-allahabad-2019-wria-6078-2019-uphc010755092019-1-2019-05-17,Allahabad High Court,2019,borderline,pdf_text,TEXT_OK,1,1,0,1.0,NO,
 28ea7260d8d3a5e84c9da05219d6bfd58730fb2f405c2a5bd78890e8e3531727,hc-ph-2025-cwp-34073-2024-phhc011765682024-1-2025-08-12,High Court of Punjab and Haryana,2025,relevant,pdf_text,TEXT_OK,6,6,0,1.0,NO,
 28f88d53cdcab7988fc26acec20e9fe85f9810ee646f182a6c987966f732d67a,sc-2009-secretary-ministry-of-defence-2009insc1059,Supreme Court of India,2009,relevant,pdf_text,TEXT_OK,21,21,0,1.0,NO,
@@ -766,7 +766,7 @@ sha256,doc_id,court,year,relevance,text_method,verdict,pages,usable_pages,unusab
 31f195bb7e96d993dacdce8dceb7741a0d5ef970078692e32f936dbfa8a73512,hc-ph-2012-cwp-20478-2010-phhc010733262010-1-2012-01-05,High Court of Punjab and Haryana,2012,borderline,pdf_text,TEXT_OK,1,1,0,1.0,NO,
 3215558a9e1793860c20e36e7d7e799edd2d0ee0e051a37a69f534aa0e9d96f6,hc-delhi-2022-w-p-c-13772-2022-dlhc010363782022-1-2022-11-04,High Court of Delhi,2022,borderline,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 3218e2f6d104fabda1508fbcef9c07e4ddc5e65ba1039e252702420d940872ad,hc-delhi-2019-w-p-c-7620-2019-dlhc010296262019-1-2019-07-17,High Court of Delhi,2019,relevant,pdf_text,TEXT_OK,2,2,0,1.0,NO,
-321ef6909265fb9aa44846c9835b101b5a99e5ed642be01aa5220a97d977aac6,hc-ph-2009-lpa-969-2009-phhc010863102009-1-2009-10-28,High Court of Punjab and Haryana,2009,borderline,pdf_text,OCR_REQUIRED,3,2,1,0.667,NO,few_chars
+321ef6909265fb9aa44846c9835b101b5a99e5ed642be01aa5220a97d977aac6,hc-ph-2009-lpa-969-2009-phhc010863102009-1-2009-10-28,High Court of Punjab and Haryana,2009,borderline,pdf_text,OCR_REQUIRED,3,2,1,0.667,NO,image_only
 32225ff191606a05dd11675967e691ed51cac7fe43a4367bd2601802c2eed178,hc-delhi-2020-w-p-c-1195-2020-dlhc010104902020-1-2020-09-11,High Court of Delhi,2020,borderline,pdf_text,OCR_REQUIRED,81,80,1,0.988,NO,image_only
 322ab2ff0991ac85a62651b82e097e26ceedbb341507a59ee80bd13d4263dd05,hc-delhi-2026-w-p-c-3979-2026-dlhc010118642026-1-2026-03-27,High Court of Delhi,2026,relevant,pdf_text,TEXT_OK,9,9,0,1.0,NO,
 323d9fd56a603648170dbf00bfbe247113735556affd7786cb7ca546d7f35a77,hc-jkl-2019-swp-1262-2018-jkhc020053352018-1-2019-09-04,High Court of Jammu and Kashmir,2019,relevant,pdf_text,TEXT_OK,1,1,0,1.0,NO,
@@ -899,7 +899,7 @@ sha256,doc_id,court,year,relevance,text_method,verdict,pages,usable_pages,unusab
 3b25cc92fad94713042f8e6bdcd1a5aa911e37d6e8a975921142e3e9fdd0cd15,hc-delhi-2025-w-p-c-2122-2025-dlhc011075522024-1-2025-02-21,High Court of Delhi,2025,relevant,pdf_text,TEXT_OK,6,6,0,1.0,NO,
 3b347f95d7ee0f52a19cb170e77eb0568a604a87e2a3c355c7f9768ef6425687,hc-delhi-2008-w-p-c-940-2008-dlhc010198262008-1-2008-11-20,High Court of Delhi,2008,relevant,pdf_text,OCR_REQUIRED,8,6,2,0.75,NO,low_dictionary;low_letter_share
 3b3af93fb4c0bee4162cd86c6b9328c64828cb07a5d76b1c02c55c8cbc3985df,hc-delhi-2025-w-p-c-10904-2024-dlhc010482102024-1-2025-11-11,High Court of Delhi,2025,borderline,pdf_text,TEXT_OK,53,53,0,1.0,NO,
-3b3d43927f0e756a2fb7829db3d842231330c0f6b81c0a7383e7473ce83ec0f6,hc-ph-2009-cwp-18938-2008-phhc010624102008-1-2009-02-04,High Court of Punjab and Haryana,2009,relevant,pdf_text,OCR_REQUIRED,7,6,1,0.857,NO,few_chars
+3b3d43927f0e756a2fb7829db3d842231330c0f6b81c0a7383e7473ce83ec0f6,hc-ph-2009-cwp-18938-2008-phhc010624102008-1-2009-02-04,High Court of Punjab and Haryana,2009,relevant,pdf_text,OCR_REQUIRED,7,6,1,0.857,NO,image_only
 3b48a1d76f99d706090a36cf518e02cb6156d6388aeea93d5030342d630f3321,hc-delhi-2025-w-p-c-11587-2025-dlhc010530752025-1-2025-08-04,High Court of Delhi,2025,relevant,pdf_text,TEXT_OK,8,8,0,1.0,NO,
 3b48f4403e6adc94d2b5ac998493b4a4987c3fd64b8b27de528764efee0bd949,hc-jkl-2026-wp-c-1748-2024-jkhc020039462024-1-2026-02-09,High Court of Jammu and Kashmir,2026,relevant,pdf_text,TEXT_OK,6,6,0,1.0,NO,
 3b539947b12ca605ec53fcb1cbcd473218db9059b11ec238b5b97ead17d62596,hc-ph-2016-cwp-12647-2016-phhc010769902016-1-2016-07-01,High Court of Punjab and Haryana,2016,relevant,pdf_text,TEXT_OK,23,23,0,1.0,NO,
@@ -1063,7 +1063,7 @@ sha256,doc_id,court,year,relevance,text_method,verdict,pages,usable_pages,unusab
 45ff7701691be0547279de424fdba5257bbacd395518421ca626ef5570cc1b15,hc-ph-2025-cacp-69-2025-phhc011098652025-1-2025-07-28,High Court of Punjab and Haryana,2025,borderline,pdf_text,TEXT_OK,1,1,0,1.0,NO,
 4603a207489bdff954bcb59c9042b3fe18df6ed88361d05311624cce9af3ffc0,sc-2015-union-of-india-and-ors-2015insc611,Supreme Court of India,2015,relevant,pdf_text,TEXT_OK,13,13,0,1.0,NO,
 46090100ce2140aa102e8a4221d72d4abbb0b691bfa7b7e4844369916c2f2d0d,hc-delhi-2025-w-p-c-11077-2019-dlhc010414422019-1-2025-11-27,High Court of Delhi,2025,relevant,pdf_text,TEXT_OK,5,5,0,1.0,NO,
-46155cc20adbc191c3aa47dfedcf7aebd1ca3d6e3c115a8c280174946ea431ed,sc-2023-anoop-baranwal-2023insc190,Supreme Court of India,2023,borderline,pdf_text,OCR_REQUIRED,245,236,9,0.963,NO,few_chars;image_only;low_letter_share
+46155cc20adbc191c3aa47dfedcf7aebd1ca3d6e3c115a8c280174946ea431ed,sc-2023-anoop-baranwal-2023insc190,Supreme Court of India,2023,borderline,pdf_text,OCR_REQUIRED,245,236,9,0.963,NO,image_only;low_letter_share
 4617cb801d9b6dcfeedf450070118056a21e93a6401fe461300896c05d46dace,hc-delhi-2025-w-p-c-10025-2025-dlhc010445962025-1-2025-07-16,High Court of Delhi,2025,relevant,pdf_text,TEXT_OK,7,7,0,1.0,NO,
 461a43a35bd13005db8bb1b2f08a61c5c2fc43069c6508453f6d54d40c0fa6ed,hc-delhi-2026-w-p-c-14454-2026-dlhc010470702026-1-2026-09-29,High Court of Delhi,2026,borderline,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 463eadecd09b4f4625bd3a7aa7f711c4ebb6574b84a190ed583a081ce4ed126a,hc-ph-2026-cwp-26587-2026-phhc011379472026-1-2026-08-20,High Court of Punjab and Haryana,2026,borderline,pdf_text,OCR_REQUIRED,2,0,2,0.0,NO,control_chars;implausible_chars;low_letter_share
@@ -1221,7 +1221,7 @@ sha256,doc_id,court,year,relevance,text_method,verdict,pages,usable_pages,unusab
 504bad02141a5de4ac3106e3233fb54b1fd0d53537d65d3045b92f60436ced47,hc-ph-2009-cwp-16570-2009-phhc010645742009-1-2009-10-30,High Court of Punjab and Haryana,2009,relevant,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 506d02635e4af4ec7d39557ab47ed6e56c5eb744976030f2ea547b02297d7b7b,hc-ph-2025-cwp-13726-2025-phhc010153082025-1-2025-08-21,High Court of Punjab and Haryana,2025,relevant,pdf_text,TEXT_OK,3,3,0,1.0,NO,
 506ffc31fe72e5f62daa661927665a3b4ee045fc6000d63337b7b74ee5c95b7f,hc-ph-2025-cwp-13750-2025-phhc010754332025-1-2025-08-21,High Court of Punjab and Haryana,2025,relevant,pdf_text,TEXT_OK,9,9,0,1.0,NO,
-5072e4cbbff6ee26b73c9a3d96babdb686a71d400160e9b8152c34b9bd7ecda7,hc-ph-2010-lpa-49-2009-phhc010857842009-1-2010-03-31,High Court of Punjab and Haryana,2010,relevant,pdf_text,OCR_REQUIRED,26,25,1,0.962,NO,few_chars
+5072e4cbbff6ee26b73c9a3d96babdb686a71d400160e9b8152c34b9bd7ecda7,hc-ph-2010-lpa-49-2009-phhc010857842009-1-2010-03-31,High Court of Punjab and Haryana,2010,relevant,pdf_text,OCR_REQUIRED,26,25,1,0.962,NO,image_only
 5095c3b28eddb546a34c28a06c8b81a3ab6bf8560324697976094cc866e6b344,hc-delhi-2016-mac-app-207-2010-dlhc010485742010-1-2016-02-02,High Court of Delhi,2016,borderline,pdf_text,TEXT_OK,10,10,0,1.0,NO,
 509d1d7601e5af5fcca47e5416f4b1b99c8071154a011d62499b9ff1cf9c46b8,hc-delhi-2024-w-p-c-16285-2024-dlhc010846012024-1-2024-11-25,High Court of Delhi,2024,relevant,pdf_text,TEXT_OK,4,4,0,1.0,NO,
 50aec19934e5a8d94e1fb830b0858a46a28e950c322f387c959830e8c5f5af61,sc-2008-ex-constable-ramvir-singh-2008insc1475,Supreme Court of India,2008,relevant,pdf_text,TEXT_OK,15,15,0,1.0,NO,
@@ -1790,7 +1790,7 @@ sha256,doc_id,court,year,relevance,text_method,verdict,pages,usable_pages,unusab
 75015d303923ed734b63ec806ba85526cf6e5a0853ff827c60abe400a046b5b9,hc-ph-2026-cwp-3201-2026-phhc010179672026-1-2026-02-25,High Court of Punjab and Haryana,2026,borderline,pdf_text,OCR_REQUIRED,4,3,1,0.75,NO,control_chars
 751e98aceead30677120444f5866f1fd37b4212fe9cd6aae7d5aaa4f4f607be3,hc-ph-2025-cwp-25623-2025-phhc011212022025-1-2025-09-01,High Court of Punjab and Haryana,2025,relevant,pdf_text,TEXT_OK,6,6,0,1.0,NO,
 752f3f0afd7ba12445ec1330fd86edd08395bc029eaa39fe8e736cc640210afc,hc-allahabad-2023-wria-38140-2014-uphc011909632014-1-2023-04-06,Allahabad High Court,2023,borderline,pdf_text,TEXT_OK,1,1,0,1.0,NO,
-7563e3b395aff1aebd828da751e453ef444218d35f2c4475d98f224430799995,hc-ph-2010-lpa-1093-2010-phhc010940062010-1-2010-09-06,High Court of Punjab and Haryana,2010,relevant,pdf_text,OCR_REQUIRED,4,3,1,0.75,NO,few_chars
+7563e3b395aff1aebd828da751e453ef444218d35f2c4475d98f224430799995,hc-ph-2010-lpa-1093-2010-phhc010940062010-1-2010-09-06,High Court of Punjab and Haryana,2010,relevant,pdf_text,OCR_REQUIRED,4,3,1,0.75,NO,image_only
 75801e22f6ddc53567df4cb5b9d8ff4a2a5dcf9ad1700be3e7489c5a8288cb37,hc-jkl-2018-owp-2525-2018-jkhc020106242018-1-2018-12-10,High Court of Jammu and Kashmir,2018,borderline,pdf_text,TEXT_OK,2,1,0,1.0,NO,blank
 75961fcbf58d73313ac0b2a76fe0760cd691e7523a7acea8b048ee287aca9771,hc-delhi-2025-w-p-c-7280-2024-dlhc010301432024-1-2025-07-01,High Court of Delhi,2025,relevant,pdf_text,TEXT_OK,5,5,0,1.0,NO,
 7599f3cc20f33e61c04a55fa1bdd22083be60b394690c06f53e8f2328863c752,hc-ph-2010-cwp-8750-2007-phhc010659432007-1-2010-04-09,High Court of Punjab and Haryana,2010,relevant,pdf_text,TEXT_OK,1,1,0,1.0,NO,
@@ -1886,7 +1886,7 @@ sha256,doc_id,court,year,relevance,text_method,verdict,pages,usable_pages,unusab
 7a6a821888e64596a44b1f14340154937a9638ff30333e8cff1a3ec193b2fa2a,hc-delhi-2026-w-p-c-560-2026-dlhc011088242025-1-2026-02-03,High Court of Delhi,2026,relevant,pdf_text,TEXT_OK,7,7,0,1.0,NO,
 7abe424c540e5519b85e8e6c11f46b680348acd688484735ae5ad485c50024f1,hc-delhi-2020-w-p-c-11230-2020-dlhc010063882020-1-2020-12-28,High Court of Delhi,2020,relevant,pdf_text,TEXT_OK,9,9,0,1.0,NO,
 7add5e849343e9eb9c2c4cba67bb501ea6c5d3be74f20b0e641bdbc3c13f73e3,hc-ph-2010-cwp-2556-2009-phhc010696202009-1-2010-04-26,High Court of Punjab and Haryana,2010,relevant,pdf_text,TEXT_OK,1,1,0,1.0,NO,
-7b012193c4f9fb7766c58193410a53a5a7fa82eecee2011ef87d47d92223dead,hc-ph-2024-cwp-24455-2019-phhc011058342019-1-2024-08-13,High Court of Punjab and Haryana,2024,relevant,ocr,OCR_REQUIRED,2,0,2,0.0,NO,few_chars
+7b012193c4f9fb7766c58193410a53a5a7fa82eecee2011ef87d47d92223dead,hc-ph-2024-cwp-24455-2019-phhc011058342019-1-2024-08-13,High Court of Punjab and Haryana,2024,relevant,ocr,OCR_REQUIRED,2,0,2,0.0,NO,image_only
 7b0855d986fe32dcf97382be9f7bb251817ed26d0bdc89f71cc0e1c2888bcf9a,hc-jkl-2025-wp-c-234-2024-jkhc020004822024-1-2025-11-03,High Court of Jammu and Kashmir,2025,relevant,pdf_text,TEXT_OK,260,260,0,1.0,NO,
 7b0be41872f273c081ad950bdbd6176bbb05dfca0abbac09f6f714fc310be796,sc-2018-suchet-singh-yadav-ors-2018insc182,Supreme Court of India,2018,relevant,pdf_text,TEXT_OK,23,23,0,1.0,NO,
 7b0e6d48c4558f7871f1ae272380d9a90929684c6a2fa9f58c1f1784105f7c9b,hc-allahabad-2024-untitled-uphc020338122024-1-2024-05-17,Allahabad High Court,2024,relevant,pdf_text,TEXT_OK,2,2,0,1.0,NO,
@@ -1992,7 +1992,7 @@ sha256,doc_id,court,year,relevance,text_method,verdict,pages,usable_pages,unusab
 819afed1c74458a7eeaa922a677630c258821f5eea8c187ba56eaabdfc5bcb2d,hc-delhi-2024-w-p-c-16546-2024-dlhc010872342024-1-2024-12-02,High Court of Delhi,2024,relevant,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 81a210136c4a1a328e989fccca7e71b6f6d9038084ba9473d6d304f761bec805,hc-ph-2015-cwp-7983-2015-phhc010982582015-1-2015-07-30,High Court of Punjab and Haryana,2015,relevant,pdf_text,OCR_REQUIRED,4,0,4,0.0,NO,control_chars
 81a996f5fc5a3566d2ab3f0c3d959dedee37f3f318c7babb27924ca463b9d72a,sc-2017-rupajan-begum-2017insc1179,Supreme Court of India,2017,borderline,pdf_text,TEXT_OK,9,9,0,1.0,NO,
-81cd462e98121e86e216efae2ce2136099f64c2c152c2a887f04633a9beb5860,hc-ph-2026-cwp-10985-2026-phhc010444682026-1-2026-04-10,High Court of Punjab and Haryana,2026,borderline,ocr,OCR_REQUIRED,2,0,2,0.0,NO,few_chars
+81cd462e98121e86e216efae2ce2136099f64c2c152c2a887f04633a9beb5860,hc-ph-2026-cwp-10985-2026-phhc010444682026-1-2026-04-10,High Court of Punjab and Haryana,2026,borderline,ocr,OCR_REQUIRED,2,0,2,0.0,NO,image_only
 81cf1231dc008dc208fbab3cbf7e82970aec7d99796c1a71873317378f3350f3,hc-delhi-2016-cont-cas-c-539-2016-dlhc011343452016-1-2016-05-09,High Court of Delhi,2016,borderline,pdf_text,TEXT_OK,1,1,0,1.0,NO,
 81d5064e011339ab0854a124b7df57fecbd6445169fedfc449cb80c54e2277c4,hc-delhi-2021-w-p-c-8896-2021-dlhc010258032021-1-2021-09-16,High Court of Delhi,2021,relevant,pdf_text,TEXT_OK,12,12,0,1.0,NO,
 81da0df122049576afc4f1f38204c78633215034abecc4b49ad566a4b63a3c10,hc-allahabad-2024-spla-305-2023-uphc020338162023-1-2024-02-26,Allahabad High Court,2024,relevant,pdf_text,TEXT_OK,4,4,0,1.0,NO,
@@ -2048,7 +2048,7 @@ sha256,doc_id,court,year,relevance,text_method,verdict,pages,usable_pages,unusab
 85b3a7a03a6006c676930b7eb822b7d9f9c4a7b55da97a6ec3f5bdfa91ce1025,hc-jkl-2026-wp-c-1293-2026-jkhc020025082026-1-2026-05-11,High Court of Jammu and Kashmir,2026,relevant,pdf_text,TEXT_OK,3,3,0,1.0,NO,
 85c2294cf897f19593086ea7a2e896c0128724aa647b602f51099c1eab599906,hc-delhi-2015-w-p-c-1091-2014-dlhc010231472014-1-2015-02-27,High Court of Delhi,2015,relevant,pdf_text,TEXT_OK,6,6,0,1.0,NO,
 85c65daac08e5e355108656b032e0a98a53ff8fc5061800d10b79d6b7eacc890,hc-delhi-2017-w-p-c-10892-2017-dlhc014965042017-1-2018-03-06,High Court of Delhi,2017,relevant,pdf_text,TEXT_OK,2,2,0,1.0,NO,
-85e8d0216915d394eab3d6dba954d1a45efc6796fa2de2dc617010127532e728,hc-ph-2013-cwp-13900-2011-phhc010675132011-1-2013-02-01,High Court of Punjab and Haryana,2013,borderline,pdf_text,OCR_REQUIRED,3,2,1,0.667,NO,few_chars
+85e8d0216915d394eab3d6dba954d1a45efc6796fa2de2dc617010127532e728,hc-ph-2013-cwp-13900-2011-phhc010675132011-1-2013-02-01,High Court of Punjab and Haryana,2013,borderline,pdf_text,OCR_REQUIRED,3,2,1,0.667,NO,image_only
 862c597fdda2c1dc9c0fd9ececc5798d2ea21e5bc741e4da29bab20ad8255a17,hc-ph-2025-cwp-9726-2025-phhc010502762025-1-2025-04-05,High Court of Punjab and Haryana,2025,relevant,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 86328ad6798c875a7942aa36345df75b97379d10a8aa31293100d8e1cf8d45d0,hc-jkl-2025-wp-c-2551-2025-jkhc020054382025-1-2025-09-16,High Court of Jammu and Kashmir,2025,relevant,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 863d1cf6d37a3a61cc67cf60fb60c70388989f68a30da1017661269030f64695,hc-ph-2023-cwp-13078-2023-phhc010753492023-1-2023-07-03,High Court of Punjab and Haryana,2023,borderline,pdf_text,TEXT_OK,2,2,0,1.0,NO,
@@ -2100,7 +2100,7 @@ sha256,doc_id,court,year,relevance,text_method,verdict,pages,usable_pages,unusab
 89341ea043079628c83699d4268bfe83a2c1d1b5f308f12c97cca515673233f0,hc-ph-2017-cwp-21340-2016-phhc010866112016-1-2017-02-27,High Court of Punjab and Haryana,2017,borderline,pdf_text,TEXT_OK,1,1,0,1.0,NO,
 89486452bfb0638a4ed07f0dd2f3b9469f88afd1cf0156b3b3c90a109e5615b6,hc-delhi-2025-w-p-c-5677-2025-dlhc010253982025-1-2025-05-01,High Court of Delhi,2025,relevant,pdf_text,TEXT_OK,9,9,0,1.0,NO,
 894b1508f6f80f263dcf67d9a49c8c04c28a2b061515562ddf04a5889725d217,hc-allahabad-2025-wria-12938-2024-uphc020924972024-1-2025-01-03,Allahabad High Court,2025,relevant,pdf_text,TEXT_OK,10,10,0,1.0,NO,
-89675d9483af1196d9628afc4a9178a812dc82166017d8291dd47883ef1d4721,hc-delhi-2008-w-p-c-12587-2006-dlhc010678552006-1-2008-01-28,High Court of Delhi,2008,relevant,pdf_text,OCR_REQUIRED,6,5,1,0.833,NO,few_chars
+89675d9483af1196d9628afc4a9178a812dc82166017d8291dd47883ef1d4721,hc-delhi-2008-w-p-c-12587-2006-dlhc010678552006-1-2008-01-28,High Court of Delhi,2008,relevant,pdf_text,OCR_REQUIRED,6,5,1,0.833,NO,image_only
 8967fb444f838b5a4707cdd5ecc3b400b4b198dc72494b405fb880d89ee1ba44,sc-1995-sarwan-singh-lamba-and-ors-etc-1995insc370,Supreme Court of India,1995,borderline,pdf_text,TEXT_OK,20,20,0,1.0,NO,
 8968f568cf14e9c07b933166325dfa4cbdff43825d4cdeb43345f437b8881f11,sc-1989-union-of-india-and-ors-1989insc332,Supreme Court of India,1989,relevant,pdf_text,TEXT_OK,4,4,0,1.0,NO,
 898ad43292451bf8afedcaaaa05709d64119681bc429f12e6579990f61122f67,hc-delhi-2016-lpa-126-2001-dlhc010166822001-1-2016-01-07,High Court of Delhi,2016,relevant,pdf_text,TEXT_OK,5,5,0,1.0,NO,
@@ -2124,7 +2124,7 @@ sha256,doc_id,court,year,relevance,text_method,verdict,pages,usable_pages,unusab
 8a6aab737ea28c3a013bbbe358fadd189f996afbac69d09248e09fb7fa09607d,hc-delhi-2026-mac-app-43-2013-dlhc012030772012-1-2026-07-01,High Court of Delhi,2026,relevant,pdf_text,TEXT_OK,30,30,0,1.0,NO,
 8a7d6a660598be920f4af92286e3794d3ae3dfc74893291d3be5a014bc3d85da,hc-ph-2009-cwp-8651-2009-phhc010763682009-1-2009-05-29,High Court of Punjab and Haryana,2009,borderline,pdf_text,TEXT_OK,3,3,0,1.0,NO,
 8a821a47f17b144dcd698e5a38cbc8376283a4ecfa3017102a52dfcd9d7c4190,hc-ph-2026-cwp-7683-2026-phhc010401632026-1-2026-03-13,High Court of Punjab and Haryana,2026,borderline,pdf_text,OCR_REQUIRED,7,0,7,0.0,NO,control_chars;low_letter_share;vertical_order
-8a97f0b126784a9e2fd80c7493a527c173d10e016dd237be56a7cbfbed165489,hc-ph-2010-lpa-624-2010-phhc010953672010-1-2010-05-14,High Court of Punjab and Haryana,2010,relevant,pdf_text,OCR_REQUIRED,6,5,1,0.833,NO,few_chars
+8a97f0b126784a9e2fd80c7493a527c173d10e016dd237be56a7cbfbed165489,hc-ph-2010-lpa-624-2010-phhc010953672010-1-2010-05-14,High Court of Punjab and Haryana,2010,relevant,pdf_text,OCR_REQUIRED,6,5,1,0.833,NO,image_only
 8a9e6f2bce1483e9abb3b7d7df31b25788b2ee216c1cdbd65aac73a125bc4be1,hc-ph-2025-cwp-17378-2025-phhc010954472025-1-2025-07-01,High Court of Punjab and Haryana,2025,borderline,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 8aa94557a64e72520077f782016609d040b057be63ede89dcb800a7020bd773d,sc-2008-union-of-india-2008insc196,Supreme Court of India,2008,borderline,pdf_text,TEXT_OK,5,5,0,1.0,NO,
 8ab6f3cde3773e4903f183cefa0dd1606fad413e2a169ed1374c25860a502e3a,hc-jkl-2021-lpa-69-2021-jkhc020017152021-1-2021-06-29,High Court of Jammu and Kashmir,2021,borderline,pdf_text,TEXT_OK,2,2,0,1.0,NO,
@@ -2182,7 +2182,7 @@ sha256,doc_id,court,year,relevance,text_method,verdict,pages,usable_pages,unusab
 8e848869deaceb9143f1e9d381c640655cfed3f8377d876481c47aeef181848f,hc-ph-2025-cwp-32530-2024-phhc011656932024-1-2025-09-17,High Court of Punjab and Haryana,2025,relevant,pdf_text,TEXT_OK,7,7,0,1.0,NO,
 8e9323f08901f1152945502105c15394241e8973e3010be747d01c5e6d41fe66,hc-allahabad-2022-untitled-uphc020617562022-1-2022-10-19,Allahabad High Court,2022,relevant,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 8eab56a7cdcdd5d454a789dc6cfee8358e5ac9a43051203b3117d6846f29ea00,hc-delhi-2016-w-p-c-1141-2014-dlhc010172882014-1-2016-05-12,High Court of Delhi,2016,relevant,pdf_text,TEXT_OK,4,3,0,1.0,NO,blank
-8eadd78cab5591be62533ca0ea91ef6445854e6a05eab9807d49fc46f40a81a8,sc-2022-cdr-amit-kumar-sharma-etc-2022insc1124,Supreme Court of India,2022,relevant,pdf_text,OCR_REQUIRED,23,22,1,0.957,NO,few_chars
+8eadd78cab5591be62533ca0ea91ef6445854e6a05eab9807d49fc46f40a81a8,sc-2022-cdr-amit-kumar-sharma-etc-2022insc1124,Supreme Court of India,2022,relevant,pdf_text,OCR_REQUIRED,23,22,1,0.957,NO,image_only
 8ebdcd805b5ab79b5fd34ca868c043ad572d78537c007fe092d8f48cff7cd49c,hc-ph-2024-cwp-6605-2021-phhc010289102021-1-2024-12-05,High Court of Punjab and Haryana,2024,borderline,pdf_text,TEXT_OK,1,1,0,1.0,NO,
 8ec97249278b530b9cb982032719a778edd9377c5fd0145d10bc378dee0e13d1,hc-delhi-2017-w-p-c-2203-2015-dlhc011115562015-1-2017-07-14,High Court of Delhi,2017,relevant,pdf_text,TEXT_OK,7,7,0,1.0,NO,
 8edc4af5fdd3d9cf0c535a31625a4d48557868dc39cdfd0a33ac77519cb8d6f8,hc-delhi-2025-w-p-c-17426-2025-dlhc010903902025-1-2025-11-17,High Court of Delhi,2025,relevant,pdf_text,TEXT_OK,9,9,0,1.0,NO,
@@ -2236,7 +2236,7 @@ sha256,doc_id,court,year,relevance,text_method,verdict,pages,usable_pages,unusab
 926ecb439103e05546d5ae00268cdc8acfd793f4b8194e97a154b5dbb95e543b,hc-ph-2012-cwp-10453-2001-phhc010171282001-1-2012-12-18,High Court of Punjab and Haryana,2012,relevant,pdf_text,TEXT_OK,1,1,0,1.0,NO,
 9288a3cef09d63703ca8e4533b0e187024c6314e7fb05b132cc7c263f881b5e2,hc-delhi-2024-w-p-c-12036-2024-dlhc010556812024-1-2024-08-30,High Court of Delhi,2024,borderline,pdf_text,TEXT_OK,1,1,0,1.0,NO,
 9288c90802475231c1fb5506ad6026fbc3f89863e3f803154176d70a2e1677d2,hc-delhi-2025-w-p-c-17791-2025-dlhc010933952025-1-2025-11-24,High Court of Delhi,2025,relevant,pdf_text,TEXT_OK,8,8,0,1.0,NO,
-928d53398c7716f84ff7c1ee867f469152bcdf79847511bab62a5e6e8f9f6698,hc-delhi-2025-la-app-18-2016-dlhc010097512016-1-2025-09-26,High Court of Delhi,2025,not_checked,ocr,OCR_REQUIRED,171,81,3,0.964,YES,blank;few_chars;low_dictionary
+928d53398c7716f84ff7c1ee867f469152bcdf79847511bab62a5e6e8f9f6698,hc-delhi-2025-la-app-18-2016-dlhc010097512016-1-2025-09-26,High Court of Delhi,2025,not_checked,ocr,OCR_REQUIRED,171,81,3,0.964,YES,blank;image_only;low_dictionary
 9297c01da409d4f419060089c14853f00c31da543f2564385cb3e00b450b8eb4,hc-ph-2011-cwp-19912-2010-phhc010727012010-1-2011-09-05,High Court of Punjab and Haryana,2011,relevant,pdf_text,TEXT_OK,3,3,0,1.0,NO,
 92a49e0b1ca3891e094672eb288136a74ee4ad723d4ef7d72461271d1514842e,hc-allahabad-2021-wria-16204-2021-uphc011784192021-1-2021-11-23,Allahabad High Court,2021,relevant,pdf_text,TEXT_OK,1,1,0,1.0,NO,
 92ac35f05e8025c4287d0339f8334fd9e903e2af746b6bbbeab829d94d54c922,hc-ph-2018-rsa-1224-2018-phhc011267622018-1-2018-10-01,High Court of Punjab and Haryana,2018,borderline,pdf_text,TEXT_OK,2,2,0,1.0,NO,
@@ -2249,7 +2249,7 @@ sha256,doc_id,court,year,relevance,text_method,verdict,pages,usable_pages,unusab
 935ebd77f57cf08c2439d3a427b3689458984b4229288b41d97d4a06b3f08348,hc-jkl-2018-swp-2914-2002-jkhc020001262002-1-2018-10-11,High Court of Jammu and Kashmir,2018,relevant,pdf_text,TEXT_OK,4,4,0,1.0,NO,
 936a4cbfa08edd4920457eb4618c2c9f44f7ceb00703740b73c78fdd1b198f22,sc-2015-union-of-india-2015insc886,Supreme Court of India,2015,relevant,pdf_text,OCR_REQUIRED,235,234,1,0.996,NO,low_dictionary
 937b481e2f7d70c23fc60fdbd5dcf8742980165d986e0f30f2d4e6fb43223449,hc-delhi-2024-w-p-c-8680-2024-dlhc010366812024-1-2024-06-24,High Court of Delhi,2024,relevant,pdf_text,TEXT_OK,5,5,0,1.0,NO,
-937ee98804344d1e30a7ed2419811befb2ffaa88a54c4c3fdb912cf172b881e4,sc-2021-lt-col-nitisha-ors-2021insc210,Supreme Court of India,2021,borderline,pdf_text,OCR_REQUIRED,138,120,18,0.87,NO,few_chars
+937ee98804344d1e30a7ed2419811befb2ffaa88a54c4c3fdb912cf172b881e4,sc-2021-lt-col-nitisha-ors-2021insc210,Supreme Court of India,2021,borderline,pdf_text,OCR_REQUIRED,138,120,18,0.87,NO,image_only
 93889aea1d36bd87e51a0a7af3869ffea831ca13c33a6e4c7234bf9a80e38c8b,hc-delhi-2025-w-p-c-5121-2024-dlhc010188452024-1-2025-11-11,High Court of Delhi,2025,borderline,pdf_text,TEXT_OK,53,53,0,1.0,NO,
 939d703afb777bf5ad7b97164716acc99775af4976ab9220abce911f1266ae6e,hc-delhi-2025-w-p-c-5935-2024-dlhc010230002024-1-2025-11-11,High Court of Delhi,2025,borderline,pdf_text,TEXT_OK,53,53,0,1.0,NO,
 93a3c70f7462eb946326076dd64964cb994c89c299d34e7f720e684614642ea5,sc-2016-union-of-india-ors-2016insc111,Supreme Court of India,2016,borderline,pdf_text,TEXT_OK,32,32,0,1.0,NO,
@@ -2307,7 +2307,7 @@ sha256,doc_id,court,year,relevance,text_method,verdict,pages,usable_pages,unusab
 96b64fec9f14d6eb58501a1edb4ff247714a8f29ae478395ce0c035217fd6b13,sc-2019-union-of-india-and-others-2019insc818,Supreme Court of India,2019,relevant,pdf_text,TEXT_OK,8,8,0,1.0,NO,
 96bcc25f2ee1d89c65cfe5379275baa414cf6d398f3b00129f7aa86b280065ae,hc-ph-2009-rsa-3420-2008-phhc010897862008-1-2009-07-20,High Court of Punjab and Haryana,2009,relevant,pdf_text,TEXT_OK,4,4,0,1.0,NO,
 96c766b5550b07c513aaa1a65c30107921af9f8db0bfc09548b27791b778a1ea,sc-2021-union-of-india-and-others-2021insc623,Supreme Court of India,2021,borderline,pdf_text,TEXT_OK,14,14,0,1.0,NO,
-96ce4a1a9cabc707090f265b425584b0d75da1234d719b90d6583898d859cc38,sc-2023-vivek-narayan-sharma-2023insc2,Supreme Court of India,2023,relevant,pdf_text,OCR_REQUIRED,230,222,8,0.965,NO,few_chars;image_only;low_dictionary
+96ce4a1a9cabc707090f265b425584b0d75da1234d719b90d6583898d859cc38,sc-2023-vivek-narayan-sharma-2023insc2,Supreme Court of India,2023,relevant,pdf_text,OCR_REQUIRED,230,222,8,0.965,NO,image_only;low_dictionary
 96dcae17aeb753f586ff9daaf97d6ce1013de11b61fb51b8968d8316a94dee02,sc-1985-chief-of-the-army-staff-and-ot-1985insc65,Supreme Court of India,1985,relevant,pdf_text,TEXT_OK,16,16,0,1.0,NO,
 96df49348148dbddfacaacf72210565c0a396a0f1321b364e16a0ec4f2cbfd8b,hc-ph-2025-cwp-23670-2025-phhc011283522025-1-2025-08-18,High Court of Punjab and Haryana,2025,relevant,pdf_text,TEXT_OK,4,4,0,1.0,NO,
 96f12e156f37a82778f25c06304b95c8163f02efd9b4e3e713065c56142609da,hc-delhi-2022-w-p-c-12648-2022-dlhc010330152022-1-2022-09-01,High Court of Delhi,2022,relevant,pdf_text,TEXT_OK,2,2,0,1.0,NO,
@@ -2491,7 +2491,7 @@ a2a3de6253ed29579b55dee2e8e9f105e6ed1dfb8e01ddb5626737f1500eb361,hc-delhi-2019-w
 a2ce86c32632204d16a12a96d19572ae928aad343ae6c04e2a667acd6177cb26,hc-ph-2012-cwp-12299-2007-phhc010502962007-1-2012-12-14,High Court of Punjab and Haryana,2012,relevant,pdf_text,TEXT_OK,1,1,0,1.0,NO,
 a2d34071e7350946632ee338f143be36f6371c186e753ac8df78ae4f7b682d35,hc-allahabad-2023-wria-13488-2023-uphc011787802023-1-2023-08-17,Allahabad High Court,2023,relevant,pdf_text,TEXT_OK,1,1,0,1.0,NO,
 a2e4cc4ffccec6a31b1cea2d0735e2fc9c3888a4c764f209716eaf350f7e47a3,hc-ph-2025-cwp-25959-2025-phhc011227542025-1-2025-09-02,High Court of Punjab and Haryana,2025,borderline,pdf_text,TEXT_OK,3,3,0,1.0,NO,
-a2ee9fc14fb3648a7965ffe1fd06d4245855dd26a84547e8ee6b2397e36439be,hc-ph-2024-cwp-30550-2024-phhc011567532024-1-2024-11-13,High Court of Punjab and Haryana,2024,relevant,ocr,OCR_REQUIRED,9,0,9,0.0,NO,few_chars
+a2ee9fc14fb3648a7965ffe1fd06d4245855dd26a84547e8ee6b2397e36439be,hc-ph-2024-cwp-30550-2024-phhc011567532024-1-2024-11-13,High Court of Punjab and Haryana,2024,relevant,ocr,OCR_REQUIRED,9,0,9,0.0,NO,image_only
 a2eef9d0a7665c0d379f7c34bada94370e5c47f771be2d7c6b3b455cd7c637f4,hc-jkl-2024-cm-m-392-2024-jkhc010054132024-1-2024-11-04,High Court of Jammu and Kashmir,2024,borderline,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 a30505898673b6b74c1ef1e5e5673d106693b56abe464ae4f6b4272a2e155a9e,hc-ph-2015-cwp-1691-2015-phhc010806412015-1-2015-05-18,High Court of Punjab and Haryana,2015,borderline,pdf_text,OCR_REQUIRED,2,1,1,0.5,NO,control_chars
 a30a9e198e9a6ea6586a3315af704ac22ef34b175055e4e3b3a95001755c6266,hc-ph-2009-cwp-8063-2008-phhc010721782008-1-2009-12-16,High Court of Punjab and Haryana,2009,relevant,pdf_text,TEXT_OK,2,2,0,1.0,NO,
@@ -2564,7 +2564,7 @@ a786353aadb4708eec6611aa3aaaf9b9fee12f800e6979f2e6732bd35c3122e7,hc-delhi-2026-w
 a79405a6c3b69accf4f29ffe3baeb627a5b6e258a80bf3f8b7cc6d74be7e3cb8,hc-ph-2026-cwp-1730-2026-phhc010092662026-1-2026-07-20,High Court of Punjab and Haryana,2026,relevant,pdf_text,TEXT_OK,5,5,0,1.0,NO,
 a7a85a795e301efa1dac80473fc94819d79c92dc83b6eeaeadf5e57686eca9bc,hc-allahabad-2023-wria-8782-2022-uphc020784192022-1-2023-11-30,Allahabad High Court,2023,relevant,pdf_text,TEXT_OK,33,33,0,1.0,NO,
 a7a8fc1467cc7c35a8e322aea378dbaa748e122c0584122d11d3aa71e9d006db,hc-ph-2025-cwp-13075-2025-phhc010712202025-1-2025-08-20,High Court of Punjab and Haryana,2025,relevant,pdf_text,TEXT_OK,6,6,0,1.0,NO,
-a7adc9ef913589cb0bb48472bea4fc76c2339cd7e3b8a3a2fa8014c7ec300230,sc-2018-justice-k-s-puttaswamy-retd-2018insc880,Supreme Court of India,2018,borderline,pdf_text,OCR_REQUIRED,1076,1065,11,0.99,NO,few_chars;low_dictionary
+a7adc9ef913589cb0bb48472bea4fc76c2339cd7e3b8a3a2fa8014c7ec300230,sc-2018-justice-k-s-puttaswamy-retd-2018insc880,Supreme Court of India,2018,borderline,pdf_text,OCR_REQUIRED,1076,1065,11,0.99,NO,image_only;low_dictionary
 a7b36383dc608406ad24d7d9e9820d3f2b38e9f6dc5137111b5cd53b6bb684b7,hc-ph-2009-cwp-13712-2009-phhc010614132009-1-2009-09-03,High Court of Punjab and Haryana,2009,relevant,pdf_text,TEXT_OK,3,3,0,1.0,NO,
 a7b36ba2ec6be0be10595b4f079f6f1b8e41d9fe8c2296968da9a534adeeacad,hc-ph-2026-cwp-11900-2026-phhc010650542026-1-2026-04-28,High Court of Punjab and Haryana,2026,relevant,pdf_text,TEXT_OK,6,6,0,1.0,NO,
 a7b49f7a5f111f454676a2401f4ddcc08f9c0f1179463dcc9a989288e28dd8e4,hc-delhi-2012-w-p-c-3396-2012-dlhc010732302012-1-2012-07-25,High Court of Delhi,2012,borderline,pdf_text,TEXT_OK,2,2,0,1.0,NO,
@@ -2661,7 +2661,7 @@ ad22769fd672b8bc8459084d76ee12d70dd76fff7c9cad6fd5610b711eb37e67,hc-ph-2025-cwp-
 ad3224a3ca6849b124d719a2a8dd975c82bd60d1a03f315261d223329c19ab53,hc-delhi-2017-w-p-c-1592-2017-dlhc010624692017-1-2017-02-22,High Court of Delhi,2017,borderline,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 ad345b317b8f5b706397f2e139f2e6bb42875e117f9437cd726e121833d458b1,hc-delhi-2026-w-p-c-1755-2023-dlhc010042252023-1-2026-04-17,High Court of Delhi,2026,borderline,pdf_text,OCR_REQUIRED,73,72,1,0.986,NO,low_letter_share
 ad357f61c123dcd68e41cb52d2de42da93fa4bb2d50419ea17e828cb0ee9b99b,hc-delhi-2016-lpa-108-2016-dlhc010264272016-1-2016-07-13,High Court of Delhi,2016,relevant,pdf_text,TEXT_OK,12,12,0,1.0,NO,
-ad4c96da38af74b210eb6b7269d15622e5cbf34e6215b38eb6197bdfacbc8c70,hc-ph-2012-crwp-1665-2011-phhc010610962011-1-2012-05-24,High Court of Punjab and Haryana,2012,relevant,pdf_text,OCR_REQUIRED,6,5,1,0.833,NO,few_chars
+ad4c96da38af74b210eb6b7269d15622e5cbf34e6215b38eb6197bdfacbc8c70,hc-ph-2012-crwp-1665-2011-phhc010610962011-1-2012-05-24,High Court of Punjab and Haryana,2012,relevant,pdf_text,OCR_REQUIRED,6,5,1,0.833,NO,image_only
 ad539976efdca5941ebfe3115a0f171a1b4472c949a43da638fcec674323a957,hc-ph-2024-cwp-17141-2024-phhc010930432024-1-2024-07-24,High Court of Punjab and Haryana,2024,borderline,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 ad5a5aea1e468fe12b08e5374c0e625631e9bee54a5d60f121b2f4bcbfd3e1d1,hc-delhi-2015-w-p-c-718-2014-dlhc010172752014-1-2015-07-29,High Court of Delhi,2015,relevant,pdf_text,TEXT_OK,11,11,0,1.0,NO,
 ad63a8cc0075d69e78fd94a80ac309efb87fdbbb2bb93ee8d66dd700998bd390,hc-allahabad-2019-spla-869-2009-uphc011990182009-1-2019-03-11,Allahabad High Court,2019,relevant,pdf_text,TEXT_OK,5,5,0,1.0,NO,
@@ -2708,7 +2708,7 @@ afb946dd767808bdbefa532f83266b4526f2baf0593883206bd6325876d44c3d,hc-ph-2025-cwp-
 afc5453c7c0f53217cedfbdbc8dbde2d028f9b8d7b346a07dfbe84ff01bc4cd4,hc-jkl-2014-lpasw-45-2004-jkhc020052672004-1-2014-03-12,High Court of Jammu and Kashmir,2014,relevant,pdf_text,TEXT_OK,10,10,0,1.0,NO,
 afd4924d65c43ec0ecff5a58d7331174b13c1beb2b617054dcf3ace7297a3f44,hc-jkl-2025-wp-c-1242-2024-jkhc020022102024-1-2025-11-03,High Court of Jammu and Kashmir,2025,relevant,pdf_text,TEXT_OK,260,260,0,1.0,NO,
 afe374e31d19a1d259e82fe64c9140569bb82b678bf7895745d505df91a2b5b2,sc-1971-union-of-india-1971insc320,Supreme Court of India,1971,relevant,pdf_text,TEXT_OK,5,5,0,1.0,NO,
-afefb817abacf86ec5e5ab803095b0939dcb7dbfb2d8ada0bbcdd5c51efbe3ed,hc-ph-2026-cwp-11618-2026-phhc010595072026-1-2026-04-20,High Court of Punjab and Haryana,2026,borderline,ocr,OCR_REQUIRED,1,0,1,0.0,NO,few_chars
+afefb817abacf86ec5e5ab803095b0939dcb7dbfb2d8ada0bbcdd5c51efbe3ed,hc-ph-2026-cwp-11618-2026-phhc010595072026-1-2026-04-20,High Court of Punjab and Haryana,2026,borderline,ocr,OCR_REQUIRED,1,0,1,0.0,NO,image_only
 b000df4f8bf004d0801866d7f63e3b3cabb6ed34654bf6720549d1b09469609a,sc-2004-union-of-india-and-ors-2004insc205,Supreme Court of India,2004,relevant,pdf_text,TEXT_OK,10,10,0,1.0,NO,
 b000f247d9e2aab13e05700664fc04e4297cc8ed7799adae84d83814cf4f735b,hc-ph-2025-cwp-18335-2025-phhc010941302025-1-2025-09-22,High Court of Punjab and Haryana,2025,borderline,pdf_text,TEXT_OK,4,4,0,1.0,NO,
 b004d7248284c92a9c5bec3f116835f4bdb141b47ec3945ea6e45976fa59c5f6,hc-allahabad-2025-wria-1744-2025-uphc020093772025-1-2025-02-14,Allahabad High Court,2025,relevant,pdf_text,TEXT_OK,6,6,0,1.0,NO,
@@ -2768,7 +2768,7 @@ b36019a6feac5e747abda27521c2043ef9d948fe8496f53d5d02964e383ebdc8,hc-ph-2025-cwp-
 b38c018598ee88b7aeeec3496c6d72f6c9519a58b36f90d6425bb6150cce6b4c,hc-ph-2026-cwp-21858-2026-phhc011109852026-1-2026-07-20,High Court of Punjab and Haryana,2026,relevant,pdf_text,TEXT_OK,5,5,0,1.0,NO,
 b396da7a6e8ef835204de4ead7eb4f18dd35b2bd07ddb0787462af9240f4e779,hc-jkl-2025-wp-c-2103-2024-jkhc020046462024-1-2025-09-11,High Court of Jammu and Kashmir,2025,relevant,pdf_text,TEXT_OK,8,8,0,1.0,NO,
 b3b7c54d4eb8639e7c417f74e7e675266699f0d0aadc9163ee62180ee157fffe,hc-delhi-2011-w-p-c-1743-2003-dlhc010214862003-1-2011-01-31,High Court of Delhi,2011,relevant,pdf_text,TEXT_OK,6,6,0,1.0,NO,
-b3d06c32bfaeb3588faa2275c22532562abeb5b8ccf66d49cfe68d14f2f31da3,hc-ph-2026-cwp-11097-2026-phhc010594862026-1-2026-04-10,High Court of Punjab and Haryana,2026,borderline,ocr,OCR_REQUIRED,1,0,1,0.0,NO,few_chars
+b3d06c32bfaeb3588faa2275c22532562abeb5b8ccf66d49cfe68d14f2f31da3,hc-ph-2026-cwp-11097-2026-phhc010594862026-1-2026-04-10,High Court of Punjab and Haryana,2026,borderline,ocr,OCR_REQUIRED,1,0,1,0.0,NO,image_only
 b3d5304755209518d7bb6712f060798fff1d935d9a1b581154902b3756d2603e,hc-ph-2026-cocp-6333-2025-phhc012092472025-1-2026-01-14,High Court of Punjab and Haryana,2026,not_checked,ocr,OCR_REQUIRED,1,0,1,0.0,NO,image_only
 b3db171dd23b2c14049415007082940274a902c10878e4d9c49f8a9b98e361d1,hc-delhi-2026-w-p-c-10072-2025-dlhc010448172025-1-2026-05-18,High Court of Delhi,2026,borderline,pdf_text,TEXT_OK,15,15,0,1.0,NO,
 b3ea334a40d05d089627f904f9ece69f543ee04ffee3846920ae3dc2565ecca6,hc-ph-2015-cwp-6958-2012-phhc010887172012-1-2015-05-18,High Court of Punjab and Haryana,2015,relevant,pdf_text,OCR_REQUIRED,9,1,8,0.111,NO,control_chars;implausible_chars;vertical_order
@@ -2968,7 +2968,7 @@ bf814080a065e7244d9abd65ba469379e5d1bf74729b48c0ff53bd1c2e1b1d70,sc-1999-union-o
 bfa17caa41dbe56dafec0b37ae4fd0cec5a39678478d63b3fa725a69ddb3438f,hc-delhi-2022-w-p-c-3280-2022-dlhc010081202022-1-2022-02-23,High Court of Delhi,2022,relevant,pdf_text,TEXT_OK,3,3,0,1.0,NO,
 bfa3084a18c5166f701aece9dea42a9b490f0b82bd2f3f4d4c455b1b6cf0faab,sc-1994-ex-capt-harish-uppal-1994insc132,Supreme Court of India,1994,relevant,pdf_text,TEXT_OK,6,6,0,1.0,NO,
 bfb1a377a479ff6b282c5e7b1860eac132727096749d13e51a4e287ee2f08964,hc-delhi-2025-w-p-c-9540-2024-dlhc010405472024-1-2025-04-24,High Court of Delhi,2025,relevant,pdf_text,TEXT_OK,3,3,0,1.0,NO,
-bfcbd2296f070bc0928efce81692def0cec81082980cbb7f011a7a4bbc44701e,hc-delhi-2013-w-p-c-8763-2011-dlhc011783572011-1-2013-02-19,High Court of Delhi,2013,relevant,pdf_text,OCR_REQUIRED,8,7,1,0.875,NO,few_chars
+bfcbd2296f070bc0928efce81692def0cec81082980cbb7f011a7a4bbc44701e,hc-delhi-2013-w-p-c-8763-2011-dlhc011783572011-1-2013-02-19,High Court of Delhi,2013,relevant,pdf_text,OCR_REQUIRED,8,7,1,0.875,NO,image_only
 bfd0b5d56ef2030a350455ab4434d1d094284c95517c6fa6ae565f8afcdce0de,hc-jkl-2025-wp-c-2213-2024-jkhc020048542024-1-2025-11-20,High Court of Jammu and Kashmir,2025,relevant,pdf_text,TEXT_OK,9,9,0,1.0,NO,
 bfd4e46756d03df50bc55dbd0ea844e3051312082a42a65e1f0f98e2c3b998c0,hc-ph-2024-cwp-18962-2024-phhc011027732024-1-2024-08-20,High Court of Punjab and Haryana,2024,relevant,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 c02b42ba26ac62c3e525f63834b3dca7c2670ae3f375e34d1bd51c141df000f5,sc-1998-m-s-bindra-1998insc333,Supreme Court of India,1998,borderline,pdf_text,TEXT_OK,12,12,0,1.0,NO,
@@ -3256,7 +3256,7 @@ d2b417855179fcc034b1e55252e57a5b9530ad4d7d6d0ace52e2ad3368e9cc38,hc-delhi-2025-w
 d2c74028ff9fad11b44afa927873958b32f08e4e9255049c154c1316d27262df,hc-delhi-2024-w-p-c-11886-2024-dlhc010552862024-1-2024-08-29,High Court of Delhi,2024,borderline,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 d2cf30beaa25e7d3f375defd63bee35f859fbf88bcdcb10e6ecd0a7a198b05c4,hc-allahabad-2024-wria-3341-2024-uphc020294582024-1-2024-04-30,Allahabad High Court,2024,relevant,pdf_text,TEXT_OK,1,1,0,1.0,NO,
 d2d599e4f1da9309b194eb5d033adacd6dccf4dc4702f0ee9b634ac0cc130551,hc-ph-2025-cwp-17332-2025-phhc010935752025-1-2025-07-02,High Court of Punjab and Haryana,2025,relevant,pdf_text,TEXT_OK,2,2,0,1.0,NO,
-d2e7f79eb93d1f9e11085e1aa77999a0f31c07dcaa57721df46981fd0d283538,hc-ph-2009-lpa-769-2009-phhc010860912009-1-2009-08-24,High Court of Punjab and Haryana,2009,borderline,pdf_text,OCR_REQUIRED,2,1,1,0.5,NO,few_chars
+d2e7f79eb93d1f9e11085e1aa77999a0f31c07dcaa57721df46981fd0d283538,hc-ph-2009-lpa-769-2009-phhc010860912009-1-2009-08-24,High Court of Punjab and Haryana,2009,borderline,pdf_text,OCR_REQUIRED,2,1,1,0.5,NO,image_only
 d3277545849e6aa0b04ec952b34ce9d2dd1759bf6c18c228b76035896f12e4ef,hc-ph-2025-cwp-20288-2025-phhc011100222025-1-2025-07-29,High Court of Punjab and Haryana,2025,relevant,pdf_text,TEXT_OK,3,3,0,1.0,NO,
 d32778929d76c8bea17d5c100d0b9d9659ba7fbef6165c6273fcaf1b85d7cbc6,hc-ph-2025-cwp-10741-2025-phhc010579302025-1-2025-08-18,High Court of Punjab and Haryana,2025,relevant,pdf_text,TEXT_OK,6,6,0,1.0,NO,
 d32801003db267d0d976d9f3a6d1f86e31fb744baddba895ae3ba2a43c98874b,hc-delhi-2020-w-p-c-10007-2020-dlhc010056072020-1-2020-12-08,High Court of Delhi,2020,relevant,pdf_text,TEXT_OK,5,5,0,1.0,NO,
@@ -3313,7 +3313,7 @@ d6a002a96c798d8c7000354bde434381dd19b2f4ce2068b541a784566254bcf6,hc-delhi-2026-w
 d6ab26bce9f8d69dbe2fefd2b5310549c37eecab5ae085e2aaa1bf9015f248d4,hc-ph-2025-cwp-14241-2025-phhc010754482025-1-2025-08-19,High Court of Punjab and Haryana,2025,relevant,pdf_text,TEXT_OK,6,6,0,1.0,NO,
 d6ae2d509c6ea28df3d4280198bf9452921842a193ae92ca1e181d955b3f343d,sc-1996-mafatlal-industries-ltd-etc-et-1996insc1514,Supreme Court of India,1996,borderline,pdf_text,TEXT_OK,278,278,0,1.0,NO,
 d6c05f2b459b963f94b3ac0e08324d5b8ef9776053676aa05e16b64e5990c167,hc-ph-2025-cwp-18906-2025-phhc011047452025-1-2025-07-10,High Court of Punjab and Haryana,2025,borderline,pdf_text,TEXT_OK,3,3,0,1.0,NO,
-d6eb9f322f39afb3edf6f6234c21170452b81aeda9d2ff46f0faba5006c74478,hc-ph-2025-cwp-12291-2018-phhc010824572018-1-2025-12-12,High Court of Punjab and Haryana,2025,borderline,ocr,OCR_REQUIRED,10,1,9,0.1,NO,few_chars
+d6eb9f322f39afb3edf6f6234c21170452b81aeda9d2ff46f0faba5006c74478,hc-ph-2025-cwp-12291-2018-phhc010824572018-1-2025-12-12,High Court of Punjab and Haryana,2025,borderline,ocr,OCR_REQUIRED,10,1,9,0.1,NO,image_only
 d6f822977330a11756f74c8b85611b7793f93c1a260188405ef0079bb5ca8f86,hc-ph-2026-cwp-14732-2024-phhc010816422024-1-2026-04-01,High Court of Punjab and Haryana,2026,relevant,pdf_text,TEXT_OK,3,3,0,1.0,NO,
 d6fb8cfa4a857ef45862144afaf44155ea58f3510a811bfd42bbe0228c98518d,hc-ph-2026-cwp-20360-2026-phhc010948432026-1-2026-07-08,High Court of Punjab and Haryana,2026,relevant,pdf_text,TEXT_OK,4,4,0,1.0,NO,
 d72a9f0b985233d29ba6d1a90f7b8bf69409b8c439fd2ee39672cc57a6226c4c,hc-delhi-2016-w-p-c-5005-2016-dlhc011550412016-1-2016-05-27,High Court of Delhi,2016,relevant,pdf_text,TEXT_OK,2,2,0,1.0,NO,
@@ -3387,7 +3387,7 @@ dae30d8f7efbae6077ecfc65cadac23fccf4024bb582810da68b77b6a49deaec,hc-allahabad-20
 db2ee3f1190283b333b5eddb654a603da89a704997c46f2204c591ce0b4462c2,hc-delhi-2024-w-p-c-7246-2021-dlhc010225192021-1-2024-07-11,High Court of Delhi,2024,borderline,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 db5d2083c8dcb88f833888d14cd5ab0c76cc5111f66bd15233297cc230c60406,hc-ph-2015-cwp-15348-1999-phhc010216661999-1-2015-04-30,High Court of Punjab and Haryana,2015,relevant,pdf_text,TEXT_OK,100,100,0,1.0,NO,
 db759e27809627fca4bad1fa9f4b4258127b7e0055526e6c4c43e1ef8cd49e4d,sc-1993-bhuwneshwar-singh-1993insc280,Supreme Court of India,1993,relevant,pdf_text,TEXT_OK,16,16,0,1.0,NO,
-dbbc0a4c1dc24d3a6475ac1e5d676eaf8614294c9339739ad720935c6d13cf94,hc-ph-2010-lpa-1003-2010-phhc010939072010-1-2010-08-18,High Court of Punjab and Haryana,2010,relevant,pdf_text,OCR_REQUIRED,3,2,1,0.667,NO,few_chars
+dbbc0a4c1dc24d3a6475ac1e5d676eaf8614294c9339739ad720935c6d13cf94,hc-ph-2010-lpa-1003-2010-phhc010939072010-1-2010-08-18,High Court of Punjab and Haryana,2010,relevant,pdf_text,OCR_REQUIRED,3,2,1,0.667,NO,image_only
 dbbd121634073cb1965bceab74f90763e4d0a253c8d05affc945b4b3104677df,hc-ph-2024-cwp-28838-2024-phhc011406732024-1-2024-12-10,High Court of Punjab and Haryana,2024,relevant,pdf_text,TEXT_OK,10,10,0,1.0,NO,
 dbc22875affc8ffdf37c6007613693be2ce358ae043d767394849dd7cec89539,sc-2015-union-of-india-anr-2015insc56,Supreme Court of India,2015,borderline,pdf_text,TEXT_OK,7,7,0,1.0,NO,
 dbcc218aea6e1f1d9f6d3cb612a63ee555cef801de0ff8dffcb92d7542d2056e,hc-delhi-2026-w-p-c-1397-2023-dlhc010031922023-1-2026-01-14,High Court of Delhi,2026,relevant,pdf_text,TEXT_OK,2,2,0,1.0,NO,
@@ -3652,7 +3652,7 @@ ecb3a243f88f56f9e94ad993e5c4fffeba4f70e588b9d735563c39badfd7ad8f,hc-delhi-2012-w
 ecbb119ad188ccb1c6ddedc7fdd46de0269bfbccd69e5ad4bb7849a474131ef7,hc-allahabad-2023-wria-19384-2023-uphc012499432023-1-2023-12-06,Allahabad High Court,2023,borderline,pdf_text,TEXT_OK,1,1,0,1.0,NO,
 ed0317b968f06c15dd27923d8e0ab7674caf977304dcc5b7516de3dafacce193,hc-ph-2011-cwp-17208-2009-phhc010652822009-1-2011-08-11,High Court of Punjab and Haryana,2011,relevant,pdf_text,TEXT_OK,1,1,0,1.0,NO,
 ed0f379e1048b70166a704e95c39d0ff9fee926dbd1c8140d5c1b269a9e7afd7,sc-2018-jaswant-singh-2018insc1182,Supreme Court of India,2018,relevant,pdf_text,TEXT_OK,7,7,0,1.0,NO,
-ed1344e0d571e662cf43379a3ef3297832c388fbfe685360c7b9993ef59d368c,hc-delhi-2025-w-p-c-792-2025-dlhc010019982025-1-2025-08-01,High Court of Delhi,2025,not_checked,ocr,OCR_REQUIRED,32,4,1,0.8,YES,blank;few_chars
+ed1344e0d571e662cf43379a3ef3297832c388fbfe685360c7b9993ef59d368c,hc-delhi-2025-w-p-c-792-2025-dlhc010019982025-1-2025-08-01,High Court of Delhi,2025,not_checked,ocr,OCR_REQUIRED,32,4,1,0.8,YES,blank;image_only
 ed1becd4f73ebbc6ed23a540d6fa8f7ff6414f2ac58918c8e4a8951b72f976b9,hc-delhi-2025-w-p-c-3262-2025-dlhc010133792025-1-2025-12-12,High Court of Delhi,2025,relevant,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 ed1c1f298bb880da271bc57840efe84d692dcadd50b35262eb372c0fd46db2d8,sc-2018-national-campaign-committee-fo-2018insc244,Supreme Court of India,2018,borderline,pdf_text,OCR_REQUIRED,44,42,2,0.955,NO,low_dictionary;low_letter_share
 ed2a29d15d1b3e7f077cfef7779641a0f0b3077123e0447be8f584be3b6be192,sc-2018-union-of-india-others-2018insc576,Supreme Court of India,2018,relevant,pdf_text,TEXT_OK,19,19,0,1.0,NO,
@@ -3669,7 +3669,7 @@ ee025635b8cf7a8d7b3c045066fb05038d26fb40cd75e82565ccd6dd6d71a81f,hc-delhi-2024-w
 ee09d1264e1c939c733b6c56809cbc8835495e0df5e2214ffb2218f7d3ecc193,hc-delhi-2026-w-p-c-2053-2026-dlhc010054682026-1-2026-04-20,High Court of Delhi,2026,borderline,pdf_text,TEXT_OK,6,6,0,1.0,NO,
 ee11b5775663efbec71303e6893aba5d4c8c2f4195967999999c7602f43f58cb,hc-delhi-2019-w-p-c-7835-2011-dlhc011050812011-1-2019-09-24,High Court of Delhi,2019,relevant,pdf_text,TEXT_OK,5,5,0,1.0,NO,
 ee32d6f13bf359f125448993c45b47f9c9edf25ce130a121f37a91052713c124,hc-delhi-2021-w-p-c-8002-2020-dlhc010282012020-1-2021-01-12,High Court of Delhi,2021,relevant,pdf_text,TEXT_OK,14,14,0,1.0,NO,
-ee374975d3d66c52cdfba3aa346e5004b8533cac873da1498daef874194812af,hc-ph-2024-cwp-26159-2023-phhc011399162023-1-2024-12-12,High Court of Punjab and Haryana,2024,borderline,ocr,OCR_REQUIRED,2,0,2,0.0,NO,few_chars
+ee374975d3d66c52cdfba3aa346e5004b8533cac873da1498daef874194812af,hc-ph-2024-cwp-26159-2023-phhc011399162023-1-2024-12-12,High Court of Punjab and Haryana,2024,borderline,ocr,OCR_REQUIRED,2,0,2,0.0,NO,image_only
 ee6234431faec4e5eb713d31f4e0bb868b61bb05920bc555046e95053bfe0bd3,hc-jkl-2026-wp-c-3469-2026-jkhc020070222026-1-2026-10-31,High Court of Jammu and Kashmir,2026,relevant,pdf_text,TEXT_OK,4,4,0,1.0,NO,
 ee760ad890c0ab80fcc01ea2b7df0ebd9aadfc1fdc34f5d2e467627d573db60d,hc-ph-2025-cwp-597-2024-phhc010040322024-1-2025-09-02,High Court of Punjab and Haryana,2025,relevant,pdf_text,TEXT_OK,8,8,0,1.0,NO,
 eea84fcef30e127d93212174c7edd16627bfbd8d28afb12b589f0f1818902069,hc-delhi-2026-w-p-c-3303-2026-dlhc010092432026-1-2026-03-16,High Court of Delhi,2026,relevant,pdf_text,TEXT_OK,9,9,0,1.0,NO,
@@ -3681,7 +3681,7 @@ eefc1da1d22e32b4cba025a8de2572d6132c4d2375800ce6c83e7dcb2b9a335f,hc-ph-2025-cwp-
 ef1193e947d221f92b68dadbae1d45cbd67f30c6f02008ee72ea2feabe06df5c,hc-ph-2010-lpa-773-2010-phhc010955292010-1-2010-07-15,High Court of Punjab and Haryana,2010,borderline,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 ef1801dba8f7a9f05f9dd874f36c8a2d1f8a2f94fc4b13604b53ba65d391bc53,hc-ph-2025-cwp-22136-2025-phhc011172272025-1-2025-08-02,High Court of Punjab and Haryana,2025,borderline,pdf_text,TEXT_OK,2,2,0,1.0,NO,
 ef262f34b39e2ea7324690cb91a1784988e4df9d6a14ee578004b818ef7e10b9,sc-2023-union-of-india-and-others-2023insc975,Supreme Court of India,2023,borderline,pdf_text,TEXT_OK,100,100,0,1.0,NO,
-ef474fa24a9595b90c0c38517591e081ea39b37db3d42d61c51019a4e56dab6c,hc-ph-2012-cwp-17119-2012-phhc010738352012-1-2012-09-03,High Court of Punjab and Haryana,2012,borderline,pdf_text,OCR_REQUIRED,3,2,1,0.667,NO,few_chars
+ef474fa24a9595b90c0c38517591e081ea39b37db3d42d61c51019a4e56dab6c,hc-ph-2012-cwp-17119-2012-phhc010738352012-1-2012-09-03,High Court of Punjab and Haryana,2012,borderline,pdf_text,OCR_REQUIRED,3,2,1,0.667,NO,image_only
 ef5d13bc16235d026399c6169d12b4c128bc8519d14fac7bb623613e0a5a2043,hc-allahabad-2025-wria-16983-2024-uphc015109182024-1-2025-02-14,Allahabad High Court,2025,borderline,pdf_text,TEXT_OK,1,1,0,1.0,NO,
 ef700c5dc063a979376585c49565a1d756d1910366f95b5b9ffef27ba2f10ecc,hc-delhi-2025-w-p-c-1019-2025-dlhc010029062025-1-2025-08-05,High Court of Delhi,2025,relevant,pdf_text,OCR_REQUIRED,17,16,1,0.941,YES,low_dictionary
 ef7254b0c8b6c5c4656cb60a521a9488be82ca663a0d892857d186daf18168b3,hc-ph-2010-lpa-254-2010-phhc010949582010-1-2010-12-22,High Court of Punjab and Haryana,2010,borderline,pdf_text,TEXT_OK,2,2,0,1.0,NO,
@@ -3790,7 +3790,7 @@ f6566760e1b14d52a2a873df62cfccff28044869a103f62419bebd3c0fcd5f1b,hc-ph-2026-cwp-
 f66c59945df47c6c56e703f8144b2b5cc6cd4d2bea671355280df898ae182c11,hc-delhi-2026-w-p-c-468-2023-dlhc010007332022-1-2026-01-30,High Court of Delhi,2026,relevant,pdf_text,TEXT_OK,1,1,0,1.0,NO,
 f696a5541cd41d4712aeb94c86d993f364f76e37de7008507cc1c8597548716a,sc-2005-controller-of-defence-accounts-2005insc515,Supreme Court of India,2005,relevant,pdf_text,TEXT_OK,8,8,0,1.0,NO,
 f6b0e0190fba2fee5cc157c957a6b15957c9812c7afc35bc0504ec0844d8ab3c,hc-jkl-2025-wp-c-1319-2024-jkhc020021762024-1-2025-11-03,High Court of Jammu and Kashmir,2025,relevant,pdf_text,TEXT_OK,260,260,0,1.0,NO,
-f6bc4002bf253dffc7eb71a4ca250927f4e772e691c069fa84e8d81e03a1d976,hc-ph-2026-cwp-1203-2026-phhc010084892026-1-2026-03-16,High Court of Punjab and Haryana,2026,relevant,ocr,OCR_REQUIRED,13,1,12,0.077,NO,few_chars
+f6bc4002bf253dffc7eb71a4ca250927f4e772e691c069fa84e8d81e03a1d976,hc-ph-2026-cwp-1203-2026-phhc010084892026-1-2026-03-16,High Court of Punjab and Haryana,2026,relevant,ocr,OCR_REQUIRED,13,1,12,0.077,NO,image_only
 f6e302960e3b4a154e6f4c6b4d434f50139601d23756f0535d9703d96fc1b268,hc-delhi-2025-w-p-c-4770-2025-dlhc010207652025-1-2025-07-14,High Court of Delhi,2025,relevant,pdf_text,TEXT_OK,9,9,0,1.0,NO,
 f6e73c0557c665022a5686e8973eae19c09d0e6d645c356ba2efb2b556a4b179,hc-jkl-2025-wp-c-527-2024-jkhc020011172024-1-2025-11-20,High Court of Jammu and Kashmir,2025,relevant,pdf_text,TEXT_OK,8,8,0,1.0,NO,
 f6ea9cf6a26a3f1a79f27a5908962719968d19b701c5152c962b8ffd08c5d298,hc-delhi-2025-w-p-c-3195-2025-dlhc010131592025-1-2025-03-12,High Court of Delhi,2025,borderline,pdf_text,TEXT_OK,8,8,0,1.0,NO,

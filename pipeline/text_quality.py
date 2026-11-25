@@ -38,7 +38,7 @@ LETTER_SHARE = 0.5
 DICT_RATIO = 0.15
 CONTROL_SHARE = 0.01
 IMAGE_COVER = 0.5
-INK_SHARE = 0.01                 # share of dark pixels on a low-resolution render: above this, the page is not blank
+INK_SHARE = 0.001                # share of dark pixels on a low-resolution render: above this, the page is not blank (blank pages measure 0.0)
 
 # Frequent English function words plus words that occur in nearly every Indian judgment. A page of real
 # English prose has 35-60% of its word tokens in this list; garbled or mis-mapped text has almost none.

@@ -1,8 +1,7 @@
 {
  "by_stratum": {
   "blank": {
-   "NO_CONTENT|pred_unusable=NO": 3,
-   "UNUSABLE_NEEDS_OCR|pred_unusable=NO": 9
+   "NO_CONTENT|pred_unusable=NO": 12
   },
   "control": {
    "UNUSABLE_NEEDS_OCR|pred_unusable=YES": 30
@@ -25,24 +24,9 @@
  },
  "errors": [
   {
-   "flags": "blank",
-   "label": "UNUSABLE_NEEDS_OCR",
-   "label_id": "L010"
-  },
-  {
-   "flags": "blank",
-   "label": "UNUSABLE_NEEDS_OCR",
-   "label_id": "L016"
-  },
-  {
-   "flags": "few_chars",
+   "flags": "image_only",
    "label": "NO_CONTENT",
    "label_id": "L017"
-  },
-  {
-   "flags": "blank",
-   "label": "UNUSABLE_NEEDS_OCR",
-   "label_id": "L019"
   },
   {
    "flags": "low_letter_share;low_dictionary",
@@ -53,11 +37,6 @@
    "flags": "low_dictionary",
    "label": "USABLE",
    "label_id": "L022"
-  },
-  {
-   "flags": "blank",
-   "label": "UNUSABLE_NEEDS_OCR",
-   "label_id": "L026"
   },
   {
    "flags": "low_letter_share;low_dictionary",
@@ -80,11 +59,6 @@
    "label_id": "L063"
   },
   {
-   "flags": "blank",
-   "label": "UNUSABLE_NEEDS_OCR",
-   "label_id": "L070"
-  },
-  {
    "flags": "low_letter_share;low_dictionary",
    "label": "USABLE",
    "label_id": "L089"
@@ -95,34 +69,14 @@
    "label_id": "L096"
   },
   {
-   "flags": "blank",
-   "label": "UNUSABLE_NEEDS_OCR",
-   "label_id": "L102"
-  },
-  {
    "flags": "low_dictionary",
    "label": "USABLE",
    "label_id": "L108"
   },
   {
-   "flags": "blank",
-   "label": "UNUSABLE_NEEDS_OCR",
-   "label_id": "L119"
-  },
-  {
    "flags": "low_letter_share;low_dictionary",
    "label": "USABLE",
    "label_id": "L123"
-  },
-  {
-   "flags": "blank",
-   "label": "UNUSABLE_NEEDS_OCR",
-   "label_id": "L127"
-  },
-  {
-   "flags": "blank",
-   "label": "UNUSABLE_NEEDS_OCR",
-   "label_id": "L130"
   },
   {
    "flags": "low_dictionary",
@@ -135,45 +89,63 @@
    "label_id": "L150"
   }
  ],
+ "label_corrections": 9,
  "labels": {
   "MARGINAL": 2,
-  "NO_CONTENT": 4,
-  "UNUSABLE_NEEDS_OCR": 82,
+  "NO_CONTENT": 13,
+  "UNUSABLE_NEEDS_OCR": 73,
   "USABLE": 62
  },
  "marginal_as_unusable": {
-  "fn": 9,
+  "fn": 0,
   "fp": 13,
   "precision": 0.852,
   "precision_ci95": [
    0.763,
    0.912
   ],
-  "recall": 0.893,
+  "recall": 1.0,
   "recall_ci95": [
-   0.809,
-   0.943
+   0.951,
+   1.0
   ],
-  "tn": 53,
+  "tn": 62,
   "tp": 75
  },
  "marginal_as_usable": {
-  "fn": 9,
+  "fn": 0,
   "fp": 15,
   "precision": 0.83,
   "precision_ci95": [
    0.738,
    0.894
   ],
-  "recall": 0.89,
+  "recall": 1.0,
   "recall_ci95": [
-   0.804,
-   0.941
+   0.95,
+   1.0
   ],
-  "tn": 53,
+  "tn": 62,
   "tp": 73
  },
  "marginal_excluded": {
+  "fn": 0,
+  "fp": 13,
+  "precision": 0.849,
+  "precision_ci95": [
+   0.758,
+   0.909
+  ],
+  "recall": 1.0,
+  "recall_ci95": [
+   0.95,
+   1.0
+  ],
+  "tn": 62,
+  "tp": 73
+ },
+ "note": "Labels: one AI labeller (Claude), blind to detector flags, from text-layer excerpts (start/middle/end) and, for pages with under 100 characters, a contact sheet of page images. Sample stratified by detector stratum (so it over-represents flagged pages); precision/recall are for this stratified sample, not corpus prevalence. Not a human review.",
+ "with_original_uncorrected_labels": {
   "fn": 9,
   "fp": 13,
   "precision": 0.849,
@@ -188,6 +160,5 @@
   ],
   "tn": 53,
   "tp": 73
- },
- "note": "Labels: one AI labeller (Claude), blind to detector flags, from text-layer excerpts (start/middle/end) and, for pages with under 100 characters, a contact sheet of page images. Sample stratified by detector stratum (so it over-represents flagged pages); precision/recall are for this stratified sample, not corpus prevalence. Not a human review."
+ }
 }

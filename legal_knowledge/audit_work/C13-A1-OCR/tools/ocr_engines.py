@@ -77,8 +77,11 @@ class PaddleEngine:
                   enable_mkldnn=False, cpu_threads=THREADS)
         if variant == "paddle_v5_mobile":
             kw.update(text_detection_model_name="PP-OCRv5_mobile_det", text_recognition_model_name="en_PP-OCRv5_mobile_rec")
-        elif variant == "paddle_hi":
+        elif variant == "paddle_hi":            # default server detector: failed (20 GB allocation) on this host
             kw.update(lang="hi")
+        elif variant == "paddle_hi_mobile":
+            kw.update(text_detection_model_name="PP-OCRv5_mobile_det",
+                      text_recognition_model_name="devanagari_PP-OCRv5_mobile_rec")
         else:
             kw.update(lang="en")
         self.name = variant
