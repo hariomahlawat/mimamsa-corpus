@@ -109,7 +109,7 @@ public static partial class Identifiers
         int best = 0;
         if (statute)
         {
-            var head = new Regex(@"(?m)^\s*\[?" + b + (s.Length > 0 ? s : @"(?![0-9A-Za-z])") + @"\s*[.\-–—]\s*(?<rest>[^\n]*)");
+            var head = new Regex(@"(?m)^\s*\[?(?:(?:Section|Rule|Regulation|Article)\s+)?" + b + (s.Length > 0 ? s : @"(?![0-9A-Za-z])(?:\s*\([0-9a-zA-Z]{1,4}\))*") + @"\s*[.\-–—]\s*(?<rest>[^\n]*)");
             foreach (Match m in head.Matches(text))
             {
                 var rest = m.Groups["rest"].Value;

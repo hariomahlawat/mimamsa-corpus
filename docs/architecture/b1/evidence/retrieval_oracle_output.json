@@ -1,0 +1,180 @@
+{
+  "cases": {
+    "RET-01": {
+      "errors": [],
+      "metrics": {
+        "recall@10": 1.0,
+        "recall@20": 1.0,
+        "precision@5": 0.2,
+        "MRR@20": 1.0,
+        "nDCG@10": 1.0,
+        "exact_precision@5": 0.2,
+        "exact_MRR@20": 1.0
+      }
+    },
+    "RET-02": {
+      "errors": [],
+      "metrics": {
+        "recall@10": 1.0,
+        "recall@20": 1.0,
+        "precision@5": 0.4,
+        "MRR@20": 1.0,
+        "nDCG@10": 1.0
+      }
+    },
+    "RET-03": {
+      "errors": [],
+      "metrics": {
+        "recall@10": 1.0,
+        "recall@20": 1.0,
+        "precision@5": 1.0,
+        "MRR@20": 1.0,
+        "nDCG@10": 0.8777069972374096,
+        "exact_precision@5": 0.8,
+        "exact_MRR@20": 1.0
+      }
+    },
+    "RET-04": {
+      "errors": [],
+      "metrics": {
+        "recall@10": 1.0,
+        "recall@20": 1.0,
+        "precision@5": 0.4,
+        "MRR@20": 1.0,
+        "nDCG@10": 1.0,
+        "exact_precision@5": 0.4,
+        "exact_MRR@20": 1.0
+      }
+    },
+    "RET-05": {
+      "errors": [],
+      "metrics": {
+        "recall@10": 1.0,
+        "recall@20": 1.0,
+        "precision@5": 0.2,
+        "MRR@20": 1.0,
+        "nDCG@10": 1.0
+      }
+    },
+    "RET-06": {
+      "errors": [
+        "expected mode hybrid"
+      ],
+      "metrics": {
+        "recall@10": 1.0,
+        "recall@20": 1.0,
+        "precision@5": 0.2,
+        "MRR@20": 1.0,
+        "nDCG@10": 1.0
+      }
+    },
+    "RET-07": {
+      "errors": [
+        "expected mode hybrid",
+        "missing at rank 10: ['J1-MAJ']"
+      ],
+      "metrics": {
+        "recall@10": 0.4,
+        "recall@20": 0.4,
+        "precision@5": 0.4,
+        "MRR@20": 1.0,
+        "nDCG@10": 0.7041278276568413
+      }
+    },
+    "RET-08": {
+      "errors": [],
+      "metrics": {
+        "recall@10": 1.0,
+        "recall@20": 1.0,
+        "precision@5": 0.2,
+        "MRR@20": 1.0,
+        "nDCG@10": 1.0
+      }
+    },
+    "RET-09": {
+      "errors": [
+        "expected mode hybrid"
+      ],
+      "metrics": {
+        "recall@10": 0.3333333333333333,
+        "recall@20": 0.3333333333333333,
+        "precision@5": 0.2,
+        "MRR@20": 1.0,
+        "nDCG@10": 0.7452525342261976
+      }
+    },
+    "RET-10": {
+      "errors": [
+        "expected mode hybrid",
+        "missing at rank 10: ['J2-MAJ']"
+      ],
+      "metrics": {
+        "recall@10": 0.6666666666666666,
+        "recall@20": 0.6666666666666666,
+        "precision@5": 0.6,
+        "MRR@20": 1.0,
+        "nDCG@10": 0.33643022079824747
+      }
+    },
+    "RET-11": {
+      "errors": [],
+      "metrics": {}
+    },
+    "RET-12": {
+      "errors": [],
+      "metrics": {
+        "recall@10": 1.0,
+        "recall@20": 1.0,
+        "precision@5": 0.4,
+        "MRR@20": 0.5,
+        "nDCG@10": 0.6653152460429406
+      }
+    },
+    "RET-13": {
+      "errors": [],
+      "metrics": {}
+    },
+    "RET-14": {
+      "errors": [],
+      "metrics": {
+        "recall@10": 1.0,
+        "recall@20": 1.0,
+        "precision@5": 0.2,
+        "MRR@20": 1.0,
+        "nDCG@10": 1.0
+      }
+    }
+  },
+  "aggregate": {
+    "MRR@20": {
+      "macro": 0.9583333333333334,
+      "n": 12
+    },
+    "exact_MRR@20": {
+      "macro": 1.0,
+      "n": 3
+    },
+    "exact_precision@5": {
+      "macro": 0.4666666666666667,
+      "n": 3
+    },
+    "nDCG@10": {
+      "macro": 0.8607360688301364,
+      "n": 12
+    },
+    "precision@5": {
+      "macro": 0.3666666666666667,
+      "n": 12
+    },
+    "recall@10": {
+      "macro": 0.8666666666666667,
+      "n": 12
+    },
+    "recall@20": {
+      "macro": 0.8666666666666667,
+      "n": 12
+    }
+  },
+  "passed": 10,
+  "total": 14
+}

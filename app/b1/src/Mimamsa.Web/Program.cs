@@ -115,6 +115,13 @@ await using (var lk = new NpgsqlCommand("SELECT pg_try_advisory_lock(hashtext('m
     for (int i = 0; i < 50 && !got; i++) { got = (bool)(await lk.ExecuteScalarAsync())!; if (!got) await Task.Delay(200); }
     if (!got) throw new InvalidOperationException("another serving instance holds the instance lock; refusing to start (single-instance constraint, review F10)");
 }
+if (testMode && conf.GetValue("Mimamsa:Test:ResetState", false))
+{
+    // TEST ONLY: disposable database state for repeatable journeys (accounts, sessions, withdrawals, policy witness)
+    await using var c = await dataSource.OpenConnectionAsync();
+    await using var cmd = new NpgsqlCommand("TRUNCATE app_sessions, app_users, audit_log, withdrawals, vault_copies; UPDATE serving_policy SET epoch = 1, digest = 'state-1'", c);
+    await cmd.ExecuteNonQueryAsync();
+}
 await ledger.InitAsync(resetForTest: testMode && conf.GetValue("Mimamsa:Test:ResetLedger", false));
 await policy.SyncCopiesAsync(generation.Documents.Values.Select(d => (d.DocId, d.CopySha, d.CopyBytes))
     .Concat(generation.HeldCopies.Values.Where(h => !generation.Documents.ContainsKey(h.DocId) || generation.Documents[h.DocId].CopySha != h.Sha)

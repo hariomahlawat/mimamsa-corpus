@@ -256,7 +256,20 @@ public sealed class SearchService
                 ctx.Phrases.Add(ph.Terms);
                 var res = new Dictionary<int, double>();
                 double idf = ph.Terms.Sum(t => _ix.Postings.TryGetValue(t, out var l) ? _ix.Idf(l.Count) : 0);
-                foreach (var (p, n) in occ) { res[p] = idf * _ix.TfNorm(n, p); Note(ctx, p, "“" + ph.Display + "”", n); }
+                // A phrase that is itself a provision identifier ("Rule 8(3)(a)"): the provision's own text in an Act or
+                // Rules document ranks before passages that merely mention it (exact-identifier rule, design 03 §2).
+                var ids = Identifiers.Recognise(ph.Display);
+                var prov = ids.Count == 1 && ids[0].Kind == IdKind.Section && ids[0].Start == 0 && ids[0].End >= ph.Display.TrimEnd().Length ? ids[0] : null;
+                foreach (var (p, n) in occ)
+                {
+                    res[p] = idf * _ix.TfNorm(n, p);
+                    Note(ctx, p, "\u201c" + ph.Display + "\u201d", n);
+                    if (prov is not null && _ix.Docs[_ix.DocOf(p)].IsStatute)
+                    {
+                        int st = Identifiers.ProvisionStrength(_ix.Passages[p].Text, prov.Base!, prov.Sub, true);
+                        if (st >= 2) { res[p] += 1000 * st; Note(ctx, p, $"{prov.ProvisionWord} {prov.Base}{prov.Sub} provision text", 1); }
+                    }
+                }
                 return res;
             }
             case QAnd a:
@@ -386,8 +399,10 @@ public sealed class SearchService
                 var res = new Dictionary<int, double>();
                 if (!_ix.Postings.TryGetValue(baseNo.ToLowerInvariant(), out var post)) return res;
                 foreach (var x in post)
-                    if (Identifiers.PassageHasProvision(_ix.Passages[x.P].Text, baseNo, sub, _ix.Docs[_ix.DocOf(x.P)].IsStatute))
-                    { res[x.P] = 1.0; Note(ctx, x.P, $"section {baseNo}{sub}", 1); }
+                {
+                    int st = Identifiers.ProvisionStrength(_ix.Passages[x.P].Text, baseNo, sub, _ix.Docs[_ix.DocOf(x.P)].IsStatute);
+                    if (st > 0) { res[x.P] = st >= 2 ? 1000.0 * st : 1.0; Note(ctx, x.P, st >= 2 ? $"provision {baseNo}{sub} (text)" : $"reference to {baseNo}{sub}", 1); }
+                }
                 ctx.Highlight.Add(baseNo.ToLowerInvariant());
                 return res;
             }
