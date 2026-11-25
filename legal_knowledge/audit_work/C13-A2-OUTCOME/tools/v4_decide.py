@@ -4,6 +4,8 @@ All values are AUTOMATED CANDIDATES read from a PDF text layer; nothing is legal
 import bisect
 import re
 
+import v4_relief
+
 from v4_text import (  # noqa: F401
     squash,
     UNVERIFIED)
@@ -110,6 +112,18 @@ def two_fields(d, cls, ev, note, zone, signals):
     if cls == "dismissed" and re.search(r"\bin\s+default\b|\bnon[-\s]*prosecution\b|\bwant\s+of\s+prosecution\b|\b[ft]or\s+default\b",
                                         sent, re.I):
         printed, subst = "dismissed_in_default", "no_adjudication"
+    if ev is not None and ev.get("extent") and cls in ("allowed", "partly_allowed"):
+        # V4 (C11 F05): an extent phrase is resolved from the operative directions, not read as partly_allowed
+        p_, s_, why = v4_relief.extent_resolution(d, ev, zone)
+        if p_ is None:
+            return UNVERIFIED, UNVERIFIED, ["printed:" + why, "substantive:" + why]
+        printed, subst, cls = p_, s_, p_
+        reasons.append(why)
+    if cls in ("disposed_of_with_directions", "transferred") and note != "transfer_direction_only":
+        tm = v4_relief.transfer_direction(d, zone)
+        if tm is not None or cls == "transferred":
+            # V4: the court sends the proceeding itself to the Tribunal and then disposes of it here
+            return "transferred", "no_adjudication", (["note:TRANSFER_DIRECTION_IN_OPERATIVE_PART"] if cls != "transferred" else [])
     if cls == "disposed_of_with_directions":
         if _CONSIGN_RE.search(sent):
             printed = "disposed_of"
@@ -157,12 +171,13 @@ def two_fields(d, cls, ev, note, zone, signals):
                                                 mt[max(rs, mt.rfind(".", rs, m.start())):m.end()], re.I)]
         if rms:
             subst = "remanded_for_fresh_decision"
+        elif ev is not None and v4_relief.referenced_remand(d, ev, zone) is not None:
+            subst = "remanded_for_fresh_decision"   # V4: 'allowed in the aforesaid terms', the terms being a fresh decision
+            reasons.append("note:ALLOWED_IN_TERMS_OF_FRESH_DECISION_DIRECTION")
     elif cls in ("remanded", "set_aside_and_remanded"):
         subst = "remanded_for_fresh_decision"
     elif cls == "partly_allowed" and ev is not None and _REMAND_RE.search(sent):
         subst = "remanded_for_fresh_decision"   # 'allowed in part and ... the matter is remitted to the Tribunal for fresh adjudication'
-    if ev is not None and ev.get("extent"):
-        reasons.append("note:EXTENT_QUALIFIED_ALLOWANCE_READ_AS_PARTLY_ALLOWED")
     return printed, subst, reasons
 
 

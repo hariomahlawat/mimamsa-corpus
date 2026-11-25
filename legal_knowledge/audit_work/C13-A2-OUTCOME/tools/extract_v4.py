@@ -42,7 +42,7 @@ DEF_COMMIT = "ad77758d"
 OUT = os.path.join(ROOT, "outputs")
 BATCH_DIR = os.path.join(OUT, "batches")
 BATCH_SIZE = 200
-TOOL_FILES = ("v4_text.py", "v4_quotes.py", "v4_proceedings.py", "v4_clauses.py", "v4_segment.py", "v4_decide.py",
+TOOL_FILES = ("v4_text.py", "v4_quotes.py", "v4_proceedings.py", "v4_clauses.py", "v4_relief.py", "v4_segment.py", "v4_decide.py",
               "v4core.py", "extract_v4.py")
 # FOUO-marked Regulations for the Air Force 2000 copy: must never enter any derivative (C13 brief, hard rule)
 RESTRICTED_SHA256 = {"4284820e5bc2fb7f52ae9fbe8a61650f1579e9b6389ba206a916a69fed016b14"}

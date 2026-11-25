@@ -140,6 +140,36 @@ def load_frozen(path, ids, v2=False):
     return out
 
 
+def _nums(label):
+    return {(int(a), b) for a, b in re.findall(r"(\d{1,6})\s*(?:/|-|\s+of\s+|\s+OF\s+)\s*((?:19|20)\d\d)", label or "")}
+
+
+def match_devg(its, preds):
+    """Development-gold matcher (this tool's convention, as in eval_dev_v3): a gold 'ALL' proceeding matches every
+    predicted row; 'N/YYYY' matches rows carrying that number and year; '#N' (year not recorded) matches rows carrying
+    number N. A single gold proceeding with a single predicted row matches directly. A field is answered when any
+    matched row answers it, and correct only when every answered matched row carries an accepted label."""
+    used, pairs = set(), []
+    for it in its:
+        nums = it["gt_raw"]["nums"]
+        if len(its) == 1 and len(preds) == 1:
+            hit = [0]
+        elif nums == ["ALL"]:
+            hit = list(range(len(preds)))
+        else:
+            hit = []
+            for i, p in enumerate(preds):
+                pn = _nums(p["proceeding"])
+                for k in nums:
+                    if k.startswith("#") and any(n == int(k[1:]) for n, _ in pn) or \
+                            "/" in k and (int(k.split("/")[0]), k.split("/")[1]) in pn:
+                        hit.append(i)
+                        break
+        used.update(hit)
+        pairs.append((it, [preds[i] for i in hit]))
+    return pairs, [p for i, p in enumerate(preds) if i not in used]
+
+
 def run_v4(ids):
     J, _ = extract_v4.load_inputs()
     store = extract_v4.TextStore()
@@ -158,13 +188,20 @@ def score_items(items, preds):
         byj[it["judgment_id"]].append(it)
     res, extras = [], []
     for j, its in byj.items():
-        pairs, ex = match(its, preds.get(j, []), gkey=lambda g: g["gkey"])
+        if its[0]["set"] == "C12H":
+            pairs, ex = match(its, preds.get(j, []), gkey=lambda g: g["gkey"])
+            pairs = [(it, [p] if p else []) for it, p in pairs]
+        else:
+            pairs, ex = match_devg(its, preds.get(j, []))
         extras += [(j, p) for p in ex]
-        for it, p in pairs:
+        for it, ps in pairs:
+            p = ps[0] if ps else None
             r = {"it": it, "pred": p}
             for f in FIELDS:
                 acc = it["accepted"][f]
-                v = p[f] if p else ""
+                vals = [q[f] for q in ps if q[f] not in ABSTAIN]
+                bad = [x for x in vals if acc and x not in acc]
+                v = (bad or vals or [p[f] if p else ""])[0]
                 if not acc:
                     cat = None
                 elif p is None:

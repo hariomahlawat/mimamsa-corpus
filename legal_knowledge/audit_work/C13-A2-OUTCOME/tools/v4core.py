@@ -4,6 +4,8 @@ All values are AUTOMATED CANDIDATES read from a PDF text layer; nothing is legal
 import bisect
 import re
 
+import v4_relief
+
 from v4_text import VERSION, STATUS, UNVERIFIED, OUTCOME_VOCAB, PRINTED_VOCAB, SUBST_VOCAB  # noqa: F401
 from v4_decide import DEFAULT_SUBST  # noqa: F401
 from v4_text import (  # noqa: F401
@@ -311,6 +313,14 @@ def analyze_segment(d, seg, hosts, scr, is_first, section=False):
                               sa_text, re.I) and not re.search(r"to\s+the\s+extent|partly|partially|modif|insofar|in\s+so\s+far", sa_text, re.I):
             res["status"] = "final"
             res["rows"] = [("ALL", "", "allowed", sa[-1], "inferred_from_set_aside_of_impugned_decision")]
+        elif v4_relief.transfer_direction(d, (zs, body_end)) is not None:
+            tm = v4_relief.transfer_direction(d, (zs, body_end))
+            a_ = max(zs, mt.rfind(".", zs, tm.start()) + 1)
+            b_ = mt.find(".", tm.end())
+            b_ = body_end if b_ < 0 or b_ > body_end else b_ + 1
+            res["status"] = "final"
+            res["rows"] = [("ALL", "", "transferred", {"sentence": (a_, b_), "pos": tm.start(), "subject": ""},
+                            "transfer_direction_only")]
         elif notfinal:
             # v3: a listing direction that names case numbers applies to those proceedings only
             named = [c for a_, b_ in nf_sents for c in find_case_numbers(mt[a_:b_]) if c["ptype"] not in ("misc", "lower")]
@@ -358,7 +368,7 @@ def analyze_segment(d, seg, hosts, scr, is_first, section=False):
         use = strong or lst
         for x in use:
             if x["cls"] == "partly_allowed_extent":
-                x["cls"], x["extent"] = "partly_allowed", True
+                x["cls"], x["extent"] = "allowed", True   # V4: resolved later from the operative directions
         if any(x["cls"] == "extent_qualified" for x in use):
             res["status"] = "abstain"
             res["reason"] = "EXTENT_QUALIFIED_ALLOWANCE_ALLOWED_OR_PARTLY_ALLOWED_UNDETERMINED"
