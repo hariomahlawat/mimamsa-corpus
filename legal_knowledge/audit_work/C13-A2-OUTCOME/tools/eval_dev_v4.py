@@ -281,6 +281,13 @@ def main(argv):
         for g, fn in GROUPS:
             s[g] = {f: summarize(res, f, lambda r, fn=fn: fn(r["it"])) for f in FIELDS}
         summary["systems"][name] = s
+    # V4 evidence tiers (in-sample precision per confidence tier, all spent sets)
+    tiers = {}
+    for f in FIELDS:
+        for tier in ("high", "medium", "low"):
+            x = summarize(allres["V4"], f, lambda r, t=tier: (r["pred"] or {}).get("confidence") == t)
+            tiers.setdefault(f, {})[tier] = {"answered": x["answered"], "correct": x["correct"], "precision": x["precision"]}
+    summary["V4_confidence_tiers"] = tiers
     # anchors (V4 answered rows on the gold judgments)
     n = at = pg = 0
     for j, rows in systems["V4"].items():
@@ -357,6 +364,16 @@ def table(s):
                 cells += ["%d/%d = %s" % (x["correct"], x["answered"], "%.1f%%" % (100 * x["precision"]) if x["precision"] is not None else "n/a"),
                           "%d/%d = %s" % (x["answered"], x["scorable"], "%.1f%%" % (100 * x["coverage"]) if x["coverage"] is not None else "n/a")]
             out.append("| %s | %s | %s |" % (g, f, " | ".join(cells)))
+    out.append("")
+    out.append("Failure categories (ALL spent sets; abstentions and errors):")
+    out.append("")
+    out.append("| System | Field | Categories |")
+    out.append("| --- | --- | --- |")
+    for nme in ("V4", "V3", "V2"):
+        for f in FIELDS:
+            out.append("| %s | %s | %s |" % (nme, f, ", ".join("%s %d" % kv for kv in sorted(s["systems"][nme]["ALL spent sets"][f]["categories"].items()))))
+    out.append("")
+    out.append("V4 in-sample precision by confidence tier (ALL spent sets): " + json.dumps(s.get("V4_confidence_tiers", {})))
     out.append("")
     out.append("Protocol reproduces frozen V3 C12 holdout result (126/138, 108/113): %s" % s["protocol_reproduces_V3_C12_result"])
     out.append("V4 anchors: %s" % json.dumps(s["V4_anchors"]))

@@ -4,7 +4,7 @@ All values are AUTOMATED CANDIDATES read from a PDF text layer; nothing is legal
 import bisect
 import re
 
-VERSION = "c13-extract-v4/0.1.0-dev"
+VERSION = "c13-extract-v4/1.0.0"
 STATUS = "AUTOMATED_CANDIDATE_NOT_VERIFIED"
 UNVERIFIED = "OUTCOME_UNVERIFIED"
 OUTCOME_VOCAB = ["allowed", "partly_allowed", "dismissed", "dismissed_as_withdrawn", "dismissed_as_infructuous",

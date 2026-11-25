@@ -1,0 +1,153 @@
+{
+ "MEASURED_ON_OUTPUTS_ONLY": true,
+ "V3": {
+  "abstain_reasons_both_fields": {
+   "CONFLICTING_DISPOSITIONS_FOR_ONE_PROCEEDING": 1,
+   "CONFLICTING_DISPOSITIONS_WITHOUT_PROCEEDING_MAPPING": 76,
+   "DISPOSITION_NAMES_NON_HOST_CASE_NUMBER": 29,
+   "DISPOSITION_WITH_EXCEPTION_OR_CARVE_OUT": 9,
+   "EXTENT_QUALIFIED_ALLOWANCE_ALLOWED_OR_PARTLY_ALLOWED_UNDETERMINED": 1,
+   "GARBLED_TEXT_IN_OPERATIVE_PART": 30,
+   "GENERIC_DISPOSITION_CONFLICTS_WITH_PROCEEDING_SPECIFIC_DISPOSITION": 5,
+   "LAST_SEGMENT_UNRESOLVED_AFTER_EARLIER_DISPOSITION": 2,
+   "NOT_FINAL_DIRECTION_FOR_A_CASE_NOT_MAPPED_TO_A_HOST": 1,
+   "NO_DISPOSITION_FOUND": 7,
+   "NO_DISPOSITION_IN_OPERATIVE_PART": 516,
+   "NO_DISPOSITION_MAPPED_TO_THIS_PROCEEDING": 81,
+   "NO_OPERATIVE_CUE_IN_FINAL_PART": 107,
+   "NO_TEXT_FILE_FOR_THIS_SHA_AT_COMMIT": 4,
+   "ONLY_LOWER_FORUM_DISPOSITION_FOUND": 27,
+   "ONLY_MISC_APPLICATION_DISPOSAL_FOUND": 2517,
+   "ONLY_PAST_OR_CONDITIONAL_DISPOSITION_FOUND": 43,
+   "ONLY_QUOTED_DISPOSITION_LANGUAGE_FOUND": 51,
+   "PARTY_SPECIFIC_DISPOSITION_CONFLICTS_WITH_GENERIC_DISPOSITION": 37,
+   "PARTY_SPECIFIC_DISPOSITION_NOT_MAPPED_TO_ONE_OF_SEVERAL_PROCEEDINGS": 30,
+   "SECTION": 100,
+   "SINGULAR_DISPOSITION_IN_MULTI_PROCEEDING_JUDGMENT": 62
+  },
+  "by_court_judgment_printed_coverage": {
+   "(none)": "0/4",
+   "Allahabad High Court": "233/264",
+   "High Court of Delhi": "1383/1564",
+   "High Court of Jammu and Kashmir": "297/360",
+   "High Court of Punjab and Haryana": "978/1137",
+   "Supreme Court of India": "212/282"
+  },
+  "judgments": 3611,
+  "printed_disposal": {
+   "judgment_any_answered": 3103,
+   "labels": {
+    "OUTCOME_UNVERIFIED": 3792,
+    "allowed": 695,
+    "dismissed": 3988,
+    "dismissed_as_infructuous": 3,
+    "dismissed_as_withdrawn": 156,
+    "dismissed_in_default": 7,
+    "disposed_of": 258,
+    "disposed_of_with_directions": 3053,
+    "not_final": 49,
+    "partly_allowed": 772,
+    "remanded": 6,
+    "set_aside_and_remanded": 12,
+    "transferred": 213
+   },
+   "row_answered": 9212
+  },
+  "rows": 13004,
+  "substantive_result": {
+   "judgment_any_answered": 2573,
+   "labels": {
+    "OUTCOME_UNVERIFIED": 6180,
+    "interim_only": 49,
+    "no_adjudication": 562,
+    "relief_granted": 1415,
+    "relief_partly_granted": 770,
+    "relief_refused": 3988,
+    "remanded_for_fresh_decision": 40
+   },
+   "row_answered": 6824
+  }
+ },
+ "V4": {
+  "abstain_reasons_both_fields": {
+   "CONFLICTING_DISPOSITIONS_FOR_ONE_PROCEEDING": 1,
+   "CONFLICTING_DISPOSITIONS_WITHOUT_PROCEEDING_MAPPING": 75,
+   "DISPOSITION_NAMES_NON_HOST_CASE_NUMBER": 26,
+   "DISPOSITION_WITH_EXCEPTION_OR_CARVE_OUT": 9,
+   "GARBLED_TEXT_IN_OPERATIVE_PART": 28,
+   "GENERIC_DISPOSITION_CONFLICTS_WITH_PROCEEDING_SPECIFIC_DISPOSITION": 5,
+   "LAST_SEGMENT_UNRESOLVED_AFTER_EARLIER_DISPOSITION": 7,
+   "NOT_FINAL_DIRECTION_FOR_A_CASE_NOT_MAPPED_TO_A_HOST": 1,
+   "NO_DISPOSITION_FOUND": 7,
+   "NO_DISPOSITION_IN_OPERATIVE_PART": 429,
+   "NO_DISPOSITION_MAPPED_TO_THIS_PROCEEDING": 66,
+   "NO_OPERATIVE_CUE_IN_FINAL_PART": 61,
+   "NO_TEXT_FILE_FOR_THIS_SHA_AT_COMMIT": 4,
+   "ONLY_A_DISSENTING_OPINION_STATES_A_DISPOSITION": 5,
+   "ONLY_LOWER_FORUM_DISPOSITION_FOUND": 27,
+   "ONLY_MISC_APPLICATION_DISPOSAL_FOUND": 2496,
+   "ONLY_PAST_OR_CONDITIONAL_DISPOSITION_FOUND": 45,
+   "ONLY_QUOTED_DISPOSITION_LANGUAGE_FOUND": 45,
+   "PARTY_SPECIFIC_DISPOSITION_CONFLICTS_WITH_GENERIC_DISPOSITION": 37,
+   "PARTY_SPECIFIC_DISPOSITION_NOT_MAPPED_TO_ONE_OF_SEVERAL_PROCEEDINGS": 32,
+   "SECTION": 100,
+   "SINGULAR_DISPOSITION_IN_MULTI_PROCEEDING_JUDGMENT": 115,
+   "printed": 4
+  },
+  "by_court_judgment_printed_coverage": {
+   "(none)": "0/4",
+   "Allahabad High Court": "233/264",
+   "High Court of Delhi": "1408/1564",
+   "High Court of Jammu and Kashmir": "326/360",
+   "High Court of Punjab and Haryana": "990/1137",
+   "Supreme Court of India": "223/282"
+  },
+  "confidence": {
+   "high": 2570,
+   "low": 494,
+   "medium": 6313
+  },
+  "judgments": 3611,
+  "notes_v4": {
+   "ALLOWED_IN_TERMS_OF_FRESH_DECISION_DIRECTION": 1,
+   "EXTENT_LIMITING_WORDS_READ_AS_PARTLY_ALLOWED": 9,
+   "EXTENT_PHRASE_REFERS_TO_DIRECTIONS_QUASHING_IMPUGNED_DECISIONS_NONE_REFUSED": 2,
+   "EXTENT_PHRASE_WITH_LIMITATION_IN_OPERATIVE_PART": 9,
+   "TRANSFER_DIRECTION_IN_OPERATIVE_PART": 73
+  },
+  "printed_disposal": {
+   "judgment_any_answered": 3180,
+   "labels": {
+    "OUTCOME_UNVERIFIED": 3680,
+    "allowed": 711,
+    "dismissed": 4015,
+    "dismissed_as_infructuous": 3,
+    "dismissed_as_withdrawn": 157,
+    "dismissed_in_default": 7,
+    "disposed_of": 388,
+    "disposed_of_with_directions": 2887,
+    "not_final": 48,
+    "partly_allowed": 768,
+    "remanded": 6,
+    "set_aside_and_remanded": 12,
+    "transferred": 320
+   },
+   "row_answered": 9322
+  },
+  "rows": 13002,
+  "substantive_result": {
+   "judgment_any_answered": 2686,
+   "labels": {
+    "OUTCOME_UNVERIFIED": 6031,
+    "interim_only": 48,
+    "no_adjudication": 670,
+    "relief_granted": 1430,
+    "relief_partly_granted": 767,
+    "relief_refused": 4015,
+    "remanded_for_fresh_decision": 41
+   },
+   "row_answered": 6971
+  }
+ },
+ "excluded_judgments_dropped": 325
+}

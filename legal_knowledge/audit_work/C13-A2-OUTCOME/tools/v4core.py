@@ -6,7 +6,7 @@ import re
 
 import v4_relief
 
-from v4_text import VERSION, STATUS, UNVERIFIED, OUTCOME_VOCAB, PRINTED_VOCAB, SUBST_VOCAB  # noqa: F401
+from v4_text import OUTCOME_VOCAB, PRINTED_VOCAB, SUBST_VOCAB  # noqa: F401  (re-exported for the driver)
 from v4_decide import DEFAULT_SUBST  # noqa: F401
 from v4_text import (  # noqa: F401
     mask_page_markers,
