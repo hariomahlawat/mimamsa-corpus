@@ -1,0 +1,16 @@
+{
+ "coder_ids": [
+  "C13-ADJ-OUT",
+  "C13-COD-OUT-1",
+  "C13-COD-OUT-2"
+ ],
+ "created_by": "C13 GA4 evaluator (independent; not a coder, adjudicator or extractor author)",
+ "created_utc": "2026-11-25T19:47:08Z",
+ "files": {
+  "H-OUT-C13.csv": "59847e945f928ab3aafa60369ecd53bcfbec66ae5f9d2add5ce6fd4c3ec257ee"
+ },
+ "note": "Adjudicated reference for H-OUT-C13, built by c13_coding.py truth from coder_1/coder_2 sheets + adjudicator result (rebuild byte-identical). AI-coded (separate agent instances); no human annotator. Sheet coder_id values are slot names coder_1/coder_2, mapped to instance ids in coding/ASSIGNMENT_LOG.md.",
+ "parent_version": null,
+ "set": "H-OUT-C13",
+ "version": 1
+}

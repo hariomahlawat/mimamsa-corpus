@@ -1,0 +1,68 @@
+{
+ "author_statement": {
+  "curated_kb": "I did not consult the curated or KB content (C11 curated 53, C12 curated scope, WS-B holdings register, KB records) for the 4 CURATED_KB_CONTENT judgments (JK-76ec35cd7ab232b5, JK-88f84411abdb3028, JK-05e9484593272fe0, JK-16dcc07543999d26), nor for any judgment. The only C12 scope file used was SCOPE_C12.csv, read programmatically for judgment_ids; J-16dcc07543999d26 was excluded from training and from every development output.",
+  "items_status": "All items AUTOMATED_CANDIDATE_NOT_VERIFIED; no legal conclusion is asserted.",
+  "other_disclosures": "On the coordinator's instruction I read the judgment_key / rep_sha256 / rep_doc_id columns of H-HOLD-C13 SAMPLE.csv and RESERVE.csv and the key/id/sha/doc_id columns of FRAME_RECORDS.csv (at 5e07e010) to build the exclusion list; protocol s.4 lists SAMPLE.csv as evaluator-only. Before the list existed, two automated scope-wide scans processed 28 fresh SC-scope texts and printed 2 fresh ids with an opinion count and the cue word 'dissent' (exclusions/EXCLUSION_NOTE.md). For the predictions I read only item_id and rep_sha256 of the blank coder packet; no coding, truth, adjudication or ITEM_MAP was read, and the prediction contents were not inspected beyond row counts.",
+  "reviews_and_scratchpad": "I, the C13-A3 extractor author (Claude agent, session 01U1on2TzucdKCNmpKvBZK7J), have NOT viewed C13-A0-EVAL/reviews/ at a4865e76 or 06340486 (or at any commit), nor the reviewer scratchpad. After merging f1d61f71 a directory listing of C13-A0-EVAL/ showed the name 'reviews'; no file in it was opened."
+ },
+ "config_sha256": {
+  "exclusions/EXCLUDE_H_HOLD_C13.txt": "b258ebb726d4664bb1525a13f39844037299677a3122f25007c764f8c6e83f62",
+  "model/THRESHOLDS.json": "7af11c45ae7efc21ef874db8746cc63d18e7e2585ebcbbd0dcef9c7f737949f8",
+  "model/TRAINING_REPORT.json": "b373e44007cc17a89927e492cc02d74c59ea3c04d5f5e795d488b46e2ea79582"
+ },
+ "extractor": "c13-holdings/1.0.0",
+ "frozen_from": "candidate lineage 05c7c82a, frozen as is: the only changes are the version label 0.9.0-candidate -> 1.0.0 and the addition of tools/predict_holdout_c13.py (packet-pointer prediction writer); no rule, threshold or model change",
+ "frozen_on": "2026-11-25",
+ "holdout_predictions": {
+  "command": "python3.11 -I -B tools/predict_holdout_c13.py --packet ../C13-A0-EVAL/outputs/packets/H-HOLD-C13/coder_1/CODER_SHEET.csv --out frozen_predictions/PRED_H-HOLD-C13.csv",
+  "determinism": "re-run under Python 3.13 gives the identical sha256",
+  "file": "frozen_predictions/PRED_H-HOLD-C13.csv",
+  "holding_rows": 758,
+  "items": 113,
+  "items_with_predictions": 109,
+  "items_without": {
+   "NO_HOLDING": 1,
+   "NO_PREDICTION:NO_TEXT_LAYER_FOR_SHA": 3
+  },
+  "packet_input": "C13-A0-EVAL/outputs/packets/H-HOLD-C13/coder_1/CODER_SHEET.csv (pointer columns item_id, rep_sha256 only; coder_2 pointer set identical)",
+  "packet_sha256": "4191217309e85844a3d07c03e0c3a270c461d156e96c762efccac03bf1944856",
+  "question_of_law_rows": 75,
+  "rows": 837,
+  "sha256": "3894ecbfb3c3c6d0bae8ab275f905d0c812c2d018dd3b63fb3eeeb348758e164"
+ },
+ "holdout_registration_ancestry": {
+  "check": "git merge-base --is-ancestor f1d61f71 <freeze commit>",
+  "registration_branch_head": "f1d61f71",
+  "result": "ANCESTOR_OK (merged by ordinary merge commit 59abf9a7 before the freeze commit)"
+ },
+ "protocol": "C13-A0-EVAL/PROTOCOL_C13.md v1.1 (A0 head f1d61f71)",
+ "scope_outputs_sha256": {
+  "HOLDINGS_C13.jsonl": "7da90edf5d044d3568c37c23fce15aa6db4d5fc50de63496bcfbd6aa2243bc45",
+  "HOLDINGS_C13_JUDGMENTS.csv": "238c629367c6a2c0ae6851439e2223de717ae2f3044f319c5a81a7533ee898b2",
+  "PASSAGES_C13.tsv.gz": "104465f167a447999236e6993fbed6589a4df5a997b7a277b0660a46962abef1"
+ },
+ "status": "FROZEN",
+ "targets_and_estimates": {
+  "author_estimates": "about 50% precision (developer hand-check 20/40 on unseen non-fresh judgments, not independent) and 51-60% recall (out-of-fold on spent references); both below target for precision; the milestone is NOT expected to be met",
+  "interim_milestone": "holding precision >= 80% and recall >= 60% on H-HOLD-C13 (unchanged)",
+  "no_post_estimate_tuning": "no tuning was done for this freeze after the coordinator's freeze instruction"
+ },
+ "thresholds": {
+  "floor_min_court_sentences": 15,
+  "holding": 0.6,
+  "holding_floor": 0.3,
+  "holding_over_operative": 0.95,
+  "issue": 0.6
+ },
+ "tool_config_model_sha256": {
+  "C12:holdings_c12.py": "a1b0163824e4062b38efe1423985559935130f7e581f3c3ba61e29a50fc7bb89",
+  "C12:holdings_core.py": "6d5b05e447e082cb8d9be4a1784148a18221091bd836b5fceb4cecbf6178fe8e",
+  "c13_corpus.py": "8f3dc72767f9f21797d4f24c958ba74f5ec0a340b69990eb2f46c7ad342fc583",
+  "c13_extract.py": "9b9a3f4f75f0e8b6da246e2ec24b98844ee732ade76c29d2fd65bccc07910549",
+  "c13_features.py": "edf3648e238a757a593b5d7590e38327edf210b23f0ee9f68ad1b9d9eb5fbff9",
+  "c13_segment.py": "6e3b80afcffdc78eb4bdda0d90c75803e3b9bcc29509d97ae956be9abc0fbcc5",
+  "holdings_c13.py": "a88bf33d0424c9ad4074260f8b71dd5666c3bd5fdbd6ea9f7737106b8892e640",
+  "model:c13_holdings_model.json": "fb28209c39a3a215d019ade5ff1356713306005606dd5223a182bd2db631e30a",
+  "predict_holdout_c13.py": "f86d26f4a0ef165d132f7dddefe6d07a71168f57fb2f96af72bdb553aa5b4d6e"
+ }
+}

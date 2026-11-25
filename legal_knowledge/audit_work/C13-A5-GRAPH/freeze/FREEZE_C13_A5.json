@@ -1,0 +1,56 @@
+{
+ "a0_commit": "f1d61f71",
+ "ancestry_checked_before_freeze": {
+  "5e07e010": true,
+  "d3a1bb0a": true,
+  "f1d61f71": true
+ },
+ "config_note": "lexicon, rules and the H-REL mapping are embedded in the hashed tool files",
+ "extractor": "treatment-c13/0.9.0-dev",
+ "known_limitations": [
+  "U11 (confirmation review P3)",
+  "edges target judgments not propositions",
+  "FOLLOWS boilerplate concentration (159/257)",
+  "case-name-only citations not detected"
+ ],
+ "merge_commit": "bf791e4b",
+ "model": null,
+ "model_note": "rule-based, CPU, Python 3.13.18 stdlib; no weights, no network",
+ "predictions": {
+  "abstained_no_text": 1,
+  "items": 160,
+  "none_rows": 39,
+  "path": "legal_knowledge/audit_work/C13-A5-GRAPH/freeze/H-REL-C13_PREDICTIONS.csv",
+  "rows": 344,
+  "sha256": "c53ea96a4c387d4d7d802d643e62b9fd3ee0b90d5ce3f8d98e5cb02640718bc3",
+  "units": 304,
+  "units_by_relation": {
+   "cites": 298,
+   "follows": 6
+  }
+ },
+ "protocol": "PROTOCOL_C13.md v1.1",
+ "registration_commits": {
+  "added": "d3a1bb0a",
+  "last_changed": "5e07e010"
+ },
+ "statement": {
+  "consulted_curated_or_kb_for_4_curated_kb_judgments": false,
+  "viewed_a0_reviews_a4865e76_or_06340486": false,
+  "viewed_holdout_pages": false,
+  "viewed_other_pages_of_holdout_judgments": [
+   "JK-f7c70c98230234f6 pp.12-13",
+   "JK-4d86990aad309acd p.1 (reviewer note)",
+   "JK-88a22c0473110afc p.58 (reviewer note)",
+   "JK-aac99e3e5fbad324 p.28 (reviewer note)"
+  ],
+  "viewed_reviewer_scratchpad": false
+ },
+ "tool_sha256": {
+  "C11 relations_c11.py": "6c6023c484c41f2181648b66de963a987379e350835075099ff9cbe40223a681",
+  "tools/common_c13.py": "ec7fe04adf6e10e793485c8f8dc7727ff5c0cfeff079bae7c177e4757ae10f82",
+  "tools/predict_hrel_c13.py": "eb2bbd96e85415a4404d52f6ab461f3c7182b0e7324df4598b48e814aebd6127",
+  "tools/treatment_c13.py": "f8be7a01b02911d17e31c620d04758de261898b0115ce2d4852fa0b04fee73f2"
+ },
+ "workstream": "C13-A5"
+}

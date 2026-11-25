@@ -1,0 +1,91 @@
+{
+  "schema_version": "0.2.0",
+  "doc_id": "hc-ph-2023-cwp-14249-2023-phhc010845612023-1-2023-07-07",
+  "doc_type": "judgment",
+  "title": "CWP/14249/2023 of UNION OF INDIA AND OTHERS Vs ARMED FORCES TRIBUNAL AND ANOTHER",
+  "number": "2023:PHHC:085740-DB",
+  "issuing_authority": "High Court of Punjab and Haryana",
+  "issue_date": "2023-07-07",
+  "effective_date": null,
+  "status": "unknown",
+  "status_note": null,
+  "status_as_of": "2026-11-24",
+  "source": "hc",
+  "source_url": "https://indian-high-court-judgments.s3.ap-south-1.amazonaws.com/data/pdf/year=2023/court=3_22/bench=phhc/PHHC010845612023_1_2023-07-07.pdf",
+  "source_aliases": [],
+  "retrieved_at": "2026-11-24T10:15:48Z",
+  "sha256": "6dc58e8721c502c67874102e09ef59a2d75f79b77004c577625e8afec2e73fc2",
+  "raw_path": "data/raw/hc/2023/6dc58e8721c502c67874102e09ef59a2d75f79b77004c577625e8afec2e73fc2.pdf",
+  "mime_type": "application/pdf",
+  "page_count": 5,
+  "access_marking": null,
+  "text_method": null,
+  "ocr_confidence": null,
+  "ocr_low_confidence_pages": [],
+  "relations": [],
+  "field_provenance": {
+    "page_count": "rule",
+    "title": "crawler",
+    "issue_date": "crawler",
+    "neutral_citation": "llm",
+    "parties": "rule",
+    "case_numbers": "rule",
+    "judges": "llm",
+    "bench": "llm",
+    "topics": "llm",
+    "relevance": "llm"
+  },
+  "text_path": null,
+  "text_quality": "suspect",
+  "needs_ocr": true,
+  "pages_without_text": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "statutes_cited": [],
+  "language": null,
+  "parent_doc_id": null,
+  "original_filename": "PHHC010845612023_1_2023-07-07.pdf",
+  "source_record": {
+    "system": "aws-open-data:indian-high-court-judgments",
+    "record_id": "PHHC010845612023",
+    "collection": "phhc",
+    "act_id": null,
+    "handle": null,
+    "listing_raw_path": null
+  },
+  "curation_note": "From the AWS Open Data bucket 'indian-high-court-judgments' (CC-BY-4.0, maintained by P. Vanga / Dattam Labs), a copy of records from the eCourts judgments portal. Excluded by the crawler's keyword pass ('no military keyword in the text'), ranked first tier in C11, re-acquired in C12 (T5-EXC-0202) with SHA-256 equal to the crawler-logged value, and ingested in C12 after review (judicial_recovery_c12).",
+  "court": "High Court of Punjab and Haryana",
+  "bench": "Division Bench",
+  "case_numbers": [
+    "CWP/14249/2023"
+  ],
+  "neutral_citation": "2023:PHHC:085740-DB",
+  "reported_citations": [],
+  "parties": {
+    "petitioner": [
+      "UNION OF INDIA AND OTHERS"
+    ],
+    "respondent": [
+      "ARMED FORCES TRIBUNAL AND ANOTHER"
+    ]
+  },
+  "judges": [
+    "Ravi Shanker Jha",
+    "Arun Palli"
+  ],
+  "outcome": null,
+  "cases_cited": [],
+  "topics": [
+    "service_pension"
+  ],
+  "relevance": {
+    "status": "not_checked",
+    "hits": 0,
+    "keywords": {},
+    "note": "Text layer unusable (font without a Unicode map; does not read as English): keyword pass not possible until OCR. C12 review of the page images: Writ petition (Division Bench) by the Union against AFT execution orders on revised pension arrears: within scope 'writs against AFT orders'."
+  }
+}

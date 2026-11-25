@@ -1,0 +1,16 @@
+judgment_id,holdouts,a3_artifact,note
+J-1def331cba2f5c4d,H-OUT,selfcheck/SELFCHECK_SAMPLE.csv,developer read excerpt in context and labelled it
+J-28f88d53cdcab798,H-OUT;H-REL,selfcheck/SELFCHECK_SAMPLE.csv;gold/OPINION_GOLD_C13.csv,self-check row at p.20 (coded H-REL page p.19); opinion gold built from its text (H-REL coded pages 8 and 19)
+J-6572f8e4e42b1acb,H-OUT;H-REL,selfcheck/SELFCHECK_SAMPLE.csv,developer read excerpt in context and labelled it
+J-7a28577d8eb000c3,H-OUT,selfcheck/SELFCHECK_SAMPLE.csv,developer read excerpt in context and labelled it
+J-7f5e29192eb0b3a7,H-OUT;H-REL,selfcheck/SELFCHECK_SAMPLE.csv,developer read excerpt in context and labelled it
+J-bf599845016b9ee4,H-OUT;H-REL,selfcheck/SELFCHECK_SAMPLE.csv,developer read excerpt in context and labelled it
+J-ce74488cee822fa3,H-OUT,selfcheck/SELFCHECK_SAMPLE.csv,developer read excerpt in context and labelled it
+J-db759e27809627fc,H-OUT,selfcheck/SELFCHECK_SAMPLE.csv,developer read excerpt in context and labelled it
+J-fc44a11760634183,H-OUT,selfcheck/SELFCHECK_SAMPLE.csv,developer read excerpt in context and labelled it
+J-38dce4e6ce951903,H-REL,selfcheck/SELFCHECK_SAMPLE.csv,developer read excerpt in context and labelled it
+J-47dffe7ecd2f8159,H-REL,selfcheck/SELFCHECK_SAMPLE.csv,self-check row at p.21 (coded H-REL page p.22)
+J-4e51f01632d9595d,H-REL,selfcheck/SELFCHECK_SAMPLE.csv,developer read excerpt in context and labelled it
+J-84225cbed11f6dec,H-REL,selfcheck/SELFCHECK_SAMPLE.csv,developer read excerpt in context and labelled it
+J-cebc765ebc72096d,H-REL,selfcheck/SELFCHECK_SAMPLE.csv,developer read excerpt in context and labelled it
+J-fd6798fbb10965c6,H-REL,selfcheck/SELFCHECK_SAMPLE.csv,developer read excerpt in context and labelled it

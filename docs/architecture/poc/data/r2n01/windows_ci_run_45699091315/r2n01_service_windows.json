@@ -1,0 +1,94 @@
+{
+ "platform": "win32",
+ "checks": [
+  {
+   "name": "svc_exact_206",
+   "pass": true,
+   "status": 206
+  },
+  {
+   "name": "svc_near_end_206",
+   "pass": true,
+   "status": 206
+  },
+  {
+   "name": "svc_unauth_401",
+   "pass": true,
+   "status": 401
+  },
+  {
+   "name": "svc_other_user_404",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "svc_oversize_400",
+   "pass": true,
+   "status": 400
+  },
+  {
+   "name": "svc_oob_416",
+   "pass": true,
+   "status": 416
+  },
+  {
+   "name": "svc_positive_control_search_200",
+   "pass": true,
+   "status": 200
+  },
+  {
+   "name": "svc_F01_unknown_copy_404_no_epoch_bump",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "svc_F05_uncertain_transfer_recorded",
+   "pass": true,
+   "uncertain": 1,
+   "released": 0
+  },
+  {
+   "name": "svc_withdraw_ok",
+   "pass": true,
+   "status": 200
+  },
+  {
+   "name": "svc_withdrawn_404",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "svc_crash_supervisor_restart",
+   "pass": true,
+   "pid_before": 1404,
+   "pid_after": 7700,
+   "seconds": 2.67
+  },
+  {
+   "name": "svc_F02_charge_survives_crash_restart",
+   "pass": true,
+   "charged_before": 134144,
+   "held": 134144
+  },
+  {
+   "name": "svc_F04_withdrawal_survives_restart_with_seed",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "svc_unrelated_after_restart_206",
+   "pass": true,
+   "status": 206
+  },
+  {
+   "name": "svc_F02_release_after_socket_evidence",
+   "pass": true,
+   "remaining": [
+    0,
+    0
+   ],
+   "seconds": 1.16
+  }
+ ],
+ "all_pass": true
+}

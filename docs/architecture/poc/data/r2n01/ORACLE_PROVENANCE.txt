@@ -1,0 +1,5 @@
+oracle: PR #54 head 703d98cb, docs/architecture/reviews/c13-assurance/transport_oracle.py sha256 fcb4806d07ce5c1e60904ee8510cee1c32c5eb7645b2a32a19a56c892a5741a0 (unmodified)
+fixtures transport-fixtures.json sha256 b8377355551d76bbb42dbd16f1ff21a7416733eb14bd7adeb20712a85d2fc85d (unmodified)
+self-test: positive_vectors 1, rejected_vectors 16 (pass)
+command: python -B transport_oracle.py --trace <dir>/normalized_trace.json --http-cases app/poc/p1_hosting/r2n01/n01_http_cases.json
+procnet = Linux /proc/net/tcp tx_queue drain probe; tcpstate = portable OS TCP-table probe (the Windows code path) forced on Linux

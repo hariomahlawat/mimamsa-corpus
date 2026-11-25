@@ -1,0 +1,101 @@
+pred_id,label,tag,reason,order,item_id
+HC13-47d95a841a2874,CORRECT,,court's conclusion applying the law (para 4 struck down) to uphold AFT invalid-pension order,1,HH13-38fdf6f424
+HC13-2e2c3b2b0fd77c,INCORRECT,FACT_FINDING,appraisal that GCM sentence was lenient; the ruling is the next sentence,2,HH13-9442014dcd
+HC13-f058cc8bc30fb6,INCORRECT,QUOTED_PRECEDENT,description of the distinguished precedent's reasoning,3,HH13-4ddc7fb0aa
+HC13-8e31ca955e872b,CORRECT,,"court's statement of the limits of judicial review of punishment, the rule it then applies (proportionality)",4,HH13-ec370442b5
+HC13-a88338fa30807f,CORRECT,,rejection of contention applying sponsorship guidelines to facts,5,HH13-44300ea336
+HC13-22d8da7ab4cf98,INCORRECT,FACT_FINDING,observation that respondents accepted illegality,6,HH13-0368be1a51
+HC13-cf41547796ddc0,INCORRECT,RESTATEMENT,"due-process conclusion restated more clearly in the next sentence (""constrained to hold"")",7,HH13-aba0d1c3cc
+HC13-1fe803ab53beb8,CORRECT,,"legal character of discharge certificate under s.17(4) Navy Act, relied on for qualifying service",8,HH13-e451223c25
+HC13-a6c563156fec74,INCORRECT,QUOTED_PRECEDENT,span is inside a quotation from an earlier judgment,9,HH13-50f5cccaa3
+HC13-878f79890cff90,INCORRECT,FACT_FINDING,appraisal of documents,10,HH13-5abc2f7a78
+HC13-888088c98a446a,INCORRECT,PROCEDURAL_OR_NARRATIVE,introduces the text of Rule 13,11,HH13-35ea45846d
+HC13-776943844f6f28,INCORRECT,FACT_FINDING,characterisation of what happened to the petitioner; the proposition is in the preceding sentences,12,HH13-91a16efde5
+HC13-682f074a3fcf1e,CORRECT,,natural-justice issue decided on the facts,13,HH13-8cd872f365
+HC13-f8502bac34cae7,INCORRECT,OTHER,reproduced text of a pension instruction,14,HH13-72aff4e798
+HC13-d216347dccca7f,CORRECT,,law applied: date of enrolment is the material date for qualifying service,15,HH13-e451223c25
+HC13-15d7bdc73cc015,CORRECT,,court's ruling on the respondents' remaining power under Rule 22,16,HH13-226cd4c846
+HC13-255ad70dc427f3,INCORRECT,OPERATIVE,bare conclusion not to interfere / affirm,17,HH13-b73e49953f
+HC13-c6e5da34a12bd5,INCORRECT,FACT_FINDING,date observation,18,HH13-226cd4c846
+HC13-8e98d9fefe98be,CORRECT,,earlier SC order lays down no ratio the applicants can rely on,19,HH13-8d08172a65
+HC13-18342c5d87b604,CORRECT,,Dharamvir Singh presumption adopted and applied: onus not discharged,20,HH13-cd8ae13534
+HC13-29ee877e9ae814,INCORRECT,FACT_FINDING,medical history narrative,21,HH13-4df86b4317
+HC13-2e264af6f5d797,INCORRECT,PROCEDURAL_OR_NARRATIVE,description of an earlier judgment,22,HH13-9e74a70c13
+HC13-444fa8cb4552ff,CORRECT,,balance of convenience against interim stay (law applied),23,HH13-67a496c410
+HC13-e22b86718bbd58,INCORRECT,FACT_FINDING,answer in personal statement,24,HH13-4df86b4317
+HC13-e1487878469769,CORRECT,,proportionality conclusion: lesser punishment should have been imposed,25,HH13-0a7d9de93d
+HC13-852d355ad79f9a,INCORRECT,OPERATIVE,bare dismissal,26,HH13-4df86b4317
+HC13-59640491432fa1,CORRECT,,first half of the court's holding applying Ram Avtar / Dharamvir Singh,27,HH13-fed9e797d2
+HC13-5b8c97b5d4697a,INCORRECT,FACT_FINDING,medical board opinion recited,28,HH13-2395002060
+HC13-ecc85f23d1cb6b,INCORRECT,FACT_FINDING,enrolment date narrative,29,HH13-4df86b4317
+HC13-a7403747024967,CORRECT,,Ram Avtar rounding-off principle stated as settled law and applied,30,HH13-ab250793df
+HC13-8ec5527ac1ad5a,INCORRECT,FACT_FINDING,admitted fact (attributability conceded),31,HH13-3ab2e269fb
+HC13-e2cb075a211a34,CORRECT,,"""we hold"" Category B / entitled to disability pension",32,HH13-2395002060
+HC13-cce16f8cab1043,INCORRECT,FACT_FINDING,sentence fragment about GCM record,33,HH13-8cd872f365
+HC13-f0e146a3d41998,INCORRECT,FACT_FINDING,fact narrative,34,HH13-4df86b4317
+HC13-2b03d3a30257c4,INCORRECT,SCOPE,recital of the High Court's holding by the SC,35,HH13-96222e60b0
+HC13-14b8489506d5ec,CORRECT,,additional evidence on revision permitted by s.160 / r.68,36,HH13-8cd872f365
+HC13-8150939b03994a,INCORRECT,OTHER,court's remark on the nature of its jurisdiction; no issue decided in this sentence,37,HH13-2b73e01e3f
+HC13-8d07a01302320e,INCORRECT,FACT_FINDING,appraisal of evidence,38,HH13-5abc2f7a78
+HC13-3880c1dc77663a,INCORRECT,COUNSEL_VOICE,respondents' claim,39,HH13-2395002060
+HC13-375989553f7144,CORRECT,,legal status of para 4 (struck down) as basis of the decision,40,HH13-38fdf6f424
+HC13-b3bb7ad98853db,INCORRECT,FACT_FINDING,finding of non-compliance (facts),41,HH13-5abc2f7a78
+HC13-16ddcbce07033d,INCORRECT,QUOTED_PRECEDENT,end of a quotation from an earlier judgment,42,HH13-50f5cccaa3
+HC13-6002798043936d,CORRECT,,delay/laches: HC entitled to decline in its discretion,43,HH13-83444b294e
+HC13-6bab4ba5a14df5,INCORRECT,OTHER,sentence fragment (rule range) without the proposition,44,HH13-f12dab3be9
+HC13-e6462d5167387a,INCORRECT,FACT_FINDING,fact,45,HH13-9442014dcd
+HC13-fe8072eebbf848,INCORRECT,FACT_FINDING,documents prove second marriage,46,HH13-093ef23124
+HC13-7dca8bedc5bb0d,INCORRECT,FACT_FINDING,undisputed non-payment,47,HH13-3ab2e269fb
+HC13-9b4bcd8d7b538d,INCORRECT,OTHER,bare statement of agreement with a precedent; the proposition is the next sentence (evaluator had incidentally seen one truth row of this item in a CSV header print before adjudicating; disclosed),48,HH13-0240ac10da
+HC13-3ffbfe06c90111,CORRECT,,applicants not entitled under the 21.11.1997 order,49,HH13-8d08172a65
+HC13-1ac5c01af2ac13,INCORRECT,QUOTED_PRECEDENT,description of what an earlier SC decision held,50,HH13-f12dab3be9
+HC13-934883bd1b68a5,CORRECT,,Union's submissions rejected in view of D.S. Nakara,51,HH13-72aff4e798
+HC13-f1846761b41cc6,INCORRECT,OPERATIVE,no-recovery direction,52,HH13-692df7ca7e
+HC13-5f60a6b00f002e,INCORRECT,QUOTED_PRECEDENT,description of an earlier decision,53,HH13-e790d57ed9
+HC13-18207e2deab65c,CORRECT,,war injury pension falls under category E(i) (law applied),54,HH13-82a1bffba8
+HC13-a2a8842a862719,CORRECT,,Bijender Singh onus principle stated as the governing law and applied (same treatment as #30),55,HH13-ab250793df
+HC13-87222396578811,CORRECT,,no reasonable person could have dismissed: proportionality holding,56,HH13-ec370442b5
+HC13-c3d52a52f6c27c,INCORRECT,QUOTED_PRECEDENT,inside a quotation from Bijender Singh,57,HH13-c1ec559e16
+HC13-1f066ebf7d1c12,INCORRECT,OTHER,supporting observation; the proportionality holding is stated in the surrounding sentences,58,HH13-0a7d9de93d
+HC13-49a17656132f85,INCORRECT,QUOTED_PRECEDENT,narrative of an earlier bench's result,59,HH13-0240ac10da
+HC13-429af2b3886c68,CORRECT,,Rule 6 bar does not apply to Rule 9(4) compensation,60,HH13-3ab2e269fb
+HC13-95ad4741896502,INCORRECT,FACT_FINDING,plea rejected for lack of evidence,61,HH13-5abc2f7a78
+HC13-a0045e800375f6,INCORRECT,SCOPE,recital of the Tribunal's conclusion,62,HH13-b485bf4f70
+HC13-4079c6880d0577,INCORRECT,OPERATIVE,"bare ""no merit""",63,HH13-3ef955e11a
+HC13-eb95e8485b0260,INCORRECT,OPERATIVE,bare no-interference conclusion,64,HH13-fed9e797d2
+HC13-c84e1598b36295,CORRECT,,back-wages issue decided (50% salary) on stated grounds,65,HH13-d3258b5f50
+HC13-d0a1614f4d6461,INCORRECT,OTHER,remark on nature of jurisdiction (same as #37),66,HH13-8e54651d2a
+HC13-40571bcb8fe07f,INCORRECT,FACT_FINDING,fact,67,HH13-2395002060
+HC13-c836756f606cbc,CORRECT,,attributability presumption applied; MB report cannot defeat rounding-off claim,68,HH13-cd8ae13534
+HC13-401bfd375f95f9,INCORRECT,FACT_FINDING,appraisal of witness evidence,69,HH13-8cd872f365
+HC13-207456e9d92589,INCORRECT,QUOTED_PRECEDENT,fragment inside a quotation from an earlier judgment,70,HH13-50f5cccaa3
+HC13-fb235c4551f2a6,CORRECT,,request for extension valid and within jurisdiction (law applied; supports arbitrary-rejection holding),71,HH13-0368be1a51
+HC13-c9a34f6da82702,INCORRECT,PROCEDURAL_OR_NARRATIVE,premise that termination was quashed,72,HH13-d3258b5f50
+HC13-605b96374a7a7f,INCORRECT,QUOTED_PRECEDENT,inside a quotation of a Supreme Court paragraph,73,HH13-f481458962
+HC13-7c3348f13471a9,INCORRECT,FACT_FINDING,length of service,74,HH13-ec370442b5
+HC13-15b18d5062a171,CORRECT,,petitioner cannot challenge invalidation for procedural non-compliance (issue decided),75,HH13-237025f2ee
+HC13-15c5554f037029,INCORRECT,FACT_FINDING,record fact,76,HH13-d3258b5f50
+HC13-197d4220541b91,INCORRECT,OTHER,remark on nature of jurisdiction (same as #37),77,HH13-b73e49953f
+HC13-95bb15aaf5906d,INCORRECT,QUOTED_PRECEDENT,inside a quotation of a Supreme Court paragraph,78,HH13-b14e722993
+HC13-68cfa7435d5095,INCORRECT,QUOTED_PRECEDENT,end of a quotation from an earlier judgment,79,HH13-10713f1e48
+HC13-926a2f1d3db2ae,CORRECT,,DV ban must not be imposed without sufficient cause,80,HH13-226cd4c846
+HC13-5f0f8bf5dbd06e,INCORRECT,OPERATIVE,bare no-interference conclusion,81,HH13-b485bf4f70
+HC13-e227f0008ab8d6,UNCLEAR,,general statement about courts martial; necessity to the decision cannot be determined from the text,82,HH13-a28323037e
+HC13-63f05e351208c2,INCORRECT,OPERATIVE,bare dismissal,83,HH13-2e7e4d3e9f
+HC13-ec9298dd87c8dc,INCORRECT,PROCEDURAL_OR_NARRATIVE,introduces the text of s.10 Army Act,84,HH13-31930437e1
+HC13-fef5f74f6c350b,INCORRECT,RESTATEMENT,"answer to framed question 5, restating the rejection in the preceding sentence",85,HH13-bca5a01bed
+HC13-132077e55f1b61,CORRECT,,extension request validly made during currency of offer (law applied),86,HH13-0368be1a51
+HC13-c0a965532cf7b6,CORRECT,,guilt need not be examined because no proceedings under the Act were initiated (reasoning step of the holding),87,HH13-91a16efde5
+HC13-0b0c465197ca20,CORRECT,,later letter only clarified the subsisting policy position (law applied),88,HH13-cc56f008bb
+HC13-edb2036897c226,INCORRECT,FACT_FINDING,fact,89,HH13-2395002060
+HC13-336120e3c428e2,INCORRECT,OBITER,normal remand course stated and then not followed,90,HH13-300067887e
+HC13-0a385557d6b95c,CORRECT,,attributability presumption applied; MB report cannot defeat claim,91,HH13-ab250793df
+HC13-1519240387ea4e,CORRECT,,Article 19 challenge rejected,92,HH13-44300ea336
+HC13-b59cb6d06cfd94,INCORRECT,OPERATIVE,direction pending Tribunal decision,93,HH13-e2685133f8
+HC13-8c671b826c2ab7,INCORRECT,FACT_FINDING,fact,94,HH13-5abc2f7a78
+HC13-ff13fa1a6f0543,INCORRECT,COUNSEL_VOICE,respondents' submission,95,HH13-237025f2ee
+HC13-6e7be1c4d5ec4f,INCORRECT,FACT_FINDING,fact,96,HH13-5abc2f7a78
+HC13-945af14a03bbb2,INCORRECT,PROCEDURAL_OR_NARRATIVE,introduces the text of s.21 Army Act,97,HH13-31930437e1
+HC13-e793817ade7d03,INCORRECT,OPERATIVE,bare dismissal,98,HH13-f481458962
+HC13-df7d9a2c4e2397,INCORRECT,FACT_FINDING,length of service (distinguishing facts),99,HH13-7b41363dfc
+HC13-947efd835c06eb,CORRECT,,entitlement to disability pension held by applying Ex Sub Gawas Anil Madso,100,HH13-bb05bf1122

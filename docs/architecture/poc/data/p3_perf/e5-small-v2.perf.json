@@ -1,0 +1,27 @@
+{
+ "model": "e5-small-v2",
+ "int8": false,
+ "loadavg_start": [
+  14.17138671875,
+  14.66015625,
+  14.54150390625
+ ],
+ "loadavg_end": [
+  12.509765625,
+  14.185546875,
+  14.38720703125
+ ],
+ "threads": 4,
+ "max_len": 256,
+ "n_chunks": 128,
+ "dim": 384,
+ "load_s": 0.93,
+ "index_s": 44.0,
+ "chunks_per_s": 2.9,
+ "query_ms_p50": 98.77,
+ "query_ms_p95": 132.72,
+ "rss_mb_before": 46.7,
+ "rss_mb_after_load": 238.6,
+ "peak_rss_mb": 687.5,
+ "index_bytes_float32": 196608
+}

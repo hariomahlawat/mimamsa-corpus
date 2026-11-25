@@ -1,0 +1,56 @@
+{
+ "a0_commit": "f1d61f71",
+ "c11_citation_graph_sha256": "3d97599dbfbd41c9bcd5117a544e0e7df89b9eea74c40aa487109442f60a2e64",
+ "coding_read": false,
+ "extractor": "treatment-c13/0.9.0-dev",
+ "holdout": "H-REL-C13",
+ "inputs": {
+  "item_map_sha256": "6c62d885b1c8a5d73e8155d33f2a838596d76b24e450b9f18b5e446f8ee462d9",
+  "sample_sha256": "000d057c11b8de524c39ac1499f0ba9cb6a71374208f913d4d6fdf85302382be"
+ },
+ "items": 160,
+ "prediction_rows": 344,
+ "predictions_sha256": "c53ea96a4c387d4d7d802d643e62b9fd3ee0b90d5ce3f8d98e5cb02640718bc3",
+ "relation_map": {
+  "APPLIES": "applies",
+  "CITES": "cites",
+  "CONSIDERS": "cites",
+  "DISAPPROVES": "overrules (Supreme Court, declaratory) / not_followed",
+  "DISTINGUISHES": "distinguishes",
+  "DOUBTS": "doubts",
+  "EXPLAINS": "cites",
+  "FOLLOWS": "follows",
+  "OVERRULES": "overrules"
+ },
+ "restricted_register": {
+  "sha256": "fc7ea07e62e7e41f348639973f19187540593e7b3237933758f64e865b95b2b6",
+  "source": "git:72fe7a75:config/restricted_material.json"
+ },
+ "status": {
+  "ITEMS_PREDICTED": 159,
+  "NONE_ROW": 39,
+  "NO_TEXT_OR_META": 1
+ },
+ "text_commit": "ad77758d",
+ "tool": "predict-hrel-c13/1.0.0",
+ "tool_sha256": {
+  "legal_knowledge/audit_work/C11-JUDICIAL-QUALITY/relations/tools/relations_c11.py": "6c6023c484c41f2181648b66de963a987379e350835075099ff9cbe40223a681",
+  "legal_knowledge/audit_work/C13-A5-GRAPH/tools/common_c13.py": "ec7fe04adf6e10e793485c8f8dc7727ff5c0cfeff079bae7c177e4757ae10f82",
+  "legal_knowledge/audit_work/C13-A5-GRAPH/tools/predict_hrel_c13.py": "eb2bbd96e85415a4404d52f6ab461f3c7182b0e7324df4598b48e814aebd6127",
+  "legal_knowledge/audit_work/C13-A5-GRAPH/tools/treatment_c13.py": "f8be7a01b02911d17e31c620d04758de261898b0115ce2d4852fa0b04fee73f2"
+ },
+ "units_by_relation": {
+  "cites": 298,
+  "follows": 6
+ },
+ "voice_map": {
+  "COURT_OWN_VOICE": "court_own",
+  "CUES_REJECTED": "unclear",
+  "HIGH_COURT_OVERRULING_WORDS_NOT_ROUTED": "court_own",
+  "NO_TREATMENT_CUE": "court_own",
+  "PARTY_SUBMISSION": "party_submission",
+  "QUOTED_PASSAGE": "quoted_passage",
+  "REPORTER_EDITORIAL": "editorial",
+  "SEPARATE_OR_DISSENT_OPINION": "court_own"
+ }
+}

@@ -1,0 +1,16 @@
+{
+ "coder_ids": [
+  "C13-ADJ-REL",
+  "C13-COD-REL-1",
+  "C13-COD-REL-2"
+ ],
+ "created_by": "C13 GA4 evaluator (independent; not a coder, adjudicator or extractor author)",
+ "created_utc": "2026-11-25T19:47:08Z",
+ "files": {
+  "H-REL-C13.csv": "eef7b10487b2b5681ea2bb689f277f1ff5f6eb06dc176cea2c065ba673d875dd"
+ },
+ "note": "Adjudicated reference for H-REL-C13, built by c13_coding.py truth from coder_1/coder_2 sheets + adjudicator result (rebuild byte-identical). AI-coded (separate agent instances); no human annotator. Sheet coder_id values are slot names coder_1/coder_2, mapped to instance ids in coding/ASSIGNMENT_LOG.md.",
+ "parent_version": null,
+ "set": "H-REL-C13",
+ "version": 1
+}

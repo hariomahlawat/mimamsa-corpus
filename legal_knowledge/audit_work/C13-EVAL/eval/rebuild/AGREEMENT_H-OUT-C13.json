@@ -1,0 +1,3031 @@
+{
+ "items": [
+  {
+   "aligned_units": 2,
+   "item_id": "HO13-007c3091ec",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-0090cc0077",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-0311acbae2",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-043037b02c",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-052b66c40f",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-07018c2ba5",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-08a4ee6f40",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-08abee4118",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HO13-098a52bd13",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-09b9775809",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-09f8738293",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-0a78c99489",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-0aa75520c5",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-0be6bb4db2",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-0c652b9e61",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 62,
+   "item_id": "HO13-0c887610a7",
+   "rows_a": 62,
+   "rows_b": 62,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-0decdd23f9",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-0e15ed8514",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-0e43736410",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-114f2e29ac",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-11a98558db",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-11b8bee9db",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-11d6e36936",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-12108bfdc9",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HO13-1482f43532",
+   "rows_a": 3,
+   "rows_b": 3,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-168fc1de7f",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-16bab1d4e1",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-173ecd74ab",
+   "rows_a": 1,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-17662246cc",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-177763c27f",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-181947e1e0",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-18af1f5e48",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-19121e9b20",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-1a1a7ec119",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-1aea4ca388",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-1b1ed5a5ad",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 6,
+   "item_id": "HO13-1bf79ba2de",
+   "rows_a": 6,
+   "rows_b": 6,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-1ceddbf84e",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-1e28392ebe",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-1e76c0fae4",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-1e76cbcdb2",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-1e8854f6ed",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-22b9dd7615",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-22cf8dd306",
+   "rows_a": 1,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-22d88962e8",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-23bbe12cd9",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-2420a820c5",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-24954ea4ce",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-24e02a2889",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-250e41ed96",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-2701429839",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-27790bf3b3",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-281623eef7",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-288ce2f5e9",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HO13-29046cf86a",
+   "rows_a": 3,
+   "rows_b": 3,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-299e337653",
+   "rows_a": 1,
+   "rows_b": 8,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 9
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HO13-2a85cb8e3e",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-2bf027a33b",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-2d0f6e1f54",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 10,
+   "item_id": "HO13-2d20284f68",
+   "rows_a": 10,
+   "rows_b": 10,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-2dc75ef4a3",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-2e5f6873b8",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-2e79c533cf",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-2f35c2e69b",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-2f652ea937",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-3004e0cb91",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-311b67cf63",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-330cc565bc",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-33499813c9",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-339ad51738",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HO13-34ed73caef",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-358a774583",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-3696ae9c86",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-36c7401973",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HO13-36e5bbd5a7",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-384a1b2e9e",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-393347fc7c",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-3a3040ebf1",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-3aafe1240d",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-3ad1dd1490",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-3c54291f66",
+   "rows_a": 2,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-3f7a379ba3",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-3f8bd7f73b",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-45bbdd8a78",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-45e6fd85bb",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-48cddaf31a",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-4a584f70b3",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-4a60571d5e",
+   "rows_a": 1,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 3
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-4d2a867792",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-505146a277",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-5142899f3c",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-522590dc59",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-52ed1b9799",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-536bb81185",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-5399512d4f",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-53d475a0f3",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-5457b9cc2c",
+   "rows_a": 1,
+   "rows_b": 8,
+   "status": "DISAGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "",
+   "unmatched_units": 8
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-54ceeb9b5f",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HO13-54fdc51392",
+   "rows_a": 2,
+   "rows_b": 6,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 4
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-55eda9551e",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-5609811a05",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-5659b4708c",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-56978b2d8b",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HO13-58ed842617",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-5a59d14a17",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-5b2d426721",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-5b7f22b27a",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-5c638ce896",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-5d672b82f1",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-5d819b393b",
+   "rows_a": 1,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 3
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-5e1f0ff4f7",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-5ed60e90f1",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-5f043e05ca",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-60608e2252",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-60a7238c16",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-6155d68ebc",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-61d710ceca",
+   "rows_a": 1,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-61ed6808aa",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-6271d6e7f7",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-62b5c2f415",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-6605206ae2",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HO13-671827d367",
+   "rows_a": 3,
+   "rows_b": 3,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-680ce048f9",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-6810fd8517",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-68fd93332c",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HO13-691cc27f88",
+   "rows_a": 3,
+   "rows_b": 3,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-695327a184",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-69b70dbd66",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-6a4fad3cd7",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-6b11f43ce6",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-6ba422a2ea",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-6c8c4aed60",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 4,
+   "item_id": "HO13-6d89babe24",
+   "rows_a": 4,
+   "rows_b": 4,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-6dcbb91e9d",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-6f11332e78",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-71d18ce105",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-7249764c2f",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-739e44e171",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-73a810a47d",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-757e1364de",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-77df345cf1",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-79195299cd",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-79db5a0cb2",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-7a200f795b",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-7ab52756bd",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-7c0464e3cc",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-7c67959c65",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-7cac9e560c",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HO13-7dc7997ed0",
+   "rows_a": 3,
+   "rows_b": 3,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-7f368f38a9",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-7fcb4645fb",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-810f0e3dd8",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-8160954072",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-822b63fe8b",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-824b884f8b",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HO13-83fb08431c",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-8480772fad",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-858e2e88bb",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 5,
+   "item_id": "HO13-85eb7b4d9c",
+   "rows_a": 5,
+   "rows_b": 5,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-8671c74ec5",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-8714903ee8",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-8718a3e0c7",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-8766949cd7",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-887f7e90fa",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-898ebe3c90",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-89a81ee230",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-8a739cf1c8",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-8b02ecaa09",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-8b72831c60",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-8bc1399079",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-8c66f20215",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-8c77754d11",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-8cfe8e2843",
+   "rows_a": 1,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-8efc8443bf",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-900ca6f9a4",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-920136426e",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-9215d0e2d4",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-937fb5ca2f",
+   "rows_a": 1,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-93819ab0ce",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-953440809f",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-97d76c6d83",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-9a53bfe763",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-9a5b40f6f7",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-9b38df21e3",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-9bd334d646",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-9beaf31636",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-9c17beb3cc",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-9ceebc09b6",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-9dc9c958db",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-9f6be4e9b3",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HO13-a01e3830df",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-a048c6eae9",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-a0558b310d",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-a0648aa5db",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-a0b73ac302",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-a0ba921e17",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-a0cae9c87a",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-a0ed85c309",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-a12e2fd266",
+   "rows_a": 1,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 31,
+   "item_id": "HO13-a1438df4ca",
+   "rows_a": 31,
+   "rows_b": 31,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-a33ca31954",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-a359a9e135",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-a419feaad1",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-a47d17b5c9",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-a53b963540",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-a8bcc6dd48",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-aa4c228933",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-aa5542e2f9",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-aab1439d45",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-aac0e25b45",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-ab4bee493d",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-ab4c943d94",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-ad4eb0204b",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-b0230bbc44",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-b14d6bb8a1",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-b3e7f6c3f4",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-b3ece22f38",
+   "rows_a": 1,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 3
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-b5bfb01029",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-b5c036ac81",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-b6529a9402",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-b6f6be4cdf",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 5,
+   "item_id": "HO13-b737712cc6",
+   "rows_a": 6,
+   "rows_b": 6,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HO13-b772d8192d",
+   "rows_a": 3,
+   "rows_b": 3,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HO13-b81f3c04a3",
+   "rows_a": 3,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HO13-b8f8fb24c5",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-b9d0cab16d",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-bacf26b34f",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-bcbe74532a",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-bd382227bc",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-bdf9332e7d",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-be247c4216",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-be6967b6e2",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-bfe71695b4",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-c123b2ef4d",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-c1b4e8ec65",
+   "rows_a": 8,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 8
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HO13-c1fe9e8975",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-c26cee69b2",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-c383a5ba86",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-c3d7d66f6c",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-c3f0a9d766",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-c48c53bf32",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-c6320b0c17",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 4,
+   "item_id": "HO13-c65834ad1a",
+   "rows_a": 4,
+   "rows_b": 4,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-c6902b689b",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-c7541dbf29",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-c927181a66",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-c9f324a700",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-cadd7a09cf",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-cb332adba6",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-cc837c0d88",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-ccb1f4b815",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-cd29b230c5",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-ce4509fc67",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-cea6c65bbb",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-ced1c265bb",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-cfc5735aeb",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-d32df6c8af",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-d3a159e632",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-d5a887a1a8",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-d7bc283d68",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-da2c4a449b",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-dc48b67e2f",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-dd73817be6",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-dd7f0e664f",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HO13-de9b057ad9",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-df77f8cae8",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-df9ec10533",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-e043de064f",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-e09cf7a024",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-e0d29df595",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-e10f072b63",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-e12db01f8f",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-e1e9d7130d",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 4,
+   "item_id": "HO13-e1f554ea69",
+   "rows_a": 4,
+   "rows_b": 4,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-e307255178",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-e4eff4c1df",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-e720cdff8d",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-e92fb4585b",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-ea1fb79ef3",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-eb40d0ab0f",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-ebb15980b3",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-ed62efe5d2",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-ee7734f054",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 14,
+   "item_id": "HO13-ee7912d06f",
+   "rows_a": 14,
+   "rows_b": 14,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-ee9dc8f0c4",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-f12e59ad64",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-f39b6b599e",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-f3c1fde78a",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-f596219373",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-f5f82fca9e",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HO13-f608871ca9",
+   "rows_a": 3,
+   "rows_b": 3,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HO13-f6d8d0d135",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HO13-f8a06463f3",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-fb15cc4e61",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-fb24aff42e",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-fb6940e73c",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-fbeed680ff",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-fcebc35832",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HO13-fda45526a6",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 6,
+   "item_id": "HO13-ff09b11dc6",
+   "rows_a": 6,
+   "rows_b": 6,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  }
+ ],
+ "summary": {
+  "aligned_units": 431,
+  "fields": {
+   "printed_disposal": {
+    "cohen_kappa_including_unmatched": 0.8083,
+    "cohen_kappa_matched_only": 0.933,
+    "krippendorff_alpha_nominal": 0.933,
+    "raw_agreement": 0.8447,
+    "units_including_unmatched": 483
+   },
+   "substantive_result": {
+    "cohen_kappa_including_unmatched": 0.7853,
+    "cohen_kappa_matched_only": 0.9117,
+    "krippendorff_alpha_nominal": 0.9117,
+    "raw_agreement": 0.8323,
+    "units_including_unmatched": 483
+   }
+  },
+  "items": 300,
+  "items_agree": 251,
+  "items_uncodable_both": 28,
+  "items_uncodable_one_coder": 6,
+  "strict_item_agreement": 0.8367,
+  "strict_unit_agreement": 0.793,
+  "task": "outcome",
+  "unmatched_units": 52
+ }
+}

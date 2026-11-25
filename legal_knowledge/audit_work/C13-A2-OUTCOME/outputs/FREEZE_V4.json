@@ -1,0 +1,28 @@
+{
+ "author_statement": "# A2 (Outcome V4) author statement for the freeze record (PROTOCOL_C13.md v1.1, section 4)\n\nSigned: the A2 extractor author (Claude agent, workstream A2, session https://claude.ai/code/session_01U1on2TzucdKCNmpKvBZK7J), 2026-11-25.\n\n1. **Reviews and reviewer scratchpad.** I have never viewed `legal_knowledge/audit_work/C13-A0-EVAL/reviews/` at commit\n   `a4865e76`, at commit `06340486`, or at any other commit, and I have never viewed the A0 reviewer scratchpad.\n2. **CURATED_KB_CONTENT judgments.** I did not consult the curated or KB content (C11 curated 53, C12 curated scope,\n   WS-B holdings register, KB records) for the 4 CURATED_KB_CONTENT judgments (JK-76ec35cd7ab232b5, JK-88f84411abdb3028,\n   JK-05e9484593272fe0, JK-16dcc07543999d26). I did not open those curated or KB artefacts for any judgment during\n   Cycle 13.\n3. **What I read from A0, and when.** Before the freeze: the header line of H-OUT-C13 `SAMPLE.csv` and its `judgment_key`\n   and `rep_sha256` columns, read by a script that wrote the exclusion list without displaying values; after the GA0\n   acceptance and the merge of `f1d61f71`: parts of `PROTOCOL_C13.md`, `tools/c13_score.py` and `tools/c13_tasks.py`\n   (prediction format and vocabulary), and the header line plus the `item_id` and `rep_sha256` pointer columns of\n   `outputs/packets/H-OUT-C13/coder_1/CODER_SHEET.csv` (a blank packet). I opened no holdout judgment text, no coding,\n   no truth file, no ITEM_MAP, DESIGN or strata, and no adjudication material.\n4. No development judgment is in H-OUT-C13 (0 of 286; see `README.md`). No tuning change is made after the freeze;\n   defects found afterwards are recorded in `POST_FREEZE_DEFECTS.md`, not fixed.\n",
+ "author_statement_file": "FREEZE_STATEMENT_A2.md",
+ "author_statement_sha256": "bf4fba40f708600c580f1fcba10a1a47974af3489feaa9d83c77dea441d11bbc",
+ "blind_evaluation_command": "python3.11 -I -B tools/extract_v4.py ids --ids-file <H-OUT-C13 ids> --out <DIR>",
+ "coordinator_confirmation": "coordinator message 2026-11-25: A0 gate GA0 ACCEPTED, C01 closed; freeze Outcome V4 per PROTOCOL_C13.md v1.1 (A0 head f1d61f71)",
+ "excluded_ids": 331,
+ "exclusion_list_sha256": "d1169093a4c8dead87b3fc1c245776f30be80a9b2ece28adc6a4bab54e31e00b",
+ "extractor": "c13-extract-v4/1.0.0",
+ "frozen_at_commit_parent": "cf6df6c7d22f796d4d7110591b7a842d5c148418",
+ "outputs_sha256": {
+  "OUTCOMES_V4.csv": "ee4b4e1a8853926c6d092fec5f3a15d4977e0ca3771630aa0a5546885ce8349b",
+  "RUN_INFO_V4.json": "2422cc841f8063cacd3660f44cd6cbdd056f8640609520ab39753ad6e8e6d1e3"
+ },
+ "status": "AUTOMATED_CANDIDATE_NOT_VERIFIED",
+ "tool_fingerprint": "37642e7bd64582f34a791bd199dee8648b274fa09e74d6253c3b8d19f124e1f4",
+ "tool_sha256": {
+  "extract_v4.py": "972ca646a90a1ed06483b6de4822170c4957c10b3e21e8f0f3449c3f53ecbe63",
+  "v4_clauses.py": "f06a6a0813f8aac27011918d81722865b29a9522ed4700192699deb05c1914c2",
+  "v4_decide.py": "396ed120e279d873dc8590c4ce6cf9356a1f69ab4d2c68ecaf3bfa33c2fbd9c8",
+  "v4_proceedings.py": "529d0e92522808579b2c4551a696641e56318a86d0667a83b42407c4e3a3de39",
+  "v4_quotes.py": "5d7dd3cba042372e9e43318611404d19412bb5c9f58d233f307d80027a85fdce",
+  "v4_relief.py": "a563ca071cb8234b91ec8fc9f2411a68babfe5430295dc65c7e6a413bf72df47",
+  "v4_segment.py": "de3ae47f81d09fcafe8b0f511297995dd66ed817c660bf87f967971ddc153d5b",
+  "v4_text.py": "fa749b309c3aba80b1d857257493ad1ff2dae6387fe8586756f9617fcfcbf99d",
+  "v4core.py": "54f885f02b3bec7b39b0e90c1f80472435113c7849558d8765d3588740835407"
+ }
+}

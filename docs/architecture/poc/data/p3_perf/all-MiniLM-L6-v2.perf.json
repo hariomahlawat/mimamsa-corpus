@@ -1,0 +1,27 @@
+{
+ "model": "all-MiniLM-L6-v2",
+ "int8": false,
+ "loadavg_start": [
+  14.70751953125,
+  14.88720703125,
+  14.60400390625
+ ],
+ "loadavg_end": [
+  14.0673828125,
+  14.70703125,
+  14.55126953125
+ ],
+ "threads": 4,
+ "max_len": 256,
+ "n_chunks": 128,
+ "dim": 384,
+ "load_s": 0.7,
+ "index_s": 26.6,
+ "chunks_per_s": 4.8,
+ "query_ms_p50": 46.88,
+ "query_ms_p95": 83.63,
+ "rss_mb_before": 46.7,
+ "rss_mb_after_load": 168.8,
+ "peak_rss_mb": 647.4,
+ "index_bytes_float32": 196608
+}

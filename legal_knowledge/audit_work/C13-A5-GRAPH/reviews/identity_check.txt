@@ -1,0 +1,66 @@
+scope copies 128 overlay copies 127 missing ['4284820e5bc2'] extra 0 RM in overlay False RM in scope True
+c12 pairs 410 overlay pairs 436 missing pairs 1 Counter({True: 1})
+copies_kept Counter({'ALL': 439})
+status Counter({'PROPOSED_IDENTITY_OVERLAY_ALL_COPIES_KEPT': 439})
+doc_id lacking meta Counter({'YES': 412, 'NO_CRAWLER_DOC_ID': 27})
+
+== INS:notif-aft-kolkata kind INSTRUMENT n 1
+    DISTINCT_INSTRUMENT_GROUPED_UNDER_PARENT_ID | notif-aft-kolkata | 2027fecd3f |  | 2009-11-18 |  | a different instrument (notification) listed on the parent Act's page; separate logical identity, not a copy; 
+
+== C5-SRC-P0-AA-AMD-ACT37-1992 kind SOURCE_DOCUMENT n 3
+    SAME_LOGICAL_DOCUMENT_SEVERAL_COPIES |  | a5943b7214 |  |  |  | C5 source id with several registered copies (copy roles in C10 COPY_EQUIVALENCE_REGISTER); copies may differ i
+    SAME_LOGICAL_DOCUMENT_SEVERAL_COPIES |  | f11d443ebf |  |  |  | C5 source id with several registered copies (copy roles in C10 COPY_EQUIVALENCE_REGISTER); copies may differ i
+    SAME_LOGICAL_DOCUMENT_SEVERAL_COPIES |  | f1e69a7415 |  |  |  | C5 source id with several registered copies (copy roles in C10 COPY_EQUIVALENCE_REGISTER); copies may differ i
+
+== LISTING:C12CV-84de940d3a0fe09d kind LISTING_PAGE n 1
+    LISTING_PAGE_NOT_AN_INSTRUMENT |  | 84de940d3a |  |  |  | India Code 'linked records' listing page grouped under the parent Act; title: The Bharatiya Nagarik Suraksha S
+
+== LJ-7bb52d0dc43c7124 kind JUDGMENT n 2
+    ONE_JUDGMENT_DUPLICATE_DOC_ID_YEAR_PARTITION | sc-1977-union-of-india-1977insc177 | 7bb52d0dc4 |  | 1977-09-19 |  | doc_ids differ only in the crawler's year partition prefix; same INSC suffix and same bytes
+    ONE_JUDGMENT_DUPLICATE_DOC_ID_YEAR_PARTITION | sc-1978-union-of-india-1977insc177 | 7bb52d0dc4 |  | 1977-09-19 |  | doc_ids differ only in the crawler's year partition prefix; same INSC suffix and same bytes
+
+== INS:act-air-force-1950 kind INSTRUMENT n 2
+    LANGUAGE_RENDITION_OF_SAME_INSTRUMENT | act-air-force-1950-hi | 0ccc80026e |  | 1950-05-18 |  | Hindi rendition (doc_id suffix -hi) of the parent instrument; title: The Air Force Act, 1950
+    PRINCIPAL_COPY | act-air-force-1950 | ef50375ea0 |  | 1950-05-18 |  | the parent instrument's own crawler record; title: The Air Force Act, 1950
+
+== INS:notif-aft-chennai kind INSTRUMENT n 1
+    DISTINCT_INSTRUMENT_GROUPED_UNDER_PARENT_ID | notif-aft-chennai | be9e3e7e88 |  | 2015-02-26 |  | a different instrument (notification) listed on the parent Act's page; separate logical identity, not a copy; 
+
+== LJ-ef7254b0c8b6c5c4 kind JUDGMENT n 2
+    ONE_JUDGMENT_SEVERAL_PROCEEDINGS | hc-ph-2010-lpa-189-2010-phhc010948852010-1-2010-12-22 | ef7254b0c8 | LPA/189/2010 | 2010-12-22 | PR:hc-ph-2010-lpa-189-2010-phhc010948852010-1-2010 | same bytes, same court and decision date, 2 distinct case numbers: one common judgment or order disposing seve
+    ONE_JUDGMENT_SEVERAL_PROCEEDINGS | hc-ph-2010-lpa-254-2010-phhc010949582010-1-2010-12-22 | ef7254b0c8 | LPA/254/2010 | 2010-12-22 | PR:hc-ph-2010-lpa-254-2010-phhc010949582010-1-2010 | same bytes, same court and decision date, 2 distinct case numbers: one common judgment or order disposing seve
+
+== INS:notif-appointed-day-aft-notification kind INSTRUMENT n 1
+    DISTINCT_INSTRUMENT_GROUPED_UNDER_PARENT_ID | notif-appointed-day-aft-notification | 8d774f1fcc |  | 2009-08-07 |  | a different instrument (notification) listed on the parent Act's page; separate logical identity, not a copy; 
+
+== C5-SRC-P0-AFT-ACT-2007-INDIACODE kind SOURCE_DOCUMENT n 2
+    SAME_LOGICAL_DOCUMENT_SEVERAL_COPIES | act-armed-forces-tribunal-2007-hi | 48f57c81bb |  | 2007-12-25 |  | C5 source id with several registered copies (copy roles in C10 COPY_EQUIVALENCE_REGISTER); copies may differ i
+    SAME_LOGICAL_DOCUMENT_SEVERAL_COPIES | act-armed-forces-tribunal-2007 | 665863d1ab |  | 2007-12-25 |  | C5 source id with several registered copies (copy roles in C10 COPY_EQUIVALENCE_REGISTER); copies may differ i
+
+== INS:act-army-1950#the-schedule kind INSTRUMENT_PART n 1
+    SCHEDULE_PART_OF_INSTRUMENT | act-army-1950-sched-the-schedule | 3a551c1f59 |  |  |  | schedule file of the parent instrument (part, not a copy); title: THE SCHEDULE.
+
+== LJ-ddf835f63effb126 kind JUDGMENT n 2
+    ONE_JUDGMENT_DUPLICATE_DOC_ID_YEAR_PARTITION | sc-1981-s-p-gupta-ors-etc-etc-1981insc209 | ddf835f63e |  | 1981-12-28 |  | doc_ids differ only in the crawler's year partition prefix; same INSC suffix and same bytes
+    ONE_JUDGMENT_DUPLICATE_DOC_ID_YEAR_PARTITION | sc-1982-s-p-gupta-ors-etc-etc-1981insc209 | ddf835f63e |  | 1981-12-28 |  | doc_ids differ only in the crawler's year partition prefix; same INSC suffix and same bytes
+
+== LJ-b5cef1571163212e kind JUDGMENT n 4
+    ONE_JUDGMENT_SEVERAL_PROCEEDINGS | hc-delhi-2024-w-p-c-15971-2023-dlhc010519692023-1-2024-12-10 | b5cef15711 | W.P.(C)/15971/2023 | 2024-12-10 | PR:hc-delhi-2024-w-p-c-15971-2023-dlhc010519692023 | same bytes, same court and decision date, 4 distinct case numbers: one common judgment or order disposing seve
+    ONE_JUDGMENT_SEVERAL_PROCEEDINGS | hc-delhi-2024-w-p-c-16163-2023-dlhc010530192023-1-2024-12-10 | b5cef15711 | W.P.(C)/16163/2023 | 2024-12-10 | PR:hc-delhi-2024-w-p-c-16163-2023-dlhc010530192023 | same bytes, same court and decision date, 4 distinct case numbers: one common judgment or order disposing seve
+    ONE_JUDGMENT_SEVERAL_PROCEEDINGS | hc-delhi-2024-w-p-c-16193-2023-dlhc010530472023-1-2024-12-10 | b5cef15711 | W.P.(C)/16193/2023 | 2024-12-10 | PR:hc-delhi-2024-w-p-c-16193-2023-dlhc010530472023 | same bytes, same court and decision date, 4 distinct case numbers: one common judgment or order disposing seve
+    ONE_JUDGMENT_SEVERAL_PROCEEDINGS | hc-delhi-2024-w-p-c-6548-2024-dlhc010262582024-1-2024-12-10 | b5cef15711 | W.P.(C)/6548/2024 | 2024-12-10 | PR:hc-delhi-2024-w-p-c-6548-2024-dlhc010262582024- | same bytes, same court and decision date, 4 distinct case numbers: one common judgment or order disposing seve
+
+== LJ-3b1cd4a1b5e75e2e kind JUDGMENT n 2
+    ONE_JUDGMENT_DUPLICATE_DOC_ID_YEAR_PARTITION | sc-1959-sardar-kapur-singh-1959insc162 | 3b1cd4a1b5 |  | 1959-12-15 |  | doc_ids differ only in the crawler's year partition prefix; same INSC suffix and same bytes
+    ONE_JUDGMENT_DUPLICATE_DOC_ID_YEAR_PARTITION | sc-1960-sardar-kapur-singh-1959insc162 | 3b1cd4a1b5 |  | 1959-12-15 |  | doc_ids differ only in the crawler's year partition prefix; same INSC suffix and same bytes
+
+== INS:act-the-tribunals-reforms-act-2026 kind INSTRUMENT n 1
+    DISTINCT_INSTRUMENT_GROUPED_UNDER_PARENT_ID | act-the-tribunals-reforms-act-2026 | be619533e4 |  |  |  | a different instrument (act_amendment) listed on the parent Act's page; separate logical identity, not a copy;
+
+== LJ-ce55eaab30f497c4 kind JUDGMENT n 6
+    ONE_JUDGMENT_SEVERAL_PROCEEDINGS | hc-delhi-2025-w-p-c-13731-2024-dlhc010661482024-1-2025-08-05 | ce55eaab30 | W.P.(C)/13731/2024 | 2025-08-05 | PR:hc-delhi-2025-w-p-c-13731-2024-dlhc010661482024 | same bytes, same court and decision date, 6 distinct case numbers: one common judgment or order disposing seve
+    ONE_JUDGMENT_SEVERAL_PROCEEDINGS | hc-delhi-2025-w-p-c-2524-2025-dlhc010102532025-1-2025-08-05 | ce55eaab30 | W.P.(C)/2524/2025 | 2025-08-05 | PR:hc-delhi-2025-w-p-c-2524-2025-dlhc010102532025- | same bytes, same court and decision date, 6 distinct case numbers: one common judgment or order disposing seve
+    ONE_JUDGMENT_SEVERAL_PROCEEDINGS | hc-delhi-2025-w-p-c-2732-2025-dlhc010110482025-1-2025-08-05 | ce55eaab30 | W.P.(C)/2732/2025 | 2025-08-05 | PR:hc-delhi-2025-w-p-c-2732-2025-dlhc010110482025- | same bytes, same court and decision date, 6 distinct case numbers: one common judgment or order disposing seve
+    ONE_JUDGMENT_SEVERAL_PROCEEDINGS | hc-delhi-2025-w-p-c-804-2025-dlhc011020862024-1-2025-08-05 | ce55eaab30 | W.P.(C)/804/2025 | 2025-08-05 | PR:hc-delhi-2025-w-p-c-804-2025-dlhc011020862024-1 | same bytes, same court and decision date, 6 distinct case numbers: one common judgment or order disposing seve
+    ONE_JUDGMENT_SEVERAL_PROCEEDINGS | hc-delhi-2025-w-p-c-821-2025-dlhc011020912024-1-2025-08-05 | ce55eaab30 | W.P.(C)/821/2025 | 2025-08-05 | PR:hc-delhi-2025-w-p-c-821-2025-dlhc011020912024-1 | same bytes, same court and decision date, 6 distinct case numbers: one common judgment or order disposing seve
+    ONE_JUDGMENT_SEVERAL_PROCEEDINGS | hc-delhi-2025-w-p-c-824-2025-dlhc010020222025-1-2025-08-05 | ce55eaab30 | W.P.(C)/824/2025 | 2025-08-05 | PR:hc-delhi-2025-w-p-c-824-2025-dlhc010020222025-1 | same bytes, same court and decision date, 6 distinct case numbers: one common judgment or order disposing seve

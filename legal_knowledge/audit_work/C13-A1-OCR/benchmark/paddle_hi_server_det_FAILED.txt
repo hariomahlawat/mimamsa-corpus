@@ -1,0 +1,3 @@
+MemoryError: In user code:
+    ResourceExhaustedError: Fail to alloc memory of 20150747136 size, error code is 12.
+      [Hint: Expected error == 0, but received error:12 != 0:0.] (at /paddle/paddle/phi/core/memory/allocation/cpu_allocator.cc:44)
