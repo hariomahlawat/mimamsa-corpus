@@ -56,8 +56,13 @@ Full detail: [R2N01_PROTECTED_DELIVERY_POC.md](R2N01_PROTECTED_DELIVERY_POC.md).
 
 - Linux: 40/40 HTTP transport checks, the Serving §10 ledger oracle 7/7, and 12/12 PDF.js protected-viewer checks.
 - PR #54 `transport_oracle.py` (unmodified, hash-pinned) **accepted** both Linux traces and the hosted-Windows trace. Peak charge was 196,608 B (= site cap), 0 residual. Withdrawal admit→ack took 16 ms on Linux and 10 ms on Windows.
-- Hosted Windows: ledger oracle, 40/40 transport checks and the trace oracle are all green.
-- The Windows PDF.js step failed on the first CI attempt with the synthetic fixture: the 300-page fixture's page tree forced a full fetch. The fixture was fixed; see the final CI run.
+- Hosted Windows, **all green** in run 45689265895:
+  - ledger oracle;
+  - 40/40 transport checks;
+  - PR #54 trace oracle ACCEPTED;
+  - PDF.js protected viewer 12/12, with a near-end page using 2.7–3.7 % of the bytes.
+- Evidence is archived in `data/r2n01/windows_ci_run_45689265895/`.
+- The runner reported SDK 11.0.100 preinstalled. The app targets net10.0, which still needs a pin.
 - Selected host: **BLOCKED (owner hardware pending)**.
 
 ## P2 search and retrieval

@@ -30,10 +30,10 @@ host, and no Windows measurement here should be carried over to the selected hos
 
 | Item | Linux (measured) | Hosted Windows (measured, CI) | Selected host |
 |---|---|---|---|
-| Protected delivery with an ordinary positive control | PASS. 40/40 transport checks. An unrelated eligible document still gets 206 after the withdrawal and after the restart. | PASS. 40/40 (run 45649488168 and later) | BLOCKED (owner hardware pending) |
+| Protected delivery with an ordinary positive control | PASS. 40/40 transport checks. An unrelated eligible document still gets 206 after the withdrawal and after the restart. | PASS. 40/40 (final run 45689265895). Both Windows Services (virtual accounts) passed restart (1.1 s) and crash recovery (2.7 s). | BLOCKED (owner hardware pending) |
 | Reservation before the terminal call; uncertain keeps the full charge; no refund on timeout, cancel, restart or duplicate | PASS. Serving §10 ledger oracle 7/7 (`data/r2n01/ledger_oracle_linux.json`). Killed connections: 8/8 kept the charge until transport evidence, 0 RELEASED. A duplicate settlement is a no-op. | PASS. Ledger oracle allPass. Transport killed-connection checks pass. | BLOCKED |
 | Durable withdrawal survives a restart with a durable fence | PASS. Epoch/digest CAS. `withdrawn_meta_after_restart = 404`. Oracle: fence before ack, recover with the exact epoch and digest. | PASS. Oracle accepted the Windows trace. | BLOCKED |
-| Authenticated large-PDF viewing: exact bounded 206 from the first fetch, near-end jump, withdrawal between chunks | PASS. 46.8 MB PDF: page 1 then page 47/47 using 4.2 % of the file, all requests ≤ 128 KiB, authenticated, 206. BNSS 282 pages: page 1 then page 280. Withdrawal between chunks: 0 post-fence 206 and the viewer is invalidated. Forged-token and other-user viewers make no range request. | Workflow step added. See the latest run (Chromium via Playwright on windows-latest). | BLOCKED |
+| Authenticated large-PDF viewing: exact bounded 206 from the first fetch, near-end jump, withdrawal between chunks | PASS. 46.8 MB PDF: page 1 then page 47/47 using 4.2 % of the file, all requests ≤ 128 KiB, authenticated, 206. BNSS 282 pages: page 1 then page 280. Withdrawal between chunks: 0 post-fence 206 and the viewer is invalidated. Forged-token and other-user viewers make no range request. | PASS (run 45689265895, Chromium via Playwright). Synthetic 6.1 MB / 300-page fixtures (case labels reuse the Linux names): page 1 then page 47 using 2.7 % of the file, page 280 using 3.7 %, all requests 206 and ≤ 64.5 KiB. Withdrawal between chunks: 0 post-fence 206 and the viewer is invalidated. Forged-token and other-user viewers make no range request. | BLOCKED |
 | Concurrent caps | PASS. 200/200 ledger races at the site cap and 100/100 at the connection cap. HTTP: 40 contenders for one 64 KiB of site credit → exactly 1 × 206. 400 requests at a 1 MiB cap: maximum outstanding 1,048,454 ≤ 1,048,576, 0 violations in about 76k samples. | PASS (same tests) | BLOCKED |
 | Slow drain | PASS. The slow reader held its charge. Kernel occupancy (6,144 B) ≤ charge. Released only after `tx_queue = 0`. | PASS via the TCP-state probe (no byte-level occupancy on Windows) | BLOCKED |
 | Crash and cancel | PASS. kill -9 mid-transfer: the charge survives the restart, no release before the grace, an explicit reconciliation releases it with evidence. A client RST gives no further attempt on the stream. | PASS | BLOCKED |
@@ -48,7 +48,7 @@ pinned in `r2n01/n01_http_cases.json`, committed (c86f66ed) before any trace was
 |---|---|---|---|---|
 | Linux, /proc tx_queue probe | ACCEPTED | 104 | 196,608 (= site cap) / 0 | 16 ms |
 | Linux, TCP-state probe (the Windows code path) | ACCEPTED | 104 | 196,608 / 0 | measured in file |
-| Hosted Windows (CI) | ACCEPTED | 100 | 196,608 / 0 | 10 ms |
+| Hosted Windows (CI run 45689265895, Windows Server 2025 build 26100, 2 vCPU) | ACCEPTED | see `data/r2n01/windows_ci_run_45689265895/` | 196,608 / 0 | 10 ms (earlier run 45649488168) |
 
 Earlier traces that the oracle rejected are recorded honestly in the commit history. They exposed three real
 defects, all fixed:
