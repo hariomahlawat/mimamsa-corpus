@@ -862,12 +862,18 @@ class Builder:
     def transition_links(self):
         """Army Act provisions that refer to the old criminal codes (as recorded in image-checked WS-A rows): successor mapping NOT determined."""
         out = []
+        pic = {}
+        for f in ("identity_transcription_register.csv", "identity_transcription_register_cycle3.csv"):
+            for x in read_csv(AW / "WS-A-STATUTORY" / f):
+                pic[x["check_id"]] = x["render_png_sha256"]
         for r in read_csv(P["aa_chain"]):
             t = r["change_as_printed"] + " " + r["sections_affected"]
+            cids = [c for c in re.split(r"[;,]\s*", r["image_check_ids"]) if c in pic]
             if re.search(r"Criminal Procedure|CrPC|Penal Code|Evidence Act", t, re.I):
                 for s in parse_sections(r["sections_affected"]):
                     out.append({"army_act_provision": f"s.{s}", "reference_as_recorded": r["change_as_printed"][:300], "recorded_in": f"WS-A army_act_amendment_chain#{r['chain_id']}",
-                                "evidence_level": r["evidence_level"], "old_code": "CrPC 1973" if "1973" in t else "CrPC (1898)",
+                                "evidence_level": r["evidence_level"] if cids else re.sub(r"^IMAGE_CHECKED", "IMAGE_CHECK_RECORD_NOT_RESOLVED", r["evidence_level"]),
+                                "check_id": ";".join(cids), "render_png_sha256": ";".join(pic[c] for c in cids), "old_code": "CrPC 1973" if "1973" in t else "CrPC (1898)",
                                 "successor_code_after_repeal": "BNSS 2023 (repeals CrPC 1973 by s.531(1), compilation text)",
                                 "successor_provision_mapping": "NOT_DETERMINED (no held instrument maps the referenced CrPC provisions to BNSS provisions; effect of the reference after 01-07-2024 is a legal question: A4-LQ-XREF-01)",
                                 "status": "AUTOMATED_CANDIDATE_NOT_VERIFIED"})
@@ -911,7 +917,7 @@ class Builder:
         files["records/PROVISION_VERSIONS_C13.jsonl"] = jsonl
         files["outputs/VERSION_COVERAGE_C13.json"] = (json.dumps(cov, indent=1, ensure_ascii=False) + "\n").encode()
         files["outputs/TEMPORAL_AXES_A4.csv"] = csv_bytes(self.axes_rows(), ["question_id", "scope", "axes", "question", "evidence_constraint", "determination", "status"])
-        files["outputs/CRIMINAL_LAW_TRANSITION_LINKS_A4.csv"] = csv_bytes(self.transition_links(), ["army_act_provision", "reference_as_recorded", "recorded_in", "evidence_level",
+        files["outputs/CRIMINAL_LAW_TRANSITION_LINKS_A4.csv"] = csv_bytes(self.transition_links(), ["army_act_provision", "reference_as_recorded", "recorded_in", "evidence_level", "check_id", "render_png_sha256",
                                                                                                    "old_code", "successor_code_after_repeal", "successor_provision_mapping", "status"])
         for k, v in files.items():
             assert_no_restricted(k, v)
