@@ -115,7 +115,7 @@
   "J-fddb6803358689ae"
  ],
  "external_calls": "none",
- "extractor": "c13-holdings/0.9.0-candidate",
+ "extractor": "c13-holdings/1.0.0",
  "ids_file_sha256": null,
  "n_ids": 284,
  "n_items": 3268,
@@ -125,10 +125,11 @@
   "C12:holdings_c12.py": "a1b0163824e4062b38efe1423985559935130f7e581f3c3ba61e29a50fc7bb89",
   "C12:holdings_core.py": "6d5b05e447e082cb8d9be4a1784148a18221091bd836b5fceb4cecbf6178fe8e",
   "c13_corpus.py": "8f3dc72767f9f21797d4f24c958ba74f5ec0a340b69990eb2f46c7ad342fc583",
-  "c13_extract.py": "1214c1545a73b4218dc16e87fd0ba72fea94286b7ad43376b1e89e78729f871c",
+  "c13_extract.py": "9b9a3f4f75f0e8b6da246e2ec24b98844ee732ade76c29d2fd65bccc07910549",
   "c13_features.py": "edf3648e238a757a593b5d7590e38327edf210b23f0ee9f68ad1b9d9eb5fbff9",
   "c13_segment.py": "6e3b80afcffdc78eb4bdda0d90c75803e3b9bcc29509d97ae956be9abc0fbcc5",
-  "holdings_c13.py": "98e51cbb9eed450e96183ac6eadf0edb4ecb99bbede9b0a4545487807f6f6abc",
-  "model:c13_holdings_model.json": "fb28209c39a3a215d019ade5ff1356713306005606dd5223a182bd2db631e30a"
+  "holdings_c13.py": "a88bf33d0424c9ad4074260f8b71dd5666c3bd5fdbd6ea9f7737106b8892e640",
+  "model:c13_holdings_model.json": "fb28209c39a3a215d019ade5ff1356713306005606dd5223a182bd2db631e30a",
+  "predict_holdout_c13.py": "f86d26f4a0ef165d132f7dddefe6d07a71168f57fb2f96af72bdb553aa5b4d6e"
  }
 }

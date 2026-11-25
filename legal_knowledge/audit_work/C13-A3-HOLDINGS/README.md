@@ -1,6 +1,6 @@
 # C13-A3: holdings and legal-proposition extraction, redesign (`c13-holdings`)
 
-**Status: candidate, PREPARED BUT NOT FROZEN.** Freeze waits for the coordinator's confirmation that A0 (H-HOLD-C13) is accepted (`FREEZE_CANDIDATE.json`).
+**Status: FROZEN as `c13-holdings/1.0.0`** after A0 acceptance (`FREEZE.json`: hashes, ancestry check, author statement). Frozen H-HOLD-C13 predictions: `frozen_predictions/PRED_H-HOLD-C13.csv` (113 items, 837 rows), to be scored by an independent evaluator.
 Every item is `AUTOMATED_CANDIDATE_NOT_VERIFIED` / `NOT_VERIFIED_RATIO_NOT_DETERMINED`. No item is a verified ratio. No overruling or other treatment is inferred. This is not legal validation.
 
 ## Headline (read this first)

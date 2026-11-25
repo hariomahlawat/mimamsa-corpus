@@ -37,7 +37,7 @@ import c13_features as cf  # noqa: E402
 ROOT = os.path.dirname(HERE)
 OUT = os.path.join(ROOT, "outputs")
 DEF_MODEL = os.path.join(ROOT, "model", "c13_holdings_model.json")
-TOOL_FILES = ["c13_corpus.py", "c13_segment.py", "c13_features.py", "c13_extract.py", "holdings_c13.py"]
+TOOL_FILES = ["c13_corpus.py", "c13_segment.py", "c13_features.py", "c13_extract.py", "holdings_c13.py", "predict_holdout_c13.py"]
 C12_DEPS = [os.path.join(cc.C12_TOOLS, "holdings_core.py"), os.path.join(cc.C12_TOOLS, "holdings_c12.py")]
 JCOLS = ["judgment_id", "sha256", "doc_id", "court", "text_status", "excluded_reason", "body_start_page", "body_start_method",
          "n_opinions", "opinions", "n_numbered_paragraphs", "n_quote_spans", "n_sentences"] + ["n_" + c for c in cx.PASSAGE_CLASSES] + \

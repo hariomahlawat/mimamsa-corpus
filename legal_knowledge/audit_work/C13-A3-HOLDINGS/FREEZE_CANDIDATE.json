@@ -10,7 +10,7 @@
   "PASSAGES_C13.tsv.gz": "104465f167a447999236e6993fbed6589a4df5a997b7a277b0660a46962abef1"
  },
  "source_repo_commit": "/home/user/c7 @ ad77758d",
- "status": "PREPARED_NOT_FROZEN_AWAITING_COORDINATOR_CONFIRMATION_OF_A0_ACCEPTANCE",
+ "status": "SUPERSEDED_BY_FREEZE_JSON",
  "thresholds": {
   "floor_min_court_sentences": 15,
   "holding": 0.6,

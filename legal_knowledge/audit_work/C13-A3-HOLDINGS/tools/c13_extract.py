@@ -21,7 +21,7 @@ import c13_features as cf
 import c13_segment as sg
 
 c12 = sg.c12
-VERSION = "c13-holdings/0.9.0-candidate"
+VERSION = "c13-holdings/1.0.0"
 STATUS = "AUTOMATED_CANDIDATE_NOT_VERIFIED"
 VERIFICATION = "NOT_VERIFIED_RATIO_NOT_DETERMINED"
 EXCERPT_CAP = 900
