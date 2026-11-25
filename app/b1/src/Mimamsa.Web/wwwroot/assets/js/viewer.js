@@ -78,6 +78,9 @@ export class ProtectedViewer {
     const seq = ++this.renderSeq;
     const host = this.host;
     const width = Math.max(320, host.clientWidth - 48);
+    let page;
+    try { page = await this.doc.getPage(this.page); } catch (e) { if (!this.destroyed) this.onState("failed", String(e.message || e)); return; }
+    if (seq !== this.renderSeq || !host.isConnected) return;
     host.replaceChildren();
     const legend = document.createElement("div");
     legend.className = "pdf-legend";
@@ -91,9 +94,6 @@ export class ProtectedViewer {
     wrap.className = "pagewrap";
     host.append(wrap);
     const ph = document.createElement("div"); ph.className = "placeholder"; ph.textContent = `Loading page ${this.page}…`;
-    let page;
-    try { page = await this.doc.getPage(this.page); } catch (e) { if (!this.destroyed) this.onState("failed", String(e.message || e)); return; }
-    if (seq !== this.renderSeq) return;
     const base = page.getViewport({ scale: 1 });
     const scale = this.scale || Math.min(2.5, width / base.width);
     const vp = page.getViewport({ scale });
@@ -110,7 +110,7 @@ export class ProtectedViewer {
     try {
       await page.render({ canvas, canvasContext: canvas.getContext("2d"), viewport: vp, transform: ratio !== 1 ? [ratio, 0, 0, ratio, 0, 0] : null }).promise;
     } catch (e) { if (!this.destroyed && seq === this.renderSeq) this.onState("failed", String(e.message || e)); return; }
-    if (seq !== this.renderSeq) return;
+    if (seq !== this.renderSeq || !host.isConnected) return;
     ph.remove();
     wrap.prepend(canvas);
     const tl = document.createElement("div");
@@ -123,6 +123,8 @@ export class ProtectedViewer {
     } catch { this.marks = 0; }
     this.onState("rendered", this.page);
   }
+
+  invalidate() { this.renderSeq++; }
 
   setScale(s) { this.scale = s; return this.render(this.page); }
 

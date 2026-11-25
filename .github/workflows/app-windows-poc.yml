@@ -250,3 +250,109 @@ jobs:
         with:
           name: app-windows-poc-results
           path: out/
+
+  # ---------------- B1 vertical slice on windows-latest: build, tests, oracle, journeys, Windows Service smoke ----------------
+  b1-windows:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+      DOTNET_NOLOGO: "1"
+      B1_ROOT: C:\mimamsa-b1
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Start PostgreSQL (preinstalled) and create B1 databases
+        run: |
+          $svc = Get-Service -Name "postgresql*" | Select-Object -First 1
+          if (-not $svc) { throw "No preinstalled PostgreSQL service found on runner" }
+          Set-Service $svc.Name -StartupType Manual
+          Start-Service $svc.Name
+          $psql = Join-Path $env:PGBIN "psql.exe"; $env:PGPASSWORD = "root"
+          & $psql -U postgres -h 127.0.0.1 -c "CREATE ROLE mimamsa LOGIN PASSWORD 'mimamsa';"
+          foreach ($db in @("mimamsa_b1_test", "mimamsa_b1_oracle", "mimamsa_b1_e2e_syn", "mimamsa_b1_svc")) {
+            & $psql -U postgres -h 127.0.0.1 -c "CREATE DATABASE $db OWNER mimamsa;"
+            if ($LASTEXITCODE) { throw "create $db failed" }
+          }
+      - name: Importer dependencies, design-token drift check, synthetic SYN site
+        run: |
+          python -m pip install --disable-pip-version-check -r app/importer/requirements.txt
+          python app/b1/web/gen_tokens.py --check
+          if ($LASTEXITCODE) { throw "tokens.css drift" }
+          python -I app/b1/build/build_fixture_site.py --out "$env:B1_ROOT\syn"
+          if ($LASTEXITCODE) { throw "fixture site build failed" }
+      - name: Vendor PDF.js and build (Release)
+        run: |
+          Push-Location app/b1/web; npm ci --omit=optional --no-audit --no-fund; node vendor.mjs; if ($LASTEXITCODE) { throw "vendor" }; Pop-Location
+          dotnet build -c Release app/b1/Mimamsa.B1.slnx
+          if ($LASTEXITCODE) { throw "build failed" }
+      - name: Unit and integration tests on Windows (real Kestrel process, PostgreSQL)
+        run: |
+          $env:MIMAMSA_TEST_SITE = "$env:B1_ROOT\syn\site"; $env:MIMAMSA_TEST_MAP = "$env:B1_ROOT\syn\fixture_map.json"
+          $env:MIMAMSA_TEST_DB = "Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_test;Maximum Pool Size=40"
+          New-Item -ItemType Directory -Force out\b1 | Out-Null
+          dotnet test -c Release --no-build app/b1/Mimamsa.B1.slnx --logger "trx;LogFileName=b1-tests-windows.trx" --results-directory out\b1
+          if ($LASTEXITCODE) { throw "B1 tests failed on Windows" }
+      - name: PR #54 retrieval oracle (unmodified) against the real search service on Windows
+        run: |
+          python app/b1/tests/b1server.py --site "$env:B1_ROOT\syn\site" --log out\b1\oracle-service.log `
+            --db "Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_oracle;Maximum Pool Size=40" -- `
+            python app/b1/tests/oracles/run_retrieval_oracle.py --map "$env:B1_ROOT\syn\fixture_map.json" --out out\b1\oracle
+          if ($LASTEXITCODE) { throw "oracle runner error" }
+      - name: Playwright journeys on Windows (headless Chromium, trace off)
+        run: |
+          $pw = "$env:RUNNER_TEMP\pw"; New-Item -ItemType Directory -Force $pw | Out-Null
+          Push-Location $pw; npm init -y | Out-Null; npm install --no-save --silent playwright@1.63.0; npx playwright install chromium; Pop-Location
+          $env:NODE_PATH = "$pw\node_modules"; $env:B1_SYN_SITE = "$env:B1_ROOT\syn\site"
+          $env:B1_SYN_DB = "Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_e2e_syn;Maximum Pool Size=40"
+          node "$pw\node_modules\playwright\cli.js" test --config app/b1/e2e/playwright.config.cjs --trace off
+          if ($LASTEXITCODE) { throw "B1 journeys failed on Windows" }
+      - name: Publish win-x64 and run as a Windows Service (virtual account, production mode, CLI-created account)
+        run: |
+          $pub = "$env:B1_ROOT\svc"
+          dotnet publish app/b1/src/Mimamsa.Web/Mimamsa.Web.csproj -c Release -r win-x64 --self-contained false -o $pub
+          if ($LASTEXITCODE) { throw "publish failed" }
+          $db = "Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_svc;Maximum Pool Size=40"
+          @{ Urls = "http://127.0.0.1:5310"; Mimamsa = @{ Site = "$env:B1_ROOT\syn\site"; Db = $db } } | ConvertTo-Json -Depth 4 |
+            Set-Content -Encoding UTF8 "$pub\appsettings.Production.json"
+          $env:MIMAMSA_NEW_PASSWORD = "ci-admin-password-1"
+          & "$pub\Mimamsa.Web.exe" --add-user ciadmin Admin --Mimamsa:Db=$db
+          New-Service -Name MimamsaB1 -BinaryPathName "`"$pub\Mimamsa.Web.exe`"" -StartupType Manual | Out-Null
+          sc.exe config MimamsaB1 obj= "NT SERVICE\MimamsaB1" | Out-Null
+          sc.exe failure MimamsaB1 reset= 60 actions= restart/2000 | Out-Null
+          icacls "$env:B1_ROOT\syn\site" /grant "NT SERVICE\MimamsaB1:(OI)(CI)R" | Out-Null
+          icacls $pub /grant "NT SERVICE\MimamsaB1:(OI)(CI)RX" | Out-Null
+          Start-Service MimamsaB1
+          $ok = $false; for ($i = 0; $i -lt 60; $i++) { try { if ((Invoke-WebRequest "http://127.0.0.1:5310/health" -UseBasicParsing -TimeoutSec 2).StatusCode -eq 200) { $ok = $true; break } } catch {}; Start-Sleep 1 }
+          if (-not $ok) { throw "service did not become healthy" }
+          $s = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+          $login = Invoke-WebRequest "http://127.0.0.1:5310/api/login" -Method Post -ContentType "application/json" -Body '{"username":"ciadmin","password":"ci-admin-password-1"}' -WebSession $s -UseBasicParsing
+          $r = Invoke-RestMethod "http://127.0.0.1:5310/api/search?q=OA%20411%2F2021" -WebSession $s
+          if ($r.mode -ne "identifier" -or $r.passages[0].doc_id -ne "syn-j-allow") { throw "service search smoke failed" }
+          try { Invoke-WebRequest "http://127.0.0.1:5310/api/search?q=x" -UseBasicParsing | Out-Null; throw "unauthenticated search allowed" } catch { if ($_.Exception.Response.StatusCode.value__ -ne 401) { throw } }
+          $p1 = (Get-CimInstance Win32_Service -Filter "Name='MimamsaB1'").ProcessId
+          Stop-Process -Id $p1 -Force
+          $ok = $false; for ($i = 0; $i -lt 60; $i++) { Start-Sleep 1; $p2 = (Get-CimInstance Win32_Service -Filter "Name='MimamsaB1'").ProcessId; if ($p2 -and $p2 -ne $p1) { try { if ((Invoke-WebRequest "http://127.0.0.1:5310/health" -UseBasicParsing -TimeoutSec 2).StatusCode -eq 200) { $ok = $true; break } } catch {} } }
+          if (-not $ok) { throw "SCM did not restart the crashed service" }
+          Stop-Service MimamsaB1
+          @{ health = "ok"; search_mode = $r.mode; first = $r.passages[0].doc_id; crash_restart = $ok } | ConvertTo-Json | Out-File out\b1\windows_service_smoke.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: b1-windows-results
+          path: |
+            out/b1
+            app/b1/e2e/out

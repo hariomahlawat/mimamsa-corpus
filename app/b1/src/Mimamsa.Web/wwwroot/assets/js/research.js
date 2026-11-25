@@ -390,7 +390,9 @@ function docHeader(d, tab) {
       (j?.reported_citations || []).length ? f("Reported", j.reported_citations.join("; "), "reported_citations", true) : null,
       j?.judges?.length ? f("Judges", j.judges.join(", "), "judges") : null),
     h("div.meta",
-      h("span.field", h("span.label", "Copy"), h("span.mono", short(d.copy.sha256)), h("span.muted", `${d.copy.page_count} pages · ${(d.copy.bytes / 1048576).toFixed(1)} MB`)),
+      tab.copy && tab.copy !== d.copy.sha256
+        ? h("span.field", h("span.label", "Cited copy"), h("span.mono", short(tab.copy)), h("span.muted", "(earlier edition held in this installation; the metadata above is the current edition's record)"))
+        : h("span.field", h("span.label", "Copy"), h("span.mono", short(d.copy.sha256)), h("span.muted", `${d.copy.page_count} pages · ${(d.copy.bytes / 1048576).toFixed(1)} MB`)),
       h("span.field", h("span.label", "Source"), h("span", host(d.provenance.source_url))),
       h("span.field", h("span.label", "Retrieved"), h("span", fmtDate(d.provenance.retrieved_at) || "not recorded")),
       h("span.field", h("span.label", "Corpus status"), h("span", d.corpus_status), h("span.muted", "(display only)")),
@@ -398,7 +400,9 @@ function docHeader(d, tab) {
   if (tab.notice) add(head, h("div.notice", { role: "status" }, h("span", tab.notice),
     tab.currentCopy ? h("button.btn.btn-small", { type: "button", onclick: () => openDocument({ docId: d.doc_id, page: 1, copy: null }, { newTab: true }) }, "Open current edition") : null));
   if (d.access_marking) add(head, h("div.notice", `Printed access marking: ${d.access_marking}`));
-  if (d.outcomes?.length) {
+  if (d.copy.completeness === "TRUNCATED_AT_SOURCE") add(head, h("div.notice", { role: "note" }, chip("warning", "Truncated at source"),
+    " This copy is incomplete as received from its source. Missing pages are not evidence that anything was decided or not decided; read a complete copy where one is held."));
+  if (d.outcomes?.length && !(tab.copy && tab.copy !== d.copy.sha256)) {
     const strip = h("div.proceedings", { "aria-label": "Proceedings and candidate outcomes" }, h("span.label.muted", "Candidate outcomes (A2 extractor V4):"));
     for (const o of d.outcomes.slice(0, 6)) {
       const ev = o.evaluation;
@@ -430,8 +434,8 @@ function renderToolbar() {
   const tb = $("#toolbar"); const tab = R.tabs[R.active];
   if (!tb || !tab?.doc) return;
   clear(tb);
-  const n = tab.doc.copy.page_count;
-  const hits = tab.hits || [];
+  const n = tab.copy ? (tab.pageCount || tab.doc.copy.page_count) : tab.doc.copy.page_count;
+  const hits = tab.copy ? [] : (tab.hits || []);
   add(tb, 
     h("div.segmented", { role: "group", "aria-label": "View (T)" },
       h("button", { type: "button", "aria-pressed": String(tab.view === "original"), onclick: () => setView("original") }, "Original"),
@@ -463,6 +467,7 @@ export function setView(v) {
   if (!tab) return;
   if (v === "toggle") v = tab.view === "original" ? "text" : "original";
   if (v === "text" && tab.copy && tab.citeState === "CITED_COPY_ELIGIBLE_NOT_CURRENT") { toast("Text view is available for the current edition only. The cited copy is shown as its original."); return; }
+  if (tab.viewer) tab.viewer.invalidate();
   tab.view = v; renderToolbar(); showView(tab);
   const vw = $("#viewer"); if (vw) vw.setAttribute("aria-label", v === "original" ? "Original document" : "Extracted text");
 }
@@ -481,8 +486,10 @@ async function showView(tab) {
     window.__mimamsaViewer = tab.viewer;
     let ok = false;
     try { ok = await tab.viewer.open(); } catch (e) { viewerState(tab, "failed", e.message); return; }
-    if (!ok || R.tabs[R.active] !== tab) return;
+    if (!ok || R.tabs[R.active] !== tab || tab.view !== "original") return;
+    tab.pageCount = tab.viewer.numPages; renderToolbar();
   } else tab.viewer.host = vw;
+  if (tab.view !== "original") return;
   await tab.viewer.render(tab.page, { terms: terms(), ocr: pageOcr });
 }
 
@@ -551,7 +558,7 @@ function highlightText(txt, rx) {
 export function goPage(n) {
   const tab = R.tabs[R.active];
   if (!tab || !Number.isFinite(n)) return;
-  n = Math.max(1, Math.min(tab.doc.copy.page_count, n));
+  n = Math.max(1, Math.min(tab.copy ? (tab.pageCount || tab.doc.copy.page_count) : tab.doc.copy.page_count, n));
   tab.page = n; tab.passage = null;
   tab.hitIndex = (tab.hits || []).findIndex((x) => x.page === n);
   R.nav.replace(docUrl(tab));

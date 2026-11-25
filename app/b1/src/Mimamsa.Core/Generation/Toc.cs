@@ -9,8 +9,11 @@ public sealed record TocEntry(string Number, string Heading, int Page, string? P
 
 public static partial class Toc
 {
-    [GeneratedRegex(@"(?m)^[ \t]*(?<n>\d{1,3}[A-Z]{0,2})\.[ \t]+(?<h>\S[^\n]{0,180})")]
+    [GeneratedRegex(@"(?m)^[ \t]*(?:(?:Section|Rule|Regulation|Article)[ \t]+)?(?<n>\d{1,3}[A-Z]{0,2}(?:\([0-9a-zA-Z]{1,4}\))*)\.[ \t]+(?<h>\S[^\n]{0,180})")]
     private static partial Regex Heading();
+    // compilation footnotes printed with the same "N. ..." shape ("1. Subs. by Act 19 of 1955", "4. The words ... omitted")
+    [GeneratedRegex(@"^(?:Subs\.|Ins\.|Omitted by|Added by|Rep\.|The (?:words|word|figures|brackets|letters?)\b.*\b(?:omitted|substituted|inserted)\b)", RegexOptions.IgnoreCase)]
+    private static partial Regex Footnote();
 
     public static List<TocEntry> Build(DocumentRecord d)
     {
@@ -26,7 +29,7 @@ public static partial class Toc
                 // "[Field punishment.] Omitted by ..." (bracketed heading) is how the compilation prints an omitted section;
                 // footnote lines ("4. The words ... omitted, ibid") are not headings and rank lowest.
                 bool omitted = h.StartsWith('[') && h.Contains("Omitted", StringComparison.Ordinal);
-                int rank = body || (omitted && h.Length > 15) ? 3 : omitted ? 2 : h.Contains("omitted", StringComparison.OrdinalIgnoreCase) || h.Contains("Subs.") || h.Contains("Ins.") ? 0 : 1;
+                int rank = body || (omitted && h.Length > 15) ? 3 : omitted ? 2 : Footnote().IsMatch(h) ? 0 : 1;
                 if (rank == 0) continue;
                 var pid = d.Passages.Where(p => p.Page == page.Page && p.CharStart <= m.Index && m.Index < p.CharEnd).Select(p => p.PassageId).FirstOrDefault();
                 var e = new TocEntry(n, heading.Length > 120 ? heading[..120] + "…" : heading, page.Page, pid, omitted);

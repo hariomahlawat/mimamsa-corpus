@@ -326,7 +326,7 @@ dialog .actions { display: flex; justify-content: flex-end; gap: var(--space-4);
   .research.doc-open .docpane { display: flex; }
   .research.doc-open.results-open .results { display: flex; position: absolute; left: 48px; top: 0; bottom: 0; width: min(380px, 85vw); z-index: var(--z-popover); box-shadow: var(--elevation-overlay); }
   .topbar .segmented, .banner-meta { display: none; }
-  .workspaces a span.wlabel { display: none; }
+  .workspaces a, .workspaces button { padding: 0 var(--space-3); }
   .footer { display: none; }
   .workspace { grid-template-columns: minmax(0, 1fr); }
   .workspace .rail { max-height: 34vh; border-right: 0; border-bottom: 1px solid var(--border-subtle); }
@@ -336,6 +336,7 @@ dialog .actions { display: flex; justify-content: flex-end; gap: var(--space-4);
   .banner { height: var(--banner-h-condensed); font-size: var(--size-xs); }
   .topbar { gap: var(--space-3); }
   .mark span { display: none; }
+  .workspaces { font-size: var(--size-sm); }
   .searchbar .btn { display: none; }
 }
 @media (max-height: 600px) { .banner { height: var(--banner-h-condensed); font-size: var(--size-xs); } .footer { display: none; } }
