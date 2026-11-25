@@ -54,6 +54,19 @@ def citation_key(s):
     return k if re.fullmatch(r"[\d;\-]+", k) else re.sub(r"\s+", " ", t).strip()
 
 
+# Coding-time disposition for an item that cannot be coded (PROTOCOL_C13 v1.1 s.4.5; GA0 review F05). The item stays in
+# the sample, is never replaced, and is counted and reported. Row form: notes = "UNCODABLE:<CODE>[ free text]" with every
+# other coding field blank except `page`.
+UNCODABLE_CODES = {"SHA_MISMATCH", "FILE_UNAVAILABLE", "UNREADABLE", "CONTENT_MISSING_TRUNCATED", "NOT_A_JUDGMENT",
+                   "MISIDENTIFIED_DOCUMENT", "OUT_OF_SCOPE", "PAGE_ABSENT", "OTHER"}
+UNCODABLE_RE = re.compile(r"^UNCODABLE:([A-Z_]+)\b")
+
+
+def uncodable_code(row):
+    m = UNCODABLE_RE.match((row.get("notes") or "").strip())
+    return m.group(1) if m else None
+
+
 class Task:
     name = ""
     coding_fields = []
@@ -70,11 +83,22 @@ class Task:
         """A row stating that the item has nothing to code (no holding / no citation on the page)."""
         return False
 
+    def is_uncodable_row(self, row):
+        code = uncodable_code(row)
+        return code is not None and not any((row.get(f) or "").strip() for f in self.coding_fields
+                                            if f not in ("notes", "page"))
+
     def family(self, field, label):
         return self.families.get(field, {}).get(label, label)
 
     def validate_row(self, row):
         """Return list of errors for a coded row (blank / off-vocabulary labels are errors)."""
+        if uncodable_code(row) is not None:
+            if uncodable_code(row) not in UNCODABLE_CODES:
+                return [f"notes: unknown UNCODABLE code {uncodable_code(row)}"]
+            if not self.is_uncodable_row(row):
+                return ["UNCODABLE row must leave the coding fields blank (page may be given)"]
+            return []
         errs = []
         for f in self.required:
             if not (row.get(f) or "").strip():
@@ -145,7 +169,7 @@ class HoldingsTask(Task):
             (row.get(f) or "").strip() for f in self.coding_fields if f != "notes")
 
     def validate_row(self, row):
-        return [] if self.is_null_row(row) else super().validate_row(row)
+        return [] if self.is_null_row(row) and uncodable_code(row) is None else super().validate_row(row)
 
     def spans_match(self, a, b):
         try:

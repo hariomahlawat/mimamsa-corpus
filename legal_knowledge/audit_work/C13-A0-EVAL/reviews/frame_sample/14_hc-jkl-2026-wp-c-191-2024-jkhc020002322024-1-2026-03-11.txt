@@ -1,0 +1,184 @@
+{
+ "i": 14,
+ "doc_id": "hc-jkl-2026-wp-c-191-2024-jkhc020002322024-1-2026-03-11",
+ "frame_court": "JK",
+ "meta_court": "High Court of Jammu and Kashmir",
+ "text_court_guess": "DEL",
+ "frame_tq": "USABLE",
+ "tq_basis": "all pages usable",
+ "my_pages": 12,
+ "my_usable": 12,
+ "my_letters": 14013,
+ "my_share": 0.925,
+ "text_method": "pdf_text",
+ "frame_stratum": "PENSION_OR_DISCIPLINARY",
+ "meta_case_numbers": "WP(C)/191/2024",
+ "records_for_file": "1",
+ "connected": "0",
+ "party_cues": "0",
+ "judgment_key": "JK-c5041c9366ab77ae"
+}
+=== HEAD ===
+[[page 1]]
+HIGH COURT OF JAMMU & KASHMIR AND LADAKH
+
+AT JAMMU
+
+WP(C) No.191/2024
+
+Reserved on: 26.02.2026
+                              Pronounced on: 11 .03.2026
+
+                          Uploaded on: 12.03.2026
+
+Raghbir Singh, Age 67
+S/o Sh. Budhi Singh,
+R/o Village & P.O.Gho Manhasan, Tehsil Marh,
+District Jammu (J&K)-181206
+                                      ...Petitioners(s)
+ Through:-
+        Mr. Chakshu Sharma, Advocate
+        (through virtual mode)
+        Mr. Sanjog Khatri, Advocate
+
+Versus
+
+1.
+Union of India through its Secretary to Government of India,
+Ministry of Defence, New Delhi
+2.
+The AFT Tribunal through its
+Registrar, Srinagar Bench, Sunjwan Cantt,
+Jammu,
+3.
+The Chief of the Army Staff, IHQ of MoD(Army),
+Adjutant General‟s Branch, Additional Directorate, Directorate
+General Personnel Services, DHQ PO New Delhi-110011.
+4.
+The PCDA (Pension) Grant Section, Allahabad (UP)-211014
+5.
+The Record Officer, Punjab Regiment, Ramgarh Cantonment,
+Jharkhand-829130
+              ...Respondent(s)
+
+Through:- Mr. Sumant Sudan, Advocate vice
+      Mr. Vishal Sharma, DSGI
+
+Coram:   HON’BLE MR. JUSTICE SANJEEV KUMAR, JUDGE
+      HON’BLE MR. JUSTICE SANJAY PARIHAR, JUDGE
+
+JUDGMENT
+
+[[page 2]]
+WP(C) No.191/2024                                                           2
+
+Sanjeev Kumar “J”
+1.
+One Raghbir Singh, a retired soldier of Indian Army is before us
+
+in this petition, filed under Article 226 of the Constitution of
+
+India, to throw challenge to an order and judgment dated 16th
+
+May, 2023 passed by the Armed Forces Tribunal, Regional
+
+Bench Srinagar at Jammu [“the Tribunal”] in OA No.230/2022
+
+titled Ex Nk Raghbir Singh v. Union of India and others,
+
+whereby the Tribunal has dismissed the OA of the petitioner,
+
+which was filed primarily to seek a direction to the r
+=== TAIL ===
+
+Flying operation involved in rehearsing of
+war plans and implementation of OP instructions
+inclusive of international exercise.
+
+(b)  All combat and tactical sorties in preparation of war
+
+(iii)Kidnapping by extremists while on operational duty.
+
+(g) An act of violence/attack by extremists, anti-social
+
+elements etc while on operational duty.
+
+(i) Operations specially notified by the Govt. from time
+
+to time.”
+
+14.
+Category-E, which is relevant for our purpose, clearly deals with
+
+death or disability that has arisen as a result of operation
+
+specially notified by the Government from time to time. From a
+
+plain reading of the provision, it is crystal clear that death or
+
+disability would be covered under Category-E only if the same
+
+has arisen as a result of operation specifically notified by the
+
+Government from time to time. This again speaks of a clear
+
+nexus between the death or disability with the operation notified
+
+by the Government for a particular area. Accidental injuries or
+
+deaths which are not in any way connected with the operational
+
+duties cannot be said to be „War Casualties‟ or „War Injuries‟.
+
+There should be a direct and causal connection of the injury with
+
+the duties connected with the operational area specially notified
+
+by the Government.
+
+15.
+In the instant case, there is no material on record to conclude that
+
+the injury that was suffered by the petitioner due to negligent
+
+handling of weapon by a co-soldier in the post is a result of any
+
+[[page 12]]
+WP(C) No.191/2024                                                           12
+
+operation undertaken by the Unit in the notified area. That apart,
+
+in the instant case, the injury occurred in the year 1990 and
+
+Government Order was issued on 31.01.2001, making it
+
+applicable only to the armed forces personnel, who were in
+
+service on 01.01.1996 or joined army service thereafter. From
+
+reading of the Government Order dated 31.01.2001 in its
+
+entirety, we could not find that the past cases, too, have been
+
+provided to be covered by it.
+
+16.
+For the foregoing reasons as also the detailed reasons given by
+
+the Tribunal in support of its judgment, we find no merit in this
+
+petition and the same is, accordingly, dismissed.
+
+(Sanjay Parihar)
+(Sanjeev Kumar)
+        Judge                              Judge
+JAMMU
+11.03.2026
+Vinod, Secy
+Whether the order is speaking : Yes
+Whether the order is reportable: Yes
+
+Vinod Kumar
+2026.03.12 11:21
+I attest to the accuracy and
+integrity of this document

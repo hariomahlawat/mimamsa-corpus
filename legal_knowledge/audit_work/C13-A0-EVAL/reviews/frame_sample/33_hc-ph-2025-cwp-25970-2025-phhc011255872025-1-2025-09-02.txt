@@ -1,0 +1,206 @@
+{
+ "i": 33,
+ "doc_id": "hc-ph-2025-cwp-25970-2025-phhc011255872025-1-2025-09-02",
+ "frame_court": "PH",
+ "meta_court": "High Court of Punjab and Haryana",
+ "text_court_guess": "PH",
+ "frame_tq": "USABLE",
+ "tq_basis": "all pages usable",
+ "my_pages": 2,
+ "my_usable": 2,
+ "my_letters": 2139,
+ "my_share": 0.913,
+ "text_method": "pdf_text",
+ "frame_stratum": "PARTY_SPECIFIC",
+ "meta_case_numbers": "CWP/25970/2025",
+ "records_for_file": "1",
+ "connected": "0",
+ "party_cues": "1",
+ "judgment_key": "JK-0b47929b9ae8b3cc"
+}
+=== HEAD ===
+[[page 1]]
+IN THE HIGH COURT OF PUNJAB AND HARYANA
+
+AT CHANDIGARH
+130
+CWP-25970-2025
+Date of Decision: 02.09.2025
+
+UNION OF INDIA AND OTHERS
+
+...Petitioners
+Versus
+SMT REENA YADAV AND ANOTHER
+
+...Respondents
+
+CORAM: HON'BLE MR. JUSTICE HARSIMRAN SINGH SETHI
+
+HON'BLE MR. JUSTICE VIKAS SURI
+
+Present:-
+Mr. Narender Kumar Vashist, Senior Panel Counsel,
+for the petitioners.
+
+*****
+
+HARSIMRAN SINGH SETHI
+ , J. (ORAL)
+
+1.
+In the present petition, the challenge is to the order dated
+
+03.12.2019 (Annexure P-1) passed by the passed by respondent No. 2-
+
+Armed Forces Tribunal, Regional Bench, Chandigarh (hereinafter referred to
+
+as ‘Tribunal’), by which, the benefit of special family pension has been
+
+allowed in favour of respondent No.1.
+
+2.
+Learned counsel for the petitioners argues that after the death of
+
+the husband of respondent No.1 on duty on 19.08.2017 due to Myocardial
+
+Infarction, the authority has found that the cause of death is neither
+
+attributable to nor aggravated by the military service, the grant of benefit by
+
+the Tribunal is incorrect.
+
+3.
+We have heard learned counsel for the petitioners and have
+
+gone through the case file with his able assistance.
+
+4.
+A bare perusal of the averments made by the counsel for the
+
+petitoiners and the record brought before this Court would show that after
+
+HARISH KUMAR
+2025.09.04 17:09
+I attest to the accuracy and
+authenticity of this
+order/judgment
+
+[[page 2]]
+CWP-25970-2025
+(2)
+
+the death of husband of respondent No.1, the Court of Inquiry was
+
+conducted and as per the Court of Inquiry, it has already been held that the
+
+death of husband of respondent No.1 is attributable to the military service.
+
+Once the said finding has been recorded by the Court of Inquiry, any other
+
+authority concerned could not have denied the benefit 
+=== TAIL ===
+ETHI
+ , J. (ORAL)
+
+1.
+In the present petition, the challenge is to the order dated
+
+03.12.2019 (Annexure P-1) passed by the passed by respondent No. 2-
+
+Armed Forces Tribunal, Regional Bench, Chandigarh (hereinafter referred to
+
+as ‘Tribunal’), by which, the benefit of special family pension has been
+
+allowed in favour of respondent No.1.
+
+2.
+Learned counsel for the petitioners argues that after the death of
+
+the husband of respondent No.1 on duty on 19.08.2017 due to Myocardial
+
+Infarction, the authority has found that the cause of death is neither
+
+attributable to nor aggravated by the military service, the grant of benefit by
+
+the Tribunal is incorrect.
+
+3.
+We have heard learned counsel for the petitioners and have
+
+gone through the case file with his able assistance.
+
+4.
+A bare perusal of the averments made by the counsel for the
+
+petitoiners and the record brought before this Court would show that after
+
+HARISH KUMAR
+2025.09.04 17:09
+I attest to the accuracy and
+authenticity of this
+order/judgment
+
+[[page 2]]
+CWP-25970-2025
+(2)
+
+the death of husband of respondent No.1, the Court of Inquiry was
+
+conducted and as per the Court of Inquiry, it has already been held that the
+
+death of husband of respondent No.1 is attributable to the military service.
+
+Once the said finding has been recorded by the Court of Inquiry, any other
+
+authority concerned could not have denied the benefit of special family
+
+pension to respondent No.1 on the ground that the death of husband of
+
+respondent No.1 was not attributable to the military service.  Establishing
+
+this fact that death was attributed to military service in a Court of Inquiry is
+
+good enough to grant the special family pension which has rightly been
+
+taken into consideration by the Tribunal to grant the benefit to respondent
+
+No.1.
+
+5.
+No other argument has been raised.
+
+6.
+Keeping in view the totality of the circumstances and in the
+
+absence of any perversity being pointed out in the impugned order dated
+
+03.12.2019 (Annexure P-1) either on the basis of the facts on record or the
+
+settled principle of law, no ground is made out for any interference by this
+
+Court in the facts and circumstances of the present case.
+
+7.
+ Accordingly, the writ petition is dismissed.
+
+( HARSIMRAN SINGH SETHI )
+
+JUDGE
+
+( VIKAS SURI )
+September 02, 2025
+JUDGE
+harish
+
+      Whether speaking/reasoned
+Yes
+
+              Whether reportable
+No
+
+HARISH KUMAR
+2025.09.04 17:09
+I attest to the accuracy and
+authenticity of this
+order/judgment

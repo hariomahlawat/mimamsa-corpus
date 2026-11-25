@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""C13-A0: run every --check (exclusions, frame, sampler, packets, scoring self-test) and verify SHA256SUMS.
+"""C13-A0: run every --check (exclusions, frame, sampler, pre-exposed subsets, packets, scoring self-test, coverage
+simulation (about 1 minute), size restatement) and verify SHA256SUMS.
 Stage 1 (text features) is included when the corpus commit and the C12 additions copy are available.
   python -I -B c13_check_all.py            # check only, writes nothing
   python -I -B c13_check_all.py --sums     # (re)write SHA256SUMS after a deliberate rebuild
@@ -15,9 +16,13 @@ import c13_exclusions  # noqa: E402
 import c13_frame  # noqa: E402
 import c13_sampler  # noqa: E402
 import c13_score  # noqa: E402
+import c13_ci_sim  # noqa: E402
+import c13_power  # noqa: E402
+import c13_sensitivity  # noqa: E402
 from c13_common import OUT, PKG, additions_cache_dir, corpus_git_dir, sha256_file, write_or_check  # noqa: E402
 
-SUMS_GLOBS = ["README.md", "PROTOCOL_C13.md", "tools/*.py", "packets/*.md", "outputs/**/*.csv", "outputs/**/*.json"]
+SUMS_GLOBS = ["README.md", "PROTOCOL_C13.md", "tools/*.py", "packets/*.md", "outputs/**/*.csv", "outputs/**/*.json",
+              "outputs/**/*.txt", "reviews/**/*"]
 
 
 def sums_text():
@@ -39,7 +44,10 @@ def main():
     codes.append(write_or_check(c13_exclusions.build(), OUT, True, "c13_exclusions"))
     codes.append(write_or_check(c13_frame.build(), OUT, True, "c13_frame"))
     codes.append(write_or_check(c13_sampler.build(), OUT, True, "c13_sampler"))
+    codes.append(write_or_check(c13_sensitivity.build(), OUT, True, "c13_sensitivity"))
     codes.append(c13_coding.main(["--check"]))
+    codes.append(write_or_check(c13_ci_sim.build(), OUT, True, "c13_ci_sim"))
+    codes.append(write_or_check(c13_power.build(), OUT, True, "c13_power"))
     codes.append(c13_score.main(["--check"]))
     ok = (PKG / "SHA256SUMS").is_file() and (PKG / "SHA256SUMS").read_text(encoding="utf-8") == sums_text()
     print("SHA256SUMS: OK" if ok else "SHA256SUMS: MISMATCH")

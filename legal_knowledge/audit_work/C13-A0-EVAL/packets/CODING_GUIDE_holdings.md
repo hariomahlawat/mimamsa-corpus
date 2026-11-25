@@ -1,4 +1,4 @@
-# C13 holdings annotation packet guide (H-HOLD-C13), version 1 (interim)
+# C13 holdings annotation packet guide (H-HOLD-C13), version 1.1 (interim)
 
 **Status:** interim field layout. The Holdings V2 workstream owns the substantive annotation guideline
 (`annotation_guideline_holdings.md`). Annotation must not start until that guideline is committed with a version
@@ -11,11 +11,31 @@ other annotator's work, no selection information.
 ## Getting the file
 Fetch `rep_raw_path` from `rep_raw_store`, verify SHA-256 equals `rep_sha256`, read the PDF.
 
+## Items you cannot code (UNCODABLE)
+
+If an item cannot be coded, return exactly one row for it with `notes` = `UNCODABLE:<CODE>` followed by a short
+explanation, `page` if relevant, and every other coding field blank. The item stays in the sample, is counted and
+reported, and is never replaced. Codes:
+
+| Code | When |
+| --- | --- |
+| `SHA_MISMATCH` | The fetched file's SHA-256 differs from `rep_sha256` (read nothing further) |
+| `FILE_UNAVAILABLE` | The file cannot be fetched from the named store |
+| `UNREADABLE` | The PDF does not open or its pages cannot be read, even as images |
+| `CONTENT_MISSING_TRUNCATED` | Pages needed for coding are missing or cut off |
+| `NOT_A_JUDGMENT` | The document is not a judgment or order of a court |
+| `MISIDENTIFIED_DOCUMENT` | The file is a different case from the one it appears to be (e.g. wrong cause title) |
+| `OUT_OF_SCOPE` | The document is outside the corpus scope (not a military-law or armed-forces service matter) |
+| `PAGE_ABSENT` | The page to code does not exist in the file |
+| `OTHER` | Anything else; explain in the note |
+
+Use `unclear` labels, not UNCODABLE, when the document is readable but the answer is uncertain.
+
 ## Rows
 One row per holding or question of law stated by the court. Copy `item_id` and the pointer columns into each row and
-add `coder_id` as the first column when returning the sheet. A judgment with no holding gets one row with
-`item_type` blank is not allowed in a normal row; instead return one row with `notes` = `NO_HOLDING` and leave the other coding
-fields blank (it is reported, not scored as an error).
+add `coder_id` as the first column when returning the sheet. For a readable judgment that states no holding or
+question of law, return one row with `notes` = `NO_HOLDING` and every other coding field blank; it is reported, not
+scored as an error.
 
 | Field | Rule |
 | --- | --- |

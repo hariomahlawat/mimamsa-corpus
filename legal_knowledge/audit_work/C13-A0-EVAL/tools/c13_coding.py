@@ -25,7 +25,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from c13_common import OUT, PKG, read_csv, render_csv, render_json, seeded_hash, sha256_file, write_or_check  # noqa
-from c13_tasks import POINTER_COLS, TASKS, HOLDOUT_TASK, content_tokens, norm_ws  # noqa: E402
+from c13_tasks import POINTER_COLS, TASKS, HOLDOUT_TASK, content_tokens, norm_ws, uncodable_code  # noqa: E402
 import c13_stats as S  # noqa: E402
 
 PACKET_SEED = "mimamsa-c13-packets"
@@ -41,6 +41,10 @@ FORBIDDEN_VALUE_TOKENS = ("BATCH_OR_MULTI", "PARTY_SPECIFIC", "PENSION_OR_DISCIP
                           "UNRESOLVED_CITATION", "design_weight", "inclusion_probability", "AUTOMATED_CANDIDATE",
                           "OUTCOME_UNVERIFIED", "V3H", "V4")
 PREFIX = {"H-OUT-C13": "HO13", "H-HOLD-C13": "HH13", "H-REL-C13": "HR13"}
+# Model-only tokens that must never appear anywhere in a returned sheet, free text included (GA0 review F08).
+MODEL_TOKENS_ANYWHERE = re.compile(r"AUTOMATED_CANDIDATE|OUTCOME_UNVERIFIED|\bextractor\b|model[ _]output|"
+                                   r"\bV[34]H\d|design_weight|inclusion_probab|HOLDINGS_C12|OUTCOMES_V\d|"
+                                   r"llm_proposed|\bpredict(?:ed|ion)s?\b", re.I)
 
 
 class LeakError(ValueError):
@@ -54,9 +58,12 @@ def item_id(holdout, unit):
 
 def build_packets():
     outputs = {}
-    for h, task_name in HOLDOUT_TASK.items():
+    jobs = [(h, t, OUT / "holdouts" / h / "SAMPLE.csv", h) for h, t in HOLDOUT_TASK.items()]
+    # H-HOLD reserve (GA0 F11): packets prepared now, sent only under the pre-registered rule (PROTOCOL s.3.1).
+    jobs.append(("H-HOLD-C13", "holdings", OUT / "holdouts/H-HOLD-C13/RESERVE.csv", "H-HOLD-C13-RESERVE"))
+    for h, task_name, sample_path, label in jobs:
         task = TASKS[task_name]
-        sample = read_csv(OUT / "holdouts" / h / "SAMPLE.csv")
+        sample = read_csv(sample_path)
         items, imap = [], []
         for r in sample:
             unit = r["judgment_key"] + (f"#p{r['page']}" if r["page"] else "")
@@ -66,23 +73,29 @@ def build_packets():
             imap.append(dict(item_id=iid, judgment_key=r["judgment_key"], page=r["page"], rep_sha256=r["rep_sha256"]))
         if len({i["item_id"] for i in items}) != len(items):
             raise ValueError(f"{h}: item id collision")
-        outputs[f"holdouts/{h}/ITEM_MAP.csv"] = render_csv(sorted(imap, key=lambda x: x["item_id"]))
+        map_name = "ITEM_MAP.csv" if label == h else "ITEM_MAP_RESERVE.csv"
+        outputs[f"holdouts/{h}/{map_name}"] = render_csv(sorted(imap, key=lambda x: x["item_id"]))
         cols = POINTER_COLS + task.coding_fields
         for slot in CODER_SLOTS:
-            order = sorted(items, key=lambda i: seeded_hash(f"{PACKET_SEED}|{h}|{slot}", i["item_id"]))
+            order = sorted(items, key=lambda i: seeded_hash(f"{PACKET_SEED}|{label}|{slot}", i["item_id"]))
             text = render_csv([dict(i, **{f: "" for f in task.coding_fields}) for i in order], cols)
             check_blank_sheet_text(text, task_name)
-            outputs[f"packets/{h}/{slot}/CODER_SHEET.csv"] = text
+            outputs[f"packets/{label}/{slot}/CODER_SHEET.csv"] = text
+        if label != h:
+            continue
         outputs[f"packets/{h}/adjudicator/ADJUDICATOR_INSTRUCTIONS.json"] = render_json(dict(
             holdout=h, task=task_name,
             input="ADJUDICATION_SHEET.csv produced by `c13_coding.py adjsheet` after both coders return: only the "
                   "items whose codings differ, each shown as coding X and coding Y (which coder is X is decided per "
-                  "item by a seeded hash; the key is sealed in ADJUDICATION_KEY.csv and is not given to you)",
+                  "item from a secret per-run seed; the key and seed are sealed in ADJUDICATION_KEY.csv and are not "
+                  "given to you)",
             result_columns=["item_id"] + task.coding_fields + ["agrees_with", "reason"],
             agrees_with=["X", "Y", "NEITHER"],
             rules=["Read the source PDF yourself (verify sha256) before deciding; do not choose by majority or "
                    "by which coding looks more careful.", "Return one row per unit for every item on the sheet "
-                   "and no other item.", "Use the same vocabulary as the coding guide; 'unclear' is allowed."]))
+                   "and no other item.", "Use the same vocabulary as the coding guide; 'unclear' is allowed.",
+                   "If the item cannot be coded, return one row with notes = 'UNCODABLE:<CODE>' (codes in the coding "
+                   "guide); it stays in the sample and is reported, never replaced."]))
     return outputs
 
 
@@ -137,8 +150,11 @@ def check_blank_sheet_text(text, task_name, where="sheet"):
 
 
 def check_completed_sheet(path, task_name, coder_id, packet_path, other_coder_ids=()):
-    """A returned sheet: only its own coder's labels, pointers unchanged, every packet item present."""
+    """A returned sheet: only its own coder's labels, pointers unchanged, every packet item present, no model-only
+    token anywhere (free text included). The other coder's id(s) are required (GA0 review F08)."""
     task = TASKS[task_name]
+    if not [c for c in other_coder_ids if c]:
+        raise LeakError("the other coder's id is required to check a returned sheet")
     where = str(path)
     with open(path, encoding="utf-8", newline="") as f:
         rd = csv.DictReader(f)
@@ -160,6 +176,10 @@ def check_completed_sheet(path, task_name, coder_id, packet_path, other_coder_id
     if missing:
         raise LeakError(f"{where}: {len(missing)} packet item(s) not returned")
     _scan_values([{k: v for k, v in r.items() if k not in ("excerpt", "notes", "legal_issue")} for r in rows], where)
+    for r in rows:
+        for k, v in r.items():
+            if MODEL_TOKENS_ANYWHERE.search(v or ""):
+                raise LeakError(f"{where}: {r['item_id']} column {k} carries a model-only token")
     errors = [(r["item_id"], e) for r in rows for e in task.validate_row(r)]
     return rows, errors
 
@@ -232,9 +252,11 @@ def agreement(task_name, rows_a, rows_b):
     items, pair_labels = [], {f: [] for f in fields}
     n_pairs = n_unmatched = 0
     for iid in sorted(set(A) | set(B)):
-        ra_ = [r for r in A.get(iid, []) if not task.is_null_row(r)]
-        rb_ = [r for r in B.get(iid, []) if not task.is_null_row(r)]
-        both_returned = iid in A and iid in B
+        ua = sorted({uncodable_code(r) for r in A.get(iid, []) if task.is_uncodable_row(r)})
+        ub = sorted({uncodable_code(r) for r in B.get(iid, []) if task.is_uncodable_row(r)})
+        ra_ = [r for r in A.get(iid, []) if not task.is_null_row(r) and not task.is_uncodable_row(r)]
+        rb_ = [r for r in B.get(iid, []) if not task.is_null_row(r) and not task.is_uncodable_row(r)]
+        both_returned = iid in A and iid in B and ua == ub
         pairs = align(task, ra_, rb_)
         unmatched = sum(1 for x, y in pairs if x is None or y is None)
         same = all(x is not None and y is not None and all(field_value(task, x, f) == field_value(task, y, f)
@@ -246,10 +268,14 @@ def agreement(task_name, rows_a, rows_b):
         n_pairs += len(pairs) - unmatched
         n_unmatched += unmatched
         items.append(dict(item_id=iid, rows_a=len(A.get(iid, [])), rows_b=len(B.get(iid, [])),
+                          uncodable_a=";".join(ua), uncodable_b=";".join(ub),
                           aligned_units=len(pairs) - unmatched, unmatched_units=unmatched,
                           status="AGREE" if same and both_returned else "DISAGREE"))
     n = len(items)
     summary = dict(task=task_name, items=n, items_agree=sum(i["status"] == "AGREE" for i in items),
+                   items_uncodable_both=sum(bool(i["uncodable_a"]) and i["uncodable_a"] == i["uncodable_b"]
+                                            for i in items),
+                   items_uncodable_one_coder=sum(bool(i["uncodable_a"]) != bool(i["uncodable_b"]) for i in items),
                    strict_item_agreement=S.rnd(sum(i["status"] == "AGREE" for i in items) / n) if n else None,
                    aligned_units=n_pairs, unmatched_units=n_unmatched,
                    strict_unit_agreement=_strict_units(pair_labels, fields),
@@ -270,8 +296,11 @@ def agreement(task_name, rows_a, rows_b):
 
 
 # ------------------------------------------------------------------------------------------------ adjudication
-def adjudication_sheet(task_name, rows_a, rows_b, items, seed="mimamsa-c13-adjudication"):
-    """Competing codings for DISAGREE items, anonymised: per item, which coder is X is seeded; the key is sealed."""
+def adjudication_sheet(task_name, rows_a, rows_b, items, seed=None):
+    """Competing codings for DISAGREE items, anonymised: per item, which coder is X comes from a secret per-run seed
+    (GA0 review F09: a code constant would let the key be recomputed). The seed is written only into the sealed key."""
+    import secrets
+    seed = seed or secrets.token_hex(16)
     task = TASKS[task_name]
     dis = [i["item_id"] for i in items if i["status"] == "DISAGREE"]
     A, B = group(rows_a), group(rows_b)
@@ -279,7 +308,7 @@ def adjudication_sheet(task_name, rows_a, rows_b, items, seed="mimamsa-c13-adjud
     for iid in sorted(dis, key=lambda x: seeded_hash(seed, x)):
         x_is_a = int(seeded_hash(seed + "|xy", iid)[0], 16) < 8
         X, Y = (A, B) if x_is_a else (B, A)
-        key.append(dict(item_id=iid, X="A" if x_is_a else "B", Y="B" if x_is_a else "A"))
+        key.append(dict(item_id=iid, X="A" if x_is_a else "B", Y="B" if x_is_a else "A", run_seed=seed))
         for lab, src in (("X", X), ("Y", Y)):
             rs = src.get(iid, []) or [{}]
             for r in rs:
@@ -288,7 +317,7 @@ def adjudication_sheet(task_name, rows_a, rows_b, items, seed="mimamsa-c13-adjud
                 row.update({f: r.get(f, "") for f in task.coding_fields})
                 sheet.append(row)
     cols = ["item_id", "coding"] + POINTER_COLS[1:] + task.coding_fields
-    return render_csv(sheet, cols), render_csv(key, ["item_id", "X", "Y"])
+    return render_csv(sheet, cols), render_csv(key, ["item_id", "X", "Y", "run_seed"])
 
 
 def check_adjudication_sheet_text(text, coder_ids):
@@ -321,7 +350,7 @@ def build_truth(task_name, rows_a, rows_b, items, adjudicated, label_source="A")
     src = group(rows_a if label_source == "A" else rows_b)
     out = []
     for iid in sorted(agree):
-        for r in src[iid]:
+        for r in src[iid]:      # includes UNCODABLE rows when both coders gave the same code
             out.append(dict({f: r.get(f, "") for f in task.coding_fields}, item_id=iid, source="BOTH_CODERS_AGREE",
                             non_label_fields_from=label_source))
     for iid in sorted(dis):
@@ -380,7 +409,7 @@ def main(argv=None):
         code = write_or_check(outs, OUT, check, "c13_coding packets")
         for k, v in outs.items():
             if k.endswith("CODER_SHEET.csv"):
-                check_blank_sheet_text(v, HOLDOUT_TASK[k.split("/")[1]], k)
+                check_blank_sheet_text(v, HOLDOUT_TASK[k.split("/")[1].replace("-RESERVE", "")], k)
         guides = [PKG / "packets" / f"CODING_GUIDE_{t}.md" for t in TASKS]
         for g in guides:
             t = g.read_text(encoding="utf-8")
@@ -393,7 +422,7 @@ def main(argv=None):
     sub = ap.add_subparsers(dest="cmd")
     p = sub.add_parser("leakcheck"); p.add_argument("sheet"); p.add_argument("--task", required=True)
     p.add_argument("--completed", action="store_true"); p.add_argument("--coder"); p.add_argument("--packet")
-    p.add_argument("--other-coder", action="append", default=[])
+    p.add_argument("--other-coder", action="append", default=[], help="required with --completed")
     p = sub.add_parser("agree"); p.add_argument("--task", required=True); p.add_argument("--a", required=True)
     p.add_argument("--b", required=True); p.add_argument("--out", required=True)
     p = sub.add_parser("adjsheet"); p.add_argument("--task", required=True); p.add_argument("--a", required=True)
@@ -405,6 +434,8 @@ def main(argv=None):
     try:
         if a.cmd == "leakcheck":
             if a.completed:
+                if not a.coder or not a.packet or not a.other_coder:
+                    print("--completed needs --coder, --packet and --other-coder"); return 2
                 _, errors = check_completed_sheet(a.sheet, a.task, a.coder, a.packet, a.other_coder)
                 print(f"leakcheck OK ({len(errors)} vocabulary/blank error(s))")
                 for e in errors[:20]:

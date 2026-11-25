@@ -1,0 +1,162 @@
+{
+ "i": 37,
+ "doc_id": "sc-1982-lt-col-prithi-pal-singh-bedi-e-1982insc65",
+ "frame_court": "SC",
+ "meta_court": "Supreme Court of India",
+ "text_court_guess": "SC",
+ "frame_tq": "USABLE",
+ "tq_basis": "all pages usable",
+ "my_pages": 52,
+ "my_usable": 52,
+ "my_letters": 104106,
+ "my_share": 0.933,
+ "text_method": "pdf_text",
+ "frame_stratum": "BATCH_OR_MULTI",
+ "meta_case_numbers": "",
+ "records_for_file": "2",
+ "connected": "0",
+ "party_cues": "0",
+ "judgment_key": "JK-ebb86d4b3308eb89"
+}
+=== HEAD ===
+[[page 1]]
+•
+
+··e-
+
+>
+
+•
+
+>
+
+393
+A
+
+LT. COL. PRtTHI PAL SINGB. BED! ETC.
+
+v . .
+
+UNION OF INDIA & OTHERS
+
+August 25, 1982
+
+-
+[Y.V. CHANDRACHUD, CJ, D.A. DESAI AND A.N. SEN, JJ.]
+
+Army Act. 1950-Section 21-Scope f!f-Law prescribing procedure for
+trial of offences by court mart ial-lf should satisfy requiremen~s of Article 21 of
+Constitution--:Absence of provision for appeal-A ~acuna in the Act.
+
+Army Rules,· 1954~Rul~s i2 to 25, 37, 40, 44, 180 and 187-Scope of-
+Composilion of Court martial-Requirements of-"Corps" if nieans "Army
+Corps:'-Rules 22 to 24, if violative of Article 21 of the Constitution--Trial 'by
+Court martial-Prior enquiry by Court of enquiry if obligatory: ' '
+
+'
+.
+Principles. of natural justic~Rules prescribe compliance with principles of
+natural justice but make it dependent. upon requisition· by the person against whom
+enquiry is held-;-Procedure, if violates-article 21 of Constitution.
+
+Interpretation of statutes--/ntenlion of legislature how ascet:tained.
+
+The petitioner in each of 'the three writ petitiolls \\ihO was to be tried by
+general court ·~artial for.breach of army discipline questioned the legality atid
+validity of the order convening the general court ~artial, more particularly its
+composition.
+
+In their petitions .under Art. 32 of the Constitutioff it was 'contended on
+behalf of the petitioners that to satisfy the requirements of Article 33 the Jaw.
+must be a specific law enacted by Parliameni in which a specific provision impo-
+_sing restrictioti or eveh abrogation .. fof fundamental rights ~h<;!uld be made;
+
+(2) that rule 40 of the Rules should· be so construed as to subserve the mandate of
+Article 21 that the Army with its total commitment to national security against
+
+for~ign invasion. must be assured the prized liberty of individual 
+=== TAIL ===
+ Act
+contained many· procedural reforms and due process safeguards not
+then guaranted in civil courts. · To cite one example, the tight to
+legally qualified counsel was ma4e mandatory in general court-
+.martial cases I 3 years before the decision of the Supreme C._onrt in
+
+Gideon v. Waimyriget,(2) Between 1950 and 1968 when the Adminis-
+tration of Justice Act, 1968, was· Introduced, many advances were
+made in the administration of justice by civil courts but they were
+
+•
+f
+not reflected in military court proceedings. To correct '.these deficien.-
+
+cies the Congress enacted Military Justice Act, 1968, the salient
+features of which are : (I) a right to legally qualified coun.sel guar-
+anteed to an accused before any special court martial;
+(2) a military
+judge can in certain circumstances conduct the trial a.lone and the
+
+accused in such a situation is given •the option after learning the
+ideptity of the military judge of requesting for the trial· by the judge
+alone. A ban bas been imposed on command interference with
+military justice, etc.:· Ours is still .an antiquated ·system. The wind
+
+of change blowing over the country has not permeated the close and
+sacrosanct precincts of the Army. · If in civil courts the universally
+·accepted dictum is that justice must no.t only be done but it must
+seem to be done, the same holds good with all 'the greate~ vigour In'
+case of court martial where the judge and the accused done the same
+
+dress, have the same mental discipline, have· a strong hierarchical
+
+sulijugation and a feeling ·~f bias in such circumsta,nces is irremove-
+
+(I) Halsbury"s Laws of Eogland, 4th Ed!'. Para, 954-5_5, pp. 458-59.
+
+wm~~
+·
+
+A
+
+B
+
+c
+
+D
+
+E
+
+F
+
+G
+
+H
+
+[[page 52]]
+A
+
+B
+
+c
+
+444
+SUPREME COURT REPORTS
+[1983) I s.c.R.
+
+able. We, therefore, hope and believe that the changes all over the
+English speaking democracies ~ill awaken onr Parliament to the
+changed valne system. In this behalf, we would like to draw· poin-
+ted attention of th_e Government to the glaring anom.aly that Courts
+
+Martial do not even write a brief reasoned order in support of their
+conclusion, even in, cases. in which. they impose the death sentenc~.
+This must be remedied in order to ensure that a disciplined and
+dedicated Indian Army may not. nurse a grievance that the substance
+
+of justice and fair play is denied to it.
+
+With'these observations we-dismiss all the three petitions and
+vacate all interim orders. There shall be no order as to costs.
+
+P.B.R.
+- Petitions.dismissed. ,

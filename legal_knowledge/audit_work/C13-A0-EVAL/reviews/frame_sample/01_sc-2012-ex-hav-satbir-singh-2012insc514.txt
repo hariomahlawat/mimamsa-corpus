@@ -1,0 +1,160 @@
+{
+ "i": 1,
+ "doc_id": "sc-2012-ex-hav-satbir-singh-2012insc514",
+ "frame_court": "SC",
+ "meta_court": "Supreme Court of India",
+ "text_court_guess": "DEL",
+ "frame_tq": "USABLE",
+ "tq_basis": "all pages usable",
+ "my_pages": 6,
+ "my_usable": 6,
+ "my_letters": 7247,
+ "my_share": 0.91,
+ "text_method": "pdf_text",
+ "frame_stratum": "PENSION_OR_DISCIPLINARY",
+ "meta_case_numbers": "",
+ "records_for_file": "1",
+ "connected": "0",
+ "party_cues": "0",
+ "judgment_key": "JK-1aa3838f30b79141"
+}
+=== HEAD ===
+[[page 1]]
+[2012] 9 S.C.R. 1001
+
+EX-HAV. SATBIR SINGH
+
+v.
+THE CHIEF OF THE ARMY STAFF, NEW DELHI & ANR.
+
+(Civil Appeal Nos. 7939-49 Df 2012)
+
+NOVEMBER 9, 2012
+
+[P. SATHASIVAM AND RANJAN GOGOi, JJ.)
+
+SERVICE LAW·
+
+A
+
+B
+
+Terminal benefits - Army - Havildar discharged/ c
+terminated from service prior to date of his superannuation
+on the ground that he had earned 4 "Red Ink Entries" - High
+
+Court directing reinstatement of incumbent, with no benefit of
+salary for interviewing period - Held: Admittedly, the
+incumbent having not worked during the intervening period,
+High Court was justified in disallowing the salary for that period
+- However, having found the discharge/termination legally
+unsustainable, High Court ought to have issued direction for
+counting the intervening period for the purpose of terminal
+benefits - Ordered accordingly.
+
+The appellant, who was enrolled in the Army on
+31.8.1982, and promoted to the rank of Havildar on
+14.2.1990, was to superannuate on 31.8.2006. However,
+
+D
+
+E
+
+he was served with a show-cause notice dated 16.3.1995,
+stating that he had earned 4 'Red Ink Entries' in the
+F
+service of 12% years. Ultimately, he was discharged from
+service on 1.4.1995. The appellant challenged the order
+in a writ petition before the High Court, which, by order
+dated 2.5.2008, set aside the qrder of discharge and
+directed his reinstatement with no benefit of salary and
+G
+other allowances for the "intervening period".
+
+In the instant appeals, the Court confined the notice
+to the respondents to show cause as to why "the
+
+1001
+H
+
+[[page 2]]
+1002
+SUPREME COURT REPORTS
+[2012] 9 S.C.R.
+
+A intervening period should not be counted for the purpose
+
+of terminal benefits."
+
+Allowing the appeals in part, the Court
+
+HELD: 1.1 It is not in dispute that the High Court in
+B categ
+=== TAIL ===
+terms set aside
+B
+the order of termination. The relevant conclusion reads as under:
+
+"Fact remains that he was discharged/terminated from
+service on the basis of show cause notice. This action is
+found to be unsustainable. Therefore, we have no
+
+hesitation in setting aside the termination order."
+C
+
+Having found that the discharge/termination is legally
+unsustainable, we are of the view that the incumbent, namely,
+the appellant, ought to have been provided relief at least to the
+extent of counting the intervening period for the purpose of
+D
+terminal benefits. It is true that during the intervening period, the
+appellant, admittedly, did not work, in that event, the Division
+Bench was justified in disallowing the salary for the said period.
+However, for the terminal benefits, in view of the categorical
+conclusion of the High Court that discharge/termination is bad,
+E
+ought to have issued a direction for counting the intervening
+period at least for the purpose of terminal benefits. According
+to the Division Bench, the conduct of the appellant, namely,
+securing 4 Red Ink Entries in the service record is the reason
+for not considering the intervening period even for the purpose
+of terminal benefits. We hold that the said reasoning adopted
+by the Division Bench of the High Court cannot be sustained
+in view of its own authoritative conclusion in setting aside the
+discharge/termination order.
+
+F
+
+10. In the light of the conclusion that the termination is bad
+G
+and the direction to deprive the appellant the benefit of
+intervening period for the purpose of terminal benefits is punitive
+imposing break in service as the period involved amounts to
+dies non and the said direction was based without considering
+
+H
+
+[[page 6]]
+1006
+SUPREME COURT REPORTS
+[20121 9 S.C.R.
+
+A any related issue and decided on merits by the High Court,
+
+hence, the same is not sustainable and liable to be set aside.
+
+11. In the light of the above discussion, while upholding the
+order of the Division Bench setting aside the termination order,
+
+8 we hold that for the purpose of terminal benefits, the
+"intervening period" for which the appellant remained out of job
+shall be counted. In view of the same, respondent Nos. 1 and
+2 are directed to pass appropriate orders fixing terminal
+benefits within a period of two months from the date of receipt
+C of copy of this judgment and intimate the same to the appellant.
+
+12. The appeals are allowed to the extent mentioned
+above.
+
+R.P.
+Appeals Partly allowed.

@@ -1,0 +1,188 @@
+{
+ "i": 8,
+ "doc_id": "hc-delhi-2015-w-p-c-568-2015-dlhc010074222015-1-2015-01-21",
+ "frame_court": "DEL",
+ "meta_court": "High Court of Delhi",
+ "text_court_guess": "DEL",
+ "frame_tq": "USABLE",
+ "tq_basis": "all pages usable",
+ "my_pages": 14,
+ "my_usable": 14,
+ "my_letters": 18454,
+ "my_share": 0.947,
+ "text_method": "pdf_text",
+ "frame_stratum": "BATCH_OR_MULTI",
+ "meta_case_numbers": "W.P.(C)/568/2015",
+ "records_for_file": "1",
+ "connected": "0",
+ "party_cues": "0",
+ "judgment_key": "JK-4030ccf38769670e"
+}
+=== HEAD ===
+[[page 1]]
+W.P.(C) Nos.562/2015 & conn.matters                                                                Page 1 of 14
+
+*
+IN  THE  HIGH  COURT  OF  DELHI  AT  NEW  DELHI
+%
+         Judgment Reserved on : January 19, 2015
+               Judgment Pronounced on : January 21, 2015
++
+W.P.(C) 562/2015
+HAV DADASO SAMPATRAO PHADTARE
+   ..... Petitioner
+Represented by:
+Mr.S.S.Pandey, Advocate with
+Mr.H.S.Tiwari, Advocate
+
+versus
+UNION OF INDIA & ORS.
+             ..... Respondents
+Represented by:
+Mr.Arjun Mitra, Advocate for R-1 to
+R-3
+
+W.P.(C) 563/2015
+HAV RAVINDRA SINGH
+ ..... Petitioner
+Represented by:
+Mr.S.S.Pandey, Advocate with
+Mr.H.S.Tiwari, Advocate
+
+versus
+UNION OF INDIA & ORS.
+         ..... Respondents
+Represented by:
+Mr.Arjun Mitra, Advocate for R-1 to
+R-3
+
+W.P.(C) 565/2015
+HAV CHAVHAN HEMANAND KRISHNA         ..... Petitioner
+
+Represented by:
+Mr.S.S.Pandey, Advocate with
+Mr.H.S.Tiwari, Advocate
+
+versus
+UNION OF INDIA & ORS
+         ..... Respondents
+
+[[page 2]]
+W.P.(C) Nos.562/2015 & conn.matters                                                                Page 2 of 14
+
+Represented by:
+Mr.Arjun Mitra, Advocate for R-1 to
+R-3
+W.P.(C) 566/2015
+HAV RAKESH SAINI
+        ..... Petitioner
+Represented by:
+Mr.S.S.Pandey, Advocate with
+Mr.H.S.Tiwari, Advocate
+
+versus
+UNION OF INDIA & ORS
+    ..... Respondents
+Represented by:
+Mr.Arjun Mitra, Advocate for R-1 to
+R-3
+
+W.P.(C) 568/2015
+HAV BIMAL CHANDRA MANDAL
+         ..... Petitioner
+Represented by:
+Mr.S.S.Pandey, Advocate with
+Mr.H.S.Tiwari, Advocate
+
+versus
+UNION OF INDIA & ORS
+    ..... Respondents
+Represented by:
+Mr.Arjun Mitra, Advocate for R-1 to
+R-3
+CORAM:
+HON'BLE MR. JUSTICE PRADEEP NANDRAJOG
+HON'BLE MS. JUSTICE PRATIBHA RANI
+
+PRADEEP NANDRAJOG, J.
+
+1.
+The above captioned writ petitions lay a challenge to the jud
+=== TAIL ===
+ible
+
+to consider two ACRs in the rank of Naik.  In other words, it is permissible
+
+for a Havaldar to be considered for promotion to the post of Naib Subedar if
+
+3 years’ service is rendered.  The other eligibility norms such as clearing pre
+
+promotional cadre courses has to be met.  Thus, to earn further promotions,
+
+the petitioners are required to fulfill various criteria and eligibility as laid
+
+down in the Rules and for that purpose, the Tribunal, in paras 28 and 30 has
+
+directed the respondents to make sure that the eligibility for promotion of
+
+the personnel be completed immediately, and if found suitable, they should
+
+be promoted to the ranks to which persons junior to them have been
+
+promoted with effect from the date the juniors were promoted.  Moreover,
+
+the said criteria required for further promotion, can be acquired by the
+
+petitioners in about 270 days as has been clarified by the Armed Forces
+
+Tribunal in para 28 of its judgment.  Therefore, on completing the said
+
+eligibility, the petitioners will be promoted to the rank to which persons
+
+junior to them have already been promoted and their promotion would be
+
+from back date, and thus the question of keeping the petitioners in the MES
+
+till they acquire the said eligibility does not arise.  Moreover, even if for the
+
+sake of argument the submission of the learned counsel for the petitioners is
+
+accepted, then it will be a never ending process since once the petitioners
+
+were to fulfill the criteria for further promotion, they would have to be
+
+promoted in the MES and this would become a never ending process
+
+because there may be a situation where the batch mates or juniors who
+
+[[page 14]]
+W.P.(C) Nos.562/2015 & conn.matters                                                                Page 14 of 14
+
+continued to remain in the Indian Army would earn promotion in the
+
+meanwhile.
+
+24.
+As far as certain petitioners who had already completed their
+
+eligibility criteria for promotion when they were in the MES in the year
+
+2011, it has already been directed by the Tribunal in para 31 of the
+
+impugned judgment that such of them who are found eligible to be
+
+promoted would be first promoted before merger is effected and the
+
+promotion would be notionally with effect from the year 2011.
+
+25.
+There is accordingly no merit in the writ petitions which are
+
+dismissed but without any order as to costs.
+
+   (PRADEEP NANDRAJOG)
+         JUDGE
+          (PRATIBHA RANI)
+         JUDGE
+JANUARY 21, 2015
+mamta

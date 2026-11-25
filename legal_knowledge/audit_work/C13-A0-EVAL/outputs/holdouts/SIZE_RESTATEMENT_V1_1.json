@@ -1,0 +1,261 @@
+{
+ "H-HOLD-C13": {
+  "cluster_deff": 1.2597,
+  "combined_deff": 1.8759,
+  "expected_gold_holdings": 236,
+  "gold_holdings_target_v10": 234,
+  "judgments": 75,
+  "kish_deff_weights": 1.4892,
+  "precision_halfwidth_at_p080_if_items_equal_gold": 0.0695,
+  "recall_halfwidth_at_p060": 0.0845,
+  "restated": "v1.0 claimed +/-7pp; with the Kish design effect of the weights the weighted half-width is about +/-8.5pp (registered 75 judgments). Opening the full registered reserve (113 judgments) before coding reduces it to about +/-7pp; see PROTOCOL_C13 s.3.1 for the pre-registered decision rule.",
+  "simulated": [
+   {
+    "coverage": 0.962,
+    "design": "H-HOLD-C13",
+    "mean_halfwidth": 0.0891,
+    "true": 0.504
+   },
+   {
+    "coverage": 0.962,
+    "design": "H-HOLD-C13",
+    "mean_halfwidth": 0.0844,
+    "true": 0.6044
+   },
+   {
+    "coverage": 0.954,
+    "design": "H-HOLD-C13",
+    "mean_halfwidth": 0.0821,
+    "true": 0.6936
+   },
+   {
+    "coverage": 0.965,
+    "design": "H-HOLD-C13",
+    "mean_halfwidth": 0.0741,
+    "true": 0.7874
+   },
+   {
+    "coverage": 0.964,
+    "design": "H-HOLD-C13+RESERVE",
+    "mean_halfwidth": 0.0692,
+    "true": 0.4945
+   },
+   {
+    "coverage": 0.956,
+    "design": "H-HOLD-C13+RESERVE",
+    "mean_halfwidth": 0.0674,
+    "true": 0.6013
+   },
+   {
+    "coverage": 0.974,
+    "design": "H-HOLD-C13+RESERVE",
+    "mean_halfwidth": 0.0618,
+    "true": 0.7096
+   },
+   {
+    "coverage": 0.955,
+    "design": "H-HOLD-C13+RESERVE",
+    "mean_halfwidth": 0.058,
+    "true": 0.8037
+   }
+  ]
+ },
+ "H-OUT-C13": {
+  "can_show": "Point estimates of weighted strict precision and coverage per field with validated 95% intervals of about +/-4-5pp overall; whether the point estimate reaches 95%/85%; per-court figures with intervals of roughly +/-6-10pp.",
+  "cannot_show": "MET_LOWER_BOUND (validated lower bound >= 0.95) is practically reachable only if true precision is about 0.99 or higher: simulated probability about 0.49 at a true 0.98 and about 0.83 at 0.99 (uniform), and lower under heterogeneity. A true precision of 0.95-0.97 cannot be distinguished from the target. Per-stratum figures for small cells are descriptive.",
+  "expected_covered": 255.0,
+  "judgments": 300,
+  "kish_deff": 2.0044,
+  "kish_wilson_halfwidth_at_p095": 0.0396,
+  "n_eff_covered": 127.2,
+  "per_court": {
+   "ALL": {
+    "judgments": 45,
+    "kish_deff": 1.1235,
+    "kish_wilson_halfwidth_at_p095": 0.0831
+   },
+   "DEL": {
+    "judgments": 70,
+    "kish_deff": 1.5532,
+    "kish_wilson_halfwidth_at_p095": 0.0775
+   },
+   "JK": {
+    "judgments": 45,
+    "kish_deff": 1.3241,
+    "kish_wilson_halfwidth_at_p095": 0.0915
+   },
+   "PH": {
+    "judgments": 70,
+    "kish_deff": 1.3785,
+    "kish_wilson_halfwidth_at_p095": 0.0724
+   },
+   "SC": {
+    "judgments": 70,
+    "kish_deff": 1.0288,
+    "kish_wilson_halfwidth_at_p095": 0.0612
+   }
+  },
+  "power_note": "The v1.0 figure (253 covered decisions for 80% power, 0.98 vs 0.95) applies to the UNWEIGHTED one-sided test only; the weighted headline has n_eff about 127.",
+  "simulated_by_true_precision": [
+   {
+    "mean_halfwidth": 0.0472,
+    "mean_lower_bound": 0.8493,
+    "p_met_lower_bound": 0.0,
+    "p_met_point_only": 0.001,
+    "scenario": "uniform",
+    "true": 0.9043
+   },
+   {
+    "mean_halfwidth": 0.041,
+    "mean_lower_bound": 0.881,
+    "p_met_lower_bound": 0.002,
+    "p_met_point_only": 0.05,
+    "scenario": "uniform",
+    "true": 0.9299
+   },
+   {
+    "mean_halfwidth": 0.037,
+    "mean_lower_bound": 0.8989,
+    "p_met_lower_bound": 0.0,
+    "p_met_point_only": 0.008,
+    "scenario": "uniform",
+    "true": 0.9437
+   },
+   {
+    "mean_halfwidth": 0.0365,
+    "mean_lower_bound": 0.9037,
+    "p_met_lower_bound": 0.007,
+    "p_met_point_only": 0.445,
+    "scenario": "uniform",
+    "true": 0.9487
+   },
+   {
+    "mean_halfwidth": 0.0337,
+    "mean_lower_bound": 0.9152,
+    "p_met_lower_bound": 0.048,
+    "p_met_point_only": 0.679,
+    "scenario": "uniform",
+    "true": 0.9574
+   },
+   {
+    "mean_halfwidth": 0.0285,
+    "mean_lower_bound": 0.9335,
+    "p_met_lower_bound": 0.205,
+    "p_met_point_only": 0.946,
+    "scenario": "uniform",
+    "true": 0.9715
+   },
+   {
+    "mean_halfwidth": 0.0245,
+    "mean_lower_bound": 0.9471,
+    "p_met_lower_bound": 0.486,
+    "p_met_point_only": 0.994,
+    "scenario": "uniform",
+    "true": 0.9825
+   },
+   {
+    "mean_halfwidth": 0.0182,
+    "mean_lower_bound": 0.9623,
+    "p_met_lower_bound": 0.832,
+    "p_met_point_only": 1.0,
+    "scenario": "uniform",
+    "true": 0.991
+   },
+   {
+    "mean_halfwidth": 0.0502,
+    "mean_lower_bound": 0.8243,
+    "p_met_lower_bound": 0.0,
+    "p_met_point_only": 0.0,
+    "scenario": "heterogeneous",
+    "true": 0.8806
+   },
+   {
+    "mean_halfwidth": 0.0464,
+    "mean_lower_bound": 0.8521,
+    "p_met_lower_bound": 0.0,
+    "p_met_point_only": 0.003,
+    "scenario": "heterogeneous",
+    "true": 0.9048
+   },
+   {
+    "mean_halfwidth": 0.0413,
+    "mean_lower_bound": 0.8765,
+    "p_met_lower_bound": 0.0,
+    "p_met_point_only": 0.0,
+    "scenario": "heterogeneous",
+    "true": 0.9262
+   },
+   {
+    "mean_halfwidth": 0.0401,
+    "mean_lower_bound": 0.8844,
+    "p_met_lower_bound": 0.0,
+    "p_met_point_only": 0.0,
+    "scenario": "heterogeneous",
+    "true": 0.9328
+   },
+   {
+    "mean_halfwidth": 0.0369,
+    "mean_lower_bound": 0.8999,
+    "p_met_lower_bound": 0.003,
+    "p_met_point_only": 0.4,
+    "scenario": "heterogeneous",
+    "true": 0.9441
+   },
+   {
+    "mean_halfwidth": 0.0354,
+    "mean_lower_bound": 0.9055,
+    "p_met_lower_bound": 0.002,
+    "p_met_point_only": 0.056,
+    "scenario": "heterogeneous",
+    "true": 0.9492
+   },
+   {
+    "mean_halfwidth": 0.0291,
+    "mean_lower_bound": 0.9307,
+    "p_met_lower_bound": 0.122,
+    "p_met_point_only": 0.915,
+    "scenario": "heterogeneous",
+    "true": 0.9692
+   },
+   {
+    "mean_halfwidth": 0.0282,
+    "mean_lower_bound": 0.9333,
+    "p_met_lower_bound": 0.136,
+    "p_met_point_only": 0.917,
+    "scenario": "heterogeneous",
+    "true": 0.9705
+   }
+  ]
+ },
+ "H-REL-C13": {
+  "kish_deff_overall": 7.4857,
+  "kish_deff_treatment_cue_pages": 1.6581,
+  "pages": 160,
+  "restated": "Weighted overall recall is very imprecise (Kish deff about 7.5, driven by the 20 no-detected-citation pages with weights in the hundreds or above); report it as descriptive. Per-type precision on treatment-cue pages: about +/-9pp at p=0.8, not +/-7pp. Relations has no owner target."
+ },
+ "party_specific_expected_gold_units_H-OUT": {
+  "cue_ppv": 0.11,
+  "cue_ppv_ci95": [
+   0.04,
+   0.28
+  ],
+  "decision": "The party-specific breakdown is DESCRIPTIVE ONLY: no pass/fail status is computed or claimed.",
+  "expected_range": [
+   0.9,
+   6.2
+  ],
+  "expected_true_from_candidates": 2.4,
+  "party_stratum_judgments": 22,
+  "plus_unknown_from_other_strata": "unknown base rate outside the cue; expected small"
+ },
+ "validated_interval": {
+  "criterion": "validated if every scenario's design-CP coverage >= 0.95",
+  "min_coverage_design_cp95": 0.954,
+  "min_coverage_design_cp95_outcome_p090_099": 0.965,
+  "min_coverage_kish_wilson95": 0.92,
+  "monte_carlo_se_at_095": 0.0069,
+  "note": "Bootstrap coverage is not re-simulated here; the GA0 reviewer measured 0.830 (p=0.983) and 0.923 (heterogeneous) for the v1.0 weighted percentile bootstrap (reviews/sim_*.json), which is why v1.1 no longer uses it for the pass rule.",
+  "nsim_per_scenario": 1000,
+  "validated": true
+ }
+}

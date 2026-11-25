@@ -1,0 +1,257 @@
+{
+ "i": 35,
+ "doc_id": "hc-delhi-2026-w-p-c-5086-2026-dlhc010159792026-1-2026-04-17",
+ "frame_court": "DEL",
+ "meta_court": "High Court of Delhi",
+ "text_court_guess": "DEL",
+ "frame_tq": "USABLE",
+ "tq_basis": "partial: 72/73 pages usable",
+ "my_pages": 73,
+ "my_usable": 72,
+ "my_letters": 83992,
+ "my_share": 0.855,
+ "text_method": "pdf_text",
+ "frame_stratum": "BATCH_OR_MULTI",
+ "meta_case_numbers": "W.P.(C)/5086/2026",
+ "records_for_file": "1",
+ "connected": "0",
+ "party_cues": "0",
+ "judgment_key": "JK-0c23ce5d53e0c3ed"
+}
+=== HEAD ===
+[[page 1]]
+Page 1 of 73
+
+$~7, 8, 10, 13, 15, 17, 18, 91, 92, 93, 25, 27, 29, 31, 95, 32, 33, 34, 35,
+37, 38, 39, 44, 48, 49, 53, 56, 59, 61, 71, 72, 85 and 89
+
+*
+IN  THE  HIGH  COURT  OF  DELHI  AT  NEW  DELHI
+
+Date of Decision: 17.04.2026
+IN THE MATTERS OF:
+7
++
+W.P.(C) 17646/2022 and CM APPL. 5538/2023, CM APPL.
+36789/2023
+RITU SINGAL
+.....Petitioner
+
+versus
+BUREAU OF IMMIGRATION& ORS.         ...Respondents
+
+with
+8
+
++
+W.P.(C) 17647/2022
+
+NEERAJ SINGAL
+.....Petitioner
+
+versus
+BUREAU OF IMMIGRATION& ORS.                .....Respondents
+10
+
++
+W.P.(C) 1755/2023 and CM APPL. 6711/2023, CM APPL.
+44687/2023, CM APPL. 44688/2023
+KUNWER SACHDEV
+.....Petitioner
+
+versus
+
+Signed By:AMIT KUMAR
+SHARMA
+Signing Date:05.05.2026
+11:49:35
+
+Signature Not Verified
+
+Signed
+By:PURUSHAINDRA
+KUMAR KAURAV
+
+Signature Not Verified
+
+[[page 2]]
+Page 2 of 73
+
+UNION OFINDIAAND ORS.
+      .....Respondents
+13
+
++
+W.P.(C) 7348/2023 and CM APPL. 28547/2023, CM APPL.
+65247/2023
+
+ARUPJYOTI RAI BARUAH
+           .....Petitioner
+
+versus
+
+BUREAU OF IMMIGRATION,
+THROUGH COMMISSIONER
+(IMMIGRATION) & ORS.
+      .....Respondents
+15
+
++
+W.P.(C) 7484/2023 and CM APPL. 37361/2023, CM APPL.
+12331/2025, CM APPL. 28333/2025, CM APPL. 34618/2025,
+CM APPL. 44241/2025
+
+RAGHU RAMA KRISHNA RAJU
+        .....Petitioner
+
+versus
+
+UNION OF INDIA& ORS.
+     .....Respondents
+
+17
+
++
+W.P.(C) 9610/2023 and CM APPL. 36814/2023, CM APPL.
+15072/2026
+
+SHIVANI PRIYAM& ANR.
+         .....Petitioners
+
+versus
+
+Signed By:AMIT KUMAR
+SHARMA
+Signing Date:05.05.2026
+11:49:35
+
+Signature Not Verified
+
+Signed
+By:PURUSHAINDRA
+KUMAR KAURAV
+
+Signature Not Verified
+
+[[page 3]]
+Page 3 of 73
+
+UNION OF INDIA& ANR.
+      .....Respondents
+18
+
++
+W.P.(C) 10895/2023 and CM APPL. 60224/2023, CM APPL.
+74501/2024, CM APPL. 24992/2026, CM APPL. 24993/2026
+
+ASHOK MI
+=== TAIL ===
+posed of
+
+with the following directions:
+
+a. The writ petitions are disposed of with liberty to the
+
+respective petitioners to approach the Court of competent
+
+jurisdiction before which the chargesheet/complaint is
+
+pending, seeking modification or cancellation of the
+
+LOC, as the case may be;
+
+b. The concerned Courts shall consider such applications
+
+expeditiously and in accordance with law; and
+
+c. It is made clear that this Court has not expressed any
+
+opinion on the merits of the LOC or the underlying
+
+criminal proceedings, and the disposal of these petitions
+
+shall not prejudice the rights of any party before the trial
+
+court.
+
+D. CONCLUSION
+
+160. In view of the foregoing discussion and the reasons recorded
+
+hereinabove, all the writ petitions listed herein, being W.P.(C)
+
+7348/2023, W.P.(C) 16550/2023, W.P.(C) 7484/2023, W.P.(C)
+
+8252/2024, W.P.(C) 549/2025, W.P.(C) 1304/2025, W.P.(C)
+
+4612/2025, W.P.(C) 4310/2026, W.P.(C) 5086/2026, W.P.(C)
+
+4066/2026, W.P.(C) 5126/2026, W.P.(C) 1196/2026, W.P.(C)
+
+9610/2023, W.P.(C) 3904/2025, W.P.(C) 11461/2025, W.P.(C)
+
+Signed By:AMIT KUMAR
+SHARMA
+Signing Date:05.05.2026
+11:49:35
+
+Signature Not Verified
+
+Signed
+By:PURUSHAINDRA
+KUMAR KAURAV
+
+Signature Not Verified
+
+[[page 73]]
+Page 73 of 73
+
+11972/2025, W.P.(C) 10895/2023, W.P.(C) 1942/2023, W.P.(C)
+
+1962/2023, W.P.(C) 950/2025, W.P.(C) 16610/2024, W.P.(C)
+
+8859/2025, W.P.(C) 4065/2025, W.P.(C) 1875/2025, W.P.(C)
+
+19065/2025, W.P.(C) 15146/2025, W.P.(C) 14518/2024, W.P.(C)
+
+2799/2026 and W.P.(C) 4065/2025, stand disposed of along with all
+
+pending applications in the above terms. The Impugned Look Out
+
+Circulars issued against the respective petitioners in each of the
+
+aforementioned writ petitions are, hereby, set aside and quashed.
+
+161. So far as W.P.(C) 17646/2022, W.P.(C) 17647/2022, W.P.(C)
+
+1755/2023 and W.P.(C) 18812/2025 are concerned, the petitioners in
+
+the said writ petitions are relegated to the appropriate forum to seek
+
+relief in accordance with law. It is clarified that this Court has not
+
+expressed any opinion on the merits of the claims of the said
+
+petitioners, and it shall be open to them to avail such remedies as may
+
+be available to them in law. The said writ petitions, along with all
+
+pending applications, stand disposed of accordingly.
+
+PURUSHAINDRA KUMAR KAURAV, J
+
+APRIL 17, 2026
+aks/p/sh/da/nk
+
+Signed By:AMIT KUMAR
+SHARMA
+Signing Date:05.05.2026
+11:49:35
+
+Signature Not Verified
+
+Signed
+By:PURUSHAINDRA
+KUMAR KAURAV
+
+Signature Not Verified

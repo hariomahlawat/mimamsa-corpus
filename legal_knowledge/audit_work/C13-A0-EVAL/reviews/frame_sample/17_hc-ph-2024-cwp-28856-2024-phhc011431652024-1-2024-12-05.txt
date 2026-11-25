@@ -1,0 +1,210 @@
+{
+ "i": 17,
+ "doc_id": "hc-ph-2024-cwp-28856-2024-phhc011431652024-1-2024-12-05",
+ "frame_court": "PH",
+ "meta_court": "High Court of Punjab and Haryana",
+ "text_court_guess": "PH",
+ "frame_tq": "USABLE",
+ "tq_basis": "all pages usable",
+ "my_pages": 11,
+ "my_usable": 11,
+ "my_letters": 14064,
+ "my_share": 0.927,
+ "text_method": "pdf_text",
+ "frame_stratum": "PENSION_OR_DISCIPLINARY",
+ "meta_case_numbers": "CWP/28856/2024",
+ "records_for_file": "1",
+ "connected": "0",
+ "party_cues": "0",
+ "judgment_key": "JK-a9d2caf4cddb7f94"
+}
+=== HEAD ===
+[[page 1]]
+CWP-28856-2024
+ - 1  -
+
+   IN THE HIGH COURT OF PUNJAB & HARYANA
+
+AT CHANDIGARH.
+
+          CWP-28856-2024
+        Date of Decision: 05.12.2024
+
+UNION OF INDIA AND ORS.
+  .....Petitioners
+
+Versus
+
+EX.WO KRISHAN LAL AND ANOTHER
+
+         .....Respondents
+
+CORAM: HON'BLE MR. JUSTICE SURESHWAR THAKUR
+
+        HON'BLE MRS. JUSTICE SUDEEPTI SHARMA
+
+Argued by: Mr. Bharat Bhushan Sharma, Advocate
+
+for the petitioners/UOI.
+                    Mr. Navdeep Singh, Advocate with Ms. Roopan Atwal,
+                    for the respondents.
+
+****
+
+SURESHWAR THAKUR
+ , J.
+
+1.
+Through the instant writ petition, the petitioner herein-
+
+Union of India, prays for the setting aside of the order dated 22.09.2022
+
+(Annexure P-3), as passed by the learned Armed Forces Tribunal
+
+concerned, wherebys the claim of respondent No. 1 for the grant of
+
+disability pension was allowed.
+
+Factual Background
+
+2.
+The respondent joined Air Force on 23.11.1978 in a fit
+
+state of health. During the course of his service, he incurred disabilities
+
+of  ‘RECURRENT DEPRESSIVE DISORDER AND CORONARY
+
+MANOJ KUMAR
+2024.12.10 22:27
+I attest to the accuracy and
+authenticity of this order
+
+[[page 2]]
+CWP-28856-2024
+ - 2  -
+
+ARTERY CSA II DVD(POST PCI TO LAD/LAX) NORMAL LV
+
+FUNCTION (FRESH)’. Respondent No. 1 was discharged from service
+
+on 30.04.2016. At the time of discharge, his disabilities were
+
+respectively assessed @ 60% (Composite) for life.
+
+3.
+The disability element claim of the respondent was
+
+rejected by the Competent Authority vide letter dated 08.09.2016, thus
+
+on the ground that the supra disabilities were neither attributable to nor
+
+being aggravated by rendition of military service.
+
+4.
+Respondent No. 1 filed first appeal dated 30.11.2020 . Vide
+
+letter dated 08.07.2021, the Competent Authority r
+=== TAIL ===
+nt regulations, which makes the onsettings of the disease in a
+
+peace area, to not beget a further sequel that as such, it's onsettings did
+
+not arise from the rendition of military service nor it became
+
+aggravated by rendition of the military service. In consequence, the
+
+lack of the said express mandate in the regulations, does constrain this
+
+Court to conclude, that even if the onsettings of the said disease upon
+
+the present respondent thus occurred in a peace area, thereby, the said
+
+onsettings are to be declared to become aggravated by or being
+
+attributable to rendition of military service.
+
+19.
+Further, since in terms of the judgment rendered by the
+
+Apex Court, in case titled as 'Union of India Vs. Ram Avtar', reported
+
+in 2014 SCC Online 1761, whereins, a declaration is made to the
+
+extent, that the benefit of rounding off, rather has to become endowed
+
+to the concerned. Resultantly also thereunders an indefeasible right
+
+became vested in the present respondent for his seeking qua the
+
+apposite roundings off being made in his favour.
+
+MANOJ KUMAR
+2024.12.10 22:27
+I attest to the accuracy and
+authenticity of this order
+
+[[page 11]]
+CWP-28856-2024
+ - 11
+  -
+
+20.
+Even otherwise since the declaration of law made in
+
+verdict (supra) makes the said declaration to be an expostulation of law
+
+in rem, therebys, the expostulation of law in rem, as made in verdict
+
+(supra) also makes the thereunders conferred benefits vis-a-vis the
+
+defence personnel concerned, to, prima facie, also entitle the
+
+concerned, thus to at any time seek the granting of the endowments as
+
+made thereunders, and that too, in the fullest complement, as spelt
+
+thereunders, besides irrespective of the bar, if any, of delay and laches.
+
+21.
+Therefore, the granting of the benefit of the apposite
+
+roundings off, in terms of the verdict (supra) rendered by the Tribunal
+
+concerned, also does not suffer from any illegality and is required to be
+
+upheld.
+
+Final Order of this Court.
+
+22.
+In aftermath, this Court finds no merit in the writ petition
+
+and with observations above, the same is dismissed.
+
+23.
+The impugned order, as passed by the learned Tribunal
+
+concerned, is maintained and affirmed.
+
+24.
+Disposed of alongwith all pending application(s), if any.
+
+    (SURESHWAR THAKUR)
+
+JUDGE
+
+          (SUDEEPTI SHARMA)
+05.12.2024
+JUDGE
+manoj
+      Whether speaking/reasoned
+:
+Yes/No
+Whether reportable
+:
+Yes/No
+
+MANOJ KUMAR
+2024.12.10 22:27
+I attest to the accuracy and
+authenticity of this order

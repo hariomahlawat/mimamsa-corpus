@@ -1,0 +1,132 @@
+{
+ "i": 22,
+ "doc_id": "hc-allahabad-2023-wria-13445-2023-uphc011608572023-1-2023-08-16",
+ "frame_court": "ALL",
+ "meta_court": "Allahabad High Court",
+ "text_court_guess": "ALL",
+ "frame_tq": "USABLE",
+ "tq_basis": "all pages usable",
+ "my_pages": 3,
+ "my_usable": 3,
+ "my_letters": 3486,
+ "my_share": 0.887,
+ "text_method": "pdf_text",
+ "frame_stratum": "PENSION_OR_DISCIPLINARY",
+ "meta_case_numbers": "WRIA/13445/2023",
+ "records_for_file": "1",
+ "connected": "0",
+ "party_cues": "0",
+ "judgment_key": "JK-f932755e95b24f82"
+}
+=== HEAD ===
+[[page 1]]
+Neutral Citation No. - 2023:AHC:164978-DB
+
+Court No. - 39
+
+Case :- WRIT - A No. - 13445 of 2023
+
+Petitioner :- Vijay Kumar Verma
+Respondent :- Union Of India And 6 Others
+Counsel for Petitioner :- Yashpal Yadav,Lalji Yadav
+Counsel for Respondent :- A.S.G.I.
+
+Hon'ble Saumitra Dayal Singh,J.
+Hon'ble Anish Kumar Gupta,J.
+
+1. Heard Sri Yashpal Yadav, learned counsel for the petitioner
+and Sri Ankur Goyal, learned counsel for the Union of India.
+
+2. The present writ petition has been filed by the petitioner to
+assail the order of the Armed Forces Tribunal, Regional Bench,
+Lucknow dated 31.01.2022 passed in O.A. (A) No. 511 of 2021
+with M.A.  No. 532 of 2021 in re O.A. No. 295 of 2019 (Ex Sep
+Vijay Kumar Verma vs. Union of India and others.
+
+3. By that order, the learned Tribunal has dismissed the O.A.,
+on merits, for the reason that the cause of action was not
+covered / falling under Section 3(o) of the Armed Forces
+Tribunal Act, 2007 (hereinafter referred to as 'the Act').
+
+4. Having heard the learned counsel for the parties and having
+perused the record, it is an undisputed fact that amongst others,
+the petitioner was awarded punishment of severe reprimand in
+General Court Martial Proceedings (GCMP) vide order dated
+05.09.2006. In that undisputed fact, it is to be tested that if the
+petitioner has a right to approach the Tribunal.
+
+5. Section 3(o) of the Act reads as follows:
+
+"3(o) "service matters", in relation to the persons subject to the Army Act,
+1950 (46 of 1950), the Navy Act, 1957 (62 of 1957) and the Air Force Act,
+1950 (45 of 1950), mean all matters relating to the conditions of their
+service and shall include—
+
+(i) remuneration (including allowances), pension and other retirement
+benefits;
+
+(ii) tenure, including commission, appointment, enrollment, 
+=== TAIL ===
+ Act, 1950 (45 of 1950); and
+
+(ii) transfers and postings including the change of place or unit on posting
+whether individually or as a part of unit, formation or ship in relation to
+the persons subject to the Army Act, 1950 (46 of 1950), the Navy Act, 1957
+(62 of 1957) and the Air Force Act, 1950 (45 of 1950);
+
+(iii) leave of any kind;
+
+(iv) summary court martial except where the punishment is of dismissal or
+imprisonment for more than three months;"
+
+6. Thus, the legislature appears to have first included within the
+ambit of the phrase "service matters," all matters relating to
+conditions of service and second the legislature further  chose to
+specify certain disputes as specifically included in the "service
+matters" thus defined. Those are enumerated as sub clauses (i),
+(ii), (iii) and (iv) of Section 3(o) of the Act.
+
+7. Thereafter another clause appears. It reads: "but shall not
+include matters relating to." Clearly, the award of severe
+reprimand at the General Court Martial Proceedings (GCMP) is
+not excluded under any of those exclusionary clauses, thus
+specified by the legislature.
+
+8. What therefore, follows is that the punishment of severe
+reprimand would remain covered under the words "matters
+relating to the conditions of their services."
+
+9. Being not specified in the exclusionary clause, the award of
+that punishment, therefore, is included within the meaning of
+the phrase "service matters" under Section 3(o) of the Act.
+
+10. The error in the order of the Tribunal appears to have made
+without owing to the impression incorporated in the later part of
+the order that such punishment had been awarded at a Summary
+Court Martial Proceeding (SCMP).
+
+11. That observation appears to be against the records as has
+been fairly admitted by the learned counsel for the Union of
+India and it is also clear from the third paragraph of the order
+itself.
+
+12. In view of the facts, no useful purpose would be served by
+keeping this matter pending. The order dated 31.01.2022 passed
+
+[[page 3]]
+by Armed Forces Tribunal, Regional Bench, Lucknow, is set
+aside. The matter is remitted back to the Tribunal to pass fresh
+orders in accordance with law, on merits.
+
+13. The delay in filing the O.A. has to be treated to have been
+condoned by the Tribunal itself. Therefore, no fresh order is
+required in that regard.
+
+14. The writ petition is, accordingly, disposed of.
+
+Order Date :- 16.8.2023
+Ashish Pd.
+
+Digitally signed by :-
+ASHISH PRASAD
+High Court of Judicature at Allahabad

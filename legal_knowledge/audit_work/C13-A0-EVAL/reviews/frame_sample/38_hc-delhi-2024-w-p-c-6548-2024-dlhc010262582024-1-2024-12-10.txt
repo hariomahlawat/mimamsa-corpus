@@ -1,0 +1,297 @@
+{
+ "i": 38,
+ "doc_id": "hc-delhi-2024-w-p-c-6548-2024-dlhc010262582024-1-2024-12-10",
+ "frame_court": "DEL",
+ "meta_court": "High Court of Delhi",
+ "text_court_guess": "DEL",
+ "frame_tq": "USABLE",
+ "tq_basis": "partial: 174/177 pages usable",
+ "my_pages": 177,
+ "my_usable": 174,
+ "my_letters": 245466,
+ "my_share": 0.878,
+ "text_method": "pdf_text",
+ "frame_stratum": "BATCH_OR_MULTI",
+ "meta_case_numbers": "W.P.(C)/6548/2024",
+ "records_for_file": "4",
+ "connected": "0",
+ "party_cues": "0",
+ "judgment_key": "JK-b5cef1571163212e"
+}
+=== HEAD ===
+[[page 1]]
+W.P.(C) 4831/2021 & connected matters
+Page 1 of 125
+
+*
+IN  THE  HIGH  COURT  OF  DELHI  AT NEW  DELHI
+
+%
+       Judgment reserved on: 13 August 2024
+    Judgment pronounced on: 10 December 2024
++
+W.P.(C) 4831/2021
+M/S VOS TECHNOLOGIES INDIA PVT. LTD. .....Petitioner
+Through:
+Mr. Prem Ranjan Kumar, and
+Ms. Poojan Malhotra,
+Advocates.
+versus
+
+THE PRINCIPAL ADDITIONAL DIRECTOR GENERAL &
+ANR.
+  .....Respondents
+Through:
+Mr. Harpreet Singh, Sr. St.
+Counsel with Ms. Suhani and
+Mr. Jatin Kumar Gaur, Adv.
++
+W.P.(C) 4832/2021
+M/S AMYRA TECHNICA PVT.LTD.
+.....Petitioner
+Through:
+Mr. Prem Ranjan Kumar, and
+Ms.
+Poojan
+Malhotra,
+Advocates.
+versus
+
+THE PRINCIPAL ADDITIONAL DIRECTOR GENERAL &
+ANR.
+.... Respondents.
+
+Through:
+Mr. Harpreet Singh, Sr. St.
+Counsel with Ms. Suhani and
+Mr. Jatin Kumar Gaur, Adv.
+
++
+W.P.(C) 15202/2023 & CM APPL. 60768/2023 (Stay)
+
+M/S R ANIL KUMAR & ANR.
+.....Petitioner
+Through:
+Mr. Sunil Dalal, Sr. Adv. with
+Ms. Shikha Sapra, Mr. Piyush
+Kumar, Ms. Reena Rawat, Mr.
+Nikhil Beniwal, Mr. Navish
+Bhati, Mr. Mahabir Singh, Mr.
+Archit Jindal and Mr. Akash
+Gupta, Advs.
+
+Digitally Signed
+By:KAMLESH KUMAR
+Signing Date:10.12.2024
+17:18:44
+
+Signature Not Verified
+
+[[page 2]]
+W.P.(C) 4831/2021 & connected matters
+Page 2 of 125
+
+versus
+
+ADDITIONAL DIRECTOR GENERAL, DIRECTORATE OF
+REVENUE INTELLIGENCE & ANR.
+....Respondents
+Through:
+Mr. Anurag Ojha, Sr. St. Counsel
+with Mr. Subham Kumar, Mr.
+Vipul Kumar and Mr. Abhishek,
+Adv. for R-1.
+Mr. Aditya Singla, SSC with Ms.
+Charu Sharma, Mr. Ritvik Saha
+and
+Mr.
+Raghav
+Bakshi,
+Advocates.
++
+W.P.(C) 6193/2021
+LAXMI SALES CORPORATION
+.....Petitioner
+Through:
+Mr. Prem Ranjan Kumar, and
+Ms.
+Poojan
+Malhotra,
+Advocates.
+versus
+THE PRINCIPAL ADDITIONAL
+DIRECTOR GENERAL
+.....Respondent
+Through:
+Mr. Harpreet Singh, Sr. St.
+Counsel
+=== TAIL ===
+e subject
+matter.
+
+-
+-
+
+Digitally Signed
+By:KAMLESH KUMAR
+Signing Date:10.12.2024
+17:18:44
+
+Signature Not Verified
+
+[[page 176]]
+W.P.(C) 4831/2021& connected matters
+Page 51 of 52
+
+•
+Impugned SCN was again
+transferred to call book w.e.f
+17.03.2021 in light of the
+Board’s
+Instruction
+No.
+04/2021-Customs
+dated
+17.03.2021.
+
+•
+SCNs were taken out from the
+call book in light of the CBIC
+Circular No. 07/2022-Customs
+dated 31.03.2022
+
+45.
+Lakshman
+Overseas vs.
+PRINCIPAL
+COMMISSI
+ONER OF
+CUSTOMS
+(IMPORT)
+
+W.P:
+5952/2024
+
+30.04.2010
+OIO not
+passed
+
+•
+Member
+(Customs)
+vide
+D.O.F. No.437/143 / 2009-
+CusIV-pt.II dated 06.01.2017
+directed the field formations to
+draw up an action plan for
+adjudications of these cases in
+a time bound manner.
+
+•
+Board’s
+Circular
+No.
+1053/02/2017-CX
+dated
+10.03.2017
+stipulates
+that
+where the department has gone
+in appeal to the appropriate
+authority, the case can be
+transferred to call book
+
+•
+In compliance of the specific
+instruction
+bearing
+F.No.276/104/ 2016- CX.8A
+(Pt.) dated 03.09.2019 issued
+by the Board the case has been
+taken out from call book and
+
+-
+-
+-
+
+Digitally Signed
+By:KAMLESH KUMAR
+Signing Date:10.12.2024
+17:18:44
+
+Signature Not Verified
+
+[[page 177]]
+W.P.(C) 4831/2021& connected matters
+Page 52 of 52
+
+adjudication proceedings have
+been initiated.
+
+46.
+Shri. Prakash
+Garg
+and
+Ors.
+v.
+Principal
+Commission
+er
+of
+Customs
+Import
+and
+Ors.
+
+Same as WP(C) 7327/2024.
+
+However, Petitioner cannot object to conducting of personal hearing and subsequent passing of the adjudication order as they themselves
+requested for a personal hearing by letters dated 06.09.2023 and 18.11.2023 and had even requested for a virtual link for the same.
+
+Also, it is apparent that Respondents have always been trying to complete the adjudication process, but it is the Petitioners who deliberately
+and intentionally procrastinated the adjudication process by repeating the same thing that they have not received all documents to invoke
+the defence of principal of natural justice, whereas the RUDs were received by them long time back.
+
+WP(C)5529
+/2024
+
+47.
+Abdul
+27.11.2009,
+31.03.2023
+-
+08.10.2021 and 10.03.2023
+Never appeared
+before
+-
+Khalique v.
+23.04.2013,
+08.10.2021
+and
+sought
+Commission
+20.05.2014,
+adjournment
+once
+er Central
+20.04.2015,
+thereafter.
+Goods and
+12.05.2016,
+Service Tax
+19.04.2018
+and
+WP(C)
+10.02.2020
+10020/2023
+
+YASHWANT VARMA, J.
+
+RAVINDER DUDEJA, J.
+
+Digitally Signed
+By:KAMLESH KUMAR
+Signing Date:10.12.2024
+17:18:44
+
+Signature Not Verified

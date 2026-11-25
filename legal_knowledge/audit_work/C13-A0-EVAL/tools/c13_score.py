@@ -7,7 +7,7 @@ Horvitz-Thompson weighted estimates with Kish-Wilson and stratified judgment-clu
 Wilson intervals, evidence-anchor verification against page text, and a failure taxonomy.
 
   python -I -B c13_score.py --task outcome --holdout H-OUT-C13 --truth TRUTH.csv --pred PRED.csv \
-      --out-dir DIR [--pages PAGES.jsonl] [--pred-adjudication ADJ.csv] [--store STORE_DIR]
+      --store STORE_DIR --out-dir DIR [--pages PAGES.jsonl] [--pred-adjudication ADJ.csv] [--reserve-open all]
 
 Input formats (CSV, UTF-8):
   truth: item_id + the task's coding fields (as produced by c13_coding.py truth).
@@ -25,7 +25,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from c13_common import OUT, read_csv, render_csv, render_json, sha256_file  # noqa: E402
-from c13_tasks import TASKS, norm_ws  # noqa: E402
+from c13_tasks import TASKS, norm_ws, uncodable_code  # noqa: E402
 from c13_coding import align, group, verify_store  # noqa: E402
 import c13_stats as S  # noqa: E402
 
@@ -64,28 +64,46 @@ def load_pages(path):
 
 
 # ------------------------------------------------------------------------------------------------ estimators
+def collapse(units):
+    """Sum units sharing (stratum/design cell, cluster): judgment clusters for H-REL pages (GA0 review F10)."""
+    agg = {}
+    for c, h, w, y, x in units:
+        a = agg.setdefault((h, c), [c, h, w, 0.0, 0.0])
+        a[3] += y; a[4] += x
+    return [tuple(v) for _, v in sorted(agg.items())]
+
+
 def estimate(units, seed):
-    """units: list of (cluster, stratum, weight, y, x). Unweighted Wilson + bootstrap; weighted HT + Kish-Wilson +
-    weighted bootstrap."""
-    units = [u for u in units if u[4] > 0]
-    k = sum(u[3] for u in units)
-    n = sum(u[4] for u in units)
+    """units: (cluster, design cell, weight, y, x) for every sampled item in the domain (zeros included).
+    Headline interval (v1.1): design-effect Clopper-Pearson (`c13_stats.design_cp`), coverage-validated by
+    c13_ci_sim.py. Kish-Wilson and stratified judgment-cluster bootstrap intervals are reported as secondary."""
+    units = collapse(units)
+    pos = [u for u in units if u[4] > 0]
+    k = sum(u[3] for u in pos)
+    n = sum(u[4] for u in pos)
     p, lo, hi = S.wilson(k, n)
-    blo, bhi = S.stratified_cluster_bootstrap(units, BOOT_REPS, seed + "|u", weighted=False)
-    wp, wlo, whi = S.weighted_wilson(units)
-    wblo, wbhi = S.stratified_cluster_bootstrap(units, BOOT_REPS, seed + "|w", weighted=True)
-    return dict(k=S.rnd(k, 3), n=S.rnd(n, 3), clusters=len(units),
+    blo, bhi = S.stratified_cluster_bootstrap(pos, BOOT_REPS, seed + "|u", weighted=False)
+    wp, wlo, whi = S.weighted_wilson(pos)
+    wblo, wbhi = S.stratified_cluster_bootstrap(pos, BOOT_REPS, seed + "|w", weighted=True)
+    cp = S.design_cp(units)
+    return dict(k=S.rnd(k, 3), n=S.rnd(n, 3), clusters=len(pos),
                 unweighted=S.rnd(p), unweighted_wilson95=[S.rnd(lo), S.rnd(hi)],
                 unweighted_cluster_bootstrap95=[S.rnd(blo), S.rnd(bhi)],
-                weighted=S.rnd(wp), weighted_kish_wilson95=[S.rnd(wlo), S.rnd(whi)],
-                weighted_cluster_bootstrap95=[S.rnd(wblo), S.rnd(wbhi)])
+                weighted=S.rnd(wp), weighted_design_cp95=[S.rnd(cp["lo"]), S.rnd(cp["hi"])],
+                weighted_design_cp_n_eff=S.rnd(cp.get("n_eff"), 1),
+                weighted_kish_wilson95_secondary=[S.rnd(wlo), S.rnd(whi)],
+                weighted_cluster_bootstrap95_secondary_not_for_pass_rule=[S.rnd(wblo), S.rnd(wbhi)])
 
 
-def target_status(est, target):
+def target_status(est, target, descriptive=False):
+    """v1.1 met rule: MET_POINT_ONLY when the weighted and unweighted point estimates reach the target;
+    MET_LOWER_BOUND when, in addition, the validated design-CP lower bound reaches it; else NOT_MET."""
+    if descriptive:
+        return "DESCRIPTIVE_ONLY"
     if target is None or est["weighted"] is None:
         return "NO_TARGET" if target is None else "NOT_ESTIMABLE"
     met_point = est["weighted"] >= target and est["unweighted"] >= target
-    lb = est["weighted_cluster_bootstrap95"][0]
+    lb = est["weighted_design_cp95"][0]
     return ("MET_LOWER_BOUND" if met_point and lb is not None and lb >= target else
             "MET_POINT_ONLY" if met_point else "NOT_MET")
 
@@ -132,24 +150,35 @@ def score_keyed(task, truth, pred, design, pages_by_sha):
     return rows
 
 
-def aggregate(task, rows, design, label, subset=lambda r: True):
+def aggregate(task, rows, design, label, subset=lambda r: True, items=None, uncodable=()):
+    """Domain estimation: every design item in `items` (default: all) enters with zeros unless it has rows in the
+    domain. Uncodable items are outside the scored denominators and are reported (counted separately)."""
+    items = sorted(design) if items is None else sorted(items)
+    unc = [i for i in items if i in set(uncodable)]
+    items = [i for i in items if i not in set(uncodable)]
     res = {}
     for f in task.scored_fields:
-        sel = [r for r in rows if subset(r)]
-        per = defaultdict(lambda: [0, 0, 0, 0, 0])   # strict, family, answered, covered, determinable
+        sel = [r for r in rows if subset(r) and r["item_id"] in set(items)]
+        per = {iid: [0, 0, 0, 0, 0] for iid in items}   # strict, family, answered, covered, determinable
         for r in sel:
             a = per[r["item_id"]]
             a[0] += r[f"{f}__strict"]; a[1] += r[f"{f}__family"]; a[2] += r[f"{f}__answered"]
             a[3] += r[f"{f}__covered"]; a[4] += r[f"{f}__determinable"]
-        def units(i_num, i_den):
-            return [(iid, design[iid].get("cell", design[iid]["stratum"]), design[iid]["weight"], v[i_num], v[i_den])
-                    for iid, v in per.items()]
+
+        def units(i_num, i_den, extra=()):
+            return [(design[i]["cluster"], design[i]["cell"], design[i]["weight"], v[i_num], v[i_den])
+                    for i, v in per.items()] + list(extra)
         seed = f"c13-score|{task.name}|{label}|{f}"
+        cats = Counter(r[f"{f}__category"] for r in sel)
         res[f] = dict(strict_precision=estimate(units(0, 2), seed + "|sp"),
                       family_precision=estimate(units(1, 2), seed + "|fp"),
                       coverage=estimate(units(3, 4), seed + "|cov"),
-                      categories=dict(Counter(r[f"{f}__category"] for r in sel)),
-                      abstained=sum(r[f"{f}__category"] == "ABSTAINED" for r in sel))
+                      coverage_counting_uncodable_items_as_not_covered=estimate(
+                          units(3, 4, [(design[i]["cluster"], design[i]["cell"], design[i]["weight"], 0, 1)
+                                       for i in unc]), seed + "|cov_u"),
+                      gold_units_undeterminable=cats["PRED_ON_UNDETERMINABLE"] + cats["GOLD_UNDETERMINABLE_NO_PRED"],
+                      items_uncodable=len(unc), categories=dict(cats),
+                      abstained=cats["ABSTAINED"])
     return res
 
 
@@ -176,8 +205,9 @@ def score_holdings(task, truth, pred, design, pages_by_sha, adjudication):
     return rows
 
 
-def aggregate_holdings(task, rows, design, adjudication, label, subset=lambda r: True):
-    sel = [r for r in rows if subset(r)]
+def aggregate_holdings(task, rows, design, adjudication, label, subset=lambda r: True, items=None, uncodable=()):
+    items_all = [i for i in (sorted(design) if items is None else sorted(items)) if i not in set(uncodable)]
+    sel = [r for r in rows if subset(r) and r["item_id"] in set(items_all)]
     out = {}
     for t in ("holding", "question_of_law"):
         rec = defaultdict(lambda: [0, 0, 0])
@@ -192,8 +222,8 @@ def aggregate_holdings(task, rows, design, adjudication, label, subset=lambda r:
                 prc[r["item_id"]][1] += 1
                 prc[r["item_id"]][2] += r["strict"]
         def U(d, i, j):
-            return [(k, design[k].get("cell", design[k]["stratum"]), design[k]["weight"], v[i], v[j])
-                    for k, v in d.items()]
+            return [(design[k]["cluster"], design[k]["cell"], design[k]["weight"], d[k][i] if k in d else 0,
+                     d[k][j] if k in d else 0) for k in items_all]
         seed = f"c13-score|holdings|{label}|{t}"
         out[t] = dict(recall=estimate(U(rec, 0, 1), seed + "|r"), recall_strict=estimate(U(rec, 2, 1), seed + "|rs"),
                       precision_reference_match_LOWER_BOUND=estimate(U(prc, 0, 1), seed + "|p"))
@@ -209,26 +239,50 @@ def aggregate_holdings(task, rows, design, adjudication, label, subset=lambda r:
         mac = [v[0] / v[1] for v in rec.values() if v[1]]
         out[t]["recall_macro_unweighted"] = S.rnd(sum(mac) / len(mac)) if mac else None
     out["categories"] = dict(Counter(r["category"] for r in sel))
+    out["items_uncodable"] = len([i for i in (sorted(design) if items is None else items) if i in set(uncodable)])
     return out
 
 
 # ------------------------------------------------------------------------------------------------ driver
-def load_design(holdout, sample_path=None, item_map_path=None):
+def load_design(holdout, sample_path=None, item_map_path=None, reserve_open=None):
+    """Item -> design info. reserve_open (H-HOLD only; GA0 F11): None, "all", or {design_cell: k} opening the first k
+    reserve ranks of a cell; n_h, inclusion probability and weight are recomputed for the whole cell."""
     sample = read_csv(sample_path or OUT / "holdouts" / holdout / "SAMPLE.csv")
     imap = read_csv(item_map_path or OUT / "holdouts" / holdout / "ITEM_MAP.csv")
-    by_unit = {(r["judgment_key"], r["page"]): r for r in sample}
+    rows = [dict(r, _reserve=False) for r in sample]
+    if reserve_open:
+        if holdout != "H-HOLD-C13":
+            raise ValueError("only H-HOLD-C13 has a reserve")
+        res = read_csv(OUT / "holdouts" / holdout / "RESERVE.csv")
+        imap += read_csv(OUT / "holdouts" / holdout / "ITEM_MAP_RESERVE.csv")
+        base_n = Counter(r["design_cell"] for r in sample)
+        for r in res:
+            k = r["design_cell"]
+            want = int(r["n_h"]) - base_n[k] if reserve_open == "all" else reserve_open.get(k, 0)
+            if int(r["rank_in_stratum"]) - base_n[k] <= want:
+                rows.append(dict(r, _reserve=True))
+    n_cell = Counter(r["design_cell"] for r in rows)
+    by_unit = {(r["judgment_key"], r["page"]): r for r in rows}
     design = {}
     for m in imap:
-        s = by_unit[(m["judgment_key"], m["page"])]
-        design[m["item_id"]] = dict(court=s["court"], stratum=s["stratum"], cell=s["design_cell"],
-                                    weight=float(s["design_weight"]),
-                                    sha256=s["rep_sha256"])
+        s_ = by_unit.get((m["judgment_key"], m["page"]))
+        if s_ is None:
+            continue                     # unopened reserve item
+        N, n = int(s_["N_h"]), n_cell[s_["design_cell"]]
+        design[m["item_id"]] = dict(court=s_["court"], stratum=s_["stratum"], cell=s_["design_cell"],
+                                    weight=N / n, inclusion_probability=n / N, cluster=s_["judgment_key"],
+                                    sha256=s_["rep_sha256"], reserve=s_["_reserve"])
     return design
 
 
-def run(task_name, holdout, truth, pred, design, pages_by_sha=None, adjudication=None):
+def run(task_name, holdout, truth, pred, design, pages_by_sha=None, adjudication=None, pre_exposed=None):
+    """pre_exposed: {judgment_key: {categories}} (c13_sensitivity.load_subset); every headline is also reported
+    without the PRIMARY subset and, for outcome, without CASE_NUMBER_REVIEWED (GA0 review F04/F06)."""
     task = TASKS[task_name]
     pages_by_sha = pages_by_sha or {}
+    for iid, d in design.items():
+        d.setdefault("cluster", iid)
+        d.setdefault("cell", d["stratum"])
     unknown = ({r["item_id"] for r in truth} | {r["item_id"] for r in pred}) - set(design)
     if unknown:
         raise ValueError(f"{len(unknown)} item(s) not in the holdout design, e.g. {sorted(unknown)[:3]}")
@@ -236,37 +290,79 @@ def run(task_name, holdout, truth, pred, design, pages_by_sha=None, adjudication
         r.setdefault("pred_id", f"P{i + 1:05d}")
         if not r["pred_id"]:
             r["pred_id"] = f"P{i + 1:05d}"
+    # UNCODABLE items (GA0 F05): all truth rows of the item are UNCODABLE rows. Kept, counted, never replaced.
+    G = group(truth)
+    uncodable = sorted(i for i, rs in G.items() if rs and all(task.is_uncodable_row(r) for r in rs))
+    truth = [r for r in truth if not task.is_uncodable_row(r)]
     tgt = TARGETS[task_name]
     res = dict(task=task_name, holdout=holdout, items=len(design), status_note="AUTOMATED_CANDIDATE_NOT_VERIFIED "
                "outputs scored against AI-coded reference annotations unless the store manifest says otherwise",
-               targets=tgt)
+               targets=tgt, protocol_version="1.1",
+               uncodable=dict(items=len(uncodable), share=S.rnd(len(uncodable) / len(design)) if design else None,
+                              codes=dict(Counter(uncodable_code(r) for i in uncodable for r in G[i])),
+                              predictions_on_uncodable_items=sum(1 for r in pred if r["item_id"] in set(uncodable)),
+                              rule="kept in the sample, outside scored denominators, reported here and as "
+                                   "coverage_counting_uncodable_items_as_not_covered; never replaced"))
     if task_name == "holdings":
         rows = score_holdings(task, truth, pred, design, pages_by_sha, adjudication)
-        agg = lambda lab, sub=lambda r: True: aggregate_holdings(task, rows, design, adjudication, lab, sub)  # noqa
+
+        def agg(lab, sub=lambda r: True, items=None):
+            return aggregate_holdings(task, rows, design, adjudication, lab, sub, items, uncodable)
+
+        def statuses(a, descriptive=False):
+            h = a["holding"]
+            prec = h.get("precision_true_adjudicated") or h["precision_reference_match_LOWER_BOUND"]
+            return dict(precision=target_status(prec, tgt["precision"], descriptive),
+                        recall=target_status(h["recall"], tgt["coverage"], descriptive))
         res["overall"] = agg("overall")
         h = res["overall"]["holding"]
-        prec = h.get("precision_true_adjudicated") or h["precision_reference_match_LOWER_BOUND"]
-        res["milestone"] = dict(precision_basis=("true (blind adjudication)" if "precision_true_adjudicated" in h
+        res["milestone"] = dict(statuses(res["overall"]),
+                                precision_basis=("true (blind adjudication)" if "precision_true_adjudicated" in h
                                                  else "reference-match LOWER BOUND (no adjudication supplied)"),
-                                precision=target_status(prec, tgt["precision"]),
-                                recall=target_status(h["recall"], tgt["coverage"]),
                                 note="Interim research milestone (P>=80%, R>=60%); not operational acceptance.")
     else:
         rows = score_keyed(task, truth, pred, design, pages_by_sha)
-        agg = lambda lab, sub=lambda r: True: aggregate(task, rows, design, lab, sub)  # noqa
+
+        def agg(lab, sub=lambda r: True, items=None):
+            return aggregate(task, rows, design, lab, sub, items, uncodable)
+
+        def statuses(a, descriptive=False):
+            return {f: dict(strict_precision=target_status(v["strict_precision"], tgt["precision"], descriptive),
+                            coverage=target_status(v["coverage"], tgt["coverage"], descriptive)) for f, v in a.items()}
         res["overall"] = agg("overall")
-        res["targets_status"] = {f: dict(strict_precision=target_status(v["strict_precision"], tgt["precision"]),
-                                         coverage=target_status(v["coverage"], tgt["coverage"]))
-                                 for f, v in res["overall"].items()}
-        res["subsets"] = dict(gold_multi_proceeding=agg("multi", lambda r: r["gold_multi_unit"]),
-                              gold_party_specific=agg("party", lambda r: r["gold_party_specific"]))
+        res["targets_status"] = statuses(res["overall"])
+        multi = agg("multi", lambda r: r["gold_multi_unit"])
+        party = agg("party", lambda r: r["gold_party_specific"])
+        res["subsets"] = dict(
+            gold_multi_proceeding=dict(estimates=multi, targets_status=statuses(multi)),
+            gold_party_specific=dict(estimates=party, targets_status=statuses(party, descriptive=True),
+                                     note="DESCRIPTIVE ONLY (PROTOCOL v1.1 s.6.3): too few expected gold units; "
+                                          "no pass or fail is claimed"))
         if task_name == "relations":
             res["by_predicted_relation_type"] = {
                 t: agg(f"type={t}", lambda r, t=t: r.get("relation_type__pred") == t)
                 for t in sorted({r.get("relation_type__pred") for r in rows if r.get("relation_type__pred")})}
-    res["by_court"] = {c: agg(f"court={c}", lambda r, c=c: r["court"] == c) for c in sorted({r["court"] for r in rows})}
-    res["by_stratum"] = {s: agg(f"stratum={s}", lambda r, s=s: r["stratum"] == s)
-                         for s in sorted({r["stratum"] for r in rows})}
+    courts = sorted({d["court"] for d in design.values()})
+    res["by_court"] = {}
+    for c in courts:
+        a = agg(f"court={c}", items=[i for i, d in design.items() if d["court"] == c])
+        res["by_court"][c] = dict(estimates=a, targets_status=statuses(a))
+    res["by_stratum"] = {}
+    for st in sorted({d["stratum"] for d in design.values()}):
+        a = agg(f"stratum={st}", items=[i for i, d in design.items() if d["stratum"] == st])
+        res["by_stratum"][st] = dict(estimates=a, targets_status=statuses(a))
+    res["breakdown_rule"] = ("The headline target status is the overall one. Per-court, per-stratum and "
+                             "proceeding-specific statuses are reported for the owner; whether 'met' must also hold per "
+                             "breakdown is an owner decision (PROTOCOL v1.1 s.6.4). Party-specific is descriptive.")
+    if pre_exposed is not None:
+        prim = {k for k, c in pre_exposed.items() if c & {"CURATED_KB_CONTENT", "NEAR_IDENTICAL_SPENT_SIBLING"}}
+        cn = {k for k, c in pre_exposed.items() if "CASE_NUMBER_REVIEWED" in c}
+        sens = {}
+        for lab, excl in (("without_primary_pre_exposed", prim), ("without_case_number_reviewed", cn)):
+            keep = [i for i, d in design.items() if d["cluster"] not in excl]
+            a = agg(lab, items=keep)
+            sens[lab] = dict(items_excluded=len(design) - len(keep), estimates=a, targets_status=statuses(a))
+        res["sensitivity"] = sens
     anc = Counter(r["anchor"] for r in rows if r["anchor"])
     n_anc = sum(anc.values())
     res["evidence_anchor"] = dict(counts=dict(anc), ok_rate=S.rnd(anc["ANCHOR_OK"] / n_anc) if n_anc else None,
@@ -294,6 +390,14 @@ def self_test():
     assert res["evidence_anchor"]["counts"] == {"ANCHOR_OK": 8}
     assert abs(pd["strict_precision"]["weighted"] - (1 * 3 + 5 * 4) / (1 * 4 + 5 * 4)) < 1e-4, pd
     assert res["targets_status"]["printed_disposal"]["strict_precision"] == "NOT_MET"
+    assert res["subsets"]["gold_party_specific"]["targets_status"]["printed_disposal"]["coverage"] == "DESCRIPTIVE_ONLY"
+    assert "SC" in res["by_court"] and "targets_status" in res["by_court"]["SC"]
+    # an UNCODABLE item stays out of the denominators and is reported
+    truth2 = truth[1:] + [dict(item_id=ids[0], notes="UNCODABLE:SHA_MISMATCH")]
+    res2, _ = run("outcome", "SELFTEST", truth2, pred, design, pages)
+    assert res2["uncodable"]["items"] == 1 and res2["uncodable"]["codes"] == {"SHA_MISMATCH": 1}
+    c2 = res2["overall"]["substantive_result"]
+    assert c2["coverage"]["n"] == 7 and c2["coverage_counting_uncodable_items_as_not_covered"]["n"] == 8
     print("c13_score self-test OK")
     return 0
 
@@ -306,9 +410,11 @@ def main(argv=None):
     ap.add_argument("--task", required=True, choices=sorted(TASKS)); ap.add_argument("--holdout", required=True)
     ap.add_argument("--truth", required=True); ap.add_argument("--pred", required=True)
     ap.add_argument("--out-dir", required=True); ap.add_argument("--pages"); ap.add_argument("--pred-adjudication")
-    ap.add_argument("--store", help="annotation store root; the truth file must be listed in a verified manifest")
+    ap.add_argument("--store", required=True,
+                    help="annotation store root; the truth file must be listed in a verified manifest (GA0 F07)")
+    ap.add_argument("--reserve-open", choices=["all"], help="H-HOLD only: score with the full reserve opened")
     a = ap.parse_args(argv)
-    if a.store:
+    if a.store:  # always set: required
         probs = verify_store(a.store)
         if probs:
             print("annotation store does not verify:\n" + "\n".join(probs)); return 1
@@ -316,8 +422,10 @@ def main(argv=None):
         if not any(h in Path(m).read_text(encoding="utf-8") for m in Path(a.store).glob("*/v*/MANIFEST.json")):
             print("truth file is not a stored, versioned annotation set"); return 1
     adj = {r["pred_id"]: r["label"] for r in read_csv(a.pred_adjudication)} if a.pred_adjudication else None
-    res, rows = run(a.task, a.holdout, read_csv(a.truth), read_csv(a.pred), load_design(a.holdout),
-                    load_pages(a.pages), adj)
+    from c13_sensitivity import load_subset
+    res, rows = run(a.task, a.holdout, read_csv(a.truth), read_csv(a.pred),
+                    load_design(a.holdout, reserve_open=a.reserve_open), load_pages(a.pages), adj,
+                    pre_exposed=load_subset(a.holdout))
     res["inputs"] = dict(truth_sha256=sha256_file(a.truth), pred_sha256=sha256_file(a.pred),
                          harness_sha256=sha256_file(__file__))
     od = Path(a.out_dir); od.mkdir(parents=True, exist_ok=True)

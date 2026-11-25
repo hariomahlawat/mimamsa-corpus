@@ -1,4 +1,4 @@
-# C13 outcome coding guide (H-OUT-C13), version 1
+# C13 outcome coding guide (H-OUT-C13), version 1.1
 
 You are one of two independent coders. You see only the source pointer (file sha256, path and store) and blank
 fields. You do not see any model output, any other coder's work, or how the item was selected. Do not look for them.
@@ -7,9 +7,29 @@ Do not discuss items with the other coder. Never infer: use `unclear` rather tha
 ## Getting the file
 1. Fetch the PDF named by `rep_raw_path` from `rep_raw_store` (HF dataset `hariomahlawat/mimamsa-corpus` at the
    named commit; `data/raw/...` paths are also in the git raw-data commit `ad77758d`).
-2. Verify its SHA-256 equals `rep_sha256` before reading. If it differs, code nothing and write `SHA_MISMATCH` in
-   `notes` on one row.
+2. Verify its SHA-256 equals `rep_sha256` before reading. If it differs, code nothing and return the item as
+   `UNCODABLE:SHA_MISMATCH` (below).
 3. Read the cause title and the whole operative part. Read the PDF itself, not a derived text file.
+
+## Items you cannot code (UNCODABLE)
+
+If an item cannot be coded, return exactly one row for it with `notes` = `UNCODABLE:<CODE>` followed by a short
+explanation, `page` if relevant, and every other coding field blank. The item stays in the sample, is counted and
+reported, and is never replaced. Codes:
+
+| Code | When |
+| --- | --- |
+| `SHA_MISMATCH` | The fetched file's SHA-256 differs from `rep_sha256` (read nothing further) |
+| `FILE_UNAVAILABLE` | The file cannot be fetched from the named store |
+| `UNREADABLE` | The PDF does not open or its pages cannot be read, even as images |
+| `CONTENT_MISSING_TRUNCATED` | Pages needed for coding are missing or cut off |
+| `NOT_A_JUDGMENT` | The document is not a judgment or order of a court |
+| `MISIDENTIFIED_DOCUMENT` | The file is a different case from the one it appears to be (e.g. wrong cause title) |
+| `OUT_OF_SCOPE` | The document is outside the corpus scope (not a military-law or armed-forces service matter) |
+| `PAGE_ABSENT` | The page to code does not exist in the file |
+| `OTHER` | Anything else; explain in the note |
+
+Use `unclear` labels, not UNCODABLE, when the document is readable but the answer is uncertain.
 
 ## Rows
 One row per proceeding disposed of by the deciding court (each appeal, petition or application with its own number).

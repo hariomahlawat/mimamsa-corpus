@@ -193,3 +193,109 @@ def krippendorff_alpha_nominal(units):
 
 def rnd(x, nd=4):
     return None if x is None else round(x, nd)
+
+
+# ------------------------------------------------------------------------------------------- validated interval (v1.1)
+def _betacf(a, b, x):
+    """Continued fraction for the incomplete beta function (modified Lentz)."""
+    tiny, qab, qap, qam = 1e-300, a + b, a + 1.0, a - 1.0
+    c, d = 1.0, 1.0 - qab * x / qap
+    d = 1.0 / (d if abs(d) > tiny else tiny)
+    h = d
+    for m in range(1, 400):
+        m2 = 2 * m
+        aa = m * (b - m) * x / ((qam + m2) * (a + m2))
+        d = 1.0 + aa * d; d = 1.0 / (d if abs(d) > tiny else tiny)
+        c = 1.0 + aa / c; c = c if abs(c) > tiny else tiny
+        h *= d * c
+        aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2))
+        d = 1.0 + aa * d; d = 1.0 / (d if abs(d) > tiny else tiny)
+        c = 1.0 + aa / c; c = c if abs(c) > tiny else tiny
+        de = d * c
+        h *= de
+        if abs(de - 1.0) < 1e-12:
+            break
+    return h
+
+
+def betainc(a, b, x):
+    """Regularized incomplete beta I_x(a, b) for real a, b > 0."""
+    if x <= 0:
+        return 0.0
+    if x >= 1:
+        return 1.0
+    lbt = math.lgamma(a + b) - math.lgamma(a) - math.lgamma(b) + a * math.log(x) + b * math.log(1 - x)
+    if x < (a + 1) / (a + b + 2):
+        return math.exp(lbt) * _betacf(a, b, x) / a
+    return 1.0 - math.exp(lbt) * _betacf(b, a, 1 - x) / b
+
+
+def beta_ppf(q, a, b):
+    lo, hi = 0.0, 1.0
+    for _ in range(80):
+        mid = (lo + hi) / 2
+        if betainc(a, b, mid) < q:
+            lo = mid
+        else:
+            hi = mid
+    return (lo + hi) / 2
+
+
+def clopper_pearson(k, n, alpha=0.05):
+    """Exact (Clopper-Pearson) interval; k and n may be non-integer (effective counts)."""
+    if n <= 0:
+        return (None, None, None)
+    p = k / n
+    lo = 0.0 if k <= 0 else beta_ppf(alpha / 2, k, n - k + 1)
+    hi = 1.0 if k >= n else beta_ppf(1 - alpha / 2, k + 1, n - k)
+    return (p, lo, hi)
+
+
+def linearized_ratio_variance(units):
+    """Taylor-linearised variance of the HT ratio sum(w*y)/sum(w*x) under stratified SRS of clusters with FPC.
+    units: (cluster, stratum, weight, y, x) for EVERY sampled cluster (including x == 0). Clusters sharing a
+    (stratum, cluster id) are summed into one PSU. N_h = weight * n_h."""
+    psu = defaultdict(lambda: [0.0, 0.0, 0.0])
+    for c, h, w, y, x in units:
+        a = psu[(h, c)]
+        a[0] = w; a[1] += y; a[2] += x
+    X = sum(w * x for (_, _), (w, _, x) in psu.items())
+    Y = sum(w * y for (_, _), (w, y, _) in psu.items())
+    if not X:
+        return None, None
+    R = Y / X
+    by_h = defaultdict(list)
+    for (h, _), (w, y, x) in psu.items():
+        by_h[h].append((w, y - R * x))
+    V = 0.0
+    for h, zs in by_h.items():
+        n = len(zs)
+        if n < 2:
+            continue
+        w = zs[0][0]
+        N = w * n
+        mz = sum(z for _, z in zs) / n
+        s2 = sum((z - mz) ** 2 for _, z in zs) / (n - 1)
+        V += N * N * (1 - n / N) * s2 / n
+    return R, V / (X * X)
+
+
+def design_cp(units, alpha=0.05):
+    """C13 v1.1 validated interval for a weighted ratio: Clopper-Pearson on an effective sample size
+    n_eff = min(Kish n_eff of the denominator, Korn-Graubard n_eff = p(1-p)/V_lin, n), with k_eff = p * n_eff.
+    Taking the smallest effective n is conservative: it guards against the zero-variance cells that made the
+    percentile bootstrap under-cover (GA0 review F01). Coverage is demonstrated by c13_ci_sim.py."""
+    units = list(units)
+    pos = [u for u in units if u[4] > 0]
+    if not pos:
+        return dict(p=None, lo=None, hi=None, n_eff=0)
+    R, V = linearized_ratio_variance(units)
+    n = sum(u[4] for u in pos)
+    ws = []
+    for _, _, w, _, x in pos:
+        ws.extend([w] * int(round(x)) if x >= 1 else [w * x])
+    n_kish = kish_neff(ws)
+    n_kg = (R * (1 - R) / V) if V and 0 < R < 1 else float("inf")
+    n_eff = max(1.0, min(n_kish, n_kg, n))
+    _, lo, hi = clopper_pearson(R * n_eff, n_eff, alpha)
+    return dict(p=R, lo=lo, hi=hi, n_eff=n_eff, n_kish=n_kish, n_korn_graubard=None if n_kg == float("inf") else n_kg)

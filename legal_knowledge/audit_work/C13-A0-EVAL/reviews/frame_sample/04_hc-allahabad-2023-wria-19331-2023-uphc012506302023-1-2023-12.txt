@@ -1,0 +1,99 @@
+{
+ "i": 4,
+ "doc_id": "hc-allahabad-2023-wria-19331-2023-uphc012506302023-1-2023-12-01",
+ "frame_court": "ALL",
+ "meta_court": "Allahabad High Court",
+ "text_court_guess": "ALL",
+ "frame_tq": "USABLE",
+ "tq_basis": "all pages usable",
+ "my_pages": 1,
+ "my_usable": 1,
+ "my_letters": 910,
+ "my_share": 0.918,
+ "text_method": "pdf_text",
+ "frame_stratum": "OTHER",
+ "meta_case_numbers": "WRIA/19331/2023",
+ "records_for_file": "1",
+ "connected": "0",
+ "party_cues": "0",
+ "judgment_key": "JK-6ad23cfb89323b87"
+}
+=== HEAD ===
+[[page 1]]
+Neutral Citation No. - 2023:AHC:227047
+
+Court No. - 34
+
+Case :- WRIT - A No. - 19331 of 2023
+
+Petitioner :- Rambir Rathor
+Respondent :- Union Of India And 2 Others
+Counsel for Petitioner :- Rama Nand Shukla,Mani Shanker Pandey
+Counsel for Respondent :- A.S.G.I.,Anil Kumar Rai
+
+Hon'ble Ajit Kumar,J.
+
+By means of this petition filed under Article 226 of the
+Constitution, petitioner has prayed for certain directions to the
+authorities for grant of full pension including other pensionary
+benefits.
+
+Learned counsel for the respondents Sri Anil Kumar Rai has raised
+preliminary objection regarding maintainability of this petition
+because the department in question stands notified under the
+Central Armed Forces Tribunal Act, 2007 and submits that the
+petitioner is an ex Army personnel and as such can avail such
+remedy before the Tribunal.
+
+I view of the above, I decline to interfere in the matter. However,
+liberty rests with the petitioner to apply before the Armed Forces
+Tribunal, if so advised.
+
+Subject to aforesaid liberty, this petition consigned to records.
+
+Order Date :- 1.12.2023
+IrfanUddin
+
+Digitally signed by :-
+IRFAN UDDIN SIDDIKI
+High Court of Judicature at Allahabad
+
+=== TAIL ===
+[[page 1]]
+Neutral Citation No. - 2023:AHC:227047
+
+Court No. - 34
+
+Case :- WRIT - A No. - 19331 of 2023
+
+Petitioner :- Rambir Rathor
+Respondent :- Union Of India And 2 Others
+Counsel for Petitioner :- Rama Nand Shukla,Mani Shanker Pandey
+Counsel for Respondent :- A.S.G.I.,Anil Kumar Rai
+
+Hon'ble Ajit Kumar,J.
+
+By means of this petition filed under Article 226 of the
+Constitution, petitioner has prayed for certain directions to the
+authorities for grant of full pension including other pensionary
+benefits.
+
+Learned counsel for the respondents Sri Anil Kumar Rai has raised
+preliminary objection regarding maintainability of this petition
+because the department in question stands notified under the
+Central Armed Forces Tribunal Act, 2007 and submits that the
+petitioner is an ex Army personnel and as such can avail such
+remedy before the Tribunal.
+
+I view of the above, I decline to interfere in the matter. However,
+liberty rests with the petitioner to apply before the Armed Forces
+Tribunal, if so advised.
+
+Subject to aforesaid liberty, this petition consigned to records.
+
+Order Date :- 1.12.2023
+IrfanUddin
+
+Digitally signed by :-
+IRFAN UDDIN SIDDIKI
+High Court of Judicature at Allahabad

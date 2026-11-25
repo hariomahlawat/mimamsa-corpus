@@ -1,0 +1,190 @@
+{
+ "i": 3,
+ "doc_id": "hc-delhi-2025-w-p-c-17732-2025-dlhc010925102025-1-2025-11-21",
+ "frame_court": "DEL",
+ "meta_court": "High Court of Delhi",
+ "text_court_guess": "DEL",
+ "frame_tq": "USABLE",
+ "tq_basis": "all pages usable",
+ "my_pages": 7,
+ "my_usable": 7,
+ "my_letters": 10387,
+ "my_share": 0.932,
+ "text_method": "pdf_text",
+ "frame_stratum": "PENSION_OR_DISCIPLINARY",
+ "meta_case_numbers": "W.P.(C)/17732/2025",
+ "records_for_file": "1",
+ "connected": "0",
+ "party_cues": "0",
+ "judgment_key": "JK-c72781c1391284ec"
+}
+=== HEAD ===
+[[page 1]]
+W.P.(C) 17732/2025
+Page 1 of 7
+
+$~18
+
+*
+IN THE HIGH COURT OF DELHI AT NEW DELHI
+
++
+W.P.(C) 17732/2025, CM APPLs. 73290/2025 & 73291/2025
+
+UNION OF INDIA & ORS.
+.....Petitioners
+
+Through:
+Mr. Rohan Jaitley, CGSC, Sgt
+Manish Kumar Singh, Sgt Mritunjay and Sgt
+PK Yadav, Air Force Legal Cell
+
+versus
+
+290808 EX MWO GOBINDA CHANDRA
+ADHIKARY
+.....Respondent
+Through:
+Mr. Durgesh Kumar Sharma,
+Adv
+
+CORAM:
+HON'BLE MR. JUSTICE C. HARI SHANKAR
+HON'BLE MR. JUSTICE OM PRAKASH SHUKLA
+
+JUDGMENT (ORAL)
+%
+21.11.2025
+
+C. HARI SHANKAR, J.
+
+1.
+This petition assails orders dated 25 October 2024 passed by the
+
+Armed Forces Tribunal1 in OA 38/2021 whereby the respondent’s
+
+application for grant of disability pension on the ground that he suffers
+
+from Essential Hypertension with 30%, rounded off to 50%, lifelong,
+
+has been allowed by the AFT.
+
+2.
+The issue is covered by a recent decision rendered by us in UOI
+
+v Ex Sub Gawas Anil Madso2.
+
+1 “the AFT”, hereinafter
+2 318 (2025) DLT 711
+
+Digitally Signed By:AJIT
+KUMAR
+Signing Date:24.11.2025
+18:43:45
+
+Signature Not Verified
+
+[[page 2]]
+W.P.(C) 17732/2025
+Page 2 of 7
+
+3.
+Nonetheless, we have heard Mr. Rohan Jaitley, learned CGSC
+
+for the petitioners, and have perused the record.
+
+4.
+The respondent was released in Low Medical Category on his
+
+being found to be suffering from Essential Hypertension. From the
+
+record, including the proceedings of the Release Medical Board3, the
+
+following facts emerged:
+
+(i)
+The respondent had served in the Indian Air Force for
+
+over 38 years before he was diagnosed as suffering from
+
+Essential Hypertension.
+
+(ii)
+The respondent, in his self-declaration, specifically
+
+declared that he had not been suffering from Essential
+
+Hypertension prior to joining the Indian Air Force. The
+
+declaration reads thus:
+
+4.
+=== TAIL ===
+ks of the Invaliding
+Medical Board and Re-Survey Medical Boards to hold that since
+the disability of the appellant was less than 20%, he would not be
+entitled to the disability element of the disability pension. Tribunal
+did not examine the issue as to whether the disability was
+attributable to or aggravated by military service. In the instant case
+neither has it been mentioned by the Invaliding Medical Board nor
+by the Re-Survey Medical Boards that the disease for which the
+appellant was invalided out of service could not be detected at the
+time of entry into military service. As a matter of fact, the
+Invaliding Medical Board was quite categorical that no disability of
+the appellant existed before entering service. As would be evident
+from the aforesaid decisions of this Court, the law has by now
+crystalized that if there is no note or report of the Medical Board at
+the time of entry into service that the member suffered from any
+particular disease, the presumption would be that the member got
+
+8 2025 SCC OnLine SC 895
+
+Digitally Signed By:AJIT
+KUMAR
+Signing Date:24.11.2025
+18:43:45
+
+Signature Not Verified
+
+[[page 7]]
+W.P.(C) 17732/2025
+Page 7 of 7
+
+afflicted by the said disease because of military service. Therefore
+the burden of proving that the disease is not attributable to or
+aggravated by military service rest entirely on the employer.
+Further, any disease or disability for which a member of the armed
+forces is invalided out of service would have to be assumed to be
+above 20% and attract grant of 50% disability pension.
+
+47.
+Thus having regard to the discussions made above, we are
+of the considered view that the impugned orders of the Tribunal are
+wholly unsustainable in law. That being the position, impugned
+orders dated 22.01.2018 and 26.02.2016 are hereby set aside.
+Consequently, respondents are directed to grant the disability
+element of disability pension to the appellant at the rate of 50%
+with effect from 01.01.1996 onwards for life. The arrears shall
+carry interest at the rate of 6% per annum till payment. The above
+directions shall be carried out by the respondents within three
+months from today.”
+
+11.
+The present petition is, accordingly, dismissed in limine.
+
+12.
+Compliance with the impugned judgment of the AFT, if not
+
+already ensured, be ensured within a period of 12 weeks from today.
+
+C. HARI SHANKAR, J.
+
+OM PRAKASH SHUKLA, J.
+NOVEMBER 21, 2025/AR
+
+Digitally Signed By:AJIT
+KUMAR
+Signing Date:24.11.2025
+18:43:45
+
+Signature Not Verified

@@ -1,0 +1,10 @@
+{
+ "criterion": "validated if every scenario's design-CP coverage >= 0.95",
+ "min_coverage_design_cp95": 0.954,
+ "min_coverage_design_cp95_outcome_p090_099": 0.965,
+ "min_coverage_kish_wilson95": 0.92,
+ "monte_carlo_se_at_095": 0.0069,
+ "note": "Bootstrap coverage is not re-simulated here; the GA0 reviewer measured 0.830 (p=0.983) and 0.923 (heterogeneous) for the v1.0 weighted percentile bootstrap (reviews/sim_*.json), which is why v1.1 no longer uses it for the pass rule.",
+ "nsim_per_scenario": 1000,
+ "validated": true
+}

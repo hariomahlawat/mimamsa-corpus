@@ -1,0 +1,236 @@
+{
+ "i": 13,
+ "doc_id": "hc-ph-2025-cwp-14558-2025-phhc010789492025-1-2025-08-20",
+ "frame_court": "PH",
+ "meta_court": "High Court of Punjab and Haryana",
+ "text_court_guess": "PH",
+ "frame_tq": "USABLE",
+ "tq_basis": "all pages usable",
+ "my_pages": 4,
+ "my_usable": 4,
+ "my_letters": 3614,
+ "my_share": 0.897,
+ "text_method": "pdf_text",
+ "frame_stratum": "PARTY_SPECIFIC",
+ "meta_case_numbers": "CWP/14558/2025",
+ "records_for_file": "1",
+ "connected": "0",
+ "party_cues": "1",
+ "judgment_key": "JK-81730e236b81cfd5"
+}
+=== HEAD ===
+[[page 1]]
+IN THE HIGH COURT OF PUNJAB AND HARYANA
+
+AT CHANDIGARH
+
+137
+CWP-14558-2025
+Date of Decision: 20.08.2025
+
+Union of India and others
+....Petitioners
+
+Versus
+
+Som Datt and another
+
+....Respondents
+
+CORAM:   HON'BLE MR. JUSTICE HARSIMRAN SINGH SETHI
+
+HON'BLE MR. JUSTICE VIKAS SURI
+  ----
+
+Present:
+Ms. Neha Jain, Senior Panel Counsel
+for the petitioners.
+
+****
+
+Harsimran Singh Sethi, J. (Oral)
+
+1.
+In the present petition, the challenge is to the impugned order
+
+dated 16.11.2018 (Annexure P-1) passed by respondent No.2-Armed Forces
+
+Tribunal, Regional Bench, Chandigarh (hereinafter referred to as ‘Tribunal’),
+
+by which, respondent No.1 has been allowed the benefit of disability pension
+
+by rounding off the disability element from 30 % to 50 % for life on the
+
+ground that the same is perverse.
+
+2.
+The only argument raised by learned counsel for the petitioners is
+
+that respondent No.1 is not entitled to the benefit of rounded off the disability
+
+pension from 30% to 50% by placing reliance upon the judgment of the
+
+Hon’ble Supreme Court of India in Union of India and others vs. Ram Avtar,
+
+VARINDER PRASHAD
+2025.08.26 15:33
+I attest to the accuracy of this
+document
+PHHC
+
+[[page 2]]
+CWP-14558-2025
+
+-: 2 :-
+
+2014 SCC Online SC 1761, thus, the grant of benefit of disability pension to
+
+respondent No.1 by rounding off @ 50% is incorrect and the facts of the
+
+present case have not been appreciated in correct perspective by the Tribunal
+
+while passing the impugned order dated 16.11.2018 (Annexure P-1).
+
+3.
+We have heard learned counsel for the petitioners and have gone
+
+through the case file with her able assistance.
+
+4.
+As per the settled principle of law settled by Hon’ble Supreme
+
+Court of India in Ram Avtar’s case (supra), any officer serving in the Armed
+
+Forces, who h
+=== TAIL ===
+y the
+
+military service, is entitled to be granted the benefit of
+
+rounding-off of disability pension. The appellant(s)
+
+herein would contend that, on the basis of Circular No.
+
+1(2)/97/D(Pen-C) issued by the Ministry of Defence,
+
+Government of India, dated 31.01.2001, the aforesaid
+
+benefit is made available only to an Armed Forces
+
+Personnel who is invalidated out of service, and not to
+
+any other category of Armed Forces Personnel
+
+VARINDER PRASHAD
+2025.08.26 15:33
+I attest to the accuracy of this
+document
+PHHC
+
+[[page 3]]
+CWP-14558-2025
+
+-: 3 :-
+
+mentioned hereinabove.
+
+5.
+We have heard learned counsel for the
+
+parties to the lis.
+
+6.
+We do not see any error in the impugned
+
+judgment(s) and order(s) and therefore all the appeals
+
+which pertain to the concept of rounding-off of the
+
+disability pension are dismissed, with no order as to
+
+costs.
+
+7.
+ The dismissal of these matters will be
+
+taken note of by the High Courts as well as by the
+
+Tribunals in granting appropriate relief to the
+
+pensioners before them, if any, who are getting or are
+
+entitled to the disability pension.”
+
+5.
+Learned counsel for the petitioners has not been able to
+
+dispute the said proposition of law having been settled by the Hon’ble
+
+Supreme Court of India in Ram Avtar’s case (supra) to the effect that
+
+percentage of disability to be rounded off and when applied in the present
+
+case disability of 30% to be rounded off to 50%.
+
+6.
+Keeping in view the facts and circumstance of the present case
+
+as well as the settled principle of law settled in Ram Avtar’s case (supra),
+
+respondent No.1 has rightly been held to be entitled to disability pension
+
+by rounding off the disability element from 30% to 50% w.e.f. 01.11.2006.
+
+7.
+No other argument has been raised.
+
+8.
+Hence, in the absence of any perversity being pointed out in
+
+the impugned order dated 16.11.2018 (Annexure P-1) either on the basis of
+
+the facts or the settled principle of law, no ground is made out for any
+
+interference by this Court in the facts and circumstances of the present
+
+case.
+
+VARINDER PRASHAD
+2025.08.26 15:33
+I attest to the accuracy of this
+document
+PHHC
+
+[[page 4]]
+CWP-14558-2025
+
+-: 4 :-
+
+9.
+Accordingly, the writ petition is dismissed.
+
+10.
+Pending application(s), if any, stands disposed of.
+
+ (HARSIMRAN SINGH SETHI)
+
+JUDGE
+
+(VIKAS SURI)
+August 20, 2025
+JUDGE
+Varinder
+
+Whether speaking/reasoned
+:
+Yes
+
+Whether reportable
+:
+No
+
+VARINDER PRASHAD
+2025.08.26 15:33
+I attest to the accuracy of this
+document
+PHHC

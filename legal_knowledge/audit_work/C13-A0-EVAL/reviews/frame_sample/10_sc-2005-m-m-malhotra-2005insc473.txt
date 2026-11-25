@@ -1,0 +1,148 @@
+{
+ "i": 10,
+ "doc_id": "sc-2005-m-m-malhotra-2005insc473",
+ "frame_court": "SC",
+ "meta_court": "Supreme Court of India",
+ "text_court_guess": "?",
+ "frame_tq": "USABLE",
+ "tq_basis": "all pages usable",
+ "my_pages": 16,
+ "my_usable": 16,
+ "my_letters": 29413,
+ "my_share": 0.94,
+ "text_method": "pdf_text",
+ "frame_stratum": "PENSION_OR_DISCIPLINARY",
+ "meta_case_numbers": "",
+ "records_for_file": "1",
+ "connected": "0",
+ "party_cues": "0",
+ "judgment_key": "JK-7812e92371b153a0"
+}
+=== HEAD ===
+[[page 1]]
+A
+
+B
+
+c
+
+M.M. MALHOTRA
+
+v.
+UNION OF INDIA AND ORS.
+
+OCTOBER 4, 2005
+
+[ARIJIT PASAYAT AND H.K. SEMA, JJ.]
+
+Military Law:
+
+Air Force Act, 1950:
+
+Section 19-Termination of service by Central Government-Moral
+turpitude-Air Force Officer married complainant as per Hindu rites-
+Complainant lodged a complaint alleging that the said Officer had illicit
+relation with a woman and had also tortured her brutally-Said Officer was
+D compulsorily retired from service on the ground that trial by Court Martial
+
+was inexpedient and impractical-High Court upheld the order of compulsory
+retirement-Correctness of-Held: Any act of misconduct of an Officer involving
+moral turpitude and/or amounting to an offence could be dealt with
+administratively under Ss. 18 and 19 or by way of disciplinary action-
+However, while dealing with the matter under S. 19 principle of natural justice
+E as contemplated in R. 16 has to be followed-Jn the instant case, trial by
+
+Court Martial neither expedient nor practical and, therefore, order of
+compulsory retirement justified-Air Force Rules, 1969, R. 16-Regulations
+for the Air Force, 1964, Para 667 (b).
+
+Section 45-Unbecoming conduct-Air Force Officer tortured a woman
+F brutally-Officer compulsorily retired from service-Correctness of-Held:
+
+Use of criminal force against a woman is an act unbecoming of an Officer and
+is an offence under S. 45-Hence, order of compulsory retirement justified
+
+Hindu Marriage Act, 1955:
+
+G
+Section 16-Void and voidable marriages-Legitimacy of children of-
+Held: legitimacy of the paternity of a child born out of a void marriage is
+upheld-However, similar protection is not extended to the mother of the
+child
+
+H
+1~6
+
+[[page 2]]
+•.
+
+M.M. MALHOTRA v. U.0.1.
+1027
+
+Words & Phrases:
+
+"Misconduct"-Meaning of
+
+The appellant was app
+=== TAIL ===
+t, carelessness
+C or negligence in performance of the duty; the act complained of bears forbidden
+
+quality or character.
+
+"Misconduct" as stated in Batt's Law of Master and Servant (4th Edition)
+(at page 63) is "comprised positive acts and not mere neglects or failures."
+D The definition of the word as given in Ballentine's Law Dictionary (148th
+
+Edition) is "A transgression of some established and definite rule of action,
+where no discretion is left except what necessity may demand, it is a violation
+of definite law, a forbidden act. It differs from carelessness."
+
+It may be generally stated that the conduct rules of the Government and
+E public sector corporations constitute a code of permissible acts and behaviour
+
+of their servants.
+
+The scheme of the Conduct Rules, almost invariably, is to first of all
+enunciate a general rule of conduct and behaviour followed by specific
+prohibitions and restrictions. For example, Rule 3 of the Central Civil Services
+F (Conduct) Rules, 1964 which occurs under the heading "General" provides
+
+that every Government servant shall at all times:
+
+(i) maintain absolute integrity;
+
+(ii) maintain devotion to duty; and
+G
+(iii) do nothing which is unbecoming of a Government servant.
+
+It has been pointed out by learned Additional Solicitor General that in
+the past also appellant's conduct was found to be objectionable. He was tried
+
+for general court-martial on a charge of using improperly travel voucher of
+H another officer's wife for his wife's travel. He was awarded sentence of 12
+
+[[page 16]]
+... •
+
+M.M. MALHOTRA v. U.0.1. (PASAYAT, J.)
+1041
+
+months' forfeiture of service for the purpose of promotion and severe A
+reprimand. He was also awarded severe displeasure for a period of eighteen
+months w.e.f. 16th September, l 987 for making false allegations against
+superior officers and misbehaving with canteen sales girl. Though these were
+not factors which weighed with the authorities in passing the order of
+compulsory retirement yet it throws light on desirability to retain the officer B
+in service. On the facts of the present case the order of compulsory retirement
+cannot be said to be one which is shockingly disproportionate to warrant
+interference.
+
+While, therefore, holding that the charge of plural marriage has not
+been established, yet taking into account the other allegations we do not think C
+it a fit case where any interference is called for.
+
+Appeal is dismissed without any order as to costs.
+
+v.s.s .
+Appeal dismissed.
