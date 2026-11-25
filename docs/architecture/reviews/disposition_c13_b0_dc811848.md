@@ -54,3 +54,27 @@
   - P6: Authenticode verification, junction detection on Windows, BitLocker;
   - P9: re-confirm the reserved-key list and the chip density on the deployed browsers.
 - **Owner:** D-08 exception (F21); trust-list root custody alongside release and register keys (D-05).
+
+## Addendum: confirmation at `10ae5c04` (F02 reopened; C01–C09)
+
+The confirmation review is [confirmation_c13_b0_10ae5c04.md](confirmation_c13_b0_10ae5c04.md) ([CSV](confirmation_c13_b0_10ae5c04_findings.csv)).
+
+| ID | Fix | Negative-control tests |
+| --- | --- | --- |
+| **F02 (P2)** | **Legal axes**<ul><li>`reviewed_record.axis` no longer includes `legal_applicability` or `legal_approval`, so no technical review, human or AI, can set them.</li><li>`legal_applicability` above `NOT_ESTABLISHED` needs an `approval_record_id` that resolves to an active T1/T2 approval with a valid appointment.</li><li>`legal_applicability` above `NOT_ESTABLISHED` is rejected outright while AUTH-LEDGER is at v0 (`LEDGER_V0_NO_APPLICABILITY`).</li></ul>**Identity**<ul><li>`IDENTITY_CONFIRMED` needs a HUMAN review plus `authentication_evidence`.</li><li>A custodian certificate needs custodian fidelity and the artefact hash.</li><li>An official-source record needs an official carrier and authority, page-image fidelity and the source URL.</li><li>An AUTH-LEDGER entry is impossible at v0.</li></ul>**Independence (structural)**<ul><li>`reviewer_id` must differ from `author_id`, and from the author recorded on the candidate.</li><li>The subject must exist in the bundle.</li><li>`reviewed_commit` must be the producing commit: the extractor commit for candidates; the document git commit or release commit for documents.</li><li>The self-declared flag has been removed.</li></ul> | `test_ai_review_cannot_raise_legal_applicability_at_ledger_v0`, `test_legal_applicability_needs_approval_even_when_ledger_supports_it`, `test_legal_applicability_never_raised_at_ledger_v0` (5 values), `test_legal_applicability_cannot_cite_review_record`, `test_reviewed_record_cannot_target_legal_axes`, `test_ai_review_cannot_confirm_identity`, `test_identity_confirmed_needs_verifiable_evidence`, `test_identity_via_auth_ledger_impossible_at_v0`, `test_custodian_evidence_needs_custodian_fidelity_and_hash`, `test_review_independence_is_structural_not_declared`, `test_review_must_cite_the_reviewed_commit`, `test_review_must_reference_existing_subject`, `test_candidate_review_by_its_own_author_rejected`, `test_candidate_review_must_cite_extractor_commit_not_release_commit` (positive controls: `test_identity_confirmed_positive_with_human_review_and_official_record`, `test_raised_value_resolves_to_review_in_bundle`) |
+| C01 | An unresolvable review id in record-level validation is now an error | `test_raised_value_outside_bundle_is_an_error` |
+| C02 | 8.3 short-name segments (`~` followed by a digit) are rejected | `test_windows_short_name_alias_rejected` (3) |
+| C03 | `valid_until` is enforced against the site's trusted date (`today` input) | `test_expired_release_key_rejected` |
+| C04 | The active `release_sequence` is mandatory in production (0 on first install); otherwise only the explicit rollback path is available (`RELEASE_SEQUENCE_REQUIRED`) | `test_release_sequence_mandatory_in_production`, CLI test |
+| C05 | `SHA256SUMS` is read once, and the verified bytes are the parsed bytes. The importer copies the bundle into a private ACL'd folder before validating (security §8.2) | `test_sums_read_once` |
+| C06 | An append-only `ExclusionStore` now sits outside the DB and the release generations (`D:\Mimamsa\exclusions\`). Restore always applies the store's latest state, and refuses if the store is missing or older than the restored DB | `test_store_is_append_only_and_monotonic`, `test_restore_uses_store_not_restored_database`, `test_restore_refused_without_store`, `test_restore_refused_if_store_older_than_database`, `test_tampered_stored_update_rejected_on_load` |
+| C07 | Screen-reader behaviour is now documented: browse-mode quick keys are left alone, there is a screen-reader mode, and NVDA/JAWS testing is in P9 (design 05) | Documentation only; P9 |
+| C08 | A copied citation now ends "(metadata not verified)" unless evidence fidelity is checked | `test_legal_citation_format`, `test_no_marker_when_metadata_checked` |
+| C09 | The ledger head now requires the full 40/64-hex value and exact equality | `test_self_asserted_ledger_version_rejected_without_trusted_head` (prefix now rejected) |
+
+**Reviewer harness `negctl2.py`**
+- **Run as written:** bundle probes now stop at `RELEASE_SEQUENCE_REQUIRED` (C04 by design).
+- **Run with `current_release_sequence=0` added:**
+  - both F02+ probes reject, with `LEDGER_V0_NO_APPLICABILITY`, `LEGAL_AXIS_NEEDS_APPROVAL`, `AI_REVIEW_CANNOT_CONFIRM_IDENTITY` and `SCHEMA`;
+  - the harness's positive F02 case is rejected because it uses the superseded review schema (`independent_of_author`, no `reviewed_artefact`). The updated positive controls above pass.
+- The underscore-variant doc_id probe is still accepted. It is informational and was not required.

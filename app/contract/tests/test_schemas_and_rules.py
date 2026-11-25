@@ -119,7 +119,7 @@ def test_approval_ref_free_string_not_accepted(example, register):
     assert "SCHEMA" in codes(record_issues("document", doc, register, "x", ledger_version=3))
 
 
-@pytest.mark.parametrize("axis,value", [("evidence_fidelity", "FIDELITY_VERIFIED"), ("legal_applicability", "EVIDENCED"),
+@pytest.mark.parametrize("axis,value", [("evidence_fidelity", "FIDELITY_VERIFIED"),
                                         ("source_authenticity", "IDENTITY_CONFIRMED"), ("dependency_freshness", "CURRENT_FOR_CHECKED_SCOPE")])
 def test_raised_values_need_review_record(example, register, axis, value):
     """F02 negative controls (reviewer probes P01-P03)."""
@@ -262,3 +262,35 @@ def test_form_template_never_usable(example, register):
     c["payload"] = {"family_id": "F-EX", "field_set_version": "MML_DERIVED", "form_authority_candidate": "OTHER_OR_UNDETERMINED",
                     "usable_as_template": True}
     assert "SCHEMA" in codes(record_issues("candidate", c, register, "x"))
+
+
+@pytest.mark.parametrize("value", ["UNRESOLVED", "PARTIAL_CHAIN", "EVIDENCED", "CONFLICTING", "NOT_APPLICABLE"])
+def test_legal_applicability_never_raised_at_ledger_v0(example, register, value):
+    """F02: legal applicability is a legal determination; no record may carry it above NOT_ESTABLISHED at ledger v0."""
+    doc = example("document")
+    doc["status_axes"]["legal_applicability"] = {"value": value, "basis": "technical review"}
+    c = codes(record_issues("document", doc, register, "x", ledger_version=0))
+    assert "LEDGER_V0_NO_APPLICABILITY" in c and "LEGAL_AXIS_NEEDS_APPROVAL" in c
+
+
+def test_legal_applicability_cannot_cite_review_record(example, register):
+    doc = example("document")
+    doc["status_axes"]["legal_applicability"] = {"value": "EVIDENCED", "basis": "x y", "review_record_id": "RV-0001"}
+    assert "SCHEMA" in codes(record_issues("document", doc, register, "x"))
+
+
+def test_reviewed_record_cannot_target_legal_axes(register):
+    base = {"contract_version": "1.0.0", "record_kind": "reviewed_record", "review_record_id": "RV-0001",
+            "subject": {"kind": "document", "id": "d1"}, "from_value": "a", "to_value": "b",
+            "reviewer": {"reviewer_id": "r-1", "name_or_role": "x y", "kind": "HUMAN"},
+            "reviewed_artefact": {"author_id": "a-1", "reviewed_commit": "0000000"}, "method": "method text here",
+            "decided_at": "2026-11-25T00:00:00Z", "record_location": {"path": "x/y.md", "commit": "0000000"}}
+    for axis in ("legal_applicability", "legal_approval"):
+        assert "SCHEMA" in codes(record_issues("reviewed_record", dict(base, axis=axis), register, "x"))
+
+
+def test_raised_value_outside_bundle_is_an_error(example, register):
+    """C01: record-level (CLI) validation cannot accept a raised value whose review it cannot resolve."""
+    doc = example("document")
+    doc["status_axes"]["evidence_fidelity"] = {"value": "DOCUMENTARY_CHECKED", "basis": "x y", "review_record_id": "RV-0001"}
+    assert "REVIEW_UNRESOLVED_OUTSIDE_BUNDLE" in codes(record_issues("document", doc, register, "x"))

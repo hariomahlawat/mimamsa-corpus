@@ -166,14 +166,18 @@ model bundle hashes ──────────────────┘   
                                                                copied by the site Admin into the fixed,
                                                                ACL'd import drop folder D:\Mimamsa\import\
                                                                      │
-                                                    release-import service (reads only the drop folder):
+                                                    release-import service (copies the bundle from the drop folder
+                                                    into a private ACL'd work folder, then validates that copy;
+                                                    SHA256SUMS read once, verified bytes = parsed bytes):
                                                       1 signature over SHA256SUMS against the trust list
                                                         (purpose release; dev keys refused); nothing parsed before
                                                       2 every checksum; no unlisted files, reparse points, unsafe or
                                                         case-colliding paths; stop on failure
-                                                      3 manifest: signer = key_id; contract major, min app version,
-                                                        release_sequence > active (else only via rollback path),
-                                                        AUTH-LEDGER pin; signed migrations only
+                                                      3 manifest: signer = key_id (key within valid_until per the
+                                                        site's trusted date); contract major, min app version;
+                                                        release_sequence > active (active sequence is mandatory;
+                                                        else only via rollback path); AUTH-LEDGER head exact match;
+                                                        signed migrations only
                                                       4 current restricted register (latest exclusion update) applied
                                                       5 schema + semantic rules on every record, cross-references
                                                       6 load into NEW generation; build indexes; smoke queries
@@ -197,7 +201,8 @@ Any failure in 1–6 rejects the whole bundle and changes nothing. The validator
 - **Working sessions are excluded** from backups by default; if a site includes them, the same ownership, retention and deletion rules apply.
 - **Restricted items are never in backups**: they are never stored (§8.4); if a register update newly restricts an item already held, its derivatives are purged and its original is isolated outside the backup set (§8.4).
 - **At-rest encryption:** BitLocker (XTS-AES-256) on the data volume holding vault, derivatives, pgdata, staging, sessions and local backups; backup media encrypted (BitLocker To Go or restic's built-in encryption). Recovery keys held by the site security officer and escrowed per site policy (not on the server). Encryption is verified in P6/P8.
-- **Restore drill** (acceptance): clean server → signed installer → restore DB and vault → hash-verify vault against the DB → **re-apply the latest exclusion state (§8.4)** → smoke queries return identical results to a recorded fixed query set, minus any item excluded since the backup → rollback to the previous generation works.
+- **Exclusion store is not restorable from backup:** accepted exclusion updates live in an append-only folder `D:\Mimamsa\exclusions\` (signed files, write-once ACL, outside the DB and release generations) and on the owner's offline media. Restore never overwrites it; restore refuses to proceed if it is missing or older than the restored database (`exclusions.state_for_restore`).
+- **Restore drill** (acceptance): clean server → signed installer → restore DB and vault → hash-verify vault against the DB → **re-apply the latest exclusion state from the exclusion store (§8.4)** → smoke queries return identical results to a recorded fixed query set, minus any item excluded since the backup → rollback to the previous generation works.
 
 ### 8.4 Exclusion channel (withdrawals and restricted register), independent of releases
 

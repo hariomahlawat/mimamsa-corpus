@@ -10,6 +10,7 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import dataclass
+from datetime import date
 
 from .schemas import validator
 
@@ -31,6 +32,7 @@ class TrustedKey:
     holder: str
     purposes: frozenset
     revoked: bool
+    valid_until: str | None = None
 
     @property
     def is_dev(self) -> bool:
@@ -42,9 +44,13 @@ class TrustList:
     sequence: int
     keys: tuple
 
-    def usable(self, purpose: str, mode: str = "production"):
+    def usable(self, purpose: str, mode: str = "production", today: date | None = None):
+        """today must come from the site's trusted time source; keys past valid_until are never used."""
+        today_s = (today or date.today()).isoformat()
         for k in self.keys:
             if k.revoked or purpose not in k.purposes:
+                continue
+            if k.valid_until and k.valid_until < today_s:
                 continue
             if mode == "production" and k.is_dev:
                 continue
@@ -62,15 +68,16 @@ def parse_trust_list(data: dict) -> TrustList:
             raise TrustError("trust list key_id does not match its public key")
         if k["key_id"].startswith("dev-") != (k["holder"] == "DEVELOPMENT"):
             raise TrustError("dev- key ids are exactly the DEVELOPMENT holder keys")
-        keys.append(TrustedKey(k["key_id"], raw, k["holder"], frozenset(k["purposes"]), k["revoked"]))
+        keys.append(TrustedKey(k["key_id"], raw, k["holder"], frozenset(k["purposes"]), k["revoked"], k.get("valid_until")))
     return TrustList(data["sequence"], tuple(keys))
 
 
-def verify_detached(data: bytes, signature: bytes, trust: TrustList, purpose: str, mode: str = "production"):
+def verify_detached(data: bytes, signature: bytes, trust: TrustList, purpose: str, mode: str = "production",
+                    today: date | None = None):
     """Return the TrustedKey that verifies, or None."""
     from cryptography.exceptions import InvalidSignature
     from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
-    for k in trust.usable(purpose, mode):
+    for k in trust.usable(purpose, mode, today):
         try:
             Ed25519PublicKey.from_public_bytes(k.raw).verify(signature, data)
             return k

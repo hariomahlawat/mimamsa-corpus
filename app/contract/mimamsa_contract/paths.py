@@ -21,6 +21,7 @@ MAX_RELATIVE = 200
 MAX_SEGMENT = 255
 _RESERVED = {"CON", "PRN", "AUX", "NUL", "CONIN$", "CONOUT$"} | {f"COM{i}" for i in "0123456789¹²³"} | {f"LPT{i}" for i in "0123456789¹²³"}
 _BAD_CHARS = re.compile(r'[<>"|?*\x00-\x1f]')
+_SHORT_NAME = re.compile(r'~[0-9]')
 
 
 def path_hazard(rel: str) -> str | None:
@@ -46,6 +47,8 @@ def path_hazard(rel: str) -> str | None:
             return "segment with trailing dot/space or leading space"
         if seg.split(".", 1)[0].upper().rstrip(" ") in _RESERVED:
             return "reserved Windows device name"
+        if _SHORT_NAME.search(seg):
+            return "possible 8.3 short-name alias ('~' followed by a digit)"
     return None
 
 

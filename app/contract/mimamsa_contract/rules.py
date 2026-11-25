@@ -16,10 +16,11 @@ NO_LEGAL_EFFECT_RELATIONS = frozenset({
 RAISED_NEEDS_REVIEW = {
     "source_authenticity": {"IDENTITY_CONFIRMED", "DISPUTED"},
     "evidence_fidelity": {"DOCUMENTARY_CHECKED", "FIDELITY_VERIFIED", "INCORRECT"},
-    "legal_applicability": {"UNRESOLVED", "PARTIAL_CHAIN", "EVIDENCED", "CONFLICTING", "NOT_APPLICABLE"},
     "dependency_freshness": {"CURRENT_FOR_CHECKED_SCOPE"},
 }
 APPROVED_TIERS = {"T1_LEGAL_ADVISER_REVIEWED", "T2_FORMAL_JAG_VALIDATED"}
+OFFICIAL_AUTHORITIES = {"ENACTED_OR_NOTIFIED_PRIMARY", "OFFICIAL_JUDICIAL_DECISION", "GOVERNMENT_COMPILATION", "GOVERNMENT_ISSUED_MANUAL"}
+OFFICIAL_CARRIERS = {"ISSUING_AUTHORITY", "GOVERNMENT_HOSTED_COPY"}
 SITE_ONLY_CHANNELS = {"RELEASE_ACTIVATION", "SITE_ADMIN"}
 
 
@@ -33,6 +34,9 @@ class BundleContext:
     doc_ids: set = field(default_factory=set)
     copy_shas: set = field(default_factory=set)
     candidate_ids: set = field(default_factory=set)
+    subject_commits: dict = field(default_factory=dict)  # subject id -> set of commits that produced it
+    subject_authors: dict = field(default_factory=dict)  # subject id -> author_id (when recorded)
+    release_commits: set = field(default_factory=set)   # manifest tools_commit and artefact commits
 
 
 def schema_issues(kind: str, record: dict, where: str) -> list[Issue]:
@@ -70,13 +74,57 @@ def _review_issues(axis: str, val: dict, subject_ids: set, where: str, ctx: Bund
     if not rid:
         return [Issue("RAISED_VALUE_NEEDS_REVIEW", f"{axis}={v} requires review_record_id of an independent review", where)]
     if ctx is None:
-        return [Issue("REVIEW_UNRESOLVED_OUTSIDE_BUNDLE", f"{axis}: {rid} can only be resolved inside a bundle", where, "warning")]
+        return [Issue("REVIEW_UNRESOLVED_OUTSIDE_BUNDLE", f"{axis}: {rid} cannot be resolved outside a bundle; raised values are only accepted with their review records", where)]
     rv = ctx.reviews.get(rid)
     if rv is None:
         return [Issue("REVIEW_UNRESOLVED", f"{axis}: review record not in bundle", where)]
     if rv.get("axis") != axis or rv.get("to_value") != v or (rv.get("subject") or {}).get("id") not in subject_ids:
         return [Issue("REVIEW_MISMATCH", f"{axis}: review record does not cover this subject, axis and value", where)]
+    if axis == "source_authenticity" and v == "IDENTITY_CONFIRMED" and (rv.get("reviewer") or {}).get("kind") != "HUMAN":
+        return [Issue("AI_REVIEW_CANNOT_CONFIRM_IDENTITY", "source identity can only be confirmed with a human review and verifiable evidence", where)]
     return []
+
+
+def _authenticity_evidence_issues(axes: dict, where: str, ledger_version: int | None) -> list[Issue]:
+    sa = axes.get("source_authenticity") or {}
+    if sa.get("value") != "IDENTITY_CONFIRMED":
+        return []
+    ev = sa.get("authentication_evidence")
+    pol = sa.get("policy_v1") or {}
+    if not ev:
+        return [Issue("AUTHENTICITY_EVIDENCE_REQUIRED", "IDENTITY_CONFIRMED needs authentication_evidence (custodian certificate, official-source record or AUTH-LEDGER entry)", where)]
+    kind = ev.get("kind")
+    if kind == "AUTH_LEDGER_ENTRY" and (ledger_version is None or ledger_version == 0):
+        return [Issue("AUTHENTICITY_EVIDENCE_INVALID", "no AUTH-LEDGER entry can exist while the ledger is at version 0", where)]
+    if kind == "CUSTODIAN_CERTIFICATE" and (pol.get("copy_fidelity") != "CUSTODIAN_AUTHENTICATED" or not ev.get("artefact_sha256")):
+        return [Issue("AUTHENTICITY_EVIDENCE_INVALID", "custodian certificate needs copy_fidelity CUSTODIAN_AUTHENTICATED and the certificate artefact hash", where)]
+    if kind == "OFFICIAL_SOURCE_RECORD" and (
+            pol.get("carrier_provenance") not in OFFICIAL_CARRIERS or pol.get("document_authority") not in OFFICIAL_AUTHORITIES
+            or pol.get("copy_fidelity") not in ("PAGE_IMAGE_CHECKED", "CUSTODIAN_AUTHENTICATED") or not ev.get("official_source_url")):
+        return [Issue("AUTHENTICITY_EVIDENCE_INVALID", "official-source evidence needs an official carrier and authority, page-image checked fidelity and the source URL", where)]
+    return []
+
+
+def _legal_applicability_issues(axes: dict, subject_ids: set, where: str, ctx, ledger_version) -> list[Issue]:
+    la = axes.get("legal_applicability") or {}
+    v = la.get("value")
+    if not v or v == "NOT_ESTABLISHED":
+        return []
+    out = []
+    if ledger_version is None or ledger_version == 0:
+        out.append(Issue("LEDGER_V0_NO_APPLICABILITY", f"legal_applicability {v} is a legal determination; not allowed while AUTH-LEDGER is at version 0", where))
+    if not la.get("approval_record_id"):
+        out.append(Issue("LEGAL_AXIS_NEEDS_APPROVAL", "legal_applicability above NOT_ESTABLISHED needs an approval record under a Legal Reviewer appointment", where))
+        return out
+    if ctx is None:
+        out.append(Issue("APPROVAL_UNRESOLVED", "applicability approval cannot be resolved outside a bundle", where))
+        return out
+    ap = ctx.approvals.get(la["approval_record_id"])
+    if ap is None or ap.get("tier") not in APPROVED_TIERS or ap.get("status") != "ACTIVE" or (ap.get("subject") or {}).get("id") not in subject_ids:
+        out.append(Issue("APPROVAL_UNRESOLVED", "applicability approval record missing, not active, wrong tier or wrong subject", where))
+    elif ap.get("appointment_id") not in ctx.appointments or ctx.appointments[ap["appointment_id"]].get("revoked"):
+        out.append(Issue("APPOINTMENT_MISSING", "applicability approval lacks a valid appointment", where))
+    return out
 
 
 def _approval_issues(axes: dict, subject_ids: set, where: str, ctx: BundleContext | None, ledger_version: int | None) -> list[Issue]:
@@ -146,6 +194,8 @@ def _axes_issues(axes: dict, subject_ids: set, where: str, ctx, ledger_version) 
         if axis in axes:
             out += _review_issues(axis, axes[axis], subject_ids, where, ctx)
     out += _contradictions(axes, where)
+    out += _authenticity_evidence_issues(axes, where, ledger_version)
+    out += _legal_applicability_issues(axes, subject_ids, where, ctx, ledger_version)
     out += _approval_issues(axes, subject_ids, where, ctx, ledger_version)
     return out
 
@@ -247,12 +297,34 @@ def candidate_rules(rec: dict, reg: RestrictedRegister, where: str, ctx: BundleC
 
 
 def reviewed_record_rules(rec, reg, where, ctx=None):
+    """Structural independence: reviewer differs from author, subject exists, reviewed commit is the producing commit."""
     out = restricted_scan(reg, rec, where)
     out += _path_issues(where, (rec.get("record_location") or {}).get("path"))
-    if ctx is not None:
-        sid = (rec.get("subject") or {}).get("id")
-        if sid not in ctx.doc_ids | ctx.copy_shas | ctx.candidate_ids:
-            out.append(Issue("DANGLING_REVIEW", "review subject not in bundle", where))
+    reviewer = (rec.get("reviewer") or {}).get("reviewer_id", "")
+    art = rec.get("reviewed_artefact") or {}
+    author = art.get("author_id", "")
+    if reviewer and author and reviewer.casefold() == author.casefold():
+        out.append(Issue("REVIEW_NOT_INDEPENDENT", "reviewer_id equals the reviewed artefact's author_id", where))
+    if rec.get("axis") == "source_authenticity" and rec.get("to_value") == "IDENTITY_CONFIRMED" and (rec.get("reviewer") or {}).get("kind") != "HUMAN":
+        out.append(Issue("AI_REVIEW_CANNOT_CONFIRM_IDENTITY", "an AI review cannot confirm source identity", where))
+    if ctx is None:
+        out.append(Issue("REVIEW_UNRESOLVED_OUTSIDE_BUNDLE", "a review can only be checked against its subject inside a bundle", where, "warning"))
+        return out
+    sid = (rec.get("subject") or {}).get("id")
+    if sid not in ctx.doc_ids | ctx.copy_shas | ctx.candidate_ids:
+        out.append(Issue("DANGLING_REVIEW", "review subject not in bundle", where))
+        return out
+    recorded_author = ctx.subject_authors.get(sid)
+    if recorded_author and recorded_author.casefold() != author.casefold():
+        out.append(Issue("REVIEW_AUTHOR_MISMATCH", "author_id differs from the author recorded on the subject", where))
+    if recorded_author and reviewer.casefold() == recorded_author.casefold():
+        out.append(Issue("REVIEW_NOT_INDEPENDENT", "reviewer_id equals the subject's recorded author", where))
+    commits = set(ctx.subject_commits.get(sid, set()))
+    if sid not in ctx.candidate_ids:  # documents/copies: the producing pipeline is the release tools or artefact commit
+        commits |= ctx.release_commits
+    rc = art.get("reviewed_commit", "")
+    if not any(c.startswith(rc) or rc.startswith(c) for c in commits if c and rc and len(rc) >= 7 and len(c) >= 7):
+        out.append(Issue("REVIEW_COMMIT_MISMATCH", "reviewed_commit is not a commit that produced this subject or this release", where))
     return out
 
 

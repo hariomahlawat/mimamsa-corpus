@@ -49,6 +49,8 @@ def codes(report):
 
 
 def prod(root, trust, register, **kw):
+    if "current_release_sequence" not in kw and not kw.get("rollback"):
+        kw["current_release_sequence"] = 0  # first installation
     return validate_bundle(root, trust_list=trust, register=register, **kw)
 
 
@@ -66,7 +68,7 @@ def test_development_mode_with_bare_key(make_bundle, owner_keys, register):
 
 # ---- F05 signature trust
 def test_production_requires_trust_list(make_bundle, owner_keys, register):
-    rep = validate_bundle(make_bundle(), trusted_public_key=owner_keys[1], register=register)
+    rep = validate_bundle(make_bundle(), trusted_public_key=owner_keys[1], register=register, current_release_sequence=0)
     assert "TRUST_LIST_REQUIRED" in codes(rep)
 
 
@@ -84,7 +86,7 @@ def test_production_rejects_development_holder_key(make_bundle, owner_keys, regi
 def test_unsigned_rejected_and_dev_flag_only_in_development(make_bundle, trust, register):
     root = make_bundle(sign=False)
     assert "SIGNATURE_MISSING" in codes(prod(root, trust, register))
-    assert "MODE_INVALID" in codes(validate_bundle(root, trust_list=trust, register=register, allow_unsigned_dev=True))
+    assert "MODE_INVALID" in codes(validate_bundle(root, trust_list=trust, register=register, allow_unsigned_dev=True, current_release_sequence=0))
     assert validate_bundle(root, register=register, mode="development", allow_unsigned_dev=True).ok
 
 
@@ -221,10 +223,11 @@ def test_downgrade_or_replay_rejected_unless_rollback(make_bundle, trust, regist
 def test_self_asserted_ledger_version_rejected_without_trusted_head(make_bundle, trust, register):
     def edit(m):
         m["auth_ledger_version"] = 1
-        m["auth_ledger_head"] = "443c4bdf"
+        m["auth_ledger_head"] = LEDGER_HEAD
     root = make_bundle(manifest_edit=edit)
     assert "LEDGER_HEAD_UNVERIFIED" in codes(prod(root, trust, register))
-    assert "LEDGER_HEAD_UNVERIFIED" in codes(prod(root, trust, register, trusted_ledger_head="deadbeef00"))
+    assert "LEDGER_HEAD_UNVERIFIED" in codes(prod(root, trust, register, trusted_ledger_head="d" * 40))
+    assert "LEDGER_HEAD_UNVERIFIED" in codes(prod(root, trust, register, trusted_ledger_head=LEDGER_HEAD[:12]))  # no prefix matching
 
 
 def test_banner_required_while_ledger_v0(make_bundle, trust, register):
@@ -279,31 +282,34 @@ def _ap(**kw):
     return a
 
 
+LEDGER_HEAD = "443c4bdf" + "0" * 32  # synthetic full-length head for tests
+
+
 def _ledger1(m):
     m["auth_ledger_version"] = 1
-    m["auth_ledger_head"] = "443c4bdf"
+    m["auth_ledger_head"] = LEDGER_HEAD
 
 
 def test_approval_without_appointment_rejected_even_with_trusted_ledger(make_bundle, trust, register, example):
     root = make_bundle(documents=[_approval_doc(example)], approvals=[_ap()], manifest_edit=_ledger1)
-    c = codes(prod(root, trust, register, trusted_ledger_head="443c4bdf"))
+    c = codes(prod(root, trust, register, trusted_ledger_head=LEDGER_HEAD))
     assert "APPOINTMENT_MISSING" in c
 
 
 def test_approval_without_record_rejected(make_bundle, trust, register, example):
     root = make_bundle(documents=[_approval_doc(example)], manifest_edit=_ledger1)
-    assert "APPROVAL_UNRESOLVED" in codes(prod(root, trust, register, trusted_ledger_head="443c4bdf"))
+    assert "APPROVAL_UNRESOLVED" in codes(prod(root, trust, register, trusted_ledger_head=LEDGER_HEAD))
 
 
 def test_revoked_appointment_rejected(make_bundle, trust, register, example):
     root = make_bundle(documents=[_approval_doc(example)], approvals=[_ap()], appointments=[_appt(revoked=True)], manifest_edit=_ledger1)
-    assert "APPOINTMENT_REVOKED" in codes(prod(root, trust, register, trusted_ledger_head="443c4bdf"))
+    assert "APPOINTMENT_REVOKED" in codes(prod(root, trust, register, trusted_ledger_head=LEDGER_HEAD))
 
 
 def test_approval_contradicting_unverified_evidence_rejected(make_bundle, trust, register, example):
     """Even with a valid appointment and artefact, approval on AUTOMATED_CANDIDATE evidence is contradictory."""
     root = make_bundle(documents=[_approval_doc(example)], approvals=[_ap()], appointments=[_appt()], manifest_edit=_ledger1)
-    c = codes(prod(root, trust, register, trusted_ledger_head="443c4bdf"))
+    c = codes(prod(root, trust, register, trusted_ledger_head=LEDGER_HEAD))
     assert "AXIS_CONTRADICTION" in c and "APPOINTMENT_MISSING" not in c
 
 
@@ -311,7 +317,8 @@ def _review(**kw):
     r = {"contract_version": "1.0.0", "record_kind": "reviewed_record", "review_record_id": "RV-0001",
          "subject": {"kind": "document", "id": "example-synthetic-judgment-0001"}, "axis": "evidence_fidelity",
          "from_value": "AUTOMATED_CANDIDATE_NOT_VERIFIED", "to_value": "DOCUMENTARY_CHECKED",
-         "reviewer": {"name_or_role": "independent reviewer", "kind": "AI_AGENT_INDEPENDENT"}, "independent_of_author": True,
+         "reviewer": {"reviewer_id": "reviewer-b", "name_or_role": "independent reviewer", "kind": "AI_AGENT"},
+         "reviewed_artefact": {"author_id": "author-a", "reviewed_commit": "0000000"},
          "method": "compared metadata fields against page 1 image", "anchors": [], "decided_at": "2026-11-25T00:00:00Z",
          "record_location": {"path": "legal_knowledge/audit_work/EXAMPLE/review.md", "commit": "0000000"}}
     r.update(kw)
@@ -339,9 +346,106 @@ def test_raised_value_with_review_of_other_axis_rejected(make_bundle, trust, reg
     assert "REVIEW_MISMATCH" in codes(rep)
 
 
-def test_review_must_be_independent(make_bundle, trust, register, example):
-    rep = prod(make_bundle(documents=[_raised_doc(example)], reviews=[_review(independent_of_author=False)]), trust, register)
+def test_review_independence_is_structural_not_declared(make_bundle, trust, register, example):
+    """F02: reviewer_id equal to author_id is rejected; a self-declared independence flag no longer exists."""
+    rep = prod(make_bundle(documents=[_raised_doc(example)],
+                           reviews=[_review(reviewer={"reviewer_id": "Author-A", "name_or_role": "x y", "kind": "AI_AGENT"})]), trust, register)
+    assert "REVIEW_NOT_INDEPENDENT" in codes(rep)
+    rep = prod(make_bundle("b2", documents=[_raised_doc(example)], reviews=[_review(independent_of_author=True)]), trust, register)
     assert "SCHEMA" in codes(rep)
+
+
+def test_review_must_cite_the_reviewed_commit(make_bundle, trust, register, example):
+    rep = prod(make_bundle(documents=[_raised_doc(example)],
+                           reviews=[_review(reviewed_artefact={"author_id": "author-a", "reviewed_commit": "abcdef1"})]), trust, register)
+    assert "REVIEW_COMMIT_MISMATCH" in codes(rep)
+
+
+def test_review_must_reference_existing_subject(make_bundle, trust, register, example):
+    rep = prod(make_bundle(documents=[_raised_doc(example)], reviews=[_review(subject={"kind": "document", "id": "example-absent"})]), trust, register)
+    assert "DANGLING_REVIEW" in codes(rep)
+
+
+def test_candidate_review_by_its_own_author_rejected(make_bundle, trust, register, example):
+    c = example("candidate_graph_edge")
+    c["extractor"]["author_id"] = "extractor-agent-1"
+    c["status"] = "DOCUMENTARY_CHECKED"
+    c["review_ref"] = "RV-0002"
+    rv = _review(review_record_id="RV-0002", subject={"kind": "candidate", "id": c["candidate_id"]},
+                 reviewer={"reviewer_id": "EXTRACTOR-AGENT-1", "name_or_role": "same agent", "kind": "AI_AGENT"},
+                 reviewed_artefact={"author_id": "someone-else", "reviewed_commit": "0000000"})
+    c2 = codes(prod(make_bundle(candidates=[c], reviews=[rv]), trust, register))
+    assert "REVIEW_NOT_INDEPENDENT" in c2 and "REVIEW_AUTHOR_MISMATCH" in c2
+
+
+def test_candidate_review_must_cite_extractor_commit_not_release_commit(make_bundle, trust, register, example):
+    c = example("candidate_graph_edge")
+    c["extractor"]["artefact_commit"] = "1111111"
+    c["status"] = "DOCUMENTARY_CHECKED"
+    c["review_ref"] = "RV-0003"
+    rv = _review(review_record_id="RV-0003", subject={"kind": "candidate", "id": c["candidate_id"]},
+                 reviewed_artefact={"author_id": "author-a", "reviewed_commit": "0000000"})  # tools_commit, not extractor
+    assert "REVIEW_COMMIT_MISMATCH" in codes(prod(make_bundle(candidates=[c], reviews=[rv]), trust, register))
+
+
+def test_ai_review_cannot_raise_legal_applicability_at_ledger_v0(make_bundle, trust, register, example):
+    """F02 reviewer probe: AI review record raising legal_applicability to EVIDENCED is rejected (schema and rules)."""
+    d = example("document")
+    d["status_axes"]["legal_applicability"] = {"value": "EVIDENCED", "basis": "AI review", "approval_record_id": None}
+    rv = _review(axis="legal_applicability", from_value="NOT_ESTABLISHED", to_value="EVIDENCED")
+    c = codes(prod(make_bundle(documents=[d], reviews=[rv]), trust, register))
+    assert {"LEDGER_V0_NO_APPLICABILITY", "LEGAL_AXIS_NEEDS_APPROVAL", "SCHEMA"} <= c
+
+
+def test_legal_applicability_needs_approval_even_when_ledger_supports_it(make_bundle, trust, register, example):
+    d = example("document")
+    d["status_axes"]["legal_applicability"] = {"value": "EVIDENCED", "basis": "claimed"}
+    c = codes(prod(make_bundle(documents=[d], manifest_edit=_ledger1), trust, register, trusted_ledger_head=LEDGER_HEAD))
+    assert "LEGAL_AXIS_NEEDS_APPROVAL" in c and "LEDGER_V0_NO_APPLICABILITY" not in c
+
+
+def _identity_doc(example, evidence=None, fidelity="PAGE_IMAGE_CHECKED"):
+    d = example("document")
+    sa = d["status_axes"]["source_authenticity"]
+    sa.update(value="IDENTITY_CONFIRMED", review_record_id="RV-0004", authentication_evidence=evidence)
+    sa["policy_v1"].update(document_authority="OFFICIAL_JUDICIAL_DECISION", copy_fidelity=fidelity)
+    return d
+
+
+def _identity_review(kind):
+    return _review(review_record_id="RV-0004", axis="source_authenticity", from_value="UNKNOWN", to_value="IDENTITY_CONFIRMED",
+                   reviewer={"reviewer_id": "reviewer-b", "name_or_role": "x y", "kind": kind})
+
+
+OFFICIAL = {"kind": "OFFICIAL_SOURCE_RECORD", "ref": "official listing record", "artefact_sha256": None,
+            "official_source_url": "https://example.invalid/official"}
+
+
+def test_ai_review_cannot_confirm_identity(make_bundle, trust, register, example):
+    c = codes(prod(make_bundle(documents=[_identity_doc(example, OFFICIAL)], reviews=[_identity_review("AI_AGENT")]), trust, register))
+    assert "AI_REVIEW_CANNOT_CONFIRM_IDENTITY" in c
+
+
+def test_identity_confirmed_needs_verifiable_evidence(make_bundle, trust, register, example):
+    c = codes(prod(make_bundle(documents=[_identity_doc(example, None)], reviews=[_identity_review("HUMAN")]), trust, register))
+    assert "AUTHENTICITY_EVIDENCE_REQUIRED" in c
+
+
+def test_identity_via_auth_ledger_impossible_at_v0(make_bundle, trust, register, example):
+    ev = {"kind": "AUTH_LEDGER_ENTRY", "ref": "BIND-0001", "artefact_sha256": None, "official_source_url": None}
+    c = codes(prod(make_bundle(documents=[_identity_doc(example, ev)], reviews=[_identity_review("HUMAN")]), trust, register))
+    assert "AUTHENTICITY_EVIDENCE_INVALID" in c
+
+
+def test_custodian_evidence_needs_custodian_fidelity_and_hash(make_bundle, trust, register, example):
+    ev = {"kind": "CUSTODIAN_CERTIFICATE", "ref": "certificate", "artefact_sha256": None, "official_source_url": None}
+    c = codes(prod(make_bundle(documents=[_identity_doc(example, ev)], reviews=[_identity_review("HUMAN")]), trust, register))
+    assert "AUTHENTICITY_EVIDENCE_INVALID" in c
+
+
+def test_identity_confirmed_positive_with_human_review_and_official_record(make_bundle, trust, register, example):
+    rep = prod(make_bundle(documents=[_identity_doc(example, OFFICIAL)], reviews=[_identity_review("HUMAN")]), trust, register)
+    assert rep.ok, [str(i) for i in rep.errors]
 
 
 def test_site_publication_act_cannot_be_carried_in_bundle(make_bundle, trust, register, example):
@@ -414,7 +518,7 @@ def test_bundle_not_applying_every_register_entry_rejected(make_bundle, trust, r
 def test_bundle_validation_fails_closed_without_register(make_bundle, trust, tmp_path, monkeypatch):
     root = make_bundle()
     monkeypatch.setenv("MIMAMSA_RESTRICTED_MATERIAL_CONFIG", str(tmp_path / "missing.json"))
-    rep = validate_bundle(root, trust_list=trust)
+    rep = validate_bundle(root, trust_list=trust, current_release_sequence=0)
     assert "RESTRICTED_CONFIG_MISSING" in codes(rep) and not rep.ok
 
 
@@ -422,7 +526,8 @@ def test_cli_bundle_and_restricted_check(make_bundle, owner_keys, register_path,
     root = make_bundle()
     tl = tmp_path / "trust.json"
     tl.write_text(json.dumps(trust_list_for([(owner_keys[1], "OWNER", ["release"])])))
-    assert cli_main(["--register", str(register_path), "bundle", str(root), "--trust-list", str(tl)]) == 0
+    assert cli_main(["--register", str(register_path), "bundle", str(root), "--trust-list", str(tl), "--current-sequence", "0"]) == 0
+    assert cli_main(["--register", str(register_path), "bundle", str(root), "--trust-list", str(tl)]) == 1  # sequence mandatory
     keyfile = tmp_path / "k.hex"
     keyfile.write_text(owner_keys[1].hex())
     assert cli_main(["--register", str(register_path), "bundle", str(root), "--trusted-key", str(keyfile)]) == 1  # production needs a trust list
@@ -431,3 +536,44 @@ def test_cli_bundle_and_restricted_check(make_bundle, owner_keys, register_path,
     assert cli_main(["--register", str(register_path), "restricted-check", "--doc-id", "example-free"]) == 0
     out = capsys.readouterr().out
     assert it["source_sha256"] not in out
+
+
+# ---- confirmation P3s
+@pytest.mark.parametrize("bad", ["data/DOCUME~1.JSO", "data/progra~2/x.txt", "data/RELEAS~1"])
+def test_windows_short_name_alias_rejected(make_bundle, trust, register, bad):
+    """C02: 8.3 short-name aliases."""
+    assert "PATH_HAZARD" in codes(prod(make_bundle(extra_files={bad: (b"x", "other")}), trust, register))
+
+
+def test_release_sequence_mandatory_in_production(make_bundle, trust, register):
+    """C04: the downgrade check cannot be skipped by omitting the active sequence."""
+    rep = validate_bundle(make_bundle(), trust_list=trust, register=register)
+    assert "RELEASE_SEQUENCE_REQUIRED" in codes(rep) and rep.checked_records == 0
+
+
+def test_expired_release_key_rejected(make_bundle, owner_keys, register):
+    """C03: keys past valid_until are not used (date from the site's trusted time source)."""
+    from datetime import date
+    tl = trust_list_for([(owner_keys[1], "OWNER", ["release"])])
+    tl["keys"][0]["valid_until"] = "2026-01-01"
+    t = parse_trust_list(tl)
+    assert "SIGNATURE_INVALID" in codes(prod(make_bundle(), t, register, today=date(2026, 11, 25)))
+    assert prod(make_bundle("b2"), t, register, today=date(2025, 12, 31)).ok
+
+
+def test_sums_read_once(make_bundle, trust, register, monkeypatch):
+    """C05: SHA256SUMS is read exactly once; the verified bytes are the parsed bytes."""
+    from pathlib import Path
+    root = make_bundle()
+    reads = []
+    real = Path.read_bytes
+
+    def counting(self):
+        if self.name == "SHA256SUMS":
+            reads.append(1)
+        return real(self)
+    monkeypatch.setattr(Path, "read_bytes", counting)
+    monkeypatch.setattr(Path, "read_text", lambda self, *a, **k: (_ for _ in ()).throw(AssertionError("SUMS re-read as text"))
+                        if self.name == "SHA256SUMS" else real(self).decode(k.get("encoding") or "utf-8"))
+    assert prod(root, trust, register).ok
+    assert len(reads) == 1

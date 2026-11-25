@@ -70,3 +70,47 @@ def items_to_suppress(items, state: ExclusionState) -> list[tuple[str, str]]:
         elif did in state.withdrawn_doc_ids or sha in state.withdrawn_shas:
             out.append((did, "WITHDRAWN"))
     return out
+
+
+class ExclusionStore:
+    """Append-only on-disk store of accepted, signed exclusion updates, kept OUTSIDE the database and the release
+    generations (site path D:\\Mimamsa\\exclusions\\, excluded from restore). A database or release restore cannot
+    remove or roll it back; restore requires it (load_latest) and re-applies its latest state.
+    Files: <seq:08d>.json + <seq:08d>.sig, written once; lower or equal sequences and overwrites are refused."""
+
+    def __init__(self, directory):
+        from pathlib import Path
+        self.dir = Path(directory)
+
+    def _seqs(self):
+        return sorted(int(p.stem) for p in self.dir.glob("*.json") if p.stem.isdigit())
+
+    def append(self, update_bytes: bytes, signature: bytes, trust: TrustList, mode: str = "production") -> ExclusionState:
+        self.dir.mkdir(parents=True, exist_ok=True)
+        seqs = self._seqs()
+        state = accept_exclusion_update(update_bytes, signature, trust, seqs[-1] if seqs else 0, mode)
+        j, s = self.dir / f"{state.sequence:08d}.json", self.dir / f"{state.sequence:08d}.sig"
+        if j.exists() or s.exists():
+            raise ExclusionError("exclusion update already stored; the store is append-only")
+        with open(j, "xb") as fh:
+            fh.write(update_bytes)
+        with open(s, "xb") as fh:
+            fh.write(signature)
+        return state
+
+    def load_latest(self, trust: TrustList, mode: str = "production") -> ExclusionState:
+        """Re-verify the newest stored update. Missing store => ExclusionError (restore must not proceed)."""
+        seqs = self._seqs()
+        if not seqs:
+            raise ExclusionError("exclusion store empty or missing: restore/activation refused until it is present")
+        n = seqs[-1]
+        return accept_exclusion_update((self.dir / f"{n:08d}.json").read_bytes(), (self.dir / f"{n:08d}.sig").read_bytes(),
+                                       trust, n - 1, mode)
+
+
+def state_for_restore(store: ExclusionStore, trust: TrustList, restored_db_sequence: int, mode: str = "production") -> ExclusionState:
+    """The exclusion state applied after a restore is always the store's latest, never the restored database's copy."""
+    latest = store.load_latest(trust, mode)
+    if latest.sequence < restored_db_sequence:
+        raise ExclusionError("exclusion store is older than the restored database: store tampered or lost; refuse")
+    return latest

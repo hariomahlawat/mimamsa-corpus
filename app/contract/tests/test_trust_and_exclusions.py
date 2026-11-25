@@ -134,3 +134,53 @@ def test_rollback_cannot_resurrect_withdrawn_or_restricted(owner, trust, registe
     st = accept_exclusion_update(b, sig, trust, current_sequence=1)
     out = dict(items_to_suppress([withdrawn, restricted, keep], st))
     assert out == {"example-withdrawn-later": "WITHDRAWN", it["doc_id"]: "RESTRICTED"}
+
+
+# ---- C06: exclusion state kept outside the restorable database/release
+from mimamsa_contract.exclusions import ExclusionStore, state_for_restore  # noqa: E402
+
+
+def test_store_is_append_only_and_monotonic(owner, trust, register_path, tmp_path):
+    store = ExclusionStore(tmp_path / "exclusions")
+    b2, s2 = _signed(owner[0], _update(register_path, sequence=2))
+    store.append(b2, s2, trust)
+    b1, s1 = _signed(owner[0], _update(register_path, sequence=1))
+    with pytest.raises(ExclusionError):
+        store.append(b1, s1, trust)          # older update refused
+    with pytest.raises(ExclusionError):
+        store.append(b2, s2, trust)          # replay refused
+    assert store.load_latest(trust).sequence == 2
+
+
+def test_restore_uses_store_not_restored_database(owner, trust, register_path, tmp_path, example):
+    store = ExclusionStore(tmp_path / "exclusions")
+    b, s = _signed(owner[0], _update(register_path, sequence=5,
+                                      withdrawals=[{"doc_id": "example-withdrawn-later", "reason": "withdrawn after backup"}]))
+    store.append(b, s, trust)
+    st = state_for_restore(store, trust, restored_db_sequence=3)   # backup predates the withdrawal
+    d = example("document")
+    d["doc_id"] = "example-withdrawn-later"
+    assert dict(items_to_suppress([d], st)) == {"example-withdrawn-later": "WITHDRAWN"}
+
+
+def test_restore_refused_without_store(trust, tmp_path):
+    with pytest.raises(ExclusionError):
+        state_for_restore(ExclusionStore(tmp_path / "missing"), trust, restored_db_sequence=1)
+
+
+def test_restore_refused_if_store_older_than_database(owner, trust, register_path, tmp_path):
+    store = ExclusionStore(tmp_path / "exclusions")
+    b, s = _signed(owner[0], _update(register_path, sequence=2))
+    store.append(b, s, trust)
+    with pytest.raises(ExclusionError):
+        state_for_restore(store, trust, restored_db_sequence=4)
+
+
+def test_tampered_stored_update_rejected_on_load(owner, trust, register_path, tmp_path):
+    store = ExclusionStore(tmp_path / "exclusions")
+    b, s = _signed(owner[0], _update(register_path, sequence=2))
+    store.append(b, s, trust)
+    p = tmp_path / "exclusions" / "00000002.json"
+    p.write_bytes(p.read_bytes().replace(b'"sequence": 2', b'"sequence": 2 '))
+    with pytest.raises(ExclusionError):
+        store.load_latest(trust)

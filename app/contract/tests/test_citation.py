@@ -14,11 +14,18 @@ def _doc(example):
 
 def test_legal_citation_format(example):
     s = format_legal_citation(_doc(example), page=12, paragraph_label="7")
-    assert s == "A. Example v. Union of Example, 2099 EXAMPLE 1 (Synthetic Tribunal, 15 January 2099), para 7"
+    assert s == "A. Example v. Union of Example, 2099 EXAMPLE 1 (Synthetic Tribunal, 15 January 2099), para 7 (metadata not verified)"
+
+
+def test_no_marker_when_metadata_checked(example):
+    """C08: the candidate marker is dropped only when evidence fidelity is checked."""
+    d = _doc(example)
+    d["status_axes"]["evidence_fidelity"] = {"value": "DOCUMENTARY_CHECKED", "basis": "x y", "review_record_id": "RV-0001"}
+    assert not format_legal_citation(d, page=1).endswith("(metadata not verified)")
 
 
 def test_page_pinpoint_when_no_paragraph(example):
-    assert format_legal_citation(_doc(example), page=12).endswith(", p. 12")
+    assert format_legal_citation(_doc(example), page=12).endswith(", p. 12 (metadata not verified)")
 
 
 def test_no_internal_ids_in_citation(example):
@@ -38,7 +45,7 @@ def test_missing_parts_omitted_not_guessed(example):
     d["title"] = None
     d["judicial"]["case_numbers"] = []
     d["number"] = None
-    assert format_legal_citation(d, page=2) == "[title not printed], p. 2"
+    assert format_legal_citation(d, page=2) == "[title not printed], p. 2 (metadata not verified)"
 
 
 def test_internal_reference_is_separate(example):

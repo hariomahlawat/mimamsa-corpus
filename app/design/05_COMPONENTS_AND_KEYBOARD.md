@@ -125,6 +125,12 @@ The keymap avoids every combination that Edge or Chrome on Windows reserves or m
 
 Single-key shortcuts are active only when focus is outside editable fields and can be turned off in user settings (WCAG 2.1.4). Pane cycling with `.`/`,` lands on dividers too.
 
+**Screen readers (NVDA, JAWS, Narrator).** In browse/virtual mode these readers consume single letters for quick navigation (B, E, N, K, C, T, M, X, O, P, G and others), so app single-key shortcuts do not reach the page there. Behaviour:
+- The research workspace regions are ARIA landmarks with `role="application"` **only** on the results grid and PDF viewer, where focus mode is expected; elsewhere browse mode keeps its quick keys.
+- Every single-key action is also available through visible buttons, the command palette (`:` in focus mode) and the context menu (Shift+F10 is browser-reserved and left native; the app menu button is reachable by Tab).
+- A user setting "Screen-reader mode" disables all single-key shortcuts and announces this; it is suggested at first sign-in when a screen reader is detected through user choice (no detection heuristics).
+- P9 tests the ten walkthrough tasks with NVDA and JAWS on Edge and Chrome.
+
 ### 2.4 Pane resizing
 
 Focus a divider (F6 lands on dividers too); ← / → resize by 16 px, Shift+← / → by 64 px, Home / End collapse / expand, Enter resets.

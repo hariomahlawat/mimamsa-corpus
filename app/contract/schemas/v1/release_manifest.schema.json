@@ -366,12 +366,12 @@
       "minimum": 1
     },
     "auth_ledger_head": {
-      "description": "AUTH-LEDGER HEAD commit at build. Required (non-null) when auth_ledger_version > 0 and compared with the site's trusted ledger state.",
+      "description": "Full AUTH-LEDGER HEAD commit (40 or 64 hex) at build. Required when auth_ledger_version > 0; compared for exact equality with the site's trusted ledger head.",
       "type": [
         "string",
         "null"
       ],
-      "pattern": "^[0-9a-f]{7,64}$"
+      "pattern": "^([0-9a-f]{40}|[0-9a-f]{64})$"
     }
   }
 }

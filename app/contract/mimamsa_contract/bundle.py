@@ -87,10 +87,10 @@ def parse_sums(text: str) -> tuple[dict[str, str], list[str]]:
     return entries, bad
 
 
-def _signature_step(root: Path, report: ValidationReport, *, trust_list: TrustList | None, trusted_public_key: bytes | None,
-                    mode: str, allow_unsigned_dev: bool) -> TrustedKey | None | bool:
-    """Returns the verifying key, True for an accepted unsigned dev bundle, or None on failure (already reported)."""
-    sums_bytes = (root / SUMS).read_bytes()
+def _signature_step(root: Path, sums_bytes: bytes, report: ValidationReport, *, trust_list: TrustList | None,
+                    trusted_public_key: bytes | None, mode: str, allow_unsigned_dev: bool, today=None) -> TrustedKey | None | bool:
+    """Returns the verifying key, True for an accepted unsigned dev bundle, or None on failure (already reported).
+    sums_bytes is the single read of SHA256SUMS; the same bytes are later parsed (no time-of-check/time-of-use gap)."""
     sig_path = root / SIG
     if mode == "production":
         if trust_list is None:
@@ -112,10 +112,11 @@ def _signature_step(root: Path, report: ValidationReport, *, trust_list: TrustLi
     if not sig_path.is_file():
         report.add(Issue("SIGNATURE_MISSING", "SHA256SUMS.sig absent", SIG))
         return None
-    signer = verify_detached(sums_bytes, sig_path.read_bytes(), trust, "release", mode)
+    sig = sig_path.read_bytes()
+    signer = verify_detached(sums_bytes, sig, trust, "release", mode, today)
     if signer is None:
         # Distinguish a dev key presented in production, for a clear message.
-        if mode == "production" and verify_detached(sums_bytes, sig_path.read_bytes(), trust, "release", "development"):
+        if mode == "production" and verify_detached(sums_bytes, sig, trust, "release", "development", today):
             report.add(Issue("SIGNATURE_DEV_KEY_IN_PRODUCTION", "bundle signed with a development key; refused in production", SIG))
         else:
             report.add(Issue("SIGNATURE_INVALID", "signature does not verify over SHA256SUMS with any trusted release key", SIG))
@@ -128,7 +129,10 @@ def validate_bundle(root: Path | str, *, trust_list: TrustList | None = None, tr
                     mode: str = "production", allow_unsigned_dev: bool = False,
                     register: RestrictedRegister | None = None, app_version: str | None = None,
                     current_release_sequence: int | None = None, rollback: bool = False,
-                    trusted_ledger_head: str | None = None) -> ValidationReport:
+                    trusted_ledger_head: str | None = None, today=None) -> ValidationReport:
+    """current_release_sequence is mandatory in production (0 for a first installation) unless rollback=True.
+    today is the site's trusted date for key validity. Importers should copy the bundle into a private, ACL'd folder
+    before calling this, so the verified bytes cannot change underneath."""
     root = Path(root)
     report = ValidationReport()
     if mode not in ("production", "development"):
@@ -150,15 +154,19 @@ def validate_bundle(root: Path | str, *, trust_list: TrustList | None = None, tr
     if sums_path.stat().st_size > MAX_SUMS_BYTES:
         report.add(Issue("SUMS_TOO_LARGE", "SHA256SUMS exceeds size cap", SUMS))
         return report
+    if mode == "production" and current_release_sequence is None and not rollback:
+        report.add(Issue("RELEASE_SEQUENCE_REQUIRED", "production validation needs the active release_sequence (0 on first install) or the explicit rollback path"))
+        return report
+    sums_bytes = sums_path.read_bytes()  # read once; these exact bytes are verified and then parsed
 
     # 1 signature: before anything else in the bundle is read
-    signer = _signature_step(root, report, trust_list=trust_list, trusted_public_key=trusted_public_key, mode=mode,
-                             allow_unsigned_dev=allow_unsigned_dev)
+    signer = _signature_step(root, sums_bytes, report, trust_list=trust_list, trusted_public_key=trusted_public_key,
+                             mode=mode, allow_unsigned_dev=allow_unsigned_dev, today=today)
     if signer is None:
         return report
 
     # 2 checksums and paths: stop on any failure, no record is parsed
-    entries, bad = parse_sums(sums_path.read_text(encoding="utf-8", errors="replace"))
+    entries, bad = parse_sums(sums_bytes.decode("utf-8", errors="replace"))
     for b in bad:
         report.add(Issue("SUMS_MALFORMED", b, SUMS))
     on_disk = set()
@@ -221,7 +229,7 @@ def validate_bundle(root: Path | str, *, trust_list: TrustList | None = None, tr
     ledger = manifest.get("auth_ledger_version")
     if isinstance(ledger, int) and ledger > 0:
         head = manifest.get("auth_ledger_head")
-        pinned = bool(head and trusted_ledger_head and (trusted_ledger_head.startswith(head) or head.startswith(trusted_ledger_head)))
+        pinned = bool(head and trusted_ledger_head and head == trusted_ledger_head)  # exact full-hash equality
         if not pinned:
             report.add(Issue("LEDGER_HEAD_UNVERIFIED", "auth_ledger_version > 0 requires auth_ledger_head matching the site's trusted ledger state", MANIFEST))
     rb = manifest.get("rollback") or {}
@@ -293,7 +301,19 @@ def validate_bundle(root: Path | str, *, trust_list: TrustList | None = None, tr
         ctx.doc_ids.add(r.get("doc_id"))
         ctx.copy_shas.add((r.get("source_copy") or {}).get("sha256"))
     for _, r in by_kind["candidate"]:
-        ctx.candidate_ids.add(r.get("candidate_id"))
+        cid = r.get("candidate_id")
+        ctx.candidate_ids.add(cid)
+        ex = r.get("extractor") or {}
+        ctx.subject_commits.setdefault(cid, set()).add(ex.get("artefact_commit"))
+        if ex.get("author_id"):
+            ctx.subject_authors[cid] = ex["author_id"]
+    pinned = manifest.get("pinned") or {}
+    ctx.release_commits = {c for c in [pinned.get("tools_commit"), *(pinned.get("artefact_commits") or {}).values()] if c}
+    for _, r in by_kind["document"]:
+        gitc = ((r.get("provenance") or {}).get("git") or {}).get("commit")
+        if gitc:
+            for k in (r.get("doc_id"), (r.get("source_copy") or {}).get("sha256")):
+                ctx.subject_commits.setdefault(k, set()).add(gitc)
     seen_docs: set = set()
     for kind in LOAD_ORDER:
         for where, rec in by_kind[kind]:

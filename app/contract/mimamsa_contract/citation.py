@@ -56,6 +56,9 @@ def format_legal_citation(doc: dict, *, page: int | None = None, paragraph_label
         text += f", para {paragraph_label}"
     elif page:
         text += f", p. {page}"
+    ef = ((doc.get("status_axes") or {}).get("evidence_fidelity") or {}).get("value")
+    if ef not in ("DOCUMENTARY_CHECKED", "FIDELITY_VERIFIED"):
+        text += " (metadata not verified)"
     return text
 
 
