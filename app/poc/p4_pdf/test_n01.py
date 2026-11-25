@@ -20,6 +20,35 @@ class DeliveryTests(unittest.TestCase):
         self.assertEqual(sorted(result.outcome for result in results), ['accepted', 'would_block'])
         self.assertEqual(gate.outstanding, 64)
 
+    def test_same_connection_contends_even_with_spare_site_credit(self):
+        gate = Delivery(site_limit=128, connection_limit=64)
+        ready = threading.Barrier(2)
+
+        def submit(_):
+            ready.wait(timeout=2)
+            return gate.handoff('A', 'copy', b'x' * 64, len)
+
+        with concurrent.futures.ThreadPoolExecutor() as pool:
+            results = list(pool.map(submit, range(2)))
+        self.assertEqual(sorted(result.outcome for result in results), ['accepted', 'would_block'])
+        self.assertEqual(gate.outstanding, 64)
+        self.assertEqual(gate.handoff('B', 'copy', b'x' * 64, len).outcome, 'accepted')
+
+    def test_unknown_adapter_completion_retires_connection_even_with_credit_available(self):
+        gate = Delivery(site_limit=128, connection_limit=64)
+
+        def interrupted(_):
+            raise OSError('synthetic ambiguous completion')
+
+        result = gate.handoff('A', 'copy', b'x' * 16, interrupted)
+        self.assertEqual(result.outcome, 'uncertain')
+        self.assertEqual(gate.outstanding, 16)
+        self.assertEqual(gate.handoff('A', 'copy', b'y', len).outcome, 'denied')
+        gate.confirm_drain(result.attempt)
+        self.assertEqual(gate.outstanding, 0)
+        self.assertEqual(gate.handoff('A', 'copy', b'y', len).outcome, 'denied')
+        self.assertEqual(gate.handoff('B', 'copy', b'y', len).outcome, 'accepted')
+
     def test_partial_and_uncertain_credit_survive_withdrawal(self):
         gate = Delivery(site_limit=64, connection_limit=64)
         first = gate.handoff('A', 'copy', b'x' * 64, lambda data: 16)

@@ -103,3 +103,5 @@ jobs:
           python-version: "3.12"
       - name: Synthetic protected-delivery reference tests
         run: python -B -m unittest discover -s app/poc/p4_pdf -v
+      - name: Record synthetic loopback benchmark
+        run: python -B app/poc/p4_pdf/benchmark.py
