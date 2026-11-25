@@ -54,7 +54,7 @@
       "type": "object", "additionalProperties": false, "required": ["date", "status", "reported_date", "basis"],
       "properties": {
         "date": {"$ref": "#/$defs/date"},
-        "status": {"enum": ["STATED_IN_INSTRUMENT", "STATED_DEEMED_IN_INSTRUMENT", "NOT_STATED_PENDING_ADVICE", "NOT_DETERMINED", "REPORTED_IN_COMPILATION_ONLY", "INSTRUMENT_NOT_HELD", "DISPUTED_PRESERVE_BOTH", "UNKNOWN"]},
+        "status": {"enum": ["STATED_IN_INSTRUMENT", "STATED_DEEMED_IN_INSTRUMENT", "STATED_IN_INSTRUMENT_DATE_FROM_INFERRED_MASTHEAD", "NOT_STATED_PENDING_ADVICE", "NOT_DETERMINED", "REPORTED_IN_COMPILATION_ONLY", "INSTRUMENT_NOT_HELD", "DISPUTED_PRESERVE_BOTH", "UNKNOWN"]},
         "reported_date": {"$ref": "#/$defs/date"},
         "basis": {"type": "string"}
       }

@@ -72,15 +72,100 @@ def test_criminal_law_transition_repeals_and_savings():
         assert vs[-1]["effective_to"]["status"] == "CEASED_OMITTED_OR_REPEALED"
 
 
+def R(fam, prov, date):
+    return V.resolve_at(RECS, fam, prov, date)
+
+
+def ids(res, key="candidates"):
+    return [c["version_id"] for c in res[key]]
+
+
 def test_resolver_never_assumes_latest_text():
-    assert [c["version_id"] for c in V.candidates_at(RECS, "AR1954", "r.22", "1990-01-01")] == ["AR1954/r.22/v01"]
-    assert [c["version_id"] for c in V.candidates_at(RECS, "AR1954", "r.22", "2000-01-01")] == ["AR1954/r.22/v02"]
-    # r.15: the 1961 substitution prints no commencement, so for 2000 both versions remain candidates
-    assert [c["version_id"] for c in V.candidates_at(RECS, "AR1954", "r.15", "2000-01-01")] == ["AR1954/r.15/v01", "AR1954/r.15/v02"]
-    for c in V.candidates_at(RECS, "AR1954", "r.15", "2000-01-01"):
-        assert c["governing_axis"].startswith("NOT_DETERMINED")
-    # Army Act s.127 omitted by Act 37/1992 (no commencement clause): both remain candidates in 2000
-    assert len(V.candidates_at(RECS, "AA1950", "s.127", "2000-01-01")) == 2
+    assert ids(R("AR1954", "r.22", "2000-01-01")) == ["AR1954/r.22/v02"]
+    r = R("AR1954", "r.22", "1990-01-01")  # 1954 commencement not stated (AQ-05): no candidate, v01 only possible
+    assert r["status"] == "UNDETERMINED" and r["candidates"] == [] and ids(r, "possible_versions") == ["AR1954/r.22/v01"]
+    r = R("AR1954", "r.15", "2000-01-01")  # S.R.O. 205/1961 prints no commencement: both possible, none definite
+    assert r["status"] == "UNDETERMINED" and ids(r, "possible_versions") == ["AR1954/r.15/v01", "AR1954/r.15/v02"]
+    for res in (R("AR1954", "r.15", "2000-01-01"), R("AR1954", "r.22", "2000-01-01")):
+        assert res["governing_axis"].startswith("NOT_DETERMINED")
+
+
+# ---- review R-01: pre-commencement / not yet created
+@pytest.mark.parametrize("fam,prov,date", [
+    ("BNS2023", "whole", "1990-01-01"), ("BNS2023", "s.358", "1990-01-01"), ("BNSS2023", "s.531", "2000-01-01"),
+    ("AFT2007", "s.9A", "1950-01-01"), ("AFT2007", "s.9A", "2010-01-01"), ("AA1950", "s.169A", "1950-01-01"),
+    ("AA1950", "s.169A", "1990-01-01"), ("AR1954", "r.59A", "1950-01-01"), ("AR1954", "r.13A", "1950-01-01"),
+    ("AR1954", "r.15A", "1950-01-01"), ("AR1954", "r.16A", "1978-01-01"), ("AR1954", "r.22", "1954-11-26")])
+def test_r01_not_yet_in_force(fam, prov, date):
+    r = R(fam, prov, date)
+    assert r["status"] == "NOT_YET_IN_FORCE" and r["candidates"] == [] and r["reason"]
+
+
+@pytest.mark.parametrize("fam,prov", [("BNS2023", "whole"), ("BNS2023", "s.358"), ("BNSS2023", "s.531"), ("BSA2023", "s.170")])
+def test_r01_1_july_2024_boundary_is_undetermined_not_a_candidate(fam, prov):
+    for d in ("2024-06-30", "2024-07-01"):
+        r = R(fam, prov, d)
+        assert r["status"] == "UNDETERMINED" and r["candidates"] == []
+    assert "after this date" in json.dumps(R(fam, prov, "2024-06-30")["possible_versions"])
+    assert "after this date" not in json.dumps(R(fam, prov, "2024-07-01")["possible_versions"])
+
+
+def test_r01_negative_controls_stated_commencement_gives_candidates():
+    r = R("AR1954", "r.16A", "1980-01-01")  # S.R.O. 188/1979 stated start 28-07-1979 (v03 is also deemed from 04-06-1979)
+    assert r["status"] == "IN_FORCE_CANDIDATES" and ids(r) == ["AR1954/r.16A/v01", "AR1954/r.16A/v03"]
+    assert ids(R("AR1954", "r.16A", "1986-01-01")) == ["AR1954/r.16A/v02", "AR1954/r.16A/v03"]
+    assert R("AR1954", "r.22", "1954-11-27")["status"] == "UNDETERMINED"  # instrument exists from this date; commencement unstated
+    assert ids(R("AFT2007", "s.9A", "2022-01-01")) == ["AFT2007/s.9A/v02"]  # TRA 2021 deemed 04-04-2021
+    r = R("AR1954", "r.25", "2000-01-01")
+    assert r["status"] == "NO_VERSION_IN_FORCE" and r["ceased_by"]["version_id"] == "AR1954/r.25/v02"
+    assert ids(R("AR1954", "r.25", "1993-12-05"), "possible_versions") == ["AR1954/r.25/v01"]
+
+
+# ---- review R-02: retrospective deemed effect
+def test_r02_retrospective_deemed_versions_included_in_deemed_window():
+    assert "AR1954/r.16A/v03" in ids(R("AR1954", "r.16A", "1985-01-01"))
+    assert "AR1954/r.2/v03" in ids(R("AR1954", "r.2", "1985-01-01"))
+    c = next(x for x in R("AR1954", "r.16A", "1985-01-01")["candidates"] if x["version_id"] == "AR1954/r.16A/v03")
+    assert "retrospective deemed effect" in c["reason"] and "AQ-06" in c["reason"]
+
+
+def test_r02_negative_controls_outside_deemed_window():
+    assert "AR1954/r.16A/v03" not in ids(R("AR1954", "r.16A", "1979-06-03"))
+    assert "AR1954/r.2/v03" not in ids(R("AR1954", "r.2", "1979-01-01"))
+    assert ids(R("AR1954", "r.16A", "1990-01-01")) == ["AR1954/r.16A/v03"]
+
+
+# ---- review R-03: the creating instrument's date is an exclusion floor
+@pytest.mark.parametrize("prov", ["s.75", "s.76", "s.127"])
+def test_r03_1992_omissions_not_before_the_1992_act(prov):
+    for d in ("1960-01-01", "1992-09-05"):
+        r = R("AA1950", prov, d)
+        allv = ids(r) + ids(r, "possible_versions")
+        assert f"AA1950/{prov}/v02" not in allv
+    assert "AA1950/Chapter XVI/v02" not in ids(R("AA1950", "Chapter XVI", "1960-01-01"), "possible_versions")
+    assert "IPC1860/whole/v02" not in ids(R("IPC1860", "whole", "1990-01-01"), "possible_versions")
+
+
+@pytest.mark.parametrize("prov", ["s.75", "s.76", "s.127"])
+def test_r03_negative_controls_after_the_act_both_remain_open(prov):
+    r = R("AA1950", prov, "2000-01-01")
+    assert r["status"] == "UNDETERMINED" and ids(r, "possible_versions") == [f"AA1950/{prov}/v01", f"AA1950/{prov}/v02"]
+
+
+def test_floor_is_lowered_only_by_a_stated_retrospective_date():
+    v = by("AR1954", "r.16A")[2]
+    assert V.instrument_floor(v) == "1979-06-04"
+    assert V.instrument_floor(by("AA1950", "s.127")[1]) == "1992-09-06"
+
+
+def test_inferred_masthead_dates_are_qualified():
+    v = by("AFTPR2008", "whole")[0]
+    assert v["effective_from"]["status"] == "STATED_IN_INSTRUMENT_DATE_FROM_INFERRED_MASTHEAD"
+
+
+def test_multi_page_rule_lists_every_page_row():
+    e = by("AR1954", "r.58")[0]["text_evidence"][0]
+    assert "C13PE-1954-313-R57-R58" in e["evidence_ids"] and "C13PE-1954-314-R59-R62" in e["evidence_ids"]
 
 
 def test_validator_rejects_an_inferred_date_and_a_broken_chain():

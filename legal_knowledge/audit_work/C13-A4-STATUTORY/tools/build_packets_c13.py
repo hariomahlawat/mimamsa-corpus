@@ -147,6 +147,18 @@ def acq_rows(matrix, recs):
     return rows
 
 
+DECISION = {  # review R-06: category-specific decision wording
+    "CONFLICT": "Determine the wording to be used for research records, or direct that the conflict stay reserved",
+    "SCOPE": "State the scope of the omission to be recorded, or direct that it stay open",
+    "APPLICABILITY": "State the applicability limitation to be recorded (dates and offices), or direct that it stay open",
+    "ALLEGED_AMENDMENT": "State whether the located text may be used pending the instrument search, or direct that the rule stay blocked",
+    "COMMENCEMENT": "State the commencement date (or rule) to be recorded for each instrument, or direct that it stay NOT_STATED_PENDING_ADVICE",
+    "RETROSPECTIVITY": "State the effect to be recorded for the deemed period, or direct that it stay open",
+    "DATE_DISPUTE": "State which date to record, or direct that both readings stay preserved",
+    "VERSION_IDENTITY": "State which version is to be treated as notified once a copy is held, or direct that both stay recorded",
+}
+
+
 def adviser_rows(matrix, recs):
     c12p = [r for r in read_csv(C12F / "CORRECTION_PROPOSALS_C12.csv") if r["proposal_type"] == "EVIDENCE_STATE_PROMOTION"]
     verif = {v["verification_id"]: v for v in read_csv(C12F / "PRIORITY_VERIFICATION.csv")}
@@ -215,7 +227,7 @@ def adviser_rows(matrix, recs):
         ("ALLEGED_AMENDMENT", "Army Rule 22 and S.R.O. 258/2002 (AR-030)", "Pending location of S.R.O. 258/2002, should r.22 be treated as the 1993 substituted text only?",
          "S.R.O. 17(E)/1993 item 5, p.14 (PE-1993-14-R22); r.1(2) in force on publication 06-12-1993 (p.12)", "(a) 1993 text complete; (b) an Explanation may have been added in 2002", "AR1954", "r.22", r"AR-030", "GAP-02"),
         ("COMMENCEMENT", "Instruments that print no commencement clause (S.R.O. 484/1954 and 13 amending S.R.O.s; Army (Amendment) Act 1992)", "On what date does each such instrument take effect (publication, a later notification, or another rule)?",
-         "AQ-05 rows in ARMY-RULES-CHAIN-01 and WS-A; 165 version records carry NOT_STATED_PENDING_ADVICE", "(a) date of publication; (b) another date; (c) not determinable from held sources", "AR1954", "", None, "AQ-STA-06; AQ-STA-11; GAP-12"),
+         "AQ-05 rows in ARMY-RULES-CHAIN-01 and WS-A; 165 version records carry NOT_STATED_PENDING_ADVICE", "(a) date of publication; (b) for the Army (Amendment) Act 1992 (an Act of Parliament), the date of assent 06-09-1992 (the reading on which the India Code 'w.e.f. 6-9-1992' note appears to rest) - posed as a question, not adopted; (c) another date; (d) not determinable from held sources", "AR1954", "", None, "AQ-STA-06; AQ-STA-11; GAP-12"),
         ("RETROSPECTIVITY", "Retrospective deemed omission by S.R.O. 216/1988 (r.2 clauses and r.16A Explanation deemed from 04-06-1979)", "What is the legal effect of the deemed retrospective operation for the period 04-06-1979 to 17-09-1988?",
          "S.R.O. 216/1988 copy 1d67bddd (WSA-PIC-41)", "(a) deemed effect from 1979; (b) effect only from publication for some purposes", "AR1954", "r.2", None, "AQ-06"),
         ("COMMENCEMENT", "AFT Act s.9A (2017 insertion, 2021 amendment deemed 04-04-2021, 2026 substitution)", "From what date does s.9A operate in each form?", "Finance Act 2017 7a5551ba pp.53, 64; TRA 2021 0c2f4e9e pp.1, 13; TRA 2026 be619533 p.1", "(a) notified dates; (b) deemed date only for 2021", "AFT2007", "s.9A", None, "AQ-STA-10"),
@@ -227,7 +239,7 @@ def adviser_rows(matrix, recs):
         recs_s, n = items_for(pat, fam, prov)
         add(category=cat, subject=subj, exact_question=q, evidence=ev, competing_readings=comp, affected_records=recs_s or "(see version records)",
             affected_items=f"{n} citation items (citing the provision or blocked by the matter)" + (f"; versions {recs_for(fam, prov)}" if recs_for(fam, prov) else ""),
-            decision_required="Determine the reading to be used for research records, or direct that the conflict stay reserved", cross_refs=xr, independent_review_verdict="")
+            decision_required=DECISION.get(cat, "State the reading to be used for research records, or direct that the matter stay open"), cross_refs=xr, independent_review_verdict="")
     for a in read_csv(OUT / "TEMPORAL_AXES_A4.csv"):
         add(category="TEMPORAL_AXIS", subject=a["scope"], exact_question=a["question"], evidence=a["evidence_constraint"],
             competing_readings="conduct date | proceedings date | procedural-action date | document preparation/review date", affected_records="all version records of the scope",

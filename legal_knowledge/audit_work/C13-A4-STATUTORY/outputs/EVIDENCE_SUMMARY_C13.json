@@ -73,7 +73,7 @@
  },
  "pymupdf_version": "2.1",
  "input_sha256": {
-  "page_evidence_c13": "9fee7d21edfb77ba1590fcf815a88f4de8132725ca69ded86f8299cce2a77219",
+  "page_evidence_c13": "83888d50ecce28d8a401bcdc5c5daa30dd646ecb9b4b7506cb48686c575637fb",
   "page_evidence_c12": "013a14948f3585c472daa5b1599ec9fad035b676228ba46c917cb8ee88e66233",
   "c12f_matrix": "cbd734784e4930e65de23ef59a19e7bb4553f34043684e267e740d55b4f2ff19",
   "engine": "b8228fb9db5205423b34cb5a8bb057b746f2e28f6ad433de74a8c9e1a8c8359c"

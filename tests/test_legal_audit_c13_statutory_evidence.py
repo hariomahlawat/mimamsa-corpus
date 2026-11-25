@@ -98,7 +98,7 @@ def test_acquisition_requests_cover_named_gaps_and_are_not_executed():
 
 def test_no_restricted_material_in_any_package_file():
     for p in PKG.rglob("*"):
-        if p.is_file() and p.suffix in (".csv", ".json", ".jsonl", ".md"):
+        if p.is_file() and p.suffix in (".csv", ".json", ".jsonl", ".md") and "reviews" not in p.parts:  # review records quote the denylist
             C.assert_no_restricted(p.name, p.read_bytes())
 
 

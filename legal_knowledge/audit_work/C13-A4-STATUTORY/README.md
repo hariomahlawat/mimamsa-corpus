@@ -32,10 +32,25 @@ located event takes effect. Each record carries:
 * `text_basis` (self-contained / composite with earlier versions / omitted), `text_status`, `conflicts`, `open_items`
   (alleged or unlocated instruments are **open items, never versions**), `currency` (always NOT_ESTABLISHED with the chain gaps).
 
-**Never assume the latest text governs.** `validate_versions_c13.candidates_at(records, family, provision, date)`
-returns every version that cannot be excluded for a date, with a reason and `governing_axis: NOT_DETERMINED`. Example:
-for Army Rule 15 on 2000-01-01 it returns both the 1954 and the 1961 versions, because S.R.O. 205/1961 prints no
-commencement; for r.22 it returns v01 for 1990 and v02 (S.R.O. 17(E)/1993, in force 06-12-1993) for 2000.
+**Never assume the latest text governs.** `validate_versions_c13.resolve_at(records, family, provision, date)`
+(remediated after independent review R-01..R-03) returns a status and reasons, never a default "latest" version:
+
+* `NOT_YET_IN_FORCE` - the date precedes the earliest possible start of the first version: its stated commencement, or else
+  the creating instrument's own date (assent/notification or publication), lowered only by a stated retrospective date.
+  E.g. BNS in 1990, AFT s.9A in 2010 (Finance Act 2017), AA s.169A in 1990 (Act 37/1992), r.59A in 1950.
+* `IN_FORCE_CANDIDATES` - at least one non-excluded version has an established start on or before the date (stated
+  commencement, or a stated retrospective deemed date such as S.R.O. 216/1988 deemed from 04-06-1979, with AQ-06 noted);
+  every version that cannot be excluded is listed. E.g. r.22 in 2000 -> v02 (S.R.O. 17(E)/1993); r.16A in 1985 -> v01 and v03.
+* `UNDETERMINED` - versions are possible but none has an established start on or before the date (commencement not stated,
+  compilation-reported only, or instrument not held): **no candidate is returned**; possible versions are listed with reasons.
+  E.g. r.15 in 2000 (S.R.O. 205/1961 prints no commencement); BNS/BNSS/BSA on 30 June and 1 July 2024 (S.O. 848-850(E) not
+  held; the reason notes when the compilation-reported 01-07-2024 is after the date); AA s.127 in 2000 (both the section and
+  its 1992 omission stay open, AQ-05).
+* `NO_VERSION_IN_FORCE` - omitted/repealed by a version with an established start (e.g. r.25 after 06-12-1993).
+
+A version is never placed before its creating instrument's date unless the instrument states a retrospective date (R-03:
+the 1992 omissions of AA ss.75, 76, 127 and Chapter XVI are excluded for 1960 and 05-09-1992). The governing date axis is
+always `NOT_DETERMINED`.
 
 ### Coverage (measured)
 
@@ -51,7 +66,7 @@ commencement; for r.22 it returns v01 for 1990 and v02 (S.R.O. 17(E)/1993, in fo
 | **Total** | | **488** | |
 
 Text status: IMAGE_CHECKED 137, TEXT_LAYER_ONLY 63, COMPILATION_ONLY 246, NOT_HELD 23, CONFLICTING 6, OMITTED 13.
-Effective-from: stated 67 (64 + 3 deemed), NOT_STATED_PENDING_ADVICE 165, compilation-reported 215, not determined 20,
+Effective-from: stated 67 (62 + 3 deemed + 2 with a date from an inferred masthead, R-07), NOT_STATED_PENDING_ADVICE 165, compilation-reported 215, not determined 20,
 instrument not held 19, disputed 1, unknown 1. Effective-to: ends on next version 61 (date known) + 61 (date not
 determined), open on located instruments 349, ceased (omitted/repealed) 17. 436 of 488 records need legal review.
 Full counts: `outputs/VERSION_COVERAGE_C13.json` (including the version list for each priority rule).
@@ -146,7 +161,24 @@ are mirrored in `tools/c13a4_common.py` (loaded from the config file too when it
 scanned before it is written; a hit stops the build. The regulations inventory row for that publication is not carried into
 any output.
 
-## 7. Limits
+## 7. Review and change log
+
+| Version | Change | Finding |
+| --- | --- | --- |
+| C13A4-v1.1 | Resolver statuses NOT_YET_IN_FORCE / IN_FORCE_CANDIDATES / UNDETERMINED / NO_VERSION_IN_FORCE; no candidate without an established start | R-01 (P1) |
+| C13A4-v1.1 | Stated retrospective deemed dates open the deemed window | R-02 |
+| C13A4-v1.1 | Creating instrument's date used as an exclusion floor; C9 instrument dates carried for AFT/graph edges | R-03 |
+| C13A4-v1.1 | 25 boundary tests and negative controls (BNS 1 July 2024, AFT s.9A, AA s.169A, rr.13A/15A/59A, r.16A/r.2 deemed window, 1992 omissions) | R-04 |
+| C13A4-v1.1 | Record count: commit 47ffc4a9's message says 490; the correct count is 488 (two duplicates were removed before 5db80dfc) | R-05 |
+| C13A4-v1.1 | A4-ADV-077 adds the date-of-assent reading for Act 37/1992 as a question; category-specific decision wording | R-06 |
+| C13A4-v1.1 | `STATED_IN_INSTRUMENT_DATE_FROM_INFERRED_MASTHEAD` qualifier (AFT s.41 v02, AFT Procedure Rules 2008) | R-07 |
+| C13A4-v1.1 | Multi-page rules list every page row in evidence_ids | R-08 |
+| C13A4-v1.1 | C13PE-1993-16 check_note records the pasted-fragment scan artefact | R-10 |
+
+Review records: `reviews/review_c13_a4_5db80dfc.md` and `_findings.csv` (verdict ACCEPT WITH CONDITIONS; all 21 page
+readings confirmed and all 10 promotions upheld; R-09, R-11 to R-13 informational).
+
+## 8. Limits
 
 * Image readings are by an AI agent, not human-confirmed; the 21 C13 page rows need an independent re-read.
 * EXACT_ANCHOR is citation-level only and does not authenticate the archival facsimiles, establish currency after the

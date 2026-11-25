@@ -228,6 +228,9 @@ class Builder:
                 evs.append(e)
         kw["text_evidence"] = evs
         kw["conflicts"] = sorted({c for c in kw["conflicts"] if c and c.strip() not in ("-", "none", "NONE")})
+        ef = kw["effective_from"]
+        if ef["status"] == "STATED_IN_INSTRUMENT" and re.search(r"identity of issue inferred|same India Code bundle", ef["basis"]):
+            ef["status"] = "STATED_IN_INSTRUMENT_DATE_FROM_INFERRED_MASTHEAD"  # review R-07: words stated, date from an inferred masthead
         kw["temporal_axes"] = axes(kw["family"])
         kw["determination_state"] = "AUTOMATED_CANDIDATE_NOT_VERIFIED"
         kw.setdefault("cited_by_items", 0)
@@ -400,8 +403,10 @@ class Builder:
                     end = int(img[0]["continues_to_pdf_page"]) if img and img[0].get("continues_rule") == rule else E.text_layer_end_page(g_pages, g_idx, n)
                     pdf = f"{hi['page']}" + (f"-{end}" if end and end != hi["page"] else "")
                     printed = f"{hi['page'] + 290}" + (f"-{end + 290}" if end and end != hi["page"] else "")
+                    cont = [x["evidence_id"] for x in self.pe if x["copy_id"] == G1954 and img and end and hi["page"] < int(x["pdf_page"]) <= end
+                            and x["evidence_id"] not in {y["evidence_id"] for y in img}]  # review R-08: every page row of a multi-page rule
                     e0 = self.ev("principal_as_notified", G1954, edition=G1954_ED, pdf=pdf, printed=printed, method=m,
-                                 ids=[x["evidence_id"] for x in img] or [hi["method"]])
+                                 ids=([x["evidence_id"] for x in img] + cont) or [hi["method"]])
                 else:
                     e0 = self.ev("principal_as_notified", G1954, edition=G1954_ED, method="NOT_LOCATED_IN_TEXT_LAYER", ids=[])
                 versions.append(dict(common, version_id=f"AR1954/{label}/v01", version_seq=1, version_kind="as_notified",
@@ -432,6 +437,9 @@ class Builder:
                 else:
                     method = "NOT_HELD"
                 ids = [x["evidence_id"] for x in pes] + [x for x in re.split(r"[;,]\s*", e["pics"] or "") if x]
+                for x in list(pes):  # review R-08: continuation page rows of the amending instrument
+                    if x.get("continues_rule") == rule:
+                        ids += [y["evidence_id"] for y in self.pe if y["copy_id"] == x["copy_id"] and y["pdf_page"] == x["continues_to_pdf_page"] and y["evidence_id"] not in ids]
                 if method == "IMAGE_CHECKED" and not ids:
                     loc = (ir.get("evidence_locator") or "").strip()
                     if loc:
@@ -695,7 +703,8 @@ class Builder:
                               f"{g['amending_instrument']}", "TEXT_LAYER_ONLY") or [self.ev("register_only", edition=g["amending_instrument"], method="NOT_HELD")]
                 versions.append(dict(common, version_id=f"AFT2007/{label}/v{seq:02d}", version_seq=seq, version_kind=k,
                                      change_summary=f"{g['provision']}: {g['edge_kind']}",
-                                     created_by={"instrument_id": g["amending_instrument_id"], "instrument": g["amending_instrument"], "instrument_date": None,
+                                     created_by={"instrument_id": g["amending_instrument_id"], "instrument": g["amending_instrument"],
+                                                 "instrument_date": instr.get(g["amending_instrument_id"], {}).get("instrument_date") or None,
                                                  "publication_date": iso(g["publication_date"]), "item_no": None, "register_refs": [f"C10 amendment_graph_c10#{g['edge_id']}"]},
                                      effective_from={"date": d if st.startswith("STATED") else None, "status": st, "reported_date": None,
                                                      "basis": f"{g['commencement_as_printed'] or 'commencement not printed on held pages'}; C10 {g['c10_status']}: {g['status_detail'][:160]}"},
