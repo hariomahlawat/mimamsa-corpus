@@ -312,6 +312,7 @@ def classify(t, court, anchor_s, anchor_e, opinion, zone, target_court, marker_b
         w0 = max(s0, cpos - 200)
         fns = [f for f in FN_GLUED.finditer(t[w0:min(s1, cend + 160)]) if not NOT_A_MARKER.search(t[max(0, w0 + f.start() - 12):w0 + f.start()])]
         fn = min(fns, key=lambda f: abs((w0 + f.start()) - cpos)) if fns else None
+        fn_bound = False
         if fn and not marker_bound:
             mk = fn.group(1)
             after_marker = max(cend, w0 + fn.end())
@@ -320,6 +321,7 @@ def classify(t, court, anchor_s, anchor_e, opinion, zone, target_court, marker_b
             if f_lo is None or not (f_lo <= anchor_s < f_lo + 250):
                 reasons.append("cue bound to footnote %s; this anchor is not footnote %s's citation (F03)" % (mk, mk))
                 continue
+            fn_bound = True   # the body marker binds the cue to this footnote citation
         elif not marker_bound and re.search(r"(?:^|\s)\d{1,3}\s*$", t[max(0, anchor_s - 8):anchor_s]) and anchor_s > s0 + 20 \
                 and FOOTNOTE_ZONE.search(t[s0:s1]):
             reasons.append("the anchor is a footnote entry and no body marker binds the cue to it (F03)")
@@ -341,6 +343,8 @@ def classify(t, court, anchor_s, anchor_e, opinion, zone, target_court, marker_b
             between, n_between = t[cend:anchor_s], count_authorities(t, cend, anchor_s)
         else:
             between, n_between = t[anchor_e:cpos], count_authorities(t, anchor_e, cpos)
+        if fn_bound:
+            between, n_between = "", 0
         if n_between > 0:
             reasons.append("another authority lies between the anchor and the cue")
             continue
@@ -366,7 +370,7 @@ def classify(t, court, anchor_s, anchor_e, opinion, zone, target_court, marker_b
         if typ in STRONG and opinion in SEPARATE:
             return dict(relation="CITES", voice="SEPARATE_OR_DISSENT_OPINION", cue=m.group(0), s0=s0, s1=window_end,
                         reasons="%s wording in a %s opinion: no proposal" % (typ.lower(), opinion.lower()))
-        if n_auth > 1 and typ not in STRONG and typ != "DISTINGUISHES":
+        if n_auth > 1 and typ not in STRONG and typ != "DISTINGUISHES" and not fn_bound:
             if typ in ("FOLLOWS", "APPLIES"):
                 reasons.append("several authorities in the sentence; FOLLOWS/APPLIES not bound to one")
                 continue

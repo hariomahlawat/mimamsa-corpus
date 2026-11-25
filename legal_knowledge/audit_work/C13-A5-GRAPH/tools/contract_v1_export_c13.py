@@ -19,7 +19,10 @@ pinned to CONTRACT_COMMIT below. The native A5 graph (graph/) is unchanged; this
 Every record: status AUTOMATED_CANDIDATE_NOT_VERIFIED, review_ref null (no RV- reviewed_record exists for these
 edges), confidence 'extracted', evaluation_ref null (no human-checked, independent figure exists: the UI shows
 'not evaluated'). Targets point at A5 node ids (JUD:...) or keep the raw reference. Passage ids are null (A5 has no
-derived_text passage ids); char offsets are page-relative into data/text@ad77758d where known.
+derived_text passage ids). Treatment edges carry a bound span (contract R2): pipeline_name 'corpus-data-text',
+pipeline_version 'ad77758d', derivative_text_sha256 = sha256 of data/text/<doc_id>.txt, page-relative offsets counted
+from the character after the '[[page N]]' marker. Citation and statute rows are page-only anchors with the excerpt
+as quote.
 
   python -I -B contract_v1_export_c13.py [--check]     # writes contract_v1/
   validation: tests/test_legal_audit_c13_graph_contract_v1.py runs the B validator at CONTRACT_COMMIT on every record.
@@ -36,8 +39,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common_c13 as C  # noqa: E402
 
 CONTRACT_BRANCH = "claude/c13-b-app"
-CONTRACT_COMMIT = "9eeb04a4"
+CONTRACT_COMMIT = "bb22ebd3"   # latest head (R2: optional span binding on page_anchor)
 CONTRACT_VERSION = "1.0.0"
+PIPELINE_NAME = "corpus-data-text"
 OUT = C.PKG / "contract_v1"
 G = C.PKG / "graph"
 NO_LEGAL_EFFECT = {"CITES_PROVISION", "QUOTES_PROVISION", "CITES_JUDGMENT", "UPLOAD_REFERENCES_PROVISION", "UPLOAD_REFERENCES_CASE"}
@@ -48,6 +52,15 @@ NOT_EXPORTED = {"CONSIDERS": "NO_V1_RELATION", "DISTINGUISHES": "LOW_RELIABILITY
 TOOLS = {"relations-c11/rev1.3": "legal_knowledge/audit_work/C11-JUDICIAL-QUALITY/relations/tools/relations_c11.py",
          "treatment": "legal_knowledge/audit_work/C13-A5-GRAPH/tools/treatment_c13.py"}
 AUTHOR = {"relations-c11/rev1.3": "claude-agent-c11-relations", "treatment": "claude-agent-c13-a5"}
+
+
+def anchor(ev, quote, text_sha):
+    a = dict(source_copy_sha256=ev["source_copy_sha256"], page=ev["page"], passage_id=None, char_start=None, char_end=None,
+             paragraph_label=None, text_sha256=None, pipeline_version=None, quote=quote, pipeline_name=None, derivative_text_sha256=None)
+    if ev.get("char_start") is not None and ev.get("char_end") is not None and ev["doc_id"] in text_sha:
+        a.update(char_start=ev["char_start"], char_end=ev["char_end"], pipeline_name=PIPELINE_NAME, pipeline_version=C.TEXT_COMMIT,
+                 derivative_text_sha256=text_sha[ev["doc_id"]])
+    return a
 
 
 def last_commit(path):
@@ -68,6 +81,12 @@ def main():
     tool_info = {}
     for k, path in TOOLS.items():
         tool_info[k] = dict(commit=last_commit(path), sha=C.sha256_file(C.WT / path), path=path)
+    # span binding (contract R2): offsets are page-relative into data/text/<doc_id>.txt at ad77758d, counted from the
+    # character after the '[[page N]]' marker; the derivative is that file, identified by the sha256 of its bytes.
+    tdocs = sorted({e["evidence"]["doc_id"] for e in edges if e["evidence"].get("char_start") is not None and e["evidence"].get("doc_id")})
+    tree = C.ls_tree(C.DEFAULT_REPO, C.TEXT_COMMIT, "data/text")
+    blobs = C.cat_blobs(C.DEFAULT_REPO, [tree["data/text/%s.txt" % d] for d in tdocs])
+    text_sha = {d: C.sha256_bytes(blobs[tree["data/text/%s.txt" % d]]) for d in tdocs}
     out, skipped = [], Counter()
     for e in sorted(edges, key=lambda x: x["edge_id"]):
         t = e["edge_type"]
@@ -91,9 +110,7 @@ def main():
         rec = dict(
             contract_version=CONTRACT_VERSION, record_kind="candidate", candidate_id=prefix + e["edge_id"],
             candidate_type="graph_edge", source_doc_id=ev["doc_id"],
-            anchors=[dict(source_copy_sha256=ev["source_copy_sha256"], page=ev["page"], passage_id=None,
-                          char_start=ev.get("char_start"), char_end=ev.get("char_end"),
-                          paragraph_label=None, text_sha256=None, pipeline_version="data/text@%s" % C.TEXT_COMMIT, quote=quote)],
+            anchors=[anchor(ev, quote, text_sha)],
             extractor=dict(name="c13-a5-treatment" if kind == "treatment" else "c11-relations", version=e["extractor_version"][:64],
                            artefact_commit=ti["commit"], artefact_path=ti["path"], artefact_sha256=ti["sha"], author_id=AUTHOR[kind]),
             status="AUTOMATED_CANDIDATE_NOT_VERIFIED", review_ref=None,

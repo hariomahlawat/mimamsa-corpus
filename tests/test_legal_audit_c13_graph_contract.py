@@ -112,6 +112,41 @@ class GraphContract(unittest.TestCase):
             self.assertEqual(hashlib.sha256(text(G / name).encode()).hexdigest(), info["sha256"], name)
         self.assertEqual(m["contract"], "IC-01")
 
+    def test_exported_passage_hash_recomputes(self):
+        for e in self.edges:
+            ev = e["evidence"]
+            if ev["passage"]:
+                self.assertEqual(hashlib.sha256(ev["passage"].encode()).hexdigest(), ev["passage_sha256"], e["edge_id"])
+                self.assertLessEqual(len(ev["passage"]), 600)
+            if e["edge_class"] == "JUDICIAL_TREATMENT":
+                self.assertIsInstance(ev["char_start"], int, e["edge_id"])
+                self.assertGreaterEqual(ev["char_end"], ev["char_start"])
+
+    def test_low_reliability_types_are_flagged(self):
+        for e in self.edges:
+            if e["edge_type"] in ("DISTINGUISHES", "APPLIES", "EXPLAINS", "DOUBTS"):
+                self.assertIn("LOW_RELIABILITY_CANDIDATE", e["restrictions"], e["edge_id"])
+                self.assertEqual(e["attributes"]["reliability"], "LOW_RELIABILITY_CANDIDATE")
+
+    def test_no_displayable_precision(self):
+        ev = json.loads((G / "EDGE_TYPE_EVALUATION_C13.json").read_text())
+        self.assertFalse(ev["treatment_dev_eval_in_sample"]["displayable"])
+        for t, v in ev["per_edge_type"].items():
+            self.assertIsNone(v.get("displayable_measured_precision"), t)
+            if v.get("development_in_sample"):
+                self.assertFalse(v["development_in_sample"]["displayable"])
+        self.assertIn("independent_ai_review_f915ac11", ev["per_edge_type"]["FOLLOWS"])
+
+    def test_overrules_unique_per_passage_and_target(self):
+        seen = set()
+        for e in self.edges:
+            if e["edge_type"] == "OVERRULES":
+                k = (e["evidence"]["doc_id"], e["evidence"]["char_start"], e["target"], e["target_raw"])
+                self.assertNotIn(k, seen)
+                seen.add(k)
+                if e["target_raw"]:
+                    self.assertFalse(e["target_raw"][0].islower(), e["target_raw"][:30])
+
     def test_summary_counts_match_files(self):
         s = json.loads((G / "GRAPH_SUMMARY_C13.json").read_text())
         self.assertEqual(s["nodes"], len(self.nodes))

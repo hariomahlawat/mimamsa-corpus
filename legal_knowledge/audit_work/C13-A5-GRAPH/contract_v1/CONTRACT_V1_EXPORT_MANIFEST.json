@@ -1,0 +1,49 @@
+{
+ "candidate_type": "graph_edge",
+ "contract": "Track B data interchange contract v1",
+ "contract_branch": "claude/c13-b-app",
+ "contract_commit": "bb22ebd3",
+ "contract_version": "1.0.0",
+ "extractor_artefacts": {
+  "relations-c11/rev1.3": {
+   "commit": "cc798a3343a6",
+   "path": "legal_knowledge/audit_work/C11-JUDICIAL-QUALITY/relations/tools/relations_c11.py",
+   "sha": "6c6023c484c41f2181648b66de963a987379e350835075099ff9cbe40223a681"
+  },
+  "treatment": {
+   "commit": "b772206bc82f",
+   "path": "legal_knowledge/audit_work/C13-A5-GRAPH/tools/treatment_c13.py",
+   "sha": "fd82d441841d184a666b830ddef73909c05c95e9ca3fcef06542ee45f1ac3f12"
+  }
+ },
+ "file": "candidates_graph_edges.jsonl.gz",
+ "native_graph_manifest_sha256": "5ca558c2de3ec6e9073d2806022fdcbbf936441eb34bce3a82edb08e5ff1ef39",
+ "not_exported": {
+  "LOW_RELIABILITY_CANDIDATE": 32,
+  "NOT_A_V1_GRAPH_EDGE:AMENDMENT": 99,
+  "NOT_A_V1_GRAPH_EDGE:FORMS": 881,
+  "NOT_A_V1_GRAPH_EDGE:STRUCTURAL": 9146,
+  "NO_V1_RELATION": 269
+ },
+ "record_kind": "candidate",
+ "records": 34557,
+ "relations": {
+  "CITES_JUDGMENT": 23222,
+  "CITES_PROVISION": 10936,
+  "FOLLOWS_PROPOSITION": 247,
+  "OVERRULES_OR_LIMITS_PROPOSITION": 12,
+  "QUOTES_PROVISION": 140
+ },
+ "restricted_register": {
+  "sha256": "fc7ea07e62e7e41f348639973f19187540593e7b3237933758f64e865b95b2b6",
+  "source": "git:72fe7a75:config/restricted_material.json"
+ },
+ "semantics": [
+  "All records are AUTOMATED_CANDIDATE_NOT_VERIFIED with evaluation_ref null ('not evaluated').",
+  "LOW_RELIABILITY_CANDIDATE types (DISTINGUISHES, APPLIES, EXPLAINS, DOUBTS) and CONSIDERS are not exported; they remain in the native A5 graph with that marker.",
+  "DISAPPROVES (declaratory 'does not lay down the correct law') maps to OVERRULES_OR_LIMITS_PROPOSITION with candidate_id prefix 'a5.disapproves.'; it is not an explicit overruling.",
+  "Absence of an edge never means absence of adverse authority."
+ ],
+ "sha256_uncompressed": "a41ed5e600c5b54298a958b4e5a2a0f4b0573794d9d9bcc51a0e8cf08628ecec",
+ "validation": "python -m mimamsa_contract record candidate <decompressed file> --register config/restricted_material.json (tests/test_legal_audit_c13_graph_contract_v1.py)"
+}

@@ -18,11 +18,11 @@
   "excluded_rows_not_in_rev13": 24,
   "fp": 1,
   "labelled_rows": 162,
-  "missed_supported": 13,
+  "missed_supported": 12,
   "note": "IN-SAMPLE: the rules were developed on these C11 reviewed rows; this is not an independent measure. Independent precision/recall awaits A0's H-REL-C13 evaluation (only its identifiers are read, to exclude it).",
-  "precision": 0.9815,
-  "recall_on_supported": 0.803,
-  "tp": 53
+  "precision": 0.9818,
+  "recall_on_supported": 0.8182,
+  "tp": 54
  },
  "frozen": false,
  "inputs": {
@@ -33,11 +33,11 @@
  "passages_on_a0_holdout_pages": 333,
  "relation_counts": {
   "APPLIES": 7,
-  "CITES": 23966,
-  "CONSIDERS": 269,
+  "CITES": 23953,
+  "CONSIDERS": 272,
   "DISAPPROVES": 4,
   "DISTINGUISHES": 25,
-  "FOLLOWS": 247,
+  "FOLLOWS": 257,
   "OVERRULES": 9
  },
  "restricted_register": {
@@ -50,8 +50,8 @@
   "edge_excerpt_not_found": 1
  },
  "voice_counts": {
-  "COURT_OWN_VOICE": 561,
-  "CUES_REJECTED": 303,
+  "COURT_OWN_VOICE": 574,
+  "CUES_REJECTED": 290,
   "HIGH_COURT_OVERRULING_WORDS_NOT_ROUTED": 2,
   "NO_TREATMENT_CUE": 12448,
   "PARTY_SUBMISSION": 3062,

@@ -70,6 +70,62 @@ class Rules(unittest.TestCase):
         self.assertEqual(r["relation"], "FOLLOWS")
 
 
+class ReviewFixes(unittest.TestCase):
+    """Review f915ac11 F02 (voice) and F03 (binding/subject) regressions, on synthetic passages."""
+
+    def test_quotation_opened_paragraphs_earlier(self):
+        lead = "12. The Supreme Court observed: \u201c5. Earlier facts are recited here. 6. More recital follows here. "
+        r = run("The matter is squarely covered by X v. Y, %s." % CIT, lead=lead)
+        self.assertEqual(r["voice"], "QUOTED_PASSAGE")
+
+    def test_reproduction_lead_in(self):
+        r = run("The case is covered by X v. Y, %s." % CIT, lead="12. The relevant paragraph is reproduced hereinbelow: 34. ")
+        self.assertEqual(r["voice"], "QUOTED_PASSAGE")
+
+    def test_party_contention_with_wherein_it_was_held(self):
+        r = run("Before the AFT, the petitioner primarily contented that the order was contrary to X v. Y, %s, wherein it was held "
+                "that the disease is presumed to be due to service." % CIT, court=HC)
+        self.assertEqual(r["voice"], "PARTY_SUBMISSION")
+
+    def test_high_court_this_court_with_supreme_court_report_is_quoted(self):
+        r = run("In X v. Y, %s, this Court considered the scope of judicial review." % CIT, court=HC)
+        self.assertEqual(r["relation"], "CITES")
+
+    def test_footnote_marker_binds_to_its_own_footnote(self):
+        text = ("[[page 1]] 2. The issue is covered by a recent decision in UOI v Madso4. 1 \u201cthe AFT\u201d, hereinafter "
+                "3 (2013) 7 SCC 316 4 2025 SCC OnLine Del 2018 3. Next.")
+        wrong = text.index("(2013) 7 SCC 316")
+        right = text.index("2025 SCC OnLine Del 2018")
+        r1 = T.classify(text, HC, wrong, wrong + 16, "OPINION_NOT_IDENTIFIED", "BODY", SC)
+        r2 = T.classify(text, HC, right, right + 24, "OPINION_NOT_IDENTIFIED", "BODY", SC)
+        self.assertEqual(r1["relation"], "CITES")
+        self.assertEqual(r2["relation"], "FOLLOWS")
+
+    def test_reported_distinguishing_in_a_list(self):
+        r = run("In X v. Y, %s, the earlier view was distinguished." % CIT)
+        self.assertEqual(r["relation"], "CITES")
+
+    def test_statutory_subject_is_not_distinguishing(self):
+        r = run("In view of X v. Y, %s, Article 323A does not apply to the Tribunal." % CIT, court=HC)
+        self.assertNotEqual(r["relation"], "DISTINGUISHES")
+
+    def test_explained_in_authority_is_considers_not_explains(self):
+        r = run("The principles of judicial review have been explained in X v. Y, %s." % CIT)
+        self.assertEqual(r["relation"], "CONSIDERS")
+
+    def test_is_followed_by_is_not_follows(self):
+        r = run("Plaque rupture is followed by thrombus, as noted in X v. Y, %s." % CIT)
+        self.assertNotEqual(r["relation"], "FOLLOWS")
+
+    def test_elision_marker_signals_quotation(self):
+        r = run("X v. Y, %s itself is per incuriam." % CIT, lead="98. Earlier text. xx xx xx 99. However, the \u201carbitrariness\u201d test. ")
+        self.assertEqual(r["voice"], "QUOTED_PASSAGE")
+
+    def test_raw_target_fragment_cleaned(self):
+        self.assertEqual(T.clean_raw_target("isposed of in the following terms"), "\u2026 of in the following terms")
+        self.assertEqual(T.clean_raw_target("MP Sharma"), "MP Sharma")
+
+
 class Build(unittest.TestCase):
     def test_summary_bookkeeping(self):
         s = json.loads((PKG / "treatment" / "TREATMENT_SUMMARY_C13.json").read_text())
@@ -82,7 +138,8 @@ class Build(unittest.TestCase):
     @unittest.skipIf(os.environ.get("C13_SKIP_SLOW"), "slow --check skipped")
     def test_tools_reproduce(self):
         py = sys.executable
-        for tool in ("scnum_reconfirm_c13.py", "identity_c13.py", "graph_c13.py", "package_c13.py"):
+        for tool in ("scnum_reconfirm_c13.py", "identity_c13.py", "graph_c13.py", "review_recheck_c13.py",
+                     "contract_v1_export_c13.py", "package_c13.py"):
             r = subprocess.run([py, "-I", "-B", str(PKG / "tools" / tool), "--check"], capture_output=True, text=True)
             self.assertEqual(r.returncode, 0, tool + r.stdout + r.stderr)
 
