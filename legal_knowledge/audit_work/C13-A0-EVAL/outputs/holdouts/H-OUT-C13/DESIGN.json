@@ -1,0 +1,250 @@
+{
+ "eligible_judgments": 2812,
+ "exclusions_sha256": "599d073bda05443a229ebf1e1acb33952bbd0c56c46829852afbaa7679b41d96",
+ "frame_sha256": "7b9e57ffa5d95a601cec5547d43df4d995b2a98d4a925e1ca996f21093024341",
+ "holdout": "H-OUT-C13",
+ "reallocation_notes": [
+  "SC/PARTY_SPECIFIC: wanted 10, population 1: took all 1; 9 slot(s) reallocated to PENSION_OR_DISCIPLINARY/OTHER proportionally",
+  "JK/BATCH_OR_MULTI: wanted 14, population 13: took all 13; 1 slot(s) reallocated to PENSION_OR_DISCIPLINARY/OTHER proportionally",
+  "JK/PARTY_SPECIFIC: wanted 7, population 1: took all 1; 6 slot(s) reallocated to PENSION_OR_DISCIPLINARY/OTHER proportionally",
+  "ALL/BATCH_OR_MULTI: wanted 14, population 7: took all 7; 7 slot(s) reallocated to PENSION_OR_DISCIPLINARY/OTHER proportionally",
+  "ALL/PARTY_SPECIFIC: wanted 7, population 0: took all 0; 7 slot(s) reallocated to PENSION_OR_DISCIPLINARY/OTHER proportionally"
+ ],
+ "seed": "mimamsa-c13-h-out",
+ "selection": "lowest SHA-256(seed|judgment_key) within each court x stratum",
+ "size_justification": {
+  "assumed_coverage": 0.85,
+  "coverage_wilson_halfwidth_at_c85_unweighted": 0.0404,
+  "expected_covered_judgments": 255.0,
+  "judgments": 300,
+  "kish_deff_overall": 2.0044,
+  "limitation": "If true precision is close to 0.95, no feasible holdout can show it is >= 0.95; the protocol reports the point estimate and interval and states 'met' only on the point estimate rule defined in PROTOCOL_C13.md s.6, with the lower bound shown beside it.",
+  "note": "Judgment-level calculation (conservative: multi-proceeding judgments add proceedings but are clustered, handled by the judgment-cluster bootstrap).",
+  "overall_wilson_halfwidth_at_p95_unweighted": 0.0274,
+  "overall_wilson_halfwidth_at_p95_weighted_neff": 0.0396,
+  "per_court": {
+   "ALL": {
+    "expected_covered": 38.2,
+    "judgments": 45,
+    "kish_deff_within_court": 1.1235,
+    "wilson_halfwidth_at_p95_unweighted": 0.0776,
+    "wilson_halfwidth_at_p95_weighted_neff": 0.0831
+   },
+   "DEL": {
+    "expected_covered": 59.5,
+    "judgments": 70,
+    "kish_deff_within_court": 1.5532,
+    "wilson_halfwidth_at_p95_unweighted": 0.0602,
+    "wilson_halfwidth_at_p95_weighted_neff": 0.0775
+   },
+   "JK": {
+    "expected_covered": 38.2,
+    "judgments": 45,
+    "kish_deff_within_court": 1.3241,
+    "wilson_halfwidth_at_p95_unweighted": 0.0776,
+    "wilson_halfwidth_at_p95_weighted_neff": 0.0915
+   },
+   "PH": {
+    "expected_covered": 59.5,
+    "judgments": 70,
+    "kish_deff_within_court": 1.3785,
+    "wilson_halfwidth_at_p95_unweighted": 0.0602,
+    "wilson_halfwidth_at_p95_weighted_neff": 0.0724
+   },
+   "SC": {
+    "expected_covered": 59.5,
+    "judgments": 70,
+    "kish_deff_within_court": 1.0288,
+    "wilson_halfwidth_at_p95_unweighted": 0.0602,
+    "wilson_halfwidth_at_p95_weighted_neff": 0.0612
+   }
+  },
+  "power_one_sided": {
+   "n_required": 253,
+   "question": "covered decisions needed so that, with 80% power, the one-sided 95% test rejects H0: precision <= 0.95 when true precision is 0.98"
+  }
+ },
+ "strata": [
+  {
+   "N_h": 7,
+   "court": "ALL",
+   "design_weight": 1.0,
+   "inclusion_probability": 1.0,
+   "n_h": 7,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "BATCH_OR_MULTI"
+  },
+  {
+   "N_h": 166,
+   "court": "ALL",
+   "design_weight": 6.384615,
+   "inclusion_probability": 0.156627,
+   "n_h": 26,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "OTHER"
+  },
+  {
+   "N_h": 0,
+   "court": "ALL",
+   "design_weight": "",
+   "inclusion_probability": 0.0,
+   "n_h": 0,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "PARTY_SPECIFIC"
+  },
+  {
+   "N_h": 75,
+   "court": "ALL",
+   "design_weight": 6.25,
+   "inclusion_probability": 0.16,
+   "n_h": 12,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "PENSION_OR_DISCIPLINARY"
+  },
+  {
+   "N_h": 75,
+   "court": "DEL",
+   "design_weight": 3.571429,
+   "inclusion_probability": 0.28,
+   "n_h": 21,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "BATCH_OR_MULTI"
+  },
+  {
+   "N_h": 391,
+   "court": "DEL",
+   "design_weight": 27.928571,
+   "inclusion_probability": 0.035806,
+   "n_h": 14,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "OTHER"
+  },
+  {
+   "N_h": 10,
+   "court": "DEL",
+   "design_weight": 1.0,
+   "inclusion_probability": 1.0,
+   "n_h": 10,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "PARTY_SPECIFIC"
+  },
+  {
+   "N_h": 665,
+   "court": "DEL",
+   "design_weight": 26.6,
+   "inclusion_probability": 0.037594,
+   "n_h": 25,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "PENSION_OR_DISCIPLINARY"
+  },
+  {
+   "N_h": 13,
+   "court": "JK",
+   "design_weight": 1.0,
+   "inclusion_probability": 1.0,
+   "n_h": 13,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "BATCH_OR_MULTI"
+  },
+  {
+   "N_h": 152,
+   "court": "JK",
+   "design_weight": 8.941176,
+   "inclusion_probability": 0.111842,
+   "n_h": 17,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "OTHER"
+  },
+  {
+   "N_h": 1,
+   "court": "JK",
+   "design_weight": 1.0,
+   "inclusion_probability": 1.0,
+   "n_h": 1,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "PARTY_SPECIFIC"
+  },
+  {
+   "N_h": 128,
+   "court": "JK",
+   "design_weight": 9.142857,
+   "inclusion_probability": 0.109375,
+   "n_h": 14,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "PENSION_OR_DISCIPLINARY"
+  },
+  {
+   "N_h": 108,
+   "court": "PH",
+   "design_weight": 5.142857,
+   "inclusion_probability": 0.194444,
+   "n_h": 21,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "BATCH_OR_MULTI"
+  },
+  {
+   "N_h": 324,
+   "court": "PH",
+   "design_weight": 21.6,
+   "inclusion_probability": 0.046296,
+   "n_h": 15,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "OTHER"
+  },
+  {
+   "N_h": 30,
+   "court": "PH",
+   "design_weight": 3.0,
+   "inclusion_probability": 0.333333,
+   "n_h": 10,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "PARTY_SPECIFIC"
+  },
+  {
+   "N_h": 536,
+   "court": "PH",
+   "design_weight": 22.333333,
+   "inclusion_probability": 0.044776,
+   "n_h": 24,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "PENSION_OR_DISCIPLINARY"
+  },
+  {
+   "N_h": 30,
+   "court": "SC",
+   "design_weight": 1.428571,
+   "inclusion_probability": 0.7,
+   "n_h": 21,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "BATCH_OR_MULTI"
+  },
+  {
+   "N_h": 35,
+   "court": "SC",
+   "design_weight": 2.058824,
+   "inclusion_probability": 0.485714,
+   "n_h": 17,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "OTHER"
+  },
+  {
+   "N_h": 1,
+   "court": "SC",
+   "design_weight": 1.0,
+   "inclusion_probability": 1.0,
+   "n_h": 1,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "PARTY_SPECIFIC"
+  },
+  {
+   "N_h": 65,
+   "court": "SC",
+   "design_weight": 2.096774,
+   "inclusion_probability": 0.476923,
+   "n_h": 31,
+   "seed": "mimamsa-c13-h-out",
+   "stratum": "PENSION_OR_DISCIPLINARY"
+  }
+ ],
+ "unit": "judgment (representative copy; all copies of a judgment are one cluster)"
+}

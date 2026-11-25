@@ -1,0 +1,37 @@
+{
+ "holdouts": {
+  "H-HOLD-C13": {
+   "files": {
+    "holdouts/H-HOLD-C13/DESIGN.json": "fcfe3aa51ac64164491fdac7d4453578f4e91cf88f695fb8bff2028838c7460d",
+    "holdouts/H-HOLD-C13/RESERVE.csv": "3d8dc7c82b06104b1bcfa8ecc359eeb508071293a9fe22e64358685b750064c5",
+    "holdouts/H-HOLD-C13/SAMPLE.csv": "d10f6b95c449af14e9467a0db6b952b81d226d49cc216d10b23665d0dcbb9b69"
+   }
+  },
+  "H-OUT-C13": {
+   "files": {
+    "holdouts/H-OUT-C13/DESIGN.json": "7b3078f21ec5c067e44d9042a482cdb31b426c859b26ca1c88111ddf51458953",
+    "holdouts/H-OUT-C13/SAMPLE.csv": "0df7bd70d5fac29d7825bca5a8b06f35dd83055a392a30e4263e54f235bc5fe5"
+   }
+  },
+  "H-REL-C13": {
+   "files": {
+    "holdouts/H-REL-C13/DESIGN.json": "22dc344e143f765a1475193f5440488485f28d5a1d13e397c3421dff77431872",
+    "holdouts/H-REL-C13/SAMPLE.csv": "000d057c11b8de524c39ac1499f0ba9cb6a71374208f913d4d6fdf85302382be"
+   }
+  }
+ },
+ "overlaps": {
+  "H-HOLD_and_H-REL": 15,
+  "H-OUT_and_H-HOLD": 21,
+  "H-OUT_and_H-REL": 32
+ },
+ "purpose": "Proves later extractor freezes post-date the fresh holdouts: the sha256 below are committed with the samples; a freeze commit must be a descendant of the commit that adds this file.",
+ "rule": "Holdout texts are not read for development. Spent sets are excluded (outputs/exclusions).",
+ "sizes": {
+  "H-HOLD-C13": 75,
+  "H-HOLD-C13-RESERVE": 38,
+  "H-OUT-C13": 300,
+  "H-REL-C13_pages": 160
+ },
+ "status": "DRAWN_NOT_CODED"
+}
