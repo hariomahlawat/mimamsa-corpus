@@ -174,8 +174,10 @@ any output.
 | C13A4-v1.1 | `STATED_IN_INSTRUMENT_DATE_FROM_INFERRED_MASTHEAD` qualifier (AFT s.41 v02, AFT Procedure Rules 2008) | R-07 |
 | C13A4-v1.1 | Multi-page rules list every page row in evidence_ids | R-08 |
 | C13A4-v1.1 | C13PE-1993-16 check_note records the pasted-fragment scan artefact | R-10 |
+| C13A4-v1.2 | NOT_YET_IN_FORCE uses the earliest possible start of any version (stated retrospective dates included): r.16A 04-06-1979 to 27-07-1979 returns v03 | N-01 |
+| C13A4-v1.2 | Resolver reason keeps the inferred-masthead qualifier | N-02 |
 
-Review records: `reviews/review_c13_a4_5db80dfc.md` and `_findings.csv` (verdict ACCEPT WITH CONDITIONS; all 21 page
+Review records: `reviews/review_c13_a4_5db80dfc.md`, `_findings.csv` and `reviews/confirmation_c13_a4_fa8715fa*` (verdict ACCEPT WITH CONDITIONS; all 21 page
 readings confirmed and all 10 promotions upheld; R-09, R-11 to R-13 informational).
 
 ## 8. Limits

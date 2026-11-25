@@ -129,6 +129,20 @@ def test_r02_retrospective_deemed_versions_included_in_deemed_window():
     assert "retrospective deemed effect" in c["reason"] and "AQ-06" in c["reason"]
 
 
+def test_n01_deemed_window_before_the_rule_itself_was_inserted():
+    for d in ("1979-06-04", "1979-07-01", "1979-07-27"):
+        r = R("AR1954", "r.16A", d)
+        assert r["status"] == "IN_FORCE_CANDIDATES" and ids(r) == ["AR1954/r.16A/v03"], d
+    r = R("AR1954", "r.16A", "1979-06-03")
+    assert r["status"] == "NOT_YET_IN_FORCE" and "retrospective" in r["reason"]
+
+
+def test_n02_inferred_masthead_qualifier_kept_in_reason():
+    r = R("AFTPR2008", "whole", "2009-01-01")
+    assert any("INFERRED_MASTHEAD" in c["reason"] for c in r["candidates"])
+    assert not any("INFERRED_MASTHEAD" in c["reason"] for c in R("AR1954", "r.22", "2000-01-01")["candidates"])
+
+
 def test_r02_negative_controls_outside_deemed_window():
     assert "AR1954/r.16A/v03" not in ids(R("AR1954", "r.16A", "1979-06-03"))
     assert "AR1954/r.2/v03" not in ids(R("AR1954", "r.2", "1979-01-01"))

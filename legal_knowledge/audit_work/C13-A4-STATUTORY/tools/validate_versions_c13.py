@@ -144,18 +144,18 @@ def resolve_at(recs, family, provision, date):
     axis = "NOT_DETERMINED (choose conduct / proceedings / procedural-action / document date with legal advice: " + vs[0]["temporal_axes"]["conduct_date"]["question_id"] + ")"
     out = {"family": family, "provision": provision, "date": date, "governing_axis": axis,
            "candidates": [], "possible_versions": [], "ceased_by": None}
-    first = vs[0]
-    f0 = first["effective_from"]["date"]
-    retro0 = first.get("retrospective_deemed_effect_from")
-    floor0 = instrument_floor(first)
-    earliest = min(d for d in (f0 if not retro0 else min(f0 or retro0, retro0), floor0) if d) if (f0 or floor0 or retro0) else None
-    if f0 and not retro0:
-        earliest = f0  # a stated commencement is the earliest possible start
-    if earliest and date < earliest:
-        out["status"] = "NOT_YET_IN_FORCE"
-        out["reason"] = (f"date precedes the earliest possible start of {first['version_id']} ({earliest}: "
-                         + ("stated commencement" if (f0 and earliest == f0) else "date of the creating instrument / stated retrospective date") + ")")
-        return out
+    def earliest_start(v):  # stated retrospective date, else stated commencement, else the instrument floor
+        return v.get("retrospective_deemed_effect_from") or v["effective_from"]["date"] or instrument_floor(v)
+    starts = [(earliest_start(v), v) for v in vs]
+    known = [(d, v) for d, v in starts if d]
+    if known and len(known) == len(starts):
+        earliest, ev = min(known, key=lambda x: x[0])
+        if date < earliest:
+            kind = ("stated retrospective deemed date" if ev.get("retrospective_deemed_effect_from") == earliest else
+                    "stated commencement" if ev["effective_from"]["date"] == earliest else "date of the creating instrument")
+            out["status"] = "NOT_YET_IN_FORCE"
+            out["reason"] = f"date precedes the earliest possible start of any version ({earliest}: {kind} of {ev['version_id']})"
+            return out
     entries = []
     for i, v in enumerate(vs):
         f, t = v["effective_from"], v["effective_to"]
@@ -174,7 +174,7 @@ def resolve_at(recs, family, provision, date):
         if hi and date >= hi:
             continue
         if stated and date >= stated:
-            est, why = True, f"stated start {stated}"
+            est, why = True, f"stated start {stated}" + ("" if f["status"] == "STATED_IN_INSTRUMENT" else f" ({f['status']})")
         elif retro and date >= retro:
             est, why = True, f"retrospective deemed effect from {retro} (stated in the instrument; legal effect AQ-06 open)"
         else:
