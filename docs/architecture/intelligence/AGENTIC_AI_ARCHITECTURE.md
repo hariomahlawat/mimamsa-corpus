@@ -15,15 +15,18 @@ flowchart TD
   O --> D[Private document tools]
   H --> S[Published eligible evidence services]
   G --> S
-  F --> V[Operational policy gate]
+  F --> V[Pre-authorized output policy and rule gate]
   D --> V
-  S --> E[Claim and source verification]
-  V --> E
-  E --> R[Conditional response / research-only / abstention]
+  S --> P[Evidence pack]
+  V --> P
+  P --> Y[Proposed synthesis / typed results]
+  Y --> E[Final claim verification and authorization]
+  E --> B[Immutable approved content / source-only fallback]
+  B --> R[Serving and revocation barrier]
   R --> U
 ```
 
-The orchestrator is not a source of truth. Evidence services resolve identities, anchors and access at the actual serving generation. The policy gate is outside the model and is applied before operative rule evaluation and before output/export. The model cannot make the gate pass by declaring an answer verified. See [tool contracts](AGENT_TOOL_CONTRACTS.md) and [legal engine](DETERMINISTIC_LEGAL_ENGINE.md).
+The orchestrator is not a source of truth. Evidence services resolve identities, anchors and access at the actual serving generation. The policy gate is outside the model, authorizes the output class before context assembly, gates any operative evaluation, and validates the final claim-bound content after synthesis. All delivery goes through the [serving barrier](SERVING_AND_REVOCATION_CONTRACT.md); see [final claim contract](FINAL_CLAIM_VERIFICATION_CONTRACT.md). The model cannot make the gate pass by declaring an answer verified. See [tool contracts](AGENT_TOOL_CONTRACTS.md) and [legal engine](DETERMINISTIC_LEGAL_ENGINE.md).
 
 ## 2. Logical responsibilities
 
@@ -54,7 +57,7 @@ Terminal alternatives: `CANCELLED`, `BUDGET_EXHAUSTED`, `FAILED`, `INVALIDATED`.
 - Store a durable workflow record and immutable task attempts; checkpoint completed read-only tasks. When input facts change, invalidate dependent tasks and replan. On restart, re-check scope and generation; retry only idempotent work.
 - Define bounded task count, graph depth, result limit, model token budget, elapsed time, concurrency and retry limits per workflow class. Proposed numerical defaults are benchmark inputs, not release specifications (e.g. 8 tool calls, 3 graph hops, 30 seconds for an interactive research workflow, configurable by policy). Long research jobs run with progress and cancellation rather than blocking the UI.
 - Ask a small number of material questions where answers affect legal scope, version, authority or route. Allow explicit UNKNOWN. Do not silently fabricate dates, rank, service status, procedural stage, or events.
-- Revalidate authorization, exclusion state and evidence generation at each tool call and again before rendering or export. If a source was withdrawn during a run, discard affected material and restart or stop; a pinned historical snapshot does not override active exclusions.
+- Revalidate authorization at each tool call. All content delivery, including queued frames, downloads and reconnects, is serialized at the serving barrier; no earlier check grants a reusable delivery permission. Invalidate affected work on a fence change. A pinned historical snapshot never overrides active exclusions.
 - The verifier must resolve anchors against eligible originals/derivatives, check source status and identify unsupported or contrary claims. For claim entailment, use independently tested methods and qualified review where required; a second model's agreement is not sufficient.
 - Record concise user-visible research actions, sources, rule checks, limitations and gaps. Do not require or persist private model chain-of-thought. Trace replay records inputs/outputs only under session privacy rules; model replay need not be byte-identical.
 
@@ -79,3 +82,15 @@ A research user may switch between commander-friendly and detailed evidence view
 ## 6. Cycle 13 compatibility
 
 No new live agent implementation required. Prefer reusable, typed search/catalogue/graph/evidence services, stable source and page anchors, cancellation and explicit status fields **where already compatible with current B0/B1 scope**. The later orchestrator calls application service interfaces via a controlled broker, not direct SQL, filesystem or general shell tools. See [roadmap](EVALUATION_AND_ROADMAP.md) for gated delivery.
+
+## 7. Durable execution and workspace protocol (INT-F08/F14)
+
+Combine deterministic phase gates with model-proposed research DAGs. Validate DAG acyclicity, registered tools, typed arguments, dependencies, owner scope, output class and budget before scheduling; reject undeclared edges or privileges. Exact lookup bypasses the DAG. Use the existing durable job mechanism initially; do not introduce a separate workflow engine without measured benefit.
+
+Persist workflow ID, actor/session, serving revision, fact revision, plan revision, node ID, input-dependency digest, attempt number, lease expiry and monotonically increasing fencing token. A completion is accepted by compare-and-set only if workflow is active, lease token/current plan and fact revision match, dependency digests and current eligibility still hold. Stale results are discarded, not attached to a replan. Use one cumulative resource budget across retries and replans; no reset on restart. Reuse only unaffected nodes whose entire input and policy dependency set remains valid. Bound parallelism and queue admission. Cancellation immediately prevents attachment; cooperative cancellation followed by process termination after a measured grace period. Future private draft writes require a unique idempotency key scoped to owner/session/operation/input revision and atomic result record, so retries cannot duplicate writes. Never retry privileged operations to evade policy.
+
+Synthetic recovery trace: attempt A1 obtains fence 7 for node N at fact revision 3; user edits a material date to revision 4 and scheduler invalidates N, issues fence 8 for N2; A1 finishes late and CAS rejects it; only N2's result may attach. A crash after a private draft commit but before acknowledgment returns the same idempotent result, not a second draft. A revoked source invalidates all dependent nodes and pending delivery independently of worker cancellation.
+
+Workspace state is server-owned and owner-scoped: workspace ID, current tabs and comparison references, fact prompts, pinned copy/page (optional derivative span), selected result and immutable result version, coverage and conflict flags. A typed progress event contains workflow ID, sequence (monotone per workflow), task ID, stage, status, redacted counts, permitted evidence/result IDs, and invalidation references. It never carries unverified substantive model prose. Reconnect via an authenticated fresh snapshot and monotone sequence; do not replay stale frames without the serving fence. Client removes invalidated application-controlled fragments, focus and links, and explains why. Preserve permitted partial results; mark completeness/coverage and cancellation. Commander/research view toggle shares workspace state, not privileges.
+
+Compare fixed DAG, bounded dynamic DAG and hybrid phase-gated planning on identical blind tasks: completion, material-question precision, adverse discovery, unsupported claims, tool calls, tail latency and resources. Add dynamic replan or external framework only when it demonstrably improves capability with equal policy behavior. Test kill/restart before and after CAS, duplicate submission, fact edits, revocation, cancellation during parallel work and keyboard-only search-to-comparison-to-source journeys. No live agent requirement in C13.
