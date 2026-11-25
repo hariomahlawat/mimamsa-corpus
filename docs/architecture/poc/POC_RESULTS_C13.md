@@ -10,8 +10,8 @@ from GitHub `windows-latest`. **Selected-host acceptance is BLOCKED until the ow
 | Decision | Recommendation | Main evidence |
 |---|---|---|
 | P1 host | **ASP.NET Core 10 (LTS) on Kestrel, as a Windows Service** (`UseWindowsService`, virtual service account, SCM recovery). IIS/ANCM (web.config provided) only if the T1 proxy topology is later proven. | Quiet-host rerun: metadata 12,689 req/s vs best Django 1,226; PDF 893 vs 639; search 99 vs 71 (DB-bound). One process of 85–135 MB RSS vs 240–270 MB for 4 Django workers. A single process uses all cores; a Django Windows Service is effectively one GIL-bound worker. R2-N01 was built and proven on Kestrel (PipeWriter handoff, cross-platform TCP-state drain probe). Both services installed, restarted and crash-recovered on hosted Windows. |
-| P2 search | **Lexical BM25 (Tantivy) with abbreviation expansion and an exact-identifier layer as the primary ranker.** Add dense hybrid only after full-text vector coverage is affordable. PostgreSQL FTS stays for filters and facets, not ranking. | nDCG@10 0.72 (bm25+abbr+id) vs 0.62 (PG FTS tiered+abbr+id), 0.61 (hybrid with head-only dense) and 0.33 (dense alone). The identifier layer lifts exact-ID Target@1 from 0.53 to 0.82. Abbreviation expansion lifts abbreviation-query P@10 from 0.54 to 0.83. |
-| P3 embeddings | **bge-small-en-v1.5 (MIT), int8 ONNX on CPU** if a dense layer is used. | Best dense quality among the models judged. int8 costs ≈0.03 nDCG vs fp32 and is ≈2–6× faster. Base models are 3–4× slower and 2–4× larger in memory. |
+| P2 search (AI-labelled, not human-verified; same labeller built the systems; unequal pool depth) | **Lexical BM25 (Tantivy) with abbreviation expansion and an exact-identifier layer as the primary ranker.** Add dense hybrid only after full-text vector coverage is affordable. PostgreSQL FTS stays for filters and facets, not ranking. | nDCG@10 0.72 (bm25+abbr+id) vs 0.62 (PG FTS tiered+abbr+id), 0.61 (hybrid with head-only dense) and 0.33 (dense alone). The identifier layer lifts exact-ID Target@1 from 0.53 to 0.82. Abbreviation expansion lifts abbreviation-query P@10 from 0.54 to 0.83. |
+| P3 embeddings (AI-labelled; other models pooled at depth 5 only) | **bge-small-en-v1.5 (MIT), int8 ONNX on CPU** if a dense layer is used. | Best dense quality among the models judged. int8 costs ≈0.03 nDCG vs fp32 and is ≈2–6× faster. Base models are 3–4× slower and 2–4× larger in memory. |
 | P4 PDF | **pypdfium2** (Apache-2.0/BSD-3) for extraction and char boxes. **PDF.js with a custom authenticated range transport** for viewing. Avoid PyMuPDF (AGPL) in the shipped product. | pypdfium2 matches PyMuPDF quality, is fastest with the lowest RSS, and has no `(cid:)` artefacts, which pdfminer and pdfplumber produce. 46.8 MB PDF: near-end page using 4.2 % of the bytes. |
 | P5 jobs | **PostgreSQL `SKIP LOCKED` queue with leases, advisory-lock concurrency slots and sandboxed parsing** | Every scenario demonstrated (below). |
 
@@ -52,6 +52,14 @@ the job queue. It is not appropriate for the protected-delivery host.
 
 ## R2-N01 protected delivery
 
+**Update after the independent review of adb5e32e:** 2 P1 and 6 P2 findings. Dispositions are in
+[REVIEW_RESPONSE_R2N01.md](REVIEW_RESPONSE_R2N01.md).
+- F01–F06, F09, F10 and F11 are fixed.
+- F07 (independent probes) and F14 (25-browser mix) remain open for the selected host.
+- Hosted Windows CI 45699091315 is all green, including R2-N01 checks against the installed Windows Service (16/16).
+- The PR #54 oracle accepts the Linux traces, which now include uncertain and zero settlements.
+- P1 was re-benchmarked with pinned cores (3 runs) plus a protected-path benchmark. The numbers are indicative only.
+
 Full detail: [R2N01_PROTECTED_DELIVERY_POC.md](R2N01_PROTECTED_DELIVERY_POC.md).
 
 - Linux: 40/40 HTTP transport checks, the Serving §10 ledger oracle 7/7, and 12/12 PDF.js protected-viewer checks.
@@ -74,7 +82,7 @@ Full detail: [R2N01_PROTECTED_DELIVERY_POC.md](R2N01_PROTECTED_DELIVERY_POC.md).
 queries, 10 legal-term queries and 10 natural-language queries. Identifier targets were drawn from metadata with a
 fixed seed before any system ran.
 
-**Labels — AI-labelled.** 1,089 pooled items were judged blind to system (sha1 order, title and snippet only) for
+**Labels — AI-labelled.** 1,089 pooled items were judged blind to system identity at labelling time (sha1 order, title and snippet only) for
 the abbreviation, legal-term and NL categories. Pooling depth was 10 for the five headline systems, 3 for the
 variants and 5 for each P3 model. Identifier and statute categories used objective rules (target doc, or exact
 identifier/section string in the text, including an unpooled full-collection scan). The labeller is the same AI

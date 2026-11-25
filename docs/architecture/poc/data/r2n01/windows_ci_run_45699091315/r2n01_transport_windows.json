@@ -1,0 +1,639 @@
+{
+ "platform": "win32",
+ "checks": [
+  {
+   "name": "meta_authorized_ok",
+   "pass": true,
+   "status": 200
+  },
+  {
+   "name": "meta_unauthenticated_401",
+   "pass": true,
+   "status": 401
+  },
+  {
+   "name": "meta_bad_token_401",
+   "pass": true,
+   "status": 401
+  },
+  {
+   "name": "meta_other_users_doc_404_no_size",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "range_first_chunk_exact_206",
+   "pass": true,
+   "status": 206,
+   "headers": {
+    "content-length": "65536",
+    "connection": "close",
+    "content-type": "application/pdf",
+    "date": "Wed, 25 Nov 2026 20:56:23 GMT",
+    "accept-ranges": "bytes",
+    "cache-control": "no-store, private",
+    "content-range": "bytes 0-65535/6098420",
+    "pragma": "no-cache",
+    "x-content-type-options": "nosniff"
+   }
+  },
+  {
+   "name": "range_near_end_exact_206",
+   "pass": true,
+   "status": 206
+  },
+  {
+   "name": "range_max_size_exact_206",
+   "pass": true,
+   "status": 206,
+   "got": 131072
+  },
+  {
+   "name": "range_missing_400",
+   "pass": true,
+   "status": 400,
+   "body_len": 0
+  },
+  {
+   "name": "range_multi_400",
+   "pass": true,
+   "status": 400,
+   "body_len": 0
+  },
+  {
+   "name": "range_open_ended_400",
+   "pass": true,
+   "status": 400,
+   "body_len": 0
+  },
+  {
+   "name": "range_suffix_400",
+   "pass": true,
+   "status": 400,
+   "body_len": 0
+  },
+  {
+   "name": "range_oversized_400",
+   "pass": true,
+   "status": 400,
+   "body_len": 0
+  },
+  {
+   "name": "range_malformed_400",
+   "pass": true,
+   "status": 400,
+   "body_len": 0
+  },
+  {
+   "name": "range_reversed_400",
+   "pass": true,
+   "status": 400,
+   "body_len": 0
+  },
+  {
+   "name": "range_start_out_of_bounds_416",
+   "pass": true,
+   "status": 416,
+   "body_len": 0
+  },
+  {
+   "name": "range_end_out_of_bounds_416",
+   "pass": true,
+   "status": 416,
+   "body_len": 0
+  },
+  {
+   "name": "range_unauthenticated_401",
+   "pass": true,
+   "status": 401
+  },
+  {
+   "name": "range_bad_token_401",
+   "pass": true,
+   "status": 401
+  },
+  {
+   "name": "range_other_users_session_404",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "range_wrong_copy_for_doc_404",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "range_non_hex_address_404",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "conditional_if_none_match_no_304",
+   "pass": true,
+   "status": 206
+  },
+  {
+   "name": "conditional_if_modified_since_no_304",
+   "pass": true,
+   "status": 206
+  },
+  {
+   "name": "conditional_if_range_ignored",
+   "pass": true,
+   "status": 206
+  },
+  {
+   "name": "v1_static_route_not_a_vault_bypass",
+   "pass": true,
+   "status": 401
+  },
+  {
+   "name": "small_doc_before_withdrawal_206",
+   "pass": true,
+   "status": 206
+  },
+  {
+   "name": "withdraw_requires_admin",
+   "pass": true,
+   "status": 401
+  },
+  {
+   "name": "F01_withdraw_unknown_copy_404_typed_no_epoch_bump",
+   "pass": true,
+   "status": 404,
+   "body": "b'{\"error\":\"unknown_copy\",\"doc\":\"doc-small\",\"sha\":\"0000000000000000000000000000000'"
+  },
+  {
+   "name": "F01_withdraw_unknown_doc_404_no_epoch_bump",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "F01_withdraw_invalid_sha_400",
+   "pass": true,
+   "status": 400
+  },
+  {
+   "name": "withdraw_admin_ok",
+   "pass": true,
+   "status": 200,
+   "body": "b'{\"operation\":\"withdraw-80221d5c\",\"epoch\":2,\"digest\":\"state-1b81e6731b3f5ffe\",\"changed\":true,\"admitted_ms\":1795640184037,'"
+  },
+  {
+   "name": "F01_repeat_withdraw_idempotent_no_epoch_bump",
+   "pass": true,
+   "status": 200
+  },
+  {
+   "name": "after_withdrawal_range_404_no_bytes",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "after_withdrawal_meta_404",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "unrelated_eligible_doc_still_206",
+   "pass": true,
+   "status": 206
+  },
+  {
+   "name": "ledger_balances_after_functional_suite",
+   "pass": true,
+   "ledger": {
+    "cap": 8388608,
+    "reserved": 0,
+    "charged": 0,
+    "states": {
+     "DRAINED": 11
+    }
+   }
+  },
+  {
+   "name": "F04_seed_on_restart_does_not_revert_withdrawal",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "F04_unrelated_copy_after_restart_206",
+   "pass": true,
+   "status": 206
+  },
+  {
+   "name": "B1_site_cap_one_64KiB_attempt_never_overcommits",
+   "pass": true,
+   "requests": 40,
+   "threads": 40,
+   "site_cap": 65536,
+   "ok_206": 3,
+   "denied_503": 37,
+   "other": 0,
+   "all_206_bodies_exact": true,
+   "wall_s": 0.82,
+   "ledger_end": {
+    "cap": 65536,
+    "reserved": 0,
+    "charged": 0,
+    "states": {
+     "DRAINED": 3
+    }
+   },
+   "max_site_outstanding": 65536,
+   "samples": 14019,
+   "violations": 0
+  },
+  {
+   "name": "B2_site_cap_1MiB_never_overcommits",
+   "pass": true,
+   "requests": 400,
+   "threads": 32,
+   "site_cap": 1048576,
+   "ok_206": 33,
+   "denied_503": 367,
+   "other": 0,
+   "all_206_bodies_exact": true,
+   "wall_s": 5.28,
+   "ledger_end": {
+    "cap": 1048576,
+    "reserved": 0,
+    "charged": 0,
+    "states": {
+     "DRAINED": 53
+    }
+   },
+   "max_site_outstanding": 474202,
+   "samples": 42772,
+   "violations": 0
+  },
+  {
+   "name": "killed_connection_charge_retained_until_termination_then_drained",
+   "pass": true,
+   "uncertain": 0,
+   "n": 8
+  },
+  {
+   "name": "killed_connection_never_refunded_as_zero_transfer",
+   "pass": true,
+   "released": 0
+  },
+  {
+   "name": "F05_real_uncertain_transfer_over_http",
+   "pass": true,
+   "uncertain_rows": 7
+  },
+  {
+   "name": "withdrawal_between_slices_stops_handoff",
+   "pass": true,
+   "body_received": 730,
+   "payload_handed": 64512,
+   "post_fence": 0
+  },
+  {
+   "name": "crash_charge_survives_restart",
+   "pass": true,
+   "ledger": {
+    "cap": 8388608,
+    "reserved": 3072,
+    "charged": 131072,
+    "states": {
+     "RESERVED": 1,
+     "ACCEPTED": 2
+    }
+   }
+  },
+  {
+   "name": "F02_no_release_while_orphan_socket_may_deliver",
+   "pass": true,
+   "ledger": {
+    "cap": 8388608,
+    "reserved": 0,
+    "charged": 0,
+    "states": {
+     "DRAINED": 3
+    }
+   },
+   "reconcile": "b'{\"drained\":0,\"min_age_s\":3}'",
+   "bytes_after_crash": 0
+  },
+  {
+   "name": "F02_release_only_after_os_socket_evidence",
+   "pass": true,
+   "ledger": {
+    "cap": 8388608,
+    "reserved": 0,
+    "charged": 0,
+    "states": {
+     "DRAINED": 3
+    }
+   }
+  },
+  {
+   "name": "F03_post_ack_egress_bounded_by_send_buffer",
+   "pass": true,
+   "withdraw_status": 200,
+   "reset_streams": 1,
+   "bytes_before_ack": 1024,
+   "bytes_read_after_ack": 0,
+   "client_queue_at_ack": null,
+   "platform": "win32",
+   "new_bytes_after_ack": null,
+   "bound_bytes": 65536
+  }
+ ],
+ "scenarios": {
+  "A_functional": {
+   "ledger_end": {
+    "cap": 8388608,
+    "reserved": 0,
+    "charged": 0,
+    "states": {
+     "DRAINED": 11
+    }
+   }
+  },
+  "B1_site_cap_one_64KiB_attempt": {
+   "requests": 40,
+   "threads": 40,
+   "site_cap": 65536,
+   "ok_206": 3,
+   "denied_503": 37,
+   "other": 0,
+   "all_206_bodies_exact": true,
+   "wall_s": 0.82,
+   "ledger_end": {
+    "cap": 65536,
+    "reserved": 0,
+    "charged": 0,
+    "states": {
+     "DRAINED": 3
+    }
+   },
+   "max_site_outstanding": 65536,
+   "samples": 14019,
+   "violations": 0
+  },
+  "B2_site_cap_1MiB": {
+   "requests": 400,
+   "threads": 32,
+   "site_cap": 1048576,
+   "ok_206": 33,
+   "denied_503": 367,
+   "other": 0,
+   "all_206_bodies_exact": true,
+   "wall_s": 5.28,
+   "ledger_end": {
+    "cap": 1048576,
+    "reserved": 0,
+    "charged": 0,
+    "states": {
+     "DRAINED": 53
+    }
+   },
+   "max_site_outstanding": 474202,
+   "samples": 42772,
+   "violations": 0
+  },
+  "C_killed_connections": {
+   "trials": [
+    {
+     "received": 2048,
+     "mid_state": "ACCEPTED",
+     "mid_charged": 65536,
+     "amount": 65536,
+     "mid_site_charged": 134144,
+     "mid_site_reserved": 0,
+     "end_state": "DRAINED",
+     "end_reason": "ushed | drained: kestrel connection 0HNQB6QC9OVV0 ended 2026-11-25T20:56:38.3756262Z; OS TCP table: socket 5181->52593 gone (all data ACKed or connection reset)",
+     "end_site": {
+      "reserved": 0,
+      "charged": 0
+     }
+    },
+    {
+     "received": 2048,
+     "mid_state": "ACCEPTED",
+     "mid_charged": 65536,
+     "amount": 65536,
+     "mid_site_charged": 134144,
+     "mid_site_reserved": 0,
+     "end_state": "DRAINED",
+     "end_reason": "ushed | drained: kestrel connection 0HNQB6QC9OVV1 ended 2026-11-25T20:56:43.4918289Z; OS TCP table: socket 5181->52598 gone (all data ACKed or connection reset)",
+     "end_site": {
+      "reserved": 0,
+      "charged": 0
+     }
+    },
+    {
+     "received": 2048,
+     "mid_state": "ACCEPTED",
+     "mid_charged": 65536,
+     "amount": 65536,
+     "mid_site_charged": 134144,
+     "mid_site_reserved": 0,
+     "end_state": "DRAINED",
+     "end_reason": "ushed | drained: kestrel connection 0HNQB6QC9OVV2 ended 2026-11-25T20:56:48.6238200Z; OS TCP table: socket 5181->52604 gone (all data ACKed or connection reset)",
+     "end_site": {
+      "reserved": 0,
+      "charged": 0
+     }
+    },
+    {
+     "received": 2048,
+     "mid_state": "ACCEPTED",
+     "mid_charged": 65536,
+     "amount": 65536,
+     "mid_site_charged": 134144,
+     "mid_site_reserved": 0,
+     "end_state": "DRAINED",
+     "end_reason": "ushed | drained: kestrel connection 0HNQB6QC9OVV3 ended 2026-11-25T20:56:53.7757919Z; OS TCP table: socket 5181->52614 gone (all data ACKed or connection reset)",
+     "end_site": {
+      "reserved": 0,
+      "charged": 0
+     }
+    },
+    {
+     "received": 2048,
+     "mid_state": "ACCEPTED",
+     "mid_charged": 65536,
+     "amount": 65536,
+     "mid_site_charged": 134144,
+     "mid_site_reserved": 0,
+     "end_state": "DRAINED",
+     "end_reason": "ushed | drained: kestrel connection 0HNQB6QC9OVV4 ended 2026-11-25T20:56:58.9317438Z; OS TCP table: socket 5181->52624 gone (all data ACKed or connection reset)",
+     "end_site": {
+      "reserved": 0,
+      "charged": 0
+     }
+    },
+    {
+     "received": 2048,
+     "mid_state": "ACCEPTED",
+     "mid_charged": 65536,
+     "amount": 65536,
+     "mid_site_charged": 134144,
+     "mid_site_reserved": 0,
+     "end_state": "DRAINED",
+     "end_reason": "ushed | drained: kestrel connection 0HNQB6QC9OVV5 ended 2026-11-25T20:57:04.0747264Z; OS TCP table: socket 5181->52651 gone (all data ACKed or connection reset)",
+     "end_site": {
+      "reserved": 0,
+      "charged": 0
+     }
+    },
+    {
+     "received": 2048,
+     "mid_state": "ACCEPTED",
+     "mid_charged": 65536,
+     "amount": 65536,
+     "mid_site_charged": 134144,
+     "mid_site_reserved": 0,
+     "end_state": "DRAINED",
+     "end_reason": "ushed | drained: kestrel connection 0HNQB6QC9OVV6 ended 2026-11-25T20:57:09.2168198Z; OS TCP table: socket 5181->52669 gone (all data ACKed or connection reset)",
+     "end_site": {
+      "reserved": 0,
+      "charged": 0
+     }
+    },
+    {
+     "received": 2048,
+     "mid_state": "ACCEPTED",
+     "mid_charged": 65536,
+     "amount": 65536,
+     "mid_site_charged": 134144,
+     "mid_site_reserved": 0,
+     "end_state": "DRAINED",
+     "end_reason": "ushed | drained: kestrel connection 0HNQB6QC9OVV7 ended 2026-11-25T20:57:14.6756346Z; OS TCP table: socket 5181->52674 gone (all data ACKed or connection reset)",
+     "end_site": {
+      "reserved": 0,
+      "charged": 0
+     }
+    }
+   ],
+   "uncertain_count": 0,
+   "uncertain_rows_total": 7
+  },
+  "C_withdraw_mid_response": {
+   "withdraw_status": 200,
+   "admitted_ms": 1795640239513,
+   "body_received": 730,
+   "content_length": 131072,
+   "slices": [
+    [
+     "ACCEPTED",
+     65536.0,
+     1795640238997.846,
+     64512.0
+    ]
+   ],
+   "post_fence_handoffs": 0,
+   "post_fence_request_status": 404
+  },
+  "D_crash_restart": {
+   "before": [
+    {
+     "res_id": "8b33a2aa-b4d2-4494-a206-841188fcd7d0",
+     "state": "ACCEPTED",
+     "amount": 65536,
+     "charged": 65536,
+     "accepted": 65536,
+     "reason": "slice handed to transport and flushed",
+     "start": 500000,
+     "instance": "runnervmbpeip:8384:6c457f3c2ff14b40bc18a3099ec1a0a0"
+    },
+    {
+     "res_id": "b035693c-3b83-475c-ac08-9e97fb3bc2f3",
+     "state": "ACCEPTED",
+     "amount": 65536,
+     "charged": 65536,
+     "accepted": 65536,
+     "reason": "slice handed to transport and flushed",
+     "start": 564512,
+     "instance": "runnervmbpeip:8384:6c457f3c2ff14b40bc18a3099ec1a0a0"
+    },
+    {
+     "res_id": "e71b7642-35b4-4735-9fc6-264a7d4170c1",
+     "state": "RESERVED",
+     "amount": 3072,
+     "charged": 0,
+     "accepted": 0,
+     "reason": null,
+     "start": 629024,
+     "instance": "runnervmbpeip:8384:6c457f3c2ff14b40bc18a3099ec1a0a0"
+    }
+   ],
+   "ledger_after_restart": {
+    "cap": 8388608,
+    "reserved": 3072,
+    "charged": 131072,
+    "states": {
+     "RESERVED": 1,
+     "ACCEPTED": 2
+    }
+   },
+   "reconcile_while_socket_alive": "{\"drained\":0,\"min_age_s\":3}",
+   "ledger_while_socket_alive": {
+    "cap": 8388608,
+    "reserved": 0,
+    "charged": 0,
+    "states": {
+     "DRAINED": 3
+    }
+   },
+   "bytes_client_received_total": 1024,
+   "ledger_after_client_drained": {
+    "cap": 8388608,
+    "reserved": 0,
+    "charged": 0,
+    "states": {
+     "DRAINED": 3
+    }
+   },
+   "after": [
+    {
+     "res_id": "8b33a2aa-b4d2-4494-a206-841188fcd7d0",
+     "state": "DRAINED",
+     "amount": 65536,
+     "charged": 65536,
+     "accepted": 65536,
+     "reason": "slice handed to transport and flushed | drained: prior instance reconciled: OS TCP table: socket 5181->52717 gone",
+     "start": 500000,
+     "instance": "runnervmbpeip:8384:6c457f3c2ff14b40bc18a3099ec1a0a0"
+    },
+    {
+     "res_id": "b035693c-3b83-475c-ac08-9e97fb3bc2f3",
+     "state": "DRAINED",
+     "amount": 65536,
+     "charged": 65536,
+     "accepted": 65536,
+     "reason": "slice handed to transport and flushed | drained: prior instance reconciled: OS TCP table: socket 5181->52717 gone",
+     "start": 564512,
+     "instance": "runnervmbpeip:8384:6c457f3c2ff14b40bc18a3099ec1a0a0"
+    },
+    {
+     "res_id": "e71b7642-35b4-4735-9fc6-264a7d4170c1",
+     "state": "DRAINED",
+     "amount": 3072,
+     "charged": 3072,
+     "accepted": 0,
+     "reason": " | unsettled at termination: treated as uncertain | drained: prior instance reconciled: OS TCP table: socket 5181->52717 gone",
+     "start": 629024,
+     "instance": "runnervmbpeip:8384:6c457f3c2ff14b40bc18a3099ec1a0a0"
+    }
+   ],
+   "f02_mode": "released_socket_gone_no_bytes_after"
+  },
+  "E_post_ack_residual_default_buffers": {
+   "withdraw_status": 200,
+   "reset_streams": 1,
+   "bytes_before_ack": 1024,
+   "bytes_read_after_ack": 0,
+   "client_queue_at_ack": null,
+   "platform": "win32",
+   "new_bytes_after_ack": null,
+   "bound_bytes": 65536
+  }
+ },
+ "all_pass": true,
+ "n_checks": 48
+}
