@@ -112,3 +112,45 @@ RESULTS_DA must be recounted (E6). The E06 policy needs the non-disclosure and c
 **ACCEPT WITH CONDITIONS.** P1: 0. Open P2: 2 (N1, N2). P3: 1 (N3). E1–E10 are all closed.
 
 N1 and N2 are fail-open and crash-recovery gaps in code paths added by this fix. They must be fixed, with tests, before B1 builds on `cite()` or `servable()`.
+
+---
+
+## 5. Second confirmation (`4476892c..6927277d`)
+
+- **Reviewed:** head `6927277d`. The worktree is clean and the branch was not modified.
+- **Probes:** `reviews/b-app/imp3/importer/tests/test_probe4.py` and `test_probe5.py`, run in a scratch copy and not committed.
+
+### 5.1 Measured
+
+| Check | Result |
+| --- | --- |
+| Contract suite | **225 passed, 1 skipped** |
+| Design suite | **117 passed** |
+| Importer suite | **57 passed** |
+| Earlier probes Q1–Q3 and Q5 | Unchanged and still correct (E1, E3, E4, E8 hold) |
+| Q4 (N1): store folder present with no ACCEPTED, `exclusions=None` | `servable` False; `cite` returns `CITED_COPY_UNAVAILABLE`. **Fixed** |
+| Q6 (N2): crash after the generation rename, before ACTIVE | The never-activated copy is not held and `cite` returns UNAVAILABLE. The retry activates. **Fixed** |
+| Q7 (N2): crash before the temporary-directory rename | The retry activates; the residue is quarantined. **Fixed** |
+| `_crashpoint` at `after_vault_object`, `before_rename` and `before_active` | In each case the new copy is not held or citable before the retry, and the retry activates (resumed at `before_active`) |
+| Crash inside `os.replace(ACTIVE.tmp → ACTIVE)` | `ACTIVE.tmp` is left behind and ACTIVE still points to the old generation. The retry resumes and activates |
+| A different, newer bundle after a `before_active` crash | Activates; the crashed generation is quarantined, not deleted |
+| `SITE_CONFIG.json` deleted on a "none" site | `servable(None)` returns False: an absent config defaults to "signed" |
+| N3 | Excluded copies are filtered before the ambiguity test (`cite()`, code read) |
+
+### 5.2 Status
+
+- **N1: OPEN** (narrowed). N1 is fixed for the paths I originally reported. The mode flag, however, can be downgraded after install: see N4.
+- **N2: CLOSED.**
+- **N3: CLOSED.**
+
+### 5.3 New finding
+
+| ID | Sev | Finding | Evidence | Required fix |
+| --- | --- | --- | --- | --- |
+| **N4** | P2 | **The "no exclusion store" mode is not install-time only.** `configure_site` accepts a reconfiguration at any time. Sequence on a "signed" site holding a signed withdrawal:<br>1. call `configure_site(site, exclusion_channel="none")`;<br>2. delete `exclusions/`;<br>3. import any new release, which records `exclusion_channel: "none"`.<br>After that, `servable(..., exclusions=None)` returns **True for the withdrawn document**, and `cite()` opens its superseded copy. Losing or deleting the store, which must halt delivery under PR #53 Serving §4/§8 and security §8.4, is turned into silent re-admission by one configuration call. (Before a new import, the old generation's recorded "signed" mode still denies correctly.) | `importer.py` `configure_site`, `_exclusions_usable`; probe `test_M1_flip_mode_delete_store_new_release`: `withdrawn doc servable with None: True`, `cite old copy: CITED_COPY_ELIGIBLE_NOT_CURRENT` | Make the mode monotone:<br>• `configure_site` refuses if `SITE_CONFIG.json`, any generation, or an `exclusions/` folder already exists, or has ever existed (keep a sticky marker);<br>• allow only none → signed, never signed → none, unless an owner-signed action, verified against the trust list, authorises it;<br>• the importer refuses to record "none" in a generation when the previous active generation recorded "signed".<br>Add a test for this exact sequence. |
+
+### 5.4 Verdict
+
+**ACCEPT WITH CONDITIONS.** P1: 0. P2 open: 1 (N4, the remaining part of N1).
+
+N2 and N3 are closed, and E1–E10 stay closed. Fix N4, with a test, before B1 relies on `servable()` and `cite()`.

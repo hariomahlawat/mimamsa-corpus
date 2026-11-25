@@ -450,7 +450,9 @@ def test_n1_store_without_accepted_state_denies_even_in_none_mode(hn, tmp_path, 
 def test_n1_generation_must_record_none_mode(hn, tmp_path):
     site = tmp_path / "site"
     assert hn.run(hn.bundle(), site, channel="signed").activated
-    imp.configure_site(site, exclusion_channel="none")       # flipped after the generation was written
+    with pytest.raises(ImporterError):                         # downgrade refused (latched by the signed generation)
+        imp.configure_site(site, exclusion_channel="none")
+    (site / "SITE_CONFIG.json").write_text('{"exclusion_channel": "none"}')   # direct tamper of the config
     assert not servable(site, "documents", DOC_ID, exclusions=None)
 
 
@@ -538,3 +540,47 @@ def test_n3_ambiguity_ignores_excluded_copies(hn, tmp_path, monkeypatch):
     monkeypatch.setattr(imp, "held_copies", lambda s: held)
     state = _store_with(tmp_path, site, withdrawals=[{"source_copy_sha256": other, "reason": "withdrawn"}])
     assert cite(site, old[:12], DOC_ID, 1, exclusions=state)["state"] == "CITED_COPY_ELIGIBLE"
+
+
+# ================= confirmation N4: one-way exclusion-mode latch =================
+import shutil  # noqa: E402
+
+
+def test_n4_deleting_store_cannot_downgrade_and_import_is_refused(hn, tmp_path):
+    site = _active_site(hn, tmp_path, "none")
+    state = _store_with(tmp_path, site, withdrawals=[{"doc_id": DOC_ID, "reason": "withdrawn"}])
+    assert not servable(site, "documents", DOC_ID, exclusions=state)
+    assert (site / "EXCLUSION_LATCH").exists()
+    shutil.rmtree(site / "exclusions")                       # tamper: delete the store
+    with pytest.raises(ImporterError):
+        hn.run(hn.bundle(), site)                            # new release refused (integrity failure)
+    assert active_generation(site)["release_sequence"] == 1
+    assert not servable(site, "documents", DOC_ID, exclusions=None)      # withdrawn doc still denied
+    assert cite(site, h(SOURCE)[:12], DOC_ID, 1, exclusions=None)["state"] == "CITED_COPY_UNAVAILABLE"
+
+
+def test_n4_configure_none_refused_once_latched(hn, tmp_path):
+    site = _active_site(hn, tmp_path, "none")
+    _store_with(tmp_path, site, withdrawals=[{"doc_id": DOC_ID, "reason": "withdrawn"}])
+    shutil.rmtree(site / "exclusions")
+    with pytest.raises(ImporterError):
+        imp.configure_site(site, exclusion_channel="none")
+
+
+def test_n4_signed_generation_latches_later_imports(hn, tmp_path):
+    site = tmp_path / "site"
+    assert hn.run(hn.bundle(), site, channel="signed").activated
+    (site / "SITE_CONFIG.json").write_text('{"exclusion_channel": "none"}')   # tamper the config
+    assert hn.run(hn.bundle(), site, channel=None).activated
+    assert active_generation(site)["exclusion_channel"] == "signed"        # inherited, never downgraded
+    assert not servable(site, "documents", DOC_ID, exclusions=None)
+    with pytest.raises(ImporterError):
+        imp.configure_site(site, exclusion_channel="none")
+
+
+def test_n4_unreadable_store_on_latched_site_refuses_import(hn, tmp_path):
+    site = _active_site(hn, tmp_path, "none")
+    _store_with(tmp_path, site, withdrawals=[{"doc_id": DOC_ID, "reason": "withdrawn"}])
+    (site / "exclusions" / "ACCEPTED.json").write_text("{not json")
+    with pytest.raises(ImporterError):
+        hn.run(hn.bundle(), site)

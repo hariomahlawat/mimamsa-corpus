@@ -167,7 +167,15 @@ class ExclusionStore:
         if (self._read_accepted() or {}).get("sequence", 0) != (acc or {}).get("sequence", 0):
             raise ExclusionError("compare-and-set failed at acceptance")
         os.replace(tmp, self.accepted)
+        self._write_latch(record["sequence"])
         return self._ack(record)
+
+    def _write_latch(self, sequence: int):
+        """One-way latch next to the store (in its parent, the site root): once any exclusion has been accepted the
+        site is permanently in exclusion-store mode, even if this directory is later deleted (review N4)."""
+        latch = self.dir.parent / "EXCLUSION_LATCH"
+        if not latch.exists():
+            self._fsync_write(latch, json.dumps({"latched": True, "first_sequence": sequence}).encode())
 
     @staticmethod
     def _ack(record):

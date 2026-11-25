@@ -53,12 +53,40 @@ def _crashpoint(name: str):
 SITE_CONFIG = "SITE_CONFIG.json"
 
 
+LATCH = "EXCLUSION_LATCH"
+
+
+def _latched(site: Path) -> bool:
+    """True once the site has ever been in exclusion-store mode: the store's latch exists (any exclusion accepted),
+    or any generation recorded mode "signed". One-way: nothing clears it."""
+    site = Path(site)
+    if (site / LATCH).exists():
+        return True
+    gens = site / "generations"
+    if gens.exists():
+        for g in gens.iterdir():
+            f = g / "generation.json"
+            if f.is_file():
+                try:
+                    if json.loads(f.read_text(encoding="utf-8")).get("exclusion_channel") == "signed":
+                        return True
+                except ValueError:
+                    return True  # unreadable generation: assume the stricter mode
+    return False
+
+
+def _site_mode(site: Path) -> str:
+    return "signed" if _latched(site) else _site_channel(site)
+
+
 def configure_site(site: Path, *, exclusion_channel: str):
     """Install-time site configuration. exclusion_channel is "signed" (an ExclusionStore accepted state must be
     supplied to every serving decision) or "none" (explicitly no exclusion channel; only then may serving decisions
     run with exclusions=None). The value is recorded in every generation the importer writes."""
     if exclusion_channel not in ("signed", "none"):
         raise ImporterError("exclusion_channel must be 'signed' or 'none'")
+    if exclusion_channel == "none" and (_latched(site) or (Path(site) / "exclusions").exists()):
+        raise ImporterError("site is latched to exclusion-store mode; it can never be downgraded to 'none'")
     Path(site).mkdir(parents=True, exist_ok=True)
     _write_atomic(Path(site) / SITE_CONFIG, json.dumps({"exclusion_channel": exclusion_channel}).encode())
 
@@ -219,7 +247,7 @@ def _exclusions_usable(site: Path, exclusions, gen: dict | None) -> bool:
     from mimamsa_contract.exclusions import ExclusionState
     if exclusions is not None:
         return isinstance(exclusions, ExclusionState)
-    return (_site_channel(site) == "none" and bool(gen) and gen.get("exclusion_channel") == "none"
+    return (_site_mode(site) == "none" and bool(gen) and gen.get("exclusion_channel") == "none"
             and not (Path(site) / "exclusions").exists())
 
 
@@ -245,6 +273,16 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
     except (OSError, ValueError):
         manifest, sums_digest = {}, None
     res = ImportResult(release_id=manifest.get("release_id"), activated=False)
+
+    # 0a exclusion-mode latch and store integrity (review N4)
+    exclusion_mode = _site_mode(site)
+    if (site / LATCH).exists():
+        acc = site / "exclusions" / "ACCEPTED.json"
+        try:
+            json.loads(acc.read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            raise ImporterError("exclusion store missing or unreadable on a latched site: integrity failure; "
+                                "import refused (restore the store from custody)") from exc
 
     # 0 recovery, replay / no-op
     try:
@@ -445,7 +483,7 @@ def import_release(bundle: Path, site: Path, *, trust_list=None, trusted_public_
     generation = {"release_id": res.release_id, "release_sequence": manifest.get("release_sequence"),
                   "sums_sha256": sums_digest, "servable": res.verified, "quarantine": res.unresolved,
                   "item_document": item_document, "candidate_evidence": evidence,
-                  "page_counts": copy_pages, "exclusion_channel": _site_channel(site)}
+                  "page_counts": copy_pages, "exclusion_channel": exclusion_mode}
     try:
         gens = site / "generations"
         gens.mkdir(parents=True, exist_ok=True)

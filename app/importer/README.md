@@ -22,6 +22,12 @@ The first piece of application code, written in response to ASR-E05 from PR #54.
 
 Every other `None` path denies: unconfigured site (default `"signed"`), empty store, pending-only store, lost acceptance record, or a mode flipped after the generation was written. A supplied state must be a real `ExclusionState`.
 
+**One-way exclusion-mode latch (review N4).** The first accepted exclusion writes `EXCLUSION_LATCH` beside the store. From then on, and also once any generation records `"signed"`, the site is permanently in exclusion-store mode:
+- later generations inherit that mode;
+- `configure_site(..., "none")` is refused;
+- edits to `SITE_CONFIG` are ignored;
+- a missing or unreadable store on a latched site raises `ImporterError` (integrity failure) and refuses the import, while serving keeps denying anything that depends on exclusions.
+
 **Crash recovery.** Held copies are derived from activated generations: those at or below the ACTIVE sequence. A copy is therefore never citable before its generation activates.
 
 On the next import:
