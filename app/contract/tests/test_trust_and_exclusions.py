@@ -333,3 +333,107 @@ def test_readmission_needs_authority_and_identity(owner, trust, register_path):
     b, s = _signed(owner[0], u)
     with pytest.raises(ExclusionError):
         accept_exclusion_update(b, s, trust, current_sequence=1)
+
+
+# ---- confirmation P3s C1-C4
+def _register_without_items(register_path):
+    d = json.loads(register_path.read_text())
+    d["items"] = [dict(d["items"][0], restriction_id="RM-999", doc_id="example-dummy-restricted",
+                       source_sha256="1" * 64, derived_sha256=[], hosted_paths=[])]
+    return json.dumps(d)
+
+
+def _update_with_register(register_path, text, **kw):
+    u = _update(register_path, **kw)
+    u["register_json"] = text
+    u["register_sha256"] = hashlib.sha256(text.encode()).hexdigest()
+    return u
+
+
+def test_restriction_kept_by_history_is_labelled_restricted(owner, trust, register_path, tmp_path, example):
+    """C2: a register entry dropped from a later register stays RESTRICTED (not WITHDRAWN)."""
+    it = json.loads(register_path.read_text())["items"][0]
+    store = ExclusionStore(tmp_path / "exclusions")
+    b, s = _signed(owner[0], _update(register_path, sequence=2))
+    store.append(b, s, trust)
+    b, s = _signed(owner[0], _update_with_register(register_path, _register_without_items(register_path), sequence=3))
+    store.append(b, s, trust)
+    d = example("document")
+    d["doc_id"] = it["doc_id"]
+    assert dict(items_to_suppress([d], store.effective_state(trust))) == {it["doc_id"]: "RESTRICTED"}
+
+
+def test_restriction_lifted_only_with_restriction_id(owner, trust, register_path, tmp_path, example):
+    it = json.loads(register_path.read_text())["items"][0]
+    reg2 = _register_without_items(register_path)
+    store = ExclusionStore(tmp_path / "exclusions")
+    b, s = _signed(owner[0], _update(register_path, sequence=2))
+    store.append(b, s, trust)
+    u = _update_with_register(register_path, reg2, sequence=3)
+    u["readmissions"] = [{"doc_id": it["doc_id"], "reason": "no restriction id given", "authority_ref": "OWNER-DECISION-0001"}]
+    b, s = _signed(owner[0], u)
+    store.append(b, s, trust)
+    d = example("document")
+    d["doc_id"] = it["doc_id"]
+    assert dict(items_to_suppress([d], store.effective_state(trust))) == {it["doc_id"]: "RESTRICTED"}
+    u = _update_with_register(register_path, reg2, sequence=4)
+    u["readmissions"] = [{"doc_id": it["doc_id"], "reason": "owner lifted restriction", "authority_ref": "OWNER-DECISION-0002",
+                          "restriction_id": it["restriction_id"]}]
+    b, s = _signed(owner[0], u)
+    store.append(b, s, trust)
+    assert items_to_suppress([d], store.effective_state(trust)) == []
+
+
+@pytest.mark.parametrize("field,value", [("authority_ref", "abc"), ("authority_ref", "OWNER DECISION 1"), ("authority_ref", "   "),
+                                         ("reason", "   "), ("reason", "\t\t\t")])
+def test_readmission_requires_structured_authority_and_real_reason(owner, trust, register_path, field, value):
+    """C2/C3: no 3-character or whitespace authority reference, no blank reason."""
+    u = _update(register_path)
+    row = {"doc_id": "example-x", "reason": "error corrected", "authority_ref": "OWNER-DECISION-0001"}
+    row[field] = value
+    u["readmissions"] = [row]
+    b, s = _signed(owner[0], u)
+    with pytest.raises(ExclusionError):
+        accept_exclusion_update(b, s, trust, current_sequence=1)
+
+
+def test_blank_withdrawal_reason_rejected(owner, trust, register_path):
+    b, s = _signed(owner[0], _update(register_path, withdrawals=[{"doc_id": "example-x", "reason": "    "}]))
+    with pytest.raises(ExclusionError):
+        accept_exclusion_update(b, s, trust, current_sequence=1)
+
+
+def test_operation_id_reuse_with_different_bytes_rejected(owner, trust, register_path, tmp_path):
+    """C3: Serving §8 P3, different bytes under the same operation id are refused."""
+    store = ExclusionStore(tmp_path / "exclusions")
+    b2, s2 = _signed(owner[0], _update(register_path, sequence=2))
+    store.append(b2, s2, trust, operation_id="op-1")
+    b3, s3 = _signed(owner[0], _update(register_path, sequence=3))
+    with pytest.raises(ExclusionError):
+        store.append(b3, s3, trust, operation_id="op-1")
+    assert store.append(b3, s3, trust, operation_id="op-2")["sequence"] == 3
+
+
+def test_crash_between_two_moves_is_recoverable(owner, trust, register_path, tmp_path):
+    """C1: lone .json in pairs/ with .sig still in staging: re-append quarantines and restages."""
+    store = ExclusionStore(tmp_path / "exclusions")
+    b2, s2 = _signed(owner[0], _update(register_path, sequence=2))
+    store.pairs.mkdir(parents=True)
+    (store.pairs / "00000002.json").write_bytes(b2)
+    st = store.dir / "staging" / "00000002"
+    st.mkdir(parents=True)
+    (st / "u.sig").write_bytes(s2)
+    assert store.append(b2, s2, trust)["sequence"] == 2 and store.load_latest(trust).sequence == 2
+
+
+def test_history_tamper_halts(owner, trust, register_path, tmp_path):
+    """C4: deleting a history entry no longer silently drops tombstones; it halts."""
+    store = ExclusionStore(tmp_path / "exclusions")
+    for seq in (2, 3):
+        b, s = _signed(owner[0], _update(register_path, sequence=seq))
+        store.append(b, s, trust)
+    acc = json.loads(store.accepted.read_text())
+    acc["history"] = acc["history"][1:]
+    store.accepted.write_text(json.dumps(acc))
+    with pytest.raises(ExclusionError):
+        store.effective_state(trust)

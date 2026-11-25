@@ -64,7 +64,8 @@
           "reason": {
             "type": "string",
             "minLength": 3,
-            "maxLength": 1000
+            "maxLength": 1000,
+            "pattern": "\\S.*\\S"
           }
         },
         "anyOf": [
@@ -132,13 +133,22 @@
           "reason": {
             "type": "string",
             "minLength": 3,
-            "maxLength": 1000
+            "maxLength": 1000,
+            "pattern": "\\S.*\\S"
           },
           "authority_ref": {
-            "description": "Recorded decision of the competent authority (owner for restrictions).",
+            "description": "Structured reference to the recorded decision (e.g. OWNER-DECISION-0001); no whitespace.",
             "type": "string",
-            "minLength": 3,
-            "maxLength": 300
+            "pattern": "^[A-Z][A-Z0-9]*(-[A-Za-z0-9._]+)+$",
+            "maxLength": 120
+          },
+          "restriction_id": {
+            "description": "Required to lift a restricted-material register entry (owner decision); without it a readmission lifts only withdrawals.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^RM-[0-9]{3}$"
           }
         },
         "anyOf": [

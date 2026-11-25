@@ -58,3 +58,59 @@ Conditions before PR #53 re-pins to this revision:
 4. Fix F04: add the missing rows.
 
 The P3 findings can be fixed in the same pass or tracked.
+
+---
+
+## 5. Confirmation review of the fixes (`31a21df4..bb22ebd3`)
+
+- **Reviewed:** head `bb22ebd3`, a single commit. The worktree is clean and the branch was not modified.
+- **Method:** I re-ran all tests and my original probes. I also wrote new adversarial probes, run in a scratch copy at `reviews/b-app/cc2/tests/test_probe2.py`, not committed.
+
+### 5.1 Re-run (measured)
+
+| Check | Result |
+| --- | --- |
+| Contract tests (app-ci.yml command) | **214 passed, 1 skipped.** This matches the author. The skip is the same pre-existing one. |
+| Design tests | **111 passed.** |
+| Original probe (a): pair stored, no ACCEPTED, re-append | Now accepted (epoch 2); `pending()` is empty. **Fixed.** |
+| Original probe (b): staging residue | Residue moved to `quarantine/00000003-<ns>`, then the update is accepted. **Fixed.** |
+| Replay of an old signed list (seq 2 after seq 3) | Rejected with "sequence must increase". The seq-2 withdrawal stays suppressed. **Holds.** |
+| Omission from a later list | Item still WITHDRAWN. **Holds.** |
+| RM-001 dropped from a later register (replaced by a dummy item) | RM-001 doc_id and sha remain tombstoned and suppressed. **Holds.** It is labelled `WITHDRAWN`, not `RESTRICTED` (see C2). |
+| Readmission without `authority_ref` | Rejected by the schema (author test; confirmed). |
+| Concurrent writer / stale LOCK | A second writer gets a typed `ExclusionError`. A stale LOCK fails closed, with no recovery tool (C5). |
+
+### 5.2 Original findings
+
+| ID | Status | Basis |
+| --- | --- | --- |
+| F01 | **CLOSED** | PARTIAL class added. R21, R22, R34, R35, R37, R42, R45 and R46 reclassified, each naming its owning milestone. Counts add up: 16 + 11 + 13 + 15 + 6 = 61. |
+| F02 | **CLOSED** | The signed channel now uses monotone tombstones (`effective_state`, used by `state_for_restore`) with explicit signed `readmissions`. The local Admin channel is recorded honestly as X7 / R60 (CONFLICT), with a proposed B2 fix and an owner decision. T-VIS-03, the security architecture §8.4 and the README are narrowed to the signed channel. |
+| F03 | **CLOSED** | Probes (a) and (b) pass. Also added: lost-ack idempotency, refusal of different bytes, LOCK, typed I/O errors, and an ACCEPTED record carrying signature digest, epoch and history. Residual narrow gaps are C1, C3 and C4 (P3). |
+| F04 | **CLOSED** | R53–R61 added and classified honestly. R53 and R57 are flagged as B1 design inputs. R57 is a spec-only incorporation, labelled as such. R61 defers the INT mapping with a named owner. |
+| F05 | **CLOSED** | Heads corrected (A4 `c7a93ab6`, A5 `e92557de`). A5 review F04 considered; 2 crosswalk rows added. |
+| F06 | **CLOSED** | `resolve_span` now checks offsets against passage bounds; test added. |
+| F07 | **CLOSED** | AD-5 and AD-10 are now DC-1 and DC-2, deployment controls with no core interface. AD-9 is worded as PoC candidates. |
+| F08 | **CLOSED** | Layer mapping aligned; §7.4 placed after §7.3; policy note corrected. |
+| F09 | **CLOSED** | `CONTRACT_REVISION = "R2"` added, with a test. |
+| F10 | **CLOSED** | §1 shows the 6 classified conflicts and 7 risks separately. |
+
+### 5.3 New findings from the confirmation (all P3; none blocks)
+
+| ID | Sev | Finding | Evidence | Required fix |
+| --- | --- | --- | --- | --- |
+| C1 | P3 | **A crash between the two pair moves wedges that sequence.** If `.json` is in `pairs/` and `.sig` is still in `staging/`, `append` raises "different bytes already stored" and `complete_pending` raises "incomplete". This fails closed and a later sequence can still be accepted, but that signed update can never be accepted without manual repair. | `exclusions.py`, `append` (pair-exists branch) and `complete_pending`; probe `test_crash_between_two_moves` | When `pairs/` holds a lone `.json` identical to the incoming bytes, quarantine it and restage. Add a test. |
+| C2 | P3 | **A restriction that persists only as a tombstone is labelled `WITHDRAWN`, not `RESTRICTED`.** This happens when a register entry (for example RM-001) is dropped from the latest register. The security architecture §8.4 treats `EXCLUDED_RESTRICTED` differently: no copy, and bytes purged. `readmissions` can also lift a register entry with any 3-character `authority_ref`, with nothing to distinguish it from correcting a withdrawal. Both rows are owner-signed, so this is not a weakening relative to R1, but it is coarse. | `exclusions.py` `effective_state` and `items_to_suppress`; probe `test_rm001_omitted_from_later_register` | Keep separate tombstone sets for restricted and withdrawn identities, so suppression reports `RESTRICTED`. For lifting a restriction, require `restriction_id` plus a non-blank owner decision reference, for example a pattern with no whitespace-only values. |
+| C3 | P3 | **`readmissions` accepts a whitespace-only `reason` and `authority_ref`**, and an `operation_id` already used for an accepted update can be reused for different bytes. Serving §8 P3 says "different bytes under same ID reject". R59's claim covers only same bytes under a different ID. | `exclusion_update.schema.json` `readmissions` (`minLength: 3` only); `exclusions.py` `append`; probe `test_readmit_whitespace_authority_and_opid_reuse` | Add a `pattern` requiring non-whitespace content. Reject an `operation_id` already present in the accepted history with a different digest (store the op id per history entry). |
+| C4 | P3 | **ACCEPTED `history` is not integrity-checked.** Deleting a history entry silently drops its tombstones: the probe shows the item un-suppressed. Writing to the store already permits other tampering (custody is X4), but a cheap consistency check would turn silent loss into a halt. | `exclusions.py` `effective_state`; probe `test_history_tamper` | Halt if the history sequence is not strictly increasing, if its last entry differs from (`sequence`, `digest`), or if any accepted-range pair file on disk is missing from the history. Record a chained digest. |
+| C5 | P3 | **Operational gaps.**<br>• A stale LOCK after a crash blocks all acceptance, and there is no documented recovery.<br>• `append` now returns an ack, and `accept_exclusion_update` returns a state without tombstones. The "on acceptance" re-application path in the security architecture §8.4 must call `effective_state`, but nothing says so. | `exclusions.py` `_lock`, `append`; `SECURITY…` §8.4 re-application rule | Document LOCK recovery: an Admin action with an audit record. State in §8.4 and the README that re-application always uses `effective_state`. |
+
+### 5.4 Abstraction, scope and agentic AI
+
+- **Abstraction and scope.** The only new contract surface is the optional, owner-signed `readmissions` array and `CONTRACT_REVISION`. Both are justified by F02/F09 and are additive. No new capability IDs, gates, services or interfaces were added; F07 *reduced* the interface list.
+- **Agentic AI.** None activated.
+- **RM-001.** Still excluded. The tombstones strengthen it against omission from a later register.
+
+### 5.5 Final verdict
+
+**ACCEPT.** P1: 0. P2: 0 open. The 10 original findings are closed. The 5 new P3 findings (C1–C5) should be tracked into B1/B2 and P8. None blocks PR #53 re-pinning to `bb22ebd3` / contract R2.

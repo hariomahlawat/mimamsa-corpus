@@ -39,6 +39,8 @@ class ExclusionState:
     # Monotone tombstones folded over the accepted history (see ExclusionStore.effective_state):
     tombstone_doc_ids: frozenset = field(default_factory=frozenset)
     tombstone_shas: frozenset = field(default_factory=frozenset)
+    restricted_tombstone_doc_ids: frozenset = field(default_factory=frozenset)
+    restricted_tombstone_shas: frozenset = field(default_factory=frozenset)
 
 
 def accept_exclusion_update(update_bytes: bytes, signature: bytes, trust: TrustList, current_sequence: int,
@@ -75,7 +77,8 @@ def items_to_suppress(items, state: ExclusionState) -> list[tuple[str, str]]:
     for it in items:
         did = it.get("doc_id")
         sha = (it.get("source_copy") or {}).get("sha256") or it.get("sha256")
-        if state.register.deep_match(it):
+        if (state.register.deep_match(it) or did in state.restricted_tombstone_doc_ids
+                or sha in state.restricted_tombstone_shas):
             out.append((did, "RESTRICTED"))
         elif (did in state.withdrawn_doc_ids or sha in state.withdrawn_shas
               or did in state.tombstone_doc_ids or sha in state.tombstone_shas):
@@ -152,7 +155,7 @@ class ExclusionStore:
     def _accept(self, acc, state, update_bytes, signature, operation_id):
         import os
         digest = hashlib.sha256(update_bytes).hexdigest()
-        history = list((acc or {}).get("history", [])) + [[state.sequence, digest]]
+        history = list((acc or {}).get("history", [])) + [[state.sequence, digest, operation_id or f"seq-{state.sequence}-{digest[:16]}"]]
         record = {"operation_id": operation_id or f"seq-{state.sequence}-{digest[:16]}",
                   "sequence": state.sequence, "digest": digest,
                   "signature_sha256": hashlib.sha256(signature).hexdigest(),
@@ -180,6 +183,10 @@ class ExclusionStore:
             acc = self._read_accepted()
             current = acc["sequence"] if acc else 0
             digest = hashlib.sha256(update_bytes).hexdigest()
+            if operation_id:
+                for entry in (acc or {}).get("history", []):
+                    if len(entry) > 2 and entry[2] == operation_id and entry[1] != digest:
+                        raise ExclusionError("operation id already used for a different update; refuse")
             if acc and acc["digest"] == digest:  # lost acknowledgement: idempotent retry
                 if operation_id and operation_id != acc["operation_id"]:
                     raise ExclusionError("same update already accepted under a different operation id")
@@ -190,6 +197,11 @@ class ExclusionStore:
             self.pairs.mkdir(parents=True, exist_ok=True)
             stem = self.pairs / f"{state.sequence:08d}"
             jp, sp = stem.with_suffix(".json"), stem.with_suffix(".sig")
+            if jp.exists() and not sp.exists() and jp.read_bytes() == update_bytes:
+                # Crash between the two moves: the lone payload is quarantined and the pair restaged (C1).
+                q = self.dir / "quarantine"
+                q.mkdir(parents=True, exist_ok=True)
+                os.replace(jp, q / f"{state.sequence:08d}-lone-{digest[:12]}.json")
             if jp.exists() or sp.exists():
                 # Pending pair from an interrupted earlier attempt: resume only if it is byte-identical.
                 if not (jp.exists() and sp.exists() and jp.read_bytes() == update_bytes and sp.read_bytes() == signature):
@@ -243,23 +255,36 @@ class ExclusionStore:
         checked by their recorded digest (their signing keys may since have rotated)."""
         latest = self.load_latest(trust, mode)
         acc = self._read_accepted()
-        docs, shas = set(), set()
-        for seq, digest in acc.get("history", []):
+        hist = acc.get("history", [])
+        seqs = [h[0] for h in hist]
+        if (not hist or seqs != sorted(set(seqs)) or hist[-1][0] != acc["sequence"] or hist[-1][1] != acc["digest"]):
+            raise ExclusionError("acceptance history inconsistent (order or head mismatch): halt and recover")
+        on_disk = {int(q.stem) for q in self.pairs.glob("*.json") if q.stem.isdigit() and int(q.stem) <= acc["sequence"]}
+        if not on_disk <= set(seqs):
+            raise ExclusionError("stored pair within the accepted range is missing from the history: halt and recover")
+        docs, shas, rdocs, rshas = set(), set(), set(), set()
+        for entry in hist:
+            seq, digest = entry[0], entry[1]
             data = json.loads(self._pair(seq, digest)[0].decode("utf-8"), object_pairs_hook=_no_dupes)
             for w in data.get("readmissions", []):
                 docs.discard(w.get("doc_id"))
                 shas.discard(w.get("source_copy_sha256"))
+                if w.get("restriction_id"):  # lifting a restriction needs the explicit restriction id
+                    rdocs.discard(w.get("doc_id"))
+                    rshas.discard(w.get("source_copy_sha256"))
             for w in data["withdrawals"]:
                 if w.get("doc_id"):
                     docs.add(w["doc_id"])
                 if w.get("source_copy_sha256"):
                     shas.add(w["source_copy_sha256"])
             reg = register_from_bytes(data["register_json"].encode("utf-8"), "history")
-            readmit = {w.get("doc_id") for w in data.get("readmissions", [])} | {w.get("source_copy_sha256") for w in data.get("readmissions", [])}
-            docs |= {d for d in reg.doc_ids if d not in readmit}
-            shas |= {h for h in reg.sha256s if h not in readmit}
+            lifted = {w.get(k) for w in data.get("readmissions", []) if w.get("restriction_id")
+                      for k in ("doc_id", "source_copy_sha256")}
+            rdocs |= {d for d in reg.doc_ids if d not in lifted}
+            rshas |= {h for h in reg.sha256s if h not in lifted}
         return ExclusionState(latest.sequence, latest.register, latest.withdrawn_doc_ids, latest.withdrawn_shas,
-                              latest.readmitted_doc_ids, latest.readmitted_shas, frozenset(docs), frozenset(shas))
+                              latest.readmitted_doc_ids, latest.readmitted_shas, frozenset(docs), frozenset(shas),
+                              frozenset(rdocs), frozenset(rshas))
 
     def pending(self) -> list[int]:
         """Sequences present as pairs or staging but not accepted (reported as pending/failed, never as accepted)."""
