@@ -575,7 +575,7 @@ def build_throughput():
     mean = sum(allsec) / len(allsec)
     lines += ["", f"- Planned pages (unusable pages of held population files, full documents for the 12 P&H writs): **{planned}**.",
               f"- OCR'd: **{len(pages)}**; skipped by early stop (document already RELEVANT): **{skipped}**; "
-              f"not reached: **{len(left)}**" + (f" ({', '.join(sorted({d for d, _ in left})[:5])}{'...' if len({d for d, _ in left}) > 5 else ''})" if left else "") + ".",
+              f"not reached (other than early-stop skips): **{len(left) - skipped}**.",
               f"- Corpus mean pages per judgment file: {avg_pages:.1f}. At the measured mean of {mean:.1f} s/page per process "
               f"and 2 processes, OCR of every page of the 8,052 not-held flagged titles would take about "
               f"{8052 * avg_pages * mean / 2 / 3600:.0f} hours; of the 550 P&H T1 titles (tranche P0) about "

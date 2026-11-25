@@ -6,9 +6,9 @@ recognition time per page at 200 dpi, 2 threads, on a shared 4-core host (`load1
 | Engine | Pages | Mean s/page | Median s/page | Mean load1 |
 | --- | --- | --- | --- | --- |
 | paddle_v5_mobile | 77 | 37.5 | 36.1 | 12.9 |
-| rapidocr | 177 | 14.2 | 8.8 | 10.6 |
+| rapidocr | 406 | 14.6 | 11.9 | 10.1 |
 
 - Planned pages (unusable pages of held population files, full documents for the 12 P&H writs): **508**.
-- OCR'd: **254**; skipped by early stop (document already RELEVANT): **0**; not reached: **254** (hc-delhi-2011-la-app-1049-2010-dlhc011879382010-1-2011-07-08, hc-delhi-2011-la-app-126-2011-dlhc011915372010-1-2011-07-08, hc-delhi-2011-la-app-186-2010-dlhc010012472010-1-2011-07-08, hc-delhi-2011-la-app-267-2010-dlhc010396632010-1-2011-07-08, hc-delhi-2011-la-app-275-2010-dlhc010402612010-1-2011-07-08...).
-- Corpus mean pages per judgment file: 14.7. At the measured mean of 21.2 s/page per process and 2 processes, OCR of every page of the 8,052 not-held flagged titles would take about 350 hours; of the 550 P&H T1 titles (tranche P0) about 24 hours. Pages with a usable text layer need no OCR, so these are upper bounds.
+- OCR'd: **483**; skipped by early stop (document already RELEVANT): **25**; not reached (other than early-stop skips): **0**.
+- Corpus mean pages per judgment file: 14.7. At the measured mean of 18.3 s/page per process and 2 processes, OCR of every page of the 8,052 not-held flagged titles would take about 301 hours; of the 550 P&H T1 titles (tranche P0) about 21 hours. Pages with a usable text layer need no OCR, so these are upper bounds.
 - No re-acquired file was OCR'd: no download run was authorised.

@@ -35,6 +35,10 @@ one of which (D.D. Joshi, Army Instruction 78/78) the C12 review called relevant
 prevents deletion of 5 of the 6 keyword-gap judgments but would still discard 1 of 6: it reduces, it does not
 remove, the keyword-gap risk.
 
+### 2.1a In-corpus records the old pipeline could not judge
+
+44 records were in the corpus with `relevance = not_checked` (Tesseract confidence below 70, or never extracted). After C13 OCR of their unusable pages: 24 IRRELEVANT, 14 SOURCE_INCOMPLETE, 6 INSUFFICIENT_TEXT, 3 CLASSIFICATION_UNCERTAIN, 0 RELEVANT. None is deleted; the IRRELEVANT ones are removal candidates for the owner. (`RELEVANCE_RERUN.csv`)
+
 ### 2.2 Text layers of the kept corpus (3,951 judgment files at `ad77758d`, detector v2)
 
 | Court | Files | Broken-CMap pages (any) | …on most pages | Any unusable page | Image-only page(s) | Does not open | No `%%EOF` |
