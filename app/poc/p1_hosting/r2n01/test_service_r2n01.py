@@ -98,8 +98,10 @@ check("svc_F01_unknown_copy_404_no_epoch_bump", st == 404 and json.loads(req("/a
 
 # F05: real UNCERTAIN over HTTP (client abort mid-body with a blocked flush; service has a 4 KiB send buffer)
 s = socket.socket(); s.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 4096); s.connect((HOST, PORT))
-s.sendall((f"GET {RANGE('doc-svc-big', BIG_SHA)} HTTP/1.1\r\nHost: x\r\nAuthorization: Bearer tok-alice\r\nRange: bytes=200000-331071\r\n\r\n").encode())
-s.recv(1024); time.sleep(1.0)
+# Root cause of the earlier flake: on Windows the loopback stack absorbed the whole 128 KiB before the RST, so every
+# flush completed and nothing was uncertain. The test-only hook holds slice 1 accepted-but-unflushed while we abort.
+s.sendall((f"GET {RANGE('doc-svc-big', BIG_SHA)} HTTP/1.1\r\nHost: x\r\nAuthorization: Bearer tok-alice\r\nX-Mimamsa-Test-Pause: before-flush\r\nRange: bytes=200000-331071\r\n\r\n").encode())
+time.sleep(0.4)
 s.setsockopt(socket.SOL_SOCKET, socket.SO_LINGER, struct.pack("HH" if os.name == "nt" else "ii", 1, 0)); s.close()
 time.sleep(2.0)
 with psycopg.connect(A.db) as c:

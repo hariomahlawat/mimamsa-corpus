@@ -218,6 +218,9 @@ public static class ProtectedDelivery
                 continue;                                      // epoch moved (other copy withdrawn): re-reserve under new epoch
             }
             wireOffset += acceptedWire; off += n;
+            // TEST-ONLY: hold the accepted-but-unflushed slice (no guard held, not cancellable) so a client abort lands
+            // while completion is still outstanding -> deterministic lost-completion (UNCERTAIN) on every OS.
+            if (hook == "before-flush" && off == n && off < len) await Task.Delay(cfg.TestPauseMs);
             try
             {
                 FlushResult fr = await writer.FlushAsync(ctx.RequestAborted);   // outside the guard; may block on slow clients
