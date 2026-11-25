@@ -24,6 +24,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--confirmation", required=True, help="reference to the coordinator's freeze confirmation")
     ap.add_argument("--exclude-ids", default="")
+    ap.add_argument("--statement", default="", help="author statement file embedded in the freeze record")
     a = ap.parse_args()
     path = os.path.join(extract_v4.OUT, "FREEZE_V4.json")
     if os.path.exists(path):
@@ -39,6 +40,9 @@ def main():
            "outputs_sha256": {n: extract_v4.sha256_bytes(open(os.path.join(extract_v4.OUT, n), "rb").read())
                               for n in ("OUTCOMES_V4.csv", "RUN_INFO_V4.json") if os.path.exists(os.path.join(extract_v4.OUT, n))},
            "exclusion_list_sha256": extract_v4.exclusion_key(set(excl)), "excluded_ids": len(excl),
+           "author_statement_file": os.path.basename(a.statement) if a.statement else "",
+           "author_statement_sha256": extract_v4.sha256_bytes(open(a.statement, "rb").read()) if a.statement else "",
+           "author_statement": open(a.statement, encoding="utf-8").read() if a.statement else "",
            "blind_evaluation_command": "python3.11 -I -B tools/extract_v4.py ids --ids-file <H-OUT-C13 ids> --out <DIR>"}
     extract_v4.write_atomic(path, (json.dumps(out, indent=1, sort_keys=True) + "\n").encode())
     print(json.dumps(out, indent=1, sort_keys=True))
