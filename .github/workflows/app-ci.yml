@@ -85,3 +85,21 @@ jobs:
       - name: Design checks (WCAG AA contrast, display scaling, keymap vs browser-reserved keys, client cache policy, capability matrix CSV)
         working-directory: app/design
         run: python -m pytest -q -p no:cacheprovider tests
+
+  protected-delivery-reference:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: app/poc/p4_pdf
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Synthetic protected-delivery reference tests
+        run: python -B -m unittest discover -s app/poc/p4_pdf -v

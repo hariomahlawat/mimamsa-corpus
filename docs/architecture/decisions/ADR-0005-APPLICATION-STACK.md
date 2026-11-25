@@ -1,4 +1,4 @@
-# ADR-0005: Offline application stack (Windows-native)
+# ADR-0005: Offline application stack (Windows-first)
 
 - **Status: PROPOSED.** Options and decision criteria only. The decision row in §6 is completed after the proof-of-concept evidence P1–P9 (workstream B-PoC, branch `claude/c13-b-poc`) has been independently reviewed, and the owner accepts it at gate **GB1**.
 - **Date:** 2026-11-25 (Cycle 13, workstream B0)
@@ -11,7 +11,7 @@ The owner's Cycle 13 directive fixes these constraints:
 
 | # | Constraint |
 | --- | --- |
-| C-1 | **Windows-native production**: IIS or a native Windows Service; browsers on an offline LAN. Do **not** assume Docker, WSL, Hyper-V or a Linux VM |
+| C-1 | **Windows-first**: native Windows is the primary development, validation and deployment target on an offline LAN. Evaluate IIS and native Windows Service hosting. Keep a single portable core so a later Linux deployment can use its own infrastructure adapters. |
 | C-2 | Provisional reference hardware: 16 cores, 64 GB RAM, 1 TB SSD. GPU optional, never mandatory |
 | C-3 | Start as a **modular monolith with isolated workers** |
 | C-4 | Two roles, Admin and User. Legal Reviewer is a designation on an existing account, inactive until appointed. Ownership checks are enforced in the backend |
@@ -20,6 +20,14 @@ The owner's Cycle 13 directive fixes these constraints:
 | C-7 | Keep the existing Python corpus pipeline; prefer permissively licensed dependencies (PyMuPDF is AGPL) |
 
 The directive names preferred candidates, **to be evaluated, not presumed**: ASP.NET Core LTS compared with Django; React + TypeScript; PostgreSQL with FTS (or a benchmarked better alternative), pgvector and a relational graph; PDF.js; Python workers; Windows Services; Tesseract, PaddleOCR or alternatives; local ONNX embeddings; SignalR; local accounts with optional AD; an offline Windows installer; signed snapshot updates.
+
+### R3.1 application boundary
+
+Keep domain, UI, API, retrieval, database schema, evidence identity, corpus and authorization semantics shared. Keep service registration, native process isolation and filesystem handles, transport ownership and buffer proof, durable storage, model runtime and offline packaging in infrastructure. Use portable libraries directly where they already satisfy the contract. Lightweight Linux and Windows checks can exercise portable code. Cycle 13 deployment evidence stays on native Windows.
+
+Publish and search through existing app modules. Reuse R1 copy identity, physical page anchoring, publication/access states and current exclusion inputs. A serving epoch, byte reservation, authorized PDF metadata and specific HTTP range are site/runtime state. Keep them outside bundle schemas. Retain typed catalogue/search/graph and owner-scoped job interfaces so future inference, evidence verification and legal evaluation can attach through an authorized application boundary. The Cycle 13 implementation scope remains the current research workflows.
+
+The P4 reference fixture exercises an authenticated large-PDF range bootstrap and a small portable delivery coordinator. Under R2-N01, the selected Windows host still has to demonstrate that charged reservations cover accepted, unresolved and downstream bytes through the real transport, with independent evidence before acceptance. Compare both host candidates on the same contract. A queue insertion or generic flush is insufficient evidence of terminal acceptance. The existing P1/P4/P5/P8 evidence and GB1 process remain applicable. [R3.1 serving requirements](https://github.com/hariomahlawat/mimamsa-corpus/blob/6a0ae735e4ea0b5e616a25db3019bd212d6604b1/docs/architecture/intelligence/SERVING_AND_REVOCATION_CONTRACT.md#10-r3-confirmation-condition-r2-n01) · [P4 reference evidence](../../../app/poc/p4_pdf/README.md)
 
 ## 2. Decision drivers (weighted criteria)
 
@@ -94,14 +102,14 @@ Weights are proposed by B0 for owner confirmation. Each option is scored 1–5 p
 
 ## 6. Evidence table (to be completed after P1–P9)
 
-Status values: `PENDING` (no evidence yet), `MEASURED` (raw measurements committed), `REVIEWED` (independent reviewer confirmed). B0 has **not** measured anything below; every row is pending.
+Status values: `PENDING` (no evidence yet), `MEASURED` (raw measurements committed), `REVIEWED` (independent reviewer confirmed). The Windows decision evidence remains pending. The P4 reference evidence is scoped below.
 
 | PoC (directive) | Question | Go criterion (proposed by B0) | Evidence location | Result | Status |
 | --- | --- | --- | --- | --- | --- |
 | P1 Windows hosting | ASP.NET Core vs Django under native Windows hosting: install, service lifecycle, concurrency, database integration, process recovery | Both hosting modes install and recover unattended; metadata p95 < 300 ms at 25 users | `app/poc/p1_hosting/` | _to fill_ | PENDING |
 | P2 Search and retrieval | PostgreSQL FTS, BM25-class engines, vector, hybrid: Recall@K, Precision@K, MRR, nDCG, exact citation retrieval, abbreviation handling, latency, concurrency | Search p95 < 1 s at 10 concurrent queries on reference hardware (16 cores, 64 GB, 1 TB SSD) without sacrificing accuracy; hybrid Recall@20 ≥ best single method; sized for ~20 GB | `app/poc/p2_search/` | _to fill_ | PENDING |
 | P3 Local embeddings | BGE, E5, Arctic and others: quality, CPU latency, memory, throughput, licence | Query embedding < 100 ms; full corpus overnight on CPU; permissive licence | `app/poc/p3_embeddings/` | _to fill_ | PENDING |
-| P4 Document processing and PDF navigation | Native, scanned, garbled, bilingual PDFs; page coordinates; highlighting; OCR boxes; large documents; pypdfium2 / pdfminer.six / pdfplumber as PyMuPDF alternatives | Page ≥ 98%; native highlight ≥ 90%; scanned overlay shown; permissive extractor adequate | `app/poc/p4_pdf/` | _to fill_ | PENDING |
+| P4 Document processing and PDF navigation | Native, scanned, garbled, bilingual PDFs; page coordinates; highlighting; OCR boxes; large documents; pypdfium2 / pdfminer.six / pdfplumber as PyMuPDF alternatives | Page ≥ 98%; native highlight ≥ 90%; scanned overlay shown; permissive extractor adequate | `app/poc/p4_pdf/` | Synthetic reference result available. Selected Windows host and corpus-quality checks pending. | PENDING |
 | P5 Background processing | Durable queues, idempotency, retries, recovery, termination/restart, resumability, progress, resource limits, untrusted-parser isolation | No lost or duplicated jobs over a 16k import with kills; limits enforced; parser crash contained | `app/poc/p5_jobs/` | _to fill_ | PENDING |
 | P6 Offline Windows installation | Clean Windows machine, no internet; runtimes, pgvector, Python libraries, frontend assets, OCR and embedding models; reproducible | Offline install succeeds; rebuild reproduces identical hashes | `app/poc/p6_installer/` | _to fill_ | PENDING |
 | P7 Security and licence review | Dependency inventory, SBOM, licences from actual versions and model artefacts, parser isolation, vulnerabilities | No unresolved copyleft without D-02; no unmitigated high/critical vulnerability; threat tests pass | `app/poc/p7_sbom/` | _to fill_ | PENDING |

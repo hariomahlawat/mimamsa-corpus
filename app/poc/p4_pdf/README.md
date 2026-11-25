@@ -1,0 +1,25 @@
+# Cycle 13 P4 protected PDF delivery reference
+
+The reference coordinator implements portable, serialized policy and byte-credit checks. Connection and site credit are reserved before each bounded nonblocking adapter call. A partial result retains the accepted prefix charge, and an uncertain result retains the full charge and closes future admission for that connection. A trusted observer can confirm a drain once. Keep terminal transport semantics, socket or TLS buffer proof and restart recovery in the host adapter. The synthetic HTTP fixture uses an in-memory withdrawal and loopback-only nonblocking sockets. It has no production auth, TLS, recovery witness or vault interface.
+
+The fixture deliberately never releases socket charges. It lacks proof of actual drain and the finite runs fit within the site limit. This models conservative accounting for a bounded run and will eventually deny new traffic under sustained use. A production adapter needs independently demonstrated drain, termination and restart evidence before credit reuse.
+
+## Reproduce
+
+From this directory, run `python -B -m unittest -v` and `python -B benchmark.py`. These require Python 3.12 and its standard library. The existing app CI runs the same tests on Windows and Linux.
+
+For browser evidence, stage the pinned PDF.js 5.4.624 build files `pdf.mjs` and `pdf.worker.mjs` locally in one folder. Run `python -B harness.py --pdfjs /path/to/pdfjs-build`. With a locally installed Playwright and Chromium, run `node browser_check.mjs <fixture-url>`. The URL fragment carries the synthetic session credential. Keep it local. Set `PLAYWRIGHT_MODULE` or `CHROMIUM_PATH` for non-default locations. The browser fixture permits loopback requests to this origin only. It checks rendered page text and observes requests separately from the Python gateway.
+
+## Observations
+
+- Linux x86-64, Python 3.12.14. Seven tests cover simultaneous reservations, partial and uncertain outcomes, one-time drain, synthetic withdrawal, authenticated metadata and exact ranges, and invalid request handling. An independent reviewer reran the suite and found that a range error could precede the policy check. The updated test failed on that case before the fix and now expects a common denial for the withdrawn copy.
+- Chromium 156.0.8078.79 rendered pages 1 and 12 of the 396,871-byte synthetic file. It issued seven authenticated single ranges with exact 206 offsets, the largest 65,536 bytes. The observer saw a range at offset 393,216, beyond the 256 KiB full-response cap, and no external requests. The separate loopback client test stopped a response after withdrawal between body slices and observed an incomplete response.
+- Linux loopback benchmark, 80 requests at concurrency 10 and 64 KiB per response. One sample measured 8.801 ms p50, 19.962 ms p95, 33.758 ms maximum and 963.89 requests/s. It retained 5,258,720 bytes of credit including response headers. This short synthetic sample does not estimate sustained load, production TLS, or Windows performance.
+
+## Reconciliation and closeout disposition
+
+The limited R3.1 delta at `6a0ae735e4ea0b5e616a25db3019bd212d6604b1` records the R3 conditional verdict, addresses the two design clarifications in §10, adds Windows-first portability to existing validation and retains the existing acceptance boundary. No new architectural finding surfaced. ADR-0005 stays proposed. The P4 fixture and CI cover portable behavior without selecting a web host. The R1 app contract can continue to supply eligible copy hash, page and exclusion inputs. Runtime session tokens, byte reservations and PDF request bounds stay in the serving layer.
+
+The material redevelopment risk is choosing a host where protected responses bypass the application barrier, or where actual buffer ownership and drain are opaque. Keep the barrier below application modules and above the replaceable terminal transport. Retain portable relative paths, shared schema, original-copy references and stable typed application boundaries so later Hybrid RAG, GraphRAG, agents and approved rules can reuse the same services.
+
+Recommend PR #53 for the controlled documentation integration point after normal checks and R1/ADR reconciliation. Record ACCEPT WITH CONDITIONS and carry R2-N01 as open into applicable Windows P1/P4/P5/P8 evidence. Final independent practical verification still needs the selected Windows service and browser with authenticated metadata and mid-range withdrawal, observed terminal acceptance and residual buffer occupancy under contention, measured fence latency and storage-backed recovery. Protected-delivery and Cycle 13 release acceptance remain separate from documentation integration. Corpus-to-application effort remains 70:30 and this fixture stays within the existing application PoC scope. [R3.1](https://github.com/hariomahlawat/mimamsa-corpus/pull/53) · [Independent R3 report](https://github.com/hariomahlawat/mimamsa-corpus/blob/e97b3de2656000712bb1cd061d88a78dd86cb8b0/docs/architecture/reviews/intelligence_pr53_r3_05cd3bf.md)

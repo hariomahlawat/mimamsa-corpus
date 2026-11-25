@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cycle 13 PDF range fixture</title>
+<style>
+  body { max-width: 650px; margin: 2rem auto; padding: 0 1rem; font: 16px/1.5 system-ui; color: #17263b; }
+  canvas { display: block; margin-top: 1rem; max-width: 100%; border: 1px solid #b0bac5; }
+  input { width: 5rem; }
+</style>
+<main>
+  <h1>Synthetic PDF</h1>
+  <form>
+    <label>Page <input name="page" type="number" min="1" value="1" required></label>
+    <button disabled>Go</button>
+  </form>
+  <p role="status">Opening document…</p>
+  <canvas aria-label="Synthetic PDF page"></canvas>
+</main>
+<script type="module">
+import { getDocument, GlobalWorkerOptions, PDFDataRangeTransport } from "/pdf.mjs";
+
+GlobalWorkerOptions.workerSrc = "/pdf.worker.mjs";
+const headers = { Authorization: `Bearer ${location.hash.slice(1)}` };
+const status = document.querySelector("[role=status]");
+const form = document.querySelector("form");
+const canvas = document.querySelector("canvas");
+let task;
+let rendering;
+function reportUnavailable(error) {
+  status.textContent = "Document unavailable.";
+  form.querySelector("button").disabled = true;
+  canvas.width = 0;
+  void task?.destroy().catch(() => {});
+  console.error(error);
+}
+
+class BoundedRanges extends PDFDataRangeTransport {
+  constructor(metadata) {
+    super(metadata.length, new Uint8Array(), true);
+    this.metadata = metadata;
+    this.controller = new AbortController();
+  }
+  requestDataRange(begin, end) {
+    this.readRange(begin, end).catch(reportUnavailable);
+  }
+  async readRange(begin, end) {
+    const {copy, length, maxRange} = this.metadata;
+    const data = new Uint8Array(end - begin);
+    for (let offset = begin; offset < end;) {
+      const stop = Math.min(end, offset + maxRange);
+      const response = await fetch(`/pdf?copy=${encodeURIComponent(copy)}`, {
+        headers: {...headers, Range: `bytes=${offset}-${stop - 1}`},
+        signal: this.controller.signal,
+        cache: "no-store",
+      });
+      const expected = `bytes ${offset}-${stop - 1}/${length}`;
+      if (response.status !== 206 || response.headers.get("Content-Range") !== expected) {
+        throw new Error("Unexpected range response");
+      }
+      const chunk = new Uint8Array(await response.arrayBuffer());
+      if (chunk.length !== stop - offset) throw new Error("Incomplete range");
+      data.set(chunk, offset - begin);
+      offset = stop;
+    }
+    this.onDataRange(begin, data);
+  }
+  abort() {
+    this.controller.abort();
+  }
+}
+
+try {
+  const response = await fetch("/metadata", {headers, cache: "no-store"});
+  if (!response.ok) throw new Error("Metadata unavailable");
+  const metadata = await response.json();
+  task = getDocument({
+    range: new BoundedRanges(metadata), length: metadata.length,
+    rangeChunkSize: Math.min(65536, metadata.maxRange), disableStream: true,
+    disableAutoFetch: true, isEvalSupported: false, useSystemFonts: true,
+  });
+  const pdf = await task.promise;
+  async function render(number) {
+    if (rendering) return;
+    rendering = true;
+    form.querySelector("button").disabled = true;
+    try {
+      const page = await pdf.getPage(number);
+      const viewport = page.getViewport({ scale: 1.25 });
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      await page.render({ canvas, viewport }).promise;
+      const text = await page.getTextContent();
+      canvas.dataset.pageText = text.items.map(item => item.str).join(" ");
+      status.textContent = `Page ${number} of ${pdf.numPages}`;
+      form.querySelector("button").disabled = false;
+    } finally {
+      rendering = false;
+    }
+  }
+  form.elements.page.max = pdf.numPages;
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    render(form.elements.page.valueAsNumber).catch(reportUnavailable);
+  });
+  await render(1);
+} catch (error) {
+  reportUnavailable(error);
+}
+</script>
+</html>
