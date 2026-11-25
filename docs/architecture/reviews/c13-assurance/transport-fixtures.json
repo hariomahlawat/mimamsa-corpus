@@ -1,0 +1,645 @@
+{
+  "cases": [
+    {
+      "id": "N01-01",
+      "capability": "Atomic connection and site admission",
+      "requirement": "Contract §§6, 10",
+      "fixture": "Keep exactly 64 KiB available. Race two 64 KiB contenders on one connection, then race across two. Repeat against the configured site cap.",
+      "expected": "Exactly one reservation at each contested cap. Track reserved, accepted and uncertain bytes together.",
+      "prohibited": "Overcommit, uncharged transfer, shared-read accounting, or early credit return.",
+      "environment": "Linux reference callback tests and hosted Windows synthetic CI cover both caps. Selected Windows TLS must associate independently observed egress and occupancy with both ledgers.",
+      "status": "OPEN_SELECTED_WINDOWS",
+      "evidence": "Windows synthetic CI job and exact-capacity trace vector"
+    },
+    {
+      "id": "N01-02",
+      "capability": "Partial acceptance, zero and uncertainty",
+      "requirement": "Contract §§6, 10",
+      "fixture": "Reserve 64 KiB. Observe 16 KiB accepted, zero-byte refusal on a fresh attempt, then an ambiguous attempt and duplicate settlement.",
+      "expected": "Release only the proven unused suffix. Keep full ambiguous credit until independent drain or termination. Retry only with fresh admission for an exact unaccepted suffix.",
+      "prohibited": "Replay, lost or duplicate charge, credit reset on close/timeout, offset retry after an ambiguous result.",
+      "environment": "Synthetic trace vectors plus Linux reference callback evidence. Selected Windows TLS terminal evidence is open.",
+      "status": "OPEN_SELECTED_WINDOWS",
+      "evidence": "Reference callback tests and partial/zero/uncertain trace vector"
+    },
+    {
+      "id": "N01-03",
+      "capability": "Terminal handoff vs durable withdrawal fence",
+      "requirement": "Contract §§1, 3, 6, 9–10",
+      "fixture": "Pause between protected slices, accept withdrawal, then resume. Run header, active-body, queued, reconnect and unaffected controls.",
+      "expected": "No affected terminal handoff after independently observed durable acceptance. Previously accepted bytes may arrive later. Unaffected access continues.",
+      "prohibited": "Application-log-only proof, affected protected headers/body accepted after fence, or claiming retroactive deletion.",
+      "environment": "Independent Linux loopback client and reference pause hook exercise in-memory mid-body denial. Hosted Windows CI proves only its synthetic control. Selected Windows durable fence, residual and unrelated-route evidence are open.",
+      "status": "OPEN_SELECTED_WINDOWS",
+      "evidence": "Independent loopback cancellation result and trace vector"
+    },
+    {
+      "id": "N01-04",
+      "capability": "Slow clients, backpressure and withdrawal progress",
+      "requirement": "Contract §§3, 6, 9–10",
+      "fixture": "Hold a real client slow while 25 browsers and 10 queries contend. Measure occupied capacity, nonblocking returns and valid-update admission-to-durable acknowledgment.",
+      "expected": "Bounded attempted slices and occupancy plus prompt withdrawal, with p95 ≤1 s and maximum ≤5 s as proposed inputs.",
+      "prohibited": "Blocked handoff guard, unbounded queue, starvation, or returning success during uncertain durability.",
+      "environment": "Linux short benchmark is informative only. Slow paused loopback receipt is not transport backpressure. Selected Windows reference-load and drain probes are open.",
+      "status": "OPEN_SELECTED_WINDOWS",
+      "evidence": "Three timed reference samples summarized in transport.md"
+    },
+    {
+      "id": "N01-05",
+      "capability": "Authorized metadata and large-PDF near-end navigation",
+      "requirement": "Contract §§6, 9–10",
+      "fixture": "Use pinned PDF.js with an authenticated browser, synthetic 396,871-byte PDF, first page and jump to page 12.",
+      "expected": "Authorized bounded metadata before byte requests, exact copy pin, single bounded ranges from first byte fetch, exact 206 and Content-Range/Length, rendered pages.",
+      "prohibited": "Unbounded or anonymous delivery, protected direct URL, optimistic 206, stale cache, or fallback full response.",
+      "environment": "Linux browser runner and independent HTTP client observed bounded near-end access. Selected Windows authenticated TLS browser evidence is open.",
+      "status": "OPEN_SELECTED_WINDOWS",
+      "evidence": "Independent Chromium reference record and loopback HTTP check"
+    },
+    {
+      "id": "N01-06",
+      "capability": "Generic deny and conditional controls",
+      "requirement": "Contract §§6, 9–10",
+      "fixture": "Try unauthenticated metadata/range, stale copy identity, and full, malformed, oversized, duplicate and conditional range requests. Repeat after withdrawal.",
+      "expected": "No protected size/header/body on unauthorized or withdrawn requests, no 304, exact eligible bounded control remains usable.",
+      "prohibited": "Size-bearing errors, status depending on withdrawn range validity, 304 reuse, silently shortened or unbounded response.",
+      "environment": "Independent Linux loopback client and hosted Windows reference suite have synthetic controls. Selected Windows actual authenticated path evidence is open.",
+      "status": "OPEN_SELECTED_WINDOWS",
+      "evidence": "Independent loopback HTTP check and hosted Windows CI job"
+    },
+    {
+      "id": "N01-07",
+      "capability": "Recovery authority and cancellation",
+      "requirement": "Contract §§4, 8–10",
+      "fixture": "Cancel affected stream and reset an uncertain route. Restart across prepared-only, durable-CAS, missing-current-witness and wrong-witness conditions.",
+      "expected": "Keep credit until trusted proof and prohibit affected replay. Rebuild exact committed effective state or halt. Admin ack follows durable CAS.",
+      "prohibited": "Reopen from stale or missing current authority, free uncertain credit on restart, ack a prepared-only update, or reattach stale stream.",
+      "environment": "Synthetic trace vectors exercise reconciliation and cancellation. Reference harness has only in-memory withdrawal. Selected Windows witness, storage and crash evidence are open.",
+      "status": "OPEN_SELECTED_WINDOWS",
+      "evidence": "Trace-vector self-test only for restart and witness cases"
+    },
+    {
+      "id": "N01-08",
+      "capability": "Browser withdrawal and unaffected viewer",
+      "requirement": "Contract §§5–6, 9–10",
+      "fixture": "Pause an actual browser on a mid-range transfer, withdraw exact copy, then perform viewer refresh/retry and open unrelated eligible PDF.",
+      "expected": "Cancel affected requests, clear rendered application-controlled state, deny new affected handoffs, and keep unrelated viewer usable.",
+      "prohibited": "Additional protected handoff after durable fence, stale viewer replay or blanket denial required to pass.",
+      "environment": "Independent Python HTTP client observed cancellation only. Linux browser runner covers positive rendering only. Selected Windows TLS browser cancellation remains open.",
+      "status": "OPEN_SELECTED_WINDOWS",
+      "evidence": "Reference HTTP cancellation and separate positive Chromium render"
+    }
+  ],
+  "http_cases": {
+    "metadata": {
+      "authenticated": true,
+      "copy": "target",
+      "status": 200,
+      "length": 96,
+      "content_range": null
+    },
+    "near_end": {
+      "authenticated": true,
+      "copy": "target",
+      "status": 206,
+      "range": "bytes=393216-396870",
+      "length": 3655,
+      "content_range": "bytes 393216-396870/396871"
+    },
+    "conditional": {
+      "authenticated": true,
+      "copy": "target",
+      "status": 416,
+      "range": "bytes=0-65535",
+      "conditional": "If-Range",
+      "length": 0,
+      "content_range": null
+    },
+    "anonymous": {
+      "authenticated": false,
+      "copy": "target",
+      "status": 404,
+      "range": "bytes=0-65535",
+      "length": 0,
+      "content_range": null
+    },
+    "withdrawn": {
+      "authenticated": true,
+      "copy": "target",
+      "status": 404,
+      "range": "bytes=0-65535",
+      "length": 0,
+      "content_range": null,
+      "phase": "withdrawn"
+    }
+  },
+  "vector": {
+    "limits": {
+      "connection": 65536,
+      "site": 65536
+    },
+    "initial_witness": {
+      "epoch": 1,
+      "digest": "state-1"
+    },
+    "events": [
+      {
+        "seq": 1,
+        "kind": "http",
+        "source": "client",
+        "case": "metadata",
+        "authenticated": true,
+        "copy": "target",
+        "status": 200,
+        "length": 96,
+        "content_range": null
+      },
+      {
+        "seq": 2,
+        "kind": "http",
+        "source": "client",
+        "case": "near_end",
+        "authenticated": true,
+        "copy": "target",
+        "status": 206,
+        "range": "bytes=393216-396870",
+        "length": 3655,
+        "content_range": "bytes 393216-396870/396871"
+      },
+      {
+        "seq": 3,
+        "kind": "http",
+        "source": "client",
+        "case": "conditional",
+        "authenticated": true,
+        "copy": "target",
+        "status": 416,
+        "range": "bytes=0-65535",
+        "conditional": "If-Range",
+        "length": 0,
+        "content_range": null
+      },
+      {
+        "seq": 4,
+        "kind": "http",
+        "source": "client",
+        "case": "anonymous",
+        "authenticated": false,
+        "copy": "target",
+        "status": 404,
+        "range": "bytes=0-65535",
+        "length": 0,
+        "content_range": null
+      },
+      {
+        "seq": 5,
+        "kind": "reserve",
+        "source": "ledger",
+        "attempt": "a1",
+        "connection": "a",
+        "stream": "s1",
+        "copy": "target",
+        "offset": 0,
+        "size": 65536,
+        "epoch": 1
+      },
+      {
+        "kind": "enter",
+        "source": "policy_probe",
+        "attempt": "a1",
+        "seq": 6
+      },
+      {
+        "seq": 7,
+        "kind": "accept",
+        "source": "terminal",
+        "attempt": "a1",
+        "offset": 0,
+        "size": 16384
+      },
+      {
+        "seq": 8,
+        "kind": "settle",
+        "source": "ledger",
+        "attempt": "a1",
+        "outcome": "accepted",
+        "size": 16384
+      },
+      {
+        "seq": 9,
+        "kind": "reserve",
+        "source": "ledger",
+        "attempt": "a2",
+        "connection": "a",
+        "stream": "s1",
+        "copy": "target",
+        "offset": 16384,
+        "size": 49152,
+        "epoch": 1
+      },
+      {
+        "kind": "enter",
+        "source": "policy_probe",
+        "attempt": "a2",
+        "seq": 10
+      },
+      {
+        "seq": 11,
+        "kind": "settle",
+        "source": "ledger",
+        "attempt": "a2",
+        "outcome": "zero"
+      },
+      {
+        "seq": 12,
+        "kind": "reserve",
+        "source": "ledger",
+        "attempt": "a3",
+        "connection": "a",
+        "stream": "s1",
+        "copy": "target",
+        "offset": 16384,
+        "size": 49152,
+        "epoch": 1
+      },
+      {
+        "kind": "enter",
+        "source": "policy_probe",
+        "attempt": "a3",
+        "seq": 13
+      },
+      {
+        "seq": 14,
+        "kind": "accept",
+        "source": "terminal",
+        "attempt": "a3",
+        "offset": 16384,
+        "size": 8192
+      },
+      {
+        "seq": 15,
+        "kind": "settle",
+        "source": "ledger",
+        "attempt": "a3",
+        "outcome": "uncertain"
+      },
+      {
+        "seq": 16,
+        "kind": "occupancy",
+        "source": "drain_probe",
+        "site": 24576,
+        "connections": {
+          "a": 24576
+        }
+      },
+      {
+        "seq": 17,
+        "kind": "admit",
+        "source": "policy_probe",
+        "copy": "target",
+        "operation": "withdraw",
+        "monotonic_ms": 100
+      },
+      {
+        "seq": 18,
+        "kind": "fence",
+        "source": "witness",
+        "copy": "target",
+        "operation": "withdraw",
+        "epoch": 2,
+        "digest": "state-2"
+      },
+      {
+        "seq": 19,
+        "kind": "ack",
+        "source": "client",
+        "operation": "withdraw",
+        "epoch": 2,
+        "digest": "state-2",
+        "monotonic_ms": 205
+      },
+      {
+        "seq": 20,
+        "kind": "http",
+        "source": "client",
+        "case": "withdrawn",
+        "authenticated": true,
+        "copy": "target",
+        "status": 404,
+        "range": "bytes=0-65535",
+        "length": 0,
+        "content_range": null,
+        "phase": "withdrawn"
+      },
+      {
+        "seq": 21,
+        "kind": "cancel",
+        "source": "client",
+        "stream": "s1"
+      },
+      {
+        "seq": 22,
+        "kind": "receive",
+        "source": "client",
+        "attempt": "a1",
+        "size": 16384
+      },
+      {
+        "seq": 23,
+        "kind": "restart",
+        "source": "fault_driver"
+      },
+      {
+        "seq": 24,
+        "kind": "recover",
+        "source": "witness",
+        "epoch": 2,
+        "digest": "state-2"
+      },
+      {
+        "seq": 25,
+        "kind": "prove_release",
+        "source": "drain_probe",
+        "attempt": "a1",
+        "proof": "drain"
+      },
+      {
+        "seq": 26,
+        "kind": "prove_release",
+        "source": "drain_probe",
+        "attempt": "a3",
+        "proof": "termination"
+      },
+      {
+        "seq": 27,
+        "kind": "reserve",
+        "source": "ledger",
+        "attempt": "b1",
+        "connection": "b",
+        "stream": "s2",
+        "copy": "other",
+        "offset": 0,
+        "size": 65536,
+        "epoch": 2
+      },
+      {
+        "kind": "enter",
+        "source": "policy_probe",
+        "attempt": "b1",
+        "seq": 28
+      },
+      {
+        "seq": 29,
+        "kind": "accept",
+        "source": "terminal",
+        "attempt": "b1",
+        "offset": 0,
+        "size": 65536
+      },
+      {
+        "seq": 30,
+        "kind": "settle",
+        "source": "ledger",
+        "attempt": "b1",
+        "outcome": "accepted",
+        "size": 65536
+      }
+    ]
+  },
+  "reject_vectors": [
+    {
+      "name": "site contender at full reservation",
+      "index": 6,
+      "insert": {
+        "kind": "reserve",
+        "source": "ledger",
+        "attempt": "extra",
+        "connection": "b",
+        "stream": "s2",
+        "copy": "other",
+        "offset": 0,
+        "size": 1,
+        "epoch": 1
+      },
+      "error": "site credit cap"
+    },
+    {
+      "name": "connection contender at full reservation",
+      "index": 6,
+      "insert": {
+        "kind": "reserve",
+        "source": "ledger",
+        "attempt": "extra",
+        "connection": "a",
+        "stream": "s2",
+        "copy": "other",
+        "offset": 0,
+        "size": 1,
+        "epoch": 1
+      },
+      "error": "connection credit cap",
+      "overrides": {
+        "limits": {
+          "site": 131072,
+          "connection": 65536
+        }
+      }
+    },
+    {
+      "name": "accepted suffix replay",
+      "index": 8,
+      "replace": {
+        "kind": "reserve",
+        "source": "ledger",
+        "attempt": "a2",
+        "connection": "a",
+        "stream": "s1",
+        "copy": "target",
+        "offset": 0,
+        "size": 49152,
+        "epoch": 1
+      },
+      "error": "offset"
+    },
+    {
+      "name": "unproven early credit release",
+      "index": 15,
+      "insert": {
+        "kind": "prove_release",
+        "source": "ledger",
+        "attempt": "a3",
+        "proof": "termination"
+      },
+      "error": "independent source"
+    },
+    {
+      "name": "duplicate settlement",
+      "index": 15,
+      "insert": {
+        "kind": "settle",
+        "source": "ledger",
+        "attempt": "a3",
+        "outcome": "uncertain"
+      },
+      "error": "settlement"
+    },
+    {
+      "name": "retry on uncertain stream",
+      "index": 15,
+      "insert": {
+        "kind": "reserve",
+        "source": "ledger",
+        "attempt": "extra",
+        "connection": "a",
+        "stream": "s1",
+        "copy": "target",
+        "offset": 24576,
+        "size": 1,
+        "epoch": 1
+      },
+      "error": "unresolved"
+    },
+    {
+      "name": "ack before durable fence",
+      "index": 17,
+      "insert": {
+        "kind": "ack",
+        "source": "client",
+        "operation": "withdraw",
+        "epoch": 2,
+        "digest": "state-2"
+      },
+      "error": "fence"
+    },
+    {
+      "name": "affected reservation after fence",
+      "index": 19,
+      "insert": {
+        "kind": "reserve",
+        "source": "ledger",
+        "attempt": "late",
+        "connection": "b",
+        "stream": "s2",
+        "copy": "target",
+        "offset": 0,
+        "size": 1,
+        "epoch": 2
+      },
+      "error": "withdrawn"
+    },
+    {
+      "name": "wrong witness after restart",
+      "index": 23,
+      "replace": {
+        "kind": "recover",
+        "source": "witness",
+        "epoch": 1,
+        "digest": "state-1"
+      },
+      "error": "witness"
+    },
+    {
+      "name": "omitted independent terminal acceptance",
+      "index": 6,
+      "remove": true,
+      "error": "terminal"
+    },
+    {
+      "name": "unauthorized conditional cache reuse",
+      "index": 2,
+      "replace": {
+        "kind": "http",
+        "source": "client",
+        "case": "conditional",
+        "authenticated": true,
+        "copy": "target",
+        "status": 304,
+        "range": "bytes=0-65535",
+        "conditional": "If-Range",
+        "length": 0,
+        "content_range": null
+      },
+      "error": "HTTP"
+    },
+    {
+      "name": "reopen during recovery",
+      "index": 23,
+      "insert": {
+        "kind": "reserve",
+        "source": "ledger",
+        "attempt": "early",
+        "connection": "b",
+        "stream": "early",
+        "copy": "other",
+        "offset": 0,
+        "size": 1,
+        "epoch": 2
+      },
+      "error": "policy authority"
+    },
+    {
+      "name": "receipt beyond independently observed prefix",
+      "index": 21,
+      "insert": {
+        "kind": "receive",
+        "source": "client",
+        "attempt": "a1",
+        "size": 16385
+      },
+      "error": "exceeds observed acceptance"
+    },
+    {
+      "name": "terminal acceptance of queued work after fence",
+      "error": "terminal handoff after fence",
+      "overrides": {
+        "limits": {
+          "site": 131072,
+          "connection": 65536
+        }
+      },
+      "edits": [
+        {
+          "index": 16,
+          "insert": {
+            "kind": "reserve",
+            "source": "ledger",
+            "attempt": "queued",
+            "connection": "b",
+            "stream": "queued",
+            "copy": "target",
+            "offset": 0,
+            "size": 1,
+            "epoch": 1
+          }
+        },
+        {
+          "index": 18,
+          "insert": {
+            "kind": "accept",
+            "source": "terminal",
+            "attempt": "queued",
+            "offset": 0,
+            "size": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "terminal acceptance without fresh handoff entry",
+      "index": 5,
+      "remove": true,
+      "error": "unguarded"
+    },
+    {
+      "name": "adapter accepts after reporting ambiguous completion",
+      "index": 15,
+      "insert": {
+        "kind": "accept",
+        "source": "terminal",
+        "attempt": "a3",
+        "size": 1,
+        "offset": 16384
+      },
+      "error": "settled terminal acceptance"
+    }
+  ]
+}
