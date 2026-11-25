@@ -6,11 +6,15 @@ Categories (a judgment can carry several):
                                 holdings scope, WS-B holdings register). Developers must not consult that content.
   NEAR_IDENTICAL_SPENT_SIBLING  shingle containment >= 0.90 against a spent judgment, or >= 0.80 with the same decision
                                 date (template sibling orders), from the GA0 reviewer's comparison
-                                (reviews/neardup_holdout_vs_spent.csv).
+                                (inputs/neardup_holdout_vs_spent.csv).
+  REVIEW_TEXT_EXPOSED           review-scratch text quoting the judgment (including its disposal) was committed to the
+                                branch at a4865e76 and remains in git history (confirmation finding C01).
+  AUTHOR_DEV_SNIPPET_VIEWED     the A0 author viewed a short cue snippet of the judgment while developing the
+                                stratum cue, before the draw (disclosed in EXPOSURE_REGISTER.md).
   CASE_NUMBER_REVIEWED          case numbers independently reviewed in C11 (SCNUM_INDEPENDENT_REVIEW.csv); exposure is
                                 limited to case-number fields.
-Every headline is reported with and without PRIMARY (= CURATED_KB_CONTENT or NEAR_IDENTICAL_SPENT_SIBLING), and the
-outcome headline also without CASE_NUMBER_REVIEWED (PROTOCOL_C13 s.4.4).
+Every headline is reported with and without PRIMARY (every category except CASE_NUMBER_REVIEWED), and the outcome
+headline also without CASE_NUMBER_REVIEWED. A pass must hold without PRIMARY (PROTOCOL_C13 v1.1 s.4.4, s.6).
 
   python -I -B c13_sensitivity.py [--check]
 """
@@ -27,7 +31,9 @@ CURATED_FILES = ["C11-JUDICIAL-QUALITY/curated/CURATED_53_C11.csv",
                  "C12-CONSOLIDATION/holdings/outputs/CURATED_SCOPE_C12.csv",
                  "WS-B-JUDGMENTS/holdings_register.csv"]
 SCNUM_FILE = "C11-JUDICIAL-QUALITY/scnum/review/SCNUM_INDEPENDENT_REVIEW.csv"
-NEARDUP = PKG / "reviews" / "neardup_holdout_vs_spent.csv"
+NEARDUP = PKG / "inputs" / "neardup_holdout_vs_spent.csv"   # GA0 reviewer evidence (keys and scores only)
+EVENTS = PKG / "inputs" / "EXPOSURE_EVENTS.csv"            # C01 exposure events (EXPOSURE_REGISTER.md)
+PRIMARY = {"CURATED_KB_CONTENT", "NEAR_IDENTICAL_SPENT_SIBLING", "REVIEW_TEXT_EXPOSED", "AUTHOR_DEV_SNIPPET_VIEWED"}
 HOLDOUTS = ("H-OUT-C13", "H-HOLD-C13", "H-REL-C13")
 DATE = re.compile(r"(\d{4}-\d{2}-\d{2})$")
 
@@ -61,19 +67,23 @@ def build():
             prev = cats[k].get("NEAR_IDENTICAL_SPENT_SIBLING", "")
             ev = f"{r['spent_key']} containment {c:.3f}{' same date' if same_date else ''}"
             cats[k]["NEAR_IDENTICAL_SPENT_SIBLING"] = (prev + "; " if prev else "") + ev
+    for r in read_csv(EVENTS):
+        if r["judgment_key"] in mem:
+            cats[r["judgment_key"]][r["category"]] = r["evidence"]
     rows = []
     for k in sorted(cats):
         c = cats[k]
         rows.append(dict(judgment_key=k, holdouts=";".join(sorted(mem[k])),
                          categories=";".join(sorted(c)),
-                         primary_sensitivity=bool({"CURATED_KB_CONTENT", "NEAR_IDENTICAL_SPENT_SIBLING"} & set(c)),
+                         primary_sensitivity=bool(PRIMARY & set(c)),
                          developer_restriction=("do not consult curated/KB content for this judgment"
                                                 if "CURATED_KB_CONTENT" in c else ""),
                          evidence=" | ".join(f"{a}: {b}" for a, b in sorted(c.items()))))
     srcs = "".join(f"# source {p}: {sha256_file(AW / p)}\n" for p in CURATED_FILES + [SCNUM_FILE])
     return {"holdouts/PRE_EXPOSED_SUBSET.csv": render_csv(rows),
-            "holdouts/PRE_EXPOSED_SOURCES.txt": srcs + f"# source reviews/neardup_holdout_vs_spent.csv: "
-                                                       f"{sha256_file(NEARDUP)}\n"}
+            "holdouts/PRE_EXPOSED_SOURCES.txt": srcs + f"# source inputs/neardup_holdout_vs_spent.csv: "
+                                                       f"{sha256_file(NEARDUP)}\n# source inputs/EXPOSURE_EVENTS.csv: "
+                                                       f"{sha256_file(EVENTS)}\n"}
 
 
 def load_subset(holdout):

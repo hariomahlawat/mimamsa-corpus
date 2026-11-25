@@ -1,5 +1,8 @@
 # Independent review: C13-A0 evaluation infrastructure (GA0 gate)
 
+> **Redacted copy (C13-A0 author, after confirmation finding C01).** Short quotations of judgment text and case details that could hint at holdout content were replaced with `[REDACTED: ...]`. The reviewer's unredacted original stays in the coordinator scratchpad (`scratchpad/c13/reviews/a0/`). Evidence files that quoted holdout text were removed from this folder; see `../EXPOSURE_REGISTER.md`.
+
+
 - **Reviewed:** branch `claude/c13-a0-eval` at commit `5e07e010`, output `legal_knowledge/audit_work/C13-A0-EVAL/`.
 - **Reviewer:** independent; I did not write this work. Read-only review. I worked in a scratch export (`git archive 5e07e010`) under `scratchpad/c13/reviews/a0/src`. I made no commits.
 - **Date:** 2026-11-25.
@@ -36,7 +39,7 @@
 
 **Duplicate identities.**
 - `HF_JUDGMENT_DUPLICATES` and the C11 `SAME_TEXT_GROUPS` link no holdout judgment to a spent judgment.
-- The only multi-key group that touches a holdout is `DUP-NC-2018INSC185`. Both of its members (JK-48e3c2db…, JK-8a0be890…) are in H-OUT, but they are **different judgments**: Kudrat Sandhu, the interim order of 22 Feb 2018 and the final judgment of 21 Aug 2018. This is correct.
+- The only multi-key group that touches a holdout is `DUP-NC-2018INSC185`. Both of its members (JK-48e3c2db…, JK-8a0be890…) are in H-OUT, but they are **different judgments**: [REDACTED: party name and the nature and dates of the two decisions]. This is correct.
 - A frame-wide MinHash search (4,254 texts) and a holdout-vs-spent shingle-containment search found **no same-judgment duplicate** between a holdout and a spent judgment. They did find near-identical *sibling* orders: separate proceedings decided in identical terms. See F06.
 
 **Negative control.**
@@ -89,10 +92,10 @@
 **Stratum errors (14):**
 - 7 false PARTY_SPECIFIC;
 - 3 pension matters labelled OTHER;
-- 2 Supreme Court multi-proceeding judgments missed, because SC meta carries no case numbers ("CA Nos. 7939-49 of 2012"; "appeals and writ petition");
+- 2 Supreme Court multi-proceeding judgments missed, because SC meta carries no case numbers ([REDACTED: quoted case-number text from two judgments]);
 - 2 false BATCH_OR_MULTI, because the AFT OA number in the cause title is counted as a second proceeding.
 
-**Party-specific cue.** In an additional seeded sample of 25 of the 60 judgment-level candidates, I found 3 true party-differentiated disposals. Combined with the frame sample, that is **3/27 unique, PPV ≈ 11% (95% CI 4–28%)**. The regex fires on AFT-writ boilerplate such as "respondent No.1 has rightly been held to be entitled …" or "respondent No.2-Armed Forces Tribunal".
+**Party-specific cue.** In an additional seeded sample of 25 of the 60 judgment-level candidates, I found 3 true party-differentiated disposals. Combined with the frame sample, that is **3/27 unique, PPV ≈ 11% (95% CI 4–28%)**. The regex fires on AFT-writ boilerplate [REDACTED: two quoted sentences from candidate judgments].
 
 **Impact on validity.** Validity is unaffected: strata only define cells, the weights are correct for any partition, and subset results use gold labels. Efficiency and the owner's party-specific breakdown are affected, because H-OUT will hold very few gold party-specific units (F03).
 

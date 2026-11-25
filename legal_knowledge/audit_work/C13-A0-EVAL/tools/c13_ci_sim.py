@@ -126,7 +126,7 @@ def build(nsim=NSIM, p_out=P_OUT, p_hold=P_HOLD):
                 criterion="validated if every scenario's design-CP coverage >= 0.95",
                 validated=worst >= 0.95,
                 note=("Bootstrap coverage is not re-simulated here; the GA0 reviewer measured 0.830 (p=0.983) and "
-                      "0.923 (heterogeneous) for the v1.0 weighted percentile bootstrap (reviews/sim_*.json), which is "
+                      "0.923 (heterogeneous) for the v1.0 weighted percentile bootstrap (reviewer scratchpad sim_*.json; review report in reviews/), which is "
                       "why v1.1 no longer uses it for the pass rule."))
     return {"ci_validation/CI_COVERAGE.csv": render_csv(rows), "ci_validation/CI_COVERAGE_SUMMARY.json": render_json(summ)}
 

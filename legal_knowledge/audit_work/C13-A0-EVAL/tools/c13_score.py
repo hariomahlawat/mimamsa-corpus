@@ -361,7 +361,8 @@ def run(task_name, holdout, truth, pred, design, pages_by_sha=None, adjudication
                              "proceeding-specific statuses are reported for the owner; whether 'met' must also hold per "
                              "breakdown is an owner decision (PROTOCOL v1.1 s.6.4). Party-specific is descriptive.")
     if pre_exposed is not None:
-        prim = {k for k, c in pre_exposed.items() if c & {"CURATED_KB_CONTENT", "NEAR_IDENTICAL_SPENT_SIBLING"}}
+        from c13_sensitivity import PRIMARY
+        prim = {k for k, c in pre_exposed.items() if c & PRIMARY}
         cn = {k for k, c in pre_exposed.items() if "CASE_NUMBER_REVIEWED" in c}
         sens = {}
         for lab, excl in (("without_primary_pre_exposed", prim), ("without_case_number_reviewed", cn)):
@@ -369,11 +370,30 @@ def run(task_name, holdout, truth, pred, design, pages_by_sha=None, adjudication
             a = agg(lab, items=keep)
             sens[lab] = dict(items_excluded=len(design) - len(keep), estimates=a, targets_status=statuses(a))
         res["sensitivity"] = sens
+        # v1.1 C01 rule: a pass must also hold WITHOUT the PRIMARY pre-exposed subset. Headline = worse of the two.
+        full = res.get("targets_status") or {k: v for k, v in res["milestone"].items() if k in ("precision", "recall")}
+        wo = sens["without_primary_pre_exposed"]["targets_status"]
+        res["headline_status"] = _worse(full, wo)
+        res["headline_rule"] = ("headline status = worse of the full-sample status and the status without the PRIMARY "
+                                "pre-exposed subset (PROTOCOL_C13 v1.1 s.6)")
+    else:
+        res["headline_status"] = "INCOMPLETE: no pre-exposed subset supplied; the v1.1 headline needs the sensitivity run"
     anc = Counter(r["anchor"] for r in rows if r["anchor"])
     n_anc = sum(anc.values())
     res["evidence_anchor"] = dict(counts=dict(anc), ok_rate=S.rnd(anc["ANCHOR_OK"] / n_anc) if n_anc else None,
                                   ok_wilson95=[S.rnd(x) for x in S.wilson(anc["ANCHOR_OK"], n_anc)[1:]])
     return res, rows
+
+
+RANK = {"NOT_ESTIMABLE": 0, "NOT_MET": 1, "MET_POINT_ONLY": 2, "MET_LOWER_BOUND": 3}
+
+
+def _worse(a, b):
+    if isinstance(a, dict):
+        return {k: _worse(a[k], b[k]) for k in a}
+    if a in RANK and b in RANK:
+        return a if RANK[a] <= RANK[b] else b
+    return a if a == b else f"{a}|{b}"
 
 
 def self_test():
@@ -404,6 +424,12 @@ def self_test():
     assert res2["uncodable"]["items"] == 1 and res2["uncodable"]["codes"] == {"SHA_MISMATCH": 1}
     c2 = res2["overall"]["substantive_result"]
     assert c2["coverage"]["n"] == 7 and c2["coverage_counting_uncodable_items_as_not_covered"]["n"] == 8
+    # headline must also hold without the pre-exposed subset
+    assert _worse({"f": "MET_LOWER_BOUND"}, {"f": "NOT_MET"}) == {"f": "NOT_MET"}
+    res3, _ = run("outcome", "SELFTEST", truth, truth, design, pages, pre_exposed={ids[0]: {"REVIEW_TEXT_EXPOSED"}})
+    assert res3["sensitivity"]["without_primary_pre_exposed"]["items_excluded"] == 1
+    assert res3["headline_status"]["printed_disposal"]["strict_precision"] in ("MET_POINT_ONLY", "MET_LOWER_BOUND",
+                                                                              "NOT_MET")
     print("c13_score self-test OK")
     return 0
 

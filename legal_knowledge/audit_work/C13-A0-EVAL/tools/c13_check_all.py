@@ -19,9 +19,10 @@ import c13_score  # noqa: E402
 import c13_ci_sim  # noqa: E402
 import c13_power  # noqa: E402
 import c13_sensitivity  # noqa: E402
+import c13_leakguard  # noqa: E402
 from c13_common import OUT, PKG, additions_cache_dir, corpus_git_dir, sha256_file, write_or_check  # noqa: E402
 
-SUMS_GLOBS = ["README.md", "PROTOCOL_C13.md", "decisions/*.json", "tools/*.py", "packets/*.md", "outputs/**/*.csv", "outputs/**/*.json",
+SUMS_GLOBS = ["README.md", "PROTOCOL_C13.md", "EXPOSURE_REGISTER.md", "decisions/*.json", "inputs/*", "tools/*.py", "packets/*.md", "outputs/**/*.csv", "outputs/**/*.json",
               "outputs/**/*.txt", "reviews/**/*"]
 
 
@@ -39,6 +40,7 @@ def main():
     if corpus_git_dir() and additions_cache_dir().is_dir():
         import c13_features
         codes.append(write_or_check(c13_features.build(), OUT, True, "c13_features"))
+        codes.append(write_or_check(c13_leakguard.build(), OUT, True, "c13_leakguard"))
     else:
         print("c13_features: SKIPPED (corpus commit or C12 additions copy not available)")
     codes.append(write_or_check(c13_exclusions.build(), OUT, True, "c13_exclusions"))
@@ -49,6 +51,9 @@ def main():
     codes.append(write_or_check(c13_ci_sim.build(), OUT, True, "c13_ci_sim"))
     codes.append(write_or_check(c13_power.build(), OUT, True, "c13_power"))
     codes.append(c13_score.main(["--check"]))
+    leaks = c13_leakguard.scan_tree()
+    print("leak guard scan: OK (no holdout text)" if not leaks else f"leak guard scan: FAILED {leaks}")
+    codes.append(1 if leaks else 0)
     ok = (PKG / "SHA256SUMS").is_file() and (PKG / "SHA256SUMS").read_text(encoding="utf-8") == sums_text()
     print("SHA256SUMS: OK" if ok else "SHA256SUMS: MISMATCH")
     codes.append(0 if ok else 1)

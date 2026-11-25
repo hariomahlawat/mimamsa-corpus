@@ -6,6 +6,8 @@ This folder holds reusable, deterministic evaluation tooling and three fresh hol
 
 The GA0 independent review of `5e07e010` returned **ACCEPT WITH CONDITIONS**, with no P1; it is in `reviews/`. Protocol **v1.1** addresses conditions F01–F05 and the P3 findings without redrawing any holdout (see `PROTOCOL_C13.md` section 9.1). Reviewer confirmation of v1.1 is the gate for the freezes.
 
+The confirmation at `06340486` found **C01 (P1)**: reviewer scratch quoting holdout text had been committed to `reviews/` at `a4865e76`. It is fixed in the tree, but **the text stays in git history**. The exposed judgments are registered and a pass must hold without them. See [`EXPOSURE_REGISTER.md`](EXPOSURE_REGISTER.md). **Extractor authors must not open `reviews/` at those commits.**
+
 All tools use only the Python 3.11+ standard library. Every tool's `--check` option writes nothing and compares a fresh in-memory rebuild with the committed bytes.
 
 ## Layout
@@ -25,7 +27,10 @@ All tools use only the Python 3.11+ standard library. Every tool's `--check` opt
 | `tools/c13_power.py` | v1.1 weighted size restatement: what each holdout can and cannot show |
 | `tools/c13_sensitivity.py` | v1.1 pre-exposed holdout subsets (curated/KB content, near-identical spent siblings, case-number review) |
 | `tools/c13_check_all.py` | Runs every check and verifies `SHA256SUMS` |
-| `reviews/` | GA0 independent review (report, findings, reviewer scripts and evidence; the reviewer's 244 MB repository exports are not copied) |
+| `reviews/` | GA0 review report, findings CSV and confirmation report only (copies; quotes of judgment text redacted). Evidence stays in the coordinator scratchpad |
+| `EXPOSURE_REGISTER.md`, `inputs/EXPOSURE_EVENTS.csv` | Every known holdout exposure (C01 review scratch, A0 development snippets) |
+| `inputs/neardup_holdout_vs_spent.csv` | GA0 reviewer near-duplicate scores (keys only), input to `c13_sensitivity.py` |
+| `tools/c13_leakguard.py`, `outputs/leakguard/` | Holdout shingle fingerprint (hashes only) and the scan that fails on any holdout text under this folder |
 | `packets/CODING_GUIDE_*.md` | Coder guides. The holdings guide is an interim layout until A3 commits its versioned guideline |
 | `outputs/frame/` | `TEXT_FEATURES.csv`, `FRAME_RECORDS.csv` (4,281), `FRAME_JUDGMENTS.csv` (3,637), `STRATUM_COUNTS.csv`, `NON_USABLE_POPULATION.csv`, `FRAME_SUMMARY.json` |
 | `outputs/exclusions/` | `SPENT_SET_MEMBERS.csv`, `EXCLUDED_JUDGMENTS.csv` (682 keys), `EXCLUSION_SUMMARY.json` (source files and their sha256) |
@@ -118,5 +123,5 @@ python3 -m unittest discover -s tests -p "test_legal_audit_c13_eval_*.py"   # fr
 - The HC holdings density is assumed. The full reserve is already opened (recorded decision), so no further items can be added.
 - C12 coordinator-tools F08 (scnum overlay) is outside A0 and is not addressed here.
 - Party-specific results cannot be demonstrated with this holdout (about 2–6 gold judgments expected).
-- Results must be reported with and without the pre-exposed subsets.
+- Results must be reported with and without the pre-exposed subsets, and a pass must hold without them. 42 holdout judgments are PRIMARY pre-exposed: H-OUT 35, H-HOLD 8, H-REL 7.
 - Coder independence rests on process: separate instances and assignment logs. The tools can detect leakage but cannot prove independence.

@@ -1,6 +1,6 @@
 # PROTOCOL_C13: binding evaluation protocol for Outcome V4, Holdings V2 and graph relations
 
-- **Version:** 1.1 (C13-A0, after the GA0 independent review of `5e07e010`: ACCEPT WITH CONDITIONS; the review is in `reviews/`). Committed before any coding starts and before any C13 extractor is frozen. The holdouts are unchanged; v1.1 changes no draw.
+- **Version:** 1.1 (C13-A0, after the GA0 independent review of `5e07e010`: ACCEPT WITH CONDITIONS; the review is in `reviews/`). Committed before any coding starts and before any C13 extractor is frozen. The holdouts are unchanged; v1.1 changes no draw. Amended after confirmation finding C01 (P1, holdout text exposed by committed review scratch): see `EXPOSURE_REGISTER.md` and section 9.2.
 - **Binds:** workstreams A2 (Outcome V4), A3 (Holdings V2) and A5 (graph relations). A0 must be independently accepted (gate GA0) before any formal A2 or A3 evaluation.
 - **Status of everything scored under this protocol:** `AUTOMATED_CANDIDATE_NOT_VERIFIED`. Meeting a target does not make an output a legal fact or verified knowledge. No result under this protocol authorises an advisory function, BIND, or a legal-status change.
 - **Changing this protocol.** Any change needs a new version number, a dated entry in section 10, and a commit that comes **before** the freeze of the extractor it affects. A change made after a freeze applies only to the next freeze. Changes after an evaluator has seen any score are reported as post-hoc and never replace the pre-registered headline figure.
@@ -130,11 +130,15 @@ The v1.0 size justification above was unweighted. The headline estimators are we
 2. If no decision is committed before the first packet goes out, `GOLD_COUNT_RULE` applies.
 
 **Recorded decision: `FULL_OPEN`.**
-- **File:** `decisions/H-HOLD_RESERVE_DECISION.json`, sha256 `d6d9a96a6695dfd12ed650ae64092d1adf1d239e64bec4845efdbafeb878bc15`.
+- **File:** `decisions/H-HOLD_RESERVE_DECISION.json`, sha256 `593b485f3a081c6dffdd4c66ae22f4528fc811eb976c0077646dcb81df8b8e5f`. This is wording version 2: the C01 correction changed only the rationale, the statement and the exposure disclosure. Version 1 was sha256 `d6d9a96a6695dfd12ed650ae64092d1adf1d239e64bec4845efdbafeb878bc15`, at commit `06340486`.
 - **Decided by:** the coordinator, on 2026-11-25.
 - **Effect:** H-HOLD-C13 is the 75 registered sample judgments plus all 38 registered reserve judgments, 113 in total. Per-cell n_h, inclusion probabilities and weights are recomputed. The harness applies this by default.
-- **Rationale:** the pre-registered precision target of about ±6.7pp. Nothing had been coded or viewed.
-- **Timing:** the decision was made before any H-HOLD packet was issued, before any H-HOLD item was coded or read, and before any extractor output on H-HOLD-C13 existed.
+- **Rationale:** the pre-registered precision target of about ±6.7pp. The decision used only design figures; it opens every reserve judgment regardless of content.
+- **Timing:** the decision was made before any H-HOLD packet was issued, before any H-HOLD item was coded, and before any extractor output on H-HOLD-C13 existed.
+- **Exposure (corrected wording, C01):** v1 of the decision file said "nothing has been coded or viewed". That was wrong about viewing.
+  - Three H-HOLD sample judgments (JK-1aa3838f30b79141, JK-c72781c1391284ec, JK-f3a273f09da43b54) had been read in part by the GA0 reviewer. Excerpts of them, including disposal text, were committed at `a4865e76`, before the decision.
+  - One reserve judgment (JK-8edc4af5fdd3d9cf) had its text effectively exposed through a committed excerpt of a near-identical sibling order.
+  - Nothing had been coded. All four judgments are PRIMARY pre-exposed, and the decision stands.
 - The H-HOLD packets were regenerated with 113 items per coder. The separate reserve packets were withdrawn.
 - `GOLD_COUNT_RULE` no longer applies, and no further H-HOLD items can be added.
 3. No item is ever added after any coded result or extractor output has been seen, except under `GOLD_COUNT_RULE` as written.
@@ -192,11 +196,17 @@ The v1.0 size justification above was unweighted. The headline estimators are we
 | `CURATED_KB_CONTENT` | 4: JK-76ec35cd7ab232b5, JK-88f84411abdb3028 and JK-05e9484593272fe0 (H-OUT); JK-16dcc07543999d26 (H-HOLD and H-REL) | **Developers of A2/A3/A5 must not consult the curated or KB content (C11 curated 53, C12 curated scope, WS-B holdings register, KB records) for these judgments.** Coders get only the blinded packet |
 | `NEAR_IDENTICAL_SPENT_SIBLING` | 16 (shingle containment ≥ 0.90, or ≥ 0.80 on the same date, against a spent judgment) | Template leakage via sibling orders |
 | `CASE_NUMBER_REVIEWED` | 27 (C11 SCNUM independent review) | Exposure limited to case-number fields |
+| `REVIEW_TEXT_EXPOSED` (C01) | 19: H-OUT 18, H-HOLD 4 (one is in the reserve), H-REL 1 | Review-scratch text quoting the judgment, including disposal text, was committed to branch history at `a4865e76`; for JK-8edc4af5fdd3d9cf this was a near-identical sibling's text. It is removed from the tree but stays in history, which was not rewritten |
+| `AUTHOR_DEV_SNIPPET_VIEWED` (C01) | 10 (H-OUT; 6 also in `REVIEW_TEXT_EXPOSED`) | The A0 author viewed short cue snippets before the draw; disclosed |
 
-**PRIMARY** means `CURATED_KB_CONTENT` or `NEAR_IDENTICAL_SPENT_SIBLING`.
+**PRIMARY** means every category except `CASE_NUMBER_REVIEWED`. It covers 42 judgments: H-OUT 35, H-HOLD 8, H-REL 7.
+
+**Binding rule (v1.1, C01).** Every evaluation reports its results both with and without the PRIMARY pre-exposed subset. **A pass must hold without it.** The headline status is the worse of the full-sample status and the without-PRIMARY status, and the harness computes it as `headline_status`.
 - Every headline figure is reported with and without the PRIMARY subset.
 - The outcome headline is also reported without `CASE_NUMBER_REVIEWED`. The harness does both automatically.
-- The registered headline is the full-sample figure. A material difference (point estimate moving by more than the validated half-width) is reported as a finding.
+- The headline status follows the binding rule above. The full-sample and without-PRIMARY figures are both shown. A material difference (point estimate moving by more than the validated half-width) is reported as a finding.
+- A2, A3 and A5 extractor authors must not open `C13-A0-EVAL/reviews/` at commits `a4865e76` or `06340486`, or the reviewer scratchpad. Each author states in writing whether they have viewed them, and the freeze record says so.
+- **Leak guard:** `tools/c13_leakguard.py` and its test fail if any file under `C13-A0-EVAL/` shares at least 5 sampled 8-word shingle hashes with holdout texts. Coder packets and sample files carry no text and pass. No holdout text may be committed anywhere in this folder.
 - No judgment is dropped or replaced.
 
 ### 4.5 Items found uncodable during coding (v1.1; GA0 F05)
@@ -264,6 +274,8 @@ The v1.0 size justification above was unweighted. The headline estimators are we
    - `MET_POINT_ONLY`: the weighted and the unweighted point estimates both reach the target;
    - `MET_LOWER_BOUND`: also, the **validated design-CP lower bound** reaches the target;
    - otherwise `NOT_MET`.
+
+   **The status must hold without the PRIMARY pre-exposed subset** (section 4.4). The headline is the worse of the two statuses.
 
    Reports show the lower bound beside the point estimate. Section 3.1 states what each status is realistically able to show. The owner decides whether `MET_POINT_ONLY` is enough for candidate display.
 5. **Party-specific breakdown:** `DESCRIPTIVE_ONLY`, with no pass status (section 3.1).
@@ -337,8 +349,19 @@ Shortfalls are stated plainly. No post-hoc change is made to headline figures.
 | F15 (P3) OCR-only exclusion | Reporting statement required (section 2) |
 | F16 (P3) env var | README states `MIMAMSA_C12_ADDITIONS` is required outside the worktree layout |
 
+### 9.2 Confirmation finding C01 (P1) at `06340486`
+
+| Step | Handling |
+| --- | --- |
+| 1. Remove text-bearing review files | Removed from the tree (`EXPOSURE_REGISTER.md` E1). Only the review and confirmation reports and the findings CSV remain, as copies with judgment quotes redacted. History is not rewritten; the exposure is recorded |
+| 2. Register the exposed judgments | The 18 on the reviewer's list were verified independently. One more was found by the leak guard (sibling text). The A0 author's 10 snippet judgments were disclosed. All are PRIMARY in `PRE_EXPOSED_SUBSET.csv` |
+| 3. With/without rule | Every evaluation reports both, and a pass must hold without PRIMARY. The harness gives `headline_status` as the worse of the two (sections 4.4 and 6) |
+| 4. Reserve decision wording | Corrected, with an exact exposure statement. The decision is unchanged (section 3.1) |
+| 5. Leakage test | `tools/c13_leakguard.py` and `tests/test_legal_audit_c13_eval_leakguard.py`, calibrated against the removed files (E3) |
+
 ## 10. Change log
 
 - 1.0 (2026-11-25): initial version (C13-A0).
+- 1.1 (2026-11-25, amended after confirmation finding C01, before any coding): text-bearing review scratch removed from the tree (history kept); exposure register; 23 distinct C01-exposed judgments (19 REVIEW_TEXT_EXPOSED and 10 AUTHOR_DEV_SNIPPET_VIEWED, 6 in both) added as PRIMARY pre-exposed; binding rule that a pass must hold without PRIMARY; reserve decision wording corrected (decision unchanged); leak guard and test.
 - 1.1 (2026-11-25, amended the same day before any coding): H-HOLD reserve decision FULL_OPEN recorded (section 3.1); owner-facing limitation on `MET_LOWER_BOUND` stated in section 1.
 - 1.1 (2026-11-25): GA0 review conditions F01–F05 and P3 F06–F16 (section 9.1). Validated interval and met rule; weighted size restatement; party-specific descriptive; pre-exposed subsets; UNCODABLE rule; reserve decision rule; harness and leak-check hardening. No holdout redrawn. Committed before any coding.
