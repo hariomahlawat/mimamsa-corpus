@@ -11,8 +11,10 @@ a = ap.parse_args()
 n = a.pages
 objs = {1: b"<< /Type /Catalog /Pages 2 0 R >>", 3: b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>"}
 kids = []
+# page objects are numbered (and therefore written) first and contiguously, content streams afterwards, so a
+# range-loading viewer can resolve the page tree from the front of the file (as in typical produced PDFs)
 for i in range(n):
-    page_id, content_id = 4 + 2 * i, 5 + 2 * i
+    page_id, content_id = 4 + i, 4 + n + i
     kids.append(b"%d 0 R" % page_id)
     text = b"BT /F1 18 Tf 72 760 Td (Mimamsa synthetic fixture page %d - court martial section 69) Tj ET\n" % (i + 1)
     # incompressible padding as a PDF comment inside the content stream, so file size grows realistically
