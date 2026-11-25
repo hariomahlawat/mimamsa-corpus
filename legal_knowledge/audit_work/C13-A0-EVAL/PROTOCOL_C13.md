@@ -15,6 +15,8 @@
 
 Targets are never lowered, re-defined or re-scoped after the holdout is drawn. A shortfall is reported as a shortfall.
 
+**Known limitation for the owner (v1.1; not a target change).** The outcome target stays strict precision ≥ 95% and coverage ≥ 85%. With H-OUT-C13 (300 judgments, weighted n_eff about 127), the stronger status `MET_LOWER_BOUND`, meaning the validated 95% lower bound is itself at least 0.95, is practically reachable only if the true precision is about 0.99 or higher. The simulated probability is about 0.49 at a true precision of 0.98 and about 0.83 at 0.99. A true precision of 0.95–0.97 cannot be distinguished from the target with this sample. Results are therefore reported as `MET_POINT_ONLY`, `MET_LOWER_BOUND` or `NOT_MET`, with the lower bound shown (section 6). This is a limit of what the sample can show; it does not lower or alter the target.
+
 ## 2. Population and classification frame
 
 - **Frame:** every judicial record in the corpus: the 4,259 judgment records at corpus commit `ad77758d`, the 18 judgments ingested in C12 (HF `15bd03cc`) and the 4 C12 held-original derived records (HF `af7f9d06`). That is **4,281 records, 3,973 files and 3,637 judgments**, built by `tools/c13_features.py` (stage 1, reads the texts) and `tools/c13_frame.py` (stage 2, committed inputs only).
@@ -126,6 +128,15 @@ The v1.0 size justification above was unweighted. The headline estimators are we
    - `FULL_OPEN`: the 38 reserve judgments are coded together with the 75, from packets `outputs/packets/H-HOLD-C13-RESERVE/` (already built). The design becomes 113, with weights recomputed per cell (`load_design(..., reserve_open="all")`, `c13_score.py --reserve-open all`).
    - `GOLD_COUNT_RULE`: the v1.0 rule applies, so the reserve opens at GA2, in rank order per stratum, only if adjudicated gold holdings fall below 234. The opened counts are recorded, and weights are recomputed with `reserve_open={cell: k}`.
 2. If no decision is committed before the first packet goes out, `GOLD_COUNT_RULE` applies.
+
+**Recorded decision: `FULL_OPEN`.**
+- **File:** `decisions/H-HOLD_RESERVE_DECISION.json`, sha256 `d6d9a96a6695dfd12ed650ae64092d1adf1d239e64bec4845efdbafeb878bc15`.
+- **Decided by:** the coordinator, on 2026-11-25.
+- **Effect:** H-HOLD-C13 is the 75 registered sample judgments plus all 38 registered reserve judgments, 113 in total. Per-cell n_h, inclusion probabilities and weights are recomputed. The harness applies this by default.
+- **Rationale:** the pre-registered precision target of about ±6.7pp. Nothing had been coded or viewed.
+- **Timing:** the decision was made before any H-HOLD packet was issued, before any H-HOLD item was coded or read, and before any extractor output on H-HOLD-C13 existed.
+- The H-HOLD packets were regenerated with 113 items per coder. The separate reserve packets were withdrawn.
+- `GOLD_COUNT_RULE` no longer applies, and no further H-HOLD items can be added.
 3. No item is ever added after any coded result or extractor output has been seen, except under `GOLD_COUNT_RULE` as written.
 
 **Party-specific gold units in H-OUT (GA0 F03).**
@@ -329,4 +340,5 @@ Shortfalls are stated plainly. No post-hoc change is made to headline figures.
 ## 10. Change log
 
 - 1.0 (2026-11-25): initial version (C13-A0).
+- 1.1 (2026-11-25, amended the same day before any coding): H-HOLD reserve decision FULL_OPEN recorded (section 3.1); owner-facing limitation on `MET_LOWER_BOUND` stated in section 1.
 - 1.1 (2026-11-25): GA0 review conditions F01–F05 and P3 F06–F16 (section 9.1). Validated interval and met rule; weighted size restatement; party-specific descriptive; pre-exposed subsets; UNCODABLE rule; reserve decision rule; harness and leak-check hardening. No holdout redrawn. Committed before any coding.

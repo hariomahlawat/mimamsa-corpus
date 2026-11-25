@@ -182,8 +182,9 @@ class P3Fixes(unittest.TestCase):
         self.assertTrue(all(v["cluster"].startswith("JK-") for v in d.values()))
 
     def test_f11_reserve_opening_recomputes_weights(self):
-        base = SC.load_design("H-HOLD-C13")
+        base = SC.load_design("H-HOLD-C13", reserve_open="none")
         full = SC.load_design("H-HOLD-C13", reserve_open="all")
+        self.assertEqual(set(SC.load_design("H-HOLD-C13")), set(full))      # recorded decision FULL_OPEN
         self.assertEqual(len(base), 75)
         self.assertEqual(len(full), 113)
         cell = "HC_DEL|MEDIUM_5_14P"
@@ -194,10 +195,18 @@ class P3Fixes(unittest.TestCase):
         part = SC.load_design("H-HOLD-C13", reserve_open={cell: 2})
         self.assertEqual(sum(v["cell"] == cell for v in part.values()),
                          sum(v["cell"] == cell for v in base.values()) + 2)
-        for h in ("H-HOLD-C13-RESERVE",):
-            for slot in K.CODER_SLOTS:
-                K.check_blank_sheet_text((O / f"packets/{h}/{slot}/CODER_SHEET.csv").read_text(encoding="utf-8"),
-                                         "holdings")
+        for slot in K.CODER_SLOTS:          # FULL_OPEN: one packet of 113 per coder
+            text = (O / f"packets/H-HOLD-C13/{slot}/CODER_SHEET.csv").read_text(encoding="utf-8")
+            self.assertEqual(K.check_blank_sheet_text(text, "holdings"), 113)
+            ids = {r["item_id"] for r in csv.DictReader(io.StringIO(text))}
+            self.assertEqual(ids, set(full))
+
+    def test_reserve_decision_recorded_before_coding(self):
+        d = jload(PKG / "decisions/H-HOLD_RESERVE_DECISION.json")
+        self.assertEqual(d["decision"], "FULL_OPEN")
+        self.assertTrue(d["made_before_any_coding"])
+        sha = c13_common.sha256_file(PKG / "decisions/H-HOLD_RESERVE_DECISION.json")
+        self.assertIn(sha, (PKG / "PROTOCOL_C13.md").read_text(encoding="utf-8"))
 
     def test_f04_sensitivity_and_f12_breakdown_status(self):
         design = SC.load_design("H-OUT-C13")

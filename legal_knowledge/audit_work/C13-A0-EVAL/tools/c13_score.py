@@ -247,6 +247,12 @@ def aggregate_holdings(task, rows, design, adjudication, label, subset=lambda r:
 def load_design(holdout, sample_path=None, item_map_path=None, reserve_open=None):
     """Item -> design info. reserve_open (H-HOLD only; GA0 F11): None, "all", or {design_cell: k} opening the first k
     reserve ranks of a cell; n_h, inclusion probability and weight are recomputed for the whole cell."""
+    if reserve_open == "none":
+        reserve_open = None            # explicit: registered sample only (ignores the recorded decision)
+    elif holdout == "H-HOLD-C13" and reserve_open is None:
+        from c13_common import hhold_reserve_decision
+        if hhold_reserve_decision() == "FULL_OPEN":
+            reserve_open = "all"       # recorded decision (decisions/H-HOLD_RESERVE_DECISION.json)
     sample = read_csv(sample_path or OUT / "holdouts" / holdout / "SAMPLE.csv")
     imap = read_csv(item_map_path or OUT / "holdouts" / holdout / "ITEM_MAP.csv")
     rows = [dict(r, _reserve=False) for r in sample]

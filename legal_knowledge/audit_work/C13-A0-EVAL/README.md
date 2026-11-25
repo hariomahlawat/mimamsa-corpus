@@ -32,7 +32,7 @@ All tools use only the Python 3.11+ standard library. Every tool's `--check` opt
 | `outputs/holdouts/<H>/` | **Evaluator only:** `SAMPLE.csv` (strata, N_h, n_h, π, weights), `DESIGN.json` (size justification, reallocations), `ITEM_MAP.csv`. `RESERVE.csv` for H-HOLD. `HOLDOUT_REGISTRATION.json` holds the sample hashes |
 | `outputs/packets/<H>/coder_{1,2}/CODER_SHEET.csv` | **Coder view:** opaque item id, file sha256, raw path, store, pages to code, blank fields |
 | `outputs/packets/<H>/adjudicator/ADJUDICATOR_INSTRUCTIONS.json` | Adjudicator result columns and rules |
-| `outputs/packets/H-HOLD-C13-RESERVE/` | Reserve packets; sent only under the pre-registered decision (PROTOCOL section 3.1) |
+| `decisions/H-HOLD_RESERVE_DECISION.json` | Coordinator decision `FULL_OPEN`, recorded before any coding: H-HOLD-C13 = 75 + 38 reserve = 113 judgments (PROTOCOL section 3.1) |
 | `outputs/ci_validation/` | `CI_COVERAGE.csv` and `CI_COVERAGE_SUMMARY.json` (validated: min coverage 0.954; outcome ≥ 0.965 for p = 0.90–0.99) |
 | `outputs/holdouts/SIZE_RESTATEMENT_V1_1.json`, `PRE_EXPOSED_SUBSET.csv` | v1.1 restatement and sensitivity subsets |
 
@@ -77,7 +77,7 @@ A judgment can have more than one reason.
 | Holdout | Size | Basis |
 | --- | --- | --- |
 | H-OUT-C13 | 300 judgments (SC/DEL/PH 70, J&K/ALL 45) | **Weighted (v1.1):** Kish design effect 2.0, n_eff about 127 covered judgments, validated half-width about ±3.7pp at p = 0.95. `MET_LOWER_BOUND` is practically reachable only if the true precision is about 0.99 or higher (simulated probability 0.49 at 0.98) |
-| H-HOLD-C13 | 75 judgments (30 SC, 45 HC) + 38 reserve | **Weighted (v1.1):** about ±8.5pp at recall 0.6 (not ±7pp). With the full reserve (113), about ±6.7pp. A pre-registered reserve decision is due before the first packet. **The HC holdings density (2.5 per judgment) is an assumption** |
+| H-HOLD-C13 | **113 judgments** (75 sample + 38 reserve, opened by the recorded coordinator decision before coding) | **Weighted (v1.1):** about ±6.7pp at recall 0.6 (75 alone would give about ±8.5pp). **The HC holdings density (2.5 per judgment) is an assumption** |
 | H-REL-C13 | 160 pages (SC 80 / HC 80) | Every citation on each page is coded. Overall weighted recall is descriptive (Kish design effect 7.5). Per-type precision about ±9pp on treatment-cue pages |
 
 The three holdouts are independent samples of the same eligible frame. Their overlaps are reported. Packets for two coders and an adjudicator are ready.
@@ -115,7 +115,7 @@ python3 -m unittest discover -s tests -p "test_legal_audit_c13_eval_*.py"   # fr
 
 - The frame is automated. Text-quality and stratum rules are heuristics, fixed in advance; they are not legal findings.
 - Estimates generalise only to the eligible, non-spent, USABLE-text population. The spent sets (about 19% of judgments) and non-usable files (2.4%) are outside it.
-- The HC holdings density is assumed. The reserve rule covers a shortfall, and the decision is recorded at GA2.
+- The HC holdings density is assumed. The full reserve is already opened (recorded decision), so no further items can be added.
 - C12 coordinator-tools F08 (scnum overlay) is outside A0 and is not addressed here.
 - Party-specific results cannot be demonstrated with this holdout (about 2–6 gold judgments expected).
 - Results must be reported with and without the pre-exposed subsets.

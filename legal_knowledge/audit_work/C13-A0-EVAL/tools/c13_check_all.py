@@ -21,7 +21,7 @@ import c13_power  # noqa: E402
 import c13_sensitivity  # noqa: E402
 from c13_common import OUT, PKG, additions_cache_dir, corpus_git_dir, sha256_file, write_or_check  # noqa: E402
 
-SUMS_GLOBS = ["README.md", "PROTOCOL_C13.md", "tools/*.py", "packets/*.md", "outputs/**/*.csv", "outputs/**/*.json",
+SUMS_GLOBS = ["README.md", "PROTOCOL_C13.md", "decisions/*.json", "tools/*.py", "packets/*.md", "outputs/**/*.csv", "outputs/**/*.json",
               "outputs/**/*.txt", "reviews/**/*"]
 
 

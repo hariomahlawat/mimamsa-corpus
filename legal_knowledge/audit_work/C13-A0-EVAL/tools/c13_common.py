@@ -30,6 +30,12 @@ FOUO_EXCLUDED_SHA256 = {"4284820e5bc2fb7f52ae9fbe8a61650f1579e9b6389ba206a916a69
 CANDIDATE_STATUS = "AUTOMATED_CANDIDATE_NOT_VERIFIED"
 
 
+def hhold_reserve_decision():
+    """The recorded H-HOLD reserve decision ("FULL_OPEN" / "GOLD_COUNT_RULE"), or None if none is committed."""
+    p = PKG / "decisions" / "H-HOLD_RESERVE_DECISION.json"
+    return json.loads(p.read_text(encoding="utf-8"))["decision"] if p.is_file() else None
+
+
 def read_csv(path):
     with open(path, encoding="utf-8", newline="") as f:
         return list(csv.DictReader(f))

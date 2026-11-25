@@ -58,12 +58,18 @@ def item_id(holdout, unit):
 
 def build_packets():
     outputs = {}
+    from c13_common import hhold_reserve_decision
+    full = hhold_reserve_decision() == "FULL_OPEN"
     jobs = [(h, t, OUT / "holdouts" / h / "SAMPLE.csv", h) for h, t in HOLDOUT_TASK.items()]
-    # H-HOLD reserve (GA0 F11): packets prepared now, sent only under the pre-registered rule (PROTOCOL s.3.1).
-    jobs.append(("H-HOLD-C13", "holdings", OUT / "holdouts/H-HOLD-C13/RESERVE.csv", "H-HOLD-C13-RESERVE"))
+    if not full:
+        # H-HOLD reserve (GA0 F11): packets prepared, sent only under the pre-registered rule (PROTOCOL s.3.1).
+        jobs.append(("H-HOLD-C13", "holdings", OUT / "holdouts/H-HOLD-C13/RESERVE.csv", "H-HOLD-C13-RESERVE"))
     for h, task_name, sample_path, label in jobs:
         task = TASKS[task_name]
         sample = read_csv(sample_path)
+        reserve_items = []
+        if full and h == "H-HOLD-C13":   # decision FULL_OPEN (decisions/H-HOLD_RESERVE_DECISION.json): 75 + 38 = 113
+            reserve_items = read_csv(OUT / "holdouts/H-HOLD-C13/RESERVE.csv")
         items, imap = [], []
         for r in sample:
             unit = r["judgment_key"] + (f"#p{r['page']}" if r["page"] else "")
@@ -71,10 +77,18 @@ def build_packets():
             items.append({"item_id": iid, "rep_sha256": r["rep_sha256"], "rep_raw_path": r["rep_raw_path"],
                           "rep_raw_store": r["rep_raw_store"], "pages_to_code": r["page"] or "all"})
             imap.append(dict(item_id=iid, judgment_key=r["judgment_key"], page=r["page"], rep_sha256=r["rep_sha256"]))
-        if len({i["item_id"] for i in items}) != len(items):
-            raise ValueError(f"{h}: item id collision")
         map_name = "ITEM_MAP.csv" if label == h else "ITEM_MAP_RESERVE.csv"
         outputs[f"holdouts/{h}/{map_name}"] = render_csv(sorted(imap, key=lambda x: x["item_id"]))
+        if reserve_items:
+            rmap = []
+            for r in reserve_items:
+                iid = item_id(h, r["judgment_key"])
+                items.append({"item_id": iid, "rep_sha256": r["rep_sha256"], "rep_raw_path": r["rep_raw_path"],
+                              "rep_raw_store": r["rep_raw_store"], "pages_to_code": "all"})
+                rmap.append(dict(item_id=iid, judgment_key=r["judgment_key"], page="", rep_sha256=r["rep_sha256"]))
+            outputs[f"holdouts/{h}/ITEM_MAP_RESERVE.csv"] = render_csv(sorted(rmap, key=lambda x: x["item_id"]))
+        if len({i["item_id"] for i in items}) != len(items):
+            raise ValueError(f"{h}: item id collision")
         cols = POINTER_COLS + task.coding_fields
         for slot in CODER_SLOTS:
             order = sorted(items, key=lambda i: seeded_hash(f"{PACKET_SEED}|{label}|{slot}", i["item_id"]))

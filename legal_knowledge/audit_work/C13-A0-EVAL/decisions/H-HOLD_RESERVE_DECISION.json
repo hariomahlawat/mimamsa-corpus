@@ -1,0 +1,12 @@
+{
+ "decision": "FULL_OPEN",
+ "holdout": "H-HOLD-C13",
+ "effect": "H-HOLD-C13 = 75 registered sample judgments + all 38 registered reserve judgments = 113; per-cell n_h, inclusion probabilities and weights recomputed (load_design(..., reserve_open='all'))",
+ "decided_by": "coordinator (C13 lead instance)",
+ "date": "2026-11-25",
+ "rationale": "Pre-registered precision target: the weighted recall/precision half-width of about +/-6.7pp stated in PROTOCOL_C13 v1.1 section 3.1 (75 judgments give about +/-8.5pp). Nothing has been coded or viewed.",
+ "made_before_any_coding": true,
+ "statement": "This decision was made and recorded before any H-HOLD-C13 packet was issued, before any H-HOLD-C13 item was coded or read, and before any extractor output on H-HOLD-C13 existed. The GOLD_COUNT_RULE no longer applies; no further items can be added.",
+ "protocol": "PROTOCOL_C13.md v1.1 section 3.1",
+ "registered_files": ["outputs/holdouts/H-HOLD-C13/SAMPLE.csv", "outputs/holdouts/H-HOLD-C13/RESERVE.csv"]
+}
