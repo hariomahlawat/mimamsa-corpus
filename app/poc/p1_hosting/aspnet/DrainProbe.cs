@@ -1,8 +1,11 @@
 // OS adapter: evidence that a terminated connection holds no more deliverable bytes in the server's kernel.
 // Linux: /proc/net/tcp{,6} tx_queue for the exact (local port, remote port) socket must be 0 or the socket gone.
-// Other OSes (incl. Windows): NOT IMPLEMENTED -> falls back to "transport terminated + grace", explicitly labelled
-// as unproven. A Windows adapter would use GetPerTcpConnectionEStats (TcpConnectionEstatsSendBuff/Data) or an
-// ETW TCP provider; that remains open for the selected-host run.
+// Windows (and any other OS): TCP state of the exact socket from the OS TCP table
+// (IPGlobalProperties.GetActiveTcpConnections -> GetTcpTable2 on Windows). The server is the active closer after
+// the response; it sends FIN only after all response bytes. FIN_WAIT_2 / TIME_WAIT / CLOSED / absent therefore
+// mean the peer has cumulatively ACKed every byte including FIN, i.e. nothing deliverable remains in the server's
+// kernel. ESTABLISHED / FIN_WAIT_1 / CLOSING / LAST_ACK keep the charge. This is weaker than a byte counter
+// (no partial occupancy figure) and is labelled as such; GetPerTcpConnectionEStats would give byte counts.
 using System.Globalization;
 using System.Net;
 
@@ -10,7 +13,9 @@ namespace MimamsaPocApi;
 
 public static class DrainProbe
 {
-    public static bool KernelEvidenceAvailable => OperatingSystem.IsLinux() && File.Exists("/proc/net/tcp");
+    // MIMAMSA_DRAIN_PROBE=tcpstate forces the portable TCP-state probe (used to validate the Windows path on Linux)
+    public static bool KernelEvidenceAvailable => OperatingSystem.IsLinux() && File.Exists("/proc/net/tcp")
+        && Environment.GetEnvironmentVariable("MIMAMSA_DRAIN_PROBE") != "tcpstate";
 
     /// Returns the kernel tx_queue bytes for the socket, or null when the socket no longer exists.
     public static long? TxQueue(int localPort, int remotePort)
@@ -33,13 +38,33 @@ public static class DrainProbe
         return found;
     }
 
+    public static System.Net.NetworkInformation.TcpState? TcpState(IPEndPoint local, IPEndPoint remote)
+    {
+        foreach (var c in System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().GetActiveTcpConnections())
+            if (c.LocalEndPoint.Port == local.Port && c.RemoteEndPoint.Port == remote.Port) return c.State;
+        return null;
+    }
+
     /// Wait until the kernel holds no unacknowledged bytes for this socket. Never gives up by releasing:
     /// returns (true, evidence) on proof, or keeps polling (with backoff) until proof arrives.
     public static async Task<(string proof, string evidence)> AwaitDrainAsync(EndPoint? local, EndPoint? remote, int graceMs)
     {
         await Task.Delay(graceMs);
-        if (!KernelEvidenceAvailable || local is not IPEndPoint l || remote is not IPEndPoint r)
-            return ("termination", $"transport terminated + {graceMs} ms grace (kernel drain UNPROVEN on {Environment.OSVersion.Platform})");
+        if (local is not IPEndPoint l || remote is not IPEndPoint r)
+            return ("termination", $"transport terminated + {graceMs} ms grace (no endpoint information; kernel drain UNPROVEN)");
+        if (!KernelEvidenceAvailable)
+        {
+            int d = 20;
+            while (true)
+            {
+                var st = TcpState(l, r);
+                if (st is null) return ("drain", $"OS TCP table: socket {l.Port}->{r.Port} gone (all data ACKed or connection reset)");
+                if (st is System.Net.NetworkInformation.TcpState.FinWait2 or System.Net.NetworkInformation.TcpState.TimeWait
+                       or System.Net.NetworkInformation.TcpState.Closed)
+                    return ("drain", $"OS TCP table: socket {l.Port}->{r.Port} in {st} (peer ACKed all bytes incl. FIN)");
+                await Task.Delay(d); d = Math.Min(d * 2, 2000);
+            }
+        }
         int delay = 20; int zeroSeen = 0;
         while (true)
         {

@@ -91,6 +91,7 @@ public static class ProtectedDelivery
 
         while (off < len)
         {
+            if (ctx.RequestAborted.IsCancellationRequested) { ctx.Abort(); return; }   // client cancelled: no new attempt on this stream
             int n = Math.Min(cfg.Slice, len - off);
             long amount = n + cfg.HeaderAllowance;      // worst-case charged wire bytes for this attempt
             // ---- reservation (atomic connection + site credit) with in-transaction policy recheck
@@ -180,7 +181,7 @@ public static class ProtectedDelivery
             if (await ledger.SettleAsync(r, Settlement.Accepted, acceptedWire, "slice handed to transport and flushed"))
                 DeliveryTrace.Emit("settle", "ledger", new { attempt = r.Id.ToString(), outcome = "accepted", size = acceptedWire });
             // TEST-ONLY deterministic barrier (like the Codex reference pause hook): lets a test withdraw between slices
-            if (cfg.TestPauseAfterFirstSliceMs > 0 && off == n && off < len) await Task.Delay(cfg.TestPauseAfterFirstSliceMs);
+            if (cfg.TestPauseAfterFirstSliceMs > 0 && off == n && off < len) { try { await Task.Delay(cfg.TestPauseAfterFirstSliceMs, ctx.RequestAborted); } catch (OperationCanceledException) { } }
         }
     }
 }

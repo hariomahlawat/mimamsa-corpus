@@ -1,0 +1,41 @@
+{
+ "notes": {
+  "slow_drain_body_ok": true,
+  "race_results": [
+   [
+    206,
+    64512,
+    true
+   ],
+   [
+    503,
+    0,
+    false
+   ]
+  ],
+  "withdraw_mid_body_received": 64512,
+  "reconcile": "{\"drained\":1}",
+  "withdrawn_meta_after_restart": 404,
+  "retries_after_503": {
+   "conditional": 3
+  }
+ },
+ "events": 104,
+ "kinds": {
+  "accept": 16,
+  "ack": 1,
+  "admit": 1,
+  "cancel": 3,
+  "enter": 16,
+  "fence": 1,
+  "http": 12,
+  "occupancy": 4,
+  "prove_release": 16,
+  "recover": 1,
+  "reserve": 16,
+  "restart": 1,
+  "settle": 16
+ },
+ "ledger_crosscheck_mismatches": [],
+ "ledger_rows": 16
+}
