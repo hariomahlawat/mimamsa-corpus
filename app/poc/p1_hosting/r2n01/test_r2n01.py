@@ -332,6 +332,7 @@ s = socket.socket(); s.connect(("127.0.0.1", A.port))
 a0 = 500_000
 s.sendall((f"GET {RANGE('doc-big', BIG_SHA)} HTTP/1.1\r\nHost: x\r\nAuthorization: Bearer tok-alice\r\nRange: bytes={a0}-{a0 + MAXR - 1}\r\n\r\n").encode())
 got = s.recv(1024)
+pre_crash_bytes = len(got)
 time.sleep(0.7)
 stop(p, hard=True)                      # kill -9 / TerminateProcess while bytes are still queued for the stalled reader
 before = rows(f"range_start >= {a0} AND range_start < {a0 + MAXR}")
@@ -361,7 +362,14 @@ try:
                                                   ledger_while_socket_alive=L_held, bytes_client_received_total=len(got),
                                                   ledger_after_client_drained=L_late, after=after)
     check("crash_charge_survives_restart", before and L_restart["reserved"] + L_restart["charged"] >= charged_before, ledger=L_restart)
-    check("F02_no_release_while_orphan_socket_may_deliver", before and L_held["reserved"] + L_held["charged"] >= charged_before, ledger=L_held, reconcile=bdy[:80])
+    # Property: never release while bytes may still be delivered. Linux keeps the orphaned socket (FIN_WAIT1, data
+    # queued) -> the charge must still be held. Windows resets the connection on TerminateProcess -> the socket is
+    # gone and release is allowed, but then the client must receive NO byte after the crash.
+    held_ok = L_held["reserved"] + L_held["charged"] >= charged_before
+    released_safely = (L_held["reserved"] + L_held["charged"] == 0) and len(got) == pre_crash_bytes
+    RESULTS["scenarios"]["D_crash_restart"]["f02_mode"] = "held_until_socket_evidence" if held_ok else ("released_socket_gone_no_bytes_after" if released_safely else "VIOLATION")
+    check("F02_no_release_while_orphan_socket_may_deliver", before and (held_ok or released_safely), ledger=L_held, reconcile=bdy[:80],
+          bytes_after_crash=len(got) - pre_crash_bytes)
     check("F02_release_only_after_os_socket_evidence", after and all(r_["state"] == "DRAINED" and "prior instance reconciled" in (r_["reason"] or "") for r_ in after)
           and L_late["reserved"] == 0 and L_late["charged"] == 0, ledger=L_late)
 finally:

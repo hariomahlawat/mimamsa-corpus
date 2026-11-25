@@ -1,0 +1,82 @@
+{
+ "runs": [
+  {
+   "concurrency": 1,
+   "completed_206": 300,
+   "responses": 300,
+   "denied_503": 0,
+   "bad": 0,
+   "rps_206": 126.4,
+   "p50_ms": 6.05,
+   "p95_ms": 14.74,
+   "mbps": 7.8,
+   "loadavg": 0.4033203125,
+   "run": 0
+  },
+  {
+   "concurrency": 16,
+   "completed_206": 300,
+   "responses": 399,
+   "denied_503": 99,
+   "bad": 0,
+   "rps_206": 94.6,
+   "p50_ms": 94.69,
+   "p95_ms": 468.28,
+   "mbps": 5.8,
+   "loadavg": 0.451171875,
+   "run": 0
+  },
+  {
+   "concurrency": 1,
+   "completed_206": 300,
+   "responses": 300,
+   "denied_503": 0,
+   "bad": 0,
+   "rps_206": 101.9,
+   "p50_ms": 5.09,
+   "p95_ms": 31.97,
+   "mbps": 6.3,
+   "loadavg": 0.73583984375,
+   "run": 1
+  },
+  {
+   "concurrency": 16,
+   "completed_206": 300,
+   "responses": 441,
+   "denied_503": 141,
+   "bad": 0,
+   "rps_206": 105.7,
+   "p50_ms": 72.28,
+   "p95_ms": 407.76,
+   "mbps": 6.5,
+   "loadavg": 0.73583984375,
+   "run": 1
+  },
+  {
+   "concurrency": 1,
+   "completed_206": 300,
+   "responses": 304,
+   "denied_503": 4,
+   "bad": 0,
+   "rps_206": 137.8,
+   "p50_ms": 3.53,
+   "p95_ms": 18.36,
+   "mbps": 8.5,
+   "loadavg": 0.75732421875,
+   "run": 2
+  },
+  {
+   "concurrency": 16,
+   "completed_206": 300,
+   "responses": 547,
+   "denied_503": 247,
+   "bad": 0,
+   "rps_206": 83.0,
+   "p50_ms": 57.87,
+   "p95_ms": 468.11,
+   "mbps": 5.1,
+   "loadavg": 0.75732421875,
+   "run": 2
+  }
+ ]
+}
