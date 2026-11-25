@@ -1,0 +1,12 @@
+{
+ "note": "Not independent: the extractor was revised after reading these verdicts. Independent figures await A0 (H-REL-C13).",
+ "outcomes": {
+  "KEPT_CORRECT": 34,
+  "KEPT_TARGET_CORRECTED": 1,
+  "RETYPED_EXPLAINS_TO_CONSIDERS": 3,
+  "WITHDRAWN_LOST_CORRECT_EDGE": 2,
+  "WITHDRAWN_REVIEWER_FOUND_ERROR": 14
+ },
+ "reviewed_commit": "f915ac11",
+ "sample": 54
+}

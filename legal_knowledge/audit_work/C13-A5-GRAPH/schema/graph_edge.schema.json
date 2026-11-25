@@ -26,6 +26,7 @@
     "evidence": {
       "type": "object", "additionalProperties": false,
       "required": ["source_copy_sha256", "doc_id", "page", "paragraph", "passage", "passage_sha256", "anchor_text"],
+      "description": "passage is the exported text (at most 600 characters) and passage_sha256 its SHA-256 (UTF-8). For treatment edges the full passage is located by char_start/char_end, page-relative offsets into data/text at the stated pipeline_version, counted from the character after the '[[page N]]' marker; passage_full_sha256 hashes the whitespace-collapsed full passage.",
       "properties": {
         "source_copy_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
         "doc_id": {"type": ["string", "null"]},
@@ -33,7 +34,12 @@
         "paragraph": {"type": ["string", "null"]},
         "passage": {"type": ["string", "null"]},
         "passage_sha256": {"type": ["string", "null"]},
-        "anchor_text": {"type": ["string", "null"]}
+        "anchor_text": {"type": ["string", "null"]},
+        "char_start": {"type": ["integer", "null"], "minimum": 0},
+        "char_end": {"type": ["integer", "null"], "minimum": 0},
+        "pipeline_version": {"type": ["string", "null"]},
+        "passage_full_sha256": {"type": ["string", "null"]},
+        "passage_truncated": {"type": ["boolean", "null"]}
       }
     },
     "extraction_method": {"type": "string"},
@@ -50,7 +56,7 @@
     "legal_effect": {"type": "boolean", "description": "true for edges with legal effect; these are candidates until a Legal Reviewer verifies them"},
     "reviews": {"type": "array", "items": {"type": "object"}},
     "evaluation_ref": {"type": ["string", "null"]},
-    "restrictions": {"type": "array", "items": {"enum": ["NON_OPERATIONAL_RESEARCH_ONLY", "HIDDEN_FROM_USERS_THIS_CYCLE", "CANDIDATE_DATA", "UNVERIFIED_MARKER_REQUIRED"]}},
+    "restrictions": {"type": "array", "items": {"enum": ["NON_OPERATIONAL_RESEARCH_ONLY", "HIDDEN_FROM_USERS_THIS_CYCLE", "CANDIDATE_DATA", "UNVERIFIED_MARKER_REQUIRED", "LOW_RELIABILITY_CANDIDATE"]}},
     "attributes": {"type": "object"}
   },
   "allOf": [

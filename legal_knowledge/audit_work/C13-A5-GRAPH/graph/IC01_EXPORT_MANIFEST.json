@@ -3,27 +3,27 @@
  "contract_version": "1.0.0",
  "files": {
   "EDGE_TYPE_EVALUATION_C13.json": {
-   "bytes": 2523,
+   "bytes": 7056,
    "records": null,
-   "sha256": "cf90d4ccade88e634a723bcad2e6255534fa1678e084156ba353c56e1bbb6b54",
+   "sha256": "4c374e3cb5931d6b4e2b4220a818caba4490af876827b65f43d14994f9223bd7",
    "sha256_note": null
   },
   "GRAPH_SUMMARY_C13.json": {
-   "bytes": 6228,
+   "bytes": 6296,
    "records": null,
-   "sha256": "9859fbea9063f00628eb59d925836ea60a5c0a583ca93a5fa32788dca2c27107",
+   "sha256": "7bac668b04235335d0ff93b43b394234469a0bac5b4a9f26b44ff5e43ecac47f",
    "sha256_note": null
   },
   "edges_candidate.jsonl.gz": {
-   "bytes": 72143421,
-   "records": 44961,
-   "sha256": "7a73325d37ded8afb75976b8dab0e0678413f39d6e2998fc7c04ff792e9de193",
+   "bytes": 78472576,
+   "records": 44814,
+   "sha256": "2feb82e30d9560e63c47496a7faecf69b4128742ab39f5125b35da3abc60bd27",
    "sha256_note": "sha256 of the uncompressed content"
   },
   "edges_reviewed.jsonl": {
-   "bytes": 320495,
-   "records": 173,
-   "sha256": "e733e2acca054326ed55dff29b731a756b6d374413b3e8e194e169c8e2e5e5f4",
+   "bytes": 347120,
+   "records": 170,
+   "sha256": "59dc81fc9e15f5b4e03cb5818a86cb2df42e81af126b9e2ed429e30145d68c97",
    "sha256_note": null
   },
   "nodes.jsonl.gz": {
@@ -41,11 +41,11 @@
  },
  "producer": "C13-A5 graph workstream",
  "restricted_material_excluded": {
-  "sha256": "6732065cd24da9cd073e9f8dcc88121792ff0662cd6d8c5e90d7e2097dc73e57",
-  "source": "git:ea282cbd:config/restricted_material.json"
+  "sha256": "fc7ea07e62e7e41f348639973f19187540593e7b3237933758f64e865b95b2b6",
+  "source": "git:72fe7a75:config/restricted_material.json"
  },
  "schema_sha256": {
-  "edge": "ba9f1e8e1aa41b456ada52cfc5c4ca90e189ee5f120c0df7d3970837b81aecd7",
+  "edge": "11b5ceb039de2411dd4d45dcd925d1e0648d123493f61ee347e9eaf34924426e",
   "node": "cbfb8d989276602ea7386018740ffe5686df2547c4fd651dc763d08116bca0ae"
  },
  "schemas": {

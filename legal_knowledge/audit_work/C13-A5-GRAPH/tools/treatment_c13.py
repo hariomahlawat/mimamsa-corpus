@@ -69,7 +69,7 @@ LEX = {
                       r"\bcannot\s+place\s+reliance\s+on\s+the\s+same\b", r"\btherefore\s+not\s+applicable\b", r"\bnot\s+applicable\s+to\s+the\s+(?:facts|present|case)",
                       r"\bfacts\s+(?:of\s+(?:that|the\s+said)\s+case\s+)?(?:were|are)\s+(?:entirely\s+|completely\s+|quite\s+)?(?:different|distinguishable)",
                       r"\bon\s+(?:its\s+own\s+)?(?:different\s+)?facts\b[^.;]{0,30}\bdistinguish"],
-    "FOLLOWS": [r"\bwe\s+(?:[a-z]+\s+){0,2}follow\b", r"\bwe\s+have\s+(?:consistently\s+|always\s+)?followed\s+the\s+(?:law|ratio|decision|judgment|view)", r"\b(?:is|are|was|be)\s+(?:respectfully\s+)?followed\b",
+    "FOLLOWS": [r"\bwe\s+(?:[a-z]+\s+){0,2}follow\b", r"\bwe\s+have\s+(?:consistently\s+|always\s+)?followed\s+the\s+(?:law|ratio|decision|judgment|view)", r"\b(?:is|are|be)\s+(?:respectfully\s+)?followed\b(?!\s+by\b)",
                 r"\bwe\s+(?:respectfully\s+)?(?:agree|concur)\s+with\b", r"\b(?:squarely|fully|clearly)?\s*covered\s+by\b",
                 r"\bgoverned\s+by\s+the\s+(?:decision|judgment|ratio|law)", r"\bwe\s+are\s+bound\s+by\b", r"\bbinding\s+(?:on|upon)\s+(?:us|this\s+(?:Court|Bench|Tribunal))",
                 r"\b(?:in\s+view\s+of|in\s+the\s+light\s+of|in\s+terms\s+of)\s+the\s+(?:law\s+laid\s+down|ratio|decision|judgment|dictum)\s+(?:in|of)\b",
@@ -78,9 +78,12 @@ LEX = {
     "APPLIES": [r"\bapplying\s+the\s+(?:ratio|principles?|test|law|dictum)\b", r"\b(?:ratio|principles?|law)\s+(?:laid\s+down|enunciated)\s+in\s+[^.;]{0,120}\bappl(?:y|ies|ied)\b",
                 r"\b(?:appl(?:y|ies)|applicable)\s+(?:with\s+full\s+force|on\s+all\s+fours|squarely)\b", r"\bon\s+all\s+fours\b",
                 r"\bthe\s+(?:same|said)\s+(?:principle|ratio)\s+(?:would\s+)?appl(?:y|ies)\b"],
-    "EXPLAINS": [r"\b(?:was|were|has\s+been|have\s+been)\s+explained\s+in\b", r"\bexplained\s+the\s+(?:ratio|scope|decision|judgment)",
-                 r"\bclarified\s+(?:in|by)\b", r"\bthe\s+ratio\s+(?:of|in)\s+[^.;]{0,80}\b(?:is|was)\s+that\b", r"\bwhat\s+was\s+(?:held|decided)\s+in\b"],
+    # EXPLAINS = the citing court explains the authority. "X has been explained in <case>" says the authority explains a
+    # principle, which is CONSIDERS (review F03, T37-T40).
+    "EXPLAINS": [r"\bwe\s+(?:have\s+)?(?:already\s+)?explained\s+the\s+(?:ratio|scope|import)\s+of\b",
+                 r"\b(?:the\s+)?ratio\s+(?:of|in)\s+[^.;]{0,80}\b(?:is|was)\s+(?:only\s+)?that\b", r"\bwhat\s+was\s+(?:held|decided)\s+in\b"],
     "CONSIDERS": [r"\bthis\s+Court\s+(?:has\s+)?(?:held|observed|ruled|opined|considered|examined|dealt)\b",
+                  r"\b(?:has|have|was|were)\s+been\s+(?:explained|clarified)\s+(?:in|by)\b|\b(?:was|were)\s+(?:explained|clarified)\s+in\b",
                   r"\b(?:it|the\s+Court)\s+was\s+(?:held|observed)\b", r"\breference\s+may\s+(?:also\s+)?be\s+made\s+to\b",
                   r"\b(?:we\s+(?:have\s+)?(?:considered|noticed|referred|perused|examined))\b", r"\b(?:considered|noticed|examined)\s+(?:in|the\s+decision)\b"],
 }
@@ -95,7 +98,7 @@ BACKREF = re.compile(r"^\s*(?:In\s+(?:that|the\s+said)\s+(?:case|decision|judgme
 DEMONSTRATIVE = re.compile(r"\b(?:these|those|the\s+said|both\s+the|the\s+above|the\s+aforesaid)\s+(?:two\s+|three\s+|four\s+)?(?:decisions|judgments|cases|authorities)\b", I)
 SEPARATE = {"SEPARATE_OPINION", "DISSENT"}
 STRONG = {"OVERRULES", "DISAPPROVES", "DOUBTS"}
-COURT_REJECTS_RELIANCE = re.compile(r"\breliance\s+(?:placed|sought\s+to\s+be\s+placed)\b[^.;]{0,200}\b(?:misplaced|misconceived|of\s+no\s+(?:assistance|help|avail)|does\s+not\s+help)|"
+COURT_REJECTS_RELIANCE = re.compile(r"\breliance\s+(?:placed|sought\s+to\s+be\s+placed)\b[^;]{0,200}?\b(?:misplaced|misconceived|of\s+no\s+(?:assistance|help|avail)|does\s+not\s+help)|"
                                     r"\b(?:is|are)\s+(?:apparently\s+|clearly\s+)?distinguishable\b|\bcannot\s+place\s+reliance\b", I)
 PARA_START = re.compile(r"(?:^|\s)\d{1,3}\s?\.\s(?=[A-Z\u201c\"(])")
 SUBMIT_LEAD = re.compile(r"\b(?:submitted|contended|argued|urged|pleaded|canvassed)\s+(?:before\s+us\s+)?that\b|\bsubmission\s+(?:of|on\s+behalf\s+of)\b|"
@@ -127,6 +130,91 @@ def holdout_pages():
                       pages=len(keys) // 2)
 
 
+QUOTE_LEADIN_X = re.compile(r"(?:reproduced|extracted|quoted|set\s+out)\s+(?:here\s*)?(?:in\s*)?(?:below|hereunder|hereinbelow|hereinafter|as\s+under|as\s+follows)\s*[:\-]|"
+                            r"(?:which\s+)?reads?\s+as\s+(?:under|follows)\s*[:\-]|(?:observed|held|stated|opined|ruled)\s+(?:thus|as\s+(?:under|follows)|in\s+the\s+following\s+(?:terms|words))\s*[:\-]|"
+                            r"in\s+(?:para(?:graph)?s?\s*[\d,\s&and-]+\s+of\s+)?(?:the\s+said|that)\s+(?:judgment|decision)[^.:]{0,60}:\s*[\-\u2013]?", I)
+PARTY_LEAD = re.compile(r"\b(?:the\s+)?(?:petitioners?|appellants?|respondents?|applicants?|claimants?|learned\s+counsel|counsel)\s+(?:had\s+)?(?:primarily\s+|mainly\s+|also\s+|further\s+)?"
+                        r"(?:contended|contented|submitted|argued|urged|pleaded|relied|placed\s+reliance|canvassed|asserted)\b", I)
+FN_GLUED = re.compile(r"(?:(?<=[A-Za-z\)])|(?<=[A-Za-z]\.))(\d{1,3})(?=[\s,;:)]|\.(?!\d)|$)")
+STATUTORY_SUBJECT = re.compile(r"\b(?:Article|Section|Rule|Regulation|Order|Para(?:graph)?|amendment|provision|circular|policy|notification|"
+                               r"Act|Rules|Regulations|clause|proviso|Schedule|letter|order)\b", I)
+FOOTNOTE_ZONE = re.compile(r"\u201d,\s*hereinafter|\bhereinafter\b\s+\d{1,3}\s|Digitally\s+Signed|Signature\s+Not\s+Verified", I)
+NOT_A_MARKER = re.compile(r"(?:\b(?:Nos?|no|nos|Para|para|paras|Rule|rule|r|rr|Art|Arts|Sec|sec|S|s|ss|Vol|vol|p|pp|Ex|Sr|Annexure|Annex|OA|O\.A|CWP|WP|SLP|CA|Item|item|Clause|cl|Reg|Regn|Appendix|Form)\.?\s?)$")
+SC_REPORT = re.compile(r"\bAIR\s+\d{4}\s+SC\b|\bSCC\b|\bS\.?C\.?R\.?\b|\bINSC\b|\bSCALE\b", I)
+NAMED_CASES = re.compile(r"\b[A-Z][A-Za-z.]+(?:\s+[A-Z][A-Za-z.]+){0,3}(?:'s)?\s+case\b")
+PAST_PASSIVE = re.compile(r"\b(?:was|were|had\s+been)\s+(?:also\s+|duly\s+|subsequently\s+)?(?:distinguished|followed|explained|overruled|doubted|applied)\b", I)
+
+
+def quoted_across_paragraphs(t, s0, s1):
+    """Quotation state tracked across paragraphs and pages (review F02): an unclosed curly quote within 6,000 characters
+    before the sentence, a reproduction lead-in with no closing quote since, or a closing quote shortly after the sentence
+    with no opening quote in between (the sentence ends a reproduced passage)."""
+    look = t[max(0, s0 - 6000):s0]
+    if look.count("\u201c") > look.count("\u201d"):
+        return True, "more opening than closing curly quotation marks in the preceding 6,000 characters (cross-paragraph)"
+    el = None
+    for m in re.finditer(r"\b(?:xx+\s+){2}xx+\b|\bx\s+x\s+x\b", t[max(0, s0 - 3000):s0], I):
+        el = m
+    def still_open(seg):   # a closing quote only ends the reproduction if it is unbalanced (inner quoted words are balanced)
+        return seg.count("\u201d") <= seg.count("\u201c") and seg.count('"') % 2 == 0
+    if el is not None and still_open(t[max(0, s0 - 3000) + el.end():s0]):
+        return True, "follows an elision marker ('xx xx xx') of a reproduced passage with no closing quotation mark"
+    lead = None
+    for m in QUOTE_LEADIN_X.finditer(t, max(0, s0 - 3000), s0):
+        lead = m
+    if lead is not None and still_open(t[lead.end():s0]):
+        return True, "follows a reproduction lead-in ('%s') with no closing quotation mark" % lead.group(0)[:40]
+    fwd = t[s1:s1 + 400]
+    c, o = fwd.find("\u201d"), fwd.find("\u201c")
+    if 0 <= c < 60 and (o < 0 or o > c) and "\u201d" not in t[s0:s1] and "\u201c" not in t[s0:s1]:
+        return True, "a closing quotation mark follows the sentence: it ends a reproduced passage"
+    return False, ""
+
+
+class OffsetMap:
+    """Map offsets in the whitespace-collapsed text back to the original data/text file, page-relative (review F06).
+    char_start/char_end count from the character after the page's '[[page N]]' marker in data/text at ad77758d."""
+
+    def __init__(self, orig):
+        import bisect as _b
+        self._b = _b
+        self.orig = orig
+        self.cstart, self.astart, self.removed, self.length = [], [], [], []
+        rem = 0
+        for m in re.finditer(r"\s+", orig):
+            self.cstart.append(m.start() - rem)
+            self.astart.append(m.start())
+            self.removed.append(rem)
+            self.length.append(m.end() - m.start())
+            rem += m.end() - m.start() - 1
+        self.marks = [(m.end(), int(m.group(1))) for m in re.finditer(r"\[\[page (\d+)\]\]", orig)]
+        self.mark_pos = [x[0] for x in self.marks]
+
+    def orig_offset(self, c):
+        i = self._b.bisect_right(self.cstart, c) - 1
+        if i < 0:
+            return c
+        if c == self.cstart[i]:
+            return self.astart[i]
+        return c + self.removed[i] + self.length[i] - 1
+
+    def page_relative(self, cs, ce):
+        os_, oe = self.orig_offset(cs), self.orig_offset(ce)
+        j = self._b.bisect_right(self.mark_pos, os_) - 1
+        if j < 0:
+            return None, os_, oe
+        base, page = self.marks[j]
+        return page, os_ - base, oe - base
+
+
+def clean_raw_target(raw):
+    """Drop a leading word fragment cut by the C11 clip ('isposed of in ...' -> '… of in ...') (review F08)."""
+    raw = (raw or "").strip()
+    if raw and raw[0].islower() and " " in raw:
+        return "\u2026 " + raw.split(" ", 1)[1]
+    return raw
+
+
 def collapse(t):
     return re.sub(r"\s+", " ", t)
 
@@ -140,7 +228,7 @@ def count_authorities(t, s, e):
     return len(R11.find_citations(t, s, e))
 
 
-def classify(t, court, anchor_s, anchor_e, opinion, zone, target_court):
+def classify(t, court, anchor_s, anchor_e, opinion, zone, target_court, marker_bound=False):
     """Return dict(relation, voice, reasons, cue, s0, s1, evidence)."""
     s0, s1 = sentence(t, anchor_s, anchor_e)
     sent = t[s0:s1]
@@ -163,12 +251,16 @@ def classify(t, court, anchor_s, anchor_e, opinion, zone, target_court):
             lead = m
         if lead is not None and not re.search(r"[”\"]", look[lead.end():]):
             q, why = True, "follows a 'held thus:' lead-in with no closing quotation mark (V13-01)"
+    if not q:
+        q, why = quoted_across_paragraphs(t, s0, s1)
     if q:
         return dict(relation="CITES", voice="QUOTED_PASSAGE", reasons=why, cue="", s0=s0, s1=window_end)
     lead = t[max(para_lo, s0 - 700):s0]
-    sub_sent = R11.SUBMISSION2.search(sent) and not COURT_REJECTS_RELIANCE.search(sent)
+    counsel_verb = re.search(r"\b(?:would\s+)?(?:submit(?:s|ted)?|contend(?:s|ed)?|argue[sd]?|urge[sd]?)\b|\blearned\s+(?:senior\s+)?(?:panel\s+)?counsel\b", sent, I)
+    sub_sent = R11.SUBMISSION2.search(sent) and (not COURT_REJECTS_RELIANCE.search(sent) or counsel_verb)
     sub_lead = SUBMIT_LEAD.search(lead) and not R11.COURT_VOICE2.search(lead[SUBMIT_LEAD.search(lead).end():] if SUBMIT_LEAD.search(lead) else "")
-    if sub_sent or sub_lead:
+    sub_party = PARTY_LEAD.search(sent) and not COURT_REJECTS_RELIANCE.search(sent)
+    if sub_sent or sub_lead or sub_party:
         return dict(relation="CITES", voice="PARTY_SUBMISSION",
                     reasons="submission or party's case in the sentence" if sub_sent else "submission lead earlier in the paragraph",
                     cue="", s0=s0, s1=window_end)
@@ -214,6 +306,24 @@ def classify(t, court, anchor_s, anchor_e, opinion, zone, target_court):
                 REPORTED_AFTER.match(t[cend:cend + 120]) or re.search(r"\bhaving\s+been\s*$", t[max(s0, cpos - 30):cpos], I)):
             reasons.append("treatment of the authority by another decision is reported (agent follows the cue)")
             continue
+        if PAST_PASSIVE.search(t[max(s0, cpos - 25):cend]) and typ not in ("CONSIDERS",):
+            reasons.append("past passive ('was distinguished/followed'): reported treatment, usually in a list of earlier decisions (F03)")
+            continue
+        w0 = max(s0, cpos - 200)
+        fns = [f for f in FN_GLUED.finditer(t[w0:min(s1, cend + 160)]) if not NOT_A_MARKER.search(t[max(0, w0 + f.start() - 12):w0 + f.start()])]
+        fn = min(fns, key=lambda f: abs((w0 + f.start()) - cpos)) if fns else None
+        if fn and not marker_bound:
+            mk = fn.group(1)
+            after_marker = max(cend, w0 + fn.end())
+            fm = re.search(r"(?<![\d/.:,])%s\s+(?=\S)" % mk, t[after_marker:after_marker + 4000])
+            f_lo = after_marker + fm.start() if fm else None
+            if f_lo is None or not (f_lo <= anchor_s < f_lo + 250):
+                reasons.append("cue bound to footnote %s; this anchor is not footnote %s's citation (F03)" % (mk, mk))
+                continue
+        elif not marker_bound and re.search(r"(?:^|\s)\d{1,3}\s*$", t[max(0, anchor_s - 8):anchor_s]) and anchor_s > s0 + 20 \
+                and FOOTNOTE_ZONE.search(t[s0:s1]):
+            reasons.append("the anchor is a footnote entry and no body marker binds the cue to it (F03)")
+            continue
         rep = R11.LOWER_FORUM.search(local) or R11.HIGH_COURT_ACT.search(local)
         if rep and not court.startswith("Supreme") and "High Court" not in rep.group(0):
             reasons.append("report of the lower forum's treatment")
@@ -221,7 +331,10 @@ def classify(t, court, anchor_s, anchor_e, opinion, zone, target_court):
         if rep and court.startswith("Supreme"):
             reasons.append("report of the High Court or Tribunal's treatment")
             continue
-        n_auth = count_authorities(t, s0, s1)
+        if not court.startswith("Supreme") and re.match(r"this\s+Court", m.group(0), I) and SC_REPORT.search(t[s0:s1]):
+            reasons.append("'this Court' with a Supreme Court report in a High Court judgment: the Supreme Court's words, quoted (F02)")
+            continue
+        n_auth = max(count_authorities(t, s0, s1), len(NAMED_CASES.findall(t[s0:s1])))
         if cpos <= anchor_s and anchor_e <= cend:   # the cue span contains the anchor ("Reliance placed on X is misplaced")
             between, n_between = "", 0
         elif anchor_s >= cend:
@@ -238,6 +351,10 @@ def classify(t, court, anchor_s, anchor_e, opinion, zone, target_court):
                                         r"the\s+High\s+Court|the\s+Tribunal|the\s+Full\s+Bench)\b[^.;]{0,50}$", local, I)
                               or re.search(r"\bwhether\b[^.;]{0,120}$", local, I)):
             reasons.append("the %s wording is another bench's view or an open question ('whether')" % typ.lower())
+            continue
+        if typ == "DISTINGUISHES" and not re.search(r"distinguish", m.group(0), I) and not COURT_REJECTS_RELIANCE.search(m.group(0)) \
+                and ((anchor_s < cpos and STATUTORY_SUBJECT.search(t[anchor_e:cpos])) or STATUTORY_SUBJECT.search(t[max(s0, cpos - 60):cpos])):
+            reasons.append("a statute, rule or instrument stands between the authority and '%s': it is the subject (F03)" % m.group(0))
             continue
         if typ == "DISTINGUISHES" and not re.search(r"distinguish", m.group(0), I) and not COURT_REJECTS_RELIANCE.search(m.group(0)) \
                 and anchor_s > cpos:
@@ -302,8 +419,10 @@ def main():
     docs = sorted({r["source_doc_id"] for r in graph} | {r["source_doc_id"] for r in tcs})
     assert not any(restricted.hit(doc_id=d) for d in docs)
     blobs = C.cat_blobs(a.repo, ["%s:data/text/%s.txt" % (C.TEXT_COMMIT, d) for d in docs])
-    text = {d: collapse(blobs["%s:data/text/%s.txt" % (C.TEXT_COMMIT, d)].decode("utf-8", "replace"))
+    orig = {d: blobs["%s:data/text/%s.txt" % (C.TEXT_COMMIT, d)].decode("utf-8", "replace")
             for d in docs if blobs["%s:data/text/%s.txt" % (C.TEXT_COMMIT, d)] is not None}
+    text = {d: collapse(v) for d, v in orig.items()}
+    omaps = {}
     edges = {r["edge_id"]: r for r in graph}
     opinion_by_edge = {}
     for r in tcs:
@@ -321,8 +440,11 @@ def main():
         if i < 0:
             unlocated["edge_excerpt_not_found"] += 1
             continue
-        cs = (r["cited_strings"].split(" | ")[0] if r["cited_strings"] else "")
-        j = t.find(cs, i, i + 400) if cs else -1
+        j, cs = -1, ""
+        for cand in re.split(r"\s*\|\|?\s*", r["cited_strings"] or ""):   # C11 joins parallel strings with ' || '
+            if cand and t.find(cand, i, i + 400) >= 0:
+                cs, j = cand, t.find(cand, i, i + 400)
+                break
         s, e = (j, j + len(cs)) if j >= 0 else (i + len(r["excerpt"]) // 2, i + len(r["excerpt"]) // 2 + 1)
         passages.append(dict(pid="PE-" + r["edge_id"][2:], origin="C11_EDGE_ANCHOR", edge_id=r["edge_id"], candidate_id="",
                              doc_id=r["source_doc_id"], s=s, e=e, zone=r["zone"], court=r["source_court"],
@@ -350,16 +472,22 @@ def main():
                              zone="REPORTER_EDITORIAL" if r["attribution"] == "REPORTER_EDITORIAL" else "BODY",
                              court=r["source_court"], opinion=(r["opinion"] or "OPINION_NOT_IDENTIFIED").split(" ")[0],
                              target_court=(edges.get(r["edge_id"]) or {}).get("target_court", ""),
-                             lead_target_raw=r["lead_target_raw"], c11_attribution=r["attribution"]))
+                             lead_target_raw=r["lead_target_raw"], c11_attribution=r["attribution"],
+                             marker_bound=(r["anchor"] in ("FOOTNOTE_MARKER", "NAME_REFERENCE") and k >= 0) or bool(r["lead_target_raw"])))
 
     hkeys, hprov = holdout_pages()
     out, seen, docobj = [], {}, {}
     for p in passages:
         t = text[p["doc_id"]]
-        res = classify(t, p["court"], p["s"], p["e"], p["opinion"], p["zone"], p["target_court"])
+        res = classify(t, p["court"], p["s"], p["e"], p["opinion"], p["zone"], p["target_court"], p.get("marker_bound", False))
         key = (p["doc_id"], res["s0"], p["edge_id"])
         e = edges.get(p["edge_id"]) or {}
-        raw_target = p.get("lead_target_raw") or ""
+        raw_target = clean_raw_target(p.get("lead_target_raw") or "")
+        if res["relation"] in ("DISAPPROVES", "OVERRULES") and res.get("cue"):
+            cpos = t.find(res["cue"], res["s0"], res["s1"])
+            sub = re.search(r"\b(?:the\s+)?subsequent\s+decisions\b[^.;]{0,120}", t[res["s0"]:cpos]) if cpos > 0 else None
+            if sub:   # the passage treats later decisions that followed the anchored authority, not the authority itself (F08)
+                raw_target = "%s (decisions following the authority cited at this anchor; not the authority itself)" % sub.group(0).strip()
         ctx = ""
         if raw_target and DEMONSTRATIVE.search(raw_target):  # V13-04: carry the preceding sentences
             b0, _ = sentence(t, max(0, res["s0"] - 2), max(1, res["s0"] - 1))
@@ -376,6 +504,14 @@ def main():
                    passage=t[res["s0"]:res["s1"]][:900], passage_sha256=C.sha256_bytes(t[res["s0"]:res["s1"]].encode()),
                    c11_attribution=p.get("c11_attribution", ""), status="AUTOMATED_CANDIDATE_NOT_VERIFIED", extractor=VERSION)
         row["merged_candidate_ids"] = p["candidate_id"]
+        exported = row["passage"][:600]
+        row["passage_export_sha256"] = C.sha256_bytes(exported.encode())
+        row["passage_truncated"] = "YES" if len(t[res["s0"]:res["s1"]]) > 600 else "NO"
+        row["char_page"], row["char_start"], row["char_end"] = "", "", ""
+        if res["relation"] != "CITES":
+            om = omaps.setdefault(p["doc_id"], OffsetMap(orig[p["doc_id"]]))
+            pgx, cs, ce = om.page_relative(res["s0"], res["s1"])
+            row["char_page"], row["char_start"], row["char_end"] = pgx or "", cs, ce
         prev = seen.get(key)
         if prev is not None:  # V13-04 second half: several cues in one sentence -> one passage; keep the typed one
             kept = out[prev]

@@ -45,8 +45,8 @@
   "SCHEDULE_PART_OF_INSTRUMENT": 4
  },
  "restricted_register": {
-  "sha256": "6732065cd24da9cd073e9f8dcc88121792ff0662cd6d8c5e90d7e2097dc73e57",
-  "source": "git:ea282cbd:config/restricted_material.json"
+  "sha256": "fc7ea07e62e7e41f348639973f19187540593e7b3237933758f64e865b95b2b6",
+  "source": "git:72fe7a75:config/restricted_material.json"
  },
  "tool": "identity-c13/1.0.0"
 }

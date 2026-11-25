@@ -57,6 +57,10 @@ LEGAL_EFFECT = {"FOLLOWS", "APPLIES", "DISTINGUISHES", "EXPLAINS", "DOUBTS", "DI
                 "AMENDS_PROVISION_VERSION", "SUBSTITUTES_PROVISION_TEXT", "INSERTS_PROVISION", "OMITS_PROVISION",
                 "REPEALS_INSTRUMENT", "COMMENCES", "SAVES_OR_TRANSITIONS", "IMPLEMENTS", "PRESCRIBES_OR_EXEMPLIFIES_FORM",
                 "REQUIREMENT_FROM_SOURCE"}
+# Review f915ac11 (F01): independent AI sample put these types far below their in-sample figures. They stay in the
+# native graph, flagged so consumers can filter them out, and are not exported under contract v1.
+LOW_RELIABILITY_TYPES = {"DISTINGUISHES", "APPLIES", "EXPLAINS", "DOUBTS"}
+REVIEW_VERDICTS = C.PKG / "reviews" / "treatment_sample_verdicts.csv"
 TREATMENT_TYPES = {"FOLLOWS", "APPLIES", "DISTINGUISHES", "CONSIDERS", "EXPLAINS", "DOUBTS", "DISAPPROVES", "OVERRULES"}
 DIRECTION = {
     "CITES": "citing judgment -> cited authority (citation only; no treatment inferred)",
@@ -146,10 +150,13 @@ class Builder:
         rs = list(restrictions or ["CANDIDATE_DATA"])
         if etype not in NO_MARKER and "UNVERIFIED_MARKER_REQUIRED" not in rs:
             rs.append("UNVERIFIED_MARKER_REQUIRED")
+        exported = (ev.get("passage") or None) and ev["passage"][:600]
         evidence = dict(source_copy_sha256=ev.get("sha"), doc_id=ev.get("doc_id"), page=ev.get("page"),
-                        paragraph=ev.get("paragraph") or None, passage=(ev.get("passage") or None) and ev["passage"][:600],
-                        passage_sha256=ev.get("passage_sha256") or (C.sha256_bytes(ev["passage"].encode()) if ev.get("passage") else None),
-                        anchor_text=ev.get("anchor_text") or None)
+                        paragraph=ev.get("paragraph") or None, passage=exported,
+                        passage_sha256=C.sha256_bytes(exported.encode()) if exported else None,
+                        anchor_text=ev.get("anchor_text") or None,
+                        char_start=ev.get("char_start"), char_end=ev.get("char_end"), pipeline_version=ev.get("pipeline_version"),
+                        passage_full_sha256=ev.get("passage_full_sha256"), passage_truncated=ev.get("passage_truncated"))
         date = (date or None)
         if date and not re.match(r"^\d{4}(-\d{2}-\d{2})?$", date):
             date = None
@@ -281,9 +288,29 @@ class Builder:
     def treatment(self):
         tsum = json.loads(Path(self.inp(TREAT_SUM)).read_text(encoding="utf-8"))
         ev = tsum["dev_eval_in_sample"]
-        for r in C.read_csv(self.inp(TREAT)):
-            if r["relation"] not in TREATMENT_TYPES:
-                continue
+        rows = [r for r in C.read_csv(self.inp(TREAT)) if r["relation"] in TREATMENT_TYPES]
+        # F08: one edge per (passage span, relation, target); lead rows without an anchor that share a span merge
+        merged, seen = {}, {}
+        for r in rows:
+            e = self.cg.get(r["edge_id"]) or {}
+            anchor = e.get("cited_strings") or ""
+            if r["target_raw"] and not anchor:
+                key = (r["source_doc_id"], r["char_page"], r["char_start"], r["char_end"], r["relation"])
+                if key in seen:
+                    keep = seen[key]
+                    if len(r["target_raw"]) > len(keep["target_raw"]):
+                        r["_merged"] = keep.get("_merged", []) + [keep["passage_id"]]
+                        del merged[keep["passage_id"]]
+                        merged[r["passage_id"]] = r
+                        seen[key] = r
+                    else:
+                        keep.setdefault("_merged", []).append(r["passage_id"])
+                    self.excluded["treatment_duplicate_lead_merged:" + r["relation"]] += 1
+                    continue
+                seen[key] = r
+            merged[r["passage_id"]] = r
+        rows = [r for r in rows if r["passage_id"] in merged]
+        for r in rows:
             e = self.cg.get(r["edge_id"]) or {}
             src = self.judgment_for(doc_id=r["source_doc_id"])
             if src is None:
@@ -293,7 +320,11 @@ class Builder:
             if e.get("target_state") == "RESOLVED" and not r["target_raw"]:
                 for d in e["target_doc_ids"].split(";"):
                     tgt = tgt or self.judgment_for(doc_id=d.strip())
-            raw = None if tgt else (r["target_raw"] or e.get("cited_strings") or e.get("citation_keys") or "unresolved")
+            raw = None
+            if not tgt:
+                raw = r["target_raw"] or e.get("cited_strings") or e.get("citation_keys") or "unresolved"
+                if r["target_raw"] and e.get("cited_strings"):
+                    raw = "%s [anchor: %s]" % (r["target_raw"], e["cited_strings"].split(" || ")[0])
             revs, state = [], CAND
             for cid in r["merged_candidate_ids"].split(";"):
                 d = self.dev.get(cid)
@@ -304,13 +335,19 @@ class Builder:
                         state = REVIEWED
             attrs = dict(passage_id=r["passage_id"], c11_edge_id=r["edge_id"], voice=r["voice"], cue=r["cue"],
                          opinion=r["opinion"], overruling_language=r["overruling_language"] or None, reasons=r["reasons"] or None,
-                         target_raw_context=r["target_raw_context"] or None,
+                         target_raw_context=r["target_raw_context"] or None, merged_passage_ids=sorted(r.get("_merged", [])) or None,
+                         reliability="LOW_RELIABILITY_CANDIDATE" if r["relation"] in LOW_RELIABILITY_TYPES else "CANDIDATE",
                          binding="RAW_TARGET_ONLY_BINDING_NOT_ESTABLISHED" if raw and r["target_raw"] else ("UNRESOLVED_CITATION" if raw else "RESOLVED_TARGET"))
+            rs = ["CANDIDATE_DATA"] + (["LOW_RELIABILITY_CANDIDATE"] if r["relation"] in LOW_RELIABILITY_TYPES else [])
+            full = r["passage"]
             self.add_edge(r["relation"], src, tgt, raw, r["source_court"], r["source_date"],
                           dict(sha=self.meta[r["source_doc_id"]]["sha256"], doc_id=r["source_doc_id"], page=iv(r["page"]),
-                               passage=r["passage"], passage_sha256=r["passage_sha256"], anchor_text=e.get("cited_strings")),
+                               passage=full, anchor_text=e.get("cited_strings"),
+                               char_start=iv(r["char_start"]), char_end=iv(r["char_end"]),
+                               pipeline_version="data/text@%s" % C.TEXT_COMMIT,
+                               passage_full_sha256=r["passage_sha256"], passage_truncated=r["passage_truncated"] == "YES"),
                           "rules: passage-level treatment classification (voice, binding, negation, opinion, competence)",
-                          r["extractor"], state=state, reviews=revs, key=r["passage_id"], attrs=attrs)
+                          r["extractor"], state=state, reviews=revs, key=r["passage_id"], attrs=attrs, restrictions=rs)
         self.treat_eval = ev
 
     # ------------------------------------------------------------------ statutes
@@ -460,27 +497,41 @@ class Builder:
     # ------------------------------------------------------------------ evaluation refs and output
     def finish(self):
         dev = self.treat_eval
-        per_type = {t: dict(measured=False, note="NOT_MEASURED: no independent sample yet (A0 H-REL-C13 pending)") for t in TREATMENT_TYPES}
+        per_type = {t: dict(displayable_measured_precision=None, development_in_sample=None, independent_ai_review_f915ac11=None)
+                    for t in TREATMENT_TYPES | {"CITES", "CITES_PROVISION"}}
         fam = defaultdict(lambda: [0, 0])
         for d in self.dev.values():
             if d["outcome"] in ("TP", "FP"):
                 fam[d["predicted"]][0 if d["outcome"] == "TP" else 1] += 1
         for t, (tp, fp) in fam.items():
-            per_type[t] = dict(measured=True, sample="IN_SAMPLE_C11_REVIEWED_ROWS", tp=tp, fp=fp,
-                               precision=round(tp / (tp + fp), 4) if tp + fp else None,
-                               note="in-sample (rules developed on these rows); not an independent estimate")
-        per_type["CITES"] = dict(measured=True, sample="C11_REVIEW_ROUNDS_1_2_RESOLVED_EDGES",
-                                 tp=sum(1 for v in self.rev_edge.values() for x in v if x["verdict"] == "TARGET_CORRECT"),
-                                 fp=sum(1 for v in self.rev_edge.values() for x in v if x["verdict"] == "WRONG_TARGET"),
-                                 note="target resolution correctness on C11 reviewers' sampled resolved edges (C11 rev 1.0/1.1 outputs)")
-        c = per_type["CITES"]
-        c["precision"] = round(c["tp"] / (c["tp"] + c["fp"]), 4) if c["tp"] + c["fp"] else None
-        per_type["CITES_PROVISION"] = dict(measured=False, note="C11 reviews checked labels, not a random sample of mentions")
-        evaluation = dict(tool=VERSION, treatment_dev_eval=dev, per_edge_type=per_type,
+            per_type[t]["development_in_sample"] = dict(
+                tp=tp, fp=fp, displayable=False,
+                note="DEVELOPMENT / IN-SAMPLE ONLY: the rules were written and tuned on these C11 reviewed rows. Not measured "
+                     "performance; must not be displayed as precision.")
+        rv = defaultdict(lambda: [0, 0])
+        if REVIEW_VERDICTS.exists():
+            self.inp(REVIEW_VERDICTS)
+            for v in C.read_csv(REVIEW_VERDICTS):
+                rv[v["edge_type"]][0 if v["fully_correct"] == "Y" else 1] += 1
+        for t, (ok, bad) in rv.items():
+            per_type.setdefault(t, {})["independent_ai_review_f915ac11"] = dict(
+                fully_correct=ok, n=ok + bad, rate=round(ok / (ok + bad), 4),
+                note="Independent AI review of extractor version treatment-c13/0.9.0-dev at f915ac11 (seeded stratified sample, "
+                     "reviews/treatment_sample_verdicts.csv). Not human-checked; small n. The current rules were revised using "
+                     "these findings, so these figures describe the earlier version and are no longer independent of the current one.")
+        cr = sum(1 for v in self.rev_edge.values() for x in v if x["verdict"] == "TARGET_CORRECT")
+        cw = sum(1 for v in self.rev_edge.values() for x in v if x["verdict"] == "WRONG_TARGET")
+        per_type["CITES"]["c11_review_resolution_rows"] = dict(target_correct=cr, wrong_target=cw,
+                                                             note="C11 review rounds 1-2 on C11 rev 1.0/1.1 resolved edges; AI review, not human-checked")
+        for t in LOW_RELIABILITY_TYPES:
+            per_type.setdefault(t, {})["reliability"] = "LOW_RELIABILITY_CANDIDATE (filterable; not exported under contract v1)"
+        evaluation = dict(tool=VERSION, treatment_dev_eval_in_sample=dict(dev, displayable=False), per_edge_type=per_type,
+                          displayable_policy="No figure in this file is displayable measured precision: none is human-checked "
+                                             "and independent of the current extractor. Independent evaluation awaits A0 (H-REL-C13).",
                           rule="Absence of an edge never means absence of adverse authority.")
         ref = "legal_knowledge/audit_work/C13-A5-GRAPH/graph/EDGE_TYPE_EVALUATION_C13.json"
         for e in self.edges:
-            if e["edge_type"] in per_type and per_type[e["edge_type"]].get("measured"):
+            if e["edge_type"] in per_type:
                 e["evaluation_ref"] = ref + "#per_edge_type." + e["edge_type"]
         # restricted-material guard over the full serialised output
         nodes = [self.nodes[k] for k in sorted(self.nodes)]

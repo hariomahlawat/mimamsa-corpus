@@ -1,86 +1,144 @@
 {
+ "displayable_policy": "No figure in this file is displayable measured precision: none is human-checked and independent of the current extractor. Independent evaluation awaits A0 (H-REL-C13).",
  "per_edge_type": {
   "APPLIES": {
-   "fp": 0,
-   "measured": true,
-   "note": "in-sample (rules developed on these rows); not an independent estimate",
-   "precision": 1.0,
-   "sample": "IN_SAMPLE_C11_REVIEWED_ROWS",
-   "tp": 1
+   "development_in_sample": {
+    "displayable": false,
+    "fp": 0,
+    "note": "DEVELOPMENT / IN-SAMPLE ONLY: the rules were written and tuned on these C11 reviewed rows. Not measured performance; must not be displayed as precision.",
+    "tp": 1
+   },
+   "displayable_measured_precision": null,
+   "independent_ai_review_f915ac11": {
+    "fully_correct": 1,
+    "n": 4,
+    "note": "Independent AI review of extractor version treatment-c13/0.9.0-dev at f915ac11 (seeded stratified sample, reviews/treatment_sample_verdicts.csv). Not human-checked; small n. The current rules were revised using these findings, so these figures describe the earlier version and are no longer independent of the current one.",
+    "rate": 0.25
+   },
+   "reliability": "LOW_RELIABILITY_CANDIDATE (filterable; not exported under contract v1)"
   },
   "CITES": {
-   "fp": 1,
-   "measured": true,
-   "note": "target resolution correctness on C11 reviewers' sampled resolved edges (C11 rev 1.0/1.1 outputs)",
-   "precision": 0.9857,
-   "sample": "C11_REVIEW_ROUNDS_1_2_RESOLVED_EDGES",
-   "tp": 69
+   "c11_review_resolution_rows": {
+    "note": "C11 review rounds 1-2 on C11 rev 1.0/1.1 resolved edges; AI review, not human-checked",
+    "target_correct": 69,
+    "wrong_target": 1
+   },
+   "development_in_sample": null,
+   "displayable_measured_precision": null,
+   "independent_ai_review_f915ac11": null
   },
   "CITES_PROVISION": {
-   "measured": false,
-   "note": "C11 reviews checked labels, not a random sample of mentions"
+   "development_in_sample": null,
+   "displayable_measured_precision": null,
+   "independent_ai_review_f915ac11": null
   },
   "CONSIDERS": {
-   "measured": false,
-   "note": "NOT_MEASURED: no independent sample yet (A0 H-REL-C13 pending)"
+   "development_in_sample": null,
+   "displayable_measured_precision": null,
+   "independent_ai_review_f915ac11": {
+    "fully_correct": 9,
+    "n": 12,
+    "note": "Independent AI review of extractor version treatment-c13/0.9.0-dev at f915ac11 (seeded stratified sample, reviews/treatment_sample_verdicts.csv). Not human-checked; small n. The current rules were revised using these findings, so these figures describe the earlier version and are no longer independent of the current one.",
+    "rate": 0.75
+   }
   },
   "DISAPPROVES": {
-   "fp": 0,
-   "measured": true,
-   "note": "in-sample (rules developed on these rows); not an independent estimate",
-   "precision": 1.0,
-   "sample": "IN_SAMPLE_C11_REVIEWED_ROWS",
-   "tp": 4
+   "development_in_sample": {
+    "displayable": false,
+    "fp": 0,
+    "note": "DEVELOPMENT / IN-SAMPLE ONLY: the rules were written and tuned on these C11 reviewed rows. Not measured performance; must not be displayed as precision.",
+    "tp": 4
+   },
+   "displayable_measured_precision": null,
+   "independent_ai_review_f915ac11": {
+    "fully_correct": 3,
+    "n": 4,
+    "note": "Independent AI review of extractor version treatment-c13/0.9.0-dev at f915ac11 (seeded stratified sample, reviews/treatment_sample_verdicts.csv). Not human-checked; small n. The current rules were revised using these findings, so these figures describe the earlier version and are no longer independent of the current one.",
+    "rate": 0.75
+   }
   },
   "DISTINGUISHES": {
-   "fp": 1,
-   "measured": true,
-   "note": "in-sample (rules developed on these rows); not an independent estimate",
-   "precision": 0.9091,
-   "sample": "IN_SAMPLE_C11_REVIEWED_ROWS",
-   "tp": 10
+   "development_in_sample": {
+    "displayable": false,
+    "fp": 0,
+    "note": "DEVELOPMENT / IN-SAMPLE ONLY: the rules were written and tuned on these C11 reviewed rows. Not measured performance; must not be displayed as precision.",
+    "tp": 9
+   },
+   "displayable_measured_precision": null,
+   "independent_ai_review_f915ac11": {
+    "fully_correct": 2,
+    "n": 6,
+    "note": "Independent AI review of extractor version treatment-c13/0.9.0-dev at f915ac11 (seeded stratified sample, reviews/treatment_sample_verdicts.csv). Not human-checked; small n. The current rules were revised using these findings, so these figures describe the earlier version and are no longer independent of the current one.",
+    "rate": 0.3333
+   },
+   "reliability": "LOW_RELIABILITY_CANDIDATE (filterable; not exported under contract v1)"
   },
   "DOUBTS": {
-   "fp": 1,
-   "measured": true,
-   "note": "in-sample (rules developed on these rows); not an independent estimate",
-   "precision": 0.0,
-   "sample": "IN_SAMPLE_C11_REVIEWED_ROWS",
-   "tp": 0
+   "development_in_sample": null,
+   "displayable_measured_precision": null,
+   "independent_ai_review_f915ac11": {
+    "fully_correct": 0,
+    "n": 1,
+    "note": "Independent AI review of extractor version treatment-c13/0.9.0-dev at f915ac11 (seeded stratified sample, reviews/treatment_sample_verdicts.csv). Not human-checked; small n. The current rules were revised using these findings, so these figures describe the earlier version and are no longer independent of the current one.",
+    "rate": 0.0
+   },
+   "reliability": "LOW_RELIABILITY_CANDIDATE (filterable; not exported under contract v1)"
   },
   "EXPLAINS": {
-   "measured": false,
-   "note": "NOT_MEASURED: no independent sample yet (A0 H-REL-C13 pending)"
+   "development_in_sample": null,
+   "displayable_measured_precision": null,
+   "independent_ai_review_f915ac11": {
+    "fully_correct": 0,
+    "n": 4,
+    "note": "Independent AI review of extractor version treatment-c13/0.9.0-dev at f915ac11 (seeded stratified sample, reviews/treatment_sample_verdicts.csv). Not human-checked; small n. The current rules were revised using these findings, so these figures describe the earlier version and are no longer independent of the current one.",
+    "rate": 0.0
+   },
+   "reliability": "LOW_RELIABILITY_CANDIDATE (filterable; not exported under contract v1)"
   },
   "FOLLOWS": {
-   "fp": 1,
-   "measured": true,
-   "note": "in-sample (rules developed on these rows); not an independent estimate",
-   "precision": 0.9697,
-   "sample": "IN_SAMPLE_C11_REVIEWED_ROWS",
-   "tp": 32
+   "development_in_sample": {
+    "displayable": false,
+    "fp": 1,
+    "note": "DEVELOPMENT / IN-SAMPLE ONLY: the rules were written and tuned on these C11 reviewed rows. Not measured performance; must not be displayed as precision.",
+    "tp": 30
+   },
+   "displayable_measured_precision": null,
+   "independent_ai_review_f915ac11": {
+    "fully_correct": 12,
+    "n": 14,
+    "note": "Independent AI review of extractor version treatment-c13/0.9.0-dev at f915ac11 (seeded stratified sample, reviews/treatment_sample_verdicts.csv). Not human-checked; small n. The current rules were revised using these findings, so these figures describe the earlier version and are no longer independent of the current one.",
+    "rate": 0.8571
+   }
   },
   "OVERRULES": {
-   "fp": 0,
-   "measured": true,
-   "note": "in-sample (rules developed on these rows); not an independent estimate",
-   "precision": 1.0,
-   "sample": "IN_SAMPLE_C11_REVIEWED_ROWS",
-   "tp": 9
+   "development_in_sample": {
+    "displayable": false,
+    "fp": 0,
+    "note": "DEVELOPMENT / IN-SAMPLE ONLY: the rules were written and tuned on these C11 reviewed rows. Not measured performance; must not be displayed as precision.",
+    "tp": 9
+   },
+   "displayable_measured_precision": null,
+   "independent_ai_review_f915ac11": {
+    "fully_correct": 9,
+    "n": 9,
+    "note": "Independent AI review of extractor version treatment-c13/0.9.0-dev at f915ac11 (seeded stratified sample, reviews/treatment_sample_verdicts.csv). Not human-checked; small n. The current rules were revised using these findings, so these figures describe the earlier version and are no longer independent of the current one.",
+    "rate": 1.0
+   }
   }
  },
  "rule": "Absence of an edge never means absence of adverse authority.",
  "tool": "graph-c13/1.0.0",
- "treatment_dev_eval": {
-  "correct_rejections": 69,
+ "treatment_dev_eval_in_sample": {
+  "correct_rejections": 71,
+  "displayable": false,
   "excluded_rows_in_a0_holdout": 0,
   "excluded_rows_not_in_rev13": 24,
-  "fp": 3,
+  "fp": 1,
   "labelled_rows": 162,
-  "missed_supported": 10,
+  "missed_supported": 13,
   "note": "IN-SAMPLE: the rules were developed on these C11 reviewed rows; this is not an independent measure. Independent precision/recall awaits A0's H-REL-C13 evaluation (only its identifiers are read, to exclude it).",
-  "precision": 0.9492,
-  "recall_on_supported": 0.8485,
-  "tp": 56
+  "precision": 0.9815,
+  "recall_on_supported": 0.803,
+  "tp": 53
  }
 }

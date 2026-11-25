@@ -21,7 +21,7 @@ DEFAULT_REPO = "/home/user/c7"
 # Restricted-material register (single source of truth, C13-GOV RM-001). Read from the worktree when present,
 # otherwise from the pinned governance branch commit as a git object.
 RESTRICTED_CONFIG_PATH = "config/restricted_material.json"
-RESTRICTED_CONFIG_COMMIT = "ea282cbd"                   # claude/c13-gov head that introduced RM-001
+RESTRICTED_CONFIG_COMMIT = "72fe7a75"                   # claude/c13-gov head (re-pinned after review F05; RM-001 ids unchanged)
 FOUO_SHA256 = "4284820e5bc2fb7f52ae9fbe8a61650f1579e9b6389ba206a916a69fed016b14"
 
 
