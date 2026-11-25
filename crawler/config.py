@@ -44,6 +44,11 @@ class ConfigReport:
         return not self.errors
 
 
+# Hosts that must never be contacted, whatever config/sources.yaml says (compromised; C13 review F02).
+# This is a code-level backstop to config blocked_hosts: removing the config entry cannot re-enable them.
+NEVER_CONTACT = frozenset({"aftjabalpur.in"})
+
+
 def normalise_host(host: str) -> str:
     return host.strip().lower().rstrip(".")
 
@@ -72,7 +77,8 @@ class Config:
     def is_blocked_host(self, host: str) -> bool:
         """True if host, or any parent domain of it, is on blocked_hosts."""
         host = normalise_host(host)
-        return any(host == b or host.endswith("." + b) for b in self.blocked_hosts)
+        blocked = set(self.blocked_hosts) | NEVER_CONTACT
+        return any(host == b or host.endswith("." + b) for b in blocked)
 
     def source(self, name: str) -> dict[str, Any]:
         try:

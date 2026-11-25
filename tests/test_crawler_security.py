@@ -91,3 +91,15 @@ def test_removing_host_from_blocked_hosts_is_detected(tmp_path):
     c = write_cfg(tmp_path, lambda r: r.__setitem__("blocked_hosts", [h for h in r["blocked_hosts"] if BAD not in h]))
     assert BAD not in c.blocked_hosts  # sanity: mutation applied
     assert BAD in load_config(DEFAULT_CONFIG).blocked_hosts  # the committed config keeps the block
+
+
+def test_never_contact_is_a_code_level_backstop(tmp_path):
+    """C13 review F02: aftjabalpur.in stays blocked even if the config blocked_hosts entry is removed."""
+    import crawler.config as cc
+    assert "aftjabalpur.in" in cc.NEVER_CONTACT
+    cfg = cc.Config(raw={"defaults": {"blocked_hosts": []}, "sources": {}}, path=tmp_path / "sources.yaml")
+    assert "aftjabalpur.in" not in [h.lower() for h in cfg.blocked_hosts]  # config no longer blocks it
+    for h in ("aftjabalpur.in", "AFTJABALPUR.IN", "www.aftjabalpur.in", "x.y.aftjabalpur.in"):
+        assert cfg.is_blocked_host(h), h
+    assert not cfg.is_blocked_host("aftdelhi.nic.in")
+    assert not cfg.is_blocked_host("notaftjabalpur.in")
