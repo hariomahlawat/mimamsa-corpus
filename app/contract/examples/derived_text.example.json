@@ -1,0 +1,60 @@
+{
+ "contract_version": "1.0.0",
+ "record_kind": "derived_text",
+ "source_copy_sha256": "cb666b27d8c5aedf0f6afb9cec2ec985adf21204d47b8845afe0f8215b59898d",
+ "doc_id": "example-synthetic-judgment-0001",
+ "pipeline": {
+  "name": "example-extract",
+  "version": "0.0.1",
+  "tools": {
+   "pdfplumber": "0.11"
+  }
+ },
+ "text_path": "data/text/example-synthetic-judgment-0001.txt",
+ "text_sha256": "982d9e3eb996f559e633f4d194def3761d909f5a3b647d1a851fead67c32c9d1",
+ "page_marker": "[[page N]]",
+ "quoting_permitted": true,
+ "evidence_fidelity": "AUTOMATED_CANDIDATE_NOT_VERIFIED",
+ "pages": [
+  {
+   "page": 1,
+   "method": "pdf_text",
+   "char_count": 900,
+   "ocr_engine": null,
+   "ocr_mean_confidence": null,
+   "low_confidence": false,
+   "has_word_boxes": false,
+   "text_sha256": "f64551fcd6f07823cb87971cfb91446425da18286b3ab1ef935e0cbd7a69f68a"
+  },
+  {
+   "page": 2,
+   "method": "pdf_text",
+   "char_count": 700,
+   "ocr_engine": null,
+   "ocr_mean_confidence": null,
+   "low_confidence": false,
+   "has_word_boxes": false,
+   "text_sha256": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693"
+  }
+ ],
+ "passages": [
+  {
+   "passage_id": "p1-1",
+   "page": 1,
+   "char_start": 0,
+   "char_end": 400,
+   "paragraph_label": null,
+   "kind": "cover",
+   "text_sha256": "e8bc163c82eee18733288c7d4ac636db3a6deb013ef2d37b68322be20edc45cc"
+  },
+  {
+   "passage_id": "p2-1",
+   "page": 2,
+   "char_start": 0,
+   "char_end": 350,
+   "paragraph_label": "1",
+   "kind": "body",
+   "text_sha256": "ad328846aa18b32a335816374511cac1063c704b8c57999e51da9f908290a7a4"
+  }
+ ]
+}

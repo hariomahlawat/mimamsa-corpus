@@ -1,0 +1,165 @@
+{
+  "source_text": "Fictional blue form. Two independent toy proceedings.",
+  "alternate_text": "Fictional blue form. An alternate typesetting.",
+  "replacement_text": "Fictional green form. Supersession is only a claim.",
+  "raw_reference": "Unknown fictional authority ZZ-9",
+  "proceedings": [
+    "PROC:fictional|A",
+    "PROC:fictional|B"
+  ],
+  "proposition_scope": {
+    "opinion": "dissent",
+    "voice": "submission",
+    "proceeding": "PROC:fictional|B",
+    "question": "QL:fictional-blue-form",
+    "provision_version": "PV:fictional-blue-form@2090-02-01"
+  },
+  "a4_queries": {
+    "DA-21": {
+      "status": "REPORTED_IN_COMPILATION_ONLY",
+      "reported_date": "2090-03-01",
+      "query": "2090-05-01",
+      "expected_resolution": "UNDETERMINED"
+    },
+    "DA-22": {
+      "status": "DISPUTED_PRESERVE_BOTH",
+      "conflicts": [
+        "Fictional copy A says 2090-03-01",
+        "Fictional copy B says 2090-04-01"
+      ],
+      "query": "2090-05-01",
+      "expected_resolution": "UNDETERMINED"
+    },
+    "DA-23": {
+      "status": "STATED_IN_INSTRUMENT",
+      "effective_date": "2090-06-01",
+      "retrospective_date": "2090-02-01",
+      "query": "2090-03-01",
+      "expected_resolution": "IN_FORCE_CANDIDATES"
+    },
+    "DA-24": {
+      "status": "STATED_IN_INSTRUMENT",
+      "effective_date": "2090-02-01",
+      "exception": "Applies only to the fictional blue bench",
+      "query": "2090-05-01",
+      "expected_resolution": "IN_FORCE_CANDIDATES"
+    }
+  },
+  "adapter_expected_evidence": {
+    "DA-01": {
+      "original_bytes_equal": true,
+      "sha256_equal": true,
+      "vault_key_matches": true
+    },
+    "DA-02": {
+      "exact_copy_count": 1,
+      "exact_copy_provenance_count": 2,
+      "exact_copy_search_hits": 1,
+      "alternate_copy_count": 2,
+      "alternate_link": true
+    },
+    "DA-03": {
+      "corrupt_rejected": true,
+      "active_generation_unchanged": true,
+      "prior_original_unchanged": true,
+      "allowed_truncation_warning_visible": true,
+      "unopenable_source_rejected": true
+    },
+    "DA-04": {
+      "ocr_warning_visible": true,
+      "ocr_quote_enabled": false,
+      "page_image_match": true,
+      "out_of_range_anchor_rejected": true
+    },
+    "DA-05": {
+      "missing_issuer": null,
+      "missing_effective_date": null,
+      "legal_applicability": "NOT_ESTABLISHED"
+    },
+    "DA-06": {
+      "candidate_label_visible": true,
+      "independent_review_traceable": true,
+      "review_raises_legal_axes": false,
+      "no_review_means_candidate": true
+    },
+    "DA-07": {
+      "staging_hits_for_user": 0,
+      "restricted_hits_all_surfaces": 0,
+      "restricted_material_on_disk": false
+    },
+    "DA-08": {
+      "user_publication_before_admin": false,
+      "user_publication_after_admin": true,
+      "ordinary_role_differs": false,
+      "publish_records_legal_approval": false
+    },
+    "DA-09": {
+      "withdrawn_search_hits": 0,
+      "withdrawn_snippets": 0,
+      "withdrawn_graph_links": 0,
+      "withdrawn_embedding_hits": 0,
+      "withdrawn_cache_hits": 0,
+      "audit_original_retained": true
+    },
+    "DA-10": {
+      "original_revision_retained": true,
+      "replacement_link_recorded": true,
+      "automatic_supersession": false,
+      "affected_dependency_impact_event": true,
+      "unrelated_dependency_blocked": false
+    },
+    "DA-21": {
+      "operative_date": null,
+      "reported_date": "2090-03-01",
+      "operational_use": false
+    },
+    "DA-22": {
+      "operative_date": null,
+      "both_variants_retained": true,
+      "operational_use": false
+    },
+    "DA-23": {
+      "stated_date": "2090-06-01",
+      "deemed_date": "2090-02-01",
+      "governing_axis_selected": false,
+      "operational_use": false
+    },
+    "DA-24": {
+      "exception_retained": true,
+      "out_of_scope_operational_use": false,
+      "legal_approval": false
+    },
+    "DA-31": {
+      "copy_count": 1,
+      "judgment_count": 1,
+      "proceeding_count": 2,
+      "proceeding_outputs_separated": true
+    },
+    "DA-32": {
+      "voice": "submission",
+      "opinion": "dissent",
+      "scope_retained": true,
+      "ordinary_user_visible": false,
+      "operational_use": false,
+      "treatment_target_is_proposition": true,
+      "reported_submission_promoted_to_court_treatment": false
+    },
+    "DA-33": {
+      "resolved": false,
+      "raw_reference": "Unknown fictional authority ZZ-9",
+      "target_node_id": null
+    },
+    "DA-34": {
+      "unsupported_outcome": "QUARANTINED_OR_DEFERRED",
+      "silently_dropped": false,
+      "substitute_relation_emitted": false
+    },
+    "DA-35": {
+      "source_copy_hash_verified": true,
+      "page_anchor_verified": true,
+      "producing_commit_retained": true,
+      "passage_hash_retained": true,
+      "broken_binding_rejected": true
+    }
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/v1/exclusion_update.schema.json",
+  "title": "Signed exclusion update (register and withdrawal channel)",
+  "description": "Delivers the current restricted-material register and the current withdrawal list to a site independently of releases. Signed (Ed25519 over the exact EXCLUSIONS.json bytes) by a key trusted for purpose 'register'. Sequence numbers only increase. After every activation, rollback or restore the site re-applies the latest accepted update, so no generation, derivative, index or backup can resurrect an excluded item. Withdrawals and register entries are monotone tombstones: once accepted, an item stays denied even if a later update omits it; only an explicit signed readmissions row (with the authority reference) lifts a denial.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "record_kind",
+    "sequence",
+    "issued_at",
+    "register_sha256",
+    "register_json",
+    "withdrawals"
+  ],
+  "properties": {
+    "contract_version": {
+      "$ref": "common.schema.json#/$defs/contract_version"
+    },
+    "record_kind": {
+      "const": "exclusion_update"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "register_sha256": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "withdrawals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "reason"
+        ],
+        "properties": {
+          "doc_id": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/doc_id"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_copy_sha256": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/sha256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 1000,
+            "pattern": "\\S.*\\S"
+          }
+        },
+        "anyOf": [
+          {
+            "required": [
+              "doc_id"
+            ],
+            "properties": {
+              "doc_id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "required": [
+              "source_copy_sha256"
+            ],
+            "properties": {
+              "source_copy_sha256": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "description": "Each row must name at least one non-null doc_id or source_copy_sha256 (a row with only nulls is rejected: it cannot be enforced)."
+      }
+    },
+    "register_json": {
+      "description": "Exact text of config/restricted_material.json; register_sha256 is the sha256 of its UTF-8 bytes, so it matches the restricted_material.config_sha256 that release bundles pin.",
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 1000000
+    },
+    "readmissions": {
+      "description": "Explicit, signed lifting of an earlier denial (withdrawal or register entry) for an exact identity. Omission from a later list never re-admits.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "reason",
+          "authority_ref"
+        ],
+        "properties": {
+          "doc_id": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/doc_id"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_copy_sha256": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/sha256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 1000,
+            "pattern": "\\S.*\\S"
+          },
+          "authority_ref": {
+            "description": "Structured reference to the recorded decision (e.g. OWNER-DECISION-0001); no whitespace.",
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9]*(-[A-Za-z0-9._]+)+$",
+            "maxLength": 120
+          },
+          "restriction_id": {
+            "description": "Required to lift a restricted-material register entry (owner decision); without it a readmission lifts only withdrawals.",
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^RM-[0-9]{3}$"
+          }
+        },
+        "anyOf": [
+          {
+            "required": [
+              "doc_id"
+            ],
+            "properties": {
+              "doc_id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "required": [
+              "source_copy_sha256"
+            ],
+            "properties": {
+              "source_copy_sha256": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

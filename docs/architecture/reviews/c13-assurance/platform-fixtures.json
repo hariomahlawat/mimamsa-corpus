@@ -1,0 +1,13 @@
+{
+  "allowed_paths": ["originals/SYNTH-001.pdf", "meta/नमूना.json", "pages/reference-02.txt"],
+  "alias_pairs": [
+    ["originals/Case-A.pdf", "originals/case-a.pdf"],
+    ["meta/ÅLAND.json", "meta/åland.json"]
+  ],
+  "synthetic_record": {
+    "copy": "SYNTH-001",
+    "issued_at": "2031-01-02T03:04:05Z",
+    "pages": [1, 3],
+    "title": "नमूना"
+  }
+}

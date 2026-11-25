@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/v1/restriction.schema.json",
+  "title": "Restricted-material flag",
+  "description": "Access marking as printed and the eligibility decision. The authoritative list of restricted items is config/restricted_material.json (RM register); this flag records what the producer observed. The validator independently checks every record against the register, so a missing or false flag cannot let a registered item through.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["access_marking", "eligibility"],
+  "properties": {
+    "access_marking": {"description": "Marking exactly as printed, e.g. a protective marking on page 1; null if none observed.", "type": ["string", "null"], "maxLength": 200},
+    "marking_page": {"type": ["integer", "null"], "minimum": 1},
+    "eligibility": {
+      "description": "ELIGIBLE_ALL_USERS: may be shown to the whole admitted audience. NOT_ASSESSED: blocks publication. RESTRICTED: never bundled, indexed, embedded or sent anywhere.",
+      "enum": ["ELIGIBLE_ALL_USERS", "NOT_ASSESSED", "RESTRICTED"]
+    },
+    "restriction_id": {"description": "Register id (RM-nnn) when eligibility is RESTRICTED.", "type": ["string", "null"], "pattern": "^RM-[0-9]{3}$"},
+    "decided_by": {"type": ["string", "null"], "maxLength": 200},
+    "basis": {"type": ["string", "null"], "maxLength": 2000}
+  }
+}

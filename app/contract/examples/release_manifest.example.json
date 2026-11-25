@@ -1,0 +1,62 @@
+{
+ "contract_version": "1.0.0",
+ "record_kind": "release_manifest",
+ "release_id": "R13-example-20261125-00000000",
+ "created_at": "2026-11-25T00:00:00Z",
+ "pinned": {
+  "hf_repo": "example-owner/example-dataset",
+  "hf_revision": "d1e75aca758154ee2147853c02ec6716f4a7ea04",
+  "tools_commit": "0000000",
+  "artefact_commits": {},
+  "model_bundles": []
+ },
+ "schema_versions": {
+  "contract": "1.0.0"
+ },
+ "compatibility": {
+  "contract_major": 1,
+  "min_app_version": "0.1.0",
+  "max_app_version": null,
+  "requires_migrations": false,
+  "previous_release_id": null,
+  "delta": false
+ },
+ "auth_ledger_version": 0,
+ "restricted_material": {
+  "config_path": "config/restricted_material.json",
+  "config_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "restriction_ids_applied": []
+ },
+ "checksums": {
+  "file": "SHA256SUMS",
+  "algorithm": "sha256"
+ },
+ "signature": {
+  "algorithm": "ed25519",
+  "signed_file": "SHA256SUMS",
+  "signature_file": "SHA256SUMS.sig",
+  "key_id": "dev-0000000000000000000000000000000000000000000000000000000000000000"
+ },
+ "files": [
+  {
+   "path": "data/documents.jsonl",
+   "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+   "bytes": 0,
+   "kind": "documents_jsonl"
+  }
+ ],
+ "migrations": [],
+ "rollback": {
+  "supported": true,
+  "retain_generations": 2,
+  "rollback_to_release_id": null,
+  "notes": null
+ },
+ "changes_file": "CHANGES.json",
+ "candidate_banner": {
+  "required": true,
+  "text": "Research and candidate data. Not legally verified. AUTH-LEDGER version 0: no legal approval exists."
+ },
+ "release_sequence": 1,
+ "auth_ledger_head": null
+}

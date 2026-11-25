@@ -1,0 +1,33 @@
+{
+  "classification": "synthetic public development fixtures",
+  "actors": {
+    "reader_a": {"role": "User", "sessions": ["session-a1", "session-a2"]},
+    "reader_b": {"role": "User", "sessions": ["session-b1"]},
+    "operator": {"role": "Admin", "sessions": ["session-admin1"]}
+  },
+  "copies": {
+    "published": {"id": "SYNTH-OPEN", "marker": "PUBLIC-ORANGE-3701"},
+    "restricted": {"id": "SYNTH-BLOCKED", "marker": "RESTRICTED-BLUE-2802"},
+    "withdrawal_target": {"id": "SYNTH-LAPSE", "marker": "WITHDRAWN-AMBER-6404"},
+    "unrelated_control": {"id": "SYNTH-CONTROL", "marker": "CONTROL-PEAR-9591"}
+  },
+  "session_artifacts": {
+    "session-a1": ["PRIVATE-A1-SPARROW-8542"],
+    "session-a2": ["PRIVATE-A2-PAPER-2654"],
+    "session-b1": ["PRIVATE-B1-AMBER-6539"]
+  },
+  "restore_epochs": {
+    "backup_epoch": 19,
+    "current_epoch": 21,
+    "withdrawal_epoch": 20,
+    "old_signed_exclusion_sequence": 5,
+    "current_signed_exclusion_sequence": 6
+  },
+  "limits_source": "Selected host policy, workload and preregistered PoC config",
+  "document_fixture_categories": [
+    "synthetic valid minimal PDF",
+    "synthetic truncated PDF with benign marker",
+    "synthetic safe size-boundary document",
+    "synthetic metadata with harmless instruction-shaped text"
+  ]
+}

@@ -1,0 +1,715 @@
+{
+  "fixture_version": 1,
+  "scope": "Synthetic labeled development and smoke only. Every document, original, date, identifier and proposition is fictional.",
+  "target_environment": "Disposable published-snapshot import of synthetic assets. User principal, original bytes and matching text/index release generation.",
+  "status": "Not implemented at app pin",
+  "evidence_required": "Raw ordered passage IDs, normalized request, execution mode, visible counts, candidate/OCR state, release ID, and page/copy assertions. Local fixture validation proves the oracle only.",
+  "documents": [
+    {
+      "id": "S-ACT",
+      "title": "Bracken Service Act (synthetic)",
+      "type": "act",
+      "date": "2012-01-01",
+      "pages": [
+        {
+          "page": 2,
+          "id": "A-17",
+          "text": "Section 17. Authorised pause. A decision-maker records each authorised interruption of a hearing."
+        },
+        {
+          "page": 3,
+          "id": "A-117",
+          "text": "Section 117. Inventory of lamps. A decision-maker records lanterns only."
+        }
+      ],
+      "publication": "published",
+      "copy": "C-S-ACT",
+      "completeness": "complete"
+    },
+    {
+      "id": "S-RULE",
+      "title": "Bracken Hearing Rules (synthetic)",
+      "type": "rules",
+      "date": "2012-01-01",
+      "pages": [
+        {
+          "page": 4,
+          "id": "R-3A",
+          "text": "Rule 8(3)(a). The chair must provide advance written notice. [Footnote: omitted by Notice F-20; commencement instrument unresolved.]"
+        },
+        {
+          "page": 5,
+          "id": "R-3B",
+          "text": "Rule 8(3)(b). Oral notice may be recorded in the register."
+        }
+      ],
+      "publication": "published",
+      "copy": "C-S-RULE",
+      "completeness": "complete"
+    },
+    {
+      "id": "S-NOTICE",
+      "title": "Notice F-20 (synthetic)",
+      "type": "notification",
+      "date": "2020-06-01",
+      "pages": [
+        {
+          "page": 1,
+          "id": "N-20",
+          "text": "Schedule: omit Rule 8(3)(a) of the Bracken Hearing Rules. Commencement to be fixed by a separate instrument."
+        }
+      ],
+      "proceedings": [],
+      "candidate_amendment": {
+        "type": "OMITS_PROVISION",
+        "to": "R-3A",
+        "evidence": "N-20",
+        "chain_status": "UNRESOLVED",
+        "commencement_evidence": null
+      },
+      "publication": "published",
+      "copy": "C-S-NOTICE",
+      "completeness": "complete"
+    },
+    {
+      "id": "J-REJECT",
+      "title": "Fern v. Wren",
+      "type": "judgment",
+      "date": "2021-02-11",
+      "pages": [
+        {
+          "page": 1,
+          "id": "J1-SUB",
+          "para": 4,
+          "text": "The applicant submits that a late warning always invalidates the hearing."
+        },
+        {
+          "page": 2,
+          "id": "J1-MAJ",
+          "para": 11,
+          "text": "The panel rejects the automatic invalidity submission. Advance written notice was given and no opportunity to respond was lost. Application dismissed."
+        },
+        {
+          "page": 3,
+          "id": "J1-DISS",
+          "para": 18,
+          "text": "Dissent. I would allow the application because I find the notice was too late."
+        }
+      ],
+      "court": "Fictional Bracken Tribunal",
+      "bench": "North",
+      "neutral_citation": "2021 BRSYN 12",
+      "case_numbers": [
+        "OA 410/2021"
+      ],
+      "judgment_identity": "J-REJECT",
+      "copy": "C-J1-full",
+      "completeness": "complete",
+      "publication": "published"
+    },
+    {
+      "id": "J-REJECT-SHORT",
+      "title": "Fern v. Wren",
+      "type": "judgment",
+      "date": "2021-02-11",
+      "pages": [
+        {
+          "page": 1,
+          "id": "J1-SHORT",
+          "para": 4,
+          "text": "The applicant submits that a late warning always invalidates the hearing."
+        }
+      ],
+      "court": "Fictional Bracken Tribunal",
+      "bench": "North",
+      "neutral_citation": "2021 BRSYN 12",
+      "case_numbers": [
+        "OA 410/2021"
+      ],
+      "judgment_identity": "J-REJECT",
+      "copy": "C-J1-short",
+      "completeness": "truncated_at_source",
+      "publication": "published"
+    },
+    {
+      "id": "J-ALLOW",
+      "title": "Vale v. Lark",
+      "type": "judgment",
+      "date": "2021-09-15",
+      "pages": [
+        {
+          "page": 5,
+          "id": "J2-QUOTE",
+          "para": 9,
+          "text": "Fern v. Wren, 2021 BRSYN 12, is quoted on prejudice. We distinguish that decision because here there was no service."
+        },
+        {
+          "page": 6,
+          "id": "J2-MAJ",
+          "para": 12,
+          "text": "The failure to furnish a written charge beforehand deprived the member of an opportunity to answer. OA 411/2021 allowed. Companion OA 412/2021 dismissed on jurisdiction."
+        }
+      ],
+      "court": "Fictional Bracken Tribunal",
+      "bench": "South",
+      "neutral_citation": "2021 BRSYN 21",
+      "case_numbers": [
+        "OA 411/2021",
+        "OA 412/2021"
+      ],
+      "judgment_identity": "J-ALLOW",
+      "copy": "C-J2",
+      "completeness": "complete",
+      "edges": [
+        {
+          "type": "CITES_JUDGMENT",
+          "to": "J-REJECT",
+          "evidence": "J2-QUOTE",
+          "status": "candidate"
+        },
+        {
+          "type": "DISTINGUISHES",
+          "to": "J-REJECT",
+          "evidence": "J2-QUOTE",
+          "status": "proposed"
+        }
+      ],
+      "candidate_outcomes": {
+        "OA 411/2021": {
+          "label": "allowed",
+          "evaluation_ref": null
+        },
+        "OA 412/2021": {
+          "label": "dismissed on jurisdiction",
+          "evaluation_ref": null
+        }
+      },
+      "publication": "published"
+    },
+    {
+      "id": "J-LOOKALIKE",
+      "title": "Vale v. Lark",
+      "type": "judgment",
+      "date": "2022-05-17",
+      "pages": [
+        {
+          "page": 2,
+          "id": "J3-ORDER",
+          "text": "This later costs proceeding under the same parties disposes of OA 411/2022 only."
+        }
+      ],
+      "court": "Fictional Bracken Tribunal",
+      "bench": "South",
+      "neutral_citation": "2022 BRSYN 21",
+      "case_numbers": [
+        "OA 411/2022"
+      ],
+      "judgment_identity": "J-LOOKALIKE",
+      "copy": "C-J3",
+      "completeness": "complete",
+      "publication": "published"
+    },
+    {
+      "id": "H-MANUAL",
+      "title": "Archive Drill Register 1948 (synthetic)",
+      "type": "historical_manual",
+      "date": "1948-01-01",
+      "pages": [
+        {
+          "page": 8,
+          "id": "H-ILL",
+          "text": "A halt recorded for want of a medical attendant shall be marked sick-call deferment. The clerk files the preliminary record of testimony."
+        }
+      ],
+      "publication": "published",
+      "copy": "C-H-MANUAL",
+      "completeness": "complete"
+    },
+    {
+      "id": "M-GUIDE",
+      "title": "Service Clerk Glossary (synthetic)",
+      "type": "manual",
+      "date": "2021-01-01",
+      "pages": [
+        {
+          "page": 2,
+          "id": "M-SYN",
+          "text": "BHT means Bracken Hearing Tribunal. Forward the summary of evidence to the Bracken Hearing Tribunal."
+        },
+        {
+          "page": 3,
+          "id": "M-NEAR",
+          "text": "In this summary of archived evidence, the initials BHT mean Battery Health Test."
+        },
+        {
+          "page": 4,
+          "id": "M-DIS",
+          "text": "The pension ledger uses the phrase summary of evidence as a generic column label."
+        }
+      ],
+      "publication": "published",
+      "copy": "C-M-GUIDE",
+      "completeness": "complete"
+    },
+    {
+      "id": "L-SCAN",
+      "title": "Bilingual Notice Board Register (synthetic)",
+      "type": "manual",
+      "date": "2021-01-15",
+      "pages": [
+        {
+          "page": 2,
+          "id": "L-HI",
+          "language": "hi",
+          "extraction": "OCR",
+          "confidence": "low",
+          "original_text": "सुनवाई से पहले लिखित सूचना दें।",
+          "text": "सुनवाई से पहले लिखित सूचला दें।"
+        },
+        {
+          "page": 3,
+          "id": "L-EN",
+          "language": "en",
+          "extraction": "native",
+          "text": "Give written notice before the hearing."
+        }
+      ],
+      "publication": "published",
+      "copy": "C-L-SCAN",
+      "completeness": "complete"
+    },
+    {
+      "id": "V-WITHDRAWN",
+      "title": "Withdrawal canary",
+      "type": "manual",
+      "date": "2021-01-18",
+      "pages": [
+        {
+          "page": 1,
+          "id": "V-WITHDRAWN",
+          "text": "violet-plume-canary summary of evidence"
+        }
+      ],
+      "publication": "withdrawn",
+      "copy": "C-V-WITHDRAWN",
+      "completeness": "complete"
+    },
+    {
+      "id": "V-STAGED",
+      "title": "Staging canary",
+      "type": "manual",
+      "date": "2021-01-19",
+      "pages": [
+        {
+          "page": 1,
+          "id": "V-STAGED",
+          "text": "violet-plume-canary summary of evidence"
+        }
+      ],
+      "publication": "staged",
+      "copy": "C-V-STAGED",
+      "completeness": "complete"
+    },
+    {
+      "id": "V-OTHER",
+      "title": "Unrelated synthetic book",
+      "type": "manual",
+      "date": "2022-07-15",
+      "pages": [
+        {
+          "page": 1,
+          "id": "V-OTHER",
+          "text": "Ceramic glaze instructions for a test studio."
+        }
+      ],
+      "publication": "published",
+      "copy": "C-V-OTHER",
+      "completeness": "complete"
+    }
+  ],
+  "queries": [
+    {
+      "id": "RET-01",
+      "capabilities": [
+        "CAP-US-02"
+      ],
+      "requirements": [
+        "PR-01",
+        "PR-02",
+        "PR-06",
+        "P2"
+      ],
+      "input": "s.17 Bracken Service Act",
+      "mode": "identifier",
+      "relevance": {
+        "A-17": 3
+      },
+      "expected": "Section and act chips. Exact section first.",
+      "prohibited": "Section 117 as section 17 or paraphrase substituted for the exact hit.",
+      "top1": [
+        "A-17"
+      ],
+      "forbidden": [
+        "A-117"
+      ]
+    },
+    {
+      "id": "RET-02",
+      "capabilities": [
+        "CAP-US-02"
+      ],
+      "requirements": [
+        "PR-01",
+        "PR-02",
+        "PR-06",
+        "P2"
+      ],
+      "input": "exact:\"Rule 8(3)(a)\"",
+      "mode": "lexical",
+      "relevance": {
+        "R-3A": 3,
+        "N-20": 1
+      },
+      "expected": "Exact clause outranks its textual notice reference. Search line says lexical.",
+      "prohibited": "Sibling clause or semantic-only row.",
+      "top1": [
+        "R-3A"
+      ],
+      "forbidden": [
+        "R-3B"
+      ]
+    },
+    {
+      "id": "RET-03",
+      "capabilities": [
+        "CAP-US-02",
+        "CAP-JI-02"
+      ],
+      "requirements": [
+        "PR-01",
+        "PR-06",
+        "PR-07",
+        "P2"
+      ],
+      "input": "2021 BRSYN 12",
+      "mode": "identifier",
+      "relevance": {
+        "J1-MAJ": 3,
+        "J1-SUB": 2,
+        "J1-DISS": 2,
+        "J1-SHORT": 2,
+        "J2-QUOTE": 1
+      },
+      "expected": "A matching source rendition of Fern comes before citation mentions. Group alternate copies under the same judgment in the grouped UI.",
+      "prohibited": "A citing case as the exact judgment, or later lookalike.",
+      "top1": [
+        "J1-MAJ",
+        "J1-SUB",
+        "J1-DISS",
+        "J1-SHORT"
+      ],
+      "forbidden": [
+        "J3-ORDER"
+      ]
+    },
+    {
+      "id": "RET-04",
+      "capabilities": [
+        "CAP-US-02",
+        "CAP-JI-02"
+      ],
+      "requirements": [
+        "PR-01",
+        "PR-06",
+        "PR-07",
+        "P2"
+      ],
+      "input": "OA 411/2021",
+      "mode": "identifier",
+      "relevance": {
+        "J2-MAJ": 3,
+        "J2-QUOTE": 2
+      },
+      "expected": "Case number resolves to 2021 proceeding within Vale. Preserve separate companion proceeding.",
+      "prohibited": "Same-title 2022 order or companion-case disposition used as 411/2021.",
+      "top1": [
+        "J2-MAJ",
+        "J2-QUOTE"
+      ],
+      "forbidden": [
+        "J3-ORDER"
+      ]
+    },
+    {
+      "id": "RET-05",
+      "capabilities": [
+        "CAP-US-01",
+        "CAP-US-04"
+      ],
+      "requirements": [
+        "PR-01",
+        "PR-12",
+        "P2"
+      ],
+      "input": "exact:\"summary of evidence\" AND NOT pension",
+      "mode": "lexical",
+      "relevance": {
+        "M-SYN": 3
+      },
+      "expected": "Contiguous exact phrase in the glossary, with the Boolean exclusion applied.",
+      "prohibited": "Noncontiguous phrase, pension row, hidden canaries or semantic paraphrase.",
+      "top1": [
+        "M-SYN"
+      ],
+      "forbidden": [
+        "M-NEAR",
+        "M-DIS",
+        "H-ILL"
+      ]
+    },
+    {
+      "id": "RET-06",
+      "capabilities": [
+        "CAP-US-01",
+        "CAP-US-02",
+        "CAP-US-03",
+        "CAP-US-05"
+      ],
+      "requirements": [
+        "PR-01",
+        "PR-12",
+        "P2"
+      ],
+      "input": "BHT hearing tribunal",
+      "mode": "hybrid",
+      "relevance": {
+        "M-SYN": 3
+      },
+      "expected": "Legal expansion and context appear above the battery acronym sense. Match reason comes from search inputs and source data.",
+      "prohibited": "Battery sense ranked first or claimed as the single meaning of BHT.",
+      "top1": [
+        "M-SYN"
+      ]
+    },
+    {
+      "id": "RET-07",
+      "capabilities": [
+        "CAP-US-03",
+        "CAP-US-05"
+      ],
+      "requirements": [
+        "PR-01",
+        "PR-12",
+        "PR-15",
+        "P2",
+        "P3"
+      ],
+      "input": "Can someone challenge a hearing when nobody told them the allegation beforehand?",
+      "mode": "hybrid",
+      "relevance": {
+        "J2-MAJ": 3,
+        "L-EN": 2,
+        "R-3A": 2,
+        "J1-MAJ": 2,
+        "J2-QUOTE": 1
+      },
+      "expected": "Retrieve loss of a chance to answer and contrary context. Display original evidence excerpts and match reasons.",
+      "prohibited": "A generated yes/no, a case recommendation, or merits inferred from similarity.",
+      "must_at": {
+        "10": [
+          "J2-MAJ",
+          "J1-MAJ"
+        ]
+      }
+    },
+    {
+      "id": "RET-08",
+      "capabilities": [
+        "CAP-US-01",
+        "CAP-US-03",
+        "CAP-US-04",
+        "CAP-SE-02"
+      ],
+      "requirements": [
+        "PR-02",
+        "PR-10",
+        "PR-11",
+        "P2"
+      ],
+      "input": "sick-call deferment medical attendant year:1948..1950",
+      "mode": "lexical",
+      "relevance": {
+        "H-ILL": 3
+      },
+      "expected": "Date-filtered original of the archival manual and clear historical metadata.",
+      "prohibited": "Modern lexical neighbour through the date filter or historical wording advertised as operative.",
+      "top1": [
+        "H-ILL"
+      ],
+      "forbidden": [
+        "R-3A",
+        "A-17"
+      ]
+    },
+    {
+      "id": "RET-09",
+      "capabilities": [
+        "CAP-US-03",
+        "CAP-US-05",
+        "CAP-US-06"
+      ],
+      "requirements": [
+        "PR-06",
+        "PR-12",
+        "P2",
+        "P4"
+      ],
+      "input": "सुनवाई से पहले लिखित सूचना",
+      "mode": "hybrid",
+      "relevance": {
+        "L-HI": 3,
+        "L-EN": 2,
+        "R-3A": 1
+      },
+      "expected": "Correct Hindi query retrieves noisy matching OCR page, with OCR and low-confidence state. Report English parallel separately.",
+      "prohibited": "OCR typo in a legal quotation or English displayed as the queried original.",
+      "must_at": {
+        "10": [
+          "L-HI"
+        ]
+      }
+    },
+    {
+      "id": "RET-10",
+      "capabilities": [
+        "CAP-US-05",
+        "CAP-JI-02",
+        "CAP-JI-06",
+        "CAP-KG-05"
+      ],
+      "requirements": [
+        "PR-06",
+        "PR-07",
+        "PR-11",
+        "P2"
+      ],
+      "input": "late warning invalidates hearing without notice",
+      "mode": "hybrid",
+      "relevance": {
+        "J1-MAJ": 3,
+        "J2-MAJ": 3,
+        "J1-DISS": 2,
+        "J1-SUB": 1,
+        "J1-SHORT": 1,
+        "J2-QUOTE": 2
+      },
+      "expected": "Open opposing operative passages and distinguish applicant submission, dissent, majority, and other-case quotation. Explain what a truncated rendition can establish.",
+      "prohibited": "Dissent/quotation/submission as majority, truncation as proof of disposal, or citation as approval.",
+      "must_at": {
+        "10": [
+          "J1-MAJ",
+          "J2-MAJ"
+        ]
+      }
+    },
+    {
+      "id": "RET-11",
+      "capabilities": [
+        "CAP-US-01",
+        "CAP-US-04",
+        "CAP-US-07"
+      ],
+      "requirements": [
+        "PR-01",
+        "PR-11",
+        "P2"
+      ],
+      "input": "exact:violet-plume-canary",
+      "mode": "lexical",
+      "relevance": {},
+      "expected": "Zero published results, suggestions and facets for the canary as User.",
+      "prohibited": "Staged/withdrawn result, snippet or suggestion, or claim of legal absence.",
+      "empty": true
+    },
+    {
+      "id": "RET-12",
+      "capabilities": [
+        "CAP-US-02",
+        "CAP-SE-01",
+        "CAP-SE-02",
+        "CAP-SE-03"
+      ],
+      "requirements": [
+        "PR-02",
+        "PR-10",
+        "PR-11",
+        "P2"
+      ],
+      "input": "section:8 act:\"Bracken Hearing Rules\"",
+      "mode": "lexical",
+      "relevance": {
+        "R-3A": 3,
+        "R-3B": 2
+      },
+      "expected": "Both stored clauses surface as source text; separate instrument record contains commencement gap.",
+      "prohibited": "An effective date inferred from the notice date or a claim of historical applicability.",
+      "must_at": {
+        "10": [
+          "R-3A",
+          "R-3B"
+        ]
+      },
+      "forbidden": [
+        "A-17",
+        "A-117"
+      ]
+    },
+    {
+      "id": "RET-13",
+      "capabilities": [
+        "CAP-US-01",
+        "CAP-US-02",
+        "CAP-US-04",
+        "CAP-US-05"
+      ],
+      "requirements": [
+        "PR-01",
+        "PR-15",
+        "P2"
+      ],
+      "input": "exact:(\"summary of evidence\" AND (BHT OR tribunal)",
+      "mode": "parser_error",
+      "relevance": {},
+      "expected": "Show malformed position, retain input, run plain words only after confirmation.",
+      "prohibited": "Silent relaxation of exact constraints or empty success.",
+      "exclusive_state": "parser_error"
+    },
+    {
+      "id": "RET-14",
+      "capabilities": [
+        "CAP-US-01",
+        "CAP-US-04"
+      ],
+      "requirements": [
+        "PR-01",
+        "PR-12",
+        "P2"
+      ],
+      "input": "exact:\"summary of evidence\" NEAR/5 tribunal",
+      "mode": "lexical",
+      "relevance": {
+        "M-SYN": 3
+      },
+      "expected": "The phrase and tribunal term match within the configured distance. Citation/excerpts still open the original.",
+      "prohibited": "Near-miss phrases, omitted proximity constraint or hidden canaries.",
+      "top1": [
+        "M-SYN"
+      ],
+      "forbidden": [
+        "M-NEAR",
+        "M-DIS",
+        "H-ILL"
+      ]
+    }
+  ]
+}

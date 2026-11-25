@@ -1,0 +1,98 @@
+{
+  "$description": "Client-side state and HTTP caching policy for shared office desktops (finding F07). Normative for B1. Tested by tests/test_client_policy.py; the B1 implementation must add an HTTP-level test that asserts these headers on every route class.",
+  "version": "0.2.0",
+  "response_classes": {
+    "original_pdf": {
+      "cache_control": "no-store",
+      "pragma": "no-cache",
+      "content_disposition": "inline",
+      "notes": "originals are served as bounded authenticated ranges through the delivery gateway after a hash check (see pdfjs); never cached by the browser"
+    },
+    "working_document": {
+      "cache_control": "no-store",
+      "pragma": "no-cache",
+      "content_disposition": "inline",
+      "notes": "Document Studio files, page images and OCR output; owner-checked; never cached"
+    },
+    "search_results": {
+      "cache_control": "no-store",
+      "pragma": "no-cache"
+    },
+    "snippets_and_text": {
+      "cache_control": "no-store",
+      "pragma": "no-cache"
+    },
+    "document_metadata": {
+      "cache_control": "no-store",
+      "pragma": "no-cache"
+    },
+    "notes_and_workspace": {
+      "cache_control": "no-store",
+      "pragma": "no-cache"
+    },
+    "admin": {
+      "cache_control": "no-store",
+      "pragma": "no-cache"
+    },
+    "static_assets_hashed": {
+      "cache_control": "public, max-age=31536000, immutable",
+      "notes": "content-hashed JS/CSS/fonts/icons only; contain no corpus or user data"
+    }
+  },
+  "logout": {
+    "clear_site_data": "\"cache\", \"storage\"",
+    "server_session_invalidated": true,
+    "client_memory_cleared": true
+  },
+  "idle_timeout_minutes": 30,
+  "client_storage": {
+    "localStorage": "forbidden",
+    "indexedDB": "forbidden",
+    "service_worker": "forbidden",
+    "cache_storage_api": "forbidden",
+    "sessionStorage": "allowed_for_ui_layout_only",
+    "sessionStorage_allowed_keys": [
+      "pane_widths",
+      "rail_collapsed",
+      "view_mode",
+      "theme"
+    ],
+    "never_on_client": [
+      "search_query_text",
+      "search_history",
+      "document_text",
+      "snippets",
+      "notes",
+      "working_document_content",
+      "tabs_with_document_ids"
+    ]
+  },
+  "server_side_per_user_state": [
+    "recent_queries",
+    "search_history",
+    "open_tabs",
+    "pane_layout",
+    "saved_searches",
+    "research_sets",
+    "notes",
+    "pins"
+  ],
+  "offline_behaviour": "When the server is unreachable the client shows a reconnecting notice and no cached content; there is no offline cached view.",
+  "pdfjs": {
+    "isEvalSupported": false,
+    "enableScripting": false,
+    "disableStream": true,
+    "disableAutoFetch": true,
+    "transport": "authenticated custom range transport (PDF.js PDFDataRangeTransport); first byte fetch is a bounded single range; no stock URL open",
+    "max_range_bytes": 65536,
+    "metadata_request": "bounded authorized metadata call (copy identity, length, range capability) before first range",
+    "disable_range_cache_persistence": true,
+    "proof": "R2-N01 (PR #53 Serving §10): large-PDF bootstrap, near-end jump and mid-range withdrawal must be proven in P4 before the route is enabled"
+  },
+  "protected_responses": {
+    "conditional_requests": "no ETag, Last-Modified or 304 on protected responses; policy validated before any 200/206",
+    "compression": "disabled on protected routes until exact slice accounting is proven",
+    "static_or_sendfile": "forbidden for vault originals and derived content; all protected bytes go through the single delivery gateway",
+    "progress_events": "bounded authenticated polling; SignalR/SSE only for content-free status until the delivery adapter is proven"
+  }
+}

@@ -1,0 +1,104 @@
+name: App contract and design checks
+
+# Track B only. Path-filtered to app/**, the capability matrix CSV, the security test catalogue and this file.
+# Precondition until the governance branch is integrated: origin/claude/c13-gov must exist on GitHub, because the
+# contract tests read config/restricted_material.json from it and fail (never skip) without the register. It does not call, modify or depend on the HF sync
+# workflows (sync-legal-knowledge-hf.yml, hf-sync-guard-ci.yml) and holds no secrets.
+on:
+  pull_request:
+    paths:
+      - "app/**"
+      - "config/restricted_material.json"
+      - "docs/architecture/CAPABILITY_TRACEABILITY_MATRIX.csv"
+      - "docs/architecture/SECURITY_AND_DEPLOYMENT_ARCHITECTURE.md"
+      - ".github/workflows/app-ci.yml"
+  push:
+    branches-ignore:
+      - main
+    paths:
+      - "app/**"
+      - "config/restricted_material.json"
+      - "docs/architecture/CAPABILITY_TRACEABILITY_MATRIX.csv"
+      - "docs/architecture/SECURITY_AND_DEPLOYMENT_ARCHITECTURE.md"
+      - ".github/workflows/app-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: app-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full refs so that, before the governance branch is integrated, the tests can read
+          # config/restricted_material.json from origin/claude/c13-gov. After integration the file is on the branch.
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install pinned contract dependencies
+        run: python -m pip install --disable-pip-version-check -r app/contract/requirements.txt
+      - name: Contract tests (network not needed; schemas resolve locally)
+        working-directory: app/contract
+        run: python -m pytest -q -p no:cacheprovider tests
+      - name: Validate committed examples with the CLI
+        working-directory: app/contract
+        run: |
+          set -e
+          REG_ARGS=""
+          if [ ! -f ../../config/restricted_material.json ]; then
+            git show origin/claude/c13-gov:config/restricted_material.json > "$RUNNER_TEMP/restricted_material.json"
+            REG_ARGS="--register $RUNNER_TEMP/restricted_material.json"
+          fi
+          python -m mimamsa_contract $REG_ARGS record document examples/document.example.json
+          python -m mimamsa_contract $REG_ARGS record derived_text examples/derived_text.example.json
+          python -m mimamsa_contract $REG_ARGS record candidate examples/candidate_graph_edge.example.json
+          python -m mimamsa_contract $REG_ARGS record candidate examples/candidate_outcome.example.json
+
+  importer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned importer dependencies
+        run: python -m pip install --disable-pip-version-check -r app/importer/requirements.txt
+      - name: Importer source-fidelity tests (PR #54 DA-01/03/04/35 conditions)
+        working-directory: app/importer
+        run: python -m pytest -q -p no:cacheprovider tests
+
+  design-tokens:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            app/design
+            docs/architecture
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install test runner
+        run: python -m pip install --disable-pip-version-check pytest==9.2.0
+      - name: Design checks (WCAG AA contrast, display scaling, keymap vs browser-reserved keys, client cache policy, capability matrix CSV)
+        working-directory: app/design
+        run: python -m pytest -q -p no:cacheprovider tests

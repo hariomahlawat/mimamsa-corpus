@@ -1,13 +1,109 @@
 # Mimamsa Cycle 13 execution plan
 
-- **Recorded:** 2026-11-24
+- **Recorded:** 2026-11-24. **Revised:** 2026-11-25 by workstream B0 to apply the owner's Cycle 13 directive and the verified baseline (§0). This remains the single Cycle 13 plan; superseded passages are marked **[SUPERSEDED 2026-11-25]** in place rather than deleted.
 - **Status:** Proposed plan for owner review. It does not authorise implementation, external acquisition, merges, legal-status changes, AUTH-LEDGER transactions or deployment. Each of those still needs the approvals named in `CLAUDE.md`, `docs/governance/CORPUS_REPOSITORY_GOVERNANCE.md` (ADR-0004) and the ADRs.
-- **Companion:** [OFFLINE_APP_TECHNOLOGY_ASSESSMENT.md](OFFLINE_APP_TECHNOLOGY_ASSESSMENT.md) provides the stack recommendation that Track B workstream B0 turns into ADR-0005.
+- **Companions:** [OFFLINE_APP_TECHNOLOGY_ASSESSMENT.md](OFFLINE_APP_TECHNOLOGY_ASSESSMENT.md) (Windows-native revision); [ADR-0005](../architecture/decisions/ADR-0005-APPLICATION-STACK.md) (PROPOSED); [capability traceability matrix](../architecture/CAPABILITY_TRACEABILITY_MATRIX.md); [security and deployment architecture](../architecture/SECURITY_AND_DEPLOYMENT_ARCHITECTURE.md); [data contract v1](../../app/contract/README.md); [UI/UX specification](../../app/design/README.md).
 - **Inputs:**
   - `CLAUDE.md`;
   - `docs/README.md`, `docs/product/*` and `docs/architecture/*`, including ADR-0001 to ADR-0004;
   - `docs/governance/CORPUS_REPOSITORY_GOVERNANCE.md`;
   - from `legal_knowledge/audit_work/C12-CONSOLIDATION/`: `CYCLE12_REPORT.md` (with its closeout addendum), `TASK_REGISTER.md`, `holdout_v3_eval/RESULTS.md`, `holdings_eval/EVALUATION_HOLDINGS_C12.md`, `statutory_citations/README.md`, `forms_registry/README.md` and `findings_consolidation/README.md`.
+
+## 0. Cycle 13 directive revision (2026-11-25)
+
+### 0.1 Verified baseline
+
+| Item | Value | Source |
+| --- | --- | --- |
+| GitHub staging `legal-knowledge/v2.5-staging` | `a4c0c382` (Merge PR #50, Cycle 12 closeout) | git |
+| GitHub `main` | `21de3531` (never touched) | git |
+| GitHub `raw-data` | `ad77758d` (data snapshot: `data/raw`, `data/text`, `data/meta`, manifests) | git |
+| Hugging Face dataset head | `3864faf3bb24edef4bfb18fa0916cc788eb68d79` | HF |
+| HF byte-verified revision | `5524c3d9`: 15,971 files; later additions `af7f9d06`, `15bd03cc`, `3864faf3` | C12 HF verification |
+| Distinct source copies | **4,121** (after the 18 ingested first-tier judgments) | CYCLE12_REPORT §closeout |
+| Judicial records | **4,277** (from 4,259) | CYCLE12_REPORT |
+| Findings register | **648 rows**: P1 11/11 and P2 116 closed-verified; **5 P2 deferred** (C11 F05, F06, F07, F08; WSG-R04), research-restricted | `findings_consolidation/`; `CAPABILITY_RESTRICTIONS.csv` |
+| AUTH-LEDGER | version 0 (HEAD `443c4bdf…`); no BIND, no legal approval | AUTH-LEDGER |
+| Protected originals | records_658 `9a8f0d19…`; cases_53 `8b8d53cd…`; CALIBRATION-02 `cfe5f408…` | unchanged |
+| Restricted material | Register `config/restricted_material.json` (RM-001: FOUO Regulations for the Air Force 2000 copy and its `data/meta` and `data/text` derivatives) on `claude/c13-gov` | governance workstream |
+
+The figures in §2 that predate this table (HF `5524c3d9` as head, 622 register rows) are kept for history and marked superseded.
+
+### 0.2 Directive constraints applied to this plan
+
+- **Effort split:** Track A (legal knowledge) about **70%**, Track B (application) about **30%** (directive).
+- **Windows-native production** (IIS or Windows Service; offline LAN browsers); no Docker, WSL, Hyper-V or Linux VM. Provisional reference hardware 16 cores / 64 GB / 1 TB SSD; GPU optional. Plan for about 20 GB of source data.
+- **Performance target:** search p95 under 1 s at 10 concurrent queries on the reference hardware; accuracy is not sacrificed to meet it.
+- **Signing key:** the production release-signing key stays in the owner's custody; agents use disposable test keys only.
+- Preferred candidates are **evaluated, not presumed** (ADR-0005 evidence table, PoCs P1–P9).
+- **Modular monolith with isolated workers.** Two roles (Admin, User); Legal Reviewer is a designation, inactive until appointed; ownership checks in the backend.
+- **No legal reasoning or compliance logic in Cycle 13.** The commander assistant and legal-rule features are architected but gated off.
+
+### 0.3 Workstreams
+
+**Track A (legal knowledge, ~70%).** Directive numbering; the detailed sections in §4 keep their content and are relabelled.
+
+| New id | Workstream | Branch / output | Detailed in |
+| --- | --- | --- | --- |
+| A0 | Evaluation infrastructure | `claude/c13-a0-eval` → `C13-A0-EVAL/` | §4 A0 |
+| A1 | OCR quality and benchmark (new) | `claude/c13-a1-ocr` → `C13-A1-OCR/` | §0.4 |
+| A2 | Outcome extractor V4 (closes C11 F05, F08) | `claude/c13-a2-outcome` → `C13-A2-OUTCOME/` | §4 "A2 (was A1)" |
+| A3 | Holdings and propositions V2 (closes C11 F06, F07) | `claude/c13-a3-holdings` → `C13-A3-HOLDINGS/` | §4 "A3 (was A2)" |
+| A4 | Statutory evidence and temporal layer | `claude/c13-a4-statutory` → `C13-A4-STATUTORY/` | §4 "A4 (was A3)" |
+| A5 | Treatment and knowledge graph (candidate) | `claude/c13-a5-graph` → `C13-A5-GRAPH/` | §4 "A5 (was A4)" |
+| A6 | Forms: official transcription (closes WSG-R04), AF/Navy | `claude/c13-a6-forms` → `C13-A6-FORMS/` | §4 "A6 (was A5)" |
+| A7 | Targeted acquisition (owner-gated) | `claude/c13-a7-acquisition` → `C13-A7-ACQUISITION/` | §4 "A7 (was A6)" |
+| A8 | Legal-adviser review packages | coordinator to assign | §4 "A8 (was A7)" |
+| A9 | Deferred findings (C11 F05–F08, WS-G R04), P3 closeout and findings-register regeneration | coordinator to assign | §4 "A9 (was A8 + A9)" |
+| GOV | Governance: restricted-material register RM-001, decision notes | `claude/c13-gov` → `C13-GOV/` | — |
+
+**Track B (application, ~30%).** The twelve 2026-11-24 workstreams B1–B12 are regrouped into the directive's milestones B0–B3.
+
+| New id | Content (directive) | Old items folded in | Gate |
+| --- | --- | --- | --- |
+| B0 | **Architecture plus PoCs**: this revision; ADR-0005 PROPOSED; traceability matrix; security architecture; `app/contract` v1; `app/design`; and PoC evidence P1–P9 from B-PoC (`claude/c13-b-poc`): P1 Windows hosting, P2 search and retrieval, P3 local embeddings, P4 document processing and PDF navigation, P5 background processing, P6 offline Windows installation, P7 security and licence review, P8 offline update and restoration, P9 UI/UX functional prototype | old B0 | GB1 (ADR-0005 accepted after P1–P9) |
+| B1 | **Minimum functional research prototype**: offline install, local DB, immutable vault, a real corpus subset, FTS plus hybrid search where benchmarked, excerpts, PDF viewer, page navigation, provenance, basic auth, professional workspace (banner and separate axes included) | old B1, B3, B5, B6, B7 (basic), B10 (install and import), B11, B12 (baseline) | GB2 (B1 on a clean, network-disabled Windows host) |
+| B2 | **Full eligible corpus**, incremental ingestion, Admin staging, publication and withdrawal (withdrawal leak-proof), release update, rollback, full restore | old B2, B10 (update and rollback) | independent + security review |
+| B3 | **Research depth**: judgment intelligence, statutory explorer, knowledge graph, research workspace depth, Document Studio working sessions (no rules), AD option, audit review, hardening | old B4, B8, B9, B12 (hardening) | GB3 security review |
+
+Capabilities per phase are listed in the [traceability matrix](../architecture/CAPABILITY_TRACEABILITY_MATRIX.md) (52 capabilities by first phase: 17 B1, 2 B2, 23 B3, 10 later/gated; several B1 capabilities complete in B2).
+
+### 0.4 A1 OCR (new workstream, summary)
+
+Objective: measure and improve OCR on the scanned subset (944 judgments / 4,705 pages OCR'd with Tesseract in C12) against hand-transcribed ground truth; per-page confidence and word boxes for the app (contract `derived_text.pages[]`); feed P6 (engine comparison on Windows). Acceptance: benchmark with pre-registered protocol, character/word accuracy with CIs, low-confidence page list; OCR text remains search-only (contract rule `OCR_QUOTING`).
+
+### 0.5 Acceptance criteria for Cycle 13 (directive-aligned)
+
+**Track A**
+1. Each workstream's protocol and evaluation tool committed before its extractor is frozen; fresh, pre-registered holdouts; weighted estimates; shortfalls reported plainly.
+2. The 5 deferred P2s closed and independently confirmed, or re-deferred with measured reasons; capabilities stay `NON_OPERATIONAL_RESEARCH_ONLY` until then (`tests/test_legal_audit_c12_research_isolation.py` keeps passing).
+3. No legal state changed without a recorded human decision; AUTH-LEDGER stays at version 0.
+4. Restricted material (register RM-001) absent from every derivative, index, embedding, package and external call.
+5. Protected originals byte-identical.
+
+**Track B**
+1. ADR-0005 decided from reviewed P1–P9 evidence and accepted by the owner (GB1).
+2. Data contract v1 adopted by Track A exports; `app/contract` tests green in `app-ci.yml`; restricted-material rule keyed on `config/restricted_material.json`.
+3. B1 installs offline on a clean Windows host with networking disabled and serves a real corpus subset (GB2); by B2, signed bundle import of the full eligible corpus, tamper rejection, N→N+1, rollback, backup and full restore pass (P6, P8). Search p95 < 1 s at 10 concurrent queries on reference hardware without loss of accuracy (P2).
+4. Banner on every route; separate status axes in API and UI; no single "verified" flag anywhere.
+5. Security review with no P1/P2 open; the directive's threat tests (malicious PDF/Word, path traversal, file-type spoofing, oversized and decompression attacks, cross-session access, privilege escalation, SQL injection, XSS, unauthorised source access, withdrawn-source leakage via indexes and caches, document-borne prompt injection) pass (security architecture §9; GB3).
+6. No legal-rule logic, compliance check or advisory output anywhere in the app; gated features refuse to enable.
+
+### 0.6 Superseded content in this document
+
+| Location | Superseded statement | Replacement |
+| --- | --- | --- |
+| §2 Corpus row | HF `5524c3d9` as current; "about 3,936 processed judgments" | §0.1 (head `3864faf3`; 4,121 copies; 4,277 judicial records) |
+| §2 Findings register row | 622 rows | 648 rows (§0.1) |
+| §3 diagram, §5 B0–B12 headings | Twelve Track B workstreams | B0–B3 (§0.3) |
+| §4 headings A1–A9 | 2026-11-24 numbering | Directive numbering (§0.3); internal cross-references in §4 still use the old numbers where not marked |
+| §5 B0 | PoCs P1–P7; P5 on Linux VM/Hyper-V; ADR file name `ADR-0005-OFFLINE_APP_STACK.md` | Directive P1–P9 (§0.3; assessment §16); Windows host; `ADR-0005-APPLICATION-STACK.md` |
+| §5 B2 "network-less container" | Container isolation | Windows Services, Job Objects, NTFS ACLs, firewall (security architecture §3–6) |
+| §5 B10 "Container images" | Image bundles | Offline Windows installer + signed data bundles |
+| §6 IC-01 table | Outline contract | `app/contract` v1 (schemas, validator, tests) |
+| §11 D-01 recommendation | Linux host or Hyper-V Linux VM | Windows-native (directive); hardware baseline confirmed provisionally |
+| §10 R6 | Mitigation via Linux VM | Windows-native PoCs P1/P8 on a Windows host |
+| §5 "Minimal first deliverable (M-B1)" and §12 Track B exit | M-B1 MVP including Admin upload round trip, on an air-gapped VM | B1 prototype on a real corpus subset on a clean, network-disabled Windows host; Admin staging/publication/withdrawal move to B2 |
 
 ## 1. Purpose and hard boundaries
 
@@ -27,7 +123,7 @@ The following boundaries hold for the whole cycle.
    - LLM-generated legal answers.
 
    The Legal Reviewer designation does not exist, and AUTH-LEDGER is at version 0. The operational-use gate therefore stays **closed** (fail-closed: Document Studio §3.3).
-2. **Everything automated stays `AUTOMATED_CANDIDATE_NOT_VERIFIED`.** Track B displays this state on every surface (workstream B11). Track A never raises an evidence or legal state without the review that the evidence policy requires.
+2. **Everything automated stays `AUTOMATED_CANDIDATE_NOT_VERIFIED`.** Track B displays this state on every surface (old workstream B11, now part of B1). Track A never raises an evidence or legal state without the review that the evidence policy requires.
 3. **Author ≠ reviewer** for every deliverable. A reviewing AI agent is a separate instance that works only from repository artefacts. Where Opus reviews Opus, the record says so. Every figure produced in Cycle 13 by AI coders and annotators carries the limitation "no human has checked this figure" until a human does.
 4. **Holdout hygiene.** The following sets are spent for tuning:
    - the V3 outcome holdout (150 judgments);
@@ -50,14 +146,14 @@ The following boundaries hold for the whole cycle.
 
 | Area | State at Cycle 13 start | Consequence for planning |
 | --- | --- | --- |
-| Corpus | HF revision `5524c3d9`: 15,971 files, 1.99 GB, fully hash-verified. There are 277 HF-only and 42 git-only paths. 19 files are truncated at the source as well. About 3,936 processed judgments plus Acts and Rules. Many scans; 944 scanned judgments (4,705 pages) were OCR'd with Tesseract | Track B imports from a **pinned HF revision**. The HF/git path differences and the truncated files must be visible in the app, not hidden |
+| Corpus **[SUPERSEDED 2026-11-25: see §0.1]** | HF revision `5524c3d9`: 15,971 files, 1.99 GB, fully hash-verified. There are 277 HF-only and 42 git-only paths. 19 files are truncated at the source as well. About 3,936 processed judgments plus Acts and Rules. Many scans; 944 scanned judgments (4,705 pages) were OCR'd with Tesseract | Track B imports from a **pinned HF revision**. The HF/git path differences and the truncated files must be visible in the app, not hidden |
 | Outcome V3 | printed_disposal precision 91.3% / coverage 64.8%; substantive_result 95.6% / 54.6%. Targets are ≥95% / ≥85%: **not met**. SC printed coverage is 42.3%. Population weighting by court only is biased by stratum over-sampling | Outcome V4 (A1), with a fresh holdout weighted by court × stratum |
 | Holdings | Precision 41.7%, recall 29.3% (blind, single adjudicator). 15% of sampled holdings are opinion-attribution errors. Paragraph anchors are unreliable; page anchors are reliable | Redesign (A2). **Holdings are not shown to Users** in the app this cycle |
 | Statutory | 99 / 595 / 289 EXACT / PARTIAL / MISSING (proposed, not applied). r.22, r.23 and r.15 are blocked on specific instruments or conflicts. Army Act, AFT Act, BSA and BNSS are held only as India Code compilations | A3, with legal-adviser review |
 | Forms | 67 families, 215 occurrences, 541 fields; 39 statutorily prescribed candidates; 32 families MML-only. Air Force and Navy not assessed. WSG-R04 deferred | A5 |
 | Treatment / graph | C11 candidates: 2,595 treatment rows and 11,076 statute–judgment link rows, unevaluated. V13-01 noise is known | A4 |
 | Acquisition | 25 first-tier judgments acquired but not ingested. Girish, Ram Avtar, egazette instruments and DESW items are blocked by the allow-list or TLS | A6 depends on owner decisions |
-| Findings register | 622 rows. P1: 0 open. P2: 5 deferred (C11 F05–F08, WSG-R04) | A8 closes them |
+| Findings register **[SUPERSEDED 2026-11-25: 648 rows, §0.1]** | 622 rows. P1: 0 open. P2: 5 deferred (C11 F05–F08, WSG-R04) | A8 closes them |
 | Legal side | Adviser package of 59 questions, unreviewed. No Legal Reviewer designation. AUTH-LEDGER at v0 | A7. Any gate that needs legal review stays closed until a person reviews |
 | Application | Blueprint accepted. The C12 report rates the foundation "ready to start in parallel" behind a candidate-data banner | Track B |
 
@@ -81,7 +177,7 @@ The following boundaries hold for the whole cycle.
  A6 Targeted acquisition (owner-gated)       B3 Search   B5 PDF citation  B6 Provenance
  A7 Adviser packages (needs a human)         B4 Research UI   B7 Access   B8 Graph UI
  A9 P3 backlog (capacity)                    B9 Document Studio foundation (no rules)
-     |                                       B10 Deployment + snapshot update
+     |                                       B10 Deployment + snapshot update   [old numbering; see §0.3]
      |                                       B11 Candidate banner (cross-cutting)
      |                                       B12 Security baseline + network-denied tests
      |                                            |
@@ -119,7 +215,7 @@ Default staffing:
 | Author / reviewer | Opus execution agent / independent Opus instance |
 | Gate | GA0: infra accepted before any A1 or A2 sampling |
 
-### A1. Outcome extractor V4
+### A2 (was A1). Outcome extractor V4
 
 | Item | Content |
 | --- | --- |
@@ -133,7 +229,7 @@ Default staffing:
 | Gate | GA1 protocol pre-registered → GA2 holdout coded and frozen → GA3 extractor frozen → GA4 independent evaluation review. Even if the targets are met, outcomes stay candidates: the app may show them **labelled with measured precision and coverage**, never as fact |
 | Risks | AI-only truth labels (mitigated by D-07). SC segmentation errors look like coverage gains (check by per-proceeding matching). Over-fitting to dev (mitigated by exclusion manifests) |
 
-### A2. Holdings and proposition redesign (Holdings V2)
+### A3 (was A2). Holdings and proposition redesign (Holdings V2)
 
 | Item | Content |
 | --- | --- |
@@ -147,7 +243,7 @@ Default staffing:
 | Gate | GA1 guideline + matcher pre-registered → GA2 reference frozen with IAA → GA3 freeze → GA4 evaluation review |
 | Risks | The definition of a holding is legally contested (needs the guideline and adviser input). Large judgments dominate pooled figures (report macro figures). The two annotators share a model's biases if both are AI (the human annotator mitigates this) |
 
-### A3. Statutory evidence and temporal applicability
+### A4 (was A3). Statutory evidence and temporal applicability
 
 | Item | Content |
 | --- | --- |
@@ -160,7 +256,7 @@ Default staffing:
 | Gate | GA5 legal-adviser decision before any state is applied |
 | Risks | The adviser is unavailable (proposals stay proposals; this is acceptable). Instruments cannot be acquired (the blockers stay recorded) |
 
-### A4. Judicial treatment and knowledge graph (candidate layer)
+### A5 (was A4). Judicial treatment and knowledge graph (candidate layer)
 
 | Item | Content |
 | --- | --- |
@@ -173,7 +269,7 @@ Default staffing:
 | Gate | GA4 evaluation review, then the IC-01 export accepted by B-side contract tests |
 | Risks | Citation-resolution ambiguity (keep it unresolved rather than guess). Treatment noise misleading Users (B8 labelling, per-type precision shown) |
 
-### A5. Official form transcription (WS-G R04) and Air Force/Navy coverage
+### A6 (was A5). Official form transcription (WS-G R04) and Air Force/Navy coverage
 
 | Item | Content |
 | --- | --- |
@@ -186,7 +282,7 @@ Default staffing:
 | Gate | Reviewer confirmation. Template use stays gated on T2 legal approval (Document Studio §3.3), which does not exist |
 | Risks | Poor scan legibility (record `ILLEGIBLE` with the image reference; never fill from MML) |
 
-### A6. Targeted acquisition (owner-gated)
+### A7 (was A6). Targeted acquisition (owner-gated)
 
 | Item | Content |
 | --- | --- |
@@ -197,7 +293,7 @@ Default staffing:
 | Author / reviewer | Opus / independent Opus |
 | Risks | The SC portal CAPTCHA blocks automation (manual acquisition by the owner is the fallback) |
 
-### A7. Legal-adviser packages
+### A8 (was A7). Legal-adviser review packages
 
 | Item | Content |
 | --- | --- |
@@ -209,7 +305,7 @@ Default staffing:
 | Author / reviewer | Opus builder / independent Opus reviewer (technical); a human legal adviser answers |
 | Risks | **No human reviewer becomes available.** Then nothing legal moves, and Cycle 13 still delivers measurements and the app foundation |
 
-### A8. Deferred P2 closure (cross-reference)
+### A9 (was A8). Deferred findings closure (C11 F05–F08, WS-G R04), P3 closeout and findings-register regeneration
 
 | Finding | Workstream | Closure evidence required |
 | --- | --- | --- |
@@ -221,7 +317,7 @@ Default staffing:
 
 Each closure is confirmed by an independent reviewer and recorded in the findings register (`findings_consolidation/`, regenerated with `--check`).
 
-### A9. P3 backlog (capacity permitting)
+### A9 continued (was A9). P3 backlog (capacity permitting)
 
 The register lists 47 P3 deferred, 12 P3 open and 27 P3 closed by the author only. Take the engineering items whose `cycle13_action` is concrete, for example AUTH-LEDGER CB-01/02, C10 RR-03/RR-06, the C12 confirmation P3s and the PR #46 wording items D-01/D-03. Close them with an independent confirmation. **Standardise one Python version** for tools and app images (the C12 P3 notes a 3.11/3.13 split).
 
@@ -230,24 +326,24 @@ The register lists 47 P3 deferred, 12 P3 open and 27 P3 closed by the author onl
 Every Track B workstream builds **capability without legal rules**. The app is a research library over candidate data. Default staffing:
 - **Author:** an Opus execution agent per workstream.
 - **Code review:** a separate Opus instance.
-- **Security review:** a separate Opus instance, distinct from the code reviewer, for B2, B7, B9, B10 and B12.
+- **Security review:** a separate Opus instance, distinct from the code reviewer, for old B2, B7, B9, B10 and B12 (now within B1–B3; §0.3).
 - **Fable:** ★ optional for ADR-0005.
 
 The stack below is the recommendation of the technology assessment and is confirmed or changed by B0.
 
-### B0. Stack selection and proofs of concept → ADR-0005
+### B0. Stack selection and proofs of concept → ADR-0005 **[PARTLY SUPERSEDED 2026-11-25: §0.3, §0.6]**
 
 | Item | Content |
 | --- | --- |
 | Objective | Confirm the recommended stack with measured PoCs on representative data, and record it in ADR-0005 |
-| PoCs (from the assessment §16) | P1 hybrid retrieval quality: PostgreSQL FTS vs true BM25 (embedded Tantivy) vs vector vs hybrid, on a retrieval benchmark. P2 embedding and reranker models on CPU: quality and throughput. P3 PDF.js page anchoring and highlighting for native and OCR'd scans. P4 OCR: Tesseract vs PaddleOCR on the low-confidence page set (plus Prism, if D-10 makes it available). P5 air-gapped install and update on a clean VM (and on Windows via a Linux VM if D-01 requires Windows). P6 PostgreSQL-backed job queue under ingestion load. P7 licence review of the dependency tree (PyMuPDF AGPL, Ghostscript, model licences) |
+| PoCs (from the assessment §16) **[SUPERSEDED 2026-11-25: renumbered P1–P9 for Windows; see assessment §16 and ADR-0005 §6]** | P1 hybrid retrieval quality: PostgreSQL FTS vs true BM25 (embedded Tantivy) vs vector vs hybrid, on a retrieval benchmark. P2 embedding and reranker models on CPU: quality and throughput. P3 PDF.js page anchoring and highlighting for native and OCR'd scans. P4 OCR: Tesseract vs PaddleOCR on the low-confidence page set (plus Prism, if D-10 makes it available). P5 air-gapped install and update on a clean VM (and on Windows via a Linux VM if D-01 requires Windows). P6 PostgreSQL-backed job queue under ingestion load. P7 licence review of the dependency tree (PyMuPDF AGPL, Ghostscript, model licences) |
 | Retrieval benchmark | Dev queries are written fresh by an agent who has not seen the golden set. **The 50-question golden set is held out** for evaluation only. Relevance judgments are double-coded |
 | Deliverables | `docs/architecture/decisions/ADR-0005-OFFLINE_APP_STACK.md`; `app/poc/` reports with raw measurements; a licence inventory |
 | Acceptance | Each PoC reports measurements on stated hardware, with go or no-go against the assessment's criteria. ADR-0005 lists the choice, reasons, risks and exit paths. Licence inventory has no unresolved copyleft question (owner decision D-02 where needed) |
 | Author / reviewer | Opus / independent Opus; ★ Fable optional |
-| Gate | **GB1: ADR-0005 accepted by the owner** before B1 to B10 build beyond throwaway prototypes |
+| Gate | **GB1: ADR-0005 accepted by the owner** before B1–B3 build beyond throwaway prototypes **[revised 2026-11-25]** |
 
-### B1. Data model, database and document storage
+### Old B1 → B1 Foundation. Data model, database and document storage
 
 - **Scope:**
   - PostgreSQL schema for the architecture entities needed now: SourceCopy, SourceDocument, LegalInstrument, ProvisionVersion (read-only from IC-01), Judgment, Proceeding, Opinion (candidate), ExtractedPassage with page and character anchors, CandidateRelationship, AdminSubmission, IngestionJob, PublicationRecord, ReleaseGeneration, AuditEvent and WorkingDocumentSession.
@@ -260,16 +356,16 @@ The stack below is the recommendation of the technology assessment and is confir
   - The IC-01 import round-trips.
 - **Author / reviewer:** Opus / independent Opus.
 
-### B2. Offline ingestion and indexing (OCR included)
+### Old B2 → B1 Foundation. Offline ingestion and indexing (OCR included)
 
 - **Two entry paths sharing one pipeline:**
-  - **(a) Release import:** the corpus at a pinned HF revision (B10).
+  - **(a) Release import:** the corpus at a pinned HF revision (old B10; B1 imports a subset, B2 the full eligible corpus).
   - **(b) Admin upload (CORPUS_INGESTION):** stage → validate and quarantine (type, size, content sniffing, malformed-file checks) → preserve bytes and hash → extract text (PDF text layer if sane, else OCR) → passages with page markers → metadata candidates → candidate links → Admin review → publish.
 - **OCR:**
   - The engine chosen in B0 P4, with per-page confidence.
   - Pages below threshold are flagged in staging and carry a warning after publication. They are never silently trusted.
   - OCR text is for search, not for quoting; the UI says so.
-- **Isolation:** workers run as an unprivileged user in a network-less container, with read-only vault access and resource limits.
+- **Isolation:** **[SUPERSEDED 2026-11-25]** ~~workers run as an unprivileged user in a network-less container~~ → workers run as separate Windows Services with low-privilege identities, outbound firewall block, read-only vault ACLs and Job Object limits (security architecture §3–6).
 - **Acceptance:**
   - Full import of the pinned revision completes with a per-file report: OK, OCR'd, low-confidence, truncated, failed.
   - An interrupted job resumes without re-preserving or duplicating.
@@ -279,7 +375,7 @@ The stack below is the recommendation of the technology assessment and is confir
   - A network-denied run passes.
 - **Author / reviewer:** Opus / independent Opus plus security reviewer.
 
-### B3. Full-text and semantic search
+### Old B3 → B1 Foundation. Full-text and semantic search
 
 - **Scope:**
   - Passage-level BM25-style full-text search (per B0 P1).
@@ -296,7 +392,7 @@ The stack below is the recommendation of the technology assessment and is confir
   - Results show **why relevant**: matched passage, page and statute (Architecture §10). No "binding" or "current" ranking signal.
 - **Author / reviewer:** Opus / independent Opus. The relevance judges are separate from the search author.
 
-### B4. Judgment research UI
+### Old B4 → B2 Research depth. Judgment research UI
 
 - **Views:**
   - search results;
@@ -312,7 +408,7 @@ The stack below is the recommendation of the technology assessment and is confir
   - Accessibility basics (keyboard, contrast).
 - **Author / reviewer:** Opus / independent Opus.
 
-### B5. Source citation and PDF page navigation
+### Old B5 → B1 Foundation. Source citation and PDF page navigation
 
 - **Scope:**
   - PDF.js viewer opening the **original bytes** at a page, with the hit highlighted. Native PDFs use text-layer matching. Scans use OCR word boxes, or an OCR'd derivative clearly labelled as derived.
@@ -324,7 +420,7 @@ The stack below is the recommendation of the technology assessment and is confir
   - PDF.js is configured with script evaluation disabled and kept at the current patched release.
 - **Author / reviewer:** Opus / independent Opus.
 
-### B6. Provenance and version management
+### Old B6 → B1 Foundation. Provenance and version management
 
 - **Scope:**
   - A provenance panel for every document: source URL, retrieved_at, sha256, HF revision, release generation, ingestion pipeline and OCR versions, aliases, alternate copies, access marking, completeness (truncated or unopenable flags), publication history.
@@ -337,7 +433,7 @@ The stack below is the recommendation of the technology assessment and is confir
   - Rollback to the previous generation restores identical search results on a fixed query set.
 - **Author / reviewer:** Opus / independent Opus.
 
-### B7. Admin/User access
+### Old B7 → B1 Foundation. Admin/User access
 
 - **Scope:**
   - Exactly two roles.
@@ -352,7 +448,7 @@ The stack below is the recommendation of the technology assessment and is confir
   - Security reviewer: no P1/P2 open.
 - **Author / reviewer:** Opus / independent Opus plus security reviewer.
 
-### B8. Knowledge-graph exploration
+### Old B8 → B2 Research depth. Knowledge-graph exploration
 
 - **Scope:**
   - Navigate statute ↔ judgment ↔ judgment edges from IC-01, with edge type, confidence class, evidence sentence and page link.
@@ -366,7 +462,7 @@ The stack below is the recommendation of the technology assessment and is confir
   - Label test: every non-`cites` edge renders the unverified marker.
 - **Author / reviewer:** Opus / independent Opus.
 
-### B9. Document Studio foundation (no legal rules)
+### Old B9 → B3. Document Studio foundation (no legal rules)
 
 - **Scope:**
   - Session-isolated working area: upload a PDF, DOCX or scan; view it; OCR it in the session; annotate; export.
@@ -379,7 +475,7 @@ The stack below is the recommendation of the technology assessment and is confir
   - Prompt-injection text in an uploaded working file has no effect. There is no model in the loop this cycle, but the parser path is tested.
 - **Author / reviewer:** Opus / independent Opus plus security reviewer.
 
-### B10. Offline deployment and snapshot update
+### Old B10 → B1 Foundation. Offline deployment and snapshot update
 
 - **Online side:** a GitHub-committed `build_release` tool with `--check` turns a pinned HF revision plus Track A IC-01 artefacts into a release bundle containing:
   - `data/`;
@@ -390,7 +486,7 @@ The stack below is the recommendation of the technology assessment and is confir
   - `RELEASE.json` (HF commit, tools commit, model bundle IDs);
   - a detached signature.
 
-  Container images and model files ship as separate checksummed and signed bundles.
+  **[SUPERSEDED 2026-11-25]** ~~Container images~~ The offline Windows installer and model files ship as separate checksummed and signed bundles.
 - **Offline side:**
   1. The importer verifies the signature and every checksum before changing anything. Any failure rejects the whole bundle.
   2. It loads the bundle into a new release generation and builds the indexes.
@@ -398,14 +494,14 @@ The stack below is the recommendation of the technology assessment and is confir
   4. The previous generation is retained for rollback.
   5. Local Admin uploads are reconciled under Architecture §9.1 (sha256 identity, aliases, no auto-merge, precedence, change list as impact trigger).
 - **Acceptance:**
-  - Install from bundles on a clean air-gapped VM with networking disabled.
+  - Install from bundles on a clean, network-disabled **Windows host** with the signed installer **[revised 2026-11-25; was "air-gapped VM"]**.
   - A tampered byte or signature rejects the import with nothing changed.
   - Update N→N+1 and rollback both work.
   - A bundle containing an already-uploaded local file produces one SourceCopy with two provenances.
   - Backup and restore of DB plus vault is tested.
 - **Author / reviewer:** Opus / independent Opus plus security reviewer.
 
-### B11. "Candidate data" banner everywhere (cross-cutting)
+### Old B11 → B1 Foundation. "Candidate data" banner everywhere (cross-cutting)
 
 - **Scope:**
   - A persistent, non-dismissable banner on every page.
@@ -420,7 +516,7 @@ The stack below is the recommendation of the technology assessment and is confir
   - Turning the banner off requires a release flag that cannot be set while AUTH-LEDGER is at v0 and no approvals exist.
 - **Author / reviewer:** Opus / independent Opus.
 
-### B12. Security baseline and network-denied testing
+### Old B12 → B1 Foundation (baseline) and B3 (hardening). Security baseline and network-denied testing
 
 - **Scope:** the minimum controls at launch (Architecture §11; Ingestion §6):
   - offline boundary;
@@ -440,7 +536,7 @@ The stack below is the recommendation of the technology assessment and is confir
 
 ### Minimal first deliverable (Track B milestone M-B1)
 
-The foundation MVP is installable from bundles on an air-gapped reference VM. It includes:
+The foundation MVP is installable from bundles on an air-gapped reference **Windows host** (**[revised 2026-11-25]**; was "VM"). It is the B1 Foundation milestone. It includes:
 
 1. offline import of a **pinned HF revision** (full corpus) with checksum and signature verification;
 2. hybrid search over judgments and Acts with page-anchored results;
@@ -453,7 +549,9 @@ The foundation MVP is installable from bundles on an air-gapped reference VM. It
 
 Graph exploration (B8) and Document Studio (B9) are the second increment (M-B2).
 
-## 6. Interface contract IC-01 (Track A → Track B)
+## 6. Interface contract IC-01 (Track A → Track B) **[SUPERSEDED 2026-11-25 by `app/contract` v1]**
+
+The outline below is retained for history. The binding definition is the versioned data contract in [`app/contract/`](../../app/contract/README.md): JSON Schemas, validator and tests, including the restricted-material rule keyed on `config/restricted_material.json`.
 
 | Element | Rule |
 | --- | --- |
@@ -475,7 +573,7 @@ Graph exploration (B8) and Document Studio (B9) are the second increment (M-B2).
 | GA4 | Evaluation independently reviewed; no P1/P2 open | Independent reviewer |
 | GA5 | Legal decision recorded before any legal state is applied | Human legal adviser + owner approval to apply |
 | GB1 | ADR-0005 stack accepted | Owner (after independent review) |
-| GB2 | M-B1 MVP passes acceptance on an air-gapped VM | Independent reviewer + security reviewer |
+| GB2 | B1 prototype passes acceptance on a clean, network-disabled Windows host **[revised 2026-11-25; was "M-B1 MVP on an air-gapped VM"]** | Independent reviewer + security reviewer |
 | GB3 | Security baseline: no P1/P2 open | Security reviewer |
 | GX | Release bundle R13-candidate imported offline; banner and state tests pass | Independent reviewer |
 | GC | Cycle report, task register, findings register regenerated (`--check`), owner review | Owner |
@@ -486,7 +584,7 @@ Graph exploration (B8) and Document Studio (B9) are the second increment (M-B2).
 | Phase | Track A | Track B |
 | --- | --- | --- |
 | 1 | A0. A6 (ingest the 25 T1; prepare targets). A7 packages 1–2 assembled | B0 PoCs and ADR-0005 draft. B12 CI skeleton |
-| 2 | A1 and A2 protocols pre-registered; holdout and reference sampling; coding. A3 provision-version build. A4 identity work | GB1 → B1, B2, B10 (import path), B11 |
+| 2 | A1 and A2 protocols pre-registered; holdout and reference sampling; coding. A3 provision-version build. A4 identity work | GB1 → B1 (old B1, B3, B5, B6, B7, B10 import path, B11) **[revised 2026-11-25]** |
 | 3 | A1 and A2 development on dev data; A5 transcription; A4 edges and evaluation | B3, B5, B6, B7; M-B1 MVP |
 | 4 | Freezes and scoring (GA3, GA4); A8 closures; adviser decisions applied if any (GA5) | B4, B8, B9; IC-01 import; GX release bundle |
 | 5 | Cycle report | Cycle report; M-B2 |
@@ -512,7 +610,7 @@ Graph exploration (B8) and Document Studio (B9) are the second increment (M-B2).
 | R3 | Scope creep into advice ("just add a checklist") | Medium / high | §1 boundary; the reasoning gate is closed; the B9 exclusion list; reviewer checks the release for any legal-rule logic |
 | R4 | Holdout contamination or tuning on test data | Medium / high | A0 exclusion manifests; pre-registration; freeze hashes |
 | R5 | Copyleft licences (PyMuPDF AGPL; Ghostscript AGPL if OCRmyPDF PDF/A is used) | Medium / medium | B0 P7 licence inventory; D-02. Permissive alternatives (pypdfium2, pdfminer.six) identified in the assessment |
-| R6 | Deployment target unknown (Windows vs Linux, RAM/CPU/GPU) | High / medium | D-01 early. P5 covers Windows-hosted Linux VM |
+| R6 | Windows-native production path unproven for the chosen stack **[revised 2026-11-25]** | High / medium | P1, P5, P8 on a Windows host; no Windows host is available to the agents (assessment Q-6) |
 | R7 | Withdrawn content leaks through a secondary index, embeddings or cache | Medium / high | Prefer transactional, in-database indexes (assessment). B3 withdrawal test |
 | R8 | OCR quality degrades search on scanned judgments | High / medium | Confidence flags; P4 engine comparison; UI states OCR limits |
 | R9 | Unannounced edits to the shared worktree and files across parallel agents | Medium / medium | Separate branches per workstream (`claude/c13-a*`, `claude/c13-b*`); Track B code in its own tree (`app/`, or a separate repo per D-06); PRs into staging only |
@@ -525,17 +623,17 @@ Graph exploration (B8) and Document Studio (B9) are the second increment (M-B2).
 
 | ID | Decision | Needed by | Recommendation |
 | --- | --- | --- | --- |
-| **D-01** | **Deployment target**: server OS (Linux, or a Linux VM on a Windows host), CPU/RAM/disk, GPU yes or no, number of LAN users | B0 P5, GB1 | Linux host or Hyper-V Linux VM; 16 cores, 64 GB RAM, 1 TB SSD as a planning baseline (assessment §18) |
+| **D-01** | **Deployment target** **[SUPERSEDED 2026-11-25 by the directive: Windows-native; 16 cores / 64 GB / 1 TB SSD provisional; GPU optional]**. Remaining: Windows Server edition, volume layout, number of LAN users, IIS vs Windows Service policy | B0 P1/P6, GB1 | Confirm edition and user count; provide a Windows host for P1/P5/P6/P8 evidence |
 | **D-02** | **Accept the stack and licence posture** (ADR-0005), including whether AGPL components (PyMuPDF) are acceptable server-side for an internal deployment or must be replaced | GB1 | Accept PostgreSQL-centred stack. Decide AGPL after P7; a permissive fallback exists |
 | **D-03** | **Human legal capacity**: name a legal adviser for A7, and confirm the Legal Reviewer designation path (Document Studio §3.3) | A3, A5, A7 decisions | Name an adviser now, even part-time. The designation can follow |
 | **D-04** | **Acquisition access**: allow-list `sci.gov.in`, `desw.gov.in` and archive.org storage nodes; fix the egazette trust store; or the owner acquires manually. Confirm the contact-email header policy | A3, A5, A6 | Allow-list plus manual fallback for CAPTCHA-protected items |
-| **D-05** | **Authentication mode** (local accounts vs LDAP/AD) and **release-signing key custody** (who holds the offline signing key) | B7, B10 | Local accounts first with an optional LDAP adaptor. Owner-held offline signing key with a backup custodian |
+| **D-05** | **Authentication mode** (local accounts vs LDAP/AD) and **release-signing key custody** (who holds the offline signing key) | B1, B3 | Local accounts first with an optional AD adaptor. Owner-held offline signing keys (release, register, trust-list root) with a backup custodian; trust list changeable only by owner-signed update; Authenticode installer signing mandatory **[revised 2026-11-25]** |
 | D-06 | App code location: `app/` in this repository or a separate private GitHub repository | B1 | Separate repository, to keep corpus-tool CI and app CI independent |
 | D-07 | Human annotator for the A1 20% subsample and as one of the two A2 annotators | GA2 | Yes. It is the only way to measure AI–human agreement |
-| D-08 | Display bar for candidate holdings and outcomes in the User UI | B4 | Holdings hidden until ≥80% P / ≥60% R; outcomes shown labelled with measured figures |
+| D-08 | Display bar for candidate holdings and outcomes in the User UI, **and approval of the Admin-only holdings diagnostic as a time-limited exception to equal research access (PR-01, ADR-0002 d.1)** until the bar is met (review F21) | B3 | Holdings hidden from Users until ≥80% P / ≥60% R; Admin diagnostic view as recorded exception expiring when the bar is met or at Cycle 14 review; outcomes shown labelled with measured figures |
 | D-09 | Apply the SC case-number overlay (99 staged) | A4 | Apply as an overlay after independent reconfirmation |
 | D-10 | Prism OCR: is it available as an offline module with known licence? | B0 P4 | If not confirmed early in Phase 1, proceed with Tesseract |
-| D-11 | Carried from C12: release of temporary working copies; handling of the FOUO RAF 2000 copy in the HF dataset; merge of the C12 PR into staging | — | FOUO copy must be excluded from every app release bundle (B10 eligibility filter) whatever is decided |
+| D-11 | Carried from C12: release of temporary working copies; handling of the FOUO RAF 2000 copy in the HF dataset; merge of the C12 PR into staging | — | FOUO copy must be excluded from every app release bundle (release build eligibility filter and the signed exclusion channel) whatever is decided |
 
 ## 12. Cycle 13 exit criteria
 
@@ -547,7 +645,7 @@ Graph exploration (B8) and Document Studio (B9) are the second increment (M-B2).
    - no legal state changed without a recorded human decision.
 2. **Track B:**
    - ADR-0005 accepted;
-   - M-B1 MVP passes on an air-gapped VM;
+   - M-B1 MVP passes on a clean, network-disabled Windows host **[revised 2026-11-25]**;
    - the release bundle R13-candidate imports and rolls back;
    - banner and state tests green;
    - security baseline with no P1/P2 open;

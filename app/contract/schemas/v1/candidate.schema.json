@@ -1,0 +1,503 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/v1/candidate.schema.json",
+  "title": "Extracted candidate",
+  "description": "An automated output from Track A (outcome, holding, graph edge, form). Always anchored to a page of a source copy, always versioned, always labelled. The app displays candidates only as candidates, with measured precision where an evaluation exists, and never as fact. Capability restrictions from C12-CONSOLIDATION/CAPABILITY_RESTRICTIONS.csv travel with the record.",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "record_kind",
+    "candidate_id",
+    "candidate_type",
+    "source_doc_id",
+    "anchors",
+    "extractor",
+    "status",
+    "capability_restriction",
+    "evaluation_ref",
+    "payload"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": {
+      "$ref": "common.schema.json#/$defs/contract_version"
+    },
+    "record_kind": {
+      "const": "candidate"
+    },
+    "candidate_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{2,159}$",
+      "description": "Stable for the same (source copy sha256, extractor name, anchor). A new extractor version that yields the same item keeps the id; a materially different item gets a new id and the old one is listed in supersedes_candidate_ids."
+    },
+    "candidate_type": {
+      "enum": [
+        "outcome",
+        "holding",
+        "graph_edge",
+        "form"
+      ]
+    },
+    "source_doc_id": {
+      "$ref": "common.schema.json#/$defs/doc_id"
+    },
+    "anchors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "common.schema.json#/$defs/page_anchor"
+      }
+    },
+    "extractor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version",
+        "artefact_commit"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "version": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "artefact_commit": {
+          "$ref": "common.schema.json#/$defs/git_commit"
+        },
+        "artefact_path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500
+        },
+        "artefact_sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "author_id": {
+          "description": "Identity of the agent or person that produced the artefact; reviews must come from a different reviewer_id.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 120
+        }
+      }
+    },
+    "status": {
+      "$ref": "common.schema.json#/$defs/candidate_status"
+    },
+    "review_ref": {
+      "description": "Id of a reviewed_record in the same bundle (resolved by the validator). Required by rule when status is DOCUMENTARY_CHECKED or REJECTED_ON_REVIEW, and for legal-effect edges marked human_verified.",
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^RV-[A-Za-z0-9._-]{3,80}$"
+    },
+    "capability_restriction": {
+      "description": "Restriction carried from CAPABILITY_RESTRICTIONS.csv. NON_OPERATIONAL_RESEARCH_ONLY and PROPOSAL_NOT_APPLIED may never drive advice, checklists or compliance logic. HIDDEN_FROM_USERS = Admin diagnostic view only (e.g. holdings until the D-08 bar is met).",
+      "enum": [
+        "NON_OPERATIONAL_RESEARCH_ONLY",
+        "PROPOSAL_NOT_APPLIED",
+        "HIDDEN_FROM_USERS",
+        "NONE_RECORDED"
+      ]
+    },
+    "deferred_findings": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 64
+      }
+    },
+    "evaluation_ref": {
+      "description": "Measured quality, or null when unevaluated. The UI shows 'not evaluated' rather than a number when null.",
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "required": [
+        "report_path",
+        "report_commit"
+      ],
+      "properties": {
+        "report_path": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "report_commit": {
+          "$ref": "common.schema.json#/$defs/git_commit"
+        },
+        "precision": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "coverage_or_recall": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "ci_note": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500
+        },
+        "human_checked": {
+          "description": "False until a human has checked the figure (Cycle 13 plan section 1.3).",
+          "type": "boolean"
+        }
+      }
+    },
+    "payload": {
+      "type": "object"
+    },
+    "supersedes_candidate_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 160
+      },
+      "uniqueItems": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "candidate_type": {
+            "const": "outcome"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "field",
+              "label",
+              "proceeding_ref"
+            ],
+            "properties": {
+              "field": {
+                "enum": [
+                  "printed_disposal",
+                  "substantive_result"
+                ]
+              },
+              "label": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "enum": [
+                  "allowed",
+                  "dismissed",
+                  "partly_allowed",
+                  "remanded",
+                  "disposed",
+                  "transferred",
+                  "withdrawn",
+                  "abstained",
+                  null
+                ]
+              },
+              "proceeding_ref": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "maxLength": 200
+              },
+              "party_scope": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "maxLength": 500
+              },
+              "abstain_reason": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "maxLength": 200
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "candidate_type": {
+            "const": "holding"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "item_type",
+              "voice",
+              "opinion"
+            ],
+            "properties": {
+              "item_type": {
+                "enum": [
+                  "holding",
+                  "reasoning",
+                  "rule_restatement",
+                  "factual_recital",
+                  "operative_disposal"
+                ]
+              },
+              "voice": {
+                "enum": [
+                  "court",
+                  "quoted_precedent",
+                  "submission",
+                  "lower_forum",
+                  "unknown"
+                ]
+              },
+              "opinion": {
+                "enum": [
+                  "sole",
+                  "lead",
+                  "concurring",
+                  "separate",
+                  "dissent",
+                  "unknown"
+                ]
+              },
+              "provision_version_ref": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "maxLength": 200
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "candidate_type": {
+            "const": "graph_edge"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "relation",
+              "source_node",
+              "target",
+              "confidence",
+              "has_legal_effect"
+            ],
+            "properties": {
+              "relation": {
+                "enum": [
+                  "CITES_PROVISION",
+                  "QUOTES_PROVISION",
+                  "APPLIES_PROVISION",
+                  "INTERPRETS_PROVISION",
+                  "CITES_JUDGMENT",
+                  "FOLLOWS_PROPOSITION",
+                  "DISTINGUISHES_PROPOSITION",
+                  "OVERRULES_OR_LIMITS_PROPOSITION",
+                  "AMENDS_PROVISION_VERSION",
+                  "SUBSTITUTES_PROVISION_TEXT",
+                  "INSERTS_PROVISION",
+                  "OMITS_PROVISION",
+                  "REPEALS_INSTRUMENT",
+                  "REPEALS_PROVISION",
+                  "RE_ENACTED_AS",
+                  "COMMENCES",
+                  "SAVES_OR_TRANSITIONS",
+                  "IMPLEMENTS",
+                  "SUPERSEDES_INSTRUMENT",
+                  "POSSIBLY_SUPERSEDES_DOCUMENT",
+                  "UPLOAD_REFERENCES_PROVISION",
+                  "UPLOAD_REFERENCES_CASE",
+                  "PRESCRIBES_OR_EXEMPLIFIES_FORM"
+                ]
+              },
+              "source_node": {
+                "type": "string",
+                "maxLength": 200
+              },
+              "target": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "resolved"
+                ],
+                "properties": {
+                  "resolved": {
+                    "type": "boolean"
+                  },
+                  "node_id": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "maxLength": 200
+                  },
+                  "raw_reference": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "maxLength": 1000
+                  }
+                }
+              },
+              "confidence": {
+                "enum": [
+                  "extracted",
+                  "llm_proposed",
+                  "human_verified"
+                ]
+              },
+              "has_legal_effect": {
+                "description": "True for every relation except citation, quotation and upload-reference rows (Architecture section 5). Enforced by rule EDGE_LEGAL_EFFECT_FLAG.",
+                "type": "boolean"
+              },
+              "effective_date": {
+                "anyOf": [
+                  {
+                    "$ref": "common.schema.json#/$defs/date"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "evidence_text": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "maxLength": 2000
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "candidate_type": {
+            "const": "form"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "payload": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "family_id",
+              "field_set_version",
+              "form_authority_candidate"
+            ],
+            "properties": {
+              "family_id": {
+                "type": "string",
+                "maxLength": 100
+              },
+              "printed_form_number": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "maxLength": 100
+              },
+              "field_set_version": {
+                "enum": [
+                  "MML_DERIVED",
+                  "OFFICIAL_TRANSCRIBED",
+                  "NOT_TRANSCRIBED"
+                ]
+              },
+              "form_authority_candidate": {
+                "enum": [
+                  "STATUTORY_PRESCRIBED",
+                  "OFFICIAL_SPECIMEN",
+                  "OFFICIAL_SERVICE_ADMINISTRATIVE",
+                  "OTHER_OR_UNDETERMINED"
+                ]
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "label"
+                  ],
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "maxLength": 300
+                    },
+                    "page_region_bbox": {
+                      "type": [
+                        "array",
+                        "null"
+                      ],
+                      "items": {
+                        "type": "number"
+                      },
+                      "minItems": 4,
+                      "maxItems": 4
+                    }
+                  }
+                }
+              },
+              "usable_as_template": {
+                "description": "Always false in contract v1: no template is usable until T2 approval exists.",
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

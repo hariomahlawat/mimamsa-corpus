@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://contract.mimamsa.invalid/v1/trust_list.schema.json",
+  "title": "Pinned trust list (signing keys)",
+  "description": "Public keys a site trusts, by purpose. Installed with the signed installer; changed only by a trust-list update signed by a key that is currently trusted for purpose 'trust_list' and held by the owner. A site Admin cannot add or replace keys. Development keys (dev-) are never valid in production mode.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "record_kind", "sequence", "issued_at", "keys"],
+  "properties": {
+    "contract_version": {"$ref": "common.schema.json#/$defs/contract_version"},
+    "record_kind": {"const": "trust_list"},
+    "sequence": {"type": "integer", "minimum": 1},
+    "issued_at": {"type": "string", "format": "date-time"},
+    "keys": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["key_id", "public_key_hex", "holder", "purposes", "revoked"],
+        "properties": {
+          "key_id": {"type": "string", "pattern": "^(dev-)?[0-9a-f]{64}$"},
+          "public_key_hex": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "holder": {"enum": ["OWNER", "OWNER_BACKUP_CUSTODIAN", "DEVELOPMENT"]},
+          "purposes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["release", "register", "trust_list"]}},
+          "valid_until": {"anyOf": [{"$ref": "common.schema.json#/$defs/date"}, {"type": "null"}]},
+          "revoked": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}
