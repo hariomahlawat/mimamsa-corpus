@@ -4,7 +4,15 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"act-army-1950": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "act-navy-1957": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-delhi-2025-w-p-c-15677-2024-dlhc010790282024-1-2025-07-01": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -52,6 +60,14 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-1996-union-of-india-and-ors-1996insc425": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-1997-the-general-court-martial-and-1997insc816": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "sc-2000-union-of-india-and-anr-2000insc231": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
@@ -80,6 +96,10 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-2015-union-of-india-anr-2015insc2": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2016-union-of-india-ors-2016insc495": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
@@ -96,7 +116,19 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"sc-2019-randhir-singh-2019insc729": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"sc-2019-union-of-india-thr-secretary-o-2019insc1271": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2020-union-of-india-ors-2020insc62": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2022-union-of-india-ors-2022insc384": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -111,6 +143,10 @@
 "grade": 0
 },
 "act-army-1950": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"act-navy-1957": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -130,6 +166,10 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"hc-delhi-2019-w-p-c-2738-2019-dlhc010147342019-1-2019-03-18": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "hc-delhi-2020-w-p-c-4781-2012-dlhc011245922012-1-2020-01-28": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
@@ -146,6 +186,14 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"hc-jkl-2019-wp-c-3058-2019-jkhc020058322019-1-2019-08-26": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2009-crwp-627-2000-phhc010141902000-1-2009-04-02": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-ph-2013-cwp-22896-2012-phhc010802182012-1-2013-01-30": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
@@ -154,7 +202,19 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"hc-ph-2023-cwp-3118-2023-phhc010194042023-1-2023-10-03": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "hc-ph-2025-cwp-17335-2025-phhc010927082025-1-2025-07-02": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2025-cwp-24838-2024-phhc011288052024-1-2025-11-12": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2026-cwp-6673-2026-phhc010359642026-1-2026-03-06": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -194,11 +254,39 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"sc-2010-union-of-india-anr-2010insc99": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2012-union-of-india-ors-2012insc497": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2013-manoj-h-mishra-2013insc227": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2013-union-of-india-and-others-2013insc705": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"sc-2015-union-of-india-anr-2015insc2": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2015-veerendra-kumar-dubey-2015insc797": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2016-union-of-india-ors-2016insc495": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2017-mohammed-ansari-2017insc1259": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2019-union-of-india-ors-2019insc1030": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -216,9 +304,17 @@
 }
 },
 "AB03": {
+"act-air-force-1950": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "act-army-1950": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"act-navy-1957": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 },
 "hc-allahabad-2019-untitled-uphc010379512019-1-2019-03-25": {
 "by": "ai_manual_blind_snippet",
@@ -252,6 +348,10 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"hc-delhi-2025-w-p-c-800-2025-dlhc010020062025-1-2025-08-01": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "hc-jkl-2015-lpasw-439-2002-jkhc020079202002-1-2015-09-03": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
@@ -264,6 +364,38 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"hc-ph-2013-cwp-4875-2012-phhc010864092012-1-2013-01-25": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2023-cwp-24604-2023-phhc011332262023-1-2023-11-30": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2023-cwp-3118-2023-phhc010194042023-1-2023-10-03": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2025-cwp-24838-2024-phhc011288052024-1-2025-11-12": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2026-cwp-25552-2023-phhc011449222023-1-2026-03-07": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2026-cwp-7697-2026-phhc010401002026-1-2026-03-13": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"rules-aft-procedure-rules-2008": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"rules-army-rules-1954": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "sc-1982-lt-col-prithi-pal-singh-bedi-e-1982insc65": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
@@ -271,6 +403,10 @@
 "sc-1988-vidya-prakash-1988insc39": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
+},
+"sc-1990-s-n-mukherjee-1990insc257": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 },
 "sc-2000-union-of-india-and-anr-2000insc231": {
 "by": "ai_manual_blind_snippet",
@@ -314,6 +450,10 @@
 }
 },
 "AB04": {
+"hc-delhi-2014-w-p-c-1478-2014-dlhc010253712014-1-2014-10-28": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
 "hc-delhi-2024-w-p-c-15513-2024-dlhc010769362024-1-2024-11-07": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
@@ -326,7 +466,23 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-delhi-2025-w-p-c-14860-2024-dlhc010730102024-1-2025-07-01": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"hc-delhi-2025-w-p-c-16554-2024-dlhc010872422024-1-2025-07-01": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
 "hc-delhi-2025-w-p-c-1797-2025-dlhc010064142025-1-2025-02-13": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-delhi-2025-w-p-c-8150-2024-dlhc010341562024-1-2025-07-01": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"hc-delhi-2026-w-p-c-306-2026-dlhc011082642025-1-2026-01-09": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
@@ -351,6 +507,10 @@
 "grade": 1
 },
 "hc-jkl-2025-wp-c-1219-2024-jkhc020025602024-1-2025-11-03": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-jkl-2025-wp-c-1239-2024-jkhc020022132024-1-2025-11-03": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
@@ -386,19 +546,43 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-jkl-2025-wp-c-544-2025-jkhc020009822025-1-2025-11-03": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-jkl-2025-wp-c-703-2024-jkhc020065562023-1-2025-12-24": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"hc-jkl-2026-wp-c-1766-2025-jkhc020038002025-1-2026-03-03": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-jkl-2026-wp-c-2424-2025-jkhc020051292025-1-2026-05-18": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
+},
+"hc-ph-2008-cwp-10075-2007-phhc010478382007-1-2008-09-23": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2025-cwp-15351-2025-phhc010833182025-1-2025-05-26": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
 },
 "hc-ph-2025-cwp-17622-2025-phhc010976032025-1-2025-07-02": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
 "hc-ph-2025-cwp-18373-2025-phhc010940742025-1-2025-07-07": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2025-cwp-19834-2025-phhc011079752025-1-2025-07-18": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2025-cwp-20277-2025-phhc011109482025-1-2025-07-29": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
@@ -414,7 +598,15 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-2008-union-of-india-ors-2008insc357": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "sc-2010-om-prakash-singh-2010insc410": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2010-union-of-india-ors-2010insc350": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
@@ -422,7 +614,19 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-2015-union-of-india-and-ors-2015insc611": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2015-union-of-india-anr-2015insc114": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "sc-2015-union-of-india-ors-2015insc150": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2015-union-of-india-ors-2015insc402": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
@@ -436,6 +640,10 @@
 }
 },
 "AB05": {
+"hc-delhi-2020-w-p-c-6364-2020-dlhc010247842020-1-2020-11-05": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "hc-delhi-2025-w-p-c-3631-2022-dlhc010089442022-1-2025-08-27": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
@@ -476,6 +684,10 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-ph-2008-cwp-10384-2007-phhc010481762007-1-2008-02-12": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "hc-ph-2008-cwp-11110-2007-phhc010489782007-1-2008-02-28": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
@@ -488,15 +700,47 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-ph-2025-cwp-15885-2025-phhc010759812025-1-2025-08-05": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2025-cwp-16265-2025-phhc010869852025-1-2025-08-18": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-ph-2025-cwp-17273-2025-phhc010938292025-1-2025-07-02": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"hc-ph-2025-cwp-17378-2025-phhc010954472025-1-2025-07-01": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2025-cwp-19577-2025-phhc010940552025-1-2025-09-02": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2025-cwp-19834-2025-phhc011079752025-1-2025-07-18": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
 },
 "hc-ph-2025-cwp-20276-2025-phhc011104882025-1-2025-07-28": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"hc-ph-2025-cwp-22577-2025-phhc011218702025-1-2025-08-06": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-ph-2025-cwp-23261-2024-phhc011206712024-1-2025-12-02": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2025-cwp-24999-2025-phhc011344472025-1-2025-09-10": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2025-cwp-34119-2024-phhc011743902024-1-2025-08-12": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
@@ -512,7 +756,15 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-2009-secretary-ministry-of-defence-2009insc1059": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
 "sc-2010-om-prakash-singh-2010insc410": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"sc-2013-dharamvir-singh-2013insc408": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
@@ -527,6 +779,18 @@
 "sc-2015-union-of-india-ors-2015insc150": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"sc-2015-union-of-india-ors-2015insc402": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2019-g-h-union-of-india-ors-2019insc1359": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2019-no-1466828m-ex-cfn-narsingh-ya-2019insc1121": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
 },
 "sc-2019-union-of-india-ors-2019insc1220": {
 "by": "ai_manual_blind_snippet",
@@ -562,7 +826,15 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-delhi-2020-w-p-c-9332-2020-dlhc010051892020-1-2020-11-24": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-delhi-2024-w-p-c-5305-2024-dlhc010196862024-1-2024-07-15": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-delhi-2025-w-p-c-14516-2024-dlhc010707222024-1-2025-11-19": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -570,9 +842,37 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"hc-jkl-2022-wp-c-947-2022-jkhc020021262022-1-2022-06-02": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2009-fao-4458-2007-phhc010711962007-1-2009-12-11": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2023-cwp-24604-2023-phhc011332262023-1-2023-11-30": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2023-cwp-3118-2023-phhc010194042023-1-2023-10-03": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "hc-ph-2023-lpa-566-2022-phhc010728032022-1-2023-01-25": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"hc-ph-2025-cwp-24838-2024-phhc011288052024-1-2025-11-12": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2026-cwp-6673-2026-phhc010359642026-1-2026-03-06": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"rules-aft-procedure-rules-2008": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 },
 "rules-army-rules-1954": {
 "by": "ai_manual_blind_snippet",
@@ -585,6 +885,10 @@
 "sc-1995-union-of-india-and-ors-1995insc449": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
+},
+"sc-1996-major-r-s-budhwar-1996insc648": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
 },
 "sc-1996-union-of-india-and-ors-1996insc425": {
 "by": "ai_manual_blind_snippet",
@@ -614,6 +918,10 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-2007-union-of-india-2007insc455": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "sc-2008-bachan-singh-2008insc801": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
@@ -630,6 +938,14 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-2012-rajvir-singh-2012insc91": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2015-om-prakash-2015insc491": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "sc-2016-union-of-india-ors-2016insc495": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
@@ -638,6 +954,10 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-2019-federation-of-obstetrics-and-g-2019insc620": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2022-union-of-india-and-others-2022insc332": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
@@ -645,6 +965,10 @@
 "sc-2022-union-of-india-ors-2022insc384": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"sc-2024-union-of-india-ors-2024insc672": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 }
 },
 "AB07": {
@@ -656,6 +980,10 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-allahabad-2021-wria-12449-2021-uphc011235332021-1-2021-09-21": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-allahabad-2021-wria-3635-2021-uphc010400732021-1-2021-03-25": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
@@ -664,9 +992,17 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-allahabad-2022-untitled-uphc020478292019-1-2022-09-19": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-allahabad-2022-untitled-uphc020617562022-1-2022-10-19": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"hc-allahabad-2022-wria-2001027-2011-uphc020435342011-1-2022-10-31": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 },
 "hc-allahabad-2022-wria-7764-2022-uphc010819652022-1-2022-07-07": {
 "by": "ai_manual_blind_snippet",
@@ -680,7 +1016,15 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-allahabad-2024-untitled-uphc020351532024-1-2024-05-24": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-allahabad-2024-untitled-uphc020539692024-1-2024-08-12": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-allahabad-2024-wria-844-2024-uphc020076732024-1-2024-02-06": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
@@ -692,9 +1036,33 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"hc-allahabad-2025-wria-15995-2021-uphc020366362021-1-2025-09-17": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-delhi-2018-w-p-c-3467-2018-dlhc010969542018-1-2018-12-20": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-delhi-2019-w-p-c-10026-2016-dlhc012744092016-1-2019-01-09": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-delhi-2019-w-p-c-2738-2019-dlhc010147342019-1-2019-03-18": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"hc-delhi-2019-w-p-c-8203-2019-dlhc010314252019-1-2019-09-13": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-delhi-2020-w-p-c-11499-2019-dlhc010015752019-1-2020-02-25": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-delhi-2020-w-p-c-11505-2019-dlhc010015732019-1-2020-02-25": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 },
 "hc-delhi-2021-w-p-c-5245-2020-dlhc010220102020-1-2021-05-25": {
 "by": "ai_manual_blind_snippet",
@@ -704,7 +1072,55 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-delhi-2024-w-p-c-14001-2023-dlhc010428932023-1-2024-10-03": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "hc-delhi-2024-w-p-c-3296-2024-dlhc010110932024-1-2024-03-05": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"hc-delhi-2025-w-p-c-1246-2025-dlhc010039222025-1-2025-01-31": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-delhi-2025-w-p-c-3158-2023-dlhc010086172023-1-2025-09-10": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-delhi-2025-w-p-c-7164-2025-dlhc010329572025-1-2025-05-30": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-delhi-2026-w-p-c-19541-2025-dlhc011062852025-1-2026-01-07": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-jkl-2023-wp-c-2418-2022-jkhc020057192022-1-2023-07-21": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2010-lpa-1829-2010-phhc010948232010-1-2010-12-23": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2011-cwp-14708-2011-phhc010684042011-1-2011-08-11": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2024-cwp-18962-2024-phhc011027732024-1-2024-08-20": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2024-cwp-19504-2024-phhc011042632024-1-2024-08-22": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"hc-ph-2024-cwp-19691-2024-phhc011062202024-1-2024-08-22": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"hc-ph-2024-cwp-19828-2024-phhc011069282024-1-2024-08-22": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
@@ -712,7 +1128,23 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"hc-ph-2025-crwp-3122-2025-phhc010499482025-1-2025-04-07": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2025-cwp-15885-2025-phhc010759812025-1-2025-08-05": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-ph-2025-cwp-18284-2025-phhc010970642025-1-2025-07-07": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2025-cwp-20560-2025-phhc011120472025-1-2025-07-22": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2026-cwp-10145-2026-phhc010551332026-1-2026-04-06": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
@@ -740,9 +1172,29 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-2019-randhir-singh-2019insc729": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2022-cdr-amit-kumar-sharma-etc-2022insc1124": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2022-union-of-india-and-others-2022insc332": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2022-union-of-india-and-others-2022insc850": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2023-ex-sepoy-madan-prasad-2023insc656": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"sc-2026-baksish-ahmad-2026insc630": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 },
 "xorder-armed-forces-tribunal-act-removal-of-difficulties-order-2008": {
 "by": "ai_manual_blind_snippet",
@@ -786,6 +1238,18 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-delhi-2010-w-p-c-14098-2009-dlhc012024252009-1-2010-10-01": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-delhi-2011-w-p-c-1652-2011-dlhc010385722011-1-2011-10-14": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-delhi-2011-w-p-c-5878-2011-dlhc011179212011-1-2011-09-13": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "hc-delhi-2013-w-p-c-6317-2012-dlhc011609182012-1-2013-12-12": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
@@ -802,6 +1266,10 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-delhi-2025-w-p-c-5109-2024-dlhc010188332024-1-2025-11-11": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-delhi-2025-w-p-c-8609-2024-dlhc010364332024-1-2025-09-25": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
@@ -810,9 +1278,21 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"rules-aft-procedure-rules-2008": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "rules-army-rules-1954": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"sc-1969-som-datt-datta-1968insc246": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-1986-ram-chander-1986insc107": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 },
 "sc-1992-union-of-india-and-ors-1992insc270": {
 "by": "ai_manual_blind_snippet",
@@ -822,7 +1302,15 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-2007-ram-sunder-ram-2007insc748": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "sc-2008-rajiv-arora-2008insc990": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2009-union-of-india-ors-2009insc1139": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -833,6 +1321,14 @@
 "sc-2015-om-prakash-2015insc491": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
+},
+"sc-2015-supreme-court-advocates-on-rec-2015insc285": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2015-union-of-india-anr-2015insc2": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 },
 "sc-2016-union-of-india-ors-2016insc495": {
 "by": "ai_manual_blind_snippet",
@@ -848,6 +1344,18 @@
 }
 },
 "AB09": {
+"act-air-force-1950": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"act-army-1950": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"act-navy-1957": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "hc-delhi-2008-w-p-c-6614-2007-dlhc011188712007-1-2008-09-05": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
@@ -884,7 +1392,15 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"sc-1987-union-of-india-through-major-g-1987insc164": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-1992-union-of-india-and-ors-1992insc270": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-1994-smt-charanjit-kaur-1994insc21": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -928,7 +1444,27 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-2013-veer-pal-singh-2013insc404": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2015-union-of-india-anr-2015insc2": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2018-union-of-india-ors-2018insc361": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2019-ex-lac-yogesh-pathania-2019insc33": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2022-union-of-india-and-others-2022insc332": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2022-union-of-india-ors-2022insc384": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -939,6 +1475,10 @@
 },
 "AB10": {
 "act-air-force-1950": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"act-armed-forces-tribunal-2007": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -954,6 +1494,14 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-delhi-2013-w-p-c-6317-2012-dlhc011609182012-1-2013-12-12": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-delhi-2013-w-p-c-7912-2011-dlhc011583772011-1-2013-07-08": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
 "hc-delhi-2015-w-p-c-350-2010-dlhc010077432010-1-2015-09-14": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
@@ -966,6 +1514,14 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"hc-ph-2025-cwp-16667-2024-phhc010920332024-1-2025-10-16": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2025-cwp-16948-2024-phhc010922952024-1-2025-10-16": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "rules-army-rules-1954": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
@@ -977,6 +1533,10 @@
 "sc-1958-parshotam-lal-dhingra-1957insc96": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
+},
+"sc-1992-union-of-india-and-ors-1992insc270": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
 },
 "sc-1993-bhuwneshwar-singh-1993insc280": {
 "by": "ai_manual_blind_snippet",
@@ -4640,6 +5200,18 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"sc-2008-union-of-india-ors-2008insc357": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2009-secretary-ministry-of-defence-2009insc1059": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2010-om-prakash-singh-2010insc410": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "sc-2010-union-of-india-others-2010insc361": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
@@ -4656,6 +5228,14 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"sc-2013-dharamvir-singh-2013insc408": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"sc-2014-sukhvinder-singh-2014insc421": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
 "sc-2015-union-of-india-anr-2015insc114": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
@@ -4667,6 +5247,10 @@
 "sc-2019-no-1466828m-ex-cfn-narsingh-ya-2019insc1121": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
+},
+"sc-2025-bijender-singh-2025insc549": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
 }
 },
 "LT02": {
@@ -4682,6 +5266,10 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"act-navy-1957": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "hc-delhi-2025-w-p-c-12380-2024-dlhc010576382024-1-2025-07-01": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
@@ -4690,7 +5278,15 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"hc-delhi-2025-w-p-c-14574-2025-dlhc010698872025-1-2025-09-19": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
 "hc-delhi-2025-w-p-c-15047-2024-dlhc010739132024-1-2025-07-01": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"hc-delhi-2025-w-p-c-15543-2025-dlhc010775382025-1-2025-10-10": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
@@ -4742,6 +5338,10 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"hc-ph-2024-cwp-20232-2024-phhc011079792024-1-2024-08-21": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
 "hc-ph-2025-cwp-14925-2025-phhc010759722025-1-2025-05-22": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
@@ -4754,11 +5354,19 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"rules-aft-procedure-rules-2008": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "rules-army-rules-1954": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
 "sc-2007-union-of-india-and-ors-2007insc446": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2010-om-prakash-singh-2010insc410": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
@@ -4778,13 +5386,25 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"sc-2015-union-of-india-ors-2015insc402": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
 "sc-2018-ex-navy-direct-entry-artificer-2018insc461": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"sc-2019-no-1466828m-ex-cfn-narsingh-ya-2019insc1121": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
 "sc-2019-sep-satgur-singh-2019insc988": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"sc-2025-bijender-singh-2025insc549": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
 },
 "sc-2025-rajumon-t-m-2025insc644": {
 "by": "ai_manual_blind_snippet",
@@ -4824,6 +5444,10 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"hc-delhi-2013-w-p-c-6317-2012-dlhc011609182012-1-2013-12-12": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-delhi-2013-w-p-c-6563-2011-dlhc011266752011-1-2013-09-23": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
@@ -4839,6 +5463,10 @@
 "hc-jkl-2026-wp-c-810-2025-jkhc020017822025-1-2026-03-11": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
+},
+"hc-ph-2012-crwp-1665-2011-phhc010610962011-1-2012-05-24": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
 },
 "hc-ph-2013-cwp-4801-2013-phhc010923312013-1-2013-04-11": {
 "by": "ai_manual_blind_snippet",
@@ -4868,7 +5496,15 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-2003-union-of-india-and-ors-2003insc254": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "sc-2004-union-of-india-and-ors-2004insc205": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2012-chandra-kumar-chopra-2012insc231": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -4881,6 +5517,14 @@
 "grade": 0
 },
 "sc-2015-union-of-india-anr-2015insc2": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"sc-2016-union-of-india-ors-2016insc495": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2016-union-of-india-ors-2016insc918": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
 }
@@ -4926,9 +5570,17 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"hc-delhi-2024-w-p-c-11036-2023-dlhc010324692023-1-2024-02-02": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
 "hc-jkl-2025-wp-c-2457-2024-jkhc020053902024-1-2025-09-30": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
+},
+"hc-jkl-2025-wp-c-2491-2024-jkhc020054902024-1-2025-09-24": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 },
 "hc-jkl-2025-wp-c-437-2024-jkhc020009832024-1-2025-09-27": {
 "by": "ai_manual_blind_snippet",
@@ -4957,6 +5609,34 @@
 "hc-ph-2024-cwp-31639-2024-phhc011634232024-1-2024-12-10": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
+},
+"hc-ph-2025-cwp-12654-2025-phhc010707172025-1-2025-08-28": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2025-cwp-13093-2025-phhc010707682025-1-2025-08-20": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"hc-ph-2025-cwp-36758-2019-phhc011527482019-1-2025-08-06": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2026-cwp-13224-2026-phhc010714772026-1-2026-04-30": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2026-cwp-21960-2026-phhc011164962026-1-2026-07-20": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2026-cwp-24493-2026-phhc011270842026-1-2026-08-12": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2026-cwp-7955-2026-phhc010370702026-1-2026-03-17": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
 },
 "hc-ph-2026-lpa-1147-2024-phhc010485332024-1-2026-01-27": {
 "by": "ai_manual_blind_snippet",
@@ -4990,17 +5670,37 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"sc-2019-swiss-ribbons-pvt-ltd-anr-2019insc95": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2021-madras-bar-association-2021insc332": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2024-lt-col-suprita-chandel-2024insc942": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2026-union-of-india-through-its-sec-2026insc149": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
 }
 },
 "LT05": {
+"hc-delhi-2020-w-p-c-6364-2020-dlhc010247842020-1-2020-11-05": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-delhi-2024-w-p-c-10528-2020-dlhc010344762020-1-2024-04-16": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
 "hc-delhi-2025-w-p-c-16298-2024-dlhc010845182024-1-2025-10-28": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-delhi-2025-w-p-c-19485-2025-dlhc011048302025-1-2025-12-22": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
@@ -5028,6 +5728,10 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"hc-ph-2024-cwp-23961-2024-phhc011221482024-1-2024-12-10": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-ph-2024-cwp-31639-2024-phhc011634232024-1-2024-12-10": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
@@ -5035,6 +5739,34 @@
 "hc-ph-2025-cwp-14558-2025-phhc010789492025-1-2025-08-20": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
+},
+"hc-ph-2025-cwp-16116-2025-phhc010882012025-1-2025-08-20": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2025-cwp-17622-2025-phhc010976032025-1-2025-07-02": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"hc-ph-2025-cwp-18371-2025-phhc010940962025-1-2025-07-07": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"hc-ph-2025-cwp-18373-2025-phhc010940742025-1-2025-07-07": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"hc-ph-2025-cwp-19626-2025-phhc011077282025-1-2025-07-16": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2025-cwp-19674-2025-phhc011068342025-1-2025-07-16": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2025-cwp-23664-2025-phhc011028882025-1-2025-08-18": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
 },
 "hc-ph-2025-cwp-27953-2025-phhc010986212025-1-2025-11-06": {
 "by": "ai_manual_blind_snippet",
@@ -5047,6 +5779,10 @@
 "hc-ph-2026-cwp-1632-2026-phhc012131162025-1-2026-04-23": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
+},
+"hc-ph-2026-cwp-19854-2026-phhc011055252026-1-2026-07-06": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
 },
 "hc-ph-2026-cwp-23406-2026-phhc011059992026-1-2026-08-20": {
 "by": "ai_manual_blind_snippet",
@@ -5064,7 +5800,15 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"sc-2005-controller-of-defence-accounts-2005insc515": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2007-p-k-kapur-2007insc89": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2007-union-of-india-2007insc473": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -5076,17 +5820,41 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-2015-union-of-india-ors-2015insc402": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2019-ex-hav-ashok-kumar-2019insc809": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
 "sc-2019-g-h-union-of-india-ors-2019insc1359": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"sc-2025-bijender-singh-2025insc549": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "sc-2025-rajumon-t-m-2025insc644": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
+},
+"sc-2026-union-of-india-through-its-sec-2026insc149": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
 }
 },
 "LT06": {
 "act-air-force-1950": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"act-army-1950": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"act-navy-1957": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -5118,11 +5886,19 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"sc-1985-chief-of-the-army-staff-and-ot-1985insc65": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
 "sc-1996-major-radha-krishan-1996insc437": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
 "sc-1997-the-general-court-martial-and-1997insc816": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-1998-m-s-bindra-1998insc333": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -5153,6 +5929,10 @@
 "sc-2014-union-of-india-and-others-2014insc172": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"sc-2015-supreme-court-advocates-on-rec-2015insc285": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 },
 "sc-2015-union-of-india-anr-2015insc2": {
 "by": "ai_manual_blind_snippet",
@@ -5252,9 +6032,21 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-ph-2025-cwp-20288-2025-phhc011100222025-1-2025-07-29": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2025-cwp-7896-2025-phhc010411012025-1-2025-03-21": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "sc-1994-union-of-india-and-ors-1994insc583": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
+},
+"sc-1996-union-of-india-and-anr-1996insc1198": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
 },
 "sc-2003-union-of-india-ors-2003insc54": {
 "by": "ai_manual_blind_snippet",
@@ -5280,9 +6072,17 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"sc-2015-union-of-india-ors-2015insc150": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
 "sc-2015-union-of-india-ors-2015insc402": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
+},
+"sc-2019-no-1466828m-ex-cfn-narsingh-ya-2019insc1121": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
 },
 "sc-2019-union-of-india-ors-2019insc1205": {
 "by": "ai_manual_blind_snippet",
@@ -5291,9 +6091,17 @@
 "sc-2022-union-of-india-ors-2022insc731": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"sc-2025-bijender-singh-2025insc549": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 }
 },
 "LT08": {
+"hc-allahabad-2025-untitled-uphc020050072025-1-2025-01-24": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "hc-delhi-2015-w-p-c-8012-2013-dlhc011944352013-1-2015-05-07": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
@@ -5338,7 +6146,31 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-delhi-2025-w-p-c-19681-2025-dlhc011072762025-1-2025-12-24": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "hc-delhi-2025-w-p-c-7579-2024-dlhc010314222024-1-2025-11-24": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-delhi-2026-w-p-c-2643-2026-dlhc010072132026-1-2026-05-29": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2009-cwp-1249-2008-phhc010553082008-1-2009-03-17": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2009-lpa-969-2009-phhc010863102009-1-2009-10-28": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2017-cwp-23915-2015-phhc010883972015-1-2017-03-17": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2025-cwp-23664-2025-phhc011028882025-1-2025-08-18": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -5358,6 +6190,10 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"sc-1994-union-of-india-and-ors-1994insc583": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-1996-union-of-india-and-anr-1996insc1198": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
@@ -5370,9 +6206,29 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"sc-2003-union-of-india-ors-2003insc54": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2005-controller-of-defence-accounts-2005insc515": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2007-p-k-kapur-2007insc89": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"sc-2007-union-of-india-2007insc473": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2010-pushpa-vanti-2010insc778": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2011-union-of-india-ors-2011insc672": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 },
 "sc-2014-union-of-india-ors-2014insc676": {
 "by": "ai_manual_blind_snippet",
@@ -5397,6 +6253,10 @@
 "sc-2019-union-of-india-ors-2019insc1205": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"sc-2022-union-of-india-ors-2022insc731": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 }
 },
 "LT09": {
@@ -5456,9 +6316,21 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-ph-2012-cwp-13297-2012-phhc010696132012-1-2012-08-08": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-ph-2025-cwp-12146-2020-phhc010625902020-1-2025-04-28": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"hc-ph-2025-cwp-15584-2025-phhc010454982025-1-2025-05-27": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2025-cwp-18966-2025-phhc011031042025-1-2025-07-10": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 },
 "hc-ph-2025-cwp-20496-2025-phhc011100782025-1-2025-08-04": {
 "by": "ai_manual_blind_snippet",
@@ -5476,9 +6348,33 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"hc-ph-2025-cwp-9726-2025-phhc010502762025-1-2025-04-05": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2026-cwp-10913-2026-phhc010579102026-1-2026-04-10": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"hc-ph-2026-cwp-11021-2026-phhc010551682026-1-2026-04-10": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2026-cwp-19605-2026-phhc010951042026-1-2026-07-02": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"hc-ph-2026-cwp-9746-2026-phhc010522952026-1-2026-04-02": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
 "regs-the-navy-pension-regulations-1964": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"sc-1972-delhi-special-police-establish-1972insc187": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 },
 "sc-1994-smt-charanjit-kaur-1994insc21": {
 "by": "ai_manual_blind_snippet",
@@ -5488,11 +6384,27 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"sc-2005-controller-of-defence-accounts-2005insc515": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2008-union-of-india-ors-2008insc357": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-2009-secretary-ministry-of-defence-2009insc1059": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2011-union-of-india-ors-2011insc496": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2012-union-of-india-anr-2012insc179": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2013-dharamvir-singh-2013insc408": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -5512,12 +6424,28 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-2019-madan-prasad-sinha-sanatan-bab-2019insc472": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "sc-2019-union-of-india-ors-2019insc1220": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
+},
+"sc-2025-bijender-singh-2025insc549": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2025-rajumon-t-m-2025insc644": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
 }
 },
 "LT10": {
+"act-air-force-1950": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "act-army-1950": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
@@ -5554,6 +6482,14 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"sc-1990-s-n-mukherjee-1990insc257": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-1995-union-of-india-and-ors-1995insc630": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-1997-the-general-court-martial-and-1997insc816": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
@@ -5566,7 +6502,19 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"sc-2000-union-of-india-and-anr-2000insc231": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2003-union-of-india-and-ors-2003insc254": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2003-union-of-india-and-ors-2003insc274": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2007-pradeep-singh-2007insc440": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
@@ -5616,9 +6564,21 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-allahabad-2021-wria-16769-2021-uphc011698942021-1-2021-11-24": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "hc-allahabad-2022-wria-14527-2022-uphc011743952022-1-2022-12-15": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
+},
+"hc-allahabad-2022-wria-2001027-2011-uphc020435342011-1-2022-10-31": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-allahabad-2024-wria-844-2024-uphc020076732024-1-2024-02-06": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
 },
 "hc-allahabad-2024-wria-8700-2023-uphc020769352023-1-2024-01-05": {
 "by": "ai_manual_blind_snippet",
@@ -5631,6 +6591,10 @@
 "hc-allahabad-2025-wria-7341-2025-uphc020505432025-1-2025-07-09": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"hc-delhi-2012-w-p-c-7249-2012-dlhc011840322012-1-2012-11-21": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
 },
 "hc-delhi-2013-w-p-c-7208-2011-dlhc011436702011-1-2013-01-11": {
 "by": "ai_manual_blind_snippet",
@@ -5648,7 +6612,19 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-delhi-2025-w-p-c-1440-2025-dlhc010047282025-1-2025-02-13": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-jkl-2019-swp-1353-2004-jkhc020001502004-1-2019-10-31": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-jkl-2019-swp-1354-2008-jkhc010007762008-1-2019-07-18": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-jkl-2020-swp-1367-2008-jkhc020034852008-1-2020-11-19": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -5660,7 +6636,23 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"hc-ph-2010-crwp-1107-2008-phhc010512732008-1-2010-09-22": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2010-cwp-16347-2006-phhc010544342006-1-2010-04-28": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "hc-ph-2010-cwp-3953-2010-phhc010784652010-1-2010-03-08": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2010-cwp-57-2008-phhc010695632008-1-2010-04-28": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2011-cwp-10700-2000-phhc010154022000-1-2011-08-01": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -5672,11 +6664,31 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"hc-ph-2012-cwp-16984-2012-phhc010736842012-1-2012-11-05": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2013-cwp-22896-2012-phhc010802182012-1-2013-01-30": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-ph-2013-cwp-3249-2013-phhc010906152013-1-2013-02-22": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
 "hc-ph-2013-cwp-4801-2013-phhc010923312013-1-2013-04-11": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2024-incomp-6629-2024-phhc010636662024-1-2024-12-17": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2026-cwp-14853-2026-phhc010806652026-1-2026-05-13": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2026-cwp-21336-2026-phhc011143302026-1-2026-07-16": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
@@ -5770,6 +6782,10 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"hc-ph-2025-cwp-23261-2024-phhc011206712024-1-2025-12-02": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
 "hc-ph-2025-cwp-32256-2024-phhc011656702024-1-2025-11-18": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
@@ -5779,6 +6795,18 @@
 "grade": 1
 },
 "sc-2005-controller-of-defence-accounts-2005insc515": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2007-union-of-india-and-ors-2007insc446": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2009-secretary-ministry-of-defence-2009insc1059": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2012-union-of-india-anr-2012insc179": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
@@ -5806,6 +6834,10 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-2019-no-1466828m-ex-cfn-narsingh-ya-2019insc1121": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
 "sc-2022-union-of-india-ors-2022insc731": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
@@ -5824,6 +6856,14 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"act-army-1950": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-allahabad-2023-wria-10144-2023-uphc020914722023-1-2023-12-22": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "hc-allahabad-2023-wria-6256-2014-uphc020034602014-1-2023-12-13": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
@@ -5836,11 +6876,43 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"hc-allahabad-2024-wria-3341-2024-uphc020294582024-1-2024-04-30": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-allahabad-2024-wria-8700-2023-uphc020769352023-1-2024-01-05": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-allahabad-2025-wria-3174-2025-uphc020208802025-1-2025-03-24": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-allahabad-2025-wria-7341-2025-uphc020505432025-1-2025-07-09": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "hc-delhi-2021-w-p-c-5245-2020-dlhc010220102020-1-2021-05-25": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"hc-delhi-2026-w-p-c-6818-2025-dlhc010317612025-1-2026-02-09": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-jkl-2021-swp-2181-2015-jkhc010041272015-1-2021-11-01": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2010-cwp-9860-2007-phhc010671652007-1-2010-04-28": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2011-rsa-2258-2010-phhc011032102010-1-2011-01-21": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"hc-ph-2012-cwp-16175-1994-phhc010110311994-1-2012-11-27": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -5892,6 +6964,10 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"sc-2017-union-of-india-and-ors-2017insc49": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2019-union-of-india-through-its-sec-2019insc103": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
@@ -5901,6 +6977,14 @@
 "grade": 0
 },
 "sc-2021-manish-kumar-2021insc28": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2023-union-of-india-ors-2023insc1074": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2024-lt-col-suprita-chandel-2024insc942": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -5922,9 +7006,17 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"act-armed-forces-tribunal-2007": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "act-army-1950": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"act-navy-1957": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 },
 "hc-delhi-2008-w-p-c-9509-2004-dlhc010299742004-1-2008-10-22": {
 "by": "ai_manual_blind_snippet",
@@ -5954,13 +7046,29 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"sc-1972-union-of-india-1971insc320": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-1990-chief-of-army-staff-and-ors-1990insc399": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-1994-major-gen-old-capt-virender-ku-1994insc113": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-1994-union-of-india-and-ors-1994insc583": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
 "sc-1995-union-of-india-and-ors-1995insc449": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
+},
+"sc-1996-union-of-india-and-ors-1996insc425": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 },
 "sc-1997-the-general-court-martial-and-1997insc816": {
 "by": "ai_manual_blind_snippet",
@@ -5990,6 +7098,14 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"sc-2005-m-m-malhotra-2005insc473": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2007-pradeep-singh-2007insc440": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2007-union-of-india-2007insc473": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
@@ -6006,6 +7122,10 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"sc-2012-union-of-india-ors-2012insc497": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2013-union-of-india-ors-2013insc206": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
@@ -6019,6 +7139,10 @@
 "grade": 0
 },
 "sc-2015-union-of-india-ors-2015insc810": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2016-union-of-india-ors-2016insc918": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -6116,17 +7240,49 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-1968-som-datt-datta-1968insc246": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-1969-som-datt-datta-1968insc246": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-1983-lt-col-prithi-pal-singh-bedi-e-1982insc65": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "sc-1987-union-of-india-through-major-g-1987insc164": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
+},
+"sc-1988-vidya-prakash-1988insc39": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-1990-s-n-mukherjee-1990insc257": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-1992-union-of-india-and-ors-1992insc270": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
 },
 "sc-1997-union-of-india-and-others-1997insc793": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-1998-union-of-india-and-ors-1998insc109": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2004-union-of-india-and-ors-2004insc205": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
+},
+"sc-2007-ram-sunder-ram-2007insc748": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
 },
 "sc-2008-rajiv-arora-2008insc990": {
 "by": "ai_manual_blind_snippet",
@@ -6144,9 +7300,17 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"sc-2013-union-of-india-and-others-2013insc705": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "sc-2015-union-of-india-anr-2015insc2": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"sc-2016-union-of-india-ors-2016insc495": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
 },
 "sc-2023-cpl-ashish-kumar-chauhan-retd-2023insc857": {
 "by": "ai_manual_blind_snippet",
@@ -6158,9 +7322,17 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"hc-allahabad-2025-wria-4133-2025-uphc020226112025-1-2025-04-23": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-delhi-2012-w-p-c-1133-2012-dlhc010334212012-1-2012-03-20": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
+},
+"hc-delhi-2015-w-p-c-1098-2015-dlhc010526822015-1-2015-07-21": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
 },
 "hc-delhi-2020-w-p-c-181-2017-dlhc013382262016-1-2025-01-28": {
 "by": "ai_manual_blind_snippet",
@@ -6202,9 +7374,17 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-ph-2025-cwp-10741-2025-phhc010579302025-1-2025-08-18": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-ph-2025-cwp-12146-2020-phhc010625902020-1-2025-04-28": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
+},
+"hc-ph-2025-cwp-15584-2025-phhc010454982025-1-2025-05-27": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
 },
 "hc-ph-2025-cwp-21617-2025-phhc011171872025-1-2025-08-08": {
 "by": "ai_manual_blind_snippet",
@@ -6222,7 +7402,19 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"hc-ph-2025-cwp-9726-2025-phhc010502762025-1-2025-04-05": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2026-cwp-19605-2026-phhc010951042026-1-2026-07-02": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-ph-2026-cwp-26486-2026-phhc011374862026-1-2026-08-20": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2026-cwp-9746-2026-phhc010522952026-1-2026-04-02": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
@@ -6233,6 +7425,10 @@
 "sc-1994-smt-charanjit-kaur-1994insc21": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"sc-2009-secretary-ministry-of-defence-2009insc1059": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 },
 "sc-2015-union-of-india-and-ors-2015insc611": {
 "by": "ai_manual_blind_snippet",
@@ -6246,6 +7442,14 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-2019-smt-sulekha-rani-2019insc769": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2019-union-of-india-and-others-2019insc818": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2023-supriyo-supriya-chakraborty-an-2023insc920": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
@@ -6253,6 +7457,10 @@
 },
 "NL07": {
 "act-air-force-1950": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"act-armed-forces-tribunal-2007": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -6312,11 +7520,35 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"hc-jkl-2024-crm-m-643-2024-jkhc010054142024-1-2024-11-27": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "hc-ph-2015-cwp-15348-1999-phhc010216661999-1-2015-04-30": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
 "sc-1962-major-e-g-barsy-1961insc177": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-1968-som-datt-datta-1968insc246": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-1969-som-datt-datta-1968insc246": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-1972-delhi-special-police-establish-1972insc187": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-1973-delhi-special-police-establish-1972insc187": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-1987-ajmer-singh-etc-etc-1987insc142": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -6328,7 +7560,19 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"sc-2003-state-union-of-india-2003insc689": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2006-union-of-india-and-ors-2006insc18": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2010-arun-raj-2010insc320": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2014-b-d-khunte-2014insc753": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
@@ -6360,7 +7604,15 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"sc-2023-no-15138812y-l-nk-gursewak-sin-2023insc648": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2024-society-for-enlightenment-and-2024insc790": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2026-rishi-malhotra-anr-2026insc873": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
 }
@@ -6414,6 +7666,14 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"sc-2010-pushpa-vanti-2010insc778": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-2016-extra-judicial-execution-victi-2016insc527": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-2020-the-secretary-ministry-of-defe-2020insc198": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
@@ -6435,6 +7695,10 @@
 "grade": 2
 },
 "sc-2024-lt-col-suprita-chandel-2024insc942": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"sc-2025-arshnoor-kaur-anr-2025insc954": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
 }
@@ -6488,9 +7752,21 @@
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"hc-jkl-2026-wp-c-1766-2025-jkhc020038002025-1-2026-03-03": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2008-cwp-20139-2008-phhc010637422008-1-2008-11-28": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "hc-ph-2008-cwp-5531-2007-phhc010623702007-1-2008-03-27": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
+},
+"hc-ph-2008-cwp-7176-2008-phhc010712012008-1-2008-05-01": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 },
 "hc-ph-2009-cwp-15227-2007-phhc010535392007-1-2009-05-11": {
 "by": "ai_manual_blind_snippet",
@@ -6501,6 +7777,10 @@
 "grade": 2
 },
 "hc-ph-2010-lpa-309-2010-phhc010950182010-1-2010-07-27": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"hc-ph-2025-cwp-23261-2024-phhc011206712024-1-2025-12-02": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
@@ -6517,6 +7797,10 @@
 "grade": 0
 },
 "sc-2005-controller-of-defence-accounts-2005insc515": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2007-union-of-india-and-ors-2007insc446": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
@@ -6540,13 +7824,45 @@
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
+"sc-2013-dharamvir-singh-2013insc408": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
 "sc-2014-sukhvinder-singh-2014insc421": {
 "by": "ai_manual_blind_snippet",
 "grade": 2
 },
+"sc-2015-union-of-india-and-ors-2015insc611": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2015-union-of-india-ors-2015insc402": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
 "sc-2018-ex-lt-col-r-k-rai-2018insc163": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
+},
+"sc-2019-ex-sepoy-washerman-ram-khilawa-2019insc987": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"sc-2019-smt-sulekha-rani-2019insc769": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"sc-2019-union-of-india-ors-2019insc1220": {
+"by": "ai_manual_blind_snippet",
+"grade": 2
+},
+"sc-2022-union-of-india-ors-2022insc731": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2025-bijender-singh-2025insc549": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
 },
 "sc-2025-rajumon-t-m-2025insc644": {
 "by": "ai_manual_blind_snippet",
@@ -6554,6 +7870,14 @@
 }
 },
 "NL10": {
+"act-air-force-1950": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"act-army-1950": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "hc-delhi-2012-w-p-c-5529-2012-dlhc011430052012-1-2012-12-07": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
@@ -6586,6 +7910,14 @@
 "by": "ai_manual_blind_snippet",
 "grade": 0
 },
+"sc-1987-ajmer-singh-etc-etc-1987insc142": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
+"sc-1988-vidya-prakash-1988insc39": {
+"by": "ai_manual_blind_snippet",
+"grade": 0
+},
 "sc-1997-the-general-court-martial-and-1997insc816": {
 "by": "ai_manual_blind_snippet",
 "grade": 0
@@ -6603,6 +7935,10 @@
 "grade": 1
 },
 "sc-2008-ex-constable-ramvir-singh-2008insc1475": {
+"by": "ai_manual_blind_snippet",
+"grade": 1
+},
+"sc-2011-shish-ram-2011insc817": {
 "by": "ai_manual_blind_snippet",
 "grade": 1
 },
