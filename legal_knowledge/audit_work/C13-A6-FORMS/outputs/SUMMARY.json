@@ -1,0 +1,170 @@
+{
+ "acquisition_requests": 16,
+ "c12_field_dispositions": {
+  "CARRIED_IN_V2": 227,
+  "SUPERSEDED_BY_FULL_OFFICIAL_TRANSCRIPTION": 20,
+  "SUPERSEDED_BY_OFFICIAL_ROW": 294
+ },
+ "c12_inputs": {
+  "FORM_DISCOVERY_REGISTER.csv": "581a7c7f363ef9c9fcc34f13a59575c1332b36002086174871f5de2ab48cf2f5",
+  "FORM_FIELDS.csv": "2ce17181d629528e63af37f2ea175e26f805adb6260406a34325104b046ac03d",
+  "SOURCE_COVERAGE.csv": "fa50c5fc256c366cfa3b238be2527123d3cf5f3acacb5d756ed16dde1c39df28",
+  "SUMMARY.json": "30d0f018a9cbfcfd2559ec28f83811708fe57ad724d088266279dc36a0911920"
+ },
+ "degraded_glyph_normalisations": [
+  {
+   "family": "FF-AR54-APPI-F1",
+   "note": "Instruction 3 'attacl cd to tl e sl cct roll' typed as 'attached to the sheet roll'",
+   "page": 65,
+   "source": "AR54-GAZ"
+  },
+  {
+   "family": "FF-AR54-APPIV-P2-FE",
+   "note": "'warrant ol' typed 'warrant of'; 'transportat'on' typed 'transportation'",
+   "page": 81,
+   "source": "AR54-GAZ"
+  },
+  {
+   "family": "FF-AR54-APPIV-P2-FF",
+   "note": "'r?quire an.l' typed 'require and'; 'y?u' typed 'you'",
+   "page": 82,
+   "source": "AR54-GAZ"
+  }
+ ],
+ "distinct_pages_read": 54,
+ "distinct_pages_transcribed": 46,
+ "illegible_notes": 17,
+ "independent_review": {
+  "findings_addressed": "F01 (P2), F02, F03, F04, F05 (documented), F06, F08, F09 (noted)",
+  "ref": "reviews/review_c13_a6_1b05490f.md",
+  "row_accuracy_text_only": "99.42% (95% CI 98.53-99.78) over 693/955 rows",
+  "verdict": "ACCEPT_WITH_FINDINGS"
+ },
+ "method_limits": [
+  "Transcriptions are AI visual readings of page images; an independent reviewer must confirm them before any status promotion.",
+  "Long printed condition paragraphs of Appendix I forms are recorded as incipits (INCIPIT_ONLY) with every blank itemised; full wording remains on the page image.",
+  "R04 comparison uses normalised whole-phrase containment and a best-window token ratio; it locates differences, it does not judge their legal effect.",
+  "bbox values are approximate fractions read by eye.",
+  "Navy Regulations Part II Appendix I forms are registered from the list page only; their fields were not transcribed this cycle."
+ ],
+ "official_copies": {
+  "AFA50-C7": "ef50375ea0550ddc1e6414c45bd9403d3842aa395a297e71e2e627403632ebd0",
+  "AFTPR08-C7": "590cf7cd393564eacab37566d605357662429f900ea58a96f0ce0e5bb0e0e317",
+  "AR-AMD-1965": "682afce5e2f1f3ce8381e74664fb2fb8d98a4571c9fb8a92160ff11193a8c046",
+  "AR-AMD-1993": "e9bf2114ab633716ea954db6e100be858e45949384f9fc0667364308bff46912",
+  "AR54-GAZ": "c5ef95a9d553685aa655f041b71d8360d6272e2775a19a3d6e7273c6cbd0aca6",
+  "AR54-IC": "48f52219121bf74d070bc832e4573f2f512b239e0a0441ba96b1daca2983a727",
+  "DPPR53-C7": "d969593bbb689144e39a406cab3d6fa806216438871ddf6321ba084e24c9b203",
+  "NA57-C7": "db6d2b3ef1e60d95f4d8127730430a01a3aab39637d88a39901aa20142399083",
+  "NR65-P2-C7": "884a893c725d4025dc95009dcd5aedf158d6726bf499e5a0690d0cdbc7b4064d",
+  "NR65-P4-C7": "e4148ee0757de0adfdeb5acf68e7bd8c752f0d21d11c329f7484e108026c9f58"
+ },
+ "official_rows_incipit_only": 31,
+ "official_rows_with_illegible_span": 9,
+ "official_transcription_rows": 956,
+ "oracle": {
+  "by_category": {
+   "abstain": 6,
+   "borderline": 26,
+   "correct": 28,
+   "defective": 26
+  },
+  "by_expected_result": {
+   "FAIL_SOURCE_SUPPORTED": 23,
+   "NOT_APPLICABLE": 1,
+   "NOT_CHECKED": 6,
+   "NOT_VERIFIABLE_FROM_DOCUMENT": 2,
+   "PASS_FOR_TESTED_REQUIREMENT": 31,
+   "REVIEW_REQUIRED": 23
+  },
+  "cases": 86,
+  "families": 40
+ },
+ "page_image_readings": 74,
+ "page_image_readings_for_transcription": 66,
+ "python": "3.13.18",
+ "r04": {
+  "c12_mml_field_rows": 227,
+  "families": 22,
+  "mml_field_rows_confirmed_in_official": 198,
+  "mml_field_rows_not_in_official": 29,
+  "official_amending_text_only": 1,
+  "official_not_held": 0,
+  "official_rows": 444,
+  "official_rows_not_in_mml": 91,
+  "official_rows_variant_vs_mml": 47,
+  "official_rows_with_illegible_span": 9,
+  "official_transcribed_full": 21
+ },
+ "register": {
+  "by_service": {
+   "ARMY": 59,
+   "NAVY": 39,
+   "TRI_SERVICE_OR_ARMY_AIR_FORCE": 8
+  },
+  "families_total": 106,
+  "fidelity": {
+   "DISCOVERED_FROM_LIST_PAGE_IMAGE; FIELDS_NOT_TRANSCRIBED_THIS_CYCLE": 34,
+   "DISCOVERED_TEXT_LAYER_ONLY_FIELDS_NOT_TRANSCRIBED": 1,
+   "MML_ONLY_UNVERIFIED (official copy not held)": 32,
+   "OFFICIAL_AMENDING_TEXT_TRANSCRIBED; REST_MML_ONLY_UNVERIFIED": 1,
+   "TRANSCRIBED_FROM_OFFICIAL_PAGE_IMAGE_PENDING_INDEPENDENT_REVIEW": 38
+  },
+  "legal_approval": {
+   "NOT_APPROVED": 106
+  },
+  "new_in_c13": 39,
+  "statutory_prescribed_candidates": 42
+ },
+ "restricted_material_excluded": [
+  "RM-001 (config/restricted_material.json on claude/c13-gov; guard in tools/a6_common.py)"
+ ],
+ "status": "RESEARCH_ONLY; every row DISCOVERED_FROM_SOURCE_NOT_LEGALLY_APPROVED; legal_approval_state NOT_APPROVED",
+ "statutory": {
+  "c12_field_rows_not_in_official": 14,
+  "families": 39,
+  "mml_or_c12_field_rows_confirmed": 277,
+  "official_not_held": 8,
+  "official_rows": 888,
+  "official_rows_not_in_mml": 86,
+  "official_rows_variant_vs_mml": 53,
+  "official_rows_with_illegible_span": 9,
+  "official_transcribed": 31
+ },
+ "tool": "c13-a6-forms/1.1.0",
+ "transcription_conventions": [
+  "Blanks: every dotted or open blank that stands alone or ends a line is a separate 'blank' row; blanks embedded inside a printed sentence (e.g. 'I ...... do solemnly declare', 'The Superintendent ..... of') are NOT itemised and the sentence is recorded as one row (applied as found by review F05; not retro-itemised).",
+  "Misprints: kept as printed (e.g. 'regmient', 'Prision', 'togethe', 'PRAT III', 'whcih', 'Reseve', 'Service or years').",
+  "Degraded glyphs: where the letter shapes are broken but the word is unambiguous from the remaining glyphs on the same image, the word is typed normally and listed in DEGRADED_GLYPH_NORMALISATIONS; where it is not unambiguous, it is written [illegible]."
+ ],
+ "version_evidence": [
+  {
+   "effect_on_fields": "wording of two INCIPIT_ONLY condition paragraphs of Form No. I; no field added or removed",
+   "families": [
+    "FF-AR54-APPI-F1"
+   ],
+   "pages": "2-3",
+   "source": "AR-AMD-1965",
+   "text": "S.R.O. 116 (New Delhi, 27th March 1965), Army (1st Amendment) Rules, 1965, r.2(b): in Appendix I, Form No. I—COMBATANTS, (i) under 'Enrolment for Army Service and Reserve Service', last paragraph, the words from 'by the competent authority, that is to say, if you are of the rank of havildar ...' to '... in Army Rule 13 (or higher authority)' are substituted by 'by the Commanding Officer as defined in Army Rule 13, but if you are of the rank of havildar (or equivalent rank) and the Commanding Officer is below the rank of Lieutenant Colonel, then, by the Officer Commanding the Brigade, or higher authority'; (ii) a corresponding substitution under 'Enrolment for Army Service only, transfer to the Reserve where such exists being voluntary'. File No. 95678/PSI; S. DEVANATH, Dy. Secy. Gazette Pt II-Sec 4 No.15, 10-04-1965, printed pp.96-97."
+  },
+  {
+   "effect_on_fields": "see the AR-AMD-1993 transcription entries",
+   "families": [
+    "FF-AR54-APPIII-P1D-CHAR",
+    "FF-AR54-APPIII-P3C",
+    "FF-AR54-APPIV-P2-FB",
+    "FF-AR54-APPIV-P2-FC",
+    "FF-AR54-APPV-FI",
+    "FF-AR54-APPV-FH",
+    "FF-AR54-APPV-FJ",
+    "FF-AR54-APPV-FK",
+    "FF-AR54-APPV-FL",
+    "FF-AR54-APPV-F1A",
+    "FF-AR54-APPV-F1B"
+   ],
+   "pages": "19-21",
+   "source": "AR-AMD-1993",
+   "text": "S.R.O. 17(E), Gazette Extraordinary 06-12-1993, items 39-41: IAFD-905 para 9 substituted; summons (c) IAFD-919C added; Forms B and C custody set-off para and explanations (ff)/(dd) inserted; Appendix V heading and Form I figure '170' -> '170A'; Forms 1-A and I-B added. p.21 Note: principal rules S.R.O. 484 of 27-11-1954, amended by 20 listed S.R.O.s (E.7 of 17-6-1960 ... 235 of 01-10-1991). Authenticated G. S. N. MURTHY, Dy. Secy. (AG), File No. 4(2)|93-D(AG)."
+  }
+ ]
+}
