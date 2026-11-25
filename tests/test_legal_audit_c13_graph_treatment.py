@@ -135,14 +135,32 @@ class Build(unittest.TestCase):
         self.assertEqual(s["dev_eval_in_sample"]["excluded_rows_in_a0_holdout"], 0)
         self.assertIn("IN-SAMPLE", s["dev_eval_in_sample"]["note"])
 
-    @unittest.skipIf(os.environ.get("C13_SKIP_SLOW"), "slow --check skipped")
+    @unittest.skipIf(os.environ.get("C13_SKIP_SLOW"), "slow --check skipped (C13_SKIP_SLOW set)")
     def test_tools_reproduce(self):
+        """Every A5 --check, run through run_check_c13.py (deterministic register provenance; review A5-01b).
+        Each tool is a subTest, so one failure does not hide the others. scnum without PyMuPDF runs its artefact check
+        and must say CHECK PARTIAL; every other tool must say CHECK OK."""
+        if not Path("/home/user/c7").is_dir():
+            self.skipTest("object store /home/user/c7 (raw-data ad77758d) absent: the --check tools read git objects from it")
         py = sys.executable
-        for tool in ("scnum_reconfirm_c13.py", "identity_c13.py", "graph_c13.py", "review_recheck_c13.py",
-                     "contract_v1_export_c13.py", "package_c13.py"):
-            r = subprocess.run([py, "-I", "-B", str(PKG / "tools" / tool), "--check"], capture_output=True, text=True)
-            self.assertEqual(r.returncode, 0, tool + r.stdout + r.stderr)
+        tools = ["scnum_reconfirm_c13.py", "identity_c13.py", "treatment_c13.py", "graph_c13.py", "review_recheck_c13.py",
+                 "contract_v1_export_c13.py", "predict_hrel_c13.py", "hf_overlay_c13.py", "package_c13.py"]
+        for tool in tools:
+            with self.subTest(tool=tool):
+                r = subprocess.run([py, "-I", "-B", str(PKG / "tools" / "run_check_c13.py"), tool, "--check"],
+                                   capture_output=True, text=True)
+                self.assertEqual(r.returncode, 0, tool + r.stdout[-800:] + r.stderr[-800:])
+                ok = "CHECK OK" in r.stdout or (tool == "scnum_reconfirm_c13.py" and "CHECK PARTIAL (PyMuPDF absent)" in r.stdout)
+                self.assertTrue(ok, tool + ": " + r.stdout[-400:])
 
+    def test_frozen_tool_hashes_unchanged(self):
+        import hashlib
+        frozen = json.loads((PKG / "freeze" / "FREEZE_C13_A5.json").read_text())["tool_sha256"]
+        for rel in ("tools/treatment_c13.py", "tools/common_c13.py", "tools/predict_hrel_c13.py"):
+            self.assertEqual(hashlib.sha256((PKG / rel).read_bytes()).hexdigest(), frozen[rel], rel)
+        pred = PKG / "freeze" / "H-REL-C13_PREDICTIONS.csv"
+        self.assertEqual(hashlib.sha256(pred.read_bytes()).hexdigest(),
+                         json.loads((PKG / "freeze" / "FREEZE_C13_A5.json").read_text())["predictions"]["sha256"])
 
 if __name__ == "__main__":
     unittest.main()

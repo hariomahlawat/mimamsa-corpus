@@ -1,5 +1,6 @@
 """C13-A5 review F04: the graph export conforms to Track B contract v1 and passes B's own validator."""
 import gzip
+import importlib.util
 import json
 import subprocess
 import sys
@@ -50,6 +51,8 @@ class ContractV1(unittest.TestCase):
             if "LOW_RELIABILITY_CANDIDATE" in e["restrictions"]:
                 self.assertNotIn(e["edge_id"], ids)
 
+    @unittest.skipUnless(importlib.util.find_spec("jsonschema") is not None,
+                         "jsonschema not installed: Track B's validator (app/contract/requirements.txt) cannot run here")
     def test_track_b_validator_accepts_every_record(self):
         commit = self.man["contract_commit"]
         try:
@@ -58,7 +61,11 @@ class ContractV1(unittest.TestCase):
             self.skipTest("Track B contract commit %s not available in this clone" % commit)
         reg = ROOT / "config" / "restricted_material.json"
         with tempfile.TemporaryDirectory() as d:
-            tarfile.open(fileobj=BytesIO(tar)).extractall(d, filter="data")
+            tf = tarfile.open(fileobj=BytesIO(tar))
+            try:
+                tf.extractall(d, filter="data")
+            except TypeError:   # Python without extraction filters
+                tf.extractall(d)
             if reg.exists():
                 regp = reg
             else:
@@ -69,6 +76,8 @@ class ContractV1(unittest.TestCase):
             data.write_bytes(gzip.decompress((OUT / "candidates_graph_edges.jsonl.gz").read_bytes()))
             r = subprocess.run([sys.executable, "-B", "-m", "mimamsa_contract", "--register", str(regp), "--json",
                                 "record", "candidate", str(data)], cwd=Path(d) / "app" / "contract", capture_output=True, text=True)
+            if not r.stdout.strip():
+                self.fail("validator produced no report (exit %d): %s" % (r.returncode, r.stderr[-800:]))
             rep = json.loads(r.stdout)
             self.assertTrue(rep["ok"], [i for i in rep["issues"] if i.get("severity") != "warning"][:3])
             self.assertEqual(rep["checked_records"], len(self.recs))

@@ -27,6 +27,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common_c13 as C  # noqa: E402
+import provenance_pin_c13  # noqa: E402
+
+provenance_pin_c13.apply()   # deterministic register provenance (post-freeze fix, review A5-01b)
 
 OVERLAY_C12 = C.AUDIT / "C12-CONSOLIDATION" / "metadata" / "SC_CASE_NUMBER_OVERLAY_C12.jsonl"
 OVERLAY_C12_SHA = "fd849f20210d323b44ae299a1c3b0a064e30e8b294b6bdae2383c20f3f162e89"  # C12 staged overlay, pinned
@@ -192,12 +195,73 @@ def check_record(rec, pdf_bytes, fitz):
                 excerpt=excerpt, npages=npages)
 
 
+def artifact_check(repo):
+    """--check without PyMuPDF (post-freeze integration fix, review A5-01a). States what it skips; never claims a full
+    reproduction. Verifies the committed artefacts against each other, the pinned C12 input, the HF staged manifest and,
+    when the object store is present, the PDF bytes' sha256."""
+    skipped = ["PDF text-layer re-extraction (PyMuPDF absent)", "text-layer matching of staged numbers"]
+    problems = []
+    staged_raw = OVERLAY_C12.read_bytes()
+    if C.sha256_bytes(staged_raw) != OVERLAY_C12_SHA:
+        problems.append("C12 staged overlay sha256 changed")
+    staged = {json.loads(l)["doc_id"]: json.loads(l) for l in staged_raw.decode("utf-8").splitlines() if l.strip()}
+    ov_path = OUT / "SC_CASE_NUMBER_OVERLAY_C13.jsonl"
+    overlay = [json.loads(l) for l in ov_path.read_text(encoding="utf-8").splitlines() if l.strip()]
+    rec = C.read_csv(OUT / "SCNUM_RECONFIRMATION_C13.csv")
+    summ = json.loads((OUT / "SCNUM_SUMMARY_C13.json").read_text(encoding="utf-8"))
+    imgs = {r["doc_id"] for r in C.read_csv(OUT / "PAGE_IMAGE_CHECKS_C13.csv")}
+    if len(overlay) != 99 or len(rec) != 99 or summ.get("overlay_records") != len(overlay):
+        problems.append("record counts differ (overlay %d, reconfirmation %d)" % (len(overlay), len(rec)))
+    for o in overlay:
+        st = staged.get(o["doc_id"])
+        if st is None or o["overlay_value"] != st["proposed_value"] or o["source_copy_sha256"] != st["sha256"]:
+            problems.append("overlay row differs from the C12 staged value: %s" % o["doc_id"])
+    for r in rec:
+        if r["verdict"] != "RECONFIRMED" or r["sha256_verified"] != "TRUE":
+            problems.append("row not reconfirmed: %s" % r["doc_id"])
+        if (r["not_found_in_text_layer"] or r["type_label_not_found"]) and r["doc_id"] not in imgs:
+            problems.append("text-layer gap without page-image reading: %s" % r["doc_id"])
+    man = {m["hf_path"]: m["sha256"] for m in C.read_csv(C.PKG / "hf" / "STAGED_MANIFEST.csv")}
+    if man.get("data/meta_overlays/c13_2026-11-25_sc_case_numbers.jsonl") != C.sha256_file(ov_path):
+        problems.append("overlay differs from the HF staged manifest")
+    ins = summ.get("input_sha256", {})
+    if ins.get("page_image_checks") != C.sha256_file(OUT / "PAGE_IMAGE_CHECKS_C13.csv"):
+        problems.append("page-image checks file changed since the summary")
+    if summ.get("restricted_register", {}).get("sha256") != C.Restricted().provenance["sha256"]:
+        problems.append("restricted register changed since the summary")
+    pdfs = "not checked (object store %s absent)" % repo
+    if Path(repo).is_dir():
+        tree = C.ls_tree(repo, C.TEXT_COMMIT, "data/raw")
+        by_sha = {Path(p).stem: p for p in tree}
+        specs = {r["doc_id"]: "%s:%s" % (C.TEXT_COMMIT, by_sha.get(r["sha256"], "missing")) for r in rec}
+        blobs = C.cat_blobs(repo, specs.values())
+        bad = [d for d, sp in specs.items() if blobs.get(sp) is None
+               or C.sha256_bytes(blobs[sp]) != next(r["sha256"] for r in rec if r["doc_id"] == d)]
+        pdfs = "%d of %d PDF byte hashes equal the staged sha256" % (len(rec) - len(bad), len(rec))
+        if bad:
+            problems.append("PDF bytes differ: %s" % bad[:3])
+    else:
+        skipped.append("PDF byte re-hash (object store absent)")
+    if problems:
+        print("CHECK FAILED (artefact check, PyMuPDF absent): " + "; ".join(problems[:5]))
+        return 1
+    print("CHECK PARTIAL (PyMuPDF absent): skipped %s. Verified: 99 overlay rows equal the pinned C12 staged values; "
+          "99 reconfirmation rows RECONFIRMED, every text-layer gap has a page-image reading; overlay sha256 equals the HF "
+          "staged manifest; %s." % ("; ".join(skipped), pdfs))
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--repo", default=C.DEFAULT_REPO)
     ap.add_argument("--check", action="store_true")
     a = ap.parse_args()
-    import fitz  # PyMuPDF
+    try:
+        import fitz  # PyMuPDF (AGPL); needed only to re-extract the PDF text layer
+    except ImportError:
+        if a.check:
+            return artifact_check(a.repo)
+        raise SystemExit("PyMuPDF (fitz) is required to rebuild the reconfirmation; --check without it verifies committed artefacts only")
 
     restricted = C.Restricted()
     staged_raw = OVERLAY_C12.read_bytes()

@@ -1,6 +1,22 @@
 # C13-A5: judicial treatment and the legal knowledge graph (candidate layer)
 
-**Status.** Candidate data and AI documentary checks only. Nothing here is legally validated. No evidence class, authentication state or AUTH-LEDGER entry was changed (the ledger stays at version 0). The treatment extractor is **not frozen**: it waits for the coordinator to confirm that A0 has been accepted.
+**Status.** Candidate data and AI documentary checks only. Nothing here is legally validated. No evidence class, authentication state or AUTH-LEDGER entry was changed (the ledger stays at version 0). **The treatment extractor is FROZEN** (GA3): `treatment-c13/0.9.0-dev` at commit **`e15af208`**, under PROTOCOL_C13 v1.1. The freeze record is `freeze/FREEZE_RECORD_C13_A5.md`. Later commits change only post-freeze tooling, tests and documentation. They do not change the classifier, its rules or the frozen predictions; `test_frozen_tool_hashes_unchanged` guards this.
+
+**Blind GA4 result (H-REL-C13; descriptive only, no owner target).** Source: `RESULTS_C13.md` §1.4 and §4.3, branch `claude/c13-eval`, commit `20a4e55d`.
+
+| Measure | Result |
+| --- | --- |
+| relation_type precision | **0.340 [0.161, 0.560]** weighted; 58/176 unweighted |
+| target precision | 0.620 [0.467, 0.758] |
+| Coverage | weighted 0.26; unweighted 0.50 |
+| `follows` recall | **0.032** (5/154) |
+| `distinguishes` identified | 0/53 |
+| Dominant error | units the coders labelled `follows` (69) or `distinguishes` (31) predicted as `cites` |
+| Without PRIMARY and the 4 author-exposed judgments | 0.341 |
+
+**What the result means.** The frozen extractor rarely captures treatment.
+- Every FOLLOWS and OVERRULES edge, in the native graph and in the contract-v1 export, stays an **unverified candidate**.
+- The absence of a treatment edge says nothing about how the cited decision was treated.
 
 **Review.** An independent review of `f915ac11` returned ACCEPT WITH CONDITIONS (`reviews/`, copied unchanged). This revision addresses its P2 findings F01-F04 and its P3 findings F05, F06, F08 and F09. F07 is addressed in wording (`scnum/ERRATA_C13.md`).
 
@@ -23,17 +39,23 @@ Branch `claude/c13-a5-graph`. Inputs are pinned: text and metadata at raw-data c
 
 ```
 PY=scratchpad/venv/bin/python        # Python 3.13 with PyMuPDF and jsonschema; tools also need git
-$PY -I -B tools/scnum_reconfirm_c13.py --check      # needs PyMuPDF (MuPDF 1.28.6) and /home/user/c7
+$PY -I -B tools/scnum_reconfirm_c13.py --check      # full re-extraction needs PyMuPDF (AGPL; MuPDF 1.28.6); without it: CHECK PARTIAL artefact check (see below)
 $PY -I -B tools/identity_c13.py --check
-$PY -I -B tools/treatment_c13.py --check            # about 4 minutes
+$PY -I -B tools/run_check_c13.py treatment_c13.py --check         # frozen tool: run through the provenance pin; about 4 minutes
+$PY -I -B tools/run_check_c13.py predict_hrel_c13.py --check      # frozen predictions reproduce
 $PY -I -B tools/treatment_c13.py --dev-only         # in-sample score only; writes nothing
 $PY -I -B tools/graph_c13.py --check                # validates every node and edge against the schemas
 $PY -I -B tools/review_recheck_c13.py --check
 $PY -I -B tools/contract_v1_export_c13.py --check   # pins Track B contract commit 5f4b8071
 $PY -I -B tools/hf_overlay_c13.py --check [--online]
 $PY -I -B tools/package_c13.py --check
-$PY -B -m pytest -q tests/test_legal_audit_c13_graph_*.py   # C13_SKIP_SLOW=1 skips the --check subprocess test
+$PY -B -m unittest discover -s tests -p "test_legal_audit_c13_graph_*.py"   # C13_SKIP_SLOW=1 skips the --check subprocess test
 ```
+
+**Integration notes (post-freeze; pre-integration review A5-01/A5-02).**
+- **Register provenance.** `provenance_pin_c13.py` makes the restricted-register provenance label deterministic. When the register bytes hash to the pinned `fc7ea07e…`, the label is always `git:72fe7a75:config/restricted_material.json`, whether the file was read from the worktree or from git. Any other bytes keep their real label, so every `--check` fails loudly. The non-frozen tools apply the pin themselves. The two frozen tools (`treatment_c13.py`, `predict_hrel_c13.py`) are run through `run_check_c13.py`, which applies the same pin without editing them.
+- **scnum without PyMuPDF.** `scnum_reconfirm_c13.py --check` prints **CHECK PARTIAL (PyMuPDF absent)**. It skips the PDF text-layer re-extraction and the text-layer matching. It still verifies the 99 overlay rows against the pinned C12 input, the reconfirmation verdicts and page-image coverage, the overlay hash against the HF staged manifest, and (when `/home/user/c7` exists) the PDF byte hashes.
+- **Test skips.** Tests that need `/home/user/c7` or jsonschema skip with an explicit reason when those are absent.
 
 Order of a full rebuild: scnum, identity, treatment, graph, review_recheck, then commit the tools (the contract export records each extractor's artefact commit), then contract_v1_export and package. The `.gz` outputs are gzip with mtime 0. `--check` compares their decompressed content. Standard library only, except PyMuPDF (scnum) and jsonschema (validation, optional in the build, used by the tests).
 
@@ -245,12 +267,12 @@ None has a resolved target node. Raw targets carry `binding = RAW_TARGET_ONLY_BI
 | Figure | Basis | Result |
 | --- | --- | --- |
 | **Independent AI review of the f915ac11 version** (`reviews/`, seeded stratified sample of 54, not human-checked) | fully correct: type, direction, own voice and target | FOLLOWS 12/14, CONSIDERS 9/12, DISTINGUISHES 2/6, APPLIES 1/4, EXPLAINS 0/4, DOUBTS 0/1, OVERRULES 9/9, DISAPPROVES 3/4. All: 36/54 |
-| Development / in-sample, current version (C11 reviewed rows; rules were tuned on them) | typed-treatment agreement | 54/55 (98.2%); recall on supported rows 54/66 (81.8%); 71 correct rejections; 162 labels, 24 excluded as withdrawn before C11 rev. 1.3 |
+| Development / in-sample, current version (C11 reviewed rows; rules were tuned on them). **SUPERSEDED: development evidence only.** The blind GA4 figure is relation_type precision 0.340 and `follows` recall 0.032 | typed-treatment agreement | 54/55 (98.2%); recall on supported rows 54/66 (81.8%); 71 correct rejections; 162 labels, 24 excluded as withdrawn before C11 rev. 1.3 |
 | Re-check of the reviewer's 54 edges against the current version (`treatment/REVIEW_SAMPLE_RECHECK_C13.csv`); **not independent**, because the fixes were written after reading these verdicts | per edge | 34 kept and correct; 14 reviewer-found errors withdrawn; 1 target corrected (T51); 3 EXPLAINS retyped to CONSIDERS (the reviewer's suggested type); 2 correct edges lost (T16, T31) |
 
 **What remains.**
 - DISTINGUISHES, APPLIES, EXPLAINS and DOUBTS are marked `LOW_RELIABILITY_CANDIDATE`. After the revision, EXPLAINS and DOUBTS have no edges.
-- Independent precision and recall per type need A0's H-REL-C13 evaluation.
+- The independent H-REL-C13 evaluation (GA4) is complete; see the blind result at the top of this README.
   - Only the identifier columns of `SAMPLE.csv` (rep_doc_id, rep_sha256, page) at `5e07e010` are read, to flag passages on those 160 pages (`in_a0_holdout_page`) and to keep them out of development scoring.
   - No H-REL-C13 passage was read.
   - No development label falls on a holdout page.
@@ -303,7 +325,7 @@ Records: `hf/HF_COMMIT.csv`, `hf/VERIFICATION.csv`, `hf/STAGED_MANIFEST.csv`.
 
 ## Limits and what needs independent review
 
-- **No treatment figure is independent of the current extractor.** The figures above are development/in-sample figures or describe the earlier version. The extractor is not frozen; it waits for A0 acceptance and the GA4 evaluation.
+- **The only independent figures for the frozen extractor are the blind GA4 results at the top of this README** (descriptive). The development/in-sample figures are superseded.
 - **Overruling.** Every OVERRULES, DISAPPROVES and DOUBTS candidate needs a human legal adviser. Raw-text targets need binding.
 - **Instrument identity.** Instruments are not yet tied to source copies. ProvisionVersion is an interface only, pending A4.
 - **Judgment identity** relies on C10 rendition groups and is PROVISIONAL.

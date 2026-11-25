@@ -37,6 +37,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common_c13 as C  # noqa: E402
+import provenance_pin_c13  # noqa: E402
+
+provenance_pin_c13.apply()   # deterministic register provenance (post-freeze fix, review A5-01b)
 
 CONTRACT_BRANCH = "claude/c13-b-app"
 CONTRACT_COMMIT = "5f4b8071"   # claude/c13-b-app head at export time (R2 + confirmation; candidate schema as R2)

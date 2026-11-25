@@ -23,6 +23,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common_c13 as C  # noqa: E402
+import provenance_pin_c13  # noqa: E402
+
+provenance_pin_c13.apply()   # deterministic register provenance (post-freeze fix, review A5-01b)
 
 CV = C.AUDIT / "C12-CONSOLIDATION" / "copy_verification_c12" / "COPY_VERIFICATION_MANIFEST.csv"
 OUT = C.PKG / "identity"
