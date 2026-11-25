@@ -5,7 +5,8 @@ Inputs (read-only):
   * corpus commit ad77758d: data/manifest.csv (type == judgment), data/meta/<doc_id>.json, data/text/<doc_id>.txt;
   * the 22 C12 judicial additions (18 ingested + 4 held-original derived records), read from a local copy of the
     pinned HF commits and verified against judicial_recovery_c12/STAGED_MANIFEST.csv sha256 before use.
-Output: outputs/frame/TEXT_FEATURES.csv (one row per record). The features are signals for stratification and text
+Output: outputs/frame/TEXT_FEATURES.csv (one row per record, with the metadata fields stage 2 needs, so stage 2
+runs from committed files only). The features are signals for stratification and text
 quality; they are not legal findings. The rules are fixed here and pre-registered in PROTOCOL_C13.md.
 
   python -I -B c13_features.py [--check]
@@ -67,7 +68,14 @@ def signals(text):
 
 
 def feature_row(doc_id, population, meta_bytes, text_bytes, text_source):
+    meta = json.loads(meta_bytes) if meta_bytes else {}
     row = dict(doc_id=doc_id, population=population, meta_sha256=sha256_bytes(meta_bytes) if meta_bytes else "",
+               meta_sha256_file=meta.get("sha256") or "", meta_court=meta.get("court") or "",
+               meta_issue_date=meta.get("issue_date") or "", meta_case_numbers_n=len(meta.get("case_numbers") or []),
+               meta_topics=";".join(sorted(meta.get("topics") or [])), meta_raw_path=meta.get("raw_path") or "",
+               meta_text_quality=meta.get("text_quality") or "",
+               meta_text_method=meta.get("text_method") or "",
+               meta_ocr_confidence="" if meta.get("ocr_confidence") is None else meta.get("ocr_confidence"), meta_access_marking=meta.get("access_marking") or "",
                text_source=text_source, text_present=bool(text_bytes), text_sha256="", text_pages=0,
                pages_usable=0, letters=0, letter_share=0.0, party_specific_cues=0, multi_opinion_cues=0,
                connected_matter_cues=0)
