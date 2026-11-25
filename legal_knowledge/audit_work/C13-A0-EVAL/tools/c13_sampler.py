@@ -223,13 +223,16 @@ def rel_pages(eligible_by_jid, rep_sha):
     return pages
 
 
-SAMPLE_COLS = ["holdout", "stratum", "rank_in_stratum", "N_h", "n_h", "inclusion_probability", "design_weight",
+SAMPLE_COLS = ["holdout", "design_cell", "stratum", "rank_in_stratum", "N_h", "n_h", "inclusion_probability", "design_weight",
                "judgment_key", "court", "year_band", "rep_sha256", "rep_doc_id", "rep_raw_path", "rep_raw_store",
                "rep_text_pages", "page"]
 
 
 def rows_out(holdout, sample, page=False):
-    return [dict(holdout=holdout, stratum=r["_stratum"], rank_in_stratum=r["_rank"], N_h=r["_N_h"], n_h=r["_n_h"],
+    def cell(h):
+        return "|".join(h) if isinstance(h, tuple) else h
+    return [dict(holdout=holdout, design_cell=cell(r["_stratum"]), stratum=cell(r["_stratum"]).split("|", 1)[1],
+                 rank_in_stratum=r["_rank"], N_h=r["_N_h"], n_h=r["_n_h"],
                  inclusion_probability=r["_pi"], design_weight=r["_weight"], judgment_key=r["judgment_key"],
                  court=r["court"], year_band=r["year_band"], rep_sha256=r["rep_sha256"], rep_doc_id=r["rep_doc_id"],
                  rep_raw_path=r["rep_raw_path"], rep_raw_store=r["rep_raw_store"], rep_text_pages=r["rep_text_pages"],

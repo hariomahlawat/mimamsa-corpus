@@ -53,6 +53,13 @@ class Reproduction(unittest.TestCase):
         self.assertEqual(quiet(c13_common.write_or_check, c13_features.build(), O, True, "x"), 0)
 
 
+class Sums(unittest.TestCase):
+    def test_sha256sums_cover_and_match(self):
+        import c13_check_all
+        self.assertEqual((PKG / "SHA256SUMS").read_text(encoding="utf-8"), c13_check_all.sums_text())
+        self.assertIn("PROTOCOL_C13.md", (PKG / "SHA256SUMS").read_text(encoding="utf-8"))
+
+
 class FrameInvariants(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -131,9 +138,10 @@ class HoldoutInvariants(unittest.TestCase):
             self.assertEqual(s["N_h"], pop[(s["court"], s["stratum"])])
             if s["n_h"]:
                 self.assertAlmostEqual(s["inclusion_probability"], s["n_h"] / s["N_h"], places=5)
-        n = Counter(r["stratum"] for r in self.samples["H-OUT-C13"])
+        n = Counter(r["design_cell"] for r in self.samples["H-OUT-C13"])
         for r in self.samples["H-OUT-C13"]:
-            self.assertEqual(int(r["n_h"]), n[r["stratum"]])
+            self.assertEqual(r["design_cell"], f"{r['court']}|{r['stratum']}")
+            self.assertEqual(int(r["n_h"]), n[r["design_cell"]])
             self.assertAlmostEqual(float(r["design_weight"]), int(r["N_h"]) / int(r["n_h"]), places=4)
         self.assertEqual(sum(s["n_h"] for s in d["strata"]), 300)
 

@@ -18,6 +18,16 @@ class Score(unittest.TestCase):
         with redirect_stdout(io.StringIO()):
             self.assertEqual(SC.main(["--check"]), 0)
 
+    def test_real_holdout_designs_load(self):
+        for h, n in (("H-OUT-C13", 300), ("H-HOLD-C13", None), ("H-REL-C13", 160)):
+            d = SC.load_design(h)
+            if n:
+                self.assertEqual(len(d), n)
+            for v in d.values():
+                self.assertTrue(v["cell"].startswith(v["court"]) or v["cell"].split("|")[0] in ("HC", "SC")
+                                or v["cell"].startswith("HC_"))
+                self.assertGreaterEqual(v["weight"], 1.0)
+
     def test_unknown_items_refused(self):
         with self.assertRaises(ValueError):
             SC.run("outcome", "T", [dict(item_id="ZZ", proceeding="1/2020")], [], D)

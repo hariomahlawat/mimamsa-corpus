@@ -3,20 +3,20 @@
   "H-HOLD-C13": {
    "files": {
     "holdouts/H-HOLD-C13/DESIGN.json": "fcfe3aa51ac64164491fdac7d4453578f4e91cf88f695fb8bff2028838c7460d",
-    "holdouts/H-HOLD-C13/RESERVE.csv": "2a49feb484936293d6b3a252d9a9a9be6d038ed5d9cfb3fd62ef47e192e68f4d",
-    "holdouts/H-HOLD-C13/SAMPLE.csv": "3049b87f275c7c2e19f48b494baceaf4d25f5f6632305a52c4f784b06a78f810"
+    "holdouts/H-HOLD-C13/RESERVE.csv": "3d8dc7c82b06104b1bcfa8ecc359eeb508071293a9fe22e64358685b750064c5",
+    "holdouts/H-HOLD-C13/SAMPLE.csv": "d10f6b95c449af14e9467a0db6b952b81d226d49cc216d10b23665d0dcbb9b69"
    }
   },
   "H-OUT-C13": {
    "files": {
     "holdouts/H-OUT-C13/DESIGN.json": "7b3078f21ec5c067e44d9042a482cdb31b426c859b26ca1c88111ddf51458953",
-    "holdouts/H-OUT-C13/SAMPLE.csv": "3172c7e8a3bbff6a81184a0d255a07d9dbe1834c816c0f9af372ebababa634bf"
+    "holdouts/H-OUT-C13/SAMPLE.csv": "0df7bd70d5fac29d7825bca5a8b06f35dd83055a392a30e4263e54f235bc5fe5"
    }
   },
   "H-REL-C13": {
    "files": {
     "holdouts/H-REL-C13/DESIGN.json": "22dc344e143f765a1475193f5440488485f28d5a1d13e397c3421dff77431872",
-    "holdouts/H-REL-C13/SAMPLE.csv": "553ae434cf2c1008d596249521bb5e21901d9292f88de6fdfb66e4f932027453"
+    "holdouts/H-REL-C13/SAMPLE.csv": "000d057c11b8de524c39ac1499f0ba9cb6a71374208f913d4d6fdf85302382be"
    }
   }
  },

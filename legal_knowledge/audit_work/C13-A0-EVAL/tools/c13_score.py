@@ -142,7 +142,8 @@ def aggregate(task, rows, design, label, subset=lambda r: True):
             a[0] += r[f"{f}__strict"]; a[1] += r[f"{f}__family"]; a[2] += r[f"{f}__answered"]
             a[3] += r[f"{f}__covered"]; a[4] += r[f"{f}__determinable"]
         def units(i_num, i_den):
-            return [(iid, design[iid]["stratum"], design[iid]["weight"], v[i_num], v[i_den]) for iid, v in per.items()]
+            return [(iid, design[iid].get("cell", design[iid]["stratum"]), design[iid]["weight"], v[i_num], v[i_den])
+                    for iid, v in per.items()]
         seed = f"c13-score|{task.name}|{label}|{f}"
         res[f] = dict(strict_precision=estimate(units(0, 2), seed + "|sp"),
                       family_precision=estimate(units(1, 2), seed + "|fp"),
@@ -191,7 +192,8 @@ def aggregate_holdings(task, rows, design, adjudication, label, subset=lambda r:
                 prc[r["item_id"]][1] += 1
                 prc[r["item_id"]][2] += r["strict"]
         def U(d, i, j):
-            return [(k, design[k]["stratum"], design[k]["weight"], v[i], v[j]) for k, v in d.items()]
+            return [(k, design[k].get("cell", design[k]["stratum"]), design[k]["weight"], v[i], v[j])
+                    for k, v in d.items()]
         seed = f"c13-score|holdings|{label}|{t}"
         out[t] = dict(recall=estimate(U(rec, 0, 1), seed + "|r"), recall_strict=estimate(U(rec, 2, 1), seed + "|rs"),
                       precision_reference_match_LOWER_BOUND=estimate(U(prc, 0, 1), seed + "|p"))
@@ -218,7 +220,8 @@ def load_design(holdout, sample_path=None, item_map_path=None):
     design = {}
     for m in imap:
         s = by_unit[(m["judgment_key"], m["page"])]
-        design[m["item_id"]] = dict(court=s["court"], stratum=s["stratum"], weight=float(s["design_weight"]),
+        design[m["item_id"]] = dict(court=s["court"], stratum=s["stratum"], cell=s["design_cell"],
+                                    weight=float(s["design_weight"]),
                                     sha256=s["rep_sha256"])
     return design
 
