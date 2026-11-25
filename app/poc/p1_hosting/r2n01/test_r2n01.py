@@ -52,7 +52,8 @@ def check(name, ok, **detail):
 def start(scenario, reset=True, **cfg):
     env = dict(os.environ)
     env.update({"ASPNETCORE_URLS": BASE, "Urls": BASE, "Mimamsa__Db": A.npgsql, "Mimamsa__SeedFile": str(WORK / "seed.json"),
-                "Mimamsa__VaultRoot": str(WORK / "vault"), "Mimamsa__Test__ResetLedger": "true" if reset else "false"})
+                "Mimamsa__VaultRoot": str(WORK / "vault"), "Mimamsa__Test__ResetLedger": "true" if reset else "false",
+                "Mimamsa__Test__Enabled": "true", "Mimamsa__Test__ReconcileMinAgeSec": "3"})
     for k, v in cfg.items():
         env["Mimamsa__" + k.replace(".", "__")] = str(v)
     log = open(WORK / f"server-{scenario}.log", "ab")
@@ -169,13 +170,35 @@ try:
     # withdrawal fence: small doc withdrawn; unrelated eligible doc keeps working (positive control)
     st, h, b = req(RANGE("doc-small", SMALL_SHA), "tok-bob", "bytes=0-99"); check("small_doc_before_withdrawal_206", st == 206 and b == SMALL[:100], status=st)
     st, h, b = req(f"/admin/withdraw?doc=doc-small&sha={SMALL_SHA}", "tok-alice", method="POST"); check("withdraw_requires_admin", st == 401, status=st)
-    st, h, b = req(f"/admin/withdraw?doc=doc-small&sha={SMALL_SHA}", "tok-admin", method="POST"); check("withdraw_admin_ok", st == 200, status=st)
+    def ep_now(): return json.loads(req("/admin/ledger", "tok-admin")[2])["epoch"]
+    e0 = ep_now()
+    st, h, b = req(f"/admin/withdraw?doc=doc-small&sha={'0' * 64}", "tok-admin", method="POST")
+    check("F01_withdraw_unknown_copy_404_typed_no_epoch_bump", st == 404 and b"unknown_copy" in b and ep_now() == e0, status=st, body=b[:80])
+    st, h, b = req(f"/admin/withdraw?doc=doc-nope&sha={SMALL_SHA}", "tok-admin", method="POST")
+    check("F01_withdraw_unknown_doc_404_no_epoch_bump", st == 404 and ep_now() == e0, status=st)
+    st, h, b = req("/admin/withdraw?doc=doc-small&sha=xyz", "tok-admin", method="POST")
+    check("F01_withdraw_invalid_sha_400", st == 400 and b"invalid_copy_identity" in b and ep_now() == e0, status=st)
+    # wrong-case sha is canonicalised: the right copy is withdrawn and is no longer served
+    st, h, b = req(f"/admin/withdraw?doc=doc-small&sha={SMALL_SHA.upper()}", "tok-admin", method="POST")
+    wj = json.loads(b or b"{}")
+    check("withdraw_admin_ok", st == 200 and wj.get("changed") is True and ep_now() == e0 + 1, status=st, body=b[:120])
+    st, h, b = req(f"/admin/withdraw?doc=doc-small&sha={SMALL_SHA}", "tok-admin", method="POST")
+    check("F01_repeat_withdraw_idempotent_no_epoch_bump", st == 200 and b'"already_withdrawn"' in b and ep_now() == e0 + 1, status=st)
     st, h, b = req(RANGE("doc-small", SMALL_SHA), "tok-bob", "bytes=0-99"); check("after_withdrawal_range_404_no_bytes", st == 404 and not b, status=st)
     st, h, b = req(META("doc-small"), "tok-bob"); check("after_withdrawal_meta_404", st == 404, status=st)
     st, h, b = req(RANGE("doc-big", BIG_SHA), "tok-alice", "bytes=0-99"); check("unrelated_eligible_doc_still_206", st == 206 and b == BIG[:100], status=st)
     time.sleep(1.0)
     L = ledger(); check("ledger_balances_after_functional_suite", L["reserved"] == 0 and L["charged"] == 0, ledger=L)
     RESULTS["scenarios"]["A_functional"] = {"ledger_end": L}
+finally:
+    stop(p)
+# F04: restart with the SAME seed file configured (no reset): durable withdrawal must stay authoritative
+p = start("A2", reset=False)
+try:
+    st, h, b = req(RANGE("doc-small", SMALL_SHA), "tok-bob", "bytes=0-99")
+    check("F04_seed_on_restart_does_not_revert_withdrawal", st == 404 and not b, status=st)
+    st, h, b = req(RANGE("doc-big", BIG_SHA), "tok-alice", "bytes=0-99")
+    check("F04_unrelated_copy_after_restart_206", st == 206 and b == BIG[:100], status=st)
 finally:
     stop(p)
 
@@ -240,7 +263,7 @@ def slow_then_kill(rng, read_bytes, pause):
     return len(got)
 
 
-p = start("C", **{"Transport.ListenSendBufferBytes": 4096, "Delivery.DrainGraceMs": 3000, "Test.PauseAfterFirstSliceMs": 1500})
+p = start("C", **{"Transport.ListenSendBufferBytes": 4096, "Delivery.DrainGraceMs": 3000})
 try:
     trials = []
     for i in range(8):
@@ -262,13 +285,17 @@ try:
     RESULTS["scenarios"]["C_killed_connections"] = {"trials": trials, "uncertain_count": sum(t["mid_state"] == "UNCERTAIN" for t in trials)}
     check("killed_connection_charge_retained_until_termination_then_drained", ok, uncertain=sum(t["mid_state"] == "UNCERTAIN" for t in trials), n=len(trials))
     check("killed_connection_never_refunded_as_zero_transfer", not rows("state = 'RELEASED'"), released=len(rows("state = 'RELEASED'")))
+    with psycopg.connect(A.db) as c_:
+        unc_rows = c_.execute("SELECT count(*) FROM credit_reservations WHERE reason LIKE 'uncertain:%%'").fetchone()[0]
+    RESULTS["scenarios"]["C_killed_connections"]["uncertain_rows_total"] = unc_rows
+    check("F05_real_uncertain_transfer_over_http", unc_rows >= 1, uncertain_rows=unc_rows)
 
     # withdrawal between slices of one response: the second slice must not be handed off after the fence
     s = socket.socket(); s.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 4096); s.connect(("127.0.0.1", A.port))
     a0 = 300_000
-    s.sendall((f"GET {RANGE('doc-big', BIG_SHA)} HTTP/1.1\r\nHost: x\r\nAuthorization: Bearer tok-alice\r\nRange: bytes={a0}-{a0 + MAXR - 1}\r\n\r\n").encode())
+    s.sendall((f"GET {RANGE('doc-big', BIG_SHA)} HTTP/1.1\r\nHost: x\r\nAuthorization: Bearer tok-alice\r\nX-Mimamsa-Test-Pause: after-first-slice\r\nRange: bytes={a0}-{a0 + MAXR - 1}\r\n\r\n").encode())
     first = s.recv(1024)
-    time.sleep(0.5)                          # server is blocked flushing slice 1 (small buffers)
+    time.sleep(0.5)                          # server is in the deterministic pause after slice 1
     st, h, b = req(f"/admin/withdraw?doc=doc-big&sha={BIG_SHA}", "tok-admin", method="POST")
     fence_at = time.time()
     total = len(first); s.settimeout(5)
@@ -299,30 +326,80 @@ try:
 finally:
     stop(p)
 
-# =============================================================== D. crash mid-transfer: no reset on restart
-p = start("D", **{"Transport.ListenSendBufferBytes": 4096, "Delivery.DrainGraceMs": 3000})
-s = socket.socket(); s.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 4096); s.connect(("127.0.0.1", A.port))
+# =============================================================== D. crash mid-transfer (F02): default buffers, no override
+p = start("D", **{"Delivery.DrainGraceMs": 300})
+s = socket.socket(); s.connect(("127.0.0.1", A.port))
 a0 = 500_000
 s.sendall((f"GET {RANGE('doc-big', BIG_SHA)} HTTP/1.1\r\nHost: x\r\nAuthorization: Bearer tok-alice\r\nRange: bytes={a0}-{a0 + MAXR - 1}\r\n\r\n").encode())
-s.recv(1024); time.sleep(0.7)
-stop(p, hard=True)                      # kill -9 / TerminateProcess while the transfer is in flight
-s.close()
-before = rows(f"range_start = {a0}")
-p = start("D2", reset=False, **{"Delivery.DrainGraceMs": 3000})
+got = s.recv(1024)
+time.sleep(0.7)
+stop(p, hard=True)                      # kill -9 / TerminateProcess while bytes are still queued for the stalled reader
+before = rows(f"range_start >= {a0} AND range_start < {a0 + MAXR}")
+p = start("D2", reset=False, **{"Delivery.DrainGraceMs": 300})
 try:
     L_restart = ledger()
-    early = req("/admin/reconcile-prior?evidence=test-too-early&minAgeSec=3600", "tok-admin", method="POST")
-    L_early = ledger()
-    time.sleep(4)
-    late = req("/admin/reconcile-prior?evidence=old-process-killed-by-test-harness;grace-3s&minAgeSec=3", "tok-admin", method="POST")
+    time.sleep(5.0)                     # > test minimum age (3 s); reconcile loop runs every 1 s
+    st_, _, bdy = req("/admin/reconcile-prior", "tok-admin", method="POST")
+    L_held = ledger()
+    # now the client drains the orphaned socket (these bytes were queued before the crash and stay charged until gone)
+    s.settimeout(5)
+    try:
+        while True:
+            c = s.recv(65536)
+            if not c: break
+            got += c
+    except (ConnectionResetError, socket.timeout):
+        pass
+    s.close()
+    deadline = time.time() + 15
+    while time.time() < deadline and (ledger()["reserved"] + ledger()["charged"]) > 0:
+        time.sleep(0.5)
     L_late = ledger()
-    after = rows(f"range_start = {a0}")
-    RESULTS["scenarios"]["D_crash_restart"] = dict(before=before, ledger_after_restart=L_restart, early=early[2].decode(), ledger_after_early=L_early,
-                                                  late=late[2].decode(), ledger_after_reconcile=L_late, after=after)
-    check("crash_charge_survives_restart", before and L_restart["reserved"] + L_restart["charged"] >= before[0]["amount"], ledger=L_restart)
-    check("no_release_before_reconciliation_grace", L_early["reserved"] + L_early["charged"] >= before[0]["amount"] if before else False, ledger=L_early)
-    check("explicit_reconciliation_releases_with_evidence", after and after[0]["state"] == "DRAINED" and "prior instance reconciled" in after[0]["reason"]
+    after = rows(f"range_start >= {a0} AND range_start < {a0 + MAXR}")
+    charged_before = sum(r_["amount"] for r_ in before)
+    RESULTS["scenarios"]["D_crash_restart"] = dict(before=before, ledger_after_restart=L_restart, reconcile_while_socket_alive=bdy.decode(),
+                                                  ledger_while_socket_alive=L_held, bytes_client_received_total=len(got),
+                                                  ledger_after_client_drained=L_late, after=after)
+    check("crash_charge_survives_restart", before and L_restart["reserved"] + L_restart["charged"] >= charged_before, ledger=L_restart)
+    check("F02_no_release_while_orphan_socket_may_deliver", before and L_held["reserved"] + L_held["charged"] >= charged_before, ledger=L_held, reconcile=bdy[:80])
+    check("F02_release_only_after_os_socket_evidence", after and all(r_["state"] == "DRAINED" and "prior instance reconciled" in (r_["reason"] or "") for r_ in after)
           and L_late["reserved"] == 0 and L_late["charged"] == 0, ledger=L_late)
+finally:
+    stop(p)
+
+# =============================================================== E. post-ack residual with DEFAULT buffers (F03)
+p = start("E", **{"Delivery.DrainGraceMs": 300})
+try:
+    s = socket.socket(); s.connect(("127.0.0.1", A.port))
+    a0 = 700_000
+    s.sendall((f"GET {RANGE('doc-big', BIG_SHA)} HTTP/1.1\r\nHost: x\r\nAuthorization: Bearer tok-alice\r\nRange: bytes={a0}-{a0 + MAXR - 1}\r\n\r\n").encode())
+    pre = s.recv(1024)
+    time.sleep(0.5)
+    queued_at_ack = None
+    st, h, b = req(f"/admin/withdraw?doc=doc-big&sha={BIG_SHA}", "tok-admin", method="POST")
+    if hasattr(socket, "SO_RCVBUF") and os.name != "nt":
+        import fcntl, termios, array
+        buf = array.array("i", [0]); fcntl.ioctl(s.fileno(), termios.FIONREAD, buf, True); queued_at_ack = buf[0]
+    post = b""; s.settimeout(3)
+    try:
+        while True:
+            c = s.recv(65536)
+            if not c: break
+            post += c
+    except (ConnectionResetError, socket.timeout):
+        pass
+    s.close()
+    wj = json.loads(b or b"{}")
+    res = dict(withdraw_status=st, reset_streams=wj.get("reset_streams"), bytes_before_ack=len(pre), bytes_read_after_ack=len(post),
+               client_queue_at_ack=queued_at_ack, platform=sys.platform)
+    RESULTS["scenarios"]["E_post_ack_residual_default_buffers"] = res
+    # bytes already in the client's receive queue at ack time were delivered before the ack; only the remainder can
+    # have left the server after the ack. Bound: effective server SO_SNDBUF (32 KiB requested -> 64 KiB on Linux).
+    new_after_ack = None if queued_at_ack is None else max(0, len(post) - queued_at_ack)
+    res["new_bytes_after_ack"] = new_after_ack
+    res["bound_bytes"] = 65536
+    ok = st == 200 and (new_after_ack is None or new_after_ack <= 65536)
+    check("F03_post_ack_egress_bounded_by_send_buffer", ok, **res)
 finally:
     stop(p)
 

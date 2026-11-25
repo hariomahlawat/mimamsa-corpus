@@ -13,7 +13,45 @@ using Npgsql;
 
 namespace MimamsaPocApi;
 
-public sealed record DeliveryConfig(int MaxRange, int Slice, int HeaderAllowance, int DrainGraceMs, int TestPauseAfterFirstSliceMs = 0);
+public sealed record DeliveryConfig(int MaxRange, int Slice, int HeaderAllowance, int DrainGraceMs, bool TestMode = false,
+                                    int TestPauseMs = 1500, int MaxStreamsPerSession = 4);
+
+/// In-flight protected streams per copy. On a withdrawal FENCE every affected stream is reset (SO_LINGER 0 + abort),
+/// so bytes already queued in the server kernel for that copy are discarded instead of drained to the client, and
+/// the withdrawal is acknowledged only after this cut (Serving §6: "terminate mid-response on withdrawal").
+public sealed class ActiveStreams
+{
+    readonly ConcurrentDictionary<string, ConcurrentDictionary<string, HttpContext>> _by = new();
+    readonly ConcurrentDictionary<string, int> _perSession = new();
+    public void Add(string key, string stream, HttpContext ctx) => _by.GetOrAdd(key, _ => new())[stream] = ctx;
+    public void Remove(string key, string stream) { if (_by.TryGetValue(key, out var m)) m.TryRemove(stream, out _); }
+    public int ResetAll(string key)
+    {
+        if (!_by.TryGetValue(key, out var m)) return 0;
+        int n = 0;
+        foreach (var (_, ctx) in m)
+        {
+            try
+            {
+                var sock = ctx.Features.Get<Microsoft.AspNetCore.Connections.Features.IConnectionSocketFeature>()?.Socket;
+                if (sock is not null) sock.LingerState = new System.Net.Sockets.LingerOption(true, 0);   // RST: discard queued bytes
+            }
+            catch (Exception) { }
+            ctx.Abort(); n++;
+        }
+        return n;
+    }
+    public bool TryEnterSession(string session, int max)
+    {
+        while (true)
+        {
+            int cur = _perSession.GetOrAdd(session, 0);
+            if (cur >= max) return false;
+            if (_perSession.TryUpdate(session, cur + 1, cur)) return true;
+        }
+    }
+    public void LeaveSession(string session) => _perSession.AddOrUpdate(session, 0, (_, v) => Math.Max(0, v - 1));
+}
 
 public sealed class ResponseSlots
 {
@@ -60,7 +98,7 @@ public static class ProtectedDelivery
     }
 
     static async Task ServeRangeAsync(HttpContext ctx, string docId, string sha, AuthStore auth, CreditLedger ledger,
-                                      ServingState state, Vault vault, DeliveryConfig cfg, ResponseSlots slots, ILoggerFactory lf)
+                                      ServingState state, Vault vault, DeliveryConfig cfg, ResponseSlots slots, ActiveStreams active, ILoggerFactory lf)
     {
         var res = ctx.Response;
         NoStore(res);
@@ -77,10 +115,24 @@ public static class ProtectedDelivery
             default:
                 res.StatusCode = 400; return;  // missing, malformed, multi-range or oversized: no full-body fallback
         }
+        // admission before any staging: global response slot (returned after drain) and per-session cap
+        if (!slots.TryAcquire(ctx.Connection.Id)) { res.StatusCode = 503; res.Headers.RetryAfter = "1"; return; }
+        if (!active.TryEnterSession(p.SessionId, cfg.MaxStreamsPerSession)) { res.StatusCode = 503; res.Headers.RetryAfter = "1"; return; }
+        var copyKey = ServingState.Key(docId, copy.Sha256);
+        active.Add(copyKey, ctx.TraceIdentifier, ctx);
+        try { await ServeStagedAsync(ctx, docId, copy, start, end, p, ledger, state, vault, cfg, lf); }
+        finally { active.Remove(copyKey, ctx.TraceIdentifier); active.LeaveSession(p.SessionId); }
+    }
+
+    static async Task ServeStagedAsync(HttpContext ctx, string docId, CopyInfo copy, long start, long end, Principal p,
+                                       CreditLedger ledger, ServingState state, Vault vault, DeliveryConfig cfg, ILoggerFactory lf)
+    {
+        var res = ctx.Response;
+        // TEST-ONLY fault/barrier hooks (ignored unless Mimamsa:Test:Enabled): deterministic interleavings for tests
+        string hook = cfg.TestMode ? ctx.Request.Headers["X-Mimamsa-Test-Pause"].ToString() : "";
         int len = checked((int)(end - start + 1));
         // PREPARED: stage the immutable bytes outside any guard
         var bytes = await vault.ReadSliceAsync(copy.Sha256, start, len);
-        if (!slots.TryAcquire(ctx.Connection.Id)) { res.StatusCode = 503; res.Headers.RetryAfter = "1"; return; }   // returned after drain
         var connPool = CreditLedger.ConnPoolId(ledger.InstanceId, ctx.Connection.Id);
         string connLabel = $"c{ctx.Connection.RemotePort}", stream = ctx.TraceIdentifier;
         var writer = res.BodyWriter;
@@ -108,12 +160,13 @@ public static class ProtectedDelivery
                     return state.UnderReadGuard(eligible =>
                     {
                         if (!eligible || state.Epoch != dbEpoch) { policyDenied = true; return false; }
+                        // (ports recorded so post-crash reconciliation can look for the orphaned socket)
                         resEpoch = dbEpoch;
                         DeliveryTrace.Emit("reserve", "ledger", new { attempt = id.ToString(), connection = connLabel, stream, copy = copy.Sha256,
                                                                     offset = wo, size = amount, epoch = dbEpoch });
                         return true;
                     }, docId, copy.Sha256);
-                });
+                }, (ctx.Connection.LocalPort), (ctx.Connection.RemotePort));
                 if (r is not null) break;
                 bool withdrawn = policyDenied && state.UnderReadGuard(e => !e && !state.Pending, docId, copy.Sha256);
                 if (withdrawn) { if (!headersSet) { res.StatusCode = 404; return; } ctx.Abort(); return; }
@@ -122,6 +175,8 @@ public static class ProtectedDelivery
                 await Task.Delay(20);    // pending withdrawal or credit exhausted mid-response: bounded wait, never a short 206
             }
 
+            if (hook == "before-enter" && off == 0)
+            { try { await Task.Delay(cfg.TestPauseMs, ctx.RequestAborted); } catch (OperationCanceledException) { } }
             // ---- handoff under the guard: fresh recheck (enter), then exact slice into the bounded Kestrel pipe (accept)
             long acceptedWire = 0;
             bool ok = state.UnderReadGuard(eligible =>
@@ -181,7 +236,8 @@ public static class ProtectedDelivery
             if (await ledger.SettleAsync(r, Settlement.Accepted, acceptedWire, "slice handed to transport and flushed"))
                 DeliveryTrace.Emit("settle", "ledger", new { attempt = r.Id.ToString(), outcome = "accepted", size = acceptedWire });
             // TEST-ONLY deterministic barrier (like the Codex reference pause hook): lets a test withdraw between slices
-            if (cfg.TestPauseAfterFirstSliceMs > 0 && off == n && off < len) { try { await Task.Delay(cfg.TestPauseAfterFirstSliceMs, ctx.RequestAborted); } catch (OperationCanceledException) { } }
+            if (hook == "after-first-slice" && off == n && off < len)
+            { try { await Task.Delay(cfg.TestPauseMs, ctx.RequestAborted); } catch (OperationCanceledException) { } }
         }
     }
 }

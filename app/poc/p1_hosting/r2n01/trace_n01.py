@@ -27,7 +27,7 @@ BASE = f"http://127.0.0.1:{A.port}"
 KiB = 1024
 CFG = {"Credit.SiteCap": 196608, "Credit.ConnCap": 196608, "Delivery.MaxRange": 131072, "Delivery.DrainGraceMs": 300,
        "Transport.ListenSendBufferBytes": 4096, "Delivery.SlotGate": "false",
-       "Test.PauseAfterFirstSliceMs": 1500}
+       "Test.Enabled": "true", "Test.ReconcileMinAgeSec": 3}
 
 TARGET = codex_fixture.make_pdf()
 assert hashlib.sha256(TARGET).hexdigest() == codex_fixture.EXPECTED_SHA256
@@ -71,13 +71,14 @@ def start(reset):
 RANGE = lambda d, sh: f"/api/v2/documents/{d}/copies/{sh}/range"
 
 
-def raw(path, token=None, rng=None, extra=None, method="GET", rcvbuf=None, read_limit=None):
+def raw(path, token=None, rng=None, extra=None, method="GET", rcvbuf=None, read_limit=None, hook=None):
     s = socket.socket(); s.settimeout(10)
     if rcvbuf: s.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, rcvbuf)
     s.connect(("127.0.0.1", A.port))
     h = [f"{method} {path} HTTP/1.1", "Host: x", "Connection: close"]
     if token: h.append(f"Authorization: Bearer {token}")
     if rng: h.append(f"Range: {rng}")
+    if hook: h.append(f"X-Mimamsa-Test-Pause: {hook}")   # test-only deterministic barrier (server in test mode)
     for k, v in (extra or {}).items(): h.append(f"{k}: {v}")
     s.sendall(("\r\n".join(h) + "\r\n\r\n").encode())
     return s
@@ -149,8 +150,8 @@ def occupancy_sample(label):
     cemit("occupancy", source="drain_probe", connections=m, site=sum(m.values()), note=label, probe="/proc/net/tcp tx_queue")
 
 
-def slow_open(path, rng, rcvbuf=4096, first=1024):
-    s = raw(path, "tok-alice", rng, rcvbuf=rcvbuf)
+def slow_open(path, rng, rcvbuf=4096, first=1024, hook=None):
+    s = raw(path, "tok-alice", rng, rcvbuf=rcvbuf, hook=hook)
     got = b""
     while len(got) < first:
         c = s.recv(first - len(got))
@@ -223,9 +224,11 @@ time.sleep(0.15)   # after the server observed the reset (it cannot hand off fur
 cemit("cancel_stream_hint", note="uncertain stream (client RST)", client_port=uport)
 time.sleep(1.2)
 
-# withdrawal between chunks
-w, gw = slow_open(RANGE("doc-target", T_SHA), "bytes=0-131071")
+# withdrawal between chunks (W paused after slice 1) and a stream reserved but not yet handed off (Z -> zero settle)
+w, gw = slow_open(RANGE("doc-target", T_SHA), "bytes=0-131071", hook="after-first-slice")
 wport = w.getsockname()[1]
+z = raw(RANGE("doc-target", T_SHA), "tok-alice", "bytes=262144-327679", hook="before-enter")
+zport = z.getsockname()[1]
 time.sleep(0.5)
 t_adm = int(time.time() * 1000)
 st, hd, body = read_all(raw(f"/admin/withdraw?doc=doc-target&sha={T_SHA}", "tok-admin", method="POST"))
@@ -235,6 +238,9 @@ gw = finish_slow(w, gw, "w")
 cemit("cancel_stream_hint", note="withdrawn stream ended early; viewer cancels", client_port=wport,
       body_received=len(gw.split(b"\r\n\r\n", 1)[1]) if b"\r\n\r\n" in gw else 0)
 notes["withdraw_mid_body_received"] = len(gw.split(b"\r\n\r\n", 1)[1]) if b"\r\n\r\n" in gw else 0
+zst = read_all(z)
+cemit("cancel_stream_hint", note="stream reserved before the fence, denied at handoff (zero transfer)", client_port=zport)
+notes["zero_stream_status"] = zst[0]
 http_case("withdrawn", RANGE("doc-target", T_SHA), "tok-alice", "bytes=0-65535", phase="withdrawn")
 time.sleep(1.0)
 
@@ -250,7 +256,8 @@ except OSError: pass
 time.sleep(4.0)
 # ------------------------------------------------------------------ boot 2 (no reset: durable ledger + witness)
 p = start(reset=False)
-st, hd, body = read_all(raw("/admin/reconcile-prior?evidence=prior-process-killed-by-fault-driver;grace-4s&minAgeSec=3", "tok-admin", method="POST"))
+time.sleep(4.0)    # evidence-gated reconciliation loop (min age + OS socket evidence) releases the crashed stream
+st, hd, body = read_all(raw("/admin/reconcile-prior", "tok-admin", method="POST"))
 notes["reconcile"] = body.decode()
 st, hd, body = read_all(raw("/api/v2/documents/doc-target/pdf-meta", "tok-alice"))
 notes["withdrawn_meta_after_restart"] = st

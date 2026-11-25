@@ -123,17 +123,39 @@ public sealed class ServingState
         finally { _guard.ExitReadLock(); }
     }
 
-    public async Task<(long epoch, string digest)> WithdrawAsync(string docId, string sha,
-        Func<Task<(long epoch, string digest)>> durableCas, Action emitAdmit, Action<long, string> emitFence)
+    /// Canonical copy identity: lower-case 64-hex sha256, else null (callers reject with a typed error).
+    public static string? CanonicalSha(string? sha)
+    {
+        if (sha is null) return null;
+        var t = sha.Trim().ToLowerInvariant();
+        return t.Length == 64 && t.All(ch => ch is >= '0' and <= '9' or >= 'a' and <= 'f') ? t : null;
+    }
+
+    public bool IsWithdrawn(string docId, string sha)
+    {
+        _guard.EnterReadLock();
+        try { return _withdrawn.Contains(Key(docId, sha)); } finally { _guard.ExitReadLock(); }
+    }
+
+    /// `durableCas` returns changed=false when the row was already withdrawn (idempotent, no epoch bump).
+    /// `onFenced` runs after FENCE and before the caller acknowledges (used to cut in-flight egress).
+    public async Task<(long epoch, string digest, bool changed)> WithdrawAsync(string docId, string sha,
+        Func<Task<(long epoch, string digest, bool changed)>> durableCas, Action emitAdmit, Action<long, string> emitFence,
+        Action? onFenced = null)
     {
         _guard.EnterWriteLock();
         try { Pending = true; _withdrawn.Add(Key(docId, sha)); emitAdmit(); }
         finally { _guard.ExitWriteLock(); }
-        var (e, d) = await durableCas();      // throws -> Pending stays true: fail closed
+        var (e, d, changed) = await durableCas();      // throws -> Pending stays true: fail closed
         _guard.EnterWriteLock();
-        try { Epoch = e; Digest = d; Pending = false; emitFence(e, d); }
+        try
+        {
+            if (changed) { Epoch = e; Digest = d; emitFence(e, d); }
+            Pending = false;
+        }
         finally { _guard.ExitWriteLock(); }
-        return (e, d);
+        onFenced?.Invoke();
+        return (e, d, changed);
     }
 }
 

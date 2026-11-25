@@ -12,6 +12,10 @@ import psutil
 
 cfg = json.loads(Path(sys.argv[1]).read_text())
 out_path = Path(sys.argv[2])
+SRV_PIN = cfg.get("server_cpus")      # e.g. "0-2": servers + PostgreSQL clients pinned away from the load generator
+GEN_PIN = cfg.get("loadgen_cpus")     # e.g. "3"
+RUNS = int(cfg.get("runs", 1))
+def pin(cmd, cpus): return (["taskset", "-c", cpus] + cmd) if cpus else cmd
 TOKEN = {"Authorization": "Bearer dev-token"}
 
 
@@ -29,14 +33,14 @@ def get(url, headers=None, timeout=2):
         r.read(); return r.status
 
 
-results = {"host": {"cpus": os.cpu_count(), "mem_gb": round(psutil.virtual_memory().total / 2**30, 1),
+results = {"pinning": {"server_cpus": SRV_PIN, "loadgen_cpus": GEN_PIN}, "runs": RUNS, "host": {"cpus": os.cpu_count(), "mem_gb": round(psutil.virtual_memory().total / 2**30, 1),
                     "cpu_model": next((l.split(":", 1)[1].strip() for l in open("/proc/cpuinfo") if l.startswith("model name")), None)},
            "config": cfg, "servers": {}}
 for srv in cfg["servers"]:
     base = f"http://127.0.0.1:{srv['port']}"
     env = dict(os.environ, **srv.get("env", {}))
     t0 = time.perf_counter()
-    proc = subprocess.Popen(srv["cmd"], cwd=srv["cwd"], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    proc = subprocess.Popen(pin(srv["cmd"], SRV_PIN), cwd=srv["cwd"], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     ps = psutil.Process(proc.pid)
     cold = None
     while time.perf_counter() - t0 < 60:
@@ -49,10 +53,15 @@ for srv in cfg["servers"]:
     time.sleep(2)
     r = {"cold_start_to_health_s": round(cold, 3) if cold else None, "first_search_request_s": round(first_search, 3),
          "idle_rss_mb": round(tree_rss_mb(ps), 1), "processes": 1 + len(ps.children(recursive=True)), "runs": []}
-    for ep, path in cfg["endpoints"].items():
+    eps = dict(cfg["endpoints"]); eps.update(srv.get("extra_endpoints", {}))
+    for run_no in range(RUNS):
+      for ep, spec in eps.items():
+        path, extra_h = (spec, []) if isinstance(spec, str) else (spec["path"], spec.get("headers", []))
+        hdrs = []
+        for h in (extra_h or ["Authorization=Bearer dev-token"]): hdrs += ["-H", h]
         for c in cfg["concurrency"]:
-            args = [cfg["autocannon"], "-j", "-c", str(c), "-d", str(cfg["duration"]), "-H", "Authorization=Bearer dev-token", base + path]
-            subprocess.run([cfg["autocannon"], "-c", str(c), "-d", str(cfg["warmup"]), "-H", "Authorization=Bearer dev-token", base + path],
+            args = pin([cfg["autocannon"], "-j", "-c", str(c), "-d", str(cfg["duration"])] + hdrs + [base + path], GEN_PIN)
+            subprocess.run(pin([cfg["autocannon"], "-c", str(c), "-d", str(cfg["warmup"])] + hdrs + [base + path], GEN_PIN),
                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
             peak = [0.0]; stop = threading.Event()
             def sample():
@@ -62,7 +71,7 @@ for srv in cfg["servers"]:
             la = os.getloadavg()
             j = json.loads(subprocess.run(args, capture_output=True, text=True).stdout)
             stop.set(); th.join()
-            r["runs"].append({"endpoint": ep, "concurrency": c, "rps_mean": j["requests"]["average"],
+            r["runs"].append({"run": run_no, "endpoint": ep, "concurrency": c, "rps_mean": j["requests"]["average"],
                               "lat_p50_ms": j["latency"]["p50"], "lat_p90_ms": j["latency"]["p90"], "lat_p99_ms": j["latency"]["p99"],
                               "lat_max_ms": j["latency"]["max"], "non2xx": j["non2xx"], "errors": j["errors"], "timeouts": j["timeouts"],
                               "throughput_MBps": round(j["throughput"]["average"] / 2**20, 2), "peak_rss_mb": round(peak[0], 1),

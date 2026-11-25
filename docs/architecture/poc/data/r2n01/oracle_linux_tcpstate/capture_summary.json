@@ -13,29 +13,30 @@
     true
    ]
   ],
-  "withdraw_mid_body_received": 64512,
-  "reconcile": "{\"drained\":1}",
+  "withdraw_mid_body_received": 3808,
+  "zero_stream_status": 0,
+  "reconcile": "{\"drained\":0,\"min_age_s\":3}",
   "withdrawn_meta_after_restart": 404,
   "retries_after_503": {
    "conditional": 3
   }
  },
- "events": 104,
+ "events": 116,
  "kinds": {
-  "accept": 16,
+  "accept": 18,
   "ack": 1,
   "admit": 1,
-  "cancel": 3,
-  "enter": 16,
+  "cancel": 4,
+  "enter": 18,
   "fence": 1,
   "http": 12,
   "occupancy": 4,
-  "prove_release": 16,
+  "prove_release": 18,
   "recover": 1,
-  "reserve": 16,
+  "reserve": 19,
   "restart": 1,
-  "settle": 16
+  "settle": 18
  },
  "ledger_crosscheck_mismatches": [],
- "ledger_rows": 16
+ "ledger_rows": 19
 }

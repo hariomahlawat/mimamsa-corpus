@@ -34,6 +34,8 @@ public sealed class CreditLedger
           state text NOT NULL CHECK (state IN ('RESERVED','ACCEPTED','RELEASED','UNCERTAIN','DRAINED')),
           reason text, created_at timestamptz NOT NULL DEFAULT clock_timestamp(), settled_at timestamptz, drained_at timestamptz,
           duplicate_settlements int NOT NULL DEFAULT 0);
+        ALTER TABLE credit_reservations ADD COLUMN IF NOT EXISTS local_port int;
+        ALTER TABLE credit_reservations ADD COLUMN IF NOT EXISTS remote_port int;
         CREATE INDEX IF NOT EXISTS credit_res_conn ON credit_reservations(conn_pool) WHERE state IN ('RESERVED','ACCEPTED','UNCERTAIN');
         CREATE TABLE IF NOT EXISTS credit_instances(instance_id text PRIMARY KEY, started_at timestamptz DEFAULT clock_timestamp(),
           heartbeat_at timestamptz DEFAULT clock_timestamp());
@@ -68,7 +70,8 @@ public sealed class CreditLedger
     /// stale policy or between withdrawal admission and the durable fence.
     public async Task<Reservation?> TryReserveAsync(string connPool, long amount, string sessionId, string docId,
                                                     string sha, long start, long len,
-                                                    Func<NpgsqlConnection, NpgsqlTransaction, Guid, Task<bool>>? admit = null)
+                                                    Func<NpgsqlConnection, NpgsqlTransaction, Guid, Task<bool>>? admit = null,
+                                                    int? localPort = null, int? remotePort = null)
     {
         await using var c = await _db.OpenConnectionAsync();
         await using var tx = await c.BeginTransactionAsync();
@@ -93,11 +96,13 @@ public sealed class CreditLedger
         { up.Parameters.AddWithValue(amount); up.Parameters.AddWithValue(pools); await up.ExecuteNonQueryAsync(); }
         await using (var ins = new NpgsqlCommand(
             """
-            INSERT INTO credit_reservations(res_id, instance_id, conn_pool, session_id, doc_id, copy_sha256, range_start, range_len, amount, state)
-            VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,'RESERVED')
+            INSERT INTO credit_reservations(res_id, instance_id, conn_pool, session_id, doc_id, copy_sha256, range_start, range_len, amount, state, local_port, remote_port)
+            VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,'RESERVED',$10,$11)
             """, c, tx))
         {
             foreach (var v in new object[] { id, InstanceId, connPool, sessionId, docId, sha, start, len, amount }) ins.Parameters.AddWithValue(v);
+            ins.Parameters.Add(new NpgsqlParameter { Value = (object?)localPort ?? DBNull.Value, NpgsqlDbType = NpgsqlTypes.NpgsqlDbType.Integer });
+            ins.Parameters.Add(new NpgsqlParameter { Value = (object?)remotePort ?? DBNull.Value, NpgsqlDbType = NpgsqlTypes.NpgsqlDbType.Integer });
             await ins.ExecuteNonQueryAsync();
         }
         await tx.CommitAsync();
@@ -184,24 +189,44 @@ public sealed class CreditLedger
         return drained;
     }
 
-    /// Outstanding charges of OTHER (previous) process instances survive restart. They are released only by an
-    /// explicit reconciliation call (operator/admin) once the caller asserts that the old process is gone and the
-    /// configured residual-delivery grace has elapsed; the evidence string is stored with every drained row.
-    public async Task<List<(Guid id, string priorState)>> ReconcilePriorInstancesAsync(string evidence, TimeSpan minAgeSinceHeartbeat)
+    /// Outstanding charges of OTHER (previous) process instances survive restart. They are released only when
+    /// (a) the old instance's heartbeat is older than `minAge` (server-enforced; never caller-supplied) AND
+    /// (b) for every connection pool, `socketEvidence(localPort, remotePort)` positively proves that the socket the
+    ///     dead process left behind holds no deliverable bytes (OS TCP table / kernel tx_queue). A pool without port
+    ///     information, or with any socket still able to deliver, keeps its full charge.
+    public async Task<List<(Guid id, string priorState, string evidence)>> ReconcilePriorInstancesAsync(
+        TimeSpan minAge, Func<int, int, (bool safe, string evidence)> socketEvidence)
     {
         await using var c = await _db.OpenConnectionAsync();
-        await using var q = new NpgsqlCommand(
-            """
-            SELECT DISTINCT r.conn_pool FROM credit_reservations r JOIN credit_instances i USING (instance_id)
+        await using var q = new NpgsqlCommand("""
+            SELECT r.conn_pool, min(r.local_port), min(r.remote_port), count(*) FILTER (WHERE r.local_port IS NULL)
+            FROM credit_reservations r JOIN credit_instances i USING (instance_id)
             WHERE r.instance_id <> $1 AND r.state IN ('RESERVED','ACCEPTED','UNCERTAIN')
               AND i.heartbeat_at < clock_timestamp() - $2
+            GROUP BY r.conn_pool
             """, c);
-        q.Parameters.AddWithValue(InstanceId); q.Parameters.AddWithValue(minAgeSinceHeartbeat);
-        var pools = new List<string>();
-        await using (var r = await q.ExecuteReaderAsync()) while (await r.ReadAsync()) pools.Add(r.GetString(0));
-        var all = new List<(Guid, string)>();
-        foreach (var p in pools) all.AddRange(await DrainConnectionAsync(p, "prior instance reconciled: " + evidence));
+        q.Parameters.AddWithValue(InstanceId); q.Parameters.AddWithValue(minAge);
+        var pools = new List<(string pool, int? lp, int? rp, long missing)>();
+        await using (var r = await q.ExecuteReaderAsync())
+            while (await r.ReadAsync())
+                pools.Add((r.GetString(0), r.IsDBNull(1) ? null : r.GetInt32(1), r.IsDBNull(2) ? null : r.GetInt32(2), r.GetInt64(3)));
+        var all = new List<(Guid, string, string)>();
+        foreach (var (pool, lp, rp, missing) in pools)
+        {
+            if (lp is null || rp is null || missing > 0) continue;               // no port evidence possible: keep charge
+            var (safe, ev) = socketEvidence(lp.Value, rp.Value);
+            if (!safe) continue;                                                 // bytes may still be in flight: keep charge
+            foreach (var (id, st) in await DrainConnectionAsync(pool, "prior instance reconciled: " + ev))
+                all.Add((id, st, ev));
+        }
         return all;
+    }
+
+    public async Task HeartbeatAsync()
+    {
+        await using var c = await _db.OpenConnectionAsync();
+        await using var q = new NpgsqlCommand("UPDATE credit_instances SET heartbeat_at = clock_timestamp() WHERE instance_id=$1", c);
+        q.Parameters.AddWithValue(InstanceId); await q.ExecuteNonQueryAsync();
     }
 
     static async Task LockSiteAsync(NpgsqlConnection c, NpgsqlTransaction tx) => await LockPoolAsync(c, tx, SitePool);
@@ -212,12 +237,6 @@ public sealed class CreditLedger
         lk.Parameters.AddWithValue(pool); await lk.ExecuteNonQueryAsync();
     }
 
-    public async Task HeartbeatAsync()
-    {
-        await using var c = await _db.OpenConnectionAsync();
-        await using var q = new NpgsqlCommand("UPDATE credit_instances SET heartbeat_at = clock_timestamp() WHERE instance_id=$1", c);
-        q.Parameters.AddWithValue(InstanceId); await q.ExecuteNonQueryAsync();
-    }
 
     public async Task<(long cap, long reserved, long charged)> PoolAsync(string pool)
     {

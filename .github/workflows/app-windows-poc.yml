@@ -147,6 +147,7 @@ jobs:
             --db "host=127.0.0.1 port=5432 user=poc password=poc dbname=poc_r2n01" `
             --npgsql "Host=127.0.0.1;Port=5432;Username=poc;Password=poc;Database=poc_r2n01;Maximum Pool Size=40" `
             --big "$env:RUNNER_TEMP\fx_big.pdf" --small "$env:RUNNER_TEMP\fx_small.pdf" --out out\r2n01_transport_windows.json --work "$env:RUNNER_TEMP\r2n01"
+          if ($LASTEXITCODE -ne 0) { throw "R2-N01 transport tests failed" }
 
       - name: R2-N01 evidence trace + independent PR #54 transport oracle (unmodified, hash-pinned) on Windows
         run: |
@@ -180,7 +181,7 @@ jobs:
           Stop-Service MimamsaPocApi
           $env:Urls = "http://127.0.0.1:5081"; $env:ASPNETCORE_URLS = $env:Urls
           $env:Mimamsa__Db = "Host=127.0.0.1;Port=5432;Username=poc;Password=poc;Database=poc_r2n01"
-          $env:Mimamsa__SeedFile = "$w\seed.json"; $env:Mimamsa__VaultRoot = "$w\vault"; $env:Mimamsa__Test__ResetLedger = "true"
+          $env:Mimamsa__SeedFile = "$w\seed.json"; $env:Mimamsa__VaultRoot = "$w\vault"; $env:Mimamsa__Test__ResetLedger = "true"; $env:Mimamsa__Test__Enabled = "true"
           $srv = Start-Process -FilePath "$env:POC_ROOT\aspnet\MimamsaPocApi.exe" -WorkingDirectory "$env:POC_ROOT\aspnet" -PassThru -RedirectStandardOutput "$w\server.out" -RedirectStandardError "$w\server.err"
           Push-Location app/poc/p4_pdf/pdfjs
           npm ci --silent
@@ -192,10 +193,37 @@ jobs:
           for ($i = 0; $i -lt 60; $i++) { try { if ((Invoke-WebRequest "http://127.0.0.1:5199/" -UseBasicParsing -TimeoutSec 2).StatusCode -eq 200) { $ok = $true; break } } catch {}; Start-Sleep -Milliseconds 500 }
           if (-not $ok) { throw "vite preview did not start on 127.0.0.1:5199" }
           node run_protected.cjs http://127.0.0.1:5199 http://127.0.0.1:5081 "$env:GITHUB_WORKSPACE\out\r2n01_pdfjs_protected_windows.json"
+          $nodeRc = $LASTEXITCODE
           Pop-Location
           Stop-Process -Id $vite.Id -Force -ErrorAction SilentlyContinue; Stop-Process -Id $srv.Id -Force -ErrorAction SilentlyContinue
           python app/poc/p1_hosting/r2n01/check_pdfjs_protected.py out\r2n01_pdfjs_protected_windows.json out\r2n01_pdfjs_protected_windows_checks.json
+          $checkRc = $LASTEXITCODE
           Start-Service MimamsaPocApi
+          if ($nodeRc -ne 0 -or $checkRc -ne 0) { throw "PDF.js protected viewer failed (node=$nodeRc, checks=$checkRc)" }
+
+      - name: R2-N01 checks against the INSTALLED Windows Service (NT SERVICE account, test mode, SCM crash restart)
+        run: |
+          $psql = Join-Path $env:PGBIN "psql.exe"; $env:PGPASSWORD = "root"
+          & $psql -U postgres -h 127.0.0.1 -c "CREATE DATABASE poc_svc OWNER poc;"
+          $env:PGPASSWORD = "poc"
+          & $psql -U poc -h 127.0.0.1 -d poc_svc -v ON_ERROR_STOP=1 -f app/poc/p1_hosting/fixtures/fixture.sql
+          $fx = "$env:POC_ROOT\svcfix"; $vault = "$env:POC_ROOT\svcvault"
+          New-Item -ItemType Directory -Force $fx, $vault | Out-Null
+          python app/poc/p1_hosting/fixtures/make_fixture_pdf.py "$fx\big.pdf" --pages 300 --pad 20000
+          python app/poc/p1_hosting/fixtures/make_fixture_pdf.py "$fx\w.pdf" --pages 20 --pad 20000
+          python -c "import hashlib,json,sys; h=lambda p: hashlib.sha256(open(p,'rb').read()).hexdigest(); a,b=sys.argv[1],sys.argv[2]; json.dump({'sessions':[{'token':'tok-alice','user':'alice','session':'s-alice'},{'token':'tok-bob','user':'bob','session':'s-bob'},{'token':'tok-admin','user':'admin','session':'s-admin','admin':True}],'copies':[{'doc_id':'doc-svc-big','source':a,'sha256':h(a)},{'doc_id':'doc-svc-w','source':b,'sha256':h(b)}],'grants':[{'user':'alice','doc_id':'doc-svc-big'},{'user':'alice','doc_id':'doc-svc-w'}]}, open(sys.argv[3],'w'))" "$fx\big.pdf" "$fx\w.pdf" "$fx\seed.json"
+          icacls $fx /grant "NT SERVICE\MimamsaPocApi:(OI)(CI)R" | Out-Null
+          icacls $vault /grant "NT SERVICE\MimamsaPocApi:(OI)(CI)M" | Out-Null
+          @{ Urls = "http://127.0.0.1:5081"
+             Mimamsa = @{ Db = "Host=127.0.0.1;Port=5432;Username=poc;Password=poc;Database=poc_svc;Maximum Pool Size=32"; PdfRoot = "$env:POC_ROOT\pdfstore"; DevToken = "dev-token"
+                          SeedFile = "$fx\seed.json"; VaultRoot = $vault
+                          Test = @{ Enabled = $true; ReconcileMinAgeSec = 3 }
+                          Transport = @{ ListenSendBufferBytes = 4096 }; Delivery = @{ DrainGraceMs = 300 } } } |
+            ConvertTo-Json -Depth 5 | Set-Content -Encoding UTF8 "$env:POC_ROOT\aspnet\appsettings.Production.json"
+          Restart-Service MimamsaPocApi
+          python app/poc/p1_hosting/r2n01/test_service_r2n01.py --base http://127.0.0.1:5081 `
+            --db "host=127.0.0.1 port=5432 user=poc password=poc dbname=poc_svc" --service-name MimamsaPocApi --seed "$fx\seed.json" --out out\r2n01_service_windows.json
+          if ($LASTEXITCODE -ne 0) { throw "R2-N01 service-mode checks failed" }
 
       - name: Light load comparison on Windows (60 s total, informational)
         continue-on-error: true

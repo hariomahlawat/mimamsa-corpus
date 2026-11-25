@@ -29,7 +29,7 @@
     "content-length": "65536",
     "connection": "close",
     "content-type": "application/pdf",
-    "date": "Wed, 25 Nov 2026 15:52:33 GMT",
+    "date": "Wed, 25 Nov 2026 20:43:39 GMT",
     "accept-ranges": "bytes",
     "cache-control": "no-store, private",
     "content-range": "bytes 0-65535/46786968",
@@ -158,7 +158,29 @@
    "status": 401
   },
   {
+   "name": "F01_withdraw_unknown_copy_404_typed_no_epoch_bump",
+   "pass": true,
+   "status": 404,
+   "body": "b'{\"error\":\"unknown_copy\",\"doc\":\"doc-small\",\"sha\":\"0000000000000000000000000000000'"
+  },
+  {
+   "name": "F01_withdraw_unknown_doc_404_no_epoch_bump",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "F01_withdraw_invalid_sha_400",
+   "pass": true,
+   "status": 400
+  },
+  {
    "name": "withdraw_admin_ok",
+   "pass": true,
+   "status": 200,
+   "body": "b'{\"operation\":\"withdraw-6d4893a8\",\"epoch\":16,\"digest\":\"state-b2eac284df01ca51\",\"changed\":true,\"admitted_ms\":1795639419449'"
+  },
+  {
+   "name": "F01_repeat_withdraw_idempotent_no_epoch_bump",
    "pass": true,
    "status": 200
   },
@@ -190,6 +212,16 @@
    }
   },
   {
+   "name": "F04_seed_on_restart_does_not_revert_withdrawal",
+   "pass": true,
+   "status": 404
+  },
+  {
+   "name": "F04_unrelated_copy_after_restart_206",
+   "pass": true,
+   "status": 206
+  },
+  {
    "name": "B1_site_cap_one_64KiB_attempt_never_overcommits",
    "pass": true,
    "requests": 40,
@@ -199,7 +231,7 @@
    "denied_503": 39,
    "other": 0,
    "all_206_bodies_exact": true,
-   "wall_s": 0.26,
+   "wall_s": 0.32,
    "ledger_end": {
     "cap": 65536,
     "reserved": 0,
@@ -209,7 +241,7 @@
     }
    },
    "max_site_outstanding": 65536,
-   "samples": 17882,
+   "samples": 18046,
    "violations": 0
   },
   {
@@ -218,21 +250,21 @@
    "requests": 400,
    "threads": 32,
    "site_cap": 1048576,
-   "ok_206": 13,
-   "denied_503": 387,
+   "ok_206": 6,
+   "denied_503": 394,
    "other": 0,
    "all_206_bodies_exact": true,
-   "wall_s": 2.04,
+   "wall_s": 1.6,
    "ledger_end": {
     "cap": 1048576,
     "reserved": 0,
     "charged": 0,
     "states": {
-     "DRAINED": 18
+     "DRAINED": 9
     }
    },
-   "max_site_outstanding": 439096,
-   "samples": 43627,
+   "max_site_outstanding": 322251,
+   "samples": 60342,
    "violations": 0
   },
   {
@@ -247,9 +279,14 @@
    "released": 0
   },
   {
+   "name": "F05_real_uncertain_transfer_over_http",
+   "pass": true,
+   "uncertain_rows": 7
+  },
+  {
    "name": "withdrawal_between_slices_stops_handoff",
    "pass": true,
-   "body_received": 64512,
+   "body_received": 3801,
    "payload_handed": 64512,
    "post_fence": 0
   },
@@ -258,38 +295,49 @@
    "pass": true,
    "ledger": {
     "cap": 8388608,
-    "reserved": 65536,
-    "charged": 65536,
+    "reserved": 0,
+    "charged": 134144,
     "states": {
-     "ACCEPTED": 1,
-     "RESERVED": 1
+     "ACCEPTED": 3
     }
    }
   },
   {
-   "name": "no_release_before_reconciliation_grace",
+   "name": "F02_no_release_while_orphan_socket_may_deliver",
    "pass": true,
    "ledger": {
     "cap": 8388608,
-    "reserved": 65536,
-    "charged": 65536,
+    "reserved": 0,
+    "charged": 134144,
     "states": {
-     "ACCEPTED": 1,
-     "RESERVED": 1
+     "ACCEPTED": 3
     }
-   }
+   },
+   "reconcile": "b'{\"drained\":0,\"min_age_s\":3}'"
   },
   {
-   "name": "explicit_reconciliation_releases_with_evidence",
+   "name": "F02_release_only_after_os_socket_evidence",
    "pass": true,
    "ledger": {
     "cap": 8388608,
     "reserved": 0,
     "charged": 0,
     "states": {
-     "DRAINED": 2
+     "DRAINED": 3
     }
    }
+  },
+  {
+   "name": "F03_post_ack_egress_bounded_by_send_buffer",
+   "pass": true,
+   "withdraw_status": 200,
+   "reset_streams": 0,
+   "bytes_before_ack": 1024,
+   "bytes_read_after_ack": 130343,
+   "client_queue_at_ack": 127783,
+   "platform": "linux",
+   "new_bytes_after_ack": 2560,
+   "bound_bytes": 65536
   }
  ],
  "scenarios": {
@@ -311,7 +359,7 @@
    "denied_503": 39,
    "other": 0,
    "all_206_bodies_exact": true,
-   "wall_s": 0.26,
+   "wall_s": 0.32,
    "ledger_end": {
     "cap": 65536,
     "reserved": 0,
@@ -321,28 +369,28 @@
     }
    },
    "max_site_outstanding": 65536,
-   "samples": 17882,
+   "samples": 18046,
    "violations": 0
   },
   "B2_site_cap_1MiB": {
    "requests": 400,
    "threads": 32,
    "site_cap": 1048576,
-   "ok_206": 13,
-   "denied_503": 387,
+   "ok_206": 6,
+   "denied_503": 394,
    "other": 0,
    "all_206_bodies_exact": true,
-   "wall_s": 2.04,
+   "wall_s": 1.6,
    "ledger_end": {
     "cap": 1048576,
     "reserved": 0,
     "charged": 0,
     "states": {
-     "DRAINED": 18
+     "DRAINED": 9
     }
    },
-   "max_site_outstanding": 439096,
-   "samples": 43627,
+   "max_site_outstanding": 322251,
+   "samples": 60342,
    "violations": 0
   },
   "C_killed_connections": {
@@ -352,10 +400,10 @@
      "mid_state": "ACCEPTED",
      "mid_charged": 65536,
      "amount": 65536,
-     "mid_site_charged": 65536,
+     "mid_site_charged": 131072,
      "mid_site_reserved": 0,
      "end_state": "DRAINED",
-     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB1GHGIR6S ended 2026-11-25T15:52:42.1436362Z; linux /proc/net/tcp: socket 5181->45730 gone",
+     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB6J6N33V7 ended 2026-11-25T20:43:47.8810113Z; linux /proc/net/tcp: socket 5181->47068 gone",
      "end_site": {
       "reserved": 0,
       "charged": 0
@@ -366,10 +414,10 @@
      "mid_state": "ACCEPTED",
      "mid_charged": 65536,
      "amount": 65536,
-     "mid_site_charged": 65536,
+     "mid_site_charged": 131072,
      "mid_site_reserved": 0,
      "end_state": "DRAINED",
-     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB1GHGIR6T ended 2026-11-25T15:52:47.1810029Z; linux /proc/net/tcp: socket 5181->45662 gone",
+     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB6J6N33V8 ended 2026-11-25T20:43:52.9019304Z; linux /proc/net/tcp: socket 5181->44970 gone",
      "end_site": {
       "reserved": 0,
       "charged": 0
@@ -380,10 +428,10 @@
      "mid_state": "ACCEPTED",
      "mid_charged": 65536,
      "amount": 65536,
-     "mid_site_charged": 65536,
+     "mid_site_charged": 131072,
      "mid_site_reserved": 0,
      "end_state": "DRAINED",
-     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB1GHGIR6U ended 2026-11-25T15:52:52.2124697Z; linux /proc/net/tcp: socket 5181->45674 gone",
+     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB6J6N33V9 ended 2026-11-25T20:43:57.9225420Z; linux /proc/net/tcp: socket 5181->44980 gone",
      "end_site": {
       "reserved": 0,
       "charged": 0
@@ -394,10 +442,10 @@
      "mid_state": "ACCEPTED",
      "mid_charged": 65536,
      "amount": 65536,
-     "mid_site_charged": 65536,
+     "mid_site_charged": 131072,
      "mid_site_reserved": 0,
      "end_state": "DRAINED",
-     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB1GHGIR6V ended 2026-11-25T15:52:57.2450306Z; linux /proc/net/tcp: socket 5181->59602 gone",
+     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB6J6N33VA ended 2026-11-25T20:44:02.9465171Z; linux /proc/net/tcp: socket 5181->56720 gone",
      "end_site": {
       "reserved": 0,
       "charged": 0
@@ -408,10 +456,10 @@
      "mid_state": "ACCEPTED",
      "mid_charged": 65536,
      "amount": 65536,
-     "mid_site_charged": 65536,
+     "mid_site_charged": 131072,
      "mid_site_reserved": 0,
      "end_state": "DRAINED",
-     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB1GHGIR70 ended 2026-11-25T15:53:02.2743950Z; linux /proc/net/tcp: socket 5181->59616 gone",
+     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB6J6N33VB ended 2026-11-25T20:44:07.9748456Z; linux /proc/net/tcp: socket 5181->56734 gone",
      "end_site": {
       "reserved": 0,
       "charged": 0
@@ -422,10 +470,10 @@
      "mid_state": "ACCEPTED",
      "mid_charged": 65536,
      "amount": 65536,
-     "mid_site_charged": 65536,
+     "mid_site_charged": 131072,
      "mid_site_reserved": 0,
      "end_state": "DRAINED",
-     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB1GHGIR71 ended 2026-11-25T15:53:07.3024409Z; linux /proc/net/tcp: socket 5181->43378 gone",
+     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB6J6N33VC ended 2026-11-25T20:44:12.9981779Z; linux /proc/net/tcp: socket 5181->45832 gone",
      "end_site": {
       "reserved": 0,
       "charged": 0
@@ -436,10 +484,10 @@
      "mid_state": "ACCEPTED",
      "mid_charged": 65536,
      "amount": 65536,
-     "mid_site_charged": 65536,
+     "mid_site_charged": 131072,
      "mid_site_reserved": 0,
      "end_state": "DRAINED",
-     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB1GHGIR72 ended 2026-11-25T15:53:12.3439720Z; linux /proc/net/tcp: socket 5181->43380 gone",
+     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB6J6N33VD ended 2026-11-25T20:44:18.0295654Z; linux /proc/net/tcp: socket 5181->45842 gone",
      "end_site": {
       "reserved": 0,
       "charged": 0
@@ -450,28 +498,29 @@
      "mid_state": "ACCEPTED",
      "mid_charged": 65536,
      "amount": 65536,
-     "mid_site_charged": 65536,
+     "mid_site_charged": 131072,
      "mid_site_reserved": 0,
      "end_state": "DRAINED",
-     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB1GHGIR73 ended 2026-11-25T15:53:17.3765175Z; linux /proc/net/tcp: socket 5181->49638 gone",
+     "end_reason": "ice handed to transport and flushed | drained: kestrel connection 0HNQB6J6N33VE ended 2026-11-25T20:44:23.0578727Z; linux /proc/net/tcp: socket 5181->56542 gone",
      "end_site": {
       "reserved": 0,
       "charged": 0
      }
     }
    ],
-   "uncertain_count": 0
+   "uncertain_count": 0,
+   "uncertain_rows_total": 7
   },
   "C_withdraw_mid_response": {
    "withdraw_status": 200,
-   "admitted_ms": 1795622001936,
-   "body_received": 64512,
+   "admitted_ms": 1795639467594,
+   "body_received": 3801,
    "content_length": 131072,
    "slices": [
     [
      "ACCEPTED",
      65536.0,
-     1795622001423.02,
+     1795639467085.388,
      64512.0
     ]
    ],
@@ -481,58 +530,106 @@
   "D_crash_restart": {
    "before": [
     {
-     "res_id": "d916c8a2-d529-4f65-bce8-a940ec3e0615",
+     "res_id": "263fe471-b16b-484b-a28f-52d2187ab107",
      "state": "ACCEPTED",
      "amount": 65536,
      "charged": 65536,
      "accepted": 65536,
      "reason": "slice handed to transport and flushed",
      "start": 500000,
-     "instance": "vm:5948:fc7e3bef6b3d4883ac5769d58427bd0e"
+     "instance": "vm:17253:093f85a9df274014820ca479bfb3f366"
+    },
+    {
+     "res_id": "c09d60a1-004a-41a5-a951-c14cee9a83d7",
+     "state": "ACCEPTED",
+     "amount": 65536,
+     "charged": 65536,
+     "accepted": 65536,
+     "reason": "slice handed to transport and flushed",
+     "start": 564512,
+     "instance": "vm:17253:093f85a9df274014820ca479bfb3f366"
+    },
+    {
+     "res_id": "4fde1027-7e07-492a-bc4f-43b21982f367",
+     "state": "ACCEPTED",
+     "amount": 3072,
+     "charged": 3072,
+     "accepted": 3072,
+     "reason": "slice handed to transport and flushed",
+     "start": 629024,
+     "instance": "vm:17253:093f85a9df274014820ca479bfb3f366"
     }
    ],
    "ledger_after_restart": {
     "cap": 8388608,
-    "reserved": 65536,
-    "charged": 65536,
+    "reserved": 0,
+    "charged": 134144,
     "states": {
-     "ACCEPTED": 1,
-     "RESERVED": 1
+     "ACCEPTED": 3
     }
    },
-   "early": "{\"drained\":0}",
-   "ledger_after_early": {
+   "reconcile_while_socket_alive": "{\"drained\":0,\"min_age_s\":3}",
+   "ledger_while_socket_alive": {
     "cap": 8388608,
-    "reserved": 65536,
-    "charged": 65536,
+    "reserved": 0,
+    "charged": 134144,
     "states": {
-     "ACCEPTED": 1,
-     "RESERVED": 1
+     "ACCEPTED": 3
     }
    },
-   "late": "{\"drained\":2}",
-   "ledger_after_reconcile": {
+   "bytes_client_received_total": 131367,
+   "ledger_after_client_drained": {
     "cap": 8388608,
     "reserved": 0,
     "charged": 0,
     "states": {
-     "DRAINED": 2
+     "DRAINED": 3
     }
    },
    "after": [
     {
-     "res_id": "d916c8a2-d529-4f65-bce8-a940ec3e0615",
+     "res_id": "263fe471-b16b-484b-a28f-52d2187ab107",
      "state": "DRAINED",
      "amount": 65536,
      "charged": 65536,
      "accepted": 65536,
-     "reason": "slice handed to transport and flushed | drained: prior instance reconciled: old-process-killed-by-test-harness;grace-3s",
+     "reason": "slice handed to transport and flushed | drained: prior instance reconciled: linux /proc/net/tcp: socket 5181->56644 tx_queue=0",
      "start": 500000,
-     "instance": "vm:5948:fc7e3bef6b3d4883ac5769d58427bd0e"
+     "instance": "vm:17253:093f85a9df274014820ca479bfb3f366"
+    },
+    {
+     "res_id": "c09d60a1-004a-41a5-a951-c14cee9a83d7",
+     "state": "DRAINED",
+     "amount": 65536,
+     "charged": 65536,
+     "accepted": 65536,
+     "reason": "slice handed to transport and flushed | drained: prior instance reconciled: linux /proc/net/tcp: socket 5181->56644 tx_queue=0",
+     "start": 564512,
+     "instance": "vm:17253:093f85a9df274014820ca479bfb3f366"
+    },
+    {
+     "res_id": "4fde1027-7e07-492a-bc4f-43b21982f367",
+     "state": "DRAINED",
+     "amount": 3072,
+     "charged": 3072,
+     "accepted": 3072,
+     "reason": "slice handed to transport and flushed | drained: prior instance reconciled: linux /proc/net/tcp: socket 5181->56644 tx_queue=0",
+     "start": 629024,
+     "instance": "vm:17253:093f85a9df274014820ca479bfb3f366"
     }
    ]
+  },
+  "E_post_ack_residual_default_buffers": {
+   "withdraw_status": 200,
+   "reset_streams": 0,
+   "bytes_before_ack": 1024,
+   "bytes_read_after_ack": 130343,
+   "client_queue_at_ack": 127783,
+   "platform": "linux",
+   "new_bytes_after_ack": 2560,
+   "bound_bytes": 65536
   }
  },
  "all_pass": true,
- "n_checks": 40
+ "n_checks": 48
 }

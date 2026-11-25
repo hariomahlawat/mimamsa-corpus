@@ -45,6 +45,24 @@ public static class DrainProbe
         return null;
     }
 
+    /// One-shot positive evidence that the socket (localPort, remotePort) can deliver no more bytes.
+    public static (bool safe, string evidence) SocketSafe(int localPort, int remotePort)
+    {
+        if (KernelEvidenceAvailable)
+        {
+            var tx = TxQueue(localPort, remotePort);
+            if (tx is null) return (true, $"linux /proc/net/tcp: socket {localPort}->{remotePort} gone");
+            return tx == 0 ? (true, $"linux /proc/net/tcp: socket {localPort}->{remotePort} tx_queue=0")
+                           : (false, $"linux /proc/net/tcp: socket {localPort}->{remotePort} still holds {tx} bytes");
+        }
+        var st = TcpState(new IPEndPoint(IPAddress.Loopback, localPort), new IPEndPoint(IPAddress.Loopback, remotePort));
+        if (st is null) return (true, $"OS TCP table: socket {localPort}->{remotePort} gone");
+        return st is System.Net.NetworkInformation.TcpState.FinWait2 or System.Net.NetworkInformation.TcpState.TimeWait
+                   or System.Net.NetworkInformation.TcpState.Closed
+            ? (true, $"OS TCP table: socket {localPort}->{remotePort} in {st}")
+            : (false, $"OS TCP table: socket {localPort}->{remotePort} in {st} (may still deliver)");
+    }
+
     /// Wait until the kernel holds no unacknowledged bytes for this socket. Never gives up by releasing:
     /// returns (true, evidence) on proof, or keeps polling (with backoff) until proof arrives.
     public static async Task<(string proof, string evidence)> AwaitDrainAsync(EndPoint? local, EndPoint? remote, int graceMs)

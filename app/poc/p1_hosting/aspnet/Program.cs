@@ -28,16 +28,26 @@ var pdfRoot = Path.GetFullPath(conf["Mimamsa:PdfRoot"] ?? "pdfstore");
 var token = conf["Mimamsa:DevToken"] ?? "dev-token";
 var credit = new CreditConfig(conf.GetValue<long>("Mimamsa:Credit:SiteCap", 8L << 20), conf.GetValue<long>("Mimamsa:Credit:ConnCap", 256L << 10),
                               conf.GetValue<long>("Mimamsa:Credit:HeaderAllowance", 1024));
+// Test mode gates every test-only behaviour (seeding, ledger reset, deterministic pause hooks, short reconcile age).
+bool testMode = conf.GetValue("Mimamsa:Test:Enabled", false);
 var delivery = new DeliveryConfig(conf.GetValue("Mimamsa:Delivery:MaxRange", 128 * 1024), conf.GetValue("Mimamsa:Delivery:Slice", 64 * 1024 - 1024),
                                   (int)credit.HeaderAllowance, conf.GetValue("Mimamsa:Delivery:DrainGraceMs", 250),
-                                  conf.GetValue("Mimamsa:Test:PauseAfterFirstSliceMs", 0));
-int listenSndBuf = conf.GetValue("Mimamsa:Transport:ListenSendBufferBytes", 0);
+                                  testMode, conf.GetValue("Mimamsa:Test:PauseMs", 1500), conf.GetValue("Mimamsa:Delivery:MaxStreamsPerSession", 4));
+// Post-crash reconciliation never trusts the caller: minimum heartbeat age is server-side (>= 30 s in production)
+// and every release additionally needs positive OS socket evidence (DrainProbe.SocketSafe).
+var reconcileMinAge = TimeSpan.FromSeconds(testMode ? conf.GetValue("Mimamsa:Test:ReconcileMinAgeSec", 5)
+                                                    : Math.Max(30, conf.GetValue("Mimamsa:Reconcile:MinAgeSec", 30)));
+// Bounded kernel send buffer (production default 32 KiB requested; Linux reports/uses 2x). Together with the RST of
+// active affected streams at FENCE this bounds post-acknowledgement egress of a withdrawn copy to what a finished
+// response still has queued in the server kernel (<= effective SO_SNDBUF). 0 = OS default (unbounded by us).
+int listenSndBuf = conf.GetValue("Mimamsa:Transport:ListenSendBufferBytes", 32 * 1024);
 var dataSource = new NpgsqlDataSourceBuilder(cs).Build();
 var ledger = new CreditLedger(dataSource, credit);
 var auth = new AuthStore(dataSource);
 var state = new ServingState();
 var vault = new Vault(conf["Mimamsa:VaultRoot"] ?? Path.Combine(AppContext.BaseDirectory, "vault"));
 var pendingDrains = new ConcurrentDictionary<string, DateTime>();
+var active = new ActiveStreams();
 // Liveness guard for per-slice reservation: admit at most N concurrent protected responses, where N responses of
 // maximum accounted size fit inside the site cap. A slot is returned only after the connection's charges drained,
 // so a started response can never stall on site credit held by other started responses.
@@ -47,7 +57,7 @@ var slots = new ResponseSlots(conf.GetValue("Mimamsa:Delivery:SlotGate", true)
     : 100_000);   // gate disabled (tests that race single-slice responses directly at the ledger)
 
 builder.Services.AddSingleton(dataSource).AddSingleton(ledger).AddSingleton(auth).AddSingleton(state)
-       .AddSingleton(vault).AddSingleton(delivery).AddSingleton(credit).AddSingleton(slots);
+       .AddSingleton(vault).AddSingleton(delivery).AddSingleton(credit).AddSingleton(slots).AddSingleton(active);
 
 // OS adapter: optional SO_SNDBUF on the listen socket (accepted sockets inherit it on Linux and Windows).
 // Used to make slow-client / uncertain-transfer tests deterministic; 0 = OS default.
@@ -59,6 +69,7 @@ builder.WebHost.UseSockets(o =>
 builder.WebHost.ConfigureKestrel(k =>
 {
     k.AddServerHeader = false;
+    k.Limits.MaxConcurrentConnections = conf.GetValue<long>("Mimamsa:Transport:MaxConcurrentConnections", 1000);
     k.Limits.MaxResponseBufferSize = 64 * 1024;   // bounded app-side send buffer (one slice incl. header allowance)
     // Transport-termination observation: when a connection ends, its accepted charges drain after a grace.
     k.ConfigureEndpointDefaults(lo => lo.Use(next => async conn =>
@@ -89,9 +100,23 @@ var app = builder.Build();
 // ---- startup: schemas, optional reset (tests only), seed, in-memory eligibility mirror
 await using (var c = await dataSource.OpenConnectionAsync())
 await using (var cmd = new NpgsqlCommand(AuthStore.Schema, c)) await cmd.ExecuteNonQueryAsync();
-await ledger.InitAsync(resetForTest: conf.GetValue("Mimamsa:Test:ResetLedger", false));
+// Single serving instance per database (the in-memory fence is process-local): hold a session advisory lock for the
+// process lifetime; a second instance (e.g. an overlapped recycle) refuses to start instead of serving stale policy.
+var instanceLockConn = await dataSource.OpenConnectionAsync();
+await using (var lk = new NpgsqlCommand("SELECT pg_try_advisory_lock(hashtext('mimamsa-serving-instance'))", instanceLockConn))
+{
+    bool got = false;
+    for (int i = 0; i < 50 && !got; i++) { got = (bool)(await lk.ExecuteScalarAsync())!; if (!got) await Task.Delay(200); }
+    if (!got) throw new InvalidOperationException("another serving instance holds the instance lock; refusing to start");
+}
+bool testReset = testMode && conf.GetValue("Mimamsa:Test:ResetLedger", false);
+await ledger.InitAsync(resetForTest: testReset);
 var seed = conf["Mimamsa:SeedFile"];
-if (!string.IsNullOrEmpty(seed)) await Seed.ApplyAsync(dataSource, vault, seed);
+if (!string.IsNullOrEmpty(seed))
+{
+    if (!testMode) throw new InvalidOperationException("Mimamsa:SeedFile is test-only; refusing to start outside Mimamsa:Test:Enabled");
+    await Seed.ApplyAsync(dataSource, vault, seed, testReset);
+}
 DeliveryTrace.Start(conf["Mimamsa:Trace:Path"]);
 await using (var c = await dataSource.OpenConnectionAsync())
 {
@@ -107,6 +132,15 @@ await using (var c = await dataSource.OpenConnectionAsync())
     DeliveryTrace.Emit("boot", "witness", new { epoch = state.Epoch, digest = state.Digest, instance = ledger.InstanceId });
 }
 _ = Task.Run(async () => { while (true) { try { await ledger.HeartbeatAsync(); } catch { } await Task.Delay(2000); } });
+// Automatic, evidence-gated reconciliation of charges left by a previous (crashed) instance.
+async Task<int> ReconcilePriorAsync()
+{
+    var drained = await ledger.ReconcilePriorInstancesAsync(reconcileMinAge, DrainProbe.SocketSafe);
+    foreach (var (id, _, ev) in drained) DeliveryTrace.Emit("prove_release", "drain_probe", new { attempt = id.ToString(), proof = "reconciliation", evidence = ev });
+    if (drained.Count > 0) DeliveryTrace.Flush();
+    return drained.Count;
+}
+_ = Task.Run(async () => { while (true) { await Task.Delay(1000); try { await ReconcilePriorAsync(); } catch { } } });
 
 // ---- v1 auth stub (P1 throughput endpoints only)
 app.Use(async (ctx, next) =>
@@ -167,9 +201,19 @@ async Task<Principal?> Admin(HttpContext ctx)
 app.MapPost("/admin/withdraw", async (HttpContext ctx, string doc, string sha) =>
 {
     if (await Admin(ctx) is null) return Results.StatusCode(401);
+    var shaC = ServingState.CanonicalSha(sha);
+    if (shaC is null || string.IsNullOrWhiteSpace(doc)) return Results.Json(new { error = "invalid_copy_identity" }, statusCode: 400);
+    // typed precheck: unknown copy -> 404, no protocol entry, no epoch change
+    string? curState;
+    await using (var c0 = await dataSource.OpenConnectionAsync())
+    await using (var q0 = new NpgsqlCommand("SELECT state FROM vault_copies WHERE doc_id=$1 AND copy_sha256=$2", c0))
+    { q0.Parameters.AddWithValue(doc); q0.Parameters.AddWithValue(shaC); curState = (string?)await q0.ExecuteScalarAsync(); }
+    if (curState is null) return Results.Json(new { error = "unknown_copy", doc, sha = shaC }, statusCode: 404);
+    if (curState == "withdrawn")
+        return Results.Json(new { status = "already_withdrawn", epoch = state.Epoch, digest = state.Digest, changed = false });
     var op = "withdraw-" + Guid.NewGuid().ToString("N")[..8];
-    long admittedMs = 0;
-    var (epoch, digest) = await state.WithdrawAsync(doc, sha,
+    long admittedMs = 0; int resetStreams = 0;
+    var (epoch, digest, changed) = await state.WithdrawAsync(doc, shaC,
         durableCas: async () =>
         {
             await using var c = await dataSource.OpenConnectionAsync();
@@ -177,35 +221,35 @@ app.MapPost("/admin/withdraw", async (HttpContext ctx, string doc, string sha) =
             long e0; string d0;
             await using (var q = new NpgsqlCommand("SELECT epoch, digest FROM serving_policy WHERE id = 1 FOR UPDATE", c, tx))
             await using (var r = await q.ExecuteReaderAsync()) { await r.ReadAsync(); e0 = r.GetInt64(0); d0 = r.GetString(1); }
-            await using (var u = new NpgsqlCommand("UPDATE vault_copies SET state='withdrawn', fence_seq=fence_seq+1 WHERE doc_id=$1 AND copy_sha256=$2", c, tx))
-            { u.Parameters.AddWithValue(doc); u.Parameters.AddWithValue(sha); await u.ExecuteNonQueryAsync(); }
+            int rows;
+            await using (var u = new NpgsqlCommand("UPDATE vault_copies SET state='withdrawn', fence_seq=fence_seq+1 WHERE doc_id=$1 AND copy_sha256=$2 AND state='eligible'", c, tx))
+            { u.Parameters.AddWithValue(doc); u.Parameters.AddWithValue(shaC); rows = await u.ExecuteNonQueryAsync(); }
+            if (rows != 1) { await tx.RollbackAsync(); return (e0, d0, false); }   // concurrently withdrawn: idempotent, no bump
             var d1 = "state-" + Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(
-                         System.Text.Encoding.UTF8.GetBytes($"{d0}|{op}|{doc}|{sha}|{e0 + 1}")))[..16].ToLowerInvariant();
+                         System.Text.Encoding.UTF8.GetBytes($"{d0}|{op}|{doc}|{shaC}|{e0 + 1}")))[..16].ToLowerInvariant();
             await using (var cas = new NpgsqlCommand("UPDATE serving_policy SET epoch = $1, digest = $2 WHERE id = 1 AND epoch = $3", c, tx))
             {
                 cas.Parameters.AddWithValue(e0 + 1); cas.Parameters.AddWithValue(d1); cas.Parameters.AddWithValue(e0);
                 if (await cas.ExecuteNonQueryAsync() != 1) throw new InvalidOperationException("witness CAS failed");
             }
             await tx.CommitAsync();
-            // independent read-back of the committed witness (new connection)
             await using var c2 = await dataSource.OpenConnectionAsync();
             await using var rb = new NpgsqlCommand("SELECT epoch, digest FROM serving_policy WHERE id = 1", c2);
             await using var rr = await rb.ExecuteReaderAsync(); await rr.ReadAsync();
-            return (rr.GetInt64(0), rr.GetString(1));
+            return (rr.GetInt64(0), rr.GetString(1), true);
         },
         emitAdmit: () => { admittedMs = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-                           DeliveryTrace.Emit("admit", "policy_probe", new { operation = op, copy = sha, monotonic_ms = admittedMs }); },
-        emitFence: (e, d) => DeliveryTrace.Emit("fence", "witness", new { operation = op, copy = sha, epoch = e, digest = d }));
+                           DeliveryTrace.Emit("admit", "policy_probe", new { operation = op, copy = shaC, monotonic_ms = admittedMs }); },
+        emitFence: (e, d) => DeliveryTrace.Emit("fence", "witness", new { operation = op, copy = shaC, epoch = e, digest = d }),
+        // cut in-flight egress of the withdrawn copy (RST discards kernel-queued bytes) BEFORE acknowledging
+        onFenced: () => { resetStreams = active.ResetAll(ServingState.Key(doc, shaC)); });
     DeliveryTrace.Flush();
-    return Results.Json(new { operation = op, epoch, digest, admitted_ms = admittedMs });
+    return Results.Json(new { operation = op, epoch, digest, changed, admitted_ms = admittedMs, reset_streams = resetStreams });
 });
-app.MapPost("/admin/reconcile-prior", async (HttpContext ctx, string evidence, int minAgeSec) =>
+app.MapPost("/admin/reconcile-prior", async (HttpContext ctx) =>
 {
     if (await Admin(ctx) is null) return Results.StatusCode(401);
-    var drained = await ledger.ReconcilePriorInstancesAsync(evidence, TimeSpan.FromSeconds(minAgeSec));
-    foreach (var (id, _) in drained) DeliveryTrace.Emit("prove_release", "drain_probe", new { attempt = id.ToString(), proof = "reconciliation" });
-    DeliveryTrace.Flush();
-    return Results.Json(new { drained = drained.Count });
+    return Results.Json(new { drained = await ReconcilePriorAsync(), min_age_s = reconcileMinAge.TotalSeconds });
 });
 app.MapGet("/admin/ledger", async (HttpContext ctx) =>
 {

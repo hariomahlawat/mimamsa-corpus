@@ -22,9 +22,9 @@
    "seq": 1
   },
   {
-   "attempt": "ec0e97e6-357f-4f62-ab42-80adab76836f",
-   "connection": "c37764",
-   "stream": "0HNQB1FRKN2IH:00000001",
+   "attempt": "6679586b-6ad0-481d-ad67-65f7c9c3e6f1",
+   "connection": "c60294",
+   "stream": "0HNQB6JPGA2CK:00000001",
    "copy": "target",
    "offset": 0,
    "size": 65536,
@@ -34,13 +34,13 @@
    "seq": 2
   },
   {
-   "attempt": "ec0e97e6-357f-4f62-ab42-80adab76836f",
+   "attempt": "6679586b-6ad0-481d-ad67-65f7c9c3e6f1",
    "kind": "enter",
    "source": "policy_probe",
    "seq": 3
   },
   {
-   "attempt": "ec0e97e6-357f-4f62-ab42-80adab76836f",
+   "attempt": "6679586b-6ad0-481d-ad67-65f7c9c3e6f1",
    "offset": 0,
    "size": 65536,
    "kind": "accept",
@@ -48,7 +48,7 @@
    "seq": 4
   },
   {
-   "attempt": "ec0e97e6-357f-4f62-ab42-80adab76836f",
+   "attempt": "6679586b-6ad0-481d-ad67-65f7c9c3e6f1",
    "outcome": "accepted",
    "size": 65536,
    "kind": "settle",
@@ -56,9 +56,9 @@
    "seq": 5
   },
   {
-   "attempt": "a3fb82da-6ab2-4540-a95f-c9e9669abb08",
-   "connection": "c37764",
-   "stream": "0HNQB1FRKN2IH:00000001",
+   "attempt": "b480c468-9f14-4a3d-ab39-562209b639ab",
+   "connection": "c60294",
+   "stream": "0HNQB6JPGA2CK:00000001",
    "copy": "target",
    "offset": 65536,
    "size": 65536,
@@ -68,13 +68,13 @@
    "seq": 6
   },
   {
-   "attempt": "a3fb82da-6ab2-4540-a95f-c9e9669abb08",
+   "attempt": "b480c468-9f14-4a3d-ab39-562209b639ab",
    "kind": "enter",
    "source": "policy_probe",
    "seq": 7
   },
   {
-   "attempt": "a3fb82da-6ab2-4540-a95f-c9e9669abb08",
+   "attempt": "b480c468-9f14-4a3d-ab39-562209b639ab",
    "offset": 65536,
    "size": 65536,
    "kind": "accept",
@@ -82,7 +82,7 @@
    "seq": 8
   },
   {
-   "attempt": "a3fb82da-6ab2-4540-a95f-c9e9669abb08",
+   "attempt": "b480c468-9f14-4a3d-ab39-562209b639ab",
    "outcome": "accepted",
    "size": 65536,
    "kind": "settle",
@@ -90,9 +90,9 @@
    "seq": 9
   },
   {
-   "attempt": "b01d11cb-7376-4f64-a5b2-b236e9a8bdb0",
-   "connection": "c37764",
-   "stream": "0HNQB1FRKN2IH:00000001",
+   "attempt": "9d4d770e-e5e1-4a58-adb3-0629ed26e8e2",
+   "connection": "c60294",
+   "stream": "0HNQB6JPGA2CK:00000001",
    "copy": "target",
    "offset": 131072,
    "size": 3072,
@@ -102,13 +102,13 @@
    "seq": 10
   },
   {
-   "attempt": "b01d11cb-7376-4f64-a5b2-b236e9a8bdb0",
+   "attempt": "9d4d770e-e5e1-4a58-adb3-0629ed26e8e2",
    "kind": "enter",
    "source": "policy_probe",
    "seq": 11
   },
   {
-   "attempt": "b01d11cb-7376-4f64-a5b2-b236e9a8bdb0",
+   "attempt": "9d4d770e-e5e1-4a58-adb3-0629ed26e8e2",
    "offset": 131072,
    "size": 3072,
    "kind": "accept",
@@ -116,7 +116,7 @@
    "seq": 12
   },
   {
-   "attempt": "b01d11cb-7376-4f64-a5b2-b236e9a8bdb0",
+   "attempt": "9d4d770e-e5e1-4a58-adb3-0629ed26e8e2",
    "outcome": "accepted",
    "size": 3072,
    "kind": "settle",
@@ -138,9 +138,9 @@
    "seq": 14
   },
   {
-   "attempt": "0aeddf26-524a-48a1-8bb1-ea28393eef00",
-   "connection": "c37768",
-   "stream": "0HNQB1FRKN2II:00000001",
+   "attempt": "23d750b1-3ed2-4bcb-a348-379139f05f26",
+   "connection": "c60296",
+   "stream": "0HNQB6JPGA2CL:00000001",
    "copy": "target",
    "offset": 0,
    "size": 4679,
@@ -150,13 +150,13 @@
    "seq": 15
   },
   {
-   "attempt": "0aeddf26-524a-48a1-8bb1-ea28393eef00",
+   "attempt": "23d750b1-3ed2-4bcb-a348-379139f05f26",
    "kind": "enter",
    "source": "policy_probe",
    "seq": 16
   },
   {
-   "attempt": "0aeddf26-524a-48a1-8bb1-ea28393eef00",
+   "attempt": "23d750b1-3ed2-4bcb-a348-379139f05f26",
    "offset": 0,
    "size": 4679,
    "kind": "accept",
@@ -164,7 +164,7 @@
    "seq": 17
   },
   {
-   "attempt": "0aeddf26-524a-48a1-8bb1-ea28393eef00",
+   "attempt": "23d750b1-3ed2-4bcb-a348-379139f05f26",
    "outcome": "accepted",
    "size": 4679,
    "kind": "settle",
@@ -186,41 +186,41 @@
    "seq": 19
   },
   {
-   "attempt": "ec0e97e6-357f-4f62-ab42-80adab76836f",
+   "attempt": "23d750b1-3ed2-4bcb-a348-379139f05f26",
    "proof": "drain",
-   "evidence": "linux /proc/net/tcp: socket 5191->37764 tx_queue=0 (2 consecutive samples)",
+   "evidence": "linux /proc/net/tcp: socket 5191->60296 tx_queue=0 (2 consecutive samples)",
    "kind": "prove_release",
    "source": "drain_probe",
    "seq": 20
   },
   {
-   "attempt": "a3fb82da-6ab2-4540-a95f-c9e9669abb08",
+   "attempt": "6679586b-6ad0-481d-ad67-65f7c9c3e6f1",
    "proof": "drain",
-   "evidence": "linux /proc/net/tcp: socket 5191->37764 tx_queue=0 (2 consecutive samples)",
+   "evidence": "linux /proc/net/tcp: socket 5191->60294 tx_queue=0 (2 consecutive samples)",
    "kind": "prove_release",
    "source": "drain_probe",
    "seq": 21
   },
   {
-   "attempt": "b01d11cb-7376-4f64-a5b2-b236e9a8bdb0",
+   "attempt": "b480c468-9f14-4a3d-ab39-562209b639ab",
    "proof": "drain",
-   "evidence": "linux /proc/net/tcp: socket 5191->37764 tx_queue=0 (2 consecutive samples)",
+   "evidence": "linux /proc/net/tcp: socket 5191->60294 tx_queue=0 (2 consecutive samples)",
    "kind": "prove_release",
    "source": "drain_probe",
    "seq": 22
   },
   {
-   "attempt": "0aeddf26-524a-48a1-8bb1-ea28393eef00",
+   "attempt": "9d4d770e-e5e1-4a58-adb3-0629ed26e8e2",
    "proof": "drain",
-   "evidence": "linux /proc/net/tcp: socket 5191->37768 tx_queue=0 (2 consecutive samples)",
+   "evidence": "linux /proc/net/tcp: socket 5191->60294 tx_queue=0 (2 consecutive samples)",
    "kind": "prove_release",
    "source": "drain_probe",
    "seq": 23
   },
   {
-   "attempt": "1ad0a3d2-23df-4eda-95ba-95ebbab4761c",
-   "connection": "c37796",
-   "stream": "0HNQB1FRKN2IM:00000001",
+   "attempt": "730c7915-e646-4d36-9db5-de4193903734",
+   "connection": "c60360",
+   "stream": "0HNQB6JPGA2CQ:00000001",
    "copy": "target",
    "offset": 0,
    "size": 65536,
@@ -230,13 +230,13 @@
    "seq": 24
   },
   {
-   "attempt": "1ad0a3d2-23df-4eda-95ba-95ebbab4761c",
+   "attempt": "730c7915-e646-4d36-9db5-de4193903734",
    "kind": "enter",
    "source": "policy_probe",
    "seq": 25
   },
   {
-   "attempt": "1ad0a3d2-23df-4eda-95ba-95ebbab4761c",
+   "attempt": "730c7915-e646-4d36-9db5-de4193903734",
    "offset": 0,
    "size": 65536,
    "kind": "accept",
@@ -244,7 +244,7 @@
    "seq": 26
   },
   {
-   "attempt": "1ad0a3d2-23df-4eda-95ba-95ebbab4761c",
+   "attempt": "730c7915-e646-4d36-9db5-de4193903734",
    "outcome": "accepted",
    "size": 65536,
    "kind": "settle",
@@ -252,9 +252,9 @@
    "seq": 27
   },
   {
-   "attempt": "63b6ba92-8e9c-4f99-94fc-1cab97f49d76",
-   "connection": "c37796",
-   "stream": "0HNQB1FRKN2IM:00000001",
+   "attempt": "770f58a6-5766-4e65-a8e1-df9d613e7fa3",
+   "connection": "c60360",
+   "stream": "0HNQB6JPGA2CQ:00000001",
    "copy": "target",
    "offset": 65536,
    "size": 2048,
@@ -264,13 +264,13 @@
    "seq": 28
   },
   {
-   "attempt": "63b6ba92-8e9c-4f99-94fc-1cab97f49d76",
+   "attempt": "770f58a6-5766-4e65-a8e1-df9d613e7fa3",
    "kind": "enter",
    "source": "policy_probe",
    "seq": 29
   },
   {
-   "attempt": "63b6ba92-8e9c-4f99-94fc-1cab97f49d76",
+   "attempt": "770f58a6-5766-4e65-a8e1-df9d613e7fa3",
    "offset": 65536,
    "size": 2048,
    "kind": "accept",
@@ -278,7 +278,7 @@
    "seq": 30
   },
   {
-   "attempt": "63b6ba92-8e9c-4f99-94fc-1cab97f49d76",
+   "attempt": "770f58a6-5766-4e65-a8e1-df9d613e7fa3",
    "outcome": "accepted",
    "size": 2048,
    "kind": "settle",
@@ -384,25 +384,25 @@
    "seq": 38
   },
   {
-   "attempt": "1ad0a3d2-23df-4eda-95ba-95ebbab4761c",
+   "attempt": "730c7915-e646-4d36-9db5-de4193903734",
    "proof": "drain",
-   "evidence": "linux /proc/net/tcp: socket 5191->37796 tx_queue=0 (2 consecutive samples)",
+   "evidence": "linux /proc/net/tcp: socket 5191->60360 tx_queue=0 (2 consecutive samples)",
    "kind": "prove_release",
    "source": "drain_probe",
    "seq": 39
   },
   {
-   "attempt": "63b6ba92-8e9c-4f99-94fc-1cab97f49d76",
+   "attempt": "770f58a6-5766-4e65-a8e1-df9d613e7fa3",
    "proof": "drain",
-   "evidence": "linux /proc/net/tcp: socket 5191->37796 tx_queue=0 (2 consecutive samples)",
+   "evidence": "linux /proc/net/tcp: socket 5191->60360 tx_queue=0 (2 consecutive samples)",
    "kind": "prove_release",
    "source": "drain_probe",
    "seq": 40
   },
   {
-   "attempt": "e06a4a57-ac9a-4eca-bef7-56e2e26baf09",
-   "connection": "c37876",
-   "stream": "0HNQB1FRKN2IT:00000001",
+   "attempt": "7adecfe6-2e44-480a-af50-e5be4b951b5b",
+   "connection": "c60438",
+   "stream": "0HNQB6JPGA2D1:00000001",
    "copy": "target",
    "offset": 0,
    "size": 65536,
@@ -412,13 +412,13 @@
    "seq": 41
   },
   {
-   "attempt": "e06a4a57-ac9a-4eca-bef7-56e2e26baf09",
+   "attempt": "7adecfe6-2e44-480a-af50-e5be4b951b5b",
    "kind": "enter",
    "source": "policy_probe",
    "seq": 42
   },
   {
-   "attempt": "e06a4a57-ac9a-4eca-bef7-56e2e26baf09",
+   "attempt": "7adecfe6-2e44-480a-af50-e5be4b951b5b",
    "offset": 0,
    "size": 65536,
    "kind": "accept",
@@ -426,7 +426,7 @@
    "seq": 43
   },
   {
-   "attempt": "e06a4a57-ac9a-4eca-bef7-56e2e26baf09",
+   "attempt": "7adecfe6-2e44-480a-af50-e5be4b951b5b",
    "outcome": "accepted",
    "size": 65536,
    "kind": "settle",
@@ -434,81 +434,83 @@
    "seq": 44
   },
   {
-   "connections": {
-    "c37876": 6144,
-    "c37796": 0,
-    "c37764": 0,
-    "c37768": 0,
-    "c37790": 0,
-    "c37844": 0,
-    "c37814": 0,
-    "c37868": 0,
-    "c37830": 0,
-    "c37770": 0,
-    "c37784": 0,
-    "c37760": 0,
-    "c37800": 0,
-    "c37854": 0
-   },
-   "site": 6144,
-   "note": "slow reader holding, after 1 KiB",
-   "probe": "/proc/net/tcp tx_queue",
-   "kind": "occupancy",
-   "source": "drain_probe",
-   "seq": 45
-  },
-  {
-   "connections": {
-    "c37876": 6144,
-    "c37796": 0,
-    "c37764": 0,
-    "c37768": 0,
-    "c37790": 0,
-    "c37844": 0,
-    "c37814": 0,
-    "c37868": 0,
-    "c37830": 0,
-    "c37770": 0,
-    "c37784": 0,
-    "c37760": 0,
-    "c37800": 0,
-    "c37854": 0
-   },
-   "site": 6144,
-   "note": "slow reader holding, +0.6 s",
-   "probe": "/proc/net/tcp tx_queue",
-   "kind": "occupancy",
-   "source": "drain_probe",
-   "seq": 46
-  },
-  {
-   "attempt": "4e86c441-162d-4696-8c2a-6b9c9cf29f8b",
-   "connection": "c37876",
-   "stream": "0HNQB1FRKN2IT:00000001",
+   "attempt": "9878bbe9-9651-464a-8e70-95520519f388",
+   "connection": "c60438",
+   "stream": "0HNQB6JPGA2D1:00000001",
    "copy": "target",
    "offset": 65536,
    "size": 65536,
    "epoch": 1,
    "kind": "reserve",
    "source": "ledger",
-   "seq": 47
+   "seq": 45
   },
   {
-   "attempt": "4e86c441-162d-4696-8c2a-6b9c9cf29f8b",
+   "attempt": "9878bbe9-9651-464a-8e70-95520519f388",
    "kind": "enter",
    "source": "policy_probe",
-   "seq": 48
+   "seq": 46
   },
   {
-   "attempt": "4e86c441-162d-4696-8c2a-6b9c9cf29f8b",
+   "attempt": "9878bbe9-9651-464a-8e70-95520519f388",
    "offset": 65536,
    "size": 65536,
    "kind": "accept",
    "source": "terminal",
+   "seq": 47
+  },
+  {
+   "connections": {
+    "c60296": 0,
+    "c60294": 0,
+    "c60360": 0,
+    "c60438": 6144,
+    "c60376": 0,
+    "c56760": 0,
+    "c60332": 0,
+    "c60310": 0,
+    "c60406": 0,
+    "c60420": 0,
+    "c60348": 0,
+    "c60392": 0,
+    "c60322": 0,
+    "c60432": 0,
+    "c60388": 0
+   },
+   "site": 6144,
+   "note": "slow reader holding, after 1 KiB",
+   "probe": "/proc/net/tcp tx_queue",
+   "kind": "occupancy",
+   "source": "drain_probe",
+   "seq": 48
+  },
+  {
+   "connections": {
+    "c60296": 0,
+    "c60294": 0,
+    "c60360": 0,
+    "c60438": 6144,
+    "c60376": 0,
+    "c56760": 0,
+    "c60332": 0,
+    "c60310": 0,
+    "c60406": 0,
+    "c60420": 0,
+    "c60348": 0,
+    "c60392": 0,
+    "c60322": 0,
+    "c60432": 0,
+    "c60388": 0
+   },
+   "site": 6144,
+   "note": "slow reader holding, +0.6 s",
+   "probe": "/proc/net/tcp tx_queue",
+   "kind": "occupancy",
+   "source": "drain_probe",
    "seq": 49
   },
   {
-   "attempt": "4e86c441-162d-4696-8c2a-6b9c9cf29f8b",
+   "attempt": "9878bbe9-9651-464a-8e70-95520519f388",
    "outcome": "accepted",
    "size": 65536,
    "kind": "settle",
@@ -516,9 +518,9 @@
    "seq": 50
   },
   {
-   "attempt": "e5dd91fb-a948-4ac2-85c0-1f809cedb20f",
-   "connection": "c37876",
-   "stream": "0HNQB1FRKN2IT:00000001",
+   "attempt": "856a3869-e989-437b-a757-b9fc676bf4ec",
+   "connection": "c60438",
+   "stream": "0HNQB6JPGA2D1:00000001",
    "copy": "target",
    "offset": 131072,
    "size": 3072,
@@ -528,13 +530,13 @@
    "seq": 51
   },
   {
-   "attempt": "e5dd91fb-a948-4ac2-85c0-1f809cedb20f",
+   "attempt": "856a3869-e989-437b-a757-b9fc676bf4ec",
    "kind": "enter",
    "source": "policy_probe",
    "seq": 52
   },
   {
-   "attempt": "e5dd91fb-a948-4ac2-85c0-1f809cedb20f",
+   "attempt": "856a3869-e989-437b-a757-b9fc676bf4ec",
    "offset": 131072,
    "size": 3072,
    "kind": "accept",
@@ -542,7 +544,7 @@
    "seq": 53
   },
   {
-   "attempt": "e5dd91fb-a948-4ac2-85c0-1f809cedb20f",
+   "attempt": "856a3869-e989-437b-a757-b9fc676bf4ec",
    "outcome": "accepted",
    "size": 3072,
    "kind": "settle",
@@ -550,45 +552,46 @@
    "seq": 54
   },
   {
-   "attempt": "e06a4a57-ac9a-4eca-bef7-56e2e26baf09",
+   "attempt": "7adecfe6-2e44-480a-af50-e5be4b951b5b",
    "proof": "drain",
-   "evidence": "linux /proc/net/tcp: socket 5191->37876 tx_queue=0 (2 consecutive samples)",
+   "evidence": "linux /proc/net/tcp: socket 5191->60438 tx_queue=0 (2 consecutive samples)",
    "kind": "prove_release",
    "source": "drain_probe",
    "seq": 55
   },
   {
-   "attempt": "4e86c441-162d-4696-8c2a-6b9c9cf29f8b",
+   "attempt": "9878bbe9-9651-464a-8e70-95520519f388",
    "proof": "drain",
-   "evidence": "linux /proc/net/tcp: socket 5191->37876 tx_queue=0 (2 consecutive samples)",
+   "evidence": "linux /proc/net/tcp: socket 5191->60438 tx_queue=0 (2 consecutive samples)",
    "kind": "prove_release",
    "source": "drain_probe",
    "seq": 56
   },
   {
-   "attempt": "e5dd91fb-a948-4ac2-85c0-1f809cedb20f",
+   "attempt": "856a3869-e989-437b-a757-b9fc676bf4ec",
    "proof": "drain",
-   "evidence": "linux /proc/net/tcp: socket 5191->37876 tx_queue=0 (2 consecutive samples)",
+   "evidence": "linux /proc/net/tcp: socket 5191->60438 tx_queue=0 (2 consecutive samples)",
    "kind": "prove_release",
    "source": "drain_probe",
    "seq": 57
   },
   {
    "connections": {
-    "c37876": 0,
-    "c37796": 0,
-    "c37764": 0,
-    "c37768": 0,
-    "c37790": 0,
-    "c37844": 0,
-    "c37814": 0,
-    "c37868": 0,
-    "c37830": 0,
-    "c37770": 0,
-    "c37784": 0,
-    "c37760": 0,
-    "c37800": 0,
-    "c37854": 0
+    "c60296": 0,
+    "c60294": 0,
+    "c60360": 0,
+    "c60438": 0,
+    "c60376": 0,
+    "c56760": 0,
+    "c60332": 0,
+    "c60310": 0,
+    "c60406": 0,
+    "c60420": 0,
+    "c60348": 0,
+    "c60392": 0,
+    "c60322": 0,
+    "c60432": 0,
+    "c60388": 0
    },
    "site": 0,
    "note": "after slow reader finished and drain grace",
@@ -598,9 +601,9 @@
    "seq": 58
   },
   {
-   "attempt": "d8c70cfa-a7ed-412c-afe7-dd0aa19269bc",
-   "connection": "c43078",
-   "stream": "0HNQB1FRKN2IU:00000001",
+   "attempt": "a7233b38-2d49-4ea3-af1a-9d6e23451010",
+   "connection": "c60448",
+   "stream": "0HNQB6JPGA2D2:00000001",
    "copy": "target",
    "offset": 0,
    "size": 65536,
@@ -610,13 +613,13 @@
    "seq": 59
   },
   {
-   "attempt": "d8c70cfa-a7ed-412c-afe7-dd0aa19269bc",
+   "attempt": "a7233b38-2d49-4ea3-af1a-9d6e23451010",
    "kind": "enter",
    "source": "policy_probe",
    "seq": 60
   },
   {
-   "attempt": "d8c70cfa-a7ed-412c-afe7-dd0aa19269bc",
+   "attempt": "a7233b38-2d49-4ea3-af1a-9d6e23451010",
    "offset": 0,
    "size": 65536,
    "kind": "accept",
@@ -624,7 +627,7 @@
    "seq": 61
   },
   {
-   "attempt": "d8c70cfa-a7ed-412c-afe7-dd0aa19269bc",
+   "attempt": "a7233b38-2d49-4ea3-af1a-9d6e23451010",
    "outcome": "accepted",
    "size": 65536,
    "kind": "settle",
@@ -632,9 +635,9 @@
    "seq": 62
   },
   {
-   "attempt": "b86dbf56-841f-4005-9247-64e803d431bd",
-   "connection": "c43090",
-   "stream": "0HNQB1FRKN2IV:00000001",
+   "attempt": "b30c68e0-d6dc-440a-82e7-fdc18ec67468",
+   "connection": "c60462",
+   "stream": "0HNQB6JPGA2D3:00000001",
    "copy": "target",
    "offset": 0,
    "size": 65536,
@@ -644,13 +647,13 @@
    "seq": 63
   },
   {
-   "attempt": "b86dbf56-841f-4005-9247-64e803d431bd",
+   "attempt": "b30c68e0-d6dc-440a-82e7-fdc18ec67468",
    "kind": "enter",
    "source": "policy_probe",
    "seq": 64
   },
   {
-   "attempt": "b86dbf56-841f-4005-9247-64e803d431bd",
+   "attempt": "b30c68e0-d6dc-440a-82e7-fdc18ec67468",
    "offset": 0,
    "size": 65536,
    "kind": "accept",
@@ -658,7 +661,7 @@
    "seq": 65
   },
   {
-   "attempt": "b86dbf56-841f-4005-9247-64e803d431bd",
+   "attempt": "b30c68e0-d6dc-440a-82e7-fdc18ec67468",
    "outcome": "accepted",
    "size": 65536,
    "kind": "settle",
@@ -667,22 +670,23 @@
   },
   {
    "connections": {
-    "c37796": 0,
-    "c43078": 6144,
-    "c37876": 0,
-    "c37764": 0,
-    "c43090": 6144,
-    "c37768": 0,
-    "c37790": 0,
-    "c37844": 0,
-    "c37814": 0,
-    "c37868": 0,
-    "c37830": 0,
-    "c37770": 0,
-    "c37784": 0,
-    "c37760": 0,
-    "c37800": 0,
-    "c37854": 0
+    "c60294": 0,
+    "c60296": 0,
+    "c60448": 6144,
+    "c60438": 0,
+    "c60462": 6144,
+    "c60360": 0,
+    "c60376": 0,
+    "c56760": 0,
+    "c60332": 0,
+    "c60310": 0,
+    "c60406": 0,
+    "c60420": 0,
+    "c60348": 0,
+    "c60392": 0,
+    "c60322": 0,
+    "c60432": 0,
+    "c60388": 0
    },
    "site": 12288,
    "note": "two holders",
@@ -692,9 +696,9 @@
    "seq": 67
   },
   {
-   "attempt": "90b79cc8-bb61-482b-8f41-05027cabba84",
-   "connection": "c43092",
-   "stream": "0HNQB1FRKN2J0:00000001",
+   "attempt": "10c96a74-d1a0-4219-a57a-344920c74356",
+   "connection": "c60478",
+   "stream": "0HNQB6JPGA2D5:00000001",
    "copy": "target",
    "offset": 0,
    "size": 65536,
@@ -704,13 +708,13 @@
    "seq": 68
   },
   {
-   "attempt": "90b79cc8-bb61-482b-8f41-05027cabba84",
+   "attempt": "10c96a74-d1a0-4219-a57a-344920c74356",
    "kind": "enter",
    "source": "policy_probe",
    "seq": 69
   },
   {
-   "attempt": "90b79cc8-bb61-482b-8f41-05027cabba84",
+   "attempt": "10c96a74-d1a0-4219-a57a-344920c74356",
    "offset": 0,
    "size": 65536,
    "kind": "accept",
@@ -718,7 +722,7 @@
    "seq": 70
   },
   {
-   "attempt": "90b79cc8-bb61-482b-8f41-05027cabba84",
+   "attempt": "10c96a74-d1a0-4219-a57a-344920c74356",
    "outcome": "accepted",
    "size": 65536,
    "kind": "settle",
@@ -726,33 +730,33 @@
    "seq": 71
   },
   {
-   "attempt": "90b79cc8-bb61-482b-8f41-05027cabba84",
+   "attempt": "10c96a74-d1a0-4219-a57a-344920c74356",
    "proof": "drain",
-   "evidence": "linux /proc/net/tcp: socket 5191->43092 tx_queue=0 (2 consecutive samples)",
+   "evidence": "linux /proc/net/tcp: socket 5191->60478 tx_queue=0 (2 consecutive samples)",
    "kind": "prove_release",
    "source": "drain_probe",
    "seq": 72
   },
   {
-   "attempt": "d8c70cfa-a7ed-412c-afe7-dd0aa19269bc",
+   "attempt": "a7233b38-2d49-4ea3-af1a-9d6e23451010",
    "proof": "drain",
-   "evidence": "linux /proc/net/tcp: socket 5191->43078 tx_queue=0 (2 consecutive samples)",
+   "evidence": "linux /proc/net/tcp: socket 5191->60448 tx_queue=0 (2 consecutive samples)",
    "kind": "prove_release",
    "source": "drain_probe",
    "seq": 73
   },
   {
-   "attempt": "b86dbf56-841f-4005-9247-64e803d431bd",
+   "attempt": "b30c68e0-d6dc-440a-82e7-fdc18ec67468",
    "proof": "drain",
-   "evidence": "linux /proc/net/tcp: socket 5191->43090 tx_queue=0 (2 consecutive samples)",
+   "evidence": "linux /proc/net/tcp: socket 5191->60462 tx_queue=0 (2 consecutive samples)",
    "kind": "prove_release",
    "source": "drain_probe",
    "seq": 74
   },
   {
-   "attempt": "83ee95f8-5b2d-4300-b120-3606776b3a60",
-   "connection": "c43122",
-   "stream": "0HNQB1FRKN2J2:00000001",
+   "attempt": "59e7db12-6916-483b-bc1e-faa721c10480",
+   "connection": "c60486",
+   "stream": "0HNQB6JPGA2D6:00000001",
    "copy": "target",
    "offset": 0,
    "size": 65536,
@@ -762,13 +766,13 @@
    "seq": 75
   },
   {
-   "attempt": "83ee95f8-5b2d-4300-b120-3606776b3a60",
+   "attempt": "59e7db12-6916-483b-bc1e-faa721c10480",
    "kind": "enter",
    "source": "policy_probe",
    "seq": 76
   },
   {
-   "attempt": "83ee95f8-5b2d-4300-b120-3606776b3a60",
+   "attempt": "59e7db12-6916-483b-bc1e-faa721c10480",
    "offset": 0,
    "size": 65536,
    "kind": "accept",
@@ -776,7 +780,7 @@
    "seq": 77
   },
   {
-   "attempt": "83ee95f8-5b2d-4300-b120-3606776b3a60",
+   "attempt": "59e7db12-6916-483b-bc1e-faa721c10480",
    "outcome": "accepted",
    "size": 65536,
    "kind": "settle",
@@ -784,86 +788,153 @@
    "seq": 78
   },
   {
-   "kind": "cancel",
-   "source": "client",
-   "stream": "0HNQB1FRKN2J2:00000001",
-   "note": "uncertain stream (client RST)",
+   "attempt": "bbd7d026-a28e-48f7-96bc-326a5317343e",
+   "connection": "c60486",
+   "stream": "0HNQB6JPGA2D6:00000001",
+   "copy": "target",
+   "offset": 65536,
+   "size": 65536,
+   "epoch": 1,
+   "kind": "reserve",
+   "source": "ledger",
    "seq": 79
   },
   {
-   "attempt": "83ee95f8-5b2d-4300-b120-3606776b3a60",
-   "proof": "drain",
-   "evidence": "linux /proc/net/tcp: socket 5191->43122 gone",
-   "kind": "prove_release",
-   "source": "drain_probe",
+   "attempt": "bbd7d026-a28e-48f7-96bc-326a5317343e",
+   "kind": "enter",
+   "source": "policy_probe",
    "seq": 80
   },
   {
-   "attempt": "c154a63c-4027-459d-aba2-31d608a5bd69",
-   "connection": "c43126",
-   "stream": "0HNQB1FRKN2J3:00000001",
+   "attempt": "bbd7d026-a28e-48f7-96bc-326a5317343e",
+   "offset": 65536,
+   "size": 65536,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 81
+  },
+  {
+   "attempt": "bbd7d026-a28e-48f7-96bc-326a5317343e",
+   "outcome": "uncertain",
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 82
+  },
+  {
+   "kind": "cancel",
+   "source": "client",
+   "stream": "0HNQB6JPGA2D6:00000001",
+   "note": "uncertain stream (client RST)",
+   "seq": 83
+  },
+  {
+   "attempt": "59e7db12-6916-483b-bc1e-faa721c10480",
+   "proof": "drain",
+   "evidence": "linux /proc/net/tcp: socket 5191->60486 gone",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 84
+  },
+  {
+   "attempt": "bbd7d026-a28e-48f7-96bc-326a5317343e",
+   "proof": "drain",
+   "evidence": "linux /proc/net/tcp: socket 5191->60486 gone",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 85
+  },
+  {
+   "attempt": "871738a1-5459-4cf6-89fc-2e4a3f06066b",
+   "connection": "c60498",
+   "stream": "0HNQB6JPGA2D7:00000001",
    "copy": "target",
    "offset": 0,
    "size": 65536,
    "epoch": 1,
    "kind": "reserve",
    "source": "ledger",
-   "seq": 81
+   "seq": 86
   },
   {
-   "attempt": "c154a63c-4027-459d-aba2-31d608a5bd69",
+   "attempt": "871738a1-5459-4cf6-89fc-2e4a3f06066b",
    "kind": "enter",
    "source": "policy_probe",
-   "seq": 82
+   "seq": 87
   },
   {
-   "attempt": "c154a63c-4027-459d-aba2-31d608a5bd69",
+   "attempt": "871738a1-5459-4cf6-89fc-2e4a3f06066b",
    "offset": 0,
    "size": 65536,
    "kind": "accept",
    "source": "terminal",
-   "seq": 83
+   "seq": 88
   },
   {
-   "attempt": "c154a63c-4027-459d-aba2-31d608a5bd69",
+   "attempt": "871738a1-5459-4cf6-89fc-2e4a3f06066b",
    "outcome": "accepted",
    "size": 65536,
    "kind": "settle",
    "source": "ledger",
-   "seq": 84
+   "seq": 89
   },
   {
-   "operation": "withdraw-c2ca0452",
+   "attempt": "22404626-d3eb-4dc4-8727-a5494bcb2974",
+   "connection": "c60508",
+   "stream": "0HNQB6JPGA2D8:00000001",
    "copy": "target",
-   "monotonic_ms": 1795621898922,
+   "offset": 0,
+   "size": 65536,
+   "epoch": 1,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 90
+  },
+  {
+   "operation": "withdraw-a211fec9",
+   "copy": "target",
+   "monotonic_ms": 1795639497767,
    "kind": "admit",
    "source": "policy_probe",
-   "seq": 85
+   "seq": 91
   },
   {
-   "operation": "withdraw-c2ca0452",
+   "operation": "withdraw-a211fec9",
    "copy": "target",
    "epoch": 2,
-   "digest": "state-2b83148a8201e7ad",
+   "digest": "state-3d8b7fedb8084129",
    "kind": "fence",
    "source": "witness",
-   "seq": 86
+   "seq": 92
   },
   {
-   "operation": "withdraw-c2ca0452",
+   "attempt": "22404626-d3eb-4dc4-8727-a5494bcb2974",
+   "outcome": "zero",
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 93
+  },
+  {
+   "operation": "withdraw-a211fec9",
    "epoch": 2,
-   "digest": "state-2b83148a8201e7ad",
-   "monotonic_ms": 1795621898936,
+   "digest": "state-3d8b7fedb8084129",
+   "monotonic_ms": 1795639497780,
    "kind": "ack",
    "source": "client",
-   "seq": 87
+   "seq": 94
   },
   {
    "kind": "cancel",
    "source": "client",
-   "stream": "0HNQB1FRKN2J3:00000001",
+   "stream": "0HNQB6JPGA2D7:00000001",
    "note": "withdrawn stream ended early; viewer cancels",
-   "seq": 88
+   "seq": 95
+  },
+  {
+   "kind": "cancel",
+   "source": "client",
+   "stream": "0HNQB6JPGA2D8:00000001",
+   "note": "stream reserved before the fence, denied at handoff (zero transfer)",
+   "seq": 96
   },
   {
    "case": "withdrawn",
@@ -878,109 +949,144 @@
    "body_matches_fixture": true,
    "kind": "http",
    "source": "client",
-   "seq": 89
-  },
-  {
-   "attempt": "c154a63c-4027-459d-aba2-31d608a5bd69",
-   "proof": "drain",
-   "evidence": "linux /proc/net/tcp: socket 5191->43126 gone",
-   "kind": "prove_release",
-   "source": "drain_probe",
-   "seq": 90
-  },
-  {
-   "attempt": "93e19e7f-6275-4427-93a1-d72876778495",
-   "connection": "c43154",
-   "stream": "0HNQB1FRKN2J6:00000001",
-   "copy": "unrelated",
-   "offset": 0,
-   "size": 65536,
-   "epoch": 2,
-   "kind": "reserve",
-   "source": "ledger",
-   "seq": 91
-  },
-  {
-   "attempt": "93e19e7f-6275-4427-93a1-d72876778495",
-   "kind": "enter",
-   "source": "policy_probe",
-   "seq": 92
-  },
-  {
-   "attempt": "93e19e7f-6275-4427-93a1-d72876778495",
-   "offset": 0,
-   "size": 65536,
-   "kind": "accept",
-   "source": "terminal",
-   "seq": 93
-  },
-  {
-   "attempt": "93e19e7f-6275-4427-93a1-d72876778495",
-   "outcome": "accepted",
-   "size": 65536,
-   "kind": "settle",
-   "source": "ledger",
-   "seq": 94
-  },
-  {
-   "kind": "restart",
-   "source": "fault_driver",
-   "seq": 95
-  },
-  {
-   "kind": "cancel",
-   "source": "client",
-   "stream": "0HNQB1FRKN2J6:00000001",
-   "note": "stream lost in crash",
-   "seq": 96
-  },
-  {
-   "kind": "recover",
-   "source": "witness",
-   "epoch": 2,
-   "digest": "state-2b83148a8201e7ad",
    "seq": 97
   },
   {
-   "attempt": "93e19e7f-6275-4427-93a1-d72876778495",
-   "proof": "reconciliation",
+   "attempt": "871738a1-5459-4cf6-89fc-2e4a3f06066b",
+   "proof": "drain",
+   "evidence": "linux /proc/net/tcp: socket 5191->60498 gone",
    "kind": "prove_release",
    "source": "drain_probe",
    "seq": 98
   },
   {
-   "attempt": "a4811d2e-40a2-41fa-865c-1047c3210888",
-   "connection": "c46530",
-   "stream": "0HNQB1G171658:00000001",
+   "attempt": "e9e59cd4-0769-4cea-86ef-836a50371ad5",
+   "connection": "c60552",
+   "stream": "0HNQB6JPGA2DB:00000001",
    "copy": "unrelated",
    "offset": 0,
-   "size": 2048,
+   "size": 65536,
    "epoch": 2,
    "kind": "reserve",
    "source": "ledger",
    "seq": 99
   },
   {
-   "attempt": "a4811d2e-40a2-41fa-865c-1047c3210888",
+   "attempt": "e9e59cd4-0769-4cea-86ef-836a50371ad5",
    "kind": "enter",
    "source": "policy_probe",
    "seq": 100
   },
   {
-   "attempt": "a4811d2e-40a2-41fa-865c-1047c3210888",
+   "attempt": "e9e59cd4-0769-4cea-86ef-836a50371ad5",
    "offset": 0,
-   "size": 2048,
+   "size": 65536,
    "kind": "accept",
    "source": "terminal",
    "seq": 101
   },
   {
-   "attempt": "a4811d2e-40a2-41fa-865c-1047c3210888",
+   "attempt": "e9e59cd4-0769-4cea-86ef-836a50371ad5",
+   "outcome": "accepted",
+   "size": 65536,
+   "kind": "settle",
+   "source": "ledger",
+   "seq": 102
+  },
+  {
+   "attempt": "128bb953-ce76-4645-8ac9-f4385bbaa676",
+   "connection": "c60552",
+   "stream": "0HNQB6JPGA2DB:00000001",
+   "copy": "unrelated",
+   "offset": 65536,
+   "size": 65536,
+   "epoch": 2,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 103
+  },
+  {
+   "attempt": "128bb953-ce76-4645-8ac9-f4385bbaa676",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 104
+  },
+  {
+   "attempt": "128bb953-ce76-4645-8ac9-f4385bbaa676",
+   "offset": 65536,
+   "size": 65536,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 105
+  },
+  {
+   "kind": "restart",
+   "source": "fault_driver",
+   "seq": 106
+  },
+  {
+   "kind": "cancel",
+   "source": "client",
+   "stream": "0HNQB6JPGA2DB:00000001",
+   "note": "stream lost in crash",
+   "seq": 107
+  },
+  {
+   "kind": "recover",
+   "source": "witness",
+   "epoch": 2,
+   "digest": "state-3d8b7fedb8084129",
+   "seq": 108
+  },
+  {
+   "attempt": "128bb953-ce76-4645-8ac9-f4385bbaa676",
+   "proof": "reconciliation",
+   "evidence": "linux /proc/net/tcp: socket 5191->60552 gone",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 109
+  },
+  {
+   "attempt": "e9e59cd4-0769-4cea-86ef-836a50371ad5",
+   "proof": "reconciliation",
+   "evidence": "linux /proc/net/tcp: socket 5191->60552 gone",
+   "kind": "prove_release",
+   "source": "drain_probe",
+   "seq": 110
+  },
+  {
+   "attempt": "828ed9f4-b431-4129-b214-e9ee3fa97748",
+   "connection": "c39390",
+   "stream": "0HNQB6JTODC1A:00000001",
+   "copy": "unrelated",
+   "offset": 0,
+   "size": 2048,
+   "epoch": 2,
+   "kind": "reserve",
+   "source": "ledger",
+   "seq": 111
+  },
+  {
+   "attempt": "828ed9f4-b431-4129-b214-e9ee3fa97748",
+   "kind": "enter",
+   "source": "policy_probe",
+   "seq": 112
+  },
+  {
+   "attempt": "828ed9f4-b431-4129-b214-e9ee3fa97748",
+   "offset": 0,
+   "size": 2048,
+   "kind": "accept",
+   "source": "terminal",
+   "seq": 113
+  },
+  {
+   "attempt": "828ed9f4-b431-4129-b214-e9ee3fa97748",
    "outcome": "accepted",
    "size": 2048,
    "kind": "settle",
    "source": "ledger",
-   "seq": 102
+   "seq": 114
   },
   {
    "case": "unrelated_after_restart",
@@ -994,15 +1100,15 @@
    "body_matches_fixture": true,
    "kind": "http",
    "source": "client",
-   "seq": 103
+   "seq": 115
   },
   {
-   "attempt": "a4811d2e-40a2-41fa-865c-1047c3210888",
+   "attempt": "828ed9f4-b431-4129-b214-e9ee3fa97748",
    "proof": "drain",
-   "evidence": "linux /proc/net/tcp: socket 5191->46530 tx_queue=0 (2 consecutive samples)",
+   "evidence": "linux /proc/net/tcp: socket 5191->39390 tx_queue=0 (2 consecutive samples)",
    "kind": "prove_release",
    "source": "drain_probe",
-   "seq": 104
+   "seq": 116
   }
  ],
  "provenance": {
