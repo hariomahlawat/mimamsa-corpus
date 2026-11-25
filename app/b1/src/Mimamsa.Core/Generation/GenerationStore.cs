@@ -109,7 +109,7 @@ public sealed partial class GenerationStore
         var release = new ReleaseInfo(S(rel["release_id"]) ?? gid, rel["release_sequence"]?.GetValue<long>() ?? 0, S(rel["created_at"]) ?? "",
             S(rel["pinned"]?["hf_repo"]), S(rel["pinned"]?["hf_revision"]), S(rel["pinned"]?["tools_commit"]),
             S(rel["candidate_banner"]?["text"]) ?? "Research and candidate data. Not legally verified.",
-            rel["auth_ledger_version"]?.GetValue<int>() ?? 0, S(gen["exclusion_channel"]) ?? "signed");
+            rel["auth_ledger_version"]?.GetValue<int>() ?? 0, S(gen["exclusion_channel"]) ?? "signed", S(rel["restricted_material"]?["config_sha256"]));
 
         vault ??= new Vault(siteRoot);
         var docs = new Dictionary<string, DocumentRecord>(StringComparer.Ordinal);

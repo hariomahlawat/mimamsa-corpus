@@ -139,27 +139,54 @@ public sealed class SearchService
             // Instrument scoping (review F05): among Acts/Rules whose title contains every query word, keep only the
             // closest titles (fewest extra title words, ignoring years and stopwords). Distinct closest titles are
             // ambiguous: nothing is pinned and a disambiguation chip lists them.
+            // Instrument scoping (review F05, F14), general rules:
+            //  - no instrument words: provision in any Act/Rules/Regulations;
+            //  - only generic words ("Rules", "Act"): ambiguous; nothing pinned; candidate instruments offered;
+            //  - instrument words that match no held title: say so; nothing pinned; the words run as lexical text;
+            //  - otherwise keep the closest titles (fewest extra words); distinct closest titles are ambiguous.
             var scoped = new List<int>();
-            string? ambiguous = null;
-            if (actWords.Count > 0)
+            string? ambiguous = null, notHeld = null;
+            var specific = actWords.Where(w => !GenericInstrumentWords.Contains(w) && !w.All(char.IsDigit)).ToList();
+            if (actWords.Count > 0 && specific.Count == 0)
+            {
+                var kinds = actWords.Where(GenericInstrumentWords.Contains).ToHashSet();
+                // candidates ordered by closeness (fewest other title words), then title; count always stated
+                var all = Enumerable.Range(0, _ix.Docs.Count)
+                    .Where(d => _ix.Docs[d].IsStatute && kinds.All(k => _ix.TitleTerms[d].Contains(k) || _ix.TitleTerms[d].Contains(k + "s") || _ix.TitleTerms[d].Contains(k.TrimEnd('s'))))
+                    .OrderBy(d => _ix.TitleTerms[d].Count(t => !kinds.Contains(t) && !Text.Stopwords.Contains(t) && !t.All(char.IsDigit)))
+                    .ThenBy(d => _ix.Docs[d].Title, StringComparer.OrdinalIgnoreCase)
+                    .Select(d => _ix.Docs[d].Title).Distinct().ToList();
+                ambiguous = all.Count == 0 ? "" : $"{all.Count} candidate instrument(s): " + string.Join("; ", all.Take(8)) + (all.Count > 8 ? $"; +{all.Count - 8} more" : "");
+                if (ambiguous.Length == 0) ambiguous = "no instrument of that kind is held";
+            }
+            else if (actWords.Count > 0)
             {
                 var cands = new List<(int d, int extra)>();
                 for (int d = 0; d < _ix.Docs.Count; d++)
                     if (_ix.Docs[d].IsStatute && actWords.All(w => _ix.TitleTerms[d].Contains(w)))
                         cands.Add((d, _ix.TitleTerms[d].Count(t => !actWords.Contains(t) && !Text.Stopwords.Contains(t) && !t.All(char.IsDigit))));
-                if (cands.Count > 0)
+                if (cands.Count == 0) notHeld = string.Join(" ", restWords);
+                else
                 {
                     int best = cands.Min(c => c.extra);
                     var top = cands.Where(c => c.extra == best).Select(c => c.d).ToList();
                     var titles = top.Select(d => NormTitle(_ix.Docs[d].Title)).Distinct().ToList();
                     if (titles.Count == 1) scoped = top;
-                    else ambiguous = string.Join("; ", top.Select(d => _ix.Docs[d].Title).Distinct().Take(4));
+                    else ambiguous = string.Join("; ", top.Select(d => _ix.Docs[d].Title).Distinct().Take(6));
                 }
             }
             string scopeText;
+            if (notHeld is not null)
+            {
+                ctx.Chips.Add(new Chip("not_held", $"No instrument titled \u201c{notHeld}\u201d in this library",
+                    $"{id.ProvisionWord} {id.Base}{id.Sub} was not looked up in any other instrument. The words are searched as plain text. Absence here is not evidence that the instrument or provision does not exist."));
+                ctx.Phrases.Add(Text.Tokenize(id.Raw).Select(t => t.Term).ToList());
+                continue;
+            }
             if (ambiguous is not null)
             {
-                ctx.Chips.Add(new Chip("ambiguous", $"{id.ProvisionWord} {id.Base}{id.Sub}: which instrument?", "several instruments match equally: " + ambiguous + ". Add the year or the full title."));
+                ctx.Chips.Add(new Chip("ambiguous", $"{id.ProvisionWord} {id.Base}{id.Sub}: which instrument?", "Several instruments could be meant: " + ambiguous + ". Add the full title or year."));
+                restWords.Clear();
                 continue;
             }
             if (scoped.Count > 0) { scopeText = _ix.Docs[scoped[0]].Title ?? string.Join(" ", restWords); restWords.Clear(); }
@@ -196,6 +223,9 @@ public sealed class SearchService
         }
         return (pinned, mentions, restWords);
     }
+
+    static readonly HashSet<string> GenericInstrumentWords = new(StringComparer.Ordinal)
+    { "act", "acts", "rule", "rules", "regulation", "regulations", "order", "orders", "notification", "notifications", "code", "manual" };
 
     static string NormTitle(string? t) => string.Join(" ", Text.Tokenize(t ?? "").Select(x => x.Term).Where(x => !x.All(char.IsDigit) && !Text.Stopwords.Contains(x)));
 
@@ -402,7 +432,9 @@ public sealed class SearchService
         {
             case "title": return DocPassages(d => Contains(d.Title, f.Terms), 0.5);
             case "party": return DocPassages(d => Contains(d.Judicial?.Petitioner, f.Terms) || Contains(d.Judicial?.Respondent, f.Terms));
-            case "judge": return DocPassages(d => d.Judicial?.Judges.Any(j => Contains(j, f.Terms)) == true);
+            case "judge":
+                ctx.Chips.Add(new Chip("caveat", "Judge metadata may be incomplete (crawler); absence here is not evidence.", "Supreme Court records often hold only the first judge. Read the bench from the original."));
+                return DocPassages(d => d.Judicial?.Judges.Any(j => Contains(j, f.Terms)) == true);
             case "court": return DocPassages(d => Contains(d.Judicial?.Court ?? d.IssuingAuthority, f.Terms));
             case "bench": return DocPassages(d => Contains(d.Judicial?.Bench, f.Terms));
             case "type":

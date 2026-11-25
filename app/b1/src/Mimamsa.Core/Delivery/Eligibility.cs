@@ -21,10 +21,26 @@ public sealed class RestrictedRegister
     public static readonly RestrictedRegister Empty = new();
     public int Count => _ids.Count;
 
+    public string? Sha256 { get; private set; }
+
+    /// Review F16: the register is mandatory. It must parse, hold at least one item, and its SHA-256 must equal the
+    /// register the ACTIVE release was built against (RELEASE.json restricted_material.config_sha256).
+    public static RestrictedRegister LoadRequired(string? path, string? releaseSha)
+    {
+        if (string.IsNullOrEmpty(path)) throw new InvalidOperationException("Mimamsa:RestrictedRegister is required (restricted-material register); refusing to start");
+        var r = Load(path);
+        if (r.Count == 0) throw new InvalidOperationException("restricted-material register has no items; refusing to start");
+        if (releaseSha is null || !string.Equals(r.Sha256, releaseSha, StringComparison.OrdinalIgnoreCase))
+            throw new InvalidOperationException("restricted-material register does not match the register pinned by the active release; refusing to start");
+        return r;
+    }
+
     public static RestrictedRegister Load(string path)
     {
         var r = new RestrictedRegister();
-        var j = JsonNode.Parse(File.ReadAllText(path))!;
+        var raw = File.ReadAllBytes(path);
+        r.Sha256 = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(raw)).ToLowerInvariant();
+        var j = JsonNode.Parse(raw)!;
         foreach (var it in j["items"]!.AsArray())
         {
             r._shas.Add(it!["source_sha256"]!.GetValue<string>());

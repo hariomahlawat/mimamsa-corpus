@@ -51,9 +51,12 @@ var state = new ServingState();
 var policy = new PolicyStore(dataSource);
 var identity = new IdentityStore(dataSource);
 var ledger = new CreditLedger(dataSource, credit);
-// Optional restricted-material register file (same shape as config/restricted_material.json). The importer already
-// refuses restricted items; this re-check covers copies held by earlier generations. Unreadable = refuse to start.
-var register = conf["Mimamsa:RestrictedRegister"] is { Length: > 0 } rp ? RestrictedRegister.Load(rp) : RestrictedRegister.Empty;
+// Restricted-material register re-check (review F16): ON by default and fail closed. The service refuses to start
+// unless Mimamsa:RestrictedRegister names a readable register whose SHA-256 equals the one pinned by the active
+// release. Only test mode may switch it off, and only explicitly (Mimamsa:Test:AllowNoRegister=true).
+RestrictedRegister register;
+if (testMode && conf.GetValue("Mimamsa:Test:AllowNoRegister", false)) register = RestrictedRegister.Empty;
+else register = RestrictedRegister.LoadRequired(conf["Mimamsa:RestrictedRegister"], generation.Release.RegisterSha256);
 var eligibility = new Eligibility(generation, state, register, vault);
 var index = SearchIndex.Build(generation);
 AppServices? appRef = null;

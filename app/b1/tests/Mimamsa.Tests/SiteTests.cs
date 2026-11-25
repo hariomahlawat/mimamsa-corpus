@@ -159,6 +159,39 @@ public class SearchServiceTests
         Assert.Contains(r.Hits, h => h.Tier == "mention" && Ix.Passages[h.PassageIndex].DocId == "syn-j-allow");
     }
 
+    [Fact] public void InstrumentNotHeldPinsNothingAndSaysSo()                 // review F14
+    {
+        var r = Svc().Search("Rule 8 Navy Rules", new SearchFilters());
+        Assert.Equal("lexical", r.Mode);
+        Assert.DoesNotContain(r.Hits, h => h.Tier is "identifier" or "document");
+        Assert.Contains(r.Chips, c => c.Kind == "not_held" && c.Text.Contains("Navy Rules"));
+    }
+
+    [Theory]                                                                   // review F14: generic word only -> ambiguous
+    [InlineData("Rule 8 Rules", "Bracken Hearing Rules")]
+    [InlineData("Section 17 Act", "Bracken Service Act")]
+    public void GenericInstrumentWordIsAmbiguousAndOffersCandidates(string q, string candidate)
+    {
+        var r = Svc().Search(q, new SearchFilters());
+        Assert.DoesNotContain(r.Hits, h => h.Tier == "identifier");
+        var chip = Assert.Single(r.Chips, c => c.Kind == "ambiguous");
+        Assert.Contains(candidate, chip.Source);
+    }
+
+    [Fact] public void NamedHeldInstrumentStillScopesExactly()
+    {
+        var r = Svc().Search("Rule 8(3)(a) Bracken Hearing Rules", new SearchFilters());
+        Assert.Equal("identifier", r.Mode);
+        Assert.Equal(P("R-3A"), Ids(r)[0]);
+    }
+
+    [Fact] public void JudgeFieldCarriesTheIncompleteMetadataCaveat()          // review F15
+    {
+        var r = Svc().Search("judge:nobody", new SearchFilters());
+        Assert.Equal("empty", r.State);
+        Assert.Contains(r.Chips, c => c.Kind == "caveat" && c.Text.Contains("may be incomplete"));
+    }
+
     [Fact] public void ModeIsNeverReportedAsHybrid()
     {
         foreach (var q in new[] { "BHT hearing tribunal", "late warning invalidates hearing without notice" })

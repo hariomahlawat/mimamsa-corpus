@@ -15,6 +15,24 @@ public sealed class ServiceFixture : IAsyncLifetime
     public string Base { get; private set; } = "";
     Process? _p;
 
+    public static string RegisterPath => Path.GetFullPath(Path.Combine(WebDir(), "..", "..", "..", "..", "config", "restricted_material.json"));
+
+    /// Start the service with the given extra settings and return (exit code, output) once it exits (or -1 if healthy).
+    public static async Task<(int code, string output)> StartExpectingExit(Dictionary<string, string> env)
+    {
+        var psi = new ProcessStartInfo(Environment.GetEnvironmentVariable("DOTNET_HOST_PATH") ?? "dotnet", Path.Combine(AppContext.BaseDirectory, "Mimamsa.Web.dll"))
+        { WorkingDirectory = WebDir(), RedirectStandardOutput = true, RedirectStandardError = true, UseShellExecute = false };
+        var l = new System.Net.Sockets.TcpListener(IPAddress.Loopback, 0); l.Start(); int port = ((IPEndPoint)l.LocalEndpoint).Port; l.Stop();
+        psi.Environment["ASPNETCORE_URLS"] = $"http://127.0.0.1:{port}";
+        psi.Environment["Mimamsa__Site"] = Syn.Site;
+        psi.Environment["Mimamsa__Db"] = Environment.GetEnvironmentVariable("MIMAMSA_TEST_DB")!;
+        foreach (var (k, v) in env) psi.Environment[k] = v;
+        using var p = Process.Start(psi)!;
+        var outTask = p.StandardOutput.ReadToEndAsync(); var errTask = p.StandardError.ReadToEndAsync();
+        if (!p.WaitForExit(60_000)) { p.Kill(true); return (-1, "still running"); }
+        return (p.ExitCode, await outTask + await errTask);
+    }
+
     static string WebDir()
     {
         var d = new DirectoryInfo(AppContext.BaseDirectory);
@@ -34,6 +52,7 @@ public sealed class ServiceFixture : IAsyncLifetime
             ["ASPNETCORE_URLS"] = Base, ["Mimamsa__Site"] = Syn.Site, ["Mimamsa__Db"] = db, ["Mimamsa__Test__Enabled"] = "true",
             ["Mimamsa__Test__ResetState"] = "true", ["Mimamsa__Test__ResetLedger"] = "true", ["Mimamsa__Test__Users__0"] = "admin:Admin:admin-password-1",
             ["Mimamsa__Test__Users__1"] = "reader:User:reader-password-1", ["Mimamsa__Test__Users__2"] = "locktest:User:locktest-password-1",
+            ["Mimamsa__RestrictedRegister"] = RegisterPath,
         }) psi.Environment[k] = v;
         _p = Process.Start(psi)!;
         _p.OutputDataReceived += (_, e) => { if (e.Data is not null) Log.Enqueue(e.Data); };
@@ -266,5 +285,32 @@ public class HttpTests(ServiceFixture f)
         var r = await c.SendAsync(m);
         Assert.Equal("\"cache\", \"storage\"", r.Headers.GetValues("Clear-Site-Data").Single());
         Assert.Equal(HttpStatusCode.Unauthorized, (await c.GetAsync("/api/search?q=notice")).StatusCode);
+    }
+}
+
+/// Review F16: the restricted-material re-check is mandatory and fails closed.
+public class RegisterStartupTests
+{
+    [Fact] public async Task ServiceRefusesToStartWithoutTheRegister()
+    {
+        var (code, output) = await ServiceFixture.StartExpectingExit(new() { ["Mimamsa__RestrictedRegister"] = "" });
+        Assert.NotEqual(0, code); Assert.NotEqual(-1, code);
+        Assert.Contains("RestrictedRegister is required", output);
+    }
+
+    [Fact] public async Task ServiceRefusesARegisterThatDoesNotMatchTheRelease()
+    {
+        var f = Path.GetTempFileName();
+        File.WriteAllText(f, """{"items":[{"restriction_id":"RM-T","source_sha256":"00","doc_id":"x"}]}""");
+        var (code, output) = await ServiceFixture.StartExpectingExit(new() { ["Mimamsa__RestrictedRegister"] = f });
+        Assert.NotEqual(0, code); Assert.NotEqual(-1, code);
+        Assert.Contains("does not match the register pinned by the active release", output);
+    }
+
+    [Fact] public async Task OptOutIsHonouredOnlyInTestMode()
+    {
+        var (code, output) = await ServiceFixture.StartExpectingExit(new() { ["Mimamsa__RestrictedRegister"] = "", ["Mimamsa__Test__AllowNoRegister"] = "true" });
+        Assert.Contains("RestrictedRegister is required", output);        // Test:Enabled not set -> still refused
+        Assert.NotEqual(0, code);
     }
 }

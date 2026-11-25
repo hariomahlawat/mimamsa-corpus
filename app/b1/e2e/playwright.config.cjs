@@ -19,7 +19,8 @@ function server(port, site, db) {
     stdout: "ignore", stderr: "pipe",
     env: { ASPNETCORE_URLS: `http://127.0.0.1:${port}`, Mimamsa__Site: site, Mimamsa__Db: db, Mimamsa__Test__Enabled: "true",
       Mimamsa__Test__ResetState: "true", Mimamsa__Test__ResetLedger: "true", Mimamsa__Test__Users__0: "admin:Admin:admin-password-1",
-      Mimamsa__Test__Users__1: "reader:User:reader-password-1", DOTNET_CLI_TELEMETRY_OPTOUT: "1", DOTNET_NOLOGO: "1" },
+      Mimamsa__Test__Users__1: "reader:User:reader-password-1", DOTNET_CLI_TELEMETRY_OPTOUT: "1", DOTNET_NOLOGO: "1",
+      Mimamsa__RestrictedRegister: process.env.B1_REGISTER || path.resolve(root, "..", "..", "config", "restricted_material.json") },
   };
 }
 

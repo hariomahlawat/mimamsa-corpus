@@ -78,6 +78,18 @@ test("S-08 instrument disambiguation: Rule 22 Army Rules scopes to the Army Rule
   expect(docs).not.toContain("rules-the-army-and-air-force-disposal-of-private-property-rules-1953");
 });
 
+test("S-09 instrument not held or ambiguous: nothing from another instrument is pinned (F14)", async ({ page }) => {
+  await login(page);
+  await search(page, "Rule 22 Navy Rules");
+  await expect(page.locator(".qchip", { hasText: "No instrument titled" })).toContainText("Navy Rules");
+  await expect(page.locator(".hit .chip", { hasText: /^Identifier$/ })).toHaveCount(0);
+  await expect(page.locator(".hit", { hasText: "Rule 22: provision text" })).toHaveCount(0);
+  await search(page, "Rule 22 Rules");
+  await expect(page.locator(".qchip", { hasText: "which instrument?" })).toBeVisible();
+  expect(await page.locator(".qchip", { hasText: "which instrument?" }).getAttribute("title")).toContain("Army Rules");
+  await expect(page.locator(".hit .chip", { hasText: /^Identifier$/ })).toHaveCount(0);
+});
+
 test("S-06 Commander view and dark theme", async ({ page }) => {
   await login(page);
   await page.click("#view-commander");

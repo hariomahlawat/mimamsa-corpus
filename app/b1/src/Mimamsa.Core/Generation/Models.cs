@@ -72,7 +72,7 @@ public sealed record HeldCopy(string Sha, string DocId, int PageCount, string Fi
 
 /// Release identity shown in the banner, footer and provenance (from the importer-written release/RELEASE.json).
 public sealed record ReleaseInfo(string ReleaseId, long Sequence, string CreatedAt, string? HfRepo, string? HfRevision,
-                                 string? ToolsCommit, string BannerText, int AuthLedgerVersion, string ExclusionChannel);
+                                 string? ToolsCommit, string BannerText, int AuthLedgerVersion, string ExclusionChannel, string? RegisterSha256);
 
 /// A4 provision-version research aid with its evidence resolved against verified copies (never authority).
 public sealed record ProvisionVersion(string VersionId, string Family, string Provision, string VersionKind, string? ChangeSummary,

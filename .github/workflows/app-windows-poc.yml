@@ -326,7 +326,9 @@ jobs:
           dotnet publish app/b1/src/Mimamsa.Web/Mimamsa.Web.csproj -c Release -r win-x64 --self-contained false -o $pub
           if ($LASTEXITCODE) { throw "publish failed" }
           $db = "Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_svc;Maximum Pool Size=40"
-          @{ Urls = "http://127.0.0.1:5310"; Mimamsa = @{ Site = "$env:B1_ROOT\syn\site"; Db = $db } } | ConvertTo-Json -Depth 4 |
+          Copy-Item config\restricted_material.json "$env:B1_ROOT\restricted_material.json"
+          icacls "$env:B1_ROOT\restricted_material.json" /grant "NT SERVICE\MimamsaB1:R" | Out-Null
+          @{ Urls = "http://127.0.0.1:5310"; Mimamsa = @{ Site = "$env:B1_ROOT\syn\site"; Db = $db; RestrictedRegister = "$env:B1_ROOT\restricted_material.json" } } | ConvertTo-Json -Depth 4 |
             Set-Content -Encoding UTF8 "$pub\appsettings.Production.json"
           $env:MIMAMSA_NEW_PASSWORD = "ci-admin-password-1"
           & "$pub\Mimamsa.Web.exe" --add-user ciadmin Admin --Mimamsa:Db=$db

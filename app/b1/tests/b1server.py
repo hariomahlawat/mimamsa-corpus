@@ -18,6 +18,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 DEFAULT_DLL = HERE.parent / "src" / "Mimamsa.Web" / "bin" / "Release" / "net10.0" / "Mimamsa.Web.dll"
+REGISTER = HERE.parents[2] / "config" / "restricted_material.json"   # mandatory restricted-material register (F16)
 USERS = ["admin:Admin:admin-password-1", "reader:User:reader-password-1"]
 
 
@@ -25,6 +26,7 @@ def start(site: str, db: str, port: int, dll: Path, log: Path, trace: str | None
     env = dict(os.environ)
     env.update({"ASPNETCORE_URLS": f"http://127.0.0.1:{port}", "Mimamsa__Site": site, "Mimamsa__Db": db,
                 "Mimamsa__Test__Enabled": "true", "Mimamsa__Test__ResetLedger": "true", "Mimamsa__Test__ResetState": "true",
+                "Mimamsa__RestrictedRegister": os.environ.get("MIMAMSA_REGISTER", str(REGISTER)),
                 "DOTNET_CLI_TELEMETRY_OPTOUT": "1", "DOTNET_NOLOGO": "1"})
     for i, u in enumerate(USERS):
         env[f"Mimamsa__Test__Users__{i}"] = u

@@ -175,6 +175,7 @@ function renderResults() {
   if (r.state === "empty") {
     add(list, h("div.empty", h("h2", "No published documents match"),
       h("p", "Try fewer filters, or search the words without the section number."),
+      (r.chips || []).filter((c) => c.kind === "caveat" || c.kind === "not_held" || c.kind === "ambiguous").map((c) => h("p.notice", c.text + (c.source ? " " + c.source : ""))),
       filterChips().length ? [h("p", "Active filters:"), h("div.active-filters", filterChips())] : null,
       h("p.muted", "This is a statement about the published library in this installation only. It is not evidence that no authority exists.")));
     return;

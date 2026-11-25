@@ -76,8 +76,16 @@ public static class QueryParser
                 list.Add(new Tok(K.Quoted, s[(i + 1)..close], off + i));
                 i = close + 1; continue;
             }
-            int st = i;
-            while (i < s.Length && !char.IsWhiteSpace(s[i]) && s[i] is not '(' and not ')' and not '"') i++;
+            // A word may carry attached sub-clause parentheses ("8(3)(a)", "W.P.(C)"): '(' opens a group only at the
+            // start of a token; inside a word, balanced parentheses belong to the word.
+            int st = i, depth = 0;
+            while (i < s.Length && !char.IsWhiteSpace(s[i]) && s[i] != '"')
+            {
+                if (s[i] == '(') depth++;
+                else if (s[i] == ')') { if (depth == 0) break; depth--; }
+                i++;
+            }
+            if (depth > 0) throw new ParseException("Parenthesis inside a word is not closed.", off + st);
             var w = s[st..i];
             // field:value, field:"phrase" or field:a..b
             int colon = w.IndexOf(':');

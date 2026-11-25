@@ -174,3 +174,18 @@ These are in `docs/architecture/b1/screenshots/`.
 | `app-ci.yml` / `b1` (ubuntu-latest) and the contract, importer and design jobs | 45716813309 | **Success** |
 
 These are hosted runners, not the selected host. Selected-host acceptance stays **BLOCKED**.
+
+## 8. Confirmation findings F14 to F16 (after the re-review of 4fbe7c79)
+
+| Finding | Disposition |
+| --- | --- |
+| F14 (P2) instrument scoping | **Fixed with general rules:**<ul><li>**No instrument words:** a provision in any Act or Rules is matched.</li><li>**Only generic words** ("Rules", "Act", "Regulations"…): the query is ambiguous. Nothing is pinned, and a "which instrument?" chip lists the candidates, closest titles first, with a count.</li><li>**Instrument words that match no held title:** the chip reads "No instrument titled '…' in this library". Nothing is pinned, and the words run as lexical text.</li><li>**Otherwise:** the closest title is scoped, and an ambiguity chip is shown on a tie.</li></ul>A word may now carry attached sub-clauses (`8(3)(a)`) without being read as a group. Tests: SYN C# (not held, two generic cases, named held instrument) and sample journeys S-08 (Army Rules) and S-09 (Navy Rules, Rules). |
+| F15 (P3) `judge:` caveat | **Fixed.** A `judge:` query adds the chip "Judge metadata may be incomplete (crawler); absence here is not evidence." The empty state repeats it. C# test added. |
+| F16 (P3) register re-check | **Fixed, fail closed and on by default.** The service refuses to start in three cases:<ul><li>`Mimamsa:RestrictedRegister` is missing;</li><li>the register is unreadable or has no items;</li><li>its SHA-256 differs from the register pinned by the active release (`RELEASE.json restricted_material.config_sha256`).</li></ul>The only opt-out is `Mimamsa:Test:AllowNoRegister=true`, and it is honoured **only** in test mode. Three start-up tests cover these cases. **Operator procedure:** install the owner-supplied register file next to the site, ACL it read-only for the service account, and set `Mimamsa:RestrictedRegister`. A register update needs a release built against the same register. Until the signed exclusion channel (B2) exists, the service will not start against a newer register file. |
+
+Test counts after F14 to F16:
+- C#: **86/86**.
+- Playwright: **28/28** (19 SYN and 9 sample).
+- Importer: 66/66.
+- Design: 117/117.
+- Oracle: 10/14, unchanged (the 4 hybrid cases fail by design).
