@@ -1,14 +1,18 @@
 {
+ "basis_counts": {
+  "page_image_assisted": 18,
+  "text_layer_only": 81
+ },
  "input_sha256": {
   "legal_knowledge/audit_work/C12-CONSOLIDATION/metadata/SC_CASE_NUMBER_OVERLAY_C12.jsonl": "fd849f20210d323b44ae299a1c3b0a064e30e8b294b6bdae2383c20f3f162e89",
-  "page_image_checks": null
+  "page_image_checks": "2ceaa45b431861de4b33b754fc799f073d1d236da07f51e04dc8e960335f90e9"
  },
  "not_applied_out_of_scope": {
   "APPLY_CANDIDATE_UNREVIEWED_CONFIRMED": 266,
   "UNRESOLVED": 3
  },
- "overlay_numbers": 229,
- "overlay_records": 52,
+ "overlay_numbers": 1747,
+ "overlay_records": 99,
  "policy": "metadata overlay only; data/meta never rewritten; 266 unreviewed candidates not read or applied",
  "pymupdf": "2.1",
  "restricted_register": {
@@ -18,8 +22,7 @@
  "staged_numbers": 1747,
  "staged_records": 99,
  "tally": {
-  "NOT_RECONFIRMED_NEEDS_PAGE_IMAGE_CHECK": 47,
-  "RECONFIRMED": 52
+  "RECONFIRMED": 99
  },
  "tool": "scnum-reconfirm-c13/1.0.0"
 }

@@ -29,10 +29,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common_c13 as C  # noqa: E402
 
 OVERLAY_C12 = C.AUDIT / "C12-CONSOLIDATION" / "metadata" / "SC_CASE_NUMBER_OVERLAY_C12.jsonl"
-OVERLAY_C12_SHA = "pinned at first run; see summary input_sha256"
+OVERLAY_C12_SHA = "fd849f20210d323b44ae299a1c3b0a064e30e8b294b6bdae2383c20f3f162e89"  # C12 staged overlay, pinned
 OUT = C.PKG / "scnum"
 VERSION = "scnum-reconfirm-c13/1.0.0"
-COVER_PAGES = 8
+COVER_PAGES = 3          # cover pages always read; jurisdiction blocks anywhere in the file are read too
+HEADING_RE = re.compile(r"(?:APPELLATE|ORIGINAL|ADVISORY|EXTRAORDINARY)\s*J\s*[UV]\s*R\s*[IlT1]\s*S\s*D\s*[IlT1]\s*C\s*T\s*[IlT1]\s*[O0]\s*[NX]|JURISDICTION\s*:|IN THE SUPREME COURT OF INDIA|REPORTABLE", re.I)
 
 # Type family -> label regex expected somewhere in the cover text.
 TYPE_LABELS = {
@@ -42,8 +43,8 @@ TYPE_LABELS = {
     "WPCRL": r"writ\s*petition|w\.\s*p\.",
     "WP": r"writ\s*petition|w\.\s*p\.|petition",
     "PET": r"petition",
-    "SLPC": r"special\s*leave|s\.\s*l\.\s*p",
-    "SLPCRL": r"special\s*leave|s\.\s*l\.\s*p",
+    "SLPC": r"special\s*leave|s\.\s*l\.\s*p|\bslp",
+    "SLPCRL": r"special\s*leave|s\.\s*l\.\s*p|\bslp",
     "TPC": r"transfer(red)?\s*petition|t\.\s*p\.",
     "TPCRL": r"transfer(red)?\s*petition|t\.\s*p\.",
     "TCC": r"transfer(red)?\s*case|t\.\s*c\.",
@@ -58,14 +59,39 @@ TYPE_LABELS = {
     "CRLMP": r"criminal\s*misc|crl\.\s*m\.\s*p",
 }
 VAL = re.compile(r"^([A-Z]+?)(DIARY)?-(\d+)([A-Z]?)-(\d{4})$")
-YEAR_RE = re.compile(r"(?:\bof\s*|/\s*|\bOF\s*)((?:19|20)\d\d|\d\d)\b|\b(?:of|OF)((?:19|20)\d\d)\b")
-NUM_RE = re.compile(r"(\d{1,6})\s*([A-Z])?\s*(?:(?:-|–|to|TO)\s*(\d{1,6}))?(?![\d/])")
+YEAR_RE = re.compile(r"(?:(?:\b|(?<=\d))of\s*|/\s*)((?:19|20)\d\d|\d\d)\b", re.I)
+NUM_RE = re.compile(r"(\d{1,6})\s*([A-Z])?\s*(?:(?:-|–|—|to|TO)\s*(\d{1,6}))?(?!\d)")
+
+
+# Digital SCR running header, which can interrupt a long connected-matter list across a page break.
+SCR_HEADER = re.compile(r"\b\d{1,4}\s*\[\d{4}\]\s*\d{1,2}\s*S\.C\.R\.\s*(?:Digital Supreme Court Reports)?")
 
 
 def norm_text(t: str) -> str:
-    t = t.replace(" ", " ").replace("’", "'")
-    t = re.sub(r"(?<=\d)\s*[Oo](?=\d)", "0", t)
-    return re.sub(r"\s+", " ", t)
+    """Whitespace collapse plus OCR digit repair next to digits only (I, l, ! -> 1; O, o -> 0)."""
+    t = t.replace("\u00a0", " ").replace("\u2019", "'")
+    t = re.sub(r"[\x00-\x08\x0b-\x1f]", " ", t)
+    t = re.sub(r"\s+", " ", t)
+    for _ in range(2):
+        t = re.sub(r"(?<=\d)[Il!](?=\d)|\b[Il!](?=9\d\d\b)", "1", t)
+        t = re.sub(r"(?<=\d)[Oo](?=\d)", "0", t)
+    return t
+
+
+def list_start(t: str, end: int, floor: int) -> int:
+    """Start of the pure number list ("9052, 9170, 9048 ... 8897") that ends at `end` (long connected-matter lists)."""
+    i = end
+    while i > floor:
+        c = t[i - 1]
+        if c.isdigit() or c in " ,&-\u2013":
+            i -= 1
+        elif t[max(floor, i - 3):i] == "and":
+            i -= 3
+        elif c.isupper() and i - 1 > floor and t[i - 2].isdigit():   # suffix letter, e.g. 1692A
+            i -= 1
+        else:
+            break
+    return i
 
 
 def pairs_from_text(t: str):
@@ -73,8 +99,8 @@ def pairs_from_text(t: str):
     found = set()
     prev_end = 0
     for m in YEAR_RE.finditer(t):
-        y = m.group(1) or m.group(2)
-        seg_lo = max(prev_end, m.start() - 400)
+        y = m.group(1)
+        seg_lo = max(prev_end, min(m.start() - 400, list_start(t, m.start(), prev_end)))
         seg = t[seg_lo:m.start()]
         prev_end = m.end()
         # do not let a segment run back across an earlier year expression
@@ -97,28 +123,37 @@ def year_ok(printed: str, staged: str) -> bool:
     return printed == staged or (len(printed) == 2 and staged.endswith(printed))
 
 
-def cover_text(pdf_bytes: bytes, fitz):
+def cover_text(pdf_bytes: bytes, fitz, n_values: int):
+    """Return the text windows that can carry the case-number block: the first COVER_PAGES pages, plus a window
+    after every jurisdiction heading anywhere in the file (SCR extracts often start inside a previous report)."""
     doc = fitz.open(stream=pdf_bytes, filetype="pdf")
-    pages = []
-    for i in range(min(COVER_PAGES, doc.page_count)):
-        pages.append(doc.load_page(i).get_text("text"))
+    pages = [SCR_HEADER.sub(" ", norm_text(doc.load_page(i).get_text("text"))) for i in range(doc.page_count)]
     n = doc.page_count
     doc.close()
-    return pages, n
+    windows = [(i + 1, pages[i]) for i in range(min(COVER_PAGES, n))]
+    span = max(6000, 70 * n_values)
+    for i, p in enumerate(pages):
+        for m in HEADING_RE.finditer(p):
+            tail = p[m.start():]
+            j = i + 1
+            while len(tail) < span and j < n:
+                tail += " " + pages[j]
+                j += 1
+            windows.append((i + 1, tail[:span]))
+    return windows, n, sum(len(p.strip()) for p in pages[:COVER_PAGES])
 
 
 def check_record(rec, pdf_bytes, fitz):
-    pages, npages = cover_text(pdf_bytes, fitz)
-    chars = sum(len(p.strip()) for p in pages)
+    windows, npages, chars = cover_text(pdf_bytes, fitz, len(rec["proposed_value"]))
+    pages = [w for _, w in windows]
     if chars < 200:
         return dict(text_layer="NO_OR_THIN_TEXT_LAYER", missing=rec["proposed_value"], type_missing=[], page="",
                     excerpt="", npages=npages)
     found = set()
     first_page = None
-    for i, p in enumerate(pages):
-        pf = pairs_from_text(norm_text(p))
-        found |= pf
-    full = norm_text(" ".join(pages))
+    for p in pages:
+        found |= pairs_from_text(p)
+    full = " ".join(pages)
     missing, hit_pages = [], set()
     for v in rec["proposed_value"]:
         m = VAL.match(v)
@@ -140,17 +175,16 @@ def check_record(rec, pdf_bytes, fitz):
         rx = TYPE_LABELS.get(fam)
         if rx and not re.search(rx, full, re.I):
             type_missing.append(fam)
-        if is_diary and not re.search(r"diary", full, re.I):
+        if is_diary and not re.search(r"diary|\bD\.\s*No", full, re.I):
             type_missing.append(fam + "DIARY")
     # locate the page of the first staged number for the anchor
-    for i, p in enumerate(pages):
-        m0 = VAL.match(rec["proposed_value"][0]) if rec["proposed_value"] else None
-        if m0 and re.search(r"\b%s\b" % m0.group(3), norm_text(p)):
-            first_page = i + 1
+    excerpt, pt = "", ""
+    m0 = VAL.match(rec["proposed_value"][0]) if rec["proposed_value"] else None
+    for pg, p in windows:
+        if m0 and re.search(r"\b%s\b" % m0.group(3), p):
+            first_page, pt = pg, p
             break
-    excerpt = ""
     if first_page:
-        pt = norm_text(pages[first_page - 1])
         m0 = VAL.match(rec["proposed_value"][0])
         k = re.search(r"\b%s\b" % m0.group(3), pt)
         excerpt = pt[max(0, k.start() - 120): k.end() + 120] if k else ""
@@ -167,6 +201,7 @@ def main():
 
     restricted = C.Restricted()
     staged_raw = OVERLAY_C12.read_bytes()
+    assert C.sha256_bytes(staged_raw) == OVERLAY_C12_SHA, "C12 staged overlay changed; stop and re-review"
     staged = [json.loads(l) for l in staged_raw.decode("utf-8").splitlines() if l.strip()]
     assert len(staged) == 99, len(staged)
     assert all(r["status"] == "CORRECTION_STAGED_DERIVATIVE_OVERLAY_ORIGINAL_UNCHANGED" for r in staged)
@@ -191,7 +226,7 @@ def main():
         res = check_record(r, b, fitz)
         ic = image_checks.get(r["doc_id"])
         if not res["missing"] and not res["type_missing"]:
-            verdict, basis = "RECONFIRMED", "PDF text layer (PyMuPDF, cover pages 1-%d): every staged number, year and type label printed" % COVER_PAGES
+            verdict, basis = "RECONFIRMED", "PDF text layer (PyMuPDF, cover pages 1-%d and every jurisdiction-heading block): every staged number, year and type label printed" % COVER_PAGES
         elif ic and ic["verdict"] == "RECONFIRMED_PAGE_IMAGE":
             verdict, basis = "RECONFIRMED", "page image read by AI agent (C13-A5): " + ic["note"]
         elif ic and ic["verdict"] == "NOT_RECONFIRMED_PAGE_IMAGE":
@@ -218,7 +253,8 @@ def main():
                 status="METADATA_OVERLAY_ORIGINAL_UNCHANGED",
                 verification="AI_DOCUMENTARY_RECONFIRMATION_NOT_LEGAL_VALIDATION",
                 tool=VERSION))
-    summary = dict(tool=VERSION, pymupdf=fitz.VersionBind, staged_records=len(staged),
+    summary = dict(tool=VERSION, pymupdf=getattr(fitz, "__version__", None) or fitz.VersionBind,
+                   basis_counts=dict(text_layer_only=sum(1 for x in rows if x["verdict"] == "RECONFIRMED" and not x["page_image_check"] and x["basis"].startswith("PDF")), page_image_assisted=sum(1 for x in rows if x["verdict"] == "RECONFIRMED" and x["basis"].startswith("page image"))), staged_records=len(staged),
                    staged_numbers=sum(len(r["proposed_value"]) for r in staged), tally=dict(sorted(tally.items())),
                    overlay_records=len(overlay), overlay_numbers=sum(len(o["overlay_value"]) for o in overlay),
                    not_applied_out_of_scope=dict(APPLY_CANDIDATE_UNREVIEWED_CONFIRMED=266, UNRESOLVED=3),
