@@ -147,9 +147,8 @@ def test_store_is_append_only_and_monotonic(owner, trust, register_path, tmp_pat
     b1, s1 = _signed(owner[0], _update(register_path, sequence=1))
     with pytest.raises(ExclusionError):
         store.append(b1, s1, trust)          # older update refused
-    with pytest.raises(ExclusionError):
-        store.append(b2, s2, trust)          # replay refused
-    assert store.load_latest(trust).sequence == 2
+    ack = store.append(b2, s2, trust)        # replay of the accepted update is idempotent (same acknowledgement)
+    assert ack["sequence"] == 2 and store.load_latest(trust).sequence == 2
 
 
 def test_restore_uses_store_not_restored_database(owner, trust, register_path, tmp_path, example):
@@ -224,3 +223,113 @@ def test_null_only_withdrawal_row_rejected(owner, trust, register_path, row):
     b, sig = _signed(owner[0], _update(register_path, withdrawals=[row]))
     with pytest.raises(ExclusionError):
         accept_exclusion_update(b, sig, trust, current_sequence=1)
+
+
+# ---- review of PR #53 reconciliation: F03 restart cases and lost acknowledgement (reviewer probes a, b)
+def test_pending_pair_can_be_completed_after_crash(owner, trust, register_path, tmp_path):
+    """Probe (a): pair written, crash before ACCEPTED; re-appending the identical update or complete_pending accepts it."""
+    store = ExclusionStore(tmp_path / "exclusions")
+    b2, s2 = _signed(owner[0], _update(register_path, sequence=2))
+    store.pairs.mkdir(parents=True)
+    (store.pairs / "00000002.json").write_bytes(b2)
+    (store.pairs / "00000002.sig").write_bytes(s2)
+    assert store.pending() == [2]
+    ack = store.complete_pending(2, trust)
+    assert ack["sequence"] == 2 and store.pending() == [] and store.load_latest(trust).sequence == 2
+
+
+def test_resume_by_reappending_identical_bytes(owner, trust, register_path, tmp_path):
+    store = ExclusionStore(tmp_path / "exclusions")
+    b2, s2 = _signed(owner[0], _update(register_path, sequence=2))
+    store.pairs.mkdir(parents=True)
+    (store.pairs / "00000002.json").write_bytes(b2)
+    (store.pairs / "00000002.sig").write_bytes(s2)
+    assert store.append(b2, s2, trust)["sequence"] == 2
+
+
+def test_different_bytes_for_stored_sequence_rejected(owner, trust, register_path, tmp_path):
+    store = ExclusionStore(tmp_path / "exclusions")
+    b2, s2 = _signed(owner[0], _update(register_path, sequence=2))
+    store.pairs.mkdir(parents=True)
+    (store.pairs / "00000002.json").write_bytes(b"other bytes")
+    (store.pairs / "00000002.sig").write_bytes(b"x")
+    with pytest.raises(ExclusionError):
+        store.append(b2, s2, trust)
+
+
+def test_staging_residue_is_quarantined_not_raw_error(owner, trust, register_path, tmp_path):
+    """Probe (b): leftover staging/<seq> no longer raises FileExistsError; it is moved to quarantine and never accepted."""
+    store = ExclusionStore(tmp_path / "exclusions")
+    st = store.dir / "staging" / "00000002"
+    st.mkdir(parents=True)
+    (st / "u.json").write_bytes(b"partial")
+    b2, s2 = _signed(owner[0], _update(register_path, sequence=2))
+    assert store.append(b2, s2, trust)["sequence"] == 2
+    assert not st.exists() and any((store.dir / "quarantine").iterdir())
+
+
+def test_lost_ack_retry_returns_original_ack(owner, trust, register_path, tmp_path):
+    store = ExclusionStore(tmp_path / "exclusions")
+    b2, s2 = _signed(owner[0], _update(register_path, sequence=2))
+    first = store.append(b2, s2, trust, operation_id="op-123")
+    again = store.append(b2, s2, trust, operation_id="op-123")
+    assert first == again and first["operation_id"] == "op-123" and first["epoch"] == 1
+    with pytest.raises(ExclusionError):
+        store.append(b2, s2, trust, operation_id="op-other")
+
+
+def test_single_writer_lock(owner, trust, register_path, tmp_path):
+    store = ExclusionStore(tmp_path / "exclusions")
+    store.dir.mkdir(parents=True)
+    store.lockfile.write_text("held")
+    b2, s2 = _signed(owner[0], _update(register_path, sequence=2))
+    with pytest.raises(ExclusionError):
+        store.append(b2, s2, trust)
+
+
+def test_io_failure_is_typed(owner, trust, register_path, tmp_path, monkeypatch):
+    import os as _os
+    store = ExclusionStore(tmp_path / "exclusions")
+    b2, s2 = _signed(owner[0], _update(register_path, sequence=2))
+    monkeypatch.setattr(_os, "replace", lambda *a, **k: (_ for _ in ()).throw(PermissionError("denied")))
+    with pytest.raises(ExclusionError):
+        store.append(b2, s2, trust)
+
+
+# ---- F02: monotone tombstones; omission never re-admits
+def test_omission_from_later_list_does_not_readmit(owner, trust, register_path, tmp_path, example):
+    store = ExclusionStore(tmp_path / "exclusions")
+    w = [{"doc_id": "example-withdrawn-later", "reason": "withdrawn"}]
+    for seq, rows in ((2, w), (3, [])):
+        b, s = _signed(owner[0], _update(register_path, sequence=seq, withdrawals=rows))
+        store.append(b, s, trust)
+    d = example("document")
+    d["doc_id"] = "example-withdrawn-later"
+    assert dict(items_to_suppress([d], store.effective_state(trust))) == {"example-withdrawn-later": "WITHDRAWN"}
+    st = state_for_restore(store, trust, restored_db_sequence=1)
+    assert dict(items_to_suppress([d], st)) == {"example-withdrawn-later": "WITHDRAWN"}
+
+
+def test_explicit_signed_readmission_lifts_denial(owner, trust, register_path, tmp_path, example):
+    store = ExclusionStore(tmp_path / "exclusions")
+    b, s = _signed(owner[0], _update(register_path, sequence=2, withdrawals=[{"doc_id": "example-x", "reason": "withdrawn"}]))
+    store.append(b, s, trust)
+    u = _update(register_path, sequence=3)
+    u["readmissions"] = [{"doc_id": "example-x", "reason": "error corrected", "authority_ref": "OWNER-DECISION-0001"}]
+    b, s = _signed(owner[0], u)
+    store.append(b, s, trust)
+    d = example("document")
+    d["doc_id"] = "example-x"
+    assert items_to_suppress([d], store.effective_state(trust)) == []
+
+
+def test_readmission_needs_authority_and_identity(owner, trust, register_path):
+    u = _update(register_path)
+    u["readmissions"] = [{"doc_id": "example-x", "reason": "no authority"}]
+    b, s = _signed(owner[0], u)
+    with pytest.raises(ExclusionError):
+        accept_exclusion_update(b, s, trust, current_sequence=1)
+    u["readmissions"] = [{"doc_id": None, "reason": "x y z", "authority_ref": "A-1"}]
+    b, s = _signed(owner[0], u)
+    with pytest.raises(ExclusionError):
+        accept_exclusion_update(b, s, trust, current_sequence=1)

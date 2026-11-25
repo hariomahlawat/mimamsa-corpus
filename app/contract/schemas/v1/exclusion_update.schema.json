@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://contract.mimamsa.invalid/v1/exclusion_update.schema.json",
   "title": "Signed exclusion update (register and withdrawal channel)",
-  "description": "Delivers the current restricted-material register and the current withdrawal list to a site independently of releases. Signed (Ed25519 over the exact EXCLUSIONS.json bytes) by a key trusted for purpose 'register'. Sequence numbers only increase. After every activation, rollback or restore the site re-applies the latest accepted update, so no generation, derivative, index or backup can resurrect an excluded item.",
+  "description": "Delivers the current restricted-material register and the current withdrawal list to a site independently of releases. Signed (Ed25519 over the exact EXCLUSIONS.json bytes) by a key trusted for purpose 'register'. Sequence numbers only increase. After every activation, rollback or restore the site re-applies the latest accepted update, so no generation, derivative, index or backup can resurrect an excluded item. Withdrawals and register entries are monotone tombstones: once accepted, an item stays denied even if a later update omits it; only an explicit signed readmissions row (with the authority reference) lifts a denial.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -97,6 +97,73 @@
       "type": "string",
       "minLength": 10,
       "maxLength": 1000000
+    },
+    "readmissions": {
+      "description": "Explicit, signed lifting of an earlier denial (withdrawal or register entry) for an exact identity. Omission from a later list never re-admits.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "reason",
+          "authority_ref"
+        ],
+        "properties": {
+          "doc_id": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/doc_id"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_copy_sha256": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/sha256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 1000
+          },
+          "authority_ref": {
+            "description": "Recorded decision of the competent authority (owner for restrictions).",
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 300
+          }
+        },
+        "anyOf": [
+          {
+            "required": [
+              "doc_id"
+            ],
+            "properties": {
+              "doc_id": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "required": [
+              "source_copy_sha256"
+            ],
+            "properties": {
+              "source_copy_sha256": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      }
     }
   }
 }

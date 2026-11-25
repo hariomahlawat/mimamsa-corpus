@@ -45,6 +45,15 @@ def resolve_span(span: SpanKey, derived_records) -> dict | None:
                 and (d.get("pipeline") or {}).get("version") == span.pipeline_version
                 and d.get("text_sha256") == span.derivative_text_sha256):
             for p in d.get("passages", []):
-                if p.get("page") == span.page.page and (span.passage_id is None or p.get("passage_id") == span.passage_id):
-                    return p
+                if p.get("page") != span.page.page:
+                    continue
+                if span.passage_id is not None and p.get("passage_id") != span.passage_id:
+                    continue
+                # Offsets, when given, must lie inside the passage: [char_start, char_end) within the passage range.
+                if span.char_start is not None or span.char_end is not None:
+                    cs = span.char_start if span.char_start is not None else span.char_end
+                    ce = span.char_end if span.char_end is not None else span.char_start
+                    if not (p.get("char_start", 0) <= cs <= ce <= p.get("char_end", -1)):
+                        continue
+                return p
     return None

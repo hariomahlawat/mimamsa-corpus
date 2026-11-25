@@ -94,7 +94,7 @@ Weights sum to 110 after adding K10; the scoring sheet normalises to 100. K10 ca
 
 ## 4a. Windows-first portable core and adapter boundaries
 
-**Principle.** One platform-independent application core (domain modules, search/graph/catalogue services, contract validation, evidence semantics, UI and API, PostgreSQL schema, corpus formats). Host-specific behaviour sits behind a small number of narrow infrastructure interfaces with a Windows adapter now. A Linux adapter is a later, separately accepted delivery. Dependencies point inward: the core never imports an OS-specific module. Portable libraries are the default; an OS-specific dependency needs a recorded benefit and its seam. No abstraction is added to ordinary portable code without need (owner directive 3).
+**Principle.** One platform-independent application core (domain modules, search/graph/catalogue services, contract validation, evidence semantics, UI and API, PostgreSQL schema, corpus formats). Host-specific behaviour sits behind a small number of narrow infrastructure interfaces (AD-1..AD-4, AD-6..AD-9) with a Windows adapter now; DC-1 and DC-2 are deployment controls with no core-facing interface. A Linux adapter is a later, separately accepted delivery. Dependencies point inward: the core never imports an OS-specific module. Portable libraries are the default; an OS-specific dependency needs a recorded benefit and its seam. No abstraction is added to ordinary portable code without need (owner directive 3).
 
 | # | Adapter boundary (interface) | Windows adapter (primary, C13) | What the core sees | Linux later (not claimed) |
 | --- | --- | --- | --- | --- |
@@ -102,12 +102,12 @@ Weights sum to 110 after adding K10; the scoring sheet normalises to 100. K10 ca
 | AD-2 | **Filesystem layout and path policy** | `D:\Mimamsa\…` roots from configuration; NTFS case-insensitive rules | logical store roots; contract-relative POSIX paths validated by `app/contract/mimamsa_contract/paths.py` (already rejects Windows and POSIX hazards on every OS) | configured roots; same validator |
 | AD-3 | **Access control on stores** | NTFS ACLs set by installer (`icacls`), virtual service accounts | "store X is read-only for this process" assertions checked at start | POSIX ownership/ACLs |
 | AD-4 | **Process isolation for untrusted parsing** | child process in a Job Object (memory, CPU, time, kill-on-close); restricted token/AppContainer later | `run_isolated(job, limits) -> result | failure` | cgroups/namespaces |
-| AD-5 | **Network egress policy** | Windows Firewall outbound block per service SID | assertion only (core makes no outbound calls) | nftables/systemd sandboxing |
+| DC-1 | **Network egress policy** (deployment control, not a core interface) | Windows Firewall outbound block per service SID | nothing: the core makes no outbound calls | nftables/systemd sandboxing |
 | AD-6 | **Protected delivery transport** (PR #53 Serving §6) | in-process gateway adapter on the selected host (T0: app service, no proxy on protected routes), bounded byte slices, credit ledger | `try_accept(artifact, offset, n, state)` and polling progress | equivalent adapter with its own proof |
 | AD-7 | **Durable policy state / witness store** | protected folder outside DB and release generations; flush semantics proven on NTFS in P8 | `ExclusionStore`-style acceptance record (`app/contract/mimamsa_contract/exclusions.py`) | same contract, separate proof |
 | AD-8 | **Secrets and key store** | DPAPI/LocalMachine certificate store; trust list from signed installer | key handles, trust list object | file/keyring with OS protection |
-| AD-9 | **OCR, embedding and (later) inference runtimes** | pinned Windows builds (Tesseract, ONNX Runtime; llama.cpp later) | typed capability interfaces (ocr, embed, rerank) with model/file hashes | pinned Linux builds |
-| AD-10 | **Installer, update and backup tooling** | Authenticode-signed MSI, Task Scheduler, robocopy/VSS, BitLocker | none (outside the core) | separate signed packages |
+| AD-9 | **OCR, embedding and (later) inference runtimes** | candidates, selected by PoC (Tesseract or alternative per A1/P4/P6; ONNX Runtime per P3; inference runtime at a later milestone). None is selected; Tesseract is not available on the B0 host | typed capability interfaces (ocr, embed, rerank) with model/file hashes | pinned Linux builds |
+| DC-2 | **Installer, update and backup tooling** (deployment control, not a core interface) | Authenticode-signed MSI, Task Scheduler, robocopy/VSS, BitLocker | nothing (outside the core) | separate signed packages |
 
 Rules: release bundles and the contract never contain drive letters, absolute paths or OS separators; database migration between hosts is by logical backup and signed bundles, not copying data directories or witness state; Windows measurements are never reused as evidence for another OS. The existing Linux CI already runs the portable contract and design tests; a Windows runner is added when the B1 code exists (P6), not in B0.
 
@@ -118,7 +118,7 @@ Rules: release bundles and the contract never contain drive letters, absolute pa
 - **Candidate vs verified separation:** already structural in contract v1 (candidate status, capability restriction, resolvable review and approval records, legal axes closed at AUTH-LEDGER v0). A future engine or GraphRAG consumes these without reinterpretation.
 - **Reserved site-only namespaces:** bundle paths `agent/`, `private/`, `workflows/`, `claims/`, `policy/` and record kinds for workflows, private drafts, final claims, output authorisations, serving epochs, policy witnesses and rule packs are rejected in exchange, so private agent writes can never enter the shared corpus by bundle.
 - **Single delivery gateway and serving fence:** every protected response goes through one gateway that checks current publication/exclusion state at hand-off (security architecture §7.4).
-- **Execution domains:** PUBLISHED_RESEARCH, STAGED_ADMIN_PROCESSING and PRIVATE_WORKING_SESSION map to the existing layers 7, staging and 9; they are not roles.
+- **Execution domains:** PUBLISHED_RESEARCH, STAGED_ADMIN_PROCESSING and PRIVATE_WORKING_SESSION map to layers 1–8 in the published view, the staging area, and layer 9 respectively (as in the security architecture §2.1); they are not roles.
 
 ## 5. Consequences (to be confirmed with the decision)
 

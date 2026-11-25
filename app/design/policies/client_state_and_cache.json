@@ -6,7 +6,7 @@
       "cache_control": "no-store",
       "pragma": "no-cache",
       "content_disposition": "inline",
-      "notes": "originals stream after hash check; never cached by the browser"
+      "notes": "originals are served as bounded authenticated ranges through the delivery gateway after a hash check (see pdfjs); never cached by the browser"
     },
     "working_document": {
       "cache_control": "no-store",

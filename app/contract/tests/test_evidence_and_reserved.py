@@ -50,3 +50,20 @@ def test_reserved_record_kinds_never_exchanged(register, kind):
 @pytest.mark.parametrize("path", ["agent/u1/draft.json", "private/u1/x.txt", "workflows/w1.json", "claims/c1.json", "policy/witness.json"])
 def test_reserved_paths_never_in_bundle(make_bundle, trust, register, path):  # noqa: F811
     assert "RESERVED_NAMESPACE" in codes(prod(make_bundle(extra_files={path: (b"x", "other")}), trust, register))
+
+
+def test_resolve_span_checks_offsets_without_passage_id(example):
+    """Review F06: with passage_id null, offsets must lie inside a passage; out-of-range offsets resolve to None."""
+    d = example("derived_text")
+    a = dict(example("candidate_graph_edge")["anchors"][0], passage_id=None, char_start=10, char_end=90)
+    _, span, _ = evidence_keys(a)
+    assert resolve_span(span, [d])["passage_id"] == "p2-1"
+    a.update(char_start=340, char_end=900)  # beyond p2-1 (0..350)
+    _, span, _ = evidence_keys(a)
+    assert resolve_span(span, [d]) is None
+
+
+def test_contract_revision_marker():
+    """Review F09: R2 is machine-detectable."""
+    from mimamsa_contract import CONTRACT_REVISION, CONTRACT_VERSION
+    assert CONTRACT_VERSION == "1.0.0" and CONTRACT_REVISION == "R2"

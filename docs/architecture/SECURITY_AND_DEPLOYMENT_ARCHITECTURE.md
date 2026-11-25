@@ -129,15 +129,6 @@ Office desktops are shared, so nothing sensitive may persist in the browser (pol
 - PDF.js loads originals with no persistent range cache; working documents are served `no-store` and never written to the browser's download folder unless the user explicitly exports.
 - No offline cached view: when the server is unreachable the client shows a reconnecting notice only.
 
-### 7.4 Single delivery gateway and serving fence (PR #53 Serving contract)
-
-- Every protected response (search results, counts, snippets, metadata, graph paths, PDF ranges, exports, progress events with content) is handed to the client by **one delivery gateway** in the web process. Workers, static-file handlers, IIS static/`X-Sendfile`-style mechanisms and reverse-proxy caches never serve vault or derived bytes.
-- At hand-off the gateway checks the current publication/exclusion state (serving epoch) for the exact item; a withdrawal or exclusion is complete only after its durable acceptance (the fence), after which no affected bytes are handed off. Bytes already delivered cannot be recalled; Admin withdrawal UX says so.
-- PDF originals are served as bounded, authenticated single ranges (≤ 64 KiB proposed), after a bounded metadata request; no unbounded first GET, no protected compression, no ETag/304 (policy file `app/design/policies/client_state_and_cache.json`).
-- Initial topology candidate T0: the application service owns protected egress with no proxy on protected routes. An IIS/ARR front end (T1) is acceptable for protected routes only if its buffering is proven inside the gateway's bounds; otherwise those routes stay disabled (ADR-0005 K10).
-- Progress uses bounded authenticated polling; SignalR/SSE only for content-free status until proven.
-- **Proof belongs to the PoC agent:** R2-N01 (atomic byte-credit reservation, large-PDF range bootstrap, near-end jump, withdrawal between chunks) under P4/P5 on the selected Windows host. Not claimed here.
-
 ### 7.3 Server-side authorisation model
 
 | Check | Rule | Enforced where |
@@ -150,6 +141,15 @@ Office desktops are shared, so nothing sensitive may persist in the browser (pol
 | Gated features | Commander assistant, legal-rule checks, readiness reports, template filling → disabled by configuration that cannot be enabled while the reasoning-feature gate is closed | Startup config validation + per-request gate check |
 | Opaque ids | Ids are random (UUIDv4/ULID); knowing an id grants nothing | All of the above |
 | Non-disclosure | For an unauthorised caller, hidden, not-found, restricted, withdrawn and staged items return one indistinguishable response; counts, facets and timing do not reveal them (PR #53 Tools §7) | Query layer filters before counting; uniform error mapping |
+
+### 7.4 Single delivery gateway and serving fence (PR #53 Serving contract)
+
+- Every protected response (search results, counts, snippets, metadata, graph paths, PDF ranges, exports, progress events with content) is handed to the client by **one delivery gateway** in the web process. Workers, static-file handlers, IIS static/`X-Sendfile`-style mechanisms and reverse-proxy caches never serve vault or derived bytes.
+- At hand-off the gateway checks the current publication/exclusion state (serving epoch) for the exact item; a withdrawal or exclusion is complete only after its durable acceptance (the fence), after which no affected bytes are handed off. Bytes already delivered cannot be recalled; Admin withdrawal UX says so.
+- PDF originals are served as bounded, authenticated single ranges (≤ 64 KiB proposed), after a bounded metadata request; no unbounded first GET, no protected compression, no ETag/304 (policy file `app/design/policies/client_state_and_cache.json`).
+- Initial topology candidate T0: the application service owns protected egress with no proxy on protected routes. An IIS/ARR front end (T1) is acceptable for protected routes only if its buffering is proven inside the gateway's bounds; otherwise those routes stay disabled (ADR-0005 K10).
+- Progress uses bounded authenticated polling; SignalR/SSE only for content-free status until proven.
+- **Proof belongs to the PoC agent:** R2-N01 (atomic byte-credit reservation, large-PDF range bootstrap, near-end jump, withdrawal between chunks) under P4/P5 on the selected Windows host. Not claimed here.
 
 ## 8. Signing-key custody, trust list and signed offline updates
 
@@ -218,8 +218,9 @@ Any failure in 1–6 rejects the whole bundle and changes nothing. The validator
 
 ### 8.4 Exclusion channel (withdrawals and restricted register), independent of releases
 
-- **Acceptance protocol (reference: `ExclusionStore`):** stage the signed pair, move it write-once into the store, then accept by compare-and-set of a single `ACCEPTED` record (flushed, atomically replaced). The `ACCEPTED` record is the sole acceptance point and the serving fence for exclusions; a pair without it is *pending*, never accepted; an `ACCEPTED` record that points to a missing or altered pair halts protected delivery. Durability on the actual Windows storage (power-loss behaviour) is proven in P8/B2; an independent custody copy of the `ACCEPTED` record (witness) is an owner decision (PR #53 Serving §8).
+- **Acceptance protocol (reference: `ExclusionStore`):** single writer (exclusive LOCK); stage the signed pair, move it write-once into the store, then accept by compare-and-set of a single `ACCEPTED` record (flushed, atomically replaced) carrying operation id, digest, signature digest, epoch and history. Restart cases: a stored but unaccepted pair can be completed; staging residue is quarantined; a retry after a lost acknowledgement returns the original acknowledgement. The `ACCEPTED` record is the sole acceptance point and the serving fence for exclusions; a pair without it is *pending*, never accepted; an `ACCEPTED` record that points to a missing or altered pair halts protected delivery. Durability on the actual Windows storage (power-loss behaviour) is proven in P8/B2; an independent custody copy of the `ACCEPTED` record (witness) is an owner decision (PR #53 Serving §8).
 - **Channel:** a signed `exclusion_update` (contract schema) carrying the full register text and the current withdrawal list, signed by the owner's `register` key, strictly increasing sequence (`exclusions.accept_exclusion_update`). It is applied from the import drop folder like a bundle, without waiting for a release.
+- **Monotone tombstones:** every accepted withdrawal and register entry stays denied even if a later signed list omits it; only an explicit signed `readmissions` row (exact identity plus `authority_ref`) lifts it (`ExclusionStore.effective_state`). **Local Admin withdrawals** are still DB mutations that a restore can roll back: conflict X7, to be moved into this store in B2 by owner decision.
 - **Re-application rule:** after every activation, rollback and restore, and immediately on accepting an exclusion update, the site computes `items_to_suppress` for the active generation and every retained generation, and in one transaction: marks them `WITHDRAWN` or `EXCLUDED_RESTRICTED`, deletes their FTS rows, embeddings, graph edges and derivatives, invalidates caches, and records publication records. A rollback, an older generation or a restored backup therefore cannot resurrect an excluded item.
 - **Restricted bytes uploaded by an Admin:** the upload service hashes the stream in the staging area **before** anything is persisted to the vault; a register hit aborts the upload, deletes the staging file, and records only the hash prefix, restriction id, actor and time. Nothing is quarantined or backed up (consistent with the register's `routine_operations_forbidden: copy`).
 - **Item already held when newly restricted:** derivatives, index rows and embeddings are deleted; the original is moved to an ACL-locked isolation folder outside the backup set, readable by no service account, pending the owner's decision (the register forbids routine deletion). The isolation is recorded in the audit log by restriction id.
@@ -264,7 +265,7 @@ Additional tests (sessions, CSRF, updates, network, logging, ledger, gates, rest
 | T-OWN-03 | Working file leaks to shared index | Upload to Document Studio, then search, graph, embeddings, template registry | No trace anywhere |
 | T-VIS-01 | Staged content leak | Search/snippet/graph/suggest for a staged item as User | Absent |
 | T-VIS-02 | Withdrawal leak | Withdraw a published item; query FTS, vector, suggestions, graph, server caches, exports, and reload pages in the browser (back/forward, history) | Absent within the same transaction/job; browser shows no cached copy |
-| T-VIS-03 | Resurrection by rollback/restore | Withdraw or newly restrict an item, then roll back to N-1 and separately restore a backup taken before the change | Item absent after activation (exclusion state re-applied); contract test `test_rollback_cannot_resurrect_withdrawn_or_restricted` |
+| T-VIS-03 | Resurrection by rollback/restore (**signed channel**) | Withdraw (signed exclusion update) or newly restrict an item, then roll back to N-1, separately restore a backup taken before the change, and issue a later signed list that omits the item | Item absent after activation (monotone tombstones re-applied; only explicit signed re-admission lifts them); contract tests `test_rollback_cannot_resurrect_withdrawn_or_restricted`, `test_omission_from_later_list_does_not_readmit`. **Local Admin withdrawals are not yet covered** (conflict X7, B2) |
 | T-CACHE-01 | Shared-desktop persistence | On a shared Windows desktop: search, open PDF, add a note, log out; second user inspects browser cache, history-restored pages, localStorage/IndexedDB/service workers | `Cache-Control: no-store` on all sensitive responses; `Clear-Site-Data` on logout; no persistent client storage (`app/design/policies/client_state_and_cache.json`) |
 | T-RM-01 | Restricted material in bundle | Bundle contains a register hash, doc_id or hosted path | Bundle rejected |
 | T-RM-02 | Restricted material via Admin upload | Admin uploads bytes whose sha256 is in the register | Upload aborted before vault write; staging file deleted; only hash prefix and restriction id recorded; nothing backed up |

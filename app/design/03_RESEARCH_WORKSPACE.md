@@ -44,6 +44,8 @@ The research workspace is the default screen and the core of the product (CAP-US
   | Field search | `field:value`; fields `title:`, `party:`, `judge:`, `court:`, `bench:`, `case:`, `citation:`, `section:`, `act:`, `type:`, `date:` with ranges `date:2019-01-01..2021-12-31` or `year:2015..2020` | `judge:"Example" section:69 act:"Army Act 1950"` |
   | Exact lexical | `exact:` prefix disables semantic expansion | `exact:"Rule 22(3)(a)"` |
 
+  **Ranking rule (PR #53 Retrieval §3):** results that match a parsed exact identifier (section, rule, case number, neutral or reported citation) are pinned above fused results and can never be displaced by semantic similarity or reranking. Lexical and vector results are combined by rank-based fusion (reciprocal rank fusion), not by mixing raw scores.
+
   The parser shows its reading as chips ("Judge = Example", "Section 69 · Army Act 1950", "NEAR/10"); a malformed query is shown with the error position and run as plain words only after the user confirms. Field and Boolean queries run lexically (FTS); semantic expansion applies only to free-text clauses. Performance target for all query types: p95 < 1 s at 10 concurrent queries on reference hardware without reducing accuracy (P2).
 - Search text is never logged server-side (security architecture §10).
 
