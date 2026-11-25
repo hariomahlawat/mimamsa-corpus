@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mimamsa:c13-a4:provision_version:v1",
+  "title": "C13 A4 provision-level temporal version record",
+  "description": "One version of one statutory provision (or of a whole instrument). A version starts with the event that created it (enactment, notification, insertion, substitution, word-level amendment, omission, repeal, commencement) and ends when the next located event takes effect. Dates that the held evidence does not establish are null with an explicit status; nothing is inferred. Every record is an automated candidate, not a legal determination.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version_id", "family", "principal_instrument", "provision", "provision_kind", "version_seq", "version_kind", "change_summary",
+               "created_by", "effective_from", "effective_to", "retrospective_deemed_effect_from", "order_basis", "jurisdiction",
+               "applicability_exceptions", "savings_transitional", "temporal_axes", "text_basis", "text_evidence", "text_status",
+               "conflicts", "open_items", "currency", "priority_tags", "cited_by_items", "legal_review_required", "determination_state", "sources"],
+  "$defs": {
+    "date": {"type": ["string", "null"], "pattern": "^\\d{4}-\\d{2}-\\d{2}$"},
+    "axis": {
+      "type": "object", "additionalProperties": false, "required": ["status", "question_id"],
+      "properties": {"status": {"enum": ["NOT_DETERMINED"]}, "question_id": {"type": "string", "pattern": "^A4-LQ-"}}
+    },
+    "evidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["role", "copy_id", "sha256", "edition", "pdf_page", "printed_page", "method", "evidence_ids", "eligible_for_exact_anchor", "anchoring_copy"],
+      "properties": {
+        "role": {"enum": ["principal_as_notified", "amending_instrument", "government_compilation", "commencement_instrument", "register_only"]},
+        "copy_id": {"type": ["string", "null"]},
+        "sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+        "edition": {"type": "string", "minLength": 3},
+        "pdf_page": {"type": ["string", "null"]},
+        "printed_page": {"type": ["string", "null"]},
+        "method": {"enum": ["IMAGE_CHECKED", "TEXT_LAYER_ONLY", "COMPILATION_TEXT_LAYER", "COMPILATION_FOOTNOTE_IMAGE_CHECKED", "NOT_LOCATED_IN_TEXT_LAYER", "NOT_HELD"]},
+        "evidence_ids": {"type": "array", "items": {"type": "string"}},
+        "eligible_for_exact_anchor": {"type": ["boolean", "null"]},
+        "anchoring_copy": {"type": "string"}
+      }
+    }
+  },
+  "properties": {
+    "version_id": {"type": "string", "pattern": "^[A-Z0-9]+/[^/]+/v\\d{2}$"},
+    "family": {"enum": ["AR1954", "AA1950", "AFT2007", "AFTPR2008", "BNS2023", "BNSS2023", "BSA2023", "IPC1860", "CRPC1973", "IEA1872", "CCCM1978", "ISO2023", "RA1987", "DSR", "PRA2008", "PRA1961", "ER1982", "ER2008", "ER2023", "GMO2023"]},
+    "principal_instrument": {"type": "string"},
+    "provision": {"type": "string", "minLength": 1},
+    "provision_kind": {"enum": ["rule", "section", "chapter", "whole_instrument", "paragraph_range"]},
+    "version_seq": {"type": "integer", "minimum": 1},
+    "version_kind": {"enum": ["as_notified", "as_enacted", "insertion", "substitution", "amendment_words", "omission", "retrospective_omission", "repeal", "repeal_with_savings", "commencement", "establishment", "applicability_exception", "edition", "implementing_instrument"]},
+    "change_summary": {"type": "string"},
+    "created_by": {
+      "type": "object", "additionalProperties": false,
+      "required": ["instrument_id", "instrument", "instrument_date", "publication_date", "item_no", "register_refs"],
+      "properties": {
+        "instrument_id": {"type": "string"}, "instrument": {"type": "string"},
+        "instrument_date": {"type": ["string", "null"]}, "publication_date": {"$ref": "#/$defs/date"},
+        "item_no": {"type": ["string", "null"]}, "register_refs": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+      }
+    },
+    "effective_from": {
+      "type": "object", "additionalProperties": false, "required": ["date", "status", "reported_date", "basis"],
+      "properties": {
+        "date": {"$ref": "#/$defs/date"},
+        "status": {"enum": ["STATED_IN_INSTRUMENT", "STATED_DEEMED_IN_INSTRUMENT", "NOT_STATED_PENDING_ADVICE", "NOT_DETERMINED", "REPORTED_IN_COMPILATION_ONLY", "INSTRUMENT_NOT_HELD", "DISPUTED_PRESERVE_BOTH", "UNKNOWN"]},
+        "reported_date": {"$ref": "#/$defs/date"},
+        "basis": {"type": "string"}
+      }
+    },
+    "effective_to": {
+      "type": "object", "additionalProperties": false, "required": ["date", "status", "next_version_id", "basis"],
+      "properties": {
+        "date": {"$ref": "#/$defs/date"},
+        "status": {"enum": ["ENDS_ON_NEXT_VERSION", "ENDS_ON_NEXT_VERSION_DATE_NOT_DETERMINED", "OPEN_ON_LOCATED_INSTRUMENTS", "CEASED_OMITTED_OR_REPEALED"]},
+        "next_version_id": {"type": ["string", "null"]},
+        "basis": {"type": "string"}
+      }
+    },
+    "retrospective_deemed_effect_from": {"$ref": "#/$defs/date"},
+    "order_basis": {"type": "string"},
+    "jurisdiction": {
+      "type": "object", "additionalProperties": false, "required": ["status", "note"],
+      "properties": {"status": {"enum": ["NOT_DETERMINED_FROM_HELD_TEXT", "LIMITED_BY_RECORDED_INSTRUMENT"]}, "note": {"type": "string"}}
+    },
+    "applicability_exceptions": {
+      "type": "array",
+      "items": {"type": "object", "additionalProperties": false, "required": ["instrument_id", "provision", "effect", "anchor_state", "ref"],
+                "properties": {"instrument_id": {"type": "string"}, "provision": {"type": "string"}, "effect": {"type": "string"}, "anchor_state": {"type": "string"}, "ref": {"type": "string"}}}
+    },
+    "savings_transitional": {
+      "type": "array",
+      "items": {"type": "object", "additionalProperties": false, "required": ["instrument_id", "provision", "summary", "ref"],
+                "properties": {"instrument_id": {"type": "string"}, "provision": {"type": "string"}, "summary": {"type": "string"}, "ref": {"type": "string"}}}
+    },
+    "temporal_axes": {
+      "type": "object", "additionalProperties": false,
+      "required": ["conduct_date", "proceedings_date", "procedural_action_date", "document_preparation_review_date"],
+      "properties": {
+        "conduct_date": {"$ref": "#/$defs/axis"}, "proceedings_date": {"$ref": "#/$defs/axis"},
+        "procedural_action_date": {"$ref": "#/$defs/axis"}, "document_preparation_review_date": {"$ref": "#/$defs/axis"}
+      }
+    },
+    "text_basis": {"enum": ["SELF_CONTAINED", "COMPOSITE_WITH_EARLIER_VERSIONS", "NO_TEXT_OMITTED", "INSTRUMENT_LEVEL"]},
+    "text_evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}, "minItems": 1},
+    "text_status": {"enum": ["IMAGE_CHECKED", "TEXT_LAYER_ONLY", "COMPILATION_ONLY", "NOT_HELD", "CONFLICTING", "OMITTED_NO_TEXT"]},
+    "conflicts": {"type": "array", "items": {"type": "string"}},
+    "open_items": {"type": "array", "items": {"type": "string"}},
+    "currency": {
+      "type": "object", "additionalProperties": false, "required": ["status", "chain_gaps"],
+      "properties": {"status": {"enum": ["NOT_ESTABLISHED"]}, "chain_gaps": {"type": "array", "items": {"type": "string"}}}
+    },
+    "priority_tags": {"type": "array", "items": {"type": "string"}},
+    "cited_by_items": {"type": "integer", "minimum": 0},
+    "legal_review_required": {"type": "boolean"},
+    "determination_state": {"const": "AUTOMATED_CANDIDATE_NOT_VERIFIED"},
+    "sources": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+  }
+}
