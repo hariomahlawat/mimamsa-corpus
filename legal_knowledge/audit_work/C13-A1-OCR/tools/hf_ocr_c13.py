@@ -38,7 +38,8 @@ from pipeline.judgments import statute_refs  # noqa: E402
 STEM = "c13_2026-11-25"
 BASE_META = OUT / "inputs" / "c12_base_meta"
 STAGE = Path(os.environ.get("C13_A1_STAGE", "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/a1_work/hf_stage"))
-ENGINE = "RapidOCR (rapidocr-onnxruntime 1.2.3, Apache-2.0; bundled PaddleOCR PP-OCRv3 det/rec ONNX models), 200 dpi"
+ENGINE = ("PaddleOCR 3.7.0 on PaddlePaddle 3.3.1 (Apache-2.0), PP-OCRv5_mobile_det + en_PP-OCRv5_mobile_rec, "
+          "CPU, oneDNN off, 200 dpi")
 CORPUS_ACTS = {"act-army-1950", "act-air-force-1950", "act-navy-1957", "act-armed-forces-tribunal-2007", "act-ipc-1860",
                "act-crpc-1973", "act-evidence-1872", "act-bns-2023", "act-bnss-2023", "act-bsa-2023"}
 

@@ -1,0 +1,49 @@
+{
+ "by_group_state": {
+  "C12_INGESTED_T1": {
+   "CLASSIFICATION_UNCERTAIN": 6,
+   "IRRELEVANT": 1,
+   "MANUAL_REVIEW_REQUIRED": 1,
+   "RELEVANT": 10
+  },
+  "C12_PRESERVED_NOT_INGESTED": {
+   "CLASSIFICATION_UNCERTAIN": 6,
+   "IRRELEVANT": 1
+  },
+  "INCORPUS_TEXT_RISK": {
+   "CLASSIFICATION_UNCERTAIN": 4,
+   "INSUFFICIENT_TEXT": 6,
+   "IRRELEVANT": 14,
+   "OCR_REQUIRED": 24,
+   "RELEVANT": 3,
+   "SOURCE_INCOMPLETE": 14
+  }
+ },
+ "by_state": {
+  "CLASSIFICATION_UNCERTAIN": 16,
+  "INSUFFICIENT_TEXT": 6,
+  "IRRELEVANT": 16,
+  "MANUAL_REVIEW_REQUIRED": 1,
+  "OCR_REQUIRED": 24,
+  "RELEVANT": 13,
+  "SOURCE_INCOMPLETE": 14
+ },
+ "documents": 90,
+ "transitions": {
+  "borderline -> CLASSIFICATION_UNCERTAIN": 3,
+  "borderline -> OCR_REQUIRED": 8,
+  "excluded_llm -> CLASSIFICATION_UNCERTAIN": 6,
+  "excluded_llm -> IRRELEVANT": 1,
+  "not_checked -> CLASSIFICATION_UNCERTAIN": 3,
+  "not_checked -> INSUFFICIENT_TEXT": 6,
+  "not_checked -> IRRELEVANT": 14,
+  "not_checked -> OCR_REQUIRED": 10,
+  "not_checked -> RELEVANT": 10,
+  "not_checked -> SOURCE_INCOMPLETE": 14,
+  "relevant -> CLASSIFICATION_UNCERTAIN": 4,
+  "relevant -> IRRELEVANT": 1,
+  "relevant -> MANUAL_REVIEW_REQUIRED": 1,
+  "relevant -> OCR_REQUIRED": 6,
+  "relevant -> RELEVANT": 3
+ }
+}
