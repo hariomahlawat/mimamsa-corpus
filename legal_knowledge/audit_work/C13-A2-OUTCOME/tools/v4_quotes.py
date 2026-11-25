@@ -112,3 +112,83 @@ def in_spans(spans, starts, pos):
             continue
         break
     return None
+
+
+# ------------------------------------------------------------------ V4: quoted versus operative language (C11 F08)
+_DOUBLE_SINGLE_OPEN_RE = re.compile(r"(?:^|(?<=[\s(\[:\-—]))(?:‘‘|’’|'')(?=\S)")
+_DOUBLE_SINGLE_CLOSE_RE = re.compile(r"(?<=\S)(?:’’|'')(?=[\s.,;:)\-—]|$)")
+_CLOSE_MARK_RE = re.compile(r"[”\"]|’’|''")
+_COURT_RESUME_RE = re.compile(
+    r"(?:For\s+the\s+(?:foregoing|forgoing|aforesaid|above|stated|said)\s+reasons|For\s+(?:all\s+)?the(?:se)?\s+reasons|In\s+view\s+of\s+the\s+"
+    r"(?:above|aforesaid|foregoing)|Accordingly|In\s+the\s+result|Resultantly|Consequently|Hence|Therefore|Thus|"
+    r"We\s+(?:are|have|find|do|hold|accordingly|therefore)|In\s+our\s+(?:view|opinion|considered)|Applying)\b")
+_PARA_RESUME_RE = re.compile(r"\n[ \t]*\d{1,3}[ \t]*\.[ \t]*\n?[ \t]*" + _COURT_RESUME_RE.pattern)
+
+
+_PARA_NUM_RE = re.compile(r"(?m)^[ \t]*(\d{1,3})[ \t]*\.(?=\s)")
+
+
+def _double_single_spans(text):
+    """Quotations marked with doubled single quotes (’’ ... ’’ or '' ... ''), common in High Court text layers."""
+    out, i = [], 0
+    while True:
+        mo = _DOUBLE_SINGLE_OPEN_RE.search(text, i)
+        if not mo:
+            break
+        mc = _DOUBLE_SINGLE_CLOSE_RE.search(text, mo.end())
+        if not mc or mc.start() - mo.start() > 8000:
+            i = mo.end()
+            continue
+        out.append((mo.start(), mc.end(), "marked", max(0, mo.start() - 300)))
+        i = mc.end()
+    return out
+
+
+def quote_spans_v4(text, para_starts_fn=None):
+    """V3 quote spans with three V4 corrections, so that the court's own operative words are not read as quoted:
+      1. an unmarked block introduced by 'as under:' ends where the marked quotation it introduces closes, or where the
+         court resumes after a closing mark ('...to the Tribunal;" For the foregoing reasons, ...');
+      2. a marked span that runs on into a new numbered paragraph opening in the court's voice ('17. Accordingly, ...')
+         is cut there (an unbalanced or mis-paired quotation mark);
+      3. quotations marked with doubled single quotes are recognised.
+    Returns sorted (start, end, kind, intro_start) like quote_spans."""
+    spans = quote_spans(text, para_starts_fn)
+    marked = sorted((s, e) for s, e, k, _ in spans if k == "marked")
+    out = []
+    for s, e, k, intro in spans:
+        if k == "intro_block":
+            # (1) the block ends at the close of the marked quotation that opens it, or at a court resumption after a close
+            first = next(((ms, me) for ms, me in marked if s <= ms <= s + 80), None)
+            if first is not None:
+                e = min(e, first[1])
+            else:
+                for mc in _CLOSE_MARK_RE.finditer(text, s, e):
+                    nxt = text[mc.end():mc.end() + 200]
+                    mr = re.match(r"\s*(?:\d{1,3}\s*\.\s*)?", nxt)
+                    if _COURT_RESUME_RE.match(nxt, mr.end()):
+                        e = mc.end()
+                        break
+            if e - s < 20:
+                continue
+        elif k == "marked" and e - s > 600:
+            # (2) a quotation that swallows a new paragraph opening in the court's own voice is mis-paired
+            # only when the paragraph number continues the court's own numbering just before the quotation
+            prev = [int(m.group(1)) for m in _PARA_NUM_RE.finditer(text, max(0, s - 6000), s)]
+            for mp in _PARA_RESUME_RE.finditer(text, s + 1, e):
+                n = int(re.match(r"\s*(\d{1,3})", text[mp.start():]).group(1))
+                if prev and 1 <= n - prev[-1] <= 2:
+                    e = mp.start() + 1
+                    break
+        out.append((s, e, k, intro))
+    if "“" not in text:
+        taken = [(s, e) for s, e, _, _ in out]
+        for sp in _double_single_spans(text):
+            if not any(a <= sp[0] < b or sp[0] <= a < sp[1] for a, b in taken):
+                out.append(sp)
+    out.sort()
+    return out
+
+
+def voice_at(spans, starts, pos):
+    """'quoted' or 'court' for a character position (party statements are handled by the clause parser)."""
+    return "quoted" if in_spans(spans, starts, pos) else "court"

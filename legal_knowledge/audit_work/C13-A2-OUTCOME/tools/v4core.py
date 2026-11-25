@@ -18,6 +18,7 @@ from v4_text import (  # noqa: F401
     VERSION,
     STATUS,
     UNVERIFIED)
+from v4_quotes import quote_spans_v4  # noqa: F401
 from v4_quotes import (  # noqa: F401
     quote_spans,
     in_spans)
@@ -432,7 +433,7 @@ def analyze_segment(d, seg, hosts, scr, is_first, section=False):
 # ------------------------------------------------------------------ v3: main entry
 ROW_COLS = ["judgment_id", "sha256", "doc_ids", "court", "proceeding", "file_case_role", "printed_disposal",
             "substantive_result", "party_specific", "final_or_interim", "page", "paragraph", "char_start", "char_end",
-            "excerpt", "abstain_reason", "notes", "method", "flags"]
+            "excerpt", "abstain_reason", "notes", "method", "flags", "segment", "operative_directions", "confidence"]
 
 
 
@@ -452,6 +453,8 @@ def analyze(text, meta):
         if m and "%d/%s" % (int(m.group(1)), m.group(2)) in own:
             return "OWN_CASE"
         return "CONNECTED_CASE" if m else "UNMATCHED"
+
+    ctx = {}
 
     def row(label, printed, subst, reason, flags, ev=None, chain=None, zone=None, method="abstain", party="",
             text_=None):
@@ -475,6 +478,11 @@ def analyze(text, meta):
                       "excerpt": squash(text_[max(zs, ze - 450):ze], 450)})
         if r["paragraph"] is None:
             r["paragraph"] = ""
+        # V4: structural location, operative directions and evidence tier (answered rows only)
+        r.update({"segment": ctx.get("segment", ""), "operative_directions": "", "confidence": ""})
+        if (printed != UNVERIFIED or subst != UNVERIFIED) and zone is not None:
+            r["operative_directions"] = v4_relief.direction_kinds(d, zone)
+            r["confidence"] = v4_relief.confidence_tier(method, notes, flags, _alpha_ratio(d.mt[zone[0]:zone[1]]))
         return r
 
     if not text or len(re.sub(r"\s|\[\[page \d+\]\]", "", text)) < 200:
@@ -489,7 +497,7 @@ def analyze(text, meta):
     def next_para(pos):
         i = bisect.bisect_right(cand_pos, pos + 5)
         return cand_pos[i] if i < len(cand_pos) else None
-    d.qspans = quote_spans(mt, next_para)
+    d.qspans = quote_spans_v4(mt, next_para)
     d.qstarts = [q[0] for q in d.qspans]
     js0 = 0
     mj = _JUDGMENT_START_RE.search(mt, 0, min(len(mt), 60000))
@@ -529,6 +537,7 @@ def analyze(text, meta):
         if secs and (best is None or len(secs) > len(best[1])):
             best = (res, secs)
     if best is not None:
+        ctx["segment"] = "batch_sections"
         brows, n_ok, last_plural = _batch_rows(d, best[1], main_hosts, row, text)
         if n_ok >= max(2, 0.5 * len(best[1])) and not last_plural:
             flags.append("BATCH_SECTIONS_%d" % len(best[1]))
@@ -552,6 +561,10 @@ def analyze(text, meta):
             rows = [row(l, UNVERIFIED, UNVERIFIED, "ONLY_A_DISSENTING_OPINION_STATES_A_DISPOSITION", flags) for l in labels]
             return _finish(rows, own, meta), {"flags": flags, "hosts": labels}
     chosen, reason = _choose(results, mt, flags)
+    if chosen is not None:
+        k_ = next((i for i, r_ in enumerate(results) if r_ is chosen), 0)
+        ctx["segment"] = "opinion_or_order_%d_of_%d:%s:p%d-p%d" % (k_ + 1, len(results), chosen.get("role", "main"),
+                                                                   page_at(d.pidx, chosen["seg"][0]), page_at(d.pidx, max(chosen["seg"][0], chosen["seg"][1] - 1)))
     labels = [h["label_norm"] for h in main_hosts] or ["UNIDENTIFIED"]
     if chosen is None:
         rows = [row(l, UNVERIFIED, UNVERIFIED, reason, flags) for l in labels]

@@ -147,3 +147,49 @@ def referenced_remand(d, ev, zone):
         a = max(a, zone[0] - 2500)
     ms = court_voice(d, a, ev["sentence"][0], _FRESH_RE)
     return ms[-1] if ms else None
+
+
+# ------------------------------------------------------------------ operative directions and confidence (V4)
+_DIRECTION_KINDS = [
+    ("set_aside", _QUASH_RE),
+    ("remand", re.compile(r"\b(?:remand\w*|remit(?:s|ted)?|sent\s+back|restored?\s+to\s+(?:the\s+)?file)\b|\bafresh\b|\bde\s+novo\b|"
+                          r"\bfresh\s+(?:decision|consideration|order)\b", re.I)),
+    ("transfer", _TRANSFER_DIR_RE),
+    ("direction", re.compile(r"\b(?:is|are|stand|be)\s+(?:hereby\s+)?directed\b|\bwe\s+(?:hereby\s+)?direct\b|\bit\s+is\s+(?:hereby\s+)?directed\b",
+                             re.I)),
+    ("relief", re.compile(r"\b(?:shall|is|are)\s+(?:be\s+)?(?:hereby\s+)?(?:entitled|reinstated|granted|released|paid)\b", re.I)),
+    ("modification", re.compile(r"\b(?:is|are|stands?|be)\s+(?:hereby\s+)?modified\b", re.I)),
+    ("withdrawal", re.compile(r"\bwithdrawn\b|\bwithdrawal\b|\bnot\s+pressed\b|\bliberty\s+to\s+withdraw", re.I)),
+    ("liberty", re.compile(r"\bliberty\b|\bopen\s+to\s+the\s+(?:petitioner|appellant|respondent)s?\b", re.I)),
+    ("listing_or_adjournment", re.compile(r"\b(?:be\s+(?:re-?)?listed|list\s+(?:on|the\s+matter)|stands?\s+adjourned|next\s+date\s+of\s+hearing)\b",
+                                          re.I)),
+    ("interim_relief", re.compile(r"\binterim\s+(?:order|relief|protection|stay)\b|\bstay\s+(?:is\s+)?granted\b|\bin\s+the\s+meanwhile\b", re.I)),
+    ("costs", re.compile(r"\bcosts?\s+(?:of|quantified|assessed)\b|\bwith\s+costs\b|\bexemplary\s+costs\b", re.I)),
+]
+
+
+def direction_kinds(d, zone):
+    """Kinds of operative directions given in the court's own voice in the operative part (multiple directions are
+    common: set aside + remand + time limit + liberty). Returns a ';'-joined sorted list."""
+    if not zone:
+        return ""
+    zs, ze = zone
+    return ";".join(sorted(k for k, rx in _DIRECTION_KINDS if court_voice(d, zs, ze, rx)))
+
+
+_INFERENTIAL_NOTES = ("EXTENT_", "ALLOWED_IN_TERMS", "TRANSFER_DIRECTION", "withdrawal_sought", "party_prayer_adopted",
+                      "modal_only", "inferred_from")
+
+
+def confidence_tier(method, notes, flags, alpha):
+    """Rule-based evidence tier for an answered row: 'high' (a disposing sentence found under an operative cue or order
+    heading, or the whole of a short order, mapped without inference, clean text), 'low' (no cue, text noise, or the
+    label inferred from directions rather than printed words), else 'medium'. In-sample precision per tier is reported
+    in dev_eval; the tier is information for users, not a guarantee."""
+    m = method or ""
+    if "final_sentences_no_cue" in m or alpha < 0.6 or any(x in (notes or "") or x in m for x in _INFERENTIAL_NOTES):
+        return "low"
+    if ("operative_cue" in m or "order_heading" in m or "short_order_whole_body" in m) and "batch_section" not in m and \
+            not any(f.startswith(("HOSTS_", "SEGMENTS_", "DISSENTING")) for f in flags):
+        return "high"
+    return "medium"
