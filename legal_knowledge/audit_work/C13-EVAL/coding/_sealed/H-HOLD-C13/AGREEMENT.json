@@ -1,0 +1,1162 @@
+{
+ "items": [
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-0240ac10da",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-025c374a3c",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-0368be1a51",
+   "rows_a": 2,
+   "rows_b": 4,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-057cc3d0bc",
+   "rows_a": 2,
+   "rows_b": 4,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 4
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-05a7a131e3",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-093ef23124",
+   "rows_a": 3,
+   "rows_b": 4,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 3
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-0a2785ba7f",
+   "rows_a": 1,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-0a54a64da2",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-0a78d157d1",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-0a7d9de93d",
+   "rows_a": 3,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-0e79ea97ce",
+   "rows_a": 3,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-10713f1e48",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HH13-147213ec3c",
+   "rows_a": 3,
+   "rows_b": 3,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-151f09ce6d",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-226cd4c846",
+   "rows_a": 3,
+   "rows_b": 6,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 5
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-2295b6c68d",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-237025f2ee",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-2395002060",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-25dfc37ec7",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-29bfb8e851",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-2b73e01e3f",
+   "rows_a": 1,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-2e399e4e77",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-2e7e4d3e9f",
+   "rows_a": 1,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-300067887e",
+   "rows_a": 2,
+   "rows_b": 4,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 4
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-31930437e1",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-334c9f522e",
+   "rows_a": 2,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-3399d7d951",
+   "rows_a": 3,
+   "rows_b": 4,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 5
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HH13-35ea45846d",
+   "rows_a": 3,
+   "rows_b": 3,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-38fdf6f424",
+   "rows_a": 1,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-3ab2e269fb",
+   "rows_a": 2,
+   "rows_b": 4,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 4
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-3b8506ea8d",
+   "rows_a": 1,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-3dae140a22",
+   "rows_a": 1,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-3ef955e11a",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-3f503ddbcd",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-44300ea336",
+   "rows_a": 2,
+   "rows_b": 4,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 4
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-444c59454b",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-474a7c1cc8",
+   "rows_a": 3,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 4
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-4ddc7fb0aa",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-4df86b4317",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-50f5cccaa3",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 3
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-540adb5313",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HH13-54a1f0d3c7",
+   "rows_a": 4,
+   "rows_b": 4,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-5abc2f7a78",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-5c546b8af2",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-5cd5225312",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-5e8f0019d0",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-67a496c410",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-692df7ca7e",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-6a31e0c383",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-6a33c1cf31",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-6a466a8b3b",
+   "rows_a": 2,
+   "rows_b": 4,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 4
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HH13-6af915b6ef",
+   "rows_a": 3,
+   "rows_b": 4,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HH13-6df8d7b55e",
+   "rows_a": 4,
+   "rows_b": 6,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 4
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HH13-72aff4e798",
+   "rows_a": 3,
+   "rows_b": 6,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 3
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-7b41363dfc",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-7ceddfb030",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-804f2b77b1",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-815b283875",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-82a1bffba8",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 5
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HH13-83444b294e",
+   "rows_a": 3,
+   "rows_b": 3,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-84508790e4",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 4,
+   "item_id": "HH13-8cd872f365",
+   "rows_a": 4,
+   "rows_b": 6,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-8d08172a65",
+   "rows_a": 2,
+   "rows_b": 4,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 4
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-8e54651d2a",
+   "rows_a": 1,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-91a16efde5",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 3
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HH13-9442014dcd",
+   "rows_a": 3,
+   "rows_b": 4,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-94fed97880",
+   "rows_a": 1,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-961ed7546a",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-96222e60b0",
+   "rows_a": 3,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-9c65cf320e",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-9e2eb1bf66",
+   "rows_a": 4,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 3
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-9e74a70c13",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-a28323037e",
+   "rows_a": 3,
+   "rows_b": 4,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 7
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-a34c35efa4",
+   "rows_a": 1,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-a4da73ea5e",
+   "rows_a": 1,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-a67249e7bb",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-a9f8530e49",
+   "rows_a": 1,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-aae739c220",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-ab250793df",
+   "rows_a": 2,
+   "rows_b": 2,
+   "status": "AGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HH13-aba0d1c3cc",
+   "rows_a": 3,
+   "rows_b": 4,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-b14e722993",
+   "rows_a": 1,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-b423f40148",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-b485bf4f70",
+   "rows_a": 2,
+   "rows_b": 4,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-b525cf27e5",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-b73e49953f",
+   "rows_a": 1,
+   "rows_b": 4,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 3
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-b750116308",
+   "rows_a": 1,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-b8d39495b8",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-baf50207cb",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-bb05bf1122",
+   "rows_a": 1,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HH13-bca5a01bed",
+   "rows_a": 7,
+   "rows_b": 6,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 7
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-bdb5d6ad70",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-c1ec559e16",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 3
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-c3dea4c056",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "AGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "OUT_OF_SCOPE",
+   "unmatched_units": 0
+  },
+  {
+   "aligned_units": 5,
+   "item_id": "HH13-c50cb7ceb2",
+   "rows_a": 5,
+   "rows_b": 6,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-c78249a3a7",
+   "rows_a": 1,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-c9b73e362f",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-cb572ec7b1",
+   "rows_a": 1,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-cc56f008bb",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 3
+  },
+  {
+   "aligned_units": 3,
+   "item_id": "HH13-ccf631a152",
+   "rows_a": 3,
+   "rows_b": 6,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 3
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-cd8ae13534",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 5,
+   "item_id": "HH13-d3258b5f50",
+   "rows_a": 7,
+   "rows_b": 7,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 4
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-db8907ee45",
+   "rows_a": 3,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 4
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-e2685133f8",
+   "rows_a": 1,
+   "rows_b": 1,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-e451223c25",
+   "rows_a": 2,
+   "rows_b": 4,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 4
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-e790d57ed9",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-e91eb0a103",
+   "rows_a": 1,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 2
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-ec370442b5",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-f12dab3be9",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-f481458962",
+   "rows_a": 1,
+   "rows_b": 2,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 1,
+   "item_id": "HH13-f7acd51326",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 3
+  },
+  {
+   "aligned_units": 0,
+   "item_id": "HH13-fbc02e9c15",
+   "rows_a": 1,
+   "rows_b": 4,
+   "status": "DISAGREE",
+   "uncodable_a": "OUT_OF_SCOPE",
+   "uncodable_b": "",
+   "unmatched_units": 4
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-fda8105008",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  },
+  {
+   "aligned_units": 2,
+   "item_id": "HH13-fed9e797d2",
+   "rows_a": 2,
+   "rows_b": 3,
+   "status": "DISAGREE",
+   "uncodable_a": "",
+   "uncodable_b": "",
+   "unmatched_units": 1
+  }
+ ],
+ "summary": {
+  "aligned_units": 152,
+  "fields": {
+   "item_type": {
+    "cohen_kappa_including_unmatched": -0.1131,
+    "cohen_kappa_matched_only": 1.0,
+    "krippendorff_alpha_nominal": 1.0,
+    "raw_agreement": 0.4497,
+    "units_including_unmatched": 338
+   },
+   "opinion": {
+    "cohen_kappa_including_unmatched": -0.1868,
+    "cohen_kappa_matched_only": 1.0,
+    "krippendorff_alpha_nominal": 1.0,
+    "raw_agreement": 0.4497,
+    "units_including_unmatched": 338
+   }
+  },
+  "items": 113,
+  "items_agree": 34,
+  "items_uncodable_both": 21,
+  "items_uncodable_one_coder": 3,
+  "span_f1": 0.5661,
+  "strict_item_agreement": 0.3009,
+  "strict_unit_agreement": 0.4497,
+  "task": "holdings",
+  "unmatched_units": 186
+ }
+}

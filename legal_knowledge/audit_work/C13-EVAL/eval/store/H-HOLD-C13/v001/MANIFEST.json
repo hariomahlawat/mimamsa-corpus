@@ -1,0 +1,16 @@
+{
+ "coder_ids": [
+  "C13-ADJ-HOLD",
+  "C13-COD-HOLD-1",
+  "C13-COD-HOLD-2"
+ ],
+ "created_by": "C13 GA4 evaluator (independent; not a coder, adjudicator or extractor author)",
+ "created_utc": "2026-11-25T19:47:08Z",
+ "files": {
+  "H-HOLD-C13.csv": "bb726f95e7e92b622486a838a1291ee076d075e99170b479c07e54f02006a701"
+ },
+ "note": "Adjudicated reference for H-HOLD-C13, built by c13_coding.py truth from coder_1/coder_2 sheets + adjudicator result (rebuild byte-identical). AI-coded (separate agent instances); no human annotator. Sheet coder_id values are slot names coder_1/coder_2, mapped to instance ids in coding/ASSIGNMENT_LOG.md. Interim-guide gold (CODING_GUIDE_holdings v1.1), no substantive guideline (PD-01); adjudicator used a coordinator working definition (PD-01 addendum).",
+ "parent_version": null,
+ "set": "H-HOLD-C13",
+ "version": 1
+}
