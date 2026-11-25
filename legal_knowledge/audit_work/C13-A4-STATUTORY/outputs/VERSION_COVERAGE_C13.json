@@ -1,0 +1,298 @@
+{
+ "version_model": "C13A4-VM-v1",
+ "records": 488,
+ "by_family": {
+  "AA1950": {
+   "provisions": 127,
+   "versions": 163
+  },
+  "AFT2007": {
+   "provisions": 24,
+   "versions": 32
+  },
+  "AFTPR2008": {
+   "provisions": 1,
+   "versions": 2
+  },
+  "AR1954": {
+   "provisions": 136,
+   "versions": 209
+  },
+  "BNS2023": {
+   "provisions": 3,
+   "versions": 3
+  },
+  "BNSS2023": {
+   "provisions": 6,
+   "versions": 6
+  },
+  "BSA2023": {
+   "provisions": 55,
+   "versions": 55
+  },
+  "CCCM1978": {
+   "provisions": 1,
+   "versions": 2
+  },
+  "CRPC1973": {
+   "provisions": 1,
+   "versions": 2
+  },
+  "DSR": {
+   "provisions": 1,
+   "versions": 1
+  },
+  "ER1982": {
+   "provisions": 1,
+   "versions": 1
+  },
+  "ER2008": {
+   "provisions": 1,
+   "versions": 1
+  },
+  "ER2023": {
+   "provisions": 1,
+   "versions": 1
+  },
+  "GMO2023": {
+   "provisions": 1,
+   "versions": 1
+  },
+  "IEA1872": {
+   "provisions": 1,
+   "versions": 2
+  },
+  "IPC1860": {
+   "provisions": 1,
+   "versions": 2
+  },
+  "ISO2023": {
+   "provisions": 1,
+   "versions": 1
+  },
+  "PRA1961": {
+   "provisions": 1,
+   "versions": 1
+  },
+  "PRA2008": {
+   "provisions": 1,
+   "versions": 1
+  },
+  "RA1987": {
+   "provisions": 2,
+   "versions": 2
+  }
+ },
+ "by_version_kind": {
+  "amendment_words": 82,
+  "as_enacted": 213,
+  "as_notified": 129,
+  "commencement": 3,
+  "edition": 9,
+  "insertion": 13,
+  "omission": 13,
+  "repeal": 1,
+  "repeal_with_savings": 3,
+  "substitution": 22
+ },
+ "by_text_status": {
+  "COMPILATION_ONLY": 246,
+  "CONFLICTING": 6,
+  "IMAGE_CHECKED": 137,
+  "NOT_HELD": 23,
+  "OMITTED_NO_TEXT": 13,
+  "TEXT_LAYER_ONLY": 63
+ },
+ "by_effective_from_status": {
+  "DISPUTED_PRESERVE_BOTH": 1,
+  "INSTRUMENT_NOT_HELD": 19,
+  "NOT_DETERMINED": 20,
+  "NOT_STATED_PENDING_ADVICE": 165,
+  "REPORTED_IN_COMPILATION_ONLY": 215,
+  "STATED_DEEMED_IN_INSTRUMENT": 3,
+  "STATED_IN_INSTRUMENT": 62,
+  "STATED_IN_INSTRUMENT_DATE_FROM_INFERRED_MASTHEAD": 2,
+  "UNKNOWN": 1
+ },
+ "by_effective_to_status": {
+  "CEASED_OMITTED_OR_REPEALED": 17,
+  "ENDS_ON_NEXT_VERSION": 61,
+  "ENDS_ON_NEXT_VERSION_DATE_NOT_DETERMINED": 61,
+  "OPEN_ON_LOCATED_INSTRUMENTS": 349
+ },
+ "records_with_conflicts": 14,
+ "records_with_open_items": 285,
+ "records_with_applicability_exceptions": 8,
+ "records_with_savings_transitional": 8,
+ "records_with_retrospective_deemed_effect": 2,
+ "records_legal_review_required": 436,
+ "effective_from_date_established": 67,
+ "priority_tag_counts": {
+  "ADMINISTRATIVE_ACTION": 5,
+  "ADMINISTRATIVE_ACTION_DISCIPLINARY_POWERS": 31,
+  "AFT_REMEDIES": 30,
+  "COURT_MARTIAL_JURISDICTION_PROCEDURE": 213,
+  "COURT_OF_INQUIRY": 13,
+  "DISCIPLINARY_POWERS": 22,
+  "LIMITATION": 6,
+  "LIMITATION_LINK_AA_S122": 2,
+  "PRIORITY": 9,
+  "PRIORITY_R15": 6,
+  "PRIORITY_R180": 1,
+  "PRIORITY_R22": 2,
+  "PRIORITY_R23": 1,
+  "PROCEDURAL_RIGHTS_SAFEGUARDS": 20,
+  "PUNISHMENTS": 11,
+  "STATUTORY_COMPLAINTS": 2,
+  "SUMMARY_OF_EVIDENCE": 6
+ },
+ "army_rules_cited_rules_modelled": "108/108",
+ "army_act_cited_sections_modelled": "110/110",
+ "priority_rules": {
+  "r.15": [
+   {
+    "version_id": "AR1954/r.15/v01",
+    "kind": "as_notified",
+    "by": "S.R.O. 484 (Army Rules, 1954)",
+    "effective_from": "NOT_STATED_PENDING_ADVICE",
+    "effective_to": "ENDS_ON_NEXT_VERSION_DATE_NOT_DETERMINED",
+    "text_status": "IMAGE_CHECKED",
+    "conflicts": [],
+    "open_items": [
+     "GAP-15 (OPEN alleged/unlocated amendment naming r.15)",
+     "OQ-A-10 (OPEN alleged/unlocated amendment naming r.15)",
+     "cross-ref WS-C OQ-C-10",
+     "cross-ref XC-03 DISCREPANCY"
+    ],
+    "exceptions": [
+     "r.15B (inserted by S.R.O. 17(E)/2019)"
+    ]
+   },
+   {
+    "version_id": "AR1954/r.15/v02",
+    "kind": "substitution",
+    "by": "S.R.O. 205 (Army (First Amendment) Rules, 1961)",
+    "effective_from": "NOT_STATED_PENDING_ADVICE",
+    "effective_to": "OPEN_ON_LOCATED_INSTRUMENTS",
+    "text_status": "IMAGE_CHECKED",
+    "conflicts": [],
+    "open_items": [
+     "GAP-15 (OPEN alleged/unlocated amendment naming r.15)",
+     "OQ-A-10 (OPEN alleged/unlocated amendment naming r.15)",
+     "cross-ref WS-C OQ-C-10",
+     "cross-ref XC-03 DISCREPANCY"
+    ],
+    "exceptions": [
+     "r.15B (inserted by S.R.O. 17(E)/2019)"
+    ]
+   }
+  ],
+  "r.22": [
+   {
+    "version_id": "AR1954/r.22/v01",
+    "kind": "as_notified",
+    "by": "S.R.O. 484 (Army Rules, 1954)",
+    "effective_from": "NOT_STATED_PENDING_ADVICE",
+    "effective_to": "1993-12-06",
+    "text_status": "IMAGE_CHECKED",
+    "conflicts": [],
+    "open_items": [
+     "AR-030 S.R.O. 258 (GAP; instrument not located/opened: alleged, not a version)",
+     "GAP-02 (OPEN alleged/unlocated amendment naming r.22)"
+    ],
+    "exceptions": []
+   },
+   {
+    "version_id": "AR1954/r.22/v02",
+    "kind": "substitution",
+    "by": "S.R.O. 17(E) (Army (Amendment) Rules, 1993)",
+    "effective_from": "1993-12-06",
+    "effective_to": "OPEN_ON_LOCATED_INSTRUMENTS",
+    "text_status": "IMAGE_CHECKED",
+    "conflicts": [],
+    "open_items": [
+     "AR-030 S.R.O. 258 (GAP; instrument not located/opened: alleged, not a version)",
+     "GAP-02 (OPEN alleged/unlocated amendment naming r.22)"
+    ],
+    "exceptions": []
+   }
+  ],
+  "r.23": [
+   {
+    "version_id": "AR1954/r.23/v01",
+    "kind": "as_notified",
+    "by": "S.R.O. 484 (Army Rules, 1954)",
+    "effective_from": "NOT_STATED_PENDING_ADVICE",
+    "effective_to": "OPEN_ON_LOCATED_INSTRUMENTS",
+    "text_status": "CONFLICTING",
+    "conflicts": [
+     "C-01",
+     "C5-BASELINE-RESERVED",
+     "C5-CF-C-01"
+    ],
+    "open_items": [
+     "GAP-01 (OPEN alleged/unlocated amendment naming r.23)",
+     "OQ-A-06 (OPEN alleged/unlocated amendment naming r.23)"
+    ],
+    "exceptions": []
+   }
+  ],
+  "r.24": [
+   {
+    "version_id": "AR1954/r.24/v01",
+    "kind": "as_notified",
+    "by": "S.R.O. 484 (Army Rules, 1954)",
+    "effective_from": "NOT_STATED_PENDING_ADVICE",
+    "effective_to": "OPEN_ON_LOCATED_INSTRUMENTS",
+    "text_status": "IMAGE_CHECKED",
+    "conflicts": [],
+    "open_items": [],
+    "exceptions": []
+   }
+  ],
+  "r.25": [
+   {
+    "version_id": "AR1954/r.25/v01",
+    "kind": "as_notified",
+    "by": "S.R.O. 484 (Army Rules, 1954)",
+    "effective_from": "NOT_STATED_PENDING_ADVICE",
+    "effective_to": "1993-12-06",
+    "text_status": "TEXT_LAYER_ONLY",
+    "conflicts": [],
+    "open_items": [],
+    "exceptions": []
+   },
+   {
+    "version_id": "AR1954/r.25/v02",
+    "kind": "omission",
+    "by": "S.R.O. 17(E) (Army (Amendment) Rules, 1993)",
+    "effective_from": "1993-12-06",
+    "effective_to": "CEASED_OMITTED_OR_REPEALED",
+    "text_status": "OMITTED_NO_TEXT",
+    "conflicts": [],
+    "open_items": [],
+    "exceptions": []
+   }
+  ],
+  "r.180": [
+   {
+    "version_id": "AR1954/r.180/v01",
+    "kind": "as_notified",
+    "by": "S.R.O. 484 (Army Rules, 1954)",
+    "effective_from": "NOT_STATED_PENDING_ADVICE",
+    "effective_to": "OPEN_ON_LOCATED_INSTRUMENTS",
+    "text_status": "IMAGE_CHECKED",
+    "conflicts": [],
+    "open_items": [],
+    "exceptions": []
+   }
+  ]
+ },
+ "not_modelled": [
+  "Army Rules appendices and forms (A6 forms workstream scope); rule-level only here",
+  "Army Act Bills (AA-11, AA-12), repeals of spent amending Acts (AA-03, AA-09, AA-10) and extension instruments (AA-C3-04): no text change, recorded in the chain register",
+  "Regulations for the Army 1987 beyond Ch. V, DSR, pension regulations and circulars: instrument level only (texts not held)",
+  "The restricted RM-001 item (config/restricted_material.json on claude/c13-gov) is excluded entirely",
+  "Air Force Act 1950 and Navy Act 1957: outside the A4 priority list; compilations held but not modelled in C13"
+ ]
+}
