@@ -279,3 +279,122 @@ Each branch also carries `C13-A0-EVAL/` (63 files) and the 6 `test_legal_audit_c
 | **A5 Treatment graph** (`e15af208`) | **NOT READY: fix P1s, then ACCEPT WITH CONDITIONS** (2 P1, 1 P2) | A5-01 (fitz skip; restricted-register provenance after merge, with frozen hashes preserved); A5-02 (contract-v1 test skip without jsonschema); A5-03 (README frozen status and GA4 figures). The freeze delta's content (freeze record, predictions, manifest, predict tool) is otherwise sound, and the predictions reproduce |
 
 **Counts:** P1 2 (A5-01, A5-02). P2 7 (A2-01, A2-02, A2-03, A3-01, A3-02, A5-03, X-01). P3 7 (A2-04, A2-05, A2-06, A3-04, X-02, X-03, X-04).
+
+---
+
+## 4. Confirmation review of the post-freeze fixes (2026-11-25)
+
+- **New heads:** A2 `2a6c710e`, A3 `010aac1c`, A5 `a60f1079`.
+- **Fresh scratch merge:** `tmp-review/trial2`, a detached worktree of staging `dbe40b4f` with the three heads merged `--no-ff`. Head `5330c91f`. No conflicts.
+- No branch was modified. All mutations below were made in the throwaway tree and reverted with `git checkout`.
+- **Eval branch:** `claude/c13-eval` is now at `6ea94ec9`. It adds the D-HHOLD decision and the A3 exposure log line.
+
+### 4.1 Frozen artefacts byte-unchanged since each freeze commit
+
+`git diff <freeze> HEAD` on the trial merge is **empty** for each path set below.
+
+| Branch | Paths checked |
+| --- | --- |
+| A2 | `tools/extract_v4.py`, `tools/v4*.py`, `outputs/` (CSV, RUN_INFO, FREEZE_V4.json, batches), `predictions_H-OUT-C13/`, `EXCLUDE_IDS_H-OUT-C13.txt` |
+| A3 | `tools/`, `model/`, `frozen_predictions/`, `outputs/`, `exclusions/EXCLUDE_H_HOLD_C13.txt` |
+| A5 | `tools/treatment_c13.py`, `tools/common_c13.py`, `tools/predict_hrel_c13.py`, `C11-JUDICIAL-QUALITY/relations/`, `freeze/H-REL-C13_PREDICTIONS.csv`, `freeze/…_MANIFEST.json`, `freeze/FREEZE_C13_A5.json`, `treatment/`, `graph/`, `contract_v1/`, `scnum/`, `identity/` |
+
+What each post-freeze delta changes:
+- **A2:** adds `FREEZE_ADDENDUM_V4.md` and `tools/predict_holdout_v4.py`; edits `README.md`, `dev_eval/DEV_EVALUATION_V4.md` and `POST_FREEZE_DEFECTS.md`.
+- **A3:** adds `FREEZE_ADDENDUM.md` and `exclusions/DEV_EXPOSURE_HOUT_HREL.csv`; edits `README.md`.
+- **A5:** edits only the non-frozen tools `scnum`, `identity`, `graph` and `contract_v1_export`, each by importing the pin. It adds `provenance_pin_c13.py`, `run_check_c13.py` and a freeze addendum, and edits the README, `SHA256SUMS` and 2 tests.
+
+The new test `test_frozen_tool_hashes_unchanged` asserts the frozen hashes and the predictions sha.
+
+Other checks:
+- Protected hashes are unchanged (`9a8f0d19`, `8b8d53cd`, `cfe5f408`), and the AUTH-LEDGER tree is `eed99c62` (v0).
+- Nothing outside `C13-{A0-EVAL,A2,A3,A5}/` and `tests/test_legal_audit_c13_*` changes.
+- RM-001 appears only in guard code, tests and prose.
+
+### 4.2 P1 closure and CHECK PARTIAL mutation tests
+
+**Every A5 check on the trial merge**, run through `run_check_c13.py` under bare `/usr/bin/python3.11` (no PyMuPDF, no jsonschema):
+- scnum: `CHECK PARTIAL (PyMuPDF absent)`, naming the two skipped steps;
+- identity, treatment, graph, review_recheck, contract_v1_export, predict_hrel and package: `CHECK OK`;
+- hf_overlay: OK.
+
+The provenance pin returns the established label only when the register sha equals `fc7ea07e…`, so a changed register still fails.
+
+**Mutation tests**, run in the throwaway tree with no PyMuPDF:
+
+| Mutation | `scnum --check` | `package --check` (SHA256SUMS) |
+| --- | --- | --- |
+| M1: `overlay_value` changed in `SC_CASE_NUMBER_OVERLAY_C13.jsonl` | **FAILED** | FAILED |
+| M2: `anchor_page` and `excerpt` changed in `SCNUM_RECONFIRMATION_C13.csv` | PARTIAL (passes) | **FAILED** |
+| M3: `staged_numbers` changed in `SCNUM_SUMMARY_C13.json` | PARTIAL (passes) | **FAILED** |
+| M4: a verdict changed to NOT_RECONFIRMED | **FAILED** | FAILED |
+
+- M3 was also run through the unittest: `test_tools_reproduce` **fails** (subtest `tool='package_c13.py'`).
+- The scnum artefact check on its own does not cover every committed field. `package_c13`'s SHA256SUMS check in the same test does, so **CHECK PARTIAL cannot mask a mismatch at test level**. See N2.
+
+**A2 converter.** `predict_holdout_v4.py --check` reproduces `45c5a332…` (CHECK PASS). After a `printed_disposal` value was mutated in `raw/OUTCOMES_V4.csv`, it reports `CHECK FAIL`.
+
+### 4.3 Test runs (trial2)
+
+| Python | Result |
+| --- | --- |
+| Bare 3.11, CI-like | 999 tests, **1 failure: the pre-existing A6 `test_build_check` (X-03)**, 18 skipped |
+| venv 3.13, with PyMuPDF and jsonschema | 999 tests, **OK** (9 skipped) |
+
+- A2 `extract_v4.py --check` gives CHECK PASS. A3 `holdings_c13.py check` gives CHECK OK.
+- A5-02: under 3.11 the contract test now skips with a stated reason. With jsonschema present it passes.
+
+### 4.4 README claims against RESULTS_C13.md
+
+Every figure in the new README addenda matches RESULTS_C13.md at `20a4e55d` (sha `b8d0b252…`).
+- **A2.** Precision 0.898 [0.838, 0.941], 0.825 (254/308); coverage 0.833 [0.743, 0.902], 0.623 (283/454); substantive 0.882 [0.815, 0.932], 0.831 and 0.760 [0.671, 0.835], 0.577; SC 0.576 and 0.391; 101 of 129 missed units in batches; family precision 0.941/0.870; anchors 403/2/75; party-specific not demonstrated; NOT_MET. The 97.6%/79.3% and 98.9%/84.6% figures and the DEVG 100% rows are bannered SUPERSEDED.
+- **A3.** H-HOLD not scorable; 0.365 [0.241, 0.503], 0.517 [0.424, 0.608], 0.156; 113 of 183 gold holdings single-adjudicator; false-positive split 26/11/9/7/5; "about 50%" and 6.4% labelled superseded; F06/F07 open.
+- **A5.** 0.340 [0.161, 0.560] (58/176); target 0.620 [0.467, 0.758]; coverage 0.26 weighted and 0.50 unweighted; `follows` 0.032 (5/154); 0/53 `distinguishes`; 0.341 sensitivity; in-sample 98.2% labelled superseded; status FROZEN.
+
+No statement claims that a target was met or that anything is legally valid.
+
+### 4.5 Finding status
+
+| Finding | Status | Evidence |
+| --- | --- | --- |
+| A5-01 (P1) | **CLOSED** | §4.2. All checks pass after the merge under 3.11; frozen hashes are preserved |
+| A5-02 (P1) | **CLOSED** | §4.3 |
+| A2-01 (P2) | **CLOSED** | README states FROZEN, gives the GA4 table, NOT_MET and NON_OPERATIONAL |
+| A2-02 (P2) | **CLOSED** | Banners on the README and DEV_EVALUATION; party-specific "not demonstrated"; "expect" sentence replaced |
+| A2-03 (P2) | **CLOSED** | Converter committed; byte-exact; detects mutation |
+| A3-01 (P2) | **CLOSED** | Addendum; superseded labels |
+| A3-02 (P2) | **CLOSED** for the branch | `DEV_EXPOSURE_HOUT_HREL.csv` lists the same 15 judgments I found; README wording corrected; exposure logged in the eval `ASSIGNMENT_LOG.md` at `6ea94ec9`. Residual P3 (N3) |
+| A5-03 (P2) | **CLOSED** | README FROZEN plus GA4 table |
+| X-01 (P2) | **CLOSED** | Coordinator decision D-HHOLD (`6ea94ec9`, ASSIGNMENT_LOG l.38): H-HOLD-C13 is SPENT, and a fresh draw is required. The owner may override; if so, X-01 reopens |
+| A2-04, A2-05 (P3) | CLOSED | — |
+| A2-06 (P3) | Recorded (deferred to next version) | — |
+| X-02, X-03, X-04 (P3) | Open, coordinator items | X-03 still fails on staging |
+
+### 4.6 New findings
+
+There are no new P1 or P2 findings.
+
+**N1 (P3). CI never runs the A5 reproduction checks.**
+- Evidence: `test_tools_reproduce` skips entirely when `/home/user/c7` is absent, which is always the case in CI. So CI never runs `package_c13 --check`, the SHA256SUMS integrity check, even though it does not read c7. The scnum artefact check also runs without c7. Only `test_frozen_tool_hashes_unchanged` guards A5 in CI.
+- Required fix: move `package_c13.py --check` and the scnum artefact check outside the c7 skip.
+
+**N2 (P3). The scnum artefact check alone does not hash all of its own outputs.**
+- Evidence: `artifact_check` accepts mutations to `SCNUM_RECONFIRMATION_C13.csv` excerpt and anchor columns and to `SCNUM_SUMMARY_C13.json` counts (M2, M3). They are caught only by `package_c13`.
+- Required fix: have the artefact check verify the three scnum files against `SHA256SUMS` itself.
+
+**N3 (P3). The A3 exposure is not yet in the A0 exposure register, and the sensitivity run is still missing.**
+- Evidence: the exposure is in the eval log, but not in the A0 `EXPOSURE_REGISTER.md` or `PRE_EXPOSED_SUBSET.csv`, which future cycles read. No H-OUT/H-REL sensitivity run excluding the 15 judgments was made. That is acceptable, because the authors are distinct.
+- Required fix: carry the entry into the A0 register next cycle.
+
+**N4 (P3, informational). The pinned provenance label can name the git source when the file was read from the worktree.**
+- Evidence: the label reads `git:72fe7a75:…` even when the file came from the worktree. The sha in the same record proves the bytes, and the addendum documents this. No action is needed.
+
+### 4.7 Confirmation verdicts
+
+| Branch | Verdict |
+| --- | --- |
+| **A2** `2a6c710e` | **ACCEPT** for integration |
+| **A3** `010aac1c` | **ACCEPT** for integration. This rests on D-HHOLD standing |
+| **A5** `a60f1079` | **ACCEPT** for integration. N1 and N2 are recommended follow-ups |
+
+**Integration note:** staging's legal-audit CI still fails on the pre-existing A6 test (X-03), independently of these branches.
