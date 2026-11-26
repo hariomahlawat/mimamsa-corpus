@@ -364,12 +364,12 @@ The independent B1 review ran three rounds. Its verdict: **accepted as the B1 ba
 
 ## 17. Functional acceptance tests
 
-**B1 at `f71957e5`**, re-run by the independent reviewer:
+**B1 at `f71957e5`**, re-run by the independent reviewer. The post-Codex fixes at `b4088344` were verified by the author, by CI and by a coordinator spot-check:
 
 | Suite | Passed |
 |---|---|
-| C# unit and integration, against real Kestrel and PostgreSQL | 86/86 |
-| Playwright journeys | 28/28 |
+| C# unit and integration, against real Kestrel and PostgreSQL | 88/88 (at `b4088344`) |
+| Playwright journeys | 30/30 (at `b4088344`) |
 | Importer | 66/66 |
 | Design | 117/117 |
 | Contract | 226 |
@@ -463,7 +463,12 @@ All of these were measured on a shared 4-core Linux VM or on hosted Windows. The
 - **Model:** every one ran Claude Opus 5.5. **Fable was not used**, in line with your instruction to conserve it.
 - **Independence:** reviewers were always separate instances from the authors. Coders and adjudicators were fresh instances with only blinded packets.
 - **Interruptions:** two usage-limit interruptions paused agents. Each resumed from saved state.
-- **External automated review:** Codex review on PR #56 raised 3 P2s, all real and all fixed.
+- **External automated review:** Codex reviewed PR #56 and raised 3 P2s, all real and all fixed. It then reviewed PR #57 and raised 1 P1 and 2 P2s, also all real and fixed at B1 `b4088344`:
+  - P1: reloading a cited earlier edition substituted the current edition, which breaks ASR-E06.
+  - P2: research state was not cleared on a 401.
+  - P2: drain reconciliation built endpoints that did not match the real connections.
+
+  These three were found after the A9 register was frozen. They are recorded here, and the register update is carried to Cycle 14.
 
 ## 22. Outstanding limitations and owner decisions
 
