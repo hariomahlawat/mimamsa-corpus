@@ -50,16 +50,21 @@ def snapshot_runtime(root):
 
 
 def approval_payload(*, revision, code_commit, runtime_sha256, plan_sha256, register_blob,
-                     guard_blob, jobs_root_sha256, job_name, now):
+                     guard_blob, jobs_root_sha256, job_name, now, deployment_sha256=None):
     pins = dict(zip(PINS, (revision, code_commit, runtime_sha256, plan_sha256,
                           register_blob, guard_blob, jobs_root_sha256), strict=True))
     for name, value in pins.items():
         pattern = HEX64 if name.endswith("sha256") else HEX40
         if not isinstance(value, str) or not pattern.fullmatch(value):
             raise ValueError("invalid immutable approval pin")
+    if deployment_sha256 is not None:
+        if not isinstance(deployment_sha256, str) or not HEX64.fullmatch(deployment_sha256):
+            raise ValueError("invalid cloud deployment pin")
+        pins["deployment_sha256"] = deployment_sha256
     now = now.astimezone(timezone.utc).replace(microsecond=0)
     return {
-        "schema": "c14-wp1-metadata-owner-approval-v1",
+        "schema": ("c14-wp1-isolated-cloud-owner-approval-v1" if deployment_sha256 is not None
+                   else "c14-wp1-metadata-owner-approval-v1"),
         "operation": "METADATA_GET_ONLY",
         "endpoint": ENDPOINT,
         "repository": REPO,
