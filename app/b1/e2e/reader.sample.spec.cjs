@@ -166,3 +166,40 @@ test("R-09 withdrawn evidence disappears from a displayed relationship view with
     expect(r.status()).toBe(200);
   }
 });
+
+// Codex review of PR #70: a stale relationship response (captured before a withdrawal) that arrives AFTER the
+// post-withdrawal refresh must be discarded, not rendered. The first response is held back until the refresh has
+// rendered, then released. The table is reinstated afterwards.
+test("R-10 a superseded relationship response cannot restore withdrawn evidence", async ({ page, browser }) => {
+  const user = await browser.newPage();
+  let release, held = false;
+  const gate = new Promise((r) => { release = r; });
+  await user.route("**/api/documents/act-ipc-1860/relations?section=302", async (route) => {
+    if (held) return route.continue();
+    held = true;
+    const resp = await route.fetch();            // the pre-withdrawal answer (one correspondence row)
+    const body = await resp.text();
+    await gate;
+    await route.fulfill({ response: resp, body });
+  });
+  await login(user);
+  await user.goto("/s/act-ipc-1860/302");
+  await expect.poll(() => held).toBe(true);
+  await login(page, "admin");
+  const origin = new URL(page.url()).origin;
+  const csrf = (await (await page.request.get("/api/session")).json()).csrf;
+  const post = (url, data) => page.request.post(url, { headers: { "X-CSRF-Token": csrf, Origin: origin }, data });
+  expect((await post("/api/admin/withdraw", { doc_id: "ref-bprd-comparison-bns-ipc", reason: "C14 R-10 stale response" })).status()).toBe(200);
+  try {
+    // the poll notices the new epoch and the refresh renders the post-withdrawal answer (no correspondence row)
+    await expect(user.locator("#relstrip .relations")).toBeVisible({ timeout: 30_000 });
+    await expect(user.locator("#relstrip .rel-row")).toHaveCount(0);
+    release();                                   // now the stale pre-withdrawal response arrives
+    await user.waitForTimeout(1500);
+    await expect(user.locator("#relstrip .rel-row")).toHaveCount(0);
+    await expect(user.locator("#relstrip")).not.toContainText("Punishment for murder");
+  } finally {
+    release();
+    expect((await post("/api/admin/reinstate", { doc_id: "ref-bprd-comparison-bns-ipc", reason: "C14 R-10 restore after test" })).status()).toBe(200);
+  }
+});

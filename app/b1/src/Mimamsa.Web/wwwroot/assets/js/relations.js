@@ -33,12 +33,17 @@ let pending = false;
 function clearRendered(box) { for (const el of [...box.children]) if (el.matches(".relations, .rel-status, .skeleton")) el.remove(); }
 
 async function load(entry, background) {
+  // Codex review of PR #70: every load takes a generation number; a response that a newer load has superseded (for
+  // example the pre-withdrawal answer of the first request arriving after the post-withdrawal refresh) is discarded,
+  // so a stale payload can never restore withdrawn evidence. The newer load owns the outcome.
+  const gen = ++entry.gen;
   let r, status = 0;
   try {
     const resp = await fetch(entry.url, { headers: { Accept: "application/json" }, credentials: "same-origin", cache: "no-store" });
     status = resp.status;
     if (resp.ok) r = await resp.json();
   } catch { /* network: cannot decide */ }
+  if (gen !== entry.gen) return true;
   if (!entry.box.isConnected) { live.delete(entry); return true; }
   if (r) {
     clearRendered(entry.box);
@@ -58,7 +63,7 @@ async function load(entry, background) {
 
 /** Fetch `url` (a /api/documents/{id}/relations route) into `box`, and keep it current across policy changes. */
 export function bindRelations(box, url, opts) {
-  const entry = { box, url, opts };
+  const entry = { box, url, opts, gen: 0 };
   live.add(entry);
   return load(entry, false);
 }
