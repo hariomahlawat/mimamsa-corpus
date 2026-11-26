@@ -67,6 +67,9 @@ def scope(env, event):
         or not re.fullmatch(r"[0-9]+", env.get("GITHUB_RUN_ATTEMPT", ""))
         or env.get("GITHUB_RUN_ATTEMPT") != "1"
         or not isinstance(event, dict)
+        or not isinstance(event.get("repository"), dict)
+        or event["repository"].get("private") is not True
+        or event["repository"].get("full_name") != REPO
     ):
         raise ValueError("cloud execution boundary not established")
     expected = {"operation": APPROVAL, "revision": REVISION, "code_commit": commit}
@@ -130,11 +133,11 @@ FAILURES = {
 
 
 def run():
+    token = os.environ.pop("HF_WP1_READ_TOKEN", "")
     event = strict_json(bounded(Path(os.environ["GITHUB_EVENT_PATH"]), 128_000))
     approved = scope(os.environ, event)
     fingerprint = runtime(ROOT, approved["code_commit"], verify_git=True)
     restricted = bind_restriction(ROOT)
-    token = os.environ.pop("HF_WP1_READ_TOKEN", "")
     temp = Path(os.environ["RUNNER_TEMP"])
     if not temp.is_absolute() or temp.resolve(strict=True) != temp or not temp.is_dir():
         raise ValueError("invalid scratch directory")
