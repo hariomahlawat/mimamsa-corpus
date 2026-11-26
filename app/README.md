@@ -7,6 +7,7 @@ Isolated tree for the offline research application. It shares no code with the c
 | `contract/` | Data interchange contract v1 (JSON Schemas, validator, tests) shared with Track A | Proposed, Cycle 13 B0 |
 | `design/` | UI/UX specification and design tokens | Proposed, Cycle 13 B0 |
 | `importer/` | Release importer with source-fidelity verification (ASR-E05) | First application code; Linux-tested |
-| `poc/` | Proof-of-concept evidence P1–P9 (workstream B-PoC, separate branch) | Pending |
+| `poc/` | Proof-of-concept evidence P1–P9 (workstream B-PoC) | Integrated |
+| `b1/` | B1 prototype: ASP.NET Core research service, offline UI, sample builder, tests and journeys ([docs](../docs/architecture/b1/B1_PROTOTYPE.md)) | Prototype, not independently reviewed |
 
 Stack choice is open until ADR-0005 (`docs/architecture/decisions/ADR-0005-APPLICATION-STACK.md`) is accepted at gate GB1. No legal reasoning, compliance logic or rule engine belongs in this tree in Cycle 13.

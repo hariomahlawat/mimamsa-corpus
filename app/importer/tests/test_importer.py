@@ -605,3 +605,72 @@ def test_n5_crash_between_latch_and_acceptance_leaves_site_latched(hn, tmp_path,
     assert not servable(site, "documents", DOC_ID, exclusions=None)
     with pytest.raises(ImporterError):
         hn.run(hn.bundle(), site)
+
+
+from hashlib import sha256  # noqa: E402
+from mimamsa_contract.devbundle import write_bundle  # noqa: E402
+
+
+# ================= B1: materialized generation (serving reads only importer-verified evidence) =================
+def _gdir(site):
+    return site / "generations" / active_generation(site)["release_id"]
+
+
+def test_b1_materialized_records_and_text_are_exactly_the_verified_items(hn, tmp_path):
+    site = tmp_path / "site"
+    r = hn.run(hn.bundle(cands=[candidate()]), site)
+    assert r.activated, r.refused_reasons
+    g = _gdir(site)
+    docs = [json.loads(x) for x in (g / "records/documents.jsonl").read_text().splitlines()]
+    ders = [json.loads(x) for x in (g / "records/derived_text.jsonl").read_text().splitlines()]
+    cands = [json.loads(x) for x in (g / "records/candidates.jsonl").read_text().splitlines()]
+    assert [d["doc_id"] for d in docs] == [DOC_ID]
+    assert len(ders) == 1 and len(cands) == 1
+    t = g / "derived" / f"{ders[0]['text_sha256']}.txt"
+    assert h(t.read_bytes()) == ders[0]["text_sha256"]
+    rel = json.loads((g / "release/RELEASE.json").read_text())
+    assert rel["candidate_banner"]["required"] is True and rel["auth_ledger_version"] == 0
+    assert active_generation(site)["materialized"]["format"] == 1
+
+
+def test_b1_quarantined_derivative_is_not_materialized(hn, tmp_path):
+    d = derived()
+    d["text_sha256"] = "0" * 64
+    site = tmp_path / "site"
+    r = hn.run(hn.bundle(derived_recs=[d]), site)
+    assert r.activated
+    g = _gdir(site)
+    assert (g / "records/derived_text.jsonl").read_text() == ""
+    assert not (g / "derived").exists() or not any((g / "derived").iterdir())
+
+
+def _research_bundle(hn, lines):
+    data = "".join(json.dumps(x) + "\n" for x in lines).encode()
+    hn.n += 1
+    from copy import deepcopy
+    m = deepcopy(hn.manifest)
+    m["release_id"] = f"R13-asr-toy-20900101-{hn.n:08x}"
+    m["release_sequence"] = hn.n
+    files = {f"originals/{h(SOURCE)}.bin": (SOURCE, "original"), "text/toy.txt": (text_file(SOURCE), "text"),
+             "research/a4.jsonl": (data, "report")}
+    path = hn.root / f"b{hn.n}"
+    write_bundle(path, m, documents=[document()], derived=[derived()], extra_files=files,
+                 signing_key=hn.key, public_key_raw=hn.pub)
+    return path
+
+
+def test_b1_research_file_copied_verbatim(hn, tmp_path):
+    site = tmp_path / "site"
+    r = hn.run(_research_bundle(hn, [{"version_id": "X/s.1/v01", "text_evidence": [{"sha256": h(SOURCE), "pdf_page": "1"}]}]), site)
+    assert r.activated, r.refused_reasons
+    assert (_gdir(site) / "research/a4.jsonl").is_file()
+    assert active_generation(site)["materialized"]["research"] == ["research/a4.jsonl"]
+
+
+def test_b1_research_file_naming_restricted_material_is_rejected(hn, tmp_path):
+    site = tmp_path / "site"
+    marker = sha256(b"fictional restricted marker only").hexdigest()
+    r = hn.run(_research_bundle(hn, [{"version_id": "X/s.1/v01", "text_evidence": [{"sha256": marker}]}]), site)
+    assert r.activated  # sources verified; the research aid alone is refused
+    assert not (_gdir(site) / "research/a4.jsonl").exists()
+    assert any(u["kind"] == "research_file" for u in r.unresolved)

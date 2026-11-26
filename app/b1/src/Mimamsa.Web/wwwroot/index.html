@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Mimamsa research</title>
+<link rel="stylesheet" href="/assets/tokens.css">
+<link rel="stylesheet" href="/assets/app.css">
+<link rel="icon" href="data:,">
+<script type="module" src="/assets/js/app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<div id="banner" class="banner" role="status" aria-live="polite">
+  <span class="banner-glyph" aria-hidden="true">○</span>
+  <span id="banner-text">Research and candidate data. Not legally verified.</span>
+  <span class="banner-meta" id="banner-meta"></span>
+</div>
+<div id="degraded" class="degraded" hidden></div>
+<header class="topbar" id="topbar">
+  <a class="mark" href="/r" aria-label="Mimamsa, research home">
+    <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 1v14M9 1v14M9 6h4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="square"/></svg>
+    <span>Mimamsa</span>
+  </a>
+  <nav class="workspaces" id="workspaces" aria-label="Workspaces"></nav>
+  <form class="searchbar" id="searchform" role="search" autocomplete="off">
+    <label for="q" class="visually-hidden">Search the published library</label>
+    <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M10.5 10.5l4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+    <input id="q" name="q" type="search" spellcheck="false" placeholder="Search: s.69 Army Act · OA 411/2021 · &quot;summary of evidence&quot; · disability pension" aria-describedby="q-help">
+    <span id="q-help" class="visually-hidden">Press slash to focus. Identifiers such as sections, case numbers and citations are matched exactly first.</span>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+  <div class="topbar-right">
+    <div class="segmented" role="group" aria-label="Presentation">
+      <button type="button" id="view-practitioner" aria-pressed="true">Practitioner</button>
+      <button type="button" id="view-commander" aria-pressed="false">Commander</button>
+    </div>
+    <div class="menu" id="usermenu"></div>
+  </div>
+</header>
+<main id="main" tabindex="-1"></main>
+<footer class="footer" id="footer" role="contentinfo"></footer>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<div id="announcer" class="visually-hidden" aria-live="assertive"></div>
+<dialog id="dialog" aria-labelledby="dialog-title"></dialog>
+</body>
+</html>

@@ -102,3 +102,81 @@ jobs:
       - name: Design checks (WCAG AA contrast, display scaling, keymap vs browser-reserved keys, client cache policy, capability matrix CSV)
         working-directory: app/design
         run: python -m pytest -q -p no:cacheprovider tests
+
+  # ---------------- B1 vertical slice (ASP.NET Core service, offline UI, synthetic SYN site) ----------------
+  # No corpus bytes in CI: the SYN site is rendered from the PR #54 development fixture (unmodified) and imported
+  # through app/importer. The real-sample screenshots (sample.spec.cjs) run only where the corpus sample exists.
+  b1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: mimamsa
+          POSTGRES_PASSWORD: mimamsa
+          POSTGRES_DB: mimamsa_b1_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U mimamsa" --health-interval 5s --health-timeout 5s --health-retries 20
+    env:
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+      DOTNET_NOLOGO: "1"
+      PGPASSWORD: mimamsa
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install pinned importer dependencies
+        run: python -m pip install --disable-pip-version-check -r app/importer/requirements.txt
+      - name: Design tokens CSS is generated from app/design/tokens (no drift)
+        run: python app/b1/web/gen_tokens.py --check
+      - name: Create disposable databases
+        run: |
+          for db in mimamsa_b1_e2e_syn mimamsa_b1_oracle; do psql -h 127.0.0.1 -U mimamsa -d mimamsa_b1_test -c "CREATE DATABASE $db"; done
+      - name: Build the synthetic SYN site (two releases, imported by app/importer)
+        run: python -I app/b1/build/build_fixture_site.py --out "$RUNNER_TEMP/syn"
+      - name: Vendor PDF.js 6.5.438 from the lockfile (offline asset at run time)
+        working-directory: app/b1/web
+        run: |
+          npm ci --omit=optional --no-audit --no-fund
+          node vendor.mjs
+      - name: Build (Release)
+        run: dotnet build -c Release app/b1/Mimamsa.B1.slnx
+      - name: Unit and integration tests (real Kestrel process, PostgreSQL)
+        env:
+          MIMAMSA_TEST_SITE: ${{ runner.temp }}/syn/site
+          MIMAMSA_TEST_MAP: ${{ runner.temp }}/syn/fixture_map.json
+          MIMAMSA_TEST_DB: Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_test;Maximum Pool Size=40
+        run: dotnet test -c Release --no-build app/b1/Mimamsa.B1.slnx --logger "trx;LogFileName=b1-tests.trx" --results-directory out/b1
+      - name: PR #54 retrieval oracle (unmodified) against the real search service
+        run: |
+          python app/b1/tests/b1server.py --site "$RUNNER_TEMP/syn/site" --log out/b1/oracle-service.log \
+            --db "Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_oracle;Maximum Pool Size=40" -- \
+            python app/b1/tests/oracles/run_retrieval_oracle.py --map "$RUNNER_TEMP/syn/fixture_map.json" --out out/b1/oracle
+      - name: Playwright journeys (headless Chromium, trace off)
+        env:
+          B1_SYN_SITE: ${{ runner.temp }}/syn/site
+          B1_SYN_DB: Host=127.0.0.1;Port=5432;Username=mimamsa;Password=mimamsa;Database=mimamsa_b1_e2e_syn;Maximum Pool Size=40
+        run: |
+          mkdir -p "$RUNNER_TEMP/pw" && cd "$RUNNER_TEMP/pw" && npm init -y >/dev/null && npm install --no-save --silent playwright@1.63.0
+          npx playwright install --with-deps chromium
+          cd "$GITHUB_WORKSPACE"
+          NODE_PATH="$RUNNER_TEMP/pw/node_modules" node "$RUNNER_TEMP/pw/node_modules/playwright/cli.js" test --config app/b1/e2e/playwright.config.cjs --trace off
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: b1-linux-results
+          path: |
+            out/b1
+            app/b1/e2e/out

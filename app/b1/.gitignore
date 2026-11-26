@@ -1,0 +1,7 @@
+bin/
+obj/
+node_modules/
+src/Mimamsa.Web/wwwroot/vendor/
+e2e/out/
+*.trace.zip
+test-results/

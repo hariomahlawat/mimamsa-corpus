@@ -1,0 +1,1065 @@
+{
+  "config": {
+    "argv": [
+      "/opt/node22/bin/node",
+      "/opt/node-tools/node_modules/playwright/cli.js",
+      "test",
+      "--config",
+      "app/b1/e2e/playwright.config.cjs",
+      "--trace",
+      "off"
+    ],
+    "configFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b1/app/b1/e2e/playwright.config.cjs",
+    "rootDir": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b1/app/b1/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b1/app/b1/e2e/out/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "syn",
+        "name": "syn",
+        "testDir": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b1/app/b1/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/journeys\\.spec\\.cjs/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b1/app/b1/e2e/out/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "sample",
+        "name": "sample",
+        "testDir": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b1/app/b1/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "/sample\\.spec\\.cjs/"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "/tmp/claude-0/-home-user-mimamsa-corpus/9dd71a54-b050-5d1e-a2e9-2ceef8ac3e20/scratchpad/c13/b1/app/b1/e2e/out/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.63.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "journeys.spec.cjs",
+      "file": "journeys.spec.cjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "UX-01 W-01 situation words: filter by type, open operative passage, same access in Commander view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1634,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:20.745Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-34bd20be3f90c4719ef0",
+          "file": "journeys.spec.cjs",
+          "line": 12,
+          "column": 1
+        },
+        {
+          "title": "UX-02 W-02 identifiers first, parsed chips, restorable deep link, malformed query needs explicit choice",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1241,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:22.445Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-54540d18d733d384c663",
+          "file": "journeys.spec.cjs",
+          "line": 34,
+          "column": 1
+        },
+        {
+          "title": "UX-03 W-03 open passage, hit navigation, legal citation and internal reference are separate",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 666,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:23.695Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-560bfb05c20d006e47b9",
+          "file": "journeys.spec.cjs",
+          "line": 66,
+          "column": 1
+        },
+        {
+          "title": "UX-04 W-04 seven separate axes in order, provenance with full hash; Admin sees publication actor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 746,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:24.370Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-e3d6729d0a4c8da55628",
+          "file": "journeys.spec.cjs",
+          "line": 91,
+          "column": 1
+        },
+        {
+          "title": "UX-05 W-05 candidate outcomes per proceeding, labelled, 'not evaluated' when unmeasured",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 380,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:25.122Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-5a4c062f26c195adc2bc",
+          "file": "journeys.spec.cjs",
+          "line": 111,
+          "column": 1
+        },
+        {
+          "title": "UX-06 W-06 statutes TOC to a rule, as-of closed with gate, temporal chain not established",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 587,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:25.511Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-6b7c474876efe8fda7a4",
+          "file": "journeys.spec.cjs",
+          "line": 128,
+          "column": 1
+        },
+        {
+          "title": "UX-10 W-13 closed gate explains appointment and approvals and links back to research",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 351,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:26.107Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-42027648cd83cdb85441",
+          "file": "journeys.spec.cjs",
+          "line": 143,
+          "column": 1
+        },
+        {
+          "title": "UX-11 truncated copy carries an explicit warning",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 278,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:26.464Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-1fb9e2a7d0f8f49f76fa",
+          "file": "journeys.spec.cjs",
+          "line": 153,
+          "column": 1
+        },
+        {
+          "title": "UX-12 citation across releases opens the cited copy and page; current edition is a separate action",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1945,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:26.752Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-9bf517648515b7ae5e89",
+          "file": "journeys.spec.cjs",
+          "line": 160,
+          "column": 1
+        },
+        {
+          "title": "UX-13 impossible filters give a published-scope empty state with recovery; no-edge caveat",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 618,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:28.705Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-109ef902a9b950aee3b4",
+          "file": "journeys.spec.cjs",
+          "line": 175,
+          "column": 1
+        },
+        {
+          "title": "UX-14 a late first query never overwrites the second; disconnection blanks views and recovers",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4692,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:29.329Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-160fe9337a58a78e6b35",
+          "file": "journeys.spec.cjs",
+          "line": 192,
+          "column": 1
+        },
+        {
+          "title": "UX-15 a failed original range shows an explicit failure, labelled text fallback and retry of the same copy",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1570,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:34.027Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-9fc7b5bfb31387c4439f",
+          "file": "journeys.spec.cjs",
+          "line": 212,
+          "column": 1
+        },
+        {
+          "title": "UX-16 keyboard-only path, help dialog focus return, landmarks and names, screen-reader mode",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 471,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:35.607Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-ec6d189bfcbb09a7d9fd",
+          "file": "journeys.spec.cjs",
+          "line": 228,
+          "column": 1
+        },
+        {
+          "title": "UX-17 status is glyph plus text, never colour alone; candidate banner on every view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 513,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:36.083Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-5994a6cff657e783adae",
+          "file": "journeys.spec.cjs",
+          "line": 262,
+          "column": 1
+        },
+        {
+          "title": "UX-19 Hindi OCR page: retrieved with OCR and low-confidence labels; text marked search-only",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 368,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:36.602Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-0cdbb86a7c62c530e3f3",
+          "file": "journeys.spec.cjs",
+          "line": 275,
+          "column": 1
+        },
+        {
+          "title": "UX-09 W-10 Admin withdraws the canary; deep link, search and citation all respect it at once",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 871,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:36.975Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-adcfdb474d616a422070",
+          "file": "journeys.spec.cjs",
+          "line": 288,
+          "column": 1
+        },
+        {
+          "title": "F05 a document identifier pins one representative passage; only passages containing it are labelled Identifier",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 268,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:37.852Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-86688ace49b2829f469c",
+          "file": "journeys.spec.cjs",
+          "line": 315,
+          "column": 1
+        },
+        {
+          "title": "F04 search highlights on the original keep the glyphs legible",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1279,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:38.129Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-3124a102300e52b97bdf",
+          "file": "journeys.spec.cjs",
+          "line": 324,
+          "column": 1
+        },
+        {
+          "title": "F01 withdrawal covers the earlier edition: cited copy and its byte ranges become unavailable",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "syn",
+              "projectName": "syn",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 785,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:39.414Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1a03737f6f0d64c51e2f-f0ac76cfcbd6599846a3",
+          "file": "journeys.spec.cjs",
+          "line": 333,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "sample.spec.cjs",
+      "file": "sample.spec.cjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "S-01 identifier search s.69 Army Act: provision text first, original at the page",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "sample",
+              "projectName": "sample",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2225,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:40.593Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8aa1cfe786b44e0de529-29fb8d962faa92d2ff68",
+          "file": "sample.spec.cjs",
+          "line": 6,
+          "column": 1
+        },
+        {
+          "title": "S-02 neutral citation 2013 INSC 408 opens Dharamvir Singh with candidate outcome and seven axes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "sample",
+              "projectName": "sample",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1893,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:42.899Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8aa1cfe786b44e0de529-7a95b71eb8a088214e12",
+          "file": "sample.spec.cjs",
+          "line": 19,
+          "column": 1
+        },
+        {
+          "title": "S-03 statutes: Army Act s.75 printed as omitted, A4 temporal candidates, as-of closed",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "sample",
+              "projectName": "sample",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1745,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:44.806Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8aa1cfe786b44e0de529-7c1c5457787f92242ad1",
+          "file": "sample.spec.cjs",
+          "line": 36,
+          "column": 1
+        },
+        {
+          "title": "S-04 compact 1366x768: rail collapses, context becomes a drawer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "sample",
+              "projectName": "sample",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2006,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:46.559Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8aa1cfe786b44e0de529-437b51d970d0d923d37a",
+          "file": "sample.spec.cjs",
+          "line": 45,
+          "column": 1
+        },
+        {
+          "title": "S-05 narrow window 1024 and 800: document fills the width, results become a drawer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "sample",
+              "projectName": "sample",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2300,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:48.571Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8aa1cfe786b44e0de529-a5ea38b140b675ec1bce",
+          "file": "sample.spec.cjs",
+          "line": 57,
+          "column": 1
+        },
+        {
+          "title": "S-08 instrument disambiguation: Rule 22 Army Rules scopes to the Army Rules, not another Rules instrument",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "sample",
+              "projectName": "sample",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 326,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:50.877Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8aa1cfe786b44e0de529-eeb2aae4da0dd2c9c88e",
+          "file": "sample.spec.cjs",
+          "line": 72,
+          "column": 1
+        },
+        {
+          "title": "S-09 instrument not held or ambiguous: nothing from another instrument is pinned (F14)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "sample",
+              "projectName": "sample",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 346,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:51.210Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8aa1cfe786b44e0de529-059a682c462491a80645",
+          "file": "sample.spec.cjs",
+          "line": 81,
+          "column": 1
+        },
+        {
+          "title": "S-06 Commander view and dark theme",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "sample",
+              "projectName": "sample",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1279,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:51.562Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8aa1cfe786b44e0de529-6c7ec23819cb048ab9a8",
+          "file": "sample.spec.cjs",
+          "line": 93,
+          "column": 1
+        },
+        {
+          "title": "S-07 Administration overview (Admin) and closed assistant",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "sample",
+              "projectName": "sample",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 304,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-25T23:10:52.847Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8aa1cfe786b44e0de529-acfa773e10f38dcc9650",
+          "file": "sample.spec.cjs",
+          "line": 109,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-25T23:10:13.483Z",
+    "duration": 39756.177,
+    "expected": 28,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
