@@ -31,3 +31,7 @@ Review pipeline/instrument_scope.py (blob a21d8a259d565dbf80f45ada12ebb19071f393
 ## Deliverable
 
 One consolidated review of both updated draft PRs. Report exact reviewed heads, severity, reproducible evidence, corrections, independent test results, and whether local acquisition may advance to owner approval. Distinguish prototype tests from full integration tests. Do not merge or run the 534-judgment recovery. No legal status changes. Follow the original review packet for documentary batches and prior scope guard; review new source discovery separately. Return findings to the corpus coordinator, not Claude.
+
+## Integration branch movement observed at closeout
+
+Staging advanced during tranche 03 to 316ae5a3c60e1e07aa1c274c1ab5edf7548977f6 via merged PR #60 (B1 local Windows commissioning fixes), with original c1e4d461 as first parent. GitHub compare reports two commits ahead and zero behind; changed paths are .gitattributes, app/b1/tests/Mimamsa.Tests/HttpTests.cs, app/b1/tests/Mimamsa.Tests/ServiceLaunchPathTests.cs, and docs/architecture/b1/LOCAL_COMMISSIONING_FIXES.md. No corpus path overlap observed, but the .gitattributes effect on byte-based pins and checkout line endings must be assessed. No rebase or merge performed by the corpus coordinator. Review both corpus PRs against their original baseline AND the current integration head; verify staging again at review start. Preserve the B1 changes. Do not merge or rebase without explicit approval.
