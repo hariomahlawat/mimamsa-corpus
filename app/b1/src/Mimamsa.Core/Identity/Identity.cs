@@ -132,20 +132,26 @@ public sealed class IdentityStore
             if (uid is not null)
             {
                 // A lock that has expired is cleared and the count starts again; the lock is set exactly once, at the
-                // LockThreshold-th failure, and never moved by later attempts.
+                // LockThreshold-th failure, and never moved by later attempts. Codex review of PR #70: everything is
+                // computed from the row being updated in ONE statement (the UPDATE takes the row lock and, under READ
+                // COMMITTED, re-evaluates against the latest row version), so overlapping failures cannot read the same
+                // count and lose an increment. "newly" is true only for the attempt that set the lock.
                 await using var f = new NpgsqlCommand("""
-                    WITH cur AS (
-                      SELECT CASE WHEN locked_until IS NOT NULL AND locked_until <= now() THEN 0 ELSE failed_count END AS n
-                      FROM app_users WHERE user_id = $1)
-                    UPDATE app_users u SET failed_count = cur.n + 1,
-                      locked_until = CASE WHEN cur.n + 1 >= $2 THEN now() + $3 ELSE NULL END
-                    FROM cur WHERE u.user_id = $1
-                    RETURNING u.locked_until IS NOT NULL
+                    UPDATE app_users SET
+                      failed_count = CASE WHEN locked_until IS NOT NULL AND locked_until <= now() THEN 1 ELSE failed_count + 1 END,
+                      locked_until = CASE
+                        WHEN locked_until IS NOT NULL AND locked_until > now() THEN locked_until
+                        WHEN (CASE WHEN locked_until IS NOT NULL AND locked_until <= now() THEN 1 ELSE failed_count + 1 END) >= $2 THEN now() + $3
+                        ELSE NULL END
+                    WHERE user_id = $1
+                    RETURNING locked_until IS NOT NULL AND locked_until > now(), failed_count
                     """, c);
                 f.Parameters.AddWithValue(uid); f.Parameters.AddWithValue(LockThreshold); f.Parameters.AddWithValue(LockDuration);
-                var locked = (bool)(await f.ExecuteScalarAsync())!;
+                bool locked; int count;
+                await using (var rr = await f.ExecuteReaderAsync()) { await rr.ReadAsync(); locked = rr.GetBoolean(0); count = rr.GetInt32(1); }
+                bool newly = locked && count == LockThreshold;
                 await AuditAsync(null, "login_failed", uid, null);
-                if (locked) await AuditAsync(null, "lockout", uid, $"locked for {LockDuration.TotalSeconds:0} s after {LockThreshold} failed attempts");
+                if (newly) await AuditAsync(null, "lockout", uid, $"locked for {LockDuration.TotalSeconds:0} s after {LockThreshold} failed attempts");
                 return (locked ? LoginOutcome.Locked : LoginOutcome.Failed, null);
             }
             // Unknown usernames are not recorded (a password typed into the username field must never be stored).

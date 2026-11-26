@@ -5,6 +5,7 @@ import { h, append, clear, $, toast, announce, openDialog, session, fmtDate } fr
 import * as research from "./research.js";
 import { loginPage, gatePage, laterPage, statutesPage, citePage, adminPage } from "./pages.js";
 import { noteRecentSearch } from "./home.js";
+import { refreshRelations, liveRelationViews, relationsRefreshPending } from "./relations.js";
 const add = (el, ...k) => append(el, k);
 
 const main = $("#main");
@@ -34,14 +35,17 @@ window.addEventListener("mimamsa:unauthenticated", () => {
 // C14 F05: a change of serving-policy epoch (seen on any API response) re-checks the open documents at once; while
 // documents are open, the epoch is also polled so pages already on screen are cleared within about 10 seconds even
 // when the reader does nothing. The poll does not refresh the session.
-window.addEventListener("mimamsa:policy-changed", () => { if (S) research.revalidateOpenDocuments(); });
+// Relationship evidence on screen (Statutes section view, instrument overview, context pane) is refreshed too, and the
+// poll also runs while such evidence is displayed (Codex review of PR #70).
+window.addEventListener("mimamsa:policy-changed", () => { if (S) { research.revalidateOpenDocuments(); refreshRelations(); } });
 const POLICY_POLL_MS = 10_000;
 setInterval(async () => {
-  if (!S || document.hidden || !research.openDocumentCount()) return;
+  if (!S || document.hidden || !(research.openDocumentCount() || liveRelationViews())) return;
   // plain fetch: the poll only reads the epoch; it never changes the connection or session state shown to the user
   try { noteEpoch(await fetch("/api/policy", { credentials: "same-origin", cache: "no-store" })); } catch { /* next tick */ }
   // a re-check that could not decide after an earlier epoch change is retried on every tick until it resolves
   if (research.hasPendingRecheck()) research.revalidateOpenDocuments();
+  if (relationsRefreshPending()) refreshRelations();
 }, POLICY_POLL_MS);
 
 // ------------------------------------------------------------------ shell

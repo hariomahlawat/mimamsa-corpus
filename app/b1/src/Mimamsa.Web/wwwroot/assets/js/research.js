@@ -6,7 +6,7 @@ import { api, ApiError, state as apiState } from "./api.js";
 import { h, append, clear, $, $$, chip, candidateChip, axisChip, fmtDate, short, host, typeLabel, toast, announce, copyText, marked, session, icon, openDialog } from "./ui.js";
 import { ProtectedViewer } from "./viewer.js";
 import { renderHome, noteRecentDoc, resetRecent } from "./home.js";
-import { renderRelations } from "./relations.js";
+import { bindRelations } from "./relations.js";
 const STATUTE_TYPES = new Set(["act", "rules", "regulations", "notification", "order"]);
 
 const add = (el, ...k) => append(el, k);
@@ -762,11 +762,8 @@ function renderCtx() {
       // C14 S3: statutory relationships for the sections printed on the current page, and the instrument's notices
       const rbox = h("div.sect", { "data-rel": "statutory" }, h("h3", `Statutory relationships (page ${tab.page})`), h("span.skeleton.w60"));
       add(body, rbox);
-      api(`/api/documents/${encodeURIComponent(d.doc_id)}/relations?page=${tab.page}`).then((r) => {
-        if (!rbox.isConnected) return;
-        rbox.querySelector(".skeleton")?.remove();
-        renderRelations(rbox, r, { nav: R.nav, onOpen: (docId, page) => openDocument({ docId, page }, { newTab: docId !== d.doc_id }) });
-      }).catch(() => { rbox.querySelector(".skeleton")?.remove(); add(rbox, h("p.muted", "Relationships could not be loaded.")); });
+      bindRelations(rbox, `/api/documents/${encodeURIComponent(d.doc_id)}/relations?page=${tab.page}`,
+        { nav: R.nav, onOpen: (docId, page) => openDocument({ docId, page }, { newTab: docId !== d.doc_id }) });
     }
   } else if (R.ctxTab === "cited") {
     add(body, h("div.absence", "Extracted citations: candidates. Absence of a citation is not absence of authority. A citation does not establish how one court treated another."));

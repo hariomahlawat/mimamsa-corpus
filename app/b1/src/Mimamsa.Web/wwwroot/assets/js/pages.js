@@ -2,7 +2,7 @@
 import { api, ApiError, state } from "./api.js";
 import { h, append, clear, $, chip, candidateChip, fmtDate, short, typeLabel, toast, openDialog } from "./ui.js";
 import { mountResearch, openDocument, R } from "./research.js";
-import { renderRelations } from "./relations.js";
+import { bindRelations } from "./relations.js";
 const add = (el, ...k) => append(el, k);
 
 export function loginPage(main, onDone, message) {
@@ -114,10 +114,8 @@ export async function statutesPage(main, nav, docId, section) {
       h("div#a4strip", h("span.skeleton.w60")),
       h("div#relstrip", { "aria-label": "Statutory relationships" }, h("span.skeleton.w40")));
     add(sm, strip);
-    api(`/api/documents/${encodeURIComponent(docId)}/relations?section=${encodeURIComponent(entry.number)}`).then((r) => {
-      const box = $("#relstrip"); if (!box) return; clear(box);
-      renderRelations(box, r, { nav, noticesCollapsed: true, onOpen: (d, page) => openDocument({ docId: d, page }, { newTab: d !== docId }) });
-    }).catch(() => { const box = $("#relstrip"); if (box) box.replaceChildren(h("p.muted", "Relationships could not be loaded.")); });
+    bindRelations($("#relstrip"), `/api/documents/${encodeURIComponent(docId)}/relations?section=${encodeURIComponent(entry.number)}`,
+      { nav, noticesCollapsed: true, onOpen: (d, page) => openDocument({ docId: d, page }, { newTab: d !== docId }) });
     add(sm, h("div#statute-doc", { style: "flex:1;min-height:0;display:flex" }));
     mountResearch($("#statute-doc"), nav).classList.add("statute-mode", "doc-open");
     await openDocument({ docId, page: entry.page, passage: entry.passage_id }, { push: false });
@@ -137,11 +135,8 @@ export async function statutesPage(main, nav, docId, section) {
       h("p.muted", `${typeLabel(s?.type)}${s?.number ? " · " + s.number : ""} · ${toc.sections?.length || 0} headings read from the held text. Choose a section in the contents to read it at its page.`),
       h("details#instrument-notices", h("summary", "Commencement, repeal and savings records"), h("div#relstrip")));
     add(sm, ov);
-    api(`/api/documents/${encodeURIComponent(docId)}/relations`).then((r) => {
-      const box = $("#relstrip"); if (!box) return;
-      if (!r.notices?.length) { box.replaceChildren(h("p.muted", "No commencement, repeal or savings record is read for this instrument from the held texts.")); return; }
-      renderRelations(box, r, { nav, onOpen: (d, page) => openDocument({ docId: d, page }, { newTab: d !== docId }) });
-    }).catch(() => {});
+    bindRelations($("#relstrip"), `/api/documents/${encodeURIComponent(docId)}/relations`,
+      { nav, emptyNoticesText: "No commencement, repeal or savings record is read for this instrument from the held texts.", onOpen: (d, page) => openDocument({ docId: d, page }, { newTab: d !== docId }) });
     add(sm, h("div#statute-doc", { style: "flex:1;min-height:0;display:flex" }));
     mountResearch($("#statute-doc"), nav).classList.add("statute-mode", "doc-open");
     await openDocument({ docId, page: 1 }, { push: false });

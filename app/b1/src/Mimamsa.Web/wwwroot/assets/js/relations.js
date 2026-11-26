@@ -21,6 +21,59 @@ function sectionLink(t, nav) {
     : h("span", text, h("span.muted", " (not held in this library)"));
 }
 
+// ------------------------------------------------------------------ live relationship views (Codex review of PR #70)
+// Relationship evidence quotes other documents (e.g. the BPRD comparison tables). After a withdrawal or reinstatement
+// (policy epoch change) every relationship view still on screen is fetched again; the server filters evidence through
+// eligibility, so withdrawn evidence disappears without navigation. Background refreshes use plain fetch so that they
+// never change the connection state shown to the user; a refresh that cannot decide stays pending and is retried by
+// the epoch poll.
+const live = new Set();
+let pending = false;
+
+function clearRendered(box) { for (const el of [...box.children]) if (el.matches(".relations, .rel-status, .skeleton")) el.remove(); }
+
+async function load(entry, background) {
+  let r, status = 0;
+  try {
+    const resp = await fetch(entry.url, { headers: { Accept: "application/json" }, credentials: "same-origin", cache: "no-store" });
+    status = resp.status;
+    if (resp.ok) r = await resp.json();
+  } catch { /* network: cannot decide */ }
+  if (!entry.box.isConnected) { live.delete(entry); return true; }
+  if (r) {
+    clearRendered(entry.box);
+    if (entry.opts.emptyNoticesText && !r.notices?.length) add(entry.box, h("p.muted.rel-status", entry.opts.emptyNoticesText));
+    else renderRelations(entry.box, r, entry.opts);
+    return true;
+  }
+  if (status === 404 || status === 403) {
+    clearRendered(entry.box);
+    add(entry.box, h("p.muted.rel-status", "Relationships are not available: this document is not available in this installation."));
+    live.delete(entry);
+    return true;
+  }
+  if (!background) { clearRendered(entry.box); add(entry.box, h("p.muted.rel-status", "Relationships could not be loaded.")); }
+  return false;   // 401, 5xx or network: keep what is shown and retry
+}
+
+/** Fetch `url` (a /api/documents/{id}/relations route) into `box`, and keep it current across policy changes. */
+export function bindRelations(box, url, opts) {
+  const entry = { box, url, opts };
+  live.add(entry);
+  return load(entry, false);
+}
+
+export async function refreshRelations() {
+  let ok = true;
+  for (const e of [...live]) {
+    if (!e.box.isConnected) { live.delete(e); continue; }
+    if (!(await load(e, true))) ok = false;
+  }
+  pending = !ok;
+}
+export const liveRelationViews = () => [...live].filter((e) => e.box.isConnected).length;
+export const relationsRefreshPending = () => pending;
+
 /** Render a /api/documents/{id}/relations response. `onOpen(docId, page)` opens evidence; `nav` routes Statutes links. */
 export function renderRelations(box, r, { onOpen, nav, showNotices = true, noticesCollapsed = false }) {
   const wrap = h("div.relations", { "data-relations": r.doc_id });

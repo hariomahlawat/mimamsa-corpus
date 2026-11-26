@@ -144,3 +144,25 @@ test("R-08 one banner line keeps both statements; the context pane groups proven
   await page.getByRole("tab", { name: "Cited/Citing" }).click();
   await expect(page.locator(".ctx-body")).not.toContainText("Unresolved reference");
 });
+
+// Codex review of PR #70: relationship evidence already on screen must follow a withdrawal of the document that
+// supplies it (here the IPC/BNS comparison table), without navigation. The table is reinstated afterwards.
+test("R-09 withdrawn evidence disappears from a displayed relationship view without navigation", async ({ page, browser }) => {
+  const user = await browser.newPage();
+  await login(user);
+  await user.goto("/s/act-ipc-1860/302");
+  await expect(user.locator("#relstrip .rel-row")).toHaveCount(1);
+  await login(page, "admin");
+  const origin = new URL(page.url()).origin;
+  const csrf = (await (await page.request.get("/api/session")).json()).csrf;
+  const post = (url, data) => page.request.post(url, { headers: { "X-CSRF-Token": csrf, Origin: origin }, data });
+  const w = await post("/api/admin/withdraw", { doc_id: "ref-bprd-comparison-bns-ipc", reason: "C14 R-09 relationship evidence refresh" });
+  expect(w.status()).toBe(200);
+  try {
+    await expect(user.locator("#relstrip .rel-row")).toHaveCount(0, { timeout: 30_000 });
+    await expect(user.locator("#relstrip")).not.toContainText("Punishment for murder");
+  } finally {
+    const r = await post("/api/admin/reinstate", { doc_id: "ref-bprd-comparison-bns-ipc", reason: "C14 R-09 restore after test" });
+    expect(r.status()).toBe(200);
+  }
+});
