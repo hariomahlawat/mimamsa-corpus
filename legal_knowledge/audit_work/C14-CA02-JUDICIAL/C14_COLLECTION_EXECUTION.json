@@ -1,0 +1,66 @@
+{
+  "manifest_git_head": "c2f23357cc777ac4d8bb3432604307673d857ea4",
+  "initial_hf_revision": "f4e6ba443ec9c0b89b2c5d21d0b5cda38f55d2dc",
+  "judicial_counts": {
+    "uploaded_verified": 238,
+    "needs-review": 5,
+    "pending": 291
+  },
+  "judicial_pages_using_ocr_text": 7,
+  "followon_probes": [
+    [
+      "C14-D01",
+      "200",
+      "200"
+    ],
+    [
+      "C14-D03",
+      "000",
+      "000"
+    ],
+    [
+      "C14-D04",
+      "503",
+      "503"
+    ],
+    [
+      "C14-D05",
+      "200",
+      "200"
+    ],
+    [
+      "C14-D06",
+      "200",
+      "200"
+    ],
+    [
+      "C14-D07",
+      "200",
+      "200"
+    ],
+    [
+      "C14-JD-001",
+      "404",
+      "200"
+    ],
+    [
+      "C14-JD-002",
+      "503",
+      "503"
+    ]
+  ],
+  "statutory_review": [
+    [
+      "C14-D06",
+      "marking-review",
+      38,
+      0
+    ]
+  ],
+  "statutory_commit": null,
+  "limits": [
+    "Source pins verify bytes, not legal authentication.",
+    "Access-marking and text screening are automated with English OCR; uncertain items are excluded from upload.",
+    "Deduplication used pinned LFS digests, content-addressed paths and direct hash checks for two PDFs outside those coverage methods."
+  ]
+}
