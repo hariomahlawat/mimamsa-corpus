@@ -147,7 +147,7 @@ At 2560 px the PDF is rendered 1530 px wide; the page is taller than the screen 
 | Search (User and Admin) | Not listed |
 | `/api/documents/…`, `/text`, `/v2/…/pdf-meta` | 404 "This document is not available in this installation." |
 | `/cite/…` permalink (UI) | "The cited copy is not available in this installation." |
-| `/api/cite` | `CITED_COPY_UNAVAILABLE`, with no id, hash or page leaked |
+| `/api/cite` (corrected, see CORRECTIONS.md C1) | With the real copy hash: `CITED_COPY_ELIGIBLE` before withdrawal, then `CITED_COPY_UNAVAILABLE` after, with no id, hash or page leaked |
 | Viewer already open in the User's tab | **Still shows the page and metadata, with no notice** (F05) |
 | `/d/<doc>` deep link | **Empty research home, no notice** (F05) |
 | Restore | No control (F17) |

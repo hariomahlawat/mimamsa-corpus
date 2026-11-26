@@ -1092,17 +1092,43 @@
           "step": "user opens the document before withdrawal",
           "observed": {
             "searchRank": 2,
-            "permalink": "/cite/R13-b1-sample-20261126-4b31855f/sc-1987-ranjit-thakur-1987insc285/35b9c948fe62/1"
+            "permalink": "/cite/R13-b1-sample-20261126-4b31855f/sc-1987-ranjit-thakur-1987insc285/35b9c948fe62/1",
+            "copy12": "35b9c948fe62",
+            "permalinkCopy12": "35b9c948fe62",
+            "copiesAgree": true
+          }
+        },
+        {
+          "step": "CONTROL+ before withdrawal: /api/cite with the real copy hash",
+          "observed": {
+            "status": 200,
+            "state": "CITED_COPY_ELIGIBLE",
+            "doc_id": "sc-1987-ranjit-thakur-1987insc285",
+            "page": 1
+          }
+        },
+        {
+          "step": "CONTROL+ before withdrawal: document and pdf-meta",
+          "observed": {
+            "document": 200,
+            "pdfMeta": 200
+          }
+        },
+        {
+          "step": "CONTROL- before withdrawal: /api/cite with a malformed hash",
+          "observed": {
+            "status": 200,
+            "state": "CITED_COPY_UNAVAILABLE"
           }
         },
         {
           "step": "withdraw via the Admin UI while searches run",
           "observed": {
-            "withdrawClickToRefreshMs": 840,
+            "withdrawClickToRefreshMs": 848,
             "concurrentSearchMs": {
               "n": 20,
-              "max": 157,
-              "median": 47
+              "max": 113,
+              "median": 67
             },
             "toast": "Withdrawn (policy epoch 2)"
           }
@@ -1154,10 +1180,12 @@
           }
         },
         {
-          "step": "user GET /api/cite for the copy",
+          "step": "after withdrawal: /api/cite with the same real copy hash",
           "observed": {
             "status": 200,
-            "body": "{\"state\":\"CITED_COPY_UNAVAILABLE\",\"notice\":\"The cited copy is not available in this installation.\",\"copy\":null,\"page\":null,\"doc_id\":null,\"current_copy\":null,\"co"
+            "state": "CITED_COPY_UNAVAILABLE",
+            "doc_id": null,
+            "page": null
           }
         },
         {
@@ -1222,7 +1250,8 @@
         "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
         "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
         "Failed to load resource: the server responded with a status of 404 (Not Found)"
-      ]
+      ],
+      "rerun": "Correction C1 (Codex PR #64): rerun on a fresh audit clone with a real copy hash and positive/negative controls. Original J13 preserved in evidence/original/walkthrough_observations.v1.json."
     },
     {
       "id": "J14",

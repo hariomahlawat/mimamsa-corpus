@@ -164,4 +164,5 @@ python scripts/perf.py evidence/perf_raw.json                                   
 | `SCREENSHOT_INDEX.md`, `screenshots/` | 61 real browser screenshots |
 | `walkthrough_observations.json`, `evidence/` | Raw observations: search, performance, withdrawal probe |
 | `scripts/` | Reproducible walkthrough, search and performance scripts |
+| `CORRECTIONS.md` | Corrections after the Codex review: C1 cite probe controls, C2 server timing. Originals in `evidence/original/` |
 | `PROPOSED_CYCLE14_APPLICATION_PLAN.md` | Work packages, acceptance criteria and the traceability matrix |

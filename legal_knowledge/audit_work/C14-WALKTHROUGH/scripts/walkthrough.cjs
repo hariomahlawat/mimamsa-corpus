@@ -229,7 +229,15 @@ const a11y = (page) => page.evaluate(() => {
   if (want("J13")) { const admin = await newPage(browser, undefined, AUDIT); const user = await newPage(browser, undefined, AUDIT);
     await login(user.page, "user"); await login(admin.page, "admin");
     let permalink = null, copy = null;
-    await step("user opens the document before withdrawal", async () => { await search(user.page, "Ranjit Thakur"); const ids = await user.page.locator(".rgroup").evaluateAll((els) => els.map((e) => e.dataset.doc)); await user.page.goto(`/d/${WITHDRAW_DOC}`); await user.page.locator(".pagewrap canvas").first().waitFor({ timeout: 20000 }); await user.page.getByRole("button", { name: /Internal ref/ }).click(); await user.page.waitForTimeout(300); const c = await user.page.evaluate(() => navigator.clipboard.readText()); permalink = (c.match(/\/cite\/\S+/) || [null])[0]; const d = await api(user.ctx.request, "GET", AUDIT + `/api/documents/${WITHDRAW_DOC}`); copy = (d.body.match(/"sha256":"([0-9a-f]{12})/) || [])[1]; await shot(user.page, "before-withdrawal-viewer"); return { searchRank: ids.indexOf(WITHDRAW_DOC) + 1, permalink }; });
+    await step("user opens the document before withdrawal", async () => { await search(user.page, "Ranjit Thakur"); const ids = await user.page.locator(".rgroup").evaluateAll((els) => els.map((e) => e.dataset.doc)); await user.page.goto(`/d/${WITHDRAW_DOC}`); await user.page.locator(".pagewrap canvas").first().waitFor({ timeout: 20000 }); await user.page.getByRole("button", { name: /Internal ref/ }).click(); await user.page.waitForTimeout(300); const c = await user.page.evaluate(() => navigator.clipboard.readText()); permalink = (c.match(/\/cite\/\S+/) || [null])[0]; // Correction (Codex PR #64 review): the copy hash is taken from the full metadata JSON (not a truncated body) and
+      // cross-checked against the permalink, so the /api/cite probe below sends a real hash.
+      const d = await (await user.ctx.request.get(AUDIT + `/api/documents/${WITHDRAW_DOC}`)).json(); copy = d.copy.sha256.slice(0, 12);
+      const fromLink = permalink ? permalink.split("/")[4] : null; await shot(user.page, "before-withdrawal-viewer");
+      return { searchRank: ids.indexOf(WITHDRAW_DOC) + 1, permalink, copy12: copy, permalinkCopy12: fromLink, copiesAgree: copy === fromLink }; });
+    const citeState = async () => { const r = await user.ctx.request.get(AUDIT + `/api/cite?doc=${WITHDRAW_DOC}&sha=${copy}&page=1`); let j = {}; try { j = await r.json(); } catch { /* none */ } return { status: r.status(), state: j.state ?? null, doc_id: j.doc_id ?? null, page: j.page ?? null }; };
+    await step("CONTROL+ before withdrawal: /api/cite with the real copy hash", citeState);
+    await step("CONTROL+ before withdrawal: document and pdf-meta", async () => ({ document: (await api(user.ctx.request, "GET", AUDIT + `/api/documents/${WITHDRAW_DOC}`)).status, pdfMeta: (await api(user.ctx.request, "GET", AUDIT + `/api/v2/documents/${WITHDRAW_DOC}/pdf-meta`)).status }));
+    await step("CONTROL- before withdrawal: /api/cite with a malformed hash", async () => { const r = await user.ctx.request.get(AUDIT + `/api/cite?doc=${WITHDRAW_DOC}&sha=undefined&page=1`); let j = {}; try { j = await r.json(); } catch { /* none */ } return { status: r.status(), state: j.state ?? null }; });
     await step("withdraw via the Admin UI while searches run", async () => {
       await admin.page.goto("/admin"); await admin.page.locator("#withdraw-form").waitFor();
       await admin.page.fill("#wd-doc", WITHDRAW_DOC); await admin.page.fill("#wd-reason", "C14 walkthrough audit: enforcement test on an isolated database copy");
@@ -245,7 +253,7 @@ const a11y = (page) => page.evaluate(() => {
     await step("citation permalink", async () => { if (!permalink) return "no permalink captured"; await user.page.goto(permalink); await user.page.waitForTimeout(1500); await shot(user.page, "permalink"); return await text(user.page, "main", 300); });
     for (const u of [`/api/documents/${WITHDRAW_DOC}`, `/api/documents/${WITHDRAW_DOC}/text`, `/api/documents/${WITHDRAW_DOC}/citation`, `/api/v2/documents/${WITHDRAW_DOC}/pdf-meta`])
       await step(`user GET ${u}`, () => api(user.ctx.request, "GET", AUDIT + u));
-    await step("user GET /api/cite for the copy", () => api(user.ctx.request, "GET", AUDIT + `/api/cite?doc=${WITHDRAW_DOC}&sha=${copy}&page=1`));
+    await step("after withdrawal: /api/cite with the same real copy hash", citeState);
     await step("admin still sees it in search?", async () => { const r = await api(admin.ctx.request, "GET", AUDIT + "/api/search?q=Ranjit%20Thakur"); return { status: r.status, mentions: r.body.includes(WITHDRAW_DOC) }; });
     await step("undo withdrawal available in UI", async () => ({ restoreControls: await admin.page.locator("button", { hasText: /restore|reinstate|undo/i }).count() }));
     await admin.ctx.close(); await user.ctx.close(); }

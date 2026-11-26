@@ -51,7 +51,8 @@ for q in queries:
             "chips": [c.get("text") for c in r.get("chips") or []],
             "total_documents": r.get("total_documents"), "total_passages": r.get("total_passages"),
             "shown_passages": r.get("shown_passages"),
-            "server_ms": (r.get("run") or {}).get("ms"), "client_ms": client_ms,
+            # Correction (Codex PR #64 review): the API reports run.elapsed_ms; run.ms does not exist.
+            "server_ms": (r.get("run") or {}).get("elapsed_ms"), "client_ms": client_ms,
             "top_documents": [{"rank": i + 1, "doc_id": d, "title": title(d)} for i, d in enumerate(top_docs[:5])],
             "top_passages": [{"rank": i + 1, "doc_id": p["doc_id"], "page": p.get("page"), "tier": p.get("tier"),
                               "reasons": p.get("reasons"), "snippet": (p.get("snippet") or "")[:220]}

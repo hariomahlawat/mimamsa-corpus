@@ -57,8 +57,8 @@
     "total_documents": 258,
     "total_passages": 14227,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 136.7,
+    "server_ms": 162.3,
+    "client_ms": 232.2,
     "top_documents": [
      {
       "rank": 1,
@@ -145,8 +145,8 @@
     "total_documents": 98,
     "total_passages": 2193,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 17.4,
+    "server_ms": 7.1,
+    "client_ms": 20.7,
     "top_documents": [
      {
       "rank": 1,
@@ -233,8 +233,8 @@
     "total_documents": 6,
     "total_passages": 14,
     "shown_passages": 14,
-    "server_ms": null,
-    "client_ms": 7.2,
+    "server_ms": 6.8,
+    "client_ms": 11.6,
     "top_documents": [
      {
       "rank": 1,
@@ -321,8 +321,8 @@
     "total_documents": 21,
     "total_passages": 108,
     "shown_passages": 108,
-    "server_ms": null,
-    "client_ms": 6.6,
+    "server_ms": 0.6,
+    "client_ms": 8.1,
     "top_documents": [
      {
       "rank": 1,
@@ -409,8 +409,8 @@
     "total_documents": 170,
     "total_passages": 6873,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 33.9,
+    "server_ms": 20.6,
+    "client_ms": 32.3,
     "top_documents": [
      {
       "rank": 1,
@@ -497,8 +497,8 @@
     "total_documents": 108,
     "total_passages": 1770,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 68.6,
+    "server_ms": 5.6,
+    "client_ms": 18.1,
     "top_documents": [
      {
       "rank": 1,
@@ -585,8 +585,8 @@
     "total_documents": 101,
     "total_passages": 3431,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 17.7,
+    "server_ms": 9.8,
+    "client_ms": 19.6,
     "top_documents": [
      {
       "rank": 1,
@@ -675,8 +675,8 @@
     "total_documents": 13,
     "total_passages": 93,
     "shown_passages": 93,
-    "server_ms": null,
-    "client_ms": 12.4,
+    "server_ms": 9.4,
+    "client_ms": 16.0,
     "top_documents": [
      {
       "rank": 1,
@@ -763,8 +763,8 @@
     "total_documents": 6,
     "total_passages": 17,
     "shown_passages": 17,
-    "server_ms": null,
-    "client_ms": 113.9,
+    "server_ms": 167.9,
+    "client_ms": 173.3,
     "top_documents": [
      {
       "rank": 1,
@@ -853,8 +853,8 @@
     "total_documents": 6,
     "total_passages": 12,
     "shown_passages": 12,
-    "server_ms": null,
-    "client_ms": 95.7,
+    "server_ms": 149.3,
+    "client_ms": 168.1,
     "top_documents": [
      {
       "rank": 1,
@@ -941,8 +941,8 @@
     "total_documents": 7,
     "total_passages": 18,
     "shown_passages": 18,
-    "server_ms": null,
-    "client_ms": 115.3,
+    "server_ms": 109.6,
+    "client_ms": 119.5,
     "top_documents": [
      {
       "rank": 1,
@@ -1029,8 +1029,8 @@
     "total_documents": 2,
     "total_passages": 3,
     "shown_passages": 3,
-    "server_ms": null,
-    "client_ms": 82.4,
+    "server_ms": 97.9,
+    "client_ms": 106.8,
     "top_documents": [
      {
       "rank": 1,
@@ -1100,8 +1100,8 @@
     "total_documents": 165,
     "total_passages": 4781,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 19.7,
+    "server_ms": 19.4,
+    "client_ms": 32.3,
     "top_documents": [
      {
       "rank": 1,
@@ -1190,8 +1190,8 @@
     "total_documents": 2,
     "total_passages": 14,
     "shown_passages": 14,
-    "server_ms": null,
-    "client_ms": 52.4,
+    "server_ms": 66.4,
+    "client_ms": 70.2,
     "top_documents": [
      {
       "rank": 1,
@@ -1263,8 +1263,8 @@
     "total_documents": 5,
     "total_passages": 17,
     "shown_passages": 17,
-    "server_ms": null,
-    "client_ms": 72.1,
+    "server_ms": 84.7,
+    "client_ms": 88.6,
     "top_documents": [
      {
       "rank": 1,
@@ -1351,8 +1351,8 @@
     "total_documents": 6,
     "total_passages": 8,
     "shown_passages": 8,
-    "server_ms": null,
-    "client_ms": 87.1,
+    "server_ms": 84.5,
+    "client_ms": 88.0,
     "top_documents": [
      {
       "rank": 1,
@@ -1439,8 +1439,8 @@
     "total_documents": 1,
     "total_passages": 1,
     "shown_passages": 1,
-    "server_ms": null,
-    "client_ms": 9.0,
+    "server_ms": 7.9,
+    "client_ms": 16.1,
     "top_documents": [
      {
       "rank": 1,
@@ -1485,8 +1485,8 @@
     "total_documents": 170,
     "total_passages": 1905,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 13.9,
+    "server_ms": 7,
+    "client_ms": 18.1,
     "top_documents": [
      {
       "rank": 1,
@@ -1573,8 +1573,8 @@
     "total_documents": 12,
     "total_passages": 13,
     "shown_passages": 13,
-    "server_ms": null,
-    "client_ms": 9.9,
+    "server_ms": 8.8,
+    "client_ms": 12.4,
     "top_documents": [
      {
       "rank": 1,
@@ -1663,8 +1663,8 @@
     "total_documents": 1,
     "total_passages": 2,
     "shown_passages": 2,
-    "server_ms": null,
-    "client_ms": 32.7,
+    "server_ms": 17.7,
+    "client_ms": 20.6,
     "top_documents": [
      {
       "rank": 1,
@@ -1721,8 +1721,8 @@
     "total_documents": 215,
     "total_passages": 7100,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 58.2,
+    "server_ms": 27.5,
+    "client_ms": 39.6,
     "top_documents": [
      {
       "rank": 1,
@@ -1807,8 +1807,8 @@
     "total_documents": 279,
     "total_passages": 19747,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 76.2,
+    "server_ms": 173.1,
+    "client_ms": 187.1,
     "top_documents": [
      {
       "rank": 1,
@@ -1896,8 +1896,8 @@
     "total_documents": 257,
     "total_passages": 15493,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 59.0,
+    "server_ms": 49.3,
+    "client_ms": 61.4,
     "top_documents": [
      {
       "rank": 1,
@@ -1984,8 +1984,8 @@
     "total_documents": 235,
     "total_passages": 18046,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 75.0,
+    "server_ms": 60,
+    "client_ms": 71.4,
     "top_documents": [
      {
       "rank": 1,
@@ -2072,8 +2072,8 @@
     "total_documents": 170,
     "total_passages": 1898,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 24.3,
+    "server_ms": 5.6,
+    "client_ms": 17.7,
     "top_documents": [
      {
       "rank": 1,
@@ -2160,8 +2160,8 @@
     "total_documents": 255,
     "total_passages": 13521,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 52.2,
+    "server_ms": 36.2,
+    "client_ms": 47.7,
     "top_documents": [
      {
       "rank": 1,
@@ -2248,8 +2248,8 @@
     "total_documents": 117,
     "total_passages": 2170,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 103.3,
+    "server_ms": 6.2,
+    "client_ms": 16.2,
     "top_documents": [
      {
       "rank": 1,
@@ -2338,8 +2338,8 @@
     "total_documents": 13,
     "total_passages": 146,
     "shown_passages": 146,
-    "server_ms": null,
-    "client_ms": 7.3,
+    "server_ms": 0.9,
+    "client_ms": 12.1,
     "top_documents": [
      {
       "rank": 1,
@@ -2428,8 +2428,8 @@
     "total_documents": 3,
     "total_passages": 91,
     "shown_passages": 91,
-    "server_ms": null,
-    "client_ms": 5.3,
+    "server_ms": 0.5,
+    "client_ms": 6.3,
     "top_documents": [
      {
       "rank": 1,
@@ -2506,8 +2506,8 @@
     "total_documents": 48,
     "total_passages": 341,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 8.8,
+    "server_ms": 1.6,
+    "client_ms": 12.2,
     "top_documents": [
      {
       "rank": 1,
@@ -2594,8 +2594,8 @@
     "total_documents": 1,
     "total_passages": 2,
     "shown_passages": 2,
-    "server_ms": null,
-    "client_ms": 43.0,
+    "server_ms": 51,
+    "client_ms": 54.1,
     "top_documents": [
      {
       "rank": 1,
@@ -2650,8 +2650,8 @@
     "total_documents": 199,
     "total_passages": 7945,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 27.2,
+    "server_ms": 24.9,
+    "client_ms": 35.8,
     "top_documents": [
      {
       "rank": 1,
@@ -2736,8 +2736,8 @@
     "total_documents": 260,
     "total_passages": 8701,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 29.6,
+    "server_ms": 37.1,
+    "client_ms": 53.5,
     "top_documents": [
      {
       "rank": 1,
@@ -2824,8 +2824,8 @@
     "total_documents": 6,
     "total_passages": 13,
     "shown_passages": 13,
-    "server_ms": null,
-    "client_ms": 27.5,
+    "server_ms": 76.7,
+    "client_ms": 80.1,
     "top_documents": [
      {
       "rank": 1,
@@ -2912,8 +2912,8 @@
     "total_documents": 243,
     "total_passages": 1793,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 15.2,
+    "server_ms": 6.5,
+    "client_ms": 24.3,
     "top_documents": [
      {
       "rank": 1,
@@ -3000,8 +3000,8 @@
     "total_documents": 20,
     "total_passages": 43,
     "shown_passages": 43,
-    "server_ms": null,
-    "client_ms": 3.8,
+    "server_ms": 0.5,
+    "client_ms": 4.7,
     "top_documents": [
      {
       "rank": 1,
@@ -3086,8 +3086,8 @@
     "total_documents": 0,
     "total_passages": 0,
     "shown_passages": 0,
-    "server_ms": null,
-    "client_ms": 2.2,
+    "server_ms": 0.5,
+    "client_ms": 4.0,
     "top_documents": [],
     "top_passages": [],
     "notes": []
@@ -3115,8 +3115,8 @@
     "total_documents": 0,
     "total_passages": 0,
     "shown_passages": 0,
-    "server_ms": null,
-    "client_ms": 5.7,
+    "server_ms": 5,
+    "client_ms": 7.8,
     "top_documents": [],
     "top_passages": [],
     "notes": [
@@ -3147,8 +3147,8 @@
     "total_documents": 14,
     "total_passages": 82,
     "shown_passages": 82,
-    "server_ms": null,
-    "client_ms": 16.6,
+    "server_ms": 11.6,
+    "client_ms": 18.2,
     "top_documents": [
      {
       "rank": 1,
@@ -3235,8 +3235,8 @@
     "total_documents": 21,
     "total_passages": 101,
     "shown_passages": 101,
-    "server_ms": null,
-    "client_ms": 6.7,
+    "server_ms": 2.1,
+    "client_ms": 8.7,
     "top_documents": [
      {
       "rank": 1,
@@ -3323,8 +3323,8 @@
     "total_documents": 12,
     "total_passages": 138,
     "shown_passages": 138,
-    "server_ms": null,
-    "client_ms": 10.4,
+    "server_ms": 6.9,
+    "client_ms": 14.7,
     "top_documents": [
      {
       "rank": 1,
@@ -3413,8 +3413,8 @@
     "total_documents": 109,
     "total_passages": 2031,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 42.3,
+    "server_ms": 45.7,
+    "client_ms": 58.0,
     "top_documents": [
      {
       "rank": 1,
@@ -3499,8 +3499,8 @@
     "total_documents": 12,
     "total_passages": 496,
     "shown_passages": 200,
-    "server_ms": null,
-    "client_ms": 16.1,
+    "server_ms": 5.1,
+    "client_ms": 22.1,
     "top_documents": [
      {
       "rank": 1,
