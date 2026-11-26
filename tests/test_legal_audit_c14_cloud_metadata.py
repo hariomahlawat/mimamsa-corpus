@@ -20,7 +20,7 @@ ENV={
     "WP1_CLOUD_ENABLED":"true","GITHUB_SHA":COMMIT,"GITHUB_RUN_ID":"123",
     "GITHUB_RUN_ATTEMPT":"1",
 }
-EVENT={"inputs":{"operation":cloud.APPROVAL,"revision":cloud.REVISION,"code_commit":COMMIT}}
+EVENT={"repository":{"private":True,"full_name":cloud.REPO},"inputs":{"operation":cloud.APPROVAL,"revision":cloud.REVISION,"code_commit":COMMIT}}
 
 
 class CloudTests(unittest.TestCase):
@@ -38,7 +38,11 @@ class CloudTests(unittest.TestCase):
                 cloud.scope(dict(ENV,**{name:value}),EVENT)
         for name,value in (("revision","b"*40),("operation","UPLOAD"),("code_commit","b"*40)):
             with self.subTest(name=name),self.assertRaises(ValueError):
-                cloud.scope(ENV,{"inputs":dict(EVENT["inputs"],**{name:value})})
+                cloud.scope(ENV,dict(EVENT,inputs=dict(EVENT["inputs"],**{name:value})))
+
+    def test_public_repository_refused(self):
+        with self.assertRaises(ValueError):
+            cloud.scope(ENV,dict(EVENT,repository={"private":False,"full_name":cloud.REPO}))
 
     def test_missing_token_writes_incomplete_without_worker(self):
         if os.name!="posix":
