@@ -259,3 +259,4 @@
 {"id": "AFT-GUW-307", "url": "https://aftrbghy.nic.in/judgement/Judgment_&_Order_dated_Sup_Cause_list_dated_20_Aug_2026_OA_20_of_2025.pdf", "status": "eligible-local", "sha256": "2fce1822af9702d65c271d963d68252020a5db79c655abf2314e3bdc67e76c7d", "pages": 2, "ocr": 2}
 {"id": "AFT-GUW-308", "url": "https://aftrbghy.nic.in/judgement/Judgmentof T.A - 01-2016 dt 16.06.2016.pdf", "status": "eligible-local", "sha256": "980dd83ef623c96a831aafdcb08d042180286b1b3b9dea233b4bfb9032d2c59d", "pages": 3, "ocr": 0}
 {"id": "AFT-GUW-309", "url": "https://aftrbghy.nic.in/judgement/Judgments &amp; Orders dated 27-07-2021 CA-02 of 2020 in OA-37 of 2018.pdf", "status": "HTTPError", "http_code": 404}
+{"id": "AFT-GUW-310", "url": "https://aftrbghy.nic.in/judgement/Judgments and Orders dated 27 Jul 2021.pdf", "status": "eligible-local", "sha256": "d75d20b4e0f3c108c41f37ce2b5567a71b682e500f47d56a136e984e70598560", "pages": 62, "ocr": 62}
