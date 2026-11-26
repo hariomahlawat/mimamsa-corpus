@@ -10,13 +10,13 @@
     "verified": 986
   },
   "all_job_statuses": {
-    "marking-review": 33,
-    "verified-local": 201,
+    "marking-review": 36,
+    "verified-local": 243,
     "sparse-page-review": 1,
     "HTTPError": 5
   },
-  "extended_uploads": 202,
-  "pending_jobs": 990,
+  "extended_uploads": 244,
+  "pending_jobs": 945,
   "official_pilot": [
     {
       "id": "AFT-GUW-1",
@@ -503,7 +503,13 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          7
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2007-cwp-8961-2007-phhc010661762007-1-2007-10-04",
@@ -528,7 +534,13 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 1
+      "pages_using_ocr": 1,
+      "secondary_review": {
+        "context_pages": [
+          11
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2010-cwp-3302-1995-phhc010220211995-1-2010-03-09",
@@ -590,7 +602,13 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          2
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2024-crwp-275-2024-phhc010026662024-1-2024-11-12",
@@ -607,7 +625,13 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          10
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2026-cwp-8947-2026-phhc010483952026-1-2026-03-24",
@@ -672,7 +696,13 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          4
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2010-cwp-3229-1996-phhc010237841996-1-2010-04-22",
@@ -747,7 +777,13 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          5
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2017-cwp-22278-2016-phhc010876462016-1-2017-02-20",
@@ -764,7 +800,13 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          2
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2024-cwp-28861-2023-phhc011659072023-1-2024-10-23",
@@ -805,7 +847,16 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          3,
+          4,
+          5,
+          7
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2024-cwp-16651-2024-phhc010909682024-1-2024-10-24",
@@ -838,7 +889,15 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          3,
+          4,
+          7
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2024-cwp-16678-2024-phhc010902292024-1-2024-10-24",
@@ -879,7 +938,16 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          2,
+          3,
+          4,
+          7
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2024-cwp-28301-2024-phhc011420252024-1-2024-10-24",
@@ -912,7 +980,15 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          2,
+          4,
+          7
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2024-cwp-30173-2024-phhc011535732024-1-2024-11-07",
@@ -953,7 +1029,16 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          2,
+          3,
+          4,
+          6
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2024-cwp-30626-2024-phhc011390792024-1-2024-11-13",
@@ -994,7 +1079,16 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          2,
+          3,
+          4,
+          6
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2024-cwp-24836-2024-phhc011289522024-1-2024-11-21",
@@ -1051,7 +1145,13 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          3
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2024-cwp-16781-2024-phhc010910392024-1-2024-12-17",
@@ -1076,7 +1176,14 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          7
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2024-cwp-20059-2024-phhc011052542024-1-2024-12-17",
@@ -1101,7 +1208,14 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          8
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2024-cwp-31300-2024-phhc011107912024-1-2024-12-17",
@@ -1126,7 +1240,14 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          8
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2024-cwp-33992-2024-phhc011734302024-1-2024-12-17",
@@ -1191,7 +1312,14 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          9
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2024-cwp-30711-2024-phhc011570122024-1-2024-12-19",
@@ -1236,7 +1364,14 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          7
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2025-cwp-20062-2024-phhc011049532024-1-2025-01-13",
@@ -1261,7 +1396,14 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          9
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2025-cwp-20070-2024-phhc011052262024-1-2025-01-13",
@@ -1286,7 +1428,14 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          7
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2025-cwp-20079-2024-phhc011051622024-1-2025-01-13",
@@ -1319,7 +1468,14 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          8
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2025-cwp-20080-2024-phhc011050012024-1-2025-01-13",
@@ -1344,7 +1500,14 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          8
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2025-cwp-21971-2024-phhc011036242024-1-2025-01-13",
@@ -1369,7 +1532,14 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          8
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2025-cwp-21976-2024-phhc011053842024-1-2025-01-13",
@@ -1394,7 +1564,14 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          8
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2025-cwp-34935-2024-phhc011807942024-1-2025-01-14",
@@ -1419,7 +1596,14 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6,
+          8
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2025-cwp-23968-2024-phhc011226182024-1-2025-01-20",
@@ -1444,7 +1628,13 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          3
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2025-cwp-29368-2025-phhc011543462025-1-2025-09-30",
@@ -1549,7 +1739,13 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          3
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2026-cwp-11766-2026-phhc010614552026-1-2026-04-20",
@@ -1614,7 +1810,13 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          2
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     },
     {
       "doc_id": "hc-ph-2026-untitled-phhc010868762026-1-2026-09-18",
@@ -1631,7 +1833,13 @@
         ]
       ],
       "preservation": null,
-      "pages_using_ocr": 0
+      "pages_using_ocr": 0,
+      "secondary_review": {
+        "context_pages": [
+          6
+        ],
+        "disposition": "Additional page context extracted. Access status requires contextual review."
+      }
     }
   ],
   "limits": [
