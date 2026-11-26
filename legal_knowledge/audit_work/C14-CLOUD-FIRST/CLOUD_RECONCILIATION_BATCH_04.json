@@ -1,0 +1,247 @@
+{
+  "schema": "c14-cloud-reconciliation-batch-v1",
+  "date": "2026-11-26",
+  "baseline": "f1bbd15dc9a57531b0b061578fdceba94ff35753",
+  "prior": "f6f0a2f246d929e51818dceda80c81fd4b9d5308",
+  "scope": "Non-mutating connected metadata checks, frozen recovery CSV reconciliation and public legal-source discovery. No new source bytes, no live inventory, no acquisition or release authority.",
+  "statutory_holdings": {
+    "source_register_blob": "428e8589b5c6b9200ecb86af394d74ee9a021f54",
+    "requests": 45,
+    "baseline_dispositions": {
+      "DISCOVERY_OPEN": 5,
+      "BLOCKED_REDIRECT_SCOPE": 22,
+      "HELD_PARTIAL_REVIEW_REMAINING": 2,
+      "HELD_REVIEW_NOT_CLOSED": 7,
+      "LOCATORS_IDENTIFIED_NOT_ACQUIRED": 3,
+      "HELD_REGISTRATION_REQUIRED": 2,
+      "CUSTODIAN_ONLY": 3,
+      "BLOCKED_ALLOWLIST": 1
+    },
+    "checks": [
+      {
+        "target": "C13-G1-AR-POST2022-236757",
+        "expected_bytes": 1275820,
+        "observed_bytes": 1275820,
+        "exists": true,
+        "lfs": true,
+        "connector_status": "success"
+      },
+      {
+        "target": "C13-G1-AR-POST2022-241268",
+        "expected_bytes": 870464,
+        "observed_bytes": 870464,
+        "exists": true,
+        "lfs": true,
+        "connector_status": "success"
+      },
+      {
+        "target": "C13-G1-AR-POST2022-246457",
+        "expected_bytes": 775443,
+        "observed_bytes": 775443,
+        "exists": true,
+        "lfs": true,
+        "connector_status": "success"
+      },
+      {
+        "target": "C13-G1-AR-POST2022-254308",
+        "expected_bytes": 723410,
+        "observed_bytes": 723410,
+        "exists": true,
+        "lfs": true,
+        "connector_status": "success"
+      },
+      {
+        "target": "C13-G1-AR-POST2022-273809",
+        "expected_bytes": 361235,
+        "observed_bytes": 361235,
+        "exists": true,
+        "lfs": true,
+        "connector_status": "success"
+      },
+      {
+        "target": "C13-G1-AA-ENACTED-1950",
+        "expected_bytes": 6491633,
+        "observed_bytes": 6491633,
+        "exists": true,
+        "lfs": true,
+        "connector_status": "success"
+      },
+      {
+        "target": "C13-G2-acq03-020-b4",
+        "expected_bytes": 21902,
+        "observed_bytes": 21902,
+        "exists": true,
+        "lfs": false,
+        "connector_status": "success"
+      },
+      {
+        "target": "C13-G2-acq03-021-b4",
+        "expected_bytes": 1058089,
+        "observed_bytes": 1058089,
+        "exists": true,
+        "lfs": true,
+        "connector_status": "success"
+      },
+      {
+        "target": "C13-G2-acq03-015-b3",
+        "expected_bytes": 609985,
+        "observed_bytes": 609985,
+        "exists": true,
+        "lfs": true,
+        "connector_status": "success"
+      },
+      {
+        "target": "C13-G2-acq03-023-b4",
+        "expected_bytes": 1076879,
+        "observed_bytes": 1076879,
+        "exists": true,
+        "lfs": true,
+        "connector_status": "success"
+      },
+      {
+        "target": "C13-G2-acq03-024-b4",
+        "expected_bytes": 41367,
+        "observed_bytes": 41367,
+        "exists": true,
+        "lfs": false,
+        "connector_status": "success"
+      },
+      {
+        "target": "C13-G2-acq03-025-b4",
+        "expected_bytes": 1489638,
+        "observed_bytes": 1489638,
+        "exists": true,
+        "lfs": true,
+        "connector_status": "success"
+      },
+      {
+        "target": "C13-G1-BSA-COMM-252352",
+        "expected_bytes": 922833,
+        "observed_bytes": 922833,
+        "exists": true,
+        "lfs": true,
+        "connector_status": "success"
+      },
+      {
+        "target": "C13-G1-BNS-COMM-252353",
+        "expected_bytes": 922134,
+        "observed_bytes": 922134,
+        "exists": true,
+        "lfs": true,
+        "connector_status": "success"
+      },
+      {
+        "target": "C13-G1-BNSS-COMM-252354",
+        "expected_bytes": 924297,
+        "observed_bytes": 924297,
+        "exists": true,
+        "lfs": true,
+        "connector_status": "success"
+      }
+    ],
+    "matching_count": 15,
+    "observed_total_bytes": 17565129,
+    "non_lfs_count": 2,
+    "revision_attested": false,
+    "byte_hash_verified": false,
+    "interpretation": "Two known PDF copies are non-LFS in connector metadata. The reviewed collector excludes PDFs without valid LFS SHA256 and marks coverage incomplete. A future exact revision-qualified read-only digest bridge or separately approved bounded byte verification is required; never infer current SHA256 from path, size, or historical copy."
+  },
+  "judicial_recovery": {
+    "frozen_population_git_blob": "a336e161ae822ac7651548a342f9e32e5c06fc67",
+    "source_path": "legal_knowledge/audit_work/C13-A1-OCR/RECOVERY_POPULATION.csv",
+    "parsed_rows": 8174,
+    "excluded_flagged_rows": 8077,
+    "in_corpus_text_risk_rows": 97,
+    "flagged_held": 71,
+    "flagged_unheld": 8006,
+    "all_p0_rows": 609,
+    "p0_c11_flagged_rows": 562,
+    "p0_c11_held": 28,
+    "p0_c11_unheld": 534,
+    "p0_other_held_risk_rows": 47,
+    "all_held_rows": 168,
+    "all_held_unique_sha256": 136,
+    "p0_pending": {
+      "rows": 534,
+      "court": "High Court of Punjab and Haryana",
+      "tier": "T1",
+      "prior_state": "DELETED_AS_NO_MILITARY_KEYWORD",
+      "all_host_allowlisted_in_frozen_register": true,
+      "host": "indian-high-court-judgments.s3.ap-south-1.amazonaws.com",
+      "syntactically_valid_exact_https_urls": 534,
+      "syntactically_valid_sha256": 534,
+      "distinct_sha256": 534,
+      "distinct_urls": 534,
+      "distinct_doc_ids": 534,
+      "distinct_population_ids": 534,
+      "hash_overlap_with_all_frozen_held_rows": 0,
+      "url_overlap_with_all_frozen_held_rows": 0,
+      "by_year": {
+        "2006": 1,
+        "2007": 3,
+        "2008": 3,
+        "2009": 9,
+        "2010": 15,
+        "2011": 14,
+        "2012": 18,
+        "2013": 35,
+        "2014": 15,
+        "2015": 15,
+        "2016": 28,
+        "2017": 33,
+        "2018": 21,
+        "2019": 21,
+        "2020": 11,
+        "2021": 8,
+        "2022": 14,
+        "2023": 32,
+        "2024": 72,
+        "2025": 76,
+        "2026": 90
+      }
+    },
+    "limitations": [
+      "Frozen register only, not current HF holdings or current crawler SQLite state. All 534 are still candidates, not proven missing now.",
+      "URL syntax, prior host allowlist label and expected SHA256 syntax are not live transport or content verification. No new requests to judgment source host.",
+      "No restriction predicate applied to select or publish individual identities; only safe aggregates retained. Exact pilot manifest must run current pinned guard and current holdings comparison before acquisition.",
+      "The 609 full P0 rows include 47 held in-corpus text-risk rows in addition to 562 C11 flagged P&H titles. Do not confuse P0 total with unheld P0 target."
+    ]
+  },
+  "new_source_findings": [
+    {
+      "request_id": "A4-ACQ-012",
+      "instrument": "MoD Notification E-7, 17 June 1960",
+      "source": "https://upload.indiacode.nic.in/showfile?actid=AC_CEN_28_38_00012_195046_1517807323368&filename=armyrules1954.pdf&type=rule",
+      "location": "Rule 147A, following explanatory note",
+      "observation": "Official-hosted consolidated text attributes Rule 147A to E-7 and cites Gazette Extraordinary Part I Section 3 dated 20 June 1960; note describes deemed insertion. Section/part designation preserved as printed, not independently verified. Screenshots at candidate physical indices 251/252 timed out. Exact original not located.",
+      "verification": "OFFICIAL_COMPILED_TEXT_ONLY",
+      "original_acquired": false
+    },
+    {
+      "request_id": "A4-ACQ-002",
+      "instrument": "SRO 235 of 1991 (new related lead; not Rule 15 authority)",
+      "sources": [
+        "https://www.legitquest.com/act/army-rules-1954/8d51",
+        "https://indiankanoon.org/doc/1494488/",
+        "https://upload.indiacode.nic.in/showfile?actid=AC_CEN_28_38_00012_195046_1517807323368&filename=armyrules1954.pdf&type=rule"
+      ],
+      "observation": "Secondary compilation footnotes 13-16 attribute Military Secretary wording in Rule 13A to SRO 235/1991. Delhi HC Division Bench UOI v HC Chandel, 14 Aug 2007, paras 13-14, quotes and construes amended Rule 13A; not Rule 15. Official-hosted Army Rules text omits Military Secretary in both Rule 13A and Rule 15, while secondary Rule 15 also omits it. Treat conflicting compilation as distinct versions; do not move the wording to Rule 15 or assign current authority. Original SRO 235 and any Rule 15-specific authority remain unlocated.",
+      "verification": "OFFICIAL_COMPILATION_TEXT_AND_JUDGMENT_REPRODUCTION; PRIMARY_ORIGINAL_PENDING",
+      "original_acquired": false
+    },
+    {
+      "request_id": "A4-ACQ-001",
+      "instrument": "SRO 258, 27 November 2002",
+      "source": "https://upload.indiacode.nic.in/showfile?actid=AC_CEN_28_38_00012_195046_1517807323368&filename=armyrules1954.pdf&type=rule",
+      "location": "Rule 22 Explanation and following attribution",
+      "observation": "Official-hosted compilation confirms the attribution previously observed only in derivative sources. Do not establish exact operative wording or commencement from text extraction without original notification.",
+      "verification": "OFFICIAL_COMPILED_TEXT_ONLY",
+      "original_acquired": false
+    }
+  ],
+  "source_downloads": 0,
+  "hf_writes": 0,
+  "legal_promotions": 0,
+  "original_requests_closed": 0,
+  "acquisition_eligible": false
+}
