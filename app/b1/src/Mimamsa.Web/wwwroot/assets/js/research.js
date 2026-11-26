@@ -8,7 +8,7 @@ import { ProtectedViewer } from "./viewer.js";
 
 const add = (el, ...k) => append(el, k);
 export const R = {
-  query: "", filters: emptyFilters(), result: null, flat: false, sort: "relevance", selected: -1, plainConfirmed: false,
+  query: "", filters: emptyFilters(), result: null, flat: false, sort: "relevance", page: 1, service: "", selected: -1, plainConfirmed: false,
   tabs: [], active: -1, ctxTab: "evidence", ctxOpen: false, railOpen: false, resultsOpen: false, el: null, reqSeq: 0, abort: null,
 };
 
@@ -22,6 +22,9 @@ export function paramsFromUrl(url) {
   for (const k of ["type", "court", "status"]) for (const v of sp.getAll(k)) R.filters[k].add(v);
   R.filters.year_from = sp.get("year_from") || ""; R.filters.year_to = sp.get("year_to") || "";
   R.plainConfirmed = sp.get("plain") === "1";
+  R.page = Math.max(1, parseInt(sp.get("page") || "1", 10) || 1);
+  R.sort = ["new", "old"].includes(sp.get("sort")) ? sp.get("sort") : "relevance";
+  R.service = ["army", "navy", "airforce"].includes(sp.get("service")) ? sp.get("service") : "";
 }
 function searchParams() {
   const sp = new URLSearchParams();
@@ -30,6 +33,9 @@ function searchParams() {
   if (R.filters.year_from) sp.set("year_from", R.filters.year_from);
   if (R.filters.year_to) sp.set("year_to", R.filters.year_to);
   if (R.plainConfirmed) sp.set("plain", "1");
+  if (R.service) sp.set("service", R.service);
+  if (R.sort !== "relevance") sp.set("sort", R.sort);
+  if (R.page > 1) sp.set("page", String(R.page));
   return sp;
 }
 export function researchUrl() { const s = searchParams().toString(); return "/r" + (s ? "?" + s : ""); }
@@ -96,9 +102,10 @@ export function toggleCtx() {
 }
 
 // ------------------------------------------------------------------ search
-export async function runSearch({ push = true } = {}) {
+export async function runSearch({ push = true, keepPage } = {}) {
   const head = $("#results-head"), list = $("#results-list");
   if (!head) return;
+  if (!(keepPage ?? !push)) R.page = 1;       // a new query, filter, sort or service starts at page 1 (C14 F10)
   if (push) R.nav.replace(researchUrl());
   if (!R.query.trim()) { R.result = null; renderResults(); renderFacets(); return; }
   const seq = ++R.reqSeq;
@@ -110,7 +117,7 @@ export async function runSearch({ push = true } = {}) {
   try {
     const res = await api("/api/search?" + searchParams().toString(), { signal: R.abort.signal });
     if (seq !== R.reqSeq) return;           // a later query won (UX-14)
-    R.result = res; R.selected = -1;
+    R.result = res; R.selected = -1; R.page = res.page || 1;
     announce(res.state === "results" ? `${res.total_documents} documents, ${res.total_passages} passages` : res.state === "empty" ? "No published documents match" : "The query could not be read");
   } catch (e) {
     if (e.name === "AbortError" || seq !== R.reqSeq) return;
@@ -162,15 +169,21 @@ function renderResults() {
     return;
   }
   const docsCount = r.total_documents, pass = r.total_passages;
-  add(head, 
+  const groupsCount = r.total_groups ?? docsCount;
+  add(head,
     h("div.results-count", h("strong", r.state === "empty" ? "No results" : `${docsCount.toLocaleString("en-GB")} document${docsCount === 1 ? "" : "s"} · ${pass.toLocaleString("en-GB")} passage${pass === 1 ? "" : "s"}`),
-      r.shown_passages < pass ? h("span.muted", `showing the first ${r.shown_passages} passages`) : null),
-    h("div.runline", { "data-testid": "runline" }, `${r.run.mode_label} · semantic search ${r.run.semantic} · ${R.plainConfirmed ? "words only (operators removed on request) · " : ""}${[...R.filters.type, ...R.filters.court, ...R.filters.status].length + (R.filters.year_from || R.filters.year_to ? 1 : 0)} filter(s) · release ${r.run.release_id} · ${r.run.elapsed_ms} ms`),
-    r.chips?.length ? h("div.chips-row", { "aria-label": "How the query was read" }, r.chips.map((c) => h("span.qchip", { title: c.source || "" }, h("span.qchip-kind", c.kind), c.text))) : null,
+      r.state === "results" && r.page_count > 1 ? h("span.muted", `page ${r.page} of ${r.page_count} · ${groupsCount.toLocaleString("en-GB")} result group${groupsCount === 1 ? "" : "s"}`) : null),
+    h("div.runline", { "data-testid": "runline" }, `${r.run.mode_label} · semantic search ${r.run.semantic} · ${R.plainConfirmed ? "words only (operators removed on request) · " : ""}${r.run.service_label ? `service preference ${r.run.service_label} (ranking only) · ` : ""}${[...R.filters.type, ...R.filters.court, ...R.filters.status].length + (R.filters.year_from || R.filters.year_to ? 1 : 0)} filter(s) · release ${r.run.release_id} · ${r.run.elapsed_ms} ms`),
+    r.chips?.length ? h("div.chips-row", { "aria-label": "How the query was read" }, r.chips.map((c) => c.kind === "suggestion"
+      ? h("button.qchip.qchip-suggest", { type: "button", title: "Run this spelling instead. Your query ran as typed.", onclick: () => { R.query = c.source; const q = $("#q"); if (q) q.value = c.source; R.plainConfirmed = false; runSearch(); } }, h("span.qchip-kind", "suggestion"), c.text)
+      : h("span.qchip", { title: c.source || "", "data-kind": c.kind }, h("span.qchip-kind", kindLabel(c.kind)), c.text))) : null,
     filterChips().length ? h("div.chips-row", { "aria-label": "Active filters" }, filterChips()) : null,
-    r.state === "results" ? h("div.results-tools",
-      h("label", "Sort ", h("select", { onchange: (e) => { R.sort = e.target.value; renderResults(); } },
+    r.state === "results" || R.service ? h("div.results-tools",
+      h("label", "Sort ", h("select#sort", { onchange: (e) => { R.sort = e.target.value; runSearch(); } },
         h("option", { value: "relevance", selected: R.sort === "relevance" }, "Relevance"), h("option", { value: "new", selected: R.sort === "new" }, "Date, newest"), h("option", { value: "old", selected: R.sort === "old" }, "Date, oldest"))),
+      h("label", { title: "Raises ranked results from the chosen service and lowers those of other services. Identifier and case-name matches keep their place; nothing is excluded." }, "Service ",
+        h("select#service", { onchange: (e) => { R.service = e.target.value; runSearch(); } },
+          [["", "All services"], ["army", "Army"], ["navy", "Navy"], ["airforce", "Air Force"]].map(([v, l]) => h("option", { value: v, selected: R.service === v }, l)))),
       h("label", h("input", { type: "checkbox", checked: R.flat, onchange: (e) => { R.flat = e.target.checked; renderResults(); } }), " Flat passages")) : null);
   if (r.state === "empty") {
     add(list, h("div.empty", h("h2", "No published documents match"),
@@ -180,31 +193,34 @@ function renderResults() {
       h("p.muted", "This is a statement about the published library in this installation only. It is not evidence that no authority exists.")));
     return;
   }
+  // Groups come from the server (one per instrument; editions and language versions nested), in page order.
   const groups = [];
   const byDoc = new Map();
-  for (const p of r.passages) {
-    if (R.flat) { groups.push({ doc: r.documents[p.doc_id], hits: [p] }); continue; }
-    if (!byDoc.has(p.doc_id)) { const g = { doc: r.documents[p.doc_id], hits: [] }; byDoc.set(p.doc_id, g); groups.push(g); }
-    byDoc.get(p.doc_id).hits.push(p);
-  }
-  if (R.sort !== "relevance") groups.sort((a, b) => ((a.doc.issue_date || "") < (b.doc.issue_date || "") ? -1 : 1) * (R.sort === "new" ? -1 : 1));
+  for (const g of r.groups || []) { const e = { doc: r.documents[g.doc_id], hits: [], variants: g.variants || [], total: g.passage_count || 0 }; byDoc.set(g.doc_id, e); groups.push(e); }
+  if (R.flat) { groups.length = 0; for (const p of r.passages) groups.push({ doc: r.documents[p.doc_id], hits: [p], variants: [] }); }
+  else for (const p of r.passages) byDoc.get(p.doc_id)?.hits.push(p);
   let idx = 0;
   for (const g of groups) {
     const d = g.doc;
-    const shown = R.flat ? g.hits : g.hits.slice(0, 3);
+    if (!d || !g.hits.length) continue;
+    const shown = R.flat ? g.hits : g.hits.slice(0, 2);
     const li = h("div.rgroup", { "data-doc": d.doc_id },
       h("a.rgroup-title", { href: shown[0].link, onclick: (e) => { e.preventDefault(); openFromHit(shown[0], false); } }, d.title || d.doc_id),
       h("div.rgroup-meta", h("span", typeLabel(d.type)), d.language === "hi" ? h("span", { lang: "en" }, "Hindi text") : null, h("span", d.court || d.issuer || "Issuer not recorded"), d.issue_date ? h("span", fmtDate(d.issue_date)) : null,
-        d.neutral_citation ? h("span.mono", d.neutral_citation) : null, (d.case_numbers || []).slice(0, 2).map((c) => h("span.mono", c)), d.number && !d.neutral_citation ? h("span", d.number) : null),
-      h("div.rgroup-prov", { "aria-label": "Provenance" }, h("span", `Source ${host(d.source_url)}`), h("span.mono", `copy ${short(d.copy_sha256)}`),
-        h("span", `retrieved ${fmtDate(d.retrieved_at) || "not recorded"}`), h("span", `corpus status: ${d.corpus_status} (display only)`),
-        d.candidate_outcomes ? h("span", candidateChip("Candidate outcomes are automated and not verified"), " outcome candidates") : null));
+        d.neutral_citation ? h("span.mono", d.neutral_citation) : null, (d.case_numbers || []).slice(0, 2).map((c) => h("span.mono", c)), d.number && !d.neutral_citation ? h("span", d.number) : null,
+        d.candidate_outcomes ? h("span", candidateChip("Candidate outcomes are automated and not verified"), " outcomes") : null),
+      h("details.rgroup-prov", h("summary", { "aria-label": "Provenance" }, `${host(d.source_url)} · copy ${short(d.copy_sha256)} · ${statusLabel(d.corpus_status)}`),
+        h("div", h("span", `Source ${host(d.source_url)}`), h("span.mono", `copy ${short(d.copy_sha256)}`),
+          h("span", `retrieved ${fmtDate(d.retrieved_at) || "not recorded"}`), h("span", `corpus status: ${d.corpus_status} (display only)`))),
+      g.variants.length ? h("div.rgroup-variants", "Also held: ", g.variants.map((v, k) => [k ? " · " : "",
+        h("a", { href: v.link, title: v.title || v.doc_id, onclick: (e) => { e.preventDefault(); openFromHit({ link: v.link, doc_id: v.doc_id, page: v.page, passage_id: v.passage_id }, false); } }, v.label)])) : null);
     for (const p of shown) {
       const i = idx++;
       const states = [];
       if (p.ocr) states.push(chip("warning", "OCR", "OCR text: for search only. Quote from the original page."));
       if (p.low_confidence) states.push(chip("warning", "Low OCR confidence"));
       const reason = p.tier === "identifier" ? chip("checked", "Identifier", p.reasons.join("; "))
+        : p.tier === "case_name" ? chip("checked", "Case name", p.reasons.join("; "))
         : p.tier === "document" ? chip("reason", "Document match", p.reasons.join("; "))
         : p.tier === "title" ? chip("reason", "Title match", p.reasons.join("; "))
         : p.tier === "mention" ? chip("reason", "Mention", p.reasons.join("; ")) : chip("reason", "Lexical", p.reasons.join("; "));
@@ -217,11 +233,26 @@ function renderResults() {
       row._hit = p;
       add(li, row);
     }
-    if (!R.flat && g.hits.length > 3) add(li, h("div.muted", { style: "font-size:12px;margin-top:4px" }, `${g.hits.length - 3} more passage(s) in this document`));
+    const total = Math.max(g.total || 0, g.hits.length);
+    if (!R.flat && total > shown.length) add(li, h("div.muted.more-passages", `${total - shown.length} more passage(s) in this document`));
     add(list, li);
   }
+  if (r.page_count > 1) add(list, pager(r));
 }
 
+function pager(r) {
+  const go = (n) => { R.page = n; runSearch({ keepPage: true }); $("#results-list")?.scrollTo(0, 0); };
+  return h("nav.pager", { "aria-label": "Result pages" },
+    h("button.btn.btn-small", { type: "button", disabled: r.page <= 1 || null, onclick: () => go(r.page - 1) }, "Previous"),
+    h("span.muted", `Page ${r.page} of ${r.page_count}`),
+    h("button.btn.btn-small", { type: "button", disabled: r.page >= r.page_count || null, onclick: () => go(r.page + 1) }, "Next"));
+}
+
+const KIND_LABELS = { identifier: "identifier", alias: "alias", case_name: "case name", not_held: "not held", ambiguous: "ambiguous", abbreviation: "abbreviation", suggestion: "suggestion" };
+function kindLabel(k) { return KIND_LABELS[k] || k; }
+const STATUS_LABELS = { in_force: "In force (crawler)", amended: "Amended (crawler)", partly_repealed: "Partly repealed (crawler)", repealed: "Repealed (crawler)",
+  superseded: "Superseded (crawler)", overruled: "Overruled (crawler)", unknown: "Status unknown" };
+export function statusLabel(v) { return STATUS_LABELS[v] || `${v} (crawler)`; }
 function visibleHits() { return $$("#results-list .hit"); }
 function select(i) {
   const rows = visibleHits();
@@ -276,11 +307,12 @@ function renderFacets() {
   if (!commander) add(box, group("court", "Court or issuer"));
   const years = (facets.year || []).map((v) => +v.value).filter(Boolean);
   const yf = h("fieldset.facet", h("legend", "Year"),
-    h("div.yearrange", h("label.visually-hidden", { for: "yf" }, "From year"), h("input#yf", { inputmode: "numeric", placeholder: years.length ? String(Math.min(...years)) : "from", value: R.filters.year_from }),
-      "–", h("label.visually-hidden", { for: "yt" }, "To year"), h("input#yt", { inputmode: "numeric", placeholder: years.length ? String(Math.max(...years)) : "to", value: R.filters.year_to }),
+    h("div.yearrange", h("label.visually-hidden", { for: "yf" }, "From year"), h("input#yf", { inputmode: "numeric", placeholder: "from", value: R.filters.year_from }),
+      "–", h("label.visually-hidden", { for: "yt" }, "To year"), h("input#yt", { inputmode: "numeric", placeholder: "to", value: R.filters.year_to }),
       h("button.btn.btn-small", { type: "button", onclick: () => { R.filters.year_from = $("#yf").value.trim(); R.filters.year_to = $("#yt").value.trim(); runSearch(); } }, "Apply")));
+  if (years.length) add(yf, h("p.hint.year-hint", `Results span ${Math.min(...years)}–${Math.max(...years)}`));
   add(box, yf);
-  if (!commander) add(box, group("status", "Corpus status (display only)"));
+  if (!commander) add(box, group("status", "Corpus status (display only)", statusLabel));
   add(box, h("p.sr-hint", "Counts are documents in the published library matching the query. Statuses are crawler summaries, not legal applicability."));
 }
 
@@ -727,7 +759,7 @@ export function resetResearch() {
   for (const t of R.tabs) { try { t.viewer && t.viewer.destroy(); } catch { /* ignore */ } }
   if (R.abort) { try { R.abort.abort(); } catch { /* ignore */ } }
   R.reqSeq++;
-  Object.assign(R, { query: "", filters: emptyFilters(), result: null, flat: false, sort: "relevance", selected: -1, plainConfirmed: false,
+  Object.assign(R, { query: "", filters: emptyFilters(), result: null, flat: false, sort: "relevance", page: 1, service: "", selected: -1, plainConfirmed: false,
                      tabs: [], active: -1, ctxTab: "evidence", ctxOpen: false, railOpen: false, resultsOpen: false, el: null, abort: null });
   window.__mimamsaViewer = null; window.__mimamsaLastCopy = null;
 }

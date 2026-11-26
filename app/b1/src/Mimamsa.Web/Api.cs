@@ -69,9 +69,11 @@ public static partial class Api
             if (raw.Length > 1000) return Json(new { state = "parser_error", mode = "parser_error", error = "The query is longer than 1,000 characters.", error_position = 1000 });
             var filters = new SearchFilters(Set(q["type"]), Set(q["court"]), Int(q["year_from"]), Int(q["year_to"]), Set(q["status"]));
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            var res = s.Search.Search(raw, filters, q["plain"] == "1");
+            var service = q["service"].ToString() is { Length: > 0 } sv && sv != "all" ? sv : null;
+            var res = s.Search.Search(raw, filters, q["plain"] == "1", service);
+            var pg = s.Search.Page(res, Int(q["page"]) ?? 1, Int(q["page_size"]) ?? SearchService.DefaultPageSize, q["sort"].ToString());
             var ms = sw.Elapsed.TotalMilliseconds;
-            return Json(SearchDto(res, s, ms));
+            return Json(SearchDto(res, pg, q["sort"].ToString() is { Length: > 0 } so ? so : "relevance", s, ms));
         });
 
         app.MapGet("/api/documents/{docId}", async (HttpContext ctx, string docId, AppServices s) =>
@@ -230,13 +232,23 @@ public static partial class Api
         gate = GateText,
     };
 
-    static object SearchDto(SearchResult r, AppServices s, double ms)
+    static object SearchDto(SearchResult r, SearchService.ResultPage rp, string sort, AppServices s, double ms)
     {
         var ix = s.Search.Index;
         var docs = new Dictionary<string, object>();
         var passages = new List<object>();
         var terms = r.HighlightTerms.ToHashSet(StringComparer.Ordinal);
-        foreach (var h in r.Hits)
+        string Link(int passage)
+        {
+            var p = ix.Passages[passage]; var d = ix.Docs[ix.DocOf(passage)];
+            return $"/d/{Uri.EscapeDataString(d.DocId)}?p={p.Page}&a={p.PassageId}&copy={d.CopySha[..12]}";
+        }
+        var groups = rp.Groups.Select(g => new
+        {
+            doc_id = ix.Docs[g.Doc].DocId, service = ix.Service[g.Doc], passage_count = rp.PassageCounts.GetValueOrDefault(g.Doc),
+            variants = g.Variants.Select(v => new { doc_id = ix.Docs[v.Doc].DocId, label = v.Label, title = ix.Docs[v.Doc].Title, language = ix.Docs[v.Doc].Language, link = Link(v.Passage), page = ix.Passages[v.Passage].Page, passage_id = ix.Passages[v.Passage].PassageId }),
+        }).ToList();
+        foreach (var h in rp.Hits)
         {
             var p = ix.Passages[h.PassageIndex];
             var d = ix.Docs[ix.DocOf(h.PassageIndex)];
@@ -255,11 +267,13 @@ public static partial class Api
         {
             state = r.State, mode = r.Mode, chips = r.Chips.Select(c => new { kind = c.Kind, text = c.Text, source = c.Source }),
             error = r.Error, error_position = r.ErrorPosition, total_passages = r.TotalPassages, total_documents = r.TotalDocuments,
-            shown_passages = passages.Count, passages, documents = docs,
+            shown_passages = passages.Count, passages, documents = docs, groups,
+            page = rp.Page, page_size = rp.PageSize, page_count = rp.PageCount, total_groups = rp.TotalGroups, sort,
             highlight_terms = r.HighlightTerms.Concat(r.HighlightPhrases.SelectMany(x => x)).Where(t => t.Length > 1 && !Text.Stopwords.Contains(t)).Distinct().Take(60),
             facets = r.Facets.ToDictionary(kv => kv.Key, kv => kv.Value.Select(v => new { value = v.Value, count = v.Count })),
             run = new { mode_label = r.Mode == "identifier" ? "Identifier match first, then lexical" : r.Mode == "lexical" ? "Lexical (BM25)" : "Not run",
-                        semantic = "not part of B1", release_id = s.Generation.Release.ReleaseId, elapsed_ms = Math.Round(ms, 1) },
+                        semantic = "not part of B1", release_id = s.Generation.Release.ReleaseId, elapsed_ms = Math.Round(ms, 1),
+                        service = r.Service, service_label = r.Service is { } sv2 && Mimamsa.Core.Legal.LegalIdentifierResolver.ServiceLabels.TryGetValue(sv2, out var sl) ? sl : null },
             notes = r.Notes,
         };
     }
