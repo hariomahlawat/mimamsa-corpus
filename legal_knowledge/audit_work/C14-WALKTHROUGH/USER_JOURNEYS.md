@@ -149,7 +149,7 @@ At 2560 px the PDF is rendered 1530 px wide; the page is taller than the screen 
 | `/cite/…` permalink (UI) | "The cited copy is not available in this installation." |
 | `/api/cite` (corrected, see CORRECTIONS.md C1) | With the real copy hash: `CITED_COPY_ELIGIBLE` before withdrawal, then `CITED_COPY_UNAVAILABLE` after, with no id, hash or page leaked |
 | Viewer already open in the User's tab | **Still shows the page and metadata, with no notice** (F05) |
-| `/d/<doc>` deep link | **Empty research home, no notice** (F05) |
+| `/d/<doc>` deep link | Standard "Not available" notice in the document pane (corrected: CORRECTIONS.md C3; originally recorded as no notice) |
 | Restore | No control (F17) |
 
 **Follow-up probe** (`scripts/withdrawal_open_viewer.cjs`, second document): same result. The 5-page file was fully delivered before withdrawal, so a mid-transfer cut-off was **not tested**.
