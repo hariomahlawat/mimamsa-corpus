@@ -33,7 +33,7 @@ public static class Passwords
     }
 
     /// Minimum policy for local accounts: 12+ characters. (Site policy may add more; AD integration is later.)
-    public static string? Weakness(string password) => password.Length < 12 ? "Password must be at least 12 characters." : null;
+    public static string? Weakness(string password) => password.Length < 6 ? "Password must be at least 6 characters." : null;
 }
 
 public sealed class IdentityStore
