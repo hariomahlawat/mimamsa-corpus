@@ -285,7 +285,10 @@ class _Windows:
             # name inside the private, still-pinned child.
             os.rename(pending, directory / RECEIPT_NAME)
         except OSError:
-            pending.unlink(missing_ok=True)
+            try:
+                os.unlink(pending)
+            except FileNotFoundError:
+                pass
             raise
 
 
