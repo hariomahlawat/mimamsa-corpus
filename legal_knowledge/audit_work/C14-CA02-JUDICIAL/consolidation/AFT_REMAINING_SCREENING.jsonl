@@ -750,3 +750,35 @@
 {"id": "AFT-GUW-798", "url": "https://aftrbghy.nic.in/judgement/OA-08 of 2019.pdf", "status": "eligible-local", "sha256": "948387a75190300b8540ffcdfef6460702e097199e06f41225ef9943467e358d", "pages": 1, "ocr": 0}
 {"id": "AFT-GUW-799", "url": "https://aftrbghy.nic.in/judgement/OA-09 of 2020.pdf", "status": "eligible-local", "sha256": "005fc808c2ae1a399f1424ab570f975481065b51c502c07e49d4ea6d5cac4173", "pages": 11, "ocr": 0}
 {"id": "AFT-GUW-800", "url": "https://aftrbghy.nic.in/judgement/OA-09-2018.pdf", "status": "text-review", "page": 2}
+{"id": "AFT-GUW-801", "url": "https://aftrbghy.nic.in/judgement/OA-10 of 2020.pdf", "status": "marking-review", "page": 15}
+{"id": "AFT-GUW-802", "url": "https://aftrbghy.nic.in/judgement/OA-10 of 2023.pdf", "status": "eligible-local", "sha256": "81af4ec9b1e364a25cd37fa860b93a3bce3b9ff10d7b0b8cfba4c751c7008aa0", "pages": 1, "ocr": 0}
+{"id": "AFT-GUW-803", "url": "https://aftrbghy.nic.in/judgement/OA-10-2014.pdf", "status": "text-review", "page": 3}
+{"id": "AFT-GUW-804", "url": "https://aftrbghy.nic.in/judgement/OA-10-2018.pdf", "status": "eligible-local", "sha256": "9934aa2d5b749a19325c1976d3320cb959760f8b49e11119230769ce952c7261", "pages": 1, "ocr": 0}
+{"id": "AFT-GUW-805", "url": "https://aftrbghy.nic.in/judgement/OA-11 of 2015.pdf", "status": "eligible-local", "sha256": "b581986e8ec6c5af21e98ef5eecd67372cfb69a6b70859405e266a2531b540df", "pages": 6, "ocr": 0}
+{"id": "AFT-GUW-806", "url": "https://aftrbghy.nic.in/judgement/OA-11 of 2023.pdf", "status": "eligible-local", "sha256": "8dd7d25466d25129ae6c7ea7525500336116d59301146d65d2d96d3c679e594a", "pages": 2, "ocr": 0}
+{"id": "AFT-GUW-807", "url": "https://aftrbghy.nic.in/judgement/OA-11-2016.pdf", "status": "eligible-local", "sha256": "e641352761e005f86555502626318a08352df233449dcfaeb4a512630893bbba", "pages": 2, "ocr": 0}
+{"id": "AFT-GUW-808", "url": "https://aftrbghy.nic.in/judgement/OA-12 of 2018.pdf", "status": "eligible-local", "sha256": "224d1847f2c0f3ea477eebc4737971b7bd298c4bf91b3bd555ba923deef0af44", "pages": 2, "ocr": 0}
+{"id": "AFT-GUW-809", "url": "https://aftrbghy.nic.in/judgement/OA-12 of 2022.pdf", "status": "eligible-local", "sha256": "43d4d27ad27953c149d7b356bcc3b3ce0c16913ba71353690a193a470f049ad6", "pages": 5, "ocr": 0}
+{"id": "AFT-GUW-810", "url": "https://aftrbghy.nic.in/judgement/OA-12-2018.pdf", "status": "text-review", "page": 2}
+{"id": "AFT-GUW-811", "url": "https://aftrbghy.nic.in/judgement/OA-13 of 2017 dated 23-10-2017.pdf", "status": "eligible-local", "sha256": "89b8815ebb9093d50d53dbba630715c0a2018d079dead4fe3aed4d66c0ecb056", "pages": 1, "ocr": 0}
+{"id": "AFT-GUW-812", "url": "https://aftrbghy.nic.in/judgement/OA-13 of 2018.pdf", "status": "eligible-local", "sha256": "1f1f55f3a1d8387e43a59267df589a679366e576e3fe78fe537e41510a5f43e6", "pages": 1, "ocr": 0}
+{"id": "AFT-GUW-813", "url": "https://aftrbghy.nic.in/judgement/OA-13-2015.pdf", "status": "eligible-local", "sha256": "a2138de9e08b8db3d68a82d6daa7496d8fa2681ff304b98578a44b2ab11e53e2", "pages": 5, "ocr": 0}
+{"id": "AFT-GUW-814", "url": "https://aftrbghy.nic.in/judgement/OA-14 of 2021.pdf", "status": "eligible-local", "sha256": "aa81b11660b3eab8aabbc7a99f55824c8905f044240059276e5e0e9296e32817", "pages": 10, "ocr": 0}
+{"id": "AFT-GUW-815", "url": "https://aftrbghy.nic.in/judgement/OA-14 of 2023.pdf", "status": "marking-review", "page": 1}
+{"id": "AFT-GUW-816", "url": "https://aftrbghy.nic.in/judgement/OA-14-2014.pdf", "status": "text-review", "page": 12}
+{"id": "AFT-GUW-817", "url": "https://aftrbghy.nic.in/judgement/OA-14-2018 dated 03-08-2018.pdf", "status": "eligible-local", "sha256": "fe0ab7fceab6aac0f2434a65476be025f48a25f712a314a8d76c2fb4fcf911e1", "pages": 8, "ocr": 1}
+{"id": "AFT-GUW-818", "url": "https://aftrbghy.nic.in/judgement/OA-15 of 2018.pdf", "status": "text-review", "page": 2}
+{"id": "AFT-GUW-819", "url": "https://aftrbghy.nic.in/judgement/OA-15 of 2019.pdf", "status": "text-review", "page": 2}
+{"id": "AFT-GUW-820", "url": "https://aftrbghy.nic.in/judgement/OA-15-2017 order dated 25-05-2017.pdf", "status": "text-review", "page": 6}
+{"id": "AFT-GUW-821", "url": "https://aftrbghy.nic.in/judgement/OA-15-2018.pdf", "status": "text-review", "page": 3}
+{"id": "AFT-GUW-822", "url": "https://aftrbghy.nic.in/judgement/OA-16 of 2017 _ MA-18 of 2017 dated 24-10-2017.pdf", "status": "marking-review", "page": 4}
+{"id": "AFT-GUW-823", "url": "https://aftrbghy.nic.in/judgement/OA-16 of 2023.pdf", "status": "eligible-local", "sha256": "989b8c3e3ff0b97ea2aabf72bae4eb417f3249a0e9aabf5677698bb8e6aa3e64", "pages": 1, "ocr": 0}
+{"id": "AFT-GUW-824", "url": "https://aftrbghy.nic.in/judgement/OA-17 of 2023.pdf", "status": "eligible-local", "sha256": "fda7a0283c13e339404ee52c508225c5042e425c1295a732f4d0d252c4d753f3", "pages": 2, "ocr": 0}
+{"id": "AFT-GUW-825", "url": "https://aftrbghy.nic.in/judgement/OA-17-2017.pdf", "status": "eligible-local", "sha256": "87f2eb6f12ba6e313049ecea49aa92ec930d933daddfd5813ad637e52fac2b5b", "pages": 5, "ocr": 1}
+{"id": "AFT-GUW-826", "url": "https://aftrbghy.nic.in/judgement/OA-18 of 2020 with MA-11 of 2020.pdf", "status": "marking-review", "page": 12}
+{"id": "AFT-GUW-827", "url": "https://aftrbghy.nic.in/judgement/OA-18 of 2023.pdf", "status": "identity-review"}
+{"id": "AFT-GUW-828", "url": "https://aftrbghy.nic.in/judgement/OA-18-2018.pdf", "status": "text-review", "page": 2}
+{"id": "AFT-GUW-829", "url": "https://aftrbghy.nic.in/judgement/OA-19 of 18   11 July 18.pdf", "status": "eligible-local", "sha256": "30b7654e4ee4be72ddcc454642d2229b1140d116377f528b3597783ec83494c2", "pages": 4, "ocr": 0}
+{"id": "AFT-GUW-830", "url": "https://aftrbghy.nic.in/judgement/OA-19 of 2014 dated 23-10-2017.pdf", "status": "eligible-local", "sha256": "04181bebf006bb511d6a0d453ab3217cc9b5555935dba5dd789f47f0cc1da4aa", "pages": 2, "ocr": 1}
+{"id": "AFT-GUW-831", "url": "https://aftrbghy.nic.in/judgement/OA-19 of 2023.pdf", "status": "eligible-local", "sha256": "1209158f79b81fcc23bc89b49fc5b8b8a110b5b918bc36b4d94fdc8320199935", "pages": 2, "ocr": 0}
+{"id": "AFT-GUW-832", "url": "https://aftrbghy.nic.in/judgement/OA-20 of  2017.pdf", "status": "text-review", "page": 2}
