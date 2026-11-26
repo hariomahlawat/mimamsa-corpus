@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-26",
+  "baseline": "c1e4d461e208bf961fd6bc51584dad01df220e61",
+  "discovery_blob": "6c45f612a730ae7a466ca21e62eea6d9a90913d8",
+  "reference_hf_head_from_owner_receipt": "f4e6ba443ec9c0b89b2c5d21d0b5cda38f55d2dc",
+  "live_hf_connector_revision_not_exposed": true,
+  "scope_approval": "PENDING_INDEPENDENT_REVIEW",
+  "max_targets": 6,
+  "known_holdings": {
+    "C14-D02": {
+      "sha256": "b1deca270440059fe967c551c0d737e6fdef5434db69abb9bc10358759992ec0",
+      "path": "legal_knowledge/preservation/c5_working_store/b1/b1deca270440059fe967c551c0d737e6fdef5434db69abb9bc10358759992ec0/indiacode_A1955-19.pdf",
+      "bytes": 173255,
+      "pages": 1,
+      "disposition": "REUSE_HELD_COPY_NOT_ORIGINAL_SCHEDULE"
+    },
+    "C14-D05": {
+      "sha256": "d4449e9995b21fd52627811d08f9d21feda6a3678b7e5355b651242d152167f5",
+      "path": "data/raw/indiacode/2023/d4449e9995b21fd52627811d08f9d21feda6a3678b7e5355b651242d152167f5.pdf",
+      "pages": 112,
+      "disposition": "DISTINCT_PAGE_COUNT_EXISTING_COMPILATION"
+    },
+    "C14-D06": {
+      "sha256": "554b2b4ae3d9f09bf31e6e1ba2b2cb8a4e7f4f5ffd6f3156736752cbbce116d5",
+      "path": "data/raw/indiacode/2023/554b2b4ae3d9f09bf31e6e1ba2b2cb8a4e7f4f5ffd6f3156736752cbbce116d5.pdf",
+      "pages": 54,
+      "disposition": "DISTINCT_PAGE_COUNT_EXISTING_COMPILATION"
+    },
+    "C14-D07": {
+      "sha256": "572c79880b9f8effc8fa6e39b864101835a0fb5d85b194b90a99d170121a0562",
+      "path": "data/raw/indiacode/2023/572c79880b9f8effc8fa6e39b864101835a0fb5d85b194b90a99d170121a0562.pdf",
+      "pages": 282,
+      "disposition": "DISTINCT_PAGE_COUNT_EXISTING_COMPILATION"
+    }
+  },
+  "targets": [
+    {
+      "id": "C14-D01",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/Acts_of_the_Parliament_of_India_1955.pdf",
+      "request_id": "A4-ACQ-025",
+      "title": "Acts of the Parliament of India 1955, Act 19 including Schedule",
+      "enabled": false,
+      "expected_bytes": 17513943,
+      "expected_sha1": "d6dba48f111834d37bd1d32b839c089aa76aa638",
+      "expected_sha256": null,
+      "maximum_bytes": 50000000,
+      "identity_status": "PENDING",
+      "existing_holding": null
+    },
+    {
+      "id": "C14-D03",
+      "url": "https://www.indiacode.nic.in/repealedfileopen?rfilename=A1960-58.pdf",
+      "request_id": "A4-ACQ-025",
+      "title": "Repealing and Amending Act 1960 (58 of 1960)",
+      "enabled": false,
+      "expected_bytes": null,
+      "expected_sha1": null,
+      "expected_sha256": null,
+      "maximum_bytes": 50000000,
+      "identity_status": "PENDING",
+      "existing_holding": null
+    },
+    {
+      "id": "C14-D04",
+      "url": "https://egazette.gov.in/WriteReadData/2026/276593.pdf",
+      "request_id": "A4-ACQ-013",
+      "title": "Army Act section 12 notification No. 12(5)/2025-DMA(AG-II)",
+      "enabled": false,
+      "expected_bytes": null,
+      "expected_sha1": null,
+      "expected_sha256": null,
+      "maximum_bytes": 50000000,
+      "identity_status": "PENDING",
+      "existing_holding": null
+    },
+    {
+      "id": "C14-D05",
+      "url": "https://www.mha.gov.in/files/documents/250883_english01042024.pdf",
+      "request_id": "A4-ACQ-037",
+      "title": "Bharatiya Nyaya Sanhita 2023, Act 45, Gazette 250883",
+      "enabled": false,
+      "expected_bytes": null,
+      "expected_sha1": null,
+      "expected_sha256": null,
+      "maximum_bytes": 50000000,
+      "identity_status": "PENDING",
+      "existing_holding": {
+        "sha256": "d4449e9995b21fd52627811d08f9d21feda6a3678b7e5355b651242d152167f5",
+        "path": "data/raw/indiacode/2023/d4449e9995b21fd52627811d08f9d21feda6a3678b7e5355b651242d152167f5.pdf",
+        "pages": 112,
+        "disposition": "DISTINCT_PAGE_COUNT_EXISTING_COMPILATION"
+      }
+    },
+    {
+      "id": "C14-D06",
+      "url": "https://www.mha.gov.in/files/documents/250882_english_01042024_0.pdf",
+      "request_id": "A4-ACQ-037",
+      "title": "Bharatiya Sakshya Adhiniyam 2023, Act 47, Gazette 250882",
+      "enabled": false,
+      "expected_bytes": null,
+      "expected_sha1": null,
+      "expected_sha256": null,
+      "maximum_bytes": 50000000,
+      "identity_status": "PENDING",
+      "existing_holding": {
+        "sha256": "554b2b4ae3d9f09bf31e6e1ba2b2cb8a4e7f4f5ffd6f3156736752cbbce116d5",
+        "path": "data/raw/indiacode/2023/554b2b4ae3d9f09bf31e6e1ba2b2cb8a4e7f4f5ffd6f3156736752cbbce116d5.pdf",
+        "pages": 54,
+        "disposition": "DISTINCT_PAGE_COUNT_EXISTING_COMPILATION"
+      }
+    },
+    {
+      "id": "C14-D07",
+      "url": "https://www.mha.gov.in/files/documents/250884_2english_01042024.pdf",
+      "request_id": "A4-ACQ-037",
+      "title": "Bharatiya Nagarik Suraksha Sanhita 2023, Act 46, Gazette 250884",
+      "enabled": false,
+      "expected_bytes": null,
+      "expected_sha1": null,
+      "expected_sha256": null,
+      "maximum_bytes": 50000000,
+      "identity_status": "PENDING",
+      "existing_holding": {
+        "sha256": "572c79880b9f8effc8fa6e39b864101835a0fb5d85b194b90a99d170121a0562",
+        "path": "data/raw/indiacode/2023/572c79880b9f8effc8fa6e39b864101835a0fb5d85b194b90a99d170121a0562.pdf",
+        "pages": 282,
+        "disposition": "DISTINCT_PAGE_COUNT_EXISTING_COMPILATION"
+      }
+    }
+  ],
+  "not_in_batch": [
+    {
+      "id": "C14-D02",
+      "reason": "Held C5 copy; no re-download needed"
+    },
+    {
+      "id": "C14-D08",
+      "reason": "Derivative reference only"
+    },
+    {
+      "id": "C14-D09",
+      "reason": "Institutional reference only"
+    }
+  ],
+  "limitations": [
+    "Frozen C5 register and live HF metadata/filename searches checked; current HF revision not available from connector.",
+    "No exact-byte match established for new URLs; full hash-index comparison on local execution required. Absence of matching filename is not absence of same bytes.",
+    "All targets disabled; no wildcard or redirect authorisation. Original 23 archive targets remain separate."
+  ]
+}
