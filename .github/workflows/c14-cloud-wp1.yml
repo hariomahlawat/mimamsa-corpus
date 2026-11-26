@@ -39,7 +39,7 @@ jobs:
   metadata:
     # No live job on push, PR, scheduled event or rerun.
     # Provision this dedicated protected environment before enabling.
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/corpus/cloud-wp1-20261126' && github.run_attempt == 1 && inputs.code_commit == github.sha && inputs.operation == 'METADATA_GET_ONLY' && inputs.revision == 'f4e6ba443ec9c0b89b2c5d21d0b5cda38f55d2dc'
+    if: github.event_name == 'workflow_dispatch' && github.event.repository.private == true && github.repository == 'hariomahlawat/mimamsa-corpus' && github.ref == 'refs/heads/corpus/cloud-wp1-20261126' && github.run_attempt == 1 && inputs.code_commit == github.sha && inputs.operation == 'METADATA_GET_ONLY' && inputs.revision == 'f4e6ba443ec9c0b89b2c5d21d0b5cda38f55d2dc'
     environment: hf-corpus-metadata-read
     runs-on: ubuntu-latest
     timeout-minutes: 8
