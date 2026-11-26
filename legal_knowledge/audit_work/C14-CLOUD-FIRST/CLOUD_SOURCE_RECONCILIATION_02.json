@@ -1,0 +1,46 @@
+{
+  "schema": "c14-cloud-source-reconciliation-v1",
+  "date": "2026-11-26",
+  "baseline": "f1bbd15dc9a57531b0b061578fdceba94ff35753",
+  "previous_observation": "eb8231be156da7ea373041c6b92be5ec1ca39a19",
+  "scope": "Public indexed-text cross-check; no source bytes stored, no legal promotion",
+  "observations": [
+    {
+      "request_id": "A4-ACQ-033",
+      "title": "Repealing and Amending Act, 1957 (Act 36)",
+      "source": "https://www.indiacode.nic.in/repealedfileopen?rfilename=A1957-36.pdf",
+      "corroboration": "https://www.indiacode.nic.in/bitstream/123456789/1930/1/A1950-46.pdf",
+      "finding": "Indexed section 2 and First Schedule entry for Army Act 1950 (46 of 1950) identify repeal of section 194 and Schedule. Section 4 contains savings. Consolidated Army Act attributes the repeal to the same Act and Schedule.",
+      "verification": "INDEXED_TEXT_CROSSCHECKED_SCREENSHOT_FETCH_TIMEOUT",
+      "remaining": "Acquire exact public source carrier after deduplication and approval; visually inspect section 2, section 4, First Schedule entry, date and instrument boundaries. No legal closure."
+    },
+    {
+      "request_id": "A4-ACQ-034",
+      "title": "AFT Act commencement notification 13 June 2008",
+      "sources": [
+        {
+          "url": "https://aftjaipur.gov.in/",
+          "type": "official institutional reference",
+          "observation": "States effective date 15 June 2008 and SRO 14(E) dated 13 June 2008."
+        },
+        {
+          "url": "https://www.aft.gov.in/public/upload_act_rule_document/1777274017.pdf",
+          "type": "official-hosted third-party editorial compilation; not original Gazette",
+          "observation": "Indexed footnote also attributes commencement to S.R.O. 14(E), dated 13 June 2008."
+        },
+        {
+          "url": "https://www.casemine.com/act/in/5ed606db894ef2080ac4fb0f",
+          "type": "secondary reproduction",
+          "observation": "Indexed footnote instead uses S.O. 14(E), while dates agree."
+        }
+      ],
+      "verification": "INDEXED_REFERENCE_CORROBORATION_ONLY",
+      "finding": "Commencement date and notification date corroborated; exact SRO/SO prefix and original Gazette issue remain unresolved. Do not substitute later 2009 notifications with same number.",
+      "remaining": "Locate official original Gazette. Do not ingest or reproduce editorial compilation."
+    }
+  ],
+  "source_downloads": 0,
+  "hf_writes": 0,
+  "legal_promotions": 0,
+  "acquisition_eligible": false
+}
