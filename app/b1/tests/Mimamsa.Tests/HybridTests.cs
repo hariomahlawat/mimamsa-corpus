@@ -51,6 +51,24 @@ public class HybridTests
         }
     }
 
+    /// Codex review of PR #70: with hybrid on, a service preference whose multiplier is the same for every hit (the SYN
+    /// documents carry no service) must leave the hybrid order exactly as it was, including where dense-only
+    /// ("semantic") hits sit and where the raw-BM25 lexical tail beyond LexicalDepth sits.
+    [Fact]
+    public void ServicePreferenceKeepsHybridOrderWhenMultipliersAreEqual()
+    {
+        int last = Ix.N - 1;
+        var on = new SearchService(Ix, _ => false) { Semantic = new FixedScorer(last, last - 1), Hybrid = new HybridOptions(LexicalDepth: 3, DenseDepth: 5) };
+        foreach (var q in new[] { "notice", "hearing written notice allegation" })
+        {
+            var plain = on.Search(q, new SearchFilters());
+            var army = on.Search(q, new SearchFilters(), service: "army");
+            Assert.Equal("hybrid", plain.Mode);
+            Assert.True(plain.Hits.Count > 3, "the query must reach the lexical tail beyond LexicalDepth");
+            Assert.Equal(plain.Hits.Select(h => (h.PassageIndex, h.Tier)), army.Hits.Select(h => (h.PassageIndex, h.Tier)));
+        }
+    }
+
     [Fact]
     public void HybridModeIsReportedAndSemanticOnlyHitsAreLabelled()
     {

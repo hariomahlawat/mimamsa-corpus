@@ -40,6 +40,8 @@ setInterval(async () => {
   if (!S || document.hidden || !research.openDocumentCount()) return;
   // plain fetch: the poll only reads the epoch; it never changes the connection or session state shown to the user
   try { noteEpoch(await fetch("/api/policy", { credentials: "same-origin", cache: "no-store" })); } catch { /* next tick */ }
+  // a re-check that could not decide after an earlier epoch change is retried on every tick until it resolves
+  if (research.hasPendingRecheck()) research.revalidateOpenDocuments();
 }, POLICY_POLL_MS);
 
 // ------------------------------------------------------------------ shell

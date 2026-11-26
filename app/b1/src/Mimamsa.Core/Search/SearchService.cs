@@ -132,7 +132,7 @@ public sealed class SearchService
         ordered = ordered.Where(h => !_docHidden(_ix.Passages[h.PassageIndex].DocId)).ToList();
         if (service is not null && Legal.LegalIdentifierResolver.ServiceLabels.TryGetValue(service, out var svcLabel))
         {
-            ordered = ServicePreference(ordered, service);
+            ordered = ServicePreference(ordered, service, hybrid: mode == "hybrid");
             notes.Add($"Service preference: {svcLabel}. Ranked results from {svcLabel} instruments and judgments are raised and those of other services lowered; identifier, case-name and mention tiers are unchanged and nothing is excluded.");
         }
         else service = null;
@@ -150,15 +150,23 @@ public sealed class SearchService
 
     /// Re-orders only the ranked tiers ("lexical", "title"): a document of the preferred service scores ×1.6, one of
     /// another service ×0.5, a general document ×1.0. Pinned tiers keep their place and order. Deterministic.
-    List<Hit> ServicePreference(List<Hit> hits, string service)
+    /// Hybrid mode (Codex review of PR #70): fused RRF scores, the raw-BM25 lexical tail beyond LexicalDepth and
+    /// dense-only ("semantic") hits are not on one scale, so the preference is applied to a rank-based score
+    /// 1/(RrfK + position) over the incoming hybrid order (fused hits, then the tail). Equal multipliers therefore keep
+    /// that order exactly, and dense-only hits are ranked with the others instead of being treated as pinned.
+    /// Lexical-only search keeps the original BM25 × multiplier behaviour.
+    List<Hit> ServicePreference(List<Hit> hits, string service, bool hybrid = false)
     {
-        static bool Ranked(Hit h) => h.Tier is "lexical";
+        bool Ranked(Hit h) => h.Tier is "lexical" || (hybrid && h.Tier is "semantic");
         var fixedPart = hits.Where(h => !Ranked(h)).ToList();
         double F(Hit h) => _ix.Service[_ix.DocOf(h.PassageIndex)] is not { } s ? 1.0 : s == service ? SameServiceBoost : OtherServicePenalty;
-        var ranked = hits.Where(Ranked).Select((h, i) => (h, i, s: h.Score * F(h)))
+        var ranked = hits.Where(Ranked).Select((h, i) => (h, i, s: (hybrid ? 1.0 / (HybridRankK + i + 1) : h.Score) * F(h)))
                          .OrderByDescending(x => x.s).ThenBy(x => x.i).Select(x => x.h with { Score = x.s });
         return fixedPart.Concat(ranked).ToList();
     }
+
+    /// Same constant as the default RRF k (HybridOptions.RrfK), so a position weight matches the fusion's own scale.
+    public const int HybridRankK = 60;
 
     // ------------------------------------------------------------------ document-level pages and instrument groups (C14 F10, F11)
     public sealed record GroupVariant(int Doc, string Label, int Passage);

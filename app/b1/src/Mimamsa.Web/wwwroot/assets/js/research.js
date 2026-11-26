@@ -873,16 +873,28 @@ async function stillAvailable(t) {
   let j = null; try { j = await r.json(); } catch { return null; }
   return j?.state === "CITED_COPY_ELIGIBLE" || j?.state === "CITED_COPY_ELIGIBLE_NOT_CURRENT";
 }
+// Codex review of PR #70: a re-check that cannot decide (network error, 5xx) must not be lost once the new epoch has
+// been recorded, so it stays pending and the periodic poll retries it; and an epoch change that arrives while a pass
+// is running triggers another full pass, because the running one may have checked a tab before the change.
+let recheckPending = false, rerunRequested = false;
+export function hasPendingRecheck() { return recheckPending; }
 export function revalidateOpenDocuments() {
-  if (revalidating) return revalidating;
+  if (revalidating) { rerunRequested = true; return revalidating; }
   revalidating = (async () => {
-    const seen = new Set();
-    for (const t of [...R.tabs]) {
-      const key = t.docId + "|" + (t.copy || "");
-      if (t.unavailable || seen.has(key)) continue;
-      seen.add(key);
-      if ((await stillAvailable(t)) === false) invalidateDocument(t.docId);
-    }
+    do {
+      rerunRequested = false;
+      let unresolved = false;
+      const seen = new Set();
+      for (const t of [...R.tabs]) {
+        const key = t.docId + "|" + (t.copy || "");
+        if (t.unavailable || seen.has(key)) continue;
+        seen.add(key);
+        const ok = await stillAvailable(t);
+        if (ok === false) invalidateDocument(t.docId);
+        else if (ok === null) unresolved = true;
+      }
+      recheckPending = unresolved;
+    } while (rerunRequested);
   })().finally(() => { revalidating = null; });
   return revalidating;
 }

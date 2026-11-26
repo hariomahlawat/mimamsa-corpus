@@ -522,3 +522,24 @@ test("C14-S2-05 F15 lockout, Admin unlock with a reason, and the audit log", asy
   await expect(user.locator("#research")).toBeVisible();
   await anon.close();
 });
+
+// Codex review of PR #70: a re-check that fails transiently (503) after the epoch change must be retried by the poll,
+// not dropped because the new epoch was already recorded.
+test("C14-INT-01 F05 a transient failure of the re-check is retried and the viewer is still cleared", async ({ page, browser }) => {
+  const user = await browser.newPage();
+  await login(user);
+  await user.goto("/d/syn-m-guide?p=1");
+  await expect(user.locator(".pagewrap canvas").first()).toBeVisible();
+  let failed = 0;
+  await user.route("**/api/documents/syn-m-guide", async (route) => {
+    if (failed === 0) { failed++; return route.fulfill({ status: 503, contentType: "application/json", body: "{}" }); }
+    return route.continue();
+  });
+  await login(page, "admin");
+  const csrf = await adminCsrf(page);
+  const w = await page.request.post("/api/admin/withdraw", { headers: { "X-CSRF-Token": csrf, Origin: new URL(page.url()).origin }, data: { doc_id: "syn-m-guide", reason: "C14 integration transient re-check" } });
+  expect(w.status()).toBe(200);
+  await expect(user.locator(".docempty[data-invalidated]")).toContainText("This document is not available in this installation.", { timeout: 40_000 });
+  expect(failed).toBe(1);
+  await expect(user.locator(".pagewrap canvas")).toHaveCount(0);
+});
