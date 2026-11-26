@@ -20,7 +20,13 @@
         ]
       ]
     ],
-    "status": "context-and-visual-review-pending"
+    "status": "visual-false-positive-cleared-local",
+    "visual_page": 7,
+    "context": "Figure of speech in counsel\u2019s argument about res judicata",
+    "derivative_sha256": "4609360b1b9959c3df3657e257e19a7c31f875f5c3e3300420cebe8395bc2ffa",
+    "page_count": 10,
+    "ocr_pages": [],
+    "hf_verified": false
   },
   {
     "doc_id": "hc-ph-2007-cwp-8961-2007-phhc010661762007-1-2007-10-04",
@@ -43,7 +49,15 @@
         ]
       ]
     ],
-    "status": "context-and-visual-review-pending"
+    "status": "visual-false-positive-extraction-hold",
+    "visual_page": 11,
+    "context": "Classification of educational institutions in cited reasoning",
+    "sparse_pages": [
+      29
+    ],
+    "ocr_pages": [
+      29
+    ]
   },
   {
     "doc_id": "hc-ph-2015-cwp-8338-2012-phhc010902392012-1-2015-03-17",
@@ -63,6 +77,7 @@
     "context": "Classification of an employment role in the merits discussion",
     "derivative_sha256": "a0badbb47d87ab094d9ab51f93ec31f16e230573df35f3447a639750ac51d1d3",
     "page_count": 2,
+    "ocr_pages": [],
     "hf_verified": false
   },
   {
@@ -106,6 +121,7 @@
     "context": "Judicial narrative about information received by investigating police",
     "derivative_sha256": "cd2893cc2e189bd585c725ee447e31c583b88b56c5f337e5e9ba3d18a7af9dd1",
     "page_count": 5,
+    "ocr_pages": [],
     "hf_verified": false
   },
   {
@@ -179,7 +195,13 @@
         ]
       ]
     ],
-    "status": "context-and-visual-review-pending"
+    "status": "visual-false-positive-cleared-local",
+    "visual_page": 5,
+    "context": "Discussion of employee performance reports and promotion",
+    "derivative_sha256": "915a21b60cd787beeb2b0c762943000aef654aa86f3d630961c6220691c54d9a",
+    "page_count": 9,
+    "ocr_pages": [],
+    "hf_verified": false
   },
   {
     "doc_id": "hc-ph-2017-cwp-22278-2016-phhc010876462016-1-2017-02-20",
@@ -199,6 +221,7 @@
     "context": "Judicial discussion of the limits of writ jurisdiction",
     "derivative_sha256": "0a17ebc63599e5832a96a93df066b7d59a5df5c4d7e7284012a1e2fec73e1fdb",
     "page_count": 3,
+    "ocr_pages": [],
     "hf_verified": false
   },
   {
