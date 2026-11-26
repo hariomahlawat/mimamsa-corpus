@@ -2,14 +2,7 @@
 
 build_docs()  one metadata record per downloaded judgment, from the index row the crawler kept.
               Only what the index states is filled; the rest is null / empty.
-run()         stage 'relevance': the brief's keyword pass over the extracted text. Every judgment gets
-              relevant / borderline / rejected with its keyword counts.
-              REJECTED judgments (no military keyword at all: civil and other unrelated cases the
-              party-name pre-selection let through) are REMOVED from the corpus: metadata, text and
-              the raw file are deleted. What remains is one line in data/excluded_judgments.jsonl and
-              in reports/relevance.csv (case, source address, hash), so the filter can be audited and
-              a judgment fetched again. For relevant and borderline judgments it also reads statute
-              references ("section 69 of the Army Act") into statutes_cited and `cites` relations.
+run()         suspended during C14 non-destructive adoption; no source or derivative writes.
 """
 from __future__ import annotations
 
@@ -173,81 +166,10 @@ def load_excluded(paths: Paths) -> dict[str, dict]:
 
 
 def run(paths: Paths) -> dict:
-    stats: Counter = Counter()
-    rows, new_edges = [], []
-    excluded = load_excluded(paths)
-    doc_ids = {p.stem for p in paths.meta.glob("*.json")}
+    """Legacy mutation entry point is suspended during C14 adoption.
 
-    def have_section(doc_id: str, number: str) -> bool:
-        return (paths.sections / doc_id / f"{section_key(number)}.json").exists()
-
-    for path in sorted(paths.meta.glob("*.json")):
-        meta = json.loads(path.read_text(encoding="utf-8"))
-        if meta["doc_type"] not in ("judgment", "order"):
-            continue
-        if not meta.get("text_path") or not (paths.data.parent / meta["text_path"]).exists():
-            meta["relevance"] = {"status": "not_checked", "hits": 0, "keywords": {},
-                                 "note": "no extracted text (needs OCR or not yet extracted)"}
-            stats["not_checked"] += 1
-        else:
-            text = (paths.data.parent / meta["text_path"]).read_text(encoding="utf-8")
-            counts = keyword_counts(text)
-            status = classify(counts)
-            note = None
-            if (status == "rejected" and meta.get("text_method") == "ocr"
-                    and (meta.get("ocr_confidence") is None or meta["ocr_confidence"] < OCR_TRUST)):
-                # a scan read too poorly to trust "no keyword found": keep it for a person to look at
-                status, note = "not_checked", f"OCR confidence below {OCR_TRUST:.0f}: cannot tell from this text"
-            meta["relevance"] = {"status": status, "hits": sum(counts.values()), "keywords": counts, "note": note}
-            stats[status] += 1
-            if status == "not_checked":
-                pass
-            elif status != "rejected":
-                cited, edges = statute_refs(text, have_section)
-                meta["statutes_cited"] = [{**c, "act_doc_id": c["act_doc_id"] if c["act_doc_id"] in doc_ids else None}
-                                          for c in cited]
-                meta["topics"] = sorted({TOPIC_OF[k] for k in counts if k in TOPIC_OF}) if status == "relevant" else []
-                rel = [{"schema_version": SCHEMA_VERSION, "source_doc_id": meta["doc_id"], "type": "cites",
-                        "target_doc_id": t, "target_ref_raw": raw, "effective_date": None, "evidence": ev,
-                        "confidence": "extracted"} for t, raw, ev in edges]
-                meta["relations"] = [r for r in meta.get("relations", []) if r["type"] != "cites"] + rel
-                new_edges += rel
-                meta.setdefault("field_provenance", {}).update({"statutes_cited": "rule", "topics": "rule"})
-            else:
-                excluded[meta["sha256"]] = {
-                    "sha256": meta["sha256"], "doc_id": meta["doc_id"], "title": meta["title"], "court": meta.get("court"),
-                    "decided": meta.get("issue_date"), "source_url": meta["source_url"], "retrieved_at": meta["retrieved_at"],
-                    "reason": "no military keyword in the text", "keywords_checked": sorted(KEYWORDS)}
-                path.unlink()
-                # the text of a removed judgment is kept OUTSIDE the corpus (state/rejected_text, never pushed),
-                # so a later change to the keywords can be re-checked without downloading everything again
-                keep = paths.data.parent / "state" / "rejected_text"
-                keep.mkdir(parents=True, exist_ok=True)
-                (keep / f"{meta['sha256']}.txt").write_text(text, encoding="utf-8")
-                (paths.data.parent / meta["text_path"]).unlink(missing_ok=True)
-                paths.raw_file(meta["raw_path"]).unlink(missing_ok=True)
-                continue
-        write_json(path, meta)
-        r = meta["relevance"]
-        rows.append([meta["doc_id"], r["status"], r["hits"], "; ".join(f"{k}={v}" for k, v in sorted(r["keywords"].items())),
-                     meta.get("court") or "", meta.get("issue_date") or "", meta["title"][:150], meta["source_url"]])
-
-    rel_path = paths.data / "relations.jsonl"
-    old = [json.loads(l) for l in rel_path.read_text(encoding="utf-8").splitlines() if l.strip()] if rel_path.exists() else []
-    judgments = {r[0] for r in rows} | {e["doc_id"] for e in excluded.values()}
-    with (paths.data / "excluded_judgments.jsonl").open("w", encoding="utf-8") as fh:
-        for e in sorted(excluded.values(), key=lambda e: e["doc_id"]):
-            fh.write(json.dumps(e, ensure_ascii=False) + "\n")
-    rows += [[e["doc_id"], "rejected (removed)", 0, "", e.get("court") or "", e.get("decided") or "", e["title"][:150],
-              e["source_url"]] for e in excluded.values()]
-    stats["removed_as_not_military_total"] = len(excluded)
-    kept = [e for e in old if not (e["type"] == "cites" and e["source_doc_id"] in judgments)]
-    with rel_path.open("w", encoding="utf-8") as fh:
-        for e in kept + new_edges:
-            fh.write(json.dumps(e, ensure_ascii=False) + "\n")
-    paths.reports.mkdir(parents=True, exist_ok=True)
-    with (paths.reports / "relevance.csv").open("w", newline="", encoding="utf-8") as fh:
-        w = csv.writer(fh)
-        w.writerow(["doc_id", "status", "keyword_hits", "keywords", "court", "decided", "title", "source_url"])
-        w.writerows(sorted(rows, key=lambda r: (r[1], r[0])))
-    return {"judgments": len(rows), **dict(stats), "cites_edges": len(new_edges)}
+    Use shadow_assessment.assess on individually approved read-only inputs.
+    Do not return a successful stage result while downstream consumers still
+    expect mutable legacy metadata, relations and relevance.csv.
+    """
+    raise RuntimeError("C14 corpus mutation hold: legacy relevance is suspended")
