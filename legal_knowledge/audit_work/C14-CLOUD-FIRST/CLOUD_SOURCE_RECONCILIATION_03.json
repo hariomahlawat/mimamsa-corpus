@@ -1,0 +1,92 @@
+{
+  "schema": "c14-cloud-source-reconciliation-v1",
+  "date": "2026-11-26",
+  "baseline": "f1bbd15dc9a57531b0b061578fdceba94ff35753",
+  "prior": "d6b701840ddbd801a82c22f1b1bd70efc957033f",
+  "scope": "Public documentary discovery and targeted visual review only. No original bytes preserved; no active source configuration changes.",
+  "observations": [
+    {
+      "id": "C14-CF03-01",
+      "request_id": "A4-ACQ-035",
+      "document": "Tribunals Reforms Act 2026",
+      "carrier": "official-hosted Gazette reproduction",
+      "url": "https://nclat.nic.in/sites/default/files/2026-11/The%20Tribunals%20Reforms%20Act%202026.pdf",
+      "gazette_id": "CG-DL-E-13082026-275447",
+      "gazette_issue": "Part II Section 1 No 31, 13 August 2026",
+      "observed": "Cover and section 1 visually inspected, PDF page index 0. Act 17 of 2026 assent and publication 13 August 2026. Section 1(2) provides notification-based commencement.",
+      "verification": "COVER_VISUALLY_CONFIRMED",
+      "raw_bytes_acquired": false
+    },
+    {
+      "id": "C14-CF03-02",
+      "request_id": "A4-ACQ-035",
+      "document": "Official compiled Tribunals Reforms Act 2026",
+      "url": "https://www.legalaffairs.gov.in/static/uploads/2026/11/0679768caf7ab8afc7c22004ae7aa5e8.pdf",
+      "carrier": "Department of Legal Affairs hosted India Code compilation",
+      "physical_pages_inspected_zero_based": [
+        3,
+        13,
+        16
+      ],
+      "observed": [
+        "Printed p4 footnote 1 identifies commencement 25 August 2026 via SO 4713(E), dated 25 August 2026, Gazette Extraordinary Part II s3(ii).",
+        "Printed p14 First Schedule entry 11 lists AFT and Act 55 of 2007.",
+        "Printed p17 Second Schedule entry 9 substitutes AFT Act s9A, applying 2026 Act to appointment, qualifications and service terms of tribunal leadership and members."
+      ],
+      "verification": "TARGETED_VISUAL_CONFIRMED_COMPILATION_NOT_ORIGINAL_NOTIFICATION",
+      "raw_bytes_acquired": false
+    },
+    {
+      "id": "C14-CF03-03",
+      "request_id": "A4-ACQ-035",
+      "document": "SO 4713(E) commencement notification",
+      "url": "https://egazette.gov.in/WriteReadData/2026/275749.pdf",
+      "secondary_url": "https://gazettetracker.com/g/CG-DL-E-25082026-275749",
+      "observed": "Direct eGazette fetch timed out. Secondary index states all provisions commence on 25 August 2026; official compilation corroborates date. Section 3(1) separately provides for notification establishing Commission; not proof Commission established on that date.",
+      "verification": "ORIGINAL_UNAVAILABLE",
+      "raw_bytes_acquired": false
+    },
+    {
+      "id": "C14-CF03-04",
+      "request_id": "A4-ACQ-035",
+      "relation": "new related source candidate; not part of existing authorized acquisition scope",
+      "document": "National Tribunals Commission and Qualification, Selection, and Conditions of Service of Chairperson and Members of Tribunals Rules, 2026",
+      "url": "https://www.legalaffairs.gov.in/static/uploads/2026/11/b80a164230bca8e58be8dad0925bfb20.pdf",
+      "carrier": "Department of Legal Affairs eOffice-marked Gazette reproduction",
+      "gazette_id": "CG-DL-E-01102026-276693",
+      "gazette_issue": "Part II Section 3(i), No 785, issue dated 30 September 2026",
+      "notification": "GSR 856(E), dated 30 September 2026",
+      "physical_pages_inspected_zero_based": [
+        0,
+        21
+      ],
+      "observed": "Gazette cover and English printed p22 visually confirmed. Rule 1(2) links commencement to publication. Printed issue date differs from date in Gazette identifier; do not infer precise operative date until original publication metadata checked. Candidate direct locator https://egazette.gov.in/WriteReadData/2026/276693.pdf inferred from identifier, untested. Separate section 3 establishment notification not located in bounded searches.",
+      "verification": "COVER_AND_FIRST_ENGLISH_PAGE_VISUALLY_CONFIRMED",
+      "raw_bytes_acquired": false
+    },
+    {
+      "id": "C14-CF03-05",
+      "request_id": "A4-ACQ-033",
+      "document": "SO 3912(E) J&K Reorganisation Removal of Difficulties Order",
+      "url": "https://www.mha.gov.in/files/documents/AnnexureC16022026.pdf",
+      "alternate_url": "https://upload.indiacode.nic.in/showfile?actid=AC_LDK_189_1412_00001_00001_1609842350488&filename=removal_of_difficulties_order_2019-converted.pdf&type=order",
+      "observed": "Official MHA English extracted text printed pp7-8, paras 2(4),(5),(8)(a),(b), provides general continuation/extension and adaptation of existing references. No exact 'Army Act' occurrence in MHA indexed text. Do not describe as express Army Act textual amendment. Distinguish publication commencement of order from appointed day 31 Oct 2019. India Code alternative is converted carrier, not Gazette image.",
+      "verification": "OFFICIAL_TEXT_CROSSCHECKED_BOTH_SCREENSHOTS_TIMEOUT",
+      "raw_bytes_acquired": false
+    },
+    {
+      "id": "C14-CF03-06",
+      "request_id": "A4-ACQ-001",
+      "url": "https://indiacode.ecourtsindia.com/rules/army-rules-1954-059789cd/",
+      "observed": "Secondary derivative attributes Rule 22 Explanation to SRO 258 dated 27 November 2002; prior finding corroborated, original not located. Do not infer precise wording from derivative.",
+      "verification": "SECONDARY_TEXT_ONLY",
+      "raw_bytes_acquired": false
+    }
+  ],
+  "legal_status": "RESEARCH_CANDIDATES_NOT_LEGALLY_VERIFIED",
+  "source_downloads": 0,
+  "hf_writes": 0,
+  "legal_promotions": 0,
+  "acquisition_eligible": false,
+  "original_requests_closed": 0
+}
