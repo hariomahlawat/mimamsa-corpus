@@ -94,6 +94,7 @@ jobs:
           git rev-parse HEAD
           python -B -m unittest discover -s legal_knowledge/audit_work/C14-CA01-STATUTORY/runner -p "test_*.py" -v
           python -B -m unittest discover -s tests -p "test_legal_audit_c14_inventory_provider.py" -v
+          python -B -m unittest discover -s tests -p "test_legal_audit_c14_metadata*.py" -v
       - name: Relation graph integrity (no dangling KB/case/source/finding/review edges, no ID collisions)
         run: python legal_knowledge/audit_work/WS-D-QUALITY/scripts/relation_graph.py --no-write
       - name: Versioned statutory edges regenerate byte-identically (no unstated effective date without a flag)

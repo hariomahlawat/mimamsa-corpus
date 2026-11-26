@@ -1,7 +1,7 @@
 {
   "schema": "c14-wp1-metadata-commissioning-proposal-v1",
   "status": "PROPOSED_NOT_AUTHORIZED",
-  "code_review_pin": "9740c07904b79af3dc310fc9bde8301b04f2745f",
+  "historical_candidate_pin": "9740c07904b79af3dc310fc9bde8301b04f2745f",
   "repository": "hariomahlawat/mimamsa-corpus",
   "endpoint": "https://huggingface.co",
   "repo_type": "dataset",
@@ -9,6 +9,12 @@
   "approved_revision": null,
   "revision_note": "Historical last observed revision only, not independently established as the current head. Owner approval of exact immutable revision required.",
   "operation": "METADATA_GET_ONLY",
+  "approval": "Detached Ed25519 signature over the exact job approval. The independently provisioned owner key, reviewed code commit, runtime SHA-256, plan SHA-256, restriction inputs, HF revision, roots, private job root and fresh job name are bound. Approval expires within four hours.",
+  "authorized_request_kinds": [
+    "GET /api/whoami-v2 for the operation credential",
+    "GET the fixed private dataset's immutable revision identity",
+    "GET bounded tree pages for the two approved parent directories and seven exact stores"
+  ],
   "roots": [
     "data/raw/hc",
     "data/raw/indiacode",
@@ -30,16 +36,16 @@
     "receipt_bytes": 24000000
   },
   "output": {
-    "location": "fresh ACL-protected subdirectory of E:\\Mimamsa-Corpus-Runner\\jobs",
+    "location": "Fresh child of a dedicated private local NTFS jobs root",
     "filename": "metadata_inventory.json",
+    "receipt_schema": "c14-wp1-metadata-operation-receipt-v1",
     "share": "aggregate counts, exact revision and receipt digests only; keep path/hash inventory local for controlled review"
   },
   "required_owner_and_reviewer_gates": [
     "Approve immutable HF revision and seven-root scope; separately attest relevant local preservation store coverage and omissions.",
-    "Verify dataset-scoped read-only credential using owner HF settings; no token disclosure.",
-    "Targeted review of direct HF metadata protocol compatibility, bounded pagination and transport; no authenticated live test before scope approval.",
-    "Commission native protected job directory and process/egress controls; verify actual entry point, worker supervision, code pins and private receipt writing together.",
-    "Record separately authorized exact operation before lifting metadata-only interlock. Do not lift acquisition or preservation interlocks."
+    "Confirm the issued fine-grained token in owner HF settings. The worker checks the response from HF before requesting any tree metadata and fails closed if exact scope is unprovable.",
+    "Confirm actual direct access to huggingface.co over verified TLS from the dedicated Windows workstation. Record the first approved metadata-only operation with its private receipt.",
+    "Provision the protected local jobs root and independently establish the owner signing-key fingerprint before signing the exact operation. Keep acquisition and preservation interlocks in effect."
   ],
   "prohibitions": {
     "source_downloads": true,

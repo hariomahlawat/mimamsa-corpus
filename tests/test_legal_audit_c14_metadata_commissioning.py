@@ -8,7 +8,7 @@ from email.message import Message
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
-from urllib.parse import urlsplit,parse_qs
+from urllib.parse import urlsplit,parse_qs,quote,unquote
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'legal_knowledge/audit_work/C14-CA01-STATUTORY/runner'))
 from hf_metadata_transport import MetadataAPI, ENDPOINT, REPO, STORES
 from hf_metadata_job import DirectMetadataHTTPS, collect_receipt, supervise, bind_restriction, git_blob, save_candidate_receipt
@@ -28,7 +28,7 @@ class ProtocolTests(unittest.TestCase):
             u=urlsplit(url)
             if url==f'{BASE}/revision/{REV}':
                 return encode(dict(id=REPO,sha=REV,private=True)),None
-            store=u.path.split('/tree/'+REV+'/',1)[1]
+            store=unquote(u.path.split('/tree/'+REV+'/',1)[1])
             q=parse_qs(u.query)
             self.assertEqual(q['expand'],['false'])
             if store not in STORES:
@@ -37,7 +37,7 @@ class ProtocolTests(unittest.TestCase):
             suffix='page2.pdf' if 'cursor' in q else 'fixture.pdf'
             link=None
             if store==STORES[0] and 'cursor' not in q:
-                link=f'<{TREE}{store}?cursor=next%2Btoken>; rel="next"'
+                link=f'<{TREE}{quote(store, safe="")}?cursor=next%2Btoken>; rel="next"'
             return encode([dict(path=store+'/'+suffix,type='file',size=10,
                                lfs=dict(oid='b'*64,size=10))]),link
         r=collect_receipt(REV,exchange,lambda **kw:False)
@@ -69,10 +69,10 @@ class ProtocolTests(unittest.TestCase):
                                        expand=False,revision=REV,repo_type='dataset'))
 
     def test_continuation_scope_denied_before_second_request(self):
-        for dest in ('https://example.invalid/x',TREE+STORES[1],
-                     TREE.replace(REV,'c'*40)+STORES[0],
-                     TREE+STORES[0]+'?recursive=false&cursor=x',
-                     TREE+STORES[0]+'?cursor=x&cursor=y'):
+        for dest in ('https://example.invalid/x',TREE+quote(STORES[1],safe=''),
+                     TREE.replace(REV,'c'*40)+quote(STORES[0],safe=''),
+                     TREE+quote(STORES[0],safe='')+'?recursive=false&cursor=x',
+                     TREE+quote(STORES[0],safe='')+'?cursor=x&cursor=y'):
             with self.subTest(dest=dest):
                 calls=[]
                 def ex(url,cap,remaining):
@@ -85,12 +85,12 @@ class ProtocolTests(unittest.TestCase):
         n=[0]
         def exchange(url,cap,remaining):
             n[0]+=1
-            return b'[]',f'<{TREE}{STORES[0]}?cursor={n[0]}>; rel="next"'
+            return b'[]',f'<{TREE}{quote(STORES[0],safe="")}?cursor={n[0]}>; rel="next"'
         with patch('hf_metadata_transport.MAX_PAGES',3):
             with self.assertRaises(ValueError):self.tree(MetadataAPI(REV,exchange))
         self.assertEqual(n[0],3)
         with self.assertRaises(ValueError):
-            self.tree(MetadataAPI(REV,lambda *args:(b'[]',f'<{TREE}{STORES[0]}?cursor=same>; rel="next"')))
+            self.tree(MetadataAPI(REV,lambda *args:(b'[]',f'<{TREE}{quote(STORES[0],safe="")}?cursor=same>; rel="next"')))
 
     def test_deadline_and_body_size(self):
         clock=[0]
@@ -137,7 +137,7 @@ class TransportTests(unittest.TestCase):
     def test_direct_route_and_query_rejected(self):
         ex,calls=self.make()
         for url in ('https://example.invalid/x',f'{BASE}/resolve/{REV}/fixture.pdf',
-                    TREE+STORES[0]+'?recursive=false&expand=false&limit=1000',
+                    TREE+quote(STORES[0],safe='')+'?recursive=false&expand=false',
                     f'{BASE}/revision/{REV}?expand=all'):
             with self.assertRaises(ValueError):ex(url,100,1)
         self.assertEqual(calls,[])
