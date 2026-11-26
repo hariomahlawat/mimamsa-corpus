@@ -11,12 +11,12 @@
   },
   "all_job_statuses": {
     "marking-review": 42,
-    "verified-local": 357,
+    "verified-local": 417,
     "sparse-page-review": 1,
     "HTTPError": 5
   },
-  "extended_uploads": 358,
-  "pending_jobs": 825,
+  "extended_uploads": 418,
+  "pending_jobs": 765,
   "official_pilot": [
     {
       "id": "AFT-GUW-1",
@@ -89,6 +89,17 @@
       "pages": 3,
       "ocr": 0,
       "documentary_status": "Physical page 3 visually verified as running header and page number only; signed disposition ends on page 2"
+    },
+    {
+      "id": "SC-ROJER-MATHEW",
+      "url": "https://cdnbbsr.s3waas.gov.in/s3ec0490f1f4972d133619a60c30f3559e/documents/aor_notice_circular/55.pdf",
+      "sha256": "4a177cdf0b3089fa7ec4b60773cdbeb0c50efe54e2fd1cf03f41d68a233719eb",
+      "pages": 251,
+      "ocr": 0,
+      "ocr_screened": 251,
+      "status": "eligible-local",
+      "findings": [],
+      "documentary_status": "Official Supreme Court accessible SCR edition; original court PDF endpoint returned 503"
     },
     {
       "id": "AFT-GUW-7",
