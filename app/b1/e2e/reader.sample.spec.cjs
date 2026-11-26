@@ -24,7 +24,8 @@ test("R-01 Statutes: one entry per instrument, grouped by category, editions nes
   await expect(page.locator(".statute-overview")).toContainText("Statutes");
   await evidence(page, "r01-statutes-list-1920");
   await page.fill("#statute-filter", "sanhita");
-  await expect(page.locator(".instrument:visible")).toHaveCount(3);
+  // BNS and BNSS are 'Sanhita'; the BSA is the Bharatiya Sakshya Adhiniyam (the original expectation of 3 was wrong)
+  await expect(page.locator(".instrument:visible")).toHaveCount(2);
   await expect(page.locator(".statute-cat:visible")).toHaveCount(1);
   expect(await a11yBasics(page)).toEqual([]);
 });

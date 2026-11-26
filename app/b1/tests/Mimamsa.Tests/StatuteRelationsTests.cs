@@ -254,5 +254,19 @@ public class StatuteRelationsTests
         Assert.Equal("act-army-1950", army.PrimaryDocId);
         Assert.Contains(army.Editions, e => e.DocId == "act-army-1950-hi");
         Assert.All(r.CommanderTasks.SelectMany(t => t.Items), i => Assert.True(i.Found, $"{i.Kind} {i.Number} not found in held TOC"));
+        // optional evidence for the stream report (written only when a directory is given)
+        if (Environment.GetEnvironmentVariable("MIMAMSA_EVIDENCE_DIR") is { Length: > 0 } dir)
+        {
+            var stats = new
+            {
+                tables = r.TableStatus,
+                edges_by_table = r.Edges.GroupBy(e => e.TableDocId).ToDictionary(g => g.Key, g => new { rows = g.Count(), new_provisions = g.Count(e => e.NewProvision), with_old_section = g.Count(e => !e.NewProvision) }),
+                notices = r.Notices.ToDictionary(kv => kv.Key, kv => kv.Value.Select(n => n.Kind)),
+                instruments = r.Instruments.Count, statute_documents = r.FamilyOfDoc.Count,
+                text_reliability = g.Documents.Values.GroupBy(d => d.TextAssessment?.Reliability ?? "none").ToDictionary(x => x.Key, x => x.Select(d => d.DocId).OrderBy(s => s).ToList()),
+            };
+            Directory.CreateDirectory(dir);
+            File.WriteAllText(Path.Combine(dir, "relations_stats.json"), System.Text.Json.JsonSerializer.Serialize(stats, new System.Text.Json.JsonSerializerOptions { WriteIndented = true }));
+        }
     }
 }

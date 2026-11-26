@@ -38,6 +38,9 @@ function searchParams() {
 export function researchUrl() { const s = searchParams().toString(); return "/r" + (s ? "?" + s : ""); }
 
 // ------------------------------------------------------------------ layout
+// C14 S3: the home pane depends on the view (Library or Commander); re-render it when nothing is open.
+export function refreshHome() { if (R.el && !R.tabs.length) renderDocPane(); }
+
 export function mountResearch(main, nav) {
   R.nav = nav;
   if (R.el && main.contains(R.el)) return R.el;

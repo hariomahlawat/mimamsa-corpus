@@ -337,6 +337,10 @@ public static partial class Api
         {
             doc_id = d.DocId, doc_type = d.DocType, title = d.Title, number = d.Number, issuing_authority = d.IssuingAuthority,
             issue_date = d.IssueDate, effective_date = d.EffectiveDate, language = d.Language,
+            // C14 S3 (F07): the header's language marker and reliability chip read these (they were computed but not sent)
+            language_detected = d.TextAssessment?.DetectedLanguage,
+            language_name = LanguageName(d.Language ?? d.TextAssessment?.DetectedLanguage),
+            text_reliability = TextReliabilityDto(d),
             corpus_status = d.CorpusStatus, corpus_status_note = d.CorpusStatusNote, corpus_status_as_of = d.CorpusStatusAsOf,
             corpus_status_label = "Corpus status (display-only summary from the crawler metadata; not legal applicability)",
             text_method = d.TextMethod, ocr_confidence = d.OcrConfidence, quoting_permitted = d.QuotingPermitted,

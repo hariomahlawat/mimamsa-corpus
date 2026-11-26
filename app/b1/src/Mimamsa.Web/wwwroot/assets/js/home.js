@@ -79,6 +79,6 @@ function commanderHome(root, L, nav) {
         it.found ? h("span.muted.task-src", `${it.instrument || ""}${it.page ? ` · p.${it.page}` : ""}${it.omitted_as_printed ? " · printed as omitted" : ""}`) : null))))),
       h("div.home-card.task", { "data-task": "Forms" }, h("h3", "Forms"),
         h("p.muted", "Forms printed in the held Rules can be found by search. Forms are not extracted as separate records yet."),
-        h("ul.task-items", h("li", h("a", { href: "#", onclick: runQuery("\"form\" act:\"Army Rules\"") }, "Search the Army Rules for printed forms")))))),
+        h("ul.task-items", h("li", h("a", { href: "#", onclick: runQuery("\"form\" act:\"Army Rules\"") }, "Search the Army Rules for printed forms"))))),
     h("p.sr-hint", "The same search and documents as the Practitioner view; this page only organises held provisions by task."));
 }

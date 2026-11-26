@@ -115,6 +115,7 @@ async function route() {
     $("#q").value = research.R.query;
     research.mountResearch(main, nav);
     if (document.body.classList.contains("commander")) research.R.el.classList.add("no-ctx");
+    if (p === "/r") research.refreshHome();   // mountResearch keeps an existing shell, so a view switch must redraw the home
     await research.runSearch({ push: false });
     if (p.startsWith("/d/")) {
       const docId = decodeURIComponent(p.slice(3));
