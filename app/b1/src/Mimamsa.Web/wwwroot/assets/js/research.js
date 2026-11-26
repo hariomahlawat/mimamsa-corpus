@@ -203,7 +203,20 @@ function renderResults() {
   const groups = [];
   const byDoc = new Map();
   for (const g of r.groups || []) { const e = { doc: r.documents[g.doc_id], hits: [], variants: g.variants || [], total: g.passage_count || 0 }; byDoc.set(g.doc_id, e); groups.push(e); }
-  if (R.flat) { groups.length = 0; for (const p of r.passages) groups.push({ doc: r.documents[p.doc_id], hits: [p], variants: [] }); }
+  if (R.flat) {
+    // Codex review of PR #70: the server orders GROUPS by the chosen sort but keeps passages in relevance order. For a
+    // date sort, flat passages follow the server's group order (a variant's passages go with its group); within a
+    // group, and for relevance sort, the relevance order is kept. Stable, so equal keys keep relevance order.
+    let flat = r.passages;
+    if (R.sort !== "relevance") {
+      const rank = new Map();
+      (r.groups || []).forEach((g, i) => { rank.set(g.doc_id, i); for (const v of g.variants || []) if (!rank.has(v.doc_id)) rank.set(v.doc_id, i); });
+      flat = r.passages.map((p, i) => ({ p, i, k: rank.has(p.doc_id) ? rank.get(p.doc_id) : Number.MAX_SAFE_INTEGER }))
+        .sort((a, b) => a.k - b.k || a.i - b.i).map((x) => x.p);
+    }
+    groups.length = 0;
+    for (const p of flat) groups.push({ doc: r.documents[p.doc_id], hits: [p], variants: [] });
+  }
   else for (const p of r.passages) byDoc.get(p.doc_id)?.hits.push(p);
   let idx = 0;
   for (const g of groups) {

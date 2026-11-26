@@ -203,3 +203,20 @@ test("R-10 a superseded relationship response cannot restore withdrawn evidence"
     expect((await post("/api/admin/reinstate", { doc_id: "ref-bprd-comparison-bns-ipc", reason: "C14 R-10 restore after test" })).status()).toBe(200);
   }
 });
+
+// Codex review of PR #70: "Flat passages" must keep the selected date order (the server sorts groups, not passages).
+test("R-11 flat passages keep the date-newest order", async ({ page }) => {
+  await login(page);
+  await page.goto("/r?q=court+martial&sort=new");
+  await page.waitForFunction(() => document.querySelector("#results-head")?.getAttribute("aria-busy") !== "true" && !document.querySelector("#results-list.dim"));
+  await page.getByLabel("Flat passages").check();
+  const docs = await page.locator(".rgroup").evaluateAll((els) => els.map((e) => e.dataset.doc));
+  expect(docs.length).toBeGreaterThan(10);
+  const api = await (await page.request.get("/api/search?q=court+martial&sort=new")).json();
+  const date = (id) => api.documents[id]?.issue_date || "";       // undated sorts last
+  const keys = docs.map(date);
+  for (let i = 1; i < keys.length; i++) {
+    if (keys[i - 1] === "") expect(keys[i]).toBe("");
+    else if (keys[i] !== "") expect(keys[i] <= keys[i - 1]).toBe(true);
+  }
+});
