@@ -25,11 +25,13 @@ function server(port, site, db) {
 }
 
 if (!process.env.B1_SYN_SITE || !process.env.B1_SYN_DB) throw new Error("B1_SYN_SITE and B1_SYN_DB are required");
-const projects = [{ name: "syn", testMatch: /journeys\.spec\.cjs/, use: { baseURL: "http://127.0.0.1:5302" } }];
-const webServer = [server(5302, process.env.B1_SYN_SITE, process.env.B1_SYN_DB)];
+// Ports are configurable so parallel work streams on one host do not collide (defaults unchanged).
+const synPort = +(process.env.B1_SYN_PORT || 5302), samplePort = +(process.env.B1_SAMPLE_PORT || 5301);
+const projects = [{ name: "syn", testMatch: /journeys\.spec\.cjs/, use: { baseURL: `http://127.0.0.1:${synPort}` } }];
+const webServer = [server(synPort, process.env.B1_SYN_SITE, process.env.B1_SYN_DB)];
 if (process.env.B1_SAMPLE_SITE && process.env.B1_SAMPLE_DB) {
-  projects.push({ name: "sample", testMatch: /sample\.spec\.cjs/, use: { baseURL: "http://127.0.0.1:5301" } });
-  webServer.push(server(5301, process.env.B1_SAMPLE_SITE, process.env.B1_SAMPLE_DB));
+  projects.push({ name: "sample", testMatch: /sample\.spec\.cjs/, use: { baseURL: `http://127.0.0.1:${samplePort}` } });
+  webServer.push(server(samplePort, process.env.B1_SAMPLE_SITE, process.env.B1_SAMPLE_DB));
 }
 
 module.exports = {

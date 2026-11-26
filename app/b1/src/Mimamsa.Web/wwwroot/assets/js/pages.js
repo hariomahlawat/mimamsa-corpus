@@ -2,6 +2,7 @@
 import { api, ApiError, state } from "./api.js";
 import { h, append, clear, $, chip, candidateChip, fmtDate, short, typeLabel, toast, openDialog } from "./ui.js";
 import { mountResearch, openDocument, R } from "./research.js";
+import { renderRelations } from "./relations.js";
 const add = (el, ...k) => append(el, k);
 
 export function loginPage(main, onDone, message) {
@@ -56,23 +57,45 @@ export async function statutesPage(main, nav, docId, section) {
   const ws = h("div.workspace", h("nav.pane.rail#statute-rail", { "aria-label": "Acts, Rules and Regulations" }, h("span.skeleton.w80"), h("span.skeleton.w60")),
     h("div.pane#statute-main", { style: "display:flex;flex-direction:column;min-height:0" }));
   add(main, ws);
-  let list;
-  try { list = (await api("/api/statutes")).statutes; } catch (e) { $("#statute-rail").replaceChildren(h("p", { role: "alert" }, e.message)); return; }
+  let cat;
+  try { cat = await api("/api/statutes"); } catch (e) { $("#statute-rail").replaceChildren(h("p", { role: "alert" }, e.message)); return; }
+  const list = cat.statutes;
   const rail = clear($("#statute-rail"));
   const sm = $("#statute-main");
+  const link = (href, ...kids) => h("a", { href, onclick: (e) => { e.preventDefault(); nav.go(href); } }, ...kids);
+  const sHref = (id, sec) => `/s/${encodeURIComponent(id)}${sec ? "/" + encodeURIComponent(sec) : ""}`;
+  // C14 S3 (F11): one entry per instrument, grouped by category; editions, language versions and schedules nested
+  const instrumentEntry = (i) => h("div.instrument", { "data-key": i.key, "data-search": [i.title, i.number, i.category, ...i.editions.map((e) => e.label), ...i.schedules.map((e) => e.label)].join(" ").toLowerCase() },
+    link(sHref(i.primary_doc), h("div", i.title), h("div.sub", `${typeLabel(i.type)}${i.number ? " · " + i.number : ""}${i.editions.length + i.schedules.length > 1 ? ` · ${i.editions.length + i.schedules.length} copies` : ""}`)),
+    i.editions.length + i.schedules.length > 1 ? h("ul.editions", [...i.editions, ...i.schedules].map((e) => h("li", link(sHref(e.doc_id), h("span", { lang: e.language === "hi" ? "hi" : null }, e.label), h("span.muted", ` · ${e.page_count} pp`))))) : null);
   if (!docId) {
-    add(rail, h("h2", "Acts, Rules and Regulations"), h("div.statute-list", list.map((s) => h("a", { href: `/s/${encodeURIComponent(s.doc_id)}`, onclick: (e) => { e.preventDefault(); nav.go(`/s/${encodeURIComponent(s.doc_id)}`); } },
-      h("div", { lang: s.language === "hi" ? "hi" : null }, s.title || s.doc_id), h("div.sub", `${typeLabel(s.type)}${s.number ? " · " + s.number : ""} · ${s.page_count} pp${s.language === "hi" ? " · Hindi" : ""}`)))));
-    add(sm, h("div.docempty", h("h2", "Statutes"), h("p", "Choose an Act, Rules or Regulations to see its table of contents, read a section at its page in the original, and see temporal version candidates."),
-      h("p", chip("gated", "As-of date: closed"), " The as-of control is not available: the temporal chain is not established and no legal approval exists.")));
+    const filter = h("input#statute-filter", { type: "search", placeholder: "Filter by title, number or language", "aria-label": "Filter Acts, Rules and Regulations", spellcheck: "false" });
+    const groups = cat.categories.map((c) => ({ c, items: cat.instruments.filter((i) => i.category === c) })).filter((g) => g.items.length);
+    const listEl = h("div.statute-list", groups.map((g) => h("section.statute-cat", { "data-category": g.c }, h("h3", `${g.c} (${g.items.length})`), g.items.map(instrumentEntry))));
+    filter.addEventListener("input", () => {
+      const q = filter.value.trim().toLowerCase();
+      for (const el of listEl.querySelectorAll(".instrument")) el.hidden = !!q && !el.dataset.search.includes(q);
+      for (const sec of listEl.querySelectorAll(".statute-cat")) sec.hidden = ![...sec.querySelectorAll(".instrument")].some((x) => !x.hidden);
+    });
+    add(rail, h("h2", "Acts, Rules and Regulations"), filter, listEl, h("p.sr-hint", cat.note));
+    add(sm, h("div.page.statute-overview", h("div.page-inner",
+      h("h1", "Statutes"),
+      h("p", "Choose an instrument to see its table of contents, read a section at its page in the original, and see amendment, correspondence, commencement, repeal and savings records drawn from the held texts."),
+      h("p", chip("gated", "As-of date: closed"), " The as-of control is not available: the temporal chain is not established and no legal approval exists."),
+      h("div.home-grid", groups.map((g) => h("div.home-card", { "data-category": g.c }, h("h3", g.c),
+        h("ul.home-links", g.items.slice(0, 8).map((i) => h("li", link(sHref(i.primary_doc), i.title), h("span.muted", ` ${typeLabel(i.type)}${i.editions.length + i.schedules.length > 1 ? ` · ${i.editions.length + i.schedules.length} copies` : ""}`)))),
+        g.items.length > 8 ? h("p.muted", `${g.items.length - 8} more in the list`) : null))))));
     return;
   }
   const s = list.find((x) => x.doc_id === docId);
+  const inst = cat.instruments.find((i) => [...i.editions, ...i.schedules].some((e) => e.doc_id === docId));
   let toc;
   try { toc = await api(`/api/documents/${encodeURIComponent(docId)}/sections`); }
   catch (e) { add(sm, h("div.docempty", { role: "alert" }, h("h2", "Not available"), h("p", "This document is not available in this installation."))); return; }
   add(rail, h("a", { href: "/s", onclick: (e) => { e.preventDefault(); nav.go("/s"); } }, "← All statutes"),
-    h("h2", { style: "margin-top:12px", lang: s?.language === "hi" ? "hi" : null }, s?.title || docId),
+    h("h2", { style: "margin-top:12px", lang: s?.language === "hi" ? "hi" : null }, inst?.title || s?.title || docId),
+    inst && inst.editions.length + inst.schedules.length > 1 ? h("ul.editions.current", [...inst.editions, ...inst.schedules].map((e) => h("li",
+      e.doc_id === docId ? h("strong", { "aria-current": "true" }, e.label) : link(sHref(e.doc_id, section), e.label)))) : null,
     h("p.sr-hint", toc.note),
     toc.sections?.length ? h("ul.toc", { role: "tree", "aria-label": "Table of contents" }, toc.sections.map((e) => h("li", { role: "treeitem", "aria-selected": String(e.number === section) },
       h("a", { href: `/s/${encodeURIComponent(docId)}/${encodeURIComponent(e.number)}`, "aria-current": e.number === section ? "true" : null, tabindex: "0",
@@ -85,11 +108,16 @@ export async function statutesPage(main, nav, docId, section) {
   add(sm, asof);
   if (entry) {
     const provs = section ? [`s.${section}`, `r.${section}`, `reg.${section}`, `Section ${section}`, `Rule ${section}`] : [];
-    const strip = h("section.dochead", { "aria-label": "Amendment strip" }, h("h2", `Section ${entry.number}. ${entry.heading}`),
+    const strip = h("section.dochead.statute-section-head", { "aria-label": "Amendment strip" }, h("h2", `Section ${entry.number}. ${entry.heading}`),
       h("p.muted", "Heading and any amendment note are compilation text as printed in the held copy. They are not a verified amendment history."),
       entry.omitted_as_printed ? h("div.notice", "The held compilation prints this provision as omitted. Commencement and chain are not established here.") : null,
-      h("div#a4strip", h("span.skeleton.w60")));
+      h("div#a4strip", h("span.skeleton.w60")),
+      h("div#relstrip", { "aria-label": "Statutory relationships" }, h("span.skeleton.w40")));
     add(sm, strip);
+    api(`/api/documents/${encodeURIComponent(docId)}/relations?section=${encodeURIComponent(entry.number)}`).then((r) => {
+      const box = $("#relstrip"); if (!box) return; clear(box);
+      renderRelations(box, r, { nav, noticesCollapsed: true, onOpen: (d, page) => openDocument({ docId: d, page }, { newTab: d !== docId }) });
+    }).catch(() => { const box = $("#relstrip"); if (box) box.replaceChildren(h("p.muted", "Relationships could not be loaded.")); });
     add(sm, h("div#statute-doc", { style: "flex:1;min-height:0;display:flex" }));
     mountResearch($("#statute-doc"), nav).classList.add("statute-mode", "doc-open");
     await openDocument({ docId, page: entry.page, passage: entry.passage_id }, { push: false });
@@ -104,6 +132,16 @@ export async function statutesPage(main, nav, docId, section) {
         : h("p.muted", "No A4 temporal version candidate is recorded for this provision with evidence in this copy."));
     } catch { $("#a4strip").replaceChildren(h("p.muted", "Version candidates could not be loaded.")); }
   } else {
+    // instrument overview above the document: notices (commencement, repeal, savings) read from held texts
+    const ov = h("section.dochead.instrument-overview", { "aria-label": "Instrument overview" }, h("h2", inst?.title || s?.title || docId),
+      h("p.muted", `${typeLabel(s?.type)}${s?.number ? " · " + s.number : ""} · ${toc.sections?.length || 0} headings read from the held text. Choose a section in the contents to read it at its page.`),
+      h("details#instrument-notices", h("summary", "Commencement, repeal and savings records"), h("div#relstrip")));
+    add(sm, ov);
+    api(`/api/documents/${encodeURIComponent(docId)}/relations`).then((r) => {
+      const box = $("#relstrip"); if (!box) return;
+      if (!r.notices?.length) { box.replaceChildren(h("p.muted", "No commencement, repeal or savings record is read for this instrument from the held texts.")); return; }
+      renderRelations(box, r, { nav, onOpen: (d, page) => openDocument({ docId: d, page }, { newTab: d !== docId }) });
+    }).catch(() => {});
     add(sm, h("div#statute-doc", { style: "flex:1;min-height:0;display:flex" }));
     mountResearch($("#statute-doc"), nav).classList.add("statute-mode", "doc-open");
     await openDocument({ docId, page: 1 }, { push: false });
