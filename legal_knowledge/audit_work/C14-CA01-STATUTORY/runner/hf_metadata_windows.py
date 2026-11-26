@@ -55,7 +55,17 @@ class _AceHeader(ct.Structure):
 
 class _RenameInfo(ct.Structure):
     _fields_ = [('flags', wt.DWORD), ('directory', wt.HANDLE),
-                ('length', wt.DWORD), ('name', wt.WCHAR * (len(RECEIPT_NAME) + 1))]
+                ('length', wt.DWORD), ('name', wt.WCHAR)]
+
+
+def _rename_info(target):
+    """FILE_RENAME_INFO expects a full Windows path and a null RootDirectory."""
+    name = str(target).encode('utf-16-le')
+    storage = ct.create_string_buffer(max(ct.sizeof(_RenameInfo), _RenameInfo.name.offset + len(name) + 2))
+    header = _RenameInfo.from_buffer(storage)
+    header.length = len(name)
+    ct.memmove(ct.addressof(storage) + _RenameInfo.name.offset, name, len(name))
+    return storage
 
 
 def _location(jobs_root, job_name):
@@ -252,7 +262,7 @@ class _Windows:
             if not self.create_dir(str(path), ct.byref(attributes)):
                 _fail('could not create fresh private Windows job directory')
 
-    def commit_receipt(self, directory, directory_handle, raw):
+    def commit_receipt(self, directory, raw):
         pending = directory / _TEMP_NAME
         access = _GENERIC_WRITE | _DELETE | _READ_CONTROL | _FILE_READ_ATTRIBUTES
         with self.private_attributes(directory=False) as attributes:
@@ -272,8 +282,10 @@ class _Windows:
                 raise OSError('incomplete Windows receipt write')
             if not self.flush(handle):
                 _fail('could not flush Windows receipt')
-            rename = _RenameInfo(0, directory_handle, 2 * len(RECEIPT_NAME), RECEIPT_NAME)
-            if not self.set_file_info(handle, 3, ct.byref(rename), ct.sizeof(rename)):  # FileRenameInfo
+            # The private destination and its ancestors remain pinned for the
+            # full-path Win32 rename. The zeroed buffer forbids replacement.
+            rename = _rename_info(directory / RECEIPT_NAME)
+            if not self.set_file_info(handle, 3, rename, ct.sizeof(rename)):  # FileRenameInfo
                 _fail('could not atomically publish Windows receipt')
             published = True
         finally:
@@ -297,7 +309,7 @@ class _ReceiptJob:
             raise FileExistsError('Windows receipt already published')
         if not isinstance(raw, bytes) or not 0 < len(raw) <= MAX_RECEIPT_BYTES:
             raise ValueError('bounded nonempty receipt bytes required')
-        self._native.commit_receipt(self._path, self._handle, raw)
+        self._native.commit_receipt(self._path, raw)
         self._published = True
 
 
