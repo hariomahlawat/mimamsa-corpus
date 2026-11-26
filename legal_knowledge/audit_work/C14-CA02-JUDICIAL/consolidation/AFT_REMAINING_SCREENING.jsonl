@@ -990,3 +990,15 @@
 {"id": "AFT-GUW-1038", "url": "https://aftrbghy.nic.in/judgement/Order_dated_04_07_2025_in_OA_18_of_2023.pdf", "status": "eligible-local", "sha256": "e305c53a41e808f841ce35ea60966ef5f4d66eb823ca2a62f1ccebcfe63e575b", "pages": 1, "ocr": 1}
 {"id": "AFT-GUW-1039", "url": "https://aftrbghy.nic.in/judgement/Order_dated_04_Oct_2024_MA_(E)_30_2024.pdf", "status": "eligible-local", "sha256": "ad8dd03be07447b963389b5cc01ed923a001cf6d964df4efb19129cfa6e18691", "pages": 1, "ocr": 1}
 {"id": "AFT-GUW-1040", "url": "https://aftrbghy.nic.in/judgement/Order_dated_09_06_2025_in_OA_18_OF_2023.pdf", "status": "eligible-local", "sha256": "6aa99d0dd303026094b6b5b5dac085c84358c7c7eedbe21ce9566d6daa44ae4a", "pages": 3, "ocr": 3}
+{"id": "AFT-GUW-1041", "url": "https://aftrbghy.nic.in/judgement/Order_dated_17_Nov_2025.pdf", "status": "eligible-local", "sha256": "ee6f7d3a164144c5fba1e2c14bdb35b04ac87b9cfddc5e7e833d3993e1e539b9", "pages": 29, "ocr": 29}
+{"id": "AFT-GUW-1042", "url": "https://aftrbghy.nic.in/judgement/Order_dated_19_08_2025_MA(E)_10_2025_&_MA_13_2025.pdf", "status": "eligible-local", "sha256": "d5fca03f7ee87907261e11c410f5630624027347019321e3dcd9da2c0528dfb3", "pages": 1, "ocr": 1}
+{"id": "AFT-GUW-1043", "url": "https://aftrbghy.nic.in/judgement/Order_dated_21_02_2025_TA-01_of_2018_ &_ OA(A)_24_of_2023.pdf", "status": "eligible-local", "sha256": "8b94cdb8c4e3b87bec724d5c741b75a1429660d0a61cfc9a28e37e2bff8f6b38", "pages": 2, "ocr": 2}
+{"id": "AFT-GUW-1044", "url": "https://aftrbghy.nic.in/judgement/RA-01 of 2023 with MA-37 of 2023.pdf", "status": "eligible-local", "sha256": "b97c216cd5e96af6d1b7aedb2f31b4bd1baf8afe710eaab0bee5d7b626d1d282", "pages": 1, "ocr": 0}
+{"id": "AFT-GUW-1045", "url": "https://aftrbghy.nic.in/judgement/RA-01-2017 _ IN MA-212015 _ TA-06-2012_.pdf", "status": "eligible-local", "sha256": "83d039b6eaa9a1a4fb0ff7454e2a7c0bb4383991169d26d2eb9038c020eba593", "pages": 1, "ocr": 0}
+{"id": "AFT-GUW-1046", "url": "https://aftrbghy.nic.in/judgement/RA-01-2018_ OA-44-2017_.pdf", "status": "text-review", "page": 2}
+{"id": "AFT-GUW-1047", "url": "https://aftrbghy.nic.in/judgement/RA-02 of 2021 with MA 04 of 2021.pdf", "status": "identity-review"}
+{"id": "AFT-GUW-1048", "url": "https://aftrbghy.nic.in/judgement/RA-02 of 2023 with MA-38 of 2023.pdf", "status": "eligible-local", "sha256": "1a94a14331c1ea6cd3ca3430c9c4bb32057caf5d228182f02d32fbfbfe835926", "pages": 1, "ocr": 0}
+{"id": "AFT-GUW-1049", "url": "https://aftrbghy.nic.in/judgement/RA-02-2017_ IN MA-18-2017_ OA 16-17.pdf", "status": "eligible-local", "sha256": "e7d600223e3136094c5991a0cda36042ca4b3df312549431f1a3e2e903cbe853", "pages": 2, "ocr": 0}
+{"id": "AFT-GUW-1050", "url": "https://aftrbghy.nic.in/judgement/RA-03 of 2017.pdf", "status": "text-review", "page": 2}
+{"id": "AFT-GUW-1051", "url": "https://aftrbghy.nic.in/judgement/RA-03-2017_ in MA-35-2017 and OA-43-2017_.pdf", "status": "text-review", "page": 2}
+{"id": "AFT-GUW-1052", "url": "https://aftrbghy.nic.in/judgement/TA  01 of 2018 in Aoo CR 733 of 98 4 June monica.pdf", "status": "text-review", "page": 2}
