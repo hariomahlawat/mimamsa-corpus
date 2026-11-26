@@ -721,5 +721,23 @@ function edgeCard(e, d) {
 }
 
 export function currentDoc() { return R.tabs[R.active]; }
+
+/** Destroy every viewer and forget all research state; in-flight searches are invalidated (their results dropped). */
+export function resetResearch() {
+  for (const t of R.tabs) { try { t.viewer && t.viewer.destroy(); } catch { /* ignore */ } }
+  if (R.abort) { try { R.abort.abort(); } catch { /* ignore */ } }
+  R.reqSeq++;
+  Object.assign(R, { query: "", filters: emptyFilters(), result: null, flat: false, sort: "relevance", selected: -1, plainConfirmed: false,
+                     tabs: [], active: -1, ctxTab: "evidence", ctxOpen: false, railOpen: false, resultsOpen: false, el: null, abort: null });
+  window.__mimamsaViewer = null; window.__mimamsaLastCopy = null;
+}
+
+/** A URL naming a copy that is not eligible: the one generic notice, no content. */
+export function showDocNotice(notice, state) {
+  const pane = $("#docpane");
+  if (!pane) return;
+  clear(pane);
+  add(pane, h("div.docempty", { role: "alert" }, h("h2", "Not available"), h("p.notice", { "data-cite-state": state }, notice)));
+}
 export function hasResults() { return !!R.result; }
 void apiState;

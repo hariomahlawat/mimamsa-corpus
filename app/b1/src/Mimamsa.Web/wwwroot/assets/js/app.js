@@ -16,7 +16,19 @@ const nav = {
   replace(url) { if (location.pathname + location.search !== url) history.replaceState({}, "", url); },
 };
 window.addEventListener("popstate", () => route());
-window.addEventListener("mimamsa:unauthenticated", () => { S = null; apiState.session = null; renderShell(); loginPage(main, onLogin, "Your session has ended. Sign in again."); });
+// Review (PR #57): on an expired or rejected session every trace of the previous user's research context is destroyed
+// before the login page appears (viewers, tabs, cached metadata, results, pending requests, the search field).
+function clearUserState() {
+  research.resetResearch();
+  const q = document.getElementById("q"); if (q) q.value = "";
+  document.querySelectorAll("dialog[open]").forEach((d) => d.close());
+}
+window.addEventListener("mimamsa:unauthenticated", () => {
+  if (!S) return;
+  S = null; apiState.session = null; clearUserState();
+  history.replaceState({}, "", "/r");
+  renderShell(); loginPage(main, onLogin, "Your session has ended. Sign in again.");
+});
 
 // ------------------------------------------------------------------ shell
 function applyTheme() {
@@ -64,7 +76,7 @@ function renderShell() {
       h("button", { role: "menuitem", onclick: () => { const t = document.documentElement.dataset.theme === "dark" || (!document.documentElement.dataset.theme && matchMedia("(prefers-color-scheme: dark)").matches) ? "light" : "dark"; session.set("theme", t); applyTheme(); closeMenu(); } }, "Switch light / dark theme"),
       h("button", { role: "menuitem", onclick: () => { closeMenu(); help(); } }, "Keyboard shortcuts (?)"),
       h("hr"),
-      h("button", { role: "menuitem", onclick: async () => { try { await api("/api/logout", { method: "POST" }); } catch { /* ignore */ } S = null; apiState.session = null; research.R.tabs = []; research.R.result = null; research.R.el = null; renderShell(); loginPage(main, onLogin, "You have signed out."); } }, "Sign out"));
+      h("button", { role: "menuitem", onclick: async () => { try { await api("/api/logout", { method: "POST" }); } catch { /* ignore */ } S = null; apiState.session = null; clearUserState(); renderShell(); loginPage(main, onLogin, "You have signed out."); } }, "Sign out"));
     const closeMenu = () => { panel.hidden = true; btn.setAttribute("aria-expanded", "false"); };
     btn.addEventListener("click", () => { panel.hidden = !panel.hidden; btn.setAttribute("aria-expanded", String(!panel.hidden)); if (!panel.hidden) panel.querySelector("button").focus(); });
     panel.addEventListener("keydown", (e) => { if (e.key === "Escape") { closeMenu(); btn.focus(); } });
@@ -104,8 +116,23 @@ async function route() {
     if (p.startsWith("/d/")) {
       const docId = decodeURIComponent(p.slice(3));
       const copy12 = u.searchParams.get("copy");
-      await research.openDocument({ docId, page: parseInt(u.searchParams.get("p") || "1", 10), passage: u.searchParams.get("a"), copy: null }, { push: false });
-      void copy12;
+      const page = parseInt(u.searchParams.get("p") || "1", 10);
+      if (copy12) {
+        // ASR-E06: a copy named in the URL is resolved through the same citation and eligibility resolver; the
+        // current edition is never substituted for it.
+        let r;
+        try { r = await api(`/api/cite?doc=${encodeURIComponent(docId)}&sha=${encodeURIComponent(copy12)}&page=${page}`); }
+        catch { r = { state: "CITED_COPY_UNAVAILABLE", notice: "The cited copy is not available in this installation." }; }
+        if (r.state === "CITED_COPY_ELIGIBLE" || r.state === "CITED_COPY_ELIGIBLE_NOT_CURRENT") {
+          await research.openDocument({ docId, page: r.page, passage: r.state === "CITED_COPY_ELIGIBLE" ? u.searchParams.get("a") : null,
+            copy: r.state === "CITED_COPY_ELIGIBLE" ? null : r.copy, notice: r.notice || null, citeState: r.state, currentCopy: r.current_copy,
+            copyPages: r.copy_pages, firstRelease: r.first_release }, { push: false });
+        } else {
+          research.showDocNotice(r.notice, r.state);
+        }
+        return;
+      }
+      await research.openDocument({ docId, page, passage: u.searchParams.get("a"), copy: null }, { push: false });
     }
     return;
   }

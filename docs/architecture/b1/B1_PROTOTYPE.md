@@ -189,3 +189,18 @@ Test counts after F14 to F16:
 - Importer: 66/66.
 - Design: 117/117.
 - Oracle: 10/14, unchanged (the 4 hybrid cases fail by design).
+
+## 9. PR #57 automated review (3 findings, all verified as real and fixed)
+
+| Finding | Verification | Fix and test |
+| --- | --- | --- |
+| P1: a cited earlier edition was replaced by the current copy after a reload | **Real.** The `/d/` route ignored `copy=` and opened `copy: null`. | **Fixed.** A copy prefix in the URL is resolved through `/api/cite`, which uses the same eligibility resolver. The exact copy, its citation state and the notice are kept. An ineligible prefix shows the generic notice. Playwright test: cite the earlier edition, move to p.5, reload; the same copy is shown, and an unknown prefix gives the notice. |
+| P2: research state survived a 401 | **Real.** On expiry only the session was cleared. | **Fixed.** `resetResearch()` destroys the viewers, clears tabs, results and filters, aborts and invalidates pending searches, and empties the search field before the login page appears. Sign-out does the same. Playwright test: user A's session expires, user B signs in, and none of A's state is visible. |
+| P2: reconciliation looked up endpoints as IPv4 loopback | **Real.** This was introduced with the N2 4-tuple match: a socket on IPv6 or a LAN address looked absent and was refunded. | **Fixed.** The reservation stores ports only, so the reconciliation check now considers **every** socket with the port pair on any address. A charge is released only when no such socket exists, or when every such socket is in FIN_WAIT_2, TIME_WAIT or CLOSED. Unit tests cover these states. The live-drain path still matches the full 4-tuple, because there the real endpoints are known. |
+
+Counts:
+- C#: 88/88.
+- Playwright: 30/30 (21 SYN, 9 sample).
+- Importer: 66/66.
+- Design: 117/117.
+- Oracle: 10/14, unchanged.
