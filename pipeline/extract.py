@@ -1,20 +1,9 @@
-"""Stage 'extract': text from PDFs, with page markers, into data/text/<doc_id>.txt.
-
-Uses the PDF's text layer only. A document without a usable text layer is marked needs_ocr and gets
-no text file (bad text is never kept silently); the OCR stage will handle those. A text layer that
-exists but does not read as the expected language is kept and marked text_quality = suspect.
-
-Slanted text is dropped: India Code stamps a diagonal "IndiaCode" watermark on every page at
-download, and legal text is never set at an angle.
-"""
+"""Pure extraction helpers; legacy mutable writers suspended during C14."""
 from __future__ import annotations
 
-import json
 import re
 
-import pymupdf
-
-from .common import Paths, write_json
+from .common import Paths
 
 MIN_CHARS_PER_PAGE = 80          # fewer printable characters than this = the page has no usable text
 OCR_SHARE = 0.5                  # more than half the pages without text = the document needs OCR
