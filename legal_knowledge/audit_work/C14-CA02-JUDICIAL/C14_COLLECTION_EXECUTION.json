@@ -2,11 +2,10 @@
   "manifest_git_head": "c2f23357cc777ac4d8bb3432604307673d857ea4",
   "initial_hf_revision": "f4e6ba443ec9c0b89b2c5d21d0b5cda38f55d2dc",
   "judicial_counts": {
-    "uploaded_verified": 238,
-    "needs-review": 5,
-    "pending": 291
+    "uploaded_verified": 489,
+    "needs-review": 45
   },
-  "judicial_pages_using_ocr_text": 7,
+  "judicial_pages_using_ocr_text": 15,
   "followon_probes": [
     [
       "C14-D01",
@@ -49,15 +48,104 @@
       "503"
     ]
   ],
+  "followon_retry": [
+    [
+      "C14-D03",
+      "000"
+    ],
+    [
+      "C14-D04",
+      "503"
+    ],
+    [
+      "C14-JD-001",
+      "404"
+    ],
+    [
+      "C14-JD-002",
+      "503"
+    ]
+  ],
+  "statutory_staged": [
+    {
+      "candidate": "C14-D01",
+      "sha256": "55a506367c797cae158918259dd60c6dd8343985c28ff106c642996fb5555262"
+    },
+    {
+      "candidate": "C14-D05",
+      "sha256": "c9da896e7a16c481a46235789f74f545b7a9ed7f3a5c8049d0b1b9252c6731f4"
+    },
+    {
+      "candidate": "C14-D06",
+      "sha256": "13e2b6eb66add222c7262ccaa0b08d58e48ca22cdf0953f6541123ef039de239"
+    },
+    {
+      "candidate": "C14-D07",
+      "sha256": "5e60e2afe30d0fe7eca4f8126301146b76c86a444e690581f81eb564843517fe"
+    }
+  ],
   "statutory_review": [
     [
       "C14-D06",
       "marking-review",
       38,
       0
+    ],
+    [
+      "C14-D05",
+      "eligible",
+      102,
+      0,
+      "c9da896e7a16c481a46235789f74f545b7a9ed7f3a5c8049d0b1b9252c6731f4"
+    ],
+    [
+      "C14-D07",
+      "marking-review",
+      166,
+      0
+    ],
+    [
+      "C14-D01",
+      "schedule-visual-review",
+      334,
+      4
+    ],
+    [
+      "C14-D06",
+      "eligible",
+      47,
+      0,
+      "13e2b6eb66add222c7262ccaa0b08d58e48ca22cdf0953f6541123ef039de239"
+    ],
+    [
+      "C14-D07",
+      "eligible",
+      249,
+      0,
+      "5e60e2afe30d0fe7eca4f8126301146b76c86a444e690581f81eb564843517fe"
     ]
   ],
-  "statutory_commit": null,
+  "statutory_and_curated_commit": {
+    "revision": "1fe8e860fb9130bbd40c397c4e247d15d0d5128d",
+    "files": {
+      "legal_knowledge/preservation/c14_statutory/v1/C14-D05/c9da896e7a16c481a46235789f74f545b7a9ed7f3a5c8049d0b1b9252c6731f4/original.pdf": "c9da896e7a16c481a46235789f74f545b7a9ed7f3a5c8049d0b1b9252c6731f4",
+      "legal_knowledge/preservation/c14_statutory/v1/C14-D05/c9da896e7a16c481a46235789f74f545b7a9ed7f3a5c8049d0b1b9252c6731f4/text.txt": "e3d5d707b48cb6d726d4accdfa930a775c9f060babb4d6f8886c128e9138b979",
+      "legal_knowledge/preservation/c14_statutory/v1/C14-D06/13e2b6eb66add222c7262ccaa0b08d58e48ca22cdf0953f6541123ef039de239/original.pdf": "13e2b6eb66add222c7262ccaa0b08d58e48ca22cdf0953f6541123ef039de239",
+      "legal_knowledge/preservation/c14_statutory/v1/C14-D06/13e2b6eb66add222c7262ccaa0b08d58e48ca22cdf0953f6541123ef039de239/text.txt": "d2d836f77b9cb95da00a7e5dfb102654e98288d8507441af38cb67b5c1d13fd0",
+      "legal_knowledge/preservation/c14_statutory/v1/C14-D07/5e60e2afe30d0fe7eca4f8126301146b76c86a444e690581f81eb564843517fe/original.pdf": "5e60e2afe30d0fe7eca4f8126301146b76c86a444e690581f81eb564843517fe",
+      "legal_knowledge/preservation/c14_statutory/v1/C14-D07/5e60e2afe30d0fe7eca4f8126301146b76c86a444e690581f81eb564843517fe/text.txt": "3a8aa13aaee4e146a6d411bd936033cf0393bbf0c23277bb958219b1de003513",
+      "legal_knowledge/preservation/c14_curated_sc/v1/C14-JD-001/e68752502a3e1f646bf30c560d998a9567aa32400155f5068e81e64766b80d71/original.pdf": "e68752502a3e1f646bf30c560d998a9567aa32400155f5068e81e64766b80d71",
+      "legal_knowledge/preservation/c14_curated_sc/v1/C14-JD-001/e68752502a3e1f646bf30c560d998a9567aa32400155f5068e81e64766b80d71/text.txt": "7846ee75a156d149d051dcd2ee9de602995ed83395f9bce119aa635976bff7ad"
+    },
+    "verified": true
+  },
+  "curated_review": [
+    "C14-JD-001",
+    "eligible",
+    4,
+    0,
+    "e68752502a3e1f646bf30c560d998a9567aa32400155f5068e81e64766b80d71"
+  ],
   "limits": [
     "Source pins verify bytes, not legal authentication.",
     "Access-marking and text screening are automated with English OCR; uncertain items are excluded from upload.",
