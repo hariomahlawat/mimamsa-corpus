@@ -51,6 +51,10 @@ public sealed partial class GenerationStore
     public required IReadOnlyDictionary<string, int> LoadIssues { get; init; }
     public required JsonArray Quarantine { get; init; }
 
+    Statutes.StatuteRelations? _relations;
+    /// Statutory relationships derived from verified held text (C14 F03), built once on first use.
+    public Statutes.StatuteRelations Relations => LazyInitializer.EnsureInitialized(ref _relations, () => Statutes.StatuteRelations.Build(this));
+
     [GeneratedRegex(@"^\[\[page (\d+)\]\]\n", RegexOptions.Multiline)] private static partial Regex Marker();
 
     static string Sha(byte[] b) => Convert.ToHexString(SHA256.HashData(b)).ToLowerInvariant();
@@ -179,6 +183,8 @@ public sealed partial class GenerationStore
                 doc.Passages.Add(new Passage(docId, S(ps["passage_id"])!, n, cs, ce, S(ps["paragraph_label"]), text));
             }
         }
+
+        foreach (var doc in docs.Values) TextQuality.Apply(doc);
 
         foreach (var c in Jsonl(Path.Combine(gdir, "records", "candidates.jsonl")))
         {

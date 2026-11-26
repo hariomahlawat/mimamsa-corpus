@@ -31,6 +31,7 @@ public static partial class Api
     public static void Map(WebApplication app)
     {
         app.MapGet("/health", () => Results.Text("ok"));
+        MapStatutes(app);   // C14 S3: /api/statutes, /api/documents/{id}/relations, /api/library (Api.Statutes.cs)
 
         app.MapPost("/api/login", async (HttpContext ctx, AppServices s) =>
         {
@@ -111,7 +112,7 @@ public static partial class Api
                                    passages = d.Passages.Where(ps => ps.Page == x.Page).Select(ps => new { id = ps.PassageId, start = ps.CharStart, end = ps.CharEnd, para = ps.ParagraphLabel }) });
             return Json(new { doc_id = d.DocId, copy_sha256 = d.CopySha, page_count = d.PageCount, from = a, to = b,
                               derivative = new { id = d.DerivativeId, text_sha256 = d.DerivativeTextSha, pipeline = d.PipelineName, version = d.PipelineVersion, quoting_permitted = d.QuotingPermitted },
-                              text_pages = d.Pages.Keys.Order().ToArray(), pages });
+                              text_pages = d.Pages.Keys.Order().ToArray(), text_reliability = TextReliabilityDto(d), pages });
         });
 
         app.MapGet("/api/documents/{docId}/sections", async (HttpContext ctx, string docId, AppServices s) =>
@@ -136,16 +137,6 @@ public static partial class Api
             bool ocr = d.Pages.TryGetValue(page, out var pg) && pg.Method == "ocr";
             return Json(new { legal = CitationFor(d, page, para), internal_reference = LegalCitation.InternalReference(d.DocId, d.CopySha, page, rel) + " " + permalink,
                               permalink, ocr_page = ocr, ocr_note = ocr ? "OCR text: for search only. Quote from the original page." : null });
-        });
-
-        app.MapGet("/api/statutes", async (HttpContext ctx, AppServices s) =>
-        {
-            var p = await User(ctx, s);
-            if (p is null) return Json(new { error = "auth" }, 401);
-            var list = s.Generation.Documents.Values.Where(d => d.IsStatute && s.VisibleDocument(d.DocId) is not null)
-                .OrderBy(d => d.DocType).ThenBy(d => d.Title, StringComparer.OrdinalIgnoreCase)
-                .Select(d => new { doc_id = d.DocId, title = d.Title, type = d.DocType, number = d.Number, issue_date = d.IssueDate, corpus_status = d.CorpusStatus, language = d.Language, page_count = d.PageCount });
-            return Json(new { statutes = list });
         });
 
         app.MapGet("/api/cite", async (HttpContext ctx, string doc, string sha, int page, AppServices s) =>
@@ -404,6 +395,7 @@ public static partial class Api
         corpus_status = d.CorpusStatus, copy_sha256 = d.CopySha, retrieved_at = d.Provenance["retrieved_at"]?.GetValue<string>(),
         source_url = d.Provenance["source_url"]?.GetValue<string>(), language = d.Language, text_method = d.TextMethod,
         candidate_outcomes = d.Candidates.Count(c => c.Type == "outcome"), release_id = s.Generation.Release.ReleaseId,
+        text_reliability = d.TextAssessment?.Reliability,
     };
 
     [GeneratedRegex(@"^JUD:JG-([0-9a-f]{12})")] private static partial Regex JudNode();
@@ -478,6 +470,10 @@ public static partial class Api
         {
             doc_id = d.DocId, doc_type = d.DocType, title = d.Title, number = d.Number, issuing_authority = d.IssuingAuthority,
             issue_date = d.IssueDate, effective_date = d.EffectiveDate, language = d.Language,
+            // C14 S3 (F07): the header's language marker and reliability chip read these (they were computed but not sent)
+            language_detected = d.TextAssessment?.DetectedLanguage,
+            language_name = LanguageName(d.Language ?? d.TextAssessment?.DetectedLanguage),
+            text_reliability = TextReliabilityDto(d),
             corpus_status = d.CorpusStatus, corpus_status_note = d.CorpusStatusNote, corpus_status_as_of = d.CorpusStatusAsOf,
             corpus_status_label = "Corpus status (display-only summary from the crawler metadata; not legal applicability)",
             text_method = d.TextMethod, ocr_confidence = d.OcrConfidence, quoting_permitted = d.QuotingPermitted,

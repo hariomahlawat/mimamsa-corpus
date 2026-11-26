@@ -128,7 +128,9 @@ test("UX-05 W-05 candidate outcomes per proceeding, labelled, 'not evaluated' wh
 test("UX-06 W-06 statutes TOC to a rule, as-of closed with gate, temporal chain not established", async ({ page }) => {
   await login(page);
   await page.goto("/s");
-  await page.getByRole("link", { name: /Bracken Hearing Rules/ }).click();
+  // C14 S3 (intended change): the grouped Statutes list shows the instrument link plus nested edition links, so the
+  // instrument entry is selected explicitly instead of by link name.
+  await page.locator(".statute-list .instrument > a", { hasText: /Bracken Hearing Rules/ }).first().click();
   await expect(page.locator(".toc")).toContainText("8(3)(a)");
   await page.locator(".toc a", { hasText: "8(3)(a)" }).click();
   await expect(page.locator("#asof")).toBeDisabled();

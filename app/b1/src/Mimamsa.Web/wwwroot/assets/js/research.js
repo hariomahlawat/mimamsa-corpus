@@ -5,6 +5,9 @@
 import { api, ApiError, state as apiState } from "./api.js";
 import { h, append, clear, $, $$, chip, candidateChip, axisChip, fmtDate, short, host, typeLabel, toast, announce, copyText, marked, session, icon, openDialog } from "./ui.js";
 import { ProtectedViewer } from "./viewer.js";
+import { renderHome, noteRecentDoc, resetRecent } from "./home.js";
+import { renderRelations } from "./relations.js";
+const STATUTE_TYPES = new Set(["act", "rules", "regulations", "notification", "order"]);
 
 const add = (el, ...k) => append(el, k);
 export const R = {
@@ -41,6 +44,9 @@ function searchParams() {
 export function researchUrl() { const s = searchParams().toString(); return "/r" + (s ? "?" + s : ""); }
 
 // ------------------------------------------------------------------ layout
+// C14 S3: the home pane depends on the view (Library or Commander); re-render it when nothing is open.
+export function refreshHome() { if (R.el && !R.tabs.length) renderDocPane(); }
+
 export function mountResearch(main, nav) {
   R.nav = nav;
   if (R.el && main.contains(R.el)) return R.el;
@@ -382,8 +388,8 @@ async function renderDocPane() {
   const tab = R.tabs[R.active];
   if (tab?.unavailable) { renderUnavailable(pane, ctx); return; }
   if (!tab) {
-    add(pane, h("div.docempty", h("h2", "No document open"), h("p", "Open a result to read the original at the cited page. ", h("kbd", "Enter"), " opens the selected result, ", h("kbd", "O"), " opens it in a new tab and ", h("kbd", "Space"), " previews it."),
-      h("p", "Originals are delivered in bounded, authenticated byte ranges and are never stored in the browser.")));
+    // C14 S3: library home (or the early Commander task home) instead of an empty pane
+    renderHome(pane, { nav: R.nav, commander: document.body.classList.contains("commander"), openDoc: (docId) => openDocument({ docId, page: 1 }) });
     clear(ctx); add(ctx, h("div.ctx-body", h("p.muted", "Evidence, provenance and related candidates for the open document appear here.")));
     return;
   }
@@ -399,6 +405,7 @@ async function renderDocPane() {
       return;
     }
     if (R.tabs[R.active] !== tab) return;
+    noteRecentDoc(tab.docId, tab.doc.title);
     return renderDocPane();
   }
   const d = tab.doc;
@@ -432,6 +439,8 @@ function docHeader(d, tab) {
     h("h1", { lang: d.language === "hi" ? "hi" : null }, d.title || "Title not printed", origin(d, "title")),
     h("div.meta",
       f("Type", typeLabel(d.doc_type)), j ? f("Court", j.court, "court") : f("Issuer", d.issuing_authority, "issuing_authority"),
+      d.language_name ? h("span.field", { "data-language": d.language || d.language_detected || "" }, h("span.label", "Language"), h("span", d.language_name)) : null,
+      d.text_reliability?.label ? h("span.field", h("span.chip.chip-warning", { title: d.text_reliability.basis || "", "data-text-reliability": d.text_reliability.state }, d.text_reliability.label)) : null,
       j?.bench ? f("Bench", j.bench, "bench") : null, f("Date", fmtDate(d.issue_date), "issue_date"),
       d.effective_date ? f("Commencement (as recorded)", fmtDate(d.effective_date), "effective_date") : null,
       f("Number", d.number, "number", true), j?.neutral_citation ? f("Neutral citation", j.neutral_citation, "neutral_citation", true) : null,
@@ -505,7 +514,8 @@ function renderToolbar() {
     tab.view === "original" ? [h("span.sep"),
       h("button.icon-btn", { type: "button", "aria-label": "Zoom out", onclick: () => zoom(-1) }, icon("minus")),
       h("button.icon-btn", { type: "button", "aria-label": "Zoom in", onclick: () => zoom(1) }, icon("plus")),
-      h("button.btn.btn-small", { type: "button", onclick: () => zoom(0) }, "Fit width")] : null,
+      h("button.btn.btn-small", { type: "button", onclick: () => zoom(0) }, "Fit width"),
+      h("button.btn.btn-small", { type: "button", onclick: () => zoom("page") }, "Fit page")] : null,
     h("span", { style: "flex:1" }),
     h("button.btn.btn-small", { type: "button", onclick: () => copyCitation(false), title: "Copy legal citation (C)" }, icon("cite"), "Copy citation"),
     h("button.btn.btn-small", { type: "button", onclick: () => copyCitation(true), title: "Copy internal reference and permalink (Shift+C)" }, icon("copy"), "Internal ref"),
@@ -541,7 +551,26 @@ async function showView(tab) {
     tab.pageCount = tab.viewer.numPages; renderToolbar();
   } else tab.viewer.host = vw;
   if (tab.view !== "original") return;
-  await tab.viewer.render(tab.page, { terms: terms(), ocr: pageOcr });
+  const anchor = await anchorText(tab);
+  if (R.tabs[R.active] !== tab || tab.view !== "original") return;
+  await tab.viewer.render(tab.page, { terms: terms(), ocr: pageOcr, anchor });
+}
+
+// C14 S3 (F12): the text of the cited passage on the current page, used by the viewer to scroll it into view. Read from
+// the verified derivative of the current edition only (never for an earlier cited copy).
+async function anchorText(tab) {
+  if (!tab.passage || tab.copy) return null;
+  const key = `${tab.page}|${tab.passage}`;
+  if (tab.anchorKey === key) return tab.anchorValue;
+  let value = null;
+  try {
+    const t = await api(`/api/documents/${encodeURIComponent(tab.docId)}/text?from=${tab.page}&to=${tab.page}`);
+    const pg = t.pages.find((p) => p.page === tab.page);
+    const ps = pg?.passages.find((p) => p.id === tab.passage);
+    if (pg && ps) value = pg.text.slice(ps.start, Math.min(ps.end, ps.start + 160));
+  } catch { value = null; }
+  tab.anchorKey = key; tab.anchorValue = value;
+  return value;
 }
 
 function viewerState(tab, s, info) {
@@ -570,6 +599,10 @@ async function showText(tab, vw) {
   const from = Math.max(1, tab.page - 2), to = Math.min(tab.doc.copy.page_count, tab.page + 12);
   add(box, h("p.muted", { style: "font-family:var(--font-ui);font-size:13px" }, "Extracted text (automated, not verified). Page markers are physical pages of the original. ",
     tab.doc.quoting_permitted ? "" : "This text includes OCR: for search only; quote from the original page."));
+  const rel = tab.doc.text_reliability;
+  if (rel?.label) add(box, h("div.notice.text-unreliable", { role: "note", "data-text-reliability": rel.state }, chip("warning", rel.label),
+    ` ${rel.state === "unreliable" ? "The extracted text of this copy is not reliable and is not used for search. Read the original page." : "Some passages of the extracted text are not reliable. Read the original page."} `,
+    h("span.muted", rel.basis || "")));
   let data;
   try { data = await api(`/api/documents/${encodeURIComponent(tab.docId)}/text?from=${from}&to=${to}`); }
   catch (e) { add(box, h("div.error-state", { role: "alert" }, h("p", e.status === 404 ? "This document is not available in this installation." : "The text could not be loaded."))); return; }
@@ -627,7 +660,8 @@ export function nextHit(d) {
 function zoom(dir) {
   const tab = R.tabs[R.active];
   if (!tab?.viewer) return;
-  const cur = tab.viewer.scale || 1.2;
+  if (dir === "page") { tab.viewer.setScale("page"); return; }
+  const cur = typeof tab.viewer.scale === "number" ? tab.viewer.scale : (tab.viewer.lastScale || 1.2);
   tab.viewer.setScale(dir === 0 ? null : Math.max(0.5, Math.min(3, cur + dir * 0.2)));
 }
 
@@ -684,22 +718,30 @@ function renderCtx() {
         h("dt", "Derived text"), h("dd", "Page and passage hashes verified; text is automated (not checked against the page image)"))));
   } else if (R.ctxTab === "provenance") {
     const p = d.provenance;
-    add(body, h("dl.kv",
-      h("dt", "Source URL"), h("dd", h("span.mono", p.source_url || "not recorded"), " ", p.source_url ? h("button.btn-quiet.btn-small", { type: "button", onclick: async () => toast(await copyText(p.source_url) ? "Source URL copied" : "Copy blocked") }, "Copy") : null),
-      h("dt", "Retrieved"), h("dd", p.retrieved_at || "not recorded"),
-      h("dt", "Channel"), h("dd", p.acquisition_channel || ""), h("dt", "Source system"), h("dd", p.source_system || "not recorded"),
-      h("dt", "Record id"), h("dd.mono", p.source_record_id || "not recorded"), h("dt", "Original file name"), h("dd.mono", p.original_filename || "not recorded"),
-      h("dt", "SHA-256"), h("dd", h("div.copybox", h("code", d.copy.sha256), h("button.btn-quiet.btn-small", { type: "button", onclick: async () => toast(await copyText(d.copy.sha256) ? "SHA-256 copied" : "Copy blocked") }, "Copy"))),
-      h("dt", "Bytes / pages"), h("dd", `${d.copy.bytes.toLocaleString("en-GB")} bytes · ${d.copy.page_count} physical pages`),
-      h("dt", "Vault key"), h("dd.mono", d.copy.vault_key),
-      h("dt", "HF repository"), h("dd.mono", p.hf ? `${p.hf.repo} @ ${p.hf.revision?.slice(0, 12)}` : "not recorded"), h("dt", "HF path"), h("dd.mono", p.hf?.path || ""),
-      h("dt", "Release"), h("dd.mono", p.release_id), h("dt", "Generation"), h("dd.mono", p.generation),
-      h("dt", "Text pipeline"), h("dd.mono", `${p.pipeline.name} ${p.pipeline.version} · text ${short(p.pipeline.text_sha256)}`),
-      h("dt", "Text method"), h("dd", `${d.text_method}${d.ocr_confidence != null ? ` · OCR mean confidence ${d.ocr_confidence}` : ""}`),
-      h("dt", "Aliases"), h("dd", (p.aliases || []).length ? p.aliases.map((a) => h("div.mono", a.source_url)) : "none"),
-      h("dt", "Access marking"), h("dd", p.access_marking || "none printed (as recorded)"),
-      h("dt", "Corpus status note"), h("dd", d.corpus_status_note || "none"),
-      h("dt", "Publication"), h("dd", p.publication_history.map((x) => h("div", `${x.channel} · ${x.release_id}${x.actor ? " · " + x.actor : ""}`)))));
+    // C14 S3: grouped, plain-language provenance (same facts as B1, read top-down: where from, this copy, this library)
+    const group = (title, lead, ...rows) => h("div.sect.prov", h("h3", title), lead ? h("p.muted", lead) : null, h("dl.kv", ...rows));
+    const rel = d.text_reliability;
+    add(body,
+      group("Where it came from", `Downloaded from ${host(p.source_url)} on ${fmtDate(p.retrieved_at) || "a date not recorded"}.`,
+        h("dt", "Source URL"), h("dd", h("span.mono", p.source_url || "not recorded"), " ", p.source_url ? h("button.btn-quiet.btn-small", { type: "button", onclick: async () => toast(await copyText(p.source_url) ? "Source URL copied" : "Copy blocked") }, "Copy") : null),
+        h("dt", "Retrieved"), h("dd", p.retrieved_at || "not recorded"),
+        h("dt", "Channel"), h("dd", p.acquisition_channel || ""), h("dt", "Source system"), h("dd", p.source_system || "not recorded"),
+        h("dt", "Record id"), h("dd.mono", p.source_record_id || "not recorded"), h("dt", "Original file name"), h("dd.mono", p.original_filename || "not recorded"),
+        h("dt", "Other URLs (aliases)"), h("dd", (p.aliases || []).length ? p.aliases.map((a) => h("div.mono", a.source_url)) : "none")),
+      group("This copy", `The original file is identified by its SHA-256 and was re-checked when this service started.`,
+        h("dt", "SHA-256"), h("dd", h("div.copybox", h("code", d.copy.sha256), h("button.btn-quiet.btn-small", { type: "button", onclick: async () => toast(await copyText(d.copy.sha256) ? "SHA-256 copied" : "Copy blocked") }, "Copy"))),
+        h("dt", "Size"), h("dd", `${d.copy.bytes.toLocaleString("en-GB")} bytes · ${d.copy.page_count} physical pages`),
+        h("dt", "Language"), h("dd", d.language_name || d.language || "not recorded"),
+        h("dt", "Extracted text"), h("dd", `${d.text_method}${d.ocr_confidence != null ? ` · OCR mean confidence ${d.ocr_confidence}` : ""} · ${p.pipeline.name} ${p.pipeline.version} · text ${short(p.pipeline.text_sha256)}`,
+          rel?.label ? h("div", chip("warning", rel.label), " ", h("span.muted", rel.basis)) : rel?.basis ? h("div.muted", rel.basis) : null),
+        h("dt", "Vault key"), h("dd.mono", d.copy.vault_key)),
+      group("In this library", null,
+        h("dt", "Release"), h("dd.mono", p.release_id), h("dt", "Generation"), h("dd.mono", p.generation),
+        h("dt", "Corpus repository"), h("dd.mono", p.hf ? `${p.hf.repo} @ ${p.hf.revision?.slice(0, 12)}` : "not recorded"), h("dt", "Path"), h("dd.mono", p.hf?.path || ""),
+        h("dt", "Published"), h("dd", p.publication_history.map((x) => h("div", `${x.channel.replaceAll("_", " ").toLowerCase()} · ${x.release_id}${x.actor ? " · " + x.actor : ""}`)))),
+      group("Notes", null,
+        h("dt", "Access marking"), h("dd", p.access_marking || "none printed (as recorded)"),
+        h("dt", "Corpus status note"), h("dd", d.corpus_status_note || "none")));
   } else if (R.ctxTab === "related") {
     add(body, h("div.absence", d.absence_notice));
     if (d.outcomes.length) {
@@ -715,7 +757,17 @@ function renderCtx() {
           v.evidence.filter((e) => e.page).map((e) => h("div", h("a", { href: "#", onclick: (ev) => { ev.preventDefault(); openDocument({ docId: e.doc_id, page: e.page }); } }, `Evidence: ${e.role.replaceAll("_", " ")} p.${e.page}`))))));
       add(body, s);
     }
-    if (!d.outcomes.length && !d.provision_versions.length) add(body, h("p.muted", "No related candidate records for this document."));
+    if (!d.outcomes.length && !d.provision_versions.length && !STATUTE_TYPES.has(d.doc_type)) add(body, h("p.muted", "No related candidate records for this document."));
+    if (STATUTE_TYPES.has(d.doc_type)) {
+      // C14 S3: statutory relationships for the sections printed on the current page, and the instrument's notices
+      const rbox = h("div.sect", { "data-rel": "statutory" }, h("h3", `Statutory relationships (page ${tab.page})`), h("span.skeleton.w60"));
+      add(body, rbox);
+      api(`/api/documents/${encodeURIComponent(d.doc_id)}/relations?page=${tab.page}`).then((r) => {
+        if (!rbox.isConnected) return;
+        rbox.querySelector(".skeleton")?.remove();
+        renderRelations(rbox, r, { nav: R.nav, onOpen: (docId, page) => openDocument({ docId, page }, { newTab: docId !== d.doc_id }) });
+      }).catch(() => { rbox.querySelector(".skeleton")?.remove(); add(rbox, h("p.muted", "Relationships could not be loaded.")); });
+    }
   } else if (R.ctxTab === "cited") {
     add(body, h("div.absence", "Extracted citations: candidates. Absence of a citation is not absence of authority. A citation does not establish how one court treated another."));
     const out = h("div.sect", h("h3", `Cites (${d.edges_out_total} extracted)`));
@@ -749,7 +801,9 @@ function edgeCard(e, d) {
   const proposed = !["CITES_JUDGMENT", "CITES_PROVISION", "QUOTES_PROVISION"].includes(p.relation);
   return h("div.cand", h("div.cand-head", candidateChip(), h("span", rel), proposed ? h("span.chip.chip-warning", "Proposed, not verified") : null),
     h("div.cand-body", e.target_in_library ? h("a", { href: "#", onclick: (ev) => { ev.preventDefault(); openDocument({ docId: e.target_in_library.doc_id, page: 1 }, { newTab: true }); } }, e.target_in_library.title)
-      : h("span.mono", p.target?.raw_reference || "Unresolved reference"),
+      : h("span", p.target?.raw_reference ? h("span.mono", p.target.raw_reference)
+          : p.target?.resolved ? "A judgment identified by the extractor that is not held in this library" : "Reference not resolved by the extractor",
+        p.evidence_text ? h("div.muted", "Cited in: ", h("q", p.evidence_text.slice(0, 240))) : null),
       e.anchors[0] ? h("div", h("a", { href: "#", onclick: (ev) => { ev.preventDefault(); goPage(e.anchors[0].page); } }, `Evidence on p.${e.anchors[0].page}`)) : null));
 }
 
@@ -763,6 +817,7 @@ export function resetResearch() {
   Object.assign(R, { query: "", filters: emptyFilters(), result: null, flat: false, sort: "relevance", page: 1, service: "", selected: -1, plainConfirmed: false,
                      tabs: [], active: -1, ctxTab: "evidence", ctxOpen: false, railOpen: false, resultsOpen: false, el: null, abort: null });
   window.__mimamsaViewer = null; window.__mimamsaLastCopy = null;
+  resetRecent();   // a new user never sees the previous user's recent items (PR #57 P2)
 }
 
 /** A URL naming a copy that is not eligible: the one generic notice, no content. */
