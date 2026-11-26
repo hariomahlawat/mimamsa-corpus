@@ -5,8 +5,7 @@ Output: data/meta/<doc_id>.json, data/sections/<doc_id>/<key>.json, data/relatio
 
 India Code publishes each Act as structured records (one per section, rule, notification ...), so
 sections are taken from those records, not cut out of the PDF. Fields the records do not give are
-null. Re-running rewrites the outputs for the sources it handles and keeps what the extract stage
-added to existing metadata (text_method, page_count, ...).
+null. The legacy writer is suspended in Cycle 14. plan_indiacode returns a read-only proposal; it does not adopt outputs.
 """
 from __future__ import annotations
 
@@ -134,7 +133,8 @@ def _edge(src: str, typ: str, target: str | None, raw: str | None, evidence: str
             "target_ref_raw": raw, "effective_date": eff, "evidence": evidence, "confidence": "extracted"}
 
 
-def build_indiacode(paths: Paths) -> dict:
+def plan_indiacode(paths: Paths) -> dict:
+    """Read-only rebuild proposal; never consumed by legacy importer."""
     conn = connect(paths.db)
     rows = conn.execute(
         """SELECT u.url, u.source, u.doc_id_hint, u.sha256, u.fetched_at, u.meta, f.raw_path, f.content_type
@@ -331,22 +331,31 @@ def build_indiacode(paths: Paths) -> dict:
         docs[e["doc_id"]] = d
     # ---- judgments from the open-data buckets (crawler/opendata.py): fields from the index row
     from .judgments import build_doc, load_excluded
-    excluded = load_excluded(paths)              # judgments already removed as not about the armed forces
+    excluded = load_excluded(paths)  # immutable historical events, not current eligibility
+    historical_seen = set()
+    recovered = []
+    historical_absent = []
     for r in conn.execute(
             """SELECT u.url, u.source, u.doc_id_hint, u.sha256, u.fetched_at, u.meta, f.raw_path, f.content_type
                FROM urls u JOIN files f ON f.sha256 = u.sha256
                WHERE u.kind='document' AND u.status='fetched' AND json_extract(u.meta, '$.dataset') IS NOT NULL
                ORDER BY u.url"""):
         handled_sources.add(r["source"])
-        if r["sha256"] in excluded:
-            continue
-        if not paths.raw_file(r["raw_path"]).exists():
-            problems.append(f"{r['url']}: raw file is missing and the judgment is not in the excluded list")
+        if r['sha256'] in excluded:
+            historical_seen.add(r['sha256'])
+        if not paths.raw_file(r['raw_path']).exists():
+            if r['sha256'] in excluded:
+                historical_absent.append({'sha256': r['sha256'], 'source_url': r['url']})
+            else:
+                problems.append(f"{r['url']}: raw file is missing and the judgment is not in the excluded list")
             continue
         d = build_doc(r, json.loads(r["meta"]), _base_doc(r, paths, aliases))
         if d["doc_id"] in docs:
             d["doc_id"] = f"{d['doc_id'][:110]}-{r['sha256'][:8]}"
         docs[d["doc_id"]] = d
+        if r['sha256'] in excluded:
+            recovered.append({'sha256': r['sha256'], 'doc_id': d['doc_id'], 'source_url': r['url'],
+                              'state': 'RECOVERED_PATH_PRESENT_BYTES_NOT_VERIFIED'})
     conn.close()
     for d in list(docs.values()):            # a hand-listed copy takes its status from the Act it is a copy of
         target = d.get("provides_sections_for")
@@ -372,42 +381,18 @@ def build_indiacode(paths: Paths) -> dict:
             docs[doc_id]["relations"].append(e)
         edges.append(e)
 
-    # ---- remove outputs of an earlier run that this run no longer produces
-    if paths.meta.exists():
-        for old in paths.meta.glob("*.json"):
-            if old.stem not in docs and json.loads(old.read_text(encoding="utf-8")).get("source") in handled_sources:
-                old.unlink()
-                (paths.text / f"{old.stem}.txt").unlink(missing_ok=True)
-    for parent in {sid.split("#")[0] for sid in sections}:
-        for old in (paths.sections / parent).glob("*.json"):
-            if f"{parent}#{old.stem}" not in sections:
-                old.unlink()
+    # No old metadata, text, sections, relations or historical ledger are rewritten.
+    # Existing artifacts remain on disk but must not be interpreted as active
+    # eligible outputs of this proposal.
+    stale_metadata = sorted(p.stem for p in paths.meta.glob('*.json') if p.stem not in docs)
+    return {'status': 'PROPOSAL_NOT_ADOPTED', 'research_eligible': False,
+            'documents': docs, 'sections': sections, 'relations': edges,
+            'problems': problems, 'recovered_path_candidates': recovered,
+            'historical_absent': historical_absent,
+            'historical_not_in_current_crawl': sorted(set(excluded) - historical_seen),
+            'retained_stale_metadata_ids': stale_metadata}
 
-    # ---- write (keeping what the extract stage already established)
-    for doc_id, d in docs.items():
-        path = paths.meta / f"{doc_id}.json"
-        if path.exists():
-            old = json.loads(path.read_text(encoding="utf-8"))
-            if old.get("sha256") == d["sha256"]:
-                for k in EXTRACT_FIELDS:
-                    if k in old:
-                        d[k] = old[k]
-                kept = [r for r in old.get("relations", []) if r.get("type") == "cites"]
-                d["relations"] += kept
-                edges += kept
-                if d.get("language") is None and old.get("language"):     # established later (e.g. by OCR)
-                    d["language"] = old["language"]
-                    d["field_provenance"]["language"] = (old.get("field_provenance") or {}).get("language", "rule")
-                for k, v in (old.get("field_provenance") or {}).items():
-                    d["field_provenance"].setdefault(k, v)
-        write_json(path, d)
-    for sid, s in sections.items():
-        parent, key = sid.split("#")
-        write_json(paths.sections / parent / f"{key}.json", s)
-    paths.data.mkdir(parents=True, exist_ok=True)
-    with (paths.data / "relations.jsonl").open("w", encoding="utf-8") as fh:
-        for e in edges:
-            fh.write(json.dumps(e, ensure_ascii=False) + "\n")
-    return {"documents": len(docs), "sections": len(sections), "relations": len(edges), "problems": problems,
-            "doc_types": dict(Counter(d["doc_type"] for d in docs.values())),
-            "section_status": dict(Counter(s["status"] for s in sections.values()))}
+
+def build_indiacode(paths: Paths) -> dict:
+    """Suspended legacy writer; use plan_indiacode for approved read-only review."""
+    raise RuntimeError("C14 corpus mutation hold: legacy records writer is suspended")
