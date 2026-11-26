@@ -964,3 +964,17 @@
 {"id": "AFT-GUW-1012", "url": "https://aftrbghy.nic.in/judgement/Order dated 25-01-2024/MA-06 of 2024.pdf", "status": "eligible-local", "sha256": "877b6cf5e382e4a8d3822629839e0573d6ebbc5df0fce96659052b45372d0237", "pages": 1, "ocr": 0}
 {"id": "AFT-GUW-1013", "url": "https://aftrbghy.nic.in/judgement/Order dated 25-01-2024/MA-07 of 2024 with RA-01 of 2024.pdf", "status": "eligible-local", "sha256": "c2a0e53a94ba2bca9f047ee1d7e6b17630fd7dd2cf596d2812856c2ec606f8e5", "pages": 2, "ocr": 0}
 {"id": "AFT-GUW-1014", "url": "https://aftrbghy.nic.in/judgement/Order dated 25-01-2024/MA-08 of 2024.pdf", "status": "marking-review", "page": 1}
+{"id": "AFT-GUW-1015", "url": "https://aftrbghy.nic.in/judgement/Order dated 25-01-2024/OA-06 of 2018.pdf", "status": "eligible-local", "sha256": "01c195dbfced989550ae3254a0100b228642b227843d32caacba87e70a4e8897", "pages": 1, "ocr": 0}
+{"id": "AFT-GUW-1016", "url": "https://aftrbghy.nic.in/judgement/Order dated 25-01-2024/OA-15 of 2023.pdf", "status": "eligible-local", "sha256": "7adbe2eafccaf6fa0bf0d0e1f68c7b20d28efaec5585d43e96e6d65897d995bd", "pages": 1, "ocr": 0}
+{"id": "AFT-GUW-1017", "url": "https://aftrbghy.nic.in/judgement/Order dated-02-04-2024/MA-09 of 2024 with MA-10 of 2024.pdf", "status": "EmptyFileError", "http_code": null}
+{"id": "AFT-GUW-1018", "url": "https://aftrbghy.nic.in/judgement/Order dated-02-04-2024/MA-11 of 2024 with MA-12 of 2024.pdf", "status": "EmptyFileError", "http_code": null}
+{"id": "AFT-GUW-1019", "url": "https://aftrbghy.nic.in/judgement/Order dated-02-04-2024/OA-01 of 2020.pdf", "status": "EmptyFileError", "http_code": null}
+{"id": "AFT-GUW-1020", "url": "https://aftrbghy.nic.in/judgement/Order dated-02-04-2024/OA-11 of 2022.pdf", "status": "EmptyFileError", "http_code": null}
+{"id": "AFT-GUW-1021", "url": "https://aftrbghy.nic.in/judgement/Order dated-02-04-2024/OA-29 of 2019.pdf", "status": "EmptyFileError", "http_code": null}
+{"id": "AFT-GUW-1022", "url": "https://aftrbghy.nic.in/judgement/Order dated-02-04-2024/OA-40 of 2019.pdf", "status": "EmptyFileError", "http_code": null}
+{"id": "AFT-GUW-1023", "url": "https://aftrbghy.nic.in/judgement/Order dated-02-04-2024/OA-43 of 2019.pdf", "status": "EmptyFileError", "http_code": null}
+{"id": "AFT-GUW-1024", "url": "https://aftrbghy.nic.in/judgement/Order dated-02-04-2024/OA-44 of 2019.pdf", "status": "EmptyFileError", "http_code": null}
+{"id": "AFT-GUW-1025", "url": "https://aftrbghy.nic.in/judgement/Order dated-02-04-2024/OA-45 of 2019.pdf", "status": "EmptyFileError", "http_code": null}
+{"id": "AFT-GUW-1026", "url": "https://aftrbghy.nic.in/judgement/Order dated-04-04-2024/OA(A)-54_2016.pdf", "status": "EmptyFileError", "http_code": null}
+{"id": "AFT-GUW-1027", "url": "https://aftrbghy.nic.in/judgement/Order dated-04-04-2024/OA-13 of 2019.pdf", "status": "EmptyFileError", "http_code": null}
+{"id": "AFT-GUW-1028", "url": "https://aftrbghy.nic.in/judgement/Order dated-04-04-2024/TA-01 of 2019.pdf", "status": "EmptyFileError", "http_code": null}
