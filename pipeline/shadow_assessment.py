@@ -86,10 +86,11 @@ def assess(root, meta, *, decide_fn=None, quality_fn=None):
                     flags.append('blank_or_unreadable_not_validated')
                 usable = q.get('usable') is True and not flags
                 result['pages'].append({'physical_page': i, 'text_sha256': sha(txt.encode('utf-8')),
-                                        'usable_for_negative_evidence': usable, 'flags': sorted(set(flags))})
+                                        'native_heuristics_pass': usable, 'usable_for_negative_evidence': False,
+                                        'flags': sorted(set(flags))})
             full = '\n'.join(f'[[page {i}]]\n{t}\n' for i, t in enumerate(texts, 1))
             result['text_sha256'] = sha(full.encode('utf-8'))
-            bad = [p['physical_page'] for p in result['pages'] if not p['usable_for_negative_evidence']]
+            bad = [p['physical_page'] for p in result['pages'] if not p['native_heuristics_pass']]
             complete = not truncated and count_ok and not bad
             quality = {'verdict': 'TEXT_OK' if complete else 'OCR_REQUIRED', 'unusable_pages': bad,
                        'usable_share': (len(texts) - len(bad)) / len(texts)}
@@ -104,7 +105,8 @@ def assess(root, meta, *, decide_fn=None, quality_fn=None):
             if state == 'IRRELEVANT':
                 state = 'INSUFFICIENT_TEXT' if not complete else 'MANUAL_REVIEW_REQUIRED'
             result['classifier_candidate_state'] = decision['state']
-            result.update(relevance=state, complete_native_evidence=complete,
+            result.update(relevance=state, native_heuristics_complete=complete,
+                          complete_native_evidence=False,
                           metadata_page_count_matches=count_ok,
                           reasons=list(decision.get('reasons', [])),
                           eligible_for_documentary_review=False)
@@ -115,7 +117,7 @@ def assess(root, meta, *, decide_fn=None, quality_fn=None):
                 result['reasons'].append('raw EOF or repair check failed')
     except Exception as exc:
         result.update(relevance='EXTRACTION_FAILED', source_integrity='REVIEW_REQUIRED',
-                      complete_native_evidence=False, eligible_for_documentary_review=False,
+                      complete_native_evidence=False, native_heuristics_complete=False, eligible_for_documentary_review=False,
                       reasons=[type(exc).__name__])
     result['assessment_id'] = sha(json.dumps(result, sort_keys=True, ensure_ascii=False).encode('utf-8'))
     return result
