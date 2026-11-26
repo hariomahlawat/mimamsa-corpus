@@ -1,0 +1,1277 @@
+[
+  {
+    "doc_id": "hc-ph-2026-cwp-18817-2026-phhc010984362026-1-2026-08-18",
+    "original_sha256": "3c3c548932e039e48e4cc95011edcd511ec52ec4fc07c55ef51869e6067b71bb",
+    "original_marking_flags": [
+      [
+        7,
+        "ambiguous-body",
+        "native",
+        [
+          "sealed"
+        ]
+      ],
+      [
+        7,
+        "ambiguous-body",
+        "ocr",
+        [
+          "sealed"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2007-cwp-8961-2007-phhc010661762007-1-2007-10-04",
+    "original_sha256": "188b006da52b048ebf06f2daebd9dabb22e479625da9924fa5d507ab9c8d4fb8",
+    "original_marking_flags": [
+      [
+        11,
+        "ambiguous-body",
+        "native",
+        [
+          "classified"
+        ]
+      ],
+      [
+        11,
+        "ambiguous-body",
+        "ocr",
+        [
+          "classified"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2015-cwp-8338-2012-phhc010902392012-1-2015-03-17",
+    "original_sha256": "31884edf2911ba2b48d2b037819939ffba909174c760a1032f01f68fd76dd14a",
+    "original_marking_flags": [
+      [
+        2,
+        "ambiguous-body",
+        "ocr",
+        [
+          "classified"
+        ]
+      ]
+    ],
+    "status": "visual-false-positive-cleared-local",
+    "visual_page": 2,
+    "context": "Classification of an employment role in the merits discussion",
+    "derivative_sha256": "a0badbb47d87ab094d9ab51f93ec31f16e230573df35f3447a639750ac51d1d3",
+    "page_count": 2,
+    "hf_verified": false
+  },
+  {
+    "doc_id": "hc-ph-2024-crwp-275-2024-phhc010026662024-1-2024-11-12",
+    "original_sha256": "e663f01082ce09936f7ce6800607ba58744ed2b186e26bc2b361f0f763c35e02",
+    "original_marking_flags": [
+      [
+        10,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2026-untitled-phhc010970002026-1-2026-06-01",
+    "original_sha256": "66022adc2a88a7c4f473467cf6117a18fcdc07c55d0db1feb84850df1cab6efe",
+    "original_marking_flags": [
+      [
+        4,
+        "ambiguous-body",
+        "native",
+        [
+          "secret"
+        ]
+      ],
+      [
+        4,
+        "ambiguous-body",
+        "ocr",
+        [
+          "secret"
+        ]
+      ]
+    ],
+    "status": "visual-false-positive-cleared-local",
+    "visual_page": 4,
+    "context": "Judicial narrative about information received by investigating police",
+    "derivative_sha256": "cd2893cc2e189bd585c725ee447e31c583b88b56c5f337e5e9ba3d18a7af9dd1",
+    "page_count": 5,
+    "hf_verified": false
+  },
+  {
+    "doc_id": "hc-ph-2010-cwp-3229-1996-phhc010237841996-1-2010-04-22",
+    "original_sha256": "e6454d14937ffe05ccc227e0516a8501e0cd8f8528949f3f1b0b272116487f85",
+    "original_marking_flags": [
+      [
+        3,
+        "legal-context",
+        "native",
+        [
+          "confidential"
+        ]
+      ],
+      [
+        3,
+        "legal-context",
+        "ocr",
+        [
+          "confidential"
+        ]
+      ],
+      [
+        5,
+        "ambiguous-body",
+        "native",
+        [
+          "confidential"
+        ]
+      ],
+      [
+        5,
+        "ambiguous-body",
+        "ocr",
+        [
+          "confidential"
+        ]
+      ],
+      [
+        7,
+        "legal-context",
+        "native",
+        [
+          "confidential",
+          "sealed"
+        ]
+      ],
+      [
+        7,
+        "legal-context",
+        "ocr",
+        [
+          "confidential",
+          "sealed"
+        ]
+      ],
+      [
+        9,
+        "legal-context",
+        "native",
+        [
+          "confidential"
+        ]
+      ],
+      [
+        9,
+        "legal-context",
+        "ocr",
+        [
+          "confidential"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2017-cwp-22278-2016-phhc010876462016-1-2017-02-20",
+    "original_sha256": "cdcb596a331224c78e8514c00d5ed42f76d567aef61efec757acb9ca2bee6097",
+    "original_marking_flags": [
+      [
+        2,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "visual-false-positive-cleared-local",
+    "visual_page": 2,
+    "context": "Judicial discussion of the limits of writ jurisdiction",
+    "derivative_sha256": "0a17ebc63599e5832a96a93df066b7d59a5df5c4d7e7284012a1e2fec73e1fdb",
+    "page_count": 3,
+    "hf_verified": false
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-28861-2023-phhc011659072023-1-2024-10-23",
+    "original_sha256": "698e89abb6006a308c2eb16a599545d5a7a2ef6b1b1e7fc7c98278e97f5336b4",
+    "original_marking_flags": [
+      [
+        3,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        4,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        5,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        7,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-16651-2024-phhc010909682024-1-2024-10-24",
+    "original_sha256": "de1f5890316749909f97a91d8cf023ce497907c71fe5e4a2ca3779011379745e",
+    "original_marking_flags": [
+      [
+        3,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        4,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        7,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-16678-2024-phhc010902292024-1-2024-10-24",
+    "original_sha256": "b0446a8790b2a1f6f200e0256f27dc63b3e696e73554c6b247828f77ac900cc4",
+    "original_marking_flags": [
+      [
+        2,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        3,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        4,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        7,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-28301-2024-phhc011420252024-1-2024-10-24",
+    "original_sha256": "71680abff0b48ad2c4402b3230cfedcad773ed7bb95e1b76707a1ba16c52d6b5",
+    "original_marking_flags": [
+      [
+        2,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        4,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        7,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-30173-2024-phhc011535732024-1-2024-11-07",
+    "original_sha256": "1f155e7343b9d635d8fc34e7af48657eadead832f39f5904a65a87b161c3ebf6",
+    "original_marking_flags": [
+      [
+        2,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        3,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        4,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        6,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-30626-2024-phhc011390792024-1-2024-11-13",
+    "original_sha256": "926cbc37419cf6e23f6c5c7778d3c8f77ce3fe820387e0913e6036435ee88270",
+    "original_marking_flags": [
+      [
+        2,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        3,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        4,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        6,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-26257-2024-phhc011368052024-1-2024-11-29",
+    "original_sha256": "3ab471f741c0e23a25c5926deeaf95e82e00be21b40154ced24920903c701b67",
+    "original_marking_flags": [
+      [
+        3,
+        "ambiguous-body",
+        "ocr",
+        [
+          "classified"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-16781-2024-phhc010910392024-1-2024-12-17",
+    "original_sha256": "c4331bf2838508e35966eda7954377198e30365d6b225be054d82bc7bc88f0d8",
+    "original_marking_flags": [
+      [
+        6,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        7,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-20059-2024-phhc011052542024-1-2024-12-17",
+    "original_sha256": "dd73306a7cc62c6993b9c3bcea207902d9545742e874c383d8adb7e456f96afd",
+    "original_marking_flags": [
+      [
+        6,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        8,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-31300-2024-phhc011107912024-1-2024-12-17",
+    "original_sha256": "a0779f490cac411818fdc67f6e8ad034d70867ccc14232109b3b71e187cfa468",
+    "original_marking_flags": [
+      [
+        6,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        8,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2024-cwp-16802-2024-phhc010913432024-1-2024-12-19",
+    "original_sha256": "84fd829f3454abb4b3b0606afa90674cf879c3bd962659c771c1f738cadeb7e6",
+    "original_marking_flags": [
+      [
+        6,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        9,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2025-cwp-20060-2024-phhc011052602024-1-2025-01-13",
+    "original_sha256": "c3c3fcf16f7cf710c0a9db9d9a0cbeedadff50e0be83297d3ec5cab38d77dbf5",
+    "original_marking_flags": [
+      [
+        6,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        7,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2025-cwp-20062-2024-phhc011049532024-1-2025-01-13",
+    "original_sha256": "b756ebbac0b4b1845689dcbb7d1a249d12e0fdaa39c5e93e63c7d45800378d3a",
+    "original_marking_flags": [
+      [
+        6,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        9,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2025-cwp-20070-2024-phhc011052262024-1-2025-01-13",
+    "original_sha256": "cbc09a789ec15e8502e5524c5d391e504e8f3b5ddb607ccede94171de9961b4e",
+    "original_marking_flags": [
+      [
+        6,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        7,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2025-cwp-20079-2024-phhc011051622024-1-2025-01-13",
+    "original_sha256": "0f672d540f2add6c9712ca4506049a734f9a2c3538cc79a88ee1415fd3be7462",
+    "original_marking_flags": [
+      [
+        2,
+        "legal-context",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        6,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        8,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2025-cwp-20080-2024-phhc011050012024-1-2025-01-13",
+    "original_sha256": "5cffcf5976df1fa4be6e711523fe77c5f7d77f998d5c4e92ea5d3e7c43f3acf1",
+    "original_marking_flags": [
+      [
+        6,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        8,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2025-cwp-21971-2024-phhc011036242024-1-2025-01-13",
+    "original_sha256": "eeefb2e5ade5c0a444999835a701a751b50d571a98a9b6f936ff1e9ce7a1f7cf",
+    "original_marking_flags": [
+      [
+        6,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        8,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2025-cwp-21976-2024-phhc011053842024-1-2025-01-13",
+    "original_sha256": "8ab1ec1e223b62e6db933f532278e7cc1e76aa539fb50955a23ee9998c87d0c3",
+    "original_marking_flags": [
+      [
+        6,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        8,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2025-cwp-34935-2024-phhc011807942024-1-2025-01-14",
+    "original_sha256": "5484dc08ec85e213be0febd8d3ea9baae85efcb7b126814a105549e8d818163f",
+    "original_marking_flags": [
+      [
+        6,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        8,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2025-cwp-23968-2024-phhc011226182024-1-2025-01-20",
+    "original_sha256": "272ce7f43a54e99e25af29f52c185aa449c2103ebc12d71181f2328f53ec8800",
+    "original_marking_flags": [
+      [
+        3,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        7,
+        "legal-context",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2026-cwp-7091-2026-phhc010395442026-1-2026-03-10",
+    "original_sha256": "2f465857e6753819ca944089955ea392c09573469ff3a1a52bcef1795883008e",
+    "original_marking_flags": [
+      [
+        3,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        4,
+        "legal-context",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2026-cwp-14706-2026-phhc010754762026-1-2026-05-12",
+    "original_sha256": "8e23d0c526e1d663f28e29f04d671c8848f14651b0f29b90e46ec275286c8c59",
+    "original_marking_flags": [
+      [
+        2,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        3,
+        "legal-context",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-ph-2026-untitled-phhc010868762026-1-2026-09-18",
+    "original_sha256": "ce0d69211f87336976cb5c63980addbc15c7f0ce05c620c1e31cf5184ed1fa3f",
+    "original_marking_flags": [
+      [
+        6,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "sc-2022-atlanta-limited-thr-its-managi-2022insc50",
+    "original_sha256": "baa7c1d7f1f6b2f7f3833861f9b02ece63346667f16ca4403266b29ec6af0232",
+    "original_marking_flags": [
+      [
+        8,
+        "ambiguous-body",
+        "native",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        8,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "sc-2023-m-s-shree-vishnu-constructions-2023insc508",
+    "original_sha256": "51ea12dd0ddfc0564f715140fe927dd9d9c16f4550f3fc1400b46dbff9049968",
+    "original_marking_flags": [
+      [
+        1,
+        "ambiguous-body",
+        "native",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        1,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        2,
+        "ambiguous-body",
+        "native",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        17,
+        "ambiguous-body",
+        "native",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-delhi-2025-arb-p-297-2025-dlhc010065612025-1-2025-05-28",
+    "original_sha256": "f8948c90d1f01cb8f4ebd1e99f91f00fe414d4117499a553d07e297a6979b1b4",
+    "original_marking_flags": [
+      [
+        14,
+        "ambiguous-body",
+        "native",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        14,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-delhi-2018-w-p-c-10690-2018-dlhc013369462018-1-2018-10-08",
+    "original_sha256": "4605eaabf5a2d3b3851404ed8a89b13b2249f1f941b41913deb90951c8724526",
+    "original_marking_flags": [
+      [
+        2,
+        "ambiguous-body",
+        "native",
+        [
+          "classified"
+        ]
+      ],
+      [
+        2,
+        "ambiguous-body",
+        "ocr",
+        [
+          "classified"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-delhi-2026-w-p-c-1049-2020-dlhc010101752020-1-2026-01-05",
+    "original_sha256": "3f67c6dd89a59400ae2de7313e60fbda4f35311879e17823f77d59557ed640f4",
+    "original_marking_flags": [
+      [
+        11,
+        "ambiguous-body",
+        "native",
+        [
+          "classified"
+        ]
+      ],
+      [
+        11,
+        "ambiguous-body",
+        "ocr",
+        [
+          "classified"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "sc-1993-state-of-punjab-and-ors-1993insc215",
+    "original_sha256": "5ed2df8269771e88d5511bcaed51e464183da1e2c917a3a70bfa43ba6db54f22",
+    "original_marking_flags": [
+      [
+        7,
+        "ambiguous-body",
+        "native",
+        [
+          "confidential"
+        ]
+      ],
+      [
+        7,
+        "ambiguous-body",
+        "ocr",
+        [
+          "confidential"
+        ]
+      ],
+      [
+        8,
+        "ambiguous-body",
+        "ocr",
+        [
+          "confidential"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-delhi-2010-w-p-c-3357-2007-dlhc010340092007-1-2010-03-12",
+    "original_sha256": "7db94cc797111e65b48a209f5a9c45319b97df1caabe3414846972a06b54a4ca",
+    "original_marking_flags": [
+      [
+        5,
+        "ambiguous-body",
+        "native",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        7,
+        "legal-context",
+        "native",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        18,
+        "ambiguous-body",
+        "native",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-delhi-2010-w-p-c-9084-2009-dlhc010869342009-1-2010-04-06",
+    "original_sha256": "4f6033b152d56fc301161726eaa3753f2229c323d87f86de94b41ef29b01b4b3",
+    "original_marking_flags": [
+      [
+        3,
+        "ambiguous-body",
+        "native",
+        [
+          "confidential"
+        ]
+      ],
+      [
+        4,
+        "ambiguous-body",
+        "native",
+        [
+          "confidential"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-delhi-2010-w-p-c-9478-2007-dlhc011722552007-1-2010-07-12",
+    "original_sha256": "e3621930db58259aadefbe773043321e5b33127de4255f5da803ab4cd089eac3",
+    "original_marking_flags": [
+      [
+        22,
+        "ambiguous-body",
+        "native",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        24,
+        "ambiguous-body",
+        "native",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-delhi-2012-w-p-c-4358-2012-dlhc011172472012-1-2012-08-13",
+    "original_sha256": "0821ff8e9b6697d33cb688906ebdc4155835d7e8e9f815d0c5c7f1de5154fdaa",
+    "original_marking_flags": [
+      [
+        23,
+        "ambiguous-body",
+        "native",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-delhi-2013-w-p-c-2620-2012-dlhc010747932012-1-2013-05-29",
+    "original_sha256": "3a650c28353d8babcff6fc748a6b8f47af8eb8efd38766ea7c2973616eccaf37",
+    "original_marking_flags": [
+      [
+        22,
+        "ambiguous-body",
+        "native",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        22,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        24,
+        "ambiguous-body",
+        "native",
+        [
+          "secret"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-delhi-2016-lpa-363-2015-dlhc012643462015-1-2016-02-10",
+    "original_sha256": "38d5162a5641d45b9c7acfbea480f14640323187f48b9c84df8256f07f021d68",
+    "original_marking_flags": [
+      [
+        7,
+        "legal-context",
+        "native",
+        [
+          "confidential"
+        ]
+      ],
+      [
+        7,
+        "legal-context",
+        "ocr",
+        [
+          "confidential"
+        ]
+      ],
+      [
+        8,
+        "legal-context",
+        "native",
+        [
+          "confidential"
+        ]
+      ],
+      [
+        8,
+        "legal-context",
+        "ocr",
+        [
+          "confidential"
+        ]
+      ],
+      [
+        11,
+        "ambiguous-body",
+        "native",
+        [
+          "confidential"
+        ]
+      ],
+      [
+        11,
+        "ambiguous-body",
+        "ocr",
+        [
+          "confidential"
+        ]
+      ],
+      [
+        16,
+        "legal-context",
+        "native",
+        [
+          "confidential"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-delhi-2018-w-p-c-3573-2017-dlhc012116292017-1-2018-09-05",
+    "original_sha256": "b686206b8651f4388103f07c47e403147595d1d9b5b1bab23f8d21067f96b729",
+    "original_marking_flags": [
+      [
+        5,
+        "ambiguous-body",
+        "native",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        5,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-jkl-2019-swp-1159-2018-jkhc020049232018-1-2019-07-03",
+    "original_sha256": "0c27a6832c4b9418dbebce8708189998a80fefd3bc02fbe94f4110972d31073e",
+    "original_marking_flags": [
+      [
+        11,
+        "ambiguous-body",
+        "ocr",
+        [
+          "secret"
+        ]
+      ],
+      [
+        12,
+        "ambiguous-body",
+        "ocr",
+        [
+          "sealed"
+        ]
+      ],
+      [
+        13,
+        "ambiguous-body",
+        "ocr",
+        [
+          "sealed"
+        ]
+      ],
+      [
+        21,
+        "legal-context",
+        "ocr",
+        [
+          "secret"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-delhi-2019-o-m-p-i-comm-206-2019-dlhc010273212019-1-2019-07-11",
+    "original_sha256": "daba7ad0514e94f4fc422007ff70c236a38391bbfda82e10499ccd3c6e08d74d",
+    "original_marking_flags": [
+      [
+        12,
+        "ambiguous-body",
+        "native",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        12,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        13,
+        "legal-context",
+        "native",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        13,
+        "legal-context",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  },
+  {
+    "doc_id": "hc-jkl-2022-lpa-16-2022-jkhc020009042022-1-2022-03-23",
+    "original_sha256": "ef351d4b3260f446fbfd220697f2abc5d8486b9b31992a98bfa05c9a0d44e30b",
+    "original_marking_flags": [
+      [
+        2,
+        "ambiguous-body",
+        "native",
+        [
+          "restricted"
+        ]
+      ],
+      [
+        2,
+        "ambiguous-body",
+        "ocr",
+        [
+          "restricted"
+        ]
+      ]
+    ],
+    "status": "context-and-visual-review-pending"
+  }
+]
