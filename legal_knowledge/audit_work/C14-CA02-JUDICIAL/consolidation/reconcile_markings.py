@@ -16,6 +16,11 @@ REVIEWED = {
     '188b006da52b': (11, 'Classification of educational institutions in cited reasoning'),
     'e6454d14937f': (5, 'Discussion of employee performance reports and promotion'),
 }
+REVIEWED = {key:([page],reason) for key,(page,reason) in REVIEWED.items()}
+independent = {}
+for path in sorted(Path('.').glob('marking-assurance-*.json')):
+    for row in json.loads(path.read_bytes()):
+        independent[row['sha256']] = row
 stage = Path('marking-cleared')
 stage.mkdir(exist_ok=True,mode=0o700)
 register_bytes = (ROOT/'register.json').read_bytes()
@@ -31,15 +36,23 @@ for raw in (ROOT/'C14_EXTENDED_JUDICIAL.jsonl').read_text().splitlines():
     flags = json.loads(diag.read_bytes()) if diag.is_file() else []
     item = dict(doc_id=doc, original_sha256=sha, original_marking_flags=flags,
                 status='context-and-visual-review-pending')
+    reviewed = independent.get(sha)
     visual = REVIEWED.get(sha[:12])
+    if reviewed:
+        assert reviewed['doc_id'] == doc
+        if reviewed['status'] in ('visual-false-positive','visual-false-positive-cleared'):
+            visual = reviewed['reviewed_pages'],reviewed['reason']
+        else:
+            item.update(status='independent-visual-hold',context=reviewed['reason'],
+                       visual_pages=reviewed['reviewed_pages'])
     if visual and not any(v in (doc+' '+sha+' '+row['source_url']).lower() for v in blocked):
-        page, context = visual
+        visual_pages, context = visual
         local = [ROOT/d/(sha+'.pdf') for d in ('batch-files','extended-files','official-files')]
         local.append(Path('visual-review')/(sha+'.pdf'))
         source = next(p for p in local if p.is_file())
         data = source.read_bytes()
         assert hashlib.sha256(data).hexdigest()==sha and data.rstrip().endswith(b'%%EOF')
-        assert {f[0] for f in flags if f[1]=='ambiguous-body'} == {page}
+        assert {f[0] for f in flags if f[1]=='ambiguous-body'} <= set(visual_pages)
         assert not any(f[1]=='standalone-marking' for f in flags)
         with pymupdf.open(stream=data,filetype='pdf') as pdf:
             assert not pdf.is_repaired and not pdf.needs_pass
@@ -56,7 +69,7 @@ for raw in (ROOT/'C14_EXTENDED_JUDICIAL.jsonl').read_text().splitlines():
                     ocr_pages.append(physical.number+1)
                 pages.append(text)
         if any(len(p.split())<10 for p in pages):
-            item.update(status='visual-false-positive-extraction-hold',visual_page=page,context=context,
+            item.update(status='visual-false-positive-extraction-hold',visual_pages=visual_pages,context=context,
                 sparse_pages=[i for i,p in enumerate(pages,1) if len(p.split())<10],ocr_pages=ocr_pages)
             out.append(item)
             continue
@@ -69,7 +82,7 @@ for raw in (ROOT/'C14_EXTENDED_JUDICIAL.jsonl').read_text().splitlines():
                 assert path.read_bytes()==content
             else:
                 path.write_bytes(content)
-        item.update(status='visual-false-positive-cleared-local',visual_page=page,context=context,
+        item.update(status='visual-false-positive-cleared-local',visual_pages=visual_pages,context=context,
                     derivative_sha256=derived,page_count=len(pages),ocr_pages=ocr_pages,hf_verified=False)
     out.append(item)
 Path('marking-dispositions.json').write_text(json.dumps(out,indent=2)+'\n')

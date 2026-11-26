@@ -31,6 +31,8 @@ def add(row, root):
 for file in ('official-pilot.jsonl','official-aft-followup.jsonl','official-aft-blank-recheck.jsonl'):
     for item in read(base/file):
         add(item,base/'official-files')
+for item in read(Path('cda-pension-result.jsonl')):
+    add(item,Path('new-official'))
 queue={x['doc_id']:x for x in json.loads((base/'extended-queue.json').read_bytes())['jobs']}
 for x in json.loads((base/'source-retry-local.json').read_text()):
     if x[1]=='verified-local':
@@ -43,7 +45,7 @@ for x in json.loads(Path('marking-dispositions.json').read_bytes()):
         digest=x['original_sha256']
         assert hashlib.sha256((Path('marking-cleared')/(digest+'.txt')).read_bytes()).hexdigest()==x['derivative_sha256']
         add(dict(id='PHHC-MARKING-REVIEW',doc_id=x['doc_id'],url=queue[x['doc_id']]['source_url'],sha256=digest,
-                 pages=x['page_count'],ocr=0,status='eligible-local',documentary_status=x['context']),Path('marking-cleared'))
+                 pages=x['page_count'],ocr=len(x['ocr_pages']),status='eligible-local',documentary_status=x['context']),Path('marking-cleared'))
 for file in ('aft-expansion.jsonl','aft-rest.jsonl'):
     for item in read(Path('aft-expansion')/file):
         add(item,Path('aft-expansion/official-files'))
