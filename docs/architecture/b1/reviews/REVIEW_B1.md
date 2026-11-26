@@ -362,3 +362,34 @@ Both runs are for `ae7d7da0`, the last code commit.
 - One **new P2 (F14)** must be fixed before B1 identifier search is relied on in practitioner walkthroughs. It does not block merging as a labelled prototype, because results remain labelled and verifiable at the source.
 - The F10 twin-withdrawal policy and the F11 unlock procedure need owner decisions.
 - F15 and F16 are P3.
+
+---
+
+## Second confirmation at `f71957e5` (F14, F15, F16)
+
+**Method:** I exported the commit into `reviews/b1/src3`, built Release (0 warnings, 0 errors) and used fresh DBs, all on loopback. The worktree is unmodified. Outputs are in `reviews/b1/work3/`.
+
+**Suites:**
+
+| Suite | Result |
+| --- | --- |
+| C# | **86/86** |
+| Playwright | **28/28** |
+| Importer | **66/66** |
+| Design | **117/117** |
+| Oracle | **10/14** (the same 4 hybrid cases; no regression) |
+
+**CI:** Windows run 45719359168 for `f71957e5` passed. `b1-windows` ran build, tests, oracle, journeys, publish and the service step, with the service now configured with `RestrictedRegister`.
+
+| Id | Status | Evidence |
+| --- | --- | --- |
+| **F14** (P2) | **CLOSED** | **Unheld instruments:** `Rule 22 Navy Rules`, `s.5 Coast Guard Act`, and the misspellings `Rule 22 Army Rulse` and `Section 22 Armi Act` each give the chip `not_held` "No instrument titled '…' in this library". Nothing is pinned and the words run as lexical text. **Generic words only:** `Section 22 Act` and `Rule 22 Rules` give an `ambiguous` chip listing the candidates, and nothing is pinned. **Equally close titles:** `Rule 14 AFT Rules` gives `ambiguous`. **Correct scoping still works:** `Rule 22 Army Rules` resolves to Army Rules 1954, `s.69 Army Act` to Army Act 1950, and `Section 22 Air Force Act 1950` to Air Force Act s.22. **The rule is general,** with three branches in `IdentifierTiers`: (1) only generic words means ambiguous; (2) no title match means not held; (3) otherwise the closest titles, with ties ambiguous. It contains no instrument-specific tokens. |
+| **F15** (P3) | **CLOSED** | `judge:mukhopadhaya` returns the `caveat` chip "Judge metadata may be incomplete (crawler); absence here is not evidence." `research.js` renders `caveat`, `not_held` and `ambiguous` chips as notices. |
+| **F16** (P3) | **CLOSED** | Production mode (no test flag) refuses to start in each failure case: <ul><li>no register: `InvalidOperationException` "required … refusing to start";</li><li>missing file: `FileNotFoundException`;</li><li>register with empty items: "no items";</li><li>register with an extra item (mismatched SHA-256): "does not match the register pinned by the active release";</li><li>`Test:AllowNoRegister=true` without test mode: still refuses.</li></ul>The correct register (`fc7ea07e…`, equal to RELEASE.json `config_sha256`) starts. The override works only with `Test:Enabled=true`. Production config path: there is no committed appsettings default. The Windows CI service writes `appsettings.Production.json` with `RestrictedRegister` and grants the service account read on the file. |
+
+**Residual P3s (non-blocking):**
+- **F17:** B1_PROTOTYPE.md line 101 still calls the register "optional". This is stale wording; §F16 of the same file is correct.
+- **F18:** `s.69 AA` gives "No instrument titled 'AA'", and the lexicon expands AA only to Air Adviser or Air Attache. The common practitioner form "AA s.69" (Army Act) is not recognised. This is a lexicon or alias gap; add instrument aliases (AA, AR, AFA and so on) to the scoping step.
+- **F19:** a query that is ambiguous only (for example `Rule 14 AFT Rules`) returns 0 results instead of also running the words lexically. The notice is shown, but consider a lexical fallback.
+
+**Final verdict:** **ACCEPTED as the B1 prototype baseline.** No open P1 or P2. Owner decisions remain on F10 (twin withdrawal policy) and F11 (manual unlock procedure).

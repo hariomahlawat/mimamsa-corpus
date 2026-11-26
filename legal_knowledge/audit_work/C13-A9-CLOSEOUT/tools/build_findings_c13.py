@@ -91,7 +91,7 @@ IC, CS, AO = VERIFICATIONS
 
 
 # Default verification basis per source: whose record states the recorded status.
-DEFAULT_VER = {"A7R": "COORDINATOR_SPOTCHECK", "GA4": "AUTHOR_ONLY", "A9R": "AUTHOR_ONLY"}
+DEFAULT_VER = {"A7R": "COORDINATOR_SPOTCHECK", "GA4": "AUTHOR_ONLY"}
 
 
 def F(src, ids, sev, status, evidence, note="", ver=None):
@@ -215,8 +215,9 @@ FINDINGS += F("GOVR", ["I01", "I02", "I03", "I04"], "INFO", C, f"{SRC['GOVR']} (
 # ---- B0 architecture
 FINDINGS += F("B0R", ["F01"] + rng("F", 3, 12), "P2", C, f"{SRC['B0C1']} (CLOSED); {CONF['B0D']}")
 FINDINGS += F("B0R", "F02", "P2", C, f"{CONF['B0C2']} (F02 closed)")
-FINDINGS += F("B0R", [f for f in rng("F", 13, 26) if f != "F21"], "P3", C,
-              f"{CONF['B0D']} (fixed); {CONF['B0C1']} ('P3s ... accepted as dispositioned')")
+FINDINGS += F("B0R", [f for f in rng("F", 13, 26) if f != "F21"], "P3", CU,
+              f"{CONF['B0D']} (fixed); {CONF['B0C1']} ('P3s ... accepted as dispositioned')",
+              "author fix; the confirmation accepted the dispositions without re-verifying each", ver="AUTHOR_ONLY")
 FINDINGS += F("B0R", "F21", "P3", O, f"{CONF['B0D']} ('Recorded for owner decision', D-08)", "owner decision OD-14")
 FINDINGS += F("B0R", ["I01", "I02", "I03", "I04"], "INFO", C, f"{SRC['B0R']} (informational)")
 FINDINGS += F("B0C1", rng("C", 1, 9, 2), "P3", C, f"{CONF['B0C2']} (C01-C09 closed)")
@@ -267,14 +268,21 @@ FINDINGS += F("B1", "F10", "P3", O, f"{_B1} ('Code CLOSED; policy OPEN (owner de
               "twin-withdrawal policy pending owner decision OD-21")
 FINDINGS += F("B1", "F11", "P3", D, f"{_B1} ('Mostly CLOSED ... Open: no manual unlock procedure')",
               "no manual unlock procedure; deferred, owner decision OD-22")
-FINDINGS += F("B1", "F14", "P2", O, f"{_B1} (new P2)", "instrument-scope fallback pins another instrument's provision; being fixed in B1")
-FINDINGS += F("B1", ["F15", "F16"], "P3", O, f"{_B1} (new P3s)", "F15: judge: filter caveat; F16: restricted-register re-check optional")
-# ---- Independent review of this closeout (A8/A9), fixed in the same branch; not yet re-confirmed
-_A9F = "fixed on claude/c13-closeout after the review; not re-confirmed by the reviewer"
-FINDINGS += F("A9R", "F01", "P1", CU, f"{AW}/C13-A9-CLOSEOUT/FINDINGS_REGISTER_C13.csv (B1 rows); docs/architecture/b1/reviews/REVIEW_B1.md", _A9F)
-FINDINGS += F("A9R", "F02", "P2", CU, f"{AW}/C13-A9-CLOSEOUT/FINDINGS_REGISTER_C13.csv (verification column); {CONF['IMP3']}; {CONF['A0C2']}", _A9F)
-FINDINGS += F("A9R", ["F03", "F04", "F05", "F06", "F07", "F09"], "P3", CU, f"{AW}/C13-A9-CLOSEOUT/README.md (review response)", _A9F)
-FINDINGS += F("A9R", "F08", "P3", C, f"{CONF['A9R']} ('none in the files')", "reporting guidance only", ver="INDEPENDENT_CONFIRMED")
+_B1B = f"{SRC['B1']} second confirmation at f71957e5"
+FINDINGS += F("B1", "F14", "P2", C, f"{_B1B} (CLOSED); Windows CI run 45719359168",
+              "filed at 4fbe7c79; instrument-scope fallback no longer pins another instrument's provision")
+FINDINGS += F("B1", ["F15", "F16"], "P3", C, f"{_B1B} (CLOSED)", "F15: judge: filter caveat; F16: restricted register required in production")
+FINDINGS += F("B1", ["F17", "F18", "F19"], "P3", O, f"{_B1B} (residual P3s, non-blocking)",
+              "F17: stale 'optional' register wording in B1_PROTOTYPE.md; F18: 'AA s.69' (Army Act) not recognised, "
+              "instrument aliases (AA, AR, AFA) missing from scoping; F19: ambiguous-only queries return 0 results "
+              "without a lexical fallback")
+# ---- Independent review of this closeout (A8/A9); confirmation at f7dae727: ACCEPT
+_A9C = f"{CONF['A9R']} confirmation at f7dae727"
+FINDINGS += F("A9R", "F01", "P1", C, f"{_A9C} (CLOSED); fixes 3b250a73")
+FINDINGS += F("A9R", "F02", "P2", C, f"{_A9C} (CLOSED); fixes 3b250a73")
+FINDINGS += F("A9R", rng("F", 3, 9), "P3", C, f"{_A9C} (CLOSED)")
+FINDINGS += F("A9R", "C-F01", "P3", CU, f"{_A9C} (new P3); B0 F13-F26 rows relabelled AUTHOR_ONLY in this register",
+              "fixed after the confirmation; not re-confirmed", ver="AUTHOR_ONLY")
 
 # ---- Cycle 12 deferred P2s carried into Cycle 13 (status in C13)
 CARRY = [
@@ -333,7 +341,7 @@ C12_CARRY_KEYS = {
 }
 NOT_IN_REVIEW_FILE: set = set()
 # Commits on claude/c13-b1 (not yet merged to staging); cited from REVIEW_B1.md, not required in this history.
-B1_BRANCH_COMMITS = {"fa72af91", "4fbe7c79", "ae7d7da0"}
+B1_BRANCH_COMMITS = {"fa72af91", "4fbe7c79", "ae7d7da0", "f71957e5"}
 
 F_COLS = ["finding_id", "workstream", "source_review", "review_finding_id", "severity", "status", "verification",
           "evidence", "note"]

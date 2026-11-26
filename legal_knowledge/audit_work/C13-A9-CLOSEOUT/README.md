@@ -8,7 +8,7 @@ reviewed. Restricted material RM-001 is referred to by its restriction id only. 
 
 | File | Content |
 | --- | --- |
-| `FINDINGS_REGISTER_C13.csv` | 257 rows: every finding of every Cycle 13 review (252, including the B1 review and the independent review of this closeout) plus the 5 Cycle 12 deferred P2s, each with source review, severity, status, **verification** and evidence (commit or file) |
+| `FINDINGS_REGISTER_C13.csv` | 261 rows: every finding of every Cycle 13 review (256, including the B1 review and the independent review of this closeout) plus the 5 Cycle 12 deferred P2s, each with source review, severity, status, **verification** and evidence (commit or file) |
 | `FINDINGS_SUMMARY_C13.json` | Counts by status, severity and verification; staging-integrated, B1 and A8/A9 sub-counts; open P1/P2 and CLOSED_UNCONFIRMED P1 lists |
 | `RESEARCH_RESTRICTIONS_C13.csv` | The five C12 research-use restrictions, Cycle 13 evidence and decision: **none lifted** |
 | `TASK_REGISTER_C13_FINAL.md` | Final status of A0-A9, GOV, B0, B-PoC and B1 (IN_PROGRESS), with evidence |
@@ -26,39 +26,42 @@ coordinator places the same file there when B1 merges) and
 
 Review files read: every file under each `C13-*/reviews/` folder, `docs/architecture/reviews/` (including
 `c13-assurance/`), `docs/architecture/poc/reviews/`, `C13-EVAL/reviews/`, `C13-EVAL/REVIEW_GA4.md`, the B1 review
-(`docs/architecture/b1/reviews/REVIEW_B1.md`, review at `fa72af91`, confirmation at `4fbe7c79`; B1 is not yet in
-staging), the confirmations copied into `reviews/`, and the review of this closeout. A2 and A3 have no `reviews/`
+(`docs/architecture/b1/reviews/REVIEW_B1.md`, review at `fa72af91`, confirmations at `4fbe7c79` and `f71957e5`; B1 is
+ACCEPTED as the prototype baseline and not yet in staging), the confirmations copied into `reviews/`, and the review of this closeout. A2 and A3 have no `reviews/`
 folder; their findings are in the C13-EVAL reviews. B0 confirmation 2 records R1 as "informational, not a finding"; it
 is not listed.
 
 | Status | Cycle 13 review findings | C12 carry-overs | All |
 | --- | ---: | ---: | ---: |
-| CLOSED | 183 | 0 | 183 |
-| CLOSED_UNCONFIRMED | 19 | 0 | 19 |
+| CLOSED | 181 | 0 | 181 |
+| CLOSED_UNCONFIRMED | 25 | 0 | 25 |
 | DEFERRED | 30 | 5 | 35 |
 | OPEN | 12 | 0 | 12 |
 | ACCEPTED_DEVIATION | 8 | 0 | 8 |
-| **Total** | **252** | **5** | **257** |
+| **Total** | **256** | **5** | **261** |
 
-Of the 252: reviews of work integrated into staging 227 (CLOSED 171, CLOSED_UNCONFIRMED 11, DEFERRED 29, OPEN 8,
-ACCEPTED_DEVIATION 8); B1 16 (CLOSED 11, OPEN 4, DEFERRED 1); the A8/A9 review 9 (CLOSED_UNCONFIRMED 8, CLOSED 1).
+Of the 256: reviews of work integrated into staging 227 (CLOSED 158, CLOSED_UNCONFIRMED 24, DEFERRED 29, OPEN 8,
+ACCEPTED_DEVIATION 8); B1 19 (CLOSED 14, OPEN 4, DEFERRED 1); the A8/A9 review 10 (CLOSED 9, CLOSED_UNCONFIRMED 1).
 
 | Verification | Rows |
 | --- | ---: |
-| INDEPENDENT_CONFIRMED (an independent reviewer's record states the status) | 220 |
+| INDEPENDENT_CONFIRMED (an independent reviewer's record states the status) | 218 |
 | COORDINATOR_SPOTCHECK (coordinator disposition or spot-check) | 13 |
-| AUTHOR_ONLY (author's or A9's own record) | 24 |
+| AUTHOR_ONLY (author's or A9's own record) | 30 |
 
-- **Open P1:** none, in any review including B1 (B1 F01 is closed in its confirmation).
-- **P1 CLOSED_UNCONFIRMED (2):** GA4 F1 (applied by the evaluator, recorded in `REVIEW_FIXES.json`; no reviewer
-  re-confirmation) and A8/A9 review F01 (fixed here; awaiting re-confirmation).
-- **Open P2 (4):** A7 F06 (20 unprobed redirect hosts), assurance R2-N01 and B-PoC F07 (both the selected Windows host),
-  B1 F14 (instrument-scope fallback; being fixed in B1).
-- **Other open (8):** A6 F07 (INFO; human spot-check before the legal gate), GOV F12 (P3; restricted scratch derivative
+- **Open P1:** none, in any review including B1 (B1 F01 closed at `4fbe7c79`) and the A8/A9 review (F01 closed in its
+  confirmation at `f7dae727`).
+- **P1 CLOSED_UNCONFIRMED (1):** GA4 F1 (applied by the evaluator, recorded in `REVIEW_FIXES.json`; no reviewer
+  re-confirmation).
+- **Open P2 (3):** A7 F06 (20 unprobed redirect hosts), assurance R2-N01 and B-PoC F07 (both the selected Windows host).
+  B1 F14, F15 and F16 are CLOSED in the B1 second confirmation at `f71957e5`.
+- **Other open (9):** A6 F07 (INFO; human spot-check before the legal gate), GOV F12 (P3; restricted scratch derivative
   outside the repository), B0 F21 (P3; owner decision D-08), assurance ASR-E03 and ASR-E04 (unrated evidence gaps), B1
-  F10 (twin-withdrawal policy, owner decision OD-21), B1 F15 and F16 (P3).
+  F10 (twin-withdrawal policy, owner decision OD-21), B1 F17-F19 (P3 residuals: stale wording; "AA s.69" not recognised;
+  no lexical fallback for ambiguous-only queries).
 - **Status rule.** CLOSED needs an independent confirmation or a coordinator spot-check on record; an author fix
-  without one is CLOSED_UNCONFIRMED (GA4 F1-F9, A4 N-01/N-02, and the A8/A9 review fixes). DEFERRED = carried to a
+  without one is CLOSED_UNCONFIRMED (GA4 F1-F9, A4 N-01/N-02, B0 F13-F26 except F21 (accepted as dispositioned, not
+  re-verified), and A8/A9 confirmation finding C-F01). DEFERRED = carried to a
   later cycle or gate with the reason. ACCEPTED_DEVIATION = accepted as is by a recorded disposition; X-02 is an
   A9-recorded deviation awaiting coordinator sign-off (AUTHOR_ONLY). The build enforces the rule.
 
@@ -97,7 +100,10 @@ The C13 tools added here (`C13-A8-ADVISER/tools/build_adviser_c13.py --check`, `
 pass. The register depends on the commit ids cited as evidence; if the branch is rebased or squashed, the cited
 commits must be updated before `--check` passes again.
 
-## Review response (`reviews/REVIEW_A8_A9.md`, ACCEPT WITH CONDITIONS)
+## Review response (`reviews/REVIEW_A8_A9.md`: ACCEPT WITH CONDITIONS, then **ACCEPT** in the confirmation at `f7dae727`)
+
+Confirmation finding C-F01 (P3, B0 F13-F26 labelled too generously) is fixed: those rows are now CLOSED_UNCONFIRMED /
+AUTHOR_ONLY.
 
 | Finding | Response |
 | --- | --- |
@@ -108,7 +114,7 @@ commits must be updated before `--check` passes again.
 | F05 (P3) | A8 stored paths now durable (HF re-download record, A1 recovery population); validator rejects absolute paths |
 | F06 (P3) | A8-Q143 now says "reads, as OCR" |
 | F07 (P3) | Root cause recorded below and in R13-18 (DEFERRED) |
-| F08 (P3) | No file change; quote counts as "252 + 5 = 257; DEFERRED 30 + 5 = 35" |
+| F08 (P3) | No file change; quote counts as "256 + 5 = 261; DEFERRED 30 + 5 = 35" |
 | F09 (P3) | Layout dependency noted in `GATE_C13_CLOSEOUT.md` |
 
 ## Integration gate

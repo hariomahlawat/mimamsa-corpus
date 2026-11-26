@@ -209,3 +209,85 @@ The only workflow diff is `.github/workflows/crawler-security-ci.yml`:
 Nothing else changed: jobs, permissions, the Python version and the guard steps are all unchanged, and no other workflow file is touched.
 
 Observation, not a finding: `requirements.txt` is not in either path filter, so a dependency bump alone will not trigger the job. That was already true before the change.
+
+---
+
+## Confirmation review at `f7dae727` (`git log 9f5bf09a..f7dae727`: `3b250a73`, `f7dae727`)
+
+- **Mode:** read-only, in a detached scratch worktree (`scratchpad/a9conf`, since removed). The branch was not modified.
+- **Gate output:** `reviews/a9/gate_f7dae727.txt`.
+
+### What I re-ran (measured)
+
+| Check | Result |
+| --- | --- |
+| Gate at `f7dae727` | **32/32 exit 0; Ran 1058 tests OK** (skipped=9, the same layout effect as before, F09); HF guard 12 OK; protected hashes OK |
+| A8 and A9 unittest under bare Python 3.11 | 15/15 OK |
+| `build_adviser_c13.py --check`, `validate_adviser_c13.py`, `build_findings_c13.py --check` | CHECK OK, VALIDATION OK, CHECK OK |
+| A8 and A9 `SHA256SUMS` | OK |
+| Register counts recomputed from the CSV | 257 rows: CLOSED 183, CLOSED_UNCONFIRMED 19, DEFERRED 35, OPEN 12, ACCEPTED_DEVIATION 8 (sum 257). Of these, 252 are Cycle 13 findings (DEFERRED 30) and 5 are carry-overs. Verification: INDEPENDENT_CONFIRMED 220, COORDINATOR_SPOTCHECK 13, AUTHOR_ONLY 24. Open P1: none. CLOSED_UNCONFIRMED P1: GA4 F1 and A8/A9 F01. Open P2: A7 F06, R2-N01, B-PoC F07, B1 F14. **All match the summary JSON, the README and the task register** |
+
+### Provenance of the newly committed review records
+
+I compared each committed copy with the reviewer's original in the scratchpad:
+
+| Committed copy | Comparison with the original |
+| --- | --- |
+| `docs/architecture/b1/reviews/REVIEW_B1.md` | Byte-identical. Includes the confirmation at `4fbe7c79` |
+| `REVIEW_IMPORTER_E05_E06_confirmation3.md` | s.6 identical |
+| A6 `839c33e3` confirmation | Byte-identical |
+| A7 `4aa8edf4` security confirmation | Byte-identical |
+| A0 confirmation 2 (`f1d61f71`) | The section body occurs verbatim in the reviewer's original `scratchpad/c13/reviews/a0/review_c13_a0_5e07e010.md` |
+| A5 confirmation (`d09b7d91`) | The section body occurs verbatim in the reviewer's original `scratchpad/c13/reviews/a5/review_c13_a5_f915ac11.md` |
+
+The copy notes are accurate. The A0 copy contains no holdout text, only shingle-scan statistics.
+
+### INDEPENDENT_CONFIRMED rows
+
+I grouped all 220 rows by evidence. Each group cites a real review or confirmation record:
+- A0 confirmations 1 and 2;
+- REVIEW_A1 rounds 1 and 2;
+- integration review §4.5 and §4.6;
+- A4 confirmation;
+- A5 confirmation;
+- A6 confirmation;
+- A7 security confirmation;
+- GOV confirmation;
+- B0 confirmations 1 and 2;
+- importer s.4.3, s.5.2 and confirmation 3;
+- PR53 s.5.2;
+- POC s.10.5 to s.10.8;
+- assurance README s.5;
+- B1 confirmation at `4fbe7c79`;
+- this review for X-03, X-04 and A7 F14.
+
+The GA4 F1–F9 rows are now CLOSED_UNCONFIRMED / AUTHOR_ONLY, as they should be. `REVIEW_FIXES.json` exists.
+
+One label is generous (C-F01 below).
+
+### Status of the original findings
+
+| ID | Status | Basis |
+| --- | --- | --- |
+| F01 (P1) | **CLOSED** | B1 F01–F16 are in the register, taken from the committed B1 review and its confirmation. B1 F01 is CLOSED in that confirmation; F14 (P2) is OPEN, which is legitimate because it is in confirmation. The ASR-E06 row cites B1 F01. "No P1 open" is now stated from recomputed counts, and the two CLOSED_UNCONFIRMED P1s are disclosed next to it in the README, the task register and the summary JSON. The task register's B1 row cites the review and its confirmation. OD-21/22 and R13-21/22 were added |
+| F02 (P2) | **CLOSED** | There is now a `verification` column and a CLOSED_UNCONFIRMED status. A0 C01 cites the reviewer's confirmation 2; importer N1 and N4 cite the committed confirmation 3; GA4 F1–F9 are CLOSED_UNCONFIRMED; X-02 is AUTHOR_ONLY |
+| F03 (P3) | CLOSED | The A6 confirmation is committed and A6 F05 is ACCEPTED_DEVIATION |
+| F04 (P3) | CLOSED (in the register) | F15 is recorded, and the F09/F10/F11 actions are DEFERRED with an owner. `DISPOSITIONS_C13.md` itself is unchanged. That is acceptable because it is the coordinator's record; the coordinator may still annotate it |
+| F05 (P3) | CLOSED | 0 `/tmp/` stored paths remain; the validator rejects absolute paths |
+| F06 (P3) | CLOSED | A8-Q143 now reads "reads, as OCR, … (A6 records the reading as NOT_DETERMINED)" |
+| F07 (P3) | CLOSED | The root cause is recorded in the README and in R13-18 |
+| F08 (P3) | CLOSED | — |
+| F09 (P3) | CLOSED | The layout dependency is noted in the GATE record |
+
+### New findings
+
+- **C-F01 (P3):** B0 F13–F26 (excluding F21) are labelled INDEPENDENT_CONFIRMED. But confirmation 1 says the P3s "are accepted as dispositioned. I did not re-verify each one". A label such as COORDINATOR_SPOTCHECK, or a note "accepted as dispositioned, not re-verified", would be more exact. Not blocking.
+- No new P1 or P2.
+
+### Confirmation verdict
+
+**ACCEPT.**
+- P1: 0 open.
+- P2: 0 open from this review.
+- The remaining open P2s belong to other reviews and are correctly listed: A7 F06, R2-N01, B-PoC F07, B1 F14.
+- A8/A9 F01 can move from CLOSED_UNCONFIRMED to CLOSED on the strength of this confirmation.
