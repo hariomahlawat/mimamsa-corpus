@@ -1,0 +1,1156 @@
+{
+  "schema": "c14-statutory-unified-work-register-v1",
+  "date": "2026-11-26",
+  "budget_usd": 0,
+  "status": "ALL_REQUESTS_INDEXED_NOT_CLOSED",
+  "source_pins": [
+    {
+      "path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/ACQUISITION_RECONCILIATION.json",
+      "ref": "f1bbd15dc9a57531b0b061578fdceba94ff35753",
+      "blob": "428e8589b5c6b9200ecb86af394d74ee9a021f54"
+    },
+    {
+      "path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/COMPOUND_REQUEST_COVERAGE.json",
+      "ref": "f1bbd15dc9a57531b0b061578fdceba94ff35753",
+      "blob": "d70acd3ac4b1c2c4f4c25160ab841e3c043ce6ec"
+    },
+    {
+      "path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/CONTROLLED_SOURCE_DISCOVERY_01.json",
+      "ref": "f1bbd15dc9a57531b0b061578fdceba94ff35753",
+      "blob": "6c45f612a730ae7a466ca21e62eea6d9a90913d8"
+    },
+    {
+      "path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/COPY_REGISTRATION_CANDIDATES.json",
+      "ref": "f1bbd15dc9a57531b0b061578fdceba94ff35753",
+      "blob": "5be838d109b9d785fcd092977e04c56f808c7034"
+    },
+    {
+      "path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_01.json",
+      "ref": "04e9f7d00dc3b37e3bbc35b2a80eae886f09001b",
+      "blob": "f97f06595eeadda543af8313261b6170052dd37c"
+    },
+    {
+      "path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_02.json",
+      "ref": "04e9f7d00dc3b37e3bbc35b2a80eae886f09001b",
+      "blob": "ceda306d9eeb0eb428e228bac3908ef2b256620e"
+    },
+    {
+      "path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_03.json",
+      "ref": "04e9f7d00dc3b37e3bbc35b2a80eae886f09001b",
+      "blob": "92b5d5d6f0c9bc5a5b4597edc2525fdbb04665de"
+    },
+    {
+      "path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_RECONCILIATION_BATCH_04.json",
+      "ref": "04e9f7d00dc3b37e3bbc35b2a80eae886f09001b",
+      "blob": "3ccdb828352c7a92e80212469e7c945103529645"
+    },
+    {
+      "path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_05.json",
+      "ref": "04e9f7d00dc3b37e3bbc35b2a80eae886f09001b",
+      "blob": "0047878e200f94618db5ffc88a52031a06b69678"
+    }
+  ],
+  "scope": "Read-only index of existing candidate records, with explicit pointers and preserved baseline statuses. No alteration to original A4/C5 registers, no authority promotion, no execution configuration.",
+  "counts": {
+    "requests": 45,
+    "open": 45,
+    "closed": 0,
+    "dispositions": {
+      "DISCOVERY_OPEN": 5,
+      "BLOCKED_REDIRECT_SCOPE": 22,
+      "HELD_PARTIAL_REVIEW_REMAINING": 2,
+      "HELD_REVIEW_NOT_CLOSED": 7,
+      "LOCATORS_IDENTIFIED_NOT_ACQUIRED": 3,
+      "HELD_REGISTRATION_REQUIRED": 2,
+      "CUSTODIAN_ONLY": 3,
+      "BLOCKED_ALLOWLIST": 1
+    },
+    "linked_evidence_pointers": 48,
+    "requests_with_linked_evidence": 18,
+    "compound_constituents": 10,
+    "newly_subject_classified_by_secondary_index": 4
+  },
+  "requests": [
+    {
+      "request_id": "A4-ACQ-001",
+      "target": "S.R.O. 258 dated 27-11-2002 (alleged Army Rules amendment; possibly an Explanation to r.22)",
+      "priority": "P1",
+      "baseline_disposition": "DISCOVERY_OPEN",
+      "dependent_citation_items": 29,
+      "dependent_version_records": 2,
+      "evidence_refs": [
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/CONTROLLED_SOURCE_DISCOVERY_01.json",
+          "git_blob": "6c45f612a730ae7a466ca21e62eea6d9a90913d8",
+          "json_pointer": "/leads/7",
+          "evidence_id": "C14-D08"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_03.json",
+          "git_blob": "92b5d5d6f0c9bc5a5b4597edc2525fdbb04665de",
+          "json_pointer": "/observations/5",
+          "evidence_id": "C14-CF03-06"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_RECONCILIATION_BATCH_04.json",
+          "git_blob": "3ccdb828352c7a92e80212469e7c945103529645",
+          "json_pointer": "/new_source_findings/2",
+          "evidence_id": null
+        }
+      ],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "PUBLIC_DISCOVERY_AND_ORIGINAL_VERIFICATION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-002",
+      "target": "Source of '[or Military Secretary]' in Army Rule 15 (MML 2 p.142 attributes it to S.R.O. 17(E)/1993, which has no r.15 item)",
+      "priority": "P1",
+      "baseline_disposition": "DISCOVERY_OPEN",
+      "dependent_citation_items": 6,
+      "dependent_version_records": 2,
+      "evidence_refs": [
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_RECONCILIATION_BATCH_04.json",
+          "git_blob": "3ccdb828352c7a92e80212469e7c945103529645",
+          "json_pointer": "/new_source_findings/1",
+          "evidence_id": null
+        }
+      ],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "PUBLIC_DISCOVERY_AND_ORIGINAL_VERIFICATION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-003",
+      "target": "'Army (First Amendment) Rules, 1966' (OCR: Part 1 of Appendix IV)",
+      "priority": "P1",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 209,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-004",
+      "target": "unknown Army Rules amendment (OCR: 'further to amend the Army Rules, 1954')",
+      "priority": "P1",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 209,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-005",
+      "target": "unknown Army Rules amendment (OCR)",
+      "priority": "P1",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 209,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-006",
+      "target": "'Army Amendment Rules, 1968' (OCR: Appendix I)",
+      "priority": "P1",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 209,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-007",
+      "target": "S.R.O. 66 dated 14-02-1969, 'Army Amendment Rules, 1969' (OCR: App. I Form No. II)",
+      "priority": "P1",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 209,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-008",
+      "target": "unknown Army Rules amendment (OCR)",
+      "priority": "P1",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 209,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-009",
+      "target": "'Army (First Amendment) Rules, 1972' (OCR: Appendix)",
+      "priority": "P1",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 209,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-010",
+      "target": "'Army (Amendment) Rules, 1974' (OCR; commencement clause)",
+      "priority": "P1",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 209,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-011",
+      "target": "'Army (Second Amendment) Rules, 1974' (OCR: App. 1 Form No.1)",
+      "priority": "P1",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 209,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-012",
+      "target": "E-7 dated 17-06-1960 (alleged first Army Rules amendment of 1960, listed in every official note)",
+      "priority": "P1",
+      "baseline_disposition": "DISCOVERY_OPEN",
+      "dependent_citation_items": 26,
+      "dependent_version_records": 209,
+      "evidence_refs": [
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_RECONCILIATION_BATCH_04.json",
+          "git_blob": "3ccdb828352c7a92e80212469e7c945103529645",
+          "json_pointer": "/new_source_findings/0",
+          "evidence_id": null
+        }
+      ],
+      "baseline_matched_target_count": 0,
+      "baseline_locator_count": 0,
+      "next_gate": "PUBLIC_DISCOVERY_AND_ORIGINAL_VERIFICATION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-013",
+      "target": "Army Rules / Army Act instruments after 06-06-2022 (C5C-004..013 egazette candidates incl. S.R.O. 9(E)/2022, 15(E)/2024, 10(E)/2026)",
+      "priority": "P1",
+      "baseline_disposition": "HELD_PARTIAL_REVIEW_REMAINING",
+      "dependent_citation_items": 204,
+      "dependent_version_records": 209,
+      "evidence_refs": [
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/CONTROLLED_SOURCE_DISCOVERY_01.json",
+          "git_blob": "6c45f612a730ae7a466ca21e62eea6d9a90913d8",
+          "json_pointer": "/leads/3",
+          "evidence_id": "C14-D04"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_05.json",
+          "git_blob": "0047878e200f94618db5ffc88a52031a06b69678",
+          "json_pointer": "/observations/0",
+          "evidence_id": "CF05-001"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_05.json",
+          "git_blob": "0047878e200f94618db5ffc88a52031a06b69678",
+          "json_pointer": "/observations/1",
+          "evidence_id": "CF05-002"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_05.json",
+          "git_blob": "0047878e200f94618db5ffc88a52031a06b69678",
+          "json_pointer": "/observations/2",
+          "evidence_id": "CF05-003"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_05.json",
+          "git_blob": "0047878e200f94618db5ffc88a52031a06b69678",
+          "json_pointer": "/observations/3",
+          "evidence_id": "CF05-004"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_05.json",
+          "git_blob": "0047878e200f94618db5ffc88a52031a06b69678",
+          "json_pointer": "/observations/4",
+          "evidence_id": "CF05-005"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/COPY_REGISTRATION_CANDIDATES.json",
+          "git_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
+          "json_pointer": "/records/0",
+          "evidence_id": "C14-COPY-c785b4d7d98b5329f785779008b786dea75b24aabcfa8633859fc340c8ecdefd"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/COPY_REGISTRATION_CANDIDATES.json",
+          "git_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
+          "json_pointer": "/records/1",
+          "evidence_id": "C14-COPY-7bb4c7a3ee9149ed30683b174654a5c99d78a4bd660afc81b207643222855f1a"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/COPY_REGISTRATION_CANDIDATES.json",
+          "git_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
+          "json_pointer": "/records/2",
+          "evidence_id": "C14-COPY-7a6c1b75700a461498bd669ca6db600aa7d03772cf9fff8e2495c6e8f02307bf"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/COPY_REGISTRATION_CANDIDATES.json",
+          "git_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
+          "json_pointer": "/records/3",
+          "evidence_id": "C14-COPY-1a4c2cb12442d250aa19c70d3a959c382f0706e15d984452f59cc827d1295591"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/COPY_REGISTRATION_CANDIDATES.json",
+          "git_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
+          "json_pointer": "/records/4",
+          "evidence_id": "C14-COPY-cc4f9d84515223c153769d5cb7e3cffa52955abac99a852048623aaa6f65d5ed"
+        }
+      ],
+      "baseline_matched_target_count": 5,
+      "baseline_locator_count": 0,
+      "next_gate": "COMPOUND_COMPLETENESS_AND_DOCUMENTARY_REVIEW",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-014",
+      "target": "S.R.O. 331 dated 23-09-1960, Army (Second Amendment) Rules, 1960 (r.168(2))",
+      "priority": "P2",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 0,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-015",
+      "target": "S.R.O. 348 dated 03-10-1960, Army (Amendment) Rules, 1960 (App. I Forms I, II)",
+      "priority": "P2",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 0,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-016",
+      "target": "S.R.O. 351 dated 07-10-1960, Army (Third Amendment) Rules, 1960 (Table below r.13)",
+      "priority": "P2",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 5,
+      "dependent_version_records": 0,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-017",
+      "target": "S.R.O. 404 dated 21-11-1960, Army (Fourth Amendment) Rules, 1960 (r.168(3), App. IV, V)",
+      "priority": "P2",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 0,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-018",
+      "target": "S.R.O. 22 dated 13-05-2010, Army (Amendment) Rules, 2010 (Table r.13)",
+      "priority": "P2",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 5,
+      "dependent_version_records": 0,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-019",
+      "target": "Army Rules amendment (App. I), 1956 (OCR)",
+      "priority": "P2",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 0,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-020",
+      "target": "Army Rules amendment of r.187(1) item (r), dated 28-11-1958 (OCR)",
+      "priority": "P2",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 2,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-021",
+      "target": "Army Rules amendments of r.95, dated 12-12-1958 (OCR)",
+      "priority": "P1",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 4,
+      "dependent_version_records": 1,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-022",
+      "target": "Army Rules amendments, 1959 (OCR)",
+      "priority": "P2",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 0,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-023",
+      "target": "Army Act, 1950 as enacted (Act 46 of 1950), Gazette of India Extraordinary 23-05-1950",
+      "priority": "P1",
+      "baseline_disposition": "HELD_REVIEW_NOT_CLOSED",
+      "dependent_citation_items": 190,
+      "dependent_version_records": 124,
+      "evidence_refs": [
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/COPY_REGISTRATION_CANDIDATES.json",
+          "git_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
+          "json_pointer": "/records/5",
+          "evidence_id": "C14-COPY-1519957a47352835942822b1b6da3ac4578c0aed1e74fbb847fb4c44e0a48fd4"
+        }
+      ],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "REVISION_PINNED_BYTE_AND_DOCUMENTARY_REVIEW",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-024",
+      "target": "Commencement notification of the Army Act 1950 (S.R.O. 120 of 22-07-1950; probable candidate)",
+      "priority": "P2",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 124,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-025",
+      "target": "S.R.O. 2(E) of 07-05-1955 (commencement of the Commanders-in-Chief (Change in Designation) Act 1955) and the Act's Schedule",
+      "priority": "P2",
+      "baseline_disposition": "HELD_PARTIAL_REVIEW_REMAINING",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 161,
+      "evidence_refs": [
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/CONTROLLED_SOURCE_DISCOVERY_01.json",
+          "git_blob": "6c45f612a730ae7a466ca21e62eea6d9a90913d8",
+          "json_pointer": "/leads/0",
+          "evidence_id": "C14-D01"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/CONTROLLED_SOURCE_DISCOVERY_01.json",
+          "git_blob": "6c45f612a730ae7a466ca21e62eea6d9a90913d8",
+          "json_pointer": "/leads/1",
+          "evidence_id": "C14-D02"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/CONTROLLED_SOURCE_DISCOVERY_01.json",
+          "git_blob": "6c45f612a730ae7a466ca21e62eea6d9a90913d8",
+          "json_pointer": "/leads/2",
+          "evidence_id": "C14-D03"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_05.json",
+          "git_blob": "0047878e200f94618db5ffc88a52031a06b69678",
+          "json_pointer": "/observations/5",
+          "evidence_id": "CF05-006"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_05.json",
+          "git_blob": "0047878e200f94618db5ffc88a52031a06b69678",
+          "json_pointer": "/observations/6",
+          "evidence_id": "CF05-007"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/COPY_REGISTRATION_CANDIDATES.json",
+          "git_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
+          "json_pointer": "/records/6",
+          "evidence_id": "C14-COPY-48532ed5d8a9d9449932afba79de6bfa139eb4c8f6a2bde03f116c423f24e206"
+        }
+      ],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "COMPOUND_COMPLETENESS_AND_DOCUMENTARY_REVIEW",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-026",
+      "target": "Adaptation of Laws (No.3) Order, 1956",
+      "priority": "P3",
+      "baseline_disposition": "HELD_REVIEW_NOT_CLOSED",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 0,
+      "evidence_refs": [
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/COPY_REGISTRATION_CANDIDATES.json",
+          "git_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
+          "json_pointer": "/records/7",
+          "evidence_id": "C14-COPY-45b2c73069e6b62db59c79519bd590937af86cb24d36b84d7addb063a6149505"
+        }
+      ],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "REVISION_PINNED_BYTE_AND_DOCUMENTARY_REVIEW",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-027",
+      "target": "Repealing and Amending Act, 1974 (56 of 1974)",
+      "priority": "P3",
+      "baseline_disposition": "HELD_REVIEW_NOT_CLOSED",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 0,
+      "evidence_refs": [
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/COPY_REGISTRATION_CANDIDATES.json",
+          "git_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
+          "json_pointer": "/records/8",
+          "evidence_id": "C14-COPY-dae0be5332c89d2f31111d0308836359ac822e3a8bb6b0aa17608c37d1cad68e"
+        }
+      ],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "REVISION_PINNED_BYTE_AND_DOCUMENTARY_REVIEW",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-028",
+      "target": "Air Force and Army Laws (Amendment) Ordinance, 1975 (Ord. 3 of 1975)",
+      "priority": "P3",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 0,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-029",
+      "target": "Delegated Legislation Provisions (Amendment) Act, 1983 (20 of 1983)",
+      "priority": "P3",
+      "baseline_disposition": "HELD_REVIEW_NOT_CLOSED",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 0,
+      "evidence_refs": [
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/COPY_REGISTRATION_CANDIDATES.json",
+          "git_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
+          "json_pointer": "/records/9",
+          "evidence_id": "C14-COPY-66bb0254a0e07d500f6272f82fc6c7d872f9afd0839afa6c54aa9cd3cc302697"
+        }
+      ],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "REVISION_PINNED_BYTE_AND_DOCUMENTARY_REVIEW",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-030",
+      "target": "Notification under s.1(2) of Act 20/1983 (commencement)",
+      "priority": "P3",
+      "baseline_disposition": "HELD_REVIEW_NOT_CLOSED",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 0,
+      "evidence_refs": [
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/COPY_REGISTRATION_CANDIDATES.json",
+          "git_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
+          "json_pointer": "/records/10",
+          "evidence_id": "C14-COPY-3e4fca3e7d71e6b1b52ca4c6dd6c022bce3ae2fdb65ae2ff7a310a5fd48290a4"
+        }
+      ],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "REVISION_PINNED_BYTE_AND_DOCUMENTARY_REVIEW",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-031",
+      "target": "Repealing and Amending Act, 2001 (30 of 2001)",
+      "priority": "P3",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 0,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-032",
+      "target": "Repealing and Amending (Second) Act, 2017 (4 of 2018)",
+      "priority": "P3",
+      "baseline_disposition": "HELD_REVIEW_NOT_CLOSED",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 0,
+      "evidence_refs": [
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/COPY_REGISTRATION_CANDIDATES.json",
+          "git_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
+          "json_pointer": "/records/11",
+          "evidence_id": "C14-COPY-0909643766770ae3d331af3bb5088e8e6e8083ac417be137606076b6d79a77fb"
+        }
+      ],
+      "baseline_matched_target_count": 1,
+      "baseline_locator_count": 0,
+      "next_gate": "REVISION_PINNED_BYTE_AND_DOCUMENTARY_REVIEW",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-033",
+      "target": "Notification S.O. 3912(E) dated 30-10-2019 (application of the Army Act references to J&K / Ladakh) and Repealing and Amending Act 1957",
+      "priority": "P3",
+      "baseline_disposition": "LOCATORS_IDENTIFIED_NOT_ACQUIRED",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 0,
+      "evidence_refs": [
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_01.json",
+          "git_blob": "f97f06595eeadda543af8313261b6170052dd37c",
+          "json_pointer": "/source_leads/0",
+          "evidence_id": null
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_02.json",
+          "git_blob": "ceda306d9eeb0eb428e228bac3908ef2b256620e",
+          "json_pointer": "/observations/0",
+          "evidence_id": null
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_03.json",
+          "git_blob": "92b5d5d6f0c9bc5a5b4597edc2525fdbb04665de",
+          "json_pointer": "/observations/4",
+          "evidence_id": "C14-CF03-05"
+        }
+      ],
+      "baseline_matched_target_count": 0,
+      "baseline_locator_count": 1,
+      "next_gate": "DEDUP_AND_CONTROLLED_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-034",
+      "target": "S.O. 14(E) dated 13-06-2008 appointing 15-06-2008 under AFT Act s.1(2)",
+      "priority": "P1",
+      "baseline_disposition": "DISCOVERY_OPEN",
+      "dependent_citation_items": 89,
+      "dependent_version_records": 24,
+      "evidence_refs": [
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/CONTROLLED_SOURCE_DISCOVERY_01.json",
+          "git_blob": "6c45f612a730ae7a466ca21e62eea6d9a90913d8",
+          "json_pointer": "/leads/8",
+          "evidence_id": "C14-D09"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_02.json",
+          "git_blob": "ceda306d9eeb0eb428e228bac3908ef2b256620e",
+          "json_pointer": "/observations/1",
+          "evidence_id": null
+        }
+      ],
+      "baseline_matched_target_count": 0,
+      "baseline_locator_count": 0,
+      "next_gate": "PUBLIC_DISCOVERY_AND_ORIGINAL_VERIFICATION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-035",
+      "target": "Commencement notification(s) of the Tribunals Reforms Act 2026 under s.1(2)",
+      "priority": "P1",
+      "baseline_disposition": "LOCATORS_IDENTIFIED_NOT_ACQUIRED",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 32,
+      "evidence_refs": [
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_03.json",
+          "git_blob": "92b5d5d6f0c9bc5a5b4597edc2525fdbb04665de",
+          "json_pointer": "/observations/0",
+          "evidence_id": "C14-CF03-01"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_03.json",
+          "git_blob": "92b5d5d6f0c9bc5a5b4597edc2525fdbb04665de",
+          "json_pointer": "/observations/1",
+          "evidence_id": "C14-CF03-02"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_03.json",
+          "git_blob": "92b5d5d6f0c9bc5a5b4597edc2525fdbb04665de",
+          "json_pointer": "/observations/2",
+          "evidence_id": "C14-CF03-03"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_03.json",
+          "git_blob": "92b5d5d6f0c9bc5a5b4597edc2525fdbb04665de",
+          "json_pointer": "/observations/3",
+          "evidence_id": "C14-CF03-04"
+        }
+      ],
+      "baseline_matched_target_count": 0,
+      "baseline_locator_count": 1,
+      "next_gate": "DEDUP_AND_CONTROLLED_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-036",
+      "target": "S.O. 848(E), 849(E) and 850(E) dated 23-02-2024 (commencement of BNSS, BSA and BNS; 01-07-2024 with stated exceptions)",
+      "priority": "P1",
+      "baseline_disposition": "HELD_REVIEW_NOT_CLOSED",
+      "dependent_citation_items": 1,
+      "dependent_version_records": 67,
+      "evidence_refs": [
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/COPY_REGISTRATION_CANDIDATES.json",
+          "git_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
+          "json_pointer": "/records/12",
+          "evidence_id": "C14-COPY-fde9e9722eb4c01375525c2a30442903371913f4199b8cef1d031535d88228e7"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/COPY_REGISTRATION_CANDIDATES.json",
+          "git_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
+          "json_pointer": "/records/13",
+          "evidence_id": "C14-COPY-dfcd5df23fb711f2996959b13ee6ff6bd32ed38be1e1f2d1c820cbba86e2a8c9"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/COPY_REGISTRATION_CANDIDATES.json",
+          "git_blob": "5be838d109b9d785fcd092977e04c56f808c7034",
+          "json_pointer": "/records/14",
+          "evidence_id": "C14-COPY-0db8a86a0cf41fbf5ee304ee84b8b145da0bd523af510baf351d79d051ef657d"
+        }
+      ],
+      "baseline_matched_target_count": 3,
+      "baseline_locator_count": 0,
+      "next_gate": "REVISION_PINNED_BYTE_AND_DOCUMENTARY_REVIEW",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-037",
+      "target": "BNS, BNSS and BSA 2023 as enacted (Gazette of India Extraordinary 25-12-2023)",
+      "priority": "P2",
+      "baseline_disposition": "DISCOVERY_OPEN",
+      "dependent_citation_items": 126,
+      "dependent_version_records": 3,
+      "evidence_refs": [
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/CONTROLLED_SOURCE_DISCOVERY_01.json",
+          "git_blob": "6c45f612a730ae7a466ca21e62eea6d9a90913d8",
+          "json_pointer": "/leads/4",
+          "evidence_id": "C14-D05"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/CONTROLLED_SOURCE_DISCOVERY_01.json",
+          "git_blob": "6c45f612a730ae7a466ca21e62eea6d9a90913d8",
+          "json_pointer": "/leads/5",
+          "evidence_id": "C14-D06"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CA01-STATUTORY/CONTROLLED_SOURCE_DISCOVERY_01.json",
+          "git_blob": "6c45f612a730ae7a466ca21e62eea6d9a90913d8",
+          "json_pointer": "/leads/6",
+          "evidence_id": "C14-D07"
+        }
+      ],
+      "baseline_matched_target_count": 0,
+      "baseline_locator_count": 0,
+      "next_gate": "PUBLIC_DISCOVERY_AND_ORIGINAL_VERIFICATION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-038",
+      "target": "AFT (Procedure) Rules 2008, Amendment Rules 2011, Practice Rules 2009: register the corpus raw-store copies in the C5 copy register (no download)",
+      "priority": "P1",
+      "baseline_disposition": "HELD_REGISTRATION_REQUIRED",
+      "dependent_citation_items": 46,
+      "dependent_version_records": 0,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 0,
+      "baseline_locator_count": 0,
+      "next_gate": "REGISTRATION_REVIEW_NO_DOWNLOAD_REQUIRED_FOR_IDENTIFIED_HELD_COPIES",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-039",
+      "target": "Register documented-primary status for held Army Rules amending copies now ineligible (AR-007, 009-011, 014, 016-028, 033-035), starting with AR-018 S.R.O. 44/1985 (r.184) and AR-027 S.R.O. 61/1991 (r.15A)",
+      "priority": "P2",
+      "baseline_disposition": "HELD_REGISTRATION_REQUIRED",
+      "dependent_citation_items": 17,
+      "dependent_version_records": 39,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 0,
+      "baseline_locator_count": 0,
+      "next_gate": "REGISTRATION_REVIEW_NO_DOWNLOAD_REQUIRED_FOR_IDENTIFIED_HELD_COPIES",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-040",
+      "target": "Custodian-certified copy of Army Rule 23(3) as notified (S.R.O. 484/1954 p.300) or official confirmation of the India Code compilation wording",
+      "priority": "P1",
+      "baseline_disposition": "CUSTODIAN_ONLY",
+      "dependent_citation_items": 26,
+      "dependent_version_records": 1,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 0,
+      "baseline_locator_count": 0,
+      "next_gate": "CUSTODIAN_PROVISION_OR_CERTIFICATION_ONLY",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-041",
+      "target": "Regulations for the Army, Revised Edition 1987, Vols I-II, with amendment lists / correction slips",
+      "priority": "P2",
+      "baseline_disposition": "CUSTODIAN_ONLY",
+      "dependent_citation_items": 4,
+      "dependent_version_records": 0,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 0,
+      "baseline_locator_count": 0,
+      "next_gate": "CUSTODIAN_PROVISION_OR_CERTIFICATION_ONLY",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-042",
+      "target": "Defence Services Regulations / Regulations for the Army 1962 edition",
+      "priority": "P2",
+      "baseline_disposition": "CUSTODIAN_ONLY",
+      "dependent_citation_items": 0,
+      "dependent_version_records": 0,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 0,
+      "baseline_locator_count": 0,
+      "next_gate": "CUSTODIAN_PROVISION_OR_CERTIFICATION_ONLY",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-043",
+      "target": "Pension Regulations for the Army 2008 Parts I-II, Entitlement Rules 1982/2008, Guide to Medical Officers 2023 and the amending circulars",
+      "priority": "P1",
+      "baseline_disposition": "BLOCKED_ALLOWLIST",
+      "dependent_citation_items": 37,
+      "dependent_version_records": 0,
+      "evidence_refs": [
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_05.json",
+          "git_blob": "0047878e200f94618db5ffc88a52031a06b69678",
+          "json_pointer": "/observations/9",
+          "evidence_id": "CF05-010"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_05.json",
+          "git_blob": "0047878e200f94618db5ffc88a52031a06b69678",
+          "json_pointer": "/observations/10",
+          "evidence_id": "CF05-011"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_05.json",
+          "git_blob": "0047878e200f94618db5ffc88a52031a06b69678",
+          "json_pointer": "/observations/11",
+          "evidence_id": "CF05-012"
+        }
+      ],
+      "baseline_matched_target_count": 5,
+      "baseline_locator_count": 4,
+      "next_gate": "EXACT_PUBLIC_SOURCE_POLICY_REVIEW_AND_DEDUP",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-044",
+      "target": "Criminal Courts and Court-martial (Adjustment of Jurisdiction) Rules 1978 (S.O. 488) and amendment S.O. 4010 (1986)",
+      "priority": "P2",
+      "baseline_disposition": "BLOCKED_REDIRECT_SCOPE",
+      "dependent_citation_items": 8,
+      "dependent_version_records": 0,
+      "evidence_refs": [
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_05.json",
+          "git_blob": "0047878e200f94618db5ffc88a52031a06b69678",
+          "json_pointer": "/observations/7",
+          "evidence_id": "CF05-008"
+        },
+        {
+          "source_path": "legal_knowledge/audit_work/C14-CLOUD-FIRST/CLOUD_SOURCE_RECONCILIATION_05.json",
+          "git_blob": "0047878e200f94618db5ffc88a52031a06b69678",
+          "json_pointer": "/observations/8",
+          "evidence_id": "CF05-009"
+        }
+      ],
+      "baseline_matched_target_count": 2,
+      "baseline_locator_count": 0,
+      "next_gate": "EXACT_REDIRECT_POLICY_AND_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    },
+    {
+      "request_id": "A4-ACQ-045",
+      "target": "Inter-Services Organisations (Command, Control and Discipline) Act 2023 and rules",
+      "priority": "P1",
+      "baseline_disposition": "LOCATORS_IDENTIFIED_NOT_ACQUIRED",
+      "dependent_citation_items": 4,
+      "dependent_version_records": 0,
+      "evidence_refs": [],
+      "baseline_matched_target_count": 0,
+      "baseline_locator_count": 5,
+      "next_gate": "DEDUP_AND_CONTROLLED_ORIGINAL_ACQUISITION",
+      "status": "OPEN",
+      "acquisition_enabled": false,
+      "legal_promotion_allowed": false
+    }
+  ],
+  "compound_013": [
+    {
+      "candidate_id": "C5C-004",
+      "baseline_disposition": "NAVY_HOLD_PIN_MISMATCH",
+      "public_subject_candidate": null,
+      "new_evidence_id": null,
+      "original_verified_in_this_increment": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "candidate_id": "C5C-005",
+      "baseline_disposition": "NAVY_HOLD_PIN_MISMATCH",
+      "public_subject_candidate": null,
+      "new_evidence_id": null,
+      "original_verified_in_this_increment": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "candidate_id": "C5C-006",
+      "baseline_disposition": "UNRESOLVED_NOT_ACQUIRED",
+      "public_subject_candidate": null,
+      "new_evidence_id": "CF05-005",
+      "original_verified_in_this_increment": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "candidate_id": "C5C-007",
+      "baseline_disposition": "AIR_FORCE_NOT_ARMY_RULES",
+      "public_subject_candidate": null,
+      "new_evidence_id": null,
+      "original_verified_in_this_increment": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "candidate_id": "C5C-008",
+      "baseline_disposition": "NAVY_NOT_ARMY_RULES",
+      "public_subject_candidate": null,
+      "new_evidence_id": null,
+      "original_verified_in_this_increment": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "candidate_id": "C5C-009",
+      "baseline_disposition": "UNRESOLVED_NOT_ACQUIRED",
+      "public_subject_candidate": "NAVAL_HONORARY_COMMISSION",
+      "new_evidence_id": "CF05-001",
+      "original_verified_in_this_increment": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "candidate_id": "C5C-010",
+      "baseline_disposition": "UNRESOLVED_NOT_ACQUIRED",
+      "public_subject_candidate": "NAVAL_HONORARY_COMMISSION",
+      "new_evidence_id": "CF05-002",
+      "original_verified_in_this_increment": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "candidate_id": "C5C-011",
+      "baseline_disposition": "UNRESOLVED_NOT_ACQUIRED",
+      "public_subject_candidate": "TERRITORIAL_ARMY_RULES_DELEGATION_ORDER",
+      "new_evidence_id": "CF05-003",
+      "original_verified_in_this_increment": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "candidate_id": "C5C-012",
+      "baseline_disposition": "UNRESOLVED_NOT_ACQUIRED",
+      "public_subject_candidate": "HONORARY_COMMISSION_NOTICE",
+      "new_evidence_id": "CF05-004",
+      "original_verified_in_this_increment": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    },
+    {
+      "candidate_id": "C5C-013",
+      "baseline_disposition": "AIR_FORCE_NOT_ARMY_RULES",
+      "public_subject_candidate": null,
+      "new_evidence_id": null,
+      "original_verified_in_this_increment": false,
+      "enabled": false,
+      "eligible_for_exact_anchor": false
+    }
+  ],
+  "limits": [
+    "Pointer index is a navigation and work-prioritisation tool, not a legal evidence dataset. Candidate observations may conflict; follow the source and retain original verification limits.",
+    "Dependent counts are per request and overlap; do not sum as unique affected records.",
+    "No full live inventory, byte acquisition, judicial recovery or legal release."
+  ],
+  "source_downloads": 0,
+  "hf_writes": 0,
+  "legal_promotions": 0
+}
